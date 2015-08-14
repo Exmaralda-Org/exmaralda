@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<project name="FatJar teide.jar (experimental)" default="doallplatforms" basedir=".">
+	<property name="release" value="release_builds" />
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="../Libraries/jarbundler-1.9.jar"/>
+	<taskdef name="jsmoothgen" classname="net.charabia.jsmoothgen.ant.JSmoothGen" classpath="../Libraries/jsmooth/lib/jsmoothgen-ant.jar"/>
+	<property name="jsmooth.dir" value="release_builds/resources/jsmooth" />
+
+	<target name="main">
+        <fatjar.build output="teide.jar">
+            <fatjar.manifest manifestfile=".manifest"/>
+            <fatjar.filesource path="/Users/woerner/Java/TEIDE/bin" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/JAR/cobra-0.97.2/lib/cobra.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/Coma/externalJars/saxon8-jdom.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/JAR/cobra-0.97.2/lib/js.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/Coma/externalJars/saxon8.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/Libraries/jdom.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/Libraries/xalan.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/Libraries/xercesImpl.jar" relpath=""/>
+            <fatjar.jarsource file="/Users/woerner/Java/Libraries/commons-net-1.4.1.jar" relpath=""/>
+        </fatjar.build>
+    </target>
+
+	
+	<target name="do_win">
+		<!-- create an exe-file for windows -->
+		<jsmoothgen project="${release}/resources/teide.jsmooth" skeletonroot="../Libraries/jsmooth/skeletons" />
+	</target>
+
+	<target name="do_mac">
+		<!-- create a jar bundle for the mac -->
+		<jarbundler
+			dir="${release}/OSX"
+			name="TEI Document Explorer"
+			shortname="TEIDE"
+			signature="Kai Wörner"
+			mainclass="org.exmaralda.teide.Launcher"
+			icon="src/org/exmaralda/teide/resources/teide_icon.icns"
+			jvmversion="1.6+"
+			version="1.0beta"
+			infostring="TEIDE 1.0beta"
+			build="${DSTAMP}"
+			bundleid="org.exmaralda.teide.Launcher"
+			jar="teide.jar">
+
+
+			<javaproperty name="apple.laf.useScreenMenuBar" value="true" />
+			<javaproperty name="apple.awt.brushMetal" value="true" />
+			<javaproperty name="apple.awt.showGrowBox" value="false" />
+			<javaproperty name="com.apple.mrj.application.apple.menu.about.name" value="TEIDE" />
+			<javaproperty name="apple.awt.textantialiasing" value="true" />
+			<javaproperty name="SplashFile" value="$APP_PACKAGE/Contents/splash.png"/>
+
+		</jarbundler>
+		<!--<antcall target="do_dmg"/>-->
+	</target>
+
+	<target name="do_dmg">
+		<!-- works only on macos -->
+
+		    <!-- Copy the docs into the release directory (anything else?) -->
+		    <copy todir="${release.dir}">
+		      <fileset dir="${dist.docs}"/>
+		    </copy>
+
+
+		    <!-- Create a .dmg file containing the app and docs -->
+		    <exec executable="/usr/bin/hdiutil" os="Mac OS X">
+		      <arg value="create"/>
+		      <arg value="-srcfolder"/>
+		      <arg value="${release.dir}"/>
+		      <arg value="-volname"/>
+		      <arg value="${Name} ${version}"/>
+		      <arg value="-ov"/>
+		      <arg value="${Name}-${version}.dmg"/>
+		    </exec>
+
+	</target>
+	
+	<target name="doallplatforms" depends="main">
+		<antcall target="do_mac" />
+		<antcall target="do_win" /> 
+	</target>
+
+</project>
+

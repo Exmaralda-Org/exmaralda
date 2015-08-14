@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <level level="2" name="minimaltranskription">
+        <pattern name="ZW_WORD">
+            <regex>(AOK3|19\d\d|DIN\-A4\-Format|[\p{L}\']+)</regex>
+            <comment>any sequence of alphabetic letters</comment>
+        </pattern>
+        <pattern name="ZW_INTERRUPT">            
+            <regex>\{/ \}</regex>
+            <comment></comment>
+        </pattern>        
+        <pattern name="ZW_COMMENT">
+            <!-- ((1) Ja, (1)) -->
+            <regex>\{[^\}]+\}</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="ZW_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="ZW_PUNCTUATION">            
+            <regex>[\W]+</regex>
+            <comment></comment>
+        </pattern>   
+        <pattern name="ZW_BOUNDARY">
+            <!-- ((1) Ja, (1)) -->
+            <regex>\Q{/*/}\E</regex>
+            <comment></comment>
+        </pattern>
+        
+        
+    </level>
+
+
+
+</patterns>

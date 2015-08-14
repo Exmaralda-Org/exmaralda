@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <level level="2" name="minimaltranskription">
+        <pattern name="BW_WORD">
+            <!--<regex>(Dr\.|'?[a-zäöüß]++|[A-ZÄÖÜ][a-zäöüß]++|[A-ZÄÖÜa-zäöüß]{2,}|[A-ZÄÖÜ]\.?)</regex>-->
+            <regex>([A-ZÄÖÜa-zäöüß\:\^_´]+)</regex>
+            <comment>lowercase alphabetic letters, possibly interspersed with colon as lengthening symbol, possibly preceded by 6 or 7 to indicate fragment or dialect</comment>
+        </pattern>
+        <pattern name="BW_PAUSE">
+            <regex>\+(\d\+)?</regex>
+            <comment></comment>
+        </pattern>           
+        <pattern name="BW_PUNCTUATION">            
+            <regex>[\W]</regex>
+            <comment></comment>
+        </pattern>                   
+        <pattern name="BW_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>        
+    </level>
+    
+</patterns>

@@ -1,0 +1,569 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>EXMARaLDA changes</title><style type="text/css">
+						tr, th {						
+						font-family: "Courier New", Courier, monospace;
+						font-size: 11px;
+						}
+										
+						.bug {
+						background-color: #FFCCCC;
+						}
+						.feature {
+						background-color: #99DDFF;
+						}
+						.change {
+						background-color: #CCCCCC;
+						}
+					
+				</style></head>
+   <body>
+      <h1>Coma changes</h1>
+      <table rules="all" frame="box" width="600px">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change (<span class="bug">bug</span>;<span class="feature">feature</span>;<span class="change">change</span>)
+            </th>
+         </tr>
+         <tr class="change">
+            <td>07.04.2009</td>
+            <td>1.4.2</td>
+            <td>kissed subcorpora goodbye, added method to merge subcorpora-information into speakers and communications</td>
+         </tr>
+         <tr class="change">
+            <td>07.04.2009</td>
+            <td>1.4.2</td>
+            <td>implemented com.apple.eawt and finder-integration</td>
+         </tr>
+         <tr class="change">
+            <td>07.04.2009</td>
+            <td>1.4.2</td>
+            <td>changed some more file-dialogs to native code</td>
+         </tr>
+         <tr class="change">
+            <td>07.04.2009</td>
+            <td>1.4.2</td>
+            <td>changed corpus-panel, killed 1200 lines of ugliest code</td>
+         </tr>
+         <tr class="change">
+            <td>07.04.2009</td>
+            <td>1.4.2</td>
+            <td>changed 'firstrun'-code. default language is english now</td>
+         </tr>
+         <tr class="feature">
+            <td>27.03.2009</td>
+            <td>1.4.1</td>
+            <td>implemented type-attribute for languages</td>
+         </tr>
+         <tr class="bug">
+            <td>26.03.2009</td>
+            <td>1.4.1</td>
+            <td>recordings were created wrong. fixed.</td>
+         </tr>
+         <tr class="change">
+            <td>26.03.2009</td>
+            <td>1.4.1</td>
+            <td>changes to the schema - see schema-file</td>
+         </tr>
+         <tr class="change">
+            <td>26.03.2009</td>
+            <td>1.4.1</td>
+            <td>purged periodExact and knownHuman from the code, remains in the schema for backwards-compatibility</td>
+         </tr>
+         <tr class="change">
+            <td>25.03.2009</td>
+            <td>1.4.1</td>
+            <td>type-attribute for locations shows and is editable now</td>
+         </tr>
+         <tr class="change">
+            <td>24.03.2009</td>
+            <td>1.4.1</td>
+            <td>coma recognizes .exb-files for assigning and ccw now</td>
+         </tr>
+         <tr class="change">
+            <td>12.03.2009</td>
+            <td>1.4.1</td>
+            <td>changes in the description-dialog</td>
+         </tr>
+         <tr class="change">
+            <td>12.03.2009</td>
+            <td>1.4.1</td>
+            <td>table-selection handling vastly improved (i hope)</td>
+         </tr>
+         <tr class="feature">
+            <td>04.03.2009</td>
+            <td>1.4.1.224</td>
+            <td>changes to the auto-update-mechanism, removed loads of asdf-comments</td>
+         </tr>
+         <tr class="feature">
+            <td>26.02.2009</td>
+            <td>1.4.1.213</td>
+            <td>removed menubar-icons, added copy-debug-info-action</td>
+         </tr>
+         <tr class="feature">
+            <td>26.02.2009</td>
+            <td>1.4.1.208</td>
+            <td>implements exmaralda-application and logging, logging-dir-preference</td>
+         </tr>
+         <tr class="feature">
+            <td>25.02.2009</td>
+            <td>1.4.1.204</td>
+            <td>auto-update feature (untested for windows)</td>
+         </tr>
+         <tr class="bug">
+            <td>18.02.2009</td>
+            <td>1.4.1_190</td>
+            <td>coma mac-build was missing the fsm-files for segmentation</td>
+         </tr>
+         <tr class="change">
+            <td>18.02.2009</td>
+            <td>1.4.1_190</td>
+            <td>coma files have the extension .coma now</td>
+         </tr>
+         <tr class="bug">
+            <td>02.02.2009</td>
+            <td>1.4</td>
+            <td>changes in recording.toHTML()</td>
+         </tr>
+         <tr class="bug">
+            <td>02.02.2009</td>
+            <td>1.4</td>
+            <td>corpus-creator changed: one recording - multiple media files, overwrite confirmation</td>
+         </tr>
+         <tr class="bug">
+            <td>30.01.2009</td>
+            <td>1.4</td>
+            <td>Description-Keys are now always deleted by deleting their value (Petra's Mail)</td>
+         </tr>
+         <tr class="bug">
+            <td>28.01.2008</td>
+            <td>1.35_176</td>
+            <td>Pressing escape while editing communication-names caused a NPE</td>
+         </tr>
+         <tr class="bug">
+            <td>27.01.2008</td>
+            <td>1.35_176</td>
+            <td>changed xmlSaved-notification and titlebar-display</td>
+         </tr>
+         <tr class="change">
+            <td>27.01.2008</td>
+            <td>1.35_176</td>
+            <td>Changed the input-method for durations YET AGAIN!</td>
+         </tr>
+         <tr class="bug">
+            <td>19.01.2009</td>
+            <td>1.35_171</td>
+            <td>fixed three bugs in the corpus generator</td>
+         </tr>
+         <tr class="bug">
+            <td>17.12.2008</td>
+            <td>1.35_162</td>
+            <td>fixed error in table updates and template-handling</td>
+         </tr>
+         <tr class="change">
+            <td>15.12.2008</td>
+            <td>1.35_160</td>
+            <td>comacorpus.xsd changed to 1.5 - changes are documented inside the file</td>
+         </tr>
+         <tr class="feature">
+            <td>27.11.2008</td>
+            <td>1.35_150</td>
+            <td>templates for descriptions</td>
+         </tr>
+         <tr class="feature">
+            <td>27.11.2008</td>
+            <td>1.35_150</td>
+            <td>you can not add transcriptions and recordings in an unsaved document anymore</td>
+         </tr>
+         <tr class="bug">
+            <td>27.11.2008</td>
+            <td>1.35_150</td>
+            <td>fixed several errors concerned with saving, url resolving and other stuff</td>
+         </tr>
+         <tr class="feature">
+            <td>21.11.2008</td>
+            <td>1.35_135</td>
+            <td>added templates for descriptions. this build is largely untested!</td>
+         </tr>
+         <tr class="bug">
+            <td>20.11.2008</td>
+            <td>1.35_131</td>
+            <td>language-lookup now with lowercase-letters (thanks, ethnologue...)</td>
+         </tr>
+         <tr class="feature">
+            <td>21.11.2008</td>
+            <td>1.35_135</td>
+            <td>added templates for descriptions. this build is largely untested!</td>
+         </tr>
+         <tr class="bug">
+            <td>20.11.2008</td>
+            <td>1.35_131</td>
+            <td>language-lookup now with lowercase-letters (thanks, ethnologue...)</td>
+         </tr>
+         <tr class="bug">
+            <td>30.10.2008</td>
+            <td>1.35_118</td>
+            <td>there was still a bug in durations-calculation. replaced the whole thing.</td>
+         </tr>
+         <tr class="feature">
+            <td>27.10.2008</td>
+            <td>1.35_112</td>
+            <td>changed preferences handling - dumped 250 lines of code, added defaults-button</td>
+         </tr>
+         <tr class="feature">
+            <td>24.10.2008</td>
+            <td>1.35_103</td>
+            <td>added preferences option to disable writing IDs into transcription files</td>
+         </tr>
+         <tr class="bug">
+            <td>24.10.2008</td>
+            <td>1.35_103</td>
+            <td>Maintenance-Tools repaired (reload transcription information)</td>
+         </tr>
+         <tr class="feature">
+            <td>08.10.2008</td>
+            <td>1.35_85</td>
+            <td>show file path to transcription in transcription-info</td>
+         </tr>
+         <tr class="bug">
+            <td>08.10.2008</td>
+            <td>1.35_85</td>
+            <td>fixed bugs in timespan calculation</td>
+         </tr>
+         <tr class="change">
+            <td>07.10.2008</td>
+            <td>1.34</td>
+            <td>minor fixes and new build-targets</td>
+         </tr>
+         <tr class="bug">
+            <td>29.09.2008</td>
+            <td>1.33_66</td>
+            <td>html-display for media-files fixed</td>
+         </tr>
+         <tr class="bug">
+            <td>29.09.2008</td>
+            <td>1.33_66</td>
+            <td>html-display for media-files fixed</td>
+         </tr>
+         <tr class="bug">
+            <td>26.09.2008</td>
+            <td>1.33_62</td>
+            <td>key-sorting is not reverse anymore</td>
+         </tr>
+         <tr class="bug">
+            <td>26.09.2008</td>
+            <td>1.33_59</td>
+            <td>bug in location-edit-dialog fixed</td>
+         </tr>
+         <tr class="bug">
+            <td>25.09.2008</td>
+            <td>1.32</td>
+            <td>millisecond-handling now with BigDecimals to prevent rounding errors in durations</td>
+         </tr>
+         <tr class="feature">
+            <td>01.08.2008</td>
+            <td>1.31</td>
+            <td>template-autosave</td>
+         </tr>
+         <tr class="feature">
+            <td>01.08.2008</td>
+            <td>1.31</td>
+            <td>awt-filedialog auf dem mac an einigen stellen</td>
+         </tr>
+         <tr class="bug">
+            <td>01.08.2008</td>
+            <td>1.31</td>
+            <td>ein paar nullpointer in den templates beseitigt</td>
+         </tr>
+         <tr class="bug">
+            <td>01.08.2008</td>
+            <td>1.31</td>
+            <td>templates und segmentierung in die dokumentation aufgenommen</td>
+         </tr>
+         <tr class="feature">
+            <td>01.08.2008</td>
+            <td>1.31</td>
+            <td>templates für locations</td>
+         </tr>
+         <tr class="feature">
+            <td>01.08.2008</td>
+            <td>1.31</td>
+            <td>ccw-panel von  blödem layout befreit</td>
+         </tr>
+         <tr class="bug">
+            <td>29.07.2008</td>
+            <td>1.24</td>
+            <td>Comm/Setting/Description liess sich nicht editieren</td>
+         </tr>
+         <tr class="bug">
+            <td>29.07.2008</td>
+            <td>1.24</td>
+            <td>SplitPanes verbessert</td>
+         </tr>
+         <tr class="bug">
+            <td>28.07.2008</td>
+            <td>1.23</td>
+            <td>Fehler im Segment-Zähler korrigiert</td>
+         </tr>
+         <tr class="bug">
+            <td>22.07.2008</td>
+            <td>1.22</td>
+            <td>Fehler in der Tabellendarstellung behoben ("redo selection")</td>
+         </tr>
+         <tr class="bug">
+            <td>01.06.2008</td>
+            <td>1.21</td>
+            <td>Fehler in CCW behoben: @-Zeichen am Anfang von "uniqueSpeaker..." entfernt.</td>
+         </tr>
+         <tr class="bug">
+            <td>16.05.2008</td>
+            <td>1.2</td>
+            <td>Fehler beim Speichern und Abrufen der Einstellungen behoben. Alle Einstellungen gehen jetzt nach org.exmaralda.coma und das
+               geschieht in Ui.java
+            </td>
+         </tr>
+         <tr class="feature">
+            <td>16.05.2008</td>
+            <td>1.2</td>
+            <td>Dublin-Core-Metadata-Button and handling</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>ComaFilter: JToggleButtons statt JCheckboxes</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>package-struktur komplett auf org.exmaralda.coma umgestellt</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>keine files mehr in coma/*</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>SVN via SourceForge</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>alle ressourcen (auch bilder) nach /resources, mit ResourceHandler.java auflösen</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>Unique Speaker Distinction für "add Corpora" hat gefehlt</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>Fehler beim "auskoppeln" von Korpora behoben</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>SegmentCount Button repariert</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>SegmentCount zählt jetzt in ausgewählten Comm. statt in allen</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>Mülleimer-Symbol durch "Minus" ersetzt</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>Übersetzungen ergänzt</td>
+         </tr>
+         <tr class="feature">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>duplicate communications</td>
+         </tr>
+         <tr class="feature">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>moved panic-button</td>
+         </tr>
+         <tr class="bug">
+            <td>24.04.2008</td>
+            <td>1.11</td>
+            <td>add-to-basket repaired</td>
+         </tr>
+         <tr class="feature">
+            <td>22.04.2008</td>
+            <td>1.06</td>
+            <td>duplicate speakers</td>
+         </tr>
+         <tr class="bug">
+            <td>14.04.2008</td>
+            <td>1.05</td>
+            <td>ccw macht das fenster zu</td>
+         </tr>
+         <tr class="feature">
+            <td>14.04.2008</td>
+            <td>1.05</td>
+            <td>ccw lokalisiert</td>
+         </tr>
+         <tr class="bug">
+            <td>14.04.2008</td>
+            <td>1.04</td>
+            <td>XML-Anzeige und Editor entfernt</td>
+         </tr>
+         <tr class="feature">
+            <td>14.04.2008</td>
+            <td>1.04</td>
+            <td>new transcription-importer ("ccw")</td>
+         </tr>
+         <tr class="feature">
+            <td>14.04.2008</td>
+            <td>1.04</td>
+            <td>"known human" now optional</td>
+         </tr>
+         <tr class="change">
+            <td>10.03.2008</td>
+            <td>1.02</td>
+            <td>Update-Check aus Werkzeug-Menü entfernt</td>
+         </tr>
+         <tr class="change">
+            <td>10.03.2008</td>
+            <td>1.02</td>
+            <td>Aboutness-Keyboard-Shortcut entfernt</td>
+         </tr>
+         <tr class="change">
+            <td>10.03.2008</td>
+            <td>1.02</td>
+            <td>TableSorter-Klasse eliminiert</td>
+         </tr>
+         <tr class="feature">
+            <td>10.03.2008</td>
+            <td>1.02</td>
+            <td>Neuer Aufräum-Knopf bei den Aufnahmen</td>
+         </tr>
+         <tr class="bug">
+            <td>10.03.2008</td>
+            <td>1.02</td>
+            <td>Aufnahmen zuordnen für alle repariert</td>
+         </tr>
+         <tr class="bug">
+            <td>10.03.2008</td>
+            <td>1.02</td>
+            <td>Aufnahmen-Tabelle reagiert jetzt</td>
+         </tr>
+         <tr class="bug">
+            <td>05.03.2008</td>
+            <td>1.01</td>
+            <td>fehlende Englische Übersetzungen ergänzt</td>
+         </tr>
+         <tr class="bug">
+            <td>05.03.2008</td>
+            <td>1.01</td>
+            <td>Korpus-Description-Panel repariert</td>
+         </tr>
+         <tr class="feature">
+            <td>05.03.2008</td>
+            <td>1.01</td>
+            <td>komplett neuer Zuordnungsmechanismus für Sprecher und Kommunikationen</td>
+         </tr>
+         <tr class="bug">
+            <td>05.03.2008</td>
+            <td>1.01</td>
+            <td>in-den-Korb-Buttons repariert</td>
+         </tr>
+         <tr class="bug">
+            <td>05.03.2008</td>
+            <td>1.01</td>
+            <td>Korb-"Füllstandsanzeige" repariert</td>
+         </tr>
+         <tr class="bug">
+            <td>18.02.2008</td>
+            <td>1.0beta3</td>
+            <td>Fehler in der Datumsberechnung korrigiert</td>
+         </tr>
+         <tr class="feature">
+            <td>18.02.2008</td>
+            <td>1.0beta3</td>
+            <td>Eingabemaske für Description zu Korpora</td>
+         </tr>
+         <tr class="feature">
+            <td>18.02.2008</td>
+            <td>1.0beta3</td>
+            <td>Korpuspanel umsortiert</td>
+         </tr>
+         <tr class="bug">
+            <td>18.02.2008</td>
+            <td>1.0beta3</td>
+            <td>Korpus-Korb repariert</td>
+         </tr>
+         <tr class="feature">
+            <td>18.02.2008</td>
+            <td>1.0beta2</td>
+            <td>Schaltfläche für vordefinierte Filter mit 3 Filtern</td>
+         </tr>
+         <tr class="bug">
+            <td>18.02.2008</td>
+            <td>1.0beta2</td>
+            <td>ComaCreators nullPointerException bei fehlenden Mediendatein gelöscht</td>
+         </tr>
+         <tr class="bug">
+            <td>18.02.2008</td>
+            <td>1.0beta2</td>
+            <td>funktionslose Buttons für neue Zuordung geschaffen</td>
+         </tr>
+         <tr class="bug">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>addlocation bei kommunikationen</td>
+         </tr>
+         <tr class="bug">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>sprecher hinzufügen geht wieder</td>
+         </tr>
+         <tr class="bug">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>comacreator verknüpft mediendateien richtig</td>
+         </tr>
+         <tr class="feature">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>Filter editierbar</td>
+         </tr>
+         <tr class="feature">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>(neue) Kommunikationen umbenenbar</td>
+         </tr>
+         <tr class="feature">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>speaker löschbar</td>
+         </tr>
+         <tr class="feature">
+            <td>17.02.2008</td>
+            <td>1.0beta1</td>
+            <td>mehrere comms löschbar</td>
+         </tr>
+         <tr class="feature">
+            <td>05.08.2008</td>
+            <td></td>
+            <td>added segmentation functionality to the corpus creation wizard</td>
+         </tr>
+         <tr class="feature">
+            <td>04.08.2008</td>
+            <td></td>
+            <td>added 'Tools &gt; EXAKT Search' function</td>
+         </tr>
+      </table>
+   </body>
+</html>

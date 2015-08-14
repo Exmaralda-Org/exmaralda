@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="TEI">
+	<key>
+		<content>[prol]</content>
+		<description>lenghthened words</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[trunc]</content>
+		<description>truncated words</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[emph]</content>
+		<description>emphasis on words</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>[cough]</content>
+		<description>cough</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[inhalation]</content>
+		<description>inhalation</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>[exhalation]</content>
+		<description>exhalation</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[rising intonation]</content>
+		<description>rising intonation</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[falling intonation]</content>
+		<description>falling intonation</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <!-- *********************** -->
+	<key>
+		<content>{question}</content>
+		<description></description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>{code switch}</content>
+		<description></description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>{noise}</content>
+		<description></description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(smiles)</content>
+		<description></description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;short&gt;</content>
+		<description>short pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;dur=1&gt;</content>
+		<description>measured pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

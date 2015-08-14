@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="iConc">
+	<key>
+		<content>{</content>
+		<description>Begin tone unit</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>}</content>
+		<description>End tone unit</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- ************************  -->
+	<key>
+		<content>\/</content>
+		<description>tone: fall-rise</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>/</content>
+		<description>tone: rise</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>\</content>
+		<description>tone: fall</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>/\</content>
+		<description>tone: rise-fall</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>=</content>
+		<description>tone: level</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>?</content>
+		<description>tone: unclassifable</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- ************************  -->
+	<key>
+		<content>[^</content>
+		<description>key: high</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[</content>
+		<description>key: mid</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[_</content>
+		<description>key: low</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>]</content>
+		<description>end key</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- ************************  -->
+	<key>
+		<content>&lt;^</content>
+		<description>termination: high</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;</content>
+		<description>termination: mid</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;_</content>
+		<description>termination: low</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&gt;</content>
+		<description>end termination</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- ************************  -->
+	<key>
+		<content>[&lt;^</content>
+		<description>key + termination: high</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[&lt;</content>
+		<description>key + termination: mid</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[&lt;_</content>
+		<description>key + termination: low</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&gt;]</content>
+		<description>end key + termination</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

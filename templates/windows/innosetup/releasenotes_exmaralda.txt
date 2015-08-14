@@ -1,0 +1,835 @@
+***** EXMARaLDA changes *******
+
+=================
+partitureditor
+=================
+28.07.2015                 Reset option for preferences
+26.07.2015                 Choice of segmentation for WebLicht function
+24.07.2015                 Choice of language for TCF export
+24.07.2015                 Choice of language for WebLicht function
+21.07.2015                 Minimum size for tier selection after add event increased
+10.07.2015                 Forgot the player libs in bundled JRE8...
+24.06.2015                 Minor beautifications for media references dialog
+03.06.2015                 Resize video to maximum 480px width when opening
+02.06.2015                 MMF player for Windows (first attempt, not working yet)
+27.05.2015                 Hide controls panel in media panel
+27.05.2015                 Goodbye ELAN DS Player on Windows
+27.05.2015                 CocoaQT player for Mac may be functional now
+18.05.2015                 CocoaQT player for Mac
+13.05.2015                 Beautified player preferences dialog
+11.05.2015                 ELAN-Quicktime-Player available for Windows
+11.05.2015                 Changes in ELAN-Quicktime-Player (PeriodicUpdateController)
+11.05.2015                 JDS-Player functional for Windows (is default player now)
+20.04.2015                 WebLicht call: statelessness attempt
+20.04.2015                 TCF conversion: changed element source to textSource as spec-required
+20.04.2015                 TEI conversion: no origin for timeline, no absolute value for first when
+09.04.2015                 Easy alignment: start first playback from cursor position (Caro)
+16.03.2015                 Null pointer bug in Alignment Panel
+12.03.2015                 Tier names must be escaped in conversion info of segmented transcriptions (Espinat)
+12.03.2015                 Tiny bugling in TEI/ISO/HIAT export: pc in unclear (Hanna)
+15.01.2015                 Adaptations of TEI export to new version of standard proposal (annotationGrp)
+08.12.2014                 Some minor changes to WebLicht (CLARIN menu)
+04.12.2014                 WebLicht (CLARIN menu) completed preliminarily
+03.12.2014                 first attempt at WebLicht integration (CLARIN menu)
+01.12.2014                 Added jniwrap for 64-bit systems (Hanna, Flo)
+01.12.2014                 Remove empty events before exporting FLK (Franziska Wallner)
+24.10.2014                 First attempt at Qucik Media Open Dialog (Steinchen)
+13.10.2014                 First attempt at TCF converter
+06.10.2014                 WebMAUS (CLARIN menu) completed preliminarily
+04.09.2014                 hide tiers button in edit tiers dialog (Torben Schinke)
+14.08.2014                 some more WebMAUS (CLARIN menu)
+08.08.2014                 first attempt at WebMAUS integration (CLARIN menu)
+04.08.2014                 bug in ELAN import when 0.0 was in several timepoints (Wrobel)
+25.06.2014                 bug in tier check for new tiers, speaker ID was wrong (Butterworth)
+23.06.2014                 further steps of ISO/TEI export
+23.06.2014                 catch splash screen transparency error (lubuntu)
+10.06.2014                 start tier count in "Add event" at 1 rather than 0
+05.06.2014                 first steps of ISO/TEI export
+26.05.2014                 bug in F4 export: url of referenced file must be xml escaped (Oppermann)
+06.03.2014                 fixed bug in masking functionality - reading of internal resource failed
+20.02.2014                 Mask audio functionality
+13.02.2014                 Mildly intelligent handling of tier names in Praat export/import (Hanna, LLN)
+20.12.2013                 Auto-Interpolate after splitting an option in preferences (Antenne Zwergenstaat)
+13.12.2013                 Customisation of New HIAT TEI export: normalisation, word IDs optional (Sarah Cadorel)
+13.12.2013                 Remove times action (Oliver Ehmer)
+27.11.2013                 Change for auto annotate: can annotate multi-interval events when match is complete (Hanna, LLN)
+13.11.2013                 Some fixes for auto annotate (Hanna, LLN)
+12.11.2013                 First attempt at auto annotate (Hanna, LLN)
+16.10.2013                 First attempt at integration Merge transcriptions action (Hanna, LLN)
+08.10.2013                 On Windows: Problem with focus management after virtual keyboard insertion (Juliane Gall)
+29.08.2013                 Do not minimize file selection in media panel
+12.08.2013                 Corrections to the Chinese internationalization
+22.07.2013                 Additions to the Chinese internationalization
+17.07.2013                 Some corrections and additions wrt internationalization
+04.07.2013                 Chinese menu translations (Fan Junjun)
+10.06.2013                 HTML5 export with video
+15.04.2013                 Audacity import: accept comma as decimal separator (Tara)
+10.04.2013                 Removed ugly auto jump icon from annotation panel
+10.04.2013                 Removed segmented transcription from "File > Export" (only in Transcription menu now)
+22.02.2013                 Import Audacity label file (Tara)
+04.02.2013                 Enormous usability enhancments to Goto dialog (Steinchen)
+03.01.2013                 Easy alignment action
+20.12.2012                 Change to XSL for WinPitch import to make it work for C-ORAL-ROM BRASIL
+06.12.2012                 first attempt at F4 export
+09.10.2012                 Spanish punctuation for generic segmentation
+12.09.2012                 Structure warnings in dialog for adding new tiers
+12.09.2012                 Shortcut and other usability improvements for timeline interpolation
+04.09.2012                 Made append spaces in TreeTagger import optional (Hirschmann)
+31.08.2012                 Auto save was not activated when opening a file via double click
+16.08.2012                 Tier format table was not always saved when present
+18.06.2012                 Added bug fix by Torben Schinke (Oldenburg) for problem with virtual keyboard insert on the MAC
+12.06.2012                 Do not add nbsps to tier labels in HTML partitur output because it causes trouble with akz tiers in HIAT (Kleinschmidt)
+30.05.2012                 Always write a referenced file even if there is none
+16.03.2012                 New method(s) for manipulating absolute times: shift and scale (Lepizig, Immerz)
+05.03.2012                 Enabled button to parameterise word boundary characters in partitur output (Konzett)
+30.01.2012                 Simple text output
+30.01.2012                 Czech localisations updated by Petr Porizka
+26.01.2012                 Tree tagger output (Trevisan)
+19.01.2012                 cGAT Minimal segmentation: allow breathe symbol inside non-pho
+19.01.2012                 import filter for Rio de Janeiro style text transcriptions (Maria Paiva)
+18.01.2012                 cGAT Minimal segmentation: bug in FSM for two h state
+18.01.2012                 cGAT Minimal segmentation: allow slash as separator for alternatives
+10.01.2012                 Fixed bug which causes GAT output to fail for tiers without speakers (Concha Hoefler)
+01.12.2011                 iConc virtual keyboard (Ralph Morton)
+17.11.2011                 Allow font size 1 for tier format (Yael)
+11.10.2011                 Info panel for display of preferred segmentation and player type
+11.10.2011                 Write URL instead of system-dependent path for absolute paths in referenced-files (Gewiss)
+22.09.2011                 Disable undo action while undo is in progress
+22.09.2011                 Disabled normalization in cleanup - suspected to cause a bug with large files
+12.09.2011                 Bug in RTF output: escape transcription name (Shinichi)
+29.08.2011                 HTML5 output methods (list and partitur)
+20.08.2011                 Changed check while opening: remove bad events, don't complain about them (reason for the bug still not discovered)
+08.08.2011                 First attempt at Phon importer
+06.07.2011                 Clicking on segmentation label in transcription menu opens segmentation preferences
+06.07.2011                 Check once for default player
+24.06.2011                 Fixed two bugs in cGAT FSM (Ralph Morton)
+17.06.2011                 Transcriber import: remove DTD reference before transforming (Hambuch)
+08.06.2011                 Bug in event-based CHAT export (C. Konzett)
+30.05.2011                 Treat https like http in filename relativization (Ott)
+18.05.2011                 Added BAS Audio Player as option for players
+11.05.2011                 Moved Error list from Transcription to File menu
+09.05.2011                 Added CHAT_MINIMAL segmentation (ur: E11)
+27.04.2011                 cGAT segmentation is now FSM based (ur: GEWISS)
+08.04.2011                 Fixed bug introduced with last bug fix...
+06.04.2011                 Keep anchors for Left/Right part to new caused bug in Undo - removed that bug
+04.04.2011                 Added HIAT symbols to Russian Transliteration keyboard (ur: Astrid Porila)
+04.04.2011                 Added webm file suffixes to media file filter
+22.03.2011                 Added ELAN JDS Player as option for players
+21.03.2011                 Virtual keyboard for Russian transliteration (ur: Astrid Porila)
+09.03.2011                 Keep anchors for Left/Right part to new
+07.03.2011                 Fixed a minor bug in Modena TEI export related to speakerless events
+02.03.2011                 Enter and Escape work in tier selection dialog after add event
+02.03.2011                 Keyboard shortcuts for add event (Ctrl +) and append interval (Alt +)
+03.02.2011                 Added equidistant option to New from timeline...
+19.01.2011                 Lots of changes to transformation XSL in the tei package
+17.01.2011                 Added remove tier to table popup menu
+17.01.2011                 Added remove event to event popup menu
+17.01.2011                 Make sure that the annotation panel does not escape from the screen when screen size changes
+17.01.2011                 Some changes to the stratify tier dialog
+17.01.2011                 Fixed bug in transcriber import: need to process <Comment> elements (Therese Leinonen)
+11.01.2011                 Need to check stratification when opeing a transcription in the main method
+10.01.2011                 Search results need to be cleared when new transcription is loaded
+05.01.2011                 Some usability improvements for the error list dialog
+10.12.2010                 Fixed a minor bug in selection updating
+07.12.2010                 Fixed a bug in the Modena-TEI section of Transformations
+03.12.2010                 Added KgSR keyboard to virtual keyboards
+25.11.2010                 Added self transformation as option in Transformation dialog
+25.11.2010                 Added TEI and Modena TEI as options for transformation base in Transformation dialog
+25.11.2010                 some adjustments to TEI transformation stylesheets for better match with tei-all.dtd
+23.11.2010                 resolve media file after transcriber import
+23.11.2010                 attribute values in conversion info must be escaped for XML (Mayr)
+23.11.2010                 fixed yet another bug in resolving relative paths
+22.11.2010                 Fixed bug in importers: stratify first, then cleanup
+11.11.2010                 Fixed bug in annotation panel related to finding corresponding tier (PK)
+29.10.2010                 Added keyboard shortcuts for Goto and Find next event
+22.10.2010                 some changes in behaviour of replace functionality
+22.10.2010                 fixed a bug with replace in events
+22.10.2010                 fixed yet another bug in resolving relative paths with ..
+21.10.2010                 fixed another bug in resolving relative paths with ..
+19.10.2010                 Replace dialog: remember tier selection (UR: BF, FFO)
+15.10.2010                 Time proportional view
+15.10.2010                 Added Romanian letters to the Romance keyboard
+14.10.2010                 First attempt at Undo functionality
+14.10.2010                 Fixed bug in file relativazitation on Windows
+30.09.2010                 fixed bug in utterance number inserting: skip speakerless contributions (Shinichi)
+24.09.2010                 fixed bug in new method for relativizing referenced files
+23.09.2010                 keyboard shortcut Ctrl+S for shifting selections was blocking saving, changed it to control+shift+s
+17.09.2010                 generic TEI import added
+17.09.2010                 fixed bug in ELAN import: speakertable was not generated
+17.09.2010                 new HIAT TEI export added
+17.09.2010                 cGAT TEI export added
+17.09.2010                 Generic TEI export added
+16.09.2010                 info plist must have library path also for PPC versions because of Quaqua
+14.09.2010                 Audacity export
+13.09.2010                 ExSync Cleanup Action (ur: Shinichi)
+13.09.2010                 Hyper-intelligent error handling for InsertUtteranceNumbers action (ur: Shinichi)
+09.09.2010                 Auto Jump in annotation dialog must take care of jumping over spanned cells
+03.09.2010                 Hyper-intelligent behaviour for penultimate column
+03.09.2010                 Event based CHAT export added
+03.09.2010                 HIAT variant of TEI export added
+02.09.2010                 Options accessory in TEI export
+30.08.2010                 Modifications to the Modena TEI export
+26.08.2010                 Additional structure check: temporal anomalies
+26.08.2010                 Some modifications to HIAT utterance numbering (ur: Shinichi)
+23.08.2010                 Added smooth timeline to cleanup options
+23.08.2010                 Smooth timeline action in Timeline menu
+13.08.2010                 Second attempt at making relative paths with .. usable (ur: gewiss)
+02.08.2010                 Added double split to the toolbar
+02.08.2010                 Audio panel is minimized by default
+02.08.2010                 Moved playback button from audio panel to controls in main window
+02.08.2010                 Added action for calculating annotated time
+02.08.2010                 Changed keyboard shortcuts for player
+02.08.2010                 Added three new player buttons for playing short intervals in and around a selection
+02.08.2010                 Partitur output: use start number when exporting selection
+23.07.2010                 CHAT import: more fine tuning related to CA-variant (CallFriend)
+20.07.2010                 CHAT export: lots of fine tuning related to PAIDUS
+20.07.2010                 CHAT import: handle new method of specifying and referring to media file
+19.07.2010                 New transcription wizard: trim speaker abbs
+19.07.2010                 Remove unused TLIs: don't remove first one
+01.07.2010                 Split segment: avoid division by zero (NaN bug)
+01.07.2010                 Split segment in list: avoid division by zero (NaN bug)
+28.06.2010                 Additional whitespace treatment in Simple EXMARaLDA import
+22.06.2010                 Uncheck view menu item when closing IPA dialog
+22.06.2010                 First attempt at ANVIL import
+25.05.2010                 GAT + Persian keyboard (ur: sanaz sharghi)
+06.05.2010                 Commit edit before going to a search result from EXAKT search (Hanna)
+03.05.2010                 Different options for CHAT export
+28.04.2010                 New auto backup file at each start
+23.04.2010                 double click in replace dialog triggers Goto (ur: Hanna)
+21.04.2010                 cleanup: remove gaps selection was not properly returned
+20.04.2010                 first attempt at CHAT importer
+12.04.2010                 insert utterance numbers for HIAT transcriptions (ur: Jockel Rehbein)
+12.04.2010                 all outputs can be restricted to visible tiers and/or selection
+09.04.2010                 commit edit before going to next item in error list (Hanna)
+30.03.2010                 When importing plain text: resulting tier is now given a default speaker AUT
+30.03.2010                 Word list creation must tolerate null speaker in T-tiers (after text import, Hanna)
+08.03.2010                 Added documentation for alignment
+05.03.2010                 changed behaviour of MAC quit handler (don't quit when check save returns false)
+18.02.2010                 first attempt at new player solution for MAC (ur: Antenne Zwergenstaat)
+17.02.2010                 enable disable assign times action according to selection status
+16.02.2010                 Finished new transcription wizard
+04.02.2010                 Insert Pause Action for the Partitur-Editor
+01.02.2010                 Started pause notation implementation: preferences under 'segmentation'
+01.02.2010                 Removed DIDA FSM field from segmentation preferences panel (DIDA is dead)
+01.02.2010                 Added ogg file suffixes to media file filter (ur: Gewiss)
+01.02.2010                 Replaced FOBS libraries with newer version (0.4.2. / Windows only)
+01.02.2010                 Added degree sign ° to GAT keyboard (ur: Gewiss)
+01.02.2010                 Fixed bug in RTF output for interlinear text: CDATA in metadata must be escaped too (cf. mail by Kerem)
+26.01.2010                 Some fine tuning for the WinPitch import (ur: Lisbon)
+19.01.2010                 Special handling for penultimate column
+19.01.2010                 Frame end must be reset after selection to new
+15.01.2010                 First attempt at WinPitch import (ur: Lisboa)
+16.12.2009                 Transcriber import
+02.12.2009                 keep formats after selection/left part/right part to new
+01.12.2009                 caught bug when resetting the DS Player to a null media
+01.12.2009                 caught bug when merging events on several tiers and one event spans across the merged range
+30.11.2009                 Added WMV to media file filter
+30.11.2009                 German and French Internationalization updated
+30.11.2009                 zoom button for waveform panel
+30.11.2009                 first version of IPA panel completed (thanks to Lars Vorberger)
+20.11.2009                 TEI Keyboard (ur: Natacha Niemants)
+20.11.2009                 TEI Modena export (ur: Natacha Niemants)
+19.11.2009                 Added some macrolanguage codes (ur: SR) and languages to the language list
+17.11.2009                 first attempt at IPA panel (ur: SiN)
+09.11.2009                 added two symbols and 10 diacritics to the IPA keyboard (ur: SiN)
+05.11.2009                 Confirm TLI action (ur: SR)
+05.11.2009                 Optionally remove unused timeline items after merge (ur: SR)
+05.11.2009                 Merge events can be applied to events on consecutive tiers (ur: SR)
+05.11.2009                 Ctrl + Period triggers Hide/Show special characters (ur: Hale)
+03.11.2009                 when checking tier dependencies: catch the case where a t-tier has no speaker
+03.10.2009                 when checking tier dependencies: catch the case where a t-tier has no speaker
+30.10.2009                 tier selection in find dialog: multiple tier selection enabled
+29.10.2009                 changed vertical maginify method for waveform
+29.10.2009                 character count interpolation
+28.10.2009                 when interpolating: reinterpolate interpolated times
+20.10.2009                 disabled loop function in media panel (is in waveform controls now)
+20.10.2009                 remember annotation panel display parameters
+20.10.2009                 annotation panel: must take care of dependencies below the top level
+16.10.2009                 added dependency handling to the annotation panel (ur: Marc Reznicek)
+15.10.2009                 NEW: Annotation Panel (ur by several users)
+14.10.2009                 remember keyboard display parameters
+14.10.2009                 extended virtual keyboard for ODT/STD
+13.10.2009                 auto anchoring optionally switch-offable
+13.10.2009                 added append space action (ur: SFB 632, B6)
+12.10.2009                 added loop selection button to player controls
+09.10.2009                 changed standard format table suffix to EXF
+09.10.2009                 re-introduced save format table as action (ur: Marc Reznicek)
+09.10.2009                 Tree Tagger import: can have a third column with lemma (ur: Marc Reznicek)
+09.10.2009                 Copy tier in add tier should also copy text (ur: Marc Reznicek)
+08.10.2009                 Find next action (ur: Marc Reznicek)
+08.10.2009                 Toggle hide/show keyboard in find dialog
+08.10.2009                 When clicking on a search result: make sure that the corresponding event is not displayed at the rightmost edge (ur: Marc Reznicek)
+06.10.2009                 Added GAT2 Minimal segmentation
+06.10.2009                 Added XSL stylesheet import (ur: Alexandr Rosen)
+24.09.2009                 Fixed bug in stylesheet for AG import
+24.09.2009                 Fixed bug in cleanup/normalize IDs: IDs in tier format table must be adapted
+06.07.2009                 Added Tree Tagger Import
+02.07.2009                 New documentation: How to edit and correct transcriptions
+24.06.2009                 On the MAC: do not show a message for ReopenApplication event
+23.06.2009                 Fixed tiny bugling in QT player when trying to stop a non-existent player
+22.06.2009                 Fixed tiny bugling in Make timeline consistent (also cleanup)
+16.06.2009                 Made Praat directory configurable from within application
+16.06.2009                 Added a number of built-in transformation scenarios
+15.06.2009                 Changed to quaqua L&F
+10.06.2009                 some small changes to the save audio snippet dialog
+09.06.2009                 new application handler on Mac exb files will be opened on double click now
+09.06.2009                 changed mac build for partitur-editor (INTEL only) to associate exb suffix
+09.06.2009                 added fallback behaviour when wav file can't be read, but other media can
+09.06.2009                 Modified the method for determining the endpoint in "Append interval" action
+09.06.2009                 Anchor transcription after "selection to new"
+09.06.2009                 Enabled multi selection/removal in media file dialog
+09.06.2009                 Put main application in a thread, seems to fix bug on startup with video and DS player
+02.06.2009                 HTML list + Flash output
+02.06.2009                 Two minor changes to the timeline segmentation dialog
+29.05.2009                 Added FOLKER export function
+29.05.2009                 Added FOLKER import function
+26.05.2009                 Enabled grab and cut in DS player
+26.05.2009                 Live update for videos in DS player
+26.05.2009                 Fixed bug in EXAKT annotation search (only inside Partitur-Editor)
+25.05.2009                 Increased maximum heap size for SUN JMF version on Windows
+25.05.2009                 Transformation action: remember last directory
+25.05.2009                 Changed calculation of word list, should be faster now
+13.05.2009                 Some changes to the languages dialog
+12.05.2009                 Added mimetype for EAF export
+11.05.2009                 fixed bug in selection2HTML action: don't write null file into preferences
+11.05.2009                 fixed bug in selection2RTF action: don't write null file into preferences
+28.04.2009                 first attempt at "new from timeline..." action
+16.04.2009                 transformation: default suffix for scenario file must be XML
+16.04.2009                 bookmark: special characters must be escaped when writing XML
+15.04.2009                 Adaptations to GUI sizes for MAC OS
+15.04.2009                 Manual updated
+15.04.2009                 set cursor time to start time of selection to avoid waveform hoppeling
+14.04.2009                 Fixed bug in handling incorrectly assigned media
+14.04.2009                 Fixed weirdness in extension checking for basic transcription save dialog
+08.04.2009                 Many changes to selection/focus handling
+08.04.2009                 Transcription > Export segmented...: overwrite check must be modified
+08.04.2009                 Export: changed segmented transcription suffix to exs
+07.04.2009                 New edit speakertable icon
+07.04.2009                 Braille intonation keyboard
+07.04.2009                 Goto action
+07.04.2009                 TLIs double-clickable in choose TLI dialog
+06.04.2009                 changed behaviour for 'append interval': bigger initial cell size, following event is scrolled into view
+06.04.2009                 changed behaviour for waveform: cursor is not reset when playback is stopped
+06.04.2009                 selection in partitur now reacts correctly when extended through CTRL+mouse click - WS mail: 4
+03.04.2009                 navigation dialog for waveform display
+02.04.2009                 'Structure errors' action in transcription menu
+01.04.2009                 Large text field displays text of consecutive event selection
+01.04.2009                 Selection duration can be copied to the clipboard by clicking on it
+01.04.2009                 Refresh button in word list dialog
+01.04.2009                 Fixed bug in "add event": selection must be remembered before commit edit is carried out
+29.03.2009                 Addition to the ODT-STD keyboard: real comments
+29.03.2009                 added timeline merge parameter to the glue transcription method
+29.03.2009                 fixed a bug in the glue transcription dialog
+26.03.2009                 changes to the ODT-STD virtual keyboard
+26.03.2009                 word list: display type/token count
+25.03.2009                 word list export: html suffix is given if none provided
+25.03.2009                 Filename for untitled has suffix 'exb'
+25.03.2009                 Fixed minor bug in the CHAT export
+24.03.2009                 locked last timeline item, different formatting (needs to be optional)
+24.03.2009                 moved CHAT conversion from output to export
+23.03.2009                 display selection times and duration
+22.03.2009                 reversed mouse wheel zooming behaviour
+21.03.2009                 Settings are stored for keyboard, large text field
+21.03.2009                 Added HIAT for ODT-STD to virtual keyboard
+19.03.2009                 removed ... in append interval
+19.03.2009                 os string must be checked in minor case because Turkish turns a small dotted i into a capital DOTTED i
+09.03.2009                 status bar added
+09.03.2009                 minor changes in the transformation action
+09.03.2009                 some cosmetic improvements to the Praat panel
+09.03.2009                 introduced minimum value for auto save interval (Gunes' mail)
+06.03.2009                 *.exb is now the default suffix for transcriptions
+03.03.2009                 Added tooltips with full path in recent files items in file menu
+27.02.2009                 Started cleaning up internationalization
+27.02.2009                 Cleaned up languages
+26.02.2009                 Added 'Anchor timeline' action to timeline menu
+25.02.2009                 Fixed bug in reading transcriptions: type is not read
+25.02.2009                 Fixed "faute nantaise": adding an avent at the very end must take care of not producing an illogial structure of the timeline
+17.02.2009                 Fixed bug in search action
+11.02.2009                 Transformation action
+11.02.2009                 Completed menu cleanup (Segmentation menu removed!)
+10.02.2009                 Moved and summarized several functions from the Segmentation menu to the Transcription menu
+09.02.2009                 Added AIF to list of common media files
+09.02.2009                 Tooltips for waveform actions
+27.01.2008                 Added tier segmentation function for SiN
+27.01.2008                 fixed bugs in selection handling
+26.01.2008                 fixed bug in QT availability check
+14.01.2009                 increased vertical size of large text field panel
+14.01.2009                 modified interpolation behaviour for splitting and double splitting
+17.12.2008                 several mouse handling features added to the timeline view
+17.12.2008                 fixed several smaller bugs in the ELAN import
+28.11.2008                 Fixed a bug in the QTJ Player
+27.11.2008                 Fixed a minor bug in the CHAT export
+26.11.2008                 Changed time display in audio/video panel
+25.11.2008                 Renamed 'Send partiture...' to 'Show partiture...'
+19.11.2008                 fixed buggy bug handling for init of logger file (problem on MAC OS)
+19.11.2008                 completed change of referenced file handling in meta information dialog
+17.11.2008                 changed CellFit-Paramater behaviour (is now default)
+28.10.2008                 fixed buggy bug handling for the case that no quicktime is installed
+24.10.2008                 Completed Spanish translations (Silke Merkel), completed French translations (Silke Merkel), Some smaller modifications to Czech translations (Petr Porizka)
+22.10.2008                 changed mac plist to set bigger maximum heap size
+22.10.2008                 some minor fixes to the ELAN export
+21.10.2008                 fixed bug in "send partitur to browser" action
+20.10.2008                 speakerwise word lists export for HIAT in Segmentation menu
+20.10.2008                 removed 70 twips indent for partitur tables in RTF output (cf. mail by Peter Weber)
+14.10.2008                 added Spanish translations (not complete yet) and fixed some minor bugs wrt internationalizazion
+06.10.2008                 started to change referenced file handling in meta information dialog
+26.09.2008                 added HTML partitur output with flash
+25.09.2008                 made format part of the transcription
+25.09.2008                 moved extra actions out of submenu into main edit menu
+23.09.2008                 moved panel actions out of submenu into main view menu
+23.09.2008                 moved recent files out of submenu into main file menu
+23.09.2008                 put all visualization actions into one ("Output") action
+22.09.2008                 fixed error in German localization wrt "selected" vs. "unselected" tiers in search dialog
+16.09.2008                 put all import actions into one action
+16.09.2008                 put all export actions into one action
+10.09.2008                 changed title of "Save media snippet" dialog
+10.09.2008                 took care of cleaning up media panel when a new file is opened or created
+09.09.2008                 updated languages list from ethnologue (now version 15)
+09.09.2008                 fixed bug in language selection in speakertable dialog
+06.08.2008                 changed some dialogs to make them look better on MAC OS X
+04.08.2008                 added 'Edit > EXAKT Search' function
+04.08.2008                 changed 'Send HTML partitur to browser' function to write to temp file
+04.08.2008                 added 'Event > Find next event' function (Ctrl + Alt + SPACE)
+01.08.2008                 rewrote quicktime player
+14.07.2008                 added 'underline' action
+07.07.2008                 integrated Czech menu translations by Petr Porizka
+20.05.2008                 more changes to the CHAT export (related to the conversion of mytheory.cha)
+07.05.2008                 several changes to the CHAT export
+10.04.2008                 made shortcuts for play, pause and stop (F1,F2,F3) work without the audio panel having the focus
+10.04.2008                 added buffer time functionality in audio panel
+10.04.2008                 caught overrun of stop time in JMF player
+20.12.2007                 changes to the segmentation function for project 'Stadtsprache'
+20.12.2007                 slider for changing font size in the virtual keyboard
+20.12.2007                 3 additions to the IPA virtual keyboard
+04.12.2007                 segmentation function for project 'Stadtsprache'
+04.12.2007                 playback mode
+04.12.2007                 fine synchronisation mode
+=================
+coma
+=================
+26.07.2015                 cGAT Minimal as tagging option (MoDiKo)
+26.07.2015                 Custom FSMs for segmentation functionality (MoDiKo)
+26.07.2015                 Beautified segmentation dialogs
+24.06.2015                 Generic as tagging option
+02.07.2014                 new entry (commons-io) in class path for COMA on MAC
+10.09.2013                 repaired mac build.
+04.09.2013                 splash-auto-timeout
+21.08.2013                 better handling of recordings vs. media-files
+21.08.2013                 error when comms or spks get filtered due to edits (DS)
+20.08.2013                 changes on how filters and search-terms are handled
+20.08.2013                 Adding unsupported media files will not crash coma anymore
+20.08.2013                 changed handling of recording-names (Hanna)
+20.08.2013                 Editing attributes in the second comm-column fixed
+20.08.2013                 Segmenting from within coma now adds the segmented transcriptions to the metadata
+20.08.2013                 Error in path handling fixed for corpus statistics
+26.03.2013                 possibility to hide description keys (requires schema change!)
+25.03.2013                 ui changes, updated language file
+22.03.2013                 auto-browse output html
+22.03.2013                 read-only keys are not to be harmonized (Hanna)
+04.03.2013                 Bug in tree tagger tool (Roman)
+19.11.2012                 Bug in corpus statistics for Non-HIAT-Transcriptions (GeWiss)
+09.10.2012                 Corpus statistics for Non-HIAT-Transcriptions (GeWiss)
+02.10.2012                 Merge document action (GeWiss)
+01.08.2012                 word list functionality was broken (like the first morning)
+18.01.2012                 Bug in speaker specific wordlists: counts all speakers in files with the selected speakers (Anna Komor)
+23.12.2011                 Completed first attempt at implementing speaker-specific word lists (Anna Komor)
+16.12.2011                 Started implementing speaker-specific word lists (Anna Komor)
+21.10.2011                 bug fix: version checking for new file (post-release...)
+20.10.2011                 Preparing release
+20.10.2011                 fixed launcher, search-result-highlighting, L10n
+19.10.2011                 removed roles code for release
+05.07.2011                 Description profile as output option
+22.06.2011                 Bug fix in CCW related to integration of segmentated files
+22.06.2011                 Additional progress indicator when segmenting in CCW
+17.06.2011                 removed established and newly introduced bugs (import languages, edit in commTable)
+19.05.2011                 nulling keynames in harmonize keys dialog now deletes the keys
+13.05.2011                 TreeTagger integrated into Tools menu
+09.05.2011                 CHAT_MINIMAL segmentation added at several places (ur: E11)
+13.04.2011                 One Thousand Commits! And: CCW doesn't create locations anymore
+13.04.2011                 Filter and Sort for language-type added
+13.04.2011                 Missing jar in CP for LINUX distribution
+24.03.2011                 Fixed bug in update recordings method
+17.01.2011                 Fixed bug in Count segments routine
+06.01.2011                 Fixed bug in Search & Replace routine
+06.01.2011                 Check type selection in COMA structure checking
+05.01.2011                 Temporal anomaly check also in COMA structure checking
+22.12.2010                 changes to the schema
+20.12.2010                 CCW creates type-attributes for l1 and l2 instead of status-description-keys
+02.12.2010                 UTF-8 for output-stylesheets
+29.11.2010                 release version
+25.11.2010                 internationalization
+23.11.2010                 added Nimus L+F to preferences
+23.11.2010                 opening a corpus won't trigger a xmlChanged anymore
+12.11.2010                 further changes to the roleplay-component
+12.11.2010                 fixed bug in saving baskets
+22.10.2010                 cleaned the corpus panel
+22.10.2010                 "save changes" in create corpus action works now
+19.10.2010                 update panel debugged...again!
+18.10.2010                 basket-saving debugged
+13.10.2010                 xsl-output-option
+12.10.2010                 changes in the mac-buildfiles
+07.09.2010                 xpath for search-and-replace
+23.08.2010                 search-and-replace in transcriptions
+23.08.2010                 segmentation action (todo: add COMA elements)
+23.08.2010                 speaker check action (todo: add speakers functionality)
+03.08.2010                 path column in ccw (timm)
+26.07.2010                 assigning metadata to recordings in ccw repaired
+13.07.2010                 (beta)user roles
+13.07.2010                 splash, garbage collection
+13.07.2010                 remove filters for new corpora, changes to quit()
+10.06.2010                 localized transcription import, changes to the language display
+10.06.2010                 coma would only display one location per speaker
+09.06.2010                 updated documentation, display settings again, modified corpus-statistics code
+28.05.2010                 delete attached files again
+27.05.2010                 release version
+26.05.2010                 inserted recording-updater again
+12.05.2010                 bug in open file detection fixed, added overwrite warning
+12.05.2010                 bug in exit and new corpus routine (Timm)
+06.05.2010                 display language names
+06.05.2010                 hid a devilish bug somewhere
+04.05.2010                 minor changes to the corpus-panel
+28.04.2010                 changed deselection mode for jtables (FiSS)
+28.04.2010                 language-name lookup in edit language dialog
+15.04.2010                 non-existing description-values editable in lists now. restricted to descriptions.
+15.04.2010                 fire list updates more often
+15.04.2010                 corpus word list action
+15.04.2010                 changed menu-items to uppercase (Thomas)
+15.04.2010                 preferences-reset added, changed some default directories
+15.04.2010                 progress bar for segmentation in CCW
+14.04.2010                 repaired key harmonizer
+14.04.2010                 calculate recording times
+14.04.2010                 import basic transcriptions
+13.04.2010                 repaired location-edit-dialog and location-type-filtering (FiSS)
+13.04.2010                 repaired language-edit-dialog (FiSS)
+09.04.2010                 moved "show speakers" to (new) view-menu
+09.04.2010                 stylesheet selection for metadata-display
+09.04.2010                 recent files redone (untested)
+09.04.2010                 added datatype "file" (largely untested!)
+08.04.2010                 clear basket with when corpus changes, basket moved to data
+08.04.2010                 display data-panel instead of corpus panel
+08.04.2010                 description-dialog has a scollbar now (TS)
+07.04.2010                 separator between datatypes (FiSS)
+07.04.2010                 locations are output in alphabetical order now (FiSS)
+07.04.2010                 new xml- and html-escaping (FiSS)
+01.04.2010                 removed duplicates from recent file list
+01.04.2010                 edit speaker dialog corrected
+01.04.2010                 pressing escape in save-changes-dialog now cancels instead of selecting "no"
+01.04.2010                 saving a basket no longer removes elements from the corpus (submitted by FiSS)
+01.04.2010                 Basket-saving only to same dir as coma-file
+01.04.2010                 removed duplicates from recent file list
+01.04.2010                 edit speaker dialog corrected
+01.04.2010                 pressing escape in save-changes-dialog now cancels instead of selecting "no"
+01.04.2010                 saving a basket no longer removes elements from the corpus (submitted by FiSS)
+01.04.2010                 Basket-saving only to same dir as coma-file
+23.02.2010                 started implementing import for basic trans
+27.01.2010                 Fixed weirdness in Load templates by cleaning & building
+20.01.2010                 Look and Feel - Quaqua on Macs, System on others
+20.01.2010                 No longer crashes when opening non-xml-files as templates (Adriana Slavcheva)
+20.01.2010                 Tooltips and the likes (Thomas)
+16.12.2009                 minor changes in menubar
+14.12.2009                 added corpus statistics operation
+09.12.2009                 harmonize description keys (first version)
+08.12.2009                 changed filter and column toggeling
+08.12.2009                 added search functionality
+08.12.2009                 added segmentation check operation
+08.12.2009                 added structure check operation
+20.11.2009                 repaired faulty html in display panel
+20.11.2009                 added pdfs to mac distribution
+20.11.2009                 updated the updater
+20.11.2009                 repaired faulty html in display panel
+20.11.2009                 added pdfs to mac distribution
+20.11.2009                 minor changes in built-script
+20.11.2009                 clone communications now disabled when no communication is selected
+20.11.2009                 misc. layout changes
+20.11.2009                 bug in ccw (forward-button gets disabled) fixed
+05.11.2009                 refresh segment count now in tools menu with working progress meter
+03.11.2009                 reactivated maintenance button (Katharina Mayr), hide segment counts in display
+27.10.2009                 changes to the basket-panel and transcription-display
+09.10.2009                 changes in the mac-build-process
+07.10.2009                 progress bar for EXAKT search init
+06.10.2009                 fixed bug in applying templates
+06.10.2009                 fixed bug in saving templates
+11.08.2009                 import speakers from other coma-files
+01.07.2009                 possible bug in generate corpus: must catch the case where basic transcription has no suffix
+01.07.2009                 generate corpus: different swing worker needs to be used to be compatible with 1.5
+24.06.2009                 description editing revamped.
+24.06.2009                 filters where disabled for some reason. not anymore.
+19.06.2009                 new css-handling for display-panel, better location-type-handling
+19.06.2009                 new css-handling for display-panel, better location-type-handling
+15.06.2009                 new edit-dialog for speakers
+12.06.2009                 preliminary multi-line editing in description-dialog
+12.06.2009                 adding and editing recordings moved to html-panel
+12.06.2009                 preliminary printing via java.desktop
+25.05.2009                 added Turkish language file
+14.05.2009                 document has not changed when you have just opened coma
+14.05.2009                 windows versions can save and open files again...
+20.04.2009                 descriptions are editable again...
+07.04.2009                 kissed subcorpora goodbye, added method to merge subcorpora-information into speakers and communications
+07.04.2009                 implemented com.apple.eawt and finder-integration
+07.04.2009                 changed some more file-dialogs to native code
+07.04.2009                 changed corpus-panel, killed 1200 lines of ugliest code
+07.04.2009                 changed 'firstrun'-code. default language is english now
+27.03.2009                 implemented type-attribute for languages
+26.03.2009                 recordings were created wrong. fixed.
+26.03.2009                 changes to the schema - see schema-file
+26.03.2009                 purged periodExact and knownHuman from the code, remains in the schema for backwards-compatibility
+25.03.2009                 type-attribute for locations shows and is editable now
+24.03.2009                 coma recognizes .exb-files for assigning and ccw now
+12.03.2009                 changes in the description-dialog
+12.03.2009                 table-selection handling vastly improved (i hope)
+04.03.2009                 changes to the auto-update-mechanism, removed loads of asdf-comments
+26.02.2009                 removed menubar-icons, added copy-debug-info-action
+26.02.2009                 implements exmaralda-application and logging, logging-dir-preference
+25.02.2009                 auto-update feature (untested for windows)
+18.02.2009                 coma mac-build was missing the fsm-files for segmentation
+18.02.2009                 coma files have the extension .coma now
+02.02.2009                 changes in recording.toHTML()
+02.02.2009                 corpus-creator changed: one recording - multiple media files, overwrite confirmation
+30.01.2009                 Description-Keys are now always deleted by deleting their value (Petra's Mail)
+28.01.2008                 Pressing escape while editing communication-names caused a NPE
+27.01.2008                 changed xmlSaved-notification and titlebar-display
+27.01.2008                 Changed the input-method for durations YET AGAIN!
+19.01.2009                 fixed three bugs in the corpus generator
+17.12.2008                 fixed error in table updates and template-handling
+15.12.2008                 comacorpus.xsd changed to 1.5 - changes are documented inside the file
+27.11.2008                 templates for descriptions
+27.11.2008                 you can not add transcriptions and recordings in an unsaved document anymore
+27.11.2008                 fixed several errors concerned with saving, url resolving and other stuff
+21.11.2008                 added templates for descriptions. this build is largely untested!
+20.11.2008                 language-lookup now with lowercase-letters (thanks, ethnologue...)
+21.11.2008                 added templates for descriptions. this build is largely untested!
+20.11.2008                 language-lookup now with lowercase-letters (thanks, ethnologue...)
+30.10.2008                 there was still a bug in durations-calculation. replaced the whole thing.
+27.10.2008                 changed preferences handling - dumped 250 lines of code, added defaults-button
+24.10.2008                 added preferences option to disable writing IDs into transcription files
+24.10.2008                 Maintenance-Tools repaired (reload transcription information)
+08.10.2008                 show file path to transcription in transcription-info
+08.10.2008                 fixed bugs in timespan calculation
+07.10.2008                 minor fixes and new build-targets
+29.09.2008                 html-display for media-files fixed
+29.09.2008                 html-display for media-files fixed
+26.09.2008                 key-sorting is not reverse anymore
+26.09.2008                 bug in location-edit-dialog fixed
+25.09.2008                 millisecond-handling now with BigDecimals to prevent rounding errors in durations
+01.08.2008                 template-autosave
+01.08.2008                 awt-filedialog auf dem mac an einigen stellen
+01.08.2008                 ein paar nullpointer in den templates beseitigt
+01.08.2008                 templates und segmentierung in die dokumentation aufgenommen
+01.08.2008                 templates für locations
+01.08.2008                 ccw-panel von  blödem layout befreit
+29.07.2008                 Comm/Setting/Description liess sich nicht editieren
+29.07.2008                 SplitPanes verbessert
+28.07.2008                 Fehler im Segment-Zähler korrigiert
+22.07.2008                 Fehler in der Tabellendarstellung behoben ("redo selection")
+01.06.2008                 Fehler in CCW behoben: @-Zeichen am Anfang von "uniqueSpeaker..." entfernt.
+16.05.2008                 Fehler beim Speichern und Abrufen der Einstellungen behoben. Alle Einstellungen gehen jetzt nach org.exmaralda.coma und das geschieht in Ui.java
+16.05.2008                 Dublin-Core-Metadata-Button and handling
+24.04.2008                 ComaFilter: JToggleButtons statt JCheckboxes
+24.04.2008                 package-struktur komplett auf org.exmaralda.coma umgestellt
+24.04.2008                 keine files mehr in coma/*
+24.04.2008                 SVN via SourceForge
+24.04.2008                 alle ressourcen (auch bilder) nach /resources, mit ResourceHandler.java auflösen
+24.04.2008                 Unique Speaker Distinction für "add Corpora" hat gefehlt
+24.04.2008                 Fehler beim "auskoppeln" von Korpora behoben
+24.04.2008                 SegmentCount Button repariert
+24.04.2008                 SegmentCount zählt jetzt in ausgewählten Comm. statt in allen
+24.04.2008                 Mülleimer-Symbol durch "Minus" ersetzt
+24.04.2008                 Übersetzungen ergänzt
+24.04.2008                 duplicate communications
+24.04.2008                 moved panic-button
+24.04.2008                 add-to-basket repaired
+22.04.2008                 duplicate speakers
+14.04.2008                 ccw macht das fenster zu
+14.04.2008                 ccw lokalisiert
+14.04.2008                 XML-Anzeige und Editor entfernt
+14.04.2008                 new transcription-importer ("ccw")
+14.04.2008                 "known human" now optional
+10.03.2008                 Update-Check aus Werkzeug-Menü entfernt
+10.03.2008                 Aboutness-Keyboard-Shortcut entfernt
+10.03.2008                 TableSorter-Klasse eliminiert
+10.03.2008                 Neuer Aufräum-Knopf bei den Aufnahmen
+10.03.2008                 Aufnahmen zuordnen für alle repariert
+10.03.2008                 Aufnahmen-Tabelle reagiert jetzt
+05.03.2008                 fehlende Englische Übersetzungen ergänzt
+05.03.2008                 Korpus-Description-Panel repariert
+05.03.2008                 komplett neuer Zuordnungsmechanismus für Sprecher und Kommunikationen
+05.03.2008                 in-den-Korb-Buttons repariert
+05.03.2008                 Korb-"Füllstandsanzeige" repariert
+18.02.2008                 Fehler in der Datumsberechnung korrigiert
+18.02.2008                 Eingabemaske für Description zu Korpora
+18.02.2008                 Korpuspanel umsortiert
+18.02.2008                 Korpus-Korb repariert
+18.02.2008                 Schaltfläche für vordefinierte Filter mit 3 Filtern
+18.02.2008                 ComaCreators nullPointerException bei fehlenden Mediendatein gelöscht
+18.02.2008                 funktionslose Buttons für neue Zuordung geschaffen
+17.02.2008                 addlocation bei kommunikationen
+17.02.2008                 sprecher hinzufügen geht wieder
+17.02.2008                 comacreator verknüpft mediendateien richtig
+17.02.2008                 Filter editierbar
+17.02.2008                 (neue) Kommunikationen umbenenbar
+17.02.2008                 speaker löschbar
+17.02.2008                 mehrere comms löschbar
+05.08.2008                 added segmentation functionality to the corpus creation wizard
+04.08.2008                 added 'Tools > EXAKT Search' function
+=================
+all
+=================
+10.07.2015                 Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)
+09.07.2015                 Fixed missing library in Linux distribution (Hanna)
+13.05.2015                 Bundle JRE on Windows
+05.05.2015                 some library cleanup for build, got rid of SUN JMF
+04.09.2013                 New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build
+04.09.2013                 new icons
+07.11.2012                 ipsk.jar for BAS-Player was missing from MAC plists
+06.11.2012                 end of official support for PPC Mac
+20.08.2012                 Parameter HTML witdth in write partitur method (Leipzig)
+16.11.2011                 IDs for words in TEI export
+19.10.2011                 Preparing release
+30.05.2011                 Command line version for Praat export (Singer)
+18.05.2011                 Changed segmented transcription format: ta's can now have ref-id's
+08.03.2011                 Added Sextant tagger to Windows and Linux distributions
+10.12.2010                 Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though)
+18.10.2010                 Simplified Windows distribution
+01.10.2010                 Added TEI drop to start menu on windows
+01.10.2010                 Removed SUN JMF versions of PE and EXAKT from start menu on windows
+24.08.2010                 Coloured splash screens
+23.08.2010                 Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly
+10.08.2010                 Added swingworker and QTJava to classpath on Linux
+31.03.2010                 Version info for Windows setup (Linde, RRZ)
+24.02.2010                 fixed bug in corpus builder, path separator must be os independent (Kerem)
+15.12.2009                 Linux: shell scripts take parameter (Timm!)
+23.06.2009                 Cleaned up build, smaller distribution size
+21.03.2009                 removed unused libs from linux distribution
+26.02.2009                 Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances
+09.02.2009                 Integration of ELAN.jar instead of copied MPI code
+09.02.2009                 Documentation updates
+28.01.2008                 Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS
+28.10.2008                 changed EXMARaLDA's build and template files for new media integration
+28.10.2008                 removed JLayer-Player because it is no longer needed (MP3 is fine in other players)
+27.10.2008                 integrated ELAN's DirectShowPlayer as a new player type
+22.10.2008                 fixed bug in log file handling which led to out of memory errors on certain Macs
+20.10.2008                 changed linux tarball: sh files are now executable
+13.10.2008                 changed linux tarball according to suggestions by Jörg Sommer
+13.10.2008                 changed info plist for mac applications to nake sure app runs on 32-bit-JVM
+06.10.2008                 changed basic and segmented transcription APIs to read and write more than one referenced file
+06.10.2008                 changed basic and segmented transcription DTD to allow more than one referenced file
+06.10.2008                 changed basic transcription DTD to allow format table
+16.09.2008                 updated XALAN libraries
+06.08.2008                 changed linux shell scripts (seem to work at least with Suse and Java 6 now)
+=================
+teidrop
+=================
+15.01.2015                 Adaptations to new version of standard proposal (annotationGrp)
+25.01.2012                 Fixed namespace issue in FOLKER transformation (word IDs)
+25.01.2012                 File type recognition did not work with upper case filename extensions
+16.02.2011                 Removed ambigutiy in CleanAndSort stylesheet
+19.01.2011                 Lots of changes to transformation XSL in the tei package
+01.10.2010                 First version
+=================
+exakt
+=================
+23.06.2014                 catch splash screen transparency error (lubuntu)
+28.05.2014                 Apply font preferences to full text area and word list (Tibetan)
+17.10.2013                 Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)
+15.10.2013                 Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)
+14.10.2013                 Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)
+05.10.2013                 UTF-8 mix up in InputHelperPanel
+16.01.2013                 Saved wordlist got wrong suffix txt when saving html (Leipzig)
+10.01.2013                 Accept fln files for FOLKER wizard
+22.11.2012                 Remove analysis function (Darsow, FiSS)
+22.11.2012                 Bug in add annotation when analyses are also present
+12.03.2012                 Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)
+16.02.2012                 Improved handling of locations and languages (Type attribute!) metadata for speakers
+16.02.2012                 Refactored local and remote COMA corpus to a common superclass
+25.01.2012                 Different color for count label in token list (hardly visible on the MAC)
+25.01.2012                 Unselected KWIC rows in gray
+18.01.2012                 FOLKER wizard: use 0 as default recording length in COMA communications
+18.01.2012                 FOLKER wizard: add warning for segmentation errors
+18.01.2012                 FOLKER wizard: make speakerless tiers description tiers to avoid structure errors
+21.11.2011                 Annotation search result must be saved/opened differently (Daniel Jettka)
+18.10.2011                 KWIC update causes hang when an annotation column is sorted (Hanna)
+05.10.2011                 KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)
+08.09.2011                 Further modifications in the catalog lookup dialog
+20.08.2011                 Some modifications in the catalog lookup dialog
+05.07.2011                 Frequency sort as option for word list output
+07.06.2011                 Special characters (apostrophe) in key names cause trouble for metadata handling
+30.05.2011                 Null corpus name causes app to hang when closing (GEWISS)
+17.05.2011                 Changed annotation search to work with Sextant annotations integrated
+09.05.2011                 FOLKER import now does automatic stratification by distribution
+23.03.2011                 Catalog functionality for remote and DB corpora
+18.03.2011                 First elements of RDB functionality added (Hanna!)
+17.01.2011                 escape type strings in input helper
+17.01.2011                 Input helper always on top (for filter and for search)
+23.11.2010                 Transcriber Import Corpus Wizard
+28.10.2010                 Savin/Opening KWIC with remote corpus was buggy
+27.10.2010                 ELAN Import Corpus Wizard
+11.10.2010                 bug in corpus generator: CHAT and GAT segmentation algorithms were confounded
+16.09.2010                 info plist must have library path also for PPC versions because of Quaqua
+16.09.2010                 CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file
+14.09.2010                 Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way.
+02.09.2010                 Sample functionality
+17.08.2010                 Added counting and levenshtein functionality to word list panel
+06.08.2010                 First attempt at multi-layer functionality (add annotation action)
+05.08.2010                 First components of regex library functionality
+03.08.2010                 Some changes to the layout and menu structure
+23.07.2010                 CHAT corpus generator
+19.07.2010                 Scandinavian alphabet in input helper
+27.04.2010                 update transcription views when view type changes
+23.04.2010                 fixed bug wrt to concordance update in annotation search
+23.04.2010                 annotation view for remote corpus was using wrong searchable segment XPath
+30.03.2010                 Selection functionailty for word list
+29.03.2010                 Word list functionality
+29.03.2010                 Double click on corpus opens new concordance
+24.03.2010                 FOLKER corpus generator
+16.03.2010                 list view
+16.03.2010                 popup menu for regular expresssion text field
+21.01.2010                 automatically open a KWIC when a new corpus has been loaded
+01.12.2009                 updated and supplemented documentation
+03.11.2009                 added GENERIC and cGAT_MINIMAL to segmentation options in the wizard
+29.10.2009                 media support for remote corpora (Windows only)
+29.10.2009                 combo box ugliness fixed
+28.10.2009                 remote corpus support (no media yet)
+20.10.2009                 some changes to the tool bar
+20.10.2009                 recent files in file menu
+20.10.2009                 view menu
+20.10.2009                 don't reset column widths after operations like adding an analysis
+01.07.2009                 possible bug in generate corpus: must catch the case where basic transcription has no suffix
+01.07.2009                 generate corpus: different swing worker needs to be used to be compatible with 1.5
+15.06.2009                 Changed to quaqua L&F
+02.06.2009                 Bug in Segmentor: must be aware of new suffixes
+07.05.2009                 MAC OS specific actions
+07.05.2009                 Enabled buttons in input helper
+07.05.2009                 Increased font-size in search expression fields
+07.05.2009                 Playback must be stopped when new transcription (part) is loaded
+05.05.2009                 Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied.
+14.04.2009                 Changed mac build to include SwingWorker.jar, necessary for corpus generator
+19.01.2009                 fixed three bugs in the corpus generator
+07.01.2009                 removed save and open buttons for search expressions
+21.11.2008                 fixed bug in annotation search
+22.10.2008                 changed mac plist to set bigger maximum heap size
+23.09.2008                 swapped rtf export action for partitur against generic output action
+07.08.2008                 modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column
+06.08.2008                 changed some dialogs to make them look better on MAC OS X
+06.08.2008                 integrated corpus creation wizard into file menu
+26.03.2008                 added function for subtracting dates
+20.03.2008                 fixed bug in reconversion of segmented to basic transcriptions
+19.03.2008                 adapted buttons for MAC OS X
+19.03.2008                 new function: import analyses
+29.02.2008                 fixed two bugs according to mail from AH
+19.02.2008                 added KWIC browsing mode
+18.02.2008                 several changes according to list by AH, JR
+18.02.2008                 increased maximum heap space to avoid out of memory errors
+18.02.2008                 annotation search working
+21.01.2008                 line numbers in the KWIC concordance
+=================
+sextant
+=================
+30.05.2011                 Logging enabled (METU)
+18.05.2011                 open tagset repaired
+24.03.2011                 Changes to the annotation panel
+28.02.2011                 moving inside taggables doesn't suck anymore
+28.02.2011                 Remove Attribute Button added
+=================
+tagger
+=================
+09.12.2008                 saving was broken, buttons were not colored, tag-overwrite did not work.

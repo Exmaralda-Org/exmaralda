@@ -1,0 +1,28 @@
+FOLKER (FOLK Editor)
+
+========================
+[Scroll down for ENGLISH]
+========================
+
+FOLKER und OrthoNormal werden in der Abteilung 'Pragmatik' des Institut für Deutsche Sprache in Mannheim von Thomas Schmidt 
+in Zusammenarbeit mit Arnulf Deppermann, Joachim Gasch, Martin Hartung, Wilfried Schütte und Jenny Winterscheid entwickelt.
+FOLKER basiert auf EXMARaLDA-Code (www.exmaralda.org) und benutzt Teile des ELAN-Codes (www.lat-mpi.eu/tools/elan/).
+FOLKER ist Freeware, Download und Nutzung der Software sind nach Registrierung beim IDS kostenlos.
+Bitte geben Sie FOLKER selbst nicht weiter, sondern verweisen Sie interessierte Personen auf die FOLKER-Website des IDS:
+
+http://agd.ids-mannheim.de/folker.shtml
+
+Rückmeldungen zur Software (an diese Adresse) sind stets willkommen.
+
+====================================
+
+FOLKER and OrthoNormal are being developed in the department 'Pragmatik' of the Institut für Deutsche Sprache in Mannheim by Thomas Schmidt 
+in cooperation with Arnulf Deppermann, Joachim Gasch, Martin Hartung, Wilfried Schütte and Jenny Winterscheid.
+FOLKER is based on EXMARaLDA code (www.exmaralda.org) and uses parts of the ELAN code (www.lat-mpi.eu/tools/elan/).
+FOLKER is freeware, download and use of the software are free after registration with the IDS.
+Please do not redistribute FOLKER. Refer interested users to the FOLKER website at the IDS:
+
+http://agd.ids-mannheim.de/folker.shtml
+
+Feedback (to this address) is much appreciated.
+

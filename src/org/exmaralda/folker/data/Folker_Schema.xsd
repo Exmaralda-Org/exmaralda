@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="folker-transcription">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="head" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="speakers" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="recording" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="timeline" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="contribution" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="head" type="xs:anyType">
+    </xs:element>
+    
+    <xs:element name="speakers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="speaker" minOccurs="0" maxOccurs="unbounded"/> 
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="speaker">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="speaker-id" type="xs:ID" use="required"/>                        
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="recording">
+        <xs:complexType>
+            <xs:attribute name="path" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="timeline">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="timepoint" minOccurs="2" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="timepoint">
+        <xs:complexType>
+            <xs:attribute name="timepoint-id" type="xs:ID" use="required"/>
+            <xs:attribute name="absolute-time" type="xs:decimal" use="required"/>
+        </xs:complexType>
+    </xs:element>
+   
+    <xs:element name="time">
+        <xs:complexType>
+            <xs:attribute name="timepoint-reference" type="xs:IDREF" use="required">                
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="pause">
+        <xs:complexType>
+            <xs:attribute name="duration" use="required">
+                <xs:simpleType>
+                    <xs:union>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:Name">
+                                <xs:enumeration value="micro"/>
+                                <xs:enumeration value="short"/>
+                                <xs:enumeration value="medium"/>
+                                <xs:enumeration value="long"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:decimal"/>                                                            
+                        </xs:simpleType>
+                    </xs:union>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="w">
+        <xs:complexType mixed="true">            
+            <xs:choice>
+                <xs:element ref="time" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="stress" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="lengthening" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>            
+            <xs:attribute name="alternatives" use="optional">
+                <xs:simpleType>
+                    <xs:list itemType="xs:string"/>
+                </xs:simpleType>                
+            </xs:attribute>
+        </xs:complexType>        
+    </xs:element>
+    
+    <xs:element name="stress">
+        <xs:complexType mixed="true">
+            <xs:choice>
+                <xs:element ref="time" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>                        
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="lengthening">
+        <xs:complexType>
+            <xs:attribute name="degree" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="non-phonological">
+        <xs:complexType>
+            <xs:attribute name="description" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="unintelligible">
+        <xs:complexType>
+            <xs:attribute name="length" use="required" type="xs:integer"/>
+        </xs:complexType>        
+    </xs:element>
+    
+    <xs:element name="breathe">
+        <xs:complexType>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:Name">
+                        <xs:enumeration value="in"/>
+                        <xs:enumeration value="out"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="uncertain">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="w" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element ref="alternative" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="alternative">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="w" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    
+    <!---  ************************** -->
+    
+    
+    
+    <xs:element name="contribution">        
+        <xs:complexType>
+            <xs:choice>
+                <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:element ref="event"/>
+                </xs:sequence>
+                <xs:element name="unparsed">
+                    <xs:complexType mixed="true">            
+                        <xs:choice>
+                            <xs:element ref="time" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:choice>            
+                    </xs:complexType>                    
+                </xs:element>
+                <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:choice>
+                        <xs:element ref="breathe"/>
+                        <xs:element ref="non-phonological"/>
+                        <xs:element ref="w"/>
+                        <xs:element ref="unintelligible"/>
+                        <xs:element ref="uncertain"/>
+                        <xs:element ref="pause"/>
+                        <xs:element ref="time"/>
+                    </xs:choice>
+                </xs:sequence>
+                <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                    <xs:choice>
+                        <xs:element ref="phrase"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:choice>
+            <xs:attribute name="speaker-reference" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="start-reference" type="xs:IDREF" use="required"/>
+            <xs:attribute name="end-reference" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="event">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="start-reference" type="xs:IDREF"/>
+                    <xs:attribute name="end-reference" type="xs:IDREF"/>                                
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="phrase">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:choice>
+                    <xs:element ref="breathe"/>
+                    <xs:element ref="non-phonological"/>
+                    <xs:element ref="w"/>
+                    <xs:element ref="unintelligible"/>
+                    <xs:element ref="uncertain"/>
+                    <xs:element ref="pause"/>
+                    <xs:element ref="time"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:Name">
+                        <xs:enumeration value="intonation-phrase"/>
+                        <xs:enumeration value="fragment"/>
+                        <xs:enumeration value="unaccentuated"/>
+                    </xs:restriction>
+                </xs:simpleType>               
+            </xs:attribute>
+            <xs:attribute name="boundary-intonation" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:Name">
+                        <xs:enumeration value="high-rise"/>
+                        <xs:enumeration value="rise"/>
+                        <xs:enumeration value="steady"/>
+                        <xs:enumeration value="fall"/>
+                        <xs:enumeration value="low-fall"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+
+</xs:schema>

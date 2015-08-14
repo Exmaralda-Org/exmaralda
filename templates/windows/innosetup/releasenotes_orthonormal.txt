@@ -1,0 +1,98 @@
+***** OrthoNormal changes *******
+
+=================
+orthonormal
+=================
+25.07.2015                 More functionality for chat corpus
+24.07.2015                 First functionality for chat corpus
+23.07.2015                 Adaptations to lexicon handling in preferences
+13.05.2015                 Embedded JRE
+14.04.2015                 Must escape XML for edit word dialog
+13.04.2015                 Always use BAS Audio Player
+12.03.2015                 TCF export
+12.03.2015                 ISO/TEI export
+12.03.2015                 Export menu
+03.03.2015                 Internal Normalisation and Capital-Only Lexicon
+01.12.2014                 Remove problematic time values before editing contribution (Franziska Wallner)
+03.09.2014                 enable bulk changes via wordlist
+12.08.2014                 player must be set to idle when stopped
+04.08.2014                 enable play buttons in edit contribution dialog (Wiki)
+04.08.2014                 OOV filter button (Wiki)
+16.07.2014                 auto complete for tag text field (Swantje)
+12.05.2014                 default audio path
+10.03.2014                 dummy button in normalization dialog commits edit directly (JW)
+26.02.2014                 modified tagset / tag buttons (SW)
+18.02.2014                 enable XML mode by password
+18.02.2014                 display normalisation ratio
+18.02.2014                 filter for split words
+29.01.2014                 Catch IllegalArgumentException when resolving media path
+28.01.2014                 Remove redundant time elements from DGD2 (Jenny)
+21.01.2014                 (Rare) bug in assigning contribution for editing removed (Tabea Mergel)
+25.11.2013                 more space for edit panel for looong contributions (F.Wallner, GeWiss)
+06.11.2013                 new quick tag buttons (SW)
+06.11.2013                 retag after edit contribution (SW)
+16.10.2013                 filtering for POS
+26.08.2013                 fixed (?) another bug in recording path resolving
+23.07.2013                 better renormalisation after edit contribution
+18.07.2013                 focus for textfield after dummy button
+18.07.2013                 some minor corrections to match list functionality
+09.07.2013                 match list
+08.05.2013                 dummy buttons
+18.04.2013                 Change speaker functionality
+18.04.2013                 Edit contribution functionality
+19.02.2013                 No Derewo marking when opening FLK files
+07.01.2013                 No Derewo marking when opening FLK files
+19.12.2012                 Use Derewo to mark suspicious forms
+22.11.2012                 Filter for word list
+20.11.2012                 Bookmarks
+06.11.2012                 index update issue in XML mode
+31.10.2012                 First Linux Preview
+31.10.2012                 First Mac Preview
+25.10.2012                 Info about parse-level when opening FLK
+02.10.2012                 XML mode
+21.09.2012                 word correction dialog
+12.09.2012                 buttons for quick tagging
+12.09.2012                 Some adaptations for legacy DGD1 transcripts
+12.09.2012                 Remove normalisations which are identical to forms when opening
+06.06.2012                 Include Linux-Shellscript in preview distribution (Piotr Banski)
+06.06.2012                 Tolerate missing p-pos in table
+30.05.2012                 RDB Lexicon Update action
+30.05.2012                 Removed Auto Normalize button
+09.05.2012                 More keyboard support (down key) for forms list in normalization dialog
+09.05.2012                 No live lexicon update / no single auto normalize for RDB lexicon
+26.04.2012                 Tag probabilities
+21.03.2012                 Auto advance option
+28.03.2012                 File extension checks for opening must not be case-sensitive
+21.03.2012                 Auto normalization option for new files
+20.03.2012                 Capitalization lexicon integrated
+09.03.2012                 Tagging functionality
+01.06.2011                 Adaptations for basic transcriptions
+01.06.2011                 Cancel in check save must cancel, not close
+01.06.2011                 Player displays complete recording, selection only changes cursor position
+20.05.2011                 Extra second before and after selection in audio player (WS: oc)
+20.05.2011                 Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)
+20.05.2011                 Right click on word will (de)capitalize it (WS: mail 19-05-2011)
+20.05.2011                 Edit recording action in file menu (WS: mail 19-05-2011)
+12.11.2010                 Exit action in file menu (WS: n)
+12.11.2010                 Modified save behaviour (WS: k)
+12.11.2010                 Play button and audio position slider (WS: h)
+12.11.2010                 Scroll bar for editing panel (WS: g)
+12.11.2010                 Audio can be rassigned (WS: a)
+11.11.2010                 Added some status messages (WS: e)
+11.11.2010                 Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f)
+11.11.2010                 Don't add FLK files to recent files (WS: d)
+11.11.2010                 Implemented double-click behaviour for application startup (WS: c)
+11.11.2010                 Introduced threshhold for auto normalisation (WS: b)
+11.11.2010                 Changed buggy behaviour when empty string was entered in normalization dialog (WS: j)
+28.09.2010                 Editor setup optimised
+28.09.2010                 Output action
+28.09.2010                 Exception handling for Lexicon lookup
+28.09.2010                 Oracle JDBC driver added
+23.09.2010                 Capitalization removed
+23.09.2010                 Several changes related to GUI updating
+23.09.2010                 Help menu
+23.09.2010                 Preferences action
+23.09.2010                 different implementation of RDB lexicon
+11.04.2010                 auto button
+10.04.2010                 word list
+22.03.2010                 First build of first prototype

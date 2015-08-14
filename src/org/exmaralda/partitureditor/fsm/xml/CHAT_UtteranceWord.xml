@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- created on 09-05-201, based on the conventions of the E11 project used for the HABLA corpus -->
+<fsm name="CHAT: Utterances and Words">
+	<char-set id="UtteranceEndSymbols">
+		<comment>Characters that signal the end of an utterance</comment>
+		<char>.</char>
+		<char>!</char>
+		<char>?</char>
+	</char-set>
+	<char-set id="PreUtteranceEndSymbols">
+		<comment>Characters that can precede an utterance end symbol and qualify the utterance as aborted, interrupted etc.</comment>
+		<char>…</char>
+		<char>+</char>
+		<char>/</char>
+	</char-set>
+	<char-set id="SpaceSymbols">
+		<comment>Characters that follow a word, an utterance end symbol or a miscellaneous punctuation symbol</comment>
+		<char>&#x0020;</char>
+	</char-set>
+	<char-set id="PauseSymbol">
+		<comment>Character which represents a pause</comment>
+		<char>#</char>
+	</char-set>
+	<char-set id="OpenParenthesis">
+		<char>(</char>
+	</char-set>
+	<char-set id="CloseParenthesis">
+		<char>)</char>
+	</char-set>
+	<char-set id="OpenSquareBracket">
+		<char>[</char>
+	</char-set>
+	<char-set id="CloseSquareBracket">
+		<char>]</char>
+	</char-set>
+	<char-set id="WordPunctuation">
+		<comment>Characters which can immediately precede or follow a word but are not a part of it</comment>
+		<char>&amp;</char>
+		<char>-</char>
+	</char-set>	
+	<char-set id="ForbiddenPunctuation">
+		<char>:</char>
+		<char>;</char>
+		<char>,</char>
+		<char>_</char>
+		<char>&#x2014;</char>
+	</char-set>
+	
+	
+	<!-- ************************** -->
+	
+	<start-state id="TurnStarts"/>
+	<end-state id="TurnParsedSuccessfully"/>
+	
+	<!-- ************************** -->
+
+	<transitions source="TurnStarts">
+		<comment>Segment chain starts</comment>
+		<forbidden>no parentheses closing, no utterance end symbol, no square brackets, no end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WordPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbol"/>
+			<target id="TurnOpen_UtteranceOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PreUtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="ForbiddenPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	<!-- ************************* -->
+		
+	<transitions source="TurnOpen_UtteranceOpen">
+		<comment>An utterance is open, but no word, no non-phonological segment and no open parenthesis has been encountered</comment>
+		<forbidden> No closing square bracket/parenthesis allowed, no end of input allowed </forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WordPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbol"/>
+			<target id="TurnOpen_UtteranceOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenSquareBracket"/>
+			<target id="TurnOpen_UtteranceOpen_OpenSquareBracketEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:c">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="PreUtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_PreUtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="ForbiddenPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>		
+	</transitions>
+
+	<!-- ************************* -->
+
+	<transitions source="TurnOpen_UtteranceOpen_WordOpen">
+		<comment>An utterance is open and a word is open</comment>
+		<forbidden>No pause symbol, no closing square bracket, no end of input (waiting for utterance end symbol...) allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="WordPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbol"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenSquareBracket"/>
+			<target id="TurnOpen_UtteranceOpen_OpenSquareBracketEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="CHAT:c">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="PreUtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_PreUtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="ForbiddenPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	
+	<!-- *************************** -->
+	
+	<transitions source="TurnOpen_UtteranceOpen_UtteranceEndSymbolEncountered">
+		<comment>An utterance is open, but no word, no non-phonological segment. An utterance end symbol has been encountered. Either a space will follow or a new utterance will begin or the turn ends here.</comment>
+		<forbidden>Only space or new utterance beginning allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>				
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WordPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbol"/>
+			<target id="TurnOpen_UtteranceOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PreUtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="ForbiddenPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	
+	<!-- *************************** -->
+	
+	<transitions source="TurnOpen_UtteranceOpen_PreUtteranceEndSymbolEncountered">
+		<comment>*** TODO ***</comment>
+		<forbidden>Only (pre-) utterance end symbols allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="WordPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbol"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PreUtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_PreUtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_PreUtteranceEndSymbolEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="ForbiddenPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	
+	<!-- ********************************* -->
+	
+	<transitions source="TurnOpen_UtteranceOpen_PauseOpen">
+		<comment>*** TODO ***</comment>
+		<forbidden>Only space or pause symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="WordPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbol"/>
+			<target id="TurnOpen_UtteranceOpen_PauseOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PreUtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="ForbiddenPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	
+	<!-- ****************************************** -->
+	
+
+	<transitions source="TurnOpen_UtteranceOpen_OpenSquareBracketEncountered">
+		<comment>*** TODO ***</comment>
+		<forbidden>No end of input allowed (square bracket must be closed)</forbidden>
+		<transition>
+			<input-char-set id="CloseSquareBracket"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_OpenSquareBracketEncountered"/>
+			<output oo="yes"/>
+		</transition>		
+		
+	</transitions>
+	
+	
+	
+	<!-- ******************************** -->
+	<transitions source="Error">
+		<comment>An error has been encountered</comment>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<!-- ******************************** -->
+	<transitions source="TurnParsedSuccessfully">
+		<comment>The segment chain has been parsed successfully</comment>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

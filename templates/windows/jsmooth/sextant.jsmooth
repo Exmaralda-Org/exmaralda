@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jsmoothproject>
+    <JVMSearchPath>registry</JVMSearchPath>
+    <JVMSearchPath>javahome</JVMSearchPath>
+    <JVMSearchPath>jrepath</JVMSearchPath>
+    <JVMSearchPath>jdkpath</JVMSearchPath>
+    <JVMSearchPath>exepath</JVMSearchPath>
+    <JVMSearchPath>jview</JVMSearchPath>
+    
+    <!-- EXMARaLDA -->
+    <classPath>..\..\..\temp\EXMARaLDA.jar</classPath>
+    <classPath>..\..\..\temp\elan.jar</classPath>
+
+    <!-- XML -->
+    <classPath>..\..\..\temp\jdom.jar</classPath>
+    <classPath>..\..\..\temp\jaxen-1.1.1.jar</classPath>
+    <classPath>..\..\..\temp\saxon8-jdom.jar</classPath>
+    <classPath>..\..\..\temp\saxon8.jar</classPath>
+    <classPath>..\..\..\temp\xalan.jar</classPath>
+    <classPath>..\..\..\temp\xercesImpl.jar</classPath>
+    <classPath>..\..\..\temp\xml-apis.jar</classPath>
+    <classPath>..\..\..\temp\xmlParserAPIs.jar</classPath>
+
+    <!-- Various -->
+    <classPath>..\..\..\temp\jctable.jar</classPath>
+    <classPath>..\..\..\temp\bounce.jar</classPath>
+    <classPath>..\..\..\temp\cobra.jar</classPath>
+    <classPath>..\..\..\temp\commons-logging-1.1.jar</classPath>
+    <classPath>..\..\..\temp\commons-net-1.4.1.jar</classPath>
+    <classPath>..\..\..\temp\forms-1.2.1.jar</classPath>
+    <classPath>..\..\..\temp\jcalendar-1.3.2.jar</classPath>
+    <classPath>..\..\..\temp\lobo-pub.jar</classPath>
+    <classPath>..\..\..\temp\lobo.jar</classPath>
+    <classPath>..\..\..\temp\mrj.jar</classPath>
+    <classPath>..\..\..\temp\AppleJavaExtensions.jar</classPath>
+    <classPath>..\..\..\temp\swing-worker-1.2.jar</classPath>
+
+
+
+    <!-- JLAYER -->
+    <classPath>..\..\..\temp\jl1.0.jar</classPath>
+    <!-- <classPath>..\..\..\temp\tritonus_share.jar</classPath> -->
+    <!-- <classPath>..\..\..\temp\basicplayer3.0.jar</classPath> -->
+
+    <!-- QUICKTIME -->
+    <classPath>..\..\..\temp\QTJava.zip</classPath>
+
+    <!-- JMF -->
+    <classPath>..\..\..\temp\SunJMF\jmf.jar</classPath>
+
+    <!-- Native Media -->
+    <classPath>..\..\..\temp\winpack-3.6.jar</classPath>
+    <classPath>..\..\..\temp\jniwrap-3.6.1.jar</classPath>
+    <classPath>..\..\..\temp\comfyj-2.3.jar</classPath>
+    <currentDirectory>${EXECUTABLEPATH}</currentDirectory>
+    <embeddedJar>false</embeddedJar>
+    <executableName>..\..\..\temp\sextant.exe</executableName>
+    <iconLocation>dummy.ico</iconLocation>
+    <initialMemoryHeap>-1</initialMemoryHeap>
+    <mainClassName>org.exmaralda.sextanttagger.launch.SextantLauncher</mainClassName>
+    <maximumMemoryHeap>536870912</maximumMemoryHeap>
+    <maximumVersion/>
+    <minimumVersion>1.6</minimumVersion>
+    <skeletonName>Windowed Wrapper</skeletonName>
+    <skeletonProperties>
+        <key>Message</key>
+        <value>Java has not been found on your computer in a version 1.6 or higher. Do you want to download it? --- Auf Ihrem
+            Rechner konnte Java in Version 1.6 oder höher nicht gefunden werden. Möchten Sie es downloaden?</value>
+    </skeletonProperties>
+    <skeletonProperties>
+        <key>URL</key>
+        <value>http://www.java.com</value>
+    </skeletonProperties>
+    <skeletonProperties>
+        <key>SingleProcess</key>
+        <value>0</value>
+    </skeletonProperties>
+    <skeletonProperties>
+        <key>SingleInstance</key>
+        <value>0</value>
+    </skeletonProperties>
+    <skeletonProperties>
+        <key>JniSmooth</key>
+        <value>0</value>
+    </skeletonProperties>
+    <skeletonProperties>
+        <key>Debug</key>
+        <value>0</value>
+    </skeletonProperties>
+</jsmoothproject>

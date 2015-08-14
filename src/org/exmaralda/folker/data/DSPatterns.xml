@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <level level="2" name="minimaltranskription">
+        <pattern name="DS_WORD">
+            <!--<regex>(Dr\.|'?[a-zäöüß]++|[A-ZÄÖÜ][a-zäöüß]++|[A-ZÄÖÜa-zäöüß]{2,}|[A-ZÄÖÜ]\.?)</regex>-->
+            <regex>([A-ZÄÖÜa-zäöü][a-zäöüß\:]*)</regex>
+            <comment>lowercase alphabetic letters, possibly interspersed with colon as lengthening symbol, possibly preceded by 6 or 7 to indicate fragment or dialect</comment>
+        </pattern>
+        <pattern name="DS_BOUNDARY">
+            <regex>\Q{/*/}\E</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_PAUSE">
+            <regex>1{1,3}</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_FILLED_PAUSE">
+            <regex>2</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_FRAGMENT">
+            <regex>6</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_DIALECT">
+            <regex>7</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_LISTENER_SIGNAL">
+            <regex>[nzf]?3</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_TEMPO">
+            <regex>4[sl]4</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_INTONATION">
+            <regex>5[sfg]5</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_OVERLAP">
+            <regex>8</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_LOUDNESS">
+            <regex>9[sl]9</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="DS_COMMENT">
+            <regex>\([^\)]+\)</regex>
+            <comment></comment>            
+        </pattern>
+        <pattern name="DS_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="DS_PUNCTUATION">            
+            <regex>[\W]</regex>
+            <comment></comment>
+        </pattern>      
+        
+        <pattern name="DS_LENGTHENING">
+            <regex>:</regex>
+            <comment>One colon</comment>            
+        </pattern>
+        
+        
+    </level>
+</patterns>

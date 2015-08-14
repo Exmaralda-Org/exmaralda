@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<fsm name="Generic: Words">
+	<char-set id="OpenParenthesis">
+		<comment>Characters whose appearance signals the beginning of a non-phonological segment</comment>
+		<!-- Open square bracket -->
+		<char>[</char>
+	</char-set>
+	<char-set id="CloseParenthesis">
+		<comment>Characters whose appearance signals the end of a non-phonological segment</comment>
+		<!-- Closed square bracket -->
+		<char>]</char>
+	</char-set>
+	<char-set id="Punctuation">
+		<comment>Characters that are not part of words an do not signal the start or end of a non-phonological segment</comment>
+		<!-- Plain space character -->
+		<char><![CDATA[ ]]></char>
+		<!-- Period -->
+		<char>.</char>
+		<!-- Exclamation mark -->
+		<char>!</char>
+		<!-- Question mark -->
+		<char>?</char>
+		<!-- Three dots (ellipsis) -->
+		<char>…</char>
+		<!-- Plain quotation mark -->
+		<char>"</char>
+		<!-- Apostrophe -->
+		<char>'</char>
+		<!-- Colon -->
+		<char>:</char>
+		<!-- Semicolon -->
+		<char>;</char>
+		<!-- Comma -->
+		<char>,</char>
+		<!-- Hyphen -->
+		<char>-</char>
+		<!-- Underscore -->
+		<char>_</char>
+		<!-- Ligatur sign -->
+		<char>&#x203F;</char>
+		<!-- Dash -->
+		<char>&#x2012;</char>
+		<!-- Forward slash -->
+		<char>/</char>
+		<!-- Open round parenthesis -->
+		<char>(</char>
+		<!-- Close round parenthesis -->
+		<char>)</char>
+		<!-- "Spanish" question mark -->
+		<char>&#x00BF;</char>
+		<!-- "Spanish" exclamation point -->
+		<char>&#x00A1;</char>
+		<!-- "Spanish" opening quotation -->
+		<char>&#x00AB;</char>
+		<!-- "Spanish" clsoing quotation -->
+		<char>&#x00BB;</char>
+	</char-set>
+	<start-state id="SpeakerContributionStarts"/>
+	<end-state id="SpeakerContributionParsedSuccessfully"/>
+	<transitions source="SpeakerContributionStarts">
+	<forbidden>No close parenthesis, no end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="Punctuation"/>
+			<target id="SpeakerContributionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="SpeakerContributionOpen_NonphoOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ats n="GEN:non-pho" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SpeakerContributionOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="GEN:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SpeakerContributionOpen_WordOpen">
+	<forbidden>No close parenthesis allowed</forbidden>
+		<transition>
+			<input-char-set id="Punctuation"/>
+			<target id="SpeakerContributionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="SpeakerContributionOpen_NonphoOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ats n="GEN:non-pho" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SpeakerContributionOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SpeakerContributionOpen">
+	<forbidden>No close parenthesis allowed</forbidden>
+		<transition>
+			<input-char-set id="Punctuation"/>
+			<target id="SpeakerContributionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="SpeakerContributionOpen_NonphoOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ats n="GEN:non-pho" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SpeakerContributionOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="GEN:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SpeakerContributionOpen_NonphoOpen">
+	<forbidden>No open parenthesis, no end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="Punctuation"/>
+			<target id="SpeakerContributionOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="SpeakerContributionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats>]]><![CDATA[<nts n="GEN:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SpeakerContributionOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SpeakerContributionParsedSuccessfully">
+		<transition>
+			<input-char-set id="Punctuation"/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SpeakerContributionParsedSuccessfully"/>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<transition>
+			<input-char-set id="Punctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotation-specification>
+     <annotation-set exmaralda-tier-category="POS">
+        <category name="POS-tags">
+            <description>reine POS-tags</description>
+            <category name="Nomina">
+                <tag name="N"/>
+                <description></description>
+                <category name="Apellativa">
+                    <tag name="NN"/>
+                    <description>Tisch, Herr, [das] Reisen</description>
+                </category>
+                <category name="Eigennamen">
+                    <tag name="NE"/>
+                    <description>Hans, Hamburg, HSV</description>
+                </category>
+            </category>
+            <category name="Verben">
+                <tag name="V"/>
+                <description></description>
+                <category name="finites Verb, voll">
+                    <tag name="VVFIN"/>
+                    <description>[du] gehst, [wir] kommen [an]</description>
+                </category>
+                <category name="Imperativ, voll">
+                    <tag name="VVIMP"/>
+                    <description>komm [!]</description>
+                </category>
+                <category name="Infinitiv, voll">
+                    <tag name="VVINF"/>
+                    <description>gehen, ankommen</description>
+                </category>
+                <category name="Infinitiv mit 'zu', voll">
+                    <tag name="VVIZU"/>
+                    <description>anzukommen, loszulassen</description>
+                </category>
+                <category name="Partizip Perfekt, voll">
+                    <tag name="VVPP"/>
+                    <description>gegangen, angekommen</description>
+                </category>
+                <category name="finites Verb, aux">
+                    <tag name="VAFIN"/>
+                    <description>[du] bist, [wir] werden</description>
+                </category>
+                <category name="Imperativ, aux">
+                    <tag name="VVIMP"/>
+                    <description>sei [ruhig!]</description>
+                </category>
+                <category name="Infinitiv, aux">
+                    <tag name="VAINF"/>
+                    <description>werden, sein</description>
+                </category>
+                <category name="Partizip Perfekt, aux">
+                    <tag name="VAPP"/>
+                    <description>gewesen</description>
+                </category>
+                <category name="finites Verb, modal">
+                    <tag name="VMFIN"/>
+                    <description>dürfen</description>
+                </category>
+                <category name="Infinitiv, modal">
+                    <tag name="VMINF"/>
+                    <description>wollen</description>
+                </category>
+                <category name="Partizip Perfekt, modal">
+                    <tag name="VMPP"/>
+                    <description>[er hat] gekonnt</description>
+                </category>
+            </category>
+            <category name="Artikel">
+                <tag name="ART"/>
+                <description></description>
+                <category name="bestimmter oder unbestimmter Artikel">
+                    <tag name="ART"/>
+                    <description>der, die, das, ein, eine</description>
+                </category>
+            </category>
+            <category name="Adjektive">
+                <tag name="ADJ"/>
+                <description></description>
+                <category name="attributives Adjektiv">
+                    <tag name="ADJA"/>
+                    <description>[das] große [Haus]</description>
+                </category>
+                <category name="adverbiales oder prädikatives Adjektiv">
+                    <tag name="ADJD"/>
+                    <description>[er fährt] schnell, [er ist] schnell</description>
+                </category>
+            </category>
+            <category name="Pronomina">
+                <tag name="P"/>
+                <description></description>
+                <category name="substituierendes Demonstrativpronomen">
+                    <tag name="PDS"/>
+                    <description>dieser, jener</description>
+                </category>
+                <category name="attribuierendes Demonstrativpronomen">
+                    <tag name="PDAT"/>
+                    <description>jener [Mensch]</description>
+                </category>
+                <category name="substituierendes Indefinitpronomen">
+                    <tag name="PIS"/>
+                    <description>keiner, viele, man, niemand</description>
+                </category>
+                <category name="attribuierendes Indefinitpronomen ohne Determiner">
+                    <tag name="PIAT"/>
+                    <description>kein [Mensch], irgendein [Glas]</description>
+                </category>
+                <category name="attribuierendes Indefinitpronomen mit Determiner">
+                    <tag name="PIDAT"/>
+                    <description>[ein] wenig [Wasser], [die] beiden [Brüder]</description>
+                </category>
+                <category name="irreflexives Personalpronomen">
+                    <tag name="PPER"/>
+                    <description>ich, er, ihm, mich, der</description>
+                </category>
+                <category name="substituierendes Possesivpronomen">
+                    <tag name="PPOSS"/>
+                    <description>meins, deiner</description>
+                </category>
+                <category name="attribuierendes Possesivpronomen">
+                    <tag name="PPOSAT"/>
+                    <description>mein [Buch], deine [Mutter]</description>
+                </category>
+                <category name="substituierendes Relativpronomen">
+                    <tag name="PRELS"/>
+                    <description>[der Hund,] der</description>
+                </category>
+                <category name="attribuierendes Relativpronomen">
+                    <tag name="PRELAT"/>
+                    <description>[der Mann,] dessen [Hund]</description>
+                </category>
+                <category name="reflexives Personalpronomen">
+                    <tag name="PRF"/>
+                    <description>sich, einander, dich, mir</description>
+                </category>
+                <category name="substituierendes Interrogativpronomen">
+                    <tag name="PWS"/>
+                    <description>wer, was</description>
+                </category>
+                <category name="attribuierendes Interrogativpronomen">
+                    <tag name="PWAT"/>
+                    <description>welche [Farbe], wessen [Hut]</description>
+                </category>
+                <category name="adverbiales Interrogativ- oder Relativpronomen">
+                    <tag name="PWAV"/>
+                    <description>warum, wo, wann, worüber, wobei</description>
+                </category>
+                <category name="Pronominaladverb">
+                    <tag name="PAV"/>
+                    <description>dafür, dabei, deswegen, trotzdem</description>
+                </category>
+            </category>
+            <category name="Kardinalzahlen">
+                <tag name="CARD"/>
+                <description></description>
+                <category name="Kardinalzahl">
+                    <tag name="CARD"/>
+                    <description>zwei [Männer], [im Jahre] 1994</description>
+                </category>
+            </category>
+            <category name="Adverbien">
+                <tag name="ADV"/>
+                <description></description>
+                <category name="Adverb">
+                    <tag name="ADV"/>
+                    <description>schon, bald, doch</description>
+                </category>
+            </category>
+            <category name="Konjunktionen">
+                <tag name="KO"/>
+                <description></description>
+                <category name="unterordnende Konjunktion mit 'zu' und Infinitiv">
+                    <tag name="KOUI"/>
+                    <description>um [zu leben], anstatt [zu fragen]</description>
+                </category>
+                <category name="unterordnende Konjunktion mit Satz">
+                    <tag name="KOUS"/>
+                    <description>weil, dass, damit, wenn, ob</description>
+                </category>
+                <category name="nebenordnende Konjunktion">
+                    <tag name="KON"/>
+                    <description>und, ober, aber</description>
+                </category>
+                <category name="Vergleichspartikel, ohne Satz">
+                    <tag name="KOKOM"/>
+                    <description>als, wie</description>
+                </category>
+            </category>
+            <category name="Adpositionen">
+                <tag name="AP"/>
+                <description></description>
+                <category name="Präposition; Zirkumposition links">
+                    <tag name="APPR"/>
+                    <description>in [der Stadt], ohne [mich]</description>
+                </category>
+                <category name="Präposition mit Artikel">
+                    <tag name="APPRART"/>
+                    <description>im [Haus], zur [Sache]</description>
+                </category>
+                <category name="Postposition">
+                    <tag name="APPO"/>
+                    <description>[ihm] zufolge, [der Sache] wegen</description>
+                </category>
+                <category name="Zirkumposition rechts">
+                    <tag name="APZR"/>
+                    <description>[von jetzt] an</description>
+                </category>
+            </category>
+            <category name="Interjektionen">
+                <tag name="ITJ"/>
+                <description></description>
+                <category name="Interjektion">
+                    <tag name="ITJ"/>
+                    <description>mhm, ach, tja</description>
+                </category>
+            </category>
+            <category name="Partikeln">
+                <tag name="PTK"/>
+                <description></description>
+                <category name="'zu' vor Infinitiv">
+                    <tag name="PTKZU"/>
+                    <description>zu [gehen]</description>
+                </category>
+                <category name="Negationspartikel">
+                    <tag name="PTKNEG"/>
+                    <description>nicht</description>
+                </category>
+                <category name="abgetrennter Verbzusatz">
+                    <tag name="PTKVZ"/>
+                    <description>[er kommt] an, [er fährt] rad</description>
+                </category>
+                <category name="Antwortpartikel">
+                    <tag name="PTKANT"/>
+                    <description>ja, nein, danke, bitte</description>
+                </category>
+                <category name="Partikel bei Adjektiv oder Adverb">
+                    <tag name="PTKA"/>
+                    <description>am [schönsten], zu [schnell]</description>
+                </category>
+                <category name="Häsitationspartikel">
+                    <tag name="PTKHES"/>
+                    <description>ähm, öhm</description>
+                </category>
+            </category>
+        </category>
+        <category name="Extra-tags">
+            <description>zusätzliche tags</description>
+            <category name="Fremdsprachliches Material">
+                <tag name="FM"/>
+                <description>[er hat das mit "] A big fish [" übersetzt]</description>
+            </category>
+            <category name="Kompositions-Erstglied">
+                <tag name="TRUNC"/>
+                <description>an [und Abreise]</description>
+            </category>
+            <category name="Nichtwort, Sonderzeichen enthaltend">
+                <tag name="XY"/>
+                <description>D2XW3</description>
+            </category>
+            <category name="Komma">
+                <tag name="$,"/>
+                <description>,</description>
+            </category>
+            <category name="Satzbeendende Interpunktion">
+                <tag name="$."/>
+                <description>. ? ! ; :</description>
+            </category>
+            <category name="sonstige Satzzeichen; satzintern">
+                <tag name="$("/>
+                <description>- ( ) [ ]</description>
+            </category>
+        </category>
+    </annotation-set>
+</annotation-specification>

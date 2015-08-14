@@ -1,0 +1,2240 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>EXMARaLDA changes</title><script>
+                    
+function toggle_visibility(className) {
+    elements = document.getElementsByClassName(className);
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.display = elements[i].style.display == 'none' ? 'inline' : 'none';
+    }
+    document.getElementById(className).style.display = 'inline';
+}
+
+
+ 
+                </script><style type="text/css">
+                    body{
+                        font-family:"Courier New", Courier, monospace;
+                    }
+                    h1{
+                        font-size:2em;
+                    }
+                    h2{
+                        font-size:1em;
+                    }
+                    tr,
+                    th,
+                    td{
+                        font-size:0.9em;
+                    }
+                    
+                    .bug{
+                        background-color:#FFCCCC;
+                    }
+                    .feature{
+                        background-color:#99DDFF;
+                    }
+                    .change{
+                        background-color:#CCCCCC;
+                    }
+                    .old{
+                        display:none;
+                    }</style></head>
+   <body>
+      <h1>EXMARaLDA changes</h1><a href="#orthonormal">orthonormal</a> | <a href="#partitureditor">partitureditor</a> | <a href="#coma">coma</a> | <a href="#all">all</a> | <a href="#teidrop">teidrop</a> | <a href="#exakt">exakt</a> | <a href="#sextant">sextant</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
+      <h2><a name="orthonormal"></a>orthonormal
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">10.08.2015</td>
+            <td class="bug">0.9</td>
+            <td class="bug">Deadlock in lexicon setup</td>
+         </tr>
+         <tr>
+            <td class="change">31.07.2015</td>
+            <td class="change">0.9</td>
+            <td class="change">Let's be version 0.9 now, splashscreen changed</td>
+         </tr>
+         <tr>
+            <td class="change">25.07.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">More functionality for chat corpus</td>
+         </tr>
+         <tr>
+            <td class="change">24.07.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">First functionality for chat corpus</td>
+         </tr>
+         <tr>
+            <td class="change">23.07.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Adaptations to lexicon handling in preferences</td>
+         </tr>
+         <tr>
+            <td class="change">13.05.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Embedded JRE</td>
+         </tr>
+         <tr>
+            <td class="bug">14.04.2015</td>
+            <td class="bug">0.6</td>
+            <td class="bug">Must escape XML for edit word dialog</td>
+         </tr>
+         <tr>
+            <td class="change">13.04.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Always use BAS Audio Player</td>
+         </tr>
+         <tr>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">0.6</td>
+            <td class="feature">TCF export</td>
+         </tr>
+         <tr>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">0.6</td>
+            <td class="feature">ISO/TEI export</td>
+         </tr>
+         <tr>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Export menu</td>
+         </tr>
+         <tr>
+            <td class="change">03.03.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Internal Normalisation and Capital-Only Lexicon</td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2014</td>
+            <td class="change">0.6</td>
+            <td class="change">Remove problematic time values before editing contribution (Franziska Wallner)</td>
+         </tr>
+         <tr>
+            <td class="feature">03.09.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">enable bulk changes via wordlist</td>
+         </tr>
+         <tr>
+            <td class="bug">12.08.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">player must be set to idle when stopped</td>
+         </tr>
+         <tr>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">enable play buttons in edit contribution dialog (Wiki)</td>
+         </tr>
+         <tr>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">OOV filter button (Wiki)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.07.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">auto complete for tag text field (Swantje)</td>
+         </tr>
+         <tr>
+            <td class="feature">12.05.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">default audio path</td>
+         </tr>
+         <tr>
+            <td class="change">10.03.2014</td>
+            <td class="change">0.6</td>
+            <td class="change">dummy button in normalization dialog commits edit directly (JW)</td>
+         </tr>
+         <tr>
+            <td class="change">26.02.2014</td>
+            <td class="change">0.6</td>
+            <td class="change">modified tagset / tag buttons (SW)</td>
+         </tr>
+         <tr>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">enable XML mode by password</td>
+         </tr>
+         <tr>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">display normalisation ratio</td>
+         </tr>
+         <tr>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">filter for split words</td>
+         </tr>
+         <tr>
+            <td class="bug">29.01.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">Catch IllegalArgumentException when resolving media path</td>
+         </tr>
+         <tr>
+            <td class="bug">28.01.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">Remove redundant time elements from DGD2 (Jenny)</td>
+         </tr>
+         <tr>
+            <td class="bug">21.01.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">(Rare) bug in assigning contribution for editing removed (Tabea Mergel)</td>
+         </tr>
+         <tr>
+            <td class="change">25.11.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">more space for edit panel for looong contributions (F.Wallner, GeWiss)</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">new quick tag buttons (SW)</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">retag after edit contribution (SW)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.10.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">filtering for POS</td>
+         </tr>
+         <tr>
+            <td class="change">26.08.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">fixed (?) another bug in recording path resolving</td>
+         </tr>
+         <tr>
+            <td class="change">23.07.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">better renormalisation after edit contribution</td>
+         </tr>
+         <tr>
+            <td class="change">18.07.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">focus for textfield after dummy button</td>
+         </tr>
+         <tr>
+            <td class="change">18.07.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">some minor corrections to match list functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">09.07.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">match list</td>
+         </tr>
+         <tr>
+            <td class="feature">08.05.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">dummy buttons</td>
+         </tr>
+         <tr>
+            <td class="feature">18.04.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Change speaker functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">18.04.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Edit contribution functionality</td>
+         </tr>
+         <tr>
+            <td class="bug">19.02.2013</td>
+            <td class="bug">0.6</td>
+            <td class="bug">No Derewo marking when opening FLK files</td>
+         </tr>
+         <tr>
+            <td class="bug">07.01.2013</td>
+            <td class="bug">0.6</td>
+            <td class="bug">No Derewo marking when opening FLK files</td>
+         </tr>
+         <tr>
+            <td class="feature">19.12.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Use Derewo to mark suspicious forms</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Filter for word list</td>
+         </tr>
+         <tr>
+            <td class="feature">20.11.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Bookmarks</td>
+         </tr>
+         <tr>
+            <td class="bug">06.11.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">index update issue in XML mode</td>
+         </tr>
+         <tr>
+            <td class="feature">31.10.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">First Linux Preview</td>
+         </tr>
+         <tr>
+            <td class="feature">31.10.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">First Mac Preview</td>
+         </tr>
+         <tr>
+            <td class="change">25.10.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Info about parse-level when opening FLK</td>
+         </tr>
+         <tr>
+            <td class="feature">02.10.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">XML mode</td>
+         </tr>
+         <tr>
+            <td class="feature">21.09.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">word correction dialog</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">buttons for quick tagging</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Some adaptations for legacy DGD1 transcripts</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Remove normalisations which are identical to forms when opening</td>
+         </tr>
+         <tr>
+            <td class="change">06.06.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Include Linux-Shellscript in preview distribution (Piotr Banski)</td>
+         </tr>
+         <tr>
+            <td class="change">06.06.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Tolerate missing p-pos in table</td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">RDB Lexicon Update action</td>
+         </tr>
+         <tr>
+            <td class="change">30.05.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Removed Auto Normalize button</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">More keyboard support (down key) for forms list in normalization dialog</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">No live lexicon update / no single auto normalize for RDB lexicon</td>
+         </tr>
+         <tr>
+            <td class="feature">26.04.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Tag probabilities</td>
+         </tr>
+         <tr>
+            <td class="feature">21.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Auto advance option</td>
+         </tr>
+         <tr>
+            <td class="bug">28.03.2012</td>
+            <td class="bug">0.6</td>
+            <td class="bug">File extension checks for opening must not be case-sensitive</td>
+         </tr>
+         <tr>
+            <td class="feature">21.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Auto normalization option for new files</td>
+         </tr>
+         <tr>
+            <td class="feature">20.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Capitalization lexicon integrated</td>
+         </tr>
+         <tr>
+            <td class="feature">09.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Tagging functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">01.06.2011</td>
+            <td class="feature">0.5</td>
+            <td class="feature">Adaptations for basic transcriptions</td>
+         </tr>
+         <tr>
+            <td class="bug">01.06.2011</td>
+            <td class="bug">0.5</td>
+            <td class="bug">Cancel in check save must cancel, not close</td>
+         </tr>
+         <tr>
+            <td class="change">01.06.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Player displays complete recording, selection only changes cursor position</td>
+         </tr>
+         <tr>
+            <td class="change">20.05.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Extra second before and after selection in audio player (WS: oc)</td>
+         </tr>
+         <tr>
+            <td class="change">20.05.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)</td>
+         </tr>
+         <tr>
+            <td class="change">20.05.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Right click on word will (de)capitalize it (WS: mail 19-05-2011)</td>
+         </tr>
+         <tr>
+            <td class="feature">20.05.2011</td>
+            <td class="feature">0.5</td>
+            <td class="feature">Edit recording action in file menu (WS: mail 19-05-2011)</td>
+         </tr>
+         <!--12.11.2010;  0.5;  Exit action in file menu (WS: n) (feature)-->
+         <!--12.11.2010;  0.5;  Modified save behaviour (WS: k) (change)-->
+         <!--12.11.2010;  0.5;  Play button and audio position slider (WS: h) (feature)-->
+         <!--12.11.2010;  0.5;  Scroll bar for editing panel (WS: g) (change)-->
+         <!--12.11.2010;  0.5;  Audio can be rassigned (WS: a) (feature)-->
+         <!--11.11.2010;  0.5;  Added some status messages (WS: e) (change)-->
+         <!--11.11.2010;  0.5;  Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f) (feature)-->
+         <!--11.11.2010;  0.5;  Don't add FLK files to recent files (WS: d) (change)-->
+         <!--11.11.2010;  0.5;  Implemented double-click behaviour for application startup (WS: c) (feature)-->
+         <!--11.11.2010;  0.5;  Introduced threshhold for auto normalisation (WS: b) (change)-->
+         <!--11.11.2010;  0.5;  Changed buggy behaviour when empty string was entered in normalization dialog (WS: j) (bug)-->
+         <!--28.09.2010;  0.5;  Editor setup optimised (change)-->
+         <!--28.09.2010;  0.5;  Output action (feature)-->
+         <!--28.09.2010;  0.5;  Exception handling for Lexicon lookup (change)-->
+         <!--28.09.2010;  0.5;  Oracle JDBC driver added (change)-->
+         <!--23.09.2010;  0.5;  Capitalization removed (change)-->
+         <!--23.09.2010;  0.5;  Several changes related to GUI updating (change)-->
+         <!--23.09.2010;  0.5;  Help menu (feature)-->
+         <!--23.09.2010;  0.5;  Preferences action (feature)-->
+         <!--23.09.2010;  0.5;  different implementation of RDB lexicon (change)-->
+         <!--11.04.2010;  0.1;  auto button (feature)-->
+         <!--10.04.2010;  0.1;  word list (feature)-->
+         <!--22.03.2010;  0.1;  First build of first prototype (feature)-->
+      </table>
+      <h2><a name="partitureditor"></a>partitureditor
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">03.08.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">More detailed error message when WebLicht fails on the server</td>
+         </tr>
+         <tr>
+            <td class="change">31.07.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Splash screen for 1.6</td>
+         </tr>
+         <tr>
+            <td class="feature">28.07.2015</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Reset option for preferences</td>
+         </tr>
+         <tr>
+            <td class="change">26.07.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Choice of segmentation for WebLicht function</td>
+         </tr>
+         <tr>
+            <td class="change">24.07.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Choice of language for TCF export</td>
+         </tr>
+         <tr>
+            <td class="change">24.07.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Choice of language for WebLicht function</td>
+         </tr>
+         <tr>
+            <td class="change">21.07.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Minimum size for tier selection after add event increased</td>
+         </tr>
+         <tr>
+            <td class="bug">10.07.2015</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Forgot the player libs in bundled JRE8...</td>
+         </tr>
+         <tr>
+            <td class="change">24.06.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Minor beautifications for media references dialog</td>
+         </tr>
+         <tr>
+            <td class="change">03.06.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Resize video to maximum 480px width when opening</td>
+         </tr>
+         <tr>
+            <td class="change">02.06.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">MMF player for Windows (first attempt, not working yet)</td>
+         </tr>
+         <tr>
+            <td class="change">27.05.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Hide controls panel in media panel</td>
+         </tr>
+         <tr>
+            <td class="change">27.05.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Goodbye ELAN DS Player on Windows</td>
+         </tr>
+         <tr>
+            <td class="change">27.05.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">CocoaQT player for Mac may be functional now</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">CocoaQT player for Mac</td>
+         </tr>
+         <tr>
+            <td class="change">13.05.2015</td>
+            <td class="change">1.6</td>
+            <td class="change">Beautified player preferences dialog</td>
+         </tr>
+         <tr>
+            <td class="change">11.05.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">ELAN-Quicktime-Player available for Windows</td>
+         </tr>
+         <tr>
+            <td class="change">11.05.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Changes in ELAN-Quicktime-Player (PeriodicUpdateController)</td>
+         </tr>
+         <tr>
+            <td class="change">11.05.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">JDS-Player functional for Windows (is default player now)</td>
+         </tr>
+         <tr>
+            <td class="change">20.04.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">WebLicht call: statelessness attempt</td>
+         </tr>
+         <tr>
+            <td class="change">20.04.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">TCF conversion: changed element source to textSource as spec-required</td>
+         </tr>
+         <tr>
+            <td class="change">20.04.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">TEI conversion: no origin for timeline, no absolute value for first when</td>
+         </tr>
+         <tr>
+            <td class="change">09.04.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Easy alignment: start first playback from cursor position (Caro)</td>
+         </tr>
+         <tr>
+            <td class="bug">16.03.2015</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">Null pointer bug in Alignment Panel</td>
+         </tr>
+         <tr>
+            <td class="bug">12.03.2015</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">Tier names must be escaped in conversion info of segmented transcriptions (Espinat)</td>
+         </tr>
+         <tr>
+            <td class="bug">12.03.2015</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">Tiny bugling in TEI/ISO/HIAT export: pc in unclear (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="change">15.01.2015</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Adaptations of TEI export to new version of standard proposal (annotationGrp)</td>
+         </tr>
+         <tr>
+            <td class="change">08.12.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Some minor changes to WebLicht (CLARIN menu)</td>
+         </tr>
+         <tr>
+            <td class="change">04.12.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">WebLicht (CLARIN menu) completed preliminarily</td>
+         </tr>
+         <tr>
+            <td class="feature">03.12.2014</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">first attempt at WebLicht integration (CLARIN menu)</td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Added jniwrap for 64-bit systems (Hanna, Flo)</td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Remove empty events before exporting FLK (Franziska Wallner)</td>
+         </tr>
+         <tr>
+            <td class="feature">24.10.2014</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">First attempt at Qucik Media Open Dialog (Steinchen)</td>
+         </tr>
+         <tr>
+            <td class="change">13.10.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">First attempt at TCF converter</td>
+         </tr>
+         <tr>
+            <td class="change">06.10.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">WebMAUS (CLARIN menu) completed preliminarily</td>
+         </tr>
+         <tr>
+            <td class="feature">04.09.2014</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">hide tiers button in edit tiers dialog (Torben Schinke)</td>
+         </tr>
+         <tr>
+            <td class="change">14.08.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">some more WebMAUS (CLARIN menu)</td>
+         </tr>
+         <tr>
+            <td class="feature">08.08.2014</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">first attempt at WebMAUS integration (CLARIN menu)</td>
+         </tr>
+         <tr>
+            <td class="bug">04.08.2014</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">bug in ELAN import when 0.0 was in several timepoints (Wrobel)</td>
+         </tr>
+         <tr>
+            <td class="bug">25.06.2014</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">bug in tier check for new tiers, speaker ID was wrong (Butterworth)</td>
+         </tr>
+         <tr>
+            <td class="change">23.06.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">further steps of ISO/TEI export</td>
+         </tr>
+         <tr>
+            <td class="change">23.06.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">catch splash screen transparency error (lubuntu)</td>
+         </tr>
+         <tr>
+            <td class="change">10.06.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">start tier count in "Add event" at 1 rather than 0</td>
+         </tr>
+         <tr>
+            <td class="feature">05.06.2014</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">first steps of ISO/TEI export</td>
+         </tr>
+         <tr>
+            <td class="bug">26.05.2014</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">bug in F4 export: url of referenced file must be xml escaped (Oppermann)</td>
+         </tr>
+         <tr>
+            <td class="bug">06.03.2014</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">fixed bug in masking functionality - reading of internal resource failed</td>
+         </tr>
+         <tr>
+            <td class="feature">20.02.2014</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">Mask audio functionality</td>
+         </tr>
+         <tr>
+            <td class="change">13.02.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Mildly intelligent handling of tier names in Praat export/import (Hanna, LLN)</td>
+         </tr>
+         <tr>
+            <td class="change">20.12.2013</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Auto-Interpolate after splitting an option in preferences (Antenne Zwergenstaat)</td>
+         </tr>
+         <tr>
+            <td class="feature">13.12.2013</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">Customisation of New HIAT TEI export: normalisation, word IDs optional (Sarah Cadorel)</td>
+         </tr>
+         <tr>
+            <td class="feature">13.12.2013</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">Remove times action (Oliver Ehmer)</td>
+         </tr>
+         <tr>
+            <td class="change">27.11.2013</td>
+            <td class="change">1.5.3</td>
+            <td class="change">Change for auto annotate: can annotate multi-interval events when match is complete (Hanna, LLN)</td>
+         </tr>
+         <tr>
+            <td class="feature">13.11.2013</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">Some fixes for auto annotate (Hanna, LLN)</td>
+         </tr>
+         <tr>
+            <td class="feature">12.11.2013</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">First attempt at auto annotate (Hanna, LLN)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.10.2013</td>
+            <td class="feature">1.5.3</td>
+            <td class="feature">First attempt at integration Merge transcriptions action (Hanna, LLN)</td>
+         </tr>
+         <tr>
+            <td class="bug">08.10.2013</td>
+            <td class="bug">1.5.3</td>
+            <td class="bug">On Windows: Problem with focus management after virtual keyboard insertion (Juliane Gall)</td>
+         </tr>
+         <tr>
+            <td class="change">29.08.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Do not minimize file selection in media panel</td>
+         </tr>
+         <tr>
+            <td class="change">12.08.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Corrections to the Chinese internationalization</td>
+         </tr>
+         <tr>
+            <td class="change">22.07.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Additions to the Chinese internationalization</td>
+         </tr>
+         <tr>
+            <td class="change">17.07.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Some corrections and additions wrt internationalization</td>
+         </tr>
+         <tr>
+            <td class="feature">04.07.2013</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Chinese menu translations (Fan Junjun)</td>
+         </tr>
+         <tr>
+            <td class="change">10.06.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">HTML5 export with video</td>
+         </tr>
+         <tr>
+            <td class="change">15.04.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Audacity import: accept comma as decimal separator (Tara)</td>
+         </tr>
+         <tr>
+            <td class="change">10.04.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Removed ugly auto jump icon from annotation panel</td>
+         </tr>
+         <tr>
+            <td class="change">10.04.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Removed segmented transcription from "File &gt; Export" (only in Transcription menu now)</td>
+         </tr>
+         <tr>
+            <td class="feature">22.02.2013</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Import Audacity label file (Tara)</td>
+         </tr>
+         <tr>
+            <td class="change">04.02.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Enormous usability enhancments to Goto dialog (Steinchen)</td>
+         </tr>
+         <tr>
+            <td class="feature">03.01.2013</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Easy alignment action</td>
+         </tr>
+         <tr>
+            <td class="change">20.12.2012</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Change to XSL for WinPitch import to make it work for C-ORAL-ROM BRASIL</td>
+         </tr>
+         <tr>
+            <td class="feature">06.12.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">first attempt at F4 export</td>
+         </tr>
+         <tr>
+            <td class="change">09.10.2012</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Spanish punctuation for generic segmentation</td>
+         </tr>
+         <tr>
+            <td class="feature">12.09.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Structure warnings in dialog for adding new tiers</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Shortcut and other usability improvements for timeline interpolation</td>
+         </tr>
+         <tr>
+            <td class="bug">04.09.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Made append spaces in TreeTagger import optional (Hirschmann)</td>
+         </tr>
+         <tr>
+            <td class="bug">31.08.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Auto save was not activated when opening a file via double click</td>
+         </tr>
+         <tr>
+            <td class="bug">16.08.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Tier format table was not always saved when present</td>
+         </tr>
+         <tr>
+            <td class="bug">18.06.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Added bug fix by Torben Schinke (Oldenburg) for problem with virtual keyboard insert on the MAC</td>
+         </tr>
+         <tr>
+            <td class="bug">12.06.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Do not add nbsps to tier labels in HTML partitur output because it causes trouble with akz tiers in HIAT (Kleinschmidt)</td>
+         </tr>
+         <tr>
+            <td class="bug">30.05.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Always write a referenced file even if there is none</td>
+         </tr>
+         <tr>
+            <td class="feature">16.03.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">New method(s) for manipulating absolute times: shift and scale (Lepizig, Immerz)</td>
+         </tr>
+         <tr>
+            <td class="feature">05.03.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Enabled button to parameterise word boundary characters in partitur output (Konzett)</td>
+         </tr>
+         <tr>
+            <td class="feature">30.01.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Simple text output</td>
+         </tr>
+         <tr>
+            <td class="change">30.01.2012</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Czech localisations updated by Petr Porizka</td>
+         </tr>
+         <tr>
+            <td class="feature">26.01.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">Tree tagger output (Trevisan)</td>
+         </tr>
+         <tr>
+            <td class="bug">19.01.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">cGAT Minimal segmentation: allow breathe symbol inside non-pho</td>
+         </tr>
+         <tr>
+            <td class="feature">19.01.2012</td>
+            <td class="feature">1.5.2</td>
+            <td class="feature">import filter for Rio de Janeiro style text transcriptions (Maria Paiva)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.01.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">cGAT Minimal segmentation: bug in FSM for two h state</td>
+         </tr>
+         <tr>
+            <td class="bug">18.01.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">cGAT Minimal segmentation: allow slash as separator for alternatives</td>
+         </tr>
+         <tr>
+            <td class="bug">10.01.2012</td>
+            <td class="bug">1.5.2</td>
+            <td class="bug">Fixed bug which causes GAT output to fail for tiers without speakers (Concha Hoefler)</td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2011</td>
+            <td class="change">1.5.2</td>
+            <td class="change">iConc virtual keyboard (Ralph Morton)</td>
+         </tr>
+         <tr>
+            <td class="change">17.11.2011</td>
+            <td class="change">1.5.2</td>
+            <td class="change">Allow font size 1 for tier format (Yael)</td>
+         </tr>
+         <tr>
+            <td class="feature">11.10.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Info panel for display of preferred segmentation and player type</td>
+         </tr>
+         <tr>
+            <td class="change">11.10.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Write URL instead of system-dependent path for absolute paths in referenced-files (Gewiss)</td>
+         </tr>
+         <tr>
+            <td class="change">22.09.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Disable undo action while undo is in progress</td>
+         </tr>
+         <tr>
+            <td class="change">22.09.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Disabled normalization in cleanup - suspected to cause a bug with large files</td>
+         </tr>
+         <tr>
+            <td class="bug">12.09.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Bug in RTF output: escape transcription name (Shinichi)</td>
+         </tr>
+         <tr>
+            <td class="feature">29.08.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">HTML5 output methods (list and partitur)</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Changed check while opening: remove bad events, don't complain about them (reason for the bug still not discovered)</td>
+         </tr>
+         <tr>
+            <td class="feature">08.08.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">First attempt at Phon importer</td>
+         </tr>
+         <tr>
+            <td class="change">06.07.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Clicking on segmentation label in transcription menu opens segmentation preferences</td>
+         </tr>
+         <tr>
+            <td class="change">06.07.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Check once for default player</td>
+         </tr>
+         <tr>
+            <td class="bug">24.06.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Fixed two bugs in cGAT FSM (Ralph Morton)</td>
+         </tr>
+         <tr>
+            <td class="change">17.06.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Transcriber import: remove DTD reference before transforming (Hambuch)</td>
+         </tr>
+         <tr>
+            <td class="change">08.06.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Bug in event-based CHAT export (C. Konzett)</td>
+         </tr>
+         <tr>
+            <td class="change">30.05.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Treat https like http in filename relativization (Ott)</td>
+         </tr>
+         <tr>
+            <td class="feature">18.05.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Added BAS Audio Player as option for players</td>
+         </tr>
+         <tr>
+            <td class="feature">11.05.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Moved Error list from Transcription to File menu</td>
+         </tr>
+         <tr>
+            <td class="feature">09.05.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Added CHAT_MINIMAL segmentation (ur: E11)</td>
+         </tr>
+         <tr>
+            <td class="change">27.04.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">cGAT segmentation is now FSM based (ur: GEWISS)</td>
+         </tr>
+         <tr>
+            <td class="bug">08.04.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Fixed bug introduced with last bug fix...</td>
+         </tr>
+         <tr>
+            <td class="bug">06.04.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Keep anchors for Left/Right part to new caused bug in Undo - removed that bug</td>
+         </tr>
+         <tr>
+            <td class="change">04.04.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Added HIAT symbols to Russian Transliteration keyboard (ur: Astrid Porila)</td>
+         </tr>
+         <tr>
+            <td class="change">04.04.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Added webm file suffixes to media file filter</td>
+         </tr>
+         <tr>
+            <td class="feature">22.03.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Added ELAN JDS Player as option for players</td>
+         </tr>
+         <tr>
+            <td class="change">21.03.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Virtual keyboard for Russian transliteration (ur: Astrid Porila)</td>
+         </tr>
+         <tr>
+            <td class="change">09.03.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Keep anchors for Left/Right part to new</td>
+         </tr>
+         <tr>
+            <td class="bug">07.03.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Fixed a minor bug in Modena TEI export related to speakerless events</td>
+         </tr>
+         <tr>
+            <td class="feature">02.03.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Enter and Escape work in tier selection dialog after add event</td>
+         </tr>
+         <tr>
+            <td class="feature">02.03.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Keyboard shortcuts for add event (Ctrl +) and append interval (Alt +)</td>
+         </tr>
+         <tr>
+            <td class="feature">03.02.2011</td>
+            <td class="feature">1.5.1</td>
+            <td class="feature">Added equidistant option to New from timeline...</td>
+         </tr>
+         <tr>
+            <td class="change">19.01.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Lots of changes to transformation XSL in the tei package</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Added remove tier to table popup menu</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Added remove event to event popup menu</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Make sure that the annotation panel does not escape from the screen when screen size changes</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Some changes to the stratify tier dialog</td>
+         </tr>
+         <tr>
+            <td class="bug">17.01.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Fixed bug in transcriber import: need to process &lt;Comment&gt; elements (Therese Leinonen)</td>
+         </tr>
+         <tr>
+            <td class="bug">11.01.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Need to check stratification when opeing a transcription in the main method</td>
+         </tr>
+         <tr>
+            <td class="bug">10.01.2011</td>
+            <td class="bug">1.5.1</td>
+            <td class="bug">Search results need to be cleared when new transcription is loaded</td>
+         </tr>
+         <tr>
+            <td class="change">05.01.2011</td>
+            <td class="change">1.5.1</td>
+            <td class="change">Some usability improvements for the error list dialog</td>
+         </tr>
+         <!--10.12.2010;  1.5.1;  Fixed a minor bug in selection updating (bug)-->
+         <!--07.12.2010;  1.5.1;  Fixed a bug in the Modena-TEI section of Transformations (bug)-->
+         <!--03.12.2010;  1.5.1;  Added KgSR keyboard to virtual keyboards (feature)-->
+         <!--25.11.2010;  1.5;  Added self transformation as option in Transformation dialog (change)-->
+         <!--25.11.2010;  1.5;  Added TEI and Modena TEI as options for transformation base in Transformation dialog (change)-->
+         <!--25.11.2010;  1.5;  some adjustments to TEI transformation stylesheets for better match with tei-all.dtd (change)-->
+         <!--23.11.2010;  1.5;  resolve media file after transcriber import (change)-->
+         <!--23.11.2010;  1.5;  attribute values in conversion info must be escaped for XML (Mayr) (bug)-->
+         <!--23.11.2010;  1.5;  fixed yet another bug in resolving relative paths (bug)-->
+         <!--22.11.2010;  1.5;  Fixed bug in importers: stratify first, then cleanup (bug)-->
+         <!--11.11.2010;  1.5;  Fixed bug in annotation panel related to finding corresponding tier (PK) (bug)-->
+         <!--29.10.2010;  1.5;  Added keyboard shortcuts for Goto and Find next event (change)-->
+         <!--22.10.2010;  1.5;  some changes in behaviour of replace functionality (change)-->
+         <!--22.10.2010;  1.5;  fixed a bug with replace in events (bug)-->
+         <!--22.10.2010;  1.5;  fixed yet another bug in resolving relative paths with .. (bug)-->
+         <!--21.10.2010;  1.5;  fixed another bug in resolving relative paths with .. (bug)-->
+         <!--19.10.2010;  1.5;  Replace dialog: remember tier selection (UR: BF, FFO) (change)-->
+         <!--15.10.2010;  1.5;  Time proportional view (feature)-->
+         <!--15.10.2010;  1.5;  Added Romanian letters to the Romance keyboard (change)-->
+         <!--14.10.2010;  1.5;  First attempt at Undo functionality (feature)-->
+         <!--14.10.2010;  1.5;  Fixed bug in file relativazitation on Windows (bug)-->
+         <!--30.09.2010;  1.4.6;  fixed bug in utterance number inserting: skip speakerless contributions (Shinichi) (bug)-->
+         <!--24.09.2010;  1.4.6;  fixed bug in new method for relativizing referenced files (bug)-->
+         <!--23.09.2010;  1.4.6;  keyboard shortcut Ctrl+S for shifting selections was blocking saving, changed it to control+shift+s (bug)-->
+         <!--17.09.2010;  1.4.6;  generic TEI import added (feature)-->
+         <!--17.09.2010;  1.4.6;  fixed bug in ELAN import: speakertable was not generated (bug)-->
+         <!--17.09.2010;  1.4.6;  new HIAT TEI export added (feature)-->
+         <!--17.09.2010;  1.4.6;  cGAT TEI export added (feature)-->
+         <!--17.09.2010;  1.4.6;  Generic TEI export added (feature)-->
+         <!--16.09.2010;  1.4.6;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
+         <!--14.09.2010;  1.4.6;  Audacity export (feature)-->
+         <!--13.09.2010;  1.4.6;  ExSync Cleanup Action (ur: Shinichi) (change)-->
+         <!--13.09.2010;  1.4.6;  Hyper-intelligent error handling for InsertUtteranceNumbers action (ur: Shinichi) (change)-->
+         <!--09.09.2010;  1.4.6;  Auto Jump in annotation dialog must take care of jumping over spanned cells (bug)-->
+         <!--03.09.2010;  1.4.6;  Hyper-intelligent behaviour for penultimate column (change)-->
+         <!--03.09.2010;  1.4.6;  Event based CHAT export added (feature)-->
+         <!--03.09.2010;  1.4.6;  HIAT variant of TEI export added (feature)-->
+         <!--02.09.2010;  1.4.6;  Options accessory in TEI export (feature)-->
+         <!--30.08.2010;  1.4.6;  Modifications to the Modena TEI export (change)-->
+         <!--26.08.2010;  1.4.6;  Additional structure check: temporal anomalies (change)-->
+         <!--26.08.2010;  1.4.6;  Some modifications to HIAT utterance numbering (ur: Shinichi) (change)-->
+         <!--23.08.2010;  1.4.6;  Added smooth timeline to cleanup options (change)-->
+         <!--23.08.2010;  1.4.6;  Smooth timeline action in Timeline menu (feature)-->
+         <!--13.08.2010;  1.4.6;  Second attempt at making relative paths with .. usable (ur: gewiss) (change)-->
+         <!--02.08.2010;  1.4.6;  Added double split to the toolbar (change)-->
+         <!--02.08.2010;  1.4.6;  Audio panel is minimized by default (change)-->
+         <!--02.08.2010;  1.4.6;  Moved playback button from audio panel to controls in main window (change)-->
+         <!--02.08.2010;  1.4.6;  Added action for calculating annotated time (feature)-->
+         <!--02.08.2010;  1.4.6;  Changed keyboard shortcuts for player (change)-->
+         <!--02.08.2010;  1.4.6;  Added three new player buttons for playing short intervals in and around a selection (feature)-->
+         <!--02.08.2010;  1.4.6;  Partitur output: use start number when exporting selection (change)-->
+         <!--23.07.2010;  1.4.6;  CHAT import: more fine tuning related to CA-variant (CallFriend) (change)-->
+         <!--20.07.2010;  1.4.6;  CHAT export: lots of fine tuning related to PAIDUS (change)-->
+         <!--20.07.2010;  1.4.6;  CHAT import: handle new method of specifying and referring to media file (change)-->
+         <!--19.07.2010;  1.4.6;  New transcription wizard: trim speaker abbs (change)-->
+         <!--19.07.2010;  1.4.6;  Remove unused TLIs: don't remove first one (change)-->
+         <!--01.07.2010;  1.4.6;  Split segment: avoid division by zero (NaN bug) (bug)-->
+         <!--01.07.2010;  1.4.6;  Split segment in list: avoid division by zero (NaN bug) (bug)-->
+         <!--28.06.2010;  1.4.6;  Additional whitespace treatment in Simple EXMARaLDA import (bug)-->
+         <!--22.06.2010;  1.4.6;  Uncheck view menu item when closing IPA dialog (bug)-->
+         <!--22.06.2010;  1.4.6;  First attempt at ANVIL import (feature)-->
+         <!--25.05.2010;  1.4.5;  GAT + Persian keyboard (ur: sanaz sharghi) (feature)-->
+         <!--06.05.2010;  1.4.5;  Commit edit before going to a search result from EXAKT search (Hanna) (bug)-->
+         <!--03.05.2010;  1.4.5;  Different options for CHAT export (change)-->
+         <!--28.04.2010;  1.4.5;  New auto backup file at each start (change)-->
+         <!--23.04.2010;  1.4.5;  double click in replace dialog triggers Goto (ur: Hanna) (feature)-->
+         <!--21.04.2010;  1.4.5;  cleanup: remove gaps selection was not properly returned (bug)-->
+         <!--20.04.2010;  1.4.5;  first attempt at CHAT importer (feature)-->
+         <!--12.04.2010;  1.4.5;  insert utterance numbers for HIAT transcriptions (ur: Jockel Rehbein) (feature)-->
+         <!--12.04.2010;  1.4.5;  all outputs can be restricted to visible tiers and/or selection (feature)-->
+         <!--09.04.2010;  1.4.5;  commit edit before going to next item in error list (Hanna) (bug)-->
+         <!--30.03.2010;  1.4.5;  When importing plain text: resulting tier is now given a default speaker AUT (change)-->
+         <!--30.03.2010;  1.4.5;  Word list creation must tolerate null speaker in T-tiers (after text import, Hanna) (bug)-->
+         <!--08.03.2010;  1.4.5;  Added documentation for alignment (feature)-->
+         <!--05.03.2010;  1.4.5;  changed behaviour of MAC quit handler (don't quit when check save returns false) (bug)-->
+         <!--18.02.2010;  1.4.5;  first attempt at new player solution for MAC (ur: Antenne Zwergenstaat) (feature)-->
+         <!--17.02.2010;  1.4.5;  enable disable assign times action according to selection status (change)-->
+         <!--16.02.2010;  1.4.5;  Finished new transcription wizard (feature)-->
+         <!--04.02.2010;  1.4.5;  Insert Pause Action for the Partitur-Editor (feature)-->
+         <!--01.02.2010;  1.4.5;  Started pause notation implementation: preferences under 'segmentation' (feature)-->
+         <!--01.02.2010;  1.4.5;  Removed DIDA FSM field from segmentation preferences panel (DIDA is dead) (change)-->
+         <!--01.02.2010;  1.4.5;  Added ogg file suffixes to media file filter (ur: Gewiss) (change)-->
+         <!--01.02.2010;  1.4.5;  Replaced FOBS libraries with newer version (0.4.2. / Windows only) (change)-->
+         <!--01.02.2010;  1.4.5;  Added degree sign ° to GAT keyboard (ur: Gewiss) (change)-->
+         <!--01.02.2010;  1.4.5;  Fixed bug in RTF output for interlinear text: CDATA in metadata must be escaped too (cf. mail by Kerem) (bug)-->
+         <!--26.01.2010;  1.4.5;  Some fine tuning for the WinPitch import (ur: Lisbon) (change)-->
+         <!--19.01.2010;  1.4.5;  Special handling for penultimate column (change)-->
+         <!--19.01.2010;  1.4.5;  Frame end must be reset after selection to new (bug)-->
+         <!--15.01.2010;  1.4.5;  First attempt at WinPitch import (ur: Lisboa) (feature)-->
+         <!--16.12.2009;  1.4.5;  Transcriber import (feature)-->
+         <!--02.12.2009;  1.4.4;  keep formats after selection/left part/right part to new (change)-->
+         <!--01.12.2009;  1.4.4;  caught bug when resetting the DS Player to a null media (bug)-->
+         <!--01.12.2009;  1.4.4;  caught bug when merging events on several tiers and one event spans across the merged range (bug)-->
+         <!--30.11.2009;  1.4.4;  Added WMV to media file filter (change)-->
+         <!--30.11.2009;  1.4.4;  German and French Internationalization updated (change)-->
+         <!--30.11.2009;  1.4.4;  zoom button for waveform panel (feature)-->
+         <!--30.11.2009;  1.4.4;  first version of IPA panel completed (thanks to Lars Vorberger) (feature)-->
+         <!--20.11.2009;  1.4.4;  TEI Keyboard (ur: Natacha Niemants) (feature)-->
+         <!--20.11.2009;  1.4.4;  TEI Modena export (ur: Natacha Niemants) (feature)-->
+         <!--19.11.2009;  1.4.4;  Added some macrolanguage codes (ur: SR) and languages to the language list (change)-->
+         <!--17.11.2009;  1.4.4;  first attempt at IPA panel (ur: SiN) (feature)-->
+         <!--09.11.2009;  1.4.4;  added two symbols and 10 diacritics to the IPA keyboard (ur: SiN) (change)-->
+         <!--05.11.2009;  1.4.4;  Confirm TLI action (ur: SR) (feature)-->
+         <!--05.11.2009;  1.4.4;  Optionally remove unused timeline items after merge (ur: SR) (change)-->
+         <!--05.11.2009;  1.4.4;  Merge events can be applied to events on consecutive tiers (ur: SR) (change)-->
+         <!--05.11.2009;  1.4.4;  Ctrl + Period triggers Hide/Show special characters (ur: Hale) (feature)-->
+         <!--03.11.2009;  1.4.4;  when checking tier dependencies: catch the case where a t-tier has no speaker (bug)-->
+         <!--03.10.2009;  1.4.4;  when checking tier dependencies: catch the case where a t-tier has no speaker (bug)-->
+         <!--30.10.2009;  1.4.4;  tier selection in find dialog: multiple tier selection enabled (change)-->
+         <!--29.10.2009;  1.4.4;  changed vertical maginify method for waveform (feature)-->
+         <!--29.10.2009;  1.4.4;  character count interpolation (feature)-->
+         <!--28.10.2009;  1.4.4;  when interpolating: reinterpolate interpolated times (change)-->
+         <!--20.10.2009;  1.4.4;  disabled loop function in media panel (is in waveform controls now) (change)-->
+         <!--20.10.2009;  1.4.4;  remember annotation panel display parameters (feature)-->
+         <!--20.10.2009;  1.4.4;  annotation panel: must take care of dependencies below the top level (bug)-->
+         <!--16.10.2009;  1.4.4;  added dependency handling to the annotation panel (ur: Marc Reznicek) (feature)-->
+         <!--15.10.2009;  1.4.4;  NEW: Annotation Panel (ur by several users) (feature)-->
+         <!--14.10.2009;  1.4.4;  remember keyboard display parameters (feature)-->
+         <!--14.10.2009;  1.4.4;  extended virtual keyboard for ODT/STD (feature)-->
+         <!--13.10.2009;  1.4.4;  auto anchoring optionally switch-offable (feature)-->
+         <!--13.10.2009;  1.4.4;  added append space action (ur: SFB 632, B6) (feature)-->
+         <!--12.10.2009;  1.4.4;  added loop selection button to player controls (feature)-->
+         <!--09.10.2009;  1.4.4;  changed standard format table suffix to EXF (change)-->
+         <!--09.10.2009;  1.4.4;  re-introduced save format table as action (ur: Marc Reznicek) (feature)-->
+         <!--09.10.2009;  1.4.4;  Tree Tagger import: can have a third column with lemma (ur: Marc Reznicek) (change)-->
+         <!--09.10.2009;  1.4.4;  Copy tier in add tier should also copy text (ur: Marc Reznicek) (feature)-->
+         <!--08.10.2009;  1.4.4;  Find next action (ur: Marc Reznicek) (feature)-->
+         <!--08.10.2009;  1.4.4;  Toggle hide/show keyboard in find dialog (feature)-->
+         <!--08.10.2009;  1.4.4;  When clicking on a search result: make sure that the corresponding event is not displayed at the rightmost edge (ur: Marc Reznicek) (change)-->
+         <!--06.10.2009;  1.4.4;  Added GAT2 Minimal segmentation (feature)-->
+         <!--06.10.2009;  1.4.4;  Added XSL stylesheet import (ur: Alexandr Rosen) (feature)-->
+         <!--24.09.2009;  1.4.4.;  Fixed bug in stylesheet for AG import (bug)-->
+         <!--24.09.2009;  1.4.4.;  Fixed bug in cleanup/normalize IDs: IDs in tier format table must be adapted (bug)-->
+         <!--06.07.2009;  1.4.3;  Added Tree Tagger Import (feature)-->
+         <!--02.07.2009;  1.4.3.;  New documentation: How to edit and correct transcriptions (change)-->
+         <!--24.06.2009;  1.4.3.;  On the MAC: do not show a message for ReopenApplication event (change)-->
+         <!--23.06.2009;  1.4.3.;  Fixed tiny bugling in QT player when trying to stop a non-existent player (bug)-->
+         <!--22.06.2009;  1.4.3.;  Fixed tiny bugling in Make timeline consistent (also cleanup) (bug)-->
+         <!--16.06.2009;  1.4.3.;  Made Praat directory configurable from within application (change)-->
+         <!--16.06.2009;  1.4.3.;  Added a number of built-in transformation scenarios (change)-->
+         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
+         <!--10.06.2009;  1.4.3.;  some small changes to the save audio snippet dialog (change)-->
+         <!--09.06.2009;  1.4.3.;  new application handler on Mac exb files will be opened on double click now (feature)-->
+         <!--09.06.2009;  1.4.3.;  changed mac build for partitur-editor (INTEL only) to associate exb suffix (feature)-->
+         <!--09.06.2009;  1.4.3.;  added fallback behaviour when wav file can't be read, but other media can (bug)-->
+         <!--09.06.2009;  1.4.3.;  Modified the method for determining the endpoint in "Append interval" action (change)-->
+         <!--09.06.2009;  1.4.3.;  Anchor transcription after "selection to new" (change)-->
+         <!--09.06.2009;  1.4.3.;  Enabled multi selection/removal in media file dialog (change)-->
+         <!--09.06.2009;  1.4.3.;  Put main application in a thread, seems to fix bug on startup with video and DS player (bug)-->
+         <!--02.06.2009;  1.4.3.;  HTML list + Flash output (feature)-->
+         <!--02.06.2009;  1.4.3.;  Two minor changes to the timeline segmentation dialog (change)-->
+         <!--29.05.2009;  1.4.3.;  Added FOLKER export function (feature)-->
+         <!--29.05.2009;  1.4.3.;  Added FOLKER import function (feature)-->
+         <!--26.05.2009;  1.4.3.;  Enabled grab and cut in DS player (change)-->
+         <!--26.05.2009;  1.4.3.;  Live update for videos in DS player (change)-->
+         <!--26.05.2009;  1.4.3.;  Fixed bug in EXAKT annotation search (only inside Partitur-Editor) (bug)-->
+         <!--25.05.2009;  1.4.3.;  Increased maximum heap size for SUN JMF version on Windows (change)-->
+         <!--25.05.2009;  1.4.3.;  Transformation action: remember last directory (change)-->
+         <!--25.05.2009;  1.4.3.;  Changed calculation of word list, should be faster now (change)-->
+         <!--13.05.2009;  1.4.3.;  Some changes to the languages dialog (change)-->
+         <!--12.05.2009;  1.4.3.;  Added mimetype for EAF export (bug)-->
+         <!--11.05.2009;  1.4.3.;  fixed bug in selection2HTML action: don't write null file into preferences (bug)-->
+         <!--11.05.2009;  1.4.3.;  fixed bug in selection2RTF action: don't write null file into preferences (bug)-->
+         <!--28.04.2009;  1.4.3.;  first attempt at "new from timeline..." action (feature)-->
+         <!--16.04.2009;  1.4.2.;  transformation: default suffix for scenario file must be XML (bug)-->
+         <!--16.04.2009;  1.4.2.;  bookmark: special characters must be escaped when writing XML (bug)-->
+         <!--15.04.2009;  1.4.2.;  Adaptations to GUI sizes for MAC OS (change)-->
+         <!--15.04.2009;  1.4.2.;  Manual updated (change)-->
+         <!--15.04.2009;  1.4.2.;  set cursor time to start time of selection to avoid waveform hoppeling (change)-->
+         <!--14.04.2009;  1.4.2.;  Fixed bug in handling incorrectly assigned media (bug)-->
+         <!--14.04.2009;  1.4.2.;  Fixed weirdness in extension checking for basic transcription save dialog (bug)-->
+         <!--08.04.2009;  1.4.2.;  Many changes to selection/focus handling (change)-->
+         <!--08.04.2009;  1.4.2.;  Transcription > Export segmented...: overwrite check must be modified (bug)-->
+         <!--08.04.2009;  1.4.2.;  Export: changed segmented transcription suffix to exs (change)-->
+         <!--07.04.2009;  1.4.2.;  New edit speakertable icon (change)-->
+         <!--07.04.2009;  1.4.2.;  Braille intonation keyboard (feature)-->
+         <!--07.04.2009;  1.4.2.;  Goto action (feature)-->
+         <!--07.04.2009;  1.4.2.;  TLIs double-clickable in choose TLI dialog (change)-->
+         <!--06.04.2009;  1.4.2.;  changed behaviour for 'append interval': bigger initial cell size, following event is scrolled into view (change)-->
+         <!--06.04.2009;  1.4.2.;  changed behaviour for waveform: cursor is not reset when playback is stopped (change)-->
+         <!--06.04.2009;  1.4.2.;  selection in partitur now reacts correctly when extended through CTRL+mouse click - WS mail: 4 (bug)-->
+         <!--03.04.2009;  1.4.2.;  navigation dialog for waveform display (feature)-->
+         <!--02.04.2009;  1.4.2.;  'Structure errors' action in transcription menu (feature)-->
+         <!--01.04.2009;  1.4.2.;  Large text field displays text of consecutive event selection (change)-->
+         <!--01.04.2009;  1.4.2.;  Selection duration can be copied to the clipboard by clicking on it (change)-->
+         <!--01.04.2009;  1.4.2.;  Refresh button in word list dialog (change)-->
+         <!--01.04.2009;  1.4.2.;  Fixed bug in "add event": selection must be remembered before commit edit is carried out (change)-->
+         <!--29.03.2009;  1.4.2.;  Addition to the ODT-STD keyboard: real comments (change)-->
+         <!--29.03.2009;  1.4.2.;  added timeline merge parameter to the glue transcription method (change)-->
+         <!--29.03.2009;  1.4.2.;  fixed a bug in the glue transcription dialog (bug)-->
+         <!--26.03.2009;  1.4.2.;  changes to the ODT-STD virtual keyboard (change)-->
+         <!--26.03.2009;  1.4.2.;  word list: display type/token count (change)-->
+         <!--25.03.2009;  1.4.2.;  word list export: html suffix is given if none provided (change)-->
+         <!--25.03.2009;  1.4.2.;  Filename for untitled has suffix 'exb' (change)-->
+         <!--25.03.2009;  1.4.2.;  Fixed minor bug in the CHAT export (bug)-->
+         <!--24.03.2009;  1.4.2.;  locked last timeline item, different formatting (needs to be optional) (change)-->
+         <!--24.03.2009;  1.4.2.;  moved CHAT conversion from output to export (change)-->
+         <!--23.03.2009;  1.4.2.;  display selection times and duration (feature)-->
+         <!--22.03.2009;  1.4.2.;  reversed mouse wheel zooming behaviour (change)-->
+         <!--21.03.2009;  1.4.2.;  Settings are stored for keyboard, large text field (change)-->
+         <!--21.03.2009;  1.4.2.;  Added HIAT for ODT-STD to virtual keyboard (change)-->
+         <!--19.03.2009;  1.4.2.;  removed ... in append interval (change)-->
+         <!--19.03.2009;  1.4.2.;  os string must be checked in minor case because Turkish turns a small dotted i into a capital DOTTED i (bug)-->
+         <!--09.03.2009;  1.4.2.;  status bar added (feature)-->
+         <!--09.03.2009;  1.4.2.;  minor changes in the transformation action (change)-->
+         <!--09.03.2009;  1.4.2.;  some cosmetic improvements to the Praat panel (change)-->
+         <!--09.03.2009;  1.4.2.;  introduced minimum value for auto save interval (Gunes' mail) (change)-->
+         <!--06.03.2009;  1.4.1.;  *.exb is now the default suffix for transcriptions (change)-->
+         <!--03.03.2009;  1.4.1.;  Added tooltips with full path in recent files items in file menu (change)-->
+         <!--27.02.2009;  1.4.1.;  Started cleaning up internationalization (change)-->
+         <!--27.02.2009;  1.4.1.;  Cleaned up languages (change)-->
+         <!--26.02.2009;  1.4.1.;  Added 'Anchor timeline' action to timeline menu (feature)-->
+         <!--25.02.2009;  1.4.1.;  Fixed bug in reading transcriptions: type is not read (bug)-->
+         <!--25.02.2009;  1.4.1.;  Fixed "faute nantaise": adding an avent at the very end must take care of not producing an illogial structure of the timeline (bug)-->
+         <!--17.02.2009;  1.4.1.;  Fixed bug in search action (bug)-->
+         <!--11.02.2009;  1.4.1.;  Transformation action (feature)-->
+         <!--11.02.2009;  1.4.1.;  Completed menu cleanup (Segmentation menu removed!) (change)-->
+         <!--10.02.2009;  1.4.1.;  Moved and summarized several functions from the Segmentation menu to the Transcription menu (change)-->
+         <!--09.02.2009;  1.4.1.;  Added AIF to list of common media files (feature)-->
+         <!--09.02.2009;  1.4.1.;  Tooltips for waveform actions (feature)-->
+         <!--27.01.2008;  1.4.;  Added tier segmentation function for SiN (feature)-->
+         <!--27.01.2008;  1.4.;  fixed bugs in selection handling (bug)-->
+         <!--26.01.2008;  1.4.;  fixed bug in QT availability check (bug)-->
+         <!--14.01.2009;  1.4.;  increased vertical size of large text field panel (feature)-->
+         <!--14.01.2009;  1.4.;  modified interpolation behaviour for splitting and double splitting (feature)-->
+         <!--17.12.2008;  1.4;  several mouse handling features added to the timeline view (feature)-->
+         <!--17.12.2008;  1.4;  fixed several smaller bugs in the ELAN import (bug)-->
+         <!--28.11.2008;  1.4;  Fixed a bug in the QTJ Player (bug)-->
+         <!--27.11.2008;  1.4;  Fixed a minor bug in the CHAT export (bug)-->
+         <!--26.11.2008;  1.4;  Changed time display in audio/video panel (change)-->
+         <!--25.11.2008;  1.4;  Renamed 'Send partiture...' to 'Show partiture...' (change)-->
+         <!--19.11.2008;  1.4;  fixed buggy bug handling for init of logger file (problem on MAC OS) (bug)-->
+         <!--19.11.2008;  1.4;  completed change of referenced file handling in meta information dialog (feature)-->
+         <!--17.11.2008;  1.4;  changed CellFit-Paramater behaviour (is now default) (change)-->
+         <!--28.10.2008;  1.4;  fixed buggy bug handling for the case that no quicktime is installed (bug)-->
+         <!--24.10.2008;  1.4;  Completed Spanish translations (Silke Merkel), completed French translations (Silke Merkel), Some smaller modifications to Czech translations (Petr Porizka) (change)-->
+         <!--22.10.2008;  1.4;  changed mac plist to set bigger maximum heap size (bug)-->
+         <!--22.10.2008;  1.4;  some minor fixes to the ELAN export (bug)-->
+         <!--21.10.2008;  1.4;  fixed bug in "send partitur to browser" action (bug)-->
+         <!--20.10.2008;  1.4;  speakerwise word lists export for HIAT in Segmentation menu (feature)-->
+         <!--20.10.2008;  1.4;  removed 70 twips indent for partitur tables in RTF output (cf. mail by Peter Weber) (change)-->
+         <!--14.10.2008;  1.4;  added Spanish translations (not complete yet) and fixed some minor bugs wrt internationalizazion (change)-->
+         <!--06.10.2008;  1.4;  started to change referenced file handling in meta information dialog (feature)-->
+         <!--26.09.2008;  1.4;  added HTML partitur output with flash (feature)-->
+         <!--25.09.2008;  ;  made format part of the transcription ()-->
+         <!--25.09.2008;  ;  moved extra actions out of submenu into main edit menu ()-->
+         <!--23.09.2008;  ;  moved panel actions out of submenu into main view menu ()-->
+         <!--23.09.2008;  ;  moved recent files out of submenu into main file menu ()-->
+         <!--23.09.2008;  ;  put all visualization actions into one ("Output") action ()-->
+         <!--22.09.2008;  ;  fixed error in German localization wrt "selected" vs. "unselected" tiers in search dialog ()-->
+         <!--16.09.2008;  ;  put all import actions into one action ()-->
+         <!--16.09.2008;  ;  put all export actions into one action ()-->
+         <!--10.09.2008;  ;  changed title of "Save media snippet" dialog ()-->
+         <!--10.09.2008;  ;  took care of cleaning up media panel when a new file is opened or created ()-->
+         <!--09.09.2008;  ;  updated languages list from ethnologue (now version 15) ()-->
+         <!--09.09.2008;  ;  fixed bug in language selection in speakertable dialog ()-->
+         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
+         <!--04.08.2008;  ;  added 'Edit > EXAKT Search' function ()-->
+         <!--04.08.2008;  ;  changed 'Send HTML partitur to browser' function to write to temp file ()-->
+         <!--04.08.2008;  ;  added 'Event > Find next event' function (Ctrl + Alt + SPACE) ()-->
+         <!--01.08.2008;  ;  rewrote quicktime player ()-->
+         <!--14.07.2008;  ;  added 'underline' action ()-->
+         <!--07.07.2008;  ;  integrated Czech menu translations by Petr Porizka ()-->
+         <!--20.05.2008;  ;  more changes to the CHAT export (related to the conversion of mytheory.cha) ()-->
+         <!--07.05.2008;  ;  several changes to the CHAT export ()-->
+         <!--10.04.2008;  ;  made shortcuts for play, pause and stop (F1,F2,F3) work without the audio panel having the focus ()-->
+         <!--10.04.2008;  ;  added buffer time functionality in audio panel ()-->
+         <!--10.04.2008;  ;  caught overrun of stop time in JMF player ()-->
+         <!--20.12.2007;  ;  changes to the segmentation function for project 'Stadtsprache' ()-->
+         <!--20.12.2007;  ;  slider for changing font size in the virtual keyboard ()-->
+         <!--20.12.2007;  ;  3 additions to the IPA virtual keyboard ()-->
+         <!--04.12.2007;  ;  segmentation function for project 'Stadtsprache' ()-->
+         <!--04.12.2007;  ;  playback mode ()-->
+         <!--04.12.2007;  ;  fine synchronisation mode ()-->
+      </table>
+      <h2><a name="coma"></a>coma
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="feature">26.07.2015</td>
+            <td class="feature">1.9</td>
+            <td class="feature">cGAT Minimal as tagging option (MoDiKo)</td>
+         </tr>
+         <tr>
+            <td class="change">26.07.2015</td>
+            <td class="change">1.9.xxxx</td>
+            <td class="change">Custom FSMs for segmentation functionality (MoDiKo)</td>
+         </tr>
+         <tr>
+            <td class="change">26.07.2015</td>
+            <td class="change">1.9.xxxx</td>
+            <td class="change">Beautified segmentation dialogs</td>
+         </tr>
+         <tr>
+            <td class="feature">24.06.2015</td>
+            <td class="feature">1.9</td>
+            <td class="feature">Generic as tagging option</td>
+         </tr>
+         <tr>
+            <td class="change">02.07.2014</td>
+            <td class="change">2.0.0000</td>
+            <td class="change">new entry (commons-io) in class path for COMA on MAC</td>
+         </tr>
+         <tr>
+            <td class="change">10.09.2013</td>
+            <td class="change">2.0.0000</td>
+            <td class="change">repaired mac build.</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">1.9.1467</td>
+            <td class="change">splash-auto-timeout</td>
+         </tr>
+         <tr>
+            <td class="change">21.08.2013</td>
+            <td class="change">1.9.1460</td>
+            <td class="change">better handling of recordings vs. media-files</td>
+         </tr>
+         <tr>
+            <td class="bug">21.08.2013</td>
+            <td class="bug">1.9.1448</td>
+            <td class="bug">error when comms or spks get filtered due to edits (DS)</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2013</td>
+            <td class="change">1.9.1448</td>
+            <td class="change">changes on how filters and search-terms are handled</td>
+         </tr>
+         <tr>
+            <td class="bug">20.08.2013</td>
+            <td class="bug">1.9.1448</td>
+            <td class="bug">Adding unsupported media files will not crash coma anymore</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2013</td>
+            <td class="change">1.9.1448</td>
+            <td class="change">changed handling of recording-names (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="bug">20.08.2013</td>
+            <td class="bug">1.9.1448</td>
+            <td class="bug">Editing attributes in the second comm-column fixed</td>
+         </tr>
+         <tr>
+            <td class="bug">20.08.2013</td>
+            <td class="bug">1.9.1448</td>
+            <td class="bug">Segmenting from within coma now adds the segmented transcriptions to the metadata</td>
+         </tr>
+         <tr>
+            <td class="bug">20.08.2013</td>
+            <td class="bug">1.9.1448</td>
+            <td class="bug">Error in path handling fixed for corpus statistics</td>
+         </tr>
+         <tr>
+            <td class="feature">26.03.2013</td>
+            <td class="feature">1.9.1404</td>
+            <td class="feature">possibility to hide description keys (requires schema change!)</td>
+         </tr>
+         <tr>
+            <td class="change">25.03.2013</td>
+            <td class="change">1.9.1400</td>
+            <td class="change">ui changes, updated language file</td>
+         </tr>
+         <tr>
+            <td class="change">22.03.2013</td>
+            <td class="change">1.9.1394</td>
+            <td class="change">auto-browse output html</td>
+         </tr>
+         <tr>
+            <td class="change">22.03.2013</td>
+            <td class="change">1.9.1394</td>
+            <td class="change">read-only keys are not to be harmonized (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="bug">04.03.2013</td>
+            <td class="bug">1.9.1392</td>
+            <td class="bug">Bug in tree tagger tool (Roman)</td>
+         </tr>
+         <tr>
+            <td class="bug">19.11.2012</td>
+            <td class="bug">1.9.1368</td>
+            <td class="bug">Bug in corpus statistics for Non-HIAT-Transcriptions (GeWiss)</td>
+         </tr>
+         <tr>
+            <td class="change">09.10.2012</td>
+            <td class="change">1.9.1349</td>
+            <td class="change">Corpus statistics for Non-HIAT-Transcriptions (GeWiss)</td>
+         </tr>
+         <tr>
+            <td class="change">02.10.2012</td>
+            <td class="change">1.9.1348</td>
+            <td class="change">Merge document action (GeWiss)</td>
+         </tr>
+         <tr>
+            <td class="bug">01.08.2012</td>
+            <td class="bug">1.9</td>
+            <td class="bug">word list functionality was broken (like the first morning)</td>
+         </tr>
+         <tr>
+            <td class="feature">18.01.2012</td>
+            <td class="feature">1.9</td>
+            <td class="feature">Bug in speaker specific wordlists: counts all speakers in files with the selected speakers (Anna Komor)</td>
+         </tr>
+         <tr>
+            <td class="feature">23.12.2011</td>
+            <td class="feature">1.9</td>
+            <td class="feature">Completed first attempt at implementing speaker-specific word lists (Anna Komor)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.12.2011</td>
+            <td class="feature">1.9</td>
+            <td class="feature">Started implementing speaker-specific word lists (Anna Komor)</td>
+         </tr>
+         <tr>
+            <td class="bug">21.10.2011</td>
+            <td class="bug">1.9</td>
+            <td class="bug">bug fix: version checking for new file (post-release...)</td>
+         </tr>
+         <tr>
+            <td class="change">20.10.2011</td>
+            <td class="change">1.9</td>
+            <td class="change">Preparing release</td>
+         </tr>
+         <tr>
+            <td class="bug">20.10.2011</td>
+            <td class="bug">1.8.1100</td>
+            <td class="bug">fixed launcher, search-result-highlighting, L10n</td>
+         </tr>
+         <tr>
+            <td class="changed">19.10.2011</td>
+            <td class="changed">1.8.1100</td>
+            <td class="changed">removed roles code for release</td>
+         </tr>
+         <tr>
+            <td class="feature">05.07.2011</td>
+            <td class="feature">1.8.1061</td>
+            <td class="feature">Description profile as output option</td>
+         </tr>
+         <tr>
+            <td class="bug">22.06.2011</td>
+            <td class="bug">1.8.1057</td>
+            <td class="bug">Bug fix in CCW related to integration of segmentated files</td>
+         </tr>
+         <tr>
+            <td class="change">22.06.2011</td>
+            <td class="change">1.8.1057</td>
+            <td class="change">Additional progress indicator when segmenting in CCW</td>
+         </tr>
+         <tr>
+            <td class="bug">17.06.2011</td>
+            <td class="bug">1.8.1044</td>
+            <td class="bug">removed established and newly introduced bugs (import languages, edit in commTable)</td>
+         </tr>
+         <tr>
+            <td class="feature">19.05.2011</td>
+            <td class="feature">1.8.1026</td>
+            <td class="feature">nulling keynames in harmonize keys dialog now deletes the keys</td>
+         </tr>
+         <tr>
+            <td class="feature">13.05.2011</td>
+            <td class="feature">1.8.1016</td>
+            <td class="feature">TreeTagger integrated into Tools menu</td>
+         </tr>
+         <tr>
+            <td class="feature">09.05.2011</td>
+            <td class="feature">1.8.1010</td>
+            <td class="feature">CHAT_MINIMAL segmentation added at several places (ur: E11)</td>
+         </tr>
+         <tr>
+            <td class="change">13.04.2011</td>
+            <td class="change">1.8.1000</td>
+            <td class="change">One Thousand Commits! And: CCW doesn't create locations anymore</td>
+         </tr>
+         <tr>
+            <td class="feature">13.04.2011</td>
+            <td class="feature">1.8.997</td>
+            <td class="feature">Filter and Sort for language-type added</td>
+         </tr>
+         <tr>
+            <td class="bug">13.04.2011</td>
+            <td class="bug">1.8.989</td>
+            <td class="bug">Missing jar in CP for LINUX distribution</td>
+         </tr>
+         <tr>
+            <td class="bug">24.03.2011</td>
+            <td class="bug">1.8.982</td>
+            <td class="bug">Fixed bug in update recordings method</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.8.913</td>
+            <td class="change">Fixed bug in Count segments routine</td>
+         </tr>
+         <tr>
+            <td class="change">06.01.2011</td>
+            <td class="change">1.8.911</td>
+            <td class="change">Fixed bug in Search &amp; Replace routine</td>
+         </tr>
+         <tr>
+            <td class="change">06.01.2011</td>
+            <td class="change">1.8.910</td>
+            <td class="change">Check type selection in COMA structure checking</td>
+         </tr>
+         <tr>
+            <td class="change">05.01.2011</td>
+            <td class="change">1.8.910</td>
+            <td class="change">Temporal anomaly check also in COMA structure checking</td>
+         </tr>
+         <!--22.12.2010;  1.8.904;  changes to the schema (change)-->
+         <!--20.12.2010;  1.8.903;  CCW creates type-attributes for l1 and l2 instead of status-description-keys (change)-->
+         <!--02.12.2010;  1.8.894;  UTF-8 for output-stylesheets (bug)-->
+         <!--29.11.2010;  1.8;  release version (feature)-->
+         <!--25.11.2010;  1.7.884;  internationalization (change)-->
+         <!--23.11.2010;  1.7.878;  added Nimus L+F to preferences (change)-->
+         <!--23.11.2010;  1.7.878;  opening a corpus won't trigger a xmlChanged anymore (change)-->
+         <!--12.11.2010;  1.7.861;  further changes to the roleplay-component (change)-->
+         <!--12.11.2010;  1.7.861;  fixed bug in saving baskets (bug)-->
+         <!--22.10.2010;  1.7.845;  cleaned the corpus panel (change)-->
+         <!--22.10.2010;  1.7.845;  "save changes" in create corpus action works now (bug)-->
+         <!--19.10.2010;  1.7.834;  update panel debugged...again! (bug)-->
+         <!--18.10.2010;  1.7.832;  basket-saving debugged (bug)-->
+         <!--13.10.2010;  1.7.822;  xsl-output-option (feature)-->
+         <!--12.10.2010;  1.7.814;  changes in the mac-buildfiles (change)-->
+         <!--07.09.2010;  1.7.800;  xpath for search-and-replace (feature)-->
+         <!--23.08.2010;  1.7.788;  search-and-replace in transcriptions (feature)-->
+         <!--23.08.2010;  1.7.775;  segmentation action (todo: add COMA elements) (feature)-->
+         <!--23.08.2010;  1.7.775;  speaker check action (todo: add speakers functionality) (feature)-->
+         <!--03.08.2010;  1.7.752;  path column in ccw (timm) (feature)-->
+         <!--26.07.2010;  1.7.740;  assigning metadata to recordings in ccw repaired (bug)-->
+         <!--13.07.2010;  1.7.720;  (beta)user roles (change)-->
+         <!--13.07.2010;  1.7.714;  splash, garbage collection (change)-->
+         <!--13.07.2010;  1.7.709;  remove filters for new corpora, changes to quit() (change)-->
+         <!--10.06.2010;  1.7.689;  localized transcription import, changes to the language display (change)-->
+         <!--10.06.2010;  1.7.689;  coma would only display one location per speaker (bug)-->
+         <!--09.06.2010;  1.7.688;  updated documentation, display settings again, modified corpus-statistics code (feature)-->
+         <!--28.05.2010;  1.7.691;  delete attached files again (feature)-->
+         <!--27.05.2010;  1.7;  release version (feature)-->
+         <!--26.05.2010;  1.6.684;  inserted recording-updater again (feature)-->
+         <!--12.05.2010;  1.6.670;  bug in open file detection fixed, added overwrite warning (bug)-->
+         <!--12.05.2010;  1.6.670;  bug in exit and new corpus routine (Timm) (bug)-->
+         <!--06.05.2010;  1.6.668;  display language names (change)-->
+         <!--06.05.2010;  1.6.666;  hid a devilish bug somewhere (change)-->
+         <!--04.05.2010;  1.6.664;  minor changes to the corpus-panel (change)-->
+         <!--28.04.2010;  1.6.662;  changed deselection mode for jtables (FiSS) (change)-->
+         <!--28.04.2010;  1.6.661;  language-name lookup in edit language dialog (feature)-->
+         <!--15.04.2010;  1.6.637;  non-existing description-values editable in lists now. restricted to descriptions. (change)-->
+         <!--15.04.2010;  1.6.637;  fire list updates more often (change)-->
+         <!--15.04.2010;  1.6.637;  corpus word list action (feature)-->
+         <!--15.04.2010;  1.6.637;  changed menu-items to uppercase (Thomas) (change)-->
+         <!--15.04.2010;  1.6.637;  preferences-reset added, changed some default directories (change)-->
+         <!--15.04.2010;  1.6.636;  progress bar for segmentation in CCW (change)-->
+         <!--14.04.2010;  1.6.629;  repaired key harmonizer (bug)-->
+         <!--14.04.2010;  1.6.629;  calculate recording times (feature)-->
+         <!--14.04.2010;  1.6.629;  import basic transcriptions (feature)-->
+         <!--13.04.2010;  1.6.623;  repaired location-edit-dialog and location-type-filtering (FiSS) (bug)-->
+         <!--13.04.2010;  1.6.623;  repaired language-edit-dialog (FiSS) (bug)-->
+         <!--09.04.2010;  1.6.621;  moved "show speakers" to (new) view-menu (change)-->
+         <!--09.04.2010;  1.6.621;  stylesheet selection for metadata-display (feature)-->
+         <!--09.04.2010;  1.6.621;  recent files redone (untested) (change)-->
+         <!--09.04.2010;  1.6.617;  added datatype "file" (largely untested!) (change)-->
+         <!--08.04.2010;  1.6.613;  clear basket with when corpus changes, basket moved to data (change)-->
+         <!--08.04.2010;  1.6.613;  display data-panel instead of corpus panel (change)-->
+         <!--08.04.2010;  1.6.613;  description-dialog has a scollbar now (TS) (bug)-->
+         <!--07.04.2010;  1.6.609;  separator between datatypes (FiSS) (feature)-->
+         <!--07.04.2010;  1.6.608;  locations are output in alphabetical order now (FiSS) (feature)-->
+         <!--07.04.2010;  1.6.606;  new xml- and html-escaping (FiSS) (bug)-->
+         <!--01.04.2010;  1.6.605;  removed duplicates from recent file list (bug)-->
+         <!--01.04.2010;  1.6.604;  edit speaker dialog corrected (bug)-->
+         <!--01.04.2010;  1.6.603;  pressing escape in save-changes-dialog now cancels instead of selecting "no" (bug)-->
+         <!--01.04.2010;  1.6.601;  saving a basket no longer removes elements from the corpus (submitted by FiSS) (bug)-->
+         <!--01.04.2010;  1.6.600;  Basket-saving only to same dir as coma-file (change)-->
+         <!--01.04.2010;  1.6.605;  removed duplicates from recent file list (bug)-->
+         <!--01.04.2010;  1.6.604;  edit speaker dialog corrected (bug)-->
+         <!--01.04.2010;  1.6.603;  pressing escape in save-changes-dialog now cancels instead of selecting "no" (bug)-->
+         <!--01.04.2010;  1.6.601;  saving a basket no longer removes elements from the corpus (submitted by FiSS) (bug)-->
+         <!--01.04.2010;  1.6.600;  Basket-saving only to same dir as coma-file (change)-->
+         <!--23.02.2010;  1.6.528;  started implementing import for basic trans (feature)-->
+         <!--27.01.2010;  1.6.528;  Fixed weirdness in Load templates by cleaning & building (bug)-->
+         <!--20.01.2010;  1.6.528;  Look and Feel - Quaqua on Macs, System on others (change)-->
+         <!--20.01.2010;  1.6.528;  No longer crashes when opening non-xml-files as templates (Adriana Slavcheva) (bug)-->
+         <!--20.01.2010;  1.6.528;  Tooltips and the likes (Thomas) (change)-->
+         <!--16.12.2009;  1.6.520;  minor changes in menubar (change)-->
+         <!--14.12.2009;  1.6.515;  added corpus statistics operation (feature)-->
+         <!--09.12.2009;  1.6.508;  harmonize description keys (first version) (feature)-->
+         <!--08.12.2009;  1.6.503;  changed filter and column toggeling (change)-->
+         <!--08.12.2009;  1.6.503;  added search functionality (feature)-->
+         <!--08.12.2009;  1.6.498;  added segmentation check operation (feature)-->
+         <!--08.12.2009;  1.6.498;  added structure check operation (feature)-->
+         <!--20.11.2009;  1.6;  repaired faulty html in display panel (bug)-->
+         <!--20.11.2009;  1.6;  added pdfs to mac distribution (change)-->
+         <!--20.11.2009;  1.6;  updated the updater (feature)-->
+         <!--20.11.2009;  1.6;  repaired faulty html in display panel (bug)-->
+         <!--20.11.2009;  1.6;  added pdfs to mac distribution (change)-->
+         <!--20.11.2009;  1.5.459;  minor changes in built-script (change)-->
+         <!--20.11.2009;  1.5.459;  clone communications now disabled when no communication is selected (bug)-->
+         <!--20.11.2009;  1.5.459;  misc. layout changes (change)-->
+         <!--20.11.2009;  1.5.459;  bug in ccw (forward-button gets disabled) fixed (bug)-->
+         <!--05.11.2009;  1.5.447;  refresh segment count now in tools menu with working progress meter (change)-->
+         <!--03.11.2009;  1.5.443;  reactivated maintenance button (Katharina Mayr), hide segment counts in display (change)-->
+         <!--27.10.2009;  1.5.415;  changes to the basket-panel and transcription-display (change)-->
+         <!--09.10.2009;  1.5.399;  changes in the mac-build-process (feature)-->
+         <!--07.10.2009;  1.5.396;  progress bar for EXAKT search init (feature)-->
+         <!--06.10.2009;  1.5.391;  fixed bug in applying templates (bug)-->
+         <!--06.10.2009;  1.5.391;  fixed bug in saving templates (bug)-->
+         <!--11.08.2009;  1.5.6;  import speakers from other coma-files (feature)-->
+         <!--01.07.2009;  1.5.5;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
+         <!--01.07.2009;  1.5.5;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
+         <!--24.06.2009;  1.5.5;  description editing revamped. (bug)-->
+         <!--24.06.2009;  1.5.5;  filters where disabled for some reason. not anymore. (bug)-->
+         <!--19.06.2009;  1.5.5;  new css-handling for display-panel, better location-type-handling (change)-->
+         <!--19.06.2009;  1.5.5;  new css-handling for display-panel, better location-type-handling (change)-->
+         <!--15.06.2009;  1.5.5;  new edit-dialog for speakers (change)-->
+         <!--12.06.2009;  1.5.5;  preliminary multi-line editing in description-dialog (feature)-->
+         <!--12.06.2009;  1.5.5;  adding and editing recordings moved to html-panel (change)-->
+         <!--12.06.2009;  1.5.5;  preliminary printing via java.desktop (feature)-->
+         <!--25.05.2009;  1.5.1;  added Turkish language file (feature)-->
+         <!--14.05.2009;  1.5.1;  document has not changed when you have just opened coma (bug)-->
+         <!--14.05.2009;  1.5.1;  windows versions can save and open files again... (bug)-->
+         <!--20.04.2009;  1.5;  descriptions are editable again... (bug)-->
+         <!--07.04.2009;  1.4.2;  kissed subcorpora goodbye, added method to merge subcorpora-information into speakers and communications (change)-->
+         <!--07.04.2009;  1.4.2;  implemented com.apple.eawt and finder-integration (change)-->
+         <!--07.04.2009;  1.4.2;  changed some more file-dialogs to native code (change)-->
+         <!--07.04.2009;  1.4.2;  changed corpus-panel, killed 1200 lines of ugliest code (change)-->
+         <!--07.04.2009;  1.4.2;  changed 'firstrun'-code. default language is english now (change)-->
+         <!--27.03.2009;  1.4.1;  implemented type-attribute for languages (feature)-->
+         <!--26.03.2009;  1.4.1;  recordings were created wrong. fixed. (bug)-->
+         <!--26.03.2009;  1.4.1;  changes to the schema - see schema-file (change)-->
+         <!--26.03.2009;  1.4.1;  purged periodExact and knownHuman from the code, remains in the schema for backwards-compatibility (change)-->
+         <!--25.03.2009;  1.4.1;  type-attribute for locations shows and is editable now (change)-->
+         <!--24.03.2009;  1.4.1;  coma recognizes .exb-files for assigning and ccw now (change)-->
+         <!--12.03.2009;  1.4.1;  changes in the description-dialog (change)-->
+         <!--12.03.2009;  1.4.1;  table-selection handling vastly improved (i hope) (change)-->
+         <!--04.03.2009;  1.4.1.224;  changes to the auto-update-mechanism, removed loads of asdf-comments (feature)-->
+         <!--26.02.2009;  1.4.1.213;  removed menubar-icons, added copy-debug-info-action (feature)-->
+         <!--26.02.2009;  1.4.1.208;  implements exmaralda-application and logging, logging-dir-preference (feature)-->
+         <!--25.02.2009;  1.4.1.204;  auto-update feature (untested for windows) (feature)-->
+         <!--18.02.2009;  1.4.1_190;  coma mac-build was missing the fsm-files for segmentation (bug)-->
+         <!--18.02.2009;  1.4.1_190;  coma files have the extension .coma now (change)-->
+         <!--02.02.2009;  1.4;  changes in recording.toHTML() (bug)-->
+         <!--02.02.2009;  1.4;  corpus-creator changed: one recording - multiple media files, overwrite confirmation (bug)-->
+         <!--30.01.2009;  1.4;  Description-Keys are now always deleted by deleting their value (Petra's Mail) (bug)-->
+         <!--28.01.2008;  1.35_176;  Pressing escape while editing communication-names caused a NPE (bug)-->
+         <!--27.01.2008;  1.35_176;  changed xmlSaved-notification and titlebar-display (bug)-->
+         <!--27.01.2008;  1.35_176;  Changed the input-method for durations YET AGAIN! (change)-->
+         <!--19.01.2009;  1.35_171;  fixed three bugs in the corpus generator (bug)-->
+         <!--17.12.2008;  1.35_162;  fixed error in table updates and template-handling (bug)-->
+         <!--15.12.2008;  1.35_160;  comacorpus.xsd changed to 1.5 - changes are documented inside the file (change)-->
+         <!--27.11.2008;  1.35_150;  templates for descriptions (feature)-->
+         <!--27.11.2008;  1.35_150;  you can not add transcriptions and recordings in an unsaved document anymore (feature)-->
+         <!--27.11.2008;  1.35_150;  fixed several errors concerned with saving, url resolving and other stuff (bug)-->
+         <!--21.11.2008;  1.35_135;  added templates for descriptions. this build is largely untested! (feature)-->
+         <!--20.11.2008;  1.35_131;  language-lookup now with lowercase-letters (thanks, ethnologue...) (bug)-->
+         <!--21.11.2008;  1.35_135;  added templates for descriptions. this build is largely untested! (feature)-->
+         <!--20.11.2008;  1.35_131;  language-lookup now with lowercase-letters (thanks, ethnologue...) (bug)-->
+         <!--30.10.2008;  1.35_118;  there was still a bug in durations-calculation. replaced the whole thing. (bug)-->
+         <!--27.10.2008;  1.35_112;  changed preferences handling - dumped 250 lines of code, added defaults-button (feature)-->
+         <!--24.10.2008;  1.35_103;  added preferences option to disable writing IDs into transcription files (feature)-->
+         <!--24.10.2008;  1.35_103;  Maintenance-Tools repaired (reload transcription information) (bug)-->
+         <!--08.10.2008;  1.35_85;  show file path to transcription in transcription-info (feature)-->
+         <!--08.10.2008;  1.35_85;  fixed bugs in timespan calculation (bug)-->
+         <!--07.10.2008;  1.34;  minor fixes and new build-targets (change)-->
+         <!--29.09.2008;  1.33_66;  html-display for media-files fixed (bug)-->
+         <!--29.09.2008;  1.33_66;  html-display for media-files fixed (bug)-->
+         <!--26.09.2008;  1.33_62;  key-sorting is not reverse anymore (bug)-->
+         <!--26.09.2008;  1.33_59;  bug in location-edit-dialog fixed (bug)-->
+         <!--25.09.2008;  1.32;  millisecond-handling now with BigDecimals to prevent rounding errors in durations (bug)-->
+         <!--01.08.2008;  1.31;  template-autosave (feature)-->
+         <!--01.08.2008;  1.31;  awt-filedialog auf dem mac an einigen stellen (feature)-->
+         <!--01.08.2008;  1.31;  ein paar nullpointer in den templates beseitigt (bug)-->
+         <!--01.08.2008;  1.31;  templates und segmentierung in die dokumentation aufgenommen (bug)-->
+         <!--01.08.2008;  1.31;  templates für locations (feature)-->
+         <!--01.08.2008;  1.31;  ccw-panel von  blödem layout befreit (feature)-->
+         <!--29.07.2008;  1.24;  Comm/Setting/Description liess sich nicht editieren (bug)-->
+         <!--29.07.2008;  1.24;  SplitPanes verbessert (bug)-->
+         <!--28.07.2008;  1.23;  Fehler im Segment-Zähler korrigiert (bug)-->
+         <!--22.07.2008;  1.22;  Fehler in der Tabellendarstellung behoben ("redo selection") (bug)-->
+         <!--01.06.2008;  1.21;  Fehler in CCW behoben: @-Zeichen am Anfang von "uniqueSpeaker..." entfernt. (bug)-->
+         <!--16.05.2008;  1.2;  Fehler beim Speichern und Abrufen der Einstellungen behoben. Alle Einstellungen gehen jetzt nach org.exmaralda.coma und das geschieht in Ui.java (bug)-->
+         <!--16.05.2008;  1.2;  Dublin-Core-Metadata-Button and handling (feature)-->
+         <!--24.04.2008;  1.11;  ComaFilter: JToggleButtons statt JCheckboxes (bug)-->
+         <!--24.04.2008;  1.11;  package-struktur komplett auf org.exmaralda.coma umgestellt (bug)-->
+         <!--24.04.2008;  1.11;  keine files mehr in coma/* (bug)-->
+         <!--24.04.2008;  1.11;  SVN via SourceForge (bug)-->
+         <!--24.04.2008;  1.11;  alle ressourcen (auch bilder) nach /resources, mit ResourceHandler.java auflösen (bug)-->
+         <!--24.04.2008;  1.11;  Unique Speaker Distinction für "add Corpora" hat gefehlt (bug)-->
+         <!--24.04.2008;  1.11;  Fehler beim "auskoppeln" von Korpora behoben (bug)-->
+         <!--24.04.2008;  1.11;  SegmentCount Button repariert (bug)-->
+         <!--24.04.2008;  1.11;  SegmentCount zählt jetzt in ausgewählten Comm. statt in allen (bug)-->
+         <!--24.04.2008;  1.11;  Mülleimer-Symbol durch "Minus" ersetzt (bug)-->
+         <!--24.04.2008;  1.11;  Übersetzungen ergänzt (bug)-->
+         <!--24.04.2008;  1.11;  duplicate communications (feature)-->
+         <!--24.04.2008;  1.11;  moved panic-button (feature)-->
+         <!--24.04.2008;  1.11;  add-to-basket repaired (bug)-->
+         <!--22.04.2008;  1.06;  duplicate speakers (feature)-->
+         <!--14.04.2008;  1.05;  ccw macht das fenster zu (bug)-->
+         <!--14.04.2008;  1.05;  ccw lokalisiert (feature)-->
+         <!--14.04.2008;  1.04;  XML-Anzeige und Editor entfernt (bug)-->
+         <!--14.04.2008;  1.04;  new transcription-importer ("ccw") (feature)-->
+         <!--14.04.2008;  1.04;  "known human" now optional (feature)-->
+         <!--10.03.2008;  1.02;  Update-Check aus Werkzeug-Menü entfernt (change)-->
+         <!--10.03.2008;  1.02;  Aboutness-Keyboard-Shortcut entfernt (change)-->
+         <!--10.03.2008;  1.02;  TableSorter-Klasse eliminiert (change)-->
+         <!--10.03.2008;  1.02;  Neuer Aufräum-Knopf bei den Aufnahmen (feature)-->
+         <!--10.03.2008;  1.02;  Aufnahmen zuordnen für alle repariert (bug)-->
+         <!--10.03.2008;  1.02;  Aufnahmen-Tabelle reagiert jetzt (bug)-->
+         <!--05.03.2008;  1.01;  fehlende Englische Übersetzungen ergänzt (bug)-->
+         <!--05.03.2008;  1.01;  Korpus-Description-Panel repariert (bug)-->
+         <!--05.03.2008;  1.01;  komplett neuer Zuordnungsmechanismus für Sprecher und Kommunikationen (feature)-->
+         <!--05.03.2008;  1.01;  in-den-Korb-Buttons repariert (bug)-->
+         <!--05.03.2008;  1.01;  Korb-"Füllstandsanzeige" repariert (bug)-->
+         <!--18.02.2008;  1.0beta3;  Fehler in der Datumsberechnung korrigiert (bug)-->
+         <!--18.02.2008;  1.0beta3;  Eingabemaske für Description zu Korpora (feature)-->
+         <!--18.02.2008;  1.0beta3;  Korpuspanel umsortiert (feature)-->
+         <!--18.02.2008;  1.0beta3;  Korpus-Korb repariert (bug)-->
+         <!--18.02.2008;  1.0beta2;  Schaltfläche für vordefinierte Filter mit 3 Filtern (feature)-->
+         <!--18.02.2008;  1.0beta2;  ComaCreators nullPointerException bei fehlenden Mediendatein gelöscht (bug)-->
+         <!--18.02.2008;  1.0beta2;  funktionslose Buttons für neue Zuordung geschaffen (bug)-->
+         <!--17.02.2008;  1.0beta1;  addlocation bei kommunikationen (bug)-->
+         <!--17.02.2008;  1.0beta1;  sprecher hinzufügen geht wieder (bug)-->
+         <!--17.02.2008;  1.0beta1;  comacreator verknüpft mediendateien richtig (bug)-->
+         <!--17.02.2008;  1.0beta1;  Filter editierbar (feature)-->
+         <!--17.02.2008;  1.0beta1;  (neue) Kommunikationen umbenenbar (feature)-->
+         <!--17.02.2008;  1.0beta1;  speaker löschbar (feature)-->
+         <!--17.02.2008;  1.0beta1;  mehrere comms löschbar (feature)-->
+         <!--05.08.2008;  ;  added segmentation functionality to the corpus creation wizard (feature)-->
+         <!--04.08.2008;  ;  added 'Tools > EXAKT Search' function (feature)-->
+      </table>
+      <h2><a name="all"></a>all
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">10.07.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)</td>
+         </tr>
+         <tr>
+            <td class="change">09.07.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Fixed missing library in Linux distribution (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="change">13.05.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Bundle JRE on Windows</td>
+         </tr>
+         <tr>
+            <td class="change">05.05.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">some library cleanup for build, got rid of SUN JMF</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">1.5.2</td>
+            <td class="change">New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">2.0</td>
+            <td class="change">new icons</td>
+         </tr>
+         <tr>
+            <td class="bug">07.11.2012</td>
+            <td class="bug">1.9</td>
+            <td class="bug">ipsk.jar for BAS-Player was missing from MAC plists</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2012</td>
+            <td class="change">1.9</td>
+            <td class="change">end of official support for PPC Mac</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2012</td>
+            <td class="change">1.9</td>
+            <td class="change">Parameter HTML witdth in write partitur method (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2011</td>
+            <td class="change">1.9</td>
+            <td class="change">IDs for words in TEI export</td>
+         </tr>
+         <tr>
+            <td class="change">19.10.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Preparing release</td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2011</td>
+            <td class="feature">1.8</td>
+            <td class="feature">Command line version for Praat export (Singer)</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Changed segmented transcription format: ta's can now have ref-id's</td>
+         </tr>
+         <tr>
+            <td class="change">08.03.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Added Sextant tagger to Windows and Linux distributions</td>
+         </tr>
+         <!--10.12.2010;  1.8;  Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though) (change)-->
+         <!--18.10.2010;  1.7;  Simplified Windows distribution (change)-->
+         <!--01.10.2010;  1.7;  Added TEI drop to start menu on windows (change)-->
+         <!--01.10.2010;  1.7;  Removed SUN JMF versions of PE and EXAKT from start menu on windows (change)-->
+         <!--24.08.2010;  1.7;  Coloured splash screens (change)-->
+         <!--23.08.2010;  1.7;  Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly (change)-->
+         <!--10.08.2010;  1.7;  Added swingworker and QTJava to classpath on Linux (change)-->
+         <!--31.03.2010;  1.6;  Version info for Windows setup (Linde, RRZ) (change)-->
+         <!--24.02.2010;  1.6;  fixed bug in corpus builder, path separator must be os independent (Kerem) (bug)-->
+         <!--15.12.2009;  1.6.515;  Linux: shell scripts take parameter (Timm!) (feature)-->
+         <!--23.06.2009;  1.4.3.;  Cleaned up build, smaller distribution size (bug)-->
+         <!--21.03.2009;  1.4.2.;  removed unused libs from linux distribution (change)-->
+         <!--26.02.2009;  1.2.;  Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances (feature)-->
+         <!--09.02.2009;  1.4.1.;  Integration of ELAN.jar instead of copied MPI code (change)-->
+         <!--09.02.2009;  1.2.;  Documentation updates (feature)-->
+         <!--28.01.2008;  1.4.;  Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS (change)-->
+         <!--28.10.2008;  ;  changed EXMARaLDA's build and template files for new media integration (change)-->
+         <!--28.10.2008;  ;  removed JLayer-Player because it is no longer needed (MP3 is fine in other players) (change)-->
+         <!--27.10.2008;  ;  integrated ELAN's DirectShowPlayer as a new player type (festure)-->
+         <!--22.10.2008;  1.1;  fixed bug in log file handling which led to out of memory errors on certain Macs (bug)-->
+         <!--20.10.2008;  ;  changed linux tarball: sh files are now executable (bug)-->
+         <!--13.10.2008;  ;  changed linux tarball according to suggestions by Jörg Sommer (bug)-->
+         <!--13.10.2008;  ;  changed info plist for mac applications to nake sure app runs on 32-bit-JVM (bug)-->
+         <!--06.10.2008;  ;  changed basic and segmented transcription APIs to read and write more than one referenced file (feature)-->
+         <!--06.10.2008;  ;  changed basic and segmented transcription DTD to allow more than one referenced file (feature)-->
+         <!--06.10.2008;  ;  changed basic transcription DTD to allow format table (feature)-->
+         <!--16.09.2008;  ;  updated XALAN libraries ()-->
+         <!--06.08.2008;  ;  changed linux shell scripts (seem to work at least with Suse and Java 6 now) ()-->
+      </table>
+      <h2><a name="teidrop"></a>teidrop
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">15.01.2015</td>
+            <td class="change">0.4</td>
+            <td class="change">Adaptations to new version of standard proposal (annotationGrp)</td>
+         </tr>
+         <tr>
+            <td class="bug">25.01.2012</td>
+            <td class="bug">0.3</td>
+            <td class="bug">Fixed namespace issue in FOLKER transformation (word IDs)</td>
+         </tr>
+         <tr>
+            <td class="bug">25.01.2012</td>
+            <td class="bug">0.3</td>
+            <td class="bug">File type recognition did not work with upper case filename extensions</td>
+         </tr>
+         <tr>
+            <td class="bug">16.02.2011</td>
+            <td class="bug">0.2</td>
+            <td class="bug">Removed ambigutiy in CleanAndSort stylesheet</td>
+         </tr>
+         <tr>
+            <td class="change">19.01.2011</td>
+            <td class="change">0.2</td>
+            <td class="change">Lots of changes to transformation XSL in the tei package</td>
+         </tr>
+         <!--01.10.2010;  0.1;  First version (feature)-->
+      </table>
+      <h2><a name="exakt"></a>exakt
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">23.06.2014</td>
+            <td class="change">1.5.3</td>
+            <td class="change">catch splash screen transparency error (lubuntu)</td>
+         </tr>
+         <tr>
+            <td class="feature">28.05.2014</td>
+            <td class="feature">1.3</td>
+            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
+         </tr>
+         <tr>
+            <td class="bug">17.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">15.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">14.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
+         </tr>
+         <tr>
+            <td class="bug">16.01.2013</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">10.01.2013</td>
+            <td class="change">1.2</td>
+            <td class="change">Accept fln files for FOLKER wizard</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
+         </tr>
+         <tr>
+            <td class="bug">22.11.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Bug in add annotation when analyses are also present</td>
+         </tr>
+         <tr>
+            <td class="bug">12.03.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
+         </tr>
+         <tr>
+            <td class="change">25.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
+         </tr>
+         <tr>
+            <td class="feature">25.01.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Unselected KWIC rows in gray</td>
+         </tr>
+         <tr>
+            <td class="bug">18.01.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
+         </tr>
+         <tr>
+            <td class="bug">21.11.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
+         </tr>
+         <tr>
+            <td class="change">08.09.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Further modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Some modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="feature">05.07.2011</td>
+            <td class="feature">1.1</td>
+            <td class="feature">Frequency sort as option for word list output</td>
+         </tr>
+         <tr>
+            <td class="bug">07.06.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
+         </tr>
+         <tr>
+            <td class="bug">30.05.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
+         </tr>
+         <tr>
+            <td class="change">17.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">FOLKER import now does automatic stratification by distribution</td>
+         </tr>
+         <tr>
+            <td class="change">23.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Catalog functionality for remote and DB corpora</td>
+         </tr>
+         <tr>
+            <td class="change">18.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">First elements of RDB functionality added (Hanna!)</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">escape type strings in input helper</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Input helper always on top (for filter and for search)</td>
+         </tr>
+         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
+         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
+         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
+         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
+         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
+         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
+         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
+         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
+         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
+         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
+         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
+         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
+         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
+         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
+         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
+         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
+         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
+         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
+         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
+         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
+         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
+         <!--16.03.2010;  0.8;  list view (feature)-->
+         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
+         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
+         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
+         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
+         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
+         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
+         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
+         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
+         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
+         <!--20.10.2009;  0.7;  view menu (change)-->
+         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
+         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
+         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
+         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
+         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
+         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
+         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
+         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
+         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
+         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
+         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
+         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
+         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
+         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
+         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
+         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
+         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
+         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
+         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
+         <!--26.03.2008;  ;  added function for subtracting dates ()-->
+         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
+         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
+         <!--19.03.2008;  ;  new function: import analyses ()-->
+         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
+         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
+         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
+         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
+         <!--18.02.2008;  ;  annotation search working ()-->
+         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
+      </table>
+      <h2><a name="sextant"></a>sextant
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">30.05.2011</td>
+            <td class="change">0.2.1029</td>
+            <td class="change">Logging enabled (METU)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.05.2011</td>
+            <td class="bug">0.2.1026</td>
+            <td class="bug">open tagset repaired</td>
+         </tr>
+         <tr>
+            <td class="change">24.03.2011</td>
+            <td class="change">0.2.982</td>
+            <td class="change">Changes to the annotation panel</td>
+         </tr>
+         <tr>
+            <td class="bug">28.02.2011</td>
+            <td class="bug">0.3</td>
+            <td class="bug">moving inside taggables doesn't suck anymore</td>
+         </tr>
+         <tr>
+            <td class="feature">28.02.2011</td>
+            <td class="feature">0.3</td>
+            <td class="feature">Remove Attribute Button added</td>
+         </tr>
+      </table>
+      <h2><a name="tagger"></a>tagger
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <!--09.12.2008;  0.7;  saving was broken, buttons were not colored, tag-overwrite did not work. (bug)-->
+      </table>
+   </body>
+</html>

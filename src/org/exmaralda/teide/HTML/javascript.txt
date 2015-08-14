@@ -1,0 +1,18 @@
+<script type="text/javascript">
+	function switchMenu(div,span,forcevisible) {
+		var el = document.getElementById(div);
+		var spel = document.getElementById(span);
+		if (forcevisible == "true") {
+				el.style.display = '';
+				spel.className = 'tabhead';
+		} else {
+			if ( el.style.display != "none" ) {
+				el.style.display = 'none';
+				spel.className = 'notab';
+			} else {
+				el.style.display = '';
+				spel.className = 'tabhead';
+			}
+		}
+	}
+</script>

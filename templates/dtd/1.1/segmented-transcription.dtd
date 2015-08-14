@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- created 11-April-2001 -->
+<!-- by Thomas Schmidt -->
+<!-- thomas.schmidt@uni-hamburg.de -->
+<!-- ************ Top level element ************ -->
+<!ELEMENT segmented-transcription (head, segmented-body)>
+<!-- ********************************************** -->
+<!-- ************ Head (same for all transcriptions ************ -->
+<!ELEMENT head (meta-information, speakertable)>
+<!-- ************************************ -->
+<!ELEMENT meta-information (project-name, transcription-name, referenced-file, ud-meta-information, comment, transcription-convention)>
+<!ELEMENT project-name (#PCDATA)>
+<!ELEMENT transcription-name (#PCDATA)>
+<!ELEMENT referenced-file EMPTY>
+<!ATTLIST referenced-file url CDATA #REQUIRED>
+<!ELEMENT ud-meta-information (ud-information*)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT transcription-convention (#PCDATA)>
+<!ELEMENT ud-information (#PCDATA)>
+<!ATTLIST ud-information attribute-name CDATA #REQUIRED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT speakertable (speaker*)>
+<!ELEMENT speaker (abbreviation, sex, languages-used, l1, l2, ud-speaker-information, comment)>
+<!ATTLIST speaker id ID #REQUIRED>
+<!ELEMENT abbreviation (#PCDATA)>
+<!ELEMENT sex EMPTY>
+<!ATTLIST sex value (m | f | u) #REQUIRED>
+<!ELEMENT languages-used (language+)>
+<!ELEMENT l1 (language*)>
+<!ELEMENT l2 (language*)>
+<!ELEMENT language EMPTY>
+<!ATTLIST language xml:lang NMTOKEN #REQUIRED>
+<!ELEMENT ud-speaker-information (ud-information*)>
+<!-- ************************************ -->
+<!-- ************ ************************************** ************ -->
+<!-- ************ Body (different for all transcriptions) ************ -->
+<!ELEMENT segmented-body (timepoints, common-timeline, segmented-tier*)>
+<!-- ************************************ -->
+<!ELEMENT timepoints (timepoint*)>
+<!ELEMENT timepoint EMPTY>
+<!ATTLIST timepoint id ID #REQUIRED
+	time CDATA #IMPLIED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT common-timeline (tpr*)>
+<!ELEMENT tpr EMPTY>
+<!ATTLIST tpr id IDREF #REQUIRED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT segmented-tier (timeline, segmentation*)>
+<!ATTLIST segmented-tier id ID #REQUIRED
+	speaker IDREF #REQUIRED
+	category CDATA #REQUIRED
+	type (t | d | a |  l | u ) #REQUIRED>
+<!ELEMENT timeline (tpr*)>
+<!ELEMENT segmentation (segment* | link*)>
+<!ATTLIST segmentation name CDATA #REQUIRED>
+<!ELEMENT segment (#PCDATA)>
+<!ATTLIST segment id ID #REQUIRED
+	start IDREF #REQUIRED
+	end IDREF #REQUIRED>
+<!ELEMENT link (#PCDATA)>
+<!ATTLIST link start IDREF #REQUIRED
+	end IDREF #REQUIRED
+	medium (aud | vid | img | txt | oth) #REQUIRED
+	url CDATA #REQUIRED>
+<!-- ************************************ -->
+<!-- ************ ******************************************* ************ -->

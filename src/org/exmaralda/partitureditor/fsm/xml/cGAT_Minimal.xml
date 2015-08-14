@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- changes on 27-04-2011:	created first version -->
+<fsm name="HIAT: Utterances and Words">
+	<char-set id="SpaceSymbols">
+		<comment>characters that follow a word</comment>
+		<!-- Plain space character -->
+		<char>&#x0020;</char>
+		<!-- Underscore -->
+		<char>_</char>		
+	</char-set>
+	<char-set id="OpenParenthesis">
+		<comment>characters whose double appearance signals the beginning of a non-phonological segment and whose single appearance signals the beginning of an uncertain passage</comment>
+		<!-- Open round bracket -->
+		<char>(</char>
+	</char-set>
+	<char-set id="CloseParenthesis">
+		<comment>Characters whose double appearance signals the end of a non-phonological segment and whose single appearance signals the end of an uncertain passage</comment>
+		<!-- Closed round bracket -->
+		<char>)</char>
+	</char-set>
+	<char-set id="Alternative">
+		<comment>Character whose appearance signals the beginning of an alternative transcription</comment>
+		<!-- Pipe symbol -->
+		<char>|</char>
+                <!-- added 18-01-2012 (actually only this one is permissible...) -->
+		<char>/</char>                
+	</char-set>
+	<char-set id="BreatheSymbol">
+		<comment>Character whose appearance signals the beginning or end of breathing in/out</comment>
+		<!-- Degree symbol -->
+		<char>°</char>
+	</char-set>
+	<char-set id="H">
+		<comment>Character which may represent breathing or a letter inside a word</comment>
+		<char>h</char>
+	</char-set>
+	<char-set id="PauseSymbols">
+		<comment>Character which describe a pause inside round parentheses</comment>
+		<!-- digits -->
+		<char>0</char>
+		<char>1</char>
+		<char>2</char>
+		<char>3</char>
+		<char>4</char>
+		<char>5</char>
+		<char>6</char>
+		<char>7</char>
+		<char>8</char>
+		<char>9</char>
+		<!-- period -->
+		<char>.</char>
+		<!-- hyphen -->
+		<char>-</char>
+	</char-set>
+	<char-set id="MiscellaneousPunctuation">
+		<!-- Plain quotation mark -->
+		<char>"</char>
+		<!-- Apostrophe -->
+		<char>&apos;</char>
+		<!-- Colon -->
+		<char>:</char>
+		<!-- Semicolon -->
+		<char>;</char>
+		<!-- Comma -->
+		<char>,</char>
+		<!-- Ligatur sign -->
+		<char>&#x203F;</char>
+		<!-- m-Dash -->
+		<char>&#x2014;</char>
+		<!-- Forward slash -->
+		<!-- <char>/</char> -->
+		<!-- Exclamation mark -->
+		<char>!</char>
+		<!-- Question mark -->
+		<char>?</char>
+		<!-- Three dots (ellipsis) -->
+		<char>…</char>
+	</char-set>
+	
+	
+	<start-state id="TurnStarts"/>
+	<end-state id="TurnParsedSuccessfully"/>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnStarts">
+		<comment>Segment chain starts</comment>
+		<forbidden>Only open parenthesis, breathe symbol or word symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="TurnOpen_BreatheOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ats n="cGAT:b">]]></prefix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="H"/>
+			<target id="TurnOpen_H1"/>
+			<output oo="no">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]></prefix>
+			</output>			
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="cGAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+
+	<transitions source="TurnOpen_OpenParenthesisEncountered">
+		<comment>One open parenthesis has been encountered, now three possibilities: another parenthesis meaning non-verbal, a pause symbol meaning a pause or something else meaning uncertain</comment>
+		<forbidden>Only open parenthesis, pause symbol or word symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ats n="cGAT:non-pho">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="cGAT:pause">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UncertainOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_PauseOpen">
+		<comment>Inside a pause</comment>
+		<forbidden>only close parenthesis or pause symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+			
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_PauseOpen"/>
+			<output oo="yes"/>							
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_UncertainOpen_WordOpen">
+		<comment>---TODO</comment>
+		<forbidden>only close parenthesis, pipe symbol, space or word symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>		
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="TurnOpen_UncertainOpen_AlternativeOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<nts n="cGAT:alt">]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UncertainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UncertainOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_UncertainOpen_AlternativeOpen">
+		<comment>---TODO</comment>
+		<forbidden>only close parenthesis, pipe symbol, space symbol or word symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</nts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="TurnOpen_UncertainOpen_AlternativeOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UncertainOpen_AlternativeOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UncertainOpen_AlternativeOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_UncertainOpen">
+		<comment>---TODO</comment>
+		<forbidden>only word symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UncertainOpen_WordOpen"/>
+			<output oo="yes"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]></prefix>
+			</output>			
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+
+	<transitions source="TurnOpen_WordOpen">
+		<comment>An utterance is open and a word is open</comment>
+		<forbidden>Only word characters or space symbols allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+
+	<transitions source="TurnOpen_NonphoOpen">
+		<comment>An utterance is open and a non-phonological segment has started</comment>
+		<forbidden>No end of input, no open parenthesis, no pause symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_NonphoOpen_CloseParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<!-- changed 19-01-2011 -->
+                        <!-- <target id="Error"/> -->
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes"/>                        
+		</transition>		
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_NonphoOpen_CloseParenthesisEncountered">
+		<comment></comment>
+		<forbidden>Only closing parentheses allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="Error"/>
+		</transition>		
+		<transition>
+			<input-char-set id="Alternative"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen">
+		<comment>A turn is open, but  no word, no non-phonological segment, and no open parenthesis has been encountered</comment>
+		<forbidden>No close parenthesis, no utterance end symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="TurnOpen_BreatheOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="cGAT:b">]]></prefix>
+			</output>			
+		</transition>
+		<transition>
+			<input-char-set id="H"/>
+			<target id="TurnOpen_H1"/>
+		</transition>		
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_BreatheOpen">
+		<comment></comment>
+		<forbidden>Only &apos;h&apos; or space allowed</forbidden>		
+		<transition>
+			<input-char-set id="H"/>
+			<target id="TurnOpen_BreatheOpen"/>
+			<output oo="yes"/>			
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>					
+			</output>			
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_H1">
+		<comment></comment>
+		<forbidden>Only &apos;h&apos; or space or breathe symbol allowed</forbidden>		
+		<transition>
+			<input-char-set id="H"/>
+			<target id="TurnOpen_H2"/>
+			<output oo="no"/>						
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>h<![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>						
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>h<![CDATA[</ts>]]></prefix>
+				<suffix></suffix>
+			</output>
+		</transition>		
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="cGAT:b">]]>h</prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>			
+		</transition>		
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>h</prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_H2">
+		<comment></comment>
+		<forbidden>Only &apos;h&apos; or space or breathe symbol allowed</forbidden>		
+		<transition>
+			<input-char-set id="H"/>
+			<target id="TurnOpen_H3"/>
+			<output oo="no"/>						
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hh<![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>						
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hh<![CDATA[</ts>]]></prefix>
+				<suffix></suffix>
+			</output>
+		</transition>		
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="cGAT:b">]]>hh</prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>			
+		</transition>		
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hh</prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnOpen_H3">
+		<comment></comment>
+		<forbidden>Only &apos;h&apos; or space or breathe symbol allowed</forbidden>		
+		<transition>
+			<input-char-set id="H"/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hhh</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hhh<![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>						
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hhh<![CDATA[</ts>]]></prefix>
+				<suffix></suffix>
+			</output>
+		</transition>		
+		<transition>
+			<input-char-set id="BreatheSymbol"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="cGAT:b">]]>hhh</prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>			
+		</transition>		
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="cGAT:w" s="" e="">]]>hhh</prefix>
+			</output>
+		</transition>
+	</transitions>
+	
+	<!-- ************************************************************** -->
+	<transitions source="Error">
+		<comment>An error has been encountered</comment>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+
+	<!-- ************************************************************** -->
+	
+	<transitions source="TurnParsedSuccessfully">
+		<comment>The segment chain has been parsed successfully</comment>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

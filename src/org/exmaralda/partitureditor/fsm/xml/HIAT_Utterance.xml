@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<fsm name="HIAT_Utterances">
+	<char-set id="UtteranceEndSymbols">
+		<comment>Characters that signal the end of an utterance</comment>
+		<!-- Period -->
+		<char>.</char>
+		<!-- Exclamation mark -->
+		<char>!</char>
+		<!-- Question mark -->
+		<char>?</char>
+		<!-- Three dots (ellipsis) -->
+		<char>…</char>
+	</char-set>
+	<char-set id="SpaceSymbols">
+		<comment>Characters that follow an uterance end symbol</comment>
+		<!-- Plain space character -->
+		<char><![CDATA[ ]]></char>
+	</char-set>
+	<start-state id="TurnStarts"/>
+	<end-state id="TurnParsedSuccessfully"/>
+	<transitions source="TurnStarts">
+		<comment>Turn starts</comment>
+		<forbidden>No utterance end symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen">
+		<comment>An utterance is open, no utterance end symbol has been encountered</comment>
+		<forbidden>Everything allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_UtteranceEndEncountered">
+		<comment>An utterance is open and an utterance end symbol has been encountered</comment>
+		<forbidden>No further utterance end symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="HIAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen">
+		<comment>No utterance is open, no utterance end symbol has been encountered</comment>
+		<forbidden>No utterance end symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<comment>An error has occured</comment>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnParsedSuccessfully">
+		<comment>Turn has been parsed successfully</comment>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

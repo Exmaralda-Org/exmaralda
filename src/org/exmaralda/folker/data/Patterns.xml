@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <!-- changes on 04-02-2009: -->
+    <!-- symbol for clitics is now _ instead of + -->
+    <!-- symbol for alternative is now / instaed of | -->
+    <!-- symbol for breathe is now ° instead of _ -->
+    <!-- symbol for unintelligible is now + instead of * -->
+    <!-- changes on 06-03-2009: -->
+    <!-- category 'unintelligible' removed, unintelligible passages are now special words -->
+    <!-- added check for following space symbol in breathe -->
+    <!-- additions on 14-12-2010: -->
+    <!-- new patterns for basic transcript -->
+    <!-- addition 31-05-2011 : -->
+    <!-- pattern for comment inside basic transcript -->
+    <!-- change 04-12-2012 : -->
+    <!-- language codes (for alphabets) -->
+    <level level="2" name="minimaltranskription">
+        <pattern name="ALPHABET_LETTERS_SMALL">
+            <regex>[a-zäöüß]</regex>
+            <comment>any lower case letters from the German alphabet</comment>                
+            <language name="ger">
+                <regex>[a-zäöüß]</regex>
+                <comment>any lower case letters from the German alphabet</comment>                
+            </language>
+            <language name="GER">
+                <regex>[a-zäöüßA-ZÄÖÜ]</regex>
+                <comment>any lower or upper case letters from the German alphabet</comment>                
+            </language>
+            <language name="eng">
+                <regex>[a-z']</regex>
+                <comment>any lower case letters from the English alphabet</comment>                
+            </language>
+            <language name="fre">
+                <regex>[a-zàâçéèêëîïôœùûüÿ'-]</regex>
+                <comment>any lower case letters from the French alphabet</comment>                
+            </language>
+            <language name="por">
+                <regex>[a-zàâãçéêíóôõú]</regex>
+                <comment>any lower case letters from the Portuguese alphabet</comment>                
+            </language>            
+            <language name="hun">
+                <regex>[a-záéíőöóüűú]</regex>
+                <comment>any lower case letters from the Hungarian alphabet</comment>                
+            </language>            
+            <language name="tur">
+                <regex>[a-zçğıöşü]</regex>
+                <comment>any lower case letters from the Turkish alphabet</comment>                
+            </language>
+            <language name="dan">
+                <regex>[a-zæøå]</regex>
+                <comment>any lower case letters from the Danish alphabet</comment>                
+            </language>
+            <language name="spa">
+                <regex>[a-záéíóúëüñ]</regex>
+                <comment>any lower case letters from the Spanish alphabet</comment>                
+            </language>
+            <language name="ita">
+                <regex>[a-zàèéìíîòóùú']</regex>
+                <comment>any lower case letters from the Italian alphabet</comment>                
+            </language>         
+            <language name="cze">
+                <regex>[aábcčdďeéěfghchiíjklmnňoópqpqrřsštťuúůvwxyýzž]</regex>
+                <comment>any lower case letters from the Czech alphabet</comment>
+            </language>        
+            <language name="rus_trans">
+                <regex>[abvgdeëžzijklmnoprstufhcčščyė"']</regex>
+                <comment>characters for Latin transliteration of Russian</comment>
+            </language>                                        
+            <language name="universal">
+                <regex>[\p{javaLowerCase}']</regex>
+                <comment>any lower case letters from any alphabet</comment>                
+            </language>
+        </pattern>
+        <pattern name="GAT_WORD">
+            <!-- changed on 04-02-2009 -->
+            <!-- changed on 06-03-2009 -->
+            <!-- <regex>[a-zäöüß]++(?!°)</regex> -->
+            <regex>(<pattern-ref ref="ALPHABET_LETTERS_SMALL"/>++(?!°)|(\+{3}+)++)</regex>
+            <comment>any sequence of lower case letters (not followed by degree sign) from the German alphabet or (change!) any sequence of +++</comment>
+        </pattern>
+        <pattern name="GAT_NON_PHO">
+            <regex>\({2}+[^\(-\.\d][^\)]*\){2}+</regex>
+            <comment>two opening round brackets / followed by an arbitrary string which does not start with a round bracket, a dash, a period or a digit / followed by two closing round brackets</comment>
+        </pattern>
+        <pattern name="GAT_UNTIMED_PAUSE">            
+            <regex>\((-{1,3}|\.)\)</regex>
+            <comment>a period or one to three dashes between a pair of round brackets</comment>
+        </pattern>
+        <pattern name="GAT_TIMED_PAUSE">
+            <regex>\(\d{1,2}\.\d{1,2}\)</regex>
+            <comment>an opening round bracket / followed by one or two digits / followed by a decimal point / followed by one or two digits / followed by a closing round bracket</comment>
+        </pattern>
+        <pattern name="GAT_PAUSE">
+            <regex>(<pattern-ref ref="GAT_UNTIMED_PAUSE"/>|<pattern-ref ref="GAT_TIMED_PAUSE"/>)</regex>
+        </pattern>
+        <pattern name="GAT_BREATHE">
+            <!-- changed on 04-02-2009 -->
+            <!-- changed on 06-03-2009 -->
+            <!-- <regex>(°h{1,3}+|h{1,3}+°)</regex> -->
+            <regex>(°h{1,3}+|h{1,3}+°)(?= )</regex>
+            <comment>One to three h, either preceded or followed by a degree sign, followed by a space</comment>
+        </pattern>
+        <pattern name="GAT_ASSIMILATION">
+            <!-- changed on 04-02-2009 -->
+            <regex>_</regex>
+            <comment>the underscore</comment>
+        </pattern>
+        <pattern name="GAT_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="GAT_WORDBOUNDARY">
+            <regex>(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_ASSIMILATION"/>)</regex>
+            <comment>either the assimilation or the space symbol</comment>
+        </pattern>
+        <pattern name="GAT_WORDCHAIN">
+            <regex><pattern-ref ref="GAT_WORD"/>(<pattern-ref ref="GAT_WORDBOUNDARY"/><pattern-ref ref="GAT_WORD"/>)*+</regex>
+        </pattern>
+        <pattern name="GAT_ASSIMILATED_WORDS">
+            <regex><pattern-ref ref="GAT_WORD"/>(<pattern-ref ref="GAT_ASSIMILATION"/><pattern-ref ref="GAT_WORD"/>)++</regex>
+        </pattern>
+        <pattern name="GAT_ALTERNATIVE">
+            <!-- changed on 04-02-2009 -->
+            <regex>/<pattern-ref ref="GAT_WORDCHAIN"/></regex>
+        </pattern>
+        <pattern name="GAT_UNCERTAIN">
+            <regex>\(<pattern-ref ref="GAT_WORDCHAIN"/>(<pattern-ref ref="GAT_ALTERNATIVE"/>)*+\)</regex>
+        </pattern>
+        <!-- removed on 06-03-2009 -->
+        <!-- <pattern name="GAT_UNINTELLIGIBLE"> -->
+            <!-- changed on 04-02-2009 -->
+            <!-- <regex>(\+{3}+)++</regex> -->
+        <!-- </pattern> -->
+        <pattern name="GAT_ELEMENT">
+            <!-- changed on 06-03-2009 -->
+            <!-- <regex>(<pattern-ref ref="GAT_UNCERTAIN"/>|<pattern-ref ref="GAT_WORD"/>|<pattern-ref ref="GAT_UNINTELLIGIBLE"/>|<pattern-ref ref="GAT_ASSIMILATED_WORDS"/>|<pattern-ref ref="GAT_NON_PHO"/>|<pattern-ref ref="GAT_PAUSE"/>|<pattern-ref ref="GAT_BREATHE"/>)</regex> -->
+            <regex>(<pattern-ref ref="GAT_UNCERTAIN"/>|<pattern-ref ref="GAT_WORD"/>|<pattern-ref ref="GAT_ASSIMILATED_WORDS"/>|<pattern-ref ref="GAT_NON_PHO"/>|<pattern-ref ref="GAT_PAUSE"/>|<pattern-ref ref="GAT_BREATHE"/>)</regex>
+        </pattern>
+        <pattern name="GAT_EVENT">
+            <regex><pattern-ref ref="GAT_ASSIMILATION"/>?(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>))*+<pattern-ref ref="GAT_ELEMENT"/>?<pattern-ref ref="GAT_SPACE"/>?</regex>
+        </pattern>
+        <pattern name="GAT_CONTRIBUTION">
+            <regex>(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>))*+<pattern-ref ref="GAT_ELEMENT"/>?<pattern-ref ref="GAT_SPACE"/>?</regex>
+        </pattern>
+    </level>
+
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+    <!-- ******************************** -->
+
+    <level level="3" name="basistranskription">
+
+        <!-- ******************************** -->
+        <!-- These patterns are the same as in the minimal transcript -->
+        <pattern name="GAT_NON_PHO">
+            <regex>\({2}+[^\(-\.\d][^\)]*\){2}+</regex>
+            <comment>two opening round brackets / followed by an arbitrary string which does not start with a round bracket, a dash, a period or a digit / followed by two closing round brackets</comment>
+        </pattern>
+        <pattern name="GAT_UNTIMED_PAUSE">
+            <regex>\((-{1,3}|\.)\)</regex>
+            <comment>a period or one to three dashes between a pair of round brackets</comment>
+        </pattern>
+        <pattern name="GAT_TIMED_PAUSE">
+            <regex>\(\d{1,2}\.\d{1,2}\)</regex>
+            <comment>an opening round bracket / followed by one or two digits / followed by a decimal point / followed by one or two digits / followed by a closing round bracket</comment>
+        </pattern>
+        <pattern name="GAT_PAUSE">
+            <regex>(<pattern-ref ref="GAT_UNTIMED_PAUSE"/>|<pattern-ref ref="GAT_TIMED_PAUSE"/>)</regex>
+        </pattern>
+        <pattern name="GAT_ASSIMILATION">
+            <regex>_</regex>
+            <comment>the underscore</comment>
+        </pattern>
+        <pattern name="GAT_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="GAT_WORDBOUNDARY">
+            <regex>(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_ASSIMILATION"/>)</regex>
+            <comment>either the assimilation or the space symbol</comment>
+        </pattern>
+        <!-- end same patterns -->
+        <!-- the breathe pattern is slightly different: it also contains a lookahead for a non-specified phrase boundary (pipe symbol) -->
+        <pattern name="GAT_BREATHE">
+            <regex>(°h{1,3}+|h{1,3}+°)(?=( |\|))</regex>
+            <comment>One to three h, either preceded or followed by a degree sign, followed by a space</comment>
+        </pattern>
+        <!-- ******************************** -->
+        <!-- <<lachend> soo > -->
+        <!-- <<sich erhebend> aber du hast es> so gesagt -->
+
+        <!-- added 31-05-2011 -->
+        <pattern name="GAT_COMMENT_START">
+            <regex>&lt;&lt;[^&lt;&gt;]++&gt;</regex>
+            <!-- <regex>&lt;&lt;[A-Za-zÄÖÜäöü, ]+&gt;</regex> -->
+            <comment>two opening angle brackets, followed by any sequence of alphabet letters, a comma or a space, followed by one closing angle bracket</comment>
+        </pattern>
+
+        <pattern name="GAT_COMMENT_END">
+            <regex>&gt;</regex>
+            <comment>a closing angle bracket</comment>
+        </pattern>
+
+        <pattern name="GAT_COMMENT_START_ESCAPED">
+            <regex>&#x2329;&#x2329;[^&#x2329;&#x232A;]++&#x232A;</regex>
+            <!-- <regex>&#x2329;&#x2329;[A-Za-zÄÖÜäöü, ]+&#x232A;</regex> -->
+            <comment>modifed version with escaped angle brackets to enable clean XML parsing</comment>
+        </pattern>
+
+        <pattern name="GAT_COMMENT_END_ESCAPED">
+            <regex>&#x232A;</regex>
+            <comment>modifed version with escaped angle brackets to enable clean XML parsing</comment>
+        </pattern>
+
+        <!-- ******************************** -->
+        <!-- These patterns define possible word forms -->
+        <!-- In contrast to the minimal transcript, words in the basic transcript can also contain capital letters and/or colons -->
+        <!-- three possible syllable types -->
+        <pattern name="ALPHABET_LETTERS_SMALL">
+            <regex>[a-zäöüß\u0294]</regex>
+            <comment>any lower case letters from the German alphabet</comment>                
+            <language name="ger">
+                <regex>[a-zäöüß\u0294]</regex>
+                <comment>any lower case letters from the German alphabet</comment>                
+            </language>
+            <language name="GER">
+                <regex>[a-zäöüß\u0294]</regex>
+                <comment>any lower case letters from the German alphabet</comment>                
+            </language>
+            <language name="eng">
+                <regex>[a-z']</regex>
+                <comment>any lower case letters from the English alphabet</comment>                
+            </language>
+            <language name="fre">
+                <regex>[a-zàâçéèêëîïôœùûüÿ]</regex>
+                <comment>any lower case letters from the French alphabet</comment>                
+            </language>
+            <language name="por">
+                <regex>[a-zàâãçéêíóôõú]</regex>
+                <comment>any lower case letters from the Portuguese alphabet</comment>                
+            </language>            
+            <language name="hun">
+                <regex>[a-záéíőöóüűú]</regex>
+                <comment>any lower case letters from the Hungarian alphabet</comment>                
+            </language>            
+            <language name="tur">
+                <regex>[a-zçğıöşü]</regex>
+                <comment>any lower case letters from the Turkish alphabet</comment>                
+            </language>
+            <language name="dan">
+                <regex>[a-zæøå]</regex>
+                <comment>any lower case letters from the Danish alphabet</comment>                
+            </language>     
+            <language name="spa">
+                <regex>[a-záéíóúëüñ]</regex>
+                <comment>any lower case letters from the Spanish alphabet</comment>                
+            </language>                  
+            <language name="ita">
+                <regex>[a-zàèéìíîòóùú']</regex>
+                <comment>any lower case letters from the Italian alphabet</comment>                
+            </language>            
+            <language name="cze">
+                <regex>[aábcčdďeéěfghchiíjklmnňoópqpqrřsštťuúůvwxyýzž]</regex>
+                <comment>any lower case letters from the Czech alphabet</comment>
+            </language>      
+            <language name="rus_trans">
+                <regex>[abvgdeëžzijklmnoprstufhcščyė"']</regex>
+                <comment>characters for Latin transliteration of Russian</comment>
+            </language>                                                                                                                                           
+            <language name="universal">
+                <regex>[\p{javaLowerCase}']</regex>
+                <comment>any lower case letters from any alphabet</comment>                
+            </language>
+        </pattern>
+        <pattern name="ALPHABET_LETTERS_CAPITAL">
+            <regex>[A-ZÄÖÜ]</regex>
+            <comment>any upper case letters from the German alphabet</comment>                
+            <language name="ger">
+                <regex>[A-ZÄÖÜ]</regex>
+                <comment>any upper case letters from the German alphabet</comment>                
+            </language>
+            <language name="GER">
+                <regex>[A-ZÄÖÜ]</regex>
+                <comment>any upper case letters from the German alphabet</comment>                
+            </language>
+            <language name="eng">
+                <regex>[A-Z']</regex>
+                <comment>any upper case letters from the English alphabet</comment>                
+            </language>
+            <language name="fre">
+                <!-- <regex>[A-ZÀÂÇÉÈÊËÎÏÔŒÙÛÜŸ]</regex> -->
+                <regex>[A-ZÇŒ]</regex> -->
+                <comment>any upper case letters from the French alphabet</comment>                
+            </language>
+            <language name="por">
+                <regex>[a-zÇ]</regex>
+                <comment>any upper case letters from the Portuguese alphabet</comment>                
+            </language>            
+            <language name="hun">
+                <regex>[A-ZÖ]</regex>
+                <comment>any upper case letters from the Hungarian alphabet</comment>                
+            </language>            
+            <language name="tur">
+                <regex>[A-ZÇĞİÖŞÜ]</regex>
+                <comment>any upper case letters from the Turkish alphabet</comment>                
+            </language>
+            <language name="dan">
+                <regex>[A-ZÆØÅ]</regex>
+                <comment>any upper case letters from the Danish alphabet</comment>                
+            </language>    
+            <language name="spa">
+                <regex>[A-ZÁÉÍÓÚÑ]</regex>
+                <comment>any upper case letters from the Spanish alphabet</comment>                
+            </language>                                
+            <language name="ita">
+                <regex>[A-ZÀÈÉÌÍÎÒÓÙÚ']</regex>
+                <comment>any upper case letters from the Italian alphabet</comment>                
+            </language>     
+            <language name="cze">
+                <regex>[AÁBCČDĎEÉĚFGHCHIÍJKLMNŇOÓPQPQRŘSŠTŤUÚŮVWXYÝZŽ]</regex>
+                <comment>any upper case letters from the Czech alphabet</comment>
+            </language>   
+            <language name="rus_trans">
+                <regex>[ABVGDEËŽZIJKLMNOPRSTUFHCČŠYĖ]</regex>
+                <comment>capital characters for Latin transliteration of Russian</comment>
+            </language>                                                                                                                                                                                     
+            <language name="universal">
+                <regex>[\p{javaUpperCase}']</regex>
+                <comment>any upper case letters from any alphabet</comment>                
+            </language>
+        </pattern>
+        
+        <pattern name="GAT_LENGTHENING">
+            <regex>:{1,3}</regex>
+            <comment>One to three colons</comment>            
+        </pattern>
+
+        <pattern name="GAT_NO_ACCENT_SYLLABLE">
+            <!-- change 07-05-2012: allow glottal stop symbol -->
+            <regex><pattern-ref ref="ALPHABET_LETTERS_SMALL"/>(<pattern-ref ref="GAT_LENGTHENING"/>|<pattern-ref ref="ALPHABET_LETTERS_SMALL"/>)*+(?!°)</regex>
+            <comment>Any sequence of small letters, possibly interspersed with one to three colons, not followed by a degree sign</comment>
+        </pattern>
+        <pattern name="GAT_ACCENT_SYLLABLE">
+            <regex><pattern-ref ref="ALPHABET_LETTERS_CAPITAL"/>(<pattern-ref ref="GAT_LENGTHENING"/>|<pattern-ref ref="ALPHABET_LETTERS_CAPITAL"/>)*+</regex>
+            <comment>Any sequence of capital letters, possibly interspersed with one to three colons</comment>
+        </pattern>
+        <pattern name="GAT_STRONG_ACCENT_SYLLABLE">
+            <regex>!<pattern-ref ref="ALPHABET_LETTERS_CAPITAL"/>(<pattern-ref ref="GAT_LENGTHENING"/>|<pattern-ref ref="ALPHABET_LETTERS_CAPITAL"/>)*+!</regex>
+            <comment>Any sequence of capital letters, possibly interspersed with one to three colons, surrounded by exclamation points</comment>
+        </pattern>
+
+        <pattern name="GAT_WORD">
+            <regex>((<pattern-ref ref="GAT_NO_ACCENT_SYLLABLE"/>)*(<pattern-ref ref="GAT_NO_ACCENT_SYLLABLE"/>|<pattern-ref ref="GAT_ACCENT_SYLLABLE"/>|<pattern-ref ref="GAT_STRONG_ACCENT_SYLLABLE"/>)(<pattern-ref ref="GAT_NO_ACCENT_SYLLABLE"/>)*|(\+{3}+)++)</regex>
+            <comment>at least one accentuated or non-accentuated syllable preceded and followed by any number of non-accentuated syllables</comment>
+        </pattern>
+        <!-- end word forms -->
+        <!-- ******************************** -->
+
+        <!-- ******************************** -->
+        <!-- These are additional symbols representing -->
+        <!-- possible intonation phrase boundaries and transitions between intonation phrases -->
+        <pattern name="GAT_TONE_MOVEMENT">
+            <!--<regex>[\Q.;,–?\|\E]</regex> -->
+            <regex>[\.\;\,\u2013\?\|]</regex>
+            <comment>any of the five intonation phrase terminators, i.e. period, semicolon, comma, dash or question mark, or the pipe sign</comment>
+        </pattern>
+        <pattern name="GAT_LATCHING">
+            <regex>=</regex>
+            <comment>The equals sign</comment>
+        </pattern>
+        <!-- new 28-03-2012: allow simple end of input as phrase boundary -->
+        <pattern name="GAT_EMPTY_BOUNDARY">
+            <regex>(?&lt;!<pattern-ref ref="GAT_TONE_MOVEMENT"/>) $</regex>
+        </pattern>
+        <pattern name="GAT_PHRASE_BOUNDARY">
+            <!-- changed 28-03-2012: allow simple end of input as phrase boundary -->
+            <!-- changed 21-06-2012: allow dangling latching -->
+            <!-- <regex><pattern-ref ref="GAT_TONE_MOVEMENT"/>((<pattern-ref ref="GAT_LATCHING"/>(?=<pattern-ref ref="GAT_LATCHING"/>))|(<pattern-ref ref="GAT_SPACE"/>*+((?!<pattern-ref ref="GAT_LATCHING"/>)|$)))</regex> -->
+            <regex><pattern-ref ref="GAT_TONE_MOVEMENT"/>((<pattern-ref ref="GAT_LATCHING"/>($|(?=<pattern-ref ref="GAT_LATCHING"/>)))|(<pattern-ref ref="GAT_SPACE"/>*+((?!<pattern-ref ref="GAT_LATCHING"/>)|$)))</regex>
+            <comment>a tone movement symbol either followed by two latching symbols or by an arbitrary number of spaces,
+            followed by something different from a latching symbol or the end of the input</comment>
+        </pattern>
+        <pattern name="GAT_PSEUDO_PHRASE_BOUNDARY">
+            <!-- changed 21-06-2012: if followed by end of input, it is NOT a pseudo boundary -->
+            <!-- <regex><pattern-ref ref="GAT_TONE_MOVEMENT"/><pattern-ref ref="GAT_LATCHING"/>(?!<pattern-ref ref="GAT_LATCHING"/>)</regex> -->
+            <regex><pattern-ref ref="GAT_TONE_MOVEMENT"/><pattern-ref ref="GAT_LATCHING"/>(?!($|<pattern-ref ref="GAT_LATCHING"/>))</regex>
+        </pattern>
+        <!-- end additional symbols -->
+        <!-- ******************************** -->
+
+        <!-- ******************************** -->
+        <!-- word chains and uncertain/alternatives are identical to the minimal transcript -->
+        <!-- except for the additional word forms -->
+        <pattern name="GAT_WORDCHAIN">
+            <regex><pattern-ref ref="GAT_WORD"/>(<pattern-ref ref="GAT_WORDBOUNDARY"/><pattern-ref ref="GAT_WORD"/>)*+</regex>
+        </pattern>
+        <pattern name="GAT_ASSIMILATED_WORDS">
+            <regex><pattern-ref ref="GAT_WORD"/>(<pattern-ref ref="GAT_ASSIMILATION"/><pattern-ref ref="GAT_WORD"/>)++</regex>
+        </pattern>
+        <pattern name="GAT_ALTERNATIVE">
+            <regex>/<pattern-ref ref="GAT_WORDCHAIN"/></regex>
+        </pattern>
+        <pattern name="GAT_UNCERTAIN">
+            <regex>\(<pattern-ref ref="GAT_WORDCHAIN"/>(<pattern-ref ref="GAT_ALTERNATIVE"/>)*+\)</regex>
+        </pattern>
+        <!-- end word chains / uncertain / alternatives -->
+        <!-- ******************************** -->
+
+        <pattern name="GAT_ELEMENT">
+            <regex>(<pattern-ref ref="GAT_UNCERTAIN"/>|<pattern-ref ref="GAT_WORD"/>|<pattern-ref ref="GAT_ASSIMILATED_WORDS"/>|<pattern-ref ref="GAT_NON_PHO"/>|<pattern-ref ref="GAT_PAUSE"/>|<pattern-ref ref="GAT_BREATHE"/>|<pattern-ref ref="GAT_COMMENT_START"/>|<pattern-ref ref="GAT_COMMENT_END"/>)</regex>
+            <comment>any one of the basic building blocks</comment>
+        </pattern>
+        <pattern name="GAT_EVENT">
+            <regex>(<pattern-ref ref="GAT_ASSIMILATION"/>|<pattern-ref ref="GAT_LATCHING"/>)?(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_PSEUDO_PHRASE_BOUNDARY"/>))*+<pattern-ref ref="GAT_ELEMENT"/>?(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_PHRASE_BOUNDARY"/>|<pattern-ref ref="GAT_PSEUDO_PHRASE_BOUNDARY"/>)?</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="GAT_IU_NO_BOUNDARY">
+            <regex>(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_PSEUDO_PHRASE_BOUNDARY"/>))*+<pattern-ref ref="GAT_ELEMENT"/></regex>            
+        </pattern>
+        <pattern name="GAT_INTONATION_UNIT">
+            <!-- <regex>(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_PSEUDO_PHRASE_BOUNDARY"/>))*+<pattern-ref ref="GAT_ELEMENT"/><pattern-ref ref="GAT_PHRASE_BOUNDARY"/></regex> -->
+            <regex><pattern-ref ref="GAT_IU_NO_BOUNDARY"/><pattern-ref ref="GAT_PHRASE_BOUNDARY"/></regex>
+        </pattern>
+        <pattern name="GAT_CONTRIBUTION">
+            <!-- <regex><pattern-ref ref="GAT_INTONATION_UNIT"/>((<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_LATCHING"/>)?<pattern-ref ref="GAT_INTONATION_UNIT"/>)*</regex> -->
+            <!-- changed 05-01-2012: allow isolated breathing -->
+            <!-- changed 28-03-2012: allow intonation units without phrase boundaries -->
+            <!-- changed 20-06-2012: allow leading latching sign -->
+            <!-- <regex>(<pattern-ref ref="GAT_BREATHE"/>|<pattern-ref ref="GAT_INTONATION_UNIT"/>((<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_LATCHING"/>)?<pattern-ref ref="GAT_INTONATION_UNIT"/>)*)</regex> -->
+            <regex>(<pattern-ref ref="GAT_BREATHE"/>|<pattern-ref ref="GAT_LATCHING"/>?<pattern-ref ref="GAT_INTONATION_UNIT"/>((<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_LATCHING"/>)?<pattern-ref ref="GAT_INTONATION_UNIT"/>)*)</regex>
+        </pattern>
+        <pattern name="GAT_NO_SPEAKER_CONTRIBUTION">
+            <regex>(<pattern-ref ref="GAT_PAUSE"/>|<pattern-ref ref="GAT_NON_PHO"/>)<pattern-ref ref="GAT_SPACE"/>*</regex>
+        </pattern>
+
+    </level>
+
+
+</patterns>

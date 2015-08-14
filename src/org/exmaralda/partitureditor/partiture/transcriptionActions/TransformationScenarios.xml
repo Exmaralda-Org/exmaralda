@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation-scenarios>
+    
+    <transformation-scenario>
+        <name>HTML Column notation transcript</name>
+        <description>A visualisation of the basic transcription in column notation</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit></list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/BT2ColumnHTML.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+    <transformation-scenario>
+        <name>HTML Event list transcript</name>
+        <description>A visualisation of the basic transcription as a temporally ordered list of events</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit></list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/BT2EventListHTML.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+    <transformation-scenario>
+        <name>HTML Partitur</name>
+        <description>A visualisation of the basic transcription as a simple musical score</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit></list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/BT2PartiturHTML.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+    <transformation-scenario>
+        <name>HTML Utterance list (HIAT)</name>
+        <description>Temporally ordered list of utterances, output as HTML.</description>
+        <input type="list-transcription"/>
+        <segmentation type="HIAT"/>
+        <list-unit>HIAT:u</list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/ListBody2HTML.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+    <transformation-scenario>
+        <name>HTML Coloured Utterance list (HIAT)</name>
+        <description>Temporally ordered list of utterances, output as HTML with different colours for different utterance types.</description>
+        <input type="list-transcription"/>
+        <segmentation type="HIAT"/>
+        <list-unit>HIAT:u</list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/HIAT_ColoredUtteranceList.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+    <transformation-scenario>
+        <name>HTML Utterance list (CHAT)</name>
+        <description>Temporally ordered list of utterances, output as HTML.</description>
+        <input type="list-transcription"/>
+        <segmentation type="CHAT"/>
+        <list-unit>CHAT:u</list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/ListBody2HTML.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+    <transformation-scenario>
+        <name>HTML Segmented Transcirption</name>
+        <description>A HTML visualisation of the segmented transcription. Change the segmentation type as needed.</description>
+        <input type="segmented-transcription"/>
+        <segmentation type="HIAT"/>
+        <list-unit></list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/ST2HTML.xsl</stylesheet>
+        <output suffix="html"/>
+    </transformation-scenario>
+
+</transformation-scenarios>

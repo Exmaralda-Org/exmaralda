@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="International Phonetic Alphabet">
+	<key>
+		<content>&#x0250;</content>
+		<description>low central unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0251;</content>
+		<description>low back unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0252;</content>
+		<description>low back rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0253;</content>
+		<description>implosive bilabial stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0254;</content>
+		<description>lower-mid back rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0255;</content>
+		<description>voiceless alveolo-palatal laminal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0256;</content>
+		<description>voiced retroflex stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0257;</content>
+		<description>implosive dental or alveolar stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0258;</content>
+		<description>upper-mid central unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0259;</content>
+		<description>mid-central unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x025A;</content>
+		<description>rhotacized schwa</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x025B;</content>
+		<description>lower-mid front unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x025C;</content>
+		<description>lower-mid central unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x025D;</content>
+		<description>rhotacized lower-mid central vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x025E;</content>
+		<description>lower-mid central rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x025F;</content>
+		<description>voiced palatal stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0260;</content>
+		<description>implosive velar stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0261;</content>
+		<description>voiced velar stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0262;</content>
+		<description>voiced uvular stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0263;</content>
+		<description>voiced velar fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0264;</content>
+		<description>upper-mid back unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0265;</content>
+		<description>voiced rounded palatal approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0266;</content>
+		<description>breathy-voiced glottal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0267;</content>
+		<description>voiceless coarticulated velar and palatoalveolar fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0268;</content>
+		<description>high central unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0269;</content>
+		<description>semi-high front unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x026A;</content>
+		<description>semi-high front unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x026B;</content>
+		<description>velarized voiced alveolar lateral approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x026C;</content>
+		<description>voiceless alveolar lateral fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x026D;</content>
+		<description>voiced retroflex lateral</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x026E;</content>
+		<description>voiced lateral fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x026F;</content>
+		<description>high back unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0270;</content>
+		<description>voiced velar approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0271;</content>
+		<description>voiced labiodental nasal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0272;</content>
+		<description>voiced palatal nasal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0273;</content>
+		<description>voiced retroflex nasal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0274;</content>
+		<description>voiced uvular nasal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x014B;</content>
+		<description>velar nasal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0275;</content>
+		<description>rounded mid-central vowel, i.e. rounded schwa</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0276;</content>
+		<description>low front rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0277;</content>
+		<description>semi-high back rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0278;</content>
+		<description>voiceless bilabial fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0279;</content>
+		<description>voiced alveolar approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x027A;</content>
+		<description>voiced lateral flap</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x027B;</content>
+		<description>voiced retroflex approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x027C;</content>
+		<description>voiced strident apico-alveolar trill</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x027D;</content>
+		<description>voiced retroflex flap</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x027E;</content>
+		<description>voiced alveolar flap or tap</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x027F;</content>
+		<description>apical dental vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0280;</content>
+		<description>voiced uvular trill</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0281;</content>
+		<description>voiced uvular fricative or approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x03C7;</content>
+		<description>voiceless uvular fricative or approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0282;</content>
+		<description>voiceless retroflex fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0283;</content>
+		<description>voiceless postalveolar fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0284;</content>
+		<description>implosive palatal stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0285;</content>
+		<description>apical retroflex vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0286;</content>
+		<description>palatalized voiceless postalveolar fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0287;</content>
+		<description>dental click</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0288;</content>
+		<description>voiceless retroflex stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0289;</content>
+		<description>high central unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x028A;</content>
+		<description>semi-high back unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x028B;</content>
+		<description>voiced labiodental approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x028C;</content>
+		<description>lower-mid back unrounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x028D;</content>
+		<description>voiceless rounded labiovelar approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x028E;</content>
+		<description>voiced lateral approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x028F;</content>
+		<description>semi-high front rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0290;</content>
+		<description>voiced retroflex fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0291;</content>
+		<description>voiced alveolo-palatal laminal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0292;</content>
+		<description>voiced postalveolar fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0293;</content>
+		<description>palatalized voiced postalveolar fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0294;</content>
+		<description>glottal stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0295;</content>
+		<description>voiced pharyngeal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0296;</content>
+		<description>lateral click</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0297;</content>
+		<description>palatal (or alveolar) click</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0298;</content>
+		<description>bilabial click</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0299;</content>
+		<description>bilabial trill</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x029A;</content>
+		<description>lower-mid front rounded vowel</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x029B;</content>
+		<description>voiced uvular implosive</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x029C;</content>
+		<description>voiceless epiglottal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x029D;</content>
+		<description>voiced palatal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E7;</content>
+		<description>voiceless palatal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x029E;</content>
+		<description>(proposed for) velar click</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x029F;</content>
+		<description>velar lateral approximant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A0;</content>
+		<description>voiceless uvular implosive</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A1;</content>
+		<description>voiced epiglottal stop</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A2;</content>
+		<description>voiced epiglottal fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A3;</content>
+		<description>voiced dental affricate</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A4;</content>
+		<description>voiced postalveolar affricate</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A5;</content>
+		<description>voiced alveolo-palatal affricate</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A6;</content>
+		<description>voiceless dental affricate</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A7;</content>
+		<description>voiceless postalveolar affricate</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02A8;</content>
+		<description>voiceless alveolo-palatal affricate</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- following characters added for SiN - 09-11-2009 -->
+    <key>
+		<content>&#x03B8;</content>
+		<description>voiceless dental fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x00F0;</content>
+		<description>voiced dental fricative</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <!-- Diacritics for SiN - 09-11-2009 -->
+    <key>
+		<content>&#x0325;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x02B0;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x0303;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x0329;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x032F;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x0311;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x0324;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x035C;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x0361;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>&#x02D1;</content>
+		<description>diacritic</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- last five IPA characters not supported by Arial Unicode Ms
+	<key>
+		<content>&#x02A9;</content>
+		<description>02A9</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02AA;</content>
+		<description>02AA</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02AB;</content>
+		<description>02AB</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02AC;</content>
+		<description>02AC</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02AD;</content>
+		<description>02AD</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>-->
+</unicode-keyboard>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules><rule><match field="n">(abends|abermals|abwärts|allemal|allenfalls|allerdings|allzu|alsbald|alsdann|anderenfalls|anderenteils|andererseits|andernfalls|andernteils|anders|anfangs|anschließend|ansonsten|aufwärts|außen|außerdem|bald|beieinander|beinahe|beispielsweise|beizeiten|bekanntlich|bereits|besonders|bestens|bestenfalls|bisher|dabei|dadurch|dafür|dagegen|daher|dahingegen|dahinter|damals|danach|dann|daran|dran|darauf|drauf|darauffolgend|daraufhin|daraus|drin|darin|drob|darob|drüber|darüber|drum|darum|drunter|darunter|davon|davor|dementgegen|demgegenüber|demnach|demnächst|demzufolge|derart|dereinst|desgleichen|dort|dorther|dorthin|draußen|drin|drob|drüben|drüber|drunter|durchaus|ebenfalls|ebenso|ehedem|ehemals|eher|eilends|einerseits|einigermaßen|einst|einstmals|ersatzweise|fast|folglich|fortan|freilich|früher|gegebenenfalls|genauso|gestern|gleichfalls|glücklicherweise|günstigenfalls|her|heraus|herein|hernach|herum|herunter|heute|heutzutage|hier|hieran|hierauf|hieraus|hierbei|hierdurch|hierein|hierfür|hiergegen|hierher|hierhin|hierhinab|hierhinauf|hierhinaus|hierhinein|hierhinter|hierhinüber|hierin|hiermit|hiernach|hierneben|hierüber|hierum|hierunter|hiervon|hiervor|hierzu|hierzulande|hierzwischen|hin|hinten|hinwieder|hinwiederum|höchstens|hoffentlich|infolgedessen|innen|inzwischen|irgendwann|irgendwie|irgendwo|jedenfalls|jedoch|jemals|kaum|keinesfalls|kopfüber|lediglich|mehrmals|meist|meistens|minder|mindestens|miteinander|mithin|mittags|mittlerweile|möglicherweise|morgen|morgens|nacheinander|nachher|nächstens|nachts|nebenbei|nebeneinander|nebenher|neulich|nie|niemals|nirgends|notfalls|nötigenfalls|nunmehr|oben|obendrein|oft|öfters|ohnedies|ohnehin|ringsum|ringsumher|rückwärts|rundum|schlimmstenfalls|schwerlich|seinerzeit|seither|sicherlich|sodann|soeben|sofort|sogleich|somit|sonst|sowieso|stattdessen|stets|tagsüber|überall|überallhin|überaus|überdies|übermorgen|übrigens|umsonst|ungestraft|unglücklicherweise|unten|unterdessen|untereinander|unterwegs|vergebens|vielleicht|vielmals|vordem|vorgestern|vorhin|vormals|vorn|vorne|warum|weg|weitaus|weiter|weiterhin|weiters|wenigstens|wieder|wiederum|wobei|wodurch|wofür|wogegen|wohinter|wohlgemerkt|womit|wonach|woneben|woran|worauf|woraufhin|woraus|worein|worin|worüber|worum|worunter|wovon|wovor|wozu|wozwischen|zeitlebens|zeitweise|zudem|zuerst|zugleich|zuguterletzt|zuletzt|zusammen|zuvor|zuweilen|zwar|zwischendurch)</match><set field="pos">ADV</set></rule><rule><match field="n">(als|desto|je|umso)</match><set field="pos">KOKOM</set></rule><rule><match field="n">(außer|beziehungsweise|entweder|oder|sondern|sowohl|und|weder)</match><set field="pos">KON</set></rule><rule><match field="n">(bevor|dass|ehe|falls|nachdem|ob|obgleich|obschon|obwohl|obzwar|sobald|sodass|sofern|sooft|soviel|sovielmal|soweit|wenngleich|wennzwar|wohingegen)</match><set field="pos">KOUS</set></rule><rule><match field="n">(ächz|brumm|gähn|glitsch|heul|knirsch|knurr|kotz|kreisch|lol|rofl|schlurp|schnarch|schnaub|seufz|staun|stöhn|dröhn|würg)</match><set field="pos">NGAKW</set></rule><rule><match field="n">(äh)</match><set field="pos">NGHES</set></rule><rule><match field="n">(jawohl|nein|hm|hmhm|m-m|ach|achdujemine|ächz|adieu|ah|aha|ahoi|äks|alaaf|alleluja|ätsch|au|aua|autsch|auweh|auweia|bah|bäh|basta|bingo|boah|bravo|brr|buh|ciao|cool|danke|dujemine|ei|eiderdaus|eieiei|ey|feurio|fresse|ha|hä|hach|haha|hahaha|halleluja|hallo|har|harhar|hatschi|hauruck|he|heda|hei|heisa|heißa|helau|herrje|heureka|hey|hi|hihi|hm|hoi|holla|holüber|hoppla|hops|hopsasa|hossa|hott|howdy|hu|hü|hüa|huch|huhu|hui|hurra|i|ia|iah|igitt|igittigittigitt|ih|inshallah|iwo|jaj|jesses|jippi|jippijayeah|jö|juchhe|juchu|juhu|kapische|kapischo|knorke|kuckuck|lala|leckomio|manometer|maschallah|maseltov|menno|mhm|miez-miez|mmmh|moin|muh|na|naja|nanu|nebbich|nu|o|oh|oha|ohja|oho|oi|oje|ojemine|okay|olala|pah|päh|papperlapapp|pardauz|pfui|potz|potzblitz|potztausend|prosit|prost|pscht|psst|pst|puh|sa|sapperlot|scheiße|schubidu|schwuppdiwupp|sers|servus|sorry|soso|tandaradei|tja|toitoi|toitoitoi|tschakka|tschau|tschüs|tschüss|tschüssikowski|uff|uh|ui|ups|voilŕ|weh|weidmannsheil|willkommen|wow|zack)</match><set field="pos">NGIRR</set></rule><rule><match field="n">(blubb|boing|bum|bumbum|gak|hicks|kikeriki|klack|klingeling|klirr|knack|knacks|mäh|miau|möh|muh|oink|paff|peng|piep|pieps|piff|platsch|plumps|quak|quiek|quietsch|rumms|schnipp|schwippschwapp|schwupp|tapp|tatütata|ticktack|tsching|wau|wuff|wumm|wums|wusch)</match><set field="pos">NGONO</set></rule><rule><match field="n">(halt)</match><set field="pos">PTKMA</set></rule><rule><match field="n">(wa|woll|ne|gell)</match><set field="pos">SEQU</set></rule>
+    <rule>
+        <!-- normalisierte Formen, die als unvollständig gekennzeichnet sind -->
+        <match field="n">[A-ZÄÖÜa-zäöüß]*\%</match>
+        <set field="pos">AB</set>
+    </rule>
+    <rule>
+        <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
+        <match field="n">&amp;</match>
+        <set field="pos">XY</set>
+    </rule>
+    <rule>
+        <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
+        <match field="n">&amp;</match>
+        <set field="lemma">&amp;</set>
+    </rule>
+    <rule>
+        <!-- Unverständliches -->
+        <match field="word">(\+\+\+)+</match>
+        <set field="pos">XY</set>
+    </rule>
+    <rule>
+        <!-- ITJ wird zu SIEITJ -->
+        <match field="pos">ITJ</match>
+        <set field="pos">NGIRR</set>
+    </rule>
+    <rule>
+        <!-- PTKANT wird zu SIERSP -->
+        <match field="pos">PTKANT</match>
+        <set field="pos">NGIRR</set>
+    </rule>
+    <rule>
+        <!-- PAV wird zu ADV -->
+        <match field="pos">PAV</match>
+        <set field="pos">ADV</set>
+    </rule>
+    <rule>
+        <!-- weißt darf nicht zu weißen lemmatisiert werden -->
+        <match field="lemma">weißen</match>
+        <set field="lemma">wissen</set>
+    </rule>    
+    <rule>
+        <!-- gell darf nicht zu gellen lemmatisiert werden -->
+        <match field="n">gell</match>
+        <set field="lemma">gell</set>
+    </rule>    
+    <rule>
+        <!-- gell darf nicht zu gellen lemmatisiert werden -->
+        <match field="n">gell</match>
+        <set field="pos">SEQU</set>
+    </rule>    
+    <rule>
+        <!-- okay darf nicht zu Okay lemmatisiert werden -->
+        <match field="n">okay</match>
+        <set field="lemma">okay</set>
+    </rule>    
+    <rule>
+        <!-- okay darf nicht zu Okay lemmatisiert werden -->
+        <match field="n">okay</match>
+        <set field="pos">NGIRR</set>
+    </rule>    
+    <rule>
+        <!-- grad muss zu gerade lemmatisiert werden -->
+        <match field="n">grad</match>
+        <set field="lemma">gerade</set>
+    </rule>    
+    <rule>
+        <!-- grad muss zu gerade lemmatisiert werden -->
+        <match field="n">grad</match>
+        <set field="pos">ADV</set>
+    </rule>    
+    <rule>
+        <!-- großgeschriebene Anredeformen müssen großgeschrieben lemmatisiert werden -->
+        <match field="n">(Euch|Eure|Euer|Euren|Eurem)</match>
+        <set field="lemma">Ihr</set>
+    </rule>    
+    <rule>
+        <!-- großgeschriebene Anredeformen müssen großgeschrieben lemmatisiert werden -->
+        <match field="n">(Sie|Ihnen)</match>
+        <set field="lemma">Sie</set>
+    </rule>    
+    <rule>
+        <!-- großgeschriebene Anredeformen müssen großgeschrieben lemmatisiert werden -->
+        <match field="lemma">Ihr\|ihr</match>
+        <set field="lemma">Sie</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">denken\|gedenken</match>
+        <set field="lemma">denken</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">zeihen\|ziehen</match>
+        <set field="lemma">ziehen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">fallen\|fällen</match>
+        <set field="lemma">fallen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Stunde\|Stunden</match>
+        <set field="lemma">Stunde</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Text\|Texten</match>
+        <set field="lemma">Text</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">treffen\|triefen</match>
+        <set field="lemma">treffen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Zündfunke\|Zündfunken</match>
+        <set field="lemma">Zündfunke</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Kaste\|Kasten</match>
+        <set field="lemma">Kasten</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Grund\|Gründen</match>
+        <set field="lemma">Grund</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Stelle\|Stellen</match>
+        <set field="lemma">Stelle</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Regel\|Regeln</match>
+        <set field="lemma">Regel</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Typ\|Type\|Typus</match>
+        <set field="lemma">Typ</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Weste\|Westen</match>
+        <set field="lemma">Westen</set>
+    </rule>    
+    <rule>
+        <!-- Fehler im Lemmatisieren -->
+        <match field="lemma">Mitagesse</match>
+        <set field="lemma">Mittagessen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Lese\|Lesen</match>
+        <set field="lemma">Lesen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Laut\|Laute</match>
+        <set field="lemma">Laut</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">messen\|missen</match>
+        <set field="lemma">messen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Antwort\|Antworten</match>
+        <set field="lemma">Antwort</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">durchfahren\|durchführen</match>
+        <set field="lemma">durchführen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Sorge\|Sorgen</match>
+        <set field="lemma">Sorge</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">bieten\|gebieten</match>
+        <set field="lemma">bieten</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Spiel\|Spielen</match>
+        <set field="lemma">Spielen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">gestehen\|stehen</match>
+        <set field="lemma">stehen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Eiche\|Eichen</match>
+        <set field="lemma">Eiche</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Fach\|Fächer</match>
+        <set field="lemma">Fach</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">kosen\|kosten</match>
+        <set field="lemma">kosten</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">schalen\|schalten</match>
+        <set field="lemma">schalen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Spule\|Spulen</match>
+        <set field="lemma">Spule</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Stimme\|Stimmen</match>
+        <set field="lemma">Stimme</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Nerv\|Nerven</match>
+        <set field="lemma">Nerv</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Seife\|Seifen</match>
+        <set field="lemma">Seife</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Bett\|Betten</match>
+        <set field="lemma">Bett</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">brauchen\|gebrauchen</match>
+        <set field="lemma">brauchen</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Fall\|Fällen</match>
+        <set field="lemma">Fall</set>
+    </rule>    
+    <rule>
+        <!-- eine Form reicht -->
+        <match field="lemma">Weihnacht\|Weihnachten</match>
+        <set field="lemma">Weihnacht</set>
+    </rule>    
+    <rule>
+        <!-- Alternativform ist sehr selten -->
+        <match field="lemma">Lein\|Leine</match>
+        <set field="lemma">Leine</set>
+    </rule>    
+    <rule>
+        <!-- laß muss zu lassen lemmatisiert werden -->
+        <match field="lemma">laß</match>
+        <set field="lemma">lassen</set>
+    </rule>    
+    <rule>
+        <!-- laß muss zu lassen lemmatisiert werden -->
+        <match field="lemma">einverstehen</match>
+        <set field="lemma">einverstanden</set>
+    </rule>    
+    <rule>
+        <!-- gradeaus muss zu geradeaus lemmatisiert werden -->
+        <match field="n">gradeaus</match>
+        <set field="lemma">geradeaus</set>
+    </rule>    
+    <rule>
+        <!-- draus muss zu daraus lemmatisiert werden -->
+        <match field="n">draus</match>
+        <set field="lemma">daraus</set>
+    </rule>    
+    <rule>
+        <!-- zeichnest muss zu zeichnen lemmatisiert werden -->
+        <match field="n">zeichnest</match>
+        <set field="lemma">zeichnen</set>
+    </rule>    
+</rules>

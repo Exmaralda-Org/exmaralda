@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEIDEUILanguages>
+	<LanguageNames>
+		<language name="Deutsch" created="14.02.2005" code="deu"/>
+		<language name="English" created="14.02.2005" code="eng"/>
+	</LanguageNames>
+
+	<uiItems>
+	<!-- commands -->
+		<uiItem name="command.copyResultToClipboard" lang="deu" value="In Zwischenablage kopieren"/>
+		<uiItem name="command.copyResultToClipboard" lang="eng" value="copy to clipboard"/>
+		<uiItem name="command.saveResult" lang="deu" value="speichern"/>
+		<uiItem name="command.saveResult" lang="eng" value="save result"/>
+		<uiItem name="command.refreshResult" lang="deu" value="aktualisieren"/>
+		<uiItem name="command.refreshResult" lang="eng" value="refresh"/>
+		<uiItem name="command.publishCorpus" lang="deu" value="Korpus veröffentlichen"/>
+		<uiItem name="command.publishCorpus" lang="eng" value="publish corpus"/>
+		<uiItem name="command.close" lang="deu" value="schliessen"/>
+		<uiItem name="command.close" lang="eng" value="close"/>
+
+
+	<!-- ui static -->
+		<uiItem name="title.transformedResult" lang="deu" value="Transformationsergebnis"/>
+		<uiItem name="title.transformedResult" lang="eng" value="transformed result"/>
+		<uiItem name="title.stylesheets" lang="deu" value="Stylesheets"/>
+		<uiItem name="title.stylesheets" lang="eng" value="stylesheets"/>
+		<uiItem name="title.showfiles" lang="deu" value="Dateien anzeigen:"/>
+		<uiItem name="title.showfiles" lang="eng" value="show files:"/>
+
+		<uiItem name="message.selectMiniStylesheet" lang="deu" value="Beschreibungs-Stylesheet auswählen (optional)"/>
+		<uiItem name="message.selectMiniStylesheet" lang="eng" value="select description-stylesheet (optional)"/>
+
+
+		<uiItem name="menu.file" lang="deu" value="Datei"/>
+		<uiItem name="menu.file" lang="eng" value="File"/>
+		<uiItem name="menu.edit" lang="deu" value="Bearbeiten"/>
+		<uiItem name="menu.edit" lang="eng" value="Edit"/>
+		<uiItem name="menu.tools" lang="deu" value="Werkzeuge"/>
+		<uiItem name="menu.tools" lang="eng" value="Tools"/>
+		
+		<uiItem name="status.countingFiles" lang="deu" value="Bestimme infragekommende Dateien..."/>
+		<uiItem name="status.countingFiles" lang="eng" value="crawling files..."/>
+
+		<uiItem name="status.transforming" lang="deu" value="Transformiere Dateien..."/>
+		<uiItem name="status.transforming" lang="eng" value="transforming files..."/>
+
+		<uiItem name="status.writingIndex" lang="deu" value="Schreibe Index..."/>
+		<uiItem name="status.writingIndex" lang="eng" value="writing index..."/>
+
+	</uiItems>
+</TEIDEUILanguages>

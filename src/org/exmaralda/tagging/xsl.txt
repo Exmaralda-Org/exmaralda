@@ -1,0 +1,7 @@
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\Evaluate.xsl
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\Evaluate_By_Corrected_Tag.xsl
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\Evaluate_By_Tag.xsl
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\Evaluate_Lemma.xsl
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\List.xsl
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\Merged2HTML.xsl
+C:\EXMARaLDA_FRESH\src\org\exmaralda\tagging\TaggedListTrancription2HTML.xsl

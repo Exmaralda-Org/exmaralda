@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <phoneme x="6" y="27">
+        <unicode>&#x0329;</unicode>
+        <description>syllabic</description>
+        <display>n&#x0329;&#x0279;&#x0329;</display>
+    </phoneme>
+    <phoneme x="6" y="59">
+        <unicode>&#x032F;</unicode>
+        <description>non-syllabic</description>
+        <display>e&#x032F;&#x028A;&#x032F;</display>
+    </phoneme>
+    <phoneme x="6" y="91">
+        <unicode>&#x02B0;</unicode>
+        <description>(pre-)aspirated</description>
+        <display>t&#x02B0; &#x02B0;t</display>
+    </phoneme>
+    <phoneme x="6" y="124">
+        <unicode>&#x207F;</unicode>
+        <description>nasal release</description>
+        <display>d&#x207F;</display>
+    </phoneme>
+    <phoneme x="6" y="156">
+        <unicode>&#x02E1;</unicode>
+        <description>lateral delease</description>
+        <display>d&#x02E1;</display>
+    </phoneme>
+    <phoneme x="6" y="189">
+        <unicode>&#x031A;</unicode>
+        <description>no audible release</description>
+        <display>t&#x031A;</display>
+    </phoneme>
+    <phoneme x="6" y="221">
+        <unicode>&#x031E;</unicode>
+        <description>lowered</description>
+        <display>e&#x031E;&#x03B2;&#x031E;</display>
+    </phoneme>
+    <phoneme x="172" y="27">
+        <unicode>&#x0325;</unicode>
+        <description>voiceless or slack voice</description>
+        <display>n&#x0325;d&#x0325;</display>
+    </phoneme>
+    <phoneme x="172" y="60">
+        <unicode>&#x032C;</unicode>
+        <description>modal voice or stiff voice</description>
+        <display>s&#x032C;d&#x032C;</display>
+    </phoneme>
+    <phoneme x="172" y="91">
+        <unicode>&#x0324;</unicode>
+        <description>breathy voice</description>
+        <display>n&#x0324;a&#x0324;</display>
+    </phoneme>
+    <phoneme x="172" y="124">
+        <unicode>&#x0330;</unicode>
+        <description>creaky voice</description>
+        <display>n&#x0330;a&#x0330;</display>
+    </phoneme>
+    <!-- <phoneme x="172" y="156">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme> -->
+    <phoneme x="172" y="189">
+        <unicode>&#x033C;</unicode>
+        <description>linguolabial</description>
+        <display>n&#x033C;d&#x033C;</display>
+    </phoneme>
+    <!-- **** PRIMARY ARTICULATION **** -->
+    <phoneme x="330" y="27">
+        <unicode>&#x032A;</unicode>
+        <description>dental</description>
+        <display>t&#x032A;b&#x032A;</display>
+    </phoneme>
+    <phoneme x="330" y="60">
+        <unicode>&#x033A;</unicode>
+        <description>apical</description>
+        <display>t&#x033A;d&#x033A;</display>
+    </phoneme>
+    <phoneme x="330" y="91">
+        <unicode>&#x033B;</unicode>
+        <description>laminal</description>
+        <display>t&#x033B;d&#x033B;</display>
+    </phoneme>
+    <phoneme x="330" y="124">
+        <unicode>&#x031F;</unicode>
+        <description>advanced</description>
+        <display>u&#x031F;t&#x031F;</display>
+    </phoneme>
+    <phoneme x="330" y="156">
+        <unicode>&#x0320;</unicode>
+        <description>retracted</description>
+        <display>i&#x0320;t&#x0320;</display>
+    </phoneme>
+    <phoneme x="330" y="189">
+        <unicode>&#x0308;</unicode>
+        <description>centralized</description>
+        <display>a&#x0308;j&#x0308;</display>
+    </phoneme>
+    <phoneme x="330" y="221">
+        <unicode>&#x031D;</unicode>
+        <description>raised</description>
+        <display>e&#x031D;&#x0279;&#x031D;</display>
+    </phoneme>
+    <!-- *** SECONDARY ARTICULATION *** -->
+    <phoneme x="491" y="27">
+        <unicode>&#x02B7;</unicode>
+        <description>labialized</description>
+        <display>t&#x02B7;d&#x02B7;</display>
+    </phoneme>
+    <phoneme x="491" y="60">
+        <unicode>&#x02B2;</unicode>
+        <description>palatalized</description>
+        <display>t&#x02B2;d&#x02B2;</display>
+    </phoneme>
+    <phoneme x="491" y="91">
+        <unicode>&#x02E0;</unicode>
+        <description>velarized</description>
+        <display>t&#x02E0;d&#x02E0;</display>
+    </phoneme>
+    <phoneme x="491" y="124">
+        <unicode>&#x02C1;</unicode>
+        <description>pharyngealized</description>
+        <display>t&#x02C1;d&#x02C1;</display>
+    </phoneme>
+    <phoneme x="491" y="156">
+        <unicode>&#x0334;</unicode>
+        <description>velarized or pharyngealized</description>
+        <display>&#x026C;z&#x0334;</display>
+    </phoneme>
+    <phoneme x="491" y="189">
+        <unicode>&#x033D;</unicode>
+        <description>mid-centralized</description>
+        <display>&#x026F;&#x033D;</display>
+    </phoneme>
+    <phoneme x="676" y="27">
+        <unicode>&#x0339;</unicode>
+        <description>more rounded</description>
+        <display>&#x0254;&#x0339; x&#x0339;</display>
+    </phoneme>
+    <phoneme x="676" y="60">
+        <unicode>&#x031C;</unicode>
+        <description>less rounded</description>
+        <display>&#x0254;&#x031C; x&#x031C;</display>
+    </phoneme>
+    <phoneme x="676" y="91">
+        <unicode>&#x0303;</unicode>
+        <description>nasalized</description>
+        <display>e&#x0303;z&#x0303;</display>
+    </phoneme>
+    <phoneme x="676" y="124">
+        <unicode>&#x02DE;</unicode>
+        <description>rhoticity</description>
+        <display>&#x025A;&#x025D;</display>
+    </phoneme>
+    <phoneme x="676" y="156">
+        <unicode>&#x0318;</unicode>
+        <description>advanced tongue root</description>
+        <display>e&#x0318;o&#x0318;</display>
+    </phoneme>
+    <phoneme x="676" y="189">
+        <unicode>&#x0319;</unicode>
+        <description>retracted tongue root</description>
+        <display>e&#x0319;o&#x0319;</display>
+    </phoneme>
+</doc>
+

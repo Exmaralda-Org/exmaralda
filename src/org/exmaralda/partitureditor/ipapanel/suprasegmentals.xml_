@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <phoneme x="15" y="40">
+        <unicode>&#x02C8;</unicode>
+        <description>Primary stress</description>
+        <display>&#x02C8;</display>
+    </phoneme>
+    <phoneme x="15" y="70">
+        <unicode>&#x02CC;</unicode>
+        <description>Secondary stress</description>
+        <display>&#x02CC;</display>
+    </phoneme>
+    <phoneme x="15" y="100">
+        <unicode>&#x02D0;</unicode>
+        <description>Long</description>
+        <display>e&#x02D0;</display>
+    </phoneme>
+    <phoneme x="15" y="130">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="15" y="159">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="15" y="221">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="15" y="252">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="15" y="282">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="170" y="39">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="170" y="100">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="170" y="130">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="170" y="159">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+    <phoneme x="170" y="282">
+        <unicode>o</unicode>
+        <description> XXX </description>
+        <display> AAA </display>
+    </phoneme>
+</doc>

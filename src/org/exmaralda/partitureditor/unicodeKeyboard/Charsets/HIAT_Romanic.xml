@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="HIAT + Roman languages supplement">
+	<!-- START HIAT Keys -->
+	<key>
+		<content>&#x0254;</content>
+		<description>lower-mid back rounded vowel (for interjections)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0301;</content>
+		<description>m (rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0300;</content>
+		<description>m (falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x030C;</content>
+		<description>m (falling-rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0302;</content>
+		<description>m (rising-falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0304;</content>
+		<description>m (steady tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0301;</content>
+		<description>Diacritic: rising tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0300;</content>
+		<description>Diacritic: falling tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030C;</content>
+		<description>Diacritic: falling-rising</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0302;</content>
+		<description>Diacritic: rising-falling</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0304;</content>
+		<description>Diacritic: steady</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2026;</content>
+		<description>Ellipsis (End symbol for interrupted utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02D9;</content>
+		<description>Dot above (End symbol for modeless utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2014;</content>
+		<description>m-dash (insertion)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022;</content>
+		<description>Very short pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022;</content>
+		<description>Pause &lt;= 0.5s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022; &#x2022;</content>
+		<description>Pause &lt;= 1s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>((_s))</content>
+		<description>Measured pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x203F;</content>
+		<description>Ligature</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- START Latin Supplement Keys (Capital letters) -->
+	<key>
+		<content>&#x00C0;</content>
+		<description>Capital A, grave accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C1;</content>
+		<description>Capital A, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C2;</content>
+		<description>Capital A, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0102;</content>
+		<description>Capital A, Romanian</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C3;</content>
+		<description>Capital A, tilde</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C7;</content>
+		<description>Capital C, cedilla</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C8;</content>
+		<description>Capital E, grave accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C9;</content>
+		<description>Capital E, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00CA;</content>
+		<description>Capital E, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00CB;</content>
+		<description>Capital E, diaresis</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00CD;</content>
+		<description>Capital I, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00CE;</content>
+		<description>Capital I, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00D1;</content>
+		<description>Capital N, tilde</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00D2;</content>
+		<description>Capital O, grave accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00D3;</content>
+		<description>Capital O, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00D4;</content>
+		<description>Capital O, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00D5;</content>
+		<description>Capital O, tilde</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0152;</content>
+		<description>Capital ligature OE</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0218;</content>
+		<description>Capital S, comma</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x021A;</content>
+		<description>Capital T, comma</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00DA;</content>
+		<description>Capital U, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00DC;</content>
+		<description>Capital U, diaresis</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<!-- START Latin Supplement Keys (small letters) -->
+	<key>
+		<content>&#x00E0;</content>
+		<description>Small a, grave accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E1;</content>
+		<description>Small a, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E2;</content>
+		<description>Small a, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E3;</content>
+		<description>Small a, tilde</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0103;</content>
+		<description>Small a, Romanian</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E7;</content>
+		<description>Small c, cedilla</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E8;</content>
+		<description>Small e, grave accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E9;</content>
+		<description>Small e, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00EA;</content>
+		<description>Small e, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00EB;</content>
+		<description>Small e, diaresis</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00ED;</content>
+		<description>Small i, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00EE;</content>
+		<description>Small i, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00F1;</content>
+		<description>Small n, tilde</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00F2;</content>
+		<description>Small o, grave accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00F3;</content>
+		<description>Small o, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00F4;</content>
+		<description>Small o, circumflex accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00F5;</content>
+		<description>Small o, tilde</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0153;</content>
+		<description>Small ligature oe</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0219;</content>
+		<description>Small s, comma</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x021B;</content>
+		<description>Small t, comma</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00FA;</content>
+		<description>Small u, acute accent</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00FC;</content>
+		<description>Small u, diaresis</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<!-- START Punctuation -->
+	<key>
+		<content>&#x00A1;</content>
+		<description>Inverted Exclamation Mark</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00BF;</content>
+		<description>Inverted Question Mark</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

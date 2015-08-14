@@ -1,0 +1,1674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Internationalization file for FOLKER -->
+<!-- version 1.0., 09-April-2010 -->
+
+<internationalization>
+        <languages>
+                <language short="de" long="Deutsch"/>
+                <language short="en" long="English"/>
+                <language short="fr" long="Français"/>
+        </languages>
+        <translations>
+                <!-- this is the most important part: the entries in the main menus -->
+                <subdomain name="menus">
+                        <!-- ****************************************** -->
+                        <subdomain name="file_menu">
+                                <item id="file_menu">
+                                        <translation lang="en" trans="File"/>
+                                        <translation lang="de" trans="Datei"/>
+                                        <translation lang="fr" trans="Fichier"/>
+                                </item>
+                                <item id="file_menu.new">
+                                        <translation lang="en" trans="New..."/>
+                                        <translation lang="de" trans="Neu..."/>
+                                        <translation lang="fr" trans="Nouveau..."/>
+                                </item>
+                                <item id="file_menu.open">
+                                        <translation lang="en" trans="Open..."/>
+                                        <translation lang="de" trans="Öffnen..."/>
+                                        <translation lang="fr" trans="Ouvrir..."/>
+                                </item>
+                                <item id="file_menu.save">
+                                        <translation lang="en" trans="Save"/>
+                                        <translation lang="de" trans="Speichern"/>
+                                        <translation lang="fr" trans="Enregistrer"/>
+                                </item>
+                                <item id="file_menu.saveAs">
+                                        <translation lang="en" trans="Save as..."/>
+                                        <translation lang="de" trans="Speichern unter..."/>
+                                        <translation lang="fr" trans="Enregistrer sous..."/>
+                                </item>
+                                <item id="file_menu.multipart_transcription">
+                                        <translation lang="en" trans="Multi-part transcription"/>
+                                        <translation lang="de" trans="Mehrteilige Transkription"/>
+                                        <translation lang="fr"
+                                                trans="Transcription à plusieurs parties"/>
+                                </item>
+                                <item id="file_menu.multipart_transcription.continue">
+                                        <translation lang="en" trans="Continue..."/>
+                                        <translation lang="de" trans="Fortsetzen..."/>
+                                        <translation lang="fr" trans="Poursuivre..."/>
+                                </item>
+                                <item id="file_menu.multipart_transcription.merge">
+                                        <translation lang="en" trans="Merge..."/>
+                                        <translation lang="de" trans="Zusammenführen..."/>
+                                        <translation lang="fr" trans="Fusionner..."/>
+                                </item>
+                                <item id="file_menu.multipart_transcription.split">
+                                        <translation lang="en" trans="Split..."/>
+                                        <translation lang="de" trans="Teilen..."/>
+                                        <translation lang="fr" trans="Fractionner..."/>
+                                </item>
+                                <item id="file_menu.import">
+                                        <translation lang="en" trans="Import..."/>
+                                        <translation lang="de" trans="Importieren... "/>
+                                        <translation lang="fr" trans="Importer..."/>
+                                </item>
+                                <item id="file_menu.export">
+                                        <translation lang="en" trans="Export..."/>
+                                        <translation lang="de" trans="Exportieren..."/>
+                                        <translation lang="fr" trans="Exporter..."/>
+                                </item>
+                                <item id="file_menu.output">
+                                        <translation lang="en" trans="Output..."/>
+                                        <translation lang="de" trans="Ausgabe... "/>
+                                        <translation lang="fr" trans="Edition..."/>
+                                </item>
+                                <item id="file_menu.exit">
+                                        <translation lang="en" trans="Exit"/>
+                                        <translation lang="de" trans="Beenden"/>
+                                        <translation lang="fr" trans="Quitter"/>
+                                </item>
+                        </subdomain>
+                        <!-- ****************************************** -->
+                        <subdomain name="edit_menu">
+                                <item id="edit_menu">
+                                        <translation lang="en" trans="Edit"/>
+                                        <translation lang="de" trans="Bearbeiten"/>
+                                        <translation lang="fr" trans="Edition"/>
+                                </item>
+                                <item id="edit_menu.copy">
+                                        <translation lang="en" trans="Copy"/>
+                                        <translation lang="de" trans="Kopieren"/>
+                                        <translation lang="fr" trans="Copier"/>
+                                </item>
+                                <item id="edit_menu.paste">
+                                        <translation lang="en" trans="Paste"/>
+                                        <translation lang="de" trans="Einfügen"/>
+                                        <translation lang="fr" trans="Coller"/>
+                                </item>
+                                <item id="edit_menu.cut">
+                                        <translation lang="en" trans="Cut"/>
+                                        <translation lang="de" trans="Ausschneiden"/>
+                                        <translation lang="fr" trans="Couper"/>
+                                </item>
+                                <item id="edit_menu.search">
+                                        <translation lang="en" trans="Search..."/>
+                                        <translation lang="de" trans="Suchen..."/>
+                                        <translation lang="fr" trans="Rechercher..."/>
+                                </item>
+                                <item id="edit_menu.replace">
+                                        <translation lang="en" trans="Replace..."/>
+                                        <translation lang="de" trans="Ersetzen..."/>
+                                        <translation lang="fr" trans="Remplacer..."/>
+                                </item>
+                                <item id="edit_menu.preferences">
+                                        <translation lang="en" trans="Preferences..."/>
+                                        <translation lang="de" trans="Voreinstellungen..."/>
+                                        <translation lang="fr" trans="Préférences..."/>
+                                </item>
+                        </subdomain>
+                        <!-- ****************************************** -->
+                        <subdomain name="view_menu">
+                                <item id="view_menu">
+                                        <translation lang="en" trans="View"/>
+                                        <translation lang="de" trans="Ansicht"/>
+                                        <translation lang="fr" trans="Affichage"/>
+                                </item>
+                                <!-- ****************************************** -->
+                                <item id="view_menu.keyboard">
+                                        <translation lang="en" trans="Keyboard"/>
+                                        <translation lang="de" trans="Virtuelle Tastatur"/>
+                                        <translation lang="fr" trans="Clavier virtuel"/>
+                                </item>
+                                <item id="view_menu.helper">
+                                        <translation lang="en" trans="Little helper"/>
+                                        <translation lang="de" trans="Helferlein"/>
+                                        <translation lang="fr" trans="Petit assistant"/>
+                                </item>
+                                <item id="view_menu.matchlist">
+                                        <translation lang="en" trans="Match list"/>
+                                        <translation lang="de" trans="Trefferliste"/>
+                                        <translation lang="fr" trans="Liste d&apos;occurrences"/>
+                                </item>
+                                <item id="view_menu.videopanel">
+                                        <translation lang="en" trans="Video Panel"/>
+                                        <translation lang="de" trans="Videowerkzeug"/>
+                                        <translation lang="fr" trans="Outil vidéo"/>
+                                </item>
+                        </subdomain>
+                        <!-- ****************************************** -->
+                        <subdomain name="transcription_menu">
+                                <item id="transcription_menu">
+                                        <translation lang="en" trans="Transcription"/>
+                                        <translation lang="de" trans="Transkription"/>
+                                        <translation lang="fr" trans="Transcription"/>
+                                </item>
+                                <!-- ****************************************** -->
+                                <item id="transcription_menu.speakers">
+                                        <translation lang="en" trans="Edit speakers..."/>
+                                        <translation lang="de" trans="Sprecher bearbeiten..."/>
+                                        <translation lang="fr" trans="Editer les locuteurs..."/>
+                                </item>
+                                <item id="transcription_menu.recording">
+                                        <translation lang="en" trans="Reassign recording..."/>
+                                        <translation lang="de" trans="Aufnahme neu zuordnen..."/>
+                                        <translation lang="fr" trans="Réassigner l'enregistrement..."
+                                        />
+                                </item>
+                                <item id="transcription_menu.fillGaps">
+                                        <translation lang="en" trans="Fill gaps"/>
+                                        <translation lang="de" trans="Lücken füllen"/>
+                                        <translation lang="fr" trans="Remplir les blancs"/>
+                                </item>
+                                <item id="transcription_menu.whiteSpace">
+                                        <translation lang="en" trans="Normalise whitespace"/>
+                                        <translation lang="de" trans="Whitespace normalisieren"/>
+                                        <translation lang="fr" trans="Normaliser les espaces"/>
+                                </item>
+                                <item id="transcription_menu.pauses">
+                                        <translation lang="en" trans="Update pause segments"/>
+                                        <translation lang="de" trans="Pausensegmente aktualisieren"/>
+                                        <translation lang="fr" trans="Recalculer les segments de pause"/>
+                                </item>
+                                <item id="transcription_menu.removePauseSpeaker">
+                                        <translation lang="en" trans="Remove speaker assignments for pauses..."/>
+                                        <translation lang="de" trans="Sprecherzuordnung von Pausen entfernen..."/>
+                                        <translation lang="fr" trans="Supprimer les locuteurs pour les pauses..."/>
+                                </item>
+                                <item id="transcription_menu.modifyTimes">
+                                        <translation lang="en" trans="Modify absolute times..."/>
+                                        <translation lang="de" trans="Absolute Zeitwerte ändern..."/>
+                                        <translation lang="fr" trans="Modifier temps absolus..."/>
+                                </item>
+                                <item id="transcription_menu.minimize">
+                                        <translation lang="en" trans="Transform upper into lower case"/>
+                                        <translation lang="de" trans="Groß- in Kleinschreibung umwandeln"/>
+                                        <translation lang="fr" trans="Transformer majuscules en minuscules"/>
+                                </item>
+                                <item id="transcription_menu.transcriptionlog">
+                                        <translation lang="en" trans="View transcription log..."/>
+                                        <translation lang="de" trans="Transkriptions-Logbuch anzeigen"/>
+                                        <translation lang="fr" trans="Afficher log..."/>
+                                </item>
+                                <item id="transcription_menu.editmask">
+                                        <translation lang="en" trans="View masking entries..."/>
+                                        <translation lang="de" trans="Maskierungseintrage anzeigen..."/>
+                                        <translation lang="fr" trans="View masking entries..."/>
+                                </item>
+                                <item id="transcription_menu.mask">
+                                        <translation lang="en" trans="Mask audio file..."/>
+                                        <translation lang="de" trans="Audiodatei maskieren..."/>
+                                        <translation lang="fr" trans="Masquer fichier audio..."/>
+                                </item>
+                                <item id="transcription_menu.deletemask">
+                                        <translation lang="en" trans="Delete masking entries..."/>
+                                        <translation lang="de" trans="Maskierungseinträge löschen..."/>
+                                        <translation lang="fr" trans="Supprimer entrées de masque..."/>
+                                </item>
+                                
+
+                        </subdomain>
+                        <!-- ****************************************** -->
+                        <subdomain name="help_menu">
+                                <item id="help_menu">
+                                        <translation lang="en" trans="Help"/>
+                                        <translation lang="de" trans="Hilfe"/>
+                                        <translation lang="fr" trans="Aide"/>
+                                </item>
+                                <item id="help_menu.web">
+                                        <translation lang="en" trans="FOLKER on the web"/>
+                                        <translation lang="de" trans="FOLKER im Web"/>
+                                        <translation lang="fr" trans="FOLKER sur le Web"/>
+                                </item>
+                                <item id="help_menu.about">
+                                        <translation lang="en" trans="About..."/>
+                                        <translation lang="de" trans="Über..."/>
+                                        <translation lang="fr" trans="À propos..."/>
+                                </item>
+                                <item id="help_menu.keyboard">
+                                        <translation lang="en" trans="Keyboard commands..."/>
+                                        <translation lang="de" trans="Tastaturkommandos..."/>
+                                        <translation lang="fr" trans="Raccourcis clavier..."/>
+                                </item>
+                        </subdomain>
+                        <!-- ****************************************** -->
+                        <subdomain name="popup_menus">
+                            <subdomain name="event_menu">
+                                    <item id="event_menu.charsright">
+                                            <translation lang="en" trans="Characters to the right"/>
+                                            <translation lang="de" trans="Zeichen nach rechts"/>
+                                            <translation lang="fr" trans="Symboles à droite"/>
+                                    </item>
+                                    <item id="event_menu.charsleft">
+                                            <translation lang="en" trans="Characters to the left"/>
+                                            <translation lang="de" trans="Zeichen nach links"/>
+                                            <translation lang="fr" trans="Symboles à gauche"/>
+                                    </item>
+                                    <item id="event_menu.split">
+                                            <translation lang="en" trans="Split"/>
+                                            <translation lang="de" trans="Teilen"/>
+                                            <translation lang="fr" trans="Diviser"/>
+                                    </item>
+                                    <item id="event_menu.doublesplit">
+                                            <translation lang="en" trans="Double split"/>
+                                            <translation lang="de" trans="Zweifach teilen"/>
+                                            <translation lang="fr" trans="Diviser deux fois"/>
+                                    </item>
+                                    <item id="event_menu.delete">
+                                            <translation lang="en" trans="Delete"/>
+                                            <translation lang="de" trans="Löschen"/>
+                                            <translation lang="fr" trans="Supprimer"/>
+                                    </item>
+
+                            </subdomain>
+                        </subdomain>
+                </subdomain>
+                <!-- ************************************************************************************* -->
+                <!-- *************************** END MENUS **************************************** -->
+                <!-- ************************************************************************************* -->
+                <subdomain name="buttons">
+                        <subdomain name="player_tooltips">
+                                <item id="player.playSelection">
+                                        <translation lang="en" trans="Play selection ("/>
+                                        <translation lang="de" trans="Auswahl abspielen ("/>
+                                        <translation lang="fr" trans="Lire la sélection ("/>
+                                </item>
+                                <item id="player.playSelection2">
+                                        <translation lang="en" trans="Play selection"/>
+                                        <translation lang="de" trans="Auswahl abspielen"/>
+                                        <translation lang="fr" trans="Lire la sélection"/>
+                                </item>
+                                <item id="player.loopSelection">
+                                        <translation lang="en" trans="Loop selection (Alt + F3)"/>
+                                        <translation lang="de"
+                                                trans="Schleife für Auswahl (Alt + F3)"/>
+                                        <translation lang="fr" trans="Lire la sélection en boucle (Alt + F3)"
+                                        />
+                                </item>
+                                <item id="player.lastSecondBefore">
+                                        <translation lang="en"
+                                                trans="Play first second before selection"/>
+                                        <translation lang="de"
+                                                trans="Erste Sekunde vor der Auswahl abspielen"/>
+                                        <translation lang="fr"
+                                                trans="Lire la première seconde avant la sélection"/>
+                                </item>
+                                <item id="player.firstSecond">
+                                        <translation lang="en"
+                                                trans="Play first second of selection"/>
+                                        <translation lang="de"
+                                                trans="Erste Sekunde der Auswahl abspielen"/>
+                                        <translation lang="fr"
+                                                trans="Lire la première seconde de la sélection (Shift + F3)"/>
+                                </item>
+                                <item id="player.lastSecond">
+                                        <translation lang="en"
+                                                trans="Play last second of selection (Shift + F3)"/>
+                                        <translation lang="de"
+                                                trans="Letzte Sekunde der Auswahl abspielen (Shift + F3)"/>
+                                        <translation lang="fr"
+                                                trans="Lire la dernière seconde de la sélection (Shift + F3)"/>
+                                </item>
+                                <item id="player.firstSecondAfter">
+                                        <translation lang="en"
+                                                trans="Play first second after selection"/>
+                                        <translation lang="de"
+                                                trans="Erste Sekunde nach der Auswahl abspielen"/>
+                                        <translation lang="fr"
+                                                trans="Lire la première seconde après la sélection"/>
+                                </item>
+                                <item id="player.play">
+                                        <translation lang="en" trans="Play ("/>
+                                        <translation lang="de" trans="Abspielen ("/>
+                                        <translation lang="fr" trans="Lire ("/>
+                                </item>
+                                <item id="player.pause">
+                                        <translation lang="en" trans="Pause ("/>
+                                        <translation lang="de" trans="Pause ("/>
+                                        <translation lang="fr" trans="Pause ("/>
+                                </item>
+                                <item id="player.stop">
+                                        <translation lang="en" trans="Stop ("/>
+                                        <translation lang="de" trans="Stop ("/>
+                                        <translation lang="fr" trans="Stop ("/>
+                                </item>
+                                <item id="player.playNextSegment">
+                                        <translation lang="en" trans="Play next segment (Shift + F4)"/>
+                                        <translation lang="de" trans="Nächstes Segment abspielen (Shift + F4)"/>
+                                        <translation lang="fr" trans="Lire prochain segment (Shift + F4)"/>
+                                </item>
+                        </subdomain>
+                        <subdomain name="waveform_tooltips">
+                                <item id="waveform.zoom">
+                                        <translation lang="en" trans="Zoom in/out"/>
+                                        <translation lang="de" trans="Ein-/Auszoomen"/>
+                                        <translation lang="fr" trans="Zoom"/>
+                                </item>
+                                <item id="waveform.shiftSelection">
+                                        <translation lang="en" trans="Shift selection (Ctrl + Space)"/>
+                                        <translation lang="de" trans="Auswahl weiterrücken (Strg + Space)"/>
+                                        <translation lang="fr" trans="Décaler la sélection (Ctrl + Espace)"/>
+                                </item>
+                                <item id="waveform.detachSelection">
+                                        <translation lang="en" trans="Detach selection"/>
+                                        <translation lang="de" trans="Auswahl lösen"/>
+                                        <translation lang="fr" trans="Délier la sélection"/>
+                                </item>
+                                <item id="waveform.navigation">
+                                        <translation lang="en" trans="Waveform navigation"/>
+                                        <translation lang="de" trans="Navigation im Oszillogramm"/>
+                                        <translation lang="fr"
+                                                trans="Navigation dans l'oscillogramme"/>
+                                </item>
+                                <item id="waveform.markposition">
+                                        <translation lang="en" trans="Mark position"/>
+                                        <translation lang="de" trans="Markierungsposition"/>
+                                        <translation lang="fr" trans="Position de marquage"/>
+                                </item>
+                                <item id="waveform.startposition">
+                                        <translation lang="en" trans="Start position"/>
+                                        <translation lang="de" trans="Startposition"/>
+                                        <translation lang="fr" trans="Limite gauche de la sélection"/>
+                                </item>
+                                <item id="waveform.cursorposition">
+                                        <translation lang="en" trans="Cursor position"/>
+                                        <translation lang="de" trans="Cursorposition"/>
+                                        <translation lang="fr" trans="Position du curseur"/>
+                                </item>
+                                <item id="waveform.stopposition">
+                                        <translation lang="en" trans="Stop position"/>
+                                        <translation lang="de" trans="Stoppposition"/>
+                                        <translation lang="fr" trans="Limite droite de la sélection"/>
+                                </item>
+                                <item id="waveform.selectionlength">
+                                        <translation lang="en" trans="Length of selection"/>
+                                        <translation lang="de" trans="Länge der Auswahl"/>
+                                        <translation lang="fr" trans="Durée de la selection"/>
+                                </item>
+
+                        </subdomain>
+                        <subdomain name="segmentactions_tooltips">
+                                <item id="segmentactions.newSegment">
+                                        <translation lang="en" trans="New segment (Ctrl + Enter)"/>
+                                        <translation lang="de" trans="Neues Segment (Strg + Enter)"/>
+                                        <translation lang="fr" trans="Nouveau segment (Ctrl + Enter)"/>
+                                </item>
+                                <item id="segmentactions.appendSegment">
+                                        <translation lang="en" trans="Append new segment (Shift + Enter)"/>
+                                        <translation lang="de" trans="Neues Segment anhängen (Shift + Enter)"/>
+                                        <translation lang="fr" trans="Ajouter un nouveau segment (Shift + Enter)"/>
+                                </item>
+                                <item id="segmentactions.removeSegment">
+                                        <translation lang="en" trans="Remove segment(s) (Alt + Del)"/>
+                                        <translation lang="de" trans="Segment(e) entfernen (Alt + Entf)"/>
+                                        <translation lang="fr" trans="Supprimer un/des segment(s)  (Alt + Suppr)"/>
+                                </item>
+                                <item id="segmentactions.removeSpeakers">
+                                        <translation lang="en" trans="Remove speaker assignment(s)"/>
+                                        <translation lang="de" trans="Sprecherzuordnung(en) entfernen"/>
+                                        <translation lang="fr" trans="Supprimer un/des locuteur(s)"/>
+                                </item>
+                                <item id="segmentactions.assignTime">
+                                        <translation lang="en" trans="Reassign time"/>
+                                        <translation lang="de" trans="Zeit neu zuweisen"/>
+                                        <translation lang="fr" trans="Réassigner les repères temporels"/>
+                                </item>
+                                <item id="segmentactions.splitSegment">
+                                        <translation lang="en" trans="Split segment (Ctrl + 2)"/>
+                                        <translation lang="de" trans="Segment teilen (Strg + 2)"/>
+                                        <translation lang="fr" trans="Fractionner le segment (Ctrl + 2)"/>
+                                </item>
+                                <item id="segmentactions.mergeSegments">
+                                        <translation lang="en" trans="Merge segments (Ctrl + 1)"/>
+                                        <translation lang="de" trans="Segmente verbinden (Strg + 1)"/>
+                                        <translation lang="fr" trans="Fusionner les segments (Ctrl + 1)"/>
+                                </item>
+                                <item id="segmentactions.insertPause">
+                                        <translation lang="en" trans="Insert pause (Alt + Enter)"/>
+                                        <translation lang="de" trans="Pause einfügen (Alt + Enter)"/>
+                                        <translation lang="fr" trans="Insérer une pause (Alt + Enter)"/>
+                                </item>
+                                <item id="segmentactions.nextError">
+                                        <translation lang="en" trans="Next error (Ctrl + E)"/>
+                                        <translation lang="de" trans="Nächster Fehler (Strg + E)"/>
+                                        <translation lang="fr" trans="Prochaine erreur (Ctrl + E)"/>
+                                </item>
+                        </subdomain>
+                        <subdomain name="partituractions_tooltips">
+                                <item id="partituractions.shiftLeft">
+                                        <translation lang="en" trans="Shift characters to the left"/>
+                                        <translation lang="de"
+                                                trans="Zeichen nach links verschieben"/>
+                                        <translation lang="fr" trans="Déplacer les caractères à gauche"/>
+                                </item>
+                                <item id="partituractions.shiftRight">
+                                        <translation lang="en" trans="Shift characters to the right"/>
+                                        <translation lang="de"
+                                                trans="Zeichen nach rechts verschieben"/>
+                                        <translation lang="fr" trans="Déplacer les caractères à droite"/>
+                                </item>
+                                <item id="partituractions.shrinkLeft">
+                                        <translation lang="en" trans="Shrink segment from the left"/>
+                                        <translation lang="de" trans="Segment von links kürzen"/>
+                                        <translation lang="fr" trans="Raccourcir le segment à gauche"/>
+                                </item>
+                                <item id="partituractions.shrinkRight">
+                                        <translation lang="en" trans="Shrink segment from the right"/>
+                                        <translation lang="de" trans="Segment von rechts kürzen"/>
+                                        <translation lang="fr" trans="Raccourcir le segment à droite"/>
+                                </item>
+                                <item id="partituractions.extendLeft">
+                                        <translation lang="en" trans="Extend segment to the left"/>
+                                        <translation lang="de" trans="Segment nach links ausdehnen"/>
+                                        <translation lang="fr" trans="Etendre le segment à gauche"/>
+                                </item>
+                                <item id="partituractions.extendRight">
+                                        <translation lang="en" trans="Extend segment to the right"/>
+                                        <translation lang="de" trans="Segment nach rechts ausdehnen"/>
+                                        <translation lang="fr" trans="Etendre le segment à droite"/>
+                                </item>
+                        </subdomain>
+                </subdomain>
+                <subdomain name="option_messages">
+                        <item id="option.fileexists">
+                                <translation lang="en" trans="File exists. Overwrite?"/>
+                                <translation lang="de" trans="Datei existiert. Überschreiben?"/>
+                                <translation lang="fr" trans="Le fichier existe déjà. Souhaitez-vous le remplacer ?"/>
+                        </item>
+                        <item id="option.cannotaccessfile">
+                                <translation lang="en" trans="File cannot be accessed."/>
+                                <translation lang="de" trans="Kein Zugriff auf die Datei."/>
+                                <translation lang="fr" trans="Fichier ne peut pas être accédé."/>
+                        </item>                        
+                        <item id="option.confirmation">
+                                <translation lang="en" trans="Confirmation"/>
+                                <translation lang="de" trans="Bestätigung"/>
+                                <translation lang="fr" trans="Confirmation"/>
+                        </item>
+                        <item id="option.sure">
+                                <translation lang="en" trans="Are you sure?"/>
+                                <translation lang="de" trans="Sind Sie sicher?"/>
+                                <translation lang="fr" trans="Etes-vous sûr(e) ?"/>
+                        </item>
+                        <item id="option.checksave1">
+                                <translation lang="en"
+                                        trans="Save changes to the current transcription?"/>
+                                <translation lang="de"
+                                        trans="Änderungen an aktueller Transkription speichern?"/>
+                                <translation lang="fr"
+                                        trans="Sauvegarder les modifications de la transcription en cours ?"
+                                />
+                        </item>
+                        <item id="option.checksave2">
+                                <translation lang="en" trans="Confirmation"/>
+                                <translation lang="de" trans="Sicherheitsabfrage"/>
+                                <translation lang="fr" trans="Demande de confirmation"/>
+                        </item>
+                        <item id="option.endofdocument">
+                                <translation lang="en" trans="Reached end of document."/>
+                                <translation lang="de" trans="Ende des Dokuments erreicht."/>
+                                <translation lang="fr" trans="Fin de document atteinte."/>
+                        </item>
+                        <item id="option.replaceall1">
+                                <translation lang="en" trans="Replacements were made in "/>
+                                <translation lang="de" trans="Es wurden in "/>
+                                <translation lang="fr" trans="Des remplacements ont été effectués en "/>
+                        </item>
+                        <item id="option.replaceall2">
+                                <translation lang="en" trans=" segments."/>
+                                <translation lang="de" trans=" Segmenten Ersetzungen vorgenommen."/>
+                                <translation lang="fr" trans=" segments."/>
+                        </item>
+                        <item id="option.noreplace1">
+                                <translation lang="en" trans="This function cannot be used in the"/>
+                                <translation lang="de" trans="Diese Funktion kann in der Beitragsansicht"/>
+                                <translation lang="fr" trans="Cette function ne peut pas être utilisée"/>
+                        </item>
+                        <item id="option.noreplace2">
+                                <translation lang="en" trans="contribution view. Please switch to the"/>
+                                <translation lang="de" trans="nicht ausgeführt werden. Bitte wechseln Sie"/>
+                                <translation lang="fr" trans="dans la vue contributions. Changez en"/>
+                        </item>
+                        <item id="option.noreplace3">
+                                <translation lang="en" trans="segment or score view or replace"/>
+                                <translation lang="de" trans="in die Segment- oder Partituransicht"/>
+                                <translation lang="fr" trans="vue segments ou en vue partition"/>
+                        </item>
+                        <item id="option.noreplace4">
+                                <translation lang="en" trans="or do the replacements individually."/>
+                                <translation lang="de" trans="oder ersetzen Sie die Vorkommen einzeln."/>
+                                <translation lang="fr" trans="ou faites les remplacements individuellement."/>
+                        </item>
+
+
+
+                </subdomain>
+                <subdomain name="status_messages">
+                        <item id="status.new1">
+                                <translation lang="en" trans="Created new transcription for "/>
+                                <translation lang="de" trans="Neue Transkription für "/>
+                                <translation lang="fr" trans="Nouvelle transcription créée pour "/>
+                        </item>
+                        <item id="status.new2">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" angelegt."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.merge1">
+                                <translation lang="en" trans="Transcription "/>
+                                <translation lang="de" trans="Transkription "/>
+                                <translation lang="fr" trans="Transcription "/>
+                        </item>
+                        <item id="status.merge2">
+                                <translation lang="en" trans=" merged."/>
+                                <translation lang="de" trans=" zusammengeführt."/>
+                                <translation lang="fr" trans=" fusionée."/>
+                        </item>
+                        <item id="status.split1">
+                                <translation lang="en"
+                                        trans="Split transcription, saved second part as "/>
+                                <translation lang="de"
+                                        trans="Transkription geteilt, zweiter Teil als "/>
+                                <translation lang="fr"
+                                        trans="Transcription fractionée, deuxième partie enregistrée sous "
+                                />
+                        </item>
+                        <item id="status.split2">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" gespeichert."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.open1">
+                                <translation lang="en" trans="Transcription "/>
+                                <translation lang="de" trans="Transkription "/>
+                                <translation lang="fr" trans="Transcription "/>
+                        </item>
+                        <item id="status.open2">
+                                <translation lang="en" trans=" opened."/>
+                                <translation lang="de" trans=" geöffnet"/>
+                                <translation lang="fr" trans=" ouverte."/>
+                        </item>
+                        <item id="status.saving">
+                                <translation lang="en" trans="Saving transcription "/>
+                                <translation lang="de" trans="Speichere Transkription "/>
+                                <translation lang="fr" trans="En train d'enregistrer "/>
+                        </item>
+                        <item id="status.saved1">
+                                <translation lang="en" trans="Transcription "/>
+                                <translation lang="de" trans="Transkription "/>
+                                <translation lang="fr" trans="Transcription "/>
+                        </item>
+                        <item id="status.saved2">
+                                <translation lang="en" trans=" saved."/>
+                                <translation lang="de" trans=" gespeichert."/>
+                                <translation lang="fr" trans=" enregistrée."/>
+                        </item>
+                        <item id="status.saveerror">
+                                <translation lang="en" trans="Error while saving "/>
+                                <translation lang="de" trans="Fehler beim Speichern von "/>
+                                <translation lang="fr" trans="Erreur lors de l'enregistrement de "/>
+                        </item>
+                        <item id="status.segmentsremoved">
+                                <translation lang="en" trans=" segment(s) removed."/>
+                                <translation lang="de" trans=" Segment(e) entfernt."/>
+                                <translation lang="fr" trans=" segment(s) supprimé(s)"/>
+                        </item>
+                        <item id="status.import1">
+                                <translation lang="en" trans="Transcription "/>
+                                <translation lang="de" trans="Transkription "/>
+                                <translation lang="fr" trans="Transcription "/>
+                        </item>
+                        <item id="status.import2">
+                                <translation lang="en" trans=" imported."/>
+                                <translation lang="de" trans=" importiert."/>
+                                <translation lang="fr" trans=" importée."/>
+                        </item>
+                        <item id="status.export1">
+                                <translation lang="en" trans="Transcription "/>
+                                <translation lang="de" trans="Transkription "/>
+                                <translation lang="fr" trans="Transcription "/>
+                        </item>
+                        <item id="status.export2">
+                                <translation lang="en" trans=" exported."/>
+                                <translation lang="de" trans=" exportiert."/>
+                                <translation lang="fr" trans=" exportée."/>
+                        </item>
+                        <item id="status.output1">
+                                <translation lang="en" trans="Transcription output as "/>
+                                <translation lang="de" trans="Transkription als "/>
+                                <translation lang="fr" trans="Transcription exportée sous le nom de "/>
+                        </item>
+                        <item id="status.output2">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" ausgegeben."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.start">
+                                <translation lang="en"
+                                        trans="Application started - transcript level: "/>
+                                <translation lang="de"
+                                        trans="Anwendung gestartet - Transkriptstufe: "/>
+                                <translation lang="fr"
+                                        trans="L'application a démarée - Niveau de transcription: "/>
+                        </item>
+                        <item id="status.mergesegments1">
+                                <translation lang="en" trans="Merged segments at position "/>
+                                <translation lang="de" trans="Segmente an Position "/>
+                                <translation lang="fr" trans="Segments fusionnés à la position "/>
+                        </item>
+                        <item id="status.mergesegments2">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" zusammengelegt."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.nosplitsegment">
+                                <translation lang="en" trans="Segment could not be split."/>
+                                <translation lang="de" trans="Segment konnte nicht geteilt werden."/>
+                                <translation lang="fr" trans="Impossible de fractionner le segment."/>
+                        </item>
+                        <item id="status.splitsegment1">
+                                <translation lang="en" trans="Split segment at position "/>
+                                <translation lang="de" trans="Segment an Position "/>
+                                <translation lang="fr" trans="Segments fractionné à la position "/>
+                        </item>
+                        <item id="status.splitsegment2">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" geteilt."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.fillgaps1">
+                                <translation lang="en" trans="Gaps filled: "/>
+                                <translation lang="de" trans="Lücken gefüllt: "/>
+                                <translation lang="fr" trans="Blancs remplis: "/>
+                        </item>
+                        <item id="status.fillgaps2">
+                                <translation lang="en" trans=" new segments."/>
+                                <translation lang="de" trans=" neue Segmente."/>
+                                <translation lang="fr" trans=" nouveaux segments."/>
+                        </item>
+                        <item id="status.updatepauses1">
+                                <translation lang="en" trans="Pause segments updated: "/>
+                                <translation lang="de" trans="Pausensegmente aktualisiert: "/>
+                                <translation lang="fr" trans="Segments de pause actualisés: "/>
+                        </item>
+                        <item id="status.updatepauses2">
+                                <translation lang="en" trans=" segments changed."/>
+                                <translation lang="de" trans=" Segmente geändert."/>
+                                <translation lang="fr" trans=" segments ont été modifiés."/>
+                        </item>
+                        <item id="status.whitespace">
+                                <translation lang="en" trans="Whitespace normalised: "/>
+                                <translation lang="de" trans="Whitespace normalisiert: "/>
+                                <translation lang="fr" trans="Espaces normalisés: "/>
+                        </item>
+                        <item id="status.insertpause1">
+                                <translation lang="en" trans="Inserted pause at position "/>
+                                <translation lang="de" trans="Pause an Position "/>
+                                <translation lang="fr" trans="Pause insérée à la position "/>
+                        </item>
+                        <item id="status.insertpause2">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" eingefügt."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.audioloaded">
+                                <translation lang="en" trans="Audio file loaded."/>
+                                <translation lang="de" trans="Audiodatei geladen."/>
+                                <translation lang="fr" trans="Fichier audio ouvert."/>
+                        </item>
+                        <item id="status.playbackstarted">
+                                <translation lang="en" trans="Playback started."/>
+                                <translation lang="de" trans="Playback gestartet."/>
+                                <translation lang="fr" trans="Playback commencé."/>
+                        </item>
+                        <item id="status.playbackstopped">
+                                <translation lang="en" trans="Playback stopped."/>
+                                <translation lang="de" trans="Playback gestoppt"/>
+                                <translation lang="fr" trans="Playback terminé."/>
+                        </item>
+                        <item id="status.playbackhalted">
+                                <translation lang="en" trans="Playback paused."/>
+                                <translation lang="de" trans="Playback angehalten."/>
+                                <translation lang="fr" trans="Playback pausé."/>
+                        </item>
+                        <item id="status.playbackcontinued">
+                                <translation lang="en" trans="Playback continued."/>
+                                <translation lang="de" trans="Playback fortgesetzt."/>
+                                <translation lang="fr" trans="Playback continué."/>
+                        </item>
+                        <item id="status.notfound">
+                                <translation lang="en" trans=" not found."/>
+                                <translation lang="de" trans=" nicht gefunden."/>
+                                <translation lang="fr" trans=" ne pas trouvé."/>
+                        </item>
+                        <item id="status.found1">
+                                <translation lang="en" trans="Found &apos;"/>
+                                <translation lang="de" trans="&apos;"/>
+                                <translation lang="fr" trans="Trouvé &apos;"/>
+                        </item>
+                        <item id="status.found2">
+                                <translation lang="en" trans="&apos; in segment "/>
+                                <translation lang="de" trans="&apos; in Segment "/>
+                                <translation lang="fr" trans="&apos; dans segment "/>
+                        </item>
+                        <item id="status.found3">
+                                <translation lang="en" trans="."/>
+                                <translation lang="de" trans=" gefunden."/>
+                                <translation lang="fr" trans="."/>
+                        </item>
+                        <item id="status.found4">
+                                <translation lang="en" trans="&apos; in contribution "/>
+                                <translation lang="de" trans="&apos; in Beitrag "/>
+                                <translation lang="fr" trans="&apos; dans contribution "/>
+                        </item>
+                        <item id="status.replaced">
+                                <translation lang="en" trans=" replaced with "/>
+                                <translation lang="de" trans=" ersetzt durch "/>
+                                <translation lang="fr" trans=" remplacé par "/>
+                        </item>
+                        <item id="status.replaceall1">
+                                <translation lang="en" trans=" replaced with "/>
+                                <translation lang="de" trans=" ersetzt durch "/>
+                                <translation lang="fr" trans=" remplacé par "/>
+                        </item>
+                        <item id="status.replaceall2">
+                                <translation lang="en" trans="&apos; in "/>
+                                <translation lang="de" trans="&apos; in "/>
+                                <translation lang="fr" trans="&apos; dans "/>
+                        </item>
+                        <item id="status.replaceall3">
+                                <translation lang="en" trans=" segments."/>
+                                <translation lang="de" trans=" Segmenten."/>
+                                <translation lang="fr" trans=" segments."/>
+                        </item>
+                        <item id="status.minimize">
+                                <translation lang="en" trans="Transformed all upper to lower case letters."/>
+                                <translation lang="de" trans="Alle Groß- ind Kleinschreibung umgewandelt."/>
+                                <translation lang="fr" trans="Transformé tous les majuscules en minuscules."/>
+                        </item>
+
+
+
+                </subdomain>
+                <subdomain name="error_messages">
+                        <item id="error.zerosegments">
+                                <translation lang="en" trans="Transcription has 0 segments."/>
+                                <translation lang="de" trans="Transkription hat 0 Segmente."/>
+                                <translation lang="fr" trans="Transcription ne contient pas de segments."/>
+                        </item>
+                        <item id="error.reading">
+                                <translation lang="en" trans="Error reading "/>
+                                <translation lang="de" trans="Fehler beim Lesen von "/>
+                                <translation lang="fr" trans="Erreur pendant la lecture de "/>
+                        </item>
+                        <item id="error.opening1">
+                                <translation lang="en" trans="There was an error opening the file "/>
+                                <translation lang="de" trans="Es gab einen Fehler beim Lesen der Datei "/>
+                                <translation lang="fr" trans="Il y avait une erreur pendant la lecture de "/>
+                        </item>
+                        <item id="error.opening2">
+                                <translation lang="en" trans="The file does not seem to be a valid FLK or FLN file."/>
+                                <translation lang="de" trans="Die Datei scheint keine gültige FLK- oder FLN-Datei zu sein. "/>
+                                <translation lang="fr" trans="Le fichier ne semble pas être un fichier FLK ou FLN valide. "/>
+                        </item>
+                        <item id="error.opening3">
+                                <translation lang="en" trans="The error message was: "/>
+                                <translation lang="de" trans="Die Fehlermeldung war: "/>
+                                <translation lang="fr" trans="Le message d'erreur était: "/>
+                        </item>
+                        <item id="error.nosegment">
+                                <translation lang="en" trans="No segment selected"/>
+                                <translation lang="de" trans="Kein Segment ausgewählt"/>
+                                <translation lang="fr" trans="Aucun segment sélectionné"/>
+                        </item>
+                        <item id="error.notimepoint">
+                                <translation lang="en" trans="No timepoint selected"/>
+                                <translation lang="de" trans="Kein Zeitpunkt ausgewählt"/>
+                                <translation lang="fr" trans="Aucun repère temporel sélectionné"/>
+                        </item>
+                        <item id="error.nocontribution">
+                                <translation lang="en" trans="No contribution selected"/>
+                                <translation lang="de" trans="Kein Beitrag ausgewählt"/>
+                                <translation lang="fr" trans="Aucune contribution sélectionnée"/>
+                        </item>
+                        <item id="error.shortsegment">
+                                <translation lang="en"
+                                        trans="The segment is too short to be split again."/>
+                                <translation lang="de"
+                                        trans="Das Segment ist zu kurz, um noch einmal geteilt zu werden."/>
+                                <translation lang="fr"
+                                        trans="Le segment est trop court pour être fractionné de nouveau."/>
+                        </item>
+                        <item id="error.readingrecording">
+                                <translation lang="en" trans="Error reading recording"/>
+                                <translation lang="de" trans="Fehler beim Lesen der Aufnahme"/>
+                                <translation lang="fr" trans="Erreur pendant la lecture de l'enregistrement"/>
+                        </item>
+                        <item id="error.message">
+                                <translation lang="en" trans="Error message"/>
+                                <translation lang="de" trans="Fehlermeldung"/>
+                                <translation lang="fr" trans="Message d&apos;erreur"/>
+                        </item>
+                        <item id="error.cancel">
+                                <translation lang="en" trans="Cancel"/>
+                                <translation lang="de" trans="Abbrechen"/>
+                                <translation lang="fr" trans="Annuler"/>
+                        </item>
+                </subdomain>
+                <subdomain name="main_gui">
+                        <item id="gui.start">
+                                <translation lang="en" trans="Start"/>
+                                <translation lang="de" trans="Start"/>
+                                <translation lang="fr" trans="Début"/>
+                        </item>
+                        <item id="gui.end">
+                                <translation lang="en" trans="End"/>
+                                <translation lang="de" trans="Ende"/>
+                                <translation lang="fr" trans="Fin"/>
+                        </item>
+                        <item id="gui.cursor">
+                                <translation lang="en" trans="Cursor"/>
+                                <translation lang="de" trans="Cursor"/>
+                                <translation lang="fr" trans="Curseur"/>
+                        </item>
+                        <item id="gui.speaker">
+                                <translation lang="en" trans="Speaker"/>
+                                <translation lang="de" trans="Sprecher"/>
+                                <translation lang="fr" trans="Locuteur"/>
+                        </item>
+                        <item id="gui.transcriptiontext">
+                                <translation lang="en" trans="Transcription text"/>
+                                <translation lang="de" trans="Transkriptionstext"/>
+                                <translation lang="fr" trans="Texte de la transcription"/>
+                        </item>
+                        <item id="gui.syntax">
+                                <translation lang="en" trans="Syntax"/>
+                                <translation lang="de" trans="Syntax"/>
+                                <translation lang="fr" trans="Syntaxe"/>
+                        </item>
+                        <item id="gui.time">
+                                <translation lang="en" trans="Time"/>
+                                <translation lang="de" trans="Zeit"/>
+                                <translation lang="fr" trans="Temps"/>
+                        </item>
+
+                        <item id="gui.segments">
+                                <translation lang="en" trans="Segments"/>
+                                <translation lang="de" trans="Segmente"/>
+                                <translation lang="fr" trans="Segments"/>
+                        </item>
+                        <item id="gui.partitur">
+                                <translation lang="en" trans="Score"/>
+                                <translation lang="de" trans="Partitur"/>
+                                <translation lang="fr" trans="Partition"/>
+                        </item>
+                        <item id="gui.contributions">
+                                <translation lang="en" trans="Contributions"/>
+                                <translation lang="de" trans="Beiträge"/>
+                                <translation lang="fr" trans="Contributions"/>
+                        </item>
+                        <item id="gui.segmentstooltip">
+                                <translation lang="en" trans="Segment view"/>
+                                <translation lang="de" trans="Segment-Ansicht"/>
+                                <translation lang="fr" trans="Vue segments"/>
+                        </item>
+                        <item id="gui.partiturtooltip">
+                                <translation lang="en" trans="Score view"/>
+                                <translation lang="de" trans="Partitur-Ansicht"/>
+                                <translation lang="fr" trans="Vue partition"/>
+                        </item>
+                        <item id="gui.contributionstooltip">
+                                <translation lang="en" trans="Contribution view"/>
+                                <translation lang="de" trans="Beitrags-Ansicht"/>
+                                <translation lang="fr" trans="Vue contributions"/>
+                        </item>
+                </subdomain>
+                <subdomain name="dialogs">
+                        <item id="dialog.new">
+                                <translation lang="en" trans="New transcription"/>
+                                <translation lang="de" trans="Neue Transkription"/>
+                                <translation lang="fr" trans="Nouvelle transcription"/>
+                        </item>
+                        <item id="dialog.open">
+                                <translation lang="en" trans="Open transcription"/>
+                                <translation lang="de" trans="Transkription öffnen"/>
+                                <translation lang="fr" trans="Ouvrir une transcription"/>
+                        </item>
+                        <item id="dialog.split">
+                                <translation lang="en" trans="Split transcription: Save second part"/>
+                                <translation lang="de"
+                                        trans="Transkription teilen: Zweiten Teil speichern"/>
+                                <translation lang="fr"
+                                        trans="Fractionner la transcription: Enregistrer la deuxième partie"/>
+                        </item>
+                        <item id="dialog.merge">
+                                <translation lang="en" trans="Merge transcriptions"/>
+                                <translation lang="de" trans="Transkriptionen zusammenführen"/>
+                                <translation lang="fr" trans="Fusionner les transcriptions"/>
+                        </item>
+                        <item id="dialog.saveAs">
+                                <translation lang="en" trans="Save transcription"/>
+                                <translation lang="de" trans="Transkription speichern"/>
+                                <translation lang="fr" trans="Enregistrer la transcription"/>
+                        </item>
+                        <item id="dialog.import">
+                                <translation lang="en" trans="Import transcription"/>
+                                <translation lang="de" trans="Transkription importieren"/>
+                                <translation lang="fr" trans="Importer une transcription"/>
+                        </item>
+                        <item id="dialog.export">
+                                <translation lang="en" trans="Export transcription"/>
+                                <translation lang="de" trans="Transkription exportieren"/>
+                                <translation lang="fr" trans="Exporter la transcription"/>
+                        </item>
+                        <item id="dialog.output">
+                                <translation lang="en" trans="Output transcription"/>
+                                <translation lang="de" trans="Transkription ausgeben"/>
+                                <translation lang="fr" trans="Edition de la transcription"/>
+                        </item>
+                        <subdomain name="searchdialog">
+                                <item id="dialog.search">
+                                        <translation lang="en" trans="Search"/>
+                                        <translation lang="de" trans="Suchen"/>
+                                        <translation lang="fr" trans="Rechercher"/>
+                                </item>
+                                <item id="dialog.searchreplace">
+                                        <translation lang="en" trans="Search and replace"/>
+                                        <translation lang="de" trans="Suchen und Ersetzen"/>
+                                        <translation lang="fr" trans="Rechercher et remplacer"/>
+                                </item>
+                                <item id="dialog.search.searchfor">
+                                        <translation lang="en" trans="Search for:"/>
+                                        <translation lang="de" trans="Suchen nach:"/>
+                                        <translation lang="fr" trans="Rechercher:"/>
+                                </item>
+                                <item id="dialog.search.replacewith">
+                                        <translation lang="en" trans="Replace with:"/>
+                                        <translation lang="de" trans="Ersetzen mit:"/>
+                                        <translation lang="fr" trans="Remplacer par:"/>
+                                </item>
+                                <item id="dialog.search.findnext">
+                                        <translation lang="en" trans="Find next"/>
+                                        <translation lang="de" trans="Weitersuchen"/>
+                                        <translation lang="fr" trans="Rechercher suivant"/>
+                                </item>
+                                <item id="dialog.search.replace">
+                                        <translation lang="en" trans="Replace"/>
+                                        <translation lang="de" trans="Ersetzen"/>
+                                        <translation lang="fr" trans="Remplacer"/>
+                                </item>
+                                <item id="dialog.search.replaceall">
+                                        <translation lang="en" trans="Replace all"/>
+                                        <translation lang="de" trans="Alle ersetzen"/>
+                                        <translation lang="fr" trans="Remplacer tout"/>
+                                </item>
+                                <item id="dialog.search.cancel">
+                                        <translation lang="en" trans="Cancel"/>
+                                        <translation lang="de" trans="Abbrechen"/>
+                                        <translation lang="fr" trans="Annuler"/>
+                                </item>
+                                <item id="dialog.search.regularexpression">
+                                        <translation lang="en" trans="Regular expression"/>
+                                        <translation lang="de" trans="Regulärer Ausdruck"/>
+                                        <translation lang="fr" trans="Expression régulière"/>
+                                </item>
+                                <item id="dialog.search.case">
+                                        <translation lang="en" trans="Match case"/>
+                                        <translation lang="de" trans="Groß-/Kleinschreibung"/>
+                                        <translation lang="fr" trans="Respecter la casse"/>
+                                </item>
+                        </subdomain>
+                        <subdomain name="preferencesdialog">
+                                <item id="dialog.preferences">
+                                        <translation lang="en" trans="Preferences"/>
+                                        <translation lang="de" trans="Voreinstellungen"/>
+                                        <translation lang="fr" trans="Préférences"/>
+                                </item>
+                                <item id="dialog.preferences.transcriptlevel">
+                                        <translation lang="en" trans="Transcript level"/>
+                                        <translation lang="de" trans="Transkriptstufe"/>
+                                        <translation lang="fr" trans="Niveau de transcription"/>
+                                </item>
+                                <item id="dialog.preferences.defaultAudioPath">
+                                        <translation lang="en" trans="Default audio path"/>
+                                        <translation lang="de" trans="Default Audioverzeichnis"/>
+                                        <translation lang="fr" trans="Dossier audio défaut"/>
+                                </item>
+                                <item id="dialog.preferences.level0">
+                                        <translation lang="en" trans="Level 0 - no controls"/>
+                                        <translation lang="de" trans="Stufe 0 - keine Kontrollen"/>
+                                        <translation lang="fr" trans="Niveau 0 - aucun contrôle"/>
+                                </item>
+                                <item id="dialog.preferences.level1">
+                                        <translation lang="en" trans="Level 1 - time control only"/>
+                                        <translation lang="de" trans="Stufe 1 - nur Zeitkontrolle"/>
+                                        <translation lang="fr" trans="Niveau 1 - contrôle de temps uniquement"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.level2">
+                                        <translation lang="en"
+                                                trans="Level 2 - cGAT minimal transcript"/>
+                                        <translation lang="de"
+                                                trans="Stufe 2 - cGAT-Minimaltranskript"/>
+                                        <translation lang="fr"
+                                                trans="Niveau 2 - transcription cGAT minimale"/>
+                                </item>
+                                <item id="dialog.preferences.level3">
+                                        <translation lang="en"
+                                                trans="Level 3 - cGAT basic transcript"/>
+                                        <translation lang="de"
+                                                trans="Stufe 3 - cGAT-Basistranskript"/>
+                                        <translation lang="fr"
+                                                trans="Niveau 3 - cGAT transcription de base"/>
+                                </item>
+                                <item id="dialog.preferences.options">
+                                        <translation lang="en" trans="Options"/>
+                                        <translation lang="de" trans="Optionen"/>
+                                        <translation lang="fr" trans="Options"/>
+                                </item>
+                                <item id="dialog.preferences.whitespace">
+                                        <translation lang="en"
+                                                trans="Normalise whitespace before saving"/>
+                                        <translation lang="de"
+                                                trans="Whitespace vor dem Speichern normalisieren"/>
+                                        <translation lang="fr"
+                                                trans="Normaliser les espaces avant la sauvegarde"/>
+                                </item>
+                                <item id="dialog.preferences.pauses">
+                                        <translation lang="en"
+                                                trans="Update pause segments before saving"/>
+                                        <translation lang="de"
+                                                trans="Pausensegmente vor dem Speichern aktualisieren"/>
+                                        <translation lang="fr"
+                                                trans="Actualiser les segments de pause avant la sauvegarde"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.level0.tooltip">
+                                        <translation lang="en"
+                                                trans="Neither self-overlaps nor syntax errors are controlled"/>
+                                        <translation lang="de"
+                                                trans="Weder Selbstüberlappungen noch Syntaxfehler werden kontrolliert"/>
+                                        <translation lang="fr"
+                                                trans="Pas de contrôle des auto-chevauchements et des erreurs de syntaxe"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.level1.tooltip">
+                                        <translation lang="en"
+                                                trans="Self-overlaps are controlled, not the syntax"/>
+                                        <translation lang="de"
+                                                trans="Selbstüberlappungen werden kontrolliert, Syntax nicht"/>
+                                        <translation lang="fr"
+                                                trans="Contrôle des auto-chevauchements, mais pas de la syntaxe"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.level2.tooltip">
+                                        <translation lang="en"
+                                                trans="Self-overlaps and cGAT syntax according to minimal level are controlled"/>
+                                        <translation lang="de"
+                                                trans="Selbstüberlappungen und cGAT-Syntax gemäß Minimaltranskript werden kontrolliert"/>
+                                        <translation lang="fr"
+                                                trans="Contrôle des auto-chevauchements et de la syntaxe cGAT (niveau minimal)"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.level3.tooltip">
+                                        <translation lang="en"
+                                                trans="Self-overlaps and cGAT syntax according to basic level are controlled"/>
+                                        <translation lang="de"
+                                                trans="Selbstüberlappungen und cGAT-Syntax gemäß Basistranskript werden kontrolliert"/>
+                                        <translation lang="fr"
+                                                trans="Contrôle des auto-chevauchements et de la syntaxe cGAT (niveau de base)"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.whitespace.tooltip">
+                                        <translation lang="en"
+                                                trans="Multiple spaces are replaced by single space"/>
+                                        <translation lang="de"
+                                                trans="Mehrfache Leerzeichen werden durch einfache ersetzt "/>
+                                        <translation lang="fr"
+                                                trans="Les espaces multiples sont remplacés par un espace simple"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.pauses.tooltip">
+                                        <translation lang="en"
+                                                trans="Pause length is recalculated according to segment length"/>
+                                        <translation lang="de"
+                                                trans="Pausenlängen werden anhand der Segmentlänge neu berechnet"/>
+                                        <translation lang="fr"
+                                                trans="La durée des pauses est recalculée selon la durée du segment"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.playerhint">
+                                        <translation lang="en"
+                                                trans="Changes to player preferences will only take effect after a restart of FOLKER."/>
+                                        <translation lang="de"
+                                                trans="Änderungen an den Voreinstellungen für den Player werden erst nach einem Neustart von FOLKER wirksam."/>
+                                        <translation lang="fr"
+                                                trans="Les modifications ne prendront effet qu'après un redémarrage de FOLKER"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.alphabethint">
+                                        <translation lang="en"
+                                                trans="Changes to alphabet preferences will only take effect after a restart of FOLKER."/>
+                                        <translation lang="de"
+                                                trans="Änderungen an den Voreinstellungen für das Alphabet werden erst nach einem Neustart von FOLKER wirksam."/>
+                                        <translation lang="fr"
+                                                trans="Les modifications ne prendront effet qu'après un redémarrage de FOLKER"
+                                        />
+                                </item>
+                                <item id="dialog.preferences.directshow">
+                                        <translation lang="en" trans="Direct Show (Windows only)"/>
+                                        <translation lang="de" trans="Direct Show (Nur auf Windows)"/>
+                                        <translation lang="fr"
+                                                trans="Direct Show (Windows seulement)"/>
+                                </item>
+                                <item id="dialog.preferences.quicktime">
+                                        <translation lang="en" trans="Quicktime (Macintosh only)"/>
+                                        <translation lang="de" trans="Quicktime (Nur auf Macintosh)"/>
+                                        <translation lang="fr"
+                                                trans="Quicktime (Macintosh seulement)"/>
+                                </item>
+                                <item id="dialog.preferences.controloption">
+                                        <translation lang="en"
+                                                trans="Use keyboard shortcuts with Ctrl"/>
+                                        <translation lang="de"
+                                                trans="Tastaturkürzel mit Strg/Ctrl verwenden"/>
+                                        <translation lang="fr"
+                                                trans="Utiliser les raccourcis clavier avec Ctrl"/>
+                                </item>
+                                <item id="dialog.preferences.waitloop">
+                                        <translation lang="en"
+                                                trans="Wating time between loops (ms): "/>
+                                        <translation lang="de"
+                                                trans="Wartezeit zwischen Loops (ms): "/>
+                                        <translation lang="fr"
+                                                trans="Temps d'attente entre les boucles de lecture (ms): "/>
+                                </item>
+                                <item id="dialog.preferences.font">
+                                        <translation lang="en" trans="Font"/>
+                                        <translation lang="de" trans="Schrift"/>
+                                        <translation lang="fr" trans="Police"/>
+                                </item>
+                                <item id="dialog.preferences.imposefont">
+                                        <translation lang="en" trans="Impose font: "/>
+                                        <translation lang="de" trans="Schriftart vorgeben: "/>
+                                        <translation lang="fr" trans="Prédéfinir la police: "/>
+                                </item>
+                                <item id="dialog.preferences.language">
+                                        <translation lang="en" trans="Language"/>
+                                        <translation lang="de" trans="Sprache"/>
+                                        <translation lang="fr" trans="Langue"/>
+                                </item>
+                                <item id="dialog.preferences.advanced">
+                                        <translation lang="en" trans="Advanced"/>
+                                        <translation lang="de" trans="Erweitert"/>
+                                        <translation lang="fr" trans="Avancé"/>
+                                </item>
+                                <item id="dialog.preferences.enableLogging">
+                                        <translation lang="en" trans="Enable logging"/>
+                                        <translation lang="de" trans="Logging aktivieren"/>
+                                        <translation lang="fr" trans="Activer logging"/>
+                                </item>
+                                <item id="dialog.preferences.languagehint">
+                                        <translation lang="en"
+                                                trans="Changes to language preferences will only take effect after a restart of FOLKER."/>
+                                        <translation lang="de"
+                                                trans="Änderungen an den Spracheinstellungen werden erst nach einem Neustart von FOLKER wirksam."/>
+                                        <translation lang="fr"
+                                                trans="Les modifications ne prendront effet qu'après un redémarrage de FOLKER"
+                                        />
+                                </item>
+                                <item id="dialog.zoom.horizontal">
+                                        <translation lang="en" trans="Horizontal zoom"/>
+                                        <translation lang="de" trans="Horizontale Auflösung"/>
+                                        <translation lang="fr" trans="Zoom horizontal"/>
+                                </item>
+                                <item id="dialog.zoom.vertical">
+                                        <translation lang="en" trans="Vertical zoom"/>
+                                        <translation lang="de" trans="Vertikale Vergrößerung"/>
+                                        <translation lang="fr" trans="Zoom vertical"/>
+                                </item>
+
+                        </subdomain>
+                        <subdomain name="speakerdialog">
+                                <item id="dialog.speaker.newspeaker">
+                                        <translation lang="en" trans="New speaker"/>
+                                        <translation lang="de" trans="Neuer Sprecher"/>
+                                        <translation lang="fr" trans="Nouveau locuteur"/>
+                                </item>
+                                <item id="dialog.speaker.removespeaker">
+                                        <translation lang="en" trans="Remove speaker"/>
+                                        <translation lang="de" trans="Sprecher entfernen"/>
+                                        <translation lang="fr" trans="Supprimer locuteur"/>
+                                </item>
+                                <item id="dialog.speaker.name">
+                                        <translation lang="en" trans="Name: "/>
+                                        <translation lang="de" trans="Name: "/>
+                                        <translation lang="fr" trans="Nom: "/>
+                                </item>
+                                <item id="dialog.speaker.editspeakers">
+                                        <translation lang="en" trans="Edit speakers"/>
+                                        <translation lang="de" trans="Sprecher bearbeiten"/>
+                                        <translation lang="fr" trans="Editer les locuteurs"/>
+                                </item>
+                        </subdomain>
+                        <subdomain name="modifytimesdialog">
+                                <item id="dialog.times.title">
+                                        <translation lang="en" trans="Modify absolute times"/>
+                                        <translation lang="de" trans="Absolute Zeitwerte ändern"/>
+                                        <translation lang="fr" trans="Modifier temps absolus"/>
+                                </item>
+                                <item id="dialog.times.shift">
+                                        <translation lang="en" trans="Shift absolute times"/>
+                                        <translation lang="de" trans="Absolute Zeitwerte verschieben"/>
+                                        <translation lang="fr" trans="Décaler temps absolus"/>
+                                </item>
+                                <item id="dialog.times.shifttext">
+                                        <translation lang="en" trans="&lt;html&gt;Enter a time value (negative or positive), e.g. &lt;b&gt;-4.56&lt;/b&gt; or &lt;b&gt;01:54.3&lt;/b&gt;.&lt;/html&gt;"/>
+                                        <translation lang="de" trans="&lt;html&gt;Geben Sie einen (negativen oder positiven) Zeitwert ein, z.B. &lt;b&gt;-4.56&lt;/b&gt; oder &lt;b&gt;01:54.3&lt;/b&gt;.&lt;/html&gt;"/>
+                                        <translation lang="fr" trans="&lt;html&gt;Enter a time value (negative or positive), e.g. &lt;b&gt;-4.56&lt;/b&gt; or &lt;b&gt;01:54.3&lt;/b&gt;.&lt;/html&gt;"/>
+                                </item>
+                                <item id="dialog.times.scale">
+                                        <translation lang="en" trans="Scale absolute times"/>
+                                        <translation lang="de" trans="Absolute Zeitwerte skalieren"/>
+                                        <translation lang="fr" trans="Mettre temps absolus à l'échelle"/>
+                                </item>
+                                <item id="dialog.times.scaletext">
+                                        <translation lang="en" trans="&lt;html&gt;Enter the scale factor, e.g. &lt;b&gt;0.8&lt;/b&gt; to scale down or &lt;b&gt;1.2&lt;/b&gt; to stretch.&lt;/html&gt;"/>
+                                        <translation lang="de" trans="&lt;html&gt;Geben Sie einen Skalierungsfaktor ein, z.B. &lt;b&gt;0.8&lt;/b&gt; zum Stauchen oder &lt;b&gt;1.2&lt;/b&gt; zum Strecken.&lt;/html&gt;"/>
+                                        <translation lang="fr" trans="&lt;html&gt;Enter the scale factor, e.g. &lt;b&gt;0.8&lt;/b&gt; to scale down or &lt;b&gt;1.2&lt;/b&gt; to stretch.&lt;/html&gt;"/>
+                                </item>                                
+                                <item id="dialog.times.first2zero">
+                                        <translation lang="en" trans="First value to 0.0"/>
+                                        <translation lang="de" trans="Anfang auf 0.0"/>
+                                        <translation lang="fr" trans="Début à 0.0"/>
+                                </item>
+                                <item id="dialog.times.checkpoint">
+                                        <translation lang="en" trans="Checkpoint: "/>
+                                        <translation lang="de" trans="Messpunkt: "/>
+                                        <translation lang="fr" trans="Point de mesure: "/>
+                                </item>
+                                <item id="dialog.times.currenttime">
+                                        <translation lang="en" trans="Current time:"/>
+                                        <translation lang="de" trans="Aktuelle Zeit:"/>
+                                        <translation lang="fr" trans="Temps actuel:"/>
+                                </item>
+                                <item id="dialog.times.targettime">
+                                        <translation lang="en" trans="Target time:"/>
+                                        <translation lang="de" trans="Zielwert:"/>
+                                        <translation lang="fr" trans="Temps cible:"/>
+                                </item>
+                                <item id="dialog.times.usecheckpoint">
+                                        <translation lang="en" trans="Use checkpoint"/>
+                                        <translation lang="de" trans="Messpunkt verwenden"/>
+                                        <translation lang="fr" trans="Utiliser point de mesure"/>
+                                </item>
+                                <item id="dialog.times.wrongformat">
+                                        <translation lang="en" trans="Wrong time format"/>
+                                        <translation lang="de" trans="Falsches Zeitformat"/>
+                                        <translation lang="fr" trans="Wrong time format"/>
+                                </item>
+                                <item id="dialog.times.updated">
+                                        <translation lang="en" trans="Absolute time values modified"/>
+                                        <translation lang="de" trans="Absolute Zeitwerte geändert"/>
+                                        <translation lang="fr" trans="Temps absolus modifiés"/>
+                                </item>
+                        </subdomain>
+                        <subdomain name="transcriptionlogdialog">
+                                <item id="dialog.log.editlog">
+                                        <translation lang="en" trans="Transcription log"/>
+                                        <translation lang="de" trans="Transkriptions-Logbuch"/>
+                                        <translation lang="fr" trans="Log"/>
+                                </item>
+                        </subdomain>
+                        <subdomain name="newlogdialog">
+                                <item id="dialog.newlog.title">
+                                        <translation lang="en" trans="New log entry"/>
+                                        <translation lang="de" trans="Neuer Eintrag ins Logbuch"/>
+                                        <translation lang="fr" trans="Nouveau log"/>
+                                </item>
+                                <item id="dialog.newlog.startedit">
+                                        <translation lang="en" trans="Start edit: "/>
+                                        <translation lang="de" trans="Beginn der Bearbeitung: "/>
+                                        <translation lang="fr" trans="Début de l'édition"/>
+                                </item>
+                                <item id="dialog.newlog.endedit">
+                                        <translation lang="en" trans="End edit: "/>
+                                        <translation lang="de" trans="Ende der Bearbeitung: "/>
+                                        <translation lang="fr" trans="Fin de l'édition"/>
+                                </item>
+                                <item id="dialog.newlog.editperson">
+                                        <translation lang="en" trans="Editor: "/>
+                                        <translation lang="de" trans="Bearbeiter: "/>
+                                        <translation lang="fr" trans="Editeur: "/>
+                                </item>
+                                <item id="dialog.newlog.description">
+                                        <translation lang="en" trans="Description: "/>
+                                        <translation lang="de" trans="Beschreibung: "/>
+                                        <translation lang="fr" trans="Description: "/>
+                                </item>
+                        </subdomain>
+                        <item id="dialog.recording">
+                                <translation lang="en" trans="Reassign recording"/>
+                                <translation lang="de" trans="Aufnahme neu zuordnen"/>
+                                <translation lang="fr" trans="Réassigner l'enregistrement"/>
+                        </item>
+                        <item id="dialog.keyboard">
+                                <translation lang="en" trans="Keyboard commands"/>
+                                <translation lang="de" trans="Tastaturkommandos"/>
+                                <translation lang="fr" trans="Raccourcis clavier"/>
+                        </item>
+                        <subdomain name="dialog.about">
+                            <item id="dialog.about.about">
+                                    <translation lang="en" trans="About "/>
+                                    <translation lang="de" trans="Über "/>
+                                    <translation lang="fr" trans="A propos "/>
+                            </item>
+                            <item id="dialog.about.os">
+                                    <translation lang="en" trans="Operating system:"/>
+                                    <translation lang="de" trans="Betriebssystem:"/>
+                                    <translation lang="fr" trans="Système d'exploitation:"/>
+                            </item>
+                            <item id="dialog.about.osversion">
+                                    <translation lang="en" trans="Operating system version:"/>
+                                    <translation lang="de" trans="Betriebssystem-Version:"/>
+                                    <translation lang="fr" trans="Version de système d'exploitation:"/>
+                            </item>
+                            <item id="dialog.about.javaversion">
+                                    <translation lang="en" trans="Java version:"/>
+                                    <translation lang="de" trans="Java-Version:"/>
+                                    <translation lang="fr" trans="Version de Java:"/>
+                            </item>
+                            <item id="dialog.about.softwareversion">
+                                    <translation lang="en" trans="Software version:"/>
+                                    <translation lang="de" trans="Software-Version:"/>
+                                    <translation lang="fr" trans="Version du logiciel:"/>
+                            </item>
+                            <item id="dialog.about.buildtime">
+                                    <translation lang="en" trans="Build time:"/>
+                                    <translation lang="de" trans="Build-Zeit:"/>
+                                    <translation lang="fr" trans="Temps de build:"/>
+                            </item>
+                            <item id="dialog.about.copydebug">
+                                    <translation lang="en" trans="Copy debug information"/>
+                                    <translation lang="de" trans="Debug-Informationen kopieren"/>
+                                    <translation lang="fr" trans="Copier informations de débogage"/>
+                            </item>
+                       </subdomain>
+                        <subdomain name="dialog.navigation">
+                            <item id="dialog.navigation.apply">
+                                    <translation lang="en" trans="Apply"/>
+                                    <translation lang="de" trans="Anwenden"/>
+                                    <translation lang="fr" trans="Appliquer"/>
+                            </item>
+                            <item id="dialog.navigation.close">
+                                    <translation lang="en" trans="Close"/>
+                                    <translation lang="de" trans="Schließen"/>
+                                    <translation lang="fr" trans="Fermer"/>
+                            </item>
+                            <item id="dialog.navigation.show">
+                                    <translation lang="en" trans="Show"/>
+                                    <translation lang="de" trans="Anzeigen"/>
+                                    <translation lang="fr" trans="Montrer"/>
+                            </item>
+                        </subdomain>
+
+                </subdomain>
+                <subdomain name="miscellaneous">
+                        <item id="misc.basicTranscription">
+                                <translation lang="en"
+                                        trans="EXMARaLDA Basic Transcription (*.exb, *.xml)"/>
+                                <translation lang="de"
+                                        trans="EXMARaLDA Basistranskription (*.exb, *.xml)"/>
+                                <translation lang="fr"
+                                        trans="EXMARaLDA Transcription de base (*.exb, *.xml)"/>
+                        </item>
+                        <item id="misc.audacityLabelFile">
+                                <translation lang="en"
+                                        trans="Audacity Label File (*.txt)"/>
+                                <translation lang="de"
+                                        trans="Audacity Label File (*.txt)"/>
+                                <translation lang="fr"
+                                        trans="Audacity Label File (*.txt)"/>
+                        </item>
+                        <item id="misc.contributionList">
+                                <translation lang="en" trans="Contribution list (*.html)"/>
+                                <translation lang="de" trans="Beitragsliste (*.html)"/>
+                                <translation lang="fr" trans="Liste de contributions (*.html)"/>
+                        </item>
+                        <item id="misc.contributionListAudio">
+                                <translation lang="en" trans="Contribution list with audio player(*.html)"/>
+                                <translation lang="de" trans="Beitragsliste mit Audioplayer(*.html)"/>
+                                <translation lang="fr" trans="Liste de contributions avec player (*.html)"/>
+                        </item>
+                        <item id="misc.compactPartiturAudio">
+                                <translation lang="en" trans="Compact Score with audio player (*.html)"/>
+                                <translation lang="de" trans="Kompakt-Partitur mit Audioplayer (*.html)"/>
+                                <translation lang="fr" trans="Partition compacte avec player (*.html)"/>
+                        </item>
+                        <item id="misc.segmentList">
+                                <translation lang="en" trans="Segment list (*.html)"/>
+                                <translation lang="de" trans="Segmentliste (*.html)"/>
+                                <translation lang="fr" trans="Liste des segments (*.html)"/>
+                        </item>
+                        <item id="misc.gatBasicTranscript">
+                                <translation lang="en" trans="GAT Basic Transcript (*.html)"/>
+                                <translation lang="de" trans="GAT Basistranskript (*.html)"/>
+                                <translation lang="fr" trans="GAT transcription de base (*.html)"/>
+                        </item>                        
+                        <item id="misc.partitur">
+                                <translation lang="en" trans="Score (*.html)"/>
+                                <translation lang="de" trans="Partitur (*.html)"/>
+                                <translation lang="fr" trans="Partition (*.html)"/>
+                        </item>
+                        <item id="misc.quantification">
+                                <translation lang="en" trans="Quantification (*.html)"/>
+                                <translation lang="de" trans="Quantifizierung (*.html)"/>
+                                <translation lang="fr" trans="Quantification (*.html)"/>
+                        </item>
+                        <item id="misc.nospeaker">
+                                <translation lang="en" trans="no speaker assignment"/>
+                                <translation lang="de" trans="keine Sprecherzuordnung"/>
+                                <translation lang="fr" trans="pas de locuteur associé"/>
+                        </item>
+                        <item id="misc.folkertranscription">
+                                <translation lang="en" trans="FOLKER transcriptions (*.flk, *.fln)"/>
+                                <translation lang="de" trans="FOLKER-Transkriptionen (*.flk, *.fln)"/>
+                                <translation lang="fr" trans="Transcriptions FOLKER (*.flk, *.fln)"/>
+                        </item>
+                        <item id="misc.error">
+                                <translation lang="en" trans="Error"/>
+                                <translation lang="de" trans="Fehler"/>
+                                <translation lang="fr" trans="Erreur"/>
+                        </item>
+                        <item id="misc.selecttier">
+                                <translation lang="en" trans="Select tier"/>
+                                <translation lang="de" trans="Spur auswählen"/>
+                                <translation lang="fr" trans="Choisir ligne"/>
+                        </item>
+                        <item id="misc.ctrl">
+                                <translation lang="en" trans="Ctrl + "/>
+                                <translation lang="de" trans="Strg + "/>
+                                <translation lang="fr" trans="Ctrl + "/>
+                        </item>
+                        <item id="misc.noMoreErrors">
+                                <translation lang="en" trans="No more errors"/>
+                                <translation lang="de" trans="Keine weiteren Fehler"/>
+                                <translation lang="fr" trans="Il n'y a plus d'erreurs"/>
+                        </item>                  
+                        <item id="misc.FLNWarning1">
+                                <translation lang="en" trans="This is a normalized FOLKER transcription."/>
+                                <translation lang="de" trans="Dies ist eine normalisierte FOLKER-Transkription."/>
+                                <translation lang="fr" trans="Ceci est une transcription FOLKER normalisée."/>
+                        </item>                  
+                        <item id="misc.FLNWarning2">
+                                <translation lang="en" trans="It contains normalisation, lemmatisation and/or POS information."/>
+                                <translation lang="de" trans="Sie enthält Normalisierungs-, Lemmatisierungs- und POS-Information."/>
+                                <translation lang="fr" trans="Elle comprend de l&apos;information de normalisation, de lemmatisation ou/et une étiquetage POS."/>
+                        </item>                  
+                        <item id="misc.FLNWarning3">
+                                <translation lang="en" trans="When opening and saving the file in FOLKER this information will be lost."/>
+                                <translation lang="de" trans="Beim Öffnen und Speichern der Datei in FOLKER geht diese Information verloren."/>
+                                <translation lang="fr" trans="En ouvrant et enregistrant le fichier dans FOLKER, cette information sera supprimée."/>
+                        </item>                  
+                        <item id="misc.FLNWarning4">
+                                <translation lang="en" trans="To view and edit the file with this information use the OrthoNormal tool."/>
+                                <translation lang="de" trans="Um diese Information anzusehen und zu bearbeiten, benutzen Sie das OrthoNormal-Tool."/>
+                                <translation lang="fr" trans="Pour voir et adapter cette information, utilisez OrthoNormal."/>
+                        </item>                  
+                </subdomain>
+                <subdomain name="keyboard">
+                        <item id="keyboard.micropause">
+                                <translation lang="en" trans="Micro pause"/>
+                                <translation lang="de" trans="Mikropause"/>
+                                <translation lang="fr" trans="Pause micro"/>
+                        </item>
+                        <item id="keyboard.breathe">
+                                <translation lang="en" trans="Breathe in/out"/>
+                                <translation lang="de" trans="Ein-/Ausatmen"/>
+                                <translation lang="fr" trans="Inspiration / expiration"/>
+                        </item>
+                        <item id="keyboard.glottalstop">
+                                <translation lang="en" trans="Glottal stop"/>
+                                <translation lang="de" trans="Glottalverschluss"/>
+                                <translation lang="fr" trans="Coup de glotte"/>
+                        </item>
+                        <item id="keyboard.segmentseparator">
+                                <translation lang="en" trans="Segment separator"/>
+                                <translation lang="de" trans="Segmenttrennzeichen"/>
+                                <translation lang="fr" trans="Séparateur de segments"/>
+                        </item>
+                        <item id="keyboard.level">
+                                <translation lang="en" trans="level tone movement"/>
+                                <translation lang="de" trans="gleichbleibende Tonhöhenbewegung"/>
+                                <translation lang="fr" trans="mouvement mélodique constant"/>
+                        </item>
+                        <item id="keyboard.smalljumpup">
+                                <translation lang="en" trans="small upwards tone jump"/>
+                                <translation lang="de" trans="kleinerer Tonhöhensprung nach oben"/>
+                                <translation lang="fr" trans="décrochage mélodique faible vers le haut"/>
+                        </item>
+                        <item id="keyboard.bigjumpup">
+                                <translation lang="en" trans="big upwards tone jump"/>
+                                <translation lang="de" trans="größerer Tonhöhensprung nach oben"/>
+                                <translation lang="fr" trans="décrochage mélodique important vers le haut"/>
+                        </item>
+                        <item id="keyboard.smalljumpdown">
+                                <translation lang="en" trans="small downwards tone jump"/>
+                                <translation lang="de" trans="kleinerer Tonhöhensprung nach unten"/>
+                                <translation lang="fr" trans="décrochage mélodique faible vers le bas"/>
+                        </item>
+                        <item id="keyboard.bigjumpdown">
+                                <translation lang="en" trans="big downwards tone jump"/>
+                                <translation lang="de" trans="größerer Tonhöhensprung nach unten"/>
+                                <translation lang="fr" trans="décrochage mélodique important vers le bas"/>
+                        </item>
+                        <item id="keyboard.accentfall">
+                                <translation lang="en" trans="falling accent tone movement"/>
+                                <translation lang="de" trans="fallende Akzenttonhöhenbewegung"/>
+                                <translation lang="fr" trans="mouvement mélodique descendant sur la syllabe accentuée"
+                                />
+                        </item>
+                        <item id="keyboard.accentrise">
+                                <translation lang="en" trans="rising accent tone movement"/>
+                                <translation lang="de" trans="steigende Akzenttonhöhenbewegung"/>
+                                <translation lang="fr" trans="mouvement mélodique montant sur la syllabe accentuée"/>
+                        </item>
+                        <item id="keyboard.accentlevel">
+                                <translation lang="en" trans="level accent tone movement"/>
+                                <translation lang="de"
+                                        trans="gleich bleibende Akzenttonhöhenbewegung"/>
+                                <translation lang="fr" trans="mouvement mélodique constant sur la syllabe accentuée"/>
+                        </item>
+                        <item id="keyboard.accentrisefall">
+                                <translation lang="en" trans="rising-falling accent tone movement"/>
+                                <translation lang="de"
+                                        trans="steigend-fallende Akzenttonhöhenbewegung"/>
+                                <translation lang="fr"
+                                        trans="mouvement mélodique montant-descandant sur la syllabe accentuée"/>
+                        </item>
+                        <item id="keyboard.accentfallrise">
+                                <translation lang="en" trans="falling-rising accent tone movement"/>
+                                <translation lang="de"
+                                        trans="fallend-steigende Akzenttonhöhenbewegung"/>
+                                <translation lang="fr"
+                                        trans="mouvement mélodique descandant-montant sur la syllabe accentuée"/>
+                        </item>
+
+                </subdomain>
+                
+                <subdomain name="masker">
+                        <item id="masker.sourcefile">
+                                <translation lang="en" trans="Source file: "/>
+                                <translation lang="de" trans="Quelldatei: "/>
+                                <translation lang="fr" trans="Fichier source: "/>
+                        </item>
+                        <item id="masker.targetfile">
+                                <translation lang="en" trans="Target file: "/>
+                                <translation lang="de" trans="Zieldatei: "/>
+                                <translation lang="fr" trans="Fichier cible: "/>
+                        </item>
+                        <item id="masker.browse">
+                                <translation lang="en" trans="Browse..."/>
+                                <translation lang="de" trans="Durchsuchen..."/>
+                                <translation lang="fr" trans="Browse..."/>
+                        </item>
+                        <item id="masker.method">
+                                <translation lang="en" trans="Method: "/>
+                                <translation lang="de" trans="Methode: "/>
+                                <translation lang="fr" trans="Méthode: "/>
+                        </item>
+                        <item id="masker.progressdialogtitle">
+                                <translation lang="en" trans="Masking audio file... "/>
+                                <translation lang="de" trans="Audiodatei wird maskiert..."/>
+                                <translation lang="fr" trans="Masquage en progrès..."/>
+                        </item>
+                        <item id="masker.accomplished">
+                                <translation lang="en" trans="Masking completed. "/>
+                                <translation lang="de" trans="Maskierung abgeschlossen."/>
+                                <translation lang="fr" trans="Masquage terminé."/>
+                        </item>
+                        <item id="masker.switchfile">
+                                <translation lang="en" trans="Assign masked audio file?  "/>
+                                <translation lang="de" trans="Maskierte Audiodatei zuordnen? "/>
+                                <translation lang="fr" trans="Assigner fichier audio masqué? "/>
+                        </item>                    
+                        <item id="masker.maskAudioTitle">
+                                <translation lang="en" trans="Mask audio file"/>
+                                <translation lang="de" trans="Audiodatei maskieren"/>
+                                <translation lang="fr" trans="Masquer fichier audio"/>
+                        </item>                    
+                        <item id="dialog.mask.editMask">
+                                <translation lang="en" trans="Masking entries"/>
+                                <translation lang="de" trans="Maskierungseinträge"/>
+                                <translation lang="fr" trans="Entrées de masque"/>
+                        </item>
+                        <item id="masker.delete.confirm1">
+                                <translation lang="en" trans="All masking entries and the masking key will be deleted."/>
+                                <translation lang="de" trans="Alle Maskierungseinträge und der Maskierungsschlüssel werden gelöscht."/>
+                                <translation lang="fr" trans="Toutes entrées de masque et la clée de masquage seront supprimées."/>
+                        </item>
+                        <item id="dialog.maskEntry">
+                                <translation lang="en" trans="New masking segment"/>
+                                <translation lang="de" trans="Neues Maskierungssegment"/>
+                                <translation lang="fr" trans="Nouveau segment de masque"/>
+                        </item>
+
+                        
+                </subdomain>    
+                
+
+
+
+        </translations>
+</internationalization>

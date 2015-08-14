@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unicode-keyboard name="HIAT + Persian supplement">
+	<key>
+		<content>(.)</content>
+		<description>Mikropause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(-)</content>
+		<description>Pause ca. 0.25 Sek.</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(--)</content>
+		<description>Pause ca. 0.5 Sek.</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(---)</content>
+		<description>Pause ca. 0.75 Sek.</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>°</content>
+		<description>Markierung von Ein- bzw. Ausatmen</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&apos;</content>
+		<description>Glottalverschluss</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>?</content>
+		<description>hoch steigend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>,</content>
+		<description>mittel steigend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>-</content>
+		<description>gleichbleibend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>;</content>
+		<description>mittel fallend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>.</content>
+		<description>tief fallend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2191;</content>
+		<description>Tonhöhensprung nach oben</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2193;</content>
+		<description>Tonhöhensprung nach unten</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02CB;</content>
+		<description>fallende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02CA;</content>
+		<description>steigende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02C9;</content>
+		<description>gleichbleibende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02C6;</content>
+		<description>steigend-fallende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02C7;</content>
+		<description>fallend-steigende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;f&gt;</content>
+		<description>forte, laut</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;ff&gt;</content>
+		<description>fortissimo, sehr laut</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;p&gt;</content>
+		<description>piano, leise</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;pp&gt;</content>
+		<description>pianissimo, sehr leise</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;all&gt;</content>
+		<description>allegro, schnell</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;len&gt;</content>
+		<description>lento, langsam</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;cresc&gt;</content>
+		<description>crescendo, lauter werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;dim&gt;</content>
+		<description>diminuendo, leiser werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;acc&gt;</content>
+		<description>accelerando, schneller werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;rall&gt;</content>
+		<description>rallentando, langsamer werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+
+
+        <!-- Start Persian letters -->
+        
+        <key>
+		<content>&#702;</content>
+		<description>right half ring</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#256;</content>
+		<description>Capital A, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#257;</content>
+		<description>Small a, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>S&#817;</content>
+		<description>Capital S, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>s&#817;</content>
+		<description>Small s, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#486;</content>
+		<description>Capital G, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#487;</content>
+		<description>Small g, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#268;</content>
+		<description>Capital C, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#269;</content>
+		<description>Small c, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7716;</content>
+		<description>Capital H, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7717;</content>
+		<description>Small h, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7722;</content>
+		<description>CApital H, breve below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7723;</content>
+		<description>Small h, breve below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7828;</content>
+		<description>Capital Z, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7829;</content>
+		<description>Small z, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#381;</content>
+		<description>Capital Z, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#382;</content>
+		<description>Small z, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#352;</content>
+		<description>Capital S, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#353;</content>
+		<description>Small s, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7778;</content>
+		<description>Capital S, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7779;</content>
+		<description>Small s, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#379;</content>
+		<description>Capital Z, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#380;</content>
+		<description>Small z, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7788;</content>
+		<description>Capital T, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7789;</content>
+		<description>Small t, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7826;</content>
+		<description>Capital Z, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7827;</content>
+		<description>Small z, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#703;</content>
+		<description>left half ring</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#288;</content>
+		<description>Capital G, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#289;</content>
+		<description>Small g, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#298;</content>
+		<description>Capital I, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#299;</content>
+		<description>Small i, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>     

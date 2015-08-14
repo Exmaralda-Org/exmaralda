@@ -1,0 +1,1658 @@
+<ComaUiLanguages>
+	<LanguageNames>
+		<language name="Deutsch" created="14.02.2005" code="deu"/>
+		<language name="English" created="14.02.2005" code="eng"/>
+<!-- 		these should be updated before they can be used again
+		<language name="Turkish" created="14.02.2005" code="tk"/>
+		<language name="Bulgarian" created="21.02.2005" code="bul"/> 
+		<language name="Français" created="22.02.2005" code="fra"/>
+		<language name="Español" created="14.02.2005" code="spa"/> 
+-->
+	</LanguageNames>
+	<uiItems>
+		<!-- localized strings -->
+		<uiItem name="DurationString" lang="deu" value="JTSMSm___"/>
+		<uiItem name="DurationString" lang="eng" value="YDHMSm___"/>
+		<uiItem name="DurationString" lang="tk" value="YGSDSm___"/>
+
+		<!--options -->
+		<uiItem name="name" lang="deu" value="Name"/>
+		<uiItem name="name" lang="eng" value="name"/>
+		<uiItem name="name" lang="tk" value="isim"/>
+
+		<uiItem name="fileexists" lang="deu" value="Datei existiert bereits. Überschreiben?"/>
+		<uiItem name="fileexists" lang="eng" value="File exists. Overwrite?"/>
+		<uiItem name="fileexists" lang="tk" value="Dosya var. Üzerine yazılsın mı?"/>
+
+		<uiItem name="yes" lang="deu" value="ja"/>
+		<uiItem name="yes" lang="eng" value="yes"/>
+		<uiItem name="yes" lang="tk" value="evet"/>
+
+		<uiItem name="no" lang="deu" value="nein"/>
+		<uiItem name="no" lang="eng" value="no"/>
+		<uiItem name="no" lang="tk" value="hayır"/>
+
+		<uiItem name="old" lang="deu" value="alt"/>
+		<uiItem name="old" lang="eng" value="old"/>
+
+		<uiItem name="new" lang="deu" value="neu"/>
+		<uiItem name="new" lang="eng" value="new"/>
+
+		<uiItem name="select" lang="deu" value="Auswählen"/>
+		<uiItem name="select" lang="eng" value="select"/>
+		<uiItem name="select" lang="tk" value="seç"/>
+
+		<uiItem name="OK" lang="deu" value="OK"/>
+		<uiItem name="OK" lang="eng" value="OK"/>
+		<uiItem name="OK" lang="tk" value="OK"/>
+		<uiItem name="OK" lang="fra" value="OK"/>
+		<uiItem name="OK" lang="spa" value="OK"/>
+		<uiItem name="OK" lang="bul" value="OK"/>
+
+		<uiItem name="PeriodDuration" lang="deu" value="Dauer"/>
+		<uiItem name="PeriodDuration" lang="eng" value="Duration"/>
+		<uiItem name="PeriodDuration" lang="tk" value="süre"/>
+		<uiItem name="PeriodDuration" lang="fra" value="Durée"/>
+		<uiItem name="PeriodDuration" lang="spa" value="Duración"/>
+		<uiItem name="PeriodDuration" lang="bul" value="Продължение на периода"/>
+
+		<uiItem name="PeriodExact" lang="deu" value="Exakt?"/>
+		<uiItem name="PeriodExact" lang="eng" value="Exact?"/>
+		<uiItem name="PeriodExact" lang="tk" value="Tamam mı?"/>
+		<uiItem name="PeriodExact" lang="fra" value="Exact?"/>
+		<uiItem name="PeriodExact" lang="spa" value="¿Es el período exacto?"/>
+		<uiItem name="PeriodExact" lang="bul" value="Точност на периода?"/>
+
+		<uiItem name="PeriodStart" lang="deu" value="Startzeit"/>
+		<uiItem name="PeriodStart" lang="eng" value="Period start"/>
+		<uiItem name="PeriodStart" lang="tk" value="başlama zamanı"/>
+		<uiItem name="PeriodStart" lang="fra" value="Commencement de la période"/>
+		<uiItem name="PeriodStart" lang="spa" value="Punto de comienzo"/>
+		<uiItem name="PeriodStart" lang="bul" value="Начало на периода"/>
+
+		<uiItem name="XMLerror" lang="deu" value="XML-Fehler"/>
+		<uiItem name="XMLerror" lang="eng" value="XML-error"/>
+		<uiItem name="XMLerror" lang="tk" value="XML-hatası"/>
+		<uiItem name="XMLerror" lang="fra" value="erreur XML"/>
+		<uiItem name="XMLerror" lang="spa" value="Error XML"/>
+		<uiItem name="XMLerror" lang="bul" value="XML-грешка"/>
+
+		<uiItem name="action" lang="deu" value="Aktion"/>
+		<uiItem name="action" lang="eng" value="Action"/>
+		<uiItem name="action" lang="tk" value="eylem"/>
+		<uiItem name="action" lang="fra" value="Action"/>
+		<uiItem name="action" lang="spa" value="Operación"/>
+		<uiItem name="action" lang="bul" value="Операции"/>
+
+		<uiItem name="unit.years" lang="deu" value="Jahre"/>
+		<uiItem name="unit.years" lang="eng" value="years"/>
+		<uiItem name="unit.years" lang="tk" value="yıllar"/>
+
+		<uiItem name="unit.months" lang="deu" value="Monate"/>
+		<uiItem name="unit.months" lang="eng" value="months"/>
+		<uiItem name="unit.months" lang="tk" value="aylar"/>
+
+		<uiItem name="unit.days" lang="deu" value="Tage"/>
+		<uiItem name="unit.days" lang="eng" value="days"/>
+		<uiItem name="unit.days" lang="tk" value="günler"/>
+
+		<uiItem name="assignedCommunications" lang="deu" value="zugeordnete Kommunikationen"/>
+		<uiItem name="assignedCommunications" lang="eng" value="Assigned communications"/>
+		<uiItem name="assignedCommunications" lang="tk" value="atanmış komünikasyonlar"/>
+		<uiItem name="assignedCommunications" lang="fra" value="Communications attribuées"/>
+		<uiItem name="assignedCommunications" lang="spa" value="Comunicación coordinada"/>
+		<uiItem name="assignedCommunications" lang="bul" value="Принадлежащи комуникации"/>
+
+		<uiItem name="assignedSpeakers" lang="deu" value="zugeordnete Sprecher"/>
+		<uiItem name="assignedSpeakers" lang="eng" value="assigned speakers"/>
+		<uiItem name="assignedSpeakers" lang="tk" value="atanmış konuşmacılar"/>
+
+		<uiItem name="available" lang="deu" value="available"/>
+		<uiItem name="available" lang="eng" value="verfügbar"/>
+
+		<uiItem name="communicationsSelected" lang="deu" value="Kommunikationen ausgewählt"/>
+		<uiItem name="communicationsSelected" lang="eng" value="communications selected"/>
+		<uiItem name="communicationsSelected" lang="tk" value="seçilen komünikasyonlar"/>
+
+		<uiItem name="speakersSelected" lang="deu" value="Personen ausgewählt"/>
+		<uiItem name="speakersSelected" lang="eng" value="persons selected"/>
+		<uiItem name="speakersSelected" lang="tk" value="seçilen kişiler"/>
+
+		<uiItem name="assignedPersons" lang="deu" value="zugeordnete Personen"/>
+		<uiItem name="assignedPersons" lang="eng" value="assigned persons"/>
+		<uiItem name="assignedPersons" lang="tk" value="atanmış kişiler"/>
+
+		<uiItem name="basket" lang="deu" value="Korpus-Korb"/>
+		<uiItem name="basket" lang="eng" value="Basket"/>
+		<uiItem name="basket" lang="tk" value="sepet"/>
+		<uiItem name="basket" lang="fra" value="Corbeille"/>
+		<uiItem name="basket" lang="spa" value="Cesta de corpus"/>
+		<uiItem name="basket" lang="bul" value="Кошница"/>
+
+		<uiItem name="basketContains" lang="deu" value="Der Korb enthält"/>
+		<uiItem name="basketContains" lang="eng" value="Basket contains"/>
+		<uiItem name="basketContains" lang="tk" value="sepet içeriği"/>
+		<uiItem name="basketContains" lang="fra" value="La corbeille contient"/>
+		<uiItem name="basketContains" lang="spa" value="La cesta contiene"/>
+		<uiItem name="basketContains" lang="bul" value="Кошницата съдържа"/>
+
+		<uiItem name="basketEmpty" lang="deu" value="Der Korb ist leer."/>
+		<uiItem name="basketEmpty" lang="eng" value="Basket is empty"/>
+		<uiItem name="basketEmpty" lang="tk" value="sepet boş"/>
+		<uiItem name="basketEmpty" lang="fra" value="La corbeille est vide"/>
+		<uiItem name="basketEmpty" lang="spa" value="La cesta está vacía"/>
+		<uiItem name="basketEmpty" lang="bul" value="Кошницата е празна"/>
+
+		<uiItem name="basketGetsTree" lang="deu" value="Korb erhält Korpus-Struktur"/>
+		<uiItem name="basketGetsTree" lang="eng" value="Basket gets tree-structure"/>
+		<uiItem name="basketGetsTree" lang="tk" value="sepetin içinde ağaç yapısı"/>
+		<uiItem name="basketGetsTree" lang="fra" value="La corbeille prend la structure de l'arbre"/>
+		<uiItem name="basketGetsTree" lang="spa" value="La cesta obtiene estructura de corpus"/>
+		<uiItem name="basketGetsTree" lang="bul" value="Кошницата получава структура на корпус"/>
+
+		<uiItem name="browse" lang="eng" value="Browse..."/>
+		<uiItem name="browse" lang="deu" value="auswählen..."/>
+
+		<uiItem name="cancel" lang="deu" value="abbrechen"/>
+		<uiItem name="cancel" lang="eng" value="cancel"/>
+		<uiItem name="cancel" lang="tk" value="iptal et"/>
+		<uiItem name="cancel" lang="fra" value="Annuler"/>
+		<uiItem name="cancel" lang="spa" value="Cancelar"/>
+		<uiItem name="cancel" lang="bul" value="Прекъсни"/>
+
+		<uiItem name="ignore" lang="deu" value="ignorieren"/>
+		<uiItem name="ignore" lang="eng" value="ignore"/>
+		<uiItem name="ignore" lang="tk" value="yoksay"/>
+
+		<uiItem name="skip" lang="deu" value="überspringen"/>
+		<uiItem name="skip" lang="eng" value="skip"/>
+		<uiItem name="skip" lang="tk" value="atla"/>
+
+		<uiItem name="next" lang="deu" value="weiter"/>
+		<uiItem name="next" lang="eng" value="next"/>
+		<uiItem name="next" lang="tk" value="sonraki"/>
+
+		<uiItem name="prev" lang="deu" value="zurück"/>
+		<uiItem name="prev" lang="eng" value="previous"/>
+		<uiItem name="prev" lang="tk" value="önceki"/>
+
+		<uiItem name="finish" lang="deu" value="abschliessen"/>
+		<uiItem name="finish" lang="eng" value="finish"/>
+		<uiItem name="finish" lang="tk" value="bitir"/>
+
+		<uiItem name="summary" lang="deu" value="Zusammenfassung"/>
+		<uiItem name="summary" lang="eng" value="Summary"/>
+		<uiItem name="summary" lang="tk" value="özet"/>
+
+		<uiItem name="assignMetadata" lang="deu" value="Metadaten-Zuordung"/>
+		<uiItem name="assignMetadata" lang="eng" value="Metadata assignment"/>
+		<uiItem name="assignMetadata" lang="tk" value="üstveri-atama"/>
+
+		<uiItem name="change" lang="deu" value="ändern"/>
+		<uiItem name="change" lang="eng" value="change"/>
+
+		<uiItem name="corpusName" lang="deu" value="Korpusname"/>
+		<uiItem name="corpusName" lang="eng" value="Corpus name"/>
+
+		<uiItem name="commNameFrom" lang="deu" value="Communication-Name aus"/>
+		<uiItem name="commNameFrom" lang="eng" value="communication name from"/>
+		<uiItem name="commNameFrom" lang="tk" value="komünikasyon isim"/>
+
+		<uiItem name="cmd.addCommunication" lang="deu" value="Kommunikation hinzufügen"/>
+		<uiItem name="cmd.addCommunication" lang="eng" value="Add new communication"/>
+		<uiItem name="cmd.addCommunication" lang="tk" value="Yeni komünikasyonu ekle"/>
+		<uiItem name="cmd.addCommunication" lang="fra" value="Ajouter la nouvelle communication"/>
+		<uiItem name="cmd.addCommunication" lang="spa" value="Agregar comunicación"/>
+		<uiItem name="cmd.addCommunication" lang="bul" value="Въведи нова комуникация"/>
+
+		<uiItem name="cmd.AddTranscription" lang="deu" value="Kommunikation zuordnen"/>
+		<uiItem name="cmd.AddTranscription" lang="eng" value="link transcription"/>
+		<uiItem name="cmd.AddTranscription" lang="tk" value="transkripsiyonu bağla"/>
+
+		<uiItem name="cmd.AddCorpus" lang="deu" value="Korpus hinzufügen"/>
+		<uiItem name="cmd.AddCorpus" lang="eng" value="Add new corpus"/>
+		<uiItem name="cmd.AddCorpus" lang="tk" value=" yeni korpusu ekle"/>
+		<uiItem name="cmd.AddCorpus" lang="fra" value="Ajouter le nouveau corpus"/>
+		<uiItem name="cmd.AddCorpus" lang="spa" value="Agregar corpus nuevo"/>
+		<uiItem name="cmd.AddCorpus" lang="bul" value="Въведи нов корпус"/>
+		
+		<uiItem name="cmd.addInComa" lang="eng" value="Add in Coma"/>
+		<uiItem name="cmd.addInComa" lang="deu" value="In Coma hinzufügen"/>
+
+		<uiItem name="cmd.checkSpeakers" lang="deu" value="Sprecherzuordnung prüfen..."/>
+		<uiItem name="cmd.checkSpeakers" lang="eng" value="Check speaker assignment..."/>
+
+		<uiItem name="cmd.clearRecentFileList" lang="deu" value="Liste löschen"/>
+		<uiItem name="cmd.clearRecentFileList" lang="eng" value="Clear list"/>
+
+		<uiItem name="cmd.editRoles" lang="deu" value="Sprecherrolle(n) bearbeiten"/>
+		<uiItem name="cmd.editRoles" lang="eng" value="Edit speaker role(s)"/>
+
+		<uiItem name="cmd.filter.andOr" lang="deu" value="und / oder"/>
+		<uiItem name="cmd.filter.andOr" lang="eng" value="and / or"/>
+
+		<uiItem name="cmd.filter.invert" lang="deu" value="invertieren"/>
+		<uiItem name="cmd.filter.invert" lang="eng" value="invert"/>
+
+		<uiItem name="cmd.filter.active" lang="deu" value="an / aus"/>
+		<uiItem name="cmd.filter.active" lang="eng" value="toggle on/off"/>
+
+		<uiItem name="cmd.ImportSpeaker" lang="deu" value="Sprecher importieren..."/>
+		<uiItem name="cmd.ImportSpeaker" lang="eng" value="Import speakers..."/>
+
+
+		<uiItem name="cmd.copyDebugInfo" lang="deu"
+			value="Debug-Information in die Zwischenablage kopieren"/>
+		<uiItem name="cmd.copyDebugInfo" lang="eng" value="Copy debug information to clipboard"/>
+		<uiItem name="cmd.copyDebugInfo" lang="tk" value="debug-bilgiyi pano'ya kopyala"/>
+
+		<uiItem name="cmd.MergeComaDocument" lang="deu" value="Coma-Datei hinzufügen..."/>
+		<uiItem name="cmd.MergeComaDocument" lang="eng" value="Merge coma document..."/>
+		
+		<uiItem name="cmd.preferences" lang="deu" value="Einstellungen"/>
+		<uiItem name="cmd.preferences" lang="eng" value="preferences"/>
+		
+		<uiItem name="cmd.printValues" lang="deu" value="Werte drucken"/>
+		<uiItem name="cmd.printValues" lang="eng" value="print values"/>
+		
+		<uiItem name="cmd.reset" lang="deu" value="reset"/>
+		<uiItem name="cmd.reset" lang="eng" value="reset"/>
+
+		<uiItem name="cmd.showSpeakers" lang="deu" value="Sprecher anzeigen"/>
+		<uiItem name="cmd.showSpeakers" lang="eng" value="show speakers"/>
+		<uiItem name="cmd.showSpeakers" lang="tk" value="konuşmacıları göster"/>
+
+		<uiItem name="cmd.showSegmentCounts" lang="deu" value="Segmentanzahl anzeigen"/>
+		<uiItem name="cmd.showSegmentCounts" lang="eng" value="show segment count"/>
+
+
+		<uiItem name="cmd.start" lang="deu" value="start"/>
+		<uiItem name="cmd.start" lang="eng" value="start"/>
+		<uiItem name="cmd.start" lang="tk" value="bașla"/>
+
+		<uiItem name="cmd.showXML" lang="deu" value="XML anzeigen"/>
+		<uiItem name="cmd.showXML" lang="eng" value="show XML"/>
+		<uiItem name="cmd.showXML" lang="tk" value="XML'ı göster"/>
+
+		<uiItem name="cmd.saveXML" lang="deu" value="übernehmen"/>
+		<uiItem name="cmd.saveXML" lang="eng" value="save changes"/>
+		<uiItem name="cmd.saveXML" lang="tk" value="değişiklikleri kaydet"/>
+
+		<uiItem name="cmd.showValues" lang="deu" value="Daten anzeigen"/>
+		<uiItem name="cmd.showValues" lang="eng" value="show data"/>
+		<uiItem name="cmd.showValues" lang="tk" value="veriyi göster"/>
+
+		<uiItem name="cmd.addTemplate" lang="deu" value="hinzufügen"/>
+		<uiItem name="cmd.addTemplate" lang="eng" value="add"/>
+		<uiItem name="cmd.addTemplate" lang="tk" value="ekle"/>
+
+		<uiItem name="cmd.templateDefault" lang="deu" value="als Standard"/>
+		<uiItem name="cmd.templateDefault" lang="eng" value="make default"/>
+		<uiItem name="cmd.templateDefault" lang="tk" value="yarsayılan yap"/>
+		
+		<uiItem name="cmd.ToTheRescue" lang="deu" value="Argh! Alles ist kaputt! Hilfe!"/>
+		<uiItem name="cmd.ToTheRescue" lang="eng" value="Oh noes! The program crashed! Help!"/>
+		
+
+		<uiItem name="cmd.transcriptionSearchAndReplace" lang="deu" value="Suchen und Ersetzen im Korpus..."/>
+		<uiItem name="cmd.transcriptionSearchAndReplace" lang="eng" value="Search and Replace in the Corpus..."/>
+
+		<uiItem name="cmd.rmvTemplate" lang="deu" value="entfernen"/>
+		<uiItem name="cmd.rmvTemplate" lang="eng" value="remove"/>
+		<uiItem name="cmd.rmvTemplate" lang="tk" value="kaldır"/>
+
+		<uiItem name="cmd.AddPerson" lang="deu" value="Person hinzufügen"/>
+		<uiItem name="cmd.AddPerson" lang="eng" value="Add new person"/>
+		<uiItem name="cmd.AddPerson" lang="tk" value="yeni kişi ekle"/>
+		<uiItem name="cmd.AddPerson" lang="fra" value="Ajouter la nouvelle personne"/>
+		<uiItem name="cmd.AddPerson" lang="spa" value="Agregar persona nueva"/>
+		<uiItem name="cmd.AddPerson" lang="bul" value="Въведи ново лице"/>
+
+		<uiItem name="cmd.assignCommSpeaker" lang="deu"
+			value="Ausgewählte Kommunikationen/ Sprecher verknüpfen"/>
+		<uiItem name="cmd.assignCommSpeaker" lang="eng"
+			value="assign selected communications / speakers"/>
+		<uiItem name="cmd.assignCommSpeaker" lang="tk"
+			value="seçilen komünikasyonları/ konuşmacıları ata"/>
+
+		<uiItem name="cmd.unassignCommSpeaker" lang="deu" value="Verknüpfung lösen"/>
+		<uiItem name="cmd.unassignCommSpeaker" lang="eng"
+			value="unassign selected communications/speakers"/>
+		<uiItem name="cmd.unassignCommSpeaker" lang="tk"
+			value="seçilen komünikasyonların/ konuşmacıların atamayını kaldır"/>
+
+		<uiItem name="cmd.cloneCommunication" lang="deu" value="Kommunikation klonen"/>
+		<uiItem name="cmd.cloneCommunication" lang="eng" value="clone communication"/>
+		<uiItem name="cmd.cloneCommunication" lang="tk" value="komünikasyonu kopyala"/>
+
+		<uiItem name="cmd.ClonePerson" lang="deu" value="Person klonen"/>
+		<uiItem name="cmd.ClonePerson" lang="eng" value="clone person"/>
+		<uiItem name="cmd.ClonePerson" lang="tk" value="kişiyi kopyala"/>
+
+		<uiItem name="cmd.commToBasket" lang="deu" value="ausgewählte in den Korb legen"/>
+		<uiItem name="cmd.commToBasket" lang="eng" value="put selected into basket"/>
+		<uiItem name="cmd.commToBasket" lang="tk" value="seçilmişleri sepete koy"/>
+
+		<uiItem name="cmd.CountSegments" lang="deu" value="Segmente zählen"/>
+		<uiItem name="cmd.CountSegments" lang="eng" value="count segments"/>
+		<uiItem name="cmd.CountSegments" lang="tk" value="bölütleri say"/>
+
+		<uiItem name="cmd.DelCommunication" lang="deu" value="Kommunikation löschen"/>
+		<uiItem name="cmd.DelCommunication" lang="eng" value="Delete communication"/>
+		<uiItem name="cmd.DelCommunication" lang="tk" value="komünikasiyonu sil"/>
+		<uiItem name="cmd.DelCommunication" lang="fra" value="Effacer communication"/>
+		<uiItem name="cmd.DelCommunication" lang="spa" value="Eliminar comunicación"/>
+		<uiItem name="cmd.DelCommunication" lang="bul" value="Изтрий комуникацията"/>
+
+		<uiItem name="cmd.search" lang="deu" value="suchen"/>
+		<uiItem name="cmd.search" lang="eng" value="search"/>
+
+		<uiItem name="cmd.RemovePerson" lang="deu" value="Person löschen"/>
+		<uiItem name="cmd.RemovePerson" lang="eng" value="Delete person"/>
+		<uiItem name="cmd.RemovePerson" lang="tk" value="kişiyi sil"/>
+		<uiItem name="cmd.RemovePerson" lang="fra" value="Effacer personne"/>
+		<uiItem name="cmd.RemovePerson" lang="spa" value="Eliminar persona"/>
+		<uiItem name="cmd.RemovePerson" lang="bul" value="Изтрий лицето"/>
+
+		<uiItem name="cmd.removeTranscription" lang="deu" value="Transkription herausnehmen"/>
+		<uiItem name="cmd.removeTranscription" lang="eng" value="unassign transcription"/>
+		<uiItem name="cmd.removeTranscription" lang="tk" value="transkripsiyonun atamayını kaldır"/>
+
+		<uiItem name="cmd.aboutness" lang="deu" value="Aboutness"/>
+		<uiItem name="cmd.aboutness" lang="eng" value="Aboutness"/>
+		<uiItem name="cmd.aboutness" lang="tk" value="Aboutness"/>
+		<uiItem name="cmd.aboutness" lang="fra" value="Aboutness"/>
+		<uiItem name="cmd.aboutness" lang="spa" value="Aboutness"/>
+		<uiItem name="cmd.aboutness" lang="bul" value="Aboutness"/>
+
+		<uiItem name="cmd.DumpCorpusAction" lang="deu" value="XML-Dokument anzeigen"/>
+		<uiItem name="cmd.DumpCorpusAction" lang="eng" value="Show XML-document"/>
+		<uiItem name="cmd.DumpCorpusAction" lang="tk" value=" XML-belgesini göster"/>
+		<uiItem name="cmd.DumpCorpusAction" lang="fra" value="Afficher dossier XML"/>
+		<uiItem name="cmd.DumpCorpusAction" lang="spa" value="Mostrar documentos XML"/>
+		<uiItem name="cmd.DumpCorpusAction" lang="bul" value="Покажи XML-документи"/>
+
+		<uiItem name="cmd.ImportTranscriptions" lang="deu"
+			value="Korpus aus Transkriptionen erstellen"/>
+		<uiItem name="cmd.ImportTranscriptions" lang="eng" value="Create corpus from transcriptions..."/>
+		<uiItem name="cmd.ImportTranscriptions" lang="tk"
+			value="korpus transkripsiyonlardan oluştur"/>
+
+		<uiItem name="cmd.MakeCorpusData" lang="deu" value="Korpus soll Daten enthalten"/>
+		<uiItem name="cmd.MakeCorpusData" lang="eng" value="Corpus shall contain data"/>
+		<uiItem name="cmd.MakeCorpusData" lang="tk" value="korpusda veri olsun"/>
+		<uiItem name="cmd.MakeCorpusData" lang="fra" value="Le corpus doit contenir des données"/>
+		<uiItem name="cmd.MakeCorpusData" lang="spa" value="El corpus debe contener datos"/>
+		<uiItem name="cmd.MakeCorpusData" lang="bul" value="Корпусът трябва да съдържа данни"/>
+
+		<uiItem name="cmd.MoveCorpus" lang="deu" value="Korpus verschieben"/>
+		<uiItem name="cmd.MoveCorpus" lang="eng" value="Move corpus"/>
+		<uiItem name="cmd.MoveCorpus" lang="tk" value="korpusu taşı"/>
+		<uiItem name="cmd.MoveCorpus" lang="fra" value="Replacer le corpus"/>
+		<uiItem name="cmd.MoveCorpus" lang="spa" value="Mover corpus"/>
+		<uiItem name="cmd.MoveCorpus" lang="bul" value="Премести корпуса"/>
+
+		<uiItem name="cmd.NewAction" lang="deu" value="Neues Dokument"/>
+		<uiItem name="cmd.NewAction" lang="eng" value="New document"/>
+		<uiItem name="cmd.NewAction" lang="tk" value="yeni belge"/>
+		<uiItem name="cmd.NewAction" lang="fra" value="Nouveau dossier"/>
+		<uiItem name="cmd.NewAction" lang="spa" value="Documento nuevo"/>
+		<uiItem name="cmd.NewAction" lang="bul" value="Нов документ"/>
+
+		<uiItem name="cmd.OpenAction" lang="deu" value="Dokument öffnen..."/>
+		<uiItem name="cmd.OpenAction" lang="eng" value="Open document"/>
+		<uiItem name="cmd.OpenAction" lang="tk" value="belgeyi aç"/>
+		<uiItem name="cmd.OpenAction" lang="fra" value="Ouvrir dossier"/>
+		<uiItem name="cmd.OpenAction" lang="spa" value="Abrir documento"/>
+		<uiItem name="cmd.OpenAction" lang="bul" value="Отвори документ"/>
+
+		<uiItem name="cmd.OpenTemplatesAction" lang="deu" value="Templates öffnen..."/>
+		<uiItem name="cmd.OpenTemplatesAction" lang="eng" value="Open templates..."/>
+		<uiItem name="cmd.OpenTemplatesAction" lang="tk" value="şablonları aç..."/>
+
+		<uiItem name="cmd.OutputAction" lang="deu" value="Ausgabe..."/>
+		<uiItem name="cmd.OutputAction" lang="eng" value="Output..."/>
+
+		<uiItem name="cmd.SaveTemplatesAction" lang="deu" value="Templates speichern"/>
+		<uiItem name="cmd.SaveTemplatesAction" lang="eng" value="Save templates"/>
+		<uiItem name="cmd.SaveTemplatesAction" lang="tk" value="şablonları kaydet"/>
+
+		<uiItem name="cmd.SaveTemplatesAsAction" lang="deu" value="Templates speichern als..."/>
+		<uiItem name="cmd.SaveTemplatesAsAction" lang="eng" value="Save templates as..."/>
+		<uiItem name="cmd.SaveTemplatesAsAction" lang="tk" value="şablonları farklı kaydet"/>
+
+		<uiItem name="cmd.QuitAction" lang="deu" value="Programm beenden"/>
+		<uiItem name="cmd.QuitAction" lang="eng" value="Quit programme"/>
+		<uiItem name="cmd.QuitAction" lang="tk" value="programdan çık"/>
+		<uiItem name="cmd.QuitAction" lang="fra" value="Quitter programme"/>
+		<uiItem name="cmd.QuitAction" lang="spa" value="Quitar el programa"/>
+		<uiItem name="cmd.QuitAction" lang="bul" value="Прекрати програмата"/>
+
+		<uiItem name="cmd.RemoveCorpus" lang="deu" value="Korpus löschen"/>
+		<uiItem name="cmd.RemoveCorpus" lang="eng" value="Delete corpus"/>
+		<uiItem name="cmd.RemoveCorpus" lang="tk" value="korpusu sil"/>
+		<uiItem name="cmd.RemoveCorpus" lang="fra" value="Effacer corpus"/>
+		<uiItem name="cmd.RemoveCorpus" lang="spa" value="Eliminar corpus"/>
+		<uiItem name="cmd.RemoveCorpus" lang="bul" value="Изтрий корпуса"/>
+
+		<uiItem name="cmd.RemoveCorpusData" lang="deu" value="Korpus soll Korpora enthalten"/>
+		<uiItem name="cmd.RemoveCorpusData" lang="eng" value="Corpus shall contain corpora"/>
+		<uiItem name="cmd.RemoveCorpusData" lang="tk" value="korpusun içinde korpora olsun"/>
+		<uiItem name="cmd.RemoveCorpusData" lang="fra" value="Le corpus doit contenir des corpus"/>
+		<uiItem name="cmd.RemoveCorpusData" lang="spa" value="El corpus debe contener los corpus"/>
+		<uiItem name="cmd.RemoveCorpusData" lang="bul" value="Корпусът трябва да съдържа корпусите"/>
+
+		<uiItem name="cmd.removeAllFilters" lang="deu" value="Alle Filter löschen"/>
+		<uiItem name="cmd.removeAllFilters" lang="eng" value="remove all filters"/>
+		<uiItem name="cmd.removeAllFilters" lang="tk" value="tüm filtreleri sil"/>
+
+		<uiItem name="cmd.removeTranscriptionFromBasket" lang="deu" value="Transkription entfernen"/>
+		<uiItem name="cmd.removeTranscriptionFromBasket" lang="eng" value="remove transcription"/>
+		<uiItem name="cmd.removeTranscriptionFromBasket" lang="tk" value="transkripsiyonu sil"/>
+
+		<!-- -->
+		<uiItem name="cmd.SaveAction" lang="deu" value="Dokument speichern"/>
+		<uiItem name="cmd.SaveAction" lang="eng" value="Save document"/>
+		<uiItem name="cmd.SaveAction" lang="tk" value="belgeyi kaydet"/>
+		<uiItem name="cmd.SaveAction" lang="fra" value="Enregistrer dossier"/>
+		<uiItem name="cmd.SaveAction" lang="spa" value="Guardar documento"/>
+		<uiItem name="cmd.SaveAction" lang="bul" value="Запамети документа"/>
+
+		<uiItem name="cmd.SaveAsAction" lang="deu" value="Dokument speichern als..."/>
+		<uiItem name="cmd.SaveAsAction" lang="eng" value="Save document as..."/>
+		<uiItem name="cmd.SaveAsAction" lang="tk" value="belgeyi farklı kaydet..."/>
+		<uiItem name="cmd.SaveAsAction" lang="fra" value="Enregistrer dossier comme..."/>
+		<uiItem name="cmd.SaveAsAction" lang="spa" value="Guardar documento como..."/>
+		<uiItem name="cmd.SaveAsAction" lang="bul" value="Запамети документа като..."/>
+
+		<uiItem name="cmd.about" lang="deu" value="Über Coma"/>
+		<uiItem name="cmd.about" lang="eng" value="About CoMa"/>
+		<uiItem name="cmd.about" lang="tk" value="CoMa hakkında"/>
+		<uiItem name="cmd.about" lang="fra" value="À propos de CoMa"/>
+		<uiItem name="cmd.about" lang="spa" value="Sobre CoMa"/>
+		<uiItem name="cmd.about" lang="bul" value="Относно CoMa"/>
+
+		<uiItem name="cmd.addBasket" lang="deu" value="in den Korb legen"/>
+		<uiItem name="cmd.addBasket" lang="eng" value="Add to basket"/>
+		<uiItem name="cmd.addBasket" lang="tk" value="sepete ekle"/>
+		<uiItem name="cmd.addBasket" lang="fra" value="Ajouter à la corbeille"/>
+		<uiItem name="cmd.addBasket" lang="spa" value="Trasladar a la cesta"/>
+		<uiItem name="cmd.addBasket" lang="bul" value="Сложи в кошницата"/>
+
+		<uiItem name="cmd.addLanguage" lang="deu" value="Language hinzufügen"/>
+		<uiItem name="cmd.addLanguage" lang="eng" value="Add new language"/>
+		<uiItem name="cmd.addLanguage" lang="tk" value="yeni dil ekle"/>
+		<uiItem name="cmd.addLanguage" lang="fra" value="Ajouter la nouvelle langue"/>
+		<uiItem name="cmd.addLanguage" lang="spa" value="Agregar lenguaje nuevo"/>
+		<uiItem name="cmd.addLanguage" lang="bul" value="Въведи нов език"/>
+
+		<uiItem name="cmd.addLocation" lang="deu" value="Neue Location hinzufügen"/>
+		<uiItem name="cmd.addLocation" lang="eng" value="Add new location"/>
+		<uiItem name="cmd.addLocation" lang="tk" value="yeni konum ekle"/>
+		<uiItem name="cmd.addLocation" lang="fra" value="Ajouter le nouvel emplacement"/>
+		<uiItem name="cmd.addLocation" lang="spa" value="Agregar localización nueva"/>
+		<uiItem name="cmd.addLocation" lang="bul" value="Въведи ново местонахождение"/>
+
+		<uiItem name="cmd.addRow" lang="deu" value="neue Zeile"/>
+		<uiItem name="cmd.addRow" lang="eng" value="Add new row"/>
+		<uiItem name="cmd.addRow" lang="tk" value="yeni satırı ekle"/>
+		<uiItem name="cmd.addRow" lang="fra" value="Ajouter la nouvelle ligne"/>
+		<uiItem name="cmd.addRow" lang="spa" value="Fila nueva"/>
+		<uiItem name="cmd.addRow" lang="bul" value="Въведи нов ред"/>
+
+		<uiItem name="cmd.addTranscription" lang="deu" value="Transkription zuordnen"/>
+		<uiItem name="cmd.addTranscription" lang="eng" value="Add transcription to"/>
+		<uiItem name="cmd.addTranscription" lang="tk" value="transkripsiyonu… ekle"/>
+		<uiItem name="cmd.addTranscription" lang="fra" value="Ajouter la transcription à"/>
+		<uiItem name="cmd.addTranscription" lang="spa" value="Coordinar transcripción"/>
+		<uiItem name="cmd.addTranscription" lang="bul" value="Присъедини транскрипция"/>
+
+		<uiItem name="cmd.assignCommunications" lang="deu" value="Kommunikationen\n zuordnen"/>
+		<uiItem name="cmd.assignCommunications" lang="eng" value="Assign communication(s) to"/>
+		<uiItem name="cmd.assignCommunications" lang="fra" value="Assigner des communications à"/>
+		<uiItem name="cmd.assignCommunications" lang="spa" value="Coordinar comunicación"/>
+		<uiItem name="cmd.assignCommunications" lang="bul" value="Присъедини комуникация"/>
+
+		<uiItem name="cmd.autoLoadTemplates" lang="deu" value="Templates beim Start laden"/>
+		<uiItem name="cmd.autoLoadTemplates" lang="eng" value="load templates on startup"/>
+		<uiItem name="cmd.autoLoadTemplates" lang="tk" value="şablonları başlangıçta yükle"/>
+
+		<uiItem name="cmd.autoSaveTemplates" lang="deu" value="Templates beim Verlassen speichern"/>
+		<uiItem name="cmd.autoSaveTemplates" lang="eng" value="save templates on exit"/>
+		<uiItem name="cmd.autoSaveTemplates" lang="tk" value="şablonları çıkışta kaydet"/>
+
+		<uiItem name="cmd.checkTranscriptionPaths" lang="deu" value="Pfade korrigieren"/>
+		<uiItem name="cmd.checkTranscriptionPaths" lang="eng" value="Correct transcription paths"/>
+		<uiItem name="cmd.checkTranscriptionPaths" lang="tk" value="transkripsiyon yolunu düzelt"/>
+		<uiItem name="cmd.checkTranscriptionPaths" lang="fra"
+			value="Corriger paths de la transcription"/>
+		<uiItem name="cmd.checkTranscriptionPaths" lang="spa"
+			value="Corregir	paths de transcripciones"/>
+		<uiItem name="cmd.checkTranscriptionPaths" lang="bul"
+			value="Коригирай  транскипционните пътеки"/>
+
+		<uiItem name="cmd.checkStructureErrors" lang="deu" value="Auf Strukturfehler überprüfen..."/>
+		<uiItem name="cmd.checkStructureErrors" lang="eng" value="Check for structure errors..."/>
+		
+		<uiItem name="cmd.checkSegmentationErrors" lang="deu" value="Auf Segmentierungsfehler überprüfen..."/>
+		<uiItem name="cmd.checkSegmentationErrors" lang="eng" value="Check for segmentation errors..."/>
+
+		<uiItem name="cmd.collectCorpusAction" lang="deu"
+			value="Komplettes Korpus in einen Ordner kopieren"/>
+		<uiItem name="cmd.collectCorpusAction" lang="eng" value="Copy complete corpus into file"/>
+		<uiItem name="cmd.collectCorpusAction" lang="tk" value="bütün korpusu dosyaya kopyala"/>
+		<uiItem name="cmd.collectCorpusAction" lang="fra" value="Copier le fichier complet sur"/>
+		<uiItem name="cmd.collectCorpusAction" lang="spa"
+			value="Copiar el corpus completo en el archivo"/>
+		<uiItem name="cmd.collectCorpusAction" lang="bul" value="Копирай целия корпус във файл"/>
+
+		<uiItem name="cmd.copyOnlySegmentedTranscriptions" lang="deu"
+			value="Nur segmentierte Transkriptionen in den Korb legen"/>
+		<uiItem name="cmd.copyOnlySegmentedTranscriptions" lang="eng"
+			value="copy only segmented transcriptions to the basket"/>
+		<uiItem name="cmd.copyOnlySegmentedTranscriptions" lang="tk"
+			value="sadece bölümlenmiş transkripsiyonları sepete kopyala"/>
+
+		<uiItem name="cmd.copySchema" lang="deu" value="...standardmässig mitkopieren"/>
+		<uiItem name="cmd.copySchema" lang="eng" value="...Standard copy with"/>
+		<uiItem name="cmd.copySchema" lang="fra" value="... copier standard avec"/>
+		<uiItem name="cmd.copySchema" lang="spa" value="... Copiar como esquema estandard"/>
+		<uiItem name="cmd.copySchema" lang="bul" value="...Копирай стандартно с"/>
+
+		<uiItem name="cmd.corpusStatistics" lang="deu" value="Korpusstatistik generieren..."/>
+		<uiItem name="cmd.corpusStatistics" lang="eng" value="Generate corpus statistics..."/>
+
+		<uiItem name="cmd.debugPanel" lang="deu" value="Debug-Modus (erfordert Neustart)"/>
+		<uiItem name="cmd.debugPanel" lang="eng" value="Debug-modus (requires new start)"/>
+		<uiItem name="cmd.debugPanel" lang="tk" value="Debug-modes (yeni başlama ister)"/>
+		<uiItem name="cmd.debugPanel" lang="fra"
+			value="Le mode debug (exige redémarrage du programme)"/>
+		<uiItem name="cmd.debugPanel" lang="spa" value="Debug-modo (necesita reiniciación)"/>
+		<uiItem name="cmd.debugPanel" lang="bul" value="Debug-модус (изисква нов старт)"/>
+
+		<uiItem name="cmd.delRow" lang="deu" value="Zeile löschen"/>
+		<uiItem name="cmd.delRow" lang="eng" value="delete row"/>
+		<uiItem name="cmd.delRow" lang="tk" value="satırı sil"/>
+
+		<uiItem name="cmd.deleteDescription" lang="deu" value="Transkription löschen"/>
+		<uiItem name="cmd.deleteDescription" lang="eng" value="Delete transcription"/>
+		<uiItem name="cmd.deleteDescription" lang="tk" value="transkripsiyonu sil"/>
+		<uiItem name="cmd.deleteDescription" lang="fra" value="Effacer transcription"/>
+		<uiItem name="cmd.deleteDescription" lang="spa" value="Eliminar transcripción"/>
+		<uiItem name="cmd.deleteDescription" lang="bul" value="Изтрий описанието"/>
+
+		<uiItem name="cmd.deleteLanguage" lang="deu" value="Language löschen"/>
+		<uiItem name="cmd.deleteLanguage" lang="eng" value="Delete language"/>
+		<uiItem name="cmd.deleteLanguage" lang="tk" value="dili sil"/>
+		<uiItem name="cmd.deleteLanguage" lang="fra" value="Effacer langue"/>
+		<uiItem name="cmd.deleteLanguage" lang="spa" value="Eliminar lenguaje"/>
+		<uiItem name="cmd.deleteLanguage" lang="bul" value="Изтрий езика"/>
+
+		<uiItem name="cmd.deleteLocation" lang="deu" value="Location löschen"/>
+		<uiItem name="cmd.deleteLocation" lang="eng" value="Delete location"/>
+		<uiItem name="cmd.deleteLocation" lang="tk" value="konumu sil"/>
+		<uiItem name="cmd.deleteLocation" lang="fra" value="Effacer emplacement"/>
+		<uiItem name="cmd.deleteLocation" lang="spa" value="Eliminar localización"/>
+		<uiItem name="cmd.deleteLocation" lang="bul" value="Изтрий местонахождението"/>
+
+		<uiItem name="cmd.deletePeriod" lang="deu" value="Period löschen"/>
+		<uiItem name="cmd.deletePeriod" lang="eng" value="Delete period"/>
+		<uiItem name="cmd.deletePeriod" lang="tk" value="dönemi sil"/>
+		<uiItem name="cmd.deletePeriod" lang="fra" value="Effacer period"/>
+		<uiItem name="cmd.deletePeriod" lang="spa" value="Eliminar período"/>
+		<uiItem name="cmd.deletePeriod" lang="bul" value="Изтрий периода"/>
+
+		<uiItem name="cmd.edit" lang="deu" value="bearbeiten"/>
+		<uiItem name="cmd.edit" lang="eng" value="Edit"/>
+		<uiItem name="cmd.edit" lang="tk" value="düzenle"/>
+		<uiItem name="cmd.edit" lang="fra" value="Édition"/>
+		<uiItem name="cmd.edit" lang="spa" value="Editar"/>
+		<uiItem name="cmd.edit" lang="bul" value="Преработи"/>
+
+		<uiItem name="cmd.editDescription" lang="deu" value="Description bearbeiten"/>
+		<uiItem name="cmd.editDescription" lang="eng" value="Edit description"/>
+		<uiItem name="cmd.editDescription" lang="tk" value="açıklamayı düzenle"/>
+		<uiItem name="cmd.editDescription" lang="fra" value="Modifier la description"/>
+		<uiItem name="cmd.editDescription" lang="spa" value="Editar descripción"/>
+		<uiItem name="cmd.editDescription" lang="bul" value="Преработи описанието"/>
+
+		<uiItem name="cmd.editPeriod" lang="deu" value="Period bearbeiten"/>
+		<uiItem name="cmd.editPeriod" lang="eng" value="Edit period"/>
+		<uiItem name="cmd.editPeriod" lang="tk" value="dönemi düzenle"/>
+		<uiItem name="cmd.editPeriod" lang="fra" value="Modifier la période"/>
+		<uiItem name="cmd.editPeriod" lang="spa" value="Editar período"/>
+		<uiItem name="cmd.editPeriod" lang="bul" value="Преработи периода"/>
+
+		<uiItem name="cmd.emptyBasket" lang="deu" value="Korb leeren"/>
+		<uiItem name="cmd.emptyBasket" lang="eng" value="empty basket"/>
+		<uiItem name="cmd.emptyBasket" lang="tk" value="sepeti boşat"/>
+
+		<uiItem name="cmd.extractRecordings" lang="deu" value="Aufnahmen aus Transkriptionen aktualisieren"/>
+		<uiItem name="cmd.extractRecordings" lang="eng" value="Update recordings from transcriptions"/>
+		<uiItem name="cmd.extractRecordings" lang="tk" value="Medya dosyaları ara ve güncelleştir"/>
+
+		<uiItem name="cmd.filter" lang="deu" value="filtern"/>
+		<uiItem name="cmd.filter" lang="eng" value="Filter out"/>
+		<uiItem name="cmd.filter" lang="tk" value="süz"/>
+		<uiItem name="cmd.filter" lang="fra" value="Filtrer"/>
+		<uiItem name="cmd.filter" lang="spa" value="Filtrar"/>
+		<uiItem name="cmd.filter" lang="bul" value="Филтрирай"/>
+
+		<uiItem name="cmd.filteredToBasket" lang="deu" value="Alle ausgewählten in den Korb"/>
+		<uiItem name="cmd.filteredToBasket" lang="eng"
+			value="Move all selected communications to the basket"/>
+		<uiItem name="cmd.filteredToBasket" lang="tk"
+			value="bütün seçilmiş komunikasyonları sepete koy"/>
+
+		<uiItem name="cmd.HarmonizeDescriptionKeys" lang="deu" value="Description-Schlüssel angleichen..."/>
+		<uiItem name="cmd.HarmonizeDescriptionKeys" lang="eng" value="Harmonize description keys..."/>
+
+		<uiItem name="cmd.HarmonizeValuesAction" lang="deu" value="Description-Werte angleichen..."/>
+		<uiItem name="cmd.HarmonizeValuesAction" lang="eng" value="harmonize description values..."/>
+
+		<uiItem name="cmd.help" lang="deu" value="Hilfe (im Web)"/>
+		<uiItem name="cmd.help" lang="eng" value="Help (on the web)"/>
+		<uiItem name="cmd.help" lang="tk" value="Yardım (web’de)"/>
+		<uiItem name="cmd.help" lang="fra" value="Aide (dans le Web)"/>
+		<uiItem name="cmd.help" lang="spa" value="Ayuda (en el web)"/>
+		<uiItem name="cmd.help" lang="bul" value="помощ (в уеба)"/>
+
+		<uiItem name="cmd.ImportBasicTranscription" lang="deu" value="Basistranskription importieren..."/>
+		<uiItem name="cmd.ImportBasicTranscription" lang="eng" value="Import basic transcription..."/>
+
+
+		<uiItem name="cmd.lookupLanguageCode" lang="deu" value="Languagecode nachschlagen"/>
+		<uiItem name="cmd.lookupLanguageCode" lang="eng" value="Search for language code"/>
+		<uiItem name="cmd.lookupLanguageCode" lang="tk" value="dil kodu ara"/>
+		<uiItem name="cmd.lookupLanguageCode" lang="fra" value="Rechercher le code de la langue"/>
+		<uiItem name="cmd.lookupLanguageCode" lang="spa" value="Buscar código de lenguaje"/>
+		<uiItem name="cmd.lookupLanguageCode" lang="bul" value="Търси езиков код"/>
+
+		<uiItem name="cmd.personToBasket" lang="deu" value="Alle Transkriptionen in den Korb"/>
+		<uiItem name="cmd.personToBasket" lang="eng" value="Move all transcriptions to the basket"/>
+		<uiItem name="cmd.personToBasket" lang="tk" value="bütün transkripsiyonları sepete koy"/>
+		<uiItem name="cmd.personToBasket" lang="fra"
+			value="Placer toutes las transcriptions dans la corbeille"/>
+		<uiItem name="cmd.personToBasket" lang="spa"
+			value="Trasladar todas las transcripciones mostradas a la cesta"/>
+		<uiItem name="cmd.personToBasket" lang="bul" value="Постави всички транскрипции в кошницата"/>
+
+		<uiItem name="cmd.prefs" lang="deu" value="Einstellungen"/>
+		<uiItem name="cmd.prefs" lang="eng" value="Settings"/>
+		<uiItem name="cmd.prefs" lang="tk" value="Ayarlar"/>
+		<uiItem name="cmd.prefs" lang="fra" value="Préférences"/>
+		<uiItem name="cmd.prefs" lang="spa" value="Preferencias"/>
+		<uiItem name="cmd.prefs" lang="bul" value="Настройки"/>
+		
+		<uiItem name="cmd.prefs" lang="deu" value="Einstellungen"/>
+		<uiItem name="cmd.prefs" lang="eng" value="Settings"/>
+
+		<uiItem name="cmd.removeTranscription" lang="deu" value="Transkription entfernen"/>
+		<uiItem name="cmd.removeTranscription" lang="eng" value="Remove transcription"/>
+		<uiItem name="cmd.removeTranscription" lang="tk" value="transkripsiyonu kaldır"/>
+		<uiItem name="cmd.removeTranscription" lang="fra" value="Replacer la transcription"/>
+		<uiItem name="cmd.removeTranscription" lang="spa" value="Eliminar transcripción"/>
+		<uiItem name="cmd.removeTranscription" lang="bul" value="Отстрани транскипцията"/>
+
+		<uiItem name="cmd.restoreDefaults" lang="deu" value="Standardeinstellungen"/>
+		<uiItem name="cmd.restoreDefaults" lang="eng" value="Standard settings"/>
+		<uiItem name="cmd.restoreDefaults" lang="tk" value="standart ayarlar"/>
+		<uiItem name="cmd.restoreDefaults" lang="fra" value="Standard préférences"/>
+		<uiItem name="cmd.restoreDefaults" lang="spa" value="Preferencias estandarizadas"/>
+		<uiItem name="cmd.restoreDefaults" lang="bul" value="Стандартна настройка"/>
+
+		<uiItem name="cmd.saveAsCorpus" lang="deu" value="Als Corpus-Datei speichern"/>
+		<uiItem name="cmd.saveAsCorpus" lang="eng" value="Save as corpus"/>
+		<uiItem name="cmd.saveAsCorpus" lang="tk" value="korpus olarak kaydet"/>
+		<uiItem name="cmd.saveAsCorpus" lang="fra" value="Enregistrer comme corpus"/>
+		<uiItem name="cmd.saveAsCorpus" lang="spa" value="Guardar como corpus"/>
+		<uiItem name="cmd.saveAsCorpus" lang="bul" value="Запамети като корпус"/>
+
+		<uiItem name="cmd.saveAsZecke" lang="deu" value="Als Zecke-Datei speichern"/>
+		<uiItem name="cmd.saveAsZecke" lang="eng" value="Save as Zecke"/>
+		<uiItem name="cmd.saveAsZecke" lang="tk" value="Zecke olarak kaydet"/>
+		<uiItem name="cmd.saveAsZecke" lang="fra" value="Enregistrer comme Zecke"/>
+		<uiItem name="cmd.saveAsZecke" lang="spa" value="Guardar como Zecke"/>
+		<uiItem name="cmd.saveAsZecke" lang="bul" value="Запамети като Zecke"/>
+
+		<uiItem name="cmd.SaveBasketAction" lang="deu" value="Korb speichern als..."/>
+		<uiItem name="cmd.SaveBasketAction" lang="eng" value="Save basket as..."/>
+
+		<uiItem name="cmd.saveChanges" lang="deu" value="Änderungen speichern"/>
+		<uiItem name="cmd.saveChanges" lang="eng" value="Save changes"/>
+		<uiItem name="cmd.saveChanges" lang="tk" value=" değişiklikleri kaydet"/>
+		<uiItem name="cmd.saveChanges" lang="fra" value="Enregistrer changements"/>
+		<uiItem name="cmd.saveChanges" lang="spa" value="Guardar cambios"/>
+		<uiItem name="cmd.saveChanges" lang="bul" value="Запамети промените"/>
+
+		<uiItem name="cmd.search" lang="deu" value="Suchen"/>
+		<uiItem name="cmd.search" lang="eng" value="Search"/>
+		<uiItem name="cmd.search" lang="tk" value="ara"/>
+		<uiItem name="cmd.search" lang="fra" value="Rechercher"/>
+		<uiItem name="cmd.search" lang="spa" value="Buscar"/>
+		<uiItem name="cmd.search" lang="bul" value="Търси"/>
+
+
+		<uiItem name="cmd.segmentTranscriptions" lang="deu" value="Transkriptionen segmentieren..."/>
+		<uiItem name="cmd.segmentTranscriptions" lang="eng" value="Segment transcriptions..."/>
+		<uiItem name="cmd.segmentTranscriptions" lang="tk" value="transkripsiyonları bölütlendir..."/>
+
+		<uiItem name="cmd.speakerSpecificWordList" lang="deu" value="Wortliste für ausgewählte Sprecher"/>
+		<uiItem name="cmd.speakerSpecificWordList" lang="eng" value="Create wordlist for selected speakers"/>
+
+		<uiItem name="cmd.wordList" lang="deu" value="Wortliste erstellen"/>
+		<uiItem name="cmd.wordList" lang="eng" value="Create wordlist"/>
+
+		<uiItem name="cmd.selectDefaultTemplateFile" lang="deu"
+			value="Standard-Templatefile auswählen..."/>
+		<uiItem name="cmd.selectDefaultTemplateFile" lang="eng"
+			value="select default template file..."/>
+		<uiItem name="cmd.selectDefaultTemplateFile" lang="tk"
+			value="varsayılan dosya şablonu seç..."/>
+
+		<uiItem name="cmd.set2ndColumn" lang="deu" value="als zweite Spalte anzeigen"/>
+		<uiItem name="cmd.set2ndColumn" lang="eng" value="Show as second column"/>
+		<uiItem name="cmd.set2ndColumn" lang="tk" value="ikinci kolon olarak göster"/>
+		<uiItem name="cmd.set2ndColumn" lang="fra" value="Afficher comme seconde colonne"/>
+		<uiItem name="cmd.set2ndColumn" lang="spa" value="Ver como segunda columna"/>
+		<uiItem name="cmd.set2ndColumn" lang="bul" value="Покажи като втора колона"/>
+
+		<uiItem name="cmd.setSegmentedFlags" lang="deu"
+			value="Segmentierte Transkriptionen selektieren"/>
+		<uiItem name="cmd.setSegmentedFlags" lang="eng" value="Select segmented transcriptions"/>
+		<uiItem name="cmd.setSegmentedFlags" lang="tk" value="bölünmüş transkripsiyonu seç"/>
+		<uiItem name="cmd.setSegmentedFlags" lang="fra"
+			value="Sélectionner les transcriptions coupées"/>
+		<uiItem name="cmd.setSegmentedFlags" lang="spa"
+			value="Seleccionar transcriptiones segmentadas"/>
+		<uiItem name="cmd.setSegmentedFlags" lang="bul" value="Избери сегментираните транскрипции"/>
+
+		<uiItem name="cmd.setBasicFlags" lang="deu" value="Basistranskriptionen selektieren"/>
+		<uiItem name="cmd.setBasicFlags" lang="eng" value="select basic transcriptions"/>
+		<uiItem name="cmd.setBasicFlags" lang="tk" value="Ana  transkripsiyonu seç"/>
+
+		<uiItem name="cmd.treeTag" lang="deu" value="TreeTagger..."/>
+		<uiItem name="cmd.treeTag" lang="eng" value="TreeTagger..."/>
+
+
+		<uiItem name="cmd.unselectAll" lang="deu" value="Alle abwählen"/>
+		<uiItem name="cmd.unselectAll" lang="eng" value="deselect all"/>
+		<uiItem name="cmd.unselectAll" lang="tk" value="tüm seçimleri kaldır"/>
+
+		<uiItem name="cmd.searchInExakt" lang="deu" value="Mit EXAKT im Korpus suchen..."/>
+		<uiItem name="cmd.searchInExakt" lang="eng" value="Search corpus using EXAKT..."/>
+		<uiItem name="cmd.searchInExakt" lang="tk" value="EXAKT’la korpusda ara..."/>
+
+		<uiItem name="cmd.showBasicTranscriptions" lang="deu" value="Basis-Transkriptionen anzeigen"/>
+		<uiItem name="cmd.showBasicTranscriptions" lang="eng" value="Show basic transcriptions"/>
+		<uiItem name="cmd.showBasicTranscriptions" lang="tk" value=" Ana  transkripsiyonu göster"/>
+		<uiItem name="cmd.showBasicTranscriptions" lang="fra" value="Afficher basic transcriptions"/>
+		<uiItem name="cmd.showBasicTranscriptions" lang="spa"
+			value="Mostrar transcripciones básicas"/>
+		<uiItem name="cmd.showBasicTranscriptions" lang="bul" value="Покажи основните транскипции"/>
+
+		<uiItem name="cmd.showDescPart" lang="deu" value="Desc.-Key anzeigen"/>
+		<uiItem name="cmd.showDescPart" lang="eng" value="Show key of description"/>
+		<uiItem name="cmd.showDescPart" lang="fra" value="Afficher paramètre de la description"/>
+		<uiItem name="cmd.showDescPart" lang="spa" value="Mostrar parámetro de descripción"/>
+		<uiItem name="cmd.showDescPart" lang="bul" value="Покажи параметър от описанието"/>
+
+		<uiItem name="cmd.showXPath" lang="deu" value="XPath anzeigen"/>
+		<uiItem name="cmd.showXPath" lang="eng" value="Show XPath"/>
+		<uiItem name="cmd.showXPath" lang="tk" value="XPath‘ı göster"/>
+		<uiItem name="cmd.showXPath" lang="fra" value="Afficher XPath"/>
+		<uiItem name="cmd.showXPath" lang="spa" value="Mostrar XPath"/>
+		<uiItem name="cmd.showXPath" lang="bul" value="Покажи XPath"/>
+
+		<uiItem name="cmd.toPE" lang="deu" value="Im PartiturEditor anzeigen"/>
+		<uiItem name="cmd.toPE" lang="eng" value="Show as in PartiturEditor"/>
+		<uiItem name="cmd.toPE" lang="tk" value=" PartiturEditor’da göster"/>
+		<uiItem name="cmd.toPE" lang="fra" value="Afficher comme dans le PartiturEditor"/>
+		<uiItem name="cmd.toPE" lang="spa" value="Mostrar como en el PartiturEditor"/>
+		<uiItem name="cmd.toPE" lang="bul" value="Покажи както в PartiturEditor"/>
+
+		<uiItem name="cmd.XPathedit" lang="deu" value="XPath bearbeiten"/>
+		<uiItem name="cmd.XPathedit" lang="eng" value="Edit XPath"/>
+
+		<uiItem name="cmd.updateTranscriptionDescriptions" lang="deu"
+			value="Segmentzahlen aktualisieren"/>
+		<uiItem name="cmd.updateTranscriptionDescriptions" lang="eng"
+			value="Update segment counts"/>
+		<uiItem name="cmd.updateTranscriptionDescriptions" lang="tk"
+			value="Transkripsiyon enformasyonu tekrar yükle"/>
+
+		<uiItem name="cmd.updateCheck" lang="deu" value="Nach Updates suchen"/>
+		<uiItem name="cmd.updateCheck" lang="eng" value="Check for updates"/>
+		<uiItem name="cmd.updateCheck" lang="tk" value="güncelleştirmeyi denetle"/>
+
+		<uiItem name="communication" lang="deu" value="Kommunikation"/>
+		<uiItem name="communication" lang="eng" value="Communication"/>
+		<uiItem name="communication" lang="tk" value="komünikasyon"/>
+		<uiItem name="communication" lang="fra" value="Communication"/>
+		<uiItem name="communication" lang="spa" value="Comunicación"/>
+		<uiItem name="communication" lang="bul" value="Комуникация"/>
+
+		<uiItem name="changesMade" lang="deu" value="Änderungen ausgeführt"/>
+		<uiItem name="changesMade" lang="eng" value="changes made"/>
+
+		<uiItem name="conflictsFound" lang="deu" value="Konflikte entdeckt"/>
+		<uiItem name="conflictsFound" lang="eng" value="conflicts found"/>
+
+		<uiItem name="comaFiles" lang="deu" value="Korpusdateien"/>
+		<uiItem name="comaFiles" lang="eng" value="corpus files"/>
+
+		<uiItem name="communications" lang="deu" value="Kommunikationen"/>
+		<uiItem name="communications" lang="eng" value="Communications"/>
+		<uiItem name="communications" lang="tk" value=" komünikasyonlar"/>
+		
+		<uiItem name="countingSegments" lang="deu" value="Aktualisiere Segmentzahlen"/>
+		<uiItem name="countingSegments" lang="eng" value="refreshing segment count"/>
+
+		<uiItem name="data" lang="deu" value="Daten"/>
+		<uiItem name="data" lang="eng" value="Data"/>
+		<uiItem name="data" lang="tk" value="veri"/>
+
+		<uiItem name="corpus" lang="deu" value="Korpus"/>
+		<uiItem name="corpus" lang="eng" value="Corpus"/>
+		<uiItem name="corpus" lang="tk" value="korpus"/>
+		<uiItem name="corpus" lang="fra" value="Corpus"/>
+		<uiItem name="corpus" lang="spa" value="Corpus"/>
+		<uiItem name="corpus" lang="bul" value="Корпус"/>
+
+		<uiItem name="data" lang="deu" value="Daten"/>
+		<uiItem name="data" lang="eng" value="Data"/>
+		<uiItem name="data" lang="tk" value="veriler"/>
+		<uiItem name="data" lang="fra" value="Données"/>
+		<uiItem name="data" lang="spa" value="Datos"/>
+		<uiItem name="data" lang="bul" value="Данни"/>
+
+		<uiItem name="default" lang="deu" value="Standard"/>
+		<uiItem name="default" lang="eng" value="Standard"/>
+		<uiItem name="default" lang="tk" value="standart"/>
+		<uiItem name="default" lang="fra" value="Standard"/>
+		<uiItem name="default" lang="spa" value="Estándar"/>
+		<uiItem name="default" lang="bul" value="Стандарт"/>
+		
+		<uiItem name="description" lang="deu" value="Beschreibung"/>
+		<uiItem name="description" lang="eng" value="Description"/>
+
+		<uiItem name="descXPath" lang="deu" value="Angezeigter Key aus Description"/>
+		<uiItem name="descXPath" lang="eng" value="Displayed key of description"/>
+		<uiItem name="descXPath" lang="tk" value="gösterilen açıklama"/>
+		<uiItem name="descXPath" lang="fra" value="Paramètre affiché de la description"/>
+		<uiItem name="descXPath" lang="spa" value="Parámetro mostrado de descripción"/>
+		<uiItem name="descXPath" lang="bul" value="Показан параметър от описанието"/>
+
+		<uiItem name="dialog.SaveCorpusData" lang="deu"
+			value="Sollen die erfassten Korpusdaten in einem separaten Korpus gespeichert werden? \n (Ansonsten werden sie gelöscht!)"/>
+		<uiItem name="dialog.SaveCorpusData" lang="eng"
+			value="Do you want to save the entered data as a separate corpus? \n (Otherwise the entered data will be deleted!)"/>
+		<uiItem name="dialog.SaveCorpusData" lang="tk"
+			value="Seçilen korpus verileri ayri korpusda kaydedilsin mi? \n (yoksa silinecekler!)"/>
+		<uiItem name="dialog.SaveCorpusData" lang="fra"
+			value="Voulez-vous enregistrer les données entrées comme un corpus séparé? \n (On supprimera autrement dans les données entrées!)"/>
+		<uiItem name="dialog.SaveCorpusData" lang="spa"
+			value="¿Desea copiar los datos nuevos como un corpus separado? \n (¡Sino los datos nuevos serán cancelados!)"/>
+		<uiItem name="dialog.SaveCorpusData" lang="bul"
+			value="Трябва ли въведените данни да бъдат запаметени като отделен корпус? \Н (В противен случай въведените данни ще бъдат изтрити!)"/>
+
+		<uiItem name="dialog.editLocation" lang="deu" value="Location bearbeiten"/>
+		<uiItem name="dialog.editLocation" lang="eng" value="edit location"/>
+		<uiItem name="dialog.editLocation" lang="tk" value="konumu düzenle"/>
+
+		<uiItem name="dirs" lang="deu" value="Verzeichnisse"/>
+		<uiItem name="dirs" lang="eng" value="Schedules"/>
+		<uiItem name="dirs" lang="tk" value="listeler"/>
+		<uiItem name="dirs" lang="fra" value="Listes"/>
+		<uiItem name="dirs" lang="spa" value="Listas"/>
+		<uiItem name="dirs" lang="bul" value="списъци"/>
+
+		<uiItem name="err.basketEmpty" lang="deu" value="Es befinden sich keine Transkriptionen im Korb."/>
+		<uiItem name="err.basketEmpty" lang="eng" value="The basket is empty."/>
+
+		<uiItem name="err.dontOverwriteCorpus" lang="deu" value="Die geladene Korpusdatei kann nicht überschrieben werden."/>
+		<uiItem name="err.dontOverwriteCorpus" lang="eng" value="You can not overwrite the corpus file in use."/>
+
+		<uiItem name="err.cannotWrite" lang="deu" value="Datei kann nicht geschrieben werden. Haben Sie ausreichende Schreibrechte?"/>
+		<uiItem name="err.cannotWrite" lang="eng" value="File can not be written. Permissions?"/>
+
+		<uiItem name="err.invalidComaDocument" lang="deu" value="ist kein gültiges Coma-XML-Dokument!"/>
+		<uiItem name="err.invalidComaDocument" lang="eng" value="is not a valid Coma-file."/>
+		<uiItem name="err.invalidComaDocument" lang="tk" value="Geçerli Coma-XML-belgesi değil!"/>
+		<uiItem name="err.invalidComaDocument" lang="fra" value="Ce n'est pas un dossier valable XML du CoMa!"/>
+		<uiItem name="err.invalidComaDocument" lang="spa" value="¡No es documento válido para CoMa XML!"/>
+		<uiItem name="err.invalidComaDocument" lang="bul" value="Не е валиден XML-документ от CoMa!"/>
+
+		<uiItem name="err.invalidTranscription" lang="deu" value=" ist keine gültige Transkriptionsdatei."/>
+		<uiItem name="err.invalidTranscription" lang="eng" value=" is not a valid transcription"/>
+
+		<uiItem name="err.transNotBelowCorpus" lang="deu" value="&lt;html&gt;&lt;body&gt;Die Transkription befindet sich nicht unterhalb&lt;br&gt;oder auf der selben Dateisystem-Ebene wie die Korpus-Datei!"/>
+		<uiItem name="err.transNotBelowCorpus" lang="eng" value="&lt;html&gt;&lt;body&gt;Transcription not below or&lt;br&gt; on same level as the corpus-file!"/>
+
+
+		<uiItem name="err.noSchemaDocFound" lang="deu"
+			value="&lt;html&gt;&lt;body&gt;
+			An der Stelle der Datei wurde keine Schema-Datei&lt;br&gt;
+			gefunden. CoMa benutzt deshalb vorübergehend ein internes Schema,&lt;br&gt;
+			um die Datei zu validieren.&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noSchemaDocFound" lang="eng"
+			value="&lt;html&gt;&lt;body&gt;
+			At the place of the file could not be found a scheme-file&lt;br&gt;
+			CoMa uses temporarily an internal scheme,&lt;br&gt;
+			in order to make this file valid.&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noSchemaDocFound" lang="tk"
+			value="&lt;html&gt;&lt;body&gt;
+			Dosyanın yerinde düzen-dosyası bulunmadı.&lt;br&gt;
+			Dosyayı geçerli yapmak için&lt;br&gt;
+CoMa geçici olarak iç düzeni kullanıyor&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noSchemaDocFound" lang="fra"
+			value="&lt;html&gt;&lt;body&gt;
+			At the place of the file could not be found a scheme-file&lt;br&gt;
+			Le CoMa utilise l'intérimaire un interne schéma,&lt;br&gt;
+			afin de rendre ce fichier valide.&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noSchemaDocFound" lang="spa"
+			value="&lt;html&gt;&lt;body&gt;
+			En lugar del archivo no se pudo encontrar un arcivo de esquemq&lt;br&gt;
+			Por eso CoMa utiliza temporalmente un esquema interno,&lt;br&gt;
+			para validar los datos.&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noSchemaDocFound" lang="bul"
+			value="&lt;html&gt;&lt;body&gt;
+			На мястото на файла не можа да бъде намерен схематичен файл&lt;br&gt;
+			CoMa употребява временно вътрешна схема,&lt;br&gt;
+			за да направи този файл валиден.&lt;/html&gt;&lt;/body&gt;"/>
+
+
+
+		<uiItem name="err.noCorpusLoaded" lang="deu" value="&lt;html&gt;&lt;body&gt;Laden (oder speichern) Sie zuerst&lt;br&gt;eine Coma-Datei.&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noCorpusLoaded" lang="eng" value="&lt;html&gt;&lt;body&gt;Please load (or save)&lt;br&gt;na coma-file first.&lt;/html&gt;&lt;/body&gt;"/>
+
+		<uiItem name="err.noDescriptionKeys" lang="deu" value="Es existieren keine Description-Schlüssel!"/>
+		<uiItem name="err.noDescriptionKeys" lang="eng" value="There are no description-keys to harmonize!"/>
+
+		<uiItem name="err.notSavedTitle" lang="deu" value="Coma-Datei nicht gespeichert!"/>
+		<uiItem name="err.notSavedTitle" lang="eng" value="Coma file not saved!"/>
+		<uiItem name="err.notSavedTitle" lang="tk" value="Coma dosyası kaydedilmedi!"/>
+
+		<uiItem name="err.notSaved" lang="deu"
+			value="Das Korpus muß gespeichert werden, bevor Sie&#xA; Transkriptionen oder Aufnahmen verknüpfen."/>
+		<uiItem name="err.notSaved" lang="eng"
+			value="Please save the corpus before\nassigning transcriptions or recordings!"/>
+		<uiItem name="err.notSaved" lang="tk"
+			value="Transkripsiyonları veya kayıtları atamakdan önce, lütfen korpusu kaydet!"/>
+
+		<uiItem name="err.fileNotWritten" lang="deu" value="Datei konnte nicht geschrieben werden!"/>
+		<uiItem name="err.fileNotWritten" lang="eng" value="File not written!"/>
+		<uiItem name="err.fileNotWritten" lang="tk" value="Dosya yazılamadı!"/>
+
+		<uiItem name="err.invalidTemplatesFile" lang="deu" value="Kann die Templates-Datei nicht laden!"/>
+		<uiItem name="err.invalidTemplatesFile" lang="eng" value="Cannot read templates file!"/>
+
+		<uiItem name="updatingRecordings" lang="deu" value="Aktualisiere Aufnahmen..."/>
+		<uiItem name="updatingRecordings" lang="eng" value="Refreshing recordings..."/>
+
+		<uiItem name="error" lang="deu" value="Fehler"/>
+		<uiItem name="error" lang="eng" value="Error"/>
+		<uiItem name="error" lang="tk" value="Hata"/>
+		<uiItem name="error" lang="fra" value="Erreur"/>
+		<uiItem name="error" lang="spa" value="Error"/>
+		<uiItem name="error" lang="bul" value="Грешка"/>
+
+		<uiItem name="file" lang="deu" value="Datei"/>
+		<uiItem name="file" lang="eng" value="File"/>
+		<uiItem name="file" lang="tk" value="dosya"/>
+		<uiItem name="file" lang="fra" value="Fichier"/>
+		<uiItem name="file" lang="spa" value="Archivo"/>
+		<uiItem name="file" lang="bul" value="Файл"/>
+
+		<uiItem name="fileLocation" lang="deu" value="Speicherort"/>
+		<uiItem name="fileLocation" lang="eng" value="file location"/>
+		<uiItem name="fileLocation" lang="tk" value="dosya konumu"/>
+
+		<uiItem name="filter" lang="deu" value="Filter"/>
+		<uiItem name="filter" lang="eng" value="Filter"/>
+		<uiItem name="filter" lang="tk" value="süzme"/>
+
+		<uiItem name="inputsigle" lang="deu" value="Sigle eingeben"/>
+		<uiItem name="inputsigle" lang="eng" value="Enter speaker's sigle"/>
+		<uiItem name="inputsigle" lang="tk" value="Konuşmacı siglesini girin"/>
+		<uiItem name="inputsigle" lang="fra" value="Entrer le sigle parlant"/>
+		<uiItem name="inputsigle" lang="spa" value="Entrar sigla del hablante"/>
+		<uiItem name="inputsigle" lang="bul" value="Въведи сигла на говорещия"/>
+		
+		<uiItem name="import" lang="deu" value="importieren"/>
+		<uiItem name="import" lang="eng" value="import"/>
+
+		<uiItem name="sigle" lang="deu" value="Sigle"/>
+		<uiItem name="sigle" lang="eng" value="sigle"/>
+		<uiItem name="sigle" lang="tk" value="Siglesini"/>
+		
+		<uiItem name="pseudo" lang="deu" value="Pseudo"/>
+		<uiItem name="pseudo" lang="eng" value="pseudo"/>
+
+		<uiItem name="sex" lang="deu" value="Sex"/>
+		<uiItem name="sex" lang="eng" value="sex"/>
+
+		<uiItem name="keyMapper.windowTitle" lang="deu" value="Description-Schlüssel angleichen"/>
+		<uiItem name="keyMapper.windowTitle" lang="eng" value="harmonize description keys"/>
+
+		<uiItem name="label.nameSuggest" lang="deu" value="Name (nur zur Referenz, Englisch)"/>
+		<uiItem name="label.nameSuggest" lang="eng" value="Name (only for reference)"/>
+
+		<uiItem name="languageFile" lang="deu" value="Sprachdatei"/>
+		<uiItem name="languageFile" lang="eng" value="Language file"/>
+		<uiItem name="languageFile" lang="tk" value="dil dosyası"/>
+		<uiItem name="languageFile" lang="fra" value="Fichier de la langue"/>
+		<uiItem name="languageFile" lang="spa" value="Archivo de lenguaje"/>
+		<uiItem name="languageFile" lang="bul" value="Езиков файл"/>
+
+		<uiItem name="maintenance" lang="deu" value="Datenpflege"/>
+		<uiItem name="maintenance" lang="eng" value="Maintenance"/>
+		<uiItem name="maintenance" lang="eng" value="Bakım"/>
+
+		<uiItem name="menu.viewMenu" lang="deu" value="Ansicht"/>
+		<uiItem name="menu.viewMenu" lang="eng" value="View"/>
+
+		<uiItem name="menu.maintenanceMenu" lang="deu" value="Wartung"/>
+		<uiItem name="menu.maintenanceMenu" lang="eng" value="Maintenance"/>
+
+		<uiItem name="menu.analysisMenu" lang="deu" value="Analyse"/>
+		<uiItem name="menu.analysisMenu" lang="eng" value="Analysis"/>
+
+		<uiItem name="menu.viewMenu.showSpeakers" lang="deu" value="Sprecher bei Kommunikationen"/>
+		<uiItem name="menu.viewMenu.showSpeakers" lang="eng" value="speakers with communications"/>
+
+		<uiItem name="menu.viewMenu.showMachineTags" lang="deu" value="geschützte Metadaten"/>
+		<uiItem name="menu.viewMenu.showMachineTags" lang="eng" value="read-only-metadata"/>
+
+		<uiItem name="menu.viewMenu.showMillis" lang="deu" value="Millisekunden"/>
+		<uiItem name="menu.viewMenu.showMillis" lang="eng" value="milliseconds"/>
+
+
+		<uiItem name="menu.viewMenu.showLangNames" lang="deu" value="Sprachnamen (Englisch)"/>
+		<uiItem name="menu.viewMenu.showLangNames" lang="eng" value="language names"/>
+
+		<uiItem name="menu.viewMenu.bw" lang="deu" value="schwarz/weiß"/>
+		<uiItem name="menu.viewMenu.bw" lang="eng" value="black and white"/>
+
+		<uiItem name="menu.viewMenu.colored" lang="deu" value="farbig"/>
+		<uiItem name="menu.viewMenu.colored" lang="eng" value="colored"/>
+
+		<!-- Messages (message.*) -->
+		<uiItem name="msg.changesTranscriptionsWarning" lang="deu" value="&lt;html&gt;&lt;b&gt;Achtung!&lt;/b&gt;&lt;br/&gt;Diese Funktion &lt;b&gt;modifiziert&lt;/b&gt; die Basistranskriptionen im Korpus.&lt;br/&gt;Benutzen Sie diese Funktion nur, wenn Sie genau wissen, was Sie tun!&lt;/html&gt;"/>
+		<uiItem name="msg.changesTranscriptionsWarning" lang="eng" value="&lt;html&gt;&lt;b&gt;Warning!&lt;/b&gt;&lt;br/&gt;This Operation  &lt;b&gt;modifies&lt;/b&gt; basic transcriptions in your corpus.&lt;br/&gt;Please use with extreme caution!&lt;/html&gt;"/>
+		<uiItem name="message.comaGenerated" lang="deu" value="Coma-File geschrieben."/>
+		<uiItem name="message.comaGenerated" lang="eng" value="Coma-file written."/>
+		<uiItem name="message.comaGenerated" lang="tk" value="Coma-dosyası yazıldı."/>
+		
+		<uiItem name="metadata" lang="deu" value="Metadaten"/>
+		<uiItem name="metadata" lang="eng" value="Metadata"/>
+
+		<uiItem name="msg.overwriteWarning" lang="deu" value="Datei existiert bereits. Überschreiben?"/>
+		<uiItem name="msg.overwriteWarning" lang="eng" value="File exists. Overwrite?"/>
+
+		<uiItem name="msg.recordingsAdded" lang="deu" value="Aufnahme(n) hinzugefügt."/>
+		<uiItem name="msg.recordingsAdded" lang="eng" value="recording(s) added."/>
+
+		<uiItem name="msg.recordingsRemoved" lang="deu" value="Aufnahme(n) entfernt."/>
+		<uiItem name="msg.recordingsRemoved" lang="eng" value="recording(s) removed."/>
+
+		<uiItem name="msg.transcriptionImported" lang="eng" value="Transcription imported"/>
+		<uiItem name="msg.transcriptionImported" lang="deu" value="Transkription importiert"/>
+
+		<uiItem name="msg.TransSearchAndReplaceDescription" lang="deu" value="&lt;html&gt;&lt;font size=&quot;2em&quot;&gt;Mit regulären Ausdrücken in &lt;br/&gt;&lt;b&gt;allen Basistranskriptionen des Korpus&lt;/b&gt;&lt;br/&gt;suchen und ersetzen&lt;/font&gt;&lt;/html&gt;"/>
+		<uiItem name="msg.TransSearchAndReplaceDescription" lang="eng" value="&lt;html&gt;&lt;font size=&quot;2em&quot;&gt;Search and replace in&lt;br/&gt;&lt;b&gt;all basic transcriptions of the corpus&lt;/font&gt;&lt;/b&gt;&lt;/html&gt;"/>
+
+		<uiItem name="msg.speakersImported" lang="eng" value="speaker(s) added."/>
+		<uiItem name="msg.speakersImported" lang="deu" value="Sprecher hinzugefügt."/>
+
+		<uiItem name="msg.speakersIgnored" lang="eng" value="existing speaker(s) ignored."/>
+		<uiItem name="msg.speakersIgnored" lang="deu" value="vorhandene Sprecher übersprungen."/>
+
+		<uiItem name="name.editMenu" lang="deu" value="Bearbeiten"/>
+		<uiItem name="name.editMenu" lang="eng" value="Edit"/>
+
+		<uiItem name="name.fileMenu" lang="deu" value="Datei"/>
+		<uiItem name="name.fileMenu" lang="eng" value="File"/>
+		<uiItem name="name.fileMenu" lang="tk" value="dosya"/>
+		<uiItem name="name.fileMenu" lang="fra" value="Fichier"/>
+		<uiItem name="name.fileMenu" lang="spa" value="Archivo"/>
+		<uiItem name="name.fileMenu" lang="bul" value="Файл"/>
+
+		<uiItem name="name.helpMenu" lang="deu" value="Hilfe"/>
+		<uiItem name="name.helpMenu" lang="eng" value="Help"/>
+		<uiItem name="name.helpMenu" lang="tk" value="Yardım"/>
+		<uiItem name="name.helpMenu" lang="fra" value="Aide"/>
+		<uiItem name="name.helpMenu" lang="spa" value="Ayuda"/>
+		<uiItem name="name.helpMenu" lang="bul" value="Помощ"/>
+
+		<uiItem name="name.toolsMenu" lang="deu" value="Werkzeuge"/>
+		<uiItem name="name.toolsMenu" lang="eng" value="Tools"/>
+		<uiItem name="name.toolsMenu" lang="tk" value="araçlar"/>
+		<uiItem name="name.toolsMenu" lang="fra" value="Outils"/>
+		<uiItem name="name.toolsMenu" lang="spa" value="Herramientas"/>
+		<uiItem name="name.toolsMenu" lang="bul" value="Инструменти"/>
+
+		<uiItem name="option.seperateRecordings" lang="deu" value="Einzelne Recordings?"/>
+		<uiItem name="option.seperateRecordings" lang="eng" value="Single Recordings?"/>
+
+		<uiItem name="option.removeFirstTitle" lang="deu" value="Existierende löschen?"/>
+		<uiItem name="option.removeFirstTitle" lang="eng" value="Remove existing?"/>
+		<uiItem name="option.removeFirst" lang="deu" value="Existierende Recordings vorher löschen?"/>
+		<uiItem name="option.removeFirst" lang="eng" value="Remove existing recordings?"/>
+
+		<uiItem name="option.changeTranscription" lang="deu" value="In Transkription(en) übernehmen"/>
+		<uiItem name="option.changeTranscription" lang="eng" value="Change transcription(s)"/>
+		<uiItem name="option.changeTranscription" lang="tk" value="transkripsiyonları değiştir"/>
+
+		<uiItem name="option.deleteOldRecordingAssignments" lang="deu"
+			value="Zuordnung für fehlende löschen"/>
+		<uiItem name="option.deleteOldRecordingAssignments" lang="eng" value="unlink missing files"/>
+		<uiItem name="option.deleteOldRecordingAssignments" lang="tk"
+			value="Eksik dosyaların bağlantısını kaldır"/>
+
+		<uiItem name="option.deleteConfirm" lang="deu" value="Löschen bestätigen"/>
+		<uiItem name="option.deleteConfirm" lang="eng" value="confirm delete"/>
+		<uiItem name="option.deleteConfirm" lang="tk" value="silmeyi onayla"/>
+
+		<uiItem name="option.createBackups" lang="deu" value="Originaldateien sichern"/>
+		<uiItem name="option.createBackups" lang="eng" value="Backup original files"/>
+
+		<uiItem name="options" lang="deu" value="weitere Optionen..."/>
+		<uiItem name="options" lang="eng" value="options..."/>
+
+		<uiItem name="outputFile" lang="deu" value="Ausgabe-Datei"/>
+		<uiItem name="outputFile" lang="eng" value="Output File"/>
+
+		<uiItem name="outputStylesheet" lang="deu" value="Ausgabe-Stylesheet"/>
+		<uiItem name="outputStylesheet" lang="eng" value="Output Stylesheet"/>
+
+		<uiItem name="parameter" lang="deu" value="Schlüssel"/>
+		<uiItem name="parameter" lang="eng" value="Key"/>
+		<uiItem name="parameter" lang="tk" value="anahtar"/>
+		<uiItem name="parameter" lang="fra" value="Paramètre"/>
+		<uiItem name="parameter" lang="spa" value="Parámetro"/>
+		<uiItem name="parameter" lang="bul" value="Параметър"/>
+
+		<uiItem name="parentCommunications" lang="deu" value="übergeordnete Kommunikationen"/>
+		<uiItem name="parentCommunications" lang="eng" value="Superordinated communications"/>
+		<uiItem name="parentCommunications" lang="tk" value="daha yüksek komünikasyonlar"/>
+		<uiItem name="parentCommunications" lang="fra" value="Communications de superordinated"/>
+		<uiItem name="parentCommunications" lang="spa" value="Comunicaciones superiores"/>
+		<uiItem name="parentCommunications" lang="bul" value="Надпоставени комуникации"/>
+
+		<uiItem name="pathToJexmaralda" lang="deu" value="EXMARaLDA-Pfad (jexmaralda.jar)"/>
+		<uiItem name="pathToJexmaralda" lang="eng" value="EXMARaLDA-path (jexmaralda.jar)"/>
+		<uiItem name="pathToJexmaralda" lang="tk" value="EXMARaLDA-yolu (jexmaralda.jar)"/>
+		<uiItem name="pathToJexmaralda" lang="fra" value="EXMARaLDA-path (jexmaralda.jar)"/>
+		<uiItem name="pathToJexmaralda" lang="spa" value="EXMARaLDA-path (jexmaralda.jar)"/>
+		<uiItem name="pathToJexmaralda" lang="bul" value="EXMARaLDA-path (jexmaralda.jar)"/>
+
+		<uiItem name="person" lang="deu" value="Person"/>
+		<uiItem name="person" lang="eng" value="Person"/>
+		<uiItem name="person" lang="tk" value="konuşmacı"/>
+		<uiItem name="person" lang="fra" value="Personne"/>
+		<uiItem name="person" lang="spa" value="Persona"/>
+		<uiItem name="person" lang="bul" value="Лице"/>
+
+		<!--  preferences -->
+
+		<uiItem name="prefs.useNimbusLookAndFeel" lang="deu" value="Nimbus-Look-and-Feel benutzen"/>
+		<uiItem name="prefs.useNimbusLookAndFeel" lang="eng" value="Use 'Nimbus' Look-and-Feel"/>
+
+		<uiItem name="prefs.loggingDir" lang="deu" value="Verzeichnis für das Fehlerprotokoll"/>
+		<uiItem name="prefs.loggingDir" lang="eng" value="Logging directory"/>
+		<uiItem name="prefs.loggingDir" lang="tk" value="Hata protokolü buraya kopyala"/>
+
+		<uiItem name="prefs.newFiltersAdd" lang="deu"
+			value="Neue Filterergebniss standardmässig addieren (logisch 'oder' statt 'und')"/>
+		<uiItem name="prefs.newFiltersAdd" lang="eng"
+			value="Add results of new Filter (instead of retaining them)"/>
+		<uiItem name="prefs.newFiltersAdd" lang="tk" value="Süzmeyi “veya” yerine “ve”la birleştir"/>
+
+		<uiItem name="prefs.newFiltersActive" lang="deu" value="Filter standardmässig aktivieren"/>
+		<uiItem name="prefs.newFiltersActive" lang="eng" value="Set filters active"/>
+		<uiItem name="prefs.newFiltersActive" lang="tk" value="Süzmeyi standart olarak aktif et"/>
+
+		<uiItem name="prefs.nameTranscriptionsAfter" lang="deu"
+			value="Neue Transkriptionen erhalten den Namen der..."/>
+		<uiItem name="prefs.nameTranscriptionsAfter" lang="eng"
+			value="New transcriptions get the name of..."/>
+		<uiItem name="prefs.nameTranscriptionsAfter" lang="tk" value="Yeni transkripsiyon adı..."/>
+		<uiItem name="prefs.nameTranscriptionsAfter" lang="fra"
+			value="Les nouvelles transcriptions prennent le nom de..."/>
+		<uiItem name="prefs.nameTranscriptionsAfter" lang="spa"
+			value="Las transcripciones nuevas obtienen el nombre de ..."/>
+		<uiItem name="prefs.nameTranscriptionsAfter" lang="bul"
+			value="Новата транскрипция получава името на..."/>
+
+		<uiItem name="prefs.resetPrefs" lang="deu" value="Einstellungen zurücksetzen"/>
+		<uiItem name="prefs.resetPrefs" lang="eng" value="Reset preferences"/>
+
+		<uiItem name="prefs.templateHandling" lang="deu" value="Vorlagenverwaltung"/>
+		<uiItem name="prefs.templateHandling" lang="eng" value="Template-handling"/>
+		<uiItem name="prefs.templateHandling" lang="tk" value=" şablon işleme"/>
+
+		<uiItem name="prefs.transcriptionHandling" lang="deu" value="Umgang mit Transkriptionen"/>
+		<uiItem name="prefs.transcriptionHandling" lang="eng" value="Transcription-handling"/>
+		<uiItem name="prefs.transcriptionHandling" lang="tk" value="transkripsiyon işleme "/>
+
+		<uiItem name="prefs.updateCheckTimespan" lang="deu"
+			value="Automatisch nach Updates suchen..."/>
+		<uiItem name="prefs.updateCheckTimespan" lang="eng" value="Check for updates..."/>
+		<uiItem name="prefs.updateCheckTimespan" lang="tk" value="güncelleştirmeleri denetle..."/>
+
+		<uiItem name="prefs.updateCheckForPreviews" lang="deu" value="Preview-Versionen berücksichtigen"/>
+		<uiItem name="prefs.updateCheckForPreviews" lang="eng" value="Include previews"/>
+
+		<uiItem name="prefs.writeCIDsWhenUpdating" lang="deu"
+			value="Coma-IDs bei Wartungsdurchläufen in Transkriptionen schreiben (sofern nicht vorhanden)"/>
+		<uiItem name="prefs.writeCIDsWhenUpdating" lang="eng"
+			value="Write missing Coma-IDs to transcriptions in maintenance-runs"/>
+		<uiItem name="prefs.writeCIDsWhenUpdating" lang="tk"
+			value=" Bakım durumda eksik olan Coma-ID’ları transkripsiyonlara yaz"/>
+
+		<uiItem name="prefs.writeCIDWhenAssigning" lang="deu"
+			value="Coma-ID beim Zuordnen in Transkriptionen schreiben (sofern nicht vorhanden)"/>
+		<uiItem name="prefs.writeCIDWhenAssigning" lang="eng"
+			value="Write missing Coma-IDs to transcriptions while assigning them"/>
+		<uiItem name="prefs.writeCIDWhenAssigning" lang="tk"
+			value="Transkripsiyonları atarken eksik olan Coma-ID’ları transkripsiyonlara yaz"/>
+
+		<uiItem name="prompt.enterBasketFilename" lang="deu" value="Name der Korpusdatei"/>
+		<uiItem name="prompt.enterBasketFilename" lang="eng" value="name of corpus file"/>
+		
+		<uiItem name="prompt.saveErrorList" lang="eng" value="Save error list"/>
+		<uiItem name="prompt.saveErrorList" lang="deu" value="Fehlerliste speichern"/>
+		
+		<uiItem name="progress.checkSegErrors" lang="eng" value="Checking for segmentation errors in " />
+		<uiItem name="progress.checkSegErrors" lang="deu" value="Suche nach Segmentierungsfehlern in " />
+		
+		<uiItem name="progress.checkSpkErrors" lang="eng" value="Checking for speaker errors in " />
+		<uiItem name="progress.checkSpkErrors" lang="deu" value="Suche nach Fehlern in der Sprecherzuordnung in " />
+		
+		<uiItem name="progress.checkStructErrors" lang="eng" value="Checking for structure errors in " />
+		<uiItem name="progress.checkStructErrors" lang="deu" value="Suche nach Strukturfehlern in " />
+		
+		<uiItem name="q.saveChanges" lang="deu" value="Änderungen speichern?"/>
+		<uiItem name="q.saveChanges" lang="eng" value="Save changes?"/>
+		<uiItem name="q.saveChanges" lang="tk" value="Değişiklikleri kaydedilsin mi?"/>
+		<uiItem name="q.saveChanges" lang="fra" value="Voulez-vous enregistrer les changements?"/>
+		<uiItem name="q.saveChanges" lang="spa" value="¿Guardar cambios?"/>
+		<uiItem name="q.saveChanges" lang="bul" value="Запамети промените?"/>
+
+		<uiItem name="recording" lang="deu" value="Aufnahme"/>
+		<uiItem name="recording" lang="eng" value="Recording"/>
+		<uiItem name="recording" lang="tk" value="kayıt"/>
+		<uiItem name="recording" lang="fra" value="Enregistrement"/>
+		<uiItem name="recording" lang="spa" value="Grabación"/>
+		<uiItem name="recording" lang="bul" value="Запис"/>
+
+		<uiItem name="recordings" lang="deu" value="Aufnahmen"/>
+		<uiItem name="recordings" lang="eng" value="Recordings"/>
+		<uiItem name="recordings" lang="tk" value=" kayıtlar"/>
+		<uiItem name="recordings" lang="fra" value="Enregistrements"/>
+		<uiItem name="recordings" lang="spa" value="Grabaciones"/>
+		<uiItem name="recordings" lang="bul" value="Записи"/>
+
+		<uiItem name="repair" lang="tk" value="onar"/>
+		<uiItem name="repair" lang="fra" value="Réparer"/>
+		<uiItem name="repair" lang="spa" value="Reparar"/>
+		<uiItem name="repair" lang="bul" value="Поправи"/>
+
+		<uiItem name="replace" lang="deu" value="Ersetzen"/>
+		<uiItem name="replace" lang="eng" value="Replace"/>
+		
+		<uiItem name="result.nrUndefinedSpeakersFound" lang="eng" value=" undefined speakers were found" /> 
+		<uiItem name="result.nrUndefinedSpeakersFound" lang="deu" value=" undefinierte Sprecher gefunden" /> 
+		
+		<uiItem name="result.segmentedWrittenFor" lang="eng" value="Segmented transcriptions written for " /> 
+		<uiItem name="result.segmentedWrittenFor" lang="deu" value="Segmentierte Transkriptionen geschrieben für " /> 
+
+		<uiItem name="result.noStructErrors" lang="eng" value="No structure errors found." /> 
+		<uiItem name="result.noStructErrors" lang="deu" value="Keine Strukturfehler gefunden." /> 
+
+		<uiItem name="result.noSegErrors" lang="eng" value="No segmentation errors found." /> 
+		<uiItem name="result.noSegErrors" lang="deu" value="Keine Segmentierungsfehler gefunden." /> 
+
+		<uiItem name="result.noUndSpkFound" lang="eng" value="No undefined speakers found." /> 
+		<uiItem name="result.noUndSpkFound" lang="deu" value="Keine undefinierten Sprecher gefunden." /> 
+
+		<uiItem name="result.structErrorsFound" lang="eng" value=" structure errors found.Save error list?" /> 
+		<uiItem name="result.structErrorsFound" lang="deu" value=" Strukturfehler gefunden. Fehlerliste speichern?" /> 
+
+		<uiItem name="result.segErrorsFound" lang="eng" value=" segmentation errors found. Save error list?" /> 
+		<uiItem name="result.segErrorsFound" lang="deu" value=" Segmentierungsfehler gefunden. Fehlerliste schreiben?" /> 
+ 
+		<uiItem name="role" lang="deu" value="Rolle"/>
+		<uiItem name="role" lang="eng" value="role"/>
+
+		<uiItem name="rootNode" lang="deu" value="root-Korpus"/>
+		<uiItem name="rootNode" lang="eng" value="Root-corpus"/>
+		<uiItem name="rootNode" lang="tk" value="Root-korpusu"/>
+		<uiItem name="rootNode" lang="fra" value="Root-corpus"/>
+		<uiItem name="rootNode" lang="spa" value="Root-corpus"/>
+		<uiItem name="rootNode" lang="bul" value="root-корпус"/>
+
+		<uiItem name="savedAs" lang="deu" value="Gespeichert als :"/>
+		<uiItem name="savedAs" lang="eng" value="saved as: "/>
+
+		<uiItem name="saveForComa" lang="deu" value="Als Korpus"/>
+		<uiItem name="saveForComa" lang="eng" value="as a corpus"/>
+		<uiItem name="saveForComa" lang="tk" value="korpus olarak"/>
+
+		<uiItem name="saveForZecke" lang="deu" value="Als Dateiliste"/>
+		<uiItem name="saveForZecke" lang="eng" value="as file list"/>
+		<uiItem name="saveForZecke" lang="tk" value="dosya listesi olarak"/>
+
+		<uiItem name="saveSchemaWithCorpus" lang="deu" value="Schema mitkopieren"/>
+		<uiItem name="saveSchemaWithCorpus" lang="eng" value="Copy schema with"/>
+		<uiItem name="saveSchemaWithCorpus" lang="tk" value="Şemayı… le kopyala"/>
+		<uiItem name="saveSchemaWithCorpus" lang="fra" value="Copier le schéma avec"/>
+		<uiItem name="saveSchemaWithCorpus" lang="spa" value="Guardar el esquema con"/>
+		<uiItem name="saveSchemaWithCorpus" lang="bul" value="Копирай схемата заедно с"/>
+
+		<uiItem name="schema" lang="deu" value="XML-Schema"/>
+		<uiItem name="schema" lang="eng" value="XML-schema"/>
+		<uiItem name="schema" lang="tk" value="XML-şeması"/>
+		<uiItem name="schema" lang="fra" value="schéma XML"/>
+		<uiItem name="schema" lang="spa" value="Esquema XML"/>
+		<uiItem name="schema" lang="bul" value="XML-схема"/>
+
+		<uiItem name="schemaHandling" lang="deu" value="Schema-Dateien"/>
+		<uiItem name="schemaHandling" lang="eng" value="Schema file"/>
+		<uiItem name="schemaHandling" lang="tk" value="dosya şeması"/>
+		<uiItem name="schemaHandling" lang="fra" value="Fichier de schéma"/>
+		<uiItem name="schemaHandling" lang="spa" value="Archivos de esquema"/>
+		<uiItem name="schemaHandling" lang="bul" value="Схематичен файл"/>
+
+		<uiItem name="scope" lang="deu" value="Umfang"/>
+		<uiItem name="scope" lang="eng" value="Scope"/>
+
+		<uiItem name="scopewholeCorpus" lang="deu" value="Ganzes Korpus"/>
+		<uiItem name="scopewholeCorpus" lang="eng" value="whole corpus"/>
+
+		<uiItem name="scopeBasket" lang="deu" value="Nur den Korb"/>
+		<uiItem name="scopeBasket" lang="eng" value="basket only"/>
+
+		<uiItem name="search" lang="deu" value="Suchen"/>
+		<uiItem name="search" lang="eng" value="Search"/>
+
+		<uiItem name="segmentation" lang="deu" value="Segmentierung"/>
+		<uiItem name="segmentation" lang="eng" value="Segmentation"/>
+		<uiItem name="segmentation" lang="tk" value="bölümleme"/>
+
+		<uiItem name="setting" lang="deu" value="Konstellation"/>
+		<uiItem name="setting" lang="eng" value="Setting"/>
+		<uiItem name="setting" lang="tk" value="konstelasyon"/>
+		<uiItem name="setting" lang="fra" value="Constellation"/>
+		<uiItem name="setting" lang="spa" value="Constelación"/>
+		<uiItem name="setting" lang="bul" value="Констелация"/>
+
+		<uiItem name="settings" lang="deu" value="Einstellungen"/>
+		<uiItem name="settings" lang="eng" value="Settings"/>
+		<uiItem name="settings" lang="tk" value="ayarlamalar"/>
+		<uiItem name="settings" lang="fra" value="Réglages"/>
+		<uiItem name="settings" lang="spa" value="Preferencias"/>
+		<uiItem name="settings" lang="bul" value="Настройки"/>
+
+		<uiItem name="speakerImport.speakerSelection" lang="deu" value="Sprecher auswählen"/>
+		<uiItem name="speakerImport.speakerSelection" lang="eng" value="select speakers"/>
+
+		<uiItem name="speakers" lang="deu" value="Personen"/>
+		<uiItem name="speakers" lang="eng" value="Speakers"/>
+		<uiItem name="speakers" lang="tk" value="konuşmacılar"/>
+		<uiItem name="speakers" lang="fra" value="Parlant"/>
+		<uiItem name="speakers" lang="spa" value="Hablante"/>
+		<uiItem name="speakers" lang="bul" value="Говорещ"/>
+
+		<uiItem name="systemSpecificPrefs" lang="deu" value="Benutzerinterface"/>
+		<uiItem name="systemSpecificPrefs" lang="eng" value="User's interface"/>
+		<uiItem name="systemSpecificPrefs" lang="tk" value="kullanıcı arayüzü"/>
+		<uiItem name="systemSpecificPrefs" lang="fra" value="Interface d'utilisateur"/>
+		<uiItem name="systemSpecificPrefs" lang="spa" value="Interface de usuario"/>
+		<uiItem name="systemSpecificPrefs" lang="bul" value="Интерфейс на потребителя"/>
+
+		<uiItem name="title.displayOptions" lang="deu" value="Anzeigeoptionen"/>
+		<uiItem name="title.displayOptions" lang="eng" value="display options"/>
+		<uiItem name="title.displayOptions" lang="tk" value="görüntü seçenekleri"/>
+
+		<uiItem name="timespanNever" lang="deu" value="niemals"/>
+		<uiItem name="timespanNever" lang="eng" value="never"/>
+		<uiItem name="timespanNever" lang="tk" value="hiçbir zaman"/>
+
+		<uiItem name="templates" lang="deu" value="Templates"/>
+		<uiItem name="templates" lang="eng" value="templates"/>
+		<uiItem name="templates" lang="tk" value="şablonlar"/>
+
+		<uiItem name="timespan" lang="deu" value="Zeitspanne"/>
+		<uiItem name="timespan" lang="eng" value="timespan"/>
+
+		<uiItem name="timespanDaily" lang="deu" value="täglich"/>
+		<uiItem name="timespanDaily" lang="eng" value="daily"/>
+		<uiItem name="timespanDaily" lang="tk" value="her gün"/>
+
+		<uiItem name="timespanWeekly" lang="deu" value="wöchentlich"/>
+		<uiItem name="timespanWeekly" lang="eng" value="weekly"/>
+		<uiItem name="timespanWeekly" lang="tk" value="her hafta"/>
+
+		<uiItem name="timespanMonthly" lang="deu" value="monatlich"/>
+		<uiItem name="timespanMonthly" lang="eng" value="monthly"/>
+		<uiItem name="timespanMonthly" lang="tk" value="her ay"/>
+
+		<uiItem name="transcription" lang="deu" value="Transkription"/>
+		<uiItem name="transcription" lang="eng" value="Transcription"/>
+		<uiItem name="transcription" lang="tk" value="transkripsiyon"/>
+		<uiItem name="transcription" lang="fra" value="Transcription"/>
+		<uiItem name="transcription" lang="spa" value="Transcripción"/>
+		<uiItem name="transcription" lang="bul" value="Транскрипция"/>
+
+		<uiItem name="transcriptionDisplay" lang="deu" value="Anzeige der Transkriptionen"/>
+		<uiItem name="transcriptionDisplay" lang="eng" value="Display of transcriptions"/>
+		<uiItem name="transcriptionDisplay" lang="tk" value="transkripsiyon görüntüsü"/>
+		<uiItem name="transcriptionDisplay" lang="fra" value="Visualisation des transcriptions"/>
+		<uiItem name="transcriptionDisplay" lang="spa" value="Visualización de transcripciones"/>
+		<uiItem name="transcriptionDisplay" lang="bul" value="Онагледи транскрипциите"/>
+
+		<uiItem name="transcriptions" lang="deu" value="Transkriptionen"/>
+		<uiItem name="transcriptions" lang="eng" value="Transcriptions"/>
+		<uiItem name="transcriptions" lang="tk" value="transkripsiyonlar"/>
+		<uiItem name="transcriptions" lang="fra" value="Transcriptions"/>
+		<uiItem name="transcriptions" lang="spa" value="Transcripciones"/>
+		<uiItem name="transcriptions" lang="bul" value="Транскрипции"/>
+
+		<uiItem name="unnamed" lang="deu" value="unbenannt"/>
+		<uiItem name="unnamed" lang="eng" value="unnamed"/>
+		<uiItem name="unnamed" lang="tk" value="adsız"/>
+
+		<uiItem name="unsavedChanges" lang="deu" value="Ungespeicherte Änderungen"/>
+		<uiItem name="unsavedChanges" lang="eng" value="Unsaved changes"/>
+		<uiItem name="unsavedChanges" lang="tk" value="kaydedilmemiş değişiklikler"/>
+		<uiItem name="unsavedChanges" lang="fra" value="Changements pas enregistrées"/>
+		<uiItem name="unsavedChanges" lang="spa" value="Cambios no guardados"/>
+		<uiItem name="unsavedChanges" lang="bul" value="Незапаметени промени"/>
+
+		<uiItem name="value" lang="deu" value="Wert"/>
+		<uiItem name="value" lang="eng" value="Value"/>
+		<uiItem name="value" lang="tk" value="değer"/>
+		<uiItem name="value" lang="fra" value="valeur"/>
+		<uiItem name="value" lang="spa" value="Valor"/>
+		<uiItem name="value" lang="bul" value="Стойност"/>
+
+		<uiItem name="versionCheck.haveLatest" lang="deu"
+			value="&lt;html&gt;&lt;body&gt;
+		Sie haben die neueste&lt;br&gt;CoMa-Version installiert&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="versionCheck.haveLatest" lang="tk"
+			value="&lt;html&gt;&lt;body&gt;
+		En son CoMa-sürümü yüklendi &lt;/html&gt;&lt;/body&gt;"/>
+
+		<uiItem name="versionCheck.haveObsolete" lang="deu"
+			value="&lt;html&gt;&lt;body&gt;
+		Von der Verwendung Ihrer CoMa-Version wird&lt;br&gt;
+		dringend abgeraten. Um eine aktuelle Version&lt;br&gt;
+		herunterzuladen, klicken Sie auf den folgenden Link.
+		&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="versionCheck.haveObsolete" lang="tk"
+			value="&lt;html&gt;&lt;body&gt;
+		Lütfen bu Coma-versiyonu kullanma.&lt;br&gt; 
+En son Coma-versiyonu yüklemek için&lt;br&gt;
+bu bağlantıyı aç.&lt;/html&gt;&lt;/body&gt;"/>
+
+		<uiItem name="versionCheck.haveStable" lang="deu"
+			value="&lt;html&gt;&lt;body&gt;
+		Sie haben die aktuelle&lt;br&gt;CoMa-Version installiert.
+		&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="versionCheck.haveStable" lang="tk"
+			value="&lt;html&gt;&lt;body&gt;
+		En son Coma-versiyon yüklendi. &lt;/html&gt;&lt;/body&gt;"/>
+
+		<uiItem name="versionCheck.haveStableNeedLatest" lang="deu"
+			value="&lt;html&gt;&lt;body&gt;
+		Sie haben die aktuelle&lt;br&gt;CoMa-Version installiert.&lt;br&gt;
+		Um den neuesten Snapshot-release&lt;br&gt;zu installieren, klicken Sie&lt;br&gt;
+		auf den folgenden Link.
+		&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="versionCheck.haveStableNeedLatest" lang="tk"
+			value="&lt;html&gt;&lt;body&gt;
+En son Coma-versiyon yüklendi. &lt;br&gt;
+En yeni Snapshot-release’i yüklemek için&lt;br&gt;
+bu bağlantıyı aç.&lt;/html&gt;&lt;/body&gt;"/>
+
+		<uiItem name="versionCheck.haveUnstable" lang="deu"
+			value="&lt;html&gt;&lt;body&gt;
+		Sie haben eine veraltete CoMa-Version installiert.&lt;br&gt;
+		Um eine aktuelle Version herunterzuladen,&lt;br&gt;klicken Sie auf den folgenden Link.
+		&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="versionCheck.haveUnstable" lang="tk"
+			value="&lt;html&gt;&lt;body&gt;
+		Eski Coma-versiyon yüklendi.&lt;br&gt;
+En son Coma-versiyonu yüklemek için&lt;br&gt;
+bu bağlantıyı aç.&lt;/html&gt;&lt;/body&gt;"/>
+
+		<uiItem name="waitMessage" lang="deu" value="Bitte warten..."/>
+		<uiItem name="waitMessage" lang="eng" value="please wait..."/>
+		<uiItem name="waitMessage" lang="tk" value="Lütfen bekle..."/>
+
+		<uiItem name="warning" lang="deu" value="Warnung"/>
+		<uiItem name="warning" lang="eng" value="Warning"/>
+		<uiItem name="warning" lang="tk" value="uyarı"/>
+		<uiItem name="warning" lang="fra" value="avis"/>
+		<uiItem name="warning" lang="spa" value="Aviso"/>
+		<uiItem name="warning" lang="bul" value="Внимание"/>
+
+		<uiItem name="filter.emptyFilter" lang="deu" value="Leerer Filter"/>
+		<uiItem name="filter.emptyFilter" lang="eng" value="empty filter"/>
+		<uiItem name="filter.emptyFilter" lang="tk" value="boş süzme"/>
+
+		<uiItem name="filter.commsWithTranscriptions" lang="deu" value="alle mit Transkriptionen"/>
+		<uiItem name="filter.commsWithTranscriptions" lang="eng" value="with transcriptions"/>
+		<uiItem name="filter.commsWithTranscriptions" lang="tk" value="transkripsiyonlarla"/>
+
+		<uiItem name="filter.commsWithRecordings" lang="deu" value="alle mit Aufnahmen"/>
+		<uiItem name="filter.commsWithRecordings" lang="eng" value="with recordings"/>
+		<uiItem name="filter.commsWithRecordings" lang="tk" value="kayıtlarla"/>
+
+		<uiItem name="ccw.algorithm" lang="deu" value="Segmentierungs-Algorithmus"/>
+		<uiItem name="ccw.algorithm" lang="eng" value="segmentation algorithm"/>
+		<uiItem name="ccw.algorithm" lang="tk" value=" bölümleme algoritması"/>
+
+		<uiItem name="ccw.fileName" lang="deu" value="Coma-Datei"/>
+		<uiItem name="ccw.fileName" lang="eng" value="Coma file"/>
+		<uiItem name="ccw.fileName" lang="tk" value="Coma dosyası"/>
+
+		<uiItem name="ccw.corpusName" lang="deu" value="Korpus-Name"/>
+		<uiItem name="ccw.corpusName" lang="eng" value="Name of corpus"/>
+		<uiItem name="ccw.corpusName" lang="tk" value="korpus adı"/>
+
+		<uiItem name="ccw.onError" lang="deu" value="bei Segmentierungsfehlern..."/>
+		<uiItem name="ccw.onError" lang="eng" value="on segmentation errors..."/>
+		<uiItem name="ccw.onError" lang="tk" value="Bölütlenme hata olunca..."/>
+
+		<uiItem name="ccw.newDir" lang="deu" value="neues Verzeichnis"/>
+		<uiItem name="ccw.newDir" lang="eng" value="new directory"/>
+		<uiItem name="ccw.newDir" lang="tk" value="yeni dizin yarat"/>
+
+		<uiItem name="ccw.sameDir" lang="deu" value="selbes Verzeichnis"/>
+		<uiItem name="ccw.sameDir" lang="eng" value="same directory"/>
+		<uiItem name="ccw.sameDir" lang="tk" value="aynı dizini kullan"/>
+
+		<uiItem name="ccw.searching" lang="deu" value="suche nach Transkriptionen"/>
+		<uiItem name="ccw.searching" lang="eng" value="searching for transcriptions"/>
+		<uiItem name="ccw.searching" lang="tk" value="transkripsiyonları ara"/>
+
+		<uiItem name="ccw.selectTranscriptions" lang="deu" value="Transkriptionen auswählen"/>
+		<uiItem name="ccw.selectTranscriptions" lang="eng" value="select transcriptions"/>
+		<uiItem name="ccw.selectTranscriptions" lang="tk" value=" transkripsiyonları seç"/>
+
+		<uiItem name="ccw.suffix" lang="deu" value="Suffix"/>
+		<uiItem name="ccw.suffix" lang="eng" value="suffix"/>
+		<uiItem name="ccw.suffix" lang="tk" value="sonek"/>
+
+		<uiItem name="ccw.target" lang="deu" value="Zielort"/>
+		<uiItem name="ccw.target" lang="eng" value="target"/>
+		<uiItem name="ccw.target" lang="tk" value="hedef"/>
+
+		<uiItem name="ccw.useDefault" lang="deu" value="Default-Segmentierung verwenden"/>
+		<uiItem name="ccw.useDefault" lang="eng" value="use default segmentation"/>
+		<uiItem name="ccw.useDefault" lang="tk" value="varsayılan bölütlenmeyi kullan"/>
+
+		<uiItem name="ccw.writeErrorList" lang="deu" value="...Fehlerliste schreiben"/>
+		<uiItem name="ccw.writeErrorList" lang="eng" value="...write error list"/>
+		<uiItem name="ccw.writeErrorList" lang="tk" value="...hata listesi yaz"/>
+
+
+
+		<uiItem name="updateCheck.latestPreviewVersion" lang="deu" value="Neueste Preview-Version"/>
+		<uiItem name="updateCheck.latestPreviewVersion" lang="eng" value="Latest preview version"/>
+
+		<uiItem name="updateCheck.latestReleaseVersion" lang="deu" value="Neueste Release-Version"/>
+		<uiItem name="updateCheck.latestReleaseVersion" lang="eng" value="Latest release version"/>
+
+		<uiItem name="updateCheck.yourVersion" lang="deu" value="Installierte Version"/>
+		<uiItem name="updateCheck.yourVersion" lang="eng" value="Installed version"/>
+
+		<uiItem name="updateCheck.windowTitle" lang="deu" value="Suche nach Updates..."/>
+		<uiItem name="updateCheck.windowTitle" lang="eng" value="checking for updates..."/>
+		<uiItem name="updateCheck.windowTitle" lang="tk" value="güncelleştirmeleri denetle..."/>
+
+		<uiItem name="updateCheck.visitPage" lang="deu" value="Download-Seite besuchen"/>
+		<uiItem name="updateCheck.visitPage" lang="eng" value="visit download page"/>
+		<uiItem name="updateCheck.visitPage" lang="tk" value="Yükleme sayfaya git"/>
+
+		<uiItem name="updateCheck.thankGod" lang="deu" value="Hab' ich ein Glück!"/>
+		<uiItem name="updateCheck.thankGod" lang="eng" value="Thank God!"/>
+		<uiItem name="updateCheck.thankGod" lang="tk" value="Çok şükür!"/>
+
+		<uiItem name="updateCheck.download" lang="deu" value="Neue Version herunterladen"/>
+		<uiItem name="updateCheck.download" lang="eng" value="download new version"/>
+		<uiItem name="updateCheck.download" lang="tk" value="Yeni versiyon yükle"/>
+
+
+		<uiItem name="updateCheck.pageUnreachable" lang="deu" value="Seite nicht erreichbar"/>
+		<uiItem name="updateCheck.pageUnreachable" lang="eng" value="page unreachable"/>
+		<uiItem name="updateCheck.pageUnreachable" lang="tk" value="sayfa ulaşılmaz"/>
+
+		<uiItem name="updateCheck.downloadFailed" lang="deu"
+			value="&lt;h2&gt;Update-informationen konnten nicht heruntergeladen werden.&lt;/h2&gt;
+		&lt;p&gt;Das ist möglicherweise unsere Schuld...&lt;/p&gt;
+		&lt;p&gt;Überprüfen Sie, ob Sie mit dem Internet verbunden sind&lt;br/&gt;und versuchen Sie es später nich einmal.&lt;/p&gt;"/>
+		<uiItem name="updateCheck.downloadFailed" lang="eng"
+			value="&lt;h2&gt;update-information could not be downloaded.&lt;/h2&gt;
+		&lt;p&gt;this may well be our fault...&lt;/p&gt;
+		&lt;p&gt;check your internet connection and try again later.&lt;/p&gt;"/>
+		<uiItem name="updateCheck.downloadFailed" lang="tk"
+			value="&lt;h2&gt;Bilgi güncellemesi yüklenmedi.&lt;/h2&gt;
+		Belki yanlışlık bizde...&lt;/p&gt;
+		&lt;p&gt;Internet bağlatıyı denetle ve lütfen daha sonar tekrar dene.&lt;/p&gt;"/>
+
+		<uiItem name="updateCheck.noUpdate" lang="deu"
+			value="&lt;h2&gt;Kein Update verfügbar.&lt;/h2&gt;
+		&lt;p&gt;Sie haben bereits die neuste Coma-Version : @v &lt;/p&gt;"/>
+		<uiItem name="updateCheck.noUpdate" lang="eng"
+			value="&lt;h2&gt;no update available.&lt;/h2&gt;
+		&lt;p&gt;you are already using the latest version : @v &lt;/p&gt;"/>
+		<uiItem name="updateCheck.noUpdate" lang="tk"
+			value="&lt;h2&gt;no update available.&lt;/h2&gt;
+		&lt;p&gt;En son Coma-versiyon kullanılmaktadır: @v &lt;/p&gt;"/>
+
+	</uiItems>
+</ComaUiLanguages>

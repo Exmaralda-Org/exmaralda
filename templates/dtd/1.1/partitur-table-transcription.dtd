@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- created 11-April-2001 -->
+<!-- by Thomas Schmidt -->
+<!-- thomas.schmidt@uni-hamburg.de -->
+<!-- ************ Top level element ************ -->
+<!ELEMENT partitur-table-transcription (head, partitur-table-body)>
+<!-- ********************************************** -->
+<!-- ************ Head (same for all transcriptions ************ -->
+<!ELEMENT head (meta-information, speakertable)>
+<!-- ************************************ -->
+<!ELEMENT meta-information (project-name, transcription-name, referenced-file, ud-meta-information, comment, transcription-convention)>
+<!ELEMENT project-name (#PCDATA)>
+<!ELEMENT transcription-name (#PCDATA)>
+<!ELEMENT referenced-file EMPTY>
+<!ATTLIST referenced-file url CDATA #REQUIRED>
+<!ELEMENT ud-meta-information (ud-information*)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT transcription-convention (#PCDATA)>
+<!ELEMENT ud-information (#PCDATA)>
+<!ATTLIST ud-information attribute-name CDATA #REQUIRED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT speakertable (speaker*)>
+<!ELEMENT speaker (abbreviation, sex, languages-used, l1, l2, ud-speaker-information, comment)>
+<!ATTLIST speaker id ID #REQUIRED>
+<!ELEMENT abbreviation (#PCDATA)>
+<!ELEMENT sex EMPTY>
+<!ATTLIST sex value (m | f | u) #REQUIRED>
+<!ELEMENT languages-used (language+)>
+<!ELEMENT l1 (language*)>
+<!ELEMENT l2 (language*)>
+<!ELEMENT language EMPTY>
+<!ATTLIST language xml:lang NMTOKEN #REQUIRED>
+<!ELEMENT ud-speaker-information (ud-information*)>
+<!-- ************************************ -->
+<!-- ************ ************************************** ************ -->
+<!-- ************ Body (different for all transcriptions) ************ -->
+<!ELEMENT partitur-table-body (common-timeline, tierformat-table?, partitur-table*)>
+<!-- ************************************ -->
+<!ELEMENT common-timeline (tli*)>
+<!ELEMENT tli EMPTY>
+<!ATTLIST tli id ID #REQUIRED
+	time CDATA #IMPLIED>
+<!-- ************************************ -->
+<!ELEMENT tierformat-table (tier-format*)>
+<!ELEMENT tier-format (#PCDATA)>
+<!ATTLIST tier-format tierref ID #REQUIRED
+					 style-name (Plain | Bold | Italic) #REQUIRED
+					 size (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 72) #REQUIRED
+					 alignment-name (Left | Right | Center) #REQUIRED
+					 textcolor-name (white | lighGray | darkGray | black | red | pink | orange | yellow | green | magenta | cyan | blue) #REQUIRED				
+					 bgcolor-name (white | lighGray | darkGray | black | red | pink | orange | yellow | green | magenta | cyan | blue) #REQUIRED>
+<!-- ************************************ -->
+<!ELEMENT partitur-table (head-row, partitur-row*)>
+<!ELEMENT head-row (partitur-row)>
+<!ELEMENT partitur-row (label, partitur-cell*)>
+<!ATTLIST partitur-row id CDATA #REQUIRED>
+<!ELEMENT label (partitur-cell)>
+<!ELEMENT partitur-cell (#PCDATA)>
+<!ATTLIST partitur-cell id CDATA #IMPLIED
+					   anchor CDATA #IMPLIED
+					   hyperlink CDATA #IMPLIED
+ 					   column CDATA #IMPLIED
+					   width CDATA #IMPLIED
+					   span CDATA #REQUIRED>

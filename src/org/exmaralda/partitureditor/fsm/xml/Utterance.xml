@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<fsm name="Utterance">
+	<char-set id="ue">
+		<char>.</char>
+		<char>!</char>
+		<char>?</char>
+		<char>…</char>
+	</char-set>
+	<start-state id="T0"/>
+	<end-state id="T5"/>
+	<transitions source="T0">
+		<transition>
+			<input-char-set id="ue"/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="t" s="" e=""><ts n="u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="T1">
+		<transition>
+			<input-char-set id="ue"/>
+			<target id="T2"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T1"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T5"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts></ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T2">
+		<transition>
+			<input-char-set id="ue"/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]></prefix>
+				<suffix><![CDATA[<ts n="u" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char><![CDATA["]]></input-char>
+			<target id="T4"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char><![CDATA[ ]]></input-char>
+			<target id="T3"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T5"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts></ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T3">
+		<transition>
+			<input-char-set id="ue"/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T5"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T4">
+		<transition>
+			<input-char-set id="ue"/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]></prefix>
+				<suffix><![CDATA[<ts n="u" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char><![CDATA[ ]]></input-char>
+			<target id="T3"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T5"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts></ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T5">
+		<transition>
+			<input-other/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="ERROR">
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+</fsm>

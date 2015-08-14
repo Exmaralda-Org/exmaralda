@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <level level="2" name="minimaltranskription">
+        <pattern name="IS_WORD">
+            <regex>(\d+(\.\d+)?|([\p{L}\']+(\|[\p{L}\']+)?))</regex>
+            <comment>any sequence of alphabetic letters</comment>
+        </pattern>
+        <pattern name="IS_INTERRUPT">            
+            <regex>\{/ \}</regex>
+            <comment></comment>
+        </pattern>        
+        <pattern name="IS_COMMENT">
+            <!-- ((1) Ja, (1)) -->
+            <regex>\{[^\}]+\}</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="IS_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="IS_PUNCTUATION">            
+            <regex>[\W]+</regex>
+            <comment></comment>
+        </pattern>   
+        <pattern name="IS_BOUNDARY">
+            <!-- ((1) Ja, (1)) -->
+            <regex>\Q{/*/}\E</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="IS_OVERLAP">
+            <regex>( \||\| |^\||\|$)</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="IS_WORD_INTERNAL_OVERLAP">
+            <regex>\|</regex>
+            <comment></comment>
+        </pattern>
+        <!-- 
+        * kurze Pause (bis max. ½ Sekunde)
+        ** etwas längere Pause (bis max. 1 Sekunde)
+        *3,5* längere Pause mit Zeitangabe in Sekunden
+        *4:30* lange Pause mit Zeitangabe in Minuten und Sekunden
+        *+* "gefüllte Pause"        
+        -->
+        <pattern name="IS_PAUSE">
+            <regex>\{\*(((\d{1,2}([\,\:]\d{1,2})?)|\+)?\*|\*{0,2}) ?\}</regex>
+            <comment></comment>            
+        </pattern>
+        
+        <pattern name="IS_INCOMPREHENSIBLE">
+            <regex>\{\((\?{1,3}|\.+\??)\) ?\}</regex>
+            <comment></comment>            
+        </pattern>
+        
+        
+    </level>
+
+
+
+</patterns>

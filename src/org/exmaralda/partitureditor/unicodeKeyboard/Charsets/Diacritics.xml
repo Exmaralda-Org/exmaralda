@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="Combining Diacritics">
+	<key>
+		<content>&#x0300;</content>
+		<description>Grave accent</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0301;</content>
+		<description>Acute accent</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0302;</content>
+		<description>Circumflex accent</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0303;</content>
+		<description>Tilde</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0304;</content>
+		<description>Macron</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0305;</content>
+		<description>Overline</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0306;</content>
+		<description>Breve</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0307;</content>
+		<description>Dot above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0308;</content>
+		<description>Diaresis</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0309;</content>
+		<description>Hook above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030A;</content>
+		<description>Ring above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030B;</content>
+		<description>Double acute accent</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030C;</content>
+		<description>Caron</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030D;</content>
+		<description>Vertical line above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030E;</content>
+		<description>Double vertical line above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030F;</content>
+		<description>Double grave accent</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0310;</content>
+		<description>Candrabindu</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0311;</content>
+		<description>Inverted breve</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0312;</content>
+		<description>Turned comma above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0313;</content>
+		<description>Comma above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0314;</content>
+		<description>Reversed comma above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0315;</content>
+		<description>Comma above right</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0316;</content>
+		<description>Grave accent below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0317;</content>
+		<description>Acute accent below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0318;</content>
+		<description>Left tack below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0319;</content>
+		<description>Right tack below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x031A;</content>
+		<description>Left angle above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x031B;</content>
+		<description>Horn</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x031C;</content>
+		<description>Left half ring below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x031D;</content>
+		<description>Up tack below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x031E;</content>
+		<description>Down tack below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x031F;</content>
+		<description>Plus sign below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0320;</content>
+		<description>Minus sign below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0321;</content>
+		<description>Palatalized hook below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0322;</content>
+		<description>Retroflex hook below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0323;</content>
+		<description>Dot below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0324;</content>
+		<description>Diaresis below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0325;</content>
+		<description>Ring below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0326;</content>
+		<description>Comma below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0327;</content>
+		<description>Cedilla</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0328;</content>
+		<description>Ogonek</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0329;</content>
+		<description>Vertical line below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x032A;</content>
+		<description>Bridge below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x032B;</content>
+		<description>Inverted double arc below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x032C;</content>
+		<description>Caron below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x032D;</content>
+		<description>Circumflex accent below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x032E;</content>
+		<description>Breve below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x032F;</content>
+		<description>Inverted breve below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0330;</content>
+		<description>Tilde below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0331;</content>
+		<description>Macron below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0332;</content>
+		<description>Low line</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0333;</content>
+		<description>Double low line</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0334;</content>
+		<description>Tilde overlay</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0335;</content>
+		<description>Short stroke overlay</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0336;</content>
+		<description>Long stroke overlay</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0337;</content>
+		<description>Short solidus overlay</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0338;</content>
+		<description>Long solidus overlay</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0339;</content>
+		<description>Right half ring below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x033A;</content>
+		<description>Inverted bridge below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x033B;</content>
+		<description>Square below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x033C;</content>
+		<description>Seagull below</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x033D;</content>
+		<description>X above</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x033E;</content>
+		<description>Vertical tilde</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x033F;</content>
+		<description>Double overline</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+</unicode-keyboard>

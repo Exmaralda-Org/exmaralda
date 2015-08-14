@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="Braille Intonation">
+	<key>
+		<content>&#x2840;</content>
+		<description>links unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2880;</content>
+		<description>rechts unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2804;</content>
+		<description>links mitte unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2820;</content>
+		<description>rechts mitte unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2802;</content>
+		<description>links mitte oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2810;</content>
+		<description>rechts mitte oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2801;</content>
+		<description>links oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2808;</content>
+		<description>rechts oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+    <!-- ***************************** -->
+	<key>
+		<content>&#x28C0;</content>
+		<description>progredierend unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2823;</content>
+		<description>progredierend mitte unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2812;</content>
+		<description>progredierend mitte oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2809;</content>
+		<description>progredierend oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+    <!-- ***************************** -->
+	<key>
+		<content>&#x2860;</content>
+		<description>steigend von unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2850;</content>
+		<description>stark steigend von unten</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x280A;</content>
+		<description>steigend oben ankommend</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x280C;</content>
+		<description>stark steigend oben ankommend</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2828;</content>
+		<description>sehr stark steigend</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+    <!-- ***************************** -->
+	<key>
+		<content>&#x2811;</content>
+		<description>fallend von oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2821;</content>
+		<description>stark fallend von oben</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2882;</content>
+		<description>stark fallend unten ankommend</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+	<key>
+		<content>&#x2881;</content>
+		<description>sehr stark fallend</description>
+		<font name="Braille" size="16" face="bold"/>
+	</key>
+
+</unicode-keyboard>

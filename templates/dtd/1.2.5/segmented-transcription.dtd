@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version 1.2.5. -->
+<!-- changes on 28-August-2003 -->
+<!-- ELEMENT segmented-tier can now optionally contain an ATTRIBUTE display-name -->
+<!ELEMENT segmented-transcription (head, segmented-body)>
+<!-- ************ Head (same for all transcriptions ************ -->
+<!ELEMENT head (meta-information, speakertable)>
+<!-- ************************************ -->
+<!ELEMENT meta-information (project-name, transcription-name, referenced-file, ud-meta-information, comment, transcription-convention)>
+<!ELEMENT project-name (#PCDATA)>
+<!ELEMENT transcription-name (#PCDATA)>
+<!ELEMENT referenced-file EMPTY>
+<!ATTLIST referenced-file
+	url CDATA #REQUIRED
+>
+<!ELEMENT ud-meta-information (ud-information*)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT transcription-convention (#PCDATA)>
+<!ELEMENT ud-information (#PCDATA)>
+<!ATTLIST ud-information
+	attribute-name CDATA #REQUIRED
+>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT speakertable (speaker*)>
+<!ELEMENT speaker (abbreviation, sex, languages-used, l1, l2, ud-speaker-information, comment)>
+<!ATTLIST speaker
+	id ID #REQUIRED
+>
+<!ELEMENT abbreviation (#PCDATA)>
+<!ELEMENT sex EMPTY>
+<!ATTLIST sex
+	value (m | f | u) #REQUIRED
+>
+<!ELEMENT languages-used (language*)>
+<!ELEMENT l1 (language*)>
+<!ELEMENT l2 (language*)>
+<!ELEMENT language EMPTY>
+<!ATTLIST language
+	lang NMTOKEN #REQUIRED
+>
+<!ELEMENT ud-speaker-information (ud-information*)>
+<!-- ************************************ -->
+<!ELEMENT segmented-body (common-timeline, segmented-tier*)>
+<!-- ************************************ -->
+<!ELEMENT common-timeline (tli*)>
+<!ELEMENT tli EMPTY>
+<!-- attribute 'type' added in version 1.1.1. -->
+<!ATTLIST tli
+	id ID #REQUIRED
+	time CDATA #IMPLIED
+	type (unsp | user | appl | intp | othr) #IMPLIED
+>
+<!-- ************************************ -->
+<!ELEMENT segmented-tier (timeline-fork*, segmentation+, annotation*)>
+<!ATTLIST segmented-tier
+	id ID #REQUIRED
+	speaker IDREF #IMPLIED
+	category CDATA #REQUIRED
+	display-name CDATA #IMPLIED
+	type (t | d | a | l | u) #REQUIRED
+>
+<!-- CHANGED IN VERSION 1.2.5. !!!! -->
+<!-- a timeline-fork defines timepoints individual to a segmented-tier -->
+<!-- the start and end attributes refer to points in the common timeline -->
+<!ELEMENT timeline-fork (tli+)>
+<!ATTLIST timeline-fork
+	start IDREF #REQUIRED
+	end IDREF #REQUIRED
+>
+<!-- <segmentation> is a collection of trees over character data. If there is more than one segmentation, all segmentations must have identical character data. -->
+<!ELEMENT segmentation (ts | ats)*>
+<!ATTLIST segmentation
+	name CDATA #REQUIRED
+>
+<!-- <ts> is a (composed) timed segment, i.e. a segment that can
+	a) a be assigned a reasonable start end point from the timeline
+	b) be further decomposed into composed and atomic timed segments and non-timed-segments 
+	a <ts> should EITHER contain character data OR a number child elements, but not both
+	an example is an utterance (usually at least decomposable into words) or a word (decomposable into phonemes)
+	-->
+<!ELEMENT ts (#PCDATA | ts | ats | nts)*>
+<!-- attribute "n" is the name of this segment, e.g. 'w' for word or 'u' for utterance -->
+<!-- attribute "id" is a unique identifier -->
+<!-- attribute "s" is a reference to the timeline specifying the start point of this segment -->
+<!-- attribute "e" is a reference to the timeline specifying the end point of this segment -->
+<!-- attribute "medium" specifies the medium of a linked file (if present) -->
+<!-- attribute "url" specifies the location of a linked file (if present) -->
+<!ATTLIST ts
+	n CDATA #REQUIRED
+	id ID #IMPLIED
+	s IDREF #REQUIRED
+	e IDREF #REQUIRED
+	medium (aud | vid | img | txt | oth) #IMPLIED
+	url CDATA #IMPLIED
+>
+<!-- <ats> is an atomic timed segment, i.e. a segment that can
+	a) a be assigned a reasonable start end point from the timeline
+	b) NOT be further decomposed into composed and atomic timed segments and non-timed-segments 
+	because it is atomic, a <ats> will only contain character data
+	an example is the description of a non-phonological event ('sneezes') 
+	-->
+<!ELEMENT ats (#PCDATA)>
+<!-- the attributes of a <ats> are identical to the attributes of a <ts> -->
+<!ATTLIST ats
+	n CDATA #REQUIRED
+	id ID #IMPLIED
+	s IDREF #REQUIRED
+	e IDREF #REQUIRED
+	medium (aud | vid | img | txt | oth) #IMPLIED
+	url CDATA #IMPLIED
+>
+<!-- <nts> is a non-timed segment, i.e. a segment that cannot be assigned a reasonable start or end point from the timeline
+      an <nts> will always be atomic, so it can only contain character data 
+	an example is punctuation in an utterance -->
+<!ELEMENT nts (#PCDATA)>
+<!-- the attributes of a <nts> are like the attributes of timed segments minus the start and end attribute and the link specifications -->
+<!ATTLIST nts
+	n CDATA #REQUIRED
+	id ID #IMPLIED
+>
+<!-- an annotation can be
+		a) a collection of timed annotations
+	other types will follow -->
+<!ELEMENT annotation (ta*)>
+<!ATTLIST annotation
+	name CDATA #REQUIRED
+>
+<!-- <ta> is a timed annotation, i.e. an annotation that is linked to the timeline and not to another timed-or non-timed segment -->
+<!ELEMENT ta (#PCDATA)>
+<!-- an <ta> need not have a name or an id, just start end end points -->
+<!ATTLIST ta
+	n CDATA #IMPLIED
+	id ID #IMPLIED
+	s IDREF #REQUIRED
+	e IDREF #REQUIRED
+>

@@ -1,0 +1,208 @@
+<?xml version='1.0'?>
+<!--
+*	Builds coma as jar, exe and application bundle
+*
+*	please change version numbers in org.exmaralda.launcher.Launcher.java
+-->
+
+<!--<project name="coma2j6" default="doallplatforms" basedir="."> -->
+<project name="coma2j6" default="sourceforge" basedir=".">
+	<property name="comaversion" value="1.23" />
+	<!-- die versionsnummer steht noch in launcher/Launcher.java -->
+	<property name="comabuild" value="${comaversion}.${DSTAMP}.${TSTAMP}" />
+	<property name="jsmooth.dir" value="libs/jsmooth" />
+	<property name="src" value="src/org/exmaralda" />
+<!--	<property name="src" value="src/org/exmaralda/coma" /> -->
+	<property name="targetroot" value="org/exmaralda/coma/" />
+	<property name="calicons" value="src/com/toedter/calendar/images" />
+	<property name="caltarget" value="com/toedter/calendar/images" />
+	<!--	<property name="images" value="src/org/exmaralda/coma/images" /> -->
+	<property name="resources" value="src/org/exmaralda/coma/resources" />
+	<property name="source" value="src/" />
+	<property name="build" value="build" />
+	<property name="doc" value="javadoc" />
+	<property name="release" value="builds" />
+	<property name="lib" value="lib" />
+
+	<fileset dir="libs" id="libraries">
+		<include name="jdom.jar" />
+		<include name="jaxen-core.jar" />
+		<include name="jaxen-jdom.jar" />
+		<include name="mrj.jar" />
+		<include name="resolver.jar" />
+		<include name="saxpath.jar" />
+		<include name="xalan.jar" />
+		<include name="xerces.jar" />
+		<include name="xercesImpl.jar" />
+		<include name="xml-apis.jar" />
+		<include name="forms-1.1.0.jar" />
+	</fileset>
+
+	<path id="comaresources">
+		<fileset refid="libraries" />
+	</path>
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="libs/jarbundler-1.9.jar" />
+	<taskdef name="jsmoothgen" classname="net.charabia.jsmoothgen.ant.JSmoothGen" classpath="libs/jsmooth/lib/jsmoothgen-ant.jar" />
+
+
+	<target name="prepare">
+		<tstamp />
+		<delete dir="tmp" />
+		<mkdir dir="tmp" />
+		<unjar dest="tmp">
+			<fileset refid="libraries" />
+		</unjar>
+		<mkdir dir="${build}" />
+		<!--	
+	<mkdir dir="${build}/${images}" />
+ -->
+		<mkdir dir="${build}/${caltarget}" />
+		<echo file="${resources}/build.inf" append="false">${comabuild}</echo>
+		<copy todir="${build}/${caltarget}" verbose="true">
+			<fileset dir="${calicons}" />
+		</copy>
+		<!--		<copy todir="${build}/${targetroot}/images" verbose="true">
+			<fileset dir="${images}" />
+		</copy> 
+-->
+		<copy todir="${build}/${targetroot}/resources">
+			<fileset dir="${resources}" />
+		</copy>
+		<mkdir dir="${lib}" />
+		<mkdir dir="${doc}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac destdir="${build}" sourcepath="" failonerror="false">
+			<src path="${source}" />
+			 <include name="**/*.java"/>
+			<exclude name="_*" />
+			<exclude name="**/discarded/**" />
+
+<!--
+			<exclude name="**ExaktSearch**" />
+			<exclude name="**corpusbuild**" />
+			<exclude name="**/common/**" /> 
+			<exclude name="**/exakt/**" />
+			<exclude name="**/zecke/**" />
+			
+-->
+			<exclude name="**/folker/**" />
+			<exclude name="**/partitureditor/**" />
+			<exclude name="**/teide/**" />
+			<exclude name="**/sextant/**" />
+			<classpath refid="comaresources" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar compress="true" jarfile="${lib}/coma.jar" basedir="${build}">
+			<fileset dir="tmp" />
+			<fileset dir="." includes="**/images" />
+			<manifest>
+				<attribute name="Main-Class" value="org.exmaralda.coma.launcher.Launcher" />
+				<attribute name="Class-Path" value="coma.jar" />
+				<attribute name="SplashScreen-Image" value="org/exmaralda/coma/resources/images/splash.png" />
+			</manifest>
+		</jar>
+	</target>
+
+
+	<target name="clean" depends="jar">
+		<delete dir="${build}" />
+	</target>
+
+	<target name="javadoc">
+		<!-- Der Tag wird kommen! -->
+	</target>
+
+	<target name="do_win">
+		<!-- create an exe-file for windows -->
+		<jsmoothgen project="${release}/resources/coma.jsmooth" skeletonroot="${jsmooth.dir}/skeletons" verbose="true" />
+	</target>
+
+	<target name="do_mac">
+		<antcall target="do_mac_app" />
+		<antcall target="do_mac_dmg" />
+	</target>
+
+	<!-- creates the application bundle for the mac -->
+	<target name="do_mac_app">
+		<echo message="v2 of the mac app builder" />
+		<mkdir dir="${release}/mac/Coma.app" />
+		<mkdir dir="${release}/mac/Coma.app/Contents" />
+		<mkdir dir="${release}/mac/Coma.app/Contents/MacOS" />
+		<mkdir dir="${release}/mac/Coma.app/Contents/Resources" />
+		<mkdir dir="${release}/mac/Coma.app/Contents/Resources/Java" />
+		<filter token="comaversion" value="${comaversion}" />
+		<filter token="comabuild" value="${comabuild}" />
+		<copy file="${release}/resources/Info.plist" todir="${release}/mac/Coma.app/Contents" filtering="true" />
+		<copy file="${release}/resources/coma.icns" todir="${release}/mac/Coma.app/Contents/Resources" />
+		<copy file="${release}/resources/JavaApplicationStub" todir="${release}/mac/Coma.app/Contents/MacOS" />
+		<copy file="${release}/resources/PkgInfo" todir="${release}/mac/Coma.app/Contents" />
+		<copy file="${lib}/coma.jar" todir="${release}/mac/Coma.app/Contents/Resources/Java" />
+		<copy file="${resources}/images/splash.png" todir="${release}/mac/Coma.app/Contents" />
+		<chmod file="${release}/mac/Coma.app/Contents/MacOS/JavaApplicationStub" perm="555" />
+	</target>
+
+	<target name="do_mac_dmg" depends="do_mac_app">
+		<!--unmount the image in any case -->
+		<exec dir="${release}/resources" executable="hdiutil">
+			<arg line="detach /Volumes/comaimage" />
+		</exec>
+		<!--duplicate the pre-created dmg-->
+		<copy file="${release}/resources/sourcedmg.dmg" tofile="${release}/resources/tmp.dmg" />
+		<!--mount that copy -->
+		<exec dir="${release}/resources" executable="hdiutil">
+			<arg line="mount tmp.dmg -mountpoint /Volumes/comaimage" />
+		</exec>
+		<!-- copy the .app-folder to the mounted volume -->
+		<copy todir="/Volumes/comaimage/EXMARaLDA Corpus Manager.app">
+			<fileset dir="${release}/mac/Coma.app" />
+		</copy>
+		<!--change the permissions in the .app folder-->
+		<chmod perm="555" file="/Volumes/comaimage/EXMARaLDA Corpus Manager.app/Contents/MacOS/JavaApplicationStub" />
+		<!--copy pre-created styling information to the colume and hide it-->
+		<copy file="${release}/resources/DSStore" tofile="/Volumes/comaimage/.DS_Store" />
+		<exec dir="/Volumes/comaimage" executable="SetFile">
+			<arg line="-a V .DS_Store" />
+		</exec>
+		<!--unmount volume again-->
+		<exec dir="${release}/resources" executable="hdiutil">
+			<arg line="detach /Volumes/comaimage" />
+		</exec>
+		<!--convert the image to a compressed one -->
+		<exec dir="${release}/resources" executable="hdiutil">
+			<arg line="convert tmp.dmg -format UDCO -o coma${comaversion}.dmg" />
+		</exec>
+		<!--delete the temporary image-->
+		<delete file="${release}/resources/tmp.dmg" />
+		<move file="${release}/resources/coma${comaversion}.dmg" tofile="${release}/mac/coma${comaversion}.dmg" />
+	</target>
+
+	<target name="doallplatforms" depends="clean">
+		<antcall target="do_mac" />
+		<antcall target="do_win" />
+		<antcall target="upload_history" />
+
+	</target>
+
+	<target name="sourceforge" depends="doallplatforms">
+		<antcall target="packsources" />
+	</target>
+
+	<target name="packsources">
+		<tar destfile="${release}/source/source.tar" compression="gzip" basedir="${source}" excludes="**/discarded/**/*.java" />
+	</target>
+	
+	<target name="upload_history">
+		<property file="${resources}/ftppass.properties"/>
+		<ftp password="${exmpass}" server="${exmserver}" userid="${exmlogin}" remotedir="comafiles">
+			<fileset dir="${resources}">
+			<include name="history.txt"/>
+		</fileset>
+		</ftp>
+	</target>
+
+</project>
+

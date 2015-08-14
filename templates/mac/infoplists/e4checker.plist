@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC 
+	"-//Apple Computer//DTD PLIST 1.0//EN" 
+	"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>CFBundleName</key>
+		<string>E4Checker_@version@</string>
+		<key>CFBundleVersion</key>
+		<string>10.2</string>
+		<key>CFBundleAllowMixedLocalizations</key>
+		<string>true</string>
+		<key>CFBundleExecutable</key>
+		<string>JavaApplicationStub</string>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>English</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleIconFile</key>
+		<string>e4checker.icns</string>
+		<key>Java</key>
+		<dict>
+			<key>MainClass</key>
+			<string>@mainclass@</string>
+			<key>JVMVersion</key>
+			<string>@javaversion@</string>
+			<key>ClassPath</key>
+			<string>$JAVAROOT/jaxen-1.1-beta-11.jar:$JAVAROOT/jdom.jar:$JAVAROOT/saxon8.jar:$JAVAROOT/xalan.jar:$JAVAROOT/EXMARaLDA.jar</string>
+			<key>Properties</key>
+			<dict>
+				<key>java.library.path</key>
+				<string>$JAVAROOT/dll</string>
+				<key>com.apple.mrj.application.apple.menu.about.name</key>
+				<string>E4 Checker @version@</string>
+				<key>com.apple.hwaccel</key>
+				<string>true</string>
+				<key>apple.laf.useScreenMenuBar</key>
+				<string>true</string>
+			</dict>
+		</dict>
+	</dict>
+</plist>

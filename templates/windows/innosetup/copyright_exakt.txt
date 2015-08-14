@@ -1,0 +1,17 @@
+EXAKT (EXMARaLDA Analyse- und Konkordanztool)
+
+(C) 2001 - 2008 by Thomas Schmidt (thomas.schmidt@uni-hamburg.de)
+==========================================================================
+Bitte geben Sie das Programm nicht an dritte Personen weiter.
+Verweisen Sie stattdessen mögliche InteressentInnen an die Projekt-Website
+
+	http://www.exmaralda.org
+
+Vielen Dank.
+==========================================================================
+Please do not distribute this software to third persons.
+Instead, refer them to to project website
+
+	http://www.exmaralda.org
+
+Thank you.

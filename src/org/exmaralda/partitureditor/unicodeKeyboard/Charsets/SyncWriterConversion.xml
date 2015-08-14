@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="SyncWriter Conversion">
+	<key>
+		<content>&#x00A0;</content>
+		<description>Non-Breaking space</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

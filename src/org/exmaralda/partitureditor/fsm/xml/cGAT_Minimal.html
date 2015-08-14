@@ -1,0 +1,692 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   </head>
+   <body>
+      <h1>HIAT: Utterances and Words</h1>
+      <h2>Character Sets</h2>
+      <table>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="SpaceSymbols">SpaceSymbols</a></td>
+            <td><b> </b><span style="color:silver"> | </span><b>_</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="OpenParenthesis">OpenParenthesis</a></td>
+            <td><b>(</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="CloseParenthesis">CloseParenthesis</a></td>
+            <td><b>)</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="Alternative">Alternative</a></td>
+            <td><b>|</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="BreatheSymbol">BreatheSymbol</a></td>
+            <td><b>&deg;</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="H">H</a></td>
+            <td><b>h</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="PauseSymbols">PauseSymbols</a></td>
+            <td><b>0</b><span style="color:silver"> | </span><b>1</b><span style="color:silver"> | </span><b>2</b><span style="color:silver"> | </span><b>3</b><span style="color:silver"> | </span><b>4</b><span style="color:silver"> | </span><b>5</b><span style="color:silver"> | </span><b>6</b><span style="color:silver"> | </span><b>7</b><span style="color:silver"> | </span><b>8</b><span style="color:silver"> | </span><b>9</b><span style="color:silver"> | </span><b>.</b><span style="color:silver"> | </span><b>-</b><span style="color:silver"> | </span></td>
+         </tr>
+         <tr>
+            <td style="font-family:'Times New Roman'; font-weight:bold"><a name="MiscellaneousPunctuation">MiscellaneousPunctuation</a></td>
+            <td><b>"</b><span style="color:silver"> | </span><b>'</b><span style="color:silver"> | </span><b>:</b><span style="color:silver"> | </span><b>;</b><span style="color:silver"> | </span><b>,</b><span style="color:silver"> | </span><b>&#8255;</b><span style="color:silver"> | </span><b>&#8212;</b><span style="color:silver"> | </span><b>/</b><span style="color:silver"> | </span><b>!</b><span style="color:silver"> | </span><b>?</b><span style="color:silver"> | </span><b>&#8230;</b><span style="color:silver"> | </span></td>
+         </tr>
+      </table>
+      <p></p>
+      <h2>Transitions</h2><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnStarts">TurnStarts</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">Segment chain starts</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No parentheses closing, no pipe symbol, no space, no pause symbols, no puncuation, no end of input allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_OpenParenthesisEncountered">TurnOpen_OpenParenthesisEncountered</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ats n="cGAT:b"&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_BreatheOpen">TurnOpen_BreatheOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#H">H</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;<br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_H1">TurnOpen_H1</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="cGAT:w" s="" e=""&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_WordOpen">TurnOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_OpenParenthesisEncountered">TurnOpen_OpenParenthesisEncountered</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">One open parenthesis has been encountered, now three possibilities: another parenthesis meaning non-verbal, a pause symbol
+         meaning a pause or something else meaning uncertain</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No parentheses closing, no pipe symbol, no space, no pause symbols, no puncuation, no end of input allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;&lt;ats n="cGAT:non-pho"&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="cGAT:pause"&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_PauseOpen">TurnOpen_PauseOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="cGAT:w" s="" e=""&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_WordOpen">TurnOpen_UncertainOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_PauseOpen">TurnOpen_PauseOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">Inside a pause</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No parentheses closing, no pipe symbol, no space, no pause symbols, no puncuation, no end of input allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ats&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_PauseOpen">TurnOpen_PauseOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UncertainOpen_WordOpen">TurnOpen_UncertainOpen_WordOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">---TODO</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">---TODO---</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;&lt;nts n="cGAT:alt"&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_AlternativeOpen">TurnOpen_UncertainOpen_AlternativeOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen">TurnOpen_UncertainOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_WordOpen">TurnOpen_UncertainOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UncertainOpen_AlternativeOpen">TurnOpen_UncertainOpen_AlternativeOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">---TODO</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">---TODO---</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/nts&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_AlternativeOpen">TurnOpen_UncertainOpen_AlternativeOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_AlternativeOpen">TurnOpen_UncertainOpen_AlternativeOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_AlternativeOpen">TurnOpen_UncertainOpen_AlternativeOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UncertainOpen">TurnOpen_UncertainOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">---TODO</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">---TODO---</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="cGAT:w" s="" e=""&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UncertainOpen_WordOpen">TurnOpen_UncertainOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_WordOpen">TurnOpen_WordOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open and a word is open</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Only word characters or space symbols allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;/ts&gt;<br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_WordOpen">TurnOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open and a non-phonological segment has started</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No end of input, no open parenthesis, no pause symbol allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ats&gt;&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen_CloseParenthesisEncountered">TurnOpen_NonphoOpen_CloseParenthesisEncountered</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_NonphoOpen">TurnOpen_NonphoOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_NonphoOpen_CloseParenthesisEncountered">TurnOpen_NonphoOpen_CloseParenthesisEncountered</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal"></span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Only closing parentheses allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Alternative">Alternative</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen">TurnOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">A turn is open, but  no word, no non-phonological segment, and no open parenthesis has been encountered</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No close parenthesis, no utterance end symbol allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_OpenParenthesisEncountered">TurnOpen_OpenParenthesisEncountered</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;<br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="cGAT:p"&gt;<br>-<br>&lt;/nts&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="cGAT:b"&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_BreatheOpen">TurnOpen_BreatheOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#H">H</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_H1">TurnOpen_H1</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="cGAT:w" s="" e=""&gt;<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_WordOpen">TurnOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_BreatheOpen">TurnOpen_BreatheOpen</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal"></span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Only 'h' or space allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#H">H</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_BreatheOpen">TurnOpen_BreatheOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>-<br>&lt;/ats&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_H1">TurnOpen_H1</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal"></span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Only 'h' or space allowed</span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#H">H</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_H2">TurnOpen_H2</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="cGAT:w" s="" e=""&gt;h&lt;/ts&gt;&lt;nts n="cGAT:p"<br>-<br>&lt;/nts"</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="cGAT:w" s="" e=""&gt;h&lt;/ts&gt;<br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#BreatheSymbol">BreatheSymbol</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="cGAT:b"&gt;h<br>-<br>&lt;/ats&gt;</b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="cGAT:w" s="" e=""&gt;h<br>-<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_WordOpen">TurnOpen_WordOpen</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="Error">Error</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">An error has been encountered</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic"></span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+      </table><br><hr><span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnParsedSuccessfully">TurnParsedSuccessfully</a></span><br><span style="font-family:'Times New Roman'; font-weight:normal">The segment chain has been parsed successfully</span><br><span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic"></span><br><br><table align="center" style="border:3px solid black">
+         <tr>
+            <th style="border:1px solid black">Input</th>
+            <th style="border:1px solid black">Output</th>
+            <th style="border:1px solid black">Target</th>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+         </tr>
+         <tr>
+            <td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td>
+            <td style="font-size:8pt; border:1px solid black"><b><br>x<br></b></td>
+            <td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+         </tr>
+      </table><br><hr>
+   </body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<!--
+does the svn-task actually work?
+-->
+<project name="svntest" default="testSVNAnt" basedir=".">
+	<path id="svnant.classpath">
+		<fileset dir="/Users/kai/Java/EXMARaLDA/libs/svnant/lib/">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.classpath" />
+	<target name="testSVNAnt">
+		<svn>
+			<wcVersion path="." />
+		</svn>
+
+		<echo message="Subversion repository url: ${revision.max}" />
+	</target>
+</project>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unicode-keyboard name="HIAT + Persian supplement">
+	<key>
+		<content>&#x0254;</content>
+		<description>lower-mid back rounded vowel (for interjections)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0301;</content>
+		<description>m (rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0300;</content>
+		<description>m (falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x030C;</content>
+		<description>m (falling-rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0302;</content>
+		<description>m (rising-falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0304;</content>
+		<description>m (steady tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0301;</content>
+		<description>Diacritic: rising tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0300;</content>
+		<description>Diacritic: falling tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030C;</content>
+		<description>Diacritic: falling-rising</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0302;</content>
+		<description>Diacritic: rising-falling</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0304;</content>
+		<description>Diacritic: steady</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2026;</content>
+		<description>Ellipsis (End symbol for interrupted utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02D9;</content>
+		<description>Dot above (End symbol for modeless utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2014;</content>
+		<description>m-dash (insertion)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022;</content>
+		<description>Very short pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022;</content>
+		<description>Pause &lt;= 0.5s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022; &#x2022;</content>
+		<description>Pause &lt;= 1s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>((_s))</content>
+		<description>Measured pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x203F;</content>
+		<description>Ligature</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <!-- Start Persian letters -->
+        
+        <key>
+		<content>&#702;</content>
+		<description>right half ring</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#256;</content>
+		<description>Capital A, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#257;</content>
+		<description>Small a, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>S&#817;</content>
+		<description>Capital S, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>s&#817;</content>
+		<description>Small s, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#486;</content>
+		<description>Capital G, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#487;</content>
+		<description>Small g, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#268;</content>
+		<description>Capital C, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#269;</content>
+		<description>Small c, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7716;</content>
+		<description>Capital H, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7717;</content>
+		<description>Small h, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7722;</content>
+		<description>CApital H, breve below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7723;</content>
+		<description>Small h, breve below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7828;</content>
+		<description>Capital Z, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7829;</content>
+		<description>Small z, line below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#381;</content>
+		<description>Capital Z, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#382;</content>
+		<description>Small z, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#352;</content>
+		<description>Capital S, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#353;</content>
+		<description>Small s, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7778;</content>
+		<description>Capital S, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7779;</content>
+		<description>Small s, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#379;</content>
+		<description>Capital Z, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#380;</content>
+		<description>Small z, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7788;</content>
+		<description>Capital T, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7789;</content>
+		<description>Small t, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7826;</content>
+		<description>Capital Z, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#7827;</content>
+		<description>Small z, dot below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#703;</content>
+		<description>left half ring</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#288;</content>
+		<description>Capital G, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#289;</content>
+		<description>Small g, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#298;</content>
+		<description>Capital I, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+        <key>
+		<content>&#299;</content>
+		<description>Small i, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>     

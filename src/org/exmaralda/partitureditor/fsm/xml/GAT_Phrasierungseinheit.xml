@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<?xml-stylesheet type="text/xsl" href="D:\Java\de\uni-hamburg\rrz\jexmaralda\fsm\xml\FSM2HTML.xsl"?>
+<fsm name="GAT_Phrasierungseinheit">
+	<char-set id="IU_END_SYMBOLS">
+		<char>?</char>
+		<char>,</char>
+		<char>-</char>
+		<char>;</char>
+		<char>.</char>
+	</char-set>
+	<char-set id="OPEN_PARENTHESIS">
+		<char>(</char>
+	</char-set>
+	<char-set id="CLOSE_PARENTHESIS">
+		<char>)</char>
+	</char-set>
+	<char-set id="CLOSE_ANGLE">
+		<char>&gt;</char>
+	</char-set>
+	<char-set id="SPACE">
+		<!--Plain space character -->
+		<char>&#x0020;</char>
+	</char-set>
+	<char-set id="EQUALS">
+		<char>=</char>
+	</char-set>
+	<start-state id="SegmentChainStarts"/>
+	<end-state id="SegmentChainParsedSuccessfully"/>
+	<transitions source="SegmentChainStarts">
+		<forbidden>Nicht erlaubt: schließende runde oder spitze Klammer, Tonhöhenbewegungs-Endzeichen</forbidden>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen">
+		<forbidden>Nicht erlaubt: schließende runde Klammer</forbidden>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered">
+		<forbidden>Nicht erlaubt: Ende der Segmentkette</forbidden>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen">
+		<forbidden>Nicht erlaubt: Ende der Segmentkette, öffnende Klammer</forbidden>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen">
+		<forbidden>Nicht erlaubt: Ende der Segmentkette, öffnende Klammer</forbidden>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen_CloseParenthesisEncountered"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen_CloseParenthesisEncountered">
+		<forbidden>Nur weitere schließende Klammer erlaubt</forbidden>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered">
+		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde schließende Klammer</forbidden>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_EqualsEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_CloseAngleEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen">
+		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde oder spitze schließende Klammer</forbidden>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainParsedSuccessfully">
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_EqualsEncountered">
+		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde schließende Klammer</forbidden>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_CloseAngleEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<!-- Ein Gleichheitszeichen = "Phrasierungseinheit geht weiter (unakzentuiertes Anhängsel)" -->
+<!--				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix> -->
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_CloseAngleEncountered">
+		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde schließende Klammer</forbidden>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="IU_END_SYMBOLS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_ANGLE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS"/>
+			<target id="SegmentChainOpen_IntonationUnitOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

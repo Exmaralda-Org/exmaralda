@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) http://www.rrz.uni-hamburg.de/exmaralda -->
+<basic-transcription>
+<head>
+<meta-information><project-name></project-name><transcription-name></transcription-name><referenced-file url="file:/T:/TP-Z2/DATEN/EXMARaLDA_DemoKorpus/PaulMcCartney/PaulMcCartney.wav"/><ud-meta-information></ud-meta-information><comment></comment><transcription-convention></transcription-convention></meta-information><speakertable><speaker id="SPK0">
+<abbreviation>X</abbreviation>
+<sex value="m"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+<speaker id="SPK1">
+<abbreviation>Y</abbreviation>
+<sex value="u"/>
+<languages-used></languages-used>
+<l1></l1>
+<l2></l2>
+<ud-speaker-information>
+</ud-speaker-information>
+<comment></comment>
+</speaker>
+</speakertable></head>
+<basic-body>
+<common-timeline>
+<tli id="T0" time="104.78" type=""/>
+<tli id="T1"/>
+<tli id="T2" time="105.88" type=""/>
+<tli id="T4"/>
+<tli id="T3"/>
+<tli id="T5" time="107.1" type=""/>
+</common-timeline>
+<tier id="TIE0" speaker="SPK0" category="v" type="t" display-name="X [v]"><event start="T0" end="T1">Please do not inter</event>
+<event start="T1" end="T2">rupt me. </event>
+</tier><tier id="TIE2" speaker="SPK0" category="de" type="a" display-name="X [de]"><event start="T0" end="T2">Bitte unterbrich mich nicht. </event>
+</tier><tier id="TIE3" speaker="SPK1" category="sup" type="a" display-name="Y [sup]"><event start="T4" end="T3">loud</event>
+</tier><tier id="TIE1" speaker="SPK1" category="v" type="t" display-name="Y [v]"><event start="T1" end="T2">I take </event>
+<event start="T2" end="T4">no orders from </event>
+<event start="T4" end="T3">you. </event>
+</tier><tier id="TIE4" speaker="SPK1" category="nv" type="d" display-name="Y [nv]"><event start="T2" end="T5">slams his fist on the table hard and repeatedly</event>
+</tier></basic-body>
+</basic-transcription>

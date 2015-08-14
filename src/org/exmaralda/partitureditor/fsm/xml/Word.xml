@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<!-- ******************* CHANGES *************************** -->
+<!-- 08-01-03	second pause point (/u00B7) added -->
+<!-- 08-01-03	Ligature (/203F) added to separator chars  -->
+<fsm name="Word">
+	<char-set id="SEG">
+		<char><![CDATA[ ]]></char>
+		<char>.</char>
+		<char>!</char>
+		<char>?</char>
+		<char>…</char>
+		<char>;</char>
+		<char>,</char>
+		<char>"</char>
+		<char>'</char>
+		<char>-</char>
+		<char>_</char>
+		<char>[</char>
+		<char>]</char>
+		<char>/</char>
+		<char>\</char>
+		<char>{</char>
+		<char>}</char>
+		<char><![CDATA[<]]></char>
+		<char><![CDATA[>]]></char>
+		<char>&#x203F;</char>
+	</char-set>
+	<char-set id="pp">
+		<char>&#x2022;</char>
+		<char>&#x00B7;</char>
+	</char-set>
+	<start-state id="T0"/>
+	<end-state id="T8"/>
+	<transitions source="T0">
+		<transition>
+			<input-char>(</input-char>
+			<target id="T3"/>
+			<output oo="no">
+				<prefix><![CDATA[<ts n="t" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="t" s="" e=""><ats n="non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="t" s="" e=""><nts n="seg" s="" e="">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T2"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="t" s="" e=""><ts n="w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T8"/>
+			<output oo="no">
+				<prefix><![CDATA[<ts n="t" s="" e=""></ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T1">
+		<transition>
+			<input-char>(</input-char>
+			<target id="T3"/>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="seg" s="" e="">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T2"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T8"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T2">
+		<transition>
+			<input-char>(</input-char>
+			<target id="T3"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts><ats n="non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T1"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts><nts n="seg" s="" e="">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T2"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T8"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts></ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="T3">
+		<transition>
+			<input-char>(</input-char>
+			<target id="T5"/>
+			<output oo="no">
+				<prefix><![CDATA[<nts n="seg" s="" e="">((</nts><ats n="non-pho" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="T1"/>
+			<output oo="no">
+				<prefix><![CDATA[<nts n="seg" s="" e="">(</nts><nts n="seg" s="" e="">)</nts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T4"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="seg" s="" e="">(</nts><ats n="non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T4"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="seg" s="" e="">(</nts><nts n="seg" s="" e="">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T6"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="seg" s="" e="">(</nts><ts n="w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="T4">
+		<transition>
+			<input-char>(</input-char>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="T1"/>
+			<output oo="no">
+				<prefix><![CDATA[<nts n="seg" s="" e="">)</nts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T4"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T4"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="seg" s="" e="">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T6"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="T5">
+		<transition>
+			<input-char>(</input-char>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="T7"/>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T5"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T5"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T5"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="T6">
+		<transition>
+			<input-char>(</input-char>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-char>)</input-char>
+			<target id="T1"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts><nts n="seg" s="" e="">)</nts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="pp"/>
+			<target id="T4"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts><ats n="non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SEG"/>
+			<target id="T4"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts><nts n="seg" s="" e="">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="T6"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="T7">
+		<transition>
+			<input-char>)</input-char>
+			<target id="T1"/>
+			<output oo="no">
+				<prefix><![CDATA[</ats><nts n="seg" s="" e="">))</nts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+	<transitions source="T8">
+		<transition>
+			<input-other/>
+			<target id="T8"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="T8"/>
+		</transition>
+	</transitions>
+	<transitions source="ERROR">
+		<transition>
+			<input-other/>
+			<target id="ERROR"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="ERROR"/>
+		</transition>
+	</transitions>
+</fsm>

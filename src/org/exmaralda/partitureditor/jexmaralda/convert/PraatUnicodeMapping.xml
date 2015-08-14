@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<praat-character-mappings>
+	<!-- *********************************************************** -->
+	<!-- ************* EUROPEAN SYMBOLS *************** -->
+	<!-- ********************************************************** -->
+	<!-- letters with diaresis (umlaut) -->
+	<mapping praat="a&quot;" unicode="&#x00E4;" desc="small a umlaut"/>
+	<mapping praat="e&quot;" unicode="&#x00EB;" desc="small e with diaresis"/>
+	<mapping praat="i&quot;" unicode="&#x00EF;" desc="small i with diaresis"/>
+	<mapping praat="o&quot;" unicode="&#x00F6;" desc="small o umlaut"/>
+	<mapping praat="u&quot;" unicode="&#x00FC;" desc="small u umlaut"/>
+	<mapping praat="y&quot;" unicode="&#x00FF;" desc="small y with diaresis"/>
+	<mapping praat="A&quot;" unicode="&#x00C4;" desc="capital A umlaut"/>
+	<mapping praat="E&quot;" unicode="&#x00CB;" desc="capital E with diaresis"/>
+	<mapping praat="I&quot;" unicode="&#x00CF;" desc="capital I with diaresis"/>
+	<mapping praat="O&quot;" unicode="&#x00D6;" desc="capital O umlaut"/>
+	<mapping praat="U&quot;" unicode="&#x00DC;" desc="capital U umlaut;"/>
+	<!-- letters with acute accent -->
+	<mapping praat="a&apos;" unicode="&#x00E1;" desc="small a with acute accent"/>
+	<mapping praat="e&apos;" unicode="&#x00E9;" desc="small e with acute accent"/>
+	<mapping praat="i&apos;" unicode="&#x00ED;" desc="small i with acute accent"/>
+	<mapping praat="o&apos;" unicode="&#x00F3;" desc="small o with acute accent"/>
+	<mapping praat="u&apos;" unicode="&#x00FA;" desc="small u with acute accent"/>
+	<!-- letters with grave accent -->
+	<mapping praat="a`" unicode="&#x00E0;" desc="small a with grave accent"/>
+	<mapping praat="e`" unicode="&#x00E8;" desc="small e with grave accent"/>
+	<mapping praat="i`" unicode="&#x00EC;" desc="small i with grave accent"/>
+	<mapping praat="o`" unicode="&#x00F2;" desc="small o with grave accent"/>
+	<mapping praat="u`" unicode="&#x00F9;" desc="small u with grave accent"/>
+	<mapping praat="A`" unicode="&#x00C0;" desc="capital a with grave accent"/>
+	<mapping praat="E`" unicode="&#x00C8;" desc="capital e with grave accent"/>
+	<mapping praat="I`" unicode="&#x00CC;" desc="capital i with grave accent"/>
+	<mapping praat="O`" unicode="&#x00D2;" desc="capital o with grave accent"/>
+	<mapping praat="U`" unicode="&#x00D9;" desc="capital u with grave accent"/>
+	<!-- letters with circumflex accent -->
+	<mapping praat="a^" unicode="&#x00E2;" desc="small a with circumflex accent"/>
+	<mapping praat="e^" unicode="&#x00EA;" desc="small e with circumflex accent"/>
+	<mapping praat="i^" unicode="&#x00EE;" desc="small i with circumflex accent"/>
+	<mapping praat="o^" unicode="&#x00F4;" desc="small o with circumflex accent"/>
+	<mapping praat="u^" unicode="&#x00FB;" desc="small u with circumflex accent"/>
+	<mapping praat="A^" unicode="&#x00C2;" desc="capital a with circumflex accent"/>
+	<mapping praat="E^" unicode="&#x00CA;" desc="capital e with circumflex accent"/>
+	<mapping praat="I^" unicode="&#x00CE;" desc="capital i with circumflex accent"/>
+	<mapping praat="O^" unicode="&#x00D4;" desc="capital o with circumflex accent"/>
+	<mapping praat="U^" unicode="&#x00DB;" desc="capital u with circumflex accent"/>
+	<!-- letters with tilde -->
+	<mapping praat="a~" unicode="&#x00E3;" desc="small a with tilde"/>
+	<mapping praat="n~" unicode="&#x00F1;" desc="small n with tilde"/>
+	<mapping praat="o~" unicode="&#x00F5;" desc="small o with tilde"/>
+	<mapping praat="A~" unicode="&#x00C3;" desc="capital a with tilde"/>
+	<mapping praat="N~" unicode="&#x00D1;" desc="capital N with tilde"/>
+	<mapping praat="O~" unicode="&#x00D5;" desc="capital O with tilde"/>
+	<!-- Ligatures and Miscellaneous-->
+	<mapping praat="ae" unicode="&#x00E6;" desc="small ae ligature"/>
+	<mapping praat="o/" unicode="&#x00F8;" desc="small o with stroke"/>
+	<mapping praat="ao" unicode="&#x00E5;" desc="small a with ring above"/>
+	<mapping praat="Ae" unicode="&#x00C6;" desc="capital Ae ligature"/>
+	<mapping praat="O/" unicode="&#x00D8;" desc="capital O with stroke"/>
+	<mapping praat="Ao" unicode="&#x00C5;" desc="capital A with ring above"/>
+	<mapping praat="c," unicode="&#x00E7;" desc="small c with cedilla"/>
+	<mapping praat="C," unicode="&#x00C7;" desc="capital c with cedilla"/>
+	<mapping praat="th" unicode="&#x00DE;" desc="Icelandic thorn"/>
+	<mapping praat="ss" unicode="&#x00DF;" desc="german s (eszet: ß)"/>        
+	<!-- Upside-Down punctuation-->
+	<mapping praat="!d" unicode="&#x00A1;" desc="Exclamation mark upside down"/>
+	<mapping praat="?d" unicode="&#x00BF;" desc="Question mark upside down"/>
+	<!-- Currency and trademark symbols etc. left out...-->
+	<!-- Guillemet -->
+	<mapping praat="&lt;&lt;" unicode="&#x00AB;" desc="guillemet left"/>
+	<mapping praat="&gt;&gt;" unicode="&#x00BB;" desc="guillemet right"/>
+	<!-- *********************************************************** -->
+	<!-- ******* MATHEMATICAL SYMBOLS *************** -->
+	<!-- ********************************************************** -->
+	<!-- Most symbols left out... -->
+	<mapping praat=".c" unicode="&#x00B7;" desc="middle dot"/>
+	<mapping praat="xx" unicode="&#x00D7;" desc="multiply"/>
+	<mapping praat="--" unicode="&#x2014;" desc="m-dash"/>
+	<!-- arrows -->
+	<mapping praat="&lt;-" unicode="&#x2190;" desc="arrow left"/>
+	<mapping praat="-&gt;" unicode="&#x2192;" desc="arrow right"/>
+	<mapping praat="&lt;&gt;" unicode="&#x2194;" desc="arrow both directions"/>
+	<mapping praat="&lt;=" unicode="&#x21D0;" desc="double arrow left"/>
+	<mapping praat="=&gt;" unicode="&#x21D2;" desc="double arrow right"/>
+	<mapping praat="eq" unicode="&#x21D4;" desc="double arrow both directions (equivalence)"/>
+	<mapping praat="^|" unicode="&#x2191;" desc="arrow up"/>
+	<mapping praat="_|" unicode="&#x2193;" desc="arrow down"/>
+	<!-- *********************************************************** -->
+	<!-- ****************** GREEK LETTERS ****************** -->
+	<!-- ********************************************************** -->
+	<!-- to do... -->
+	<!-- *********************************************************** -->
+	<!-- ****************** PHONETIC SYMBOLS *************** -->
+	<!-- ********************************************************** -->
+	<!-- added for version 1.3.2 (24-05-2005) -->
+        <mapping praat="ep" unicode="&#x025B;" desc="Cardinal vowel nr. 3"/>
+        <!-- "turned" Roman letters -->
+	<mapping praat="ct" unicode="&#x0254;" desc="lower-mid back rounded vowel"/>
+	<mapping praat="mt" unicode="&#x026F;" desc="high back unrounded vowel"/>
+	<mapping praat="at" unicode="&#x0250;" desc="low central unrounded vowel"/>
+	<mapping praat="ht" unicode="&#x0265;" desc="voiced rounded palatal approximant"/>
+	<mapping praat="rt" unicode="&#x0279;" desc="voiced alveolar approximant"/>
+	<mapping praat="vt" unicode="&#x028C;" desc="lower-mid back unrounded vowel"/>
+	<mapping praat="wt" unicode="&#x028D;" desc="voiceless rounded labiovelar approximant"/>
+	<mapping praat="yt" unicode="&#x028E;" desc="voiced lateral approximant"/>
+	<!-- "script style" symbols -->
+	<mapping praat="as" unicode="&#x0251;" desc="low back unrounded vowel"/>
+	<mapping praat="gs" unicode="&#x0261;" desc="voiced velar stop"/>
+	<mapping praat="vs" unicode="&#x028B;" desc="voiced labiodental approximant"/>
+	<mapping praat="ab" unicode="&#x0252;" desc="low back rounded vowel"/>
+	<!-- "small capitals" -->
+	<mapping praat="ic" unicode="&#x026A;" desc=""/>
+	<mapping praat="yc" unicode="&#x028F;" desc=""/>
+	<mapping praat="rc" unicode="&#x0280;" desc=""/>
+	<mapping praat="bc" unicode="&#x0299;" desc=""/>
+	<mapping praat="gc" unicode="&#x0262;" desc=""/>
+	<mapping praat="lc" unicode="&#x029F;" desc=""/>
+	<mapping praat="nc" unicode="&#x0274;" desc=""/>
+	<mapping praat="hc" unicode="&#x029C;" desc=""/>
+	<!-- symbols with a curl -->
+	<mapping praat="cc" unicode="&#x0255;" desc=""/>
+	<mapping praat="zc" unicode="&#x0291;" desc=""/>
+	<mapping praat="jc" unicode="&#x029D;" desc=""/>
+	<!-- symbols with a hooktop -->
+	<mapping praat="b^" unicode="&#x0253;" desc=""/>
+	<mapping praat="d^" unicode="&#x0257;" desc=""/>
+	<mapping praat="j^" unicode="&#x0284;" desc=""/>
+	<mapping praat="g^" unicode="&#x0260;" desc=""/>
+	<mapping praat="G^" unicode="&#x029B;" desc=""/>
+	<mapping praat="h^" unicode="&#x0266;" desc=""/>
+	<!-- symbols with traditional spellings -->
+	<mapping praat="ng" unicode="&#x014B;" desc=""/>
+	<mapping praat="dh" unicode="&#x00F0;" desc=""/>
+	<mapping praat="sh" unicode="&#x0283;" desc=""/>
+	<mapping praat="zh" unicode="&#x0292;" desc=""/>
+	<!-- schwa -->
+	<mapping praat="sw" unicode="&#x0259;" desc="Schwa"/>
+	<!-- traditional Roman surrogates -->
+	<mapping praat="?g" unicode="&#x0294;" desc=""/>
+	<mapping praat="9e" unicode="&#x0295;" desc=""/>
+	<!-- symbols with iconic names  -->
+	<mapping praat="rh" unicode="&#x0264;" desc=""/>
+	<mapping praat="fh" unicode="&#x027E;" desc=""/>
+	<mapping praat="hs" unicode="&#x028A;" desc=""/>
+	<mapping praat="O." unicode="&#x0298;" desc=""/>
+	<mapping praat="cn" unicode="&#x031A;" desc=""/>
+	<!-- Symbols with a bar, belt or tilde -->
+	<mapping praat="i-" unicode="&#x0268;" desc=""/>
+	<mapping praat="u-" unicode="&#x0289;" desc=""/>
+	<mapping praat="o-" unicode="&#x0275;" desc=""/>
+	<mapping praat="h-" unicode="&#x0127;" desc=""/>
+	<mapping praat="j-" unicode="&#x025F;" desc=""/>
+	<mapping praat="?-" unicode="&#x02A1;" desc=""/>
+	<mapping praat="9-" unicode="&#x02A2;" desc=""/>
+	<mapping praat="l-" unicode="&#x026C;" desc=""/>
+	<mapping praat="l~" unicode="&#x026B;" desc=""/>
+	<!-- Symbols with a traditional transliteration with subscript dot -->
+	<mapping praat="t." unicode="&#x0288;" desc=""/>
+	<mapping praat="d." unicode="&#x0256;" desc=""/>
+	<mapping praat="s." unicode="&#x0282;" desc=""/>
+	<mapping praat="z." unicode="&#x0290;" desc=""/>
+	<mapping praat="n." unicode="&#x0273;" desc=""/>
+	<mapping praat="l." unicode="&#x026D;" desc=""/>
+	<mapping praat="f." unicode="&#x027D;" desc=""/>
+	<mapping praat="r." unicode="&#x027B;" desc=""/>
+	<!-- ligatures -->
+	<!-- taken care of elsewhere (european symbols) -->
+	<!-- <mapping praat="ae" unicode="" desc=""/> -->
+	<mapping praat="oe" unicode="&#x0153;" desc=""/>
+	<mapping praat="Oe" unicode="&#x0276;" desc=""/>
+	<mapping praat="lz" unicode="&#x026E;" desc=""/>
+	<!-- symbol with right hook, reversed letter, inverted letter -->
+	<mapping praat="sr" unicode="&#x025A;" desc=""/>
+	<mapping praat="er" unicode="&#x025C;" desc=""/>
+	<mapping praat="ri" unicode="&#x0281;" desc=""/>
+	<!-- symbols with a left tail -->
+	<mapping praat="mj" unicode="&#x0271;" desc=""/>
+	<mapping praat="nj" unicode="&#x0272;" desc=""/>
+	<mapping praat="hj" unicode="&#x0267;" desc=""/>
+	<!-- symbols with a leg -->
+	<mapping praat="ml" unicode="&#x0270;" desc=""/>
+	<mapping praat="rl" unicode="&#x027A;" desc=""/>
+	<!-- Missing: Understrikes, Overstrikes, Pipes -->
+	<!-- *********************************************************** -->
+	<!-- ****************** MISCELLANEOUS **************** -->
+	<!-- ********************************************************** -->
+	<mapping praat="bs" unicode="&#x005C;" desc="Backslash"/>
+	<mapping praat="bu" unicode="&#x2022;" desc="Bullet (Pause Point)"/>
+	<!-- Missing: club, diamon, heart, spade -->
+	<!-- added for version 1.3.2 (24-05-2005) -->
+        <mapping praat="v&#x005E;" unicode="&#x0306;" desc="Diacritic for extra short"/>
+</praat-character-mappings>

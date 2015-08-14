@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regex-library name="EXMARaLDA Regex Library">
+    <folder name="General patterns">
+        <!-- *************************** -->
+        <entry name="Capitalized/Small">
+                <regex>[Ww]ord</regex>
+                <description>Matches small and capitalized variants of 'word'</description>
+                <explanation></explanation>
+                <examples>
+                    <example>Word</example>
+                    <example>word</example>
+                </examples>
+        </entry>
+        <!-- *************************** -->
+        <entry name="Optional suffix">
+                <regex>word(s)?</regex>
+                <description>Matches word with an optional plural suffix</description>
+                <explanation></explanation>
+                <examples>
+                    <example>word</example>
+                    <example>words</example>
+                </examples>
+        </entry>
+        <!-- *************************** -->
+        <entry name="Alternative strings">
+                <regex>(center|centre)</regex>
+                <description>Matches American and British English spelling of the word 'centre'</description>
+                <explanation></explanation>
+                <examples>
+                    <example>centre</example>
+                    <example>centre</example>
+                </examples>
+        </entry>
+        <!-- *************************** -->
+        <entry name="Alternative characters">
+                <regex>st[iau]ng</regex>
+                <description>Matches different forms of the verb 'sting'</description>
+                <explanation><i>st</i> followed by <i>i</i>, <i>a</i> or <i>u</i>, followed by <i>ng</i></explanation>
+                <examples>
+                    <example>sting</example>
+                    <example>stang</example>
+                    <example>stung</example>
+                </examples>
+        </entry>
+    </folder>
+    <folder name="Word forms">
+        <folder name="English">
+            <!-- *************************** -->
+            <entry name="Demonstratives">
+                    <regex>\b[Tt]h(is|at|ose|ese)\b</regex>
+                    <description>Matches English demonstrative pronouns in small and capital variants</description>
+                    <explanation>A word boundary, followed by a capital or small <i>T</i>, followed by an <i>h</i>, followed by one of the strings <i>is</i>, <i>at</i>, <i>ose</i> or <i>ese</i>, followed by a word boundary.</explanation>
+                    <examples>
+                        <example>This</example>
+                        <example>this</example>
+                        <example>Those</example>
+                        <example>those</example>
+                    </examples>
+            </entry>
+            <!-- *************************** -->
+            <entry name="in- / -able adjectives and adverbs">
+                <regex>\bin[a-z]+abl[ey]\b</regex>
+                <description>Words starting with <i>in</i> and ending in <i>able</i> or <i>ably</i></description>
+                <explanation>A word boundary, followed by <i>in</i>, followed by one or more small letters of the alphabet, followed by <i>abl</i>, followed by either <i>e</i> or <i>y</i>, followed by a word boundary.</explanation>
+                <examples>
+                    <example>indisputable</example>
+                    <example>indescribably</example>
+                    <example>ineffable</example>
+                    <example>indistinguishable</example>
+                </examples>
+            </entry>
+        </folder>
+        <folder name="Deutsch">           
+            <entry name="Wörter auf -keit oder -heit">
+                <regex> \b[A-Za-zÄäÖöÜüß]+(h|k)eit\b</regex>
+                <description>Wörter, die mit den Suffixen <i>heit</i> oder <i>keit</i> enden</description>
+                <explanation>Eine Wortgrenze, gefolgt von einem oder mehreren beliebigen Buchstaben des deutschen Alphabets, gefolgt von <i>heit</i> oder  <i>keit</i>, gefolgt von einer Wortgrenze.</explanation>
+                <examples>
+                    <example>Heiterkeit</example>
+                    <example>Freiheit</example>
+                    <example>Übelkeit</example>
+                    <example>gescheit</example>
+                </examples>
+            </entry>
+            <entry name="Formen von laufen">
+                <regex>\bl(au|äu|ie)f(en?|st|t)\b</regex>
+                <description>Alle flektierten Formen des Verbs <i>laufen</i></description>
+                <explanation></explanation>
+                <examples>
+                    <example>laufen</example>
+                    <example>läufst</example>
+                    <example>lief</example>
+                    <example>liefst</example>
+                </examples>
+            </entry>            
+        </folder>
+        <folder name="Français">
+            <entry name="Formes de tout">
+                <regex>\b[Tt]ou(s|t(es?)?)\b</regex>
+                <description>Les formes déclinées des tout, en majuscule ou en minuscule</description>
+                <explanation></explanation>
+                <examples>
+                    <example>tout</example>
+                    <example>tous</example>
+                    <example>toute</example>
+                    <example>toutes</example>
+                    <example>Tout</example>
+                </examples>
+            </entry>
+            <entry name="Pronoms possessifs">
+                <regex>\b([MmTtSs](a|on|es)|[Ll]eur(s)?|[VvNn](os|ôtre))\b</regex>
+                <description>Toutes les formes des pronoms possessifs</description>
+                <explanation></explanation>
+                <examples>
+                    <example>mon</example>
+                    <example>Ta</example>
+                    <example>ses</example>
+                    <example>nos</example>
+                    <example>vôtre</example>
+                </examples>
+              </entry>
+        </folder>
+    </folder>
+    <folder name="Transcription units">
+        <folder name="HIAT">
+            <entry name="Pauses">
+                <regex>((• ?){1,3}|\(\(\d{1,2}[\.,]\d{1,2}s?\)\))</regex>
+                <description>All measured or estimated pauses</description>
+                <explanation>A sequence of one to three bullet points, possibly interspersed with spaces, or a numerically notated pause in double round brackets</explanation>
+                <examples>
+                    <example>((0.4))</example>
+                    <example>((2,3s))</example>
+                    <example>•</example>
+                    <example>• • •</example>
+                </examples>
+            </entry>
+            <entry name="Repairs">
+                <regex>\b\p{L}+/</regex>
+                <description>(Truncated) words that form the first part of a repair sequence</description>
+                <explanation>Word boundary, followed by any sequence of letters, followed by a forward slash</explanation>
+                <examples>
+                    <example>interes/</example>
+                    <example>Abbr/</example>
+                </examples>
+            </entry>
+            <entry name="Non-phonological">
+                <regex>\(\([^\d][^\)]*\)\)</regex>
+                <description>Non-phonological elements described between double parentheses</description>
+                <explanation></explanation>
+                <examples>
+                    <example>((laughs))</example>
+                    <example>((breathes))</example>
+                </examples>
+            </entry>
+        </folder>
+        <folder name="GAT/cGAT">
+            <entry name="Pauses">
+                <regex>\((\.|-{1,3}|\d{1,2}\.\d{1,2})\)</regex>
+                <description>All measured or estimated pauses</description>
+                <explanation>A period or a sequence of one to three dashes, or a numerically notated pause in single parentheses</explanation>
+                <examples>
+                    <example>(0.4)</example>
+                    <example>(2.3)</example>
+                    <example>(.)</example>
+                    <example>(--)</example>
+                </examples>
+            </entry>
+            <entry name="Words with accentuated syllables">
+                <regex>(([a-zäöüß](:{1,3}|[a-zäöüß])*+(?!°))*([A-ZÄÖÜ](:{1,3}|[A-ZÄÖÜ])*+|![A-ZÄÖÜ](:{1,3}|[A-ZÄÖÜ])*+!)([a-zäöüß](:{1,3}|[a-zäöüß])*+(?!°))*|(\+{3}+)++)</regex>
+                <description>All words which contain an accentuated syllable</description>
+                <explanation>at least one accentuated or non-accentuated syllable preceded and followed by any number of non accentuated syllables</explanation>
+                <examples>
+                    <example>Aber</example>
+                    <example>wunderBAR</example>
+                    <example>entSTEHen</example>
+                    <example>!GROSS!mutter</example>
+                    <example>gross!ONKEL!</example>
+                </examples>
+            </entry>
+        </folder>
+    </folder>
+
+</regex-library>

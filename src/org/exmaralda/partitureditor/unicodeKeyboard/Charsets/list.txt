@@ -1,0 +1,20 @@
+ Datentr„ger in Laufwerk D: ist Entwicklung
+ Datentr„gernummer: 545B-A3BA
+
+ Verzeichnis von D:\Java\de\uni-hamburg\rrz\jexmaralda\unicodeKeyboard\Charsets
+
+14.06.2004  15:42               13'014 Armenian.xml
+20.10.2003  18:26                9'130 Cyrillic.xml
+14.06.2004  16:03                9'889 Diacritics.xml
+05.02.2004  12:50                1'644 DIDA.xml
+16.06.2004  14:05                4'502 GAT.xml
+20.10.2003  18:26                7'012 Greek.xml
+28.10.2003  19:01                3'267 HIAT.xml
+28.10.2003  19:01                5'863 HIAT_Germanic.xml
+28.10.2003  19:01                9'745 HIAT_Romanic.xml
+28.10.2003  19:01                6'393 HIAT_Turkish.xml
+28.10.2003  18:48               15'627 IPA.xml
+20.10.2003  18:10               15'018 MiscSymbols.xml
+03.06.2004  11:46                  368 SyncWriterConversion.xml
+              13 Datei(en)        101'472 Bytes
+               0 Verzeichnis(se),   1'732'780'032 Bytes frei

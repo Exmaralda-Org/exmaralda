@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <phoneme x="71" y="46">
+        <unicode>i</unicode>
+        <description>close front unrounded</description>
+    </phoneme>
+    <phoneme x="121" y="46">
+        <unicode>y</unicode>
+        <description>close front rounded</description>
+    </phoneme>
+    <phoneme x="241" y="46">
+        <unicode>ɨ</unicode>
+        <description>close central unrounded</description>
+    </phoneme>
+    <phoneme x="289" y="46">
+        <unicode>ʉ</unicode>
+        <description>close central rounded</description>
+    </phoneme>
+    <phoneme x="401" y="46">
+        <unicode>ɯ</unicode>
+        <description>close back unrounded</description>
+    </phoneme>
+    <phoneme x="457" y="46">
+        <unicode>u</unicode>
+        <description>close back rounded</description>
+    </phoneme>
+    <!-- ******************* -->
+    <phoneme x="165" y="86">
+        <unicode>ɪ</unicode>
+        <description>near-close near-front unrounded</description>
+    </phoneme>
+    <phoneme x="217" y="86">
+        <unicode>ʏ</unicode>
+        <description>near-close near-front rounded</description>
+    </phoneme>
+    <!-- <phoneme x="255" y="86">
+        <unicode>?</unicode>
+        <description> XXX </description>
+    </phoneme>
+    <phoneme x="299" y="86">
+        <unicode>?</unicode>
+        <description> XXX </description>
+    </phoneme> -->
+    <phoneme x="375" y="86">
+        <unicode>ʊ</unicode>
+        <description>near-close near-back rounded</description>
+    </phoneme>
+    <!-- **************** -->
+    <phoneme x="125" y="124">
+        <unicode>e</unicode>
+        <description>close-mid front unrounded</description>
+    </phoneme>
+    <phoneme x="173" y="124">
+        <unicode>ø</unicode>
+        <description>close-mid front rounded</description>
+    </phoneme>
+    <phoneme x="263" y="124">
+        <unicode>ɘ</unicode>
+        <description>close-mid central unrounded</description>
+    </phoneme>
+    <phoneme x="313" y="124">
+        <unicode>ɵ</unicode>
+        <description>close-mid central rounded</description>
+    </phoneme>
+    <phoneme x="407" y="124">
+        <unicode>ɤ</unicode>
+        <description>close-mid near-back unrounded</description>
+    </phoneme>
+    <phoneme x="457" y="124">
+        <unicode>o</unicode>
+        <description>close-mid back rounded</description>
+    </phoneme>
+    <!-- ****************** -->
+    <phoneme x="303" y="164">
+        <unicode>ə</unicode>
+        <description>mid central unrounded (Schwa)</description>
+    </phoneme>
+    <!-- ****************** -->    
+    <phoneme x="183" y="204">
+        <unicode>ɛ</unicode>
+        <description>open-mid front unrounded</description>
+    </phoneme>
+    <phoneme x="237" y="204">
+        <unicode>&#x0153;</unicode>
+        <description>open-mid front rounded</description>
+    </phoneme>
+    <phoneme x="297" y="204">
+        <unicode>ɜ</unicode>
+        <description>open-mid central unrounded</description>
+    </phoneme>
+    <phoneme x="343" y="204">
+        <unicode>ɞ</unicode>
+        <description>open-mid central rounded</description>
+    </phoneme>
+    <phoneme x="408" y="204">
+        <unicode>&#x028C;</unicode>
+        <description>open-mid back unrounded</description>
+    </phoneme>
+    <phoneme x="457" y="204">
+        <unicode>ɔ</unicode>
+        <description>open-mid back rounded</description>
+    </phoneme>
+    <!-- ******************** -->
+    <phoneme x="206" y="240">
+        <unicode>æ</unicode>
+        <description>near-open front unrounded</description>
+    </phoneme>
+    <phoneme x="333" y="240">
+        <unicode>ɐ</unicode>
+        <description>near-open central</description>
+    </phoneme>
+    <!-- ************* -->
+    <phoneme x="236" y="280">
+        <unicode>a</unicode>
+        <description>open front unrounded</description>
+    </phoneme>
+    <phoneme x="290" y="280">
+        <unicode>ɶ</unicode>
+        <description>open front rounded</description>
+    </phoneme>
+    <phoneme x="408" y="280">
+        <unicode>ɑ</unicode>
+        <description>open back unrounded</description>
+    </phoneme>
+    <phoneme x="457" y="280">
+        <unicode>ɒ</unicode>
+        <description>open back rounded</description>
+    </phoneme>
+</doc>
+

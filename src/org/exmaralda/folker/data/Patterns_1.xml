@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <!-- changes on 04-02-2009: -->
+    <!-- symbol for clitics is now _ instead of + -->
+    <!-- symbol for alternative is now / instaed of | -->
+    <!-- symbol for breathe is now ° instead of _ -->
+    <!-- symbol for unintelligible is now + instead of * -->
+    <level level="2" name="minimaltranskription">
+        <pattern name="GAT_WORD">
+            <!-- changed on 04-02-2009 -->
+            <regex>[a-zäöüß]++(?!°)</regex>
+            <comment>any sequence of lower case letters from the German alphabet</comment>
+        </pattern>
+        <pattern name="GAT_NON_PHO">
+            <regex>\({2}+[^\(-\.\d][^\)]*\){2}+</regex>
+            <comment>two opening round brackets / followed by an arbitrary string which does not start with a round bracket, a dash, a period or a digit / followed by two closing round brackets</comment>
+        </pattern>
+        <pattern name="GAT_UNTIMED_PAUSE">            
+            <regex>\((-{1,3}|\.)\)</regex>
+            <comment>a period or one to three dashes between a pair of round brackets</comment>
+        </pattern>
+        <pattern name="GAT_TIMED_PAUSE">
+            <regex>\(\d{1,2}\.\d{1,2}\)</regex>
+            <comment>an opening round bracket / followed by one or two digits / followed by a decimal point / followed by one or two digits / followed by a closing round bracket</comment>
+        </pattern>
+        <pattern name="GAT_PAUSE">
+            <regex>(<pattern-ref ref="GAT_UNTIMED_PAUSE"/>|<pattern-ref ref="GAT_TIMED_PAUSE"/>)</regex>
+        </pattern>
+        <pattern name="GAT_BREATHE">
+            <!-- changed on 04-02-2009 -->
+            <regex>(°h{1,3}+|h{1,3}+°)</regex>
+            <comment>One to three h, either preceded or followed by a degree sign</comment>
+        </pattern>
+        <pattern name="GAT_ASSIMILATION">
+            <!-- changed on 04-02-2009 -->
+            <regex>_</regex>
+            <comment>the underscore</comment>
+        </pattern>
+        <pattern name="GAT_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="GAT_WORDBOUNDARY">
+            <regex>(<pattern-ref ref="GAT_SPACE"/>|<pattern-ref ref="GAT_ASSIMILATION"/>)</regex>
+            <comment>either the assimilation or the space symbol</comment>
+        </pattern>
+        <pattern name="GAT_WORDCHAIN">
+            <regex><pattern-ref ref="GAT_WORD"/>(<pattern-ref ref="GAT_WORDBOUNDARY"/><pattern-ref ref="GAT_WORD"/>)*+</regex>
+        </pattern>
+        <pattern name="GAT_ASSIMILATED_WORDS">
+            <regex><pattern-ref ref="GAT_WORD"/>(<pattern-ref ref="GAT_ASSIMILATION"/><pattern-ref ref="GAT_WORD"/>)++</regex>
+        </pattern>
+        <pattern name="GAT_ALTERNATIVE">
+            <!-- changed on 04-02-2009 -->
+            <regex>/<pattern-ref ref="GAT_WORDCHAIN"/></regex>
+        </pattern>
+        <pattern name="GAT_UNCERTAIN">
+            <regex>\(<pattern-ref ref="GAT_WORDCHAIN"/>(<pattern-ref ref="GAT_ALTERNATIVE"/>)*+\)</regex>
+        </pattern>
+        <pattern name="GAT_UNINTELLIGIBLE">
+            <!-- changed on 04-02-2009 -->
+            <regex>(\+{3}+)++</regex>
+        </pattern>
+        <pattern name="GAT_ELEMENT">
+            <regex>(<pattern-ref ref="GAT_UNCERTAIN"/>|<pattern-ref ref="GAT_WORD"/>|<pattern-ref ref="GAT_UNINTELLIGIBLE"/>|<pattern-ref ref="GAT_ASSIMILATED_WORDS"/>|<pattern-ref ref="GAT_NON_PHO"/>|<pattern-ref ref="GAT_PAUSE"/>|<pattern-ref ref="GAT_BREATHE"/>)</regex>
+        </pattern>
+        <pattern name="GAT_EVENT">
+            <regex><pattern-ref ref="GAT_ASSIMILATION"/>?(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>))*+<pattern-ref ref="GAT_ELEMENT"/>?<pattern-ref ref="GAT_SPACE"/>?</regex>
+        </pattern>
+        <pattern name="GAT_CONTRIBUTION">
+            <regex>(<pattern-ref ref="GAT_ELEMENT"/>(<pattern-ref ref="GAT_SPACE"/>))*+<pattern-ref ref="GAT_ELEMENT"/>?<pattern-ref ref="GAT_SPACE"/>?</regex>
+        </pattern>
+    </level>        
+</patterns>

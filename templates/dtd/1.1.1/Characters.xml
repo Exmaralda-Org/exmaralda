@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<!DOCTYPE character-sets SYSTEM "character-sets.dtd">
+<character-sets name="Partitur-Editor-Standard">
+	<character-set name="HIAT-Basic">
+		<char>
+			<text font="Arial Unicode MS" face="bold" size="12">((Pause))</text>
+			<tooltip font="Arial Unicode MS" face="bold" size="10">HIAT Pause symbol</tooltip>
+		</char>
+		<char>
+			<text font="Arial Unicode MS" face="bold" size="12">m&#x0301;</text>
+			<tooltip font="Arial Unicode MS" face="bold" size="10">m with accute accent</tooltip>
+		</char>
+	</character-set>
+	<character-set name="HIAT-Portuguese" extends="HIAT-Basic">
+		<char>
+			<text></text>
+		</char>
+	</character-set>
+</character-sets>

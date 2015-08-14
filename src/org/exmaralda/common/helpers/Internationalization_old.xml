@@ -1,0 +1,3670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Internationalization file for the EXMARaLDA Partitur-Editor -->
+<!-- version 1.0., 28-June-2005 -->
+<!-- English originals and German translations (by Annette Schnieder) -->
+<!-- Turkısh translations (by Tuelay Selcuk) -->
+<!-- Swedish translations (by Hanna Hedeland) -->
+<!-- Czech translations (by Petr Porizka) -->
+<!-- Spanish translations (by Silke Merkel) -->
+
+<!-- 27-February-2009 -->
+<!-- New version for version 1.4.1. of the Partitur-Editor -->
+<!-- Many changes -->
+<!-- Old version kept in Internationalization_old.xml -->
+
+<internationalization>
+	<languages>
+		<language short="de" long="Deutsch"/>
+		<language short="en" long="English"/>
+		<language short="fr" long="Français"/>
+		<language short="sv" long="Svenska"/>
+		<language short="tr" long="Turkish"/>
+		<language short="cz" long="Czech"/>
+		<language short="es" long="Spanish"/>
+	</languages>
+	<translations>
+		<!-- this is the most important part: the entries in the main menus -->
+		<subdomain name="menus">
+			<!-- ****************************************** -->
+			<subdomain name="file_menu">
+				<item id="File">
+					<translation lang="en" trans="File"/>
+					<translation lang="de" trans="Datei"/>
+					<translation lang="fr" trans="Fichier"/>
+					<translation lang="sv" trans="Arkiv"/>
+					<translation lang="tr" trans="Dosya"/>
+					<translation lang="cz" trans="Soubor"/>
+					<translation lang="es" trans="Archivo"/>
+				</item>
+				<item id="New...">
+					<translation lang="en" trans="New..."/>
+					<translation lang="de" trans="Neu..."/>
+					<translation lang="fr" trans="Nouveau..."/>
+					<translation lang="sv" trans="Nytt..."/>
+					<translation lang="tr" trans="Yeni..."/>
+					<translation lang="cz" trans="Nový..."/>
+					<translation lang="es" trans="Nuevo..."/>
+				</item>
+				<item id="New from speakertable...">
+					<translation lang="en" trans="New from speakertable..."/>
+					<translation lang="de" trans="Neu aus Sprechertabelle..."/>
+					<translation lang="fr" trans="Nouveau par table des locuteurs..."/>
+					<translation lang="sv" trans="Nytt från talarförteckning..."/>
+					<translation lang="tr" trans="Konuşmacı tablosundan yeni..."/>
+					<translation lang="cz" trans="Nový z tabulky mluvčího..."/>
+					<translation lang="es" trans="Nuevo de  tabla de hablantes..."/>
+				</item>
+				<item id="New from wizard">
+					<translation lang="en" trans="New from wizard..."/>
+					<translation lang="de" trans="Neu aus Assistent..."/>
+					<translation lang="fr" trans="Nouveau par assistant..."/>
+					<!-- <translation lang="sv" trans="Nytt från talarförteckning..."/>
+					<translation lang="tr" trans="Konuşmacı tablosundan yeni..."/>
+					<translation lang="cz" trans="Nový z tabulky mluvčího..."/>
+					<translation lang="es" trans="Nuevo de  tabla de hablantes..."/> -->
+				</item>
+				<item id="New from timeline...">
+					<translation lang="en" trans="New from timeline..."/>
+					<translation lang="de" trans="Neu aus Zeitachse..."/>
+					<translation lang="fr" trans="Nouveau par axe de temps..."/>
+				</item>
+				<item id="Open...">
+					<translation lang="en" trans="Open..."/>
+					<translation lang="de" trans="Öffnen..."/>
+					<translation lang="fr" trans="Ouvrir..."/>
+					<translation lang="sv" trans="Öppna..."/>
+					<translation lang="tr" trans="Aç..."/>
+					<translation lang="cz" trans="Otevřít..."/>
+					<translation lang="es" trans="Abrir..."/>
+				</item>
+				<item id="Restore">
+					<translation lang="en" trans="Restore"/>
+					<translation lang="de" trans="Zurücksetzen"/>
+					<translation lang="fr" trans="Remettre"/>
+					<translation lang="sv" trans="Återställ"/>
+					<translation lang="tr" trans="Temizle"/>
+					<translation lang="cz" trans="Obnovit"/>
+					<translation lang="es" trans="Volver a la versión guardada"/>
+				</item>
+				<item id="Save">
+					<translation lang="en" trans="Save"/>
+					<translation lang="de" trans="Speichern"/>
+					<translation lang="fr" trans="Enregistrer"/>
+					<translation lang="sv" trans="Spara"/>
+					<translation lang="tr" trans="Kaydet"/>
+					<translation lang="cz" trans="Uložit"/>
+					<translation lang="es" trans="Guardar"/>
+				</item>
+				<item id="Save as...">
+					<translation lang="en" trans="Save as..."/>
+					<translation lang="de" trans="Speichern unter..."/>
+					<translation lang="fr" trans="Enregistrer sous..."/>
+					<translation lang="sv" trans="Spara som..."/>
+					<translation lang="tr" trans="Farklı kaydet..."/>
+					<translation lang="cz" trans="Uložit jako..."/>
+					<translation lang="es" trans="Guardar como..."/>
+				</item>
+				<item id="Page setup...">
+					<translation lang="en" trans="Page setup..."/>
+					<translation lang="de" trans="Seite einrichten..."/>
+					<translation lang="fr" trans="Format d'impression..."/>
+					<translation lang="sv" trans="Utskriftsformat..."/>
+					<translation lang="tr" trans="Sayfa yapısı..."/>
+					<translation lang="cz" trans="Nastavení stránky..."/>
+					<translation lang="es" trans="Configuración de página..."/>
+				</item>
+				<item id="Print...">
+					<translation lang="en" trans="Print..."/>
+					<translation lang="de" trans="Drucken..."/>
+					<translation lang="fr" trans="Imprimer..."/>
+					<translation lang="sv" trans="Skriv ut..."/>
+					<translation lang="tr" trans="Yazdır..."/>
+					<translation lang="cz" trans="Tisknout..."/>
+					<translation lang="es" trans="Imprimir..."/>
+				</item>
+		                              <item id="Output...">
+		                                        <translation lang="en" trans="Output..."/>
+		                                        <translation lang="de" trans="Ausgabe... "/>
+		                                        <translation lang="fr" trans="Edition..."/>
+		                                        <!--  TODO! -->
+		                                        <!-- <translation lang="sv" trans="Importera..."/>
+		                                        <translation lang="tr" trans="İçeri aktarım..."/> -->
+		                                        <translation lang="cz" trans="Výstup..."/>
+		                                        <translation lang="es" trans="Output..."/>
+		                                </item>
+		                                <item id="Import...">
+		                                        <translation lang="en" trans="Import..."/>
+		                                        <translation lang="de" trans="Importieren... "/>
+		                                        <translation lang="fr" trans="Importer..."/>
+		                                        <translation lang="sv" trans="Importera..."/>
+		                                        <translation lang="tr" trans="İçeri aktarım..."/>
+		                                        <translation lang="cz" trans="Importovat..."/>
+		                                        <translation lang="es" trans="Importar..."/>
+		                                </item>
+		                                <item id="Export...">
+		                                        <translation lang="en" trans="Export..."/>
+		                                        <translation lang="de" trans="Exportieren..."/>
+		                                        <translation lang="fr" trans="Exporter..."/>
+		                                        <translation lang="sv" trans="Exportera..."/>
+		                                        <translation lang="tr" trans="Dışa aktarım..."/>
+		                                        <translation lang="cz" trans="Exportovat..."/>
+		                                        <translation lang="es" trans="Exportar..."/>
+		                                </item>
+                                
+				<item id="Exit">
+					<translation lang="en" trans="Exit"/>
+					<translation lang="de" trans="Beenden"/>
+					<translation lang="fr" trans="Quitter"/>
+					<translation lang="sv" trans="Avsluta"/>
+					<translation lang="tr" trans="Çıkış"/>
+					<translation lang="cz" trans="Konec"/>
+					<translation lang="es" trans="Quitar"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="edit_menu">
+				<item id="Edit">
+					<translation lang="en" trans="Edit"/>
+					<translation lang="de" trans="Bearbeiten"/>
+					<translation lang="fr" trans="Édition"/>
+					<translation lang="sv" trans="Redigera"/>
+					<translation lang="tr" trans="Düzen"/>
+					<translation lang="cz" trans="Editovat"/>
+					<translation lang="es" trans="Edición"/>
+				</item>
+				<item id="Copy">
+					<translation lang="en" trans="Copy"/>
+					<translation lang="de" trans="Kopieren"/>
+					<translation lang="fr" trans="Copier"/>
+					<translation lang="sv" trans="Kopiera"/>
+					<translation lang="tr" trans="Kopyala"/>
+					<translation lang="cz" trans="Kopírovat"/>
+					<translation lang="es" trans="Copiar"/>
+				</item>
+				<item id="Paste">
+					<translation lang="en" trans="Paste"/>
+					<translation lang="de" trans="Einfügen"/>
+					<translation lang="fr" trans="Coller"/>
+					<translation lang="sv" trans="Klistra in"/>
+					<translation lang="tr" trans="Yapıştır"/>
+					<translation lang="cz" trans="Vložit"/>
+					<translation lang="es" trans="Pegar"/>
+				</item>
+				<item id="Cut">
+					<translation lang="en" trans="Cut"/>
+					<translation lang="de" trans="Ausschneiden"/>
+					<translation lang="fr" trans="Couper"/>
+					<translation lang="sv" trans="Klipp ut"/>
+					<translation lang="tr" trans="Kes"/>
+					<translation lang="cz" trans="Vyjmout"/>
+					<translation lang="es" trans="Cortar"/>
+				</item>
+				<item id="Search in events...">
+					<translation lang="en" trans="Search in events..."/>
+					<translation lang="de" trans="In Ereignissen suchen..."/>
+					<translation lang="fr" trans="Rechercher en événements..."/>
+					<translation lang="sv" trans="Sök i händelser... "/>
+					<translation lang="tr" trans="Olayın içinde ara..."/>
+					<translation lang="cz" trans="Hledat v událostech..."/>
+					<translation lang="es" trans="Buscar en eventos..."/>
+				</item>
+				<item id="Find next">
+					<translation lang="en" trans="Find next"/>
+					<translation lang="de" trans="Nächstes finden"/>
+					<translation lang="fr" trans="Trouver suivant"/>
+				</item>
+				<item id="Replace in events...">
+					<translation lang="en" trans="Replace in events..."/>
+					<translation lang="de" trans="In Ereignissen ersetzen..."/>
+					<translation lang="fr" trans="Remplacer en événements..."/>
+					<translation lang="sv" trans="Ersätt i händelser..."/>
+					<translation lang="tr" trans="Olayın içine koy..."/>
+					<translation lang="cz" trans="Nahradit v událostech..."/>
+					<translation lang="es" trans="Reemplazar en eventos..."/>
+				</item>
+				<item id="Go to...">
+					<translation lang="en" trans="Go to..."/>
+					<translation lang="de" trans="Gehe zu..."/>
+					<translation lang="fr" trans="Aller à..."/>
+
+                    				<!-- <translation lang="sv" trans="Ersätt i händelser..."/>
+					<translation lang="tr" trans="Olayın içine koy..."/> -->
+					<translation lang="cz" trans="Přejít na..."/>
+					<translation lang="es" trans="Ir a..."/>
+				</item>
+				<item id="EXAKT search...">
+					<translation lang="en" trans="EXAKT search..."/>
+					<translation lang="de" trans="EXAKT-Suche..."/>
+					<translation lang="fr" trans="Recherche EXAKT..."/>
+					<!--  TODO! -->
+					<!-- <translation lang="sv" trans="..."/>
+					<translation lang="tr" trans="..."/> -->
+					<translation lang="cz" trans="EXAKT - vyhledávání..."/>                                        
+					<translation lang="es" trans="Búsqueda EXAKT..."/> 
+				</item>
+				<!-- ****************************************** -->
+				<subdomain name="selection_submenu">
+					<item id="Selection">
+						<translation lang="en" trans="Selection"/>
+						<translation lang="de" trans="Auswahl"/>
+						<translation lang="fr" trans="Sélection"/>
+						<translation lang="sv" trans="Markering"/>
+						<translation lang="tr" trans="Seçim"/>
+						<translation lang="cz" trans="Výběr"/>
+						<translation lang="es" trans="Selección"/>
+					</item>
+					<item id="Selection to new">
+						<translation lang="en" trans="Selection to new"/>
+						<translation lang="de" trans="Auswahl als neue Partitur"/>
+						<translation lang="fr" trans="Nouveau à partir de sélection"/>
+						<translation lang="sv" trans="Skapa nytt partitur från markering"/>
+						<translation lang="tr" trans="Yeni partisyon olarak seç"/>
+						<translation lang="cz" trans="Výběr jako nová partitura"/>
+						<translation lang="es" trans="Nueva partitura partiendo de selección"/>
+					</item>
+					<item id="Left part to new">
+						<translation lang="en" trans="Left part to new"/>
+						<translation lang="de" trans="Linker Teil als neue Partitur"/>
+						<translation lang="fr" trans="Nouveau à partir de partie gauche"/>
+						<translation lang="sv" trans="Skapa nytt partitur från vänster del"/>
+						<translation lang="tr" trans="Sol kısmı yeni partisyon olarak seç"/>
+						<translation lang="cz" trans="Levá část jako nová partitura"/>
+						<translation lang="es" trans="Nueva partitura partiendo de parte izquierda"/>
+						
+					</item>
+					<item id="Right part to new">
+						<translation lang="en" trans="Right part to new"/>
+						<translation lang="de" trans="Rechter Teil als neue Partitur"/>
+						<translation lang="fr" trans="Nouveau à partir de partie droite"/>
+						<translation lang="sv" trans="Skapa nytt partitur från höger del"/>
+						<translation lang="tr" trans="Sağ kısmı yeni partisyon olarak seç"/>
+						<translation lang="cz" trans="Pravá část jako nová partitura"/>
+						<translation lang="es" trans="Nueva partitura partiendo de parte derecha"/>
+					</item>
+					<item id="Selection to RTF...">
+						<translation lang="en" trans="Selection to RTF..."/>
+						<translation lang="de" trans="Auswahl als RTF..."/>
+						<translation lang="fr" trans="RTF à partir de sélection..."/>
+						<translation lang="sv" trans="Skapa RTF från markering..."/>
+						<translation lang="tr" trans="RTF olarak seç..."/>
+						<translation lang="cz" trans="Výběr jako RTF..."/>
+						<translation lang="es" trans="RTF partiendo de selección..."/>
+					</item>
+					<item id="Selection to HTML...">
+						<translation lang="en" trans="Selection to HTML..."/>
+						<translation lang="de" trans="Auswahl als HTML..."/>
+						<translation lang="fr" trans="HTML à partir de sélection..."/>
+						<translation lang="sv" trans="Skapa HTML från markering..."/>
+						<translation lang="tr" trans="HTML olarak seç..."/>
+						<translation lang="cz" trans="Výběr jako HTML..."/>
+						<translation lang="es" trans="HTML partiendo de selección..."/>
+					</item>
+					<!-- NEW -->
+					<item id="Print selection...">
+						<translation lang="en" trans="Print selection..."/>
+						<translation lang="de" trans="Auswahl drucken..."/>
+						<translation lang="fr" trans="Imprimer sélection..."/>
+						<!-- <translation lang="sv" trans="Selection to HTML..."/>
+						<translation lang="tr" trans="Selection to HTML..."/> -->
+						<translation lang="cz" trans="Výběr jako HTML..."/>
+						<translation lang="es" trans="Imprimir selección..."/>
+					</item>
+				</subdomain>
+				<!-- ****************************************** -->
+				<item id="Preferences...">
+					<translation lang="en" trans="Preferences..."/>
+					<translation lang="de" trans="Voreinstellungen..."/>
+					<translation lang="fr" trans="Préférences..."/>
+					<translation lang="sv" trans="Inställningar..."/>
+					<translation lang="tr" trans="Ayarlar..."/>
+					<translation lang="cz" trans="Nastavení..."/>
+					<translation lang="es" trans="Preferencias..."/>
+				</item>
+				<item id="Partitur preferences...">
+					<translation lang="en" trans="Partitur preferences..."/>
+					<translation lang="de" trans="Partitureinstellungen..."/>
+					<translation lang="fr" trans="Préférences pour la partition..."/>
+					<translation lang="sv" trans="Partiturinställningar..."/>
+					<translation lang="tr" trans="Partisyon parametresi..."/>
+					<translation lang="cz" trans="Parametry partitury..."/>
+					<translation lang="es" trans="Preferencias para la partitura..."/>
+				</item>				
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="view_menu">
+				<item id="View">
+					<translation lang="en" trans="View"/>
+					<translation lang="de" trans="Ansicht"/>
+					<translation lang="fr" trans="Présentation"/>
+					<translation lang="sv" trans="Visa"/>
+					<translation lang="tr" trans="Görünüm"/>
+					<translation lang="cz" trans="Zobrazení"/>
+					<translation lang="es" trans="Vista"/>
+				</item>
+				<!-- ****************************************** -->
+				<item id="Keyboard">
+					<translation lang="en" trans="Keyboard"/>
+					<translation lang="de" trans="Virtuelle Tastatur"/>
+					<translation lang="fr" trans="Clavier virtuel"/>
+					<translation lang="sv" trans="Tangentbordet"/>
+					<translation lang="tr" trans="Klavye"/>
+					<translation lang="cz" trans="Klávesnice"/>
+					<translation lang="es" trans="Teclado virtual"/>
+				</item>
+				<item id="Link panel">
+					<translation lang="en" trans="Link panel"/>
+					<translation lang="de" trans="Verknüpfungs-Werkzeug"/>
+					<translation lang="fr" trans="Outil de reliage"/>
+					<translation lang="sv" trans="Länkningspanelen"/>
+					<translation lang="tr" trans="Bağlantı panosu"/>
+					<translation lang="cz" trans="Panel propojení"/>
+					<translation lang="es" trans="Herramienta de enlaces"/>
+				</item>
+				<item id="Audio/Video panel">
+					<translation lang="en" trans="Audio/Video panel"/>
+					<translation lang="de" trans="Audio-/Video-Werkzeug"/>
+					<translation lang="fr" trans="Outil audio/vidéo"/>
+					<translation lang="sv" trans="Audio/Video-panelen"/>
+					<translation lang="tr" trans="Audio/Video panosu"/>
+					<translation lang="cz" trans="Audio/Video panel"/>
+					<translation lang="es" trans="Herramienta audio/video"/>
+				</item>
+				<item id="Praat panel">
+					<translation lang="en" trans="Praat panel"/>
+					<translation lang="de" trans="Praat-Werkzeug"/>
+					<translation lang="fr" trans="Outil Praat"/>
+					<translation lang="sv" trans="Praat-panelen"/>
+					<translation lang="tr" trans="Praat panosu"/>
+					<translation lang="cz" trans="Praat panel"/>
+					<translation lang="es" trans="Herramienta Praat"/>
+				</item>
+				<item id="Annotation panel">
+					<translation lang="en" trans="Annotation panel"/>
+					<translation lang="de" trans="Annotationswerkzeug"/>
+					<translation lang="fr" trans="Outil d'annotation"/>
+				</item>
+				<item id="IPA panel">
+					<translation lang="en" trans="IPA panel"/>
+					<translation lang="de" trans="IPA-Werkzeug"/>
+					<translation lang="fr" trans="Outil API"/>
+					<translation lang="sv" trans="IPA-panelen"/>
+					<translation lang="tr" trans="IPA panosu"/>
+					<translation lang="cz" trans="IPA panel"/>
+					<translation lang="es" trans="Herramienta IPA"/>
+				</item>
+				<!-- ****************************************** -->
+				<item id="Show toolbar">
+					<translation lang="en" trans="Show toolbar"/>
+					<translation lang="de" trans="Symbolleiste anzeigen"/>
+					<translation lang="fr" trans="Afficher barre d'outils"/>
+					<translation lang="sv" trans="Visa verktygsfält"/>
+					<translation lang="tr" trans="Araç çubuğunu göster"/>
+					<translation lang="cz" trans="Zobrazit panel nástrojů"/>
+					<translation lang="es" trans=" Mostrar barra de iconos"/>
+				</item>
+				<!-- NEW -->
+				<item id="Show large text field">
+					<translation lang="en" trans="Show large text field"/>
+					<translation lang="de" trans="Großes Textfeld anzeigen"/>
+					<translation lang="fr" trans="Afficher grand champs de texte"/>
+					<!-- <translation lang="sv" trans="Visa verktygsfält"/>
+					<translation lang="tr" trans="Araç çubuğunu göster"/>
+					<translation lang="cz" trans="Zobrazit panel nástrojů"/>
+					<translation lang="es" trans=" Mostrar barra de iconos"/> -->
+				</item>
+				<item id="Show grid">
+					<translation lang="en" trans="Show grid"/>
+					<translation lang="de" trans="Gitternetz anzeigen"/>
+					<translation lang="fr" trans="Afficher canevas"/>
+					<translation lang="sv" trans="Visa rutnät"/>
+					<translation lang="tr" trans="Kılavuz çizgilerini göster"/>
+					<translation lang="cz" trans="Zobrazit mřížku"/>
+					<translation lang="es" trans="Mostrar cuadrícula"/>
+				</item>
+				<item id="Show special characters">
+					<translation lang="en" trans="Show special characters"/>
+					<translation lang="de" trans="Leerzeichen anzeigen"/>
+					<translation lang="fr" trans="Afficher caractères à ignorer"/>
+					<translation lang="sv" trans="Visa dolda tecken"/>
+					<translation lang="tr" trans="Boş karakterleri göster"/>
+					<translation lang="cz" trans="Zobrazit zvláštní znaky"/>
+					<translation lang="es" trans="Mostrar carácter en blanco"/>
+				</item>
+				<item id="Color empty events">
+					<translation lang="en" trans="Color empty events"/>
+					<translation lang="de" trans="Leere Ereignisse schattieren"/>
+					<translation lang="fr" trans="Ombrer événements vides"/>
+					<translation lang="sv" trans="Skugga tomma händelser"/>
+					<translation lang="tr" trans="Boş olayları gölgelendir"/>
+					<translation lang="cz" trans="Vyznačit prázdné události"/>
+					<translation lang="es" trans="Sombrear enventos vacios"/>
+				</item>
+				<item id="Change scale constant...">
+					<translation lang="en" trans="Change scale constant..."/>
+					<translation lang="de" trans="Skalierung ändern..."/>
+					<translation lang="fr" trans="Changer constante d'agrandissement..."/>
+					<translation lang="sv" trans="Ändra skala..."/>
+					<translation lang="tr" trans="Ölçeği değiştir..."/>
+					<translation lang="cz" trans="Změnit měřítko zobrazení..."/>
+					<translation lang="es" trans="Cambiar escala clasificación..."/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="transcription_menu">
+				<item id="Transcription">
+					<translation lang="en" trans="Transcription"/>
+					<translation lang="de" trans="Transkription"/>
+					<translation lang="fr" trans="Transcription"/>
+					<translation lang="sv" trans="Transkription"/>
+					<translation lang="tr" trans="Traskripsyon"/>
+					<translation lang="cz" trans="Transkripce"/>
+					<translation lang="es" trans="Transcripción"/>
+				</item>
+				<!-- ****************************************** -->
+				<item id="Meta information...">
+					<translation lang="en" trans="Meta information..."/>
+					<translation lang="de" trans="Meta-Information..."/>
+					<translation lang="fr" trans="Méta-information..."/>
+					<translation lang="sv" trans="Meta-information..."/>
+					<translation lang="tr" trans="Anabilgiler..."/>
+					<translation lang="cz" trans="Metainformace..."/>
+					<translation lang="es" trans="Meta-información..."/>
+				</item>
+				<item id="Speakertable...">
+					<translation lang="en" trans="Speakertable..."/>
+					<translation lang="de" trans="Sprechertabelle..."/>
+					<translation lang="fr" trans="Table des locuteurs..."/>
+					<translation lang="sv" trans="Talarförteckning..."/>
+					<translation lang="tr" trans="Konuşmacı tablosu..."/>
+					<translation lang="cz" trans="Tabulka mluvčího..."/>
+					<translation lang="es" trans="Tabla de hablantes..."/>
+				</item>		
+				<!-- NEW -->
+				<item id="Recordings...">
+					<translation lang="en" trans="Recordings..."/>
+					<translation lang="de" trans="Aufnahmen..."/>
+					<translation lang="fr" trans="Enregistrements..."/>
+					<!-- <translation lang="sv" trans="Talarförteckning..."/>
+					<translation lang="tr" trans="Konuşmacı tablosu..."/>
+					<translation lang="cz" trans="Tabulka mluvčího..."/>
+					<translation lang="es" trans="Tabla de hablantes..."/> -->
+				</item>		
+				<!-- *********************** -->
+				<!-- NEW  -->
+				<item id="Structure errors...">
+					<translation lang="en" trans="Structure errors..."/>
+					<translation lang="de" trans="Strukturfehler..."/>
+					<translation lang="fr" trans="Erreurs de structure..."/>
+					<!-- <translation lang="sv" trans="Segmenteringsfel..."/>
+					<translation lang="tr" trans="Kesim hatalarını düzelt..."/>
+					<translation lang="cz" trans="Upravit chyby segmentace..."/>
+					<translation lang="es" trans="Edición errores de segmentación..."/> -->
+				</item>
+				<!-- NEW  -->
+				<item id="Calculate annotated time...">
+					<translation lang="en" trans="Calculate annotated time..."/>
+					<translation lang="de" trans="Annotierte Zeit berechnen..."/>
+					<translation lang="fr" trans="Calculer temps annoté..."/>
+					<!-- <translation lang="sv" trans="Segmenteringsfel..."/>
+					<translation lang="tr" trans="Kesim hatalarını düzelt..."/>
+					<translation lang="cz" trans="Upravit chyby segmentace..."/>
+					<translation lang="es" trans="Edición errores de segmentación..."/> -->
+				</item>
+				<!-- *********************** -->
+				<!-- NEW (Check!) -->
+				<item id="Segmentation errors...">
+					<translation lang="en" trans="Segmentation errors..."/>
+					<translation lang="de" trans="Segmentierungsfehler..."/>
+					<translation lang="fr" trans="Erreurs de segmentation..."/>
+					<translation lang="sv" trans="Segmenteringsfel..."/>
+					<translation lang="tr" trans="Kesim hatalarını düzelt..."/>
+					<translation lang="cz" trans="Upravit chyby segmentace..."/>
+					<translation lang="es" trans="Edición errores de segmentación..."/>
+				</item>
+				<!-- NEW (Check!) -->
+				<item id="Export segmented transcription...">
+					<translation lang="en" trans="Export segmented transcription..."/>
+					<translation lang="de" trans="Segmentierte Transkription exportieren..."/>
+					<translation lang="fr" trans="Exporter transcription segmentée..."/>
+					<translation lang="sv" trans="Segmenterad transkription..."/>
+					<translation lang="tr" trans="Kesimlenmiş traskripsyon..."/>
+					<translation lang="cz" trans="Segmentovaná transkripce..."/>
+					<translation lang="es" trans="Transcripción segmentada..."/>
+				</item>
+				<item id="Count segments...">
+					<translation lang="en" trans="Count segments..."/>
+					<translation lang="de" trans="Transkription auszählen..."/>
+					<translation lang="fr" trans="Compter segments..."/>
+					<translation lang="sv" trans="Räkna segment..."/>
+					<translation lang="tr" trans="Kesimleri say..."/>
+					<translation lang="cz" trans="Počet segmentů..."/>
+					<translation lang="es" trans="Contar segmentos..."/>
+				</item>				
+				<item id="Word list...">
+					<translation lang="en" trans="Word list..."/>
+					<translation lang="de" trans="Wortliste..."/>
+					<translation lang="fr" trans="Liste de mots..."/>
+					<translation lang="sv" trans="Ordlista..."/>
+					<translation lang="tr" trans="Kelimeler listesi..."/>
+					<translation lang="cz" trans="Index slov..."/>
+					<translation lang="es" trans="Lista de palabras..."/>
+				</item>
+				<!-- NEW -->
+				<item id="Insert utterance numbers">
+					<translation lang="en" trans="Insert utterance numbers"/>
+					<translation lang="de" trans="Äußerungsnummern einfügen"/>
+					<translation lang="fr" trans="Insérer numéros d'énoncés"/>
+					<!-- <translation lang="sv" trans="Ordlista..."/>
+					<translation lang="tr" trans="Kelimeler listesi..."/>
+					<translation lang="cz" trans="Index slov..."/>
+					<translation lang="es" trans="Lista de palabras..."/> -->
+				</item>
+				<!-- NEW -->
+				<item id="Transformation...">
+					<translation lang="en" trans="Transformation..."/>
+					<translation lang="de" trans="Transformation..."/>
+					<translation lang="fr" trans="Transformation..."/>
+					<!-- <translation lang="sv" trans="Ordlista..."/>
+					<translation lang="tr" trans="Kelimeler listesi..."/>
+					<translation lang="cz" trans="Index slov..."/>
+					<translation lang="es" trans="Lista de palabras..."/> -->
+				</item>
+				<item id="Clean up...">
+					<translation lang="en" trans="Clean up..."/>
+					<translation lang="de" trans="Bereinigen..."/>
+					<translation lang="fr" trans="Ranger..."/>
+					<translation lang="sv" trans="Rensa..."/>
+					<translation lang="tr" trans="Temizle..."/>
+					<translation lang="cz" trans="Vyčistit..."/>
+					<translation lang="es" trans="Ordenar..."/>
+				</item>
+				<!-- NEW (Check!) -->
+				<item id="Error list...">
+					<translation lang="en" trans="Error list..."/>
+					<translation lang="de" trans="Fehlerliste..."/>
+					<translation lang="fr" trans="Liste d'erreurs..."/>
+					<!--  TODO! -->
+					<!-- <translation lang="sv" trans="Edit errors..."/>
+					<translation lang="tr" trans="Edit errors..."/> -->
+					<translation lang="cz" trans="Upravit chyby..."/>
+					<translation lang="es" trans=" Edición errores..."/>
+				</item>
+				<item id="Glue transcriptions...">
+					<translation lang="en" trans="Glue transcriptions..."/>
+					<translation lang="de" trans="Transkriptionen zusammenfügen..."/>
+					<translation lang="fr" trans="Assembler transcriptions..."/>
+					<translation lang="sv" trans="Sammanfoga transkriptioner..."/>
+					<translation lang="tr" trans="Transkripsyonları birleştir..."/>
+					<translation lang="cz" trans="Spojit transkripce..."/>
+					<translation lang="es" trans="Juntar  transcripciones..."/>
+				</item>
+				<item id="Chop transcription...">
+					<translation lang="en" trans="Chop transcription..."/>
+					<translation lang="de" trans="Transkription zerschneiden..."/>
+					<translation lang="fr" trans="Découper transcription..."/>
+					<translation lang="sv" trans="Dela upp transkription..."/>
+					<translation lang="tr" trans="Transkripsyonları kes..."/>
+					<translation lang="cz" trans="Rozdělit transkripci..."/>
+					<translation lang="es" trans="Dividir transcripción..."/>
+				</item>												
+				<item id="Chop audio...">
+					<translation lang="en" trans="Chop audio..."/>
+					<translation lang="de" trans="Audio-Datei aufteilen..."/>
+					<translation lang="fr" trans="Découper fichier audio..."/>
+					<translation lang="sv" trans="Dela upp ljudfil..."/>
+					<translation lang="tr" trans="Audio klasörünü ikiye böl..."/>
+					<translation lang="cz" trans="Rozdělit audio..."/>
+					<translation lang="es" trans="Dividir archivo audio..."/>
+				</item>
+				<item id="ExSync event shrinker...">
+					<translation lang="en" trans="ExSync event shrinker..."/>
+					<translation lang="de" trans="ExSync Ereignisschrumpfer..."/>
+					<translation lang="fr" trans="ExSync ratatineur d'événements..."/>
+					<translation lang="sv" trans="ExSync händelsekrympare..."/>
+					<translation lang="tr" trans="ExSync olay küçültücüsü..."/>
+					<translation lang="cz" trans="ExSync - zmenšit událost..."/>
+					<translation lang="es" trans="ExSync encogedor de eventos..."/>
+				</item>				
+			</subdomain>
+			<subdomain name="tier_menu">
+				<item id="Tier">
+					<translation lang="en" trans="Tier"/>
+					<translation lang="de" trans="Spur"/>
+					<translation lang="fr" trans="Piste"/>
+					<translation lang="sv" trans="Spår"/>
+					<translation lang="tr" trans="Şerit"/>
+					<translation lang="cz" trans="Stopa"/>
+					<translation lang="es" trans="Capa"/>
+				</item>
+				<item id="Tier properties...">
+					<translation lang="en" trans="Tier properties..."/>
+					<translation lang="de" trans="Spureigenschaften..."/>
+					<translation lang="fr" trans="Propriétés de piste..."/>
+					<translation lang="sv" trans="Spårinställningar..."/>
+					<translation lang="tr" trans="Şerit özellikleri..."/>
+					<translation lang="cz" trans="Vlastnosti stopy..."/>
+					<translation lang="es" trans="Propiedades de capa..."/>
+				</item>
+				<!-- NEW -->
+				<item id="Edit tiers...">
+					<translation lang="en" trans="Edit tiers..."/>
+					<translation lang="de" trans="Spuren bearbeiten..."/>
+					<translation lang="fr" trans="Edition de pistes..."/>
+					<!--  TODO! -->
+					<!-- <translation lang="sv" trans="Edit tiers..."/>
+						<translation lang="tr" trans="Edit tiers..."/> -->
+					<translation lang="cz" trans="Editovat stopy..."/>
+					<translation lang="es" trans="Edición de capas..."/>
+				</item>								
+				<item id="Add tier...">
+					<translation lang="en" trans="Add tier..."/>
+					<translation lang="de" trans="Spur anfügen..."/>
+					<translation lang="fr" trans="Ajouter piste..."/>
+					<translation lang="sv" trans="Lägg till spår..."/>
+					<translation lang="tr" trans="Şerit ekle..."/>
+					<translation lang="cz" trans="Přidat stopu..."/>
+					<translation lang="es" trans="Añadir capa..."/>
+				</item>
+				<item id="Insert tier...">
+					<translation lang="en" trans="Insert tier..."/>
+					<translation lang="de" trans="Spur einfügen..."/>
+					<translation lang="fr" trans="Insérer piste..."/>
+					<translation lang="sv" trans="Infoga spår..."/>
+					<translation lang="tr" trans="Şerit ilave et..."/>
+					<translation lang="cz" trans="Vložit stopu..."/>
+					<translation lang="es" trans="Pegar capa..."/>
+				</item>
+				<item id="Remove tier...">
+					<translation lang="en" trans="Remove tier..."/>
+					<translation lang="de" trans="Spur entfernen..."/>
+					<translation lang="fr" trans="Effacer piste..."/>
+					<translation lang="sv" trans="Ta bort spår..."/>
+					<translation lang="tr" trans="Şeridi sil..."/>
+					<translation lang="cz" trans="Odstranit stopu..."/>
+					<translation lang="es" trans="Quitar capa..."/>
+				</item>
+				<item id="Move tier upwards">
+					<translation lang="en" trans="Move tier upwards"/>
+					<translation lang="de" trans="Spur nach oben verschieben"/>
+					<translation lang="fr" trans="Déplacer piste en haut"/>
+					<translation lang="sv" trans="Flytta spår uppåt"/>
+					<translation lang="tr" trans="Şeridi yukarı götür"/>
+					<translation lang="cz" trans="Posunout stopu nahoru"/>
+					<translation lang="es" trans="Desplazar capa hacia arriba"/>
+				</item>
+				<item id="Change tier order...">
+					<translation lang="en" trans="Change tier order..."/>
+					<translation lang="de" trans="Spurreihenfolge verändern..."/>
+					<translation lang="fr" trans="Changer l'ordre des pistes..."/>
+					<translation lang="sv" trans="Ändra spårordning..."/>
+					<translation lang="tr" trans="Şeritlerin sıralarını değiştir..."/>
+					<translation lang="cz" trans="Změnit pořadí stop..."/>
+					<translation lang="es" trans="Cambiar orden de capas..."/>
+				</item>
+				<item id="Hide tier">
+					<translation lang="en" trans="Hide tier"/>
+					<translation lang="de" trans="Spur ausblenden"/>
+					<translation lang="fr" trans="Cacher piste"/>
+					<translation lang="sv" trans="Göm spår"/>
+					<translation lang="tr" trans="Şeridi gizle"/>
+					<translation lang="cz" trans="Skrýt stopu"/>
+					<translation lang="es" trans="Esconder capa"/>
+				</item>
+				<item id="Show all tiers">
+					<translation lang="en" trans="Show all tiers"/>
+					<translation lang="de" trans="Alle Spuren einblenden"/>
+					<translation lang="fr" trans="Montrer toutes les pistes"/>
+					<translation lang="sv" trans="Visa alla spår"/>
+					<translation lang="tr" trans="Bütün şeritleri göster"/>
+					<translation lang="cz" trans="Zobrazit všechny stopy"/>
+					<translation lang="es" trans="Mostrar todas las capas"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="event_menu">
+				<item id="Event">
+					<translation lang="en" trans="Event"/>
+					<translation lang="de" trans="Ereignis"/>
+					<translation lang="fr" trans="Événement"/>
+					<translation lang="sv" trans="Händelse"/>
+					<translation lang="tr" trans="Olay"/>
+					<translation lang="cz" trans="Událost"/>
+					<translation lang="es" trans="Evento"/>
+				</item>
+				<item id="Event properties...">
+					<translation lang="en" trans="Event properties..."/>
+					<translation lang="de" trans="Ereigniseigenschaften..."/>
+					<translation lang="fr" trans="Propriétés d'événement..."/>
+					<translation lang="sv" trans="Inställningar för händelser..."/>
+					<translation lang="tr" trans="Olay özellikleri..."/>
+					<translation lang="cz" trans="Vlastnosti události..."/>
+					<translation lang="es" trans="Propriedades de eventos..."/>
+				</item>
+				<item id="Shift characters to the right">
+					<translation lang="en" trans="Shift characters to the right"/>
+					<translation lang="de" trans="Zeichen nach rechts verschieben"/>
+					<translation lang="fr" trans="Déplacer symbols à droite"/>
+					<translation lang="sv" trans="Flytta tecken åt höger"/>
+					<translation lang="tr" trans="Karakterleri sağa kaydır"/>
+					<translation lang="cz" trans="Posunout znaky doprava"/>
+					<translation lang="es" trans="Desplazar símbolos hacia derecha"/>
+				</item>
+				<item id="Shift characters to the left">
+					<translation lang="en" trans="Shift characters to the left"/>
+					<translation lang="de" trans="Zeichen nach links verschieben"/>
+					<translation lang="fr" trans="Déplacer symbols à gauche"/>
+					<translation lang="sv" trans="Flytta tecken åt vänster"/>
+					<translation lang="tr" trans="Karakterleri sola kaydır"/>
+					<translation lang="cz" trans="Posunout znaky doleva"/>
+					<translation lang="es" trans="Desplazar símbolos hacia izquierda"/>
+				</item>
+				<item id="Merge">
+					<translation lang="en" trans="Merge"/>
+					<translation lang="de" trans="Verbinden"/>
+					<translation lang="fr" trans="Joindre"/>
+					<translation lang="sv" trans="Förena"/>
+					<translation lang="tr" trans="Birleştir"/>
+					<translation lang="cz" trans="Sloučit"/>
+					<translation lang="es" trans="Unir"/>
+				</item>
+				<item id="Split">
+					<translation lang="en" trans="Split"/>
+					<translation lang="de" trans="Teilen"/>
+					<translation lang="fr" trans="Partager"/>
+					<translation lang="sv" trans="Dela"/>
+					<translation lang="tr" trans="Böl"/>
+					<translation lang="cz" trans="Rozdělit"/>
+					<translation lang="es" trans="Dividir"/>
+				</item>
+				<item id="Double split">
+					<translation lang="en" trans="Double split"/>
+					<translation lang="de" trans="Zweifach teilen"/>
+					<translation lang="fr" trans="Partager deux fois"/>
+					<translation lang="sv" trans="Dela två gånger"/>
+					<translation lang="tr" trans="İki defa böl"/>
+					<translation lang="cz" trans="Rozdělit dvakrát"/>
+					<translation lang="es" trans="Dividir dos veces"/>
+				</item>
+				<item id="Extend to the right">
+					<translation lang="en" trans="Extend to the right"/>
+					<translation lang="de" trans="Nach rechts ausdehnen"/>
+					<translation lang="fr" trans="Étendre à droite"/>
+					<translation lang="sv" trans="Utvidga åt höger"/>
+					<translation lang="tr" trans="Sağa uzat"/>
+					<translation lang="cz" trans="Roztáhnout doprava"/>
+					<translation lang="es" trans="Extender hacia derecho"/>
+				</item>
+				<item id="Extend to the left">
+					<translation lang="en" trans="Extend to the left"/>
+					<translation lang="de" trans="Nach links ausdehnen"/>
+					<translation lang="fr" trans="Étendre à gauche"/>
+					<translation lang="sv" trans="Utvidga åt vänster"/>
+					<translation lang="tr" trans="Sola uzat"/>
+					<translation lang="cz" trans="Roztáhnout doleva"/>
+					<translation lang="es" trans="Extender hacia izquierda"/>
+				</item>
+				<item id="Shrink on the right">
+					<translation lang="en" trans="Shrink on the right"/>
+					<translation lang="de" trans="Von rechts kürzen"/>
+					<translation lang="fr" trans="Diminuer à droite"/>
+					<translation lang="sv" trans="Förkorta från höger"/>
+					<translation lang="tr" trans="Sağdan küçült"/>
+					<translation lang="cz" trans="Stáhnout zprava"/>
+					<translation lang="es" trans="Cortar a la derecha"/>
+				</item>
+				<item id="Shrink on the left">
+					<translation lang="en" trans="Shrink on the left"/>
+					<translation lang="de" trans="Von links kürzen"/>
+					<translation lang="fr" trans="Diminuer à gauche"/>
+					<translation lang="sv" trans="Förkorta från vänster"/>
+					<translation lang="tr" trans="Soldan küçült"/>
+					<translation lang="cz" trans="Stáhnout zleva"/>
+					<translation lang="es" trans="Cortar a la izquierda"/>
+				</item>
+				<item id="Move to the right">
+					<translation lang="en" trans="Move to the right"/>
+					<translation lang="de" trans="Nach rechts verschieben"/>
+					<translation lang="fr" trans="Déplacer à droite"/>
+					<translation lang="sv" trans="Flytta åt höger "/>
+					<translation lang="tr" trans="Sağa kaydir"/>
+					<translation lang="cz" trans="Posunout doprava"/>
+					<translation lang="es" trans="Desplazar hacia derecha"/>
+				</item>
+				<item id="Move to the left">
+					<translation lang="en" trans="Move to the left"/>
+					<translation lang="de" trans="Nach links verschieben"/>
+					<translation lang="fr" trans="Déplacer à gauche"/>
+					<translation lang="sv" trans="Flytta åt vänster"/>
+					<translation lang="tr" trans="Sola kaydır"/>
+					<translation lang="cz" trans="Posunout doleva"/>
+					<translation lang="es" trans="Desplazar hacia izquierda"/>
+				</item>
+				<item id="Find next event">
+					<translation lang="en" trans="Find next event"/>
+					<translation lang="de" trans="Nächstes Ereignis finden"/>
+					<translation lang="fr" trans="Trouver prochain événement"/>
+					<!-- TODO! -->
+					<!-- <translation lang="sv" trans=""/>
+					<translation lang="tr" trans=""/> -->
+					<translation lang="cz" trans="Najít další událost"/>
+					<translation lang="es" trans="Encontrar nuevos eventos"/> 
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="timeline_menu">
+				<item id="Timeline">
+					<translation lang="en" trans="Timeline"/>
+					<translation lang="de" trans="Zeitachse"/>
+					<translation lang="fr" trans="Axe de temps"/>
+					<translation lang="sv" trans="Tidslinje"/>
+					<translation lang="tr" trans="Zaman şeridi"/>
+					<translation lang="cz" trans="Časová osa"/>
+					<translation lang="es" trans="Eje temporal"/>
+				</item>
+				<item id="Edit timeline item...">
+					<translation lang="en" trans="Edit timeline item..."/>
+					<translation lang="de" trans="Zeitpunkt bearbeiten..."/>
+					<translation lang="fr" trans="Édition point du temps..."/>
+					<translation lang="sv" trans="Redigera tidpunkt..."/>
+					<translation lang="tr" trans="Zamanı düzenle..."/>
+					<translation lang="cz" trans="Upravit časový bod..."/>
+					<translation lang="es" trans="Edición punto temporal..."/>
+				</item>
+				<item id="Insert timeline item">
+					<translation lang="en" trans="Insert timeline item"/>
+					<translation lang="de" trans="Zeitpunkt einfügen"/>
+					<translation lang="fr" trans="Insérer point du temps"/>
+					<translation lang="sv" trans="Infoga tidpunkt"/>
+					<translation lang="tr" trans="Zaman ekle"/>
+					<translation lang="cz" trans="Vložit časový bod"/>
+					<translation lang="es" trans="Pegar punto temporal"/>
+				</item>
+				<item id="Remove gap">
+					<translation lang="en" trans="Remove gap"/>
+					<translation lang="de" trans="Lücke entfernen"/>
+					<translation lang="fr" trans="Éffacer lacune"/>
+					<translation lang="sv" trans="Ta bort lucka"/>
+					<translation lang="tr" trans="Boşluğu sil"/>
+					<translation lang="cz" trans="Odstranit mezeru"/>
+					<translation lang="es" trans="Quitar vacío"/>
+				</item>
+				<item id="Remove all gaps">
+					<translation lang="en" trans="Remove all gaps"/>
+					<translation lang="de" trans="Alle Lücken entfernen"/>
+					<translation lang="fr" trans="Éffacer toutes les lacunes"/>
+					<translation lang="sv" trans="Ta bort alla luckor"/>
+					<translation lang="tr" trans="Bütün boşlukları sil"/>
+					<translation lang="cz" trans="Odstranit všechny mezery"/>
+					<translation lang="es" trans="Quitar todos los vacíos"/>
+				</item>
+				<item id="Remove unused timeline items">
+					<translation lang="en" trans="Remove unused timeline items"/>
+					<translation lang="de" trans="Unbenutzte Zeitpunkte entfernen"/>
+					<translation lang="fr" trans="Éffacer points du temps non utilisés"/>
+					<translation lang="sv" trans="Ta bort oanvända tidpunkter"/>
+					<translation lang="tr" trans="Kullanılmayan zamanları sil"/>
+					<translation lang="cz" trans="Odstranit všechny nepoužité časové body"/>
+					<translation lang="es" trans="Quitar puntos temporales no utilizados"/>
+				</item>
+				<item id="Make timeline consistent">
+					<translation lang="en" trans="Make timeline consistent"/>
+					<translation lang="de" trans="Zeitachse konsistent machen"/>
+					<translation lang="fr" trans="Rendre axe de temps consistant"/>
+					<translation lang="sv" trans="Gör tidslinjen konsistent"/>
+					<translation lang="tr" trans="Zaman şeridini sağlamlaştır"/>
+					<translation lang="cz" trans="Ustálit časovou osu"/>
+					<translation lang="es" trans="Hacer eje temporal consistente"/>
+				</item>
+				<!-- NEW -->
+				<item id="Smooth timeline...">
+					<translation lang="en" trans="Smooth timeline..."/>
+					<translation lang="de" trans="Zeitachse glätten..."/>
+					<translation lang="fr" trans="Défroisser axe de temps..."/>
+					<!-- <translation lang="sv" trans="Gör tidslinjen konsistent"/>
+					<translation lang="tr" trans="Zaman şeridini sağlamlaştır"/>
+					<translation lang="cz" trans="Ustálit časovou osu"/>
+					<translation lang="es" trans="Hacer eje temporal consistente"/> -->
+				</item>
+				<item id="Anchor timeline">
+					<translation lang="en" trans="Anchor timeline"/>
+					<translation lang="de" trans="Zeitachse verankern"/>
+					<translation lang="fr" trans="Ancrer axe de temps"/>
+					<!-- <translation lang="sv" trans="Gör tidslinjen konsistent"/>
+					<translation lang="tr" trans="Zaman şeridini sağlamlaştır"/>
+					<translation lang="cz" trans="Ustálit časovou osu"/>
+					<translation lang="es" trans="Hacer eje temporal consistente"/> -->
+				</item>
+				<item id="Interpolate timeline...">
+					<translation lang="en" trans="Interpolate timeline..."/>
+					<translation lang="de" trans="Zeitachse interpolieren..."/>
+					<translation lang="fr" trans="Interpoler axe de temps..."/>
+					<translation lang="sv" trans="Interpolera tidslinjen..."/>
+					<translation lang="tr" trans="Zaman şeridini enterpolare et..."/>
+					<translation lang="cz" trans="Vložit časovou osu..."/>
+					<translation lang="es" trans="Interpolar eje temporal..."/>
+				</item>
+				<item id="Confirm timeline item(s)">
+					<translation lang="en" trans="Confirm timeline item(s)"/>
+					<translation lang="de" trans="Zeitpunkt(e) bestätigen"/>
+					<translation lang="fr" trans="Confirmer point(s) du temps"/>
+				</item>
+				<item id="Remove interpolated times">
+					<translation lang="en" trans="Remove interpolated times"/>
+					<translation lang="de" trans="Interpolierte Zeiten entfernen"/>
+					<translation lang="fr" trans="Éffacer unité de temps interpolées"/>
+					<translation lang="sv" trans="Ta bort interpolerade tidpunkter"/>
+					<translation lang="tr" trans="Enterpolasyon zamanını sil"/>
+					<translation lang="cz" trans="Odstranit vložené časy"/>
+					<translation lang="es" trans="Quitar tiempos interpolados"/>
+				</item>
+				<!-- NEW -->
+				<item id="Shift absolute times...">
+					<translation lang="en" trans="Shift absolute times..."/>
+					<translation lang="de" trans="Absolute Zeitwerte verschieben..."/>
+					<translation lang="fr" trans="Remettre temps absolus..."/>
+					<!-- TODO! -->
+					<!-- <translation lang="sv" trans=""/>
+					<translation lang="tr" trans=""/> -->
+					<translation lang="cz" trans="Posunout absolutní časy..."/>
+					<translation lang="es" trans="Desplazar tiempos abolutos..."/>
+				</item>				
+				<!-- NEW -->
+				<item id="Fine tuning mode">
+					<translation lang="en" trans="Fine tuning mode"/>
+					<translation lang="de" trans="Feinjustiermodus"/>
+					<translation lang="fr" trans="Mode d'ajustement fin"/>
+					<!-- TODO! -->
+					<!-- <translation lang="sv" trans="Synch fine tuning mode"/>
+					<translation lang="tr" trans="Synch fine tuning mode"/> -->
+					<translation lang="cz" trans="Modus jemného nastavení"/>
+					<translation lang="es" trans="Modo de ajuste fino"/>
+				</item>
+				<item id="Add bookmark...">
+					<translation lang="en" trans="Add bookmark..."/>
+					<translation lang="de" trans="Lesezeichen hinzufügen..."/>
+					<translation lang="fr" trans="Ajouter marque-page..."/>
+					<translation lang="sv" trans="Lägg till bokmärke..."/>
+					<translation lang="tr" trans="Sık kullanılanlara ekle..."/>
+					<translation lang="cz" trans="Přidat záložku..."/>
+					<translation lang="es" trans="Añadir marcador..."/>
+				</item>
+				<item id="Bookmarks...">
+					<translation lang="en" trans="Bookmarks..."/>
+					<translation lang="de" trans="Lesezeichen..."/>
+					<translation lang="fr" trans="Marque-page..."/>
+					<translation lang="sv" trans="Bokmärken..."/>
+					<translation lang="tr" trans="Sık kullanılanlar..."/>
+					<translation lang="cz" trans="Záložky..."/>
+					<translation lang="es" trans="Marcadores..."/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="format_menu">
+				<item id="Format">
+					<translation lang="en" trans="Format"/>
+					<translation lang="de" trans="Format"/>
+					<translation lang="fr" trans="Format"/>
+					<translation lang="sv" trans="Format"/>
+					<translation lang="tr" trans="Biçim"/>
+					<translation lang="cz" trans="Formát"/>
+					<translation lang="es" trans="Formato"/>
+				</item>
+				<item id="Apply stylesheet">
+					<translation lang="en" trans="Apply stylesheet"/>
+					<translation lang="de" trans="Stylesheet anwenden"/>
+					<translation lang="fr" trans="Appliquer stylesheet"/>
+					<translation lang="sv" trans="Använd formatmall"/>
+					<translation lang="tr" trans="Stylesheeti kullan"/>
+					<translation lang="cz" trans="Aplikovat styl"/>
+					<translation lang="es" trans="Aplicar stylesheet"/>
+				</item>
+				<item id="Open format table...">
+					<translation lang="en" trans="Open format table..."/>
+					<translation lang="de" trans="Formatierungstabelle öffnen..."/>
+					<translation lang="fr" trans="Ouvrir table de formats..."/>
+					<translation lang="sv" trans="Öppna formatmall..."/>
+					<translation lang="tr" trans="Biçim tablosunu aç..."/>
+					<translation lang="cz" trans="Otevřít formát tabulky..."/>
+					<translation lang="es" trans="Abrir tabla de formatos..."/>
+				</item>
+				<item id="Save format table as...">
+					<translation lang="en" trans="Save format table as..."/>
+					<translation lang="de" trans="Formatierungstabelle speichern unter..."/>
+					<translation lang="fr" trans="Enregistrer table de formats sous..."/>
+				</item>
+				<item id="Save formats">
+					<translation lang="en" trans="Save formats"/>
+					<translation lang="de" trans="Formatierungen mitspeichern"/>
+					<translation lang="fr" trans="Enregistrer les formats"/>
+					<translation lang="sv" trans="Spara formatmall"/>
+					<translation lang="tr" trans="Biçim tablosunu kaydet"/>
+					<translation lang="cz" trans="Uložit formát tabulky"/>
+					<translation lang="es" trans="Guardar formatos"/>
+				</item>
+				<item id="Edit format table...">
+					<translation lang="en" trans="Edit format table..."/>
+					<translation lang="de" trans="Formatierungstabelle bearbeiten..."/>
+					<translation lang="fr" trans="Édition table de formats..."/>
+					<translation lang="sv" trans="Redigera formatmall..."/>
+					<translation lang="tr" trans="Biçim tablosunu düzenle..."/>
+					<translation lang="cz" trans="Upravit formát tabulky..."/>
+					<translation lang="es" trans="Edición tabla de formatos..."/>
+				</item>
+				<item id="Format tier...">
+					<translation lang="en" trans="Format tier..."/>
+					<translation lang="de" trans="Spur formatieren..."/>
+					<translation lang="fr" trans="Formater piste..."/>
+					<translation lang="sv" trans="Formatera spår..."/>
+					<translation lang="tr" trans="Şeridi biçimle..."/>
+					<translation lang="cz" trans="Formát stopy..."/>
+					<translation lang="es" trans="Formatear capas..."/>
+				</item>
+				<item id="Format tier labels...">
+					<translation lang="en" trans="Format tier labels..."/>
+					<translation lang="de" trans="Spurbeschriftung formatieren..."/>
+					<translation lang="fr" trans="Formater étiquetage de piste..."/>
+					<translation lang="sv" trans="Formatera spårbeskrivningar..."/>
+					<translation lang="tr" trans="Şerit yazısını biçimlendir..."/>
+					<translation lang="cz" trans="Formát značek stopy..."/>
+					<translation lang="es" trans="Formatear etiquetado de capas..."/>
+				</item>
+				<item id="Format timeline...">
+					<translation lang="en" trans="Format timeline..."/>
+					<translation lang="de" trans="Zeitachse formatieren..."/>
+					<translation lang="fr" trans="Formater axe de temps..."/>
+					<translation lang="sv" trans="Formatera tidslinje..."/>
+					<translation lang="tr" trans="Zaman şeridini biçimlendir..."/>
+					<translation lang="cz" trans="Formát časové osy..."/>
+					<translation lang="es" trans="Formatear eje temporal..."/>
+				</item>
+				<item id="Format timeline items...">
+					<translation lang="en" trans="Format timeline items..."/>
+					<translation lang="de" trans="Zeitpunkte formatieren..."/>
+					<translation lang="fr" trans="Formater points du temps..."/>
+					<translation lang="sv" trans="Formatera tidpunkt..."/>
+					<translation lang="tr" trans="Zamanı biçimlendir..."/>
+					<translation lang="cz" trans="Formát časových bodů..."/>
+					<translation lang="es" trans="Formatear puntos temporales..."/>
+				</item>
+				<item id="Set frame end">
+					<translation lang="en" trans="Set frame end"/>
+					<translation lang="de" trans="Rahmenende festlegen"/>
+					<translation lang="fr" trans="Fixer limitation de cadre"/>
+					<translation lang="sv" trans="Bestäm ramgränsen"/>
+					<translation lang="tr" trans="Çerçeve sonunu sabitleştir"/>
+					<translation lang="cz" trans="Nastavit konec ohraničení"/>
+					<translation lang="es" trans="Fijar limites del cuadro"/>
+				</item>
+				<item id="Reformat">
+					<translation lang="en" trans="Reformat"/>
+					<translation lang="de" trans="Erneut formatieren"/>
+					<translation lang="fr" trans="Reformater"/>
+					<translation lang="sv" trans="Upprepa formatera"/>
+					<translation lang="tr" trans="Yeniden biçimlendir"/>
+					<translation lang="cz" trans="Přeformátovat"/>
+					<translation lang="es" trans="Reformatear"/>
+				</item>
+				<!-- NEW -->
+				<item id="Underline">
+					<translation lang="en" trans="Underline"/>
+					<translation lang="de" trans="Unterstreichen"/>
+					<translation lang="fr" trans="Souligner"/>
+					<!-- TODO! -->
+					<!-- <translation lang="sv" trans=""/>
+					<translation lang="tr" trans=""/> -->
+					<translation lang="cz" trans="Podtrhnout"/>
+					<translation lang="es" trans="Subrayar"/>
+				</item>				
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="help_menu">
+				<item id="Help">
+					<translation lang="en" trans="Help"/>
+					<translation lang="de" trans="Hilfe"/>
+					<translation lang="fr" trans="Aide"/>
+					<translation lang="sv" trans="Hjälp"/>
+					<translation lang="tr" trans="Yardım"/>
+					<translation lang="cz" trans="Nápověda"/>
+					<translation lang="es" trans="Ayuda"/>
+				</item>
+				<item id="EXMARaLDA on the web">
+					<translation lang="en" trans="EXMARaLDA on the web"/>
+					<translation lang="de" trans="EXMARaLDA im Internet"/>
+					<translation lang="fr" trans="EXMARaLDA sur le Web"/>
+					<translation lang="sv" trans="EXMARalDA på nätet"/>
+					<translation lang="tr" trans="Web'de EXMARaLDA"/>
+					<translation lang="cz" trans="EXMARaLDA na webu"/>
+					<translation lang="es" trans="EXMARalDA en el web"/>
+				</item>
+				<item id="About...">
+					<translation lang="en" trans="About..."/>
+					<translation lang="de" trans="Über..."/>
+					<translation lang="fr" trans="À propos..."/>
+					<translation lang="sv" trans="Om EXMARaLDA..."/>
+					<translation lang="tr" trans="EXMARaLDA Hakkında..."/>
+					<translation lang="cz" trans="O programu..."/>
+					<translation lang="es" trans="Sobre..."/>
+				</item>
+				<!-- NEW -->
+				<item id="Check version...">
+					<translation lang="en" trans="Check version..."/>
+					<translation lang="de" trans="Version prüfen..."/>
+					<translation lang="fr" trans="Vérifier version..."/>
+					<!-- TODO! -->
+					<!-- <translation lang="sv" trans="Check for update..."/>
+					<translation lang="tr" trans="Check for update..."/> -->
+					<translation lang="cz" trans="Zkontrolovat aktualizace..."/>
+					<translation lang="es" trans="Verificar versión..."/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="popup_menus">
+				<subdomain type="menu" name="table_popup_menu">
+					<item id="Tier properties">
+						<translation lang="en" trans="Tier properties"/>
+						<translation lang="de" trans="Spureigenschaften"/>
+						<translation lang="fr" trans="Propriétés de piste"/>
+						<translation lang="sv" trans="Spårinställningar"/>
+						<translation lang="tr" trans="Şerit özellikleri"/>
+						<translation lang="cz" trans="Vlastnosti stopy"/>
+						<translation lang="es" trans="Propiedades de capa"/>
+					</item>
+					<item id="Insert tier">
+						<translation lang="en" trans="Insert tier"/>
+						<translation lang="de" trans="Spur einfügen"/>
+						<translation lang="fr" trans="Insérer piste"/>
+						<translation lang="sv" trans="Infoga spår"/>
+						<translation lang="tr" trans="Şerit ekle"/>
+						<translation lang="cz" trans="Vložit stopu"/>
+						<translation lang="es" trans="Pegar capa"/>
+					</item>
+					<item id="Move tier up">
+						<translation lang="en" trans="Move tier up"/>
+						<translation lang="de" trans="Spur nach oben verschieben"/>
+						<translation lang="fr" trans="Déplacer piste en haut"/>
+						<translation lang="sv" trans="Flytta spår uppåt"/>
+						<translation lang="tr" trans="Şeridi yukarı kaldır"/>
+						<translation lang="cz" trans="Posunout stopu nahoru"/>
+						<translation lang="es" trans="Desplazar capa hacia arriba"/>
+					</item>
+					<item id="Tier format">
+						<translation lang="en" trans="Tier format"/>
+						<translation lang="de" trans="Spurformatierung"/>
+						<translation lang="fr" trans="Format de piste"/>
+						<translation lang="sv" trans="Spårformat"/>
+						<translation lang="tr" trans="Şerit biçimi"/>
+						<translation lang="cz" trans="Formát stopy"/>
+						<translation lang="es" trans="Formato de capa"/>
+					</item>
+				</subdomain>
+				<!-- ****************************************** -->
+				<subdomain type="menu" name="event_popup_menu">
+					<item id="Event properties">
+						<translation lang="en" trans="Event properties"/>
+						<translation lang="de" trans="Ereigniseigenschaften"/>
+						<translation lang="fr" trans="Propriétés d'événement"/>
+						<translation lang="sv" trans="Inställningar för händelser"/>
+						<translation lang="tr" trans="Olay özellikleri"/>
+						<translation lang="cz" trans="Vlastnosti události"/>
+						<translation lang="es" trans="Propiedades de evento"/>
+					</item>
+					<item id="Chars right">
+						<translation lang="en" trans="Chars right"/>
+						<translation lang="de" trans="Zeichen nach rechts"/>
+						<translation lang="fr" trans="Symboles à droite"/>
+						<translation lang="sv" trans="Tecken åt höger"/>
+						<translation lang="tr" trans="Karakterler sağa"/>
+						<translation lang="cz" trans="Znaky doprava"/>
+						<translation lang="es" trans="Símbolos hacia derecha"/>
+					</item>
+					<item id="Chars left">
+						<translation lang="en" trans="Chars left"/>
+						<translation lang="de" trans="Zeichen nach links"/>
+						<translation lang="fr" trans="Symboles à gauche"/>
+						<translation lang="sv" trans="Tecken åt vänster"/>
+						<translation lang="tr" trans="Karakterler sola"/>
+						<translation lang="cz" trans="Znaky doleva"/>
+						<translation lang="es" trans="Símbolos hacia izquierda"/>
+					</item>
+					<item id="Split">
+						<translation lang="en" trans="Split"/>
+						<translation lang="de" trans="Teilen"/>
+						<translation lang="fr" trans="Partager"/>
+						<translation lang="sv" trans="Dela"/>
+						<translation lang="tr" trans="Böl"/>
+						<translation lang="cz" trans="Rozdělit"/>
+						<translation lang="es" trans="Dividir"/>
+					</item>
+					<item id="Double split">
+						<translation lang="en" trans="Double split"/>
+						<translation lang="de" trans="Zweifach teilen"/>
+						<translation lang="fr" trans="Partager deux fois"/>
+						<translation lang="sv" trans="Dela två gånger"/>
+						<translation lang="tr" trans="İki defa böl"/>
+						<translation lang="cz" trans="Rozdělit dvakrát"/>
+						<translation lang="es" trans="Dividir dos veces"/>
+					</item>
+				</subdomain>
+			</subdomain>
+			<!-- ****************************************** -->
+		</subdomain>
+		<!-- ************************************************************************************* -->
+		<!-- *************************** END MENUS **************************************** -->
+		<!-- ************************************************************************************* -->
+		<subdomain name="panels">
+			<!-- ****************************************** -->
+			<subdomain name="link_panel">
+				<item id="Link medium">
+					<translation lang="en" trans="Link medium"/>
+					<translation lang="de" trans="Verknüpftes Medium"/>
+					<translation lang="fr" trans="Fichier relié"/>
+					<translation lang="tr" trans="Bağlanan araç"/>
+					<translation lang="cz" trans="Připojit médium"/>
+					<translation lang="es" trans="Medio enlazado"/>
+				</item>
+				<item id="Link URL">
+					<translation lang="en" trans="Link URL"/>
+					<translation lang="de" trans="URL-Adresse der Verknüpfung"/>
+					<translation lang="fr" trans="URL reliée"/>
+					<translation lang="tr" trans="Bağlantının URL-Adresi"/>
+					<translation lang="cz" trans="Připojit URL adresu"/>
+					<translation lang="es" trans="URL enlazado"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="audio_panel">
+				<item id="Start">
+					<translation lang="en" trans="Start"/>
+					<translation lang="de" trans="Start"/>
+					<translation lang="fr" trans="Marche"/>
+					<translation lang="tr" trans="Başlat"/>
+					<translation lang="cz" trans="Start"/>
+					<translation lang="es" trans="Inicio"/>
+				</item>
+				<item id="Start time">
+					<translation lang="en" trans="Start time"/>
+					<translation lang="de" trans="Beginn"/>
+					<translation lang="fr" trans="Début"/>
+					<translation lang="tr" trans="Başlangıç"/>
+					<translation lang="cz" trans="Počátek"/>
+					<translation lang="es" trans="Tiempo de inicio"/>
+				</item>
+				<item id="Position">
+					<translation lang="en" trans="Position"/>
+					<translation lang="de" trans="Position"/>
+					<translation lang="fr" trans="Position"/>
+					<translation lang="tr" trans="Pozisyon"/>
+					<translation lang="cz" trans="Pozice"/>
+					<translation lang="es" trans="Posición"/>
+				</item>
+				<item id="Stop">
+					<translation lang="en" trans="Stop"/>
+					<translation lang="de" trans="Stopp"/>
+					<translation lang="fr" trans="Arrêt"/>
+					<translation lang="tr" trans="Durdur"/>
+					<translation lang="cz" trans="Stop"/>
+					<translation lang="es" trans="Detención"/>
+				</item>
+				<item id="Minimize">
+					<translation lang="en" trans="Minimize"/>
+					<translation lang="de" trans="Minimieren"/>
+					<translation lang="fr" trans="Réduire"/>
+					<translation lang="tr" trans="Simge durumuna küçült"/>
+					<translation lang="cz" trans="Minimalizovat"/>
+					<translation lang="es" trans="Minimizar"/>
+				</item>
+				<item id="Audio/Video file opened successfully">
+					<translation lang="en" trans="Audio/Video file opened successfully"/>
+					<translation lang="de" trans="Audio-/Video-Datei erfolgreich geöffnet"/>
+					<translation lang="fr" trans="Fichier audio/video ouvert avec succès"/>
+					<translation lang="tr" trans="Audio-/Video dosyası açıldı"/>
+					<translation lang="cz" trans="Audio/Video soubor úspěšně otevřen"/>
+					<translation lang="es" trans="Archivo audio/video abierto con éxito"/>
+				</item>
+				<item id="Playback started">
+					<translation lang="en" trans="Playback started"/>
+					<translation lang="de" trans="Wiedergabe gestartet"/>
+					<translation lang="fr" trans="Démarrer l'enregistrement"/>
+					<translation lang="tr" trans="Playback başladı"/>
+					<translation lang="cz" trans="Přehrávání spuštěno"/>
+					<translation lang="es" trans="Playback iniciado"/>
+				</item>
+				<item id="Playback halted">
+					<translation lang="en" trans="Playback halted"/>
+					<translation lang="de" trans="Wiedergabe angehalten"/>
+					<translation lang="fr" trans="Pauser l'enregistrement"/>
+					<translation lang="tr" trans="Playback durdu"/>
+					<translation lang="cz" trans="Přehrávání pozastaveno"/>
+					<translation lang="es" trans="Playback parado"/>
+				</item>
+				<item id="Playback stopped">
+					<translation lang="en" trans="Playback stopped"/>
+					<translation lang="de" trans="Wiedergabe beendet"/>
+					<translation lang="fr" trans="Arrêter l'enregistrement"/>
+					<translation lang="tr" trans="Playback bitti"/>
+					<translation lang="cz" trans="Přehrávání zastaveno"/>
+					<translation lang="es" trans="Playback terminado"/>
+				</item>
+				<item id="Start time changed">
+					<translation lang="en" trans="Start time changed"/>
+					<translation lang="de" trans="Startzeit verändert"/>
+					<translation lang="fr" trans="Début changé"/>
+					<translation lang="tr" trans="Başlangıç zamanı değişti"/>
+					<translation lang="cz" trans="Počáteční čas změněn"/>
+					<translation lang="es" trans="Tiempo inicial cambiado"/>
+				</item>
+				<item id="End time changed">
+					<translation lang="en" trans="End time changed"/>
+					<translation lang="de" trans="Stoppzeit verändert"/>
+					<translation lang="fr" trans="Temps d'arrêt changé"/>
+					<translation lang="tr" trans="Bitiş zamanı değişti"/>
+					<translation lang="cz" trans="Koncový čas změněn"/>
+					<translation lang="es" trans="Tiempo final cambiado"/>
+				</item>
+				<item id="Save snapshot">
+					<translation lang="en" trans="Save snapshot"/>
+					<translation lang="de" trans="Standbild speichern"/>
+					<translation lang="fr" trans="Enrégistrer image fixe"/>
+					<translation lang="tr" trans="Enstantane fotoğrafı kaydet"/>
+					<translation lang="cz" trans="Uložit snímek"/>
+					<translation lang="es" trans="Guardar imagen congelado"/>
+				</item>
+				<item id="Link to transcription">
+					<translation lang="en" trans="Link to transcription"/>
+					<translation lang="de" trans="Mit Transkription verknüpfen"/>
+					<translation lang="fr" trans="Reliage a la transcription"/>
+					<translation lang="tr" trans="Transkripsyonla bağla"/>
+					<translation lang="cz" trans="Připojit k transkripci"/>
+					<translation lang="es" trans="Enlace a transcripción"/>
+				</item>
+				<item id="Save snippet">
+					<translation lang="en" trans="Save snippet"/>
+					<translation lang="de" trans="Audio-Schnipsel speichern"/>
+					<translation lang="fr" trans="Enrégistrer rognure audio"/>
+					<translation lang="tr" trans="Audio kırpıntısını kaydet"/>
+					<translation lang="cz" trans="Uložit úryvek"/>
+					<translation lang="es" trans="Guardar recorte audio"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="praat_panel">
+				<item id="Start Praat">
+					<translation lang="en" trans="Start Praat"/>
+					<translation lang="de" trans="Praat starten"/>
+					<translation lang="fr" trans="Démarrer Praat"/>
+					<translation lang="tr" trans="Praat başlat"/>
+					<translation lang="cz" trans="Spustit Praat"/>
+					<translation lang="es" trans="Iniciar Praat"/>
+				</item>
+				<item id="Starting Praat">
+					<translation lang="en" trans="Starting Praat"/>
+					<translation lang="de" trans="Praat wird gestartet"/>
+					<translation lang="fr" trans="Praat en train de démarrer"/>
+					<translation lang="tr" trans="Praat başlatılıyor"/>
+					<translation lang="cz" trans="Spouštění Praatu"/>
+					<translation lang="es" trans="Iniciando Praat"/>
+					
+				</item>
+				<item id="Choose an audio file">
+					<translation lang="en" trans="Choose an audio file"/>
+					<translation lang="de" trans="Audio-Datei auswählen"/>
+					<translation lang="fr" trans="Choisir ficher audio"/>
+					<translation lang="tr" trans="Audio dosyasını seç"/>
+					<translation lang="cz" trans="Zvolit audiosoubor"/>
+					<translation lang="es" trans="Seleccionar archivo audio"/>
+				</item>
+				<item id="(Re)load">
+					<translation lang="en" trans="(Re)load"/>
+					<translation lang="de" trans="(Erneutes) Laden"/>
+					<translation lang="fr" trans="(Re)charger"/>
+					<translation lang="tr" trans="(Yeniden) yükle"/>
+					<translation lang="cz" trans="Načíst"/>
+					<translation lang="es" trans="(Des)cargar"/>
+				</item>
+				<item id="Set">
+					<translation lang="en" trans="Set"/>
+					<translation lang="de" trans="Übertragen"/>
+					<translation lang="fr" trans="Transférer"/>
+					<translation lang="tr" trans="Aktar"/>
+					<translation lang="cz" trans="Převést"/>
+					<translation lang="es" trans="Trasmitir"/>
+									</item>
+				<item id="Get">
+					<translation lang="en" trans="Get"/>
+					<translation lang="de" trans="Übernehmen"/>
+					<translation lang="fr" trans="Adopter"/>
+					<translation lang="tr" trans="Al"/>
+					<translation lang="cz" trans="Převzít"/>
+					<translation lang="es" trans="Asumir"/>
+				</item>
+				<item id="Synchronize with selection">
+					<translation lang="en" trans="Synchronize with selection"/>
+					<translation lang="de" trans="Mit Auswahl synchronisieren"/>
+					<translation lang="fr" trans="Synchronisation avec selection"/>
+					<translation lang="tr" trans="Seçilmiş olanla senkronize et"/>
+					<translation lang="cz" trans="Synchronizovat s výběrem"/>
+					<translation lang="es" trans="Sincronización con selección"/>
+				</item>
+			</subdomain>
+		</subdomain>
+		<!-- ************************************************************************************* -->
+		<!-- *************************** END PANELS  **************************************** -->
+		<!-- ************************************************************************************* -->
+		<subdomain name="large_dialogs">
+			<subdomain name="search_and_replace_dialogs">
+				<item id="Search in events">
+					<translation lang="en" trans="Search in events"/>
+					<translation lang="de" trans="In Ereignissen suchen"/>
+					<translation lang="fr" trans="Rechercher en événements"/>
+					<translation lang="tr" trans="Olayların içinde ara"/>
+					<translation lang="cz" trans="Hledat v událostech"/>
+					<translation lang="es" trans="Buscar en eventos"/>
+				</item>
+				<item id="Search string">
+					<translation lang="en" trans="Search string"/>
+					<translation lang="de" trans="Suchen nach"/>
+					<translation lang="fr" trans="Rechercher"/>
+					<translation lang="tr" trans="Dizgiyi ara"/>
+					<translation lang="cz" trans="Hledat řetězec"/>
+					<translation lang="es" trans="Buscar"/>
+				</item>
+				<item id="Search area">
+					<translation lang="en" trans="Search area"/>
+					<translation lang="de" trans="Suchbereich"/>
+					<translation lang="fr" trans="Domaine de recherche"/>
+					<translation lang="tr" trans="Arama alanı"/>
+					<translation lang="cz" trans="Hledat oblast"/>
+					<translation lang="es" trans="Area de búsqueda"/>
+				</item>
+				<item id="Select tiers">
+					<translation lang="en" trans="Select tiers"/>
+					<translation lang="de" trans="Spuren auswählen"/>
+					<translation lang="fr" trans="Choisir pistes"/>
+					<translation lang="tr" trans="Şeritler seç"/>
+					<translation lang="cz" trans="Vybrat stopy"/>
+					<translation lang="es" trans="Seleccionar capas"/>
+				</item>
+				<item id="Unselected tiers">
+					<translation lang="en" trans="Unselected tiers"/>
+					<translation lang="de" trans="Nicht zu durchsuchende Spuren"/>
+					<translation lang="fr" trans="Pistes non choisies"/>
+					<translation lang="tr" trans="Aranacak şeritler"/>
+					<translation lang="cz" trans="Nevybrané stopy"/>
+					<translation lang="es" trans="Capas no seleccionadas"/>
+				</item>
+				<item id="Selected tiers">
+					<translation lang="en" trans="Selected tiers"/>
+					<translation lang="de" trans="Zu durchsuchende Spuren "/>
+					<translation lang="fr" trans="Pistes choisies"/>
+					<translation lang="tr" trans="Aranmayacak şeritler"/>
+					<translation lang="cz" trans="Vybrané stopy"/>
+					<translation lang="es" trans="Capas seleccionadas"/>
+				</item>
+				<item id="Case sensitive search">
+					<translation lang="en" trans="Case sensitive search"/>
+					<translation lang="de" trans="Groß-/Kleinschreibung beachten"/>
+					<translation lang="fr" trans="Respecter la casse"/>
+					<translation lang="tr" trans="Büyük küçük harfe duyarlı ara"/>
+					<translation lang="cz" trans="Hledat s rozlišením velká/malá písmena"/>
+					<translation lang="es" trans="Búsqueda con distincción entre mayúscula y minúscula"/>
+				</item>
+				<item id="Search">
+					<translation lang="en" trans="Search"/>
+					<translation lang="de" trans="Suchen"/>
+					<translation lang="fr" trans="Rechercher"/>
+					<translation lang="tr" trans="Ara"/>
+					<translation lang="cz" trans="Hledat"/>
+					<translation lang="es" trans="Buscar"/>
+				</item>
+				<item id="Result">
+					<translation lang="en" trans="Result"/>
+					<translation lang="de" trans="Suchergebnis"/>
+					<translation lang="fr" trans="Résultat"/>
+					<translation lang="tr" trans="Sonuç"/>
+					<translation lang="cz" trans="Výsledek"/>
+					<translation lang="es" trans="Resultatdo"/>
+				</item>
+				<item id="Go to">
+					<translation lang="en" trans="Go to"/>
+					<translation lang="de" trans="Gehe zu"/>
+					<translation lang="fr" trans="Aller à"/>
+					<!-- <translation lang="tr" trans="Gehe zu"/> -->
+					<translation lang="cz" trans="Přejít na"/>
+					<translation lang="es" trans="Ir a"/>
+				</item>
+				<item id="Close">
+					<translation lang="en" trans="Close"/>
+					<translation lang="de" trans="Schließen"/>
+					<translation lang="fr" trans="Fermer"/>
+					<translation lang="tr" trans="Kapat"/>
+					<translation lang="cz" trans="Zavřít"/>
+					<translation lang="es" trans="Cerrar"/>
+				</item>
+				<item id="Replace in events">
+					<translation lang="en" trans="Replace in events"/>
+					<translation lang="de" trans="In Ereignissen ersetzen"/>
+					<translation lang="fr" trans="Remplacer en événements"/>
+					<translation lang="tr" trans="Olayların içinde değiştir"/>
+					<translation lang="cz" trans="Nahradit v událostech"/>
+					<translation lang="es" trans="Substituir en eventos"/>
+				</item>
+				<item id="Replace string">
+					<translation lang="en" trans="Replace string"/>
+					<translation lang="de" trans="Ersetzen durch"/>
+					<translation lang="fr" trans="Remplacer par"/>
+					<translation lang="tr" trans="Dizgiyi değiştir"/>
+					<translation lang="cz" trans="Nahradit řetězec"/>
+					<translation lang="es" trans="Substituir por"/>
+				</item>
+				<item id="Replace">
+					<translation lang="en" trans="Replace"/>
+					<translation lang="de" trans="Ersetzen"/>
+					<translation lang="fr" trans="Remplacer"/>
+					<translation lang="tr" trans="Değiştir"/>
+					<translation lang="cz" trans="Nahradit"/>
+					<translation lang="es" trans="Substituir"/>
+				</item>
+				<item id="Replace all">
+					<translation lang="en" trans="Replace all"/>
+					<translation lang="de" trans="Alle ersetzen"/>
+					<translation lang="fr" trans="Replacer tous"/>
+					<translation lang="tr" trans="Hepsini değiştir"/>
+					<translation lang="cz" trans="Nahradit vše"/>
+					<translation lang="es" trans="Substituir todos"/>
+				</item>
+			</subdomain>
+			<!-- *********************************** -->
+			<subdomain name="preferences_dialog">
+				<item id="Fonts">
+					<translation lang="en" trans="Fonts"/>
+					<translation lang="de" trans="Schriftarten"/>
+					<translation lang="fr" trans="Police"/>
+					<translation lang="tr" trans="Yazı tipi"/>
+					<translation lang="cz" trans="Font"/>
+					<translation lang="es" trans="Tipo de letra"/>
+				</item>
+				<item id="Default tier font">
+					<translation lang="en" trans="Default tier font"/>
+					<translation lang="de" trans="Standard-Spurschriftart"/>
+					<translation lang="fr" trans="Police du piste standard"/>
+					<translation lang="tr" trans="Standart şerit yazı tipi"/>
+					<translation lang="cz" trans="Font stopy"/>
+					<translation lang="es" trans="Tipo de letra capa estándar"/>
+				</item>
+				<item id="Default general purpose font">
+					<translation lang="en" trans="Default general purpose font"/>
+					<translation lang="de" trans="Standard-Schriftart"/>
+					<translation lang="fr" trans="Police standard"/>
+					<translation lang="tr" trans="Standart yazı tipi"/>
+					<translation lang="cz" trans="Standardní font"/>
+					<translation lang="es" trans="Tipo de letra estándar"/>
+				</item>
+				<item id="Set the default tier font">
+					<translation lang="en" trans="Set the default tier font"/>
+					<translation lang="de" trans="Standard-Spurschriftart einstellen"/>
+					<translation lang="fr" trans="Mettre police de la piste standard "/>
+					<translation lang="tr" trans="Standart şerit yazı tipini ayarla"/>
+					<translation lang="cz" trans="Nastavit font stopy"/>
+					<translation lang="es" trans="Ajustar tipo de letra capa estándar"/>
+				</item>
+				<item id="Choose a font">
+					<translation lang="en" trans="Choose a font"/>
+					<translation lang="de" trans="Schriftart auswählen"/>
+					<translation lang="fr" trans="Choisir police"/>
+					<translation lang="tr" trans="Yazı tipi seç"/>
+					<translation lang="cz" trans="Zvolit font"/>
+					<translation lang="es" trans="Seleccionar tipo de letra"/>
+				</item>
+				<item id="Set the general purpose font">
+					<translation lang="en" trans="Set the general purpose font"/>
+					<translation lang="de" trans="Standard-Schriftart einstellen"/>
+					<translation lang="fr" trans="Mettre police standard"/>
+					<translation lang="tr" trans="Standart yazı tipini ayarla"/>
+					<translation lang="cz" trans="Nastavit standardní font"/>
+					<translation lang="es" trans="Ajustar tipo de letra estándar"/>
+				</item>
+				<item id="Stylesheets">
+					<translation lang="en" trans="Stylesheets"/>
+					<translation lang="de" trans="Stylesheets"/>
+					<translation lang="fr" trans="Stylesheets"/>
+					<translation lang="tr" trans="Stylesheets"/>
+					<translation lang="cz" trans="Styly"/>
+					<translation lang="es" trans="Stylesheets"/>
+				</item>
+				<item id="Head to HTML">
+					<translation lang="en" trans="Head to HTML"/>
+					<translation lang="de" trans="Kopf für HTML-Ausgabe"/>
+					<translation lang="fr" trans="Tête en HTML "/>
+					<translation lang="tr" trans="HTML çıktısı için başlık"/>
+					<translation lang="cz" trans="Hlavička do HTML"/>
+					<translation lang="es" trans="Cabeza hacia HTML"/>
+				</item>
+				<item id="Speakertable to transcription">
+					<translation lang="en" trans="Speakertable to transcription"/>
+					<translation lang="de" trans="Sprechertabelle zu Transkription"/>
+					<translation lang="fr" trans="Table de locuteurs en transcription"/>
+					<translation lang="tr" trans="Transkripsyon için konuşmacı tablosu"/>
+					<translation lang="cz" trans="Tabulka mluvčího do transkripce"/>
+					<translation lang="es" trans="Tabla de hablantes hacia transcripción"/>
+				</item>
+				<item id="Transcription to format table">
+					<translation lang="en" trans="Transcription to format table"/>
+					<translation lang="de" trans="Formatierungstabelle zu Transkription"/>
+					<translation lang="fr" trans="Table de formats en transcription"/>
+					<translation lang="tr" trans="Transkripsyon için biçim tablosu"/>
+					<translation lang="cz" trans="Transkripce do formátu tabulky"/>
+					<translation lang="es" trans="Transcripción hacia tabla de formato"/>
+				</item>
+				<item id="Free stylesheet visualization">
+					<translation lang="en" trans="Free stylesheet visualization"/>
+					<translation lang="de" trans="Freie Stylesheet-Ausgabe"/>
+					<translation lang="fr" trans="Visualisation stylesheet libre"/>
+					<translation lang="tr" trans="Free Stylesheet çıktısı"/>
+					<translation lang="cz" trans="Náhled stylu"/>
+					<translation lang="es" trans="Visualización stylesheet libre"/>
+				</item>
+				<item id="HIAT utterance list to HTML">
+					<translation lang="en" trans="HIAT utterance list to HTML"/>
+					<translation lang="de" trans="HIAT-Äußerungsliste (HTML)"/>
+					<translation lang="fr" trans="Liste de locutions HIAT (HTML)"/>
+					<translation lang="tr" trans="HIAT ifadeler listesi (HTML)"/>
+					<translation lang="cz" trans="Seznam výpovědí: HIAT do HTML"/>
+					<translation lang="es" trans="Lista acto oral HIAT hacia HTML"/>
+				</item>
+				<item id="Choose...">
+					<translation lang="en" trans="Choose..."/>
+					<translation lang="de" trans="Auswählen..."/>
+					<translation lang="fr" trans="Choisir..."/>
+					<translation lang="tr" trans="Seç..."/>
+					<translation lang="cz" trans="Zvolit..."/>
+					<translation lang="es" trans="Seleccionar..."/>
+				</item>
+				<item id="Choose a stylesheet">
+					<translation lang="en" trans="Choose a stylesheet"/>
+					<translation lang="de" trans="Stylesheet auswählen"/>
+					<translation lang="fr" trans="Choisir stylesheet"/>
+					<translation lang="tr" trans="Stylesheet seç"/>
+					<translation lang="cz" trans="Zvolit styl"/>
+					<translation lang="es" trans="Seleccionar stylesheet"/>
+				</item>
+				<item id="Finite State Machines">
+					<translation lang="en" trans="Finite State Machines"/>
+					<translation lang="de" trans="Endliche Maschinen"/>
+					<translation lang="fr" trans="Machines finies"/>
+					<translation lang="tr" trans="Sonlu Durum Makinası"/>
+					<translation lang="cz" trans="Formáty"/>
+					<translation lang="es" trans="Maquina finita"/>
+				</item>
+				<item id="Auto save">
+					<translation lang="en" trans="Auto save"/>
+					<translation lang="de" trans="Automatische Sicherungskopie"/>
+					<translation lang="fr" trans="Copie de sécurité automatique"/>
+					<translation lang="tr" trans="Otomatik kopyala"/>
+					<translation lang="cz" trans="Automatické ukládání"/>
+					<translation lang="es" trans="Copia de seguridad automática"/>
+				</item>
+				<item id="Enable auto save">
+					<translation lang="en" trans="Enable auto save"/>
+					<translation lang="de" trans="Automatische Sicherungskopie erstellen"/>
+					<translation lang="fr" trans="Créer copie de sécurité automatique"/>
+					<translation lang="tr" trans="Otomatik kopyalamayi düzenle"/>
+					<translation lang="cz" trans="Povolit automatické ukládání"/>
+					<translation lang="es" trans="Crear copia de seguridad automática"/>
+				</item>
+				<item id="Auto save filename">
+					<translation lang="en" trans="Filename"/>
+					<translation lang="de" trans="Dateiname"/>
+					<translation lang="fr" trans="Nom de fichier"/>
+					<translation lang="tr" trans="Dosya adı"/>
+					<translation lang="cz" trans="Jméno souboru"/>
+					<translation lang="es" trans="Nobre de archivo"/>
+				</item>
+				<item id="Auto save path">
+					<translation lang="en" trans="Directory"/>
+					<translation lang="de" trans="Verzeichnis"/>
+					<translation lang="fr" trans="Dossier"/>
+					<translation lang="tr" trans="Dizin"/>
+					<translation lang="cz" trans="Adresář"/>
+					<translation lang="es" trans="Directorio"/>
+				</item>
+				<item id="Auto save interval">
+					<translation lang="en" trans="Interval"/>
+					<translation lang="de" trans="Speicherintervall"/>
+					<translation lang="fr" trans="Intervalle d'enrégistrement"/>
+					<translation lang="tr" trans="Ara"/>
+					<translation lang="cz" trans="Interval ukládání"/>
+					<translation lang="es" trans="Intervalo para guardar"/>
+				</item>
+				<item id="min">
+					<translation lang="en" trans="min"/>
+					<translation lang="de" trans="min"/>
+					<translation lang="fr" trans="min"/>
+					<translation lang="tr" trans="min"/>
+					<translation lang="cz" trans="min"/>
+					<translation lang="es" trans="min"/>
+				</item>
+				<item id="Language">
+					<translation lang="en" trans="Language"/>
+					<translation lang="de" trans="Sprache"/>
+					<translation lang="fr" trans="Langue"/>
+					<translation lang="tr" trans="Dil"/>
+					<translation lang="cz" trans="Jazyk"/>
+					<translation lang="es" trans="Idioma"/>
+				</item>
+				<item id="Choose a language">
+					<translation lang="en" trans="Choose a language"/>
+					<translation lang="de" trans="Sprache auswählen"/>
+					<translation lang="fr" trans="Choisir langue"/>
+					<translation lang="tr" trans="Dil seç"/>
+					<translation lang="cz" trans="Nastavit jazyk"/>
+					<translation lang="es" trans="Seleccionar idioma"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="format_panel">
+				<item id="Edit format table">
+					<translation lang="en" trans="Edit format table"/>
+					<translation lang="de" trans="Formatierungstabelle bearbeiten"/>
+					<translation lang="fr" trans="Edition de table de formats"/>
+					<translation lang="tr" trans="Biçim tablosunu düzenle"/>
+					<translation lang="cz" trans="Upravit formát tabulky"/>
+					<translation lang="es" trans="Edición tabla de formato"/>
+				</item>
+				<item id="Test area">
+					<translation lang="en" trans="Test area"/>
+					<translation lang="de" trans="Vorschau"/>
+					<translation lang="fr" trans="Prévisualisation"/>
+					<translation lang="tr" trans="Test alanı"/>
+					<translation lang="cz" trans="Náhled"/>
+					<translation lang="es" trans="Previsualización"/>
+				</item>
+				<item id="Formatting properties">
+					<translation lang="en" trans="Formatting properties"/>
+					<translation lang="de" trans="Formatierungseigenschaften"/>
+					<translation lang="fr" trans="Propriétés de formats"/>
+					<translation lang="tr" trans="Biçimleme özellikleri"/>
+					<translation lang="cz" trans="Vlastnosti formátování"/>
+					<translation lang="es" trans="Propiedades de formato"/>
+				</item>
+				<item id="Font:">
+					<translation lang="en" trans="Font:"/>
+					<translation lang="de" trans="Schriftart:"/>
+					<translation lang="fr" trans="Police:"/>
+					<translation lang="tr" trans="Yazı tipi:"/>
+					<translation lang="cz" trans="Font:"/>
+					<translation lang="es" trans="Tipo de letra:"/>
+				</item>
+				<item id="Font style:">
+					<translation lang="en" trans="Font style:"/>
+					<translation lang="de" trans="Schriftschnitt:"/>
+					<translation lang="fr" trans="Style:"/>
+					<translation lang="tr" trans="Yazı tipi:"/>
+					<translation lang="cz" trans="Řez písma:"/>
+					<translation lang="es" trans="Estilo:"/>
+				</item>
+				<item id="Font size:">
+					<translation lang="en" trans="Font size:"/>
+					<translation lang="de" trans="Schriftgrad:"/>
+					<translation lang="fr" trans="Corps:"/>
+					<translation lang="tr" trans="Yazı tipi boyutu:"/>
+					<translation lang="cz" trans="Velikost písma:"/>
+					<translation lang="es" trans="Tamaño de letra:"/>
+				</item>
+				<item id="Text color:">
+					<translation lang="en" trans="Text color:"/>
+					<translation lang="de" trans="Schriftfarbe:"/>
+					<translation lang="fr" trans="Coleur de police:"/>
+					<translation lang="tr" trans="Yazı tipi rengi:"/>
+					<translation lang="cz" trans="Barva textu:"/>
+					<translation lang="es" trans="Color de letra:"/>
+				</item>
+				<item id="Background color:">
+					<translation lang="en" trans="Background color:"/>
+					<translation lang="de" trans="Hintergrundfarbe:"/>
+					<translation lang="fr" trans="Couleur de fonds"/>
+					<translation lang="tr" trans="Arka planın rengi:"/>
+					<translation lang="cz" trans="Barva pozadí:"/>
+					<translation lang="es" trans="Color de fondo:"/>
+				</item>
+				<item id="Alignment:">
+					<translation lang="en" trans="Alignment:"/>
+					<translation lang="de" trans="Ausrichtung:"/>
+					<translation lang="fr" trans="Orientation:"/>
+					<translation lang="tr" trans="Konum:"/>
+					<translation lang="cz" trans="Zarovnání:"/>
+					<translation lang="es" trans="Alineamiento:"/>
+				</item>
+				<item id="Border sides:">
+					<translation lang="en" trans="Border sides:"/>
+					<translation lang="de" trans="Rahmenlinien:"/>
+					<translation lang="fr" trans="Lignes de cadre:"/>
+					<translation lang="tr" trans="Kenar yüzü:"/>
+					<translation lang="cz" trans="Ohraničení:"/>
+					<translation lang="es" trans="Línea del cuadro:"/>
+				</item>
+				<item id="Border color:">
+					<translation lang="en" trans="Border color:"/>
+					<translation lang="de" trans="Rahmenfarbe:"/>
+					<translation lang="fr" trans="Coleur de cadre:"/>
+					<translation lang="tr" trans="Kenar rengi:"/>
+					<translation lang="cz" trans="Barva ohraničení:"/>
+					<translation lang="es" trans="Color del cuadro:"/>
+				</item>
+				<item id="Border style:">
+					<translation lang="en" trans="Border style:"/>
+					<translation lang="de" trans="Rahmenart:"/>
+					<translation lang="fr" trans="Style de cadre:"/>
+					<translation lang="tr" trans="Kenar biçemi:"/>
+					<translation lang="cz" trans="Styl ohraničení:"/>
+					<translation lang="es" trans="Estilo del cuadro:"/>
+				</item>
+				<item id="Height calculation:">
+					<translation lang="en" trans="Height calculation:"/>
+					<translation lang="de" trans="Spurhöhenberechnung:"/>
+					<translation lang="fr" trans="Calcul d'altitude de couche"/>
+					<translation lang="tr" trans="Yüksekliğini hesapla:"/>
+					<translation lang="cz" trans="Kalkulovaná výška vrstvy:"/>
+					<translation lang="es" trans="Calculación de altitud de capa:"/>
+				</item>
+				<item id="Generous">
+					<translation lang="en" trans="Generous"/>
+					<translation lang="de" trans="Großzügig"/>
+					<translation lang="fr" trans="Généreux"/>
+					<translation lang="tr" trans="Cömert"/>
+					<translation lang="cz" trans="Prostorně"/>
+					<translation lang="es" trans="Generoso"/>
+				</item>
+				<item id="Miserly">
+					<translation lang="en" trans="Miserly"/>
+					<translation lang="de" trans="Sparsam"/>
+					<translation lang="fr" trans="Econome"/>
+					<translation lang="tr" trans="İdareli"/>
+					<translation lang="cz" trans="Úsporně"/>
+					<translation lang="es" trans="Económico"/>
+				</item>
+				<item id="Fixed">
+					<translation lang="en" trans="Fixed"/>
+					<translation lang="de" trans="Genau"/>
+					<translation lang="fr" trans="Exact"/>
+					<translation lang="tr" trans="Sabit"/>
+					<translation lang="cz" trans="Fixní"/>
+					<translation lang="es" trans="Exacto"/>
+				</item>
+				<item id="Pixels">
+					<translation lang="en" trans="Pixels"/>
+					<translation lang="de" trans="Pixel"/>
+					<translation lang="fr" trans="Pixels"/>
+					<translation lang="tr" trans="Piksel"/>
+					<translation lang="cz" trans="Pixel"/>
+					<translation lang="es" trans="Pixeles"/>
+				</item>
+				<item id="Edit...">
+					<translation lang="en" trans="Edit..."/>
+					<translation lang="de" trans="Bearbeiten..."/>
+					<translation lang="fr" trans="Edition..."/>
+					<translation lang="tr" trans="Düzen..."/>
+					<translation lang="cz" trans="Upravit..."/>
+					<translation lang="es" trans="Edición..."/>
+				</item>
+				<item id="Choose a color">
+					<translation lang="en" trans="Choose a color"/>
+					<translation lang="de" trans="Farbe auswählen"/>
+					<translation lang="fr" trans="Choisir une couleur"/>
+					<translation lang="tr" trans="Renk seç"/>
+					<translation lang="cz" trans="Vybrat barvu"/>
+					<translation lang="es" trans="Selección color"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain type="dialog" name="metainfo_edit_dialog">
+				<item id="Edit meta information">
+					<translation lang="en" trans="Edit meta information"/>
+					<translation lang="de" trans="Meta-Information bearbeiten"/>
+					<translation lang="fr" trans="Edition de meta-information"/>
+					<translation lang="tr" trans="Anabilgileri düzenle"/>
+					<translation lang="cz" trans="Editace metadat"/>
+					<translation lang="es" trans="Edición meta-información"/>
+				</item>
+				<item id="Project name">
+					<translation lang="en" trans="Project name"/>
+					<translation lang="de" trans="Projektname"/>
+					<translation lang="fr" trans="Nom de projet"/>
+					<translation lang="tr" trans="Proje adı"/>
+					<translation lang="cz" trans="Název projektu"/>
+					<translation lang="es" trans="Nombre de proyecto"/>
+				</item>
+				<item id="Transcription name">
+					<translation lang="en" trans="Transcription name"/>
+					<translation lang="de" trans="Transkriptionsname"/>
+					<translation lang="fr" trans="Nom de transcription"/>
+					<translation lang="tr" trans="Transkripsyon adı"/>
+					<translation lang="cz" trans="Název transkriptu"/>
+					<translation lang="es" trans="Nombre de transcripción"/>
+				</item>
+				<item id="Transcription convention">
+					<translation lang="en" trans="Transcription convention"/>
+					<translation lang="de" trans="Transkriptionskonvention"/>
+					<translation lang="fr" trans="Convention de transcription"/>
+					<translation lang="tr" trans="Transkripsyon kuralı"/>
+					<translation lang="cz" trans="Typ transkripce (formát)"/>
+					<translation lang="es" trans="Convención de transcripción"/>
+				</item>
+				<item id="Media file(s)">
+					<translation lang="en" trans="Media file(s)"/>
+					<translation lang="de" trans="Medien-Datei(en)"/>
+					<translation lang="fr" trans="Fichier(s) audio/vidéo"/>
+					<translation lang="tr" trans="İlgili medya dosyası"/>
+					<translation lang="cz" trans="Příslušný mediální soubor"/>
+					<translation lang="es" trans="Archivos de medios"/>
+				</item>
+				<item id="Browse...">
+					<translation lang="en" trans="Browse..."/>
+					<translation lang="de" trans="Suchen..."/>
+					<translation lang="fr" trans="Chercher..."/>
+					<translation lang="tr" trans="Göz at..."/>
+					<translation lang="cz" trans="Prohlížet..."/>
+					<translation lang="es" trans="Buscar..."/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain type="dialog" name="page_setup_dialog">
+				<item id="Page setup">
+					<translation lang="en" trans="Page setup"/>
+					<translation lang="de" trans="Seite einrichten"/>
+					<translation lang="fr" trans="Format d'impression"/>
+					<translation lang="sv" trans="Utskriftsformat"/>
+					<translation lang="tr" trans="Sayfa yapısı"/>
+					<translation lang="cz" trans="Nastavení stránky"/>
+					<translation lang="es" trans="Ajustar página"/>
+				</item>
+				<item id="Paper format">
+					<translation lang="en" trans="Paper format"/>
+					<translation lang="de" trans="Papierformat"/>
+					<translation lang="fr" trans="Format de feuille"/>
+					<translation lang="cz" trans="Formát dokumentu"/>
+					<translation lang="es" trans="Formato de hoja"/>
+				</item>
+				<item id="Height">
+					<translation lang="en" trans="Height"/>
+					<translation lang="de" trans="Höhe"/>
+					<translation lang="fr" trans="Altitude"/>
+					<translation lang="tr" trans="Yükseklik"/>
+					<translation lang="cz" trans="Výška"/>
+					<translation lang="es" trans="Altitud"/>
+				</item>
+				<item id="Orientation">
+					<translation lang="en" trans="Orientation"/>
+					<translation lang="de" trans="Orientierung"/>
+					<translation lang="fr" trans="Orientation"/>
+					<translation lang="cz" trans="Orientace"/>
+					<translation lang="es" trans="Orientación"/>
+				</item>
+				<item id="Portrait">
+					<translation lang="en" trans="Portrait"/>
+					<translation lang="de" trans="Hochformat"/>
+					<translation lang="fr" trans="Portrait"/>
+					<translation lang="tr" trans="Dikey Biçim"/>
+					<translation lang="cz" trans="Na výšku"/>
+					<translation lang="es" trans="Formato vertical"/>
+				</item>
+				<item id="Landscape">
+					<translation lang="en" trans="Landscape"/>
+					<translation lang="de" trans="Querformat"/>
+					<translation lang="fr" trans="Paysage"/>
+					<translation lang="tr" trans="Yatay Biçim"/>
+					<translation lang="cz" trans="Na šířku"/>
+					<translation lang="es" trans="Formato horizontal"/>
+				</item>
+				<item id="Margins">
+					<translation lang="en" trans="Margins"/>
+					<translation lang="de" trans="Seitenränder"/>
+					<translation lang="fr" trans="Marges"/>
+					<translation lang="tr" trans="Kenar Boşlukları"/>
+					<translation lang="cz" trans="Okraje stránky"/>
+					<translation lang="es" trans="Márgenes"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain type="dialog" name="partitur_parameters_edit_dialog">
+				<item id="Break">
+					<translation lang="en" trans="Break"/>
+					<translation lang="de" trans="Umbruch"/>
+					<translation lang="fr" trans="Saut"/>
+					<translation lang="tr" trans="Kesme"/>
+					<translation lang="cz" trans="Zalomení"/>
+					<translation lang="es" trans="Ajuste"/>
+				</item>
+				<item id="Word boundaries">
+					<translation lang="en" trans="Word boundaries"/>
+					<translation lang="de" trans="Wortgrenzen"/>
+					<translation lang="fr" trans="Limites de mots"/>
+					<translation lang="tr" trans="Kelime sınırı"/>
+					<translation lang="cz" trans="Hranice slova"/>
+					<translation lang="es" trans="Límites de palabras"/>
+				</item>
+				<item id="Respect word boundaries">
+					<translation lang="en" trans="Respect word boundaries"/>
+					<translation lang="de" trans="Wortgrenzen beachten"/>
+					<translation lang="fr" trans="Respecter limites de mots"/>
+					<translation lang="tr" trans="Kelime sınırına uy"/>
+					<translation lang="cz" trans="Dodržovat hranice slova"/>
+					<translation lang="es" trans="Respetar límites de palabras"/>
+				</item>
+				<item id="Change...">
+					<translation lang="en" trans="Change..."/>
+					<translation lang="de" trans="Ändern..."/>
+					<translation lang="fr" trans="Changer..."/>
+					<translation lang="tr" trans="Değiştir..."/>
+					<translation lang="cz" trans="Změnit..."/>
+					<translation lang="es" trans="Cambiar..."/>
+				</item>
+				<item id="Measures">
+					<translation lang="en" trans="Measures"/>
+					<translation lang="de" trans="Maße"/>
+					<translation lang="fr" trans="Mesures"/>
+					<translation lang="tr" trans="Ölçü"/>
+					<translation lang="cz" trans="Měřítka"/>
+					<translation lang="es" trans="Dimensiones"/>
+				</item>
+				<item id="Horizontal tolerance">
+					<translation lang="en" trans="Horizontal tolerance"/>
+					<translation lang="de" trans="Grenzwert für Partitur-Umbruch"/>
+					<translation lang="fr" trans="Tolérance horizontale"/>
+					<translation lang="cz" trans="Horizontální tolerance"/>
+					<translation lang="es" trans="Tolerancia horizontal"/>
+				</item>
+				<item id="Vertical tolerance">
+					<translation lang="en" trans="Vertical tolerance"/>
+					<translation lang="de" trans="Grenzwert für Seiten-Umbruch"/>
+					<translation lang="fr" trans="Tolérance verticale"/>
+					<translation lang="cz" trans="Vertikální tolerance"/>
+					<translation lang="es" trans="Tolerancia vertical"/>
+				</item>
+				<item id="Additional label space">
+					<translation lang="en" trans="Additional label space"/>
+					<translation lang="de" trans="Zusätzlicher Leerraum nach Spur-Label"/>
+					<translation lang="fr" trans="Espace de label additionnel"/>
+					<translation lang="tr" trans="Ek etiket boşluğu"/>
+					<translation lang="cz" trans="Dodatečný prostor značky"/>
+					<translation lang="es" trans="Espacio label adicional"/>
+				</item>
+				<item id="Remove empty lines">
+					<translation lang="en" trans="Remove empty lines"/>
+					<translation lang="de" trans="Leerzeilen entfernen"/>
+					<translation lang="fr" trans="Effacer lignes blanches"/>
+					<translation lang="tr" trans="Boş satırları sil"/>
+					<translation lang="cz" trans="Odstranit prázdné řádky"/>
+					<translation lang="es" trans="Quitar líneas en blanco"/>
+				</item>
+				<item id="Number partitur areas">
+					<translation lang="en" trans="Number partitur areas"/>
+					<translation lang="de" trans="Partiturflächen nummerieren"/>
+					<translation lang="fr" trans="Numéroter partition"/>
+					<translation lang="tr" trans="Partisyon alanını numaralandır"/>
+					<translation lang="cz" trans="Očíslovat oblasti partitury"/>
+					<translation lang="es" trans="Numerar partitura"/>
+				</item>
+				<item id="Smooth right boundaries">
+					<translation lang="en" trans="Smooth right boundaries"/>
+					<translation lang="de" trans="Rechte Ränder angleichen"/>
+					<translation lang="fr" trans="Ajuster marges droites"/>
+					<translation lang="cz" trans="Přizpůsobit pravé okraje"/>
+					<translation lang="es" trans="Ajustar márgenes derechos"/>
+				</item>
+				<item id="Save space">
+					<translation lang="en" trans="Save space"/>
+					<translation lang="de" trans="Platz sparen"/>
+					<translation lang="fr" trans="Gagner de l'espace"/>
+					<translation lang="tr" trans="Yerden kazan"/>
+					<translation lang="cz" trans="Uložit prostor"/>
+					<translation lang="es" trans="Ahorrar espacio"/>
+				</item>
+				<item id="General">
+					<translation lang="en" trans="General"/>
+					<translation lang="de" trans="Allgemein"/>
+					<translation lang="fr" trans="Général"/>
+					<translation lang="tr" trans="Genel"/>
+					<translation lang="cz" trans="Obecné"/>
+					<translation lang="es" trans="General"/>
+				</item>
+				<item id="Timeline">
+					<translation lang="en" trans="Timeline"/>
+					<translation lang="de" trans="Zeitachse"/>
+					<translation lang="fr" trans="Axe de temps"/>
+					<translation lang="tr" trans="Zaman şeridi"/>
+					<translation lang="cz" trans="Časová osa"/>
+					<translation lang="es" trans="Eje temporal"/>
+				</item>
+				<item id="Include timeline">
+					<translation lang="en" trans="Include timeline"/>
+					<translation lang="de" trans="Zeitachse einfügen"/>
+					<translation lang="fr" trans="Insérer axe de temps"/>
+					<translation lang="tr" trans="Zaman şeridi ekle"/>
+					<translation lang="cz" trans="Přiřadit časovou osu"/>
+					<translation lang="es" trans="Pegar eje temporal"/>
+				</item>
+				<item id="Put timeline outside frame">
+					<translation lang="en" trans="Put timeline outside frame"/>
+					<translation lang="de" trans="Zeitachse außerhalb des Partiturrahmens"/>
+					<translation lang="fr" trans="Axe de temps hors cadre de partition"/>
+					<translation lang="tr" trans="Zaman şeridini partisyon çerçevesinin dışına koy"/>
+					<translation lang="cz" trans="Umístit časovou osu vně ohraničení"/>
+					<translation lang="es" trans="Poner eje temporal fuera del cuadro de partitura"/>
+				</item>
+				<item id="Frame">
+					<translation lang="en" trans="Frame"/>
+					<translation lang="de" trans="Partiturrahmen"/>
+					<translation lang="fr" trans="Cadre de partition"/>
+					<translation lang="tr" trans="Partisyon çerçevesi"/>
+					<translation lang="cz" trans="Ohraničení"/>
+					<translation lang="es" trans="Cuadro"/>
+				</item>
+				<item id="Sides">
+					<translation lang="en" trans="Sides"/>
+					<translation lang="de" trans="Seiten"/>
+					<translation lang="fr" trans="Côtés"/>
+					<translation lang="tr" trans="Sayfalar"/>
+					<translation lang="cz" trans="Okraje"/>
+					<translation lang="es" trans="Lados"/>
+				</item>
+				<item id="Left">
+					<translation lang="en" trans="Left"/>
+					<translation lang="de" trans="Links"/>
+					<translation lang="fr" trans="Gauche"/>
+					<translation lang="tr" trans="Sol"/>
+					<translation lang="cz" trans="Vlevo"/>
+					<translation lang="es" trans="Izquierda"/>
+				</item>
+				<item id="Right">
+					<translation lang="en" trans="Right"/>
+					<translation lang="de" trans="Rechts"/>
+					<translation lang="fr" trans="Droite"/>
+					<translation lang="tr" trans="Sağ"/>
+					<translation lang="cz" trans="Vpravo"/>
+					<translation lang="es" trans="Derecha"/>
+				</item>
+				<item id="Top">
+					<translation lang="en" trans="Top"/>
+					<translation lang="de" trans="Oben"/>
+					<translation lang="fr" trans="En haut"/>
+					<translation lang="tr" trans="Üst"/>
+					<translation lang="cz" trans="Nahoře"/>
+					<translation lang="es" trans="Arriba"/>
+				</item>
+				<item id="Bottom">
+					<translation lang="en" trans="Bottom"/>
+					<translation lang="de" trans="Unten"/>
+					<translation lang="fr" trans="En bas"/>
+					<translation lang="tr" trans="Alt"/>
+					<translation lang="cz" trans="Dole"/>
+					<translation lang="es" trans="Abajo"/>
+				</item>
+				<item id="Color">
+					<translation lang="en" trans="Color"/>
+					<translation lang="de" trans="Farbe"/>
+					<translation lang="fr" trans="Couleur"/>
+					<translation lang="tr" trans="Renk"/>
+					<translation lang="cz" trans="Barva"/>
+					<translation lang="es" trans="Color"/>
+				</item>
+				<item id="Frame style">
+					<translation lang="en" trans="Frame style"/>
+					<translation lang="de" trans="Rahmenart"/>
+					<translation lang="fr" trans="Style de cadre"/>
+					<translation lang="tr" trans="Çerçeve biçemi"/>
+					<translation lang="cz" trans="Styl ohraničení"/>
+					<translation lang="es" trans="Tipo de cuadro"/>
+				</item>
+				<item id="Miscellaneous">
+					<translation lang="en" trans="Miscellaneous"/>
+					<translation lang="de" trans="Sonstiges"/>
+					<translation lang="fr" trans="Autres"/>
+					<translation lang="tr" trans="Diğerleri"/>
+					<translation lang="cz" trans="Různé"/>
+					<translation lang="es" trans="Varios"/>
+				</item>
+				<item id="Prepend meta information and speakertable">
+					<translation lang="en" trans="Prepend meta information and speakertable"/>
+					<translation lang="de" trans="Meta-Information und Sprechertabelle voranstellen"/>
+					<translation lang="fr" trans="Anteposer meta-information et table de locuteurs"/>
+					<translation lang="cz" trans="Předřadit metadata a tabulku mluvčího"/>
+					<translation lang="es" trans="Anteponer meta informaciones y tabla de locutores"/>
+				</item>
+				<item id="RTF">
+					<translation lang="en" trans="RTF"/>
+					<translation lang="de" trans="RTF"/>
+					<translation lang="fr" trans="RTF"/>
+					<translation lang="tr" trans="RTF"/>
+					<translation lang="cz" trans="RTF"/>
+					<translation lang="es" trans="RTF"/>
+				</item>
+				<item id="Critical size percentage">
+					<translation lang="en" trans="Critical size percentage"/>
+					<translation lang="de" trans="Kritische Größe für Ereignis-Text"/>
+					<translation lang="fr" trans="Taille critique pour texte d'événements"/>
+					<translation lang="cz" trans="Procentuální velikost události-textu"/>
+					<translation lang="es" trans="Tamaño crítico para texto de eventos"/>
+				</item>
+				<item id="Right margin buffer">
+					<translation lang="en" trans="Right margin buffer"/>
+					<translation lang="de" trans="Pufferzone rechts"/>
+					<translation lang="fr" trans="Zone amortisseur a droite"/>
+					<translation lang="cz" trans="Konec pravého okraje"/>
+					<translation lang="es" trans="Zona amortiguadora a la derecha"/>
+				</item>
+				<item id="Calculate page breaks">
+					<translation lang="en" trans="Calculate page breaks"/>
+					<translation lang="de" trans="Seitenumbrüche erzeugen"/>
+					<translation lang="fr" trans="Générer sauts de page "/>
+					<translation lang="cz" trans="Vypočítat zlom stránek"/>
+					<translation lang="es" trans="Calcular ajuste página"/>
+				</item>
+				<item id="Glue adjacent events (MS Word 97)">
+					<translation lang="en" trans="Glue adjacent events (MS Word 97)"/>
+					<translation lang="de" trans="Benachbarte Ereignisse zusammenlegen (MS Word 97)"/>
+					<translation lang="fr" trans="Réunir événements voisins (MS Word 97)"/>
+					<translation lang="cz" trans="Sloučit přilehlé události (MS Word 97)"/>
+					<translation lang="es" trans="Juntar eventos vecinos (MS Word 97)"/>
+				</item>
+				<item id="Glue empty events (MS Word 97)">
+					<translation lang="en" trans="Glue empty events (MS Word 97)"/>
+					<translation lang="de" trans="Leere Ereignisse mit benachbarten zusammenlegen (MS Word 97)"/>
+					<translation lang="fr" trans="Réunir événements vides (MS Word 97)"/>
+					<translation lang="cz" trans="Sloučit přilehlé prázdné události (MS Word 97)"/>
+					<translation lang="es" trans="Juntar eventos vacios (MS Word 97)"/>
+				</item>
+				<item id="Use CellFit parameter">
+					<translation lang="en" trans="Use CellFit parameter"/>
+					<translation lang="de" trans="CellFit-Parameter benutzen"/>
+					<translation lang="fr" trans="Appliquer paramètres CellFit"/>
+					<translation lang="cz" trans="Použít parametr přizpůsobení textu v buňce"/>
+					<translation lang="es" trans="Aplicar parámetros CellFit"/>
+				</item>
+				<item id="HTML">
+					<translation lang="en" trans="HTML"/>
+					<translation lang="de" trans="HTML"/>
+					<translation lang="fr" trans="HTML"/>
+					<translation lang="tr" trans="HTML"/>
+					<translation lang="cz" trans="HTML"/>
+					<translation lang="es" trans="HTML"/>
+				</item>
+				<item id="Hypertext">
+					<translation lang="en" trans="Hypertext"/>
+					<translation lang="de" trans="Hypertext"/>
+					<translation lang="fr" trans="Hypertexte"/>
+					<translation lang="tr" trans="Hiper metin"/>
+					<translation lang="cz" trans="Hypertext"/>
+					<translation lang="es" trans="Hypertext"/>
+				</item>
+				<item id="Make links">
+					<translation lang="en" trans="Make links"/>
+					<translation lang="de" trans="Verknüpfungen als Hyperlinks"/>
+					<translation lang="fr" trans="Créer liens hyperlink"/>
+					<translation lang="tr" trans="Hiper Bağ bağlantısı"/>
+					<translation lang="cz" trans="Vytvořit odkazy (hyperlink)"/>
+					<translation lang="es" trans="Enlaces Hyperlink"/>
+				</item>
+				<item id="Make anchors">
+					<translation lang="en" trans="Make anchors"/>
+					<translation lang="de" trans="Anker erstellen"/>
+					<translation lang="fr" trans="Créer ancre"/>
+					<translation lang="tr" trans="Çengel yap"/>
+					<translation lang="cz" trans="Ukotvit"/>
+					<translation lang="es" trans="Crear ancla"/>
+				</item>
+				<item id="Use JavaScript">
+					<translation lang="en" trans="Use JavaScript"/>
+					<translation lang="de" trans="JavaScript aktivieren"/>
+					<translation lang="fr" trans="Activer JavaScript"/>
+					<translation lang="tr" trans="JavaScripti kullan"/>
+					<translation lang="cz" trans="Aktivovat JavaScript"/>
+					<translation lang="es" trans="Activar JavaScritp"/>
+				</item>
+				<item id="Width">
+					<translation lang="en" trans="Width"/>
+					<translation lang="de" trans="Breite"/>
+					<translation lang="fr" trans="Largeur"/>
+					<translation lang="tr" trans="Genişlik"/>
+					<translation lang="cz" trans="Šířka"/>
+					<translation lang="es" trans="Latitud"/>
+				</item>
+				<item id="Don't make line breaks">
+					<translation lang="en" trans="Don't make line breaks"/>
+					<translation lang="de" trans="Keine Zeilenumbrüche"/>
+					<translation lang="fr" trans="Pas de saut de lignes"/>
+					<translation lang="tr" trans="Satır kesmesi olmasın"/>
+					<translation lang="cz" trans="Nezalamovat řádky"/>
+					<translation lang="es" trans="Ningunos ajustes de lineas"/>
+				</item>
+				<item id="Pixel width">
+					<translation lang="en" trans="Pixel width"/>
+					<translation lang="de" trans="Umbruchbreite in Pixeln"/>
+					<translation lang="fr" trans="Largeur de saut en pixels"/>
+					<translation lang="tr" trans="Genişlik pikseli"/>
+					<translation lang="cz" trans="Šířka pixelů"/>
+					<translation lang="es" trans="Latitud de ajuste en pixels"/>
+					
+				</item>
+				<item id="SVG">
+					<translation lang="en" trans="SVG"/>
+					<translation lang="de" trans="SVG"/>
+					<translation lang="fr" trans="SVG"/>
+					<translation lang="tr" trans="SVG"/>
+					<translation lang="cz" trans="SVG"/>
+					<translation lang="es" trans="SVG"/>
+				</item>
+				<item id="Scale factor">
+					<translation lang="en" trans="Scale factor"/>
+					<translation lang="de" trans="Skalierungsfaktor"/>
+					<translation lang="fr" trans="Facteur de constante d'agrandissment"/>
+					<translation lang="tr" trans="Ölçek faktörü"/>
+					<translation lang="cz" trans="Měřítko"/>
+					<translation lang="es" trans="Alineamiento"/>
+					<translation lang="es" trans="Coeficiente de clasificación"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain type="dialog" name="speakertable_edit_dialog">
+				<!-- N.B.: This conatins the items for the ud-attribute-table -->
+				<item id="Speakers">
+					<translation lang="en" trans="Speakers"/>
+					<translation lang="de" trans="Sprecher"/>
+					<translation lang="fr" trans="Locuteur"/>
+					<translation lang="tr" trans="Konuşmacı"/>
+					<translation lang="cz" trans="Mluvčí"/>
+					<translation lang="es" trans="Locutor"/>
+				</item>
+				<item id="Add speaker">
+					<translation lang="en" trans="Add speaker"/>
+					<translation lang="de" trans="Sprecher hinzufügen"/>
+					<translation lang="fr" trans="Ajouter locuteur"/>
+					<translation lang="tr" trans="Konuşmacı ekle"/>
+					<translation lang="cz" trans="Přidat mluvčího"/>
+					<translation lang="es" trans="Añadir locutor"/>
+				</item>
+				<item id="Remove speaker">
+					<translation lang="en" trans="Remove speaker"/>
+					<translation lang="de" trans="Sprecher entfernen"/>
+					<translation lang="fr" trans="Effacer locuteur"/>
+					<translation lang="tr" trans="Konuşmacıyı sil"/>
+					<translation lang="cz" trans="Odstranit mluvčího"/>
+					<translation lang="es" trans="Quitar locutor"/>
+				</item>
+				<item id="Speaker properties">
+					<translation lang="en" trans="Speaker properties"/>
+					<translation lang="de" trans="Sprecher-Eigenschaften"/>
+					<translation lang="fr" trans="Propriétés de locuteurs"/>
+					<translation lang="tr" trans="Konuşmacı özellikleri"/>
+					<translation lang="cz" trans="Vlastnosti mluvčího"/>
+					<translation lang="es" trans="Propiedades del locutor"/>
+				</item>
+				<item id="Fixed attributes">
+					<translation lang="en" trans="Fixed attributes"/>
+					<translation lang="de" trans="Vorgegebene Attribute"/>
+					<translation lang="fr" trans="Attributs fixés"/>
+					<translation lang="tr" trans="Verilen öznitelikler"/>
+					<translation lang="cz" trans="Fixní atributy"/>
+					<translation lang="es" trans="Atributos fijos"/>
+				</item>
+				<item id="Abbreviation">
+					<translation lang="en" trans="Abbreviation"/>
+					<translation lang="de" trans="Namenskürzel"/>
+					<translation lang="fr" trans="Abréviation"/>
+					<translation lang="tr" trans="Kısaltma"/>
+					<translation lang="cz" trans="Zkratka (ID)"/>
+					<translation lang="es" trans="Abriviación"/>
+				</item>
+				<item id="Sex">
+					<translation lang="en" trans="Sex"/>
+					<translation lang="de" trans="Geschlecht"/>
+					<translation lang="fr" trans="Sexe"/>
+					<translation lang="tr" trans="Cinsiyet"/>
+					<translation lang="cz" trans="Pohlaví"/>
+					<translation lang="es" trans="Sexo"/>
+				</item>
+				<item id="Languages">
+					<translation lang="en" trans="Languages"/>
+					<translation lang="de" trans="Sprachen"/>
+					<translation lang="fr" trans="Langues"/>
+					<translation lang="tr" trans="Diller"/>
+					<translation lang="cz" trans="Jazyky"/>
+					<translation lang="es" trans="Idiomas"/>
+				</item>
+				<item id="Language(s) used">
+					<translation lang="en" trans="Language(s) used"/>
+					<translation lang="de" trans="Verwendete Sprache(n)"/>
+					<translation lang="fr" trans="Langues utilisées"/>
+					<translation lang="tr" trans="Kullanılan dil(ler)"/>
+					<translation lang="cz" trans="Užité jazyky"/>
+					<translation lang="es" trans="Idiomas utilizados"/>
+				</item>
+				<item id="First language(s)">
+					<translation lang="en" trans="First language(s)"/>
+					<translation lang="de" trans="Erstsprache(n)"/>
+					<translation lang="fr" trans="Langue(s) première(s)"/>
+					<translation lang="tr" trans="Birinci Dil(ler)"/>
+					<translation lang="cz" trans="První jazyk(y)"/>
+					<translation lang="es" trans="Primer(os) idioma(s)"/>
+				</item>
+				<item id="First language(s):">
+					<translation lang="en" trans="First language(s):"/>
+					<translation lang="de" trans="Erstsprache(n):"/>
+					<translation lang="fr" trans="Langue(s) première(s):"/>
+					<translation lang="tr" trans="Birinci Dil(ler):"/>
+					<translation lang="cz" trans="První jazyk(y):"/>
+					<translation lang="es" trans="Primer(os) idioma(s):"/>
+				</item>
+				<item id="Second language(s)">
+					<translation lang="en" trans="Second language(s)"/>
+					<translation lang="de" trans="Zweitsprache(n)"/>
+					<translation lang="fr" trans="Langue(s) secondaires(s)"/>
+					<translation lang="tr" trans="İkinci Dil(ler)"/>
+					<translation lang="cz" trans="Další jazyk(y)"/>
+					<translation lang="es" trans="Segundo(s) idioma(s)"/>
+				</item>
+				<item id="Second language(s):">
+					<translation lang="en" trans="Second language(s):"/>
+					<translation lang="de" trans="Zweitsprache(n):"/>
+					<translation lang="fr" trans="Langue(s) secondaires(s):"/>
+					<translation lang="tr" trans="İkinci Dil(ler):"/>
+					<translation lang="cz" trans="Další jazyk(y):"/>
+					<translation lang="es" trans="Segundo(s) idioma(s):"/>
+				</item>
+				<item id="All languages">
+					<translation lang="en" trans="All languages"/>
+					<translation lang="de" trans="Alle Sprachen"/>
+					<translation lang="fr" trans="Toutes les Langues"/>
+					<translation lang="tr" trans="Bütün Diller"/>
+					<translation lang="cz" trans="Všechny jazyky"/>
+					<translation lang="es" trans="Todos los idiomas"/>
+				</item>
+				<item id="Edit languages...">
+					<translation lang="en" trans="Edit languages..."/>
+					<translation lang="de" trans="Sprachen bearbeiten..."/>
+					<translation lang="fr" trans="Edition de langues..."/>
+					<translation lang="tr" trans="Dilleri düzenle..."/>
+					<translation lang="cz" trans="Editace jazyků..."/>
+					<translation lang="es" trans="Edición idiomas..."/>
+				</item>
+				<item id="Edit languages">
+					<translation lang="en" trans="Edit languages"/>
+					<translation lang="de" trans="Sprachen bearbeiten"/>
+					<translation lang="fr" trans="Edition de langues"/>
+					<translation lang="tr" trans="Dilleri düzenle"/>
+					<translation lang="cz" trans="Editace jazyků"/>
+					<translation lang="es" trans="Edición idiomas"/>
+				</item>
+				<item id="Add">
+					<translation lang="en" trans="Add"/>
+					<translation lang="de" trans="Hinzufügen"/>
+					<translation lang="fr" trans="Ajouter"/>
+					<translation lang="tr" trans="Ekle"/>
+					<translation lang="cz" trans="Přidat"/>
+					<translation lang="es" trans="Añadir"/>
+				</item>
+				<item id="Remove">
+					<translation lang="en" trans="Remove"/>
+					<translation lang="de" trans="Entfernen"/>
+					<translation lang="fr" trans="Eliminer"/>
+					<translation lang="sv" trans="Ta bort"/>
+					<translation lang="tr" trans="Sil"/>
+					<translation lang="cz" trans="Odstranit"/>
+					<translation lang="es" trans="Quitar"/>
+				</item>
+				<item id="Comment">
+					<translation lang="en" trans="Comment"/>
+					<translation lang="de" trans="Kommentar"/>
+					<translation lang="fr" trans="Commentaire"/>
+					<translation lang="tr" trans="Yorum"/>
+					<translation lang="cz" trans="Komentář"/>
+					<translation lang="es" trans="Comentario"/>
+				</item>
+				<item id="User defined attributes">
+					<translation lang="en" trans="User defined attributes"/>
+					<translation lang="de" trans="Frei bestimmbare Attribute"/>
+					<translation lang="fr" trans="Attributs à définir par usager"/>
+					<translation lang="tr" trans="Kullanıcıının tanımladıgı öznitelikler"/>
+					<translation lang="cz" trans="Atributy definované uživatelem"/>
+					<translation lang="es" trans="Atributos definidos por usuario"/>
+				</item>
+				<item id="Add attribute">
+					<translation lang="en" trans="Add attribute"/>
+					<translation lang="de" trans="Attribut hinzufügen"/>
+					<translation lang="fr" trans="Ajouter atribut"/>
+					<translation lang="tr" trans="Öznitelik ekle"/>
+					<translation lang="cz" trans="Přidat atribut"/>
+					<translation lang="es" trans="Añadir atributo"/>
+				</item>
+				<item id="Remove attribute">
+					<translation lang="en" trans="Remove attribute"/>
+					<translation lang="de" trans="Attribut entfernen"/>
+					<translation lang="fr" trans="Eliminer attribut"/>
+					<translation lang="tr" trans="Öznitelikleri sil"/>
+					<translation lang="cz" trans="Odstranit atribut"/>
+					<translation lang="es" trans="Quitar atributo"/>
+				</item>
+				<item id="Edit attribute...">
+					<translation lang="en" trans="Edit attribute..."/>
+					<translation lang="de" trans="Attribut bearbeiten..."/>
+					<translation lang="fr" trans="Edition d'attribut..."/>
+					<translation lang="tr" trans="Öznitelikleri düzenle..."/>
+					<translation lang="cz" trans="Upravit atribut..."/>
+					<translation lang="es" trans="Edición atributo..."/>
+				</item>
+				<item id="Up">
+					<translation lang="en" trans="Up"/>
+					<translation lang="de" trans="Aufwärts"/>
+					<translation lang="fr" trans="En haut"/>
+					<translation lang="tr" trans="Yukarıya"/>
+					<translation lang="cz" trans="Nahoru"/>
+					<translation lang="es" trans="Hacia arriba"/>
+				</item>
+				<item id="Down">
+					<translation lang="en" trans="Down"/>
+					<translation lang="de" trans="Abwärts"/>
+					<translation lang="fr" trans="En bas"/>
+					<translation lang="tr" trans="Aşağıya"/>
+					<translation lang="cz" trans="Dolů"/>
+					<translation lang="es" trans="Hacia abajo"/>
+				</item>
+				<item id="Collect attributes">
+					<translation lang="en" trans="Collect attributes"/>
+					<translation lang="de" trans="Attribute übernehmen"/>
+					<translation lang="fr" trans="Adopter les attributs"/>
+					<translation lang="tr" trans="Öznitelikleri al"/>
+					<translation lang="cz" trans="Shromáždit atributy"/>
+					<translation lang="es" trans="Asumir atributos"/>
+					
+				</item>
+				<item id="Template...">
+					<translation lang="en" trans="Template..."/>
+					<translation lang="de" trans="Vorlage..."/>
+					<translation lang="fr" trans="Modèle..."/>
+					<translation lang="tr" trans="Şablon..."/>
+					<translation lang="cz" trans="Šablona..."/>
+					<translation lang="es" trans="Plantilla..."/>					
+				</item>
+			</subdomain>
+		</subdomain>
+		<!-- ************************************************************************************* -->
+		<!-- *************************** END LARGE DIALOGS **************************** -->
+		<!-- ************************************************************************************* -->
+		<subdomain name="miscellaneous_dialogs">
+			<subdomain name="input_output_dialogs_miscellaneous">
+				<item id="Import a Simple EXMARaLDA file">
+					<translation lang="en" trans="Import a Simple EXMARaLDA file"/>
+					<translation lang="de" trans="Importieren einer Simple EXMARaLDA-Datei"/>
+					<translation lang="fr" trans="Importer un fichier Simple EXMARaLDA"/>
+					<translation lang="tr" trans="Simple EXMARaLDA dosyasını içeri aktar"/>
+					<translation lang="cz" trans="Importovat soubor Simple EXMARaLDA"/>
+					<translation lang="es" trans="Importar un archivo Simple EXMARaLDA"/>
+				</item>
+				<item id="Import a text file">
+					<translation lang="en" trans="Import a text file"/>
+					<translation lang="de" trans="Importieren einer Text-Datei"/>
+					<translation lang="fr" trans="Importer un fichier texte"/>
+					<translation lang="tr" trans="Metin dosyasını içeri aktar"/>
+					<translation lang="cz" trans="Importovat textový soubor"/>
+					<translation lang="es" trans="Importar archivo de texto"/>
+				</item>
+				<item id="Char encoding">
+					<translation lang="en" trans="Char encoding"/>
+					<translation lang="de" trans="Zeichenkodierung"/>
+					<translation lang="fr" trans="Codage de signes"/>
+					<translation lang="tr" trans="Karakter kodlaması"/>
+					<translation lang="cz" trans="Kódování znaků"/>
+					<translation lang="es" trans="Codificación de signos"/>
+				</item>
+				<item id="Import a TASX file">
+					<translation lang="en" trans="Import a TASX file"/>
+					<translation lang="de" trans="TASX-Datei importieren"/>
+					<translation lang="fr" trans="Importer un fichier TASX"/>
+					<translation lang="tr" trans="TASX dosyasını içeri aktar"/>
+					<translation lang="cz" trans="Importovat TASX soubor"/>
+					<translation lang="es" trans="Importar archivo TASX"/>
+				</item>
+				<item id="Import a Praat TextGrid">
+					<translation lang="en" trans="Import a Praat TextGrid"/>
+					<translation lang="de" trans="Praat TextGrid importieren"/>
+					<translation lang="fr" trans="Importer PRAAT TextGrid"/>
+					<translation lang="tr" trans="Praat TextGrid'i içeri aktar"/>
+					<translation lang="cz" trans="Importovat Praat TextGrid "/>
+					<translation lang="es" trans="Importar Paat TextGrid"/>
+				</item>
+				<item id="Import an ELAN file">
+					<translation lang="en" trans="Import an ELAN file"/>
+					<translation lang="de" trans="ELAN-Datei importieren"/>
+					<translation lang="fr" trans="Importer un fichier ELAN"/>
+					<translation lang="tr" trans="ELAN dosyasını içeri aktar"/>
+					<translation lang="cz" trans="Importovat ELAN soubor"/>
+					<translation lang="es" trans="Importar archivo ELAN"/>
+				</item>
+				<item id="Import a TEI file">
+					<translation lang="en" trans="Import a TEI file"/>
+					<translation lang="de" trans="TEI-Datei importieren"/>
+					<translation lang="fr" trans="Importer un fichier TEI"/>
+					<translation lang="tr" trans="TEI dosyasını içeri aktar"/>
+					<translation lang="cz" trans="Importovat TEI soubor"/>
+					<translation lang="es" trans="Importar archivo TEI"/>
+				</item>
+				<item id="&quot;Import&quot; an ExSync file">
+					<translation lang="en" trans="&quot;Import&quot; an ExSync file"/>
+					<translation lang="de" trans="ExSync-Datei &quot;importieren&quot;"/>
+					<translation lang="fr" trans="&quot;Importer&quot; un fichier ExSync"/>
+					<translation lang="tr" trans="ExSync dosyasını &quot;içeri aktar&quot;"/>
+					<translation lang="cz" trans="&quot;Importovat&quot; ExSync soubor"/>
+					<translation lang="es" trans="&quot;Importar&quot; ExSync archivo"/>					
+				</item>
+				<item id="ExSync &quot;import&quot; messages">
+					<translation lang="en" trans="ExSync &quot;import&quot; messages"/>
+					<translation lang="de" trans="ExSync-&quot;Import&quot;-Nachrichten"/>
+					
+					<translation lang="tr" trans="ExSync-&quot;içeri aktarım&quot; iletisi"/>
+					<translation lang="cz" trans="ExSync-&quot;vložit&quot; zprávy"/>
+					
+				</item>
+				<item id="Export a TASX file">
+					<translation lang="en" trans="Export a TASX file"/>
+					<translation lang="de" trans="TASX-Datei exportieren"/>
+					<translation lang="fr" trans="Exporter un fichier TASX"/>
+					<translation lang="tr" trans="TASX dosyasını dışa aktar"/>
+					<translation lang="cz" trans="Exportovat TASX soubor"/>
+					<translation lang="es" trans="Exportar archivo TASX"/>
+				</item>
+				<item id="Export a Praat TextGrid">
+					<translation lang="en" trans="Export a Praat TextGrid"/>
+					<translation lang="de" trans="Praat-TextGrid exportieren"/>
+					<translation lang="fr" trans="Exporter Praat TextGrid"/>
+					<translation lang="tr" trans="Praat-TextGrid dışa aktar"/>
+					<translation lang="cz" trans="Exportovat Praat TextGrid"/>
+					<translation lang="es" trans="Exportar Praat TextGrid"/>
+				</item>
+				<item id="ELAN Media">
+					<translation lang="en" trans="ELAN Media"/>
+					<translation lang="de" trans="ELAN-Medien"/>
+					<translation lang="fr" trans="Médias ELAN"/>
+					<translation lang="tr" trans="ELAN medyası"/>
+					<translation lang="cz" trans="ELAN média"/>
+					<translation lang="es" trans="Medios ELAN"/>
+				</item>
+				<item id="Specify media file and MIME type">
+					<translation lang="en" trans="Specify media file and MIME type"/>
+					<translation lang="de" trans="Medien-Datei und MIME-Typ angeben"/>
+					<translation lang="fr" trans="Spécifier fichier média et type MIME"/>
+					<translation lang="tr" trans="Medya dosyasını ve MIME türünü belirt"/>
+					<translation lang="cz" trans="Specifikovat multimediální data a MIME typ"/>
+					<translation lang="es" trans="Especificar archivo medio y tipo MIME"/>
+				</item>
+				<item id="Media file">
+					<translation lang="en" trans="Media file"/>
+					<translation lang="de" trans="Medien-Datei"/>
+					<translation lang="fr" trans="Fichier média"/>
+					<translation lang="tr" trans="Medya dosyası"/>
+					<translation lang="cz" trans="Mediální soubor"/>
+					<translation lang="es" trans="Archivo medio"/>
+				</item>
+				<item id="MIME type">
+					<translation lang="en" trans="MIME type"/>
+					<translation lang="de" trans="MIME-Typ "/>
+					<translation lang="fr" trans="Type MIME"/>
+					<translation lang="tr" trans="MIME türü "/>
+					<translation lang="cz" trans="MIME typ"/>
+					<translation lang="es" trans="Tipo MIME"/>
+				</item>
+				<item id="Export an AIF transcription">
+					<translation lang="en" trans="Export an AIF file"/>
+					<translation lang="de" trans="AIF-Datei exportieren"/>
+					<translation lang="fr" trans="Exporter un fichier AIF"/>
+					<translation lang="tr" trans="AIF dosyasını dışa aktar"/>
+					<translation lang="cz" trans="Exportovat AIF transkripci"/>
+					<translation lang="es" trans="Exportar archivo AIF"/>
+				</item>
+				<item id="Save a segmented transcription to file">
+					<translation lang="en" trans="Save a segmented transcription to file"/>
+					<translation lang="de" trans="Segmentierte Transkription speichern unter"/>
+					<translation lang="fr" trans="Transcription segmentée enrégistrer sous"/>
+					<translation lang="tr" trans="Segman edilmiş transkripsyonu farklı kaydet"/>
+					<translation lang="cz" trans="Uložit segmentovanou transkripci do souboru"/>
+					<translation lang="es" trans="Guardar transcripción segmentada"/>
+				</item>
+				<item id="Save a list transcription to file">
+					<translation lang="en" trans="Save a list transcription to file"/>
+					<translation lang="de" trans="Listen-Transkription speichern unter"/>
+					<translation lang="fr" trans="Transcription de liste enrégistrer sous"/>
+					<translation lang="tr" trans="Liste transkripsyonu farklı kaydet"/>
+					<translation lang="cz" trans="Uložit transkripci (seznam) do souboru"/>
+					<translation lang="es" trans="Guardar transcripción de lista"/>
+					
+				</item>
+				<item id="Set the text file for export">
+					<translation lang="en" trans="Set the text file for export"/>
+					<translation lang="de" trans="Textdatei speichern unter"/>
+					<translation lang="fr" trans="Fichier texte enrégistrer sous"/>
+					<translation lang="tr" trans="Metin dosyasını farklı kaydet"/>
+					<translation lang="cz" trans="Nastavit textový soubor pro export"/>
+					<translation lang="es" trans="Guardar archivo de texto"/>
+				</item>
+				<item id="Set the CHA file for export">
+					<translation lang="en" trans="Set the CHA file for export"/>
+					<translation lang="de" trans="CHA-Datei speichern unter"/>
+					<translation lang="fr" trans="Fichier CHA enrégistrer sous"/>
+					<translation lang="tr" trans="CHA dosyasını farklı kaydet"/>
+					<translation lang="cz" trans="Nastavit CHA soubor pro export"/>
+					<translation lang="es" trans="Guardar archivo CHA"/>
+				</item>
+				<item id="Export a TEI transcription">
+					<translation lang="en" trans="Export a TEI transcription"/>
+					<translation lang="de" trans="TEI-Transkription speichern unter"/>
+					<translation lang="fr" trans="Transcription TEI enrégistrer sous"/>
+					<translation lang="tr" trans="TEI dosyasını farklı kaydet"/>
+					<translation lang="cz" trans="Exportovat TEI transkripci"/>
+					<translation lang="es" trans="Guardar archivo TEI"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="cleanup_dialog">
+				<item id="Clean up">
+					<translation lang="en" trans="Clean up"/>
+					<translation lang="de" trans="Bereinigen"/>
+					<translation lang="fr" trans="Ranger"/>
+					<translation lang="tr" trans="Temizle"/>
+					<translation lang="cz" trans="Pročistit"/>
+					<translation lang="es" trans="Ordenar"/>
+				</item>
+				<item id="Remove empty events">
+					<translation lang="en" trans="Remove empty events"/>
+					<translation lang="de" trans="Leere Ereignisse entfernen"/>
+					<translation lang="fr" trans="Eliminer événements vides"/>
+					<translation lang="tr" trans="Boş olayları sil"/>
+					<translation lang="cz" trans="Odstranit prázdné události"/>
+					<translation lang="es" trans="Quitar eventos vacíos"/>
+				</item>
+				<item id="Bridge gaps smaller than">
+					<translation lang="en" trans="Bridge gaps smaller than"/>
+					<translation lang="de" trans="Lücken schließen, die kleiner als"/>
+					<translation lang="fr" trans="Fermer lacunes plus petites que"/>
+					<translation lang="tr" trans="...den küçük aralıkları kapat"/>
+					<translation lang="cz" trans="Spojit mezery menší než"/>
+					<translation lang="es" trans="Cerrar vacíos más pequeños que"/>
+				</item>
+				<item id="Remove unused timeline items">
+					<translation lang="en" trans="Remove unused timeline items"/>
+					<translation lang="de" trans="Unbenutze Zeitpunkte entfernen"/>
+					<translation lang="fr" trans="Eliminer points du temps non utilisés"/>
+					<translation lang="tr" trans="Kullanılmayan zamanları sil"/>
+					<translation lang="cz" trans="Odstranit nepoužité body časové osy"/>
+					<translation lang="es" trans="Quitar puntos temporales no utilizados"/>
+				</item>
+				<item id="Remove gaps">
+					<translation lang="en" trans="Remove gaps"/>
+					<translation lang="de" trans="Lücken entfernen"/>
+					<translation lang="fr" trans="Effacer lacunes"/>
+					<translation lang="tr" trans="Aralıkları çıkar"/>
+					<translation lang="cz" trans="Odstranit mezery"/>
+					<translation lang="es" trans="Quitar vacíos"/>
+				</item>
+				<item id="Normalize IDs">
+					<translation lang="en" trans="Normalize IDs"/>
+					<translation lang="de" trans="IDs normalisieren"/>
+					<translation lang="fr" trans="Normaliser IDs"/>
+					<translation lang="fr" trans="Normaliser IDs"/>
+					<translation lang="cz" trans="Normalizovat IDs"/>
+					<translation lang="es" trans="Normalizar IDs"/>
+				</item>
+				<item id="ms">
+					<translation lang="en" trans="ms"/>
+					<translation lang="de" trans="ms"/>
+					<translation lang="fr" trans="ms"/>
+					<translation lang="tr" trans="ms"/>
+					<translation lang="cz" trans="ms"/>
+					<translation lang="es" trans="ms"/>
+				</item>
+				<item id="Stratify tier">
+					<translation lang="en" trans="Stratify tier"/>
+					<translation lang="de" trans="Spur schichten"/>
+					<translation lang="tr" trans="Şeritleri istif et"/>
+					<translation lang="cz" trans="Vrstvení stopy"/>
+					<translation lang="es" trans="Estratificar capa"/>
+				</item>
+				<item id="Stratify by deletion">
+					<translation lang="en" trans="Stratify by deletion (i.e. delete overlapping events)"/>
+					<translation lang="de" trans="Schichten durch Löschen der überlappenden Ereignisse"/>
+					<translation lang="tr" trans="Silerek istif et"/>
+					<translation lang="cz" trans="Soubory"/>
+					<translation lang="es" trans="Estratificar quitando"/>
+				</item>
+				<item id="Stratify by distribution">
+					<translation lang="en" trans="Stratify by distribution (i.e. put overlapping events on an additional tier)"/>
+					<translation lang="de" trans="Schichten durch Verteilen der überlappenden Ereignisse auf zusätzliche Spuren"/>
+					<translation lang="tr" trans="Dağıtımlı istif et"/>
+					<translation lang="cz" trans="Vrstvit podle rozložení"/>
+					<translation lang="es" trans="Estratificar por distribución"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="import_hiatdos_dialog">
+				<item id="&quot;Import&quot; a HIAT-DOS file">
+					<translation lang="en" trans="&quot;Import&quot; HIAT-DOS file"/>
+					<translation lang="de" trans="HIAT-DOS-Datei &quot;importieren&quot;"/>
+					<translation lang="fr" trans="&quot;Importer&quot; un fichier HIAT-DOS"/>
+					<translation lang="tr" trans="HIAT-DOS dosyasını &quot;içeri aktar&quot;"/>
+					<translation lang="cz" trans="&quot;Importovat&quot; soubor HIAT-DOS"/>
+					<translation lang="es" trans="&quot;Importar&quot; HIAT-DOS archivo"/>
+				</item>
+				<item id="Files">
+					<translation lang="en" trans="Files"/>
+					<translation lang="de" trans="Dateien"/>
+					<translation lang="fr" trans="Fichiers"/>
+					<translation lang="tr" trans="Dosyalar"/>
+					<translation lang="cz" trans="Soubory"/>
+					<translation lang="es" trans="Archivos"/>
+				</item>
+				<item id="Transcript file">
+					<translation lang="en" trans="Transcript file"/>
+					<translation lang="de" trans="Transkriptdatei"/>
+					<translation lang="fr" trans="Fichier de transcription"/>
+					<translation lang="tr" trans="Transkripsyon dosyası"/>
+					<translation lang="cz" trans="Transkript"/>
+					<translation lang="es" trans="Archivo Transcripcion"/>
+				</item>
+				<item id="Info file">
+					<translation lang="en" trans="Info file"/>
+					<translation lang="de" trans="Infodatei"/>
+					<translation lang="fr" trans="Fichier info"/>
+					<translation lang="tr" trans="Bilgi dosyası"/>
+					<translation lang="cz" trans="Info"/>
+					<translation lang="es" trans="Archivo de información"/>
+				</item>
+				<item id="Speakers file">
+					<translation lang="en" trans="Speakers file"/>
+					<translation lang="de" trans="Siglendatei"/>
+					<translation lang="fr" trans="Fichier de locuteurs"/>
+					<translation lang="tr" trans="Konuşmacı dosyası"/>
+					<translation lang="cz" trans="Mluvčí"/>
+					<translation lang="es" trans="Archivo de locutores"/>
+				</item>
+				<item id="Method for calculating synchronization points">
+					<translation lang="en" trans="Method for calculating synchronization points"/>
+					<translation lang="de" trans="Methoden zur Berechnung der Synchronisationspunkte"/>
+					<translation lang="fr" trans="Méthode à calculer de points de synchronisation"/>
+					<translation lang="cz" trans="Metoda pro výpočet synchronizačních bodů"/>
+					<translation lang="es" trans="Método para calcular puntos de sincronización"/>
+				</item>
+				<item id="Use left and right boundaries">
+					<translation lang="en" trans="Use left and right boundaries"/>
+					<translation lang="de" trans="Linke und rechte Grenzen verwenden"/>
+					<translation lang="fr" trans="Utiliser des limites gauches et droites"/>
+					<translation lang="cz" trans="Použít levé a pravé hranice"/>
+					<translation lang="es" trans="Utilizar limites izquierdos y derechos"/>
+				</item>
+				<item id="Use left boundaries only">
+					<translation lang="en" trans="Use left boundaries only"/>
+					<translation lang="de" trans="Nur linke Grenzen verwenden"/>
+					<translation lang="fr" trans="Utiliser limite gauche seulement"/>
+					<translation lang="cz" trans="Použít pouze levé hranice"/>
+					<translation lang="es" trans="Utilizar sólo limite izquierdo"/>
+				</item>
+				<item id="Remove holes (after manual wrap)">
+					<translation lang="en" trans="Remove holes (after manual wrap)"/>
+					<translation lang="de" trans="Löcher entfernen (bei nachbearbeitetem Umbruch)"/>
+					<translation lang="fr" trans="Effacer des trous (après saut manuel)"/>
+					<translation lang="cz" trans="Nahradit mezery"/>
+					<translation lang="es" trans="Quitar vacíos (después de ajuste manual) "/>
+				</item>
+				<item id="Replace symbols">
+					<translation lang="en" trans="Replace symbols"/>
+					<translation lang="de" trans="Zeichen ersetzen"/>
+					<translation lang="fr" trans="Remplacer des symboles"/>
+					<translation lang="cz" trans="Nahradit symboly"/>
+					<translation lang="es" trans="Substituir símbolos"/>
+				</item>
+				<item id="Remove all">
+					<translation lang="en" trans="Remove all"/>
+					<translation lang="de" trans="Alle entfernen"/>
+					<translation lang="fr" trans="Effacer tous"/>
+					<translation lang="tr" trans="Hepsini sil"/>
+					<translation lang="cz" trans="Odstranit vše"/>
+					<translation lang="es" trans="Quitar todos"/>
+				</item>
+				<item id="Standard">
+					<translation lang="en" trans="Standard"/>
+					<translation lang="de" trans="Standard"/>
+					<translation lang="fr" trans="Standard"/>
+					<translation lang="tr" trans="Standart"/>
+					<translation lang="cz" trans="Standard"/>
+					<translation lang="es" trans="Estándar"/>
+				</item>
+				<item id="To be replaced">
+					<translation lang="en" trans="To be replaced"/>
+					<translation lang="de" trans="Zu ersetzendes Zeichen"/>
+					<translation lang="fr" trans="Signes à remplacer"/>
+					<translation lang="tr" trans="Değiştirilecek karakter"/>
+					<translation lang="cz" trans="K nahrazení"/>
+					<translation lang="es" trans="Signos para sustituir"/>
+				</item>
+				<item id="Replacement">
+					<translation lang="en" trans="Replacement"/>
+					<translation lang="de" trans="Ersatz"/>
+					<translation lang="fr" trans="Remplacement"/>
+					<translation lang="cz" trans="Náhrada"/>
+					<translation lang="es" trans="Substitución"/>
+				</item>
+				<item id="(Enter decimal unicode number)">
+					<translation lang="en" trans="(Enter decimal unicode number)"/>
+					<translation lang="de" trans="(Unicode-Nr. des Zeichens eingeben)"/>
+					<translation lang="fr" trans="Entrer numéro unicode"/>
+					<translation lang="cz" trans="Vložit Unicode (číselný kód)"/>
+					<translation lang="es" trans="(Entrar número unicode)"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="export_interlinear_text_xml_dialog">
+				<item id="Export an interlinear text to an XML file">
+					<translation lang="en" trans="Export an interlinear text to an XML file"/>
+					<translation lang="de" trans="Exportieren eines interlinearen Textes als XML"/>
+					<translation lang="fr" trans="Exporter un texte interlinéaire en XML"/>
+					<translation lang="cz" trans="Exportovat interlineární text jako XML"/>
+					<translation lang="es" trans="Exportar texto interlial como XML "/>
+				</item>
+				<item id="Settings">
+					<translation lang="en" trans="Settings"/>
+					<translation lang="de" trans="Einstellungen"/>
+					<translation lang="fr" trans="Préférences"/>
+					<translation lang="tr" trans="Ayarlar"/>
+					<translation lang="cz" trans="Nastavení"/>
+					<translation lang="es" trans="Preferencias"/>
+				</item>
+				<item id="Use print settings">
+					<translation lang="en" trans="Use print settings"/>
+					<translation lang="de" trans="Drucker-Einstellungen verwenden"/>
+					<translation lang="fr" trans="Utiliser préférences pour l'imprimeur"/>
+					<translation lang="tr" trans="Yazıcı ayarlarını kullan"/>
+					<translation lang="cz" trans="Použít nastavení tisku"/>
+					<translation lang="es" trans="Utilizar preferencias del impresor"/>
+				</item>
+				<item id="Use RTF settings">
+					<translation lang="en" trans="Use RTF settings"/>
+					<translation lang="de" trans="RTF-Einstellungen verwenden"/>
+					<translation lang="fr" trans="Utiliser préférences RTF"/>
+					<translation lang="tr" trans="RTF ayarlarını kullan"/>
+					<translation lang="cz" trans="Použít nastavení RTF"/>
+					<translation lang="es" trans="Utilizar preferencias RTF"/>
+				</item>
+				<item id="Use HTML settings">
+					<translation lang="en" trans="Use HTML settings"/>
+					<translation lang="de" trans="HTML-Einstellungen verwenden"/>
+					<translation lang="fr" trans="Utiliser préférences HTML"/>
+					<translation lang="tr" trans="HTML ayarlarını kullan"/>
+					<translation lang="cz" trans="Použít nastavení HTML"/>
+					<translation lang="es" trans="Utilizar preferencias HTML"/>
+				</item>
+			</subdomain>
+			<!-- *********************************** -->
+			<subdomain name="chop_audio_dialog">
+				<item id="Chop audio">
+					<translation lang="en" trans="Chop audio"/>
+					<translation lang="de" trans="Audio-Datei aufteilen"/>
+					<translation lang="fr" trans="Découper fichier audio"/>
+					<translation lang="tr" trans="Audio dosyasını böl"/>
+					<translation lang="cz" trans="Rozdělit audiosoubor"/>
+					<translation lang="es" trans="Dividir archivo audio"/>
+				</item>
+				<item id="Based on the timeline">
+					<translation lang="en" trans="Based on the timeline"/>
+					<translation lang="de" trans="Auf Grundlage der Zeitachse"/>
+					<translation lang="fr" trans="Basé sur l'axe de temps"/>
+					<translation lang="cz" trans="Založeno na časové ose"/>
+					<translation lang="es" trans="Basado en eje temporal"/>
+				</item>
+				<item id="Based on events in tier">
+					<translation lang="en" trans="Based on events in tier"/>
+					<translation lang="de" trans="Auf Grundlage von Ereignissen in der Spur"/>
+					<translation lang="fr" trans="Basé sur les événements de la couche"/>
+					<translation lang="cz" trans="Založeno na události ve stopě"/>
+					<translation lang="es" trans="Basado en eventos de la capa"/>
+				</item>
+				<item id="Append event description">
+					<translation lang="en" trans="Append event description"/>
+					<translation lang="de" trans="Ereignisbeschreibung anhängen"/>
+					<translation lang="fr" trans="Joindre description d'événements"/>
+					<translation lang="cz" trans="Přidat popis události"/>
+					<translation lang="es" trans="Adjuntar descripción de evento"/>
+				</item>
+				<item id="Link to the selected tier">
+					<translation lang="en" trans="Link to the selected tier"/>
+					<translation lang="de" trans="Mit ausgewählter Spur verknüpfen"/>
+					<translation lang="fr" trans="Relier avec couche sélectionnée"/>
+					<translation lang="tr" trans="Seçilmiş şeritle bağla"/>
+					<translation lang="cz" trans="Připojit k vybrané stopě"/>
+					<translation lang="es" trans="Enlace a capa seleccionada"/>
+				</item>
+				<item id="Link to a new tier">
+					<translation lang="en" trans="Link to a new tier"/>
+					<translation lang="de" trans="Mit neuer Spur verknüpfen"/>
+					<translation lang="fr" trans="Relier avec nouvelle couche"/>
+					<translation lang="tr" trans="Yeni şeritle bağla"/>
+					<translation lang="cz" trans="Připojit k nové stopě"/>
+					<translation lang="es" trans="Enlace a nueva capa"/>
+				</item>
+				<item id="Don't link">
+					<translation lang="en" trans="Don't link"/>
+					<translation lang="de" trans="Nicht verknüpfen"/>
+					<translation lang="fr" trans="Ne pas relier"/>
+					<translation lang="tr" trans="Bağlantı kurma"/>
+					<translation lang="cz" trans="Nepřipojovat"/>
+					<translation lang="es" trans="No elazar"/>
+				</item>
+				<item id="Directory">
+					<translation lang="en" trans="Directory"/>
+					<translation lang="de" trans="Verzeichnis"/>
+					<translation lang="fr" trans="Dossier"/>
+					<translation lang="tr" trans="Dizin"/>
+					<translation lang="cz" trans="Adresář"/>
+					<translation lang="es" trans="Directorio"/>
+				</item>
+				<item id="Messages">
+					<translation lang="en" trans="Messages"/>
+					<translation lang="de" trans="Meldungen"/>
+					<translation lang="fr" trans="Messages"/>
+					<translation lang="tr" trans="Mesajlar"/>
+					<translation lang="cz" trans="Zprávy"/>
+					<translation lang="es" trans="Mensajes"/>
+				</item>
+			</subdomain>
+			<!-- *********************************** -->
+			<subdomain name="glue_transcriptions_dialog">
+				<item id="Glue transcriptions">
+					<translation lang="en" trans="Glue transcriptions"/>
+					<translation lang="de" trans="Transkriptionen zusammenfügen"/>
+					<translation lang="fr" trans="Assembler transcriptions"/>
+					<translation lang="tr" trans="Transkripsyonları birleştir"/>
+					<translation lang="cz" trans="Spojit transkripce"/>
+					<translation lang="es" trans="Juntar transcripciones"/>
+				</item>
+				<item id="Mappings">
+					<translation lang="en" trans="Mappings"/>
+					<translation lang="de" trans="Spurzuordnungen"/>
+					<translation lang="fr" trans="Allocation de pistes"/>
+					<translation lang="cz" trans="Přiřazení"/>
+					<translation lang="es" trans="Asignación de capa"/>
+				</item>
+				<item id="Remove all">
+					<translation lang="en" trans="Remove all"/>
+					<translation lang="de" trans="Alle löschen"/>
+					<translation lang="fr" trans="Effacer tous"/>
+					<translation lang="tr" trans="Hepsini sil"/>
+					<translation lang="cz" trans="Odstranit vše"/>
+					<translation lang="es" trans="Quitar todos"/>
+				</item>
+				<item id="Auto (Position)">
+					<translation lang="en" trans="Auto (Position)"/>
+					<translation lang="de" trans="Automatische Spurzuordnung nach Position"/>
+					<translation lang="fr" trans="Allocation de pistes selon position"/>
+					<translation lang="tr" trans="Şerit özellikleri"/>
+					<translation lang="cz" trans="Automatické přiřazení podle pozice"/>
+					<translation lang="es" trans="Asignación automática según posición"/>
+				</item>
+				<item id="Auto (Properties)">
+					<translation lang="en" trans="Auto (Properties)"/>
+					<translation lang="de" trans="Automatische Spurzuordnung nach Spureigenschaften"/>
+					<translation lang="fr" trans="Allocation automatique de pistes selon propriétés de pistes "/>
+					<translation lang="tr" trans="Otomatik Şerit özellikleri"/>
+					<translation lang="cz" trans="Automatické přiřazení podle vlastností"/>
+					<translation lang="es" trans="Aisignación de capa automática según propiedades de capa"/>
+				</item>
+			</subdomain>
+			<!-- *********************************** -->
+			<subdomain name="chop_transcription_dialog">
+				<item id="Chop transcription">
+					<translation lang="en" trans="Chop transcription"/>
+					<translation lang="de" trans="Transkription zerschneiden"/>
+					<translation lang="fr" trans="Découper transcription"/>
+					<translation lang="tr" trans="Transkripsyonları kes"/>
+					<translation lang="cz" trans="Rozdělit transkripci"/>
+					<translation lang="es" trans="Dividir transcripción"/>
+				</item>
+				<item id="Minimum number of timeline items">
+					<translation lang="en" trans="Minimum number of timeline items"/>
+					<translation lang="de" trans="Mindestanzahl der Zeitachsenintervalle"/>
+					<translation lang="fr" trans="Minimum de points du temps"/>
+					<translation lang="cz" trans="Minimální počet časových bodů"/>
+					<translation lang="es" trans="Nombre mínimo de puntos temporales en el eje temporal"/>
+				</item>
+				<item id="Choose directory">
+					<translation lang="en" trans="Choose directory"/>
+					<translation lang="de" trans="Verzeichnis auswählen"/>
+					<translation lang="fr" trans="Choisir dossier"/>
+					<translation lang="tr" trans="Dizin seç"/>
+					<translation lang="cz" trans="Zvolit adresář"/>
+					<translation lang="es" trans="Seleccionar directorio"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="exSync_event_shrinker_dialog">
+				<item id="ExSync event shrinker ">
+					<translation lang="en" trans="ExSync event shrinker "/>
+					<translation lang="de" trans="ExSync Ereignisschrumpfer"/>
+					<translation lang="fr" trans="ExSync ratatineur d'événements"/>
+					<translation lang="tr" trans="ExSync olay küçültücüsü"/>
+					<translation lang="cz" trans="ExSync - zmenšit událost"/>
+					<translation lang="es" trans="ExSync encogedor eventos"/>
+				</item>
+				<item id="Percentage">
+					<translation lang="en" trans="Percentage"/>
+					<translation lang="de" trans="Prozentsatz"/>
+					<translation lang="fr" trans="Pourcentage "/>
+					<translation lang="tr" trans="Yüzde oranı"/>
+					<translation lang="cz" trans="Procenta"/>
+					<translation lang="es" trans="Porcentaje"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="edit_tier_properties_dialog">
+				<item id="Edit tier properties">
+					<translation lang="en" trans="Edit tier properties"/>
+					<translation lang="de" trans="Spureigenschaften bearbeiten"/>
+					<translation lang="fr" trans="Edition de propriétés de piste "/>
+					<translation lang="tr" trans="Şerit özelliklerini düzenle"/>
+					<translation lang="cz" trans="Upravit vlastnosti stopy"/>
+					<translation lang="es" trans="Edición propiedades de capa"/>
+				</item>
+				<item id="Speaker">
+					<translation lang="en" trans="Speaker"/>
+					<translation lang="de" trans="Sprecher"/>
+					<translation lang="fr" trans="Locuteur"/>
+					<translation lang="tr" trans="Konuşmacı"/>
+					<translation lang="cz" trans="Mluvčí"/>
+					<translation lang="es" trans="Locutor"/>
+				</item>
+				<item id="Type">
+					<translation lang="en" trans="Type"/>
+					<translation lang="de" trans="Typ"/>
+					<translation lang="fr" trans="Type "/>
+					<translation lang="tr" trans="Tür"/>
+					<translation lang="cz" trans="Typ"/>
+					<translation lang="es" trans="Tipo"/>
+				</item>
+				<item id="Category">
+					<translation lang="en" trans="Category"/>
+					<translation lang="de" trans="Kategorie"/>
+					<translation lang="fr" trans="Catégorie"/>
+					<translation lang="tr" trans="Kategori"/>
+					<translation lang="cz" trans="Kategorie"/>
+					<translation lang="es" trans="Categoria"/>
+				</item>
+				<item id="Display">
+					<translation lang="en" trans="Display"/>
+					<translation lang="de" trans="Anzeige"/>
+					<translation lang="fr" trans="Ecran"/>
+					<translation lang="tr" trans="Görüntüle"/>
+					<translation lang="cz" trans="Zobrazit"/>
+					<translation lang="es" trans="Visualizador"/>
+				</item>
+				<item id="Auto">
+					<translation lang="en" trans="Auto"/>
+					<translation lang="de" trans="Automatisch"/>
+					<translation lang="fr" trans="Automatique "/>
+					<translation lang="tr" trans="Otomatik"/>
+					<translation lang="cz" trans="Automaticky"/>
+					<translation lang="es" trans="Automático"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="new_tier_dialog">
+				<item id="New tier">
+					<translation lang="en" trans="New tier"/>
+					<translation lang="de" trans="Neue Spur"/>
+					<translation lang="fr" trans="Nouvelle piste "/>
+					<translation lang="tr" trans="Yeni şerit"/>
+					<translation lang="cz" trans="Nová stopa"/>
+					<translation lang="es" trans="Nueva capa"/>
+				</item>
+				<item id="Copy events from">
+					<translation lang="en" trans="Copy events from"/>
+					<translation lang="de" trans="Ereignisse kopieren aus"/>
+					<translation lang="fr" trans="Copier des événements de "/>
+					<translation lang="tr" trans="Olayları kopyala"/>
+					<translation lang="cz" trans="Kopírovat událost z"/>
+					<translation lang="es" trans="Copiar eventos de"/>
+				</item>
+				<item id="Edit speakertable...">
+					<translation lang="en" trans="Edit speakertable..."/>
+					<translation lang="de" trans="Sprechertabelle bearbeiten..."/>
+					<translation lang="fr" trans="Edition de table de locuteurs... "/>
+					<translation lang="tr" trans="Konuşmacı tablosunu düyenle..."/>
+					<translation lang="cz" trans="Upravit tabulku mluvčího..."/>
+					<translation lang="es" trans="Edición tabla de locutores..."/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="edit_timeline_item_dialog">
+				<item id="Edit timeline item">
+					<translation lang="en" trans="Edit timeline item"/>
+					<translation lang="de" trans="Zeitpunkt bearbeiten"/>
+					<translation lang="fr" trans="Edition de points du temps "/>
+					<translation lang="cz" trans="Editovat bod časové osy"/>
+					<translation lang="es" trans="Edición puntos temporales"/>
+				</item>
+				<item id="Absolute time value">
+					<translation lang="en" trans="Absolute time value"/>
+					<translation lang="de" trans="Absoluter Zeitwert"/>
+					<translation lang="fr" trans="Valeur du temps absolue"/>
+					<translation lang="cz" trans="Celkový čas"/>
+					<translation lang="es" trans="Valor de tiempo absoluto"/>
+				</item>
+				<item id="No value">
+					<translation lang="en" trans="No value"/>
+					<translation lang="de" trans="Ohne Eintrag"/>
+					<translation lang="fr" trans="Pas d'entrée"/>
+					<translation lang="cz" trans="Bez hodnoty"/>
+					<translation lang="es" trans="Ninguna entrada"/>
+				</item>
+				<item id="Enter number (sec) or hh:mm:ss.xxx">
+					<translation lang="en" trans="Enter number (sec) or hh:mm:ss.xxx"/>
+					<translation lang="de" trans="Eingabe als Dezimalzahl (sec) oder hh:mm:ss.xxx "/>
+					<translation lang="fr" trans="Entrer numéro (sec) ou hh:mm:ss.xxx"/>
+					<translation lang="cz" trans="Vložit číslo (sec) nebo hh:mm:ss.xxx"/>
+					<translation lang="es" trans="Entrar número (sec) o hh:ss:xxx"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="edit_timeline_item_format_dialog">
+				<item id="Edit timeline item format">
+					<translation lang="en" trans="Edit timeline item format"/>
+					<translation lang="de" trans="Zeitpunktformatierung bearbeiten"/>
+					<translation lang="fr" trans="Edition du format de point du temps "/>
+					<translation lang="cz" trans="Editovat formát bodu časové osy"/>
+					<translation lang="es" trans="Edición formato de punto temporal"/>
+				</item>
+				<item id="Show every n-th numbering">
+					<translation lang="en" trans="Show every n-th numbering"/>
+					<translation lang="de" trans="Jede n-te Nummerierung anzeigen"/>
+					<translation lang="fr" trans="Afficher chaque n-ème numérotation"/>
+					<translation lang="cz" trans="Zobrazit každý n-tý výpočet"/>
+					<translation lang="es" trans="Mostrar cada enésimo número"/>
+				</item>
+				<item id="Show every n-th absolute time">
+					<translation lang="en" trans="Show every n-th absolute time"/>
+					<translation lang="de" trans="Jeden n-ten absoluten Zeitwert anzeigen"/>
+					<translation lang="fr" trans="Afficher chaque n-ème valeur du temps absolue"/>
+					<translation lang="cz" trans="Zobrazit každý n-tý celkový čas"/>
+					<translation lang="es" trans="Mostrar cada enésimo valor de tiempo absoluto"/>
+				</item>
+				<item id="Absolute time format">
+					<translation lang="en" trans="Absolute time format"/>
+					<translation lang="de" trans="Darstellungsform der absoluten Zeitwerte"/>
+					<translation lang="fr" trans="Format valeur du temps absolue"/>
+					<translation lang="cz" trans="Formát celkového času"/>
+					<translation lang="es" trans="Formato valor de tiempo absoluto"/>
+				</item>
+				<item id="Miliseconds digits">
+					<translation lang="en" trans="Miliseconds digits"/>
+					<translation lang="de" trans="Anzahl der Dezimalstellen für Millisekunden"/>
+					<translation lang="cz" trans="Číslice v milisekundách"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="edit_segmentation_errors_dialog">
+				<item id="Edit segmentation errors">
+					<translation lang="en" trans="Edit segmentation errors"/>
+					<translation lang="de" trans="Segmentierungsfehler bearbeiten"/>
+					<translation lang="fr" trans="Edition d'erreurs de segmentation"/>
+					<translation lang="tr" trans="Kesimleme hatalarını düzenle"/>
+					<translation lang="cz" trans="Upravit chyby segmentace"/>
+					<translation lang="es" trans="Edición errores de segmentación"/>
+				</item>
+				<item id="TLI">
+					<translation lang="en" trans="TLI"/>
+					<translation lang="de" trans="Zeitpunkt"/>
+					<translation lang="fr" trans="Point du temps"/>
+					<translation lang="tr" trans="Zaman"/>
+					<translation lang="cz" trans="TLI - časový bod"/>
+					<translation lang="es" trans="Punto temporal"/>
+				</item>
+				<item id="Error">
+					<translation lang="en" trans="Error"/>
+					<translation lang="de" trans="Fehler"/>
+					<translation lang="fr" trans="Erreur"/>
+					<translation lang="tr" trans="Hata"/>
+					<translation lang="cz" trans="Chyba"/>
+					<translation lang="es" trans="Error"/>
+				</item>
+				<item id="Processed output">
+					<translation lang="en" trans="Processed output"/>
+					<translation lang="de" trans="Verarbeitete Ausgabe"/>
+					<translation lang="fr" trans="Edition  processée "/>
+					<translation lang="tr" trans="İşlem çıkışı"/>
+					<translation lang="cz" trans="Zpracovaný výstup"/>
+					<translation lang="es" trans="Output procesado"/>
+				</item>
+				<item id="Refresh">
+					<translation lang="en" trans="Refresh"/>
+					<translation lang="de" trans="Aktualisieren"/>
+					<translation lang="fr" trans="Actualiser"/>
+					<translation lang="tr" trans="Yenile"/>
+					<translation lang="cz" trans="Obnovit"/>
+					<translation lang="es" trans="Actualizar"/>
+				</item>
+				<item id="Tier ID">
+					<translation lang="en" trans="Tier ID"/>
+					<translation lang="de" trans="Spur-ID"/>
+					<translation lang="fr" trans="ID couche"/>
+					<translation lang="tr" trans="Şerit ID"/>
+					<translation lang="cz" trans="Stopa - ID"/>
+					<translation lang="es" trans="ID capa"/>
+				</item>
+				<item id="Timeline item ID">
+					<translation lang="en" trans="Timeline item ID"/>
+					<translation lang="de" trans="Zeitachsen-ID"/>
+					<translation lang="fr" trans="Axe de temps ID"/>
+					<translation lang="tr" trans="Zaman şeridi ID"/>
+					<translation lang="cz" trans="Časový bod - ID"/>
+					<translation lang="es" trans="ID eje temporal"/>
+				</item>
+				<item id="Error message">
+					<translation lang="en" trans="Error message"/>
+					<translation lang="de" trans="Fehlermeldung"/>
+					<translation lang="fr" trans="Message d'erreur"/>
+					<translation lang="tr" trans="Hata İletisi"/>
+					<translation lang="cz" trans="Chybové hlášení"/>
+					<translation lang="es" trans="Mensaje error"/>
+				</item>
+			</subdomain>
+			<!-- ****************************************** -->
+			<subdomain name="about_dialog">
+				<item id="Info">
+					<translation lang="en" trans="Info"/>
+					<translation lang="de" trans="Info"/>
+					<translation lang="fr" trans="Info"/>
+					<translation lang="tr" trans="Bilgi"/>
+					<translation lang="cz" trans="Info"/>
+					<translation lang="es" trans="Info"/>
+				</item>
+				<item id="Java version">
+					<translation lang="en" trans="Java version"/>
+					<translation lang="de" trans="Java-Version"/>
+					<translation lang="fr" trans="Version Java"/>
+					<translation lang="tr" trans="Java sürümü"/>
+					<translation lang="cz" trans="Java (verze)"/>
+					<translation lang="es" trans="Versión Java"/>
+				</item>
+				<item id="Operating system">
+					<translation lang="en" trans="Operating system"/>
+					<translation lang="de" trans="Betriebssystem"/>
+					<translation lang="fr" trans="Système d'exploitation"/>
+					<translation lang="tr" trans="İşletim sistemi"/>
+					<translation lang="cz" trans="Operační systém"/>
+					<translation lang="es" trans="Sistema operativo"/>
+				</item>
+				<item id="Operating system version">
+					<translation lang="en" trans="Operating system version"/>
+					<translation lang="de" trans="Betriebssystem-Version"/>
+					<translation lang="fr" trans="Version du système d'exploitation"/>
+					<translation lang="tr" trans="İşletim sistemi sürümü"/>
+					<translation lang="cz" trans="Verze operačního systému"/>
+					<translation lang="es" trans="Versión sistema operativo"/>
+				</item>
+			</subdomain>
+		</subdomain>
+		<!-- ************************************************************************************* -->
+		<!-- ************** END MISCELLANEOUS DIALOGS **************************** -->
+		<!-- ************************************************************************************* -->
+		<item id="Event description">
+			<translation lang="en" trans="Event description"/>
+			<translation lang="de" trans="Ereignisbeschreibung"/>
+			<translation lang="fr" trans="Déscription d'événements"/>
+			<translation lang="tr" trans="Olayı betimle"/>
+			<translation lang="cz" trans="Popis události"/>
+			<translation lang="es" trans="Descripción eventos"/>
+		</item>
+		<item id="Scale constant">
+			<translation lang="en" trans="Scale constant"/>
+			<translation lang="de" trans="Skalierungskonstante"/>
+			<translation lang="fr" trans="Constante d'agrandissement"/>
+			<translation lang="tr" trans="Ölçek değişmezi"/>
+			<translation lang="cz" trans="Měřítko zobrazení"/>
+			<translation lang="es" trans="Constante de clasificación"/>
+		</item>
+		<item id="Change tier order">
+			<translation lang="en" trans="Change tier order"/>
+			<translation lang="de" trans="Spurreihenfolge verändern"/>
+			<translation lang="fr" trans="Changer l'ordre de couches"/>
+			<translation lang="tr" trans="Şerit sırasını değiştir"/>
+			<translation lang="cz" trans="Změnit pořadí stop"/>
+			<translation lang="es" trans="Cambiar orden de capas"/>
+		</item>
+		<item id="Edit event properties...">
+			<translation lang="en" trans="Edit event properties..."/>
+			<translation lang="de" trans="Ereigniseigenschaften bearbeiten..."/>
+			<translation lang="fr" trans="Edition de propriétés d'événements..."/>
+			<translation lang="tr" trans="Olay özelliklerini düzenle..."/>
+			<translation lang="cz" trans="Upravit vlastnosti události..."/>
+			<translation lang="es" trans="Edición propiedades de evento..."/>
+		</item>
+		<item id="Choose a timeline item">
+			<translation lang="en" trans="Choose a timeline item"/>
+			<translation lang="de" trans="Zeitpunkt auswählen"/>
+			<translation lang="fr" trans="Constante d'agrandissement"/>
+			<translation lang="tr" trans="Zamanı seç"/>
+			<translation lang="cz" trans="Vybrat časový bod"/>
+			<translation lang="es" trans="Seleccionar punto temporal"/>
+		</item>
+		<item id="Add bookmark">
+			<translation lang="en" trans="Add bookmark"/>
+			<translation lang="de" trans="Lesezeichen hinzufügen"/>
+			<translation lang="fr" trans="Ajouter marque-page"/>
+			<translation lang="tr" trans="Sık kullanılanlara ekle"/>
+			<translation lang="cz" trans="Přidat záložku"/>
+			<translation lang="es" trans="Añadir marcador"/>
+		</item>
+		<item id="Bookmark name">
+			<translation lang="en" trans="Bookmark name"/>
+			<translation lang="de" trans="Name des Lesezeichens"/>
+			<translation lang="fr" trans="Nom du marque-page"/>
+			<translation lang="tr" trans="Sık kullanılanlar adı"/>
+			<translation lang="cz" trans="Název záložky"/>
+			<translation lang="es" trans="Nombre del marcador"/>
+		</item>
+		<item id="Bookmark">
+			<translation lang="en" trans="Bookmark"/>
+			<translation lang="de" trans="Lesezeichen"/>
+			<translation lang="fr" trans="Marque page"/>
+			<translation lang="tr" trans="Sık kullanılanlar"/>
+			<translation lang="cz" trans="Záložka"/>
+			<translation lang="es" trans="Marcador"/>
+		</item>
+		<item id="Open format table from file">
+			<translation lang="en" trans="Open format table from file"/>
+			<translation lang="de" trans="Formatierungstabelle als Datei öffnen"/>
+			<translation lang="fr" trans="Ouvrir table de formats comme fichier"/>
+			<translation lang="tr" trans="Biçim tablosunu dosya olarak aç"/>
+			<translation lang="cz" trans="Otevřít formát tabulky jako"/>
+			<translation lang="es" trans="Abrir tabla de formato como archivo"/>
+		</item>
+		<item id="Save a format table to file">
+			<translation lang="en" trans="Save a format table to file"/>
+			<translation lang="de" trans="Formatierungstabelle als Datei speichern"/>
+			<translation lang="fr" trans="Enrégistrer tables de formats comme fichier"/>
+			<translation lang="tr" trans="Biçim tablosunu dosya olarak kaydet"/>
+			<translation lang="cz" trans="Uložit formát tabulky jako"/>
+			<translation lang="es" trans="Guardar tabla de formato como archivo"/>
+		</item>
+		<item id="Edit tier format">
+			<translation lang="en" trans="Edit tier format"/>
+			<translation lang="de" trans="Spurformatierung bearbeiten"/>
+			<translation lang="fr" trans="Edition de format de piste"/>
+			<translation lang="tr" trans="Şerit biçimini düzenle"/>
+			<translation lang="cz" trans="Upravit formát stopy"/>
+			<translation lang="es" trans="Edición formato capa"/>
+		</item>
+		<item id="Count result">
+			<translation lang="en" trans="Count result"/>
+			<translation lang="de" trans="Auszählungsergebnis"/>
+			<translation lang="fr" trans="Résultat de dénombrement"/>
+			<translation lang="tr" trans="Sayaç sonucu"/>
+			<translation lang="cz" trans="Výpočet výsledku"/>
+			<translation lang="es" trans="Resultado de contaje"/>			
+		</item>
+		<item id="Edit speakertable">
+			<translation lang="en" trans="Edit speakertable"/>
+			<translation lang="de" trans="Sprechertabelle bearbeiten"/>
+			<translation lang="fr" trans="Edition de table de locuteurs"/>
+			<translation lang="tr" trans="Konuşmacı tablosunu düzenle"/>
+			<translation lang="cz" trans="Upravit tabulku mluvčího"/>
+			<translation lang="es" trans="Edición tabla de locutores"/>
+		</item>
+		<item id="Partitur parameters">
+			<translation lang="en" trans="Partitur parameters"/>
+			<translation lang="de" trans="Partitureinstellungen"/>
+			<translation lang="fr" trans="Préférences pour la partition"/>
+			<translation lang="tr" trans="Partisyon parametreleri"/>
+			<translation lang="cz" trans="Parametry partitury"/>
+			<translation lang="es" trans="Preferencias para la partitura"/>
+			
+		</item>
+		<item id="Set the HTML file for export">
+			<translation lang="en" trans="Set the HTML file for export"/>
+			<translation lang="de" trans="Ausgabe als HTML-Datei speichern unter"/>
+			<translation lang="fr" trans="Enrégistrer édition sous fichier HTML"/>
+			<translation lang="tr" trans="Çıktıyı HTML dosyası olarak farklı kaydet"/>
+			<translation lang="cz" trans="Nastavit HTML soubor pro export"/>
+			<translation lang="es" trans="Guardar output como archivo HTML "/>
+		</item>
+		<item id="Frame options">
+			<translation lang="en" trans="Frame options"/>
+			<translation lang="de" trans="Frame-Optionen"/>
+			<translation lang="fr" trans="Options de cadre "/>
+			<translation lang="tr" trans="Çerçeve seçenekleri"/>
+			<translation lang="cz" trans="Možnosti ohraničení"/>
+			<translation lang="es" trans="Opciones de cuadro"/>
+		</item>
+		<item id="No frames">
+			<translation lang="en" trans="No frames"/>
+			<translation lang="de" trans="Keine Frames"/>
+			<translation lang="fr" trans="Pas de cadre"/>
+			<translation lang="tr" trans="Çerçevesiz"/>
+			<translation lang="cz" trans="Bez ohraničení"/>
+			<translation lang="es" trans="Ningun cuadro"/>
+		</item>
+		<item id="Frames">
+			<translation lang="en" trans="Frames"/>
+			<translation lang="de" trans="Frames"/>
+			<translation lang="fr" trans="Cadre"/>
+			<translation lang="tr" trans="Çerçeve"/>
+			<translation lang="cz" trans="Ohraničení"/>
+			<translation lang="es" trans="Cuadros"/>
+		</item>
+		<item id="Subdirectory for SVG files">
+			<translation lang="en" trans="Subdirectory for SVG files"/>
+			<translation lang="de" trans="Unterverzeichnis für SVG-Dateien"/>
+			<translation lang="fr" trans="Sous-dossier pour fichiers SVG"/>
+			<translation lang="tr" trans="SVG dosyaları için altdizin"/>
+			<translation lang="cz" trans="Podadresář pro SVG soubory"/>
+			<translation lang="es" trans="Subdirectorio para archivos SVG"/>
+		</item>
+		<item id="Base filename for SVG files">
+			<translation lang="en" trans="Base filename for SVG files"/>
+			<translation lang="de" trans="Namensstamm für SVG-Dateien"/>
+			<translation lang="fr" trans="Tronc de nom pour fichier SVG"/>
+			<translation lang="tr" trans="SVG dosyaları için temel dosya adı"/>
+			<translation lang="cz" trans=" Základ názvu souboru pro SVG data"/>
+			<translation lang="es" trans="Tronco de nombre para ficheros SVG"/>
+		</item>
+		<item id="Set the RTF file for export">
+			<translation lang="en" trans="Set the RTF file for export"/>
+			<translation lang="de" trans="Ausgabe als RTF-Datei speichern unter"/>
+			<translation lang="fr" trans="Enrégistrer edition de fichier RTF sous"/>
+			<translation lang="tr" trans="RTF dosya çıktısını farklı kaydet"/>
+			<translation lang="cz" trans="Nastavit RTF soubor pro export"/>
+			<translation lang="es" trans="Guardar output como archivo RTF "/>
+		</item>
+		<item id="Save changes to the format table">
+			<translation lang="en" trans="Save changes to the format table"/>
+			<translation lang="de" trans="Änderungen in der Format-Datei übernehmen"/>
+			<translation lang="fr" trans="Enrégistrer modifications du fichier format"/>
+			<translation lang="tr" trans="Biçim dosyasındaki değiştirmeleri kaydet"/>
+			<translation lang="cz" trans="Uložit změny do formátu tabulky"/>
+			<translation lang="es" trans="Guardar cambios en la tabla de formato"/>
+		</item>
+		<item id="Yes">
+			<translation lang="en" trans="Yes"/>
+			<translation lang="de" trans="Ja"/>
+			<translation lang="fr" trans="Oui"/>
+			<translation lang="tr" trans="Evet"/>
+			<translation lang="cz" trans="Ano"/>
+			<translation lang="es" trans="Sí"/>
+		</item>
+		<item id="No">
+			<translation lang="en" trans="No"/>
+			<translation lang="de" trans="Nein"/>
+			<translation lang="fr" trans="Non"/>
+			<translation lang="tr" trans="Hayır"/>
+			<translation lang="cz" trans="Ne"/>
+			<translation lang="es" trans="No"/>
+		</item>
+		<item id="Cancel">
+			<translation lang="en" trans="Cancel"/>
+			<translation lang="de" trans="Abbrechen"/>
+			<translation lang="fr" trans="Annuler"/>
+			<translation lang="tr" trans="İptal"/>
+			<translation lang="cz" trans="Zrušit"/>
+			<translation lang="es" trans="Cancelar"/>
+		</item>
+		<item id="Save changes to the transcription">
+			<translation lang="en" trans="Save changes to the transcription"/>
+			<translation lang="de" trans="Änderungen in der Transkription übernehmen"/>
+			<translation lang="fr" trans="Enrégistrer modifications de la transcription"/>
+			<translation lang="tr" trans="Transkripsyondaki değiştirmeleri kaydet"/>
+			<translation lang="cz" trans="Uložit změny v transkripci"/>
+			<translation lang="es" trans="Guardar cambios en la transcripción"/>
+		</item>
+		<item id="New transcription from speakertable">
+			<translation lang="en" trans="New transcription from speakertable"/>
+			<translation lang="de" trans="Neue Transkription aus Sprechertabelle"/>
+			<translation lang="fr" trans="Nouvelle transcription de la table de locuteur"/>
+			<translation lang="tr" trans="Konuşmacı tablosundan yeni transkripsyon"/>
+			<translation lang="cz" trans="Nová transkripce z tabulky mluvčího"/>
+			<translation lang="es" trans="Nueva transcripción por la tabla de locutores"/>
+		</item>
+		<item id="Open transcription from file">
+			<translation lang="en" trans="Open transcription from file"/>
+			<translation lang="de" trans="Transkription öffnen"/>
+			<translation lang="fr" trans="Ouvrir transcription"/>
+			<translation lang="tr" trans="Transkripsyonu aç"/>
+			<translation lang="cz" trans="Otevřít transkripci ze souboru"/>
+			<translation lang="es" trans="Abrir transcripción"/>
+		</item>
+		<item id="Attribute">
+			<translation lang="en" trans="Attribute"/>
+			<translation lang="de" trans="Attribut"/>
+			<translation lang="fr" trans="Attribut"/>
+			<translation lang="tr" trans="Öznitelik"/>
+			<translation lang="cz" trans="Atribut"/>
+			<translation lang="es" trans="Atributo"/>
+		</item>
+		<item id="Value">
+			<translation lang="en" trans="Value"/>
+			<translation lang="de" trans="Wert"/>
+			<translation lang="fr" trans="Valeur"/>
+			<translation lang="tr" trans="Değer"/>
+			<translation lang="cz" trans="Hodnota"/>
+			<translation lang="es" trans="Valor"/>
+		</item>
+		<item id="OK">
+			<translation lang="en" trans="OK   "/>
+			<translation lang="de" trans="OK   "/>
+			<translation lang="fr" trans="D'accord"/>
+			<translation lang="tr" trans="Tamam"/>
+			<translation lang="cz" trans="OK"/>
+			<translation lang="es" trans="OK"/>
+		</item>
+		<item id="Save basic transcription as">
+			<translation lang="en" trans="Save basic transcription as"/>
+			<translation lang="de" trans="Transkription speichern unter"/>
+			<translation lang="fr" trans="Enrégistrer transcription sous"/>
+			<translation lang="tr" trans="Transkripsyonu farklı kaydet"/>
+			<translation lang="cz" trans="Uložit transkripci jako"/>
+			<translation lang="es" trans="Guardar transcripción como"/>
+		</item>
+	</translations>
+</internationalization>

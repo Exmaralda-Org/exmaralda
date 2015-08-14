@@ -1,0 +1,55 @@
+<style type="text/css" media="print">
+
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: larger;
+}
+
+table {
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+td {
+	align: top;
+	valign: top;
+}
+
+
+.description {
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+.speaker {
+	font-size: larger;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+.transcription {
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+.recording {
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+img {
+	display: none;
+	}
+
+.communication {
+	font-size: larger;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+.language {
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+</style>

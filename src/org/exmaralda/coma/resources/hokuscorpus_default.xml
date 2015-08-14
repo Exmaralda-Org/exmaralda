@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hokuscorpusconfig name="default">
+	<section name="dirs">
+		<!--<basedir>S:\TP-Z2\DATEN\E3\0.4</basedir>-->
+		<outputDir use="required">%BaseDirectory%\output</outputDir>
+	</section>
+
+	<section name="files">
+		<comafile use="required">%BaseDirectory%\PAIDUS.coma</comafile>
+		<transferMetaDataOutputFile use="optional">%OutputDirectory%\TransferMetaData_Messages.txt</transferMetaDataOutputFile>
+		<normalizationOutputFile use="optional">%OutputDirectory%\Normalization_Messages.txt</normalizationOutputFile>
+		<segmentationOutputFile use="optional">%OutputDirectory%\Segmentation_Messages.txt</segmentationOutputFile>
+		<subdirectoriesOutputFile use="optional">%OutputDirectory%\Subdirectories_Messages.txt</subdirectoriesOutputFile>
+		<partiturOutputFile use="optional">%OutputDirectory%\Partitur_Messages.txt</partiturOutputFile>
+		<ulistOutputFile use="optional">%OutputDirectory%\Ulist_Messages.txt</ulistOutputFile>
+		<wlistOutputFile use="optional">%OutputDirectory%\Wlist_Messages.txt</wlistOutputFile>
+		<headOutputFile use="optional">%OutputDirectory%\Head_Messages.txt</headOutputFile>
+		<TEIOutputFile use="optional">%OutputDirectory%\TEI_Messages.txt</TEIOutputFile>
+		<EAFOutputFile use="optional">%OutputDirectory%\EAF_Messages.txt</EAFOutputFile>
+		<AGOutputFile use="optional">%OutputDirectory%\AG_Messages.txt</AGOutputFile>
+		<PraatOutputFile use="optional">%OutputDirectory%\Praat_Messages.txt</PraatOutputFile>
+		<PepeOutputFile use="optional">%OutputDirectory%\Pepe_Messages.txt</PepeOutputFile>
+		<!--Corpus files-->
+		<corpusHTMLFile use="required">%BaseDirectory%\corpus.html</corpusHTMLFile>
+		<corpusCountXMLFile use="optional">%BaseDirectory%\SegmentCount.xml</corpusCountXMLFile>
+		<corpusCountHTMLFile use="optional">%BaseDirectory%\SegmentCount.html</corpusCountHTMLFile>
+		<corpusCountHTMLFile2 use="optional">%BaseDirectory%\SegmentCount2.html</corpusCountHTMLFile2>
+	</section>
+
+	<section name="naming">
+		<segmentationSuffix  use="optional">_s</segmentationSuffix>
+		<partiturSuffix use="optional">_partiture</partiturSuffix>
+		<ulistSuffix use="optional">_ulist</ulistSuffix>
+		<wlistSuffix use="optional">_wlist</wlistSuffix>
+		<headSuffix use="optional">_head</headSuffix>
+		<TEISuffix use="optional">_TEI</TEISuffix>
+		<EAFSuffix use="optional">_EAF</EAFSuffix>
+		<AGSuffix use="optional">_AG</AGSuffix>
+		<PraatSuffix use="optional">_PRAAT</PraatSuffix>
+		<PepeSuffix use="optional">_PEPE</PepeSuffix>
+	</section>
+
+	<section name="stylesheets">
+		<!--the stylesheet which transforms the COMA file to HTML -->
+		<CorpusStylesheet use="required">%StylesheetDirectory%\comadisplay.xsl</CorpusStylesheet>
+		<!--the stylesheet which formats the EXMARaLDA partitur for HTML output -->
+		<HTMLPartiturStylesheet use="optional">%StylesheetDirectory%\FormatTable4BasicTranscription.xsl</HTMLPartiturStylesheet>
+		<!--the stylesheet which transforms the XML-IT output to HTML -->
+		<ITPartiturStylesheet use="optional">%StylesheetDirectory%\Partitur2HTML.xsl</ITPartiturStylesheet>
+		<!--the stylesheet which formats the EXMARaLDA partitur for RTF output -->
+		<RTFPartiturStylesheet use="optional">%StylesheetDirectory%\FormatTable4BasicTranscription.xsl</RTFPartiturStylesheet>
+		<!--the stylesheet which transforms the XML list transcription to HTML -->
+		<ListStylesheet use="optional">%StylesheetDirectory%\List2HTML.xsl</ListStylesheet>
+		<!--the stylesheet which transforms the XML transcription head to HTML -->
+		<HeadStylesheet use="optional">%StylesheetDirectory%\Head2HTML.xsl</HeadStylesheet>
+		<!--the stylesheet which transforms the XML transcription to a TEI Skeleton -->
+		<TEISkeletonStylesheet use="optional">%StylesheetDirectory%\EXMARaLDA2TEI_Skeleton.xsl</TEISkeletonStylesheet>
+		<!--the stylesheet which transforms segment chains to TEI utterances -->
+		<TEIsc2uStylesheet use="optional">%StylesheetDirectory%\SegmentChain2TEIUtterance.xsl</TEIsc2uStylesheet>
+		<!--the stylesheet which cleans and sorts the TEI document -->
+		<TEICleanAndSortStylesheet use="optional">%StylesheetDirectory%\TEICleanAndSort.xsl</TEICleanAndSortStylesheet>
+		<!--the stylesheet for performing the segment count -->
+		<SegmentCountStylesheet use="optional">%StylesheetDirectory%\CountSegments.xsl</SegmentCountStylesheet>
+		<!--the stylesheet for displaying the segment count in HTML-->
+		<SegmentCount2HTMLStylesheet use="optional">%StylesheetDirectory%\CountSegments2HTML_By_Communication.xsl</SegmentCount2HTMLStylesheet>
+		<SegmentCount2HTMLStylesheet2 use="optional">%StylesheetDirectory%\CountSegments2HTML_By_Speaker.xsl</SegmentCount2HTMLStylesheet2>
+
+		<!-- the stylesheet for transforming files into the PEPE format-->
+		<PepeStylesheet use="optional">%StylesheetDirectory%\PaidusList2Pepe.xsl</PepeStylesheet>
+	</section>
+
+	<!--	
+	:commands
+	java -cp %jarfile% org.exmaralda.partitureditor.jexmaralda.command.XSLTransform %COMAFile% %CorpusStylesheet% %CorpusHTML% TRUE
+	:java -cp %jarfile% org.exmaralda.common.corpusbuild.TransferMetaData %COMAFile% %TransferMetaDataOutputFile% 
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.NormalizeTranscriptions %COMAFile% %NormalizationOutputFile% 
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.SegmentTranscriptions %COMAFile% %SegmentationOutputFile% %SegmentationSuffix%
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WriteWordLists %COMAFile% %wlistOutputFile% %wlistSuffix%
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WriteHeadFiles %COMAFile% %HeadOutputFile% %headSuffix% %HeadStylesheet% ../../../
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WriteEAFFiles %COMAFile% %EAFOutputFile% %EAFSuffix% 
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WriteAGFiles %COMAFile% %AGOutputFile% %AGSuffix% 
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WritePraatFiles %COMAFile% %PraatOutputFile% %PraatSuffix% 
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WritePEPE %COMAFile% %PepeOutputFile% %PepeSuffix% %PepeStylesheet%  ../../../
+	
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WriteCHATFilesFromHIAT %COMAFile%
+	
+	
+	: counting
+	:java -cp %jarfile% org.exmaralda.exakt.exmaraldaSearch.Count %COMAFile% %SegmentCountStylesheet% %SegmentCount2HTMLStylesheet% %CorpusCountXML% %CorpusCountHTML%
+	:java -cp %jarfile% org.exmaralda.exakt.exmaraldaSearch.Count %COMAFile% %SegmentCountStylesheet% %SegmentCount2HTMLStylesheet2% %CorpusCountXML% %CorpusCountHTML2%
+	
+	
+	:time-consuming commands
+	java -cp %jarfile% -Xmx1024m org.exmaralda.common.corpusbuild.WriteUtteranceLists %COMAFile% %UlistOutputFile% %ulistSuffix% %ListStylesheet%  ../../../
+	java -cp %jarfile% -Xmx1024m org.exmaralda.common.corpusbuild.WritePartiturs %COMAFile% %PartiturOutputFile% %PartiturSuffix% %HTMLPartiturStylesheet% %ITPartiturStylesheet% %RTFPartiturStylesheet% ../../../
+	java -cp %jarfile% org.exmaralda.common.corpusbuild.WriteTEIFiles %COMAFile% %TEIOutputFile% %TEISuffix% %TEISkeletonStylesheet% %TEIsc2uStylesheet% %TEICleanAndSortStylesheet%
+	
+	:zipping
+	:C:\Programme\WinRAR\Rar.exe a -r PEPE.zip *_PEPE.xml
+	:C:\Programme\WinRAR\Rar.exe a -r TEI.zip *_TEI.xml
+	:C:\Programme\WinRAR\Rar.exe a -r PRAAT.zip *.textGrid
+	:C:\Programme\WinRAR\Rar.exe a -r PDF.zip *.pdf
+	:C:\Programme\WinRAR\Rar.exe a -r -x*_TEI.xml -x*_PEPE.xml -x*_AG.xml -x*_ulist.xml -x*_partiture.xml EXMARaLDA.zip *.xml *.mp3
+	:C:\Programme\WinRAR\Rar.exe a -r -x*_TEI.xml -x*_PEPE.xml -x*_AG.xml -x*_ulist.xml -x*_partiture.xml EXMARaLDA_NoAudio.zip *.xml
+	-->
+
+</hokuscorpusconfig>

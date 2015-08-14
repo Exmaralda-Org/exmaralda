@@ -1,0 +1,241 @@
+<?xml version='1.0'?>
+<!--test-->
+<!--<project name="coma2j6" default="clean" basedir=".">-->
+<project name="coma2j6" default="clean" basedir=".">
+	<!-- set to false for release versions -->
+	<property name="release" value="release" />
+	<property name="preview" value="false" />
+	<property name="template_directory" value="templates/" />
+	<property name="resources" value="src/org/exmaralda/coma/resources" />
+	<property name="exaktresources" value="src/org/exmaralda/exakt/exmaraldaSearch/swing/resources" />
+	
+	<property name="docfolder" value="templates/documentation" />
+
+	<!-- make version properties -->
+	<xslt in="${template_directory}/changes.xml" out="${template_directory}/version.properties" style="${template_directory}/changes2version_properties.xsl" />
+	<property file="${resources}/version.properties" />
+	<property name="targetroot" value="org/exmaralda/coma/" />
+	<property name="calicons" value="src/com/toedter/calendar/images" />
+	<property name="caltarget" value="com/toedter/calendar/images" />
+	<property name="source" value="src" />
+	<property name="build" value="build" />
+	<property name="doc" value="javadoc" />
+	<property name="release" value="builds" />
+	<property name="lib" value="lib" />
+	<property name="eclipseClasses" value="bin" />
+
+	<fileset dir="libs" id="libraries">
+		<include name="ant.jar" />
+		<include name="AppleJavaExtensions.jar" />
+		<include name="args4j-2.0.9.jar" />
+		<include name="basicplayer3.0.jar" />
+		<include name="bounce.jar" />
+		<include name="comfyj-2.3.jar" />
+		<include name="commons-io-2.4.jar" />
+		<include name="commons-lang-2.5.jar" />
+		<include name="commons-net-2.0.jar" />
+		<include name="commons-net-ftp-2.0.jar" />
+
+		<!-- -->
+		<include name="httpclient-4.1-alpha2.jar" />
+		<include name="httpclient-cache-4.1-alpha2.jar" />
+		<include name="httpcore-4.1-beta1.jar" />
+		<include name="httpmime-4.1-alpha2.jar" />
+		<!-- -->
+		<include name="saxon9.jar" />
+
+		<include name="elan.jar" />
+		<include name="jdom.jar" />
+		<include name="jaxen-core.jar" />
+		<include name="jaxen-jdom.jar" />
+		<include name="mrj.jar" />
+		<include name="QTJava.zip" />
+		<include name="resolver.jar" />
+		<include name="saxpath.jar" />
+		<include name="xalan.jar" />
+		<include name="xerces.jar" />
+		<include name="xercesImpl.jar" />
+		<include name="xml-apis.jar" />
+		<include name="forms-1.1.0.jar" />
+		<include name="SunJMF/*.jar" />
+		<include name="jctable.jar" />
+		<include name="tritonus_share.jar" />
+		<include name="mp3spi1.9.4.jar" />
+		<include name="winpack-3.6.jar" />
+		<include name="jniwrap-3.6.1.jar" />
+		<include name="quaqua.jar" />
+		<include name="swing-worker-1.2.jar" />
+		<include name="saxonb9-0-0-4j/saxon9.jar" />
+		<include name="saxonb9-0-0-4j/saxon-jdom.jar" />
+		<include name="fedora-client-0.1.6-with-dependencies.jar" />
+		<include name="ipsk.jar" />
+		<include name="ojdbc6.jar" />
+
+	</fileset>
+
+	<path id="comaresources">
+		<fileset refid="libraries" />
+	</path>
+	<path id="svnant.classpath">
+		<fileset dir="libs/svnant/lib/">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.classpath" />
+
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="libs/jarbundler-2.1.0.jar" />
+	<taskdef name="jsmoothgen" classname="net.charabia.jsmoothgen.ant.JSmoothGen" classpath="libs/jsmooth/lib/jsmoothgen-ant.jar" />
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="libs/ant-contrib.jar" />
+		</classpath>
+	</taskdef>
+
+
+
+
+	<target name="prepare">
+		<tstamp />
+		<svn>
+			<wcVersion path="." />
+		</svn>
+
+		<echo message="Subversion repository url: ${revision.max}" />
+
+		<delete dir="${release}/mac/Coma.app" />
+		<delete dir="tmp" />
+		<mkdir dir="tmp" />
+		<copy file="${template_directory}/version.properties" tofile="${resources}/version.properties" />
+		<copy file="libs/comfyj.lic" toFile="${build}/comfyj.lic" />
+		<copy file="libs/jniwrap.lic" toFile="${build}/jniwrap.lic" />
+		<copy file="libs/libquaqua.jnilib" toFile="${build}/libquaqua.jnilib" />
+		<copy file="libs/libquaqua64.jnilib" toFile="${build}/libquaqua64.jnilib" />
+		<unjar dest="tmp">
+			<fileset refid="libraries" />
+		</unjar>
+		<delete file="tmp/META-INF/JNIWRAPP.DSA" />
+		<delete file="tmp/META-INF/JNIWRAPP.SF" />
+		<mkdir dir="${build}" />
+		<mkdir dir="${build}/${caltarget}" />
+		<copy todir="${build}/${caltarget}" verbose="true">
+			<fileset dir="${calicons}" />
+		</copy>
+		<copy todir="${build}/${targetroot}/resources">
+			<fileset dir="${resources}">
+				
+				<exclude name="**/raw/**" />
+				<exclude name="**/ftppass.*" />
+			</fileset>
+			<fileset dir="${exaktresources}" />
+		</copy>
+		<mkdir dir="${lib}" />
+		<mkdir dir="${doc}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<copy todir="${build}/">
+			<fileset dir="${eclipseClasses}">
+				<include name="**/*.class" />
+			</fileset>
+		</copy>
+		<javac verbose="true" destdir="${build}" sourcepath="" failonerror="true" memorymaximumsize="512m" includeantruntime="false" nowarn="true" target="1.6">
+			<src path="${source}" />
+			<include name="**/*.java" />
+			<exclude name="_*" />
+			<exclude name="**/discarded/**" />
+			<exclude name="**/teide/**" />
+			<exclude name="**/stanford/**" />
+			<exclude name="**/sound/*VLC*" />
+			<classpath refid="comaresources" />
+		</javac>
+		<copy todir="${build}/">
+			<fileset dir="${source}">
+				<include name="**/*.xsl" />
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="makesplash" depends="compile">
+		<copy file="${resources}/images/splash.png" toFile="${build}/${targetroot}/resources/images/splash.png" />
+	</target>
+
+
+	<target name="jar" depends="makesplash">
+		<jar compress="true" jarfile="${lib}/coma.jar" basedir="${build}">
+			<fileset dir="tmp" />
+			<fileset dir="." includes="**/images" />
+			<manifest>
+				<attribute name="Main-Class" value="org.exmaralda.coma.launcher.Launcher" />
+				<attribute name="Class-Path" value="coma.jar" />
+				<attribute name="SplashScreen-Image" value="org/exmaralda/coma/resources/images/splash.png" />
+			</manifest>
+		</jar>
+	</target>
+
+
+	<target name="clean" depends="copy_app">
+		<!--	<delete dir="${build}" /> -->
+	</target>
+
+	<!-- creates the application bundle for the mac using jarbundler -->
+	<target name="do_mac_app" depends="jar">
+		<jarbundler dir="${release}/mac/" name="Coma" mainclass="org.exmaralda.coma.launcher.Launcher" jar="${lib}/coma.jar" splashfile="${resources}/images/splash.png" stubfile="${template_directory}/mac/binaries/JavaApplicationStub" icon="${resources}/images/coma.icns" version="${version}" verbose="true">
+			<documenttype name="EXMARaLDA Corpus File" extensions="coma" iconFile="${resources}/images/comadocument.icns" role="Editor" />
+		</jarbundler>
+	</target>
+
+	<target name="copy_app" depends="do_mac_app">
+		<copy todir="S:/Software/EXMARaLDA/BUILD/PREVIEW/mac/Coma.app">
+			<fileset dir="${release}/mac/Coma.app" />
+		</copy>
+		<copy todir="S:/Software/EXMARaLDA/BUILD/Coma.app">
+			<fileset dir="${release}/mac/Coma.app" />
+		</copy>
+		<!--		<zip basedir="${release}/mac/" file="${release}/mac/coma.zip" preserve0permissions="true">
+			<include name="**/Coma.app/**/*" />
+		</zip> -->
+		<exec executable= "D:\Code\EXMARaLDA\libs\7-ZipPortable\App\7-Zip\7z.exe" dir="${release}/mac/">
+			<arg value="a" />
+			<arg line="-tzip coma.zip Coma.app" />
+		</exec>
+	</target>
+
+
+
+	<target name="packsources">
+		<tar destfile="${release}/source/source.tar" compression="gzip" basedir="${source}" excludes="**/discarded/**/*.java" />
+	</target>
+
+	<!--	<target name="upload_preview" depends="zip_preview">
+		<echo message="generating bugs list" />
+		<xslt in="${template_directory}/changes.xml" out="tmp/coma_bugs.html" style="${template_directory}/coma_changes2knownbugs.xsl" />
+		<xslt in="${template_directory}/changes.xml" out="tmp/coma_changes.html" style="${template_directory}/coma_changes2html.xsl" force="true">
+			<classpath location="libs/saxonb9-0-0-4j/saxon9.jar" />
+
+		</xslt>
+		<property file="${resources}/ftppass.properties" />
+		<echo message="uploading mac-coma-preview" />
+		<ftp password="${uhhpass}" server="${uhhserver}" userid="${uhhlogin}" remotedir="${uhhfolder}/preview">
+			<fileset dir="${release}/mac">
+				<include name="coma_preview.zip" />
+			</fileset>
+		</ftp>
+		<echo message="uploading bugs list" />
+		<ftp password="${exmpass}" server="${exmserver}" userid="${exmlogin}" remotedir="${exmfolder}">
+			<fileset dir="tmp">
+				<include name="coma_bugs.html" />
+				<include name="coma_changes.html" />
+			</fileset>
+		</ftp>
+
+	</target>
+	<target name="sftp-upload">
+		<scp todir="${uhhlogin}:${uhhpass}@rrzlogin.rrz.uni-hamburg.de:/www/exmaralda/files/preview" sftp="true" trust="true">
+		</scp>
+	</target>
+	-->
+</project>
+

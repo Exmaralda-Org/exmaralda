@@ -1,0 +1,363 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>FOLKER changes</title><style type="text/css">
+                                tr, th {
+                                font-family: "Courier New", Courier, monospace;
+                                font-size: 11px;
+                                }
+
+                                .bug {
+                                background-color: #FFCCCC;
+                                }
+                                .feature {
+                                background-color: #99DDFF;
+                                }
+                                .change {
+                                background-color: #CCCCCC;
+                                }
+
+                </style></head>
+   <body>
+      <h1>FOLKER changes</h1>
+      <h2>folker</h2>
+      <table rules="all" frame="box" width="600px">
+         <tr>
+            <th>Date</th>
+            <th>Change</th>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>08.04.2009</b></td>
+            <td style="padding:0.5em;">Changed selection/focus behaviour -  WS mail: 1</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>07.04.2009</b></td>
+            <td style="padding:0.5em;">disable output and copy when no document is loaded</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">pause length is automatically recalculated (not happy yet: this is more complex!) - WS mail: 7</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">changed behaviour for waveform: cursor is not reset when playback is stopped</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">navigation action for waveform</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">vertical magnify of waveform -  WS mail: 8</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">special behaviour for last interval in partitur</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">configured popup menus in partitur for FOLKER -  WS mail: 6</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">changed scrolling behaviour when a new event is added in the segment view -  WS mail: 5</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">selection in partitur now reacts correctly when extended through CTRL+mouse click - WS mail: 4</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">partitur output: different formatting for speakerless tier, speakerless tier(s) outside partitur frame - WS mail: 3</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">partitur output: transcription is now stratified - WS mail: 3</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>06.04.2009</b></td>
+            <td style="padding:0.5em;">fixed bug in encoding ouf breathing (out) - WS mail: 2</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>03.04.2009</b></td>
+            <td style="padding:0.5em;">changed document icon</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>01.04.2009</b></td>
+            <td style="padding:0.5em;">Don't offer DirectShow-Player in Preferences when not on Windows</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>01.04.2009</b></td>
+            <td style="padding:0.5em;">Export action: needs to read new EXMARaLDA suffix EXB</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>01.04.2009</b></td>
+            <td style="padding:0.5em;">Import action: needs to read new EXMARaLDA suffix EXB</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>06.03.2009</b></td>
+            <td style="padding:0.5em;">Edit recording action</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>06.03.2009</b></td>
+            <td style="padding:0.5em;">Changed data model/parsing for unintelligible and breathe</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>05.03.2009</b></td>
+            <td style="padding:0.5em;">Split event now takes care that resulting segments don't become smaller than the tolerance</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>05.03.2009</b></td>
+            <td style="padding:0.5em;">Added log messages for all major actions</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>04.03.2009</b></td>
+            <td style="padding:0.5em;">Fixed bug writing null audio file (Wilfried's mail)</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>03.03.2009</b></td>
+            <td style="padding:0.5em;">Added tooltips with full path in recent files items in file menu</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>03.03.2009</b></td>
+            <td style="padding:0.5em;">Waveform view also makes sure that selection boundaries are not closer to next timepoints than than tolerance</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>02.03.2009</b></td>
+            <td style="padding:0.5em;">Waveform view now makes sure that selection length does not become less than tolerance</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>02.03.2009</b></td>
+            <td style="padding:0.5em;">Changed tolerance from 100 to 50 miliseconds</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>02.03.2009</b></td>
+            <td style="padding:0.5em;">Caught bug when opening null audio file (Wilfried's mail)</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>27.02.2009</b></td>
+            <td style="padding:0.5em;">Added mark functionality to the waveform panel</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>26.02.2009</b></td>
+            <td style="padding:0.5em;">Added possibility to select parse level</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>26.02.2009</b></td>
+            <td style="padding:0.5em;">Added possibility to select parse level</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>26.02.2009</b></td>
+            <td style="padding:0.5em;">Copy Action</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>26.02.2009</b></td>
+            <td style="padding:0.5em;">Disabled speakertable edit for partitur view</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>25.02.2009</b></td>
+            <td style="padding:0.5em;">Added quantification HTML output</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>25.02.2009</b></td>
+            <td style="padding:0.5em;">Added partitur HTML output</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>25.02.2009</b></td>
+            <td style="padding:0.5em;">Added segment HTML output</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>25.02.2009</b></td>
+            <td style="padding:0.5em;">Changes in the HTML contribution list output: added columns for numbering, added brackets for overlaps</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>25.02.2009</b></td>
+            <td style="padding:0.5em;">Fixed bug in output: suffix must be appended if none provided by the user</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>05.02.2009</b></td>
+            <td style="padding:0.5em;">Output action</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>04.02.2009</b></td>
+            <td style="padding:0.5em;">Changed symbols for: breathe, assimilation, unintelligible and alternative (Wilfried's, Martin's and my own mail)</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>29.01.2009</b></td>
+            <td style="padding:0.5em;">Possibility to unassign speakers (Wilfried's mail)</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>29.01.2009</b></td>
+            <td style="padding:0.5em;">Minor changes in the help menu</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>29.01.2009</b></td>
+            <td style="padding:0.5em;">Made a decent splash screen</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>26.01.2009</b></td>
+            <td style="padding:0.5em;">Added accelerators for New, Open, Save</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>22.01.2009</b></td>
+            <td style="padding:0.5em;">Fixed bug after segment deletion: timeline must be updated</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>09.01.2009</b></td>
+            <td style="padding:0.5em;">changed and supplemented key bindings</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>09.01.2009</b></td>
+            <td style="padding:0.5em;">added 'play last second of selection' action</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>06.01.2009</b></td>
+            <td style="padding:0.5em;">added 'append segment' action</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>17.12.2008</b></td>
+            <td style="padding:0.5em;">several mouse handling features added to the timeline view</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>15.12.2008</b></td>
+            <td style="padding:0.5em;">minor changes to the data model (assimilation and unintelligible)</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>12.12.2008</b></td>
+            <td style="padding:0.5em;">changed I/O to write parse level 2</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>11.11.2008</b></td>
+            <td style="padding:0.5em;">changed behaviour when a recording is not found, cannot be processed in 'New' and 'Open' actions</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>11.11.2008</b></td>
+            <td style="padding:0.5em;">renamed 'Ereignis' to 'Segment' in several places</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>29.10.2008</b></td>
+            <td style="padding:0.5em;">changed behaviour of contribution text pane</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>29.10.2008</b></td>
+            <td style="padding:0.5em;">added time integrity check columns in list views</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>29.10.2008</b></td>
+            <td style="padding:0.5em;">added 'insert pause' action</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>27.10.2008</b></td>
+            <td style="padding:0.5em;">fixed bug related to switch from partitur to event view: edit must be commited</td>
+         </tr>
+         <tr class="bug">
+            <td style="padding:0.5em;"><b>27.10.2008</b></td>
+            <td style="padding:0.5em;">fixed bug related to speaker cell editor / event removal: edit must be commited</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>22.10.2008</b></td>
+            <td style="padding:0.5em;">added ELAN export</td>
+         </tr>
+         <tr class="change">
+            <td style="padding:0.5em;"><b>22.10.2008</b></td>
+            <td style="padding:0.5em;">changed save to write to folker-transcription format</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>22.10.2008</b></td>
+            <td style="padding:0.5em;">changed open to read folker-transcription format</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>22.10.2008</b></td>
+            <td style="padding:0.5em;">added export action</td>
+         </tr>
+         <tr class="feature">
+            <td style="padding:0.5em;"><b>22.10.2008</b></td>
+            <td style="padding:0.5em;">added import action</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>16.09.2008</b></td>
+            <td style="padding:0.5em;">changed key bindings for event viewer to CTRL-combinations</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>16.09.2008</b></td>
+            <td style="padding:0.5em;">added 'merge events' action to the event viewer</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>15.09.2008</b></td>
+            <td style="padding:0.5em;">changed time viewer to display only one channel in case of mono recordings</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>15.09.2008</b></td>
+            <td style="padding:0.5em;">added label for display of selection length in time viewer</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>15.09.2008</b></td>
+            <td style="padding:0.5em;">changed row height of event view to avoid clipping of descenders in cell editor</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>12.09.2008</b></td>
+            <td style="padding:0.5em;">added recent files to file menu</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>12.09.2008</b></td>
+            <td style="padding:0.5em;">added 'store settings' (windows size, recent files etc.) action</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>12.09.2008</b></td>
+            <td style="padding:0.5em;">added safety check before opening file / exiting</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>11.09.2008</b></td>
+            <td style="padding:0.5em;">added exit action to file menu</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>11.09.2008</b></td>
+            <td style="padding:0.5em;">changed behaviour after zoom in/out (selection should remain visible)</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>09.09.2008</b></td>
+            <td style="padding:0.5em;">changed setup file to create a file association between Folker and files with suffix "flk"</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>09.09.2008</b></td>
+            <td style="padding:0.5em;">application can now optionally be given a transcription or wave file as an argument and will attempt to open them</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>09.09.2008</b></td>
+            <td style="padding:0.5em;">changed file ending for transcriptions from *.xml to *.flk</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>08.08.2008</b></td>
+            <td style="padding:0.5em;">experimented with a PRAAT player</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>08.08.2008</b></td>
+            <td style="padding:0.5em;">modified 'Save' and 'Save as...' actions</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>07.08.2008</b></td>
+            <td style="padding:0.5em;">added player selection option in preferences</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>07.08.2008</b></td>
+            <td style="padding:0.5em;">fixed bug in 'remove event'action</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>07.08.2008</b></td>
+            <td style="padding:0.5em;">added 'timestamp event' action</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>07.08.2008</b></td>
+            <td style="padding:0.5em;">made application implement the EXMARaLDA application interface --&gt; help menu, logging funcionality</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>07.08.2008</b></td>
+            <td style="padding:0.5em;">added 'detach selection' action</td>
+         </tr>
+         <tr class="">
+            <td style="padding:0.5em;"><b>07.08.2008</b></td>
+            <td style="padding:0.5em;">added row numbering to event and contribution view</td>
+         </tr>
+      </table>
+   </body>
+</html>

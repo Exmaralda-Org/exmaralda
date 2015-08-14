@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unicode-keyboard name="HIAT + Turkish supplement">
+	<key>
+		<content>&#x0254;</content>
+		<description>lower-mid back rounded vowel (for interjections)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0301;</content>
+		<description>m (rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0300;</content>
+		<description>m (falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x030C;</content>
+		<description>m (falling-rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0302;</content>
+		<description>m (rising-falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0304;</content>
+		<description>m (steady tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0301;</content>
+		<description>Diacritic: rising tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0300;</content>
+		<description>Diacritic: falling tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030C;</content>
+		<description>Diacritic: falling-rising</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0302;</content>
+		<description>Diacritic: rising-falling</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0304;</content>
+		<description>Diacritic: steady</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2026;</content>
+		<description>Ellipsis (End symbol for interrupted utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02D9;</content>
+		<description>Dot above (End symbol for modeless utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2014;</content>
+		<description>m-dash (insertion)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022;</content>
+		<description>Very short pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022;</content>
+		<description>Pause &lt;= 0.5s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022; &#x2022;</content>
+		<description>Pause &lt;= 1s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>((_s))</content>
+		<description>Measured pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x203F;</content>
+		<description>Ligature</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- Start capitall Turkish letters -->
+	<key>
+		<content>&#x00C2;</content>
+		<description>Capital A, circumflex accent</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00C7;</content>
+		<description>Capital C, cedilla</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x011E;</content>
+		<description>Capital G, breve</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0130;</content>
+		<description>Capital I, dot</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00CE;</content>
+		<description>Capital I, circumflex accent</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00D6;</content>
+		<description>Capital O, diaresis</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x015E;</content>
+		<description>Capitel S, cedilla</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0160;</content>
+		<description>Capital S, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00DB;</content>
+		<description>Capital U, circumflex accent</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00DC;</content>
+		<description>Capital U, diaresis</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- Start small Turkish letters -->
+	<key>
+		<content>&#x00E2;</content>
+		<description>Small a, circumflex accent</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00E7;</content>
+		<description>Small c, cedilla</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x011F;</content>
+		<description>Smalll g, breve</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00EE;</content>
+		<description>Small i, circumflex accent</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0131;</content>
+		<description>Small i, dotless</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00F6;</content>
+		<description>Small o, diaresis</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x015F;</content>
+		<description>Small s, cedilla</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0161;</content>
+		<description>Small s, caron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00FB;</content>
+		<description>Small u, circumflex accent</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00FC;</content>
+		<description>Small u, diaresis</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="GAT">
+	<key>
+		<content>(.)</content>
+		<description>Mikropause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(-)</content>
+		<description>Pause ca. 0.25 Sek.</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(--)</content>
+		<description>Pause ca. 0.5 Sek.</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(---)</content>
+		<description>Pause ca. 0.75 Sek.</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>°</content>
+		<description>Markierung von Ein- bzw. Ausatmen</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&apos;</content>
+		<description>Glottalverschluss</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>?</content>
+		<description>hoch steigend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>,</content>
+		<description>mittel steigend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>-</content>
+		<description>gleichbleibend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>;</content>
+		<description>mittel fallend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>.</content>
+		<description>tief fallend</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2191;</content>
+		<description>Tonhöhensprung nach oben</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2193;</content>
+		<description>Tonhöhensprung nach unten</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02CB;</content>
+		<description>fallende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02CA;</content>
+		<description>steigende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02C9;</content>
+		<description>gleichbleibende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02C6;</content>
+		<description>steigend-fallende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02C7;</content>
+		<description>fallend-steigende Akzenttonhöhenbewegung</description>
+		<font name="Arial Unicode MS" size="18" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;f&gt;</content>
+		<description>forte, laut</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;ff&gt;</content>
+		<description>fortissimo, sehr laut</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;p&gt;</content>
+		<description>piano, leise</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;pp&gt;</content>
+		<description>pianissimo, sehr leise</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;all&gt;</content>
+		<description>allegro, schnell</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;len&gt;</content>
+		<description>lento, langsam</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;cresc&gt;</content>
+		<description>crescendo, lauter werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;dim&gt;</content>
+		<description>diminuendo, leiser werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;acc&gt;</content>
+		<description>accelerando, schneller werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+	<key>
+		<content>&lt;&lt;rall&gt;</content>
+		<description>rallentando, langsamer werdend</description>
+		<font name="Arial Unicode MS" size="10" face="plain"/>
+	</key>
+</unicode-keyboard>
