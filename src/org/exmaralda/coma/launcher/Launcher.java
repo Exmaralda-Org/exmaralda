@@ -21,6 +21,7 @@ import org.exmaralda.coma.root.Ui;
 public class Launcher {
 
 	// always change launchertemplate.java
+	// another git test
 
 	private static Coma comaInstance;
 	Preferences prefs = Ui.prefs;
