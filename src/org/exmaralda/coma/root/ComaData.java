@@ -1,5 +1,5 @@
 /**
- *
+ * Dies ist ein Git-Test!
  */
 package org.exmaralda.coma.root;
 
@@ -259,7 +259,7 @@ public class ComaData {
 
 	/**
 	 * Returns a java.util.list of Communications for a Speaker
-	 * 
+	 *
 	 * @param speakerElmt
 	 * @return
 	 */
@@ -274,7 +274,7 @@ public class ComaData {
 
 	/**
 	 * Returns a java.util.list of Communications for a Speaker
-	 * 
+	 *
 	 * @param speakerElmt
 	 * @return
 	 */
@@ -659,7 +659,7 @@ public class ComaData {
 	public void setFilterChanged(String string) {
 		filterChanged=string;
 	}
-	
+
 	public String getFilterChanged() {
 		return filterChanged;
 	}
