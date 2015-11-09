@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:exmaralda="http://www.exmaralda.org" version="2.0">
-    <xsl:output method="xhtml" encoding="UTF-8" omit-xml-declaration="yes"/>
+    <xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes"/> 
 
-    <xsl:strip-space elements="*"/>
+    <xsl:strip-space elements="*"/> 
     <!-- COUNT_START specifies at which number to start the contribution count -->
     <!-- this is important when outputting a selection of the whole transcript-->
     <xsl:variable name="COUNT_START">
@@ -50,25 +50,28 @@
                     </xsl:variable>
                     <audio>
                         <xsl:element name="source">
-                            <xsl:attribute name="src"><xsl:text>./</xsl:text><xsl:value-of select="$AUDIO_FILE"/></xsl:attribute>
+                            <xsl:attribute name="src"><!--<xsl:text>./</xsl:text>--><xsl:value-of select="$AUDIO_FILE"/></xsl:attribute>
                             <xsl:attribute name="type">audio/wav</xsl:attribute>
                         </xsl:element>
                     </audio>
                     <span style="font-family: Calibri, Arial, sans-serif; color:white;">
-                        Audiodatei: <xsl:value-of select="$AUDIO_FILE"/><br/>
-                        Anleitung: [einfacher Klick] - Audio an der betreffenden Stelle abspielen / [Doppelklick] - Audio stoppen / [Mouseover] - Überlappungen hervorheben
+                        <xsl:text>Audio: </xsl:text>
+                        <xsl:value-of select="$AUDIO_FILE"/>
+                        <br/>
+                        <xsl:text>Anleitung: [einfacher Klick] - Audio an der betreffenden Stelle abspielen / [Doppelklick] - Audio stoppen / [Mouseover] - Überlappungen hervorheben</xsl:text>                            
                     </span>
                 </div>
                 <div class="main">
                     <table>
-                        <xsl:apply-templates select="//segment"> </xsl:apply-templates>
+                        <!-- <xsl:apply-templates select="//segment"> </xsl:apply-templates> -->
+                        <xsl:apply-templates select="//contribution"/> 
                     </table>
                 </div>
             </body>
         </html>
     </xsl:template>
 
-    <xsl:template match="segment">
+    <xsl:template match="contribution">
         <tr>
             <td class="time">
                 <xsl:text>[</xsl:text>
@@ -93,7 +96,8 @@
                 <xsl:value-of select="$NUMBER"/>
             </td>
             <td class="speaker">
-                <xsl:value-of select="ancestor::contribution/@speaker-reference"/>
+                <!-- <xsl:value-of select="ancestor::contribution/@speaker-reference"/> -->
+                <xsl:value-of select="@speaker-reference"/>
             </td>
             <td>
                 <xsl:attribute name="class">
@@ -101,7 +105,7 @@
                     <xsl:if test="position() mod 2=0"> even</xsl:if>
                     <xsl:if test="not(position() mod 2=0)"> odd</xsl:if>
                 </xsl:attribute>                
-                <xsl:apply-templates mode="unparsed"/>
+                <xsl:apply-templates select="segment" mode="unparsed"/>
             </td>
         </tr>
     </xsl:template>
@@ -234,7 +238,7 @@
                     element = elements[i];
                     start = element.getAttribute('data-start');
                     end = element.getAttribute('data-end');
-                    if ((!player.paused) && (start < elapsedTime) && (end < elapsedTime)){
+                    if ((!player.paused) && (start < elapsedTime) && (end > elapsedTime)){
                         element.style.borderBottom='1px dashed blue';
                     } else {
                         element.style.borderBottom='none';                           

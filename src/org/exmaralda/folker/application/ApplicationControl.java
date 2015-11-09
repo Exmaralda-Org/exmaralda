@@ -1455,8 +1455,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         videoPanel.setPreferredPath(currentMediaPath);
         
 
-        editRecordingToolbarButton.setText(new File(path).getName());
-        editRecordingToolbarButton.setToolTipText(FOLKERInternationalizer.getString("transcription_menu.recording") + " [" + path +"]");
+        editRecordingToolbarButton.setText(new File(tryPath).getName());
+        editRecordingToolbarButton.setToolTipText(FOLKERInternationalizer.getString("transcription_menu.recording") + " [" + tryPath +"]");
     }
     
     public void setTranscription(EventListTranscription elt){

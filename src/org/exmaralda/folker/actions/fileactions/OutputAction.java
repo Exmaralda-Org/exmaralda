@@ -32,6 +32,7 @@ import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFil
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.xpath.XPath;
 
 /**
  *
@@ -82,7 +83,7 @@ public class OutputAction extends AbstractApplicationAction {
         if (retValue==JFileChooser.CANCEL_OPTION) return;
         
         File f = fileChooser.getSelectedFile();
-        if (!(f.getName().indexOf(".")>=0)){
+        if (!f.getName().contains(".")){
             f = new File(f.getAbsolutePath() + "." + ((ParameterFileFilter)(fileChooser.getFileFilter())).getSuffix());
         }
         if (f.exists()){
@@ -103,7 +104,7 @@ public class OutputAction extends AbstractApplicationAction {
                     System.out.println("[*** ContributionListOutput ***]");
                     STYLESHEET = CONTRIBUTIONS2HTML_STYLESHEET;
                 } else if (fileChooser.getFileFilter()==htmlContributionListAudioFilter) {
-                    System.out.println("[*** SegmentListAudioOutput ***]");
+                    System.out.println("[*** ContributionListAudioOutput ***]");
                     STYLESHEET = CONTRIBUTIONS2HTML_AUDIO_STYLESHEET;
                 } else if (fileChooser.getFileFilter()==htmlSegmentListFilter) {
                     System.out.println("[*** SegmentListOutput ***]");
@@ -124,6 +125,29 @@ public class OutputAction extends AbstractApplicationAction {
                 }
                 EventListTranscription elt = ac.getTranscription();
                 Document transcriptionDoc = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, fileChooser.getSelectedFile());
+                
+                // NEW 09-11-2015
+                // For HTML5 Audio output, need to make sure that we have the audio!
+                // don't forget audio may be in default audio path
+                if (fileChooser.getFileFilter()==htmlContributionListAudioFilter) {
+                    Element audioElement = (Element) XPath.selectSingleNode(transcriptionDoc, "//recording");
+                    String recordingPath = audioElement.getAttributeValue("path");
+                    if (!(new File(recordingPath).exists())){
+                        String defaultAudioPath = PreferencesUtilities.getProperty("default-audio-path", "");
+                        if (defaultAudioPath!=null && defaultAudioPath.length()>0){
+                            String name = new File(recordingPath).getName();
+                            File otherTryFile = new File(new File(defaultAudioPath), name);
+                            if (otherTryFile.exists()){
+                                audioElement.setAttribute("path", otherTryFile.getAbsolutePath());
+                            } else {
+                                ac.displayException(recordingPath + " not found. \nCannot generate output.");
+                                return;
+                            }
+                        }                         
+                    }
+                }
+                
+                
                 if (fileChooser.getFileFilter()==htmlQuantifyFilter){
                     GATParser ap = new GATParser(Constants.getAlphabetLanguage());
                     if (((ApplicationControl)applicationControl).PARSE_LEVEL!=3){

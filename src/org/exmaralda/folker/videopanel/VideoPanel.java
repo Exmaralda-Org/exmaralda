@@ -140,30 +140,32 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         int dialogWidth = this.getWidth();
         int dialogHeight = this.getHeight();
 
-        JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer; 
-        //int currentVideoWidth = jdsPlayer.getVisibleComponent().getWidth();
-        //int currentVideoHeight = jdsPlayer.getVisibleComponent().getHeight();
-        int sourceWidth = jdsPlayer.getSourceWidth();
-        int sourceHeight = jdsPlayer.getSourceHeight();
-        
-        float widthRatio = (float)dialogWidth / (float)sourceWidth;
-        float heightRatio = (float)dialogHeight / (float)sourceHeight;
-        
-        Component c = jdsPlayer.getVisibleComponent();
+        if (videoPlayer instanceof JDSPlayer){
+            JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer; 
+            //int currentVideoWidth = jdsPlayer.getVisibleComponent().getWidth();
+            //int currentVideoHeight = jdsPlayer.getVisibleComponent().getHeight();
+            int sourceWidth = jdsPlayer.getSourceWidth();
+            int sourceHeight = jdsPlayer.getSourceHeight();
 
-        if (widthRatio<heightRatio){
-                c.setPreferredSize(new java.awt.Dimension(
-                        dialogWidth,
-                        (int) Math.round((double)(dialogWidth/(double)sourceWidth) * sourceHeight)
-                ));
-            
-        } else {
-                c.setPreferredSize(new java.awt.Dimension(
-                        (int) Math.round((double)(dialogHeight/(double)sourceHeight) * sourceWidth),
-                        dialogHeight
-                ));            
+            float widthRatio = (float)dialogWidth / (float)sourceWidth;
+            float heightRatio = (float)dialogHeight / (float)sourceHeight;
+
+            Component c = jdsPlayer.getVisibleComponent();
+
+            if (widthRatio<heightRatio){
+                    c.setPreferredSize(new java.awt.Dimension(
+                            dialogWidth,
+                            (int) Math.round((double)(dialogWidth/(double)sourceWidth) * sourceHeight)
+                    ));
+
+            } else {
+                    c.setPreferredSize(new java.awt.Dimension(
+                            (int) Math.round((double)(dialogHeight/(double)sourceHeight) * sourceWidth),
+                            dialogHeight
+                    ));            
+            }
+            videoDisplayPanel.setPreferredSize(c.getPreferredSize());
         }
-        videoDisplayPanel.setPreferredSize(c.getPreferredSize());
         //pack();
     }//GEN-LAST:event_formComponentResized
 
