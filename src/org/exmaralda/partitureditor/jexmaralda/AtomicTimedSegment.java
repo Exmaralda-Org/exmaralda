@@ -22,6 +22,7 @@ public class AtomicTimedSegment extends AbstractSegment implements Timeable, XML
     public AtomicTimedSegment() {
     }
 
+    @Override
     public AbstractSegment makeCopy() {
         AtomicTimedSegment result = new AtomicTimedSegment();
         result.setStart(this.getStart());
@@ -30,22 +31,27 @@ public class AtomicTimedSegment extends AbstractSegment implements Timeable, XML
         return result;        
     }
 
+    @Override
     public void setEnd(String e) {
         end = e;
     }
       
+    @Override
     public String getEnd() {
         return end;
     }
     
+    @Override
     public void setStart(String s) {
         start = s;
     }
     
+    @Override
     public String getStart() {
         return start;
     }
 
+    @Override
     public String toXML() {
         StringBuffer sb = new StringBuffer();
         String [][] atts = {{"n", getName()},
@@ -60,10 +66,12 @@ public class AtomicTimedSegment extends AbstractSegment implements Timeable, XML
         return sb.toString();        
     }
     
+    @Override
     public boolean isTimed() {
         return ((start!=null) && (end!=null) && (start.length()>0) && (end.length()>0));
     }
     
+    @Override
     public void timeUp() {
         if (getParent()==null) {return;}
         TimedSegment parent = (TimedSegment)getParent();
@@ -86,6 +94,7 @@ public class AtomicTimedSegment extends AbstractSegment implements Timeable, XML
         parent.timeUp();        
     }
     
+    @Override
     public Hashtable indexTLIs(){
         Hashtable result = new Hashtable();
         result.put(getStart(),this);
