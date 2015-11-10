@@ -57,7 +57,10 @@ public class OutputAction extends AbstractApplicationAction {
     public static String QUANTIFY_STYLESHEET_FR = "/org/exmaralda/folker/data/folkerquantification_fr.xsl";
     public static String BASIC_TRANSCRIPTION2HTML_STYLESHEET = "/org/exmaralda/folker/data/basicFolker2HTML.xsl";    
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public OutputAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
@@ -124,7 +127,9 @@ public class OutputAction extends AbstractApplicationAction {
                     }
                 }
                 EventListTranscription elt = ac.getTranscription();
-                Document transcriptionDoc = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, fileChooser.getSelectedFile());
+                //CHANGED 10-11-2015
+                //Document transcriptionDoc = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, fileChooser.getSelectedFile());
+                Document transcriptionDoc = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, null);
                 
                 // NEW 09-11-2015
                 // For HTML5 Audio output, need to make sure that we have the audio!
