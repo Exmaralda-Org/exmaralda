@@ -21,6 +21,8 @@ import org.exmaralda.partitureditor.jexmaralda.sax.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.awt.Cursor;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import javax.swing.JOptionPane;
@@ -42,6 +44,7 @@ import org.exmaralda.exakt.tokenlist.WordlistDialog;
 import org.exmaralda.partitureditor.jexmaralda.segment.SegmentedToListInfo;
 import org.exmaralda.partitureditor.listTable.ListTable;
 import org.exmaralda.partitureditor.listTable.ListTableModel;
+import org.exmaralda.partitureditor.praatPanel.PraatControl;
 import org.xml.sax.SAXException;
 
 
@@ -124,6 +127,9 @@ public class EXAKT extends javax.swing.JFrame
     RegexMenu regexMenu;
 
     KWICTableEvent lastKWICTableEvent = null;
+    
+    //NEW 10-11-2015
+    PraatControl praatControl;
     
     /** Creates new form EXAKT */
     public EXAKT() {
@@ -208,6 +214,10 @@ public class EXAKT extends javax.swing.JFrame
                 System.out.println(e.getLocalizedMessage());
             }
         }
+        
+        //NEW 10-11-2015
+        praatControl = new PraatControl();
+        praatControl.configure(this);
         
         status("EXAKT started.");
 
@@ -296,6 +306,9 @@ public class EXAKT extends javax.swing.JFrame
         getPartitur().setSettings(getPreferencesNode());
         partiturPanel.add(getPartitur());   
         getPartitur().mediaPanelDialog.setVisible(false);
+        
+        //NEW 10-11-2015
+        getPartitur().praatPanel.praatControl.configure(this);
     }
     
     void readSettings() {
@@ -316,6 +329,11 @@ public class EXAKT extends javax.swing.JFrame
 
         String lsp = prefs.get("Last-Search-Result-Path", System.getProperties().getProperty("user.dir"));
         setLastSearchResultPath(new File(lsp));
+        
+        //New 10-11-2015
+        //Make sure EXAKT has the same Praat Path as Partitur Editor
+        String praatPath = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PRAAT-Directory", "");
+        prefs.put("PRAAT-Directory", praatPath);
 
     }
     
@@ -1064,6 +1082,7 @@ public class EXAKT extends javax.swing.JFrame
         }
     }
 
+    @Override
     public void processEvent(KWICTableEvent ev) {
         if (ev.getType() == KWICTableEvent.DOUBLE_CLICK){
             if (partiturViewRadioButton.isSelected()){
@@ -1076,6 +1095,8 @@ public class EXAKT extends javax.swing.JFrame
                 // update HTML view
                 showList(ev);
             }
+        } else if (ev.getType() == KWICTableEvent.PRAAT){
+            openInPraat(ev);
         }
     }
 
@@ -1149,6 +1170,60 @@ public class EXAKT extends javax.swing.JFrame
         setCursor(ORDINARY_CURSOR);
     }
 
+    //NEW 10-11-2015
+    public void openInPraat(KWICTableEvent event){
+        SimpleSearchResult searchResult = (SimpleSearchResult)(event.getSelectedSearchResult());
+        try {
+            //
+            SegmentedTranscription st = getTranscriptionForSearchResult(searchResult);
+            BasicTranscription bt = st.toBasicTranscription();
+            bt.getBody().getCommonTimeline().completeTimes(false, bt);
+            String tierID = searchResult.getAdditionalData()[0];
+            Tier tier = bt.getBody().getTierWithID(tierID);            
+            String timeID = searchResult.getAdditionalData()[2];
+            
+            if (!(searchResult instanceof AnnotationSearchResult)){
+                // find the exact startpoint
+                int count = 0;
+                int s = searchResult.getOriginalMatchStart();
+                while (count + tier.getEventAtStartPoint(timeID).getDescription().length() <= s){
+                    count+=tier.getEventAtStartPoint(timeID).getDescription().length();
+                    timeID = tier.getEventAtStartPoint(timeID).getEnd();
+                }                            
+            }
+            
+            String timeID2 = st.getBody().getCommonTimelineMatch(timeID);
+
+            Event e = tier.getEventAtStartPoint(timeID2);
+            String timeID3 = e.getEnd();
+            
+            double startTime = bt.getBody().getCommonTimeline().getTimelineItemWithID(timeID2).getTime();
+            double endTime = bt.getBody().getCommonTimeline().getTimelineItemWithID(timeID3).getTime();
+            
+            String wavFile = bt.getHead().getMetaInformation().getReferencedFile("wav");
+            
+            /*String message = "If I wanted to, I could no try for:\n"
+                    + "WAV: " + wavFile + "\n"
+                    + "Start: " + Double.toString(startTime) + "\n"
+                    + "End: " + Double.toString(endTime);
+            
+            JOptionPane.showMessageDialog(partiturPanel, message);*/
+            
+            praatControl.openSoundFile(wavFile);
+            praatControl.selectSound(startTime, endTime);
+            
+        } catch (SAXException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+            this.showErrorDialog(ex);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+            this.showErrorDialog(ex);
+        } catch (IOException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+            this.showErrorDialog(ex);
+        }
+    }
+    
     public void showPartitur(KWICTableEvent event) {
         lastKWICTableEvent = event;
         // added 07-05-2009
@@ -1203,6 +1278,10 @@ public class EXAKT extends javax.swing.JFrame
                 TierFormatTable tft = new TierFormatTable();
                 tft.TierFormatTableFromString(formatString);                
                 partitur.getModel().setTranscriptionAndTierFormatTable(bt, tft);
+                
+                //NEW 10-11-2015
+                //partitur.setupPraatPanel();
+                
                 boolean success = partitur.setupMedia();
                 playButton.setEnabled(success);
                 stopButton.setEnabled(false);
@@ -1308,6 +1387,7 @@ public class EXAKT extends javax.swing.JFrame
     }
     
     /** returns the icon associated with this application */
+    @Override
     public java.awt.Image getIconImage(){
         return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt.png")).getImage();
     }
@@ -1323,6 +1403,7 @@ public class EXAKT extends javax.swing.JFrame
 
     boolean waitASecond = false;
     
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) return;
         if (e.getSource()==concordanceList.getSelectionModel()){
@@ -1422,18 +1503,22 @@ public class EXAKT extends javax.swing.JFrame
         }
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
 
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
 
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
 
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
 
     }
@@ -1458,16 +1543,20 @@ class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPref
 		com.apple.mrj.MRJApplicationUtils.registerQuitHandler(this);
 	}
 
+    @Override
     public void handleAbout() {
 		exakt.about();
 	}
 
+    @Override
     public void handlePrefs() {
         exakt.handlePrefs();
 	}
 
+    @Override
     public void handleQuit() {
 		SwingUtilities.invokeLater(new Runnable() {
+                        @Override
 			public void run() {
 				exakt.exit();
 			}

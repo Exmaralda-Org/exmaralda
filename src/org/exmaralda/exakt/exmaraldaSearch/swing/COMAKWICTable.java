@@ -37,6 +37,7 @@ public class COMAKWICTable  extends javax.swing.JTable
     Vector<KWICTableListener> listenerList = new Vector<KWICTableListener>();
     boolean tableInitialised = false;
     
+    public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.PraatAction praatAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction copyAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ImportAnalysesAction importAnalysesAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction sampleAction;
@@ -81,6 +82,7 @@ public class COMAKWICTable  extends javax.swing.JTable
     }
     
     private void initActions(){
+        praatAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.PraatAction(this, "Open in Praat");
         copyAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction(this, "Copy");
         importAnalysesAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ImportAnalysesAction(this, "Import analyses...");
         sampleAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction(this, "Sample...");
@@ -280,16 +282,27 @@ public class COMAKWICTable  extends javax.swing.JTable
         
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
     }
 
+    @Override
     public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount()==2){
             fireSearchResultDoubleClicked();
         }                
+    }
+    
+    public void firePraatRequest(){
+        int viewSelection = getSelectedRow();
+        if (viewSelection<0) return;
+        int selectedRow = ((COMAKWICTableSorter)(getModel())).modelIndex(viewSelection);
+        KWICTableEvent event = new KWICTableEvent(KWICTableEvent.PRAAT, getWrappedModel().getSearchResultAt(selectedRow));
+        fireEvent(event);                
     }
     
     public void fireSearchResultDoubleClicked(){

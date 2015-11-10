@@ -21,6 +21,7 @@ public class KWICTableEvent {
     
     public static final int SELECTION = 0;
     public static final int DOUBLE_CLICK = 1;    
+    public static final int PRAAT = 2;    
     
     private int type;
     private SearchResultInterface selectedSearchResult;

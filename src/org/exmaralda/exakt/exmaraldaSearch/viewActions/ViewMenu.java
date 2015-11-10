@@ -22,6 +22,7 @@ public class ViewMenu extends javax.swing.JMenu {
     EXAKT exaktFrame;
     public JCheckBoxMenuItem showMediaPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showLinkPanelCheckBoxMenuItem;
+    public JCheckBoxMenuItem showPraatPanelCheckBoxMenuItem;
     
     
     /** Creates a new instance of FileMenu */
@@ -30,10 +31,12 @@ public class ViewMenu extends javax.swing.JMenu {
         exaktFrame = ef;
 
         add(exaktFrame.browsingModeAction);
+        
         showMediaPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showMediaPanelCheckBoxMenuItem.setSelected(false);
         showMediaPanelCheckBoxMenuItem.setText("Show video panel");
         showMediaPanelCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showMediaPanelCheckBoxMenuItemActionPerformed(evt);
             }
@@ -44,11 +47,24 @@ public class ViewMenu extends javax.swing.JMenu {
         showLinkPanelCheckBoxMenuItem.setSelected(false);
         showLinkPanelCheckBoxMenuItem.setText("Show link panel");
         showLinkPanelCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLinkPanelCheckBoxMenuItemActionPerformed(evt);
             }
         });
         add(showLinkPanelCheckBoxMenuItem);
+        
+        /*showPraatPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        showPraatPanelCheckBoxMenuItem.setSelected(false);
+        showPraatPanelCheckBoxMenuItem.setText("Show Praat panel");
+        showPraatPanelCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPraatPanelCheckBoxMenuItemActionPerformed(evt);
+            }
+        });
+        add(showPraatPanelCheckBoxMenuItem);*/
+        
     }
 
 
@@ -61,5 +77,11 @@ public class ViewMenu extends javax.swing.JMenu {
         // Add your handling code here:
         exaktFrame.getPartitur().linkPanelDialog.setVisible(showLinkPanelCheckBoxMenuItem.isSelected());
     }
+    
+    private void showPraatPanelCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        // Add your handling code here:
+        exaktFrame.getPartitur().praatPanel.setVisible(showPraatPanelCheckBoxMenuItem.isSelected());
+    }
+    
 
 }

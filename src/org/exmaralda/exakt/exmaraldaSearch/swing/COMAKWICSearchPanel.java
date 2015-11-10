@@ -304,6 +304,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         metaDataButton = new javax.swing.JButton();
         addAnalysisButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        praatButton = new javax.swing.JButton();
         copyButton = new javax.swing.JButton();
         removeUnselectedButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -354,7 +355,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         });
         regularExpressionPanel.add(searchExpressionButton);
 
-        searchExpressionComboBox.setFont(new java.awt.Font("Tahoma", 0, 14));
+        searchExpressionComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         searchExpressionComboBox.setMaximumSize(new java.awt.Dimension(3000, 31));
         searchExpressionComboBox.setMinimumSize(new java.awt.Dimension(10, 31));
         searchExpressionComboBox.setPreferredSize(new java.awt.Dimension(300, 31));
@@ -376,7 +377,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         searchAnnotationLabel2.setText(" Regex: ");
         annotationExpressionPanel.add(searchAnnotationLabel2);
 
-        annotationRegExField.setFont(new java.awt.Font("Tahoma", 0, 14));
+        annotationRegExField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         annotationRegExField.setMaximumSize(new java.awt.Dimension(3000, 31));
         annotationRegExField.setMinimumSize(new java.awt.Dimension(100, 31));
         annotationRegExField.setPreferredSize(new java.awt.Dimension(300, 31));
@@ -429,7 +430,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         searchXPathLabel2.setText(" XPath: ");
         xpathExpressionPanel.add(searchXPathLabel2);
 
-        xpathTextField.setFont(new java.awt.Font("Tahoma", 0, 14));
+        xpathTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         xpathTextField.setMaximumSize(new java.awt.Dimension(3000, 31));
         xpathTextField.setMinimumSize(new java.awt.Dimension(100, 31));
         xpathTextField.setPreferredSize(new java.awt.Dimension(300, 31));
@@ -622,6 +623,21 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         rightSideButtonsPanel.add(addAnalysisButton);
         rightSideButtonsPanel.add(jSeparator1);
 
+        praatButton.setAction(((COMAKWICTable)(kwicTable)).praatAction
+        );
+        praatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif"))); // NOI18N
+        praatButton.setText(null);
+        praatButton.setToolTipText("Open the corresponding WAV file in Praat");
+        praatButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        praatButton.setMinimumSize(new java.awt.Dimension(57, 33));
+        praatButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        praatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                praatButtonActionPerformed(evt);
+            }
+        });
+        rightSideButtonsPanel.add(praatButton);
+
         copyButton.setAction(((COMAKWICTable)(kwicTable)).copyAction
         );
         copyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/Copy.gif"))); // NOI18N
@@ -630,6 +646,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         copyButton.setMaximumSize(new java.awt.Dimension(57, 33));
         copyButton.setMinimumSize(new java.awt.Dimension(57, 33));
         copyButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        copyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyButtonActionPerformed(evt);
+            }
+        });
         rightSideButtonsPanel.add(copyButton);
 
         removeUnselectedButton.setAction(((COMAKWICTable)(kwicTable)).removeUnselectedAction);
@@ -688,8 +709,8 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         completeTextScrollPane.setPreferredSize(new java.awt.Dimension(400, 150));
 
-        completeTextEditorPane.setContentType("text/html");
         completeTextEditorPane.setEditable(false);
+        completeTextEditorPane.setContentType("text/html"); // NOI18N
         completeTextEditorPane.setPreferredSize(new java.awt.Dimension(400, 100));
         completeTextScrollPane.setViewportView(completeTextEditorPane);
 
@@ -786,6 +807,14 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         performSearch();
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_copyButtonActionPerformed
+
+    private void praatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_praatButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_praatButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -813,6 +842,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     private javax.swing.JButton lessContextButton;
     private javax.swing.JButton metaDataButton;
     private javax.swing.JButton moreContextButton;
+    private javax.swing.JButton praatButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel progressBarLabel;
     private javax.swing.JPanel progressBarPanel;
