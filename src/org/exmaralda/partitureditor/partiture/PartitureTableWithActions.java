@@ -1587,7 +1587,8 @@ public class PartitureTableWithActions extends PartitureTable
     }
     
     
-    /** sets the user preferences */
+    /** sets the user preferences
+     * @param usernode */
     //void setSettings(java.util.Properties settings){
     public void setSettings(String usernode){
         java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(usernode);
@@ -1729,7 +1730,8 @@ public class PartitureTableWithActions extends PartitureTable
 
     }
     
-    /** returns the user settings */
+    /** returns the user settings
+     * @param usernode */
     public void getSettings(String usernode){
         //java.util.Properties result = new java.util.Properties();
         //changed for version 1.3.5.        
@@ -1876,7 +1878,8 @@ public class PartitureTableWithActions extends PartitureTable
         settings.put("ENABLE-UNDO", Boolean.toString(undoEnabled));
     }
     
-    /** launches the system's default browser with the standard HTML file */
+    /** launches the system's default browser with the standard HTML file
+     * @param file */
     public void launchBrowser(File file){
         try{
             String url = file.toURI().toString();

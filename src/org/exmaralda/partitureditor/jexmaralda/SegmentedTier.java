@@ -307,6 +307,7 @@ public class SegmentedTier extends AbstractTier implements XMLable {
     
     /** returns the tier as an XML element &lt;segmented-tier&gt; as
      *  specified in the corresponding dtd */
+    @Override
     public String toXML(){
         StringBuffer sb = new StringBuffer();
         String [][] atts = {{"id", getID()},

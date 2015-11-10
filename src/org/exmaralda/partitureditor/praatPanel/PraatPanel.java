@@ -22,7 +22,9 @@ public class PraatPanel extends javax.swing.JDialog {
     double startTime = 0;
     double endTime = 0;
         
-    /** Creates new form PraatPanel */
+    /** Creates new form PraatPanel
+     * @param parent
+     * @param modal */
     public PraatPanel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

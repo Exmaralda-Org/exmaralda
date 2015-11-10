@@ -6,14 +6,10 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.prefs.BackingStoreException;
 import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.EditPreferencesDialog;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 
 /**
  *
@@ -21,7 +17,9 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class EditPreferencesAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditPreferencesAction */
+    /** Creates a new instance of EditPreferencesAction
+     * @param t
+     * @param icon */
     public EditPreferencesAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Preferences...", icon, t);
     }
