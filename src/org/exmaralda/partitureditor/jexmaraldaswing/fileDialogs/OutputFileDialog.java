@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  * @author thomas
  */
-public class OutputFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
+public final class OutputFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
 
     
     public SVGAccessoryPanel svgAccessory = new SVGAccessoryPanel();   
@@ -31,7 +31,8 @@ public class OutputFileDialog extends AbstractFileFilterDialog implements java.b
     
       
     
-    /** Creates new ExportTASXDialog */
+    /** Creates new ExportTASXDialog
+     * @param startDirectory */
     public OutputFileDialog(String startDirectory) {
         super();
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
@@ -42,17 +43,19 @@ public class OutputFileDialog extends AbstractFileFilterDialog implements java.b
         setDialogTitle("Output file");       
         setAcceptAllFileFilterUsed(false);
         addChoosableFileFilter(HTMLPartiturFileFilter);
-        addChoosableFileFilter(RTFPartiturFileFilter);
-        addChoosableFileFilter(SVGPartiturFileFilter);
-        addChoosableFileFilter(XMLPartiturFileFilter);
-        addChoosableFileFilter(HTMLSegmentChainFileFilter);
-        addChoosableFileFilter(FreeStylesheetFileFilter);
         addChoosableFileFilter(HTMLPartiturWithHTML5AudioFileFilter);
-        addChoosableFileFilter(HTMLPartiturWithFlashFileFilter);
+        addChoosableFileFilter(RTFPartiturFileFilter);
+        addChoosableFileFilter(HTMLSegmentChainFileFilter);
         addChoosableFileFilter(HTMLSegmentChainWithHTML5AudioFileFilter);
-        addChoosableFileFilter(HTMLSegmentChainWithFlashFileFilter);
         addChoosableFileFilter(GATTranscriptFileFilter);
         addChoosableFileFilter(SimpleTextTranscriptFileFilter);
+        // from here on: not so useful outputs
+        addChoosableFileFilter(FreeStylesheetFileFilter);
+        addChoosableFileFilter(HTMLPartiturWithFlashFileFilter);
+        addChoosableFileFilter(SVGPartiturFileFilter);
+        addChoosableFileFilter(XMLPartiturFileFilter);
+        addChoosableFileFilter(HTMLSegmentChainWithFlashFileFilter);
+
         setFileFilter(HTMLPartiturFileFilter);
         setMultiSelectionEnabled(false);
         addPropertyChangeListener("fileFilterChanged", this);

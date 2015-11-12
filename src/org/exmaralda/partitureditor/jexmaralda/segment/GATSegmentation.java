@@ -29,6 +29,7 @@ public class GATSegmentation extends AbstractSegmentation {
         super(ptef);
     }
 
+    @Override
     public SegmentedTranscription BasicToSegmented(BasicTranscription bt) throws SAXException, FSMException {
          SegmentedTranscription st = bt.toSegmentedTranscription();
          FSMSaxReader sr = new FSMSaxReader();
@@ -94,6 +95,7 @@ public class GATSegmentation extends AbstractSegmentation {
             longestAbbLength = Math.max(longestAbbLength, speakertable.getSpeakerAt(pos).getAbbreviation().length());
         }
         ListBody body = lt.getBody();
+        
         Hashtable overlaps = new Hashtable();
         // count the frequency of start/end combinations
         for (int pos=0; pos<body.getNumberOfSpeakerContributions(); pos++){
@@ -105,20 +107,26 @@ public class GATSegmentation extends AbstractSegmentation {
                 String key = epe.getStart() + "#" + epe.getEnd();
                 if (overlaps.containsKey(key)){
                     Integer i = (Integer)(overlaps.get(key));
-                    Integer i_plus_one = new Integer(i.intValue()+1);
+                    Integer i_plus_one = i+1;
                     overlaps.put(key, i_plus_one);
                 } else {
-                    overlaps.put(key, new Integer(1));
+                    overlaps.put(key, 1);
                 }
             }
         }
         
-        StringBuffer output = new StringBuffer();
+        StringBuilder output = new StringBuilder();
         String lastSpeaker = "";
+        HashMap<String,Integer> openingBracketPositions = new HashMap<String,Integer>();
+        HashMap<String,Integer> closingBracketPositions = new HashMap<String,Integer>();
         for (int pos=0; pos<body.getNumberOfSpeakerContributions(); pos++){
+            // flag for recording problems in overlap alignment
+            boolean isOverlapProblem = false;
+
             // Zeilennummerierung
             if (pos+1<10) output.append("0");
             if (pos+1<100) output.append("0");
+            if (body.getNumberOfSpeakerContributions()>999 && pos+1<1000) output.append("0");
             output.append(Integer.toString(pos+1));
             output.append("  ");
             
@@ -146,13 +154,66 @@ public class GATSegmentation extends AbstractSegmentation {
             // Text
             TimedSegment ts = sc.getMain();
             Vector v = ts.getAllSegmentsWithName("e.pe");
+            int textPosition = 0;
             for (int e=0; e<v.size(); e++){
                 TimedSegment epe = (TimedSegment)(v.elementAt(e));
                 String key = epe.getStart() + "#" + epe.getEnd();
-                int howOften = ((Integer)(overlaps.get(key))).intValue();
-                if (howOften>1) output.append("[");
+                int howOften = ((Integer)(overlaps.get(key)));
+                
+                
+                // opening bracket if appropriate
+                if (howOften>1) {
+                    int bracketPosition = openingBracketPositions.getOrDefault(epe.getStart(), 0);
+                    if (bracketPosition>=textPosition){
+                        // this is the place where the magic happens
+                        int numberOfSpaces = bracketPosition-textPosition;
+                        for (int j=0; j<numberOfSpaces; j++){
+                            output.append(" ");
+                            textPosition++;
+                        }
+                        //textPosition=bracketPosition;
+                    } else if (openingBracketPositions.containsKey(epe.getStart())) {
+                        // the bracket should have been moved but couldn't because
+                        // text position is already beyond the place where the bracket should appear
+                        isOverlapProblem = true;                        
+                    }
+                    output.append("[");
+                    if (!(openingBracketPositions.containsKey(epe.getStart()))){
+                        openingBracketPositions.put(epe.getStart(), textPosition);
+                    }
+                    textPosition++;
+                }
+                
+                // the text
                 output.append(epe.getDescription());
-                if (howOften>1) output.append("]");                
+                textPosition+=epe.getDescription().length();
+                
+                // closing bracket if appropriate
+                if (howOften>1) {
+                    int bracketPosition = closingBracketPositions.getOrDefault(epe.getEnd(), 0);
+                    if (bracketPosition>=textPosition){
+                        // this is the place where the magic happens
+                        int numberOfSpaces = bracketPosition-textPosition;                        
+                        for (int j=0; j<numberOfSpaces; j++){
+                            output.append(" ");
+                            textPosition++;
+                        }
+                        //textPosition=bracketPosition;
+                    } else if (closingBracketPositions.containsKey(epe.getEnd())) {
+                        // the bracket should have been moved but couldn't because
+                        // text position is already beyond the place where the bracket should appear
+                        isOverlapProblem = true;                        
+                    }
+                    output.append("]");
+                    if (!(closingBracketPositions.containsKey(epe.getEnd()))){
+                        closingBracketPositions.put(epe.getEnd(), textPosition);
+                    }
+                    textPosition++;
+                }                
+            }
+            
+            if (isOverlapProblem){
+                output.append("\t").append("{*** OVERLAP MANUELL BEARBEITEN! ***}");
             }
             
             output.append(System.getProperty("line.separator"));
@@ -162,12 +223,13 @@ public class GATSegmentation extends AbstractSegmentation {
         return output.toString();
     }
     
+    @Override
     public Vector getSegmentationErrors(BasicTranscription bt) throws SAXException {
          Vector result = new Vector();
          SegmentedTranscription st = bt.toSegmentedTranscription();
          FSMSaxReader sr = new FSMSaxReader();
 
-         FiniteStateMachine fsm = null;
+         FiniteStateMachine fsm;
        
          if (pathToExternalFSM.length()<=0){
             java.io.InputStream is2 = getClass().getResourceAsStream(intonationUnitFSM);

@@ -55,7 +55,7 @@ public class PartiturEditor extends javax.swing.JFrame
     
                          
     /** the table component containing the partitur */
-    private PartitureTableWithActions table;
+    private final PartitureTableWithActions table;
     /** the user settings */
     /** changed in version 1.3.3. to use java 1.4 properties */
     //private java.util.Properties settings;
@@ -312,9 +312,10 @@ public class PartiturEditor extends javax.swing.JFrame
         }
     }
     
-   /** listener method for the EXAKT search dialog */ 
+   /** listener method for the EXAKT search dialog
+     * @param ev */ 
     @Override
-   public void processEvent(KWICTableEvent ev) {
+    public void processEvent(KWICTableEvent ev) {
         if (ev.getType() == KWICTableEvent.DOUBLE_CLICK){
             try {
                 table.commitEdit(true);
@@ -346,16 +347,18 @@ public class PartiturEditor extends javax.swing.JFrame
         }
    }
 
-    /** forces immediate update of the progress bar */ 
+    /** forces immediate update of the progress bar
+     * @param p1 */ 
     @Override
-   public void stateChanged(final javax.swing.event.ChangeEvent p1) {
+    public void stateChanged(final javax.swing.event.ChangeEvent p1) {
         java.awt.Rectangle barRectangle = table.progressBar.getBounds();
         barRectangle.x = 0;
         barRectangle.y = 0;
         table.progressBar.paintImmediately(barRectangle);
     }
     
-    /** returns the EXMARaLDA icon associated with this application */
+    /** returns the EXMARaLDA icon associated with this application
+     * @return  */
     @Override
     public java.awt.Image getIconImage(){
         return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/partitureditor2.png")).getImage();
@@ -364,7 +367,8 @@ public class PartiturEditor extends javax.swing.JFrame
     /** reacts to changes in the partitur table:
      *  a change of filename (FILENAME_CHANGED) or
      *  a change of media time (MEDIA_TIME_CHANGED) or
-     *  an addition / removal to / from the undo history */
+     *  an addition / removal to / from the undo history
+     * @param e */
     @Override
     public void partitureTablePropertyChanged(PartitureTableEvent e) {
         if (e.getID()==PartitureTableEvent.FILENAME_CHANGED){
@@ -487,7 +491,8 @@ public class PartiturEditor extends javax.swing.JFrame
     /** handles window closing events
      *  source can be either this JFrame
      * or one of the panels (i.e. keyboard, link, segmentation or audio panel)
-     * if the latter, takes care of updating the CheckBoxMenuItems in the view menu accordingly */
+     * if the latter, takes care of updating the CheckBoxMenuItems in the view menu accordingly
+     * @param windowEvent */
     @Override
     public void windowClosed(java.awt.event.WindowEvent windowEvent) {
         Object source = windowEvent.getSource();
@@ -509,32 +514,38 @@ public class PartiturEditor extends javax.swing.JFrame
         }
     }
     
-    /** does nothing, required by the WindowListener interface */
+    /** does nothing, required by the WindowListener interface
+     * @param windowEvent */
     @Override
     public void windowOpened(java.awt.event.WindowEvent windowEvent) {
     }
     
-    /** does nothing, required by the WindowListener interface */
+    /** does nothing, required by the WindowListener interface
+     * @param windowEvent */
     @Override
     public void windowClosing(java.awt.event.WindowEvent windowEvent) {
     }
     
-    /** does nothing, required by the WindowListener interface */
+    /** does nothing, required by the WindowListener interface
+     * @param windowEvent */
     @Override
     public void windowActivated(java.awt.event.WindowEvent windowEvent) {
     }
     
-    /** does nothing, required by the WindowListener interface */
+    /** does nothing, required by the WindowListener interface
+     * @param windowEvent */
     @Override
     public void windowDeiconified(java.awt.event.WindowEvent windowEvent) {
     }
     
-    /** does nothing, required by the WindowListener interface */
+    /** does nothing, required by the WindowListener interface
+     * @param windowEvent */
     @Override
     public void windowDeactivated(java.awt.event.WindowEvent windowEvent) {
     }
     
-    /** does nothing, required by the WindowListener interface */
+    /** does nothing, required by the WindowListener interface
+     * @param windowEvent */
     @Override
     public void windowIconified(java.awt.event.WindowEvent windowEvent) {
     }
@@ -543,13 +554,15 @@ public class PartiturEditor extends javax.swing.JFrame
     //*************** METHODS FROM ExmaraldaApplication ******************
     //*******************************************************************
     
-    /** returns the version string */
+    /** returns the version string
+     * @return  */
     @Override
     public String getVersion(){
         return org.exmaralda.common.EXMARaLDAConstants.PARTITUREDITOR_VERSION;
     }
     
-    /** returns the application name */
+    /** returns the application name
+     * @return  */
     @Override
     public String getApplicationName(){
         return "Partitur-Editor";
@@ -586,14 +599,17 @@ public class PartiturEditor extends javax.swing.JFrame
     
 
     // ----- Acess methods for DIDA Extensions --
-    /** returns the partitur */
+    /** returns the partitur
+     * @return  */
     public PartitureTableWithActions getPartitur(){
         return table;
     }
     
     /** called whenever the media time has changed through
      *  a user selection (this can be overridden by the DIDA extension 
-     *  to communicate with XWaves or PRAAT) */
+     *  to communicate with XWaves or PRAAT)
+     * @param startTime
+     * @param endTime */
     public void processMediaTimeChanged(double startTime, double endTime){
     }
     

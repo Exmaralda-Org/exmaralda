@@ -34,7 +34,9 @@ import org.jdom.xpath.*;
  */
 public class OutputAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ExportAGAction */
+    /** Creates a new instance of ExportAGAction
+     * @param t
+     * @param icon */
     public OutputAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Output...", icon, t);  
     }
@@ -63,7 +65,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         String filename = selectedFile.getAbsolutePath();
         
         //check whether or not the selected file has an extension
-        if (!(selectedFile.getName().indexOf(".")>=0)){
+        if (!selectedFile.getName().contains(".")){
             filename+="." + selectedFileFilter.getSuffix();
         }
         
@@ -93,26 +95,27 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 break;
         }
         
-        // partitur output methods
+        /******************************************/
+        /******** partitur output methods *********/
+        /******************************************/
         if ((selectedFileFilter==dialog.HTMLPartiturFileFilter) 
                 || (selectedFileFilter==dialog.HTMLPartiturWithHTML5AudioFileFilter) 
-                || (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter) 
                 || (selectedFileFilter==dialog.RTFPartiturFileFilter) 
+                || (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter) 
                 || (selectedFileFilter==dialog.SVGPartiturFileFilter)
                 || (selectedFileFilter==dialog.XMLPartiturFileFilter)) {
                 
-            InterlinearText it = null;
+            InterlinearText it;
             // changed 02-08-2010
             if (dialog.getSelectionChoice()!=SelectionAccessory.SELECTION){
-                    it = ItConverter.BasicTranscriptionToInterlinearText(trans, table.getModel().getTierFormatTable());
+                it = ItConverter.BasicTranscriptionToInterlinearText(trans, table.getModel().getTierFormatTable());
             } else {
                 int timelineStart = table.selectionStartCol;
                 it = ItConverter.BasicTranscriptionToInterlinearText(trans, table.getModel().getTierFormatTable(), timelineStart);
             }
             System.out.println("Transcript converted to interlinear text.");
             if (table.getFrameEndPosition()>=0){
-                ((ItBundle)it.getItElementAt(0)).frameEndPosition
-                        = table.getFrameEndPosition();
+                ((ItBundle)it.getItElementAt(0)).frameEndPosition = table.getFrameEndPosition();
             }
             
             if (selectedFileFilter==dialog.HTMLPartiturFileFilter){
@@ -121,6 +124,9 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             } else if (selectedFileFilter==dialog.RTFPartiturFileFilter){
                 // RTF partitur
                 exportRTFPartitur(it, filename);                                
+            } else if (selectedFileFilter==dialog.HTMLPartiturWithHTML5AudioFileFilter){
+                // HTML Partitur with HTML5 Audio
+                exportHTMLPartiturWithHTML5Audio(it, filename);
             } else if (selectedFileFilter==dialog.SVGPartiturFileFilter){
                 // SVG partitur
                 exportSVGPartitur(it, filename, dialog.svgAccessory.getSubdirectory(), dialog.svgAccessory.getBasename());                                
@@ -128,10 +134,12 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 // XML partitur
                 exportXMLPartitur(it, filename, dialog.chooseSettingsForXMLExportPanel.getSelection());                                
             } else if (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter){
+                // HTML Partitur with FLASH
                 exportHTMLPartiturWithFlash(it, filename);
-            } else if (selectedFileFilter==dialog.HTMLPartiturWithHTML5AudioFileFilter){
-                exportHTMLPartiturWithHTML5Audio(it, filename);
             }
+        /******************************************/
+        /******** non-partitur output methods *****/
+        /******************************************/
         } else if (selectedFileFilter==dialog.FreeStylesheetFileFilter){
             exportFreeStylesheet(filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
         } else if (selectedFileFilter==dialog.HTMLSegmentChainFileFilter){
@@ -164,7 +172,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     org.exmaralda.partitureditor.jexmaralda.convert.HTMLConverter converter = new org.exmaralda.partitureditor.jexmaralda.convert.HTMLConverter();
                     table.htmlParameters.additionalStuff = converter.HeadToHTML(head, table.head2HTMLStylesheet);
                 } catch (Exception e){
-                    String text = new String("There was a problem with " + System.getProperty("line.separator"));
+                    String text = "There was a problem with " + System.getProperty("line.separator");
                     text+=table.head2HTMLStylesheet + " : " + System.getProperty("line.separator");
                     text+=e.getLocalizedMessage() + System.getProperty("line.separator");
                     text+="Using internal stylesheet instead.";                    
@@ -347,7 +355,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         Document itDocument = org.exmaralda.common.corpusbuild.FileIO.readDocumentFromLocalFile(xmlFilename);
         Document btDocument = org.exmaralda.common.corpusbuild.FileIO.readDocumentFromString(table.getModel().getTranscription().toXML());
 
-        // remove "line" elements (die stören nur)
+        // remove "line" elements (die stoeren nur)
         java.util.Iterator i = itDocument.getRootElement().getDescendants(new org.jdom.filter.ElementFilter("line"));
         java.util.Vector toBeRemoved = new java.util.Vector();
         while (i.hasNext()){
@@ -447,8 +455,8 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
     void exportGATTranscript(BasicTranscription bt, String filename, String encoding) throws JexmaraldaException, FSMException, SAXException, FileNotFoundException, IOException{
          // segment the basic transcription and transform it into a list transcription
          GATSegmentation segmenter = new org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation(table.gatFSM);
-         ListTranscription lt = segmenter.BasicToIntonationUnitList(bt);
-             
+         ListTranscription lt = segmenter.BasicToIntonationUnitList(bt);     
+         //lt.writeXMLToFile("C:\\Users\\Schmidt\\Dropbox\\JensLanwer\\ListTranscription.xml", "none");
          String text = GATSegmentation.toText(lt);
          
          System.out.println("started writing document...");
@@ -461,6 +469,8 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
          fos.close();
          System.out.println("document written.");                               
     }
+    
+    
     
     void exportSimpleTextTranscript(BasicTranscription bt, String filename) throws IOException{
          SegmentedTranscription st = bt.toSegmentedTranscription();
