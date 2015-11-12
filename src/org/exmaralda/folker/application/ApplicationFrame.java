@@ -197,7 +197,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         });
     }
 
-    /** returns the icon associated with this application */
+    /** returns the icon associated with this application
+     * @return  */
     @Override
     public java.awt.Image getIconImage(){
         return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/gui/folkerlogo.png")).getImage();
@@ -249,8 +250,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         }        
     }
     
-
-	/** added 01-03-2010 */
+    /** added 01-03-2010 */
     private void setupMacOSXApplicationListener() {
         final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
         application.setEnabledAboutMenu(true); // damit ein "Ueber " Menu erscheint
@@ -264,8 +264,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                 ae.setHandled(true); // habe fertig...
             }
 
-                    // app wird ueber den finder geoeffnet. wie auch sonst.
-                    // (lies: total unnuetz!)
+            // app wird ueber den finder geoeffnet. wie auch sonst.
+            // (lies: total unnuetz!)
             @Override
             public void handleOpenApplication(ApplicationEvent ae) {
             }
@@ -289,7 +289,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                 ae.setHandled(reallyQuit); // da wird wohl nichts mehr draus!
             }
 
-                    // coma laeuft bereits und jemand startet es nochmal
+            // anwendung laeuft bereits und jemand startet es nochmal
             @Override
             public void handleReOpenApplication(ApplicationEvent ae) {
                 System.out.println("Laeuft schon");
@@ -298,7 +298,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                 ae.setHandled(true);
             }
 
-                    // anwendung laeuft schon, dokument wird ueber den finder geoeffnet
+            // anwendung laeuft schon, dokument wird ueber den finder geoeffnet
             @Override
             public void handleOpenFile(ApplicationEvent ae) {
                 try{

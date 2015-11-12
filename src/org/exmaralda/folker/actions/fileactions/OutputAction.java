@@ -13,6 +13,7 @@ import org.exmaralda.folker.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
+import java.net.URL;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.application.ApplicationControl;
 import org.exmaralda.folker.data.EventListTranscription;
@@ -143,13 +144,16 @@ public class OutputAction extends AbstractApplicationAction {
                             String name = new File(recordingPath).getName();
                             File otherTryFile = new File(new File(defaultAudioPath), name);
                             if (otherTryFile.exists()){
-                                audioElement.setAttribute("path", otherTryFile.getAbsolutePath());
+                                recordingPath = otherTryFile.getAbsolutePath();
                             } else {
                                 ac.displayException(recordingPath + " not found. \nCannot generate output.");
                                 return;
                             }
                         }                         
                     }
+                    // yet another fix
+                    URL recordingURL = new File(recordingPath).toURI().toURL();
+                    audioElement.setAttribute("path", recordingURL.toString());
                 }
                 
                 
