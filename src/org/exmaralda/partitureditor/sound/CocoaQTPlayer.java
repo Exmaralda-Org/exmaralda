@@ -45,7 +45,10 @@ public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener 
         try {
             // added 04-06-2009
             if (wrappedPlayer!=null){
-                wrappedPlayer.cleanUpOnClose();
+                // removed 12-11-2015
+                // this seems to cause a null pointer exception in some circumstances
+                // I'm taking it out hoping it is not really necessary
+                //wrappedPlayer.cleanUpOnClose();
                 /*try {
                     wrappedPlayer.finalize();
                 } catch (Throwable ex) {
@@ -57,9 +60,7 @@ public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener 
             wrappedPlayer.addController(puc);
             puc.addControllerListener(this);
             //puc.start();
-            
-            
-            
+                                    
             //wrappedPlayer = new mpi.eudico.client.annotator.player.NativeMediaPlayerWindowsDS(urlString);
             // added 08-02-2010
             this.fireSoundfileSet();

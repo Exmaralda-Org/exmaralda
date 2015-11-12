@@ -7,6 +7,8 @@ package org.exmaralda.partitureditor.sound;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.masker.WavFile;
@@ -159,16 +161,21 @@ public class SilenceDetector {
      * and removes the rest from the input
      */
     public void findNBest(int n, ArrayList<ArrayList<double[]>> all, final double[] parameters){
-        all.sort(new java.util.Comparator<ArrayList<double[]>>(){
+        Comparator<ArrayList<double[]>> customComp = 
+            new java.util.Comparator<ArrayList<double[]>>(){
+                @Override
+                public int compare(ArrayList<double[]> o1, ArrayList<double[]> o2) {
+                    double score1 = getScore(o1, parameters);
+                    double score2 = getScore(o2, parameters);
+                    return Double.compare(score1, score2);
+                }            
+        }; 
 
-            @Override
-            public int compare(ArrayList<double[]> o1, ArrayList<double[]> o2) {
-                double score1 = getScore(o1, parameters);
-                double score2 = getScore(o2, parameters);
-                return Double.compare(score1, score2);
-            }
-            
-        }); 
+        
+        // requires Java 7        
+        // all.sort(customComparator);        
+        // This one should be okay for Java 6
+        Collections.sort(all, customComp);
         
         for (int i=n; i<all.size(); i++){
             all.remove(i);
