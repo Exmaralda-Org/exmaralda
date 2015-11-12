@@ -158,10 +158,10 @@ public class Aligner {
                     "-F", "SIGNAL=@" + f.getAbsolutePath(),
                     MAUS_WEB_SERVICE);            
             // requires Java 7
-            pb2.redirectOutput(praatFile);
+            // pb2.redirectOutput(praatFile);
             File errorFile = new File("C:\\Users\\Schmidt\\Desktop\\Alignment\\MAUS_ERROR.txt");
             // requires Java 7
-            pb2.redirectError(errorFile);
+            // pb2.redirectError(errorFile);
             System.out.println(pb2.command());
             Process p2 = pb2.start();
             try {
