@@ -162,7 +162,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        wordLabel.setFont(new java.awt.Font("Tahoma", 1, 14));
+        wordLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         wordLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         wordLabel.setText("jLabel1");
         wordLabel.setToolTipText("Doppelklicken, um das transkribierte Wort zu korrigieren");
@@ -229,6 +229,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         dummyButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         dummyButton3.setText("$");
         dummyButton3.setToolTipText("Buchstabierung");
+        dummyButton3.setEnabled(false);
         dummyButton3.setMaximumSize(new java.awt.Dimension(45, 23));
         dummyButton3.setMinimumSize(new java.awt.Dimension(45, 23));
         dummyButton3.setPreferredSize(new java.awt.Dimension(45, 23));

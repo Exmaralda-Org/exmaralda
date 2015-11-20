@@ -184,6 +184,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="$"/>
             <Property name="toolTipText" type="java.lang.String" value="Buchstabierung"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[45, 23]"/>
             </Property>
