@@ -40,17 +40,19 @@ public class RegularExpressionTextField extends JTextField implements DocumentLi
         java.awt.Insets newInsets = (java.awt.Insets)(insets.clone());
         newInsets.left=0;
         this.setMargin(newInsets);
-
     }
 
+    @Override
     public void changedUpdate(DocumentEvent e) {
         checkExpression();
     }
 
+    @Override
     public void insertUpdate(DocumentEvent e) {
         checkExpression();
     }
 
+    @Override
     public void removeUpdate(DocumentEvent e) {        
         checkExpression();
     }

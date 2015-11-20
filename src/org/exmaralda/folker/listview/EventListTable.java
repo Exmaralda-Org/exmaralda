@@ -24,6 +24,10 @@ public class EventListTable extends AbstractListTranscriptionTable  {
     public EventTextCellEditor eventTextCellEditor;
     //public EventTextCellRenderer eventTextCellRenderer;
     
+    String[][] keyBindings = {
+        {"alt VK_PERIOD", "(.)"}
+    };
+    
     /** Creates a new instance of EventListTableView */
     public EventListTable() {
         
@@ -59,7 +63,8 @@ public class EventListTable extends AbstractListTranscriptionTable  {
         cmodel.getColumn(3).setCellRenderer(speakerCellRenderer);
 
         //eventTextCellEditor = new EventTextCellEditor(org.exmaralda.folker.utilities.Constants.GAT_EVENT);
-        eventTextCellEditor = new EventTextCellEditor(this.getCheckRegex());
+        eventTextCellEditor = new EventTextCellEditor(getCheckRegex());
+        eventTextCellEditor.setKeyBindings(keyBindings);
         //eventTextCellRenderer = new EventTextCellRenderer();
         if (mainFont!=null){
             eventTextCellEditor.setFont(mainFont);
