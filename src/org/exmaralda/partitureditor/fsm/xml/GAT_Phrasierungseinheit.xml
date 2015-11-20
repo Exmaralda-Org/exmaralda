@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
-<?xml-stylesheet type="text/xsl" href="D:\Java\de\uni-hamburg\rrz\jexmaralda\fsm\xml\FSM2HTML.xsl"?>
 <fsm name="GAT_Phrasierungseinheit">
 	<char-set id="IU_END_SYMBOLS">
 		<char>?</char>
 		<char>,</char>
 		<char>-</char>
 		<char>;</char>
+		<char>.</char>
+                <!-- added 18-11-2015 -->
 		<char>.</char>
 	</char-set>
 	<char-set id="OPEN_PARENTHESIS">

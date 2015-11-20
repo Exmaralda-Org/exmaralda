@@ -811,6 +811,7 @@ public class PartitureTableWithActions extends PartitureTable
         newFromWizardAction = new NewFromWizardAction(this, null);
         newFromSpeakertableAction = new NewFromSpeakertableAction(this, null);
         newFromTimelineAction = new NewFromTimelineAction(this);
+        newFromSilenceDetectionAction = new NewFromSilenceDetectionAction(this);
         openAction = new OpenAction(this,new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif")));       
         restoreAction = new RestoreAction(this);
         saveAction = new SaveAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Save.gif")));
@@ -1387,6 +1388,8 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction newFromSpeakertableAction;
     /** Action for creating a new transcription file from a timeline (Menu File --> New from timeline)*/
     public javax.swing.AbstractAction newFromTimelineAction;
+    /** Action for creating a new transcription file from a silence detection (Menu File --> New from silence detection)*/
+    public javax.swing.AbstractAction newFromSilenceDetectionAction;
     /** Action for opening an existing transcription file (Menu File --> Open)*/
     public javax.swing.AbstractAction openAction;
     /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    

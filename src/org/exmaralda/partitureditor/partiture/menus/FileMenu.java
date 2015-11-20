@@ -11,7 +11,6 @@ import org.exmaralda.partitureditor.partiture.*;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
 import org.exmaralda.partitureditor.partiture.fileActions.OpenRecentAction;
-import org.exmaralda.common.helpers.Internationalizer;
 
 /**
  *
@@ -19,11 +18,11 @@ import org.exmaralda.common.helpers.Internationalizer;
  */
 public class FileMenu extends AbstractTableMenu {
     
-    private JMenuItem newMenuItem;
-    private JMenuItem openMenuItem;
-    private JMenuItem saveMenuItem;
+    private final JMenuItem newMenuItem;
+    private final JMenuItem openMenuItem;
+    private final JMenuItem saveMenuItem;
     
-    private JMenuItem printMenuItem;
+    private final JMenuItem printMenuItem;
 
 
    
@@ -46,6 +45,7 @@ public class FileMenu extends AbstractTableMenu {
         add(table.newFromWizardAction);
         add(table.newFromSpeakertableAction);
         add(table.newFromTimelineAction);
+        add(table.newFromSilenceDetectionAction);
 
         addSeparator();
         

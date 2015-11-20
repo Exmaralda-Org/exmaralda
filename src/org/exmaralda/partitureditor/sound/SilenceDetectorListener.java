@@ -8,6 +8,8 @@ package org.exmaralda.partitureditor.sound;
  *
  * @author Schmidt
  */
-public class SilenceDetectorListener {
+public interface SilenceDetectorListener {
+
+    public void processProgress(int countIterations, int totalIterations, long startTime, long time); 
     
 }

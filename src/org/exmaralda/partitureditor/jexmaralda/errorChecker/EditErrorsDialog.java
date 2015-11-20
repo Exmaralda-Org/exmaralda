@@ -184,6 +184,7 @@ public class EditErrorsDialog extends org.exmaralda.partitureditor.jexmaraldaswi
         });
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         Object o = errorList.getSelectedValue();
         if (o==null) return;
@@ -193,18 +194,23 @@ public class EditErrorsDialog extends org.exmaralda.partitureditor.jexmaraldaswi
         startLabel.setText("Start: " + error.getAttributeValue("start"));
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
     }
 
+    @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getClickCount() == 2){
              Object item = errorList.getSelectedValue();

@@ -79,10 +79,12 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
     }
     
     public int getSourceWidth(){
+        if (wrappedPlayer==null) return 0;
         return wrappedPlayer.getSourceWidth();
     }
     
     public int getSourceHeight(){
+        if (wrappedPlayer==null) return 0;
         return wrappedPlayer.getSourceHeight();        
     }
 

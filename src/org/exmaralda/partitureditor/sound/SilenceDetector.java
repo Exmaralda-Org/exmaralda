@@ -11,6 +11,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import org.exmaralda.masker.WavFile;
 import org.exmaralda.masker.WavFileException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
@@ -31,7 +35,7 @@ public class SilenceDetector {
     
     int windowSize = 1024;
     
-    ArrayList<SilenceDetectorListener> listeners;
+    ArrayList<SilenceDetectorListener> listeners = new ArrayList<SilenceDetectorListener>();
 
     /* initialises the silence detector with a wave file 
      * memorizes the number of channels and the number of frames
@@ -278,7 +282,7 @@ public class SilenceDetector {
         return totalScore;
     }
 
-    /* returns the list of intervals that complements
+    /** returns the list of intervals that complements
      * the list of intervals passed as thisOne, i.e.
      * both lists together cover [0, audioLength]
      */
@@ -294,6 +298,150 @@ public class SilenceDetector {
         result.add(complementPair);
         return result;
     }
+    
+    /* recommended default parameters as successfully used for the ZW corpus */
+    public static double DEFAULT_START_THRESHHOLD = 0.005;     //0.005
+    public static double DEFAULT_END_THRESHHOLD =  0.015;     //0.015
+    public static double DEFAULT_STEP_THRESHHOLD = 0.001;      //0.001
+    public static double DEFAULT_START_MIN_LENGTH = 0.2;      //0.2
+    public static double DEFAULT_END_MIN_LENGTH = 1.0;        //1
+    public static double DEFAULT_STEP_MIN_LENGTH = 0.1;       //0.1
+    public static double DEFAULT_MIN_LENGTH_BETWEEN = 0.3;    //0.3
+    public static double DEFAULT_SHRINK_AMOUNT = 0.05;        //0.05
+    public static double DEFAULT_MUCH_TOO_SHORT = 1.0;        //1.0
+    public static double DEFAULT_OKAY = 3.0;                //3.0
+    public static double DEFAULT_TOO_LONG = 7.0;             //7.0
+    public static double DEFAULT_MUCH_TOO_LONG = 10.0;         //10.0
+    public static double DEFAULT_TIMELINE_TOLERANCE = 0.00001;    //0.00001
+    
+    
+    /** performs a full run of silence detections through the 
+     * given audio file using the default parameters
+     * @param audioFile
+     * @return 
+     * @throws java.io.IOException 
+     * @throws org.exmaralda.masker.WavFileException 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException 
+     * @throws javax.sound.sampled.UnsupportedAudioFileException 
+     */
+    public BasicTranscription performSilenceDetection(File audioFile) throws IOException, WavFileException, JexmaraldaException, UnsupportedAudioFileException{
+        return this.performSilenceDetection(audioFile, 
+                DEFAULT_START_THRESHHOLD, DEFAULT_END_THRESHHOLD, DEFAULT_STEP_THRESHHOLD, 
+                DEFAULT_START_MIN_LENGTH, DEFAULT_END_MIN_LENGTH, DEFAULT_STEP_MIN_LENGTH, 
+                DEFAULT_MIN_LENGTH_BETWEEN, DEFAULT_SHRINK_AMOUNT, 
+                DEFAULT_MUCH_TOO_SHORT, DEFAULT_OKAY, DEFAULT_TOO_LONG, DEFAULT_MUCH_TOO_LONG, 
+                DEFAULT_TIMELINE_TOLERANCE);
+    }
+    
+    
+    public BasicTranscription performSilenceDetection(File audioFile, double[] parameters) throws IOException, WavFileException, JexmaraldaException, UnsupportedAudioFileException{
+        return this.performSilenceDetection(audioFile, 
+                parameters[0], parameters[1], parameters[2], 
+                parameters[3], parameters[4], parameters[5], 
+                parameters[6], parameters[7], 
+                parameters[8], parameters[9], parameters[10], parameters[11],
+                DEFAULT_TIMELINE_TOLERANCE);
+        
+    }
+            
+    
+    /** performs a full run of silence detections through the 
+     * given audio file using the parameters for threhhold and min length
+     * then evaluates the different results using the parameters for scoring
+     * and then generates a basic transcription based on the best result and
+     * returns it
+     * @param audioFile
+     * @param startThreshHold
+     * @param endThreshHold
+     * @param stepThreshHold
+     * @param startMinLength
+     * @param endMinLength
+     * @param stepMinLength
+     * @param minLengthBetween
+     * @param shrinkAmount
+     * @param muchTooShort
+     * @param okay
+     * @param tooLong
+     * @param muchTooLong
+     * @param timelineTolerance
+     * @return
+     * @throws IOException
+     * @throws WavFileException
+     * @throws JexmaraldaException 
+     * @throws javax.sound.sampled.UnsupportedAudioFileException 
+     */
+    public BasicTranscription performSilenceDetection(
+                                        File audioFile,
+                                        double startThreshHold,     //0.005
+                                        double endThreshHold,       //0.015
+                                        double stepThreshHold,      //0.001
+                                        double startMinLength,      //0.2
+                                        double endMinLength,        //1
+                                        double stepMinLength,       //0.1
+                                        double minLengthBetween,    //0.3
+                                        double shrinkAmount,        //0.05
+                                        double muchTooShort,        //1.0
+                                        double okay,                //3.0
+                                        double tooLong,             //7.0
+                                        double muchTooLong,         //10.0
+                                        double timelineTolerance    //0.00001
+    ) throws IOException, WavFileException, JexmaraldaException, UnsupportedAudioFileException{
+        BasicTranscription resultTranscription = new BasicTranscription();
+        
+        /*BASAudioPlayer player = new BASAudioPlayer();
+        player.setSoundFile(audioFile.getAbsolutePath());
+        double audioLength = player.getTotalLength(); */
+                
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+        AudioFormat format = audioInputStream.getFormat();
+        long audioFileLength = audioFile.length();
+        int frameSize = format.getFrameSize();
+        float frameRate = format.getFrameRate();
+        //float durationInSeconds = (audioFileLength / (frameSize * frameRate));        
+        double audioLength = (audioFileLength / (frameSize * frameRate));        
+        
+        
+        double[] scoreParameters = {0.0, muchTooShort, okay, tooLong, muchTooLong, audioLength};        
+        
+        int totalIterations =  (int) ((Math.floor(((endThreshHold-startThreshHold)/stepThreshHold)) +1)
+                * (Math.floor(((endMinLength-startMinLength)/stepMinLength))+1));
+        int countIterations = 0;
+        long startTime = System.currentTimeMillis();
+        
+        
+        ArrayList<ArrayList<double[]>> all = new ArrayList<ArrayList<double[]>>();
+        fireProgress(0, totalIterations, startTime, startTime);
+        for (double threshhold = startThreshHold; threshhold < endThreshHold; threshhold+=stepThreshHold){
+            for (double minLength=startMinLength; minLength<=endMinLength; minLength+=stepMinLength){
+                SilenceDetector sd = new SilenceDetector(audioFile);
+                ArrayList<double[]> silenceIntervals = sd.detectSilences(threshhold, minLength);
+                ArrayList<double[]> cleanedSilenceIntervals = sd.clean(silenceIntervals, minLengthBetween);
+                ArrayList<double[]> shrunkSilenceIntervals = sd.shrink(cleanedSilenceIntervals, shrinkAmount);
+                all.add(shrunkSilenceIntervals);
+                countIterations++;
+                long time = System.currentTimeMillis();
+                fireProgress(countIterations, totalIterations, startTime, time);
+            }
+        }
+        
+        SilenceDetector sd = new SilenceDetector(audioFile);
+        ArrayList<double[]> bestIntervals = sd.findBest(all, scoreParameters);
+        //double score = sd.getScore(bestIntervals, scoreParameters);
+        String id = resultTranscription.getBody().makeTierFromTimes(bestIntervals, 0.00001);
+        
+        
+        
+        return resultTranscription;
+    }
+    
+    private void fireProgress(int countIterations, int totalIterations, long startTime, long time) {
+        for (SilenceDetectorListener listener : this.listeners){
+            listener.processProgress(countIterations, totalIterations, startTime, time);
+        }
+    }
+    
+            
+            
     
     public static void main (String[] args){
         try {
@@ -313,7 +461,8 @@ public class SilenceDetector {
                     SilenceDetector sd = new SilenceDetector(new File(audio));
                     ArrayList<double[]> silenceIntervals = sd.detectSilences(threshhold, minLength);
                     ArrayList<double[]> cleanedSilenceIntervals = sd.clean(silenceIntervals, 0.3);
-                    ArrayList<double[]> shrunkSilenceIntervals = sd.clean(cleanedSilenceIntervals, 0.05);
+                    //ArrayList<double[]> shrunkSilenceIntervals = sd.clean(cleanedSilenceIntervals, 0.05);
+                    ArrayList<double[]> shrunkSilenceIntervals = sd.shrink(cleanedSilenceIntervals, 0.05);
                     all.add(shrunkSilenceIntervals);
                     double score = sd.getScore(shrunkSilenceIntervals, parameters);
                     System.out.println(threshhold + "\t" + minLength + "\t" + score + "\t" + shrunkSilenceIntervals.size());
@@ -340,6 +489,7 @@ public class SilenceDetector {
             Logger.getLogger(SilenceDetector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     
     
 }
