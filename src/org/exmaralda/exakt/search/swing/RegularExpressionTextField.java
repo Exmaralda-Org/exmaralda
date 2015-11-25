@@ -31,14 +31,17 @@ public class RegularExpressionTextField extends javax.swing.JTextField
         addMouseListener(this);
     }
 
+    @Override
     public void removeUpdate(DocumentEvent e) {
         checkExpression();
     }
 
+    @Override
     public void insertUpdate(DocumentEvent e) {
         checkExpression();
     }
 
+    @Override
     public void changedUpdate(DocumentEvent e) {
         checkExpression();
     }
@@ -56,15 +59,18 @@ public class RegularExpressionTextField extends javax.swing.JTextField
         }
     }
 
+    @Override
     public void setItem(Object anObject) {
         String[] historyItem = (String[])anObject;
         setText(historyItem[0]);
     }
 
+    @Override
     public Component getEditorComponent() {
         return this;
     }
 
+    @Override
     public Object getItem() {
         String[] returnValue = {getText(), "?"};
         return returnValue;
@@ -79,9 +85,11 @@ public class RegularExpressionTextField extends javax.swing.JTextField
         }
     }
 
+    @Override
     public void mouseClicked(MouseEvent e) {
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (e.isPopupTrigger()){
             popupMenu.show(this, e.getX(), e.getY());
@@ -89,16 +97,19 @@ public class RegularExpressionTextField extends javax.swing.JTextField
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         if (e.isPopupTrigger()){
             popupMenu.show(this, e.getX(), e.getY());
         }
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
 
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
 
     }
