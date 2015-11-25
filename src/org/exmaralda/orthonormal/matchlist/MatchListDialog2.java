@@ -34,7 +34,7 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
     File lastList = null;
     MatchList ml;
     ApplicationControl applicationControl;
-    ProgressBarDialog pbd = null;
+    //ProgressBarDialog pbd = null;
     
     /** Creates new form MatchListDialog */
     public MatchListDialog2(java.awt.Frame parent, boolean modal) {
@@ -67,6 +67,8 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
         workingDirLabel = new javax.swing.JLabel();
         workingDirBrowseLabel = new javax.swing.JButton();
         openButton = new javax.swing.JButton();
+        countPanel = new javax.swing.JPanel();
+        countLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Trefferliste");
@@ -108,6 +110,11 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
         });
         controlPanel.add(openButton);
 
+        countLabel.setText("0 results");
+        countPanel.add(countLabel);
+
+        controlPanel.add(countPanel);
+
         getContentPane().add(controlPanel, java.awt.BorderLayout.PAGE_START);
 
         pack();
@@ -134,23 +141,30 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
         }
     }//GEN-LAST:event_openButtonActionPerformed
 
-    void displayList(MatchList newML){
-        if (pbd!=null){
+    public void displayList(MatchList newML){
+        /*if (pbd!=null){
             pbd.setVisible(false);
-        }
+        }*/
         matchListList.setModel(new MatchListListModel(newML));
-        ml = newML;                        
+        ml = newML;   
+        countLabel.setText(Integer.toString(newML.l.size()) + " results");
     }
+    
+    public void setWorkingDirectory(File f){
+            workingDir = f;
+            workingDirLabel.setText(f.getName());
+            workingDirLabel.setToolTipText(f.getAbsolutePath());
+            PreferencesUtilities.setProperty("ortho-matchlist-work-dir", workingDir.getAbsolutePath());            
+        
+    }
+    
     private void workingDirBrowseLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workingDirBrowseLabelActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int ret = fileChooser.showOpenDialog(this);
         if (ret==JFileChooser.APPROVE_OPTION){
             File f = fileChooser.getSelectedFile();
-            workingDir = f;
-            workingDirLabel.setText(f.getName());
-            workingDirLabel.setToolTipText(f.getAbsolutePath());
-            PreferencesUtilities.setProperty("ortho-matchlist-work-dir", workingDir.getAbsolutePath());            
+            setWorkingDirectory(f);
         } 
     }//GEN-LAST:event_workingDirBrowseLabelActionPerformed
 
@@ -199,6 +213,8 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel countLabel;
+    private javax.swing.JPanel countPanel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList matchListList;
     private javax.swing.JScrollPane matchListScrollPane;

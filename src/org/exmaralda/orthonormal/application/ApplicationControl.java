@@ -46,11 +46,13 @@ import org.exmaralda.orthonormal.actions.fileactions.OpenRecentAction;
 import org.exmaralda.folker.actions.fileactions.OutputAction;
 import org.exmaralda.orthonormal.gui.WordLabel;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
+import org.exmaralda.folker.matchlist.MatchList;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.gui.EditContributionDialog;
 import org.exmaralda.orthonormal.gui.EditPreferencesDialog;
 import org.exmaralda.orthonormal.gui.SaveLexiconDialog;
+import org.exmaralda.orthonormal.gui.SearchInDirectoryDialog;
 import org.exmaralda.orthonormal.gui.TaggingDialog;
 import org.exmaralda.orthonormal.gui.WordListTableCellRenderer;
 import org.exmaralda.orthonormal.gui.WordListTableModel;
@@ -62,6 +64,7 @@ import org.exmaralda.orthonormal.lexicon.LexiconInterface;
 import org.exmaralda.orthonormal.lexicon.RDBLexicon;
 import org.exmaralda.orthonormal.lexicon.SimpleXMLFileLexicon;
 import org.exmaralda.orthonormal.lexicon.XMLLexicon;
+import org.exmaralda.orthonormal.matchlist.DirectorySearch;
 import org.exmaralda.orthonormal.matchlist.MatchListDialog2;
 import org.exmaralda.orthonormal.matchlist.MatchListListener;
 import org.exmaralda.orthonormal.utilities.PreferencesUtilities;
@@ -123,6 +126,7 @@ public final class ApplicationControl implements  ListSelectionListener,
     org.exmaralda.orthonormal.actions.editActions.EditPreferencesAction editPreferencesAction;
     //org.exmaralda.orthonormal.actions.editActions.UpdateRDBLexiconAction updateRDBLexiconAction;
     org.exmaralda.orthonormal.actions.editActions.SaveLexiconAction saveLexiconAction;
+    org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction searchInDirectoryAction;
     
     public String currentFilePath = null;
     public String currentMediaPath = null;
@@ -346,6 +350,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         editPreferencesAction = new org.exmaralda.orthonormal.actions.editActions.EditPreferencesAction(this, "Voreinstellungen...", c.getIcon(Constants.EDIT_PREFERENCES_ICON));
         //updateRDBLexiconAction = new org.exmaralda.orthonormal.actions.editActions.UpdateRDBLexiconAction(this, "Datenbank-Lexikon aktualisieren...", null);
         saveLexiconAction = new org.exmaralda.orthonormal.actions.editActions.SaveLexiconAction(this, "Lexikon speichern...", null);
+        searchInDirectoryAction = new org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction(this, "Verzeichnis durchsuchen...", c.getIcon(Constants.SEARCH_ICON));
 
     }
     
@@ -374,6 +379,9 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.editMenu.addSeparator();
         //applicationFrame.editMenu.add(updateRDBLexiconAction);
         applicationFrame.editMenu.add(saveLexiconAction);
+        applicationFrame.editMenu.addSeparator();
+        applicationFrame.editMenu.add(searchInDirectoryAction);
+        
 
         playSelectionAction.setEnabled(false);
         applicationFrame.playSelectionButton.setAction(playSelectionAction);
@@ -1878,6 +1886,34 @@ public final class ApplicationControl implements  ListSelectionListener,
         TableColumn column2 = contributionListTable.getColumnModel().getColumn(2);
         contributionListTable.getColumnModel().removeColumn(column1);
         contributionListTable.getColumnModel().removeColumn(column2);
+    }
+
+    public void searchInDirectory() {
+        SearchInDirectoryDialog sidd = new SearchInDirectoryDialog(applicationFrame, true);
+        sidd.setLocationRelativeTo(applicationFrame);
+        sidd.setVisible(true);
+        if (!sidd.approved) return;
+        
+        String transcribed = sidd.getTranscribedRegex();
+        String normalized = sidd.getNormalizedRegex();
+        String lemma = sidd.getLemmaRegex();
+        String pos = sidd.getPOSRegex();
+        
+        DirectorySearch ds = new DirectorySearch(sidd.getDirectory());
+        try {
+            org.exmaralda.orthonormal.matchlist.MatchList ml = ds.searchDirectory(transcribed, normalized, lemma, pos);
+            matchListDialog.setWorkingDirectory(sidd.getDirectory());
+            matchListDialog.displayList(ml);
+            matchListDialog.setVisible(true);
+        } catch (JDOMException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+            displayException(ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+            displayException(ex);
+        }
+        
+        
     }
     
 

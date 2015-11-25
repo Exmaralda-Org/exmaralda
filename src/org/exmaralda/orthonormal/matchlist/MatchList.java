@@ -23,9 +23,14 @@ public class MatchList {
     ArrayList<MatchListListener> listeners = new ArrayList<MatchListListener>();
     List l = new ArrayList();
     
-    public MatchList(){        
+    public MatchList(){ 
     }
     
+    public MatchList(Document d){ 
+        matchListDocument = d;
+        l = matchListDocument.getRootElement().getChildren("contribution");
+    }
+
     public void addMatchListListener(MatchListListener listener){
         listeners.add(listener);
     }
