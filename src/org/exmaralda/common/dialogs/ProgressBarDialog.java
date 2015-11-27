@@ -15,12 +15,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.exmaralda.exakt.search.SearchEvent;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
+import org.exmaralda.partitureditor.sound.SilenceDetectorListener;
 
 /**
  *
  * @author thomas
  */
 public class ProgressBarDialog extends javax.swing.JDialog implements org.exmaralda.exakt.search.SearchListenerInterface,
+                                                                      SilenceDetectorListener,
                                                                       org.exmaralda.folker.matchlist.MatchListListener {
 
     javax.swing.Timer timer;
@@ -29,13 +31,15 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
     boolean estimateTime = false;
     long startTime;
 
-    /** Creates new form ProgressBarDialog */
+    /** Creates new form ProgressBarDialog
+     * @param parent */
     public ProgressBarDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         estimatePanel.setVisible(false);
         pack();
         timer = new javax.swing.Timer(100, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 progressBar.setValue(currentProgress);
                 progressBar.setString(progressString);
@@ -159,6 +163,18 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
     public void processMatchListEvent(String description, double progress) {
         progressString = description;
         currentProgress = (int)Math.round(progress*100);
+    }
+
+    @Override
+    public void processProgress(int countIterations, int totalIterations, long startTime, long time) {
+        progressString = "Iteration #" + Integer.toString(countIterations) + " of " + Integer.toString(totalIterations);
+        currentProgress = (int)Math.round((double)countIterations/(double)totalIterations*100.0);
+        if (estimateTime){
+            updateTimeEstimate();
+        }
+         if (currentProgress>99){
+            this.setVisible(false);
+        }         
     }
 
 }
