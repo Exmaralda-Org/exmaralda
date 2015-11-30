@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.TierFormat;
 import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
 import org.exmaralda.partitureditor.jexmaralda.errorChecker.EditErrorsDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.AutoAnnotationDialog;
@@ -65,6 +65,15 @@ public class AutoAnnotationAction extends org.exmaralda.partitureditor.partiture
             Document errorsDocument = table.getModel().getTranscription().getBody().autoAnnotate(tierIDs, 
                     regex, category, value, delete, 
                     table.getModel().getTranscription().getHead().getSpeakertable());
+
+            //Need to update tft here!
+            String[] allTierIDs = table.getModel().getTranscription().getBody().getAllTierIDs();
+            for (String tierID : allTierIDs){
+                if (!tft.containsTierFormatForTier(tierID)){
+                    TierFormat newTF = new TierFormat("a", tierID);
+                    tft.addTierFormat(newTF);
+                }
+            }
 
             //table.getModel().setTranscriptionAndTierFormatTable(bt, tft);
             table.stratify(table.getModel().getTranscription());
