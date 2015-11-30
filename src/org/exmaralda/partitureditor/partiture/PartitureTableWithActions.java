@@ -1917,7 +1917,8 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
     
-    /** does nothing */
+    /** does nothing
+     * @param documentEvent */
     @Override
     public void removeUpdate(javax.swing.event.DocumentEvent documentEvent) {
     }
@@ -2460,6 +2461,14 @@ public class PartitureTableWithActions extends PartitureTable
 
     public void clearSearchResult() {
         ((SearchInEventsAction)(searchInEventsAction)).dialog.clearSearchResult();
+    }
+
+    void setMediaPlaybackRate(double newRate) {
+        if (player instanceof JDSPlayer){
+            ((JDSPlayer)player).setPlaybackRate(newRate); 
+        } else if (player instanceof CocoaQTPlayer){
+            ((CocoaQTPlayer)player).setPlaybackRate(newRate);             
+        }
     }
 
 

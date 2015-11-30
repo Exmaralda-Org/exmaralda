@@ -394,7 +394,7 @@ public class PartiturEditor extends javax.swing.JFrame
             String os = System.getProperty("os.name").substring(0,3);
             String defaultPlayer = "JMF-Player";
             if (os.equalsIgnoreCase("mac")){
-                defaultPlayer = "ELAN-Quicktime-Player";
+                defaultPlayer = "CocoaQT-Player";
             } else if (os.equalsIgnoreCase("win")){
                 defaultPlayer = "JDS-Player";
             }
@@ -416,7 +416,11 @@ public class PartiturEditor extends javax.swing.JFrame
                 settings.putBoolean("PlayerTypeConfirmed", true);
             }
 
-
+            String playerNow = settings.get("PlayerType", defaultPlayer);
+            partiturTimelinePanel.rateSpinner.setVisible(
+                    "JDS-Player".equals(playerNow) ||
+                    "CocoaQT-Player".equals(playerNow)
+            );
 
             table.setSettings(getPreferencesNode());
 

@@ -185,6 +185,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         zoomToggleButton = new javax.swing.JToggleButton();
         timeViewerControlPanel = new javax.swing.JPanel();
         playerControlsPanel = new javax.swing.JPanel();
+        rateSpinner = new javax.swing.JSpinner();
         selectionControlsPanel = new javax.swing.JPanel();
         playFirstSecondBeforeSelectionButton = new javax.swing.JButton();
         playFirstSecondOfSelectionButton = new javax.swing.JButton();
@@ -263,6 +264,15 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         timeViewerPanel.add(timeViewerValuesPanel, java.awt.BorderLayout.NORTH);
 
         timeViewerControlPanel.setLayout(new java.awt.BorderLayout());
+
+        rateSpinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.5d, 1.5d, 0.1d));
+        rateSpinner.setToolTipText("Change media playback rate (1=normal speed)");
+        rateSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rateSpinnerStateChanged(evt);
+            }
+        });
+        playerControlsPanel.add(rateSpinner);
 
         selectionControlsPanel.setLayout(new javax.swing.BoxLayout(selectionControlsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -376,6 +386,11 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         // TODO add your handling code here:
     }//GEN-LAST:event_addEventButtonActionPerformed
 
+    private void rateSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rateSpinnerStateChanged
+        double newRate = (Double)rateSpinner.getValue();
+        partitur.setMediaPlaybackRate(newRate);
+    }//GEN-LAST:event_rateSpinnerStateChanged
+
     void copyDuration(){
         java.awt.datatransfer.StringSelection ss = new java.awt.datatransfer.StringSelection(durationLabel.getText());
         this.getToolkit().getSystemClipboard().setContents(ss,ss);
@@ -406,6 +421,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     private javax.swing.JToggleButton playbackModeToggleButton;
     private javax.swing.JPanel playerControlsPanel;
     private javax.swing.JPanel progressBarPanel;
+    public javax.swing.JSpinner rateSpinner;
     private javax.swing.JPanel selectionControlPanel;
     private javax.swing.JPanel selectionControlsPanel;
     private javax.swing.JButton shiftSelectionButton;

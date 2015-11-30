@@ -61,9 +61,11 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
     @Override
     public double getTotalLength() {
         if (wrappedPlayer==null) return 0.0;
-        double seconds = wrappedPlayer.getFrameLength() / wrappedPlayer.getAudioFormat().getFrameRate();
+        double seconds = wrappedPlayer.getFrameLength() / wrappedPlayer.getAudioFormat().getFrameRate();        
         return seconds;
     }
+    
+    
 
     private void play(double startTime, double endTime) throws PlayerException{
         long startFrame = Math.round(wrappedPlayer.getAudioFormat().getFrameRate() * startTime);

@@ -65,12 +65,17 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
             fireSoundfileSet();
 
             // experiment!
-            //wrappedPlayer.setRate(0.5f);
+            //wrappedPlayer.setRate(0.8f);
 
         } catch (NoPlayerException ex) {
             throw new IOException(ex);
         }
     }
+    
+    public void setPlaybackRate(double rate){
+        wrappedPlayer.setRate((float)rate);
+    }
+        
 
     @Override
     public double getTotalLength() {

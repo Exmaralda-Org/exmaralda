@@ -114,6 +114,12 @@ public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener 
         }*/
         
     }
+    
+    public void setPlaybackRate(double rate){
+        wrappedPlayer.setRate((float)rate);
+    }
+        
+    
 
     @Override
     public void startPlayback() {
