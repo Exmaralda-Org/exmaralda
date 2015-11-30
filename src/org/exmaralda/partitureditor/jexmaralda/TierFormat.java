@@ -70,7 +70,7 @@ public class TierFormat extends java.util.Properties {
     /** Creates new standard TierFormat for the given tier */
     public TierFormat(String type, String tr){
         this();
-        tierref = new String(tr);
+        tierref = tr;
         this.setProperty("font-color","black");            
         this.setProperty("bg-color","white");              
         if (type.equals("t")){
@@ -154,7 +154,7 @@ public class TierFormat extends java.util.Properties {
     }
     
     public int getSize(){
-        return Integer.valueOf(this.getProperty("font-size")).intValue();   //return size;
+        return Integer.parseInt(this.getProperty("font-size"));   //return size;
     }
     
     public String getSizeAsString(){
@@ -303,7 +303,7 @@ public class TierFormat extends java.util.Properties {
     // ********************************************    
 
     public String toXML(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<tier-format tierref=\"" + getTierref() +"\">");
         for (java.util.Enumeration e = propertyNames() ; e.hasMoreElements() ;) {
              String propertyName = (String)e.nextElement();
