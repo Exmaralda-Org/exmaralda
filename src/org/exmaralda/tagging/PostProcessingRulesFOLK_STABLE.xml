@@ -2,31 +2,44 @@
 <rules>
     <rule>
         <!-- normalisierte Formen, die als unvollständig gekennzeichnet sind -->
-        <match field="n">[A-ZÄÖÜa-zäöüß]*\%</match>
+        <!-- bekommen immer AB als POS-Tag -->
+        <!-- (geändert am 01.12.2015) -->
+        <match field="n">%</match>
         <set field="pos">AB</set>
     </rule>
     <rule>
         <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
+        <!-- bekommen immer XY als POS-Tag -->
         <match field="n">&amp;</match>
         <set field="pos">XY</set>
     </rule>
     <rule>
+        <!-- normalisierte Formen, die mit dem Dummy '§' versehen sind -->
+        <!-- bekommen immer NGIRR als POS-Tag -->
+        <!-- neu am 01.12.2015) -->
+        <match field="n">&amp;</match>
+        <set field="pos">NGIRR</set>
+    </rule>
+    <rule>
         <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
+        <!-- bekommen immer auch '&' als Lemma -->
         <match field="n">&amp;</match>
         <set field="lemma">&amp;</set>
     </rule>
     <rule>
-        <!-- Unverständliches -->
+        <!-- Unverständliches bekommt immer UI als POS-Tag -->
+        <!-- (geändert am 01.12.2015) -->
         <match field="word">(\+\+\+)+</match>
-        <set field="pos">XY</set>
+        <set field="pos">UI</set>
     </rule>
+    
     <rule>
-        <!-- ITJ wird zu SIEITJ -->
+        <!-- ITJ wird zu NGIRR -->
         <match field="pos">ITJ</match>
         <set field="pos">NGIRR</set>
     </rule>
     <rule>
-        <!-- PTKANT wird zu SIERSP -->
+        <!-- PTKANT wird zu NGIRR -->
         <match field="pos">PTKANT</match>
         <set field="pos">NGIRR</set>
     </rule>
@@ -36,6 +49,14 @@
         <set field="pos">ADV</set>
     </rule>
     <rule>
+        <!-- 'gell' ist immer SEQU -->
+        <match field="n">gell</match>
+        <set field="pos">SEQU</set>
+    </rule>    
+    <!-- ****************************************************** -->
+    <!-- *** ab hier: Postprocessing f+r Lemmatisierung ******* -->
+    <!-- ****************************************************** -->    
+    <rule>
         <!-- weißt darf nicht zu weißen lemmatisiert werden -->
         <match field="lemma">weißen</match>
         <set field="lemma">wissen</set>
@@ -44,11 +65,6 @@
         <!-- gell darf nicht zu gellen lemmatisiert werden -->
         <match field="n">gell</match>
         <set field="lemma">gell</set>
-    </rule>    
-    <rule>
-        <!-- gell darf nicht zu gellen lemmatisiert werden -->
-        <match field="n">gell</match>
-        <set field="pos">SEQU</set>
     </rule>    
     <rule>
         <!-- okay darf nicht zu Okay lemmatisiert werden -->

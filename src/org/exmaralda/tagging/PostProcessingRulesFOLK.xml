@@ -1,32 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rules><rule><match field="n">(abends|abermals|abwärts|allemal|allenfalls|allerdings|allzu|alsbald|alsdann|anderenfalls|anderenteils|andererseits|andernfalls|andernteils|anders|anfangs|anschließend|ansonsten|aufwärts|außen|außerdem|bald|beieinander|beinahe|beispielsweise|beizeiten|bekanntlich|bereits|besonders|bestens|bestenfalls|bisher|dabei|dadurch|dafür|dagegen|daher|dahingegen|dahinter|damals|danach|dann|daran|dran|darauf|drauf|darauffolgend|daraufhin|daraus|drin|darin|drob|darob|drüber|darüber|drum|darum|drunter|darunter|davon|davor|dementgegen|demgegenüber|demnach|demnächst|demzufolge|derart|dereinst|desgleichen|dort|dorther|dorthin|draußen|drin|drob|drüben|drüber|drunter|durchaus|ebenfalls|ebenso|ehedem|ehemals|eher|eilends|einerseits|einigermaßen|einst|einstmals|ersatzweise|fast|folglich|fortan|freilich|früher|gegebenenfalls|genauso|gestern|gleichfalls|glücklicherweise|günstigenfalls|her|heraus|herein|hernach|herum|herunter|heute|heutzutage|hier|hieran|hierauf|hieraus|hierbei|hierdurch|hierein|hierfür|hiergegen|hierher|hierhin|hierhinab|hierhinauf|hierhinaus|hierhinein|hierhinter|hierhinüber|hierin|hiermit|hiernach|hierneben|hierüber|hierum|hierunter|hiervon|hiervor|hierzu|hierzulande|hierzwischen|hin|hinten|hinwieder|hinwiederum|höchstens|hoffentlich|infolgedessen|innen|inzwischen|irgendwann|irgendwie|irgendwo|jedenfalls|jedoch|jemals|kaum|keinesfalls|kopfüber|lediglich|mehrmals|meist|meistens|minder|mindestens|miteinander|mithin|mittags|mittlerweile|möglicherweise|morgen|morgens|nacheinander|nachher|nächstens|nachts|nebenbei|nebeneinander|nebenher|neulich|nie|niemals|nirgends|notfalls|nötigenfalls|nunmehr|oben|obendrein|oft|öfters|ohnedies|ohnehin|ringsum|ringsumher|rückwärts|rundum|schlimmstenfalls|schwerlich|seinerzeit|seither|sicherlich|sodann|soeben|sofort|sogleich|somit|sonst|sowieso|stattdessen|stets|tagsüber|überall|überallhin|überaus|überdies|übermorgen|übrigens|umsonst|ungestraft|unglücklicherweise|unten|unterdessen|untereinander|unterwegs|vergebens|vielleicht|vielmals|vordem|vorgestern|vorhin|vormals|vorn|vorne|warum|weg|weitaus|weiter|weiterhin|weiters|wenigstens|wieder|wiederum|wobei|wodurch|wofür|wogegen|wohinter|wohlgemerkt|womit|wonach|woneben|woran|worauf|woraufhin|woraus|worein|worin|worüber|worum|worunter|wovon|wovor|wozu|wozwischen|zeitlebens|zeitweise|zudem|zuerst|zugleich|zuguterletzt|zuletzt|zusammen|zuvor|zuweilen|zwar|zwischendurch)</match><set field="pos">ADV</set></rule><rule><match field="n">(als|desto|je|umso)</match><set field="pos">KOKOM</set></rule><rule><match field="n">(außer|beziehungsweise|entweder|oder|sondern|sowohl|und|weder)</match><set field="pos">KON</set></rule><rule><match field="n">(bevor|dass|ehe|falls|nachdem|ob|obgleich|obschon|obwohl|obzwar|sobald|sodass|sofern|sooft|soviel|sovielmal|soweit|wenngleich|wennzwar|wohingegen)</match><set field="pos">KOUS</set></rule><rule><match field="n">(ächz|brumm|gähn|glitsch|heul|knirsch|knurr|kotz|kreisch|lol|rofl|schlurp|schnarch|schnaub|seufz|staun|stöhn|dröhn|würg)</match><set field="pos">NGAKW</set></rule><rule><match field="n">(äh)</match><set field="pos">NGHES</set></rule><rule><match field="n">(jawohl|nein|hm|hmhm|m-m|ach|achdujemine|ächz|adieu|ah|aha|ahoi|äks|alaaf|alleluja|ätsch|au|aua|autsch|auweh|auweia|bah|bäh|basta|bingo|boah|bravo|brr|buh|ciao|cool|danke|dujemine|ei|eiderdaus|eieiei|ey|feurio|fresse|ha|hä|hach|haha|hahaha|halleluja|hallo|har|harhar|hatschi|hauruck|he|heda|hei|heisa|heißa|helau|herrje|heureka|hey|hi|hihi|hm|hoi|holla|holüber|hoppla|hops|hopsasa|hossa|hott|howdy|hu|hü|hüa|huch|huhu|hui|hurra|i|ia|iah|igitt|igittigittigitt|ih|inshallah|iwo|jaj|jesses|jippi|jippijayeah|jö|juchhe|juchu|juhu|kapische|kapischo|knorke|kuckuck|lala|leckomio|manometer|maschallah|maseltov|menno|mhm|miez-miez|mmmh|moin|muh|na|naja|nanu|nebbich|nu|o|oh|oha|ohja|oho|oi|oje|ojemine|okay|olala|pah|päh|papperlapapp|pardauz|pfui|potz|potzblitz|potztausend|prosit|prost|pscht|psst|pst|puh|sa|sapperlot|scheiße|schubidu|schwuppdiwupp|sers|servus|sorry|soso|tandaradei|tja|toitoi|toitoitoi|tschakka|tschau|tschüs|tschüss|tschüssikowski|uff|uh|ui|ups|voilŕ|weh|weidmannsheil|willkommen|wow|zack)</match><set field="pos">NGIRR</set></rule><rule><match field="n">(blubb|boing|bum|bumbum|gak|hicks|kikeriki|klack|klingeling|klirr|knack|knacks|mäh|miau|möh|muh|oink|paff|peng|piep|pieps|piff|platsch|plumps|quak|quiek|quietsch|rumms|schnipp|schwippschwapp|schwupp|tapp|tatütata|ticktack|tsching|wau|wuff|wumm|wums|wusch)</match><set field="pos">NGONO</set></rule><rule><match field="n">(halt)</match><set field="pos">PTKMA</set></rule><rule><match field="n">(wa|woll|ne|gell)</match><set field="pos">SEQU</set></rule>
+<rules>
+    <rule>
+        <match field="n">(abends|abermals|abwärts|allemal|allenfalls|allerdings|allzu|alsbald|alsdann|anderenfalls|anderenteils|andererseits|andernfalls|andernteils|anders|anfangs|anschließend|ansonsten|aufwärts|außen|außerdem|bald|beieinander|beinahe|beispielsweise|beizeiten|bekanntlich|bereits|besonders|bestens|bestenfalls|bisher|dabei|dadurch|dafür|dagegen|daher|dahingegen|dahinter|damals|danach|dann|daran|dran|darauf|drauf|darauffolgend|daraufhin|daraus|drin|darin|drob|darob|drüber|darüber|drum|darum|drunter|darunter|davon|davor|dementgegen|demgegenüber|demnach|demnächst|demzufolge|derart|dereinst|desgleichen|dort|dorther|dorthin|draußen|drin|drob|drüben|drüber|drunter|durchaus|ebenfalls|ebenso|ehedem|ehemals|eher|eilends|einerseits|einigermaßen|einst|einstmals|ersatzweise|fast|folglich|fortan|freilich|früher|gegebenenfalls|genauso|gestern|gleichfalls|glücklicherweise|günstigenfalls|her|heraus|herein|hernach|herum|herunter|heute|heutzutage|hier|hieran|hierauf|hieraus|hierbei|hierdurch|hierein|hierfür|hiergegen|hierher|hierhin|hierhinab|hierhinauf|hierhinaus|hierhinein|hierhinter|hierhinüber|hierin|hiermit|hiernach|hierneben|hierüber|hierum|hierunter|hiervon|hiervor|hierzu|hierzulande|hierzwischen|hin|hinten|hinwieder|hinwiederum|höchstens|hoffentlich|infolgedessen|innen|inzwischen|irgendwann|irgendwie|irgendwo|jedenfalls|jedoch|jemals|kaum|keinesfalls|kopfüber|lediglich|mehrmals|meist|meistens|minder|mindestens|miteinander|mithin|mittags|mittlerweile|möglicherweise|morgen|morgens|nacheinander|nachher|nächstens|nachts|nebenbei|nebeneinander|nebenher|neulich|nie|niemals|nirgends|notfalls|nötigenfalls|nunmehr|oben|obendrein|oft|öfters|ohnedies|ohnehin|ringsum|ringsumher|rückwärts|rundum|schlimmstenfalls|schwerlich|seinerzeit|seither|sicherlich|sodann|soeben|sofort|sogleich|somit|sonst|sowieso|stattdessen|stets|tagsüber|überall|überallhin|überaus|überdies|übermorgen|übrigens|umsonst|ungestraft|unglücklicherweise|unten|unterdessen|untereinander|unterwegs|vergebens|vielleicht|vielmals|vordem|vorgestern|vorhin|vormals|vorn|vorne|warum|weg|weitaus|weiter|weiterhin|weiters|wenigstens|wieder|wiederum|wobei|wodurch|wofür|wogegen|wohinter|wohlgemerkt|womit|wonach|woneben|woran|worauf|woraufhin|woraus|worein|worin|worüber|worum|worunter|wovon|wovor|wozu|wozwischen|zeitlebens|zeitweise|zudem|zuerst|zugleich|zuguterletzt|zuletzt|zusammen|zuvor|zuweilen|zwar|zwischendurch)</match>
+        <set field="pos">ADV</set>
+    </rule>
+    <rule>
+        <match field="n">(als|desto|je|umso)</match>
+        <set field="pos">KOKOM</set>
+    </rule>
+    <rule>
+        <match field="n">(außer|beziehungsweise|entweder|oder|sondern|sowohl|und|weder)</match>
+        <set field="pos">KON</set>
+    </rule>
+    <rule>
+        <match field="n">(bevor|dass|ehe|falls|nachdem|ob|obgleich|obschon|obwohl|obzwar|sobald|sodass|sofern|sooft|soviel|sovielmal|soweit|wenngleich|wennzwar|wohingegen)</match>
+        <set field="pos">KOUS</set>
+    </rule>
+    <rule>
+        <match field="n">(ächz|brumm|gähn|glitsch|heul|knirsch|knurr|kotz|kreisch|lol|rofl|schlurp|schnarch|schnaub|seufz|staun|stöhn|dröhn|würg)</match>
+        <set field="pos">NGAKW</set>
+    </rule>
+    <rule>
+        <match field="n">(äh)</match>
+        <set field="pos">NGHES</set>
+    </rule>
+    <rule>
+        <match field="n">(jawohl|nein|hm|hmhm|m-m|ach|achdujemine|ächz|adieu|ah|aha|ahoi|äks|alaaf|alleluja|ätsch|au|aua|autsch|auweh|auweia|bah|bäh|basta|bingo|boah|bravo|brr|buh|ciao|cool|danke|dujemine|ei|eiderdaus|eieiei|ey|feurio|fresse|ha|hä|hach|haha|hahaha|halleluja|hallo|har|harhar|hatschi|hauruck|he|heda|hei|heisa|heißa|helau|herrje|heureka|hey|hi|hihi|hm|hoi|holla|holüber|hoppla|hops|hopsasa|hossa|hott|howdy|hu|hü|hüa|huch|huhu|hui|hurra|i|ia|iah|igitt|igittigittigitt|ih|inshallah|iwo|jaj|jesses|jippi|jippijayeah|jö|juchhe|juchu|juhu|kapische|kapischo|knorke|kuckuck|lala|leckomio|manometer|maschallah|maseltov|menno|mhm|miez-miez|mmmh|moin|muh|na|naja|nanu|nebbich|nu|o|oh|oha|ohja|oho|oi|oje|ojemine|okay|olala|pah|päh|papperlapapp|pardauz|pfui|potz|potzblitz|potztausend|prosit|prost|pscht|psst|pst|puh|sa|sapperlot|scheiße|schubidu|schwuppdiwupp|sers|servus|sorry|soso|tandaradei|tja|toitoi|toitoitoi|tschakka|tschau|tschüs|tschüss|tschüssikowski|uff|uh|ui|ups|voilŕ|weh|weidmannsheil|willkommen|wow|zack)</match>
+        <set field="pos">NGIRR</set>
+    </rule>
+    <rule>
+        <match field="n">(blubb|boing|bum|bumbum|gak|hicks|kikeriki|klack|klingeling|klirr|knack|knacks|mäh|miau|möh|muh|oink|paff|peng|piep|pieps|piff|platsch|plumps|quak|quiek|quietsch|rumms|schnipp|schwippschwapp|schwupp|tapp|tatütata|ticktack|tsching|wau|wuff|wumm|wums|wusch)</match>
+        <set field="pos">NGONO</set>
+    </rule>
+    <rule>
+        <match field="n">(halt)</match>
+        <set field="pos">PTKMA</set>
+    </rule>
+    <rule>
+        <match field="n">(wa|woll|ne|gell)</match>
+        <set field="pos">SEQU</set>
+    </rule>
     <rule>
         <!-- normalisierte Formen, die als unvollständig gekennzeichnet sind -->
-        <match field="n">[A-ZÄÖÜa-zäöüß]*\%</match>
+        <!-- bekommen immer AB als POS-Tag -->
+        <!-- (geändert am 01.12.2015) -->
+        <match field="n">%</match>
         <set field="pos">AB</set>
     </rule>
     <rule>
         <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
+        <!-- bekommen immer XY als POS-Tag -->
         <match field="n">&amp;</match>
         <set field="pos">XY</set>
     </rule>
     <rule>
+        <!-- normalisierte Formen, die mit dem Dummy '§' versehen sind -->
+        <!-- bekommen immer NGIRR als POS-Tag -->
+        <!-- neu am 01.12.2015) -->
+        <match field="n">&amp;</match>
+        <set field="pos">NGIRR</set>
+    </rule>
+    <rule>
         <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
+        <!-- bekommen immer auch '&' als Lemma -->
         <match field="n">&amp;</match>
         <set field="lemma">&amp;</set>
     </rule>
     <rule>
-        <!-- Unverständliches -->
+        <!-- Unverständliches bekommt immer UI als POS-Tag -->
+        <!-- (geändert am 01.12.2015) -->
         <match field="word">(\+\+\+)+</match>
-        <set field="pos">XY</set>
+        <set field="pos">UI</set>
     </rule>
+    
     <rule>
-        <!-- ITJ wird zu SIEITJ -->
+        <!-- ITJ wird zu NGIRR -->
         <match field="pos">ITJ</match>
         <set field="pos">NGIRR</set>
     </rule>
     <rule>
-        <!-- PTKANT wird zu SIERSP -->
+        <!-- PTKANT wird zu NGIRR -->
         <match field="pos">PTKANT</match>
         <set field="pos">NGIRR</set>
     </rule>
@@ -36,6 +89,14 @@
         <set field="pos">ADV</set>
     </rule>
     <rule>
+        <!-- 'gell' ist immer SEQU -->
+        <match field="n">gell</match>
+        <set field="pos">SEQU</set>
+    </rule>    
+    <!-- ****************************************************** -->
+    <!-- *** ab hier: Postprocessing f+r Lemmatisierung ******* -->
+    <!-- ****************************************************** -->    
+    <rule>
         <!-- weißt darf nicht zu weißen lemmatisiert werden -->
         <match field="lemma">weißen</match>
         <set field="lemma">wissen</set>
@@ -44,11 +105,6 @@
         <!-- gell darf nicht zu gellen lemmatisiert werden -->
         <match field="n">gell</match>
         <set field="lemma">gell</set>
-    </rule>    
-    <rule>
-        <!-- gell darf nicht zu gellen lemmatisiert werden -->
-        <match field="n">gell</match>
-        <set field="pos">SEQU</set>
     </rule>    
     <rule>
         <!-- okay darf nicht zu Okay lemmatisiert werden -->

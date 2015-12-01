@@ -38,7 +38,7 @@ public class GeneratePostProcessingRules {
     }
 
     private void doit() throws IOException, JDOMException {
-        String TXT_DIR = "C:\\EXMARaLDA_FRESHEST\\src\\org\\exmaralda\\tagging\\closedlists";
+        String TXT_DIR = "C:\\EXMARaLDA_GIT\\exmaralda\\src\\org\\exmaralda\\tagging\\closedlists";
         Element root = new Element("rules");
         Document result = new Document(root);
         File[] txt_files = new File(TXT_DIR).listFiles();
@@ -77,12 +77,12 @@ public class GeneratePostProcessingRules {
             br.close();
             
         }
-        String STABLE = "C:\\EXMARaLDA_FRESHEST\\src\\org\\exmaralda\\tagging\\PostProcessingRulesFOLK_STABLE.xml";
+        String STABLE = "C:\\EXMARaLDA_GIT\\exmaralda\\src\\org\\exmaralda\\tagging\\PostProcessingRulesFOLK_STABLE.xml";
         Document stableRulesDoc = FileIO.readDocumentFromLocalFile(STABLE);
         List c = stableRulesDoc.getRootElement().removeContent();
         root.addContent(c);
         
-        String OUTPUT = "C:\\EXMARaLDA_FRESHEST\\src\\org\\exmaralda\\tagging\\PostProcessingRulesFOLK.xml";
+        String OUTPUT = "C:\\EXMARaLDA_GIT\\exmaralda\\src\\org\\exmaralda\\tagging\\PostProcessingRulesFOLK.xml";
         FileIO.writeDocumentToLocalFile(OUTPUT, result);
     }
 }
