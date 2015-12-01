@@ -5,8 +5,13 @@
  */
 package org.exmaralda.orthonormal.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.KeyStroke;
 import org.exmaralda.exakt.search.swing.RegularExpressionTextField;
 
 
@@ -26,6 +31,16 @@ public class SearchInDirectoryDialog extends javax.swing.JDialog {
     public SearchInDirectoryDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        ActionListener enterKeyListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                searchButtonActionPerformed(actionEvent);
+            }
+        };
+        KeyStroke enterStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
+        getRootPane().registerKeyboardAction(enterKeyListener, enterStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
+        
     }
     
     public File getDirectory(){
@@ -78,6 +93,7 @@ public class SearchInDirectoryDialog extends javax.swing.JDialog {
         searchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Verzeichnis durchsuchen");
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -249,4 +265,8 @@ public class SearchInDirectoryDialog extends javax.swing.JDialog {
     private javax.swing.JPanel wordPanel;
     private javax.swing.JTextField wordTextField;
     // End of variables declaration//GEN-END:variables
+
+    public void setDirectory(String lastDir) {
+        directoryTextField.setText(lastDir);
+    }
 }

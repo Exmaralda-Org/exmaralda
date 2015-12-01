@@ -1889,8 +1889,12 @@ public final class ApplicationControl implements  ListSelectionListener,
     }
 
     public void searchInDirectory() {
+        String lastDir = java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode())
+                .get("search-dir", System.getProperty("user.dir"));
+
         SearchInDirectoryDialog sidd = new SearchInDirectoryDialog(applicationFrame, true);
-        sidd.setLocationRelativeTo(applicationFrame);
+        sidd.setDirectory(lastDir);
+        sidd.setLocationRelativeTo(applicationFrame);        
         sidd.setVisible(true);
         if (!sidd.approved) return;
         
@@ -1899,7 +1903,20 @@ public final class ApplicationControl implements  ListSelectionListener,
         String lemma = sidd.getLemmaRegex();
         String pos = sidd.getPOSRegex();
         
-        DirectorySearch ds = new DirectorySearch(sidd.getDirectory());
+        if ((transcribed + normalized + lemma + pos).length()==0){
+            JOptionPane.showMessageDialog(applicationFrame, "No search term provided.");
+            return;
+        }
+        
+        File directory = sidd.getDirectory();
+        if ((directory==null) || (!directory.isDirectory()) || (!directory.canRead())){
+            JOptionPane.showMessageDialog(applicationFrame, "Invalid directory:\n" + directory);
+            return;            
+        }
+        
+        java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).put("search-dir", directory.getAbsolutePath());
+        
+        DirectorySearch ds = new DirectorySearch(directory);
         try {
             org.exmaralda.orthonormal.matchlist.MatchList ml = ds.searchDirectory(transcribed, normalized, lemma, pos);
             matchListDialog.setWorkingDirectory(sidd.getDirectory());
