@@ -114,9 +114,13 @@ public class MergeTrainingLexicon {
             BufferedReader br2 = new BufferedReader(fr);
             String nextLine2 = new String();
             while ((nextLine2 = br2.readLine()) != null) {
-                // ignore multiwords and starred entries
-                if ((nextLine2.trim().length()==0) || (nextLine2.trim().contains(" ")) || (nextLine2.contains("*"))) continue;
-                add(nextLine2.trim(), nextLine2.trim(), pos);
+                // ignore multiwords 
+                if ((nextLine2.trim().length()==0) || (nextLine2.trim().contains(" "))) continue;
+                String word = nextLine2.trim();
+                if ((nextLine2.contains("*"))){
+                    word = nextLine2.trim().replaceAll("\\*", "");
+                }
+                add(word, word, pos);
                 
             }
             br2.close();

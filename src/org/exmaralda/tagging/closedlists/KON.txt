@@ -1,27 +1,32 @@
 *aber
-*als auch
-auﬂer
-beziehungsweise
+*als
+*ausgenommen
+*auﬂer
+*beziehungsweise
+*bis
 *da 
-*das heiﬂt
+(*das heiﬂt)
 *denn 
+*desto
 *doch
 entweder
-*es sei denn
+(*es sei denn)
+geschweige
+*indem
 *indessen
 *jedoch
 *minus
 *noch
-oder
+*oder
 *plus
+sowenig
 sondern
 *sondern auch 
 *sowie
 sowohl
 und
-weder
-*weil
-*wenn auch
+*weder
+(*wenn auch)
 *wie
-*wie auch
-*zum Beispiel
+(*wie auch)
+(*zum Beispiel)

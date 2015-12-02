@@ -7,7 +7,7 @@
 (auf dass)
 *auﬂer
 (auﬂer dass)
-bevor
+*bevor
 *bis
 *da
 *damit
@@ -19,6 +19,7 @@ falls
 *gleichwohl
 (im Falle dass)
 *indem
+*indes
 *indessen
 *insofern
 (insofern als)
@@ -28,7 +29,7 @@ nachdem
 ob
 obgleich
 obschon
-obwohl
+*obwohl
 obzwar
 (ohne dass)
 *seit
@@ -42,7 +43,7 @@ sofern
 sooft
 soviel
 sovielmal
-soweit
+*soweit
 *sowie
 *statt
 (statt das)
@@ -50,6 +51,7 @@ soweit
 (umso mehr als)
 (umso weniger als)
 *w‰hrend
+*w‰hrenddem
 *weil
 *wenn
 (wenn auch)

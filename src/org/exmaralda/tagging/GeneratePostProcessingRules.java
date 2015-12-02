@@ -43,6 +43,11 @@ public class GeneratePostProcessingRules {
         Document result = new Document(root);
         File[] txt_files = new File(TXT_DIR).listFiles();
         for (File f : txt_files){
+            
+            // 02-12-2015: we do not want PI* in the post processing rules
+            // says Swantje
+            if (f.getName().startsWith("PI")) continue;
+                        
             System.out.println("Processing " + f.getName());
             String tag = f.getName().substring(0,f.getName().indexOf("."));
             /* <rule>
