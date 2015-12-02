@@ -1173,10 +1173,10 @@
                                                 trans="Direct Show (Windows seulement)"/>
                                 </item>
                                 <item id="dialog.preferences.quicktime">
-                                        <translation lang="en" trans="Quicktime (Macintosh only)"/>
-                                        <translation lang="de" trans="Quicktime (Nur auf Macintosh)"/>
+                                        <translation lang="en" trans="Cocoa Quicktime (Macintosh only)"/>
+                                        <translation lang="de" trans="Cocoa Quicktime (Nur auf Macintosh)"/>
                                         <translation lang="fr"
-                                                trans="Quicktime (Macintosh seulement)"/>
+                                                trans="Cocoa Quicktime (Macintosh seulement)"/>
                                 </item>
                                 <item id="dialog.preferences.controloption">
                                         <translation lang="en"
