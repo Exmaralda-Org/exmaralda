@@ -163,7 +163,12 @@ public class GATSegmentation extends AbstractSegmentation {
                 
                 // opening bracket if appropriate
                 if (howOften>1) {
-                    int bracketPosition = openingBracketPositions.getOrDefault(epe.getStart(), 0);
+                    // not in Java 1.6!
+                    //int bracketPosition = openingBracketPositions.getOrDefault(epe.getStart(), 0);
+                    int bracketPosition = 0;
+                    if (openingBracketPositions.containsKey(epe.getStart())){
+                        bracketPosition = openingBracketPositions.get(epe.getStart());
+                    }                    
                     if (bracketPosition>=textPosition){
                         // this is the place where the magic happens
                         int numberOfSpaces = bracketPosition-textPosition;
@@ -190,7 +195,13 @@ public class GATSegmentation extends AbstractSegmentation {
                 
                 // closing bracket if appropriate
                 if (howOften>1) {
-                    int bracketPosition = closingBracketPositions.getOrDefault(epe.getEnd(), 0);
+                    // not in Java 1.6!
+                    // int bracketPosition = closingBracketPositions.getOrDefault(epe.getEnd(), 0);
+                    int bracketPosition = 0;
+                    if (closingBracketPositions.containsKey(epe.getStart())){
+                        bracketPosition = closingBracketPositions.get(epe.getStart());
+                    }                    
+
                     if (bracketPosition>=textPosition){
                         // this is the place where the magic happens
                         int numberOfSpaces = bracketPosition-textPosition;                        
