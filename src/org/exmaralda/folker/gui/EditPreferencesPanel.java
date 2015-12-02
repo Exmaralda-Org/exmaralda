@@ -28,7 +28,8 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     String[] LANGUAGE_CODES = {"default", "ger", "GER", "eng", "fre", "por", "hun", "tur", "dan", "spa", "ita", "cze", "rus_tran", "universal"};
 
 
-    /** Creates new form EditPreferencesPanel */
+    /** Creates new form EditPreferencesPanel
+     * @param app */
     public EditPreferencesPanel(org.exmaralda.common.ExmaraldaApplication app) {
         initComponents();
         useControlCheckBoxPanel.add(javax.swing.Box.createHorizontalGlue());
@@ -68,6 +69,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         String os = System.getProperty("os.name").toLowerCase();
         directShowRadioButton.setVisible(os.toLowerCase().startsWith("win"));
+        jdsRadioButton.setVisible(os.toLowerCase().startsWith("win"));
         elanQuicktimeRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
 
         String parseLevel = prefs.get("parse-level", "2");
