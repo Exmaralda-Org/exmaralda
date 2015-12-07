@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
@@ -36,13 +35,18 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
     ApplicationControl applicationControl;
     //ProgressBarDialog pbd = null;
     
-    /** Creates new form MatchListDialog */
+    /** Creates new form MatchListDialog
+     * @param parent
+     * @param modal */
     public MatchListDialog2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         matchListList.setModel(new MatchListListModel(new MatchList()));
         matchListList.setCellRenderer(new MatchListCellRenderer());
         matchListList.addMouseListener(this);
+        
+        tokensTable.addMouseListener(this);
+        
         retrieveSettings();
     }
     
@@ -59,8 +63,6 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        matchListScrollPane = new javax.swing.JScrollPane();
-        matchListList = new javax.swing.JList();
         controlPanel = new javax.swing.JPanel();
         workingDirPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,19 +71,17 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
         openButton = new javax.swing.JButton();
         countPanel = new javax.swing.JPanel();
         countLabel = new javax.swing.JLabel();
+        mainTabbedPane = new javax.swing.JTabbedPane();
+        kwicPanel = new javax.swing.JPanel();
+        matchListScrollPane = new javax.swing.JScrollPane();
+        matchListList = new javax.swing.JList();
+        tokensPanel = new javax.swing.JPanel();
+        tokensTableScrollPane = new javax.swing.JScrollPane();
+        tokensTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Trefferliste");
         setMinimumSize(new java.awt.Dimension(400, 600));
-
-        matchListList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        matchListScrollPane.setViewportView(matchListList);
-
-        getContentPane().add(matchListScrollPane, java.awt.BorderLayout.CENTER);
 
         controlPanel.setLayout(new java.awt.GridLayout(3, 1));
 
@@ -117,6 +117,40 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
 
         getContentPane().add(controlPanel, java.awt.BorderLayout.PAGE_START);
 
+        kwicPanel.setLayout(new javax.swing.BoxLayout(kwicPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        matchListList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        matchListScrollPane.setViewportView(matchListList);
+
+        kwicPanel.add(matchListScrollPane);
+
+        mainTabbedPane.addTab("KWIC", kwicPanel);
+
+        tokensPanel.setLayout(new javax.swing.BoxLayout(tokensPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        tokensTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tokensTableScrollPane.setViewportView(tokensTable);
+
+        tokensPanel.add(tokensTableScrollPane);
+
+        mainTabbedPane.addTab("Tokens", tokensPanel);
+
+        getContentPane().add(mainTabbedPane, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,7 +181,8 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
         }*/
         matchListList.setModel(new MatchListListModel(newML));
         ml = newML;   
-        countLabel.setText(Integer.toString(newML.l.size()) + " results");
+        countLabel.setText(Integer.toString(newML.l.size()) + " results");        
+        tokensTable.setModel(new MatchListTableModel(newML));        
     }
     
     public void setWorkingDirectory(File f){
@@ -216,9 +251,14 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
     private javax.swing.JLabel countLabel;
     private javax.swing.JPanel countPanel;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel kwicPanel;
+    private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JList matchListList;
     private javax.swing.JScrollPane matchListScrollPane;
     private javax.swing.JButton openButton;
+    private javax.swing.JPanel tokensPanel;
+    private javax.swing.JTable tokensTable;
+    private javax.swing.JScrollPane tokensTableScrollPane;
     private javax.swing.JButton workingDirBrowseLabel;
     private javax.swing.JLabel workingDirLabel;
     private javax.swing.JPanel workingDirPanel;
@@ -227,13 +267,20 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount()==2){
-            Element matchElement = (Element) matchListList.getSelectedValue();
-            ((MatchListListModel)(matchListList.getModel())).setChecked(matchListList.getSelectedIndex());
-            applicationControl.processMatchListEvent(workingDir, matchElement);
-            try {
-                ml.write(lastList);
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, ex);
+            if (e.getSource()==matchListList){
+                Element matchElement = (Element) matchListList.getSelectedValue();
+                ((MatchListListModel)(matchListList.getModel())).setChecked(matchListList.getSelectedIndex());
+                applicationControl.processMatchListEvent(workingDir, matchElement);
+                try {
+                    ml.write(lastList);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, ex);
+                }
+            } else if (e.getSource()==tokensTable){
+                int row = tokensTable.getSelectedRow();
+                if (row<0) return;
+                Element matchElement = (Element) ((MatchListListModel)(matchListList.getModel())).matchList.getElementAt(row);
+                applicationControl.processMatchListEvent(workingDir, matchElement);
             }
         }
     }
