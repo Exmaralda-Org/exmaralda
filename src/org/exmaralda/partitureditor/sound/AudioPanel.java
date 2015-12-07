@@ -46,7 +46,10 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     
     boolean stopPressed = false;
     
-    /** Creates new form AudioPanel */
+    /** Creates new form AudioPanel
+     * @param parent
+     * @param modal
+     * @param player */
     public AudioPanel(java.awt.Frame parent, boolean modal, Playable player) {
         super(parent, modal);
         initComponents();
@@ -78,8 +81,10 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }
 
     public void setStartTime(double t){
+        //System.out.println("Setting start time");
         internalStartTime = t;
         if ((!isPlaying) && (syncStartCheckBox.isSelected())){
+            //System.out.println("Updating start time slider");
             updateStartTimeSlider();
         }
     }
@@ -958,7 +963,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }//GEN-LAST:event_playButtonActionPerformed
 
     public void doPlay(){
-        double bufferTime = ((Double)(bufferTimeSpinner.getValue())).doubleValue();
+        double bufferTime = ((Double)(bufferTimeSpinner.getValue()));
         getPlayer().setBufferTime(bufferTime);
         double startTime = (totalLength*startTimeSlider.getValue())/1000000.0;
         getPlayer().setStartTime(startTime);
@@ -1570,6 +1575,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     public Action increaseStopTimeAction = 
         new AbstractAction() {public void actionPerformed(ActionEvent e) {increaseStopTime(0.1); } };
         
+    @Override
     public void show(){
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         java.awt.Dimension dialogSize = this.getPreferredSize();

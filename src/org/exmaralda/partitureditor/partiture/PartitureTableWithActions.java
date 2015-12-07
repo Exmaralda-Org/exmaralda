@@ -1923,7 +1923,8 @@ public class PartitureTableWithActions extends PartitureTable
     public void removeUpdate(javax.swing.event.DocumentEvent documentEvent) {
     }
     
-    /** sets up the media panel to play the referenced file (if possible) */
+    /** sets up the media panel to play the referenced file (if possible)
+     * @return  */
     public boolean setupMedia(){
         
         // the partitur editor must handle the setup of the time viewer
@@ -2026,7 +2027,8 @@ public class PartitureTableWithActions extends PartitureTable
             return getModel().getPartOfTranscription(getIndicesOfVisibleRows(),0,getModel().getNumColumns()-1);        
     }
 
-    /** returns the currently selected portion of non-hidden tiers as a new transcription */
+    /** returns the currently selected portion of non-hidden tiers as a new transcription
+     * @return  */
     public BasicTranscription getCurrentSelectionAsNewTranscription(){
         if ((!(selectionStartCol<0)) && (selectionStartRow==-1)){
             int selectionEnd=Math.min(selectionEndCol+1, getModel().getNumColumns()-1);
@@ -2052,7 +2054,8 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }*/
     
-    /** processes a time sent from the praat panel */
+    /** processes a time sent from the praat panel
+     * @param event */
     @Override
     public void processTime(PraatPanelEvent event) {
         if (this.selectionStartCol<0) return;
@@ -2182,7 +2185,9 @@ public class PartitureTableWithActions extends PartitureTable
         this.setSelectedCells(new JCCellRange(rowNo, colNo, rowNo, colNo));
     }
     
-    /** processes a replace result from the replace dialog */
+    /** processes a replace result from the replace dialog
+     * @param esr
+     * @param replaceString */
     @Override
     public void processReplaceResult(org.exmaralda.partitureditor.search.EventSearchResult esr, String replaceString) {
         try{
@@ -2207,7 +2212,10 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
     
-    /** processes a request from the replace dialog to replace all found instances */
+    /** processes a request from the replace dialog to replace all found instances
+     * @param resultVector
+     * @param searchString
+     * @param replaceString */
     @Override
     public void processReplaceAll(Vector resultVector, String searchString, String replaceString) {
         if (undoEnabled){
@@ -2366,6 +2374,7 @@ public class PartitureTableWithActions extends PartitureTable
         
         // changed 11-10-2011: make sure that default player
         // is always used under EXAKT
+        // why??? 02-12-2015
         if (parent instanceof EXAKT){
             playerType = defaultPlayer;
             //playerType = "BAS-Audio-Player";
