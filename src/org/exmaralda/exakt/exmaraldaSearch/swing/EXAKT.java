@@ -775,7 +775,9 @@ public class EXAKT extends javax.swing.JFrame
         if (partitur.mediaPanelDialog.isVideo()){
             partitur.mediaPanelDialog.setVisible(true);
         }
-        partitur.mediaPanelDialog.doPlay();
+        // changed 07-12-2015
+        //partitur.mediaPanelDialog.doPlay();
+        partitur.player.startPlayback();
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
