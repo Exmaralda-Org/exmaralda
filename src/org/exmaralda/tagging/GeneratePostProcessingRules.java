@@ -47,6 +47,12 @@ public class GeneratePostProcessingRules {
             // 02-12-2015: we do not want PI* in the post processing rules
             // says Swantje
             if (f.getName().startsWith("PI")) continue;
+            if (f.getName().startsWith("ART")) continue;
+            if (f.getName().startsWith("PTKIFG")) continue;
+            if (f.getName().startsWith("SEDM")) continue;
+            if (f.getName().startsWith("SEQ")) continue;
+            // erst mal alles zurücksetzen
+            if (true) continue;
                         
             System.out.println("Processing " + f.getName());
             String tag = f.getName().substring(0,f.getName().indexOf("."));
