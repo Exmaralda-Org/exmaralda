@@ -59,6 +59,7 @@ import org.xml.sax.SAXException;
 public class EXAKT extends javax.swing.JFrame 
         implements  org.exmaralda.exakt.search.SearchListenerInterface, 
                     org.exmaralda.exakt.search.swing.KWICTableListener,
+                    org.exmaralda.partitureditor.partiture.PartitureTableListener,
                     javax.swing.event.ChangeListener,
                     javax.swing.event.ListSelectionListener,
                     org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICSearchPanelListener,
@@ -91,6 +92,10 @@ public class EXAKT extends javax.swing.JFrame
     
     PartitureTableWithActions partitur;
     String lastLoadedPartitur = "";
+    
+    // new 07-12-2015
+    double playStart = 0.0;
+    double playEnd = 0.0;
     
     public Hashtable<COMAKWICSearchPanel,Integer> panelIndex = new Hashtable<COMAKWICSearchPanel,Integer>();
     
@@ -138,7 +143,10 @@ public class EXAKT extends javax.swing.JFrame
         org.exmaralda.common.Logger.initialiseLogger(this);
 
         initActions();
-        partitur = new PartitureTableWithActions(this);        
+        partitur = new PartitureTableWithActions(this);           
+        // added 07-12-2015
+        partitur.addPartitureTableListener(this);
+        
         initComponents();
 
         regexLibraryDialog = new RegexLibraryDialog(this, false);
@@ -764,7 +772,9 @@ public class EXAKT extends javax.swing.JFrame
     }//GEN-LAST:event_partiturViewRadioButtonActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
-        partitur.mediaPanelDialog.doStop();
+        //changed 08-12-2015
+        //partitur.mediaPanelDialog.doStop();
+        partitur.player.stopPlayback();
         playButton.setEnabled(true);
         stopButton.setEnabled(false);
     }//GEN-LAST:event_stopButtonActionPerformed
@@ -775,8 +785,11 @@ public class EXAKT extends javax.swing.JFrame
         if (partitur.mediaPanelDialog.isVideo()){
             partitur.mediaPanelDialog.setVisible(true);
         }
-        // changed 07-12-2015
+        //changed 07-12-2015
         //partitur.mediaPanelDialog.doPlay();
+        System.out.println("Setting start time: " + playStart);
+        partitur.player.setStartTime(playStart);
+        partitur.player.setEndTime(partitur.player.getTotalLength());
         partitur.player.startPlayback();
     }//GEN-LAST:event_playButtonActionPerformed
 
@@ -969,6 +982,8 @@ public class EXAKT extends javax.swing.JFrame
      };
     
 
+    /** open a corpus from the file system
+     * @param f */
     public void doOpen(File f){
         setCursor(WAIT_CURSOR);
         final File file = f;
@@ -1002,6 +1017,8 @@ public class EXAKT extends javax.swing.JFrame
         //javax.swing.SwingUtilities.invokeLater(openThread);
     }
 
+    /** open a remote corpus
+     * @param u */
     public void doOpen(URL u){
         setCursor(WAIT_CURSOR);
         final URL url = u;
@@ -1035,6 +1052,11 @@ public class EXAKT extends javax.swing.JFrame
         //javax.swing.SwingUtilities.invokeLater(openThread);
     }
 
+    /** open a database corpus
+     * @param corpusName
+     * @param connection
+     * @param usr
+     * @param pwd */
     public void doOpenDB(final String corpusName, final String connection, final String usr, final String pwd){
         setCursor(WAIT_CURSOR);
         final COMADBCorpus corpus = new COMADBCorpus();
@@ -1071,6 +1093,7 @@ public class EXAKT extends javax.swing.JFrame
         JOptionPane.showMessageDialog(this, ex.getMessage());        
     }
 
+    @Override
     public void processSearchEvent(SearchEvent se) {
         switch(se.getType()){
             case SearchEvent.CORPUS_INIT_PROGRESS : 
@@ -1102,6 +1125,7 @@ public class EXAKT extends javax.swing.JFrame
         }
     }
 
+    @Override
     public void processEvent(COMAKWICSearchPanelEvent ev) {
         if (ev.getType()==COMAKWICSearchPanelEvent.NEW_SEARCH_RESULT){
             SearchResultList srl = ev.getSearchResultList();
@@ -1388,7 +1412,8 @@ public class EXAKT extends javax.swing.JFrame
         this.lastSearchResultPath = lastSearchResultPath;
     }
     
-    /** returns the icon associated with this application */
+    /** returns the icon associated with this application
+     * @return  */
     @Override
     public java.awt.Image getIconImage(){
         return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt.png")).getImage();
@@ -1527,6 +1552,21 @@ public class EXAKT extends javax.swing.JFrame
 
     public void status(String message){
         statusLabel.setText(message);
+    }
+
+    // new 07-12-2015
+    @Override
+    public void partitureTablePropertyChanged(PartitureTableEvent e) {
+        if (e.getID()==PartitureTableEvent.MEDIA_TIME_CHANGED){
+            Object o = e.getInfo();
+            Double[] times = (Double[])o;
+            double minTime = times[0];
+            double maxTime = times[1];
+            playStart = minTime;
+            playEnd = maxTime;
+            //System.out.println("play start set to " +  playStart);
+        }
+        
     }
 
 
