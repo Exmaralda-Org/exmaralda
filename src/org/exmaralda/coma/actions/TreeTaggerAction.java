@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.coma.actions;
+package org.exmaralda.coma.actions; 
 
 import java.awt.event.ActionEvent;
 import java.io.File;
