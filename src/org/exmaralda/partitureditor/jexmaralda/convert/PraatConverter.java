@@ -168,6 +168,8 @@ public final class PraatConverter {
                                         if (name.contains("|")){
                                             // parse the name
                                             String speakerID = name.substring(0, name.indexOf("|"));
+                                            // change 11-12-2015: make sure there are no spaces here!
+                                            speakerID = speakerID.replaceAll(" ", "");
                                             if (!(t.getHead().getSpeakertable().containsSpeakerWithID(speakerID) || speakerID.length()==0 || "NO_SPEAKER".equals(speakerID))){
                                                 Speaker newSpeaker = new Speaker();
                                                 newSpeaker.setID(speakerID);
