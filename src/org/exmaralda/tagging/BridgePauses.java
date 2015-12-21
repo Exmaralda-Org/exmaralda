@@ -26,8 +26,8 @@ import org.jdom.xpath.XPath;
 public class BridgePauses {
 
     String inputDir = "C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK-GOLD";
-    String outputDir = "C:\\Users\\Schmidt\\Desktop\\FOLK-GOLD\\BRIDGE_0_5";   
-    double MIN_LENGTH = 0.5;
+    String outputDir = "C:\\Users\\Schmidt\\Desktop\\FOLK-GOLD\\BRIDGE_0_3";   
+    double MIN_LENGTH = 0.3;
     
     /**
      * @param args the command line arguments

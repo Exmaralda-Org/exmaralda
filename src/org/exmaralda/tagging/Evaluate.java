@@ -108,7 +108,20 @@ public class Evaluate {
         
         HashMap<String,HashMap<String,Integer>> matrix = new HashMap<String,HashMap<String,Integer>>(); 
         Document overviewDocument = new Document(new Element("overview"));
+        int allFilesWords = 0;
+        int allFilesAgree = 0;
+        int allFilesDisagree = 0;
+        int allFilesSuperAgree = 0;
+        int allFilesSuperDisagree = 0;
+        
         for (File evaluationFile : evaluationFiles){
+            int totalWords = 0;
+            int agreement = 0;
+            int disagreement = 0;
+            int superAgreement = 0;
+            int superDisagreement = 0;
+            
+            
             System.out.println("************************************************");
             System.out.println("Evaluating " + evaluationFile.getAbsolutePath());
             //FOLK_E_00124_SE_01_T_02_DF_01_S_1xxxx.fln
@@ -135,10 +148,15 @@ public class Evaluate {
                 Element w = (Element)o;
                 String allPos = w.getAttributeValue("pos");
                 String allCorrectedPos = w.getAttributeValue("pos_c");
+                String allSuperPos = w.getAttributeValue("super");
+                String allSuperCorrectedPos = w.getAttributeValue("super_c");
+                
                 if (allPos==null) continue;
                 if (allCorrectedPos==null) continue;
                 String[] posTokens = allPos.split(" ");
                 String[] correctedPosTokens = allCorrectedPos.split(" ");
+                String[] superTokens = allSuperPos.split(" ");
+                String[] correctedSuperTokens = allSuperCorrectedPos.split(" ");
                 int count=0;
                 for (String pos : posTokens){
                     if (count>=correctedPosTokens.length) {
@@ -146,6 +164,21 @@ public class Evaluate {
                         continue;
                     }
                     String correctedPos = correctedPosTokens[count];
+                    String superPos = superTokens[count];
+                    String superCorrectedPos = correctedSuperTokens[count];
+                    
+                    totalWords++;
+                    if (pos.equals(correctedPos)){
+                        agreement++;                    
+                    } else {
+                        disagreement++;                                            
+                    }                    
+                    if (superPos.equals(superCorrectedPos)){
+                        superAgreement++;                    
+                    } else {
+                        superDisagreement++;                                            
+                    }
+
                     if (!(matrix.containsKey(pos))){
                         HashMap<String, Integer> thisOne = new HashMap<String, Integer>();
                         thisOne.put(correctedPos, 0);
@@ -171,18 +204,21 @@ public class Evaluate {
             //Abweichung <xsl:value-of select="count(//w[@pos_c and not(@pos=@pos_c)])"/> (= <xsl:value-of select="count(//w[@pos_c and not(@pos=@pos_c)]) div count(//w[@pos_c]) * 100"/>%)<br/> 
             //Übereinstimmung: (Superkategorie): <xsl:value-of select="count(//w[@pos_c and @super=@super_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @super=@super_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
             //Abweichung (Superkategorie): <xsl:value-of select="count(//w[@pos_c and not(@super=@super_c)])"/> (= <xsl:value-of select="count(//w[@pos_c and not(@super=@super_c)]) div count(//w[@pos_c]) * 100"/>%) 
-            int totalWords = XPath.selectNodes(mergedDoc, "//w").size();
-            int nonComparableWords = XPath.selectNodes(mergedDoc, "//w[not(@pos_c)]").size();
-            int agreement = XPath.selectNodes(mergedDoc, "//w[@pos_c and @pos=@pos_c]").size();
-            int disagreement = XPath.selectNodes(mergedDoc, "//w[@pos_c and not(@pos=@pos_c)]").size();
-            int superAgreement = XPath.selectNodes(mergedDoc, "//w[@pos_c and @super=@super_c]").size();
-            int superDisagreement = XPath.selectNodes(mergedDoc, "//w[@pos_c and not(@super=@super_c)]").size();
+            
+            allFilesWords+=totalWords;
+            allFilesAgree+=agreement;
+            allFilesDisagree+=disagreement;
+            allFilesSuperAgree+=superAgreement;
+            allFilesSuperDisagree+=superDisagreement;
+            
             Element thisOverview = new Element("file");
             thisOverview.setAttribute("name", testFile.getName());
             thisOverview.setAttribute("total-words", Integer.toString(totalWords));
-            thisOverview.setAttribute("non-compare", Integer.toString(nonComparableWords));
+            //thisOverview.setAttribute("non-compare", Integer.toString(nonComparableWords));
             thisOverview.setAttribute("agree", Integer.toString(agreement));
+            thisOverview.setAttribute("agree_perc", Double.toString((double)agreement/(double)totalWords));
             thisOverview.setAttribute("disagree", Integer.toString(disagreement));
+            thisOverview.setAttribute("disagree_perc", Double.toString((double)disagreement/(double)totalWords));
             thisOverview.setAttribute("super-agree", Integer.toString(superAgreement));
             thisOverview.setAttribute("super-disagree", Integer.toString(superDisagreement));
             overviewDocument.getRootElement().addContent(thisOverview);
@@ -201,6 +237,19 @@ public class Evaluate {
             }
             System.out.println("************************************************");
         }
+        
+        Element allOverview = new Element("file");
+        allOverview.setAttribute("name", "TOTAL");
+        allOverview.setAttribute("total-words", Integer.toString(allFilesWords));
+        allOverview.setAttribute("agree", Integer.toString(allFilesAgree));
+        allOverview.setAttribute("agree_perc", Double.toString((double)allFilesAgree/(double)allFilesWords));
+        allOverview.setAttribute("disagree", Integer.toString(allFilesDisagree));
+        allOverview.setAttribute("disagree_perc", Double.toString((double)allFilesDisagree/(double)allFilesWords));
+        allOverview.setAttribute("super-agree", Integer.toString(allFilesSuperAgree));
+        allOverview.setAttribute("super-disagree", Integer.toString(allFilesSuperDisagree));
+        overviewDocument.getRootElement().addContent(allOverview);
+        
+        
         
         Element root = new Element("matrix");
         root.setAttribute("source", evaluationDataDirectory.getAbsolutePath());

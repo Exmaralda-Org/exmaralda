@@ -7,6 +7,8 @@ package org.exmaralda.tagging;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 import org.exmaralda.exakt.utilities.FileIO;
@@ -23,9 +25,12 @@ import org.jdom.xpath.XPath;
 public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocument {
 
     public static String XPATH_TO_CONTRIBUTIONS = "//contribution";
-    // change 06.11.2013
+    public static String XPATH_ALL_WORDS_AND_PUNCTUATION = "descendant::*[self::w or self::p]";
+    public static String XPATH_NO_XY = "descendant::*[(self::w and not(@n='&')) or self::p]"; 
+    public static String XPATH_NO_DUMMIES = "descendant::*[(self::w and not(@n='&' or @n='%' or @n='§' or @n='äh')) or self::p]"; 
+    //change 06.11.2013
     //public String xpathToTokens = "descendant::*[self::w or self::p]"; 
-    public String xpathToTokens = "descendant::*[(self::w and not(@n='&')) or self::p]"; 
+    public String xpathToTokens = XPATH_NO_XY;
     
     Document transcriptionDocument;
     List<Element> contributions;
@@ -44,6 +49,10 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
         contributions = XPath.newInstance(XPATH_TO_CONTRIBUTIONS).selectNodes(transcriptionDocument);
         basedOnNormalization = bon;
     }
+    
+    public void setXPathToTokens(String xp){
+        xpathToTokens = xp;
+    }
 
     @Override
     public int getNumberOfTaggableSegments() {
@@ -58,7 +67,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
 
     @Override
     public List<String> getTokensAt(int pos) throws IOException {
-        Vector<String> result = new Vector<String>();
+        ArrayList<String> result = new ArrayList<String>();
         Element contribution = contributions.get(pos);
         try {
             List l = XPath.newInstance(xpathToTokens).selectNodes(contribution);
@@ -74,9 +83,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
                        //String[] tokens = normalizedForm.split(" ");
                        // change 07/11/2014: trim before splitting, causes problems otherwise
                        String[] tokens = normalizedForm.trim().split(" ");
-                       for (String t : tokens){
-                           result.add(t);
-                       }
+                       result.addAll(Arrays.asList(tokens));
                    }
                 } else {
                     //result.add(e.getText());

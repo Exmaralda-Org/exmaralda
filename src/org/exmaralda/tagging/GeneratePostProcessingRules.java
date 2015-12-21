@@ -51,6 +51,7 @@ public class GeneratePostProcessingRules {
             if (f.getName().startsWith("PTKIFG")) continue;
             if (f.getName().startsWith("SEDM")) continue;
             if (f.getName().startsWith("SEQ")) continue;
+            
             // erst mal alles zurücksetzen
             if (true) continue;
                         

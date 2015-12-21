@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
+import static org.exmaralda.tagging.TreeTaggableOrthonormalTranscription.XPATH_NO_XY;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -30,21 +31,38 @@ public class MakeTrainingFile {
     
     File inputDirectory;
     File outputFile;
+    public String xpathToTokens = XPATH_NO_XY;
     
     public MakeTrainingFile(String in, String out) {
         inputDirectory = new File(in);
         outputFile = new File(out);
     }
+    
+    public void setXPathToTokens(String xp){
+        xpathToTokens = xp;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         MakeTrainingFile mtl = new MakeTrainingFile(INPUT_DIRECTORY, OUTPUT_FILE);
-        if (args.length!=2){
-            
-        } else {
+        if (args.length==0){
+            // DEFAULT
+        } else if(args.length==2){
+            mtl = new MakeTrainingFile(args[0], args[1]);            
+        } else if (args.length==3) {
             mtl = new MakeTrainingFile(args[0], args[1]);
+            if ("ALL".equals(args[2])){
+                mtl.setXPathToTokens(TreeTaggableOrthonormalTranscription.XPATH_ALL_WORDS_AND_PUNCTUATION);
+            }
+            if ("NO_DUMMIES".equals(args[2])){
+                mtl.setXPathToTokens(TreeTaggableOrthonormalTranscription.XPATH_NO_DUMMIES);
+            }            
         }
+            
         try {
             mtl.doit();
         } catch (JDOMException ex) {
@@ -66,10 +84,13 @@ public class MakeTrainingFile {
         for (File f : files){
             System.out.println("Reading " + f.getAbsolutePath());
             Document doc = FileIO.readDocumentFromLocalFile(f);
-            List contributions = XPath.selectNodes(doc,"//contribution[descendant::w]");
+            // changed 09-12-2015
+            List contributions = XPath.selectNodes(doc,"//contribution[" + xpathToTokens + "]");
             for (Object o : contributions){
                 Element contribution = (Element)o;
-                List tokens = XPath.selectNodes(contribution, "descendant::w");
+                // changed 09-12-2015
+                //List tokens = XPath.selectNodes(contribution, "descendant::w");
+                List tokens = XPath.selectNodes(contribution, xpathToTokens);
                 for (Object o2 : tokens){
                     Element token = (Element)o2;
                     String n = token.getAttributeValue("n");

@@ -14,17 +14,17 @@
         <set field="pos">XY</set>
     </rule>
     <rule>
-        <!-- normalisierte Formen, die mit dem Dummy '§' versehen sind -->
-        <!-- bekommen immer NGIRR als POS-Tag -->
-        <!-- neu am 01.12.2015) -->
-        <match field="n">&amp;</match>
-        <set field="pos">NGIRR</set>
-    </rule>
-    <rule>
         <!-- normalisierte Formen, die mit dem Dummy '&' versehen sind -->
         <!-- bekommen immer auch '&' als Lemma -->
         <match field="n">&amp;</match>
         <set field="lemma">&amp;</set>
+    </rule>
+    <rule>
+        <!-- normalisierte Formen, die mit dem Dummy '§' versehen sind -->
+        <!-- bekommen immer NGIRR als POS-Tag -->
+        <!-- neu am 01.12.2015) -->
+        <match field="n">§</match>
+        <set field="pos">NGIRR</set>
     </rule>
     <rule>
         <!-- Unverständliches bekommt immer UI als POS-Tag -->
@@ -32,7 +32,16 @@
         <match field="word">(\+\+\+)+</match>
         <set field="pos">UI</set>
     </rule>
+    <rule>
+        <!-- Tokens, die als äh normalisiert sind bekommen immer NGHES als POS-Tag -->
+        <!-- (neu am 09.12.2015) -->
+        <match field="n">äh</match>
+        <set field="pos">NGHES</set>
+    </rule>
     
+    <!-- ************************************ -->
+    <!-- Mapping aus altem STTS nach STTS 2.0 -->
+    <!-- ************************************ -->
     <rule>
         <!-- ITJ wird zu NGIRR -->
         <match field="pos">ITJ</match>
@@ -53,8 +62,9 @@
         <match field="n">gell</match>
         <set field="pos">SEQU</set>
     </rule>    
+    
     <!-- ****************************************************** -->
-    <!-- *** ab hier: Postprocessing f+r Lemmatisierung ******* -->
+    <!-- *** ab hier: Postprocessing für Lemmatisierung ******* -->
     <!-- ****************************************************** -->    
     <rule>
         <!-- weißt darf nicht zu weißen lemmatisiert werden -->

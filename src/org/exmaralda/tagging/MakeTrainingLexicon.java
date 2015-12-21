@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
+import static org.exmaralda.tagging.TreeTaggableOrthonormalTranscription.XPATH_NO_XY;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -32,6 +33,8 @@ public class MakeTrainingLexicon {
     static String INPUT_DIRECTORY = "Z:\\TAGGING\\TRAINING\\kleiner_Goldstandard";
     static String OUTPUT_FILE = "Z:\\TAGGING\\TRAINING\\goldstandard_lexicon.txt";
     
+
+    
     File inputDirectory;
     File outputFile;
     
@@ -39,15 +42,19 @@ public class MakeTrainingLexicon {
         inputDirectory = new File(in);
         outputFile = new File(out);
     }
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         MakeTrainingLexicon mtl = new MakeTrainingLexicon(INPUT_DIRECTORY, OUTPUT_FILE);
-        if (args.length!=2){
-            
-        } else {
-            mtl = new MakeTrainingLexicon(args[0], args[1]);
+        if (args.length==0){
+            // DEFAULT
+        } else if (args.length==2){
+            mtl = new MakeTrainingLexicon(args[0], args[1]);            
+        } else { 
+            //wrong number of arguments
         }
         try {
             mtl.doit();

@@ -31,14 +31,15 @@ public class TagDirectory {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        if ((args.length!=2) && (args.length!=6)){
-            System.out.println("usage: tagDirectory inputDir ouputDir [ttDir] [ttParamFile] [applyPP] [encoding]");
+        if ((args.length!=2) && (args.length!=7)){
+            System.out.println("usage: tagDirectory inputDir ouputDir [ttDir] [ttParamFile] [applyPP] [encoding] [xpathToTokens]");
             System.out.println(" inputDir  = directory with normalised FOLKER transcriptions (*.fln)");
             System.out.println(" outputDir = directory where to write the tagged FOLKER transcriptions (*.fln)");        
             System.out.println(" ttDir     = directory with TT exe (default c:\\TreeTagger)");
             System.out.println(" ttParamFile = TT parameter file (default c:\\TreeTagger\\lib\\german-utf8.par)");
             System.out.println(" applyPP = whether (TRUE/FALSE) to apply FOLK post processing (default TRUE)");
-            System.out.println(" encoding = the encoding of the parameter file (default: UTF-8 / iso8859-1");
+            System.out.println(" encoding = the encoding of the parameter file (UTF-8 (default) | iso8859-1");
+            System.out.println(" xpathToTokens = the xpath selecting tokens for a contribution (ALL | NO_XY (default) | NO_DUMMIES)");
             System.exit(1);
         }
         try {
@@ -54,6 +55,7 @@ public class TagDirectory {
         System.out.println("=================================");
         String inputDir = args[0];
         String outputDir = args[1];
+        String xpathToTokens = TreeTaggableOrthonormalTranscription.XPATH_NO_XY;
         boolean applyPP = true;
         if (args.length>2){
             TTC = args[2];
@@ -63,6 +65,12 @@ public class TagDirectory {
             System.out.println("TreeTagger directory set to " + TTC);
             System.out.println("TreeTagger parameter file set to " + PF);
             if (!applyPP) System.out.println("No post processing will be applied.");
+            if ("ALL".equals(args[6])){
+                xpathToTokens = TreeTaggableOrthonormalTranscription.XPATH_ALL_WORDS_AND_PUNCTUATION;
+            }
+            if ("NO_DUMMIES".equals(args[6])){
+                xpathToTokens = TreeTaggableOrthonormalTranscription.XPATH_NO_DUMMIES;
+            }
         }
         File in = new File(inputDir);
         File out = new File(outputDir); 
@@ -93,6 +101,8 @@ public class TagDirectory {
         for (File transcript : transcriptFiles){
             System.out.println("=================================");
             Document trDoc = FileIO.readDocumentFromLocalFile(transcript);
+            
+            // get rid of all existing attributes for pos and lemma
             List l = XPath.selectNodes(trDoc, "//@lemma|//@pos|//@p-pos");
             for (Object o : l){
                 Attribute a = (Attribute)o;
@@ -104,6 +114,8 @@ public class TagDirectory {
             
             System.out.println("Tagging " + transcript.getName() + " (" + (count2+1) + " of " + transcriptFiles.length + ")");
             TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(intermediate, true);
+            ttont.setXPathToTokens(xpathToTokens);
+                        
             File output = File.createTempFile("FLN","TMP");
             output.deleteOnExit();
             tt.tag(ttont, output);
