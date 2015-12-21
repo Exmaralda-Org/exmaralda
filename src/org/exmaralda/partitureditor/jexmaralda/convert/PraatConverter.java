@@ -196,7 +196,9 @@ public final class PraatConverter {
                                                 }                                                
                                             }                                             
                                         } else {
-                                            String originalName = name; 
+                                            // change 11-12-2015: make sure there are no spaces here!
+                                            name = name.replaceAll(" ", "");                                            
+                                            String originalName = name;
                                             int count=0;
                                             // check for duplicate names, added 11-Oct-2002
                                             while (t.getHead().getSpeakertable().containsSpeakerWithID(name)){

@@ -87,7 +87,7 @@ public class AbstractTierBody extends AbstractBody {
         Vector result = new Vector();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             AbstractTier tier = (AbstractTier)elementAt(pos);
-            if ((tier.getSpeaker().equals(speakerID)) && (tier.getType().equals(t))){
+            if ((tier.getSpeaker()!=null) && (tier.getSpeaker().equals(speakerID)) && (tier.getType().equals(t))){
                 result.addElement(tier.getID());
             }
         }

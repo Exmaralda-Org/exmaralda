@@ -56,12 +56,23 @@ public class BasicBody extends AbstractTierBody {
             TimelineItem tli = tl.getTimelineItemAt(pos);
             if ((tli.getTime()-lastTime)<THRESHHOLD){
                 lastTime = (tli.getTime()+lastTime)/2.0;
-                tli.setTime(lastTime);
+                tli.setTime(lastTime);                                
                 tliMappings.put(tl.getTimelineItemAt(pos-1).getID(), tli.getID());
             } else {
                 lastTime = tli.getTime();
             }
         }
+        
+        //new 11-12-2015
+        // for consecutive smoothing
+        for (String key : tliMappings.keySet()){
+            String value = tliMappings.get(key);
+            while (tliMappings.containsKey(value)){
+                value = tliMappings.get(value);
+            }
+            tliMappings.put(key, value);
+        }
+        
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             Tier tier = getTierAt(pos);
             for (int i=0; i<tier.getNumberOfEvents(); i++){
@@ -572,7 +583,7 @@ public class BasicBody extends AbstractTierBody {
             }
             tier.normalize(timelineMappings);
         }
-        this.updatePositions();
+        updatePositions();
     }
     
 

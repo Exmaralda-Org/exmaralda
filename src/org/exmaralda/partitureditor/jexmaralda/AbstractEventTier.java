@@ -259,7 +259,7 @@ public class AbstractEventTier extends AbstractTier {
             event.setStart(newStart);
             event.setEnd(newEnd);
         }
-        this.updatePositions();
+        updatePositions();
     }
 
     /** checks if this tier respects the specified timeline, i.e. returns true iff it contains no events
@@ -389,7 +389,7 @@ public class AbstractEventTier extends AbstractTier {
     public void updatePositions(){
         positions.clear();
         for (int pos=0; pos<getNumberOfEvents(); pos++){
-            positions.put(getEventAt(pos).getStart(), new Integer(pos));
+            positions.put(getEventAt(pos).getStart(), pos);
         }       
     }
 
@@ -398,7 +398,7 @@ public class AbstractEventTier extends AbstractTier {
     private int lookupID(String id){
         if (positions.containsKey(id))
         {
-           return ((Integer)positions.get(id)).intValue();
+           return ((Integer)positions.get(id));
         }
         return -1;
     }

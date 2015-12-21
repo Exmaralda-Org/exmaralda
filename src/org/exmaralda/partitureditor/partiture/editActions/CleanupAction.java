@@ -24,6 +24,7 @@ public class CleanupAction extends org.exmaralda.partitureditor.partiture.Abstra
         super("Clean up...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("cleanupAction!");
         cleanup();                

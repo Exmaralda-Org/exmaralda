@@ -608,7 +608,6 @@ public class Timeline extends Vector {
         if (id2==null){ // i.e. no tli after
             try {addTimelineItem(tli);}
             catch (JexmaraldaException je){je.printStackTrace();}
-            return;
         } else {
             try {insertTimelineItemBefore(id2,tli);}
             catch (JexmaraldaException je){je.printStackTrace();}
@@ -630,16 +629,18 @@ public class Timeline extends Vector {
     // ********** XML OUTPUT **********************
     // ********************************************
 
-    /** returns a sequence of XML-Elements lt;tli&lt; as specified in corresponding dtds (without any top level element!)*/
+    /** returns a sequence of XML-Elements lt;tli&lt; as specified in corresponding dtds (without any top level element!)
+     * @return */
     public String toXML(){
-       StringBuffer sb = new StringBuffer();
+       StringBuilder sb = new StringBuilder();
        for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
             sb.append(getTimelineItemAt(pos).toXML());
         }
         return sb.toString();
     } 
 
-    /** returns a sequence of XML-Elements lt;tpr&lt; as specified in corresponding dtds (without any top level element!)*/
+    /** returns a sequence of XML-Elements lt;tpr&lt; as specified in corresponding dtds (without any top level element!)
+     * @return*/
     public String toTimepointReferenceXML(){
         String result = new String();
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
@@ -664,7 +665,7 @@ public class Timeline extends Vector {
             tli.setID(newID);
             mappings.put(oldID, newID);
         }
-        this.updatePositions();
+        updatePositions();
         return mappings;
     }
 

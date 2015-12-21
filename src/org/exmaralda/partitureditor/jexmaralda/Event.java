@@ -71,33 +71,39 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     // ********************************************
 
     /** returns the id of the start point of this event */
+    @Override
     public String getStart(){
         return start;
     }
     
     /** sets the start point to the specified value */
+    @Override
     public void setStart(String s){
-        start = new String(s);
+        start = s;
     }
     
     /** returns the id of the end point of this event */
+    @Override
     public String getEnd(){
         return end;
     }
     
     /** sets the end point of this event to the specified value */
+    @Override
     public void setEnd(String e){
+        //if (e==null) System.out.println(this.toXML());
         end = new String(e);
     }
     
     /** returns the description of this event */
+    @Override
     public String getDescription(){
         return description;
     }
     
     /** sets the description of this event to the specified value */
     public void setDescription(String d){
-        description = new String(d);
+        description = d;
     }
 
     /** returns the link medium of this event */
