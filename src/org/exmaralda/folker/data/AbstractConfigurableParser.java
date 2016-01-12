@@ -1,8 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.exmaralda.folker.data;
 
 import java.io.IOException;
@@ -21,35 +21,28 @@ import org.jdom.transform.XSLTransformer;
 
 /**
  *
- * @author thomas
+ * @author Schmidt
  */
-public class ZWParser extends AbstractParser {
+public abstract class AbstractConfigurableParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/ZWPatterns.xml";
 
-    Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/ZW_transformcontribution.xsl";
+    public Hashtable<String, String> minimalPatterns;
     XSLTransformer minimalTransformer;
+
+    public abstract String getPatternsFilePath();  // e.g. "/org/exmaralda/folker/data/ZWPatterns.xml"
+    public abstract String getMinimalTransformerFilePath(); // e.g. "/org/exmaralda/folker/data/ZW_transformcontribution.xsl"
     
-
-    public ZWParser() {
-        try {
-            PatternReader pr = new PatternReader(PATTERNS_FILE_PATH);
-
-            minimalPatterns = pr.getAllPatterns(2);
-            minimalTransformer = new XSLTransformer(new org.exmaralda.common.jdomutilities.IOUtilities().readDocumentFromResource(MINIMAL_TRANSFORMER_FILE_PATH));
-
-
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public abstract String doParse(String text) throws JDOMException, IOException;
+    
+    public AbstractConfigurableParser() throws JDOMException, IOException{
+        PatternReader pr = new PatternReader(getPatternsFilePath());
+        minimalPatterns = pr.getAllPatterns(2);
+        minimalTransformer = new XSLTransformer(new org.exmaralda.common.jdomutilities.IOUtilities().readDocumentFromResource(getMinimalTransformerFilePath()));        
     }
-
-
+    
+    
     @Override
-    public void parseDocument(Document doc, int parseLevel){
+    public void parseDocument(Document doc, int parseLevel) {
         if (parseLevel==0) return;
 
         if (parseLevel==1){
@@ -121,12 +114,7 @@ public class ZWParser extends AbstractParser {
                     continue;
                 }*/
                 try {
-                    text = parseText(text, "ZW_INTERRUPT", minimalPatterns);
-                    text = parseText(text, "ZW_BOUNDARY", minimalPatterns);
-                    text = parseText(text, "ZW_COMMENT", minimalPatterns);
-                    text = parseText(text, "ZW_WORD", minimalPatterns);
-                    text = parseText(text, "ZW_SPACE", minimalPatterns);
-                    text = parseText(text, "ZW_PUNCTUATION", minimalPatterns);
+                    text = doParse(text);
                     
                     //System.out.println(text);
                     List newContent = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + text.replaceAll("&", "&amp;") +"</X>").getRootElement().removeContent();
@@ -151,7 +139,7 @@ public class ZWParser extends AbstractParser {
     }
 
 
-    String parseText(String text, String patternName, Hashtable<String,String> patterns) throws JDOMException, IOException{
+    public String parseText(String text, String patternName, Hashtable<String,String> patterns) throws JDOMException, IOException{
         String docString = "<X>" + text.replace("&", "&amp;") + "</X>";
         //System.out.println("=== " + docString);
         Element e = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString(docString).getRootElement();
@@ -241,6 +229,5 @@ public class ZWParser extends AbstractParser {
         //System.out.println("*********************");
         
     }
-
-
+    
 }
