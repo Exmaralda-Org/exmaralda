@@ -392,7 +392,6 @@
               <Image iconType="3" name="/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/32x32/apps/help-browser.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Get media info"/>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[35, 35]"/>
             </Property>

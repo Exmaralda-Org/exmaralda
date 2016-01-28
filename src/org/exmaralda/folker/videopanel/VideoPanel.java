@@ -5,6 +5,7 @@
 package org.exmaralda.folker.videopanel;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
@@ -28,6 +29,9 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
     double startTime = 0.0;
     double endTime = 10.0;
     private String preferredPath = "C:\\Users\\Schmidt\\Dropbox\\IDS\\VIDEO";
+    
+    int sourceWidth = -1;
+    int sourceHeight = -1;
     
     /**
      * Creates new form VideoPanel
@@ -139,34 +143,17 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
     }//GEN-LAST:event_playSelectionButtonActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        int dialogWidth = this.getWidth();
-        int dialogHeight = this.getHeight();
 
-        if (videoPlayer instanceof JDSPlayer){
-            JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer; 
-            //int currentVideoWidth = jdsPlayer.getVisibleComponent().getWidth();
-            //int currentVideoHeight = jdsPlayer.getVisibleComponent().getHeight();
-            int sourceWidth = jdsPlayer.getSourceWidth();
-            int sourceHeight = jdsPlayer.getSourceHeight();
-
-            float widthRatio = (float)dialogWidth / (float)sourceWidth;
-            float heightRatio = (float)dialogHeight / (float)sourceHeight;
-
-            Component c = jdsPlayer.getVisibleComponent();
-
-            if (widthRatio<heightRatio){
-                    c.setPreferredSize(new java.awt.Dimension(
-                            dialogWidth,
-                            (int) Math.round((double)(dialogWidth/(double)sourceWidth) * sourceHeight)
-                    ));
-
-            } else {
-                    c.setPreferredSize(new java.awt.Dimension(
-                            (int) Math.round((double)(dialogHeight/(double)sourceHeight) * sourceWidth),
-                            dialogHeight
-                    ));            
-            }
-            videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+        if (videoPlayer.getVisibleComponent()==null) return;
+        int videoDisplayPanelWidth = videoDisplayPanel.getWidth();
+        int videoDisplayPanelHeight = videoDisplayPanel.getHeight();
+        Dimension dimensionByWidth = calculateDimensionByWidth(sourceWidth, sourceHeight, videoDisplayPanelWidth);
+        Dimension dimensionByHeight = calculateDimensionByHeight(sourceWidth, sourceHeight, videoDisplayPanelHeight);
+        // use the smaller of the two because it is guaranteed to fit
+        if (dimensionByWidth.width < dimensionByHeight.width){
+           videoPlayer.getVisibleComponent().setPreferredSize(dimensionByWidth);
+        } else {
+           videoPlayer.getVisibleComponent().setPreferredSize(dimensionByHeight);            
         }
         //pack();
     }//GEN-LAST:event_formComponentResized
@@ -230,24 +217,12 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         jdsPlayer.setSoundFile(f.getAbsolutePath());
         
         if (jdsPlayer.getVisibleComponent()!=null){
-            //videoDisplayPanel.removeAll();
-            //System.out.println("Dummy panel removed");
             Component c = jdsPlayer.getVisibleComponent();
-            //c.setPreferredSize(new java.awt.Dimension(
-            //        edsp.wrappedPlayer.getSourceWidth(),
-            //        edsp.wrappedPlayer.getSourceHeight()));
             // change 02-06-2015: attempt to set size for video
-            int sourceWidth = jdsPlayer.getSourceWidth();
-            int sourceHeight = jdsPlayer.getSourceHeight();
-            //float aspectRatio = edsp.wrappedPlayer.getAspectRatio();
-            if (sourceWidth<=480){
-                c.setPreferredSize(new java.awt.Dimension(sourceWidth, sourceHeight));                    
-            } else {
-                c.setPreferredSize(new java.awt.Dimension(
-                        480,
-                        (int) Math.round((double)(480.0/(double)sourceWidth) * sourceHeight)
-                        ));
-            }
+            sourceWidth = jdsPlayer.getSourceWidth();
+            sourceHeight = jdsPlayer.getSourceHeight();
+            Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
+            c.setPreferredSize(initialDimension);
             videoDisplayPanel.add(c);
             videoDisplayPanel.setPreferredSize(c.getPreferredSize());
             //pack();
@@ -292,4 +267,30 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
     public void setPreferredPath(String currentMediaPath) {
         preferredPath = currentMediaPath;
     }
+    
+    int MAXIMAL_INITIAL_WIDTH = 480;
+    
+    private Dimension calculateInitialDimension(int sourceWidth, int sourceHeight) {
+        if (sourceWidth<=MAXIMAL_INITIAL_WIDTH){
+            // don't make it bigger than necessary
+            return new java.awt.Dimension(sourceWidth, sourceHeight);                    
+        }
+        return calculateDimensionByWidth(sourceWidth, sourceHeight, MAXIMAL_INITIAL_WIDTH);
+    }
+    
+    private Dimension calculateDimensionByWidth(int sourceWidth, int sourceHeight, int actualWidth) {
+        double ratio = (double)((double)actualWidth/(double)sourceWidth);
+        int calculatedHeight = (int) Math.round(ratio * sourceHeight);
+        Dimension result = new Dimension(actualWidth, calculatedHeight);
+        return result;
+    }
+    
+    private Dimension calculateDimensionByHeight(int sourceWidth, int sourceHeight, int actualHeight) {
+        double ratio = (double)((double)actualHeight/(double)sourceHeight);
+        int calculatedWidth = (int) Math.round(ratio * sourceWidth);
+        Dimension result = new Dimension(calculatedWidth, actualHeight);
+        return result;
+    }
+
+    
 }

@@ -444,7 +444,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         mediaInfoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/32x32/apps/help-browser.png"))); // NOI18N
         mediaInfoButton.setToolTipText("Get media info");
-        mediaInfoButton.setEnabled(false);
         mediaInfoButton.setMaximumSize(new java.awt.Dimension(35, 35));
         mediaInfoButton.setMinimumSize(new java.awt.Dimension(35, 35));
         mediaInfoButton.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -461,26 +460,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }// </editor-fold>//GEN-END:initComponents
 
     private void endPositionLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_endPositionLabelMouseWheelMoved
-        int units = evt.getWheelRotation();
-        if (units>0){
-            decreaseStopTime(0.1);
-        } else if (units<0){
-            increaseStopTime(0.1);
-        } else {
-            return;
-        }                
-
     }//GEN-LAST:event_endPositionLabelMouseWheelMoved
 
     private void startPositionLabelMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_startPositionLabelMouseWheelMoved
-        int units = evt.getWheelRotation();
-        if (units>0){
-            decreaseStartTime(0.1);
-        } else if (units<0){
-            increaseStartTime(0.1);
-        } else {
-            return;
-        }                
     }//GEN-LAST:event_startPositionLabelMouseWheelMoved
 
     private void startPositionLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startPositionLabelMouseReleased
@@ -492,17 +474,17 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }//GEN-LAST:event_startPositionLabelMousePressed
 
     private void cutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutButtonActionPerformed
-            /*final double startTime = (totalLength*startTimeSlider.getValue())/1000000.0;
-            final double endTime = (totalLength*endTimeSlider.getValue())/1000000.0;
+            final double fStartTime = internalStartTime / 1000.0;
+            final double fEndTime = internalEndTime / 1000.0;
             SaveAudioPartDialog dialog = new SaveAudioPartDialog(null, true, lastAudioPartFilename, snapshotWouldBeLinkeable);
             String info = "[Cut audio from "
-                    + TimeStringFormatter.formatMiliseconds(startTime*1000.0, 2) + " to "
-                    + TimeStringFormatter.formatMiliseconds(endTime*1000.0, 2) + "]";
+                    + TimeStringFormatter.formatMiliseconds(fStartTime*1000.0, 2) + " to "
+                    + TimeStringFormatter.formatMiliseconds(fEndTime*1000.0, 2) + "]";
             dialog.setExtraInfo(info);
             dialog.setLocationRelativeTo(this);
             dialog.setVisible(true);
             if (dialog.change) {
-                if ((endTime - startTime)>30.0){
+                if ((fEndTime - fStartTime)>30.0){
                     String message = "Going to save audio snippet in background.\nThis may take a while.";
                     JOptionPane.showMessageDialog(this, message);
                 }
@@ -516,7 +498,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                         try {
                             myself.status("Saving audio snippet as " + filename + "...");
                             AudioProcessor ap = new AudioProcessor();
-                            ap.writePart(startTime, endTime, soundFileName, filename);
+                            ap.writePart(fStartTime, fEndTime, soundFileName, filename);
                             myself.status("Saved audio snippet as " + filename + ".");
                             lastAudioPartFilename = filename;
                             if (snapshotWouldBeLinkeable && sendLink) {
@@ -534,7 +516,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 
                 //SwingUtilities.invokeLater(backgroundThread);
                 backgroundThread.start();
-            }*/
+            }
         
     }//GEN-LAST:event_cutButtonActionPerformed
 
@@ -591,23 +573,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }//GEN-LAST:event_currentPositionLabelMouseClicked
 
     private void endPositionLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_endPositionLabelMouseClicked
-        if (SwingUtilities.isLeftMouseButton(evt)){
-            decreaseStopTime(0.1);
-        } else if (SwingUtilities.isRightMouseButton(evt)){
-            increaseStopTime(0.1);
-        } else {
-            return;
-        }
     }//GEN-LAST:event_endPositionLabelMouseClicked
 
     private void startPositionLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startPositionLabelMouseClicked
-        if (SwingUtilities.isLeftMouseButton(evt)){
-            decreaseStartTime(0.1);
-        } else if (SwingUtilities.isRightMouseButton(evt)){
-            increaseStartTime(0.1);
-        } else {
-            return;
-        }
     }//GEN-LAST:event_startPositionLabelMouseClicked
 
     public void minimize(boolean mini){
@@ -620,61 +588,20 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }
     
     private void minimizeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeCheckBoxActionPerformed
-        minimize(minimizeCheckBox.isSelected());
-        //mainPanel.setVisible(!minimizeCheckBox.isSelected());
-        //pack();
     }//GEN-LAST:event_minimizeCheckBoxActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
-        stopPressed = true;
-        doStop();
     }//GEN-LAST:event_stopButtonActionPerformed
 
-    public void doStop(){
-        System.out.println("JMF-Player: doStop");
-        getPlayer().stopPlayback();
-        isPlaying = false;
-        isPausing = false;        
-    }
     
     private void pauseToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseToggleButtonActionPerformed
-        doPause();
     }//GEN-LAST:event_pauseToggleButtonActionPerformed
 
-    public void doPause(){
-        if (pauseToggleButton.isSelected()){
-            // Pause
-            getPlayer().haltPlayback();
-            pauseToggleButton.setToolTipText("Resume");
-            isPausing = true;
-            status("Playback halted");
-            //enablePositionToSomethingButtons();
-        } else {
-            // Resume
-            getPlayer().resumePlayback();
-            pauseToggleButton.setToolTipText("Pause");
-            isPausing = false;
-            status("Playback started");
-            //disablePositionToSomethingButtons();
-        }                
-    }
     
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
         //doPlay();
     }//GEN-LAST:event_playButtonActionPerformed
 
-    public void doPlay(){
-        /*double bufferTime = ((Double)(bufferTimeSpinner.getValue()));
-        getPlayer().setBufferTime(bufferTime);
-        double startTime = (totalLength*startTimeSlider.getValue())/1000000.0;
-        getPlayer().setStartTime(startTime);
-        double endTime = (totalLength*endTimeSlider.getValue())/1000000.0;
-        getPlayer().setEndTime(endTime);
-        isPlaying = true;
-        isPausing = false;
-        getPlayer().startPlayback();                */
-    }
-    
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         setVisible(false);
@@ -716,7 +643,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }//GEN-LAST:event_formComponentResized
 
     private void mediaInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediaInfoButtonActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_mediaInfoButtonActionPerformed
     
     /**
@@ -778,58 +704,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         if (type==PlayableEvent.POSITION_UPDATE){
                 double pos = e.getPosition();
                 currentPositionLabel.setText(TimeStringFormatter.formatMiliseconds(pos*1000.0,1));
-        }
-        
-        /*switch (type){
-            case PlayableEvent.PLAYBACK_STARTED :                 
-                status("Playback started.");
-                playButton.setEnabled(false);
-                pauseToggleButton.setEnabled(true);
-                stopButton.setEnabled(true);
-                startTimeSlider.setEnabled(false);
-                endTimeSlider.setEnabled(false);
-                positionSlider.setEnabled(true);
-                isPlaying = true;
-                isPausing = true;
-
-                break;
-            case PlayableEvent.PLAYBACK_STOPPED : 
-                status("Playback stopped.");
-                if (syncStartCheckBox.isSelected()){
-                    updateStartTimeSlider();
-                }
-                if (syncEndCheckBox.isSelected()){
-                    updateEndTimeSlider();
-                }
-                positionSlider.setValue(startTimeSlider.getValue());
-                playButton.setEnabled(true);
-                pauseToggleButton.setEnabled(false);
-                pauseToggleButton.setSelected(false);
-                pauseToggleButton.setToolTipText("Pause");
-                stopButton.setEnabled(false);
-                startTimeSlider.setEnabled(true);
-                endTimeSlider.setEnabled(true);
-                positionSlider.setEnabled(false);
-                positionSlider.setValue(startTimeSlider.getValue());
-                currentPositionLabel.setText(startPositionLabel.getText());
-
-                isPlaying = false;
-                isPausing = false;
-                //disablePositionToSomethingButtons();
-                if ((!stopPressed) && (loopCheckBox.isSelected())){
-                    this.doPlay();
-                }
-                stopPressed = false;
-                break;
-            case PlayableEvent.POSITION_UPDATE :
-                double pos = e.getPosition();
-                //int position = (int)(Math.round(pos));
-                positionSlider.setValue((int)Math.round(pos/totalLength*1000000));
-                //currentPositionLabel.setText(Double.toString(Math.round(pos*10)/10.0));
-                currentPositionLabel.setText(TimeStringFormatter.formatMiliseconds(pos*1000.0,1));
-                break;
-            default: break;
-        } */
+        }        
     }    
     
     private void status (String text){
@@ -862,16 +737,22 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 JDSPlayer jdsp = (JDSPlayer)getPlayer();
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
+                System.out.println("JDSPlayer says the movie " + new File(filename).getName() 
+                        + " has width " + sourceWidth + "and  height " + sourceHeight);
             } else if (getPlayer() instanceof CocoaQTPlayer) {
                  CocoaQTPlayer cqtp = (CocoaQTPlayer)getPlayer();
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
-                 sourceHeight = cqtp.wrappedPlayer.getSourceHeight();                         
+                 sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
+                 System.out.println("CocoaQTPlayer says the movie " + new File(filename).getName() 
+                         + " has width " + sourceWidth + "and  height " + sourceHeight);
             } else {
-                // this includes JMF and the other, mor shitty like, players
+                // this includes JMF and the other, more shitty like, players
                 videoDisplayPanel.add(c);
                 videoPanel.setVisible(true);
                 sourceWidth = c.getPreferredSize().width;
-                sourceHeight = c.getPreferredSize().height;                
+                sourceHeight = c.getPreferredSize().height;              
+                System.out.println("JMFPlayer says the movie " + new File(filename).getName() 
+                        + " has width " + sourceWidth + "and  height " + sourceHeight);                
             }
             
             
@@ -892,6 +773,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 videoPanel.setVisible(true);                
             } else {
                 // all the other crap players...
+                videoPanel.setVisible(true);                
             }
 
             
@@ -904,42 +786,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         return true;
 
-    }
-    
-    void decreaseStartTime(double amount){
-        if (isPlaying) return;
-        //double time = Double.parseDouble(startPositionLabel.getText());
-        double time = internalStartTime;
-        double newTime = Math.max(0, time - amount);
-        setStartTime(newTime);
-        updateStartTimeSlider();                
-    }
-
-    void increaseStartTime(double amount){
-        if (isPlaying) return;
-        //double time = Double.parseDouble(startPositionLabel.getText());
-        double time = internalStartTime;
-        double newTime = Math.min(totalLength, time + amount);       
-        setStartTime(newTime);
-        updateStartTimeSlider();                
-    }
-
-    void decreaseStopTime(double amount){
-        if (isPlaying) return;
-        //double time = Double.parseDouble(endPositionLabel.getText());
-        double time = internalEndTime;
-        double newTime = Math.max(0, time - amount);        
-        setEndTime(newTime);
-        updateEndTimeSlider();                
-    }
-    
-    void increaseStopTime(double amount){
-        if (isPlaying) return;
-        //double time = Double.parseDouble(endPositionLabel.getText());
-        double time = internalEndTime;
-        double newTime = Math.min(totalLength, time + amount);       
-        setEndTime(newTime);
-        updateEndTimeSlider();                
     }
     
     /*private void disablePositionToSomethingButtons(){
@@ -1035,17 +881,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0),"F12_Pressed");
         am.put("F12_Pressed", nextTLIAction);
         
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),"LeftArrow_Pressed");
-        am.put("LeftArrow_Pressed", decreaseStartTimeAction);
-    
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),"RightArrow_Pressed");
-        am.put("RightArrow_Pressed", increaseStartTimeAction);
-
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 1),"Shift_LeftArrow_Pressed");
-        am.put("Shift_LeftArrow_Pressed", decreaseStopTimeAction);
-
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 1),"Shift_RightArrow_Pressed");
-        am.put("Shift_RightArrow_Pressed", increaseStopTimeAction);
 
     }
     
@@ -1073,18 +908,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     public Action nextTLIAction = 
         new AbstractAction() {public void actionPerformed(ActionEvent e) {nextTLIButton.doClick(); } };
     
-    public Action decreaseStartTimeAction = 
-        new AbstractAction() {public void actionPerformed(ActionEvent e) {decreaseStartTime(0.1); } };
-
-    public Action increaseStartTimeAction = 
-        new AbstractAction() {public void actionPerformed(ActionEvent e) {increaseStartTime(0.1); } };
-
-    public Action decreaseStopTimeAction = 
-        new AbstractAction() {public void actionPerformed(ActionEvent e) {decreaseStopTime(0.1); } };
-
-    public Action increaseStopTimeAction = 
-        new AbstractAction() {public void actionPerformed(ActionEvent e) {increaseStopTime(0.1); } };
-        
     @Override
     public void show(){
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -1152,6 +975,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }
 
     public void setTimeSelection(TimeSelectionEvent event) {
+        internalStartTime = event.getStartTime();
+        internalEndTime = event.getEndTime();
         startPositionLabel.setText(TimeStringFormatter.formatMiliseconds(event.getStartTime(), 1));
         endPositionLabel.setText(TimeStringFormatter.formatMiliseconds(event.getEndTime(), 1));
     }

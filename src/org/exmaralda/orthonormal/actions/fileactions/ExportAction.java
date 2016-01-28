@@ -78,7 +78,7 @@ public class ExportAction extends AbstractApplicationAction {
         try {
             if (fileChooser.getFileFilter()==exmaraldaFileFilter){
             } else if (fileChooser.getFileFilter()==elanFileFilter){
-            }  else if (fileChooser.getFileFilter()==praatFileFilter){
+            } else if (fileChooser.getFileFilter()==praatFileFilter){
             } else if (fileChooser.getFileFilter()==teiFileFilter){
                 Document flnDoc = ac.getTranscription().getDocument();
                 TEIConverter converter = new TEIConverter();

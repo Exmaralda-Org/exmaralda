@@ -187,6 +187,9 @@ public class JMFPlayer extends AbstractPlayer implements PlayableListener {
             return null;
         }
         Buffer buf = fgc.grabFrame();
+        if (buf==null){
+            return null;
+        }
         javax.media.format.VideoFormat vf = (javax.media.format.VideoFormat)(buf.getFormat());
         javax.media.util.BufferToImage bti = new javax.media.util.BufferToImage(vf);
         java.awt.Image img = bti.createImage(buf);        

@@ -94,39 +94,9 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
     }
 
     private void play(double startTime, double endTime){
-        /*playThread = new Thread(new Runnable(){
-            public void run(){
-                while (playThread!=null){
-                    if (playThread.isInterrupted()) break;
-                    if (!wrappedPlayer.isPlaying()) {
-                        if (!halted){
-                            // i.e. this is a real stop caused by stop button
-                            // or by end of interval
-                            firePlaybackStopped();
-                        }
-                        playThread.interrupt();
-                    }
-                    firePosition();
-                    try{
-                        Thread.sleep(1);
-                    } catch (InterruptedException ie){
-                        if (playThread!=null){
-                            playThread.interrupt();
-                        }
-                    }
-                }
-            }
-        });   */     
-        
         long thisStartTime = (long)(startTime * 1000);
         long thisEndTime = (long)(endTime * 1000);
-
-        wrappedPlayer.playInterval(thisStartTime, thisEndTime);
-        // added 11-05-2009 to avoid IllegalThreadStateException
-        /*if (!playThread.isAlive()){
-            playThread.start();
-        }*/
-        
+        wrappedPlayer.playInterval(thisStartTime, thisEndTime);        
     }
 
     @Override
@@ -151,7 +121,7 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
         firePlaybackResumed();        
         //halted = false;
     }
-
+    
 
     @Override
     public void stopPlayback() {
@@ -180,12 +150,14 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
         // do nothing
     }
 
+    @Override
     public Component getVisibleComponent(){
         if (wrappedPlayer!=null){
             return wrappedPlayer.getVisualComponent();
         }
         return null;
     }
+    
 
 
     // added 26-05-2009
@@ -194,6 +166,7 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
             wrappedPlayer.setMediaTime((long)(time*1000.0));
         }
     }
+      
 
     // added 26-05-2009
     public java.awt.Image grabFrame(){

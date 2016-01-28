@@ -19,6 +19,8 @@ public class MediaInfoTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        JDSPlayer player = new JDSPlayer();
+        //player.wrappedPlayer.getMediaDescriptor().
         /*try {
             MediaDescriptor mediaDescriptor = mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor("file:///S:/TP-Z2/DATEN/E3/PHONBLA/HAMBURG_LONGITUDINAL/0.1/Manuel/Sp/01/Manuel_Sp_01.mov");
             NativeMediaPlayerWindowsDS wrappedPlayer = new mpi.eudico.client.annotator.player.NativeMediaPlayerWindowsDS(mediaDescriptor);
