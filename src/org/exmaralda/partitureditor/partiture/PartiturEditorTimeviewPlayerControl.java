@@ -100,7 +100,7 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                 }
             } 
         }
-
+        
     }
 
     @Override

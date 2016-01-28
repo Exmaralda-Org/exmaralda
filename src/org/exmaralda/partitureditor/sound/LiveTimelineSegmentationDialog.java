@@ -311,8 +311,8 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
 
         if (getPlayer() instanceof JMFPlayer){
             JMFPlayer jmfp = (JMFPlayer)getPlayer();
-            if (jmfp.getPlayerVisibleComponent()!=null){
-                Component c = jmfp.getPlayerVisibleComponent();
+            if (jmfp.getVisibleComponent()!=null){
+                Component c = jmfp.getVisibleComponent();
                 videoDisplayPanel.add(c);
                 //videoDisplayPanel.setPreferredSize(c.getPreferredSize());
                 videoDisplayPanel.setVisible(true);

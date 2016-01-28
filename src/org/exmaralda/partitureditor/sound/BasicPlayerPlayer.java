@@ -9,6 +9,7 @@
 
 package org.exmaralda.partitureditor.sound;
 
+import java.awt.Component;
 import java.io.*;
 import java.util.Map;
 import java.util.logging.Level;
@@ -311,6 +312,11 @@ public class BasicPlayerPlayer extends AbstractPlayer implements BasicPlayerList
             }
         }
         return milliseconds;
+    }
+
+    @Override
+    public Component getVisibleComponent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

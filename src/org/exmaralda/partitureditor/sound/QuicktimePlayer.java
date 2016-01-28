@@ -5,6 +5,7 @@
 
 package org.exmaralda.partitureditor.sound;
 
+import java.awt.Component;
 import java.io.IOException;
 
 import quicktime.QTException;
@@ -236,6 +237,11 @@ public class QuicktimePlayer extends AbstractPlayer implements PlayableListener 
 
     public void setQtc(QTComponent qtc) {
             this.qtc = qtc;
+    }
+
+    @Override
+    public Component getVisibleComponent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

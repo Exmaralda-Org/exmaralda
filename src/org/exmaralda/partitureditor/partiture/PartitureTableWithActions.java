@@ -610,7 +610,7 @@ public class PartitureTableWithActions extends PartitureTable
         confirmTimelineItemAction.setEnabled((aWholeColumnIsSelected || aSeriesOfColumnsIsSelected) && !locked);
         removeGapAction.setEnabled(aWholeColumnIsSelected && columnIsGap && !locked);
         praatPanel.getGetButton().setEnabled(aWholeColumnIsSelected);
-        mediaPanelDialog.enableGetButtons(aWholeColumnIsSelected);
+        //mediaPanelDialog.enableGetButtons(aWholeColumnIsSelected);
         
         // 4. Format Actions
         editTierFormatAction.setEnabled((aWholeRowIsSelected || aSeriesOfRowsIsSelected) && !locked);
@@ -1220,7 +1220,7 @@ public class PartitureTableWithActions extends PartitureTable
         getModel().fireColumnLabelsChanged();     
         if (getModel().timelineMode){
             addTableMouseWheelListener(this);
-            mediaPanelDialog.activateTimelineMode();
+            //mediaPanelDialog.activateTimelineMode();
         } else {
             addTableMouseWheelListener(null);        
         }        
@@ -2436,6 +2436,7 @@ public class PartitureTableWithActions extends PartitureTable
     public void processTimeSelectionEvent(TimeSelectionEvent event) {
         currentSelectionLength = (event.getEndTime()-event.getStartTime())/1000.0;
         insertPauseAction.setEnabled(currentSelectionLength>0.0);
+        mediaPanelDialog.setTimeSelection(event);
     }
 
 

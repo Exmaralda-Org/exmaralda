@@ -5,28 +5,40 @@
 
 package org.exmaralda.partitureditor.sound;
 
+import ipsk.audio.FileAudioSource;
 import ipsk.audio.player.PlayerException;
+import ipsk.audio.player.event.PlayerCloseEvent;
+import ipsk.audio.player.event.PlayerErrorEvent;
 import ipsk.audio.player.event.PlayerEvent;
+import ipsk.audio.player.event.PlayerStopEvent;
 import java.awt.Component;
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL; 
 
 
 /**
  *
  * @author thomas
  */
-public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.PlayerListener {
+public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.PlayerListener { 
 
     ipsk.audio.player.Player wrappedPlayer;
     private double haltTime = 0;
     private boolean halted = false;
     Thread playThread;
 
+    // new 19-01-2016
+    public BASAudioPlayer() {
+        wrappedPlayer = new ipsk.audio.player.Player();
+    }
+        
+    
     @Override
     public void setSoundFile(String pathToSoundFile) throws IOException {
         System.out.println("This is the BASAudioPlayer setting media file to " + pathToSoundFile);
+        if ((pathToSoundFile==null)){
+            return;
+        }
         if (!(pathToSoundFile.toUpperCase().endsWith(".WAV"))){
             String message = "BASAudioPlayer can only be used with *.wav files.";
             throw new IOException(message);
@@ -35,9 +47,6 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         if ((pathToSoundFile==null) && (wrappedPlayer!=null)){
             wrappedPlayer.stop();
         }
-        if ((pathToSoundFile==null)){
-            return;
-        }
 
         if (!pathToSoundFile.startsWith("http://")){            
             urlString = "file:///" + pathToSoundFile;
@@ -45,17 +54,19 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         }
 
         try {
-            wrappedPlayer = new ipsk.audio.player.Player(new URL(urlString));
+            //changed 19-01-2016
+            //wrappedPlayer = new ipsk.audio.player.Player(new URL(urlString));
+            wrappedPlayer.setAudioSource(new FileAudioSource(new File(soundFilePath))); 
             wrappedPlayer.addPlayerListener(this);
             wrappedPlayer.open();
             fireSoundfileSet();
         } catch (PlayerException ex) {
             ex.printStackTrace();
             throw new IOException(ex);
-        } catch (MalformedURLException mue){
+        } /*catch (MalformedURLException mue){
             mue.printStackTrace();;
             throw new IOException(mue);
-        }
+        }*/
     }
 
     @Override
@@ -166,12 +177,23 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         // do nothing
     }
 
+    @Override
     public Component getVisibleComponent(){        
         return null;
     }
 
+    @Override
     public void update(PlayerEvent playerEvent) {
         firePosition();
+        
+        // added 19-01-2016 - not sure what to do with this yet
+        if (playerEvent instanceof PlayerStopEvent) {
+              // wrappedPlayer.close();
+         } else if (playerEvent instanceof PlayerCloseEvent) {
+             // player is ready again
+         } else if (playerEvent instanceof PlayerErrorEvent) {
+             // show error
+         }        
     }
     
     public void destroy(){

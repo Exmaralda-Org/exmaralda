@@ -51,13 +51,13 @@ public class MetaInformation extends Object {
     /** creates new MetaInformation with project name pn, transcription name tn, referenced file rf,
       * udMetaInformation udi, comment c and transcription convention tc */
     public MetaInformation(String pn, String tn, String rf, UDInformationHashtable udi, String c, String tc){
-        projectName = new String(pn);
-        transcriptionName = new String(tn);
+        projectName = pn;
+        transcriptionName = tn;
         addReferencedFile(rf);
         udMetaInformation = new UDInformationHashtable();
         udMetaInformation = udi;
-        comment = new String(c);
-        transcriptionConvention = new String(tc);
+        comment = c;
+        transcriptionConvention = tc;
     }
     
     /** returns a copy of this MetaInformation */
@@ -120,7 +120,7 @@ public class MetaInformation extends Object {
     /** sets the referenced file to the specified value */
     public void setReferencedFile(String url){
         //referencedFile = new String(url);
-        if (referencedFiles.size()==0){
+        if (referencedFiles.isEmpty()){
             referencedFiles.addElement(url);
         } else {
             referencedFiles.setElementAt(url, 0);

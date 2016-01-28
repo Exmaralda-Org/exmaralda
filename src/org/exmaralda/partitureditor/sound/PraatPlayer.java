@@ -5,6 +5,7 @@
 
 package org.exmaralda.partitureditor.sound;
 
+import java.awt.Component;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,6 +176,11 @@ public class PraatPlayer extends AbstractPlayer implements PlayableListener {
         } catch (IOException ex) {
             Logger.getLogger(PraatPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public Component getVisibleComponent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.deprecated;
 
+import java.awt.Component;
 import org.exmaralda.partitureditor.sound.*;
 import javax.sound.sampled.*;
 import java.io.*;
@@ -237,6 +238,11 @@ public class JavaSoundPlayer extends AbstractPlayer implements LineListener {
 
     public void increaseCurrentPosition(double time) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Component getVisibleComponent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

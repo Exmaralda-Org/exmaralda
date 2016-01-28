@@ -26,6 +26,7 @@ public class SpeakerContributionComparator implements java.util.Comparator {
     }
 
     
+    @Override
     public int compare(Object o1, Object o2) {
         if ((!(o1 instanceof SpeakerContribution)) 
             || (!(o2 instanceof SpeakerContribution))) {return 0;}

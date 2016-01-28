@@ -120,6 +120,7 @@ public class GATSegmentation extends AbstractSegmentation {
         HashMap<String,Integer> openingBracketPositions = new HashMap<String,Integer>();
         HashMap<String,Integer> closingBracketPositions = new HashMap<String,Integer>();
         for (int pos=0; pos<body.getNumberOfSpeakerContributions(); pos++){
+            SpeakerContribution sc = body.getSpeakerContributionAt(pos);
             // flag for recording problems in overlap alignment
             boolean isOverlapProblem = false;
 
@@ -131,7 +132,6 @@ public class GATSegmentation extends AbstractSegmentation {
             output.append("  ");
             
             // Sprecherkuerzel
-            SpeakerContribution sc = body.getSpeakerContributionAt(pos);
             String thisSpeaker = sc.getSpeaker();
             if (thisSpeaker==null){
                 

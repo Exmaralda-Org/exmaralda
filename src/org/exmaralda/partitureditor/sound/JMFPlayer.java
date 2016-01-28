@@ -37,9 +37,11 @@ public class JMFPlayer extends AbstractPlayer implements PlayableListener {
         return player.getControlPanelComponent();
     }
     
-    public java.awt.Component getPlayerVisibleComponent(){
-        return player.getVisualComponent();
+    public java.awt.Component getVisibleComponent(){
+        return player.getVisualComponent();        
     }
+    
+    
     
     @Override
     public double getCurrentPosition() {
@@ -197,7 +199,7 @@ public class JMFPlayer extends AbstractPlayer implements PlayableListener {
         if (e.getType()!=PlayableEvent.POSITION_UPDATE) return;
         double p = e.getPosition();
         if (p>Math.min(getTotalLength(),endTime+bufferTime+0.1)) {
-            System.out.println("SHOULD HAVE STOPPED: " + p + " > " + endTime+bufferTime);
+            //System.out.println("SHOULD HAVE STOPPED: " + p + " > " + endTime+bufferTime);
             stopPlayback();
         }
     }

@@ -1,16 +1,9 @@
 package org.exmaralda.partitureditor.deprecated;
 
-import org.exmaralda.partitureditor.sound.*;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import org.exmaralda.partitureditor.sound.*;
 import java.io.IOException;
 
-import javax.media.ControllerAdapter;
-import javax.media.EndOfMediaEvent;
-import javax.media.StopAtTimeEvent;
-import javax.media.Time;
 
 import quicktime.QTException;
 import quicktime.QTSession;
@@ -18,8 +11,6 @@ import quicktime.app.view.QTComponent;
 import quicktime.app.view.QTFactory;
 import quicktime.std.StdQTConstants;
 import quicktime.std.StdQTException;
-import quicktime.std.clocks.TimeRecord;
-import quicktime.std.movies.ExecutingWiredAction;
 import quicktime.std.movies.Movie;
 import quicktime.std.movies.MovieController;
 import quicktime.std.movies.media.DataRef;
@@ -382,6 +373,11 @@ public class QuicktimeBasedPlayer extends AbstractPlayer {
 		firePlaybackStopped();
 		
 	}
+
+    @Override
+    public Component getVisibleComponent() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 	
 

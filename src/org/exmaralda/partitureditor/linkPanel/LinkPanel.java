@@ -349,7 +349,7 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
         mediaControlPanel.removeAll();
         try{
             player.setSoundFile(url);
-            java.awt.Component viscomp = player.getPlayerVisibleComponent();
+            java.awt.Component viscomp = player.getVisibleComponent();
             if (viscomp!=null){
                 displayPanel2.add(viscomp);
                 displayPanel2.setPreferredSize(viscomp.getPreferredSize());
