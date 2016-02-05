@@ -26,20 +26,24 @@ import org.jdom.Document;
  */
 public class OutputAction extends AbstractApplicationAction {
     
-    ParameterFileFilter htmlContributionListFilter = new ParameterFileFilter("html", "Normalisierte Beitragsliste");
+    ParameterFileFilter htmlContributionListBothFilter = new ParameterFileFilter("html", "Beitragsliste mit beiden Ebenen (*.html)");
+    ParameterFileFilter htmlContributionListNormalFilter = new ParameterFileFilter("html", "Beitragsliste nur mit Normalisierung (*.html)");
     public static String CONTRIBUTIONS2HTML_STYLESHEET = "/org/exmaralda/folker/data/normalizedFolker2HTMLContributionList.xsl";
+    public static String CONTRIBUTIONS2HTML_STYLESHEET2 = "/org/exmaralda/folker/data/normalizedFolker2HTMLContributionList2.xsl";
     
     /** Creates a new instance of OpenAction */
     public OutputAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** OutputAction ***]");
         ApplicationControl ac = (ApplicationControl)applicationControl;
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.output"));
-        fileChooser.addChoosableFileFilter(htmlContributionListFilter);
+        fileChooser.addChoosableFileFilter(htmlContributionListBothFilter);
+        fileChooser.addChoosableFileFilter(htmlContributionListNormalFilter);
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));        
 
@@ -47,7 +51,7 @@ public class OutputAction extends AbstractApplicationAction {
         if (retValue==JFileChooser.CANCEL_OPTION) return;
         
         File f = fileChooser.getSelectedFile();
-        if (!(f.getName().indexOf(".")>=0)){
+        if (!f.getName().contains(".")){
             f = new File(f.getAbsolutePath() + "." + ((ParameterFileFilter)(fileChooser.getFileFilter())).getSuffix());
         }
         if (f.exists()){
@@ -57,23 +61,24 @@ public class OutputAction extends AbstractApplicationAction {
             }
         } // remotely commented
         try {
-            if ((fileChooser.getFileFilter()==htmlContributionListFilter)){
-                String STYLESHEET = "";
-                if (fileChooser.getFileFilter()==htmlContributionListFilter) {
-                    System.out.println("[*** ContributionListOutput ***]");
-                    STYLESHEET = CONTRIBUTIONS2HTML_STYLESHEET;
-                }
-                Document transcriptionDoc = ac.getTranscription().getDocument();
-                String docString = org.exmaralda.common.jdomutilities.IOUtilities.documentToString(transcriptionDoc);
-                StylesheetFactory sf = new StylesheetFactory(true);
-                String resultString = sf.applyInternalStylesheetToString(STYLESHEET, docString);
-
-                System.out.println("started writing document...");
-                FileOutputStream fos = new FileOutputStream(f);
-                fos.write(resultString.getBytes("UTF-8"));
-                fos.close();
-                System.out.println("document written.");
+            String STYLESHEET = "";
+            if (fileChooser.getFileFilter()==htmlContributionListBothFilter) {
+                System.out.println("[*** ContributionListBothOutput ***]");
+                STYLESHEET = CONTRIBUTIONS2HTML_STYLESHEET;
+            } else if (fileChooser.getFileFilter()==htmlContributionListNormalFilter) {
+                System.out.println("[*** ContributionListNormalOutput ***]");
+                STYLESHEET = CONTRIBUTIONS2HTML_STYLESHEET2;
             }
+            Document transcriptionDoc = ac.getTranscription().getDocument();
+            String docString = org.exmaralda.common.jdomutilities.IOUtilities.documentToString(transcriptionDoc);
+            StylesheetFactory sf = new StylesheetFactory(true);
+            String resultString = sf.applyInternalStylesheetToString(STYLESHEET, docString);
+
+            System.out.println("started writing document...");
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(resultString.getBytes("UTF-8"));
+            fos.close();
+            System.out.println("document written.");
         } catch (Exception ex) {
             applicationControl.displayException(ex);
             return;
