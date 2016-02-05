@@ -12,9 +12,15 @@
 package org.exmaralda.folker.gui;
 
 import java.awt.Container;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
@@ -27,23 +33,31 @@ import org.exmaralda.partitureditor.jexmaralda.Timeline;
 public class TierSelectionPanel extends javax.swing.JPanel {
 
     DefaultListModel listModel;
+    HashMap<Integer,Integer> list2tierIndex = new HashMap<Integer, Integer>();
 
     /** Creates new form TierSelectionPanel */
     public TierSelectionPanel(BasicTranscription bt, String id1, String id2) {
         initComponents();
         listModel = new DefaultListModel();
         Timeline tl = bt.getBody().getCommonTimeline();
+        int listIndex = 0;
         for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
             Tier tier = bt.getBody().getTierAt(pos);
             int intersectorsCount = tier.getEventsIntersecting(tl, id1, id2).size();
             if (intersectorsCount==0){
                 listModel.addElement(tier);
+                int tierIndex = bt.getBody().lookupID(tier.getID());
+                list2tierIndex.put(listIndex, tierIndex);
+                listIndex++;
             }
         }
         tierList.setModel(listModel);
         tierList.setVisibleRowCount(listModel.getSize());
         tierList.setPreferredSize(tierList.getPreferredScrollableViewportSize());
         tierList.setCellRenderer(new TierSelectionListCellRenderer(bt));
+        
+        // new 29-01-2016
+        setKeyboardShortcuts();
     }
 
     public boolean isATierAvailable(){
@@ -147,5 +161,30 @@ public class TierSelectionPanel extends javax.swing.JPanel {
     public javax.swing.JList tierList;
     private javax.swing.JScrollPane tierListScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    private void setKeyboardShortcuts() {
+        // only do this when you have fewer that 10 entries
+        if (listModel.size()>9) return;
+        for (int i=0; i<listModel.size(); i++) {
+            int tierIndex = this.list2tierIndex.get(i);
+            int keyCode = tierIndex+49; // Key 1 has code 49
+                        
+            String actionName = "KeyAction_" + Integer.toString(i+1);
+            //System.out.println(keyName + " " + actionName);
+            final int fi = i;
+            AbstractAction action = new AbstractAction(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    tierList.setSelectedIndex(fi);
+                    closeDialog();
+                }
+                
+            };
+            tierList.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyCode, 0), actionName);
+            tierList.getActionMap().put(actionName, action);
+        }
+        
+    }
 
 }

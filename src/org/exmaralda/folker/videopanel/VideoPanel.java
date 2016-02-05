@@ -63,6 +63,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         bottomPanel = new javax.swing.JPanel();
         controlsPanel = new javax.swing.JPanel();
         playSelectionButton = new javax.swing.JButton();
+        stopButton = new javax.swing.JButton();
         filePanel = new javax.swing.JPanel();
         openFileButton = new javax.swing.JButton();
 
@@ -104,6 +105,14 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         });
         controlsPanel.add(playSelectionButton);
 
+        stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/media-playback-stop.png"))); // NOI18N
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopButtonActionPerformed(evt);
+            }
+        });
+        controlsPanel.add(stopButton);
+
         bottomPanel.add(controlsPanel, java.awt.BorderLayout.CENTER);
 
         openFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/devices/video-display.png"))); // NOI18N
@@ -124,7 +133,9 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
 
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
-        jfc.setFileFilter(new ParameterFileFilter("mpg", "MPEG-1 Videodateien (*.mpg)"));
+        String[] suffixes = {"mpg", "mpeg"};
+        jfc.setFileFilter(new ParameterFileFilter(suffixes, "MPEG-1 Videodateien (*.mpg, *.mpeg)"));
+        jfc.setAcceptAllFileFilterUsed(false);
         //jfc.setFileFilter(new ParameterFileFilter("mp4", "MPEG-1 Videodateien (*.mp4)"));
         jfc.setCurrentDirectory(new File(preferredPath));
         int ret = jfc.showOpenDialog(this);
@@ -157,6 +168,10 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         }
         //pack();
     }//GEN-LAST:event_formComponentResized
+
+    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+        videoPlayer.stopPlayback();
+    }//GEN-LAST:event_stopButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,13 +223,17 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
     private javax.swing.JButton openFileButton;
     private javax.swing.JButton playSelectionButton;
     private javax.swing.JLabel startPositionLabel;
+    private javax.swing.JButton stopButton;
     private javax.swing.JPanel timePanel;
     private javax.swing.JPanel videoDisplayPanel;
     // End of variables declaration//GEN-END:variables
 
     private void openVideoFile(File f) throws IOException {
-        JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer;
+        JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer;       
         jdsPlayer.setSoundFile(f.getAbsolutePath());
+        
+        
+        videoDisplayPanel.removeAll();
         
         if (jdsPlayer.getVisibleComponent()!=null){
             Component c = jdsPlayer.getVisibleComponent();
@@ -249,6 +268,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 
                 videoPlayer.setStartTime(selectionStart / 1000.0);
                 videoPlayer.setEndTime(selectionEnd / 1000.0);
+                playSelectionButton.setEnabled(true);
                 
                 ((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
 
@@ -258,6 +278,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 endPositionLabel.setText("-");
                 videoPlayer.setStartTime(selectionStart / 1000.0);
                 videoPlayer.setEndTime(videoPlayer.getTotalLength());
+                playSelectionButton.setEnabled(false);
             }
             
         }
