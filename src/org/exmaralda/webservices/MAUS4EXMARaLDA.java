@@ -23,8 +23,10 @@ import org.exmaralda.partitureditor.jexmaralda.SegmentList;
 import org.exmaralda.partitureditor.jexmaralda.Segmentation;
 import org.exmaralda.partitureditor.jexmaralda.TimedSegment;
 import org.exmaralda.partitureditor.jexmaralda.convert.PraatConverter;
+import org.exmaralda.partitureditor.jexmaralda.segment.GATMinimalSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
 import org.exmaralda.partitureditor.sound.AudioProcessor;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -126,8 +128,11 @@ public class MAUS4EXMARaLDA {
             } else if ("GENERIC".equals(whichSegmentation)){
                 fsm = new FSMSaxReader().readFromStream(getClass().getResourceAsStream(GenericSegmentation.wordFSM));
                 segmentName = "GEN:w";                
+            } else if ("cGAT Minimal".equals(whichSegmentation)){
+                fsm = new FSMSaxReader().readFromStream(getClass().getResourceAsStream(cGATMinimalSegmentation.wordFSM));
+                segmentName = "cGAT:w";                                    
             }
-            
+
             String output = fsm.process(allText);
             Document doc = FileIO.readDocumentFromString(output);
             List l = XPath.selectNodes(doc, "//ts[@n='" + segmentName + "']");

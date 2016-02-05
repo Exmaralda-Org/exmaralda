@@ -133,7 +133,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         segmentRadioButton.setText("Use a segmentation algorithm: ");
         jPanel2.add(segmentRadioButton);
 
-        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HIAT", "GENERIC" }));
+        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HIAT", "GENERIC", "cGAT Minimal" }));
         jPanel2.add(segmentationComboBox);
 
         jPanel1.add(jPanel2);
