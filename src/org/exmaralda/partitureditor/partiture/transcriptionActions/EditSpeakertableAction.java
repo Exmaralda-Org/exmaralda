@@ -25,6 +25,7 @@ public class EditSpeakertableAction extends org.exmaralda.partitureditor.partitu
         super("Speakertable...", icon, t);                        
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editSpeakertableAction!");
         table.commitEdit(true);
@@ -38,6 +39,9 @@ public class EditSpeakertableAction extends org.exmaralda.partitureditor.partitu
         if (dialog.editSpeakertable()){
             transcription.getHead().setSpeakertable(dialog.getSpeakertable());
             table.getModel().getTranscription().checkSpeakers();
+            if (dialog.getAutoAdd()){
+                //TODO: auto add speaker tiers
+            }
             transcription.makeAutoDisplayName(tiersWithAutoDisplayName);
             table.getModel().fireRowLabelsChanged();
             table.transcriptionChanged = true;

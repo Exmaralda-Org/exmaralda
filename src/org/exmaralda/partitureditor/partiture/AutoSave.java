@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.partiture;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 
 /**
@@ -38,9 +39,13 @@ public class AutoSave implements Runnable {
     
     public void doSave() {
         try {
+            // added 05-02-2016: otherwise auto save don't make no sense, man
+            timestamp = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.getDefault()).format(new java.util.Date());
+            
             System.out.println("Auto saving " + FILENAME + " at " + new java.util.Date().toString());
             String filename = PATH + System.getProperty("file.separator") + FILENAME + "_" + timestamp + ".exb";
             
+            transcription.writeXMLToFile(filename, "none");
             // new 31-08-2012
             // log auto saving in the meta information
             if (!(transcription.getHead().getMetaInformation().getUDMetaInformation().containsAttribute("AutoSave"))){
@@ -48,9 +53,8 @@ public class AutoSave implements Runnable {
             }
             transcription.getHead().getMetaInformation().getUDMetaInformation().setAttribute("AutoSave", 
                     transcription.getHead().getMetaInformation().getUDMetaInformation().getValueOfAttribute("AutoSave")
-                    + ";" + filename + " at " + new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(new java.util.Date()));
+                    + ";" + filename + " at " + new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.getDefault()).format(new java.util.Date()));
             
-            transcription.writeXMLToFile(filename, "none");
         } catch (Exception e) {
             System.out.println (e.getLocalizedMessage());
             try{

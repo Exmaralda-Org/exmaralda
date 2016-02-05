@@ -40,7 +40,9 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
     
     CLARINProgressDialog pbd;
 
-    /** Creates a new instance of NewAction */
+    /** Creates a new instance of NewAction
+     * @param t
+     * @param icon */
     public WebMAUSAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Web MAUS...", icon, t);
     }
@@ -260,7 +262,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
             
             //bt2.writeXMLToFile("C:\\Users\\Schmidt\\Desktop\\TEST\\merge_out.exb", "none");
             //table.getModel().fireDataReset();
-            table.resetData();
+            table.resetData();           
         }
         
 

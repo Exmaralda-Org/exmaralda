@@ -18,7 +18,7 @@ import org.xml.sax.*;
 
 public class cGATMinimalSegmentation extends AbstractSegmentation {
     
-    private final String wordFSM = "/org/exmaralda/partitureditor/fsm/xml/cGAT_Minimal.xml";
+    public static final String wordFSM = "/org/exmaralda/partitureditor/fsm/xml/cGAT_Minimal.xml";
 
     
     public cGATMinimalSegmentation() {

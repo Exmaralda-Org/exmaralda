@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
+import org.exmaralda.partitureditor.jexmaraldaswing.RecordingsListCellRenderer;
 
 /**
  *
@@ -61,6 +62,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         super(parent, modal);
         initComponents();
         
+        availableFilesComboBox.setRenderer(new RecordingsListCellRenderer());
+
         // 27-05-2015: get rid of it - it is useless and causes trouble
         controlPanel.setVisible(false);
                 
@@ -94,10 +97,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         }*/
     }
     
-    private void updateStartTimeSlider(){
-        int sliderValue = (int)Math.round(internalStartTime/totalLength * 1000000);
-        /*startTimeSlider.setValue(sliderValue);        */
-    }
     
     public void setEndTime(double t){
         internalEndTime = t;
@@ -106,10 +105,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         }*/
     }
     
-    private void updateEndTimeSlider(){
-        int sliderValue = (int)Math.round(internalEndTime/totalLength * 1000000);
-        //endTimeSlider.setValue(sliderValue);        
-    }
 
 
     public boolean setSoundFile(String path) {
@@ -126,7 +121,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         }
 
         for (String path : paths){
-            dcbm.addElement(new File(path).getName());
+            dcbm.addElement(new File(path));
         }
         availableFilesComboBox.setModel(dcbm);
         availableFilesComboBox.setEnabled(true);
@@ -178,6 +173,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         filesPanel = new javax.swing.JPanel();
         availableFilesComboBox = new javax.swing.JComboBox();
+        buttonsPanel = new javax.swing.JPanel();
+        grabButton = new javax.swing.JButton();
+        cutButton = new javax.swing.JButton();
         controlsPanel = new javax.swing.JPanel();
         currentPositionPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -191,12 +189,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         jPanel5 = new javax.swing.JPanel();
         totalLengthLabel = new javax.swing.JLabel();
         controlPanel = new javax.swing.JPanel();
-        bufferTimeSpinner = new javax.swing.JSpinner();
-        loopCheckBox = new javax.swing.JCheckBox();
         playButton = new javax.swing.JButton();
         pauseToggleButton = new javax.swing.JToggleButton();
         stopButton = new javax.swing.JButton();
-        minimizeCheckBox = new javax.swing.JCheckBox();
         previousTLIButton = new javax.swing.JButton();
         nextTLIButton = new javax.swing.JButton();
         playbackModeToggleButton = new javax.swing.JToggleButton();
@@ -204,10 +199,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         statusLabel = new javax.swing.JLabel();
         videoPanel = new javax.swing.JPanel();
         videoDisplayPanel = new javax.swing.JPanel();
-        buttonsPanel = new javax.swing.JPanel();
-        grabButton = new javax.swing.JButton();
-        cutButton = new javax.swing.JButton();
-        mediaInfoButton = new javax.swing.JButton();
 
         setTitle("Audio/Video panel");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -230,14 +221,45 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         availableFilesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--- no media files available ---", " " }));
         availableFilesComboBox.setEnabled(false);
-        availableFilesComboBox.setMaximumSize(new java.awt.Dimension(1000, 20));
-        availableFilesComboBox.setPreferredSize(new java.awt.Dimension(200, 20));
+        availableFilesComboBox.setMaximumSize(new java.awt.Dimension(1000, 40));
+        availableFilesComboBox.setPreferredSize(new java.awt.Dimension(400, 40));
         availableFilesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 availableFilesComboBoxActionPerformed(evt);
             }
         });
         filesPanel.add(availableFilesComboBox);
+
+        buttonsPanel.setMinimumSize(new java.awt.Dimension(20, 20));
+        buttonsPanel.setLayout(new javax.swing.BoxLayout(buttonsPanel, javax.swing.BoxLayout.X_AXIS));
+
+        grabButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/sound/Grab.gif"))); // NOI18N
+        grabButton.setToolTipText("Save/Link current video image");
+        grabButton.setEnabled(false);
+        grabButton.setMaximumSize(new java.awt.Dimension(35, 35));
+        grabButton.setMinimumSize(new java.awt.Dimension(35, 35));
+        grabButton.setPreferredSize(new java.awt.Dimension(35, 35));
+        grabButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                grabButtonActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(grabButton);
+
+        cutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/sound/Cut.gif"))); // NOI18N
+        cutButton.setToolTipText("Save/Link audio snippet");
+        cutButton.setEnabled(false);
+        cutButton.setMaximumSize(new java.awt.Dimension(35, 35));
+        cutButton.setMinimumSize(new java.awt.Dimension(35, 35));
+        cutButton.setPreferredSize(new java.awt.Dimension(35, 35));
+        cutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutButtonActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(cutButton);
+
+        filesPanel.add(buttonsPanel);
 
         getContentPane().add(filesPanel, java.awt.BorderLayout.NORTH);
 
@@ -313,17 +335,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         controlsPanel.add(currentPositionPanel);
 
-        bufferTimeSpinner.setToolTipText("Buffer time (in seconds)");
-        bufferTimeSpinner.setPreferredSize(new java.awt.Dimension(40, 18));
-        controlPanel.add(bufferTimeSpinner);
-
-        loopCheckBox.setText("Loop");
-        loopCheckBox.setToolTipText("Loop selection");
-        loopCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        loopCheckBox.setEnabled(false);
-        loopCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        controlPanel.add(loopCheckBox);
-
         playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/sound/Start.gif"))); // NOI18N
         playButton.setToolTipText("Play (F1)");
         playButton.setEnabled(false);
@@ -353,14 +364,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
             }
         });
         controlPanel.add(stopButton);
-
-        minimizeCheckBox.setText("Minimize");
-        minimizeCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minimizeCheckBoxActionPerformed(evt);
-            }
-        });
-        controlPanel.add(minimizeCheckBox);
 
         previousTLIButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/sound/PreviousTLI.gif"))); // NOI18N
         previousTLIButton.setToolTipText("Select previous timeline item (F11)");
@@ -412,49 +415,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         videoPanel.add(videoDisplayPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(videoPanel, java.awt.BorderLayout.CENTER);
-
-        buttonsPanel.setMinimumSize(new java.awt.Dimension(20, 20));
-        buttonsPanel.setLayout(new javax.swing.BoxLayout(buttonsPanel, javax.swing.BoxLayout.Y_AXIS));
-
-        grabButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/sound/Grab.gif"))); // NOI18N
-        grabButton.setToolTipText("Save/Link current video image");
-        grabButton.setEnabled(false);
-        grabButton.setMaximumSize(new java.awt.Dimension(35, 35));
-        grabButton.setMinimumSize(new java.awt.Dimension(35, 35));
-        grabButton.setPreferredSize(new java.awt.Dimension(35, 35));
-        grabButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                grabButtonActionPerformed(evt);
-            }
-        });
-        buttonsPanel.add(grabButton);
-
-        cutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/sound/Cut.gif"))); // NOI18N
-        cutButton.setToolTipText("Save/Link audio snippet");
-        cutButton.setEnabled(false);
-        cutButton.setMaximumSize(new java.awt.Dimension(35, 35));
-        cutButton.setMinimumSize(new java.awt.Dimension(35, 35));
-        cutButton.setPreferredSize(new java.awt.Dimension(35, 35));
-        cutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutButtonActionPerformed(evt);
-            }
-        });
-        buttonsPanel.add(cutButton);
-
-        mediaInfoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/32x32/apps/help-browser.png"))); // NOI18N
-        mediaInfoButton.setToolTipText("Get media info");
-        mediaInfoButton.setMaximumSize(new java.awt.Dimension(35, 35));
-        mediaInfoButton.setMinimumSize(new java.awt.Dimension(35, 35));
-        mediaInfoButton.setPreferredSize(new java.awt.Dimension(35, 35));
-        mediaInfoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mediaInfoButtonActionPerformed(evt);
-            }
-        });
-        buttonsPanel.add(mediaInfoButton);
-
-        getContentPane().add(buttonsPanel, java.awt.BorderLayout.LINE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -581,15 +541,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     public void minimize(boolean mini){
         //sliderPanel.setVisible(!mini);
         //mainPanel.setVisible(!mini);
-        if (minimizeCheckBox.isSelected()!=mini){
-            minimizeCheckBox.setSelected(mini);
-        }
         pack();
     }
     
-    private void minimizeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeCheckBoxActionPerformed
-    }//GEN-LAST:event_minimizeCheckBoxActionPerformed
-
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
     }//GEN-LAST:event_stopButtonActionPerformed
 
@@ -641,9 +595,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         
         
     }//GEN-LAST:event_formComponentResized
-
-    private void mediaInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediaInfoButtonActionPerformed
-    }//GEN-LAST:event_mediaInfoButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -665,7 +616,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox availableFilesComboBox;
-    private javax.swing.JSpinner bufferTimeSpinner;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel controlsPanel;
@@ -680,9 +630,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JCheckBox loopCheckBox;
-    private javax.swing.JButton mediaInfoButton;
-    private javax.swing.JCheckBox minimizeCheckBox;
     private javax.swing.JButton nextTLIButton;
     private javax.swing.JToggleButton pauseToggleButton;
     private javax.swing.JButton playButton;
@@ -979,6 +926,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         internalEndTime = event.getEndTime();
         startPositionLabel.setText(TimeStringFormatter.formatMiliseconds(event.getStartTime(), 1));
         endPositionLabel.setText(TimeStringFormatter.formatMiliseconds(event.getEndTime(), 1));
+        cutButton.setEnabled((internalStartTime!=internalEndTime) && (AudioProcessor.isCuttable(soundFileName)));
     }
 
     

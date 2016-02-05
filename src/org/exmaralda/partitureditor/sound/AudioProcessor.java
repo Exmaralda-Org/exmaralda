@@ -26,7 +26,10 @@ public class AudioProcessor {
     }
     
     public static boolean isCuttable(String pathToSoundFile){
+        if (pathToSoundFile==null) return false;
         File sf = new File(pathToSoundFile);
+        if (!sf.exists()) return false;
+        if (!sf.canRead()) return false;       
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(sf);    
             AudioFormat af = ais.getFormat();        

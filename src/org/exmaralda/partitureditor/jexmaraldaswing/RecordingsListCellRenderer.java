@@ -16,7 +16,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author Schmidt
  */
-class RecordingsListCellRenderer implements ListCellRenderer {
+public class RecordingsListCellRenderer implements ListCellRenderer {
 
     DefaultListCellRenderer dflcr = new DefaultListCellRenderer();
     
@@ -24,12 +24,22 @@ class RecordingsListCellRenderer implements ListCellRenderer {
 
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        String path = (String) value;
-        File file = new File(path);
+        String path = null;
+        File file = null;
+        if (value instanceof File){
+            file = (File)value;
+            path = file.getAbsolutePath();
+        } else {
+            path = (String) value;
+            file = new File(path);
+        }
         //JLabel label = new JLabel();
         JLabel label = (JLabel) dflcr.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         label.setText(file.getName());
-        if (file.getName().toUpperCase().matches("^.*\\.(MP3|WAV|OGG|WMA|AIF)$")){
+        if (path.startsWith("---")){            
+            label.setIcon(new javax.swing.ImageIcon(
+                    getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/status/dialog-error.png")));
+        } else if (file.getName().toUpperCase().matches("^.*\\.(MP3|WAV|OGG|WMA|AIF)$")){
             label.setIcon(new javax.swing.ImageIcon(
                     getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/mimetypes/audio-x-generic.png")));
         } else {

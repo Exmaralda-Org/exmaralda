@@ -47,6 +47,7 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         templateButton.setMinimumSize (new java.awt.Dimension(150, 27));
         templateButton.setText ("Template...");
         templateButton.addActionListener (new java.awt.event.ActionListener () {
+            @Override
             public void actionPerformed (java.awt.event.ActionEvent evt) {
                 templateButtonActionPerformed (evt);
             }
@@ -78,6 +79,10 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         return speakertable;
     }
     
+    public boolean getAutoAdd(){
+        return autoAddSpeakerTiersCheckBox.isSelected();
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -94,6 +99,7 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         addSpeakerButton.setMnemonic('A');
         removeSpeakerButton = new javax.swing.JButton();
         removeSpeakerButton.setMnemonic('R');
+        autoAddSpeakerTiersCheckBox = new javax.swing.JCheckBox();
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         okButton.setMnemonic('O');
@@ -181,6 +187,9 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         speakersButtonPanel.add(removeSpeakerButton);
 
         speakersPanel.add(speakersButtonPanel, java.awt.BorderLayout.SOUTH);
+
+        autoAddSpeakerTiersCheckBox.setText("Auto add one T tier per speaker");
+        speakersPanel.add(autoAddSpeakerTiersCheckBox, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(speakersPanel, java.awt.BorderLayout.WEST);
 
@@ -289,7 +298,6 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(140, 16));
         lUsedPanel.add(jLabel4);
 
-        luLabel.setForeground(java.awt.Color.blue);
         luLabel.setMaximumSize(new java.awt.Dimension(460, 16));
         luLabel.setMinimumSize(new java.awt.Dimension(100, 16));
         luLabel.setPreferredSize(new java.awt.Dimension(130, 16));
@@ -307,7 +315,6 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         jLabel6.setPreferredSize(new java.awt.Dimension(140, 16));
         l1Panel.add(jLabel6);
 
-        l1Label.setForeground(java.awt.Color.blue);
         l1Label.setMaximumSize(new java.awt.Dimension(460, 16));
         l1Label.setMinimumSize(new java.awt.Dimension(100, 16));
         l1Label.setPreferredSize(new java.awt.Dimension(130, 16));
@@ -325,7 +332,6 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         jLabel8.setPreferredSize(new java.awt.Dimension(140, 16));
         l2Panel.add(jLabel8);
 
-        l2Label.setForeground(java.awt.Color.blue);
         l2Label.setMaximumSize(new java.awt.Dimension(460, 16));
         l2Label.setMinimumSize(new java.awt.Dimension(100, 16));
         l2Label.setPreferredSize(new java.awt.Dimension(130, 16));
@@ -540,6 +546,7 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
     private javax.swing.JPanel abbreviationPanel;
     private javax.swing.JTextField abbreviationTextField;
     private javax.swing.JButton addSpeakerButton;
+    private javax.swing.JCheckBox autoAddSpeakerTiersCheckBox;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JScrollPane commentScrollPane;
