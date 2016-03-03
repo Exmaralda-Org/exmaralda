@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- change 03-03-2016: additional namespaces no longer necessary 
+        xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
+        xmlns:standoff="http://standoff.proposal"
+-->        
 <xsl:stylesheet version="2.0"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
         xmlns:tesla="http://www.exmaralda.org" 
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
-        xmlns:standoff="http://standoff.proposal">
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
     
     <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
     
@@ -76,10 +78,11 @@
                                 </application>
                         </appInfo>       
                         <!-- information about the transcription convention used -->
-                        <isoSpoken:transcriptionDesc ident="HIAT" version="2004">
+                        <!-- change 03-03-2016: namespace switch no longer necessary -->
+                        <transcriptionDesc ident="HIAT" version="2004">
                                 <desc><xsl:comment>Fill me in</xsl:comment></desc>
                                 <label><xsl:comment>Fill me in</xsl:comment></label>
-                        </isoSpoken:transcriptionDesc>
+                        </transcriptionDesc>
                 </encodingDesc>
                 <revisionDesc>
                     <!-- ... -->                    
@@ -213,12 +216,13 @@
     <!-- ************************************************* -->
 
     <!-- events from primary transcription tiers with speakers with no immediately preceding event -->
-    <!-- CHANGE FOR ISO: use annotatedU instead of div -->
+    <!-- CHANGE FOR ISO: use annotationBlock instead of div -->
     <xsl:template match="event[../@speaker and ../@type='t']" mode="first-pass">
         <xsl:variable name="DIV_START"><xsl:value-of select="@start"/></xsl:variable>
         <xsl:variable name="DIV_END"><xsl:value-of select="tesla:last-endpoint-of-segment-chain(.)"/></xsl:variable>
-        <!-- CHANGE FOR ISO: who, start and end attributes on annotationGrp instead of on u and as anchors -->
-        <xsl:element name="annotationGrp" xmlns="http://standoff.proposal">            
+        <!-- CHANGE FOR ISO: who, start and end attributes on annotationBlock instead of on u and as anchors -->
+        <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
+        <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
             <xsl:attribute name="who">
                 <xsl:text>#</xsl:text><xsl:value-of select="parent::tier/@speaker"/>
             </xsl:attribute>
@@ -228,7 +232,8 @@
             <xsl:attribute name="end">
                 <xsl:text>#</xsl:text><xsl:value-of select="$DIV_END"/>                
             </xsl:attribute>
-            <xsl:element name="u" xmlns="http://www.tei-c.org/ns/1.0">
+            <!-- change 03-03-2016: namespace switch no longer necessary -->        
+            <xsl:element name="u">
                 <xsl:attribute name="xml:id"><xsl:text>u_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
                 <xsl:value-of select="text()"/>
                 <xsl:if test="following-sibling::event and tesla:timeline-position(@end)&gt;=tesla:timeline-position(following-sibling::event[1]/@start)">

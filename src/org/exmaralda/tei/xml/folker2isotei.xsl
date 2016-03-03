@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- change 03-03-2016: additional namespaces no longer necessary 
+        xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
+        xmlns:standoff="http://standoff.proposal"
+-->        
 <xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:tesla="http://www.exmaralda.org" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
-    xmlns:standoff="http://standoff.proposal">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
     <xsl:output method="xml" encoding="UTF-8"/>
 
     <!-- ******************************************************* -->
@@ -123,10 +126,11 @@
                         </application>
                     </appInfo>       
                     <!-- information about the transcription convention used -->
-                    <isoSpoken:transcriptionDesc ident="cGAT" version="2009">
+                    <!-- change 03-03-2016: namespace switch no longer necessary -->
+                    <transcriptionDesc ident="cGAT" version="2009">
                         <desc><xsl:comment>Fill me in</xsl:comment></desc>
                         <label><xsl:comment>Fill me in</xsl:comment></label>
-                    </isoSpoken:transcriptionDesc>
+                    </transcriptionDesc>
                 </encodingDesc>
                 <revisionDesc>
                     <!-- ... -->                    
@@ -173,7 +177,8 @@
     
     
     <xsl:template match="contribution[@speaker-reference or count(child::*[not(self::pause or self::time)])&gt;0]">
-        <xsl:element name="annotationGrp" xmlns="http://standoff.proposal">            
+        <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
+        <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
             <xsl:if test="@speaker-reference">
                 <xsl:attribute name="who">
                     <xsl:text>#</xsl:text><xsl:value-of select="translate(@speaker-reference, ' ', '_')"/>
@@ -255,8 +260,6 @@
                     </xsl:for-each>
                 </spanGrp>
             </xsl:if>
-            
-            
         </xsl:element> <!-- end annotationGrp -->        
     </xsl:template>
 

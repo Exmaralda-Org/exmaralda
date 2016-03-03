@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- change 03-03-2016: additional namespaces no longer necessary 
+        xmlns:standoff="http://standoff.proposal"
+-->        
 <xsl:stylesheet  version="2.0"
         xmlns="http://www.tei-c.org/ns/1.0" 
         xmlns:tei="http://www.tei-c.org/ns/1.0" 
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
         xmlns:tesla="http://www.exmaralda.org"  
-        xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-        xmlns:standoff="http://standoff.proposal">
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	
 	<!-- I've been having loads of trouble with namespaces in this stylesheet -->
 	<!-- The whole thing could probably look much simpler without these problems -->
@@ -61,7 +63,8 @@
 	
 	<!-- u elements -->
 	<xsl:template match="*:u">
-		<xsl:element name="annotationGrp"  xmlns="http://standoff.proposal">
+		<!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
+		<xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">
 			<xsl:attribute name="who">
 				<xsl:text>#</xsl:text><xsl:value-of select="@who"/>
 			</xsl:attribute>

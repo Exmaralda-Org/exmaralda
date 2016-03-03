@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- change 03-03-2016: additional namespaces no longer necessary 
+        xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
+        xmlns:standoff="http://standoff.proposal"
+-->        
 <xsl:stylesheet version="2.0"  
         xmlns:tesla="http://www.exmaralda.org" 
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
         xmlns:tei="http://www.tei-c.org/ns/1.0" 
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
-        xmlns:standoff="http://standoff.proposal">
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 	<xsl:function name="tesla:determine-recording-type">
@@ -90,8 +92,8 @@
 						</availability>
 						<distributor><xsl:comment>Fill me in</xsl:comment></distributor>
 						<address>
-                                                    <addrLine><xsl:comment>Fill me in</xsl:comment></addrLine>  
-                                                </address>
+                            <addrLine><xsl:comment>Fill me in</xsl:comment></addrLine>  
+                        </address>
 					</publicationStmt>
 					<!-- ***************************************************** -->
 					<sourceDesc>
@@ -138,10 +140,11 @@
 						</application>
 					</appInfo>       
 					<!-- information about the transcription convention used -->
-					<isoSpoken:transcriptionDesc ident="HIAT" version="2004">
+					<!-- change 03-03-2016: namespace switch no longer necessary -->
+					<transcriptionDesc ident="HIAT" version="2004">
 						<desc><xsl:comment>Fill me in</xsl:comment></desc>
-                                                <label><xsl:comment>Fill me in</xsl:comment></label>
-					</isoSpoken:transcriptionDesc>
+                        <label><xsl:comment>Fill me in</xsl:comment></label>
+					</transcriptionDesc>
 				</encodingDesc>
 				<revisionDesc>
 					<!-- ... -->                    
