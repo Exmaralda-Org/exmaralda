@@ -482,14 +482,15 @@ public final class ApplicationControl implements  ListSelectionListener,
     
     public String getDefaultPlayer(){
         // changed 13-04-2015
-        String defaultPlayer = "BAS-Audio-Player";
-        /*String defaultPlayer = "JMF-Player";
+        // changed again 26-02-2016
+        //String defaultPlayer = "BAS-Audio-Player";
+        String defaultPlayer = "JMF-Player";
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("mac")){
             defaultPlayer="ELAN-Quicktime-Player";
         } else if (os.equalsIgnoreCase("win")){
-            defaultPlayer="DirectShow-Player";
-        }*/
+            defaultPlayer="JDS-Player";
+        }
         return defaultPlayer;
     }
 
@@ -498,19 +499,23 @@ public final class ApplicationControl implements  ListSelectionListener,
         
         // set the default player according to os
         String defaultPlayer = getDefaultPlayer();
-        player = new BASAudioPlayer();
+        //player = new BASAudioPlayer();
         
-        // read preferred player from preferences
-        //String playerType = java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).get("PlayerType", defaultPlayer);
-        //System.out.println("Player: " + playerType);
+        //read preferred player from preferences
+        String playerType = java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).get("PlayerType", defaultPlayer);
+        System.out.println("Player: " + playerType);
         // make sure that there is no contradiction between preferred player and os
-        //String os = System.getProperty("os.name").substring(0,3);
-        /*if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("mac")){
+        String os = System.getProperty("os.name").substring(0,3);
+        if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("mac")){
             playerType = "ELAN-Quicktime-Player";
         }
         if (playerType.equals("ELAN-Quicktime-Player") && os.equalsIgnoreCase("win")){
-            playerType = "DirectShow-Player";
+            playerType = "JDS-Player";
         }
+        if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("win")){
+            playerType = "JDS-Player";
+        }
+        
 
         if (playerType.equals("JMF-Player")) {
             player = new JMFPlayer();
@@ -534,8 +539,8 @@ public final class ApplicationControl implements  ListSelectionListener,
             }
         } else {
             player = new JMFPlayer();            
-        }*/
-        //java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).put("PlayerType", playerType);
+        }
+        java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).put("PlayerType", playerType);
     }
 
  

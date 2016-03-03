@@ -132,11 +132,11 @@
     
     <xsl:template match="w" mode="transform-parsed-to-unparsed">
         <xsl:choose>
-            <xsl:when test="@transition='assimilated'">
+            <!-- <xsl:when test="@transition='assimilated'"> -->
                 <!-- change 04-02-2009 -->
-                <xsl:text>_</xsl:text>
-            </xsl:when>
-            <xsl:when test="preceding-sibling::*[1][not(self::time) and not(self::latching) and not(self::boundary) and not(self::comment)]">
+                <!-- <xsl:text>_</xsl:text> -->
+            <!-- </xsl:when> -->
+            <xsl:when test="@transition='assimilated' or (preceding-sibling::*[1][not(self::time) and not(self::latching) and not(self::boundary) and not(self::comment)])">
                 <xsl:text>&#x0020;</xsl:text>
             </xsl:when>
         </xsl:choose>
@@ -171,16 +171,16 @@
         <xsl:if test="preceding-sibling::* and not(preceding-sibling::*[1][self::time])">
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
-        <span class="pause">
+        <!-- <span class="pause">
             <xsl:attribute name="title">Pause</xsl:attribute>
             <xsl:choose>
                 <xsl:when test="@duration='micro'"><xsl:text>(.)</xsl:text></xsl:when>
                 <xsl:when test="@duration='short'"><xsl:text>(-)</xsl:text></xsl:when>
-                <xsl:when test="@duration='medium'"><xsl:text>(--)</xsl:text></xsl:when>
-                <xsl:when test="@duration='long'"><xsl:text>(---)</xsl:text></xsl:when>
+                <xsl:when test="@duration='medium'"><xsl:text>(\-\-)</xsl:text></xsl:when>
+                <xsl:when test="@duration='long'"><xsl:text>(\-\-\-)</xsl:text></xsl:when>
                 <xsl:otherwise><xsl:text>(</xsl:text><xsl:value-of select="@duration"></xsl:value-of><xsl:text>)</xsl:text></xsl:otherwise>
             </xsl:choose>
-        </span>
+        </span> -->
         <xsl:if test="following-sibling::*[1][self::time] or not(following-sibling::*)">
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
@@ -212,11 +212,11 @@
         <xsl:if test="preceding-sibling::* and not(preceding-sibling::*[1][self::time])">
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
-        <span class="nonpho">
+        <!-- <span class="nonpho">
             <xsl:text>((</xsl:text>
             <xsl:value-of select="@description"/>
             <xsl:text>))</xsl:text>
-        </span>
+        </span> -->
         <xsl:if test="following-sibling::*[1][self::time] or not(following-sibling::*)">
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
@@ -249,20 +249,18 @@
         <xsl:if test="preceding-sibling::* and not(preceding-sibling::*[1][self::time])">
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
-        <span class="breathe">
+        <!-- <span class="breathe">
             <xsl:attribute name="title">Ein-/Ausatmen</xsl:attribute>
             <xsl:if test="@type='in'">
-                <!-- change 04-02-2009 -->
                 <xsl:text>°</xsl:text>
             </xsl:if>
             <xsl:for-each select="(1 to @length)">
                 <xsl:text>h</xsl:text>
             </xsl:for-each>
             <xsl:if test="@type='out'">
-                <!-- change 04-02-2009 -->
                 <xsl:text>°</xsl:text>
             </xsl:if>
-        </span>
+        </span> -->
         <xsl:if test="following-sibling::*[1][self::time] or not(following-sibling::*)">
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
@@ -277,9 +275,9 @@
     <!-- *************** START TEMPLATES FOR BASIC TRANSCRIPT ************** -->
     
     <xsl:template match="lengthening" mode="transform-parsed-to-unparsed">
-        <xsl:for-each select="(1 to @degree)">
+        <!-- <xsl:for-each select="(1 to @degree)">
             <xsl:text>:</xsl:text>
-        </xsl:for-each>
+        </xsl:for-each> -->
     </xsl:template>
     
     <xsl:template match="line" mode="transform-parsed-to-unparsed">
@@ -287,17 +285,18 @@
     </xsl:template>
     
     <xsl:template match="stress" mode="transform-parsed-to-unparsed">
-        <xsl:if test="@type='strong'"><xsl:text>!</xsl:text></xsl:if>
+        <!-- <xsl:if test="@type='strong'"><xsl:text>!</xsl:text></xsl:if> -->
         <xsl:apply-templates mode="transform-parsed-to-unparsed"/>
-        <xsl:if test="@type='strong'"><xsl:text>!</xsl:text></xsl:if>
+        <!-- <xsl:if test="@type='strong'"><xsl:text>!</xsl:text></xsl:if> -->
     </xsl:template>
     
     <xsl:template match="stress/text()" mode="transform-parsed-to-unparsed">
-        <xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyzäöü', 'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ')"/>
+        <!-- <xsl:value-of select="translate(., 'abcdefghijklmnopqrstuvwxyzäöü', 'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ')"/> -->
+        <xsl:value-of select="."/>
     </xsl:template>
     
     <xsl:template match="latching" mode="transform-parsed-to-unparsed">
-        <xsl:text>=</xsl:text>
+        <!-- <xsl:text>=</xsl:text> -->
     </xsl:template>
     
     <xsl:template match="boundary" mode="transform-parsed-to-unparsed">
@@ -309,15 +308,15 @@
             <xsl:when test="@movement='high-rise'">?</xsl:when>
             <xsl:otherwise>|</xsl:otherwise>
         </xsl:choose>
-        <xsl:if test="@latching='yes'">=</xsl:if>
-        <xsl:if test="@type='final' and @latching='no'"><xsl:text>&#x0020;</xsl:text></xsl:if>
+        <!-- <xsl:if test="@latching='yes'">=</xsl:if> -->
+        <!-- <xsl:if test="@type='final' and @latching='no'"><xsl:text>&#x0020;</xsl:text></xsl:if> -->
     </xsl:template>
     
     <xsl:template match="comment" mode="transform-parsed-to-unparsed">
-        <xsl:choose>
+        <!-- <xsl:choose>
             <xsl:when test="@position='start'">&#x0020;&lt;&lt;<xsl:value-of select="@description"/>&gt;&#x0020;</xsl:when>
             <xsl:otherwise>&#x0020;&gt;&#x0020;</xsl:otherwise>
-        </xsl:choose>        
+        </xsl:choose> -->        
     </xsl:template>
     
     <!-- *************** END TEMPLATES FOR BASIC TRANSCRIPT ************** -->

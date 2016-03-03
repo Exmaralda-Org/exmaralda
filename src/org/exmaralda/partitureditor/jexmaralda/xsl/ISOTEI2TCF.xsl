@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- change 03-03-2016: additional namespaces no longer necessary 
+        xmlns:standoff="http://standoff.proposal"
+-->        
+
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0" 
     xmlns:tei="http://www.tei-c.org/ns/1.0"
-    xmlns:dspin="http://www.dspin.de/data"
-    xmlns:standoff="http://standoff.proposal"   
+    xmlns:dspin="http://www.dspin.de/data"  
     xmlns:metadata="http://www.dspin.de/data/metadata"
     xpath-default-namespace="xmlns=http://www.dspin.de/data">
     <xsl:template match="/">

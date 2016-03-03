@@ -972,14 +972,16 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     
     public String getDefaultPlayer(){
         // changed 13-04-2015
-        String defaultPlayer = "BAS-Audio-Player";
-        /*String defaultPlayer = "JMF-Player";
+        // changed again 26-02-2015
+        //String defaultPlayer = "BAS-Audio-Player";
+        //String defaultPlayer = "JDS-Player";
+        String defaultPlayer = "JMF-Player";
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("mac")){
             defaultPlayer="ELAN-Quicktime-Player";
         } else if (os.equalsIgnoreCase("win")){
-            defaultPlayer="DirectShow-Player";
-        }*/
+            defaultPlayer="JDS-Player";
+        }
         return defaultPlayer;
     }
 
@@ -1004,7 +1006,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             playerType = "ELAN-Quicktime-Player";
         }
         if (playerType.equals("ELAN-Quicktime-Player") && os.equalsIgnoreCase("win")){
-            playerType = "DirectShow-Player";
+            playerType = "JDS-Player";
+        }
+        if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("win")){
+            playerType = "JDS-Player";
         }
 
         if (playerType.equals("JMF-Player")) {

@@ -62,6 +62,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         Preferences prefs = Preferences.userRoot().node(application.getPreferencesNode());
         String playerType = prefs.get("PlayerType", "JMF-Player");
         jmfRadioButton.setSelected(playerType.equals("JMF-Player"));
+        jdsRadioButton.setSelected(playerType.equals("JDS-Player"));
         elanQuicktimeRadioButton.setSelected(playerType.equals("ELAN-Quicktime-Player"));
         quicktimeRadioButton.setSelected(playerType.equals("Quicktime-Player"));
         directShowRadioButton.setSelected(playerType.equals("DirectShow-Player"));
