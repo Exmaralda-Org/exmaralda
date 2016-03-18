@@ -337,7 +337,7 @@ public class SegmentedTier extends AbstractTier implements XMLable {
     
 }
 
-/*class TLICharPos {
+class TLICharPos {
 
     public String tli;
     public int charpos;
@@ -347,4 +347,4 @@ public class SegmentedTier extends AbstractTier implements XMLable {
         charpos = c;
     }
     
-} */   
+}    
