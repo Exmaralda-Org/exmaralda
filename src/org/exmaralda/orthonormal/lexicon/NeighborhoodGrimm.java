@@ -50,14 +50,14 @@ public class NeighborhoodGrimm {
     }
 
     // the input file with word forms for the child
-    static String FILENAME = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÖRTER_NEIGHBORHOOD\\Kunstwörter in Sampa (1).txt";
+    static String FILENAME = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÃ–RTER_NEIGHBORHOOD\\KunstwÃ¶rter in Sampa (1).txt";
     // the output file
-    static String XML_OUT = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÖRTER_NEIGHBORHOOD\\Kunstwörter_Nachbarn_aus_HADI-BOMP_2.xml";
+    static String XML_OUT = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÃ–RTER_NEIGHBORHOOD\\KunstwÃ¶rter_Nachbarn_aus_HADI-BOMP_2.xml";
     // the phonetic lexicon
     //String LEXICON_NAME = "S:\\TP-Z2\\DATEN\\E3\\Zaba_PBU\\lexicon\\German-UTF8-Final.xml";
-    static String LEXICON_NAME = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÖRTER_NEIGHBORHOOD\\nur die zweisilbigen W_rter aus HADI-BOMP.txt";
+    static String LEXICON_NAME = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÃ–RTER_NEIGHBORHOOD\\nur die zweisilbigen W_rter aus HADI-BOMP.txt";
     // a list of compound phonemes to be replaced with a single symbols
-    static String COMBINATIONS_NAME = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÖRTER_NEIGHBORHOOD\\mehrteilige Phoneme.txt";
+    static String COMBINATIONS_NAME = "C:\\Users\\Schmidt\\Dropbox\\IDS\\Allerlei\\KUNSTWÃ–RTER_NEIGHBORHOOD\\mehrteilige Phoneme.txt";
 
     private void doit(String[] args) throws JDOMException, IOException {
        FILENAME = args[0];

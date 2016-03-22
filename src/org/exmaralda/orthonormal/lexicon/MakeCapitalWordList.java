@@ -58,7 +58,7 @@ public class MakeCapitalWordList {
             int index = nextLine.indexOf(" ");
             if (index<0) continue;
             String form = nextLine.substring(0,index);
-            if (!(form.matches("[A-Za-zÄÖÜäöüß]+"))) continue;
+            if (!(form.matches("[A-Za-zÃ„Ã–ÃœÃ¤Ã¶Ã¼ÃŸ]+"))) continue;
             //System.out.println(form);
             allForms.add(form);
         }
@@ -72,14 +72,14 @@ public class MakeCapitalWordList {
             int index = nextLine.indexOf(" ");
             if (index<0) continue;
             String form = nextLine.substring(0,index);
-            if (!(form.matches("[A-Za-zÄÖÜäöüß]+"))) continue;
+            if (!(form.matches("[A-Za-zÃ„Ã–ÃœÃ¤Ã¶Ã¼ÃŸ]+"))) continue;
             //System.out.println(form);
             allForms.add(form);
         }
         br.close();
 
         for (String form : allForms){
-            if (!(form.matches("^[A-ZÄÖÜ].*"))) continue;
+            if (!(form.matches("^[A-ZÃ„Ã–Ãœ].*"))) continue;
             String lowerForm = form.toLowerCase();
             if (allForms.contains(lowerForm)) continue;
             capitalForms.add(form);
