@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import org.exmaralda.partitureditor.jexmaralda.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
@@ -20,12 +21,15 @@ import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.SentencesLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Sentence;
+import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.tc.api.TextLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Token;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
+import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
+
 
 
 /**
@@ -38,9 +42,10 @@ public class TCFConverter {
 
     TextCorpusStored textCorpus;
 
-    /** Creates a new instance of TextConverter */
+    /** Creates a new instance of TCFConverter */
     public TCFConverter() {}
 
+    /** Read TCF from fis using WLData. */
     public void readText(FileInputStream fis)
     {
         try {
@@ -52,10 +57,16 @@ public class TCFConverter {
         }
     }
 
+    /** Read TCF from a file. 
+     *  @sa readText(FileInputStream)
+     */
     public void readText(File file) throws IOException {
         readText(new FileInputStream(file));
     }
 
+    /** Read encoded TCF from a file.
+     *  @fixme doesn't actually decode.
+     */
     public void readText(File file, String encoding) throws 
         FileNotFoundException, IOException, UnsupportedEncodingException
     {
@@ -63,6 +74,11 @@ public class TCFConverter {
         readText(new FileInputStream(file));
     }
 
+    /** 
+     * Imports some parts of TCF file into tiers.
+     * The timeline is based on the tokens and rests are aligned on their
+     * bounding points. Text is assumed to stretch over all tokens.
+     */
     public BasicTranscription importText(){
         BasicTranscription bt = new BasicTranscription();
         Speakertable st = bt.getHead().getSpeakertable();
@@ -199,7 +215,7 @@ public class TCFConverter {
         } catch (JexmaraldaException ex) {
             ex.printStackTrace();
         }
-        return bt;        
+        return bt;
     }
 
     public static void main(String[] args){
@@ -219,8 +235,100 @@ public class TCFConverter {
 
     public String exportBasicTranscription(BasicTranscription bt) 
             throws IOException {
-       // should create document using WLBLeach
-       return "DANGER TERROR HORROR !!!!!!";
+        Timeline commonTimeline = bt.getBody().getCommonTimeline();
+        // XXX: can I get metadatas
+        TextCorpusStored textCorpus = new TextCorpusStored("unk");
+        // find token tier first, to bind all others to those boundaries
+        Tier tokenTier = null;
+        for (int pos = 0; pos < bt.getBody().getNumberOfTiers(); pos++) {
+            Tier thisTier = bt.getBody().getTierAt(pos);
+            if ((thisTier.getSpeaker() != null) && 
+                    (thisTier.getType().equals("t")) &&
+                    (thisTier.getDisplayName().contains("token"))) {
+                tokenTier = thisTier;
+                break;
+            }
+        }
+        if (tokenTier == null) {
+            throw new
+                IOException("No token tier found for this transcription?");
+        }
+        TokensLayer tokensLayer = textCorpus.createTokensLayer();
+        Map <String, Token> tokenStarts = new HashMap<String, Token>();
+        Map <String, Token> tokenEnds = new HashMap<String, Token>();
+        for (int pos = 0; pos < tokenTier.getNumberOfEvents(); pos++) {
+            Event e = tokenTier.getEventAt(pos);
+            String token_id = "t_" + new Integer(pos + 1).toString();
+            long tokenstart = 0;
+            long tokenend = 0;
+            try {
+                TimelineItem tli = 
+                    commonTimeline.getTimelineItemWithID(e.getStart());
+                tokenstart = Math.round(tli.getTime());
+                tli = commonTimeline.getTimelineItemWithID(e.getEnd());
+                tokenend = Math.round(tli.getTime());
+            }
+            catch (JexmaraldaException je) {
+                je.printStackTrace();
+            }
+            tokensLayer.addToken(e.getDescription(),
+                   tokenstart, tokenend, token_id);
+            Token token = tokensLayer.getToken(token_id);
+            tokenStarts.put(e.getStart(), token);
+            tokenEnds.put(e.getEnd(), token);
+        }
+        // add other tiers back
+        for (int i = 0; i < bt.getBody().getNumberOfTiers(); i++) {
+            Tier thisTier = bt.getBody().getTierAt(i);
+            if (thisTier.getSpeaker() == null) {
+                // XXX: skip no speaker tiers?
+                continue;
+            } else if ((thisTier.getType().equals("t")) &&
+                    (thisTier.getDisplayName().contains("text"))) {
+                // handle text layer
+                Event e = thisTier.getEventAt(0);
+                textCorpus.createTextLayer().addText(e.getDescription());
+            } else if ((thisTier.getType().equals("t")) &&
+                    (thisTier.getDisplayName().contains("sentence"))) {
+                SentencesLayer sentencesLayer = 
+                    textCorpus.createSentencesLayer();
+                for (int j = 0; j < thisTier.getNumberOfEvents(); j++) {
+                    Event e = thisTier.getEventAt(j);
+                    // TODO: calculate span and reconstruct tokens :-///
+                    int sentStart = 
+                        tokenStarts.get(e.getStart()).getOrder();
+                    int sentEnd =
+                        tokenEnds.get(e.getEnd()).getOrder();
+//                    sentencesLayer.addSentence(words, sentStart, sentEnd);
+                }
+            // XXX: Lemmas and poses are 1:1 to tokens for now½!
+            } else if ((thisTier.getType().equals("a")) &&
+                    (thisTier.getDisplayName().contains("lemma"))) {
+                LemmasLayer lemmasLayer = textCorpus.createLemmasLayer();
+                for (int j = 0; j < thisTier.getNumberOfEvents(); j++) {
+                    Event e = thisTier.getEventAt(j);
+                    Token t = tokenStarts.get(e.getStart());
+                    lemmasLayer.addLemma(e.getDescription(), t);
+                }
+            } else if ((thisTier.getType().equals("a")) &&
+                    (thisTier.getDisplayName().contains("POS"))) {
+                // XXX: restore somewhereabouts
+                PosTagsLayer posTagsLayer = 
+                    textCorpus.createPosTagsLayer("UNKNOWN");
+                for (int j = 0; j < thisTier.getNumberOfEvents(); j++) {
+                    Event e = thisTier.getEventAt(j);
+                    Token t = tokenStarts.get(e.getStart());
+                    posTagsLayer.addTag(e.getDescription(), t);
+                }
+            } else {
+                // handle unk tier
+                System.out.println("XXX: missing unk layer handler");
+            }
+        }
+        OutputStream bytes = new ByteArrayOutputStream();
+        WLData wlData = new WLData(textCorpus);
+        WLDObjector.write(wlData, bytes);
+        return bytes.toString();
     }
 
     public void writeText(BasicTranscription bt, File file) throws IOException {
