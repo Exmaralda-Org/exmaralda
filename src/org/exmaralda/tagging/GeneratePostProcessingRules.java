@@ -52,14 +52,14 @@ public class GeneratePostProcessingRules {
             if (f.getName().startsWith("SEDM")) continue;
             if (f.getName().startsWith("SEQ")) continue;
             
-            // erst mal alles zurücksetzen
+            // erst mal alles zurÃ¼cksetzen
             if (true) continue;
                         
             System.out.println("Processing " + f.getName());
             String tag = f.getName().substring(0,f.getName().indexOf("."));
             /* <rule>
-                <!-- Häsitationspartikel -->
-                <match field="n">äh</match>
+                <!-- HÃ¤sitationspartikel -->
+                <match field="n">Ã¤h</match>
                 <set field="pos">PTKHES</set>
             </rule> */
             Element rule = new Element("rule");

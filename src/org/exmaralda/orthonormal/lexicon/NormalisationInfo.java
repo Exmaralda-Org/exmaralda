@@ -25,10 +25,10 @@ public class NormalisationInfo {
     }
 
     NormalisationInfo(Element e) {
-        /* <entry form="schätze">
-            <n corr="Schätze" freq="5"/>
-            <n corr="schätzen" freq="1"/>
-            <n corr="schätze" freq="10"/>
+        /* <entry form="schÃ¤tze">
+            <n corr="SchÃ¤tze" freq="5"/>
+            <n corr="schÃ¤tzen" freq="1"/>
+            <n corr="schÃ¤tze" freq="10"/>
         </entry> */
         form = e.getAttributeValue("form");
         for (Object o : e.getChildren("n")){
