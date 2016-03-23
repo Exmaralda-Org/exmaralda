@@ -60,48 +60,60 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
          Map<String, Double> totalLabelTimes = new HashMap<String, Double>();
          for (int i = 0; i < bt.getBody().getNumberOfTiers(); i++) {
             Tier tier = bt.getBody().getTierAt(i);
-            html += "<tr><th colspan='2'>" + 
-                tier.getDescription(bt.getHead().getSpeakertable()) + 
-                "</th></tr>\n";
-            Map<String, Double> labelTimes = new HashMap<String, Double>();
-            for (int j = 0; j < tier.getNumberOfEvents(); j++) {
-                Event e = tier.getEventAt(j);
-                try {
-                    double timestart = commonTimeline.getTimelineItemWithID(
-                            e.getStart()).getTime();
-                    double timeend = commonTimeline.getTimelineItemWithID(
-                            e.getEnd()).getTime();
-                    double time = timeend - timestart;
-                    String descr = e.getDescription().trim();
-                    if (labelTimes.containsKey(descr)) {
-                        double newtime = labelTimes.get(descr) + time;
-                        labelTimes.put(descr, newtime);
-                    } else {
-                        labelTimes.put(descr, time);
+            System.out.println(tier.getType());
+            if (tier.getType().equals("a")) {
+                html += "<tr><th colspan='2'>" + 
+                    tier.getDescription(bt.getHead().getSpeakertable()) + 
+                    "</th></tr>\n";
+                Map<String, Double> labelTimes = new HashMap<String, Double>();
+                for (int j = 0; j < tier.getNumberOfEvents(); j++) {
+                    Event e = tier.getEventAt(j);
+                    try {
+                        double timestart = commonTimeline.getTimelineItemWithID(
+                                e.getStart()).getTime();
+                        double timeend = commonTimeline.getTimelineItemWithID(
+                                e.getEnd()).getTime();
+                        double time = timeend - timestart;
+                        String descr = e.getDescription().trim();
+                        if (labelTimes.containsKey(descr)) {
+                            double newtime = labelTimes.get(descr) + time;
+                            labelTimes.put(descr, newtime);
+                        } else {
+                            labelTimes.put(descr, time);
+                        }
+                        if (totalLabelTimes.containsKey(descr)) {
+                            double newtime = totalLabelTimes.get(descr) + time;
+                            totalLabelTimes.put(descr, newtime);
+                        } else {
+                            totalLabelTimes.put(descr, time);
+                        }
+                    } catch (JexmaraldaException je) {
+                        je.printStackTrace();
                     }
-                    if (totalLabelTimes.containsKey(descr)) {
-                        double newtime = totalLabelTimes.get(descr) + time;
-                        totalLabelTimes.put(descr, newtime);
+                }
+                for (Map.Entry<String, Double> entry : labelTimes.entrySet()) {
+                    if (entry.getKey().length() < 32) {
+                        html += "<tr><td>" + entry.getKey() + "</td>\n<td>" + 
+                            TimeStringFormatter.formatMiliseconds(
+                                    entry.getValue() * 1000.0, 2) + "</td></tr>\n";
                     } else {
-                        totalLabelTimes.put(descr, time);
+                        html += "<tr><td>" + entry.getKey().substring(0, 32) + 
+                            "<span style='color:red'>... [[truncated]]</span>" +
+                            "</td>\n<td>" + TimeStringFormatter.formatMiliseconds(
+                                    entry.getValue() * 1000.0, 2) +
+                            "</td></tr>\n";
                     }
-                } catch (JexmaraldaException je) {
-                    je.printStackTrace();
-                    // we cannot do anything here
                 }
-            }
-            for (Map.Entry<String, Double> entry : labelTimes.entrySet()) {
-                if (entry.getKey().length() < 32) {
-                    html += "<tr><td>" + entry.getKey() + "</td>\n<td>" + 
-                        TimeStringFormatter.formatMiliseconds(
-                                entry.getValue() * 1000.0, 2) + "</td></tr>\n";
-                } else {
-                    html += "<tr><td>" + entry.getKey().substring(0, 32) + 
-                        "<span style='color:red'>... [[truncated]]</span>" +
-                        "</td>\n<td>" + TimeStringFormatter.formatMiliseconds(
-                                entry.getValue() * 1000.0, 2) +
-                        "</td></tr>\n";
-                }
+            } else {
+                // I guess for non-annotation tiers just do something
+                html += "<tr><th colspan='2'>" + 
+                    tier.getDescription(bt.getHead().getSpeakertable()) + 
+                    "</th></tr>\n";
+                html += "<tr><td><em>text-type tier</em></td>\n";
+                html += "<td>" +
+                    TimeStringFormatter.formatMiliseconds(
+                            tier.calculateEventTime(commonTimeline) * 1000.0,
+                            2) + "</td></tr>\n";
             }
          }
          html += "<tr><th colspan='2'><strong>Totals</strong></th></tr>\n";
