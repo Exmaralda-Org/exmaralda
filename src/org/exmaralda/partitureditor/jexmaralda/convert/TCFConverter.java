@@ -1,235 +1,173 @@
-/**
- * @file TCFConverter.java
+/*
+ * TEIConverter.java
  *
- * 
+ * Created on 12. August 2004, 17:24
  */
 
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import java.io.*;
-import java.util.*;
-import java.util.regex.*;
 
-// using wlfxb for conversions
-import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamed;
-import eu.clarin.weblicht.wlfxb.io.WLDObjector;
-import eu.clarin.weblicht.wlfxb.io.WLFormatException;
-import eu.clarin.weblicht.wlfxb.tc.api.Lemma;
-import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.SentencesLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.Sentence;
-import eu.clarin.weblicht.wlfxb.tc.api.TextLayer;
-import eu.clarin.weblicht.wlfxb.tc.api.Token;
-import eu.clarin.weblicht.wlfxb.tc.api.PosTag;
-import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
-import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
-import eu.clarin.weblicht.wlfxb.xb.WLData;
+import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.exmaralda.partitureditor.fsm.FSMException;
+import org.exmaralda.partitureditor.jexmaralda.*;
 
+import org.jdom.JDOMException;
+import org.jdom.transform.XSLTransformException;
+import org.xml.sax.SAXException;
+
+import org.exmaralda.common.corpusbuild.FileIO;
+import org.exmaralda.common.corpusbuild.TEIMerger;
+import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.Namespace;
+import org.jdom.xpath.XPath;
 
 /**
- * @author thomas
- * @author tpirinen
  *
- * @note TCF converter copied from TreeTaggerConverter.
+ * @author  thomas
  */
 public class TCFConverter {
+    
+    static String TCF_STYLESHEET_PATH = "/org/exmaralda/partitureditor/jexmaralda/xsl/ISOTEI2TCF.xsl";
+    
 
-    TextCorpusStored textCorpus;
-
-    /** Creates a new instance of TextConverter */
-    public TCFConverter() {}
-
-    public void readText(FileInputStream fis)
-    {
-        try {
-            WLDObjector wldo = new WLDObjector();
-            WLData data = wldo.read(fis);
-            textCorpus = data.getTextCorpus();
-        } catch (WLFormatException wlfe) {
-            wlfe.printStackTrace();
-        }
+    
+    /** Creates a new instance of TEIConverter */
+    public TCFConverter() {
     }
-
-    public void readText(File file) throws IOException {
-        readText(new FileInputStream(file));
+    
+    public BasicTranscription readTCFFromFile(String path) { 
+        // TODO
+        return null;
     }
-
-    public void readText(File file, String encoding) throws 
-        FileNotFoundException, IOException, UnsupportedEncodingException
-    {
-        // XXX: encoding
-        readText(new FileInputStream(file));
+    
+    
+    public void writeHIATTCFToFile(BasicTranscription bt, String filename) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              Exception {
+        writeHIATTCFToFile(bt, filename, "de");
+        
     }
-
-    public BasicTranscription importText(){
-        BasicTranscription bt = new BasicTranscription();
-        Speakertable st = bt.getHead().getSpeakertable();
-        Speaker speaker = new Speaker();
-        speaker.setID("SPK0");
-        speaker.setAbbreviation("X");
-        try {
-            st.addSpeaker(speaker);
-        } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
-        }
-        Timeline timeline = bt.getBody().getCommonTimeline();
-        String tliStart = timeline.addTimelineItem();
-
-        // do we always have tokens, right?
-        Tier tokenTier = new Tier();
-        tokenTier.setID("TIE0");
-        tokenTier.setCategory("txt");
-        tokenTier.setType("t");
-        tokenTier.setDisplayName("X [token]");
-        tokenTier.setSpeaker("SPK0");
-
-        Map<String, String> tokenStartTimelineItems =
-            new HashMap<String, String>();
-        Map<String, String> tokenEndTimelineItems =
-            new HashMap<String, String>();
-
-        // collect tokens for later use, as main id points
-        String tli = tliStart;
-        for (int i = 0; i < textCorpus.getTokensLayer().size(); i++) {
-            Token token = textCorpus.getTokensLayer().getToken(i);
-            Event e = new Event();
-            e.setDescription(token.getString());
-            tokenStartTimelineItems.put(token.getID(), tli);
-            e.setStart(tli);
-            tli = timeline.addTimelineItem();
-            e.setEnd(tli);
-            tokenEndTimelineItems.put(token.getID(), tli);
-            tokenTier.addEvent(e);
-        }
-        String tliEnd = tli;
-
-        // text layer covers whole timeline?
-        Tier textTier = new Tier();
-        textTier.setID("TIE1");
-        textTier.setCategory("txt");
-        textTier.setType("t");
-        textTier.setDisplayName("X [txt]");
-        textTier.setSpeaker("SPK0");
-        TextLayer text = textCorpus.getTextLayer();
-        Event e = new Event();
-        e.setStart(tliStart);
-        e.setDescription(text.getText());
-        e.setEnd(tliEnd);
-        textTier.addEvent(e);
-
-        // sentences cover some subsets
-        Tier sentenceTier = new Tier();
-        sentenceTier.setID("TIE4");
-        sentenceTier.setCategory("txt");
-        sentenceTier.setType("t");
-        sentenceTier.setDisplayName("X [sent]");
-        sentenceTier.setSpeaker("SPK0");
-        SentencesLayer sents = textCorpus.getSentencesLayer();
-        for (int i = 0; i < sents.size(); i++) {
-            Sentence sentence = sents.getSentence(i);
-            Token[] tokenses = sents.getTokens(sentence);
-            String descr = "";
-            for (int j = 0; j < tokenses.length; j++) {
-                descr = descr + " " + tokenses[j].getString();
-            }
-            e = new Event();
-            String tliStartNow = 
-                tokenStartTimelineItems.get(tokenses[0].getID());
-            e.setStart(tliStartNow);
-            e.setDescription(descr);
-            String tliEndNow = tokenEndTimelineItems.get(
-                tokenses[tokenses.length - 1].getID());
-            e.setEnd(tliEndNow);
-            sentenceTier.addEvent(e);
-        }
-
-        // other layers?  (this starts to be a bit of copy-pasta)
-        // please to be refactoring next time you see this...
-        Tier posTier = new Tier();
-        posTier.setID("TIE2");
-        posTier.setCategory("pos");
-        posTier.setType("a");
-        posTier.setDisplayName("X [pos]");
-        posTier.setSpeaker("SPK0");
-        PosTagsLayer poses = textCorpus.getPosTagsLayer();
-        for (int i = 0; i < poses.size(); i++) {
-            PosTag pos = poses.getTag(i);
-            e = new Event();
-            e.setDescription(pos.getString());
-            Token[] tokenses = poses.getTokens(pos);
-            String tliStartNow = 
-                tokenStartTimelineItems.get(tokenses[0].getID());
-            e.setStart(tliStartNow);
-            String tliEndNow = tokenEndTimelineItems.get(
-                tokenses[tokenses.length - 1].getID());
-            e.setEnd(tliEndNow);
-            posTier.addEvent(e);
-        }
-        // Lemmas
-        Tier lemmaTier = new Tier();
-        lemmaTier.setID("TIE3");
-        lemmaTier.setCategory("lemma");
-        lemmaTier.setType("a");
-        lemmaTier.setDisplayName("X [lemma]");
-        lemmaTier.setSpeaker("SPK0");
-        LemmasLayer lemmas = textCorpus.getLemmasLayer();
-        for (int i = 0; i < lemmas.size(); i++) {
-            Lemma lemma = lemmas.getLemma(i);
-            e = new Event();
-            e.setDescription(lemma.getString());
-            Token[] tokenses = lemmas.getTokens(lemma);
-            String tliStartNow = 
-                tokenStartTimelineItems.get(tokenses[0].getID());
-            e.setStart(tliStartNow);
-            String tliEndNow = tokenEndTimelineItems.get(
-                    tokenses[tokenses.length - 1].getID());
-            e.setEnd(tliEndNow);
-            lemmaTier.addEvent(e);
-        }
-
-
-        try {
-            bt.getBody().addTier(tokenTier);
-            bt.getBody().addTier(textTier);
-            bt.getBody().addTier(sentenceTier);
-            bt.getBody().addTier(posTier);
-            bt.getBody().addTier(lemmaTier);
-        } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
-        }
-        return bt;        
+    public void writeHIATTCFToFile(BasicTranscription bt, String filename, String language) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              Exception {
+        writeTCFToFile(bt, filename, language, "HIAT");
     }
-
-    public static void main(String[] args){
-        try {
-            File f = new File("tcf04-karin-wl.xml");
-            TCFConverter tc = new TCFConverter();
-            tc.readText(f);
-            BasicTranscription bt = tc.importText();
-            bt.writeXMLToFile("tcf04-karin-wl.exb", "none");
-            System.out.println(tc.importText().toXML());
-        } catch (PatternSyntaxException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    
+    public void writeTCFToFile(BasicTranscription bt, String filename, String language, String segmentationName) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              Exception {
+    
+        BasicTranscription copyBT = bt.makeCopy();
+        copyBT.normalize();        
+        System.out.println("started writing document...");
+        
+        AbstractSegmentation segmentation = null;
+        if ("HIAT".equals(segmentationName)){
+            segmentation = new HIATSegmentation();
+        } else if ("cGAT Minimal".equals(segmentationName)){
+            segmentation = new cGATMinimalSegmentation();                                                                      
+        } else {
+            segmentation = new GenericSegmentation();
         }
-    }
-
-    public String exportBasicTranscription(BasicTranscription bt) 
-            throws IOException {
-       // should create document using WLBLeach
-       return "DANGER TERROR HORROR !!!!!!";
-    }
-
-    public void writeText(BasicTranscription bt, File file) throws IOException {
-        String text = exportBasicTranscription(bt);
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(text.getBytes("UTF-8"));
-        fos.close();
+        
+        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
+        System.out.println("Segmented transcription created");
+        
+        String nameOfDeepSegmentation = "SpeakerContribution_Word";
+        if ("HIAT".equals(segmentationName)){
+            nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
+        }
+        
+        TEIMerger teiMerger = new TEIMerger(true);
+        Document stdoc = FileIO.readDocumentFromString(st.toXML());
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
+        System.out.println("Merged");
+        generateWordIDs(teiDoc);
+        
+        
+        StylesheetFactory ssf = new StylesheetFactory(true);
+        String tcf = ssf.applyInternalStylesheetToString(TCF_STYLESHEET_PATH, IOUtilities.documentToString(teiDoc));
+        Document tcfDoc = FileIO.readDocumentFromString(tcf);
+                
+        // set the language (not too elegant...)
+        XPath xp = XPath.newInstance("//tcf:TextCorpus");
+        xp.addNamespace("tcf", "http://www.dspin.de/data/textcorpus");        
+        Element textCorpusElement = (Element) xp.selectSingleNode(tcfDoc);
+        textCorpusElement.setAttribute("lang", language);
+        
+        FileIO.writeDocumentToLocalFile(filename, tcfDoc);
+        System.out.println("document written.");        
         
     }
     
+    public void writeFOLKERTCFToFile(Document flnDoc, String absolutePath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException {
+        StylesheetFactory sf = new StylesheetFactory(true);
+        
+        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2isotei.xsl", IOUtilities.documentToString(flnDoc));
+        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        generateWordIDs(teiDoc);
+        
+        String tcf = sf.applyInternalStylesheetToString(TCF_STYLESHEET_PATH, IOUtilities.documentToString(teiDoc));
+        Document tcfDoc = FileIO.readDocumentFromString(tcf);
+        
+        IOUtilities.writeDocumentToLocalFile(absolutePath, tcfDoc);                
+    }
+    
+    
+
+    //****************************************************
+    //********* private processing methods ***************
+    //****************************************************
+
+    private void generateWordIDs(Document document) throws JDOMException{
+        XPath wordXPath = XPath.newInstance("//tei:w"); 
+        wordXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        
+        List words = wordXPath.selectNodes(document);
+        int count=0;
+        for (Object o : words){
+            count++;
+            Element word = (Element)o;
+            String wordID = "w" + Integer.toString(count);
+            //System.out.println("*** " + wordID);
+            word.setAttribute("id", wordID, Namespace.XML_NAMESPACE);
+        }
+        
+        // new 02-12-2014
+        XPath pcXPath = XPath.newInstance("//tei:pc"); 
+        pcXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        
+        List pcs = pcXPath.selectNodes(document);
+        count=0;
+        for (Object o : pcs){
+            count++;
+            Element pc = (Element)o;
+            String pcID = "pc" + Integer.toString(count);
+            //System.out.println("*** " + wordID);
+            pc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
+        }
+    }
+
+    
+
     
 }
