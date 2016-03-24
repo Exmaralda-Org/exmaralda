@@ -206,6 +206,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             } else {
                 return;
             }
+        } else if (selectedFileFilter==dialog.TCFFileFilter) {
+            TCFConverter tc = new TCFConverter();
+            importedTranscription = tc.readTCFFromFile(filename);
         }
         
 
