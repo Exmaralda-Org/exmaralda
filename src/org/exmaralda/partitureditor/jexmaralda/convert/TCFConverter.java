@@ -1,7 +1,10 @@
 /**
  * @file TCFConverter.java
  *
- * 
+ * Convert to and from TCF format. This version is based on weblicht wlfxb
+ * libraries, you need to have wlfxb.jar and oaipmh-cmdi-bindings.jar on your
+ * classpath. I (tommi) used wlfxb-1.3.4-SNAPSHOT.jar and
+ * oaipmh-cmdi-bindings-1.0.6-SNAPSHOT.jar from March 2016 github master.
  */
 
 package org.exmaralda.partitureditor.jexmaralda.convert;
