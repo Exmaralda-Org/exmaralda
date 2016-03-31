@@ -17,6 +17,7 @@ import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
 import org.exmaralda.common.corpusbuild.FileIO;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.interlinearText.*;
 import org.exmaralda.partitureditor.interlinearText.swing.ChooseSettingsForXMLExportPanel;
 import org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation;
@@ -150,6 +151,8 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             exportHTMLSegmentChainListWithHTML5Audio(trans, filename);
         } else if (selectedFileFilter==dialog.GATTranscriptFileFilter){
             exportGATTranscript(trans, filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
+        } else if (selectedFileFilter==dialog.GATWithHTML5AudioFileFilter){
+            exportGATWithHTML5Audio(trans, filename);
         } else if (selectedFileFilter==dialog.SimpleTextTranscriptFileFilter){
             exportSimpleTextTranscript(trans, filename);
         }
@@ -449,6 +452,24 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
         table.htmlDirectory = filename;
         table.htmlParameters.additionalStuff = "";                
+        
+    }
+    
+    void exportGATWithHTML5Audio(BasicTranscription bt, String filename) throws FSMException, SAXException, JexmaraldaException, FileNotFoundException, ParserConfigurationException, IOException, TransformerException{
+         // segment the basic transcription and transform it into a list transcription
+         GATSegmentation segmenter = new org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation(table.gatFSM);
+         ListTranscription lt = segmenter.BasicToIntonationUnitList(bt);     
+         //lt.writeXMLToFile("C:\\Users\\Schmidt\\Dropbox\\JensLanwer\\ListTranscription.xml", "none");
+         Document xml = GATSegmentation.toXML(lt);
+         
+         StylesheetFactory sf = new StylesheetFactory(true);
+         String html = sf.applyInternalStylesheetToString("/org/exmaralda/partitureditor/jexmaralda/xsl/GAT2HTML5.xsl", IOUtilities.documentToString(xml));
+
+         System.out.println("started writing document...");
+         FileOutputStream fos = new FileOutputStream(new File(filename));
+         fos.write(html.getBytes("UTF-8"));
+         fos.close();
+         System.out.println("document written.");                               
         
     }
     

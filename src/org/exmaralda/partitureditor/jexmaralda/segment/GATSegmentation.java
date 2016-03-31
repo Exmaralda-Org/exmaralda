@@ -11,6 +11,8 @@ import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.fsm.FiniteStateMachine;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import java.util.*;
+import org.jdom.Document;
+import org.jdom.Element;
 import org.xml.sax.*;
 
 /**
@@ -18,7 +20,7 @@ import org.xml.sax.*;
  * @author  thomas
  */
 public class GATSegmentation extends AbstractSegmentation {
-    
+   
     private final String intonationUnitFSM = "/org/exmaralda/partitureditor/fsm/xml/GAT_Phrasierungseinheit.xml";
     
     /** Creates a new instance of GATSegmentation */
@@ -87,7 +89,15 @@ public class GATSegmentation extends AbstractSegmentation {
          return lt;
     }
     
-    public static String toText(ListTranscription lt) throws JexmaraldaException {
+    /**********************************************************************************/
+    /**********************************************************************************/
+    /**********************************************************************************/
+    /**********************************************************************************/
+    /**********************************************************************************/
+    
+
+    private static ArrayList<GATLine> toGATLines(ListTranscription lt) throws JexmaraldaException {
+        Timeline timeline = lt.getBody().getCommonTimeline();
         Speakertable speakertable = lt.getHead().getSpeakertable();
         // determine the longest speaker abbreviation
         int longestAbbLength = 0;
@@ -115,43 +125,57 @@ public class GATSegmentation extends AbstractSegmentation {
             }
         }
         
-        StringBuilder output = new StringBuilder();
+        //StringBuilder output = new StringBuilder();
         String lastSpeaker = "";
         HashMap<String,Integer> openingBracketPositions = new HashMap<String,Integer>();
         HashMap<String,Integer> closingBracketPositions = new HashMap<String,Integer>();
+        ArrayList<GATLine> result = new ArrayList<GATLine>();
         for (int pos=0; pos<body.getNumberOfSpeakerContributions(); pos++){
+            GATLine thisGATLine = new GATLine();
+            
             SpeakerContribution sc = body.getSpeakerContributionAt(pos);
+            
+            String startID = sc.getMain().getStart();
+            String endID = sc.getMain().getEnd();
+            double startTime = timeline.getTimelineItemWithID(startID).getTime();
+            double endTime = timeline.getTimelineItemWithID(endID).getTime();
+            thisGATLine.start = startTime;
+            thisGATLine.end = endTime;
+            
+            
             // flag for recording problems in overlap alignment
             boolean isOverlapProblem = false;
 
             // Zeilennummerierung
-            if (pos+1<10) output.append("0");
-            if (pos+1<100) output.append("0");
-            if (body.getNumberOfSpeakerContributions()>999 && pos+1<1000) output.append("0");
-            output.append(Integer.toString(pos+1));
-            output.append("  ");
+            String lineNumber = "";
+            if (pos+1<10) lineNumber+="0";
+            if (pos+1<100) lineNumber+="0";
+            if (body.getNumberOfSpeakerContributions()>999 && pos+1<1000) lineNumber+="0";;
+            lineNumber+=Integer.toString(pos+1);
+            thisGATLine.lineNumber = lineNumber;
             
             // Sprecherkuerzel
+            String speaker = "";
             String thisSpeaker = sc.getSpeaker();
-            if (thisSpeaker==null){
-                
+            if (thisSpeaker==null){                
             } else if (!thisSpeaker.equals(lastSpeaker)){
-                output.append(speakertable.getSpeakerWithID(thisSpeaker).getAbbreviation());
-                output.append(":");
+                speaker+=speakertable.getSpeakerWithID(thisSpeaker).getAbbreviation();
+                speaker+=":";
             } else {
                 for (int s=0; s<=speakertable.getSpeakerWithID(thisSpeaker).getAbbreviation().length(); s++){
-                    output.append(" ");
+                    speaker+=" ";
                 }
             }
             // Sprecherkuerzelausgleich
             if (thisSpeaker!=null){
                 for (int i=0; i<longestAbbLength-speakertable.getSpeakerWithID(thisSpeaker).getAbbreviation().length(); i++){
-                    output.append(" ");
+                    speaker+=" ";
                 }
             }
-            output.append("  ");
+            thisGATLine.speakerAbb = speaker;
             
             // Text
+            StringBuilder lineText = new StringBuilder();
             TimedSegment ts = sc.getMain();
             Vector v = ts.getAllSegmentsWithName("e.pe");
             int textPosition = 0;
@@ -173,7 +197,7 @@ public class GATSegmentation extends AbstractSegmentation {
                         // this is the place where the magic happens
                         int numberOfSpaces = bracketPosition-textPosition;
                         for (int j=0; j<numberOfSpaces; j++){
-                            output.append(" ");
+                            lineText.append(" ");
                             textPosition++;
                         }
                         //textPosition=bracketPosition;
@@ -182,7 +206,7 @@ public class GATSegmentation extends AbstractSegmentation {
                         // text position is already beyond the place where the bracket should appear
                         isOverlapProblem = true;                        
                     }
-                    output.append("[");
+                    lineText.append("[");
                     if (!(openingBracketPositions.containsKey(epe.getStart()))){
                         openingBracketPositions.put(epe.getStart(), textPosition);
                     }
@@ -190,7 +214,7 @@ public class GATSegmentation extends AbstractSegmentation {
                 }
                 
                 // the text
-                output.append(epe.getDescription());
+                lineText.append(epe.getDescription());
                 textPosition+=epe.getDescription().length();
                 
                 // closing bracket if appropriate
@@ -206,7 +230,7 @@ public class GATSegmentation extends AbstractSegmentation {
                         // this is the place where the magic happens
                         int numberOfSpaces = bracketPosition-textPosition;                        
                         for (int j=0; j<numberOfSpaces; j++){
-                            output.append(" ");
+                            lineText.append(" ");
                             textPosition++;
                         }
                         //textPosition=bracketPosition;
@@ -215,7 +239,7 @@ public class GATSegmentation extends AbstractSegmentation {
                         // text position is already beyond the place where the bracket should appear
                         isOverlapProblem = true;                        
                     }
-                    output.append("]");
+                    lineText.append("]");
                     if (!(closingBracketPositions.containsKey(epe.getEnd()))){
                         closingBracketPositions.put(epe.getEnd(), textPosition);
                     }
@@ -227,12 +251,53 @@ public class GATSegmentation extends AbstractSegmentation {
                 //output.append("\t").append("{*** OVERLAP MANUELL BEARBEITEN! ***}");
             }
             
-            output.append(System.getProperty("line.separator"));
+            thisGATLine.text = lineText.toString();
+            
+            result.add(thisGATLine);
+            
             lastSpeaker = thisSpeaker;
+            
+            
+        } 
+        
+        return result;
+    }
+    
+    
+    public static String toText(ListTranscription lt) throws JexmaraldaException {
+        ArrayList<GATLine> gatLines = toGATLines(lt);
+        StringBuilder output = new StringBuilder();
+        for (GATLine gl : gatLines){
+            output.append(gl.lineNumber).append(" ");
+            output.append(gl.speakerAbb).append("  ");
+            output.append(gl.text).append(System.getProperty("line.separator"));
         }
-
         return output.toString();
     }
+    
+    public static Document toXML(ListTranscription lt) throws JexmaraldaException {
+        ArrayList<GATLine> gatLines = toGATLines(lt);
+        Document result = new Document(new Element("gat-transcript"));
+        result.getRootElement().setAttribute("audio", lt.getHead().getMetaInformation().getReferencedFile("wav"));
+        
+        for (GATLine gl : gatLines){
+            Element lineElement = new Element("gat-line");            
+            lineElement.setAttribute("start", Double.toString(gl.start));
+            lineElement.setAttribute("end", Double.toString(gl.end));
+            lineElement.setAttribute("number", gl.lineNumber);
+            result.getRootElement().addContent(lineElement);
+            
+            Element speakerElement = new Element("speaker");
+            speakerElement.addContent(new org.jdom.CDATA(gl.speakerAbb));
+            lineElement.addContent(speakerElement);
+            
+            Element textElement = new Element("text");
+            textElement.addContent(new org.jdom.CDATA(gl.text));
+            lineElement.addContent(textElement);
+        }
+        return result;
+    }
+    
     
     @Override
     public Vector getSegmentationErrors(BasicTranscription bt) throws SAXException {
@@ -259,6 +324,18 @@ public class GATSegmentation extends AbstractSegmentation {
              }
          }
          return result;
+    }
+
+    private static class GATLine {
+
+        String lineNumber;
+        String speakerAbb;
+        String text;
+        double start;
+        double end;
+        
+        public GATLine() {
+        }
     }
     
     

@@ -54,6 +54,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("HTML5List")) {dialog.setFileFilter(dialog.HTMLSegmentChainWithHTML5AudioFileFilter);}
             else if (lastFileFilter.equals("ExmaraldaSegmented")) {dialog.setFileFilter(dialog.ExmaraldaSegmentedTranscriptionFileFilter);}
             else if (lastFileFilter.equals("GATTranscript")) {dialog.setFileFilter(dialog.GATTranscriptFileFilter);}
+            else if (lastFileFilter.equals("GATHTML5")) {dialog.setFileFilter(dialog.GATWithHTML5AudioFileFilter);}
             else if (lastFileFilter.equals("SimpleTextTranscript")) {dialog.setFileFilter(dialog.SimpleTextTranscriptFileFilter);}
             else if (lastFileFilter.equals("CHATTranscript")) {dialog.setFileFilter(dialog.CHATTranscriptFileFilter);}
             else if (lastFileFilter.equals("FOLKERTranscription")) {dialog.setFileFilter(dialog.FOLKERTranscriptionFileFilter);}
@@ -101,6 +102,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.HTMLSegmentChainWithHTML5AudioFileFilter) {lastFileFilter = "HTML5List";}
             else if (selectedFileFilter==dialog.ExmaraldaSegmentedTranscriptionFileFilter) {lastFileFilter = "ExmaraldaSegmented";}
             else if (selectedFileFilter==dialog.GATTranscriptFileFilter) {lastFileFilter = "GATTranscript";}
+            else if (selectedFileFilter==dialog.GATWithHTML5AudioFileFilter) {lastFileFilter = "GATHTML5";}
             else if (selectedFileFilter==dialog.SimpleTextTranscriptFileFilter) {lastFileFilter = "SimpleTextTranscript";}            
             else if (selectedFileFilter==dialog.CHATTranscriptFileFilter) {lastFileFilter = "CHATTranscript";}
             else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter) {lastFileFilter = "FOLKERTranscription";}

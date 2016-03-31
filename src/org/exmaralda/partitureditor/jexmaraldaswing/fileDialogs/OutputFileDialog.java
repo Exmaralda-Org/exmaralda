@@ -48,7 +48,9 @@ public final class OutputFileDialog extends AbstractFileFilterDialog implements 
         addChoosableFileFilter(HTMLSegmentChainFileFilter);
         addChoosableFileFilter(HTMLSegmentChainWithHTML5AudioFileFilter);
         addChoosableFileFilter(GATTranscriptFileFilter);
+        addChoosableFileFilter(GATWithHTML5AudioFileFilter);
         addChoosableFileFilter(SimpleTextTranscriptFileFilter);
+        
         // from here on: not so useful outputs
         addChoosableFileFilter(FreeStylesheetFileFilter);
         addChoosableFileFilter(HTMLPartiturWithFlashFileFilter);
@@ -77,6 +79,7 @@ public final class OutputFileDialog extends AbstractFileFilterDialog implements 
     }
     
 
+    @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (!(evt.getPropertyName().equals("fileFilterChanged"))) return;
         if (getFileFilter()==SVGPartiturFileFilter){
@@ -86,8 +89,6 @@ public final class OutputFileDialog extends AbstractFileFilterDialog implements 
         } else if (getFileFilter()==XMLPartiturFileFilter){
             setAccessory(chooseSettingsForXMLExportPanel);
         } else if (getFileFilter()==this.FreeStylesheetFileFilter){
-            setAccessory(encodingPanel);
-        } else if (getFileFilter()==GATTranscriptFileFilter){
             setAccessory(encodingPanel);
         } else if (getFileFilter()==GATTranscriptFileFilter){
             setAccessory(encodingPanel);

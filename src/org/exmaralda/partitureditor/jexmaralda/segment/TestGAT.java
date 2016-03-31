@@ -5,10 +5,10 @@
 
 package org.exmaralda.partitureditor.jexmaralda.segment;
 
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
-import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
-import org.xml.sax.SAXException;
+import org.exmaralda.partitureditor.jexmaralda.ListTranscription;
+import org.jdom.Document;
 
 /**
  *
@@ -21,10 +21,13 @@ public class TestGAT {
      */
     public static void main(String[] args) {
         try {
-            BasicTranscription bt = new BasicTranscription("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\cMini\\Thomas_Willis_SE_Final.exb");
-            cGATMinimalSegmentation gms = new cGATMinimalSegmentation();
-
-            SegmentedTranscription st = gms.BasicToSegmented(bt);
+            BasicTranscription bt = new BasicTranscription("C:\\Users\\Schmidt\\Dropbox\\WV_JensLanwer\\DATEN\\Komplex_Beispiel3.exb");
+            GATSegmentation segmenter = new org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation();
+            ListTranscription lt = segmenter.BasicToIntonationUnitList(bt);     
+            Document xml = GATSegmentation.toXML(lt);
+            System.out.println(IOUtilities.documentToString(xml));
+            //String text = GATSegmentation.toText(lt);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         } 

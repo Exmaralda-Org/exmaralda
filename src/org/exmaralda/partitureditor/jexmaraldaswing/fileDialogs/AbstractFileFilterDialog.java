@@ -39,6 +39,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     static String[] seg_suff = {"exs", "xml"};
     public ParameterFileFilter ExmaraldaSegmentedTranscriptionFileFilter = new ParameterFileFilter(seg_suff, "EXMARaLDA Segmented Transcription (*.exs)");
     public ParameterFileFilter GATTranscriptFileFilter = new ParameterFileFilter("txt", "GAT transcript (*.txt)");
+    public ParameterFileFilter GATWithHTML5AudioFileFilter = new ParameterFileFilter("html", "GAT transcript + HTML5 Audio (*.html)");
     static String[] f4_suff = {"txt", "rtf"};
     public ParameterFileFilter F4TextFileFilter = new ParameterFileFilter(f4_suff, "F4 transcript (*.txt, *.rtf)");
     public ParameterFileFilter SimpleTextTranscriptFileFilter = new ParameterFileFilter("txt", "Simple text output (*.txt)");
