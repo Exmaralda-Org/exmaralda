@@ -30,7 +30,7 @@ public class StylesheetFactory {
     /** Creates a new instance of StylesheetFactory */
     public StylesheetFactory() {
         // Change in version 1.3.4. to add XSLT2 support
-        this(false);
+        this(false); 
     }
     
     public StylesheetFactory(boolean useXSLT2){

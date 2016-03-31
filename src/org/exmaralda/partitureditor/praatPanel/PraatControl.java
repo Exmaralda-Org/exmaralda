@@ -8,6 +8,8 @@ package org.exmaralda.partitureditor.praatPanel;
 
 import java.io.*;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import org.exmaralda.common.ExmaraldaApplication;
 
@@ -46,6 +48,24 @@ public class PraatControl {
             SENDPRAAT = "sendpraat_intel";
         }
         NL = System.getProperty("line.separator");
+    }
+    
+    public boolean checkSendpraat(){
+        File f = new File(PRAATPATH + SENDPRAAT);
+        return (f.exists() && f.canExecute());        
+    }
+    
+    public boolean checkPraat(){
+        File f = new File(PRAATPATH + PRAAT);
+        return (f.exists() && f.canExecute());                
+    }
+    
+    public String getSendpraatPath(){
+        return new File(PRAATPATH + SENDPRAAT).getAbsolutePath();
+    }
+
+    public String getPraatPath(){
+        return new File(PRAATPATH + PRAAT).getAbsolutePath();
     }
 
     public void configure(ExmaraldaApplication app){
@@ -104,12 +124,23 @@ public class PraatControl {
             }*/
             System.out.println("Command executed.");
         } catch (InterruptedException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(PraatControl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
         }
     }
     
+    Process praatProcess = null;
+    
+    public boolean isPraatRunning(){
+        return ((praatProcess!=null) && (praatProcess.isAlive()));
+    }
+    
     public void startPraat() throws IOException {
-        Runtime.getRuntime().exec(PRAATPATH + PRAAT);
+        //Runtime.getRuntime().exec(PRAATPATH + PRAAT);
+        String command = PRAATPATH + PRAAT;
+        ProcessBuilder pb = new ProcessBuilder(command);
+        praatProcess = pb.start();
+        //p.waitFor();
         praatStarted = true;
     }
     

@@ -19,7 +19,7 @@ import org.exmaralda.common.helpers.Internationalizer;
  */
 public class ViewMenu extends AbstractTableMenu {
     
-    private javax.swing.JCheckBoxMenuItem showGridCheckBoxMenuItem;
+    private final javax.swing.JCheckBoxMenuItem showGridCheckBoxMenuItem;
 
     public JCheckBoxMenuItem showSpecialCharsCheckBoxMenuItem;   
     public JCheckBoxMenuItem useDifferentEmptyColorCheckBoxMenuItem;

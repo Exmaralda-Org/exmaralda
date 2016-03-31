@@ -50,6 +50,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         addChoosableFileFilter(XSLStylesheetImportFilter);
         addChoosableFileFilter(HIATDOSFileFilter);
         addChoosableFileFilter(PhonFileFilter);
+        addChoosableFileFilter(TransanaXMLFileFilter);
         addChoosableFileFilter(exSyncFileFilter);
         setFileFilter(PraatFileFilter);
         setMultiSelectionEnabled(false);

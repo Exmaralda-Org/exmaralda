@@ -25,6 +25,7 @@ public class EditPreferencesAction extends org.exmaralda.exakt.exmaraldaSearch.s
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         EditPreferencesPanel p = new EditPreferencesPanel();
         AbstractOKCancelDialog dialog = new AbstractOKCancelDialog(exaktFrame,true,p);

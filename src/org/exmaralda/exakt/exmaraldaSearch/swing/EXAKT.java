@@ -1196,16 +1196,16 @@ public class EXAKT extends javax.swing.JFrame
         setCursor(ORDINARY_CURSOR);
     }
 
-    //NEW 10-11-2015
-    public void openInPraat(KWICTableEvent event){
-        SimpleSearchResult searchResult = (SimpleSearchResult)(event.getSelectedSearchResult());
+    //NEW 10-11-2015 / WERKVERTRAG JW
+    public void openInPraat(KWICTableEvent event) {
         try {
-            //
+            SimpleSearchResult searchResult = (SimpleSearchResult)(event.getSelectedSearchResult());
+            
             SegmentedTranscription st = getTranscriptionForSearchResult(searchResult);
             BasicTranscription bt = st.toBasicTranscription();
             bt.getBody().getCommonTimeline().completeTimes(false, bt);
             String tierID = searchResult.getAdditionalData()[0];
-            Tier tier = bt.getBody().getTierWithID(tierID);            
+            Tier tier = bt.getBody().getTierWithID(tierID);
             String timeID = searchResult.getAdditionalData()[2];
             
             if (!(searchResult instanceof AnnotationSearchResult)){
@@ -1214,12 +1214,12 @@ public class EXAKT extends javax.swing.JFrame
                 int s = searchResult.getOriginalMatchStart();
                 while (count + tier.getEventAtStartPoint(timeID).getDescription().length() <= s){
                     count+=tier.getEventAtStartPoint(timeID).getDescription().length();
-                    timeID = tier.getEventAtStartPoint(timeID).getEnd();
-                }                            
+                    timeID = tier.getEventAtStartPoint(timeID).getEnd();                            
+                }
             }
             
             String timeID2 = st.getBody().getCommonTimelineMatch(timeID);
-
+            
             Event e = tier.getEventAtStartPoint(timeID2);
             String timeID3 = e.getEnd();
             
@@ -1228,26 +1228,132 @@ public class EXAKT extends javax.swing.JFrame
             
             String wavFile = bt.getHead().getMetaInformation().getReferencedFile("wav");
             
-            /*String message = "If I wanted to, I could no try for:\n"
-                    + "WAV: " + wavFile + "\n"
-                    + "Start: " + Double.toString(startTime) + "\n"
-                    + "End: " + Double.toString(endTime);
+            if (!(praatControl.isPraatRunning())){
+                try {
+                    praatControl.startPraat();
+                    javax.swing.JOptionPane.showMessageDialog(this, 
+                                                              "Press OK when Praat is up and running.", 
+                                                              "Starting Praat",
+                                                              javax.swing.JOptionPane.WARNING_MESSAGE);
+                    
+                } catch (IOException ex){
+                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+                String message = "Error while opening Praat:\n"
+                        + ex.getLocalizedMessage() + "\n\n";
+                
+                message+="Praat path: " + praatControl.getPraatPath() + "\n";
+                if (praatControl.checkPraat()){
+                    message+="Path exists and is executable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not executable. \n\n";                    
+                }
+                
+                message+="Make sure that\n"
+                        + "   * Praat and Sendpraat paths are set correctly\n\n";
+                
+                Object[] options = {"OK"};
+                JOptionPane.showOptionDialog(partiturPanel, message, "Praat error", 
+                        JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, 
+                        new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif")),
+                        options, options[0]);
+                }
+                return;
+                
+            }
+                        
+            try {
+                praatControl.openSoundFile(wavFile);
+            } catch (IOException ex){
+                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+                String message = "Error while opening sound file in Praat:\n"
+                        + ex.getLocalizedMessage() + "\n\n";
+                
+                message+="Audio path: " + wavFile + "\n";
+                if (new File(wavFile).exists() && new File(wavFile).canRead()){
+                    message+="Path exists and is readable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not readable. \n\n";                    
+                }
+
+                message+="Praat path: " + praatControl.getPraatPath() + "\n";
+                if (praatControl.checkPraat()){
+                    message+="Path exists and is executable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not executable. \n\n";                    
+                }
+                
+                message+="Sendpraat path: " + praatControl.getSendpraatPath()+ "\n";
+                if (praatControl.checkSendpraat()){
+                    message+="Path exists and is executable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not executable. \n\n";                    
+                }
+                
+                message+="Make sure that\n"
+                        + "   * Audio path is correct\n"
+                        + "   * Praat is running\n"
+                        + "   * Praat and Sendpraat paths are set correctly\n\n";
+                
+                Object[] options = {"OK"};
+                JOptionPane.showOptionDialog(partiturPanel, message, "Praat error", 
+                        JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, 
+                        new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif")),
+                        options, options[0]);
+                return;
+            }
             
-            JOptionPane.showMessageDialog(partiturPanel, message);*/
+            try {
+                praatControl.selectSound(startTime, endTime);
+            } catch (IOException ex){
+                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+                String message = "Error while selecting sound in Praat:\n"
+                        + ex.getLocalizedMessage() + "\n\n";
+                
+                message+="Audio path: " + wavFile + "\n";
+                if (new File(wavFile).exists() && new File(wavFile).canRead()){
+                    message+="Path exists and is readable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not readable. \n\n";                    
+                }
+
+                message+="Praat path: " + praatControl.getPraatPath() + "\n";
+                if (praatControl.checkPraat()){
+                    message+="Path exists and is executable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not executable. \n\n";                    
+                }
+                
+                message+="Sendpraat path: " + praatControl.getSendpraatPath()+ "\n";
+                if (praatControl.checkSendpraat()){
+                    message+="Path exists and is executable. \n\n";
+                } else {
+                    message+="Path does not exist and/or is not executable. \n\n";                    
+                }
+                
+                message+="Make sure that\n"
+                        + "   * Audio path is correct\n"
+                        + "   * Praat is running\n"
+                        + "   * Praat and Sendpraat paths are set correctly\n\n";
+                
+                Object[] options = {"OK"};
+                JOptionPane.showOptionDialog(partiturPanel, message, "Praat error", 
+                        JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, 
+                        new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif")),
+                        options, options[0]);
+            }
             
-            praatControl.openSoundFile(wavFile);
-            praatControl.selectSound(startTime, endTime);
-            
-        } catch (SAXException ex) {
-            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
-            this.showErrorDialog(ex);
         } catch (JexmaraldaException ex) {
             Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
-            this.showErrorDialog(ex);
-        } catch (IOException ex) {
+            String message = "EXMARaLDA error during creation of selection:\n"
+                    + ex.getLocalizedMessage();
+            JOptionPane.showMessageDialog(partiturPanel, message);
+        } catch (SAXException ex) {
             Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
-            this.showErrorDialog(ex);
+            String message = "SAX error during creation of selection:\n"
+                    + ex.getLocalizedMessage();
+            JOptionPane.showMessageDialog(partiturPanel, message);
         }
+            
     }
     
     public void showPartitur(KWICTableEvent event) {

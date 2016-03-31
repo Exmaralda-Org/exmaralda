@@ -87,6 +87,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         rightSideButtonsPanel.add(javax.swing.Box.createVerticalGlue());
                 
         timer = new javax.swing.Timer(UPDATE_TIME, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 if (!isSearching) return;
                 if (getCorpus() instanceof COMADBCorpus){
@@ -140,6 +141,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         
         // actionListener for the regular search expression textfield
         actionListener = new ActionListener() {     
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                  if (isSearching) return;
                  searchExpressionComboBox.setSelectedItem(searchExpressionComboBox.getEditor().getItem());
@@ -150,6 +152,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         
         // actionListener for the xpath expression textfield
         actionListener2 = new ActionListener() {     
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                  if (isSearching) return;
                  performSearch();                 
@@ -159,6 +162,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         // actionListener for the xsl textfield
         actionListener3 = new ActionListener() {     
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                  if (isSearching) return;
                  performSearch();                 
@@ -183,13 +187,17 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                 int fontSize = prefs.getInt("kwic-table-font-size", 10);
                 java.awt.Font font = new java.awt.Font(fontName, java.awt.Font.PLAIN, fontSize);
                 kwicTable.setFont(font);
-                // new 28-05-2014
-                searchExpressionComboBox.setFont(font);
-                annotationRegExField.setFont(font);
-                descriptionRegExField.setFont(font);
-                completeTextEditorPane.setFont(font);
+                // new 31-03-2016
+                kwicTable.setRowHeight(Math.max(12, fontSize + 4));
+                // changed 28-05-2014
+                
+                java.awt.Font font2 = new java.awt.Font(fontName, java.awt.Font.PLAIN, Math.max(12, fontSize));
+                searchExpressionComboBox.setFont(font2);
+                annotationRegExField.setFont(font2);
+                descriptionRegExField.setFont(font2);
+                completeTextEditorPane.setFont(font2);
                 String bodyRule = "body { font-family: " + font.getFamily() + "; " +
-                    "font-size: " + font.getSize() + "pt; }";
+                    "font-size: " + Math.max(12, font.getSize()) + "pt; }";
                 ((HTMLDocument)completeTextEditorPane.getDocument()).getStyleSheet().addRule(bodyRule);                
             } catch (Exception e){
                 e.printStackTrace();

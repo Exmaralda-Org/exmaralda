@@ -5,6 +5,8 @@
 
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
@@ -48,15 +50,38 @@ public class Test {
             
             
             //BasicTranscription bt = new BasicTranscription("C:\\Users\\Schmidt\\Dropbox\\IDS\\AGD\\Peters\\BEISPIEL\\ZW--_E_05206_SE_01_T_01_DF_01.exb");
-            BasicTranscription bt = new BasicTranscription("C:\\Users\\Schmidt\\ownCloud\\Shared\\ModiKo\\Datengrundlage\\MoDiKo-Gesamtkorpus\\1a_07_prozesserhebung_stufenpresse\\1a_07_prozesserhebung_stufenpresse.exb");
-            TEIConverter converter = new TEIConverter();
+            //BasicTranscription bt = new BasicTranscription("C:\\Users\\Schmidt\\ownCloud\\Shared\\ModiKo\\Datengrundlage\\MoDiKo-Gesamtkorpus\\1a_07_prozesserhebung_stufenpresse\\1a_07_prozesserhebung_stufenpresse.exb");
+            //TEIConverter converter = new TEIConverter();
             //TCFConverter converter = new TCFConverter();
             //converter.writeNewHIATTEIToFile(bt, "C:\\Users\\Schmidt\\Desktop\\TEI\\HIAT_new.xml");
             //System.out.println("DONE 1!");
             //converter.writeHIATISOTEIToFile(bt, "C:\\Users\\Schmidt\\Desktop\\TEI\\FRENCH_MICRO.xml");
             //converter.writeHIATTCFToFile(bt, "C:\\Users\\Schmidt\\Desktop\\TEI\\ZW_MICRO.tcf");
-            converter.writeCGATMINIMALISOTEIToFile(bt, "C:\\Users\\Schmidt\\Desktop\\tei_out.xml", 
-                    "C:\\Users\\Schmidt\\ownCloud\\Shared\\ModiKo\\Datengrundlage\\MoDiKo-Gesamtkorpus\\cGAT_Minimal_Custom_FSM.xml");
+            //converter.writeCGATMINIMALISOTEIToFile(bt, "C:\\Users\\Schmidt\\Desktop\\tei_out.xml", 
+            //        "C:\\Users\\Schmidt\\ownCloud\\Shared\\ModiKo\\Datengrundlage\\MoDiKo-Gesamtkorpus\\cGAT_Minimal_Custom_FSM.xml");
+            
+            String IN = "C:\\Users\\Schmidt\\Dropbox\\IDS\\HZSK\\WV_MuM-Multi\\Transana Daten für Konvertierung\\xml Dateien";
+            String OUT = "C:\\Users\\Schmidt\\Dropbox\\IDS\\HZSK\\WV_MuM-Multi\\EXB";
+            
+            File[] xmlFiles = new File(IN).listFiles(new FilenameFilter(){
+
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.toUpperCase().endsWith(".XML");
+                }
+                
+            });
+            
+            TransanaConverter tc = new TransanaConverter();
+            for (File f : xmlFiles){
+                BasicTranscription bt = tc.readTransanaFromXMLFile(f);
+                File out = new File(OUT, f.getName().replaceAll("\\.xml", ".exb"));
+                bt.writeXMLToFile(out.getAbsolutePath(), "none");
+                System.out.println(out.getAbsolutePath() + " written.");
+            }
+            
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }

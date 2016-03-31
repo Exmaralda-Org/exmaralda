@@ -52,6 +52,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter WinPitchFileFilter = new ParameterFileFilter(winpitch_suff, "Winpitch file (*.alg, *.xml)");
     public ParameterFileFilter AnvilFileFilter = new ParameterFileFilter("anvil", "Anvil annotation file (*.anvil)");
     public ParameterFileFilter PhonFileFilter = new ParameterFileFilter("xml", "Phon transcription (*.xml)");
+    public ParameterFileFilter TransanaXMLFileFilter = new ParameterFileFilter("xml", "Transana XML file (*.xml)");
 
 
 }

@@ -43,7 +43,7 @@ public class BasicTranscription extends AbstractTranscription {
     
     /** Creates new BasicTranscription */
     public BasicTranscription() {
-        super();
+        super(); 
         body = new BasicBody();
     }
 

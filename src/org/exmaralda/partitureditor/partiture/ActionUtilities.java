@@ -63,6 +63,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("WinPitch")) {dialog.setFileFilter(dialog.WinPitchFileFilter);}
             else if (lastFileFilter.equals("Audacity")) {dialog.setFileFilter(dialog.AudacityLabelFileFilter);}
             else if (lastFileFilter.equals("Phon")) {dialog.setFileFilter(dialog.PhonFileFilter);}
+            else if (lastFileFilter.equals("TransanaXML")) {dialog.setFileFilter(dialog.TransanaXMLFileFilter);}
             else if (lastFileFilter.equals("F4Text")) {dialog.setFileFilter(dialog.F4TextFileFilter);}
         }
     }
@@ -109,6 +110,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.WinPitchFileFilter) {lastFileFilter = "WinPitch";}
             else if (selectedFileFilter==dialog.AudacityLabelFileFilter) {lastFileFilter = "Audacity";}
             else if (selectedFileFilter==dialog.PhonFileFilter) {lastFileFilter = "Phon";}
+            else if (selectedFileFilter==dialog.TransanaXMLFileFilter) {lastFileFilter = "TransanaXML";}
             else if (selectedFileFilter==dialog.F4TextFileFilter) {lastFileFilter = "F4Text";}
 
 

@@ -247,6 +247,7 @@ public class COMAKWICTable  extends javax.swing.JTable
         formatTable();
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getSource() instanceof JTableHeader){
             JTableHeader h = (JTableHeader) e.getSource();
@@ -264,6 +265,7 @@ public class COMAKWICTable  extends javax.swing.JTable
         }
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() instanceof JTableHeader){
             JTableHeader h = (JTableHeader) e.getSource();

@@ -691,7 +691,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
                  sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
                  System.out.println("CocoaQTPlayer says the movie " + new File(filename).getName() 
-                         + " has width " + sourceWidth + "and  height " + sourceHeight);
+                         + " has width " + sourceWidth + " and  height " + sourceHeight);
             } else {
                 // this includes JMF and the other, more shitty like, players
                 videoDisplayPanel.add(c);

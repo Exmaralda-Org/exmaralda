@@ -24,6 +24,7 @@ public class NewSearchPanelAction extends org.exmaralda.exakt.exmaraldaSearch.sw
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         COMACorpusInterface corpus = (COMACorpusInterface)(exaktFrame.corpusList.getSelectedValue());
         if (corpus==null) return;
@@ -37,7 +38,7 @@ public class NewSearchPanelAction extends org.exmaralda.exakt.exmaraldaSearch.sw
         newPanel.addKWICTableListener(exaktFrame);
         exaktFrame.tabbedPane.add(corpus.getCorpusName(),newPanel);        
         exaktFrame.tabbedPane.setSelectedComponent(newPanel);
-        exaktFrame.panelIndex.put(newPanel, new Integer(exaktFrame.tabbedPane.getTabCount()-1));    
+        exaktFrame.panelIndex.put(newPanel, exaktFrame.tabbedPane.getTabCount()-1);    
         exaktFrame.concordanceListModel.addElement(newPanel);
         exaktFrame.concordanceList.setSelectedValue(exaktFrame.getActiveSearchPanel(),true);        
     }

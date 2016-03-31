@@ -29,7 +29,7 @@ public class ExportAction extends AbstractApplicationAction {
     
     String[] exmaraldaSuffixes = {"exb", "xml"};
     String[] f4Suffixes = {"rtf", "txt"};
-    String[] tcfSuffixes = {"tcf", "txt"};
+    String[] tcfSuffixes = {"tcf", "xml"};
     ParameterFileFilter exmaraldaFileFilter = new ParameterFileFilter(exmaraldaSuffixes, FOLKERInternationalizer.getString("misc.basicTranscription"));
     ParameterFileFilter elanFileFilter = new ParameterFileFilter("eaf", "ELAN Annotation File (*.eaf)");
     ParameterFileFilter praatFileFilter = new ParameterFileFilter("textGrid", "Praat TextGrid (*.textGrid)");
@@ -66,7 +66,7 @@ public class ExportAction extends AbstractApplicationAction {
         if (retValue==JFileChooser.CANCEL_OPTION) return;
         
         File f = fileChooser.getSelectedFile();
-        if (!(f.getName().indexOf(".")>=0)){
+        if (!f.getName().contains(".")){
             f = new File(f.getAbsolutePath() + "." + ((ParameterFileFilter)(fileChooser.getFileFilter())).getSuffix());
         }
         if (f.exists()){

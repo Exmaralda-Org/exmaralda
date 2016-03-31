@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.*;
+import java.util.HashSet;
 
 import java.util.Iterator;
 import java.util.List;
@@ -372,7 +373,7 @@ public class TEIConverter {
     //********* private processing methods ***************
     //****************************************************
 
-    private void generateWordIDs(Document document) throws JDOMException{
+    /*private void generateWordIDs(Document document) throws JDOMException{
         XPath wordXPath = XPath.newInstance("//tei:w"); 
         wordXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
         
@@ -382,11 +383,9 @@ public class TEIConverter {
             count++;
             Element word = (Element)o;
             String wordID = "w" + Integer.toString(count);
-            //System.out.println("*** " + wordID);
             word.setAttribute("id", wordID, Namespace.XML_NAMESPACE);
         }
         
-        // new 02-12-2014
         XPath pcXPath = XPath.newInstance("//tei:pc"); 
         pcXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
         
@@ -396,11 +395,64 @@ public class TEIConverter {
             count++;
             Element pc = (Element)o;
             String pcID = "pc" + Integer.toString(count);
-            //System.out.println("*** " + wordID);
             pc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
         }
         
+    } */
+    
+    // new 30-03-2016
+    private void generateWordIDs(Document document) throws JDOMException{
+        // added 30-03-2016
+        HashSet<String> allExistingIDs = new HashSet<String>();
+        XPath idXPath = XPath.newInstance("//tei:*[@xml:id]"); 
+        idXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        idXPath.addNamespace(Namespace.XML_NAMESPACE);
+        List idElements = idXPath.selectNodes(document);
+        for (Object o : idElements){
+            Element e = (Element)o;
+            allExistingIDs.add(e.getAttributeValue("id", Namespace.XML_NAMESPACE));
+        }
+        
+        
+        // changed 30-03-2016
+        XPath wordXPath = XPath.newInstance("//tei:w[not(@xml:id)]"); 
+        wordXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        wordXPath.addNamespace(Namespace.XML_NAMESPACE);
+        
+        List words = wordXPath.selectNodes(document);
+        int count=1;
+        for (Object o : words){
+            Element word = (Element)o;
+            while(allExistingIDs.contains("w" + Integer.toString(count))){
+                count++;
+            }
+
+            String wordID = "w" + Integer.toString(count);
+            allExistingIDs.add(wordID);
+            //System.out.println("*** " + wordID);
+            word.setAttribute("id", wordID, Namespace.XML_NAMESPACE);
+        }
+        
+        // new 02-12-2014
+        XPath pcXPath = XPath.newInstance("//tei:pc[not(@xml:id)]"); 
+        pcXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        pcXPath.addNamespace(Namespace.XML_NAMESPACE);
+        
+        List pcs = pcXPath.selectNodes(document);
+        count=1;
+        for (Object o : pcs){
+            Element pc = (Element)o;
+            while(allExistingIDs.contains("pc" + Integer.toString(count))){
+                count++;
+            }
+            
+            String pcID = "pc" + Integer.toString(count);
+            allExistingIDs.add(pcID);
+            //System.out.println("*** " + wordID);
+            pc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
+        }
     }
+    
     
     private Element makeNonphoElement(String matchedText) {
         Element returnValue = new Element("x");

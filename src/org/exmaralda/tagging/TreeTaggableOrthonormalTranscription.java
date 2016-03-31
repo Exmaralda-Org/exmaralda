@@ -50,6 +50,16 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
         basedOnNormalization = bon;
     }
     
+    public void clearTagging() throws JDOMException{
+        List l = XPath.selectNodes(transcriptionDocument, "//w");
+        for (Object o : l){
+            Element e = (Element)o;
+            e.removeAttribute("lemma");
+            e.removeAttribute("pos");
+            e.removeAttribute("p-pos");
+        }
+    }
+    
     public void setXPathToTokens(String xp){
         xpathToTokens = xp;
     }
@@ -127,6 +137,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
         return result;
     }
 
+    @Override
     public String getBase() {
         return base;
     }

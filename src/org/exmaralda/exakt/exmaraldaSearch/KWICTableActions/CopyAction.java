@@ -14,16 +14,12 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 import java.util.*;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import org.jdom.*;
 import org.jdom.transform.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
-import org.xml.sax.SAXException;
 import org.exmaralda.exakt.search.SearchResultInterface;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
@@ -45,6 +41,7 @@ public class CopyAction extends AbstractKWICTableAction {
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                        
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         COMAKWICTable t = this.table;
         int[] viewSelections = t.getSelectedRows();

@@ -15,9 +15,6 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
 import org.jdom.JDOMException;
@@ -116,6 +113,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.PhonFileFilter){
             PhonConverter pc = new PhonConverter();
             importedTranscription = pc.readPhonFromFile(filename);
+        } else if (selectedFileFilter==dialog.TransanaXMLFileFilter){
+            TransanaConverter tc = new TransanaConverter();
+            importedTranscription = tc.readTransanaFromXMLFile(selectedFile);
         } else if (selectedFileFilter==dialog.EAFFileFilter){
             ELANConverter ec = new ELANConverter();
             importedTranscription = ec.readELANFromFile(filename);            

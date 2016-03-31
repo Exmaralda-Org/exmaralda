@@ -11,8 +11,6 @@ package org.exmaralda.exakt.exmaraldaSearch.swing;
 
 import java.awt.Component;
 import javax.swing.*;
-import org.exmaralda.exakt.exmaraldaSearch.*;
-import org.exmaralda.exakt.exmaraldaSearch.swing.*;
 import org.exmaralda.exakt.tokenlist.AbstractTokenList;
 
 
@@ -56,6 +54,10 @@ public class WordListListCellRenderer extends javax.swing.DefaultListCellRendere
          nameLabel.setOpaque(true);
          nameLabel.setBackground(bc);
          nameLabel.setText(tokenList.getName());
+         
+         nameLabel.setIcon(new javax.swing.ImageIcon(
+                getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/format-justify-left.png")));
+         
 
          
          int count1 = tokenList.getNumberOfTokens();

@@ -12,7 +12,6 @@ package org.exmaralda.exakt.exmaraldaSearch.swing;
 import java.awt.Component;
 import javax.swing.*;
 import org.exmaralda.exakt.exmaraldaSearch.*;
-import org.exmaralda.exakt.exmaraldaSearch.swing.*;
 
 
 /**

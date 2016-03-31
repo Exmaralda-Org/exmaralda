@@ -224,7 +224,7 @@ public class GATSegmentation extends AbstractSegmentation {
             }
             
             if (isOverlapProblem){
-                output.append("\t").append("{*** OVERLAP MANUELL BEARBEITEN! ***}");
+                //output.append("\t").append("{*** OVERLAP MANUELL BEARBEITEN! ***}");
             }
             
             output.append(System.getProperty("line.separator"));
