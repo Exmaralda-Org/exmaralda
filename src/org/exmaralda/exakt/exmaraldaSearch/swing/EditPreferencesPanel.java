@@ -9,6 +9,7 @@ package org.exmaralda.exakt.exmaraldaSearch.swing;
 import java.util.prefs.*;
 import javax.swing.JFileChooser;
 import java.io.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -85,11 +86,13 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         } else {
             fullDisplayContextLimitSpinner.setValue(fullDisplayContextLimit);
         }
+        
+        this.praatPathTextField.setText(prefs.get("PRAAT-Directory", ""));
                 
     }
 
     public int getKwicTableFontSize() {
-        return ((Integer)(kwicTableFontSizeSpinner.getValue())).intValue();
+        return ((Integer)(kwicTableFontSizeSpinner.getValue()));
     }
     
     public String getPartiturInToolStylesheet() {
@@ -125,10 +128,12 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         fileChooser.setCurrentDirectory(new File(startDirectory));
         fileChooser.setDialogTitle("Choose a stylesheet");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+            @Override
             public boolean accept(File f) {
                 String name = f.getAbsolutePath();
                 return (f.isDirectory() || name.substring(Math.max(0,name.length()-3)).equalsIgnoreCase("XSL"));
             }
+            @Override
             public String getDescription() {
                 return "XSL files (*.xsl)";
             }
@@ -147,15 +152,15 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
     public int getMaxSearchResults() {
         if (maxSearchResultsCheckBox.isSelected()) return -1;
-        return ((Integer)(maxSearchResultsSpinner.getValue())).intValue();
+        return ((Integer)(maxSearchResultsSpinner.getValue()));
     }
     public int getKWICContextLimit() {
         if (kwicContextLimitCheckBox.isSelected()) return -1;
-        return ((Integer)(kwicContextLimitSpinner.getValue())).intValue();
+        return ((Integer)(kwicContextLimitSpinner.getValue()));
     }
     public int getFullDisplayContextLimit() {
         if (fullDisplayContextLimitCheckBox.isSelected()) return -1;
-        return ((Integer)(fullDisplayContextLimitSpinner.getValue())).intValue();
+        return ((Integer)(fullDisplayContextLimitSpinner.getValue()));
     }
     
     /** This method is called from within the constructor to
@@ -191,6 +196,11 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         kwicTableFontSizeSpinner = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
+        pathsPanel = new javax.swing.JPanel();
+        praatPathPanel = new javax.swing.JPanel();
+        praatPathLabel = new javax.swing.JLabel();
+        praatPathTextField = new javax.swing.JTextField();
+        praatPathBrowseButton = new javax.swing.JButton();
         performancePanel = new javax.swing.JPanel();
         maxSearchResultsPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -341,6 +351,30 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         tabbedPane.addTab("Fonts", fontsPanel);
 
+        pathsPanel.setLayout(new javax.swing.BoxLayout(pathsPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        praatPathPanel.setLayout(new javax.swing.BoxLayout(praatPathPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        praatPathLabel.setText("Praat directory: ");
+        praatPathLabel.setMaximumSize(new java.awt.Dimension(150, 14));
+        praatPathPanel.add(praatPathLabel);
+
+        praatPathTextField.setMaximumSize(new java.awt.Dimension(700, 25));
+        praatPathTextField.setPreferredSize(new java.awt.Dimension(400, 25));
+        praatPathPanel.add(praatPathTextField);
+
+        praatPathBrowseButton.setText("Browse...");
+        praatPathBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                praatPathBrowseButtonActionPerformed(evt);
+            }
+        });
+        praatPathPanel.add(praatPathBrowseButton);
+
+        pathsPanel.add(praatPathPanel);
+
+        tabbedPane.addTab("Paths", pathsPanel);
+
         performancePanel.setMaximumSize(new java.awt.Dimension(500, 70));
         performancePanel.setPreferredSize(new java.awt.Dimension(500, 70));
         performancePanel.setLayout(new javax.swing.BoxLayout(performancePanel, javax.swing.BoxLayout.Y_AXIS));
@@ -480,6 +514,23 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         String newXSL = browseForStylesheet(getPartiturInToolStylesheet());
         if (newXSL!=null) partiturInToolStylesheetTextField.setText(newXSL);
     }//GEN-LAST:event_partiturInToolStylesheetButtonActionPerformed
+
+    private void praatPathBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_praatPathBrowseButtonActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Choose the directory with the Praat and Sendpraat binaries");
+        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int retValue = jfc.showOpenDialog(this);
+        if (retValue==JFileChooser.APPROVE_OPTION){
+            Preferences settings = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");
+            String newPD = jfc.getSelectedFile().getAbsolutePath();
+            settings.put("PRAAT-Directory", newPD);
+            this.praatPathTextField.setText(newPD);
+            JOptionPane.showMessageDialog(this, 
+                    "Praat directory set to " + newPD 
+                    + ".\nChanges will take effect after restart.");
+        }
+
+    }//GEN-LAST:event_praatPathBrowseButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -517,7 +568,12 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JButton partiturOutputStylesheetButton;
     private javax.swing.JPanel partiturOutputStylesheetPanel;
     private javax.swing.JTextField partiturOutputStylesheetTextField;
+    private javax.swing.JPanel pathsPanel;
     private javax.swing.JPanel performancePanel;
+    private javax.swing.JButton praatPathBrowseButton;
+    private javax.swing.JLabel praatPathLabel;
+    private javax.swing.JPanel praatPathPanel;
+    private javax.swing.JTextField praatPathTextField;
     private javax.swing.JLabel segmentedOutputSSLabel;
     private javax.swing.JButton segmentedOutputStylesheetButton;
     private javax.swing.JTextField segmentedOutputStylesheetTextField;

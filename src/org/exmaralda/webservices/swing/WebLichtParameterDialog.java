@@ -123,7 +123,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
         segmentationPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
 
-        jLabel7.setText("Please specify which algorith to use for segmenting (=tokenising) the input");
+        jLabel7.setText("Please specify which algorithm to use for segmenting (=tokenising) the input");
         segmentationPanel.add(jLabel7, java.awt.BorderLayout.NORTH);
 
         mainPanel.add(segmentationPanel);

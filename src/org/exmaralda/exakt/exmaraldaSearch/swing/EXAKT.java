@@ -338,8 +338,8 @@ public class EXAKT extends javax.swing.JFrame
         String lsp = prefs.get("Last-Search-Result-Path", System.getProperties().getProperty("user.dir"));
         setLastSearchResultPath(new File(lsp));
         
-        //New 10-11-2015
-        //Make sure EXAKT has the same Praat Path as Partitur Editor
+        //New 10-11-2015        
+        //Make sure EXAKT has the same Praat Path as Partitur Editor        
         String praatPath = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PRAAT-Directory", "");
         prefs.put("PRAAT-Directory", praatPath);
 
