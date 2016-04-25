@@ -183,15 +183,16 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     // ********************************************
 
     /** returns the event as an XML element &lt;event&gt; as
-     *  specified in the corresponding dtd */
+     *  specified in the corresponding dtd
+     * @return  */
     public String toXML() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<event ");
-        sb.append("start=\"" + getStart() +"\" ");
-        sb.append("end=\"" + getEnd() + "\"");
+        sb.append("start=\"").append(getStart()).append("\" ");
+        sb.append("end=\"").append(getEnd()).append("\"");
         if (!medium.equals("none")){
-            sb.append(" medium=\"" + getMedium() + "\" ");
-            sb.append("url=\"" + getURL() + "\"");
+            sb.append(" medium=\"").append(getMedium()).append("\" ");
+            sb.append("url=\"").append(getURL()).append("\"");
         }
         sb.append(">");
         sb.append(udEventInformation.toXML());
@@ -201,7 +202,9 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     }
     
     /** writes an XML element &lt;event&gt; to the specified
-     *  file output stream */
+     *  file output stream
+     * @param fos
+     * @throws java.io.IOException */
     public void writeXML(FileOutputStream fos) throws IOException {
         fos.write(toXML().getBytes("UTF-8"));
     }

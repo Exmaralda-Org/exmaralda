@@ -330,7 +330,7 @@ public class AbstractEventTier extends AbstractTier {
             Event[] events = getEventsAtStartPoint(timeline.getTimelineItemAt(pos).getID());
             if (events.length>1){
                 // sort the events according to their length, longest event first
-                events = this.sortAccordingToLength(timeline, events);
+                events = sortAccordingToLength(timeline, events);
             }
             for (int i=0; i<events.length; i++){
                 result.addElement(events[i]);
@@ -413,6 +413,7 @@ public class AbstractEventTier extends AbstractTier {
             for (int i=0; i<unsortedEvents.length; i++){
                 String start = unsortedEvents[i].getStart();
                 String end = unsortedEvents[i].getEnd();
+                //System.out.println(start + " / " + end + " / " + timeline.calculateSpan(start,end) + " / " + checkLength);
                 if (timeline.calculateSpan(start,end)==checkLength){
                     sortedEvents[count]=unsortedEvents[i].makeCopy();
                     count++;
@@ -620,10 +621,10 @@ public class AbstractEventTier extends AbstractTier {
     }
     
     /** returns all events as an XML-string */
-    String eventsToXML(){
+    String eventsToXML(){ 
         StringBuffer sb = new StringBuffer();
         for (int pos=0; pos<getNumberOfEvents(); pos++){
-                sb.append(getEventAt(pos).toXML());
+           sb.append(getEventAt(pos).toXML());
         }
         return sb.toString();
     }

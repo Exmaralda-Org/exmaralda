@@ -10,7 +10,7 @@ import ipsk.audio.player.PlayerException;
 import ipsk.audio.player.event.PlayerCloseEvent;
 import ipsk.audio.player.event.PlayerErrorEvent;
 import ipsk.audio.player.event.PlayerEvent;
-import ipsk.audio.player.event.PlayerStopEvent;
+import ipsk.audio.player.event.PlayerStopEvent; 
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +22,10 @@ import java.io.IOException;
  */
 public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.PlayerListener { 
 
-    ipsk.audio.player.Player wrappedPlayer;
+    ipsk.audio.player.Player wrappedPlayer; 
     private double haltTime = 0;
     private boolean halted = false;
-    Thread playThread;
+    Thread playThread; 
 
     // new 19-01-2016
     public BASAudioPlayer() {

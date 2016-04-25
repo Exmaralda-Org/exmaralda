@@ -11,7 +11,11 @@
     
     <xsl:template match="*:paragraph">
         <transana-line>
-            <xsl:apply-templates select="*:text|*:symbol"/>
+            <xsl:apply-templates select="*:text[1]"/>
+            <xsl:apply-templates select="*:text[2]"/>
+            <xsl:apply-templates select="*:text[3]"/>
+            <xsl:apply-templates select="*:text[4]"/>
+            <!-- <xsl:apply-templates select="*:text|*:symbol"/> -->
         </transana-line>
     </xsl:template>
     
@@ -92,9 +96,10 @@
                 <xsl:comment>Condition #1</xsl:comment>
                 <xsl:apply-templates select="following-sibling::*[1]" mode="grab"/>
             </xsl:if>
+
             <!-- this one's blue, following is just a space, then follows another blue (=translation) -->
             <xsl:if test="@textcolor='#0000FF' and 
-                following-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))&lt;=1] and 
+                following-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0] and 
                 following-sibling::*[2][@textcolor='#0000FF']">
                 <xsl:comment>Condition #2</xsl:comment>
                 <xsl:text> </xsl:text>
@@ -102,11 +107,11 @@
             </xsl:if>
             <!-- this one's black, following is just a space, then follows another black (=transcription) -->
             <xsl:if test="@textcolor='#000000' and 
-                following-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))&lt;=1] and 
+                following-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0] and 
                 following-sibling::*[2][@textcolor='#000000']">
                 <xsl:comment>Condition #3</xsl:comment>
                 <xsl:text> </xsl:text>
-                <xsl:apply-templates select="following-sibling::*[2]" mode="grab"/>
+                <!-- <xsl:apply-templates select="following-sibling::*[2]" mode="grab"/> -->
             </xsl:if>
             <!-- this one's black, following is just a symbol, then follows another black (=transcription) -->
             <xsl:if test="@textcolor='#000000' and 
@@ -117,6 +122,7 @@
                 <xsl:apply-templates select="following-sibling::*[2]" mode="grab"/>
             </xsl:if>
         </segment>
+        <xsl:apply-templates select="following-sibling::*[string-length(normalize-space(translate(text(),'&quot;',' ')))&gt;0][1]"/>
     </xsl:template>
     
     <!-- OMG! This - symbol 34 - is used to encode a quote (sic!) -->
@@ -170,19 +176,30 @@
         </xsl:if>
     </xsl:template>
     
+    <!-- ****************************************************** -->
     <!-- following nodes have already been visited in grab mode -->
-    <xsl:template match="*:symbol[@textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
-    <!-- <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF' or string-length(normalize-space(translate(text(),'&quot;',' ')))=0]]"/> -->
+    <!-- ****************************************************** -->
+    
+    <!-- a symbol and between two blues -->
+    <xsl:template match="*:symbol[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
+    
+    <!-- just a space -->
+    <xsl:template match="*:text[position()&gt;4 and string-length(normalize-space(translate(text(),'&quot;',' ')))=0]"/>
+    
+
+    <!-- the (n+1)th in a row of blues -->
     <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
     
-    <!-- <xsl:template match="*:text[position()&gt;3  and string-length(normalize-space(translate(text(),'&quot;',' ')))=0 and preceding-sibling::*[1][@textcolor='#0000FF']]"/> -->
-    <!-- <xsl:template match="*:text[position()&gt;3  and @textcolor='#0000FF' and preceding-sibling::*[1]]"/> -->
+    <!-- preceding is a space prepreceding is also blue -->
+    <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0] and preceding-sibling::*[2][@textcolor='#0000FF']]"/>
     
+    <!-- a space following a black -->
     <xsl:template match="*:text[position()&gt;4  and string-length(normalize-space(translate(text(),'&quot;',' ')))=0 and preceding-sibling::*[1][@textcolor='#000000']]"/>
-    <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0]]"/>
+    
+    <!-- <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0]]"/> -->
     
     <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][self::*:symbol]]"/>
-    <xsl:template match="*:symbol[preceding-sibling::*[1][@textcolor='#000000'] and following-sibling::*[1][@textcolor='#000000']]"/>
+    <xsl:template match="*:symbol[position()&gt;4 and preceding-sibling::*[1][@textcolor='#000000'] and following-sibling::*[1][@textcolor='#000000']]"/>
     
     
     

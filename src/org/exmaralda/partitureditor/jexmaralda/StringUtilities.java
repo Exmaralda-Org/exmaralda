@@ -51,7 +51,7 @@ public class StringUtilities extends Object {
             (contains(checkString,'>')) ||
             (contains(checkString,'&')) ||
             checkString.equals(" ")){
-                return new String("<![CDATA[" + checkString + "]]>");
+                return "<![CDATA[" + checkString + "]]>";
             } else {
                 return checkString;
             }            

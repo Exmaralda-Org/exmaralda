@@ -36,17 +36,17 @@
             <basic-body>
                 <common-timeline>
                     <!-- <tli id="T0" time="0.0"/> -->
-                    <xsl:for-each select="//transana-line">
+                    <xsl:for-each select="//transana-line[speaker]">
                         <xsl:if test="time">
                             <tli>
-                                <xsl:attribute name="id"><xsl:text>T_</xsl:text><xsl:value-of select="count(preceding-sibling::transana-line)"/><xsl:text>_0</xsl:text></xsl:attribute>
+                                <xsl:attribute name="id"><xsl:text>T_</xsl:text><xsl:value-of select="count(preceding-sibling::transana-line[speaker])"/><xsl:text>_0</xsl:text></xsl:attribute>
                                 <xsl:attribute name="time"><xsl:value-of select="substring(time,1,string-length(time)-3)"/><xsl:text>.</xsl:text><xsl:value-of select="substring(time,string-length(time)-2)"/></xsl:attribute>
                             </tli>
                             <xsl:for-each select="segment[not(@type='#0000FF') and not(position()=1)]">
                                 <tli>
                                     <xsl:attribute name="id">
                                         <xsl:text>T_</xsl:text>
-                                        <xsl:value-of select="count(../preceding-sibling::transana-line)"/>
+                                        <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])"/>
                                         <xsl:text>_</xsl:text>
                                         <xsl:value-of select="count(preceding-sibling::segment[not(@type='#0000FF')])"/>
                                     </xsl:attribute>                                    
@@ -55,19 +55,19 @@
                         </xsl:if>
                     </xsl:for-each>
                     <tli id="T_LAST"/>
-                    <xsl:for-each-group select="//speaker" group-by="text()">
-                        <tier category="v" type="t">
-                            <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_V</xsl:text></xsl:attribute>
-                            <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>
-                            <xsl:apply-templates select="//transana-line[speaker=current-grouping-key()]/segment[not(@type='#0000FF')]"/>
-                        </tier>
-                        <tier category="de" type="a">
-                            <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_DE</xsl:text></xsl:attribute>
-                            <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>                            
-                            <xsl:apply-templates select="//transana-line[speaker=current-grouping-key()]/segment[@type='#0000FF']"/>
-                        </tier>
-                    </xsl:for-each-group>
                 </common-timeline>
+                <xsl:for-each-group select="//speaker" group-by="text()">
+                    <tier category="v" type="t">
+                        <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_V</xsl:text></xsl:attribute>
+                        <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>
+                        <xsl:apply-templates select="//transana-line[speaker=current-grouping-key()]/segment[not(@type='#0000FF')]"/>
+                    </tier>
+                    <tier category="de" type="a">
+                        <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_DE</xsl:text></xsl:attribute>
+                        <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>                            
+                        <xsl:apply-templates select="//transana-line[speaker=current-grouping-key()]/segment[@type='#0000FF']"/>
+                    </tier>
+                </xsl:for-each-group>
             </basic-body>
         </basic-transcription>                    
     </xsl:template>
@@ -76,7 +76,7 @@
         <event>
             <xsl:attribute name="start">
                 <xsl:text>T_</xsl:text>
-                <xsl:value-of select="count(../preceding-sibling::transana-line)"/>
+                <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])"/>
                 <xsl:text>_</xsl:text>
                 <xsl:value-of select="count(preceding-sibling::segment[not(@type='#0000FF')])"/>
             </xsl:attribute>
@@ -84,15 +84,15 @@
                 <xsl:choose>
                     <xsl:when test="following-sibling::segment[not(@type='#0000FF')]">
                         <xsl:text>T_</xsl:text>
-                        <xsl:value-of select="count(../preceding-sibling::transana-line)"/>
+                        <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])"/>
                         <xsl:text>_</xsl:text>
                         <xsl:value-of select="count(preceding-sibling::segment[not(@type='#0000FF')])+1"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <xsl:when test="../following-sibling::transana-line">
+                            <xsl:when test="../following-sibling::transana-line[speaker]">
                                 <xsl:text>T_</xsl:text>
-                                <xsl:value-of select="count(../preceding-sibling::transana-line)+1"/>
+                                <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])+1"/>
                                 <xsl:text>_0</xsl:text>                                
                             </xsl:when>
                             <xsl:otherwise>
@@ -110,7 +110,7 @@
         <event>
             <xsl:attribute name="start">
                 <xsl:text>T_</xsl:text>
-                <xsl:value-of select="count(../preceding-sibling::transana-line)"/>
+                <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])"/>
                 <xsl:text>_</xsl:text>
                 <xsl:value-of select="count(preceding-sibling::segment[not(@type='#0000FF')])-1"/>
             </xsl:attribute>
@@ -118,15 +118,15 @@
                 <xsl:choose>
                     <xsl:when test="following-sibling::segment[not(@type='#0000FF')]">
                         <xsl:text>T_</xsl:text>
-                        <xsl:value-of select="count(../preceding-sibling::transana-line)"/>
+                        <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])"/>
                         <xsl:text>_</xsl:text>
                         <xsl:value-of select="count(preceding-sibling::segment[not(@type='#0000FF')])"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <xsl:when test="../following-sibling::transana-line">
+                            <xsl:when test="../following-sibling::transana-line[speaker]">
                                 <xsl:text>T_</xsl:text>
-                                <xsl:value-of select="count(../preceding-sibling::transana-line)+1"/>
+                                <xsl:value-of select="count(../preceding-sibling::transana-line[speaker])+1"/>
                                 <xsl:text>_0</xsl:text>                                
                             </xsl:when>
                             <xsl:otherwise>
