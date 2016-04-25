@@ -60,9 +60,11 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     
     public void initValues(){
         Preferences prefs = Preferences.userRoot().node(application.getPreferencesNode());
+        
         String playerType = prefs.get("PlayerType", "JMF-Player");
         jmfRadioButton.setSelected(playerType.equals("JMF-Player"));
         jdsRadioButton.setSelected(playerType.equals("JDS-Player"));
+        cocoaQTRadioButton.setSelected(playerType.equals("CocoaQT-Player"));
         elanQuicktimeRadioButton.setSelected(playerType.equals("ELAN-Quicktime-Player"));
         quicktimeRadioButton.setSelected(playerType.equals("Quicktime-Player"));
         directShowRadioButton.setSelected(playerType.equals("DirectShow-Player"));
@@ -72,7 +74,8 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         directShowRadioButton.setVisible(os.toLowerCase().startsWith("win"));
         jdsRadioButton.setVisible(os.toLowerCase().startsWith("win"));
         elanQuicktimeRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
-
+        cocoaQTRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
+                
         String parseLevel = prefs.get("parse-level", "2");
         System.out.println("Parse level is " + parseLevel);
         level0RadioButton.setSelected(parseLevel.equals("0"));
@@ -131,6 +134,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         if (elanQuicktimeRadioButton.isSelected()) playerType = "ELAN-Quicktime-Player";
         if (basRadioButton.isSelected()) playerType = "BAS-Audio-Player";
         if (jdsRadioButton.isSelected()) playerType = "JDS-Player";
+        if (cocoaQTRadioButton.isSelected()) playerType = "CocoaQT-Player";
         
         prefs.put("PlayerType", playerType);
 
@@ -196,6 +200,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         basRadioButton = new javax.swing.JRadioButton();
         jdsRadioButton = new javax.swing.JRadioButton();
         directShowRadioButton = new javax.swing.JRadioButton();
+        cocoaQTRadioButton = new javax.swing.JRadioButton();
         elanQuicktimeRadioButton = new javax.swing.JRadioButton();
         quicktimeRadioButton = new javax.swing.JRadioButton();
         jmfRadioButton = new javax.swing.JRadioButton();
@@ -343,7 +348,12 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         playerButtonGroup.add(directShowRadioButton);
         directShowRadioButton.setForeground(new java.awt.Color(128, 128, 128));
         directShowRadioButton.setText(FOLKERInternationalizer.getString("dialog.preferences.directshow"));
+        directShowRadioButton.setEnabled(false);
         playerPanel.add(directShowRadioButton);
+
+        playerButtonGroup.add(cocoaQTRadioButton);
+        cocoaQTRadioButton.setText("Cocoa QT Player");
+        playerPanel.add(cocoaQTRadioButton);
 
         playerButtonGroup.add(elanQuicktimeRadioButton);
         elanQuicktimeRadioButton.setText(FOLKERInternationalizer.getString("dialog.preferences.quicktime"));
@@ -352,10 +362,10 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         playerButtonGroup.add(quicktimeRadioButton);
         quicktimeRadioButton.setForeground(new java.awt.Color(128, 128, 128));
         quicktimeRadioButton.setText("QTJ (Quicktime for Java) Player");
+        quicktimeRadioButton.setEnabled(false);
         playerPanel.add(quicktimeRadioButton);
 
         playerButtonGroup.add(jmfRadioButton);
-        jmfRadioButton.setForeground(new java.awt.Color(128, 128, 128));
         jmfRadioButton.setText("JMF (Java Media Framework) Player");
         playerPanel.add(jmfRadioButton);
 
@@ -591,6 +601,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox alphabetComboBox;
     private javax.swing.JPanel alphabetPanel;
     private javax.swing.JRadioButton basRadioButton;
+    private javax.swing.JRadioButton cocoaQTRadioButton;
     private javax.swing.JButton defaultAudioBrowseButton;
     private javax.swing.JPanel defaultAudioPanel;
     private javax.swing.JTextField defaultAudioTextField;

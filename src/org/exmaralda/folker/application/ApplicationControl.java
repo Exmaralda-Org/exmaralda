@@ -972,18 +972,20 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     
     public String getDefaultPlayer(){
         // changed 13-04-2015
-        // changed again 26-02-2015
+        // changed again 26-02-2016
+        // changed once more 05-04-2016
         //String defaultPlayer = "BAS-Audio-Player";
-        //String defaultPlayer = "JDS-Player";
         String defaultPlayer = "JMF-Player";
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("mac")){
-            defaultPlayer="ELAN-Quicktime-Player";
+            defaultPlayer="BAS-Audio-Player";
         } else if (os.equalsIgnoreCase("win")){
             defaultPlayer="JDS-Player";
         }
         return defaultPlayer;
     }
+
+
 
 
     public void initVideoPanel(){
@@ -996,14 +998,18 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         
         // set the default player according to os
         String defaultPlayer = getDefaultPlayer();
+        //player = new BASAudioPlayer();
         
-        // read preferred player from preferences
+        //read preferred player from preferences
         String playerType = java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).get("PlayerType", defaultPlayer);
         System.out.println("Player: " + playerType);
         // make sure that there is no contradiction between preferred player and os
         String os = System.getProperty("os.name").substring(0,3);
         if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("mac")){
-            playerType = "ELAN-Quicktime-Player";
+            playerType = "BAS-Audio-Player";
+        }
+        if (playerType.equals("ELAN-Quicktime-Player") && os.equalsIgnoreCase("mac")){
+            playerType = "BAS-Audio-Player";
         }
         if (playerType.equals("ELAN-Quicktime-Player") && os.equalsIgnoreCase("win")){
             playerType = "JDS-Player";
@@ -1011,15 +1017,18 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("win")){
             playerType = "JDS-Player";
         }
+        
 
         if (playerType.equals("JMF-Player")) {
             player = new JMFPlayer();
+        } else if (playerType.equals("BAS-Audio-Player")){
+            player = new BASAudioPlayer();
+        } else if (playerType.equals("JDS-Player")){
+            player = new JDSPlayer();
+        } else if (playerType.equals("CocoaQT-Player")) {
+            player = new CocoaQTPlayer();
         } else if (playerType.equals("DirectShow-Player")) {
             player = new ELANDSPlayer();
-        } else if (playerType.equals("JDS-Player")) {
-            player = new JDSPlayer();
-        } else if (playerType.equals("BAS-Audio-Player")) {
-            player = new BASAudioPlayer();
         } else if (playerType.equals("ELAN-Quicktime-Player")) {
             player = new ELANQTPlayer();
         } else if (playerType.equals("Quicktime-Player")) {

@@ -94,7 +94,8 @@ public class ExportAction extends AbstractApplicationAction {
                             = new org.exmaralda.partitureditor.jexmaralda.convert.ELANConverter();
                     converter.writeELANToFile(bt, f.getAbsolutePath());
             }  else if (fileChooser.getFileFilter()==praatFileFilter){
-                    BasicTranscription bt = ac.getBasicTranscription();
+                    // change 21-04-2016
+                    BasicTranscription bt = ac.getBasicTranscription().makeCopy();
                     org.exmaralda.partitureditor.jexmaralda.convert.PraatConverter converter 
                             = new org.exmaralda.partitureditor.jexmaralda.convert.PraatConverter();
                     converter.writePraatToFile(bt, f.getAbsolutePath());

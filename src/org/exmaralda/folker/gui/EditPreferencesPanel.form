@@ -297,6 +297,15 @@
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="FOLKERInternationalizer.getString(&quot;dialog.preferences.directshow&quot;)" type="code"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="cocoaQTRadioButton">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="playerButtonGroup"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Cocoa QT Player"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="elanQuicktimeRadioButton">
@@ -318,15 +327,13 @@
                       <Color blue="80" green="80" red="80" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="QTJ (Quicktime for Java) Player"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jmfRadioButton">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="playerButtonGroup"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="80" green="80" red="80" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="JMF (Java Media Framework) Player"/>
                   </Properties>

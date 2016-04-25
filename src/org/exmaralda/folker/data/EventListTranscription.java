@@ -11,7 +11,6 @@ package org.exmaralda.folker.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

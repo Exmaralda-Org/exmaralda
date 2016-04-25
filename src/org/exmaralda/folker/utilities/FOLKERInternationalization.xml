@@ -1150,11 +1150,11 @@
                                 </item>
                                 <item id="dialog.preferences.playerhint">
                                         <translation lang="en"
-                                                trans="Changes to player preferences will only take effect after a restart of FOLKER."/>
+                                                trans="Changes to player preferences will only take effect after a restart of FOLKER/OrthoNormal"/>
                                         <translation lang="de"
-                                                trans="Änderungen an den Voreinstellungen für den Player werden erst nach einem Neustart von FOLKER wirksam."/>
+                                                trans="Änderungen an den Voreinstellungen für den Player werden erst nach einem Neustart von FOLKER/OrthoNormal wirksam."/>
                                         <translation lang="fr"
-                                                trans="Les modifications ne prendront effet qu'après un redémarrage de FOLKER"
+                                                trans="Les modifications ne prendront effet qu'après un redémarrage de FOLKER/OrthoNormal"
                                         />
                                 </item>
                                 <item id="dialog.preferences.alphabethint">
@@ -1173,10 +1173,10 @@
                                                 trans="Direct Show (Windows seulement)"/>
                                 </item>
                                 <item id="dialog.preferences.quicktime">
-                                        <translation lang="en" trans="Cocoa Quicktime (Macintosh only)"/>
-                                        <translation lang="de" trans="Cocoa Quicktime (Nur auf Macintosh)"/>
+                                        <translation lang="en" trans="ELAN Quicktime"/>
+                                        <translation lang="de" trans="ELAN Quicktime"/>
                                         <translation lang="fr"
-                                                trans="Cocoa Quicktime (Macintosh seulement)"/>
+                                                trans="ELAN Quicktime"/>
                                 </item>
                                 <item id="dialog.preferences.controloption">
                                         <translation lang="en"
