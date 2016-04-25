@@ -160,6 +160,17 @@ public class TEIConverter {
                                                                               JDOMException,
                                                                               IOException,
                                                                               Exception {
+        writeHIATISOTEIToFile(bt, filename, false);
+    }
+    
+    public void writeHIATISOTEIToFile(BasicTranscription bt, 
+                                      String filename,
+                                      boolean includeFullText) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              Exception {
         // added 13-12-2013
         BasicTranscription copyBT = bt.makeCopy();
         copyBT.normalize();        
@@ -170,7 +181,11 @@ public class TEIConverter {
         String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
         TEIMerger teiMerger = new TEIMerger(true);
         Document stdoc = FileIO.readDocumentFromString(st.toXML());
-        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, 
+                nameOfDeepSegmentation, 
+                "SpeakerContribution_Event", 
+                true,
+                includeFullText);
         System.out.println("Merged");
         generateWordIDs(teiDoc);
         FileIO.writeDocumentToLocalFile(filename, teiDoc);
