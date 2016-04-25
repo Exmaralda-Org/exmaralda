@@ -191,22 +191,34 @@ public class TEIMerger {
         return finalDocument;
     }
     
+    public static Vector TEIMerge(Document segmentedTranscription, String nameOfDeepSegmentation, String nameOfFlatSegmentation) throws Exception{                
+        return TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, false);
+    }
     /** this method will take the segmented transcription and, for each speaker contribution in the segmentation with
      * the name 'nameOfDeepSegmentation' will add anchors from the segmentation with the name 'nameOfFlatSegmentation'
      * such that the temporal information provided in the flat segmentation is completely represented as anchors 
      * with in the deep segmentation. The typical application scenario is to give this method a segmented HIAT transcription with
      * nameOfDeepSegmentation = 'SpeakerContribution_Utterance_Word' 
-     * nameOfFlatSegmentation = 'SpeakerContribution_Event' 
-     * the method returns a vector of speaker-contribution elements with 'who' attributes */
-    public static Vector TEIMerge(Document segmentedTranscription, String nameOfDeepSegmentation, String nameOfFlatSegmentation) throws Exception{                
+     * nameOfFlatSegmentation = 'SpeakerContribution_Event'
+     * @param segmentedTranscription
+     * @param nameOfDeepSegmentation
+     * @param nameOfFlatSegmentation
+     * @param includeFullText
+     * the method returns a vector of speaker-contribution elements with 'who' attributes
+     * @return  */
+    public static Vector TEIMerge(Document segmentedTranscription, 
+            String nameOfDeepSegmentation, 
+            String nameOfFlatSegmentation,
+            boolean includeFullText) throws Exception{                
         try {
+            
             // Make a map of the timeline
             Hashtable timelineItems = new Hashtable();
             String xpath = "//tli";
             XPath xpx = XPath.newInstance(xpath);
             List tlis = xpx.selectNodes(segmentedTranscription);
             for (int pos=0; pos<tlis.size();pos++){
-                timelineItems.put(((Element)(tlis.get(pos))).getAttributeValue("id"), new Integer(pos));
+                timelineItems.put(((Element)(tlis.get(pos))).getAttributeValue("id"), pos);
             }
             
             
@@ -214,43 +226,39 @@ public class TEIMerger {
             XPath xp1 = XPath.newInstance("//segmentation[@name='" + nameOfDeepSegmentation + "']/ts");
             List segmentChains = xp1.selectNodes(segmentedTranscription);        
             // go through all top level segment chains
-            for (int pos=0; pos<segmentChains.size(); pos++){
-                Element sc = (Element)(segmentChains.get(pos));
+            for (Object segmentChain : segmentChains) {
+                Element sc = (Element) (segmentChain);
                 sc.setAttribute("speaker", sc.getParentElement().getParentElement().getAttributeValue("speaker"));
-                
-                
                 String tierref = sc.getParentElement().getAttributeValue("tierref");
                 String start = sc.getAttributeValue("s");
                 String end = sc.getAttributeValue("e");
-                
                 String xpath2 = "//segmentation[@name='" + nameOfFlatSegmentation + "' and @tierref='" + tierref + "']"
-                        + "/ts[@s='" + start + "' and @e='" + end +"']";                                
-                XPath xp2 = XPath.newInstance(xpath2);                
+                        + "/ts[@s='" + start + "' and @e='" + end +"']";
+                XPath xp2 = XPath.newInstance(xpath2);
                 Element sc2 = (Element)(xp2.selectSingleNode(segmentedTranscription));                                               
                 if (sc2==null){
-                    //System.out.println(tierref + " " + start + " " + end);
+                    //this means that no corresponding top level
+                    //element was found in the second segmentation
+                    //which should not happen
                     throw new Exception(tierref + " " + start + " " + end);
                 }
-                
+                // this is where the magic happens
                 Element mergedElement = merge(sc,sc2);
+                
 
                 // now take care of the corresponding annotations
-                int s = ((Integer)(timelineItems.get(start))).intValue();
-                int e = ((Integer)(timelineItems.get(end))).intValue();
-                
-                
+                int s = ((Integer)(timelineItems.get(start)));
+                int e = ((Integer)(timelineItems.get(end)));
                 String xpath5 = "//segmented-tier[@id='" + tierref + "']/annotation/ta";
                 XPath xp5 = XPath.newInstance(xpath5);
                 List annotations = xp5.selectNodes(segmentedTranscription);
-                for (int pos2=0; pos2<annotations.size();pos2++){
-                    Element anno = (Element)(annotations.get(pos2));
+                for (Object annotation1 : annotations) {
+                    Element anno = (Element) (annotation1);
                     String aStart = anno.getAttributeValue("s");
                     String aEnd = anno.getAttributeValue("e");
-                    int as = ((Integer)(timelineItems.get(aStart))).intValue();
-                    int ae = ((Integer)(timelineItems.get(aEnd))).intValue();
-                                        
+                    int as = ((Integer)(timelineItems.get(aStart)));
+                    int ae = ((Integer)(timelineItems.get(aEnd)));
                     boolean annotationBelongsToThisElement = (as>=s && as<=e) || (ae>=s && ae<=e);
-                    
                     if (annotationBelongsToThisElement){
                         Element annotationsElement = mergedElement.getChild("annotations");
                         if (annotationsElement==null){
@@ -269,8 +277,33 @@ public class TEIMerger {
                 }
                 
                 
+                //*****************************************
+                // NEW 25-04-2016
+                // include full text if Daniel J. wisheth thus
+                if (includeFullText){
+                    Element annotation = new Element("annotation");
+                    annotation.setAttribute("start", start);
+                    annotation.setAttribute("end", end);
+                    annotation.setAttribute("level", "full-text");
+                    
+                    String fullText = "";
+                    List l = XPath.selectNodes(sc2, "descendant::text()");
+                    for (Object o : l){
+                        Text text = (Text)o;
+                        fullText+=text.getText();
+                    }
+                    annotation.setAttribute("value", fullText);
+                    
+                    Element annotationsElement = mergedElement.getChild("annotations");
+                    if (annotationsElement==null){
+                        annotationsElement = new Element("annotations");
+                        mergedElement.addContent(annotationsElement);
+                    }
+                    annotationsElement.addContent(annotation);
+                }
+                //*****************************************
+                
                 returnValue.addElement(mergedElement.detach());
-                                               
             }
             return returnValue;
         } catch (JDOMException ex) {
