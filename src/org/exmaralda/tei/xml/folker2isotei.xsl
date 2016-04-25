@@ -120,8 +120,8 @@
                     <appInfo>
                         <!-- information about the application with which -->
                         <!-- the transcription was created -->
-                        <application ident="EXMARaLDA" version="1.5.3">
-                            <label>EXMARaLDA Partitur-Editor</label>
+                        <application ident="FOLKER" version="1.1">
+                            <label>FOLK Editor</label>
                             <desc>Transcription Tool providing a TEI Export</desc>
                         </application>
                     </appInfo>       
