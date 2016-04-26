@@ -72,6 +72,7 @@ public class PartitureTableWithActions extends PartitureTable
                             PraatPanelListener,
                             org.exmaralda.partitureditor.search.SearchResultListener, 
                             org.exmaralda.partitureditor.jexmaralda.errorChecker.ErrorCheckerListener,
+                            org.exmaralda.partitureditor.svgPanel.XPointerListener, 
                             java.awt.event.MouseWheelListener,
                             java.awt.event.MouseListener,
                             org.exmaralda.partitureditor.sound.PlayableListener,
@@ -314,7 +315,13 @@ public class PartitureTableWithActions extends PartitureTable
         
         quickMediaOpenDialog = new QuickMediaOpenDialog(parent, this, false);    
         quickMediaOpenDialog.setLocationRelativeTo(parent);
+        
+        multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);
+        multimodalDialog.setLocationRelativeTo(this);
 
+        svgDialog = new org.exmaralda.partitureditor.svgPanel.SVGDialog(parent, false);
+        svgDialog.setLocationRelativeTo(this);
+        svgDialog.svgPanel.addXPointerListener(this);
         
     }
 
@@ -1639,6 +1646,8 @@ public class PartitureTableWithActions extends PartitureTable
         if (settings.get("SHOW-PraatPanel","FALSE").equalsIgnoreCase("TRUE")){praatPanel.setVisible(true);}
         if (settings.get("SHOW-AnnotationPanel","FALSE").equalsIgnoreCase("TRUE")){annotationDialog.setVisible(true);}
         if (settings.get("SHOW-IPAPanel","FALSE").equalsIgnoreCase("TRUE")){ipaPanel.setVisible(true);}
+        if (settings.get("SHOW-MultimodalPanel","FALSE").equalsIgnoreCase("TRUE")){multimodalDialog.setVisible(true);}
+        if (settings.get("SHOW-SVGPanel","FALSE").equalsIgnoreCase("TRUE")){svgDialog.setVisible(true);}
 
 
         // default font and general purpose font
@@ -1759,6 +1768,8 @@ public class PartitureTableWithActions extends PartitureTable
         settings.put("SHOW-PraatPanel", Boolean.toString(praatPanel.isShowing()));
         settings.put("SHOW-AnnotationPanel", Boolean.toString(annotationDialog.isShowing()));
         settings.put("SHOW-IPAPanel", Boolean.toString(ipaPanel.isShowing()));
+        settings.put("SHOW-MultimodalPanel", Boolean.toString(multimodalDialog.isShowing()));
+        settings.put("SHOW-SVGPanel", Boolean.toString(svgDialog.isShowing()));
         // Default font
         settings.put("Default-Font", defaultFontName);
         settings.put("General-Purpose-Font", generalPurposeFontName);
@@ -2479,6 +2490,11 @@ public class PartitureTableWithActions extends PartitureTable
         } else if (player instanceof CocoaQTPlayer){
             ((CocoaQTPlayer)player).setPlaybackRate(newRate);             
         }
+    }
+
+    @Override
+    public void processXPointer(String xPointer) {
+        JOptionPane.showMessageDialog(parent, "Implement me!");
     }
 
 

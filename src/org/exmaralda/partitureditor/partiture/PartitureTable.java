@@ -40,22 +40,31 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
      *  a basic transcription */
     private BasicTranscriptionTableModel tableModel;
 
+    //****************************************************************************
+    //******************************   PANELS      *******************************    
+    //****************************************************************************
     /** the link panel */
     public org.exmaralda.partitureditor.linkPanel.LinkPanelDialog linkPanelDialog;
     /** the virtual keyboard */
     public org.exmaralda.partitureditor.unicodeKeyboard.UnicodeKeyboardDialog keyboardDialog;
     /** the audio panel */
     public org.exmaralda.partitureditor.sound.AudioPanel mediaPanelDialog;
-    /** the segmentation panel */
-    //public org.exmaralda.partitureditor.segmentationPanel.SegmentationPanel segmentationPanel;
     /** the praat panel */
     public org.exmaralda.partitureditor.praatPanel.PraatPanel praatPanel;
     /** the annotation dialog */
     public org.exmaralda.partitureditor.annotation.AnnotationDialog annotationDialog;
     /** the IPA Panel */
     public org.exmaralda.partitureditor.ipapanel.IPADialog ipaPanel;
+    /** the Mutltimodal Panel */
+    public org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog multimodalDialog;
+    /** the SVG Panel */
+    public org.exmaralda.partitureditor.svgPanel.SVGDialog svgDialog;
     /** the quick media open dialog */
     public org.exmaralda.partitureditor.jexmaraldaswing.QuickMediaOpenDialog quickMediaOpenDialog;
+    /** the segmentation panel (no longer used)*/
+    //public org.exmaralda.partitureditor.segmentationPanel.SegmentationPanel segmentationPanel;
+    //****************************************************************************
+    //****************************************************************************
     
     /** the scale constant */
     public int scaleConstant = +2;

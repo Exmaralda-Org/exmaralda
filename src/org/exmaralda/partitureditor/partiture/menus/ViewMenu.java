@@ -29,6 +29,8 @@ public class ViewMenu extends AbstractTableMenu {
     public JCheckBoxMenuItem showPraatPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showAnnotationPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showIPAPanelCheckBoxMenuItem;
+    public JCheckBoxMenuItem showMultimodalPanelCheckBoxMenuItem;
+    public JCheckBoxMenuItem showSVGPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showQuickMediaOpenCheckBoxMenuItem;
     //public JCheckBoxMenuItem showSegmentationPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showToolbarCheckBoxMenuItem;
@@ -38,7 +40,8 @@ public class ViewMenu extends AbstractTableMenu {
     public JRadioButtonMenuItem characterProportionalRadioButton;
     public JRadioButtonMenuItem timeProportionalRadioButton;
 
-    /** Creates a new instance of ViewMenu */
+    /** Creates a new instance of ViewMenu
+     * @param t */
     public ViewMenu(PartitureTableWithActions t) {
 
         super(t);
@@ -99,6 +102,26 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
 
+        showMultimodalPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        showMultimodalPanelCheckBoxMenuItem.setSelected(true);
+        showMultimodalPanelCheckBoxMenuItem.setText(Internationalizer.getString("Multimedia panel"));
+        showMultimodalPanelCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showMultimodalPanelCheckBoxMenuItemActionPerformed(evt);
+            }
+        });
+
+        showSVGPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        showSVGPanelCheckBoxMenuItem.setSelected(true);
+        showSVGPanelCheckBoxMenuItem.setText(Internationalizer.getString("SVG panel"));
+        showSVGPanelCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showSVGPanelCheckBoxMenuItemActionPerformed(evt);
+            }
+        });
+        
         showAnnotationPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showAnnotationPanelCheckBoxMenuItem.setSelected(true);
         showAnnotationPanelCheckBoxMenuItem.setText(Internationalizer.getString("Annotation panel"));
@@ -126,6 +149,8 @@ public class ViewMenu extends AbstractTableMenu {
         add(showPraatPanelCheckBoxMenuItem);
         add(showAnnotationPanelCheckBoxMenuItem);
         add(showIPAPanelCheckBoxMenuItem);
+        add(showMultimodalPanelCheckBoxMenuItem);
+        add(showSVGPanelCheckBoxMenuItem);
         //add(showSegmentationPanelCheckBoxMenuItem);
         addSeparator();
         
@@ -280,6 +305,14 @@ public class ViewMenu extends AbstractTableMenu {
 
     private void showIPAPanelCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         table.ipaPanel.setVisible(showIPAPanelCheckBoxMenuItem.isSelected());
+    }
+
+    private void showMultimodalPanelCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        table.multimodalDialog.setVisible(showMultimodalPanelCheckBoxMenuItem.isSelected());
+    }
+
+    private void showSVGPanelCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+        table.svgDialog.setVisible(showSVGPanelCheckBoxMenuItem.isSelected());
     }
 
     /*private void showSegmentationPanelCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {

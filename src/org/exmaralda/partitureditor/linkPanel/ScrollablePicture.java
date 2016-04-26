@@ -9,7 +9,6 @@ package org.exmaralda.partitureditor.linkPanel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 /* ScrollablePicture.java is used by ScrollDemo.java. */
 

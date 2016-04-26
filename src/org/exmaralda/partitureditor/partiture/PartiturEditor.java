@@ -112,6 +112,8 @@ public class PartiturEditor extends javax.swing.JFrame
         table.praatPanel.addWindowListener(this);
         table.annotationDialog.addWindowListener(this);
         table.ipaPanel.addWindowListener(this);
+        table.multimodalDialog.addWindowListener(this);
+        table.svgDialog.addWindowListener(this);
              
         // init the other GUI components      
         initComponents();
@@ -432,6 +434,8 @@ public class PartiturEditor extends javax.swing.JFrame
             menuBar.viewMenu.showPraatPanelCheckBoxMenuItem.setSelected(settings.get("SHOW-PraatPanel","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.viewMenu.showAnnotationPanelCheckBoxMenuItem.setSelected(settings.get("SHOW-AnnotationPanel","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.viewMenu.showIPAPanelCheckBoxMenuItem.setSelected(settings.get("SHOW-IPAPanel","FALSE").equalsIgnoreCase("TRUE"));
+            menuBar.viewMenu.showMultimodalPanelCheckBoxMenuItem.setSelected(settings.get("SHOW-MultimodalPanel","FALSE").equalsIgnoreCase("TRUE"));
+            menuBar.viewMenu.showSVGPanelCheckBoxMenuItem.setSelected(settings.get("SHOW-SVGPanel","FALSE").equalsIgnoreCase("TRUE"));
 
             boolean showLTF = settings.get("SHOW-LargeTextField","TRUE").equalsIgnoreCase("TRUE");
             largeTextFieldPanel.setVisible(showLTF);
@@ -514,6 +518,10 @@ public class PartiturEditor extends javax.swing.JFrame
             menuBar.viewMenu.showAnnotationPanelCheckBoxMenuItem.setSelected(false);
         } else if (source==table.ipaPanel){
             menuBar.viewMenu.showIPAPanelCheckBoxMenuItem.setSelected(false);
+        } else if (source==table.multimodalDialog){
+            menuBar.viewMenu.showMultimodalPanelCheckBoxMenuItem.setSelected(false);
+        } else if (source==table.svgDialog){
+            menuBar.viewMenu.showSVGPanelCheckBoxMenuItem.setSelected(false);
         } else { // i.e. source is this
         }
     }
