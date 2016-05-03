@@ -10,6 +10,7 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import org.exmaralda.partitureditor.jexmaralda.*;
+import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 
 import java.io.*;
 import java.util.*;
@@ -30,6 +31,7 @@ import eu.clarin.weblicht.wlfxb.tc.api.Token;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
+import eu.clarin.weblicht.wlfxb.tc.xb.TextSourceLayerStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
 import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 
@@ -65,6 +67,7 @@ import org.jdom.xpath.XPath;
 public class TCFConverter {
 
     TextCorpusStored textCorpus;
+    TextSourceLayerStored textSource;
     static String TCF_STYLESHEET_PATH = 
         "/org/exmaralda/partitureditor/jexmaralda/xsl/ISOTEI2TCF.xsl";
 
@@ -89,6 +92,9 @@ public class TCFConverter {
             WLDObjector wldo = new WLDObjector();
             WLData data = wldo.read(fis);
             textCorpus = data.getTextCorpus();
+            // FIXME: if there's hidden exmeralda tei merger data in
+            // text-source, just slurp that in
+            textSource = textCorpus.getTextSourceLayer();
         } catch (WLFormatException wlfe) {
             wlfe.printStackTrace();
         }
@@ -117,7 +123,30 @@ public class TCFConverter {
      * bounding points. Text is assumed to stretch over all tokens.
      */
     public BasicTranscription importText(){
-        BasicTranscription bt = new BasicTranscription();
+        BasicTranscription bt;
+        if (textSource != null) {
+            try {
+                File tempfile = File.createTempFile("exmaralda-tei", ".xml");
+                tempfile.deleteOnExit();
+                Writer tempwriter = new BufferedWriter(new OutputStreamWriter(
+                            new FileOutputStream(tempfile), "utf-8"));
+                tempwriter.write(textSource.getText());
+                TEIConverter teireader = new TEIConverter();
+                bt = teireader.readTEIFromFile(tempfile.getAbsolutePath());
+                if (bt != null) {
+                    return bt;
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } catch (SAXException saxe) {
+                saxe.printStackTrace();
+            } catch (JDOMException jdome) {
+                jdome.printStackTrace();
+            }
+            System.err.println("Could not use TEI in textsource for importing, "
+                    + "falling back to TCF data");
+        }
+        bt = new BasicTranscription();
         Speakertable st = bt.getHead().getSpeakertable();
         Speaker speaker = new Speaker();
         speaker.setID("SPK0");
@@ -129,126 +158,152 @@ public class TCFConverter {
         }
         Timeline timeline = bt.getBody().getCommonTimeline();
         String tliStart = timeline.addTimelineItem();
+        String tliEnd = tliStart;
 
         // do we always have tokens, right?
-        Tier tokenTier = new Tier();
-        tokenTier.setID("TIE0");
-        tokenTier.setCategory("txt");
-        tokenTier.setType("t");
-        tokenTier.setDisplayName("X [token]");
-        tokenTier.setSpeaker("SPK0");
-
+        TokensLayer tokensLayer = textCorpus.getTokensLayer();
+        Tier tokenTier = null;
         Map<String, String> tokenStartTimelineItems =
-            new HashMap<String, String>();
+                new HashMap<String, String>();
         Map<String, String> tokenEndTimelineItems =
-            new HashMap<String, String>();
+                new HashMap<String, String>();
+        if (tokensLayer != null) {
+            tokenTier = new Tier();
+            tokenTier.setID("TIE0");
+            tokenTier.setCategory("txt");
+            tokenTier.setType("t");
+            tokenTier.setDisplayName("X [token]");
+            tokenTier.setSpeaker("SPK0");
 
-        // collect tokens for later use, as main id points
-        String tli = tliStart;
-        for (int i = 0; i < textCorpus.getTokensLayer().size(); i++) {
-            Token token = textCorpus.getTokensLayer().getToken(i);
-            Event e = new Event();
-            e.setDescription(token.getString());
-            tokenStartTimelineItems.put(token.getID(), tli);
-            e.setStart(tli);
-            tli = timeline.addTimelineItem();
-            e.setEnd(tli);
-            tokenEndTimelineItems.put(token.getID(), tli);
-            tokenTier.addEvent(e);
+
+            // collect tokens for later use, as main id points
+            String tli = tliStart;
+            for (int i = 0; i < textCorpus.getTokensLayer().size(); i++) {
+                Token token = textCorpus.getTokensLayer().getToken(i);
+                Event e = new Event();
+                e.setDescription(token.getString());
+                tokenStartTimelineItems.put(token.getID(), tli);
+                e.setStart(tli);
+                tli = timeline.addTimelineItem();
+                e.setEnd(tli);
+                tokenEndTimelineItems.put(token.getID(), tli);
+                tokenTier.addEvent(e);
+            }
+            tliEnd = tli;
         }
-        String tliEnd = tli;
 
         // text layer covers whole timeline?
-        Tier textTier = new Tier();
-        textTier.setID("TIE1");
-        textTier.setCategory("txt");
-        textTier.setType("t");
-        textTier.setDisplayName("X [txt]");
-        textTier.setSpeaker("SPK0");
         TextLayer text = textCorpus.getTextLayer();
-        Event e = new Event();
-        e.setStart(tliStart);
-        e.setDescription(text.getText());
-        e.setEnd(tliEnd);
-        textTier.addEvent(e);
+        Tier textTier = null;
+        if (text != null) {
+            textTier = new Tier();
+            textTier.setID("TIE1");
+            textTier.setCategory("txt");
+            textTier.setType("t");
+            textTier.setDisplayName("X [txt]");
+            textTier.setSpeaker("SPK0");
+            Event e = new Event();
+            e.setStart(tliStart);
+            e.setDescription(text.getText());
+            e.setEnd(tliEnd);
+            textTier.addEvent(e);
+        }
 
         // sentences cover some subsets
-        Tier sentenceTier = new Tier();
-        sentenceTier.setID("TIE4");
-        sentenceTier.setCategory("txt");
-        sentenceTier.setType("t");
-        sentenceTier.setDisplayName("X [sent]");
-        sentenceTier.setSpeaker("SPK0");
         SentencesLayer sents = textCorpus.getSentencesLayer();
-        for (int i = 0; i < sents.size(); i++) {
-            Sentence sentence = sents.getSentence(i);
-            Token[] tokenses = sents.getTokens(sentence);
-            String descr = "";
-            for (int j = 0; j < tokenses.length; j++) {
-                descr = descr + " " + tokenses[j].getString();
+        Tier sentenceTier = new Tier();
+        if (sents != null) {
+            sentenceTier = new Tier();
+            sentenceTier.setID("TIE4");
+            sentenceTier.setCategory("txt");
+            sentenceTier.setType("t");
+            sentenceTier.setDisplayName("X [sent]");
+            sentenceTier.setSpeaker("SPK0");
+            for (int i = 0; i < sents.size(); i++) {
+                Sentence sentence = sents.getSentence(i);
+                Token[] tokenses = sents.getTokens(sentence);
+                String descr = "";
+                for (int j = 0; j < tokenses.length; j++) {
+                    descr = descr + " " + tokenses[j].getString();
+                }
+                Event e = new Event();
+                String tliStartNow = 
+                    tokenStartTimelineItems.get(tokenses[0].getID());
+                e.setStart(tliStartNow);
+                e.setDescription(descr);
+                String tliEndNow = tokenEndTimelineItems.get(
+                    tokenses[tokenses.length - 1].getID());
+                e.setEnd(tliEndNow);
+                sentenceTier.addEvent(e);
             }
-            e = new Event();
-            String tliStartNow = 
-                tokenStartTimelineItems.get(tokenses[0].getID());
-            e.setStart(tliStartNow);
-            e.setDescription(descr);
-            String tliEndNow = tokenEndTimelineItems.get(
-                tokenses[tokenses.length - 1].getID());
-            e.setEnd(tliEndNow);
-            sentenceTier.addEvent(e);
         }
 
         // other layers?  (this starts to be a bit of copy-pasta)
         // please to be refactoring next time you see this...
-        Tier posTier = new Tier();
-        posTier.setID("TIE2");
-        posTier.setCategory("pos");
-        posTier.setType("a");
-        posTier.setDisplayName("X [pos]");
-        posTier.setSpeaker("SPK0");
+        Tier posTier = null;
         PosTagsLayer poses = textCorpus.getPosTagsLayer();
-        for (int i = 0; i < poses.size(); i++) {
-            PosTag pos = poses.getTag(i);
-            e = new Event();
-            e.setDescription(pos.getString());
-            Token[] tokenses = poses.getTokens(pos);
-            String tliStartNow = 
-                tokenStartTimelineItems.get(tokenses[0].getID());
-            e.setStart(tliStartNow);
-            String tliEndNow = tokenEndTimelineItems.get(
-                tokenses[tokenses.length - 1].getID());
-            e.setEnd(tliEndNow);
-            posTier.addEvent(e);
+        if (poses != null) {
+            posTier = new Tier();
+            posTier.setID("TIE2");
+            posTier.setCategory("pos");
+            posTier.setType("a");
+            posTier.setDisplayName("X [pos]");
+            posTier.setSpeaker("SPK0");
+            for (int i = 0; i < poses.size(); i++) {
+                PosTag pos = poses.getTag(i);
+                Event e = new Event();
+                e.setDescription(pos.getString());
+                Token[] tokenses = poses.getTokens(pos);
+                String tliStartNow = 
+                    tokenStartTimelineItems.get(tokenses[0].getID());
+                e.setStart(tliStartNow);
+                String tliEndNow = tokenEndTimelineItems.get(
+                    tokenses[tokenses.length - 1].getID());
+                e.setEnd(tliEndNow);
+                posTier.addEvent(e);
+            }
         }
         // Lemmas
-        Tier lemmaTier = new Tier();
-        lemmaTier.setID("TIE3");
-        lemmaTier.setCategory("lemma");
-        lemmaTier.setType("a");
-        lemmaTier.setDisplayName("X [lemma]");
-        lemmaTier.setSpeaker("SPK0");
         LemmasLayer lemmas = textCorpus.getLemmasLayer();
-        for (int i = 0; i < lemmas.size(); i++) {
-            Lemma lemma = lemmas.getLemma(i);
-            e = new Event();
-            e.setDescription(lemma.getString());
-            Token[] tokenses = lemmas.getTokens(lemma);
-            String tliStartNow = 
-                tokenStartTimelineItems.get(tokenses[0].getID());
-            e.setStart(tliStartNow);
-            String tliEndNow = tokenEndTimelineItems.get(
-                    tokenses[tokenses.length - 1].getID());
-            e.setEnd(tliEndNow);
-            lemmaTier.addEvent(e);
+        Tier lemmaTier = null;
+        if (lemmas != null) {
+            lemmaTier = new Tier();
+            lemmaTier.setID("TIE3");
+            lemmaTier.setCategory("lemma");
+            lemmaTier.setType("a");
+            lemmaTier.setDisplayName("X [lemma]");
+            lemmaTier.setSpeaker("SPK0");
+            for (int i = 0; i < lemmas.size(); i++) {
+                Lemma lemma = lemmas.getLemma(i);
+                Event e = new Event();
+                e.setDescription(lemma.getString());
+                Token[] tokenses = lemmas.getTokens(lemma);
+                String tliStartNow = 
+                    tokenStartTimelineItems.get(tokenses[0].getID());
+                e.setStart(tliStartNow);
+                String tliEndNow = tokenEndTimelineItems.get(
+                        tokenses[tokenses.length - 1].getID());
+                e.setEnd(tliEndNow);
+                lemmaTier.addEvent(e);
+            }
         }
 
-
         try {
-            bt.getBody().addTier(tokenTier);
-            bt.getBody().addTier(textTier);
-            bt.getBody().addTier(sentenceTier);
-            bt.getBody().addTier(posTier);
-            bt.getBody().addTier(lemmaTier);
+            if (tokenTier != null) {
+                bt.getBody().addTier(tokenTier);
+            }
+            if (textTier != null) {
+                bt.getBody().addTier(textTier);
+            }
+            if (sentenceTier != null) {
+                bt.getBody().addTier(sentenceTier);
+            }
+            if (posTier != null) {
+                bt.getBody().addTier(posTier);
+            }
+            if (lemmaTier != null) {
+                bt.getBody().addTier(lemmaTier);
+            }
         } catch (JexmaraldaException ex) {
             ex.printStackTrace();
         }
