@@ -35,7 +35,7 @@ public class OpenAction extends javax.swing.AbstractAction {
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** OpenAction ***]");
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Normalisierte Transkription öffnen");
+        fileChooser.setDialogTitle("Normalisierte Transkription Ã¶ffnen");
         fileChooser.setCurrentDirectory(new File("Y:\\thomas\\DS2FLK\\13_Manual_Alignment"));
         NormalizedFolkerFileFilter nff = new org.exmaralda.folker.utilities.NormalizedFolkerFileFilter();
         fileChooser.addChoosableFileFilter(nff);

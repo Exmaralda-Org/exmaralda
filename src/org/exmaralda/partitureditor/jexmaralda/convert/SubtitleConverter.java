@@ -38,7 +38,7 @@ public class SubtitleConverter {
     //
     //2
     //00:00:15,000 --> 00:00:18,000
-    //wünschen dürfte!    
+    //wÃ¼nschen dÃ¼rfte!    
     
     public SubtitleConverter(EventListTranscription elt){
         transcription = elt;
@@ -55,7 +55,7 @@ public class SubtitleConverter {
     //
     //2
     //00:00:15,000 --> 00:00:18,000
-    //wünschen dürfte!    
+    //wÃ¼nschen dÃ¼rfte!    
     public String getSRT(){
         return getSRT(false,false);
     }

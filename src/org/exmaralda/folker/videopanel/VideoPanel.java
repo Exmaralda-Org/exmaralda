@@ -116,7 +116,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         bottomPanel.add(controlsPanel, java.awt.BorderLayout.CENTER);
 
         openFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/devices/video-display.png"))); // NOI18N
-        openFileButton.setToolTipText("Videodatei öffnen...");
+        openFileButton.setToolTipText("Videodatei Ã¶ffnen...");
         openFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openFileButtonActionPerformed(evt);

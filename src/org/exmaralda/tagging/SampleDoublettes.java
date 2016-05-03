@@ -78,7 +78,7 @@ public class SampleDoublettes {
             }
         }
         System.out.println("=============");
-        System.out.println(count + " von " + all + " Beitr�gen sind Doubletten");
+        System.out.println(count + " von " + all + " BeitrÃ¤gen sind Doubletten");
         System.out.println(wCount + " von " + wCountAll + " Tokens sind Doubletten");
         for (String t : trs){
             System.out.println(t);
