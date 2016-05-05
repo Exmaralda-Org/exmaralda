@@ -19,7 +19,7 @@
                     <transcription-convention/>
                 </meta-information>
                 <speakertable>
-                    <xsl:for-each-group select="//speaker" group-by="text()">
+                    <xsl:for-each-group select="//transana-line[not(problem)]/speaker" group-by="text()">
                         <speaker>
                             <xsl:attribute name="id" select="upper-case(current-grouping-key())"/>
                             <abbreviation><xsl:value-of select="current-grouping-key()"/></abbreviation>
@@ -36,11 +36,12 @@
             <basic-body>
                 <common-timeline>
                     <!-- <tli id="T0" time="0.0"/> -->
-                    <xsl:for-each select="//transana-line[speaker]">
-                        <xsl:if test="time">
+                    <xsl:for-each select="//transana-line">
                             <tli>
                                 <xsl:attribute name="id"><xsl:text>T_</xsl:text><xsl:value-of select="count(preceding-sibling::transana-line[speaker])"/><xsl:text>_0</xsl:text></xsl:attribute>
-                                <xsl:attribute name="time"><xsl:value-of select="substring(time,1,string-length(time)-3)"/><xsl:text>.</xsl:text><xsl:value-of select="substring(time,string-length(time)-2)"/></xsl:attribute>
+                                <xsl:if test="time">                                    
+                                    <xsl:attribute name="time"><xsl:value-of select="substring(time,1,string-length(time)-3)"/><xsl:text>.</xsl:text><xsl:value-of select="substring(time,string-length(time)-2)"/></xsl:attribute>
+                                </xsl:if>                                
                             </tli>
                             <xsl:for-each select="segment[not(@type='#0000FF') and not(position()=1)]">
                                 <tli>
@@ -52,20 +53,19 @@
                                     </xsl:attribute>                                    
                                 </tli>                                
                             </xsl:for-each>
-                        </xsl:if>
                     </xsl:for-each>
                     <tli id="T_LAST"/>
                 </common-timeline>
-                <xsl:for-each-group select="//speaker" group-by="text()">
+                <xsl:for-each-group select="//transana-line[not(problem)]/speaker" group-by="text()">
                     <tier category="v" type="t">
                         <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_V</xsl:text></xsl:attribute>
                         <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>
-                        <xsl:apply-templates select="//transana-line[speaker=current-grouping-key()]/segment[not(@type='#0000FF')]"/>
+                        <xsl:apply-templates select="//transana-line[speaker=current-grouping-key() and (not(problem))]/segment[not(@type='#0000FF')]"/>
                     </tier>
                     <tier category="de" type="a">
                         <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_DE</xsl:text></xsl:attribute>
                         <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>                            
-                        <xsl:apply-templates select="//transana-line[speaker=current-grouping-key()]/segment[@type='#0000FF']"/>
+                        <xsl:apply-templates select="//transana-line[speaker=current-grouping-key() and (not(problem))]/segment[@type='#0000FF']"/>
                     </tier>
                 </xsl:for-each-group>
             </basic-body>

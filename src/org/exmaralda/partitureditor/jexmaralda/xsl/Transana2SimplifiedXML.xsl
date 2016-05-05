@@ -181,12 +181,11 @@
     <!-- ****************************************************** -->
     
     <!-- a symbol and between two blues -->
-    <xsl:template match="*:symbol[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
+    <xsl:template match="*:symbol[count(preceding-sibling::*)&gt;=4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
     
     <!-- just a space -->
     <xsl:template match="*:text[position()&gt;4 and string-length(normalize-space(translate(text(),'&quot;',' ')))=0]"/>
-    
-
+        
     <!-- the (n+1)th in a row of blues -->
     <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
     
@@ -199,7 +198,7 @@
     <!-- <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0]]"/> -->
     
     <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][self::*:symbol]]"/>
-    <xsl:template match="*:symbol[position()&gt;4 and preceding-sibling::*[1][@textcolor='#000000'] and following-sibling::*[1][@textcolor='#000000']]"/>
+    <xsl:template match="*:symbol[count(preceding-sibling::*)&gt;=4 and preceding-sibling::*[1][@textcolor='#000000'] and following-sibling::*[1][@textcolor='#000000']]"/>
     
     
     

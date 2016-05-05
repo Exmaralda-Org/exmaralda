@@ -104,7 +104,7 @@ public class ViewMenu extends AbstractTableMenu {
 
         showMultimodalPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showMultimodalPanelCheckBoxMenuItem.setSelected(true);
-        showMultimodalPanelCheckBoxMenuItem.setText(Internationalizer.getString("Multimedia panel"));
+        showMultimodalPanelCheckBoxMenuItem.setText(Internationalizer.getString("Multimodal panel"));
         showMultimodalPanelCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
