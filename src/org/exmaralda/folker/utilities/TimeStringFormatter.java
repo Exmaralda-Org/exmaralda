@@ -1,7 +1,7 @@
 /*
  * TimeStringFormatter.java
  *
- * Created on 10. März 2008, 14:15
+ * Created on 10. Mrz 2008, 14:15
  *
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.

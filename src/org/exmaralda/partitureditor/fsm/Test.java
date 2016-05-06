@@ -27,7 +27,7 @@ public class Test {
         try {
             FSMSaxReader sr = new FSMSaxReader();
             FiniteStateMachine fsm = sr.readFromFile("C:\\DATEN\\CODE\\EXMARaLDA\\src\\org\\exmaralda\\partitureditor\\fsm\\xml\\cGAT_Minimal.xml");
-            String result = fsm.process("((lacht/hhh°))");
+            String result = fsm.process("((lacht/hhhÂ°))");
             System.out.println(result);
         } catch (Exception e){
             System.out.println(e.getMessage());

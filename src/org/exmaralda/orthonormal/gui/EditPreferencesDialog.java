@@ -405,7 +405,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
-        jfc.setDialogTitle("XML-Datei für Lexikon auswählen/angeben");
+        jfc.setDialogTitle("XML-Datei fÃ¼r Lexikon auswÃ¤hlen/angeben");
         jfc.setFileFilter(new ParameterFileFilter("xml", "Normalisierungslexikondateien (*.xml)"));
         int v = jfc.showOpenDialog(this);
         if (v==JFileChooser.APPROVE_OPTION){
@@ -460,7 +460,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
     private void browsePOSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsePOSButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
-        jfc.setDialogTitle("XML-Datei für POS-Tagset auswählen/angeben");
+        jfc.setDialogTitle("XML-Datei fÃ¼r POS-Tagset auswÃ¤hlen/angeben");
         jfc.setFileFilter(new ParameterFileFilter("xml", "POS-Tagset-Dateien (*.xml)"));
         int v = jfc.showOpenDialog(this);
         if (v==JFileChooser.APPROVE_OPTION){

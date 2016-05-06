@@ -15,7 +15,7 @@ class PostProcessingRule {
  
     
 /*    <rule>
-        <match field="word">[A-ZִײÜa-zהצüß]{0,2}\%</match>
+        <match field="word">[A-Zֳ„ֳ–ֳa-zֳ₪ֳ¶ֳ¼ֳ]{0,2}\%</match>
         <set field="pos">XY</set>
     </rule> */
     

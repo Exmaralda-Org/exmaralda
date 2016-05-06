@@ -102,7 +102,7 @@ public class MatchListDialog2 extends javax.swing.JDialog implements MouseListen
         controlPanel.add(workingDirPanel);
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/document-open.png"))); // NOI18N
-        openButton.setText("Liste öffnen...");
+        openButton.setText("Liste Ã¶ffnen...");
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openButtonActionPerformed(evt);

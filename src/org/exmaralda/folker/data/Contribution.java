@@ -42,7 +42,7 @@ public class Contribution implements TimeAssigned, SpeakerAssigned {
             <time timepoint-reference="TLI_480"/>
             <breathe type="in" length="2"/>
             <pause duration="micro"/>
-            <w id="w2524" n="äh" i="n">ähm</w>
+            <w id="w2524" n="Ã¤h" i="n">Ã¤hm</w>
         </contribution>*/
         Element root = new Element("folker-transcription");
         root.addContent(new Element("head"));

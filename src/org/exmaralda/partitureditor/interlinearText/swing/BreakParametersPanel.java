@@ -115,7 +115,7 @@ public class BreakParametersPanel extends javax.swing.JPanel {
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel5.setText("Horizontal tolerance: ");
-        jLabel5.setToolTipText("Grenzwert für Partitur-Umbruch");
+        jLabel5.setToolTipText("Grenzwert fÃ¼r Partitur-Umbruch");
         jLabel5.setMaximumSize(new java.awt.Dimension(150, 16));
         jLabel5.setMinimumSize(new java.awt.Dimension(130, 16));
         jLabel5.setPreferredSize(new java.awt.Dimension(130, 16));
@@ -134,7 +134,7 @@ public class BreakParametersPanel extends javax.swing.JPanel {
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setText("Vertical tolerance: ");
-        jLabel1.setToolTipText("Grenzwert für Seitenumbruch");
+        jLabel1.setToolTipText("Grenzwert fÃ¼r Seitenumbruch");
         jLabel1.setMaximumSize(new java.awt.Dimension(150, 16));
         jLabel1.setMinimumSize(new java.awt.Dimension(130, 16));
         jLabel1.setPreferredSize(new java.awt.Dimension(130, 16));
@@ -152,7 +152,7 @@ public class BreakParametersPanel extends javax.swing.JPanel {
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel6.setText("Additional label space: ");
-        jLabel6.setToolTipText("Zusätzlicher Freiraum nach Sprecherlabels");
+        jLabel6.setToolTipText("ZusÃ¤tzlicher Freiraum nach Sprecherlabels");
         jLabel6.setMaximumSize(new java.awt.Dimension(150, 16));
         jPanel8.add(jLabel6);
 
@@ -178,12 +178,12 @@ public class BreakParametersPanel extends javax.swing.JPanel {
 
         numberItBundlesCheckBox.setSelected(true);
         numberItBundlesCheckBox.setText("Number partitur areas");
-        numberItBundlesCheckBox.setToolTipText("Partiturflächen nummerieren");
+        numberItBundlesCheckBox.setToolTipText("PartiturflÃ¤chen nummerieren");
         jPanel3.add(numberItBundlesCheckBox);
 
         smoothRightBoundariesCheckBox.setSelected(true);
         smoothRightBoundariesCheckBox.setText("Smooth right boundaries");
-        smoothRightBoundariesCheckBox.setToolTipText("Rechte Ränder angleichen");
+        smoothRightBoundariesCheckBox.setToolTipText("Rechte RÃ¤nder angleichen");
         jPanel3.add(smoothRightBoundariesCheckBox);
 
         saveSpaceCheckBox.setText("Save space");

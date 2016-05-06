@@ -228,13 +228,13 @@ public final class ApplicationControl implements  ListSelectionListener,
                         }
                    }
                 } else {
-                    errorMessage = "Kein Pfad für XML-Lexikondatei angegeben.";
+                    errorMessage = "Kein Pfad fÃ¼r XML-Lexikondatei angegeben.";
                 }            
             }
 
             if (!(success)){
                 status(errorMessage);
-                JOptionPane.showMessageDialog(applicationFrame, errorMessage + "\nBitte ändern Sie die Einstellungen für das Lexikon.");
+                JOptionPane.showMessageDialog(applicationFrame, errorMessage + "\nBitte Ã¤ndern Sie die Einstellungen fÃ¼r das Lexikon.");
                 EditPreferencesDialog dialog = new EditPreferencesDialog(applicationFrame, true);
                 dialog.setLocationRelativeTo(applicationFrame);
                 dialog.setVisible(true);
@@ -250,7 +250,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                 lexicon = new SimpleXMLFileLexicon();
 
                 } else {
-                    errorMessage = "Kein Pfad für XML-Lexikondatei angegeben.";
+                    errorMessage = "Kein Pfad fÃ¼r XML-Lexikondatei angegeben.";
                 }
             } else if (type.equals("db")){
                 try {
@@ -264,11 +264,11 @@ public final class ApplicationControl implements  ListSelectionListener,
                     success = true;
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    errorMessage = "Keine Verbindung zur Datenbank möglich.";
+                    errorMessage = "Keine Verbindung zur Datenbank mÃ¶glich.";
                 }
             }
             if (!(success)){
-                JOptionPane.showMessageDialog(applicationFrame, errorMessage + "\nBitte ändern Sie die Einstellungen für das Lexikon.");
+                JOptionPane.showMessageDialog(applicationFrame, errorMessage + "\nBitte Ã¤ndern Sie die Einstellungen fÃ¼r das Lexikon.");
                 EditPreferencesDialog dialog = new EditPreferencesDialog(applicationFrame, true);
                 dialog.setLocationRelativeTo(applicationFrame);
                 dialog.setVisible(true);
@@ -337,7 +337,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         playAction = new org.exmaralda.orthonormal.actions.playeractions.PlayAction(this, "" , c.getIcon(Constants.PLAY_ICON));
         stopAction = new org.exmaralda.orthonormal.actions.playeractions.StopAction(this, "", c.getIcon(Constants.STOP_ICON));
 
-        openAction = new org.exmaralda.orthonormal.actions.fileactions.OpenAction(this, "Öffnen...", c.getIcon(Constants.OPEN_ICON));
+        openAction = new org.exmaralda.orthonormal.actions.fileactions.OpenAction(this, "Ã–ffnen...", c.getIcon(Constants.OPEN_ICON));
         saveAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAction(this, "Speichern", c.getIcon(Constants.SAVE_ICON));
         saveAsAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAsAction(this, "Speichern unter...", c.getIcon(Constants.SAVE_AS_ICON));
         exportAction = new org.exmaralda.orthonormal.actions.fileactions.ExportAction(this, "Export...", c.getIcon(Constants.EXPORT_ICON));        
@@ -395,7 +395,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.stopButton.setAction(stopAction);
         applicationFrame.stopButton.setToolTipText("Stop");
 
-        applicationFrame.applicationToolBar.add(openAction).setToolTipText("Öffnen...");
+        applicationFrame.applicationToolBar.add(openAction).setToolTipText("Ã–ffnen...");
         applicationFrame.applicationToolBar.add(saveAction).setToolTipText("Speichern");
         applicationFrame.applicationToolBar.add(saveAsAction).setToolTipText("Speichern unter...");
         applicationFrame.applicationToolBar.add(outputAction).setToolTipText("Ausgabe...");
@@ -640,9 +640,9 @@ public final class ApplicationControl implements  ListSelectionListener,
                                     try {
                                         int count = autoNormalizer.normalize(nft.getDocument());
                                         pbd.setVisible(false);
-                                        status(Integer.toString(count) + " Wörter automatisch normalisiert. ");
+                                        status(Integer.toString(count) + " WÃ¶rter automatisch normalisiert. ");
                                         javax.swing.SwingUtilities.invokeAndWait(setTrans);                                        
-                                        //status("Transkription " + f.getAbsolutePath() + " geöffnet.");
+                                        //status("Transkription " + f.getAbsolutePath() + " geÃ¶ffnet.");
                                         //notifyAll();
                                     } catch (Exception ex) {
                                             ex.printStackTrace();
@@ -650,7 +650,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                             }
                     };        
                     normalizeThread.start();
-                    status("Transkription " + f.getAbsolutePath() + " geöffnet.");
+                    status("Transkription " + f.getAbsolutePath() + " geÃ¶ffnet.");
                     return;
             }
         } else {
@@ -679,7 +679,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         setCurrentFilePath(newFilename);
 
         reset();            
-        status("Transkription " + f.getAbsolutePath() + " geöffnet.");
+        status("Transkription " + f.getAbsolutePath() + " geÃ¶ffnet.");
     }
     
     public void saveTranscriptionFileAs(File f, boolean checkOverwrite){
@@ -687,7 +687,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             // check if the file exists
             // if yes, ask for user confirmation
             if ((checkOverwrite) && (f.exists())) {
-                int retVal = JOptionPane.showConfirmDialog(applicationFrame, "Datei existiert. Überschreiben?", "Bestätigung", JOptionPane.YES_NO_OPTION);
+                int retVal = JOptionPane.showConfirmDialog(applicationFrame, "Datei existiert. Ãœberschreiben?", "BestÃ¤tigung", JOptionPane.YES_NO_OPTION);
                 if (retVal != JOptionPane.YES_OPTION) {
                     return;
                 }
@@ -823,7 +823,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         //if ((getTranscription().getNumberOfEvents()>0) && thereWereChanges){
         if (thereWereChanges){
             int retValue = JOptionPane.showConfirmDialog(applicationFrame, 
-                    "Änderungen an aktueller Transkription speichern?", 
+                    "Ã„nderungen an aktueller Transkription speichern?", 
                     "Sicherheitsabfrage", JOptionPane.YES_NO_CANCEL_OPTION);
             if (retValue==JOptionPane.CANCEL_OPTION){
                 return false;
@@ -1028,7 +1028,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             //Dimension preferredSize = xmlEditorPane.getPreferredSize();
             xmlEditorPane.setPreferredSize(new Dimension(800, 400));
             
-            JButton okButton = new JButton("Ändern");
+            JButton okButton = new JButton("Ã„ndern");
             okButton.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1376,7 +1376,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         int count = autoNormalizer.normalize(contribution);
         wordListTableModel.fireTableDataChanged();
         setupEditor(contribution);
-        status(Integer.toString(count) + " Wörter automatisch normalisiert. ");
+        status(Integer.toString(count) + " WÃ¶rter automatisch normalisiert. ");
     }
     
     private void autoNormalizeAll() {
@@ -1510,7 +1510,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         try {
             java.util.regex.Pattern.compile(input);
             applicationFrame.filterTextField.setForeground(Color.BLACK);
-            applicationFrame.filterTextField.setToolTipText("Regulärer Ausdruck OK");
+            applicationFrame.filterTextField.setToolTipText("RegulÃ¤rer Ausdruck OK");
             applicationFrame.filterButton.setEnabled(true);
         } catch (PatternSyntaxException pse){
             applicationFrame.filterTextField.setForeground(Color.RED);
@@ -1604,7 +1604,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                 applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
                 JOptionPane.showMessageDialog(applicationFrame, "Der bearbeitete Beitrag konnte nicht auf dem selben \n"
                         + "Parse-Level geparst werden wie der Ausgangsbeitrag.\n"
-                        + "Die Änderungen wurden nicht angenommen.");
+                        + "Die Ã„nderungen wurden nicht angenommen.");
                 return;
             }
             
@@ -1617,7 +1617,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             if (tModified.size()!=tOriginal.size()){
                 applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
                 JOptionPane.showMessageDialog(applicationFrame, "Es gab Probleme beim Zuordnen von Zeitpunkten. \n"
-                        + "Die Änderungen wurden nicht angenommen.");
+                        + "Die Ã„nderungen wurden nicht angenommen.");
                 return;                
             }
             for (int i=0; i<tModified.size(); i++){

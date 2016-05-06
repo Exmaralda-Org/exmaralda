@@ -173,9 +173,9 @@ public class OutputAction extends AbstractApplicationAction {
                     ap.parseDocument(transcriptionDoc, 1);
                     ap.parseDocument(transcriptionDoc, 3);
                     if (!(ap.isFullyParsedOnLevel(transcriptionDoc, 3))){
-                        String text = "Die Transkription konnte nicht vollst‰ndig\n"
+                        String text = "Die Transkription konnte nicht vollst√§ndig\n"
                                 + "als GAT-Basistranskript geparst werden.\n"
-                                + "Die Ausgabe ist daher unvollst‰ndig.";
+                                + "Die Ausgabe ist daher unvollst√§ndig.";
                         JOptionPane.showMessageDialog(fileChooser, text, "Parse-Fehler", JOptionPane.WARNING_MESSAGE);
                     }
                 }

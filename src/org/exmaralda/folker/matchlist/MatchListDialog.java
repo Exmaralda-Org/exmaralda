@@ -120,7 +120,7 @@ public class MatchListDialog extends javax.swing.JDialog implements MouseListene
         controlPanel.add(workingDirPanel);
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/document-open.png"))); // NOI18N
-        openButton.setText("Liste öffnen...");
+        openButton.setText("Liste Ã¶ffnen...");
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openButtonActionPerformed(evt);
@@ -147,7 +147,7 @@ public class MatchListDialog extends javax.swing.JDialog implements MouseListene
                 if (!(newML.isAugmented())){
                     pbd = new ProgressBarDialog(applicationControl.getFrame(), false);
                     pbd.setLocationRelativeTo(this);
-                    pbd.setTitle("Trefferliste ergänzen");
+                    pbd.setTitle("Trefferliste ergÃ¤nzen");
                     newML.addMatchListListener(pbd);
                     pbd.setVisible(true);
 

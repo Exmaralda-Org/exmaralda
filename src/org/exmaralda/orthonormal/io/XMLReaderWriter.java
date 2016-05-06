@@ -84,7 +84,7 @@ public class XMLReaderWriter {
 
     private static void setUpDocument(Document d) throws IOException, JDOMException {
         if (XPath.selectSingleNode(d, "//contribution[not(@parse-level='2' or @parse-level='3')]")!=null){
-            throw new IOException("Das Dokument ist nicht vollst‰ndig geparst.");
+            throw new IOException("Das Dokument ist nicht vollst√§ndig geparst.");
         }
         d.getRootElement().setAttribute("id", new GUID().makeID());
         Iterator i = d.getDescendants(new ElementFilter("w"));
