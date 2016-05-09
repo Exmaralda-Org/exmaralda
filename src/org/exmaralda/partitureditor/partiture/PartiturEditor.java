@@ -797,7 +797,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 ae.setHandled(true);
             }
 
-            // anwendung laeuft schon, dokument wird Ã¼ber den finder geÃ¶ffnet
+            // anwendung laeuft schon, dokument wird ueber den finder geoeffnet
             @Override
             public void handleOpenFile(ApplicationEvent ae) {
                 try{
