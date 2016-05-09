@@ -29,4 +29,13 @@
 		<xsl:text>)</xsl:text>		
 	</xsl:template>
 	
+	<!-- New 09-05-201 -->
+	<!-- An implicit pause inside a turn -->
+	<xsl:template match="//Turn/Sync[string-length(normalize-space(following-sibling::text()[1]))=0 and following-sibling::*[1][self::Sync]]">
+		<xsl:copy><xsl:apply-templates select="@* | node()"/></xsl:copy>
+		<xsl:text>(</xsl:text>
+		<xsl:value-of select="format-number(following-sibling::Sync[1]/@time - @time, '#0.00')"/>
+		<xsl:text>) </xsl:text>
+	</xsl:template>
+	
 </xsl:stylesheet>

@@ -237,15 +237,15 @@ public class SegmentedTier extends AbstractTier implements XMLable {
             Vector spmVector = new Vector();
             for (int j=0; j<startPointMappings.length; j++){
                 if (startPointMappings[j]!=null){
-                    TLICharPos tlicp = new TLICharPos(startPointMappings[j], j);
+                    TLICharPos2 tlicp = new TLICharPos2(startPointMappings[j], j);
                     spmVector.add(tlicp);
                 }
             }
             
             String desc = referenceSegment.getDescription();
             for (int j=0; j<spmVector.size()-1; j++){
-                TLICharPos start = (TLICharPos)(spmVector.elementAt(j));
-                TLICharPos end = (TLICharPos)(spmVector.elementAt(j+1));
+                TLICharPos2 start = (TLICharPos2)(spmVector.elementAt(j));
+                TLICharPos2 end = (TLICharPos2)(spmVector.elementAt(j+1));
                 int startIndex = start.charpos;
                 int endIndex = end.charpos;
                 String startTLI = start.tli;
@@ -333,18 +333,19 @@ public class SegmentedTier extends AbstractTier implements XMLable {
     
     public void addAnnotation(Annotation a){
         addElement(a);
-    }
+    } 
     
 }
 
-class TLICharPos {
+class TLICharPos2 {
 
     public String tli;
     public int charpos;
     
-    public TLICharPos(String t, int c){
+    public TLICharPos2(String t, int c){
         tli = t;
         charpos = c;
     }
     
 }    
+ 

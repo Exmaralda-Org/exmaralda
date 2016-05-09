@@ -6,10 +6,8 @@
 
 package org.exmaralda.partitureditor.jexmaralda;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.fsm.FiniteStateMachine;
 import org.exmaralda.partitureditor.fsm.FSMException;
-import org.exmaralda.partitureditor.fsm.*;
 import org.xml.sax.*;
 import java.util.*;
 
