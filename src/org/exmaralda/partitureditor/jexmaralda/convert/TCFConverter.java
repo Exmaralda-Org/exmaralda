@@ -195,7 +195,7 @@ public class TCFConverter {
         }
 
         // text layer covers whole timeline?
-        TextLayer text = textCorpus.getTextLayer();
+        /*TextLayer text = textCorpus.getTextLayer();
         Tier textTier = null;
         if (text != null) {
             textTier = new Tier();
@@ -209,7 +209,7 @@ public class TCFConverter {
             e.setDescription(text.getText());
             e.setEnd(tliEnd);
             textTier.addEvent(e);
-        }
+        }*/
 
         // sentences cover some subsets
         SentencesLayer sents = textCorpus.getSentencesLayer();
@@ -294,9 +294,9 @@ public class TCFConverter {
             if (tokenTier != null) {
                 bt.getBody().addTier(tokenTier);
             }
-            if (textTier != null) {
+            /*if (textTier != null) {
                 bt.getBody().addTier(textTier);
-            }
+            }*/
             if (sentenceTier != null) {
                 bt.getBody().addTier(sentenceTier);
             }
