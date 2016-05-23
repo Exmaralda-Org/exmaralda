@@ -160,7 +160,8 @@ public class EditReferencedFilesDialog extends javax.swing.JDialog implements ja
 
 private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
     javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
-    fc.setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.MediaFileFilter());
+    fc.addChoosableFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.MediaFileFilter());
+    fc.setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.RecommendedMediaFileFilter());
     fc.setMultiSelectionEnabled(true);
     if ((listModel.getSize()>0) && (((String)(listModel.get(0))).length()>0)){
         fc.setCurrentDirectory(new File((String)(listModel.get(0))).getParentFile());

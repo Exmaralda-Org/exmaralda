@@ -35,7 +35,14 @@ public class TranscriberConverter {
     }
     
 
-    /** reads the EAF file specified by filename and returns an EXMARaLDA BasicTranscription */
+    /** reads the EAF file specified by filename and returns an EXMARaLDA BasicTranscription
+     * @param filename
+     * @return
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException
+     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws javax.xml.transform.TransformerConfigurationException  */
     public BasicTranscription readTranscriberFromFile(String filename) throws JexmaraldaException,
                                                                        SAXException, 
                                                                        IOException, 
@@ -67,6 +74,8 @@ public class TranscriberConverter {
         while ((nextLine = br.readLine()) != null){
             if ((nextLine.trim().length()>0) && (!(nextLine.trim().startsWith("<!DOCTYPE")))){
                 result.append(nextLine);
+            } else if (nextLine.trim().length()==0){
+                result.append(" ");
             }
         }
         br.close();
