@@ -151,7 +151,8 @@
         </Container>
         <Component class="javax.swing.JCheckBox" name="autoAddSpeakerTiersCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Auto add one T tier per speaker"/>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="Auto add one T tier for new speakers"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

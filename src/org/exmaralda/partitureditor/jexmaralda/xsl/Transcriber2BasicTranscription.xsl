@@ -106,6 +106,21 @@
             </xsl:for-each>
         </xsl:if> 
         
+        <!-- this is the case where a turn has more than one speaker, i.e. there is an overlap, like so: -->
+        <!-- <Turn speaker="spk1 spk2" startTime="484.743" endTime="488.149">
+                 <Sync time="484.743"/><Who nb="1"/> la vue d'une sorcière est tout de même bien amusante se dit la maman 
+                 <Who nb="2"/> ça veut dire quoi retrousser des nez 
+             </Turn> -->
+        <!-- 06-06-2016: However, there seems to be a wrong assumption: -->
+        <!-- The assumption is that @nb="1" will refer to the first speaker id in @speaker, @nb="2" to the second, and so on -->
+        <!-- This does not always seem to be the case. It is not the case in the following excerpt from ESLO (ESLO2_LIVRENF_1326_B.trs) -->
+        <!-- <Turn speaker="spk2 spk1" startTime="494.242" endTime="498.981">
+                <Sync time="494.242"/><Who nb="1"/> le nez il remonte retrousser c'est aller vers le haut 
+                <Who nb="2"/> c'est rigolo <Event desc="pif" type="pronounce" extent="instantaneous"/> comme des cochons 
+            </Turn> -->
+        <!-- Question is: what does @nb refer to - sent this question to the transcriber-devel list on 06-06-2016 -->    
+
+        
         <xsl:if test="not(@speaker=$SPEAKER)">
             <xsl:variable name="SPEAKER_NUMBER">
                 <xsl:choose>

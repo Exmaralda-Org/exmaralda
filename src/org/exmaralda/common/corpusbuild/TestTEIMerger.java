@@ -6,12 +6,10 @@
 package org.exmaralda.common.corpusbuild;
 
 import java.io.IOException;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.exmaralda.common.jdomutilities.IOUtilities;
-import org.jdom.Document;
-import org.jdom.Element;
+import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.jdom.JDOMException;
 
 /**
@@ -35,19 +33,15 @@ public class TestTEIMerger {
         }
     }
 
-    String SEG = "C:\\Users\\Schmidt\\Desktop\\EXMARaLDA-Demokorpus\\Arbeitsamt\\Helge_Schneider_Arbeitsamt_s.exs";
+    String TRANS = "C:\\Users\\Schmidt\\Desktop\\EXMARaLDA-Demokorpus\\Arbeitsamt\\Helge_Schneider_Arbeitsamt.exb";
     String FLAT = "SpeakerContribution_Event";
     String DEEP = "SpeakerContribution_Utterance_Word";
+    String OUT = "C:\\Users\\Schmidt\\Desktop\\TEI_OUT.xml";
     
     private void doit() throws JDOMException, IOException, Exception {
-        Document segmentedTranscription = FileIO.readDocumentFromLocalFile(SEG);
-        Vector v = TEIMerger.TEIMerge(segmentedTranscription, DEEP, FLAT, true);
-        String outDocString = "<x>";
-        for (Object o : v){
-            outDocString+=IOUtilities.elementToString((Element)o);
-        }
-        outDocString+="</x>";
-        System.out.println(outDocString);
+        BasicTranscription bt = new BasicTranscription(TRANS);
+        TEIConverter converter = new TEIConverter();
+        converter.writeHIATISOTEIToFile(bt, OUT, true);
     }
     
 }

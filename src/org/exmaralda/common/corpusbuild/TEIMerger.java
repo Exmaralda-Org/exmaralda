@@ -89,6 +89,18 @@ public class TEIMerger {
                                                              String nameOfDeepSegmentation, 
                                                              String nameOfFlatSegmentation,
                                                              boolean useNewStylesheets) throws XSLTransformException, JDOMException, Exception {
+        return SegmentedTranscriptionToTEITranscription(segmentedTranscription, 
+                nameOfDeepSegmentation, 
+                nameOfFlatSegmentation, 
+                useNewStylesheets, 
+                false);
+    }
+    
+    public Document SegmentedTranscriptionToTEITranscription(Document segmentedTranscription,
+                                                             String nameOfDeepSegmentation, 
+                                                             String nameOfFlatSegmentation,
+                                                             boolean useNewStylesheets,
+                                                             boolean includeFullText) throws XSLTransformException, JDOMException, Exception {
         
         String skeleton_stylesheet = TEIMerger.TEI_SKELETON_STYLESHEET_NEW;
         if (ISO) skeleton_stylesheet = TEIMerger.TEI_SKELETON_STYLESHEET_ISO;
@@ -113,7 +125,7 @@ public class TEIMerger {
         //FileIO.writeDocumentToLocalFile("C:\\Users\\Schmidt\\Desktop\\TEI\\intermediate1.xml", teiDocument);      
         //System.out.println("STEP 1 completed.");
         
-        Vector uElements = TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation);
+        Vector uElements = TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, includeFullText);
         
 
         XPath xp = XPath.newInstance(BODY_NODE);

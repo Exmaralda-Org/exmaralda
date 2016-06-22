@@ -188,7 +188,8 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
 
         speakersPanel.add(speakersButtonPanel, java.awt.BorderLayout.SOUTH);
 
-        autoAddSpeakerTiersCheckBox.setText("Auto add one T tier per speaker");
+        autoAddSpeakerTiersCheckBox.setSelected(true);
+        autoAddSpeakerTiersCheckBox.setText("Auto add one T tier for new speakers");
         speakersPanel.add(autoAddSpeakerTiersCheckBox, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(speakersPanel, java.awt.BorderLayout.WEST);

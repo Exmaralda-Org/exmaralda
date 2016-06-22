@@ -228,7 +228,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                         }
                    }
                 } else {
-                    errorMessage = "Kein Pfad fÃ¼r XML-Lexikondatei angegeben.";
+                    errorMessage = "Kein Pfad für XML-Lexikondatei angegeben.";
                 }            
             }
 
