@@ -64,7 +64,7 @@
                     </tier>
                     <!-- added 17-06-2016: target for manual post-processing, so don't put anything in there -->
                     <tier category="nv" type="d">
-                        <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_DE</xsl:text></xsl:attribute>
+                        <xsl:attribute name="id"><xsl:text>TIE_</xsl:text><xsl:value-of select="upper-case(current-grouping-key())"/><xsl:text>_NV</xsl:text></xsl:attribute>
                         <xsl:attribute name="speaker" select="upper-case(current-grouping-key())"/>                                                    
                     </tier>
                     <tier category="de" type="a">

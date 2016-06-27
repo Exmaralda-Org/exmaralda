@@ -21,19 +21,25 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     
     PartitureTableWithActions table;
 
-    private JMenuItem shiftRightMenuItem;
-    private JMenuItem shiftLeftMenuItem;
-    private JMenuItem splitMenuItem;
-    private JMenuItem doubleSplitMenuItem;
-    private JMenuItem deleteMenuItem;
-    private JMenuItem copyMenuItem;
-    private JMenuItem pasteMenuItem;
-    private JMenuItem cutMenuItem;
-    private JMenuItem underlineMenuItem;
-    private JMenuItem editEventPropertiesMenuItem;
+    private final JMenuItem shiftRightMenuItem;
+    private final JMenuItem shiftLeftMenuItem;
+    private final JMenuItem splitMenuItem;
+    private final JMenuItem doubleSplitMenuItem;
+    private final JMenuItem deleteMenuItem;
+    
+    // 24-06-2016 MuM-Multi new 
+    private final JMenuItem moveDownLeftMenuItem;
+    private final JMenuItem moveDownRightMenuItem;
+    
+    
+    private final JMenuItem copyMenuItem;
+    private final JMenuItem pasteMenuItem;
+    private final JMenuItem cutMenuItem;
+    private final JMenuItem underlineMenuItem;
+    private final JMenuItem editEventPropertiesMenuItem;
 
-    private Component firstSeparator;
-    private Component lastSeparator;
+    private final Component firstSeparator;
+    private final Component lastSeparator;
     
     /** Creates a new instance of EventPopupMenu */
     public EventPopupMenu(PartitureTableWithActions t) {
@@ -64,8 +70,14 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
         deleteMenuItem.setAccelerator(null);
         deleteMenuItem.setText(Internationalizer.getString("Remove"));
 
-        this.add(new javax.swing.JPopupMenu.Separator());
+        add(new javax.swing.JPopupMenu.Separator());
         
+        // 24-06-2016 MuM-Multi new 
+        moveDownLeftMenuItem = this.add(table.moveDownLeftAction);
+        moveDownRightMenuItem = this.add(table.moveDownRightAction);
+        
+        add(new javax.swing.JPopupMenu.Separator());
+
         copyMenuItem  = this.add(table.copyTextAction);      
         copyMenuItem.setIcon(null);
         copyMenuItem.setAccelerator(null);

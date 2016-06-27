@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Internationalization file for the EXMARaLDA Partitur-Editor -->
 <!-- version 1.0., 28-June-2005 -->
 <!-- English originals and German translations (by Annette Schnieder) -->
@@ -116,14 +116,14 @@
 					<translation lang="zh" trans="打开..."/>
 				</item>
 				<item id="Restore">
-					<translation lang="en" trans="Restore"/>
-					<translation lang="de" trans="Zurücksetzen"/>
-					<translation lang="fr" trans="Remettre"/>
-					<translation lang="sv" trans="Återställ"/>
-					<translation lang="tr" trans="Temizle"/>
-					<translation lang="cz" trans="Obnovit"/>
-					<translation lang="es" trans="Volver a la versión guardada"/>
-					<translation lang="zh" trans="恢复"/>
+					<translation lang="en" trans="Restore..."/>
+					<translation lang="de" trans="Zurücksetzen..."/>
+					<translation lang="fr" trans="Remettre..."/>
+					<translation lang="sv" trans="Återställ..."/>
+					<translation lang="tr" trans="Temizle..."/>
+					<translation lang="cz" trans="Obnovit..."/>
+					<translation lang="es" trans="Volver a la versión guardada..."/>
+					<translation lang="zh" trans="恢复..."/>
 				</item>
 				<item id="Save">
 					<translation lang="en" trans="Save"/>

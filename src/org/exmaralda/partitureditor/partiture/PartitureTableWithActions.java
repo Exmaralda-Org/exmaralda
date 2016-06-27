@@ -609,6 +609,13 @@ public class PartitureTableWithActions extends PartitureTable
         splitAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
         doubleSplitAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !cellSpanIsGreaterThanOne && !locked);
         findNextEventAction.setEnabled(aSingleCellIsSelected || aSeriesOfCellsIsSelected);
+
+        
+        // 24-06-2016 MuM-Multi new 
+        moveDownLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
+        moveDownRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
+        
+        
         
         // 3. Timeline actions
         editTimelineItemAction.setEnabled(aWholeColumnIsSelected && !locked);
@@ -938,6 +945,9 @@ public class PartitureTableWithActions extends PartitureTable
 
         insertPauseAction = new org.exmaralda.partitureditor.partiture.eventActions.InsertPauseAction(this, "Insert pause", new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/QuarterRestSmall.png")));
 
+        // 24-06-2016 MuM-Multi new 
+        moveDownLeftAction = new MoveDownLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-left.png")));
+        moveDownRightAction = new MoveDownRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-right.png")));
         
         //*********************************************************************************************
         //***************************************** TIMELINE ACTIONS **********************************
@@ -1065,6 +1075,11 @@ public class PartitureTableWithActions extends PartitureTable
         doubleSplitAction.setEnabled(false);
         editEventAction.setEnabled(false);
         insertPauseAction.setEnabled(false);
+        
+        // 24-06-2016 MuM-Multi new 
+        moveDownLeftAction.setEnabled(false);
+        moveDownRightAction.setEnabled(false);
+        
         
         insertTimelineItemAction.setEnabled(false);
         makeTimelineConsistentAction.setEnabled(true);
@@ -1521,6 +1536,11 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction findNextEventAction;
 
     public javax.swing.AbstractAction insertPauseAction;
+    
+    // 24-06-2016 MuM-Multi new 
+    public javax.swing.AbstractAction moveDownLeftAction;
+    public javax.swing.AbstractAction moveDownRightAction;
+    
 
 
     //*******************************************************************

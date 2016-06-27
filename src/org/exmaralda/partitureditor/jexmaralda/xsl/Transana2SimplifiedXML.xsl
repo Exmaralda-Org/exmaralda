@@ -82,6 +82,7 @@
     <xsl:template match="*:text[position()&gt;3]">
         <segment>
             <xsl:attribute name="type" select="@textcolor"/>
+            <xsl:comment>Condition Ordinary</xsl:comment>
             <xsl:choose>            
                 <xsl:when test="starts-with(text(),'&quot;') and ends-with(text(),'&quot;')">
                     <xsl:variable name="NORMAL_TEXT" select="concat(normalize-space(substring(text(),2,string-length(text())-2)), ' ')"/>
@@ -181,24 +182,39 @@
     <!-- ****************************************************** -->
     
     <!-- a symbol and between two blues -->
-    <xsl:template match="*:symbol[count(preceding-sibling::*)&gt;=4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
+    <xsl:template match="*:symbol[count(preceding-sibling::*)&gt;=4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]">
+        <xsl:comment>Condition A</xsl:comment>
+    </xsl:template>
     
     <!-- just a space -->
-    <xsl:template match="*:text[position()&gt;4 and string-length(normalize-space(translate(text(),'&quot;',' ')))=0]"/>
+    <xsl:template match="*:text[position()&gt;4 and string-length(normalize-space(translate(text(),'&quot;',' ')))=0]">
+        <xsl:comment>Condition B</xsl:comment>        
+    </xsl:template>
         
     <!-- the (n+1)th in a row of blues -->
-    <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]"/>
+    <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][@textcolor='#0000FF']]">
+        <xsl:comment>Condition C</xsl:comment>        
+    </xsl:template>
     
     <!-- preceding is a space prepreceding is also blue -->
-    <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0] and preceding-sibling::*[2][@textcolor='#0000FF']]"/>
+    <xsl:template match="*:text[position()&gt;4 and @textcolor='#0000FF' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0] and preceding-sibling::*[2][@textcolor='#0000FF']]">
+        <xsl:comment>Condition D</xsl:comment>
+        <xsl:apply-templates select="following-sibling::*[1]"/>
+    </xsl:template>
     
     <!-- a space following a black -->
-    <xsl:template match="*:text[position()&gt;4  and string-length(normalize-space(translate(text(),'&quot;',' ')))=0 and preceding-sibling::*[1][@textcolor='#000000']]"/>
+    <xsl:template match="*:text[position()&gt;4  and string-length(normalize-space(translate(text(),'&quot;',' ')))=0 and preceding-sibling::*[1][@textcolor='#000000']]">
+        <xsl:comment>Condition E</xsl:comment>                
+    </xsl:template>
     
     <!-- <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][string-length(normalize-space(translate(text(),'&quot;',' ')))=0]]"/> -->
     
-    <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][self::*:symbol]]"/>
-    <xsl:template match="*:symbol[count(preceding-sibling::*)&gt;=4 and preceding-sibling::*[1][@textcolor='#000000'] and following-sibling::*[1][@textcolor='#000000']]"/>
+    <xsl:template match="*:text[position()&gt;4  and @textcolor='#000000' and preceding-sibling::*[1][self::*:symbol]]">
+        <xsl:comment>Condition F</xsl:comment>                
+    </xsl:template>
+    <xsl:template match="*:symbol[count(preceding-sibling::*)&gt;=4 and preceding-sibling::*[1][@textcolor='#000000'] and following-sibling::*[1][@textcolor='#000000']]">
+        <xsl:comment>Condition G</xsl:comment>                
+    </xsl:template>
     
     
     

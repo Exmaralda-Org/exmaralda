@@ -151,6 +151,11 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
                 closeDialog(evt);
             }
         });
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Result"));
         resultPanel.setPreferredSize(new java.awt.Dimension(500, 200));
@@ -342,6 +347,10 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         gotoNextSearchResult();
     }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        searchStringTextField.selectAll();
+    }//GEN-LAST:event_formComponentShown
     
     /**
      * @param args the command line arguments

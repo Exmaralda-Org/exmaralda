@@ -1201,6 +1201,70 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
 
         fireDataReset();
     }
+    
+    
+    // 24-06-2016 MuM-Multi new 
+    public void moveDownLeft (int row, int col){
+        if (row>=this.getNumRows()-1) return;
+        if (col==0) return;
+        Tier tier = transcription.getBody().getTierAt(row);
+        Tier tierBelow = transcription.getBody().getTierAt(row+1);
+        String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();        
+        String tliBefore = transcription.getBody().getCommonTimeline().getTimelineItemAt(col-1).getID();  
+        if (tierBelow.containsEventAtStartPoint(tliBefore)) return;
+        try {
+            Event oldEvent = tier.getEventAtStartPoint(tli);
+            int span = getCellSpan(row,col);
+            String newStart = transcription.getBody().getCommonTimeline().getTimelineItemAt(col-1).getID();
+            String newEnd = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+span-1).getID();
+            Event newEvent = new Event(newStart, newEnd, oldEvent.getDescription(),oldEvent.getMedium(), oldEvent.getURL());
+            
+            tier.removeEventAtStartPoint(tli);  // remove old element
+            fireValueChanged(row,col);
+            fireCellFormatChanged(row,col);
+            fireCellSpanChanged(row,col);
+            
+            tierBelow.addEvent(newEvent);    // add new event to tier below
+            fireValueChanged(row+1,col-1);                    
+            fireCellFormatChanged(row+1,col-1);
+            fireCellSpanChanged(row+1,col-1);
+            
+            fireAreaChanged(lower(col-1),upper(col+span));
+            fireSelectionChanged(row+1,col-1,false);
+        } catch (JexmaraldaException je){}            // should never get here        
+    }
+    
+    // 24-06-2016 MuM-Multi new 
+    public void moveDownRight (int row, int col){
+        if (row>=getNumRows()-1) return;
+        if (col>=this.getNumColumns()-1) return;
+        Tier tier = transcription.getBody().getTierAt(row);
+        Tier tierBelow = transcription.getBody().getTierAt(row+1);
+        String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();        
+        String tliAfter = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+1).getID();  
+        if (tierBelow.containsEventAtStartPoint(tliAfter)) return;
+        try {
+            Event oldEvent = tier.getEventAtStartPoint(tli);
+            int span = getCellSpan(row,col);
+
+            String newStart = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+1).getID();
+            String newEnd = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+span+1).getID();
+            Event newEvent = new Event(newStart, newEnd, oldEvent.getDescription(),oldEvent.getMedium(), oldEvent.getURL());
+            
+            tier.removeEventAtStartPoint(tli);  // remove old element
+            fireValueChanged(row,col);
+            fireCellFormatChanged(row,col);
+            fireCellSpanChanged(row,col);
+            
+            tierBelow.addEvent(newEvent);    // add new event to tier below
+            fireValueChanged(row+1,col+1);                    
+            fireCellFormatChanged(row+1,col+1);
+            fireCellSpanChanged(row+1,col+1);
+            
+            fireAreaChanged(lower(col-1),upper(col+span));
+            fireSelectionChanged(row+1,col+1,false);
+        } catch (JexmaraldaException je){}            // should never get here        
+    }
 
 
 
