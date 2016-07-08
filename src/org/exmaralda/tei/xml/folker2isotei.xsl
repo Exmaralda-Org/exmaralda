@@ -7,6 +7,11 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:tesla="http://www.exmaralda.org" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- new 08-07-2016 -->
+    <!-- A parameter can be passed spcifying the language of the document -->
+    <!-- xx is used as a default value if no such parameter is passed -->
+    <xsl:param name="LANGUAGE">xx</xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8"/>
 
@@ -141,6 +146,9 @@
                 </revisionDesc>                
             </teiHeader>
             <text>
+                <!-- new 08-07-2016 -->
+                <!-- encode the language here -->
+                <xsl:attribute name="xml:lang" select="$LANGUAGE"/>
                 <xsl:call-template name="MAKE_TIMELINE"/>
                 <body>
                     <xsl:apply-templates select="//contribution"/>

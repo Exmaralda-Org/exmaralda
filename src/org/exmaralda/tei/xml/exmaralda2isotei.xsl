@@ -2,11 +2,18 @@
 <!-- change 03-03-2016: additional namespaces no longer necessary 
         xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
         xmlns:standoff="http://standoff.proposal"
+     change 08-07-2016: add parameter for language    
 -->        
 <xsl:stylesheet version="2.0"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
         xmlns:tesla="http://www.exmaralda.org" 
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    <!-- new 08-07-2016 -->
+    <!-- A parameter can be passed spcifying the language of the document -->
+    <!-- xx is used as a default value if no such parameter is passed -->
+    <xsl:param name="LANGUAGE">xx</xsl:param>
+    
     
     <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
     
@@ -93,6 +100,10 @@
                 </revisionDesc>                
             </teiHeader>
             <text>
+                <!-- new 08-07-2016 -->
+                <!-- encode the language here -->
+                <xsl:attribute name="xml:lang" select="$LANGUAGE"/>                
+                
                 <xsl:call-template name="MAKE_TIMELINE"/>
                 <body>
                     <xsl:for-each select="//tli">
