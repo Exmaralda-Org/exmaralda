@@ -127,7 +127,7 @@
                 <textSource>
                     <!-- changed 08-07-2016 -->
                     <xsl:attribute name="type">
-                        <xsl:text>text/tei+xml;format-variant=tei-iso-spoken</xsl:text>
+                        <xsl:text>application/tei+xml;format-variant=tei-iso-spoken</xsl:text>
                         <xsl:choose>
                             <xsl:when test="//tei:w | //tei:pc"><xsl:text>;tokenized=1</xsl:text></xsl:when>
                             <xsl:otherwise><xsl:text>;tokenized=0</xsl:text></xsl:otherwise>
