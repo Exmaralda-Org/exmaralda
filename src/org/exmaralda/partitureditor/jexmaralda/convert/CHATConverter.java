@@ -179,15 +179,19 @@ public class CHATConverter extends Vector<String> {
                 //@Media:	block, audio
                 int index0 = line.indexOf(":");
                 int index1 = line.indexOf(",");
-                String medianame = line.substring(index0+1,index1).trim();
                 String referencedFile = null;
-                String[] suffixes = {"wav", "WAV", "mp3", "MP3", "mov", "MOV", ""};
-                for (String suffix : suffixes){
-                    File testFile = new File(inputFile.getParentFile(), medianame + "." + suffix);
-                    System.out.println("Searching " + testFile.getAbsolutePath());
-                    if (testFile.exists()){
-                        referencedFile = testFile.getAbsolutePath();
-                        break;
+                // changed 19-07-2016
+                // otherwise import fails when media element is not in this form
+                if (index0>0 && index1>index0){
+                    String medianame = line.substring(index0+1,index1).trim();
+                    String[] suffixes = {"wav", "WAV", "mp3", "MP3", "mov", "MOV", ""};
+                    for (String suffix : suffixes){
+                        File testFile = new File(inputFile.getParentFile(), medianame + "." + suffix);
+                        System.out.println("Searching " + testFile.getAbsolutePath());
+                        if (testFile.exists()){
+                            referencedFile = testFile.getAbsolutePath();
+                            break;
+                        }
                     }
                 }
                 if (referencedFile!=null){
@@ -203,7 +207,9 @@ public class CHATConverter extends Vector<String> {
                 String snd = sndLine.substring(sndLine.indexOf("%snd:")+5);
                 int index1 = snd.indexOf("\"");
                 int index2 = snd.indexOf("\"", index1+1);
-                snd = snd.substring(index1+1, index2);
+                if (index1>=0 && index2>index1){
+                     snd = snd.substring(index1+1, index2);
+                }
                 if (!checked.contains(snd)){
                     String referencedFile = null;
                     String[] suffixes = {"wav", "WAV", "mp3", "MP3", "mov", "MOV", ""};

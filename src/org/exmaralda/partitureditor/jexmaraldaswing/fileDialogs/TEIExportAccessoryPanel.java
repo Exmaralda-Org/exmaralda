@@ -23,6 +23,13 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
     /** Creates new form CHATExportAccessoryPanel */
     public TEIExportAccessoryPanel() {
         initComponents();
+        azmRadioButton.setVisible(false);
+        genericRadioButton.setVisible(false);
+        hiatOldRadioButton.setVisible(false);
+        hiatNewRadioButton.setVisible(false);
+        modenaMethodRadioButton.setVisible(false);
+        hiatISORadioButton.setVisible(false);
+        hiatSegmentationRadioButton.setVisible(false);
     }
 
     public int getMethod(){
@@ -30,6 +37,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         if (hiatSegmentationRadioButton.isSelected() && hiatOldRadioButton.isSelected()) return TEIConverter.HIAT_METHOD;
         if (hiatSegmentationRadioButton.isSelected() && hiatNewRadioButton.isSelected()) return TEIConverter.HIAT_NEW_METHOD;
         if (hiatSegmentationRadioButton.isSelected() && hiatISORadioButton.isSelected()) return TEIConverter.HIAT_ISO_METHOD;
+        if (hiatISORadioButton2.isSelected()) return TEIConverter.HIAT_ISO_METHOD;
         if (cGatSegmentationRadioButton.isSelected()) return TEIConverter.CGAT_METHOD;
         if (genericRadioButton.isSelected()) return TEIConverter.GENERIC_METHOD;
         if (isoGenericRadioButton.isSelected()) return TEIConverter.ISO_GENERIC_METHOD;
@@ -50,15 +58,19 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         buttonGroup2 = new javax.swing.ButtonGroup();
         genericRadioButton = new javax.swing.JRadioButton();
         isoGenericRadioButton = new javax.swing.JRadioButton();
+        hiatISORadioButton2 = new javax.swing.JRadioButton();
         modenaMethodRadioButton = new javax.swing.JRadioButton();
         azmRadioButton = new javax.swing.JRadioButton();
         hiatSegmentationRadioButton = new javax.swing.JRadioButton();
-        jPanel1 = new javax.swing.JPanel();
+        hiatVariantsPanel = new javax.swing.JPanel();
         hiatOldRadioButton = new javax.swing.JRadioButton();
         hiatNewRadioButton = new javax.swing.JRadioButton();
         hiatISORadioButton = new javax.swing.JRadioButton();
         cGatSegmentationRadioButton = new javax.swing.JRadioButton();
         wordIDsCheckBox = new javax.swing.JCheckBox();
+        languagePanel = new javax.swing.JPanel();
+        languageLabel = new javax.swing.JLabel();
+        languagesComboBox = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("TEI Export Method"));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
@@ -84,6 +96,17 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
             }
         });
         add(isoGenericRadioButton);
+
+        buttonGroup1.add(hiatISORadioButton2);
+        hiatISORadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        hiatISORadioButton2.setForeground(new java.awt.Color(0, 0, 102));
+        hiatISORadioButton2.setText("ISO - HIAT segmentation");
+        hiatISORadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hiatISORadioButton2ActionPerformed(evt);
+            }
+        });
+        add(hiatISORadioButton2);
 
         buttonGroup1.add(modenaMethodRadioButton);
         modenaMethodRadioButton.setForeground(new java.awt.Color(153, 153, 153));
@@ -114,8 +137,8 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         });
         add(hiatSegmentationRadioButton);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 40, 1, 1));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+        hiatVariantsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 40, 1, 1));
+        hiatVariantsPanel.setLayout(new javax.swing.BoxLayout(hiatVariantsPanel, javax.swing.BoxLayout.Y_AXIS));
 
         buttonGroup2.add(hiatOldRadioButton);
         hiatOldRadioButton.setForeground(new java.awt.Color(153, 153, 153));
@@ -126,7 +149,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
                 hiatOldRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(hiatOldRadioButton);
+        hiatVariantsPanel.add(hiatOldRadioButton);
 
         buttonGroup2.add(hiatNewRadioButton);
         hiatNewRadioButton.setForeground(new java.awt.Color(153, 153, 153));
@@ -137,12 +160,11 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
                 hiatNewRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(hiatNewRadioButton);
+        hiatVariantsPanel.add(hiatNewRadioButton);
 
         buttonGroup2.add(hiatISORadioButton);
         hiatISORadioButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         hiatISORadioButton.setForeground(new java.awt.Color(0, 0, 102));
-        hiatISORadioButton.setSelected(true);
         hiatISORadioButton.setText("... ISO style");
         hiatISORadioButton.setEnabled(false);
         hiatISORadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -150,9 +172,9 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
                 hiatISORadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(hiatISORadioButton);
+        hiatVariantsPanel.add(hiatISORadioButton);
 
-        add(jPanel1);
+        add(hiatVariantsPanel);
 
         buttonGroup1.add(cGatSegmentationRadioButton);
         cGatSegmentationRadioButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -169,6 +191,16 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         wordIDsCheckBox.setText("Generate Word IDs");
         wordIDsCheckBox.setEnabled(false);
         add(wordIDsCheckBox);
+
+        languageLabel.setText("Language: ");
+        languageLabel.setToolTipText("Language of the transcription");
+        languagePanel.add(languageLabel);
+
+        languagesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "de", "en", "fr" }));
+        languagesComboBox.setMaximumSize(new java.awt.Dimension(40, 20));
+        languagePanel.add(languagesComboBox);
+
+        add(languagePanel);
     }// </editor-fold>//GEN-END:initComponents
 
     void checkEnable(ActionEvent evt){
@@ -214,6 +246,10 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_hiatISORadioButtonActionPerformed
 
+    private void hiatISORadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hiatISORadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hiatISORadioButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton azmRadioButton;
@@ -222,11 +258,15 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton cGatSegmentationRadioButton;
     private javax.swing.JRadioButton genericRadioButton;
     private javax.swing.JRadioButton hiatISORadioButton;
+    private javax.swing.JRadioButton hiatISORadioButton2;
     private javax.swing.JRadioButton hiatNewRadioButton;
     private javax.swing.JRadioButton hiatOldRadioButton;
     private javax.swing.JRadioButton hiatSegmentationRadioButton;
+    private javax.swing.JPanel hiatVariantsPanel;
     private javax.swing.JRadioButton isoGenericRadioButton;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel languageLabel;
+    private javax.swing.JPanel languagePanel;
+    private javax.swing.JComboBox languagesComboBox;
     private javax.swing.JRadioButton modenaMethodRadioButton;
     private javax.swing.JCheckBox wordIDsCheckBox;
     // End of variables declaration//GEN-END:variables

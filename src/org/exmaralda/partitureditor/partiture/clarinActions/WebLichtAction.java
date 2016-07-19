@@ -166,7 +166,7 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                     // changed 20-04-2015 because Thorsten's Mudder is stateless
                     TEITCFMerger merger = new TEITCFMerger(teiInputFile, tcfResultFile);    
                     // rollback owing to shittiness of WebLicht which loses the textSource element on its way
-                    // TEITCFMerger merger = new TEITCFMerger(tcfResultFile);
+                    //TEITCFMerger merger = new TEITCFMerger(tcfResultFile);
                     merger.merge();
                     Document mergedDocument = merger.getMergedDocument();
 
