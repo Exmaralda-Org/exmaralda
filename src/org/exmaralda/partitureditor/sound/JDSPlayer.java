@@ -34,6 +34,7 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
         if ((pathToSoundFile==null)){
             return;
         }
+                
 
         if (!pathToSoundFile.startsWith("http://")){
             urlString = "file:///" + pathToSoundFile;

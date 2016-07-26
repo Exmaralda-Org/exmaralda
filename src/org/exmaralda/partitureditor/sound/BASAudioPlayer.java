@@ -14,6 +14,7 @@ import ipsk.audio.player.event.PlayerStopEvent;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
+import javax.sound.sampled.AudioSystem;
 
 
 /**
@@ -31,7 +32,7 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
     public BASAudioPlayer() {
         wrappedPlayer = new ipsk.audio.player.Player();
     }
-        
+    
     
     @Override
     public void setSoundFile(String pathToSoundFile) throws IOException {

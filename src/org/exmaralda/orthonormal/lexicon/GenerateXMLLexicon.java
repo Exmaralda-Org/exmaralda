@@ -48,7 +48,7 @@ public class GenerateXMLLexicon {
         XMLLexicon lexicon = new XMLLexicon();
         File[] flns = new File(PATH).listFiles(FLN_FILTER);
         lexicon.update(flns);
-        File f = new File("C:\\Users\\Schmidt\\Dropbox\\IDS\\FOLK\\Normalisierung\\FOLK_Normalization_Lexicon_FEB_2015.xml");
+        File f = new File("C:\\Users\\Schmidt\\Dropbox\\IDS\\FOLK\\Normalisierung\\FOLK_Normalization_Lexicon_JULY_2016.xml");
         lexicon.write(f);
         lexicon.read(f);
         

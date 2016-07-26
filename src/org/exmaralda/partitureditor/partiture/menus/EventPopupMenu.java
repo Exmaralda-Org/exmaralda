@@ -27,7 +27,9 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     private final JMenuItem doubleSplitMenuItem;
     private final JMenuItem deleteMenuItem;
     
-    // 24-06-2016 MuM-Multi new 
+    public final JMenu moveMenu;
+    
+// 24-06-2016 MuM-Multi new 
     private final JMenuItem moveDownLeftMenuItem;
     private final JMenuItem moveDownRightMenuItem;
     
@@ -37,6 +39,9 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     private final JMenuItem cutMenuItem;
     private final JMenuItem underlineMenuItem;
     private final JMenuItem editEventPropertiesMenuItem;
+    
+    // 26-07-2016 New - issue #11
+    private final JMenuItem nextEventMenuItem;
 
     private final Component firstSeparator;
     private final Component lastSeparator;
@@ -72,6 +77,11 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
 
         add(new javax.swing.JPopupMenu.Separator());
         
+        // 26-07-2016 new
+        moveMenu = new JMenu();
+        moveMenu.setText("Move to tier...");
+        add(moveMenu);
+        
         // 24-06-2016 MuM-Multi new 
         moveDownLeftMenuItem = this.add(table.moveDownLeftAction);
         moveDownRightMenuItem = this.add(table.moveDownRightAction);
@@ -99,6 +109,10 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
         underlineMenuItem.setIcon(null);
         underlineMenuItem.setAccelerator(null);
         underlineMenuItem.setText(Internationalizer.getString("Underline"));
+
+        add(new javax.swing.JPopupMenu.Separator());
+        
+        nextEventMenuItem  = add(table.findNextEventAction);
 
         firstSeparator = add(new javax.swing.JPopupMenu.Separator());
 
@@ -128,5 +142,7 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
         cutMenuItem.setText(FOLKERInternationalizer.getString("edit_menu.cut"));
 
     }
+    
+    
     
 }

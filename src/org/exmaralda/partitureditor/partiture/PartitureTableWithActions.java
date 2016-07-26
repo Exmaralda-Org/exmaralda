@@ -38,6 +38,8 @@ import org.exmaralda.partitureditor.partiture.menus.EventPopupMenu;
 import org.exmaralda.partitureditor.partiture.menus.TablePopupMenu;
 
 import com.klg.jclass.table.*;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -45,7 +47,11 @@ import java.util.*;
 import java.io.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebLichtAction;
@@ -68,6 +74,7 @@ public class PartitureTableWithActions extends PartitureTable
                 implements  JCEditCellListener,
                             JCSelectListener, 
                             DocumentListener, 
+                            PopupMenuListener, 
                             /* SegmentationPanelListener, */
                             PraatPanelListener,
                             org.exmaralda.partitureditor.search.SearchResultListener, 
@@ -234,6 +241,7 @@ public class PartitureTableWithActions extends PartitureTable
         }
 
         eventPopupMenu = new EventPopupMenu(this);
+        eventPopupMenu.addPopupMenuListener(this);
         tablePopupMenu = new org.exmaralda.partitureditor.partiture.menus.TablePopupMenu(this);
                 
         pageFormat = java.awt.print.PrinterJob.getPrinterJob().defaultPage();
@@ -2515,6 +2523,52 @@ public class PartitureTableWithActions extends PartitureTable
     @Override
     public void processXPointer(String xPointer) {
         JOptionPane.showMessageDialog(parent, "Implement me!");
+    }
+
+    @Override
+    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+        eventPopupMenu.moveMenu.removeAll();
+        if (!getModel().containsEvent(selectionStartRow, selectionStartCol)){
+            eventPopupMenu.moveMenu.setEnabled(false);
+            return;
+        } 
+        Event event = null;
+        try {
+            event = getModel().getEvent(selectionStartRow, selectionStartCol);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String startID = event.getStart();
+        String endID = event.getEnd();
+        String sourceTierID = getModel().getTranscription().getBody().getTierAt(selectionStartRow).getID();
+        for (int i=0; i<getModel().getTranscription().getBody().getNumberOfTiers(); i++){
+            if (i==selectionStartRow) continue;
+            Tier tier = getModel().getTranscription().getBody().getTierAt(i);
+            if (tier.getEventsIntersecting(getModel().getTranscription().getBody().getCommonTimeline(), startID, endID).isEmpty()){
+                try {
+                    // this means the tier is free in this place
+                    MoveEventAction thisAction = new MoveEventAction(this, sourceTierID, tier.getID(), startID);
+                    JMenuItem thisMenuItem = eventPopupMenu.moveMenu.add(thisAction);
+                    if (tier.getType().equals("t")){
+                        thisMenuItem.setFont(thisMenuItem.getFont().deriveFont(Font.BOLD));
+                    }
+                    eventPopupMenu.moveMenu.setEnabled(true);
+                } catch (JexmaraldaException ex) {
+                    Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+    }
+
+    @Override
+    public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+        // do nothing
+    }
+
+    @Override
+    public void popupMenuCanceled(PopupMenuEvent e) {
+        // do nothing
     }
 
 

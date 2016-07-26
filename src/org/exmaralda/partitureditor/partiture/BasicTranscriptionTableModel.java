@@ -1203,6 +1203,28 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
     
     
+    public void moveToTier(String sourceTierID, String targetTierID, String startID) throws JexmaraldaException{
+        Tier sourceTier = transcription.getBody().getTierWithID(sourceTierID);
+        Tier targetTier = transcription.getBody().getTierWithID(targetTierID);
+        Event event = sourceTier.getEventAtStartPoint(startID);
+        targetTier.addEvent(event);
+        sourceTier.removeEventAtStartPoint(startID);
+        
+        int sourceRow = transcription.getBody().lookupID(sourceTierID);
+        int targetRow = transcription.getBody().lookupID(targetTierID);
+        int startCol = transcription.getBody().getCommonTimeline().lookupID(startID);
+        
+        fireValueChanged(sourceRow, startCol);        
+        fireCellFormatChanged(sourceRow,startCol);
+        fireCellSpanChanged(sourceRow,startCol);
+
+        fireValueChanged(targetRow, startCol);
+        fireCellFormatChanged(targetRow,startCol);
+        fireCellSpanChanged(targetRow,startCol);
+                
+        
+    }
+
     // 24-06-2016 MuM-Multi new 
     public void moveDownLeft (int row, int col){
         if (row>=this.getNumRows()-1) return;
