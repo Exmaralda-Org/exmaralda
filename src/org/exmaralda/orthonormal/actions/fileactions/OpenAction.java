@@ -35,7 +35,7 @@ public class OpenAction extends AbstractApplicationAction {
         ApplicationControl ac = (ApplicationControl)applicationControl;
         if (!ac.checkSave()) return;
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Normalisierte Transkription Ã¶ffnen");
+        fileChooser.setDialogTitle("Normalisierte Transkription öffnen");
         FolkerFileFilter ff = new org.exmaralda.folker.utilities.FolkerFileFilter();
         fileChooser.addChoosableFileFilter(ff);
         fileChooser.addChoosableFileFilter(new org.exmaralda.folker.utilities.NormalizedFolkerFileFilter());

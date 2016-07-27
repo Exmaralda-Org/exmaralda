@@ -198,11 +198,11 @@ public class Evaluate {
             String xml = IOUtilities.documentToString(mergedDoc);
             System.out.println("   Documents merged.");
             
-            //WÃ¶rter insgesamt: <xsl:value-of select="count(//w)"/><br/>
+            //Wörter insgesamt: <xsl:value-of select="count(//w)"/><br/>
             //Nicht vergleichbar: <xsl:value-of select="count(//w[not(@pos_c)])"/> (= <xsl:value-of select="count(//w[not(@pos_c)]) div count(//w) * 100"/>%)<br/>
-            //Ãœbereinstimmung: <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
+            //Übereinstimmung: <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
             //Abweichung <xsl:value-of select="count(//w[@pos_c and not(@pos=@pos_c)])"/> (= <xsl:value-of select="count(//w[@pos_c and not(@pos=@pos_c)]) div count(//w[@pos_c]) * 100"/>%)<br/> 
-            //Ãœbereinstimmung: (Superkategorie): <xsl:value-of select="count(//w[@pos_c and @super=@super_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @super=@super_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
+            //Übereinstimmung: (Superkategorie): <xsl:value-of select="count(//w[@pos_c and @super=@super_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @super=@super_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
             //Abweichung (Superkategorie): <xsl:value-of select="count(//w[@pos_c and not(@super=@super_c)])"/> (= <xsl:value-of select="count(//w[@pos_c and not(@super=@super_c)]) div count(//w[@pos_c]) * 100"/>%) 
             
             allFilesWords+=totalWords;

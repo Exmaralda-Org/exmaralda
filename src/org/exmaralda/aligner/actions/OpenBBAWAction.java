@@ -34,7 +34,7 @@ public class OpenBBAWAction extends javax.swing.AbstractAction {
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** OpenBBAWAction ***]");
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("BBAW-TEI-Transkription Ã¶ffnen");
+        fileChooser.setDialogTitle("BBAW-TEI-Transkription öffnen");
         fileChooser.setCurrentDirectory(new File("Y:\\thomas\\BW2FLK\\3-BBAW-SPLIT"));
         fileChooser.addChoosableFileFilter(new ParameterFileFilter("xml", "XML files"));
         int retValue = fileChooser.showOpenDialog(applicationFrame);

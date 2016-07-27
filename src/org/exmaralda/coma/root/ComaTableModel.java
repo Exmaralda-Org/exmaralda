@@ -8,7 +8,9 @@ import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * coma2/org.sfb538.coma2/ComaTableModel.java *  * @author woerner
+ * coma2/org.sfb538.coma2/ComaTableModel.java
+ * 
+ * @author woerner
  */
 
 public class ComaTableModel extends AbstractTableModel {
@@ -78,7 +80,7 @@ public class ComaTableModel extends AbstractTableModel {
 			data.clear();
 		} else {
 			System.err.println(
-				"Bitte ComaTableModel.setRowCount(int rowCount) fÃ¼r rowCount>0 implementieren!");
+				"Bitte ComaTableModel.setRowCount(int rowCount) für rowCount>0 implementieren!");
 			System.exit(1);
 		}
 

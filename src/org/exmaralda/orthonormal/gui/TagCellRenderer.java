@@ -20,7 +20,7 @@ public class TagCellRenderer extends DefaultListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         /* <category name="Partikel bei Adjektiv oder Adverb">
             <tag name="PTKA"/>
-            <description>am [schÃ¶nsten], zu [schnell]</description>
+            <description>am [schönsten], zu [schnell]</description>
         </category> */
         Element e = (Element)value;
         String tag = e.getChild("tag").getAttributeValue("name");

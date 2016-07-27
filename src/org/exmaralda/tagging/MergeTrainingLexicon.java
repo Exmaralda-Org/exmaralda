@@ -30,7 +30,7 @@ public class MergeTrainingLexicon {
     
     HashMap<String, ArrayList<String[]>> entries = new HashMap<String, ArrayList<String[]>>();
 
-    String DEREKO_LEXICON = "Z:\\TAGGING\\WÃ–RTERBÃœCHER\\DeReKo_GOOD.freq";
+    String DEREKO_LEXICON = "Z:\\TAGGING\\WÖRTERBÜCHER\\DeReKo_GOOD.freq";
     String CLOSED_LISTS_DIRECTORY = "Z:\\TAGGING\\closedlists";
     String TRAINING_LEXICON = "Z:\\TAGGING\\TRAINING\\goldstandard_lexicon.txt";
     String OUTPUT_FILE = "Z:\\TAGGING\\TRAINING\\lexicon.txt";

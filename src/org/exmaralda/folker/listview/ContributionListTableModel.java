@@ -1,7 +1,7 @@
 /*
  * EventListTableModel.java
  *
- * Created on 20. MÃ¤rz 2008, 15:37
+ * Created on 20. März 2008, 15:37
  *
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.

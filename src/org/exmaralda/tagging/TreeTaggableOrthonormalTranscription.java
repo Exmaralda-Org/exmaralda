@@ -27,7 +27,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
     public static String XPATH_TO_CONTRIBUTIONS = "//contribution";
     public static String XPATH_ALL_WORDS_AND_PUNCTUATION = "descendant::*[self::w or self::p]";
     public static String XPATH_NO_XY = "descendant::*[(self::w and not(@n='&')) or self::p]"; 
-    public static String XPATH_NO_DUMMIES = "descendant::*[(self::w and not(@n='&' or @n='%' or @n='Â§' or @n='Ã¤h')) or self::p]"; 
+    public static String XPATH_NO_DUMMIES = "descendant::*[(self::w and not(@n='&' or @n='%' or @n='§' or @n='äh')) or self::p]"; 
     //change 06.11.2013
     //public String xpathToTokens = "descendant::*[self::w or self::p]"; 
     public String xpathToTokens = XPATH_NO_XY;

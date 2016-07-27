@@ -58,7 +58,7 @@ public class GeneratePostProcessingRules {
             System.out.println("Processing " + f.getName());
             String tag = f.getName().substring(0,f.getName().indexOf("."));
             /* <rule>
-                <!-- Häsitationspartikel -->
+                <!-- H�sitationspartikel -->
                 <match field="n">äh</match>
                 <set field="pos">PTKHES</set>
             </rule> */

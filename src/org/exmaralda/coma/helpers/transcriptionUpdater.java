@@ -59,7 +59,7 @@ public class transcriptionUpdater {
 								}
 							}
 							if (!set) {
-								System.out.println("EinfÃ¼gen!");
+								System.out.println("Einfügen!");
 								Element newKey = new Element("Key");
 								newKey.setAttribute("Name", "count_" + key);
 								newKey.setText(value.toString());

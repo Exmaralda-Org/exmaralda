@@ -254,7 +254,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         dummyButtonsPanel.add(dummyButton4);
 
         dummyButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        dummyButton5.setText("ยง");
+        dummyButton5.setText("ง");
         dummyButton5.setToolTipText("nicht-usuelle Interjektion");
         dummyButton5.setMaximumSize(new java.awt.Dimension(45, 23));
         dummyButton5.setMinimumSize(new java.awt.Dimension(45, 23));

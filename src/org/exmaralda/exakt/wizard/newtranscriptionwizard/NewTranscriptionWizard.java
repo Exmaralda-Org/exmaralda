@@ -239,7 +239,7 @@ public class NewTranscriptionWizard extends AbstractWizardDialog{
 
     String[][] parseTierSpec(String string){
         if (string.length()==0){return new String[0][0];}
-        String[] individualSpecs = string.split("ยง");
+        String[] individualSpecs = string.split("ง");
         String[][] result = new String[individualSpecs.length][2];
         int pos=0;
         for (String individualSpec : individualSpecs){

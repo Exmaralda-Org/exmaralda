@@ -89,7 +89,7 @@ public class AutoNormalizer {
                 }
 
                 // 2. if you can, try the capitals only list
-                if (!(lookupGotResult) && lexicon.hasCapitalInformation() && wordText.matches("[a-zÃ¤Ã¶Ã¼ÃŸ].+")){
+                if (!(lookupGotResult) && lexicon.hasCapitalInformation() && wordText.matches("[a-zäöü].+")){
                     try {
                         String capitalWord = wordText.substring(0,1).toUpperCase() + wordText.substring(1);
                         if (lexicon.isCapitalOnly(capitalWord)){

@@ -421,7 +421,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements TimeSelectio
             setTranscription(doc);
             JFileChooser jfc = new JFileChooser();
             jfc.setFileFilter(new ParameterFileFilter("WAV", "WAV files"));
-            jfc.setDialogTitle("Bitte Audiodatei ausw√§hlen");
+            jfc.setDialogTitle("Bitte Audiodatei ausw‰hlen");
             jfc.setCurrentDirectory(new File("Y:\\media\\audio\\BW"));
             jfc.showOpenDialog(this);
             try {
@@ -471,7 +471,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements TimeSelectio
                 ex.printStackTrace();
                 JFileChooser jfc = new JFileChooser();
                 jfc.setFileFilter(new ParameterFileFilter("WAV", "WAV files"));
-                jfc.setDialogTitle("Bitte Audiodatei ausw√§hlen");
+                jfc.setDialogTitle("Bitte Audiodatei ausw‰hlen");
                 jfc.showOpenDialog(this);
                 try {
                     setMedia(jfc.getSelectedFile().getAbsolutePath());

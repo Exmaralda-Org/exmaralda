@@ -38,9 +38,9 @@ public class CleanDerekoLexicon {
         }
     }
     
-    String INPUT = "Z:\\TAGGING\\W√ñRTERB√úCHER\\DeReKo-2014-II-MainArchive-STT.100000.freq";
-    String OUTPUT_GOOD = "Z:\\TAGGING\\W√ñRTERB√úCHER\\DeReKo_GOOD.freq";
-    String OUTPUT_BAD = "Z:\\TAGGING\\W√ñRTERB√úCHER\\DeReKo_BAD.freq";
+    String INPUT = "Z:\\TAGGING\\W÷RTERB‹CHER\\DeReKo-2014-II-MainArchive-STT.100000.freq";
+    String OUTPUT_GOOD = "Z:\\TAGGING\\W÷RTERB‹CHER\\DeReKo_GOOD.freq";
+    String OUTPUT_BAD = "Z:\\TAGGING\\W÷RTERB‹CHER\\DeReKo_BAD.freq";
 
     ArrayList<String[]> allEntries = new ArrayList<String[]>();
     ArrayList<String[]> badEntries = new ArrayList<String[]>();
@@ -80,18 +80,18 @@ public class CleanDerekoLexicon {
                     (thisEntry.length!=4) // Eintr√§ge mit falscher Zahl an Records
                     || (thisEntry[1].equalsIgnoreCase("UNKNOWN"))   // unknown lemmas
                     || (thisEntry[2].equals("XY"))  // XY tags
-                    || (!(thisEntry[2].equals("NE") || thisEntry[2].equals("NN")) && (thisEntry[0].matches("^[A-Z√Ñ√ñ√ú].*"))) // gro√ügeschrieben aber nicht NE oder NN
-                    || ((thisEntry[2].equals("NE") || thisEntry[2].equals("NN")) && (thisEntry[0].matches("^[a-z√§√∂√º].*"))) // NE oder NN aber kleingeschrieben
-                    || ((thisEntry[0].matches("^[A-Z√Ñ√ñ√ú].*")) && (thisEntry[1].matches("^[a-z√§√∂√º].*"))) // Form gro√ü-, aber Lemma kleingeschrieben
+                    || (!(thisEntry[2].equals("NE") || thisEntry[2].equals("NN")) && (thisEntry[0].matches("^[A-Zƒ÷‹].*"))) // groﬂgeschrieben aber nicht NE oder NN
+                    || ((thisEntry[2].equals("NE") || thisEntry[2].equals("NN")) && (thisEntry[0].matches("^[a-z‰ˆ¸].*"))) // NE oder NN aber kleingeschrieben
+                    || ((thisEntry[0].matches("^[A-Zƒ÷‹].*")) && (thisEntry[1].matches("^[a-z‰ˆ¸].*"))) // Form groﬂ-, aber Lemma kleingeschrieben
                     || (thisEntry[2].equals("VVIMP")) // VIMP tags
                     || (thisEntry[0].matches(".*[0-9].*")) // alles mit Ziffern
                     || (thisEntry[0].matches(".*[\\%\\$].*")) // alles mit diesen Interpunktionszeichen : %$
-                    || (thisEntry[0].matches("^[A-Z√Ñ√ñ√ú]$")) // einzelne Gro√übuchstaben
+                    || (thisEntry[0].matches("^[A-Zƒ÷‹]$")) // einzelne Groﬂbuchstaben
                     || (thisEntry[2].equals("ADV")) // ADV tags
                     || (thisEntry[2].equals("FM")) // FM tags
                     || (thisEntry[2].equals("PAV")) // PAV tags
                     || (thisEntry[2].equals("PROAV")) // PROAV tags
-                    || (!(thisEntry[2].equals("NE")) && (thisEntry[0].matches("[A-Z√Ñ√ñ√ú]+"))) // ganz gro√ügeschriebene Formen, sofern nicht NE
+                    || (!(thisEntry[2].equals("NE")) && (thisEntry[0].matches("[A-Zƒ÷‹]+"))) // ganz groﬂgeschriebene Formen, sofern nicht NE
                     || (thisEntry[0].contains(".")) // Formen mit Punkten
                     || (clc.contains(thisEntry[2])) // closed list categories
                     || (thisEntry[2].startsWith("$")); // Interpunktion

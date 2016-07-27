@@ -79,7 +79,7 @@ public class CharacterSet {
                                                    "\u2190","\u2191","\u2193","\u2192","\u2197","\u2198", // arrows
                                                    "\u2026",  "\u2013", // three dots, n-dash (Gedankenstrich)
                                                    "\u2022","\u00B7","((_s))","\u203F", // Pause dot and written out, Ligature                                                     "\u00C0","\u00C1","\u00C2","\u00C3", // Capital As with diacritics
-                                                   "Ã„","Ã–","Ãœ","Ã¤","Ã¶","Ã¼","ÃŸ"};
+                                                   "Ä","Ö","Ü","ä","ö","ü","ß"};
                                                    
     public static String[] LATIN_SUPPLEMENT_CHAR_SET = {"\u00C0","\u00C1","\u00C2","\u00C3","\u00C4","\u00C5","\u00C6","\u00C7",
                                                         "\u00C8","\u00C9","\u00CA","\u00CB","\u00CC","\u00CD","\u00CE","\u00CF",
