@@ -79,8 +79,8 @@ public class TransanaConverter {
         double startTime;
         double endTime;
         
-        // Â¤ (0:13:28.2)Leh [Lehrer teilt die ArbeitsblÃ¤tter aus und geht weiter zu den Dokumenten] Jetzt wollen wir mal Ã¼berprÃ¼fen, wer Recht hat. Oder was stimmt.
-        // Â¤<812073> (0:13:32.1) Hal [mit Hakan Schnick- Schnack- Schnuck spielend] ... [lachend] Drei Null. 
+        // ¤ (0:13:28.2)Leh [Lehrer teilt die Arbeitsblätter aus und geht weiter zu den Dokumenten] Jetzt wollen wir mal überprüfen, wer Recht hat. Oder was stimmt.
+        // ¤<812073> (0:13:32.1) Hal [mit Hakan Schnick- Schnack- Schnuck spielend] ... [lachend] Drei Null. 
         public ParsedLine(String unparsedLine) {
             // startTime
             if (unparsedLine.matches("^\\u00A4<\\d+> .*")){

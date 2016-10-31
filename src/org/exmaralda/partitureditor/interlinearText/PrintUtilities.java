@@ -28,7 +28,7 @@ public class PrintUtilities {
        int w = Math.round(new Double(r.width).floatValue());;
        int h = Math.round(new Double(r.height).floatValue());;
        // fill the specified space with the specified background color
-       if (!backgroundColor.equals(Color.white)){   // no need to fill white areas (GIBT NUR AEGER)
+       if (!backgroundColor.equals(Color.white)){   // no need to fill white areas (GIBT NUR �SCHER)
             graphics.setColor(backgroundColor);
             graphics.fillRect(x,y,w,h);
        }    

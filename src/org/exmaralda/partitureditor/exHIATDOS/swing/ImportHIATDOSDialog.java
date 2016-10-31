@@ -272,7 +272,7 @@ public class ImportHIATDOSDialog extends org.exmaralda.partitureditor.jexmaralda
         // Add your handling code here:
         AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(startDirectory);
         dialog.setFileFilter(new ParameterFileFilter("sig", "HIAT-DOS Siglendateien (*.sig)"));
-        dialog.setDialogTitle("HIAT-DOS Siglendatei auswählen");
+        dialog.setDialogTitle("HIAT-DOS Siglendatei ausw�hlen");
         int returnVal = dialog.showOpenDialog(this);
         if(returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
             String fn = new String(dialog.getSelectedFile().toString());
@@ -284,7 +284,7 @@ public class ImportHIATDOSDialog extends org.exmaralda.partitureditor.jexmaralda
         // Add your handling code here:
         AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(startDirectory);
         dialog.setFileFilter(new ParameterFileFilter("inf", "HIAT-DOS Infodateien (*.inf)"));
-        dialog.setDialogTitle("HIAT-DOS Infodatei auswählen");
+        dialog.setDialogTitle("HIAT-DOS Infodatei ausw�hlen");
         int returnVal = dialog.showOpenDialog(this);
         if(returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
             String fn = new String(dialog.getSelectedFile().toString());
@@ -296,7 +296,7 @@ public class ImportHIATDOSDialog extends org.exmaralda.partitureditor.jexmaralda
         // Add your handling code here:
         AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(startDirectory);
         dialog.setFileFilter(new ParameterFileFilter("dat", "HIAT-DOS Transkriptdateien (*.dat)"));
-        dialog.setDialogTitle("HIAT-DOS Transkriptdatei auswählen");
+        dialog.setDialogTitle("HIAT-DOS Transkriptdatei ausw�hlen");
         int returnVal = dialog.showOpenDialog(this);
         if(returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
             String fn = new String(dialog.getSelectedFile().toString());
