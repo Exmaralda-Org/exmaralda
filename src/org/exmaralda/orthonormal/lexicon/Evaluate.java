@@ -61,7 +61,7 @@ public class Evaluate {
                if (normalization.contains(" ")) countOneToMany++;
                if (normalization.contains("#")) countNonLexicalised++;
                if (normalization.contains("%")) countCutOff++;
-               if (normalization.contains("ง")) countIdeolect++;
+               if (normalization.contains("ยง")) countIdeolect++;
                if (normalization.toLowerCase().equals(wordText.toLowerCase())) countCapitalizations++;
                
                String hash = wordText + "***" + normalization;
