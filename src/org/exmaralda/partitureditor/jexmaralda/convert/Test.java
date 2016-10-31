@@ -60,7 +60,7 @@ public class Test {
             //converter.writeCGATMINIMALISOTEIToFile(bt, "C:\\Users\\Schmidt\\Desktop\\tei_out.xml", 
             //        "C:\\Users\\Schmidt\\ownCloud\\Shared\\ModiKo\\Datengrundlage\\MoDiKo-Gesamtkorpus\\cGAT_Minimal_Custom_FSM.xml");
             
-            String IN = "C:\\Users\\Schmidt\\Dropbox\\IDS\\HZSK\\WV_MuM-Multi\\Transana Daten für Konvertierung\\xml Dateien";
+            String IN = "C:\\Users\\Schmidt\\Dropbox\\IDS\\HZSK\\WV_MuM-Multi\\Transana Daten fÃ¼r Konvertierung\\xml Dateien";
             String OUT = "C:\\Users\\Schmidt\\Dropbox\\IDS\\HZSK\\WV_MuM-Multi\\EXB";
             
             File[] xmlFiles = new File(IN).listFiles(new FilenameFilter(){

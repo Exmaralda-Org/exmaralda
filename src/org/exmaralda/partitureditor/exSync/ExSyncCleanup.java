@@ -198,7 +198,7 @@ public class ExSyncCleanup {
             Tier t = transcription.getBody().getTierAt(pos);
             for (int i=0; i<t.getNumberOfEvents(); i++){
                 Event e = t.getEventAt(i);
-                String newDescription = e.getDescription().replaceAll("(?<!\\()\\( +\\)(?!\\))", "((unverständlich))");
+                String newDescription = e.getDescription().replaceAll("(?<!\\()\\( +\\)(?!\\))", "((unverstÃ¤ndlich))");
                 if (!e.getDescription().equals(newDescription)){
                     e.setDescription(newDescription);
                     count++;

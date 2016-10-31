@@ -351,7 +351,7 @@ public class BasicBody extends AbstractTierBody {
                 return tli.getID();
             }
         }
-        // this is the borderk‰se: return the very first timeline item
+        // this is the borderk√§se: return the very first timeline item
         return getCommonTimeline().getTimelineItemAt(0).getID();
     }
 

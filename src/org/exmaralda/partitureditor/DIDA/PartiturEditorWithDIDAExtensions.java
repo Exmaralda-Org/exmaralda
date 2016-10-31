@@ -56,14 +56,14 @@ public class PartiturEditorWithDIDAExtensions extends org.exmaralda.partituredit
         
         this.getVersion();
 
-        // Initialisierung des DIDA-Men�s
+        // Initialisierung des DIDA-Menüs
         didaMenu = new javax.swing.JMenu();
         didaMenu.setText("DIDA");
-        // Hinzuf�gen der DIDA-spezifischen Aktionen zum DIDA-Men�
+        // Hinzufügen der DIDA-spezifischen Aktionen zum DIDA-Menü
         didaMenu.add(someAction);
         didaMenu.add(someOtherAction);
         
-        // Hinzuf�gen des DIDA-Men�s zur Men�-Bar
+        // Hinzufügen des DIDA-Menüs zur Menü-Bar
         getJMenuBar().add(didaMenu);
         System.out.println(getName());
         getPartitur().setLocked(true);
@@ -74,14 +74,14 @@ public class PartiturEditorWithDIDAExtensions extends org.exmaralda.partituredit
         this.addMouseListener(this);
     }
     
-    // Wenn der Benutzer die Auswahl in der Partitur �ndert wird diese Methode aufgerufen
-    // startTime ist dann die der Auswahl n�chste vorhergehende absolute Zeitangabe
-    // endTime ist die der Auswahl n�chste folgende Zeitangabe
+    // Wenn der Benutzer die Auswahl in der Partitur aendert wird diese Methode aufgerufen
+    // startTime ist dann die der Auswahl naechste vorhergehende absolute Zeitangabe
+    // endTime ist die der Auswahl naechste folgende Zeitangabe
     // in der Superklasse ist diese Methode leer
-    // hier m�sste sie so overridden werden, dass sie die startTime und endTime
-    // (wahrscheinlich �ber Aufruf einer System-Routine)
+    // hier muesste sie so overridden werden, dass sie die startTime und endTime
+    // (wahrscheinlich ueber Aufruf einer System-Routine)
     // an XWaves bzw. Praat weitergibt, damit diese Programme entsprechend reagieren,
-    // also z.B. in der zugeh�rigen Aufnahme den betreffenden Abschnitt selektieren
+    // also z.B. in der zugehoerigen Aufnahme den betreffenden Abschnitt selektieren
     public void processMediaTimeChanged(double startTime, double endTime){
         
         // Hier werden zu Demozwecken Start- und Endzeit einfach in
@@ -103,9 +103,9 @@ public class PartiturEditorWithDIDAExtensions extends org.exmaralda.partituredit
     private void performSomeOtherAction(){
         System.out.println("Some other action performed.");
         if (getPartitur().transcriptionChanged){
-            javax.swing.JOptionPane.showConfirmDialog(this, "Ge�������ndert!!!!");
+            javax.swing.JOptionPane.showConfirmDialog(this, "Geaendert!!!!");
         } else {
-            javax.swing.JOptionPane.showConfirmDialog(this, "Nixe ge�ndert.");
+            javax.swing.JOptionPane.showConfirmDialog(this, "Nixe geaendert.");
         }
         try {
             double time = praatControl.getCursorTime();
