@@ -309,7 +309,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         jLabel2.setText("Alphabet: ");
         jPanel3.add(jLabel2);
 
-        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German (Deutsch)", "German (Deutsch) + Capitals", "English", "French (Français)", "Portuguese (Portugu?s)", "Hungarian (Magyar)", "Turkish (Türkçe)", "Danish (Dansk)", "Spanish (Espagnol)", "Italian (Italiano)", "Czech (èeština)", "Russian (Latin transliteration)", "Universal" }));
+        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German (Deutsch)", "German (Deutsch) + Capitals", "English", "French (FranÃ§ais)", "Portuguese (Portugu?s)", "Hungarian (Magyar)", "Turkish (TÃ¼rkÃ§e)", "Danish (Dansk)", "Spanish (Espagnol)", "Italian (Italiano)", "Czech (Ã¨eÅ¡tina)", "Russian (Latin transliteration)", "Universal" }));
         alphabetComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alphabetComboBoxActionPerformed(evt);

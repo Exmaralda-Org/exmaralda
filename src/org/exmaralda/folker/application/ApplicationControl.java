@@ -1085,7 +1085,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 timeViewer.setCursorTime(0.0);
 
 
-                status("Player zur�ckgesetzt");
+                status("Player zurückgesetzt");
             }            
         });
 
