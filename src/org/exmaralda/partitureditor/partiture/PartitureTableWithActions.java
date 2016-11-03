@@ -329,7 +329,8 @@ public class PartitureTableWithActions extends PartitureTable
 
         svgDialog = new org.exmaralda.partitureditor.svgPanel.SVGDialog(parent, false);
         svgDialog.setLocationRelativeTo(this);
-        svgDialog.svgPanel.addXPointerListener(this);
+        //svgDialog.svgPanel.addXPointerListener(this);
+        
         
     }
 
@@ -658,8 +659,19 @@ public class PartitureTableWithActions extends PartitureTable
                 startTime = tl.getPreviousTime(start);
                 endTime = tl.getNextTime(end);
                 largeTextField.setText(ev.getDescription());
+                
+                // NEW - 02-11-2016
+                // SVG PANEL COMMUNICATION
+                if (svgDialog.isVisible()){
+                    if (getModel().getTranscription().getBody().getTierAt(selectionStartRow).getCategory().equals("ref")){
+                        String xpointerRef = getModel().getEvent(selectionStartRow, selectionStartCol).getDescription();
+                        svgDialog.svgPanel.setXPointer(xpointerRef, new File(filename).getParentFile());
+                    }
+                }
+                
             } catch (JexmaraldaException je){
             }
+            
         } else if (selectionStartCol >=0 && selectionEndCol>=0){
             String start = tl.getTimelineItemAt(selectionStartCol).getID();
             // ADDED 27-01-2009

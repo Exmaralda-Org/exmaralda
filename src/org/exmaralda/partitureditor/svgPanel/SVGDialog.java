@@ -5,20 +5,22 @@
  */
 package org.exmaralda.partitureditor.svgPanel;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Schmidt
  */
 public class SVGDialog extends javax.swing.JDialog {
 
-    public PrototypeSVGPanel svgPanel;
+    public DisplaySVGPanel svgPanel;
     /**
      * Creates new form SVGDialog
      */
     public SVGDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        svgPanel = new PrototypeSVGPanel();
+        svgPanel = new DisplaySVGPanel((JFrame) parent);        
         getContentPane().add(svgPanel, java.awt.BorderLayout.CENTER);
         pack();
     }
@@ -33,6 +35,8 @@ public class SVGDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SVG Panel");
+        setPreferredSize(new java.awt.Dimension(600, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
