@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<changes>
+	<!--major releases-->
+	<release tool="coma" version="1.4" date="03.02.2009" macfile="http://www.exmaralda.org/files/coma/Coma.dmg" winfile="http://www.exmaralda.org/files/1.1/exmaralda_setup.exe" linuxfile="http://www.exmaralda.org/files/1.1/EXMARaLDA.tar.gz"/>
+	<release tool="partitureditor" version="1.4" date="03.02.2009"/>
+
+<!--bugs -->
+	<bug tool="coma" priority="5" added="18.12.2008">clear transcription and recording-lists when deselecting communications</bug>
+	<bug tool="coma" priority="8" added="18.12.2008">description-table-should update with editing cell</bug>
+	<bug tool="partitureditor" priority="5" added="11.10.2008">Quicktime player cannot make snapshot. Either deactivate snapshot button or add snapshot functionality to Quicktime player (cf. mail Mempel)</bug>
+	<bug tool="coma" priority="1" added="20.09.2008">xmlChanged should be triggered more often</bug>
+	<bug tool="coma" priority="3" added="20.09.2008">no distinction between recordings and media</bug>
+	<bug tool="coma" priority="3" added="20.09.2008">passing a coma-document via the command line doesn't work (launcher.java)</bug>
+	<bug tool="coma" priority="5" added="20.09.2008">assigning recordings shows odd behaviour</bug>
+	<bug tool="coma" priority="3" added="21.09.2008">the comaDatatype-code is almost unusable, especially with descriptions</bug>
+	<bug tool="exakt" priority="5" added="01.12.2008">Annotation search does not work if annotated:annotation is n:1 (see XMLSearchableSegment, line 90ff)</bug>
+        
+<!--requirements -->
+	<req tool="exakt" priority="4" added="20.11.2008">cannot use languages from coma as metadata</req>
+	<req tool="partitureditor" priority="2" added="17.11.2008">ODF export for partiturs</req>
+	<req tool="partitureditor" priority="3" added="11.11.2008">need Polish keyboard for M1,H8</req>
+	<req tool="partitureditor" priority="2" added="09.10.2008">synch fine tuning mode and playback-mode should be checkboxes in the media panel</req>
+	<req tool="coma" priority="3" added="20.09.2008">progress-bar for the tools-window</req>
+	<req tool="coma" priority="1" added="20.09.2008">additional information for multi-selections</req>
+	<req tool="coma" priority="2" added="29.09.2008">automatically compute total length of recordings when adding them</req>
+	<req tool="coma" priority="2" added="18.12.2008">data entry for durations in locations</req>
+	
+
+<!--changes -->
+	<change tool="folker" type="change" version="0.7." date="03.03.2009">Added tooltips with full path in recent files items in file menu</change>
+	<change tool="folker" type="change" version="0.7." date="03.03.2009">Waveform view also makes sure that selection boundaries are not closer to next timepoints than than tolerance</change>
+	<change tool="folker" type="change" version="0.7." date="02.03.2009">Waveform view now makes sure that selection length does not become less than tolerance</change>
+    <change tool="folker" type="change" version="0.7." date="02.03.2009">Changed tolerance from 100 to 50 miliseconds</change>
+	<change tool="folker" type="bug" version="0.7." date="02.03.2009">Caught bug when opening null audio file (Wilfried's mail)</change>
+	<change tool="folker" type="feature" version="0.7." date="27.02.2009">Added mark functionality to the waveform panel</change>
+	<change tool="folker" type="feature" version="0.7." date="26.02.2009">Added possibility to select parse level</change>
+	<change tool="partitureditor" type="change" version="1.4.1." date="27.02.2009">Started cleaning up internationalization</change>
+	<change tool="partitureditor" type="change" version="1.4.1." date="27.02.2009">Cleaned up languages</change>
+	<change tool="folker" type="feature" version="0.7." date="26.02.2009">Added possibility to select parse level</change>
+	<change tool="all" type="feature" version="1.2." date="26.02.2009">Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances</change>
+	<change tool="folker" type="feature" version="0.7." date="26.02.2009">Copy Action</change>
+	<change tool="folker" type="change" version="0.7." date="26.02.2009">Disabled speakertable edit for partitur view</change>
+	<change tool="partitureditor" type="feature" version="1.4.1." date="26.02.2009">Added 'Anchor timeline' action to timeline menu</change>
+	<change tool="coma" type="feature" version="1.4.1.204" date="25.02.2009">auto-update feature (untested for windows)</change>
+	<change tool="folker" type="feature" version="0.7." date="25.02.2009">Added quantification HTML output</change>
+	<change tool="folker" type="feature" version="0.7." date="25.02.2009">Added partitur HTML output</change>
+	<change tool="folker" type="feature" version="0.7." date="25.02.2009">Added segment HTML output</change>
+	<change tool="partitureditor" type="bug" version="1.4.1." date="25.02.2009">Fixed bug in reading transcriptions: type is not read</change>
+	<change tool="folker" type="change" version="0.7." date="25.02.2009">Changes in the HTML contribution list output: added columns for numbering, added brackets for overlaps</change>
+	<change tool="folker" type="bug" version="0.7." date="25.02.2009">Fixed bug in output: suffix must be appended if none provided by the user</change>
+	<change tool="partitureditor" type="bug" version="1.4.1." date="25.02.2009">Fixed "faute nantaise": adding an avent at the very end must take care of not producing an illogial structure of the timeline</change>
+	<change tool="partitureditor" type="bug" version="1.4.1." date="17.02.2009">Fixed bug in search action</change>
+	<change tool="partitureditor" type="feature" version="1.4.1." date="11.02.2009">Transformation action</change>
+	<change tool="partitureditor" type="change" version="1.4.1." date="11.02.2009">Completed menu cleanup (Segmentation menu removed!)</change>
+	<change tool="partitureditor" type="change" version="1.4.1." date="10.02.2009">Moved and summarized several functions from the Segmentation menu to the Transcription menu</change>
+	<change tool="all" type="change" version="1.4.1." date="09.02.2009">Integration of ELAN.jar instead of copied MPI code</change>
+	<change tool="partitureditor" type="feature" version="1.4.1." date="09.02.2009">Added AIF to list of common media files</change>
+	<change tool="all" type="feature" version="1.2." date="09.02.2009">Documentation updates</change>
+	<change tool="partitureditor" type="feature" version="1.4.1." date="09.02.2009">Tooltips for waveform actions</change>
+	<change tool="folker" type="feature" version="0.5." date="05.02.2009">Output action</change>
+	<change tool="folker" type="change" version="0.5." date="04.02.2009">Changed symbols for: breathe, assimilation, unintelligible and alternative (Wilfried's, Martin's and my own mail)</change>
+	<change tool="coma" type="bug" version="1.4.1_190" date="18.02.2009">coma mac-build was missing the fsm-files for segmentation</change>
+	<change tool="coma" type="change" version="1.4.1_190" date="18.02.2009">coma files have the extension .coma now</change>
+	<change tool="coma" type="bug" version="1.4" date="02.02.2009">changes in recording.toHTML()</change>
+	<change tool="coma" type="bug" version="1.4" date="02.02.2009">corpus-creator changed: one recording - multiple media files, overwrite confirmation</change>
+	<change tool="coma" type="bug" version="1.4" date="30.01.2009">Description-Keys are now always deleted by deleting their value (Petra's Mail)</change>
+	<change tool="folker" type="feature" version="0.5." date="29.01.2009">Possibility to unassign speakers (Wilfried's mail)</change>
+	<change tool="folker" type="change" version="0.5." date="29.01.2009">Minor changes in the help menu</change>
+	<change tool="folker" type="change" version="0.5." date="29.01.2009">Made a decent splash screen</change>
+	<change tool="all" type="change" version="1.4." date="28.01.2008">Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS</change>
+	<change tool="coma" type="bug" version="1.35_176" date="28.01.2008">Pressing escape while editing communication-names caused a NPE</change>
+	<change tool="coma" type="bug" version="1.35_176" date="27.01.2008">changed xmlSaved-notification and titlebar-display</change>
+	<change tool="coma" type="change" version="1.35_176" date="27.01.2008">Changed the input-method for durations YET AGAIN!</change>
+	<change tool="partitureditor" type="feature" version="1.4." date="27.01.2008">Added tier segmentation function for SiN</change>
+	<change tool="partitureditor" type="bug" version="1.4." date="27.01.2008">fixed bugs in selection handling</change>
+	<change tool="folker" type="feature" version="0.4." date="26.01.2009">Added accelerators for New, Open, Save</change>
+	<change tool="partitureditor" type="bug" version="1.4." date="26.01.2008">fixed bug in QT availability check</change>
+	<change tool="folker" type="bug" version="0.4." date="22.01.2009">Fixed bug after segment deletion: timeline must be updated</change>
+	<change tool="exakt" type="bug" version="0.5" date="19.01.2009">fixed three bugs in the corpus generator</change>
+	<change tool="coma" type="bug" version="1.35_171" date="19.01.2009">fixed three bugs in the corpus generator</change>
+	<change tool="partitureditor" type="feature" version="1.4." date="14.01.2009">increased vertical size of large text field panel</change>
+	<change tool="partitureditor" type="feature" version="1.4." date="14.01.2009">modified interpolation behaviour for splitting and double splitting</change>
+	<change tool="folker" type="feature" version="0.4." date="09.01.2009">changed and supplemented key bindings</change>
+	<change tool="folker" type="feature" version="0.4." date="09.01.2009">added 'play last second of selection' action</change>
+	<change tool="exakt" type="change" version="0.5." date="07.01.2009">removed save and open buttons for search expressions</change>
+	<change tool="folker" type="feature" version="0.4." date="06.01.2009">added 'append segment' action</change>
+	<change tool="folker" type="feature" version="0.3." date="17.12.2008">several mouse handling features added to the timeline view</change>
+	<change tool="partitureditor" type="feature" version="1.4" date="17.12.2008">several mouse handling features added to the timeline view</change>
+	<change tool="partitureditor" type="bug" version="1.4" date="17.12.2008">fixed several smaller bugs in the ELAN import</change>
+	<change tool="coma" type="bug" version="1.35_162" date="17.12.2008">fixed error in table updates and template-handling</change>
+	<change tool="folker" type="change" version="0.3" date="15.12.2008">minor changes to the data model (assimilation and unintelligible)</change>
+	<change tool="coma" type="change" version="1.35_160" date="15.12.2008">comacorpus.xsd changed to 1.5 - changes are documented inside the file</change>
+	<change tool="tagger" type="bug" version="0.7" date="09.12.2008">saving was broken, buttons were not colored, tag-overwrite did not work.</change>
+	<change tool="coma" type="feature" version="1.35_150" date="27.11.2008">templates for descriptions</change>
+	<change tool="coma" type="feature" version="1.35_150" date="27.11.2008">you can not add transcriptions and recordings in an unsaved document anymore</change>
+	<change tool="coma" type="bug" version="1.35_150" date="27.11.2008">fixed several errors concerned with saving, url resolving and other stuff</change>
+	<change tool="exakt" type="bug" version="0.5" date="21.11.2008">fixed bug in annotation search</change>
+	<change tool="coma" type="feature" version="1.35_135" date="21.11.2008">added templates for descriptions. this build is largely untested!</change>
+	<change tool="coma" type="bug" version="1.35_131" date="20.11.2008">language-lookup now with lowercase-letters (thanks, ethnologue...)</change>
+	<change tool="folker" type="change" version="0.3" date="12.12.2008">changed I/O to write parse level 2</change>
+	<change tool="partitureditor" type="bug" version="1.4" date="28.11.2008">Fixed a bug in the QTJ Player</change>
+	<change tool="partitureditor" type="bug" version="1.4" date="27.11.2008">Fixed a minor bug in the CHAT export</change>
+	<change tool="partitureditor" type="change" version="1.4" date="26.11.2008">Changed time display in audio/video panel</change>
+	<change tool="partitureditor" type="change" version="1.4" date="25.11.2008">Renamed 'Send partiture...' to 'Show partiture...'</change>
+	<change tool="coma" type="feature" version="1.35_135" date="21.11.2008">added templates for descriptions. this build is largely untested!</change>
+	<change tool="coma" type="bug" version="1.35_131" date="20.11.2008">language-lookup now with lowercase-letters (thanks, ethnologue...)</change>
+	<change tool="partitureditor" type="bug" version="1.4" date="19.11.2008">fixed buggy bug handling for init of logger file (problem on MAC OS)</change>	
+	<change tool="partitureditor" type="feature" version="1.4" date="19.11.2008">completed change of referenced file handling in meta information dialog</change>	
+	<change tool="partitureditor" type="change" version="1.4" date="17.11.2008">changed CellFit-Paramater behaviour (is now default)</change>	
+	<change tool="folker" type="feature" version="0.2" date="11.11.2008">changed behaviour when a recording is not found, cannot be processed in 'New' and 'Open' actions</change>
+	<change tool="folker" type="change" version="0.2" date="11.11.2008">renamed 'Ereignis' to 'Segment' in several places</change>
+	<change tool="coma" type="bug" version="1.35_118" date="30.10.2008">there was still a bug in durations-calculation. replaced the whole thing.</change>
+	<change tool="folker" type="feature" version="0.2" date="29.10.2008">changed behaviour of contribution text pane</change>
+	<change tool="folker" type="feature" version="0.2" date="29.10.2008">added time integrity check columns in list views</change>
+	<change tool="folker" type="feature" version="0.2" date="29.10.2008">added 'insert pause' action</change>
+	<change tool="coma" type="feature" version="1.35_112" date="27.10.2008">changed preferences handling - dumped 250 lines of code, added defaults-button</change>
+	<change tool="all" type="change" date="28.10.2008">changed EXMARaLDA's build and template files for new media integration</change>	
+	<change tool="all" type="change" date="28.10.2008">removed JLayer-Player because it is no longer needed (MP3 is fine in other players)</change>	
+	<change tool="partitureditor" type="bug" version="1.4" date="28.10.2008">fixed buggy bug handling for the case that no quicktime is installed</change>	
+	<change tool="all" type="festure" date="27.10.2008">integrated ELAN's DirectShowPlayer as a new player type</change>	
+	<change tool="folker" type="bug" version="0.2" date="27.10.2008">fixed bug related to switch from partitur to event view: edit must be commited</change>	
+	<change tool="folker" type="bug" version="0.2" date="27.10.2008">fixed bug related to speaker cell editor / event removal: edit must be commited</change>	
+	<change tool="coma" type="feature" version="1.35_103" date="24.10.2008">added preferences option to disable writing IDs into transcription files</change>
+	<change tool="coma" type="bug" version="1.35_103" date="24.10.2008">Maintenance-Tools repaired (reload transcription information)</change>
+	<change tool="partitureditor" type="change" version="1.4" date="24.10.2008">Completed Spanish translations (Silke Merkel), completed French translations (Silke Merkel), Some smaller modifications to Czech translations (Petr Porizka)</change>	
+	<change tool="all" type="bug" version="1.1" date="22.10.2008">fixed bug in log file handling which led to out of memory errors on certain Macs</change>	
+	<change tool="exakt" type="bug" version="0.5" date="22.10.2008">changed mac plist to set bigger maximum heap size</change>	
+	<change tool="partitureditor" type="bug" version="1.4" date="22.10.2008">changed mac plist to set bigger maximum heap size</change>	
+	<change tool="partitureditor" type="bug" version="1.4" date="22.10.2008">some minor fixes to the ELAN export</change>	
+	<change tool="folker" type="feature" version="0.2" date="22.10.2008">added ELAN export</change>	
+	<change tool="folker" type="change" version="0.2" date="22.10.2008">changed save to write to folker-transcription format</change>	
+	<change tool="folker" type="feature" version="0.2" date="22.10.2008">changed open to read folker-transcription format</change>	
+	<change tool="folker" type="feature" version="0.2" date="22.10.2008">added export action</change>	
+	<change tool="folker" type="feature" version="0.2" date="22.10.2008">added import action</change>	
+	<change tool="partitureditor" type="bug" version="1.4" date="21.10.2008">fixed bug in "send partitur to browser" action</change>	
+	<change tool="partitureditor" type="feature" version="1.4" date="20.10.2008">speakerwise word lists export for HIAT in Segmentation menu</change>	
+	<change tool="partitureditor" type="change" version="1.4" date="20.10.2008">removed 70 twips indent for partitur tables in RTF output (cf. mail by Peter Weber)</change>	
+	<change tool="all" type="bug" date="20.10.2008">changed linux tarball: sh files are now executable</change>	
+	<change tool="partitureditor" type="change" version="1.4" date="14.10.2008">added Spanish translations (not complete yet) and fixed some minor bugs wrt internationalizazion</change>	
+	<change tool="all" type="bug" date="13.10.2008">changed linux tarball according to suggestions by Jörg Sommer</change>	
+	<change tool="all" type="bug" date="13.10.2008">changed info plist for mac applications to nake sure app runs on 32-bit-JVM</change>	
+	<change tool="coma" type="feature" version="1.35_85" date="08.10.2008">show file path to transcription in transcription-info</change>
+	<change tool="coma" type="bug" version="1.35_85" date="08.10.2008">fixed bugs in timespan calculation</change>
+	<change tool="coma" type="change" version="1.34" date="07.10.2008" release="true">minor fixes and new build-targets</change>
+	<change tool="coma" type="bug" version="1.33_66" date="29.09.2008">html-display for media-files fixed</change>	
+	<change tool="partitureditor" type="feature" version="1.4" date="06.10.2008">started to change referenced file handling in meta information dialog</change>	
+	<change tool="all" type="feature" date="06.10.2008">changed basic and segmented transcription APIs to read and write more than one referenced file</change>	
+	<change tool="all" type="feature" date="06.10.2008">changed basic and segmented transcription DTD to allow more than one referenced file</change>	
+	<change tool="all" type="feature" date="06.10.2008">changed basic transcription DTD to allow format table</change>	
+	<change tool="coma" type="bug" version="1.33_66" date="29.09.2008">html-display for media-files fixed</change>	
+	<change tool="partitureditor" type="feature" version="1.4" date="26.09.2008">added HTML partitur output with flash</change>
+	<change tool="coma" type="bug" version="1.33_62" date="26.09.2008">key-sorting is not reverse anymore</change>
+	<change tool="coma" type="bug" version="1.33_59" date="26.09.2008">bug in location-edit-dialog fixed</change>
+	<change tool="coma" type="bug" version="1.32" date="25.09.2008">millisecond-handling now with BigDecimals to prevent rounding errors in durations</change>
+	<change tool="coma" type="feature" version="1.31" date="01.08.2008">template-autosave</change>
+	<change tool="coma" type="feature" version="1.31" date="01.08.2008">awt-filedialog auf dem mac an einigen stellen</change>
+	<change tool="coma" type="bug" version="1.31" date="01.08.2008">ein paar nullpointer in den templates beseitigt</change>
+	<change tool="coma" type="bug" version="1.31" date="01.08.2008">templates und segmentierung in die dokumentation aufgenommen</change>
+	<change tool="coma" type="feature" version="1.31" date="01.08.2008">templates für locations</change>
+	<change tool="coma" type="feature" version="1.31" date="01.08.2008">ccw-panel von  blödem layout befreit</change>
+	<change tool="coma" type="bug" version="1.24" date="29.07.2008">Comm/Setting/Description liess sich nicht editieren</change>
+	<change tool="coma" type="bug" version="1.24" date="29.07.2008">SplitPanes verbessert</change>
+	<change tool="coma" type="bug" version="1.23" date="28.07.2008">Fehler im Segment-Zähler korrigiert</change>
+	<change tool="coma" type="bug" version="1.22" date="22.07.2008">Fehler in der Tabellendarstellung behoben ("redo selection")</change>
+	<change tool="coma" type="bug" version="1.21" date="01.06.2008">Fehler in CCW behoben: @-Zeichen am Anfang von "uniqueSpeaker..." entfernt.</change>
+	<change tool="coma" type="bug" version="1.2" date="16.05.2008">Fehler beim Speichern und Abrufen der Einstellungen behoben. Alle Einstellungen gehen jetzt nach org.exmaralda.coma und das geschieht in Ui.java</change>
+	<change tool="coma" type="feature" version="1.2" date="16.05.2008">Dublin-Core-Metadata-Button and handling</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">ComaFilter: JToggleButtons statt JCheckboxes</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">package-struktur komplett auf org.exmaralda.coma umgestellt</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">keine files mehr in coma/*</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">SVN via SourceForge</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">alle ressourcen (auch bilder) nach /resources, mit ResourceHandler.java auflösen</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">Unique Speaker Distinction für "add Corpora" hat gefehlt</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">Fehler beim "auskoppeln" von Korpora behoben</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">SegmentCount Button repariert</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">SegmentCount zählt jetzt in ausgewählten Comm. statt in allen</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">Mülleimer-Symbol durch "Minus" ersetzt</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">Übersetzungen ergänzt</change>
+	<change tool="coma" type="feature" version="1.11" date="24.04.2008">duplicate communications</change>
+	<change tool="coma" type="feature" version="1.11" date="24.04.2008">moved panic-button</change>
+	<change tool="coma" type="bug" version="1.11" date="24.04.2008">add-to-basket repaired</change>
+	<change tool="coma" type="feature" version="1.06" date="22.04.2008">duplicate speakers</change>
+	<change tool="coma" type="bug" version="1.05" date="14.04.2008">ccw macht das fenster zu</change>
+	<change tool="coma" type="feature" version="1.05" date="14.04.2008">ccw lokalisiert</change>
+	<change tool="coma" type="bug" version="1.04" date="14.04.2008">XML-Anzeige und Editor entfernt</change>
+	<change tool="coma" type="feature" version="1.04" date="14.04.2008">new transcription-importer ("ccw")</change>
+	<change tool="coma" type="feature" version="1.04" date="14.04.2008">"known human" now optional</change>
+	<change tool="coma" type="change" version="1.02" date="10.03.2008">Update-Check aus Werkzeug-Menü entfernt</change>
+	<change tool="coma" type="change" version="1.02" date="10.03.2008">Aboutness-Keyboard-Shortcut entfernt</change>
+	<change tool="coma" type="change" version="1.02" date="10.03.2008">TableSorter-Klasse eliminiert</change>
+	<change tool="coma" type="feature" version="1.02" date="10.03.2008">Neuer Aufräum-Knopf bei den Aufnahmen</change>
+	<change tool="coma" type="bug" version="1.02" date="10.03.2008">Aufnahmen zuordnen für alle repariert</change>
+	<change tool="coma" type="bug" version="1.02" date="10.03.2008">Aufnahmen-Tabelle reagiert jetzt</change>
+	<change tool="coma" type="bug" version="1.01" date="05.03.2008">fehlende Englische Übersetzungen ergänzt</change>
+	<change tool="coma" type="bug" version="1.01" date="05.03.2008">Korpus-Description-Panel repariert</change>
+	<change tool="coma" type="feature" version="1.01" date="05.03.2008">komplett neuer Zuordnungsmechanismus für Sprecher und Kommunikationen</change>
+	<change tool="coma" type="bug" version="1.01" date="05.03.2008">in-den-Korb-Buttons repariert</change>
+	<change tool="coma" type="bug" version="1.01" date="05.03.2008">Korb-"Füllstandsanzeige" repariert</change>
+	<change tool="coma" type="bug" version="1.0beta3" date="18.02.2008">Fehler in der Datumsberechnung korrigiert</change>
+	<change tool="coma" type="feature" version="1.0beta3" date="18.02.2008">Eingabemaske für Description zu Korpora</change>
+	<change tool="coma" type="feature" version="1.0beta3" date="18.02.2008">Korpuspanel umsortiert</change>
+	<change tool="coma" type="bug" version="1.0beta3" date="18.02.2008">Korpus-Korb repariert</change>
+	<change tool="coma" type="feature" version="1.0beta2" date="18.02.2008">Schaltfläche für vordefinierte Filter mit 3 Filtern</change>
+	<change tool="coma" type="bug" version="1.0beta2" date="18.02.2008">ComaCreators nullPointerException bei fehlenden Mediendatein gelöscht</change>
+	<change tool="coma" type="bug" version="1.0beta2" date="18.02.2008">funktionslose Buttons für neue Zuordung geschaffen</change>
+	<change tool="coma" type="bug" version="1.0beta1" date="17.02.2008">addlocation bei kommunikationen</change>
+	<change tool="coma" type="bug" version="1.0beta1" date="17.02.2008">sprecher hinzufügen geht wieder</change>
+	<change tool="coma" type="bug" version="1.0beta1" date="17.02.2008">comacreator verknüpft mediendateien richtig</change>
+	<change tool="coma" type="feature" version="1.0beta1" date="17.02.2008">Filter editierbar</change>
+	<change tool="coma" type="feature" version="1.0beta1" date="17.02.2008">(neue) Kommunikationen umbenenbar</change>
+	<change tool="coma" type="feature" version="1.0beta1" date="17.02.2008">speaker löschbar</change>
+	<change tool="coma" type="feature" version="1.0beta1" date="17.02.2008">mehrere comms löschbar</change>
+
+	<change tool="partitureditor" date="25.09.2008">made format part of the transcription</change>
+	<change tool="partitureditor" date="25.09.2008">moved extra actions out of submenu into main edit menu</change>
+	<change tool="partitureditor" date="23.09.2008">moved panel actions out of submenu into main view menu</change>
+	<change tool="exakt" date="23.09.2008">swapped rtf export action for partitur against generic output action</change>
+	<change tool="partitureditor" date="23.09.2008">moved recent files out of submenu into main file menu</change>
+	<change tool="partitureditor" date="23.09.2008">put all visualization actions into one ("Output") action</change>
+	<change tool="partitureditor" date="22.09.2008">fixed error in German localization wrt "selected" vs. "unselected" tiers in search dialog</change>
+	<change tool="partitureditor" date="16.09.2008">put all import actions into one action</change>
+	<change tool="partitureditor" date="16.09.2008">put all export actions into one action</change>
+	<change tool="all" date="16.09.2008">updated XALAN libraries</change>
+	<change tool="folker" date="16.09.2008">changed key bindings for event viewer to CTRL-combinations</change>
+	<change tool="folker" date="16.09.2008">added 'merge events' action to the event viewer</change>
+	<change tool="folker" date="15.09.2008">changed time viewer to display only one channel in case of mono recordings</change>
+	<change tool="folker" date="15.09.2008">added label for display of selection length in time viewer</change>
+	<change tool="folker" date="15.09.2008">changed row height of event view to avoid clipping of descenders in cell editor</change>
+	<change tool="folker" date="12.09.2008">added recent files to file menu</change>
+	<change tool="folker" date="12.09.2008">added 'store settings' (windows size, recent files etc.) action</change>
+	<change tool="folker" date="12.09.2008">added safety check before opening file / exiting</change>
+	<change tool="folker" date="11.09.2008">added exit action to file menu</change>
+	<change tool="folker" date="11.09.2008">changed behaviour after zoom in/out (selection should remain visible)</change>
+	<change tool="partitureditor" date="10.09.2008">changed title of "Save media snippet" dialog</change>
+	<change tool="partitureditor" date="10.09.2008">took care of cleaning up media panel when a new file is opened or created</change>
+	<change tool="folker" date="09.09.2008">changed setup file to create a file association between Folker and files with suffix "flk"</change>
+	<change tool="folker" date="09.09.2008">application can now optionally be given a transcription or wave file as an argument and will attempt to open them</change>
+	<change tool="folker" date="09.09.2008">changed file ending for transcriptions from *.xml to *.flk</change>
+	<change tool="partitureditor" date="09.09.2008">updated languages list from ethnologue (now version 15)</change>
+	<change tool="partitureditor" date="09.09.2008">fixed bug in language selection in speakertable dialog</change>
+	<change tool="folker" date="08.08.2008">experimented with a PRAAT player</change>
+	<change tool="folker" date="08.08.2008">modified 'Save' and 'Save as...' actions</change>
+	<change tool="folker" date="07.08.2008">added player selection option in preferences</change>
+	<change tool="folker" date="07.08.2008">fixed bug in 'remove event'action</change>
+	<change tool="folker" date="07.08.2008">added 'timestamp event' action</change>
+	<change tool="folker" date="07.08.2008">made application implement the EXMARaLDA application interface --&gt; help menu, logging funcionality</change>
+	<change tool="folker" date="07.08.2008">added 'detach selection' action</change>
+	<change tool="folker" date="07.08.2008">added row numbering to event and contribution view</change>
+	<change tool="exakt" date="07.08.2008">modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column</change>
+	<change tool="exakt" date="06.08.2008">changed some dialogs to make them look better on MAC OS X</change>
+	<change tool="partitureditor" date="06.08.2008">changed some dialogs to make them look better on MAC OS X</change>
+	<change tool="exakt" date="06.08.2008">integrated corpus creation wizard into file menu</change>
+	<change tool="all" date="06.08.2008">changed linux shell scripts (seem to work at least with Suse and Java 6 now)</change>
+	<change tool="coma" date="05.08.2008" type="feature">added segmentation functionality to the corpus creation wizard</change>
+	<change tool="coma" date="04.08.2008" type="feature">added 'Tools > EXAKT Search' function</change>
+	<change tool="partitureditor" date="04.08.2008">added 'Edit > EXAKT Search' function</change>
+	<change tool="partitureditor" date="04.08.2008">changed 'Send HTML partitur to browser' function to write to temp file</change>
+	<change tool="partitureditor" date="04.08.2008">added 'Event > Find next event' function (Ctrl + Alt + SPACE)</change>
+	<change tool="partitureditor" date="01.08.2008">rewrote quicktime player</change>
+	<change tool="partitureditor" date="14.07.2008">added 'underline' action</change>
+	<change tool="partitureditor" date="07.07.2008">integrated Czech menu translations by Petr Porizka</change>
+	<change tool="partitureditor" date="20.05.2008">more changes to the CHAT export (related to the conversion of mytheory.cha)</change>
+	<change tool="partitureditor" date="07.05.2008">several changes to the CHAT export</change>
+	<change tool="partitureditor" date="10.04.2008">made shortcuts for play, pause and stop (F1,F2,F3) work without the audio panel having the focus</change>
+	<change tool="partitureditor" date="10.04.2008">added buffer time functionality in audio panel</change>
+	<change tool="partitureditor" date="10.04.2008">caught overrun of stop time in JMF player</change>
+	<change tool="exakt" date="26.03.2008">added function for subtracting dates</change>
+	<change tool="exakt" date="20.03.2008">fixed bug in reconversion of segmented to basic transcriptions</change>
+	<change tool="exakt" date="19.03.2008">adapted buttons for MAC OS X</change>
+	<change tool="exakt" date="19.03.2008">new function: import analyses</change>
+	<change tool="exakt" date="29.02.2008">fixed two bugs according to mail from AH</change>
+	<change tool="exakt" date="19.02.2008">added KWIC browsing mode</change>
+	<change tool="exakt" date="18.02.2008">several changes according to list by AH, JR</change>
+	<change tool="exakt" date="18.02.2008">increased maximum heap space to avoid out of memory errors</change>
+	<change tool="exakt" date="18.02.2008">annotation search working</change>
+	<change tool="exakt" date="21.01.2008">line numbers in the KWIC concordance</change>
+	<change tool="partitureditor" date="20.12.2007">changes to the segmentation function for project 'Stadtsprache'</change>
+	<change tool="partitureditor" date="20.12.2007">slider for changing font size in the virtual keyboard</change>
+	<change tool="partitureditor" date="20.12.2007">3 additions to the IPA virtual keyboard</change>
+	<change tool="partitureditor" date="04.12.2007">segmentation function for project 'Stadtsprache'</change>
+	<change tool="partitureditor" date="04.12.2007">playback mode</change>
+	<change tool="partitureditor" date="04.12.2007">fine synchronisation mode</change>
+</changes>

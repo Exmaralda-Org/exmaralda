@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<!-- changes on 15-09-2003:	added behaviour for characters between quotation marks -->
+<!-- changes on 28-10-2003: added utterance end symbol -->
+<!--                                       : changed n-dash to m-dash -->
+<fsm name="HIAT: Utterances and Words">
+	<char-set id="UtteranceEndSymbols">
+		<comment>Characters that signal the end of an utterance</comment>
+		<!-- Period -->
+		<char>.</char>
+		<!-- Exclamation mark -->
+		<char>!</char>
+		<!-- Question mark -->
+		<char>?</char>
+		<!-- Three dots (ellipsis) -->
+		<char>…</char>
+		<!-- Dot above -->
+		<char>&#x02D9;</char>
+	</char-set>
+	<char-set id="SpaceSymbols">
+		<comment>Characters that follow a word, an utterance end symbol or a miscellaneous punctuation symbol</comment>
+		<!-- Plain space character -->
+		<char>&#x0020;</char>
+	</char-set>
+	<char-set id="Quote">
+		<comment>Characters in which reported speech is embedded. Between these, utterance terminators will be ignored</comment>
+		<!-- Double quote symbol (quotation mark) -->
+		<char>&#x0022;</char>
+	</char-set>
+	<char-set id="OpenParenthesis">
+		<comment>Characters whose double appearance signals the beginning of a non-phonological segment</comment>
+		<!-- Open round bracket -->
+		<char>(</char>
+	</char-set>
+	<char-set id="CloseParenthesis">
+		<comment>Characters whose double appearance signals the end of a non-phonological segment</comment>
+		<!-- Closed round bracket -->
+		<char>)</char>
+	</char-set>
+	<char-set id="MiscellaneousPunctuation">
+		<!-- Plain quotation mark -->
+		<!-- <char>"</char> -->
+		<!-- Moved to own category -->
+		<!-- Apostrophe -->
+		<!-- <char>'</char> -->
+		<!-- Removed because it is part of word (glottal stop in interjections) -->
+		<!-- Colon -->
+		<char>:</char>
+		<!-- Semicolon -->
+		<char>;</char>
+		<!-- Comma -->
+		<char>,</char>
+		<!-- Hyphen -->
+		<char>-</char>
+		<!-- Underscore -->
+		<char>_</char>
+		<!-- Ligatur sign -->
+		<char>&#x203F;</char>
+		<!-- m-Dash -->
+		<char>&#x2014;</char>
+		<!-- Forward slash -->
+		<char>/</char>
+	</char-set>
+	<char-set id="PauseSymbols">
+		<!-- "Thick" Pause point -->
+		<char>&#x2022;</char>
+		<!-- "Thin" Pause point -->
+		<char>&#x00B7;</char>
+	</char-set>
+	<start-state id="TurnStarts"/>
+	<end-state id="TurnParsedSuccessfully"/>
+	<transitions source="TurnStarts">
+		<comment>Speaker contribution starts</comment>
+		<forbidden>No parentheses closing, No utterance end symbol, No end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen">
+		<comment>An utterance is open, but no word, no non-phonological segment and no open parenthesis has been encountered</comment>
+		<forbidden>Everything allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_OpenParenthesisEncountered">
+		<comment>An utterance is open, but no word, no non-phonological segment. One open parenthesis has been encountered, so maybe a non-phonological segment starts</comment>
+		<forbidden>Everything allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_NonphoOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix>#closeUtterence;<![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_WordOpen">
+		<comment>An utterance is open and a word is open</comment>
+		<forbidden>No opening quote allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_UtteranceEndEncountered">
+		<comment>An utterance is open, but no word, no non-phonological segment. An utterance end symbol has been encountered. Either a space will follow or a new utterance will begin or the turn ends here.</comment>
+		<forbidden>No closed parenthesis, no further utterance end symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="HIAT:u" s="" e="">]]>openIP;</prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_NonphoOpen">
+		<comment>An utterance is open and a non-phonological segment has started</comment>
+		<forbidden>No end of input, no open parenthesis, no pause symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_CloseParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen">
+		<comment>A turn is open, but no utterance, no word, no non-phonological segment, and no open parenthesis or utterance end symbol has been encountered</comment>
+		<forbidden>No close parenthesis, no utterance end symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:u" s="" e="">]]><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_CloseParenthesisEncountered">
+		<comment>An utterance is open, a non-phonological segment is open and an open parenthesis has been encountered</comment>
+		<forbidden>Only close parenthesis allowed</forbidden>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_QuoteOpen">
+		<comment>An utterance is open, but no word and no non-phonological segment, and a quotation mark has been encountered earlier</comment>
+		<forbidden>No end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_QuoteOpen_WordOpen">
+		<comment>An utterance is open, a word is open, and a quotation mark has been encountered earlier</comment>
+		<forbidden>No end of input allowed</forbidden>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered">
+		<comment>An utterance is open, but no word and no non-phonological segment, a quotation mark has been encountered earlier, and one open parenthesis has been encountered, so maybe a non-phonological segment starts</comment>
+		<forbidden>No end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="HIAT:non-pho" s="" e="">]]></prefix>
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts><ats n="HIAT:non-pho" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="HIAT:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">
+		<comment>An utterance is open, a quotation mark has been encountered earlier and a non-phonological segment has started</comment>
+		<forbidden>No end of input, no open parenthesis, no pause symbol allowed</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen_CloseParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats><nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_QuoteOpen_CloseParenthesisEncountered">
+		<comment>An utterance is open, a quotation mark has been encountered earlier, a non-phonological segment is open and an open parenthesis has been encountered</comment>
+		<forbidden>Only close parenthesis allowed</forbidden>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_QuoteOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="HIAT:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<comment>An error has been encountered</comment>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PauseSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="Quote"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnParsedSuccessfully">
+		<comment>The speaker contribution has been parsed successfully</comment>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

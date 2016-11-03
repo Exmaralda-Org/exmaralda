@@ -1,0 +1,48 @@
+***** EXMARaLDA changes *******
+
+=================
+exakt
+=================
+07.08.2008                 modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column
+06.08.2008                 changed some dialogs to make them look better on MAC OS X
+06.08.2008                 integrated corpus creation wizard into file menu
+26.03.2008                 added function for subtracting dates
+20.03.2008                 fixed bug in reconversion of segmented to basic transcriptions
+19.03.2008                 adapted buttons for MAC OS X
+19.03.2008                 new function: import analyses
+29.02.2008                 fixed two bugs according to mail from AH
+19.02.2008                 added KWIC browsing mode
+18.02.2008                 several changes according to list by AH, JR
+18.02.2008                 increased maximum heap space to avoid out of memory errors
+18.02.2008                 annotation search working
+21.01.2008                 line numbers in the KWIC concordance
+=================
+partitureditor
+=================
+06.08.2008                 changed some dialogs to make them look better on MAC OS X
+04.08.2008                 added 'Edit > EXAKT Search' function
+04.08.2008                 changed 'Send HTML partitur to browser' function to write to temp file
+04.08.2008                 added 'Event > Find next event' function (Ctrl + Alt + SPACE)
+01.08.2008                 rewrote quicktime player
+14.07.2008                 added 'underline' action
+07.07.2008                 integrated Czech menu translations by Petr Porizka
+20.05.2008                 more changes to the CHAT export (related to the conversion of mytheory.cha)
+07.05.2008                 several changes to the CHAT export
+10.04.2008                 made shortcuts for play, pause and stop (F1,F2,F3) work without the audio panel having the focus
+10.04.2008                 added buffer time functionality in audio panel
+10.04.2008                 caught overrun of stop time in JMF player
+20.12.2007                 changes to the segmentation function for project 'Stadtsprache'
+20.12.2007                 slider for changing font size in the virtual keyboard
+20.12.2007                 3 additions to the IPA virtual keyboard
+04.12.2007                 segmentation function for project 'Stadtsprache'
+04.12.2007                 playback mode
+04.12.2007                 fine synchronisation mode
+=================
+all
+=================
+06.08.2008                 changed linux shell scripts (seem to work at least with Suse and Java 6 now)
+=================
+coma
+=================
+05.08.2008                 added segmentation functionality to the corpus creation wizard
+04.08.2008                 added 'Tools > EXAKT Search' function

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Changes for version 1.2.5. -->
+<!-- top-level element must have attribute 'name' -->
+<!-- charset can contain element 'comment' -->
+<!-- transitions can contain element 'comment' -->
+<!-- transitions can contain element 'forbidden' -->
+<!ELEMENT fsm (char-set*, start-state, end-state, transitions+)>
+<!-- Change Version 1.2.5. -->
+<!ATTLIST fsm name CDATA #REQUIRED>
+<!-- Change Version 1.2.5. -->
+<!ELEMENT char-set (comment?, char+)>
+<!ATTLIST char-set
+	id ID #REQUIRED
+>
+<!-- Added Version 1.2.5. -->
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT char (#PCDATA)>
+<!ELEMENT start-state EMPTY>
+<!ATTLIST start-state
+	id IDREF #REQUIRED
+>
+<!ELEMENT end-state EMPTY>
+<!ATTLIST end-state
+	id IDREF #REQUIRED
+>
+<!-- Change Version 1.2.5. -->
+<!ELEMENT transitions (comment?, forbidden?, transition+)>
+<!ATTLIST transitions
+	source ID #REQUIRED
+>
+<!-- Added Version 1.2.5. -->
+<!ELEMENT forbidden (#PCDATA)>
+<!ELEMENT transition ((input-char | input-char-set | input-other | input-end), target, output?)>
+<!ELEMENT input-char (#PCDATA)>
+<!ELEMENT input-char-set EMPTY>
+<!ATTLIST input-char-set
+	id IDREF #REQUIRED
+>
+<!ELEMENT input-other EMPTY>
+<!ELEMENT input-end EMPTY>
+<!ELEMENT target EMPTY>
+<!ATTLIST target
+	id IDREF #REQUIRED
+>
+<!ELEMENT output (prefix?, suffix?)>
+<!ATTLIST output
+	oo (yes | no) #REQUIRED
+>
+<!ELEMENT prefix (#PCDATA)>
+<!ELEMENT suffix (#PCDATA)>

@@ -1,0 +1,54 @@
+EXMARaLDA
+
+This EXMARaLDA distribution contains the following software tools:
+
+Partitur Editor Version @partitureditor-version@
+Corpus Manager Version @coma-version@
+EXAKT Search tool Version @exakt-version@
+
+The tools are developed by Thomas Schmidt, Kai Wörner and Hanna Hedeland.
+
+German localisations by Annette Schnieders
+Turkish localisations by Tülay Selcuk
+Swedish localisations by Hanna Hedeland
+Czech localisations by Petr Porizka
+Spanish localisations by Silke Merkel
+Chinese localisations by Fan Junjun
+
+EXMARaLDA is developed by the
+
+Hamburger Zentrum für Sprachkorpora (HZSK)
+Max Brauer-Allee 60
+D-22765 Hamburg
+http://www.corpora.uni-hamburg.de
+
+and the
+
+Archiv für Gesprochenes Deutsch (AGD)
+R5, 6-13
+D-68161 Mannheim
+
+Work on EXMARaLDA was and is funded by the German Research Association (DFG), 
+the Bundesministerium für Bildung und Forschung (BMBF),
+the University of Hamburg,
+and the Institut für Deutsche Sprache.
+
+EXMARaLDA tools are free to use.
+EXMARaLDA's source code is licensed under an open source license.
+
+EXMARaLDA uses the following libraries:
+* JDOM (http://www.jdom.org/)
+* FOBS for JMF (http://fobs.sourceforge.net/)
+* parts of the ELAN code (http://www.lat-mpi.eu/tools/elan/)
+* parts of the BAS code (http://www.phonetik.uni-muenchen.de/forschung/bay_arch_sprsig/index.html)
+* TreeTagger for Java (http://www.ohloh.net/p/tt4j)
+* Quaqua (http://www.randelshofer.ch/quaqua/)
+* Saxon, Xalan, Bounce and Cobra.
+
+
+For questions, updates etc. please consult the EXMARaLDA website:
+
+http://www.exmaralda.org
+
+Thank you for using EXMARaLDA. We appreciate your feedback.
+

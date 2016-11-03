@@ -1,0 +1,194 @@
+FOBS 0.4.1 README
+-----------------
+
+This Fobs version has been built successfuly using:
+- ffmpeg (CVS 2006/11/24)
+- scons 0.96.1
+
+
+Unless otherwise specified, all files and software in this package are subject to the LPGL License Version 2.1 and copyright is owned by Omnividea Multimedia S.L. See the accompanying file COPYING.
+
+For the most current version of fobs, see:
+
+   http://fobs.sourceforge.net
+
+
+
+1-DESCRIPTION
+----------------------
+FOBS is a set of object oriented wrappers upon ffmpeg library to work with multimedia files. It is released under the LGPL license. Further information (installation and build instructions) can be found at the official page of this project (http://fobs.sourceforge.net).
+
+
+2-BUILDING FOBS
+--------------------------
+Fobs requieres two software packages in order to be built: 
+
+1 - ffmpeg (CVS Snapshot 2006-11-24 or above)
+2 - scons (0.9.6.1 or above)
+
+Both of them have been included in the source code tarball for your convinience, although you may use different versions of these packages. To use your ffmpeg package use the FFMPEG_HOME command line argument of the build script (./buildFobs.sh --help for additional help). To use your custom scons package, replace the files located in the scripts/ directory.
+
+Before beginning the actual building process, you need to unpack the packages mentioned above (if you decide to use your own packages you should proceed similar to this so go on reading):
+
+cd $FOBS_HOME
+tar xvfz resources/current-ffmpeg.tar.gz
+(this creates a directory called ffmpeg-XXX with XXX depending on the actual version of ffmpeg. If you plan to use the default set of options to build the package you'll need to rename this directory to just 'ffmpeg', e.g. $mv ffmpeg-XXX ffmpeg)
+Of course, you'll need to build the ffmpeg package using the appropriate configure options to your application. More information about optional library support for ffmpeg can be found below.
+
+cd $FOBS_HOME/scripts
+tar xvfz ../resources/current-scons-local.tar.gz
+
+
+To build Fobs, change dir to $FOBS_HOME and type:
+./buildFobs.sh [OPTIONS]
+(options must not be preceded by '-')
+
+To clean, type:
+./buildFobs.sh -c
+
+To get help, type:
+./buildFobs.sh --help
+
+
+3-KNOWN ISSUES
+--------------------------
+There seems to be problems with the compatibility of JMStudio in J2SE 1.5 and above under GNU/Linux. This is not a Fobs issue but an UI incompatibility introduced with the new version of the JVM. The only functional workaround to this issue is using the following argument when invoking java command:
+-Dawt.toolkit=sun.awt.motif.MToolkit  (e.g. java -Dawt.toolkit=sun.awt.motif.MToolkit -cp jmf.jar JMStudio)
+
+Thanks to Andy Bailey for this tip!
+
+
+
+4-COMPILING 3rd PARTY LIBRARIES TO IMPROVE FORMAT&CODEC SUPPORT
+----------------------------------------------------------------------------------------------------------------
+Here are some clues regarding the compilation of 3rd party libraries that can be used to extend ffmpeg encoding/decoding/parsing capabilities. This section gathers my experience with the actual compilation of these libraries, which is pretty straightforward most of the times, but can get pretty difficult in others.
+
+4.1-General advice: 
+I don't really like the idea of thousands of shared libraries upon which my project depends. It usually makes the project more difficult to pack and distribute, and is especially uncomfortable for final users, which may have different versions of the required components. For that reason, I create a local sandbox where all the 3rd party libraries used by Fobs are built and stored. This can be easily accomplished by using the --prefix option with the configure command, necessary to build all of these libs. I have experienced problems when globally available dynamic versions of some of the libraries were available in /usr/lib or /usr/local/lib. If you experience problems, try to make sure the compiler is not choosing those versions instead of the local sandbox versions.
+
+Let's say we have a directory where we store Fobs sources:
+/home/username/Sources/fobs-src
+
+The fobs sources package includes a subdirectory called resources which is intended to be the place for this and other stuff:
+/home/username/Sources/fobs-src/resources
+
+So, when I build a library I always use the following command:
+$./configure --prefix=/home/username/Sources/fobs-src/resources/ --enable-shared=no
+and then
+$make
+$make install
+
+The 'make install' command creates the necessary files in the subdirectories of the resources directory. The only directories important for that matter are:
+/home/username/Sources/fobs-src/resources/lib     -> actual libraries (.a, .lib)
+/home/username/Sources/fobs-src/resources/include -> include files (.h)
+
+You'll need to instruct ffmpeg to look for those 3rd party libraries using the following parameters in the ./configure command:
+$./configure --enable-gpl --enable-mp3lame --enable-faac --enable-a52 --enable-faad --enable-xvid --enable-x264 --enable-vorbis --enable-libogg --extra-ldflags=-L/Users/jsanpedro/Desktop/fobs-src/resources/lib --extra-cflags=-I/Users/jsanpedro/Desktop/fobs-src/resources/include --extra-libs="-lmp3lame -lvorbis -lfaac -la52 -lfaad -lxvidcore -lx264 -lvorbisenc -logg"
+
+Each of the following sections references a 3rd party library which can be used within the ffmpeg context. For each of these libraries, compilation advice is given for each different platform (if required). In this first section, general advice and requirements for each supported platforms are provided:
+
+*MinGW:
+ - Install MSYS-1.0.11 ,msysdtk-1.0.1 and MinGW 3.0.1. Install nasm-0.98.39-win32 (copy nasmw.exe to mingw/bin directory)
+ - Download and install last bash update for MinGW (ffmpeg configure script complains about the bash version provided in the msys package)
+ - Install last python release
+[Related links:
+	http://www.mingw.org
+	http://sourceforge.net/projects/nasm
+	http://www.python.org/download/
+]
+
+*Mac OSX:
+ - Install latest realease of XCode (2.4.1 at the time of this Fobs release).
+ 
+*Linux:
+ - Install development tools (gcc, g++, make, automake, autoconf, python, nasm)
+
+4.2-xvidcore-1.1.2: 
+ *MACOSX: Trying to compile xvidcore in Macintel machines with asm enabled will lead to errors. Robert Swain has a very interesting article describing a workaround that allows to compile it with no errors and with full functionality. Three simple stages are enough:
+   1 - declare the following env var: $export LDFLAGS="-read_only_relocs suppress"
+   2 - Run the configure script: ./configure --enable-macosx_module --prefix=/home/username/Sources/fobs-src/resources
+   3 - edit the build/generic/platform.inc file so that it reads:
+		AS=nasm
+		AFLAGS=-I$(<D)/ -f macho -DPREFIX=_
+		ASSEMBLY_EXTENSION=asm
+	
+	Don't miss any of the steps as the procedure won't work!!
+
+4.3-x264:
+ *ALL PLATFORMS: The configure script of this package does NOT allow to specify a prefix parameter. You'll have to copy the library (libx264.a) and header (x264.h) file manually to the appropriate directory (resources/lib and resources/include).
+
+4.4-faad2-2.5:
+ *ALL PLATFORMS: The bootstrap script seems to assume HAVE_BMP var is always true, which is not the case most times. A post in the forum offers a workaround by modifying some files in the project. Type the next lines in the home dir for the faad2 sources:
+	tar xf faad2-2.5.tar.gz &&
+	cd faad2 &&
+	echo > plugins/Makefile.am &&
+	echo > plugins/xmms/src/Makefile.am &&
+	sed -i '/E_B/d' configure.in &&
+	autoreconf -vif &&
+	./configure --prefix=/home/username/Sources/fobs-src/resources --enable-shared=no &&
+	make
+
+ *MACOSX: The libtoolize command in MacOSX is called 'glibtoolize'. Remeber to preceed the previous sequence with the following env declaration:
+	export LIBTOOLIZE=glibtoolize
+	
+	That is not the only problem when building the MacOSX. It seems the script doesn't really detect the lrintf function included in the math.h and redeclares it. My workaround (which has proved to be fine till the moment) is the following:
+	1 - Edit the libfaad/common.h file
+	2 - The function beggining at line 328 (and goes until line 337) must be commented.
+	These steps will comment out the redefinition of the function and forces the package to use the built-in lrintf function.
+
+*MinGW:
+To build from the command line, go to WinFAAD2Inst/faad2/libfaad,
+ - First a small edit to common.h has to be performed.
+   on line 312 change:
+    #if defined(_WIN32) && !defined(__MINGW32__)
+    to:
+    #if defined(HAS_LRINTF)
+    #elif defined(_WIN32) && !defined(__MINGW32__)
+   and then run:
+    gcc -c -I"." -DDRM -DDRM_PS -DHAS_LRINTF -DHAVE_MEMCPY=1 -DHAVE_STRING_H=1 -mthreads -fexceptions -fexceptions -fexpensive-optimizations -march=pentium3 *.c
+    ar r libfaad.a *.o
+    ranlib libfaad.a 
+
+ - You'll have to copy following files to the resources dir:
+     WinFAAD2Inst/faad2/libfaad/libfaad.a -> resources/lib
+     WinFAAD2Inst/faad2/include/*.h        -> resources/include
+
+4.5-faac-1.25:
+ *ALL PLATFORMS: Similar problems to those described for faad2 are found when compiling this lib. The workaround in this case is:
+	sed -i '/[2de].M/d' configure.in &&
+	echo "AC_OUTPUT(common/Makefile common/mp4v2/Makefile libfaac/Makefile frontend/Makefile include/Makefile Makefile)" >> configure.in &&
+	autoreconf -vif &&
+	./configure --prefix=/home/username/Sources/fobs-src/resources --enable-shared=no &&
+	make &&
+	make install
+ 
+ *MACOSX: The libtoolize command in MacOSX is called 'glibtoolize'. Remeber to preceed the previous sequence with the following env declaration:
+	export LIBTOOLIZE=glibtoolize
+
+ *MinGW:
+  To build from the command line, go to WinFAACInst/faac/libfaac or WinFAAC960Inst/faac/libfaac and run:
+    gcc -DDRM -mthreads -fexceptions -I../include -c *.c kiss_fft/*.c
+    ar r libfaac.a *.o kiss_fft/*.o
+    ranlib libfaac.a 
+
+  You'll have to copy following files to the resources dir:
+    WinFAAD2Inst/faac/libfaac/libfaac.a -> resources/lib
+    WinFAAD2Inst/faac/include/*.h       -> resources/include
+
+4.6-libvorbis-1.1.2:
+ *ALL PLATFORMS: remember to tell the configure script about the path of the ogg installation. That means you need to build and install libogg first and use the following command to configure libvorbis:
+	./configure --enable-shared=no --prefix=/home/username/Sources/fobs-src/resources --with-ogg=/home/username/Sources/fobs-src/resources/
+	
+
+4.7-ffmpeg
+
+ *MinGW:
+  Configure compilation with the following line:
+   ./configure --enable-gpl --enable-mp3lame --enable-vorbis --enable-libogg --enable-faad --enable-faac --enable-xvid --enable-x264 --enable-a52 --enable-mingw32 --extra-cflags=-I/home/jsanpedro/fobs-src/resources/include --extra-ldflags=-L/home/jsanpedro/fobs-src/resources/lib --extra-libs='-la52 -lvorbis -lvorbisenc -logg -lx264 -lxvidcore -lfaad -lfaac -lmp3lame' --prefix=/home/jsanpedro/fobs-src/resources --enable-memalign-hack
+
+  Then run make.
+ 
+ *Other Platforms:
+ Use the same configure command omitting the '--enable-memalign-hack' argument.
+
+Good Luck!

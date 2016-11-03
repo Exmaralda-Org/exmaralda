@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version 1.0 -->
+<!-- created 11-April-2001 -->
+<!-- by Thomas Schmidt -->
+<!-- thomas.schmidt@uni-hamburg.de -->
+<!-- Version 1.1. -->
+<!-- changes on 11-October-2001 -->
+<!-- ELEMENT <event> can now optionally have attributes "medium" and "url", ELEMENT <link> -->
+<!-- thus becoming obsolete (it will however, be retained for a while for backwards compatibility -->
+<!-- ELEMENT <languages-used> is no longer required to have at least one child element <language>, i.e. -->
+<!-- it can now be empty -->
+<!-- ELEMENT <tier> can now optionally have a child element <ud-tier-information> for user-defined attribute-value pairs -->
+<!-- giving additional information about that tier (this is for compatibility with TASX) -->
+<!-- Version 1.2. -->
+<!-- changes on 25-January-2002 -->
+<!-- ELEMENT <event> can now optionally have child elements <ud-information> for user-defined attribute-value pairs -->
+<!-- giving additional information about that event (this is for compatibility with TASX and for user extended functionality-->
+<!-- ELEMENT <link> no longer supported -->
+
+<!-- ************ Top level element ************ -->
+<!ELEMENT basic-transcription (head, basic-body)>
+<!-- ********************************************** -->
+<!-- ************ Head (same for all transcriptions ************ -->
+<!ELEMENT head (meta-information, speakertable)>
+<!-- ************************************ -->
+<!ELEMENT meta-information (project-name, transcription-name, referenced-file, ud-meta-information, comment, transcription-convention)>
+<!ELEMENT project-name (#PCDATA)>
+<!ELEMENT transcription-name (#PCDATA)>
+<!ELEMENT referenced-file EMPTY>
+<!ATTLIST referenced-file
+	url CDATA #REQUIRED
+>
+<!ELEMENT ud-meta-information (ud-information*)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT transcription-convention (#PCDATA)>
+<!ELEMENT ud-information (#PCDATA)>
+<!ATTLIST ud-information
+	attribute-name CDATA #REQUIRED
+>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT speakertable (speaker*)>
+<!ELEMENT speaker (abbreviation, sex, languages-used, l1, l2, ud-speaker-information, comment)>
+<!ATTLIST speaker
+	id ID #REQUIRED
+>
+<!ELEMENT abbreviation (#PCDATA)>
+<!ELEMENT sex EMPTY>
+<!ATTLIST sex
+	value (m | f | u) #REQUIRED
+>
+<!-- Version 1.0 was: <!ELEMENT languages-used (language+)> -->
+<!ELEMENT languages-used (language*)>
+<!-- CHANGED IN VERSION 1.1. !!! -->
+<!ELEMENT l1 (language*)>
+<!ELEMENT l2 (language*)>
+<!ELEMENT language EMPTY>
+<!ATTLIST language
+	xml:lang NMTOKEN #REQUIRED
+>
+<!ELEMENT ud-speaker-information (ud-information*)>
+<!-- ************************************ -->
+<!-- ************ ************************************** ************ -->
+<!-- ************ Body (different for all transcriptions) ************ -->
+<!ELEMENT basic-body (common-timeline, tier*)>
+<!-- ************************************ -->
+<!ELEMENT common-timeline (tli*)>
+<!ELEMENT tli EMPTY>
+<!ATTLIST tli
+	id ID #REQUIRED
+	time CDATA #IMPLIED
+>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!-- Version 1.0 was: <!ELEMENT tier (event* | link*)> -->
+<!-- Version 1.1. was: <!ELEMENT tier (ud-tier-information?, (event* | link*))>-->
+<!ELEMENT tier (ud-tier-information?, event*)>
+<!-- CHANGED IN VERSION 1.1. !!! -->
+<!-- CHANGED IN VERSION 1.2. !!! -->
+<!ELEMENT ud-tier-information (ud-information*)>
+<!-- ADDED IN VERSION 1.1. !!! -->
+<!ATTLIST tier
+	id ID #REQUIRED
+	speaker IDREF #REQUIRED
+	category CDATA #REQUIRED
+	type (t | d | a | l | u) #REQUIRED
+>
+<!-- Version 1.1. was: <!ELEMENT event (#PCDATA)> -->
+<!ELEMENT event (#PCDATA | ud-information)*>
+<!-- CHANGED IN VERSION 1.2. !!! -->
+
+<!-- Version 1.0. was: <!ATTLIST event
+								    start IDREF #REQUIRED
+	                        end IDREF #REQUIRED
+								> -->
+<!ATTLIST event
+	start IDREF #REQUIRED
+	end IDREF #REQUIRED
+	medium (aud | vid | img | txt | oth) #IMPLIED
+	url CDATA #IMPLIED
+>
+<!-- CHANGED IN VERSION 1.1. !!! -->
+<!-- ELEMENT <link> becomes obsolete in version 1.1. -->
+<!-- COMMENTED OUT IN VERSION 1.2. !!! -->
+<!--
+<!ELEMENT link (#PCDATA)>
+<!ATTLIST link
+	start IDREF #REQUIRED
+	end IDREF #REQUIRED
+	medium (aud | vid | img | txt | oth) #REQUIRED
+	url CDATA #REQUIRED
+>-->
+<!-- ************************************ -->
+<!-- ************ ******************************************* ************ -->

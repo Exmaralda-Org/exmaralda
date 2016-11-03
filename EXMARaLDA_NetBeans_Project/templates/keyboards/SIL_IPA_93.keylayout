@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Version 0 : 14-Aug-2003                                                 -->
+<!-- Version 0.1. : 14-Aug-2003                                             -->
+<!-- Changes: -->
+<!-- apostrophe replaced by 'ejective' (2019) -->
+<!-- major intonation group added (alt + n ; shift + n) -->
+<!-- linking/absence of a break added (acute; shift + e) -->
+<!-- superscript h added (shift +h) -->
+<!-- a changed to "normal" (ASCII) a -->
+<!-- affricates added (accesible by ALT + SHIFT + Number keys (3,4,5,6,7,9) -->
+<!-- Version 0.2.: 31-Oct-2003 -->
+<!-- Changes: -->
+<!--Shift +a : low back unrounded vowel -->
+<!-- Version 0.3.: 27-Nov-2003 -->
+<!-- Changes: -->
+<!-- Shift + l -->
+<!-- circumflex + Shift + i -->
+<!-- less than symbol -->
+<!-- Shift + Alt + f -->
+<!-- Shift + comma -->
+<!-- acute + shift + o -->
+<!-- shift + alt + n -->
+<!-- Version 0.4.: 19-March-2004 -->
+<!-- Changes: -->
+<!-- shift + alt + a -->
+<!-- Version 0.5.: 17-March-2005 -->
+<!-- Changes: -->
+<!-- typing 'less than' will yield 'less than' -->
+<!-- and superscript n moved to shift + alt + n -->
+<!-- and mid-centralized n moved to shift + alt + x -->
+<keyboard group="126" id="-12" name="SIL IPA 93">
+	<layouts>
+		<!-- copied from "US Extended" keyboard layout -->
+		<layout first="0" last="17" modifiers="commonModifiers" mapSet="ANSI"/>
+		<!-- Don't care about JIS, though... -->
+	</layouts>
+	<modifierMap id="commonModifiers" defaultIndex="0">
+		<keyMapSelect mapIndex="0">
+			<modifier keys=""/>
+		</keyMapSelect>
+		<keyMapSelect mapIndex="1">
+			<modifier keys="anyShift"/>
+		</keyMapSelect>
+		<keyMapSelect mapIndex="2">
+			<modifier keys="anyOption"/>
+		</keyMapSelect>
+		<keyMapSelect mapIndex="3">
+			<modifier keys="anyShift anyOption"/>
+		</keyMapSelect>
+	</modifierMap>
+	<keyMapSet id="ANSI">
+		<keyMap index="0" baseMapSet="ANSI" baseIndex="0">
+			<!-- no modifiers -->
+			<!-- a : low back unrounded vowel -->
+			<!-- <key code="0" output="&#x0251;"/> -->
+			<key code="0" action="a"/>
+			<key code="1" output="s"/>
+			<key code="2" output="d"/>
+			<key code="3" output="f"/>
+			<key code="4" output="h"/>
+			<!-- g : voiced velar stop -->
+			<key code="5" output="&#x0261;"/>
+			<!-- Y and Z swapped in US and German keyboard -->
+			<key code="6" output="y"/>
+			<key code="7" output="x"/>
+			<key code="8" output="c"/>
+			<key code="9" output="v"/>
+			<!-- upper left corner key : accent circonflex-->
+			<!--	<key code="10" output="&#x005E;"/> -->
+			<key code="10" action="circumflex"/>
+			<key code="11" output="b"/>
+			<key code="12" output="q"/>
+			<key code="13" output="w"/>
+			<!-- <key code="14" output="e"/> -->
+			<key code="14" action="e"/>
+			<key code="15" output="r"/>
+			<!-- Y and Z swapped in US and German keyboard -->
+			<key code="16" output="z"/>
+			<key code="17" output="t"/>
+			<key code="18" output="1"/>
+			<key code="19" output="2"/>
+			<key code="20" output="3"/>
+			<key code="21" output="4"/>
+			<key code="22" output="6"/>
+			<key code="23" output="5"/>
+			<!-- acute accent -->
+			<!-- <key code="24" output="&#x00B4;"/> -->
+			<key code="24" action="acute"/>
+			<!-- 9 : non-syllabic -->
+			<key code="25" output="&#x032F;"/>
+			<key code="26" output="7"/>
+			<!-- German s (ß) : voiceless retroflex fricative -->
+			<key code="27" output="&#x0282;"/>
+			<key code="28" output="8"/>
+			<key code="29" output="0"/>
+			<key code="30" output="+"/>
+			<!-- <key code="31" output="o"/> -->
+			<key code="31" action="o"/>
+			<!-- <key code="32" output="u"/> -->
+			<key code="32" action="u"/>
+			<key code="33" output="ü"/>
+			<!-- <key code="34" output="i"/> -->
+			<key code="34" action="i"/>
+			<key code="35" output="p"/>
+			<!-- carriage return -->
+			<key code="36" output="&#xD;"/>
+			<key code="37" output="l"/>
+			<key code="38" output="j"/>
+			<key code="39" output="ä"/>
+			<key code="40" output="k"/>
+			<key code="41" output="ö"/>
+			<!-- hash sign -->
+			<key code="42" output="&#x0023;"/>
+			<!-- comma -->
+			<key code="43" output="&#x002C;"/>
+			<key code="44" output="-"/>
+			<key code="45" output="n"/>
+			<key code="46" output="m"/>
+			<!-- period : syllabic break -->
+			<key code="47" output="&#x002E;"/>
+			<!-- tab key -->
+			<key code="48" output="&#x9;"/>
+			<!-- space bar -->
+			<!-- <key code="49" output=" "/> -->
+			<key code="49" action="space"/>
+			<!--  less than : nasal release -->
+			<!-- <key code="50" output="&#x2074;"/> -->
+			<!-- changed in version 0.3. -->
+			<!-- <key code="50" output="&#x207F;"/> -->
+			<!-- changed in version 0.5. -->
+			<key code="50" output="&lt;"/>			
+			<!-- backspace -->
+			<key code="51" output="&#x8;"/>
+			<!-- ??? -->
+			<key code="52" output="&#x3;"/>
+			<!-- escape key -->
+			<key code="53" output="&#x1B;"/>
+			<!-- gap, 54-64 -->
+			<!-- start numeric key pad -->
+			<key code="65" output="."/>
+			<key code="66" output="*"/>
+			<key code="67" output="*"/>
+			<!-- gap, 68 -->
+			<key code="69" output="+"/>
+			<key code="70" output="+"/>
+			<key code="71" output="&#x1B;"/>
+			<key code="72" output="="/>
+			<!-- gap, 73-74 -->
+			<key code="75" output="/"/>
+			<key code="76" output="&#x3;"/>
+			<key code="77" output="/"/>
+			<key code="78" output="-"/>
+			<!-- gap, 79-80 -->
+			<key code="81" output="="/>
+			<!-- changed in version 0.2. -->
+			<!-- 0 : creaky voiced -->
+			<key code="82" output="&#x0330;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 1 : Advanced Tongue Root -->
+			<key code="83" output="&#x0318;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 2 : Retraced Tongue Root -->
+			<key code="84" output="&#x0319;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 3 : Raised -->
+			<key code="85" output="&#x031D;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 4: Lowered -->
+			<key code="86" output="&#x031E;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 5 : Dental -->
+			<key code="87" output="&#x032A;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 6 : Laminal -->
+			<key code="88" output="&#x033B;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 7 : less rounded -->
+			<key code="89" output="&#x031C;"/>
+			<!-- gap, 90 -->
+			<!-- changed in version 0.2. -->
+			<!-- 8 : Voiceless -->
+			<key code="91" output="&#x0325;"/>
+			<!-- changed in version 0.2. -->
+			<!-- 9 : Non-syllabic -->
+			<key code="92" output="&#x032F;"/>
+			<!-- gap, 93-94 -->
+			<key code="95" output=","/>
+			<key code="96" output="&#x10;"/>
+			<key code="97" output="&#x10;"/>
+			<key code="98" output="&#x10;"/>
+			<!-- function keys (F1 to F12) and then some  -->
+			<key code="99" output="&#x10;"/>
+			<key code="100" output="&#x10;"/>
+			<key code="101" output="&#x10;"/>
+			<key code="102" output=" "/>
+			<key code="103" output="&#x10;"/>
+			<key code="104" output=" "/>
+			<key code="105" output="&#x10;"/>
+			<key code="106" output="&#x10;"/>
+			<key code="107" output="&#x10;"/>
+			<key code="108" output="&#x10;"/>
+			<key code="109" output="&#x10;"/>
+			<key code="110" output="&#x10;"/>
+			<key code="111" output="&#x10;"/>
+			<key code="112" output="&#x10;"/>
+			<key code="113" output="&#x10;"/>
+			<!-- "Hilfe" -->
+			<key code="114" output="&#x5;"/>
+			<!-- Pos1 -->
+			<key code="115" output="&#x1;"/>
+			<!-- Line Tabulation (Page up) -->
+			<key code="116" output="&#xB;"/>
+			<!-- Delete key -->
+			<key code="117" output="&#x7F;"/>
+			<!-- ??? -->
+			<key code="118" output="&#x10;"/>
+			<!-- End -->
+			<key code="119" output="&#x4;"/>
+			<!-- ??? -->
+			<key code="120" output="&#x10;"/>
+			<key code="121" output="&#xC;"/>
+			<key code="122" output="&#x10;"/>
+			<!-- Navigation arrows -->
+			<!-- left -->
+			<key code="123" output="&#x1C;"/>
+			<!-- right -->
+			<key code="124" output="&#x1D;"/>
+			<!-- down -->
+			<key code="125" output="&#x1F;"/>
+			<!-- up -->
+			<key code="126" output="&#x1E;"/>
+		</keyMap>
+		<keyMap index="1">
+			<!-- SHIFT -->
+			<!-- <key code="0" output="A"/> -->
+			<key code="0" action="shift_a"/>
+			<!-- voiceless postalveolar fricative -->
+			<key code="1" output="&#x0283;"/>
+			<!-- SHIFT + d : latin small letter eth -->
+			<key code="2" output="&#x00F0;"/>
+			<!-- shift + f: upper-mid back unrounded vowel -->
+			<key code="3" output="&#x0264;"/>
+			<!-- change version 0.1. -->
+			<!-- SHIFT + h : aspirated -->
+			<key code="4" output="&#x02B0;"/>
+			<!-- SHIFT + g : voiced uvular stop -->
+			<key code="5" output="&#x0262;"/>
+			<!-- shift + y: -->
+			<key code="6" output="&#x028F;"/>
+			<!-- SHIFT + x : greek small letter chi -->
+			<key code="7" output="&#x03C7;"/>
+			<!-- SHIFT + c : latin small letter c with cedilla -->
+			<key code="8" output="&#x00E7;"/>
+			<!-- SHIFT + v : voiced labiodental approximant -->
+			<key code="9" output="&#x028B;"/>
+			<!-- SHIFT + upper left corner key : degree symbol -->
+			<key code="10" output="&#x00B0;"/>
+			<!-- SHIFT + b : greek small letter beta -->
+			<key code="11" output="&#x03B2;"/>
+			<!-- shift + q: latin small letter ae -->
+			<key code="12" output="&#x00E6;"/>
+			<!-- SHIFT + w : labialized -->
+			<key code="13" output="&#x02B7;"/>
+			<!-- change version 0.1. -->
+			<!-- shift + e: lower mid-front unrounded vowel -->
+			<!-- <key code="14" output="&#x025B;"/> -->
+			<key code="14" action="shift_e"/>
+			<!-- SHIFT + r : voiced alveolar flap or tap -->
+			<key code="15" output="&#x027E;"/>
+			<!-- Y and Z swapped in US and German keyboard -->
+			<!-- SHIFT + z : voiced postalveolar fricative -->
+			<key code="16" output="&#x0292;"/>
+			<!-- SHIFT + t : greek small letter theta -->
+			<key code="17" output="&#x03B8;"/>
+			<key code="18" output="!"/>
+			<!-- SHIFT + 2 : double quotes -->
+			<key code="19" output="&#x0022;"/>
+			<key code="20" output="§"/>
+			<key code="21" output="$"/>
+			<!-- SHIFT + 6 : ampersand -->
+			<key code="22" output="&#x0026;"/>
+			<!-- SHIFT + 5 : percent sign -->
+			<key code="23" output="%"/>
+			<!-- SHIFT + acute accent : syllabic -->
+			<key code="24" output="&#x0329;"/>
+			<!-- SHIFT + 9 : nasalized -->
+			<key code="25" output="&#x0303;"/>
+			<!-- SHIFT + 7 : glottal stop -->
+			<key code="26" output="&#x0294;"/>
+			<!-- SHIFT + German s : glottal stop -->
+			<key code="27" output="&#x0294;"/>
+			<!-- SHIFT + 8 : open round bracket -->
+			<key code="28" output="("/>
+			<!-- SHIFT + 0 : equals sign -->
+			<key code="29" output="="/>
+			<!-- SHIFT + plus : asterisk -->
+			<key code="30" output="*"/>
+			<!-- shift + o: latin small letter o with stroke -->
+			<!-- <key code="31" output="&#x00F8;"/> -->
+			<key code="31" action="shift_o"/>
+			<!-- shift + u: semi-high back rounded vowel-->
+			<!-- <key code="32" output="&#x028A;"/> -->
+			<key code="32" action="shift_u"/>
+			<!-- capital umlaut U -->
+			<key code="33" output="Ü"/>
+			<!-- changed in version 0.3 -->
+			<!-- shift + i: semi-high front unrounded vowel -->
+			<!-- <key code="34" output="&#x026A;"/> -->
+			<key code="34" action="shift_i"/>
+			<!-- shift + p: rounded mid-central vowel, i.e. rounded schwa -->
+			<key code="35" output="&#x0275;"/>
+			<!-- SHIFT + enter key : carriage return -->
+			<key code="36" output="&#xD;"/>
+			<!-- SHIFT + l : lateral release -->
+			<!-- <key code="37" output="&#x02E1;"/> -->
+			<!-- changed in Version 0.3. -->
+			<!-- SHIFT + l : alveolar lateral fricative -->
+			<key code="37" output="&#x026E;"/>
+			<!-- SHIFT + j : palatalized -->
+			<key code="38" output="&#x02B2;"/>
+			<!-- capital umlaut A -->
+			<key code="39" output="Ä"/>
+			<!-- SHIFT + K : voiceless epiglottal fricative -->
+			<key code="40" output="&#x029C;"/>
+			<key code="41" output="Ö"/>
+			<!-- change version 0.1. -->
+			<!-- Apostrophe -->
+			<!-- SHIFT + # : ejective -->
+			<key code="42" output="&#x2019;"/>
+			<!-- SHIFT + comma :  velar lateral approximant -->
+			<!-- changed in version 0.3 -->
+			<key code="43" output="&#x029F;"/>
+			<!-- SHIFT + dash : underscore -->
+			<key code="44" output="_"/>
+			<!-- change version 0.1. -->
+			<!-- SHIFT + n : latin small letter eng -->
+			<!-- <key code="45" output="&#x014B;"/> -->
+			<key code="45" action="shift_n"/>
+			<!-- SHIFT + m : voiced labiodental nasal -->
+			<key code="46" output="&#x0271;"/>
+			<!-- SHIFT + full stop : colon -->
+			<key code="47" output=":"/>
+			<!-- SHIFT + tab key -->
+			<key code="48" output="&#x9;"/>
+			<!-- SHIFT + space bar -->
+			<key code="49" output=" "/>
+			<!-- SHIFT + less than : greater than sign -->
+			<key code="50" output="&#x003E;"/>
+			<!-- backspace -->
+			<key code="51" output="&#x8;"/>
+			<!-- ??? -->
+			<key code="52" output="&#x3;"/>
+			<!-- escape key -->
+			<key code="53" output="&#x1B;"/>
+			<!-- gap, 54-64 -->
+			<!-- start numeric key pad -->
+			<key code="65" output="."/>
+			<key code="66" output="*"/>
+			<key code="67" output="*"/>
+			<!-- gap, 68 -->
+			<key code="69" output="+"/>
+			<key code="70" output="+"/>
+			<key code="71" output="&#x1B;"/>
+			<key code="72" output="="/>
+			<!-- gap, 73-74 -->
+			<key code="75" output="/"/>
+			<key code="76" output="&#x3;"/>
+			<key code="77" output="/"/>
+			<key code="78" output="-"/>
+			<!-- gap, 79-80 -->
+			<key code="81" output="="/>
+			<key code="82" output="0"/>
+			<key code="83" output="1"/>
+			<key code="84" output="2"/>
+			<key code="85" output="3"/>
+			<key code="86" output="4"/>
+			<key code="87" output="5"/>
+			<key code="88" output="6"/>
+			<key code="89" output="7"/>
+			<!-- gap, 90 -->
+			<key code="91" output="8"/>
+			<key code="92" output="9"/>
+			<!-- gap, 93-94 -->
+			<key code="95" output=","/>
+			<key code="96" output="&#x10;"/>
+			<key code="97" output="&#x10;"/>
+			<key code="98" output="&#x10;"/>
+			<!-- function keys (F1 to F12) and then some  -->
+			<key code="99" output="&#x10;"/>
+			<key code="100" output="&#x10;"/>
+			<key code="101" output="&#x10;"/>
+			<key code="102" output=" "/>
+			<key code="103" output="&#x10;"/>
+			<key code="104" output=" "/>
+			<key code="105" output="&#x10;"/>
+			<key code="106" output="&#x10;"/>
+			<key code="107" output="&#x10;"/>
+			<key code="108" output="&#x10;"/>
+			<key code="109" output="&#x10;"/>
+			<key code="110" output="&#x10;"/>
+			<key code="111" output="&#x10;"/>
+			<key code="112" output="&#x10;"/>
+			<key code="113" output="&#x10;"/>
+			<!-- "Hilfe" -->
+			<key code="114" output="&#x5;"/>
+			<!-- Pos1 -->
+			<key code="115" output="&#x1;"/>
+			<!-- Line Tabulation (Page up) -->
+			<key code="116" output="&#xB;"/>
+			<!-- Delete key -->
+			<key code="117" output="&#x7F;"/>
+			<!-- ??? -->
+			<key code="118" output="&#x10;"/>
+			<!-- End -->
+			<key code="119" output="&#x4;"/>
+			<!-- ??? -->
+			<key code="120" output="&#x10;"/>
+			<key code="121" output="&#xC;"/>
+			<key code="122" output="&#x10;"/>
+			<!-- Navigation arrows -->
+			<!-- left -->
+			<key code="123" output="&#x1C;"/>
+			<!-- right -->
+			<key code="124" output="&#x1D;"/>
+			<!-- down -->
+			<key code="125" output="&#x1F;"/>
+			<!-- up -->
+			<key code="126" output="&#x1E;"/>
+		</keyMap>
+		<keyMap index="2">
+			<!-- option (ALT) -->
+			<!-- ALT + a : low central unrounded vowel -->
+			<key code="0" output="&#x0250;"/>
+			<!-- ALT + f : voiced velar fricative -->
+			<key code="3" output="&#x0263;"/>
+			<!-- ALT + h : diacritic: semivowel -->
+			<key code="4" output="&#x032F;"/>
+			<!-- ALT + g : implosive velar stop -->
+			<key code="5" output="&#x0260;"/>
+			<!-- ALT + y : voiced lateral approximant -->
+			<key code="6" output="&#x028E;"/>
+			<!-- ALT + c : lower mid-back rounded vowel -->
+			<key code="8" output="&#x0254;"/>
+			<!-- ALT + v : lower mid back unrounded vowel -->
+			<key code="9" output="&#x028C;"/>
+			<!-- ALT + b : implosive bilabial stop -->
+			<key code="11" output="&#x0253;"/>
+			<!-- ALT + q : secondary stress -->
+			<key code="12" output="&#x02CC;"/>
+			<!-- ALT + r : voiced alveolar approximant -->
+			<key code="15" output="&#x0279;"/>
+			<!-- ALT + z : voiced retroflex fricative -->
+			<key code="16" output="&#x0290;"/>
+			<!-- ALT + 4 : diacritic: vowel opening or opening -->
+			<key code="21" output="&#x031E;"/>
+			<!-- ALT + 6 : square bracket closed -->
+			<key code="22" output="]"/>
+			<!-- ALT + 5 : square bracket open -->
+			<key code="23" output="["/>
+			<!-- ALT + 9 : voiced retroflex flap -->
+			<key code="25" output="&#x027D;"/>
+			<!-- ALT + 7 : unreleased stop -->
+			<key code="26" output="&#x031A;"/>
+			<!-- ALT + ß :  voiced pharyngeal fricative-->
+			<key code="27" output="&#x0295;"/>
+			<!-- ALT + 8 : voiced uvular trill -->
+			<key code="28" output="&#x0280;"/>
+			<!-- ALT + o : latin small ligature oe -->
+			<key code="31" output="&#x0153;"/>
+			<!-- ALT + u : high central rounded vowel -->
+			<key code="32" output="&#x0289;"/>
+			<!-- ALT + p : voiced epiglottal fricative -->
+			<key code="35" output="&#x02A2;"/>
+			<!-- Alt + l : @-sign -->
+			<key code="37" output="&#x0040;"/>
+			<!-- ALT + k : voiced palatal fricative -->
+			<key code="40" output="&#x029D;"/>
+			<!-- ALT + ö : lower-mid central rounded vowel -->
+			<key code="41" output="&#x025E;"/>
+			<!-- change version 0.1. -->
+			<!-- ALT + n : diacritic: mid-centralized -->
+			<!-- <key code="45" output="&#x033D;"/> -->
+			<key code="45" action="alt_n"/>
+			<!-- ALT + m : high back unrounded vowel -->
+			<key code="46" output="&#x026F;"/>
+			<!-- ALT + < : voiced uvular nasal-->
+			<key code="50" output="&#x0274;"/>
+		</keyMap>
+		<keyMap index="3">
+			<!-- SHIFT + option (ALT) -->
+			<!-- ALT + SHIFT + a : low back rounded vowel -->
+			<!-- changed in 0.4., was wrong unicode number -->
+			<key code="0" output="&#x0252;"/>
+			<!-- ALT + SHIFT + s :  voiced retroflex stop -->
+			<key code="1" output="&#x0256;"/>
+			<!-- ALT + SHIFT + f : "these modifier letters are occasionally used in transcription of affricates" (UNICODE CODE-CHART "Spacing Modifier letters") -->
+			<!-- <key code="3" output="&#x02B8;"/> -->
+			<!-- changed in version 0.3. -->
+			<!-- ALT + SHIFT + f : diacritic: velarized -->
+			<key code="3" output="&#x02E0;"/>
+			<!-- ALT + SHIFT + h : voiceless coarticulated velar and palatoalveolar fricative-->
+			<key code="4" output="&#x0267;"/>
+			<!-- added in version 0.5 -->
+			<!-- ALT + SHIFT + x : mid-centralized-->
+			<key code="8" output="&#x033D;"/>
+			<!-- ALT + SHIFT + c : upper-mid central unrounded vowel-->
+			<key code="8" output="&#x0258;"/>
+			<!-- ALT + SHIFT + v : implosive palatal stop -->
+			<key code="9" output="&#x0284;"/>
+			<!-- ALT + SHIFT + ^ : voiced uvular fricative or approximant-->
+			<key code="10" output="&#x0281;"/>
+			<!-- ALT + SHIFT + q : primary stress -->
+			<key code="12" output="&#x02C8;"/>
+			<!-- ALT + SHIFT + w : voiceless rounded labiovelar approximant-->
+			<key code="13" output="&#x028D;"/>
+			<!-- ALT + SHIFT + e : voiced lateral flap -->
+			<key code="14" output="&#x027A;"/>
+			<!-- ALT + SHIFT + r : voiced alveoplo-palatal laminal fricative -->
+			<key code="15" output="&#x0291;"/>
+			<!-- ALT + SHIFT + z : voiceless retroflex stop -->
+			<key code="16" output="&#x0288;"/>
+			<!-- ALT + SHIFT + t : voiced uvular implosive -->
+			<key code="17" output="&#x029B;"/>
+			<!-- ALT + SHIFT + 1 : voiceless alveolar lateral fricative-->
+			<key code="18" output="&#x026C;"/>
+			<!-- ALT + SHIFT + 2 : voiced retroflex approximant-->
+			<key code="19" output="&#x027B;"/>
+			<!-- ALT + SHIFT + 3: voiced dental affricate -->
+			<key code="20" output="&#x02A3;"/>
+			<!-- ALT + SHIFT + 4: voiced postalveolar affricate -->
+			<key code="21" output="&#x02A4;"/>
+			<!-- ALT + SHIFT + 6: voiceless dental affricate -->
+			<key code="22" output="&#x02A6;"/>
+			<!-- ALT + SHIFT + 5: voiced alveolo-palatal affricate -->
+			<key code="23" output="&#x02A5;"/>
+			<!-- ALT + SHIFT + acute accent : voiced epiglottal stop -->
+			<key code="24" output="&#x02A1;"/>
+			<!-- ALT + SHIFT + 9: voiceless alveolo-palatal affricate -->
+			<key code="25" output="&#x02A8;"/>
+			<!-- ALT + SHIFT + 7: voiceless postalveolar affricate -->
+			<key code="26" output="&#x02A7;"/>
+			<!-- ALT + SHIFT + ß : breathy-voiced global fricative -->
+			<key code="27" output="&#x0266;"/>
+			<!-- ALT + SHIFT + 8 : voiced retroflex nasal -->
+			<key code="28" output="&#x0273;"/>
+			<!-- ALT + SHIFT + 0 : voiced palatal nasal -->
+			<key code="29" output="&#x0272;"/>
+			<!-- ALT + SHIFT + Plus-sign : latin small letter h with stroke -->
+			<key code="30" output="&#x0127;"/>
+			<!-- ALT + SHIFT + o : low front rounded vowel -->
+			<key code="31" output="&#x0276;"/>
+			<!-- ALT + SHIFT + u : voiced rounded palatal approximant-->
+			<key code="32" output="&#x0265;"/>
+			<!-- ALT + SHIFT + p : voiceless bilabial fricative -->
+			<key code="35" output="&#x0278;"/>
+			<!-- ALT + SHIFT + j : bilabial trill -->
+			<key code="38" output="&#x0299;"/>
+			<!-- ALT + SHIFT + k : high central unrounded vowel-->
+			<key code="40" output="&#x0268;"/>
+			<!-- ALT + SHIFT + ö : lower-mid central unrounded vowel -->
+			<key code="41" output="&#x025C;"/>
+			<!-- ALT + SHIFT + comma : voiceless alveolo-palatal laminal fricative-->
+			<key code="43" output="&#x0255;"/>
+			<!-- added in version 0.3. -->
+			<!-- ALT + SHIFT + n : mid-centralized -->
+			<!-- <key code="45" output="&#x033D;"/> -->
+			<!-- changed in version 0.5. -->
+			<!-- ALT + SHIFT + n : nasal release -->
+			<key code="45" output="&#x207F;"/>
+			<!-- ALT + SHIFT + m : long -->
+			<key code="46" output="&#x02D0;"/>
+			<!-- ALT + SHIFT + < : "Modifier letter small reversed glottal stop-->
+			<key code="50" output="&#x02E4;"/>
+		</keyMap>
+	</keyMapSet>
+	<actions>
+		<action id="acute">
+			<when state="none" next="acute"/>
+		</action>
+		<action id="circumflex">
+			<when state="none" next="circumflex"/>
+		</action>
+		<action id="alt_n">
+			<when state="none" next="alt_n"/>
+		</action>
+		<action id="a">
+			<!-- change version 0.1. -->
+			<when state="none" output="a"/>
+			<!-- acute + a : bilabial click -->
+			<when state="acute" output="&#x0298;"/>
+		</action>
+		<action id="e">
+			<when state="none" output="e"/>
+			<!-- acute + e : minor foot group -->
+			<when state="acute" output="&#x007C;"/>
+		</action>
+		<action id="o">
+			<when state="none" output="o"/>
+			<!-- acute + o : post-alveolar click -->
+			<when state="acute" output="&#x01C3;"/>
+		</action>
+		<action id="u">
+			<when state="none" output="u"/>
+			<!-- acute + u : Palatoalveolar click -->
+			<when state="acute" output="&#x01C2;"/>
+		</action>
+		<action id="i">
+			<when state="none" output="i"/>
+			<!-- acute + i : Aveolar lateral click -->
+			<when state="acute" output="&#x01C1;"/>
+		</action>
+		<action id="shift_u">
+			<!-- shift + u: semi-high back rounded vowel -->
+			<when state="none" output="&#x028A;"/>
+			<!-- acute + shift + u: Velarized or pharyngealized -->
+			<when state="acute" output="&#x0334;"/>
+		</action>
+		<!-- added in version 0.3. -->
+		<action id="shift_i">
+			<!-- shift + i: semi-high front unrounded vowel -->
+			<when state="none" output="&#x026A;"/>
+			<!-- circumflex + i : dental/alveolar voiced implosive -->
+			<when state="circumflex" output="&#x0257;"/>
+		</action>
+		<action id="shift_o">
+			<!-- shift + o: latin small letter o with stroke -->
+			<when state="none" output="&#x00F8;"/>
+			<!-- ^ + shift + o : voiced palatal stop -->
+			<when state="circumflex" output="&#x025F;"/>
+			<!-- added in version 0.3. -->
+			<!-- acute + shift + o : retroflex lateral approximant -->
+			<when state="acute" output="&#x026D;"/>
+		</action>
+		<action id="shift_a">
+			<!-- shift + a : capital A -->
+			<when state="none" output="&#x0251;"/>
+			<!-- ^ + shift + a : voiced velar approximant -->
+			<when state="circumflex" output="&#x0270;"/>
+		</action>
+		<action id="shift_e">
+			<!-- shift + e: lower mid-front unrounded vowel -->
+			<when state="none" output="&#x025B;"/>
+			<!-- acute + shift + e : linking (absence of a break) -->
+			<when state="acute" output="&#x203F;"/>
+		</action>
+		<action id="shift_n">
+			<!-- SHIFT + n : latin small letter eng -->
+			<when state="none" output="&#x014B;"/>
+			<!-- ALT + n / SHIFT + n : major intonation group -->
+			<when state="alt_n" output="&#x2016;"/>
+		</action>
+		<action id="space">
+			<when state="none" output=" "/>
+			<!-- acute + space bar : Schwa  -->
+			<when state="acute" output="&#x0259;"/>
+		</action>
+	</actions>
+</keyboard>
