@@ -18,29 +18,29 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
     
     private static String[] ANY_CHARACTER = {
         "[A-Za-z]", // 0 : DEFAULT
-        "[A-Za-zƒ÷‹‰ˆ¸ﬂ]", // 1 : GERMAN
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º√ü]", // 1 : GERMAN
         "[A-Za-z\u00C2\u00C7\u011E\u0130\u00CE\u00D6\u015E\u0160\u00DB\u00DC\u00E2\u00E7\u011F\u00EE\u0131\u00F6\u015F\u0161\u00FB\u00FC]", // 2 : TURKISH
         "[A-Za-z\u00C6\u00E6\u00C5\u00E5\u00C4\u00E4\u00D0\u00F0\u00D8\u00F8\u00D6\u00F6\u00DE\u00FE]", // 3 : SCANDINAVIAN
-        "[A-Za-zƒ÷‹‰ˆ¸]", // 4 : PORTUGUESE
-        "[A-Za-zƒ÷‹‰ˆ¸]", // 5 : EXTENDED LATIN
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º]", // 4 : PORTUGUESE
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º]", // 5 : EXTENDED LATIN
     };
     
     private static String[] UPPER_CASE_CHARACTER = {
         "[A-Z]", // 0 : DEFAULT
-        "[A-Zƒ÷‹]", // 1 : GERMAN
+        "[A-Z√Ñ√ñ√ú]", // 1 : GERMAN
         "[A-Z\u00C2\u00C7\u011E\u0130\u00CE\u00D6\u015E\u0160\u00DB\u00DC]", // 2 : TURKISH
         "[A-Za-z\u00C6\u00C5\u00C4\u00D0\u00D8\u00D6\u00DE]", // 3 : SCANDINAVIAN
-        "[A-Za-zƒ÷‹‰ˆ¸]", // 4 : PORTUGUESE
-        "[A-Za-zƒ÷‹‰ˆ¸]", // 5 : EXTENDED LATIN
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º]", // 4 : PORTUGUESE
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º]", // 5 : EXTENDED LATIN
     };
 
     private static String[] LOWER_CASE_CHARACTER = {
         "[a-z]", // 0 : DEFAULT
-        "[a-z‰ˆ¸ﬂ]", // 1 : GERMAN
+        "[a-z√§√∂√º√ü]", // 1 : GERMAN
         "[a-z\u00E2\u00E7\u011F\u00EE\u0131\u00F6\u015F\u0161\u00FB\u00FC]", // 2 : TURKISH
         "[A-Za-z\u00E6\u00E5\u00E4\u00F0\u00F8\u00F6\u00FE]", // 3 : SCANDINAVIAN
-        "[A-Za-zƒ÷‹‰ˆ¸]", // 4 : PORTUGUESE
-        "[A-Za-zƒ÷‹‰ˆ¸]", // 5 : EXTENDED LATIN
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º]", // 4 : PORTUGUESE
+        "[A-Za-z√Ñ√ñ√ú√§√∂√º]", // 5 : EXTENDED LATIN
     };
     
     Comparator<String> caseIgnoringComparator = new java.util.Comparator<String>() {
