@@ -31,7 +31,7 @@ public class MouseListener implements EventListener {
 
 	@Override
 	public void handleEvent(Event evt) {
-		if (evt instanceof DOMMouseEvent) {
+            if (evt instanceof DOMMouseEvent) {
 			EventTarget target = evt.getCurrentTarget();
 
 			if (target instanceof SVGImageElement) {

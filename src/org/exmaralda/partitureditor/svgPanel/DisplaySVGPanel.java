@@ -6,8 +6,7 @@
 package org.exmaralda.partitureditor.svgPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -69,7 +71,7 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 	 */
 	private static final long serialVersionUID = 2113076818698940197L;
 	
-	protected final String HIGHLIGHT = "stroke:red;fill:red;fill-opacity:0.25;stroke-width:0.15%";
+	protected /*final*/ String HIGHLIGHT = "stroke:red;fill:red;fill-opacity:0.25;stroke-width:0.15%";
 	protected final int rightPanelWidth = 270;
 	protected final int topPanelWidth = 80;
 	
@@ -80,6 +82,7 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 	protected JButton openButton = new JButton();
         protected JButton zoomInButton = new JButton();
         protected JButton zoomOutButton = new JButton();
+        protected JButton colorChooserButton = new JButton();
 
 	// The status label that shows what's happening
 	protected JLabel statusLabel = new JLabel();
@@ -91,11 +94,13 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
         JSVGScrollPane scroller;
 	protected SVGDocument svgDoc;
 
-	private JTextField selectedIdLabel;
+        final JPanel panel = new JPanel(new BorderLayout());
 
-	private JTextField enterXpointerText;
+	/*private JTextField selectedIdLabel;
+	private JTextField enterXpointerText;*/
 
-	private SVGElement highlighted;
+	//private SVGElement highlighted;
+        private final ArrayList<SVGElement> highlighted = new ArrayList<>();
 	
 	// url of currently selected file
 	private URL selectedFileUrl;
@@ -105,6 +110,11 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
             XPointerObservable._instance.addObserver(this);
             initComponents();
 	}
+        
+        public void setHighlightColor(String colorString){
+            removeHighlight();
+            HIGHLIGHT = "stroke:" + colorString + ";fill:" + colorString + ";fill-opacity:0.25;stroke-width:0.15%";
+        }
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -114,7 +124,6 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 	private void initComponents() {
 		this.setLayout(new BorderLayout());
 		
-		final JPanel panel = new JPanel(new BorderLayout());
 		this.add(panel);
 
 		scroller = new JSVGScrollPane(svgCanvas);
@@ -124,31 +133,23 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
                 bottomPanel.add(statusLabel);
 		
 		// top bar
-		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));                
+		JPanel topPanel = new JPanel();                
+                topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+		
+                JPanel topPanel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));                
+                JPanel topPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));                
 
                 openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/32x32/actions/document-open.png"))); 
                 openButton.setToolTipText("Open SVG file...");
                 openButton.setMaximumSize(new java.awt.Dimension(40, 40));
                 openButton.setMinimumSize(new java.awt.Dimension(40, 40));
                 openButton.setPreferredSize(new java.awt.Dimension(40, 40));
-		topPanel.add(openButton);
+		topPanel1.add(openButton);
 		openButton.addActionListener(new ActionListener() {
                         @Override
 			public void actionPerformed(ActionEvent ae) {
-				JFileChooser fc = new JFileChooser(".");
-                                fc.setFileFilter(new ParameterFileFilter("svg", "Scalable Vector Graphics (*.svg)"));
-				int choice = fc.showOpenDialog(panel);
-				if (choice == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = fc.getSelectedFile();
-					try {
-                                            setSelectedFileUrl(selectedFile.toURI().toURL());
-					} catch (MalformedURLException e) {
-                                            // TODO Auto-generated catch block
-                                            e.printStackTrace();
-					}
-					
-				}
-			}
+                            openButtonActionPerformed(ae);
+                        }
 		});
                 
 
@@ -157,7 +158,7 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
                 zoomInButton.setMaximumSize(new java.awt.Dimension(40, 40));
                 zoomInButton.setMinimumSize(new java.awt.Dimension(40, 40));
                 zoomInButton.setPreferredSize(new java.awt.Dimension(40, 40));
-		topPanel.add(zoomInButton);
+		topPanel1.add(zoomInButton);
 		zoomInButton.addActionListener(svgCanvas.getActionMap().get(JSVGCanvas.ZOOM_IN_ACTION));
 		
                 zoomOutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/zoom-out-32.png"))); 
@@ -165,15 +166,29 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
                 zoomOutButton.setMaximumSize(new java.awt.Dimension(40, 40));
                 zoomOutButton.setMinimumSize(new java.awt.Dimension(40, 40));
                 zoomOutButton.setPreferredSize(new java.awt.Dimension(40, 40));
-		topPanel.add(zoomOutButton);
+		topPanel1.add(zoomOutButton);
 		zoomOutButton.addActionListener(svgCanvas.getActionMap().get(JSVGCanvas.ZOOM_OUT_ACTION));
                 
-                topPanel.add(filenameLabel);
-                topPanel.add(new JLabel(" # "));
-                topPanel.add(xpointerIDLabel);
+                colorChooserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ColorChooser.png"))); 
+                colorChooserButton.setToolTipText("Choose highlight color");
+                colorChooserButton.setMaximumSize(new java.awt.Dimension(40, 40));
+                colorChooserButton.setMinimumSize(new java.awt.Dimension(40, 40));
+                colorChooserButton.setPreferredSize(new java.awt.Dimension(40, 40));
+		topPanel1.add(colorChooserButton);
+		colorChooserButton.addActionListener(new ActionListener() {
+                        @Override
+			public void actionPerformed(ActionEvent ae) {
+                            colorChooserButtonActionPerformed(ae);
+                        }
+		});
+
+
+                topPanel2.add(filenameLabel);
+                topPanel2.add(new JLabel(" # "));
+                topPanel2.add(xpointerIDLabel);
 
 		// add components for showing selected xpointer
-		JPanel rightPanel = new JPanel();
+		/*JPanel rightPanel = new JPanel();
 		rightPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		JLabel label1 = new JLabel("XPointer for selected Element:", JLabel.LEFT);
@@ -184,15 +199,17 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 		selectedIdLabel.setEditable(false);
 		selectedIdLabel.setMaximumSize(new Dimension(400, 40));
 		selectedIdLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		rightPanel.add(selectedIdLabel);
+		rightPanel.add(selectedIdLabel); */
 
-		panel.add(BorderLayout.PAGE_START, topPanel);
+		topPanel.add(topPanel1);
+		topPanel.add(topPanel2);
+                panel.add(BorderLayout.PAGE_START, topPanel);
 		panel.add(BorderLayout.CENTER, scroller);
-		panel.add(BorderLayout.LINE_END, rightPanel);
+		/*panel.add(BorderLayout.LINE_END, rightPanel);*/
 		panel.add(BorderLayout.PAGE_END, bottomPanel);
 		
 		// add components for entering xpointer
-		JLabel labelEnterXPointer = new JLabel(
+		/*JLabel labelEnterXPointer = new JLabel(
 				"Enter an XPointer to highlight:", JLabel.LEFT);
 		labelEnterXPointer.setAlignmentX(Component.LEFT_ALIGNMENT);
 		rightPanel.add(labelEnterXPointer);
@@ -231,19 +248,21 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 		});
 		rightPanel.add(removeHighlightBtn);
                 
-                rightPanel.setVisible(false);
+                rightPanel.setVisible(false);*/
 
 
 		// Set the JSVGCanvas listeners.
 		svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
                         @Override
 			public void documentLoadingStarted(SVGDocumentLoaderEvent e) {
+				System.out.println("Document loading started");
 				statusLabel.setText("Document Loading...");
 			}
 
                         @Override
 			public void documentLoadingCompleted(SVGDocumentLoaderEvent e) {
-				svgDoc = svgCanvas.getSVGDocument();
+				System.out.println("Document loading completed");
+                                svgDoc = svgCanvas.getSVGDocument();
 				Element docNode = svgDoc.getDocumentElement();
 				NodeList pathNodes = docNode.getElementsByTagName("*");
 
@@ -318,9 +337,34 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
                                 
 			}
 		});
-
 	}
 
+        private void openButtonActionPerformed(ActionEvent ae) {
+                JFileChooser fc = new JFileChooser(".");
+                fc.setFileFilter(new ParameterFileFilter("svg", "Scalable Vector Graphics (*.svg)"));
+                int choice = fc.showOpenDialog(panel);
+                if (choice == JFileChooser.APPROVE_OPTION) {
+                        File selectedFile = fc.getSelectedFile();
+                        try {
+                            setSelectedFileUrl(selectedFile.toURI().toURL());
+                        } catch (MalformedURLException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                }
+        }
+        
+        private void colorChooserButtonActionPerformed(ActionEvent ae) {
+            Color newColor = JColorChooser.showDialog(
+                                 panel,
+                                 "Choose Highlight Color",
+                                 null);
+            String colorString = "rgb(" + Integer.toString(newColor.getRed()) + "," + Integer.toString(newColor.getGreen()) + "," + Integer.toString(newColor.getBlue()) + ")";
+            setHighlightColor(colorString);
+        }
+        
+        
 	private void highlightElement(SVGElement newHighlight) {
 		// remove highlight css but keep any pre-existing styles
 		String newElementStyleValue = newHighlight.getAttribute("style");
@@ -331,17 +375,21 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 		newHighlight.setAttribute("style", newElementStyleValue);
 		svgCanvas.repaint();
 
-		highlighted = newHighlight;
+		//highlighted = newHighlight;
+                highlighted.add(newHighlight);
 	}
 
 	private void removeHighlight() {
-		if (highlighted != null) {
-			String styleValue = highlighted.getAttribute("style");
-			if (styleValue == null) {
-				styleValue = "";
-			}
-			styleValue = styleValue.replace(HIGHLIGHT, "");
-			highlighted.setAttribute("style", styleValue);
+		//if (highlighted != null) {
+                if (!highlighted.isEmpty()) {
+                        for (SVGElement hlElement : highlighted){
+                            String styleValue = hlElement.getAttribute("style");
+                            if (styleValue == null) {
+                               styleValue = "";
+                            }
+                            styleValue = styleValue.replace(HIGHLIGHT, "");
+                            hlElement.setAttribute("style", styleValue);
+                        }
 		}
 	}
 	
@@ -366,8 +414,11 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
             }
             this.selectedFileUrl = selectedFileUrl;
             
+            final URL fUrl = selectedFileUrl;
+            
             svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
-            svgCanvas.setURI(selectedFileUrl.toString());            
+            svgCanvas.setURI(fUrl.toString());
+            
             
 	}
 
@@ -376,7 +427,7 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof XPointerObservable) {
 			String xpointer = arg.toString();
-			selectedIdLabel.setText(xpointer);
+			//selectedIdLabel.setText(xpointer);
                         xpointerIDLabel.setText(xpointer);
 			highlightByXPointer(xpointer);
 		}
@@ -388,10 +439,14 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 	 * @param xpointer An xpointer identifying the element to highlight.
 	 */
 	public void highlightByXPointer(String xpointer) {
-		if (xpointer != null && !xpointer.trim().isEmpty()) {
+            highlightByXPointer(xpointer, true);
+        }
+	
+        public void highlightByXPointer(String xpointer, boolean removeExistingHighlights) {
+            System.out.println("Trying XPointer " + xpointer);
+            if (xpointer != null && !xpointer.trim().isEmpty()) {
 			XPath xpath = XPathFactory.newInstance().newXPath();
 			try {
-				// get object identified by xpointer
 				final Object obj = xpath.evaluate(xpointer, svgDoc.getRootElement(),
 						XPathConstants.NODE);
 				if (obj != null && obj instanceof SVGElement) {
@@ -400,7 +455,9 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
 
 						@Override
 						public void run() {
-							removeHighlight();
+							if (removeExistingHighlights){
+                                                            removeHighlight();
+                                                        }
 							highlightElement((SVGElement) obj);
 						}
 					});
@@ -421,7 +478,7 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
             
             // diagramme/1a_13_prozesserhebung_entfetten_notiz-1-von-pm1.svg#xpointer(id('rect2993'))
             //File baseDir = new File(filename).getParentFile();
-            int index = xPointerRef.indexOf("#");
+            final int index = xPointerRef.indexOf("#");
             if (index<0){
                 String message = "No file component given in " + xPointerRef;
                 JOptionPane.showMessageDialog(this, message);
@@ -432,22 +489,72 @@ public class DisplaySVGPanel extends javax.swing.JPanel implements Observer {
             String svgPath = xPointerRef.substring(0, index);
             URI baseURI = baseDir.toURI();
             URI absoluteURI = baseURI.resolve(svgPath);
+            
+            
             try {
-                setSelectedFileUrl(absoluteURI.toURL());                
+                // START NON_THREADED VARIANT
+                setSelectedFileUrl(absoluteURI.toURL());
             } catch (MalformedURLException ex) {
-                String message = "Malformed URL: " + absoluteURI.toString();
-                JOptionPane.showMessageDialog(this, message);
+                Logger.getLogger(DisplaySVGPanel.class.getName()).log(Level.SEVERE, null, ex);
                 return;
             }
             
+            /////////////////////////////////////////////////////////
+            // NOW SHOULD MAKE SURE THAT THE DOCUMENT IS FULLY LOADED
+            /////////////////////////////////////////////////////////
+
             // Step 2 : locate the SVG element and highlight it
             Pattern p = Pattern.compile("id\\(\\'[a-zA-Z0-9]+\\'\\)");      
             Matcher m = p.matcher(xPointerRef);
-            if (m.find(index)){
+            removeHighlight();
+            xpointerIDLabel.setText("");
+            int i = index;
+            while (m.find(i)){
                 String id = xPointerRef.substring(m.start(), m.end());
-                xpointerIDLabel.setText(id);
-                highlightByXPointer(id);
-            }
+                //xpointerIDLabel.setText(id);
+                xpointerIDLabel.setText(xpointerIDLabel.getText() + " " + id);
+                highlightByXPointer(id, false);
+                i = m.end();
+            }                      
+            // END NON_THREADED VARIANT
+            
+            // START THREADED VARIANT            
+            /*final Runnable doHighlightElements = new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("Started Highlight Thread");
+                        // Step 2 : locate the SVG element and highlight it
+                        Pattern p = Pattern.compile("id\\(\\'[a-zA-Z0-9]+\\'\\)");      
+                        Matcher m = p.matcher(xPointerRef);
+                        removeHighlight();
+                        xpointerIDLabel.setText("");
+                        int i = index;
+                        while (m.find(i)){
+                            String id = xPointerRef.substring(m.start(), m.end());
+                            //xpointerIDLabel.setText(id);
+                            xpointerIDLabel.setText(xpointerIDLabel.getText() + " " + id);
+                            highlightByXPointer(id, false);
+                            i = m.end();
+                        }
+                    }
+
+            };
+            Thread loadThread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            setSelectedFileUrl(absoluteURI.toURL());
+                            System.out.println("Finished Load Thread");
+                        } catch (MalformedURLException ex) {
+                            Logger.getLogger(DisplaySVGPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        SwingUtilities.invokeLater(doHighlightElements);
+                    }
+            };
+            loadThread.start();*/
+                
+                
+            
         }
         
         

@@ -2021,7 +2021,8 @@ public class PartitureTableWithActions extends PartitureTable
                 }
                 return success;
             } catch (IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
+                System.out.println("Message: " + ex.getLocalizedMessage());
                 String message = "There was a problem opening\n" + soundFile +"\n\n" + "Error message:\n";
                 String errmess = ex.getLocalizedMessage();
                 if (errmess.length()>50){

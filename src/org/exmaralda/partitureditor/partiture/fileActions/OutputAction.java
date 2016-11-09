@@ -459,6 +459,13 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
          // segment the basic transcription and transform it into a list transcription
          GATSegmentation segmenter = new org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation(table.gatFSM);
          ListTranscription lt = segmenter.BasicToIntonationUnitList(bt);     
+         String wavAudio = lt.getHead().getMetaInformation().getReferencedFile("wav");
+         if (wavAudio==null || wavAudio.length()==0){
+             throw new IOException("No wav audio assigned!");
+         }
+
+         
+         
          //lt.writeXMLToFile("C:\\Users\\Schmidt\\Dropbox\\JensLanwer\\ListTranscription.xml", "none");
          Document xml = GATSegmentation.toXML(lt);
          

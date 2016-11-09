@@ -23,6 +23,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
     /** Creates new form CHATExportAccessoryPanel */
     public TEIExportAccessoryPanel() {
         initComponents();
+        //languagesComboBox.setRenderer(ISOLanguageCodeUtilities.getListCellRenderer());
         azmRadioButton.setVisible(false);
         genericRadioButton.setVisible(false);
         hiatOldRadioButton.setVisible(false);
@@ -70,7 +71,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         wordIDsCheckBox = new javax.swing.JCheckBox();
         languagePanel = new javax.swing.JPanel();
         languageLabel = new javax.swing.JLabel();
-        languagesComboBox = new javax.swing.JComboBox();
+        languageTextField = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("TEI Export Method"));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
@@ -78,6 +79,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         buttonGroup1.add(genericRadioButton);
         genericRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         genericRadioButton.setText("Generic");
+        genericRadioButton.setEnabled(false);
         genericRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genericRadioButtonActionPerformed(evt);
@@ -111,6 +113,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         buttonGroup1.add(modenaMethodRadioButton);
         modenaMethodRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         modenaMethodRadioButton.setText("Modena method");
+        modenaMethodRadioButton.setEnabled(false);
         modenaMethodRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modenaMethodRadioButtonActionPerformed(evt);
@@ -121,6 +124,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         buttonGroup1.add(azmRadioButton);
         azmRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         azmRadioButton.setText("AZM method");
+        azmRadioButton.setEnabled(false);
         azmRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 azmRadioButtonActionPerformed(evt);
@@ -196,16 +200,16 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         languageLabel.setToolTipText("Language of the transcription");
         languagePanel.add(languageLabel);
 
-        languagesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "de", "en", "fr" }));
-        languagesComboBox.setMaximumSize(new java.awt.Dimension(40, 20));
-        languagePanel.add(languagesComboBox);
+        languageTextField.setText("en");
+        languageTextField.setPreferredSize(new java.awt.Dimension(40, 20));
+        languagePanel.add(languageTextField);
 
         add(languagePanel);
     }// </editor-fold>//GEN-END:initComponents
 
     void checkEnable(ActionEvent evt){
-        hiatOldRadioButton.setEnabled(hiatSegmentationRadioButton.isSelected());
-        hiatNewRadioButton.setEnabled(hiatSegmentationRadioButton.isSelected());
+        //hiatOldRadioButton.setEnabled(hiatSegmentationRadioButton.isSelected());
+        //hiatNewRadioButton.setEnabled(hiatSegmentationRadioButton.isSelected());
         hiatISORadioButton.setEnabled(hiatSegmentationRadioButton.isSelected());
         wordIDsCheckBox.setEnabled(hiatSegmentationRadioButton.isSelected() && hiatNewRadioButton.isSelected());        
     }
@@ -266,7 +270,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton isoGenericRadioButton;
     private javax.swing.JLabel languageLabel;
     private javax.swing.JPanel languagePanel;
-    private javax.swing.JComboBox languagesComboBox;
+    private javax.swing.JTextField languageTextField;
     private javax.swing.JRadioButton modenaMethodRadioButton;
     private javax.swing.JCheckBox wordIDsCheckBox;
     // End of variables declaration//GEN-END:variables

@@ -64,7 +64,7 @@ public class Evaluate {
         if (args.length!=3){
             System.out.println("Usage: Evaluate evaluation-data-directory test-data-directory output-directory");
             System.exit(0);
-        }
+        } 
         File edd = new File(args[0]);
         File tdd = new File(args[1]);
         File opd = new File(args[2]);
@@ -142,6 +142,7 @@ public class Evaluate {
             Document originalDoc = FileIO.readDocumentFromLocalFile(testFile);
             Document correctedDoc = FileIO.readDocumentFromLocalFile(evaluationFile);
             Document mergedDoc = new Merge().merge(originalDoc, correctedDoc);
+            FileIO.writeDocumentToLocalFile(new File("Z:\\TAGGING\\2016_11_08_TestEvaluate.xml"), mergedDoc);
             //pos / pos_c
             List l = XPath.selectNodes(mergedDoc, "//w");
             for (Object o : l){

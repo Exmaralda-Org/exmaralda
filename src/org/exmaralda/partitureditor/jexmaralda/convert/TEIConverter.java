@@ -93,6 +93,7 @@ public class TEIConverter {
         }
     }
     
+    @Deprecated
     public String BasicTranscriptionToTEI(BasicTranscription bt) throws SAXException,
                                                                         IOException,
                                                                         ParserConfigurationException,
@@ -257,6 +258,7 @@ public class TEIConverter {
     
     /** transforms the basic transcription and writes a TEI file to path
      * according to the method described in Schmidt 2005 */
+    @Deprecated
     public void writeTEIToFile(BasicTranscription bt, String path) throws SAXException,
                                                                           IOException, 
                                                                           ParserConfigurationException, 
@@ -273,6 +275,7 @@ public class TEIConverter {
 
     /** transforms the basic transcription and writes a TEI file to path
      * according to the method described by Natacha Niemants (Modena) */
+    @Deprecated
     public void writeModenaTEIToFile(BasicTranscription bt, String path) throws SAXException,
                                                                                 IOException,
                                                                                 ParserConfigurationException,
@@ -287,6 +290,7 @@ public class TEIConverter {
         System.out.println("document written.");
     }
 
+    @Deprecated
     public void writeHIATTEIToFile(BasicTranscription bt, String path) throws SAXException, 
                                                                               FSMException, 
                                                                               XSLTransformException, 
@@ -308,6 +312,7 @@ public class TEIConverter {
         System.out.println("document written.");                
     }
 
+    @Deprecated
     public void writeNewHIATTEIToFile(BasicTranscription bt, String filename) throws SAXException,
                                                                               FSMException,
                                                                               XSLTransformException,
@@ -317,6 +322,7 @@ public class TEIConverter {
         writeNewHIATTEIToFile(bt, filename, true);
     }
 
+    @Deprecated
     public void writeNewHIATTEIToFile(BasicTranscription bt, String filename, boolean generateWordIDs) throws SAXException,
                                                                               FSMException,
                                                                               XSLTransformException,
@@ -349,6 +355,7 @@ public class TEIConverter {
     }
 
     
+    @Deprecated
     public void writeFOLKERTEIToFile(BasicTranscription bt, String path) throws SAXException, 
                                                                                 ParserConfigurationException, 
                                                                                 IOException, 
@@ -370,6 +377,7 @@ public class TEIConverter {
         IOUtilities.writeDocumentToLocalFile(path, d);                
     }
 
+    @Deprecated
     public void writeGenericTEIToFile(BasicTranscription bt, String path) throws SAXException,
                                                                                 ParserConfigurationException,
                                                                                 JDOMException,

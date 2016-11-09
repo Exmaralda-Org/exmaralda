@@ -278,7 +278,10 @@ public class GATSegmentation extends AbstractSegmentation {
     public static Document toXML(ListTranscription lt) throws JexmaraldaException {
         ArrayList<GATLine> gatLines = toGATLines(lt);
         Document result = new Document(new Element("gat-transcript"));
-        result.getRootElement().setAttribute("audio", lt.getHead().getMetaInformation().getReferencedFile("wav"));
+        String wavAudio = lt.getHead().getMetaInformation().getReferencedFile("wav");
+        if (wavAudio!=null){
+            result.getRootElement().setAttribute("audio", wavAudio);
+        }
         
         for (GATLine gl : gatLines){
             Element lineElement = new Element("gat-line");            

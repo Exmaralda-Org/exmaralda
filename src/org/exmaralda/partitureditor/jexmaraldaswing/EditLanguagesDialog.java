@@ -17,6 +17,7 @@ import org.exmaralda.partitureditor.jexmaralda.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import org.xml.sax.*;
 import javax.xml.parsers.SAXParserFactory;  
 import javax.xml.parsers.ParserConfigurationException;  
@@ -38,8 +39,9 @@ public class EditLanguagesDialog extends JEscapeDialog {
     private javax.swing.DefaultListModel l2ListModel;
     public boolean change;
     
+    
     /** Creates new form EditLanguagesDialog */
-    public EditLanguagesDialog(java.awt.Frame parent,boolean modal, Languages lu, Languages lang1, Languages lang2) {
+    public EditLanguagesDialog(java.awt.Frame parent, boolean modal, Languages lu, Languages lang1, Languages lang2) {
         super (parent, modal);
         try {
             readAllLanguages();
@@ -91,6 +93,22 @@ public class EditLanguagesDialog extends JEscapeDialog {
         });
 
     }
+
+    public void configureForSingleSelection(){
+        selectedLanguagesPanel.setVisible(false);
+        allLanguagesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        setTitle("Select Language");
+    }
+    
+    public String getSelectedLanguage(){
+        String selectedLanguage = ((String)allLanguagesList.getSelectedValue());
+        return selectedLanguage;
+        
+    }
+    
+    
+
+
 
     public Languages getLanguagesUsed(){
         return lUsed;
