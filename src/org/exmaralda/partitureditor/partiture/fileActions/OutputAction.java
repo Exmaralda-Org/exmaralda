@@ -16,6 +16,8 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.common.corpusbuild.FileIO;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.interlinearText.*;
@@ -140,7 +142,9 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             }
         /******************************************/
         /******** non-partitur output methods *****/
-        /******************************************/
+        /******************************************/ 
+        } else if (selectedFileFilter==dialog.HTMLPartiturWithSVGFileFilter){
+            exportHTMLPartiturWithSVG(filename);
         } else if (selectedFileFilter==dialog.FreeStylesheetFileFilter){
             exportFreeStylesheet(filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
         } else if (selectedFileFilter==dialog.HTMLSegmentChainFileFilter){
@@ -163,8 +167,36 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         }
 
         table.status("Transcription output as " + filename);
-
-
+    }
+    
+    void exportHTMLPartiturWithSVG (String filename) throws IOException{
+        FileOutputStream fos = null;
+        try {
+            StylesheetFactory sf = new StylesheetFactory(true);
+            //String resultText = sf.applyExternalStylesheetToString( table.freeStylesheetVisualisationStylesheet,
+            //        table.getModel().getTranscription().toXML());
+            String xslString = "/org/exmaralda/partitureditor/jexmaralda/xsl/modiko-exb2view.xsl";
+            String resultText = sf.applyInternalStylesheetToExternalXMLFile(xslString, table.getFilename());
+            System.out.println("started writing document...");
+            fos = new FileOutputStream(new File(filename));
+            fos.write(resultText.getBytes("UTF-8"));
+            System.out.println("document written.");
+        } catch (FileNotFoundException ex) {
+            throw new IOException(ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    
     }
     
     void exportHTMLPartitur(InterlinearText it, String filename, boolean useFrames) throws IOException{
@@ -275,7 +307,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             return;            
         }
         
-        StylesheetFactory sf = new StylesheetFactory();
+        StylesheetFactory sf = new StylesheetFactory(true);
         String resultText = sf.applyExternalStylesheetToString( table.freeStylesheetVisualisationStylesheet, 
                                                                 table.getModel().getTranscription().toXML());
         System.out.println("started writing document...");

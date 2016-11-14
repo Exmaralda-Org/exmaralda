@@ -329,7 +329,7 @@ public class PartitureTableWithActions extends PartitureTable
 
         svgDialog = new org.exmaralda.partitureditor.svgPanel.SVGDialog(parent, false);
         svgDialog.setLocationRelativeTo(this);
-        //svgDialog.svgPanel.addXPointerListener(this);
+        svgDialog.svgPanel.addXPointerListener(this);
         
         
     }
@@ -2535,7 +2535,11 @@ public class PartitureTableWithActions extends PartitureTable
 
     @Override
     public void processXPointer(String xPointer) {
-        JOptionPane.showMessageDialog(parent, "Implement me!");
+        //JOptionPane.showMessageDialog(parent, xPointer);
+        if (isEditing){
+            editor = (PartitureCellStringEditor)(getEditingComponent());
+            editor.replaceSelection(xPointer);
+        }        
     }
 
     @Override

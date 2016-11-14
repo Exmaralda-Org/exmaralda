@@ -37,10 +37,16 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
     String base;
     
     boolean basedOnNormalization;
+    
+    boolean verbose = false;
    
 
     public TreeTaggableOrthonormalTranscription(File transcription, boolean basedOnNormalization) throws JDOMException, IOException {
         this(FileIO.readDocumentFromLocalFile(transcription), transcription, basedOnNormalization);
+    }
+    
+    public void setVerbose(boolean v){
+        verbose = v;
     }
 
     public TreeTaggableOrthonormalTranscription(Document transcriptionDoc, File transcriptionFile, boolean bon) throws JDOMException, IOException {
@@ -104,6 +110,12 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
             }
         } catch (JDOMException ex) {
             throw new IOException(ex);
+        }
+        if (verbose){
+            System.out.println(result.size() + " tokens at " + pos + ": ");
+            for (String t : result){
+                System.out.println(t);
+            }
         }
         return result;
     }

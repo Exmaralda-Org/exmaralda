@@ -33,6 +33,7 @@ public class MouseListener implements EventListener {
 	public void handleEvent(Event evt) {
             if (evt instanceof DOMMouseEvent) {
 			EventTarget target = evt.getCurrentTarget();
+                        DOMMouseEvent domMouseEvent = (DOMMouseEvent)evt;                        
 
 			if (target instanceof SVGImageElement) {
 				int x = ((DOMMouseEvent) evt).getClientX();
@@ -62,7 +63,7 @@ public class MouseListener implements EventListener {
 				List<?> it = gvtRoot.getRoot().getChildren();
 				
 				// check which elements contain the point
-				List<GraphicsNode> containingNodes = new ArrayList<>();
+				List<GraphicsNode> containingNodes = new ArrayList<GraphicsNode>();
 				for (Object o : ((CanvasGraphicsNode) it.get(0)).getChildren()) {
 
 					Rectangle2D rect2 = ((GraphicsNode) o).getSensitiveBounds();

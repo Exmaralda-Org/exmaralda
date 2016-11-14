@@ -102,7 +102,7 @@ public class PartiturEditor extends javax.swing.JFrame
         
         new StartupSplashScreen(this);
         
-        //org.exmaralda.common.Logger.initialiseLogger(this);
+        org.exmaralda.common.Logger.initialiseLogger(this);
                                 
         // initialize the table
         table = new PartitureTableWithActions(this);
@@ -607,9 +607,6 @@ public class PartiturEditor extends javax.swing.JFrame
     //*******************************************************************
     //*******************************************************************
     
-    
-    
-
     // ----- Acess methods for DIDA Extensions --
     /** returns the partitur
      * @return  */

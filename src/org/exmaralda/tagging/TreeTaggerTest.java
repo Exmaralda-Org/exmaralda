@@ -6,6 +6,11 @@
 package org.exmaralda.tagging;
 
 import java.io.File;
+import java.util.List;
+import org.exmaralda.exakt.utilities.FileIO;
+import org.jdom.Attribute;
+import org.jdom.Document;
+import org.jdom.xpath.XPath;
 
 /**
  *
@@ -14,13 +19,13 @@ import java.io.File;
 public class TreeTaggerTest {
 
     public static String TTC = "c:\\TreeTagger";
-    public static String PF = "c:\\TreeTagger\\lib\\german.par";
+    public static String PF = "c:\\TreeTagger\\lib\\german-utf8.par";
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
-    public static String INPUT="C:\\Users\\Schmidt\\Desktop\\FOLK_2_4\\BUG\\FOLK_E_00070_SE_01_T_02_DF_01.fln";
+    public static String INPUT="Y:\\thomas\\DR2FLK\\TagVerschiebung_shortest.xml";
     //public static String INPUT="C:\\Users\\Schmidt\\Desktop\\HAMATAC\\David_Rufus\\MT_091209_David_s.exs";
     //public static String INPUT="S:\\TP-Z2\\IDS\\GAT\\orthonormal\\ek.fln";
     //public static String INPUT="S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\MAPTASK.coma";
-    public static String OUTPUT="C:\\Users\\Schmidt\\Desktop\\FOLK_2_4\\BUG\\FOLK_E_00070_SE_01_T_02_DF_01_OUT.fln";
+    public static String OUTPUT="Y:\\thomas\\DR2FLK\\TagVerschiebung_out.xml";
     //public static String OUTPUT="C:\\Users\\Schmidt\\Desktop\\HAMATAC\\David_Rufus\\MT_091209_David_s_out.exs";
     /**
      * @param args the command line arguments
@@ -32,7 +37,10 @@ public class TreeTaggerTest {
             //        TaggingProfiles.HIAT_WORDS_PUNCTUATION_SEGMENTATION_XPATH,
             //        TaggingProfiles.HIAT_WORDS_PUNCTUATION_TOKEN_XPATH);
             TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(new File(INPUT), true);
-            File output = File.createTempFile("FLN","TMP");
+            ttont.setXPathToTokens("//w|//p[not(text()=',')]");
+            ttont.clearTagging();
+            ttont.setVerbose(true);
+            File output = File.createTempFile("FLN",".xml");
             //output.deleteOnExit();
             System.out.println("***" + output.getAbsolutePath());
             tt.tag(ttont, output);
