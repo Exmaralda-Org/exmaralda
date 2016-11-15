@@ -58,6 +58,7 @@ public class TEIConverter {
     public static final int ISO_GENERIC_METHOD = 6;
     public static final int HIAT_ISO_METHOD = 7;
     public static final int CGAT_MINIMAL_ISO_METHOD = 8;
+    public static final int ISO_EVENT_TOKEN_METHOD = 9;
 
     
     /** Creates a new instance of TEIConverter */
@@ -154,6 +155,14 @@ public class TEIConverter {
         Document d = IOUtilities.readDocumentFromString(result);
         IOUtilities.writeDocumentToLocalFile(path, d);
     }
+    
+    public void writeEventTokenISOTEIToFile(BasicTranscription bt, String path)  throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
+        StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2isotei_eventToken.xsl", bt.toXML());
+        Document d = IOUtilities.readDocumentFromString(result);
+        IOUtilities.writeDocumentToLocalFile(path, d);
+    }
+    
 
     public void writeHIATISOTEIToFile(BasicTranscription bt, String filename) throws SAXException,
                                                                               FSMException,
@@ -558,6 +567,7 @@ public class TEIConverter {
 
         return org.exmaralda.common.jdomutilities.IOUtilities.documentToString(doc,false);
     }
+
 
 
 

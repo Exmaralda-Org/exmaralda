@@ -246,7 +246,16 @@
             <!-- change 03-03-2016: namespace switch no longer necessary -->        
             <xsl:element name="u">
                 <xsl:attribute name="xml:id"><xsl:text>u_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
-                <xsl:value-of select="text()"/>
+                <!-- HERE IS A DIFFERENCE TO THE GENERIC CASE -->
+                <w>
+                    <xsl:attribute name="xml:id">
+                        <xsl:text>w_</xsl:text>
+                        <xsl:value-of select="ancestor::tier/@id"/>
+                        <xsl:text>_</xsl:text>
+                        <xsl:value-of select="count(preceding-sibling::event)"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="normalize-space(text())"/>
+                </w>
                 <xsl:if test="following-sibling::event and exmaralda:timeline-position(@end)&gt;=exmaralda:timeline-position(following-sibling::event[1]/@start)">
                     <!-- ADDED 15-11-2016 -->
                     <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
@@ -271,7 +280,16 @@
     
     <!-- events from primary transcription tiers with speakers with an immediately preceding event -->
     <xsl:template match="event" mode="second-pass">
-            <xsl:value-of select="text()"/>
+        <!-- HERE IS A DIFFERENCE TO THE GENERIC CASE -->
+            <w xmlns="http://www.tei-c.org/ns/1.0">
+                <xsl:attribute name="xml:id">
+                    <xsl:text>w_</xsl:text>
+                    <xsl:value-of select="ancestor::tier/@id"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:value-of select="count(preceding-sibling::event)"/>
+                </xsl:attribute>
+                <xsl:value-of select="normalize-space(text())"/>
+            </w>
             <xsl:if test="following-sibling::event and exmaralda:timeline-position(@end)&gt;=exmaralda:timeline-position(following-sibling::event[1]/@start)">
                 <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:attribute name="synch">
