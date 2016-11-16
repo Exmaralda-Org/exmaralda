@@ -182,6 +182,7 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
         // do nothing
     }
 
+    @Override
     public Component getVisibleComponent(){
         if (wrappedPlayer!=null){
             return wrappedPlayer.getVisualComponent();

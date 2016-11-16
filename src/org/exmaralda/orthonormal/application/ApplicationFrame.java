@@ -126,6 +126,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         editMenu = new javax.swing.JMenu();
         viewMenu = new javax.swing.JMenu();
         showMatchListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        annotationMenu = new javax.swing.JMenu();
         helpMenu = new org.exmaralda.common.application.HelpMenu("Hilfe", this, HELP_MENU_TITLES, "http://agd.ids-mannheim.de/folker.shtml")
         ;
 
@@ -408,6 +409,9 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
         applicationMenuBar.add(viewMenu);
 
+        annotationMenu.setText("Annotation");
+        applicationMenuBar.add(annotationMenu);
+
         helpMenu.setText("Hilfe");
         applicationMenuBar.add(helpMenu);
 
@@ -529,6 +533,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JMenu annotationMenu;
     private javax.swing.JMenuBar applicationMenuBar;
     public javax.swing.JToolBar applicationToolBar;
     private javax.swing.JCheckBox autoAdvanceCheckBox;

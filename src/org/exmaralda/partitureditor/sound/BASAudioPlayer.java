@@ -5,6 +5,7 @@
 
 package org.exmaralda.partitureditor.sound;
 
+import ipsk.audio.AudioSourceException;
 import ipsk.audio.FileAudioSource;
 import ipsk.audio.player.PlayerException;
 import ipsk.audio.player.event.PlayerCloseEvent;
@@ -15,6 +16,9 @@ import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.Mixer;
+import javax.sound.sampled.Port;
 
 
 /**
@@ -33,6 +37,14 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         wrappedPlayer = new ipsk.audio.player.Player();
     }
     
+    // don't really know how to do this...
+    public void muteChannels(boolean muteRight, boolean muteLeft) throws PlayerException, AudioSourceException{
+        /*if (wrappedPlayer.getAudioSource().getAudioInputStream().getFormat().getChannels()!=2) return;
+        Mixer newPlaybackMixer = AudioSystem.getMixer(AudioSystem.getMixerInfo()[0]);
+        newPlaybackMixer.getLine(Port.Info.LINE_IN).
+        wrappedPlayer.setMixer(newPlaybackMixer);*/
+    }
+    
     
     @Override
     public void setSoundFile(String pathToSoundFile) throws IOException {
@@ -45,7 +57,8 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
             throw new IOException(message);
         }
         String urlString = pathToSoundFile;
-        if ((pathToSoundFile==null) && (wrappedPlayer!=null)){
+        //if ((pathToSoundFile==null) && (wrappedPlayer!=null)){
+        if (wrappedPlayer!=null){
             wrappedPlayer.stop();
         }
 
@@ -76,8 +89,6 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         double seconds = wrappedPlayer.getFrameLength() / wrappedPlayer.getAudioFormat().getFrameRate();        
         return seconds;
     }
-    
-    
 
     private void play(double startTime, double endTime) throws PlayerException{
         long startFrame = Math.round(wrappedPlayer.getAudioFormat().getFrameRate() * startTime);
@@ -90,6 +101,7 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
     @Override
     public void startPlayback() {
         playThread = new Thread(new Runnable(){
+            @Override
             public void run(){
                 while (playThread!=null){
                     if (playThread.isInterrupted()) break;

@@ -46,7 +46,6 @@ import org.exmaralda.orthonormal.actions.fileactions.OpenRecentAction;
 import org.exmaralda.folker.actions.fileactions.OutputAction;
 import org.exmaralda.orthonormal.gui.WordLabel;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
-import org.exmaralda.folker.matchlist.MatchList;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.gui.EditContributionDialog;
@@ -127,6 +126,8 @@ public final class ApplicationControl implements  ListSelectionListener,
     //org.exmaralda.orthonormal.actions.editActions.UpdateRDBLexiconAction updateRDBLexiconAction;
     org.exmaralda.orthonormal.actions.editActions.SaveLexiconAction saveLexiconAction;
     org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction searchInDirectoryAction;
+    // ---------------------------
+    org.exmaralda.orthonormal.actions.annotationActions.TreeTaggerAction treeTaggerAction;
     
     public String currentFilePath = null;
     public String currentMediaPath = null;
@@ -352,6 +353,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         saveLexiconAction = new org.exmaralda.orthonormal.actions.editActions.SaveLexiconAction(this, "Lexikon speichern...", null);
         searchInDirectoryAction = new org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction(this, "Verzeichnis durchsuchen...", c.getIcon(Constants.SEARCH_ICON));
 
+        treeTaggerAction = new org.exmaralda.orthonormal.actions.annotationActions.TreeTaggerAction(this, "TreeTagger...", null);
     }
     
     void assignActions(){
@@ -401,6 +403,8 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.applicationToolBar.add(outputAction).setToolTipText("Ausgabe...");
         applicationFrame.applicationToolBar.add(new JToolBar.Separator());
         applicationFrame.applicationToolBar.add(editPreferencesAction).setToolTipText("Voreinstellungen bearbeiten...");
+        
+        applicationFrame.annotationMenu.add(treeTaggerAction).setToolTipText("Lemmatisierung und POS-Tagging mit TreeTagger");
 
     }
 

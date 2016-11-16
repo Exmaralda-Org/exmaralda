@@ -232,6 +232,10 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         wordIDsCheckBox.setEnabled(hiatSegmentationRadioButton.isSelected() && hiatNewRadioButton.isSelected());        
     }
     
+    public String getLanguage(){
+        return languageTextField.getText();
+    }
+    
     private void hiatSegmentationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hiatSegmentationRadioButtonActionPerformed
         checkEnable(evt);
     }//GEN-LAST:event_hiatSegmentationRadioButtonActionPerformed

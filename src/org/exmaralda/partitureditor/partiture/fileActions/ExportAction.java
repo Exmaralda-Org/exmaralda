@@ -124,19 +124,23 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     break;
                 case TEIConverter.CGAT_METHOD :
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     // changed 16-01-2015: ISO!
                     ec.writeFOLKERISOTEIToFile(trans, filename);
                     break;
                 case TEIConverter.ISO_GENERIC_METHOD :
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     ec.writeGenericISOTEIToFile(trans, filename);                    
                     break;
                 case TEIConverter.HIAT_ISO_METHOD :
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     ec.writeHIATISOTEIToFile(trans, filename);                    
                     break;
                 case TEIConverter.ISO_EVENT_TOKEN_METHOD :    
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     ec.writeEventTokenISOTEIToFile(trans, filename);                    
                     break;
             }

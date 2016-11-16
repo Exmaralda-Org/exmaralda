@@ -48,7 +48,10 @@ public class ExportAction extends AbstractApplicationAction {
     ParameterFileFilter vttFileFilter = new ParameterFileFilter("vtt", "VTT subtitles (*.vtt)");
     ParameterFileFilter subtitlePlainTextFileFilter = new ParameterFileFilter("txt", "Plain text subtitles (*.txt)");
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public ExportAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
@@ -75,7 +78,7 @@ public class ExportAction extends AbstractApplicationAction {
         if (retValue==JFileChooser.CANCEL_OPTION) return;
         
         File f = fileChooser.getSelectedFile();
-        if (!(f.getName().indexOf(".")>=0)){
+        if (!f.getName().contains(".")){
             f = new File(f.getAbsolutePath() + "." + ((ParameterFileFilter)(fileChooser.getFileFilter())).getSuffix());
         }
         if (f.exists()){
@@ -103,6 +106,7 @@ public class ExportAction extends AbstractApplicationAction {
                     BasicTranscription bt = ac.getBasicTranscription();
                     TEIConverter converter = new TEIConverter();
                     // changed 16-01-2015: ISO!
+                    converter.setLanguage("de");                    
                     converter.writeFOLKERISOTEIToFile(bt, f.getAbsolutePath());
             } else if (fileChooser.getFileFilter()==tcfFileFilter){
                     Document flnDoc = EventListTranscriptionXMLReaderWriter.toJDOMDocument(ac.getTranscription(), f);
