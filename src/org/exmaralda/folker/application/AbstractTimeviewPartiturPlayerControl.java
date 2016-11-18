@@ -434,7 +434,8 @@ public abstract class AbstractTimeviewPartiturPlayerControl
 
     }
 
-    /** process changes in the partitur view */
+    /** process changes in the partitur view
+     * @param e */
     @Override
     public void partitureTablePropertyChanged(PartitureTableEvent e) {
         //System.out.println("THIS IS AbstractTimeviewPartiturPlayerControl");
@@ -454,8 +455,8 @@ public abstract class AbstractTimeviewPartiturPlayerControl
             }
             Object o = e.getInfo();
             Double[] times = (Double[])o;
-            double minTime = times[0].doubleValue()*1000.0;
-            double maxTime = times[1].doubleValue()*1000.0;
+            double minTime = times[0]*1000.0;
+            double maxTime = times[1]*1000.0;
             // added 15-04-2009
             timeViewer.setCursorTime(minTime);
             timeViewer.setSelectionInterval(minTime, maxTime, true, (!partitur.getModel().timeProportional));

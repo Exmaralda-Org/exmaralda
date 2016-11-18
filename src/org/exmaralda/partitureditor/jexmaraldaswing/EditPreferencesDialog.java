@@ -807,7 +807,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         mediaPlayersButtonGroup.add(mmfPlayerRadioButton);
         mmfPlayerRadioButton.setText("<html><b>MMF Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window's native Microsoft Media Foundation framework to playback audio and video files. <i>Not working yet!</i> </html>");
-        mmfPlayerRadioButton.setEnabled(false);
         playerSelectionPanel.add(mmfPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(elanDSPlayerRadioButton);

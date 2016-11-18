@@ -66,11 +66,9 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
             puc.addControllerListener(this);
             puc.start();
             
-            
-            
             //wrappedPlayer = new mpi.eudico.client.annotator.player.NativeMediaPlayerWindowsDS(urlString);
             // added 08-02-2010
-            this.fireSoundfileSet();
+            fireSoundfileSet();
 
             // experiment!
             //wrappedPlayer.setRate(0.5f);
@@ -96,38 +94,12 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
     
 
     private void play(double startTime, double endTime){
-        /*playThread = new Thread(new Runnable(){
-            public void run(){
-                while (playThread!=null){
-                    if (playThread.isInterrupted()) break;
-                    if (!wrappedPlayer.isPlaying()) {
-                        if (!halted){
-                            // i.e. this is a real stop caused by stop button
-                            // or by end of interval
-                            firePlaybackStopped();
-                        }
-                        playThread.interrupt();
-                    }
-                    firePosition();
-                    try{
-                        Thread.sleep(1);
-                    } catch (InterruptedException ie){
-                        if (playThread!=null){
-                            playThread.interrupt();
-                        }
-                    }
-                }
-            }
-        });   */     
-        
         long thisStartTime = (long)(startTime * 1000);
         long thisEndTime = (long)(endTime * 1000);
+        
+        System.out.println(System.currentTimeMillis() + ": Instructing MMF player to play from " + thisStartTime + " to " + thisEndTime);
 
         wrappedPlayer.playInterval(thisStartTime, thisEndTime);
-        // added 11-05-2009 to avoid IllegalThreadStateException
-        /*if (!playThread.isAlive()){
-            playThread.start();
-        }*/
         
     }
 
@@ -185,6 +157,8 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
     @Override
     public Component getVisibleComponent(){
         if (wrappedPlayer!=null){
+            //HEY HO BERND THE BUILDER!
+            // Can I wait here until init has finished?
             return wrappedPlayer.getVisualComponent();
         }
         return null;
@@ -193,6 +167,8 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
 
     // added 26-05-2009
     public void updateVideo(double time){
+        //System.out.println(System.currentTimeMillis() + ": update video to " + time);
+        //HEY HO BERND THE BUILDER!        
         if ((wrappedPlayer!=null) && (wrappedPlayer.getVisualComponent()!=null)){
             wrappedPlayer.setMediaTime((long)(time*1000.0));
         }
@@ -210,7 +186,7 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
             //System.out.println("Current JDS position: " + getCurrentPosition());
             firePosition();
         } else if (ce instanceof mpi.eudico.client.mediacontrol.StopEvent){
-            this.firePlaybackStopped();
+            firePlaybackStopped();
         }
     }
 
