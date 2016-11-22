@@ -12,6 +12,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 import mpi.eudico.client.annotator.ElanLayoutManager;
 
@@ -76,6 +77,7 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
         private static final int DEFAULT_HEIGHT = 320;
 	
 	private final ReentrantLock syncLock = new ReentrantLock();
+        
 	
 	/**
 	 * Constructor.
@@ -808,6 +810,22 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    // added 21-11-2016
+    // Experiment!
+    private ArrayList<StrippedJMMFMediaPlayerListener> listeners = new ArrayList<StrippedJMMFMediaPlayerListener>();
+    
+    public void addStrippedJMMFMediaPlayerListener(StrippedJMMFMediaPlayerListener l){
+        listeners.add(l);
+    }
+    
+    void firePlayerInitialised(){
+        for (StrippedJMMFMediaPlayerListener listener : listeners){
+            listener.jmmfPlayerInitialised();
+        }            
+    } 
+    
+    // end experiment
 
 	
 //##############
@@ -955,6 +973,7 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
                         //HEY HO BERND THE BUILDER!
                         //now could be the time to adjust the size of the video
                         System.out.println(System.currentTimeMillis() + ": Exiting InitWaitThread");
+                        firePlayerInitialised();
 		}
 	}
 	

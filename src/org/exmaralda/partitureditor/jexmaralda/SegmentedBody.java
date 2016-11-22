@@ -220,6 +220,10 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
     }
     
     
+    public SegmentedTier getSegmentedTierAt(int index){
+        return (SegmentedTier)(elementAt(index));
+    }
+
     public SegmentedTier getSegmentedTierWithID(String id){
         return (SegmentedTier)(elementAt(lookupID(id)));
     }

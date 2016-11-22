@@ -19,8 +19,9 @@ public class Annotation extends AbstractSegmentVector implements XMLable{
 
 
     
+    @Override
     public String toXML() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String [][] atts = {{"name", getName()}, {"tierref", getTierReference()}};
         sb.append(StringUtilities.makeXMLOpenElement("annotation", atts));
         for (int pos=0; pos<getNumberOfSegments(); pos++){

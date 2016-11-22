@@ -39,7 +39,6 @@ import org.exmaralda.partitureditor.partiture.menus.TablePopupMenu;
 
 import com.klg.jclass.table.*;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -2401,7 +2400,7 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
 
-    public Playable makePlayer(){
+    public final Playable makePlayer(){
 
         /*if (true){
             return new VLCPlayer();
@@ -2445,7 +2444,8 @@ public class PartitureTableWithActions extends PartitureTable
         } else if (playerType.equals("JDS-Player")){
             return new JDSPlayer();
         } else if (playerType.equals("MMF-Player")){
-            return new MMFPlayer();
+            MMFPlayer thePlayer = new MMFPlayer();            
+            return thePlayer;
         } else if (playerType.equals("BAS-Audio-Player")){
             return new BASAudioPlayer();
         } else if (playerType.equals("ELAN-Quicktime-Player")){
@@ -2490,6 +2490,8 @@ public class PartitureTableWithActions extends PartitureTable
         insertPauseAction.setEnabled(currentSelectionLength>0.0);
         mediaPanelDialog.setTimeSelection(event);
     }
+    
+    
 
 
     /*********************************************

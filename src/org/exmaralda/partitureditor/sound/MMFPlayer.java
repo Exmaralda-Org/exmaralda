@@ -17,7 +17,7 @@ import mpi.eudico.server.corpora.clomimpl.abstr.MediaDescriptor;
  *
  * @author thomas
  */
-public class MMFPlayer extends AbstractPlayer implements ControllerListener {
+public class MMFPlayer extends AbstractPlayer implements ControllerListener, StrippedJMMFMediaPlayerListener {
 
     //mpi.eudico.client.annotator.player.JMMFMediaPlayer wrappedPlayer;
     StrippedJMMFMediaPlayer wrappedPlayer;
@@ -55,6 +55,7 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
             }
             //wrappedPlayer = new mpi.eudico.client.annotator.player.JMMFMediaPlayer(mediaDescriptor);
             wrappedPlayer = new StrippedJMMFMediaPlayer(mediaDescriptor);
+            wrappedPlayer.addStrippedJMMFMediaPlayerListener(this);
             wrappedPlayer.getVisualComponent();
             
             // not having a layout manager will cause a null pointer exception...
@@ -189,6 +190,19 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener {
             firePlaybackStopped();
         }
     }
+    
+    @Override
+    public void addPlayableListener(PlayableListener l) {
+        super.addPlayableListener(l);
+    }
+
+    @Override
+    public void jmmfPlayerInitialised() {
+        System.out.println("The (EXMARaLDA) MMF Player now knows that the (ELAN) MMF player has been initialised.");
+        //setStartTime(0.1);
+        //super.fireSoundfileSet();
+    }
+    
 
 
 
