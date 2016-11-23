@@ -466,7 +466,8 @@ public class PartitureTableWithActions extends PartitureTable
         setupLinkPanel();
     }
     
-    /** called when editing of an event starts */
+    /** called when editing of an event starts
+     * @param evt */
     @Override
     public void editCell(final com.klg.jclass.table.JCEditCellEvent evt) {
         //System.out.println("editCell");
@@ -478,6 +479,7 @@ public class PartitureTableWithActions extends PartitureTable
         editor = (PartitureCellStringEditor)(evt.getEditingComponent());
         editor.setPopupMenu(eventPopupMenu);
         keyboardDialog.getKeyboardPanel().addListener(editor);
+        multimodalDialog.multimodalPanel.addUnicodeKeyboardListener(editor);
         ipaPanel.ipaPanel.addUnicodeListener(editor);
         editor.positionCursor();
         editor.getDocument().addDocumentListener(this);        

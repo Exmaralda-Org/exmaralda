@@ -59,7 +59,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         String filename = selectedFile.getAbsolutePath();
         
         //check whether or not the selected file has an extension
-        if (!(selectedFile.getName().indexOf(".")>=0)){
+        if (!selectedFile.getName().contains(".")){
             filename+="." + selectedFileFilter.getSuffix();
         }
         
@@ -150,6 +150,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.TCFFileFilter){
             String language = (String) dialog.tcfExportAccessoryPanel.languageComboBox.getSelectedItem();
             TCFConverter tcfConverter = new TCFConverter();
+            // issue # : user must be able to choose the segmentation algorithm
             tcfConverter.writeHIATTCFToFile(trans, filename, language);
         } else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
             switch(dialog.chatExportAccessoryPanel.getMethod()){

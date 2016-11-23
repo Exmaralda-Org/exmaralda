@@ -40,7 +40,10 @@ public class TEITCFMerger {
         //XPath xp = XPath.newInstance("//metadata:textSource"); 
         //xp.addNamespace("metadata", "http://www.dspin.de/data/metadata");
         //Element textSourceElement = (Element) xp.selectSingleNode(tcfDocument);
-        Element textSourceElement = (Element) XPath.selectSingleNode(tcfDocument, "tc:textSource");
+        XPath xp = XPath.newInstance("//tc:textSource"); 
+        xp.addNamespace("tc", "http://www.dspin.de/data/textcorpus");
+        //Element textSourceElement = (Element) XPath.selectSingleNode(tcfDocument, "tc:textSource");
+        Element textSourceElement = (Element) xp.selectSingleNode(tcfDocument);
         String textSource = textSourceElement.getText();
         teiDocument = FileIO.readDocumentFromString(textSource);        
     }
@@ -68,7 +71,8 @@ public class TEITCFMerger {
     
     static String tei = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_ISO_TEI_EXPORT.xml";
     //static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_TCF_WebLichtResult_2.xml";
-    static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\NEW_IN.tcf";
+    //static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\NEW_IN.tcf";
+    static String tcf = "F:\\Dropbox\\EXMARaLDA_Build\\WEB-SERVICE-TEST\\TCF.xml";
     
     public static void main(String[] args){
         try {
@@ -76,7 +80,7 @@ public class TEITCFMerger {
             TEITCFMerger merger = new TEITCFMerger(new File(tcf));
             merger.merge();
             Document result = merger.getMergedDocument();
-            FileIO.writeDocumentToLocalFile(new File("C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_ISO_TEI_TCF_WebLichtResult_MERGED_2.xml"), result);
+            FileIO.writeDocumentToLocalFile(new File("F:\\Dropbox\\EXMARaLDA_Build\\WEB-SERVICE-TEST\\TCF_OUT.xml"), result);
         } catch (JDOMException ex) {
             Logger.getLogger(TEITCFMerger.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

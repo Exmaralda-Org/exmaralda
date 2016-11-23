@@ -15,6 +15,8 @@ public class MultimodalDialog extends javax.swing.JDialog {
     public MultimodalPanel multimodalPanel;
     /**
      * Creates new form SVGDialog
+     * @param parent
+     * @param modal
      */
     public MultimodalDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,6 +36,7 @@ public class MultimodalDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Multimodal Panel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
