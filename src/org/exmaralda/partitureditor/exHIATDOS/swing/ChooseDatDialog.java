@@ -21,7 +21,7 @@ public class ChooseDatDialog extends OpenBasicTranscriptionDialog {
     public ChooseDatDialog(String startDirectory) {
         super(startDirectory);
         setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter("dat", "HIAT-DOS Transkriptdateien"));
-        setDialogTitle("Transkriptdatei ausw‰hlen");        
+        setDialogTitle("Transkriptdatei ausw√§hlen");        
     }
     
 }

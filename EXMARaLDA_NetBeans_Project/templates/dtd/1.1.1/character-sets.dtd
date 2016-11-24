@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT character-sets (character-set+)>
+<!ATTLIST character-sets name CDATA #IMPLIED>
+
+<!ELEMENT character-set (char+)>
+<!ATTLIST character-set 	name ID #REQUIRED
+							extends IDREF #IMPLIED>
+
+<!ELEMENT char (text, tooltip?)>
+
+<!ELEMENT text (#PCDATA)>
+<!ATTLIST text 	font CDATA #IMPLIED
+				face CDATA #IMPLIED
+				size CDATA #IMPLIED
+				>
+				
+<!ELEMENT tooltip (#PCDATA)>
+<!ATTLIST tooltip 	font CDATA #IMPLIED
+					face CDATA #IMPLIED
+					size CDATA #IMPLIED
+					>
+
+
+

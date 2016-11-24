@@ -25,9 +25,9 @@ import org.jdom.xpath.XPath;
  */
 public class Merge {
 
-    String ORIGINAL = "Z:\\FOLK-Tagging\\transcripts\\Evaluation1\\FOLK_E_00076_SE_01_T_01_DF_01.fln";
-    String CORRECTED = "Z:\\FOLK-Tagging\\transcripts\\Evaluation1\\FOLK_E_00076_SE_01_T_01_DF_01_korrigiert.fln";
-    String OUT = "Z:\\FOLK-Tagging\\transcripts\\Evaluation1\\FOLK_E_00076_SE_01_T_01_DF_01_merged.fln";
+    String ORIGINAL = "Z:\\TAGGING\\TRAINING\\20151209-TAG-TAG\\TAGGING_OUTPUT\\ORIGINAL_NO_DUMMIES\\FOLK_E_00004_SE_01_T_01_DF_01_S_1.fln";
+    String CORRECTED = "Z:\\TAGGING\\GOLD-STANDARD\\ORIGINAL\\eval\\FOLK_E_00004_SE_01_T_01_DF_01_S_1.fln";
+    String OUT = "Z:\\TAGGING\\MergeOut.xml";
     static Tagset STTS;
     
     static {

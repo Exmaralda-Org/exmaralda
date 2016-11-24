@@ -37,7 +37,7 @@ public class ExtractADVADJ {
         }
     }
     
-    String INPUT = "Z:\\TAGGING\\WOE–RTERBUECHER\\DeReKo-2014-II-MainArchive-STT.100000.freq";
+    String INPUT = "Z:\\TAGGING\\WOEâ€“RTERBUECHER\\DeReKo-2014-II-MainArchive-STT.100000.freq";
     String OUTPUT = "Z:\\TAGGING\\WOERTERBUECHER\\ADVADJ.txt";
 
     HashSet<String> ADV = new HashSet<String>();

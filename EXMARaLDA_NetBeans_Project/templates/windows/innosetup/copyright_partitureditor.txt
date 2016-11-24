@@ -1,0 +1,26 @@
+EXMARaLDA
+
+This EXMARaLDA distribution contains the following software tools:
+
+Partitur Editor Version @partitureditor-version@
+Corpus Manager Version @coma-version@
+EXAKT Search tool Version @exakt-version@
+
+All tools are developed by Thomas Schmidt & Kai Wörner for
+
+Project Z2 'Computergestützte Erfassungs- und Analysemethoden multilingualer Daten'
+
+at the 
+
+SFB 538 'Multilingualism'
+Max Brauer-Allee 60
+D-22765 Hamburg
+
+The project is funded by the German Research Association (DFG).
+
+The source code is licensed under an open source license.
+
+For questions, updates etc. please consult the EXMARaLDA website:
+
+http://www.exmaralda.org
+

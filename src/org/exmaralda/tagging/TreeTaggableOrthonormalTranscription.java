@@ -27,7 +27,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
     public static String XPATH_TO_CONTRIBUTIONS = "//contribution";
     public static String XPATH_ALL_WORDS_AND_PUNCTUATION = "descendant::*[self::w or self::p]";
     public static String XPATH_NO_XY = "descendant::*[(self::w and not(@n='&')) or self::p]"; 
-    public static String XPATH_NO_DUMMIES = "descendant::*[(self::w and not(@n='&' or @n='%' or @n='§' or @n='äh')) or self::p]"; 
+    public static String XPATH_NO_DUMMIES = "descendant::*[(self::w and not(@n='&' or @n='%' or @n='Â§' or @n='Ã¤h')) or self::p]"; 
     //change 06.11.2013
     //public String xpathToTokens = "descendant::*[self::w or self::p]"; 
     public String xpathToTokens = XPATH_NO_XY;
@@ -37,10 +37,16 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
     String base;
     
     boolean basedOnNormalization;
+    
+    boolean verbose = false;
    
 
     public TreeTaggableOrthonormalTranscription(File transcription, boolean basedOnNormalization) throws JDOMException, IOException {
         this(FileIO.readDocumentFromLocalFile(transcription), transcription, basedOnNormalization);
+    }
+    
+    public void setVerbose(boolean v){
+        verbose = v;
     }
 
     public TreeTaggableOrthonormalTranscription(Document transcriptionDoc, File transcriptionFile, boolean bon) throws JDOMException, IOException {
@@ -104,6 +110,12 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
             }
         } catch (JDOMException ex) {
             throw new IOException(ex);
+        }
+        if (verbose){
+            System.out.println(result.size() + " tokens at " + pos + ": ");
+            for (String t : result){
+                System.out.println(t);
+            }
         }
         return result;
     }

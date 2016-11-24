@@ -12,13 +12,12 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 import mpi.eudico.client.annotator.ElanLayoutManager;
 
-import mpi.eudico.client.annotator.Preferences;
 import mpi.eudico.client.annotator.player.DIBToImage;
 import mpi.eudico.client.annotator.player.ElanMediaPlayer;
-import mpi.eudico.client.annotator.player.JMMFMediaPlayer;
 import mpi.eudico.client.annotator.player.NoPlayerException;
 import mpi.eudico.client.annotator.player.VideoFrameGrabber;
 import mpi.eudico.client.mediacontrol.ControllerEvent;
@@ -73,8 +72,12 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
 	//private int vx = 0, vy = 0, vw = 0, vh = 0;
 	private int dragX = 0, dragY = 0;
 	private int SET_MT_TIMEOUT = 1000;
+        
+        private static final int DEFAULT_WIDTH = 480;
+        private static final int DEFAULT_HEIGHT = 320;
 	
 	private final ReentrantLock syncLock = new ReentrantLock();
+        
 	
 	/**
 	 * Constructor.
@@ -124,24 +127,25 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
             }
 	}
 	
-        @Override
-	public void cleanUpOnClose() {
-		if (jmmfPlayer != null) {
-			if (endTimeWatcher != null) {
-				endTimeWatcher.close();
-			}
-			if (jmmfPanel != null) {
-				jmmfPanel.setPlayer(null);
-			}
-			
-			jmmfPlayer.cleanUpOnClose();
-			jmmfPlayer = null;//make sure no more calls are made to this player
-		}
+    @Override
+    public void cleanUpOnClose() {
+        if (jmmfPlayer != null) {
+                if (endTimeWatcher != null) {
+                        endTimeWatcher.close();
+                }
+                if (jmmfPanel != null) {
+                        jmmfPanel.setPlayer(null);
+                }
 
-	}
+                jmmfPlayer.cleanUpOnClose();
+                jmmfPlayer = null;//make sure no more calls are made to this player
+        }
+
+    }
 
 	/**
 	 * Returns the aspect ratio.
+        * @return 
 	 */
         @Override
 	public float getAspectRatio() {
@@ -230,31 +234,43 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
 
         @Override
 	public int getSourceHeight() {
-		if (jmmfPlayer != null) {
-			return jmmfPlayer.getSourceHeight();
-		}
-		return 0;
+            if (jmmfPlayer != null) {
+                    if (jmmfPlayer.isVisualMedia() && jmmfPlayer.getSourceHeight() <= 1) {
+                            System.out.println("Height not initialized yet");
+                            return DEFAULT_HEIGHT;
+                    }
+                    return jmmfPlayer.getSourceHeight();
+            }
+            return 0;
 	}
 
         @Override
 	public int getSourceWidth() {
-		if (jmmfPlayer != null) {
-			return jmmfPlayer.getSourceWidth();
-		}
-		return 0;
+            if (jmmfPlayer != null) {
+                    if (jmmfPlayer.isVisualMedia() && jmmfPlayer.getSourceWidth() <= 1) {
+                            System.out.println("Width not initialized yet");
+                            return DEFAULT_WIDTH;
+                    }
+                    return jmmfPlayer.getSourceWidth();
+            }
+            return 0;
 	}
 
 	/**
 	 * After the first time this is called the panel will be added to a window,
 	 * upon which the player will be initialized fully.
+         * @return 
 	 */
         @Override
 	public Component getVisualComponent() {
-		if (!isInited) {
-                    System.out.println("Is not inited");
-                    new StrippedJMMFMediaPlayer.InitWaitThread().start();
-		}
-		return jmmfPanel;
+            if (!isInited) {
+                System.out.println("Is not inited");
+                InitWaitThread initWaitThread = new StrippedJMMFMediaPlayer.InitWaitThread();
+                //HEY HO BERND THE BUILDER!
+                //Can I wait here until initWaitThread has returned?
+                initWaitThread.start();
+            }
+            return jmmfPanel;
 	}
 
         @Override
@@ -360,52 +376,57 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
         }
     }*/
 
-        @Override
-	public void playInterval(long startTime, long stopTime) {
-		if (jmmfPlayer != null) {
-			if (jmmfPlayer.isPlaying()) {
-				stop();
-			}
-			setStopTime(stopTime);
-			if (getMediaTime() != startTime + offset) {
-				setMediaTimeAndWait(startTime);
-			}
-			startInterval();
-		}
+    /**
+     * @param startTime
+     * @param stopTime
+     */
+    @Override
+    public void playInterval(long startTime, long stopTime) {
+        if (jmmfPlayer != null) {
+                if (jmmfPlayer.isPlaying()) {
+                        stop();
+                }
+                setStopTime(stopTime);
+                System.out.println(System.currentTimeMillis() + ": Stop time set to " + stopTime);
+                if (getMediaTime() != startTime + offset) {
+                        setMediaTimeAndWait(startTime);
+                }
+                startInterval();
+        }
 
-	}
+    }
 	
-	void startInterval() {
-		if (jmmfPlayer != null) {
-			if (jmmfPlayer.isPlaying()) {
-				return;
-			}
-	        syncLock.lock();
-	        try {
-		        // create a PlayerEndWatcher thread
-		        if (stopThread != null && stopThread.isAlive()) {
-		        	stopThread.setStopped();
-		        }
-		        int sleepTime = 200;	        
-		        if (jmmfPlayer.isSynchronousMode()) {
-		        	sleepTime = 20;
-		        }
-		        
-		        stopThread = new StrippedJMMFMediaPlayer.PlayerStateWatcher(sleepTime);
-		        if (jmmfPlayer.isSynchronousMode()) {
-		        	jmmfPlayer.start();
-		        	startControllers();
-		        	stopThread.start();
-		        } else {
-			        stopThread.start();		        
-			        jmmfPlayer.start();
-			        startControllers();
-		        }
-	        } finally {
-	        	syncLock.unlock();
-	        }
-		}
-	}
+    void startInterval() {
+        if (jmmfPlayer != null) {
+                    if (jmmfPlayer.isPlaying()) {
+                            return;
+                    }
+            syncLock.lock();
+            try {
+                    // create a PlayerEndWatcher thread
+                    if (stopThread != null && stopThread.isAlive()) {
+                            stopThread.setStopped();
+                    }
+                    int sleepTime = 200;	        
+                    if (jmmfPlayer.isSynchronousMode()) {
+                            sleepTime = 20;
+                    }
+
+                    stopThread = new StrippedJMMFMediaPlayer.PlayerStateWatcher(sleepTime);
+                    if (jmmfPlayer.isSynchronousMode()) {
+                            jmmfPlayer.start();
+                            startControllers();
+                            stopThread.start();
+                    } else {
+                            stopThread.start();		        
+                            jmmfPlayer.start();
+                            startControllers();
+                    }
+            } finally {
+                    syncLock.unlock();
+            }
+        }
+    }
 
         @Override
 	public void previousFrame() {
@@ -454,78 +475,85 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
 		}
 	}*/
 
-        @Override
-	public void setMediaTime(long time) {
-		if (jmmfPlayer != null) {
-			// works a bit better than just setting the position
+    @Override
+    public void setMediaTime(long time) {
+        if (jmmfPlayer != null) {
+                // works a bit better than just setting the position
 //			if (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value){
 //				return;
 //			}
-			if (jmmfPlayer.isPlaying()) {
-				stop();
-			}
-			if (time < 0) {
-				time = 0;
-			}
-			if (time > duration - eomBuffer) {
-				time = duration - eomBuffer;
-			}
+                if (jmmfPlayer.isPlaying()) {
+                        stop();
+                }
+                if (time < 0) {
+                        time = 0;
+                }
+                if (time > duration - eomBuffer) {
+                        time = duration - eomBuffer;
+                }
 
-			// blocking
-			jmmfPlayer.setMediaTime(time + offset);
-			if (!jmmfPlayer.isSynchronousMode()) {
-				long curTime = System.currentTimeMillis();
-				while (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value) {
-					try {
-						Thread.sleep(5);
-					} catch (InterruptedException ie){}
-					if (System.currentTimeMillis() - curTime > SET_MT_TIMEOUT) {
-	//					System.out.println("Set MT: time out");
-						break;
-					}
-				}
-			}
-			//System.out.println("Set MT: " + (System.currentTimeMillis() - curTime));
-			setControllersMediaTime(time);
+                // blocking
+                jmmfPlayer.setMediaTime(time + offset);
+                if (!jmmfPlayer.isSynchronousMode()) {
+                        long curTime = System.currentTimeMillis();
+                        while (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value) {
+                                try {
+                                        Thread.sleep(5);
+                                } catch (InterruptedException ie){}
+                                if (System.currentTimeMillis() - curTime > SET_MT_TIMEOUT) {
+					System.out.println("[setMediaTime] time out");
+                                        break;
+                                }
+                        }
+                }
+            //System.out.println("Set MT: " + (System.currentTimeMillis() - curTime));
+            setControllersMediaTime(time);
+            System.out.println(System.currentTimeMillis() + ": [setMediaTime] Start time set to " + time);
 
-		}
-	}
+        }
+    }
 
-	private void setMediaTimeAndWait(long time) {
-		//System.out.println("T: " + time);
-		if (jmmfPlayer != null) {
-			// works a bit better than just setting the position
-//			if (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value){
-//				return;
-//			}
-			if (jmmfPlayer.isPlaying()) {
-				stop();
-			}
-			if (time < 0) {
-				time = 0;
-			}
-			// don't check for the margin at the end of media
-			if (time > duration /* - eomBuffer*/) {
-				time = duration /* - eomBuffer*/;
-			}
-			
-			jmmfPlayer.setMediaTime(time + offset);
-			if (!jmmfPlayer.isSynchronousMode()) {
-				long sysTime = System.currentTimeMillis();
-				
-				while (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value) {
-					try {
-						Thread.sleep(5);
-					} catch (InterruptedException ie){}
-					
-					if (System.currentTimeMillis() - sysTime > SET_MT_TIMEOUT) {
-						break;
-					}
-				}
-			}
-			setControllersMediaTime(time);
-		}
-	}
+    /**
+     * 
+     * @param time 
+     */
+    private void setMediaTimeAndWait(long time) {
+        if (jmmfPlayer != null) {
+                // works a bit better than just setting the position
+                // if (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value){
+                // return;
+                //			}
+                if (jmmfPlayer.isPlaying()) {
+                        stop();
+                }
+                if (time < 0) {
+                        time = 0;
+                }
+                // don't check for the margin at the end of media
+                if (time > duration /* - eomBuffer*/) {
+                        time = duration /* - eomBuffer*/;
+                }
+
+                jmmfPlayer.setMediaTime(time + offset);
+                if (!jmmfPlayer.isSynchronousMode()) {
+                        long sysTime = System.currentTimeMillis();
+
+                        while (jmmfPlayer.getState() == JMMFPlayer.PlayerState.SEEKING.value) {
+                                try {
+                                    Thread.sleep(5);
+                                } catch (InterruptedException ie){}
+
+                                if (System.currentTimeMillis() - sysTime > SET_MT_TIMEOUT) {
+					System.out.println("[setMediaTimeAndWait] time out");
+                                        break;
+                                }
+                        }
+                }
+                setControllersMediaTime(time);
+                System.out.println(System.currentTimeMillis() + ": [setMediaTimeAndWait] Start time set to " + time);
+
+        }
+    }
 
         @Override
 	public void setMilliSecondsPerSample(long milliSeconds) {
@@ -537,16 +565,16 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
         @Override
 	public void setOffset(long offset) {
 		long diff = this.offset - offset;
-        this.offset = offset;
-        mediaDescriptor.timeOrigin = offset;
-        if (jmmfPlayer != null) {
-			if (origDuration == 0) {
-				origDuration = jmmfPlayer.getDuration();
-			}
-        	duration = origDuration - offset;
-        }
-        stopTime += diff;
-        setStopTime(stopTime);//??
+                this.offset = offset;
+                mediaDescriptor.timeOrigin = offset;
+                if (jmmfPlayer != null) {
+                                if (origDuration == 0) {
+                                        origDuration = jmmfPlayer.getDuration();
+                                }
+                        duration = origDuration - offset;
+                }
+                stopTime += diff;
+                setStopTime(stopTime);//??
 	}
 
         @Override
@@ -563,7 +591,7 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
         @Override
 	public void setStopTime(long stopTime) {
 		this.stopTime = stopTime;
-        // see if the stop time must be increased to ensure correct frame rendering at a frame boundary
+                // see if the stop time must be increased to ensure correct frame rendering at a frame boundary
 		double msps = getMilliSecondsPerSample();
 		if (msps != 0.0) {
 	        long nFrames = (long) ((stopTime + offset) / msps);
@@ -782,6 +810,22 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    // added 21-11-2016
+    // Experiment!
+    private ArrayList<StrippedJMMFMediaPlayerListener> listeners = new ArrayList<StrippedJMMFMediaPlayerListener>();
+    
+    public void addStrippedJMMFMediaPlayerListener(StrippedJMMFMediaPlayerListener l){
+        listeners.add(l);
+    }
+    
+    void firePlayerInitialised(){
+        for (StrippedJMMFMediaPlayerListener listener : listeners){
+            listener.jmmfPlayerInitialised();
+        }            
+    } 
+    
+    // end experiment
 
 	
 //##############
@@ -904,7 +948,17 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
 					setVolume(cachedVolume);
 					setRate(cachedRate);
 					//layoutManager.doLayout();
-					break;
+                                        
+                                        //HEY HO BERND THE BUILDER!
+                                        //Added these lines to see if it makes a difference
+                                        // It doesn't
+                                        //jmmfPlayer.setMediaTime(0);
+                                        //jmmfPlayer.setStopTime(100);
+                                        //jmmfPlayer.start();
+                                        //jmmfPlayer.stop();
+                                        playInterval(0,50);
+					
+                                        break;
 				}
 				try {
 					Thread.sleep(200);
@@ -915,6 +969,11 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
 					break;
 				}
 			} while (true);
+                        
+                        //HEY HO BERND THE BUILDER!
+                        //now could be the time to adjust the size of the video
+                        System.out.println(System.currentTimeMillis() + ": Exiting InitWaitThread");
+                        firePlayerInitialised();
 		}
 	}
 	

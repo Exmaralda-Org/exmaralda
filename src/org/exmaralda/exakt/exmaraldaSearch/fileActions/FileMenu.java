@@ -27,7 +27,7 @@ public class FileMenu extends javax.swing.JMenu {
         exaktFrame = ef;
         add(exaktFrame.openCorpusAction);
         add(exaktFrame.openRemoteCorpusAction);
-        add(exaktFrame.openDBCorpusAction);
+        //add(exaktFrame.openDBCorpusAction);
         addSeparator();
         add(exaktFrame.generateCorpusAction);
         add(exaktFrame.generateFolkerCorpusAction).setToolTipText("Generate a corpus from FOLKER transcriptions");

@@ -40,7 +40,10 @@ public class ExportAction extends AbstractApplicationAction {
     ParameterFileFilter srtFileFilter = new ParameterFileFilter("srt", "SRT subtitles (*.srt)");
     ParameterFileFilter subtitlePlainTextFileFilter = new ParameterFileFilter("txt", "Plain text subtitles (*.txt)");
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public ExportAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
@@ -82,6 +85,7 @@ public class ExportAction extends AbstractApplicationAction {
             } else if (fileChooser.getFileFilter()==teiFileFilter){
                 Document flnDoc = ac.getTranscription().getDocument();
                 TEIConverter converter = new TEIConverter();
+                converter.setLanguage("de");
                 converter.writeFOLKERISOTEIToFile(flnDoc, f.getAbsolutePath()); 
             } else if (fileChooser.getFileFilter()==tcfFileFilter){
                 Document flnDoc = ac.getTranscription().getDocument();

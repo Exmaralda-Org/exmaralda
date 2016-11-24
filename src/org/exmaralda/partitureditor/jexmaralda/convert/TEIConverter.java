@@ -33,6 +33,7 @@ import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.data.GATParser;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
+import org.jdom.Attribute;
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -58,7 +59,10 @@ public class TEIConverter {
     public static final int ISO_GENERIC_METHOD = 6;
     public static final int HIAT_ISO_METHOD = 7;
     public static final int CGAT_MINIMAL_ISO_METHOD = 8;
+    public static final int ISO_EVENT_TOKEN_METHOD = 9;
 
+    
+    String language = "en";
     
     /** Creates a new instance of TEIConverter */
     public TEIConverter() {
@@ -67,6 +71,11 @@ public class TEIConverter {
     /** Creates a new instance of TEIConverter */
     public TEIConverter(String ss) {
         STYLESHEET_PATH = ss;
+    }
+    
+    public void setLanguage(String l){
+        language = l;
+        System.out.println("Language of converter set to " + language);
     }
 
     public BasicTranscription readTEIFromFile(String path) throws SAXException, JDOMException, IOException { 
@@ -93,6 +102,7 @@ public class TEIConverter {
         }
     }
     
+    @Deprecated
     public String BasicTranscriptionToTEI(BasicTranscription bt) throws SAXException,
                                                                         IOException,
                                                                         ParserConfigurationException,
@@ -102,6 +112,7 @@ public class TEIConverter {
         return BasicTranscriptionToTEI(bt, false);
     }
 
+    @Deprecated
     public String BasicTranscriptionToTEI(BasicTranscription bt, boolean callBracketReplacer) throws SAXException,
                                                                                                      IOException,
                                                                                                      ParserConfigurationException,
@@ -121,6 +132,7 @@ public class TEIConverter {
         return result;
     }
     
+    @Deprecated
     public void writeTEIToFile(BasicTranscription bt, String path, int method) throws SAXException, 
                                                                                       IOException, 
                                                                                       ParserConfigurationException, 
@@ -150,9 +162,19 @@ public class TEIConverter {
     public void writeGenericISOTEIToFile(BasicTranscription bt, String path) throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
         StylesheetFactory sf = new StylesheetFactory(true);
         String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2isotei.xsl", bt.toXML());
-        Document d = IOUtilities.readDocumentFromString(result);
-        IOUtilities.writeDocumentToLocalFile(path, d);
+        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        setDocLanguage(teiDoc, language);        
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc);
     }
+    
+    public void writeEventTokenISOTEIToFile(BasicTranscription bt, String path)  throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
+        StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2isotei_eventToken.xsl", bt.toXML());
+        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        setDocLanguage(teiDoc, language);        
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+    }
+    
 
     public void writeHIATISOTEIToFile(BasicTranscription bt, String filename) throws SAXException,
                                                                               FSMException,
@@ -188,6 +210,7 @@ public class TEIConverter {
                 includeFullText);
         System.out.println("Merged");
         generateWordIDs(teiDoc);
+        setDocLanguage(teiDoc, language);
         FileIO.writeDocumentToLocalFile(filename, teiDoc);
         System.out.println("document written.");        
     }
@@ -216,6 +239,7 @@ public class TEIConverter {
         Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
         System.out.println("Merged");
         generateWordIDs(teiDoc);
+        setDocLanguage(teiDoc, language);        
         FileIO.writeDocumentToLocalFile(filename, teiDoc);
         System.out.println("document written.");        
     }
@@ -236,17 +260,19 @@ public class TEIConverter {
         }
         StylesheetFactory sf = new StylesheetFactory(true);
         String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2isotei.xsl", IOUtilities.documentToString(doc));
-        Document d = IOUtilities.readDocumentFromString(result);
-        generateWordIDs(d);
-        IOUtilities.writeDocumentToLocalFile(path, d);                
+        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        generateWordIDs(teiDoc);
+        setDocLanguage(teiDoc, language);                
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc);                
     }
     
     public void writeFOLKERISOTEIToFile(Document flnDoc, String absolutePath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException {
         StylesheetFactory sf = new StylesheetFactory(true);
         String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2isotei.xsl", IOUtilities.documentToString(flnDoc));
-        Document d = IOUtilities.readDocumentFromString(result);
-        generateWordIDs(d);
-        IOUtilities.writeDocumentToLocalFile(absolutePath, d);                
+        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        generateWordIDs(teiDoc);
+        setDocLanguage(teiDoc, language);                
+        IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc);                
     }
     
     
@@ -257,6 +283,7 @@ public class TEIConverter {
     
     /** transforms the basic transcription and writes a TEI file to path
      * according to the method described in Schmidt 2005 */
+    @Deprecated
     public void writeTEIToFile(BasicTranscription bt, String path) throws SAXException,
                                                                           IOException, 
                                                                           ParserConfigurationException, 
@@ -273,6 +300,7 @@ public class TEIConverter {
 
     /** transforms the basic transcription and writes a TEI file to path
      * according to the method described by Natacha Niemants (Modena) */
+    @Deprecated
     public void writeModenaTEIToFile(BasicTranscription bt, String path) throws SAXException,
                                                                                 IOException,
                                                                                 ParserConfigurationException,
@@ -287,6 +315,7 @@ public class TEIConverter {
         System.out.println("document written.");
     }
 
+    @Deprecated
     public void writeHIATTEIToFile(BasicTranscription bt, String path) throws SAXException, 
                                                                               FSMException, 
                                                                               XSLTransformException, 
@@ -308,6 +337,7 @@ public class TEIConverter {
         System.out.println("document written.");                
     }
 
+    @Deprecated
     public void writeNewHIATTEIToFile(BasicTranscription bt, String filename) throws SAXException,
                                                                               FSMException,
                                                                               XSLTransformException,
@@ -317,6 +347,7 @@ public class TEIConverter {
         writeNewHIATTEIToFile(bt, filename, true);
     }
 
+    @Deprecated
     public void writeNewHIATTEIToFile(BasicTranscription bt, String filename, boolean generateWordIDs) throws SAXException,
                                                                               FSMException,
                                                                               XSLTransformException,
@@ -349,6 +380,7 @@ public class TEIConverter {
     }
 
     
+    @Deprecated
     public void writeFOLKERTEIToFile(BasicTranscription bt, String path) throws SAXException, 
                                                                                 ParserConfigurationException, 
                                                                                 IOException, 
@@ -370,6 +402,7 @@ public class TEIConverter {
         IOUtilities.writeDocumentToLocalFile(path, d);                
     }
 
+    @Deprecated
     public void writeGenericTEIToFile(BasicTranscription bt, String path) throws SAXException,
                                                                                 ParserConfigurationException,
                                                                                 JDOMException,
@@ -550,6 +583,26 @@ public class TEIConverter {
 
         return org.exmaralda.common.jdomutilities.IOUtilities.documentToString(doc,false);
     }
+
+    private void setDocLanguage(Document teiDoc, String language) throws JDOMException {
+        // /TEI/text[1]/@*[namespace-uri()='http://www.w3.org/XML/1998/namespace' and local-name()='lang']
+        XPath xpathToLangAttribute = XPath.newInstance("//tei:text/@xml:lang");
+        xpathToLangAttribute.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        xpathToLangAttribute.addNamespace(Namespace.XML_NAMESPACE);
+        Attribute langAtt = (Attribute) xpathToLangAttribute.selectSingleNode(teiDoc);
+        if (langAtt!=null){
+            langAtt.setValue(language);
+        } else {
+            XPath xpathToTextElement = XPath.newInstance("//tei:text");
+            xpathToTextElement.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+            xpathToTextElement.addNamespace(Namespace.XML_NAMESPACE);
+            Element textEl = (Element) xpathToTextElement.selectSingleNode(teiDoc);
+            textEl.setAttribute("lang", language, Namespace.XML_NAMESPACE);
+        }
+        System.out.println("Language of document set to " + language);
+        
+    }
+
 
 
 

@@ -37,6 +37,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         addChoosableFileFilter(FOLKERTranscriptionFileFilter);
         addChoosableFileFilter(CHATTranscriptFileFilter);
         addChoosableFileFilter(TranscriberFileFilter);
+        addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
         addChoosableFileFilter(WinPitchFileFilter);
         addChoosableFileFilter(AnvilFileFilter);
         addChoosableFileFilter(TASXFileFilter);

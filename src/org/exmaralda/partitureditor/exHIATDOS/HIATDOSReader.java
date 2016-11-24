@@ -118,12 +118,12 @@ public class HIATDOSReader extends Vector {
         if (recordingDuration.length()>0) udinfo.setAttribute("Aufnahme:Dauer", recordingDuration);
         if (zaehlwerkStart.length()>0) udinfo.setAttribute("Aufnahme:Zaehlwerk:Start", zaehlwerkStart);
         if (zaehlwerkEnd.length()>0) udinfo.setAttribute("Aufnahme:Zaehlwerk:End", zaehlwerkEnd);
-        if (aufnahmeGeraet.length()>0) udinfo.setAttribute("Aufnahme:Ger�t", aufnahmeGeraet);
+        if (aufnahmeGeraet.length()>0) udinfo.setAttribute("Aufnahme:Gerät", aufnahmeGeraet);
         if (transkribent.length()>0) udinfo.setAttribute("Transkribent", transkribent);
-        if (transVerh.length()>0) udinfo.setAttribute("Transkribent:Verh�ltnis", transVerh);
+        if (transVerh.length()>0) udinfo.setAttribute("Transkribent:Verhältnis", transVerh);
         if (transDatum.length()>0) udinfo.setAttribute("Transkribent:Datum", transDatum);
         if (korrektor.length()>0) udinfo.setAttribute("Korrektor", korrektor);
-        if (korrVerh.length()>0) udinfo.setAttribute("Korrektor:Verh�ltnis", korrVerh);
+        if (korrVerh.length()>0) udinfo.setAttribute("Korrektor:Verhältnis", korrVerh);
         if (korrDatum.length()>0) udinfo.setAttribute("Korrektor:Datum", korrDatum);
         if (copyright.length()>0) udinfo.setAttribute("Copyright", copyright);
         

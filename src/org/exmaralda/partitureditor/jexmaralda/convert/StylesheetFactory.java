@@ -149,6 +149,7 @@ public class StylesheetFactory {
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
+        
         java.io.StringReader sr = new java.io.StringReader(sourceString);
         javax.xml.transform.stream.StreamSource ss = new javax.xml.transform.stream.StreamSource(sr);
 

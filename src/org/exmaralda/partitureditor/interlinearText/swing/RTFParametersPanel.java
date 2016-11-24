@@ -54,7 +54,7 @@ public class RTFParametersPanel extends javax.swing.JPanel {
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setText("Critical size percentage: ");
-        jLabel1.setToolTipText("Kritische Gr��e f�r Ereignis-Text");
+        jLabel1.setToolTipText("Kritische Größe für Ereignis-Text");
         jPanel1.add(jLabel1);
 
         criticalSizeSlider.setMajorTickSpacing(1);

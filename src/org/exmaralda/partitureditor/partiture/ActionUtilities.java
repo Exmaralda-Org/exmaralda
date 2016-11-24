@@ -50,6 +50,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("FreeStylesheet")) {dialog.setFileFilter(dialog.FreeStylesheetFileFilter);}
             else if (lastFileFilter.equals("HTMLPartiturFlash")) {dialog.setFileFilter(dialog.HTMLPartiturWithFlashFileFilter);}
             else if (lastFileFilter.equals("HTML5Partitur")) {dialog.setFileFilter(dialog.HTMLPartiturWithHTML5AudioFileFilter);}
+            else if (lastFileFilter.equals("HTML5PartiturSVG")) {dialog.setFileFilter(dialog.HTMLPartiturWithSVGFileFilter);}
             else if (lastFileFilter.equals("HTMLListFlash")) {dialog.setFileFilter(dialog.HTMLSegmentChainWithFlashFileFilter);}
             else if (lastFileFilter.equals("HTML5List")) {dialog.setFileFilter(dialog.HTMLSegmentChainWithHTML5AudioFileFilter);}
             else if (lastFileFilter.equals("ExmaraldaSegmented")) {dialog.setFileFilter(dialog.ExmaraldaSegmentedTranscriptionFileFilter);}
@@ -91,6 +92,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.TextFileFilter) {lastFileFilter = "Text";}
             else if (selectedFileFilter==dialog.exSyncFileFilter) {lastFileFilter = "exSync";}
             else if (selectedFileFilter==dialog.HTMLPartiturFileFilter) {lastFileFilter = "HTMLPartitur";}
+            else if (selectedFileFilter==dialog.HTMLPartiturWithSVGFileFilter) {lastFileFilter = "HTMLPartiturSVG";}
             else if (selectedFileFilter==dialog.RTFPartiturFileFilter) {lastFileFilter = "RTFPartitur";}
             else if (selectedFileFilter==dialog.SVGPartiturFileFilter) {lastFileFilter = "SVGPartitur";}
             else if (selectedFileFilter==dialog.XMLPartiturFileFilter) {lastFileFilter = "XMLPartitur";}

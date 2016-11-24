@@ -92,6 +92,8 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                     jmfp.updateVideo(selectionEnd/1000.0);
                 }
             } else if (player instanceof MMFPlayer){
+                //HEY HO BERND THE BUILDER!
+                //Timeview cursor update may cause problems?
                 MMFPlayer jmfp = (MMFPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
                     jmfp.updateVideo(selectionStart/1000.0);

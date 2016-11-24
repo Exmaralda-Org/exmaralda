@@ -80,7 +80,7 @@ public class ComaTableModel extends AbstractTableModel {
 			data.clear();
 		} else {
 			System.err.println(
-				"Bitte ComaTableModel.setRowCount(int rowCount) für rowCount>0 implementieren!");
+				"Bitte ComaTableModel.setRowCount(int rowCount) fÃ¼r rowCount>0 implementieren!");
 			System.exit(1);
 		}
 

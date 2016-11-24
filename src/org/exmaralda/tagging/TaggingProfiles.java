@@ -50,9 +50,7 @@ public class TaggingProfiles {
     }
 
     public static void writePreferences(String directory,
-            String parameterFile, String parameterFileEncoding, String[] options,
-            String taggingProfileName, boolean writeSextant, boolean integrateSextant, String sextantSuffix) {
-
+            String parameterFile, String parameterFileEncoding, String[] options) {
             Preferences preferences = java.util.prefs.Preferences.userRoot().node(PREFERENCES_NODE);
             preferences.put("directory", directory);
             preferences.put("parameter-file", parameterFile);
@@ -66,6 +64,16 @@ public class TaggingProfiles {
                     preferences.putBoolean("token-option", true);
                 }
             }
+        
+    }
+
+    public static void writePreferences(String directory,
+            String parameterFile, String parameterFileEncoding, String[] options,
+            String taggingProfileName, boolean writeSextant, boolean integrateSextant, String sextantSuffix) {
+            
+            writePreferences(directory, parameterFile, parameterFileEncoding, options);
+
+            Preferences preferences = java.util.prefs.Preferences.userRoot().node(PREFERENCES_NODE);
             preferences.put("tagging-profile-name", taggingProfileName);
             preferences.putBoolean("write-sextant", writeSextant);
             preferences.putBoolean("integrate-sextant", integrateSextant);

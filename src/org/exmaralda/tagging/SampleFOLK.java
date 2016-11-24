@@ -50,7 +50,7 @@ public class SampleFOLK {
             String[] INTERVIEWS = sampleFOLK.find("Sprachbiografisches Interview");
             allSamples.addAll(sampleFOLK.sample(INTERVIEWS, 1, 1000, "INTERVIEW"));
 
-            String[] PRUEFUNG = sampleFOLK.find("Prüfungsgespräch in der Hochschule");
+            String[] PRUEFUNG = sampleFOLK.find("PrÃ¼fungsgesprÃ¤ch in der Hochschule");
             allSamples.addAll(sampleFOLK.sample(PRUEFUNG, 1, 500, "PRUEFUNG"));
 
             String[] BERUFSSCHULE = sampleFOLK.find("Unterrichtsstunde in der Berufsschule");
@@ -59,7 +59,7 @@ public class SampleFOLK {
             String[] WGYM = sampleFOLK.find("Unterrichtsstunde im Wirtschaftsgymnasium");
             allSamples.addAll(sampleFOLK.sample(WGYM, 1, 500, "WIRTSCHAFTSGYMNASIUM"));
 
-            String[] SCHICHT = sampleFOLK.find("Schichtübergabe in einem Krankenhaus");
+            String[] SCHICHT = sampleFOLK.find("SchichtÃ¼bergabe in einem Krankenhaus");
             allSamples.addAll(sampleFOLK.sample(SCHICHT, 1, 1000, "SCHICHTUEBERGABE"));
 
             String[] TRAINING = sampleFOLK.find("Training in einer Hilfsorganisation");
@@ -72,7 +72,7 @@ public class SampleFOLK {
             allSamples.addAll(sampleFOLK.sample(LLFB, 1, 1000, "LEHRER_LEHRER-FEEDBACK"));
             
             String[] UMRA = {"FOLK_E_00133"};
-            allSamples.addAll(sampleFOLK.sample(UMRA, 1, 1000, "UMRÄUMEN"));
+            allSamples.addAll(sampleFOLK.sample(UMRA, 1, 1000, "UMRÃ„UMEN"));
 
             String[] SIN = {"FOLK_E_00161"};
             allSamples.addAll(sampleFOLK.sample(SIN, 2, 1000, "SIN"));
@@ -83,10 +83,10 @@ public class SampleFOLK {
             String[] SPIEL_KINDER = {"FOLK_E_00010", "FOLK_E_00011", "FOLK_E_00012"};
             allSamples.addAll(sampleFOLK.sample(SPIEL_KINDER, 1, 500, "SPIEL_KINDER"));
 
-            String[] VORLESEN_KINDER = sampleFOLK.find("Vorlesen für Kinder");
+            String[] VORLESEN_KINDER = sampleFOLK.find("Vorlesen fÃ¼r Kinder");
             allSamples.addAll(sampleFOLK.sample(VORLESEN_KINDER, 1, 500, "VORLESEN_KINDER"));
 
-            String[] POLIZEI = sampleFOLK.find("Gespräch im Polizeirevier");
+            String[] POLIZEI = sampleFOLK.find("GesprÃ¤ch im Polizeirevier");
             allSamples.addAll(sampleFOLK.sample(POLIZEI, 1, 200, "POLIZEI"));
             
             Document resultDocument = new Document(new Element("samples"));

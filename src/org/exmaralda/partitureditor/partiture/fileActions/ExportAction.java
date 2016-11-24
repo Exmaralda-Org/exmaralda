@@ -59,7 +59,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         String filename = selectedFile.getAbsolutePath();
         
         //check whether or not the selected file has an extension
-        if (!(selectedFile.getName().indexOf(".")>=0)){
+        if (!selectedFile.getName().contains(".")){
             filename+="." + selectedFileFilter.getSuffix();
         }
         
@@ -124,16 +124,24 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     break;
                 case TEIConverter.CGAT_METHOD :
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     // changed 16-01-2015: ISO!
                     ec.writeFOLKERISOTEIToFile(trans, filename);
                     break;
                 case TEIConverter.ISO_GENERIC_METHOD :
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     ec.writeGenericISOTEIToFile(trans, filename);                    
                     break;
                 case TEIConverter.HIAT_ISO_METHOD :
                     ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     ec.writeHIATISOTEIToFile(trans, filename);                    
+                    break;
+                case TEIConverter.ISO_EVENT_TOKEN_METHOD :    
+                    ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
+                    ec.writeEventTokenISOTEIToFile(trans, filename);                    
                     break;
             }
         } else if (selectedFileFilter==dialog.TEIModenaFileFilter){
@@ -142,6 +150,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.TCFFileFilter){
             String language = (String) dialog.tcfExportAccessoryPanel.languageComboBox.getSelectedItem();
             TCFConverter tcfConverter = new TCFConverter();
+            // issue # : user must be able to choose the segmentation algorithm
             tcfConverter.writeHIATTCFToFile(trans, filename, language);
         } else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
             switch(dialog.chatExportAccessoryPanel.getMethod()){

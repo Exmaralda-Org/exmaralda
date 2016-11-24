@@ -337,7 +337,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         searchExpressionPanel.setLayout(new javax.swing.BoxLayout(searchExpressionPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        searchTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RegEx (T)", "RegEx (A)", "RegEx (D)", "XPath (T)", "XSL" }));
+        searchTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "RegEx (Transcription)", "RegEx (Annotations)", "RegEx (Descriptions)", "XPath (T)", "XSL" }));
         searchTypeComboBox.setToolTipText("Search Type");
         searchTypeComboBox.setMaximumSize(new java.awt.Dimension(300, 31));
         searchTypeComboBox.setMinimumSize(new java.awt.Dimension(80, 31));

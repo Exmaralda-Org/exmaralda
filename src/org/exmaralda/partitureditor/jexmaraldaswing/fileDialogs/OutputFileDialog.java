@@ -47,6 +47,7 @@ public final class OutputFileDialog extends AbstractFileFilterDialog implements 
         addChoosableFileFilter(RTFPartiturFileFilter);
         addChoosableFileFilter(HTMLSegmentChainFileFilter);
         addChoosableFileFilter(HTMLSegmentChainWithHTML5AudioFileFilter);
+        addChoosableFileFilter(HTMLPartiturWithSVGFileFilter);
         addChoosableFileFilter(GATTranscriptFileFilter);
         addChoosableFileFilter(GATWithHTML5AudioFileFilter);
         addChoosableFileFilter(SimpleTextTranscriptFileFilter);

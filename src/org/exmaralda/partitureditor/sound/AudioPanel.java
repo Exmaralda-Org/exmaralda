@@ -692,6 +692,12 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                  sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
                  System.out.println("CocoaQTPlayer says the movie " + new File(filename).getName() 
                          + " has width " + sourceWidth + " and  height " + sourceHeight);
+            } else if (getPlayer() instanceof MMFPlayer) {
+                 MMFPlayer cqtp = (MMFPlayer)getPlayer();
+                 sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
+                 sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
+                 System.out.println("MMFPlayer says the movie " + new File(filename).getName() 
+                         + " has width " + sourceWidth + " and  height " + sourceHeight);
             } else {
                 // this includes JMF and the other, more shitty like, players
                 videoDisplayPanel.add(c);
@@ -712,7 +718,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 JMFPlayer jmfp = (JMFPlayer)getPlayer();                
                 grabButton.setEnabled(jmfp.fgc!=null);
                 cutButton.setEnabled(AudioProcessor.isCuttable(filename));                
-            } else if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof CocoaQTPlayer){
+            } else if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof CocoaQTPlayer || getPlayer() instanceof MMFPlayer){
                 videoDisplayPanel.add(c);
                 videoDisplayPanel.setPreferredSize(c.getPreferredSize());
                 grabButton.setEnabled(true);

@@ -264,7 +264,7 @@ public class SearchPanel extends javax.swing.JPanel implements DocumentListener 
         if (!regexCheckBox.isSelected()) return;
         try {
             Pattern.compile(searchStringTextField.getText());
-            searchStringTextField.setToolTipText("Regul‰rer Ausdruck OK");
+            searchStringTextField.setToolTipText("Regul√§rer Ausdruck OK");
             searchStringTextField.setForeground(Color.BLACK);
             searchButton.setEnabled(true);
         } catch (PatternSyntaxException pex){

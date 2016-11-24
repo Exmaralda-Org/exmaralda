@@ -39,7 +39,6 @@ import org.exmaralda.partitureditor.partiture.menus.TablePopupMenu;
 
 import com.klg.jclass.table.*;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -331,6 +330,7 @@ public class PartitureTableWithActions extends PartitureTable
         svgDialog.setLocationRelativeTo(this);
         svgDialog.svgPanel.addXPointerListener(this);
         
+        
     }
 
     public void insertPause() {
@@ -466,7 +466,8 @@ public class PartitureTableWithActions extends PartitureTable
         setupLinkPanel();
     }
     
-    /** called when editing of an event starts */
+    /** called when editing of an event starts
+     * @param evt */
     @Override
     public void editCell(final com.klg.jclass.table.JCEditCellEvent evt) {
         //System.out.println("editCell");
@@ -478,6 +479,7 @@ public class PartitureTableWithActions extends PartitureTable
         editor = (PartitureCellStringEditor)(evt.getEditingComponent());
         editor.setPopupMenu(eventPopupMenu);
         keyboardDialog.getKeyboardPanel().addListener(editor);
+        multimodalDialog.multimodalPanel.addUnicodeKeyboardListener(editor);
         ipaPanel.ipaPanel.addUnicodeListener(editor);
         editor.positionCursor();
         editor.getDocument().addDocumentListener(this);        
@@ -658,8 +660,19 @@ public class PartitureTableWithActions extends PartitureTable
                 startTime = tl.getPreviousTime(start);
                 endTime = tl.getNextTime(end);
                 largeTextField.setText(ev.getDescription());
+                
+                // NEW - 02-11-2016
+                // SVG PANEL COMMUNICATION
+                if (svgDialog.isVisible()){
+                    if (getModel().getTranscription().getBody().getTierAt(selectionStartRow).getCategory().equals("ref")){
+                        String xpointerRef = getModel().getEvent(selectionStartRow, selectionStartCol).getDescription();
+                        svgDialog.svgPanel.setXPointer(xpointerRef, new File(filename).getParentFile());
+                    }
+                }
+                
             } catch (JexmaraldaException je){
             }
+            
         } else if (selectionStartCol >=0 && selectionEndCol>=0){
             String start = tl.getTimelineItemAt(selectionStartCol).getID();
             // ADDED 27-01-2009
@@ -2009,7 +2022,8 @@ public class PartitureTableWithActions extends PartitureTable
                 }
                 return success;
             } catch (IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
+                System.out.println("Message: " + ex.getLocalizedMessage());
                 String message = "There was a problem opening\n" + soundFile +"\n\n" + "Error message:\n";
                 String errmess = ex.getLocalizedMessage();
                 if (errmess.length()>50){
@@ -2388,7 +2402,7 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
 
-    public Playable makePlayer(){
+    public final Playable makePlayer(){
 
         /*if (true){
             return new VLCPlayer();
@@ -2432,7 +2446,8 @@ public class PartitureTableWithActions extends PartitureTable
         } else if (playerType.equals("JDS-Player")){
             return new JDSPlayer();
         } else if (playerType.equals("MMF-Player")){
-            return new MMFPlayer();
+            MMFPlayer thePlayer = new MMFPlayer();            
+            return thePlayer;
         } else if (playerType.equals("BAS-Audio-Player")){
             return new BASAudioPlayer();
         } else if (playerType.equals("ELAN-Quicktime-Player")){
@@ -2477,6 +2492,8 @@ public class PartitureTableWithActions extends PartitureTable
         insertPauseAction.setEnabled(currentSelectionLength>0.0);
         mediaPanelDialog.setTimeSelection(event);
     }
+    
+    
 
 
     /*********************************************
@@ -2522,7 +2539,11 @@ public class PartitureTableWithActions extends PartitureTable
 
     @Override
     public void processXPointer(String xPointer) {
-        JOptionPane.showMessageDialog(parent, "Implement me!");
+        //JOptionPane.showMessageDialog(parent, xPointer);
+        if (isEditing){
+            editor = (PartitureCellStringEditor)(getEditingComponent());
+            editor.replaceSelection(xPointer);
+        }        
     }
 
     @Override

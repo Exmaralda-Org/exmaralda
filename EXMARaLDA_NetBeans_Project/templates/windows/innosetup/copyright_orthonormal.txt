@@ -1,0 +1,9 @@
+OrthoNormal (Werkzeug zum orthographischen Normalisieren von FOLKER Transkriptionen)
+
+OrthoNormal wird im Auftrag der Abteilung 'Pragmatik' des Institut für Deutsche Sprache in Mannheim von Thomas Schmidt in Zusammenarbeit mit Arnulf Deppermann, Joachim Gasch, Martin Hartung, Rudolf Schmidt und Wilfried Schütte entwickelt. OrthoNormal basiert auf EXMARaLDA-Code (www.exmaralda.org) und benutzt Teile des ELAN-Codes (www.lat-mpi.eu/tools/elan/). OrthoNormal ist Freeware, Download und Nutzung der Software sind nach Registrierung beim IDS kostenlos. Bitte geben Sie OrthoNormal selbst nicht weiter, sondern verweisen Sie interessierte Personen auf die OrthoNormal-Website des IDS:
+
+http://agd.ids-mannheim.de/html/orthonormal.shtml
+
+Rückmeldungen zur Software (an diese Adresse) sind stets willkommen.
+
+

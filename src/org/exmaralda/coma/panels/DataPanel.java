@@ -1110,7 +1110,7 @@ public class DataPanel extends JPanel implements ActionListener,
 	}
 
 	/**
-	 * tut alle transkriptionen, an denen die ausgew�hlten sprecher teilgenommen
+	 * tut alle transkriptionen, an denen die ausgewählten sprecher teilgenommen
 	 * haben, in den korb.
 	 */
 	private void personToBasket() {
@@ -1258,7 +1258,7 @@ public class DataPanel extends JPanel implements ActionListener,
 	}
 
 	/**
-	 * l�scht Sprecherverkn�pfungen mit einer bestimmten ID (meistens, weil der
+	 * lï¿½scht Sprecherverknï¿½pfungen mit einer bestimmten ID (meistens, weil der
 	 * Sprecher nicht mehr existiert)
 	 * 
 	 * @param id
@@ -1922,7 +1922,7 @@ public class DataPanel extends JPanel implements ActionListener,
 							coma.xmlChanged();
 							updateLists(true);
 						} else {
-							System.out.println("h�?");
+							System.out.println("hä?");
 						}
 
 					} catch (JDOMException err) {

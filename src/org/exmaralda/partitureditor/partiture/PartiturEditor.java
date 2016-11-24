@@ -113,6 +113,7 @@ public class PartiturEditor extends javax.swing.JFrame
         table.annotationDialog.addWindowListener(this);
         table.ipaPanel.addWindowListener(this);
         table.multimodalDialog.addWindowListener(this);
+        table.quickMediaOpenDialog.addWindowListener(this);
         table.svgDialog.addWindowListener(this);
              
         // init the other GUI components      
@@ -522,6 +523,8 @@ public class PartiturEditor extends javax.swing.JFrame
             menuBar.viewMenu.showMultimodalPanelCheckBoxMenuItem.setSelected(false);
         } else if (source==table.svgDialog){
             menuBar.viewMenu.showSVGPanelCheckBoxMenuItem.setSelected(false);
+        } else if (source==table.quickMediaOpenDialog){
+            menuBar.viewMenu.showQuickMediaOpenCheckBoxMenuItem.setSelected(false);
         } else { // i.e. source is this
         }
     }
@@ -607,9 +610,6 @@ public class PartiturEditor extends javax.swing.JFrame
     //*******************************************************************
     //*******************************************************************
     
-    
-    
-
     // ----- Acess methods for DIDA Extensions --
     /** returns the partitur
      * @return  */
@@ -690,7 +690,8 @@ public class PartiturEditor extends javax.swing.JFrame
                         // added 09-06-2009: fallback onto first media file
                         // if the WAV file cannot be opened
                         System.out.println("One goes wrong, other one may go right");
-                        ioe.printStackTrace();
+                        //ioe.printStackTrace();
+                        System.out.println("Error message: " + ioe.getMessage());
                         timelineViewer = new org.exmaralda.folker.timeview.TimelineViewer();
                         timelineViewer.setPixelsPerSecond(150.0);
                         table.getModel().setPixelsPerSecond(150.0);
@@ -713,7 +714,8 @@ public class PartiturEditor extends javax.swing.JFrame
                 partiturTimelinePanel.assignActions(controller);
                 partiturTimelinePanel.assignKeyStrokes(controller);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
                 String message = "There was a problem opening\n" + rf +"\n\n" + "Error message:\n";
                 String errmess = ex.getLocalizedMessage();
                 if (errmess.length()>50){

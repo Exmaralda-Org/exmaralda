@@ -34,6 +34,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter FreeStylesheetFileFilter = new ParameterFileFilter("html", "Free Stylesheet Transformation (*.html)");
     public ParameterFileFilter HTMLPartiturWithFlashFileFilter = new ParameterFileFilter("html", "HTML Partitur + Flash Player (*.html)");
     public ParameterFileFilter HTMLPartiturWithHTML5AudioFileFilter = new ParameterFileFilter("html", "HTML Partitur + HTML5 Video/Audio (*.html)");
+    public ParameterFileFilter HTMLPartiturWithSVGFileFilter = new ParameterFileFilter("html", "HTML Partitur + SVG (*.html)");
     public ParameterFileFilter HTMLSegmentChainWithFlashFileFilter = new ParameterFileFilter("html", "HTML Segment Chain List + Flash Player (*.html)");
     public ParameterFileFilter HTMLSegmentChainWithHTML5AudioFileFilter = new ParameterFileFilter("html", "HTML Segment Chain List + HTML5 Audio (*.html)");
     static String[] seg_suff = {"exs", "xml"};

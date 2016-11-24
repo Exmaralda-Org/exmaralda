@@ -6,7 +6,7 @@
 -->        
 <xsl:stylesheet version="2.0"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-        xmlns:tesla="http://www.exmaralda.org" 
+        xmlns:exmaralda="http://www.exmaralda.org" 
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
     
     <!-- new 08-07-2016 -->
@@ -108,7 +108,7 @@
                 <body>
                     <xsl:for-each select="//tli">
                         <xsl:for-each select="//tier[@type='t' and @speaker]/event[@start=current()/@id]">
-                            <xsl:if test="not(preceding-sibling::event) or tesla:timeline-position(@start)&gt;tesla:timeline-position(preceding-sibling::event[1]/@end)">
+                            <xsl:if test="not(preceding-sibling::event) or exmaralda:timeline-position(@start)&gt;exmaralda:timeline-position(preceding-sibling::event[1]/@end)">
                                 <xsl:apply-templates select="." mode="first-pass"/>
                             </xsl:if>                            
                         </xsl:for-each>
@@ -126,7 +126,7 @@
     <!-- ************************************************* -->
     <xsl:template match="referenced-file">
         <media  xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:attribute name="mimeType"><xsl:value-of select="tesla:determine-recording-type(@url)"/>/xxx</xsl:attribute>
+            <xsl:attribute name="mimeType"><xsl:value-of select="exmaralda:determine-recording-type(@url)"/>/xxx</xsl:attribute>
             <xsl:attribute name="url"><xsl:value-of select="@url"/></xsl:attribute>
         </media>        
     </xsl:template>
@@ -230,7 +230,7 @@
     <!-- CHANGE FOR ISO: use annotationBlock instead of div -->
     <xsl:template match="event[../@speaker and ../@type='t']" mode="first-pass">
         <xsl:variable name="DIV_START"><xsl:value-of select="@start"/></xsl:variable>
-        <xsl:variable name="DIV_END"><xsl:value-of select="tesla:last-endpoint-of-segment-chain(.)"/></xsl:variable>
+        <xsl:variable name="DIV_END"><xsl:value-of select="exmaralda:last-endpoint-of-segment-chain(.)"/></xsl:variable>
         <!-- CHANGE FOR ISO: who, start and end attributes on annotationBlock instead of on u and as anchors -->
         <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
         <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
@@ -247,7 +247,13 @@
             <xsl:element name="u">
                 <xsl:attribute name="xml:id"><xsl:text>u_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
                 <xsl:value-of select="text()"/>
-                <xsl:if test="following-sibling::event and tesla:timeline-position(@end)&gt;=tesla:timeline-position(following-sibling::event[1]/@start)">
+                <xsl:if test="following-sibling::event and exmaralda:timeline-position(@end)&gt;=exmaralda:timeline-position(following-sibling::event[1]/@start)">
+                    <!-- ADDED 15-11-2016 -->
+                    <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
+                        <xsl:attribute name="synch">
+                            <xsl:text>#</xsl:text><xsl:value-of select="@end"/>
+                        </xsl:attribute>
+                    </xsl:element>
                     <xsl:apply-templates select="following-sibling::event[1]" mode="second-pass"/>
                 </xsl:if>
             </xsl:element> <!-- end u -->
@@ -266,7 +272,7 @@
     <!-- events from primary transcription tiers with speakers with an immediately preceding event -->
     <xsl:template match="event" mode="second-pass">
             <xsl:value-of select="text()"/>
-            <xsl:if test="following-sibling::event and tesla:timeline-position(@end)&gt;=tesla:timeline-position(following-sibling::event[1]/@start)">
+            <xsl:if test="following-sibling::event and exmaralda:timeline-position(@end)&gt;=exmaralda:timeline-position(following-sibling::event[1]/@start)">
                 <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:attribute name="synch">
                         <xsl:text>#</xsl:text><xsl:value-of select="@end"/>
@@ -285,7 +291,7 @@
         <xsl:variable name="SPAN_GRP" >
             <xsl:element name="spanGrp">
                 <xsl:for-each select="//tier[@id=$TIER_ID]/event">
-                    <xsl:if test="tesla:timeline-position(@start)&gt;=tesla:timeline-position($START) and tesla:timeline-position(@end)&lt;=tesla:timeline-position($END)">
+                    <xsl:if test="exmaralda:timeline-position(@start)&gt;=exmaralda:timeline-position($START) and exmaralda:timeline-position(@end)&lt;=exmaralda:timeline-position($END)">
                         <xsl:element name="span">
                             <xsl:attribute name="from"><xsl:text>#</xsl:text><xsl:value-of select="@start"/></xsl:attribute>
                             <xsl:attribute name="to"><xsl:text>#</xsl:text><xsl:value-of select="@end"/></xsl:attribute>
@@ -353,25 +359,25 @@
     </xsl:variable>
     
     <!-- returns the position number of the timeline item with the given id -->
-    <xsl:function name="tesla:timeline-position" as="xs:integer">
+    <xsl:function name="exmaralda:timeline-position" as="xs:integer">
         <xsl:param name="timeline-id"/>
         <xsl:value-of select="$timeline-positions/descendant::item[@id=$timeline-id]/@position"/>
     </xsl:function>
     
     <!-- returns latest event that is connected to the given event through an uninterrupted chain of other events -->
-    <xsl:function name="tesla:last-endpoint-of-segment-chain">
+    <xsl:function name="exmaralda:last-endpoint-of-segment-chain">
         <xsl:param name="event"/>
         <xsl:choose>
-            <xsl:when test="not($event/following-sibling::event) or tesla:timeline-position($event/following-sibling::event[1]/@start)&gt;tesla:timeline-position($event/@end)">
+            <xsl:when test="not($event/following-sibling::event) or exmaralda:timeline-position($event/following-sibling::event[1]/@start)&gt;exmaralda:timeline-position($event/@end)">
                 <xsl:value-of select="$event/@end"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="tesla:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/>
+                <xsl:value-of select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/>
             </xsl:otherwise>
         </xsl:choose>        
     </xsl:function>
     
-    <xsl:function name="tesla:determine-recording-type">
+    <xsl:function name="exmaralda:determine-recording-type">
         <xsl:param name="path"/>
         <xsl:choose>
             <xsl:when test="ends-with(lower-case($path), '.wav')">audio</xsl:when>
@@ -382,7 +388,7 @@
         </xsl:choose>        
     </xsl:function>
     
-    <xsl:function name="tesla:seconds-to-timestring">
+    <xsl:function name="exmaralda:seconds-to-timestring">
         <xsl:param name="seconds"/>
         <xsl:variable name="totalseconds">
             <xsl:value-of select="0 + $seconds"/>

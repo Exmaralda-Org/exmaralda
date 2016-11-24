@@ -126,6 +126,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         editMenu = new javax.swing.JMenu();
         viewMenu = new javax.swing.JMenu();
         showMatchListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        annotationMenu = new javax.swing.JMenu();
         helpMenu = new org.exmaralda.common.application.HelpMenu("Hilfe", this, HELP_MENU_TITLES, "http://agd.ids-mannheim.de/folker.shtml")
         ;
 
@@ -227,7 +228,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
         modePanel.add(jPanel2);
 
-        autoAdvanceCheckBox.setText("Automatisches Weiterrücken");
+        autoAdvanceCheckBox.setText("Automatisches WeiterrÃ¼cken");
         autoAdvanceCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 autoAdvanceCheckBoxActionPerformed(evt);
@@ -249,7 +250,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         });
         correctionPanel.add(editContributionButton);
 
-        changeSpeakerButton.setText("Sprecherzuordnung ändern");
+        changeSpeakerButton.setText("Sprecherzuordnung Ã¤ndern");
         changeSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeSpeakerButtonActionPerformed(evt);
@@ -334,7 +335,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         wordListButtonPanel.setLayout(new javax.swing.BoxLayout(wordListButtonPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         splitWordsToggleButton.setText("ab|cd");
-        splitWordsToggleButton.setToolTipText("Wörter an Segmentgrenzen");
+        splitWordsToggleButton.setToolTipText("WÃ¶rter an Segmentgrenzen");
         splitWordsToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 splitWordsToggleButtonActionPerformed(evt);
@@ -344,7 +345,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
         oovToggleButton.setBackground(new java.awt.Color(255, 0, 0));
         oovToggleButton.setText("OOV");
-        oovToggleButton.setToolTipText("Out of Vocabulary-Wörter");
+        oovToggleButton.setToolTipText("Out of Vocabulary-WÃ¶rter");
         oovToggleButton.setOpaque(true);
         oovToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -408,6 +409,9 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
         applicationMenuBar.add(viewMenu);
 
+        annotationMenu.setText("Annotation");
+        applicationMenuBar.add(annotationMenu);
+
         helpMenu.setText("Hilfe");
         applicationMenuBar.add(helpMenu);
 
@@ -466,7 +470,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
     private void xmlRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xmlRadioButtonMouseClicked
         if (evt.getClickCount()==2){
-            String pw = JOptionPane.showInputDialog(this, "Passwort zum Entsperren der XML-Funktionalität?");
+            String pw = JOptionPane.showInputDialog(this, "Passwort zum Entsperren der XML-FunktionalitÃ¤t?");
             xmlRadioButton.setEnabled("reklof".equals(pw));
         }
     }//GEN-LAST:event_xmlRadioButtonMouseClicked
@@ -474,7 +478,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     private void normalisationRatioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_normalisationRatioButtonActionPerformed
         double ratio = applicationControl.getTranscription().getNormalisationRatio();
         JOptionPane.showMessageDialog(this, 
-                "Die Normalisierungsquote für dieses Dokument ist:\n" + Double.toString(ratio * 100) + "%");
+                "Die Normalisierungsquote fÃ¼r dieses Dokument ist:\n" + Double.toString(ratio * 100) + "%");
     }//GEN-LAST:event_normalisationRatioButtonActionPerformed
 
     private void oovToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oovToggleButtonActionPerformed
@@ -529,6 +533,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JMenu annotationMenu;
     private javax.swing.JMenuBar applicationMenuBar;
     public javax.swing.JToolBar applicationToolBar;
     private javax.swing.JCheckBox autoAdvanceCheckBox;

@@ -28,9 +28,11 @@ import org.xml.sax.SAXException;
  */
 public class ImportAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    private String[] encodings = {"US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE"};
+    private final String[] encodings = {"US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE"};
 
-    /** Creates a new instance of ExportAGAction */
+    /** Creates a new instance of ExportAGAction
+     * @param t
+     * @param icon */
     public ImportAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Import...", icon, t);  
     }
@@ -82,6 +84,19 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.TranscriberFileFilter){
             TranscriberConverter tc = new TranscriberConverter();
             importedTranscription = tc.readTranscriberFromFile(filename);
+        } else if (selectedFileFilter==dialog.ExmaraldaSegmentedTranscriptionFileFilter){
+            org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader reader 
+                = new org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader();
+            SegmentedTranscription st = reader.readFromFile(filename);
+            st.getBody().augmentCommonTimeline();
+            File outFile = File.createTempFile("EXMARaLDA", ".exs");
+            outFile.deleteOnExit();
+            st.writeXMLToFile(outFile.getAbsolutePath(), "none");
+            StylesheetFactory sf = new StylesheetFactory(true);
+            String xslString = "/org/exmaralda/partitureditor/jexmaralda/xsl/Segmented2BasicTokens.xsl";
+            String result = sf.applyInternalStylesheetToExternalXMLFile(xslString, outFile.getAbsolutePath());
+            importedTranscription = new BasicTranscription();
+            importedTranscription.BasicTranscriptionFromString(result);
         }  else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
             CHATConverter tc = new CHATConverter(new File(filename));
             importedTranscription = tc.convert();

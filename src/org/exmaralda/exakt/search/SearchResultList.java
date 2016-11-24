@@ -17,10 +17,13 @@ import org.exmaralda.exakt.exmaraldaSearch.COMACorpus;
 import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMASearchResultListTableModel;
 import org.exmaralda.exakt.search.analyses.*;
+import org.exmaralda.partitureditor.jexmaralda.Annotation;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTier;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaralda.TimedAnnotation;
 import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader;
 import org.xml.sax.SAXException;
@@ -314,6 +317,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
                     st = str.readFromURL(filename);
                 }
                 try {
+                    // make a basic version from the segmented one
                     bt = st.toBasicTranscription();
                 } catch (JexmaraldaException ex) {
                     ex.printStackTrace();
@@ -361,9 +365,33 @@ public class SearchResultList extends Vector<SearchResultInterface> {
                 }
                 // ATTENTION: Maybe the tier is null for POS annotations etc.
                 //if (tier==null){
-                if (tiers.size()==0){
+                if (tiers.isEmpty()){
                     // WHAT TO DO????
                     // asketh the programmer, 21-06-2011
+                    // Now also available as an issue (#36), 22-11-2016
+                    // to get here: search for POS in a POS-tagged corpus
+                    // then add "annotation as analysis": LEMMA 
+                    System.out.println("Here we have issue #36!");
+                    // this code addresses issue #36
+                    // it is for sure the worst code that any vertebrate 
+                    // has ever come up with
+                    // Shame one me!
+                    for (int pos=0; pos<st.getBody().getNumberOfTiers(); pos++){
+                        SegmentedTier t = st.getBody().getSegmentedTierAt(pos);
+                        if ((t.getSpeaker()!=null) && (t.getSpeaker().equals(speakerID))){
+                            Annotation a = t.getAnnotationWithName(annotationCategory);
+                            for (int i=0; i<a.size(); i++){
+                                TimedAnnotation ta = (TimedAnnotation)(a.get(i));
+                                if (ta.getStart().equals(startID)){
+                                    annotationValue = ta.getDescription();
+                                    break;
+                                }
+                            }
+                            sr.setAdditionalData(getAnalyses().size()-1+3, annotationValue);
+                            returnValue.add(sr);
+                        }
+                    }
+                    continue;
                 }
                 for (Tier tier : tiers){
                     try {
@@ -413,7 +441,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
                         } catch (JexmaraldaException ex) {
                             // this simply means there was no such event
                             //ex.printStackTrace();
-                            System.out.print("*");
+                            //System.out.print("*");
                         }
                         if ((annotation!=null) && (annotation.getEnd().equals(endID2))){
                             annotationValue = annotation.getDescription();

@@ -64,7 +64,7 @@ public class Evaluate {
         if (args.length!=3){
             System.out.println("Usage: Evaluate evaluation-data-directory test-data-directory output-directory");
             System.exit(0);
-        }
+        } 
         File edd = new File(args[0]);
         File tdd = new File(args[1]);
         File opd = new File(args[2]);
@@ -142,6 +142,7 @@ public class Evaluate {
             Document originalDoc = FileIO.readDocumentFromLocalFile(testFile);
             Document correctedDoc = FileIO.readDocumentFromLocalFile(evaluationFile);
             Document mergedDoc = new Merge().merge(originalDoc, correctedDoc);
+            FileIO.writeDocumentToLocalFile(new File("Z:\\TAGGING\\2016_11_08_TestEvaluate.xml"), mergedDoc);
             //pos / pos_c
             List l = XPath.selectNodes(mergedDoc, "//w");
             for (Object o : l){
@@ -198,11 +199,11 @@ public class Evaluate {
             String xml = IOUtilities.documentToString(mergedDoc);
             System.out.println("   Documents merged.");
             
-            //Wörter insgesamt: <xsl:value-of select="count(//w)"/><br/>
+            //WÃ¶rter insgesamt: <xsl:value-of select="count(//w)"/><br/>
             //Nicht vergleichbar: <xsl:value-of select="count(//w[not(@pos_c)])"/> (= <xsl:value-of select="count(//w[not(@pos_c)]) div count(//w) * 100"/>%)<br/>
-            //Übereinstimmung: <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
+            //Ãœbereinstimmung: <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @pos=@pos_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
             //Abweichung <xsl:value-of select="count(//w[@pos_c and not(@pos=@pos_c)])"/> (= <xsl:value-of select="count(//w[@pos_c and not(@pos=@pos_c)]) div count(//w[@pos_c]) * 100"/>%)<br/> 
-            //Übereinstimmung: (Superkategorie): <xsl:value-of select="count(//w[@pos_c and @super=@super_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @super=@super_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
+            //Ãœbereinstimmung: (Superkategorie): <xsl:value-of select="count(//w[@pos_c and @super=@super_c])"/> (= <xsl:value-of select="count(//w[@pos_c and @super=@super_c]) div count(//w[@pos_c]) * 100"/>%)<br/>
             //Abweichung (Superkategorie): <xsl:value-of select="count(//w[@pos_c and not(@super=@super_c)])"/> (= <xsl:value-of select="count(//w[@pos_c and not(@super=@super_c)]) div count(//w[@pos_c]) * 100"/>%) 
             
             allFilesWords+=totalWords;

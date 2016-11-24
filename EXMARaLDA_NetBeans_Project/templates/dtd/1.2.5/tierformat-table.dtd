@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v2.5 NT  - http://www.xmlspy.com -->
+<!-- MAJOR CHANGE IN Version 1.1. !!!! : remade 04-03-2002 -->
+<!-- (Reason: Appropriate implementation of interlinear text requires more flexible format) -->
+<!-- element <tier-format> is now simply a collection of elements <property> -->
+<!-- the old format (until 1.0.1) is still supported, but jexmaralda will always write the new format -->
+<!-- the attributes that were obligatory in 1.2. are now implied -->
+<!-- the only required attribute now is "tierref" -->
+<!-- attributes until 1.0.1 have the following correspondances in 1.1. -->
+<!-- attribute "style-name"	becomes <property name="font:style>" -->
+<!-- attribute "size"	becomes <property name="font:size>" -->
+<!-- attribute "alignment-name"	becomes <property name="text:alignment>" -->
+<!-- attribute "textcolor-name"	becomes <property name="font:color>" -->
+<!-- attribute "bgcolor-name"	becomes <property name="bg:color>" -->
+<!-- the fontname, which was encoded in the PCDATA before, will now be the value of <property name="font:name"> -->
+<!-- colors may either be encoded using the given names or using a string of the form #RxxGxxBxx -->
+<!-- where the xx represent the red/green/blue values in hexadecimal (!!) numbers (this is the much preferred way...) -->
+<!-- Version 1.1.1. -->
+<!-- Changes on 06-June-2002 -->
+<!-- addtional element "timeline-item-format" -->
+<!-- (specifying how to display timeline items, i.e. how many digits after comma, numbering or not etc.) -->
+<!-- Version 1.2.5. -->
+<!-- Changes on 24-July-2003 -->
+<!-- replaced attribute names of type "font:name" -->
+<!-- to attribute names of type "font-name". This is to avoid collisions with namespace conventions in XML -->
+<!-- Changes on 25-August-2003 -->
+<!-- added attribute "row-height-calculation" (possible values: 'Generous', 'Fixed' and 'Miserly') -->
+<!-- Changes on 08-Oct-2003 -->
+<!-- added attribute 'fixed-row-height (forgotten in Version 1.2.5.) -->
+<!ELEMENT tierformat-table (referenced-file*, timeline-item-format*, tier-format*)>
+<!ELEMENT referenced-file EMPTY>
+<!ATTLIST referenced-file
+	url CDATA #REQUIRED
+>
+<!-- Added in version 1.1.1. -->
+<!ELEMENT timeline-item-format EMPTY>
+<!ATTLIST timeline-item-format
+	show-every-nth-numbering CDATA #IMPLIED
+	show-every-nth-absolute CDATA #IMPLIED
+	absolute-time-format (decimal | time) #IMPLIED
+	miliseconds-digits CDATA #IMPLIED
+>
+<!ELEMENT tier-format (#PCDATA | property)*>
+<!ATTLIST tier-format
+	tierref ID #REQUIRED
+	style-name (Plain | Bold | Italic) #IMPLIED
+	size (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 72) #IMPLIED
+	alignment-name (Left | Right | Center) #IMPLIED
+	textcolor-name (white | lightGray | darkGray | black | red | pink | orange | yellow | green | magenta | cyan | blue) #IMPLIED
+	bgcolor-name (white | lightGray | darkGray | black | red | pink | orange | yellow | green | magenta | cyan | blue) #IMPLIED
+>
+<!ELEMENT property (#PCDATA)>
+<!-- Changed in version 1.2.5. -->
+<!ATTLIST property
+	name (font-color | bg-color | font-size | font-name | font-face | chunk-border | chunk-border-color | chunk-border-style | text-alignment | row-height-calculation | fixed-row-width) #REQUIRED
+>

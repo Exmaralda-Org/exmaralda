@@ -1260,7 +1260,6 @@
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;MMF Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window&apos;s native Microsoft Media Foundation framework to playback audio and video files. &lt;i&gt;Not working yet!&lt;/i&gt; &lt;/html&gt;"/>
-                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="elanDSPlayerRadioButton">
