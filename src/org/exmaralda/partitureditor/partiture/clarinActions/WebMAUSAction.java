@@ -77,6 +77,15 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
     
     private void webMAUS() throws JexmaraldaException, IOException, JDOMException, SAXException, FSMException{
         
+        String wavPath = table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("wav");
+        if (wavPath==null){
+            String message = "No WAV audio file assigned to this transcription. \n"
+                    + "WebMAUS cannot run without a WAV audio file. \n"
+                    + "Please use Transcription > Recording to assign a WAV audio file.";
+            JOptionPane.showMessageDialog(table, message);
+            return;
+        }
+        
         // let the user define parameters
         MAUSParameterDialog mausParameterDialog = new MAUSParameterDialog(table.parent, true);
         mausParameterDialog.setLocationRelativeTo(table);

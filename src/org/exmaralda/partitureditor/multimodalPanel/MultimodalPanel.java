@@ -37,7 +37,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
     }
 
     private void updatePeriodButton(){
-        int length = (int) milisecondsSpinner.getValue();
+        int length = ((Integer) milisecondsSpinner.getValue()).intValue();
         String type = (String) typeComboBox.getSelectedItem();
         String period = "";
         for (int i=0; i<length; i++){
@@ -132,7 +132,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
         mouthPanel = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         periodsPanel = new javax.swing.JPanel();
-        typeComboBox = new javax.swing.JComboBox<>();
+        typeComboBox = new javax.swing.JComboBox();
         milisecondsSpinner = new javax.swing.JSpinner();
         milisecondsLabel = new javax.swing.JLabel();
         periodButton = new javax.swing.JButton();
@@ -876,7 +876,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
 
             periodsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-            typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preparation", "Holding", "Retraction" }));
+            typeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Preparation", "Holding", "Retraction" }));
             typeComboBox.setMaximumSize(new java.awt.Dimension(100, 20));
             typeComboBox.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1053,6 +1053,6 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JButton periodButton;
     private javax.swing.JPanel periodsPanel;
     private javax.swing.JPanel topPanel;
-    private javax.swing.JComboBox<String> typeComboBox;
+    private javax.swing.JComboBox typeComboBox;
     // End of variables declaration//GEN-END:variables
 }

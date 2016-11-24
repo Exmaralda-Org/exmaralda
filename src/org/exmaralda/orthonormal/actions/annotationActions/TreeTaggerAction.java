@@ -77,7 +77,7 @@ public class TreeTaggerAction extends AbstractApplicationAction {
             String PF = treeTaggerParametersPanel.getParameterFile();
             String PFE = treeTaggerParametersPanel.getParameterFileEncoding();
             String[] OPT = treeTaggerParametersPanel.getOptions();
-            TreeTagger tt = new TreeTagger(TTD, PF, PFE, OPT);
+            final TreeTagger tt = new TreeTagger(TTD, PF, PFE, OPT);
             System.out.println("Tree Tagger initialised");
             
             //2a. setting up was succcessful so we can write the preferences
@@ -94,12 +94,12 @@ public class TreeTaggerAction extends AbstractApplicationAction {
                 Attribute a = (Attribute)o;
                 a.detach();
             }
-            File intermediate = File.createTempFile("FLN","TMP");
+            final File intermediate = File.createTempFile("FLN","TMP");
             intermediate.deleteOnExit();
             FileIO.writeDocumentToLocalFile(intermediate, trDoc);
             
             String xpathToTokens = TreeTaggableOrthonormalTranscription.XPATH_ALL_WORDS_AND_PUNCTUATION;
-            TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(intermediate, true);
+            final TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(intermediate, true);
             ttont.setXPathToTokens(xpathToTokens);
                         
             pbd = new ProgressBarDialog(ac.getFrame(), false);
@@ -117,7 +117,7 @@ public class TreeTaggerAction extends AbstractApplicationAction {
                             tt.tag(ttont, output);
                             SextantOrthonormalIntegrator soi = new SextantOrthonormalIntegrator(intermediate.getAbsolutePath());
                             soi.integrate(output.getAbsolutePath());
-                            File output2 = File.createTempFile("FLN_Tagged_",".fln");
+                            final File output2 = File.createTempFile("FLN_Tagged_",".fln");
                             //output2.deleteOnExit();            
                             soi.writeDocument(output2.getAbsolutePath());
                             System.out.println("------ tagging done.");
