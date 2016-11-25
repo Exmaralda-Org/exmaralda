@@ -151,6 +151,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
 
                 } catch (Exception ex) {
                     pbd.addText("Error: " + ex.getLocalizedMessage());
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(pbd, ex);
                 } 
             }
