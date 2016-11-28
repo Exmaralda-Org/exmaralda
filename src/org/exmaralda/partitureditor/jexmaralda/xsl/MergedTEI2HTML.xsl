@@ -2,8 +2,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:tei="http://www.tei-c.org/ns/1.0"    
-    xmlns:isoSpoken="http://iso-tei-spoken.org/ns/1.0"
-    xmlns:standoff="http://standoff.proposal" 
     exclude-result-prefixes="xs"
     version="2.0">
     <xsl:output method="xhtml"/>
@@ -74,13 +72,13 @@
             </head>
             <body>
                 <div class="all">
-                    <xsl:apply-templates select="//standoff:annotationGrp"/>
+                    <xsl:apply-templates select="//tei:annotationBlock"/>
                 </div>
             </body>
         </html>
     </xsl:template>
     
-    <xsl:template match="standoff:annotationGrp">
+    <xsl:template match="tei:annotationBlock">
         <xsl:apply-templates select="tei:u"/>
     </xsl:template>
     
@@ -92,7 +90,7 @@
             <xsl:otherwise>
                 <div class="seg">
                     <div class="speaker">
-                        <xsl:value-of select="id(substring-after(ancestor::standoff:annotationGrp/@who,'#'))/@n"/>
+                        <xsl:value-of select="id(substring-after(ancestor::tei:annotationBlock/@who,'#'))/@n"/>
                     </div>                
                     <xsl:apply-templates select="descendant::tei:w | descendant::tei:pc | descendant::tei:incident | descendant::tei:pause"/>
                 </div>
@@ -104,7 +102,7 @@
         <div class="seg">
             <div class="speaker">
                 <xsl:if test="preceding-sibling::tei:seg"><xsl:attribute name="style">color:gray;</xsl:attribute></xsl:if>
-                <xsl:value-of select="id(substring-after(ancestor::standoff:annotationGrp/@who,'#'))/@n"/>
+                <xsl:value-of select="id(substring-after(ancestor::tei:annotationBlock/@who,'#'))/@n"/>
             </div>
                 
             <xsl:apply-templates select="descendant::tei:w | descendant::tei:pc | descendant::tei:incident | descendant::tei:pause"/>
@@ -124,7 +122,7 @@
                 <div class="word">
                     <xsl:text>&#160;</xsl:text>
                 </div>
-                <xsl:for-each-group select="ancestor::standoff:annotationGrp[1]/descendant::tei:spanGrp" group-by="@type">
+                <xsl:for-each-group select="ancestor::tei:annotationBlock[1]/descendant::tei:spanGrp" group-by="@type">
                     <xsl:sort select="current-grouping-key()"/>
                     <div class="anno-label">
                         <xsl:value-of select="current-grouping-key()"/>
@@ -142,11 +140,11 @@
             <!-- <div class="lemma"><xsl:value-of select="ancestor::tei:annotatedU[1]/descendant::tei:spanGrp[@type='lemma']/descendant::tei:span[@from=$THIS_ID]/text()"/></div>
             <div class="pos"><xsl:value-of select="ancestor::tei:annotatedU[1]/descendant::tei:spanGrp[@type='pos']/descendant::tei:span[@from=$THIS_ID]/text()"/></div>
             <div class="named-entities"><xsl:value-of select="ancestor::tei:annotatedU[1]/descendant::tei:spanGrp[@type='named-entities']/descendant::tei:span[@from=$THIS_ID]/text()"/></div> -->
-            <xsl:for-each-group select="ancestor::standoff:annotationGrp[1]/descendant::tei:spanGrp" group-by="@type">
+            <xsl:for-each-group select="ancestor::tei:annotationBlock[1]/descendant::tei:spanGrp" group-by="@type">
                 <xsl:sort select="current-grouping-key()"/><div class="annotation">
                     <xsl:choose>
-                        <xsl:when test="ancestor::standoff:annotationGrp[1]/descendant::tei:spanGrp[@type=current-grouping-key()]/descendant::tei:span[@from=$THIS_ID]">
-                            <xsl:value-of select="ancestor::standoff:annotationGrp[1]/descendant::tei:spanGrp[@type=current-grouping-key()]/descendant::tei:span[@from=$THIS_ID]/text()"/>
+                        <xsl:when test="ancestor::tei:annotationBlock[1]/descendant::tei:spanGrp[@type=current-grouping-key()]/descendant::tei:span[@from=$THIS_ID]">
+                            <xsl:value-of select="ancestor::tei:annotationBlock[1]/descendant::tei:spanGrp[@type=current-grouping-key()]/descendant::tei:span[@from=$THIS_ID]/text()"/>
                         </xsl:when>
                         <xsl:otherwise>-</xsl:otherwise>
                     </xsl:choose>

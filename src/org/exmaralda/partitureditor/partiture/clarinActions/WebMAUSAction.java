@@ -97,8 +97,10 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
         final BasicTranscription bt = table.getModel().getTranscription();
         final String tierID = bt.getBody().getTierAt(table.selectionStartRow).getID();
         final String startID = bt.getBody().getCommonTimeline().getTimelineItemAt(table.selectionStartCol).getID();
-        final String endID = bt.getBody().getCommonTimeline().getTimelineItemAt(table.selectionEndCol+1).getID();
-        
+        // this must be the bug of issue #42: beware of events stretching more than one timeline item!
+        // final String endID = bt.getBody().getCommonTimeline().getTimelineItemAt(table.selectionEndCol+1).getID();
+        int span = table.getModel().getCellSpan(table.selectionStartRow, table.selectionEndCol);
+        final String endID = bt.getBody().getCommonTimeline().getTimelineItemAt(table.selectionEndCol+span).getID();
 
         pbd = new CLARINProgressDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);

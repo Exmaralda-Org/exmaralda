@@ -31,7 +31,11 @@ public class ModifyAbsoluteTimesDialog extends javax.swing.JDialog {
     public static int SHIFT_MODIFICATION = 0;
     public static int SCALE_MODIFICATION = 1;
     
-    /** Creates new form ModifyAbsoluteTimesDialog */
+    /** Creates new form ModifyAbsoluteTimesDialog
+     * @param tl
+     * @param index
+     * @param parent
+     * @param modal */
     public ModifyAbsoluteTimesDialog(Timeline tl, int index, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

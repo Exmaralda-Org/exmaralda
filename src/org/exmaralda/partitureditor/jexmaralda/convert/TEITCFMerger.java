@@ -52,8 +52,9 @@ public class TEITCFMerger {
         //XPath uXPath = XPath.newInstance("//tei:annotatedU"); 
         //uXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
         //tei:TEI/tei:text[1]/tei:body[1]/standoff:annotationGrp[1]        
-        XPath uXPath = XPath.newInstance("//standoff:annotationGrp"); 
-        uXPath.addNamespace("standoff", "http://standoff.proposal");
+        // changed 28-11-2016
+        XPath uXPath = XPath.newInstance("//tei:annotationBlock"); 
+        uXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
         List annotatedUs = uXPath.selectNodes(teiDocument);
         System.out.println(annotatedUs.size() + " items");
         
@@ -72,7 +73,7 @@ public class TEITCFMerger {
     static String tei = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_ISO_TEI_EXPORT.xml";
     //static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_TCF_WebLichtResult_2.xml";
     //static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\NEW_IN.tcf";
-    static String tcf = "F:\\Dropbox\\EXMARaLDA_Build\\WEB-SERVICE-TEST\\TCF.xml";
+    static String tcf = "F:\\Dropbox\\EXMARaLDA_Build\\WEB-LICHT-TEST\\DE_AnneWill_EXMARaLDA_Output.tcf";
     
     public static void main(String[] args){
         try {
@@ -80,7 +81,7 @@ public class TEITCFMerger {
             TEITCFMerger merger = new TEITCFMerger(new File(tcf));
             merger.merge();
             Document result = merger.getMergedDocument();
-            FileIO.writeDocumentToLocalFile(new File("F:\\Dropbox\\EXMARaLDA_Build\\WEB-SERVICE-TEST\\TCF_OUT.xml"), result);
+            FileIO.writeDocumentToLocalFile(new File("F:\\Dropbox\\EXMARaLDA_Build\\WEB-LICHT-TEST\\DE_AnneWill_EXMARaLDA_OutputMerged.tei"), result);
         } catch (JDOMException ex) {
             Logger.getLogger(TEITCFMerger.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

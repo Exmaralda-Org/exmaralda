@@ -310,6 +310,7 @@ public class Timeline extends Vector {
     }
     
     public void shiftAbsoluteTimes(double amount){
+        System.out.println("shifting by : " + amount);
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
             double currentTime=getTimelineItemAt(pos).getTime();
             if (currentTime>=0){
@@ -332,11 +333,16 @@ public class Timeline extends Vector {
         completeTimes(true, null);
     }
     
-    /** interpolates the timeline */
+    /** interpolates the timeline
+     * @param linear
+     * @param bt */
     public void completeTimes(boolean linear, BasicTranscription bt){
         completeTimes(linear, bt, true);
     }
-    /** interpolates the timeline */
+    /** interpolates the timeline
+     * @param linear
+     * @param bt
+     * @param reinterpolate */
     public void completeTimes(boolean linear, BasicTranscription bt, boolean reinterpolate){
 
         if (getNumberOfTimelineItems()==0) {return;}

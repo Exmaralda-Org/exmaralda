@@ -9,6 +9,9 @@
 
 package org.exmaralda.folker.utilities;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author thomas
@@ -55,6 +58,15 @@ public class TimeStringFormatter {
             int index = text.lastIndexOf(".");
             if (index<text.length()-1){
                 miliseconds = text.substring(index+1);
+                // bug, fixed 28-11-2016
+                if (miliseconds.length()==1){
+                    miliseconds+="00";
+                } else if (miliseconds.length()==2){
+                    miliseconds+="0";
+                } else if (miliseconds.length()>3){
+                    miliseconds=miliseconds.substring(0,3);
+                } 
+
             }
             textWithoutMiliseconds = text.substring(0,index);
         }
@@ -176,7 +188,12 @@ public class TimeStringFormatter {
     }
     
     public static void main(String[] args){
-        System.out.println(formatMiliseconds(true, 60*60*1000, 0));
+        try {
+            //System.out.println(formatMiliseconds(true, 60*60*1000, 0));
+            System.out.println(parseString("25:43.65") / 1000.0);
+        } catch (Exception ex) {
+            Logger.getLogger(TimeStringFormatter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

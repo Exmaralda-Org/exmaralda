@@ -16,11 +16,13 @@ import org.exmaralda.partitureditor.partiture.*;
  */
 public class ShiftAbsoluteTimesAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of CompleteTimelineAction */
+    /** Creates a new instance of CompleteTimelineAction
+     * @param t */
     public ShiftAbsoluteTimesAction(PartitureTableWithActions t) {
         super("Modify absolute times...", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("ShiftAbsoluteTimesAction!");
         table.commitEdit(true);
@@ -49,6 +51,7 @@ public class ShiftAbsoluteTimesAction extends org.exmaralda.partitureditor.parti
         if (dialog.approved){
             if (dialog.getModificationType()==ModifyAbsoluteTimesDialog.SHIFT_MODIFICATION){
                 double shift = dialog.getShiftAmount();
+                System.out.println("Shifting by: " + shift);
                 table.getModel().shiftTimes(shift);             
             } else if (dialog.getModificationType()==ModifyAbsoluteTimesDialog.SCALE_MODIFICATION){
                 double scale = dialog.getScaleAmount();

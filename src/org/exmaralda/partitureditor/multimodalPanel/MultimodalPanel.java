@@ -140,6 +140,20 @@ public class MultimodalPanel extends javax.swing.JPanel {
         kineButton = new javax.swing.JButton();
         kineBeginButton = new javax.swing.JButton();
         kineContinueButton = new javax.swing.JButton();
+        bottomPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton14 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton43 = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton44 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jButton45 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -219,7 +233,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         headInputPanel.add(jLabel6, gridBagConstraints);
 
-        jButton1.setText("+");
+        jButton1.setText("\u253C");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 symbolButtonActionPerformed(evt);
@@ -945,6 +959,92 @@ public class MultimodalPanel extends javax.swing.JPanel {
             topPanel.add(buttonPanel, java.awt.BorderLayout.PAGE_END);
 
             add(topPanel, java.awt.BorderLayout.PAGE_START);
+
+            bottomPanel.setLayout(new java.awt.BorderLayout());
+
+            jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+            jPanel2.setMaximumSize(new java.awt.Dimension(59, 37));
+            jPanel2.setPreferredSize(new java.awt.Dimension(59, 37));
+            jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+
+            jButton14.setText("!");
+            jButton14.setAlignmentX(0.5F);
+            jButton14.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    symbolButtonActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton14);
+
+            jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+            jLabel15.setText("heavy");
+            jLabel15.setAlignmentX(0.5F);
+            jPanel2.add(jLabel15);
+
+            jPanel1.add(jPanel2);
+
+            jPanel3.setMaximumSize(new java.awt.Dimension(59, 37));
+            jPanel3.setPreferredSize(new java.awt.Dimension(59, 37));
+            jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
+
+            jButton43.setText("?");
+            jButton43.setAlignmentX(0.5F);
+            jButton43.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    symbolButtonActionPerformed(evt);
+                }
+            });
+            jPanel3.add(jButton43);
+
+            jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+            jLabel22.setText("slightly");
+            jLabel22.setAlignmentX(0.5F);
+            jPanel3.add(jLabel22);
+
+            jPanel1.add(jPanel3);
+
+            jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.Y_AXIS));
+
+            jButton44.setText("+");
+            jButton44.setAlignmentX(0.5F);
+            jButton44.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    symbolButtonActionPerformed(evt);
+                }
+            });
+            jPanel4.add(jButton44);
+
+            jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+            jLabel23.setText("intensified");
+            jLabel23.setAlignmentX(0.5F);
+            jPanel4.add(jLabel23);
+
+            jPanel1.add(jPanel4);
+
+            jPanel5.setMaximumSize(new java.awt.Dimension(59, 37));
+            jPanel5.setPreferredSize(new java.awt.Dimension(59, 37));
+            jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
+
+            jButton45.setText("-");
+            jButton45.setAlignmentX(0.5F);
+            jButton45.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    symbolButtonActionPerformed(evt);
+                }
+            });
+            jPanel5.add(jButton45);
+
+            jLabel24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+            jLabel24.setText("weakened");
+            jLabel24.setAlignmentX(0.5F);
+            jPanel5.add(jLabel24);
+
+            jPanel1.add(jPanel5);
+
+            bottomPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+            add(bottomPanel, java.awt.BorderLayout.PAGE_END);
         }// </editor-fold>//GEN-END:initComponents
 
     
@@ -972,6 +1072,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bottomPanel;
     private javax.swing.JPanel browsPanel;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JLabel eyesIconLabel;
@@ -987,6 +1088,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
@@ -1018,6 +1120,9 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton40;
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButton43;
+    private javax.swing.JButton jButton44;
+    private javax.swing.JButton jButton45;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -1029,6 +1134,7 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1036,6 +1142,9 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1043,6 +1152,11 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JButton kineBeginButton;
     private javax.swing.JButton kineButton;
     private javax.swing.JButton kineContinueButton;

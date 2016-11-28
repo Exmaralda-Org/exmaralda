@@ -29,8 +29,9 @@ public class CLARINProgressDialog extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
         closeButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -45,9 +46,6 @@ public class CLARINProgressDialog extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/clarin-logo.png"))); // NOI18N
-        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
-
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +53,15 @@ public class CLARINProgressDialog extends javax.swing.JDialog {
             }
         });
         getContentPane().add(closeButton, java.awt.BorderLayout.PAGE_END);
+
+        jPanel1.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/clarin-logo.png"))); // NOI18N
+        jPanel1.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,6 +114,7 @@ public class CLARINProgressDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
