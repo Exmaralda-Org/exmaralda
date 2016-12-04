@@ -428,5 +428,15 @@
         </xsl:element>                
     </xsl:template>
     
+    <!-- *********************************************** -->
+    <!-- ***** ELEMENTS OUTSIDE THE ORIGINAL SPEC ****** -->    
+    <!-- *********************************************** -->
+    <!-- puncutation, added 29-11-2016 -->
+    <xsl:template match="p">
+        <pc  xmlns="http://www.tei-c.org/ns/1.0"><xsl:apply-templates/></pc>
+    </xsl:template>
+    
+    
+    
     
 </xsl:stylesheet>

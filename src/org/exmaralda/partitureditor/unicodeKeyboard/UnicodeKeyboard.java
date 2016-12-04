@@ -21,7 +21,7 @@ public class UnicodeKeyboard extends Vector{
     }
     
     public String toXML(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<unicode-keyboard name=\"" + name + "\">");
         for (int pos=0; pos<this.size(); pos++){
             UnicodeKey key = (UnicodeKey)(elementAt(pos));

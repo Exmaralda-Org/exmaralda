@@ -18,11 +18,13 @@ public class UnicodeTextField extends javax.swing.JTextField implements UnicodeK
         this.setFont(new java.awt.Font("Arial Unicode MS", java.awt.Font.PLAIN , 12));
     }
     
+    @Override
     public void performUnicodeKeyboardAction(org.exmaralda.partitureditor.unicodeKeyboard.UnicodeKeyboardEvent event) {
         this.replaceSelection(event.getText());
         this.requestFocus(); 
     }
 
+    @Override
     public void requestFocus() {
         super.requestFocus();
     }

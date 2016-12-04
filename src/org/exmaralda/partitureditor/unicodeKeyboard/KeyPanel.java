@@ -34,7 +34,8 @@ public class KeyPanel extends javax.swing.JPanel {
     javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();
     
     
-    /** Creates new form KeyPanel */
+    /** Creates new form KeyPanel
+     * @param generalPurposeFontName */
     public KeyPanel(String generalPurposeFontName) {
         generalPurposeFont  = new Font(generalPurposeFontName, Font.PLAIN, 12);
         java.awt.GraphicsEnvironment ge = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -54,6 +55,7 @@ public class KeyPanel extends javax.swing.JPanel {
             keys[i].setMargin(new java.awt.Insets(2,2,2,2));
             keys[i].setBackground(java.awt.Color.white);
             keys[i].addActionListener (new java.awt.event.ActionListener () {
+                @Override
                 public void actionPerformed (java.awt.event.ActionEvent evt) {
                     keyPressed (evt);
                 }

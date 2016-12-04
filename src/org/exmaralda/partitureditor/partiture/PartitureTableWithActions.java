@@ -320,15 +320,21 @@ public class PartitureTableWithActions extends PartitureTable
 
         ipaPanel = new org.exmaralda.partitureditor.ipapanel.IPADialog(parent, false);
         
-        quickMediaOpenDialog = new QuickMediaOpenDialog(parent, this, false);    
-        quickMediaOpenDialog.setLocationRelativeTo(parent);
+        if (parent instanceof PartiturEditor){
+            quickMediaOpenDialog = new QuickMediaOpenDialog(parent, this, false);    
+            quickMediaOpenDialog.setLocationRelativeTo(parent);
+        }
         
-        multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);
-        multimodalDialog.setLocationRelativeTo(this);
+        if (parent instanceof PartiturEditor){
+            multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);
+            multimodalDialog.setLocationRelativeTo(this);
+        }
 
-        svgDialog = new org.exmaralda.partitureditor.svgPanel.SVGDialog(parent, false);
-        svgDialog.setLocationRelativeTo(this);
-        svgDialog.svgPanel.addXPointerListener(this);
+        if (parent instanceof PartiturEditor){
+            svgDialog = new org.exmaralda.partitureditor.svgPanel.SVGDialog(parent, false);
+            svgDialog.setLocationRelativeTo(this);
+            svgDialog.svgPanel.addXPointerListener(this);
+        }
         
         
     }
@@ -492,7 +498,8 @@ public class PartitureTableWithActions extends PartitureTable
 
     }
     
-    /** called after editing of an event has finished */
+    /** called after editing of an event has finished
+     * @param evt */
     @Override
     public void afterEditCell(final com.klg.jclass.table.JCEditCellEvent evt) {
         if (cancelEdit){
@@ -507,6 +514,7 @@ public class PartitureTableWithActions extends PartitureTable
         // changed 19-02-2009
         largeTextField.setDocument(new javax.swing.text.PlainDocument());
         keyboardDialog.getKeyboardPanel().removeAllListeners();
+        multimodalDialog.multimodalPanel.removeAllListeners();        
         ipaPanel.ipaPanel.removeAllListeners();
         selectionChanged();
         isEditing = false;

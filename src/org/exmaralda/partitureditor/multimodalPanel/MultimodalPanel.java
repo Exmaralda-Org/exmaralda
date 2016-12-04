@@ -35,6 +35,11 @@ public class MultimodalPanel extends javax.swing.JPanel {
     public void addUnicodeKeyboardListener(UnicodeKeyboardListener listener){
         listeners.add(listener);
     }
+    
+    public void removeAllListeners() {
+        listeners.removeAll(listeners);
+    }
+    
 
     private void updatePeriodButton(){
         int length = ((Integer) milisecondsSpinner.getValue()).intValue();
@@ -1169,4 +1174,5 @@ public class MultimodalPanel extends javax.swing.JPanel {
     private javax.swing.JPanel topPanel;
     private javax.swing.JComboBox typeComboBox;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -19,7 +19,7 @@ import org.xml.sax.*;
 public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.swing.event.ChangeListener {
 
 
-    private static String[] BUILT_IN_CHARACTER_SETS = {"/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/HIAT.xml", 
+    private static final String[] BUILT_IN_CHARACTER_SETS = {"/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/HIAT.xml", 
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/HIAT_ODTSTD.xml",
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/HIAT_ODTSTD_Extended.xml",
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/HIAT_Romanic.xml",
@@ -45,7 +45,7 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/MiscSymbols.xml"
                                                        };
     
-    private static String[] BUILT_IN_CHARACTER_SET_NAMES = {"HIAT", 
+    private static final String[] BUILT_IN_CHARACTER_SET_NAMES = {"HIAT", 
                                                             "HIAT for ODT-STD",
                                                             "HIAT for ODT-STD + Common annotations",
                                                             "HIAT + Roman languages supplement",
@@ -97,21 +97,19 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
         
         EXTERNAL_CHARACTER_SETS = externalCharsets;
         Vector externalCharsetNames = new Vector();
-        for (int pos=0; pos<externalCharsets.length; pos++){
-            filename = externalCharsets[pos];
+        for (String externalCharset : externalCharsets) {
+            filename = externalCharset;
             try{
                 UnicodeKeyboard extKeyboard = reader.readFromFile(filename);
                 externalCharsetNames.add(extKeyboard.name);
             } catch (SAXException se){
-                 System.out.println("Exception reading external keyboard " + filename);
-                 System.out.println (se.getLocalizedMessage());
+                System.out.println("Exception reading external keyboard " + filename);
+                System.out.println (se.getLocalizedMessage());
             }
         }
 
         ALL_CHARACTER_SET_NAMES = new String[BUILT_IN_CHARACTER_SET_NAMES.length + externalCharsetNames.size()];
-        for (int pos=0; pos<BUILT_IN_CHARACTER_SET_NAMES.length; pos++){
-            ALL_CHARACTER_SET_NAMES[pos] = BUILT_IN_CHARACTER_SET_NAMES[pos];
-        }
+        System.arraycopy(BUILT_IN_CHARACTER_SET_NAMES, 0, ALL_CHARACTER_SET_NAMES, 0, BUILT_IN_CHARACTER_SET_NAMES.length);
         for (int pos=0; pos<externalCharsetNames.size(); pos++){
             ALL_CHARACTER_SET_NAMES[pos + BUILT_IN_CHARACTER_SET_NAMES.length] = (String)(externalCharsetNames.elementAt(pos));
         }
@@ -159,6 +157,7 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
     }
 
 
+    @Override
     public void stateChanged(ChangeEvent e) {
         //if (sizeSlider.getValueIsAdjusting()) return;
         int v = sizeSlider.getValue();
