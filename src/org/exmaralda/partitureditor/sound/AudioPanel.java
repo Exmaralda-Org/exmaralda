@@ -66,7 +66,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         // 27-05-2015: get rid of it - it is useless and causes trouble
         controlPanel.setVisible(false);
-                
+                        
         pack();
         
         org.exmaralda.common.helpers.Internationalizer.internationalizeDialogToolTips(this);
@@ -201,9 +201,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         videoDisplayPanel = new javax.swing.JPanel();
 
         setTitle("Audio/Video panel");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                closeDialog(evt);
+        addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                formComponentRemoved(evt);
             }
         });
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -211,9 +211,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 formComponentResized(evt);
             }
         });
-        addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentRemoved(java.awt.event.ContainerEvent evt) {
-                formComponentRemoved(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                closeDialog(evt);
             }
         });
 
@@ -412,6 +412,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
         videoPanel.setVisible(false);
         videoPanel.setLayout(new java.awt.BorderLayout());
+
+        videoDisplayPanel.setLayout(new java.awt.BorderLayout());
         videoPanel.add(videoDisplayPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(videoPanel, java.awt.BorderLayout.CENTER);
@@ -584,6 +586,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // new 28-01-2016
         System.out.println("This is AudioPanel.formComponentResized.");
+        if (player==null) return;
         if (player.getVisibleComponent()==null) return;
         int videoDisplayPanelWidth = videoDisplayPanel.getWidth();
         int videoDisplayPanelHeight = videoDisplayPanel.getHeight();
@@ -593,20 +596,22 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         // use the smaller of the two because it is guaranteed to fit
         if (dimensionByWidth.width < dimensionByHeight.width){
            player.getVisibleComponent().setPreferredSize(dimensionByWidth);
-           /*if (player instanceof CocoaQTPlayer){
+           if (player instanceof CocoaQTPlayer){
                 player.getVisibleComponent().setSize(dimensionByWidth);
                 player.getVisibleComponent().setMinimumSize(dimensionByWidth);
                 player.getVisibleComponent().setMaximumSize(dimensionByWidth);                
-           } */              
+           } 
            System.out.println("Dimensions after resize: [" + dimensionByWidth.getWidth() + "/" + dimensionByWidth.getHeight() + "]");
+           System.out.println(player.getVisibleComponent().toString());
         } else {
            player.getVisibleComponent().setPreferredSize(dimensionByHeight);            
-           /*if (player instanceof CocoaQTPlayer){
+           if (player instanceof CocoaQTPlayer){
                 player.getVisibleComponent().setSize(dimensionByHeight);
                 player.getVisibleComponent().setMinimumSize(dimensionByHeight);
                 player.getVisibleComponent().setMaximumSize(dimensionByHeight);                
-           } */              
+           } 
            System.out.println("Dimensions after resize: [" + dimensionByHeight.getWidth() + "/" + dimensionByHeight.getHeight() + "]");
+           System.out.println(player.getVisibleComponent().toString());
         }
         
         
@@ -617,16 +622,17 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
      */
     public static void main(String args[]) {
         //ELANDSPlayer player = new ELANDSPlayer();
-        JMFPlayer player = new JMFPlayer();
+        //JMFPlayer player = new JMFPlayer();
         //VLCPlayer player = new VLCPlayer();
+        CocoaQTPlayer player = new CocoaQTPlayer();
         try {
-            player.setSoundFile(null);
+            player.setSoundFile("/Users/thomasschmidt/Desktop/MEDIA-TEST/BECKHAMS_MPEG-1.mpg");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         AudioPanel ap = new AudioPanel(new javax.swing.JFrame(), true, player);
-        ap.setSoundFile(null);
         ap.show();
+        //ap.setSoundFile("/Users/thomasschmidt/Desktop/MEDIA-TEST/BECKHAMS_MPEG-1.mpg");
     }
     
     
@@ -738,11 +744,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
             
             // 3. now do the rest
             c.setPreferredSize(initialDimension);
-            /*if (player instanceof CocoaQTPlayer){
-                c.setSize(initialDimension);
-                c.setMinimumSize(initialDimension);
-                c.setMaximumSize(initialDimension);                
-            }*/
             System.out.println("Preferred size set to: " + initialDimension.width + "/" + initialDimension.height);
             
             if (getPlayer() instanceof JMFPlayer){
@@ -753,7 +754,12 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 // new 06-12-2016
                 videoDisplayPanel.add(c);
                 System.out.println("(3c) AudioPanel: added the visual component");
-                
+                System.out.println(c.toString());
+                if (player instanceof CocoaQTPlayer){
+                    c.setSize(initialDimension);
+                    c.setMinimumSize(initialDimension);
+                    c.setMaximumSize(initialDimension);                
+                }
                 if ((getPlayer() instanceof CocoaQTPlayer) && 
                         ((new File(filename).getName().toUpperCase().endsWith(".WAV")) ||
                         (new File(filename).getName().toUpperCase().endsWith(".MP3")))){
@@ -940,7 +946,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         } else if (player instanceof BASAudioPlayer){
             setTitle(getTitle() + " [BAS-Audio]");
         } else if (player instanceof CocoaQTPlayer){
-            setTitle(getTitle() + " [CocoaQT]");
+            setTitle(getTitle() + " [CocoaQT]");           
         } /*else if (player instanceof VLCPlayer){
             setTitle(getTitle() + " [VLCPlayer]");
         }*/

@@ -182,9 +182,10 @@ public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener 
         if (wrappedPlayer!=null){
             return wrappedPlayer.getVisualComponent();
         }
-        return null;
+        return null;        
     }
 
+    
 
     // added 26-05-2009
     public void updateVideo(double time){
