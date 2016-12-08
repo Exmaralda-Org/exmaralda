@@ -2016,7 +2016,6 @@ public class PartitureTableWithActions extends PartitureTable
                     protectLastColumn = true;
                     // added 19-01-2010
                     getModel().protectLastColumn = true;
-
                     getModel().anchorTimeline(0.0, player.getTotalLength());
                 }
                 mediaPanelDialog.setAvailableSoundFiles(getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles());
@@ -2026,7 +2025,11 @@ public class PartitureTableWithActions extends PartitureTable
                     PartiturEditor pe = (PartiturEditor)(getTopLevelAncestor());
                     pe.menuBar.viewMenu.showMediaPanelCheckBoxMenuItem.setSelected(true);        
                     
-                    
+                    //new 06-12-2016: prevent closing of dialog, may cause trouble
+                    //because CocoaQT always has a visible component
+                    if (player instanceof CocoaQTPlayer){
+                        mediaPanelDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                    }
                 }
                 return success;
             } catch (IOException ex) {

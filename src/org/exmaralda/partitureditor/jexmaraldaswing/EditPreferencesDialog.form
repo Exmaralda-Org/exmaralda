@@ -1259,8 +1259,11 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;MMF Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window&apos;s native Microsoft Media Foundation framework to playback audio and video files. &lt;i&gt;Not working yet!&lt;/i&gt; &lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;MMF Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window&apos;s native Microsoft Media Foundation framework to playback audio and video files. &lt;i&gt;&lt;b&gt;Not fully working yet!&lt;/b&gt;&lt;/i&gt; &lt;/html&gt;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mmfPlayerRadioButtonActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="elanDSPlayerRadioButton">
                       <Properties>

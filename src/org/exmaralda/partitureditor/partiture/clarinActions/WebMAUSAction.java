@@ -39,12 +39,14 @@ import org.xml.sax.SAXException;
 public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
     CLARINProgressDialog pbd;
-
+    MAUSParameterDialog mausParameterDialog;
+    
     /** Creates a new instance of NewAction
      * @param t
      * @param icon */
     public WebMAUSAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Web MAUS...", icon, t);
+        mausParameterDialog = new MAUSParameterDialog(table.parent, true);        
     }
     
     @Override
@@ -86,8 +88,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
             return;
         }
         
-        // let the user define parameters
-        MAUSParameterDialog mausParameterDialog = new MAUSParameterDialog(table.parent, true);
+        // let the user define parameters        
         mausParameterDialog.setLocationRelativeTo(table);
         mausParameterDialog.setVisible(true);
         if (!mausParameterDialog.approved) return;
@@ -151,8 +152,24 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
                     });
 
 
-                } catch (Exception ex) {
-                    pbd.addText("Error: " + ex.getLocalizedMessage());
+                } catch (JexmaraldaException ex) {
+                    pbd.addText("EXMARaLDA Error: " + ex.getLocalizedMessage());
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(pbd, ex);
+                } catch (IOException ex) {
+                    pbd.addText("I/O Error: " + ex.getLocalizedMessage());
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(pbd, ex);
+                } catch (SAXException ex) {
+                    pbd.addText("SAX Error: " + ex.getLocalizedMessage());
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(pbd, ex);
+                } catch (FSMException ex) {
+                    pbd.addText("FSM Error: " + ex.getLocalizedMessage());
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(pbd, ex);
+                } catch (JDOMException ex) {
+                    pbd.addText("JDOM Error: " + ex.getLocalizedMessage());
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(pbd, ex);
                 } 

@@ -16,6 +16,8 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form MAUSParameterDialog
+     * @param parent
+     * @param modal
      */
     public MAUSParameterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -216,6 +218,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        approved = false;
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -248,6 +251,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 MAUSParameterDialog dialog = new MAUSParameterDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

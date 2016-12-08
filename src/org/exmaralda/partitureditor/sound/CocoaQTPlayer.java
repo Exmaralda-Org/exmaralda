@@ -59,11 +59,16 @@ public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener 
             PeriodicUpdateController puc = new PeriodicUpdateController(1);
             wrappedPlayer.addController(puc);
             puc.addControllerListener(this);
+            
+            // new 08-12-2016
+            wrappedPlayer.setAspectRatio(16.0f/9.0f);
+            wrappedPlayer.createNewVisualComponent();
+            
             //puc.start();
                                     
             //wrappedPlayer = new mpi.eudico.client.annotator.player.NativeMediaPlayerWindowsDS(urlString);
             // added 08-02-2010
-            this.fireSoundfileSet();
+            fireSoundfileSet();
 
             // experiment!
             //wrappedPlayer.setRate(0.5f);
@@ -172,6 +177,7 @@ public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener 
         // do nothing
     }
 
+    @Override
     public Component getVisibleComponent(){
         if (wrappedPlayer!=null){
             return wrappedPlayer.getVisualComponent();

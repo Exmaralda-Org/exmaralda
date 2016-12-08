@@ -28,7 +28,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     public boolean reset = false;
     org.exmaralda.common.ExmaraldaApplication application;
     
-    /** Creates new form EditPreferencesDialog */
+    /** Creates new form EditPreferencesDialog
+     * @param parent
+     * @param modal
+     * @param app */
     public EditPreferencesDialog(java.awt.Frame parent, boolean modal, org.exmaralda.common.ExmaraldaApplication app) {
         super(parent, modal);
         application = app;
@@ -806,7 +809,12 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         playerSelectionPanel.add(elanQuicktimeRadioButton);
 
         mediaPlayersButtonGroup.add(mmfPlayerRadioButton);
-        mmfPlayerRadioButton.setText("<html><b>MMF Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window's native Microsoft Media Foundation framework to playback audio and video files. <i>Not working yet!</i> </html>");
+        mmfPlayerRadioButton.setText("<html><b>MMF Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window's native Microsoft Media Foundation framework to playback audio and video files. <i><b>Not fully working yet!</b></i> </html>");
+        mmfPlayerRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mmfPlayerRadioButtonActionPerformed(evt);
+            }
+        });
         playerSelectionPanel.add(mmfPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(elanDSPlayerRadioButton);
@@ -1056,22 +1064,22 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         if (seg.equals("HIAT")){
             pausePrefixTextField.setText("((");
             pauseSuffixTextField.setText("s))");
-            digitsSpinner.setValue(new Integer(1));
+            digitsSpinner.setValue(1);
             decimalCommaRadioButton.setSelected(true);
         } else if (seg.equals("DIDA")){
             pausePrefixTextField.setText("*");
             pauseSuffixTextField.setText("*");
-            digitsSpinner.setValue(new Integer(1));
+            digitsSpinner.setValue(1);
             decimalCommaRadioButton.setSelected(true);
         } else if ((seg.equals("GAT")) || (seg.equals("cGAT_MINIMAL"))){
             pausePrefixTextField.setText("(");
             pauseSuffixTextField.setText(")");
-            digitsSpinner.setValue(new Integer(1));
+            digitsSpinner.setValue(1);
             decimalPointRadioButton.setSelected(true);
         } else if ((seg.equals("CHAT")) || (seg.equals("CHAT_MINIMAL"))){
             pausePrefixTextField.setText("(");
             pauseSuffixTextField.setText(")");
-            digitsSpinner.setValue(new Integer(2));
+            digitsSpinner.setValue(2);
             decimalPointRadioButton.setSelected(true);
         }
 
@@ -1089,6 +1097,19 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void mmfPlayerRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmfPlayerRadioButtonActionPerformed
+        if (mmfPlayerRadioButton.isSelected()){
+            String message = "You have selected the MMF Player. Please not that\n\n"
+                    + "(1) it only makes sense to use this player with MPEG-4 videos\n"
+                    + "it will not work well with WAV audio or other video formats.\n\n"
+                    + "(2) the MMF player needs some time to initialise.\n"
+                    + "To get it started, try clicking into the WAV form viewer\n"
+                    + "and press the play button.\n\n";
+            JOptionPane.showMessageDialog(mainPanel, message);
+        }
+        
+    }//GEN-LAST:event_mmfPlayerRadioButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1224,6 +1245,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton underlineTierRadioButton;
     // End of variables declaration//GEN-END:variables
     
+    @Override
     public void show(){
         java.awt.Dimension dialogSize = this.getPreferredSize();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -1235,8 +1257,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         String example = "1.6543 = "
                 + org.exmaralda.partitureditor.partiture.StringUtilities.makePause(1.6543,
                     pausePrefixTextField.getText(),
-                    pauseSuffixTextField.getText(),
-                    ((Integer)digitsSpinner.getValue()).intValue(),
+                    pauseSuffixTextField.getText(), ((Integer)digitsSpinner.getValue()),
                     decimalCommaRadioButton.isSelected()
                     );
         testLabel.setText(example);
@@ -1252,7 +1273,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         transcription2FormattableTextField.setText(values[4]);
         freeStylesheetVisualisationTextField.setText(values[5]);
         HIATUtteranceList2HTMLTextField.setText(values[6]);
-        enableAutoSaveCheckBox.setSelected(new Boolean(values[7]).booleanValue());
+        enableAutoSaveCheckBox.setSelected(Boolean.parseBoolean(values[7]));
         autoSaveFilenameTextField.setText(values[8]);
         autoSavePathTextField.setText(values[9]);
         try {
@@ -1277,25 +1298,25 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         basPlayerRadioButton.setSelected("BAS-Audio-Player".equals(mp));
         
 
-        underlineCharRadioButton.setSelected(new Boolean(values[17]).booleanValue());
-        underlineTierRadioButton.setSelected(!(new Boolean(values[17]).booleanValue()));
+        underlineCharRadioButton.setSelected(Boolean.parseBoolean(values[17]));
+        underlineTierRadioButton.setSelected(!(Boolean.parseBoolean(values[17])));
         underlineCategoryTextField.setText(values[18]);
 
         preferredSegmentationComboBox.setSelectedItem(values[19]);
 
-        sfb538MenuCheckBox.setSelected(new Boolean(values[20]).booleanValue());
-        sinMenuCheckBox.setSelected(new Boolean(values[21]).booleanValue());
-        odtstdMenuCheckBox.setSelected(new Boolean(values[22]).booleanValue());
-        autoAnchorCheckBox.setSelected(new Boolean(values[23]).booleanValue());
-        autoRemoveTLICheckBox.setSelected(new Boolean(values[24]).booleanValue());
+        sfb538MenuCheckBox.setSelected(Boolean.parseBoolean(values[20]));
+        sinMenuCheckBox.setSelected(Boolean.parseBoolean(values[21]));
+        odtstdMenuCheckBox.setSelected(Boolean.parseBoolean(values[22]));
+        autoAnchorCheckBox.setSelected(Boolean.parseBoolean(values[23]));
+        autoRemoveTLICheckBox.setSelected(Boolean.parseBoolean(values[24]));
 
         // pause notation
         pausePrefixTextField.setText(values[25]);
         pauseSuffixTextField.setText(values[26]);
-        digitsSpinner.setValue(new Integer(Integer.parseInt(values[27])));
-        decimalCommaRadioButton.setSelected(new Boolean(values[28]).booleanValue());
-        enableAutoSaveCheckBox.setSelected(new Boolean(values[29]).booleanValue());
-        autoInterpolateCheckBox.setSelected(new Boolean(values[30]).booleanValue());
+        digitsSpinner.setValue(Integer.parseInt(values[27]));
+        decimalCommaRadioButton.setSelected(Boolean.parseBoolean(values[28]));
+        enableAutoSaveCheckBox.setSelected(Boolean.parseBoolean(values[29]));
+        autoInterpolateCheckBox.setSelected(Boolean.parseBoolean(values[30]));
 
         show();
         return changed;
