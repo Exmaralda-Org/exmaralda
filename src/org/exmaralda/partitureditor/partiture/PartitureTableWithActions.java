@@ -1987,6 +1987,7 @@ public class PartitureTableWithActions extends PartitureTable
      * @return  */
     public boolean setupMedia(){
         
+        System.out.println("(1a) PartiturTableWithActions: setupMedia");
         // the partitur editor must handle the setup of the time viewer
         // this is awkward but I'm only human
         if (getTopLevelAncestor() instanceof PartiturEditor){
@@ -1996,6 +1997,7 @@ public class PartitureTableWithActions extends PartitureTable
         // end of awkward, human-only part
         // code is immaculate from here on
 
+        System.out.println("(1b) PartiturTableWithActions: setupMedia");
         // changed 14-04-2009
         String soundFile = getModel().getTranscription().getHead().getMetaInformation().getReferencedFile();
         String waveFile = getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("wav");
@@ -2019,8 +2021,12 @@ public class PartitureTableWithActions extends PartitureTable
                     getModel().anchorTimeline(0.0, player.getTotalLength());
                 }
                 mediaPanelDialog.setAvailableSoundFiles(getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles());
+                System.out.println("(1c) PartiturTableWithActions: handing the media file to the audio/video panel");
                 boolean success = mediaPanelDialog.setSoundFile(soundFile);
+                
                 if ((mediaPanelDialog.isVideo()) && (getTopLevelAncestor() instanceof PartiturEditor)){
+                    
+                    System.out.println("(1d) PartiturTableWithActions: handling a video");
                     mediaPanelDialog.setVisible(true);
                     PartiturEditor pe = (PartiturEditor)(getTopLevelAncestor());
                     pe.menuBar.viewMenu.showMediaPanelCheckBoxMenuItem.setSelected(true);        

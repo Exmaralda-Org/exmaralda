@@ -680,6 +680,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     }
     
     private boolean openSoundFile(String filename){
+        System.out.println("(3a) AudioPanel: openSoundFile");
 
         soundFileName = filename;
         totalLength = getPlayer().getTotalLength();
@@ -693,7 +694,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         // restructured 28-01-2016
         Component c = getPlayer().getVisibleComponent();
         if (c!=null){
-            
+            System.out.println("(3b) AudioPanel: taking care of the visual component");
+         
             // 1. determine the actual size of the video
             // this may work differently in different players
             if (getPlayer() instanceof JDSPlayer){
@@ -750,6 +752,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
             } else if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof CocoaQTPlayer || getPlayer() instanceof MMFPlayer){
                 // new 06-12-2016
                 videoDisplayPanel.add(c);
+                System.out.println("(3c) AudioPanel: added the visual component");
+                
                 if ((getPlayer() instanceof CocoaQTPlayer) && 
                         ((new File(filename).getName().toUpperCase().endsWith(".WAV")) ||
                         (new File(filename).getName().toUpperCase().endsWith(".MP3")))){
