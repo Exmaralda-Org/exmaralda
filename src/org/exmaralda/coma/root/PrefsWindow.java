@@ -17,7 +17,7 @@ public class PrefsWindow extends JFrame {
 		setLayout(new BorderLayout());
 		// ImageIcon ii = IconFactory.createImageIcon("splash.png");
 		setSize(coma.getSize());
-
+		setTitle(Ui.getText("cmd.preferences"));
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		getContentPane().add(new JScrollPane(new PrefsPanel(coma)),

@@ -375,7 +375,7 @@
 		<uiItem name="cmd.DumpCorpusAction" lang="bul" value="Покажи XML-документи"/>
 
 		<uiItem name="cmd.ImportTranscriptions" lang="deu"
-			value="Korpus aus Transkriptionen erstellen"/>
+			value="Korpus aus Transkriptionen erstellen..."/>
 		<uiItem name="cmd.ImportTranscriptions" lang="eng" value="Create corpus from transcriptions..."/>
 		<uiItem name="cmd.ImportTranscriptions" lang="tk"
 			value="korpus transkripsiyonlardan oluştur"/>
@@ -1141,6 +1141,11 @@ CoMa geçici olarak iç düzeni kullanıyor&lt;/html&gt;&lt;/body&gt;"/>
 		<uiItem name="option.removeFirstTitle" lang="eng" value="Remove existing?"/>
 		<uiItem name="option.removeFirst" lang="deu" value="Existierende Recordings vorher löschen?"/>
 		<uiItem name="option.removeFirst" lang="eng" value="Remove existing recordings?"/>
+
+		<uiItem name="option.removeStatsTitle" lang="deu" value="Alte löschen?"/>
+		<uiItem name="option.removeStatsTitle" lang="eng" value="Remove existing?"/>
+		<uiItem name="option.removeStats" lang="deu" value="Existierende Zählungen vorher löschen?"/>
+		<uiItem name="option.removeStats" lang="eng" value="Remove existing segment counts?"/>
 
 		<uiItem name="option.changeTranscription" lang="deu" value="In Transkription(en) übernehmen"/>
 		<uiItem name="option.changeTranscription" lang="eng" value="Change transcription(s)"/>

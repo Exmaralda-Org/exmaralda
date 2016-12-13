@@ -30,6 +30,7 @@ public class Ui {
 
 	private static String languageCode="";
 
+
 	/** Returns localized UI-Element-names */
 	public static String getText(String key) {
 		String value;

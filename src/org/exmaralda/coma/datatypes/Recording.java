@@ -230,6 +230,7 @@ public class Recording extends ComaDatatype {
 									}
 								}
 							}
+
 							newRec.addContent(newMedia);
 						}
 						c.addContent(newRec);
@@ -243,6 +244,7 @@ public class Recording extends ComaDatatype {
 			}
 			System.out.println("CREATE!");
 		}
+
 	}
 
 	public String getColumnHTML(String display) {
