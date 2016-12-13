@@ -172,6 +172,7 @@ public class Recording extends ComaDatatype {
 							newMedia.getChild("Description").getChild("Key")
 									.setText("Digital");
 							newMedia.addContent(new Element("NSLink"));
+							newMedia.addContent(new Element("Filename"));
 							recRelPath = coma.getRelativePath(null, f);
 							if (newRec.getChildren("RecordingDuration").size() == 0) {
 								if (f.getName().endsWith(".wav")) {
@@ -188,6 +189,7 @@ public class Recording extends ComaDatatype {
 
 
 							newMedia.getChild("NSLink").setText(recRelPath);
+							newMedia.getChild("Filename").setText(f.getName());
 							newRec.addContent(newMedia);
 							c.addContent(newRec);
 							communication.refresh();

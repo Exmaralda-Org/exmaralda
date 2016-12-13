@@ -33,8 +33,6 @@ public class transcriptionUpdater {
 									.getText())), coma.prefs.getBoolean(
 									"prefs.writeCIDsWhenUpdating", true));
 					if (myPartiture.isSegmented()) {
-						System.out.println(element.getChild("Filename")
-								.getText());
 						List descKeys;
 						Element myKey;
 						HashMap segments = myPartiture.getSegmentCount();

@@ -143,7 +143,7 @@ public class TranscriptionSearchAndReplaceAction extends ComaAction
 					progress = 99;
 				}
 				setProgress(progress);
-				if (element.getChild("Filename") != null) {
+				if (element.getChild("NSLink") != null) {
 					ExmaraldaPartitur myPartiture = null;
 					int count = 1;
 					File partitureFile = new File(coma.absolutized(element
