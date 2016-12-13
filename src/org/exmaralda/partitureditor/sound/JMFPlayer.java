@@ -37,8 +37,13 @@ public class JMFPlayer extends AbstractPlayer implements PlayableListener {
         return player.getControlPanelComponent();
     }
     
+    @Override
     public java.awt.Component getVisibleComponent(){
-        return player.getVisualComponent();        
+        // changed 13-12-2016 - avoid null pointer exception
+        if (player!=null){
+            return player.getVisualComponent();        
+        } 
+        return null;
     }
     
     

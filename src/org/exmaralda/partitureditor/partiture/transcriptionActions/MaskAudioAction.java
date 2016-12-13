@@ -9,11 +9,8 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.exmaralda.folker.application.ApplicationControl;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.masker.MaskFileDialog;
 import org.exmaralda.masker.MaskTimeCreator;
@@ -51,6 +48,14 @@ public class MaskAudioAction extends org.exmaralda.partitureditor.partiture.Abst
     }
     
     private void maskAudio() throws IOException, WavFileException, URISyntaxException, ClassNotFoundException, JexmaraldaException{
+        String wavPath = table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("wav");
+        if (wavPath==null){
+            String message = "No WAV audio file assigned to this transcription. \n"
+                    + "Masking cannot be carried out without a WAV audio file. \n"
+                    + "Please use Transcription > Recording to assign a WAV audio file.";
+            JOptionPane.showMessageDialog(table, message);
+            return;
+        }
         BasicTranscription transcription = table.getModel().getTranscription();
         JFrame frame = (JFrame) table.getTopLevelAncestor();
         
