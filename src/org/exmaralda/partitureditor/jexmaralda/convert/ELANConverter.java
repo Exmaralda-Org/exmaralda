@@ -17,6 +17,8 @@ import javax.xml.transform.TransformerConfigurationException;
 
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import javax.swing.JProgressBar;
 
@@ -53,7 +55,14 @@ public class ELANConverter {
         //progBar.paintImmediately(progBar.getBounds());
     }
 
-    /** reads the EAF file specified by filename and returns an EXMARaLDA BasicTranscription */
+    /** reads the EAF file specified by filename and returns an EXMARaLDA BasicTranscription
+     * @param filename
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException
+     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws javax.xml.transform.TransformerConfigurationException */
     public BasicTranscription readELANFromFile(String filename) throws JexmaraldaException, 
                                                                        SAXException, 
                                                                        IOException, 
@@ -118,7 +127,13 @@ public class ELANConverter {
     }
     
     /** converts the basic transcription to an EAF document and 
-     *  writes it to the specified filename */
+     *  writes it to the specified filename
+     * @param t
+     * @param filename
+     * @throws org.xml.sax.SAXException
+     * @throws java.io.IOException
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws javax.xml.transform.TransformerConfigurationException */
     public void writeELANToFile(BasicTranscription t, String filename) throws SAXException,
                                                                               IOException, 
                                                                               ParserConfigurationException, 
@@ -134,7 +149,8 @@ public class ELANConverter {
     
     /** removes duplicate timeline items from the timeline
      * and changes the start and end points of events 
-     * accordingly */
+     * accordingly
+     * @param bt */
     public void normalize(BasicTranscription bt){
         Hashtable TLIReplacements = new Hashtable();
         Timeline tl = bt.getBody().getCommonTimeline();
@@ -230,12 +246,16 @@ public class ELANConverter {
         BasicBody bb = bt.getBody();
         for (int tierNo=0; tierNo<bb.getNumberOfTiers(); tierNo++){
             Tier tier = bb.getTierAt(tierNo);
+            System.out.println("Tier : " + tier.getDescription(bt.getHead().getSpeakertable()));
             UDInformationHashtable udTierInfo = tier.getUDTierInformation();
-            if (udTierInfo.getValueOfAttribute("ELAN-TimeAlignable").equalsIgnoreCase("true")) continue;
+            //13-12-2016: leave that - there can be time-alignable annotations which refer to other annotations and not to the timeline issue #52
+            //if (udTierInfo.getValueOfAttribute("ELAN-TimeAlignable").equalsIgnoreCase("true")) continue;
             for (int eventNo=0; eventNo<tier.getNumberOfEvents(); eventNo++){
                 Event event = tier.getEventAt(eventNo);
                 UDInformationHashtable udInfo = event.getUDEventInformation();
                 String refID = udInfo.getValueOfAttribute("ELAN-REF");
+                //13-12-2016: if the refID is null, there is nothing to resolve issue #52
+                if(refID==null) continue;
                 Event referencedEvent = (Event)(ELAN_IDs.get(refID));
                 while (referencedEvent.getStart().equals("TO_BE_INFERRED")){
                     refID = referencedEvent.getUDEventInformation().getValueOfAttribute("ELAN-REF");
@@ -358,5 +378,24 @@ public class ELANConverter {
             }
         }         
         
+    }
+    
+    public static void main(String[] args){
+        try {
+            String eafFilePath = "F:\\Dropbox\\IDS\\TGDP\\1-1-1-3-a.eaf";
+            ELANConverter converter = new ELANConverter();
+            BasicTranscription bt = converter.readELANFromFile(eafFilePath);
+            bt.writeXMLToFile("F:\\Dropbox\\IDS\\TGDP\\1-1-1-3-a_OUT.exb", "none");
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
