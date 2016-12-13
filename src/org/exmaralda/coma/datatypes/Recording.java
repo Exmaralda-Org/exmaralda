@@ -220,6 +220,8 @@ public class Recording extends ComaDatatype {
 							recRelPath = coma.getRelativePath(null, f);
 
 							newMedia.getChild("NSLink").setText(recRelPath);
+							newMedia.addContent(new Element("Filename"));
+							newMedia.getChild("Filename").setText(f.getName());
 							if (newRec.getChildren("RecordingDuration").size() == 0) {
 								if (f.getName().endsWith(".wav")) {
 									double dur = RecordingPropertiesCalculator
