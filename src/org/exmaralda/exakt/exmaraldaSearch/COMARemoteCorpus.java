@@ -76,15 +76,18 @@ public class COMARemoteCorpus extends AbstractCOMACorpus {
         fetchAttributes("//Transcription", transcriptionAttributes, FIXED_TRANSCRIPTION_ATTRIBUTES);
     }
     
+    @Override
     public int getNumberOfCorpusComponents() {
         return uriList.size();
     }
     
     
+    @Override
     public String getXPathToSearchableSegment() {
         return XPATH_TO_SEARCHABLE_SEGMENT;
     }
     
+    @Override
     public void index() throws JDOMException, IOException {
         Hashtable<String,Element> speakersInComaIndex = new Hashtable<String,Element>();
         String speakersInComa = "//Speaker/Sigle";
@@ -167,15 +170,18 @@ public class COMARemoteCorpus extends AbstractCOMACorpus {
         setNumberOfSearchableSegments(countSegments);                
     }
 
+    @Override
     public String getCorpusName() {
         return corpusName;
     }
 
+    @Override
     public String getCorpusPath() {
         return corpusPath;
     }
 
 
+    @Override
     public CorpusComponentInterface next() {
         XMLCorpusComponent returnValue = new XMLCorpusComponent(getXPathToSearchableSegment());
         //File xmlFile = getFileList().elementAt(counter);
@@ -191,6 +197,7 @@ public class COMARemoteCorpus extends AbstractCOMACorpus {
         return returnValue;
     }
 
+    @Override
     public CorpusComponentInterface getCorpusComponent(SearchableSegmentLocatorInterface id) {
         XMLSearchableSegmentLocator locator = (XMLSearchableSegmentLocator)id;
         String corpusComponentPath = (String)(locator.getCorpusComponentLocator());

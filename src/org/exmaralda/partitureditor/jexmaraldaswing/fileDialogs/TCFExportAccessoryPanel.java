@@ -26,14 +26,39 @@ public class TCFExportAccessoryPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         languageComboBox = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
+        segmentationComboBox = new javax.swing.JComboBox();
+        ;
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("TCF Export Language"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder("TCF Export Parameters"));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
 
         languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "de", "en", "cs", "es", "fr", "it", "nl", "ro" }));
-        add(languageComboBox);
+        languageComboBox.setMaximumSize(new java.awt.Dimension(100, 25));
+        languageComboBox.setMinimumSize(new java.awt.Dimension(100, 25));
+        languageComboBox.setPreferredSize(new java.awt.Dimension(100, 25));
+        jPanel1.add(languageComboBox);
+
+        add(jPanel1);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Segmentation"));
+
+        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HIAT", "cGAT Minimal", "Generic"}));
+        segmentationComboBox.setMaximumSize(new java.awt.Dimension(100, 25));
+        segmentationComboBox.setMinimumSize(new java.awt.Dimension(100, 25));
+        segmentationComboBox.setPreferredSize(new java.awt.Dimension(100, 25));
+        jPanel2.add(segmentationComboBox);
+
+        add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     public javax.swing.JComboBox languageComboBox;
+    public javax.swing.JComboBox segmentationComboBox;
     // End of variables declaration//GEN-END:variables
 }

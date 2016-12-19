@@ -19,7 +19,8 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
     public TEIExportAccessoryPanel teiExportAccessoryPanel = new TEIExportAccessoryPanel();
     public TCFExportAccessoryPanel tcfExportAccessoryPanel = new TCFExportAccessoryPanel();
 
-    /** Creates new ExportTASXDialog */
+    /** Creates new ExportTASXDialog
+     * @param startDirectory */
     public ExportFileDialog(String startDirectory) {
         super();
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");

@@ -22,7 +22,8 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
     public String[] encodings = {"", "US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE"};
     
     
-    /** Creates new ImportFileDialog */
+    /** Creates new ImportFileDialog
+     * @param startDirectory */
     public ImportFileDialog(String startDirectory) {
         super();
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");

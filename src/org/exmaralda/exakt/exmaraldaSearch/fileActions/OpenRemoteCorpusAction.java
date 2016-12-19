@@ -19,11 +19,15 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.OpenRemoteCorpusDialog;
  */
 public class OpenRemoteCorpusAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
-    /** Creates a new instance of OpenCorpusAction */
+    /** Creates a new instance of OpenCorpusAction
+     * @param ef
+     * @param title
+     * @param icon */
     public OpenRemoteCorpusAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         //String url = "http://www1.uni-hamburg.de/exmaralda/files/demokorpus/EXMARaLDA_DemoKorpus.coma";
         //String url = "http://www1.uni-hamburg.de/exmaralda/files/k2-korpus/K2_Corpus.xml";

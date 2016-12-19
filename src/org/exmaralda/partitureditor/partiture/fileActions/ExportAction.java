@@ -30,7 +30,9 @@ import org.xml.sax.SAXException;
  */
 public class ExportAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ExportAGAction */
+    /** Creates a new instance of ExportAGAction
+     * @param t
+     * @param icon */
     public ExportAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Export...", icon, t);  
     }
@@ -149,9 +151,11 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             ec.writeModenaTEIToFile(trans, filename);
         } else if (selectedFileFilter==dialog.TCFFileFilter){
             String language = (String) dialog.tcfExportAccessoryPanel.languageComboBox.getSelectedItem();
+            String segmentation = (String) dialog.tcfExportAccessoryPanel.segmentationComboBox.getSelectedItem();
             TCFConverter tcfConverter = new TCFConverter();
-            // issue # : user must be able to choose the segmentation algorithm
-            tcfConverter.writeHIATTCFToFile(trans, filename, language);
+            // issue #38 : user must be able to choose the segmentation algorithm
+            //tcfConverter.writeHIATTCFToFile(trans, filename, language);
+            tcfConverter.writeTCFToFile(trans, filename, language, segmentation);
         } else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
             switch(dialog.chatExportAccessoryPanel.getMethod()){
                 case CHATConverter.CHAT_SEGMENTATION_METHOD :

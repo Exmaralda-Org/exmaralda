@@ -10,14 +10,12 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
 // using wlfxb for conversions
-import eu.clarin.weblicht.wlfxb.io.TextCorpusStreamed;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
 import eu.clarin.weblicht.wlfxb.tc.api.Lemma;
@@ -25,11 +23,8 @@ import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.SentencesLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Sentence;
-import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
-import eu.clarin.weblicht.wlfxb.tc.api.TextLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.Token;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTag;
-import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusLayerTag;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextSourceLayerStored;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
@@ -41,7 +36,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.partitureditor.fsm.FSMException;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.jdom.JDOMException;
 import org.jdom.transform.XSLTransformException;
 import org.xml.sax.SAXException;
@@ -74,7 +68,9 @@ public class TCFConverter {
     /** Creates a new instance of TCFConverter */
     public TCFConverter() {}
 
-    /** Read by filename */
+    /** Read by filename
+     * @param path
+     * @return  */
     public BasicTranscription readTCFFromFile(String path) {
         try {
             readText(new FileInputStream(path));
@@ -85,7 +81,8 @@ public class TCFConverter {
     }
 
 
-    /** Read TCF from fis using WLData. */
+    /** Read TCF from fis using WLData.
+     * @param fis */
     public void readText(FileInputStream fis)
     {
         try {
@@ -100,7 +97,8 @@ public class TCFConverter {
         }
     }
 
-    /** Read TCF from a file. 
+    /** Read TCF from a file.
+     * @param file
      *  @sa readText(FileInputStream)
      */
     public void readText(File file) throws IOException {
@@ -108,6 +106,7 @@ public class TCFConverter {
     }
 
     /** Read encoded TCF from a file.
+     * @param file
      *  @fixme doesn't actually decode.
      */
     public void readText(File file, String encoding) throws 
@@ -121,6 +120,7 @@ public class TCFConverter {
      * Imports some parts of TCF file into tiers.
      * The timeline is based on the tokens and rests are aligned on their
      * bounding points. Text is assumed to stretch over all tokens.
+     * @return 
      */
     public BasicTranscription importText(){
         BasicTranscription bt;
@@ -325,8 +325,8 @@ public class TCFConverter {
 
     public void writeTCFToFile(BasicTranscription bt, String filename,
             String language, String segmentationName) throws SAXException,
-           FSMException, XSLTransformException, JDOMException, IOException,
-           Exception {
+            FSMException, XSLTransformException, JDOMException, IOException,
+            Exception {
         BasicTranscription copyBT = bt.makeCopy();
         copyBT.normalize();
         System.out.println("started writing document...");
