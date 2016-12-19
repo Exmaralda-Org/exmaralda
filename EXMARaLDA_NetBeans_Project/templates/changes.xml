@@ -10,7 +10,45 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 -->
-    <change tool="partitureditor" type="change" version="1.6" date="02.11.2016">Started integration of SVN panel (MoDiKo)</change>
+    <change tool="folker" type="feature" version="1.2" date="19.12.2016">Spinner for setting playback rate (issue #53)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="19.12.2016">Choose segmentation for TCF export (issue #38)</change>
+    <change tool="orthonormal" type="bug" version="0.9" date="14.12.2016">Missing bounce.jar in library path on MAC (issue #29)</change>
+    <change tool="teidrop" type="bug" version="0.5" date="14.12.2016">Wrong java path in Linux shell script (issue #30)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="13.12.2016">Bug in ELAN import fixed (issue #52)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="13.12.2016">One lil' fix to avoid a null pointer with the JMF player</change>
+    <change tool="all" type="change" version="1.6" date="13.12.2016">Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue #51)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="08.12.2016">Video image on the MAC would always be square and could not resize. Fixed that (issue #29)</change>
+    <change tool="all" type="change" version="1.6" date="04.12.2016">... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)</change>
+    <change tool="all" type="change" version="1.6" date="04.12.2016">FOBS and SUN JMF distributions for Linux (issue #30)</change>
+    <change tool="all" type="bug" version="1.6" date="03.12.2016">Wrong libraries for BAS Player on Linux (issue #30)</change>
+    <change tool="all" type="bug" version="1.6" date="02.12.2016">Embedded java binaries need executable permissions (issue #30)</change>
+    <change tool="all" type="bug" version="1.6" date="01.12.2016">Exchange Linux Bundled JRE 64bit to 32bit (issue #30)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="30.11.2016">Bug in multimodal panel: have to remove listeners after editing (issue #27)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="28.11.2016">WebLicht action needed to be updated to final ISO spec (issue #41)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="28.11.2016">Bug in WebMaus selection when last event spanned over more than one TLI (issue #42)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="28.11.2016">Added four buttons, changed one button in multimodal panel (issue #27)</change>
+    <change tool="folker" type="bug" version="1.6" date="28.11.2016">Bug in TimeStringFormatter (issue #43)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="28.11.2016">Bug in TimeStringFormatter (issue #43)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="24.11.2016">WebMaus action: check for WAV file (issue #40)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="22.11.2016">QuickMediaOpenDialog: deselect in view menu when closed (issue #39)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="22.11.2016">Multimodal panel now functioning? (issue #27)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="21.11.2016">Started to make multimodal panel functional (issue #27)</change>
+    <change tool="exakt" type="change" version="1.3" date="22.11.2016">"Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue #36)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="18.11.2016">Reenabled MMF player, next attempt at making it work (issue #12)</change>
+    <change tool="orthonormal" type="feature" version="0.9" date="16.11.2016">TreeTaggerAction in new Annotation menu (issue #33)</change>
+    <change tool="orthonormal" type="change" version="0.9" date="16.11.2016">Export: Set language for ISO/TEI export (issue #9)</change>
+    <change tool="folker" type="change" version="1.2" date="16.11.2016">Export: Set language for ISO/TEI export (issue #9)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="16.11.2016">Export: Set language for ISO/TEI export (issue #9)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="15.11.2016">Export: ISO/TEI export for event=token segmentation (issue #7)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="15.11.2016">Fixed bug in Generic ISO/TEI export: first anchor of segment chains was omitted (issue #31)</change>
+    <change tool="exakt" type="change" version="1.3" date="11.11.2016">Removed Open DB corpus item from file menu (issue #28)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="10.11.2016">Import: Reimport segmented transcription with token layer (from MoDiKo, for Hanna, issue #6)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="10.11.2016">Output: HTML partitur + SVG (MoDiKo)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="10.11.2016">SVG Panel: send xpointer to partitur (MoDiKo)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="09.11.2016">SVG Panel: multiple highlights, highlight color chooser (MoDiKo)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="04.11.2016">Disabled all non-ISO-methods in TEI export</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="04.11.2016">Throw error message when no wav audio is assigned in Output-GAT+HTML5-Audio</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="02.11.2016">Started integration of SVG panel (MoDiKo)</change>
     <change tool="partitureditor" type="change" version="1.6" date="24.06.2016">NV tier, one change for Transana import (Mum-Multi)</change>
     <change tool="partitureditor" type="feature" version="1.6" date="24.06.2016">Move down left / Move down right actions (Mum-Multi)</change>
     <change tool="partitureditor" type="feature" version="1.6" date="17.06.2016">Auto add tiers option for speakertable</change>
