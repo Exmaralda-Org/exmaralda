@@ -671,7 +671,7 @@ public class PartitureTableWithActions extends PartitureTable
                 
                 // NEW - 02-11-2016
                 // SVG PANEL COMMUNICATION
-                if (svgDialog.isVisible()){
+                if ((svgDialog!=null) && (svgDialog.isVisible())){
                     if (getModel().getTranscription().getBody().getTierAt(selectionStartRow).getCategory().equals("ref")){
                         String xpointerRef = getModel().getEvent(selectionStartRow, selectionStartCol).getDescription();
                         svgDialog.svgPanel.setXPointer(xpointerRef, new File(filename).getParentFile());
@@ -1817,8 +1817,12 @@ public class PartitureTableWithActions extends PartitureTable
         settings.put("SHOW-PraatPanel", Boolean.toString(praatPanel.isShowing()));
         settings.put("SHOW-AnnotationPanel", Boolean.toString(annotationDialog.isShowing()));
         settings.put("SHOW-IPAPanel", Boolean.toString(ipaPanel.isShowing()));
-        settings.put("SHOW-MultimodalPanel", Boolean.toString(multimodalDialog.isShowing()));
-        settings.put("SHOW-SVGPanel", Boolean.toString(svgDialog.isShowing()));
+        if (multimodalDialog!=null){
+            settings.put("SHOW-MultimodalPanel", Boolean.toString(multimodalDialog.isShowing()));
+        }
+        if (svgDialog!=null){
+            settings.put("SHOW-SVGPanel", Boolean.toString(svgDialog.isShowing()));
+        }
         // Default font
         settings.put("Default-Font", defaultFontName);
         settings.put("General-Purpose-Font", generalPurposeFontName);

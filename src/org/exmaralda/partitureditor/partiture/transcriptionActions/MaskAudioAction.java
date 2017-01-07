@@ -29,7 +29,9 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class MaskAudioAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditMetaInformationAction */
+    /** Creates a new instance of EditMetaInformationAction
+     * @param t
+     * @param icon */
     public MaskAudioAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Mask audio file...", icon, t);
     }

@@ -1049,6 +1049,13 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             player = new JMFPlayer();            
         }
         java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).put("PlayerType", playerType);
+                
+    }
+    
+    void displayRateSpinner(){
+        // New 19-12-2016
+        applicationFrame.mainPanel.rateSpinner.setVisible((player instanceof JDSPlayer) || (player instanceof CocoaQTPlayer));
+        applicationFrame.mainPanel.rateSpinner.addChangeListener(this);        
     }
 
     public void rescuePlayer() throws IOException {
@@ -2673,9 +2680,17 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             int v = changeZoomDialog.magnifyLevelSlider.getValue();
             double magnification = v / 10.0;
             timeViewer.setVerticalMagnify(magnification);
-        }
-        else if (e.getSource()==applicationFrame.mainPanel.textViewsTabbedPane){
+        } else if (e.getSource()==applicationFrame.mainPanel.textViewsTabbedPane){
             switchViews();
+        } else if (e.getSource()==applicationFrame.mainPanel.rateSpinner){
+            // New 19-12-2016
+            double newRate = (Double)(applicationFrame.mainPanel.rateSpinner.getValue());
+            if (player instanceof JDSPlayer){
+                ((JDSPlayer)player).setPlaybackRate(newRate);
+            }
+            if (player instanceof CocoaQTPlayer){
+                ((CocoaQTPlayer)player).setPlaybackRate(newRate);
+            }
         }
     }
 

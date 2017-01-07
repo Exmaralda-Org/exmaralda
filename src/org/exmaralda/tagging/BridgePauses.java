@@ -25,9 +25,9 @@ import org.jdom.xpath.XPath;
  */
 public class BridgePauses {
 
-    String inputDir = "C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK-GOLD";
-    String outputDir = "C:\\Users\\Schmidt\\Desktop\\FOLK-GOLD\\BRIDGE_0_3";   
-    double MIN_LENGTH = 0.3;
+    String inputDir = "F:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK-GOLD";
+    String outputDir = "Z:\\TAGGING\\GOLD-STANDARD\\BRIDGE_3_0";   
+    double MIN_LENGTH = 3.0;    
     
     /**
      * @param args the command line arguments
@@ -50,10 +50,10 @@ public class BridgePauses {
             System.out.println("Created directory " + out.getAbsolutePath() + ".");
         } else {
             File[] allFiles = out.listFiles();
-            System.out.println("Deleting " + allFiles.length + " files from " + out.getAbsolutePath() + ".");
+            /*System.out.println("Deleting " + allFiles.length + " files from " + out.getAbsolutePath() + ".");
             for (File f : allFiles){
                 f.delete();
-            }        
+            } */       
         }
         
         File[] transcriptFiles = in.listFiles(new FilenameFilter(){

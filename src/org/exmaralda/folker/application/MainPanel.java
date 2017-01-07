@@ -77,6 +77,7 @@ public class MainPanel extends javax.swing.JPanel {
         navigateButton = new javax.swing.JButton();
         controlsPanel = new javax.swing.JPanel();
         playerControlsPanel = new javax.swing.JPanel();
+        rateSpinner = new javax.swing.JSpinner();
         selectionControlsPanel = new javax.swing.JPanel();
         playLastSecondBeforeSelectionButton = new javax.swing.JButton();
         playFirstSecondOfSelectionButton = new javax.swing.JButton();
@@ -232,6 +233,12 @@ public class MainPanel extends javax.swing.JPanel {
         timeViewPanel.add(infoPanel, java.awt.BorderLayout.NORTH);
 
         controlsPanel.setLayout(new java.awt.BorderLayout());
+
+        rateSpinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.5d, 1.5d, 0.1d));
+        rateSpinner.setToolTipText("Change media playback rate (1=normal speed)");
+        rateSpinner.setMinimumSize(new java.awt.Dimension(47, 20));
+        rateSpinner.setPreferredSize(new java.awt.Dimension(47, 20));
+        playerControlsPanel.add(rateSpinner);
 
         selectionControlsPanel.setLayout(new javax.swing.BoxLayout(selectionControlsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -628,6 +635,7 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel playerInfoPanel;
     public javax.swing.JLabel playerLabel;
     public final javax.swing.JProgressBar progressBar = new javax.swing.JProgressBar();
+    public javax.swing.JSpinner rateSpinner;
     javax.swing.JButton removeAccentButton;
     public javax.swing.JButton removeEventButton;
     public javax.swing.JButton removeEventInPartiturButton;

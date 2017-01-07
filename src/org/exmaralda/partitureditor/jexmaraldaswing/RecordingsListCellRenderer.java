@@ -6,6 +6,7 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.io.File;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -34,27 +35,30 @@ public class RecordingsListCellRenderer implements ListCellRenderer {
             file = new File(path);
         }
         //JLabel label = new JLabel();
-        JLabel label = (JLabel) dflcr.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        label.setText(file.getName());
+        JLabel mediaTypeLabel = (JLabel) dflcr.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        mediaTypeLabel.setText(file.getName());
         if (path.startsWith("---")){            
-            label.setIcon(new javax.swing.ImageIcon(
+            mediaTypeLabel.setIcon(new javax.swing.ImageIcon(
                     getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/status/dialog-error.png")));
         } else if (file.getName().toUpperCase().matches("^.*\\.(MP3|WAV|OGG|WMA|AIF)$")){
-            label.setIcon(new javax.swing.ImageIcon(
+            mediaTypeLabel.setIcon(new javax.swing.ImageIcon(
                     getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/mimetypes/audio-x-generic.png")));
         } else {
-            label.setIcon(new javax.swing.ImageIcon(
+            mediaTypeLabel.setIcon(new javax.swing.ImageIcon(
                     getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/mimetypes/video-x-generic.png")));            
         }
         if (file.exists()){
-            label.setForeground(Color.black);
-            label.setToolTipText(path);            
+            mediaTypeLabel.setForeground(Color.black);
+            mediaTypeLabel.setToolTipText(path);            
         } else {
-            label.setForeground(Color.red);
-            label.setToolTipText(path + " does not exist.");            
+            mediaTypeLabel.setForeground(Color.red);
+            mediaTypeLabel.setToolTipText(path + " does not exist.");            
         }
-        label.setFont(label.getFont().deriveFont(14.0f));
-        return label;
+        // BOLD FOR RECOMMENDED FILE TYPES
+        if (file.getName().toUpperCase().matches("^.*\\.(WAV|MPG)$")){
+            mediaTypeLabel.setFont(mediaTypeLabel.getFont().deriveFont(Font.BOLD));
+        }
+        return mediaTypeLabel;
         
     }
     

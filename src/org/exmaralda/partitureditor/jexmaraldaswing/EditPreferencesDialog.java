@@ -1100,7 +1100,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
     private void mmfPlayerRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmfPlayerRadioButtonActionPerformed
         if (mmfPlayerRadioButton.isSelected()){
-            String message = "You have selected the MMF Player. Please not that\n\n"
+            String message = "You have selected the MMF Player. Please note that\n\n"
                     + "(1) it only makes sense to use this player with MPEG-4 videos\n"
                     + "it will not work well with WAV audio or other video formats.\n\n"
                     + "(2) the MMF player needs some time to initialise.\n"

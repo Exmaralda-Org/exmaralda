@@ -137,10 +137,29 @@ public class GATSegmentation extends AbstractSegmentation {
             
             String startID = sc.getMain().getStart();
             String endID = sc.getMain().getEnd();
-            double startTime = timeline.getTimelineItemWithID(startID).getTime();
-            double endTime = timeline.getTimelineItemWithID(endID).getTime();
-            thisGATLine.start = startTime;
-            thisGATLine.end = endTime;
+            if (timeline.containsTimelineItemWithID(startID)){
+                double startTime = timeline.getTimelineItemWithID(startID).getTime();
+                thisGATLine.start = startTime;
+            } else {
+                // is not in the common timeline
+                if (timeline.containsTimelineItemWithID(endID)){
+                    thisGATLine.start = timeline.getTimelineItemWithID(endID).getTime() - 1.0;
+                } else {
+                    thisGATLine.start = 0.0;
+                }
+            }
+            if (timeline.containsTimelineItemWithID(endID)){
+                double endTime = timeline.getTimelineItemWithID(endID).getTime();
+                thisGATLine.end = endTime;                
+            } else {
+                // is not in the common timeline
+                if (timeline.containsTimelineItemWithID(startID)){
+                    thisGATLine.end = timeline.getTimelineItemWithID(startID).getTime() + 1.0;
+                } else {
+                    thisGATLine.end = 0.0;
+                }
+                
+            }
             
             
             // flag for recording problems in overlap alignment

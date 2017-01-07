@@ -18,14 +18,21 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
     javax.swing.DefaultComboBoxModel comboBoxModel;
     String[] tierIDs;
     
-    /** Creates new form SingleTierSelectionDialog */
+    /** Creates new form SingleTierSelectionDialog
+     * @param bt
+     * @param parent
+     * @param modal */
     public SingleTierSelectionDialog(BasicTranscription bt, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTranscription(bt);
     }
     
-    void setTranscription(BasicTranscription bt){
+    public void setExplanationText(String text){
+        explanationTextPane.setText(text);
+    }
+    
+    final void setTranscription(BasicTranscription bt){
         String[] descs = new String[bt.getBody().getNumberOfTiers()];
         for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
             Tier t = bt.getBody().getTierAt(pos);
@@ -52,6 +59,8 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
 
         jPanel1 = new javax.swing.JPanel();
         tierSelectionComboBox = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        explanationTextPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tier selection");
@@ -65,7 +74,14 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
         tierSelectionComboBox.setPreferredSize(new java.awt.Dimension(200, 22));
         jPanel1.add(tierSelectionComboBox);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        explanationTextPane.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
+        explanationTextPane.setBorder(null);
+        explanationTextPane.setEnabled(false);
+        jScrollPane1.setViewportView(explanationTextPane);
+
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -76,6 +92,7 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
     public static void main(String args[]) {
     }
 
+    @Override
     public void setVisible(boolean b) {
         if(b){
             java.awt.Dimension dialogSize = this.getPreferredSize();
@@ -86,7 +103,9 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane explanationTextPane;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox tierSelectionComboBox;
     // End of variables declaration//GEN-END:variables
     

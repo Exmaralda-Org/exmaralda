@@ -55,6 +55,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         applicationControl.assignKeyboardShortcuts();
         
         applicationControl.retrieveSettings();
+        
+        applicationControl.displayRateSpinner();
 
         // if this is a MAC OS: init the MAC OS X specific actions
         String os = System.getProperty("os.name").substring(0,3);
