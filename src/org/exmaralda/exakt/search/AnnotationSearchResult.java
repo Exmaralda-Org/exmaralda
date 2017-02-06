@@ -4,6 +4,7 @@
  */
 package org.exmaralda.exakt.search;
 
+import java.util.List;
 import org.jdom.*;
 
 /**
@@ -30,8 +31,13 @@ public class AnnotationSearchResult extends SimpleSearchResult {
         int index = parentElement.indexOf(annotatedElement);
         String matchText = org.exmaralda.exakt.utilities.FileIO.getPlainText(annotatedElement);
         String leftContext = "";
+        //changed 06-02-2017 - issue #56
+        List children = parentElement.getChildren();
+        
         for (int pos = 0; pos < index; pos++) {
-            Element e = (Element) (parentElement.getContent(pos));
+            //Element e = (Element) (parentElement.getContent(pos));
+            //changed 06-02-2017 - issue #56
+            Element e = (Element) (children.get(pos));
             leftContext += org.exmaralda.exakt.utilities.FileIO.getPlainText(e);
         }
         String rightContext = "";
