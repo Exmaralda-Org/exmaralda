@@ -458,6 +458,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         }
     }
 
+    @Override
     public void adjustmentValueChanged(AdjustmentEvent e) {
         if (e.getValueIsAdjusting()){
             return;

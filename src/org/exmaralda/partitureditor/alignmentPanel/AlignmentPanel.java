@@ -13,6 +13,7 @@ package org.exmaralda.partitureditor.alignmentPanel;
 import com.klg.jclass.table.JCSelectEvent;
 import com.klg.jclass.table.JCSelectListener;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
+import org.exmaralda.partitureditor.partiture.PartiturEditor;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
@@ -41,11 +43,20 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
     Playable player;
     ArrayList<String> eventTexts = new ArrayList<String>();
     
-    /** Creates new form AlignmentPanel */
+    int totalCols = 0;
+    
+    /** Creates new form AlignmentPanel
+     * @param table
+     * @param player */
     public AlignmentPanel(PartitureTableWithActions table, Playable player) {
         this.table = table;
         this.player = player;
         double rememberPosition = player.getCurrentPosition();
+        Container c = table.getTopLevelAncestor();
+        if (c instanceof PartiturEditor){
+            rememberPosition = ((PartiturEditor)c).controller.timeViewer.getCursorTime() / 1000.0;
+        }
+        System.out.println("Remember position: " + rememberPosition);
         indexTexts();
         initComponents();
         
@@ -79,6 +90,16 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
         player.setStartTime(rememberPosition);
         player.setEndTime(player.getTotalLength());
         
+        String s = TimeStringFormatter.formatMiliseconds(rememberPosition*1000.0,2);
+        timeLabel.setText(s);
+        
+        
+        int currentColumn = table.selectionStartCol;
+        totalCols = table.getNumColumns();
+        columnCountLabel.setText("[" + Integer.toString(currentColumn+1) + "/" + totalCols + "]");
+        
+        
+        
         jScrollPane2.setVisible(false);
         jScrollPane1.setPreferredSize(new Dimension(table.getWidth() - 100, 200));
         
@@ -95,6 +116,8 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
             table.setLeftColumn(currentColumn+1);
             table.setNewSelection(-1, -1, currentColumn+1, currentColumn+1);
         }
+        columnCountLabel.setText("[" + Integer.toString(currentColumn+1) + "/" + totalCols + "]");
+        
         timeLabel.setForeground(Color.black);
         jPanel1.requestFocus();
         
@@ -116,22 +139,36 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        columnCountLabel = new javax.swing.JLabel();
         startButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
         alignButton = new javax.swing.JButton();
         timeLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        explainLabel1 = new javax.swing.JLabel();
+        explainLabel2 = new javax.swing.JLabel();
+        textPanel = new javax.swing.JPanel();
+        fontSizeSlider = new javax.swing.JSlider();
+        nowPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventTextArea = new javax.swing.JTextArea();
+        beforePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         beforeTextArea = new javax.swing.JTextArea();
+        afterPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         afterTextArea = new javax.swing.JTextArea();
 
         setLayout(new java.awt.BorderLayout());
+
+        columnCountLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        columnCountLabel.setText("[0/0]");
+        columnCountLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                columnCountLabelMousePressed(evt);
+            }
+        });
+        jPanel1.add(columnCountLabel);
 
         startButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/media-playback-start.png"))); // NOI18N
@@ -152,7 +189,7 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
         });
         jPanel1.add(stopButton);
 
-        alignButton.setFont(new java.awt.Font("Tahoma", 0, 14));
+        alignButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         alignButton.setText("Align!");
         jPanel1.add(alignButton);
 
@@ -169,21 +206,37 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel1.setText("Press the START button to start playback of the recording. ");
-        jPanel2.add(jLabel1);
+        explainLabel1.setText("Press the START button to start playback of the recording. ");
+        jPanel2.add(explainLabel1);
 
-        jLabel2.setText("Press the ALIGN button or hit <SPACE> after you've heard the currently displayed text");
-        jPanel2.add(jLabel2);
+        explainLabel2.setText("Press the ALIGN button or hit <SPACE> after you've heard the currently displayed text");
+        jPanel2.add(explainLabel2);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        textPanel.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(32767, 100));
+        fontSizeSlider.setMaximum(48);
+        fontSizeSlider.setMinimum(6);
+        fontSizeSlider.setOrientation(javax.swing.JSlider.VERTICAL);
+        fontSizeSlider.setToolTipText("Change font size");
+        fontSizeSlider.setValue(14);
+        fontSizeSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                fontSizeSliderStateChanged(evt);
+            }
+        });
+        textPanel.add(fontSizeSlider, java.awt.BorderLayout.WEST);
 
+        nowPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Now"));
+        nowPanel.setLayout(new javax.swing.BoxLayout(nowPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(32767, 400));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(226, 300));
+
+        eventTextArea.setEditable(false);
         eventTextArea.setBackground(new java.awt.Color(0, 0, 0));
         eventTextArea.setColumns(20);
-        eventTextArea.setEditable(false);
         eventTextArea.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         eventTextArea.setForeground(new java.awt.Color(255, 255, 0));
         eventTextArea.setLineWrap(true);
@@ -191,7 +244,9 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
         eventTextArea.setWrapStyleWord(true);
         jScrollPane1.setViewportView(eventTextArea);
 
-        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        nowPanel.add(jScrollPane1);
+
+        textPanel.add(nowPanel, java.awt.BorderLayout.CENTER);
 
         beforeTextArea.setBackground(new java.awt.Color(153, 153, 153));
         beforeTextArea.setColumns(20);
@@ -199,19 +254,28 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
         beforeTextArea.setRows(5);
         jScrollPane2.setViewportView(beforeTextArea);
 
-        jPanel3.add(jScrollPane2, java.awt.BorderLayout.NORTH);
+        beforePanel.add(jScrollPane2);
+
+        textPanel.add(beforePanel, java.awt.BorderLayout.NORTH);
+
+        afterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Next"));
+        afterPanel.setLayout(new javax.swing.BoxLayout(afterPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jScrollPane3.setMaximumSize(new java.awt.Dimension(32767, 100));
 
-        afterTextArea.setBackground(new java.awt.Color(153, 153, 153));
+        afterTextArea.setEditable(false);
+        afterTextArea.setBackground(new java.awt.Color(204, 204, 204));
         afterTextArea.setColumns(20);
-        afterTextArea.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
+        afterTextArea.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         afterTextArea.setRows(5);
+        afterTextArea.setWrapStyleWord(true);
         jScrollPane3.setViewportView(afterTextArea);
 
-        jPanel3.add(jScrollPane3, java.awt.BorderLayout.SOUTH);
+        afterPanel.add(jScrollPane3);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        textPanel.add(afterPanel, java.awt.BorderLayout.SOUTH);
+
+        add(textPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
@@ -229,21 +293,35 @@ public class AlignmentPanel extends javax.swing.JPanel implements JCSelectListen
         jPanel1.requestFocus();        
     }//GEN-LAST:event_stopButtonActionPerformed
 
+    private void columnCountLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_columnCountLabelMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_columnCountLabelMousePressed
+
+    private void fontSizeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_fontSizeSliderStateChanged
+        int newFontSize = fontSizeSlider.getValue();
+        eventTextArea.setFont(eventTextArea.getFont().deriveFont((float)newFontSize));
+    }//GEN-LAST:event_fontSizeSliderStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel afterPanel;
     private javax.swing.JTextArea afterTextArea;
     private javax.swing.JButton alignButton;
+    private javax.swing.JPanel beforePanel;
     private javax.swing.JTextArea beforeTextArea;
+    private javax.swing.JLabel columnCountLabel;
     private javax.swing.JTextArea eventTextArea;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel explainLabel1;
+    private javax.swing.JLabel explainLabel2;
+    private javax.swing.JSlider fontSizeSlider;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel nowPanel;
     private javax.swing.JButton startButton;
     private javax.swing.JButton stopButton;
+    private javax.swing.JPanel textPanel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 

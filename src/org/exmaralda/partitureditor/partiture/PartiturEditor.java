@@ -272,6 +272,7 @@ public class PartiturEditor extends javax.swing.JFrame
             e.printStackTrace();        
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 PartiturEditor pe = new PartiturEditor();
                 pe.setVisible(true);

@@ -48,16 +48,45 @@ public class Logger {
             System.out.println("Redirect:  Unable to open log file! ");
         }
         
+        /*java.version	Java Runtime Environment version
+        java.vendor	Java Runtime Environment vendor
+        java.vendor.url	Java vendor URL
+        java.home	Java installation directory
+        java.vm.specification.version	Java Virtual Machine specification version
+        java.vm.specification.vendor	Java Virtual Machine specification vendor
+        java.vm.specification.name	Java Virtual Machine specification name
+        java.vm.version	Java Virtual Machine implementation version
+        java.vm.vendor	Java Virtual Machine implementation vendor
+        java.vm.name	Java Virtual Machine implementation name
+        java.specification.version	Java Runtime Environment specification version
+        java.specification.vendor	Java Runtime Environment specification vendor
+        java.specification.name	Java Runtime Environment specification name
+        java.class.version	Java class format version number
+        java.class.path	Java class path
+        os.name	Operating system name
+        os.arch	Operating system architecture*/
+
         // print information to the standard output
-        System.out.println("**** INFO ****");
+        System.out.println("************* INFO **************");
         System.out.println("Date : " + new java.util.Date().toString());
+        
         System.out.println("Operating system : " + System.getProperty("os.name"));
+        System.out.println("Operating system architecture : " + System.getProperty("os.arch"));
         System.out.println("OS version : " + System.getProperty("os.version"));
+        
         System.out.println("JRE version : " + System.getProperty("java.version"));
-        System.out.println("Application name:" + app.getApplicationName());
-        System.out.println("Application version:" + app.getVersion());
-        System.out.println("Build time:" + org.exmaralda.common.EXMARaLDAConstants.BUILD_TIME);
+        System.out.println("JRE vendor : " + System.getProperty("java.vendor"));
+        
+        System.out.println("JVM version (specification/implementation) : " 
+                + System.getProperty("java.vm.specification.version") + " / " + System.getProperty("java.vm.version"));
+        
+        System.out.println("Java Class Path : " + System.getProperty("java.class.path"));
+        
+        System.out.println("Application name :" + app.getApplicationName());
+        System.out.println("Application version :" + app.getVersion());
+        System.out.println("Build time :" + org.exmaralda.common.EXMARaLDAConstants.BUILD_TIME);
         System.out.println("http://www.exmaralda.org");
+        System.out.println("*********************************");
         
     }
     

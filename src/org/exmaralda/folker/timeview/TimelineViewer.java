@@ -69,6 +69,7 @@ public class TimelineViewer extends AbstractTimeProportionalViewer {
         }
     }
 
+    @Override
     public void drawContents() {
         drawTimeline();
     }

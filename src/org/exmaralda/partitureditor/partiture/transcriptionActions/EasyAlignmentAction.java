@@ -18,7 +18,8 @@ import org.exmaralda.partitureditor.partiture.*;
  */
 public class EasyAlignmentAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditMetaInformationAction */
+    /** Creates a new instance of EditMetaInformationAction
+     * @param t */
     public EasyAlignmentAction(PartitureTableWithActions t) {
         super("Easy alignment...", t);
     }

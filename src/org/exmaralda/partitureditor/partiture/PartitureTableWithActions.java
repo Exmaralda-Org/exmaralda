@@ -221,7 +221,9 @@ public class PartitureTableWithActions extends PartitureTable
     }
     
     /** Creates new PartitureTableWithActions
-     *  p specifies the parent component */
+     *  p specifies the parent component
+     * @param p
+     * @param initKeystrokes */
     public PartitureTableWithActions(java.awt.Frame p, boolean initKeystrokes){
         super();
         defaultSelectionBg = this.getSelectedBackground();
@@ -528,7 +530,10 @@ public class PartitureTableWithActions extends PartitureTable
     
     /** programatically sets the user selection to the specified
      * row and column. beginEdit determines whether or not editing
-     * of the corresponding event is to be started */
+     * of the corresponding event is to be started
+     * @param row
+     * @param col
+     * @param beginEdit */
     @Override
     public void setNewSelection(int row, int col, boolean beginEdit){
         super.setNewSelection(row, col, beginEdit);
