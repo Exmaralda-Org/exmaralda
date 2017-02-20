@@ -20,7 +20,6 @@ import org.exmaralda.masker.WavFileException;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.sound.LiveTimelineSegmentationDialog;
 import org.exmaralda.partitureditor.sound.SilenceDetector;
 
 /**
@@ -34,7 +33,8 @@ public class NewFromSilenceDetectionAction extends org.exmaralda.partitureditor.
     ProgressBarDialog pbd;
     Vector<String> mediaFiles;
     
-    /** Creates a new instance of NewFromSpeakertableAction */
+    /** Creates a new instance of NewFromSpeakertableAction
+     * @param t */
     public NewFromSilenceDetectionAction(PartitureTableWithActions t) {
         super("New from silence detection...", t);
     }

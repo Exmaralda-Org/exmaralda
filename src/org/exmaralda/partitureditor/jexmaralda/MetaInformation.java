@@ -49,7 +49,13 @@ public class MetaInformation extends Object {
     }
 
     /** creates new MetaInformation with project name pn, transcription name tn, referenced file rf,
-      * udMetaInformation udi, comment c and transcription convention tc */
+      * udMetaInformation udi, comment c and transcription convention tc
+     * @param pn
+     * @param tn
+     * @param rf
+     * @param udi
+     * @param c
+     * @param tc */
     public MetaInformation(String pn, String tn, String rf, UDInformationHashtable udi, String c, String tc){
         projectName = pn;
         transcriptionName = tn;
@@ -60,7 +66,8 @@ public class MetaInformation extends Object {
         transcriptionConvention = tc;
     }
     
-    /** returns a copy of this MetaInformation */
+    /** returns a copy of this MetaInformation
+     * @return  */
     public MetaInformation makeCopy(){
         MetaInformation mi = new MetaInformation(this.getProjectName(), this.getTranscriptionName(), this.getReferencedFile(),
                         this.getUDMetaInformation().makeCopy(), this.getComment(), this.getTranscriptionConvention());
@@ -76,27 +83,32 @@ public class MetaInformation extends Object {
     // ********** GET AND SET METHODS *************
     // ********************************************
 
-    /** returns the project name */
+    /** returns the project name
+     * @return  */
     public String getProjectName(){
         return projectName;
     }
     
-    /** sets the project name to the specified value */
+    /** sets the project name to the specified value
+     * @param name */
     public void setProjectName(String name){
-        projectName = new String(name);
+        projectName = name;
     }
     
-    /** returns the transcription name */
+    /** returns the transcription name
+     * @return  */
     public String getTranscriptionName(){
         return transcriptionName;
     }
     
-    /** sets the transcription name to the specified value */
+    /** sets the transcription name to the specified value
+     * @param name */
     public void setTranscriptionName(String name){
-        transcriptionName = new String(name);
+        transcriptionName = name;
     }
     
-    /** returns the referenced file */
+    /** returns the referenced file
+     * @return  */
     public String getReferencedFile(){
         if (referencedFiles.size()>0){
             return referencedFiles.elementAt(0);
@@ -107,6 +119,8 @@ public class MetaInformation extends Object {
     /** returns the first file in the list of referenced files with the
      * specified extension
      * returns null if there is no such file
+     * @param extension
+     * @return 
      */
     public String getReferencedFile(String extension){
         for (String rf : getReferencedFiles()){
@@ -117,7 +131,8 @@ public class MetaInformation extends Object {
         return null;
     }
     
-    /** sets the referenced file to the specified value */
+    /** sets the referenced file to the specified value
+     * @param url */
     public void setReferencedFile(String url){
         //referencedFile = new String(url);
         if (referencedFiles.isEmpty()){

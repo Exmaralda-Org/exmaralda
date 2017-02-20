@@ -32,6 +32,8 @@ import eu.clarin.weblicht.wlfxb.tc.api.TokensLayer;
 
 // from old version?
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -351,6 +353,8 @@ public class TCFConverter {
                     nameOfDeepSegmentation, "SpeakerContribution_Event", true);
         System.out.println("Merged");
         generateWordIDs(teiDoc);
+        
+        FileIO.writeDocumentToLocalFile("F:\\KORPORA\\EXMARaLDA-Demokorpus\\AnneWill\\AnneWill_TEI.xml", teiDoc);
 
         StylesheetFactory ssf = new StylesheetFactory(true);
         String tcf = ssf.applyInternalStylesheetToString(TCF_STYLESHEET_PATH,
@@ -409,18 +413,25 @@ public class TCFConverter {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
-            File f = new File("tcf04-karin-wl.xml");
+            File f = new File("F:\\KORPORA\\EXMARaLDA-Demokorpus\\AnneWill\\AnneWill.exb");
+            BasicTranscription bt = new BasicTranscription(f.getAbsolutePath());
             TCFConverter tc = new TCFConverter();
-            tc.readText(f);
-            BasicTranscription bt = tc.importText();
+            tc.writeTCFToFile(bt, "F:\\KORPORA\\EXMARaLDA-Demokorpus\\AnneWill\\AnneWill_TCF.xml", "de", "Generic");
+            /*tc.readText(f);
             bt.writeXMLToFile("tcf04-karin-wl.exb", "none");
-            System.out.println(tc.importText().toXML());
-        } catch (PatternSyntaxException ex) {
-            ex.printStackTrace();
+            System.out.println(tc.importText().toXML());*/
+        } catch (SAXException ex) {
+            Logger.getLogger(TCFConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(TCFConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JDOMException ex) {
+            Logger.getLogger(TCFConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(TCFConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(TCFConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

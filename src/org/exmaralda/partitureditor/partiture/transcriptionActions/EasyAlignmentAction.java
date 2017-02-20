@@ -8,6 +8,7 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.alignmentPanel.AlignmentPanel;
 import org.exmaralda.partitureditor.partiture.*;
 /**
@@ -32,6 +33,11 @@ public class EasyAlignmentAction extends org.exmaralda.partitureditor.partiture.
     }
     
     private void easyAlignment(){
+        if (table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles().isEmpty()
+                || table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile().length()==0){
+            JOptionPane.showMessageDialog(table, "No media file associated.\nUse 'Transcription > Recordings...' to associate a media file.");
+            return;
+        }
         table.setSelectedBackground(java.awt.Color.YELLOW);
         table.setSelectedForeground(java.awt.Color.BLACK);  
         JDialog alignmentDialog = new JDialog((JFrame)(table.getTopLevelAncestor()), true);

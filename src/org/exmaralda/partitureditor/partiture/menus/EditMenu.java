@@ -18,20 +18,20 @@ import org.exmaralda.common.helpers.Internationalizer;
  */
 public class EditMenu extends AbstractTableMenu {
     
-    private JMenuItem undoMenuItem;
+    private final JMenuItem undoMenuItem;
 
-    private JMenuItem copyTextMenuItem;
-    private JMenuItem pasteMenuItem;
-    private JMenuItem cutMenuItem;
+    private final JMenuItem copyTextMenuItem;
+    private final JMenuItem pasteMenuItem;
+    private final JMenuItem cutMenuItem;
 
-    private JMenuItem searchInEventsMenuItem;
-    private JMenuItem findNextMenuItem;
-    private JMenuItem replaceInEventsMenuItem;
+    private final JMenuItem searchInEventsMenuItem;
+    private final JMenuItem findNextMenuItem;
+    private final JMenuItem replaceInEventsMenuItem;
 
-    private JMenuItem exaktSearchMenuItem;
+    private final JMenuItem exaktSearchMenuItem;
 
     
-    private javax.swing.JMenu selectionMenu;
+    private final javax.swing.JMenu selectionMenu;
 
 
     /** Creates a new instance of EditMenu */
@@ -43,11 +43,13 @@ public class EditMenu extends AbstractTableMenu {
         
         selectionMenu = new javax.swing.JMenu();
         selectionMenu.setText(Internationalizer.getString("Selection"));
+        selectionMenu.setToolTipText("Operations for the current selection");
 
         
         undoMenuItem = this.add(table.undoAction);
         undoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-
+        undoMenuItem.setToolTipText("Undo the last action");
+        
         addSeparator();
 
         // edit menu
@@ -65,12 +67,15 @@ public class EditMenu extends AbstractTableMenu {
 
         searchInEventsMenuItem = this.add(table.searchInEventsAction);
         searchInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        searchInEventsMenuItem.setToolTipText("Search for text in events");
         
         findNextMenuItem = this.add(table.findNextAction);
         findNextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        findNextMenuItem.setToolTipText("Find the next item for the last search in events");
 
         replaceInEventsMenuItem = this.add(table.replaceInEventsAction);
         replaceInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        replaceInEventsMenuItem.setToolTipText("Search and replace text in events");
 
         add(table.gotoAction).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
@@ -79,16 +84,17 @@ public class EditMenu extends AbstractTableMenu {
 
         exaktSearchMenuItem = this.add(table.exaktSearchAction);
         exaktSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK + Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-
+        exaktSearchMenuItem.setToolTipText("Use EXAKT interface to do a search on this transcription");
+                
         this.add(new javax.swing.JSeparator());
         //-------------------------------------------------
-        selectionMenu.add(table.selectionToNewAction);
-        selectionMenu.add(table.leftPartToNewAction);
-        selectionMenu.add(table.rightPartToNewAction);
+        selectionMenu.add(table.selectionToNewAction).setToolTipText("Make a new transcription from the current selection");
+        selectionMenu.add(table.leftPartToNewAction).setToolTipText("Make a new transcription out of the part on the left of the cursor");
+        selectionMenu.add(table.rightPartToNewAction).setToolTipText("Make a new transcription out of the part on the right of the cursor");
         selectionMenu.add(new javax.swing.JSeparator());
-        selectionMenu.add(table.selectionToRTFAction);
-        selectionMenu.add(table.selectionToHTMLAction);
-        selectionMenu.add(table.printSelectionAction);
+        selectionMenu.add(table.selectionToRTFAction).setToolTipText("Output the current selection as an RTF file (for MS Word)");
+        selectionMenu.add(table.selectionToHTMLAction).setToolTipText("Output the current selection as an HTML file (for a browser)");
+        selectionMenu.add(table.printSelectionAction).setToolTipText("");
         
         this.add(selectionMenu);
         
@@ -96,8 +102,8 @@ public class EditMenu extends AbstractTableMenu {
         //-------------------------------------------------
         
 
-        add(table.editPreferencesAction);
-        add(table.editPartiturParametersAction);
+        add(table.editPreferencesAction).setToolTipText("Change settings and preferences for the Partitur Editor");
+        add(table.editPartiturParametersAction).setToolTipText("Change settings and preferences for outputting and formatting partiturs");
     }
 
     public void setUndoText(String text){

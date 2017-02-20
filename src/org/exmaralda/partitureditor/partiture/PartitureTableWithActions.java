@@ -2438,10 +2438,16 @@ public class PartitureTableWithActions extends PartitureTable
                 java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");
 
         String os = System.getProperty("os.name").substring(0,3);
+        String jreVersion = System.getProperty("java.version");
         String defaultPlayer = "JMF-Player";
         if (os.equalsIgnoreCase("mac")){
             //defaultPlayer = "ELAN-Quicktime-Player";
-            defaultPlayer = "CocoaQT-Player";
+            if (jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6")){
+                defaultPlayer = "CocoaQT-Player";
+            } else {
+                // new 15-02-2017: don't use CocoaQT if running under Oracle Java
+                defaultPlayer = "BAS-Audio-Player";
+            }
         } else if (os.equalsIgnoreCase("win")){
             defaultPlayer = "JDS-Player";
         }
@@ -2479,6 +2485,16 @@ public class PartitureTableWithActions extends PartitureTable
         } else if (playerType.equals("ELAN-Quicktime-Player")){
             return new ELANQTPlayer();
         } else if (playerType.equals("CocoaQT-Player")){
+            if (!(jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6"))) {
+                // new 15-02-2017: don't use CocoaQT if running under Oracle Java
+                settings.put("PlayerType", "BAS-Audio-Player");
+                String message = "You are using Java version " + jreVersion +". \n"
+                                + "CocoaQT-Player requires Apple's Java in version 1.6."
+                                + ".\nCreating BAS Audio player instead.\n"
+                                + "Changed settings accordingly.";
+                javax.swing.JOptionPane.showMessageDialog(this, message);
+                return new BASAudioPlayer();                
+            }
             return new CocoaQTPlayer();
         } else if (playerType.equals("Quicktime-Player")){
             settings.put("PlayerType", "ELAN-Quicktime-Player");

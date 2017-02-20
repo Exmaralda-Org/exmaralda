@@ -39,45 +39,49 @@ public class FileMenu extends AbstractTableMenu {
         // this is because MAC OS X ignores the accelerator assigned to the action and this in turn is because
         // there is a bug in 1.3.1. (fixed in 1.4.)
         newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        newMenuItem.setToolTipText("Create a new empty transcription with one speaker and one tier");
                 
         addSeparator();
 
-        add(table.newFromWizardAction);
-        add(table.newFromSpeakertableAction);
-        add(table.newFromTimelineAction);
-        add(table.newFromSilenceDetectionAction);
+        add(table.newFromWizardAction).setToolTipText("Create a new transcription by defining its properties in a wizard step-by-step");
+        add(table.newFromSpeakertableAction).setToolTipText("Define speakers, then create a new transcription with one tier for each speaker");
+        add(table.newFromTimelineAction).setToolTipText("Choose a media file, then pre-segment it and create a new transcription with the resulting time intervals");
+        add(table.newFromSilenceDetectionAction).setToolTipText("Run a silence detection on a WAV file and create a new transcription with the resulting time intervals");
 
         addSeparator();
         
         openMenuItem = this.add(table.openAction);
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));        
-
-        add(table.restoreAction);
+        openMenuItem.setToolTipText("Open a basic transcription (*.exb) from file");
+        
+        add(table.restoreAction).setToolTipText("Go back to the last saved version of the current transcription");
         
         saveMenuItem = this.add(table.saveAction);
         saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        saveMenuItem.setToolTipText("Save the transcription under its current name and location");
         
-        add(table.saveAsAction);
+        add(table.saveAsAction).setToolTipText("Save the transcription under a new name and/or location");
         
         add(new javax.swing.JSeparator());
 
-        add(table.editErrorsAction);
+        add(table.editErrorsAction).setToolTipText("Open an error list created by the Corpus Manager");
 
         add(new javax.swing.JSeparator());
 
-        add(table.pageSetupAction);
+        add(table.pageSetupAction).setToolTipText("Define the page setup for printing");
         
         //add(table.editPartiturParametersAction);
         
         printMenuItem = this.add(table.printAction);
         printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));        
+        printMenuItem.setToolTipText("Print the transcctiption");
         
         addSeparator();
         //-------------------------------------------------
        
-        add(table.outputAction);
-        add(table.importAction);
-        add(table.exportAction);
+        add(table.outputAction).setToolTipText("Generate an output of this transcription to view/process in a browser, a word processor, etc.");
+        add(table.importAction).setToolTipText("Import a transcription in a format from another tool (e.g. Praat, FOLKER, ELAN)");
+        add(table.exportAction).setToolTipText("Export the transcription to the format of another tool (e.g. Praat, FOLKER, ELAN)");
 
         addSeparator();
         //-------------------------------------------------

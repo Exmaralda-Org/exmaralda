@@ -142,15 +142,18 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
 
-        add(showKeyboardCheckBoxMenuItem);
-        add(showLinkPanelCheckBoxMenuItem);
-        add(showMediaPanelCheckBoxMenuItem);
+        add(showMediaPanelCheckBoxMenuItem).setToolTipText("The panel for displaying video and further operations on media files");
+        add(showPraatPanelCheckBoxMenuItem).setToolTipText("The panel for sending messages between the Partitur-Editor and Praat");
+        add(showLinkPanelCheckBoxMenuItem).setToolTipText("The panel for displaying and operating on externally linked files");
+        addSeparator();
+        add(showAnnotationPanelCheckBoxMenuItem).setToolTipText("The panel to support annotation according to an annotation scheme");
+        addSeparator();
+        add(showKeyboardCheckBoxMenuItem).setToolTipText("Virtual keyboards with 'special' symbols");
+        add(showIPAPanelCheckBoxMenuItem).setToolTipText("Virtual keyboard with symbols from the International Phonetic Alphabet");
+        addSeparator();
+        add(showMultimodalPanelCheckBoxMenuItem).setToolTipText("The panel with annotation symbols for non-verbal actions, facial expression etc.");
+        add(showSVGPanelCheckBoxMenuItem).setToolTipText("The panel for working with external SVG files");
         add(showQuickMediaOpenCheckBoxMenuItem);
-        add(showPraatPanelCheckBoxMenuItem);
-        add(showAnnotationPanelCheckBoxMenuItem);
-        add(showIPAPanelCheckBoxMenuItem);
-        add(showMultimodalPanelCheckBoxMenuItem);
-        add(showSVGPanelCheckBoxMenuItem);
         //add(showSegmentationPanelCheckBoxMenuItem);
         addSeparator();
         
@@ -164,7 +167,7 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
         
-        this.add(showToolbarCheckBoxMenuItem);
+        add(showToolbarCheckBoxMenuItem).setToolTipText("Show or hide the toolbar");
         
         showLargeTextFieldCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showLargeTextFieldCheckBoxMenuItem.setSelected(true);
@@ -175,7 +178,7 @@ public class ViewMenu extends AbstractTableMenu {
                 showLargeTextFieldCheckBoxMenuItemActionPerformed(evt);
             }
         });
-        this.add(showLargeTextFieldCheckBoxMenuItem);
+        add(showLargeTextFieldCheckBoxMenuItem).setToolTipText("Show or hide the text field in the upper part of the screen");
 
         addSeparator();
 
@@ -190,7 +193,7 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
         
-        this.add(showGridCheckBoxMenuItem);
+        this.add(showGridCheckBoxMenuItem).setToolTipText("Show or hide the grid lines in the partitur");
 
         showSpecialCharsCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showSpecialCharsCheckBoxMenuItem.setSelected(false);
@@ -202,7 +205,7 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
         showSpecialCharsCheckBoxMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PERIOD, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        this.add(showSpecialCharsCheckBoxMenuItem);
+        this.add(showSpecialCharsCheckBoxMenuItem).setToolTipText("Make whitespace visible in the event text");
 
         useDifferentEmptyColorCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         useDifferentEmptyColorCheckBoxMenuItem.setSelected(table.diffBgCol);
@@ -213,11 +216,11 @@ public class ViewMenu extends AbstractTableMenu {
                 useDifferentEmptyColorCheckBoxMenuItemActionPerformed(evt);
             }
         });
-        this.add(useDifferentEmptyColorCheckBoxMenuItem);
+        this.add(useDifferentEmptyColorCheckBoxMenuItem).setToolTipText("Whether or not to use a different background color for empty events");
 
         addSeparator();
 
-        add(table.changeScaleConstantAction);
+        add(table.changeScaleConstantAction).setToolTipText("Increase or decrease the displayed font size in the Partitur");
 
         addSeparator();
 
@@ -233,7 +236,7 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
         buttonGroup.add(characterProportionalRadioButton);
-        add(characterProportionalRadioButton);
+        add(characterProportionalRadioButton).setToolTipText("Events are as large as the text in them");;
         
         timeProportionalRadioButton = new javax.swing.JRadioButtonMenuItem();
         timeProportionalRadioButton.setSelected(false);
@@ -245,7 +248,7 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
         buttonGroup.add(timeProportionalRadioButton);
-        add(timeProportionalRadioButton);
+        add(timeProportionalRadioButton).setToolTipText("Event sizes are proportional to the length of the corresponding time interval");
 
         setProportionButtonsVisible(false);
     }

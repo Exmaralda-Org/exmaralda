@@ -46,7 +46,8 @@
                                 <cmd:Toolchain>
                                     <cmd:ToolInChain>
                                         <!-- no idea what the meaning of this is -->
-                                        <cmd:PID>11858/00-1778-0000-0004-BABF-C</cmd:PID>
+                                        <!-- 20-02-2017: PID of the Partitur-Editor (issue #58) -->
+                                        <cmd:PID>hdl.handle.net/11022/0000-0000-850D-C</cmd:PID>
                                     </cmd:ToolInChain>
                                 </cmd:Toolchain>
                             </cmd:WebServiceToolChain>
