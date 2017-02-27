@@ -140,7 +140,7 @@ public class EXAKT extends javax.swing.JFrame
     public EXAKT() {
         new StartupSplashScreen(this);        
         
-        //org.exmaralda.common.Logger.initialiseLogger(this);
+        org.exmaralda.common.Logger.initialiseLogger(this);
 
         initActions();
         partitur = new PartitureTableWithActions(this);           
