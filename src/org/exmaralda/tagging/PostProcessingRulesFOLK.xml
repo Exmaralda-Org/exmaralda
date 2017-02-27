@@ -315,5 +315,6 @@
         <!-- zeichnest muss zu zeichnen lemmatisiert werden -->
         <match field="n">zeichnest</match>
         <set field="lemma">zeichnen</set>
-    </rule>    
+    </rule>
+    
 </rules>

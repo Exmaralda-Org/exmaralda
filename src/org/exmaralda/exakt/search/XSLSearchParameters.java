@@ -22,27 +22,34 @@ public class XSLSearchParameters implements SearchParametersInterface {
     XSLTransformer transformer;
     String filename;
     
-    /** Creates a new instance of XSLSearchParameters */
+    /** Creates a new instance of XSLSearchParameters
+     * @param file
+     * @throws org.jdom.transform.XSLTransformException */
     public XSLSearchParameters(File file) throws XSLTransformException {
         transformer = new XSLTransformer(file);
     }
 
+    @Override
     public int getSearchType() {
         return SearchParametersInterface.COMPONENT_SEARCH;
     }
 
+    @Override
     public String getSearchExpressionAsString() {
         return "";
     }
 
+    @Override
     public int getContextLimit() {
         return -1;
     }
     
+    @Override
     public void setContextLimit(int cl){
     }
 
 
+    @Override
     public Object[][] getAdditionalDataLocators() {
         return null;
     }
@@ -51,6 +58,7 @@ public class XSLSearchParameters implements SearchParametersInterface {
         return transformer;
     }
 
+    @Override
     public String getCategory() {
         return "";
     }

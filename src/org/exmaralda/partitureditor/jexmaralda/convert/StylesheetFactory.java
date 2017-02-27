@@ -18,6 +18,8 @@ import javax.xml.transform.stream.StreamResult;
 
 
 import java.io.*;
+import javax.xml.transform.Source;
+import javax.xml.transform.URIResolver;
 
 /**
  *
@@ -43,7 +45,7 @@ public class StylesheetFactory {
         }
     }
     
-    public String applyInternalStylesheetToString(String pathToInternalStyleSheet, 
+    public String applyInternalStylesheetToString(final String pathToInternalStyleSheet, 
                                                   String sourceString,
                                                   String[][] parameters)
                                         throws    SAXException, 
@@ -56,10 +58,20 @@ public class StylesheetFactory {
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        
+        // this does not work, but also no harm...
+        tFactory.setURIResolver(new URIResolver(){
+            @Override
+            public Source resolve(String href, String base) throws TransformerException {
+                InputStream is= getClass().getResourceAsStream("/" + href);
+                return new javax.xml.transform.stream.StreamSource(is,href);
+            }            
+        });
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
         java.io.StringReader sr = new java.io.StringReader(sourceString);
         javax.xml.transform.stream.StreamSource ss = new javax.xml.transform.stream.StreamSource(sr);
+        
 
         // set up the output stream for the second transformation
         java.io.StringWriter sw2 = new java.io.StringWriter();

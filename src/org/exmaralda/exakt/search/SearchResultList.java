@@ -217,6 +217,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
         Element bd = new Element("base-directory");
         bd.setAttribute("url", baseDirectory);
         returnValue.addContent(bd);       
+        System.out.println("*********** ADDED Base Directory Element");
         
         Element a = new Element("analyses");
         for (AnalysisInterface ai : analyses){

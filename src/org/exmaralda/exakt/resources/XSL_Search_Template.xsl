@@ -3,7 +3,8 @@
 	<xsl:output method="xml" encoding="UTF-8"/>
 	<xsl:template match="/">
 		<search-result-list>
-			<xsl:apply-templates select="//*[@n='HIAT:w' and text()='Ja']"/>
+                    <base-directory url="/dummy"/>
+                    <xsl:apply-templates select="//*[@n='HIAT:w' and text()='Ja']"/>
 		</search-result-list>
 	</xsl:template>
 	<xsl:template match="*">

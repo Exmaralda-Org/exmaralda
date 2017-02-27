@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Attribute;
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
 
@@ -95,6 +96,9 @@ public class TagDirectory {
         PostProcessingRules ppr = new PostProcessingRules();
         ppr.read(PostProcessingRules.FOLK_RULES);
         
+        CombinedPostProcessingRules pprCombined = new CombinedPostProcessingRules();
+        pprCombined.read(CombinedPostProcessingRules.FOLK_RULES);
+        
         
         System.out.println("Found " + transcriptFiles.length + " OrthoNormal transcripts in " + in.getAbsolutePath() + ".");
         int count2 = 0;
@@ -125,10 +129,20 @@ public class TagDirectory {
             System.out.println("Writing " + OUTPUT);
             soi.writeDocument(OUTPUT);
 
+            
             if (applyPP){
                 Document doc = FileIO.readDocumentFromLocalFile(new File(OUTPUT));
+                
+                // "Ordinary" Post Processing Rules : 1:1
                 int count = ppr.apply(doc);
-                System.out.println("Applied " + count + " post processing rules");
+                System.out.println("Applied 1:1 post processing rules on " + count + " elements. " );
+                
+                // "Combined" Post Processing Rules : 2:2
+                //int countCombi = pprCombined.apply(doc);
+                //System.out.println("Applied 2:2 post processing rules on " + countCombi + " elements. " );
+                
+                
+                
                 FileIO.writeDocumentToLocalFile(OUTPUT, doc);
             }
             System.out.println("=================================");

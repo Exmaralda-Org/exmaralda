@@ -142,7 +142,7 @@ public class Evaluate {
             Document originalDoc = FileIO.readDocumentFromLocalFile(testFile);
             Document correctedDoc = FileIO.readDocumentFromLocalFile(evaluationFile);
             Document mergedDoc = new Merge().merge(originalDoc, correctedDoc);
-            FileIO.writeDocumentToLocalFile(new File("Z:\\TAGGING\\2016_11_08_TestEvaluate.xml"), mergedDoc);
+            //FileIO.writeDocumentToLocalFile(new File("Z:\\TAGGING\\2016_11_08_TestEvaluate.xml"), mergedDoc);
             //pos / pos_c
             List l = XPath.selectNodes(mergedDoc, "//w");
             for (Object o : l){

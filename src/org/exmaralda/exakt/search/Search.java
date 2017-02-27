@@ -25,7 +25,9 @@ public class Search {
     double timeForLastSearch;
     
     
-    /** Creates a new instance of AbstractSearch */
+    /** Creates a new instance of AbstractSearch
+     * @param c
+     * @param sp */
     public Search(CorpusInterface c, SearchParametersInterface sp) {
         corpus = c;
         searchParameters = sp;

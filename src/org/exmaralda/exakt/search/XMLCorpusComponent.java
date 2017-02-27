@@ -59,6 +59,7 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
         }
     }
 
+    @Override
     public SearchableSegmentInterface getSearchableSegment(SearchableSegmentLocatorInterface id) {
         XMLSearchableSegmentLocator locator = (XMLSearchableSegmentLocator)id;
         String segmentXPath = (String)(locator.getSearchableSegmentLocator());
@@ -73,10 +74,12 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
         return null;
     }
 
+    @Override
     public boolean hasNext() {
         return (counter<numberOfSearchableSegments);
     }
 
+    @Override
     public SearchableSegmentInterface next() {
         XMLSearchableSegmentLocator xssl = new XMLSearchableSegmentLocator(
                 url,
@@ -87,10 +90,12 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
         return returnValue;
     }
 
+    @Override
     public void reset() {
         counter=0;
     }
 
+    @Override
     public int getNumberOfSearchableSegments() {
         return numberOfSearchableSegments;
     }
@@ -99,10 +104,12 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
         return xpath_to_searchable_segment;
     }
 
+    @Override
     public String getIdentifier() {
         return url;
     }
 
+    @Override
     public SearchResultList search(SearchParametersInterface searchParameters) {
         SearchResultList searchResult = new SearchResultList();
         if (searchParameters.getSearchType() == SearchParametersInterface.DEFAULT_SEARCH){        
@@ -125,7 +132,9 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
         } else if (searchParameters instanceof XSLSearchParameters){
             XSLTransformer xslsp = ((XSLSearchParameters)(searchParameters)).getXSLTransformer();
             try {
-                Document thisResultDocument = xslsp.transform(this.corpusComponentDocument);
+                Document thisResultDocument = xslsp.transform(corpusComponentDocument);
+                // NEW 27-02-2017
+                thisResultDocument.getRootElement().getChild("base-directory").setAttribute("url", url);
                 searchResult.read(thisResultDocument);
                 for (SearchResultInterface sri : searchResult){
                     ((XMLSearchableSegmentLocator)(sri.getSearchableSegmentLocator())).setCorpusComponentLocator(getIdentifier());
