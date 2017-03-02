@@ -110,7 +110,9 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     }
 
     public String getNormalizedForm(){
-        return normalizedWord;
+        //changed 01-03-2017 (issue #62)
+        //return normalizedWord;
+        return normalizedWord.trim().replaceAll(" {2,}", " ");
     }
     
     public Element getWordElement(){

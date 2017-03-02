@@ -1005,6 +1005,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         System.out.println("Player: " + playerType);
         // make sure that there is no contradiction between preferred player and os
         String os = System.getProperty("os.name").substring(0,3);
+        String jreVersion = System.getProperty("java.version");
+        
         if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("mac")){
             playerType = "BAS-Audio-Player";
         }
@@ -1016,6 +1018,15 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         }
         if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("win")){
             playerType = "JDS-Player";
+        }
+        if (playerType.equals("CocoaQT-Player") && !(os.equalsIgnoreCase("mac") && ((jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6"))))){
+            playerType = "BAS-Audio-Player";
+            System.out.println("Forced player change from CocoaQT to BAS-Audio-Player");
+            String message = "You are using Java version " + jreVersion +". \n"
+                            + "CocoaQT-Player requires Apple's Java in version 1.6."
+                            + ".\nCreating BAS Audio player instead.\n"
+                            + "Changed settings accordingly.";
+            displayException(message);
         }
         
 

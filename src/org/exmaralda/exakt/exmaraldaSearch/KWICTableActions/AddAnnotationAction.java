@@ -26,7 +26,9 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
     int count=0;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public AddAnnotationAction(COMAKWICTable t, String title) {
         super(t,title);
     }

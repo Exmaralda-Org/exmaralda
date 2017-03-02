@@ -46,6 +46,7 @@ import org.exmaralda.orthonormal.actions.fileactions.OpenRecentAction;
 import org.exmaralda.folker.actions.fileactions.OutputAction;
 import org.exmaralda.orthonormal.gui.WordLabel;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
+import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.gui.EditContributionDialog;
@@ -511,6 +512,8 @@ public final class ApplicationControl implements  ListSelectionListener,
         System.out.println("Player: " + playerType);
         // make sure that there is no contradiction between preferred player and os
         String os = System.getProperty("os.name").substring(0,3);
+        String jreVersion = System.getProperty("java.version");
+        
         if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("mac")){
             playerType = "BAS-Audio-Player";
         }
@@ -523,6 +526,16 @@ public final class ApplicationControl implements  ListSelectionListener,
         if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("win")){
             playerType = "JDS-Player";
         }
+        if (playerType.equals("CocoaQT-Player") && !(os.equalsIgnoreCase("mac") && ((jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6"))))){
+            playerType = "BAS-Audio-Player";
+            System.out.println("Forced player change from CocoaQT to BAS-Audio-Player");
+            String message = "You are using Java version " + jreVersion +". \n"
+                            + "CocoaQT-Player requires Apple's Java in version 1.6."
+                            + ".\nCreating BAS Audio player instead.\n"
+                            + "Changed settings accordingly.";
+            displayException(message);
+        }
+        
         
 
         if (playerType.equals("JMF-Player")) {
@@ -959,6 +972,12 @@ public final class ApplicationControl implements  ListSelectionListener,
         status(title + ": " + message);
         e.printStackTrace();
     }
+    
+    public void displayException(String message){
+        String title = FOLKERInternationalizer.getString("misc.error");       
+        JOptionPane.showMessageDialog(getFrame(), message, title, JOptionPane.ERROR_MESSAGE);
+    }
+    
 
 
     public String displayRecordingNotFoundDialog(String mediaPath, Exception ex){
