@@ -43,7 +43,8 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
     
     static String XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/MergedTEI2HTML.xsl";
 
-    /** Creates a new instance of NewAction */
+    /** Creates a new instance of NewAction
+     * @param t */
     public WebLichtAction(PartitureTableWithActions t) {
         super("WebLicht...", t);
     }

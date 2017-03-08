@@ -354,8 +354,6 @@ public class TCFConverter {
         System.out.println("Merged");
         generateWordIDs(teiDoc);
         
-        FileIO.writeDocumentToLocalFile("F:\\KORPORA\\EXMARaLDA-Demokorpus\\AnneWill\\AnneWill_TEI.xml", teiDoc);
-
         StylesheetFactory ssf = new StylesheetFactory(true);
         String tcf = ssf.applyInternalStylesheetToString(TCF_STYLESHEET_PATH,
                 IOUtilities.documentToString(teiDoc));
