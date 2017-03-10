@@ -25,7 +25,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
     String[] FONTS;
     String TEST_STRING = "\u00B0 \u0294 \u007C \u2013 \u2191 \u2193 \u0060 \u00B4 \u00AF \u02C6 \u02C7";
-    String[] LANGUAGE_CODES = {"default", "ger", "GER", "eng", "fre", "por", "hun", "tur", "dan", "spa", "ita", "cze", "rus_tran", "universal"};
+    String[] LANGUAGE_CODES = {"default", "ger", "GER", "eng", "fre", "por", "hun", "tur", "dan", "spa", "ita", "cze", "ukr", "rus_tran", "universal"};
 
 
     /** Creates new form EditPreferencesPanel
@@ -309,7 +309,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         jLabel2.setText("Alphabet: ");
         jPanel3.add(jLabel2);
 
-        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German (Deutsch)", "German (Deutsch) + Capitals", "English", "French (Français)", "Portuguese (Portugu?s)", "Hungarian (Magyar)", "Turkish (Türkçe)", "Danish (Dansk)", "Spanish (Espagnol)", "Italian (Italiano)", "Czech (èeština)", "Russian (Latin transliteration)", "Universal" }));
+        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German (Deutsch)", "German (Deutsch) + Capitals", "English", "French (Français)", "Portuguese (Português)", "Hungarian (Magyar)", "Turkish (Türkçe)", "Danish (Dansk)", "Spanish (Espagnol)", "Italian (Italiano)", "Czech (čeština)", "Ukranian (українська мова‎)", "Russian (Latin transliteration)", "Universal" }));
         alphabetComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alphabetComboBoxActionPerformed(evt);

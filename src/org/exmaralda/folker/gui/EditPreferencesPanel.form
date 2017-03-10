@@ -202,7 +202,7 @@
                         <Component class="javax.swing.JComboBox" name="alphabetComboBox">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="14">
+                              <StringArray count="15">
                                 <StringItem index="0" value="Default"/>
                                 <StringItem index="1" value="German (Deutsch)"/>
                                 <StringItem index="2" value="German (Deutsch) + Capitals"/>
@@ -215,8 +215,9 @@
                                 <StringItem index="9" value="Spanish (Espagnol)"/>
                                 <StringItem index="10" value="Italian (Italiano)"/>
                                 <StringItem index="11" value="Czech (&#x10d;e&#x161;tina)"/>
-                                <StringItem index="12" value="Russian (Latin transliteration)"/>
-                                <StringItem index="13" value="Universal"/>
+                                <StringItem index="12" value="Ukranian (&#x443;&#x43a;&#x440;&#x430;&#x457;&#x43d;&#x441;&#x44c;&#x43a;&#x430; &#x43c;&#x43e;&#x432;&#x430;&#x200e;)"/>
+                                <StringItem index="13" value="Russian (Latin transliteration)"/>
+                                <StringItem index="14" value="Universal"/>
                               </StringArray>
                             </Property>
                           </Properties>

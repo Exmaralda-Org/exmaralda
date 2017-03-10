@@ -61,7 +61,12 @@
             <language name="cze">
                 <regex>[aábcčdďeéěfghchiíjklmnňoópqpqrřsštťuúůvwxyýzž]</regex>
                 <comment>any lower case letters from the Czech alphabet</comment>
-            </language>        
+            </language>     
+            <!-- added 13-03-2017 (issue #62) -->
+            <language name="ukr">
+                <regex>[абвгґдеєжзиіїйклмнопрстуфхцчшщьюя]</regex>
+                <comment>any lower case letters from the Ukranian alphabet</comment>
+            </language>                    
             <language name="rus_trans">
                 <regex>[abvgdeëžzijklmnoprstufhcčščyė"']</regex>
                 <comment>characters for Latin transliteration of Russian</comment>
@@ -268,6 +273,11 @@
                 <regex>[aábcčdďeéěfghchiíjklmnňoópqpqrřsštťuúůvwxyýzž]</regex>
                 <comment>any lower case letters from the Czech alphabet</comment>
             </language>      
+            <!-- added 13-03-2017 (issue #62) -->
+            <language name="ukr">
+                <regex>[абвгґдеєжзиіїйклмнопрстуфхцчшщьюя]</regex>
+                <comment>any lower case letters from the Ukranian alphabet</comment>
+            </language>                                
             <language name="rus_trans">
                 <regex>[abvgdeëžzijklmnoprstufhcščyė"']</regex>
                 <comment>characters for Latin transliteration of Russian</comment>
@@ -325,6 +335,12 @@
                 <regex>[AÁBCČDĎEÉĚFGHCHIÍJKLMNŇOÓPQPQRŘSŠTŤUÚŮVWXYÝZŽ]</regex>
                 <comment>any upper case letters from the Czech alphabet</comment>
             </language>   
+            <!-- added 13-03-2017 (issue #62) -->
+            <language name="ukr">
+                <!-- <regex>[АаБбВвГгҐґДдЕеЄєЖжЗзИиІіЇїЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЬьЮюЯя]</regex> -->
+                <regex>[АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ]</regex>
+                <comment>any upper case letters from the Ukranian alphabet</comment>
+            </language>                                
             <language name="rus_trans">
                 <regex>[ABVGDEËŽZIJKLMNOPRSTUFHCČŠYĖ]</regex>
                 <comment>capital characters for Latin transliteration of Russian</comment>
