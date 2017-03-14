@@ -64,7 +64,7 @@
             </language>     
             <!-- added 13-03-2017 (issue #62) -->
             <language name="ukr">
-                <regex>[абвгґдеєжзиіїйклмнопрстуфхцчшщьюя]</regex>
+                <regex>[абвгґдеєжзиіїйклмнопрстуфхцчшщьюя']</regex>
                 <comment>any lower case letters from the Ukranian alphabet</comment>
             </language>                    
             <language name="rus_trans">
@@ -270,7 +270,7 @@
                 <comment>any lower case letters from the Italian alphabet</comment>                
             </language>            
             <language name="cze">
-                <regex>[aábcčdďeéěfghchiíjklmnňoópqpqrřsštťuúůvwxyýzž]</regex>
+                <regex>[aábcčdďeéěfghchiíjklmnňoópqpqrřsštťuúůvwxyýzž']</regex>
                 <comment>any lower case letters from the Czech alphabet</comment>
             </language>      
             <!-- added 13-03-2017 (issue #62) -->

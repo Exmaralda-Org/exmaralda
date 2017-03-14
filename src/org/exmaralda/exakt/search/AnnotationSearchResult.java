@@ -28,11 +28,13 @@ public class AnnotationSearchResult extends SimpleSearchResult {
         Element parentElement = annotatedElement.getParentElement();
         //System.out.println("*** Parent element " + parentElement.getAttributeValue("n") + " " + parentElement.toString());
 
-        int index = parentElement.indexOf(annotatedElement);
-        String matchText = org.exmaralda.exakt.utilities.FileIO.getPlainText(annotatedElement);
-        String leftContext = "";
         //changed 06-02-2017 - issue #56
         List children = parentElement.getChildren();
+        //int index = parentElement.indexOf(annotatedElement);
+        //changed 14-03-2017 - issue #56
+        int index = children.indexOf(annotatedElement);
+        String matchText = org.exmaralda.exakt.utilities.FileIO.getPlainText(annotatedElement);
+        String leftContext = "";
         
         for (int pos = 0; pos < index; pos++) {
             //Element e = (Element) (parentElement.getContent(pos));
@@ -46,14 +48,12 @@ public class AnnotationSearchResult extends SimpleSearchResult {
             rightContext += org.exmaralda.exakt.utilities.FileIO.getPlainText(e);
         }
 
-        String text = leftContext + matchText + rightContext;
+        String thisText = leftContext + matchText + rightContext;
         String[][] extendedAD = new String[ad.length + 1][2];
-        for (int pos = 0; pos < ad.length; pos++) {
-            extendedAD[pos] = ad[pos];
-        }
+        System.arraycopy(ad, 0, extendedAD, 0, ad.length);
         String[] newAD = {"", t.substring(ms, me)};
         extendedAD[ad.length] = newAD;
-        super.init(text, leftContext.length(), leftContext.length() + matchText.length(), contextLimit, ssli, extendedAD);
+        super.init(thisText, leftContext.length(), leftContext.length() + matchText.length(), contextLimit, ssli, extendedAD);
     }
 
     public AnnotationSearchResult(String t, int ms, int me,
