@@ -24,37 +24,37 @@
                 and process the document, ensuring the conformity with the 
                 CLARIN Metadata Schema (CMDI).  
                 [http://weblicht.sfs.uni-tuebingen.de/weblichtwiki/index.php/The_TCF_Format] -->
+            <!-- replaced 15-03-2017: CMDI 1.2 version issue #58 -->
             <MetaData xmlns="http://www.dspin.de/data/metadata">
-                <Services>
-                    <cmd:CMD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xmlns:cmd="http://www.clarin.eu/cmd/" CMDVersion="1.1"
-                        xsi:schemaLocation="http://www.clarin.eu/cmd/ http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1320657629623/xsd">
-                        <cmd:Resources>
-                            <cmd:ResourceProxyList/>
-                            <cmd:JournalFileProxyList/>
-                            <cmd:ResourceRelationList/>
-                        </cmd:Resources>
-                        <cmd:Components>
-                            <cmd:WebServiceToolChain>
-                                <cmd:GeneralInfo>
-                                    <cmd:Descriptions>
-                                        <cmd:Description/>
-                                    </cmd:Descriptions>
-                                    <cmd:ResourceName>Custom chain</cmd:ResourceName>
-                                    <cmd:ResourceClass>Toolchain</cmd:ResourceClass>
-                                </cmd:GeneralInfo>
-                                <cmd:Toolchain>
-                                    <cmd:ToolInChain>
-                                        <!-- no idea what the meaning of this is -->
-                                        <!-- 20-02-2017: PID of the Partitur-Editor (issue #58) -->
-                                        <cmd:PID>hdl.handle.net/11022/0000-0000-850D-C</cmd:PID>
-                                    </cmd:ToolInChain>
-                                </cmd:Toolchain>
-                            </cmd:WebServiceToolChain>
-                        </cmd:Components>
-                    </cmd:CMD>
-                </Services>
+               <Services>
+                  <cmd:CMD xmlns:cmd="http://www.clarin.eu/cmd/1"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.2"
+                     xsi:schemaLocation="http://www.clarin.eu/cmd/1 http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1320657629623/xsd">
+                     <cmd:Resources>
+                        <cmd:ResourceProxyList/>
+                        <cmd:JournalFileProxyList/>
+                        <cmd:ResourceRelationList/>
+                     </cmd:Resources>
+                     <cmd:Components>
+                        <cmd:WebServiceToolChain>
+                           <cmd:GeneralInfo>
+                              <cmd:Descriptions>
+                                 <cmd:Description/>
+                              </cmd:Descriptions>
+                              <cmd:ResourceName>Custom chain</cmd:ResourceName>
+                              <cmd:ResourceClass>Toolchain</cmd:ResourceClass>
+                           </cmd:GeneralInfo>
+                           <cmd:Toolchain>
+                              <cmd:ToolInChain>
+                                 <cmd:PID>hdl.handle.net/11022/0000-0000-850D-C</cmd:PID>
+                              </cmd:ToolInChain>
+                           </cmd:Toolchain>
+                        </cmd:WebServiceToolChain>
+                     </cmd:Components>
+                  </cmd:CMD>
+               </Services>
             </MetaData>
+            
 
 
             <!-- *********************************************************** -->
