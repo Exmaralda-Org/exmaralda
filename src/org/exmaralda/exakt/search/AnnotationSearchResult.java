@@ -43,8 +43,8 @@ public class AnnotationSearchResult extends SimpleSearchResult {
             leftContext += org.exmaralda.exakt.utilities.FileIO.getPlainText(e);
         }
         String rightContext = "";
-        for (int pos = index + 1; pos < parentElement.getChildren().size(); pos++) {
-            Element e = (Element) (parentElement.getContent(pos));
+        for (int pos = index + 1; pos < children.size(); pos++) {
+            Element e = (Element) (children.get(pos));
             rightContext += org.exmaralda.exakt.utilities.FileIO.getPlainText(e);
         }
 
