@@ -178,7 +178,7 @@ public class SegmentTranscriptionAction extends
 	private void success(HashMap<File, File> segmentedTranscriptions) {
 		int count = 0;
 		for (File segTr : segmentedTranscriptions.keySet()) {
-			File basTr = basicTr.elementAt(count);
+			//File basTr = basicTr.elementAt(count);
 			if (!(existingSegs.contains(segTr))) {
 				Element trE = new Element("Transcription");
 				trE.setAttribute("Id", "T" + new GUID().makeID());
@@ -199,13 +199,36 @@ public class SegmentTranscriptionAction extends
 				TranscriptionMetadata tm = new TranscriptionMetadata(segTr,
 						true);
 				Element dElement = new Element("Description");
+                                /*<Transcription Id="CIDIDA68F4AAD-0DAB-C778-2992-301A3B03DD10">
+                                    <Name>Griffith_01</Name>
+                                    <Filename>Griffith_01.exb</Filename>
+                                    <NSLink>Griffith_01.exb</NSLink>
+                                    <Description>
+                                        <Key Name="segmented">false</Key>
+                                    </Description>
+                                    <Availability>
+                                        <Available>false</Available>
+                                        <ObtainingInformation/>
+                                    </Availability>
+                                </Transcription>
+                                <Transcription Id="TID3710E022-BA7C-72B7-9707-382B67858D69">
+                                    <Name/>
+                                    <Filename>Griffith_01_s.exs</Filename>
+                                    <NSLink>Griffith_01_s.exs</NSLink>
+                                    <Description>
+                                        <Key Name="transcription-name"/>
+                                        <Key Name="project-name"/>
+                                        <Key Name="transcription-convention"/>
+                                        <Key Name="comment"/>
+                                    </Description>
+                                </Transcription>*/
 				for (String key : tm.getMetadata().keySet()) {
-					dElement.addContent(new Element("Key").setAttribute("Name",
-							key).setText(tm.getMetadata().get(key)));
+                                    dElement.addContent(new Element("Key").setAttribute("Name", key).setText(tm.getMetadata().get(key)));
 				}
+                                // issue #66
+                                dElement.addContent(new Element("Key").setAttribute("Name", "segmented").setText(("true")));
 				trE.addContent(dElement);
-				basicTr2Communication.get(segmentedTranscriptions.get(segTr))
-						.addContent(trE);
+				basicTr2Communication.get(segmentedTranscriptions.get(segTr)).addContent(trE);
 			}
 			count++;
 

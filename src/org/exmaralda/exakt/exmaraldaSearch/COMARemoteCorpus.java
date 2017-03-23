@@ -113,6 +113,7 @@ public class COMARemoteCorpus extends AbstractCOMACorpus {
             URI xmlURI = uriList.elementAt(pos);
             Document xmlDocument = org.exmaralda.exakt.utilities.FileIO.readDocumentFromURL(xmlURI.toString());
             
+            System.out.println("Read " + xmlURI.toString());
             // get the segmentation names
             List segNames = segmentationNameXPath.selectNodes(xmlDocument);
             for (Object o : segNames){
