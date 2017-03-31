@@ -209,6 +209,7 @@ public class Speakertable extends Vector {
             Speaker speaker = getSpeakerAt(pos);
             String oldID = speaker.getID();
             String newID = "SPK" + Integer.toString(pos);
+            System.out.println(oldID + " --- " + newID);
             speaker.setID(newID);
             mappings.put(oldID, newID);
         }        

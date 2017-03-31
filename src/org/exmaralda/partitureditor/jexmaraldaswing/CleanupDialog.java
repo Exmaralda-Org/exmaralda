@@ -16,7 +16,8 @@ public class CleanupDialog extends JEscapeDialog {
 
     public boolean change = false; 
     
-    /** Creates new form CleanupDialog */
+    /** Creates new form CleanupDialog
+     * @param parent */
     public CleanupDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -53,8 +54,8 @@ public class CleanupDialog extends JEscapeDialog {
     }
     
     public boolean normalizeIDs(){
-        return false;
-        //return normalizeIDsCheckBox.isSelected();
+        //return false;
+        return normalizeIDsCheckBox.isSelected();
     }
     
     
@@ -81,8 +82,10 @@ public class CleanupDialog extends JEscapeDialog {
         removeUnusedTLICheckBox = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         removeGapsCheckBox = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         normalizeIDsCheckBox = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -157,8 +160,14 @@ public class CleanupDialog extends JEscapeDialog {
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
         removeGapsCheckBox.setText("Remove gaps");
-        removeGapsCheckBox.setToolTipText("Remove gaps in the timeline (DANGEROUS!)");
+        removeGapsCheckBox.setToolTipText("Remove gaps in the timeline (i.e. join events interrupted only by stretches of empty events, remove the intervening timeline items)");
         jPanel6.add(removeGapsCheckBox);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setForeground(java.awt.Color.red);
+        jLabel4.setText("   [USE WITH CAUTION!]");
+        jLabel4.setToolTipText("Removing gaps s can have unintended side effects. Use this option only if you are very sure you know what you are doing. Make a safety backup of your file first.");
+        jPanel6.add(jLabel4);
 
         jPanel1.add(jPanel6);
 
@@ -166,9 +175,13 @@ public class CleanupDialog extends JEscapeDialog {
 
         normalizeIDsCheckBox.setText("Normalize IDs");
         normalizeIDsCheckBox.setToolTipText("Normalize speaker, tier and timeline IDs - disabled, suspected to cause a serious bug with larg files");
-        normalizeIDsCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        normalizeIDsCheckBox.setEnabled(false);
         jPanel7.add(normalizeIDsCheckBox);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setForeground(java.awt.Color.red);
+        jLabel3.setText("   [USE WITH CAUTION!]");
+        jLabel3.setToolTipText("Normalizing IDs can have unintended side effects. Use this option only if you are very sure you know what you are doing.  Make a safety backup of your file first.");
+        jPanel7.add(jLabel3);
 
         jPanel1.add(jPanel7);
 
@@ -235,6 +248,8 @@ public class CleanupDialog extends JEscapeDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
