@@ -14,6 +14,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import javax.swing.text.BadLocationException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -2049,7 +2050,11 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         // window location
         int windowLocationX = Integer.parseInt(PreferencesUtilities.getProperty("window-location-x", "0"));
         int windowLocationY = Integer.parseInt(PreferencesUtilities.getProperty("window-location-y", "0"));
-        applicationFrame.setLocation(Math.max(0,windowLocationX), Math.max(0,windowLocationY));
+        // changed 12-04-2017, issue #72
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();        
+        applicationFrame.setLocation(Math.min(screenWidth-50, Math.max(0,windowLocationX)), Math.min(screenHeight-50, Math.max(0,windowLocationY)));
         // divider location
         int dividerLocation = Integer.parseInt(PreferencesUtilities.getProperty("divider-location", "200"));
         applicationFrame.mainPanel.timeTextViewsSplitPane.setDividerLocation(dividerLocation);
