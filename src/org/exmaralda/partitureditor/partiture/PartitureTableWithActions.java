@@ -2021,14 +2021,9 @@ public class PartitureTableWithActions extends PartitureTable
         if (soundFile!=null && soundFile.length()>0){
             try {
                 player.setSoundFile(soundFile);
+                System.out.println("(1b - alpha) - Media file is now set for player of PartiturTableWithActions");
+                System.out.println("   Player says that media file has length " + Double.toString(player.getTotalLength()));
                 //getModel().getTranscription().getBody().getCommonTimeline().anchorTimeline(0.0, player.getTotalLength());
-                // anchoring the timeline may require relayout
-                if (AUTO_ANCHOR){
-                    protectLastColumn = true;
-                    // added 19-01-2010
-                    getModel().protectLastColumn = true;
-                    getModel().anchorTimeline(0.0, player.getTotalLength());
-                }
                 mediaPanelDialog.setAvailableSoundFiles(getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles());
                 System.out.println("(1c) PartiturTableWithActions: handing the media file to the audio/video panel");
                 boolean success = mediaPanelDialog.setSoundFile(soundFile);
@@ -2044,7 +2039,16 @@ public class PartitureTableWithActions extends PartitureTable
                     //because CocoaQT always has a visible component
                     if (player instanceof CocoaQTPlayer){
                         mediaPanelDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                        
                     }
+                }
+                //anchoring the timeline may require relayout
+                //moved here 24-04-2017 issue #73
+                if (AUTO_ANCHOR){
+                    protectLastColumn = true;
+                    // added 19-01-2010
+                    getModel().protectLastColumn = true;
+                    getModel().anchorTimeline(0.0, player.getTotalLength());
                 }
                 return success;
             } catch (IOException ex) {
