@@ -135,8 +135,8 @@ public class PraatControl {
     public boolean isPraatRunning(){
         // isAlive() is not available in 1.6, so need to use this defunct
         // version when compiling for the crappy Mac
-        return (praatProcess!=null);
-        //return ((praatProcess!=null) && (praatProcess.isAlive())); 
+        //return (praatProcess!=null);
+        return ((praatProcess!=null) && (praatProcess.isAlive())); 
     }
     
     public void startPraat() throws IOException {

@@ -26,7 +26,7 @@
                 [http://weblicht.sfs.uni-tuebingen.de/weblichtwiki/index.php/The_TCF_Format] -->
             <!-- replaced 15-03-2017: CMDI 1.2 version issue #58 -->
             <MetaData xmlns="http://www.dspin.de/data/metadata">
-               <Services>
+               <!-- <Services>
                   <cmd:CMD xmlns:cmd="http://www.clarin.eu/cmd/1"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CMDVersion="1.2"
                      xsi:schemaLocation="http://www.clarin.eu/cmd/1 http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1320657629623/xsd">
@@ -52,7 +52,7 @@
                         </cmd:WebServiceToolChain>
                      </cmd:Components>
                   </cmd:CMD>
-               </Services>
+               </Services> -->
             </MetaData>
             
 
