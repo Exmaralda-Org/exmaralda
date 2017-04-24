@@ -30,7 +30,9 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
 
     
     HashMap<String, NormalisationInfo> map = new HashMap<String, NormalisationInfo>();
-    String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2016.xml";
+    //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2016.xml";
+    String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_APRIL_2017.xml";
+    
     String CAPITAL_ONLY_LIST = "/org/exmaralda/orthonormal/lexicon/dereko_capital_only.txt";
     HashSet<String> capitalOnly = new HashSet<String>(240000, 1.0f);
     
