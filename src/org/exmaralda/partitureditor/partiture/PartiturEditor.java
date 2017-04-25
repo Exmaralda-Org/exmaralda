@@ -396,9 +396,15 @@ public class PartiturEditor extends javax.swing.JFrame
             settings = java.util.prefs.Preferences.userRoot().node(getPreferencesNode());
 
             String os = System.getProperty("os.name").substring(0,3);
+            String jreVersion = System.getProperty("java.version");        
             String defaultPlayer = "JMF-Player";
             if (os.equalsIgnoreCase("mac")){
-                defaultPlayer = "CocoaQT-Player";
+                // changed 25-04-2017 (issue #29)
+                if (jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6")){
+                    defaultPlayer = "CocoaQT-Player";
+                } else {
+                    defaultPlayer = "BAS-Audio-Player";                    
+                }
             } else if (os.equalsIgnoreCase("win")){
                 defaultPlayer = "JDS-Player";
             }
