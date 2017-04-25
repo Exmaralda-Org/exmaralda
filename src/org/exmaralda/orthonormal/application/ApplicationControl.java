@@ -16,6 +16,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -884,7 +885,11 @@ public final class ApplicationControl implements  ListSelectionListener,
         // window location
         int windowLocationX = Integer.parseInt(PreferencesUtilities.getProperty("window-location-x", "0"));
         int windowLocationY = Integer.parseInt(PreferencesUtilities.getProperty("window-location-y", "0"));
-        applicationFrame.setLocation(Math.max(0,windowLocationX), Math.max(0,windowLocationY));
+        // changed 12-04-2017, issue #72
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();        
+        applicationFrame.setLocation(Math.min(screenWidth-50, Math.max(0,windowLocationX)), Math.min(screenHeight-50, Math.max(0,windowLocationY)));
         // divider location
         int dividerLocation = Integer.parseInt(PreferencesUtilities.getProperty("divider-location", "200"));
         applicationFrame.mainSplitPane.setDividerLocation(dividerLocation);

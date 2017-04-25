@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
+import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.TierFormat;
 import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
@@ -19,7 +20,9 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class CleanupAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of CleanupAction */
+    /** Creates a new instance of CleanupAction
+     * @param t
+     * @param icon */
     public CleanupAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Clean up...", icon, t);
     }
@@ -49,9 +52,11 @@ public class CleanupAction extends org.exmaralda.partitureditor.partiture.Abstra
             if (dialog.removeGaps()){table.getModel().getTranscription().getBody().removeAllGaps();}
             if (dialog.normalizeIDs()){
                 // added 24-09-2009: tier format table mappings must be taken care of
-                String[] originaltierids = table.getModel().getTranscription().getBody().getAllTierIDs();
-                table.getModel().getTranscription().normalize();
-                String[] newtierids = table.getModel().getTranscription().getBody().getAllTierIDs();
+                // changed 31-03-2017: perform this on a copy, may be safer issue #67
+                BasicTranscription copyBT = table.getModel().getTranscription().makeCopy();
+                String[] originaltierids = copyBT.getBody().getAllTierIDs();
+                copyBT.normalize();
+                String[] newtierids = copyBT.getBody().getAllTierIDs();
                 TierFormatTable tft = table.getModel().getTierFormatTable();
                 int count = 0;
                 for (String originalID : originaltierids){
@@ -63,10 +68,13 @@ public class CleanupAction extends org.exmaralda.partitureditor.partiture.Abstra
                         ex.printStackTrace();
                     }
                 }
+                table.getModel().setTranscription(copyBT);
+                return;
             }
         }        
         //table.resetData();
         //table.getModel().fireDataReset();
+        //table.getModel().setTranscription(table.getModel().getTranscription());
         table.getModel().setTranscription(table.getModel().getTranscription());
     }
     

@@ -689,9 +689,6 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         System.out.println("(3a) AudioPanel: openSoundFile");
 
         soundFileName = filename;
-        totalLength = getPlayer().getTotalLength();
-        totalLengthLabel.setText(TimeStringFormatter.formatMiliseconds(totalLength*1000.0,1));
-        endPositionLabel.setText(TimeStringFormatter.formatMiliseconds(totalLength*1000.0,1));
         
         status("Audio/Video file " + new File(filename).getName() + " opened successfully.");
       
@@ -783,6 +780,11 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
             videoPanel.setVisible(false);
         }
 
+        //moved here 24-04-2017 issue #73
+        totalLength = getPlayer().getTotalLength();
+        totalLengthLabel.setText(TimeStringFormatter.formatMiliseconds(totalLength*1000.0,1));
+        endPositionLabel.setText(TimeStringFormatter.formatMiliseconds(totalLength*1000.0,1));
+        
 
         pack();
 

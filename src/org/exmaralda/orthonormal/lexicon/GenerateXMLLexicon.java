@@ -18,7 +18,8 @@ import org.jdom.JDOMException;
  */
 public class GenerateXMLLexicon {
 
-    public static String PATH = "C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK";
+    //public static String PATH = "C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK";
+    public static String PATH = "F:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK";
     public static FilenameFilter FLN_FILTER = new FilenameFilter(){
         @Override
         public boolean accept(File dir, String name) {
@@ -48,7 +49,7 @@ public class GenerateXMLLexicon {
         XMLLexicon lexicon = new XMLLexicon();
         File[] flns = new File(PATH).listFiles(FLN_FILTER);
         lexicon.update(flns);
-        File f = new File("C:\\Users\\Schmidt\\Dropbox\\IDS\\FOLK\\Normalisierung\\FOLK_Normalization_Lexicon_JULY_2016.xml");
+        File f = new File("F:\\Dropbox\\IDS\\FOLK\\Normalisierung\\FOLK_Normalization_Lexicon_APRIL_2017.xml");
         lexicon.write(f);
         lexicon.read(f);
         

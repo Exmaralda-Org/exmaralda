@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.2" maxVersion="1.2" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
@@ -6,6 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="closeDialog"/>
@@ -127,7 +128,19 @@
             <Component class="javax.swing.JCheckBox" name="removeGapsCheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remove gaps"/>
-                <Property name="toolTipText" type="java.lang.String" value="Remove gaps in the timeline (DANGEROUS!)"/>
+                <Property name="toolTipText" type="java.lang.String" value="Remove gaps in the timeline (i.e. join events interrupted only by stretches of empty events, remove the intervening timeline items)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="   [USE WITH CAUTION!]"/>
+                <Property name="toolTipText" type="java.lang.String" value="Removing gaps s can have unintended side effects. Use this option only if you are very sure you know what you are doing. Make a safety backup of your file first."/>
               </Properties>
             </Component>
           </SubComponents>
@@ -140,12 +153,18 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Normalize IDs"/>
                 <Property name="toolTipText" type="java.lang.String" value="Normalize speaker, tier and timeline IDs - disabled, suspected to cause a serious bug with larg files"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                    <EmptyBorder bottom="0" left="0" right="0" top="0"/>
-                  </Border>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="   [USE WITH CAUTION!]"/>
+                <Property name="toolTipText" type="java.lang.String" value="Normalizing IDs can have unintended side effects. Use this option only if you are very sure you know what you are doing.  Make a safety backup of your file first."/>
               </Properties>
             </Component>
           </SubComponents>
