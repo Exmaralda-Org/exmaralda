@@ -21,6 +21,7 @@ import org.exmaralda.coma.actions.CopyDebugInfoAction;
 import org.exmaralda.coma.actions.CreateCorpusFromTranscriptionsAction;
 import org.exmaralda.coma.actions.DumpCorpusAction;
 import org.exmaralda.coma.actions.HarmonizeDescriptionKeysAction;
+import org.exmaralda.coma.actions.HelpAction;
 import org.exmaralda.coma.actions.ImportBasicTranscriptionAction;
 import org.exmaralda.coma.actions.ImportSpeakerAction;
 import org.exmaralda.coma.actions.IntroduceRolesAction;
