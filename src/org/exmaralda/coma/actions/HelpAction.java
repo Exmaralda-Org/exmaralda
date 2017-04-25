@@ -1,7 +1,11 @@
 /*
  * Created on 06.02.2004 by woerner
  */
-package org.exmaralda.coma.root;
+package org.exmaralda.coma.actions;
+
+import org.exmaralda.coma.root.Coma;
+import org.exmaralda.coma.root.ComaAction;
+import org.exmaralda.coma.root.Ui;
 
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -34,7 +38,7 @@ public class HelpAction extends ComaAction {
 	public void actionPerformed(ActionEvent actionEvent) {
 
 		try {
-			Desktop.getDesktop().browse(new URI("http://www.exmaralda.org/files/comadoku.pdf"));
+			Desktop.getDesktop().browse(new URI("http://exmaralda.org/en/manuals-and-tutorials/"));
 		} catch (IOException err) {
 			err.printStackTrace();
 		} catch (URISyntaxException e) {
