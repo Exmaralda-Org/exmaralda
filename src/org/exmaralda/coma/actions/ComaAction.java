@@ -1,7 +1,10 @@
 /*
  * Created on 06.02.2004 by woerner
  */
-package org.exmaralda.coma.root;
+package org.exmaralda.coma.actions;
+
+import org.exmaralda.coma.root.Coma;
+import org.exmaralda.coma.root.ComaData;
 
 import javax.swing.AbstractAction;
 

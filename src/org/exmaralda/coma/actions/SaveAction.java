@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.ComaXMLOutputter;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.helpers.ExmaraldaFileFilter;

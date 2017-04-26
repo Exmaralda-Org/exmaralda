@@ -12,7 +12,6 @@ import java.io.FilenameFilter;
 import javax.swing.JFileChooser;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.helpers.ExmaraldaFileFilter;
 

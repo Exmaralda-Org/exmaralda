@@ -9,7 +9,6 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 
 /**

@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
  * 
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
-public class CorpusStatisticsAction extends org.exmaralda.coma.root.ComaAction {
+public class CorpusStatisticsAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 

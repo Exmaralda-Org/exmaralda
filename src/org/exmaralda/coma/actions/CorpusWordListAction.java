@@ -29,7 +29,7 @@ import org.jdom.xpath.XPath;
  * 
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
-public class CorpusWordListAction extends org.exmaralda.coma.root.ComaAction {
+public class CorpusWordListAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 

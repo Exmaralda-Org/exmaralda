@@ -28,7 +28,7 @@ import org.jdom.JDOMException;
  */
 public class CheckSegmentationErrorsAction
 		extends
-			org.exmaralda.coma.root.ComaAction {
+		ComaAction {
 
 	ProgressBarDialog pbd;
 

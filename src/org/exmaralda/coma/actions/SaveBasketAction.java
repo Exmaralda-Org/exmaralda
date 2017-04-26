@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 
 import org.exmaralda.coma.dialogs.OneDirFileSelector;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.ComaXMLOutputter;
 import org.exmaralda.coma.root.Ui;
 import org.jdom.Document;

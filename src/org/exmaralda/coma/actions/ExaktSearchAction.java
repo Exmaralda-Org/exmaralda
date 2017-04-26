@@ -22,7 +22,7 @@ import org.jdom.JDOMException;
  * 
  * @author thomas First attempt at application crossover! Bleeding hell!!!!!
  */
-public class ExaktSearchAction extends org.exmaralda.coma.root.ComaAction {
+public class ExaktSearchAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 

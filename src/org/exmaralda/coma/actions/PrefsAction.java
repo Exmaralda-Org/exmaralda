@@ -3,16 +3,9 @@
  */
 package org.exmaralda.coma.actions;
 
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.Action;
-import javax.swing.JDialog;
-import javax.swing.KeyStroke;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.PrefsWindow;
 import org.exmaralda.coma.root.Ui;
 

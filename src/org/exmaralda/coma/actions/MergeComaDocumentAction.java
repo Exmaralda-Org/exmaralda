@@ -7,15 +7,11 @@ import java.awt.event.ActionEvent;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
-import org.exmaralda.common.helpers.BasicTranscription2COMA;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.jdom.Document;

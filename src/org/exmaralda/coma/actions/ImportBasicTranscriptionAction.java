@@ -9,7 +9,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.helpers.BasicTranscription2COMA;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;

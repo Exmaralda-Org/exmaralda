@@ -4,7 +4,6 @@
 package org.exmaralda.coma.actions;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 
 import java.awt.Desktop;

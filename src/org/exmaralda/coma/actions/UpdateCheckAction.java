@@ -18,7 +18,6 @@ import java.util.HashMap;
 
 import org.exmaralda.coma.dialogs.UpdateDialogPane;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.JarClassLoader;
 import org.exmaralda.coma.root.Ui;
 import org.jdom.Element;

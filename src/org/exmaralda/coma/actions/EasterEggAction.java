@@ -1,7 +1,10 @@
 /*
  * Created on 06.02.2004 by woerner
  */
-package org.exmaralda.coma.root;
+package org.exmaralda.coma.actions;
+
+import org.exmaralda.coma.root.Coma;
+import org.exmaralda.coma.root.Ui;
 
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -14,7 +17,7 @@ import java.net.URISyntaxException;
  * @author woerner
  *
  */
-public class EasterEggAction extends ComaAction {
+public class EasterEggAction extends org.exmaralda.coma.actions.ComaAction {
 	/**
 	 * Abstract action to display an aboutess screen.
 	 *

@@ -9,8 +9,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
-import org.exmaralda.coma.root.SplashScreen;
 
 /**
  * coma2/org.sfb538.coma2/AboutAction.java

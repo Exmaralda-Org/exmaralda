@@ -34,7 +34,7 @@ import org.jdom.xpath.XPath;
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
 public class SegmentTranscriptionAction extends
-		org.exmaralda.coma.root.ComaAction {
+		ComaAction {
 
 	ProgressBarDialog pbd;
 	SegmentationOptionsDialog dialog = new SegmentationOptionsDialog(this.coma,

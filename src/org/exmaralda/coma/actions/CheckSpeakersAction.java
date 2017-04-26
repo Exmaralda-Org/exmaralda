@@ -7,11 +7,8 @@ package org.exmaralda.coma.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.exmaralda.coma.root.Coma;
@@ -19,14 +16,12 @@ import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.corpusbuild.comafunctions.AddSpeakersDialog;
 import org.exmaralda.common.corpusbuild.comafunctions.SpeakersChecker;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
-import org.jdom.JDOMException;
 
 /**
  * 
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
-public class CheckSpeakersAction extends org.exmaralda.coma.root.ComaAction {
+public class CheckSpeakersAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 

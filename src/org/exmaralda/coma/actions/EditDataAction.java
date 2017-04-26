@@ -1,20 +1,22 @@
 /*
  * Created on 06.02.2004 by woerner
  */
-package org.exmaralda.coma.root;
+package org.exmaralda.coma.actions;
 
 import java.awt.event.ActionEvent;
 
 import org.exmaralda.coma.dialogs.EditLanguageDialog;
 import org.exmaralda.coma.dialogs.EditLocationDialog;
 import org.exmaralda.coma.dialogs.EditPeriodDialog;
+import org.exmaralda.coma.root.Coma;
+import org.exmaralda.coma.root.Ui;
 import org.jdom.Element;
 
 /**
  * @author woerner
  */
 
-public class EditDataAction extends ComaAction {
+public class EditDataAction extends org.exmaralda.coma.actions.ComaAction {
 
 	Coma coma;
 

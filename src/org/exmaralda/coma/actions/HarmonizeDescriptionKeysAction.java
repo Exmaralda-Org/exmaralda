@@ -15,7 +15,6 @@ import javax.swing.text.StyledDocument;
 
 import org.exmaralda.coma.dialogs.KeyMapperDialog;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.jdom.Element;
 import org.jdom.xpath.XPath;

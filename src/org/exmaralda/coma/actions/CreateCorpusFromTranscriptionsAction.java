@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import org.exmaralda.coma.helpers.CCW;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 
 /**

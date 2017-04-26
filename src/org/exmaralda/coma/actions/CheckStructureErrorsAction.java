@@ -28,7 +28,7 @@ import org.jdom.JDOMException;
  */
 public class CheckStructureErrorsAction
 		extends
-			org.exmaralda.coma.root.ComaAction {
+		ComaAction {
 
 	ProgressBarDialog pbd;
 

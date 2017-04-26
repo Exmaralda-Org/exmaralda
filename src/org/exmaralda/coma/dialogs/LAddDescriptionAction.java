@@ -8,12 +8,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
+import org.exmaralda.coma.actions.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.jdom.Element;
 
 /**
- * coma2/org.sfb538.coma2.personActions/PAddLocationAction.java * @author woerner
+ * coma2/org.sfb538.coma2.personActions/PAddLocationAction.java
+ * @author woerner
  */
 
 public class LAddDescriptionAction extends ComaAction {

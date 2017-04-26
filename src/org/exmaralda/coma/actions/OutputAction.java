@@ -28,7 +28,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -47,7 +46,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.exmaralda.coma.resources.ResourceHandler;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.helpers.ExmaraldaFileFilter;
 import org.jdom.Document;

@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,7 +26,6 @@ import javax.swing.table.DefaultTableModel;
 import org.exmaralda.coma.dialogs.TranscriptionSearchAndReplaceDialog;
 import org.exmaralda.coma.importer.ExmaraldaPartitur;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.jdom.Element;
 import org.jdom.JDOMException;

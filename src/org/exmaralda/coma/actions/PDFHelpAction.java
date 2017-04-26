@@ -6,7 +6,6 @@ package org.exmaralda.coma.actions;
 import java.awt.event.ActionEvent;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.SplashScreen;
 import org.exmaralda.coma.root.Ui;
 

@@ -13,7 +13,6 @@ import javax.swing.KeyStroke;
 
 import org.exmaralda.coma.helpers.GUID;
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.ComaElement;
 import org.exmaralda.coma.root.Ui;
 import org.jdom.Element;

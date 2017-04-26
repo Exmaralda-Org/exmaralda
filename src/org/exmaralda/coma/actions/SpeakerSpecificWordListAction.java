@@ -31,7 +31,7 @@ import org.jdom.xpath.XPath;
  * 
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
-public class SpeakerSpecificWordListAction extends org.exmaralda.coma.root.ComaAction {
+public class SpeakerSpecificWordListAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 

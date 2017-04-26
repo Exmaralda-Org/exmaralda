@@ -24,7 +24,7 @@ import org.exmaralda.tagging.swing.COMATreeTaggingDialog;
  * 
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
-public class TreeTaggerAction extends org.exmaralda.coma.root.ComaAction {
+public class TreeTaggerAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 

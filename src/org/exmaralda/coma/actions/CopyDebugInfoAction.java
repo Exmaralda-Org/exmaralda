@@ -9,7 +9,6 @@ import java.util.prefs.BackingStoreException;
 import javax.swing.JDialog;
 
 import org.exmaralda.coma.root.Coma;
-import org.exmaralda.coma.root.ComaAction;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.Logger;
 
