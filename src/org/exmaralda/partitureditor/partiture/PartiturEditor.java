@@ -460,8 +460,9 @@ public class PartiturEditor extends javax.swing.JFrame
                 // changed to accomodate a presumed bug on OS X where the returned ScreenSize is wayyyyy tooooo laaaaaarge
                 int x = Integer.parseInt(settings.get("XSize","600"));
                 int y = Integer.parseInt(settings.get("YSize","400"));
-                int xSize = Math.min(screenSize.width, x);
-                int ySize = Math.min(screenSize.height, y);
+                // changed 25-04-2017 to make sure that the screen has at least some size (issue #77)
+                int xSize = Math.max(600,Math.min(screenSize.width, x));
+                int ySize = Math.max(400, Math.min(screenSize.height, y));
                 setSize(xSize,ySize);
                 
                 int x2 = Integer.parseInt(settings.get("XPosition","0"));

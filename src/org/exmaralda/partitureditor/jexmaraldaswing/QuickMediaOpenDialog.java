@@ -40,8 +40,9 @@ public class QuickMediaOpenDialog extends javax.swing.JDialog {
         initComponents();
         partiturTable = p;   
         settings = java.util.prefs.Preferences.userRoot().node(((ExmaraldaApplication)parent).getPreferencesNode());            
-        String mediaDir = settings.get("QUICK-OPEN-MEDIA-DIR", System.getProperty("user.dir"));
-        String transcriptDir = settings.get("QUICK-OPEN-TRANSCRIPT-DIR", System.getProperty("user.dir"));
+        // attention: issue #78 default user.dir on the mac cannot be read
+        String mediaDir = settings.get("QUICK-OPEN-MEDIA-DIR", System.getProperty("user.home"));
+        String transcriptDir = settings.get("QUICK-OPEN-TRANSCRIPT-DIR", System.getProperty("user.home"));
         mediaDirectoryTextField.setText(mediaDir);
         transcriptionDirectoryTextField.setText(transcriptDir);
         refreshMediaList();
@@ -230,7 +231,7 @@ public class QuickMediaOpenDialog extends javax.swing.JDialog {
     private void refreshMediaList() {
         File mediaDirectory = new File(mediaDirectoryTextField.getText());
         if ((!mediaDirectory.isDirectory())){
-            JOptionPane.showMessageDialog(centerPanel, "Cannot read " + mediaDirectoryTextField.getText());
+            JOptionPane.showMessageDialog(centerPanel, "QuickMediaOpen: Cannot read the media directory:\n" + mediaDirectoryTextField.getText());
         }
         settings.put("QUICK-OPEN-MEDIA-DIR", mediaDirectory.getAbsolutePath());
         File[] mediaFiles = mediaDirectory.listFiles(new FileFilter(){

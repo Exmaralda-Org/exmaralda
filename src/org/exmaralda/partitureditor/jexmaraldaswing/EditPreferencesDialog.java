@@ -53,8 +53,20 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         elanDSPlayerRadioButton.setVisible(os.startsWith("win"));
         jdsPlayerRadioButton.setVisible(os.startsWith("win"));
         mmfPlayerRadioButton.setVisible(os.startsWith("win"));
-        elanQuicktimeRadioButton.setVisible(os.startsWith("mac") || (os.startsWith("win") && org.exmaralda.partitureditor.sound.QuicktimePlayer.isQuicktimeAvailable()));
+        elanQuicktimeRadioButton.setVisible(
+                os.startsWith("mac") || 
+                (os.startsWith("win") && org.exmaralda.partitureditor.sound.QuicktimePlayer.isQuicktimeAvailable()));
+        // added 25-04-2017 (issue #29)
+        elanQuicktimeRadioButton.setEnabled(elanQuicktimeRadioButton.isSelected());        
         cocoaQuicktimePlayerRadioButton.setVisible(os.startsWith("mac"));
+        String jreVersion = System.getProperty("java.version");        
+        // added 25-04-2017 (issue #29)
+        if (!(jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6"))){
+            cocoaQuicktimePlayerRadioButton.setEnabled(cocoaQuicktimePlayerRadioButton.isSelected());
+            cocoaQuicktimePlayerRadioButton.setToolTipText("Cocoa QT Player is only available for Apple's Java 1.6,"
+                    + "not for Oracle's Java 1.7 or higher");
+        }
+        
         
         digitsSpinner.addChangeListener(new ChangeListener(){
             @Override
