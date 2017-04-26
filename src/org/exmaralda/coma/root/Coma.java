@@ -69,7 +69,7 @@ import java.util.regex.Pattern;
 /**
  * Coma.java<br>
  * The container for everything happening.
- * coma2/org.sfb538.coma2/Coma.java
+ * org.exmaralda.coma.root.Coma.java
  *
  * @author woerner
  */
@@ -108,7 +108,6 @@ public class Coma extends JFrame implements ChangeListener,
     public boolean filterSet;
     public Element speakerElmt;
     private Element missingElement;
-    protected JTextField descName;
     private String version = "0.0";
     private Coma coma;
     private boolean allDone = false;
@@ -1406,7 +1405,6 @@ public class Coma extends JFrame implements ChangeListener,
                                 "prefs.writeCIDsWhenUpdating", true));
                         count++;
                     }
-                    //TODO: Hier muss ich hin!
                     if (myPartiture.isSegmented()) {
                         List<Element> descKeys;
                         Element myKey;

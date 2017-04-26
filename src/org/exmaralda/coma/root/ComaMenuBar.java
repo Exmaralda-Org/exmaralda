@@ -15,30 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JRadioButtonMenuItem;
 
-import org.exmaralda.coma.actions.AboutAction;
-import org.exmaralda.coma.actions.ClearRecentFileListAction;
-import org.exmaralda.coma.actions.CopyDebugInfoAction;
-import org.exmaralda.coma.actions.CreateCorpusFromTranscriptionsAction;
-import org.exmaralda.coma.actions.DumpCorpusAction;
-import org.exmaralda.coma.actions.HarmonizeDescriptionKeysAction;
-import org.exmaralda.coma.actions.ImportBasicTranscriptionAction;
-import org.exmaralda.coma.actions.ImportSpeakerAction;
-import org.exmaralda.coma.actions.IntroduceRolesAction;
-import org.exmaralda.coma.actions.MergeComaDocumentAction;
-import org.exmaralda.coma.actions.NewAction;
-import org.exmaralda.coma.actions.OpenAction;
-import org.exmaralda.coma.actions.OpenTemplatesAction;
-import org.exmaralda.coma.actions.OutputAction;
-import org.exmaralda.coma.actions.PrefsAction;
-import org.exmaralda.coma.actions.QuitAction;
-import org.exmaralda.coma.actions.RefreshTranscriptionStatsAction;
-import org.exmaralda.coma.actions.SaveAction;
-import org.exmaralda.coma.actions.SaveBasketAction;
-import org.exmaralda.coma.actions.SaveTemplatesAction;
-import org.exmaralda.coma.actions.TranscriptionSearchAndReplaceAction;
-import org.exmaralda.coma.actions.TreeTaggerAction;
-import org.exmaralda.coma.actions.UpdateCheckAction;
-import org.exmaralda.coma.actions.UpdateRecordingsAction;
+import org.exmaralda.coma.actions.*;
 
 /**
  * coma2/org.sfb538.coma2.toolbars/FileBar.java
@@ -215,7 +192,7 @@ public class ComaMenuBar extends JMenuBar {
 		// toolsmenu.add(new HarmonizeDescriptionKeysAction(coma));
 		// toolsmenu.add(new HarmonizeDescriptionValuesAction(coma));
 		JMenu helpmenu = new JMenu(Ui.getText("name.helpMenu"));
-		helpmenu.add(new HelpAction(coma));
+		helpmenu.add(new org.exmaralda.coma.actions.HelpAction(coma));
 		helpmenu.add(new UpdateCheckAction(coma));
 		helpmenu.add(new CopyDebugInfoAction(coma));
 
