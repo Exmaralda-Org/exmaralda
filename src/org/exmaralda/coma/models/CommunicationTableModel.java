@@ -109,6 +109,7 @@ public class CommunicationTableModel extends DefaultTableModel {
 	 * @return
 	 */
 	public boolean setSecondColumn(String xpath) {
+		System.out.println("CommunicationTableModel.setSecondColumn "+xpath);
 		xpath = xpath.substring(xpath.indexOf("Communication") + 14);
 		try {
 			columnXPath = XPath.newInstance(xpath);

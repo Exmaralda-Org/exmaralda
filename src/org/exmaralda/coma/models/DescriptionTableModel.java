@@ -37,10 +37,6 @@ public class DescriptionTableModel extends AbstractTableModel implements
 
 	private HashSet<String> lockedKeys;
 
-	/**
-	 * @param coma2
-	 * @param description
-	 */
 
 	public DescriptionTableModel(Coma c, Description description) {
 		this(c, description, false);
@@ -277,7 +273,6 @@ public class DescriptionTableModel extends AbstractTableModel implements
 	}
 
 	/**
-	 * @param description
 	 */
 	public void setDescription(Description d) {
 		data = makeData(d);
@@ -322,9 +317,6 @@ public class DescriptionTableModel extends AbstractTableModel implements
 		fireTableDataChanged();
 	}
 
-	/**
-	 * @param templateElement
-	 */
 	public void setDataFromElement(Element de) {
 		System.out.println(de);
 		TreeMap<String, String> tm = new TreeMap<String, String>();
