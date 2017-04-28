@@ -65,6 +65,8 @@
     <!-- <classPath>..\..\..\temp\ipsk_audiotools.jar</classPath> -->
     <!-- <classPath>..\..\..\temp\ipsk_utils.jar</classPath>   -->
 
+    <classPath>..\..\..\temp\BATIK.jar</classPath>
+
 
     <currentDirectory>${EXECUTABLEPATH}</currentDirectory>
     <embeddedJar>false</embeddedJar>

@@ -5,7 +5,7 @@
         <xsl:text>***** EXMARaLDA changes *******</xsl:text>
         <xsl:text>&#x0D;&#x0A;</xsl:text>
         <xsl:text>&#x0D;&#x0A;</xsl:text>
-        <xsl:for-each-group select="//change[not(@tool='folker') and not(@tool='orthonormal')]" group-by="@tool">
+        <xsl:for-each-group select="//change" group-by="@tool">
             <xsl:text>=================</xsl:text>
             <xsl:text>&#x0D;&#x0A;</xsl:text>
             <xsl:value-of select="current-grouping-key()"/>

@@ -55,6 +55,9 @@
 
     <!-- Database -->
     <classPath>..\..\..\temp\mysql-connector-java-5.1.6-bin.jar</classPath>
+    
+    <classPath>..\..\..\temp\BATIK.jar</classPath>
+    
 
     <currentDirectory>${EXECUTABLEPATH}</currentDirectory>
     <embeddedJar>false</embeddedJar>

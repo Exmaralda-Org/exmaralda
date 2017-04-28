@@ -50,7 +50,7 @@ function toggle_visibility(className) {
             </head>
             <body>
                 <h1>EXMARaLDA changes</h1>
-                <xsl:for-each-group select="//change[not(@tool='folker')]" group-by="@tool">
+                <xsl:for-each-group select="//change" group-by="@tool">
                     <a>
                         <xsl:attribute name="href">#<xsl:value-of select="current-grouping-key()"
                             /></xsl:attribute><xsl:value-of select="current-grouping-key()"/>
@@ -61,7 +61,7 @@ function toggle_visibility(className) {
                         onclick="toggle_visibility('feature');">feature</a>
                 </span>; <span class="change" id="change"><a href="#"
                         onclick="toggle_visibility('change');">change</a>
-                </span>) <xsl:for-each-group select="//change[not(@tool='folker')]" group-by="@tool">
+                </span>) <xsl:for-each-group select="//change" group-by="@tool">
                     <h2><a><xsl:attribute name="name"><xsl:value-of select="current-grouping-key()"
                                 /></xsl:attribute></a><xsl:value-of select="current-grouping-key()"
                         /></h2>

@@ -10,24 +10,48 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 -->
+    <change tool="partitureditor" type="change" version="1.6" date="25.04.2017">Some smaller fixes for the MAC (issues #77 and #78)</change>
+    <change tool="orthonormal" type="change" version="0.9" date="24.04.2017">Update normalisation lexicon (issue #74)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="24.04.2017">Metadata for TCF must be empty (issue #64)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="24.04.2017">CocoaQT Player: duration is available only after visual component has been initialised (issue #73)</change>
+    <change tool="orthonormal" type="change" version="0.9" date="12.04.2017">Make sure frame is inside screen dimensions at startup (issue #72)</change>
+    <change tool="folker" type="change" version="1.2" date="12.04.2017">Make sure frame is inside screen dimensions at startup (issue #72)</change>
+    <change tool="coma" type="bug" version="1.9" date="03.04.2017">Switched CHAT/GAT in dropdown menu, now all right (issue #69)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="31.03.2017">Reanmimated ID normalization in cleanup dialog (issue #67)</change>
+    <change tool="coma" type="feature" version="1.9" date="23.03.2017">Set segmented=true for newly generated EXS (issue #66)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="14.03.2017">TCF export now with CMDI 1.2 (issue #58)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="14.03.2017">Annotation search would still fail when exs is pretty printed (issue #56)</change>
+    <change tool="folker" type="change" version="1.2" date="10.03.2017">Ukranian alphabet (issue #63)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="08.03.2017">TCF export would fail because of left-over debug line (issue #58)</change>
+    <change tool="folker" type="change" version="1.2" date="02.03.2017">force player change when running with JRE &gt; 1.6 on MAC (issue #29)</change>
+    <change tool="orthonormal" type="change" version="0.9" date="02.03.2017">force player change when running with JRE &gt; 1.6 on MAC (issue #29)</change>
+    <change tool="orthonormal" type="change" version="0.9" date="01.03.2017">normalize whitespace in normalized forms (issue #62)</change>
+    <change tool="exakt" type="bug" version="1.3" date="27.02.2017">Bug in XSL search: need to set base directory (issue #60)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="20.02.2017">TCF export needs handle PID for Partitur-Editor (issue #58)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="20.02.2017">TCF export with generic segmentation would swallow words (issue #57)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="06.02.2017">Annotation search would fail when exs is pretty printed (issue #56)</change>
+    <change tool="partitureditor" type="change" version="1.6" date="06.02.2017">Improvements to the alignment panel (issue #55)</change>
+    <change tool="all" type="bug" version="1.10" date="26.01.2017">Wrong time stamp for build time (issue #54), added some more info about JRE etc. to log file</change>
+    <change tool="partitureditor" type="change" version="1.6" date="05.01.2017">Make GAT output robust against timepoints not in the common timeline (should be rare...)</change>
+    <change tool="partitureditor" type="bug" version="1.6" date="04.01.2017">Tiny bugling in Partitur when called from EXAKT: don't update null SVG panel</change>
     <change tool="folker" type="feature" version="1.2" date="19.12.2016">Spinner for setting playback rate (issue #53)</change>
     <change tool="partitureditor" type="change" version="1.6" date="19.12.2016">Choose segmentation for TCF export (issue #38)</change>
     <change tool="orthonormal" type="bug" version="0.9" date="14.12.2016">Missing bounce.jar in library path on MAC (issue #29)</change>
     <change tool="teidrop" type="bug" version="0.5" date="14.12.2016">Wrong java path in Linux shell script (issue #30)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="13.12.2016">Bug in ELAN import fixed (issue #52)</change>
     <change tool="partitureditor" type="change" version="1.6" date="13.12.2016">One lil' fix to avoid a null pointer with the JMF player</change>
-    <change tool="all" type="change" version="1.6" date="13.12.2016">Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue #51)</change>
+    <change tool="all" type="change" version="1.10" date="13.12.2016">Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue #51)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="08.12.2016">Video image on the MAC would always be square and could not resize. Fixed that (issue #29)</change>
-    <change tool="all" type="change" version="1.6" date="04.12.2016">... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)</change>
-    <change tool="all" type="change" version="1.6" date="04.12.2016">FOBS and SUN JMF distributions for Linux (issue #30)</change>
-    <change tool="all" type="bug" version="1.6" date="03.12.2016">Wrong libraries for BAS Player on Linux (issue #30)</change>
-    <change tool="all" type="bug" version="1.6" date="02.12.2016">Embedded java binaries need executable permissions (issue #30)</change>
-    <change tool="all" type="bug" version="1.6" date="01.12.2016">Exchange Linux Bundled JRE 64bit to 32bit (issue #30)</change>
+    <change tool="all" type="change" version="1.10" date="04.12.2016">... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)</change>
+    <change tool="all" type="change" version="1.10" date="04.12.2016">FOBS and SUN JMF distributions for Linux (issue #30)</change>
+    <change tool="all" type="bug" version="1.10" date="03.12.2016">Wrong libraries for BAS Player on Linux (issue #30)</change>
+    <change tool="all" type="bug" version="1.10" date="02.12.2016">Embedded java binaries need executable permissions (issue #30)</change>
+    <change tool="all" type="bug" version="1.10" date="01.12.2016">Exchange Linux Bundled JRE 64bit to 32bit (issue #30)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="30.11.2016">Bug in multimodal panel: have to remove listeners after editing (issue #27)</change>
     <change tool="partitureditor" type="change" version="1.6" date="28.11.2016">WebLicht action needed to be updated to final ISO spec (issue #41)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="28.11.2016">Bug in WebMaus selection when last event spanned over more than one TLI (issue #42)</change>
     <change tool="partitureditor" type="feature" version="1.6" date="28.11.2016">Added four buttons, changed one button in multimodal panel (issue #27)</change>
-    <change tool="folker" type="bug" version="1.6" date="28.11.2016">Bug in TimeStringFormatter (issue #43)</change>
+    <change tool="folker" type="bug" version="1.2" date="28.11.2016">Bug in TimeStringFormatter (issue #43)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="28.11.2016">Bug in TimeStringFormatter (issue #43)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="24.11.2016">WebMaus action: check for WAV file (issue #40)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="22.11.2016">QuickMediaOpenDialog: deselect in view menu when closed (issue #39)</change>
@@ -56,18 +80,18 @@
     <change tool="partitureditor" type="change" version="1.6" date="09.05.2016">Changes to Transcriber import (SegCor)</change>
     <change tool="partitureditor" type="change" version="1.6" date="09.05.2016">Changes to TCF import and Calculate Annotated Time (Tommi)</change>
     <change tool="partitureditor" type="change" version="1.6" date="03.05.2016">Robustness improvements to Transana import (MuM-Multi)</change>
-    <change tool="folker" type="bug" version="1.6" date="21.04.2016">Praat export from partitur view messed up the transcript</change>
+    <change tool="folker" type="bug" version="1.2" date="21.04.2016">Praat export from partitur view messed up the transcript</change>
     <change tool="orthonormal" type="change" version="0.9" date="18.04.2016">revert to old version of BAS player (MAC)</change>
-    <change tool="folker" type="change" version="1.6" date="18.04.2016">revert to old version of BAS player (MAC)</change>
+    <change tool="folker" type="change" version="1.2" date="18.04.2016">revert to old version of BAS player (MAC)</change>
     <change tool="partitureditor" type="feature" version="1.6" date="18.04.2016">revert to old version of BAS player (MAC)</change>
     <change tool="exakt" type="change" version="1.3" date="18.04.2016">revert to old version of BAS player (MAC)</change>
     <change tool="partitureditor" type="change" version="1.6" date="18.04.2016">Added pipe symbol for GAT segmentation</change>
     <change tool="orthonormal" type="change" version="0.9" date="08.04.2016">revert to old version of BAS player (Windows)</change>
-    <change tool="folker" type="change" version="1.6" date="08.04.2016">revert to old version of BAS player (Windows)</change>
+    <change tool="folker" type="change" version="1.2" date="08.04.2016">revert to old version of BAS player (Windows)</change>
     <change tool="partitureditor" type="feature" version="1.6" date="08.04.2016">revert to old version of BAS player (Windows)</change>
     <change tool="exakt" type="change" version="1.3" date="08.04.2016">revert to old version of BAS player (Windows)</change>
     <change tool="orthonormal" type="change" version="0.9" date="06.04.2016">Updated player preferences handling</change>
-    <change tool="folker" type="change" version="1.6" date="06.04.2016">Updated player preferences handling</change>
+    <change tool="folker" type="change" version="1.2" date="06.04.2016">Updated player preferences handling</change>
     <change tool="partitureditor" type="feature" version="1.6" date="31.03.2016">GAT HTML5 output (Jens Lanwer)</change>
     <change tool="exakt" type="change" version="1.3" date="31.03.2016">Icon for word list</change>
     <change tool="exakt" type="change" version="1.3" date="31.03.2016">Adapt KWIC row height to font size</change>
@@ -76,7 +100,7 @@
     <change tool="orthonormal" type="bug" version="0.9" date="30.03.2016">TEI and TCF exports must retain IDs (methods generateWordIDs())</change>
     <change tool="orthonormal" type="bug" version="0.9" date="30.03.2016">Wrong file filter for TCF export (txt instead of xml)</change>
     <change tool="partitureditor" type="feature" version="1.6" date="29.03.2016">First version of Transana import (MuM-Multi)</change>
-    <change tool="folker" type="change" version="1.6" date="03.03.2016">Adapted TEI exports (annotationBlock etc.)</change>
+    <change tool="folker" type="change" version="1.2" date="03.03.2016">Adapted TEI exports (annotationBlock etc.)</change>
     <change tool="orthonormal" type="change" version="0.9" date="03.03.2016">Adapted TEI exports (annotationBlock etc.)</change>
     <change tool="partitureditor" type="change" version="1.6" date="03.03.2016">Adapted TEI exports (annotationBlock etc.)</change>
     <change tool="orthonormal" type="change" version="0.9" date="22.02.2016">Changes to output variant with normalisations only</change>

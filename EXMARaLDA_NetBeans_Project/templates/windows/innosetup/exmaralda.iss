@@ -4,47 +4,67 @@
 [Setup]
 AppName=EXMARaLDA
 AppVerName=EXMARaLDA @version@
-AppPublisher=Thomas Schmidt, Kai Woerner, Timm Lehmberg, Hanna Hedeland
+AppPublisher=Thomas Schmidt, Kai Woerner
 AppPublisherURL=http://www.exmaralda.org
 AppSupportURL=http://www.exmaralda.org
 AppUpdatesURL=http://www.exmaralda.org
+
 DefaultDirName={pf}\EXMARaLDA
 DefaultGroupName=EXMARaLDA
+DisableDirPage=no
+
 LicenseFile=@templatesdir@\windows\innosetup\copyright_exmaralda.txt
 InfoAfterFile=@templatesdir@\windows\innosetup\releasenotes_exmaralda.txt
 SetupIconFile=exmaralda_install.ico
 WizardImageFile=exmaralda_install_wizard.bmp
 WizardSmallImageFile=exmaralda_install.bmp
 ChangesAssociations=yes
-VersionInfoCompany=Hamburger Zentrum für Sprachkorpora, University of Hamburg / Archiv für Gesprochenes Deutsch, IDS Mannheim
-VersionInfoCopyright=Project Z2, Thomas Schmidt, Kai Wörner, Timm Lehmberg, Hanna Hedeland
+VersionInfoCompany=Hamburger Zentrum fÃ¼r Sprachkorpora, University of Hamburg / Archiv fÃ¼r Gesprochenes Deutsch, IDS Mannheim
+VersionInfoCopyright=Project Z2, Thomas Schmidt, Kai WÃ¶rner, Timm Lehmberg, Hanna Hedeland
 VersionInfoDescription=Version @version@ (Build time: @build-time@)
 VersionInfoVersion=@version@ 
+
+[Types]
+Name: "full"; Description: "Full installation (all tools)"
+Name: "compact"; Description: "Compact installation (almost all tools)"
+Name: "EXMARaLDAOnly"; Description: "EXMARaLDA tools only"
+Name: "FOLKOnly"; Description: "FOLK tools only"
+Name: "Custom"; Description: "Custom (make your own choice)"; Flags: iscustom
+
+[Components]
+Name: "main"; Description: "Main Files"; Types: full compact EXMARaLDAOnly FOLKOnly; Flags: fixed
+Name: "EXMARaLDA"; Description: "EXMARaLDA tools"; Types: full
+Name: "EXMARaLDA\PartiturEditor"; Description: "Partitur-Editor"; Types: full compact EXMARaLDAOnly
+Name: "EXMARaLDA\CorpusManager"; Description: "Corpus-Manager"; Types: full compact EXMARaLDAOnly
+Name: "EXMARaLDA\EXAKT"; Description: "EXAKT"; Types: full compact EXMARaLDAOnly
+Name: "EXMARaLDA\TEIDrop"; Description: "TEI-Drop"; Types: full EXMARaLDAOnly
+Name: "EXMARaLDA\Sextant"; Description: "Sextant"; Types: full EXMARaLDAOnly
+Name: "FOLK"; Description: "FOLK tools"; Types: full
+Name: "FOLK\FOLKER"; Description: "FOLKER editor"; Types: full compact FOLKOnly
+Name: "FOLK\OrthoNormal"; Description: "OrthoNormal"; Types: full compact FOLKOnly
+
 
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: {cm:AdditionalIcons}
 Name: associate; Description: "{cm:AssocFileExtension,Partitur-Editor,exb}"; GroupDescription: "Other tasks:"; Flags: checkedonce;
 Name: associateComa; Description: "{cm:AssocFileExtension,Coma,coma}"; GroupDescription: "Other tasks:"; Flags: checkedonce;
-;;;; Name: "quicklaunchicon"; Description: "Create a &Quick Launch icon"; GroupDescription: "Additional icons:"; Flags: unchecked
 
 
 [Files]
-; Library files common to both versions
+; ************************ Library files common to both versions
 Source: "@tempdir@\*.jar"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@tempdir@\*.zip"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@tempdir@\*.exe"; DestDir: "{app}"; Flags: ignoreversion
-; New 11-05-2015
+; ************************ New 11-05-2015: Embedded JRE
 Source: "@tempdir@\jre\*"; DestDir: "{app}\jre"; Flags: ignoreversion recursesubdirs
-
-; Icons
+; ************************ Icons
 Source: "@templatesdir@\windows\icons\*.ico"; DestDir: "{app}"; Flags: ignoreversion
-; Manuals etc.
-;;Source: "@templatesdir@\documentation\*.pdf"; DestDir: "{app}\Documentation"; Flags: ignoreversion
+; ************************ Files for FOBS JMF Version
+Source: "@tempdir@\FobsJmf\*"; DestDir: "{app}\FobsJMF"; Flags: ignoreversion
 ; Files for SUN JMF Version
 ; Source: "@tempdir@\SunJmf\*"; DestDir: "{app}\SunJMF"; Flags: ignoreversion
-; Files for FOBS JMF Version
-Source: "@tempdir@\FobsJmf\*"; DestDir: "{app}\FobsJMF"; Flags: ignoreversion
+
 
 
 [Languages]
@@ -64,67 +84,58 @@ Name: cz; MessagesFile: "compiler:Languages\Czech.isl"
 Filename: "{app}\exmaralda.url"; Section: "InternetShortcut"; Key: "URL"; String: "http://www.exmaralda.org"
 
 [Icons]
-Name: "{group}\Partitur-Editor"; IconFilename: "{app}\partitureditor.ico"; Filename: "{app}\FobsJMF\PartiturEditorWithFOBS.exe"
-Name: "{group}\COMA"; IconFilename: "{app}\coma.ico"; Filename: "{app}\coma.exe"
-Name: "{group}\EXAKT"; IconFilename: "{app}\exakt.ico"; Filename: "{app}\FobsJMF\ExaktWithFOBS.exe"
-Name: "{group}\Sextant"; IconFilename: "{app}\sextant.ico"; Filename: "{app}\sextant.exe"
-Name: "{group}\TEI Drop"; IconFilename: "{app}\teidropicon.ico"; Filename: "{app}\teidrop.exe"
-Name: "{group}\Uninstall EXMARaLDA"; Filename: "{uninstallexe}"
-
-;;;;; Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\My Program"; Filename: "{app}\FobsJMF\PartiturEditorWithFOBS.exe"; Tasks: quicklaunchicon
-
-;;;;; Name: "{group}\Partitur-Editor (with SUN JMF)"; IconFilename: "{app}\partitureditor.ico"; Filename: "{app}\SunJMF\PartiturEditorWithSun.exe"
-;;;;; Name: "{group}\EXAKT (with SUN JMF)"; IconFilename: "{app}\exakt.ico"; Filename: "{app}\SunJMF\ExaktWithSun.exe"
-
-Name: "{userdesktop}\Partitur-Editor"; IconFilename: "{app}\partitureditor.ico"; Filename: "{app}\FobsJMF\PartiturEditorWithFOBS.exe"; Tasks: desktopicon
-Name: "{userdesktop}\Coma"; IconFilename: "{app}\coma.ico"; Filename: "{app}\coma.exe"; Tasks: desktopicon
-Name: "{userdesktop}\EXAKT"; IconFilename: "{app}\exakt.ico"; Filename: "{app}\FobsJMF\ExaktWithFOBS.exe"; Tasks: desktopicon
-;;;;; Name: "{userdesktop}\Sextant"; IconFilename: "{app}\sextant.ico"; Filename: "{app}\sextant.exe"; Tasks: desktopicon
-;;;;; Name: "{userdesktop}\TEIDrop"; IconFilename: "{app}\teidropicon.ico"; Filename: "{app}\teidrop.exe"; Tasks: desktopicon
-
+; ************************ for the program menu (?)
+Name: "{group}\Partitur-Editor"; IconFilename: "{app}\partitureditor.ico"; Filename: "{app}\FobsJMF\PartiturEditorWithFOBS.exe";  Components: EXMARaLDA\PartiturEditor
+Name: "{group}\COMA"; IconFilename: "{app}\coma.ico"; Filename: "{app}\coma.exe"; Components: EXMARaLDA\CorpusManager
+Name: "{group}\EXAKT"; IconFilename: "{app}\exakt.ico"; Filename: "{app}\FobsJMF\ExaktWithFOBS.exe"; Components: EXMARaLDA\EXAKT
+Name: "{group}\TEI Drop"; IconFilename: "{app}\teidropicon.ico"; Filename: "{app}\teidrop.exe"; Components: EXMARaLDA\TEIDrop
+Name: "{group}\Sextant"; IconFilename: "{app}\sextant.ico"; Filename: "{app}\sextant.exe"; Components: EXMARaLDA\Sextant
+Name: "{group}\FOLKER"; IconFilename: "{app}\folker.ico"; Filename: "{app}\FobsJMF\FolkerWithFOBS.exe"; Components: FOLK\FOLKER
+Name: "{group}\OrthoNormal"; IconFilename: "{app}\orthonormal.ico"; Filename: "{app}\FobsJMF\OrthoNormalWithFOBS.exe"; Components: FOLK\OrthoNormal
 Name: "{group}\EXMARaLDA on the Web"; IconFilename: "{app}\exmaralda.ico"; Filename: "{app}\exmaralda.url"
-
-;;Name: "{group}\Documentation\Partitur-Editor Manual"; Filename: "{app}\Documentation\PartiturEditor_Handbuch.pdf"
-;;Name: "{group}\Documentation\EXMARaLDA - Basics"; Filename: "{app}\Documentation\Understanding_the_basics_of_exmaralda.pdf"
-;;Name: "{group}\Documentation\EXMARaLDA - Getting started"; Filename: "{app}\Documentation\How_to_get_started.pdf"
-;;Name: "{group}\Documentation\EXMARaLDA - Audio and Video Support"; Filename: "{app}\Documentation\Audio_and_Video_support_in_EXMARaLDA.pdf"
-;;Name: "{group}\Documentation\EXMARaLDA - How to use a corpus"; Filename: "{app}\Documentation\How_to_use_an_EXMARaLDA_corpus.pdf"
-;;Name: "{group}\Documentation\Partitur-Editor - How to transcribe"; Filename: "{app}\Documentation\How_to_make_a_transcription_from_a_digital_recording.pdf"
-;;Name: "{group}\Documentation\Partitur-Editor - How to align"; Filename: "{app}\Documentation\How_to_align_transcriptions.pdf"
-;;Name: "{group}\Documentation\Partitur-Editor - How to edit a transcription"; Filename: "{app}\Documentation\How_to_edit_and_correct_transcriptions.pdf"
-;;Name: "{group}\Documentation\Partitur-Editor - Schritt für Schritt"; Filename: "{app}\Documentation\SCHRITT_FUER_SCHRITT.pdf"
-;;Name: "{group}\Documentation\Partitur-Editor - Short Intro"; Filename: "{app}\Documentation\ShortIntro.pdf"
-;;Name: "{group}\Documentation\Partitur-Editor - Synchronization Instructions"; Filename: "{app}\Documentation\Anweisungen_zum_Synchronisieren.pdf"
-;;Name: "{group}\Documentation\Coma - Manual"; Filename: "{app}\Documentation\comadoku.pdf"
-;;Name: "{group}\Documentation\Coma - Corpus Creation"; Filename: "{app}\Documentation\how_to_create_a_corpus_from_a_set_of_transcritpions.pdf"
-;;Name: "{group}\Documentation\EXAKT - Short Intro"; Filename: "{app}\Documentation\EXAKT_Short_Intro.pdf"
+Name: "{group}\Uninstall EXMARaLDA"; Filename: "{uninstallexe}"
+; ************************ for the desktop
+Name: "{userdesktop}\Partitur-Editor"; IconFilename: "{app}\partitureditor.ico"; Filename: "{app}\FobsJMF\PartiturEditorWithFOBS.exe"; Tasks: desktopicon;  Components: EXMARaLDA\PartiturEditor
+Name: "{userdesktop}\Coma"; IconFilename: "{app}\coma.ico"; Filename: "{app}\coma.exe"; Tasks: desktopicon; Components: EXMARaLDA\CorpusManager
+Name: "{userdesktop}\EXAKT"; IconFilename: "{app}\exakt.ico"; Filename: "{app}\FobsJMF\ExaktWithFOBS.exe"; Tasks: desktopicon; Components: EXMARaLDA\EXAKT
+Name: "{userdesktop}\FOLKER"; IconFilename: "{app}\folker.ico"; Filename: "{app}\FobsJMF\FolkerWithFOBS.exe"; Tasks: desktopicon; Components: FOLK\FOLKER
+Name: "{userdesktop}\OrthoNormal"; IconFilename: "{app}\orthonormal.ico"; Filename: "{app}\FobsJMF\OrthoNormalWithFOBS.exe"; Tasks: desktopicon; Components: FOLK\OrthoNormal
 
 
 
 [Registry]
+; ************************ EXB --> Partitur-Editor
 Root: HKCR; Subkey: ".exb"; ValueType: string; ValueName: ""; ValueData: "ExmaraldaTranscriptionFile"; Flags: uninsdeletevalue; Tasks: associate;
 Root: HKCR; Subkey: "ExmaraldaTranscriptionFile"; ValueType: string; ValueName: ""; ValueData: "Exmaralda Basic Transcription"; Flags: uninsdeletekey; Tasks: associate;
 Root: HKCR; Subkey: "ExmaraldaTranscriptionFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\pe-document-icon.ico"; Tasks: associate;
 Root: HKCR; Subkey: "ExmaraldaTranscriptionFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\SunJMF\PartiturEditorWithSun.exe"" ""%1"""; Tasks: associate;
-
-Root: HKCR; Subkey: ".exs"; ValueType: string; ValueName: ""; ValueData: "ExmaraldaSegmentedTranscriptionFile"; Flags: uninsdeletevalue; Tasks: associate;
-Root: HKCR; Subkey: "ExmaraldaSegmentedTranscriptionFile"; ValueType: string; ValueName: ""; ValueData: "Exmaralda Segmented Transcription"; Flags: uninsdeletekey; Tasks: associate;
-Root: HKCR; Subkey: "ExmaraldaSegmentedTranscriptionFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\segmented_document.ico"; Tasks: associate;
-
-Root: HKCR; Subkey: ".exc"; ValueType: string; ValueName: ""; ValueData: "ExmaraldaConcordance"; Flags: uninsdeletevalue; Tasks: associate;
-Root: HKCR; Subkey: "ExmaraldaConcordance"; ValueType: string; ValueName: ""; ValueData: "EXAKT Concordance"; Flags: uninsdeletekey; Tasks: associate;
-Root: HKCR; Subkey: "ExmaraldaConcordance\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\exakt.ico"; Tasks: associate;
-
-Root: HKCR; Subkey: ".exa"; ValueType: string; ValueName: ""; ValueData: "SextantAnnotationFile"; Flags: uninsdeletevalue; Tasks: associate;
-Root: HKCR; Subkey: "SextantAnnotationFile"; ValueType: string; ValueName: ""; ValueData: "Sextant Annotation File"; Flags: uninsdeletekey; Tasks: associate;
-Root: HKCR; Subkey: "SextantAnnotationFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\sextant-document.ico"; Tasks: associate;
-
-
+; ************************ COMA --> COMA
 Root: HKCR; Subkey: ".coma"; ValueType: string; ValueName: ""; ValueData: "ComaFile"; Flags: uninsdeletevalue; Tasks: associateComa;
 Root: HKCR; Subkey: "ComaFile"; ValueType: string; ValueName: ""; ValueData: "Exmaralda Corpus"; Flags: uninsdeletekey; Tasks: associateComa;
 Root: HKCR; Subkey: "ComaFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\comadocument.ico"; Tasks: associateComa;
 Root: HKCR; Subkey: "ComaFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\coma.exe"" ""%1"""; Tasks: associateComa;
-
+; ************************ FLK --> FOLKER
+Root: HKCR; Subkey: ".flk"; ValueType: string; ValueName: ""; ValueData: "FolkerTranscriptionFile"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "FolkerTranscriptionFile"; ValueType: string; ValueName: ""; ValueData: "Folker Transcription File"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "FolkerTranscriptionFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\folker-document-icon-128.ico"
+Root: HKCR; Subkey: "FolkerTranscriptionFile\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\SunJMF\FolkerWithSun.exe"" ""%1"""
+; ************************ FLN --> OrthoNormal
+Root: HKCR; Subkey: ".fln"; ValueType: string; ValueName: ""; ValueData: "NormalizedFolkerTranscription"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "NormalizedFolkerTranscription"; ValueType: string; ValueName: ""; ValueData: "Normalized Folker Transcription"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "NormalizedFolkerTranscription\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\orthonormal.ico"
+Root: HKCR; Subkey: "NormalizedFolkerTranscription\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\SunJMF\OrthoNormalWithSun.exe"" ""%1"""
+; ************************ EXS --> (Not double clickable?)
+Root: HKCR; Subkey: ".exs"; ValueType: string; ValueName: ""; ValueData: "ExmaraldaSegmentedTranscriptionFile"; Flags: uninsdeletevalue; Tasks: associate;
+Root: HKCR; Subkey: "ExmaraldaSegmentedTranscriptionFile"; ValueType: string; ValueName: ""; ValueData: "Exmaralda Segmented Transcription"; Flags: uninsdeletekey; Tasks: associate;
+Root: HKCR; Subkey: "ExmaraldaSegmentedTranscriptionFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\segmented_document.ico"; Tasks: associate;
+; ************************ EXC --> (Not double clickable?)
+Root: HKCR; Subkey: ".exc"; ValueType: string; ValueName: ""; ValueData: "ExmaraldaConcordance"; Flags: uninsdeletevalue; Tasks: associate;
+Root: HKCR; Subkey: "ExmaraldaConcordance"; ValueType: string; ValueName: ""; ValueData: "EXAKT Concordance"; Flags: uninsdeletekey; Tasks: associate;
+Root: HKCR; Subkey: "ExmaraldaConcordance\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\exakt.ico"; Tasks: associate;
+; ************************ EXA --> (Not double clickable?)
+Root: HKCR; Subkey: ".exa"; ValueType: string; ValueName: ""; ValueData: "SextantAnnotationFile"; Flags: uninsdeletevalue; Tasks: associate;
+Root: HKCR; Subkey: "SextantAnnotationFile"; ValueType: string; ValueName: ""; ValueData: "Sextant Annotation File"; Flags: uninsdeletekey; Tasks: associate;
+Root: HKCR; Subkey: "SextantAnnotationFile\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\sextant-document.ico"; Tasks: associate;
 
 [Run]
 Filename: "{app}\FobsJMF\PartiturEditorWithFOBS.exe"; Description: "{cm:LaunchProgram, Partitur-Editor}"; Flags: shellexec postinstall skipifsilent

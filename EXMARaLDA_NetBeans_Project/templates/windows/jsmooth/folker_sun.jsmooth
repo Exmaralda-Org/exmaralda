@@ -29,15 +29,7 @@
     
     <!-- AUDIO / VIDEO -->
     <classPath>..\..\..\temp\SunJMF\jmf.jar</classPath>
-    
-    
-    <!-- BAS -->
-    <!-- change 16-01-2016 -->
-    <!-- reverted 08-04-2016 -->
-    <!-- old version of ipsk.jar seems to work better than new one -->
     <classPath>..\..\..\temp\ipsk.jar</classPath>
-    <!-- <classPath>..\..\..\temp\ipsk_audiotools.jar</classPath> -->
-    <!-- <classPath>..\..\..\temp\ipsk_utils.jar</classPath>   -->
     <classPath>..\..\..\temp\elan.jar</classPath>
     <classPath>..\..\..\temp\JavaQTMovieView-1.4.4.jar</classPath>
     

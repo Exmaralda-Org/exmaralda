@@ -24,11 +24,11 @@ CP_JAVA_2=$WORKINGDIR/lib/jdom.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/xer
 # MAC OS
 CP_JAVA_3=$WORKINGDIR/lib/mrj.jar:$WORKINGDIR/lib/AppleJavaExtensions.jar:$WORKINGDIR/lib/QTJava.zip
 # AUDIO/VIDEO
-CP_JAVA_4=$WORKINGDIR/lib/fobs4jmf.jar:$WORKINGDIR/lib/jmf.jar:$WORKINGDIR/lib/ipsk_audiotools.jar:$WORKINGDIR/lib/ipsk_utils.jar:$WORKINGDIR/lib/elan.jar:$WORKINGDIR/lib/tritonus_share-0.3.6.jar
+CP_JAVA_4=$WORKINGDIR/lib/fobs4jmf.jar:$WORKINGDIR/lib/jmf.jar:$WORKINGDIR/lib/ipsk.jar:$WORKINGDIR/lib/elan.jar:$WORKINGDIR/lib/tritonus_share-0.3.6.jar
 # HTTP CLIENT
 CP_JAVA_5=$WORKINGDIR/lib/httpcore-4.4.3.jar:$WORKINGDIR/lib/httpclient-4.5.1.jar:$WORKINGDIR/lib/httpmime-4.5.1.jar
 # OTHER STUFF
-CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/swing-worker-1.2.jar:$WORKINGDIR/lib/mysql-connector-java-5.1.6-bin.jar    
+CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/swing-worker-1.2.jar:$WORKINGDIR/lib/mysql-connector-java-5.1.6-bin.jar::$WORKINGDIR/lib/BATIK.jar    
 
 # ALL COMBINED
 CP_JAVA=$CP_JAVA_1:$CP_JAVA_2:$CP_JAVA_3:$CP_JAVA_4:$CP_JAVA_5:$CP_JAVA_6

@@ -14,7 +14,7 @@ export DYLD_LIBRARY_PATH
 # if [ -z "$JAVA_HOME" ]; then
 #     JAVA_CMD="java"
 # fi
-JAVA_CMD="$WORKINGDIR/lib/java-8-oracle/bin/java"
+JAVA_CMD="$WORKINGDIR/java-8-oracle/bin/java"
 
 
 #CP_JAVA=$WORKINGDIR/lib/xercesImpl.jar:$WORKINGDIR/lib/xml-apis.jar:$WORKINGDIR/lib/xmlParserAPIs.jar:$WORKINGDIR/lib/jaxen-1.1.1.jar:$WORKINGDIR/lib/EXMARaLDA.jar:$WORKINGDIR/lib/commons-logging-1.1.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/saxon8.jar:$WORKINGDIR/lib/jdom.jar

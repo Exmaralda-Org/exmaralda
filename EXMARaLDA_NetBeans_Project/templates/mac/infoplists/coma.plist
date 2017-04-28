@@ -39,7 +39,7 @@
             <key>JVMVersion</key>
             <string>@javaversion@</string>
             <key>ClassPath</key>
-            <string>$JAVAROOT/mrj.jar:$JAVAROOT/commons-io-2.4.jar:$JAVAROOT/commons-lang-2.5.jar:$JAVAROOT/JavaQTMovieView-1.4.4.jar:$JAVAROOT/ipsk_audiotools.jar:$JAVAROOT/ipsk_utils.jar:$JAVAROOT/quaqua.jar:$JAVAROOT/swing-layout.jar:$JAVAROOT/elan.jar:$JAVAROOT/jaxen-1.1.6.jar:$JAVAROOT/jctable.jar:$JAVAROOT/jdom.jar:$JAVAROOT/saxon9he.jar:$JAVAROOT/xalan.jar:$JAVAROOT/commons-logging-1.2.jar:$JAVAROOT/QTJava.zip:$JAVAROOT/EXMARaLDA.jar:$JAVAROOT/fobs4jmf.jar:$JAVAROOT/jmf.jar::$JAVAROOT/swing-worker-1.2.jar</string>
+            <string>$JAVAROOT/mrj.jar:$JAVAROOT/commons-io-2.4.jar:$JAVAROOT/commons-lang-2.5.jar:$JAVAROOT/JavaQTMovieView-1.4.4.jar:$JAVAROOT/ipsk_audiotools.jar:$JAVAROOT/ipsk_utils.jar:$JAVAROOT/quaqua.jar:$JAVAROOT/swing-layout.jar:$JAVAROOT/elan.jar:$JAVAROOT/jaxen-1.1.6.jar:$JAVAROOT/jctable.jar:$JAVAROOT/jdom.jar:$JAVAROOT/saxon9he.jar:$JAVAROOT/xalan.jar:$JAVAROOT/commons-logging-1.2.jar:$JAVAROOT/QTJava.zip:$JAVAROOT/EXMARaLDA.jar:$JAVAROOT/fobs4jmf.jar:$JAVAROOT/jmf.jar::$JAVAROOT/swing-worker-1.2.jar:$JAVAROOT/jcalendar-1.4.jar</string>
             <key>Properties</key>
             <dict>
                 <key>java.library.path</key>

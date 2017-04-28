@@ -3,7 +3,43 @@
 =================
 partitureditor
 =================
-02.11.2016                 Started integration of SVN panel (MoDiKo)
+25.04.2017                 Some smaller fixes for the MAC (issues #77 and #78)
+24.04.2017                 Metadata for TCF must be empty (issue #64)
+24.04.2017                 CocoaQT Player: duration is available only after visual component has been initialised (issue #73)
+31.03.2017                 Reanmimated ID normalization in cleanup dialog (issue #67)
+14.03.2017                 TCF export now with CMDI 1.2 (issue #58)
+14.03.2017                 Annotation search would still fail when exs is pretty printed (issue #56)
+08.03.2017                 TCF export would fail because of left-over debug line (issue #58)
+20.02.2017                 TCF export needs handle PID for Partitur-Editor (issue #58)
+20.02.2017                 TCF export with generic segmentation would swallow words (issue #57)
+06.02.2017                 Annotation search would fail when exs is pretty printed (issue #56)
+06.02.2017                 Improvements to the alignment panel (issue #55)
+05.01.2017                 Make GAT output robust against timepoints not in the common timeline (should be rare...)
+04.01.2017                 Tiny bugling in Partitur when called from EXAKT: don't update null SVG panel
+19.12.2016                 Choose segmentation for TCF export (issue #38)
+13.12.2016                 Bug in ELAN import fixed (issue #52)
+13.12.2016                 One lil' fix to avoid a null pointer with the JMF player
+08.12.2016                 Video image on the MAC would always be square and could not resize. Fixed that (issue #29)
+30.11.2016                 Bug in multimodal panel: have to remove listeners after editing (issue #27)
+28.11.2016                 WebLicht action needed to be updated to final ISO spec (issue #41)
+28.11.2016                 Bug in WebMaus selection when last event spanned over more than one TLI (issue #42)
+28.11.2016                 Added four buttons, changed one button in multimodal panel (issue #27)
+28.11.2016                 Bug in TimeStringFormatter (issue #43)
+24.11.2016                 WebMaus action: check for WAV file (issue #40)
+22.11.2016                 QuickMediaOpenDialog: deselect in view menu when closed (issue #39)
+22.11.2016                 Multimodal panel now functioning? (issue #27)
+21.11.2016                 Started to make multimodal panel functional (issue #27)
+18.11.2016                 Reenabled MMF player, next attempt at making it work (issue #12)
+16.11.2016                 Export: Set language for ISO/TEI export (issue #9)
+15.11.2016                 Export: ISO/TEI export for event=token segmentation (issue #7)
+15.11.2016                 Fixed bug in Generic ISO/TEI export: first anchor of segment chains was omitted (issue #31)
+10.11.2016                 Import: Reimport segmented transcription with token layer (from MoDiKo, for Hanna, issue #6)
+10.11.2016                 Output: HTML partitur + SVG (MoDiKo)
+10.11.2016                 SVG Panel: send xpointer to partitur (MoDiKo)
+09.11.2016                 SVG Panel: multiple highlights, highlight color chooser (MoDiKo)
+04.11.2016                 Disabled all non-ISO-methods in TEI export
+04.11.2016                 Throw error message when no wav audio is assigned in Output-GAT+HTML5-Audio
+02.11.2016                 Started integration of SVG panel (MoDiKo)
 24.06.2016                 NV tier, one change for Transana import (Mum-Multi)
 24.06.2016                 Move down left / Move down right actions (Mum-Multi)
 17.06.2016                 Auto add tiers option for speakertable
@@ -432,161 +468,429 @@ partitureditor
 04.12.2007                 playback mode
 04.12.2007                 fine synchronisation mode
 =================
-exakt
+orthonormal
 =================
+24.04.2017                 Update normalisation lexicon (issue #74)
+12.04.2017                 Make sure frame is inside screen dimensions at startup (issue #72)
+02.03.2017                 force player change when running with JRE > 1.6 on MAC (issue #29)
+01.03.2017                 normalize whitespace in normalized forms (issue #62)
+14.12.2016                 Missing bounce.jar in library path on MAC (issue #29)
+16.11.2016                 TreeTaggerAction in new Annotation menu (issue #33)
+16.11.2016                 Export: Set language for ISO/TEI export (issue #9)
 18.04.2016                 revert to old version of BAS player (MAC)
 08.04.2016                 revert to old version of BAS player (Windows)
-31.03.2016                 Icon for word list
-31.03.2016                 Adapt KWIC row height to font size
-31.03.2016                 Start Praat if it is not already running (Jens Lanwer)
-31.03.2016                 Better error handling for Praat functionality (Jens Lanwer)
-10.11.2015                 first attempt at Praat functionality (Jens Lanwer)
-23.06.2014                 catch splash screen transparency error (lubuntu)
-28.05.2014                 Apply font preferences to full text area and word list (Tibetan)
-17.10.2013                 Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)
-15.10.2013                 Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)
-14.10.2013                 Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)
-05.10.2013                 UTF-8 mix up in InputHelperPanel
-16.01.2013                 Saved wordlist got wrong suffix txt when saving html (Leipzig)
-10.01.2013                 Accept fln files for FOLKER wizard
-22.11.2012                 Remove analysis function (Darsow, FiSS)
-22.11.2012                 Bug in add annotation when analyses are also present
-12.03.2012                 Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)
-16.02.2012                 Improved handling of locations and languages (Type attribute!) metadata for speakers
-16.02.2012                 Refactored local and remote COMA corpus to a common superclass
-25.01.2012                 Different color for count label in token list (hardly visible on the MAC)
-25.01.2012                 Unselected KWIC rows in gray
-18.01.2012                 FOLKER wizard: use 0 as default recording length in COMA communications
-18.01.2012                 FOLKER wizard: add warning for segmentation errors
-18.01.2012                 FOLKER wizard: make speakerless tiers description tiers to avoid structure errors
-21.11.2011                 Annotation search result must be saved/opened differently (Daniel Jettka)
-18.10.2011                 KWIC update causes hang when an annotation column is sorted (Hanna)
-05.10.2011                 KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)
-08.09.2011                 Further modifications in the catalog lookup dialog
-20.08.2011                 Some modifications in the catalog lookup dialog
-05.07.2011                 Frequency sort as option for word list output
-07.06.2011                 Special characters (apostrophe) in key names cause trouble for metadata handling
-30.05.2011                 Null corpus name causes app to hang when closing (GEWISS)
-17.05.2011                 Changed annotation search to work with Sextant annotations integrated
-09.05.2011                 FOLKER import now does automatic stratification by distribution
-23.03.2011                 Catalog functionality for remote and DB corpora
-18.03.2011                 First elements of RDB functionality added (Hanna!)
-17.01.2011                 escape type strings in input helper
-17.01.2011                 Input helper always on top (for filter and for search)
-23.11.2010                 Transcriber Import Corpus Wizard
-28.10.2010                 Savin/Opening KWIC with remote corpus was buggy
-27.10.2010                 ELAN Import Corpus Wizard
-11.10.2010                 bug in corpus generator: CHAT and GAT segmentation algorithms were confounded
-16.09.2010                 info plist must have library path also for PPC versions because of Quaqua
-16.09.2010                 CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file
-14.09.2010                 Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way.
-02.09.2010                 Sample functionality
-17.08.2010                 Added counting and levenshtein functionality to word list panel
-06.08.2010                 First attempt at multi-layer functionality (add annotation action)
-05.08.2010                 First components of regex library functionality
-03.08.2010                 Some changes to the layout and menu structure
-23.07.2010                 CHAT corpus generator
-19.07.2010                 Scandinavian alphabet in input helper
-27.04.2010                 update transcription views when view type changes
-23.04.2010                 fixed bug wrt to concordance update in annotation search
-23.04.2010                 annotation view for remote corpus was using wrong searchable segment XPath
-30.03.2010                 Selection functionailty for word list
-29.03.2010                 Word list functionality
-29.03.2010                 Double click on corpus opens new concordance
-24.03.2010                 FOLKER corpus generator
-16.03.2010                 list view
-16.03.2010                 popup menu for regular expresssion text field
-21.01.2010                 automatically open a KWIC when a new corpus has been loaded
-01.12.2009                 updated and supplemented documentation
-03.11.2009                 added GENERIC and cGAT_MINIMAL to segmentation options in the wizard
-29.10.2009                 media support for remote corpora (Windows only)
-29.10.2009                 combo box ugliness fixed
-28.10.2009                 remote corpus support (no media yet)
-20.10.2009                 some changes to the tool bar
-20.10.2009                 recent files in file menu
-20.10.2009                 view menu
-20.10.2009                 don't reset column widths after operations like adding an analysis
-01.07.2009                 possible bug in generate corpus: must catch the case where basic transcription has no suffix
-01.07.2009                 generate corpus: different swing worker needs to be used to be compatible with 1.5
-15.06.2009                 Changed to quaqua L&F
-02.06.2009                 Bug in Segmentor: must be aware of new suffixes
-07.05.2009                 MAC OS specific actions
-07.05.2009                 Enabled buttons in input helper
-07.05.2009                 Increased font-size in search expression fields
-07.05.2009                 Playback must be stopped when new transcription (part) is loaded
-05.05.2009                 Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied.
-14.04.2009                 Changed mac build to include SwingWorker.jar, necessary for corpus generator
-19.01.2009                 fixed three bugs in the corpus generator
-07.01.2009                 removed save and open buttons for search expressions
-21.11.2008                 fixed bug in annotation search
-22.10.2008                 changed mac plist to set bigger maximum heap size
-23.09.2008                 swapped rtf export action for partitur against generic output action
-07.08.2008                 modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column
-06.08.2008                 changed some dialogs to make them look better on MAC OS X
-06.08.2008                 integrated corpus creation wizard into file menu
-26.03.2008                 added function for subtracting dates
-20.03.2008                 fixed bug in reconversion of segmented to basic transcriptions
-19.03.2008                 adapted buttons for MAC OS X
-19.03.2008                 new function: import analyses
-29.02.2008                 fixed two bugs according to mail from AH
-19.02.2008                 added KWIC browsing mode
-18.02.2008                 several changes according to list by AH, JR
-18.02.2008                 increased maximum heap space to avoid out of memory errors
-18.02.2008                 annotation search working
-21.01.2008                 line numbers in the KWIC concordance
-=================
-all
-=================
-19.01.2016                 Updated ipsk libraries for BASAudioPlayer
-17.12.2015                 Embedded JRE for Linux distributions
-16.10.2015                 Changed linux sh scripts and mac plists to new library sitchuaishon
-16.10.2015                 Moved fobs dll to bundled jre
+06.04.2016                 Updated player preferences handling
+30.03.2016                 TEI and TCF exports must retain IDs (methods generateWordIDs())
+30.03.2016                 Wrong file filter for TCF export (txt instead of xml)
+03.03.2016                 Adapted TEI exports (annotationBlock etc.)
+22.02.2016                 Changes to output variant with normalisations only
+29.01.2016                 Output variant with normalisations only
+07.12.2015                 Table view in match list
+30.11.2015                 Improvements to directory search
+25.11.2015                 Directory search
+18.11.2015                 Disabled $ dummy symbol since it is no longer used in the conventions
 06.10.2015                 Build from git: jsmooth path changes for Windows (todo: Mac and Linux)
-10.07.2015                 Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)
-09.07.2015                 Fixed missing library in Linux distribution (Hanna)
-13.05.2015                 Bundle JRE on Windows
-05.05.2015                 some library cleanup for build, got rid of SUN JMF
-04.09.2013                 New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build
-04.09.2013                 new icons
-07.11.2012                 ipsk.jar for BAS-Player was missing from MAC plists
-06.11.2012                 end of official support for PPC Mac
-20.08.2012                 Parameter HTML witdth in write partitur method (Leipzig)
-16.11.2011                 IDs for words in TEI export
-19.10.2011                 Preparing release
-30.05.2011                 Command line version for Praat export (Singer)
-18.05.2011                 Changed segmented transcription format: ta's can now have ref-id's
-08.03.2011                 Added Sextant tagger to Windows and Linux distributions
-10.12.2010                 Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though)
-18.10.2010                 Simplified Windows distribution
-01.10.2010                 Added TEI drop to start menu on windows
-01.10.2010                 Removed SUN JMF versions of PE and EXAKT from start menu on windows
-24.08.2010                 Coloured splash screens
-23.08.2010                 Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly
-10.08.2010                 Added swingworker and QTJava to classpath on Linux
-31.03.2010                 Version info for Windows setup (Linde, RRZ)
-24.02.2010                 fixed bug in corpus builder, path separator must be os independent (Kerem)
-15.12.2009                 Linux: shell scripts take parameter (Timm!)
-23.06.2009                 Cleaned up build, smaller distribution size
-21.03.2009                 removed unused libs from linux distribution
-26.02.2009                 Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances
-09.02.2009                 Integration of ELAN.jar instead of copied MPI code
-09.02.2009                 Documentation updates
-28.01.2008                 Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS
-28.10.2008                 changed EXMARaLDA's build and template files for new media integration
-28.10.2008                 removed JLayer-Player because it is no longer needed (MP3 is fine in other players)
-27.10.2008                 integrated ELAN's DirectShowPlayer as a new player type
-22.10.2008                 fixed bug in log file handling which led to out of memory errors on certain Macs
-20.10.2008                 changed linux tarball: sh files are now executable
-13.10.2008                 changed linux tarball according to suggestions by Jörg Sommer
-13.10.2008                 changed info plist for mac applications to nake sure app runs on 32-bit-JVM
-06.10.2008                 changed basic and segmented transcription APIs to read and write more than one referenced file
-06.10.2008                 changed basic and segmented transcription DTD to allow more than one referenced file
-06.10.2008                 changed basic transcription DTD to allow format table
-16.09.2008                 updated XALAN libraries
-06.08.2008                 changed linux shell scripts (seem to work at least with Suse and Java 6 now)
+10.08.2015                 Deadlock in lexicon setup
+31.07.2015                 Let's be version 0.9 now, splashscreen changed
+25.07.2015                 More functionality for chat corpus
+24.07.2015                 First functionality for chat corpus
+23.07.2015                 Adaptations to lexicon handling in preferences
+13.05.2015                 Embedded JRE
+14.04.2015                 Must escape XML for edit word dialog
+13.04.2015                 Always use BAS Audio Player
+12.03.2015                 TCF export
+12.03.2015                 ISO/TEI export
+12.03.2015                 Export menu
+03.03.2015                 Internal Normalisation and Capital-Only Lexicon
+01.12.2014                 Remove problematic time values before editing contribution (Franziska Wallner)
+03.09.2014                 enable bulk changes via wordlist
+12.08.2014                 player must be set to idle when stopped
+04.08.2014                 enable play buttons in edit contribution dialog (Wiki)
+04.08.2014                 OOV filter button (Wiki)
+16.07.2014                 auto complete for tag text field (Swantje)
+12.05.2014                 default audio path
+10.03.2014                 dummy button in normalization dialog commits edit directly (JW)
+26.02.2014                 modified tagset / tag buttons (SW)
+18.02.2014                 enable XML mode by password
+18.02.2014                 display normalisation ratio
+18.02.2014                 filter for split words
+29.01.2014                 Catch IllegalArgumentException when resolving media path
+28.01.2014                 Remove redundant time elements from DGD2 (Jenny)
+21.01.2014                 (Rare) bug in assigning contribution for editing removed (Tabea Mergel)
+25.11.2013                 more space for edit panel for looong contributions (F.Wallner, GeWiss)
+06.11.2013                 new quick tag buttons (SW)
+06.11.2013                 retag after edit contribution (SW)
+16.10.2013                 filtering for POS
+26.08.2013                 fixed (?) another bug in recording path resolving
+23.07.2013                 better renormalisation after edit contribution
+18.07.2013                 focus for textfield after dummy button
+18.07.2013                 some minor corrections to match list functionality
+09.07.2013                 match list
+08.05.2013                 dummy buttons
+18.04.2013                 Change speaker functionality
+18.04.2013                 Edit contribution functionality
+19.02.2013                 No Derewo marking when opening FLK files
+07.01.2013                 No Derewo marking when opening FLK files
+19.12.2012                 Use Derewo to mark suspicious forms
+22.11.2012                 Filter for word list
+20.11.2012                 Bookmarks
+06.11.2012                 index update issue in XML mode
+31.10.2012                 First Linux Preview
+31.10.2012                 First Mac Preview
+25.10.2012                 Info about parse-level when opening FLK
+02.10.2012                 XML mode
+21.09.2012                 word correction dialog
+12.09.2012                 buttons for quick tagging
+12.09.2012                 Some adaptations for legacy DGD1 transcripts
+12.09.2012                 Remove normalisations which are identical to forms when opening
+06.06.2012                 Include Linux-Shellscript in preview distribution (Piotr Banski)
+06.06.2012                 Tolerate missing p-pos in table
+30.05.2012                 RDB Lexicon Update action
+30.05.2012                 Removed Auto Normalize button
+09.05.2012                 More keyboard support (down key) for forms list in normalization dialog
+09.05.2012                 No live lexicon update / no single auto normalize for RDB lexicon
+26.04.2012                 Tag probabilities
+21.03.2012                 Auto advance option
+28.03.2012                 File extension checks for opening must not be case-sensitive
+21.03.2012                 Auto normalization option for new files
+20.03.2012                 Capitalization lexicon integrated
+09.03.2012                 Tagging functionality
+01.06.2011                 Adaptations for basic transcriptions
+01.06.2011                 Cancel in check save must cancel, not close
+01.06.2011                 Player displays complete recording, selection only changes cursor position
+20.05.2011                 Extra second before and after selection in audio player (WS: oc)
+20.05.2011                 Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)
+20.05.2011                 Right click on word will (de)capitalize it (WS: mail 19-05-2011)
+20.05.2011                 Edit recording action in file menu (WS: mail 19-05-2011)
+12.11.2010                 Exit action in file menu (WS: n)
+12.11.2010                 Modified save behaviour (WS: k)
+12.11.2010                 Play button and audio position slider (WS: h)
+12.11.2010                 Scroll bar for editing panel (WS: g)
+12.11.2010                 Audio can be rassigned (WS: a)
+11.11.2010                 Added some status messages (WS: e)
+11.11.2010                 Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f)
+11.11.2010                 Don't add FLK files to recent files (WS: d)
+11.11.2010                 Implemented double-click behaviour for application startup (WS: c)
+11.11.2010                 Introduced threshhold for auto normalisation (WS: b)
+11.11.2010                 Changed buggy behaviour when empty string was entered in normalization dialog (WS: j)
+28.09.2010                 Editor setup optimised
+28.09.2010                 Output action
+28.09.2010                 Exception handling for Lexicon lookup
+28.09.2010                 Oracle JDBC driver added
+23.09.2010                 Capitalization removed
+23.09.2010                 Several changes related to GUI updating
+23.09.2010                 Help menu
+23.09.2010                 Preferences action
+23.09.2010                 different implementation of RDB lexicon
+11.04.2010                 auto button
+10.04.2010                 word list
+22.03.2010                 First build of first prototype
+=================
+folker
+=================
+12.04.2017                 Make sure frame is inside screen dimensions at startup (issue #72)
+10.03.2017                 Ukranian alphabet (issue #63)
+02.03.2017                 force player change when running with JRE > 1.6 on MAC (issue #29)
+19.12.2016                 Spinner for setting playback rate (issue #53)
+28.11.2016                 Bug in TimeStringFormatter (issue #43)
+16.11.2016                 Export: Set language for ISO/TEI export (issue #9)
+21.04.2016                 Praat export from partitur view messed up the transcript
+18.04.2016                 revert to old version of BAS player (MAC)
+08.04.2016                 revert to old version of BAS player (Windows)
+06.04.2016                 Updated player preferences handling
+03.03.2016                 Adapted TEI exports (annotationBlock etc.)
+03.02.2016                 Some smaller fixes to the video panel (Mail WS)
+28.01.2016                 Enable video resize
+02.12.2015                 Some minor corrections to player selection
+12.11.2015                 HTML+Audio contribution list output: output audio as url, won't work on Firefox otherwise
+10.11.2015                 HTML+Audio contribution list output: nuther bug?
+09.11.2015                 HTML+Audio contribution list output: several bugs
+06.10.2015                 Build from git: jsmooth path changes for Windows (todo: Mac and Linux)
+30.07.2015                 VTT subtitles
+21.07.2015                 First attempt at minimalistic video panel
+13.05.2015                 Embedded JRE
+13.05.2015                 JDS Player
+20.04.2015                 TEI conversion: no origin for timeline, no absolute value for first when
+20.04.2015                 Bug in XSL stylesheet for TEI conversion (pause with speaker-reference)
+13.04.2015                 Default player = BAS Audio Player
+12.03.2015                 TCF export
+16.01.2015                 Adaptations of TEI export to new version of standard proposal (annotationGrp)
+05.01.2015                 Remove empty events ONLY before importing EXB, not in other situations (Jenny)
+01.12.2014                 Added jniwrap for 64-bit systems (Hanna, Flo)
+01.12.2014                 Remove empty events before importing EXB (Franziska Wallner)
+04.08.2014                 empty segments as syntax errors (wiki)
+04.08.2014                 remember mask method (wiki)
+04.08.2014                 mask button in partitur (wiki)
+30.06.2014                 changed loop behaviour when appending (Wilfried)
+10.06.2014                 new keyboard shortcut for next segment: CTRL + E
+08.05.2014                 new keyboard shortcut for mask segment: CTRL + M
+08.05.2014                 new keyboard shortcut for next segment: CTRL + F
+08.05.2014                 keyboard shortcuts in tooltips (segment view only)
+08.05.2014                 apostrophe in universal alphabet
+08.05.2014                 quantification output not correct on parse level 3
+08.05.2014                 bug when moving old mask segments
+06.05.2014                 default audio path in preferences
+20.03.2014                 mask and real name column labels were mixed up
+20.03.2014                 audacity export
+20.03.2014                 bug in audacity import
+10.03.2014                 button for removing mask segments (JW)
+06.03.2014                 fixed bug in masking functionality - reading of internal resource failed
+26.02.2014                 java bug wrt window translucency, disabled th respective parts of the code
+20.02.2014                 improved and debugged audio masking
+18.02.2014                 edit entries in mask mode, scroll transcriptions with selection, opacity
+29.01.2014                 plain text subtitles with frames, first attempt (Jürgen Immerz)
+29.01.2014                 masking key
+27.01.2014                 enable logging as advanced preferences option
+21.01.2014                 Esc in confirmation after remove segment must abort action (Bug report Magdeburg)
+21.01.2014                 commit edit before saving (Bug report Magdeburg)
+16.01.2014                 Reworked and extended masking functionality
+16.01.2014                 Reactivated user logging
+15.01.2014                 SRT Subtitle export (Jürgen Immerz / Reinhold Schmitt)
+03.12.2013                 Added Czech and Russian transliteration to alphabets, added one missing character to Italian alphabet (requests after FOLKER training)
+06.09.2013                 Audacity import
+29.08.2013                 Mask button
+20.08.2013                 Restrict input for speaker IDs
+20.08.2013                 Buttons for accent (un)marking
+15.08.2013                 Added German+Capitals to alphabets (request from Magdeburg)
+18.07.2013                 Danish, Spanish and Italian alphabets
+10.04.2013                 No whitespace between latching and comment open (WS)
+04.02.2013                 Handle multiple row selection in contribution view differently
+21.01.2013                 Match list
+17.01.2013                 Additional functionality for contribution text pane
+06.12.2012                 first attempt at F4 export
+04.12.2012                 Comment insertion
+04.12.2012                 Alphabet customisation
+26.11.2012                 Praat export
+31.10.2012                 First Linux Preview
+31.10.2012                 First Mac Preview
+25.10.2012                 Info about parse-level and player displayed in status bar
+25.10.2012                 Info about parse-level when opening FLK
+18.09.2012                 Need to commit edit before splitting transcription to avoid null pointer in certain time constellations
+11.09.2012                 Minimize function in transcription menu
+10.09.2012                 Two more fixes concerning basic output
+03.09.2012                 Fixed several details concerning basic output
+02.08.2012                 Added *.FLN to the file filter for opening
+03.07.2012                 Added BAS Audio Player as a player option
+21.06.2012                 allow dangling and leading latching if latching is across speaker change (mail JW)
+21.06.2012                 do not add space before uncertain after latching (mail JW)
+18.06.2012                 one more correction (latching) for GAT basic transcription output (mail JW)
+19.06.2012                 no smaller font size for nv in basic transcription output
+19.06.2012                 resolve relative paths with new method (bug on Mac)
+18.06.2012                 fixed problem with RegEx matching on the MAC (Basic transcription end symbols)
+18.06.2012                 two more corrections (comments, latching) for GAT basic transcription output (mail WS)
+13.06.2012                 first corrections for GAT basic transcription output (mail WS)
+12.06.2012                 first attempt at GAT basic transcription output
+18.05.2012                 Micro pause in virtual keyboard
+18.05.2012                 Changed web addresses to fit new AGD website in several places
+18.05.2012                 Don't throw out empty contributions when opening transcription
+07.05.2012                 Allow glottal stop symbol at level 3
+07.05.2012                 Further fixes concerning whitespace in level 3 transcripts
+07.05.2012                 Allow auto normalize whitespace in preferences also for level 3
+07.05.2012                 Fixed bug in tranformation of breathe add parse level 3: do not add whitespace
+19.04.2012                 Fixed bug in tranformation of speakerless contributions: do not add whitespace
+28.03.2012                 Allow empty phrase boundaries on parse level 3
+19.03.2012                 Modify times action (shift/scale absolute times) in transcription menu
+01.02.2012                 Integrated OrthoNormal into installer
+25.01.2012                 Auto assign last speaker in append event
+24.01.2012                 Relativize audio files with ..
+24.01.2012                 Goto next error action in contribution view
+06.01.2012                 Goto next error action
+05.01.2012                 Fine tuning for level 3 parsing
+23.12.2011                 Remove pause speaker assignment (WS: Twiki)
+23.12.2011                 Keyboard shortcut Shift + F4 for play next segment (JW: Twiki)
+23.12.2011                 EXMARaLDA import: reassign audio if audio cannot be found (WS: Twiki)
+16.12.2011                 Bug in EXMARaLDA import: do not override interpolated times
+07.12.2011                 Start implementing log functionality (not active yet)
+07.12.2011                 Play next segment action
+10.10.2011                 compact partitur ouput method
+07.10.2011                 HTML5 audio ouput method for contribution list
+08.06.2011                 Changing attached start or end time must not lead to a contradictory time structure (more to do...)
+31.05.2011                 Updated schema and data model documentation for basic transcript
+31.05.2011                 Parsing for level 3 (input and output)
+31.05.2011                 Completed level 3 syntax check (comments)
+17.05.2011                 Additional buttons for playing parts of/before/after the selection (as in EXMARaLDA)
+17.05.2011                 Completed first attempt at level 3 syntax check (no comments yet!)
+22.03.2011                 Fixed tiny bugling in internationalisation
+19.01.2011                 Modifications to the TEI export
+14.12.2010                 Patterns for syntax checking of basic transcript level
+30.11.2010                 Attempt at fixing file filter strangeness in output (Mail WS)
+28.10.2010                 TEI as export option
+18.08.2010                 Minimum required Java version is now 1.6
+18.08.2010                 Fixed bug in copy action: media file resolution got a null pointer when the transcription was unsaved
+16.08.2010                 French translations modified according to corrections by Florence Oloff
+01.07.2010                 Split segment in list: avoid division by zero (NaN bug)
+29.06.2010                 Add segment button has to be disabled / selection has to be reset after new/open
+23.06.2010                 Fixed six remaining internationalization issues, second release Candidate 1.1
+18.06.2010                 Release Candidate 1.1
+17.06.2010                 Fixed remaining internationalization issues
+27.05.2010                 Check save after reassign recording
+26.05.2010                 Completed internationalization
+13.04.2010                 removed keyboard shortcuts for GAT symbols
+09.04.2010                 started internationalization
+08.04.2010                 added language options to preferences
+16.03.2010                 updated manual for release
+08.03.2010                 commit edit before switching from segment/contribution view to another view
+06.03.2010                 update virtual key font after preferences edit
+06.03.2010                 commit edit before preferences edit
+06.03.2010                 output XSL must use rounded values to calculate filler zeroes
+05.03.2010                 pause measurement with two digits also in partitur
+05.03.2010                 changed pause symbol in partitur view
+05.03.2010                 changed behaviour of MAC quit handler (don't quit when check save returns false)
+04.03.2010                 changed order of symbols in font preferences test string
+04.03.2010                 increased text field size for fonts preferences
+04.03.2010                 increased button size for virtual keyboard on the MAC
+04.03.2010                 removed Assign Times action from partitur view
+03.03.2010                 assigned keyboard shortcuts to virtual keyboard
+03.03.2010                 added safety mechanism to make it harder to load zero width font in preferences panel (WS)
+02.03.2010                 commit edit must be done differently before adding segment in partitur (Jenny Kunz)
+02.03.2010                 forgot to add apple extensions to Windows distribution
+01.03.2010                 explicitly set DIN A4 paper measures for RTF
+01.03.2010                 commit edit before updating pauses
+01.03.2010                 changed MAC OS plists to assign more heap space to FOLKER
+01.03.2010                 changed MAC OS plists to recognize FLK as FOLKER files
+01.03.2010                 added MAC OS application handlers (for system menu)
+28.02.2010                 insert pause action for partitur (Jenny Kunz)
+28.02.2010                 safety check for remove segment in partitur (Jenny Kunz)
+27.02.2010                 integrated time-stamps in partitur output
+27.02.2010                 integrated time-stamps in segment list output
+27.02.2010                 integrated time-stamps in contribution list output
+27.02.2010                 font options under preferences
+27.02.2010                 view option for virtual keyboard
+26.02.2010                 virtual keyboard
+26.02.2010                 changed setting of default player (mail WS)
+19.02.2010                 first attempt at new player solution for MAC
+29.10.2009                 changed vertical maginify method for waveform
+05.10.2009                 new transcription: media path must be immediately written to the transcription
+05.10.2009                 after merge: DOCUMENT_CHANGED must be true
+05.10.2009                 when reassigning audio after opening: change must be immediately written to the transcription
+22.09.2009                 split transcription must make overwrite check when file exists
+21.09.2009                 split transcription must remove unused timepoints
+07.09.2009                 fixed bug in merge segments when one segment is editing (see Loreen Sommer's mail, 30 July 2009)
+07.09.2009                 added split transcription action
+07.09.2009                 added merge transcriptions action
+07.09.2009                 added append transcription action
+07.09.2009                 fixed bug in remove segment when buffer line was selected
+07.09.2009                 added assign times action in partitur
+07.09.2009                 added remove segment action in partitur
+17.08.2009                 removed rescue action
+17.08.2009                 changed loop implementation: one thread instead of many
+19.06.2009                 Fixed bug in the bug fix for copy for segment and contribution view
+18.06.2009                 Fixed bug in copy for segment and contribution view
+15.06.2009                 Square brackets to mark overlap in copied partitur
+12.06.2009                 Rescue player action in help menu
+10.06.2009                 Small changes to the Keyboard shortcut helper
+08.06.2009                 Made time between loops configurable
+08.06.2009                 Implemented "replace all"
+08.06.2009                 Use a faster method (java vs. XSL) to transform a FOLKER transcription into a JDOM document
+08.06.2009                 Changed .iss file to include quick start guide and big manual
+29.05.2009                 Added progress bar in status bar for saving
+29.05.2009                 Application must not exit while saving is in progress
+29.05.2009                 Update pauses: forgot trailing space
+27.05.2009                 Started implementing Search and Replace
+22.05.2009                 Help function for keyboard shortcuts
+20.05.2009                 Ctrl + 1 for merge segments in event view
+20.05.2009                 Implemented loop functionality
+19.05.2009                 Check save only if the transcription has really changed
+19.05.2009                 Partitur output: insert square brackets for overlaps
+19.05.2009                 Show wait cursor when switching to partitur view
+19.05.2009                 Default for player keyboard controls is now function key WITHOUT modifier, can be changed through preferences
+19.05.2009                 Preferences panel: added option for player keyboard control
+18.05.2009                 Moved "Fill gaps" action from side panel to transcription menu
+18.05.2009                 Preferences: added options for normalizing whitespace, updating pauses when saving
+18.05.2009                 Saving: doing this in a thread now to avoid blocking the editor when saving long files -  WS mail 11-05-2009
+18.05.2009                 Vertical alignment: top for all cell renderers -  WS mail 11-05-2009
+18.05.2009                 Added cancel option to check save procedure
+18.05.2009                 Added pause update action
+18.05.2009                 Added whitespace normalization action
+12.05.2009                 Added mimetype for EAF export
+08.04.2009                 Changed selection/focus behaviour -  WS mail: 1
+07.04.2009                 disable output and copy when no document is loaded
+06.04.2009                 pause length is automatically recalculated (not happy yet: this is more complex!) - WS mail: 7
+06.04.2009                 changed behaviour for waveform: cursor is not reset when playback is stopped
+06.04.2009                 navigation action for waveform
+06.04.2009                 vertical magnify of waveform -  WS mail: 8
+06.04.2009                 special behaviour for last interval in partitur
+06.04.2009                 configured popup menus in partitur for FOLKER -  WS mail: 6
+06.04.2009                 changed scrolling behaviour when a new event is added in the segment view -  WS mail: 5
+06.04.2009                 selection in partitur now reacts correctly when extended through CTRL+mouse click - WS mail: 4
+06.04.2009                 partitur output: different formatting for speakerless tier, speakerless tier(s) outside partitur frame - WS mail: 3
+06.04.2009                 partitur output: transcription is now stratified - WS mail: 3
+06.04.2009                 fixed bug in encoding ouf breathing (out) - WS mail: 2
+03.04.2009                 changed document icon
+01.04.2009                 Don't offer DirectShow-Player in Preferences when not on Windows
+01.04.2009                 Export action: needs to read new EXMARaLDA suffix EXB
+01.04.2009                 Import action: needs to read new EXMARaLDA suffix EXB
+06.03.2009                 Edit recording action
+06.03.2009                 Changed data model/parsing for unintelligible and breathe
+05.03.2009                 Split event now takes care that resulting segments don't become smaller than the tolerance
+05.03.2009                 Added log messages for all major actions
+04.03.2009                 Fixed bug writing null audio file (Wilfried's mail)
+03.03.2009                 Added tooltips with full path in recent files items in file menu
+03.03.2009                 Waveform view also makes sure that selection boundaries are not closer to next timepoints than than tolerance
+02.03.2009                 Waveform view now makes sure that selection length does not become less than tolerance
+02.03.2009                 Changed tolerance from 100 to 50 miliseconds
+02.03.2009                 Caught bug when opening null audio file (Wilfried's mail)
+27.02.2009                 Added mark functionality to the waveform panel
+26.02.2009                 Added possibility to select parse level
+26.02.2009                 Added possibility to select parse level
+26.02.2009                 Copy Action
+26.02.2009                 Disabled speakertable edit for partitur view
+25.02.2009                 Added quantification HTML output
+25.02.2009                 Added partitur HTML output
+25.02.2009                 Added segment HTML output
+25.02.2009                 Changes in the HTML contribution list output: added columns for numbering, added brackets for overlaps
+25.02.2009                 Fixed bug in output: suffix must be appended if none provided by the user
+05.02.2009                 Output action
+04.02.2009                 Changed symbols for: breathe, assimilation, unintelligible and alternative (Wilfried's, Martin's and my own mail)
+29.01.2009                 Possibility to unassign speakers (Wilfried's mail)
+29.01.2009                 Minor changes in the help menu
+29.01.2009                 Made a decent splash screen
+26.01.2009                 Added accelerators for New, Open, Save
+22.01.2009                 Fixed bug after segment deletion: timeline must be updated
+09.01.2009                 changed and supplemented key bindings
+09.01.2009                 added 'play last second of selection' action
+06.01.2009                 added 'append segment' action
+17.12.2008                 several mouse handling features added to the timeline view
+15.12.2008                 minor changes to the data model (assimilation and unintelligible)
+12.12.2008                 changed I/O to write parse level 2
+11.11.2008                 changed behaviour when a recording is not found, cannot be processed in 'New' and 'Open' actions
+11.11.2008                 renamed 'Ereignis' to 'Segment' in several places
+29.10.2008                 changed behaviour of contribution text pane
+29.10.2008                 added time integrity check columns in list views
+29.10.2008                 added 'insert pause' action
+27.10.2008                 fixed bug related to switch from partitur to event view: edit must be commited
+27.10.2008                 fixed bug related to speaker cell editor / event removal: edit must be commited
+22.10.2008                 added ELAN export
+22.10.2008                 changed save to write to folker-transcription format
+22.10.2008                 changed open to read folker-transcription format
+22.10.2008                 added export action
+22.10.2008                 added import action
+16.09.2008                 changed key bindings for event viewer to CTRL-combinations
+16.09.2008                 added 'merge events' action to the event viewer
+15.09.2008                 changed time viewer to display only one channel in case of mono recordings
+15.09.2008                 added label for display of selection length in time viewer
+15.09.2008                 changed row height of event view to avoid clipping of descenders in cell editor
+12.09.2008                 added recent files to file menu
+12.09.2008                 added 'store settings' (windows size, recent files etc.) action
+12.09.2008                 added safety check before opening file / exiting
+11.09.2008                 added exit action to file menu
+11.09.2008                 changed behaviour after zoom in/out (selection should remain visible)
+09.09.2008                 changed setup file to create a file association between Folker and files with suffix "flk"
+09.09.2008                 application can now optionally be given a transcription or wave file as an argument and will attempt to open them
+09.09.2008                 changed file ending for transcriptions from *.xml to *.flk
+08.08.2008                 experimented with a PRAAT player
+08.08.2008                 modified 'Save' and 'Save as...' actions
+07.08.2008                 added player selection option in preferences
+07.08.2008                 fixed bug in 'remove event'action
+07.08.2008                 added 'timestamp event' action
+07.08.2008                 made application implement the EXMARaLDA application interface --> help menu, logging funcionality
+07.08.2008                 added 'detach selection' action
+07.08.2008                 added row numbering to event and contribution view
 =================
 coma
 =================
+03.04.2017                 Switched CHAT/GAT in dropdown menu, now all right (issue #69)
+23.03.2017                 Set segmented=true for newly generated EXS (issue #66)
 26.07.2015                 cGAT Minimal as tagging option (MoDiKo)
 26.07.2015                 Custom FSMs for segmentation functionality (MoDiKo)
 26.07.2015                 Beautified segmentation dialogs
@@ -852,8 +1156,172 @@ coma
 05.08.2008                 added segmentation functionality to the corpus creation wizard
 04.08.2008                 added 'Tools > EXAKT Search' function
 =================
+exakt
+=================
+27.02.2017                 Bug in XSL search: need to set base directory (issue #60)
+22.11.2016                 "Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue #36)
+11.11.2016                 Removed Open DB corpus item from file menu (issue #28)
+18.04.2016                 revert to old version of BAS player (MAC)
+08.04.2016                 revert to old version of BAS player (Windows)
+31.03.2016                 Icon for word list
+31.03.2016                 Adapt KWIC row height to font size
+31.03.2016                 Start Praat if it is not already running (Jens Lanwer)
+31.03.2016                 Better error handling for Praat functionality (Jens Lanwer)
+10.11.2015                 first attempt at Praat functionality (Jens Lanwer)
+23.06.2014                 catch splash screen transparency error (lubuntu)
+28.05.2014                 Apply font preferences to full text area and word list (Tibetan)
+17.10.2013                 Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)
+15.10.2013                 Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)
+14.10.2013                 Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)
+05.10.2013                 UTF-8 mix up in InputHelperPanel
+16.01.2013                 Saved wordlist got wrong suffix txt when saving html (Leipzig)
+10.01.2013                 Accept fln files for FOLKER wizard
+22.11.2012                 Remove analysis function (Darsow, FiSS)
+22.11.2012                 Bug in add annotation when analyses are also present
+12.03.2012                 Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)
+16.02.2012                 Improved handling of locations and languages (Type attribute!) metadata for speakers
+16.02.2012                 Refactored local and remote COMA corpus to a common superclass
+25.01.2012                 Different color for count label in token list (hardly visible on the MAC)
+25.01.2012                 Unselected KWIC rows in gray
+18.01.2012                 FOLKER wizard: use 0 as default recording length in COMA communications
+18.01.2012                 FOLKER wizard: add warning for segmentation errors
+18.01.2012                 FOLKER wizard: make speakerless tiers description tiers to avoid structure errors
+21.11.2011                 Annotation search result must be saved/opened differently (Daniel Jettka)
+18.10.2011                 KWIC update causes hang when an annotation column is sorted (Hanna)
+05.10.2011                 KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)
+08.09.2011                 Further modifications in the catalog lookup dialog
+20.08.2011                 Some modifications in the catalog lookup dialog
+05.07.2011                 Frequency sort as option for word list output
+07.06.2011                 Special characters (apostrophe) in key names cause trouble for metadata handling
+30.05.2011                 Null corpus name causes app to hang when closing (GEWISS)
+17.05.2011                 Changed annotation search to work with Sextant annotations integrated
+09.05.2011                 FOLKER import now does automatic stratification by distribution
+23.03.2011                 Catalog functionality for remote and DB corpora
+18.03.2011                 First elements of RDB functionality added (Hanna!)
+17.01.2011                 escape type strings in input helper
+17.01.2011                 Input helper always on top (for filter and for search)
+23.11.2010                 Transcriber Import Corpus Wizard
+28.10.2010                 Savin/Opening KWIC with remote corpus was buggy
+27.10.2010                 ELAN Import Corpus Wizard
+11.10.2010                 bug in corpus generator: CHAT and GAT segmentation algorithms were confounded
+16.09.2010                 info plist must have library path also for PPC versions because of Quaqua
+16.09.2010                 CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file
+14.09.2010                 Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way.
+02.09.2010                 Sample functionality
+17.08.2010                 Added counting and levenshtein functionality to word list panel
+06.08.2010                 First attempt at multi-layer functionality (add annotation action)
+05.08.2010                 First components of regex library functionality
+03.08.2010                 Some changes to the layout and menu structure
+23.07.2010                 CHAT corpus generator
+19.07.2010                 Scandinavian alphabet in input helper
+27.04.2010                 update transcription views when view type changes
+23.04.2010                 fixed bug wrt to concordance update in annotation search
+23.04.2010                 annotation view for remote corpus was using wrong searchable segment XPath
+30.03.2010                 Selection functionailty for word list
+29.03.2010                 Word list functionality
+29.03.2010                 Double click on corpus opens new concordance
+24.03.2010                 FOLKER corpus generator
+16.03.2010                 list view
+16.03.2010                 popup menu for regular expresssion text field
+21.01.2010                 automatically open a KWIC when a new corpus has been loaded
+01.12.2009                 updated and supplemented documentation
+03.11.2009                 added GENERIC and cGAT_MINIMAL to segmentation options in the wizard
+29.10.2009                 media support for remote corpora (Windows only)
+29.10.2009                 combo box ugliness fixed
+28.10.2009                 remote corpus support (no media yet)
+20.10.2009                 some changes to the tool bar
+20.10.2009                 recent files in file menu
+20.10.2009                 view menu
+20.10.2009                 don't reset column widths after operations like adding an analysis
+01.07.2009                 possible bug in generate corpus: must catch the case where basic transcription has no suffix
+01.07.2009                 generate corpus: different swing worker needs to be used to be compatible with 1.5
+15.06.2009                 Changed to quaqua L&F
+02.06.2009                 Bug in Segmentor: must be aware of new suffixes
+07.05.2009                 MAC OS specific actions
+07.05.2009                 Enabled buttons in input helper
+07.05.2009                 Increased font-size in search expression fields
+07.05.2009                 Playback must be stopped when new transcription (part) is loaded
+05.05.2009                 Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied.
+14.04.2009                 Changed mac build to include SwingWorker.jar, necessary for corpus generator
+19.01.2009                 fixed three bugs in the corpus generator
+07.01.2009                 removed save and open buttons for search expressions
+21.11.2008                 fixed bug in annotation search
+22.10.2008                 changed mac plist to set bigger maximum heap size
+23.09.2008                 swapped rtf export action for partitur against generic output action
+07.08.2008                 modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column
+06.08.2008                 changed some dialogs to make them look better on MAC OS X
+06.08.2008                 integrated corpus creation wizard into file menu
+26.03.2008                 added function for subtracting dates
+20.03.2008                 fixed bug in reconversion of segmented to basic transcriptions
+19.03.2008                 adapted buttons for MAC OS X
+19.03.2008                 new function: import analyses
+29.02.2008                 fixed two bugs according to mail from AH
+19.02.2008                 added KWIC browsing mode
+18.02.2008                 several changes according to list by AH, JR
+18.02.2008                 increased maximum heap space to avoid out of memory errors
+18.02.2008                 annotation search working
+21.01.2008                 line numbers in the KWIC concordance
+=================
+all
+=================
+26.01.2017                 Wrong time stamp for build time (issue #54), added some more info about JRE etc. to log file
+13.12.2016                 Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue #51)
+04.12.2016                 ... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)
+04.12.2016                 FOBS and SUN JMF distributions for Linux (issue #30)
+03.12.2016                 Wrong libraries for BAS Player on Linux (issue #30)
+02.12.2016                 Embedded java binaries need executable permissions (issue #30)
+01.12.2016                 Exchange Linux Bundled JRE 64bit to 32bit (issue #30)
+19.01.2016                 Updated ipsk libraries for BASAudioPlayer
+17.12.2015                 Embedded JRE for Linux distributions
+16.10.2015                 Changed linux sh scripts and mac plists to new library sitchuaishon
+16.10.2015                 Moved fobs dll to bundled jre
+06.10.2015                 Build from git: jsmooth path changes for Windows (todo: Mac and Linux)
+10.07.2015                 Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)
+09.07.2015                 Fixed missing library in Linux distribution (Hanna)
+13.05.2015                 Bundle JRE on Windows
+05.05.2015                 some library cleanup for build, got rid of SUN JMF
+04.09.2013                 New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build
+04.09.2013                 new icons
+07.11.2012                 ipsk.jar for BAS-Player was missing from MAC plists
+06.11.2012                 end of official support for PPC Mac
+20.08.2012                 Parameter HTML witdth in write partitur method (Leipzig)
+16.11.2011                 IDs for words in TEI export
+19.10.2011                 Preparing release
+30.05.2011                 Command line version for Praat export (Singer)
+18.05.2011                 Changed segmented transcription format: ta's can now have ref-id's
+08.03.2011                 Added Sextant tagger to Windows and Linux distributions
+10.12.2010                 Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though)
+18.10.2010                 Simplified Windows distribution
+01.10.2010                 Added TEI drop to start menu on windows
+01.10.2010                 Removed SUN JMF versions of PE and EXAKT from start menu on windows
+24.08.2010                 Coloured splash screens
+23.08.2010                 Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly
+10.08.2010                 Added swingworker and QTJava to classpath on Linux
+31.03.2010                 Version info for Windows setup (Linde, RRZ)
+24.02.2010                 fixed bug in corpus builder, path separator must be os independent (Kerem)
+15.12.2009                 Linux: shell scripts take parameter (Timm!)
+23.06.2009                 Cleaned up build, smaller distribution size
+21.03.2009                 removed unused libs from linux distribution
+26.02.2009                 Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances
+09.02.2009                 Integration of ELAN.jar instead of copied MPI code
+09.02.2009                 Documentation updates
+28.01.2008                 Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS
+28.10.2008                 changed EXMARaLDA's build and template files for new media integration
+28.10.2008                 removed JLayer-Player because it is no longer needed (MP3 is fine in other players)
+27.10.2008                 integrated ELAN's DirectShowPlayer as a new player type
+22.10.2008                 fixed bug in log file handling which led to out of memory errors on certain Macs
+20.10.2008                 changed linux tarball: sh files are now executable
+13.10.2008                 changed linux tarball according to suggestions by Jörg Sommer
+13.10.2008                 changed info plist for mac applications to nake sure app runs on 32-bit-JVM
+06.10.2008                 changed basic and segmented transcription APIs to read and write more than one referenced file
+06.10.2008                 changed basic and segmented transcription DTD to allow more than one referenced file
+06.10.2008                 changed basic transcription DTD to allow format table
+16.09.2008                 updated XALAN libraries
+06.08.2008                 changed linux shell scripts (seem to work at least with Suse and Java 6 now)
+=================
 teidrop
 =================
+14.12.2016                 Wrong java path in Linux shell script (issue #30)
 15.01.2015                 Adaptations to new version of standard proposal (annotationGrp)
 25.01.2012                 Fixed namespace issue in FOLKER transformation (word IDs)
 25.01.2012                 File type recognition did not work with upper case filename extensions

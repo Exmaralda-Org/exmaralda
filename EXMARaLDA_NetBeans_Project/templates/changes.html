@@ -42,7 +42,7 @@ function toggle_visibility(className) {
                         display:none;
                     }</style></head>
    <body>
-      <h1>EXMARaLDA changes</h1><a href="#partitureditor">partitureditor</a> | <a href="#orthonormal">orthonormal</a> | <a href="#exakt">exakt</a> | <a href="#all">all</a> | <a href="#coma">coma</a> | <a href="#teidrop">teidrop</a> | <a href="#sextant">sextant</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
+      <h1>EXMARaLDA changes</h1><a href="#partitureditor">partitureditor</a> | <a href="#orthonormal">orthonormal</a> | <a href="#folker">folker</a> | <a href="#coma">coma</a> | <a href="#exakt">exakt</a> | <a href="#all">all</a> | <a href="#teidrop">teidrop</a> | <a href="#sextant">sextant</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
       <h2><a name="partitureditor"></a>partitureditor
       </h2>
       <table rules="all" frame="box" width="60%">
@@ -52,9 +52,189 @@ function toggle_visibility(className) {
             <th>Change</th>
          </tr>
          <tr>
-            <td class="change">02.11.2016</td>
+            <td class="change">25.04.2017</td>
             <td class="change">1.6</td>
-            <td class="change">Started integration of SVN panel (MoDiKo)</td>
+            <td class="change">Some smaller fixes for the MAC (issues #77 and #78)</td>
+         </tr>
+         <tr>
+            <td class="bug">24.04.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Metadata for TCF must be empty (issue #64)</td>
+         </tr>
+         <tr>
+            <td class="bug">24.04.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">CocoaQT Player: duration is available only after visual component has been initialised (issue #73)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2017</td>
+            <td class="change">1.6</td>
+            <td class="change">Reanmimated ID normalization in cleanup dialog (issue #67)</td>
+         </tr>
+         <tr>
+            <td class="change">14.03.2017</td>
+            <td class="change">1.6</td>
+            <td class="change">TCF export now with CMDI 1.2 (issue #58)</td>
+         </tr>
+         <tr>
+            <td class="bug">14.03.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Annotation search would still fail when exs is pretty printed (issue #56)</td>
+         </tr>
+         <tr>
+            <td class="bug">08.03.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">TCF export would fail because of left-over debug line (issue #58)</td>
+         </tr>
+         <tr>
+            <td class="bug">20.02.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">TCF export needs handle PID for Partitur-Editor (issue #58)</td>
+         </tr>
+         <tr>
+            <td class="bug">20.02.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">TCF export with generic segmentation would swallow words (issue #57)</td>
+         </tr>
+         <tr>
+            <td class="bug">06.02.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Annotation search would fail when exs is pretty printed (issue #56)</td>
+         </tr>
+         <tr>
+            <td class="change">06.02.2017</td>
+            <td class="change">1.6</td>
+            <td class="change">Improvements to the alignment panel (issue #55)</td>
+         </tr>
+         <tr>
+            <td class="change">05.01.2017</td>
+            <td class="change">1.6</td>
+            <td class="change">Make GAT output robust against timepoints not in the common timeline (should be rare...)</td>
+         </tr>
+         <tr>
+            <td class="bug">04.01.2017</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Tiny bugling in Partitur when called from EXAKT: don't update null SVG panel</td>
+         </tr>
+         <tr>
+            <td class="change">19.12.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">Choose segmentation for TCF export (issue #38)</td>
+         </tr>
+         <tr>
+            <td class="bug">13.12.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Bug in ELAN import fixed (issue #52)</td>
+         </tr>
+         <tr>
+            <td class="change">13.12.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">One lil' fix to avoid a null pointer with the JMF player</td>
+         </tr>
+         <tr>
+            <td class="bug">08.12.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Video image on the MAC would always be square and could not resize. Fixed that (issue #29)</td>
+         </tr>
+         <tr>
+            <td class="bug">30.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Bug in multimodal panel: have to remove listeners after editing (issue #27)</td>
+         </tr>
+         <tr>
+            <td class="change">28.11.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">WebLicht action needed to be updated to final ISO spec (issue #41)</td>
+         </tr>
+         <tr>
+            <td class="bug">28.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Bug in WebMaus selection when last event spanned over more than one TLI (issue #42)</td>
+         </tr>
+         <tr>
+            <td class="feature">28.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Added four buttons, changed one button in multimodal panel (issue #27)</td>
+         </tr>
+         <tr>
+            <td class="bug">28.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Bug in TimeStringFormatter (issue #43)</td>
+         </tr>
+         <tr>
+            <td class="bug">24.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">WebMaus action: check for WAV file (issue #40)</td>
+         </tr>
+         <tr>
+            <td class="bug">22.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">QuickMediaOpenDialog: deselect in view menu when closed (issue #39)</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Multimodal panel now functioning? (issue #27)</td>
+         </tr>
+         <tr>
+            <td class="feature">21.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Started to make multimodal panel functional (issue #27)</td>
+         </tr>
+         <tr>
+            <td class="change">18.11.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">Reenabled MMF player, next attempt at making it work (issue #12)</td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">Export: Set language for ISO/TEI export (issue #9)</td>
+         </tr>
+         <tr>
+            <td class="feature">15.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Export: ISO/TEI export for event=token segmentation (issue #7)</td>
+         </tr>
+         <tr>
+            <td class="bug">15.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Fixed bug in Generic ISO/TEI export: first anchor of segment chains was omitted (issue #31)</td>
+         </tr>
+         <tr>
+            <td class="feature">10.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Import: Reimport segmented transcription with token layer (from MoDiKo, for Hanna, issue #6)</td>
+         </tr>
+         <tr>
+            <td class="feature">10.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Output: HTML partitur + SVG (MoDiKo)</td>
+         </tr>
+         <tr>
+            <td class="change">10.11.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">SVG Panel: send xpointer to partitur (MoDiKo)</td>
+         </tr>
+         <tr>
+            <td class="change">09.11.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">SVG Panel: multiple highlights, highlight color chooser (MoDiKo)</td>
+         </tr>
+         <tr>
+            <td class="change">04.11.2016</td>
+            <td class="change">1.6</td>
+            <td class="change">Disabled all non-ISO-methods in TEI export</td>
+         </tr>
+         <tr>
+            <td class="bug">04.11.2016</td>
+            <td class="bug">1.6</td>
+            <td class="bug">Throw error message when no wav audio is assigned in Output-GAT+HTML5-Audio</td>
+         </tr>
+         <tr>
+            <td class="feature">02.11.2016</td>
+            <td class="feature">1.6</td>
+            <td class="feature">Started integration of SVG panel (MoDiKo)</td>
          </tr>
          <tr>
             <td class="change">24.06.2016</td>
@@ -1105,6 +1285,41 @@ function toggle_visibility(className) {
             <th>Change</th>
          </tr>
          <tr>
+            <td class="change">24.04.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">Update normalisation lexicon (issue #74)</td>
+         </tr>
+         <tr>
+            <td class="change">12.04.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">Make sure frame is inside screen dimensions at startup (issue #72)</td>
+         </tr>
+         <tr>
+            <td class="change">02.03.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">force player change when running with JRE &gt; 1.6 on MAC (issue #29)</td>
+         </tr>
+         <tr>
+            <td class="change">01.03.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">normalize whitespace in normalized forms (issue #62)</td>
+         </tr>
+         <tr>
+            <td class="bug">14.12.2016</td>
+            <td class="bug">0.9</td>
+            <td class="bug">Missing bounce.jar in library path on MAC (issue #29)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.11.2016</td>
+            <td class="feature">0.9</td>
+            <td class="feature">TreeTaggerAction in new Annotation menu (issue #33)</td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2016</td>
+            <td class="change">0.9</td>
+            <td class="change">Export: Set language for ISO/TEI export (issue #9)</td>
+         </tr>
+         <tr>
             <td class="change">18.04.2016</td>
             <td class="change">0.9</td>
             <td class="change">revert to old version of BAS player (MAC)</td>
@@ -1553,7 +1768,7 @@ function toggle_visibility(className) {
          <!--10.04.2010;  0.1;  word list (feature)-->
          <!--22.03.2010;  0.1;  First build of first prototype (feature)-->
       </table>
-      <h2><a name="exakt"></a>exakt
+      <h2><a name="folker"></a>folker
       </h2>
       <table rules="all" frame="box" width="60%">
          <tr>
@@ -1562,393 +1777,801 @@ function toggle_visibility(className) {
             <th>Change</th>
          </tr>
          <tr>
+            <td class="change">12.04.2017</td>
+            <td class="change">1.2</td>
+            <td class="change">Make sure frame is inside screen dimensions at startup (issue #72)</td>
+         </tr>
+         <tr>
+            <td class="change">10.03.2017</td>
+            <td class="change">1.2</td>
+            <td class="change">Ukranian alphabet (issue #63)</td>
+         </tr>
+         <tr>
+            <td class="change">02.03.2017</td>
+            <td class="change">1.2</td>
+            <td class="change">force player change when running with JRE &gt; 1.6 on MAC (issue #29)</td>
+         </tr>
+         <tr>
+            <td class="feature">19.12.2016</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Spinner for setting playback rate (issue #53)</td>
+         </tr>
+         <tr>
+            <td class="bug">28.11.2016</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Bug in TimeStringFormatter (issue #43)</td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2016</td>
+            <td class="change">1.2</td>
+            <td class="change">Export: Set language for ISO/TEI export (issue #9)</td>
+         </tr>
+         <tr>
+            <td class="bug">21.04.2016</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Praat export from partitur view messed up the transcript</td>
+         </tr>
+         <tr>
             <td class="change">18.04.2016</td>
-            <td class="change">1.3</td>
+            <td class="change">1.2</td>
             <td class="change">revert to old version of BAS player (MAC)</td>
          </tr>
          <tr>
             <td class="change">08.04.2016</td>
-            <td class="change">1.3</td>
+            <td class="change">1.2</td>
             <td class="change">revert to old version of BAS player (Windows)</td>
          </tr>
          <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Icon for word list</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Adapt KWIC row height to font size</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Start Praat if it is not already running (Jens Lanwer)</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Better error handling for Praat functionality (Jens Lanwer)</td>
-         </tr>
-         <tr>
-            <td class="feature">10.11.2015</td>
-            <td class="feature">1.3</td>
-            <td class="feature">first attempt at Praat functionality (Jens Lanwer)</td>
-         </tr>
-         <tr>
-            <td class="change">23.06.2014</td>
-            <td class="change">1.3</td>
-            <td class="change">catch splash screen transparency error (lubuntu)</td>
-         </tr>
-         <tr>
-            <td class="feature">28.05.2014</td>
-            <td class="feature">1.3</td>
-            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
-         </tr>
-         <tr>
-            <td class="bug">17.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
-         </tr>
-         <tr>
-            <td class="bug">15.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
-         </tr>
-         <tr>
-            <td class="bug">14.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
-         </tr>
-         <tr>
-            <td class="bug">05.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
-         </tr>
-         <tr>
-            <td class="bug">16.01.2013</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
-         </tr>
-         <tr>
-            <td class="change">10.01.2013</td>
+            <td class="change">06.04.2016</td>
             <td class="change">1.2</td>
-            <td class="change">Accept fln files for FOLKER wizard</td>
+            <td class="change">Updated player preferences handling</td>
          </tr>
          <tr>
-            <td class="feature">22.11.2012</td>
+            <td class="change">03.03.2016</td>
+            <td class="change">1.2</td>
+            <td class="change">Adapted TEI exports (annotationBlock etc.)</td>
+         </tr>
+         <tr>
+            <td class="change">03.02.2016</td>
+            <td class="change">1.2</td>
+            <td class="change">Some smaller fixes to the video panel (Mail WS)</td>
+         </tr>
+         <tr>
+            <td class="change">28.01.2016</td>
+            <td class="change">1.2</td>
+            <td class="change">Enable video resize</td>
+         </tr>
+         <tr>
+            <td class="change">02.12.2015</td>
+            <td class="change">1.2</td>
+            <td class="change">Some minor corrections to player selection</td>
+         </tr>
+         <tr>
+            <td class="bug">12.11.2015</td>
+            <td class="bug">1.2</td>
+            <td class="bug">HTML+Audio contribution list output: output audio as url, won't work on Firefox otherwise</td>
+         </tr>
+         <tr>
+            <td class="bug">10.11.2015</td>
+            <td class="bug">1.2</td>
+            <td class="bug">HTML+Audio contribution list output: nuther bug?</td>
+         </tr>
+         <tr>
+            <td class="bug">09.11.2015</td>
+            <td class="bug">1.2</td>
+            <td class="bug">HTML+Audio contribution list output: several bugs</td>
+         </tr>
+         <tr>
+            <td class="change">06.10.2015</td>
+            <td class="change">1.2</td>
+            <td class="change">Build from git: jsmooth path changes for Windows (todo: Mac and Linux)</td>
+         </tr>
+         <tr>
+            <td class="feature">30.07.2015</td>
             <td class="feature">1.2</td>
-            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
+            <td class="feature">VTT subtitles</td>
          </tr>
          <tr>
-            <td class="bug">22.11.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Bug in add annotation when analyses are also present</td>
+            <td class="feature">21.07.2015</td>
+            <td class="feature">1.2</td>
+            <td class="feature">First attempt at minimalistic video panel</td>
          </tr>
          <tr>
-            <td class="bug">12.03.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
-         </tr>
-         <tr>
-            <td class="change">16.02.2012</td>
+            <td class="change">13.05.2015</td>
             <td class="change">1.2</td>
-            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
+            <td class="change">Embedded JRE</td>
          </tr>
          <tr>
-            <td class="change">16.02.2012</td>
+            <td class="feature">13.05.2015</td>
+            <td class="feature">1.2</td>
+            <td class="feature">JDS Player</td>
+         </tr>
+         <tr>
+            <td class="change">20.04.2015</td>
             <td class="change">1.2</td>
-            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
+            <td class="change">TEI conversion: no origin for timeline, no absolute value for first when</td>
+         </tr>
+         <tr>
+            <td class="change">20.04.2015</td>
+            <td class="change">1.2</td>
+            <td class="change">Bug in XSL stylesheet for TEI conversion (pause with speaker-reference)</td>
+         </tr>
+         <tr>
+            <td class="change">13.04.2015</td>
+            <td class="change">1.2</td>
+            <td class="change">Default player = BAS Audio Player</td>
+         </tr>
+         <tr>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">1.2</td>
+            <td class="feature">TCF export</td>
+         </tr>
+         <tr>
+            <td class="change">16.01.2015</td>
+            <td class="change">1.2</td>
+            <td class="change">Adaptations of TEI export to new version of standard proposal (annotationGrp)</td>
+         </tr>
+         <tr>
+            <td class="change">05.01.2015</td>
+            <td class="change">1.2</td>
+            <td class="change">Remove empty events ONLY before importing EXB, not in other situations (Jenny)</td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">Added jniwrap for 64-bit systems (Hanna, Flo)</td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">Remove empty events before importing EXB (Franziska Wallner)</td>
+         </tr>
+         <tr>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">empty segments as syntax errors (wiki)</td>
+         </tr>
+         <tr>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">remember mask method (wiki)</td>
+         </tr>
+         <tr>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">mask button in partitur (wiki)</td>
+         </tr>
+         <tr>
+            <td class="change">30.06.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">changed loop behaviour when appending (Wilfried)</td>
+         </tr>
+         <tr>
+            <td class="change">10.06.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">new keyboard shortcut for next segment: CTRL + E</td>
+         </tr>
+         <tr>
+            <td class="change">08.05.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">new keyboard shortcut for mask segment: CTRL + M</td>
+         </tr>
+         <tr>
+            <td class="change">08.05.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">new keyboard shortcut for next segment: CTRL + F</td>
+         </tr>
+         <tr>
+            <td class="change">08.05.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">keyboard shortcuts in tooltips (segment view only)</td>
+         </tr>
+         <tr>
+            <td class="change">08.05.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">apostrophe in universal alphabet</td>
+         </tr>
+         <tr>
+            <td class="bug">08.05.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">quantification output not correct on parse level 3</td>
+         </tr>
+         <tr>
+            <td class="bug">08.05.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">bug when moving old mask segments</td>
+         </tr>
+         <tr>
+            <td class="feature">06.05.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">default audio path in preferences</td>
+         </tr>
+         <tr>
+            <td class="bug">20.03.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">mask and real name column labels were mixed up</td>
+         </tr>
+         <tr>
+            <td class="feature">20.03.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">audacity export</td>
+         </tr>
+         <tr>
+            <td class="bug">20.03.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">bug in audacity import</td>
+         </tr>
+         <tr>
+            <td class="feature">10.03.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">button for removing mask segments (JW)</td>
+         </tr>
+         <tr>
+            <td class="bug">06.03.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">fixed bug in masking functionality - reading of internal resource failed</td>
+         </tr>
+         <tr>
+            <td class="bug">26.02.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">java bug wrt window translucency, disabled th respective parts of the code</td>
+         </tr>
+         <tr>
+            <td class="feature">20.02.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">improved and debugged audio masking</td>
+         </tr>
+         <tr>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">edit entries in mask mode, scroll transcriptions with selection, opacity</td>
+         </tr>
+         <tr>
+            <td class="feature">29.01.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">plain text subtitles with frames, first attempt (Jürgen Immerz)</td>
+         </tr>
+         <tr>
+            <td class="change">29.01.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">masking key</td>
+         </tr>
+         <tr>
+            <td class="change">27.01.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">enable logging as advanced preferences option</td>
+         </tr>
+         <tr>
+            <td class="bug">21.01.2014</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Esc in confirmation after remove segment must abort action (Bug report Magdeburg)</td>
+         </tr>
+         <tr>
+            <td class="change">21.01.2014</td>
+            <td class="change">1.2</td>
+            <td class="change">commit edit before saving (Bug report Magdeburg)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.01.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Reworked and extended masking functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">16.01.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Reactivated user logging</td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">SRT Subtitle export (Jürgen Immerz / Reinhold Schmitt)</td>
+         </tr>
+         <tr>
+            <td class="feature">03.12.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Added Czech and Russian transliteration to alphabets, added one missing character to Italian alphabet (requests after FOLKER
+               training)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">06.09.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Audacity import</td>
+         </tr>
+         <tr>
+            <td class="feature">29.08.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Mask button</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2013</td>
+            <td class="change">1.2</td>
+            <td class="change">Restrict input for speaker IDs</td>
+         </tr>
+         <tr>
+            <td class="feature">20.08.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Buttons for accent (un)marking</td>
+         </tr>
+         <tr>
+            <td class="feature">15.08.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Added German+Capitals to alphabets (request from Magdeburg)</td>
+         </tr>
+         <tr>
+            <td class="feature">18.07.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Danish, Spanish and Italian alphabets</td>
+         </tr>
+         <tr>
+            <td class="bug">10.04.2013</td>
+            <td class="bug">1.2</td>
+            <td class="bug">No whitespace between latching and comment open (WS)</td>
+         </tr>
+         <tr>
+            <td class="change">04.02.2013</td>
+            <td class="change">1.2</td>
+            <td class="change">Handle multiple row selection in contribution view differently</td>
+         </tr>
+         <tr>
+            <td class="feature">21.01.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Match list</td>
+         </tr>
+         <tr>
+            <td class="feature">17.01.2013</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Additional functionality for contribution text pane</td>
+         </tr>
+         <tr>
+            <td class="feature">06.12.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">first attempt at F4 export</td>
+         </tr>
+         <tr>
+            <td class="feature">04.12.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Comment insertion</td>
+         </tr>
+         <tr>
+            <td class="feature">04.12.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Alphabet customisation</td>
+         </tr>
+         <tr>
+            <td class="feature">26.11.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Praat export</td>
+         </tr>
+         <tr>
+            <td class="feature">31.10.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">First Linux Preview</td>
+         </tr>
+         <tr>
+            <td class="feature">31.10.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">First Mac Preview</td>
+         </tr>
+         <tr>
+            <td class="feature">25.10.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Info about parse-level and player displayed in status bar</td>
+         </tr>
+         <tr>
+            <td class="change">25.10.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Info about parse-level when opening FLK</td>
+         </tr>
+         <tr>
+            <td class="bug">18.09.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Need to commit edit before splitting transcription to avoid null pointer in certain time constellations</td>
+         </tr>
+         <tr>
+            <td class="feature">11.09.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Minimize function in transcription menu</td>
+         </tr>
+         <tr>
+            <td class="bug">10.09.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Two more fixes concerning basic output</td>
+         </tr>
+         <tr>
+            <td class="bug">03.09.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Fixed several details concerning basic output</td>
+         </tr>
+         <tr>
+            <td class="change">02.08.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Added *.FLN to the file filter for opening</td>
+         </tr>
+         <tr>
+            <td class="change">03.07.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Added BAS Audio Player as a player option</td>
+         </tr>
+         <tr>
+            <td class="bug">21.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">allow dangling and leading latching if latching is across speaker change (mail JW)</td>
+         </tr>
+         <tr>
+            <td class="bug">21.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">do not add space before uncertain after latching (mail JW)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">one more correction (latching) for GAT basic transcription output (mail JW)</td>
+         </tr>
+         <tr>
+            <td class="change">19.06.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">no smaller font size for nv in basic transcription output</td>
+         </tr>
+         <tr>
+            <td class="bug">19.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">resolve relative paths with new method (bug on Mac)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">fixed problem with RegEx matching on the MAC (Basic transcription end symbols)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">two more corrections (comments, latching) for GAT basic transcription output (mail WS)</td>
+         </tr>
+         <tr>
+            <td class="bug">13.06.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">first corrections for GAT basic transcription output (mail WS)</td>
+         </tr>
+         <tr>
+            <td class="change">12.06.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">first attempt at GAT basic transcription output</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Micro pause in virtual keyboard</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Changed web addresses to fit new AGD website in several places</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Don't throw out empty contributions when opening transcription</td>
+         </tr>
+         <tr>
+            <td class="change">07.05.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Allow glottal stop symbol at level 3</td>
+         </tr>
+         <tr>
+            <td class="bug">07.05.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Further fixes concerning whitespace in level 3 transcripts</td>
+         </tr>
+         <tr>
+            <td class="change">07.05.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Allow auto normalize whitespace in preferences also for level 3</td>
+         </tr>
+         <tr>
+            <td class="bug">07.05.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Fixed bug in tranformation of breathe add parse level 3: do not add whitespace</td>
+         </tr>
+         <tr>
+            <td class="bug">19.04.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Fixed bug in tranformation of speakerless contributions: do not add whitespace</td>
+         </tr>
+         <tr>
+            <td class="change">28.03.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Allow empty phrase boundaries on parse level 3</td>
+         </tr>
+         <tr>
+            <td class="feature">19.03.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Modify times action (shift/scale absolute times) in transcription menu</td>
+         </tr>
+         <tr>
+            <td class="change">01.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Integrated OrthoNormal into installer</td>
          </tr>
          <tr>
             <td class="change">25.01.2012</td>
             <td class="change">1.2</td>
-            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
+            <td class="change">Auto assign last speaker in append event</td>
          </tr>
          <tr>
-            <td class="feature">25.01.2012</td>
+            <td class="change">24.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Relativize audio files with ..</td>
+         </tr>
+         <tr>
+            <td class="feature">24.01.2012</td>
             <td class="feature">1.2</td>
-            <td class="feature">Unselected KWIC rows in gray</td>
+            <td class="feature">Goto next error action in contribution view</td>
          </tr>
          <tr>
-            <td class="bug">18.01.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
+            <td class="feature">06.01.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Goto next error action</td>
          </tr>
          <tr>
-            <td class="change">18.01.2012</td>
+            <td class="change">05.01.2012</td>
             <td class="change">1.2</td>
-            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
+            <td class="change">Fine tuning for level 3 parsing</td>
          </tr>
          <tr>
-            <td class="change">18.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
+            <td class="feature">23.12.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Remove pause speaker assignment (WS: Twiki)</td>
          </tr>
          <tr>
-            <td class="bug">21.11.2011</td>
+            <td class="feature">23.12.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Keyboard shortcut Shift + F4 for play next segment (JW: Twiki)</td>
+         </tr>
+         <tr>
+            <td class="bug">23.12.2011</td>
             <td class="bug">1.2</td>
-            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
+            <td class="bug">EXMARaLDA import: reassign audio if audio cannot be found (WS: Twiki)</td>
          </tr>
          <tr>
-            <td class="bug">18.10.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
+            <td class="bug">16.12.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Bug in EXMARaLDA import: do not override interpolated times</td>
          </tr>
          <tr>
-            <td class="bug">05.10.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
+            <td class="feature">07.12.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Start implementing log functionality (not active yet)</td>
          </tr>
          <tr>
-            <td class="change">08.09.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Further modifications in the catalog lookup dialog</td>
+            <td class="feature">07.12.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Play next segment action</td>
          </tr>
          <tr>
-            <td class="change">20.08.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Some modifications in the catalog lookup dialog</td>
+            <td class="feature">10.10.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">compact partitur ouput method</td>
          </tr>
          <tr>
-            <td class="feature">05.07.2011</td>
-            <td class="feature">1.1</td>
-            <td class="feature">Frequency sort as option for word list output</td>
+            <td class="feature">07.10.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">HTML5 audio ouput method for contribution list</td>
          </tr>
          <tr>
-            <td class="bug">07.06.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
+            <td class="bug">08.06.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Changing attached start or end time must not lead to a contradictory time structure (more to do...)</td>
          </tr>
          <tr>
-            <td class="bug">30.05.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
+            <td class="feature">31.05.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Updated schema and data model documentation for basic transcript</td>
          </tr>
          <tr>
-            <td class="change">17.05.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
+            <td class="feature">31.05.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Parsing for level 3 (input and output)</td>
          </tr>
          <tr>
-            <td class="change">09.05.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">FOLKER import now does automatic stratification by distribution</td>
+            <td class="feature">31.05.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Completed level 3 syntax check (comments)</td>
          </tr>
          <tr>
-            <td class="change">23.03.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Catalog functionality for remote and DB corpora</td>
+            <td class="feature">17.05.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Additional buttons for playing parts of/before/after the selection (as in EXMARaLDA)</td>
          </tr>
          <tr>
-            <td class="change">18.03.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">First elements of RDB functionality added (Hanna!)</td>
+            <td class="feature">17.05.2011</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Completed first attempt at level 3 syntax check (no comments yet!)</td>
          </tr>
          <tr>
-            <td class="change">17.01.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">escape type strings in input helper</td>
+            <td class="bug">22.03.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Fixed tiny bugling in internationalisation</td>
          </tr>
          <tr>
-            <td class="change">17.01.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Input helper always on top (for filter and for search)</td>
+            <td class="change">19.01.2011</td>
+            <td class="change">1.2</td>
+            <td class="change">Modifications to the TEI export</td>
          </tr>
-         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
-         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
-         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
-         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
-         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
-         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
-         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
-         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
-         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
-         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
-         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
-         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
-         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
-         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
-         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
-         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
-         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
-         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
-         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
-         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
-         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
-         <!--16.03.2010;  0.8;  list view (feature)-->
-         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
-         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
-         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
-         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
-         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
-         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
-         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
-         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
-         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
-         <!--20.10.2009;  0.7;  view menu (change)-->
-         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
-         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
-         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
-         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
-         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
-         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
-         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
-         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
-         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
-         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
-         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
-         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
-         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
-         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
-         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
-         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
-         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
-         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
-         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
-         <!--26.03.2008;  ;  added function for subtracting dates ()-->
-         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
-         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
-         <!--19.03.2008;  ;  new function: import analyses ()-->
-         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
-         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
-         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
-         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
-         <!--18.02.2008;  ;  annotation search working ()-->
-         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
-      </table>
-      <h2><a name="all"></a>all
-      </h2>
-      <table rules="all" frame="box" width="60%">
-         <tr>
-            <th>Date</th>
-            <th>Version</th>
-            <th>Change</th>
-         </tr>
-         <tr>
-            <td class="change">19.01.2016</td>
-            <td class="change">2.0</td>
-            <td class="change">Updated ipsk libraries for BASAudioPlayer</td>
-         </tr>
-         <tr>
-            <td class="change">17.12.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Embedded JRE for Linux distributions</td>
-         </tr>
-         <tr>
-            <td class="change">16.10.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Changed linux sh scripts and mac plists to new library sitchuaishon</td>
-         </tr>
-         <tr>
-            <td class="change">16.10.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Moved fobs dll to bundled jre</td>
-         </tr>
-         <tr>
-            <td class="change">06.10.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Build from git: jsmooth path changes for Windows (todo: Mac and Linux)</td>
-         </tr>
-         <tr>
-            <td class="change">10.07.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)</td>
-         </tr>
-         <tr>
-            <td class="change">09.07.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Fixed missing library in Linux distribution (Hanna)</td>
-         </tr>
-         <tr>
-            <td class="change">13.05.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Bundle JRE on Windows</td>
-         </tr>
-         <tr>
-            <td class="change">05.05.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">some library cleanup for build, got rid of SUN JMF</td>
-         </tr>
-         <tr>
-            <td class="change">04.09.2013</td>
-            <td class="change">2.0</td>
-            <td class="change">New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build</td>
-         </tr>
-         <tr>
-            <td class="change">04.09.2013</td>
-            <td class="change">2.0</td>
-            <td class="change">new icons</td>
-         </tr>
-         <tr>
-            <td class="bug">07.11.2012</td>
-            <td class="bug">1.9</td>
-            <td class="bug">ipsk.jar for BAS-Player was missing from MAC plists</td>
-         </tr>
-         <tr>
-            <td class="change">06.11.2012</td>
-            <td class="change">1.9</td>
-            <td class="change">end of official support for PPC Mac</td>
-         </tr>
-         <tr>
-            <td class="change">20.08.2012</td>
-            <td class="change">1.9</td>
-            <td class="change">Parameter HTML witdth in write partitur method (Leipzig)</td>
-         </tr>
-         <tr>
-            <td class="change">16.11.2011</td>
-            <td class="change">1.9</td>
-            <td class="change">IDs for words in TEI export</td>
-         </tr>
-         <tr>
-            <td class="change">19.10.2011</td>
-            <td class="change">1.8</td>
-            <td class="change">Preparing release</td>
-         </tr>
-         <tr>
-            <td class="feature">30.05.2011</td>
-            <td class="feature">1.8</td>
-            <td class="feature">Command line version for Praat export (Singer)</td>
-         </tr>
-         <tr>
-            <td class="change">18.05.2011</td>
-            <td class="change">1.8</td>
-            <td class="change">Changed segmented transcription format: ta's can now have ref-id's</td>
-         </tr>
-         <tr>
-            <td class="change">08.03.2011</td>
-            <td class="change">1.8</td>
-            <td class="change">Added Sextant tagger to Windows and Linux distributions</td>
-         </tr>
-         <!--10.12.2010;  1.8;  Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though) (change)-->
-         <!--18.10.2010;  1.7;  Simplified Windows distribution (change)-->
-         <!--01.10.2010;  1.7;  Added TEI drop to start menu on windows (change)-->
-         <!--01.10.2010;  1.7;  Removed SUN JMF versions of PE and EXAKT from start menu on windows (change)-->
-         <!--24.08.2010;  1.7;  Coloured splash screens (change)-->
-         <!--23.08.2010;  1.7;  Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly (change)-->
-         <!--10.08.2010;  1.7;  Added swingworker and QTJava to classpath on Linux (change)-->
-         <!--31.03.2010;  1.6;  Version info for Windows setup (Linde, RRZ) (change)-->
-         <!--24.02.2010;  1.6;  fixed bug in corpus builder, path separator must be os independent (Kerem) (bug)-->
-         <!--15.12.2009;  1.6.515;  Linux: shell scripts take parameter (Timm!) (feature)-->
-         <!--23.06.2009;  1.4.3.;  Cleaned up build, smaller distribution size (bug)-->
-         <!--21.03.2009;  1.4.2.;  removed unused libs from linux distribution (change)-->
-         <!--26.02.2009;  1.2.;  Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances (feature)-->
-         <!--09.02.2009;  1.4.1.;  Integration of ELAN.jar instead of copied MPI code (change)-->
-         <!--09.02.2009;  1.2.;  Documentation updates (feature)-->
-         <!--28.01.2008;  1.4.;  Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS (change)-->
-         <!--28.10.2008;  ;  changed EXMARaLDA's build and template files for new media integration (change)-->
-         <!--28.10.2008;  ;  removed JLayer-Player because it is no longer needed (MP3 is fine in other players) (change)-->
-         <!--27.10.2008;  ;  integrated ELAN's DirectShowPlayer as a new player type (festure)-->
-         <!--22.10.2008;  1.1;  fixed bug in log file handling which led to out of memory errors on certain Macs (bug)-->
-         <!--20.10.2008;  ;  changed linux tarball: sh files are now executable (bug)-->
-         <!--13.10.2008;  ;  changed linux tarball according to suggestions by Jörg Sommer (bug)-->
-         <!--13.10.2008;  ;  changed info plist for mac applications to nake sure app runs on 32-bit-JVM (bug)-->
-         <!--06.10.2008;  ;  changed basic and segmented transcription APIs to read and write more than one referenced file (feature)-->
-         <!--06.10.2008;  ;  changed basic and segmented transcription DTD to allow more than one referenced file (feature)-->
-         <!--06.10.2008;  ;  changed basic transcription DTD to allow format table (feature)-->
-         <!--16.09.2008;  ;  updated XALAN libraries ()-->
-         <!--06.08.2008;  ;  changed linux shell scripts (seem to work at least with Suse and Java 6 now) ()-->
+         <!--14.12.2010;  1.2;  Patterns for syntax checking of basic transcript level (change)-->
+         <!--30.11.2010;  1.2;  Attempt at fixing file filter strangeness in output (Mail WS) (bug)-->
+         <!--28.10.2010;  1.2;  TEI as export option (feature)-->
+         <!--18.08.2010;  1.1;  Minimum required Java version is now 1.6 (change)-->
+         <!--18.08.2010;  1.1;  Fixed bug in copy action: media file resolution got a null pointer when the transcription was unsaved (bug)-->
+         <!--16.08.2010;  1.1;  French translations modified according to corrections by Florence Oloff (change)-->
+         <!--01.07.2010;  1.1;  Split segment in list: avoid division by zero (NaN bug) (bug)-->
+         <!--29.06.2010;  1.1;  Add segment button has to be disabled / selection has to be reset after new/open (bug)-->
+         <!--23.06.2010;  1.1;  Fixed six remaining internationalization issues, second release Candidate 1.1 (change)-->
+         <!--18.06.2010;  1.1;  Release Candidate 1.1 (change)-->
+         <!--17.06.2010;  1.1;  Fixed remaining internationalization issues (change)-->
+         <!--27.05.2010;  1.1;  Check save after reassign recording (change)-->
+         <!--26.05.2010;  1.1;  Completed internationalization (change)-->
+         <!--13.04.2010;  1.1;  removed keyboard shortcuts for GAT symbols (change)-->
+         <!--09.04.2010;  1.1;  started internationalization (feature)-->
+         <!--08.04.2010;  1.1;  added language options to preferences (feature)-->
+         <!--16.03.2010;  1.0;  updated manual for release (change)-->
+         <!--08.03.2010;  1.0;  commit edit before switching from segment/contribution view to another view (bug)-->
+         <!--06.03.2010;  1.0;  update virtual key font after preferences edit (bug)-->
+         <!--06.03.2010;  1.0;  commit edit before preferences edit (bug)-->
+         <!--06.03.2010;  1.0;  output XSL must use rounded values to calculate filler zeroes (bug)-->
+         <!--05.03.2010;  1.0;  pause measurement with two digits also in partitur (bug)-->
+         <!--05.03.2010;  1.0;  changed pause symbol in partitur view (change)-->
+         <!--05.03.2010;  1.0;  changed behaviour of MAC quit handler (don't quit when check save returns false) (bug)-->
+         <!--04.03.2010;  1.0;  changed order of symbols in font preferences test string (change)-->
+         <!--04.03.2010;  1.0;  increased text field size for fonts preferences (change)-->
+         <!--04.03.2010;  1.0;  increased button size for virtual keyboard on the MAC (change)-->
+         <!--04.03.2010;  1.0;  removed Assign Times action from partitur view (change)-->
+         <!--03.03.2010;  1.0;  assigned keyboard shortcuts to virtual keyboard (feature)-->
+         <!--03.03.2010;  1.0;  added safety mechanism to make it harder to load zero width font in preferences panel (WS) (change)-->
+         <!--02.03.2010;  1.0;  commit edit must be done differently before adding segment in partitur (Jenny Kunz) (bug)-->
+         <!--02.03.2010;  1.0;  forgot to add apple extensions to Windows distribution (bug)-->
+         <!--01.03.2010;  1.0;  explicitly set DIN A4 paper measures for RTF (bug)-->
+         <!--01.03.2010;  1.0;  commit edit before updating pauses (bug)-->
+         <!--01.03.2010;  1.0;  changed MAC OS plists to assign more heap space to FOLKER (feature)-->
+         <!--01.03.2010;  1.0;  changed MAC OS plists to recognize FLK as FOLKER files (feature)-->
+         <!--01.03.2010;  1.0;  added MAC OS application handlers (for system menu) (feature)-->
+         <!--28.02.2010;  1.0;  insert pause action for partitur (Jenny Kunz) (feature)-->
+         <!--28.02.2010;  1.0;  safety check for remove segment in partitur (Jenny Kunz) (change)-->
+         <!--27.02.2010;  1.0;  integrated time-stamps in partitur output (change)-->
+         <!--27.02.2010;  1.0;  integrated time-stamps in segment list output (change)-->
+         <!--27.02.2010;  1.0;  integrated time-stamps in contribution list output (change)-->
+         <!--27.02.2010;  1.0;  font options under preferences (feature)-->
+         <!--27.02.2010;  1.0;  view option for virtual keyboard (feature)-->
+         <!--26.02.2010;  1.0;  virtual keyboard (feature)-->
+         <!--26.02.2010;  1.0;  changed setting of default player (mail WS) (bug)-->
+         <!--19.02.2010;  1.0;  first attempt at new player solution for MAC (feature)-->
+         <!--29.10.2009;  0.8;  changed vertical maginify method for waveform (feature)-->
+         <!--05.10.2009;  0.8;  new transcription: media path must be immediately written to the transcription (bug)-->
+         <!--05.10.2009;  0.8;  after merge: DOCUMENT_CHANGED must be true (bug)-->
+         <!--05.10.2009;  0.8;  when reassigning audio after opening: change must be immediately written to the transcription (bug)-->
+         <!--22.09.2009;  0.8;  split transcription must make overwrite check when file exists (change)-->
+         <!--21.09.2009;  0.8;  split transcription must remove unused timepoints (bug)-->
+         <!--07.09.2009;  0.8;  fixed bug in merge segments when one segment is editing (see Loreen Sommer's mail, 30 July 2009) (bug)-->
+         <!--07.09.2009;  0.8;  added split transcription action (feature)-->
+         <!--07.09.2009;  0.8;  added merge transcriptions action (feature)-->
+         <!--07.09.2009;  0.8;  added append transcription action (feature)-->
+         <!--07.09.2009;  0.8;  fixed bug in remove segment when buffer line was selected (bug)-->
+         <!--07.09.2009;  0.8;  added assign times action in partitur (feature)-->
+         <!--07.09.2009;  0.8;  added remove segment action in partitur (feature)-->
+         <!--17.08.2009;  0.8;  removed rescue action (change)-->
+         <!--17.08.2009;  0.8;  changed loop implementation: one thread instead of many (change)-->
+         <!--19.06.2009;  0.8.;  Fixed bug in the bug fix for copy for segment and contribution view (bug)-->
+         <!--18.06.2009;  0.8.;  Fixed bug in copy for segment and contribution view (bug)-->
+         <!--15.06.2009;  0.8.;  Square brackets to mark overlap in copied partitur (change)-->
+         <!--12.06.2009;  0.8.;  Rescue player action in help menu (feature)-->
+         <!--10.06.2009;  0.8.;  Small changes to the Keyboard shortcut helper (feature)-->
+         <!--08.06.2009;  0.8.;  Made time between loops configurable (feature)-->
+         <!--08.06.2009;  0.8.;  Implemented "replace all" (feature)-->
+         <!--08.06.2009;  0.8.;  Use a faster method (java vs. XSL) to transform a FOLKER transcription into a JDOM document (change)-->
+         <!--08.06.2009;  0.8.;  Changed .iss file to include quick start guide and big manual (change)-->
+         <!--29.05.2009;  0.8.;  Added progress bar in status bar for saving (feature)-->
+         <!--29.05.2009;  0.8.;  Application must not exit while saving is in progress (bug)-->
+         <!--29.05.2009;  0.8.;  Update pauses: forgot trailing space (bug)-->
+         <!--27.05.2009;  0.8.;  Started implementing Search and Replace (feature)-->
+         <!--22.05.2009;  0.8.;  Help function for keyboard shortcuts (feature)-->
+         <!--20.05.2009;  0.8.;  Ctrl + 1 for merge segments in event view (change)-->
+         <!--20.05.2009;  0.8.;  Implemented loop functionality (feature)-->
+         <!--19.05.2009;  0.8.;  Check save only if the transcription has really changed (change)-->
+         <!--19.05.2009;  0.8.;  Partitur output: insert square brackets for overlaps (change)-->
+         <!--19.05.2009;  0.8.;  Show wait cursor when switching to partitur view (change)-->
+         <!--19.05.2009;  0.8.;  Default for player keyboard controls is now function key WITHOUT modifier, can be changed through preferences (change)-->
+         <!--19.05.2009;  0.8.;  Preferences panel: added option for player keyboard control (change)-->
+         <!--18.05.2009;  0.8.;  Moved "Fill gaps" action from side panel to transcription menu (change)-->
+         <!--18.05.2009;  0.8.;  Preferences: added options for normalizing whitespace, updating pauses when saving (change)-->
+         <!--18.05.2009;  0.8.;  Saving: doing this in a thread now to avoid blocking the editor when saving long files -  WS mail 11-05-2009 (change)-->
+         <!--18.05.2009;  0.8.;  Vertical alignment: top for all cell renderers -  WS mail 11-05-2009 (change)-->
+         <!--18.05.2009;  0.8.;  Added cancel option to check save procedure (feature)-->
+         <!--18.05.2009;  0.8.;  Added pause update action (feature)-->
+         <!--18.05.2009;  0.8.;  Added whitespace normalization action (feature)-->
+         <!--12.05.2009;  0.8.;  Added mimetype for EAF export (bug)-->
+         <!--08.04.2009;  0.8.;  Changed selection/focus behaviour -  WS mail: 1 (change)-->
+         <!--07.04.2009;  0.8.;  disable output and copy when no document is loaded (change)-->
+         <!--06.04.2009;  0.8.;  pause length is automatically recalculated (not happy yet: this is more complex!) - WS mail: 7 (feature)-->
+         <!--06.04.2009;  0.8.;  changed behaviour for waveform: cursor is not reset when playback is stopped (change)-->
+         <!--06.04.2009;  0.8.;  navigation action for waveform (feature)-->
+         <!--06.04.2009;  0.8.;  vertical magnify of waveform -  WS mail: 8 (feature)-->
+         <!--06.04.2009;  0.8.;  special behaviour for last interval in partitur (change)-->
+         <!--06.04.2009;  0.8.;  configured popup menus in partitur for FOLKER -  WS mail: 6 (change)-->
+         <!--06.04.2009;  0.8.;  changed scrolling behaviour when a new event is added in the segment view -  WS mail: 5 (change)-->
+         <!--06.04.2009;  0.8.;  selection in partitur now reacts correctly when extended through CTRL+mouse click - WS mail: 4 (bug)-->
+         <!--06.04.2009;  0.8.;  partitur output: different formatting for speakerless tier, speakerless tier(s) outside partitur frame - WS mail: 3 (change)-->
+         <!--06.04.2009;  0.8.;  partitur output: transcription is now stratified - WS mail: 3 (change)-->
+         <!--06.04.2009;  0.8.;  fixed bug in encoding ouf breathing (out) - WS mail: 2 (bug)-->
+         <!--03.04.2009;  0.8.;  changed document icon (change)-->
+         <!--01.04.2009;  0.8.;  Don't offer DirectShow-Player in Preferences when not on Windows (change)-->
+         <!--01.04.2009;  0.8.;  Export action: needs to read new EXMARaLDA suffix EXB (change)-->
+         <!--01.04.2009;  0.8.;  Import action: needs to read new EXMARaLDA suffix EXB (change)-->
+         <!--06.03.2009;  0.7.;  Edit recording action (feature)-->
+         <!--06.03.2009;  0.7.;  Changed data model/parsing for unintelligible and breathe (change)-->
+         <!--05.03.2009;  0.7.;  Split event now takes care that resulting segments don't become smaller than the tolerance (change)-->
+         <!--05.03.2009;  0.7.;  Added log messages for all major actions (change)-->
+         <!--04.03.2009;  0.7.;  Fixed bug writing null audio file (Wilfried's mail) (bug)-->
+         <!--03.03.2009;  0.7.;  Added tooltips with full path in recent files items in file menu (change)-->
+         <!--03.03.2009;  0.7.;  Waveform view also makes sure that selection boundaries are not closer to next timepoints than than tolerance (change)-->
+         <!--02.03.2009;  0.7.;  Waveform view now makes sure that selection length does not become less than tolerance (change)-->
+         <!--02.03.2009;  0.7.;  Changed tolerance from 100 to 50 miliseconds (change)-->
+         <!--02.03.2009;  0.7.;  Caught bug when opening null audio file (Wilfried's mail) (bug)-->
+         <!--27.02.2009;  0.7.;  Added mark functionality to the waveform panel (feature)-->
+         <!--26.02.2009;  0.7.;  Added possibility to select parse level (feature)-->
+         <!--26.02.2009;  0.7.;  Added possibility to select parse level (feature)-->
+         <!--26.02.2009;  0.7.;  Copy Action (feature)-->
+         <!--26.02.2009;  0.7.;  Disabled speakertable edit for partitur view (change)-->
+         <!--25.02.2009;  0.7.;  Added quantification HTML output (feature)-->
+         <!--25.02.2009;  0.7.;  Added partitur HTML output (feature)-->
+         <!--25.02.2009;  0.7.;  Added segment HTML output (feature)-->
+         <!--25.02.2009;  0.7.;  Changes in the HTML contribution list output: added columns for numbering, added brackets for overlaps (change)-->
+         <!--25.02.2009;  0.7.;  Fixed bug in output: suffix must be appended if none provided by the user (bug)-->
+         <!--05.02.2009;  0.5.;  Output action (feature)-->
+         <!--04.02.2009;  0.5.;  Changed symbols for: breathe, assimilation, unintelligible and alternative (Wilfried's, Martin's and my own mail) (change)-->
+         <!--29.01.2009;  0.5.;  Possibility to unassign speakers (Wilfried's mail) (feature)-->
+         <!--29.01.2009;  0.5.;  Minor changes in the help menu (change)-->
+         <!--29.01.2009;  0.5.;  Made a decent splash screen (change)-->
+         <!--26.01.2009;  0.4.;  Added accelerators for New, Open, Save (feature)-->
+         <!--22.01.2009;  0.4.;  Fixed bug after segment deletion: timeline must be updated (bug)-->
+         <!--09.01.2009;  0.4.;  changed and supplemented key bindings (feature)-->
+         <!--09.01.2009;  0.4.;  added 'play last second of selection' action (feature)-->
+         <!--06.01.2009;  0.4.;  added 'append segment' action (feature)-->
+         <!--17.12.2008;  0.3.;  several mouse handling features added to the timeline view (feature)-->
+         <!--15.12.2008;  0.3;  minor changes to the data model (assimilation and unintelligible) (change)-->
+         <!--12.12.2008;  0.3;  changed I/O to write parse level 2 (change)-->
+         <!--11.11.2008;  0.2;  changed behaviour when a recording is not found, cannot be processed in 'New' and 'Open' actions (feature)-->
+         <!--11.11.2008;  0.2;  renamed 'Ereignis' to 'Segment' in several places (change)-->
+         <!--29.10.2008;  0.2;  changed behaviour of contribution text pane (feature)-->
+         <!--29.10.2008;  0.2;  added time integrity check columns in list views (feature)-->
+         <!--29.10.2008;  0.2;  added 'insert pause' action (feature)-->
+         <!--27.10.2008;  0.2;  fixed bug related to switch from partitur to event view: edit must be commited (bug)-->
+         <!--27.10.2008;  0.2;  fixed bug related to speaker cell editor / event removal: edit must be commited (bug)-->
+         <!--22.10.2008;  0.2;  added ELAN export (feature)-->
+         <!--22.10.2008;  0.2;  changed save to write to folker-transcription format (change)-->
+         <!--22.10.2008;  0.2;  changed open to read folker-transcription format (feature)-->
+         <!--22.10.2008;  0.2;  added export action (feature)-->
+         <!--22.10.2008;  0.2;  added import action (feature)-->
+         <!--16.09.2008;  ;  changed key bindings for event viewer to CTRL-combinations ()-->
+         <!--16.09.2008;  ;  added 'merge events' action to the event viewer ()-->
+         <!--15.09.2008;  ;  changed time viewer to display only one channel in case of mono recordings ()-->
+         <!--15.09.2008;  ;  added label for display of selection length in time viewer ()-->
+         <!--15.09.2008;  ;  changed row height of event view to avoid clipping of descenders in cell editor ()-->
+         <!--12.09.2008;  ;  added recent files to file menu ()-->
+         <!--12.09.2008;  ;  added 'store settings' (windows size, recent files etc.) action ()-->
+         <!--12.09.2008;  ;  added safety check before opening file / exiting ()-->
+         <!--11.09.2008;  ;  added exit action to file menu ()-->
+         <!--11.09.2008;  ;  changed behaviour after zoom in/out (selection should remain visible) ()-->
+         <!--09.09.2008;  ;  changed setup file to create a file association between Folker and files with suffix "flk" ()-->
+         <!--09.09.2008;  ;  application can now optionally be given a transcription or wave file as an argument and will attempt to open them ()-->
+         <!--09.09.2008;  ;  changed file ending for transcriptions from *.xml to *.flk ()-->
+         <!--08.08.2008;  ;  experimented with a PRAAT player ()-->
+         <!--08.08.2008;  ;  modified 'Save' and 'Save as...' actions ()-->
+         <!--07.08.2008;  ;  added player selection option in preferences ()-->
+         <!--07.08.2008;  ;  fixed bug in 'remove event'action ()-->
+         <!--07.08.2008;  ;  added 'timestamp event' action ()-->
+         <!--07.08.2008;  ;  made application implement the EXMARaLDA application interface - -> help menu, logging funcionality ()-->
+         <!--07.08.2008;  ;  added 'detach selection' action ()-->
+         <!--07.08.2008;  ;  added row numbering to event and contribution view ()-->
       </table>
       <h2><a name="coma"></a>coma
       </h2>
@@ -1957,6 +2580,16 @@ function toggle_visibility(className) {
             <th>Date</th>
             <th>Version</th>
             <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">03.04.2017</td>
+            <td class="bug">1.9</td>
+            <td class="bug">Switched CHAT/GAT in dropdown menu, now all right (issue #69)</td>
+         </tr>
+         <tr>
+            <td class="feature">23.03.2017</td>
+            <td class="feature">1.9</td>
+            <td class="feature">Set segmented=true for newly generated EXS (issue #66)</td>
          </tr>
          <tr>
             <td class="feature">26.07.2015</td>
@@ -2407,6 +3040,455 @@ function toggle_visibility(className) {
          <!--05.08.2008;  ;  added segmentation functionality to the corpus creation wizard (feature)-->
          <!--04.08.2008;  ;  added 'Tools > EXAKT Search' function (feature)-->
       </table>
+      <h2><a name="exakt"></a>exakt
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">27.02.2017</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in XSL search: need to set base directory (issue #60)</td>
+         </tr>
+         <tr>
+            <td class="change">22.11.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">"Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue #36)</td>
+         </tr>
+         <tr>
+            <td class="change">11.11.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Removed Open DB corpus item from file menu (issue #28)</td>
+         </tr>
+         <tr>
+            <td class="change">18.04.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">revert to old version of BAS player (MAC)</td>
+         </tr>
+         <tr>
+            <td class="change">08.04.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">revert to old version of BAS player (Windows)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Icon for word list</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Adapt KWIC row height to font size</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Start Praat if it is not already running (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Better error handling for Praat functionality (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="feature">10.11.2015</td>
+            <td class="feature">1.3</td>
+            <td class="feature">first attempt at Praat functionality (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="change">23.06.2014</td>
+            <td class="change">1.3</td>
+            <td class="change">catch splash screen transparency error (lubuntu)</td>
+         </tr>
+         <tr>
+            <td class="feature">28.05.2014</td>
+            <td class="feature">1.3</td>
+            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
+         </tr>
+         <tr>
+            <td class="bug">17.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">15.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">14.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
+         </tr>
+         <tr>
+            <td class="bug">16.01.2013</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">10.01.2013</td>
+            <td class="change">1.2</td>
+            <td class="change">Accept fln files for FOLKER wizard</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
+         </tr>
+         <tr>
+            <td class="bug">22.11.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Bug in add annotation when analyses are also present</td>
+         </tr>
+         <tr>
+            <td class="bug">12.03.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
+         </tr>
+         <tr>
+            <td class="change">25.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
+         </tr>
+         <tr>
+            <td class="feature">25.01.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Unselected KWIC rows in gray</td>
+         </tr>
+         <tr>
+            <td class="bug">18.01.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
+         </tr>
+         <tr>
+            <td class="bug">21.11.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
+         </tr>
+         <tr>
+            <td class="change">08.09.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Further modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Some modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="feature">05.07.2011</td>
+            <td class="feature">1.1</td>
+            <td class="feature">Frequency sort as option for word list output</td>
+         </tr>
+         <tr>
+            <td class="bug">07.06.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
+         </tr>
+         <tr>
+            <td class="bug">30.05.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
+         </tr>
+         <tr>
+            <td class="change">17.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">FOLKER import now does automatic stratification by distribution</td>
+         </tr>
+         <tr>
+            <td class="change">23.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Catalog functionality for remote and DB corpora</td>
+         </tr>
+         <tr>
+            <td class="change">18.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">First elements of RDB functionality added (Hanna!)</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">escape type strings in input helper</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Input helper always on top (for filter and for search)</td>
+         </tr>
+         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
+         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
+         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
+         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
+         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
+         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
+         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
+         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
+         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
+         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
+         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
+         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
+         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
+         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
+         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
+         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
+         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
+         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
+         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
+         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
+         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
+         <!--16.03.2010;  0.8;  list view (feature)-->
+         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
+         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
+         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
+         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
+         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
+         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
+         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
+         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
+         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
+         <!--20.10.2009;  0.7;  view menu (change)-->
+         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
+         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
+         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
+         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
+         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
+         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
+         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
+         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
+         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
+         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
+         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
+         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
+         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
+         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
+         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
+         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
+         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
+         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
+         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
+         <!--26.03.2008;  ;  added function for subtracting dates ()-->
+         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
+         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
+         <!--19.03.2008;  ;  new function: import analyses ()-->
+         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
+         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
+         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
+         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
+         <!--18.02.2008;  ;  annotation search working ()-->
+         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
+      </table>
+      <h2><a name="all"></a>all
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">26.01.2017</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Wrong time stamp for build time (issue #54), added some more info about JRE etc. to log file</td>
+         </tr>
+         <tr>
+            <td class="change">13.12.2016</td>
+            <td class="change">1.10</td>
+            <td class="change">Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue
+               #51)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">04.12.2016</td>
+            <td class="change">1.10</td>
+            <td class="change">... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)</td>
+         </tr>
+         <tr>
+            <td class="change">04.12.2016</td>
+            <td class="change">1.10</td>
+            <td class="change">FOBS and SUN JMF distributions for Linux (issue #30)</td>
+         </tr>
+         <tr>
+            <td class="bug">03.12.2016</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Wrong libraries for BAS Player on Linux (issue #30)</td>
+         </tr>
+         <tr>
+            <td class="bug">02.12.2016</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Embedded java binaries need executable permissions (issue #30)</td>
+         </tr>
+         <tr>
+            <td class="bug">01.12.2016</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Exchange Linux Bundled JRE 64bit to 32bit (issue #30)</td>
+         </tr>
+         <tr>
+            <td class="change">19.01.2016</td>
+            <td class="change">2.0</td>
+            <td class="change">Updated ipsk libraries for BASAudioPlayer</td>
+         </tr>
+         <tr>
+            <td class="change">17.12.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Embedded JRE for Linux distributions</td>
+         </tr>
+         <tr>
+            <td class="change">16.10.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Changed linux sh scripts and mac plists to new library sitchuaishon</td>
+         </tr>
+         <tr>
+            <td class="change">16.10.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Moved fobs dll to bundled jre</td>
+         </tr>
+         <tr>
+            <td class="change">06.10.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Build from git: jsmooth path changes for Windows (todo: Mac and Linux)</td>
+         </tr>
+         <tr>
+            <td class="change">10.07.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)</td>
+         </tr>
+         <tr>
+            <td class="change">09.07.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Fixed missing library in Linux distribution (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="change">13.05.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Bundle JRE on Windows</td>
+         </tr>
+         <tr>
+            <td class="change">05.05.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">some library cleanup for build, got rid of SUN JMF</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">2.0</td>
+            <td class="change">New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">2.0</td>
+            <td class="change">new icons</td>
+         </tr>
+         <tr>
+            <td class="bug">07.11.2012</td>
+            <td class="bug">1.9</td>
+            <td class="bug">ipsk.jar for BAS-Player was missing from MAC plists</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2012</td>
+            <td class="change">1.9</td>
+            <td class="change">end of official support for PPC Mac</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2012</td>
+            <td class="change">1.9</td>
+            <td class="change">Parameter HTML witdth in write partitur method (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2011</td>
+            <td class="change">1.9</td>
+            <td class="change">IDs for words in TEI export</td>
+         </tr>
+         <tr>
+            <td class="change">19.10.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Preparing release</td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2011</td>
+            <td class="feature">1.8</td>
+            <td class="feature">Command line version for Praat export (Singer)</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Changed segmented transcription format: ta's can now have ref-id's</td>
+         </tr>
+         <tr>
+            <td class="change">08.03.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Added Sextant tagger to Windows and Linux distributions</td>
+         </tr>
+         <!--10.12.2010;  1.8;  Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though) (change)-->
+         <!--18.10.2010;  1.7;  Simplified Windows distribution (change)-->
+         <!--01.10.2010;  1.7;  Added TEI drop to start menu on windows (change)-->
+         <!--01.10.2010;  1.7;  Removed SUN JMF versions of PE and EXAKT from start menu on windows (change)-->
+         <!--24.08.2010;  1.7;  Coloured splash screens (change)-->
+         <!--23.08.2010;  1.7;  Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly (change)-->
+         <!--10.08.2010;  1.7;  Added swingworker and QTJava to classpath on Linux (change)-->
+         <!--31.03.2010;  1.6;  Version info for Windows setup (Linde, RRZ) (change)-->
+         <!--24.02.2010;  1.6;  fixed bug in corpus builder, path separator must be os independent (Kerem) (bug)-->
+         <!--15.12.2009;  1.6.515;  Linux: shell scripts take parameter (Timm!) (feature)-->
+         <!--23.06.2009;  1.4.3.;  Cleaned up build, smaller distribution size (bug)-->
+         <!--21.03.2009;  1.4.2.;  removed unused libs from linux distribution (change)-->
+         <!--26.02.2009;  1.2.;  Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances (feature)-->
+         <!--09.02.2009;  1.4.1.;  Integration of ELAN.jar instead of copied MPI code (change)-->
+         <!--09.02.2009;  1.2.;  Documentation updates (feature)-->
+         <!--28.01.2008;  1.4.;  Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS (change)-->
+         <!--28.10.2008;  ;  changed EXMARaLDA's build and template files for new media integration (change)-->
+         <!--28.10.2008;  ;  removed JLayer-Player because it is no longer needed (MP3 is fine in other players) (change)-->
+         <!--27.10.2008;  ;  integrated ELAN's DirectShowPlayer as a new player type (festure)-->
+         <!--22.10.2008;  1.1;  fixed bug in log file handling which led to out of memory errors on certain Macs (bug)-->
+         <!--20.10.2008;  ;  changed linux tarball: sh files are now executable (bug)-->
+         <!--13.10.2008;  ;  changed linux tarball according to suggestions by Jörg Sommer (bug)-->
+         <!--13.10.2008;  ;  changed info plist for mac applications to nake sure app runs on 32-bit-JVM (bug)-->
+         <!--06.10.2008;  ;  changed basic and segmented transcription APIs to read and write more than one referenced file (feature)-->
+         <!--06.10.2008;  ;  changed basic and segmented transcription DTD to allow more than one referenced file (feature)-->
+         <!--06.10.2008;  ;  changed basic transcription DTD to allow format table (feature)-->
+         <!--16.09.2008;  ;  updated XALAN libraries ()-->
+         <!--06.08.2008;  ;  changed linux shell scripts (seem to work at least with Suse and Java 6 now) ()-->
+      </table>
       <h2><a name="teidrop"></a>teidrop
       </h2>
       <table rules="all" frame="box" width="60%">
@@ -2414,6 +3496,11 @@ function toggle_visibility(className) {
             <th>Date</th>
             <th>Version</th>
             <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">14.12.2016</td>
+            <td class="bug">0.5</td>
+            <td class="bug">Wrong java path in Linux shell script (issue #30)</td>
          </tr>
          <tr>
             <td class="change">15.01.2015</td>
