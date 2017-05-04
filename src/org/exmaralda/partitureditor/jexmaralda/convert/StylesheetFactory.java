@@ -147,6 +147,51 @@ public class StylesheetFactory {
         return sw.toString();
     }    
     
+    /**
+     *
+     * @param pathToInternalStyleSheet
+     * @param pathToExternalXMLFile
+     * @param parameters
+     * @return
+     */
+    public String applyInternalStylesheetToExternalXMLFile(String pathToInternalStyleSheet, String pathToExternalXMLFile, String[][] parameters)
+                                                  throws    SAXException, 
+                                                  ParserConfigurationException, 
+                                                  IOException, 
+                                                  TransformerConfigurationException, 
+                                                  TransformerException{
+
+        // set up a SAX source as input to the transformer
+        java.io.File inputFile  = new java.io.File(pathToExternalXMLFile);        
+        java.io.FileInputStream fis = new java.io.FileInputStream(inputFile);
+        org.xml.sax.InputSource is = new org.xml.sax.InputSource(fis);
+        javax.xml.transform.sax.SAXSource saxSource = new javax.xml.transform.sax.SAXSource(is);
+        saxSource.setSystemId(inputFile.toURL().toString());
+        
+        //TransformerFactory tFactory = TransformerFactory.newInstance();
+        java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
+        if (is2==null) {throw new IOException("Stylesheet not found!");}
+        javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
+                
+        // set up the output stream for the first transformation
+        java.io.StringWriter sw = new java.io.StringWriter();
+        javax.xml.transform.stream.StreamResult inputStream = new StreamResult(sw);
+           
+        
+        //pass the parameters to the transfomer
+         for (String[] p : parameters){
+            transformer.setParameter(p[0], p[1]);
+        } 
+        
+        
+        //perform the first transformation        
+        transformer.transform(saxSource, inputStream);    
+                
+        // convert the ouput stream to a string and return it
+        return sw.toString();
+    }    
+    
     public String applyExternalStylesheetToString(String pathToExternalStyleSheet, String sourceString)
                                         throws    SAXException, 
                                                   ParserConfigurationException, 
