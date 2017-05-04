@@ -15,6 +15,9 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.xpath.XPathExpressionException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
 import org.jdom.JDOMException;
@@ -197,8 +200,23 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             md.show();            
         } else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter){
             importedTranscription =
-                    org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File(filename));
-        } else if (selectedFileFilter==dialog.XSLStylesheetImportFilter){
+                    org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File(filename));           
+        }   
+         else if (selectedFileFilter==dialog.FlexTextXMLFileFilter){
+            //new for INEL 2017-05-02
+            org.exmaralda.partitureditor.jexmaraldaswing.ChooseXMLSettingsFileDialog flexDialog =
+                    new org.exmaralda.partitureditor.jexmaraldaswing.ChooseXMLSettingsFileDialog(table.parent, true);
+            String xmlPath = settings.get("ImportXML", "");
+            flexDialog.setPath(xmlPath);
+            flexDialog.setLocationRelativeTo(table);
+            flexDialog.setVisible(true);
+            if (flexDialog.returnStatus){
+            File xmlSelectedFile = new File(flexDialog.getPath());
+            settings.put("ImportXML", flexDialog.getPath());
+            FlexTextConverter fc = new FlexTextConverter();            
+            importedTranscription = fc.readFlexTextFromTextFile(selectedFile, xmlSelectedFile);
+            }
+         } else if (selectedFileFilter==dialog.XSLStylesheetImportFilter){
             // added 24-09-2009
             org.exmaralda.partitureditor.jexmaraldaswing.ChooseXSLStylesheetDialog xslDialog =
                     new org.exmaralda.partitureditor.jexmaraldaswing.ChooseXSLStylesheetDialog(table.parent, true);
@@ -226,7 +244,6 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             importedTranscription = tc.readTCFFromFile(filename);
         }
         
-
         if (importedTranscription!=null){
             if ((selectedFileFilter==dialog.TASXFileFilter) 
                     || (selectedFileFilter==dialog.EAFFileFilter)                    
