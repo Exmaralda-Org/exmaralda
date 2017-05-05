@@ -505,7 +505,8 @@ public class AbstractEventTier extends AbstractTier {
     }
 
     /** checks whether this tier is stratified, i.e. whether it does not contain any
-     * overlappimg events */
+     * overlappimg events
+     * @param timeline */
     public boolean isStratified(Timeline timeline){
         Event emptyEvent = new Event();
         return isStratified(timeline, emptyEvent);
@@ -514,7 +515,9 @@ public class AbstractEventTier extends AbstractTier {
     /** checks whether this tier is stratified, i.e. whether it does not contain any
      * overlappimg events */
     public boolean isStratified(Timeline timeline, Event offendingEvent){
+        System.out.println("Started sorting tier...");
         sort(timeline);
+        System.out.println("Tier sorting finished.");
         String lastEnd = new String();
         for (int pos=0; pos<getNumberOfEvents(); pos++){
             Event currentEvent = getEventAt(pos);

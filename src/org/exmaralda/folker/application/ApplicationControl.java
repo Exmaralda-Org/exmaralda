@@ -2386,8 +2386,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                         BasicTranscription bt = org.exmaralda.folker.io.EventListTranscriptionConverter
                                 .exportBasicTranscription(getTranscription(), 
                                 (org.exmaralda.folker.data.Event)selection, correspondingEvent);
+                        System.out.println("Basic transcription calculated.");
                         bt.getHead().getMetaInformation().setReferencedFile(currentMediaPath);
                         // stratify the transcription
+                        System.out.println("Starting to stratify...");
                         bt.getBody().stratify(Tier.STRATIFY_BY_DISTRIBUTION);
                         
                         partitur.getModel().setTranscription(bt);

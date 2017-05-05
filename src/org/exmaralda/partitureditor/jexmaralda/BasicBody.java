@@ -590,6 +590,7 @@ public class BasicBody extends AbstractTierBody {
     public void stratify(short method){
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             Tier t = getTierAt(pos);
+            //System.out.println("Stratifying tier " + t.getDisplayName() + " / " + t.getID());
             if (!t.isStratified(getCommonTimeline())){
                 Tier[] at = t.stratify(getCommonTimeline(), method);
                 for (Tier nt : at){

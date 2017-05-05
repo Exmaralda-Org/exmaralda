@@ -4,8 +4,12 @@
  */
 package org.exmaralda.tagging;
 
+import java.io.IOException;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.xpath.XPath;
 
 /**
  *
@@ -90,6 +94,39 @@ class PostProcessingRule {
                 return count;
             }
         }
+    }
+    
+    
+    public int applyELAN(Element token) throws JDOMException, IOException {
+        /*
+            <ANNOTATION>
+                <REF_ANNOTATION ANNOTATION_ID="a2" ANNOTATION_REF="a1">
+                    <ANNOTATION_VALUE>also</ANNOTATION_VALUE>
+                </REF_ANNOTATION>
+            </ANNOTATION>
+        
+        
+            <ANNOTATION>
+                <REF_ANNOTATION ANNOTATION_ID="a2_p" ANNOTATION_REF="a2">
+                    <ANNOTATION_VALUE>SEDM</ANNOTATION_VALUE>
+                </REF_ANNOTATION>
+            </ANNOTATION>        
+        */
+
+        String textToBeMatched = token.getChild("REF_ANNOTATION").getChildText("ANNOTATION_VALUE");
+        String id = token.getChild("REF_ANNOTATION").getAttributeValue("ANNOTATION_ID");
+        if (textToBeMatched.matches(matchRegex)){       
+            String xpath = "ancestor::ANNOTATION_DOCUMENT/descendant::TIER[@LINGUISTIC_TYPE_REF='" 
+                    + this.setField
+                    + "']/descendant::REF_ANNOTATION[@ANNOTATION_REF='" + id + "']/parent::ANNOTATION";
+            Element elementToBeSet = (Element) XPath.selectSingleNode(token,xpath); 
+            if (elementToBeSet==null){
+                throw new IOException("No matching element for " + IOUtilities.elementToString(token) + " using XPath " + xpath +  "!");
+            }
+            elementToBeSet.getChild("REF_ANNOTATION").getChild("ANNOTATION_VALUE").setText(this.setString);
+            return 1;
+        }
+        return 0;
     }
     
     

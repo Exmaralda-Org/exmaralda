@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.exmaralda.common.corpusbuild.FileIO;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -45,6 +46,19 @@ public class PostProcessingRules {
             Element word = (Element)o;
             for (PostProcessingRule r : rules){
                 count+=r.apply(word);
+            }
+        }
+        return count;
+    }
+    
+    public int applyELAN(Document taggedELANDocument) throws JDOMException, IOException{
+        List l = XPath.newInstance("//TIER[@LINGUISTIC_TYPE_REF='Tokenization']/descendant::ANNOTATION").selectNodes(taggedELANDocument);
+        int count = 0;
+        System.out.println(l.size() + " tokens to post-process");
+        for (Object o : l){
+            Element token = (Element)o;
+            for (PostProcessingRule r : rules){
+                count+=r.applyELAN(token);
             }
         }
         return count;
