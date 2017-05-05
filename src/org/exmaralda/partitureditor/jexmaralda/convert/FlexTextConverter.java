@@ -32,6 +32,7 @@ public class FlexTextConverter {
     public static void main(String[] args) throws SAXException, ParserConfigurationException, IOException, TransformerException {
 
     
+        
         try {
             new FlexTextConverter().readFlexTextFromTextFile((new File("C:\\Users\\fsnv625\\Desktop\\BaA_1930_FireInSmallTent_flk.flextext")), new File("C:\\Users\\fsnv625\\Desktop\\settings.xml"));
         } catch (JDOMException ex) {
@@ -39,6 +40,7 @@ public class FlexTextConverter {
         } catch (JexmaraldaException ex) {
             Logger.getLogger(FlexTextConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
         
         
     }
@@ -52,7 +54,7 @@ public class FlexTextConverter {
     public static String DEFAULT_SETTINGS = "";
 
     //(File inputFile)
-    public BasicTranscription readFlexTextFromTextFile(File inputFile, File parameterFile) throws SAXException, IOException, ParserConfigurationException, TransformerException, JDOMException, JexmaraldaException {
+    public BasicTranscription readFlexTextFromTextFile(File inputFile, File parameterFile) throws SAXException, ParserConfigurationException, IOException, TransformerException, JDOMException, JexmaraldaException {
         //initialise the Stylesheet Factory
         StylesheetFactory ssf = new StylesheetFactory(true);
         //get the whole path of the flextext file
@@ -77,10 +79,8 @@ public class FlexTextConverter {
         //there is probably a much easier way
         String btPath = newBT.toString().replace("[Attribute: output-location=\"file:/", "").replace("\"]","");
         //System.out.println(btPath); 
-        Document d = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromLocalFile(btPath);
-        //finally make a basic transcription of new exb document
-        BasicTranscription bt = new BasicTranscription();
-        bt.BasicTranscriptionFromJDOMDocument(d);
+        //finally make a basic transcription of new exb filepath
+        BasicTranscription bt = new BasicTranscription(btPath);
         return bt;
 
     }
