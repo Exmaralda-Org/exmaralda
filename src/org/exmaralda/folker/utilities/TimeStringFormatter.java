@@ -132,6 +132,38 @@ public class TimeStringFormatter {
         return formatMiliseconds(miliseconds, false);
     }
     
+    public static String formatSeconds(double inseconds, boolean doHours, int digitsAfterComma){
+        int seconds = (int)(inseconds);
+        //System.out.println(seconds);
+        int minutes = seconds/60;
+        //System.out.println(minutes);
+        String formatted = "";
+        int hours = 0;
+        if (doHours){
+            hours = minutes/60;
+            if (hours<10) formatted+="0";
+            formatted+=Integer.toString(hours) + ":";
+            minutes-=hours*60;
+            //System.out.println(minutes);
+        }
+        if (minutes<10) formatted+="0";
+        formatted+=Integer.toString(minutes) + ":";
+        
+        double remainingMiliseconds = inseconds*1000 - 60000*minutes - 60*60000*hours;
+        //System.out.println(remainingMiliseconds);
+        if (remainingMiliseconds<10000) formatted+="0";
+        formatted+=Double.toString(remainingMiliseconds/1000.0);
+        int index = formatted.lastIndexOf('.');
+        if (digitsAfterComma>0){
+            return formatted.substring(0,Math.min(index+digitsAfterComma+1,formatted.length()));
+        } else {
+            if (index<0){
+                return formatted;
+            } else {
+                return formatted.substring(0,Math.min(index, formatted.length()));
+            }
+        }
+    }
     public static String formatMiliseconds(double miliseconds, boolean doHours){
         
         int seconds = (int)(miliseconds / 1000);
