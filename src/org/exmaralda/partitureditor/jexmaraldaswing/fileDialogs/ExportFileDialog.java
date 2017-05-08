@@ -42,6 +42,7 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         addChoosableFileFilter(AudacityLabelFileFilter);
         addChoosableFileFilter(TreeTaggerFilter);
         addChoosableFileFilter(F4TextFileFilter);
+        addChoosableFileFilter(SRTFileFilter);
         // removed 10-04-2013
         //addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
         setFileFilter(PraatFileFilter);

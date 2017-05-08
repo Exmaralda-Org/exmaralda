@@ -56,6 +56,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter PhonFileFilter = new ParameterFileFilter("xml", "Phon transcription (*.xml)");
     public ParameterFileFilter TransanaXMLFileFilter = new ParameterFileFilter("xml", "Transana XML file (*.xml)");
     public ParameterFileFilter FlexTextXMLFileFilter = new ParameterFileFilter("flextext", "Flex XML file (*.flextext)");
+    public ParameterFileFilter SRTFileFilter = new ParameterFileFilter("srt", "SubRip Subtitle file (*.srt)");
     
 
 

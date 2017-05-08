@@ -180,6 +180,9 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.F4TextFileFilter){
             trans.getBody().getCommonTimeline().completeTimes(false, trans);
             new F4Converter().writeText(trans, exportFile, F4Converter.SPEAKER_CONTRIBUTIONS, "RTF");
+        } else if (selectedFileFilter==dialog.SRTFileFilter){
+            trans.getBody().getCommonTimeline().completeTimes(false, trans);
+            new SrtConverter().writeText(trans, exportFile);
         }
 
         ActionUtilities.memorizeFileFilter("last-export-filter", table.getTopLevelAncestor(), dialog);
