@@ -515,8 +515,11 @@ public class PartitureTableWithActions extends PartitureTable
         largeTextField.setEditable(false);
         // changed 19-02-2009
         largeTextField.setDocument(new javax.swing.text.PlainDocument());
-        keyboardDialog.getKeyboardPanel().removeAllListeners();
-        multimodalDialog.multimodalPanel.removeAllListeners();        
+        keyboardDialog.getKeyboardPanel().removeAllListeners();        
+        // changed 09-05-2017 - issue #87
+        if (multimodalDialog!=null && (multimodalDialog.multimodalPanel!=null)){
+            multimodalDialog.multimodalPanel.removeAllListeners();        
+        }
         ipaPanel.ipaPanel.removeAllListeners();
         selectionChanged();
         isEditing = false;
