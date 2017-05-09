@@ -67,6 +67,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("Phon")) {dialog.setFileFilter(dialog.PhonFileFilter);}
             else if (lastFileFilter.equals("TransanaXML")) {dialog.setFileFilter(dialog.TransanaXMLFileFilter);}
             else if (lastFileFilter.equals("F4Text")) {dialog.setFileFilter(dialog.F4TextFileFilter);}
+            else if (lastFileFilter.equals("SRT")) {dialog.setFileFilter(dialog.SRTFileFilter);}
         }
     }
 
@@ -116,6 +117,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.PhonFileFilter) {lastFileFilter = "Phon";}
             else if (selectedFileFilter==dialog.TransanaXMLFileFilter) {lastFileFilter = "TransanaXML";}
             else if (selectedFileFilter==dialog.F4TextFileFilter) {lastFileFilter = "F4Text";}
+            else if (selectedFileFilter==dialog.SRTFileFilter) {lastFileFilter = "SRT";}
 
 
             settings.put(propName, lastFileFilter);
