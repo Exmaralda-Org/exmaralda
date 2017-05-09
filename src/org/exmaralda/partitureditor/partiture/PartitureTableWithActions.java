@@ -487,7 +487,10 @@ public class PartitureTableWithActions extends PartitureTable
         editor = (PartitureCellStringEditor)(evt.getEditingComponent());
         editor.setPopupMenu(eventPopupMenu);
         keyboardDialog.getKeyboardPanel().addListener(editor);
-        multimodalDialog.multimodalPanel.addUnicodeKeyboardListener(editor);
+        // changed 09-05-2017 - issue #87
+        if (multimodalDialog!=null && (multimodalDialog.multimodalPanel!=null)){
+            multimodalDialog.multimodalPanel.addUnicodeKeyboardListener(editor);
+        }
         ipaPanel.ipaPanel.addUnicodeListener(editor);
         editor.positionCursor();
         editor.getDocument().addDocumentListener(this);        
@@ -1703,8 +1706,8 @@ public class PartitureTableWithActions extends PartitureTable
         if (settings.get("SHOW-PraatPanel","FALSE").equalsIgnoreCase("TRUE")){praatPanel.setVisible(true);}
         if (settings.get("SHOW-AnnotationPanel","FALSE").equalsIgnoreCase("TRUE")){annotationDialog.setVisible(true);}
         if (settings.get("SHOW-IPAPanel","FALSE").equalsIgnoreCase("TRUE")){ipaPanel.setVisible(true);}
-        if (settings.get("SHOW-MultimodalPanel","FALSE").equalsIgnoreCase("TRUE")){multimodalDialog.setVisible(true);}
-        if (settings.get("SHOW-SVGPanel","FALSE").equalsIgnoreCase("TRUE")){svgDialog.setVisible(true);}
+        if (settings.get("SHOW-MultimodalPanel","FALSE").equalsIgnoreCase("TRUE") && multimodalDialog!=null){multimodalDialog.setVisible(true);}
+        if (settings.get("SHOW-SVGPanel","FALSE").equalsIgnoreCase("TRUE") && svgDialog!=null){svgDialog.setVisible(true);}
 
 
         // default font and general purpose font
