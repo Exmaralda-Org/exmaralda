@@ -5,6 +5,7 @@
 
 package org.exmaralda.folker.data;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -40,6 +42,31 @@ public class GATParser extends AbstractParser {
     public GATParser() {
         this("default");
     }
+    
+    public static GATParser createCustomisedGATParser(String languageCode, 
+            File patternsFile, 
+            File minimalTransformerFile,
+            File basicTransformerFile
+            ) throws JDOMException, IOException{
+        GATParser newParser = new GATParser(languageCode);
+        
+        if (patternsFile!=null){
+            PatternReader pr = new PatternReader(patternsFile);
+            newParser.minimalPatterns = pr.getAllPatterns(2, languageCode);
+            newParser.basicPatterns = pr.getAllPatterns(3, languageCode);            
+        }
+        
+        if (minimalTransformerFile!=null){
+            newParser.minimalTransformer = new XSLTransformer(IOUtilities.readDocumentFromLocalFile(minimalTransformerFile.getAbsolutePath()));
+        }
+        
+        if (basicTransformerFile!=null){
+            newParser.basicTransformer = new XSLTransformer(IOUtilities.readDocumentFromLocalFile(basicTransformerFile.getAbsolutePath()));
+        }
+
+        return newParser;
+    };
+            
     
     public GATParser(String languageCode) {
         try {

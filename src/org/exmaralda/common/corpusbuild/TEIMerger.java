@@ -12,7 +12,6 @@ package org.exmaralda.common.corpusbuild;
 import org.jdom.*;
 import org.jdom.xpath.*;
 import java.util.*;
-import java.io.*;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.jdom.transform.*;
@@ -209,7 +208,7 @@ public class TEIMerger {
     /** this method will take the segmented transcription and, for each speaker contribution in the segmentation with
      * the name 'nameOfDeepSegmentation' will add anchors from the segmentation with the name 'nameOfFlatSegmentation'
      * such that the temporal information provided in the flat segmentation is completely represented as anchors 
-     * with in the deep segmentation. The typical application scenario is to give this method a segmented HIAT transcription with
+     * within the deep segmentation. The typical application scenario is to give this method a segmented HIAT transcription with
      * nameOfDeepSegmentation = 'SpeakerContribution_Utterance_Word' 
      * nameOfFlatSegmentation = 'SpeakerContribution_Event'
      * @param segmentedTranscription
@@ -317,6 +316,12 @@ public class TEIMerger {
                 
                 returnValue.addElement(mergedElement.detach());
             }
+            
+            // issue #89 - Now the vector contains elements only from the 
+            // segmentations passed as parameters
+            // in particular, it seems that tiers of type 'd' (which end up as 
+            // segmentation @name='Event' are lost
+            
             return returnValue;
         } catch (JDOMException ex) {
             ex.printStackTrace();

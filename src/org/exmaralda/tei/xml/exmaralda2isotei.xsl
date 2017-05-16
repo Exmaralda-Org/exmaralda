@@ -112,7 +112,7 @@
                                 <xsl:apply-templates select="." mode="first-pass"/>
                             </xsl:if>                            
                         </xsl:for-each>
-                        <xsl:apply-templates select="//tier[@type='d']/event[@start=current()/@id]"></xsl:apply-templates>
+                        <xsl:apply-templates select="//tier[@type='d']/event[@start=current()/@id]"/>
                     </xsl:for-each>                                    
                 </body>
             </text>
@@ -318,6 +318,7 @@
     </xsl:template>
     
     <xsl:template match="event[../@type='d']">
+        <xsl:message>HERE I GO!</xsl:message>
         <xsl:element name="incident" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:if test="../@speaker">
                 <xsl:attribute name="who">

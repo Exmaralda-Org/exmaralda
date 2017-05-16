@@ -5,9 +5,11 @@
 
 package org.exmaralda.folker.data;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.jdom.*;
 import org.jdom.xpath.*;
 
@@ -27,6 +29,12 @@ public class PatternReader {
         document = new org.exmaralda.common.jdomutilities.IOUtilities().readDocumentFromResource(internalPath);
     }
 
+    public PatternReader(File externalFile) throws JDOMException, IOException {
+        document = IOUtilities.readDocumentFromLocalFile(externalFile.getAbsolutePath());
+    }
+    
+    
+    
     public Hashtable<String,String> getAllPatterns(int level) throws JDOMException{
         return getAllPatterns(level, "default");
     }
