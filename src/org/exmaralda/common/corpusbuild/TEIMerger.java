@@ -147,6 +147,8 @@ public class TEIMerger {
             String result =
                 ssf.applyInternalStylesheetToString(transform_stylesheet, IOUtilities.documentToString(teiDocument));
             transformedDocument = IOUtilities.readDocumentFromString(result);
+            //fix for issue #89
+            textNode = (Element)(xp.selectSingleNode(transformedDocument));
         } else {
             transformedDocument = transformer2.transform(teiDocument);
             textNode = (Element)(xp.selectSingleNode(transformedDocument));
