@@ -125,11 +125,13 @@ public class ApplicationFrame extends javax.swing.JFrame {
    Vector<File> getFilesFromDirectory(File dir) {
        Vector<File> result = new Vector<File>();
        File[] fs = dir.listFiles(new FilenameFilter() {
+            @Override
             public boolean accept(File dir, String name) {
                 return (name.toLowerCase().endsWith("exb") 
                         || name.toLowerCase().endsWith("eaf")
                         || name.toLowerCase().endsWith("trs")
                         || name.toLowerCase().endsWith("flk")
+                        || name.toLowerCase().endsWith("fln") // issue #83
                         || name.toLowerCase().endsWith("cha")
                         );
             }
@@ -138,6 +140,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
             result.addElement(f);
         }
         File[] dirs = dir.listFiles(new FileFilter(){
+            @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory();
             }
@@ -165,7 +168,9 @@ public class ApplicationFrame extends javax.swing.JFrame {
                     message("["+ f.getName() + "]" + " Cannot determine file type (missing suffix)");
                 } else {
                     String suffix = f.getName().substring(index+1).toLowerCase();
-                    if (("exb".equals(suffix) || "eaf".equals(suffix)|| "trs".equals(suffix) || "cha".equals(suffix) || "flk".equals(suffix))){
+                    // issue #83
+                    if (("exb".equals(suffix) || "eaf".equals(suffix)|| "trs".equals(suffix) || "cha".equals(suffix) 
+                            || "flk".equals(suffix) || "fln".equals(suffix))){
                         allFiles.add(f);
                         message(f.getName() + " added to list.");
                     } else {
@@ -207,7 +212,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
                                     CHATConverter chatConverter = new CHATConverter(f);
                                     bt = chatConverter.convert();
                                     message(f.getName() + " read as CHAT transcription file");
-                            } else if ("flk".equalsIgnoreCase(suffix)){
+                            } else if (("flk".equalsIgnoreCase(suffix) || ("fln".equalsIgnoreCase(suffix)))){
                                     bt = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(f);
                                     message(f.getName() + " read as FOLKER transcription file");
                             }  else if ("trs".equalsIgnoreCase(suffix)){

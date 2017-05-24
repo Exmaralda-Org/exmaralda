@@ -516,7 +516,11 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
 
     /** splits the cell in two cells
-    * or: double splits the corresponding event */
+    * or: double splits the corresponding event
+     * @param row
+     * @param col
+     * @param textStartPos
+     * @param textEndPos */
     public void doubleSplit(int row, int col, int textStartPos, int textEndPos){
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();

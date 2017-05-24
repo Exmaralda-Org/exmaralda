@@ -1374,13 +1374,15 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }        
 
-    /** returns the cursor Position in the editing component */
+    /** returns the cursor Position in the editing component
+     * @return  */
     public int getCharPos(){
         return getSelectionStartPosition();
     }
     
     /** returns the start position of the selection in the
-     * current editing component */
+     * current editing component
+     * @return  */
     public int getSelectionStartPosition(){
         javax.swing.JTextField editingComponent = (javax.swing.JTextField)getEditingComponent();
         if (editingComponent!=null){
@@ -1391,7 +1393,8 @@ public class PartitureTableWithActions extends PartitureTable
     }
     
     /** returns the end position of the selection in the
-     * current editing component */
+     * current editing component
+     * @return  */
     public int getSelectionEndPosition(){
         javax.swing.JTextField editingComponent = (javax.swing.JTextField)getEditingComponent();
         if (editingComponent!=null){
