@@ -229,6 +229,21 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
         File temp2 = File.createTempFile("EXMARaLDA_MAUS", ".exb");
         bt2.writeXMLToFile(temp2.getAbsolutePath(), "none");
         
+        // new 31-05-2017: issue #91
+        Timeline tl = bt2.getBody().getCommonTimeline();
+        for (int pos=0; pos<bt2.getBody().getNumberOfTiers(); pos++){
+            Tier tier = bt2.getBody().getTierAt(pos);
+            if (!tier.isStratified(tl)){
+                String message = "The MAUS result is not stratified, i.e.\n"
+                        + "it contains overlapping annotations. \n"
+                        + "Operation is aborted. Please check \n"
+                        + temp2.getAbsolutePath();
+                JOptionPane.showMessageDialog(table, message);
+                return;
+            }
+        }
+        
+        
         Boolean merge = (Boolean) mausParameters.get("MERGE");
         if (!merge){
             // ...set the transcription for the partitur to the newly read transcription...
