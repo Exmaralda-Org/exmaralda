@@ -5,9 +5,20 @@
 package org.exmaralda.webservices.swing;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.Namespace;
+import org.jdom.xpath.XPath;
 
 /**
  *
@@ -300,6 +311,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
             chainTextField.setText(jfc.getSelectedFile().getAbsolutePath());
         }
         updateOK();
+        updateChainLanguage();
         
     }//GEN-LAST:event_chainBrowseButtonActionPerformed
 
@@ -359,6 +371,8 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
     private void chainTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chainTextFieldActionPerformed
        updateOK();
+       // 31-05-2017 - issue #88
+       updateChainLanguage();
     }//GEN-LAST:event_chainTextFieldActionPerformed
 
     private void tcfTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcfTextFieldActionPerformed
@@ -457,5 +471,55 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
                 && apiKeyTextField.getText().length()>0
                 && (tcfTextField.getText().length()>0 || teiTextField.getText().length()>0 || htmlTextField.getText().length()>0);
         okButton.setEnabled(parametersSuffice);
+    }
+
+    // 31-05-2017 - issue #88
+    private void updateChainLanguage() {
+        String chainPath = chainTextField.getText();
+        File chainFile = new File(chainPath);
+        if ((!chainFile.exists()) || (!(chainFile.canRead()))){
+            String message = "Chain file \n" + chainPath + "\n does not exist or cannot be read. ";
+            JOptionPane.showMessageDialog(rootPane, message);
+            return;
+        }
+        
+        try {
+            /* <cmd:Toolchain>
+                <cmd:ToolInChain>
+                    <cmd:PID>http://hdl.handle.net/11858/00-1778-0000-0004-BA56-7</cmd:PID>
+                    <cmd:Parameter value="de" name="lang"/>
+                    <cmd:Parameter value="text/plain" name="type"/>
+                </cmd:ToolInChain>
+                <cmd:ToolInChain>
+                    <cmd:PID>http://hdl.handle.net/11858/00-1778-0000-0004-BA63-7</cmd:PID>
+                    <cmd:Parameter value="de" name="lang"/>
+                    <cmd:Parameter value="0.4" name="version"/>
+                </cmd:ToolInChain>
+                <cmd:ToolInChain>
+                    <cmd:PID>http://hdl.handle.net/11858/00-203C-0000-002B-B8EE-C</cmd:PID>
+                </cmd:ToolInChain> */
+
+            Document chainDoc = FileIO.readDocumentFromLocalFile(chainFile);
+            XPath xp = XPath.newInstance("//cmd:ToolInChain/cmd:Parameter[@name='lang']");
+            Namespace CMD_NAMESPACE = Namespace.getNamespace("cmd", "http://www.clarin.eu/cmd/1");
+            xp.addNamespace(CMD_NAMESPACE);
+            
+            List l = xp.selectNodes(chainDoc);
+            if (l==null || l.isEmpty()){
+                System.out.println("No language defined in chain");
+            } else {
+                Element paramElement = (Element)(l.get(0));
+                String language = paramElement.getAttributeValue("value");
+                System.out.println("First language defined in chain is " + language);
+                languageComboBox.setSelectedItem(language);
+            }            
+        } catch (JDOMException ex) {
+            String message = "Problem reading chain file \n" + chainPath + ": \n" + ex.getLocalizedMessage();
+            JOptionPane.showMessageDialog(rootPane, message);
+        } catch (IOException ex) {
+            String message = "Problem reading chain file \n" + chainPath + ": \n" + ex.getLocalizedMessage();
+            JOptionPane.showMessageDialog(rootPane, message);
+        }
+        
     }
 }
