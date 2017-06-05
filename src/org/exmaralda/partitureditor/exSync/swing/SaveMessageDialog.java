@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.exSync.swing;
 
 import java.io.*;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.HTMLFileFilter;
 /**
  *
  * @author  thomas
@@ -15,7 +16,8 @@ public class SaveMessageDialog extends org.exmaralda.partitureditor.jexmaraldasw
     
     StringBuffer message;
     
-    /** Creates a new instance of SaveMessageDialog */
+    /** Creates a new instance of SaveMessageDialog
+     * @param sb */
     public SaveMessageDialog(StringBuffer sb) {
         setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
         setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.TextFileFilter());        
@@ -23,10 +25,17 @@ public class SaveMessageDialog extends org.exmaralda.partitureditor.jexmaraldasw
     }
     
     
+    @Override
     public void checkExtension(){
-        setFilename(new String(getSelectedFile().toString()));
-        if (getFilename().indexOf('.')<getFilename().lastIndexOf(getSelectedFile().separatorChar)){
-            setFilename(getFilename() + ".txt");
+        setFilename(getSelectedFile().toString());
+        if (getFilename().indexOf('.')<getFilename().lastIndexOf(File.separatorChar)){
+            
+            // changed 05-06-2017 - issue #97
+            if (this.getFileFilter() instanceof HTMLFileFilter){
+                setFilename(getFilename() + ".html");                
+            } else {
+                setFilename(getFilename() + ".txt");
+            }
         }
     }    
     

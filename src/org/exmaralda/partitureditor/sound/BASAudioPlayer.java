@@ -15,10 +15,6 @@ import ipsk.audio.player.event.PlayerStopEvent;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.Mixer;
-import javax.sound.sampled.Port;
 
 
 /**

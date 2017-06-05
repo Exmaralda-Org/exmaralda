@@ -18,11 +18,13 @@ import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
  */
 public class CountAction extends AbstractFSMSegmentationAction {
     
-    /** Creates a new instance of CountDIDAAction */
+    /** Creates a new instance of CountDIDAAction
+     * @param t */
     public CountAction(PartitureTableWithActions t) {
         super("Count segments...", t);
     }
 
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("countAction!");
         table.commitEdit(true);

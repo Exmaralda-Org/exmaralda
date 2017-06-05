@@ -7,8 +7,6 @@
 package org.exmaralda.partitureditor.jexmaraldaswing.fileFilters;
 
 import java.io.File;
-import javax.swing.*;
-import javax.swing.filechooser.*;
 
 
 /**
@@ -32,6 +30,7 @@ public class HTMLFileFilter extends javax.swing.filechooser.FileFilter {
         return ext;
     }
     
+    @Override
     public boolean accept(File f) {
         if (f.isDirectory()) {
             return true;

@@ -1419,7 +1419,8 @@ public class PartitureTableWithActions extends PartitureTable
     
     /** if one or more events are selected: returns the start point 
      * of the first of these events, otherwise: returns the timeline
-     * item corresponding to the first visible column */
+     * item corresponding to the first visible column
+     * @return  */
     public TimelineItem getVisiblePosition(){
         if (selectionStartCol>=0){
             return getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemAt(selectionStartCol);
@@ -2428,17 +2429,25 @@ public class PartitureTableWithActions extends PartitureTable
     public void processPlayableEvent(org.exmaralda.partitureditor.sound.PlayableEvent e){
         if (!playbackMode) return;
         if (!(e.getType()==org.exmaralda.partitureditor.sound.PlayableEvent.POSITION_UPDATE)) return;
-        //System.out.println("DAS! " + e.getPosition());
-        int col = getModel().getTranscription().getBody().getCommonTimeline().getPositionForTime(e.getPosition());
+        //System.out.println("processPlayableEvent in PartitureTableWithActions - " + e.getPosition());
+        final int col = getModel().getTranscription().getBody().getCommonTimeline().getPositionForTime(e.getPosition());
         //System.out.println("JENES! " + col);        
         // changed 18-06-2008
         /*if (!this.isColumnVisible(col)){
             this.makeColumnVisible(col);
         }*/
-        setLeftColumn(col);
-        if (selectionStartCol!=col){
-            this.setSelection(-1,col,-1,col);
-        }
+        //issue #98: put that in a separate thread?
+        // but who understands threading?
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                setLeftColumn(col);
+                if (selectionStartCol!=col){
+                    setSelection(-1,col,-1,col);
+                }
+            }
+            
+        });
     }
 
     public final Playable makePlayer(){

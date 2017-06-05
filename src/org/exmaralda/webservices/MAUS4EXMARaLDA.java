@@ -23,7 +23,6 @@ import org.exmaralda.partitureditor.jexmaralda.SegmentList;
 import org.exmaralda.partitureditor.jexmaralda.Segmentation;
 import org.exmaralda.partitureditor.jexmaralda.TimedSegment;
 import org.exmaralda.partitureditor.jexmaralda.convert.PraatConverter;
-import org.exmaralda.partitureditor.jexmaralda.segment.GATMinimalSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;

@@ -18,14 +18,18 @@ public class ParameterFileFilter extends javax.swing.filechooser.FileFilter {
     String[] suffix;
     String description = "";
     
-    /** Creates a new instance of ParameterFileFilter */
+    /** Creates a new instance of ParameterFileFilter
+     * @param ext
+     * @param desc */
     public ParameterFileFilter(String ext, String desc) {
         suffix = new String[1];
         suffix[0] = ext;
         description = desc;
     }
 
-    /** Creates a new instance of ParameterFileFilter */
+    /** Creates a new instance of ParameterFileFilter
+     * @param ext
+     * @param desc */
     public ParameterFileFilter(String[] ext, String desc) {
         suffix = ext;
         description = desc;

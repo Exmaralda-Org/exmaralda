@@ -6,6 +6,9 @@
 
 package org.exmaralda.partitureditor.exSync.swing;
 
+import javax.swing.filechooser.FileFilter;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.HTMLFileFilter;
+
 /**
  *
  * @author  thomas
@@ -13,7 +16,10 @@ package org.exmaralda.partitureditor.exSync.swing;
 public class MessageDialog extends javax.swing.JDialog {
     
     StringBuffer message = null;
-    /** Creates new form MessageDialog */
+    /** Creates new form MessageDialog
+     * @param parent
+     * @param modal
+     * @param m */
     public MessageDialog(java.awt.Frame parent, boolean modal, StringBuffer m) {
         super(parent, modal);
         initComponents();
@@ -83,6 +89,13 @@ public class MessageDialog extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // Add your handling code here:
         SaveMessageDialog dialog = new SaveMessageDialog(message);
+        
+        // added 05-06-2017 - issue #97
+        for (FileFilter f : dialog.getChoosableFileFilters()){
+            dialog.removeChoosableFileFilter(f);
+        }
+        dialog.setFileFilter(new HTMLFileFilter());
+
         dialog.saveMessage(this);
     }//GEN-LAST:event_saveButtonActionPerformed
 
