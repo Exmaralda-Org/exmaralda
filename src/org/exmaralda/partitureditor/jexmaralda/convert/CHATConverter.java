@@ -292,12 +292,16 @@ public class CHATConverter extends Vector<String> {
                 if (sndIndex>=0){
                     int index1=-1;
                     int index2=-1;
-                    if (line.indexOf("%snd")>=0){
+                    if (line.contains("%snd")){
                         index1 = line.indexOf("_", sndIndex);
                         index2 = line.lastIndexOf("_");
                     } else {
                         index1 = sndIndex;
                         index2 = line.indexOf("_", sndIndex);
+                    }
+                    // issue #99
+                    if (index1<0 || index2<0){
+                        throw new JexmaraldaException(1, "Something is wrong with the %snd tag:\n" + line);
                     }
                     String startTime = line.substring(index1+1, index2).trim();
                     String endTime = line.substring(index2+1).trim();
