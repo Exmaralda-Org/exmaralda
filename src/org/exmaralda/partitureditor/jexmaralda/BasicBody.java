@@ -32,7 +32,8 @@ public class BasicBody extends AbstractTierBody {
     }
 
     
-    /** returns a copy of this BasicBody */
+    /** returns a copy of this BasicBody
+     * @return  */
     public BasicBody makeCopy(){
         BasicBody result = new BasicBody();
         result.setCommonTimeline(this.getCommonTimeline().makeCopy());

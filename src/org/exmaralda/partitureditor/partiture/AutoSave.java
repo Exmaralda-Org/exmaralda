@@ -24,7 +24,8 @@ public class AutoSave implements Runnable {
     private Thread thread;
     private BasicTranscription transcription;
     
-    /** Creates a new instance of AutoSave */
+    /** Creates a new instance of AutoSave
+     * @param bt */
     public AutoSave(BasicTranscription bt) {
         transcription = bt;
         PATH = System.getProperty("user.home");
@@ -45,7 +46,11 @@ public class AutoSave implements Runnable {
             System.out.println("Auto saving " + FILENAME + " at " + new java.util.Date().toString());
             String filename = PATH + System.getProperty("file.separator") + FILENAME + "_" + timestamp + ".exb";
             
-            transcription.writeXMLToFile(filename, "none");
+            // new 14-06-2017, issue #102            
+            BasicTranscription copyTranscription = transcription.makeCopy();
+            copyTranscription.writeXMLToFile(filename, "none");            
+            //transcription.writeXMLToFile(filename, "none");
+            
             // new 31-08-2012
             // log auto saving in the meta information
             if (!(transcription.getHead().getMetaInformation().getUDMetaInformation().containsAttribute("AutoSave"))){

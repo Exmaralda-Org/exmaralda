@@ -24,11 +24,15 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
     
     ProgressBarDialog pbd;
 
-    /** Creates a new instance of OpenCorpusAction */
+    /** Creates a new instance of OpenCorpusAction
+     * @param ef
+     * @param title
+     * @param icon */
     public GenerateFOLKERCorpusAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         FolkerCorpusWizard theMagician = new FolkerCorpusWizard(exaktFrame, true);
         theMagician.setLocationRelativeTo(exaktFrame);
@@ -42,9 +46,9 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
         final String comaPath = (String)theData[0];
         Vector<File> folkerFiles = (Vector<File>)theData[1];
         Object[] parameters = (Object[])theData[2];
-        boolean separateDirectory = ((Boolean)parameters[0]).booleanValue();
+        boolean separateDirectory = ((Boolean)parameters[0]);
         String directoryName = (String)parameters[1];
-        boolean writeBasic = ((Boolean)parameters[2]).booleanValue();
+        boolean writeBasic = ((Boolean)parameters[2]);
         try {
             final FOLKERBuilder theBuilder = new FOLKERBuilder(new File(comaPath), folkerFiles, directoryName, separateDirectory, writeBasic);
             pbd = new ProgressBarDialog(exaktFrame, false);
@@ -54,6 +58,7 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
             pbd.setVisible(true);
 
             final Runnable doItWhenIsOver = new Runnable() {
+                 @Override
                  public void run() {
                     File file = new File(comaPath);
                     if (file!=null){
@@ -80,7 +85,6 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
                         ex.printStackTrace();
                         pbd.setVisible(false);
                         exaktFrame.showErrorDialog(ex);
-
                     }
                 }
             };
@@ -88,6 +92,7 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
 
         } catch (Exception ex) {
             ex.printStackTrace();
+            exaktFrame.showErrorDialog(ex);
         }
 
 

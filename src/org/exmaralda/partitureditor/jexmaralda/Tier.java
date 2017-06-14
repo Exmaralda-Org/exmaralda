@@ -91,7 +91,8 @@ public class Tier extends AbstractEventTier {
         return retValue;
     }
     
-    /** returns a copy of this tier */
+    /** returns a copy of this tier
+     * @return  */
     public Tier makeCopy(){
         Tier result=new Tier(this.getID(), this.getSpeaker(), this.getCategory(), this.getType());
         // changed in Version 1.2.5.
@@ -103,7 +104,8 @@ public class Tier extends AbstractEventTier {
         return result;
     }
     
-    /** returns a copy of this tier where all events have empty descriptions */
+    /** returns a copy of this tier where all events have empty descriptions
+     * @return  */
     public Tier makeEmptyCopy(){
         Tier result=new Tier(this.getID(), this.getSpeaker(), this.getCategory(), this.getType());
         for (int pos=0; pos<this.getNumberOfEvents(); pos++){

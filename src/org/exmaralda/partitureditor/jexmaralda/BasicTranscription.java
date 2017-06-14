@@ -156,7 +156,8 @@ public class BasicTranscription extends AbstractTranscription {
     }
     
 
-    /** returns a copy of this BasicTranscription */
+    /** returns a copy of this BasicTranscription
+     * @return  */
     public BasicTranscription makeCopy(){
         BasicTranscription result = new BasicTranscription();
         result.setHead(this.getHead().makeCopy());
@@ -164,7 +165,8 @@ public class BasicTranscription extends AbstractTranscription {
         return result;
     }
     
-    /** returns a copy of this BasicTranscription */
+    /** returns a copy of this BasicTranscription
+     * @return  */
     public BasicTranscription makeEmptyCopy(){
         BasicTranscription result = new BasicTranscription();
         result.setHead(this.getHead().makeCopy());
