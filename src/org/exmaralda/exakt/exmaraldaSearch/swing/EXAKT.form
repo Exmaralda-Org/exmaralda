@@ -36,7 +36,6 @@
   <SubComponents>
     <Container class="javax.swing.JSplitPane" name="outerSplitPane">
       <Properties>
-        <Property name="dividerSize" type="int" value="10"/>
         <Property name="orientation" type="int" value="0"/>
         <Property name="oneTouchExpandable" type="boolean" value="true"/>
       </Properties>
@@ -50,7 +49,6 @@
       <SubComponents>
         <Container class="javax.swing.JSplitPane" name="innerSplitPane">
           <Properties>
-            <Property name="dividerSize" type="int" value="10"/>
             <Property name="oneTouchExpandable" type="boolean" value="true"/>
           </Properties>
           <Constraints>

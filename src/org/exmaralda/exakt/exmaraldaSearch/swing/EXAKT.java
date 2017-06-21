@@ -269,7 +269,7 @@ public class EXAKT extends javax.swing.JFrame
         saveSearchResultAction = new SaveSearchResultAction(this, "Save concordance", null);
         openSearchResultAction = new OpenSearchResultAction(this, "Open concordance...", null);
         appendSearchResultAction = new AppendSearchResultAction(this, "Append concordance...", null);
-        closeSearchResultAction = new CloseSearchResultAction(this, "Close concordance", null);
+        closeSearchResultAction = new CloseSearchResultAction(this, "Close concordance now", null);
 
         newWordlistAction = new NewWordlistAction(this, "New wordlist", null);
 
