@@ -114,6 +114,7 @@ public class EXAKT extends javax.swing.JFrame
     public OpenSearchResultAction openSearchResultAction;
     public AppendSearchResultAction appendSearchResultAction;
     public CloseSearchResultAction closeSearchResultAction;
+    public CreateCollectionAction createCollectionAction; 
 
     public NewWordlistAction newWordlistAction;
     
@@ -269,7 +270,8 @@ public class EXAKT extends javax.swing.JFrame
         saveSearchResultAction = new SaveSearchResultAction(this, "Save concordance", null);
         openSearchResultAction = new OpenSearchResultAction(this, "Open concordance...", null);
         appendSearchResultAction = new AppendSearchResultAction(this, "Append concordance...", null);
-        closeSearchResultAction = new CloseSearchResultAction(this, "Close concordance now", null);
+        closeSearchResultAction = new CloseSearchResultAction(this, "Close concordance", null);
+        createCollectionAction = new CreateCollectionAction(this, "Create collection from concordance...", null);
 
         newWordlistAction = new NewWordlistAction(this, "New wordlist", null);
 
@@ -283,6 +285,7 @@ public class EXAKT extends javax.swing.JFrame
         openSearchResultAction.setEnabled(false);
         appendSearchResultAction.setEnabled(false);
         closeSearchResultAction.setEnabled(false);
+        createCollectionAction.setEnabled(false);
     }
     
     private void initMenuBar(){
@@ -1551,7 +1554,8 @@ public class EXAKT extends javax.swing.JFrame
             saveSearchResultAsAction.setEnabled(somethingIsSelected);
             saveSearchResultAction.setEnabled(somethingIsSelected);
             appendSearchResultAction.setEnabled(somethingIsSelected);
-            closeSearchResultAction.setEnabled(somethingIsSelected);      
+            closeSearchResultAction.setEnabled(somethingIsSelected);  
+            createCollectionAction.setEnabled(somethingIsSelected);              
             
             concordanceMenu.enableMenuItems(somethingIsSelected);
             columnsMenu.enableMenuItems(somethingIsSelected);
