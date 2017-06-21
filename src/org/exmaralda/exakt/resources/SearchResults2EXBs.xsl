@@ -217,9 +217,10 @@
         <!-- copy tier if it is a transcription tier -->
         <xsl:if test="@type = $keep-tier-types">
             <!-- copy tier and events that have start and end IDs of tli's that lie in range -->
-            <tier id="TIE{$tier-position}" speaker="{@speaker}" category="{@category}" type="{@type}" display-name="{@display-name}">
+            <xsl:copy>
+                <xsl:copy-of select="@*"/>
                 <xsl:copy-of select="event[(@start = $tli-IDs) and (@end = $tli-IDs)]"/>
-            </tier>
+            </xsl:copy>
         </xsl:if>
 
         <!--<!-\- for the transcription tier of the matched speaker, return annotation and template tiers -\->
@@ -231,7 +232,7 @@
             <!-- create tier for annotation mark if provided in parameter $ANNOTATION_TEXT-->
             <xsl:if test="$annotation-text">
                 <xsl:variable name="annotation-tier-category" select="lower-case(replace(replace($annotation-text, '#', ''), '^\s+|\s+$', ''))" as="xs:string"/>
-                <tier id="TIE{$tier-position}00" speaker="{$match-speaker-id}" category="{$annotation-tier-category}" type="a" display-name="{concat($tier-speaker-name, ' ', '[', $annotation-tier-category, ']')}">
+                <tier id="{@id}00" speaker="{$match-speaker-id}" category="{$annotation-tier-category}" type="a" display-name="{concat($tier-speaker-name, ' ', '[', $annotation-tier-category, ']')}">
                     <event start="{substring-before($new-annotation-start-end, '-')}" end="{substring-after($new-annotation-start-end, '-')}">
                         <xsl:value-of select="replace($annotation-text, '#', xs:string($anno-counter))"/>
                     </event>
@@ -241,7 +242,7 @@
 
             <!-- copy tiers from template -->
             <xsl:for-each select="$tier-template//tier">
-                <tier id="TIE{$tier-position}0{position()}" speaker="{$match-speaker-id}" type="{@type}" display-name="{$tier-speaker-name} [{@category}]"/>
+                <tier id="{@id}0{position()}" speaker="{$match-speaker-id}" type="{@type}" display-name="{$tier-speaker-name} [{@category}]"/>
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
