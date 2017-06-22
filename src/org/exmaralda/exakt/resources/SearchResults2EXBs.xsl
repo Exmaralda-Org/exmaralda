@@ -7,6 +7,14 @@
     exclude-result-prefixes="#all"
     version="2.0">
 
+    <!--
+        Author:      Daniel Jettka
+        Created:     03.06.2017, 14:45
+        Description: This stylesheet can be applied to the XML resulting from an EXAKT search.
+                     It transforms the search results into a collection of new EXBs by using parameters 
+                     (e.g. for the range of left and right context).
+    -->
+    
     <!-- **** START: Parameters **** -->
 
     <!-- path to coma file -->
