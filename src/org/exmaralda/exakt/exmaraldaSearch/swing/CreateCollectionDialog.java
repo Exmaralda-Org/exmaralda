@@ -15,10 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.NumberFormatter;
 
-/**
- *
- * @author KJ
+/*
+ * Created on 03. Juni 2017, 14:45
+ * This class is used to build a dialog that provides fields for setting parameters that are used for transforming
+ * an EXAKT search result (XML format) to a collection of EXBs based on the originals.
  */
+
+/**
+ * @author Daniel Jettka
+ */
+
 public class CreateCollectionDialog extends javax.swing.JDialog {
 
     private JButton selectOutputDirectoryButton,
