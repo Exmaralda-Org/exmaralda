@@ -14,7 +14,10 @@ import javax.swing.*;
 import org.jdom.*;
 import java.util.prefs.Preferences;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.html.HTMLDocument;
+import javax.xml.transform.TransformerConfigurationException;
 import org.exmaralda.exakt.search.*;
 import org.exmaralda.exakt.search.swing.*;
 import org.exmaralda.exakt.exmaraldaSearch.*;
@@ -1016,9 +1019,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                      xpath = "/*";
                      try {
                         parameters = new XSLSearchParameters(xslFile);
-                     } catch (JDOMException ex){
-                        javax.swing.JOptionPane.showMessageDialog(this, "Error in stylesheet: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;                         
+                     }
+                     catch (TransformerConfigurationException ex) {
+                        Logger.getLogger(COMAKWICSearchPanel.class.getName()).log(Level.SEVERE, null, ex);
                      }
                      break;
         }
