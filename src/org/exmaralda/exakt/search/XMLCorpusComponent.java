@@ -151,15 +151,11 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
                 StreamSource resultSource = new StreamSource(new StringReader(result));
                 StringWriter resultWriter = new StringWriter();
                 xslsp.transform(corpusComponentSource, new StreamResult(resultWriter));
-                result = resultWriter.toString();                  
+                result = resultWriter.toString();
+                InputStream resultInputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
                 SAXBuilder sb=new SAXBuilder();
-                Document thisResultDocument = sb.build(result);
+                Document thisResultDocument = sb.build(resultInputStream);
                 
-                try(  PrintWriter pw = new PrintWriter( "log.xml" )  ){
-                    pw.println( "Result\n" + result );
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(XMLCorpusComponent.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 
                 // NEW 27-02-2017
                 thisResultDocument.getRootElement().getChild("base-directory").setAttribute("url", url);
