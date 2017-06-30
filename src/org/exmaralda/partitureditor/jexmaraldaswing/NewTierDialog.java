@@ -12,6 +12,9 @@ import org.exmaralda.partitureditor.jexmaralda.Speakertable;
 import org.exmaralda.partitureditor.jexmaralda.TierDescriptions;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.JTextComponent;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 
 /**
@@ -21,10 +24,12 @@ import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
  */
 public class NewTierDialog extends JEscapeDialog {
 
-    private static String[] TYPES = {"T(ranscription)", "D(escription)", "A(nnotation)", "L(ink)", "U(ser) D(efined)"};
+    private static final String[] TYPES = {"T(ranscription)", "D(escription)", "A(nnotation)", "L(ink)", "U(ser) D(efined)"};
     private String[] speakers;
-    private javax.swing.DefaultComboBoxModel speakerComboBoxModel;
-    private String[] tiers;
+    private final javax.swing.DefaultComboBoxModel speakerComboBoxModel;
+    private final javax.swing.DefaultComboBoxModel categoriesComboBoxModel;
+    
+    private final String[] tiers;
     private BasicTranscription transcription;
     private Speakertable speakertable;
     private Tier newTier;
@@ -32,7 +37,10 @@ public class NewTierDialog extends JEscapeDialog {
     private java.awt.Frame parent;
     private String[] speakerIDs;
     
-    /** Creates new form NewTierDialog */
+    /** Creates new form NewTierDialog
+     * @param p
+     * @param modal
+     * @param t */
     public NewTierDialog(java.awt.Frame p, boolean modal, BasicTranscription t) {
         super (p, modal);
         parent = p;
@@ -41,11 +49,12 @@ public class NewTierDialog extends JEscapeDialog {
         speakertable = transcription.getHead().getSpeakertable().makeCopy();
         speakerIDs = speakertable.getAllSpeakerIDs();
         Vector speakersVector = new Vector();
-        for (int pos=0; pos<speakerIDs.length; pos++){
-            try{
-                String listEntry = speakerIDs[pos] + " [" + speakertable.getSpeakerWithID(speakerIDs[pos]).getAbbreviation() + "]";
+        for (String speakerID : speakerIDs) {
+            try {
+                String listEntry = speakerID + " [" + speakertable.getSpeakerWithID(speakerID).getAbbreviation() + "]";
                 speakersVector.addElement(listEntry);
-            } catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je){};
+            } catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je){
+            }
         }
         speakersVector.addElement("[no speaker]");
         speakers = StringUtilities.stringVectorToArray(speakersVector);
@@ -54,15 +63,28 @@ public class NewTierDialog extends JEscapeDialog {
         String[] tierIDs = transcription.getBody().getAllTierIDs();
         TierDescriptions tierDescriptions = new TierDescriptions(transcription);                
         Vector tiersVector = new Vector();
-        for (int pos=0; pos<tierIDs.length; pos++){
-            String listEntry = tierIDs[pos] + " (" + tierDescriptions.getTierDescriptionForTierID(tierIDs[pos]) + ")";
+        HashSet<String> categories = new HashSet<String>();
+        categories.add("v");
+        for (String tierID : tierIDs) {
+            String listEntry = tierID + " (" + tierDescriptions.getTierDescriptionForTierID(tierID) + ")";
             tiersVector.addElement(listEntry);
+            try {
+                categories.add(transcription.getBody().getTierWithID(tierID).getCategory());
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(NewTierDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         tiers = StringUtilities.stringVectorToArray(tiersVector);
 
+        // new 30-06-2017, issue #109
+        categoriesComboBoxModel = new javax.swing.DefaultComboBoxModel(categories.toArray());
+        categoriesComboBoxModel.insertElementAt("", 0);
+        
         
         initComponents ();
         this.getRootPane().setDefaultButton(okButton);        
+        categoryTextField.setVisible(false);
+        categoryComboBox.setSelectedItem("v");        
         pack ();
         
         Internationalizer.internationalizeDialogToolTips(this);
@@ -107,6 +129,7 @@ public class NewTierDialog extends JEscapeDialog {
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         categoryTextField = new javax.swing.JTextField();
+        categoryComboBox = new javax.swing.JComboBox(categoriesComboBoxModel);
         jPanel6 = new javax.swing.JPanel();
         copyTierCheckBox = new javax.swing.JCheckBox();
         copyTierComboBox = new javax.swing.JComboBox(tiers);
@@ -217,6 +240,18 @@ public class NewTierDialog extends JEscapeDialog {
         categoryTextField.setPreferredSize(new java.awt.Dimension(100, 27));
         jPanel5.add(categoryTextField);
 
+        categoryComboBox.setEditable(true);
+        categoryComboBox.setToolTipText("Enter category or choose from existing");
+        categoryComboBox.setMaximumSize(new java.awt.Dimension(123, 27));
+        categoryComboBox.setMinimumSize(new java.awt.Dimension(123, 27));
+        categoryComboBox.setPreferredSize(new java.awt.Dimension(123, 27));
+        categoryComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                categoryComboBoxFocusGained(evt);
+            }
+        });
+        jPanel5.add(categoryComboBox);
+
         propertiesPanel.add(jPanel5);
 
         jPanel6.setAlignmentX(0.0F);
@@ -257,15 +292,15 @@ public class NewTierDialog extends JEscapeDialog {
             speakertableChanged=true;
             speakerIDs = speakertable.getAllSpeakerIDs();
             Vector speakersVector = new Vector();
-            for (int pos=0; pos<speakerIDs.length; pos++){
-                try{
-                    String listEntry = new String(speakerIDs[pos] + " [" + speakertable.getSpeakerWithID(speakerIDs[pos]).getAbbreviation() + "]");
-                    speakersVector.addElement(listEntry);
-                } catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je){
-                    je.printStackTrace();
-                };
-            }
-            speakersVector.addElement(new String("[no speaker]"));
+            for (String speakerID : speakerIDs) {
+               try {
+                   String listEntry = speakerID + " [" + speakertable.getSpeakerWithID(speakerID).getAbbreviation() + "]";
+                   speakersVector.addElement(listEntry);
+               }catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je){
+                   je.printStackTrace();
+               }
+           }
+            speakersVector.addElement("[no speaker]");
             speakers = StringUtilities.stringVectorToArray(speakersVector);
             speakerComboBoxModel.removeAllElements();
             for (int pos=0; pos<speakers.length; pos++){
@@ -325,7 +360,8 @@ public class NewTierDialog extends JEscapeDialog {
     }
     newTier.setID(id);
     newTier.setType(type);
-    String category = categoryTextField.getText();
+    //String category = categoryTextField.getText();
+    String category = (String) categoryComboBox.getSelectedItem();
     newTier.setCategory(category);
     setVisible (false);
     dispose ();               
@@ -346,6 +382,14 @@ public class NewTierDialog extends JEscapeDialog {
         checkWarnings();
     }//GEN-LAST:event_typeComboBoxActionPerformed
 
+    private void categoryComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_categoryComboBoxFocusGained
+        Object source = evt.getSource();
+           if (source instanceof JTextComponent) {
+               JTextComponent comp = (JTextComponent) source;
+               comp.selectAll();
+           } 
+    }//GEN-LAST:event_categoryComboBoxFocusGained
+
     /**
     * @param args the command line arguments
     */
@@ -357,6 +401,7 @@ public class NewTierDialog extends JEscapeDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JComboBox<String> categoryComboBox;
     private javax.swing.JTextField categoryTextField;
     private javax.swing.JCheckBox copyTextCheckBox;
     private javax.swing.JCheckBox copyTierCheckBox;
