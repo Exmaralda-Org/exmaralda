@@ -24,6 +24,7 @@ public class SegmentAndSaveTranscriptionAction extends AbstractFSMSegmentationAc
         super("Export segmented transcription...", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("exportSegmentedTranscriptionAction!");
         table.commitEdit(true);

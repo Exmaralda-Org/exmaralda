@@ -52,6 +52,13 @@ public class UndoInformation {
     public UndoInformation(PartitureTableWithActions partitur, String text) {
         description = text;
         visibleRectangle = partitur.getVisibleRect();
+        
+
+        // issue #110: should keep track of hidden tiers
+        
+        // end todo
+        
+        
         if (partitur.isEditing){
             editingRow = partitur.selectionStartRow;
             editingColumn = partitur.selectionStartCol;

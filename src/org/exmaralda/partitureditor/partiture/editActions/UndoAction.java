@@ -19,12 +19,15 @@ import org.exmaralda.common.helpers.Internationalizer;
  */
 public class UndoAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of CutAction */
+    /** Creates a new instance of CutAction
+     * @param t
+     * @param icon */
     public UndoAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super(Internationalizer.getString("Undo"), icon, t);
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("undoAction!");
         undo();
