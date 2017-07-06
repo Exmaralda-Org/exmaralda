@@ -6,6 +6,7 @@
 package org.exmaralda.partitureditor.partiture.undo;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
@@ -107,7 +108,19 @@ public class UndoHandler {
                 @Override
                 public void run() {
                     // scroll back to where you where before
-                    partitur.scrollRectToVisible(info.visibleRectangle);                    
+                    partitur.scrollRectToVisible(info.visibleRectangle);  
+                    
+                    // issue #110: hide the tiers that were hidden before
+                    int[] visibleRows = info.visibleRows;
+                    HashSet<Integer> vr = new HashSet<Integer>();
+                    for (int i : visibleRows){
+                        vr.add(i);
+                    }
+                    for (int i=0;i<partitur.getNumRows(); i++){
+                        if (!(vr.contains(i))){
+                            partitur.setRowHidden(i, true);
+                        }
+                    }
                 }                
             });
             undoInformation.removeElementAt(0);

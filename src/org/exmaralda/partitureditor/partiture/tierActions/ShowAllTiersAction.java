@@ -7,12 +7,6 @@
 package org.exmaralda.partitureditor.partiture.tierActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import javax.swing.Action;
-import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 
 /**
  *
@@ -25,6 +19,7 @@ public class ShowAllTiersAction extends org.exmaralda.partitureditor.partiture.A
         super("Show all tiers", icon, t); 
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("showAllTiersAction!");
         table.commitEdit(true);
