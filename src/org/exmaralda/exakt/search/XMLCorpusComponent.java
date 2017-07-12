@@ -15,6 +15,16 @@ import org.jdom.*;
 import org.jdom.transform.*;
 import org.jdom.xpath.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import org.jdom.input.SAXBuilder;
+import org.xml.sax.InputSource;
 
 /**
  *
@@ -130,9 +140,23 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
             }        
             
         } else if (searchParameters instanceof XSLSearchParameters){
-            XSLTransformer xslsp = ((XSLSearchParameters)(searchParameters)).getXSLTransformer();
+            Transformer xslsp = ((XSLSearchParameters)(searchParameters)).getXSLTransformer();
             try {
-                Document thisResultDocument = xslsp.transform(corpusComponentDocument);
+                //convert Document into Source
+                String corpusComponentString = org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(corpusComponentDocument);
+                StreamSource corpusComponentSource = new StreamSource(new StringReader(corpusComponentString));
+                
+                //transform and fetch result as jdom Document
+                String result = "";
+                StreamSource resultSource = new StreamSource(new StringReader(result));
+                StringWriter resultWriter = new StringWriter();
+                xslsp.transform(corpusComponentSource, new StreamResult(resultWriter));
+                result = resultWriter.toString();
+                InputStream resultInputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
+                SAXBuilder sb=new SAXBuilder();
+                Document thisResultDocument = sb.build(resultInputStream);
+                
+                
                 // NEW 27-02-2017
                 thisResultDocument.getRootElement().getChild("base-directory").setAttribute("url", url);
                 searchResult.read(thisResultDocument);
@@ -145,6 +169,8 @@ public class XMLCorpusComponent implements CorpusComponentInterface {
                 ex.printStackTrace();
             } catch (JDOMException ex) {
                 ex.printStackTrace();
+            } catch (TransformerException ex) {
+                Logger.getLogger(XMLCorpusComponent.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return searchResult;
