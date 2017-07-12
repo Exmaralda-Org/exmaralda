@@ -26,7 +26,7 @@ public class XSLSearchParameters implements SearchParametersInterface {
     
     /** Creates a new instance of XSLSearchParameters
      * @param file
-     * @throws org.jdom.transform.XSLTransformException */
+     * @throws javax.xml.transform.TransformerConfigurationException */
     public XSLSearchParameters(File file) throws TransformerConfigurationException {
         StreamSource xsltSource = new StreamSource(file);
         TransformerFactory tf = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null);
