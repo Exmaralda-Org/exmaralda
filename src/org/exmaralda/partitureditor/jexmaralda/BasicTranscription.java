@@ -47,7 +47,8 @@ public class BasicTranscription extends AbstractTranscription {
         body = new BasicBody();
     }
 
-    /** reads in a new BasicTranscription from the specified file */
+    /** reads in a new BasicTranscription from the specified file
+     * @param inputFileName */
     public BasicTranscription (String inputFileName) throws SAXException, JexmaraldaException{
         this(inputFileName, true);
     }
@@ -67,7 +68,7 @@ public class BasicTranscription extends AbstractTranscription {
         //if (!new File(getHead().getMetaInformation().getReferencedFile()).isAbsolute()){
             // changed 13-08-2010
             // ".." in relative paths allowed now
-            getHead().getMetaInformation().resolveReferencedFile(inputFileName, MetaInformation.NEW_METHOD);
+        getHead().getMetaInformation().resolveReferencedFile(inputFileName, MetaInformation.NEW_METHOD);
         //}
         resolveLinks(inputFileName);  
         

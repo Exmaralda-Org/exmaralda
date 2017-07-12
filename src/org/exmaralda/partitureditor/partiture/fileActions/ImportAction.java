@@ -15,9 +15,6 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.xpath.XPathExpressionException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
 import org.jdom.JDOMException;
@@ -100,6 +97,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             String result = sf.applyInternalStylesheetToExternalXMLFile(xslString, outFile.getAbsolutePath());
             importedTranscription = new BasicTranscription();
             importedTranscription.BasicTranscriptionFromString(result);
+            // 06-07-2017: issue #111 (Helau!)
+            importedTranscription.getHead().getMetaInformation().resolveReferencedFile(filename, MetaInformation.NEW_METHOD);            
         }  else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
             CHATConverter tc = new CHATConverter(new File(filename));
             importedTranscription = tc.convert();

@@ -104,7 +104,9 @@ public class UndoHandler {
                 partitur.setNewSelection(info.selectionStartRow, info.selectionEndRow, info.selectionStartCol, info.selectionEndCol);
             }
             SwingUtilities.invokeLater(new Runnable(){
+                @Override
                 public void run() {
+                    // scroll back to where you where before
                     partitur.scrollRectToVisible(info.visibleRectangle);                    
                 }                
             });

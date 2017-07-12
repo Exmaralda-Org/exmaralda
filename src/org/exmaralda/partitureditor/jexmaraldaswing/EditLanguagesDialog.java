@@ -408,33 +408,58 @@ public class EditLanguagesDialog extends JEscapeDialog {
   }//GEN-LAST:event_removeLuButtonActionPerformed
 
   private void addL2ButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addL2ButtonActionPerformed
-// Add your handling code here:
-    if (allLanguagesList.getSelectedIndex()!=-1){
+    // changed 30-06-2017 - issue #106
+    if (allLanguagesList.getSelectedIndices().length>0){
+        for (int i : allLanguagesList.getSelectedIndices()){
+            String newLanguage = ((String)allLanguagesList.getModel().getElementAt(i)).substring(0,3);
+            if (l2.containsLanguage(newLanguage)) {continue;}
+            l2.addLanguage(newLanguage);
+            l2ListModel.addElement(newLanguage);            
+        }
+    }
+    /*if (allLanguagesList.getSelectedIndex()!=-1){
         String newLanguage = ((String)allLanguagesList.getSelectedValue()).substring(0,3);
         if (l2.containsLanguage(newLanguage)) {return;}
         l2.addLanguage(newLanguage);
         l2ListModel.addElement(newLanguage);
-    }    
+    } */   
   }//GEN-LAST:event_addL2ButtonActionPerformed
 
   private void addL1ButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addL1ButtonActionPerformed
-// Add your handling code here:
-    if (allLanguagesList.getSelectedIndex()!=-1){
+    // changed 30-06-2017 - issue #106
+    if (allLanguagesList.getSelectedIndices().length>0){
+        for (int i : allLanguagesList.getSelectedIndices()){
+            String newLanguage = ((String)allLanguagesList.getModel().getElementAt(i)).substring(0,3);
+            if (l1.containsLanguage(newLanguage)) {continue;}
+            l1.addLanguage(newLanguage);
+            l1ListModel.addElement(newLanguage);            
+        }
+    }
+    /*if (allLanguagesList.getSelectedIndex()!=-1){
         String newLanguage = ((String)allLanguagesList.getSelectedValue()).substring(0,3);
         if (l1.containsLanguage(newLanguage)) {return;}
         l1.addLanguage(newLanguage);
         l1ListModel.addElement(newLanguage);
-    }    
+    }    */
   }//GEN-LAST:event_addL1ButtonActionPerformed
 
   private void addLuButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLuButtonActionPerformed
-// Add your handling code here:
-    if (allLanguagesList.getSelectedIndex()!=-1){
+    // changed 30-06-2017 - issue #106
+    if (allLanguagesList.getSelectedIndices().length>0){
+        for (int i : allLanguagesList.getSelectedIndices()){
+            String newLanguage = ((String)allLanguagesList.getModel().getElementAt(i)).substring(0,3);
+            if (lUsed.containsLanguage(newLanguage)) {continue;}
+            lUsed.addLanguage(newLanguage);
+            luListModel.addElement(newLanguage);            
+        }
+    }
+    /*if (allLanguagesList.getSelectedIndex()!=-1){
         String newLanguage = ((String)allLanguagesList.getSelectedValue()).substring(0,3);
         if (lUsed.containsLanguage(newLanguage)) {return;}
         lUsed.addLanguage(newLanguage);
         luListModel.addElement(newLanguage);
-    }
+    }*/
+
   }//GEN-LAST:event_addLuButtonActionPerformed
 
   private void l2ListValueChanged (javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_l2ListValueChanged
