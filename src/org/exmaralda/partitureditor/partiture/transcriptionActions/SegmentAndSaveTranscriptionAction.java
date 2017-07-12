@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
+import java.io.File;
 import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.deprecated.segmentationActions.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.SaveSegmentedTranscriptionAsDialog;
@@ -19,7 +20,8 @@ import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
  */
 public class SegmentAndSaveTranscriptionAction extends AbstractFSMSegmentationAction {
     
-    /** Creates a new instance of ExportSegmentedTranscriptionAction */
+    /** Creates a new instance of ExportSegmentedTranscriptionAction
+     * @param t */
     public SegmentAndSaveTranscriptionAction(PartitureTableWithActions t) {
         super("Export segmented transcription...", t);
     }
@@ -39,6 +41,12 @@ public class SegmentAndSaveTranscriptionAction extends AbstractFSMSegmentationAc
             st.setEXBSource(table.filename);
             org.exmaralda.partitureditor.jexmaralda.segment.SegmentCountForMetaInformation.count(st);
             SaveSegmentedTranscriptionAsDialog dialog = new SaveSegmentedTranscriptionAsDialog(table.homeDirectory, st);
+            if (!(table.getFilename().equals("untitled.exb"))){
+                File exbFile = new File(table.getFilename());
+                File exsFile = new File(exbFile.getParentFile(), exbFile.getName().replaceAll("\\.exb", ".exs"));
+                dialog.setCurrentDirectory(exsFile);
+                dialog.setFilename(exsFile.getName());                
+            }
             dialog.saveTranscriptionAs(table);
         } catch (Exception ex) {
             int optionChosen = JOptionPane
