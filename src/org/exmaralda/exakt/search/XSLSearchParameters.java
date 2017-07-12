@@ -9,9 +9,11 @@
 
 package org.exmaralda.exakt.search;
 
-import org.jdom.*;
-import org.jdom.transform.*;
 import java.io.File;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamSource;
 
 /**
  *
@@ -19,14 +21,16 @@ import java.io.File;
  */
 public class XSLSearchParameters implements SearchParametersInterface {
     
-    XSLTransformer transformer;
+    Transformer transformer;
     String filename;
     
     /** Creates a new instance of XSLSearchParameters
      * @param file
-     * @throws org.jdom.transform.XSLTransformException */
-    public XSLSearchParameters(File file) throws XSLTransformException {
-        transformer = new XSLTransformer(file);
+     * @throws javax.xml.transform.TransformerConfigurationException */
+    public XSLSearchParameters(File file) throws TransformerConfigurationException {
+        StreamSource xsltSource = new StreamSource(file);
+        TransformerFactory tf = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null);
+        transformer = tf.newTransformer(xsltSource);        
     }
 
     @Override
@@ -54,7 +58,7 @@ public class XSLSearchParameters implements SearchParametersInterface {
         return null;
     }
     
-    public XSLTransformer getXSLTransformer(){
+    public Transformer getXSLTransformer(){
         return transformer;
     }
 
