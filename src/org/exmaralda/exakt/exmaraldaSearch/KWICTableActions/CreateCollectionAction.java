@@ -89,7 +89,8 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
                 t.setParameter("LEFT_CONTEXT", dialog.getLeftContext().intValue());
                 t.setParameter("RIGHT_CONTEXT", dialog.getRightContext().intValue());
                 t.setParameter("RESET_TIMES", dialog.getResetTime().toString());
-                t.setParameter("ANNOTATION_TEXT", dialog.getAnnotationText());
+                t.setParameter("ANNOTATION_TEXT", dialog.getAnnotationText());                
+                t.setParameter("OPERATING_SYSTEM", System.getProperty("os.name"));
 
                 //transform and fetch result as string
                 String result = "";

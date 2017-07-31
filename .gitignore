@@ -16,3 +16,6 @@ hs_err_pid*
 /EXMARaLDA
 /EXMARaLDA_OCT_2015
 /templates
+/nbproject/private/
+/build/
+/dist/

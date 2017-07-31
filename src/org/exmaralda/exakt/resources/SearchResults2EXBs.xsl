@@ -35,6 +35,9 @@
 
     <!-- if present, then this parameter defines the value of annotations applied to matches -->
     <xsl:param name="ANNOTATION_TEXT" required="yes" as="xs:string"/>
+    
+    <!-- name of the operating system (determines format of URI for writing document with <xsl:result-document>) -->
+    <xsl:param name="OPERATING_SYSTEM" select="'windows'" required="no" as="xs:string"/>
 
     <!-- **** END:   Parameters **** -->
 
@@ -50,6 +53,8 @@
 
     <!-- **** START: Global variables **** -->
     <xsl:variable name="corpus-base-directory" select="//base-directory/@url" as="xs:string"/>
+    <xsl:variable name="operating-system" select="('win'[starts-with(lower-case($OPERATING_SYSTEM), 'win')], 'mac'[starts-with(lower-case($OPERATING_SYSTEM), 'mac')], 'unix'[matches(lower-case($OPERATING_SYSTEM), '^(nix|nux|aix)')], error((), concat('Your operating system (', $OPERATING_SYSTEM, ') is not supported.')))[1]" as="xs:string"/>
+    <xsl:variable name="file-protocol" select="('file:/'[$operating-system=('win', 'unix')], '')[1]" as="xs:string"/>
     <xsl:variable name="coma-path" select="replace($COMA_PATH, '\\', '/')" as="xs:string"/>
     <xsl:variable name="coma-name" select="tokenize($coma-path, '/')[last()]" as="xs:string"/>
     <xsl:variable name="coma" select="document($coma-path)"/>
@@ -139,7 +144,7 @@
                 <xsl:variable name="matching-end" select="$matching-events[last()]/@end" as="xs:string"/>
 
                 <!-- for DEBUGGING purposes -->
-                <!--<xsl:result-document href="{concat('file:/', $output-path, '/', substring-before($coma-name, '.coma'), '-search-result-', $result-position, '.xml')}">
+                <!--<xsl:result-document href="{concat($file-protocol, $output-path, '/', substring-before($coma-name, '.coma'), '-search-result-', $result-position, '.xml')}">
                     <timleine pos="{$tier-number}">
                         <xsl:copy-of select="$search-result"/>
                         <xsl:copy-of select="$matching-events"></xsl:copy-of>
@@ -147,8 +152,8 @@
                 </xsl:result-document>-->
 
                 <!-- write the new transcript -->
-                <xsl:result-document href="{concat('file:/', $output-path, '/', substring-before($coma-name, '.coma'), '-collection-', $result-position, '.exb')}">
-                    <xsl:comment select="concat('created automatically by ', tokenize($xsl-path, '/')[last()], ' on ', current-dateTime())"/>
+                <xsl:result-document href="{concat($file-protocol, $output-path, '/', substring-before($coma-name, '.coma'), '-collection-', $result-position, '.exb')}">
+                    <xsl:comment select="concat('created automatically by ', tokenize($xsl-path, '/')[last()], ' on ', $OPERATING_SYSTEM, ' at ', current-dateTime())"/>
                     <xsl:for-each select="$exb">
                         <xsl:copy>
                             <xsl:copy-of select="@*"/>
