@@ -34,10 +34,12 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
     private JCheckBox resetTimeCheckbox;
     private JFormattedTextField leftContextFormattedTextField,
             rightContextFormattedTextField,
-            annotationTextFormattedTextField;
+            annotationTextFormattedTextField,
+            outputNameFormattedTextField;
     private JLabel leftContextLabel,
             rightContextLabel,
             annotationTextLabel,
+            outputNameLabel,
             resetTimeLabel,
             selectOutputDirectoryLabel,
             outputDirectoryLabel,
@@ -48,7 +50,7 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
     private Boolean resetTime;
     private Boolean dialogApproved = false;
 
-    private String outputDirectory, templateFile, annotationText;
+    private String outputDirectory, templateFile, annotationText, outputName;
 
 
     /**
@@ -72,6 +74,7 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
         rightContextLabel = new JLabel("Right context (in sec.)");
         annotationTextLabel = new JLabel("(Optional) Annotate matches with (use # for numbering)");
         resetTimeLabel = new JLabel("Reset start time to 0.0");
+        outputNameLabel = new JLabel("(Optional) Name of collection (used for result files)");
         selectOutputDirectoryLabel = new JLabel("Output directory");
         selectTemplateFileLabel = new JLabel("(Optional) Template file");
         leftContextFormattedTextField = new JFormattedTextField(formatter);
@@ -81,6 +84,8 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
         annotationTextFormattedTextField = new JFormattedTextField();
         annotationTextFormattedTextField.setText("");
         resetTimeCheckbox = new JCheckBox();
+        outputNameFormattedTextField = new JFormattedTextField();
+        outputNameFormattedTextField.setText("");
         selectOutputDirectoryButton = new JButton("Select ...");
         selectTemplateFileButton = new JButton("Select ...");
         outputDirectoryLabel = new JLabel("");
@@ -161,6 +166,7 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
                         .addComponent(rightContextLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(annotationTextLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(resetTimeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(outputNameLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(selectOutputDirectoryLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(selectTemplateFileLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 )
@@ -178,6 +184,7 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
                         .addComponent(outputDirectoryLabel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addComponent(templateFileLabel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addComponent(annotationTextFormattedTextField, GroupLayout.Alignment.LEADING)
+                        .addComponent(outputNameFormattedTextField, GroupLayout.Alignment.LEADING)
                         .addComponent(rightContextFormattedTextField, GroupLayout.Alignment.LEADING)
                         .addComponent(leftContextFormattedTextField, GroupLayout.Alignment.LEADING)
                     )
@@ -206,6 +213,11 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                     .addComponent(resetTimeLabel)
                     .addComponent(resetTimeCheckbox)
+                )
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                    .addComponent(outputNameLabel)
+                    .addComponent(outputNameFormattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 )
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -299,6 +311,11 @@ public class CreateCollectionDialog extends javax.swing.JDialog {
     public String getOutputDirectory() {
         outputDirectory = outputDirectoryLabel.getText();
         return outputDirectory;
+    }
+
+    public String getOutputName() {
+        outputName = String.valueOf(outputNameFormattedTextField.getText());
+        return outputName;
     }
 
     public String getTemplateFile() {

@@ -85,6 +85,7 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
                 Transformer t = tf.newTransformer(xsltSource);
                 t.setParameter("COMA_PATH", ComaPath);
                 t.setParameter("OUTPUT_DIRECTORY", dialog.getOutputDirectory());
+                t.setParameter("OUTPUT_NAME", dialog.getOutputName());
                 t.setParameter("TEMPLATE_FILE", dialog.getTemplateFile());
                 t.setParameter("LEFT_CONTEXT", dialog.getLeftContext().intValue());
                 t.setParameter("RIGHT_CONTEXT", dialog.getRightContext().intValue());

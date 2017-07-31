@@ -30,6 +30,9 @@
     <!-- result directory - new EXBs written here -->
     <xsl:param name="OUTPUT_DIRECTORY" required="yes" as="xs:string"/>
 
+    <!-- if present, then this parameter defines the name pattern of created EXB files -->
+    <xsl:param name="OUTPUT_NAME" select="'collection'" required="no" as="xs:string"/>
+    
     <!-- parameter sets start time of first event in result EXB to 0.0 -->
     <xsl:param name="RESET_TIMES" required="yes" as="xs:string"/>
 
@@ -60,6 +63,7 @@
     <xsl:variable name="coma" select="document($coma-path)"/>
     <xsl:variable name="xsl-path" select="replace(static-base-uri(), '\\', '/')" as="xs:string"/>
     <xsl:variable name="output-path" select="replace($OUTPUT_DIRECTORY, '\\', '/')" as="xs:string"/>
+    <xsl:variable name="output-name" select="encode-for-uri(($OUTPUT_NAME[not(matches(., '^\s*$'))], 'collection')[1])" as="xs:string"/>
     <xsl:variable name="left-seconds" select="$LEFT_CONTEXT" as="xs:integer"/>
     <xsl:variable name="right-seconds" select="$RIGHT_CONTEXT" as="xs:integer"/>
     <xsl:variable name="annotation-text" select="$ANNOTATION_TEXT[not(.='')]" as="xs:string?"/>
@@ -152,7 +156,7 @@
                 </xsl:result-document>-->
 
                 <!-- write the new transcript -->
-                <xsl:result-document href="{concat($file-protocol, $output-path, '/', substring-before($coma-name, '.coma'), '-collection-', $result-position, '.exb')}">
+                <xsl:result-document href="{concat($file-protocol, $output-path, '/', substring-before($coma-name, '.coma'), '-', $output-name,'-', $result-position, '.exb')}">
                     <xsl:comment select="concat('created automatically by ', tokenize($xsl-path, '/')[last()], ' on ', $OPERATING_SYSTEM, ' at ', current-dateTime())"/>
                     <xsl:for-each select="$exb">
                         <xsl:copy>
