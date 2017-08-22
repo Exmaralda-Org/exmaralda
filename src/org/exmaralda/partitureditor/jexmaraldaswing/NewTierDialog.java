@@ -401,7 +401,7 @@ public class NewTierDialog extends JEscapeDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox<String> categoryComboBox;
+    private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JTextField categoryTextField;
     private javax.swing.JCheckBox copyTextCheckBox;
     private javax.swing.JCheckBox copyTierCheckBox;

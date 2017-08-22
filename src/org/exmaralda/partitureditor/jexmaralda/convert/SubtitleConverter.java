@@ -4,14 +4,22 @@
  */
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.data.Event;
 import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.data.Eventlist;
@@ -19,6 +27,8 @@ import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -139,6 +149,54 @@ public class SubtitleConverter {
         }
         return sb.toString();
     }
+    
+    
+    static String PSEUDO_VTT_XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/VTTPseudoXML2FLK.xsl";
+    // 22-08-2017: quick hack for issue #119
+    // meant to work for VTT output of YouTube ASR
+    public static BasicTranscription readVTT(File file) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException{
+        // 00:00:00.000 --> 00:00:05.370 align:start position:19%
+        // in<c.colorCCCCCC><00:00:00.750><c> böblingen</c></c><c.colorE5E5E5><00:00:01.050><c> treten</c><00:00:01.770><c> zwei</c><00:00:02.100><c> listen</c><00:00:02.639><c> an</c><00:00:02.820><c> und</c></c>
+        String timeRegEx = "\\d{2}\\:\\d{2}\\:\\d{2}\\.\\d{3}";
+        FileInputStream fis = new FileInputStream(file);
+        InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+        BufferedReader br = new BufferedReader(isr);
+        String nextLine = "";
+        System.out.println("Started reading document");
+        boolean cueRead = false;
+        Element currentElement = null;
+        ArrayList<Element> allElements = new ArrayList<Element>();
+        while ((nextLine = br.readLine()) != null){
+            if (cueRead){
+                // second line
+                String modifiedLine = nextLine;
+                modifiedLine = modifiedLine.replaceAll("(" + timeRegEx + ")", "time time=\"$1\"/");
+                modifiedLine = modifiedLine.replaceAll("\\<c\\.color([A-Z0-9]{6})\\>", "<c color=\"$1\">");
+                modifiedLine = "<content>" + modifiedLine + "</content>";
+                System.out.println(modifiedLine);
+                Element contentElement = IOUtilities.readElementFromString(modifiedLine);
+                currentElement.addContent(contentElement);
+                allElements.add(currentElement);
+                cueRead = false;
+            }
+            if (nextLine.matches("^" + timeRegEx + " \\-\\-\\> " + timeRegEx + " .+")){
+                // first line
+                String time1String = nextLine.substring(0,12);
+                String time2String = nextLine.substring(17,29);
+                currentElement = new Element("cue");
+                currentElement.setAttribute("start", time1String);
+                currentElement.setAttribute("end", time2String);
+                cueRead = true;
+            }
+        }
+        
+        Document pseudoDoc = new Document(new Element("doc"));        
+        pseudoDoc.getRootElement().addContent(allElements);
+        StylesheetFactory ssf = new StylesheetFactory(true);
+        String flkString = ssf.applyInternalStylesheetToString(PSEUDO_VTT_XSL, IOUtilities.documentToString(pseudoDoc));
+        BasicTranscription result = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(IOUtilities.readDocumentFromString(flkString));
+        return result;
+    }
 
     public void writeVTT(File file) throws IOException{
         System.out.println("started writing document " + file.getAbsolutePath() + "...");
@@ -160,27 +218,21 @@ public class SubtitleConverter {
     }
     
     public static void main(String[] args){
+        File f = new File("F:\\Dropbox\\IDS\\AGD\\BETV\\BETV_E_00003_SE_01_T_01.vtt");
         try {
-            EventListTranscription t = EventListTranscriptionXMLReaderWriter.readXML(
-                    new File("C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK\\FOLK_E_00070_SE_01_T_07_DF_01.fln"));
-            SubtitleConverter c = new SubtitleConverter(t);
-            //c.writeSRT(new File("C:\\Users\\Schmidt\\Desktop\\out.srt"));
-            System.out.println(c.getVTT());
-        } catch (JDOMException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
+            BasicTranscription bt = SubtitleConverter.readVTT(f);
+            bt.writeXMLToFile("F:\\Dropbox\\IDS\\AGD\\BETV\\BETV_E_00003_SE_01_T_01.exb", "none");
         } catch (IOException ex) {
+            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JDOMException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JexmaraldaException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
