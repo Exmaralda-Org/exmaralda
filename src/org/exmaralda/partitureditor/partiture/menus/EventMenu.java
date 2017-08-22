@@ -21,7 +21,7 @@ public class EventMenu extends AbstractTableMenu {
     private final JMenuItem shiftLeftMenuItem;
     private final JMenuItem mergeMenuItem;
     private final JMenuItem splitMenuItem;
-    private JMenuItem doubleSplitMenuItem;
+    private final JMenuItem doubleSplitMenuItem;
     private final JMenuItem deleteEventMenuItem;
     private final JMenuItem extendRightMenuItem;
     private final JMenuItem extendLeftMenuItem;
@@ -30,6 +30,7 @@ public class EventMenu extends AbstractTableMenu {
     private final JMenuItem moveRightMenuItem;
     private final JMenuItem moveLeftMenuItem;
     private final JMenuItem findNextEventMenuItem;
+    private final JMenuItem splitLongEventMenuItem;
 
     /** Creates a new instance of EventMenu
      * @param t */
@@ -67,7 +68,10 @@ public class EventMenu extends AbstractTableMenu {
 
         doubleSplitMenuItem  = this.add(table.doubleSplitAction);
         doubleSplitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        splitMenuItem.setToolTipText("Make three events from the current event, splitting it at the start and end of the text selection");
+        doubleSplitMenuItem.setToolTipText("Make three events from the current event, splitting it at the start and end of the text selection");
+
+        splitLongEventMenuItem  = this.add(table.splitLongEventAction);
+        splitLongEventMenuItem.setToolTipText("Open a dialog for placing the cursor in a long event so you can split it");
 
         addSeparator();
 
