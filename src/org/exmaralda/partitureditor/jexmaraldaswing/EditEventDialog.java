@@ -9,8 +9,6 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.partitureditor.unicodeKeyboard.UnicodeKeyboardPanel;
 import org.exmaralda.partitureditor.jexmaralda.Event;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.unicodeKeyboard.*;
 
 /**
  *
@@ -23,7 +21,11 @@ public class EditEventDialog extends JEscapeDialog implements org.exmaralda.part
     private Event event;
     private UnicodeKeyboardPanel keyboardPanel;
     
-    /** Creates new form JDialog */
+    /** Creates new form JDialog
+     * @param parent
+     * @param modal
+     * @param e
+     * @param generalPurposeFont */
     public EditEventDialog(java.awt.Frame parent, boolean modal, Event e, String generalPurposeFont) {        
         super(parent, modal);
         event = e.makeCopy();
@@ -171,6 +173,7 @@ public class EditEventDialog extends JEscapeDialog implements org.exmaralda.part
 //        new EditEventDialog(new javax.swing.JFrame(), true, new Event()).show();
     }
 
+    @Override
     public void performUnicodeKeyboardAction(org.exmaralda.partitureditor.unicodeKeyboard.UnicodeKeyboardEvent event) {
         if (descriptionTextArea.getSelectionStart()>=0){
             descriptionTextArea.replaceSelection(event.getText());

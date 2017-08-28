@@ -827,7 +827,12 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         } catch (JexmaraldaException je){}            // should never get here
     }
     
-    /** opens a dialog for editing properties of the specified event */
+    /** opens a dialog for editing properties of the specified event
+     * @param row
+     * @param col
+     * @param parent
+     * @param generalPurposeFont
+     * @return  */
     public boolean editEvent(int row, int col, java.awt.Frame parent, String generalPurposeFont){
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();

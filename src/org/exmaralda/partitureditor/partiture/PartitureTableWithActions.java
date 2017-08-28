@@ -354,13 +354,15 @@ public class PartitureTableWithActions extends PartitureTable
     // ************************ GET & SET METHODS ***************************************** //
     // *********************************************************************************** //
     
-    /** sets the filename of the current transcription */
+    /** sets the filename of the current transcription
+     * @param f */
     public void setFilename(String f){
         filename = f;
         fireFilenameChanged();
     }
     
-    /** returns the filename of the current transcription */
+    /** returns the filename of the current transcription
+     * @return  */
     public String getFilename(){
         return filename;
     }
@@ -371,7 +373,8 @@ public class PartitureTableWithActions extends PartitureTable
     
 
     /** checks if the event is a popup trigger
-     *  if so, displays the table's popup menu */
+     *  if so, displays the table's popup menu
+     * @param event */
     @Override
     public void processMouseEvent(MouseEvent event) {        
        //super.processMouseEvent(event);
@@ -392,7 +395,8 @@ public class PartitureTableWithActions extends PartitureTable
     
     public boolean waitForSelection = false;
 
-    /** called before the user selection changes */
+    /** called before the user selection changes
+     * @param evt */
     @Override
     public void beforeSelect(final com.klg.jclass.table.JCSelectEvent evt) {
         waitForSelection = true;
@@ -410,7 +414,8 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
     
-    /** called when the user selection changes */
+    /** called when the user selection changes
+     * @param evt */
     @Override
     public void select(final com.klg.jclass.table.JCSelectEvent evt) {
         //System.out.println("select");
@@ -427,7 +432,8 @@ public class PartitureTableWithActions extends PartitureTable
         waitForSelection = false;
     }
     
-    /** called after the user selection changes */
+    /** called after the user selection changes
+     * @param evt */
     @Override
     public void afterSelect(final com.klg.jclass.table.JCSelectEvent evt) {
         //System.out.println("afterSelect");
@@ -439,7 +445,8 @@ public class PartitureTableWithActions extends PartitureTable
         selectionChanged();
     }
     
-    /** called before editing of an event starts */
+    /** called before editing of an event starts
+     * @param evt */
     @Override
     public void beforeEditCell(final com.klg.jclass.table.JCEditCellEvent evt) {
         //System.out.println("beforeEditCell");
@@ -638,6 +645,7 @@ public class PartitureTableWithActions extends PartitureTable
         splitAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
         doubleSplitAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !cellSpanIsGreaterThanOne && !locked);
         findNextEventAction.setEnabled(aSingleCellIsSelected || aSeriesOfCellsIsSelected);
+        splitLongEventAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
 
         
         // 24-06-2016 MuM-Multi new 
@@ -788,11 +796,13 @@ public class PartitureTableWithActions extends PartitureTable
     
     /** informs the listeners that the current media time of the transcription has changed 
      *  by calling their partitureTablePropertyChanged method with the
-     * appropriate parameter (PartitureTableEvent.MEDIA_TIME_CHANGED) */
+     * appropriate parameter (PartitureTableEvent.MEDIA_TIME_CHANGED)
+     * @param startTime
+     * @param endTime */
     protected void fireMediaTimeChanged(double startTime, double endTime) {
         Double[] times = new Double[2];
-        times[0] = new Double(startTime);
-        times[1] = new Double (endTime);
+        times[0] = startTime;
+        times[1] = endTime;
         PartitureTableEvent event = new PartitureTableEvent(this, PartitureTableEvent.MEDIA_TIME_CHANGED, times);
         fireEvent(event);
     }
@@ -982,6 +992,7 @@ public class PartitureTableWithActions extends PartitureTable
         moveLeftAction = new MoveLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveLeft.png")));
         editEventAction = new EditEventAction(this);
         findNextEventAction = new FindNextEventAction(this);
+        splitLongEventAction = new SplitLongEventAction(this);
 
         insertPauseAction = new org.exmaralda.partitureditor.partiture.eventActions.InsertPauseAction(this, "Insert pause", new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/QuarterRestSmall.png")));
 
@@ -1115,6 +1126,7 @@ public class PartitureTableWithActions extends PartitureTable
         doubleSplitAction.setEnabled(false);
         editEventAction.setEnabled(false);
         insertPauseAction.setEnabled(false);
+        splitLongEventAction.setEnabled(false);
         
         // 24-06-2016 MuM-Multi new 
         moveDownLeftAction.setEnabled(false);
@@ -1304,7 +1316,8 @@ public class PartitureTableWithActions extends PartitureTable
         setPlaybackMode(!playbackMode);
     }
 
-    /** checks if the user wants to save changes to the transcription */
+    /** checks if the user wants to save changes to the transcription
+     * @return  */
     public boolean checkSave(){
         String text = "The transcription " + getFilename() + " has been changed. \n Do you want to save changes?";
         int returnval = javax.swing.JOptionPane.showConfirmDialog(parent, text, "Save changes to the transcription", javax.swing.JOptionPane.YES_NO_CANCEL_OPTION);
@@ -1317,7 +1330,8 @@ public class PartitureTableWithActions extends PartitureTable
     }
             
     
-    /** opens a dialog for clean up (called by TASX Import) */
+    /** opens a dialog for clean up (called by TASX Import)
+     * @param t */
     public void cleanup(BasicTranscription t){
         CleanupDialog dialog = new CleanupDialog(parent, true);
         if (dialog.editCleanupParameters()){
@@ -1352,7 +1366,8 @@ public class PartitureTableWithActions extends PartitureTable
     }
     
     /** checks if tiers are stratified. If they are not,
-      * opens an appropriate dialog (used by TASX Import) */
+      * opens an appropriate dialog (used by TASX Import)
+     * @param t */
     public void stratify(BasicTranscription t){
         Timeline tl = t.getBody().getCommonTimeline();
         for (int pos=0; pos<t.getBody().getNumberOfTiers(); pos++){
@@ -1430,12 +1445,14 @@ public class PartitureTableWithActions extends PartitureTable
     }
     
     
-    /** returns the first column that is fully visible */
+    /** returns the first column that is fully visible
+     * @return  */
     public int getFirstVisibleColumn(){
         return 0;
     }
     
-    /** returns the last column that is fully visible */
+    /** returns the last column that is fully visible
+     * @return  */
     public int getLastVisibleColumn(){
         JCCellRange visibleCells = getVisibleCells();
         int lastVisibleColumn = visibleCells.end_column;
@@ -1578,6 +1595,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction doubleSplitAction;
     public javax.swing.AbstractAction editEventAction;
     public javax.swing.AbstractAction findNextEventAction;
+    public javax.swing.AbstractAction splitLongEventAction;
 
     public javax.swing.AbstractAction insertPauseAction;
     

@@ -41,6 +41,8 @@ public class UndoInformation {
     int selectionEndRow;
     int selectionStartCol;
     int selectionEndCol;
+    
+    int[] visibleRows;
 
     int action;
 
@@ -55,7 +57,7 @@ public class UndoInformation {
         
 
         // issue #110: should keep track of hidden tiers
-        
+        visibleRows = partitur.getIndicesOfVisibleRows();
         // end todo
         
         

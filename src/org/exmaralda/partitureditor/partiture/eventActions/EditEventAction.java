@@ -19,13 +19,15 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class EditEventAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditEventAction */
+    /** Creates a new instance of EditEventAction
+     * @param t */
     public EditEventAction(PartitureTableWithActions t) {
         super("Event properties...", t);
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                        
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editEventAction!");
         editEvent();

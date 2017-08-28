@@ -694,12 +694,12 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
         Vector resultVector = new Vector();
         for (int row=0; row<getModel().getNumRows(); row++){
             if (!isRowHidden(row)){
-                resultVector.addElement(new Integer(row));
+                resultVector.addElement(row);
             }
         }
         int[] result = new int[resultVector.size()];
         for (int pos=0; pos<resultVector.size(); pos++){
-            result[pos] = ((Integer)resultVector.elementAt(pos)).intValue();
+            result[pos] = ((Integer)resultVector.elementAt(pos));
         }
         return result;
     }

@@ -7,12 +7,8 @@
 package org.exmaralda.partitureditor.partiture.tierActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 
 /**
  *
@@ -20,12 +16,14 @@ import java.awt.Toolkit;
  */
 public class HideTierAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of HideTierAction */
+    /** Creates a new instance of HideTierAction
+     * @param t */
     public HideTierAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Hide tier", icon, t); 
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control alt H"));        
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("hideTierAction!");
         table.commitEdit(true);
