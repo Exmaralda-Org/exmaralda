@@ -72,7 +72,7 @@
         <xsl:variable name="hastime" as="xs:boolean" select="if (.//phrase/@begin-time-offset) then true() else false()"/>
         
         <interlinear-text name="{$textname}"/>
-        <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no" href="{concat($output-location, $textname,'.exb')}">
+        <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no" href="{concat($output-location, 'flex2exb-conversion/', $textname,'.exb')}">
             <basic-transcription>
                 <head>
                     <meta-information>
