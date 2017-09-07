@@ -44,10 +44,11 @@
     <xsl:variable name="timestart" as="xs:decimal" select="$settings//timeline/@start"/>
     <xsl:variable name="timestep" as="xs:decimal" select="$settings//timeline/@step"/>
     <xsl:variable name="segnum-format" select="$settings//sentence-number/@format"/>
+    <xsl:variable name="dateNow" select="format-dateTime(current-dateTime(), '[Y0001][M01][D01][H][m][s]')"/>
     <xsl:variable name="textname" select="/document/interlinear-text[1]/item[@type = $settings//text-name/@from-item and @lang = $settings//text-name/@from-lang]/text()"/>
 
     <xsl:template match="/">
-        <conversion-report filename="{$filename}" output-location="{concat($output-location, $textname,'.exb')}">
+        <conversion-report filename="{$filename}" output-location="{concat($output-location, 'flex2exb-conversion/', $textname, '-', $dateNow, '.exb')}">
             <conversion-settings filename="{$settings-file}">
                 <xsl:copy-of select="$settings/*/*"/>
             </conversion-settings>
@@ -72,7 +73,7 @@
         <xsl:variable name="hastime" as="xs:boolean" select="if (.//phrase/@begin-time-offset) then true() else false()"/>
         
         <interlinear-text name="{$textname}"/>
-        <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no" href="{concat($output-location, 'flex2exb-conversion/', $textname,'.exb')}">
+        <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no" href="{concat($output-location, 'flex2exb-conversion/', $textname, '-', $dateNow, '.exb')}">
             <basic-transcription>
                 <head>
                     <meta-information>
