@@ -1320,7 +1320,7 @@ public class Coma extends JFrame implements ChangeListener,
                                 .setText(elementName));
                         newRec.setAttribute("Id", "R" + new GUID().makeID());
                         for (File f : filesToAdd) {
-                            if (!(existingFiles.contains(f))) {
+                          //  if (!(existingFiles.contains(f))) {
                                 Element newMedia = new Element("Media");
                                 newMedia.setAttribute("Id",
                                         "M" + new GUID().makeID());
@@ -1348,7 +1348,7 @@ public class Coma extends JFrame implements ChangeListener,
                                     }
                                 }
                                 existingFiles.add(f);
-                            }
+                     //       }
                         }
                     }
                 }
