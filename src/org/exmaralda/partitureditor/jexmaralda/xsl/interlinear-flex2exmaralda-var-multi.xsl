@@ -9,10 +9,10 @@
             This is the transform from SIL FLEx flextext format into EXMARaLDA exb, with configurable settings.
             See interlinear-eaf2exmaralda.xsl for conversion from ELAN.
             (c) Alexandre Arkhipov, 2015-2016.
-
             This transform is for a single file containing multiple texts. 
             Based on transform for Nganasan.
             Based on the batch version based on interlinear-eaf2exmaralda.xsl v1.11.
+            v2.03: Time attributes (per phrase) are imported if there are any
             v2.02: Added sentence-numbering options (flat, para, both); moved all parameters to settings file; added couple of tier styles
             v2.01: Added lang attribute to tier-word template (23.11.2016)
             v2.00: Many parameters related to specific tiers etc. are now read from a settings file.
@@ -27,7 +27,7 @@
     <xsl:variable name="tiers-gloss">ge gr mc hn</xsl:variable>
 
 
-    <!--    <xsl:param name="timestart" as="xs:decimal" select="4.0"/>
+<!--    <xsl:param name="timestart" as="xs:decimal" select="4.0"/>
     <!-\- Time offset for first word -\->
     <xsl:param name="timestep" as="xs:decimal" select="0.5"/>
     <!-\- Mean word length in sec -\->
@@ -44,10 +44,11 @@
     <xsl:variable name="timestart" as="xs:decimal" select="$settings//timeline/@start"/>
     <xsl:variable name="timestep" as="xs:decimal" select="$settings//timeline/@step"/>
     <xsl:variable name="segnum-format" select="$settings//sentence-number/@format"/>
+    <xsl:variable name="dateNow" select="format-dateTime(current-dateTime(), '[Y0001][M01][D01][H][m][s]')"/>
     <xsl:variable name="textname" select="/document/interlinear-text[1]/item[@type = $settings//text-name/@from-item and @lang = $settings//text-name/@from-lang]/text()"/>
 
     <xsl:template match="/">
-        <conversion-report filename="{$filename}" output-location="{concat($output-location, $textname,'.exb')}">
+        <conversion-report filename="{$filename}" output-location="{concat($output-location, 'flex2exb-conversion/', $textname, '-', $dateNow, '.exb')}">
             <conversion-settings filename="{$settings-file}">
                 <xsl:copy-of select="$settings/*/*"/>
             </conversion-settings>
@@ -68,9 +69,11 @@
                         substring-before(substring-after($textname, '_'), '_')
                     else
                         substring-before($textname, '_')"/>
-
+        <!-- v2.03: checks whether time attributes are present -->
+        <xsl:variable name="hastime" as="xs:boolean" select="if (.//phrase/@begin-time-offset) then true() else false()"/>
+        
         <interlinear-text name="{$textname}"/>
-        <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no" href="{concat($output-location, $textname,'.exb')}">
+        <xsl:result-document method="xml" indent="yes" encoding="utf-8" omit-xml-declaration="no" href="{concat($output-location, 'flex2exb-conversion/', $textname, '-', $dateNow, '.exb')}">
             <basic-transcription>
                 <head>
                     <meta-information>
@@ -105,10 +108,32 @@
                         <xsl:for-each select=".//phrase">
                             <xsl:variable name="tsnumber" select="count(./preceding::word[my:word(.)])"/>
                             <!-- +position()-1 -->
-                            <tli id="{concat('T',$tsnumber)}" time="{format-number($timestart + $timestep*$tsnumber, '#0.0##')}" type="appl"/>
-                            <xsl:for-each select="current()//word[my:word(.)]">
-                                <tli id="{concat('T',$tsnumber+position())}" time="{format-number($timestart + $timestep*($tsnumber+position()),'#0.0##')}" type="appl"/>
-                            </xsl:for-each>
+                            <!-- v2.03: imports time attributes if there are any -->
+                            <xsl:choose>
+                                <xsl:when test="$hastime">
+                                    <xsl:variable name="phrasestart" select="(./@begin-time-offset) div 1000"/>
+                                    <xsl:variable name="phraseend" select="(./@end-time-offset) div 1000"/>
+                                    <xsl:variable name="phrasestep" select="($phraseend - $phrasestart) div count(.//word[my:word(.)])"/>
+                                    <tli id="{concat('T',$tsnumber)}"
+                                        time="{format-number($phrasestart, '#0.0##')}"
+                                        type="appl"/>
+                                    <xsl:for-each select="current()//word[my:word(.)]">
+                                        <tli id="{concat('T',$tsnumber+position())}"
+                                            time="{format-number($phrasestart + $phrasestep*(position()),'#0.0##')}"
+                                            type="appl"/>
+                                    </xsl:for-each>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <tli id="{concat('T',$tsnumber)}"
+                                        time="{format-number($timestart + $timestep*$tsnumber, '#0.0##')}"
+                                        type="appl"/>
+                                    <xsl:for-each select="current()//word[my:word(.)]">
+                                        <tli id="{concat('T',$tsnumber+position())}"
+                                            time="{format-number($timestart + $timestep*($tsnumber+position()),'#0.0##')}"
+                                            type="appl"/>
+                                    </xsl:for-each>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:for-each>
                     </common-timeline>
 
@@ -231,7 +256,7 @@
                         </xsl:choose>
                     </xsl:for-each>
 
-                    <!--                    <xsl:call-template name="tier-sent">
+<!--                    <xsl:call-template name="tier-sent">
                         <!-\- nt: Comments (notes) -\->
                         <xsl:with-param name="itemtype" select="'note'"/>
                         <xsl:with-param name="cat" select="'nt'"/>
@@ -254,7 +279,7 @@
         <xsl:param name="lang" select="''"/>
         <!-- for exmaralda -->
         <xsl:param name="cat" select="'v'"/>
-        <xsl:param name="type" select="'d'"/>
+        <xsl:param name="type" select="'a'"/>
         <xsl:param name="display"/>
         <!-- to append filename in ref tier -->
         <xsl:param name="prefix" select="''"/>
@@ -310,7 +335,7 @@
         <xsl:param name="lang" select="''"/>
         <!-- for exmaralda -->
         <xsl:param name="cat" select="'v'"/>
-        <xsl:param name="type" select="'d'"/>
+        <xsl:param name="type" select="'a'"/>
         <xsl:param name="display"/>
         <xsl:param name="speaker" select="'SPK'"/>
         <tier id="{$display}" speaker="{$speaker}" category="{$cat}" type="{$type}" display-name="{$display}">
