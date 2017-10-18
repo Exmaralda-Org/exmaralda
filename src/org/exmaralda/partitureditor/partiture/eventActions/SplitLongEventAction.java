@@ -40,17 +40,6 @@ public class SplitLongEventAction extends org.exmaralda.partitureditor.partiture
     
     private void splitLongEvent(){
         table.commitEdit(true);
-        if (table.undoEnabled){
-            // Undo information
-            int lower = table.getModel().lower(table.selectionStartCol);
-            int upper = table.getModel().upper(table.selectionStartCol + table.getModel().getCellSpan(table.selectionStartRow, table.selectionEndCol));
-            //System.out.println("upper " + upper + " lower " + lower);
-            UndoInformation undoInfo = new UndoInformation(table, "Split");
-            undoInfo.memorizeRegion(table, lower, upper);
-            table.addUndo(undoInfo);
-            //System.out.println("Added undo split");
-            // end undo information
-        }
         SplitLongEventDialog dialog = new SplitLongEventDialog(table.parent, true);
         Tier tier = table.getModel().getTranscription().getBody().getTierAt(table.selectionStartRow);
         String tli = table.getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemAt(table.selectionStartCol).getID();
@@ -61,6 +50,17 @@ public class SplitLongEventAction extends org.exmaralda.partitureditor.partiture
             dialog.setLocationRelativeTo(table);
             dialog.setVisible(true);
             if (dialog.approved){
+                if (table.undoEnabled){
+                // Undo information
+                    int lower = table.getModel().lower(table.selectionStartCol);
+                    int upper = table.getModel().upper(table.selectionStartCol + table.getModel().getCellSpan(table.selectionStartRow, table.selectionEndCol));
+                    //System.out.println("upper " + upper + " lower " + lower);
+                    UndoInformation undoInfo = new UndoInformation(table, "Split");
+                    undoInfo.memorizeRegion(table, lower, upper);
+                    table.addUndo(undoInfo);
+                    //System.out.println("Added undo split");
+                    // end undo information
+                }
                 int splitPosition = dialog.getCursorPosition();
                 table.getModel().split(table.selectionStartRow, table.selectionStartCol, splitPosition, table.parent);                
             }
