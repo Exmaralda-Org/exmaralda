@@ -8,10 +8,6 @@ package org.exmaralda.partitureditor.partiture.editActions;
 
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import java.io.*;
 import org.exmaralda.partitureditor.sound.*;
 /**
  *
