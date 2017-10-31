@@ -33,7 +33,11 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
     ActionListener actionListener2;
 
     
-    /** Creates new form FindDialog */
+    /** Creates new form FindDialog
+     * @param parent
+     * @param modal
+     * @param externalKeyboardPaths
+     * @param generalPurposeFontName */
     public FindDialog(java.awt.Frame parent, boolean modal, String[] externalKeyboardPaths, String generalPurposeFontName) {
         super(parent, modal);
         //addFocusListener(this);
@@ -49,6 +53,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
         
         // actionListener for the  search expression textfield
         actionListener = new ActionListener() {     
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                  searchButtonActionPerformed(actionEvent);                 
             }
@@ -57,6 +62,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
 
 
         actionListener2 = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 gotoNextSearchResult();
             }

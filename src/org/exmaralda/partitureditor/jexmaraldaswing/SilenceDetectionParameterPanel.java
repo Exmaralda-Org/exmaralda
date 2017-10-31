@@ -186,7 +186,7 @@ public class SilenceDetectionParameterPanel extends javax.swing.JPanel {
         t3Spinner.setModel(new javax.swing.SpinnerNumberModel(7.0d, 1.0d, 20.0d, 0.5d));
         minimumLengthSpinnersPanel1.add(t3Spinner);
 
-        t4Label.setText(" T3: ");
+        t4Label.setText(" T4: ");
         minimumLengthSpinnersPanel1.add(t4Label);
 
         t4Spinner.setModel(new javax.swing.SpinnerNumberModel(12.0d, 3.0d, 30.0d, 0.5d));

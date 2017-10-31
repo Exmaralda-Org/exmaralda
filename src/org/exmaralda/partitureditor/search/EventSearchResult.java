@@ -5,8 +5,6 @@
  */
 
 package org.exmaralda.partitureditor.search;
-
-import org.exmaralda.partitureditor.jexmaralda.*;
 /**
  *
  * @author  thomas

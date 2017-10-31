@@ -267,7 +267,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="t4Label">
               <Properties>
-                <Property name="text" type="java.lang.String" value=" T3: "/>
+                <Property name="text" type="java.lang.String" value=" T4: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="t4Spinner">

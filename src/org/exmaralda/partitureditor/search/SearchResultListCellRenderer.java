@@ -19,6 +19,7 @@ public class SearchResultListCellRenderer implements ListCellRenderer {
     public SearchResultListCellRenderer() {
     }
     
+    @Override
     public java.awt.Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
          java.awt.Font arialUnicodeMS = new java.awt.Font("Arial Unicode MS", java.awt.Font.PLAIN, 10);
          java.awt.Color bc = java.awt.Color.white;
@@ -43,6 +44,9 @@ public class SearchResultListCellRenderer implements ListCellRenderer {
          beforeLabel.setForeground(java.awt.Color.black);
          beforeLabel.setOpaque(true);
          beforeLabel.setBackground(bc);
+         //java.lang.StringIndexOutOfBoundsException: String index out of range: 6
+	 //at java.lang.String.substring(String.java:1963)
+	 //at org.exmaralda.partitureditor.search.SearchResultListCellRenderer.getListCellRendererComponent(SearchResultListCellRenderer.java:46)
          beforeLabel.setText(esr.event.getDescription().substring(0,esr.offset));
 
          JLabel searchLabel = new JLabel();
