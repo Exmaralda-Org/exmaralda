@@ -346,6 +346,8 @@ public class PartitureTableWithActions extends PartitureTable
         if (isEditing){
             editor = (PartitureCellStringEditor)(getEditingComponent());
             editor.replaceSelection(pauseText);
+            // new 17-11-2017: issue #122
+            editor.requestFocus();
         }
     }
 
