@@ -68,6 +68,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("TransanaXML")) {dialog.setFileFilter(dialog.TransanaXMLFileFilter);}
             else if (lastFileFilter.equals("F4Text")) {dialog.setFileFilter(dialog.F4TextFileFilter);}
             else if (lastFileFilter.equals("SRT")) {dialog.setFileFilter(dialog.SRTFileFilter);}
+            else if (lastFileFilter.equals("VTT")) {dialog.setFileFilter(dialog.VTTFileFilter);}
             else if (lastFileFilter.equals("Flextext")) {dialog.setFileFilter(dialog.FlexTextXMLFileFilter);}
         }
     }
@@ -119,6 +120,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.TransanaXMLFileFilter) {lastFileFilter = "TransanaXML";}
             else if (selectedFileFilter==dialog.F4TextFileFilter) {lastFileFilter = "F4Text";}
             else if (selectedFileFilter==dialog.SRTFileFilter) {lastFileFilter = "SRT";}
+            else if (selectedFileFilter==dialog.VTTFileFilter) {lastFileFilter = "VTT";}
             else if (selectedFileFilter==dialog.FlexTextXMLFileFilter) {lastFileFilter = "Flextext";}
 
 

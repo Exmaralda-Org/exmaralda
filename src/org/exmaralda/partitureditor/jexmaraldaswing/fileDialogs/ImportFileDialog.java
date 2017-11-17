@@ -44,6 +44,8 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         addChoosableFileFilter(TASXFileFilter);
         addChoosableFileFilter(AGFileFilter);
         addChoosableFileFilter(SimpleExmaraldaFileFilter);
+        // added 17-11-2017: issue #119
+        addChoosableFileFilter(VTTFileFilter);
         addChoosableFileFilter(RioDeJaneiroFileFilter);
         addChoosableFileFilter(TextFileFilter);
         addChoosableFileFilter(AudacityLabelFileFilter);
