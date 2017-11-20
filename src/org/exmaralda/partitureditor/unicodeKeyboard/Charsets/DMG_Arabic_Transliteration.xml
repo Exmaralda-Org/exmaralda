@@ -170,7 +170,17 @@
 		<description>Small g, caron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
+		<content>&#288;</content>
+		<description>Capital G, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#289;</content>
+		<description>Small g, dot above</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
 		<content>&#7716;</content>
 		<description>Capital H, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
@@ -259,16 +269,6 @@
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
     <key>
-		<content>&#288;</content>
-		<description>Capital G, dot above</description>
-		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
-        <key>
-		<content>&#289;</content>
-		<description>Small g, dot above</description>
-		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
-        <key>
 		<content>&#362;</content>
 		<description>Capital U, macron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
