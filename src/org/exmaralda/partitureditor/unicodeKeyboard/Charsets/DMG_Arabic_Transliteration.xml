@@ -99,10 +99,10 @@
 		<description>Ligature</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        
-        <!-- Start Arabic letters -->
-        
-    <key>
+
+	<!-- Start Arabic letters -->
+
+	<key>
 		<content>&#702;</content>
 		<description>right half ring</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
@@ -117,7 +117,7 @@
 		<description>Capital A, macron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#257;</content>
 		<description>Small a, macron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
@@ -141,7 +141,7 @@
 		<content>&#7693;</content>
 		<description>Small d, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>	
+	</key>
 	<!-- new, 20-11-2017 -->
 	<key>
 		<content>&#x01DD;</content>
@@ -165,7 +165,7 @@
 		<description>Capital G, caron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#487;</content>
 		<description>Small g, caron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
@@ -185,19 +185,29 @@
 		<description>Capital H, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#7717;</content>
 		<description>Small h, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#7722;</content>
 		<description>Capital H, breve below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-    <key>
+	<key>
 		<content>&#7723;</content>
 		<description>Small h, breve below</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#298;</content>
+		<description>Capital I, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#299;</content>
+		<description>Small i, macron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
 	<!-- New, 20-11-2017 -->
@@ -217,17 +227,17 @@
 		<description>Capital S, caron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#353;</content>
 		<description>Small s, caron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#7778;</content>
 		<description>Capital S, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#7779;</content>
 		<description>Small s, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
@@ -242,22 +252,32 @@
 		<description>Small t, line below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-    <key>
+	<key>
 		<content>&#7788;</content>
 		<description>Capital T, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
 		<content>&#7789;</content>
 		<description>Small t, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-        <key>
+	<key>
+		<content>&#362;</content>
+		<description>Capital U, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#363;</content>
+		<description>Small u, macron</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
 		<content>&#7826;</content>
 		<description>Capital Z, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-    <key>
+	<key>
 		<content>&#7827;</content>
 		<description>Small z, dot below</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
@@ -268,25 +288,5 @@
 		<description>Small z, with caron</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
-    <key>
-		<content>&#362;</content>
-		<description>Capital U, macron</description>
-		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
-        <key>
-		<content>&#363;</content>
-		<description>Small u, macron</description>
-		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
-        <key>
-		<content>&#298;</content>
-		<description>Capital I, macron</description>
-		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
-        <key>
-		<content>&#299;</content>
-		<description>Small i, macron</description>
-		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
-        
+
 </unicode-keyboard>
