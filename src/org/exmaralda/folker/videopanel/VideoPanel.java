@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
+import org.exmaralda.partitureditor.sound.CocoaQTPlayer;
 import org.exmaralda.partitureditor.sound.JDSPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
@@ -41,7 +42,13 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
     public VideoPanel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        videoPlayer = new JDSPlayer();
+        // changed 21-11-2017: issue #82
+        String os = System.getProperty("os.name").substring(0,3);
+        if (os.equalsIgnoreCase("win")) {
+            videoPlayer = new JDSPlayer();
+        } else if (os.equalsIgnoreCase("mac")){
+            videoPlayer = new CocoaQTPlayer();
+        }
         //videoPlayer = new MMFPlayer();
         videoPlayer.addPlayableListener(this);
     }
@@ -202,6 +209,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 VideoPanel dialog = new VideoPanel(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -229,22 +237,44 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
     // End of variables declaration//GEN-END:variables
 
     private void openVideoFile(File f) throws IOException {
-        JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer;       
-        jdsPlayer.setSoundFile(f.getAbsolutePath());
-        
-        
-        videoDisplayPanel.removeAll();
-        
-        if (jdsPlayer.getVisibleComponent()!=null){
-            Component c = jdsPlayer.getVisibleComponent();
-            // change 02-06-2015: attempt to set size for video
-            sourceWidth = jdsPlayer.getSourceWidth();
-            sourceHeight = jdsPlayer.getSourceHeight();
-            Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
-            c.setPreferredSize(initialDimension);
-            videoDisplayPanel.add(c);
-            videoDisplayPanel.setPreferredSize(c.getPreferredSize());
-            //pack();
+
+        // changed 21-11-2017: issue #82
+        String os = System.getProperty("os.name").substring(0,3);
+        if (os.equalsIgnoreCase("win")) {
+            JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer;       
+            jdsPlayer.setSoundFile(f.getAbsolutePath());
+
+            videoDisplayPanel.removeAll();
+
+            if (jdsPlayer.getVisibleComponent()!=null){
+                Component c = jdsPlayer.getVisibleComponent();
+                // change 02-06-2015: attempt to set size for video
+                sourceWidth = jdsPlayer.getSourceWidth();
+                sourceHeight = jdsPlayer.getSourceHeight();
+                Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
+                c.setPreferredSize(initialDimension);
+                videoDisplayPanel.add(c);
+                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+                //pack();
+            }
+        } else if (os.equalsIgnoreCase("mac")){
+            // TO DO
+            CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)videoPlayer;
+            cocoaQTPlayer.setSoundFile(f.getAbsolutePath());
+
+            videoDisplayPanel.removeAll();
+
+            if (cocoaQTPlayer.getVisibleComponent()!=null){
+                Component c = cocoaQTPlayer.getVisibleComponent();
+                sourceWidth = 480;
+                sourceHeight = 270;
+                System.out.println("CocoaQTPlayer has set movie width/height to 480/270");
+                Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
+                c.setPreferredSize(initialDimension);
+                videoDisplayPanel.add(c);
+                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+            }
+            
         }
     }
 
