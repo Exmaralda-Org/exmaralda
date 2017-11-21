@@ -4,11 +4,14 @@
 	<!-- Based on "HIAT + Arabic supplement -->
 	<!-- reordered alphabetically -->
 	<!-- a few additional characters -->
-	<key>
+	<!-- 21-11-2017 -->
+	<!-- Better take this out: it is rarely used in HIAT -->
+	<!-- and there is a danger of confusion with the half ring characters -->
+	<!-- <key>
 		<content>&#x0254;</content>
 		<description>lower-mid back rounded vowel (for interjections)</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
-	</key>
+	</key> -->
 	<key>
 		<content>m&#x0301;</content>
 		<description>m (rising tone)</description>
@@ -103,12 +106,16 @@
 	<!-- Start Arabic letters -->
 
 	<key>
-		<content>&#702;</content>
+		<!-- changed 21-11-2017 -->
+		<!-- <content>&#702;</content> -->
+		<content>&#x02BE;</content>
 		<description>right half ring</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
 	<key>
-		<content>&#703;</content>
+		<!-- changed 21-11-2017 -->
+		<!-- <content>&#703;</content> -->
+		<content>&#x02BF;</content>
 		<description>left half ring </description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
