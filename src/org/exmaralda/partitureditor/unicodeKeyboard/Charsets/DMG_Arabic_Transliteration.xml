@@ -107,15 +107,19 @@
 
 	<key>
 		<!-- changed 21-11-2017 -->
+		<!-- changed again 22-11-2017 -->
 		<!-- <content>&#702;</content> -->
-		<content>&#x02BE;</content>
+		<!-- <content>&#x02BE;</content> -->
+		<content>&#x1D53;</content>
 		<description>right half ring</description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
 	<key>
 		<!-- changed 21-11-2017 -->
+		<!-- changed again 22-11-2017 -->
 		<!-- <content>&#703;</content> -->
-		<content>&#x02BF;</content>
+		<!-- <content>&#x02BF;</content> -->
+		<content>&#x1D9C;</content>
 		<description>left half ring </description>
 		<font name="Arial Unicode MS" size="12" face="plain"/>
 	</key>
