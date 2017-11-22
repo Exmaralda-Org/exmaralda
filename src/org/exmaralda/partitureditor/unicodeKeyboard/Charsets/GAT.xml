@@ -56,6 +56,12 @@
 		<description>tief fallend</description>
 		<font name="Arial Unicode MS" size="16" face="plain"/>
 	</key>
+	<!-- added 22-11-2017: issue #132 -->
+	<key>
+		<content>|</content>
+		<description>nicht weiter spezifizierte Intontationsphrasen-Grenze</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
 	<key>
 		<content>&#x2191;</content>
 		<description>Tonhöhensprung nach oben</description>
