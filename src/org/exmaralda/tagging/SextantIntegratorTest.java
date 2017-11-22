@@ -35,10 +35,10 @@ public class SextantIntegratorTest {
         String ANN = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\Ali_Dimitri\\MT_091209_Dimitri_st_possup.esa";
         String SEG_OUT = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\Ali_Dimitri\\MT_091209_Dimitri_s_integrated.exs";
         String LIST_OUT = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\Ali_Dimitri\\MT_091209_Dimitri_integrated.exl";*/
-        String SEG_TRANS = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\David_Rufus\\MT_091209_David_s.exs";
-        String ANN = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\David_Rufus\\MT_091209_David_st_possup.esa";
-        String SEG_OUT = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\David_Rufus\\MT_091209_David_integrated.exs";
-        String LIST_OUT = "S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\David_Rufus\\MT_091209_David_integrated.exl";
+        String SEG_TRANS = "X:\\MINI_DEMO_CORPUS\\HIAT-segmented\\BLSA_E_00220_SE_01_T_01_s.exs";
+        String ANN = "X:\\MINI_DEMO_CORPUS\\HIAT-segmented\\BLSA_E_00220_SE_01_T_01_s_POS.esa";
+        String SEG_OUT = "X:\\MINI_DEMO_CORPUS\\HIAT-segmented\\BLSA_E_00220_SE_01_T_01_s_integrated.exs";
+        String LIST_OUT = "X:\\MINI_DEMO_CORPUS\\HIAT-segmented\\BLSA_E_00220_SE_01_T_01_s_integrated.exl";
         try {
             SextantIntegrator si = new SextantIntegrator(SEG_TRANS);
             si.integrate(ANN);

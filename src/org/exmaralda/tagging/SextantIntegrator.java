@@ -91,10 +91,23 @@ public class SextantIntegrator {
             Element ann = (Element)o;
             String id = ann.getAttributeValue("href", xlinkNS).substring(1);
             String speaker = ids2speakers.get(id);
+            // issue #130: if there is no speaker, there will also be not annotation-tier
+            // so we might as well continue here.
+            // changed 22-11-2017
+            if (speaker==null){
+                continue;
+            }
+
+
             List fs = XPath.newInstance("descendant::f").selectNodes(ann);
+            
+            
+            //System.out.println("Speaker: " + speaker);
+            //System.out.println("ID: " + id);
             for (Object o2 : fs){
                 Element f = (Element)o2;
                 String category = f.getAttributeValue("name");
+                //System.out.println("\tCategory: " + category);
                 Element annotation = speakersAndCategories2Annotations.get(speaker + "*****" + category);
                 Element referencedElement = ids2elements.get(id);
                 if (referencedElement==null) continue;
