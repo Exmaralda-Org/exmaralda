@@ -968,6 +968,8 @@ public class MultimodalPanel extends javax.swing.JPanel {
             bottomPanel.setLayout(new java.awt.BorderLayout());
 
             jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+            jPanel1.setMinimumSize(new java.awt.Dimension(261, 60));
+            jPanel1.setPreferredSize(new java.awt.Dimension(261, 60));
 
             jPanel2.setMaximumSize(new java.awt.Dimension(59, 37));
             jPanel2.setPreferredSize(new java.awt.Dimension(59, 37));
