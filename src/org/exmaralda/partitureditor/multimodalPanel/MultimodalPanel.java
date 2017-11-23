@@ -971,8 +971,10 @@ public class MultimodalPanel extends javax.swing.JPanel {
             jPanel1.setMinimumSize(new java.awt.Dimension(261, 60));
             jPanel1.setPreferredSize(new java.awt.Dimension(261, 60));
 
-            jPanel2.setMaximumSize(new java.awt.Dimension(59, 37));
-            jPanel2.setPreferredSize(new java.awt.Dimension(59, 37));
+            jPanel2.setAlignmentX(0.5F);
+            jPanel2.setMaximumSize(new java.awt.Dimension(59, 59));
+            jPanel2.setMinimumSize(new java.awt.Dimension(59, 59));
+            jPanel2.setPreferredSize(new java.awt.Dimension(59, 59));
             jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
             jButton14.setText("!");
@@ -991,8 +993,9 @@ public class MultimodalPanel extends javax.swing.JPanel {
 
             jPanel1.add(jPanel2);
 
-            jPanel3.setMaximumSize(new java.awt.Dimension(59, 37));
-            jPanel3.setPreferredSize(new java.awt.Dimension(59, 37));
+            jPanel3.setMaximumSize(new java.awt.Dimension(59, 59));
+            jPanel3.setMinimumSize(new java.awt.Dimension(59, 59));
+            jPanel3.setPreferredSize(new java.awt.Dimension(59, 59));
             jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
             jButton43.setText("?");
@@ -1011,6 +1014,10 @@ public class MultimodalPanel extends javax.swing.JPanel {
 
             jPanel1.add(jPanel3);
 
+            jPanel4.setAlignmentX(0.5F);
+            jPanel4.setMaximumSize(new java.awt.Dimension(59, 59));
+            jPanel4.setMinimumSize(new java.awt.Dimension(59, 59));
+            jPanel4.setPreferredSize(new java.awt.Dimension(59, 59));
             jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.Y_AXIS));
 
             jButton44.setText("+");
@@ -1029,8 +1036,9 @@ public class MultimodalPanel extends javax.swing.JPanel {
 
             jPanel1.add(jPanel4);
 
-            jPanel5.setMaximumSize(new java.awt.Dimension(59, 37));
-            jPanel5.setPreferredSize(new java.awt.Dimension(59, 37));
+            jPanel5.setMaximumSize(new java.awt.Dimension(59, 59));
+            jPanel5.setMinimumSize(new java.awt.Dimension(59, 59));
+            jPanel5.setPreferredSize(new java.awt.Dimension(59, 59));
             jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
 
             jButton45.setText("-");
