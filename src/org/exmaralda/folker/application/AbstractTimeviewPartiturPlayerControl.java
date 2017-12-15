@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.exmaralda.common.ExmaraldaApplication;
@@ -593,55 +594,78 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                 break;
             case PlayableEvent.PLAYBACK_STARTED :
                 //System.out.println("Received playback started");
-                playAction.setEnabled(false);
-                playSelectionAction.setEnabled(false);
-                playFirstSecondOfSelectionAction.setEnabled(false);
-                playLastSecondOfSelectionAction.setEnabled(false);
-                playFirstSecondBeforeSelectionAction.setEnabled(false);
-                playFirstSecondAfterSelectionAction.setEnabled(false);
-                loopSelectionAction.setEnabled(false);
-                // changed 11-05-2009: pause causes trouble when looping
-                //pauseAction.setEnabled(true);
-                pauseAction.setEnabled(!loopPlay);
-                stopAction.setEnabled(true);
-                playerState = PLAYER_PLAYING;
+                SwingUtilities.invokeLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        playAction.setEnabled(false);
+                        playSelectionAction.setEnabled(false);
+                        playFirstSecondOfSelectionAction.setEnabled(false);
+                        playLastSecondOfSelectionAction.setEnabled(false);
+                        playFirstSecondBeforeSelectionAction.setEnabled(false);
+                        playFirstSecondAfterSelectionAction.setEnabled(false);
+                        loopSelectionAction.setEnabled(false);
+                        // changed 11-05-2009: pause causes trouble when looping
+                        //pauseAction.setEnabled(true);
+                        pauseAction.setEnabled(!loopPlay);
+                        stopAction.setEnabled(true);
+                        playerState = PLAYER_PLAYING;
+                    }
+                });
                 break;
             case PlayableEvent.PLAYBACK_STOPPED :
                 //System.out.println("Received playback stopped");
-                playerState=PLAYER_IDLE;
-                playAction.setEnabled(true && !loopPlay);
-                playSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
-                playFirstSecondOfSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
-                playLastSecondOfSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
-                playFirstSecondBeforeSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
-                playFirstSecondAfterSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
-                loopSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
-                pauseAction.setEnabled(false && !loopPlay);
-                stopAction.setEnabled(false);
+                SwingUtilities.invokeLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        playerState=PLAYER_IDLE;
+                        playAction.setEnabled(true && !loopPlay);
+                        playSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
+                        playFirstSecondOfSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
+                        playLastSecondOfSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
+                        playFirstSecondBeforeSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
+                        playFirstSecondAfterSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
+                        loopSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
+                        pauseAction.setEnabled(false && !loopPlay);
+                        stopAction.setEnabled(false);
+                    }
+                });
                 break;
             case PlayableEvent.PLAYBACK_HALTED :
-                playAction.setEnabled(false);
-                playSelectionAction.setEnabled(false);
-                playFirstSecondOfSelectionAction.setEnabled(false);
-                playLastSecondOfSelectionAction.setEnabled(false);
-                playFirstSecondBeforeSelectionAction.setEnabled(false);
-                playFirstSecondAfterSelectionAction.setEnabled(false);
-                loopSelectionAction.setEnabled(false);
-                pauseAction.setEnabled(true);
-                stopAction.setEnabled(true);
-                playerState = PLAYER_HALTED;
+                // The JDS player has a threading issue with this (issue #112)
+                // Wrapping it in invokeLater seems to solve this
+                // might be a good idea to do this for the other event types, too
+                SwingUtilities.invokeLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        playAction.setEnabled(false);
+                        playSelectionAction.setEnabled(false);
+                        playFirstSecondOfSelectionAction.setEnabled(false);
+                        playLastSecondOfSelectionAction.setEnabled(false);
+                        playFirstSecondBeforeSelectionAction.setEnabled(false);
+                        playFirstSecondAfterSelectionAction.setEnabled(false);
+                        loopSelectionAction.setEnabled(false);
+                        pauseAction.setEnabled(true);
+                        stopAction.setEnabled(true);
+                        playerState = PLAYER_HALTED;
+                    }
+                });
                 break;
             case PlayableEvent.PLAYBACK_RESUMED :
-                playAction.setEnabled(false);
-                playSelectionAction.setEnabled(false);
-                playFirstSecondOfSelectionAction.setEnabled(false);
-                playLastSecondOfSelectionAction.setEnabled(false);
-                playFirstSecondBeforeSelectionAction.setEnabled(false);
-                playFirstSecondAfterSelectionAction.setEnabled(false);
-                loopSelectionAction.setEnabled(false);
-                pauseAction.setEnabled(true);
-                stopAction.setEnabled(true);
-                playerState = PLAYER_PLAYING;
+                SwingUtilities.invokeLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        playAction.setEnabled(false);
+                        playSelectionAction.setEnabled(false);
+                        playFirstSecondOfSelectionAction.setEnabled(false);
+                        playLastSecondOfSelectionAction.setEnabled(false);
+                        playFirstSecondBeforeSelectionAction.setEnabled(false);
+                        playFirstSecondAfterSelectionAction.setEnabled(false);
+                        loopSelectionAction.setEnabled(false);
+                        pauseAction.setEnabled(true);
+                        stopAction.setEnabled(true);
+                        playerState = PLAYER_PLAYING;
+                    }
+                });
                 break;
             case PlayableEvent.POSITION_UPDATE :
                 break;

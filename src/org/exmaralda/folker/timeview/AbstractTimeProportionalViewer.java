@@ -767,11 +767,16 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
     public void processPlayableEvent(PlayableEvent e) {
         if (e.getType() == PlayableEvent.POSITION_UPDATE){
             double seconds = e.getPosition();
-            float pixel = getPixelForMilisecond(1000*seconds);
-            setCursorPositionPixel(pixel);
-            BUFFER_REDRAW_NECESSARY = false;
-            repaint();
-            BUFFER_REDRAW_NECESSARY = true;            
+            final float pixel = getPixelForMilisecond(1000*seconds);
+            //SwingUtilities.invokeLater(new Runnable(){
+            //    @Override
+            //    public void run() {
+                    setCursorPositionPixel(pixel);
+                    BUFFER_REDRAW_NECESSARY = false;
+                    repaint();
+                    BUFFER_REDRAW_NECESSARY = true;            
+            //    }
+            //});
         } else if ((e.getType() == PlayableEvent.PLAYBACK_STOPPED)){
             /*if (this.getSelectionStartPixel()>=0){
                 setCursorPositionPixel(getSelectionStartPixel());
