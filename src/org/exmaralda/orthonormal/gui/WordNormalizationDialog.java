@@ -146,7 +146,9 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        transcribedFormPanel = new javax.swing.JPanel();
         wordLabel = new javax.swing.JLabel();
+        editWordButton = new javax.swing.JButton();
         textField = new javax.swing.JTextField();
         formsListScrollPane = new javax.swing.JScrollPane();
         formsList = new javax.swing.JList();
@@ -164,22 +166,36 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        transcribedFormPanel.setAlignmentX(0.0F);
+        transcribedFormPanel.setLayout(new javax.swing.BoxLayout(transcribedFormPanel, javax.swing.BoxLayout.LINE_AXIS));
+
         wordLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         wordLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         wordLabel.setText("jLabel1");
         wordLabel.setToolTipText("Doppelklicken, um das transkribierte Wort zu korrigieren");
-        wordLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        wordLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 20));
         wordLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 wordLabelMouseClicked(evt);
             }
         });
-        mainPanel.add(wordLabel);
+        transcribedFormPanel.add(wordLabel);
+
+        editWordButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        editWordButton.setText("Bearbeiten...");
+        editWordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editWordButtonActionPerformed(evt);
+            }
+        });
+        transcribedFormPanel.add(editWordButton);
+
+        mainPanel.add(transcribedFormPanel);
 
         textField.setForeground(new java.awt.Color(0, 102, 0));
-        textField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textField.setToolTipText("Normalisierte Form");
         textField.setMaximumSize(new java.awt.Dimension(400, 24));
-        textField.setPreferredSize(new java.awt.Dimension(200, 20));
+        textField.setPreferredSize(new java.awt.Dimension(300, 24));
         textField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldActionPerformed(evt);
@@ -281,14 +297,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     private void wordLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_wordLabelMouseClicked
        // double click brings up correction dialog 
        if (evt.getClickCount()==2){
-           WordCorrectionDialog wordCorrectionDialog = new WordCorrectionDialog(parent, true, wordElement);
-           wordCorrectionDialog.setLocationRelativeTo(this);
-           wordCorrectionDialog.setVisible(true);
-           if (wordCorrectionDialog.approved){
-               Element newWordElement = wordCorrectionDialog.getWordElement();
-               wordElement.setContent(newWordElement.removeContent()); 
-               wordLabel.setText(wordElement.getText());
-           }
+           editWordForm();
        }
     }//GEN-LAST:event_wordLabelMouseClicked
 
@@ -300,6 +309,10 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         normalizedWord = textField.getText();
         exitDialog();        
     }//GEN-LAST:event_insertDummy
+
+    private void editWordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editWordButtonActionPerformed
+           editWordForm();
+    }//GEN-LAST:event_editWordButtonActionPerformed
 
 
 
@@ -329,10 +342,12 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     private javax.swing.JButton dummyButton4;
     private javax.swing.JButton dummyButton5;
     private javax.swing.JPanel dummyButtonsPanel;
+    private javax.swing.JButton editWordButton;
     private javax.swing.JList formsList;
     private javax.swing.JScrollPane formsListScrollPane;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField textField;
+    private javax.swing.JPanel transcribedFormPanel;
     private javax.swing.JLabel wordLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -373,6 +388,17 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     public void mouseMoved(MouseEvent e) {
         int i = formsList.locationToIndex(e.getPoint());
         formsList.setSelectedIndex(i);
+    }
+
+    private void editWordForm() {
+        WordCorrectionDialog wordCorrectionDialog = new WordCorrectionDialog(parent, true, wordElement);
+        wordCorrectionDialog.setLocationRelativeTo(this);
+        wordCorrectionDialog.setVisible(true);
+        if (wordCorrectionDialog.approved){
+            Element newWordElement = wordCorrectionDialog.getWordElement();
+            wordElement.setContent(newWordElement.removeContent()); 
+            wordLabel.setText(wordElement.getText());
+        }
     }
 
 
