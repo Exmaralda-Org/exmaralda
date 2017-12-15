@@ -16,7 +16,8 @@ public interface PlayableListener {
      * whenever playback is started, halted, resumed or stopped
      * and whenever the current position in the media file has changed.
      * The method 'getType()' on the PlayableEvent can be used
-     * to determine which type of event has occured */
+     * to determine which type of event has occured
+     * @param e */
     public void processPlayableEvent(PlayableEvent e);
     
 }

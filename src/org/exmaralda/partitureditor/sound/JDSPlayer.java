@@ -182,10 +182,10 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
             //System.out.println("Current JDS position: " + getCurrentPosition());
             firePosition();
         } else if (ce instanceof mpi.eudico.client.mediacontrol.StopEvent){
-            //System.out.println("Stop event received!");
+            //System.out.println("Controller Update: Stop event received!");
             firePlaybackStopped();
         } else if (ce instanceof mpi.eudico.client.mediacontrol.StartEvent){    
-            //System.out.println("Start event received!");
+            //System.out.println("Controller Update: Start event received!");
             firePlaybackStarted();     
         } /*else {
             // added 02-06-2015: additional check if end time has been reached
@@ -198,6 +198,7 @@ public class JDSPlayer extends AbstractPlayer implements ControllerListener {
             
         }*/
     }
+
 }
 
 

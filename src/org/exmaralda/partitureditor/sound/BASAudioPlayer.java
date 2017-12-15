@@ -136,6 +136,11 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
     public void haltPlayback() {
         haltTime = getCurrentPosition();
         halted = true;
+
+        // new 15-12-2017 - trying to address a part of issue #112
+        playThread.interrupt();
+        playThread=null;
+
         wrappedPlayer.stop();
         long framePosition = Math.round(wrappedPlayer.getAudioFormat().getFrameRate() * haltTime);
         try {
@@ -148,11 +153,16 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
     
     @Override
     public void resumePlayback() {
-        try {
+        // changed 15-12-2017 - for issue #112 and the cursor problem
+        /*try {
             play(haltTime, endTime);
         } catch (PlayerException ex) {
             ex.printStackTrace();
-        }
+        }*/
+
+        startTime = haltTime;
+        startPlayback();
+
         firePlaybackResumed();        
         halted = false;
     }
