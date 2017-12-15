@@ -231,9 +231,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         basPlayerRadioButton = new javax.swing.JRadioButton();
         jdsPlayerRadioButton = new javax.swing.JRadioButton();
         cocoaQuicktimePlayerRadioButton = new javax.swing.JRadioButton();
-        jmfPlayerRadioButton = new javax.swing.JRadioButton();
         elanQuicktimeRadioButton = new javax.swing.JRadioButton();
         mmfPlayerRadioButton = new javax.swing.JRadioButton();
+        jmfPlayerRadioButton = new javax.swing.JRadioButton();
         elanDSPlayerRadioButton = new javax.swing.JRadioButton();
         otherOptionsPanel = new javax.swing.JPanel();
         autoAnchorCheckBox = new javax.swing.JCheckBox();
@@ -812,10 +812,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         cocoaQuicktimePlayerRadioButton.setText("<html><b>Cocoa Quicktime Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Recommended for video files on the <b>MAC</b>.</html>");
         playerSelectionPanel.add(cocoaQuicktimePlayerRadioButton);
 
-        mediaPlayersButtonGroup.add(jmfPlayerRadioButton);
-        jmfPlayerRadioButton.setText("<html><b>JMF Player:</b> Uses the Java Media framework to playback audio and video files. Recommended for video files on <b>Linuxes</b> (but also available on Windows and MAC).</html>");
-        playerSelectionPanel.add(jmfPlayerRadioButton);
-
         mediaPlayersButtonGroup.add(elanQuicktimeRadioButton);
         elanQuicktimeRadioButton.setText("<html><b>ELAN Quicktime Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Requires Quicktime for Java.</html>");
         playerSelectionPanel.add(elanQuicktimeRadioButton);
@@ -828,6 +824,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
             }
         });
         playerSelectionPanel.add(mmfPlayerRadioButton);
+
+        mediaPlayersButtonGroup.add(jmfPlayerRadioButton);
+        jmfPlayerRadioButton.setText("<html><b>JMF Player:</b> Uses the Java Media framework to playback audio and video files. Only option for video files on <b>Linuxes</b> (also available, but <b>not recommended on Windows and MAC</b>).</html>");
+        playerSelectionPanel.add(jmfPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(elanDSPlayerRadioButton);
         elanDSPlayerRadioButton.setForeground(new java.awt.Color(64, 64, 64));

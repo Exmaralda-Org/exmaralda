@@ -1238,14 +1238,6 @@
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Cocoa Quicktime Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Recommended for video files on the &lt;b&gt;MAC&lt;/b&gt;.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="jmfPlayerRadioButton">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="mediaPlayersButtonGroup"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;JMF Player:&lt;/b&gt; Uses the Java Media framework to playback audio and video files. Recommended for video files on &lt;b&gt;Linuxes&lt;/b&gt; (but also available on Windows and MAC).&lt;/html&gt;"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JRadioButton" name="elanQuicktimeRadioButton">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -1264,6 +1256,14 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mmfPlayerRadioButtonActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jmfPlayerRadioButton">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="mediaPlayersButtonGroup"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;JMF Player:&lt;/b&gt; Uses the Java Media framework to playback audio and video files. Only option for video files on &lt;b&gt;Linuxes&lt;/b&gt; (also available, but &lt;b&gt;not recommended on Windows and MAC&lt;/b&gt;).&lt;/html&gt;"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="elanDSPlayerRadioButton">
                       <Properties>
