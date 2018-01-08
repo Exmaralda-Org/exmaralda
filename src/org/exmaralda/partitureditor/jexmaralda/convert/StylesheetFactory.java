@@ -57,7 +57,9 @@ public class StylesheetFactory {
         // set up the transformer         
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
+        java.net.URL styleURL = getClass().getResource(pathToInternalStyleSheet);
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(styleURL.toExternalForm());
         
         // this does not work, but also no harm...
         tFactory.setURIResolver(new URIResolver(){
@@ -100,7 +102,9 @@ public class StylesheetFactory {
         //TransformerFactory tFactory = TransformerFactory.newInstance();
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
+        java.net.URL styleURL = getClass().getResource(pathToInternalStyleSheet);
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(styleURL.toExternalForm());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
         java.io.StringReader sr = new java.io.StringReader(sourceString);
@@ -134,7 +138,9 @@ public class StylesheetFactory {
         //TransformerFactory tFactory = TransformerFactory.newInstance();
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
+        java.net.URL styleURL = getClass().getResource(pathToInternalStyleSheet);
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(styleURL.toExternalForm());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
                 
         // set up the output stream for the first transformation
@@ -171,7 +177,9 @@ public class StylesheetFactory {
         //TransformerFactory tFactory = TransformerFactory.newInstance();
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
+        java.net.URL styleURL = getClass().getResource(pathToInternalStyleSheet);
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(styleURL.toExternalForm());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
                 
         // set up the output stream for the first transformation
@@ -201,9 +209,11 @@ public class StylesheetFactory {
 
         // set up the transformer 
         //TransformerFactory tFactory = TransformerFactory.newInstance();
-        java.io.FileInputStream is2 = new FileInputStream(pathToExternalStyleSheet);
+        java.io.File inputFile2  = new java.io.File(pathToExternalStyleSheet);
+        java.io.FileInputStream is2 = new java.io.FileInputStream(inputFile2);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
         
@@ -230,9 +240,11 @@ public class StylesheetFactory {
 
         // set up the transformer 
         //TransformerFactory tFactory = TransformerFactory.newInstance();
-        java.io.FileInputStream is2 = new FileInputStream(pathToExternalStyleSheet);
+        java.io.File inputFile2  = new java.io.File(pathToExternalStyleSheet);
+        java.io.FileInputStream is2 = new java.io.FileInputStream(inputFile2);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
 
         // set up a SAX source as input to the transformer
@@ -264,9 +276,11 @@ public class StylesheetFactory {
 
         // set up the transformer 
         //TransformerFactory tFactory = TransformerFactory.newInstance();
-        java.io.FileInputStream is2 = new FileInputStream(pathToExternalStyleSheet);
+        java.io.File inputFile2  = new java.io.File(pathToExternalStyleSheet);
+        java.io.FileInputStream is2 = new java.io.FileInputStream(inputFile2);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
+        styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
 
         // set up a SAX source as input to the transformer
