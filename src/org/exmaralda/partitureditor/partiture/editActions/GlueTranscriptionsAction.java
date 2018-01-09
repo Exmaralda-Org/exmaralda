@@ -11,9 +11,6 @@ import org.exmaralda.partitureditor.jexmaraldaswing.PattexmaraldaDialog;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.ELANConverter;
 
 /**
@@ -23,7 +20,9 @@ import org.exmaralda.partitureditor.jexmaralda.convert.ELANConverter;
 
 public class GlueTranscriptionsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of GlueTranscriptionsAction */
+    /** Creates a new instance of GlueTranscriptionsAction
+     * @param t
+     * @param icon */
     public GlueTranscriptionsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Glue transcriptions...", icon, t);
     }
@@ -55,6 +54,7 @@ public class GlueTranscriptionsAction extends org.exmaralda.partitureditor.parti
                             glueDialog.getTierIDMappings(),
                             glueDialog.getMergeTimelines());
                     if (glueDialog.getMergeTimelines()){
+                        // häh?!?!
                         new ELANConverter().normalize(table.getModel().getTranscription());
                     }
                     table.stratify(table.getModel().getTranscription());

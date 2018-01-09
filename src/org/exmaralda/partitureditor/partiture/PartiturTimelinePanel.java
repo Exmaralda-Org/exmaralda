@@ -112,6 +112,10 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
         zoomToggleButton.setAction(atppc.changeZoomAction);
         zoomToggleButton.setToolTipText("Zoom in/out");
+        
+        // new 15-12-2017 for issue #113
+        moveBackCursorButton.setAction(atppc.moveBackCursorAction);
+        moveBackCursorButton.setToolTipText("Move cursor back 1 sec");
 
     }
 
@@ -125,10 +129,14 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.CTRL_DOWN_MASK), "addEvent");
         am.put("addEvent", atppc.addEventInPartiturAction);
 
-        // for add interval (Alt PLUS)
+        // for append interval (Alt PLUS)
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.ALT_DOWN_MASK), "appendInterval");
         getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.ALT_DOWN_MASK), "appendInterval");
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.ALT_DOWN_MASK), "appendInterval");
+        am.put("appendInterval", atppc.appendIntervalInPartiturAction);
+
+
+
         am.put("appendInterval", atppc.appendIntervalInPartiturAction);
 
     }
@@ -196,6 +204,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         playButton = new javax.swing.JButton();
         pauseButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
+        moveBackCursorButton = new javax.swing.JButton();
         selectionControlPanel = new javax.swing.JPanel();
         shiftSelectionButton = new javax.swing.JButton();
         detachSelectionButton = new javax.swing.JButton();
@@ -305,6 +314,9 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         stopButton.setText("jButton1");
         playerControlsPanel.add(stopButton);
 
+        moveBackCursorButton.setText("jButton1");
+        playerControlsPanel.add(moveBackCursorButton);
+
         timeViewerControlPanel.add(playerControlsPanel, java.awt.BorderLayout.CENTER);
 
         shiftSelectionButton.setText("jButton1");
@@ -407,6 +419,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     public javax.swing.JLabel endTimeLabel;
     private javax.swing.JPanel eventControlPanel;
     private javax.swing.JButton loopSelectionButton;
+    private javax.swing.JButton moveBackCursorButton;
     private javax.swing.JButton navigateButton;
     private javax.swing.JPanel navigationPanel;
     private javax.swing.JPanel numbersPanel;

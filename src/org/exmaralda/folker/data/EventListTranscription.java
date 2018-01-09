@@ -231,7 +231,7 @@ public class EventListTranscription {
         for (int pos=0; pos<getTimeline().timepoints.size()-1; pos++){
             Timepoint t0 = getTimeline().getTimepointAt(pos);
             Timepoint t1 = getTimeline().getTimepointAt(pos+1);
-            if (findEvents(t0.getTime(),t1.getTime()).size()==0){
+            if (findEvents(t0.getTime(),t1.getTime()).isEmpty()){
                 Event newEvent = new Event(t0,t1,"",null);
                 eventlist.addEvent(newEvent);
                 count++;

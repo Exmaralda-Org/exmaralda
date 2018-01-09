@@ -19,29 +19,22 @@ import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
  *
  * @author thomas
  */
-public class FineTuneSelectionAction extends AbstractApplicationAction {
+public class MoveBackCursorAction extends AbstractApplicationAction {
     
-    int boundary;
-    int amount;
-    public static int LEFT_BOUNDARY = 0;
-    public static int RIGHT_BOUNDARY = 1;
-
+    // new 15-12-2017, for issue #113
+    
     /** Creates a new instance of OpenAction
      * @param ac
      * @param name
-     * @param icon
-     * @param whichBoundary
-     * @param whichAmount */
-    public FineTuneSelectionAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon, int whichBoundary, int whichAmount) {
+     * @param icon */
+    public MoveBackCursorAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon) {
         super(ac, name, icon);
-        boundary = whichBoundary;
-        amount = whichAmount;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("[*** FineTuneSelectionAction ***]");
-        applicationControl.fineTuneSelection(boundary, amount);
+        System.out.println("[*** MoveBackCursorAction ***]");
+        applicationControl.moveBackCursor();
     }
     
 }

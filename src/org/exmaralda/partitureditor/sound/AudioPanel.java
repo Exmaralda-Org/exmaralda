@@ -858,7 +858,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
 
     void registerKeyStrokes(){
-        InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        // 15-12-2017 : these can go, I think
+        /*InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         ActionMap am = getRootPane().getActionMap();
         
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
@@ -883,34 +884,35 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         am.put("F11_Pressed", previousTLIAction);
 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0),"F12_Pressed");
-        am.put("F12_Pressed", nextTLIAction);
+        am.put("F12_Pressed", nextTLIAction);*/
         
 
     }
     
-    public Action playAction = 
+    // 15-12-2017 : get rid of all these actions
+    /*public Action playAction = 
         new AbstractAction() { public void actionPerformed(ActionEvent e) {playButton.doClick(); } };
     
     public Action pauseAction = 
         new AbstractAction(){ public void actionPerformed(ActionEvent e) {pauseToggleButton.doClick(); } };
     
     public Action stopAction = 
-        new AbstractAction() { public void actionPerformed(ActionEvent e) {stopButton.doClick(); } };
+        new AbstractAction() { public void actionPerformed(ActionEvent e) {stopButton.doClick(); } };*/
     
-    public Action sendStartTimeAction = 
-        new AbstractAction() { public void actionPerformed(ActionEvent e) {/*sendStartTimeButton.doClick(); */} };
+    //public Action sendStartTimeAction = 
+    //    new AbstractAction() { public void actionPerformed(ActionEvent e) {/*sendStartTimeButton.doClick(); */} };
     
-    public Action sendPositionTimeAction = 
-        new AbstractAction() { public void actionPerformed(ActionEvent e) {/*sendPositionTimeButton.doClick(); */ }};
+    //public Action sendPositionTimeAction = 
+    //    new AbstractAction() { public void actionPerformed(ActionEvent e) {/*sendPositionTimeButton.doClick(); */ }};
     
-    public Action sendStopTimeAction = 
-        new AbstractAction() { public void actionPerformed(ActionEvent e) {/*sendStopTimeButton.doClick(); */} };
+    //public Action sendStopTimeAction = 
+    //    new AbstractAction() { public void actionPerformed(ActionEvent e) {/*sendStopTimeButton.doClick(); */} };
     
-    public Action previousTLIAction = 
+    /*public Action previousTLIAction = 
         new AbstractAction() { public void actionPerformed(ActionEvent e) {previousTLIButton.doClick(); } };
     
     public Action nextTLIAction = 
-        new AbstractAction() {public void actionPerformed(ActionEvent e) {nextTLIButton.doClick(); } };
+        new AbstractAction() {public void actionPerformed(ActionEvent e) {nextTLIButton.doClick(); } };*/
     
     @Override
     public void show(){

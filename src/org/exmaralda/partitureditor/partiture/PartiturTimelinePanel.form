@@ -233,6 +233,11 @@
                         <Property name="text" type="java.lang.String" value="jButton1"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JButton" name="moveBackCursorButton">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="jButton1"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="selectionControlPanel">

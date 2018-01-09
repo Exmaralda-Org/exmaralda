@@ -45,6 +45,8 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
     float soundDuration = 0.0f;
     int scrollAmount = 100;
     float MAX_SELECTION_SIZE_FOR_SHIFT = 5000.0f;
+    
+    float MOVE_BACK_CURSOR_AMOUNT = 1000.0f;
             
     final Object paintlock = new Object();
     
@@ -668,6 +670,12 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             repaint();
         }
     }
+    
+    public void moveBackCursor() {
+        setCursorTime(Math.max(0, getCursorTime() - MOVE_BACK_CURSOR_AMOUNT));
+        fireStartTimeMoved();
+    }
+    
 
 
 
@@ -788,6 +796,7 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             BUFFER_REDRAW_NECESSARY = true;                        
         }
     }
+
 
 
 

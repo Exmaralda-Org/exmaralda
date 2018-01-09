@@ -85,7 +85,7 @@ public class MAUS4EXMARaLDA {
         modifiedEndID = endID;
 
         
-        if (segmentChain){
+        if (segmentChain!=null && segmentChain){
             if (!(bt.getBody().getTierAt(selectionStartRow).getType().equals("t"))){
                 throw new JexmaraldaException(112, "Selection is not in tier of type 't'");
             } else {
@@ -116,7 +116,7 @@ public class MAUS4EXMARaLDA {
         // *********************************************
         Boolean useSegmentation = (Boolean) parameters.get("USE-SEGMENTATION");
 
-        if (useSegmentation){            
+        if (useSegmentation!=null && useSegmentation){            
             String whichSegmentation = (String) parameters.get("SEGMENTATION-ALGORITHM");
             
             FiniteStateMachine fsm = null;
@@ -172,14 +172,14 @@ public class MAUS4EXMARaLDA {
         return result;
     };
     
-    File cutAudioFile(File inputFile, double start, double end) throws IOException{
+    public File cutAudioFile(File inputFile, double start, double end) throws IOException{
        File tempFile = File.createTempFile("EXMARaLDA_MAUS", ".WAV");
        tempFile.deleteOnExit();
        audioProcessor.writePart(start, end, inputFile.getAbsolutePath(), tempFile.getAbsolutePath());   
        return tempFile;
     }
     
-    File convertAudioFileToMono(File inputFile) throws IOException{
+    public File convertAudioFileToMono(File inputFile) throws IOException{
        File tempFile = File.createTempFile("EXMARaLDA_MAUS", ".WAV");
        //tempFile.deleteOnExit();
        audioProcessor.stereoToMono16kHz(inputFile, tempFile);

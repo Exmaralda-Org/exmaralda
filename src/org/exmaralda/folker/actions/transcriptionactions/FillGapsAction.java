@@ -12,10 +12,7 @@ package org.exmaralda.folker.actions.transcriptionactions;
 import org.exmaralda.folker.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import java.io.*;
-import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.folker.application.ApplicationControl;
-import org.xml.sax.SAXException;
 
 
 /**
@@ -24,11 +21,15 @@ import org.xml.sax.SAXException;
  */
 public class FillGapsAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public FillGapsAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** FillGapsAction ***]");
         ApplicationControl ac = (ApplicationControl)applicationControl;

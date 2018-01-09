@@ -832,7 +832,8 @@ public class PartitureTableWithActions extends PartitureTable
         am.put("jumpToEndAction", jumpToEndAction);       
                        
         // for audio/video panel actions (function keys)
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
+        // 15-12-2017 : I guess these better go - the actions are not active in the panel anymore
+        /*im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
         am.put("F1_Pressed", mediaPanelDialog.playAction);
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0),"F2_Pressed");
         am.put("F2_Pressed", mediaPanelDialog.pauseAction);
@@ -847,7 +848,7 @@ public class PartitureTableWithActions extends PartitureTable
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0),"F11_Pressed");
         am.put("F11_Pressed", mediaPanelDialog.previousTLIAction);
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0),"F12_Pressed");
-        am.put("F12_Pressed", mediaPanelDialog.nextTLIAction);
+        am.put("F12_Pressed", mediaPanelDialog.nextTLIAction);*/
 
         
         // for scrolling forwards

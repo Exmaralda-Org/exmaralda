@@ -91,6 +91,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
     public org.exmaralda.folker.actions.waveformactions.FineTuneSelectionAction decreaseSelectionEndAction;
     public org.exmaralda.folker.actions.waveformactions.FineTuneSelectionAction increaseSelectionEndAction;
     public org.exmaralda.folker.actions.waveformactions.NavigateAction navigateAction;
+    public org.exmaralda.folker.actions.waveformactions.MoveBackCursorAction moveBackCursorAction; // new 15-12-2017 for issue #113
     // ---------------------------
     public org.exmaralda.folker.actions.partiturviewactions.AddEventInPartiturAction addEventInPartiturAction;
     public org.exmaralda.folker.actions.partiturviewactions.AppendIntervalInPartiturAction appendIntervalInPartiturAction;
@@ -176,7 +177,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         // -----------------
         changeZoomAction = new org.exmaralda.folker.actions.waveformactions.ChangeZoomAction(this, "",  c.getIcon(Constants.ZOOM_ICON));
 
-
+        moveBackCursorAction = new org.exmaralda.folker.actions.waveformactions.MoveBackCursorAction(this, "", c.getIcon(Constants.GO_BACK_ICON)); // new 13-12-2017 for issue #113
     }
 
  /***************** PLAYING MEDIA ******************************/
@@ -292,6 +293,11 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         timeViewer.shiftSelection();
         detachSelectionAction.setEnabled(false);
     }
+    
+    public void moveBackCursor() {
+        timeViewer.moveBackCursor();
+    }
+    
 
     public void detachSelection(){
         timeViewer.detachSelection();
@@ -590,6 +596,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                 loopSelectionAction.setEnabled(false);
                 pauseAction.setEnabled(false);
                 stopAction.setEnabled(false);
+                moveBackCursorAction.setEnabled(true);
                 playerState=PLAYER_IDLE;
                 break;
             case PlayableEvent.PLAYBACK_STARTED :
@@ -608,6 +615,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                         //pauseAction.setEnabled(true);
                         pauseAction.setEnabled(!loopPlay);
                         stopAction.setEnabled(true);
+                        moveBackCursorAction.setEnabled(false);
                         playerState = PLAYER_PLAYING;
                     }
                 });
@@ -627,6 +635,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                         loopSelectionAction.setEnabled(selectionStart!=selectionEnd && !loopPlay);
                         pauseAction.setEnabled(false && !loopPlay);
                         stopAction.setEnabled(false);
+                        moveBackCursorAction.setEnabled(true);
                     }
                 });
                 break;
@@ -646,6 +655,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                         loopSelectionAction.setEnabled(false);
                         pauseAction.setEnabled(true);
                         stopAction.setEnabled(true);
+                        moveBackCursorAction.setEnabled(false);                        
                         playerState = PLAYER_HALTED;
                     }
                 });
@@ -663,6 +673,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                         loopSelectionAction.setEnabled(false);
                         pauseAction.setEnabled(true);
                         stopAction.setEnabled(true);
+                        moveBackCursorAction.setEnabled(false);                        
                         playerState = PLAYER_PLAYING;
                     }
                 });
@@ -757,6 +768,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
             loopThread.stopLoop();
         }
     }
+
 
 
     // ********************

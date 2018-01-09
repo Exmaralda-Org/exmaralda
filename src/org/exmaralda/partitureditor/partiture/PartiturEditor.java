@@ -654,21 +654,27 @@ public class PartiturEditor extends javax.swing.JFrame
         InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         ActionMap am = getRootPane().getActionMap();
         
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
+        // 15-12-2017 : issue #113 - these three bindings should go
+        // since the respective buttons are disabled and invisible
+        /*im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
         am.put("F1_Pressed", table.mediaPanelDialog.playAction);
 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0),"F2_Pressed");
         am.put("F2_Pressed", table.mediaPanelDialog.pauseAction);
 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0),"F3_Pressed");
-        am.put("F3_Pressed", table.mediaPanelDialog.stopAction);
+        am.put("F3_Pressed", table.mediaPanelDialog.stopAction);*/
 
         Object[][] generalAssignments = {
             {"control SPACE", "playSelection", controller.playSelectionAction},
             {"control shift SPACE", "playLastSecondOfSelection", controller.playLastSecondOfSelectionAction},
             {"control F4", "play", controller.playAction},
+            // 15-12-2017 : issue #113, additional binding to variants WITHOUT control key
+            {"F4", "play", controller.playAction},
             {"control F5", "pause", controller.pauseAction},
+            {"F5", "pause", controller.pauseAction},
             {"control F6", "stop", controller.stopAction},
+            {"F6", "stop", controller.stopAction},
 
             {"alt shift LEFT", "decreaseSelectionStart", controller.decreaseSelectionStartAction},
             {"alt shift RIGHT", "increaseSelectionStart", controller.increaseSelectionStartAction},
