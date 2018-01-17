@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.jdom.JDOMException;
 
 /**
  *
@@ -98,6 +99,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         correctionPanel = new javax.swing.JPanel();
         editContributionButton = new javax.swing.JButton();
         changeSpeakerButton = new javax.swing.JButton();
+        changeSpeakerAbbButton = new javax.swing.JButton();
         outerSplitPane = new javax.swing.JSplitPane();
         wordListPanel = new javax.swing.JPanel();
         tablePanel = new javax.swing.JPanel();
@@ -242,7 +244,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
         correctionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Korrekturen"));
 
-        editContributionButton.setText("Beitrag bearbeiten");
+        editContributionButton.setText("Beitrag bearbeiten...");
         editContributionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editContributionButtonActionPerformed(evt);
@@ -250,13 +252,21 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         });
         correctionPanel.add(editContributionButton);
 
-        changeSpeakerButton.setText("Sprecherzuordnung ändern");
+        changeSpeakerButton.setText("Sprecherzuordnung ändern...");
         changeSpeakerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeSpeakerButtonActionPerformed(evt);
             }
         });
         correctionPanel.add(changeSpeakerButton);
+
+        changeSpeakerAbbButton.setText("Sprecherkürzel ändern...");
+        changeSpeakerAbbButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeSpeakerAbbButtonActionPerformed(evt);
+            }
+        });
+        correctionPanel.add(changeSpeakerAbbButton);
 
         editControlsPanel.add(correctionPanel, java.awt.BorderLayout.WEST);
 
@@ -485,6 +495,15 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         applicationControl.filterOutOfVocabularyWords(oovToggleButton.isSelected());
     }//GEN-LAST:event_oovToggleButtonActionPerformed
 
+    private void changeSpeakerAbbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSpeakerAbbButtonActionPerformed
+        try {
+            applicationControl.changeSpeakerAbbreviations();
+        } catch (JDOMException ex) {
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);
+            applicationControl.displayException(ex);
+        }
+    }//GEN-LAST:event_changeSpeakerAbbButtonActionPerformed
+
     private void changeMode(){
         if (normalizationRadioButton.isSelected()){
             applicationControl.mode = ApplicationControl.NORMALIZATION_MODE;            
@@ -538,6 +557,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     public javax.swing.JToolBar applicationToolBar;
     private javax.swing.JCheckBox autoAdvanceCheckBox;
     private javax.swing.JPanel buttonPanel;
+    private javax.swing.JButton changeSpeakerAbbButton;
     private javax.swing.JButton changeSpeakerButton;
     public javax.swing.JScrollPane contributionTableScrollPane;
     private javax.swing.JPanel correctionPanel;

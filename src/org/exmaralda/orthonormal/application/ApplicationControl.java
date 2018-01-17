@@ -50,6 +50,7 @@ import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
+import org.exmaralda.orthonormal.gui.ChangeSpeakerAbbreviationsDialog;
 import org.exmaralda.orthonormal.gui.EditContributionDialog;
 import org.exmaralda.orthonormal.gui.EditPreferencesDialog;
 import org.exmaralda.orthonormal.gui.SaveLexiconDialog;
@@ -1974,6 +1975,61 @@ public final class ApplicationControl implements  ListSelectionListener,
         }
         
         
+    }
+
+    void changeSpeakerAbbreviations() throws JDOMException {
+        ChangeSpeakerAbbreviationsDialog dialog = new ChangeSpeakerAbbreviationsDialog(applicationFrame, true, getTranscription().getDocument());
+        dialog.setLocationRelativeTo(applicationFrame);
+        dialog.setVisible(true);
+        if (dialog.changed){
+            ArrayList<String[]> mappings = dialog.getMappings();
+            
+            //checkMappings
+            HashSet<String> oldAbbs = new HashSet<String>();
+            HashSet<String> newAbbs = new HashSet<String>();
+            for (String[] pair : mappings){
+                oldAbbs.add(pair[0]);
+                if (pair[0].equals(pair[1])) continue;
+                if (!(pair[1].matches("^[A-Za-z][A-Za-z0-9]{0,5}$"))){
+                    displayException(pair[1] + " ist kein zulässiges Kürzel.\nÄnderung werden nicht ausgeführt");
+                    return;
+                }
+                if (!(newAbbs.add(pair[1]))){
+                    displayException(pair[1] + " kommt doppelt vor.\nÄnderungen werden nicht ausgeführt");
+                    return;                    
+                }
+            }
+            newAbbs.retainAll(oldAbbs);
+            if (!(newAbbs.isEmpty())){
+                String message = "";
+                for (String abb : newAbbs){
+                    message+= abb + " soll als geändertes Kürzel verwendet werden, kommt aber schon in den alten vor.\n";
+                }
+                message+="Änderungen werden nicht ausgeführt.";
+                displayException(message);
+                return;
+            }
+            Document doc= getTranscription().getDocument();
+            int count = 0;
+            for (String[] pair : mappings){
+                if (pair[0].equals(pair[1])) continue;
+                String oldAbb = pair[0];
+                String newAbb = pair[1];
+                ((Element)(XPath.selectSingleNode(doc, "//speaker[@speaker-id='" + oldAbb + "']"))).setAttribute("speaker-id", newAbb);
+                List l = XPath.selectNodes(doc, "//contribution[@speaker-reference='" + oldAbb + "']");
+                for (Object o : l){
+                    ((Element)o).setAttribute("speaker-reference", newAbb);
+                }
+                count++;
+            }
+            getTranscription().indexSpeakers();
+            contributionListTableModel.fireTableChanged(new TableModelEvent(contributionListTableModel, 0, contributionListTableModel.getRowCount(), 3,
+                       TableModelEvent.UPDATE));
+            JOptionPane.showMessageDialog(applicationFrame, Integer.toString(count) + " Kürzel geändert.");
+            if (count>0){
+                DOCUMENT_CHANGED=true;
+            }
+        }
     }
     
 

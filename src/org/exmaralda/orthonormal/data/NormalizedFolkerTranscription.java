@@ -140,16 +140,7 @@ public class NormalizedFolkerTranscription {
             timeMappings.put(id, tp);
         }
 
-        speakerMappings  = new HashMap<String, Speaker>();
-        List l3 = xmlDocument.getRootElement().getChild("speakers").getChildren("speaker");
-        for (Object o : l3){
-            Element speakerElement = (Element)o;
-            String id = speakerElement.getAttributeValue("speaker-id");
-            String name = speakerElement.getChildText("name");
-            Speaker speaker = new Speaker(id);
-            speaker.setName(name);
-            speakerMappings.put(id, speaker);
-        }
+        indexSpeakers();
 
         wordMappings = new HashMap<Element, ArrayList<Element>>();
         wordIDs = new HashSet<String>();
@@ -220,6 +211,19 @@ public class NormalizedFolkerTranscription {
             return (double)nWords / (double)allWords;
         } catch (JDOMException ex) {
             return -1.0;
+        }
+    }
+
+    public void indexSpeakers() {
+        speakerMappings  = new HashMap<String, Speaker>();
+        List l3 = xmlDocument.getRootElement().getChild("speakers").getChildren("speaker");
+        for (Object o : l3){
+            Element speakerElement = (Element)o;
+            String id = speakerElement.getAttributeValue("speaker-id");
+            String name = speakerElement.getChildText("name");
+            Speaker speaker = new Speaker(id);
+            speaker.setName(name);
+            speakerMappings.put(id, speaker);
         }
     }
 

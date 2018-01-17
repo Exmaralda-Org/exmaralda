@@ -24,15 +24,18 @@ public class NormalizedContributionListTableModel extends AbstractTableModel {
     public boolean DOCUMENT_CHANGED = false;
 
 
-    /** Creates a new instance of EventListTableModel */
+    /** Creates a new instance of EventListTableModel
+     * @param nft */
     public NormalizedContributionListTableModel(NormalizedFolkerTranscription nft) {
         transcription = nft;
     }
 
+    @Override
     public int getRowCount() {
         return transcription.getNumberOfContributions();
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (rowIndex>=transcription.getNumberOfContributions()) return null;
         Element contribution = transcription.getContributionAt(rowIndex);
@@ -46,14 +49,17 @@ public class NormalizedContributionListTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
 
+    @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         // do nothing - table is not editable
     }
     
+    @Override
     public int getColumnCount() {
         return 5;
     }
