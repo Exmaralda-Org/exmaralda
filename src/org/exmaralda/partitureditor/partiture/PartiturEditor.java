@@ -17,7 +17,6 @@ import javax.swing.*;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.prefs.BackingStoreException;

@@ -12,6 +12,44 @@ import java.util.HashMap;
  */
 public class MAUSParameterDialog extends javax.swing.JDialog {
 
+    // Language of the speech to be processed; we use the RFC5646 sub-structure 'iso639-3 - iso3166-1 [ - iso3166-2], 
+    // e.g. 'eng-US' for American English, 'deu-AT-1' for Austrian German spoken in 'Oberoesterreich'; 
+    // defines the possible orthographic text language in the input, the text-to-phoneme tranformation and some language specific transformations within the MAUS process. The code 'gsw-CH' (= Swiss German) denotes orthographic text input in Swiss German 'Dieth' encoding. 
+    
+    
+    // [aus-AU, eus-ES, eus-FR, cat-ES, nld-BE, nld-NL, eng-AU, eng-US, eng-GB, eng-SC, eng-NZ, 
+    // ekk-EE, fin-FI, fra-FR, kat-GE, deu-DE, gsw-CH, gsw-CH-BE, gsw-CH-BS, gsw-CH-GR, gsw-CH-SG, 
+    // gsw-CH-ZH, hun-HU, ita-IT, jpn-JP, gup-AU, mlt-MT, nor-NO, pol-PL, ron-RO, rus-RU, spa-ES, 
+    // guf-AU, cat, deu, eng, fra, hun, ita, mlt, nld, pol, nze, fin, ron, spa] 
+    
+    static String[][] LANGUAGES = {
+        {"deu", "German"},
+        {"eng", "English"},
+        {"nld", "Dutch ; Flemish"},
+        {"fra", "French"},
+        {"spa", "Spanish"},
+        {"ita", "Italian"},
+        {"cat", "Catalan"}, 	
+        {"ron", "Romanian; Moldavian; Moldovan"},
+        {"hun", "Hungarian"},
+        {"pol", "Polish"},
+        {"fin", "Finnish"},
+        {"cat-ES", "Catalan (Spanish)"},
+        {"eng-AU", "English (Australian)"},
+        {"eng-US", "English (American)"},
+        {"eng-GB", "English (British)"},
+        {"eng-NZ", "English (New Zealand)"},
+        {"eng-SC", "English (Seychelles)"},
+        {"eus-ES", "Basque (Spanish)"},
+        {"eus-FR", "Basque (French)"},
+        {"nld-BE", "Flemish (Belgium)"},
+        {"nld-NL", "Dutch (Netherlands)"},
+
+        {"aus-AU", "???"},
+        {"ekk", "EE)"}
+
+    };   
+
     public boolean approved = false;
     
     /**
@@ -22,11 +60,12 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     public MAUSParameterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.languageComboBox.setRenderer(new MAUSLanguagesComboBoxRenderer());
     }
     
     public HashMap<String, Object> getMAUSParameters() {
         HashMap<String, Object> result = new HashMap<String, Object>();
-        result.put("LANGUAGE", languageComboBox.getSelectedItem());
+        result.put("LANGUAGE", ((String[])languageComboBox.getSelectedItem())[0]);
         result.put("SEGMENT-CHAIN-SELECTION", segmentChainSelectionRadioButton.isSelected());
         result.put("USE-SEGMENTATION", segmentRadioButton.isSelected());
         result.put("SEGMENTATION-ALGORITHM", segmentationComboBox.getSelectedItem());
@@ -93,7 +132,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         jLabel1.setText("What language is spoken in the excerpt?");
         languagePanel.add(jLabel1, java.awt.BorderLayout.NORTH);
 
-        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "deu", "eng", "ita", "hun", "nld", "aus", "pol", "nze" }));
+        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel<String[]>(LANGUAGES));
         languagePanel.add(languageComboBox, java.awt.BorderLayout.SOUTH);
 
         mainPanel.add(languagePanel);

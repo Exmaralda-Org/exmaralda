@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +37,9 @@ public class ChangeSpeakerAbbreviationsDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form ChangeSpeakerAbbreviationsDialog
+     * @param parent
+     * @param modal
+     * @param transcription
      */
     public ChangeSpeakerAbbreviationsDialog(java.awt.Frame parent, boolean modal, Document transcription) {
         super(parent, modal);
@@ -45,6 +50,13 @@ public class ChangeSpeakerAbbreviationsDialog extends javax.swing.JDialog {
                 String[] pair = {abb,abb};
                 mappings.add(pair);                
             }
+            Collections.sort(mappings, new Comparator<String[]>(){
+                @Override
+                public int compare(String[] o1, String[] o2) {
+                    return o1[0].compareTo(o2[0]);
+                }
+                
+            });
         } catch (JDOMException ex) {
             Logger.getLogger(ChangeSpeakerAbbreviationsDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

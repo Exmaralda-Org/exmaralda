@@ -66,17 +66,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="languageComboBox">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
-                    <StringItem index="0" value="deu"/>
-                    <StringItem index="1" value="eng"/>
-                    <StringItem index="2" value="ita"/>
-                    <StringItem index="3" value="hun"/>
-                    <StringItem index="4" value="nld"/>
-                    <StringItem index="5" value="aus"/>
-                    <StringItem index="6" value="pol"/>
-                    <StringItem index="7" value="nze"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;String[]&gt;(LANGUAGES)" type="code"/>
                 </Property>
               </Properties>
               <Constraints>
