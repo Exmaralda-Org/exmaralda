@@ -14,9 +14,10 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
 
     // Language of the speech to be processed; we use the RFC5646 sub-structure 'iso639-3 - iso3166-1 [ - iso3166-2], 
     // e.g. 'eng-US' for American English, 'deu-AT-1' for Austrian German spoken in 'Oberoesterreich'; 
-    // defines the possible orthographic text language in the input, the text-to-phoneme tranformation and some language specific transformations within the MAUS process. The code 'gsw-CH' (= Swiss German) denotes orthographic text input in Swiss German 'Dieth' encoding. 
+    // defines the possible orthographic text language in the input, the text-to-phoneme tranformation and some language specific transformations 
+    //within the MAUS process. The code 'gsw-CH' (= Swiss German) denotes orthographic text input in Swiss German 'Dieth' encoding. 
     
-    
+     
     // [aus-AU, eus-ES, eus-FR, cat-ES, nld-BE, nld-NL, eng-AU, eng-US, eng-GB, eng-SC, eng-NZ, 
     // ekk-EE, fin-FI, fra-FR, kat-GE, deu-DE, gsw-CH, gsw-CH-BE, gsw-CH-BS, gsw-CH-GR, gsw-CH-SG, 
     // gsw-CH-ZH, hun-HU, ita-IT, jpn-JP, gup-AU, mlt-MT, nor-NO, pol-PL, ron-RO, rus-RU, spa-ES, 
@@ -34,19 +35,37 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         {"hun", "Hungarian"},
         {"pol", "Polish"},
         {"fin", "Finnish"},
-        {"cat-ES", "Catalan (Spanish)"},
-        {"eng-AU", "English (Australian)"},
-        {"eng-US", "English (American)"},
-        {"eng-GB", "English (British)"},
+        {"cat-ES", "Catalan (Spain)"},
+        {"ekk-EE", "Estonian (Estonia)"},        
+        {"eng-AU", "English (Australia)"},
+        {"eng-US", "English (USA)"},
+        {"eng-GB", "English (Great Britain)"},
         {"eng-NZ", "English (New Zealand)"},
         {"eng-SC", "English (Seychelles)"},
-        {"eus-ES", "Basque (Spanish)"},
-        {"eus-FR", "Basque (French)"},
+        {"fra-FR", "French (France)"},
+        {"eus-ES", "Basque (Spain)"},
+        {"eus-FR", "Basque (France)"}, 
+        {"guf-AU", "Gupapuyngu (Australia)"},
+        {"gup-AU", "Gunwinggu (Australia)"},
+        {"ita-IT", "Italian (Italy)"},
+        {"jpn-JP", "Japanese (Japan)"},
         {"nld-BE", "Flemish (Belgium)"},
+        {"kat-GE", "Georgian (Georgia)"},
         {"nld-NL", "Dutch (Netherlands)"},
+        {"nor-NO", "Norwegian (Norway)"},
+        {"pol-PL", "Polish (Poland)"},
+        {"rus-RU", "Russian (Russia)"},
+        {"gsw-CH", "Swiss German, Dieth encoding"},
+        {"gsw-CH-BE", "Swiss German, Dieth encoding (Bern)"},
+        {"gsw-CH-BS", "Swiss German, Dieth encoding (Basel)"},
+        {"gsw-CH-GR", "Swiss German, Dieth encoding (Graubünden)"},
+        {"gsw-CH-SG", "Swiss German, Dieth encoding (St. Gallen)"},
+        {"gsw-CH-ZH", "Swiss German, Dieth encoding (Zürich)"},
+        
+        
+        // gsw-CH, gsw-CH-BE, gsw-CH-BS, gsw-CH-GR, gsw-CH-SG, gsw-CH-ZH,
 
-        {"aus-AU", "???"},
-        {"ekk", "EE)"}
+        {"aus-AU", "???"}
 
     };   
 
