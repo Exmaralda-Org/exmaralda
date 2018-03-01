@@ -63,7 +63,7 @@
             <!-- ... one cell for the text ... -->
             <td class="text">
                 <span>
-                    <xsl:if test="@who='1'">
+                    <xsl:if test="@who='Speaker_001'">
                         <xsl:attribute name="style">color:blue;</xsl:attribute>
                     </xsl:if>
                     <xsl:apply-templates select="u"/><br/>

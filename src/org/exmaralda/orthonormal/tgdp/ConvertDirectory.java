@@ -6,9 +6,12 @@
 package org.exmaralda.orthonormal.tgdp;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,6 +20,7 @@ import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.jdom.Document;
 import org.jdom.JDOMException;
+import org.jdom.xpath.XPath;
 import org.xml.sax.SAXException;
 
 /**
@@ -44,35 +48,52 @@ public class ConvertDirectory {
         }
     }
 
-    String IN_DIR = "F:\\Dropbox\\IDS\\AGD\\Sprachinseln\\GOLD_STANDARD\\TGDP";
+    String IN_DIR = "F:\\Dropbox\\IDS\\AGD\\Sprachinseln\\GOLD_STANDARD\\TGDP\\interviews";
     String EAF2TEI1 = "/org/exmaralda/orthonormal/tgdp/EAF2TEI_tgdp.xsl";
     String EAF2TEI2 = "/org/exmaralda/orthonormal/tgdp/EAF2TEI_tgdp2.xsl";
     String TEI2HTML = "/org/exmaralda/orthonormal/tgdp/TEI2HTML_tgdp.xsl";
 
     private void doit() throws SAXException, ParserConfigurationException, IOException, TransformerException, JDOMException {
-        File[] eafFiles = new File(IN_DIR).listFiles(new FilenameFilter(){
+        ArrayList<File> allEAFFiles = new ArrayList<File>();
+        File[] subDirs = new File(IN_DIR).listFiles(new FileFilter(){
             @Override
-            public boolean accept(File dir, String name) {
-                return name.toUpperCase().endsWith(".EAF");
-            }            
+            public boolean accept(File pathname) {
+                return pathname.isDirectory();
+            }
+                  
         });
+        for (File subDir : subDirs){
+            File[] eafFiles = subDir.listFiles(new FilenameFilter(){
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.toUpperCase().endsWith(".EAF");
+                }            
+            });
+            allEAFFiles.addAll(Arrays.asList(eafFiles));
+        }
         StylesheetFactory ssf = new StylesheetFactory(true);
-        for (File eafFile : eafFiles){
+        int countAll = 0;
+        for (File eafFile : allEAFFiles){
             System.out.println("Processing " + eafFile.getAbsolutePath());
             String isoTei1 = ssf.applyInternalStylesheetToExternalXMLFile(EAF2TEI1, eafFile.getAbsolutePath());
-            String isoTei2 = ssf.applyInternalStylesheetToString(EAF2TEI2, isoTei1);
-            System.out.println(isoTei2);
+            //String isoTei2 = ssf.applyInternalStylesheetToString(EAF2TEI2, isoTei1);
+            String isoTei2 = isoTei1;
+            //System.out.println(isoTei2);
             Document doc = FileIO.readDocumentFromString(isoTei2);
-            File outFile = new File(new File(IN_DIR), eafFile.getName().replaceAll("\\.eaf", ".xml"));
+            System.out.println(XPath.selectNodes(doc, "//w").size());
+            System.out.println(XPath.selectNodes(doc, "//span[string-length()>0]").size());
+            countAll+=XPath.selectNodes(doc, "//w").size();
+            File outFile = new File(eafFile.getParentFile(), eafFile.getName().replaceAll("\\.eaf", ".xml"));
             FileIO.writeDocumentToLocalFile(outFile, doc);
             
             String html = ssf.applyInternalStylesheetToString(TEI2HTML, isoTei2);
-            File htmlFile = new File(new File(IN_DIR), eafFile.getName().replaceAll("\\.eaf", ".html"));
+            File htmlFile = new File(eafFile.getParentFile(), eafFile.getName().replaceAll("\\.eaf", ".html"));
             FileOutputStream fos = new FileOutputStream(htmlFile);
             fos.write(html.getBytes("UTF-8"));
             fos.close();
 
         }
+        System.out.println(countAll + " tokens!");
     }
     
 }
