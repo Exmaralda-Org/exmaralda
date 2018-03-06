@@ -76,8 +76,8 @@ public class ConvertDirectory {
         for (File eafFile : allEAFFiles){
             System.out.println("Processing " + eafFile.getAbsolutePath());
             String isoTei1 = ssf.applyInternalStylesheetToExternalXMLFile(EAF2TEI1, eafFile.getAbsolutePath());
-            //String isoTei2 = ssf.applyInternalStylesheetToString(EAF2TEI2, isoTei1);
-            String isoTei2 = isoTei1;
+            String isoTei2 = ssf.applyInternalStylesheetToString(EAF2TEI2, isoTei1);
+            //String isoTei2 = isoTei1;
             //System.out.println(isoTei2);
             Document doc = FileIO.readDocumentFromString(isoTei2);
             System.out.println(XPath.selectNodes(doc, "//w").size());

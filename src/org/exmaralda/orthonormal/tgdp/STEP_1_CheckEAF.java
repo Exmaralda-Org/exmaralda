@@ -55,6 +55,7 @@ public class STEP_1_CheckEAF extends AbstractEAFProcessor {
                 /*<TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="Default" PARTICIPANT="001"
                     TIER_ID="Interviewer 1">*/
                 Element e = (Element)o;
+                e.setAttribute("child-count", Integer.toString(e.getChildren().size()));
                 e.removeContent();
                 e.detach();
                 fileElement.addContent(e);

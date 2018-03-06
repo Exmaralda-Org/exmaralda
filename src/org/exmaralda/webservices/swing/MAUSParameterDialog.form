@@ -67,7 +67,7 @@
             <Component class="javax.swing.JComboBox" name="languageComboBox">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;String[]&gt;(LANGUAGES)" type="code"/>
+                  <Connection code="new javax.swing.DefaultComboBoxModel(LANGUAGES)" type="code"/>
                 </Property>
               </Properties>
               <Constraints>

@@ -21,10 +21,13 @@ public class MaskFileDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form MaskFileDialog
+     * @param parent
+     * @param modal
      */
     public MaskFileDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        samplePanel.setVisible(false);
     }
     
     public void setFile(String mediaPath) {
@@ -53,6 +56,7 @@ public class MaskFileDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         sourceFilePanel = new javax.swing.JPanel();
         sourceFileLabel = new javax.swing.JLabel();
@@ -65,6 +69,10 @@ public class MaskFileDialog extends javax.swing.JDialog {
         methodPanel = new javax.swing.JPanel();
         methodLabel = new javax.swing.JLabel();
         methodComboBox = new javax.swing.JComboBox();
+        samplePanel = new javax.swing.JPanel();
+        sampleLabel = new javax.swing.JLabel();
+        sampleTextField = new javax.swing.JTextField();
+        sampleBrowseButton = new javax.swing.JButton();
         okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -125,17 +133,39 @@ public class MaskFileDialog extends javax.swing.JDialog {
         methodPanel.setLayout(new javax.swing.BoxLayout(methodPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         methodLabel.setText(FOLKERInternationalizer.getString("masker.method"));
-        methodLabel.setMaximumSize(new java.awt.Dimension(80, 14));
-        methodLabel.setMinimumSize(new java.awt.Dimension(80, 14));
-        methodLabel.setPreferredSize(new java.awt.Dimension(80, 14));
         methodPanel.add(methodLabel);
 
-        methodComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Silence", "Brownian Noise (Generated)", "Brownian Noise (Copied)" }));
+        methodComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Silence", "Brownian Noise (Generated)", "Brownian Noise (Copied)", "Sample" }));
         methodComboBox.setMaximumSize(new java.awt.Dimension(200, 24));
         methodComboBox.setPreferredSize(new java.awt.Dimension(200, 24));
+        methodComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                methodComboBoxActionPerformed(evt);
+            }
+        });
         methodPanel.add(methodComboBox);
 
         mainPanel.add(methodPanel);
+
+        samplePanel.setLayout(new javax.swing.BoxLayout(samplePanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        sampleLabel.setText("Sample: ");
+        samplePanel.add(sampleLabel);
+
+        sampleTextField.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        sampleTextField.setPreferredSize(new java.awt.Dimension(400, 24));
+        samplePanel.add(sampleTextField);
+
+        sampleBrowseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/document-open.png"))); // NOI18N
+        sampleBrowseButton.setText(FOLKERInternationalizer.getString("masker.browse"));
+        sampleBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sampleBrowseButtonActionPerformed(evt);
+            }
+        });
+        samplePanel.add(sampleBrowseButton);
+
+        mainPanel.add(samplePanel);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -209,6 +239,26 @@ public class MaskFileDialog extends javax.swing.JDialog {
        dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void sampleBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sampleBrowseButtonActionPerformed
+       JFileChooser fileChooser = new JFileChooser();
+        JLabel imageLabel = new JLabel("");
+        imageLabel.setIcon(new Constants().getIcon(Constants.BIG_RECORDING_ICON));
+        fileChooser.setAccessory(imageLabel);
+        fileChooser.setAcceptAllFileFilterUsed(false);        
+        fileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
+        fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));
+        int retValue = fileChooser.showSaveDialog(this);
+        if (retValue==JFileChooser.APPROVE_OPTION) {
+            File f = fileChooser.getSelectedFile();
+            sampleTextField.setText(f.getAbsolutePath());
+            //checkIfReady();
+        }
+    }//GEN-LAST:event_sampleBrowseButtonActionPerformed
+
+    private void methodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_methodComboBoxActionPerformed
+        samplePanel.setVisible(this.methodComboBox.getSelectedIndex()==Masker.METHOD_SAMPLE);
+    }//GEN-LAST:event_methodComboBoxActionPerformed
+
     private void checkIfReady(){
         okButton.setEnabled(sourceFileTextField.getText().length()>0
                 && targetFileTextField.getText().length()>0);
@@ -256,6 +306,7 @@ public class MaskFileDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
@@ -265,6 +316,10 @@ public class MaskFileDialog extends javax.swing.JDialog {
     private javax.swing.JPanel methodPanel;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
+    private javax.swing.JButton sampleBrowseButton;
+    private javax.swing.JLabel sampleLabel;
+    private javax.swing.JPanel samplePanel;
+    private javax.swing.JTextField sampleTextField;
     private javax.swing.JButton sourceFileBrowseButton;
     private javax.swing.JLabel sourceFileLabel;
     private javax.swing.JPanel sourceFilePanel;

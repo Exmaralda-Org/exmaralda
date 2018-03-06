@@ -32,7 +32,7 @@
         <xsl:variable name="WORD_ID" select="@xml:id"/>
         <w>
             <xsl:attribute name="id" select="@xml:id"/>
-            <xsl:if test="ancestor::annotationBlock/descendant::spanGrp[@type='normalisation']">
+            <xsl:if test="ancestor::annotationBlock/descendant::spanGrp[@type='normalisation']/span[@from=concat('#',$WORD_ID)]">
                 <xsl:attribute name="n">
                     <xsl:for-each select="ancestor::annotationBlock/descendant::spanGrp[@type='normalisation']/span[@from=concat('#',$WORD_ID)]">
                         <xsl:value-of select="text()"/>

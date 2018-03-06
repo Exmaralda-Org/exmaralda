@@ -9,7 +9,6 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.partitureditor.jexmaralda.TierDescriptions;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import java.util.*;
 /**
  *
@@ -18,18 +17,21 @@ import java.util.*;
  */
 public class EditTierOrderDialog extends JEscapeDialog {
 
-    private javax.swing.DefaultListModel tiersListModel;
+    private final javax.swing.DefaultListModel tiersListModel;
     private String[] tierOrder;
     
-    /** Creates new form EditTierOrderDialog */
+    /** Creates new form EditTierOrderDialog
+     * @param parent
+     * @param modal
+     * @param transcription */
     public EditTierOrderDialog(java.awt.Frame parent,boolean modal, BasicTranscription transcription) {
         super (parent, modal);
         tierOrder = transcription.getBody().getAllTierIDs();
         tiersListModel = new javax.swing.DefaultListModel();
         TierDescriptions td = new TierDescriptions(transcription);
-        for (int pos=0; pos<tierOrder.length; pos++){
-           String listEntry = new String(tierOrder[pos] + " (" + td.getTierDescriptionForTierID(tierOrder[pos]) + ")");
-           tiersListModel.addElement(listEntry);
+        for (String tierOrder1 : tierOrder) {
+            String listEntry = tierOrder1 + " (" + td.getTierDescriptionForTierID(tierOrder1) + ")";
+            tiersListModel.addElement(listEntry);
         }
         initComponents ();
         this.getRootPane().setDefaultButton(okButton);
@@ -156,8 +158,8 @@ public class EditTierOrderDialog extends JEscapeDialog {
   private void downButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
 // Add your handling code here:
     int selection = tiersList.getSelectedIndex();
-    String value = new String((String)tiersListModel.getElementAt(selection));
-    String valueBelow = new String((String)tiersListModel.getElementAt(selection+1));
+    String value = (String)tiersListModel.getElementAt(selection);
+    String valueBelow = (String)tiersListModel.getElementAt(selection+1);
     tiersListModel.setElementAt(value, selection+1);
     tiersListModel.setElementAt(valueBelow, selection);
     tiersList.setSelectedIndex(selection+1);    
@@ -166,8 +168,8 @@ public class EditTierOrderDialog extends JEscapeDialog {
   private void upButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
 // Add your handling code here:
     int selection = tiersList.getSelectedIndex();
-    String value = new String((String)tiersListModel.getElementAt(selection));
-    String valueAbove = new String((String)tiersListModel.getElementAt(selection-1));
+    String value = (String)tiersListModel.getElementAt(selection);
+    String valueAbove = (String)tiersListModel.getElementAt(selection-1);
     tiersListModel.setElementAt(value, selection-1);
     tiersListModel.setElementAt(valueAbove, selection);
     tiersList.setSelectedIndex(selection-1);

@@ -76,6 +76,7 @@ import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.xml.sax.SAXException;
 
@@ -122,6 +123,8 @@ public final class ApplicationControl implements  ListSelectionListener,
     org.exmaralda.orthonormal.actions.fileactions.OutputAction outputAction;
     org.exmaralda.orthonormal.actions.fileactions.ImportCMCAction importCMCAction;    
     org.exmaralda.orthonormal.actions.fileactions.ExportCMCAction exportCMCAction;    
+    org.exmaralda.orthonormal.actions.fileactions.ImportTGDPAction importTGDPAction;    
+    org.exmaralda.orthonormal.actions.fileactions.ExportTGDPAction exportTGDPAction;    
     org.exmaralda.orthonormal.actions.fileactions.EditRecordingAction editRecordingAction;
     org.exmaralda.orthonormal.actions.fileactions.ExitAction exitAction;
     // ---------------------------
@@ -346,8 +349,14 @@ public final class ApplicationControl implements  ListSelectionListener,
         saveAsAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAsAction(this, "Speichern unter...", c.getIcon(Constants.SAVE_AS_ICON));
         exportAction = new org.exmaralda.orthonormal.actions.fileactions.ExportAction(this, "Export...", c.getIcon(Constants.EXPORT_ICON));        
         outputAction = new org.exmaralda.orthonormal.actions.fileactions.OutputAction(this, "Ausgabe...", c.getIcon(Constants.OUTPUT_ICON));
+        
         importCMCAction = new org.exmaralda.orthonormal.actions.fileactions.ImportCMCAction(this, "CMC-Datei importieren...", c.getIcon(Constants.IMPORT_ICON));
         exportCMCAction = new org.exmaralda.orthonormal.actions.fileactions.ExportCMCAction(this, "CMC-Datei exportieren...", c.getIcon(Constants.EXPORT_ICON));
+
+        importTGDPAction = new org.exmaralda.orthonormal.actions.fileactions.ImportTGDPAction(this, "TGDP-Datei importieren...", c.getIcon(Constants.IMPORT_ICON));
+        exportTGDPAction = new org.exmaralda.orthonormal.actions.fileactions.ExportTGDPAction(this, "TGDP-Datei exportieren...", c.getIcon(Constants.EXPORT_ICON));
+
+        
         editRecordingAction = new org.exmaralda.orthonormal.actions.fileactions.EditRecordingAction(this, "Aufnahme...", c.getIcon(Constants.EDIT_RECORDING_ICON));
         exitAction = new org.exmaralda.orthonormal.actions.fileactions.ExitAction(this, "Beenden", null);
 
@@ -370,10 +379,13 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.fileMenu.add(outputAction);
         
         applicationFrame.fileMenu.addSeparator();
-        JMenu cmcDataMenu = new JMenu("CMC-Daten");
-        cmcDataMenu.add(importCMCAction);
-        cmcDataMenu.add(exportCMCAction);
-        applicationFrame.fileMenu.add(cmcDataMenu);
+        JMenu otherDataMenu = new JMenu("Andere Daten");
+        otherDataMenu.add(importCMCAction);
+        otherDataMenu.add(exportCMCAction);
+        otherDataMenu.add(new JSeparator());
+        otherDataMenu.add(importTGDPAction);
+        otherDataMenu.add(exportTGDPAction);
+        applicationFrame.fileMenu.add(otherDataMenu);
         
         
         applicationFrame.fileMenu.addSeparator();
@@ -1819,6 +1831,30 @@ public final class ApplicationControl implements  ListSelectionListener,
     /**************************/
     /* CMC DATA Functionality */
     /**************************/
+
+    String TRANSFORM_TGDP_XSL = "/org/exmaralda/orthonormal/tgdp/TEI2FLN_tgdp.xsl";
+
+    public void importTGDPFile(File f) {
+        
+        try {
+            String in = IOUtilities.documentToString(FileIO.readDocumentFromLocalFile(f));
+            // transform to FLN using the stylesheet
+            StylesheetFactory ssf = new StylesheetFactory(true);
+            String transformed = ssf.applyInternalStylesheetToString(TRANSFORM_TGDP_XSL, in); 
+            
+            File temp = File.createTempFile("TGDP", ".fln");
+            FileIO.writeDocumentToLocalFile(temp,FileIO.readDocumentFromString(transformed));
+            this.openTranscriptionFile(temp);
+            
+            
+        } catch (Exception ex) {
+            displayException(ex);
+        } 
+    }
+
+    /**************************/
+    /* CMC DATA Functionality */
+    /**************************/
     
     String TRANSFORM_CMC_XSL = "/org/exmaralda/orthonormal/chat/ChatXML2FLN.xsl";
     
@@ -1860,6 +1896,95 @@ public final class ApplicationControl implements  ListSelectionListener,
         }
                 
     }
+    
+    public void exportTGDPFile(File f) {
+        try {
+            Document editedDocument = getTranscription().getDocument();
+            Document targetDocument = FileIO.readDocumentFromLocalFile(f);
+                    
+            List editedTokens = XPath.selectNodes(editedDocument, "//w");
+            HashMap<String,Element> ids2editedTokens = new HashMap<String, Element>();
+            for (Object o : editedTokens){
+                Element e = (Element)o;
+                String id = e.getAttributeValue("id");
+                ids2editedTokens.put(id, e);
+            }
+            
+            /*List targetTokens = XPath.selectNodes(targetDocument, "//w");
+            for (Object o : targetTokens){
+                Element t = (Element)o;
+                String id = t.getAttributeValue("id", Namespace.XML_NAMESPACE);
+                Element e = ids2editedTokens.get(id);
+                
+                if (e.getAttributeValue("n")!=null){
+                    t.setAttribute("n", e.getAttributeValue("n"));                    
+                } else {
+                    t.removeAttribute("n");
+                }
+                if (e.getAttributeValue("lemma")!=null){
+                    t.setAttribute("lemma", e.getAttributeValue("lemma"));                
+                }
+                if (e.getAttributeValue("pos")!=null){
+                    t.setAttribute("pos", e.getAttributeValue("pos"));                    
+                }
+                t.setAttribute("i", e.getAttributeValue("i"));
+            }*/
+            
+            List targetAnnotationBlocks = XPath.selectNodes(targetDocument, "//annotationBlock");
+            for (Object o : targetAnnotationBlocks){
+                Element annotationBlock = (Element)o;
+                //annotationBlock.removeChildren("spanGrp");
+                List existing = XPath.selectNodes(annotationBlock, "descendant::spanGrp[@type='normalisation' or @type='lemma' or @type='pos']");
+                for (Object o2 : existing){
+                    ((Element)o2).detach();
+                }
+                Element nSpanGrp = new Element("spanGrp").setAttribute("type", "normalisation");
+                Element lemmaSpanGrp = new Element("spanGrp").setAttribute("type", "lemma");
+                Element posSpanGrp = new Element("spanGrp").setAttribute("type", "pos");
+                annotationBlock.addContent(nSpanGrp);
+                annotationBlock.addContent(lemmaSpanGrp);
+                annotationBlock.addContent(posSpanGrp);
+                List wordTokens = XPath.selectNodes(annotationBlock, "descendant::w");
+                for (Object o2 : wordTokens){
+                    Element t = (Element)o2;
+                    String id = t.getAttributeValue("id", Namespace.XML_NAMESPACE);
+                    Element e = ids2editedTokens.get(id);
+                    if (e.getAttributeValue("n")!=null){
+                       Element span = new Element("span")
+                               .setAttribute("from", "#" + id)
+                               .setAttribute("to", "#" + id)
+                               .setText(e.getAttributeValue("n"));
+                       nSpanGrp.addContent(span);
+                    } 
+                    if (e.getAttributeValue("lemma")!=null){
+                       Element span = new Element("span")
+                               .setAttribute("from", "#" + id)
+                               .setAttribute("to", "#" + id)
+                               .setText(e.getAttributeValue("lemma"));
+                       lemmaSpanGrp.addContent(span);
+                    }
+                    if (e.getAttributeValue("pos")!=null){
+                       Element span = new Element("span")
+                               .setAttribute("from", "#" + id)
+                               .setAttribute("to", "#" + id)
+                               .setText(e.getAttributeValue("pos"));
+                       posSpanGrp.addContent(span);
+                    }
+                }
+                
+            }
+            
+            FileIO.writeDocumentToLocalFile(f, targetDocument);
+            status("TGDP-Datei " + f.getAbsolutePath() + " exportiert.");
+            
+            
+        } catch (JDOMException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
     public void exportCMCFile(File f) {
         try {
@@ -2031,6 +2156,8 @@ public final class ApplicationControl implements  ListSelectionListener,
             }
         }
     }
+
+
     
 
 

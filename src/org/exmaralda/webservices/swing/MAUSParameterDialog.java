@@ -151,7 +151,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         jLabel1.setText("What language is spoken in the excerpt?");
         languagePanel.add(jLabel1, java.awt.BorderLayout.NORTH);
 
-        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel<String[]>(LANGUAGES));
+        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(LANGUAGES));
         languagePanel.add(languageComboBox, java.awt.BorderLayout.SOUTH);
 
         mainPanel.add(languagePanel);

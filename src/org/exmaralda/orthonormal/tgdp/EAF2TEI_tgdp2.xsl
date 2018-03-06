@@ -25,15 +25,18 @@
                 </spanGrp>
             </xsl:if>
             <spanGrp type="normalisation">
-                <xsl:for-each select="u/w">
+                <xsl:for-each select="u/w[matches(text(),'[A-ZÄÖÜ]{2,}')]">
+                <!-- <xsl:for-each select="u/w"> -->
                     <span>
                         <xsl:attribute name="from"><xsl:text>#</xsl:text><xsl:value-of select="@xml:id"/></xsl:attribute>
                         <xsl:attribute name="to"><xsl:text>#</xsl:text><xsl:value-of select="@xml:id"/></xsl:attribute>
-                        <xsl:value-of select="text()"/>
+                        <xsl:value-of select="lower-case(text())"/>
                     </span>
                 </xsl:for-each>
             </spanGrp>
         </xsl:copy>
+        
+        
     </xsl:template>
     
     <xsl:template match="p[text()='[' or text()=']']"/>

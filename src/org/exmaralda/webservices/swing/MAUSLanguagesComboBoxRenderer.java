@@ -16,7 +16,8 @@ import javax.swing.JList;
 public class MAUSLanguagesComboBoxRenderer extends DefaultListCellRenderer {
 
     @Override
-    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    //public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         String myValue = ((String[])value)[1] + " (" + ((String[])value)[0] + ")";
         return super.getListCellRendererComponent(list, myValue, index, isSelected, cellHasFocus); //To change body of generated methods, choose Tools | Templates.
     }

@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -38,6 +37,7 @@ public class Masker {
     public static final int METHOD_SILENCE = 0;
     public static final int METHOD_BROWN_NOISE = 1;
     public static final int METHOD_BROWN_NOISE_COPIED = 2;
+    public static final int METHOD_SAMPLE = 3;
 
     public Masker(File fileIn, File fileOut) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException {
         wavFileIn = WavFile.openWavFile(fileIn);
@@ -145,24 +145,32 @@ public class Masker {
     private double[] getMask(double[] originalBuffer, int method) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException {
         //long[] mask = new long[originalBuffer.length];
         double[] mask = new double[originalBuffer.length];
-        if (method==Masker.METHOD_SILENCE){
-            Arrays.fill(mask, 0.0);
-        } else if (method==Masker.METHOD_BROWN_NOISE){
-            for (int c=0; c<numChannels; c++){
-                for (int pos=c; pos<mask.length; pos+=numChannels){
-                    mask[pos]=brownNoiseGenerator.getNext();
-                }
-            }
-        } else if (method==Masker.METHOD_BROWN_NOISE_COPIED){
-            if (brownNoise==null){
-                brownNoise = initBrownNoiseWavFile();  
-            }
-            for (int c=0; c<numChannels; c++){
-                for (int pos=c; pos<mask.length; pos+=numChannels){
-                    mask[pos] = brownNoise[(brownNoisePointer+pos)%brownNoise.length];
-                }
-            }
-            brownNoisePointer+=mask.length;
+        switch (method) {
+            case Masker.METHOD_SILENCE:
+                Arrays.fill(mask, 0.0);
+                break;
+            case Masker.METHOD_BROWN_NOISE:
+                for (int c=0; c<numChannels; c++){
+                    for (int pos=c; pos<mask.length; pos+=numChannels){
+                        mask[pos]=brownNoiseGenerator.getNext();
+                    }
+                }   break;
+            case Masker.METHOD_BROWN_NOISE_COPIED:
+                if (brownNoise==null){
+                    brownNoise = initBrownNoiseWavFile();
+                }   
+                for (int c=0; c<numChannels; c++){
+                    for (int pos=c; pos<mask.length; pos+=numChannels){
+                        mask[pos] = brownNoise[(brownNoisePointer+pos)%brownNoise.length];
+                    }
+                }   
+                brownNoisePointer+=mask.length;
+                break;
+            case Masker.METHOD_SAMPLE:
+                // TO DO
+                break;
+            default:
+                break;
         }
         return mask;
     }
