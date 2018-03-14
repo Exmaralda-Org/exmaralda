@@ -32,10 +32,12 @@
         <xsl:variable name="WORD_ID" select="@xml:id"/>
         <w>
             <xsl:attribute name="id" select="@xml:id"/>
+            <xsl:variable name="LANGUAGE"><xsl:value-of select="@xml:lang"/></xsl:variable>
             <xsl:if test="ancestor::annotationBlock/descendant::spanGrp[@type='normalisation']/span[@from=concat('#',$WORD_ID)]">
                 <xsl:attribute name="n">
                     <xsl:for-each select="ancestor::annotationBlock/descendant::spanGrp[@type='normalisation']/span[@from=concat('#',$WORD_ID)]">
                         <xsl:value-of select="text()"/>
+                        <xsl:if test="string-length($LANGUAGE)>0">@<xsl:value-of select="$LANGUAGE"/></xsl:if>
                     </xsl:for-each>
                 </xsl:attribute>
             </xsl:if>

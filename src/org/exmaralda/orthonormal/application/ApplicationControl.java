@@ -1955,6 +1955,12 @@ public final class ApplicationControl implements  ListSelectionListener,
                                .setAttribute("to", "#" + id)
                                .setText(e.getAttributeValue("n"));
                        nSpanGrp.addContent(span);
+                       if (e.getAttributeValue("n").contains("@")){
+                           int index = e.getAttributeValue("n").indexOf("@");
+                           String language = e.getAttributeValue("n").substring(index+1);
+                           t.setAttribute("lang", language, Namespace.XML_NAMESPACE);
+                           span.setText(e.getAttributeValue("n").substring(0,index));
+                       }
                     } 
                     if (e.getAttributeValue("lemma")!=null){
                        Element span = new Element("span")
