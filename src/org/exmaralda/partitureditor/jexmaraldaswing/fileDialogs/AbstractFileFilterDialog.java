@@ -58,8 +58,10 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter FlexTextXMLFileFilter = new ParameterFileFilter("flextext", "Flex XML file (*.flextext)");
     public ParameterFileFilter SRTFileFilter = new ParameterFileFilter("srt", "SubRip Subtitle file (*.srt)");
     public ParameterFileFilter VTTFileFilter = new ParameterFileFilter("vtt", "Web Video Text Tracks file (*.vtt)");
+    static String[] ineltsv_suff = {"tsv", "csv", "txt"};
+    public ParameterFileFilter InelTsvFileFilter = new ParameterFileFilter(ineltsv_suff, "INEL tsv file (*.tsv, *.csv, *.txt)");
 
-    
+
 
 
 }
