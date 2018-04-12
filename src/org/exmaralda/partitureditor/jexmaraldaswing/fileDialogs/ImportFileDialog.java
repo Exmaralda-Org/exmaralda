@@ -14,14 +14,14 @@ import javax.swing.*;
  * @author thomas
  */
 public class ImportFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
-    
+
     public JComboBox encodingComboBox;
     private JPanel accessoryPanel;
     public JCheckBox appendSpacesCheckBox;
     public String[] encodingNames = {"[System-Default]", "7-Bit-ASCII", "ISO-8859-1 (Standard Latin)", "UTF-8", "UTF-16 (Big Endian)", "UTF-16 (Little Endian)"};
     public String[] encodings = {"", "US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE"};
-    
-    
+
+
     /** Creates new ImportFileDialog
      * @param startDirectory */
     public ImportFileDialog(String startDirectory) {
@@ -31,7 +31,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
             setPreferredSize(new java.awt.Dimension(800, 600));
         }
         setCurrentDirectory(new File(startDirectory).getParentFile());
-        setDialogTitle("Import file");       
+        setDialogTitle("Import file");
         setAcceptAllFileFilterUsed(false);
         addChoosableFileFilter(EAFFileFilter);
         addChoosableFileFilter(PraatFileFilter);
@@ -58,12 +58,13 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         addChoosableFileFilter(FlexTextXMLFileFilter);
         addChoosableFileFilter(exSyncFileFilter);
         addChoosableFileFilter(TCFFileFilter);
+        addChoosableFileFilter(InelTsvFileFilter);
         setFileFilter(PraatFileFilter);
         setMultiSelectionEnabled(false);
         initAccessory();
         addPropertyChangeListener("fileFilterChanged", this);
     }
-    
+
     private void initAccessory(){
         accessoryPanel = new JPanel();
         accessoryPanel.setLayout(new BoxLayout(accessoryPanel, BoxLayout.Y_AXIS));
@@ -95,6 +96,6 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         appendSpacesCheckBox.setVisible(getFileFilter()==TreeTaggerFilter);
         revalidate();
     }
-    
+
 
 }
