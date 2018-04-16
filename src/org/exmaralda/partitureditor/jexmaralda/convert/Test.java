@@ -23,10 +23,13 @@ public class Test {
     public static void main(String[] args) {
         try {
             //try {
-                CHATConverter cc = new CHATConverter(new File("F:\\Dropbox\\DEBUG\\issue99\\liean11a.1.cha"));
+                //CHATConverter cc = new CHATConverter(new File("F:\\Dropbox\\DEBUG\\issue99\\liean11a.1.cha"));
                 //CHATConverter cc = new CHATConverter(new File("T:\\TP-Z2\\DATEN\\EXMARaLDA_DemoKorpus\\EnglishTranslator\\export\\EnglishTranslator.cha"));
                 //CHATConverter cc = new CHATConverter(new File("S:\\TP-Z2\\Schulungen\\ICCA_Folkerschulung_2010\\block2.cha"));
-                BasicTranscription bt = cc.convert();
+                AudacityConverter cc = new AudacityConverter();
+                BasicTranscription bt = cc.readAudacityFromFile(new File("C:\\Users\\Thomas_Schmidt\\Desktop\\DEBUG\\AudacityImport\\T1220ASPEAK_dellines_hs02.txt"));
+                bt.writeXMLToFile("C:\\Users\\Thomas_Schmidt\\Desktop\\DEBUG\\AudacityImport\\out.exb", "none");
+                //BasicTranscription bt = cc.convert();
                 //bt.writeXMLToFile("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\CHAT_OUT.exb", "none");
                 //System.out.println(bt.getHead().toXML());
                 //System.out.println(bt.getBody().toXML());

@@ -260,7 +260,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 // switched
                 table.stratify(importedTranscription);
                 table.cleanup(importedTranscription);
-            } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter) || (selectedFileFilter==dialog.WinPitchFileFilter)){
+            } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter) 
+                    || (selectedFileFilter==dialog.AudacityLabelFileFilter)
+                    || (selectedFileFilter==dialog.WinPitchFileFilter)){
                 table.stratify(importedTranscription);
             }
             table.getModel().setTranscription(importedTranscription);

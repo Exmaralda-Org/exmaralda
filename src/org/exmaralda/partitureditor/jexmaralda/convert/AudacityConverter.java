@@ -223,6 +223,7 @@ public class AudacityConverter {
                 break;
         }
         bt.getBody().setCommonTimeline(tl);
+        //bt.getBody().stratify(AbstractEventTier.STRATIFY_BY_DISTRIBUTION);
         bt.normalize();
         return bt;
         

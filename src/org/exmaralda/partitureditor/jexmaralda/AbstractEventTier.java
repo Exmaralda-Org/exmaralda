@@ -330,6 +330,7 @@ public class AbstractEventTier extends AbstractTier {
             Event[] events = getEventsAtStartPoint(timeline.getTimelineItemAt(pos).getID());
             if (events.length>1){
                 // sort the events according to their length, longest event first
+                System.out.println("Here!");
                 events = sortAccordingToLength(timeline, events);
             }
             for (int i=0; i<events.length; i++){
@@ -405,10 +406,28 @@ public class AbstractEventTier extends AbstractTier {
 
     /** PRIVATE CONVENIENCE METHOD FOR SORTING AN ARRAY OF EVENTS ACCORDING TO LENGTH 
     ** WITH RESPECT TO A GIVEN TIMELINE */
-    private Event[] sortAccordingToLength(Timeline timeline, Event[] unsortedEvents){
-        Event[] sortedEvents = new Event[unsortedEvents.length];
+    private Event[] sortAccordingToLength(final Timeline timeline, Event[] unsortedEvents){
+       Arrays.sort(unsortedEvents, new Comparator(){
+            
+            @Override
+            public int compare(Object o1, Object o2) {
+                Event e1 = (Event)o1;
+                Event e2 = (Event)o1;
+                
+                int length1 = timeline.calculateSpan(e1.getStart(),e1.getEnd());
+                int length2 = timeline.calculateSpan(e2.getStart(),e2.getEnd());
+                
+                return new Integer(length1).compareTo(new Integer(length2));
+            }
+            
+        });
+        
+       return unsortedEvents;
+       
+        /*Event[] sortedEvents = new Event[unsortedEvents.length];
         int count = 0;
         int checkLength=0;
+        System.out.println(unsortedEvents.length);
         while (count<unsortedEvents.length) {
             for (int i=0; i<unsortedEvents.length; i++){
                 String start = unsortedEvents[i].getStart();
@@ -428,7 +447,7 @@ public class AbstractEventTier extends AbstractTier {
             result[count] = sortedEvents[i];
             count++;
         }
-        return result;
+        return result;*/
     }
     
     /** returns true if this tier, according to the given timeline
