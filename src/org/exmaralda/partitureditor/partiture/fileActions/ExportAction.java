@@ -25,18 +25,18 @@ import org.xml.sax.SAXException;
 /**
  *
  * exports the current transcription to some 3rd party format
- * Menu: File --> Export... 
+ * Menu: File --> Export...
  * @author  thomas
  */
 public class ExportAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
-    
+
     /** Creates a new instance of ExportAGAction
      * @param t
      * @param icon */
     public ExportAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
-        super("Export...", icon, t);  
+        super("Export...", icon, t);
     }
-    
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("exportAction!");
@@ -49,7 +49,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             javax.swing.JOptionPane.showMessageDialog(table, message);
         }
     }
-    
+
     private void export() throws SAXException, IOException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException, FSMException, JDOMException, XSLTransformException, Exception{
         ExportFileDialog dialog = new ExportFileDialog(table.homeDirectory);
         ActionUtilities.setFileFilter("last-export-filter", table.getTopLevelAncestor(), dialog);
@@ -59,27 +59,27 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         ParameterFileFilter selectedFileFilter = (ParameterFileFilter)(dialog.getFileFilter());
         File selectedFile = dialog.getSelectedFile();
         String filename = selectedFile.getAbsolutePath();
-        
+
         //check whether or not the selected file has an extension
         if (!selectedFile.getName().contains(".")){
             filename+="." + selectedFileFilter.getSuffix();
         }
-        
+
         File exportFile = new File(filename);
         //check whether the export file already exists
         if (exportFile.exists()){
-            int confirm = 
+            int confirm =
                 javax.swing.JOptionPane.showConfirmDialog(table, exportFile.getAbsolutePath() + "\nalready exists. Overwrite?");
             if (confirm==javax.swing.JOptionPane.CANCEL_OPTION) return;
             if (confirm==javax.swing.JOptionPane.NO_OPTION) export();
         }
-        
+
         // now do the real export
         BasicTranscription trans = table.getModel().getTranscription().makeCopy();
-        
+
         if (selectedFileFilter==dialog.TASXFileFilter){
             TASXConverter tc = new TASXConverter();
-            tc.writeTASXToFile(trans, filename);            
+            tc.writeTASXToFile(trans, filename);
         } else if (selectedFileFilter==dialog.PraatFileFilter){
             PraatConverter pc = new PraatConverter();
             pc.writePraatToFile(trans, filename);
@@ -87,17 +87,17 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             AIFConverter.writeAIFToFile(trans, filename);
         } else if (selectedFileFilter==dialog.EAFFileFilter){
             ELANConverter ec = new ELANConverter();
-            ec.writeELANToFile(trans, filename);            
+            ec.writeELANToFile(trans, filename);
         } else if (selectedFileFilter==dialog.AudacityLabelFileFilter){
             //AudacityConverter ec = new AudacityConverter();
             switch (dialog.audacityExportAccessoryPanel.getMethod()){
                 case AudacityConverter.ALL_TIERS :
                     AudacityConverter.writeAudacityToFile(trans, filename);
                     break;
-                case AudacityConverter.SELECTED_TIERS :                    
+                case AudacityConverter.SELECTED_TIERS :
                     AudacityConverter.writeAudacityToFile(trans, filename, table.selectionStartRow, table.selectionEndRow);
                     break;
-                case AudacityConverter.TIMELINE :                    
+                case AudacityConverter.TIMELINE :
                     AudacityConverter.writeTimelineToFile(trans, filename);
                     break;
             }
@@ -133,17 +133,17 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 case TEIConverter.ISO_GENERIC_METHOD :
                     ec = new TEIConverter();
                     ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
-                    ec.writeGenericISOTEIToFile(trans, filename);                    
+                    ec.writeGenericISOTEIToFile(trans, filename);
                     break;
                 case TEIConverter.HIAT_ISO_METHOD :
                     ec = new TEIConverter();
                     ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
-                    ec.writeHIATISOTEIToFile(trans, filename);                    
+                    ec.writeHIATISOTEIToFile(trans, filename);
                     break;
-                case TEIConverter.ISO_EVENT_TOKEN_METHOD :    
+                case TEIConverter.ISO_EVENT_TOKEN_METHOD :
                     ec = new TEIConverter();
                     ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
-                    ec.writeEventTokenISOTEIToFile(trans, filename);                    
+                    ec.writeEventTokenISOTEIToFile(trans, filename);
                     break;
             }
         } else if (selectedFileFilter==dialog.TEIModenaFileFilter){
@@ -166,7 +166,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     break;
                 case CHATConverter.EVENT_METHOD :
                     CHATConverter.writeEventSegmentedCHATFile(trans, exportFile);
-                    break;                                   
+                    break;
             }
         } else if (selectedFileFilter==dialog.ExmaraldaSegmentedTranscriptionFileFilter){
             SegmentedTranscription st = trans.toSegmentedTranscription();
@@ -180,6 +180,8 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.F4TextFileFilter){
             trans.getBody().getCommonTimeline().completeTimes(false, trans);
             new F4Converter().writeText(trans, exportFile, F4Converter.SPEAKER_CONTRIBUTIONS, "RTF");
+        } else if (selectedFileFilter==dialog.TsvFileFilter){
+            new TsvConverter().writeText(trans, exportFile);
         } else if (selectedFileFilter==dialog.SRTFileFilter){
             trans.getBody().getCommonTimeline().completeTimes(false, trans);
             new SrtConverter().writeText(trans, exportFile);
@@ -189,7 +191,7 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         table.status("Transcription exported as " + filename);
 
     }
-    
+
     void exportCHATTranscript(BasicTranscription bt, String filename, String encoding) throws JexmaraldaException, FSMException, SAXException, FileNotFoundException, IOException{
          // segment the basic transcription and transform it into a list transcription
          CHATSegmentation segmenter = new org.exmaralda.partitureditor.jexmaralda.segment.CHATSegmentation(table.chatFSM);
@@ -209,5 +211,5 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
          System.out.println("document written.");
 
     }
-    
+
 }

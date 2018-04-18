@@ -244,8 +244,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.VTTFileFilter) {
             // added 17-11-2017: issue #119
             importedTranscription = SubtitleConverter.readVTT(selectedFile);
-        } else if (selectedFileFilter == dialog.InelTsvFileFilter) {
-            InelTsvConverter itc = new InelTsvConverter();
+        } else if (selectedFileFilter == dialog.TsvFileFilter) {
+            TsvConverter itc = new TsvConverter();
             itc.readText(selectedFile);
             importedTranscription = itc.importText();
         }
@@ -260,7 +260,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 // switched
                 table.stratify(importedTranscription);
                 table.cleanup(importedTranscription);
-            } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter) 
+            } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter)
                     || (selectedFileFilter==dialog.AudacityLabelFileFilter)
                     || (selectedFileFilter==dialog.WinPitchFileFilter)){
                 table.stratify(importedTranscription);
