@@ -106,7 +106,13 @@ public class RelativePath {
 
 		homelist = getPathList(home);
 		filelist = getPathList(f);
-		s = matchPathLists(homelist,filelist);
+		
+                // added 18-04-2018
+                if ((homelist==null) || (filelist==null)){
+                    return f.getAbsolutePath();
+                }
+                
+                s = matchPathLists(homelist,filelist);
 
 		// changed 13-08: need to have slashes in relative filenames
                 // not system dependent separator char
