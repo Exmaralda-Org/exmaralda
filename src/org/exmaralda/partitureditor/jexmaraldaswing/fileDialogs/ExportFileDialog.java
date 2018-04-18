@@ -13,7 +13,7 @@ import java.io.*;
  */
 public class ExportFileDialog extends AbstractFileFilterDialog  implements java.beans.PropertyChangeListener {
 
-    
+
     public CHATExportAccessoryPanel chatExportAccessoryPanel = new CHATExportAccessoryPanel();
     public AudacityExportAccessoryPanel audacityExportAccessoryPanel = new AudacityExportAccessoryPanel();
     public TEIExportAccessoryPanel teiExportAccessoryPanel = new TEIExportAccessoryPanel();
@@ -28,7 +28,7 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
             setPreferredSize(new java.awt.Dimension(800, 600));
         }
         setCurrentDirectory(new File(startDirectory).getParentFile());
-        setDialogTitle("Export file");       
+        setDialogTitle("Export file");
         setAcceptAllFileFilterUsed(false);
         addChoosableFileFilter(EAFFileFilter);
         addChoosableFileFilter(PraatFileFilter);
@@ -43,6 +43,7 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         addChoosableFileFilter(TreeTaggerFilter);
         addChoosableFileFilter(F4TextFileFilter);
         addChoosableFileFilter(SRTFileFilter);
+        addChoosableFileFilter(TsvFileFilter);
         // removed 10-04-2013
         //addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
         setFileFilter(PraatFileFilter);

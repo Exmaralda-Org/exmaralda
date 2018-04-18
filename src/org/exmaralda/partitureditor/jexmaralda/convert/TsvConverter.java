@@ -17,7 +17,7 @@ import java.util.regex.*;
  *
  * @author tommi
  *
- * Some TSV format for INEL. HEre's an email describing:
+ * Some TSV format. HEre's an email describing:
  * <blockquote>
  * more than one transcription tier.
  * I'd suggest an extra header line with a list of transcription tier names
@@ -42,13 +42,13 @@ import java.util.regex.*;
  * </pre>
  * </blockquote>
  */
-public class InelTsvConverter {
+public class TsvConverter {
 
     ArrayList<String> lines = new ArrayList<String>();
     public boolean appendSpaces = true;
 
     /** Creates a new instance of TextConverter */
-    public InelTsvConverter() {
+    public TsvConverter() {
     }
 
     public void readText(File file) throws IOException {
@@ -88,10 +88,11 @@ public class InelTsvConverter {
         Speakertable st = bt.getHead().getSpeakertable();
         Set<String> speakers = new HashSet<String>();
         Set<String> tiers = new HashSet<String>();
+        // (Tiername   Tiertype  Speaker    Annotation    Start    End)
         for (String line : lines) {
             String[] fields = line.split("\\t");
             tiers.add(fields[0] + "\t" + fields[1] + "\t" + fields[2]);
-            speakers.add(fields[1]);
+            speakers.add(fields[2]);
         }
         int n_speakers = 0;
         Map<String, String> speakermap = new HashMap<String, String>();
@@ -176,11 +177,12 @@ public class InelTsvConverter {
     public static void main(String[] args){
         try {
             File f = new File("test.tsv");
-            InelTsvConverter tc = new InelTsvConverter();
+            TsvConverter tc = new TsvConverter();
             tc.readText(f);
             BasicTranscription bt = tc.importText();
             bt.writeXMLToFile("test.exb", "none");
             System.out.println(tc.importText().toXML());
+            System.out.println(tc.exportBasicTranscription(bt));
         } catch (PatternSyntaxException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -189,7 +191,39 @@ public class InelTsvConverter {
     }
 
     public String exportBasicTranscription(BasicTranscription bt) throws IOException{
-        return "FIXME";
+        Timeline timeline = bt.getBody().getCommonTimeline();
+        String result = "";
+        for (int i = 0; i < timeline.getNumberOfTimelineItems(); i++) {
+            TimelineItem tli = timeline.getTimelineItemAt(i);
+            for (int j = 0; j < bt.getBody().getNumberOfTiers(); j++) {
+                Tier tier = bt.getBody().getTierAt(j);
+                try {
+                    if (tier.containsEventAtStartPoint(tli.getID())) {
+                        Event ev = tier.getEventAtStartPoint(tli.getID());
+        // (Tiername   Tiertype  Speaker    Annotation    Start    End)
+                        result += (tier.getDisplayName());
+                        result += ("\t");
+                        result += (tier.getType());
+                        result += ("\t");
+                        result += (tier.getSpeaker());
+                        result += ("\t");
+                        result += (ev.getDescription());
+                        result += ("\t");
+                        result +=
+                            timeline.getTimelineItemWithID(ev.getStart()).
+                            getTimeAsString();
+                        result += ("\t");
+                        result +=
+                            timeline.getTimelineItemWithID(ev.getEnd()).
+                            getTimeAsString();
+                        result += (System.getProperty("line.separator"));
+                    }
+                } catch (JexmaraldaException je) {
+                    je.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 
     public void writeText(BasicTranscription bt, File file) throws IOException {
