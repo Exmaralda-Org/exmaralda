@@ -513,7 +513,7 @@ public class BasicBody extends AbstractTierBody {
         sb.append(getCommonTimeline().toXML());
         sb.append("</common-timeline>\n");
         for (int pos=0; pos<getNumberOfTiers(); pos++){
-            System.out.println("Sorting tier " + getTierAt(pos).getID());
+            //System.out.println("Sorting tier " + getTierAt(pos).getID());
             getTierAt(pos).sort(getCommonTimeline());
             sb.append(getTierAt(pos).toXML());
         }

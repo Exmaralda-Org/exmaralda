@@ -190,9 +190,11 @@
             <comment>either the assimilation or the space symbol</comment>
         </pattern>
         <!-- end same patterns -->
-        <!-- the breathe pattern is slightly different: it also contains a lookahead for a non-specified phrase boundary (pipe symbol) -->
+        <!-- the breathe pattern is slightly different: it also contains a lookahead for a non-specified phrase boundary (pipe symbol) -->        
+        <!-- change on 20-04-2018 for issue #148: also lookahead for n-dash, period and comma -->        
         <pattern name="GAT_BREATHE">
-            <regex>(°h{1,3}+|h{1,3}+°)(?=( |\|))</regex>
+            <!-- <regex>(°h{1,3}+|h{1,3}+°)(?=( |\|))</regex> -->
+            <regex>(°h{1,3}+|h{1,3}+°)(?=( |\||\.|\,|\u2013))</regex>
             <comment>One to three h, either preceded or followed by a degree sign, followed by a space</comment>
         </pattern>
         <!-- ******************************** -->

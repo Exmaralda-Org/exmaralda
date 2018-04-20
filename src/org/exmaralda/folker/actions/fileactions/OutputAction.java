@@ -47,6 +47,7 @@ public class OutputAction extends AbstractApplicationAction {
     ParameterFileFilter htmlPartiturFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.partitur"));
     ParameterFileFilter htmlCompactPartiturAudioFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.compactPartiturAudio"));
     ParameterFileFilter gatBasicTranscriptFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.gatBasicTranscript"));
+    ParameterFileFilter segCorTranscriptFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.segCorTranscript"));
     ParameterFileFilter htmlQuantifyFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.quantification"));
     
     public static String CONTRIBUTIONS2HTML_STYLESHEET = "/org/exmaralda/folker/data/unparsedFolker2HTMLContributionList.xsl";
@@ -57,6 +58,7 @@ public class OutputAction extends AbstractApplicationAction {
     public static String QUANTIFY_STYLESHEET_EN = "/org/exmaralda/folker/data/folkerquantification_en.xsl";
     public static String QUANTIFY_STYLESHEET_FR = "/org/exmaralda/folker/data/folkerquantification_fr.xsl";
     public static String BASIC_TRANSCRIPTION2HTML_STYLESHEET = "/org/exmaralda/folker/data/basicFolker2HTML.xsl";    
+    public static String SEGCOR_TRANSCRIPTION2HTML_STYLESHEET = "/org/exmaralda/folker/data/segcorFolker2HTML.xsl";    
     
     /** Creates a new instance of OpenAction
      * @param ac
@@ -79,6 +81,7 @@ public class OutputAction extends AbstractApplicationAction {
         fileChooser.addChoosableFileFilter(htmlContributionListFilter);
         fileChooser.addChoosableFileFilter(htmlContributionListAudioFilter);
         fileChooser.addChoosableFileFilter(gatBasicTranscriptFilter);
+        fileChooser.addChoosableFileFilter(segCorTranscriptFilter);
         fileChooser.addChoosableFileFilter(htmlQuantifyFilter);
         fileChooser.setFileFilter(htmlSegmentListFilter);
         fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));        
@@ -101,6 +104,7 @@ public class OutputAction extends AbstractApplicationAction {
                     || (fileChooser.getFileFilter()==htmlContributionListAudioFilter)
                     || (fileChooser.getFileFilter()==htmlSegmentListFilter)
                     || (fileChooser.getFileFilter()==gatBasicTranscriptFilter)
+                    || (fileChooser.getFileFilter()==segCorTranscriptFilter)
                     || (fileChooser.getFileFilter()==htmlQuantifyFilter)){
                 // List based output
                 String STYLESHEET = "";
@@ -116,6 +120,9 @@ public class OutputAction extends AbstractApplicationAction {
                 } else if (fileChooser.getFileFilter()==gatBasicTranscriptFilter) {
                     System.out.println("[*** GAT output ***]");
                     STYLESHEET = BASIC_TRANSCRIPTION2HTML_STYLESHEET;
+                } else if (fileChooser.getFileFilter()==segCorTranscriptFilter) {
+                    System.out.println("[*** SegCor output ***]");
+                    STYLESHEET = SEGCOR_TRANSCRIPTION2HTML_STYLESHEET;
                 } else {
                     System.out.println("[*** QuantificationOutput ***]");
                     String lang = PreferencesUtilities.getProperty("language", "en");
@@ -168,7 +175,10 @@ public class OutputAction extends AbstractApplicationAction {
                         ap.parseDocument(transcriptionDoc, 1);
                         ap.parseDocument(transcriptionDoc, 3);                        
                     }
-                } else if (fileChooser.getFileFilter()==gatBasicTranscriptFilter) {
+                } else if (
+                        (fileChooser.getFileFilter()==gatBasicTranscriptFilter) ||
+                        (fileChooser.getFileFilter()==segCorTranscriptFilter)
+                        ){
                     GATParser ap = new GATParser(Constants.getAlphabetLanguage());
                     ap.parseDocument(transcriptionDoc, 1);
                     ap.parseDocument(transcriptionDoc, 3);

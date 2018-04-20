@@ -1466,6 +1466,11 @@
                                 <translation lang="de" trans="GAT Basistranskript (*.html)"/>
                                 <translation lang="fr" trans="GAT transcription de base (*.html)"/>
                         </item>                        
+                        <item id="misc.segCorTranscript">
+                                <translation lang="en" trans="SegCor Transcript (*.html)"/>
+                                <translation lang="de" trans="SegCor-Transkript (*.html)"/>
+                                <translation lang="fr" trans="Transcription SegCor (*.html)"/>
+                        </item>                        
                         <item id="misc.partitur">
                                 <translation lang="en" trans="Score (*.html)"/>
                                 <translation lang="de" trans="Partitur (*.html)"/>

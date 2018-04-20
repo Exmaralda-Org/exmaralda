@@ -330,7 +330,7 @@ public class AbstractEventTier extends AbstractTier {
             Event[] events = getEventsAtStartPoint(timeline.getTimelineItemAt(pos).getID());
             if (events.length>1){
                 // sort the events according to their length, longest event first
-                System.out.println("Here!");
+                //System.out.println("Here!");
                 events = sortAccordingToLength(timeline, events);
             }
             for (int i=0; i<events.length; i++){
