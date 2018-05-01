@@ -31,6 +31,8 @@
     <xsl:variable name="lines">
         <transcription>
             <xsl:for-each select="//line">
+                <xsl:sort select="tesla:timeline-position(ancestor::*/@start-reference)" order="ascending"/>
+                <xsl:sort select="tesla:timeline-position(ancestor::*/@end-reference)" order="descending"/>                
                 <xsl:copy>
                     <xsl:attribute name="start-reference">
                         <xsl:choose>
@@ -173,10 +175,14 @@
                 <xsl:attribute name="class">
                     <xsl:text>speaker</xsl:text>
                 </xsl:attribute>
-                <!-- <xsl:if test="@speaker-reference=preceding-sibling::line[1]/@speaker-reference">
+                <!-- <xsl:if test="@speaker-reference=preceding-sibling::line[1]/@speaker-reference"> -->
+                <!-- <xsl:variable name="THIS_SPEAKER" select="@speaker-reference"/>
+                <xsl:variable name="THIS_START" select="descendant::time[1]/@timepoint-reference"/>                
+                <xsl:if test="not($lines/descendant::line[@speaker-reference=$THIS_SPEAKER and descendant::time[last()]/@timepoint-reference=$THIS_START])">
                     <xsl:attribute name="style">color:lightgray;</xsl:attribute>
                 </xsl:if> -->
                 <xsl:value-of select="@speaker-reference"/>
+                <!-- <xsl:text>/</xsl:text><xsl:value-of select="preceding-sibling::line[1]/@speaker-reference"/> -->
             </xsl:element>
             <xsl:element name="td">
                 <xsl:attribute name="class">

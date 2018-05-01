@@ -14,6 +14,8 @@
     <xsl:param name="LANGUAGE">xx</xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8"/>
+    
+    <xsl:variable name="ANONYMOUS_SPEAKER_ID" select="generate-id()"/>
 
     <!-- ******************************************************* -->
     <!-- *************       FUNCTIONS         ***************** -->
@@ -69,6 +71,10 @@
     <!-- ****************************************************************** -->
     <xsl:template match="/">
         <TEI xmlns="http://www.tei-c.org/ns/1.0">
+            <!-- new 25-04-2018: this is for pointing to the corresponding AGD-ID -->
+            <xsl:if test="/*/@dgd-id ">
+                <idno type="AGD-ID"><xsl:value-of select="/*/@dgd-id"/></idno>
+            </xsl:if>            
             <teiHeader>
                 <!-- ***************************************************** -->
                 <fileDesc>
@@ -112,6 +118,17 @@
                     <!-- ... -->
                     <particDesc>
                         <xsl:apply-templates select="//speaker"/>
+                        <xsl:if test="//contribution[@speaker-reference or count(child::*[not(self::pause or self::non-phonological or self::time)])&gt;0]">
+                            <!-- generate an anonymous speaker -->
+                            <person xml:id="MA" n="MA">
+                                <xsl:attribute name="xml:id" select="$ANONYMOUS_SPEAKER_ID"/>
+                                <xsl:attribute name="n" select="$ANONYMOUS_SPEAKER_ID"/>
+                                <persName>
+                                    <forename>Anonymous</forename>
+                                    <abbr><xsl:value-of select="$ANONYMOUS_SPEAKER_ID"/></abbr>
+                                </persName>
+                            </person>                            
+                        </xsl:if>
                     </particDesc>        
                     <!-- ***************************************************** -->                
                     <settingDesc>
@@ -161,12 +178,6 @@
        
     <xsl:template name="MAKE_TIMELINE">
         <timeline unit="s" xmlns="http://www.tei-c.org/ns/1.0">
-            <!-- <xsl:attribute name="origin">
-                <xsl:choose>
-                    <xsl:when test="(//timepoint[1]/@absolute-time + 0.0)=0.0">#<xsl:value-of select="//timepoint[1]/@timepoint-id"/></xsl:when>
-                    <xsl:otherwise>#T_START</xsl:otherwise>
-                </xsl:choose>                
-            </xsl:attribute> -->
             <xsl:choose>
                 <xsl:when test="(//timepoint[1]/@absolute-time + 0.0)&gt;0.0">
                     <!-- <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/> -->     
@@ -184,14 +195,25 @@
     </xsl:template>
     
     
-    <xsl:template match="contribution[@speaker-reference or count(child::*[not(self::pause or self::time)])&gt;0]">
+    <xsl:template match="contribution[@speaker-reference or count(child::*[not(self::pause or self::non-phonological or self::time)])&gt;0]">
         <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
         <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
-            <xsl:if test="@speaker-reference">
-                <xsl:attribute name="who">
-                    <xsl:text>#</xsl:text><xsl:value-of select="translate(@speaker-reference, ' ', '_')"/>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:attribute name="xml:id">
+                <xsl:choose>
+                    <xsl:when test="u/@id"><xsl:value-of select="u/@id"></xsl:value-of></xsl:when>
+                    <xsl:otherwise><xsl:text>ab_</xsl:text><xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>                    
+            </xsl:attribute>
+            <xsl:attribute name="who">
+                <xsl:choose>
+                    <xsl:when test="@speaker-reference">
+                        <xsl:text>#</xsl:text><xsl:value-of select="translate(@speaker-reference, ' ', '_')"/>                        
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>#</xsl:text><xsl:value-of select="$ANONYMOUS_SPEAKER_ID"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
             <xsl:attribute name="start">
                 <xsl:text>#</xsl:text><xsl:value-of select="@start-reference"/>                
             </xsl:attribute>
@@ -200,10 +222,7 @@
             </xsl:attribute>
             <xsl:element name="u" xmlns="http://www.tei-c.org/ns/1.0">
                 <xsl:attribute name="xml:id">
-                    <xsl:choose>
-                        <xsl:when test="@id"><xsl:value-of select="@id"></xsl:value-of></xsl:when>
-                        <xsl:otherwise><xsl:text>u_</xsl:text><xsl:value-of select="generate-id()"/></xsl:otherwise>
-                    </xsl:choose>                    
+                     <xsl:text>u_</xsl:text><xsl:value-of select="generate-id()"/>
                 </xsl:attribute>
                 <xsl:apply-templates/>
             </xsl:element> <!-- end u -->
@@ -271,8 +290,9 @@
         </xsl:element> <!-- end annotationGrp -->        
     </xsl:template>
 
-    <xsl:template match="contribution[not(@speaker-reference) and pause and count(child::*[not(self::pause or self::time)])=0]">
-        <xsl:apply-templates/>
+    <xsl:template match="contribution[not(@speaker-reference) 
+        and (pause|non-phonological|breathe) and count(child::*[not(self::pause or self::non-phonological or self::breathe or self::time)])=0]">
+        <xsl:apply-templates select="pause|non-phonological|breathe"/>
     </xsl:template>
             
     <xsl:template match="time">
@@ -328,6 +348,10 @@
     
     <xsl:template match="non-phonological">
         <xsl:element name="incident"  xmlns="http://www.tei-c.org/ns/1.0">
+            <xsl:if test="not(ancestor::*[@speaker-reference])">
+                <xsl:attribute name="start">#<xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
+                <xsl:attribute name="end">#<xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+            </xsl:if>
             <xsl:element name="desc">
                 <xsl:value-of select="@description"/>
             </xsl:element>
@@ -336,6 +360,10 @@
     
     <xsl:template match="breathe">
         <xsl:element name="vocal"  xmlns="http://www.tei-c.org/ns/1.0">
+            <xsl:if test="not(ancestor::*[@speaker-reference])">
+                <xsl:attribute name="start">#<xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
+                <xsl:attribute name="end">#<xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+            </xsl:if>
             <xsl:element name="desc">
                 <xsl:if test="@length='1'">short</xsl:if>
                 <xsl:if test="@length='2'">medium</xsl:if>
@@ -356,6 +384,12 @@
                 <xsl:otherwise>
                     <choice xmlns="http://www.tei-c.org/ns/1.0">
                         <seg xmlns="http://www.tei-c.org/ns/1.0">
+                            <xsl:attribute name="xml:id">
+                                <xsl:choose>
+                                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                                    <xsl:otherwise>w<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>                                
                             <xsl:apply-templates select="child::*[not(self::alternative)]"/>
                         </seg>
                         <xsl:apply-templates select="alternative"/>
@@ -380,12 +414,20 @@
     
     <xsl:template match="alternative">
         <!-- <unclear  xmlns="http://www.tei-c.org/ns/1.0"><xsl:apply-templates/></unclear> -->
-        <seg  xmlns="http://www.tei-c.org/ns/1.0"><xsl:apply-templates/></seg>
+        <seg  xmlns="http://www.tei-c.org/ns/1.0">
+            <xsl:attribute name="xml:id">
+                <xsl:choose>
+                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                    <xsl:otherwise>w<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>                                
+            <xsl:apply-templates/>
+        </seg>
     </xsl:template>
             
     <xsl:template match="recording">
         <media  xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:attribute name="mimeType"><xsl:value-of select="tesla:determine-recording-type(@url)"/>/xxx</xsl:attribute>
+            <xsl:attribute name="mimeType"><xsl:value-of select="tesla:determine-recording-type(@path)"/>/wav</xsl:attribute>
             <xsl:attribute name="url"><xsl:value-of select="@path"/></xsl:attribute>
         </media>        
     </xsl:template> 
@@ -398,6 +440,10 @@
             <xsl:attribute name="n">
                 <xsl:value-of select="@speaker-id"/>
             </xsl:attribute>
+            <!-- new 25-04-2018: this is for pointing to the corresponding AGD-ID -->
+            <xsl:if test="@dgd-id and not(@dgd-id='???')">
+                <idno type="AGD-ID"><xsl:value-of select="@dgd-id"/></idno>
+            </xsl:if>
             <xsl:element name="persName">
                 <xsl:element name="forename">
                     <xsl:value-of select="name"/>

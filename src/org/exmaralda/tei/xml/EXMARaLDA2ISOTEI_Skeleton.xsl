@@ -140,7 +140,7 @@
 					<appInfo>
 						<!-- information about the application with which -->
 						<!-- the transcription was created -->
-						<application ident="EXMARaLDA" version="1.5.3">
+						<application ident="EXMARaLDA" version="1.6.1">
 							<label>EXMARaLDA Partitur-Editor</label>
 							<desc>Transcription Tool providing a TEI Export</desc>
 						</application>
@@ -227,26 +227,9 @@
 	
 	<!-- CHANGE FOR ISO: special treatment for first -->
 	<xsl:template match="//common-timeline/tli[position()=1]">
-		<xsl:choose>
-			<xsl:when test="@time=0" >
-				<when absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0">
-					<xsl:attribute name="xml:id" select="@id"/>
-				</when>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
-					<xsl:attribute name="xml:id">
-						<xsl:value-of select="@id"/>
-					</xsl:attribute>
-					<xsl:if test="@time">
-						<xsl:attribute name="interval">
-							<xsl:value-of select="@time"/>
-						</xsl:attribute>
-						<xsl:attribute name="since">#T_START</xsl:attribute>
-					</xsl:if>
-				</xsl:element>                                
-			</xsl:otherwise>
-		</xsl:choose>
+		<when xmlns="http://www.tei-c.org/ns/1.0">
+			<xsl:attribute name="xml:id" select="@id"/>
+		</when>
 	</xsl:template>
 	
 	<!-- ************************************************* -->
@@ -268,7 +251,9 @@
 					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>                
 			</xsl:attribute>
-			<xsl:element name="persName"></xsl:element>
+			<xsl:element name="persName">
+				<xsl:element name="abbr"><xsl:value-of select="abbreviation"/></xsl:element>
+			</xsl:element>
 		</xsl:element>        
 	</xsl:template>
 	
