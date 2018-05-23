@@ -464,8 +464,7 @@
             </xsl:attribute>
             <xsl:if test="@absolute-time">
                 <xsl:attribute name="interval">
-                    <!-- changed 23-05-2018, need to convert miliseconds to seconds!!! (issue #152) -->
-                    <xsl:value-of select="@absolute-time div 1000.0"/>
+                    <xsl:value-of select="@absolute-time"/>
                 </xsl:attribute>
                 <xsl:attribute name="since">
                     <xsl:choose>
