@@ -11,9 +11,7 @@ package org.exmaralda.exakt.search;
 
 import java.io.*;
 import org.jdom.*;
-import org.jdom.xpath.*;
 import java.net.*;
-import java.util.*;
 /**
  *
  * @author thomas
@@ -24,19 +22,23 @@ public class SimpleXMLFileListCorpus extends AbstractXMLFileListCorpus {
     URI baseURI;    
     
     
-    /** Creates a new instance of SimpleXMLFileListCorpus */
+    /** Creates a new instance of SimpleXMLFileListCorpus
+     * @param xp */
     public SimpleXMLFileListCorpus(String xp) {
         XPATH_TO_SEARCHABLE_SEGMENT = xp;
     }
     
+    @Override
     public String getXPathToSearchableSegment() {
         return XPATH_TO_SEARCHABLE_SEGMENT;
     }
     
+    @Override
     public void setXPathToSearchableSegment(String xp) {
         XPATH_TO_SEARCHABLE_SEGMENT = xp;
     }
 
+    @Override
     public void readCorpus(File file) throws JDOMException, IOException {
         baseURI = file.getParentFile().toURI();
         FileReader fr = new FileReader(file);

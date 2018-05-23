@@ -157,7 +157,9 @@
                 <revisionDesc>
                     <!-- ... -->                    
                     <xsl:element name="change">
-                        <xsl:attribute name="when"><xsl:value-of select="current-dateTime()"/></xsl:attribute>
+                        <xsl:attribute name="when">
+                            <xsl:value-of select="current-dateTime()"/>
+                        </xsl:attribute>
                         <xsl:text>Created by XSL transformation from a FOLKER transcription</xsl:text>
                     </xsl:element>
                 </revisionDesc>                
@@ -462,7 +464,8 @@
             </xsl:attribute>
             <xsl:if test="@absolute-time">
                 <xsl:attribute name="interval">
-                    <xsl:value-of select="@absolute-time"/>
+                    <!-- changed 23-05-2018, need to convert miliseconds to seconds!!! (issue #152) -->
+                    <xsl:value-of select="@absolute-time div 1000.0"/>
                 </xsl:attribute>
                 <xsl:attribute name="since">
                     <xsl:choose>
