@@ -30,7 +30,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     String[] HELP_MENU_TITLES = {"OrthoNormal im Web", "Über OrthoNormal", ""};
     ApplicationControl applicationControl;
 
-    /** Creates new form ApplicationFrame */
+    /** Creates new form ApplicationFrame
+     * @param args */
     public ApplicationFrame(String[] args) {
         new StartupSplashScreen(this, "/org/exmaralda/orthonormal/gui/OrthoSplashScreen.png");
 

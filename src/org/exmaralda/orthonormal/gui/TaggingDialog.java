@@ -63,7 +63,10 @@ public class TaggingDialog extends javax.swing.JDialog implements MouseListener,
         }
     }
 
-    /** Creates new form WordNormalizationDialog */
+    /** Creates new form WordNormalizationDialog
+     * @param parent
+     * @param modal
+     * @param wordElement */
     public TaggingDialog(java.awt.Frame parent, boolean modal, Element wordElement) {
         super(parent, modal);
         initComponents();

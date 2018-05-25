@@ -134,6 +134,7 @@ public final class ApplicationControl implements  ListSelectionListener,
     org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction searchInDirectoryAction;
     // ---------------------------
     org.exmaralda.orthonormal.actions.annotationActions.TreeTaggerAction treeTaggerAction;
+    org.exmaralda.orthonormal.actions.annotationActions.ApplyRulesAction applyRulesAction;
     
     public String currentFilePath = null;
     public String currentMediaPath = null;
@@ -158,7 +159,8 @@ public final class ApplicationControl implements  ListSelectionListener,
     
     public MatchListDialog2 matchListDialog;
     
-    /** Creates a new instance of ApplicationControl */
+    /** Creates a new instance of ApplicationControl
+     * @param af */
     public ApplicationControl(ApplicationFrame af)  {
         applicationFrame = af;
         applicationFrame.addComponentListener(this);
@@ -366,6 +368,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         searchInDirectoryAction = new org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction(this, "Verzeichnis durchsuchen...", c.getIcon(Constants.SEARCH_ICON));
 
         treeTaggerAction = new org.exmaralda.orthonormal.actions.annotationActions.TreeTaggerAction(this, "TreeTagger...", null);
+        applyRulesAction = new org.exmaralda.orthonormal.actions.annotationActions.ApplyRulesAction(this, "Regeln anwenden...", null);
     }
     
     void assignActions(){
@@ -420,6 +423,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.applicationToolBar.add(editPreferencesAction).setToolTipText("Voreinstellungen bearbeiten...");
         
         applicationFrame.annotationMenu.add(treeTaggerAction).setToolTipText("Lemmatisierung und POS-Tagging mit TreeTagger");
+        applicationFrame.annotationMenu.add(applyRulesAction).setToolTipText("Regeln auf Normalisierung, Lemmatisierung und/oder POS-Tagging anwenden");
 
     }
 
@@ -2163,19 +2167,10 @@ public final class ApplicationControl implements  ListSelectionListener,
         }
     }
 
+    public void applyRules(String rulesPath) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-    
-
-
-
-
-
-
-
-
-    
-    
-    
 
     
 }
