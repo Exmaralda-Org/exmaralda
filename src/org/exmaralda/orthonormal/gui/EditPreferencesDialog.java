@@ -22,25 +22,37 @@ import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFil
  */
 public class EditPreferencesDialog extends javax.swing.JDialog {
 
-    /** Creates new form EditPreferencesDialog */
+    /** Creates new form EditPreferencesDialog
+     * @param parent
+     * @param modal */
     public EditPreferencesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        String type = PreferencesUtilities.getProperty("lexicon-type", "xml");
+        String lexicon_type = PreferencesUtilities.getProperty("lexicon-type", "xml");
         String LEXICON_PATH = PreferencesUtilities.getProperty("lexicon-path", "");
+        
+        String tageset_type = PreferencesUtilities.getProperty("tagset-type", "xml");
+        String TAGSET_PATH = PreferencesUtilities.getProperty("tagset-path", "");
+        
         String RDB_URL = PreferencesUtilities.getProperty("rdb-url", "");
         String RDB_USERNAME = PreferencesUtilities.getProperty("rdb-username", "");
         String RDB_PASSWORD = PreferencesUtilities.getProperty("rdb-password", "");
 
-        if ("xml".equals(type)){
+        if ("xml".equals(lexicon_type)){
             internalRadioButton.setSelected(true);
-        } else if ("xml-local".equals(type)){
+        } else if ("xml-local".equals(lexicon_type)){
             xmlRadioButton.setSelected(true);
         } else {
             rdbRadioButton.setSelected(true);
         }
         
+        if ("xml".equals(tageset_type)){
+            internalPOSRadioButton.setSelected(true);
+        } else if ("xml-local".equals(lexicon_type)){
+            xmlPOSRadioButton.setSelected(true);
+        }
+
         String playerType = PreferencesUtilities.getProperty("PlayerType", "JMF-Player");
         jmfRadioButton.setSelected(playerType.equals("JMF-Player"));
         jdsRadioButton.setSelected(playerType.equals("JDS-Player"));
@@ -58,6 +70,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
 
         xmlFileTextField.setText(LEXICON_PATH);
+        xmlPOSFileTextField.setText(TAGSET_PATH);
         urlTextField.setText(RDB_URL);
         usernameTextField.setText(RDB_USERNAME);
         passwordField.setText(RDB_PASSWORD);
@@ -477,7 +490,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         defaultAudioTextField.setText(jfc.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_defaultAudioBrowseButtonActionPerformed
 
-    void switchViews(){
+    private void switchViews(){
         xmlParamatersPanel.setVisible(xmlRadioButton.isSelected());
         rdbParamatersPanel.setVisible(rdbRadioButton.isSelected());
         xmlPOSParametersPanel.setVisible(xmlPOSRadioButton.isSelected());

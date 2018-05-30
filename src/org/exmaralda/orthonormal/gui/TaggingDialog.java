@@ -19,11 +19,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import org.exmaralda.common.corpusbuild.FileIO;
 import org.exmaralda.orthonormal.lexicon.Tagset;
+import org.exmaralda.orthonormal.utilities.PreferencesUtilities;
+import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 
@@ -36,7 +42,7 @@ public class TaggingDialog extends javax.swing.JDialog implements MouseListener,
     String lemma;
     String pos;
     
-    String[][] DEFAULT_FREQUENT_TAGS = {
+    static final String[][] DEFAULT_FREQUENT_TAGS = {
         {"NGIRR","I"},  
         {"NGHES","H"},  
         {"PTKMA","M"},  
@@ -49,6 +55,8 @@ public class TaggingDialog extends javax.swing.JDialog implements MouseListener,
         {"VVFIN","V"}  
         //{"SIERSP","R"}  
     };
+    
+    static String[][] QUICK_TAGS = DEFAULT_FREQUENT_TAGS;
 
     public boolean escaped = false;
     static ComboBoxModel comboBoxModel;
@@ -56,6 +64,32 @@ public class TaggingDialog extends javax.swing.JDialog implements MouseListener,
     static {
         try {
             comboBoxModel = new Tagset().getComboBoxModel();
+            
+            // new 28-05-2018, issue #154
+            String type = PreferencesUtilities.getProperty("tagset-type", "xml");
+            String xmlPath = PreferencesUtilities.getProperty("tagset-path", null);
+            if (("xml-local".equals(type)) && (xmlPath!=null)){
+                try {
+                    Document annotationSpecificationDocument = FileIO.readDocumentFromLocalFile(xmlPath);
+                    Element quickTagsElement = annotationSpecificationDocument.getRootElement().getChild("quick-tags");
+                    if (quickTagsElement!=null){
+                        List l = quickTagsElement.getChildren("quick-tag");
+                        QUICK_TAGS = new String[l.size()][2];
+                        int i=0;
+                        for (Object o : l){
+                            Element quickTagElement = (Element)o;
+                            QUICK_TAGS[i][0] = quickTagElement.getAttributeValue("tag");
+                            QUICK_TAGS[i][1] = quickTagElement.getAttributeValue("key");
+                            i++;
+                        }
+                    }
+                } catch (JDOMException ex) {
+                    Logger.getLogger(TaggingDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(TaggingDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }        
+            
         } catch (JDOMException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -71,7 +105,7 @@ public class TaggingDialog extends javax.swing.JDialog implements MouseListener,
         super(parent, modal);
         initComponents();
         
-        setFrequentTags(DEFAULT_FREQUENT_TAGS);
+        setFrequentTags(QUICK_TAGS);
         
         pack();
         
