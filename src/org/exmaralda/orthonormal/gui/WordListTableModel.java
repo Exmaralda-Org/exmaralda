@@ -6,7 +6,11 @@
 package org.exmaralda.orthonormal.gui;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.xpath.XPath;
 
 /**
  *
@@ -15,9 +19,15 @@ import org.jdom.Element;
 public class WordListTableModel extends javax.swing.table.AbstractTableModel {
 
     List<Element> words;
+    boolean hasLemmaOrPOS = false;
 
     public WordListTableModel(List<Element> words) {
         this.words = words;
+        try {
+            hasLemmaOrPOS = (XPath.selectSingleNode(words, "//w[@lemma or @pos]")!=null);
+        } catch (JDOMException ex) {
+            Logger.getLogger(WordListTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -27,7 +37,8 @@ public class WordListTableModel extends javax.swing.table.AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        if (words.size()>0 && words.get(0).getAttribute("pos")!=null){
+        //if (words.size()>0 && words.get(0).getAttribute("pos")!=null){
+        if (hasLemmaOrPOS) {
             return 5;
         } else {
             return 2;
@@ -42,16 +53,19 @@ public class WordListTableModel extends javax.swing.table.AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        if (column==0){
-            return "Wort";
-        } else if (column==1) {
-            return "Normal";
-        } else if (column==2) {
-            return "Lemma";
-        } else if (column==3) {
-            return "POS";
-        } else if (column==4) {
-            return "p(POS)";
+        switch (column) {
+            case 0:
+                return "Wort";
+            case 1:
+                return "Normal";
+            case 2:
+                return "Lemma";
+            case 3:
+                return "POS";
+            case 4:
+                return "p(POS)";
+            default:
+                break;
         }
         return "";
     }

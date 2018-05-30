@@ -12,26 +12,10 @@ package org.exmaralda.orthonormal.actions.annotationActions;
 import org.exmaralda.orthonormal.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import java.io.*;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.orthonormal.application.ApplicationFrame;
 import org.exmaralda.orthonormal.gui.RulesFileDialog;
-import org.exmaralda.partitureditor.jexmaraldaswing.OKCancelDialog;
-import org.exmaralda.tagging.PostProcessingRules;
-import org.exmaralda.tagging.SextantOrthonormalIntegrator;
-import org.exmaralda.tagging.TaggingProfiles;
-import org.exmaralda.tagging.TreeTaggableOrthonormalTranscription;
-import org.exmaralda.tagging.TreeTagger;
-import org.exmaralda.tagging.swing.TreeTaggerParametersPanel;
-import org.jdom.Attribute;
-import org.jdom.Document;
-import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
 
 /**
  *

@@ -73,6 +73,7 @@ import org.exmaralda.orthonormal.utilities.PreferencesUtilities;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
+import org.exmaralda.tagging.PostProcessingRules;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -2168,7 +2169,27 @@ public final class ApplicationControl implements  ListSelectionListener,
     }
 
     public void applyRules(String rulesPath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PostProcessingRules rules = new PostProcessingRules();
+            rules.read(rulesPath);
+            Document doc = getTranscription().getDocument();
+            int count = rules.apply(doc);
+            
+            File tempFile = File.createTempFile("OrthoNormal", ".fln");
+            FileIO.writeDocumentToLocalFile(tempFile, doc);
+            
+            JOptionPane.showMessageDialog(applicationFrame, Integer.toString(count) + " rules applied.\nResult written to\n" + tempFile.getAbsolutePath());
+            
+            status("Rules applied: " + tempFile.getAbsolutePath());
+            openTranscriptionFile(tempFile);
+            
+
+            
+        } catch (JDOMException ex) {
+            displayException(ex);
+        } catch (IOException ex) {
+            displayException(ex);
+        }
     }
 
 

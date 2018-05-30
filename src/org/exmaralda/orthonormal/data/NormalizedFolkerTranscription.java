@@ -121,7 +121,7 @@ public class NormalizedFolkerTranscription {
         return returnValue;
     }
 
-    void index(){
+    final void index(){
         contributions = new ArrayList<Element>();
         List l = xmlDocument.getRootElement().getChildren("contribution");
         for (Object o : l){

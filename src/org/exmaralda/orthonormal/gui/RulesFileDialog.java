@@ -102,7 +102,7 @@ public class RulesFileDialog extends javax.swing.JDialog {
         jfc.setFileFilter(new FileFilter(){
             @Override
             public boolean accept(File f) {
-                return f.getName().toLowerCase().endsWith(".xml");
+                return (f.getName().toLowerCase().endsWith(".xml") || f.isDirectory());
             }
 
             @Override
