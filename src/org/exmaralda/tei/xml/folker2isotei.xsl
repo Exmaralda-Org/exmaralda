@@ -230,10 +230,40 @@
             </xsl:element> <!-- end u -->
             
             <!-- take care of annotations belonging to this u -->            
+            
+            <!-- alternative transcriptions if any (new 01-06-2018) -->
+            <xsl:if test="descendant::alternative">
+                <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="alternative">
+                    <xsl:for-each select="descendant::alternative">
+                        <!-- <uncertain id="u23" ol="in">
+                            <w id="w601" n="ist" pos="VAFIN" lemma="sein" ol="in">is</w>
+                            <w id="w602" n="wahr" pos="ADJD" lemma="wahr" ol="in">wahr</w>
+                            <alternative id="a1" ol="in">
+                                <w id="w603" n="vier" pos="CARD" lemma="vier" ol="in">vier</w>
+                                <w id="w604" n="zwei" pos="CARD" lemma="zwei" ol="in">zwei</w>
+                            </alternative>
+                        </uncertain> -->
+                        <span>
+                            <xsl:attribute name="from">#<xsl:value-of select="ancestor::uncertain/child::w[1]/@id"/></xsl:attribute>
+                            <xsl:attribute name="to">#<xsl:value-of select="ancestor::uncertain/child::w[last()]/@id"/></xsl:attribute>
+                            <xsl:choose>
+                                <xsl:when test="count(w)=1"><xsl:value-of select="w[1]"/></xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:for-each select="w">
+                                        <span><xsl:value-of select="text()"/></span>
+                                    </xsl:for-each>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </span>
+                    </xsl:for-each>
+                </spanGrp>                    
+            </xsl:if>
+            
             <!-- normalisations, if any -->
             <xsl:if test="descendant::w[@n]">
                 <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="n">
-                    <xsl:for-each select="descendant::w[@n]">
+                    <!-- change 01-06-2018 : discard annotations of alternatives -->
+                    <xsl:for-each select="descendant::w[@n and not(ancestor::alternative)]">
                         <span>
                             <xsl:attribute name="from">#<xsl:value-of select="@id"/></xsl:attribute>
                             <xsl:attribute name="to">#<xsl:value-of select="@id"/></xsl:attribute>
@@ -253,7 +283,8 @@
             <!-- lemmatisations, if any -->
             <xsl:if test="descendant::w[@lemma]">
                 <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="lemma">
-                    <xsl:for-each select="descendant::w[@lemma]">
+                    <!-- change 01-06-2018 : discard annotations of alternatives -->
+                    <xsl:for-each select="descendant::w[@lemma and not(ancestor::alternative)]">
                         <span>
                             <xsl:attribute name="from">#<xsl:value-of select="@id"/></xsl:attribute>
                             <xsl:attribute name="to">#<xsl:value-of select="@id"/></xsl:attribute>
@@ -273,7 +304,8 @@
             <!-- POS tags, if any -->
             <xsl:if test="descendant::w[@pos]">
                 <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="pos">
-                    <xsl:for-each select="descendant::w[@pos]">
+                    <!-- change 01-06-2018 : discard annotations of alternatives -->
+                    <xsl:for-each select="descendant::w[@pos and not(ancestor::alternative)]">
                         <span>
                             <xsl:attribute name="from">#<xsl:value-of select="@id"/></xsl:attribute>
                             <xsl:attribute name="to">#<xsl:value-of select="@id"/></xsl:attribute>
@@ -329,7 +361,21 @@
     </xsl:template>
     
     <xsl:template match="pause">
-        <xsl:element name="pause"  xmlns="http://www.tei-c.org/ns/1.0">
+        <xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
+            <!-- added 01-06-2018 -->
+            <xsl:attribute name="rend">
+                <xsl:choose>
+                    <xsl:when test="@duration='micro'">(.)</xsl:when>
+                    <xsl:when test="@duration='short'">(-)</xsl:when>
+                    <xsl:when test="@duration='medium'">(--)</xsl:when>
+                    <xsl:when test="@duration='long'">(---)</xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>(</xsl:text>
+                        <xsl:value-of select="@duration"/>
+                        <xsl:text>)</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="not(@duration='micro' or @duration='short' or @duration='medium' or @duration='long')">
                     <xsl:attribute name="dur">PT<xsl:value-of select="@duration"/>S</xsl:attribute>
@@ -367,6 +413,14 @@
                 <xsl:attribute name="end">#<xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
             </xsl:if>
             <xsl:element name="desc">
+                <!-- new 01-06-2018 -->
+                <xsl:attribute name="rend">
+                    <xsl:if test="@type='in'">°</xsl:if>
+                    <xsl:for-each select="(1 to @length)">
+                        <xsl:text>h</xsl:text>
+                    </xsl:for-each>                    
+                    <xsl:if test="@type='out'">°</xsl:if>
+                </xsl:attribute>
                 <xsl:if test="@length='1'">short</xsl:if>
                 <xsl:if test="@length='2'">medium</xsl:if>
                 <xsl:if test="@length='3'">long</xsl:if>
@@ -379,7 +433,9 @@
     <!-- 04-05-2015: TODO! -->
     <xsl:template match="uncertain">
         <unclear xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:choose>
+            <!-- changed 01-06-2018 -->
+            <xsl:apply-templates select="child::*[not(self::alternative)]"/>
+            <!-- <xsl:choose>
                 <xsl:when test="not(alternative)">
                     <xsl:apply-templates/>
                 </xsl:when>
@@ -397,7 +453,7 @@
                         <xsl:apply-templates select="alternative"/>
                     </choice>
                 </xsl:otherwise>
-            </xsl:choose>
+            </xsl:choose> -->
         </unclear>
         <!-- <xsl:choose>
             <xsl:when test="not(alternative)">
