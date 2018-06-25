@@ -136,7 +136,7 @@
                         <xsl:apply-templates select="//speaker"/>
                         <xsl:if test="//contribution[@speaker-reference or count(child::*[not(self::pause or self::non-phonological or self::time)])&gt;0]">
                             <!-- generate an anonymous speaker -->
-                            <person xml:id="MA" n="MA">
+                            <person>
                                 <xsl:attribute name="xml:id" select="$ANONYMOUS_SPEAKER_ID"/>
                                 <xsl:attribute name="n" select="$ANONYMOUS_SPEAKER_ID"/>
                                 <persName>

@@ -221,7 +221,7 @@
 
 	<xsl:template match="*:anchor">
 		<xsl:element name="anchor">
-			<xsl:attribute name="synch">#<xsl:value-of select="@synch"/></xsl:attribute>
+			<xsl:attribute name="synch"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@synch"/></xsl:attribute>
 			<!-- <xsl:apply-templates select="@synch"/> -->
 		</xsl:element>
 	</xsl:template>

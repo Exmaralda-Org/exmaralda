@@ -156,7 +156,7 @@
                 </xsl:choose>                
             </xsl:attribute>
             <xsl:if test="//tli[1]/@time&gt;0.0">
-                <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/>                        
+                <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0"/>                        
             </xsl:if>
             <xsl:apply-templates select="//tli"/>
         </timeline>        
