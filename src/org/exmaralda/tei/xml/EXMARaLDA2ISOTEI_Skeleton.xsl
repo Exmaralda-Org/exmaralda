@@ -14,6 +14,18 @@
 	<!-- xx is used as a default value if no such parameter is passed -->
 	<xsl:param name="LANGUAGE">xx</xsl:param>
 	
+	<!-- new 25-06-2018 -->
+	<!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
+	<xsl:param name="USE_XPOINTER">FALSE</xsl:param>
+	
+	
+	<xsl:variable name="XPOINTER_HASH">
+		<xsl:choose>
+			<xsl:when test="$USE_XPOINTER='TRUE'">#</xsl:when>
+			<xsl:otherwise></xsl:otherwise>
+		</xsl:choose>            
+	</xsl:variable>
+
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 	<xsl:function name="tesla:determine-recording-type">
@@ -217,8 +229,8 @@
 				</xsl:attribute>
 				<xsl:attribute name="since">
 					<xsl:choose>
-						<xsl:when test="//tli[1]/@time=0.0">#<xsl:value-of select="//common-timeline/tli[1]/@id"/></xsl:when>
-						<xsl:otherwise>#T_START</xsl:otherwise>
+						<xsl:when test="//tli[1]/@time=0.0"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="//common-timeline/tli[1]/@id"/></xsl:when>
+						<xsl:otherwise><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
 			</xsl:if>

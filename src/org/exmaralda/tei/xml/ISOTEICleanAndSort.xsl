@@ -9,6 +9,18 @@
         xmlns:tesla="http://www.exmaralda.org"  
         xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	
+	<!-- new 25-06-2018 -->
+	<!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
+	<xsl:param name="USE_XPOINTER">FALSE</xsl:param>
+	
+	
+	<xsl:variable name="XPOINTER_HASH">
+		<xsl:choose>
+			<xsl:when test="$USE_XPOINTER='TRUE'">#</xsl:when>
+			<xsl:otherwise></xsl:otherwise>
+		</xsl:choose>            
+	</xsl:variable>
+
 	<!-- I've been having loads of trouble with namespaces in this stylesheet -->
 	<!-- The whole thing could probably look much simpler without these problems -->
 	
@@ -66,13 +78,13 @@
 		<!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
 		<xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">
 			<xsl:attribute name="who">
-				<xsl:text>#</xsl:text><xsl:value-of select="@who"/>
+				<xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@who"/>
 			</xsl:attribute>
 			<xsl:attribute name="start">
-				<xsl:text>#</xsl:text><xsl:value-of select="@start"/>
+				<xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start"/>
 			</xsl:attribute>
 			<xsl:attribute name="end">
-				<xsl:text>#</xsl:text><xsl:value-of select="@end"/>
+				<xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/>
 			</xsl:attribute>
 			<xsl:attribute name="xml:id">
 				<xsl:text>au</xsl:text><xsl:value-of select="count(preceding::*:u)+1"/>
@@ -88,8 +100,8 @@
 					<xsl:attribute name="type"><xsl:value-of select="current-grouping-key()"/></xsl:attribute>
 					<xsl:for-each select="current-group()">
 						<xsl:element name="span">
-							<xsl:attribute name="from"><xsl:text>#</xsl:text><xsl:value-of select="@start"/></xsl:attribute>
-							<xsl:attribute name="to"><xsl:text>#</xsl:text><xsl:value-of select="@end"/></xsl:attribute>
+							<xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start"/></xsl:attribute>
+							<xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/></xsl:attribute>
 							<xsl:value-of select="@value"/>
 						</xsl:element>
 					</xsl:for-each>
@@ -105,7 +117,7 @@
 			<xsl:apply-templates select="@* | node()"/>
 		</xsl:element>
 		<xsl:element name="anchor">
-			<xsl:attribute name="synch">#<xsl:value-of select="child::*[last()]/@synch"/></xsl:attribute>
+			<xsl:attribute name="synch"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="child::*[last()]/@synch"/></xsl:attribute>
 		</xsl:element>
 	</xsl:template>
 	
