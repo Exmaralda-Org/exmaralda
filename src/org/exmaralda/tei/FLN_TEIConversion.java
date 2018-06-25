@@ -68,7 +68,8 @@ public class FLN_TEIConversion {
         for (File file : files){ 
             File out = new File(new File(OUT), file.getName().replaceAll("\\.fln", ".xml"));
             String[][] parameters = {
-                {"LANGUAGE", "de"}
+                {"LANGUAGE", "de"},
+                {"MAKE_INLINE_ATTRIBUTES", "TRUE"}
             };
             String result = sf.applyInternalStylesheetToExternalXMLFile("/org/exmaralda/tei/xml/folker2isotei.xsl", file.getAbsolutePath(), parameters);
             Document d = IOUtilities.readDocumentFromString(result);

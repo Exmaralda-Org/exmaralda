@@ -21,8 +21,13 @@
     </xsl:template>
     
     <xsl:template match="tei:w">
-        <span class="token">
+        <xsl:variable name="ID" select="@xml:id"/>
+        <span class="token">            
             <xsl:attribute name="id" select="@xml:id"/>
+            <xsl:if test="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='pos']/descendant::tei:span[substring-after(@from, '#')=$ID and starts-with(text(), 'ADJ')]">
+                <!-- adjectives in bold and blue -->
+                <xsl:attribute name="style">font-weight:bold; color:blue;</xsl:attribute>
+            </xsl:if>
             <xsl:value-of select="."/><xsl:text> </xsl:text>
         </span>
     </xsl:template>
@@ -31,17 +36,33 @@
         <span class="pause">
             <xsl:attribute name="id" select="@xml:id"/>
             <xsl:choose>
-                <xsl:when test="@type='micro'">(.) </xsl:when>
-                <xsl:otherwise><xsl:text>(</xsl:text><xsl:value-of select="substring-before(substring-after(@dur, 'PT'), 'S')"/><xsl:text>) </xsl:text></xsl:otherwise>
+                <xsl:when test="@rend">
+                    <xsl:value-of select="@rend"/>
+                    <xsl:text> </xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <xsl:when test="@type='micro'">(.) </xsl:when>
+                        <xsl:otherwise><xsl:text>(</xsl:text><xsl:value-of select="substring-before(substring-after(@dur, 'PT'), 'S')"/><xsl:text>) </xsl:text></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:otherwise>
             </xsl:choose>
         </span>
     </xsl:template>
     
     <xsl:template match="tei:desc">
         <span class="desc">
-            <xsl:text>((</xsl:text>
-            <xsl:value-of select="."/>
-            <xsl:text>)) </xsl:text>
+            <xsl:choose>
+                <xsl:when test="@rend">
+                    <xsl:value-of select="@rend"/>
+                    <xsl:text> </xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>((</xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text>)) </xsl:text>                    
+                </xsl:otherwise>
+            </xsl:choose>
         </span>
     </xsl:template>
 

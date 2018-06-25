@@ -137,7 +137,7 @@ public class PraatControl {
         // version when compiling for the crappy Mac
         //return (praatProcess!=null);
         return ((praatProcess!=null) && (praatProcess.isAlive())); 
-    }
+    } 
     
     public void startPraat() throws IOException {
         //Runtime.getRuntime().exec(PRAATPATH + PRAAT);

@@ -12,10 +12,26 @@
     <!-- A parameter can be passed spcifying the language of the document -->
     <!-- xx is used as a default value if no such parameter is passed -->
     <xsl:param name="LANGUAGE">xx</xsl:param>
+    <!-- new 22-06-2018 -->
+    <!-- if this parameter is set to TRUE, <w> elements will get inline attributes @norm, @lemma and @pos -->
+    <xsl:param name="MAKE_INLINE_ATTRIBUTES">FALSE</xsl:param>
+    <!-- new 22-06-2018 -->
+    <!-- if this parameter is set to TRUE, <span> elements will be produced for normalisation, lemmatisation and POS tags -->
+    <xsl:param name="MAKE_STANDOFF_ANNOTATIONS">FALSE</xsl:param>
+    <!-- new 25-06-2018 -->
+    <!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
+    <xsl:param name="USE_XPOINTER">FALSE</xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8"/>
     
     <xsl:variable name="ANONYMOUS_SPEAKER_ID" select="generate-id()"/>
+    
+    <xsl:variable name="XPOINTER_HASH">
+        <xsl:choose>
+            <xsl:when test="$USE_XPOINTER='TRUE'">#</xsl:when>
+            <xsl:otherwise></xsl:otherwise>
+        </xsl:choose>            
+    </xsl:variable>
 
     <!-- ******************************************************* -->
     <!-- *************       FUNCTIONS         ***************** -->
@@ -184,15 +200,16 @@
                 <xsl:when test="(//timepoint[1]/@absolute-time + 0.0)&gt;0.0">
                     <!-- <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/> -->     
                     <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0"/> 
+                    <xsl:apply-templates select="//timepoint"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- <when xmlns="http://www.tei-c.org/ns/1.0" absolute="00:00:00.0"> -->
                     <when xmlns="http://www.tei-c.org/ns/1.0">
                         <xsl:attribute name="xml:id" select="//timepoint[1]/@timepoint-id"/>                        
                     </when>
+                    <xsl:apply-templates select="//timepoint[position()>1]"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:apply-templates select="//timepoint[position()>1]"/>
         </timeline>        
     </xsl:template>
     
@@ -209,18 +226,18 @@
             <xsl:attribute name="who">
                 <xsl:choose>
                     <xsl:when test="@speaker-reference">
-                        <xsl:text>#</xsl:text><xsl:value-of select="translate(@speaker-reference, ' ', '_')"/>                        
+                        <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="translate(@speaker-reference, ' ', '_')"/>                        
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>#</xsl:text><xsl:value-of select="$ANONYMOUS_SPEAKER_ID"/>
+                        <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="$ANONYMOUS_SPEAKER_ID"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
             <xsl:attribute name="start">
-                <xsl:text>#</xsl:text><xsl:value-of select="@start-reference"/>                
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start-reference"/>                
             </xsl:attribute>
             <xsl:attribute name="end">
-                <xsl:text>#</xsl:text><xsl:value-of select="@end-reference"/>                
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end-reference"/>                
             </xsl:attribute>
             <xsl:element name="u" xmlns="http://www.tei-c.org/ns/1.0">
                 <xsl:attribute name="xml:id">
@@ -244,8 +261,8 @@
                             </alternative>
                         </uncertain> -->
                         <span>
-                            <xsl:attribute name="from">#<xsl:value-of select="ancestor::uncertain/child::w[1]/@id"/></xsl:attribute>
-                            <xsl:attribute name="to">#<xsl:value-of select="ancestor::uncertain/child::w[last()]/@id"/></xsl:attribute>
+                            <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor::uncertain/child::w[1]/@id"/></xsl:attribute>
+                            <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor::uncertain/child::w[last()]/@id"/></xsl:attribute>
                             <xsl:choose>
                                 <xsl:when test="count(w)=1"><xsl:value-of select="w[1]"/></xsl:when>
                                 <xsl:otherwise>
@@ -259,67 +276,71 @@
                 </spanGrp>                    
             </xsl:if>
             
-            <!-- normalisations, if any -->
-            <xsl:if test="descendant::w[@n]">
-                <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="n">
-                    <!-- change 01-06-2018 : discard annotations of alternatives -->
-                    <xsl:for-each select="descendant::w[@n and not(ancestor::alternative)]">
-                        <span>
-                            <xsl:attribute name="from">#<xsl:value-of select="@id"/></xsl:attribute>
-                            <xsl:attribute name="to">#<xsl:value-of select="@id"/></xsl:attribute>
-                            <xsl:choose>
-                                <xsl:when test="contains(@n,' ')">
-                                    <xsl:for-each select="tokenize(@n, ' ')">
-                                        <span><xsl:value-of select="current()"/></span>
-                                    </xsl:for-each>                                    
-                                </xsl:when>
-                                <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
-                            </xsl:choose>
-                        </span>
-                    </xsl:for-each>
-                </spanGrp>
-            </xsl:if>
+            <!-- new 22-06-2018 - make these standoff-annotations optional -->
+            <xsl:if test="$MAKE_STANDOFF_ANNOTATIONS='TRUE'">
             
-            <!-- lemmatisations, if any -->
-            <xsl:if test="descendant::w[@lemma]">
-                <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="lemma">
-                    <!-- change 01-06-2018 : discard annotations of alternatives -->
-                    <xsl:for-each select="descendant::w[@lemma and not(ancestor::alternative)]">
-                        <span>
-                            <xsl:attribute name="from">#<xsl:value-of select="@id"/></xsl:attribute>
-                            <xsl:attribute name="to">#<xsl:value-of select="@id"/></xsl:attribute>
-                            <xsl:choose>
-                                <xsl:when test="contains(@lemma,' ')">
-                                    <xsl:for-each select="tokenize(@lemma, ' ')">
-                                        <span><xsl:value-of select="current()"/></span>
-                                    </xsl:for-each>                                    
-                                </xsl:when>
-                                <xsl:otherwise><xsl:value-of select="@lemma"/></xsl:otherwise>
-                            </xsl:choose>
-                        </span>
-                    </xsl:for-each>
-                </spanGrp>
-            </xsl:if>
-            
-            <!-- POS tags, if any -->
-            <xsl:if test="descendant::w[@pos]">
-                <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="pos">
-                    <!-- change 01-06-2018 : discard annotations of alternatives -->
-                    <xsl:for-each select="descendant::w[@pos and not(ancestor::alternative)]">
-                        <span>
-                            <xsl:attribute name="from">#<xsl:value-of select="@id"/></xsl:attribute>
-                            <xsl:attribute name="to">#<xsl:value-of select="@id"/></xsl:attribute>
-                            <xsl:choose>
-                                <xsl:when test="contains(@pos,' ')">
-                                    <xsl:for-each select="tokenize(@pos, ' ')">
-                                        <span><xsl:value-of select="current()"/></span>
-                                    </xsl:for-each>                                    
-                                </xsl:when>
-                                <xsl:otherwise><xsl:value-of select="@pos"/></xsl:otherwise>
-                            </xsl:choose>
-                        </span>
-                    </xsl:for-each>
-                </spanGrp>
+                <!-- normalisations, if any -->
+                <xsl:if test="descendant::w[@n]">
+                    <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="norm">
+                        <!-- change 01-06-2018 : discard annotations of alternatives -->
+                        <xsl:for-each select="descendant::w[@n and not(ancestor::alternative)]">
+                            <span>
+                                <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                                <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                                <xsl:choose>
+                                    <xsl:when test="contains(@n,' ')">
+                                        <xsl:for-each select="tokenize(@n, ' ')">
+                                            <span><xsl:value-of select="current()"/></span>
+                                        </xsl:for-each>                                    
+                                    </xsl:when>
+                                    <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
+                                </xsl:choose>
+                            </span>
+                        </xsl:for-each>
+                    </spanGrp>
+                </xsl:if>
+                
+                <!-- lemmatisations, if any -->
+                <xsl:if test="descendant::w[@lemma]">
+                    <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="lemma">
+                        <!-- change 01-06-2018 : discard annotations of alternatives -->
+                        <xsl:for-each select="descendant::w[@lemma and not(ancestor::alternative)]">
+                            <span>
+                                <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                                <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                                <xsl:choose>
+                                    <xsl:when test="contains(@lemma,' ')">
+                                        <xsl:for-each select="tokenize(@lemma, ' ')">
+                                            <span><xsl:value-of select="current()"/></span>
+                                        </xsl:for-each>                                    
+                                    </xsl:when>
+                                    <xsl:otherwise><xsl:value-of select="@lemma"/></xsl:otherwise>
+                                </xsl:choose>
+                            </span>
+                        </xsl:for-each>
+                    </spanGrp>
+                </xsl:if>
+                
+                <!-- POS tags, if any -->
+                <xsl:if test="descendant::w[@pos]">
+                    <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="pos">
+                        <!-- change 01-06-2018 : discard annotations of alternatives -->
+                        <xsl:for-each select="descendant::w[@pos and not(ancestor::alternative)]">
+                            <span>
+                                <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                                <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                                <xsl:choose>
+                                    <xsl:when test="contains(@pos,' ')">
+                                        <xsl:for-each select="tokenize(@pos, ' ')">
+                                            <span><xsl:value-of select="current()"/></span>
+                                        </xsl:for-each>                                    
+                                    </xsl:when>
+                                    <xsl:otherwise><xsl:value-of select="@pos"/></xsl:otherwise>
+                                </xsl:choose>
+                            </span>
+                        </xsl:for-each>
+                    </spanGrp>
+                </xsl:if>
             </xsl:if>
         </xsl:element> <!-- end annotationGrp -->        
     </xsl:template>
@@ -332,7 +353,7 @@
     <xsl:template match="time">
         <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="synch">
-                <xsl:text>#</xsl:text><xsl:value-of select="@timepoint-reference"/>
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@timepoint-reference"/>
             </xsl:attribute>            
         </xsl:element>
     </xsl:template>
@@ -355,6 +376,13 @@
             </xsl:attribute>
             <xsl:if test="@transition='assimilated'">
                 <xsl:attribute name="type">assimilated</xsl:attribute>
+            </xsl:if>
+            
+            <!-- new 22-06-2018: optionally include inline attributes -->
+            <xsl:if test="$MAKE_INLINE_ATTRIBUTES='TRUE'">
+                <xsl:if test="@n"><xsl:attribute name="norm" select="@n"></xsl:attribute></xsl:if>
+                <xsl:if test="@lemma"><xsl:attribute name="lemma" select="@lemma"></xsl:attribute></xsl:if>
+                <xsl:if test="@pos"><xsl:attribute name="pos" select="@pos"></xsl:attribute></xsl:if>
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:element>
@@ -388,8 +416,8 @@
                 <xsl:attribute name="dur">PT<xsl:value-of select="@duration"/>S</xsl:attribute>
             </xsl:if>
             <xsl:if test="not(ancestor::*[@speaker-reference])">
-                <xsl:attribute name="start">#<xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
-                <xsl:attribute name="end">#<xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+                <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
+                <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
             </xsl:if>
         </xsl:element>
     </xsl:template>
@@ -397,8 +425,8 @@
     <xsl:template match="non-phonological">
         <xsl:element name="incident"  xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:if test="not(ancestor::*[@speaker-reference])">
-                <xsl:attribute name="start">#<xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
-                <xsl:attribute name="end">#<xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+                <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
+                <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
             </xsl:if>
             <xsl:element name="desc">
                 <xsl:value-of select="@description"/>
@@ -409,8 +437,8 @@
     <xsl:template match="breathe">
         <xsl:element name="vocal"  xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:if test="not(ancestor::*[@speaker-reference])">
-                <xsl:attribute name="start">#<xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
-                <xsl:attribute name="end">#<xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+                <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
+                <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
             </xsl:if>
             <xsl:element name="desc">
                 <!-- new 01-06-2018 -->
@@ -513,8 +541,9 @@
         </xsl:element>        
     </xsl:template>
     
-    <xsl:template match="timepoint[position()&gt;1]">
-        <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
+    <!-- <xsl:template match="timepoint[position()&gt;1]"> -->
+    <xsl:template match="timepoint">
+            <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@timepoint-id"/>
             </xsl:attribute>
@@ -524,8 +553,8 @@
                 </xsl:attribute>
                 <xsl:attribute name="since">
                     <xsl:choose>
-                        <xsl:when test="(//timepoint[1]/@absolute-time + 0.0)=0.0">#<xsl:value-of select="//timepoint[1]/@timepoint-id"/></xsl:when>
-                        <xsl:otherwise>#T_START</xsl:otherwise>
+                        <xsl:when test="(//timepoint[1]/@absolute-time + 0.0)=0.0"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="//timepoint[1]/@timepoint-id"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$XPOINTER_HASH"/><xsl:text>T_START</xsl:text></xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
             </xsl:if>

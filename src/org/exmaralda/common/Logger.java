@@ -80,6 +80,9 @@ public class Logger {
         System.out.println("JVM version (specification/implementation) : " 
                 + System.getProperty("java.vm.specification.version") + " / " + System.getProperty("java.vm.version"));
         
+        System.out.println("org.sfb538.exmaralda.PartiturEditor.PlayerType: " 
+                + java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PlayerType", "Not set - using default player"));
+        
         System.out.println("Java Class Path : " + System.getProperty("java.class.path"));
         
         System.out.println("Application name :" + app.getApplicationName());
