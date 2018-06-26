@@ -25,8 +25,8 @@ import org.xml.sax.SAXException;
  */
 public class FLN_TEIConversion {
 
-    //String CORPUS ="FOLK";
-    String CORPUS ="GWSS";
+    String CORPUS ="FOLK";
+    //String CORPUS ="GWSS";
     String IN = "F:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
     String OUT = "F:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;
     /**

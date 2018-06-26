@@ -95,35 +95,35 @@
                 <!-- ***************************************************** -->
                 <fileDesc>
                     <titleStmt>
-                        <title/>
+                        <title><xsl:value-of select="/*/@dgd-id"/></title>
                     </titleStmt>
-                    <publicationStmt>
-                        <authority><!--Fill me in--></authority>
+                    <!-- <publicationStmt>
+                        <authority/>
                         <availability>
                             <licence target="someurl"/>
-                            <p><!--Fill me in--></p>
+                            <p></p>
                         </availability>
-                        <distributor><!--Fill me in--></distributor>
+                        <distributor></distributor>
                         <address>
-                           <addrLine><!--Fill me in--></addrLine>
+                           <addrLine></addrLine>
                         </address>
-                    </publicationStmt>
+                    </publicationStmt> -->
                     <!-- ***************************************************** -->
                     <sourceDesc>
                         <recordingStmt>
                             <recording type="audio">
                                 <!-- element from TEI P5, but not allowed there as a child of recording -->
                                 <xsl:apply-templates select="//recording"/>
-                                <broadcast>
+                                <!-- <broadcast>
                                     <ab><xsl:comment>Fill me in</xsl:comment></ab>
-                                </broadcast>
+                                </broadcast> -->
                                 <!-- information about the equipment used for creating the recording -->
                                 <!-- where recordings are made by the researcher, this would be -->
                                 <!-- place to specify the recording equipment (e.g. Camcorder) -->
-                                <equipment>
+                                <!-- <equipment>
                                     <ab><xsl:comment>Fill me in</xsl:comment></ab>
                                     <ab><xsl:comment>Fill me in</xsl:comment></ab>
-                                </equipment>                  
+                                </equipment> -->                  
                             </recording>
                         </recordingStmt>                                        
                     </sourceDesc>
@@ -140,19 +140,19 @@
                                 <xsl:attribute name="xml:id" select="$ANONYMOUS_SPEAKER_ID"/>
                                 <xsl:attribute name="n" select="$ANONYMOUS_SPEAKER_ID"/>
                                 <persName>
-                                    <forename>Anonymous</forename>
+                                    <!-- <forename>Anonymous</forename> -->
                                     <abbr><xsl:value-of select="$ANONYMOUS_SPEAKER_ID"/></abbr>
                                 </persName>
                             </person>                            
                         </xsl:if>
                     </particDesc>        
                     <!-- ***************************************************** -->                
-                    <settingDesc>
+                    <!-- <settingDesc>
                         <place><xsl:comment>Fill me in</xsl:comment></place>
                         <setting>
                             <activity><xsl:comment>Fill me in</xsl:comment></activity>
                         </setting>
-                    </settingDesc>                    
+                    </settingDesc> -->                    
                 </profileDesc>
                 <encodingDesc>
                     <appInfo>
@@ -165,7 +165,7 @@
                     </appInfo>       
                     <!-- information about the transcription convention used -->
                     <!-- change 03-03-2016: namespace switch no longer necessary -->
-                    <transcriptionDesc ident="cGAT" version="2009">
+                    <transcriptionDesc ident="cGAT" version="2014">
                         <desc><xsl:comment>Fill me in</xsl:comment></desc>
                         <label><xsl:comment>Fill me in</xsl:comment></label>
                     </transcriptionDesc>
