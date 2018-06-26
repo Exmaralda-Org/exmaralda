@@ -15,6 +15,20 @@
     <xsl:param name="LANGUAGE">xx</xsl:param>
     
     
+    <!-- new 26-06-2018 -->
+    <!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
+    <xsl:param name="USE_XPOINTER">FALSE</xsl:param>
+    
+    
+    <xsl:variable name="XPOINTER_HASH">
+        <xsl:choose>
+            <xsl:when test="$USE_XPOINTER='TRUE'">#</xsl:when>
+            <xsl:otherwise></xsl:otherwise>
+        </xsl:choose>            
+    </xsl:variable>
+    
+    
+    
     <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
     
     
@@ -140,12 +154,12 @@
         <timeline unit="s" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="origin">
                 <xsl:choose>
-                    <xsl:when test="//tli[1]/@time=0.0">#<xsl:value-of select="//tli[1]/@id"/></xsl:when>
-                    <xsl:otherwise>#T_START</xsl:otherwise>
+                    <xsl:when test="//tli[1]/@time=0.0"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="//tli[1]/@id"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:otherwise>
                 </xsl:choose>                
             </xsl:attribute>
             <xsl:if test="//tli[1]/@time&gt;0.0">
-                <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/>                        
+                <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0"/>                        
             </xsl:if>
             <xsl:apply-templates select="//tli"/>
         </timeline>        
@@ -163,8 +177,8 @@
                 </xsl:attribute>
                 <xsl:attribute name="since">
                     <xsl:choose>
-                        <xsl:when test="//tli[1]/@time=0.0">#<xsl:value-of select="//tli[1]/@id"/></xsl:when>
-                        <xsl:otherwise>#T_START</xsl:otherwise>
+                        <xsl:when test="//tli[1]/@time=0.0"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="//tli[1]/@id"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
@@ -175,7 +189,7 @@
     <xsl:template match="tli[position()=1]">
         <xsl:choose>
             <xsl:when test="@time=0" >
-                <when absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0">
+                <when xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:attribute name="xml:id" select="@id"/>
                 </when>
             </xsl:when>
@@ -188,7 +202,7 @@
                         <xsl:attribute name="interval">
                             <xsl:value-of select="@time"/>
                         </xsl:attribute>
-                        <xsl:attribute name="since">#T_START</xsl:attribute>
+                        <xsl:attribute name="since"><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:attribute>
                     </xsl:if>
                 </xsl:element>                                
             </xsl:otherwise>
@@ -235,13 +249,13 @@
         <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
         <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
             <xsl:attribute name="who">
-                <xsl:text>#</xsl:text><xsl:value-of select="parent::tier/@speaker"/>
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="parent::tier/@speaker"/>
             </xsl:attribute>
             <xsl:attribute name="start">
-                <xsl:text>#</xsl:text><xsl:value-of select="@start"/>                
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start"/>                
             </xsl:attribute>
             <xsl:attribute name="end">
-                <xsl:text>#</xsl:text><xsl:value-of select="$DIV_END"/>                
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="$DIV_END"/>                
             </xsl:attribute>
             <!-- change 03-03-2016: namespace switch no longer necessary -->        
             <xsl:element name="u">
@@ -260,7 +274,7 @@
                     <!-- ADDED 15-11-2016 -->
                     <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
                         <xsl:attribute name="synch">
-                            <xsl:text>#</xsl:text><xsl:value-of select="@end"/>
+                            <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/>
                         </xsl:attribute>
                     </xsl:element>
                     <xsl:apply-templates select="following-sibling::event[1]" mode="second-pass"/>
@@ -293,7 +307,7 @@
             <xsl:if test="following-sibling::event and exmaralda:timeline-position(@end)&gt;=exmaralda:timeline-position(following-sibling::event[1]/@start)">
                 <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:attribute name="synch">
-                        <xsl:text>#</xsl:text><xsl:value-of select="@end"/>
+                        <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/>
                     </xsl:attribute>
                 </xsl:element>
                 <xsl:apply-templates select="following-sibling::event[1]" mode="second-pass"/>
@@ -311,8 +325,8 @@
                 <xsl:for-each select="//tier[@id=$TIER_ID]/event">
                     <xsl:if test="exmaralda:timeline-position(@start)&gt;=exmaralda:timeline-position($START) and exmaralda:timeline-position(@end)&lt;=exmaralda:timeline-position($END)">
                         <xsl:element name="span">
-                            <xsl:attribute name="from"><xsl:text>#</xsl:text><xsl:value-of select="@start"/></xsl:attribute>
-                            <xsl:attribute name="to"><xsl:text>#</xsl:text><xsl:value-of select="@end"/></xsl:attribute>
+                            <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start"/></xsl:attribute>
+                            <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/></xsl:attribute>
                             <xsl:value-of select="text()"/>
                         </xsl:element>
                     </xsl:if>
@@ -339,17 +353,17 @@
         <xsl:element name="incident" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:if test="../@speaker">
                 <xsl:attribute name="who">
-                    <xsl:text>#</xsl:text><xsl:value-of select="../@speaker"/>
+                    <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="../@speaker"/>
                 </xsl:attribute>                
             </xsl:if>
             <xsl:attribute name="type">
                 <xsl:value-of select="../@category"/>
             </xsl:attribute>
             <xsl:attribute name="start">
-                <xsl:text>#</xsl:text><xsl:value-of select="@start"/>
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start"/>
             </xsl:attribute>
             <xsl:attribute name="end">
-                <xsl:text>#</xsl:text><xsl:value-of select="@end"/>
+                <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/>
             </xsl:attribute>
             <xsl:element name="desc">
                 <xsl:value-of select="text()"/>
