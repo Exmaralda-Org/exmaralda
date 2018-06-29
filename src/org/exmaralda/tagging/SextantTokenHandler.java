@@ -38,10 +38,14 @@ public class SextantTokenHandler implements org.annolab.tt4j.ProbabilityHandler<
 
 
 
+    /* introduced this flag on 29-06-2018 because of issue #157 */
+    boolean beenToProbabilityFlag;
     
     @Override
     public void token(String token, String pos, String lemma) {
+        beenToProbabilityFlag = false;
         //System.out.println("HERE BE TOKEN!");
+        
         /*<ann xlink:href="#Seg_4" id="MyTheory_s_exs_pos_5">
 			<fs>
 				<f name="a">
@@ -90,11 +94,29 @@ public class SextantTokenHandler implements org.annolab.tt4j.ProbabilityHandler<
 
     @Override
     public void probability(String pos, String lemma, double probability) {
-        //System.out.println("Probability: " + pos + " " + lemma + " " + probability);
-        //System.out.println("---------------------------");
+        if (beenToProbabilityFlag) {
+            return;
+        }
+        beenToProbabilityFlag = true;
+        if (count>=idList.size()){
+            System.out.println("Probability: " + pos + " " + lemma + " " + probability);
+            System.out.println("Irregularity in POS tagging");
+            System.out.println("---------------------------");
+            
+            //return;
+        }
         
         Element ann = new Element("ann");
         ann.setAttribute("id", "ann_" + Integer.toString(count));
+        
+        /*if (count>=idList.size()){
+            System.out.println("*********************");
+            System.out.println(pos + " / " + lemma + " / " + probability);
+            for (String id : idList){
+                System.out.println(id);
+            }
+            //System.exit(1);
+        }*/
         ann.setAttribute("href", "#" + idList.get(count), xlinkNameSpace);
 
         Element fs = new Element("fs");

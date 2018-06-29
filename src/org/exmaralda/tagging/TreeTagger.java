@@ -40,6 +40,8 @@ public class TreeTagger {
     public void tag(TreeTaggableDocument input, File outputFile) throws IOException{
          System.setProperty("treetagger.home", treeTaggerDirectory);
          TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
+         //uncomment next line to make TreeTaggerWrapper verbose
+         //tt.TRACE = true;
          tt.setProbabilityThreshold(0.999999);
          SextantTokenHandler tokenHandler = new SextantTokenHandler();
          tokenHandler.setIDList(input.getIDs());
@@ -55,7 +57,7 @@ public class TreeTagger {
              for (int pos=0; pos<input.getNumberOfTaggableSegments(); pos++){
                  System.out.print("\rProcessing " + (pos+1) + " of " + input.getNumberOfTaggableSegments());
                  List tokens = input.getTokensAt(pos);
-                 System.out.print(" (" + tokens.size() + " tokens to tag).                ");
+                 System.out.println(" (" + tokens.size() + " tokens to tag).                ");
                  //for (Object t: tokens){System.out.println(t.toString());}
                  tt.process(tokens);
              }

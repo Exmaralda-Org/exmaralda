@@ -14,7 +14,7 @@
     <xsl:param name="LANGUAGE">xx</xsl:param>
     <!-- new 22-06-2018 -->
     <!-- if this parameter is set to TRUE, <w> elements will get inline attributes @norm, @lemma and @pos -->
-    <xsl:param name="MAKE_INLINE_ATTRIBUTES">FALSE</xsl:param>
+    <xsl:param name="MAKE_INLINE_ATTRIBUTES">TRUE</xsl:param>
     <!-- new 22-06-2018 -->
     <!-- if this parameter is set to TRUE, <span> elements will be produced for normalisation, lemmatisation and POS tags -->
     <xsl:param name="MAKE_STANDOFF_ANNOTATIONS">FALSE</xsl:param>
@@ -214,7 +214,8 @@
     </xsl:template>
     
     
-    <xsl:template match="contribution[@speaker-reference or count(child::*[not(self::pause or self::non-phonological or self::time)])&gt;0]">
+    <!-- contributions which have a speaker or something other than a pause, a non-pho, a breathe or a time -->
+    <xsl:template match="contribution[@speaker-reference or count(child::*[not(self::pause or self::non-phonological or self::breathe or self::time)])&gt;0]">
         <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
         <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
             <xsl:attribute name="xml:id">

@@ -122,7 +122,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
 
     @Override
     public List<String> getIDs() throws IOException {
-        Vector<String> result = new Vector<String>();
+        ArrayList<String> result = new ArrayList<String>();
         for (Element contribution : contributions){
             try {
                 List l = XPath.newInstance(xpathToTokens).selectNodes(contribution);
