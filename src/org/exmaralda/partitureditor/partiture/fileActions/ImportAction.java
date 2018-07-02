@@ -246,7 +246,12 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             importedTranscription = SubtitleConverter.readVTT(selectedFile);
         } else if (selectedFileFilter == dialog.TsvFileFilter) {
             TsvConverter itc = new TsvConverter();
-            itc.readText(selectedFile);
+            if (dialog.encodingComboBox.getSelectedIndex()==0){
+                itc.readText(selectedFile);
+            } else {
+                itc.readText(selectedFile,
+                        dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
+            }
             importedTranscription = itc.importText();
         }
 

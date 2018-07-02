@@ -20,18 +20,7 @@ import java.util.regex.*;
  * Some TSV format. HEre's an email describing:
  * <blockquote>
  * more than one transcription tier.
- * I'd suggest an extra header line with a list of transcription tier names
- * if more than one. If that line is absent, the first column is taken as the
- * only transcription tier.
- * <pre>
- * ### Transcription tiers ### TXT-A TXT-B
- * TXT-A   Lemma-A  POS-A   TXT-B   Lemma-B  POS-B   Start    End
- * [...]
- * xxxx    yyyyy    zzzz                             1.2907   5.3719
- *                         xxxx    yyyyy    zzzz    7.6353   10.7190
- * xxxx    yyyyy    zzzz    aaaa    bbbb     cccc    12.2907  15.371
- * </pre>
- * lternatively, in the row-per-annotation setup I'd use a separate column
+ * [... A]lternatively, in the row-per-annotation setup I'd use a separate column
  * for tier type (transcription/annot./desc.) and/or for the speaker.
  * <pre>
  * (Tiername   Tiertype  Speaker    Annotation    Start    End)
