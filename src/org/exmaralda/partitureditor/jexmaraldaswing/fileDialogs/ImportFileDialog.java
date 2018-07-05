@@ -90,6 +90,8 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
             setAccessory(accessoryPanel);
         }  else if (getFileFilter()==TreeTaggerFilter){
             setAccessory(accessoryPanel);
+        }  else if (getFileFilter()==TsvFileFilter){
+            setAccessory(accessoryPanel);
         } else {
             setAccessory(null);
         }
