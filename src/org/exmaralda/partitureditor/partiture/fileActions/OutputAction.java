@@ -498,8 +498,10 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
          
          
-         //lt.writeXMLToFile("C:\\Users\\Schmidt\\Dropbox\\JensLanwer\\ListTranscription.xml", "none");
+         //lt.writeXMLToFile("F:\\Dropbox\\IDS\\ListTranscription.xml", "none");
          Document xml = GATSegmentation.toXML(lt);
+         
+         //FileIO.writeDocumentToLocalFile("F:\\Dropbox\\IDS\\ListTranscription.xml", xml);
          
          StylesheetFactory sf = new StylesheetFactory(true);
          String html = sf.applyInternalStylesheetToString("/org/exmaralda/partitureditor/jexmaralda/xsl/GAT2HTML5.xsl", IOUtilities.documentToString(xml));

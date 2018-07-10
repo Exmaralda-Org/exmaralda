@@ -241,13 +241,16 @@ public class GATSegmentation extends AbstractSegmentation {
                     // not in Java 1.6!
                     // int bracketPosition = closingBracketPositions.getOrDefault(epe.getEnd(), 0);
                     int bracketPosition = 0;
-                    if (closingBracketPositions.containsKey(epe.getStart())){
-                        bracketPosition = closingBracketPositions.get(epe.getStart());
+                    //if (closingBracketPositions.containsKey(epe.getStart())){
+                    if (closingBracketPositions.containsKey(epe.getEnd())){
+                        //bracketPosition = closingBracketPositions.get(epe.getStart());
+                        bracketPosition = closingBracketPositions.get(epe.getEnd());
                     }                    
 
                     if (bracketPosition>=textPosition){
                         // this is the place where the magic happens
                         int numberOfSpaces = bracketPosition-textPosition;                        
+                        //System.out.println("About to append " + numberOfSpaces + " spaces.");
                         for (int j=0; j<numberOfSpaces; j++){
                             lineText.append(" ");
                             textPosition++;
@@ -267,7 +270,7 @@ public class GATSegmentation extends AbstractSegmentation {
             }
             
             if (isOverlapProblem){
-                //output.append("\t").append("{*** OVERLAP MANUELL BEARBEITEN! ***}");
+                //lineText.append("\t").append("{*** OVERLAP MANUELL BEARBEITEN! ***}");
             }
             
             thisGATLine.text = lineText.toString();

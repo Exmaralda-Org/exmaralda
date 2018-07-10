@@ -5,7 +5,7 @@
 -->        
 <xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:tesla="http://www.exmaralda.org" 
+    xmlns:exmaralda="http://www.exmaralda.org" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <!-- new 08-07-2016 -->
@@ -21,6 +21,9 @@
     <!-- new 25-06-2018 -->
     <!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
     <xsl:param name="USE_XPOINTER">FALSE</xsl:param>
+    <!-- new 05-07-2018 -->
+    <!-- if this parameter is set to TRUE, a <seg type='contribution'> will be introduced -->
+    <xsl:param name="ENFORCE_SEG">TRUE</xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8"/>
     
@@ -37,7 +40,7 @@
     <!-- *************       FUNCTIONS         ***************** -->
     <!-- ******************************************************* -->
     
-    <xsl:function name="tesla:determine-recording-type">
+    <xsl:function name="exmaralda:determine-recording-type">
         <xsl:param name="path"/>
         <xsl:choose>
             <xsl:when test="ends-with(lower-case($path), '.wav')">audio</xsl:when>
@@ -48,7 +51,7 @@
         </xsl:choose>        
     </xsl:function>
 
-    <xsl:function name="tesla:seconds-to-timestring">
+    <xsl:function name="exmaralda:seconds-to-timestring">
         <xsl:param name="seconds"/>
         <xsl:variable name="totalseconds">
             <xsl:value-of select="0 + $seconds"/>
@@ -199,13 +202,16 @@
             <xsl:choose>
                 <xsl:when test="(//timepoint[1]/@absolute-time + 0.0)&gt;0.0">
                     <!-- <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/> -->     
-                    <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0"/> 
+                    <when xml:id="T_START" interval="0.0" xmlns="http://www.tei-c.org/ns/1.0">
+                        <xsl:attribute name="since"><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:attribute>                                                
+                    </when> 
                     <xsl:apply-templates select="//timepoint"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- <when xmlns="http://www.tei-c.org/ns/1.0" absolute="00:00:00.0"> -->
-                    <when xmlns="http://www.tei-c.org/ns/1.0">
+                    <when xmlns="http://www.tei-c.org/ns/1.0" interval="0.0">
                         <xsl:attribute name="xml:id" select="//timepoint[1]/@timepoint-id"/>                        
+                        <xsl:attribute name="since"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="//timepoint[1]/@timepoint-id"/></xsl:attribute>                        
                     </when>
                     <xsl:apply-templates select="//timepoint[position()>1]"/>
                 </xsl:otherwise>
@@ -220,7 +226,7 @@
         <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
             <xsl:attribute name="xml:id">
                 <xsl:choose>
-                    <xsl:when test="u/@id"><xsl:value-of select="u/@id"></xsl:value-of></xsl:when>
+                    <xsl:when test="@id"><xsl:value-of select="@id"></xsl:value-of></xsl:when>
                     <xsl:otherwise><xsl:text>ab_</xsl:text><xsl:value-of select="generate-id()"/></xsl:otherwise>
                 </xsl:choose>                    
             </xsl:attribute>
@@ -244,7 +250,18 @@
                 <xsl:attribute name="xml:id">
                      <xsl:text>u_</xsl:text><xsl:value-of select="generate-id()"/>
                 </xsl:attribute>
-                <xsl:apply-templates/>
+                <!-- changed 05-07-2018 - enforce a seg if so desired -->
+                <xsl:choose>
+                    <xsl:when test="$ENFORCE_SEG='TRUE' and not(child::line)">
+                        <seg xmlns="http://www.tei-c.org/ns/1.0" type="contribution">
+                            <xsl:attribute name="xml:id">seg_<xsl:value-of select="generate-id()"/></xsl:attribute>                                        
+                            <xsl:apply-templates/>
+                        </seg>                           
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>                        
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:element> <!-- end u -->
             
             <!-- take care of annotations belonging to this u -->            
@@ -351,6 +368,34 @@
         <xsl:apply-templates select="pause|non-phonological|breathe"/>
     </xsl:template>
             
+    <xsl:template match="line">
+        <!-- <line>
+            <w>scheiß</w>
+            <time timepoint-reference="TLI_13"/>
+            <w>dosenöffner</w>
+            <boundary type="final" movement="not-qualified" latching="no"/>
+        </line> -->
+        <seg xmlns="http://www.tei-c.org/ns/1.0" type="line">
+            <xsl:attribute name="xml:id">
+                <xsl:choose>
+                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                    <xsl:otherwise>seg_<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>            
+            <xsl:attribute name="subtype">
+                <xsl:value-of select="child::boundary/@type"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="child::boundary/@movement"/>
+                <xsl:if test="child::boundary/@latching='yes'">
+                    <xsl:text> latching</xsl:text>
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:apply-templates/>            
+        </seg>
+            
+        
+    </xsl:template>
+    
     <xsl:template match="time">
         <xsl:element name="anchor" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="synch">
@@ -372,11 +417,18 @@
             <xsl:attribute name="xml:id">
                 <xsl:choose>
                     <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-                    <xsl:otherwise>w<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                    <xsl:otherwise>w_<xsl:value-of select="generate-id()"/></xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
-            <xsl:if test="@transition='assimilated'">
-                <xsl:attribute name="type">assimilated</xsl:attribute>
+            <xsl:if test="@transition or ancestor::uncertain">
+                <xsl:attribute name="type">
+                    <xsl:variable name="TYPE_VALUE">
+                        <xsl:if test="@transition='assimilated'">assimilated </xsl:if>
+                        <!-- added 05-07-2018 -->
+                        <xsl:if test="ancestor::uncertain">uncertain </xsl:if>
+                    </xsl:variable>
+                    <xsl:value-of select="normalize-space($TYPE_VALUE)"/>
+                </xsl:attribute>
             </xsl:if>
             
             <!-- new 22-06-2018: optionally include inline attributes -->
@@ -460,11 +512,14 @@
     </xsl:template>
     
     <!-- 04-05-2015: TODO! -->
+    <!-- changed 01-06-2018 -->
+    <!-- changed again because alternatives should be mapped onto a spanGrp -->
+    <!-- changed again (05-07-2018) uncertainty should be encoded in an attribute @type -->
     <xsl:template match="uncertain">
-        <unclear xmlns="http://www.tei-c.org/ns/1.0">
-            <!-- changed 01-06-2018 -->
+        <!-- <unclear xmlns="http://www.tei-c.org/ns/1.0"> -->
             <xsl:apply-templates select="child::*[not(self::alternative)]"/>
-            <!-- <xsl:choose>
+        <!-- </unclear> -->
+        <!-- <xsl:choose>
                 <xsl:when test="not(alternative)">
                     <xsl:apply-templates/>
                 </xsl:when>
@@ -483,7 +538,6 @@
                     </choice>
                 </xsl:otherwise>
             </xsl:choose> -->
-        </unclear>
         <!-- <xsl:choose>
             <xsl:when test="not(alternative)">
                 <unclear xmlns="http://www.tei-c.org/ns/1.0">
@@ -514,7 +568,7 @@
             
     <xsl:template match="recording">
         <media  xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:attribute name="mimeType"><xsl:value-of select="tesla:determine-recording-type(@path)"/>/wav</xsl:attribute>
+            <xsl:attribute name="mimeType"><xsl:value-of select="exmaralda:determine-recording-type(@path)"/>/wav</xsl:attribute>
             <xsl:attribute name="url"><xsl:value-of select="@path"/></xsl:attribute>
         </media>        
     </xsl:template> 
