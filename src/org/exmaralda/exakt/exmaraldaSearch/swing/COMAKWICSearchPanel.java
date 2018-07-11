@@ -123,7 +123,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         
         // init the annotation combo box
         DefaultComboBoxModel comboBoxModel2 = new DefaultComboBoxModel();
-        for (String an : corpus.getAnnotationNames()){
+        //here the sorting alphabetically should be done
+        //HashSet<String> sortedannotationsnames = corpus.getAnnotationNames(). sort();
+        ArrayList<String> sortedList = new ArrayList(corpus.getAnnotationNames());
+        Collections.sort(sortedList, new SortIgnoreCase());
+        for (String an : sortedList){
             comboBoxModel2.addElement(an);
         }
         annotationComboBox.setModel(comboBoxModel2);
@@ -1298,6 +1302,12 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         return entry;
     }
 
-    
+    public class SortIgnoreCase implements Comparator<Object> {
+        public int compare(Object o1, Object o2) {
+            String s1 = (String) o1;
+            String s2 = (String) o2;
+            return s1.toLowerCase().compareTo(s2.toLowerCase());
+        }
+    }
         
 }
