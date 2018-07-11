@@ -130,35 +130,48 @@
 	</xsl:template>
 	
 	<xsl:template match="*:seg/@type">
-               	<xsl:attribute name="type"><xsl:value-of select="."/></xsl:attribute>
-        	</xsl:template>
-
-	<xsl:template match="*:seg/@mode">
-            		<xsl:attribute name="subtype"><xsl:value-of select="."/></xsl:attribute>
+       	<xsl:attribute name="type"><xsl:value-of select="."/></xsl:attribute>
     </xsl:template>
 
-    <xsl:template match="*:uncertain-start[following-sibling::*:uncertain-end]">
-     	<xsl:element name="unclear" xmlns="http://www.tei-c.org/ns/1.0">
+	<xsl:template match="*:seg/@mode">
+    	<xsl:attribute name="subtype"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:template>
+
+    <!-- ************************************************************** -->
+	<!-- templates for things between uncertain-start and uncertain-end -->
+	<!-- ************************************************************** -->
+	
+	<xsl:template match="*:uncertain-start[following-sibling::*:uncertain-end]">
+     	<!-- removed uncertain 11-07-2018 -->
+		<!-- <xsl:element name="unclear" xmlns="http://www.tei-c.org/ns/1.0"> -->
             <xsl:apply-templates select="following-sibling::*[count(preceding-sibling::*)&lt;count(current()/following-sibling::*:uncertain-end/preceding-sibling::*)]" mode="grab_em"/>
-	</xsl:element>
+		<!-- </xsl:element> -->
     </xsl:template>
 	
     <xsl:template match="*:w[not(self::*:uncertain-start) and preceding-sibling::*:uncertain-start and following-sibling::*:uncertain-end]" mode="grab_em">
-            <xsl:element name="w">
-                    <xsl:apply-templates select="@* | node()"/>			
-            </xsl:element>
+        <xsl:element name="w">
+            <!-- added 11-07-2018 -->
+        	<xsl:attribute name="type">uncertain</xsl:attribute>
+        	<xsl:apply-templates select="@* | node()"/>			
+        </xsl:element>
     </xsl:template>
 	
     <!-- added 12-03-2015 -->
     <xsl:template match="*:pc[not(self::*:uncertain-start) and preceding-sibling::*:uncertain-start and following-sibling::*:uncertain-end]" mode="grab_em">
-            <xsl:element name="pc">
-                    <xsl:apply-templates select="@* | node()"/>			
-            </xsl:element>
+          <xsl:element name="pc">
+          	<!-- added 11-07-2018 -->
+          	<xsl:attribute name="type">uncertain</xsl:attribute>
+          	<xsl:apply-templates select="@* | node()"/>			
+          </xsl:element>
     </xsl:template>
 
     <xsl:template match="*[not(self::*:pause) and not(self::*:uncertain-start) and preceding-sibling::*:uncertain-start and following-sibling::*:uncertain-end]">
-            <!-- do nothing -->
+            <!-- do nothing if you encounter this while NOT in mode="grab_em"-->
     </xsl:template>
+	
+	<!-- ****************************************************************** -->
+	<!-- end templates for things between uncertain-start and uncertain-end -->
+	<!-- ****************************************************************** -->
 	
 	<xsl:template match="//*:seg[@type='utterance']/*:anchor[not(following-sibling::*)]">
 		<!-- do not copy the last anchor? -->

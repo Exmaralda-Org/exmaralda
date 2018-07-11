@@ -30,11 +30,18 @@
         <xsl:variable name="FROM_REF_ELEMENT" select="//*[@xml:id=$FROM_SOURCE]/name()"/>
         <xsl:variable name="FROM_TARGET">
             <xsl:choose>
-                <xsl:when test="$FROM_REF_ELEMENT='w' or not(ancestor::tei:annotationBlock/descendant::tei:anchor[@synch=concat($XPOINTER_HASH,$FROM_SOURCE)]/following-sibling::tei:w)">
+                <xsl:when test="$FROM_REF_ELEMENT='w'">
+                    <!-- it already points to a w element -->
                     <xsl:value-of select="$FROM_SOURCE"/>
+                </xsl:when>
+                <xsl:when test="not(ancestor::tei:annotationBlock/descendant::tei:anchor[@synch=concat($XPOINTER_HASH,$FROM_SOURCE)]/following-sibling::tei:w)">
+                    <!-- it points to a timepoint, but there is no w element which follows the anchor with that timepoint id -->
+                    <xsl:value-of select="$FROM_SOURCE"/>                    
                 </xsl:when>
                 <!-- <anchor synch="#T342"/> -->
                 <xsl:otherwise>
+                    <!-- it points to a timepoint -->
+                    <!-- pick the first w element which follows the anchor with that timepoint id -->
                     <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:anchor[@synch=concat($XPOINTER_HASH,$FROM_SOURCE)]/following-sibling::tei:w[1]/@xml:id"/>
                 </xsl:otherwise>
             </xsl:choose>
@@ -44,11 +51,27 @@
         <xsl:variable name="TO_REF_ELEMENT" select="//*[@xml:id=$TO_SOURCE]/name()"/>
         <xsl:variable name="TO_TARGET">
             <xsl:choose>
-                <xsl:when test="$TO_REF_ELEMENT='w' or not(ancestor::tei:annotationBlock/descendant::tei:anchor[@synch=concat($XPOINTER_HASH,$TO_SOURCE)]/preceding-sibling::tei:w)">
+                <xsl:when test="$TO_REF_ELEMENT='w'">
+                    <!-- it already points to a w element -->
                     <xsl:value-of select="$TO_SOURCE"/>
+                </xsl:when>
+                <xsl:when test="not(ancestor::tei:annotationBlock/descendant::tei:anchor[@synch=concat($XPOINTER_HASH,$TO_SOURCE)]/preceding-sibling::tei:w)">
+                    <!-- it points to a timepoint, but there is no anchor for it, so it may be the end point of the respective annotationBlock? -->
+                    <xsl:choose>
+                        <xsl:when test="ancestor::tei:annotationBlock/@end=concat($XPOINTER_HASH, $TO_SOURCE)">
+                            <!-- yes, it is, so choose the id of the last word in that annotation block -->
+                            <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:w[last()]/@xml:id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- no, it isn't, so give up -->
+                            <xsl:value-of select="$TO_SOURCE"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
                 <!-- <anchor synch="#T342"/> -->
                 <xsl:otherwise>
+                    <!-- it points to a timepoint -->
+                    <!-- pick the rightmost w element which precedes the anchor with that timepoint id -->
                     <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:anchor[@synch=concat($XPOINTER_HASH,$TO_SOURCE)]/preceding-sibling::tei:w[1]/@xml:id"/>
                 </xsl:otherwise>
             </xsl:choose>
