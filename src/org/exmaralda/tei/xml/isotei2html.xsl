@@ -11,20 +11,22 @@
     </xsl:template>
     
     <xsl:template match="tei:annotationBlock">
-        <xsl:variable name="SPEAKER_ID" select="substring-after(@who,'#')"/>
+        <xsl:variable name="SPEAKER_ID" select="@who"/>
         <div class="anotationBlock">
             <xsl:attribute name="id" select="@xml:id"/>
             <span class="speaker"><xsl:value-of select="//tei:person[@xml:id=$SPEAKER_ID]/@n"/></span>
             <xsl:text>: </xsl:text>
-            <xsl:apply-templates select="tei:u/descendant::*"/>
+            <xsl:apply-templates select="tei:u/child::tei:*"/>
         </div>
     </xsl:template>
+    
+    <xsl:template match="tei:u"/>
     
     <xsl:template match="tei:w">
         <xsl:variable name="ID" select="@xml:id"/>
         <span class="token">            
-            <xsl:attribute name="id" select="@xml:id"/>
-            <xsl:if test="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='pos']/descendant::tei:span[substring-after(@from, '#')=$ID and starts-with(text(), 'ADJ')]">
+            <!-- <xsl:attribute name="id" select="@xml:id"/> -->
+            <xsl:if test="starts-with(@pos,'ADJ')">
                 <!-- adjectives in bold and blue -->
                 <xsl:attribute name="style">font-weight:bold; color:blue;</xsl:attribute>
             </xsl:if>

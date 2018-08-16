@@ -55,6 +55,7 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebLichtAction;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebMAUSAction;
+import org.exmaralda.partitureditor.partiture.clarinActions.WebMAUSFineAlignmentAction;
 import org.exmaralda.partitureditor.partiture.undo.RestoreCellInfo;
 import org.exmaralda.partitureditor.partiture.undo.UndoHandler;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
@@ -1062,6 +1063,7 @@ public class PartitureTableWithActions extends PartitureTable
         //*********************************************************************************************
 
         webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/mickey-mouse-9-24.gif")));
+        webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/mickey-mouse-9-24.gif")));
         webLichtAction = new WebLichtAction(this);
 
         //-------------------------------- NAVIGATION ACTIONS --------------------------------------------------
@@ -1663,6 +1665,7 @@ public class PartitureTableWithActions extends PartitureTable
     
     /* CLARIN */
     public javax.swing.AbstractAction webMAUSAction;
+    public javax.swing.AbstractAction webMAUSFineAlignmentAction;
     public javax.swing.AbstractAction webLichtAction; 
     
     //*******************************************************************

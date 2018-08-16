@@ -15,13 +15,15 @@ import org.exmaralda.partitureditor.partiture.*;
 public class CLARINMenu extends AbstractTableMenu {
     
 
-    /** Creates a new instance of EventMenu */
+    /** Creates a new instance of EventMenu
+     * @param t */
     public CLARINMenu(PartitureTableWithActions t) {
         super(t);
 
         this.setText("CLARIN");
         
         add(table.webMAUSAction);
+        add(table.webMAUSFineAlignmentAction);
         add(table.webLichtAction);
     }
     
