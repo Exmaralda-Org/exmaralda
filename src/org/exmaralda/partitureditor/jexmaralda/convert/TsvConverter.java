@@ -120,42 +120,54 @@ public class TsvConverter {
             n_tiers++;
         }
         // map from TSV time presenetaiton to timeline id's
+        Map<Double, String> sortedTimes = new TreeMap<Double, String>();
+        for (String line : lines) {
+            String[] fields = line.split("\\t");
+            double start = timestampToDouble(fields[4]);
+            if (!sortedTimes.containsKey(start)) {
+                sortedTimes.put(start, fields[4]);
+            }
+            double end = timestampToDouble(fields[5]);
+            if (!sortedTimes.containsKey(end)) {
+                sortedTimes.put(end, fields[5]);
+            }
+        }
         Map<String, String> tlimap = new HashMap<String, String>();
-        tlimap.put("0", tli_start);
+        try {
+            for (Map.Entry<Double, String> times : sortedTimes.entrySet()) {
+                String e = timeline.getFreeID();
+                TimelineItem tli = new TimelineItem(e, times.getKey());
+                timeline.addTimelineItem(tli);
+                tlimap.put(times.getValue(), e);
+            }
+        } catch (JexmaraldaException je) {
+            je.printStackTrace();
+        }
+        //tlimap.put("0.0", tli_start);
         for (String line : lines) {
             String[] fields = line.split("\\t");
             Event e = new Event();
             e.setDescription(fields[3]);
             String e_start = "";
             String e_end = "";
-            try {
                 if (tlimap.containsKey(fields[4])) {
                     e_start = tlimap.get(fields[4]);
                 } else {
-                    e_start = timeline.getFreeID();
-                    TimelineItem tli = new TimelineItem(e_start,
-                            timestampToDouble(fields[4]));
-                    timeline.addTimelineItem(tli);
-                    tlimap.put(fields[4], e_start);
+                    System.out.println("DEBUG: timeline item missing???");
                 }
                 if (tlimap.containsKey(fields[5])) {
                     e_end = tlimap.get(fields[5]);
                 } else {
-                    e_end = timeline.getFreeID();
-                    TimelineItem tli = new TimelineItem(e_end,
-                            timestampToDouble(fields[5]));
-                    timeline.addTimelineItem(tli);
-                    tlimap.put(fields[5], e_end);
+                    System.out.println("DEBUG: timeline item missing???");
                 }
                 e.setStart(e_start);
                 e.setEnd(e_end);
                 Tier tier = tiermap.get(fields[0]);
                 tier.addEvent(e);
                 tli_end = e_end;
-            } catch (JexmaraldaException je) {
-                je.printStackTrace();
-            }
         }
+        // something with stratification?
+        bt.getBody().stratify((short)1);
         return bt;
     }
 
