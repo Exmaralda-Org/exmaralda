@@ -129,6 +129,8 @@
                     <xsl:when test="contains(text(),'–')">steady</xsl:when>
                     <xsl:when test="contains(text(),',')">rise</xsl:when>
                     <xsl:when test="contains(text(),'?')">high-rise</xsl:when>
+                    <!-- added 24-08-2018 for issue #162: the asterisk -->
+                    <xsl:when test="contains(text(),'*')">other</xsl:when>
                     <xsl:otherwise>not-qualified</xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
