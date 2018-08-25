@@ -20,6 +20,7 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Document;
@@ -114,9 +115,10 @@ public class MAUSConnector {
         
         StringBuilder result = new StringBuilder();
         
-        HttpClient client = new DefaultHttpClient();
-        client.getParams().setParameter("http.protocol.content-charset", "UTF-8");
+        HttpClient client = HttpClientBuilder.create().build(); // new DefaultHttpClient();
+        //client.getParams().setParameter("http.protocol.content-charset", "UTF-8");
         HttpGet request = new HttpGet(downloadLink);
+        request.addHeader("http.protocol.content-charset", "UTF-8");
 
         // add request header
         //request.addHeader("User-Agent", "");

@@ -38,6 +38,7 @@ public class FineAligner {
     BasicTranscription transcription;
     double maximumIntervalLength = 10.0;
     double minimumIntervalLength = 5.0;
+    double MAX_ALIGNABLE_DURATION = 120.0;
 
     public FineAligner(BasicTranscription transcription) {
         this.transcription = transcription;
@@ -82,6 +83,12 @@ public class FineAligner {
             // no need to do anything if this interval is short enough
             if ((nextTimelineItem.getTime() - thisTimelineItem.getTime())<maximumIntervalLength) continue;
             
+            // don't try if the interval is too long
+            if ((nextTimelineItem.getTime() - thisTimelineItem.getTime())>MAX_ALIGNABLE_DURATION) {
+                System.out.println("Interval is too long: " + thisTimelineItem.getID());
+                continue;
+            }
+
             // now it is clear that the current interval is longer than minimum
             ArrayList<Event> eventsForThisInterval = new ArrayList<Event>();
             String tierID = "";

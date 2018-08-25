@@ -29,6 +29,7 @@ public class CheckSpeakersAction extends ComaAction {
 		super(text, icon, c);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent e) {
 		final File file = coma.getData().getOpenFile();
 		if (file == null) {
@@ -48,6 +49,7 @@ public class CheckSpeakersAction extends ComaAction {
 			pbd.setVisible(true);
 
 			final Runnable doDisplaySaveDialog = new Runnable() {
+                                @Override
 				public void run() {
 					displayAddSpeakersDialog(checker);
 				}

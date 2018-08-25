@@ -281,6 +281,7 @@
             <xsl:when test="@movement='steady'"><xsl:text>–</xsl:text></xsl:when>
             <xsl:when test="@movement='rise'"><xsl:text>,</xsl:text></xsl:when>
             <xsl:when test="@movement='high-rise'"><xsl:text>?</xsl:text></xsl:when>
+            <xsl:when test="@movement='other'"><xsl:text>*</xsl:text></xsl:when>
         </xsl:choose>
         <xsl:if test="@latching='yes'">=</xsl:if>
         <xsl:if test="@type='final' and @latching='no'"><xsl:text>&#x0020;</xsl:text></xsl:if>        
