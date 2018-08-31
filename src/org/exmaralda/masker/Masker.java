@@ -29,7 +29,8 @@ public class Masker {
     
     long totalFramesRead = 0;
     
-    BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(-0.4,0.4);   
+    // construct brownNoiseGenerator furhter below where it is used
+    //BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(-0.4,0.4);   
     double[] brownNoise = null;
     int brownNoisePointer = 0;
     
@@ -38,6 +39,7 @@ public class Masker {
     public static final int METHOD_BROWN_NOISE = 1;
     public static final int METHOD_BROWN_NOISE_COPIED = 2;
     public static final int METHOD_SAMPLE = 3;
+    private double[] lastBufferValues;
 
     public Masker(File fileIn, File fileOut) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException {
         wavFileIn = WavFile.openWavFile(fileIn);
@@ -81,18 +83,20 @@ public class Masker {
         int framesRead;
 
         // Create a buffer of 100 frames
-        double[] buffer = new double[100 * numChannels];
+        int bufferSizeCopy = 1000;
+        double[] buffer = new double[bufferSizeCopy * numChannels];
         //long[] buffer = new long[100 * numChannels];
+        lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length); // in case there are no "remaining"
 
         do {
              // Read frames into buffer                    
-             framesRead = wavFileIn.readFrames(buffer, 100);
+             framesRead = wavFileIn.readFrames(buffer, bufferSizeCopy);
              totalFramesRead+=framesRead;
              wavFileOut.writeFrames(buffer, framesRead);
              fireMaskerEvent(MaskerEvent.COPY_ACTIVITY);
              
 
-        } while (wavFileIn.getNumFrames() - wavFileIn.getFramesRemaining() + 100 < end);
+        } while (wavFileIn.getNumFrames() - wavFileIn.getFramesRemaining() + bufferSizeCopy < end);
         
         // remaining frames not fitting into 100 buffer
         int remaining = (int) (end - totalFramesRead);
@@ -101,6 +105,7 @@ public class Masker {
             buffer = new double[remaining * numChannels];
             //buffer = new long[remaining * numChannels];
             framesRead = wavFileIn.readFrames(buffer, remaining);
+            lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length);
             totalFramesRead+=framesRead;
             wavFileOut.writeFrames(buffer, framesRead);
         }
@@ -112,28 +117,36 @@ public class Masker {
         int framesRead;
 
         // Create a buffer of 100 frames
-        double[] buffer = new double[100 * numChannels];
+        // This was changed to 4000 frames to avoid repetitive impulses at a high rate
+        int bufferSizeMask = 1000;
+        double[] buffer = new double[bufferSizeMask * numChannels];
         //long[] buffer = new long[100 * numChannels];
-
+        // in order to give the last sample value to the beginning of the mask
+        double[] lastMaskValues = new double[1 * numChannels];
+        lastMaskValues = lastBufferValues; // at the initial state
+        
         do {
                 // Read frames into buffer                    
-                framesRead = wavFileIn.readFrames(buffer, 100);
+                framesRead = wavFileIn.readFrames(buffer, bufferSizeMask);
                 totalFramesRead+=framesRead;              
-                double[] mask = getMask(buffer, method);                
+                double[] mask = getMask(buffer, lastMaskValues, method);                
+                // give the previous last sample value to the beginning of the new mask
+                lastMaskValues = Arrays.copyOfRange(mask, mask.length-numChannels, mask.length);
                 wavFileOut.writeFrames(mask, framesRead);
                 fireMaskerEvent(MaskerEvent.MASK_ACTIVITY);
 
 
-        } while (wavFileIn.getNumFrames() - wavFileIn.getFramesRemaining() + 100 < end);
+        } while (wavFileIn.getNumFrames() - wavFileIn.getFramesRemaining() + bufferSizeMask < end);
 
-        // remaining frames not fitting into 100 buffer
+        // remaining frames not fitting into 4000 buffer
         int remaining = (int) (end - totalFramesRead);
         //System.out.println(remaining + " REMAINING TO MASK");
         if (remaining>=0){
+            System.out.println(remaining + " REMAINING TO MASK");
             //buffer = new long[remaining * numChannels];
             buffer = new double[remaining * numChannels];
-            double[] mask = getMask(buffer, method);
             framesRead = wavFileIn.readFrames(buffer, remaining);
+            double[] mask = getMask(buffer, lastMaskValues, method);                
             totalFramesRead+=framesRead;            
             wavFileOut.writeFrames(mask, framesRead);
         }
@@ -142,7 +155,7 @@ public class Masker {
 
     
     //private long[] getMask(long[] originalBuffer, int method) throws IOException, WavFileException, URISyntaxException {
-    private double[] getMask(double[] originalBuffer, int method) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException {
+    private double[] getMask(double[] originalBuffer, double[] lastMaskValues, int method) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException {
         //long[] mask = new long[originalBuffer.length];
         double[] mask = new double[originalBuffer.length];
         switch (method) {
@@ -151,6 +164,21 @@ public class Masker {
                 break;
             case Masker.METHOD_BROWN_NOISE:
                 for (int c=0; c<numChannels; c++){
+                    double sum = 0.0;
+                    double rms = 0.0;
+                    double currentValue=lastMaskValues[c];
+                    // Calculate the Root-Mean-Square (Energy) of the Signal
+                    // in order to balance the brown noise accordingly
+                    for (int i=0; i<originalBuffer.length/numChannels; i++){
+                        // select values in current channel
+                        double numInChannel=originalBuffer[i*numChannels+c];
+                        sum += numInChannel * numInChannel; // sum up the squares
+                    }
+                    rms = Math.sqrt(sum / originalBuffer.length/numChannels);
+                    double lowerLimit = 0.0-rms;
+                    double upperLimit = rms;
+                    //BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(lowerLimit,upperLimit);
+                    BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(lowerLimit,upperLimit,(upperLimit - lowerLimit) / 20,0.02,currentValue);
                     for (int pos=c; pos<mask.length; pos+=numChannels){
                         mask[pos]=brownNoiseGenerator.getNext();
                     }

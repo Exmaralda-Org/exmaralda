@@ -96,6 +96,50 @@ public BrownNoiseGenerator (double minValue, double maxValue, double slope, doub
    random = new Random(); }
 
 /**
+* Creates a brown noise generator.
+*
+* @param minValue
+*    Minimum output value.
+* @param maxValue
+*    Maximum output value.
+* @param slope
+*    Maximum slope of the output signal.
+*    This parameter defines the maximum difference between two consecutive output values.
+*    It controls the amplitude of the output signal spectrum.
+*    A reasonable value is <code>(maxValue - minValue) / 20</code>.
+* @param hpFilter
+*    High pass filter factor.
+*    A simple first-order high pass filter is used to reduce DC drift of the output signal
+*    and avoid frequent clipping.
+*    A reasonable value is  0.02.
+*    If this parameter is zero, the high pass filter is disabled.
+* @param currentValue
+*    Last value from the last buffer iteration.
+*    As each value (except the initial random one) of brown noise depends on 
+*    the immediately preceding one, we need to know it at the beginning of each 
+*    iteration.
+*/
+public BrownNoiseGenerator (double minValue, double maxValue, double slope, double hpFilter, double currentValue) {
+   this.minValue = minValue;
+   this.maxValue = maxValue;
+   this.slope = slope;
+   this.hpFilter = hpFilter;
+   this.currentValue = currentValue;
+   if (minValue >= maxValue) {
+      throw new IllegalArgumentException("Invalid minValue/maxValue."); }
+   valueRange = maxValue - minValue;
+   if (slope <= 0 || slope >= valueRange / 2) {
+      throw new IllegalArgumentException("Invalid slope."); }
+      // slope must be less than valueRange/2 because of the way we handle clipping.
+   if (hpFilter < 0 || hpFilter >= 1) {
+      throw new IllegalArgumentException("Invalid hpFilter value."); }
+   if (currentValue < -1 || currentValue > 1) {
+      throw new IllegalArgumentException("Invalid currentValue."); }
+   centerValue = (minValue + maxValue) / 2;
+   //currentValue = centerValue;
+   random = new Random(); }
+
+/**
 * Returns the next output value of the noise generator.
 */
 public double getNext() {
