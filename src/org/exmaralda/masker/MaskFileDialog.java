@@ -256,7 +256,7 @@ public class MaskFileDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_sampleBrowseButtonActionPerformed
 
     private void methodComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_methodComboBoxActionPerformed
-        samplePanel.setVisible(this.methodComboBox.getSelectedIndex()==MaskerOld.METHOD_SAMPLE);
+        samplePanel.setVisible(this.methodComboBox.getSelectedIndex()==Masker.METHOD_SAMPLE);
     }//GEN-LAST:event_methodComboBoxActionPerformed
 
     private void checkIfReady(){

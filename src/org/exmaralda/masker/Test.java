@@ -40,10 +40,10 @@ public class Test implements MaskerListener {
             for (double[] d : mask){
                 System.out.println(d[0] + " / " + d[1]);
             }
-            MaskerOld m = new MaskerOld(in, out);
+            Masker m = new Masker(in, out);
             m.addMaskerListener(this);
             //m.mask(MaskerOld.METHOD_SILENCE, mask);
-            m.mask(MaskerOld.METHOD_BROWN_NOISE_COPIED, mask);
+            m.mask(Masker.METHOD_BROWN_NOISE_COPIED, mask);
             //m.mask(MaskerOld.METHOD_WHITE_NOISE, mask);
 
         } catch (Exception ex) {
