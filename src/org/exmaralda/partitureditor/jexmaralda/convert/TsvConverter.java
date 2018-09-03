@@ -30,6 +30,8 @@ import java.util.regex.*;
  * TXT-B       t         B          xxxx          1.2907   5.3719
  * </pre>
  * </blockquote>
+ *
+ * Extended on 2018-09 with ID and category.
  */
 public class TsvConverter {
 
@@ -77,10 +79,12 @@ public class TsvConverter {
         Speakertable st = bt.getHead().getSpeakertable();
         Set<String> speakers = new HashSet<String>();
         Set<String> tiers = new HashSet<String>();
-        // (Tiername   Tiertype  Speaker    Annotation    Start    End)
+        // (0 Tiername 1 Tiertype 2 Speaker 3 Annotation 4 Start 5 End)
+        // + 6 id 7 cat
         for (String line : lines) {
             String[] fields = line.split("\\t");
-            tiers.add(fields[0] + "\t" + fields[1] + "\t" + fields[2]);
+            tiers.add(fields[0] + "\t" + fields[1] + "\t" + fields[2] +
+                    "\t"  + fields[6] + "\t" + fields[7]);
             speakers.add(fields[2]);
         }
         int n_speakers = 0;
@@ -104,13 +108,13 @@ public class TsvConverter {
         int n_tiers  = 0;
         Map<String, Tier> tiermap = new HashMap<String, Tier>();
         for (String s : tiers) {
-            String tid = "TIE" + n_tiers;
             Tier tier = new Tier();
             String[] fields = s.split("\\t");
-            tier.setID(tid);
+            tier.setID(fields[3]);
             tier.setType(fields[1]);
             tier.setDisplayName(fields[0]);
             tier.setSpeaker(speakermap.get(fields[2]));
+            tier.setCategory(fields[4]);
             try {
                 bt.getBody().addTier(tier);
             } catch (JexmaraldaException ex) {
@@ -217,6 +221,10 @@ public class TsvConverter {
                         result +=
                             timeline.getTimelineItemWithID(ev.getEnd()).
                             getTimeAsString();
+                        result += ("\t");
+                        result += tier.getCategory();
+                        result += ("\t");
+                        result += tier.getID();
                         result += (System.getProperty("line.separator"));
                     }
                 } catch (JexmaraldaException je) {
