@@ -5,7 +5,6 @@
 package org.exmaralda.masker;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
@@ -62,13 +61,28 @@ public class Masker {
     
     public void mask(int method, double[][] maskTimes) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException{
         long sampleRate = wavFileIn.getSampleRate();
+
+        //double lastStart = 0.0;
+        double maskStart;
+        double lastEnd = 0.0;
+        double maskEnd;
         for (double[] t : maskTimes){
-            // copy to t[0]
-            copyFrames((long) (t[0]*((double)sampleRate)));
-            // write mask  to [t1]
-            maskFrames((long) (t[1]*((double)sampleRate)), method);
+            maskStart = t[0]*((double)sampleRate);
+            maskEnd = t[1]*((double)sampleRate);
+            if (maskStart != lastEnd){
+                // copy to t[0]
+                copyFrames((long) maskStart);
+                // mask to t[1]
+                maskFrames((long) maskEnd, method);
+            }
+            else {
+            // write mask  to t[1]
+            maskFrames((long) maskEnd, method);
+            }
+            lastEnd = maskEnd;
         }
         // copy what's left
+        //System.out.println("copying what's left ");
         copyFrames(wavFileIn.getNumFrames());
 
         // close the wavFiles
@@ -86,12 +100,12 @@ public class Masker {
         int bufferSizeCopy = 1000;
         double[] buffer = new double[bufferSizeCopy * numChannels];
         //long[] buffer = new long[100 * numChannels];
-        lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length); // in case there are no "remaining"
-
+        //lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length); // in case there are no "remaining"
         do {
              // Read frames into buffer                    
              framesRead = wavFileIn.readFrames(buffer, bufferSizeCopy);
              totalFramesRead+=framesRead;
+             lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length);
              wavFileOut.writeFrames(buffer, framesRead);
              fireMaskerEvent(MaskerEvent.COPY_ACTIVITY);
              
@@ -118,20 +132,18 @@ public class Masker {
 
         // Create a buffer of 100 frames
         // This was changed to 4000 frames to avoid repetitive impulses at a high rate
-        int bufferSizeMask = 1000;
+        int bufferSizeMask = 4000;
         double[] buffer = new double[bufferSizeMask * numChannels];
         //long[] buffer = new long[100 * numChannels];
         // in order to give the last sample value to the beginning of the mask
-        double[] lastMaskValues = new double[1 * numChannels];
-        lastMaskValues = lastBufferValues; // at the initial state
         
         do {
                 // Read frames into buffer                    
                 framesRead = wavFileIn.readFrames(buffer, bufferSizeMask);
                 totalFramesRead+=framesRead;              
-                double[] mask = getMask(buffer, lastMaskValues, method);                
+                double[] mask = getMask(buffer, lastBufferValues, method);                
                 // give the previous last sample value to the beginning of the new mask
-                lastMaskValues = Arrays.copyOfRange(mask, mask.length-numChannels, mask.length);
+                lastBufferValues = Arrays.copyOfRange(mask, mask.length-numChannels, mask.length);
                 wavFileOut.writeFrames(mask, framesRead);
                 fireMaskerEvent(MaskerEvent.MASK_ACTIVITY);
 
@@ -146,8 +158,9 @@ public class Masker {
             //buffer = new long[remaining * numChannels];
             buffer = new double[remaining * numChannels];
             framesRead = wavFileIn.readFrames(buffer, remaining);
-            double[] mask = getMask(buffer, lastMaskValues, method);                
             totalFramesRead+=framesRead;            
+            double[] mask = getMask(buffer, lastBufferValues, method);                
+            lastBufferValues = Arrays.copyOfRange(mask, mask.length-numChannels, mask.length);
             wavFileOut.writeFrames(mask, framesRead);
         }
             
