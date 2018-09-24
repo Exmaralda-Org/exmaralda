@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!-- was: <?xml version="1.0" encoding="ISO-8859-1"?> -->
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (UniversitÃ¤t Hamburg) -->
 <fsm name="GAT_Phrasierungseinheit">
 	<char-set id="IU_END_SYMBOLS">
 		<char>?</char>
 		<char>,</char>
 		<char>-</char>
+		<!-- added 24-09-2018, issue #164 -->
+                <char>â€“</char>
 		<char>;</char>
 		<char>.</char>
                 <!-- added 18-11-2015 -->
@@ -30,7 +33,7 @@
 	<start-state id="SegmentChainStarts"/>
 	<end-state id="SegmentChainParsedSuccessfully"/>
 	<transitions source="SegmentChainStarts">
-		<forbidden>Nicht erlaubt: schließende runde oder spitze Klammer, Tonhöhenbewegungs-Endzeichen</forbidden>
+		<forbidden>Nicht erlaubt: schlieÃŸende runde oder spitze Klammer, TonhÃ¶henbewegungs-Endzeichen</forbidden>
 		<transition>
 			<input-char-set id="CLOSE_ANGLE"/>
 			<target id="Error"/>
@@ -77,7 +80,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen">
-		<forbidden>Nicht erlaubt: schließende runde Klammer</forbidden>
+		<forbidden>Nicht erlaubt: schlieÃŸende runde Klammer</forbidden>
 		<transition>
 			<input-char-set id="CLOSE_PARENTHESIS"/>
 			<target id="Error"/>
@@ -163,7 +166,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen">
-		<forbidden>Nicht erlaubt: Ende der Segmentkette, öffnende Klammer</forbidden>
+		<forbidden>Nicht erlaubt: Ende der Segmentkette, Ã¶ffnende Klammer</forbidden>
 		<transition>
 			<input-char-set id="SPACE"/>
 			<target id="SegmentChainOpen_IntonationUnitOpen_OneParenthesisOpen"/>
@@ -204,7 +207,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen">
-		<forbidden>Nicht erlaubt: Ende der Segmentkette, öffnende Klammer</forbidden>
+		<forbidden>Nicht erlaubt: Ende der Segmentkette, Ã¶ffnende Klammer</forbidden>
 		<transition>
 			<input-char-set id="SPACE"/>
 			<target id="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen"/>
@@ -245,7 +248,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen_TwoParenthesesOpen_CloseParenthesisEncountered">
-		<forbidden>Nur weitere schließende Klammer erlaubt</forbidden>
+		<forbidden>Nur weitere schlieÃŸende Klammer erlaubt</forbidden>
 		<transition>
 			<input-other/>
 			<target id="Error"/>
@@ -261,7 +264,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered">
-		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde schließende Klammer</forbidden>
+		<forbidden>Nicht erlaubt: TonhÃ¶henbewegungs-Endzeichen, runde schlieÃŸende Klammer</forbidden>
 		<transition>
 			<input-char-set id="CLOSE_PARENTHESIS"/>
 			<target id="Error"/>
@@ -310,7 +313,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen">
-		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde oder spitze schließende Klammer</forbidden>
+		<forbidden>Nicht erlaubt: TonhÃ¶henbewegungs-Endzeichen, runde oder spitze schlieÃŸende Klammer</forbidden>
 		<transition>
 			<input-char-set id="SPACE"/>
 			<target id="SegmentChainOpen_IntonationUnitOpen"/>
@@ -370,7 +373,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_EqualsEncountered">
-		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde schließende Klammer</forbidden>
+		<forbidden>Nicht erlaubt: TonhÃ¶henbewegungs-Endzeichen, runde schlieÃŸende Klammer</forbidden>
 		<transition>
 			<input-char-set id="CLOSE_PARENTHESIS"/>
 			<target id="Error"/>
@@ -409,7 +412,7 @@
 			<input-other/>
 			<target id="SegmentChainOpen_IntonationUnitOpen"/>
 			<output oo="yes">
-				<!-- Ein Gleichheitszeichen = "Phrasierungseinheit geht weiter (unakzentuiertes Anhängsel)" -->
+				<!-- Ein Gleichheitszeichen = "Phrasierungseinheit geht weiter (unakzentuiertes AnhÃ¤ngsel)" -->
 <!--				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="GAT:pe" s="" e="">]]></prefix> -->
 			</output>
 		</transition>
@@ -422,7 +425,7 @@
 		</transition>
 	</transitions>
 	<transitions source="SegmentChainOpen_IntonationUnitOpen_IuEndSymbolEncountered_CloseAngleEncountered">
-		<forbidden>Nicht erlaubt: Tonhöhenbewegungs-Endzeichen, runde schließende Klammer</forbidden>
+		<forbidden>Nicht erlaubt: TonhÃ¶henbewegungs-Endzeichen, runde schlieÃŸende Klammer</forbidden>
 		<transition>
 			<input-char-set id="CLOSE_PARENTHESIS"/>
 			<target id="Error"/>
