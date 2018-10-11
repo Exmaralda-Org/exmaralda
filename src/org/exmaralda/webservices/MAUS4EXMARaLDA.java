@@ -174,6 +174,7 @@ public class MAUS4EXMARaLDA {
     
     public File cutAudioFile(File inputFile, double start, double end) throws IOException{
        File tempFile = File.createTempFile("EXMARaLDA_MAUS", ".WAV");
+       System.out.println("Temp file: " + tempFile.getAbsolutePath());
        tempFile.deleteOnExit();
        audioProcessor.writePart(start, end, inputFile.getAbsolutePath(), tempFile.getAbsolutePath());   
        return tempFile;

@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class Masker {
 
-    ArrayList<MaskerListener> listeners = new ArrayList<MaskerListener>();
+    ArrayList<MaskerListener> listeners = new ArrayList<MaskerListener>(); 
     
     WavFile wavFileIn;
     WavFile wavFileOut;

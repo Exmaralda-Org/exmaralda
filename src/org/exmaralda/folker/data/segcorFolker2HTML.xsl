@@ -120,6 +120,15 @@
                         /* C - Complex */
                         color: blue;
                     }
+                    td.high-rise{
+                        color:orange;
+                    }
+                    td.other{
+                        td.violet;
+                    }
+                    td.fall{
+                        color:tan;
+                    }
                     td.segment-type {
                         color: white;
                     }
@@ -148,18 +157,24 @@
                 </xsl:attribute>
                 <xsl:attribute name="style">
                     <xsl:choose>
-                        <xsl:when test="$MOVEMENT='steady'">background-color:red;</xsl:when>
-                        <xsl:when test="$MOVEMENT='not-qualified'">background-color:black;</xsl:when>
-                        <xsl:when test="$MOVEMENT='rise'">background-color:blue;</xsl:when>
                         <xsl:when test="$MOVEMENT='low-fall'">background-color:green;</xsl:when>
+                        <xsl:when test="$MOVEMENT='fall'">background-color:tan;</xsl:when>
+                        <xsl:when test="$MOVEMENT='steady'">background-color:red;</xsl:when>
+                        <xsl:when test="$MOVEMENT='rise'">background-color:blue;</xsl:when>
+                        <xsl:when test="$MOVEMENT='high-rise'">background-color:orange;</xsl:when>
+                        <xsl:when test="$MOVEMENT='other'">background-color:violet;</xsl:when>
+                        <xsl:when test="$MOVEMENT='not-qualified'">background-color:black;</xsl:when>
                         <xsl:otherwise>background-color:gray;</xsl:otherwise>
                     </xsl:choose>                                    
                 </xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="$MOVEMENT='steady'">A</xsl:when>
-                    <xsl:when test="$MOVEMENT='not-qualified'">N</xsl:when>
-                    <xsl:when test="$MOVEMENT='rise'">C</xsl:when>
                     <xsl:when test="$MOVEMENT='low-fall'">S</xsl:when>
+                    <xsl:when test="$MOVEMENT='fall'">CA</xsl:when>
+                    <xsl:when test="$MOVEMENT='steady'">A</xsl:when>
+                    <xsl:when test="$MOVEMENT='rise'">C</xsl:when>
+                    <xsl:when test="$MOVEMENT='high-rise'">U</xsl:when>
+                    <xsl:when test="$MOVEMENT='other'">CN</xsl:when>
+                    <xsl:when test="$MOVEMENT='not-qualified'">N</xsl:when>
                 </xsl:choose>                                    
             </xsl:element>
             <xsl:element name="td">

@@ -172,7 +172,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
                     pbd.addText("JDOM Error: " + ex.getLocalizedMessage());
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(pbd, ex);
-                } 
+                }
             }
             
         };
