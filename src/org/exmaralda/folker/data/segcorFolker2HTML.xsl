@@ -124,7 +124,7 @@
                         color:orange;
                     }
                     td.other{
-                        td.violet;
+                        color:violet;
                     }
                     td.fall{
                         color:tan;
