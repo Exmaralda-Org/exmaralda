@@ -259,7 +259,7 @@
 
             <!-- copy tiers from template -->
             <xsl:for-each select="$tier-template//tier">
-                <tier id="{@id}0{position()}" speaker="{$match-speaker-id}" type="{@type}" display-name="{$tier-speaker-name} [{@category}]"/>
+                <tier id="{@id}0{position()}" speaker="{$match-speaker-id}" type="{@type}" display-name="{$tier-speaker-name} [{@category}]" category="{@category}"/>
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
