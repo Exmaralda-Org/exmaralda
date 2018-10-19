@@ -176,7 +176,9 @@ public class SubtitleConverter {
                 allElements.add(currentElement);
                 cueRead = false;
             }
-            if (nextLine.matches("^" + timeRegEx + " \\-\\-\\> " + timeRegEx + " .+")){
+            // changed 17-10-2018
+            //if (nextLine.matches("^" + timeRegEx + " \\-\\-\\> " + timeRegEx + " .+")){
+            if (nextLine.matches("^" + timeRegEx + " \\-\\-\\> " + timeRegEx + " .*")){
                 // first line
                 String time1String = nextLine.substring(0,12);
                 String time2String = nextLine.substring(17,29);
