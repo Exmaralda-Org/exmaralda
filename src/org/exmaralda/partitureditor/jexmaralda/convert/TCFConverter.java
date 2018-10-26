@@ -13,7 +13,6 @@ import org.exmaralda.partitureditor.jexmaralda.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.*;
 
 // using wlfxb for conversions
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
