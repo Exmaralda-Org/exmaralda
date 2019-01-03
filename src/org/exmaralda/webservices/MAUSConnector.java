@@ -17,8 +17,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -42,31 +44,38 @@ public class MAUSConnector {
     public String callMAUS(File textFile, File audioFile, HashMap<String, Object> otherParameters) throws IOException, JDOMException{
         
         // setup a HTTP client
-        HttpClient httpClient = new DefaultHttpClient();
+        //HttpClient httpClient = new DefaultHttpClient(); // deprecated!
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         
         // construct a multipart entity that will be sent via POST to the web service
-        MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);        
+        //MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE); // deprecated!
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();  
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         
         if (otherParameters!=null){
             // add the other parameters
             //for (String[] parameter : otherParameters){
             //    entity.addPart(parameter[0], new StringBody(parameter[1]));            
             //}
-            entity.addPart("LANGUAGE", new StringBody((String) otherParameters.get("LANGUAGE")));
+            //entity.addPart("LANGUAGE", new StringBody((String) otherParameters.get("LANGUAGE"))); // deprecated
+            builder.addTextBody("LANGUAGE", (String) otherParameters.get("LANGUAGE"));
         }
         
         
         // add the text file
-        FileBody fileBody = new FileBody(textFile, "application/octet-stream");
-        entity.addPart("TEXT", fileBody);
+        //FileBody fileBody = new FileBody(textFile, "application/octet-stream"); // deprecated
+        //entity.addPart("TEXT", fileBody);
+        builder.addBinaryBody("TEXT", textFile);
 
         // ad the audio file
-        FileBody fileBody2 = new FileBody(audioFile, "application/octet-stream");
-        entity.addPart("SIGNAL", fileBody2);
+        //FileBody fileBody2 = new FileBody(audioFile, "application/octet-stream"); // deprecated
+        //entity.addPart("SIGNAL", fileBody2); // deprecated
+        builder.addBinaryBody("SIGNAL", audioFile);
 
         // construct a POST request with the multipart entity
-        HttpPost httpPost = new HttpPost(webMausURL);
-        httpPost.setEntity(entity);
+        HttpPost httpPost = new HttpPost(webMausURL);        
+        //httpPost.setEntity(entity); // deprecated
+        httpPost.setEntity(builder.build());
         HttpResponse response = httpClient.execute(httpPost);
         HttpEntity result = response.getEntity();     
         
@@ -98,8 +107,11 @@ public class MAUSConnector {
             // now we have the download link - just need to get the content as text
             String praatTextGridString = downloadText(downloadLink);
             
-            result.consumeContent();
-            httpClient.getConnectionManager().shutdown();        
+            //result.consumeContent(); // deprecated
+            EntityUtils.consume(result);
+            //httpClient.getConnectionManager().shutdown();   // deprecated
+            httpClient.close();
+            
             return praatTextGridString;
         } else {
             // something went wrong, throw an exception
