@@ -24,6 +24,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -67,7 +68,7 @@ public class MAUSConnector {
         //entity.addPart("TEXT", fileBody);
         builder.addBinaryBody("TEXT", textFile);
 
-        // ad the audio file
+        // add the audio file
         //FileBody fileBody2 = new FileBody(audioFile, "application/octet-stream"); // deprecated
         //entity.addPart("SIGNAL", fileBody2); // deprecated
         builder.addBinaryBody("SIGNAL", audioFile);
@@ -101,6 +102,15 @@ public class MAUSConnector {
             
             // read the XML result string
             Document doc = FileIO.readDocumentFromString(resultAsString);
+            
+            // check if success == true
+            Element successElement = (Element) XPath.selectSingleNode(doc, "//success");
+            if (!((successElement!=null) && successElement.getText().equals("true"))){
+                String errorText = "Call to BASChunker was not successful: " + IOUtilities.elementToString(doc.getRootElement(), true);
+                throw new IOException(errorText);                
+            }
+            
+            
             Element downloadLinkElement = (Element) XPath.selectSingleNode(doc, "//downloadLink");
             String downloadLink = downloadLinkElement.getText();
             
