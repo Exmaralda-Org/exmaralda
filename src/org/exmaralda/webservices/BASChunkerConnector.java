@@ -92,16 +92,24 @@ public class BASChunkerConnector {
             builder.addTextBody("language", (String) otherParameters.get("language"));
         }
         
+        builder.addTextBody("aligner", "fast");
+        builder.addTextBody("force", "rescue");
+        
+        
         // add the text file
         builder.addBinaryBody("bpf", bpfInFile);
         
         // add the audio file
         builder.addBinaryBody("audio", audioFile);
         
+        System.out.println("All parameters set. ");
         
         // construct a POST request with the multipart entity
         HttpPost httpPost = new HttpPost(chunkerURL);        
         httpPost.setEntity(builder.build());
+        
+        System.out.println("URI: " + httpPost.getURI().toString());
+        
         HttpResponse response = httpClient.execute(httpPost);
         HttpEntity result = response.getEntity();     
         

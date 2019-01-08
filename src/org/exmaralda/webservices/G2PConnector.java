@@ -5,28 +5,19 @@
  */
 package org.exmaralda.webservices;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.exmaralda.common.jdomutilities.IOUtilities;
-import org.exmaralda.exakt.utilities.FileIO;
-import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
 
 /* [https://clarin.phonetik.uni-muenchen.de/BASWebServices/services/help]
 ----------------------------------------------------------------
@@ -217,34 +208,12 @@ public class G2PConnector {
 
         if (statusCode==200 && result != null) {
             String resultAsString = EntityUtils.toString(result);
-            
-            /*
-                <WebServiceResponseLink>
-                    <success>true</success>
-                    <downloadLink>https://clarin.phonetik.uni-muenchen.de:443/BASWebServices/data/2019.01.03_14.51.16_76BEC32A3AA44B83114C598BA451A1F4/IS--_E_00021_SE_01_T_01.par</downloadLink>
-                    <output/>
-                    <warnings/>
-                </WebServiceResponseLink>            
-            */
-            
-            // read the XML result string
-            Document doc = FileIO.readDocumentFromString(resultAsString);
-            
-            // check if success == true
-            Element successElement = (Element) XPath.selectSingleNode(doc, "//success");
-            if (!((successElement!=null) && successElement.getText().equals("true"))){
-                String errorText = "Call to G2P was not successful: " + IOUtilities.elementToString(doc.getRootElement(), true);
-                throw new IOException(errorText);                
+            BASWebServiceResult basResult = new BASWebServiceResult(resultAsString);
+            if (!(basResult.isSuccess())){
+                String errorText = "Call to G2P was not successful: " + resultAsString;
+                throw new IOException(errorText);                                
             }
-            
-            
-            Element downloadLinkElement = (Element) XPath.selectSingleNode(doc, "//downloadLink");
-            String downloadLink = downloadLinkElement.getText();
-            
-            // now we have the download link - just need to get the content as text
-            String bpfOutString = downloadText(downloadLink);
-            
-            
+            String bpfOutString = basResult.getDownloadText();
 
             EntityUtils.consume(result);
             httpClient.close();
@@ -255,40 +224,6 @@ public class G2PConnector {
             String reason = statusLine.getReasonPhrase();
             throw new IOException(reason);
         }
-        
-        
-        
-        
-    }
-    
-    private String downloadText(String downloadLink) throws IOException {
-        
-        StringBuilder result = new StringBuilder();
-        
-        HttpClient client = HttpClientBuilder.create().build(); // new DefaultHttpClient();
-        HttpGet request = new HttpGet(downloadLink);
-        request.addHeader("http.protocol.content-charset", "UTF-8");
-
-        HttpResponse response = client.execute(request);
-
-        StatusLine statusLine = response.getStatusLine();
-        int statusCode = statusLine.getStatusCode();
-        if (statusCode == 200) {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"UTF-8"));
-            String sCurrentLine;
-            while ((sCurrentLine = rd.readLine()) != null) {
-              result.append(sCurrentLine);
-              result.append("\n");
-            }
-        } else {
-            // something went wrong, throw an exception
-            String reason = statusLine.getReasonPhrase();
-            throw new IOException(reason);
-        }
-
-        
-        return result.toString();        
-    }
-    
+    }        
     
 }
