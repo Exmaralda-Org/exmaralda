@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,17 +45,29 @@ Parameters:  [minanchorlength] [aligner] [boost_minanchorlength] audio [silenceo
 
 Parameter description: 
 minanchorlength: [2, 8] 
-The chunker performs speech recognition and symbolic alignment to find regions of correctly aligned words (so-called 'anchors'). Setting this parameter to a high value (e.g. 4-5) means that the chunker finds chunk boundaries with higher certainty. However, the total number of discovered chunk boundaries may be reduced as a consequence. A low value (e.g. 2) is likely to lead to a more fine-grained chunking result, but with lower confidence for individual chunk boundaries.
+The chunker performs speech recognition and symbolic alignment to find regions of correctly aligned words (so-called 'anchors'). 
+Setting this parameter to a high value (e.g. 4-5) means that the chunker finds chunk boundaries with higher certainty. 
+However, the total number of discovered chunk boundaries may be reduced as a consequence. 
+A low value (e.g. 2) is likely to lead to a more fine-grained chunking result, but with lower confidence for individual chunk boundaries.
 
 aligner: [hirschberg, fast] 
 Symbolic aligner to be used. The "fast" aligner performs approximate alignment by splitting the alignment matrix into "windows" of size 5000*5000. The "hirschberg" aligner performs optimal matching. On recordings below the 1 hour mark, the choice of aligner does not make a big difference in runtime. On longer recordings, you can improve runtime by selecting the "fast" aligner. Note however that this choice increases the probability of errors on recordings with untranscribed stretches (such as long pauses, musical interludes, untranscribed speech). Therefore, the "hirschberg" aligner should be used on this kind of material.
 
 boost_minanchorlength: [2, 8] 
-If you are using the boost phase, you can set its minimum anchor length independently of the general minimum anchor length. Setting this parameter to a low value (e.g. 2-3) means that the boost phase has a greater chance of finding preliminary chunk boundaries, which is essential for speeding up the chunking process. On the other hand, high values (e.g. 5-6) lead to more conservative and more reliable chunking decisions. If boost is set to false, this option is ignored.
+If you are using the boost phase, you can set its minimum anchor length independently of the general minimum anchor length. 
+Setting this parameter to a low value (e.g. 2-3) means that the boost phase has a greater chance of finding preliminary chunk boundaries, 
+which is essential for speeding up the chunking process. 
+On the other hand, high values (e.g. 5-6) lead to more conservative and more reliable chunking decisions. 
+If boost is set to false, this option is ignored.
 
 audio: Mono WAVE or NIST/SPHERE sound file or video file (MP4,MPEG) containing the speech signal to be segmented. PCM 16 bit resolution, any sampling rate.
 
-silenceonly: If set to a value greater than 0, the chunker will only place chunk boundaries in regions where it has detected a silent interval of at least that duration (in ms). Else, silent intervals are prioritized, but not to the exclusion of word boundaries without silence. On speech that has few silent pauses (spontaneous speech or speech with background noise), setting this parameter to a number greater than 0 is likely to hinder the discovery of chunk boundaries. On careful and noise-free speech (e.g. audio books) on the other hand, setting this parameter to a sensible value (e.g. 200) may reduce chunkin errors.
+silenceonly: If set to a value greater than 0, the chunker will only place chunk boundaries in regions 
+where it has detected a silent interval of at least that duration (in ms). 
+Else, silent intervals are prioritized, but not to the exclusion of word boundaries without silence. 
+On speech that has few silent pauses (spontaneous speech or speech with background noise), 
+setting this parameter to a number greater than 0 is likely to hinder the discovery of chunk boundaries. 
+On careful and noise-free speech (e.g. audio books) on the other hand, setting this parameter to a sensible value (e.g. 200) may reduce chunkin errors.
 
 bpf: Phonemic transcription of the utterance to be segmented. Format is a BAS Partitur Format (BPF) file with a KAN tier. The KAN tier contains a table with 3 columns and one line per word in the input. Column 1 is always 'KAN:'; column 2 is an integer starting with 0 denoting the word position within the input; column 3 contains the canonical pronunciation of the word coded in SAM-PA. The canonical pronunciation string may contain phoneme-separating blanks. For supported languages, the BPF can be derived using the G2P service (runG2P). See http://www.bas.uni-muenchen.de/forschung/Bas/BasFormatseng.html for detailed description of the BPF.
 
@@ -84,6 +99,11 @@ public class BASChunkerConnector {
     public String chunkerURL = "https://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runChunker";
     
     public String callChunker(File bpfInFile, File audioFile, HashMap<String, Object> otherParameters) throws IOException, JDOMException{
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date();
+	System.out.println("Chunker called at " + dateFormat.format(date)); //2016/11/16 12:08:43        System.out.println("Chunker called at " + Date.);
+        
+        
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();       
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();  
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -94,6 +114,8 @@ public class BASChunkerConnector {
         
         builder.addTextBody("aligner", "fast");
         builder.addTextBody("force", "rescue");
+        builder.addTextBody("minanchorlength", "2");
+        builder.addTextBody("boost_minanchorlength", "3");
         
         
         // add the text file

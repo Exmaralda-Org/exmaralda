@@ -204,6 +204,9 @@ public class PartitureTableWithActions extends PartitureTable
     /** the popup menu used for editing the partitur */
     public TablePopupMenu tablePopupMenu;
     
+    // new 11-01-2019, issue #176
+    public JMenu moveMenu = new JMenu("Move to tier");
+    
     public java.awt.Color defaultSelectionBg;
     public java.awt.Color defaultSelectionColor;
 
@@ -244,7 +247,9 @@ public class PartitureTableWithActions extends PartitureTable
 
         eventPopupMenu = new EventPopupMenu(this);
         eventPopupMenu.addPopupMenuListener(this);
+        
         tablePopupMenu = new org.exmaralda.partitureditor.partiture.menus.TablePopupMenu(this);
+        tablePopupMenu.addPopupMenuListener(this);
                 
         pageFormat = java.awt.print.PrinterJob.getPrinterJob().defaultPage();
         homeDirectory = new String();
@@ -747,7 +752,8 @@ public class PartitureTableWithActions extends PartitureTable
         }*/
     }
     
-    /** if an event is selected: returns this event, writing the tier ID into its UD data */
+    /** if an event is selected: returns this event, writing the tier ID into its UD data
+     * @return  */
     public Event getSelectedEvent(){
         if ((selectionStartRow<0) || (selectionStartCol<0)) return null;
         try {
@@ -766,7 +772,8 @@ public class PartitureTableWithActions extends PartitureTable
     // ************************ METHODS FOR LISTENERS  *********************************** //
     // *********************************************************************************** //
     
-    /** add a listener that is to be informed of changes to the table */
+    /** add a listener that is to be informed of changes to the table
+     * @param l */
     public void addPartitureTableListener(PartitureTableListener l) {
         //listenerList.add(PartitureTableListener.class, l);
         thisListenerList.addElement(l);
@@ -2634,7 +2641,50 @@ public class PartitureTableWithActions extends PartitureTable
         }        
     }
 
+    // changed 11-01-2019 for issue #176
     @Override
+    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+        ((JPopupMenu)(e.getSource())).add(moveMenu);
+        moveMenu.removeAll();
+        if (!(getModel().containsEvent(selectionStartRow, selectionStartCol) && getModel().containsEvent(selectionStartRow, selectionEndCol))){
+            moveMenu.setEnabled(false);
+            return;
+        } 
+        Event firstEvent = null;
+        Event lastEvent = null;
+        try {
+            firstEvent = getModel().getEvent(selectionStartRow, selectionStartCol);
+            lastEvent = getModel().getEvent(selectionStartRow, selectionEndCol);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String startID = firstEvent.getStart();
+        String endID = lastEvent.getEnd();
+        
+        System.out.println(startID + " --- " + endID);
+        String sourceTierID = getModel().getTranscription().getBody().getTierAt(selectionStartRow).getID();
+        for (int i=0; i<getModel().getTranscription().getBody().getNumberOfTiers(); i++){
+            if (i==selectionStartRow) continue;
+            Tier tier = getModel().getTranscription().getBody().getTierAt(i);
+            if (tier.getEventsIntersecting(getModel().getTranscription().getBody().getCommonTimeline(), startID, endID).isEmpty()){
+                try {
+                    // this means the tier is free in this place
+                    //MoveEventAction thisAction = new MoveEventAction(this, sourceTierID, tier.getID(), startID);
+                    MoveEventAction thisAction = new MoveEventAction(this, sourceTierID, tier.getID(), startID, endID);
+                    JMenuItem thisMenuItem = moveMenu.add(thisAction);
+                    if (tier.getType().equals("t")){
+                        thisMenuItem.setFont(thisMenuItem.getFont().deriveFont(Font.BOLD));
+                    }
+                    moveMenu.setEnabled(true);
+                } catch (JexmaraldaException ex) {
+                    Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+    }
+
+    /*@Override
     public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
         eventPopupMenu.moveMenu.removeAll();
         if (!getModel().containsEvent(selectionStartRow, selectionStartCol)){
@@ -2668,7 +2718,7 @@ public class PartitureTableWithActions extends PartitureTable
                 
             }
         }
-    }
+    }*/
 
     @Override
     public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {

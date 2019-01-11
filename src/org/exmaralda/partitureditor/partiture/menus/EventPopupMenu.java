@@ -27,9 +27,9 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     private final JMenuItem doubleSplitMenuItem;
     private final JMenuItem deleteMenuItem;
     
-    public final JMenu moveMenu;
+    //public final JMenu moveMenu;
     
-// 24-06-2016 MuM-Multi new 
+    // 24-06-2016 MuM-Multi new 
     private final JMenuItem moveDownLeftMenuItem;
     private final JMenuItem moveDownRightMenuItem;
     
@@ -46,7 +46,8 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     private final Component firstSeparator;
     private final Component lastSeparator;
     
-    /** Creates a new instance of EventPopupMenu */
+    /** Creates a new instance of EventPopupMenu
+     * @param t */
     public EventPopupMenu(PartitureTableWithActions t) {
         table=t;
         
@@ -78,9 +79,9 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
         add(new javax.swing.JPopupMenu.Separator());
         
         // 26-07-2016 new
-        moveMenu = new JMenu();
-        moveMenu.setText("Move to tier...");
-        add(moveMenu);
+        //moveMenu = new JMenu();
+        //moveMenu.setText("Move to tier...");
+        add(table.moveMenu);
         
         // 24-06-2016 MuM-Multi new 
         moveDownLeftMenuItem = this.add(table.moveDownLeftAction);

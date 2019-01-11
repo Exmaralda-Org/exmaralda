@@ -15,7 +15,6 @@ package org.exmaralda.folker.listview;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
-import java.util.*;
 import javax.swing.text.html.HTMLEditorKit;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;

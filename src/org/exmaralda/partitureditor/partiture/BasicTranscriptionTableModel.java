@@ -244,7 +244,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
             Timeline timeline = transcription.getBody().getCommonTimeline();
             String mergedStart = timeline.getTimelineItemAt(startColumn).getID();
             int spanOfLast = getCellSpan(row, endColumn);
-            String mergedEnd = new String();
+            String mergedEnd; // = new String();
             // Changes on 06-Oct-2003 (Version 1.2.6.)
             // Suspecting this is the cause of bug no. 154
             // Merge can sometimes be larger than the timeline
@@ -291,13 +291,16 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
 
     /** merges the cells between startColumn and endColumn of the specified row 
-     *  or: combines the corresponding events*/
+     *  or: combines the corresponding event
+     * @param row
+     * @param startColumn
+     * @param endColumn*/
     public void merge(int row, int startColumn, int endColumn){
         Tier tier = transcription.getBody().getTierAt(row);
         Timeline timeline = transcription.getBody().getCommonTimeline();
         String mergedStart = timeline.getTimelineItemAt(startColumn).getID();
         int spanOfLast = getCellSpan(row, endColumn);
-        String mergedEnd = new String();
+        String mergedEnd; // = new String();
         // Changes on 06-Oct-2003 (Version 1.2.6.)
         // Suspecting this is the cause of bug no. 154
         // Merge can sometimes be larger than the timeline
@@ -1212,7 +1215,42 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
     
     
-    public void moveToTier(String sourceTierID, String targetTierID, String startID) throws JexmaraldaException{
+    public void moveToTier(String sourceTierID, String targetTierID, String startID, String endID) throws JexmaraldaException{
+        Tier sourceTier = transcription.getBody().getTierWithID(sourceTierID);
+        Tier targetTier = transcription.getBody().getTierWithID(targetTierID);
+        
+        
+        int startCol = transcription.getBody().getCommonTimeline().lookupID(startID);
+        int endCol = transcription.getBody().getCommonTimeline().lookupID(endID);
+
+        int sourceRow = transcription.getBody().lookupID(sourceTierID);
+        int targetRow = transcription.getBody().lookupID(targetTierID);
+
+        
+        for (int i=startCol; i<endCol; i++){
+            String tliID = transcription.getBody().getCommonTimeline().getTimelineItemAt(i).getID();
+            if (sourceTier.containsEventAtStartPoint(tliID)){
+                Event event = sourceTier.getEventAtStartPoint(tliID);
+                targetTier.addEvent(event);
+                sourceTier.removeEventAtStartPoint(tliID);
+                fireValueChanged(sourceRow, i);        
+                fireCellFormatChanged(sourceRow,i);
+                fireCellSpanChanged(sourceRow,i);
+
+                fireValueChanged(targetRow, i);
+                fireCellFormatChanged(targetRow,i);
+                fireCellSpanChanged(targetRow,i);
+            }
+            
+        }
+        
+        
+        
+                
+        
+    }
+
+    /*public void moveToTier(String sourceTierID, String targetTierID, String startID) throws JexmaraldaException{
         Tier sourceTier = transcription.getBody().getTierWithID(sourceTierID);
         Tier targetTier = transcription.getBody().getTierWithID(targetTierID);
         Event event = sourceTier.getEventAtStartPoint(startID);
@@ -1232,7 +1270,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         fireCellSpanChanged(targetRow,startCol);
                 
         
-    }
+    }*/
 
     // 24-06-2016 MuM-Multi new 
     public void moveDownLeft (int row, int col){

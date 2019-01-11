@@ -33,8 +33,8 @@ public class TestBASChunkerConnector {
     private void doit() throws IOException, JDOMException {
         BASChunkerConnector mc = new BASChunkerConnector();
          
-        File bpfFileIn = new File("N:\\Workspace\\IS_Alignment\\NonDGD-Transkripte\\BPF-G2P\\IS--_E_00021_SE_01_T_01.par");
-        File wavFileIn = new File("N:\\Workspace\\IS_Alignment\\NonDGD-Transkripte\\Audio_16kHz_Mono\\IS--_E_00021_SE_01_A_01_DF_01.WAV");
+        File bpfFileIn = new File("N:\\Workspace\\IS_Alignment\\NonDGD-Transkripte\\BPF-G2P\\IS--_E_00021_SE_01_T_01_Part_01.par");
+        File wavFileIn = new File("N:\\Workspace\\IS_Alignment\\NonDGD-Transkripte\\Audio_16kHz_Mono\\IS--_E_00021_SE_01_A_01_DF_01_Part_01.WAV");
         
         String[][] parameters = {
             {"language","deu-DE"}

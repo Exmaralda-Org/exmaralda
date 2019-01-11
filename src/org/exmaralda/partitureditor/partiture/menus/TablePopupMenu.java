@@ -19,21 +19,22 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
     
     PartitureTableWithActions table;
 
-    private JMenuItem editTierPropertiesMenuItem;
-    private JMenuItem insertTierMenuItem;
-    private JMenuItem deleteTierMenuItem;
-    private JMenuItem hideTierMenuItem;
-    private JMenuItem tierUpMenuItem;
-    private JMenuItem editTimelineItemMenuItem;
-    private JMenuItem insertTimelineItemMenuItem;
-    private JMenuItem confirmTimelineItemMenuItem;
-    private JMenuItem removeGapMenuItem;
-    private JMenuItem addBookmarkMenuItem;
-    private JMenuItem formatTierMenuItem;
+    private final JMenuItem editTierPropertiesMenuItem;
+    private final JMenuItem insertTierMenuItem;
+    private final JMenuItem deleteTierMenuItem;
+    private final JMenuItem hideTierMenuItem;
+    private final JMenuItem tierUpMenuItem;
+    private final JMenuItem editTimelineItemMenuItem;
+    private final JMenuItem insertTimelineItemMenuItem;
+    private final JMenuItem confirmTimelineItemMenuItem;
+    private final JMenuItem removeGapMenuItem;
+    private final JMenuItem addBookmarkMenuItem;
+    private final JMenuItem formatTierMenuItem;
     private JMenuItem copyMenuItem;
         
     
-    /** Creates a new instance of TablePopupMenu */
+    /** Creates a new instance of TablePopupMenu
+     * @param t */
     public TablePopupMenu(PartitureTableWithActions t) {
         
         table=t;
@@ -103,6 +104,10 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
         copyMenuItem.setIcon(null);
         copyMenuItem.setAccelerator(null);
         copyMenuItem.setText(Internationalizer.getString("Copy"));
+
+        this.add(new javax.swing.JPopupMenu.Separator());
+        
+        this.add(table.moveMenu);
 
         this.pack();
     }

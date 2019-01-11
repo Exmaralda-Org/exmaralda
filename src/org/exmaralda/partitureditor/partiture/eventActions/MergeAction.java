@@ -17,13 +17,16 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class MergeAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of MergeAction */
+    /** Creates a new instance of MergeAction
+     * @param t
+     * @param icon */
     public MergeAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Merge", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control 1"));            
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("mergeAction!");
         merge();
