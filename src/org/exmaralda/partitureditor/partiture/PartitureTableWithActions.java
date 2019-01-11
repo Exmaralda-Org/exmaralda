@@ -2646,7 +2646,7 @@ public class PartitureTableWithActions extends PartitureTable
     public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
         ((JPopupMenu)(e.getSource())).add(moveMenu);
         moveMenu.removeAll();
-        if (!(getModel().containsEvent(selectionStartRow, selectionStartCol) && getModel().containsEvent(selectionStartRow, selectionEndCol))){
+        if (!(selectionStartRow==selectionEndRow && getModel().containsEvent(selectionStartRow, selectionStartCol) && getModel().containsEvent(selectionStartRow, selectionEndCol))){
             moveMenu.setEnabled(false);
             return;
         } 
@@ -2661,7 +2661,7 @@ public class PartitureTableWithActions extends PartitureTable
         String startID = firstEvent.getStart();
         String endID = lastEvent.getEnd();
         
-        System.out.println(startID + " --- " + endID);
+        //System.out.println(startID + " --- " + endID);
         String sourceTierID = getModel().getTranscription().getBody().getTierAt(selectionStartRow).getID();
         for (int i=0; i<getModel().getTranscription().getBody().getNumberOfTiers(); i++){
             if (i==selectionStartRow) continue;
