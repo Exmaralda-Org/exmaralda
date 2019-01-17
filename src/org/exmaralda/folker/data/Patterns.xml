@@ -195,8 +195,9 @@
         <!-- change on 24-08-2018 for issue #162: also lookahead for asterisk -->        
         <pattern name="GAT_BREATHE">
             <!-- <regex>(°h{1,3}+|h{1,3}+°)(?=( |\|))</regex> -->
-            <regex>(°h{1,3}+|h{1,3}+°)(?=( |\||\.|\,|\u2013|\*))</regex>
-            <comment>One to three h, either preceded or followed by a degree sign, followed by a space</comment>
+            <regex>(°h{1,3}+|h{1,3}+°)(?=( |\||\.|\,|\u2013|\;|\?|\*))</regex>
+            <!-- change 17-01-2019 - forgot the semicolon and the question mark, discovered in SegCor (issue #178) -->
+            <comment>One to three h, either preceded or followed by a degree sign, followed by a space or a phrase boudary</comment>
         </pattern>
         <!-- ******************************** -->
         <!-- <<lachend> soo > -->
