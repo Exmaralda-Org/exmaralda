@@ -135,6 +135,10 @@
                 <xsl:attribute name="class">
                     <xsl:text>speaker</xsl:text>
                 </xsl:attribute>
+                <xsl:variable name="THIS_SPEAKER" select="@speaker-reference"/>
+                <xsl:if test="preceding-sibling::line[1][@speaker-reference=$THIS_SPEAKER]">
+                    <xsl:attribute name="style">color:rgb(220,220,220);</xsl:attribute>
+                </xsl:if>
                 <xsl:value-of select="@speaker-reference"/>
             </xsl:element>
             <xsl:element name="td">

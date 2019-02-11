@@ -43,7 +43,8 @@ public class MaskTimeCreator {
         Tier tier = bt.getBody().getTierWithID(tierID);
         Timeline tl = bt.getBody().getCommonTimeline().makeCopy();
         tl.makeConsistent();
-        tl.completeTimes(false, bt);
+        //tl.completeTimes(false, bt);
+        tl.completeTimes(false, bt, false); // make sure NOT to reinterpolate values!!! issue #167 
         double[][] result = new double[tier.getNumberOfEvents()][2];        
         for (int pos=0; pos<tier.getNumberOfEvents(); pos++){
             Event e = tier.getEventAt(pos);

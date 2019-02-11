@@ -6,10 +6,9 @@
 
 package org.exmaralda.partitureditor.partiture.tierActions;
 
-import org.exmaralda.partitureditor.jexmaraldaswing.EditTiersDialog;
+import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaraldaswing.EditTiersDialogNew;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -18,11 +17,13 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class EditTiersAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditTierAction */
+    /** Creates a new instance of EditTierAction
+     * @param t */
     public EditTiersAction(PartitureTableWithActions t) {
         super("Edit tiers...", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editTiersAction!");
         table.commitEdit(true);
@@ -31,15 +32,28 @@ public class EditTiersAction extends org.exmaralda.partitureditor.partiture.Abst
     }
     
     private void editTiers(){
-        EditTiersDialog dialog = new EditTiersDialog(table.parent, true, table.getModel().getTranscription());
-        if (dialog.editTiers()){
+        //EditTiersDialog dialog = new EditTiersDialog(table.parent, true, table.getModel().getTranscription());
+        BasicTranscription workingCopy = table.getModel().getTranscription().makeCopy();
+        EditTiersDialogNew dialog = new EditTiersDialogNew(table.parent, true, workingCopy);
+        dialog.setLocationRelativeTo(table);
+        dialog.setTitle("Edit tiers");
+        dialog.setVisible(true);
+        if (dialog.isChanged()){
+            if (table.undoEnabled){
+                UndoInformation undoInfo = new UndoInformation(table, "Edit tiers");
+                undoInfo.memorizeTranscription(table);
+                table.addUndo(undoInfo);
+            }
+            table.getModel().editTiers(workingCopy);
+        }
+        /*if (dialog.editTiers()){
             if (table.undoEnabled){
                 UndoInformation undoInfo = new UndoInformation(table, "Edit tiers");
                 undoInfo.memorizeTranscription(table);
                 table.addUndo(undoInfo);
             }
             table.getModel().editTiers(dialog.getTranscription());
-        }
+        }*/
     }
     
     

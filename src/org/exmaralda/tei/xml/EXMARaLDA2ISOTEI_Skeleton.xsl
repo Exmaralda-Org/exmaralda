@@ -211,14 +211,14 @@
 			</xsl:attribute> -->
 			<xsl:if test="//common-timeline/tli[1]/@time&gt;0.0">
 				<!-- <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/> -->
-				<when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0"/>				
+				<when xml:id="T_START" interval="0.0" since="T_START" xmlns="http://www.tei-c.org/ns/1.0"/>				
 			</xsl:if>
 			<xsl:apply-templates select="//common-timeline/tli"/>
 		</timeline>        
 	</xsl:template>
 	
 	<!-- CHANGE FOR ISO: use decimal seconds notation, use intervals and since instead of absoulute -->
-	<xsl:template match="common-timeline/tli[position()&gt;1]">
+	<xsl:template match="common-timeline/tli">
 		<xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
 			<xsl:attribute name="xml:id">
 				<xsl:value-of select="@id"/>
@@ -238,11 +238,11 @@
 	</xsl:template>
 	
 	<!-- CHANGE FOR ISO: special treatment for first -->
-	<xsl:template match="//common-timeline/tli[position()=1]">
+	<!-- <xsl:template match="//common-timeline/tli[position()=1]">
 		<when xmlns="http://www.tei-c.org/ns/1.0">
 			<xsl:attribute name="xml:id" select="@id"/>
 		</when>
-	</xsl:template>
+	</xsl:template> -->
 	
 	<!-- ************************************************* -->
 	<!-- ************************************************* -->

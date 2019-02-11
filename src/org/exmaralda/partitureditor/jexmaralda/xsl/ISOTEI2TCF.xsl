@@ -3,6 +3,7 @@
     change 03-03-2016: additional namespaces no longer necessary  xmlns:standoff="http://standoff.proposal"
     change 08-07-2016: new and hopefully definite mime type for textSource/@type attribute
     change 08-07-2016: first attempt at setting the language correctly
+    change 26-10-2018: read lemma and pos (also) from attributes of @w
 -->        
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
@@ -99,7 +100,7 @@
                     </sentences>
                     
                     <!-- existing lemmatization of the transcription, if present -->
-                    <xsl:if test="//tei:spanGrp[@type='lemma']">
+                    <xsl:if test="//tei:spanGrp[@type='lemma'] or //tei:w[@lemma]">
                         <lemmas>
                             <xsl:call-template name="GET_LEMMAS"/>                    
                         </lemmas>
@@ -108,7 +109,7 @@
                     
                     <!-- existing pos tagging of the transcription, if present -->
                     <!-- it is assumed that this will be STTS -->
-                    <xsl:if test="//tei:spanGrp[@type='pos']">
+                    <xsl:if test="//tei:spanGrp[@type='pos'] or //tei:w[@lemma]">
                         <POStags tagset="stts">
                             <xsl:call-template name="GET_POS"/>                                        
                         </POStags>
@@ -116,7 +117,7 @@
                     
                     
                     <!-- existing (orthographic) normalitation of the transcription, if present -->
-                    <xsl:if test="//tei:spanGrp[@type='n']">
+                    <xsl:if test="//tei:spanGrp[@type='n' or @type='norm'] or //tei:w[@norm]">
                         <orthography>
                             <xsl:call-template name="GET_NORMALISATION"/>                                        
                         </orthography>
@@ -186,26 +187,40 @@
         TARGET:
         <lemma ID="le_0" tokenIDs="t_0">Karin</lemma>
         -->
-        <xsl:for-each select="//tei:spanGrp[@type='lemma']/descendant::tei:span[@from]">
-            <xsl:choose>
-                <xsl:when test="child::tei:span">
-                    <xsl:for-each select="child::tei:span">
-                        <xsl:element name="lemma" namespace="http://www.dspin.de/data/textcorpus">
-                            <xsl:attribute name="ID"><xsl:text>le_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
-                            <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(../@from,'#')"/></xsl:attribute>                 
-                            <xsl:value-of select="text()"/>
-                        </xsl:element>                                                            
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
+        <xsl:choose>
+            <xsl:when test="//tei:w[@lemma]">
+                <xsl:for-each select="//tei:w[@lemma]">
                     <xsl:element name="lemma" namespace="http://www.dspin.de/data/textcorpus">
                         <xsl:attribute name="ID"><xsl:text>le_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
-                        <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(@from,'#')"/></xsl:attribute>                 
-                        <xsl:value-of select="text()"/>
-                    </xsl:element>                                    
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+                        <xsl:attribute name="tokenIDs"><xsl:value-of select="@xml:id"/></xsl:attribute>                 
+                        <xsl:value-of select="@lemma"/>
+                    </xsl:element>                                                                                
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="//tei:spanGrp[@type='lemma']/descendant::tei:span[@from]">
+                    <xsl:choose>
+                        <xsl:when test="child::tei:span">
+                            <xsl:for-each select="child::tei:span">
+                                <xsl:element name="lemma" namespace="http://www.dspin.de/data/textcorpus">
+                                    <xsl:attribute name="ID"><xsl:text>le_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
+                                    <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(../@from,'#')"/></xsl:attribute>                 
+                                    <xsl:value-of select="text()"/>
+                                </xsl:element>                                                            
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:element name="lemma" namespace="http://www.dspin.de/data/textcorpus">
+                                <xsl:attribute name="ID"><xsl:text>le_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
+                                <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(@from,'#')"/></xsl:attribute>                 
+                                <xsl:value-of select="text()"/>
+                            </xsl:element>                                    
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>                
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     
     <xsl:template name="GET_POS">
@@ -217,26 +232,40 @@
             TARGET:
             <tag ID="pt_0" tokenIDs="t_0">NE</tag>
         -->
-        <xsl:for-each select="//tei:spanGrp[@type='pos']/descendant::tei:span[@from]">
-            <xsl:choose>
-                <xsl:when test="child::tei:span">
-                    <xsl:for-each select="child::tei:span">
-                        <xsl:element name="tag" namespace="http://www.dspin.de/data/textcorpus">
-                            <xsl:attribute name="ID"><xsl:text>pt_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
-                            <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(../@from,'#')"/></xsl:attribute>                 
-                            <xsl:value-of select="text()"/>
-                        </xsl:element>            
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
+        <xsl:choose>
+            <xsl:when test="//tei:w[@pos]">
+                <xsl:for-each select="//tei:w[@pos]">
                     <xsl:element name="tag" namespace="http://www.dspin.de/data/textcorpus">
-                        <xsl:attribute name="ID"><xsl:text>pt_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
-                        <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(@from,'#')"/></xsl:attribute>                 
-                        <xsl:value-of select="text()"/>
-                    </xsl:element>            
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+                        <xsl:attribute name="ID"><xsl:text>le_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
+                        <xsl:attribute name="tokenIDs"><xsl:value-of select="@xml:id"/></xsl:attribute>                 
+                        <xsl:value-of select="@pos"/>
+                    </xsl:element>                                                                                
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="//tei:spanGrp[@type='pos']/descendant::tei:span[@from]">
+                    <xsl:choose>
+                        <xsl:when test="child::tei:span">
+                            <xsl:for-each select="child::tei:span">
+                                <xsl:element name="tag" namespace="http://www.dspin.de/data/textcorpus">
+                                    <xsl:attribute name="ID"><xsl:text>pt_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
+                                    <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(../@from,'#')"/></xsl:attribute>                 
+                                    <xsl:value-of select="text()"/>
+                                </xsl:element>            
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:element name="tag" namespace="http://www.dspin.de/data/textcorpus">
+                                <xsl:attribute name="ID"><xsl:text>pt_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
+                                <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(@from,'#')"/></xsl:attribute>                 
+                                <xsl:value-of select="text()"/>
+                            </xsl:element>            
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>                
+            </xsl:otherwise>
+        </xsl:choose>
+                
     </xsl:template>
 
     <!-- normalisations are mapped onto the <correction> element in TCF -->
@@ -251,26 +280,40 @@
             TARGET:
             <correction operation="replace" tokenIDs="t_0">Karina</correction>
         -->
-        <xsl:for-each select="//tei:spanGrp[@type='n']/descendant::tei:span[@from]">
-            <xsl:choose>
-                <xsl:when test="child::tei:span">
-                    <xsl:for-each select="child::tei:span">
-                        <xsl:element name="correction" namespace="http://www.dspin.de/data/textcorpus">
-                            <xsl:attribute name="operation">replace</xsl:attribute>
-                            <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(../@from,'#')"/></xsl:attribute>                 
-                            <xsl:value-of select="text()"/>
-                        </xsl:element>            
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
+        <xsl:choose>
+            <xsl:when test="//tei:w[@norm]">
+                <xsl:for-each select="//tei:w[@norm]">
                     <xsl:element name="correction" namespace="http://www.dspin.de/data/textcorpus">
                         <xsl:attribute name="operation">replace</xsl:attribute>
-                        <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(@from,'#')"/></xsl:attribute>                 
-                        <xsl:value-of select="text()"/>
-                    </xsl:element>            
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+                        <xsl:attribute name="ID"><xsl:text>norm_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
+                        <xsl:attribute name="tokenIDs"><xsl:value-of select="@xml:id"/></xsl:attribute>                 
+                        <xsl:value-of select="@norm"/>
+                    </xsl:element>                                                                                
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="//tei:spanGrp[@type='n']/descendant::tei:span[@from]">
+                    <xsl:choose>
+                        <xsl:when test="child::tei:span">
+                            <xsl:for-each select="child::tei:span">
+                                <xsl:element name="correction" namespace="http://www.dspin.de/data/textcorpus">
+                                    <xsl:attribute name="operation">replace</xsl:attribute>
+                                    <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(../@from,'#')"/></xsl:attribute>                 
+                                    <xsl:value-of select="text()"/>
+                                </xsl:element>            
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:element name="correction" namespace="http://www.dspin.de/data/textcorpus">
+                                <xsl:attribute name="operation">replace</xsl:attribute>
+                                <xsl:attribute name="tokenIDs"><xsl:value-of select="substring-after(@from,'#')"/></xsl:attribute>                 
+                                <xsl:value-of select="text()"/>
+                            </xsl:element>            
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>                
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
 

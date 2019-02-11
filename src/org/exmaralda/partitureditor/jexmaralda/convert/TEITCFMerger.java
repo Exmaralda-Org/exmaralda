@@ -58,9 +58,9 @@ public class TEITCFMerger {
         List annotatedUs = uXPath.selectNodes(teiDocument);
         System.out.println(annotatedUs.size() + " items");
         
-        addTokenAnnotation("//tc:lemma","lemma", annotatedUs, "text()"); // lemmas
-        addTokenAnnotation("//tc:POStags/descendant::tc:tag","pos", annotatedUs, "text()"); // POS tags
-        addTokenAnnotation("//tc:entity","named-entities", annotatedUs, "@class"); // named entities
+        addTokenAnnotationAsAttribute("//tc:lemma","lemma", annotatedUs, "text()"); // lemmas
+        addTokenAnnotationAsAttribute("//tc:POStags/descendant::tc:tag","pos", annotatedUs, "text()"); // POS tags
+        addTokenAnnotationAsSpanGrp("//tc:entity","named-entities", annotatedUs, "@class"); // named entities
         
         addFeatureStructureAnnotation("//tc:morphology", "morph", annotatedUs);
         
@@ -70,10 +70,10 @@ public class TEITCFMerger {
         return teiDocument;
     }
     
-    static String tei = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_ISO_TEI_EXPORT.xml";
+    //static String tei = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_ISO_TEI_EXPORT.xml";
     //static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\HelgeSchneider_TCF_WebLichtResult_2.xml";
     //static String tcf = "C:\\Users\\Schmidt\\Dropbox\\IDS\\TEI_ISO\\TCF\\NEW_IN.tcf";
-    static String tcf = "F:\\Dropbox\\EXMARaLDA_Build\\WEB-LICHT-TEST\\DE_AnneWill_EXMARaLDA_Output.tcf";
+    static String tcf = "F:\\Dropbox\\IDS\\TEI_ISO\\2018_10_26_Weblicht\\chainer_result_621816656909579431.xml";
     
     public static void main(String[] args){
         try {
@@ -81,7 +81,7 @@ public class TEITCFMerger {
             TEITCFMerger merger = new TEITCFMerger(new File(tcf));
             merger.merge();
             Document result = merger.getMergedDocument();
-            FileIO.writeDocumentToLocalFile(new File("F:\\Dropbox\\EXMARaLDA_Build\\WEB-LICHT-TEST\\DE_AnneWill_EXMARaLDA_OutputMerged.tei"), result);
+            FileIO.writeDocumentToLocalFile(new File("F:\\Dropbox\\IDS\\TEI_ISO\\2018_10_26_Weblicht\\chainer_result_back2isoTei.xml"), result);
         } catch (JDOMException ex) {
             Logger.getLogger(TEITCFMerger.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -89,7 +89,53 @@ public class TEITCFMerger {
         }
     }
 
-    private void addTokenAnnotation(String annotationXPath, String annotationName, List annotatedUs, String valuePath) throws JDOMException {
+    private void addTokenAnnotationAsAttribute(String annotationXPath, String annotationName, List annotatedUs, String valuePath) throws JDOMException {
+        XPath lXPath = XPath.newInstance(annotationXPath); 
+        lXPath.addNamespace("tc", "http://www.dspin.de/data/textcorpus");
+        List annotations = lXPath.selectNodes(tcfDocument);
+        if (annotations.isEmpty()) return;
+        HashMap<String, Element> elements = new HashMap<String, Element>();
+        for (Object o2 : annotations){
+            Element la = (Element)o2;
+            String[] tokenIDs = la.getAttributeValue("tokenIDs").split(" ");
+            elements.put(tokenIDs[0], la);
+        }
+        
+        for (Object o : annotatedUs){
+            Element annotatedU = (Element)o;
+            XPath tXPath = XPath.newInstance("descendant::*[self::tei:w  or self::tei:pc]"); 
+            tXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+            List tokens = tXPath.selectNodes(annotatedU);
+            
+            // 1. LEMMAS
+            /* <w xml:id="w36">Karin</w>
+             * <lemmas>
+                  <lemma ID="le_0" tokenIDs="w36">Karin</lemma>
+            </lemmas>            
+            <spanGrp type="lemma">
+                <span from="#w36" to="#w36">Karin</span>
+            </spanGrp>*/
+            if (tokens.size()>0){
+                //Element spanGrp = new Element("spanGrp", annotatedU.getNamespace());
+                for (Object o2 : tokens){
+                    Element token = (Element)o2;
+                    String teiTokenID = token.getAttributeValue("id", Namespace.XML_NAMESPACE); 
+                    //System.out.println("Trying " + teiTokenID);
+                    if (elements.containsKey(teiTokenID)){
+                        Element tcfElement = elements.get(teiTokenID);
+                        if ("text()".equals(valuePath)){
+                            token.setAttribute(annotationName, tcfElement.getText());
+                        } else if (valuePath.startsWith("@")){
+                            token.setAttribute(annotationName, tcfElement.getAttributeValue(valuePath.substring(1)));
+                        }
+                    }
+                }
+            }            
+        }
+        
+    }
+    
+    private void addTokenAnnotationAsSpanGrp(String annotationXPath, String annotationName, List annotatedUs, String valuePath) throws JDOMException {
         XPath lXPath = XPath.newInstance(annotationXPath); 
         lXPath.addNamespace("tc", "http://www.dspin.de/data/textcorpus");
         List annotations = lXPath.selectNodes(tcfDocument);

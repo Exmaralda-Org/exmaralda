@@ -22,8 +22,14 @@ public class MoveEventAction extends org.exmaralda.partitureditor.partiture.Abst
     String sourceTierID;
     String targetTierID;
     String startID;
+    String endID;
     
-    /** Creates a new instance of MoveLeftAction */
+    /** Creates a new instance of MoveLeftAction
+     * @param t
+     * @param sourceTierID
+     * @param targetTierID
+     * @param startID
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public MoveEventAction(PartitureTableWithActions t, String sourceTierID, String targetTierID, String startID) throws JexmaraldaException {
         super(t.getModel().getTranscription().getBody().getTierWithID(targetTierID).getDescription(t.getModel().getTranscription().getHead().getSpeakertable()), t);        
         this.sourceTierID = sourceTierID;
@@ -31,10 +37,17 @@ public class MoveEventAction extends org.exmaralda.partitureditor.partiture.Abst
         this.startID = startID;
     }
     
+    public MoveEventAction(PartitureTableWithActions t, String sourceTierID, String targetTierID, String startID, String endID) throws JexmaraldaException {
+        super(t.getModel().getTranscription().getBody().getTierWithID(targetTierID).getDescription(t.getModel().getTranscription().getHead().getSpeakertable()), t);        
+        this.sourceTierID = sourceTierID;
+        this.targetTierID = targetTierID;
+        this.startID = startID;
+        this.endID = endID;
+    }
     
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
-        System.out.println("moveDownLeftAction!");
+        System.out.println("moveEventAction!");
         move();
         table.transcriptionChanged = true;        
     }
@@ -49,11 +62,10 @@ public class MoveEventAction extends org.exmaralda.partitureditor.partiture.Abst
             UndoInformation undoInfo = new UndoInformation(table, "Move to tier");
             undoInfo.memorizeRegion(table, lower, upper);
             table.addUndo(undoInfo);
-            //System.out.println("Added undo move left");
             // end undo information
         }
         try {  
-            table.getModel().moveToTier(sourceTierID, targetTierID, startID);            
+            table.getModel().moveToTier(sourceTierID, targetTierID, startID, endID);            
         } catch (JexmaraldaException ex) {
             Logger.getLogger(MoveEventAction.class.getName()).log(Level.SEVERE, null, ex);
         }
