@@ -30,19 +30,6 @@ public class FlexTextConverter {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SAXException, ParserConfigurationException, IOException, TransformerException {
-
-    
-        
-        try {
-            new FlexTextConverter().readFlexTextFromTextFile((new File("C:\\Users\\fsnv625\\Desktop\\BaA_1930_FireInSmallTent_flk.flextext")), new File("C:\\Users\\fsnv625\\Desktop\\settings.xml"));
-        } catch (JDOMException ex) {
-            Logger.getLogger(FlexTextConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(FlexTextConverter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        
-        
     }
 
     public FlexTextConverter() {
@@ -60,7 +47,7 @@ public class FlexTextConverter {
         //get the whole path of the flextext file
         String filepath = inputFile.getAbsolutePath();
         String parametervalue = parameterFile.toURI().toString();
-        String[][] parameters = {{"settings-file", parametervalue}};
+        String[][] parameters = {{"SETTINGS-FILE", parametervalue}};
         //how will the settings be put in here?
         String out = ssf.applyInternalStylesheetToExternalXMLFile(FLEXTEXT2EX_STYLESHEET, filepath, parameters);
         System.out.println(out);  
