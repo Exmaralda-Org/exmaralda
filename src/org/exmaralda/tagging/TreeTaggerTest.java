@@ -37,8 +37,8 @@ public class TreeTaggerTest {
             //        TaggingProfiles.HIAT_WORDS_PUNCTUATION_SEGMENTATION_XPATH,
             //        TaggingProfiles.HIAT_WORDS_PUNCTUATION_TOKEN_XPATH);
             TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(new File(INPUT), true);
-            ttont.setXPathToTokens("//w|//p[not(text()=',')]");
-            ttont.clearTagging();
+            //ttont.setXPathToTokens("//w|//p[not(text()=',')]");
+            //ttont.clearTagging();
             ttont.setVerbose(true);
             File output = File.createTempFile("FLN",".xml");
             //output.deleteOnExit();

@@ -54,6 +54,15 @@ public class StylesheetFactory {
                                                   TransformerConfigurationException, 
                                                   TransformerException{
 
+        // this does not work, but also no harm...
+        tFactory.setURIResolver(new URIResolver(){
+            @Override
+            public Source resolve(String href, String base) throws TransformerException {
+                InputStream is = getClass().getResourceAsStream("/" + href);
+                return new javax.xml.transform.stream.StreamSource(is,href);
+            }            
+        });
+
         // set up the transformer         
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
         if (is2==null) {throw new IOException("Stylesheet not found!");}
@@ -61,14 +70,6 @@ public class StylesheetFactory {
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
         styleSource.setSystemId(styleURL.toExternalForm());
         
-        // this does not work, but also no harm...
-        tFactory.setURIResolver(new URIResolver(){
-            @Override
-            public Source resolve(String href, String base) throws TransformerException {
-                InputStream is= getClass().getResourceAsStream("/" + href);
-                return new javax.xml.transform.stream.StreamSource(is,href);
-            }            
-        });
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
         java.io.StringReader sr = new java.io.StringReader(sourceString);

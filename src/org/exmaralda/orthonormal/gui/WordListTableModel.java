@@ -38,10 +38,11 @@ public class WordListTableModel extends javax.swing.table.AbstractTableModel {
     @Override
     public int getColumnCount() {
         //if (words.size()>0 && words.get(0).getAttribute("pos")!=null){
+        // changed 19-02-2019, issue #179
         if (hasLemmaOrPOS) {
-            return 5;
+            return 5+1;
         } else {
-            return 2;
+            return 2+1;
         }
     }
 
@@ -55,14 +56,16 @@ public class WordListTableModel extends javax.swing.table.AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
+                return "";
+            case 0+1:
                 return "Wort";
-            case 1:
+            case 1+1:
                 return "Normal";
-            case 2:
+            case 2+1:
                 return "Lemma";
-            case 3:
+            case 3+1:
                 return "POS";
-            case 4:
+            case 4+1:
                 return "p(POS)";
             default:
                 break;

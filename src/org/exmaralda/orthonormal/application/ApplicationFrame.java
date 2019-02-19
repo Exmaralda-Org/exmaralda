@@ -523,10 +523,10 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     }
     
     private void filter(){
-        int column = 0;
-        if (normalFilterRadioButton.isSelected()) column=1;
-        if (lemmaFilterRadioButton.isSelected()) column=2;
-        if (posFilterRadioButton.isSelected()) column=3;
+        int column = 1;
+        if (normalFilterRadioButton.isSelected()) column=2;
+        if (lemmaFilterRadioButton.isSelected()) column=3;
+        if (posFilterRadioButton.isSelected()) column=4;
         applicationControl.filter(filterTextField.getText(), column);        
     }
     

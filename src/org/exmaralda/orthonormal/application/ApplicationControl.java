@@ -834,11 +834,14 @@ public final class ApplicationControl implements  ListSelectionListener,
     
     void setWordListCellRenderers(){
         applicationFrame.wordTable.getColumnModel().getColumn(0).setCellRenderer(new WordListTableCellRenderer());
+        applicationFrame.wordTable.getColumnModel().getColumn(0).setMaxWidth(45);
+        //applicationFrame.wordTable.getColumnModel().getColumn(0).setWidth(30);
         applicationFrame.wordTable.getColumnModel().getColumn(1).setCellRenderer(new WordListTableCellRenderer());
-        if (applicationFrame.wordTable.getModel().getColumnCount()>2){
-            applicationFrame.wordTable.getColumnModel().getColumn(2).setCellRenderer(new WordListTableCellRenderer());
+        applicationFrame.wordTable.getColumnModel().getColumn(2).setCellRenderer(new WordListTableCellRenderer());
+        if (applicationFrame.wordTable.getModel().getColumnCount()>3){
             applicationFrame.wordTable.getColumnModel().getColumn(3).setCellRenderer(new WordListTableCellRenderer());
             applicationFrame.wordTable.getColumnModel().getColumn(4).setCellRenderer(new WordListTableCellRenderer());
+            applicationFrame.wordTable.getColumnModel().getColumn(5).setCellRenderer(new WordListTableCellRenderer());
         }        
     }
 
@@ -2062,8 +2065,8 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.playerControlsPanel.setVisible(false);
         applicationFrame.xmlRadioButton.setEnabled(true); 
         contributionListTable.setEnabled(true);
-        TableColumn column1 = contributionListTable.getColumnModel().getColumn(1);
-        TableColumn column2 = contributionListTable.getColumnModel().getColumn(2);
+        TableColumn column1 = contributionListTable.getColumnModel().getColumn(1+1);
+        TableColumn column2 = contributionListTable.getColumnModel().getColumn(2+1);
         contributionListTable.getColumnModel().removeColumn(column1);
         contributionListTable.getColumnModel().removeColumn(column2);
     }

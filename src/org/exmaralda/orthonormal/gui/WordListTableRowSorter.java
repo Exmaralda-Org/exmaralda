@@ -34,24 +34,31 @@ public class WordListTableRowSorter extends TableRowSorter<WordListTableModel> {
             public String toString(TableModel model, int row, int column) {
                 Element word = ((WordListTableModel)model).words.get(row);
                 String text = "";
-                if (column==0){
-                    text = word.getText();
-                } else if (column==1){
-                    if (word.getAttribute("n")!=null){
-                        text = word.getAttributeValue("n");
-                    }
-                } else if (column==2){
-                    if (word.getAttribute("lemma")!=null){
-                        text = word.getAttributeValue("lemma");
-                    }
-                } else if (column==3){
-                    if (word.getAttribute("pos")!=null){
-                        text = word.getAttributeValue("pos");
-                    }
-                } else if (column==4){
-                    if (word.getAttribute("p-pos")!=null){
-                        text = word.getAttributeValue("p-pos");
-                    }
+                switch (column) {
+                    case 0 :
+                        text = Integer.toString(row+1);
+                        break;
+                    case 0+1:
+                        text = word.getText();
+                        break;
+                    case 1+1:
+                        if (word.getAttribute("n")!=null){
+                            text = word.getAttributeValue("n");
+                        }   break;
+                    case 2+1:
+                        if (word.getAttribute("lemma")!=null){
+                            text = word.getAttributeValue("lemma");
+                        }   break;
+                    case 3+1:
+                        if (word.getAttribute("pos")!=null){
+                            text = word.getAttributeValue("pos");
+                        }   break;
+                    case 4+1:
+                        if (word.getAttribute("p-pos")!=null){
+                            text = word.getAttributeValue("p-pos");
+                        }   break;
+                    default:
+                        break;
                 }
                 return text;
             }
