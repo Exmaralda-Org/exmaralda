@@ -23,6 +23,8 @@
             v3.1: Changes by Daniel Jettka, 22.01.2019
                    - added preprocessing step (inel:append-punct) to merge punctuation into words already in flextext input
                    - added cleanup functionality for clitics
+                   - consistency checks
+                   - more tier formats
             v3.0: Changes by Daniel Jettka, 30.10.2018
                   cf. https://lab.multilingua.uni-hamburg.de/redmine/versions/75
                    - restructured XSLT
