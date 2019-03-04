@@ -23,6 +23,8 @@
             v3.1: Changes by Daniel Jettka, 22.01.2019
                    - added preprocessing step (inel:append-punct) to merge punctuation into words already in flextext input
                    - added cleanup functionality for clitics
+                   - consistency checks
+                   - more tier formats
             v3.0: Changes by Daniel Jettka, 30.10.2018
                   cf. https://lab.multilingua.uni-hamburg.de/redmine/versions/75
                    - restructured XSLT
@@ -38,17 +40,17 @@
                    NB: the cleanup functions are NOT yet called according to the settings file, but controlled internally
             v1.21: ... is replaced with … and both are counted as a (punctuation) word. (27.02.2016)
             v1.20: Transform for single files.
-            
-            
     -->
     
-    
+
+    <!-- *************************** -->
     <!-- ***** START: KEYS ********* -->
-    <xsl:key name="tli-id-by-time" match="tli/@id" use="../@time"/>    
-    <xsl:key name="tier-format-by-tierref" match="tier-format" use="@tierref"/>    
+    <xsl:key name="tli-id-by-time" match="tli/@id" use="../@time"/>
+    <xsl:key name="tier-format-by-tierref" match="tier-format" use="@tierref"/>
     <!-- ***** END: KEYS ********** -->
-    
-        
+    <!-- ************************** -->
+
+
     <!-- ******************************** -->
     <!-- *** START: GLOBAL PARAMETERS *** -->
     
@@ -100,6 +102,8 @@
     <!-- **** START: GLOBAL VARIABLES **** -->
     
     <xsl:variable name="settings" select="if(doc-available($SETTINGS-FILE)) then document($SETTINGS-FILE) else ()"/>
+
+    <!-- constants -->
     <xsl:variable name="tiers-morph" select="'mb', 'mp'" as="xs:string+"/>
     <xsl:variable name="tiers-gloss" select="'ge', 'gr', 'mc', 'hn'" as="xs:string+"/>
     <xsl:variable name="clitic-separator" select="'='" as="xs:string+"/>
@@ -127,8 +131,6 @@
     
     <xsl:variable name="output-directory" select="replace(base-uri(), tokenize(substring(base-uri(), 6), '/')[last()], '')"/>
     <xsl:variable name="filename" select="replace(replace(base-uri(), '^.*/', ''), '.flextext', '')"/>
-    <xsl:variable name="current-text" select="//interlinear-text"/>
-    <xsl:variable name="textname" select="$current-text/item[@type = $TEXT-NAME-FROM-ITEM and @lang = $TEXT-NAME-FROM-LANG]/text()"/>
     <xsl:variable name="preprocessed-root">
         <!--<xsl:copy-of select="/"/>-->
         <xsl:for-each select="/">
@@ -371,6 +373,19 @@
                 <property name="font-size">12</property>
                 <property name="font-name">Charis SIL</property>
             </tier-format>
+            <tier-format tierref="hn">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
             <tier-format tierref="SeR">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
@@ -398,6 +413,32 @@
                 <property name="font-name">Charis SIL</property>
             </tier-format>
             <tier-format tierref="IST">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="Top">
+                <property name="row-height-calculation">Generous</property>
+                <property name="fixed-row-height">10</property>
+                <property name="font-face">Plain</property>
+                <property name="font-color">black</property>
+                <property name="chunk-border-style">solid</property>
+                <property name="bg-color">white</property>
+                <property name="text-alignment">Left</property>
+                <property name="chunk-border-color">#R00G00B00</property>
+                <property name="chunk-border"/>
+                <property name="font-size">12</property>
+                <property name="font-name">Charis SIL</property>
+            </tier-format>
+            <tier-format tierref="Foc">
                 <property name="row-height-calculation">Generous</property>
                 <property name="fixed-row-height">10</property>
                 <property name="font-face">Plain</property>
@@ -778,20 +819,29 @@
         </tierformat-table>
     </xsl:variable>
     
-    <xsl:variable name="set-format-table.tiers">
-        <xsl:copy-of select="//tier"/>
-    </xsl:variable>
     
     <!-- **** END: GLOBAL VARIABLES ****** -->
     <!-- ********************************* -->
 
 
+
     <!-- **************************** -->
     <!-- ***** START: TEMPLATES ***** -->
 
-    <xsl:template match="/"> 
+    <xsl:template match="/">
+        
+        <!-- some consistency checks -->
+        <xsl:for-each select="//phrase[not(concat(@begin-time-offset, '#', @end-time-offset) = '#') and concat(@begin-time-offset, '#', @end-time-offset, '#', @speaker) = following-sibling::phrase/concat(@begin-time-offset, '#', @end-time-offset, '#', @speaker)]">
+            <xsl:copy-of select="error((), concat('***ERROR: time info inconsistent; more than one phrase with time ', @begin-time-offset, '-', @end-time-offset))"/>
+        </xsl:for-each>
+        <!-- multiple interlinear text in one file not supported in this version -->
+        <xsl:if test="//interlinear-text[2]">    
+            <xsl:copy-of select="error((), '***ERROR: multiple interlinear-text elements in one file not supported - please split into multiple files.')"/>
+        </xsl:if>
+        
         <xsl:message select="('Time information retrieved from flextext.'[$use-flex-times], 'Time information generated by interpolation.'[not($use-flex-times)])[1]"/>
-        <conversion-report filename="{$filename}" output-location="{concat($output-directory, $filename, '.exb')}" settings-file="{($SETTINGS-FILE[doc-available($SETTINGS-FILE)], concat('not found: ', $SETTINGS-FILE))[1]}">
+        <xsl:message select="$preprocessed-root"></xsl:message>
+        <conversion-report filename="{$filename}" output-location="{concat($output-directory, $filename, '.exb')}" settings-file="{($SETTINGS-FILE[doc-available($SETTINGS-FILE)], error((),concat('***ERROR: settings file not found: ', $SETTINGS-FILE)))[1]}">
             <!--<conversion-settings filename="{$settings-file}">
                 <xsl:copy-of select="$settings/*/*"/>
             </conversion-settings>-->
@@ -909,7 +959,7 @@
                             <!-- v2.02: if format is 'flat' then just count the sentences through the whole text -->
                             <xsl:variable name="text" as="xs:string?" select="concat(
                                 $prefix                                                                                                     [$cat = 'ref'], 
-                                format-number(position(), '#000')                                                                           [$cat = 'ref' and $SENTENCE-NUMBER-FORMAT = ('both', 'flat')], 
+                                format-number($pos, '#000')                                                                           [$cat = 'ref' and $SENTENCE-NUMBER-FORMAT = ('both', 'flat')], 
                                 ' ('                                                                                                        [$cat = 'ref' and $SENTENCE-NUMBER-FORMAT = 'both'], 
                                 inel:cleanup( string-join(./item[ @type = $itemtype and ($lang = ('', @lang))], ' || '), $cleanup-routines) [(not($cat='ref') or $SENTENCE-NUMBER-FORMAT = ('para', 'both')) and not(.='')],
                                 ')'                                                                                                         [$cat = 'ref' and $SENTENCE-NUMBER-FORMAT = 'both']
@@ -951,6 +1001,11 @@
                                             ),
                                             $cleanup-routines)"/>
                                     </xsl:when>
+                                    <xsl:when test="$cat = 'ps'">
+                                        <xsl:copy-of select="$descendant-words/inel:cleanup(
+                                            string-join(item[@type = $itemtype and @lang = $lang], $sep),
+                                            $cleanup-routines)"/>
+                                    </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:copy-of select="$descendant-words/inel:cleanup(
                                             string-join(descendant::morph/item[@type = $itemtype and @lang = $lang], $sep),
@@ -960,7 +1015,8 @@
                             </xsl:variable>
                             
                             <!-- iterate and return events -->
-                            <xsl:copy-of select="inel:words2events($word-sequence, $result-value-sequence, 1, $phrase-start-time, $phrase-end-time, ())"/>                        
+                            <xsl:copy-of select="inel:words2events($word-sequence, $result-value-sequence, 1, $phrase-start-time, $phrase-end-time, ())"/>
+                            
                         </xsl:when>
                         
                         <!-- 'tier-word-new' -->
@@ -1003,6 +1059,10 @@
                 <!-- this is always item -->
                 <xsl:copy>
                     <xsl:copy-of select="@*"/>
+                    <!--<xsl:message select="."></xsl:message>
+                    <xsl:message select="$preceding-texts-in-phrase"></xsl:message>
+                    <xsl:message select="$following-texts-in-phrase"></xsl:message>
+                    <xsl:message select="$preceding-texts-of-speaker"></xsl:message>-->
                     <xsl:value-of select="inel:append-punct($preceding-texts-in-phrase, $following-texts-in-phrase, ., $preceding-texts-of-speaker)"/>
                 </xsl:copy>
             </xsl:for-each>
@@ -1051,6 +1111,10 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- copy pos item -->
+    <xsl:template match="text()[parent::item[@type='pos']]" mode="preprocess-punctuation">
+        <xsl:copy-of select="parent::item"/>
+    </xsl:template>
     
     <xsl:template match="text()" mode="preprocess-punctuation">
         <xsl:copy-of select="."/>
@@ -1060,7 +1124,7 @@
     
     <!-- insert the tierformat-table (copied a formatting template) -->
     <xsl:template name="set-format-table">
-        <xsl:param name="tiers-to-format" select="$set-format-table.tiers//tier" as="element()*"/>
+        <xsl:param name="tiers-to-format" as="element()*"/>
         <xsl:choose>
             <xsl:when test="exists($TIERFORMAT-TABLE//*:tier-format)">
                 <tierformat-table>
@@ -1118,11 +1182,11 @@
                 <xsl:value-of select="inel:append-punct(($preceding-texts[position() != last()], replace($preceding-texts[last()], '§', '')[not(matches(., '^$'))]), $following-texts, $result, $all-preceding-texts)"/>
             </xsl:when>
             
-            <!-- clause punctuation -->
-            <xsl:when test="matches($following-texts[1], concat('^', $regex.sentpunct, '+$'))">                
+            <!-- clause punctuation (with optional dash before the punctuation) -->
+            <xsl:when test="matches($following-texts[1], concat('^', $regex.dash, '?', $regex.sentpunct, '+$'))">                
                 <xsl:value-of select="inel:append-punct($preceding-texts, subsequence($following-texts, 2), concat($result, $following-texts[1]), $all-preceding-texts)"/>
             </xsl:when>
-            <xsl:when test="matches($preceding-texts[last()], concat('^', $regex.sentpunct, '+$'))">
+            <xsl:when test="matches($preceding-texts[last()], concat('^', $regex.dash, '?', $regex.sentpunct, '+$'))">
                 <xsl:value-of select="inel:append-punct($preceding-texts[position() != last()], $following-texts, $result, $all-preceding-texts)"/>
             </xsl:when>
             
@@ -1174,14 +1238,14 @@
                 </xsl:choose>
             </xsl:when>
             
-            <!-- special case 1 -->
+            <!-- quotes: special case 1 -->
             <xsl:when test="matches($following-texts[1], concat($regex.quote, $regex.sentpunct, '+'))">
                 <xsl:value-of select="inel:append-punct($preceding-texts, subsequence($following-texts, 2), concat($result, $following-texts[1]), $all-preceding-texts)"/>
             </xsl:when>
             <xsl:when test="matches($preceding-texts[last()], concat($regex.quote, $regex.sentpunct, '+'))">
                 <xsl:value-of select="inel:append-punct($preceding-texts[position() != last()], $following-texts, $result, $all-preceding-texts)"/>
             </xsl:when>
-            <!-- special case 2 -->
+            <!-- quotes: special case 2 -->
             <xsl:when test="matches($following-texts[1], concat($regex.sentpunct, '+', $regex.quote))">
                 <xsl:value-of select="inel:append-punct($preceding-texts, subsequence($following-texts, 2), concat($result,$following-texts[1]), $all-preceding-texts)"/>
             </xsl:when>
@@ -1236,6 +1300,8 @@
             </xsl:when>
             <!-- if there is more puntuation that could not be appended -->
             <xsl:otherwise>
+                <!--<xsl:message select="'inel:treat-as-puntuation(', $preceding-texts[last()], ') = ', inel:treat-as-puntuation($preceding-texts[last()])"/>
+                <xsl:message select="'inel:treat-as-puntuation(', $following-texts[1], ') = ', inel:treat-as-puntuation($following-texts[1])"></xsl:message>-->
                 <xsl:copy-of select="error((), concat('***Error: Could not append to ''', $result, ''': preceding ''', $preceding-texts[last()], ''' or following ''', $following-texts[1], '''.'))"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -1248,7 +1314,9 @@
     
     <xsl:function name="inel:treat-as-puntuation" as="xs:boolean">
         <xsl:param name="str" as="xs:string?"/>
-        <xsl:copy-of select="matches($str, '^[^\w]|[^\w\-]$') and not(matches($str, concat('^', $regex.ellipsis, '(', $regex.sentpunct, '+)*', '$')))"/>
+        <xsl:copy-of select="matches($str, '^[^\w]|[^\w\-]$') and 
+            not(matches($str, concat('^', $regex.ellipsis, '(', $regex.sentpunct, '+)*', '$'))) and 
+            not(matches($str, concat('^', $regex.dash, '\w+$')))"/>
     </xsl:function>
     
     <xsl:function name="inel:pattern-occurs-pairwise" as="xs:boolean">
@@ -1279,8 +1347,8 @@
                         <xsl:when test="$routines[1] = 'brackets'">
                             <xsl:value-of select="inel:multi-replace( 
                                 $text, 
-                                ('\[\[', '\]\]', '\.\.\.|\(+\.\.\.\)+', '///',     '\?\?\?'), 
-                                ('((',   '))',   '…',                 '((XXX))', '((unknown))')
+                                ('\[\[', '\]\]', '\.\.\.', '///',     '\?\?\?'), 
+                                ('((',   '))',   '…',     '((XXX))', '((unknown))')
                                 )"/>                            
                         </xsl:when>
                         
@@ -1288,10 +1356,11 @@
                         <xsl:when test="$routines[1] = 'tx'">                            
                             <xsl:value-of select="inel:multi-replace( 
                                 $text, 
-                                ('( +$)|[ˀ]', '[03]([\.,!\?;:]*)$'), 
+                                ('[ˀ]', '[03]([\.,!\?;:]*)$'), 
                                 ('',           '$1') 
                                 )"/>
-                            <!-- strip trailing space, strip final 0 and 3 -->
+                            <!-- formerly stripped all trailing spaces ( +$), but not anymore because of preprocessing -->
+                            <!-- strip final 0 and 3 -->
                             <!-- strip "deep consonant" and "deep glottal stop" -->
                         </xsl:when>
                         
@@ -1314,9 +1383,9 @@
                         
                         <!-- cleanup gloss -->
                         <xsl:when test="$routines[1] = 'gloss'">
-                            <xsl:value-of select="inel:multi-replace($text, (' ', '-(\[.+?\])'), ('', '.$1'))"/>
+                            <xsl:value-of select="inel:multi-replace($text, ('-(\[.+?\])'), ('.$1'))"/>
                             <!-- replace -[] with .[] -->
-                            <!-- erase spaces -->
+                            <!-- removed this step because of pre-processing: "erase spaces" -->
                         </xsl:when>
                         
                         <!-- cleanup clitics -->
@@ -1388,8 +1457,7 @@
         <xsl:copy-of select="if($join) then string-join($sentence-sequence, '') else $sentence-sequence"/>
     </xsl:function>
     
-        
-    
+
     <xsl:function name="inel:words2events" as="element()*">
         <xsl:param name="whitespaced-words" as="xs:string*"/>
         <xsl:param name="result-values" as="xs:string*"/>
@@ -1401,17 +1469,17 @@
         <xsl:choose>
             <xsl:when test="$index &lt;= count($whitespaced-words)">
                 <!-- 
-                    (1) if the text of this word contains an opening parantheses, but not a closing one
+                    (1) if the text of this word contains an opening parantheses, but not a closing one, and does not end with a whitespace (necessary for multi-worded paranthesed sequences)
                     (2) if the text of this word does not match the above (it's a simple word)
                 -->
-                <xsl:variable name="position-of-closing" select="if(matches($whitespaced-words[$index], '^[^\(]*\([^\)]*$')) 
+                <xsl:variable name="position-of-closing" select="if(matches($whitespaced-words[$index], '^[^\(]*\([^\)]*$') and not(matches($whitespaced-words[$index], '\s$'))) 
                     then (:1:) min(index-of($whitespaced-words[position() &gt; $index], ($whitespaced-words[position() &gt; $index and matches(., '^[^\(]*\)[^\)]*$')])[1]))
                     else (:2:) 0" as="xs:integer"/>
                 
                 <!-- create the new event -->
                 <xsl:variable name="new-event" as="element()?">
                     <xsl:for-each select="string-join($result-values[position() &gt;= $index and position() &lt;= ($index + $position-of-closing)], '')[not(.='')]">
-                        <event start="{$start-time + (($index - 1) * $time-interval)}" end="{$start-time + (($index + $position-of-closing) * $time-interval)}"><xsl:value-of select="."/></event>
+                        <event start="{$start-time + (($index - 1) * $time-interval)}" end="{$start-time + (($index + $position-of-closing) * $time-interval)}"><xsl:value-of select="replace(., '\s+$', ' ')"/></event>
                     </xsl:for-each>                             
                 </xsl:variable>
                 

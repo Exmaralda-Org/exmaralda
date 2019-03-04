@@ -99,7 +99,7 @@ public class ChooseXMLSettingsFileDialog extends javax.swing.JDialog {
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         JFileChooser fc = new JFileChooser();
-        fc.setFileFilter(new ParameterFileFilter("xml", "XML settings file (*.xml)"));
+        fc.setFileFilter(new ParameterFileFilter("xsl", "XSL settings file (*.xsl)"));
         int ret = fc.showOpenDialog(jPanel1);
         if (ret==JFileChooser.APPROVE_OPTION){
             pathTextField.setText(fc.getSelectedFile().getAbsolutePath());
