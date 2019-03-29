@@ -74,6 +74,11 @@
                                         <translation lang="de" trans="Ausgabe... "/>
                                         <translation lang="fr" trans="Edition..."/>
                                 </item>
+                                <item id="file_menu.transform">
+                                        <translation lang="en" trans="Transform..."/>
+                                        <translation lang="de" trans="Transformieren... "/>
+                                        <translation lang="fr" trans="Transformer..."/>
+                                </item>
                                 <item id="file_menu.exit">
                                         <translation lang="en" trans="Exit"/>
                                         <translation lang="de" trans="Beenden"/>

@@ -49,6 +49,7 @@ public class OutputAction extends AbstractApplicationAction {
     ParameterFileFilter gatBasicTranscriptFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.gatBasicTranscript"));
     ParameterFileFilter segCorTranscriptFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.segCorTranscript"));
     ParameterFileFilter htmlQuantifyFilter = new ParameterFileFilter("html", FOLKERInternationalizer.getString("misc.quantification"));
+           
     
     public static String CONTRIBUTIONS2HTML_STYLESHEET = "/org/exmaralda/folker/data/unparsedFolker2HTMLContributionList.xsl";
     public static String CONTRIBUTIONS2HTML_AUDIO_STYLESHEET = "/org/exmaralda/folker/data/unparsedFolker2HTMLContributionListAudio.xsl";
