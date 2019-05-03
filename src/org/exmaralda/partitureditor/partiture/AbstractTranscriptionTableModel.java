@@ -176,7 +176,10 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     
     /** returns the content of the columns label viz. the description of the corresponding timeline item 
      *  format is 'n' if no absolute time is assigned and
-     *  format is 'n [xxx.y]' if an absolute time is assigned */
+     *  format is 'n [xxx.y]' if an absolute time is assigned
+     * @param col
+     * @return  */
+    @Override
     public java.lang.Object getTableColumnLabel(int col) {
         if (col==-1) {return new String();}       
         TimelineItem tli = getTimelineItem(col);
@@ -192,6 +195,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     }
     
     /** returns the content of the row label viz. the description of speaker and category of the corresponding tier */
+    @Override
     public java.lang.Object getTableRowLabel(int row) {
         Tier tier = transcription.getBody().getTierAt(row);
         // changed for Version 1.2.5.
@@ -199,12 +203,16 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         return tier.getDisplayName();
     }
     
-    /** returns the number of rows viz. the number of tiers */
+    /** returns the number of rows viz. the number of tiers
+     * @return  */
+    @Override
     public int getNumRows() {
         return transcription.getBody().getNumberOfTiers();
     }
 
-    /** returns the number of columns viz. the length of the timeline */
+    /** returns the number of columns viz. the length of the timeline
+     * @return  */
+    @Override
     public int getNumColumns() {
         return transcription.getBody().getCommonTimeline().getNumberOfTimelineItems();
     }
@@ -316,7 +324,10 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
        fireColumnLabelChanged(JCTableEnum.ALLCELLS);
     }
 
-    /** notifies listeners that the selection must be changed */
+    /** notifies listeners that the selection must be changed
+     * @param row
+     * @param col
+     * @param beginEdit */
     public void fireSelectionChanged(int row, int col, boolean beginEdit){
         int v=0;
         if (beginEdit){v=1;}
@@ -324,13 +335,15 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         fireTableDataEvent(event);
     }
     
-    /** notifies the listeners that a row has been inserted */
+    /** notifies the listeners that a row has been inserted
+     * @param row */
     public void fireRowInserted(int row){
         JCTableDataEvent event = new JCTableDataEvent(this, row, 0, 0, 0, ROW_INSERTED);
         fireTableDataEvent(event);
     }
     
     /** notifies the listeners that all data have been reset */
+    @Override
     public void fireDataReset(){
         JCTableDataEvent event = new JCTableDataEvent(this, 0, 0, 0, 0, RESET_APPROACHING);
         fireTableDataEvent(event);
@@ -343,13 +356,16 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         fireTableDataEvent(event);
     }
     
-    /** notifies the listeners that the format of the row has been changed */
+    /** notifies the listeners that the format of the row has been changed
+     * @param row */
     public void fireRowFormatChanged(int row){
         JCTableDataEvent event = new JCTableDataEvent(this, row, 0, 0, 0, ROW_FORMAT_CHANGED);
         fireTableDataEvent(event);        
     }
     
-    /** notifies the listeners that the format of the cell has been changed */
+    /** notifies the listeners that the format of the cell has been changed
+     * @param row
+     * @param col */
     public void fireCellFormatChanged(int row, int col){
         JCTableDataEvent event = new JCTableDataEvent(this, row, col, 0, 0, CELL_FORMAT_CHANGED);
         fireTableDataEvent(event);        
@@ -367,25 +383,34 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         fireTableDataEvent(event);        
     }
 
-    /** notifies the listeners that the format of the column labels has been changed */
+    /** notifies the listeners that the format of the column labels has been changed
+     * @param row1
+     * @param row2 */
     public void fireRowsSwapped(int row1, int row2){
         JCTableDataEvent event = new JCTableDataEvent(this, row1, 0, row2, 0, ROWS_SWAPPED);
         fireTableDataEvent(event);        
     }
 
-    /** notifies the listeners that an area of the table has to be resized */
+    /** notifies the listeners that an area of the table has to be resized
+     * @param col1
+     * @param col2 */
     public void fireAreaChanged(int col1, int col2){
         JCTableDataEvent event = new JCTableDataEvent(this, 0, col1, 0, col2, AREA_CHANGED);
         fireTableDataEvent(event);        
     }
     
-    /** notifies the listeners that an event has been added on the specified tier */
+    /** notifies the listeners that an event has been added on the specified tier
+     * @param row
+     * @param col1
+     * @param col2 */
     public void fireEventAdded(int row, int col1, int col2){
         fireCellSpanChanged(row, col1);
         fireAreaChanged(lower(col1), upper(col2));
     }
 
-    /** notifies the listeners that the cell span has changed */
+    /** notifies the listeners that the cell span has changed
+     * @param row
+     * @param col */
     public void fireCellSpanChanged(int row, int col){
         JCTableDataEvent event = new JCTableDataEvent(this, row, col, 0, 0, CELL_SPAN_CHANGED);
         fireTableDataEvent(event);        
@@ -394,7 +419,11 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     // Methods for getting values from the actual basic transcription    
 
     /** either returns the event corresponding to the position or
-     * throws a JexmaraldaException if there is no such event */
+     * throws a JexmaraldaException if there is no such event
+     * @param row
+     * @param col
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public Event getEvent(int row,int col) throws JexmaraldaException {
         Tier tier = transcription.getBody().getTierAt(row);
         TimelineItem tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col);
@@ -404,20 +433,27 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         return tier.getEventAtStartPoint(tli.getID());
     }
     
-    /** returns the tier that is held by the specified row */
+    /** returns the tier that is held by the specified row
+     * @param row
+     * @return  */
     public Tier getTier(int row) {
         return transcription.getBody().getTierAt(row);
     }
-    /** returns the timeline item corresponding to the specified position */
+    /** returns the timeline item corresponding to the specified position
+     * @param col
+     * @return  */
     public TimelineItem getTimelineItem(int col) {
         return transcription.getBody().getCommonTimeline().getTimelineItemAt(col);
     }
     
     /** returns the text of the speaker contribution
-     * that the event in the specified cell is a part of */
+     * that the event in the specified cell is a part of
+     * @param row
+     * @param col
+     * @return  */
     public String getTurnText(int row, int col){
         if ((row>=this.getNumRows()) || (col>=this.getNumColumns())) return "";
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         int startCol=col;
         while ((startCol>0) && (containsEvent(row, startCol-1))){
             startCol--;
@@ -444,21 +480,27 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     public BasicTranscription getPartOfTranscription(int[] rows, int startCol, int endCol){
         return this.getPartOfTranscription(rows, startCol, endCol, false);
     }
-    /** returns the part of the transcription between the two columns and the specified rows */
+    /** returns the part of the transcription between the two columns and the specified rows
+     * @param rows
+     * @param startCol
+     * @param endCol
+     * @param anchor
+     * @return  */
     public BasicTranscription getPartOfTranscription(int[] rows, int startCol, int endCol, boolean anchor){
         return transcription.getPartOfTranscription(getIDsOfRows(rows), getTimelineItem(startCol).getID(), getTimelineItem(endCol).getID(), anchor);
     }
     // ******************** BOOLEAN METHODS ************************************************
     
-    /** returns true if the specified cell contains an event, false otherwise */
+    /** returns true if the specified cell contains an event, false otherwise
+     * @param row
+     * @param col
+     * @return  */
     public boolean containsEvent(int row,int col) {
         if ((row>=this.getNumRows()) || (col>=this.getNumColumns())) return false;
+        if ((row<0) || (col<0)) return false;
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
-        if (tier.containsEventAtStartPoint(tli)){
-            return true;
-        }
-        return false;
+        return tier.containsEventAtStartPoint(tli);
     }
     
     /** returns true if the specified cell contains a link, false otherwise */
@@ -466,11 +508,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         if ((row>=this.getNumRows()) || (col>=this.getNumColumns())) return false;
         try {
             Event event = getEvent(row,col);
-            if (!event.getMedium().equals("none")){
-                return true;
-            } else {
-                return false;
-            }
+            return !event.getMedium().equals("none");
         } catch (JexmaraldaException je) {return false;}
     }
             
