@@ -134,7 +134,10 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         // init the annotation combo box
         DefaultComboBoxModel comboBoxModel3 = new DefaultComboBoxModel();
-        for (String dn : corpus.getDescriptionNames()){
+        //here the sorting alphabetically should be done
+        ArrayList<String> sortedListdesc = new ArrayList(corpus.getDescriptionNames());
+        Collections.sort(sortedListdesc, new SortIgnoreCase());
+        for (String dn : sortedListdesc){
             comboBoxModel3.addElement(dn);
         }
         descriptionComboBox.setModel(comboBoxModel3);

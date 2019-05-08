@@ -129,6 +129,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     org.exmaralda.folker.actions.fileactions.ImportAction importAction;
     org.exmaralda.folker.actions.fileactions.ExportAction exportAction;
     org.exmaralda.folker.actions.fileactions.OutputAction outputAction;
+    org.exmaralda.folker.actions.fileactions.TransformAction transformAction;
     org.exmaralda.folker.actions.fileactions.ExitAction exitAction;
     // ---------------------------
     org.exmaralda.folker.actions.editactions.CopyAction copyAction;
@@ -185,7 +186,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     ActionListener virtualKeyListener;
     private JButton editRecordingToolbarButton;
             
-    /** Creates a new instance of ApplicationControl */
+    /** Creates a new instance of ApplicationControl
+     * @param af */
     public ApplicationControl(ApplicationFrame af) {
         super(af, new WaveFormViewer(), new PartitureTableWithActions(af, false), null);
 
@@ -539,6 +541,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         importAction = new org.exmaralda.folker.actions.fileactions.ImportAction(this, FOLKERInternationalizer.getString("file_menu.import"), c.getIcon(Constants.IMPORT_ICON));
         exportAction = new org.exmaralda.folker.actions.fileactions.ExportAction(this, FOLKERInternationalizer.getString("file_menu.export"), c.getIcon(Constants.EXPORT_ICON));
         outputAction = new org.exmaralda.folker.actions.fileactions.OutputAction(this, FOLKERInternationalizer.getString("file_menu.output"), c.getIcon(Constants.OUTPUT_ICON));
+        transformAction = new org.exmaralda.folker.actions.fileactions.TransformAction(this, FOLKERInternationalizer.getString("file_menu.transform"), c.getIcon(Constants.OUTPUT_ICON));
         exitAction = new org.exmaralda.folker.actions.fileactions.ExitAction(this, FOLKERInternationalizer.getString("file_menu.exit"), null);
         // -----------------
         copyAction = new org.exmaralda.folker.actions.editactions.CopyAction(this, FOLKERInternationalizer.getString("edit_menu.copy"), c.getIcon(Constants.COPY_ICON));
@@ -600,6 +603,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         applicationFrame.fileMenu.add(exportAction);
         applicationFrame.fileMenu.addSeparator();
         applicationFrame.fileMenu.add(outputAction);
+        applicationFrame.fileMenu.add(transformAction);
         applicationFrame.fileMenu.addSeparator();
         // after this separator go the actions for opening recent files
         
@@ -948,6 +952,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         splitTranscriptionAction.setEnabled(enabled);
         exportAction.setEnabled(enabled);
         outputAction.setEnabled(enabled);
+        transformAction.setEnabled(enabled);
         editSpeakersAction.setEnabled(enabled);                
         editRecordingAction.setEnabled(enabled);
         editTranscriptionLogAction.setEnabled(enabled);

@@ -5,8 +5,10 @@
 -->        
 <xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:exmaralda="http://www.exmaralda.org" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    xmlns:exmaralda="http://www.exmaralda.org"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="exmaralda"
+>
 
     <!-- new 08-07-2016 -->
     <!-- A parameter can be passed spcifying the language of the document -->
@@ -137,8 +139,8 @@
                     <!-- ... -->
                     <particDesc>
                         <xsl:apply-templates select="//speaker"/>
-                        <xsl:if test="//contribution[@speaker-reference or count(child::*[not(self::pause or self::non-phonological or self::time)])&gt;0]">
-                            <!-- generate an anonymous speaker -->
+                        <xsl:if test="//contribution[not(@speaker-reference) and count(child::*[not(self::pause or self::non-phonological or self::time)])&gt;0]">
+                            <!-- generate an anonymous speaker -->                            
                             <person>
                                 <xsl:attribute name="xml:id" select="$ANONYMOUS_SPEAKER_ID"/>
                                 <xsl:attribute name="n" select="$ANONYMOUS_SPEAKER_ID"/>

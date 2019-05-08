@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Attribute;
 import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
 

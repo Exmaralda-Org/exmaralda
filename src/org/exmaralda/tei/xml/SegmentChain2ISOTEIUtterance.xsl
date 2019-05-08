@@ -19,7 +19,7 @@
                             <xsl:value-of select="@e"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
-		</xsl:element>
+			</xsl:element>
 		<!-- </annotatedU> -->
 	</xsl:template>
 
@@ -132,11 +132,20 @@
 	
 	<xsl:template match="*:ats">
 		<xsl:choose>
+			<!-- <ats n="HIAT:non-pho" id="Seg_14" s="T2" e="T2.TIE0.1">0,2s</ats> -->
 			<xsl:when test="string-length(translate(text()[1],'0123456789,s',''))=0">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">
 						<xsl:value-of select="text()"/>
 					</xsl:attribute>
+					<!-- added 05-05-2019 -->
+					<xsl:if test="@n='HIAT:non-pho'">
+						<xsl:attribute name="rend">
+							<xsl:text>((</xsl:text>
+							<xsl:value-of select="text()"/>
+							<xsl:text>))</xsl:text>
+						</xsl:attribute>						
+					</xsl:if>
 				</xsl:element>
 			</xsl:when>
 			<xsl:when test="text()='&#x2022;'">

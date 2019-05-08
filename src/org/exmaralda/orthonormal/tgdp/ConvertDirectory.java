@@ -5,6 +5,8 @@
  */
 package org.exmaralda.orthonormal.tgdp;
 
+// Test new setup, 16-04-2019
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
