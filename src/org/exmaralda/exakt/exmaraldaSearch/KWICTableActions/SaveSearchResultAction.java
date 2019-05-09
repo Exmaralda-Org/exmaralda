@@ -13,8 +13,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import java.util.prefs.Preferences;
@@ -26,7 +24,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
-import static org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CreateCollectionAction.CREATE_COLLECTION_FROM_SEARCH_RESULTS_XSLT;
 
 
 /**
