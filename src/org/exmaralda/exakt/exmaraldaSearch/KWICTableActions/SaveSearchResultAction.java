@@ -16,6 +16,12 @@ import java.util.*;
 import org.jdom.*;
 import org.jdom.transform.*;
 import java.util.prefs.Preferences;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
 
@@ -50,8 +56,26 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
             SearchResultList list = exaktFrame.getActiveSearchPanel().getSearchResultList();
             COMACorpusInterface corpus = exaktFrame.getActiveSearchPanel().getCorpus();
             Vector<String[]> meta = exaktFrame.getActiveSearchPanel().getMeta();
-            Document doc = org.exmaralda.exakt.utilities.FileIO.COMASearchResultListToXML(list, corpus, meta, exaktFrame.getActiveSearchPanel().getCorpus().getCorpusPath());            
-
+            
+            
+            //get the current KWIC results
+            Document searchResultDoc = null;
+            StreamSource searchResultSource = null;
+            String searchResultString = null;
+            try{
+                searchResultDoc = org.exmaralda.exakt.utilities.FileIO.COMASearchResultListToXML(list, corpus, meta, exaktFrame.getActiveSearchPanel().getCorpus().getCorpusPath());
+                searchResultString = org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(searchResultDoc);
+                searchResultSource = new StreamSource(new StringReader(searchResultString));
+            } catch(IOException ioE){
+                String message = "Exception getting the KWIC result:";
+                message += ioE.getMessage() + "\n";
+                javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
+                ioE.printStackTrace();
+                return;
+            }
+            
+            
+            //transform XML concordance into HTML
             if (type.startsWith("HTML")){
                 // prepare the transformation                
                 Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
@@ -64,9 +88,8 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                     try {
                         org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory ssf =
                                 new org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory(true);
-                        String result = 
-                                ssf.applyExternalStylesheetToString(pathToXSL, org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(doc));
-                        doc = org.exmaralda.exakt.utilities.FileIO.readDocumentFromString(result);
+                        searchResultString = ssf.applyExternalStylesheetToString(pathToXSL, searchResultString);
+                        
                         //transformer = new XSLTransformer(pathToXSL);
                     } catch (Exception ex) {
                         String message = "There is a problem with " + pathToXSL + ": \n";
@@ -78,25 +101,78 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                 }
                 try {
                     if ((pathToXSL.length()==0) || failed) {
-                        // use internal stylesheet
+                        
                         java.io.InputStream is = getClass().getResourceAsStream(PATH_TO_INTERNAL_STYLESHEET);
-                        transformer = new XSLTransformer(is);
-                        doc = transformer.transform(doc);
+                        StreamSource xsltSource = new StreamSource(is);
+
+                        //create TransformerFactory and TransformerInstance
+                        TransformerFactory tf = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null);
+                        Transformer t = tf.newTransformer(xsltSource);
+
+
+                        //transform and fetch result as string
+                        StreamSource resultSource = new StreamSource(new StringReader(searchResultString));
+                        StringWriter resultWriter = new StringWriter();
+                        t.transform(searchResultSource, new StreamResult(resultWriter));
+
+                        // result is not saved anywhere (could be done for debugging)
+                        searchResultString = resultWriter.toString(); 
+                        
                     }                    
-                } catch (XSLTransformException ex) {
-                    String message = "Stylesheet transformation failed:";
+                } catch (TransformerConfigurationException ex) {
+                    String message = "There is a problem with the XSLT transformation (TransformerConfigurationException): \n";
                     message += ex.getMessage() + "\n";
                     javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
-                    ex.printStackTrace();
-                    return;
+                } catch (TransformerException ex) {
+                    String message = "There is a problem with the XSLT transformation (TransformerException): \n";
+                    message += ex.getMessage() + "\n";
+                    javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
                 }
             }
+            
+            //if CSV is desired
+            if (type.startsWith("CSV")){
+                // prepare the transformation  
+                XSLTransformer transformer = null;
+                boolean failed = false;
+                
+                
+                // try to use external stylesheet
+                try {
+                    
+                    java.io.InputStream is = getClass().getResourceAsStream("/org/exmaralda/exakt/resources/SearchResult2CSV.xsl");
+                    StreamSource xsltSource = new StreamSource(is);
+
+                    //create TransformerFactory and TransformerInstance
+                    TransformerFactory tf = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null);
+                    Transformer t = tf.newTransformer(xsltSource);
+                
+
+                    //transform and fetch result as string
+                    StreamSource resultSource = new StreamSource(new StringReader(searchResultString));
+                    StringWriter resultWriter = new StringWriter();
+                    t.transform(searchResultSource, new StreamResult(resultWriter));
+                
+                    // result is not saved anywhere (could be done for debugging)
+                    searchResultString = resultWriter.toString();  
+                    
+                }  catch (Exception ex) {
+                    String message = "General problem with CSV export:" + ": \n";
+                    message += ex.getMessage() + "\n";
+                    failed = true;
+                    javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
+                } 
+                
+            }
+            
             try {
-                //list.writeXML(file);
-                org.exmaralda.exakt.utilities.FileIO.writeDocumentToLocalFile(file,doc);
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(searchResultString);
+                fileWriter.flush();
+                fileWriter.close();
                 exaktFrame.setLastSearchResultPath(file);
                 exaktFrame.getActiveSearchPanel().setCurrentSearchResultFile(file);
-                exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);
+                exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);                
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(exaktFrame, ex.getMessage());
                 ex.printStackTrace();
