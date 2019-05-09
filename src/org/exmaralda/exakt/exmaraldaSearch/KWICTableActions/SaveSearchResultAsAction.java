@@ -32,6 +32,7 @@ public class SaveSearchResultAsAction extends org.exmaralda.exakt.exmaraldaSearc
         fileChooser.setDialogTitle("Save a concordance");
         fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.HTMLFileFilter());
         fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.XMLFileFilter());
+        fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.CSVFileFilter());
         
         boolean goAhead = false;
         File file = null;
@@ -47,8 +48,10 @@ public class SaveSearchResultAsAction extends org.exmaralda.exakt.exmaraldaSearc
                     // add appropriate suffix
                     if (fileChooser.getFileFilter().getDescription().startsWith("XML")){
                         file = new File(file.getAbsolutePath() + ".xml");
+                    } else if(fileChooser.getFileFilter().getDescription().startsWith("CSV")) {
+                        file = new File(file.getAbsolutePath() + ".csv");                    
                     } else {
-                        file = new File(file.getAbsolutePath() + ".html");                    
+                        file = new File(file.getAbsolutePath() + ".html");   
                     }
                 }
 

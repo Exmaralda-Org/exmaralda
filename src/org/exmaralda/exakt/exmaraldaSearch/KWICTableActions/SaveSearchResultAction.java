@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import java.util.prefs.Preferences;
@@ -50,8 +52,21 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
             SearchResultList list = exaktFrame.getActiveSearchPanel().getSearchResultList();
             COMACorpusInterface corpus = exaktFrame.getActiveSearchPanel().getCorpus();
             Vector<String[]> meta = exaktFrame.getActiveSearchPanel().getMeta();
+            
+            //this is the KWIC as XML
             Document doc = org.exmaralda.exakt.utilities.FileIO.COMASearchResultListToXML(list, corpus, meta, exaktFrame.getActiveSearchPanel().getCorpus().getCorpusPath());            
 
+            //this is the KWIC as String (with XML content)
+            String result = "";
+            try {
+                result = org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(doc);
+            } catch (IOException ex) {
+                String message = "There is a problem with getting the concordance result"+"\n";
+                message += ex.getMessage() + "\n";
+                javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
+            }
+            
+            //transform XML concordance into HTML
             if (type.startsWith("HTML")){
                 // prepare the transformation                
                 Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
@@ -64,9 +79,8 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                     try {
                         org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory ssf =
                                 new org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory(true);
-                        String result = 
-                                ssf.applyExternalStylesheetToString(pathToXSL, org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(doc));
-                        doc = org.exmaralda.exakt.utilities.FileIO.readDocumentFromString(result);
+                        result = ssf.applyExternalStylesheetToString(pathToXSL, result);
+                        
                         //transformer = new XSLTransformer(pathToXSL);
                     } catch (Exception ex) {
                         String message = "There is a problem with " + pathToXSL + ": \n";
@@ -91,12 +105,35 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                     return;
                 }
             }
+            
+            //if CSV is desired
+            if (type.startsWith("CSV")){
+                // prepare the transformation  
+                XSLTransformer transformer = null;
+                boolean failed = false;
+                
+                // try to use external stylesheet
+                try {
+                    org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory ssf =
+                            new org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory(true);
+                    result = ssf.applyExternalStylesheetToString("/org/exmaralda/exakt/resources/SearchResult2CSV.xsl", result);
+                } catch (Exception ex) {
+                    String message = "There is a problem with " + "/org/exmaralda/exakt/resources/SearchResult2CSV.xsl" + ": \n";
+                    message += ex.getMessage() + "\n";
+                    failed = true;
+                    javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
+                } 
+                
+            }
+            
             try {
-                //list.writeXML(file);
-                org.exmaralda.exakt.utilities.FileIO.writeDocumentToLocalFile(file,doc);
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(result);
+                fileWriter.flush();
+                fileWriter.close();
                 exaktFrame.setLastSearchResultPath(file);
                 exaktFrame.getActiveSearchPanel().setCurrentSearchResultFile(file);
-                exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);
+                exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);                
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(exaktFrame, ex.getMessage());
                 ex.printStackTrace();
