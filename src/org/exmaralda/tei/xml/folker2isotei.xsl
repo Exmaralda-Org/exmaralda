@@ -26,6 +26,9 @@
     <!-- new 05-07-2018 -->
     <!-- if this parameter is set to TRUE, a <seg type='contribution'> will be introduced -->
     <xsl:param name="ENFORCE_SEG">TRUE</xsl:param>
+    <!-- new 10-05-2019 -->
+    <!-- if this parameter is set to TRUE, <segs> will be classified according to SegCor terminology -->
+    <xsl:param name="SEGCOR_UNITS">TRUE</xsl:param>
     
     <xsl:output method="xml" encoding="UTF-8"/>
     
@@ -377,20 +380,51 @@
             <w>dosenöffner</w>
             <boundary type="final" movement="not-qualified" latching="no"/>
         </line> -->
-        <seg xmlns="http://www.tei-c.org/ns/1.0" type="line">
+        <seg xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="xml:id">
                 <xsl:choose>
                     <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
                     <xsl:otherwise>seg_<xsl:value-of select="generate-id()"/></xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>            
+            <xsl:attribute name="type">
+                <xsl:choose>
+                    <xsl:when test="$SEGCOR_UNITS='TRUE'">maximal_unit</xsl:when>
+                    <xsl:otherwise>line</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
             <xsl:attribute name="subtype">
-                <xsl:value-of select="child::boundary/@type"/>
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="child::boundary/@movement"/>
-                <xsl:if test="child::boundary/@latching='yes'">
-                    <xsl:text> latching</xsl:text>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="$SEGCOR_UNITS='TRUE'">
+                        <xsl:variable name="GAT_MOVEMENT" select="child::boundary/@movement"/>
+                        <xsl:choose>
+                            <!-- <xsl:when test="$MOVEMENT='low-fall'">S</xsl:when>
+                            <xsl:when test="$MOVEMENT='fall'">CA</xsl:when>
+                            <xsl:when test="$MOVEMENT='steady'">A</xsl:when>
+                            <xsl:when test="$MOVEMENT='rise'">C</xsl:when>
+                            <xsl:when test="$MOVEMENT='high-rise'">U</xsl:when>
+                            <xsl:when test="$MOVEMENT='other'">CN</xsl:when>
+                            <xsl:when test="$MOVEMENT='not-qualified'">N</xsl:when> -->
+
+                            <xsl:when test="$GAT_MOVEMENT='low-fall'">simple</xsl:when>
+                            <xsl:when test="$GAT_MOVEMENT='fall'">complex_abandoned</xsl:when>
+                            <xsl:when test="$GAT_MOVEMENT='steady'">abandoned</xsl:when>
+                            <xsl:when test="$GAT_MOVEMENT='rise'">complex</xsl:when>
+                            <xsl:when test="$GAT_MOVEMENT='high-rise'">uninterpretable</xsl:when>
+                            <xsl:when test="$GAT_MOVEMENT='other'">complex_non-sentential</xsl:when>
+                            <xsl:when test="$GAT_MOVEMENT='not-qualified'">non-sentential</xsl:when>
+                            <xsl:otherwise></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="child::boundary/@type"/>
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="child::boundary/@movement"/>
+                        <xsl:if test="child::boundary/@latching='yes'">
+                            <xsl:text> latching</xsl:text>
+                        </xsl:if>                        
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
             <xsl:apply-templates/>            
         </seg>

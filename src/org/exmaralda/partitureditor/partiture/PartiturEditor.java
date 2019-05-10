@@ -31,7 +31,7 @@ import org.exmaralda.common.helpers.Internationalizer;
 
 // *************************************************************************************
 
-
+// WHY?
 
 //=========================================================
 /**
@@ -98,6 +98,8 @@ public class PartiturEditor extends javax.swing.JFrame
   
     /** Creates new form PartiturEditor */
     public PartiturEditor() {
+        
+        System.out.println("Starting up");
         
         new StartupSplashScreen(this);
         
@@ -317,7 +319,7 @@ public class PartiturEditor extends javax.swing.JFrame
     
    /** listener method for the EXAKT search dialog
      * @param ev */ 
-    @Override
+    @Override 
     public void processEvent(KWICTableEvent ev) {
         if (ev.getType() == KWICTableEvent.DOUBLE_CLICK){
             try {

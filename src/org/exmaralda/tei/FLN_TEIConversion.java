@@ -26,10 +26,11 @@ import org.xml.sax.SAXException;
 public class FLN_TEIConversion {
 
     //String CORPUS ="FOLK";
+    String CORPUS ="FOLK-GOLD";
     //String CORPUS ="GWSS";
-    String CORPUS="ISW";
-    String IN = "F:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
-    String OUT = "F:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;
+    //String CORPUS="ISW";
+    String IN = "D:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
+    String OUT = "D:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;
     /**
      * @param args the command line arguments
      */

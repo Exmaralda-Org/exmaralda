@@ -96,7 +96,9 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         }
     }
     
-    /** sets transcription and format table in one go (this can be reasonable for performance reasons */
+    /** sets transcription and format table in one go (this can be reasonable for performance reasons
+     * @param t
+     * @param tft */
     public void setTranscriptionAndTierFormatTable(BasicTranscription t, TierFormatTable tft){
         transcription = t;
         formats = new TierFormatTable(transcription);   // first create a default format table
@@ -112,12 +114,14 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         fireDataReset();
     }
     
-    /** returns the format table that this model works with */
+    /** returns the format table that this model works with
+     * @return  */
     public TierFormatTable getTierFormatTable() {
         return formats;
     }
     
-    /** sets the format table that this model works with */
+    /** sets the format table that this model works with
+     * @param tft */
     public void setTierFormatTable(TierFormatTable tft) {
         formats = new TierFormatTable(transcription);   // first create a default format table
         formats.setTimelineItemFormat(tft.getTimelineItemFormat());
@@ -129,7 +133,8 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         fireFormatReset();                              // CHANGE! in version 1.01
     }
     
-    /** determines if space characters are to be shown */
+    /** determines if space characters are to be shown
+     * @param show */
     public void setShowSpecialCharacters(boolean show){
         showSpecialChars = show;
         for (int r=0; r<getNumRows(); r++){
@@ -139,13 +144,18 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         }
     }
 
-    /** returns true if space characters are currently shown, false otherwise */
+    /** returns true if space characters are currently shown, false otherwise
+     * @return  */
     public boolean getShowSpecialCharacters(){
         return showSpecialChars;
     }
     
     // Implementation of methods specified by AbstractDataSource/EditableTableDataModel
-    /** returns the content of the cell viz. the description of the corresponding event */
+    /** returns the content of the cell viz. the description of the corresponding event
+     * @param row
+     * @param col
+     * @return  */
+    @Override
     public java.lang.Object getTableDataItem(int row, int col) {
         try {
             
@@ -160,7 +170,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
             }*/
             String rendered = e.getDescription();
             if (!showSpecialChars) {return rendered;}
-            StringBuffer sb=new StringBuffer();
+            StringBuilder sb=new StringBuilder();
             for (int pos=0; pos<rendered.length(); pos++){
                 if (rendered.charAt(pos)==' '){
                     sb.append("\u00B7");
@@ -194,7 +204,9 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         }
     }
     
-    /** returns the content of the row label viz. the description of speaker and category of the corresponding tier */
+    /** returns the content of the row label viz. the description of speaker and category of the corresponding tier
+     * @param row
+     * @return  */
     @Override
     public java.lang.Object getTableRowLabel(int row) {
         Tier tier = transcription.getBody().getTierAt(row);
@@ -224,7 +236,12 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
                  ((oldValue!=null) && (!(oldValue.equals(newValue)))));
     }
 
-    /** sets the event in the specified position to the specified object */
+    /** sets the event in the specified position to the specified object
+     * @param v
+     * @param row
+     * @param col
+     * @return  */
+    @Override
     public boolean setTableDataItem(final java.lang.Object v,int row,int col) {
         String value = (String)v;
         newValue = value;
