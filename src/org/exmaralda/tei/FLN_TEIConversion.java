@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 public class FLN_TEIConversion {
 
     //String CORPUS ="FOLK";
-    String CORPUS ="FOLK-GOLD";
+    String CORPUS ="FOLK-GOLD-SEGCOR";
     //String CORPUS ="GWSS";
     //String CORPUS="ISW";
     String IN = "D:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
@@ -63,9 +63,11 @@ public class FLN_TEIConversion {
         });
         StylesheetFactory sf = new StylesheetFactory(true);
         new File(OUT).mkdir();
-        for (File existingFile : new File(OUT).listFiles()){
-            System.out.println("Deleting " + existingFile.getAbsolutePath());
-            Files.delete(existingFile.toPath());
+        if (new File(OUT).listFiles()!=null){
+            for (File existingFile : new File(OUT).listFiles()){
+                System.out.println("Deleting " + existingFile.getAbsolutePath());
+                Files.delete(existingFile.toPath());
+            }
         }
         for (File file : files){ 
             File out = new File(new File(OUT), file.getName().replaceAll("\\.fln", ".xml"));

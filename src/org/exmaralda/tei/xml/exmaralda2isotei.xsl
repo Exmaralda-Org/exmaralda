@@ -149,19 +149,19 @@
     <!-- ************************************************* -->
     <xsl:template name="MAKE_TIMELINE">
         <timeline unit="s" xmlns="http://www.tei-c.org/ns/1.0">
-            <xsl:attribute name="origin">
+            <!-- <xsl:attribute name="origin">
                 <xsl:choose>
                     <xsl:when test="//tli[1]/@time=0.0"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="//tli[1]/@id"/></xsl:when>
                     <xsl:otherwise><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:otherwise>
                 </xsl:choose>                
-            </xsl:attribute>
+            </xsl:attribute> -->
             <xsl:if test="//tli[1]/@time&gt;0.0">
-                <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0"/>                        
+                <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0" interval="0.0" since="T_START"/>                        
             </xsl:if>
             <xsl:apply-templates select="//tli"/>
         </timeline>        
     </xsl:template>
-
+    
     <!-- CHANGE FOR ISO: use decimal seconds notation, use intervals and since instead of absoulute -->
     <xsl:template match="tli[position()&gt;1]">
         <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
@@ -225,7 +225,10 @@
                     <xsl:otherwise>0</xsl:otherwise>
                 </xsl:choose>                
             </xsl:attribute>
-            <xsl:element name="persName"></xsl:element>
+            <xsl:element name="persName">
+                <xsl:element name="forename">?</xsl:element>
+                <xsl:element name="abbr"><xsl:value-of select="abbreviation"/></xsl:element>                                
+            </xsl:element>
         </xsl:element>        
     </xsl:template>
     
@@ -245,6 +248,7 @@
         <!-- CHANGE FOR ISO: who, start and end attributes on annotationBlock instead of on u and as anchors -->
         <!-- change 03-03-2016: element renamed, namespace switch no longer necessary -->        
         <xsl:element name="annotationBlock" xmlns="http://www.tei-c.org/ns/1.0">            
+            <xsl:attribute name="xml:id"><xsl:text>ab_</xsl:text><xsl:value-of select="generate-id()"/></xsl:attribute>
             <xsl:attribute name="who">
                 <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="parent::tier/@speaker"/>
             </xsl:attribute>
