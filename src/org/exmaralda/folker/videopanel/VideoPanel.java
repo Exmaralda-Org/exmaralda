@@ -286,6 +286,8 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
 
     @Override
     public void processTimeSelectionEvent(TimeSelectionEvent event) {
+
+        String os = System.getProperty("os.name").substring(0,3);
         
         if (event.getType()!=TimeSelectionEvent.ZOOM_CHANGED){
             double selectionStart = event.getStartTime();
@@ -300,7 +302,12 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 videoPlayer.setEndTime(selectionEnd / 1000.0);
                 playSelectionButton.setEnabled(true);
                 
-                ((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                // issue #189
+                if (os.equalsIgnoreCase("win")) {
+                    ((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                } else if (os.equalsIgnoreCase("mac")) {
+                    ((CocoaQTPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);                    
+                }
 
 
             } else {
