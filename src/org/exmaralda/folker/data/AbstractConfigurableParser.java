@@ -141,7 +141,7 @@ public abstract class AbstractConfigurableParser extends AbstractParser {
 
     public String parseText(String text, String patternName, Hashtable<String,String> patterns) throws JDOMException, IOException{
         String docString = "<X>" + text.replace("&", "&amp;") + "</X>";
-        System.out.println("=== " + docString);
+        //System.out.println("=== " + docString);
         Element e = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString(docString).getRootElement();
         String returnText = "";
         for (Object o : e.getContent()){

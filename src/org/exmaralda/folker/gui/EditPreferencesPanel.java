@@ -41,7 +41,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         boolean timesIsThere = false;
         for (String fontname : FONTS){
             model.addElement(fontname);
-            System.out.println(fontname);
+            //System.out.println(fontname);
             if (fontname.equals("Arial")){ arialIsThere = true;}
             if (fontname.equals("Times New Roman")){ timesIsThere = true;}
         }

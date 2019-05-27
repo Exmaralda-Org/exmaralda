@@ -24,6 +24,7 @@ public class PlayAction extends AbstractApplicationAction {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         applicationControl.play();
     }

@@ -803,6 +803,17 @@ public final class ApplicationControl implements  ListSelectionListener,
         } 
         //timeViewer.setPixelsPerSecond(10.0);
         player.setSoundFile(tryPath);            
+
+        // 27-05-2019: issue #189
+        if (player instanceof CocoaQTPlayer){
+            CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)player;
+            Component visibleComponent = cocoaQTPlayer.getVisibleComponent();
+            visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
+            applicationFrame.dummyPanelForCocoaQT.removeAll();
+            applicationFrame.dummyPanelForCocoaQT.add(visibleComponent);
+        }
+
+
         playerState=PLAYER_IDLE;         
         currentMediaPath = path;
 

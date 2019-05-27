@@ -584,6 +584,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
 
     @Override
     public void processPlayableEvent(PlayableEvent e) {
+        //System.out.println("This is AbstractTimeviewPartiturPlayerControl.processPlayableEvent" );
         int type = e.getType();
         switch (type){
             case PlayableEvent.SOUNDFILE_SET :

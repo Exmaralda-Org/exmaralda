@@ -87,6 +87,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     private void initComponents() {
 
         applicationToolBar = new javax.swing.JToolBar();
+        dummyPanelForCocoaQT = new javax.swing.JPanel();
         applicationMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         editMenu = new javax.swing.JMenu();
@@ -104,6 +105,13 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         applicationToolBar.setMaximumSize(new java.awt.Dimension(800, 24));
         applicationToolBar.setMinimumSize(new java.awt.Dimension(200, 24));
         applicationToolBar.setPreferredSize(new java.awt.Dimension(800, 24));
+
+        dummyPanelForCocoaQT.setMaximumSize(new java.awt.Dimension(1, 1));
+        dummyPanelForCocoaQT.setMinimumSize(new java.awt.Dimension(1, 1));
+        dummyPanelForCocoaQT.setPreferredSize(new java.awt.Dimension(1, 1));
+        dummyPanelForCocoaQT.setLayout(new javax.swing.BoxLayout(dummyPanelForCocoaQT, javax.swing.BoxLayout.LINE_AXIS));
+        applicationToolBar.add(dummyPanelForCocoaQT);
+
         getContentPane().add(applicationToolBar, java.awt.BorderLayout.NORTH);
 
         fileMenu.setText(FOLKERInternationalizer.getString("file_menu"));
@@ -210,6 +218,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar applicationMenuBar;
     public javax.swing.JToolBar applicationToolBar;
+    javax.swing.JPanel dummyPanelForCocoaQT;
     public javax.swing.JMenu editMenu;
     public javax.swing.JMenu fileMenu;
     public javax.swing.JMenu helpMenu;

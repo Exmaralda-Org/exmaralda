@@ -77,6 +77,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         modeButtonGroup = new javax.swing.ButtonGroup();
         filterButtonGroup = new javax.swing.ButtonGroup();
         applicationToolBar = new javax.swing.JToolBar();
+        dummyPanelForCocoaQT = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         playerControlsPanel = new javax.swing.JPanel();
         buttonPanel = new javax.swing.JPanel();
@@ -142,6 +143,13 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         });
 
         applicationToolBar.setRollover(true);
+
+        dummyPanelForCocoaQT.setMaximumSize(new java.awt.Dimension(1, 1));
+        dummyPanelForCocoaQT.setMinimumSize(new java.awt.Dimension(1, 1));
+        dummyPanelForCocoaQT.setPreferredSize(new java.awt.Dimension(1, 1));
+        dummyPanelForCocoaQT.setLayout(new javax.swing.BoxLayout(dummyPanelForCocoaQT, javax.swing.BoxLayout.LINE_AXIS));
+        applicationToolBar.add(dummyPanelForCocoaQT);
+
         getContentPane().add(applicationToolBar, java.awt.BorderLayout.NORTH);
 
         mainPanel.setLayout(new java.awt.BorderLayout());
@@ -562,6 +570,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     private javax.swing.JButton changeSpeakerButton;
     public javax.swing.JScrollPane contributionTableScrollPane;
     private javax.swing.JPanel correctionPanel;
+    javax.swing.JPanel dummyPanelForCocoaQT;
     private javax.swing.JButton editContributionButton;
     private javax.swing.JPanel editControlsPanel;
     public javax.swing.JMenu editMenu;

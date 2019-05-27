@@ -1486,6 +1486,16 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         ((WaveFormViewer)timeViewer).setSoundFile(tryPath);
         //timeViewer.setPixelsPerSecond(10.0);
         player.setSoundFile(tryPath);            
+        
+        // 27-05-2019: issue #189
+        if (player instanceof CocoaQTPlayer){
+            CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)player;
+            Component visibleComponent = cocoaQTPlayer.getVisibleComponent();
+            visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
+            applicationFrame.dummyPanelForCocoaQT.removeAll();
+            applicationFrame.dummyPanelForCocoaQT.add(visibleComponent);
+        }
+        
         timeViewScrollPane.revalidate();
         playerState=PLAYER_IDLE;         
         currentMediaPath = tryPath;
@@ -2662,6 +2672,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     @Override
     public void processPlayableEvent(PlayableEvent e) {
         super.processPlayableEvent(e);
+        System.out.println("This is ApplicationControl.processPlayableEvent" );
         int type = e.getType();
         switch (type){
             case PlayableEvent.SOUNDFILE_SET :
@@ -2682,7 +2693,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             case PlayableEvent.PLAYBACK_RESUMED :
                 status(FOLKERInternationalizer.getString("status.playbackcontinued"));
                 break;
-            case PlayableEvent.POSITION_UPDATE :
+            case PlayableEvent.POSITION_UPDATE :                
                 double pos = e.getPosition();
                 applicationFrame.mainPanel.cursorTimeLabel.setText("   " + org.exmaralda.folker.utilities.TimeStringFormatter.formatMiliseconds(pos*1000.0,2) + "   ");
                 break;

@@ -289,10 +289,10 @@ public class ContributionTextPane extends javax.swing.JTextPane
         } catch (BadLocationException ex) {
             Logger.getLogger(ContributionTextPane.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Offset1: " + startOffset);
-        System.out.println("Offset2: " + endOffset);
-        System.out.println("Cursor position: " + cursorPosition);
-        System.out.println("Event: " + splitEvent.getText());
+        //System.out.println("Offset1: " + startOffset);
+        //System.out.println("Offset2: " + endOffset);
+        //System.out.println("Cursor position: " + cursorPosition);
+        //System.out.println("Event: " + splitEvent.getText());
         
         String firstPart = splitEvent.getText().substring(0, splitPosition);
         String lastPart = splitEvent.getText().substring(splitPosition);

@@ -64,16 +64,16 @@ public class PatternReader {
 
     public String getPattern(int level, String name, String languageCode) throws JDOMException{
         String xp = "//level[@level='" + Integer.toString(level) + "']/pattern[@name='" + name + "']";
-        System.out.println(xp);
+        //System.out.println(xp);
         Element e =  (Element) XPath.newInstance(xp).selectSingleNode(document);
         String pattern = resolveElement(e.getChild("regex"), languageCode);
         if (!("default".equals(languageCode))){
             String xpath = "descendant::language[@name='" + languageCode + "']/regex";
-            System.out.println(xpath);
+            //System.out.println(xpath);
             Element regexChildOfThisLanguage = (Element) XPath.selectSingleNode(e, xpath);
-            System.out.println("Null?");
+            //System.out.println("Null?");
             if (regexChildOfThisLanguage!=null){
-                System.out.println("Not null");
+                //System.out.println("Not null");
                 pattern = resolveElement(regexChildOfThisLanguage, languageCode);
             }
         }        
