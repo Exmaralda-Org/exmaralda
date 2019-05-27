@@ -11,12 +11,14 @@
 
 package org.exmaralda.orthonormal.application;
 
+import com.apple.eawt.ApplicationEvent;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.exmaralda.common.application.HelpMenu;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.jdom.JDOMException;
@@ -50,6 +52,13 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         applicationControl.retrieveSettings();
 
         contributionTableScrollPane.setViewportView(applicationControl.contributionListTable);
+
+        // if this is a MAC OS: init the MAC OS X specific actions (added 27-05-2019: issue #184)
+        String os = System.getProperty("os.name").substring(0,3);
+        if (os.equalsIgnoreCase("mac")) {
+            // added 03-03-2010
+            setupMacOSXApplicationListener();
+        }
 
         if (args.length>0){
             String fileNameToOpen = args[0];
@@ -653,4 +662,74 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     } 
     
 
+    /** added 27-05-2019: issue # 184*/
+    private void setupMacOSXApplicationListener() {
+        final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
+        application.setEnabledAboutMenu(true); // damit ein "Ueber " Menu erscheint
+        application.addPreferencesMenuItem(); // "Einstellen..." Dialog
+        application.setEnabledPreferencesMenu(true); // diesen Dialog auch
+        application.addApplicationListener(new com.apple.eawt.ApplicationListener() {
+
+            @Override
+            public void handleAbout(com.apple.eawt.ApplicationEvent ae) {
+                ((HelpMenu)helpMenu).aboutAction.actionPerformed(null);
+                ae.setHandled(true); // habe fertig...
+            }
+
+            // app wird ueber den finder geoeffnet. wie auch sonst.
+            // (lies: total unnuetz!)
+            @Override
+            public void handleOpenApplication(ApplicationEvent ae) {
+            }
+
+            @Override
+            public void handlePreferences(ApplicationEvent ae) {
+                applicationControl.editPreferencesAction.actionPerformed(null);
+                ae.setHandled(true);
+            }
+
+            @Override
+            public void handlePrintFile(ApplicationEvent ae) {
+                System.out.println("Drucken?!");
+                JOptionPane.showMessageDialog(rootPane, "Drucken wird nicht unterstuetzt.\b Bitte nutzen Sie die Funktionen unter\bDatei > Ausgabe...");
+                ae.setHandled(true);
+            }
+
+            @Override
+            public void handleQuit(ApplicationEvent ae) {
+                boolean reallyQuit = applicationControl.exitApplication();
+                ae.setHandled(reallyQuit); // da wird wohl nichts mehr draus!
+            }
+
+            // anwendung laeuft bereits und jemand startet es nochmal
+            @Override
+            public void handleReOpenApplication(ApplicationEvent ae) {
+                System.out.println("Laeuft schon");
+                // will ich mehrere instanzen? nein
+                //JOptionPane.showMessageDialog(new JFrame(), "You already have an instance\nof the EXMARaLDA Partitur-Editor running.");
+                ae.setHandled(true);
+            }
+
+            // anwendung laeuft schon, dokument wird ueber den finder geoeffnet
+            @Override
+            public void handleOpenFile(ApplicationEvent ae) {
+                try{
+                    boolean proceed = true;
+                    if (applicationControl.DOCUMENT_CHANGED){
+                        proceed = applicationControl.checkSave();
+                    }
+                    if (!proceed) return;
+                    String fileNameToOpen = ae.getFilename();
+                    File fileToOpen = new File(fileNameToOpen);
+                    applicationControl.openTranscriptionFile(fileToOpen);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(rootPane, e.getLocalizedMessage());
+                }
+            }
+           });
+	}
+    
+    
+    
 }

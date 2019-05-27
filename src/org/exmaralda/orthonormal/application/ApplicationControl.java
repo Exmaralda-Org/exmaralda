@@ -951,13 +951,14 @@ public final class ApplicationControl implements  ListSelectionListener,
     }
 
     
-    public void exitApplication(){
-        if (!checkSave()) return;
+    public boolean exitApplication(){
+        if (!checkSave()) return false;
         System.out.println("Application terminated");
         System.out.println("-----------------------");
         storeSettings();
         writeLexicon();
         System.exit(0);
+        return true;
     }
     
     
