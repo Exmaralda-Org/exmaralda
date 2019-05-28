@@ -19,9 +19,9 @@ import org.jdom.JDOMException;
 public class GenerateXMLLexicon {
 
     //public static String PATH = "C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK";
-    public static String PATH = "F:\\AGD-DATA\\dgd2_data\\transcripts\\UNSD";
-    //String OUT = "F:\\Dropbox\\IDS\\FOLK\\Normalisierung\\FOLK_Normalization_Lexicon_MAY_2018.xml";
-    String OUT = "F:\\Dropbox\\IDS\\AGD\\UNSD-Maitz\\20180517_Workshop_IDS\\UNSD_Normalization_Lexicon_MAY_2018.xml";
+    public static String PATH = "D:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK";
+    String OUT = "D:\\Dropbox\\IDS\\FOLK\\Normalisierung\\FOLK_Normalization_Lexicon_MAY_2019.xml";
+    //String OUT = "F:\\Dropbox\\IDS\\AGD\\UNSD-Maitz\\20180517_Workshop_IDS\\UNSD_Normalization_Lexicon_MAY_2018.xml";
     public static FilenameFilter FLN_FILTER = new FilenameFilter(){
         @Override
         public boolean accept(File dir, String name) {
