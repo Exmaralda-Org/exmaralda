@@ -368,26 +368,35 @@ public class BasicTranscription extends AbstractTranscription {
     }
 
     public void merge(BasicTranscription otherTrans) throws JexmaraldaException{
+        merge(otherTrans, false);
+    }
         
+    public void merge(BasicTranscription otherTrans, boolean useIDs) throws JexmaraldaException{
         // merge speakertables
-        Hashtable<String,String> speakerMappings = new Hashtable<String,String>();
+        Map<String,String> speakerMappings = new HashMap<String,String>();
         Speakertable thisSpeakertable = getHead().getSpeakertable();
         Speakertable otherSpeakertable = otherTrans.getHead().getSpeakertable();
         for (int pos=0; pos<otherSpeakertable.getNumberOfSpeakers(); pos++){
             Speaker speaker = otherSpeakertable.getSpeakerAt(pos);
             String oldID = speaker.getID();
-            String newID = thisSpeakertable.getFreeID();
-            speaker.setID(newID);
-            thisSpeakertable.addSpeaker(speaker);
-            speakerMappings.put(oldID, newID);
+            if ((!useIDs) || (useIDs && (!thisSpeakertable.containsSpeakerWithID(oldID)))){
+                String newID = thisSpeakertable.getFreeID();
+                speaker.setID(newID);
+                thisSpeakertable.addSpeaker(speaker);
+                speakerMappings.put(oldID, newID);
+            } else {
+                speakerMappings.put(oldID, oldID);                
+            }
         }
         
         //merge timelines
-        Hashtable<String,String> tliMappings = new Hashtable<String,String>();
+        Map<String,String> tliMappings = new HashMap<String,String>();
         Timeline thisTimeline = getBody().getCommonTimeline();
         Timeline otherTimeline = otherTrans.getBody().getCommonTimeline();
         thisTimeline.completeTimes();
         otherTimeline.completeTimes();
+        
+        
         for (int pos=0; pos<otherTimeline.getNumberOfTimelineItems(); pos++){
             TimelineItem tli = otherTimeline.getTimelineItemAt(pos);
             String oldID = tli.getID();
@@ -406,21 +415,50 @@ public class BasicTranscription extends AbstractTranscription {
         }
         
         //merge tiers
+        Map<String, Tier> tierMemory = new HashMap<String,Tier>();
+        if (useIDs){
+            for (int pos=0; pos<getBody().getNumberOfTiers(); pos++){
+                Tier tier = getBody().getTierAt(pos);
+                String tierID = tier.getID();
+                String speakerID = tier.getSpeaker();
+                if (speakerID!=null){
+                    tierMemory.put(tierID + "###" + speakerID, tier);
+                }
+            }            
+        }
+
+        
         for (int pos=0; pos<otherTrans.getBody().getNumberOfTiers(); pos++){
-            Tier tier = otherTrans.getBody().getTierAt(pos);
-            String newID = getBody().getFreeID();
-            tier.setID(newID);
-            //change speaker assigment
-            if (tier.getSpeaker()!=null){
-                tier.setSpeaker(speakerMappings.get(tier.getSpeaker()));
+            Tier otherTier = otherTrans.getBody().getTierAt(pos);
+            String otherTierID = otherTier.getID();
+            String otherSpeakerID = otherTier.getSpeaker();
+            
+            if (useIDs && otherSpeakerID!=null && tierMemory.containsKey(otherTierID + "###" + otherSpeakerID)){
+                //change timeline assigments of events, then add them to the existing tier
+                for (int i=0; i<otherTier.getNumberOfEvents(); i++){
+                    Event event = otherTier.getEventAt(i);
+                    event.setStart(tliMappings.get(event.getStart()));
+                    event.setEnd(tliMappings.get(event.getEnd()));
+                    tierMemory.get(otherTierID + "###" + otherSpeakerID).addEvent(event);
+                    System.out.println("A new way to merge!");
+                }                
+            } else {
+                String newID = getBody().getFreeID();
+                otherTier.setID(newID);
+                //change speaker assigment
+                if (otherTier.getSpeaker()!=null){
+                    otherTier.setSpeaker(speakerMappings.get(otherTier.getSpeaker()));
+                }
+                //change timeline assigments of events
+                for (int i=0; i<otherTier.getNumberOfEvents(); i++){
+                    Event event = otherTier.getEventAt(i);
+                    event.setStart(tliMappings.get(event.getStart()));
+                    event.setEnd(tliMappings.get(event.getEnd()));
+                }
+                getBody().addTier(otherTier);                
             }
-            //change timeline assigments of events
-            for (int i=0; i<tier.getNumberOfEvents(); i++){
-                Event event = tier.getEventAt(i);
-                event.setStart(tliMappings.get(event.getStart()));
-                event.setEnd(tliMappings.get(event.getEnd()));
-            }
-            getBody().addTier(tier);
+            
+            
         }
     }
     

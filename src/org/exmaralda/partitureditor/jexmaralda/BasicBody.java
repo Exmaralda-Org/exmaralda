@@ -161,9 +161,9 @@ public class BasicBody extends AbstractTierBody {
             }
             tliMappings.put(oldTLI.getID(), newID);
         }
-        for (int pos=0; pos<tierIDMappings.length; pos++){
-            String tierID1 = tierIDMappings[pos][0];
-            String tierID2 = tierIDMappings[pos][1];
+        for (String[] tierIDMapping : tierIDMappings) {
+            String tierID1 = tierIDMapping[0];
+            String tierID2 = tierIDMapping[1];
             //System.out.println("Trying to get " + tierID1 + " and " + tierID2);
             Tier tier1 = getTierWithID(tierID1);
             Tier tier2 = otherBody.getTierWithID(tierID2);
@@ -171,10 +171,10 @@ public class BasicBody extends AbstractTierBody {
                 Event oldEvent = tier2.getEventAt(ev);
                 String newStartID = (String)(tliMappings.get(oldEvent.getStart()));
                 String newEndID = (String)(tliMappings.get(oldEvent.getEnd()));
-                Event newEvent = new Event( newStartID, newEndID, 
-                                            oldEvent.getDescription(),
-                                            oldEvent.getMedium(),
-                                            oldEvent.getURL());
+                Event newEvent = new Event( newStartID, newEndID,
+                        oldEvent.getDescription(),
+                        oldEvent.getMedium(),
+                        oldEvent.getURL());
                 newEvent.setUDEventInformation(oldEvent.getUDEventInformation());
                 tier1.addEvent(newEvent);
             }
@@ -188,18 +188,18 @@ public class BasicBody extends AbstractTierBody {
         int[] clearCuts = getClearCuts();
         int lastChop = 0;
         Vector whereToCut = new Vector();
-        whereToCut.addElement(new Integer(0));
+        whereToCut.addElement(0);
         for (int pos=0; pos<clearCuts.length; pos++){
             if ((clearCuts[pos]-lastChop)>minNumberOfTimelineItems){
-                whereToCut.addElement(new Integer(clearCuts[pos]));
+                whereToCut.addElement(clearCuts[pos]);
                 lastChop = clearCuts[pos];
             }
         }
-        whereToCut.addElement(new Integer(getCommonTimeline().getNumberOfTimelineItems()-1));
+        whereToCut.addElement(getCommonTimeline().getNumberOfTimelineItems()-1);
         BasicBody[] result = new BasicBody[whereToCut.size()-1];
         for (int pos=0; pos<whereToCut.size()-1; pos++){
-            int from = ((Integer)(whereToCut.elementAt(pos))).intValue();
-            int to = ((Integer)(whereToCut.elementAt(pos+1))).intValue();
+            int from = ((Integer)(whereToCut.elementAt(pos)));
+            int to = ((Integer)(whereToCut.elementAt(pos+1)));
             String fromID = getCommonTimeline().getTimelineItemAt(from).getID();
             String toID = getCommonTimeline().getTimelineItemAt(to).getID();
             try{
@@ -237,8 +237,8 @@ public class BasicBody extends AbstractTierBody {
             // end change
         }
 
-        for (int i=0; i<tierIDs.length; i++){
-            Tier newTier = getTierWithID(tierIDs[i]).getPartOfTier(timeline, startTLI, endTLI);
+        for (String tierID : tierIDs) {
+            Tier newTier = getTierWithID(tierID).getPartOfTier(timeline, startTLI, endTLI);
             result.addTier(newTier);
         }
         return result;        
@@ -246,7 +246,7 @@ public class BasicBody extends AbstractTierBody {
     
     public int[] getClearCuts(){
         Vector resultVector = new Vector();
-        resultVector.addElement(new Integer(0));
+        resultVector.addElement(0);
         Timeline tl = this.getCommonTimeline();
         for (int pos=1; pos<tl.getNumberOfTimelineItems(); pos++){
             String tli = tl.getTimelineItemAt(pos).getID();
@@ -254,11 +254,9 @@ public class BasicBody extends AbstractTierBody {
             for (int pos2=0; pos2<getNumberOfTiers(); pos2++){
                 Tier t = getTierAt(pos2);
                 if (t.containsEventAtStartPoint(tli)){
-                    continue;
                 } else {
                     Event e = t.getFirstEventBeforeStartPoint(tl, tli);
                     if (e==null) {
-                        continue;
                     } else if (tl.lookupID(e.getEnd())>tl.lookupID(tli)){
                         isClearCut = false;
                         break;
@@ -266,12 +264,12 @@ public class BasicBody extends AbstractTierBody {
                 }
             }
             if (isClearCut) {
-                resultVector.addElement(new Integer(pos));
+                resultVector.addElement(pos);
             }
         }
         int[] result = new int[resultVector.size()];
         for (int pos=0; pos<resultVector.size(); pos++){
-            result[pos] = ((Integer)(resultVector.elementAt(pos))).intValue();
+            result[pos] = ((Integer)(resultVector.elementAt(pos)));
         }
         return result;
     }
@@ -304,16 +302,16 @@ public class BasicBody extends AbstractTierBody {
      * speaker IDs, then according to their types (order: t - a - d - l - ud */
     public String[] makeCanonicalTierOrder(String[] speakerIDs){
         Vector result = new Vector();
-        for (int pos=0; pos<speakerIDs.length; pos++){
-            String[] tiersOfTypeT = getTiersWithProperties(speakerIDs[pos],"t");
+        for (String speakerID : speakerIDs) {
+            String[] tiersOfTypeT = getTiersWithProperties(speakerID, "t");
             StringUtilities.addStringArrayToVector(tiersOfTypeT, result);
-            String[] tiersOfTypeA = getTiersWithProperties(speakerIDs[pos],"a");
+            String[] tiersOfTypeA = getTiersWithProperties(speakerID, "a");
             StringUtilities.addStringArrayToVector(tiersOfTypeA, result);
-            String[] tiersOfTypeD = getTiersWithProperties(speakerIDs[pos],"d");
+            String[] tiersOfTypeD = getTiersWithProperties(speakerID, "d");
             StringUtilities.addStringArrayToVector(tiersOfTypeD, result);
-            String[] tiersOfTypeL = getTiersWithProperties(speakerIDs[pos],"l");            
+            String[] tiersOfTypeL = getTiersWithProperties(speakerID, "l");            
             StringUtilities.addStringArrayToVector(tiersOfTypeL, result);
-            String[] tiersOfTypeUD = getTiersWithProperties(speakerIDs[pos],"ud");            
+            String[] tiersOfTypeUD = getTiersWithProperties(speakerID, "ud");            
             StringUtilities.addStringArrayToVector(tiersOfTypeUD, result);
         }
         return StringUtilities.stringVectorToArray(result);
@@ -323,9 +321,9 @@ public class BasicBody extends AbstractTierBody {
     public void reorderTiers(String[] tierIDs) throws JexmaraldaException{
         BasicBody result = new BasicBody();
         result.setCommonTimeline(this.getCommonTimeline());
-        for (int pos=0; pos<tierIDs.length; pos++){
-//            System.out.println("reordering " + tierIDs[pos]);
-            result.addTier(this.getTierWithID(tierIDs[pos]));
+        for (String tierID : tierIDs) {
+              // System.out.println("reordering " + tierIDs[pos]);
+              result.addTier(this.getTierWithID(tierID));
         }
         clear();
         positions.clear();
@@ -342,9 +340,7 @@ public class BasicBody extends AbstractTierBody {
         HashSet<String> allEndIDs = new HashSet<String>();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             Tier tier = getTierAt(pos);
-            for (String id : tier.getAllEndIDs()){
-                allEndIDs.add(id);
-            }
+            allEndIDs.addAll(Arrays.asList(tier.getAllEndIDs()));
         }
         for (int i=getCommonTimeline().getNumberOfTimelineItems()-1; i>=0; i--){
             TimelineItem tli = getCommonTimeline().getTimelineItemAt(i);
@@ -365,8 +361,8 @@ public class BasicBody extends AbstractTierBody {
             allIDs = StringUtilities.mergeStringArrays(allIDs, tier.getAllEndIDs());
         }
         Hashtable usedIDs = new Hashtable();
-        for (int pos=0; pos<allIDs.length; pos++){
-            usedIDs.put(allIDs[pos],"");
+        for (String allID : allIDs) {
+            usedIDs.put(allID, "");
         }
         for (int pos=selectionStartCol; pos<Math.min(selectionEndCol+1, getCommonTimeline().getNumberOfTimelineItems()-1); pos++){
             String id = getCommonTimeline().getTimelineItemAt(pos).getID();
@@ -390,8 +386,8 @@ public class BasicBody extends AbstractTierBody {
             allIDs = StringUtilities.mergeStringArrays(allIDs, tier.getAllEndIDs());
         }
         Hashtable usedIDs = new Hashtable();
-        for (int pos=0; pos<allIDs.length; pos++){
-            usedIDs.put(allIDs[pos],"");
+        for (String allID : allIDs) {
+            usedIDs.put(allID, "");
         }
         // changed 17-02-2009: never remove the last timeline item!
         // changed again 19-07-2010: never remove the first timeline item either!
