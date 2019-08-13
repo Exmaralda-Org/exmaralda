@@ -53,6 +53,7 @@ public class ChooseXMLSettingsFileDialog extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         dolganRadioButton = new javax.swing.JRadioButton();
         kamasRadioButton = new javax.swing.JRadioButton();
+        evenkiRadioButton = new javax.swing.JRadioButton();
         pathTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -60,7 +61,7 @@ public class ChooseXMLSettingsFileDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
         predefinedLabel = new javax.swing.JLabel();
         customLabel = new javax.swing.JLabel();
-
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Choose a settings file");
 
@@ -81,9 +82,17 @@ public class ChooseXMLSettingsFileDialog extends javax.swing.JDialog {
             }
         });
         jPanel0.add(kamasRadioButton);
+        evenkiRadioButton.setText("Evenki Corpus settings");
+        evenkiRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evenkiButtonActionPerformed(evt);
+            }
+        });
+        jPanel0.add(evenkiRadioButton);
         getContentPane().add(jPanel0, java.awt.BorderLayout.NORTH);
         buttonGroup1.add(dolganRadioButton);
         buttonGroup1.add(kamasRadioButton);
+        buttonGroup1.add(evenkiRadioButton);
         //jPanel0.add(buttonGroup1);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -156,6 +165,10 @@ public class ChooseXMLSettingsFileDialog extends javax.swing.JDialog {
     private void kamasButtonActionPerformed(java.awt.event.ActionEvent evt) {
         pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\kamas_flextext2exb.xsl");
     }
+    
+    private void evenkiButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\evenki_flextext2exb.xsl");
+    }
 
     /**
      * @param args the command line arguments
@@ -184,6 +197,7 @@ public class ChooseXMLSettingsFileDialog extends javax.swing.JDialog {
     private javax.swing.JTextField pathTextField;
     private javax.swing.JRadioButton dolganRadioButton;
     private javax.swing.JRadioButton kamasRadioButton;
+    private javax.swing.JRadioButton evenkiRadioButton;
     private javax.swing.JLabel predefinedLabel;
     private javax.swing.JLabel customLabel;
     private javax.swing.ButtonGroup buttonGroup1;
