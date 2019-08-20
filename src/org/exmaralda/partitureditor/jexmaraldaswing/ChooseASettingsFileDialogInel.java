@@ -50,7 +50,8 @@ public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
 
         jPanel0 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        String[] dropDownList = {"Custom", "INEL Dolgan settings", "INEL Kamas settings", "INEL Evenki settings"};
+        String[] dropDownList = {"Custom", "INEL Dolgan settings", "INEL Kamas settings", "INEL Evenki settings"
+        , "INEL Selkup Settings (Lit. Russian as ltr)", "INEL Selkup Settings (Free Selkup (Cyr) as ltr)"};
         dropDown = new javax.swing.JComboBox(dropDownList);
         pathTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
@@ -138,6 +139,14 @@ public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
                 break;
             case "INEL Evenki settings":
                 pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\evenki_flextext2exb.xsl");
+                jPanel1.setVisible(false);
+                break;
+            case "INEL Selkup Settings (Lit. Russian as ltr)":
+                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\selkup_flextext2exb_ltr_lit-ru.xsl");
+                jPanel1.setVisible(false);
+                break;
+            case "INEL Selkup Settings (Free Selkup (Cyr) as ltr)":
+                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\selkup_flextext2exb_ltr_gls-sel-cyrl.xsl");
                 jPanel1.setVisible(false);
                 break;
         }
