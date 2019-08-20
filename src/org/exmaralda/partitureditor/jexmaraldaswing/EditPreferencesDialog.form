@@ -1428,6 +1428,11 @@
                     <Property name="text" type="java.lang.String" value="ODT/STD Menu"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JCheckBox" name="inelMenuCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="INEL Menu"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
