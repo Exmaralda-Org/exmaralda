@@ -41,12 +41,12 @@ public class ImportActionInel extends org.exmaralda.partitureditor.partiture.Abs
      * @param icon
      */
     public ImportActionInel(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
-        super("Import...", icon, t);
+        super("INEL-specific Import", icon, t);
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
-        System.out.println("importAction!");
+        System.out.println("importActionInel!");
         table.commitEdit(true);
         try {
             importFile();

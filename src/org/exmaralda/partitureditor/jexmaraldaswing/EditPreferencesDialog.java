@@ -85,7 +85,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[31];
+        String[] result = new String[32];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();

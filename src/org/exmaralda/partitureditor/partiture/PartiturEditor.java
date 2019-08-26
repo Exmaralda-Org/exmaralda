@@ -453,6 +453,7 @@ public class PartiturEditor extends javax.swing.JFrame
             menuBar.sfb538Menu.setVisible(settings.get("SHOW-SFB538Menu","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.sinMenu.setVisible(settings.get("SHOW-SiNMenu","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.odtstdMenu.setVisible(settings.get("SHOW-ODTSTDMenu","FALSE").equalsIgnoreCase("TRUE"));
+            menuBar.inelMenu.setVisible(settings.get("SHOW-INELMenu","FALSE").equalsIgnoreCase("TRUE"));
 
             System.out.println("Settings read and set.");
 
@@ -501,6 +502,7 @@ public class PartiturEditor extends javax.swing.JFrame
         settings.put("SHOW-SFB538Menu", Boolean.toString(menuBar.sfb538Menu.isShowing()));
         settings.put("SHOW-SiNMenu", Boolean.toString(menuBar.sinMenu.isShowing()));
         settings.put("SHOW-ODTSTDMenu", Boolean.toString(menuBar.odtstdMenu.isShowing()));
+        settings.put("SHOW-INELMenu", Boolean.toString(menuBar.inelMenu.isShowing()));
 
         System.out.println("Settings stored.");        
     }
