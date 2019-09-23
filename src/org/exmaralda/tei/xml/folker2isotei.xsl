@@ -181,8 +181,15 @@
                 <revisionDesc>
                     <!-- ... -->                    
                     <xsl:element name="change">
+                        <!-- This one causes trouble for data base import -->
+                        <!--  <change when="2019-05-08T17:20:31.795+02:00"  -->
+                        <!-- it should look like this -->
+                        <!-- <change when="2019-05-08T17:20:31.795"> -->
                         <xsl:attribute name="when">
-                            <xsl:value-of select="current-dateTime()"/>
+                            <xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/>
+                            <xsl:text>T</xsl:text>
+                            <xsl:value-of select="format-time(current-time(), '[H01]:[m01]:[s01]')"/>
+                            <xsl:text>.000</xsl:text>
                         </xsl:attribute>
                         <xsl:text>Created by XSL transformation from a FOLKER transcription</xsl:text>
                     </xsl:element>
@@ -296,6 +303,25 @@
                             </xsl:choose>
                         </span>
                     </xsl:for-each>
+                </spanGrp>                    
+            </xsl:if>
+            
+            <!-- New 19-08-2019, needs to be made generic... -->
+            <xsl:if test="@sentence-nos">
+                <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="prompt-reference">
+                    <span>
+                        <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                        <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                        <xsl:attribute name="target">
+                            <xsl:text>kaufmann-sentences.xml#</xsl:text>
+                            <xsl:value-of select="substring-before(concat(substring-before(@sentence-nos, '-'), '*'), '*')"/>
+                        </xsl:attribute>  
+                        <xsl:choose>
+                            <xsl:when test="@speaker-reference='INT'">prompt</xsl:when>
+                            <xsl:when test="contains(@sentence-nos, '*')">translation</xsl:when>
+                            <xsl:otherwise>translation attempt</xsl:otherwise>
+                        </xsl:choose>
+                    </span>
                 </spanGrp>                    
             </xsl:if>
             

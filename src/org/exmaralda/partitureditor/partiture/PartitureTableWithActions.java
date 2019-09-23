@@ -2079,8 +2079,7 @@ public class PartitureTableWithActions extends PartitureTable
                     //new 06-12-2016: prevent closing of dialog, may cause trouble
                     //because CocoaQT always has a visible component
                     if (player instanceof CocoaQTPlayer){
-                        mediaPanelDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                        
+                        mediaPanelDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);                        
                     }
                 }
                 //anchoring the timeline may require relayout

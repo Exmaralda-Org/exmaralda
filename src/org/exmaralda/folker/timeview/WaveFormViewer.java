@@ -10,9 +10,7 @@
 package org.exmaralda.folker.timeview;
 
 import java.awt.*;
-import java.awt.image.*;
 import java.io.*;
-import javax.swing.*;
 
 
 
@@ -33,6 +31,7 @@ public class WaveFormViewer extends TimelineViewer{
     public WaveFormViewer() {
     }
     
+    @Override
     public void setSoundFile(String soundFilePath) throws IOException{
         ELANWaveSampler ews = new ELANWaveSampler(soundFilePath);
         waveSamplerWrapper = new ELANWaveSamplerWrapper(ews);
@@ -44,6 +43,7 @@ public class WaveFormViewer extends TimelineViewer{
     }
 
     
+    @Override
     public void drawContents() {
         super.drawContents();
         int x1 = visibleRectangle.x;

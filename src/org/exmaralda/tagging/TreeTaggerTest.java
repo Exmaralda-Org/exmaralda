@@ -21,9 +21,9 @@ public class TreeTaggerTest {
     public static String TTC = "c:\\TreeTagger";
     public static String PF = "c:\\TreeTagger\\lib\\german-utf8.par";
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
-    public static String INPUT="Y:\\thomas\\DR2FLK\\TagVerschiebung_shortest.xml";
+    //public static String INPUT="Y:\\thomas\\DR2FLK\\TagVerschiebung_shortest.xml";
     //public static String INPUT="C:\\Users\\Schmidt\\Desktop\\HAMATAC\\David_Rufus\\MT_091209_David_s.exs";
-    //public static String INPUT="S:\\TP-Z2\\IDS\\GAT\\orthonormal\\ek.fln";
+    public static String INPUT="N:\\Workspace\\DH\\Lesetext1\\04-LT1_Fln\\DH--_E_00001_SE_01_T_01_DF_01.fln";
     //public static String INPUT="S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\MAPTASK.coma";
     public static String OUTPUT="Y:\\thomas\\DR2FLK\\TagVerschiebung_out.xml";
     //public static String OUTPUT="C:\\Users\\Schmidt\\Desktop\\HAMATAC\\David_Rufus\\MT_091209_David_s_out.exs";
@@ -39,7 +39,7 @@ public class TreeTaggerTest {
             TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(new File(INPUT), true);
             //ttont.setXPathToTokens("//w|//p[not(text()=',')]");
             //ttont.clearTagging();
-            ttont.setVerbose(true);
+            //ttont.setVerbose(true);
             File output = File.createTempFile("FLN",".xml");
             //output.deleteOnExit();
             System.out.println("***" + output.getAbsolutePath());

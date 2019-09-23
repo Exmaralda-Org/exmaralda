@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.jdom.Document;

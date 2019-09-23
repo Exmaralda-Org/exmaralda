@@ -20,22 +20,23 @@ import org.jdom.xpath.XPath;
  *
  * @author Thomas_Schmidt
  */
-public class STEP_1_CheckEAF extends AbstractEAFProcessor {
+public class TierInventory extends AbstractEAFProcessor {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
-            STEP_1_CheckEAF x = new STEP_1_CheckEAF();
+            TierInventory x = new TierInventory();
+            x.IN_DIR = "D:\\Dropbox\\work\\WERKVERTRAEGE\\2019_AUSTIN\\2019_05_03_Pilot_Sample\\2-CHANGE_TIER_ATTRIBUTES";
             x.doit();
-            FileIO.writeDocumentToLocalFile(new File("F:\\Dropbox\\IDS\\AGD\\Sprachinseln\\GOLD_STANDARD\\TGDP\\interviews\\TierInventory.xml"), x.result);
+            FileIO.writeDocumentToLocalFile(new File("D:\\Dropbox\\work\\WERKVERTRAEGE\\2019_AUSTIN\\2019_05_03_Pilot_Sample\\TierInventory-2.xml"), x.result);
             for (String type : x.alltypes){
                 System.out.println(type);
             }
                 
         } catch (IOException ex) {
-            Logger.getLogger(STEP_1_CheckEAF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TierInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

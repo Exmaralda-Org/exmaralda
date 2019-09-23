@@ -24,6 +24,7 @@ public class TreeTagger {
     String parameterFileEncoding = "iso8859-1"; 
 
     public TreeTagger(String treeTaggerDirectory, String parameterFile, String parameterFileEncoding, String[] options) throws IOException{
+        System.out.println("Initialising tagger");
         File f1 = new File(treeTaggerDirectory);
         if (!f1.exists()){throw new IOException("Command file " + treeTaggerDirectory + " does not exist.");}
         if (!f1.canExecute()){throw new IOException("Command file " + treeTaggerDirectory + " is not exectuable.");}
@@ -35,9 +36,11 @@ public class TreeTagger {
         this.parameterFile = parameterFile;
         this.parameterFileEncoding = parameterFileEncoding;
         this.options = options;
+        System.out.println("Tagger initialised");
     }
 
     public void tag(TreeTaggableDocument input, File outputFile) throws IOException{
+         System.out.println("Setting up tagger");
          System.setProperty("treetagger.home", treeTaggerDirectory);
          TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
          //uncomment next line to make TreeTaggerWrapper verbose
@@ -46,10 +49,13 @@ public class TreeTagger {
          SextantTokenHandler tokenHandler = new SextantTokenHandler();
          tokenHandler.setIDList(input.getIDs());
          try {
+             System.out.println("   Setting model");
              tt.setModel(parameterFile + ":" + parameterFileEncoding);
+             System.out.println("   Setting arguments");
              tt.setArguments(options);
+             System.out.println("   Setting handler");
              tt.setHandler(tokenHandler);
-             System.out.print("Tagger setup complete");
+             System.out.println("Tagger setup complete");
              
              //System.out.println("");
              //System.out.println(input.getNumberOfTaggableSegments() + " tokens to tag");

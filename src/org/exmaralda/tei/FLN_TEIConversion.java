@@ -7,7 +7,6 @@ package org.exmaralda.tei;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,10 +25,12 @@ import org.xml.sax.SAXException;
 public class FLN_TEIConversion {
 
     //String CORPUS ="FOLK";
-    String CORPUS ="FOLK-GOLD-SEGCOR";
-    //String CORPUS ="GWSS";
+    //String CORPUS ="FOLK-GOLD-SEGCOR";
+    String CORPUS ="GWSS";
     //String CORPUS="ISW";
+    //String CORPUS ="MEND";
     String IN = "D:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
+    //String IN = "D:\\Dropbox\\IDS\\AGD\\MEND-Mennonitendeutsch-Goez\\Transkripte\\5";
     String OUT = "D:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;
     /**
      * @param args the command line arguments
@@ -66,7 +67,8 @@ public class FLN_TEIConversion {
         if (new File(OUT).listFiles()!=null){
             for (File existingFile : new File(OUT).listFiles()){
                 System.out.println("Deleting " + existingFile.getAbsolutePath());
-                Files.delete(existingFile.toPath());
+                //Files.delete(existingFile.toPath());
+                existingFile.delete();
             }
         }
         for (File file : files){ 

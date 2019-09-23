@@ -18,10 +18,10 @@ import java.util.Arrays;
  */
 public abstract class AbstractEAFProcessor {
 
-    String IN_DIR = "F:\\Dropbox\\IDS\\AGD\\Sprachinseln\\GOLD_STANDARD\\TGDP\\interviews";
+    String IN_DIR = "D:\\Dropbox\\work\\WERKVERTRAEGE\\2019_AUSTIN\\2019_05_03_Pilot_Sample\\0";
 
     public void doit() throws IOException {
-        ArrayList<File> allEAFFiles = new ArrayList<File>();
+        /*ArrayList<File> allEAFFiles = new ArrayList<File>();
         File[] subDirs = new File(IN_DIR).listFiles(new FileFilter(){
             @Override
             public boolean accept(File pathname) {
@@ -37,8 +37,15 @@ public abstract class AbstractEAFProcessor {
                 }            
             });
             allEAFFiles.addAll(Arrays.asList(eafFiles));
-        }
+        }*/
+        File[] allEAFFiles = new File(IN_DIR).listFiles(new FilenameFilter(){
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.toUpperCase().endsWith(".EAF");
+            }            
+        });
         for (File eafFile : allEAFFiles){
+            System.out.println("\n---------------------------");
             System.out.println("Processing " + eafFile.getAbsolutePath());
             processFile(eafFile);
         }

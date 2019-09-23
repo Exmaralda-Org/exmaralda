@@ -24,6 +24,7 @@ public class AppendIntervalInPartiturAction extends AbstractApplicationAction {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** AppendIntervalInPartiturAction ***]");
         applicationControl.appendInterval();

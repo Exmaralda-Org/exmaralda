@@ -67,7 +67,7 @@ public class TranscriptionTableModel extends AbstractTableModel {
         try {
             transcriptionDoc = doc;
             List l = XPath.newInstance("//text/body/div[1]/u/seg").selectNodes(transcriptionDoc);
-            System.out.println(l.size() + " <u>-elements");
+            //System.out.println(l.size() + " <u>-elements");
             texts = new String[l.size()];
             speakers = new String[l.size()];
             times = new Double[l.size()][2];

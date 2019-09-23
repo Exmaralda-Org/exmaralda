@@ -283,7 +283,7 @@ public class ComaMenuBar extends JMenuBar {
 	public void updateFileMenu() {
 		fileMenu = getFileMenu();
 		this.repaint();
-		this.revalidate();
+		this.revalidate(); 
 
 	}
 }

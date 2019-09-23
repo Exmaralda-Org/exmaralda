@@ -19,16 +19,18 @@ import org.jdom.JDOMException;
  *
  * @author Thomas_Schmidt
  */
-public class STEP_0_RemoveXSI extends AbstractEAFProcessor {
+public class STEP_0_1_RemoveXSI extends AbstractEAFProcessor {
 
+    File OUT = new File("D:\\Dropbox\\work\\WERKVERTRAEGE\\2019_AUSTIN\\2019_05_03_Pilot_Sample\\1-REMOVED_XSI");
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
-            new STEP_0_RemoveXSI().doit();
+            new STEP_0_1_RemoveXSI().doit();
         } catch (IOException ex) {
-            Logger.getLogger(STEP_0_RemoveXSI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(STEP_0_1_RemoveXSI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -54,7 +56,8 @@ public class STEP_0_RemoveXSI extends AbstractEAFProcessor {
             
             org.jdom.Document doc = FileIO.readDocumentFromString(result.toString());
             
-            FileIO.writeDocumentToLocalFile(eafFile, doc);
+            OUT.mkdir();
+            FileIO.writeDocumentToLocalFile(new File(OUT, eafFile.getName()), doc);
             
         } catch (JDOMException ex) {
             System.out.println(result.toString());
