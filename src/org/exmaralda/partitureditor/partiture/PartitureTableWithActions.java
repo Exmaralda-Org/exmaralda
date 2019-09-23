@@ -904,6 +904,7 @@ public class PartitureTableWithActions extends PartitureTable
         
         outputAction = new OutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
         importAction = new ImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
+        importActionInel = new ImportActionInel(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/InelSymbol.gif")));
         exportAction = new ExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
         
         //*********************************************************************************************
@@ -1506,6 +1507,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction outputAction;
     /** Action for importing some 3rd party format to EXMARaLDA */
     public javax.swing.AbstractAction importAction;
+    public javax.swing.AbstractAction importActionInel;
     /** Action for exporting the transcription to some 3rd party format */
     public javax.swing.AbstractAction exportAction;
     //*******************************************************************

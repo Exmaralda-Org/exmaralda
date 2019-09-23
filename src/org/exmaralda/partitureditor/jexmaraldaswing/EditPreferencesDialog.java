@@ -85,7 +85,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[31];
+        String[] result = new String[32];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -110,15 +110,16 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         result[20] = Boolean.toString(sfb538MenuCheckBox.isSelected());
         result[21] = Boolean.toString(sinMenuCheckBox.isSelected());
         result[22] = Boolean.toString(odtstdMenuCheckBox.isSelected());
-        result[23] = Boolean.toString(autoAnchorCheckBox.isSelected());
-        result[24] = Boolean.toString(autoRemoveTLICheckBox.isSelected());
+        result[23] = Boolean.toString(inelMenuCheckBox.isSelected());
+        result[24] = Boolean.toString(autoAnchorCheckBox.isSelected());
+        result[25] = Boolean.toString(autoRemoveTLICheckBox.isSelected());
         // pause notation
-        result[25] = pausePrefixTextField.getText();
-        result[26] = pauseSuffixTextField.getText();
-        result[27] = digitsSpinner.getValue().toString();
-        result[28] = Boolean.toString(decimalCommaRadioButton.isSelected());
-        result[29] = Boolean.toString(enableUndoCheckBox.isSelected());
-        result[30] = Boolean.toString(autoInterpolateCheckBox.isSelected());
+        result[26] = pausePrefixTextField.getText();
+        result[27] = pauseSuffixTextField.getText();
+        result[28] = digitsSpinner.getValue().toString();
+        result[29] = Boolean.toString(decimalCommaRadioButton.isSelected());
+        result[30] = Boolean.toString(enableUndoCheckBox.isSelected());
+        result[31] = Boolean.toString(autoInterpolateCheckBox.isSelected());
         return result;        
     }
     
@@ -251,6 +252,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         sfb538MenuCheckBox = new javax.swing.JCheckBox();
         sinMenuCheckBox = new javax.swing.JCheckBox();
         odtstdMenuCheckBox = new javax.swing.JCheckBox();
+        inelMenuCheckBox = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         resetButton = new javax.swing.JButton();
 
@@ -901,6 +903,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         odtstdMenuCheckBox.setText("ODT/STD Menu");
         menusPanel.add(odtstdMenuCheckBox);
 
+        inelMenuCheckBox.setText("INEL Menu");
+        menusPanel.add(inelMenuCheckBox);
+
         tabbedPane.addTab("Menus", menusPanel);
 
         mainPanel.add(tabbedPane, java.awt.BorderLayout.CENTER);
@@ -1177,6 +1182,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel generalPurposeFontPanel;
     private javax.swing.JTextField head2HTMLTextField;
     private javax.swing.JTextField hiatTextField;
+    private javax.swing.JCheckBox inelMenuCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1319,16 +1325,17 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         sfb538MenuCheckBox.setSelected(Boolean.parseBoolean(values[20]));
         sinMenuCheckBox.setSelected(Boolean.parseBoolean(values[21]));
         odtstdMenuCheckBox.setSelected(Boolean.parseBoolean(values[22]));
-        autoAnchorCheckBox.setSelected(Boolean.parseBoolean(values[23]));
-        autoRemoveTLICheckBox.setSelected(Boolean.parseBoolean(values[24]));
+        inelMenuCheckBox.setSelected(Boolean.parseBoolean(values[23]));
+        autoAnchorCheckBox.setSelected(Boolean.parseBoolean(values[24]));
+        autoRemoveTLICheckBox.setSelected(Boolean.parseBoolean(values[25]));
 
         // pause notation
-        pausePrefixTextField.setText(values[25]);
-        pauseSuffixTextField.setText(values[26]);
-        digitsSpinner.setValue(Integer.parseInt(values[27]));
-        decimalCommaRadioButton.setSelected(Boolean.parseBoolean(values[28]));
-        enableAutoSaveCheckBox.setSelected(Boolean.parseBoolean(values[29]));
-        autoInterpolateCheckBox.setSelected(Boolean.parseBoolean(values[30]));
+        pausePrefixTextField.setText(values[26]);
+        pauseSuffixTextField.setText(values[27]);
+        digitsSpinner.setValue(Integer.parseInt(values[28]));
+        decimalCommaRadioButton.setSelected(Boolean.parseBoolean(values[29]));
+        enableAutoSaveCheckBox.setSelected(Boolean.parseBoolean(values[30]));
+        autoInterpolateCheckBox.setSelected(Boolean.parseBoolean(values[31]));
 
         show();
         return changed;

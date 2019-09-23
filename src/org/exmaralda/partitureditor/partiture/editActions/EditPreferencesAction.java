@@ -41,12 +41,13 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         Boolean showSFB538Menu = new Boolean(false);
         Boolean showSinMenu = new Boolean(false);
         Boolean showODTSTDMenu = new Boolean(false);
+        Boolean showInelMenu = new Boolean(false);
         if (app instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)app;
             showSFB538Menu = new Boolean(pe.menuBar.sfb538Menu.isShowing());
             showSinMenu = new Boolean(pe.menuBar.sinMenu.isShowing());
             showODTSTDMenu = new Boolean(pe.menuBar.odtstdMenu.isShowing());
-
+            showInelMenu = new Boolean(pe.menuBar.inelMenu.isShowing());
         }
         
         String oldMediaPlayer = mediaPlayer;
@@ -74,6 +75,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             showSFB538Menu.toString(),
                             showSinMenu.toString(),
                             showODTSTDMenu.toString(),
+                            showInelMenu.toString(),
                             new Boolean(table.AUTO_ANCHOR).toString(),
                             new Boolean(table.AUTO_REMOVE_UNUSED_TLI).toString(),
                             // pause notation
@@ -141,19 +143,20 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    pe.menuBar.sfb538Menu.setVisible(new Boolean(newValues[20]).booleanValue());
                    pe.menuBar.sinMenu.setVisible(new Boolean(newValues[21]).booleanValue());
                    pe.menuBar.odtstdMenu.setVisible(new Boolean(newValues[22]).booleanValue());
+                   pe.menuBar.inelMenu.setVisible(new Boolean(newValues[23]).booleanValue());
             }
 
-            table.AUTO_ANCHOR = new Boolean(newValues[23]).booleanValue();
-            table.AUTO_REMOVE_UNUSED_TLI = new Boolean(newValues[24]).booleanValue();
+            table.AUTO_ANCHOR = new Boolean(newValues[24]).booleanValue();
+            table.AUTO_REMOVE_UNUSED_TLI = new Boolean(newValues[25]).booleanValue();
 
             // pause notation
-            table.pausePrefix = newValues[25];
-            table.pauseSuffix = newValues[26];
-            table.pauseDigits = Integer.parseInt(newValues[27]);
-            table.pauseDecimalComma = Boolean.parseBoolean(newValues[28]);
-            table.undoEnabled = Boolean.parseBoolean(newValues[29]);
+            table.pausePrefix = newValues[26];
+            table.pauseSuffix = newValues[27];
+            table.pauseDigits = Integer.parseInt(newValues[28]);
+            table.pauseDecimalComma = Boolean.parseBoolean(newValues[29]);
+            table.undoEnabled = Boolean.parseBoolean(newValues[30]);
             table.undoAction.setEnabled(table.undoAction.isEnabled() && table.undoEnabled);
-            table.getModel().INTERPOLATE_WHEN_SPLITTING = new Boolean(newValues[30]).booleanValue();
+            table.getModel().INTERPOLATE_WHEN_SPLITTING = new Boolean(newValues[31]).booleanValue();
             
             table.status("Preferences changed");
 
