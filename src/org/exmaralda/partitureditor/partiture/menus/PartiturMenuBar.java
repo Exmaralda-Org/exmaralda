@@ -39,7 +39,8 @@ public class PartiturMenuBar extends javax.swing.JMenuBar {
     public SFB538Menu sfb538Menu;
     public SinMenu sinMenu;
     public ODTSTDMenu odtstdMenu;
-            
+    public InelMenu inelMenu;
+    
     /** Creates a new instance of PartiturMenuBar */
     public PartiturMenuBar(PartitureTableWithActions table) {
         
@@ -57,6 +58,7 @@ public class PartiturMenuBar extends javax.swing.JMenuBar {
         sfb538Menu = new SFB538Menu(table);
         sinMenu = new SinMenu(table);
         odtstdMenu = new ODTSTDMenu(table);
+        inelMenu = new InelMenu(table);
         
         add(fileMenu);
         add(editMenu);            
@@ -72,7 +74,7 @@ public class PartiturMenuBar extends javax.swing.JMenuBar {
         add(sfb538Menu);
         add(sinMenu);
         add(odtstdMenu);
-        
+        add(inelMenu);
         
     }
     

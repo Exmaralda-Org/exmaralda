@@ -35,7 +35,7 @@ public class FlexTextConverter {
     public FlexTextConverter() {
 
     }
-    public static String FLEXTEXT2EX_STYLESHEET = "/org/exmaralda/partitureditor/jexmaralda/xsl/interlinear-flex2exmaralda-var-multi.xsl";
+    public static String FLEXTEXT2EX_STYLESHEET = "/org/exmaralda/partitureditor/jexmaralda/xsl/flextext2exb.xsl";
 
     //how to give the settings.xml?
     public static String DEFAULT_SETTINGS = "";
