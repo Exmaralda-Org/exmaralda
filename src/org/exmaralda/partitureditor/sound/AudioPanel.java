@@ -622,7 +622,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         //ELANDSPlayer player = new ELANDSPlayer();
         //JMFPlayer player = new JMFPlayer();
         //VLCPlayer player = new VLCPlayer();
-        CocoaQTPlayer player = new CocoaQTPlayer();
+        //CocoaQTPlayer player = new CocoaQTPlayer();
+        JavaFXPlayer player = new JavaFXPlayer();
         try {
             player.setSoundFile("/Users/thomasschmidt/Desktop/MEDIA-TEST/BECKHAMS_MPEG-1.mpg");
         } catch (IOException ex) {
@@ -705,6 +706,12 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JDSPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
+            } if (getPlayer() instanceof JavaFXPlayer){
+                JavaFXPlayer jdsp = (JavaFXPlayer)getPlayer();
+                sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
+                sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
+                System.out.println("JavaFXPlayer says the movie " + new File(filename).getName() 
+                        + " has width " + sourceWidth + "and  height " + sourceHeight);
             } else if (getPlayer() instanceof CocoaQTPlayer) {
                  CocoaQTPlayer cqtp = (CocoaQTPlayer)getPlayer();
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
@@ -745,7 +752,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 JMFPlayer jmfp = (JMFPlayer)getPlayer();                
                 grabButton.setEnabled(jmfp.fgc!=null);
                 cutButton.setEnabled(AudioProcessor.isCuttable(filename));                
-            } else if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof CocoaQTPlayer || getPlayer() instanceof MMFPlayer){
+            } else if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof CocoaQTPlayer || getPlayer() instanceof MMFPlayer || getPlayer() instanceof JavaFXPlayer){
                 // new 06-12-2016
                 videoDisplayPanel.add(c);
                 System.out.println("(3c) AudioPanel: added the visual component");
@@ -949,6 +956,8 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
             setTitle(getTitle() + " [BAS-Audio]");
         } else if (player instanceof CocoaQTPlayer){
             setTitle(getTitle() + " [CocoaQT]");           
+        } else if (player instanceof JavaFXPlayer){
+            setTitle(getTitle() + " [JavaFX]");           
         } /*else if (player instanceof VLCPlayer){
             setTitle(getTitle() + " [VLCPlayer]");
         }*/

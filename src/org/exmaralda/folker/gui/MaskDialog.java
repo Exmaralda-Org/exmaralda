@@ -4,7 +4,7 @@
  */
 package org.exmaralda.folker.gui;
 
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.event.ListSelectionEvent;
@@ -241,7 +241,7 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }//GEN-LAST:event_increaseEndButtonActionPerformed
 
     private void opacitySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_opacitySliderStateChanged
-        AWTUtilities.setWindowOpacity(this, (float)opacitySlider.getValue()/100.0f);
+        //AWTUtilities.setWindowOpacity(this, (float)opacitySlider.getValue()/100.0f);
     }//GEN-LAST:event_opacitySliderStateChanged
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed

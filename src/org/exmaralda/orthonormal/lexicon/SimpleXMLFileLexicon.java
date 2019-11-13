@@ -29,7 +29,7 @@ public class SimpleXMLFileLexicon extends AbstractNormalizationLexicon {
     Hashtable<String,HashSet<String>> mappings = new Hashtable<String,HashSet<String>>();
 
     public void put(String form, String lemma, String transcriptionID, String wordID) {
-        if (form!=null || form.equals(lemma)) return;
+        if (form==null || form.equals(lemma)) return;
         if (!mappings.containsKey(form)){
             mappings.put(form, new HashSet<String>());
         }

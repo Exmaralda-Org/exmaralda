@@ -23,6 +23,8 @@ import org.jdom.filter.ElementFilter;
 public class AutoNormalizer {
 
     public int MIN_AUTO_FREQUENCY = 5;
+    
+    public boolean OVERWRITE_EXISTING = false;
 
     LexiconInterface lexicon;
     
@@ -70,18 +72,20 @@ public class AutoNormalizer {
         while (i.hasNext()){
             Element word = (Element)(i.next());
             String wordText = WordUtilities.getWordText(word);
-            if (word.getAttribute("n")==null){
+            //System.out.println("??? " + wordText);
+            if (word.getAttribute("n")==null || OVERWRITE_EXISTING){
                 boolean lookupGotResult = false;
-
                 // 1. lookup the form in the lexicon
                 List<String> forms = lexicon.getCandidateForms(wordText);
                 if (forms.size()>0){
                     String form = forms.get(0);
+                    //System.out.println(form + " " + lexicon.getFrequency(wordText, form));
                     if (!(form.equals(word.getText()))){
                        if ((!lexicon.hasFrequencyInformation()) 
                                || ((lexicon.hasFrequencyInformation()) 
                                && (lexicon.getFrequency(wordText, form)>=MIN_AUTO_FREQUENCY))){
                             word.setAttribute("n", form);
+                            //System.out.println("Set " + form);
                             lookupGotResult = true;
                             count++;
                         }

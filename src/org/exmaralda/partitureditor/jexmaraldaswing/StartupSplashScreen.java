@@ -6,7 +6,7 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import javax.swing.*;
 import java.awt.*;
 /**
@@ -24,12 +24,12 @@ public class StartupSplashScreen extends JWindow {
         label.setOpaque(false);
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SplashScreen.png")));
         label.repaint();
-        try {
+        /*try {
             AWTUtilities.setWindowOpaque(this, false);
         } catch (IllegalArgumentException iae){
             // happens on shitty systems like lubuntu
             iae.printStackTrace();
-        }
+        }*/
 
         getContentPane().add(label, BorderLayout.CENTER);
         pack();

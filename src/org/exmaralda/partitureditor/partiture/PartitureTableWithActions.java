@@ -2505,12 +2505,14 @@ public class PartitureTableWithActions extends PartitureTable
         } else if (os.equalsIgnoreCase("win")){
             defaultPlayer = "JDS-Player";
         }
-        System.out.println("Default player: " + defaultPlayer);
 
+        System.out.println("Default player: " + defaultPlayer);
         
         String playerType = settings.get("PlayerType", defaultPlayer);
         settings.put("PlayerType", playerType);
         
+        System.out.println("User's player: " + playerType);
+
         // changed 11-10-2011: make sure that default player
         // is always used under EXAKT
         // why??? 02-12-2015
@@ -2531,6 +2533,8 @@ public class PartitureTableWithActions extends PartitureTable
             return new JDSPlayer();
         } else if (playerType.equals("JDS-Player")){
             return new JDSPlayer();
+        } else if (playerType.equals("JavaFX-Player")){
+            return new JavaFXPlayer();
         } else if (playerType.equals("MMF-Player")){
             MMFPlayer thePlayer = new MMFPlayer();            
             return thePlayer;

@@ -764,7 +764,7 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
      * 
      * @param text the text to copy
      */
-    private void copyToClipboard(String text) {
+    /*private void copyToClipboard(String text) {
     	    if (text == null) {
     		    return;
     	    }
@@ -789,7 +789,7 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
             	   // LOG.warning("");
             }
         }
-    }
+    }*/
 
     @Override
     public void setLayoutManager(ElanLayoutManager elm) {

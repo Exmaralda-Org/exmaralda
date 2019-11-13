@@ -128,6 +128,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor")
                         .put("PlayerType", newValues[16]);
             
+            System.out.println("Changed player type settings to " + newValues[16]);
+            
             table.underlineWithDiacritics = new Boolean(newValues[17]).booleanValue();
             table.underlineCategory = newValues[18];
 

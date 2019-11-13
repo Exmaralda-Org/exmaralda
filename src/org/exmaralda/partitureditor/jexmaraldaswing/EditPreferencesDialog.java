@@ -233,6 +233,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jdsPlayerRadioButton = new javax.swing.JRadioButton();
         cocoaQuicktimePlayerRadioButton = new javax.swing.JRadioButton();
         elanQuicktimeRadioButton = new javax.swing.JRadioButton();
+        javaFXPlayerRadioButton = new javax.swing.JRadioButton();
         mmfPlayerRadioButton = new javax.swing.JRadioButton();
         jmfPlayerRadioButton = new javax.swing.JRadioButton();
         elanDSPlayerRadioButton = new javax.swing.JRadioButton();
@@ -818,6 +819,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         elanQuicktimeRadioButton.setText("<html><b>ELAN Quicktime Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Requires Quicktime for Java.</html>");
         playerSelectionPanel.add(elanQuicktimeRadioButton);
 
+        mediaPlayersButtonGroup.add(javaFXPlayerRadioButton);
+        javaFXPlayerRadioButton.setText("<html><b>Java FX Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Java's FX framework to playback audio and video files. <b><i>Experimental</i></b>.</html>");
+        playerSelectionPanel.add(javaFXPlayerRadioButton);
+
         mediaPlayersButtonGroup.add(mmfPlayerRadioButton);
         mmfPlayerRadioButton.setText("<html><b>MMF Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window's native Microsoft Media Foundation framework to playback audio and video files. <i><b>Not fully working yet!</b></i> </html>");
         mmfPlayerRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1218,6 +1223,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JRadioButton javaFXPlayerRadioButton;
     private javax.swing.JRadioButton jdsPlayerRadioButton;
     private javax.swing.JRadioButton jmfPlayerRadioButton;
     private javax.swing.JPanel languagePanel;
@@ -1314,6 +1320,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         cocoaQuicktimePlayerRadioButton.setSelected("CocoaQT-Player".equals(mp));
         jmfPlayerRadioButton.setSelected("JMF-Player".equals(mp));
         basPlayerRadioButton.setSelected("BAS-Audio-Player".equals(mp));
+        javaFXPlayerRadioButton.setSelected("JavaFX-Player".equals(mp));
         
 
         underlineCharRadioButton.setSelected(Boolean.parseBoolean(values[17]));
@@ -1363,6 +1370,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         }
         if (cocoaQuicktimePlayerRadioButton.isSelected()){
             return "CocoaQT-Player";
+        }
+        if (javaFXPlayerRadioButton.isSelected()){
+            return "JavaFX-Player";
         }
         return "JMF-Player";
     }

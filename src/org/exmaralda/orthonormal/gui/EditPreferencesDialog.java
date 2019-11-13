@@ -452,6 +452,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         if (basRadioButton.isSelected()) playerType = "BAS-Audio-Player";
         if (jdsRadioButton.isSelected()) playerType = "JDS-Player";
         if (cocoaQTRadioButton.isSelected()) playerType = "CocoaQT-Player";
+        //if (this.javaFXPlayerRadioButton.isSelected()) playerType = "CocoaQT-Player";
         
         PreferencesUtilities.setProperty("PlayerType", playerType);
         

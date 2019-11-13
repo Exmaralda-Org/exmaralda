@@ -97,6 +97,7 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
 
     @Override
     public int getFrequency(String form, String correspondingForm) {
+        //System.out.println("### " + form + " +++  "+ correspondingForm);
         NormalisationInfo info = map.get(form);
         return info.getFrequency(correspondingForm);
     }

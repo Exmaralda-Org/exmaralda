@@ -15,6 +15,7 @@ import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.sound.CocoaQTPlayer;
 import org.exmaralda.partitureditor.sound.JDSPlayer;
+import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
 import org.exmaralda.partitureditor.sound.PlayableListener;
@@ -45,7 +46,8 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         // changed 21-11-2017: issue #82
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("win")) {
-            videoPlayer = new JDSPlayer();
+            //videoPlayer = new JDSPlayer();
+            videoPlayer = new JavaFXPlayer();
         } else if (os.equalsIgnoreCase("mac")){
             videoPlayer = new CocoaQTPlayer();
         }
@@ -140,8 +142,10 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
 
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
-        String[] suffixes = {"mpg", "mpeg"};
-        jfc.setFileFilter(new ParameterFileFilter(suffixes, "MPEG-1 Videodateien (*.mpg, *.mpeg)"));
+        //String[] suffixes = {"mpg", "mpeg"};
+        //jfc.setFileFilter(new ParameterFileFilter(suffixes, "MPEG-1 Videodateien (*.mpg, *.mpeg)"));
+        String[] suffixes = {"mp4"};
+        jfc.setFileFilter(new ParameterFileFilter(suffixes, "MPEG-4 Videodateien (*.mp4)"));
         jfc.setAcceptAllFileFilterUsed(false);
         //jfc.setFileFilter(new ParameterFileFilter("mp4", "MPEG-1 Videodateien (*.mp4)"));
         jfc.setCurrentDirectory(new File(preferredPath));
@@ -241,6 +245,23 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         // changed 21-11-2017: issue #82
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("win")) {
+            JavaFXPlayer jfxPlayer = (JavaFXPlayer)videoPlayer;       
+            jfxPlayer.setSoundFile(f.getAbsolutePath());
+
+            videoDisplayPanel.removeAll();
+
+            if (jfxPlayer.getVisibleComponent()!=null){
+                Component c = jfxPlayer.getVisibleComponent();
+                // change 02-06-2015: attempt to set size for video
+                sourceWidth = jfxPlayer.getSourceWidth();
+                sourceHeight = jfxPlayer.getSourceHeight();
+                Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
+                c.setPreferredSize(initialDimension);
+                videoDisplayPanel.add(c);
+                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+                //pack();
+            }
+        }/* if (os.equalsIgnoreCase("win")) {
             JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer;       
             jdsPlayer.setSoundFile(f.getAbsolutePath());
 
@@ -257,7 +278,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 videoDisplayPanel.setPreferredSize(c.getPreferredSize());
                 //pack();
             }
-        } else if (os.equalsIgnoreCase("mac")){
+        } */else if (os.equalsIgnoreCase("mac")){
             // TO DO
             CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)videoPlayer;
             cocoaQTPlayer.setSoundFile(f.getAbsolutePath());
@@ -304,7 +325,8 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 
                 // issue #189
                 if (os.equalsIgnoreCase("win")) {
-                    ((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                    //((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                    ((JavaFXPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
                 } else if (os.equalsIgnoreCase("mac")) {
                     ((CocoaQTPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);                    
                 }

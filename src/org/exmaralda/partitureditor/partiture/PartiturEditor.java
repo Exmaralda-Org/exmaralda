@@ -103,7 +103,7 @@ public class PartiturEditor extends javax.swing.JFrame
         
         new StartupSplashScreen(this);
         
-        org.exmaralda.common.Logger.initialiseLogger(this);
+        //org.exmaralda.common.Logger.initialiseLogger(this);
                                 
         // initialize the table
         table = new PartitureTableWithActions(this);
@@ -657,6 +657,7 @@ public class PartiturEditor extends javax.swing.JFrame
         InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         ActionMap am = getRootPane().getActionMap();
         
+        //
         // 15-12-2017 : issue #113 - these three bindings should go
         // since the respective buttons are disabled and invisible
         /*im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
@@ -667,6 +668,7 @@ public class PartiturEditor extends javax.swing.JFrame
 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0),"F3_Pressed");
         am.put("F3_Pressed", table.mediaPanelDialog.stopAction);*/
+        // **
 
         Object[][] generalAssignments = {
             {"control SPACE", "playSelection", controller.playSelectionAction},

@@ -17,6 +17,7 @@ import org.exmaralda.partitureditor.sound.ELANDSPlayer;
 import org.exmaralda.partitureditor.sound.ELANQTPlayer;
 import org.exmaralda.partitureditor.sound.JDSPlayer;
 import org.exmaralda.partitureditor.sound.JMFPlayer;
+import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 import org.exmaralda.partitureditor.sound.MMFPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
@@ -72,6 +73,13 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                 }
             } else if (player instanceof JDSPlayer){
                 JDSPlayer jmfp = (JDSPlayer)player;
+                if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
+                    jmfp.updateVideo(selectionStart/1000.0);
+                } else {
+                    jmfp.updateVideo(selectionEnd/1000.0);
+                }
+            } else if (player instanceof JavaFXPlayer){
+                JavaFXPlayer jmfp = (JavaFXPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
                     jmfp.updateVideo(selectionStart/1000.0);
                 } else {
