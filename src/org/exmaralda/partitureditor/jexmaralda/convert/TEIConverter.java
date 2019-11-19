@@ -447,11 +447,12 @@ public class TEIConverter {
         }
         
     } */
+
+    HashSet<String> allExistingIDs = new HashSet<String>();
     
     // new 30-03-2016
     private void generateWordIDs(Document document) throws JDOMException{
         // added 30-03-2016
-        HashSet<String> allExistingIDs = new HashSet<String>();
         XPath idXPath = XPath.newInstance("//tei:*[@xml:id]"); 
         idXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
         idXPath.addNamespace(Namespace.XML_NAMESPACE);
@@ -481,6 +482,7 @@ public class TEIConverter {
             word.setAttribute("id", wordID, Namespace.XML_NAMESPACE);
         }
         
+        
         // new 02-12-2014
         XPath pcXPath = XPath.newInstance("//tei:pc[not(@xml:id)]"); 
         pcXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
@@ -499,7 +501,63 @@ public class TEIConverter {
             //System.out.println("*** " + wordID);
             pc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
         }
+
+        // new 19-11-2019
+        XPath vocXPath = XPath.newInstance("//tei:vocal[not(@xml:id)]"); 
+        vocXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        vocXPath.addNamespace(Namespace.XML_NAMESPACE);        
+        List vocs = vocXPath.selectNodes(document);
+        count=1;
+        for (Object o : vocs){
+            Element voc = (Element)o;
+            while(allExistingIDs.contains("v" + Integer.toString(count))){
+                count++;
+            }
+            
+            String pcID = "v" + Integer.toString(count);
+            allExistingIDs.add(pcID);
+            //System.out.println("*** " + wordID);
+            voc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
+        }
+
+        // new 19-11-2019
+        XPath incXPath = XPath.newInstance("//tei:incident[not(@xml:id)]"); 
+        incXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        incXPath.addNamespace(Namespace.XML_NAMESPACE);        
+        List incs = incXPath.selectNodes(document);
+        count=1;
+        for (Object o : incs){
+            Element inc = (Element)o;
+            while(allExistingIDs.contains("i" + Integer.toString(count))){
+                count++;
+            }
+            
+            String pcID = "i" + Integer.toString(count);
+            allExistingIDs.add(pcID);
+            //System.out.println("*** " + wordID);
+            inc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
+        }
+
+        // new 19-11-2019
+        XPath pauseXPath = XPath.newInstance("//tei:pause[not(@xml:id)]"); 
+        pauseXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        pauseXPath.addNamespace(Namespace.XML_NAMESPACE);        
+        List pauses = pauseXPath.selectNodes(document);
+        count=1;
+        for (Object o : pauses){
+            Element pause = (Element)o;
+            while(allExistingIDs.contains("p" + Integer.toString(count))){
+                count++;
+            }
+            
+            String pcID = "p" + Integer.toString(count);
+            allExistingIDs.add(pcID);
+            //System.out.println("*** " + wordID);
+            pause.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
+        }
+        
     }
+    
     
     
     private Element makeNonphoElement(String matchedText) {

@@ -310,8 +310,18 @@
             <xsl:if test="@sentence-nos">
                 <spanGrp xmlns="http://www.tei-c.org/ns/1.0" type="prompt-reference">
                     <span>
-                        <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
-                        <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@id"/></xsl:attribute>
+                        <xsl:attribute name="from">
+                            <xsl:value-of select="$XPOINTER_HASH"/>
+                            <!-- change 19-11-2019 -->
+                            <xsl:value-of select="descendant::*[@id][1]/@id"/>
+                            <!-- <xsl:value-of select="@id"/> -->
+                        </xsl:attribute>
+                        <xsl:attribute name="to">
+                            <xsl:value-of select="$XPOINTER_HASH"/>
+                            <!-- change 19-11-2019 -->
+                            <xsl:value-of select="descendant::*[@id][last()]/@id"/>
+                            <!-- <xsl:value-of select="@id"/> --> 
+                        </xsl:attribute>
                         <xsl:attribute name="target">
                             <xsl:text>kaufmann-sentences.xml#</xsl:text>
                             <xsl:value-of select="substring-before(concat(substring-before(@sentence-nos, '-'), '*'), '*')"/>
@@ -505,7 +515,11 @@
     
     <xsl:template match="pause">
         <xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
-            <!-- added 01-06-2018 -->
+            <!-- added 19-11-2019 -->
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <!-- added 01-06-2018 -->            
             <xsl:attribute name="rend">
                 <xsl:choose>
                     <xsl:when test="@duration='micro'">(.)</xsl:when>
@@ -539,6 +553,10 @@
     
     <xsl:template match="non-phonological">
         <xsl:element name="incident"  xmlns="http://www.tei-c.org/ns/1.0">
+            <!-- added 19-11-2019 -->
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>        
             <xsl:if test="not(ancestor::*[@speaker-reference])">
                 <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
                 <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
@@ -551,6 +569,10 @@
     
     <xsl:template match="breathe">
         <xsl:element name="vocal"  xmlns="http://www.tei-c.org/ns/1.0">
+            <!-- added 19-11-2019 -->
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
             <xsl:if test="not(ancestor::*[@speaker-reference])">
                 <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
                 <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
@@ -682,8 +704,14 @@
     <!-- ***** ELEMENTS OUTSIDE THE ORIGINAL SPEC ****** -->    
     <!-- *********************************************** -->
     <!-- puncutation, added 29-11-2016 -->
-    <xsl:template match="p">
-        <pc  xmlns="http://www.tei-c.org/ns/1.0"><xsl:apply-templates/></pc>
+    <xsl:template match="p">        
+        <pc  xmlns="http://www.tei-c.org/ns/1.0">
+            <!-- added 19-11-2019 -->
+            <xsl:attribute name="xml:id">
+                <xsl:value-of select="@id"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </pc>
     </xsl:template>
     
     
