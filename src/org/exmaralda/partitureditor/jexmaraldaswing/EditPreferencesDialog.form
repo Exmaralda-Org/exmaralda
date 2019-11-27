@@ -32,7 +32,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,24,0,0,2,6"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,116,0,0,2,33"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -1283,6 +1283,14 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;ELAN DS Player:&lt;/b&gt; A player provided by the language Archive at the MPI Nijmegen, also used in older versions of ELAN. Uses Window&apos;s native Direct Show framework to playback audio and video files. Not used anymore. &lt;/html&gt;"/>
                         <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="avfPlayerRadioButton">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="mediaPlayersButtonGroup"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;AVF Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Apples AV Foundation framework to playback audio and video files. &lt;b&gt;&lt;i&gt;Experimental&lt;/i&gt;&lt;/b&gt;.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                   </SubComponents>

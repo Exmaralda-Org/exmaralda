@@ -12,6 +12,7 @@ import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
 import org.exmaralda.folker.timeview.AbstractTimeProportionalViewer;
 import org.exmaralda.folker.timeview.ChangeZoomDialog;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
+import org.exmaralda.partitureditor.sound.AVFPlayer;
 import org.exmaralda.partitureditor.sound.CocoaQTPlayer;
 import org.exmaralda.partitureditor.sound.ELANDSPlayer;
 import org.exmaralda.partitureditor.sound.ELANQTPlayer;
@@ -84,7 +85,14 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                     jmfp.updateVideo(selectionStart/1000.0);
                 } else {
                     jmfp.updateVideo(selectionEnd/1000.0);
-                }
+                } 
+            } else if (player instanceof AVFPlayer){
+                AVFPlayer jmfp = (AVFPlayer)player;
+                if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
+                    jmfp.updateVideo(selectionStart/1000.0);
+                } else {
+                    jmfp.updateVideo(selectionEnd/1000.0);
+                }            
             } else if (player instanceof ELANQTPlayer){
                 ELANQTPlayer jmfp = (ELANQTPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){

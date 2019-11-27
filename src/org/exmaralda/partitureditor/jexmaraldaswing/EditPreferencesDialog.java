@@ -237,6 +237,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         mmfPlayerRadioButton = new javax.swing.JRadioButton();
         jmfPlayerRadioButton = new javax.swing.JRadioButton();
         elanDSPlayerRadioButton = new javax.swing.JRadioButton();
+        avfPlayerRadioButton = new javax.swing.JRadioButton();
         otherOptionsPanel = new javax.swing.JPanel();
         autoAnchorCheckBox = new javax.swing.JCheckBox();
         autoRemoveTLICheckBox = new javax.swing.JCheckBox();
@@ -842,6 +843,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         elanDSPlayerRadioButton.setEnabled(false);
         playerSelectionPanel.add(elanDSPlayerRadioButton);
 
+        mediaPlayersButtonGroup.add(avfPlayerRadioButton);
+        avfPlayerRadioButton.setText("<html><b>AVF Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Apples AV Foundation framework to playback audio and video files. <b><i>Experimental</i></b>.</html>");
+        playerSelectionPanel.add(avfPlayerRadioButton);
+
         mediaPanel.add(playerSelectionPanel, java.awt.BorderLayout.CENTER);
 
         otherOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Additional Options"));
@@ -1153,6 +1158,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel autoSavePanel;
     private javax.swing.JPanel autoSavePathPanel;
     private javax.swing.JTextField autoSavePathTextField;
+    private javax.swing.JRadioButton avfPlayerRadioButton;
     private javax.swing.JRadioButton basPlayerRadioButton;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton browseForAutoSavePathButton;
@@ -1321,6 +1327,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jmfPlayerRadioButton.setSelected("JMF-Player".equals(mp));
         basPlayerRadioButton.setSelected("BAS-Audio-Player".equals(mp));
         javaFXPlayerRadioButton.setSelected("JavaFX-Player".equals(mp));
+        avfPlayerRadioButton.setSelected("AVF-Player".equals(mp));
         
 
         underlineCharRadioButton.setSelected(Boolean.parseBoolean(values[17]));
@@ -1373,6 +1380,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         }
         if (javaFXPlayerRadioButton.isSelected()){
             return "JavaFX-Player";
+        }
+        if (avfPlayerRadioButton.isSelected()){
+            return "AVF-Player";
         }
         return "JMF-Player";
     }

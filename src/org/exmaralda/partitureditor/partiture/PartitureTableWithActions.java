@@ -2535,6 +2535,8 @@ public class PartitureTableWithActions extends PartitureTable
             return new JDSPlayer();
         } else if (playerType.equals("JavaFX-Player")){
             return new JavaFXPlayer();
+        } else if (playerType.equals("AVF-Player")){
+            return new AVFPlayer();
         } else if (playerType.equals("MMF-Player")){
             MMFPlayer thePlayer = new MMFPlayer();            
             return thePlayer;

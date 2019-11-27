@@ -11,7 +11,7 @@
 
 package org.exmaralda.partitureditor.partiture;
 
-import com.apple.eawt.ApplicationEvent;
+//import com.apple.eawt.ApplicationEvent;
 import java.io.IOException;
 import javax.swing.*;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
@@ -103,7 +103,7 @@ public class PartiturEditor extends javax.swing.JFrame
         
         new StartupSplashScreen(this);
         
-        org.exmaralda.common.Logger.initialiseLogger(this);
+        //org.exmaralda.common.Logger.initialiseLogger(this);
                                 
         // initialize the table
         table = new PartitureTableWithActions(this);
@@ -141,10 +141,12 @@ public class PartiturEditor extends javax.swing.JFrame
         
       
         // if this is a MAC OS: init the MAC OS X specific actions
+        // won't run with java 11 anymore
+        // see 
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("mac")) {
             // changed 09-06-2009
-            setupMacOSXApplicationListener();
+            //setupMacOSXApplicationListener();
         }
 
         // register shortcuts for media playback
@@ -772,7 +774,7 @@ public class PartiturEditor extends javax.swing.JFrame
 
 
     /** added 09-06-2009: replaces older mac app handler in inner class */
-    private void setupMacOSXApplicationListener() {
+    /*private void setupMacOSXApplicationListener() {
         final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
         application.setEnabledAboutMenu(true); // damit ein "Ueber " Menue erscheint
         application.addPreferencesMenuItem(); // "Einstellen..." Dialog
@@ -840,7 +842,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 }
             }
           });
-	}
+	}*/
 
     public void setTimeViewBuffer(boolean proportional) {
         if (proportional){

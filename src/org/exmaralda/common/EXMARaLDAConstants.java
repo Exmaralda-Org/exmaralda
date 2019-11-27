@@ -8,6 +8,6 @@ public class EXMARaLDAConstants {
     public static String SURFER_VERSION="${surfer_version}";
     public static String ORTHONORMAL_VERSION="0.9.2";
     
-    public static String BUILD_TIME="20191119.1651";
+    public static String BUILD_TIME="20191127.0932";
     
 }

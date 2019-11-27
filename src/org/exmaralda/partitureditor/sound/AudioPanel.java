@@ -706,11 +706,17 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JDSPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } if (getPlayer() instanceof JavaFXPlayer){
+            } else if (getPlayer() instanceof JavaFXPlayer){
                 JavaFXPlayer jdsp = (JavaFXPlayer)getPlayer();
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JavaFXPlayer says the movie " + new File(filename).getName() 
+                        + " has width " + sourceWidth + "and  height " + sourceHeight);
+            } else if (getPlayer() instanceof AVFPlayer){
+                AVFPlayer jdsp = (AVFPlayer)getPlayer();
+                sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
+                sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
+                System.out.println("AVFPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
             } else if (getPlayer() instanceof CocoaQTPlayer) {
                  CocoaQTPlayer cqtp = (CocoaQTPlayer)getPlayer();

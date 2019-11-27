@@ -84,6 +84,7 @@ public class Logger {
                 + java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PlayerType", "Not set - using default player"));
         
         System.out.println("Java Class Path : " + System.getProperty("java.class.path"));
+        System.out.println("Java Library Path: " + System.getProperty("java.library.path"));        
         
         System.out.println("Application name :" + app.getApplicationName());
         System.out.println("Application version :" + app.getVersion());
