@@ -66,9 +66,22 @@ public class TranscriberConverter {
     }
 
     public String removeEmptyLinesAndDTD(String filename) throws FileNotFoundException, UnsupportedEncodingException, IOException{
+        /* <?xml version="1.0" encoding="UTF-8"?> */
+        FileInputStream fis1 = new FileInputStream(filename);
+        InputStreamReader isr1 = new InputStreamReader(fis1, "ISO-8859-1");
+        BufferedReader br1 = new BufferedReader(isr1);
+        String firstLine = br1.readLine();
+        int i1 = firstLine.indexOf("encoding");
+        int i2 = firstLine.lastIndexOf("\"");
+        String encoding = firstLine.substring(i1+10, i2);
+        System.out.println("TRS encoding= " + encoding);
+        br1.close();
+        
         StringBuffer result = new StringBuffer();
         FileInputStream fis = new FileInputStream(filename);
-        InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
+        InputStreamReader isr = new InputStreamReader(fis, encoding);
+        //InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
+        //InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
         String nextLine="";
         while ((nextLine = br.readLine()) != null){

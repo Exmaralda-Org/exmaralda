@@ -22,13 +22,17 @@ public class Test {
      */
     public static void main(String[] args) {
         try {
+            TranscriberConverter tc = new TranscriberConverter();
+            BasicTranscription bt = tc.readTranscriberFromFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3 (2).trs");
+            bt.writeXMLToFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3.exb", "none");
+                    
             //try {
                 //CHATConverter cc = new CHATConverter(new File("F:\\Dropbox\\DEBUG\\issue99\\liean11a.1.cha"));
                 //CHATConverter cc = new CHATConverter(new File("T:\\TP-Z2\\DATEN\\EXMARaLDA_DemoKorpus\\EnglishTranslator\\export\\EnglishTranslator.cha"));
                 //CHATConverter cc = new CHATConverter(new File("S:\\TP-Z2\\Schulungen\\ICCA_Folkerschulung_2010\\block2.cha"));
-                AudacityConverter cc = new AudacityConverter();
+                /*AudacityConverter cc = new AudacityConverter();
                 BasicTranscription bt = cc.readAudacityFromFile(new File("C:\\Users\\Thomas_Schmidt\\Desktop\\DEBUG\\AudacityImport\\T1220ASPEAK_dellines_hs02.txt"));
-                bt.writeXMLToFile("C:\\Users\\Thomas_Schmidt\\Desktop\\DEBUG\\AudacityImport\\out.exb", "none");
+                bt.writeXMLToFile("C:\\Users\\Thomas_Schmidt\\Desktop\\DEBUG\\AudacityImport\\out.exb", "none");*/
                 //BasicTranscription bt = cc.convert();
                 //bt.writeXMLToFile("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\CHAT_OUT.exb", "none");
                 //System.out.println(bt.getHead().toXML());
@@ -43,6 +47,7 @@ public class Test {
                 //System.out.println(out);
             //PraatConverter pc = new PraatConverter();
             //pc.readPraatFromFile("C:\\Users\\Schmidt\\Desktop\\FOLK_E_00002_SE_01_A_01_DF_01.TextGrid");
+            
             /*} catch (JexmaraldaException ex) {
                 ex.printStackTrace();
             } catch (FileNotFoundException ex) {
