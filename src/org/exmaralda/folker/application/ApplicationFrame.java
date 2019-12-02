@@ -62,7 +62,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("mac")) {
             // added 03-03-2010
-            setupMacOSXApplicationListener();
+            //setupMacOSXApplicationListener();
         }
 
 
@@ -262,7 +262,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     }
     
     /** added 01-03-2010 */
-    private void setupMacOSXApplicationListener() {
+    /*private void setupMacOSXApplicationListener() {
         final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
         application.setEnabledAboutMenu(true); // damit ein "Ueber " Menu erscheint
         application.addPreferencesMenuItem(); // "Einstellen..." Dialog
@@ -331,5 +331,5 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                 }
             }
            });
-	}
+	}*/
 }

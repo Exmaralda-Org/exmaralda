@@ -14,7 +14,6 @@ import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.sound.CocoaQTPlayer;
-import org.exmaralda.partitureditor.sound.JDSPlayer;
 import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
@@ -49,7 +48,8 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
             //videoPlayer = new JDSPlayer();
             videoPlayer = new JavaFXPlayer();
         } else if (os.equalsIgnoreCase("mac")){
-            videoPlayer = new CocoaQTPlayer();
+            //videoPlayer = new CocoaQTPlayer();
+            videoPlayer = new JavaFXPlayer();
         }
         //videoPlayer = new MMFPlayer();
         videoPlayer.addPlayableListener(this);
@@ -278,8 +278,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 videoDisplayPanel.setPreferredSize(c.getPreferredSize());
                 //pack();
             }
-        } */else if (os.equalsIgnoreCase("mac")){
-            // TO DO
+        } *//*else if (os.equalsIgnoreCase("mac")){
             CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)videoPlayer;
             cocoaQTPlayer.setSoundFile(f.getAbsolutePath());
 
@@ -290,6 +289,23 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 sourceWidth = 480;
                 sourceHeight = 270;
                 System.out.println("CocoaQTPlayer has set movie width/height to 480/270");
+                Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
+                c.setPreferredSize(initialDimension);
+                videoDisplayPanel.add(c);
+                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+            }
+            
+        }*/ else if (os.equalsIgnoreCase("mac")){
+            JavaFXPlayer javaFXPlayer = (JavaFXPlayer)videoPlayer;
+            javaFXPlayer.setSoundFile(f.getAbsolutePath());
+
+            videoDisplayPanel.removeAll();
+
+            if (javaFXPlayer.getVisibleComponent()!=null){
+                Component c = javaFXPlayer.getVisibleComponent();
+                sourceWidth = 480;
+                sourceHeight = 270;
+                System.out.println("JavaFXPlayer has set movie width/height to 480/270");
                 Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
                 c.setPreferredSize(initialDimension);
                 videoDisplayPanel.add(c);
@@ -328,7 +344,8 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                     //((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
                     ((JavaFXPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
                 } else if (os.equalsIgnoreCase("mac")) {
-                    ((CocoaQTPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);                    
+                    //((CocoaQTPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);                    
+                    ((JavaFXPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
                 }
 
 
