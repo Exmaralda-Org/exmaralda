@@ -91,7 +91,7 @@
     <!-- ********************************* -->
     <!-- **** START: GLOBAL VARIABLES **** -->
     
-    <xsl:variable name="settings" select="if(doc-available($SETTINGS-FILE)) then document($SETTINGS-FILE) else ()"/>
+    <xsl:variable name="settings" select="if(doc-available($SETTINGS-FILE)) then document($SETTINGS-FILE) else error((), 'Settings file could not be found.')"/>
     <xsl:variable name="tiers-morph" select="'mb', 'mp'" as="xs:string+"/>
     <xsl:variable name="tiers-gloss" select="'ge', 'gr', 'mc', 'hn'" as="xs:string+"/>
     <xsl:variable name="clitic-separator" select="'='" as="xs:string+"/>

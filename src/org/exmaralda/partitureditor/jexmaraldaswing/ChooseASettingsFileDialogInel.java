@@ -21,7 +21,7 @@ import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFil
 public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
 
     public boolean returnStatus = false;
-
+    private boolean custom = false;
     /**
      * Creates new form ChooseXSLStylesheetDialog
      */
@@ -50,8 +50,7 @@ public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
 
         jPanel0 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        String[] dropDownList = {"Custom", "INEL Dolgan settings", "INEL Kamas settings", "INEL Evenki settings"
-        , "INEL Selkup Settings (Lit. Russian as ltr)", "INEL Selkup Settings (Free Selkup (Cyr) as ltr)"};
+        String[] dropDownList = {"Custom", "INEL Dolgan settings", "INEL Kamas settings", "INEL Evenki settings", "INEL Selkup Settings (Lit. Russian as ltr)", "INEL Selkup Settings (Free Selkup (Cyr) as ltr)"};
         dropDown = new javax.swing.JComboBox(dropDownList);
         pathTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
@@ -117,38 +116,37 @@ public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
-        setSize(300,125);
+        setSize(300, 125);
     }// </editor-fold>                        
 
     private void dropDownActionPerformed(java.awt.event.ActionEvent evt) {
         javax.swing.JComboBox cb = (javax.swing.JComboBox) evt.getSource();
         String chosenOption = (String) cb.getSelectedItem();
-        switch (chosenOption) {
-            case "Custom":
-                pathTextField.setText("");
-                jPanel1.setVisible(true);
-                pack();
-                break;
-            case "INEL Dolgan settings":
-                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\dolgan_flextext2exb.xsl");
-                jPanel1.setVisible(false);
-                break;
-            case "INEL Kamas settings":
-                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\kamas_flextext2exb.xsl");
-                jPanel1.setVisible(false);
-                break;
-            case "INEL Evenki settings":
-                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\evenki_flextext2exb.xsl");
-                jPanel1.setVisible(false);
-                break;
-            case "INEL Selkup Settings (Lit. Russian as ltr)":
-                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\selkup_flextext2exb_ltr_lit-ru.xsl");
-                jPanel1.setVisible(false);
-                break;
-            case "INEL Selkup Settings (Free Selkup (Cyr) as ltr)":
-                pathTextField.setText("src\\org\\exmaralda\\partitureditor\\jexmaralda\\xsl\\selkup_flextext2exb_ltr_gls-sel-cyrl.xsl");
-                jPanel1.setVisible(false);
-                break;
+        if (chosenOption.equals("Custom")) {
+            pathTextField.setText("");
+            jPanel1.setVisible(true);
+            setCustom(true);
+            pack();
+        } else if (chosenOption.equals("INEL Dolgan settings")) {
+            pathTextField.setText("/org/exmaralda/partitureditor/jexmaralda/xsl/dolgan_flextext2exb.xsl");
+            setCustom(false);
+            jPanel1.setVisible(false);
+        } else if (chosenOption.equals("INEL Kamas settings")) {
+            pathTextField.setText("/org/exmaralda/partitureditor/jexmaralda/xsl/kamas_flextext2exb.xsl");
+            setCustom(false);
+            jPanel1.setVisible(false);
+        } else if (chosenOption.equals("INEL Evenki settings")) {
+            pathTextField.setText("/org/exmaralda/partitureditor/jexmaralda/xsl/evenki_flextext2exb.xsl");
+            setCustom(false);
+            jPanel1.setVisible(false);
+        } else if (chosenOption.equals("INEL Selkup Settings (Lit. Russian as ltr)")) {
+            pathTextField.setText("/org/exmaralda/partitureditor/jexmaralda/xsl/selkup_flextext2exb_ltr_lit-ru.xsl");
+            setCustom(false);
+            jPanel1.setVisible(false);
+        } else if (chosenOption.equals("INEL Selkup Settings (Free Selkup (Cyr) as ltr)")) {
+            pathTextField.setText("/org/exmaralda/partitureditor/jexmaralda/xsl/selkup_flextext2exb_ltr_gls-sel-cyrl.xsl");
+            setCustom(false);
+            jPanel1.setVisible(false);
         }
     }
 
@@ -200,6 +198,20 @@ public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
     private javax.swing.JTextField pathTextField;
     private javax.swing.JComboBox dropDown;
     private javax.swing.JLabel predefinedLabel;
-    private javax.swing.JLabel customLabel;           
+    private javax.swing.JLabel customLabel;
+
+    /**
+     * @return the custom
+     */
+    public boolean isCustom() {
+        return custom;
+    }
+
+    /**
+     * @param custom the custom to set
+     */
+    public void setCustom(boolean custom) {
+        this.custom = custom;
+    }
 
 }

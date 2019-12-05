@@ -205,8 +205,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             //new for INEL 2017-05-02
             org.exmaralda.partitureditor.jexmaraldaswing.ChooseXMLSettingsFileDialog flexDialog =
                     new org.exmaralda.partitureditor.jexmaraldaswing.ChooseXMLSettingsFileDialog(table.parent, true);
-            String xmlPath = settings.get("ImportXML", "");
-            flexDialog.setPath(xmlPath);
+            //String xmlPath = settings.get("ImportXML", "");
+            //flexDialog.setPath(xmlPath);
             flexDialog.setLocationRelativeTo(table);
             flexDialog.setVisible(true);
             if (flexDialog.returnStatus){

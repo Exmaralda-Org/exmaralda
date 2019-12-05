@@ -220,17 +220,22 @@ public class ImportActionInel extends org.exmaralda.partitureditor.partiture.Abs
             flexDialog.setVisible(true);
             if (flexDialog.returnStatus) {
                 File xmlSelectedFile;
+                FlexTextConverter fc = new FlexTextConverter();
                 if (flexDialog.getPath().startsWith("http")) {
                     xmlSelectedFile = new File(selectedFile.getAbsolutePath()+"settings.xml");
                     InputStream inputStream = new URL(flexDialog.getPath()).openStream();
                     OutputStream outputStream = new FileOutputStream(xmlSelectedFile);
                     IOUtils.copy(inputStream, outputStream);
                 } else {
-                    xmlSelectedFile = new File(flexDialog.getPath());
+                    if(flexDialog.isCustom()){                       
+                        settings.put("ImportXML", flexDialog.getPath());
+                        xmlSelectedFile = new File(flexDialog.getPath());
+                        importedTranscription = fc.readFlexTextFromTextFile(selectedFile, xmlSelectedFile);
+                    }else{
+                        settings.put("ImportXML", getClass().getResource(flexDialog.getPath()).toExternalForm().substring(6).replace("/", "\\"));
+                        importedTranscription = fc.readFlexTextFromTextFilePredefined(selectedFile, flexDialog.getPath());
+                    }
                 }
-                settings.put("ImportXML", flexDialog.getPath());
-                FlexTextConverter fc = new FlexTextConverter();
-                importedTranscription = fc.readFlexTextFromTextFile(selectedFile, xmlSelectedFile);
             }
         } else if (selectedFileFilter == dialog.XSLStylesheetImportFilter) {
             // added 24-09-2009

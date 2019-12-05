@@ -187,12 +187,10 @@ public class StylesheetFactory {
         java.io.StringWriter sw = new java.io.StringWriter();
         javax.xml.transform.stream.StreamResult inputStream = new StreamResult(sw);
            
-        
         //pass the parameters to the transfomer
          for (String[] p : parameters){
             transformer.setParameter(p[0], p[1]);
         } 
-        
         
         //perform the first transformation        
         transformer.transform(saxSource, inputStream);    
