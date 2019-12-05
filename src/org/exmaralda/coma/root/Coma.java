@@ -61,7 +61,7 @@ import org.jdom.filter.ElementFilter;
 import org.jdom.input.SAXBuilder;
 import org.jdom.xpath.XPath;
 
-import com.apple.eawt.ApplicationEvent;
+//import com.apple.eawt.ApplicationEvent;
 
 import java.util.prefs.BackingStoreException;
 import java.util.regex.Pattern;
@@ -134,7 +134,7 @@ public class Coma extends JFrame implements ChangeListener,
         coma = this;
         data = new ComaData(coma);
         if (os.equals("mac")) {
-            setupMacOSXApplicationListener();
+            //setupMacOSXApplicationListener();
             setupMacLookAndFeelTweaks();
         }
         this.setMinimumSize(new Dimension(800, 500));
@@ -1039,7 +1039,8 @@ public class Coma extends JFrame implements ChangeListener,
         return IconFactory.createImageIcon("splash.png");
     }
 
-    private void setupMacOSXApplicationListener() {
+    // this must go, see issue #199
+    /*private void setupMacOSXApplicationListener() {
         try {
             final com.apple.eawt.Application application = com.apple.eawt.Application
                     .getApplication();
@@ -1097,7 +1098,7 @@ public class Coma extends JFrame implements ChangeListener,
         } catch (Throwable e) {
             // bummsti. nicht schlimm.
         }
-    }
+    } */
 
     private void setupMacLookAndFeelTweaks() {
         // Font for OptionPanes
@@ -1463,6 +1464,7 @@ public class Coma extends JFrame implements ChangeListener,
     /**
      * Invoked when task's progress property changes.
      */
+    @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("progress".equals(evt.getPropertyName())) {
             int progress = (Integer) evt.getNewValue();

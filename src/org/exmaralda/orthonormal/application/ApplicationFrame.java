@@ -11,7 +11,7 @@
 
 package org.exmaralda.orthonormal.application;
 
-import com.apple.eawt.ApplicationEvent;
+//import com.apple.eawt.ApplicationEvent;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +57,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         String os = System.getProperty("os.name").substring(0,3);
         if (os.equalsIgnoreCase("mac")) {
             // added 03-03-2010
-            setupMacOSXApplicationListener();
+            //setupMacOSXApplicationListener();
         }
 
         if (args.length>0){
@@ -659,11 +659,12 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
             ex.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());
         }        
-    } 
+    }  
     
 
     /** added 27-05-2019: issue # 184*/
-    private void setupMacOSXApplicationListener() {
+    /** removed 05-12-2019: issue # 199*/
+    /*private void setupMacOSXApplicationListener() {
         final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
         application.setEnabledAboutMenu(true); // damit ein "Ueber " Menu erscheint
         application.addPreferencesMenuItem(); // "Einstellen..." Dialog
@@ -728,7 +729,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                 }
             }
            });
-	}
+	}*/
     
     
     

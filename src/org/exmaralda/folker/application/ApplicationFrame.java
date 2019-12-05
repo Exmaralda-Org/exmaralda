@@ -6,7 +6,7 @@
 
 package org.exmaralda.folker.application;
 
-import com.apple.eawt.ApplicationEvent;
+//import com.apple.eawt.ApplicationEvent;
 import javax.swing.ImageIcon;
 import java.io.*;
 import java.util.prefs.BackingStoreException;
