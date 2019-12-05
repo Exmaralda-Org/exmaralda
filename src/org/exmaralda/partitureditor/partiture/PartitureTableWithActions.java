@@ -2521,8 +2521,13 @@ public class PartitureTableWithActions extends PartitureTable
             //playerType = "BAS-Audio-Player";
         }
         
-        if (playerType.equals("JMF-Player") || playerType.equals("JLayer-Player")){
-            return new JMFPlayer();
+        if (playerType.equals("JMF-Player")){
+            settings.put("PlayerType", "BAS-Audio-Player");
+            String message = "The JMF Player is no longer used. \n"
+                                + ".\nCreating BAS Audio player instead.\n"
+                                + "Changed settings accordingly.";
+            javax.swing.JOptionPane.showMessageDialog(this, message);
+            return new BASAudioPlayer();
         } else if (playerType.equals("DirectShow-Player")){
             settings.put("PlayerType", "JDS-Player");
             String message = "The ELAN DS Player is no longer used. \n"
@@ -2578,7 +2583,7 @@ public class PartitureTableWithActions extends PartitureTable
                 return new JMFPlayer();
             }
         }*/
-        return new JMFPlayer();
+        return new BASAudioPlayer();
     }
 
     @Override
@@ -2636,6 +2641,8 @@ public class PartitureTableWithActions extends PartitureTable
             ((JDSPlayer)player).setPlaybackRate(newRate); 
         } else if (player instanceof CocoaQTPlayer){
             ((CocoaQTPlayer)player).setPlaybackRate(newRate);             
+        } else if (player instanceof JavaFXPlayer){
+            ((JavaFXPlayer)player).setPlaybackRate(newRate);             
         }
     }
 

@@ -404,6 +404,8 @@ public class PartiturEditor extends javax.swing.JFrame
             if (os.equalsIgnoreCase("mac")){
                 // changed 25-04-2017 (issue #29)
                 if (jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6")){
+                    // shouldn't happen anymore since there is no such 
+                    // java version for newer MACs (issue #199)
                     defaultPlayer = "CocoaQT-Player";
                 } else {
                     defaultPlayer = "BAS-Audio-Player";                    
@@ -432,7 +434,8 @@ public class PartiturEditor extends javax.swing.JFrame
             String playerNow = settings.get("PlayerType", defaultPlayer);
             partiturTimelinePanel.rateSpinner.setVisible(
                     "JDS-Player".equals(playerNow) ||
-                    "CocoaQT-Player".equals(playerNow)
+                    "CocoaQT-Player".equals(playerNow) ||
+                    "JavaFX-Player".equals(playerNow)
             );
 
             table.setSettings(getPreferencesNode());

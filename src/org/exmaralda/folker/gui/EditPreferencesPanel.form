@@ -307,6 +307,7 @@
                       <ComponentRef name="playerButtonGroup"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cocoa QT Player"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="elanQuicktimeRadioButton">
@@ -317,6 +318,7 @@
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="FOLKERInternationalizer.getString(&quot;dialog.preferences.quicktime&quot;)" type="code"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="quicktimeRadioButton">
@@ -337,6 +339,7 @@
                       <ComponentRef name="playerButtonGroup"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="JMF (Java Media Framework) Player"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>

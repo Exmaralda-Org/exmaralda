@@ -353,10 +353,12 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         playerButtonGroup.add(cocoaQTRadioButton);
         cocoaQTRadioButton.setText("Cocoa QT Player");
+        cocoaQTRadioButton.setEnabled(false);
         playerPanel.add(cocoaQTRadioButton);
 
         playerButtonGroup.add(elanQuicktimeRadioButton);
         elanQuicktimeRadioButton.setText(FOLKERInternationalizer.getString("dialog.preferences.quicktime"));
+        elanQuicktimeRadioButton.setEnabled(false);
         playerPanel.add(elanQuicktimeRadioButton);
 
         playerButtonGroup.add(quicktimeRadioButton);
@@ -367,6 +369,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         playerButtonGroup.add(jmfRadioButton);
         jmfRadioButton.setText("JMF (Java Media Framework) Player");
+        jmfRadioButton.setEnabled(false);
         playerPanel.add(jmfRadioButton);
 
         playerOptionsPanel.add(playerPanel, java.awt.BorderLayout.CENTER);
