@@ -2672,7 +2672,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     @Override
     public void processPlayableEvent(PlayableEvent e) {
         super.processPlayableEvent(e);
-        System.out.println("This is ApplicationControl.processPlayableEvent" );
+        //System.out.println("This is ApplicationControl.processPlayableEvent" );
         int type = e.getType();
         switch (type){
             case PlayableEvent.SOUNDFILE_SET :

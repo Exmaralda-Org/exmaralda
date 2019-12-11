@@ -20,6 +20,9 @@ public class StartupSplashScreen extends JWindow {
         JLabel label = new JLabel();
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource(pathToImage)));
         getContentPane().add(label, BorderLayout.CENTER);
+        Color transparentColor = new Color(1,1,1,Color.TRANSLUCENT);
+        this.setBackground(transparentColor);
+        
         pack();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension panelSize = this.getPreferredSize();
@@ -29,8 +32,9 @@ public class StartupSplashScreen extends JWindow {
                 dump();
             }
         });
-        final int pause = 4000;
+        final int pause = 10000;
         final Runnable closerRunner = new Runnable(){
+            @Override
             public void run()
             {
                 dump();

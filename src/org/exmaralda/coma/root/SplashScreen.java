@@ -12,7 +12,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import mpi.eudico.util.ErrOutLogFileHandler;
 
 public class SplashScreen extends JPanel implements MouseListener {
 	Coma coma;

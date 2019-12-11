@@ -24,6 +24,9 @@ public class StartupSplashScreen extends JWindow {
         label.setOpaque(false);
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SplashScreen.png")));
         label.repaint();
+
+        Color transparentColor = new Color(1,1,1,Color.TRANSLUCENT);
+        this.setBackground(transparentColor);
         /*try {
             AWTUtilities.setWindowOpaque(this, false);
         } catch (IllegalArgumentException iae){
@@ -37,18 +40,21 @@ public class StartupSplashScreen extends JWindow {
         Dimension panelSize = this.getPreferredSize();
         setLocation(screenSize.width/2 - panelSize.width/2, screenSize.height/2 - panelSize.height/2);
         addMouseListener(new java.awt.event.MouseAdapter(){
+            @Override
             public void mousePressed(java.awt.event.MouseEvent e){
                 dump();
             }
         });
         final int pause = 8000;
         final Runnable closerRunner = new Runnable(){
+            @Override
             public void run()
             {
                 dump();
             }
         };
         Runnable waitRunner = new Runnable (){
+            @Override
             public void run(){
                 try{
                     Thread.sleep(pause);
@@ -60,6 +66,10 @@ public class StartupSplashScreen extends JWindow {
         setVisible(true);
         Thread splashThread = new Thread(waitRunner, "SplashThread");
         splashThread.start();
+    }
+    
+    public static void main(String[] args){
+        new StartupSplashScreen(new JFrame());
     }
     
     

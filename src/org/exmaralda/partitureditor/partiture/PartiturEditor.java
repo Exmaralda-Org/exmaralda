@@ -294,7 +294,9 @@ public class PartiturEditor extends javax.swing.JFrame
                         //pe.table.transcriptionChanged = true;
                     } catch (Exception e){
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(pe, e.getLocalizedMessage());
+                        String message =  e.getLocalizedMessage() + ": ";
+                        message+="(\nError trying to read " + args[0] + ")";
+                        JOptionPane.showMessageDialog(pe, message);
                     }
                 }
             }

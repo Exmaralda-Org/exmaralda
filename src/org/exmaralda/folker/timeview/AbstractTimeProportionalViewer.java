@@ -89,16 +89,18 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
     }
 
             
+    // this is overridden in WaveFormViewer
     public void setSoundFile(String soundFilePath) throws IOException{
         // changed 28-04-2009
         AbstractPlayer player = null;
 
         try {
-            player = new JMFPlayer();
+            //player = new JMFPlayer();
+            player = new JavaFXPlayer();
             player.setSoundFile(soundFilePath);
         } catch (Exception ioe){
             String os = System.getProperty("os.name").substring(0,3);
-            if (os.equalsIgnoreCase("mac")) {
+            /*if (os.equalsIgnoreCase("mac")) {
                 try {
                     //player = new QuicktimePlayer();
                     player = new CocoaQTPlayer();
@@ -106,7 +108,7 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
                 } catch (Exception ex) {
                     throw new IOException("No available player can open this file");
                 }
-            } else if (os.equalsIgnoreCase("win")){
+            } else */if (os.equalsIgnoreCase("win")){
                 try {
                     //player = new ELANDSPlayer();
                     player = new JDSPlayer();

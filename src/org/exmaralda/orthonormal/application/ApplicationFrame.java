@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import org.exmaralda.common.application.HelpMenu;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.jdom.JDOMException;

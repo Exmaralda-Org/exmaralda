@@ -23,6 +23,9 @@ public class StartupSplashScreen extends JWindow {
         label.setOpaque(false);
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/SplashScreen.png")));
         label.repaint();
+        Color transparentColor = new Color(1,1,1,Color.TRANSLUCENT);
+        this.setBackground(transparentColor);
+        
         /*try {
             AWTUtilities.setWindowOpaque(this, false);
         } catch (IllegalArgumentException iae){

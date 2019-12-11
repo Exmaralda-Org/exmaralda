@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import java.io.*;
 import java.util.prefs.BackingStoreException;
 import javax.swing.JOptionPane;
-import org.exmaralda.common.application.HelpMenu;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 
