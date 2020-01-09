@@ -473,6 +473,12 @@
             <xsl:attribute name="synch">
                 <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@timepoint-reference"/>
             </xsl:attribute>            
+            <xsl:if test="@ol">
+                <xsl:attribute name="type">ol-<xsl:value-of select="@ol"/></xsl:attribute>
+            </xsl:if>            
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id"><xsl:value-of select="@id"/></xsl:attribute>
+            </xsl:if>            
         </xsl:element>
     </xsl:template>
     
@@ -492,12 +498,13 @@
                     <xsl:otherwise>w_<xsl:value-of select="generate-id()"/></xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
-            <xsl:if test="@transition or ancestor::uncertain">
+            <xsl:if test="@transition or ancestor::uncertain or @ol">
                 <xsl:attribute name="type">
                     <xsl:variable name="TYPE_VALUE">
                         <xsl:if test="@transition='assimilated'">assimilated </xsl:if>
                         <!-- added 05-07-2018 -->
                         <xsl:if test="ancestor::uncertain">uncertain </xsl:if>
+                        <xsl:if test="@ol">ol-<xsl:value-of select="@ol"/> </xsl:if>
                     </xsl:variable>
                     <xsl:value-of select="normalize-space($TYPE_VALUE)"/>
                 </xsl:attribute>
@@ -517,8 +524,11 @@
         <xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
             <!-- added 19-11-2019 -->
             <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                    <xsl:otherwise>pause_<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>            
             <!-- added 01-06-2018 -->            
             <xsl:attribute name="rend">
                 <xsl:choose>
@@ -555,13 +565,22 @@
         <xsl:element name="incident"  xmlns="http://www.tei-c.org/ns/1.0">
             <!-- added 19-11-2019 -->
             <xsl:attribute name="xml:id">
-                <xsl:value-of select="@id"/>
-            </xsl:attribute>        
+                <xsl:choose>
+                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                    <xsl:otherwise>inc_<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>            
             <xsl:if test="not(ancestor::*[@speaker-reference])">
                 <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
                 <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
             </xsl:if>
             <xsl:element name="desc">
+                <!-- new 12-12-2019 -->
+                <xsl:attribute name="rend">
+                    <xsl:text>((</xsl:text>
+                        <xsl:value-of select="@description"/>                   
+                    <xsl:text>))</xsl:text>
+                </xsl:attribute>                
                 <xsl:value-of select="@description"/>
             </xsl:element>
         </xsl:element>
