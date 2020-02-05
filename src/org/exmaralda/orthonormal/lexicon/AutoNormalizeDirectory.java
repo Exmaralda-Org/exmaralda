@@ -23,8 +23,8 @@ import org.jdom.xpath.XPath;
  */
 public class AutoNormalizeDirectory implements SearchListenerInterface {
 
-    String INPUT_DIRECTORY = /*CompareDirectories.MANUAL_DIRECTORY; */ "Y:\\thomas\\BW2FLK\\4";
-    String OUTPUT_DIRECTORY = /*CompareDirectories.AUTO_DIRECTORY; */ "Y:\\thomas\\BW2FLK\\4a";
+    String INPUT_DIRECTORY = /*CompareDirectories.MANUAL_DIRECTORY; */ "D:\\AGD-DATA\\dgd2_data\\legacy-transcripts\\BG\\FLK";
+    String OUTPUT_DIRECTORY = /*CompareDirectories.AUTO_DIRECTORY; */ "D:\\AGD-DATA\\dgd2_data\\legacy-transcripts\\BG\\FLN";
     
     /**
      * @param args the command line arguments
