@@ -17,6 +17,7 @@ import mpi.eudico.server.corpora.clomimpl.abstr.MediaDescriptor;
  *
  * @author thomas
  */
+@Deprecated 
 public class CocoaQTPlayer extends AbstractPlayer implements ControllerListener {
 
     mpi.eudico.client.annotator.player.CocoaQTMediaPlayer wrappedPlayer;

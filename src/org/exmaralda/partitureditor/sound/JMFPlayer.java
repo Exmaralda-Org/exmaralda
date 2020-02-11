@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
  *
  * @author  thomas
  */
+@Deprecated 
 public class JMFPlayer extends AbstractPlayer implements PlayableListener {
     
     Player player;
