@@ -309,7 +309,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
         // added 18-03-2005
         videoDisplayPanel.removeAll();
 
-        if (getPlayer() instanceof JMFPlayer){
+        /*if (getPlayer() instanceof JMFPlayer){
             JMFPlayer jmfp = (JMFPlayer)getPlayer();
             if (jmfp.getVisibleComponent()!=null){
                 Component c = jmfp.getVisibleComponent();
@@ -319,7 +319,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
             } else {
                 videoDisplayPanel.setVisible(false);
             }
-        }
+        }*/
 
         /*if (getPlayer() instanceof ELANDSPlayer){
             ELANDSPlayer edsp = (ELANDSPlayer)getPlayer();
@@ -339,6 +339,38 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
 
         if (getPlayer() instanceof JDSPlayer){
             JDSPlayer edsp = (JDSPlayer)getPlayer();
+            // TODO
+            if (edsp.getVisibleComponent()!=null){
+                Component c = edsp.getVisibleComponent();
+                c.setPreferredSize(new java.awt.Dimension(
+                        edsp.wrappedPlayer.getSourceWidth(),
+                        edsp.wrappedPlayer.getSourceHeight()));
+                videoDisplayPanel.add(c);
+                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+                videoDisplayPanel.setVisible(true);
+            } else {
+                videoDisplayPanel.setVisible(false);
+            }
+        }
+
+        if (getPlayer() instanceof JavaFXPlayer){
+            JavaFXPlayer edsp = (JavaFXPlayer)getPlayer();
+            // TODO
+            if (edsp.getVisibleComponent()!=null){
+                Component c = edsp.getVisibleComponent();
+                c.setPreferredSize(new java.awt.Dimension(
+                        edsp.wrappedPlayer.getSourceWidth(),
+                        edsp.wrappedPlayer.getSourceHeight()));
+                videoDisplayPanel.add(c);
+                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
+                videoDisplayPanel.setVisible(true);
+            } else {
+                videoDisplayPanel.setVisible(false);
+            }
+        }
+
+        if (getPlayer() instanceof AVFPlayer){
+            AVFPlayer edsp = (AVFPlayer)getPlayer();
             // TODO
             if (edsp.getVisibleComponent()!=null){
                 Component c = edsp.getVisibleComponent();
@@ -393,6 +425,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
         pack();
     }
 
+    @Override
     public void processPlayableEvent(PlayableEvent e) {
         if (e.getType()==PlayableEvent.POSITION_UPDATE){
             String time = TimeStringFormatter.formatMiliseconds(player.getCurrentPosition()*1000.0,2);

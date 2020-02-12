@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.xpath.*;
 import java.util.*;
-import org.exmaralda.partitureditor.sound.JMFPlayer;
+import org.exmaralda.partitureditor.sound.AbstractPlayer;
+import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 
 
 /**
@@ -25,7 +26,7 @@ public class AddRecordingDurationsInComa {
     public static String CORPUS_PATH = "S:\\TP-Z2\\DATEN\\MAPTASK\\Map_Task_Aufnahmen\\";
     public static String OUT_FILENAME = "S:\\TP-Z2\\DATEN\\MAPTASK\\Map_Task_Aufnahmen\\MAPTASK.coma";
 
-    JMFPlayer player = new JMFPlayer();
+    AbstractPlayer player = new JavaFXPlayer();
 
     GUID guido = new GUID();
 

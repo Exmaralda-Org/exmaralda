@@ -2080,7 +2080,7 @@ public class PartitureTableWithActions extends PartitureTable
                     
                     //new 06-12-2016: prevent closing of dialog, may cause trouble
                     //because CocoaQT always has a visible component
-                    if (player instanceof CocoaQTPlayer){
+                    if (player instanceof AVFPlayer){
                         mediaPanelDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);                        
                     }
                 }
@@ -2619,8 +2619,8 @@ public class PartitureTableWithActions extends PartitureTable
     void setMediaPlaybackRate(double newRate) {
         if (player instanceof JDSPlayer){
             ((JDSPlayer)player).setPlaybackRate(newRate); 
-        } else if (player instanceof CocoaQTPlayer){
-            ((CocoaQTPlayer)player).setPlaybackRate(newRate);             
+        } else if (player instanceof AVFPlayer){
+            ((AVFPlayer)player).setPlaybackRate(newRate);             
         } else if (player instanceof JavaFXPlayer){
             ((JavaFXPlayer)player).setPlaybackRate(newRate);             
         }

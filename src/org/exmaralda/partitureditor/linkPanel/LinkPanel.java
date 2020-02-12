@@ -25,7 +25,7 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
     private String directory;
     javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();    
     ScrollablePicture scrollablePicture;
-    org.exmaralda.partitureditor.sound.JMFPlayer player = null;
+    org.exmaralda.partitureditor.sound.JavaFXPlayer player = null;
     JLabel errorLabel;
     java.awt.TextArea textdisplay;
     
@@ -343,7 +343,7 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
     }
     
     private void setAudioVideo(){
-        player = new org.exmaralda.partitureditor.sound.JMFPlayer();
+        player = new org.exmaralda.partitureditor.sound.JavaFXPlayer();
         String url = urlTextField.getText();
         displayPanel2.removeAll();
         mediaControlPanel.removeAll();
@@ -356,12 +356,12 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
             } else {
                 displayPanel2.setPreferredSize(new java.awt.Dimension(0,0));
             }
-            java.awt.Component comp = player.getPlayerControlComponent();
+            /*java.awt.Component comp = player.getPlayerControlComponent();
             if (comp!=null){                                
                 mediaControlPanel.add(comp);
             } else {
                 
-            }
+            }*/
             displayPanel.setVisible(true);
         } catch (IOException ioe){
             System.out.println(ioe.getMessage());

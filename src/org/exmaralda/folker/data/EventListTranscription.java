@@ -474,8 +474,8 @@ public class EventListTranscription {
     }
 
     public EventListTranscription splitTranscription(double splitTime) throws IOException {
-        org.exmaralda.partitureditor.sound.JMFPlayer player =
-            new org.exmaralda.partitureditor.sound.JMFPlayer();
+        org.exmaralda.partitureditor.sound.BASAudioPlayer player =
+            new org.exmaralda.partitureditor.sound.BASAudioPlayer();
         System.out.println("MEDIA PATH " + getMediaPath());
         player.setSoundFile(getMediaPath());
         double recEnd = player.getTotalLength() *1000.0;

@@ -84,7 +84,7 @@ public class LayoutPrototype    extends javax.swing.JFrame
         //tpv.setSoundFile(fn);
         tpv.addTimeSelectionListener(this);
 
-        player = new JMFPlayer();
+        player = new BASAudioPlayer();
 
         addEventAction = new AddEventAction(tableModel, tpv);
         tpv.getInputMap(tpv.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), "addEvent");

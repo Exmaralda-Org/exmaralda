@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
-import org.exmaralda.partitureditor.sound.CocoaQTPlayer;
 import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;

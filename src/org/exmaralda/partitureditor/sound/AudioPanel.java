@@ -555,7 +555,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        if (!(player instanceof CocoaQTPlayer)){
+        if (!(player instanceof AVFPlayer)){
             setVisible(false);
             dispose();
         }
@@ -591,20 +591,20 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         // use the smaller of the two because it is guaranteed to fit
         if (dimensionByWidth.width < dimensionByHeight.width){
            player.getVisibleComponent().setPreferredSize(dimensionByWidth);
-           if (player instanceof CocoaQTPlayer){
+           /*if (player instanceof CocoaQTPlayer){
                 player.getVisibleComponent().setSize(dimensionByWidth);
                 player.getVisibleComponent().setMinimumSize(dimensionByWidth);
                 player.getVisibleComponent().setMaximumSize(dimensionByWidth);                
-           } 
+           } */
            System.out.println("Dimensions after resize: [" + dimensionByWidth.getWidth() + "/" + dimensionByWidth.getHeight() + "]");
            System.out.println(player.getVisibleComponent().toString());
         } else {
            player.getVisibleComponent().setPreferredSize(dimensionByHeight);            
-           if (player instanceof CocoaQTPlayer){
+           /*if (player instanceof CocoaQTPlayer){
                 player.getVisibleComponent().setSize(dimensionByHeight);
                 player.getVisibleComponent().setMinimumSize(dimensionByHeight);
                 player.getVisibleComponent().setMaximumSize(dimensionByHeight);                
-           } 
+           } */
            System.out.println("Dimensions after resize: [" + dimensionByHeight.getWidth() + "/" + dimensionByHeight.getHeight() + "]");
            System.out.println(player.getVisibleComponent().toString());
         }
@@ -715,7 +715,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("AVFPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } else if (getPlayer() instanceof CocoaQTPlayer) {
+            } /*else if (getPlayer() instanceof CocoaQTPlayer) {
                  CocoaQTPlayer cqtp = (CocoaQTPlayer)getPlayer();
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
                  sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
@@ -727,7 +727,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                     sourceHeight = 270;
                     System.out.println("CocoaQTPlayer has set movie width/height to 480/270");
                  }
-            } else if (getPlayer() instanceof MMFPlayer) {
+            } */else if (getPlayer() instanceof MMFPlayer) {
                  MMFPlayer cqtp = (MMFPlayer)getPlayer();
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
                  sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
@@ -751,24 +751,24 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
             c.setPreferredSize(initialDimension);
             System.out.println("Preferred size set to: " + initialDimension.width + "/" + initialDimension.height);
             
-            if (getPlayer() instanceof JMFPlayer){
+            /*if (getPlayer() instanceof JMFPlayer){
                 JMFPlayer jmfp = (JMFPlayer)getPlayer();                
                 grabButton.setEnabled(jmfp.fgc!=null);
                 cutButton.setEnabled(AudioProcessor.isCuttable(filename));                
-            } else if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof CocoaQTPlayer || getPlayer() instanceof MMFPlayer || getPlayer() instanceof JavaFXPlayer){
+            } else */if (getPlayer() instanceof JDSPlayer || getPlayer() instanceof AVFPlayer || getPlayer() instanceof MMFPlayer || getPlayer() instanceof JavaFXPlayer){
                 // new 06-12-2016
                 videoDisplayPanel.add(c);
                 System.out.println("(3c) AudioPanel: added the visual component");
                 System.out.println(c.toString());
-                if (player instanceof CocoaQTPlayer){
+                /*if (player instanceof CocoaQTPlayer){
                     c.setSize(initialDimension);
                     c.setMinimumSize(initialDimension);
                     c.setMaximumSize(initialDimension);                
-                }
-                if ((getPlayer() instanceof CocoaQTPlayer) && 
+                }*/
+                if ((getPlayer() instanceof AVFPlayer) && 
                         ((new File(filename).getName().toUpperCase().endsWith(".WAV")) ||
                         (new File(filename).getName().toUpperCase().endsWith(".MP3")))){
-                    System.out.println("We have CocoaQT player with a sound file!");
+                    System.out.println("We have AVFPlayer player with a sound file!");
                     /*videoDisplayPanel.setPreferredSize(new java.awt.Dimension(1, 1));*/
                     grabButton.setEnabled(false);
                 } else {

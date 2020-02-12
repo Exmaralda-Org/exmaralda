@@ -786,8 +786,8 @@ public final class ApplicationControl implements  ListSelectionListener,
         player.setSoundFile(tryPath);            
 
         // 27-05-2019: issue #189
-        if (player instanceof CocoaQTPlayer){
-            CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)player;
+        if (player instanceof AVFPlayer){
+            AVFPlayer cocoaQTPlayer = (AVFPlayer)player;
             Component visibleComponent = cocoaQTPlayer.getVisibleComponent();
             visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
             applicationFrame.dummyPanelForCocoaQT.removeAll();
