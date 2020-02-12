@@ -252,8 +252,8 @@ public class PartiturEditor extends javax.swing.JFrame
     public static void main(final String args[]) {
         System.out.println("java.library.path=" + System.getProperty("java.library.path"));
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
-        /*try{
-            if (thisIsAMac){
+        try{
+            /*if (thisIsAMac){
                 System.out.println("Setting Quaqua L&F");
                 Set includes = new HashSet();
                 includes.add("ColorChooser");
@@ -264,14 +264,14 @@ public class PartiturEditor extends javax.swing.JFrame
                 includes.add("SplitPane");
                 ch.randelshofer.quaqua.QuaquaManager.setIncludedUIs(includes);
                 UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-            } else {
+            } else {*/
                 System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
                 javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            }
+            //}
         }           
         catch (Exception e) {
             e.printStackTrace();        
-        } */
+        } 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
