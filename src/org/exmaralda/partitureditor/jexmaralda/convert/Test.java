@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 
 /**
@@ -22,10 +23,12 @@ public class Test {
      */
     public static void main(String[] args) {
         try {
-            TranscriberConverter tc = new TranscriberConverter();
+            /*TranscriberConverter tc = new TranscriberConverter();
             BasicTranscription bt = tc.readTranscriberFromFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3 (2).trs");
-            bt.writeXMLToFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3.exb", "none");
-                    
+            bt.writeXMLToFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3.exb", "none");*/
+            BasicTranscription bt = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File("D:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK\\FOLK_E_00069_SE_01_T_01_DF_01.fln"));
+            SubtitleConverter sc = new SubtitleConverter(bt);
+            sc.writeVTT(new File("D:\\WebApplication3\\web\\data\\FOLK_E_00069_SE_01_T_01.vtt"));
             //try {
                 //CHATConverter cc = new CHATConverter(new File("F:\\Dropbox\\DEBUG\\issue99\\liean11a.1.cha"));
                 //CHATConverter cc = new CHATConverter(new File("T:\\TP-Z2\\DATEN\\EXMARaLDA_DemoKorpus\\EnglishTranslator\\export\\EnglishTranslator.cha"));

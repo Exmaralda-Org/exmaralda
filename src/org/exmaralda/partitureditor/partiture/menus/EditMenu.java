@@ -91,10 +91,10 @@ public class EditMenu extends AbstractTableMenu {
         selectionMenu.add(table.selectionToNewAction).setToolTipText("Make a new transcription from the current selection");
         selectionMenu.add(table.leftPartToNewAction).setToolTipText("Make a new transcription out of the part on the left of the cursor");
         selectionMenu.add(table.rightPartToNewAction).setToolTipText("Make a new transcription out of the part on the right of the cursor");
-        selectionMenu.add(new javax.swing.JSeparator());
+        /*selectionMenu.add(new javax.swing.JSeparator());
         selectionMenu.add(table.selectionToRTFAction).setToolTipText("Output the current selection as an RTF file (for MS Word)");
         selectionMenu.add(table.selectionToHTMLAction).setToolTipText("Output the current selection as an HTML file (for a browser)");
-        selectionMenu.add(table.printSelectionAction).setToolTipText("");
+        selectionMenu.add(table.printSelectionAction).setToolTipText("");*/
         
         this.add(selectionMenu);
         

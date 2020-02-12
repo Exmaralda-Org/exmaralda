@@ -17,8 +17,6 @@ import javax.swing.*;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.prefs.BackingStoreException;
 import org.exmaralda.exakt.search.AnnotationSearchResult;
 import org.exmaralda.partitureditor.partiture.menus.*;
@@ -254,7 +252,7 @@ public class PartiturEditor extends javax.swing.JFrame
     public static void main(final String args[]) {
         System.out.println("java.library.path=" + System.getProperty("java.library.path"));
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
-        try{
+        /*try{
             if (thisIsAMac){
                 System.out.println("Setting Quaqua L&F");
                 Set includes = new HashSet();
@@ -273,7 +271,7 @@ public class PartiturEditor extends javax.swing.JFrame
         }           
         catch (Exception e) {
             e.printStackTrace();        
-        }
+        } */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -861,7 +859,7 @@ public class PartiturEditor extends javax.swing.JFrame
 
 }
 
-class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPrefsHandler, com.apple.mrj.MRJAboutHandler {
+/*class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPrefsHandler, com.apple.mrj.MRJAboutHandler {
 
     PartiturEditor pe;
 
@@ -893,4 +891,4 @@ class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPref
             });
             throw new IllegalStateException("Let the quit handler do it");
 	}
-}
+}*/

@@ -6,14 +6,9 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
-import org.exmaralda.partitureditor.deprecated.ExportHTMLPartitureFileDialog;
 import org.exmaralda.partitureditor.jexmaralda.convert.ItConverter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 
 
 /**
@@ -27,6 +22,7 @@ public class SelectionToHTMLAction extends org.exmaralda.partitureditor.partitur
         super("Selection to HTML...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("selectionToHTMLAction!");
         table.commitEdit(true);
@@ -41,11 +37,11 @@ public class SelectionToHTMLAction extends org.exmaralda.partitureditor.partitur
         if (table.getFrameEndPosition()>=0){((org.exmaralda.partitureditor.interlinearText.ItBundle)it.getItElementAt(0)).frameEndPosition=table.getFrameEndPosition();}
         System.out.println("Transcript converted to interlinear text.");
         table.htmlParameters.additionalStuff="";
-        ExportHTMLPartitureFileDialog dialog = new ExportHTMLPartitureFileDialog(it, table.htmlParameters, table.htmlDirectory);
+        /*ExportHTMLPartitureFileDialog dialog = new ExportHTMLPartitureFileDialog(it, table.htmlParameters, table.htmlDirectory);
         boolean success = dialog.saveHTML(table);
         if (success){
             table.htmlDirectory = dialog.getFilename();
-        }
+        }*/
     }
     
     

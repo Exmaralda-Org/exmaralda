@@ -6,7 +6,6 @@
 
 package org.exmaralda.partitureditor.partiture.formatActions;
 
-import org.exmaralda.partitureditor.deprecated.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.SaveTierFormatTableAsDialog;
 import org.exmaralda.partitureditor.partiture.*;
 

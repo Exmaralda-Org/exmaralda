@@ -18,7 +18,7 @@ public class RecordingPropertiesCalculator {
         if (!(recordingFile.exists())) return -1.0;
         if (!(recordingFile.canRead())) return -1.0;
         AbstractPlayer player;
-        player = new JMFPlayer();
+        player = new BASAudioPlayer();
         double result = -1.0;
         try {
             player.setSoundFile(recordingFile.getAbsolutePath());
@@ -28,21 +28,14 @@ public class RecordingPropertiesCalculator {
             String os = System.getProperty("os.name").substring(0,3);
             if (os.equalsIgnoreCase("mac")){
                 try {
-                    player = new ELANQTPlayer();
+                    player = new AVFPlayer();
                     player.setSoundFile(recordingFile.getAbsolutePath());
                     result = player.getTotalLength();
-                    ((ELANQTPlayer)(player)).wrappedPlayer.cleanUpOnClose();
+                    ((AVFPlayer)(player)).wrappedPlayer.cleanUpOnClose();
                     player = null;
                 } catch (IOException ex1) {
-                    try {
-                        player = new QuicktimePlayer();
-                        player.setSoundFile(recordingFile.getAbsolutePath());
-                        result = player.getTotalLength();
-                        player = null;
-                    } catch (Exception ex2) {
-                        // give up
-                        return -1.0;
-                    }
+                    // give up
+                    return -1.0;
                 }
             } else if (os.equalsIgnoreCase("win")){
                 try {

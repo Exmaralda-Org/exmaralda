@@ -2493,15 +2493,9 @@ public class PartitureTableWithActions extends PartitureTable
 
         String os = System.getProperty("os.name").substring(0,3);
         String jreVersion = System.getProperty("java.version");
-        String defaultPlayer = "JMF-Player";
+        String defaultPlayer = "BAS-Audio-Player";
         if (os.equalsIgnoreCase("mac")){
-            //defaultPlayer = "ELAN-Quicktime-Player";
-            if (jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6")){
-                defaultPlayer = "CocoaQT-Player";
-            } else {
-                // new 15-02-2017: don't use CocoaQT if running under Oracle Java
-                defaultPlayer = "BAS-Audio-Player";
-            }
+            defaultPlayer = "AVF-Player";
         } else if (os.equalsIgnoreCase("win")){
             defaultPlayer = "JDS-Player";
         }
@@ -2548,41 +2542,27 @@ public class PartitureTableWithActions extends PartitureTable
         } else if (playerType.equals("BAS-Audio-Player")){
             return new BASAudioPlayer();
         } else if (playerType.equals("ELAN-Quicktime-Player")){
-            return new ELANQTPlayer();
-        } else if (playerType.equals("CocoaQT-Player")){
-            if (!(jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6"))) {
-                // new 15-02-2017: don't use CocoaQT if running under Oracle Java
-                settings.put("PlayerType", "BAS-Audio-Player");
-                String message = "You are using Java version " + jreVersion +". \n"
-                                + "CocoaQT-Player requires Apple's Java in version 1.6."
+            settings.put("PlayerType", "BAS-Audio-Player");
+            String message = "The ELAN-Quicktime Player is no longer used. \n"
                                 + ".\nCreating BAS Audio player instead.\n"
                                 + "Changed settings accordingly.";
-                javax.swing.JOptionPane.showMessageDialog(this, message);
-                return new BASAudioPlayer();                
-            }
-            return new CocoaQTPlayer();
+            javax.swing.JOptionPane.showMessageDialog(this, message);
+            return new BASAudioPlayer();
+        } else if (playerType.equals("CocoaQT-Player")){
+            settings.put("PlayerType", "BAS-Audio-Player");
+            String message = "The CocoaQT-Player is no longer used. \n"
+                                + ".\nCreating AVF player instead.\n"
+                                + "Changed settings accordingly.";
+            javax.swing.JOptionPane.showMessageDialog(this, message);
+            return new AVFPlayer();
         } else if (playerType.equals("Quicktime-Player")){
             settings.put("PlayerType", "ELAN-Quicktime-Player");
             String message = "Do not want to create old Quicktime player. \n"
-                                + ".\nCreating ELAN Quicktime player instead.\n"
+                                + ".\nCreating AVF player instead.\n"
                                 + "Changed settings accordingly.";
             javax.swing.JOptionPane.showMessageDialog(this, message);
-            return new ELANQTPlayer();
+            return new AVFPlayer();
         }
-            // added for TTTs player, version 1.3.4., April 2007
-            /*try {
-                QuicktimePlayer qbp = new QuicktimePlayer();
-                return qbp;
-            } catch (Throwable ex) {
-                ex.printStackTrace();
-                String message = "Could not create Quicktime player: \n"
-                                    + ex.getMessage()
-                                    + ".\nCreating JMF player instead.";
-                javax.swing.JOptionPane.showMessageDialog(this, message);
-                settings.put("PlayerType", "JMF-Player");
-                return new JMFPlayer();
-            }
-        }*/
         return new BASAudioPlayer();
     }
 

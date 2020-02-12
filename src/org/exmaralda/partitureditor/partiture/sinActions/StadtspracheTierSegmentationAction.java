@@ -7,9 +7,6 @@
 package org.exmaralda.partitureditor.partiture.sinActions;
 
 import org.exmaralda.partitureditor.partiture.transcriptionActions.AbstractFSMSegmentationAction;
-import org.exmaralda.partitureditor.deprecated.segmentationActions.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 

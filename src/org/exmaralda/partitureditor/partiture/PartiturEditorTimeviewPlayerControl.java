@@ -13,11 +13,7 @@ import org.exmaralda.folker.timeview.AbstractTimeProportionalViewer;
 import org.exmaralda.folker.timeview.ChangeZoomDialog;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.partitureditor.sound.AVFPlayer;
-import org.exmaralda.partitureditor.sound.CocoaQTPlayer;
-import org.exmaralda.partitureditor.sound.ELANDSPlayer;
-import org.exmaralda.partitureditor.sound.ELANQTPlayer;
 import org.exmaralda.partitureditor.sound.JDSPlayer;
-import org.exmaralda.partitureditor.sound.JMFPlayer;
 import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 import org.exmaralda.partitureditor.sound.MMFPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
@@ -55,24 +51,11 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
     @Override
     public void processTimeSelectionEvent(TimeSelectionEvent event) {
         // TODO?
+        // changed 11-02-2020
         super.processTimeSelectionEvent(event);
         super.moveTimepoints(event);
         if ((playerState==PLAYER_IDLE)){
-            if (player instanceof JMFPlayer){
-                JMFPlayer jmfp = (JMFPlayer)player;
-                if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
-                } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
-                }
-            } else if (player instanceof ELANDSPlayer){
-                ELANDSPlayer jmfp = (ELANDSPlayer)player;
-                if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
-                } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
-                }
-            } else if (player instanceof JDSPlayer){
+             if (player instanceof JDSPlayer){
                 JDSPlayer jmfp = (JDSPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
                     jmfp.updateVideo(selectionStart/1000.0);
@@ -93,20 +76,6 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                 } else {
                     jmfp.updateVideo(selectionEnd/1000.0);
                 }            
-            } else if (player instanceof ELANQTPlayer){
-                ELANQTPlayer jmfp = (ELANQTPlayer)player;
-                if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
-                } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
-                }
-            } else if (player instanceof CocoaQTPlayer){
-                CocoaQTPlayer jmfp = (CocoaQTPlayer)player;
-                if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
-                } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
-                }
             } else if (player instanceof MMFPlayer){
                 //HEY HO BERND THE BUILDER!
                 //Timeview cursor update may cause problems?

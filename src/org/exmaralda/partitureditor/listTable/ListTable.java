@@ -13,10 +13,10 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableModel;
 import org.exmaralda.partitureditor.jexmaralda.ListTranscription;
+import org.exmaralda.partitureditor.sound.AVFPlayer;
 import org.exmaralda.partitureditor.sound.AbstractPlayer;
-import org.exmaralda.partitureditor.sound.ELANDSPlayer;
-import org.exmaralda.partitureditor.sound.ELANQTPlayer;
-import org.exmaralda.partitureditor.sound.JMFPlayer;
+import org.exmaralda.partitureditor.sound.BASAudioPlayer;
+import org.exmaralda.partitureditor.sound.JDSPlayer;
 
 /**
  *
@@ -35,13 +35,15 @@ public class ListTable extends JTable implements MouseListener {
     }
 
     public AbstractPlayer makePlayer(){
+        // new 11-02-2020
         String os = System.getProperty("os.name").substring(0,3);
-        if (os.equalsIgnoreCase("mac")){
-            return new ELANQTPlayer();
-        } else if (os.equalsIgnoreCase("win")){
-            return new ELANDSPlayer();
-        } else {
-            return new JMFPlayer();
+        switch (os.toLowerCase()){
+            case "mac" : 
+                return new AVFPlayer();
+            case "win" :
+                return new JDSPlayer();
+            default :
+                return new BASAudioPlayer();
         }
     }
 

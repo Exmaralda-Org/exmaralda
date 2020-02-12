@@ -76,7 +76,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
                 }
             }
         }
-        times.addElement(new Double(t));
+        times.addElement(t);
         String time = "[" + TimeStringFormatter.formatMiliseconds(t*1000.0,2) + "]";
         listModel.addElement(time);
         tliList.scrollRectToVisible(tliList.getCellBounds(listModel.size()-1, listModel.size()-1));
@@ -372,7 +372,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
         // ADDED BY TTT FOR version 1.3.4., April 2007
         // Load Quicktime components into the Exmaralda GUI
         // changed by TS 01-08-2008 because TTT is a honk
-        if (getPlayer() instanceof QuicktimePlayer){
+        /*if (getPlayer() instanceof QuicktimePlayer){
 
             // Create an object of QuictimeBasedPlayer
             QuicktimePlayer qtp = (QuicktimePlayer)getPlayer();
@@ -388,7 +388,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
             }
 
 
-        }
+        }*/
 
         pack();
     }

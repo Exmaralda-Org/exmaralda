@@ -483,18 +483,15 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
     private void grabButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grabButtonActionPerformed
         // TODO add your handling code here:        
         java.awt.Image img = null;
-        if (getPlayer() instanceof JMFPlayer){
-            img = ((JMFPlayer)getPlayer()).grabFrame();
-        } else if (getPlayer() instanceof ELANDSPlayer){
-            img = ((ELANDSPlayer)getPlayer()).grabFrame();        
-        } else if (getPlayer() instanceof ELANQTPlayer){
-            img = ((ELANQTPlayer)getPlayer()).grabFrame();
-        } else if (getPlayer() instanceof JDSPlayer){
+
+        if (getPlayer() instanceof JDSPlayer){
             img = ((JDSPlayer)getPlayer()).grabFrame();            
         } else if (getPlayer() instanceof MMFPlayer){
             img = ((MMFPlayer)getPlayer()).grabFrame();            
-        } else if (getPlayer() instanceof CocoaQTPlayer){
-            img = ((CocoaQTPlayer)getPlayer()).grabFrame();  
+        } else if (getPlayer() instanceof JavaFXPlayer){
+            img = ((JavaFXPlayer)getPlayer()).grabFrame();  
+        } else if (getPlayer() instanceof AVFPlayer){
+            img = ((AVFPlayer)getPlayer()).grabFrame();  
         }
 
         if (img==null) return;
@@ -946,27 +943,17 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
 
     public void setPlayer(Playable player) {
         this.player = player;
-        if (player instanceof JMFPlayer){
-            setTitle(getTitle() + " [JMF]");
-        } else if (player instanceof QuicktimePlayer){
-            setTitle(getTitle() + " [Quicktime]");
-        } else if (player instanceof ELANDSPlayer){
-            setTitle(getTitle() + " [DirectShow]");
-        } else if (player instanceof JDSPlayer){
+        if (player instanceof JDSPlayer){
             setTitle(getTitle() + " [JDS]");
         } else if (player instanceof MMFPlayer){
             setTitle(getTitle() + " [MMF]");
-        } else if (player instanceof ELANQTPlayer){
-            setTitle(getTitle() + " [ELAN-QT]");
         } else if (player instanceof BASAudioPlayer){
             setTitle(getTitle() + " [BAS-Audio]");
-        } else if (player instanceof CocoaQTPlayer){
-            setTitle(getTitle() + " [CocoaQT]");           
         } else if (player instanceof JavaFXPlayer){
             setTitle(getTitle() + " [JavaFX]");           
-        } /*else if (player instanceof VLCPlayer){
-            setTitle(getTitle() + " [VLCPlayer]");
-        }*/
+        } else if (player instanceof AVFPlayer){
+            setTitle(getTitle() + " [AVF]");           
+        } 
     }
 
     int MAXIMAL_INITIAL_WIDTH = 480;

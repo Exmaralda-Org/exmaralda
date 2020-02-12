@@ -8,7 +8,6 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.exmaralda.partitureditor.deprecated.segmentationActions.*;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;

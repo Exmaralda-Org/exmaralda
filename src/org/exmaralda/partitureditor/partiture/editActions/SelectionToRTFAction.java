@@ -6,14 +6,9 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
-import org.exmaralda.partitureditor.deprecated.ExportRTFPartitureFileDialog;
 import org.exmaralda.partitureditor.jexmaralda.convert.ItConverter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 
 /**
  *
@@ -40,12 +35,12 @@ public class SelectionToRTFAction extends org.exmaralda.partitureditor.partiture
         if (table.getFrameEndPosition()>=0){((org.exmaralda.partitureditor.interlinearText.ItBundle)it.getItElementAt(0)).frameEndPosition=table.getFrameEndPosition();}
         System.out.println("Transcript converted to interlinear text.");
         table.rtfParameters.additionalStuff = "";
-        ExportRTFPartitureFileDialog dialog = new ExportRTFPartitureFileDialog(it, table.rtfParameters, table.rtfDirectory);
+        /*ExportRTFPartitureFileDialog dialog = new ExportRTFPartitureFileDialog(it, table.rtfParameters, table.rtfDirectory);
         boolean success = dialog.saveRTF(table);
         if (success){
             table.rtfDirectory = dialog.getFilename();
         }
-        table.rtfParameters.clearMappings();
+        table.rtfParameters.clearMappings();*/
     }
     
     

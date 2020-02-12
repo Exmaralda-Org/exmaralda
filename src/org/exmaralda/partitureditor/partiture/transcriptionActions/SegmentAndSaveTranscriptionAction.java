@@ -8,7 +8,6 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import java.io.File;
 import javax.swing.JOptionPane;
-import org.exmaralda.partitureditor.deprecated.segmentationActions.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.SaveSegmentedTranscriptionAsDialog;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
