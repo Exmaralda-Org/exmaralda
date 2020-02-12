@@ -278,7 +278,7 @@ class TreeTaggerWrapper<O>
      * Setting this to {@code null} or to a negative value disables the output of probabilities.
      * Per default this is disabled.
      * 
-     * @param aProbabilityThreshold threshold X.
+     * @param aThreshold threshold X.
      */
     public 
     void setProbabilityThreshold(
@@ -333,7 +333,6 @@ class TreeTaggerWrapper<O>
 	/**
 	 * Get the current model resolver.
 	 *
-	 * @param aModelProvider a model resolver.
 	 */
 	public ModelResolver getModelResolver()
 	{
@@ -518,7 +517,6 @@ class TreeTaggerWrapper<O>
 	/**
 	 * Process the given array of token objects.
 	 *
-	 * @param aTokens the token objects.
 	 * @throws IOException if there is a problem providing the model or executable.
 	 * @throws TreeTaggerException if there is a problem communication with TreeTagger.
 	 */
