@@ -24,11 +24,13 @@ import org.xml.sax.SAXException;
  */
 public class FLN_TEIConversion {
 
-    //String CORPUS ="FOLK";
+    String CORPUS ="FOLK";
     //String CORPUS ="FOLK-GOLD-SEGCOR";
-    String CORPUS ="GWSS";
+    //String CORPUS ="GWSS";
     //String CORPUS="ISW";
     //String CORPUS ="MEND";
+    //String CORPUS ="DH";
+    //String CORPUS ="DNAM";
     String IN = "D:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
     //String IN = "D:\\Dropbox\\IDS\\AGD\\MEND-Mennonitendeutsch-Goez\\Transkripte\\5";
     String OUT = "D:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;

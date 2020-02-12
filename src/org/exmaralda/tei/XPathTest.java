@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.common.jdomutilities.IOUtilities;
-import org.exmaralda.sbcsae.utilities.FileIO;
+import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
