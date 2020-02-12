@@ -48,8 +48,8 @@ public class EventListTranscription {
     public static EventListTranscription AppendTranscription(EventListTranscription t) throws IOException{
         t.updateTimeline();
         double lastTime = t.getTimeline().getMaximumTime();
-        org.exmaralda.partitureditor.sound.JMFPlayer player =
-            new org.exmaralda.partitureditor.sound.JMFPlayer();
+        org.exmaralda.partitureditor.sound.BASAudioPlayer player =
+            new org.exmaralda.partitureditor.sound.BASAudioPlayer();
         player.setSoundFile(t.getMediaPath());
         double recEnd = player.getTotalLength() *1000.0;
         EventListTranscription elt = new EventListTranscription(lastTime, recEnd);

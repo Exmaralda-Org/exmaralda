@@ -37,6 +37,7 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     
     String CAPITAL_ONLY_LIST = "/org/exmaralda/orthonormal/lexicon/dereko_capital_only.txt";
     HashSet<String> capitalOnly = new HashSet<String>(240000, 1.0f);
+
     
     @Override
     public void put(String form, String correspondingForm, String transcriptionID, String wordID) throws LexiconException {

@@ -18,7 +18,7 @@ import org.jdom.JDOMException;
  */
 public class ResetDatabaseLexicon {
 
-    public static String PATH = "C:\\Users\\Schmidt\\Desktop\\DGD-RELEASE\\transcripts\\FOLK";
+    public static String PATH = "D:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK";
     public static FilenameFilter FLN_FILTER = new FilenameFilter(){
         @Override
         public boolean accept(File dir, String name) {

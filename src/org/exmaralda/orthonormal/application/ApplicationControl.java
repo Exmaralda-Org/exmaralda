@@ -509,18 +509,23 @@ public final class ApplicationControl implements  ListSelectionListener,
         // changed again 26-02-2016
         // changed once more 05-04-2016
         //String defaultPlayer = "BAS-Audio-Player";
-        String defaultPlayer = "JMF-Player";
+        // changed 11-02-2020
+        String defaultPlayer = "BAS-Audio-Player";
         String os = System.getProperty("os.name").substring(0,3);
-        if (os.equalsIgnoreCase("mac")){
-            defaultPlayer="BAS-Audio-Player";
-        } else if (os.equalsIgnoreCase("win")){
-            defaultPlayer="JDS-Player";
+        switch (os.toLowerCase()){
+            case "mac" : 
+                defaultPlayer="AVF-Player";
+                break;
+            case "win" :
+                defaultPlayer="JDS-Player";                
         }
         return defaultPlayer;
     }
 
 
     public void initPlayer(){
+        
+        // new 11-02-2020
         
         // set the default player according to os
         String defaultPlayer = getDefaultPlayer();
@@ -530,62 +535,38 @@ public final class ApplicationControl implements  ListSelectionListener,
         String playerType = java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).get("PlayerType", defaultPlayer);
         System.out.println("Player: " + playerType);
         // make sure that there is no contradiction between preferred player and os
-        String os = System.getProperty("os.name").substring(0,3);
-        String jreVersion = System.getProperty("java.version");
+        //String os = System.getProperty("os.name").substring(0,3);
+        //String jreVersion = System.getProperty("java.version");
         
-        if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("mac")){
-            playerType = "BAS-Audio-Player";
-        }
-        if (playerType.equals("ELAN-Quicktime-Player") && os.equalsIgnoreCase("mac")){
-            playerType = "BAS-Audio-Player";
-        }
-        if (playerType.equals("ELAN-Quicktime-Player") && os.equalsIgnoreCase("win")){
-            playerType = "JDS-Player";
-        }
-        if (playerType.equals("DirectShow-Player") && os.equalsIgnoreCase("win")){
-            playerType = "JDS-Player";
-        }
-        if (playerType.equals("CocoaQT-Player") && !(os.equalsIgnoreCase("mac") && ((jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6"))))){
-            playerType = "BAS-Audio-Player";
-            System.out.println("Forced player change from CocoaQT to BAS-Audio-Player");
-            String message = "You are using Java version " + jreVersion +". \n"
-                            + "CocoaQT-Player requires Apple's Java in version 1.6."
-                            + ".\nCreating BAS Audio player instead.\n"
-                            + "Changed settings accordingly.";
-            displayException(message);
+        switch (playerType){
+            case "DirectShow-Player" : 
+                playerType = "JDS-Player";
+                break;
+            case "ELAN-Quicktime-Player" :
+            case "JMFPlayer" : 
+                playerType = "BAS-Audio-Player";
+                break;
+            case "CocoaQT-Player" :
+                playerType = "AVF-Player";
+                break;                   
         }
         
-        
+        switch (playerType) {
+            case "BAS-Audio-Player" :
+                player = new BASAudioPlayer();
+                break;
+            case "JDS-Player" :
+                player = new JDSPlayer();
+                break;
+            case "AVF-Player" :
+                player = new AVFPlayer();
+                break;
+            case "JavaFX-Player" :
+                player = new JavaFXPlayer();
+                break;
+                
+        }
 
-        if (playerType.equals("JMF-Player")) {
-            player = new JMFPlayer();
-        } else if (playerType.equals("BAS-Audio-Player")){
-            player = new BASAudioPlayer();
-        } else if (playerType.equals("JDS-Player")){
-            player = new JDSPlayer();
-        } else if (playerType.equals("CocoaQT-Player")) {
-            player = new CocoaQTPlayer();
-        } else if (playerType.equals("DirectShow-Player")) {
-            player = new ELANDSPlayer();
-        } else if (playerType.equals("ELAN-Quicktime-Player")) {
-            player = new ELANQTPlayer();
-        } else if (playerType.equals("Quicktime-Player")) {
-            try {
-                player = new QuicktimePlayer();
-            } catch (Throwable ex) {
-                ex.printStackTrace();
-                player = new JMFPlayer();
-            }
-        } else if (playerType.equals("Praat-Player")) {
-            try {
-                player = new PraatPlayer(new File("c:\\programme\\praat\\praatcon.exe"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                player = new JMFPlayer();
-            }
-        } else {
-            player = new JMFPlayer();            
-        }
         java.util.prefs.Preferences.userRoot().node(applicationFrame.getPreferencesNode()).put("PlayerType", playerType);
     }
 

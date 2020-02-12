@@ -21,7 +21,7 @@ import org.jdom.xpath.XPath;
  *
  * @author Schmidt
  */
-public class Evaluate {
+public class Evaluate2 {
 
     public static String OUTPUT_PATH = "C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Evaluation.xml";
 
@@ -30,15 +30,20 @@ public class Evaluate {
      */
     public static void main(String[] args) {
         try {
-            new Evaluate().doit();
+            new Evaluate2().doit();
         } catch (JDOMException ex) {
-            Logger.getLogger(Evaluate.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Evaluate2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Evaluate.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Evaluate2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LexiconException ex) {
+            Logger.getLogger(Evaluate2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void doit() throws JDOMException, IOException {
+    private void doit() throws JDOMException, IOException, LexiconException {
+        
+       XMLLexicon lexicon = new XMLLexicon(); 
+       lexicon.read(null);
        Element rootElement = new Element("normalization-evaluation");
        Document outputDocument = new Document(rootElement);
        Hashtable<String,Integer> allForms = new Hashtable<String,Integer>();
@@ -48,16 +53,23 @@ public class Evaluate {
            Document doc = FileIO.readDocumentFromLocalFile(f);
            int countWords = XPath.newInstance("//w").selectNodes(doc).size();
            List normalizedWords = XPath.newInstance("//w[@n]").selectNodes(doc);
-           int countNormalizedWords = normalizedWords.size();
+           int countNormalizedWords = 0;
            int countCapitalizations = 0;
            int countOneToMany = 0;
            int countNonLexicalised = 0;
            int countCutOff = 0;
            int countIdeolect = 0;
+           int countCorrect = 0;
+           int countCorrectWhereNeeded = 0;
            for (Object o : normalizedWords){
                Element w = (Element)o;
                String wordText = WordUtilities.getWordText(w);
+               String autoNormalisedForm = lexicon.getCandidateForms(wordText).get(0);
                String normalization = w.getAttributeValue("n");
+               //System.out.println("\t" + normalization + "\t" + autoNormalisedForm + "\t");
+               if(normalization.equals(autoNormalisedForm)) countCorrect++;
+               if(normalization.equals(autoNormalisedForm) && (!normalization.equals(wordText))) countCorrectWhereNeeded++;
+               if((!normalization.equals(wordText))) countNormalizedWords++;
                if (normalization.contains(" ")) countOneToMany++;
                if (normalization.contains("#")) countNonLexicalised++;
                if (normalization.contains("%")) countCutOff++;
@@ -75,6 +87,8 @@ public class Evaluate {
            thisEvaluation.setAttribute("file", f.getName());
            thisEvaluation.setAttribute("words", Integer.toString(countWords));
            thisEvaluation.setAttribute("normalizedWords", Integer.toString(countNormalizedWords));
+           thisEvaluation.setAttribute("correct", Integer.toString(countCorrect));
+           thisEvaluation.setAttribute("correctWhereNeeded", Integer.toString(countCorrectWhereNeeded));
            thisEvaluation.setAttribute("capitalisations", Integer.toString(countCapitalizations));
            thisEvaluation.setAttribute("oneToMany", Integer.toString(countOneToMany));
            thisEvaluation.setAttribute("nonLexicalised", Integer.toString(countNonLexicalised));

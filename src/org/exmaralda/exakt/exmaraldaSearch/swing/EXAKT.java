@@ -214,7 +214,7 @@ public class EXAKT extends javax.swing.JFrame
 
         // if this is a MAC OS: init the MAC OS X specific actions
         String os = System.getProperty("os.name").substring(0,3);
-        if (os.equalsIgnoreCase("mac")) {
+        /*if (os.equalsIgnoreCase("mac")) {
             try {
             	new MacSpecials(this);
             }
@@ -222,7 +222,7 @@ public class EXAKT extends javax.swing.JFrame
                 System.out.println("Failed to init MAC OS X specific actions.");
                 System.out.println(e.getLocalizedMessage());
             }
-        }
+        }*/
         
         //NEW 10-11-2015
         praatControl = new PraatControl();
@@ -814,7 +814,7 @@ public class EXAKT extends javax.swing.JFrame
      */
     public static void main(String args[]) {
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
-        try{
+        /*try{
             if (thisIsAMac){
                 System.out.println("Setting Quaqua L&F");
                 Set includes = new HashSet();
@@ -832,7 +832,7 @@ public class EXAKT extends javax.swing.JFrame
             }
         } catch (Exception e) {
           e.printStackTrace();        
-        }
+        }*/
         EXAKT ex = new EXAKT();
         if (args.length>0){
             try{
@@ -1683,7 +1683,7 @@ public class EXAKT extends javax.swing.JFrame
     
     
 }
-class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPrefsHandler, com.apple.mrj.MRJAboutHandler {
+/*class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPrefsHandler, com.apple.mrj.MRJAboutHandler {
 
     EXAKT exakt;
 
@@ -1715,4 +1715,4 @@ class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPref
 		});
 		throw new IllegalStateException("Let the quit handler do it");
 	}
-}
+}*/

@@ -8,11 +8,13 @@ package org.exmaralda.exakt.tokenlist;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.exmaraldaSearch.COMACorpus;
@@ -22,7 +24,6 @@ import org.exmaralda.exakt.exmaraldaSearch.COMARemoteCorpus;
 import org.exmaralda.exakt.search.SearchEvent;
 import org.exmaralda.exakt.search.SearchListenerInterface;
 import org.jdom.Attribute;
-import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -35,6 +36,8 @@ import org.jdom.xpath.XPath;
 public class HashtableTokenList extends AbstractTokenList {
 
     Hashtable<String, Integer> theTokens = new Hashtable<String, Integer>();
+    Hashtable<String, Set<String>> tokensByDocument = new Hashtable<String, Set<String>>();
+    Hashtable<String, Set<String>> tokensByPOS = new Hashtable<String, Set<String>>();
     private Vector<SearchListenerInterface> listenerList = new Vector<SearchListenerInterface>();
 
 
@@ -82,12 +85,30 @@ public class HashtableTokenList extends AbstractTokenList {
 
     @Override
     public void write(Object target) throws IOException {
+        write(target, false);
+    }
+
+    public void write(Object target, boolean writeExtra) throws IOException {
         File file = (File)target;
         Document doc = new Document(new Element("token-list"));
         for (String token : getTokens(AbstractTokenList.ALPHABETICALLY_SORTED)){
             Element tokenElement = new Element("token");
             tokenElement.setText(token);
             tokenElement.setAttribute("count", Integer.toString(getTokenCount(token)));
+            if (writeExtra){
+                Set<String> documents = this.tokensByDocument.get(token);
+                /* for (String document : documents){
+                    Element docE = new Element("doc");
+                    docE.setAttribute("id", document.substring(0, document.indexOf(".")));
+                    tokenElement.addContent(docE);
+                } */
+                tokenElement.setAttribute("doc-count", Integer.toString(documents.size()));     
+                
+                Set<String> pos = this.tokensByPOS.get(token);
+                if (pos!=null){
+                    tokenElement.setAttribute("pos", String.join(" ", pos));
+                }
+            }
             doc.getRootElement().addContent(tokenElement);
         }
         IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc);
@@ -192,17 +213,35 @@ public class HashtableTokenList extends AbstractTokenList {
             for (Object o : l){
                 if (o instanceof Element){
                     Element e = (Element)o; 
-                    this.addToken(e.getText());
+                    addToken(e.getText());
+                    addTokenDocument(e.getText(), xmlFile.getName());
+                    String partOfSpeech = e.getAttributeValue("pos");
+                    if (partOfSpeech!=null){
+                        addTokenPOS(e.getText(), partOfSpeech);                    
+                    }
                 } else if (o instanceof Attribute){
                     Attribute a = (Attribute)o;
                     // attention: can be more than one token!
                     String attValue = a.getValue();
+                    String partOfSpeech = a.getParent().getAttributeValue("pos");
                     if (!(attValue.contains(" "))){
                         addToken(attValue);                    
+                        addTokenDocument(attValue, xmlFile.getName());
+                        if (partOfSpeech!=null){
+                            addTokenPOS(attValue, partOfSpeech);
+                        }
                     } else {
                         String[] tokens = attValue.split(" ");
+                        int i=0;
                         for (String t : tokens){
                             addToken(t);
+                            addTokenDocument(t, xmlFile.getName());
+                            if (partOfSpeech!=null){
+                                if (i<partOfSpeech.split(" ").length){
+                                    addTokenPOS(t, partOfSpeech.split(" ")[i]);
+                                    i++;
+                                }
+                            }
                         }
                     }
                 }
@@ -216,7 +255,7 @@ public class HashtableTokenList extends AbstractTokenList {
     @Override
     public int getTokenCount(String token) {
         if (!theTokens.containsKey(token)) return 0;
-        return theTokens.get(token).intValue();
+        return theTokens.get(token);
     }
 
     @Override
@@ -282,6 +321,21 @@ public class HashtableTokenList extends AbstractTokenList {
         System.out.println(xpath2);
         return XPath.newInstance(xpath2);
     }
+
+    private void addTokenDocument(String tok, String doc) {
+        if (tokensByDocument.get(tok)==null){
+            tokensByDocument.put(tok, new HashSet<String>());
+        }
+        tokensByDocument.get(tok).add(doc);
+    }
+
+    private void addTokenPOS(String tok, String partOfSpeech) {
+        if (tokensByPOS.get(tok)==null){
+            tokensByPOS.put(tok, new HashSet<String>());
+        }
+        tokensByPOS.get(tok).add(partOfSpeech);
+    }
+    
 
 
 }
