@@ -8,11 +8,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
+import org.exmaralda.partitureditor.sound.AVFPlayer;
+import org.exmaralda.partitureditor.sound.JDSPlayer;
 import org.exmaralda.partitureditor.sound.JavaFXPlayer;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
@@ -43,12 +48,19 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         initComponents();
         // changed 21-11-2017: issue #82
         String os = System.getProperty("os.name").substring(0,3);
-        if (os.equalsIgnoreCase("win")) {
-            //videoPlayer = new JDSPlayer();
+        Preferences prefs = Preferences.userRoot().node(((ExmaraldaApplication)parent).getPreferencesNode());
+        
+        String playerType = prefs.get("PlayerType", "JavaFX-Player");
+        
+        if (os.equalsIgnoreCase("win") && playerType.equals("JDS-Player")) {
+            videoPlayer = new JDSPlayer();
+            setTitle("FOLKER Video Panel [JDS]");
+        } else if (os.equalsIgnoreCase("mac") && playerType.equals("AVF-Player")){
+            videoPlayer = new AVFPlayer();
+            setTitle("FOLKER Video Panel [AVF]");
+        } else {
             videoPlayer = new JavaFXPlayer();
-        } else if (os.equalsIgnoreCase("mac")){
-            //videoPlayer = new CocoaQTPlayer();
-            videoPlayer = new JavaFXPlayer();
+            setTitle("FOLKER Video Panel [JavaFX]");            
         }
         //videoPlayer = new MMFPlayer();
         videoPlayer.addPlayableListener(this);
@@ -143,8 +155,15 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         JFileChooser jfc = new JFileChooser();
         //String[] suffixes = {"mpg", "mpeg"};
         //jfc.setFileFilter(new ParameterFileFilter(suffixes, "MPEG-1 Videodateien (*.mpg, *.mpeg)"));
-        String[] suffixes = {"mp4"};
-        jfc.setFileFilter(new ParameterFileFilter(suffixes, "MPEG-4 Videodateien (*.mp4)"));
+        String[] mpeg4Suffixes = {"mp4"};
+        FileFilter mpeg4FileFilter = new ParameterFileFilter(mpeg4Suffixes, "MPEG-4 Videodateien (*.mp4)");
+        String[] mpeg1Suffixes = {"mpg", "mpeg"};
+        FileFilter mpeg1FileFilter = new ParameterFileFilter(mpeg1Suffixes, "MPEG-1 Videodateien (*.mpg, *.mpeg)");
+        
+        
+        jfc.addChoosableFileFilter(mpeg4FileFilter);
+        jfc.addChoosableFileFilter(mpeg1FileFilter);
+        jfc.setFileFilter(mpeg4FileFilter);
         jfc.setAcceptAllFileFilterUsed(false);
         //jfc.setFileFilter(new ParameterFileFilter("mp4", "MPEG-1 Videodateien (*.mp4)"));
         jfc.setCurrentDirectory(new File(preferredPath));
@@ -243,7 +262,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
 
         // changed 21-11-2017: issue #82
         String os = System.getProperty("os.name").substring(0,3);
-        if (os.equalsIgnoreCase("win")) {
+        if (videoPlayer instanceof JavaFXPlayer) {
             JavaFXPlayer jfxPlayer = (JavaFXPlayer)videoPlayer;       
             jfxPlayer.setSoundFile(f.getAbsolutePath());
 
@@ -260,7 +279,7 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 videoDisplayPanel.setPreferredSize(c.getPreferredSize());
                 //pack();
             }
-        }/* if (os.equalsIgnoreCase("win")) {
+        } else if (videoPlayer instanceof JDSPlayer) {
             JDSPlayer jdsPlayer = (JDSPlayer)videoPlayer;       
             jdsPlayer.setSoundFile(f.getAbsolutePath());
 
@@ -277,14 +296,14 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 videoDisplayPanel.setPreferredSize(c.getPreferredSize());
                 //pack();
             }
-        } *//*else if (os.equalsIgnoreCase("mac")){
-            CocoaQTPlayer cocoaQTPlayer = (CocoaQTPlayer)videoPlayer;
-            cocoaQTPlayer.setSoundFile(f.getAbsolutePath());
+        } else if (videoPlayer instanceof AVFPlayer){
+            AVFPlayer avfPlayer = (AVFPlayer)videoPlayer;
+            avfPlayer.setSoundFile(f.getAbsolutePath());
 
             videoDisplayPanel.removeAll();
 
-            if (cocoaQTPlayer.getVisibleComponent()!=null){
-                Component c = cocoaQTPlayer.getVisibleComponent();
+            if (avfPlayer.getVisibleComponent()!=null){
+                Component c = avfPlayer.getVisibleComponent();
                 sourceWidth = 480;
                 sourceHeight = 270;
                 System.out.println("CocoaQTPlayer has set movie width/height to 480/270");
@@ -294,22 +313,10 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 videoDisplayPanel.setPreferredSize(c.getPreferredSize());
             }
             
-        }*/ else if (os.equalsIgnoreCase("mac")){
-            JavaFXPlayer javaFXPlayer = (JavaFXPlayer)videoPlayer;
-            javaFXPlayer.setSoundFile(f.getAbsolutePath());
-
-            videoDisplayPanel.removeAll();
-
-            if (javaFXPlayer.getVisibleComponent()!=null){
-                Component c = javaFXPlayer.getVisibleComponent();
-                sourceWidth = 480;
-                sourceHeight = 270;
-                System.out.println("JavaFXPlayer has set movie width/height to 480/270");
-                Dimension initialDimension = this.calculateInitialDimension(sourceWidth, sourceHeight);
-                c.setPreferredSize(initialDimension);
-                videoDisplayPanel.add(c);
-                videoDisplayPanel.setPreferredSize(c.getPreferredSize());
-            }
+            // this beast needs to be initialised somehow
+            avfPlayer.setStartTime(0.01);
+            avfPlayer.setEndTime(0.02);
+            avfPlayer.startPlayback();
             
         }
     }
@@ -339,12 +346,12 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
                 playSelectionButton.setEnabled(true);
                 
                 // issue #189
-                if (os.equalsIgnoreCase("win")) {
-                    //((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                if (videoPlayer instanceof JavaFXPlayer) {
                     ((JavaFXPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
-                } else if (os.equalsIgnoreCase("mac")) {
-                    //((CocoaQTPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);                    
-                    ((JavaFXPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                } else if (videoPlayer instanceof AVFPlayer) {
+                    ((AVFPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
+                } else if (videoPlayer instanceof JDSPlayer) {
+                    ((JDSPlayer)videoPlayer).updateVideo(selectionStart / 1000.0);
                 }
 
 

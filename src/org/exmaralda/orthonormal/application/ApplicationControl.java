@@ -554,15 +554,19 @@ public final class ApplicationControl implements  ListSelectionListener,
         switch (playerType) {
             case "BAS-Audio-Player" :
                 player = new BASAudioPlayer();
+                applicationFrame.playerTypeLabel.setText("[BAS]");
                 break;
             case "JDS-Player" :
                 player = new JDSPlayer();
+                applicationFrame.playerTypeLabel.setText("[JDS]");
                 break;
             case "AVF-Player" :
                 player = new AVFPlayer();
+                applicationFrame.playerTypeLabel.setText("[AVF]");
                 break;
             case "JavaFX-Player" :
                 player = new JavaFXPlayer();
+                applicationFrame.playerTypeLabel.setText("[JavaFX]");
                 break;
                 
         }
@@ -789,9 +793,11 @@ public final class ApplicationControl implements  ListSelectionListener,
         if (player instanceof AVFPlayer){
             AVFPlayer cocoaQTPlayer = (AVFPlayer)player;
             Component visibleComponent = cocoaQTPlayer.getVisibleComponent();
-            visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
-            applicationFrame.dummyPanelForCocoaQT.removeAll();
-            applicationFrame.dummyPanelForCocoaQT.add(visibleComponent);
+            if (visibleComponent!=null){
+                visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
+                applicationFrame.dummyPanelForCocoaQT.removeAll();
+                applicationFrame.dummyPanelForCocoaQT.add(visibleComponent);
+            }
         }
 
 

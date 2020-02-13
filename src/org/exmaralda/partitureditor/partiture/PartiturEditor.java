@@ -312,11 +312,11 @@ public class PartiturEditor extends javax.swing.JFrame
             }
         };
         String os = System.getProperty("os.name").substring(0,3);
-        if (!(os.equalsIgnoreCase("mac"))) {
+        //if (!(os.equalsIgnoreCase("mac"))) {
             menuBar.fileMenu.addSeparator();
             exitMenuItem = menuBar.fileMenu.add(this.exitAction);
             exitMenuItem.setToolTipText("Programm beenden");
-        }
+        //}
     }
     
    /** listener method for the EXAKT search dialog
@@ -434,7 +434,7 @@ public class PartiturEditor extends javax.swing.JFrame
             String playerNow = settings.get("PlayerType", defaultPlayer);
             partiturTimelinePanel.rateSpinner.setVisible(
                     "JDS-Player".equals(playerNow) ||
-                    "CocoaQT-Player".equals(playerNow) ||
+                    "AVF-Player".equals(playerNow) ||
                     "JavaFX-Player".equals(playerNow)
             );
 

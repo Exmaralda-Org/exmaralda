@@ -171,8 +171,7 @@ public class AVFPlayer extends AbstractPlayer implements ControllerListener {
 
     // added 26-05-2009
     public java.awt.Image grabFrame(){
-        //return wrappedPlayer.getCurrentFrameImage();
-        return null;
+        return wrappedPlayer.getCurrentFrameImage();
     }
 
     

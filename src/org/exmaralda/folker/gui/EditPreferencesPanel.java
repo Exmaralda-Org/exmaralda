@@ -61,21 +61,17 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     public void initValues(){
         Preferences prefs = Preferences.userRoot().node(application.getPreferencesNode());
         
-        String playerType = prefs.get("PlayerType", "JMF-Player");
-        jmfRadioButton.setSelected(playerType.equals("JMF-Player"));
+        String playerType = prefs.get("PlayerType", "BAS-Audio-Player");
         jdsRadioButton.setSelected(playerType.equals("JDS-Player"));
-        cocoaQTRadioButton.setSelected(playerType.equals("CocoaQT-Player"));
-        elanQuicktimeRadioButton.setSelected(playerType.equals("ELAN-Quicktime-Player"));
-        quicktimeRadioButton.setSelected(playerType.equals("Quicktime-Player"));
-        directShowRadioButton.setSelected(playerType.equals("DirectShow-Player"));
+        avfRadioButton.setSelected(playerType.equals("AVF-Player"));
         basRadioButton.setSelected(playerType.equals("BAS-Audio-Player"));
+        javaFXRadioButton.setSelected(playerType.equals("JavaFX-Player"));
 
         String os = System.getProperty("os.name").toLowerCase();
-        directShowRadioButton.setVisible(os.toLowerCase().startsWith("win"));
         jdsRadioButton.setVisible(os.toLowerCase().startsWith("win"));
-        elanQuicktimeRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
-        cocoaQTRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
+        avfRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
                 
+
         String parseLevel = prefs.get("parse-level", "2");
         System.out.println("Parse level is " + parseLevel);
         level0RadioButton.setSelected(parseLevel.equals("0"));
@@ -129,12 +125,13 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     public void commitValues(){
         Preferences prefs = Preferences.userRoot().node(application.getPreferencesNode());
         String playerType = "JMF-Player";
-        if (quicktimeRadioButton.isSelected()) playerType = "Quicktime-Player"; 
+        /*if (quicktimeRadioButton.isSelected()) playerType = "Quicktime-Player"; 
         if (directShowRadioButton.isSelected()) playerType = "DirectShow-Player"; 
-        if (elanQuicktimeRadioButton.isSelected()) playerType = "ELAN-Quicktime-Player";
+        if (elanQuicktimeRadioButton.isSelected()) playerType = "ELAN-Quicktime-Player";*/
         if (basRadioButton.isSelected()) playerType = "BAS-Audio-Player";
         if (jdsRadioButton.isSelected()) playerType = "JDS-Player";
-        if (cocoaQTRadioButton.isSelected()) playerType = "CocoaQT-Player";
+        if (avfRadioButton.isSelected()) playerType = "AVF-Player";
+        if (javaFXRadioButton.isSelected()) playerType = "JavaFX-Player";
         
         prefs.put("PlayerType", playerType);
 
@@ -199,11 +196,8 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         playerPanel = new javax.swing.JPanel();
         basRadioButton = new javax.swing.JRadioButton();
         jdsRadioButton = new javax.swing.JRadioButton();
-        directShowRadioButton = new javax.swing.JRadioButton();
-        cocoaQTRadioButton = new javax.swing.JRadioButton();
-        elanQuicktimeRadioButton = new javax.swing.JRadioButton();
-        quicktimeRadioButton = new javax.swing.JRadioButton();
-        jmfRadioButton = new javax.swing.JRadioButton();
+        avfRadioButton = new javax.swing.JRadioButton();
+        javaFXRadioButton = new javax.swing.JRadioButton();
         restartHintPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         restartHintTextArea = new javax.swing.JTextArea();
@@ -345,32 +339,13 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         jdsRadioButton.setText("JDS Player");
         playerPanel.add(jdsRadioButton);
 
-        playerButtonGroup.add(directShowRadioButton);
-        directShowRadioButton.setForeground(new java.awt.Color(128, 128, 128));
-        directShowRadioButton.setText(FOLKERInternationalizer.getString("dialog.preferences.directshow"));
-        directShowRadioButton.setEnabled(false);
-        playerPanel.add(directShowRadioButton);
+        playerButtonGroup.add(avfRadioButton);
+        avfRadioButton.setText("AVF Player");
+        playerPanel.add(avfRadioButton);
 
-        playerButtonGroup.add(cocoaQTRadioButton);
-        cocoaQTRadioButton.setText("Cocoa QT Player");
-        cocoaQTRadioButton.setEnabled(false);
-        playerPanel.add(cocoaQTRadioButton);
-
-        playerButtonGroup.add(elanQuicktimeRadioButton);
-        elanQuicktimeRadioButton.setText(FOLKERInternationalizer.getString("dialog.preferences.quicktime"));
-        elanQuicktimeRadioButton.setEnabled(false);
-        playerPanel.add(elanQuicktimeRadioButton);
-
-        playerButtonGroup.add(quicktimeRadioButton);
-        quicktimeRadioButton.setForeground(new java.awt.Color(128, 128, 128));
-        quicktimeRadioButton.setText("QTJ (Quicktime for Java) Player");
-        quicktimeRadioButton.setEnabled(false);
-        playerPanel.add(quicktimeRadioButton);
-
-        playerButtonGroup.add(jmfRadioButton);
-        jmfRadioButton.setText("JMF (Java Media Framework) Player");
-        jmfRadioButton.setEnabled(false);
-        playerPanel.add(jmfRadioButton);
+        playerButtonGroup.add(javaFXRadioButton);
+        javaFXRadioButton.setText("Java FX Player");
+        playerPanel.add(javaFXRadioButton);
 
         playerOptionsPanel.add(playerPanel, java.awt.BorderLayout.CENTER);
 
@@ -603,13 +578,11 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JPanel advancedOptionsPanel;
     private javax.swing.JComboBox alphabetComboBox;
     private javax.swing.JPanel alphabetPanel;
+    private javax.swing.JRadioButton avfRadioButton;
     private javax.swing.JRadioButton basRadioButton;
-    private javax.swing.JRadioButton cocoaQTRadioButton;
     private javax.swing.JButton defaultAudioBrowseButton;
     private javax.swing.JPanel defaultAudioPanel;
     private javax.swing.JTextField defaultAudioTextField;
-    private javax.swing.JRadioButton directShowRadioButton;
-    private javax.swing.JRadioButton elanQuicktimeRadioButton;
     private javax.swing.JCheckBox enableLoggingCheckBox;
     private javax.swing.JRadioButton englishRadioButton;
     private javax.swing.JPanel fontOptionsPanel;
@@ -628,8 +601,8 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton javaFXRadioButton;
     private javax.swing.JRadioButton jdsRadioButton;
-    private javax.swing.JRadioButton jmfRadioButton;
     private javax.swing.JPanel languageOptionsPanel;
     private javax.swing.JPanel languagePanel;
     private javax.swing.ButtonGroup languagesButtonGroup;
@@ -652,7 +625,6 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup playerButtonGroup;
     private javax.swing.JPanel playerOptionsPanel;
     private javax.swing.JPanel playerPanel;
-    private javax.swing.JRadioButton quicktimeRadioButton;
     private javax.swing.JCheckBox recalculatePausesCheckBox;
     private javax.swing.JPanel restartHintPanel;
     private javax.swing.JPanel restartHintPanel1;

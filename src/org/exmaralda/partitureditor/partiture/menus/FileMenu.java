@@ -74,7 +74,7 @@ public class FileMenu extends AbstractTableMenu {
         
         printMenuItem = this.add(table.printAction);
         printMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));        
-        printMenuItem.setToolTipText("Print the transcctiption");
+        printMenuItem.setToolTipText("Print the transcription");
         
         addSeparator();
         //-------------------------------------------------

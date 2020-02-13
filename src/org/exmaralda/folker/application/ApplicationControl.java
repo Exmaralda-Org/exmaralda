@@ -1051,7 +1051,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     
     void displayRateSpinner(){
         // New 19-12-2016
-        applicationFrame.mainPanel.rateSpinner.setVisible((player instanceof JDSPlayer) || (player instanceof JavaFXPlayer));
+        applicationFrame.mainPanel.rateSpinner.setVisible(
+                (player instanceof AVFPlayer) || (player instanceof JDSPlayer) || (player instanceof JavaFXPlayer));
         applicationFrame.mainPanel.rateSpinner.addChangeListener(this);        
     }
 
@@ -1470,11 +1471,13 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         // 27-05-2019: issue #189
         // needed for AVFPlayer?
         if (player instanceof AVFPlayer){
-            AVFPlayer cocoaQTPlayer = (AVFPlayer)player;
-            Component visibleComponent = cocoaQTPlayer.getVisibleComponent();
-            visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
-            applicationFrame.dummyPanelForCocoaQT.removeAll();
-            applicationFrame.dummyPanelForCocoaQT.add(visibleComponent);
+            AVFPlayer avfPlayer = (AVFPlayer)player;
+            Component visibleComponent = avfPlayer.getVisibleComponent();
+            if (visibleComponent!=null){
+                visibleComponent.setPreferredSize(new java.awt.Dimension(1,1));
+                applicationFrame.dummyPanelForCocoaQT.removeAll();
+                applicationFrame.dummyPanelForCocoaQT.add(visibleComponent);
+            }
         }
         
         timeViewScrollPane.revalidate();
@@ -2705,6 +2708,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             }
             if (player instanceof JavaFXPlayer){
                 ((JavaFXPlayer)player).setPlaybackRate(newRate);
+            }
+            if (player instanceof AVFPlayer){
+                ((AVFPlayer)player).setPlaybackRate(newRate);
             }
         }
     }

@@ -346,6 +346,11 @@ public class EXAKT extends javax.swing.JFrame
         String praatPath = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PRAAT-Directory", "");
         prefs.put("PRAAT-Directory", praatPath);
 
+        // new 13-02-2020
+        String playerType = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PlayerType", "");
+        mediaButtonsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(playerType));
+        
+        
     }
     
     void writeSettings(){
@@ -382,6 +387,7 @@ public class EXAKT extends javax.swing.JFrame
    private void initExit(){
         javax.swing.AbstractAction exitAction = 
                 new javax.swing.AbstractAction(org.exmaralda.common.helpers.Internationalizer.getString("Exit")){
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 exitForm(null);
             }
@@ -482,11 +488,9 @@ public class EXAKT extends javax.swing.JFrame
             }
         });
 
-        outerSplitPane.setDividerSize(10);
         outerSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         outerSplitPane.setOneTouchExpandable(true);
 
-        innerSplitPane.setDividerSize(10);
         innerSplitPane.setOneTouchExpandable(true);
 
         thingsPanel.setLayout(new java.awt.BorderLayout());
@@ -599,6 +603,7 @@ public class EXAKT extends javax.swing.JFrame
 
         partiturButtonPanel.setLayout(new javax.swing.BoxLayout(partiturButtonPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        mediaButtonsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Player"));
         mediaButtonsPanel.setLayout(new javax.swing.BoxLayout(mediaButtonsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/media-playback-start.png"))); // NOI18N
@@ -830,7 +835,7 @@ public class EXAKT extends javax.swing.JFrame
                 System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
                 javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             //}
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
           e.printStackTrace();        
         }
         EXAKT ex = new EXAKT();

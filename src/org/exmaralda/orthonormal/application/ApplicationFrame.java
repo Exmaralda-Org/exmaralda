@@ -89,6 +89,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         mainPanel = new javax.swing.JPanel();
         playerControlsPanel = new javax.swing.JPanel();
         buttonPanel = new javax.swing.JPanel();
+        playerTypeLabel = new javax.swing.JLabel();
         playSelectionButton = new javax.swing.JButton();
         playButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
@@ -165,6 +166,10 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         playerControlsPanel.setLayout(new javax.swing.BoxLayout(playerControlsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         buttonPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        playerTypeLabel.setForeground(java.awt.Color.gray);
+        playerTypeLabel.setText("jLabel1");
+        buttonPanel.add(playerTypeLabel);
 
         playSelectionButton.setText("jButton1");
         buttonPanel.add(playSelectionButton);
@@ -608,6 +613,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     public javax.swing.JButton playSelectionButton;
     javax.swing.JPanel playerControlsPanel;
     public javax.swing.JSlider playerSlider;
+    javax.swing.JLabel playerTypeLabel;
     private javax.swing.JRadioButton posFilterRadioButton;
     public javax.swing.JLabel positionLabel;
     public javax.swing.JCheckBoxMenuItem showMatchListCheckBoxMenuItem;
