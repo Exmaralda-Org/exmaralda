@@ -13,7 +13,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -42,16 +41,21 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
         tiersTable.setDefaultRenderer(String.class, new EditTiersTableCellRenderer());
         tiersTable.setDefaultRenderer(Integer.class, new EditTiersTableCellRenderer());
         
-        tiersTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+        
+        
+
+
+
         tiersTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         tiersTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-        tiersTable.getColumnModel().getColumn(3).setPreferredWidth(200);
+        tiersTable.getColumnModel().getColumn(3).setPreferredWidth(250);
         tiersTable.getColumnModel().getColumn(4).setPreferredWidth(150);
         tiersTable.getColumnModel().getColumn(5).setPreferredWidth(200);
         tiersTable.getColumnModel().getColumn(6).setPreferredWidth(150);
         tiersTable.getColumnModel().getColumn(7).setPreferredWidth(120);
         tiersTable.getColumnModel().getColumn(8).setPreferredWidth(150);
         tiersTable.getColumnModel().getColumn(9).setPreferredWidth(120);
+        
         
         tiersTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(new TierTypeComboBox()));
         tiersTable.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(new SpeakerComboBox(transcription)));
@@ -88,10 +92,14 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
         rightSidePanel = new javax.swing.JPanel();
         upButton = new javax.swing.JButton();
         downButton = new javax.swing.JButton();
+        okCancelPanel = new javax.swing.JPanel();
+        okButon = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(1200, 800));
 
+        tiersTable.setAutoCreateRowSorter(true);
         tiersTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tiersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,9 +112,9 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tiersTable.setPreferredSize(new java.awt.Dimension(800, 400));
+        tiersTable.setMaximumSize(new java.awt.Dimension(2147483647, 800000));
         tiersTable.setRowHeight(20);
-        tiersTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        tiersTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tiersTableScrollPane.setViewportView(tiersTable);
 
         getContentPane().add(tiersTableScrollPane, java.awt.BorderLayout.CENTER);
@@ -116,14 +124,21 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
         upButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-up.png"))); // NOI18N
         upButton.setText("Up");
         upButton.setToolTipText("Move the selected tier(s) upwards");
+        upButton.setEnabled(false);
         upButton.setMaximumSize(new java.awt.Dimension(79, 25));
         upButton.setMinimumSize(new java.awt.Dimension(79, 25));
         upButton.setPreferredSize(new java.awt.Dimension(79, 25));
+        upButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upButtonActionPerformed(evt);
+            }
+        });
         rightSidePanel.add(upButton);
 
         downButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-down.png"))); // NOI18N
         downButton.setText("Down");
         downButton.setToolTipText("Move the selected tier(s) downwards");
+        downButton.setEnabled(false);
         downButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downButtonActionPerformed(evt);
@@ -133,12 +148,57 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
 
         getContentPane().add(rightSidePanel, java.awt.BorderLayout.EAST);
 
+        okButon.setText("OK");
+        okButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButonActionPerformed(evt);
+            }
+        });
+        okCancelPanel.add(okButon);
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        okCancelPanel.add(cancelButton);
+
+        getContentPane().add(okCancelPanel, java.awt.BorderLayout.SOUTH);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
-        // TODO add your handling code here:
+        // an interval can be selected
+        int[] rows = tiersTable.getSelectedRows();
+        try {
+            editTiersTableModel.moveDown(rows[0], rows[rows.length-1]);
+            tiersTable.setRowSelectionInterval(rows[0]+1, rows[rows.length-1]+1);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(EditTiersDialogNew.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_downButtonActionPerformed
+
+    private void okButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButonActionPerformed
+        dispose();
+    }//GEN-LAST:event_okButonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        editTiersTableModel.changed = false;
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
+        int[] rows = tiersTable.getSelectedRows();
+        try {
+            editTiersTableModel.moveUp(rows[0], rows[rows.length-1]);
+            tiersTable.setRowSelectionInterval(rows[0]-1, rows[rows.length-1]-1);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(EditTiersDialogNew.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_upButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +243,10 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelButton;
     private javax.swing.JButton downButton;
+    private javax.swing.JButton okButon;
+    private javax.swing.JPanel okCancelPanel;
     private javax.swing.JPanel rightSidePanel;
     private javax.swing.JTable tiersTable;
     private javax.swing.JScrollPane tiersTableScrollPane;

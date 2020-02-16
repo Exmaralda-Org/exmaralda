@@ -44,7 +44,8 @@ public class EditTiersAction extends org.exmaralda.partitureditor.partiture.Abst
                 undoInfo.memorizeTranscription(table);
                 table.addUndo(undoInfo);
             }
-            table.getModel().editTiers(workingCopy);
+            //table.getModel().editTiers(workingCopy);
+            table.getModel().setTranscription(dialog.getTranscription());
         }
         /*if (dialog.editTiers()){
             if (table.undoEnabled){

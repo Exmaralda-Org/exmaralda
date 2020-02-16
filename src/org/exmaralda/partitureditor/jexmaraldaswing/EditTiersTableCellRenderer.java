@@ -26,11 +26,23 @@ public class EditTiersTableCellRenderer extends javax.swing.table.DefaultTableCe
         } else {
             component.setBackground(new DefaultTableCellRenderer().getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column).getBackground());
         } 
+
         if ("### ERROR".equals(value)){
             component.setForeground(Color.red);
         } else {
             component.setForeground(new DefaultTableCellRenderer().getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column).getForeground());            
         }
+
+        if (column==0 && !isSelected){
+            component.setBackground(Color.gray);
+            component.setForeground(Color.white);
+        }
+
+        if (column==1 && !isSelected){
+            component.setBackground(Color.blue);
+            component.setForeground(Color.white);
+        }
+
         if (table.getValueAt(row, 3).equals("t")){
             component.setFont(component.getFont().deriveFont(Font.BOLD));
         }
@@ -42,9 +54,13 @@ public class EditTiersTableCellRenderer extends javax.swing.table.DefaultTableCe
                 label.setText("A(nnotation)");
             } else if ("d".equals(value)){
                 label.setText("D(escription)");                
-            }
-            
+            }            
         }
+        
+        if (!table.isCellEditable(row, column) && column>0){
+            component.setForeground(Color.lightGray);
+        }
+        
         return component;
     }
     

@@ -10,7 +10,6 @@ import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.PartiturEditor;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
-import org.xml.sax.SAXException;
 
 /**
  *

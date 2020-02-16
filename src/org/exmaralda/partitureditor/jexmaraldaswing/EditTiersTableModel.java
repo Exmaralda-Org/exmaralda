@@ -29,6 +29,22 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
     public int getRowCount() {
         return transcription.getBody().getNumberOfTiers();
     }
+    
+    public void moveDown(int fromIndex, int toIndex) throws JexmaraldaException{
+        Tier tierAfter = transcription.getBody().getTierAt(toIndex + 1);
+        transcription.getBody().removeTierAt(toIndex + 1);
+        transcription.getBody().insertTierAt(tierAfter, fromIndex);
+        changed = true;
+        fireTableRowsUpdated(fromIndex, toIndex+1);
+    }
+    
+    public void moveUp(int fromIndex, int toIndex) throws JexmaraldaException{
+        Tier tierBefore = transcription.getBody().getTierAt(fromIndex -1);
+        transcription.getBody().removeTierAt(fromIndex -1);
+        transcription.getBody().insertTierAt(tierBefore, toIndex);
+        changed = true;
+        fireTableRowsUpdated(fromIndex-1, toIndex+1);
+    }
 
     @Override
     public int getColumnCount() {
