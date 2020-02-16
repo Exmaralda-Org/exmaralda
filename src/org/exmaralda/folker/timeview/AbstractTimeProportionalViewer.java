@@ -96,19 +96,24 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
 
         try {
             //player = new JMFPlayer();
-            player = new JavaFXPlayer();
+            player = new BASAudioPlayer();
             player.setSoundFile(soundFilePath);
         } catch (Exception ioe){
             String os = System.getProperty("os.name").substring(0,3);
-            /*if (os.equalsIgnoreCase("mac")) {
+            if (os.equalsIgnoreCase("mac")) {
                 try {
                     //player = new QuicktimePlayer();
-                    player = new CocoaQTPlayer();
+                    player = new AVFPlayer();
                     player.setSoundFile(soundFilePath);
-                } catch (Exception ex) {
-                    throw new IOException("No available player can open this file");
+                } catch (IOException ex) {
+                    try {
+                        player = new JavaFXPlayer();
+                        player.setSoundFile(soundFilePath);
+                    } catch (IOException ex3){
+                        throw new IOException("No available player can open this file");                                                    
+                    }
                 }
-            } else */if (os.equalsIgnoreCase("win")){
+            } else if (os.equalsIgnoreCase("win")){
                 try {
                     //player = new ELANDSPlayer();
                     player = new JDSPlayer();
@@ -116,11 +121,19 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
                 } catch (IOException ex) {
                     //if (QuicktimePlayer.isQuicktimeAvailable()){
                             //player = new QuicktimePlayer();
+                    System.out.println("JDSPlayer could not set file for TimeViewer");
                     try {
-                        player = new MMFPlayer();
+                        player = new JavaFXPlayer();
                         player.setSoundFile(soundFilePath);
-                    } catch (Exception ex2){
-                        throw new IOException("No available player can open this file");                        
+                    } catch (IOException ex2){
+                        System.out.println("JavaFXPlayer could not set file for TimeViewer");
+                        try {
+                            player = new MMFPlayer();
+                            player.setSoundFile(soundFilePath);
+                            System.out.println("MMFPlayer could not set file for TimeViewer");
+                        } catch (IOException ex3){
+                            throw new IOException("No available player can open this file");                                                    
+                        }
                     }
                    //}
                 }
@@ -128,7 +141,11 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
                 throw new IOException(ioe);
             }
         }
+        // need a better, more reliable way to detect sound duration here
+        // it is 0.0 if just an MPEG-4 file is in the list
         soundDuration = (float)(player.getTotalLength() * 1000.0f);
+        
+        System.out.println("Sound duration is " + soundDuration);
         pixelWidth = (int)Math.ceil(soundDuration/1000.f*getPixelsPerSecond());
         player = null;
         reset();
