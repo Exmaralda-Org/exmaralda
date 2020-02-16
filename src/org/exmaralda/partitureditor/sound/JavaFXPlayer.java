@@ -7,6 +7,8 @@ package org.exmaralda.partitureditor.sound;
 
 import java.awt.Component;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mpi.eudico.client.annotator.player.NoPlayerException;
 import mpi.eudico.client.mediacontrol.ControllerEvent;
 import mpi.eudico.client.mediacontrol.ControllerListener;
@@ -34,7 +36,7 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
         if ((pathToSoundFile==null)){
             return;
         }
-                
+        
 
         if (!pathToSoundFile.startsWith("http://")){
             urlString = "file:///" + pathToSoundFile;
@@ -58,11 +60,17 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
             wrappedPlayer.addController(puc);
             puc.addControllerListener(this);
             //puc.start();
-            
-            
+            // new 16-02-2020
+            // give the player a second to initialise
+            try {
+                Thread.sleep(1000); 
+            } catch (InterruptedException ex) {
+                Logger.getLogger(JavaFXPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             //wrappedPlayer = new mpi.eudico.client.annotator.player.NativeMediaPlayerWindowsDS(urlString);
             // added 08-02-2010
+            
             fireSoundfileSet();
 
             // experiment!
