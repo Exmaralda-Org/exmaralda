@@ -1227,7 +1227,7 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;JDS Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window&apos;s native Direct Show framework to playback audio and video files. Recommended for video files on &lt;b&gt;Windows&lt;/b&gt;.&lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;JDS Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Window&apos;s native Direct Show framework to playback audio and video files. Recommended for most audio and video files on &lt;b&gt;Windows&lt;/b&gt;.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="javaFXPlayerRadioButton">
@@ -1235,7 +1235,7 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Java FX Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Java&apos;s FX framework to playback audio and video files. &lt;b&gt;&lt;i&gt;Experimental&lt;/i&gt;&lt;/b&gt;.&lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Java FX Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Java&apos;s FX framework to playback audio and video files. &lt;b&gt;&lt;i&gt;New since 2020&lt;/i&gt;&lt;/b&gt;. Try this player for&lt;b&gt; MPEG-4 videos under Windows&lt;/b&gt;. &lt;/html&gt;"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="mmfPlayerRadioButton">
@@ -1249,13 +1249,21 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mmfPlayerRadioButtonActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JRadioButton" name="avfPlayerRadioButton">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="mediaPlayersButtonGroup"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;AVF Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Apple&apos;s AV Foundation framework to playback audio and video files. &lt;b&gt;&lt;i&gt;New since 2020&lt;/i&gt;&lt;/b&gt;. Recommended player on &lt;b&gt;MAC OS&lt;/b&gt;&lt;/html&gt;"/>
+                      </Properties>
+                    </Component>
                     <Component class="javax.swing.JRadioButton" name="elanDSPlayerRadioButton">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="40" green="40" red="40" type="rgb"/>
+                          <Color blue="99" green="99" red="99" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;ELAN DS Player:&lt;/b&gt; A player provided by the language Archive at the MPI Nijmegen, also used in older versions of ELAN. Uses Window&apos;s native Direct Show framework to playback audio and video files. Not used anymore. &lt;/html&gt;"/>
                         <Property name="enabled" type="boolean" value="false"/>
@@ -1266,6 +1274,9 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="99" green="99" red="99" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;ELAN Quicktime Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Requires Quicktime for Java.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
@@ -1273,6 +1284,9 @@
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="99" green="99" red="99" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;JMF Player:&lt;/b&gt; Uses the Java Media framework to playback audio and video files. Only option for video files on &lt;b&gt;Linuxes&lt;/b&gt; (also available, but &lt;b&gt;not recommended on Windows and MAC&lt;/b&gt;).&lt;/html&gt;"/>
                       </Properties>
@@ -1282,15 +1296,10 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="mediaPlayersButtonGroup"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Cocoa Quicktime Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Recommended for video files on the &lt;b&gt;MAC&lt;/b&gt;.&lt;/html&gt;"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JRadioButton" name="avfPlayerRadioButton">
-                      <Properties>
-                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="mediaPlayersButtonGroup"/>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="99" green="99" red="99" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;AVF Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Apples AV Foundation framework to playback audio and video files. &lt;b&gt;&lt;i&gt;Experimental&lt;/i&gt;&lt;/b&gt;.&lt;/html&gt;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Cocoa Quicktime Player:&lt;/b&gt; A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Recommended for video files on the &lt;b&gt;MAC&lt;/b&gt;.&lt;/html&gt;"/>
                       </Properties>
                     </Component>
                   </SubComponents>
