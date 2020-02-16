@@ -38,7 +38,10 @@ public class ListTableModel extends AbstractTableModel {
             case 1 :
                 String speaker = "";
                 try {
-                    speaker = listTranscription.getHead().getSpeakertable().getSpeakerWithID(listTranscription.getBody().getSpeakerContributionAt(rowIndex).getSpeaker()).getAbbreviation();
+                    String speakerID = listTranscription.getBody().getSpeakerContributionAt(rowIndex).getSpeaker();
+                    if (speakerID!=null){
+                        speaker = listTranscription.getHead().getSpeakertable().getSpeakerWithID(speakerID).getAbbreviation();
+                    }
                 } catch (JexmaraldaException e){
                     e.printStackTrace();
                 }
