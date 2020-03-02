@@ -14,7 +14,6 @@ import java.util.prefs.BackingStoreException;
 import javax.swing.JOptionPane;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
-import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 
 /**
  *
