@@ -12,6 +12,7 @@
 package org.exmaralda.orthonormal.application;
 
 //import com.apple.eawt.ApplicationEvent;
+import java.awt.desktop.OpenFilesEvent;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +58,26 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         if (os.equalsIgnoreCase("mac")) {
             // added 03-03-2010
             //setupMacOSXApplicationListener();
+            // new 02-03-2020
+            java.awt.Desktop.getDesktop().setOpenFileHandler(new java.awt.desktop.OpenFilesHandler(){
+                    @Override
+                    public void openFiles(OpenFilesEvent e){
+                        try{
+                            boolean proceed = true;
+                            if (applicationControl.DOCUMENT_CHANGED){
+                                proceed = applicationControl.checkSave();
+                            }
+                            if (!proceed) return;
+                            String fileNameToOpen = e.getFiles().get(0).getAbsolutePath();
+                            File fileToOpen = new File(fileNameToOpen);
+                            applicationControl.openTranscriptionFile(fileToOpen);
+                        } catch (Exception ex){
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
+                        }
+                    }
+            });
+            
         }
 
         if (args.length>0){
