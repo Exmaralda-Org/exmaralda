@@ -12,6 +12,7 @@
 package org.exmaralda.partitureditor.partiture;
 
 //import com.apple.eawt.ApplicationEvent;
+import java.awt.desktop.OpenFilesEvent;
 import java.io.IOException;
 import javax.swing.*;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
@@ -147,6 +148,30 @@ public class PartiturEditor extends javax.swing.JFrame
         if (os.equalsIgnoreCase("mac")) {
             // changed 09-06-2009
             //setupMacOSXApplicationListener();
+            
+            // new 02-03-2020
+            java.awt.Desktop.getDesktop().setOpenFileHandler(new java.awt.desktop.OpenFilesHandler(){
+                    public void openFiles(OpenFilesEvent e){
+                        try{
+                            boolean proceed = true;
+                            if (table.transcriptionChanged){
+                                proceed = table.checkSave();
+                            }
+                            if (!proceed) return;
+                            String filename = e.getFiles().get(0).getAbsolutePath();
+                            BasicTranscription bt = new BasicTranscription(filename);
+                            table.getModel().setTranscription(bt);
+                            table.setFilename(filename);
+                            table.setupMedia();
+                            table.homeDirectory = filename;
+                            //pe.table.transcriptionChanged = true;
+                        } catch (Exception ex){
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(table.getTopLevelAncestor(), ex.getLocalizedMessage());
+                        }                        
+                    }
+            });
+            
         }
 
         // register shortcuts for media playback
@@ -792,7 +817,8 @@ public class PartiturEditor extends javax.swing.JFrame
 
     /** added 09-06-2009: replaces older mac app handler in inner class */
     /*private void setupMacOSXApplicationListener() {
-        final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
+        //final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
+        
         application.setEnabledAboutMenu(true); // damit ein "Ueber " Menue erscheint
         application.addPreferencesMenuItem(); // "Einstellen..." Dialog
         application.setEnabledPreferencesMenu(true); // diesen Dialog auch
@@ -867,6 +893,9 @@ public class PartiturEditor extends javax.swing.JFrame
         } else {
             partiturTimelinePanel.setBuffer(0);
         }
+        
+        
+        
     }
     
 
