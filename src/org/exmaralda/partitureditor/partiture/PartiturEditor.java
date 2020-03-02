@@ -271,7 +271,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
             //}
         }           
-        catch (Exception e) {
+        catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();        
         } 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -386,7 +386,7 @@ public class PartiturEditor extends javax.swing.JFrame
             //menuBar.fileMenu.setupOpenRecentMenu(table.recentFiles);            
         } else if (e.getID()==PartitureTableEvent.MEDIA_TIME_CHANGED){
             Double[] times = (Double[])(e.getInfo());
-            this.processMediaTimeChanged(times[0].doubleValue(), times[1].doubleValue());
+            this.processMediaTimeChanged(times[0], times[1]);
         } else if (e.getID()==PartitureTableEvent.UNDO_CHANGED){
             String text = (String)(e.getInfo());
             menuBar.editMenu.setUndoText(text);
@@ -402,7 +402,7 @@ public class PartiturEditor extends javax.swing.JFrame
 
             String os = System.getProperty("os.name").substring(0,3);
             String jreVersion = System.getProperty("java.version");        
-            String defaultPlayer = "JMF-Player";
+            String defaultPlayer = "BAS-Audio-Player";
             if (os.equalsIgnoreCase("mac")){
                 // changed 25-04-2017 (issue #29)
                 if (jreVersion.startsWith("1.5") || jreVersion.startsWith("1.6")){
@@ -410,7 +410,7 @@ public class PartiturEditor extends javax.swing.JFrame
                     // java version for newer MACs (issue #199)
                     defaultPlayer = "CocoaQT-Player";
                 } else {
-                    defaultPlayer = "BAS-Audio-Player";                    
+                    defaultPlayer = "AVF-Player";                    
                 }
             } else if (os.equalsIgnoreCase("win")){
                 defaultPlayer = "JDS-Player";
@@ -419,6 +419,18 @@ public class PartiturEditor extends javax.swing.JFrame
 
 
             String playerType = settings.get("PlayerType", defaultPlayer);
+            if (!(playerType.equals("BAS-Audio-Player") 
+                    || playerType.equals("JDS-Player") 
+                    || playerType.equals("JavaFX-Player") 
+                    || playerType.equals("AVF-Player") 
+                    || playerType.equals("MMF-Player") 
+                    )){
+                String message = "Your preferred player is " + playerType + ".\n"
+                            + "This player is no longer supported.\n"
+                            + "Generating " + defaultPlayer + " instead.";
+                JOptionPane.showMessageDialog(rootPane, message);
+                playerType = defaultPlayer;                
+            }
             boolean playerTypeConfirmed = settings.getBoolean("PlayerTypeConfirmed", false);
             if ((!playerTypeConfirmed) && (!playerType.equals(defaultPlayer))){
                 String message = "Your player preference is set to " + playerType + ".\n"

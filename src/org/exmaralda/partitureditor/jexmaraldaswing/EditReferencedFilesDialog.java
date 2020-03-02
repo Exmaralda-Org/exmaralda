@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
 
+import java.awt.Dimension;
 import java.util.*;
 import javax.swing.DefaultListModel;
 import java.io.*;
@@ -168,6 +169,7 @@ private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     } else {
         fc.setCurrentDirectory(new File(defaultDirectory));
     }
+    //fc.setMinimumSize(new Dimension(2000,2000));
     int ret = fc.showOpenDialog(this);
     if (ret==javax.swing.JFileChooser.APPROVE_OPTION){
         //listModel.addElement(fc.getSelectedFile().getAbsolutePath());

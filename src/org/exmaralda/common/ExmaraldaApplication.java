@@ -6,7 +6,7 @@
 package org.exmaralda.common;
 
 import javax.swing.JFrame;
-import org.exmaraldapro.support.ReminderDialog;
+//import org.exmaraldapro.support.ReminderDialog;
 
 /**
  *
@@ -37,7 +37,7 @@ public interface ExmaraldaApplication {
     
     //public void checkRegistration();
     
-    default void checkRegistration(){
+    /*default void checkRegistration(){
         java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(getPreferencesNode());
         String key = settings.get("EXMARaLDA-Registration-Key", null);
         if (key!=null){
@@ -51,6 +51,6 @@ public interface ExmaraldaApplication {
             reminderDialog.setLocationRelativeTo(getApplicationFrame());
             reminderDialog.setVisible(true);
         }        
-    }
+    }*/
 
 }
