@@ -222,30 +222,33 @@
     
     <xsl:template name="EMBED_PLAYER">
         <xsl:choose>
-            <xsl:when test="//referenced-file[ends-with(@url,'.webm') or ends-with(@url,'.WEBM')]">
-                <video controls="controls" id="player">
+            <!-- changed 03-05-2020: MP3 and MP4 -->
+            <xsl:when test="//referenced-file[ends-with(upper-case(@url), '.WEBM') or ends-with(upper-case(@url), '.MP4')]">
+                <video controls="controls" id="player" width="480px">
                     <xsl:variable name="VIDEO_FILE">
-                        <xsl:value-of select="//referenced-file[ends-with(@url,'.webm') or ends-with(@url,'.WEBM')]/@url"/>
+                        <xsl:value-of select="//referenced-file[ends-with(upper-case(@url), '.WEBM') or ends-with(upper-case(@url), '.MP4')][1]/@url"/>                        
                     </xsl:variable>
                     <xsl:element name="source">
                         <xsl:attribute name="src"><xsl:value-of select="$VIDEO_FILE"/></xsl:attribute>
-                        <xsl:attribute name="type">video/webm</xsl:attribute>
+                        <xsl:attribute name="type">video/<xsl:value-of select="substring-after($VIDEO_FILE,'.')"/></xsl:attribute>
                     </xsl:element>
                 </video>                
             </xsl:when>
             <xsl:otherwise>
                 <audio controls="controls" id="player">
                     <xsl:variable name="AUDIO_FILE">
-                        <xsl:value-of select="//referenced-file[ends-with(@url,'.wav') or ends-with(@url,'ogg')][1]/@url"/>
+                        <xsl:value-of select="//referenced-file[ends-with(upper-case(@url), '.WAV') or ends-with(upper-case(@url), '.MP3') or ends-with(upper-case(@url), '.OGG')][1]/@url"/>
                     </xsl:variable>
                     <xsl:element name="source">
                         <xsl:attribute name="src"><xsl:value-of select="$AUDIO_FILE"/></xsl:attribute>
-                        <xsl:attribute name="type">
+                        <xsl:attribute name="type">video/<xsl:value-of select="substring-after($AUDIO_FILE,'.')"/></xsl:attribute>
+                        <!--                         <xsl:attribute name="type">
                             <xsl:choose>
                                 <xsl:when test="ends-with($AUDIO_FILE,'wav')">audio/wav</xsl:when>
                                 <xsl:otherwise>audio/ogg</xsl:otherwise>
                             </xsl:choose>
-                        </xsl:attribute>
+                        </xsl:attribute> -->
+
                     </xsl:element>
                 </audio>				                
             </xsl:otherwise>
