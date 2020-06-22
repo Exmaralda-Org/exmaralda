@@ -67,9 +67,16 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         basRadioButton.setSelected(playerType.equals("BAS-Audio-Player"));
         javaFXRadioButton.setSelected(playerType.equals("JavaFX-Player"));
 
+        String videoPlayerType = prefs.get("VideoPlayerType", "JavaFX-Player");
+        jdsRadioButton1.setSelected(videoPlayerType.equals("JDS-Player"));
+        avfRadioButton1.setSelected(videoPlayerType.equals("AVF-Player"));
+        javaFXRadioButton1.setSelected(videoPlayerType.equals("JavaFX-Player"));
+
         String os = System.getProperty("os.name").toLowerCase();
         jdsRadioButton.setVisible(os.toLowerCase().startsWith("win"));
         avfRadioButton.setVisible(os.toLowerCase().startsWith("mac"));
+        jdsRadioButton1.setVisible(os.toLowerCase().startsWith("win"));
+        avfRadioButton1.setVisible(os.toLowerCase().startsWith("mac"));
                 
 
         String parseLevel = prefs.get("parse-level", "2");
@@ -124,7 +131,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     
     public void commitValues(){
         Preferences prefs = Preferences.userRoot().node(application.getPreferencesNode());
-        String playerType = "JMF-Player";
+        String playerType = "BAS-Audio-Player";
         /*if (quicktimeRadioButton.isSelected()) playerType = "Quicktime-Player"; 
         if (directShowRadioButton.isSelected()) playerType = "DirectShow-Player"; 
         if (elanQuicktimeRadioButton.isSelected()) playerType = "ELAN-Quicktime-Player";*/
@@ -134,6 +141,15 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         if (javaFXRadioButton.isSelected()) playerType = "JavaFX-Player";
         
         prefs.put("PlayerType", playerType);
+
+
+        String videoPlayerType = "JavaFX-Player";
+        if (jdsRadioButton1.isSelected()) videoPlayerType = "JDS-Player";
+        if (avfRadioButton1.isSelected()) videoPlayerType = "AVF-Player";
+        if (javaFXRadioButton1.isSelected()) videoPlayerType = "JavaFX-Player";
+        
+        prefs.put("VideoPlayerType", videoPlayerType);
+
 
         String parseLevel = "2";
         if (level0RadioButton.isSelected()) parseLevel="0";
@@ -175,6 +191,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         playerButtonGroup = new javax.swing.ButtonGroup();
         parseLevelButtonGroup = new javax.swing.ButtonGroup();
         languagesButtonGroup = new javax.swing.ButtonGroup();
+        videoPlayerButtonGroup = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         parsePanel = new javax.swing.JPanel();
         parseOptionsPanel = new javax.swing.JPanel();
@@ -193,11 +210,6 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         playerOptionsPanel = new javax.swing.JPanel();
-        playerPanel = new javax.swing.JPanel();
-        basRadioButton = new javax.swing.JRadioButton();
-        jdsRadioButton = new javax.swing.JRadioButton();
-        avfRadioButton = new javax.swing.JRadioButton();
-        javaFXRadioButton = new javax.swing.JRadioButton();
         restartHintPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         restartHintTextArea = new javax.swing.JTextArea();
@@ -211,6 +223,16 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         defaultAudioTextField = new javax.swing.JTextField();
         defaultAudioBrowseButton = new javax.swing.JButton();
+        playerSelectionPanel = new javax.swing.JPanel();
+        playerPanel = new javax.swing.JPanel();
+        basRadioButton = new javax.swing.JRadioButton();
+        jdsRadioButton = new javax.swing.JRadioButton();
+        avfRadioButton = new javax.swing.JRadioButton();
+        javaFXRadioButton = new javax.swing.JRadioButton();
+        playerPanel1 = new javax.swing.JPanel();
+        jdsRadioButton1 = new javax.swing.JRadioButton();
+        avfRadioButton1 = new javax.swing.JRadioButton();
+        javaFXRadioButton1 = new javax.swing.JRadioButton();
         fontOptionsPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         setFontCheckBox = new javax.swing.JCheckBox();
@@ -329,26 +351,6 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         playerOptionsPanel.setLayout(new java.awt.BorderLayout());
 
-        playerPanel.setLayout(new javax.swing.BoxLayout(playerPanel, javax.swing.BoxLayout.Y_AXIS));
-
-        playerButtonGroup.add(basRadioButton);
-        basRadioButton.setText("BAS Audio Player");
-        playerPanel.add(basRadioButton);
-
-        playerButtonGroup.add(jdsRadioButton);
-        jdsRadioButton.setText("JDS Player");
-        playerPanel.add(jdsRadioButton);
-
-        playerButtonGroup.add(avfRadioButton);
-        avfRadioButton.setText("AVF Player");
-        playerPanel.add(avfRadioButton);
-
-        playerButtonGroup.add(javaFXRadioButton);
-        javaFXRadioButton.setText("Java FX Player");
-        playerPanel.add(javaFXRadioButton);
-
-        playerOptionsPanel.add(playerPanel, java.awt.BorderLayout.CENTER);
-
         restartHintPanel.setLayout(new javax.swing.BoxLayout(restartHintPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jScrollPane1.setBorder(null);
@@ -414,6 +416,49 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         optionsPanel.add(defaultAudioPanel);
 
         playerOptionsPanel.add(optionsPanel, java.awt.BorderLayout.PAGE_END);
+
+        playerSelectionPanel.setLayout(new java.awt.GridLayout(1, 2));
+
+        playerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Audio Player"));
+        playerPanel.setRequestFocusEnabled(false);
+        playerPanel.setLayout(new javax.swing.BoxLayout(playerPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        playerButtonGroup.add(basRadioButton);
+        basRadioButton.setText("BAS Audio Player");
+        playerPanel.add(basRadioButton);
+
+        playerButtonGroup.add(jdsRadioButton);
+        jdsRadioButton.setText("JDS Player");
+        playerPanel.add(jdsRadioButton);
+
+        playerButtonGroup.add(avfRadioButton);
+        avfRadioButton.setText("AVF Player");
+        playerPanel.add(avfRadioButton);
+
+        playerButtonGroup.add(javaFXRadioButton);
+        javaFXRadioButton.setText("Java FX Player");
+        playerPanel.add(javaFXRadioButton);
+
+        playerSelectionPanel.add(playerPanel);
+
+        playerPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Video Player"));
+        playerPanel1.setLayout(new javax.swing.BoxLayout(playerPanel1, javax.swing.BoxLayout.Y_AXIS));
+
+        videoPlayerButtonGroup.add(jdsRadioButton1);
+        jdsRadioButton1.setText("JDS Player");
+        playerPanel1.add(jdsRadioButton1);
+
+        videoPlayerButtonGroup.add(avfRadioButton1);
+        avfRadioButton1.setText("AVF Player");
+        playerPanel1.add(avfRadioButton1);
+
+        videoPlayerButtonGroup.add(javaFXRadioButton1);
+        javaFXRadioButton1.setText("Java FX Player");
+        playerPanel1.add(javaFXRadioButton1);
+
+        playerSelectionPanel.add(playerPanel1);
+
+        playerOptionsPanel.add(playerSelectionPanel, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("Player", playerOptionsPanel);
 
@@ -579,6 +624,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox alphabetComboBox;
     private javax.swing.JPanel alphabetPanel;
     private javax.swing.JRadioButton avfRadioButton;
+    private javax.swing.JRadioButton avfRadioButton1;
     private javax.swing.JRadioButton basRadioButton;
     private javax.swing.JButton defaultAudioBrowseButton;
     private javax.swing.JPanel defaultAudioPanel;
@@ -602,7 +648,9 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton javaFXRadioButton;
+    private javax.swing.JRadioButton javaFXRadioButton1;
     private javax.swing.JRadioButton jdsRadioButton;
+    private javax.swing.JRadioButton jdsRadioButton1;
     private javax.swing.JPanel languageOptionsPanel;
     private javax.swing.JPanel languagePanel;
     private javax.swing.ButtonGroup languagesButtonGroup;
@@ -625,6 +673,8 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup playerButtonGroup;
     private javax.swing.JPanel playerOptionsPanel;
     private javax.swing.JPanel playerPanel;
+    private javax.swing.JPanel playerPanel1;
+    private javax.swing.JPanel playerSelectionPanel;
     private javax.swing.JCheckBox recalculatePausesCheckBox;
     private javax.swing.JPanel restartHintPanel;
     private javax.swing.JPanel restartHintPanel1;
@@ -633,6 +683,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox setFontCheckBox;
     private javax.swing.JCheckBox useControlCheckBox;
     private javax.swing.JPanel useControlCheckBoxPanel;
+    private javax.swing.ButtonGroup videoPlayerButtonGroup;
     // End of variables declaration//GEN-END:variables
 
     private void updateCheckBoxEnablement() {

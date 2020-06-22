@@ -6,8 +6,6 @@
 
 package org.exmaralda.partitureditor.fsm;
 
-import org.xml.sax.*;
-
 /**
  *
  * @author  Thomas
@@ -26,8 +24,9 @@ public class Test {
     public static void main (String args[]) {
         try {
             FSMSaxReader sr = new FSMSaxReader();
-            FiniteStateMachine fsm = sr.readFromFile("C:\\DATEN\\CODE\\EXMARaLDA\\src\\org\\exmaralda\\partitureditor\\fsm\\xml\\cGAT_Minimal.xml");
-            String result = fsm.process("((lacht/hhh°))");
+            FiniteStateMachine fsm = 
+                    sr.readFromFile("D:\\EXMARaLDA_GIT\\exmaralda\\src\\org\\exmaralda\\partitureditor\\fsm\\xml\\cGAT_Minimal.xml");
+            String result = fsm.process("a-b");
             System.out.println(result);
         } catch (Exception e){
             System.out.println(e.getMessage());

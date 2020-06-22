@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- changes on 27-04-2011:	created first version -->
-<fsm name="HIAT: Utterances and Words">
+<fsm name="cGAT: Minimal transcript">
 	<char-set id="SpaceSymbols">
 		<comment>characters that follow a word</comment>
 		<!-- Plain space character -->

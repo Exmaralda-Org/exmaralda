@@ -10,6 +10,8 @@
  */
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author thomas
@@ -43,12 +45,17 @@ public class PartiturEditorInfoPanel extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setText("Segmentation: ");
         jPanel2.add(jLabel1);
 
-        segmentationLabel.setFont(new java.awt.Font("Tahoma", 1, 11));
+        segmentationLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         segmentationLabel.setText("GENERIC");
         jPanel2.add(segmentationLabel);
 
@@ -69,6 +76,11 @@ public class PartiturEditorInfoPanel extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        //table.editPreferencesAction.actionPerformed(new ActionEvent(e.getSource(), e.getID(), "ChangeSegmentation", e.getWhen(), e.getModifiers()));
+    }//GEN-LAST:event_jPanel2MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;

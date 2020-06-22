@@ -50,7 +50,8 @@ public class VideoPanel extends javax.swing.JDialog implements PlayableListener,
         String os = System.getProperty("os.name").substring(0,3);
         Preferences prefs = Preferences.userRoot().node(((ExmaraldaApplication)parent).getPreferencesNode());
         
-        String playerType = prefs.get("PlayerType", "JavaFX-Player");
+        String otherPlayerType = prefs.get("PlayerType", "JavaFX-Player");
+        String playerType = prefs.get("VideoPlayerType", otherPlayerType);
         
         if (os.equalsIgnoreCase("win") && playerType.equals("JDS-Player")) {
             videoPlayer = new JDSPlayer();

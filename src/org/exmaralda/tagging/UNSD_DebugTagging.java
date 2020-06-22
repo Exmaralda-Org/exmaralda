@@ -14,8 +14,6 @@ import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerException;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.exmaralda.exakt.utilities.FileIO;
-import org.exmaralda.tagging.TreeTaggableOrthonormalTranscription;
-import org.exmaralda.tagging.TreeTagger;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -46,10 +44,10 @@ public class UNSD_DebugTagging {
         String xpathToTokens = TreeTaggableOrthonormalTranscription.XPATH_NO_XY;
         boolean applyPP = true;    
         String TTC = "c:\\TreeTagger";
-        String PF = "F:\\Dropbox\\IDS\\AGD\\UNSD-Maitz\\20180517_Workshop_IDS\\TOOL_CONFIG\\UNSD_ParameterFile_28052018.par";
+        String PF = "C:\\TreeTagger\\lib\\italian.par";
         String ENC = "UTF-8";
         String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
-        String transcript = "F:\\AGD-DATA\\dgd2_data\\transcripts\\UNSD\\UNSD_E_00062_SE_02_T_01_DF_01.fln";
+        String transcript = "M:\\GeWiss\\1-NON-DE\\FLN\\ita\\GWSS_E_03017_SE_01_T_01_DF_01.fln";
         
          System.setProperty("treetagger.home", TTC);
          TreeTaggerWrapper ttw = new TreeTaggerWrapper<String>();
@@ -80,15 +78,15 @@ public class UNSD_DebugTagging {
             a.detach();
         }
         
-        Element contr278 = (Element) XPath.selectSingleNode(trDoc, "//contribution[278]");
+        /*Element contr278 = (Element) XPath.selectSingleNode(trDoc, "//contribution[278]");
         contr278.detach();
         Document doc278 = new Document(contr278);
         File intermediate = File.createTempFile("FLN","TMP");
         intermediate.deleteOnExit();
-        FileIO.writeDocumentToLocalFile(intermediate, doc278);
+        FileIO.writeDocumentToLocalFile(intermediate, doc278);*/
 
         //System.out.println("Tagging " + transcript.getName() + " (" + (count2+1) + " of " + transcriptFiles.length + ")");
-        TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(intermediate, true);
+        TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(new File(transcript), true);
         ttont.setXPathToTokens(xpathToTokens);
 
         File output = File.createTempFile("FLN","TMP");
@@ -100,13 +98,13 @@ public class UNSD_DebugTagging {
                 works=true;
             } catch (IOException ex){
                 System.out.println("Error");
-                Element lastWord = (Element) XPath.selectSingleNode(contr278, "//descendant::w[last()]");
+                /*Element lastWord = (Element) XPath.selectSingleNode(contr278, "//descendant::w[last()]");
                 lastWord.detach();
                 //lastWord.setAttribute("n", "XXX");
                 System.out.println("Removed word " + lastWord.getText());
                 FileIO.writeDocumentToLocalFile(intermediate, doc278);
                 ttont = new TreeTaggableOrthonormalTranscription(intermediate, true);
-                ttont.setXPathToTokens(xpathToTokens);                                
+                ttont.setXPathToTokens(xpathToTokens);                                */
             }
         }
         

@@ -89,6 +89,23 @@
         <xsl:value-of select="$seconds"/>            
     </xsl:function>
     
+    <xsl:param name="TIMELINE_COPY">
+        <timeline>
+            <xsl:for-each select="//timeline/timepoint">
+                <timepoint>
+                    <xsl:attribute name="id" select="@timepoint-id"/>
+                    <xsl:attribute name="position" select="count(preceding-sibling::*)"/>
+                </timepoint>
+            </xsl:for-each>
+        </timeline>
+    </xsl:param>
+    
+    <xsl:function name="exmaralda:timeline-position">
+        <xsl:param name="ID"/>
+        <xsl:value-of select="$TIMELINE_COPY/descendant::timepoint[@id=$ID]/@position"/>
+    </xsl:function>
+    
+    
     
     <!-- ****************************************************************** -->
     <!-- ************************ ROOT TEMPLATE    ************************ -->
@@ -200,12 +217,23 @@
                 <!-- encode the language here -->
                 <xsl:attribute name="xml:lang" select="$LANGUAGE"/>
                 <xsl:call-template name="MAKE_TIMELINE"/>
+                <xsl:variable name="ANNOTATION_BLOCKS">
+                    <body>
+                        <xsl:apply-templates select="//contribution"/>
+                    </body>
+                </xsl:variable>
                 <body>
-                    <xsl:apply-templates select="//contribution"/>
+                    <!--<xsl:apply-templates select="//contribution"/> -->
+                    <xsl:for-each select="$ANNOTATION_BLOCKS/child::*">                        
+                        <xsl:sort select="exmaralda:timeline-position(@start)" data-type="number"/>
+                        <xsl:sort select="exmaralda:timeline-position(@end)" order="descending" data-type="number"/>
+                        <xsl:copy-of select="current()"/>
+                    </xsl:for-each>
                 </body>
             </text>
         </TEI>            
     </xsl:template>
+    
 
 
        
@@ -555,8 +583,31 @@
                 <xsl:attribute name="dur">PT<xsl:value-of select="@duration"/>S</xsl:attribute>
             </xsl:if>
             <xsl:if test="not(ancestor::*[@speaker-reference])">
-                <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
-                <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+                <!-- changed 12.05.2020 -->
+                <xsl:attribute name="start">
+                    <xsl:value-of select="$XPOINTER_HASH"/>
+                    <xsl:choose>
+                        <!--     
+                            <contribution start-reference="TLI_1636" end-reference="TLI_1656" parse-level="2" id="c1105"
+                                time="2775.726">
+                                <time timepoint-reference="TLI_1636" time="2775.726"/>
+                                <non-phonological description="Alle reden durcheinander, 21.9s" id="n118"/>
+                                <time timepoint-reference="TLI_1655" time="2797.608"/>
+                                <pause duration="0.29" id="p561"/>
+                                <time timepoint-reference="TLI_1656" time="2797.902"/>
+                            </contribution>
+                         -->
+                        <xsl:when test="preceding-sibling::time"><xsl:value-of select="preceding-sibling::time[1]/@timepoint-reference"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:otherwise>
+                    </xsl:choose>                    
+                </xsl:attribute>
+                <xsl:attribute name="end">
+                    <xsl:value-of select="$XPOINTER_HASH"/>
+                    <xsl:choose>
+                        <xsl:when test="following-sibling::time"><xsl:value-of select="following-sibling::time[1]/@timepoint-reference"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:otherwise>
+                    </xsl:choose>                    
+                </xsl:attribute>
             </xsl:if>
         </xsl:element>
     </xsl:template>
@@ -571,8 +622,31 @@
                 </xsl:choose>
             </xsl:attribute>            
             <xsl:if test="not(ancestor::*[@speaker-reference])">
-                <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
-                <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
+                <!-- changed 12.05.2020 -->
+                <xsl:attribute name="start">
+                    <xsl:value-of select="$XPOINTER_HASH"/>
+                    <xsl:choose>
+                        <!--     
+                            <contribution start-reference="TLI_1636" end-reference="TLI_1656" parse-level="2" id="c1105"
+                                time="2775.726">
+                                <time timepoint-reference="TLI_1636" time="2775.726"/>
+                                <non-phonological description="Alle reden durcheinander, 21.9s" id="n118"/>
+                                <time timepoint-reference="TLI_1655" time="2797.608"/>
+                                <pause duration="0.29" id="p561"/>
+                                <time timepoint-reference="TLI_1656" time="2797.902"/>
+                            </contribution>
+                         -->
+                        <xsl:when test="preceding-sibling::time"><xsl:value-of select="preceding-sibling::time[1]/@timepoint-reference"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:otherwise>
+                    </xsl:choose>                    
+                </xsl:attribute>
+                <xsl:attribute name="end">
+                    <xsl:value-of select="$XPOINTER_HASH"/>
+                    <xsl:choose>
+                        <xsl:when test="following-sibling::time"><xsl:value-of select="following-sibling::time[1]/@timepoint-reference"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:otherwise>
+                    </xsl:choose>                    
+                </xsl:attribute>
             </xsl:if>
             <xsl:element name="desc">
                 <!-- new 12-12-2019 -->
