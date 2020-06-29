@@ -92,7 +92,12 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     public boolean UPDATE_PAUSES = true; //whether or not to update pauses before saving
     public boolean AUTO_ASSIGN_SPEAKER = true; //whether or not to automatically assign the previous speaker when appending segments 
 
-    boolean IS_SAVING_IN_BACKGROUND = false;
+    // changed this to volatile because otherwise
+    // application will hang on exit
+    // seems to be some compiler optimisation problem
+    // related to wait while saving
+    // issue #210
+    volatile boolean IS_SAVING_IN_BACKGROUND = false;
 
     int selectedPanelIndex = 0;
     
@@ -1405,6 +1410,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         final File finalFile = f;
         Thread saveThread = new Thread(new Runnable(){
 
+            @Override
             public void run() {
                 // now this is really weird: the writeXML method first transforms the event list transcription
                 // into an EXMARaLDA basic transcription. Then this basic transcription is transformed via a stylesheet
@@ -1419,8 +1425,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     importAction.setEnabled(false);
                     exportAction.setEnabled(false);
                     exitAction.setEnabled(false);
+                    //System.out.println("STATION 1");
                     status(FOLKERInternationalizer.getString("status.saving") + finalFile.getAbsolutePath() + "...");
                     org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(finalTranscription, finalFile, parser, PARSE_LEVEL, finalTranscriptionHead);
+                    //System.out.println("STATION 2");
                     setCurrentFilePath(finalFile.getAbsolutePath());
                     status(FOLKERInternationalizer.getString("status.saved1") 
                             + finalFile.getAbsolutePath() 
@@ -1443,12 +1451,14 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     saveAsAction.setEnabled(true);
                     applicationFrame.mainPanel.progressBar.setVisible(false);
                     IS_SAVING_IN_BACKGROUND = false;
+                    System.out.println("SAVE_THREAD_FINALLY");
                 }
             }
 
         });
 
-        saveThread.start();
+        System.out.println("STARTING SAVE THREAD");
+        saveThread.start();        
                 
     }
     
@@ -2110,6 +2120,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         while (IS_SAVING_IN_BACKGROUND){
             // added 29-05-2009
             // don't do anything while saving is in progress
+            //System.out.println("Waiting");
         }
     }
 

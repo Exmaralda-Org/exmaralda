@@ -31,7 +31,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     public ApplicationFrame(String[] args) {
         new StartupSplashScreen(this);
 
-        org.exmaralda.common.Logger.initialiseLogger(this);
+        //org.exmaralda.common.Logger.initialiseLogger(this);
         
         initComponents();
 
