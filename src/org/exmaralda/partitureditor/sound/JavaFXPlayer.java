@@ -62,6 +62,9 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
             //puc.start();
             // new 16-02-2020
             // give the player a second to initialise
+            // changed 30-06-2020
+            // no: rather give it sixty seconds
+            // no, don't. That's not the point
             try {
                 Thread.sleep(1000); 
             } catch (InterruptedException ex) {
