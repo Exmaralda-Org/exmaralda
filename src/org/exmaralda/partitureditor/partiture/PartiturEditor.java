@@ -130,6 +130,12 @@ public class PartiturEditor extends javax.swing.JFrame
         loadSettings();
         menuBar.transcriptionMenu.segmentationLabel.setText(" Segmentation (" + table.preferredSegmentation + ")");
         menuBar.transcriptionMenu.insertHIATUtteranceNumbersMenuItem.setVisible(table.preferredSegmentation.equals("HIAT"));
+        //GENERIC, HIAT, DIDA, GAT, cGAT_MINIMAL, CHAT, IPA        
+        menuBar.transcriptionMenu.addTokenLayerMenuItem.setVisible(
+                table.preferredSegmentation.equals("GENERIC") ||
+                table.preferredSegmentation.equals("cGAT_MINIMAL") ||
+                table.preferredSegmentation.equals("HIAT")
+        );
         
         // init the exit action and add it to the file menu
         initExit();

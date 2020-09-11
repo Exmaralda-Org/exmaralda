@@ -967,6 +967,7 @@ public class PartitureTableWithActions extends PartitureTable
         transformationAction = new TransformationAction(this);
         insertUtteranceNumbersAction = new InsertHIATUtteranceNumbersAction(this);
         autoAnnotationAction = new AutoAnnotationAction(this);
+        addTokenLayerAction = new AddTokenLayerAction(this);
         //*********************************************************************************************
         //*************************************** TIER ACTIONS ****************************************
         //*********************************************************************************************
@@ -1574,6 +1575,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction transformationAction;
     public javax.swing.AbstractAction autoAnnotationAction;
     public javax.swing.AbstractAction insertUtteranceNumbersAction;
+    public javax.swing.AbstractAction addTokenLayerAction;
 
     
     //*******************************************************************

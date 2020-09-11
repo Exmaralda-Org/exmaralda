@@ -22,6 +22,7 @@ public class TranscriptionMenu extends AbstractTableMenu implements MouseListene
     
     public JLabel segmentationLabel = new JLabel(" Segmentation");
     public JMenuItem insertHIATUtteranceNumbersMenuItem;
+    public JMenuItem addTokenLayerMenuItem;
 
     /** Creates a new instance of FileMenu */
     public TranscriptionMenu(PartitureTableWithActions t) {
@@ -54,6 +55,7 @@ public class TranscriptionMenu extends AbstractTableMenu implements MouseListene
         add(table.segmentAndSaveTranscriptionAction);
         add(table.countAction);
         add(table.wordListAction);
+        addTokenLayerMenuItem = add(table.addTokenLayerAction);
         insertHIATUtteranceNumbersMenuItem = add(table.insertUtteranceNumbersAction);
 
         addSeparator();

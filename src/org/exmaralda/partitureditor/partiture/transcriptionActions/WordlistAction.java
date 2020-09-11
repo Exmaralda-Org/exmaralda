@@ -6,12 +6,14 @@
 
 package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
+import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.exmaralda.partitureditor.jexmaraldaswing.WordListDialog;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -32,6 +34,7 @@ public class WordlistAction extends AbstractFSMSegmentationAction {
 
     }
 
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("wordlistAction!");
         table.commitEdit(true);
@@ -49,7 +52,7 @@ public class WordlistAction extends AbstractFSMSegmentationAction {
              wordListDialog.setLocation(screenSize.width - dialogSize.width, 0);
              wordListDialog.setVisible(true);
              wordListDialog.requestFocusInWindow();
-         } catch (Exception ex){
+         } catch (HeadlessException | FSMException | SAXException ex){
             int optionChosen = JOptionPane
                     .showConfirmDialog(table, "Segmentation Error(s):\n " + ex.getLocalizedMessage() + "\nEdit errors?",
                     "Segmentation Error(s)", JOptionPane.OK_CANCEL_OPTION);
