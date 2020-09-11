@@ -26,13 +26,15 @@ public class SaveSearchResultAsAction extends org.exmaralda.exakt.exmaraldaSearc
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(exaktFrame.getLastSearchResultPath());
         fileChooser.setDialogTitle("Save a concordance");
         fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.HTMLFileFilter());
-        fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.XMLFileFilter());
         fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.CSVFileFilter());
+        // changed order, issue #211
+        fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.XMLFileFilter());
         
         boolean goAhead = false;
         File file = null;
