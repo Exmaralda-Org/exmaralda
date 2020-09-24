@@ -56,10 +56,10 @@ public final class PraatConverter {
         sb.append("\n");
         Timeline tl = t.getBody().getCommonTimeline();
         tl.completeTimes();
-        sb.append("xmin = " + Double.toString(tl.getTimelineItemAt(0).getTime()) + " \n");
-        sb.append("xmax = " + Double.toString(tl.getTimelineItemAt(tl.getNumberOfTimelineItems()-1).getTime()) + " \n");
+        sb.append("xmin = ").append(Double.toString(tl.getTimelineItemAt(0).getTime())).append(" \n");
+        sb.append("xmax = ").append(Double.toString(tl.getTimelineItemAt(tl.getNumberOfTimelineItems()-1).getTime())).append(" \n");
         sb.append("tiers? <exists> \n");
-        sb.append("size = " + Integer.toString(t.getBody().getNumberOfTiers()) + " \n" );
+        sb.append("size = ").append(Integer.toString(t.getBody().getNumberOfTiers())).append(" \n");
         sb.append("item []: \n");
         for (int pos=0; pos<t.getBody().getNumberOfTiers(); pos++){
             Tier tier = t.getBody().getTierAt(pos);
@@ -67,7 +67,7 @@ public final class PraatConverter {
             tier.fillWithEmptyEvents(tl);
             tier.sort(tl);
             sb.append("    "); // 4 spaces
-            sb.append("item [" + Integer.toString(pos+1) + "]: \n");
+            sb.append("item [").append(Integer.toString(pos+1)).append("]: \n");
             sb.append("        "); // 8 spaces
             sb.append("class = \"IntervalTier\" \n");
             // changed in Version 1.2.5.
@@ -81,29 +81,29 @@ public final class PraatConverter {
             // changed in Version 1.2.5.
             //sb.append("name = \"" + speakerAbbrev + " [" + category + "]\" \n");
             //sb.append("name = \"" + tier.getDisplayName() + "\" \n");
-            sb.append("name = \"" + tier.getPraatName() + "\" \n");
+            sb.append("name = \"").append(tier.getPraatName()).append("\" \n");
             sb.append("        "); // 8 spaces
-            sb.append("xmin = " + Double.toString(tl.getTimelineItemAt(0).getTime()) + " \n");
+            sb.append("xmin = ").append(Double.toString(tl.getTimelineItemAt(0).getTime())).append(" \n");
             sb.append("        "); // 8 spaces
-            sb.append("xmax = " + Double.toString(tl.getTimelineItemAt(tl.getNumberOfTimelineItems()-1).getTime()) + " \n");
+            sb.append("xmax = ").append(Double.toString(tl.getTimelineItemAt(tl.getNumberOfTimelineItems()-1).getTime())).append(" \n");
             sb.append("        "); // 8 spaces
-            sb.append("intervals: size = " + Integer.toString(tier.getNumberOfEvents()) + " \n");
+            sb.append("intervals: size = ").append(Integer.toString(tier.getNumberOfEvents())).append(" \n");
             
             for (int i=0; i<tier.getNumberOfEvents(); i++){
                 Event e = tier.getEventAt(i);
                 sb.append("        "); // 8 spaces
-                sb.append("intervals [" + Integer.toString(i+1) + "]: \n");
+                sb.append("intervals [").append(Integer.toString(i+1)).append("]: \n");
                 try {
                     sb.append("            "); // 12 spaces
-                    sb.append("xmin = " + Double.toString(tl.getTimelineItemWithID(e.getStart()).getTime()) + " \n");
+                    sb.append("xmin = ").append(Double.toString(tl.getTimelineItemWithID(e.getStart()).getTime())).append(" \n");
                     sb.append("            "); // 12 spaces
-                    sb.append("xmax = " + Double.toString(tl.getTimelineItemWithID(e.getEnd()).getTime()) + " \n");
+                    sb.append("xmax = ").append(Double.toString(tl.getTimelineItemWithID(e.getEnd()).getTime())).append(" \n");
                 } catch (JexmaraldaException je) {
                     //should not get here
                     System.out.println(je.getMessage());
                 }
                 sb.append("            "); // 12 spaces
-                sb.append("text = \"" + toPraatString(e.getDescription()) + "\" \n");
+                sb.append("text = \"").append(toPraatString(e.getDescription())).append("\" \n");
             }
         }
         tl.removeInterpolatedTimes();

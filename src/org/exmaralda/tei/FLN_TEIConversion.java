@@ -29,9 +29,10 @@ public class FLN_TEIConversion {
     //String CORPUS ="GWSS";
     //String CORPUS="ISW";
     //String CORPUS ="MEND";
-    //String CORPUS ="DH";
+    String CORPUS ="DH";
     //String CORPUS ="DNAM";
-    String CORPUS = "ZW";
+    //String CORPUS = "ZW";
+    //String CORPUS ="BETV";
     String IN = "D:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
     //String IN = "D:\\Dropbox\\IDS\\AGD\\MEND-Mennonitendeutsch-Goez\\Transkripte\\5";
     String OUT = "D:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;
