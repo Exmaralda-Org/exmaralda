@@ -1211,7 +1211,7 @@ CoMa geçici olarak iç düzeni kullanıyor&lt;/html&gt;&lt;/body&gt;"/>
 		<uiItem name="prefs.loggingDir" lang="tk" value="Hata protokolü buraya kopyala"/>
 
 		<uiItem name="prefs.newFiltersAdd" lang="deu"
-			value="Neue Filterergebniss standardmässig addieren (logisch 'oder' statt 'und')"/>
+			value="Neue Filterergebnisse standardmässig addieren (logisch 'oder' statt 'und')"/>
 		<uiItem name="prefs.newFiltersAdd" lang="eng"
 			value="Add results of new Filter (instead of retaining them)"/>
 		<uiItem name="prefs.newFiltersAdd" lang="tk" value="Süzmeyi “veya” yerine “ve”la birleştir"/>
