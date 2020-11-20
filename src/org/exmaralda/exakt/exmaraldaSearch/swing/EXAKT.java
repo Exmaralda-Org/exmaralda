@@ -841,7 +841,9 @@ public class EXAKT extends javax.swing.JFrame
         EXAKT ex = new EXAKT();
         if (args.length>0){
             try{
-                ex.doOpen(new File(args[0]));
+                //ex.doOpen(new File(args[0]));
+                // dirty fix for #216
+                ex.doOpen(new File(org.exmaralda.partitureditor.partiture.StringUtilities.fixFilePath(args[0]))); 
             } catch (Exception e){
                 e.printStackTrace();
             }

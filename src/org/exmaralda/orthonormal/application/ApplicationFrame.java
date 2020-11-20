@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.partiture.StringUtilities;
 import org.jdom.JDOMException;
 
 /**
@@ -69,7 +70,9 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                             }
                             if (!proceed) return;
                             String fileNameToOpen = e.getFiles().get(0).getAbsolutePath();
-                            File fileToOpen = new File(fileNameToOpen);
+                            // dirty fix for #216
+                            File fileToOpen = new File(StringUtilities.fixFilePath(fileNameToOpen));                                                        
+                            //File fileToOpen = new File(fileNameToOpen);
                             applicationControl.openTranscriptionFile(fileToOpen);
                         } catch (Exception ex){
                             ex.printStackTrace();

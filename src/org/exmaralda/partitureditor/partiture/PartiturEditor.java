@@ -312,7 +312,10 @@ public class PartiturEditor extends javax.swing.JFrame
                 pe.setVisible(true);
                 if (args.length>0){
                     try{
-                        BasicTranscription bt = new BasicTranscription(args[0]);
+                        // dirty fix for #216
+                        String filepath = StringUtilities.fixFilePath(args[0]);
+                        BasicTranscription bt = new BasicTranscription(filepath);
+                        //BasicTranscription bt = new BasicTranscription(args[0]);
                         pe.table.stratify(bt);
                         pe.table.getModel().setTranscription(bt);
                         pe.table.setFilename(args[0]);
