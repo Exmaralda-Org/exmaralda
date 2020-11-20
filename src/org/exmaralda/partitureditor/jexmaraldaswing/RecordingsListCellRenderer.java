@@ -55,7 +55,8 @@ public class RecordingsListCellRenderer implements ListCellRenderer {
             mediaTypeLabel.setToolTipText(path + " does not exist.");            
         }
         // BOLD FOR RECOMMENDED FILE TYPES
-        if (file.getName().toUpperCase().matches("^.*\\.(WAV|MPG)$")){
+        // added MP4 for issue #219
+        if (file.getName().toUpperCase().matches("^.*\\.(WAV|MPG|MP4)$")){
             mediaTypeLabel.setFont(mediaTypeLabel.getFont().deriveFont(Font.BOLD));
         }
         return mediaTypeLabel;
