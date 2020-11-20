@@ -7,7 +7,6 @@
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
 
-import java.awt.Dimension;
 import java.util.*;
 import javax.swing.DefaultListModel;
 import java.io.*;
@@ -227,9 +226,11 @@ private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 EditReferencedFilesDialog dialog = new EditReferencedFilesDialog(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -253,6 +254,7 @@ private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton upButton;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         int index = fileList.getSelectedIndex();
         removeButton.setEnabled(index>=0);

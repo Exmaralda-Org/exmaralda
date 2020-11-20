@@ -789,23 +789,14 @@ public class PartiturEditor extends javax.swing.JFrame
             } catch (IOException ex) {
                 //ex.printStackTrace();
                 System.out.println(ex.getLocalizedMessage());
-                String message = "There was a problem opening\n" + rf +"\n\n" + "Error message:\n";
-                String errmess = ex.getLocalizedMessage();
-                if (errmess.length()>50){
-                    int index = errmess.length()/2;
-                    errmess = errmess.substring(0,index)+"\n" + errmess.substring(index);
-                }
-                message+=errmess + "\n\n";
-                message+="The media file may not be at the specified location\n";
-                message+="or it may be in some format not supported by the current configuration.\n";
-                message+="Try one of the following:\n";
-                message+="1) Edit the recordings associated with this transcription\n";
-                message+="2) Use a different media player (Edit > Preferences > Media)\n\n";
-                String[] options = {"Edit recordings", "Ignore"};
-                int optionChosen = JOptionPane.showOptionDialog(this, message, "Waveform viewer: Problem opening Media",
+                String[] options = {"Edit recordings", "Ignore"};                
+                // changed this for issue #220
+                Object messagePane = new RecordingErrorMessagePanel(rf, ex, getPreferencesNode());
+                int optionChosen = JOptionPane.showOptionDialog(this, messagePane , "Player: Problem opening Media",
                         JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-                        new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/video-x-generic.png")), 
+                        new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/video-x-generic.png")),
                         options, "Edit recordings");
+                
                 if (optionChosen==JOptionPane.YES_OPTION){
                     table.editRecordingsAction.actionPerformed(null);
                 } else {
