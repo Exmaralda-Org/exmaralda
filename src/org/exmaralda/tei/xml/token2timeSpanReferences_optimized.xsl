@@ -15,6 +15,7 @@
         Intermediate steps will still conform to ISO/TEI in general.
     -->
     
+    
     <!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
     <xsl:param name="USE_XPOINTER">FALSE</xsl:param>
     <xsl:param name="SPAN_GRP_TYPE">.*</xsl:param>
@@ -24,6 +25,25 @@
             <xsl:when test="$USE_XPOINTER='TRUE'">#</xsl:when>
             <xsl:otherwise></xsl:otherwise>
         </xsl:choose>            
+    </xsl:variable>
+    
+    <xsl:variable name="TOKEN_TIME_MAP">
+        <map>
+            <xsl:for-each select="//tei:seg/*[@xml:id]">
+                <token>
+                    <xsl:attribute name="id" select="@xml:id"/>
+                    <xsl:attribute name="synch-before" select="preceding-sibling::tei:anchor[1]/@synch"/>
+                    <xsl:attribute name="synch-after" select="following-sibling::tei:anchor[1]/@synch"/>
+                </token>
+            </xsl:for-each>
+            <xsl:for-each select="//tei:when">
+                <token>
+                    <xsl:attribute name="id" select="@xml:id"/>
+                    <xsl:attribute name="synch-before" select="@xml:id"/>                    
+                    <xsl:attribute name="synch-after" select="@xml:id"/>                    
+                </token>                
+            </xsl:for-each>
+        </map>
     </xsl:variable>
     
     
@@ -43,39 +63,11 @@
     <xsl:template match="tei:spanGrp[matches(@type, $SPAN_GRP_TYPE)]/tei:span[@from or @to]">
         <!-- the current value of the from attribute -->
         <xsl:variable name="FROM_SOURCE" select="substring-after(@from, $XPOINTER_HASH)"/>
-        <!-- the element that it refers to -->
-        <xsl:variable name="FROM_REF_ELEMENT" select="//*[@xml:id=$FROM_SOURCE]/name()"/>
-        <xsl:variable name="FROM_TARGET">
-            <xsl:choose>                
-                <xsl:when test="$FROM_REF_ELEMENT='when'">
-                    <!-- it already points to a when element -->
-                    <xsl:value-of select="$FROM_SOURCE"/>
-                </xsl:when>
-                <xsl:when test="//*[@xml:id=$FROM_SOURCE]/preceding-sibling::tei:anchor">
-                    <xsl:value-of select="//*[@xml:id=$FROM_SOURCE]/preceding-sibling::tei:anchor[1]/@synch"/>                    
-                </xsl:when>
-                <xsl:when test="//*[@xml:id=$FROM_SOURCE]/ancestor-or-self::*[@start]">
-                    <xsl:value-of select="//*[@xml:id=$FROM_SOURCE]/ancestor-or-self::*[@start][1]/@start"/>                                        
-                </xsl:when>
-            </xsl:choose>
-        </xsl:variable>
+        <!-- get the corresponding anchor -->
+        <xsl:variable name="FROM_TARGET" select="$TOKEN_TIME_MAP/*/token[@id=$FROM_SOURCE]/@synch-before"/>
         
-        <xsl:variable name="TO_SOURCE" select="substring-after(@to, $XPOINTER_HASH)"/>
-        <xsl:variable name="TO_REF_ELEMENT" select="//*[@xml:id=$TO_SOURCE]/name()"/>
-        <xsl:variable name="TO_TARGET">
-            <xsl:choose>                
-                <xsl:when test="$TO_REF_ELEMENT='when'">
-                    <!-- it already points to a when element -->
-                    <xsl:value-of select="$TO_SOURCE"/>
-                </xsl:when>
-                <xsl:when test="//*[@xml:id=$TO_SOURCE]/following-sibling::tei:anchor">
-                    <xsl:value-of select="//*[@xml:id=$TO_SOURCE]/following-sibling::tei:anchor[1]/@synch"/>                    
-                </xsl:when>
-                <xsl:when test="//*[@xml:id=$TO_SOURCE]/ancestor-or-self::*[@end]">
-                    <xsl:value-of select="//*[@xml:id=$TO_SOURCE]/ancestor-or-self::*[@end][1]/@end"/>                                        
-                </xsl:when>
-            </xsl:choose>
-        </xsl:variable>
+        <xsl:variable name="TO_SOURCE" select="substring-after(@to, $XPOINTER_HASH)"/>        
+        <xsl:variable name="TO_TARGET" select="$TOKEN_TIME_MAP/*/token[@id=$TO_SOURCE]/@synch-after"/>
         
         
         <xsl:copy>

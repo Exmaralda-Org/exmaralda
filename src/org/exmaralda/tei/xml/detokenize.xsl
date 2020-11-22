@@ -5,6 +5,16 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
+    <!-- 
+        Converting from ISO/TEI to EXB is done in several steps:
+        (1) move <w> attributes to <span> elements : attributes2spans.xsl
+        (2) transform token references in <span> to time references : token2timeSpanReferences.xsl
+        ==> (3) turn explicit token markup into implicit charachter markup : detokenize.xsl
+        (4) transform this TEI document to EXB : isotei2exmaralda
+        The assumption is that the input to (1) conforms to ZuMult's ISO/TEI schema
+        Intermediate steps will still conform to ISO/TEI in general.
+    -->
+    
     <xsl:param name="TRANSCRIPTION_SYSTEM">
         <!-- <transcriptionDesc ident="cGAT" version="2014"> -->
         <xsl:choose>
@@ -30,7 +40,7 @@
         
     </xsl:template>
     
-    <xsl:template match="tei:seg//descendant::tei:pause">
+    <xsl:template match="tei:seg/tei:pause">
         <xsl:choose>
             <!-- <pause xml:id="p495" rend="(0.71)" dur="PT0.71S" start="TLI_950" end="TLI_951"/>  -->
             <xsl:when test="@rend"><xsl:value-of select="@rend"/></xsl:when>
@@ -43,18 +53,28 @@
                 </xsl:choose>                
             </xsl:otherwise>
         </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="x"></xsl:when>
+            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+        </xsl:choose>        
     </xsl:template>
     
     <!-- <vocal xml:id="b1">
         <desc rend="°h">short breathe in</desc>
     </vocal> -->
-    <xsl:template match="tei:seg/descendant::tei:vocal | tei:seg/descendant::tei:incident">
-        <xsl:text>((</xsl:text>
+    <xsl:template match="tei:seg/tei:vocal | tei:seg/tei:incident">
         <xsl:choose>
             <xsl:when test="tei:desc/@rend"><xsl:value-of select="tei:desc/@rend"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="tei:desc"/></xsl:otherwise>
+            <xsl:otherwise>
+                <xsl:text>((</xsl:text>
+                <xsl:value-of select="tei:desc"/>
+                <xsl:text>))</xsl:text>
+            </xsl:otherwise>
         </xsl:choose>
-        <xsl:text>))</xsl:text>
+        <xsl:choose>
+            <xsl:when test="x"></xsl:when>
+            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+        </xsl:choose>        
     </xsl:template>
     
     <xsl:template match="tei:spanGrp">
