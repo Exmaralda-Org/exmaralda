@@ -141,10 +141,6 @@ public class TCFConverter {
                 }
             } catch (IOException ioe) {
                 ioe.printStackTrace();
-            } catch (SAXException saxe) {
-                saxe.printStackTrace();
-            } catch (JDOMException jdome) {
-                jdome.printStackTrace();
             }
             System.err.println("Could not use TEI in textsource for importing, "
                     + "falling back to TCF data");
