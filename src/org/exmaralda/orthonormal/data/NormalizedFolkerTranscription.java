@@ -98,9 +98,7 @@ public class NormalizedFolkerTranscription {
             }
             xmlDocument.getRootElement().getChild("recording").setAttribute("path", mp);
             System.out.println("************** Path set from " + path + " to " + mp);
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
-        } catch (IllegalArgumentException ex){
+        } catch (MalformedURLException | IllegalArgumentException ex) {
             ex.printStackTrace();
         }
     }

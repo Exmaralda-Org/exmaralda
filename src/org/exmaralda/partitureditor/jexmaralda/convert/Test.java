@@ -115,6 +115,7 @@ public class Test {
         for (File f : files){
             System.out.println("[" + count + "/" + files.length + "]");
             converter.readISOTEIFromFile(f.getAbsolutePath());
+            count++;
         }
         long end = System.currentTimeMillis();
         

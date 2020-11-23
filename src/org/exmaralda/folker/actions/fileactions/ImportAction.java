@@ -13,13 +13,18 @@ import org.exmaralda.folker.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.folker.application.ApplicationControl;
 import org.exmaralda.folker.data.*;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
+import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.AudacityConverter;
+import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
+import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
 /**
@@ -28,9 +33,10 @@ import org.xml.sax.SAXException;
  */
 public class ImportAction extends AbstractApplicationAction {
     
-    String[] exmaraldaSuffixes = {"exb", "xml"};
+    String[] exmaraldaSuffixes = {"exb"};
     ParameterFileFilter exmaraldaFileFilter = new ParameterFileFilter(exmaraldaSuffixes, FOLKERInternationalizer.getString("misc.basicTranscription"));
     ParameterFileFilter audacityFileFilter = new ParameterFileFilter("txt", FOLKERInternationalizer.getString("misc.audacityLabelFile"));
+    ParameterFileFilter teiFileFilter = new ParameterFileFilter("xml", "ISO/TEI File (*.xml)");
     
     /** Creates a new instance of OpenAction */
     public ImportAction(ApplicationControl ac, String name, Icon icon) {
@@ -45,6 +51,7 @@ public class ImportAction extends AbstractApplicationAction {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.import"));
         fileChooser.addChoosableFileFilter(exmaraldaFileFilter);
+        fileChooser.addChoosableFileFilter(teiFileFilter);
         fileChooser.addChoosableFileFilter(audacityFileFilter);
         fileChooser.setFileFilter(exmaraldaFileFilter);
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -83,7 +90,18 @@ public class ImportAction extends AbstractApplicationAction {
                 applicationControl.displayException(ex);
                 return;
             }
+        } else if (fileChooser.getFileFilter()==teiFileFilter){
+            try {
+                TEIConverter converter = new TEIConverter();
+                NormalizedFolkerTranscription nft = converter.readFOLKERISOTEIFromFile(f.getAbsolutePath());
+                mediaPath = nft.getMediaPath();
+                importedTranscription = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXML(nft.getDocument(), 0);
+            } catch (IOException | JexmaraldaException | JDOMException | SAXException | ParserConfigurationException | TransformerException | IllegalArgumentException ex) {
+                applicationControl.displayException(ex);
+                return;
+            }
         }
+        
         
         
         ac.transcriptionHead = new TranscriptionHead();

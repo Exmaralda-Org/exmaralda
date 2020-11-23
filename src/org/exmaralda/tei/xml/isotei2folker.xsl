@@ -108,7 +108,7 @@
                 <time><xsl:attribute name="timepoint-reference" select="@start"/></time>
                 <non-phonological>
                     <xsl:attribute name="id" select="@xml:id"/>
-                    <xsl:value-of select="tei:desc"/>
+                    <xsl:attribute name="description" select="tei:desc"/>
                 </non-phonological>
                 <time><xsl:attribute name="timepoint-reference" select="@end"/></time>
             </contribution>
@@ -159,7 +159,7 @@
         
         <xsl:template name="MAKE_TIMELINE">
             <timeline>
-                <timepoint timepoint-id="TLI_0" absolute-time="0.0"/>
+                <!-- <timepoint timepoint-id="TLI_0" absolute-time="0.0"/> -->
                 <xsl:for-each select="//tei:when[@interval]">
                     <timepoint>
                         <xsl:attribute name="timepoint-id" select="@xml:id"/>

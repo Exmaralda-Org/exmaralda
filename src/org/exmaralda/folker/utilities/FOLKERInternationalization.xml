@@ -64,6 +64,11 @@
                                         <translation lang="de" trans="Importieren... "/>
                                         <translation lang="fr" trans="Importer..."/>
                                 </item>
+                                <item id="file_menu.import">
+                                        <translation lang="en" trans="Import..."/>
+                                        <translation lang="de" trans="Importieren..."/>
+                                        <translation lang="fr" trans="Importer..."/>
+                                </item>
                                 <item id="file_menu.export">
                                         <translation lang="en" trans="Export..."/>
                                         <translation lang="de" trans="Exportieren..."/>
