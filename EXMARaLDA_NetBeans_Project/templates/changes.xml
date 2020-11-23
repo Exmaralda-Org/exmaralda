@@ -9,7 +9,102 @@
 	revision= SVN-revision
 	date 	= the date
 	release = true | false (is it a release-version) 
--->
+--> 
+    
+    <change tool="partitureditor" type="feature" version="1.7" date="23.11.2020">Import ISO/TEI (issue #215)</change>
+    <change tool="folker" type="feature" version="1.3" date="23.11.2020">Import ISO/TEI (issue #222)</change>
+    <change tool="orthonormal" type="feature" version="0.9.9" date="23.11.2020">Import ISO/TEI (issue #222)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="20.11.2020">Beautified error message dialog for media (issue #220)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="20.11.2020">Added MP4 as recommended file type (issue #219)</change>
+    <change tool="all" type="change" version="1.13" date="20.11.2020">OpenJDK 15 is breaking the JDS player (issue #217), so going back to 14 with a dirty fix for the encoding problem (issue #216)</change>
+    <change tool="all" type="change" version="1.13" date="16.11.2020">Using OpenJDK 15, make the encoding problem go away (issue #216)</change>
+    <change tool="partitureditor" type="feature" version="1.7" date="11.09.2020">Function Transcription > Add token tiers... (issue #107)</change>
+    <change tool="exakt" type="change" version="1.4" date="11.09.2020">XML should be default when saving a KWIC (issue #221)</change>
+    <change tool="folker" type="change" version="1.3" date="29.06.2020">Keep save thread when exiting from hanging (issue #210)</change>
+    <change tool="folker" type="change" version="1.3" date="22.06.2020">Separate selection of video player preference (issue #209)</change>
+    <change tool="orthonormal" type="change" version="0.9.9" date="06.05.2020">Update OrthoNormal normalisation lexicon to FOLK 2.14 (issue #74)</change>
+    <change tool="all" type="change" version="1.13" date="02.03.2020">New preview version with 64bit / OpenJDK / Java 11+ (issue #199)</change>
+    <change tool="all" type="change" version="1.13" date="18.02.2020">Experimental version with 64bit / OpenJDK / Java 11+ (issue #199)</change>
+    <change tool="partitureditor" type="change" version="1.6.2" date="02.12.2019">Experiment: 64 bit / OpenJDK version for MAC with JavaFX player (issue #199)</change>
+    <change tool="folker" type="change" version="1.3" date="02.12.2019">Experiment: 64 bit / OpenJDK version for MAC with JavaFX player (issue #199)</change>
+    <change tool="partitureditor" type="change" version="1.6.2" date="29.11.2019">Detect encoding for TRS import (issue #200)</change>
+    <change tool="folker" type="change" version="1.3" date="07.11.2019">Experiment: Java FX Player for video panel (win) (issue #177)</change>
+    <change tool="partitureditor" type="change" version="1.6.2" date="07.11.2019">Experiment: Java FX Player (win) (issue #177)</change>
+    <change tool="sextant" type="bug" version="0.2.1026" date="31.07.2019">repairs sextant linux launcher (#193)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="28.05.2019">Update OrthoNormal normalisation lexicon to FOLK 2.12 (issue #74)</change>
+    <change tool="orthonormal" type="bug" version="0.9.1" date="27.05.2019">Open file on double click on MAC (issue #184)</change>
+    <change tool="orthonormal" type="bug" version="0.9.1" date="27.05.2019">Player trouble fixed (issue #189)</change>
+    <change tool="folker" type="bug" version="1.2.1" date="27.05.2019">Rest of player trouble fixed (issue #189)</change>
+    <change tool="folker" type="bug" version="1.2.1" date="14.05.2019">Some player trouble fixed (issue #189)</change>
+    <change tool="exakt" type="change" version="1.3.1" date="09.05.2019">added new option to save a result list from the concordance in CSV format (issue #188)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="03.05.2019">Tier context menu wouldn't appear on last tier (issue #187)</change>
+    <change tool="folker" type="feature" version="1.2.1" date="29.03.2019">Transform action (issue #183)</change>
+    <change tool="exakt" type="change" version="1.3.1" date="15.10.2018">Alphabetic ordering description tiers in search and annotatio… (issue #182)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="19.02.2019">New version of Flextext Converter (issue #180)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="19.02.2019">Additional counting column (issue #179)</change>
+    <change tool="partitureditor" type="feature" version="1.6.1" date="11.01.2019">Move to tier for more than one event (issue #176)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="11.01.2019">Remodeled edit tiers dialog (issue #137)</change>
+    <change tool="folker" type="change" version="1.2.1" date="12.12.2018">Format second occurrence of speaker abb (issue #172)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="19.10.2018">No reinterpolation in mask time creator (issue #167)</change>
+    <change tool="exakt" type="bug" version="1.3.1" date="15.10.2018">added attribute @category to output of new tiers from template (issue #165)</change>
+    <change tool="folker" type="change" version="1.2.1" date="11.10.2018">Fine tuning of color-coding for SegCor output (issue #162)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="24.09.2018">Added n-dash as delimiter for GAT segmentation (issue #164)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="31.08.2018">Improvements to the Brown Noise Generator and the masking algorithm: generated brown noise is now smoother and adapts to the volume of the source audio on a per channel basis. (issue #134)</change>
+    <change tool="folker" type="change" version="1.2.1" date="31.08.2018">Improvements to the Brown Noise Generator and the masking algorithm: generated brown noise is now smoother and adapts to the volume of the source audio on a per channel basis. (issue #134)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="24.08.2018">Asterisk as possible phrase boundary (issue #162)</change>
+    <change tool="exakt" type="change" version="1.3.1" date="11.07.2018"> the names of the annotations are now sorted alphabetically (issue #160)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="11.07.2018">Some smaller changes to the HIAT-ISO-TEI export (issue #152)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="10.07.2018">bracket adjustment in GAT outputs was gone (issue #159)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="05.07.2018">encoding selection panel for TSV's (issue #158)</change>
+    <change tool="orthonormal" type="bug" version="0.9.1" date="29.06.2018">Flag for token/probability in tagging (issue #157)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="25.06.2018">Log entry for player type (issue #156)</change>
+    <change tool="folker" type="change" version="1.2.1" date="25.06.2018">Fine tuning of ISO/TEI export for ZuMult (issue #152)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="25.06.2018">Fine tuning of ISO/TEI export for ZuMult (issue #152)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="25.06.2018">Fine tuning of ISO/TEI export for ZuMult (issue #152)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="30.05.2018">Update normalisation lexicon (issue #74)</change>
+    <change tool="orthonormal" type="feature" version="0.9.1" date="30.05.2018">Configurable Quick Buttons for POS (issue #154)</change>
+    <change tool="orthonormal" type="feature" version="0.9.1" date="30.05.2018">Function for applying rules (issue #153)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="01.05.2018">Fine tuning of ISO/TEI export for ZuMult</change>
+    <change tool="folker" type="change" version="1.2.1" date="01.05.2018">Fine tuning of ISO/TEI export for ZuMult  (issue #152)</change>
+    <change tool="folker" type="feature" version="1.2.1" date="20.04.2018">Color coded output for SegCor segmentation (issue #149)</change>
+    <change tool="folker" type="feature" version="1.2.1" date="20.04.2018">Adapt level 3 parsing for SegCor segmentation (issue #148)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="16.04.2018">Bug fix in sorting / Stratify after Audacity import (issue #145)</change>
+    <change tool="partitureditor" type="feature" version="1.6.1" date="12.04.2018">TSV converter for INEL (issue #144)</change>
+    <change tool="orthonormal" type="feature" version="0.9.1" date="26.02.2018">function for importing TGDP data (issue #143)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="23.01.2018">more new languages for WebMaus (issue #141)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="23.01.2018">new languages for WebMaus (issue #141)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="17.01.2018">function for changing speaker IDs (issue #140)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="08.01.2018">system ID on stylesheet sources (issue #138 - nolda)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="15.12.2017">Threading issues in JDS and BAS player (issue #112)</change>
+    <change tool="orthonormal" type="change" version="0.9.1" date="15.12.2017">Button for correcting transcribed form in normalisation dialog (issue #135)</change>
+    <change tool="coma" type="bug" version="2.0.1" date="22.11.2017">POS tagger would quit with null pointer because of tokens in tiers without speakers (issue #130)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="22.11.2017">Added pipe symbol to GAT keyboard (issue #132)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="22.11.2017">Changed preferred size for bottom panel in multimodal panel (issue #131)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="22.11.2017">Another change to the DMG keyboard for Arabic (issue #129)</change>
+    <change tool="folker" type="feature" version="1.2.1" date="21.11.2017">First attempt at making video panel work for MAC (issue #82)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="21.11.2017">A few changes to the DMG keyboard for Arabic (issue #129)</change>
+    <change tool="partitureditor" type="feature" version="1.6.1" date="20.11.2017">First version of DMG keyboard for Arabic (issue #129)</change>
+    <change tool="partitureditor" type="feature" version="1.6.1" date="17.11.2017">First version of VTT import (issue #119)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="17.11.2017">After insert pause: request focus for editing cell (issue #122)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="22.09.2017">Flextext import improvements (issue #123)</change>
+    <change tool="exakt" type="feature" version="1.3.1" date="28.08.2017">Improvements to EXAKT enhancements (DJ, AF) (issue #121)</change>
+    <change tool="partitureditor" type="feature" version="1.6.1" date="22.08.2017">Split long event action (issue #120)</change>
+    <change tool="exakt" type="feature" version="1.3.1" date="12.07.2017">First versions of EXAKT enhancements (DJ, AF): collections (issue #104) and XSLT 2.0 (issue #114)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="06.07.2017">Restore hidden tiers after undo (issue #110)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="06.07.2017">Referenced file not properly resolved after import of EXS (issue #111)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="30.06.2017">offer existing categories in add tier dialog (issue #109)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="30.06.2017">handle multiple selection in languages dialog (issue #106)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="14.06.2017">Auto save copy of transcription rather than the instance used by the PE (issue #102)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="14.06.2017">Changed error message for a certain type of CHAT import error (issue #99)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="05.06.2017">JDS Player would behave sillily in playback mode (issue #98)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="05.06.2017">Count segments: Save as... needs HTML File Filter (issue #97)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="31.05.2017">WebMAUS: check for stratification (issue #91)</change>
+    <change tool="partitureditor" type="change" version="1.6.1" date="31.05.2017">WebLicht: determine language from chain (issue #88)</change>
+    <change tool="teidrop" type="change" version="0.5" date="24.05.2017">Added fln as a recognizable file suffix (issue #83)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="24.05.2017">Avoid double split for zero or margin selections (issue #93)</change>
+    <change tool="partitureditor" type="bug" version="1.6.1" date="23.05.2017">D-tiers in HIAT TEI export (issue #89)</change>
+    <change tool="folker" type="bug" version="1.2" date="09.05.2017">Bug in afterEditCell for FOLKER (issue #87)</change>
+    <change tool="partitureditor" type="feature" version="1.6" date="08.05.2017">SRT export (issue #85)</change>
     <change tool="partitureditor" type="change" version="1.6" date="25.04.2017">Some smaller fixes for the MAC (issues #77 and #78)</change>
     <change tool="orthonormal" type="change" version="0.9" date="24.04.2017">Update normalisation lexicon (issue #74)</change>
     <change tool="partitureditor" type="bug" version="1.6" date="24.04.2017">Metadata for TCF must be empty (issue #64)</change>
