@@ -6,7 +6,7 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.File;
-import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
@@ -21,7 +21,8 @@ public class Test {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        new Test().doit();
         try {
             /*TranscriberConverter tc = new TranscriberConverter();
             BasicTranscription bt = tc.readTranscriberFromFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3 (2).trs");
@@ -97,6 +98,27 @@ public class Test {
         } catch (Exception ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void doit() throws IOException {
+        long start = System.currentTimeMillis();
+        TEIConverter converter = new TEIConverter();
+        converter.addConverterListener(new ConverterListener(){
+            @Override
+            public void processConverterEvent(ConverterEvent converterEvent) {
+                System.out.println(converterEvent.getMessage() + " / " + converterEvent.getProgress());
+            }
+            
+        });
+        int count = 0;
+        File[] files = new File("D:\\AGD-DATA\\dgd2_data\\iso-transcripts\\FOLK").listFiles();
+        for (File f : files){
+            System.out.println("[" + count + "/" + files.length + "]");
+            converter.readISOTEIFromFile(f.getAbsolutePath());
+        }
+        long end = System.currentTimeMillis();
+        
+        System.out.println(((end - start) / 1000) + " seconds for " + count + " files.");
     }
 
 }

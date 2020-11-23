@@ -25,7 +25,8 @@ public class TagDirectory {
     public static String TTC = "c:\\TreeTagger";
     public static String PF = "c:\\TreeTagger\\lib\\german-utf8.par";
     public static String ENC = "UTF-8";
-    public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
+    //public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
+    public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
     
     /**
      * @param args the command line arguments

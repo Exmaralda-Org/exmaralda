@@ -14,6 +14,7 @@ import java.util.prefs.BackingStoreException;
 import javax.swing.JOptionPane;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
+import org.exmaralda.partitureditor.partiture.StringUtilities;
 
 /**
  *
@@ -75,7 +76,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                             }
                             if (!proceed) return;
                             String fileNameToOpen = e.getFiles().get(0).getAbsolutePath();
-                            File fileToOpen = new File(fileNameToOpen);
+                            // dirty fix for #216
+                            File fileToOpen = new File(StringUtilities.fixFilePath(fileNameToOpen));                            
                             if (!(fileNameToOpen.toLowerCase().endsWith(".wav"))){
                                 applicationControl.openTranscriptionFile(fileToOpen);
                             } else {

@@ -13,6 +13,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import org.exmaralda.coma.resources.ResourceHandler;
 import org.exmaralda.coma.root.Coma;
 import org.exmaralda.coma.root.Ui;
+import org.exmaralda.partitureditor.partiture.StringUtilities;
 
 /**
  * @author woerner
@@ -105,7 +106,9 @@ public class Launcher {
 		boolean logging = true;
 		if (args.length > 0) {
 			if (new File(args[0]).exists()) {
-				inputFile = args[0];
+				//inputFile = args[0];
+                                // dirty fix for #216
+                                inputFile = StringUtilities.fixFilePath(args[0]);
 			}
 
 			if (args.length > 1) {

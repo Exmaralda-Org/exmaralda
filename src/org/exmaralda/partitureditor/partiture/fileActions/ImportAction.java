@@ -45,7 +45,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             importFile();
             table.clearUndo();
             table.clearSearchResult();
-        } catch (Exception ex) {
+        } catch (IOException | ParserConfigurationException | TransformerException | JexmaraldaException | JDOMException | SAXException ex) {
             ex.printStackTrace();
             String message = "File could not be imported:\n" + ex.getLocalizedMessage();
             javax.swing.JOptionPane.showMessageDialog(table, message);

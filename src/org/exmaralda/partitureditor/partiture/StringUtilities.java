@@ -22,6 +22,28 @@ import org.exmaralda.partitureditor.jexmaralda.*;
 
 public class StringUtilities extends Object {
 
+    // this is a dirty fix for #216
+    public static String fixFilePath(String input) {
+        /*
+            Ã„
+            Ã¤
+            Ã–
+            Ã¶
+            Ãœ
+            Ã¼
+            ÃŸ        
+        */
+        String output = input
+                .replaceAll("Ã„", "Ä")
+                .replaceAll("Ã¤", "ä")
+                .replaceAll("Ã–", "Ö")
+                .replaceAll("Ã¶", "ö")
+                .replaceAll("Ãœ", "Ü")
+                .replaceAll("Ã¼", "ü")
+                .replaceAll("ÃŸ", "ß");
+        return output;
+    }
+
     // ********************************************
     // ********** CONSTRUCTORS  *******************
     // ********************************************

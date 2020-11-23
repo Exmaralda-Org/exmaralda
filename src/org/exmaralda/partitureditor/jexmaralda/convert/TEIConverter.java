@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.exmaralda.partitureditor.fsm.FSMException;
@@ -46,10 +48,32 @@ import org.jdom.xpath.XPath;
  *
  * @author  thomas
  */
-public class TEIConverter {
+public class TEIConverter extends AbstractConverter {
     
-    static String STYLESHEET_PATH = "/org/exmaralda/partitureditor/jexmaralda/xsl/EXMARaLDA2TEI.xsl";
-
+    public static String EXMARaLDA2TEI_XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/EXMARaLDA2TEI.xsl";
+    public static String TEI2EXMARaLDA_XSL = "/org/exmaralda/tei/xml/tei2exmaralda.xsl";
+    
+    public static String EXMARaLDA2GENERIC_ISO_TEI_XSL = "/org/exmaralda/tei/xml/exmaralda2isotei.xsl";
+    public static String EXMARaLDA2EVENT_TOKEN_ISO_TEI_XSL = "/org/exmaralda/tei/xml/exmaralda2isotei_eventToken.xsl";
+    
+    public static String FOLKER2ISO_TEI_XSL = "/org/exmaralda/tei/xml/folker2isotei.xsl";
+    
+    /* 
+        Converting from ISO/TEI to EXB is done in several steps:
+        (1) move <w> attributes to <span> elements : attributes2spans.xsl
+        (2) transform token references in <span> to time references : token2timeSpanReferences.xsl
+        (3) turn explicit token markup into implicit charachter markup : detokenize.xsl
+        (4) transform this TEI document to EXB : isotei2exmaralda.xsl
+        The assumption is that the input to (1) conforms to ZuMult's ISO/TEI schema
+        Intermediate steps will still conform to ISO/TEI in general.
+    */
+    
+    public static String ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    //public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences.xsl";
+    public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences_optimized.xsl";
+    public static String ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL = "/org/exmaralda/tei/xml/detokenize.xsl";
+    public static String ISOTEI2EXMARaLDA_4_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2exmaralda.xsl";
+    
     public static final int GENERIC_METHOD = 0;
     public static final int AZM_METHOD = 1;
     public static final int MODENA_METHOD = 2;
@@ -70,98 +94,45 @@ public class TEIConverter {
     
     /** Creates a new instance of TEIConverter */
     public TEIConverter(String ss) {
-        STYLESHEET_PATH = ss;
+        EXMARaLDA2TEI_XSL = ss;
     }
+    
     
     public void setLanguage(String l){
         language = l;
         System.out.println("Language of converter set to " + language);
     }
 
-    public BasicTranscription readTEIFromFile(String path) throws SAXException, JDOMException, IOException { 
-        Document doc = IOUtilities.readDocumentFromLocalFile(path);
-        if ("TEI.2".equals(doc.getRootElement().getName())){
-            // i.e. this must be a TEI document like the one defined in the AzM paper
-            TEISaxReader reader = new TEISaxReader();
-            return reader.readFromFile(path);
-        }
-        StylesheetFactory ssf = new StylesheetFactory(true);
+    /**
+     * Reads a TEI file like the one defined in https://nbn-resolving.org/urn:nbn:de:bsz:mh39-22729
+     * 
+     * @param path
+     * @return
+     * @throws IOException 
+     */
+    public BasicTranscription readTEIFromFile(String path) throws IOException { 
         try {
-            String result = ssf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/tei2exmaralda.xsl", IOUtilities.documentToString(doc));
+            Document doc = IOUtilities.readDocumentFromLocalFile(path);
+            if ("TEI.2".equals(doc.getRootElement().getName())){
+                // i.e. this must be a TEI document like the one defined in the AzM paper
+                TEISaxReader reader = new TEISaxReader();
+                return reader.readFromFile(path);
+            }
+            StylesheetFactory ssf = new StylesheetFactory(true);
+            String result = ssf.applyInternalStylesheetToString(TEI2EXMARaLDA_XSL, IOUtilities.documentToString(doc));
             BasicTranscription bt = new BasicTranscription();
             bt.BasicTranscriptionFromString(result);
             return bt;
-        } catch (JexmaraldaException ex) {
+        } catch (JexmaraldaException | ParserConfigurationException | TransformerException | SAXException | IOException | JDOMException ex) {
+            Logger.getLogger(TEIConverter.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
-        } catch (ParserConfigurationException ex) {
-            throw new IOException(ex);
-        } catch (TransformerConfigurationException ex) {
-            throw new IOException(ex);
-        } catch (TransformerException ex) {
-            throw new IOException(ex);
-        }
+        } 
     }
     
-    @Deprecated
-    public String BasicTranscriptionToTEI(BasicTranscription bt) throws SAXException,
-                                                                        IOException,
-                                                                        ParserConfigurationException,
-                                                                        TransformerConfigurationException,
-                                                                        TransformerException,
-                                                                        JDOMException {
-        return BasicTranscriptionToTEI(bt, false);
-    }
-
-    @Deprecated
-    public String BasicTranscriptionToTEI(BasicTranscription bt, boolean callBracketReplacer) throws SAXException,
-                                                                                                     IOException,
-                                                                                                     ParserConfigurationException,
-                                                                                                     TransformerConfigurationException,
-                                                                                                     TransformerException,
-                                                                                                     JDOMException {
-        SegmentedTranscription st = bt.toSegmentedTranscription();
-        ListTranscription lt = st.toListTranscription(new SegmentedToListInfo(st, SegmentedToListInfo.TURN_SEGMENTATION));
-        // CHANGED FOR VERSION 1.3.3, 20-10-2006
-        lt.getBody().sort();
-        // CHANGED 30-08-2010: use XSLT2
-        StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString(STYLESHEET_PATH, lt.toXML());
-        if (callBracketReplacer){
-            return replaceBrackets(result);
-        }
-        return result;
-    }
-    
-    @Deprecated
-    public void writeTEIToFile(BasicTranscription bt, String path, int method) throws SAXException, 
-                                                                                      IOException, 
-                                                                                      ParserConfigurationException, 
-                                                                                      TransformerConfigurationException, 
-                                                                                      TransformerException, 
-                                                                                      JDOMException, 
-                                                                                      FSMException, 
-                                                                                      XSLTransformException, 
-                                                                                      Exception{
-        switch (method){
-            case GENERIC_METHOD :
-                writeGenericTEIToFile(bt,path);
-            case AZM_METHOD :
-                writeTEIToFile(bt, path);
-                break;
-            case MODENA_METHOD :
-                writeModenaTEIToFile(bt, path);
-                break;
-            case HIAT_METHOD :
-                writeHIATTEIToFile(bt, path);
-                break;
-        }
-    }
-
-
     
     public void writeGenericISOTEIToFile(BasicTranscription bt, String path) throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
         StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2isotei.xsl", bt.toXML());
+        String result = sf.applyInternalStylesheetToString(EXMARaLDA2GENERIC_ISO_TEI_XSL, bt.toXML());
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
@@ -169,7 +140,7 @@ public class TEIConverter {
     
     public void writeEventTokenISOTEIToFile(BasicTranscription bt, String path)  throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
         StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2isotei_eventToken.xsl", bt.toXML());
+        String result = sf.applyInternalStylesheetToString(EXMARaLDA2EVENT_TOKEN_ISO_TEI_XSL, bt.toXML());
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
@@ -185,9 +156,7 @@ public class TEIConverter {
         writeHIATISOTEIToFile(bt, filename, false);
     }
     
-    public void writeHIATISOTEIToFile(BasicTranscription bt, 
-                                      String filename,
-                                      boolean includeFullText) throws SAXException,
+    public void writeHIATISOTEIToFile(BasicTranscription bt, String filename, boolean includeFullText) throws SAXException,
                                                                               FSMException,
                                                                               XSLTransformException,
                                                                               JDOMException,
@@ -259,7 +228,7 @@ public class TEIConverter {
             parser.parseDocument(doc, level);
         }
         StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2isotei.xsl", IOUtilities.documentToString(doc));
+        String result = sf.applyInternalStylesheetToString(FOLKER2ISO_TEI_XSL, IOUtilities.documentToString(doc));
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);                
@@ -268,185 +237,44 @@ public class TEIConverter {
     
     public void writeFOLKERISOTEIToFile(Document flnDoc, String absolutePath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException {
         StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2isotei.xsl", IOUtilities.documentToString(flnDoc));
+        String result = sf.applyInternalStylesheetToString(FOLKER2ISO_TEI_XSL, IOUtilities.documentToString(flnDoc));
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);                
         IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc);                
     }
     
+    public BasicTranscription readISOTEIFromFile(String path) throws IOException{
+        try {
+            StylesheetFactory sf = new StylesheetFactory(true);
+            fireConverterEvent(new ConverterEvent("Reading " + new File(path).getName(), 0.05));
+            Document doc = IOUtilities.readDocumentFromLocalFile(path);
+            String docString = IOUtilities.documentToString(doc);
+            fireConverterEvent(new ConverterEvent(new File(path).getName() + " read, now transforming attributes to spans...", 0.1));
+            String transform1 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL, docString);
+            fireConverterEvent(new ConverterEvent("Transformed attributes to spans, now transforming token to time references...", 0.25));            
+            String transform2 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL, transform1);
+            fireConverterEvent(new ConverterEvent("Transformed token references to time references, now detokenizing...", 0.7));            
+            String transform3 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL, transform2);
+            fireConverterEvent(new ConverterEvent("Detokenized, now transforming to EXB...", 0.85));            
+            String exbString = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_4_TRANSFORM_XSL, transform3);
+            fireConverterEvent(new ConverterEvent("Transformed to EXB", 0.95));            
+            BasicTranscription bt = new BasicTranscription();
+            bt.BasicTranscriptionFromString(exbString);
+            return bt;
+        } catch (JDOMException | SAXException | JexmaraldaException | ParserConfigurationException | TransformerException ex) {
+            Logger.getLogger(TEIConverter.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
+        }        
+    }
     
     
-    //////////////////////////////////////////////////////////////////
-    //////////////// OLDER METHODS, NOT NEEDED SINCE ISO /////////////
-    //////////////////////////////////////////////////////////////////
     
-    /** transforms the basic transcription and writes a TEI file to path
-     * according to the method described in Schmidt 2005 */
-    @Deprecated
-    public void writeTEIToFile(BasicTranscription bt, String path) throws SAXException,
-                                                                          IOException, 
-                                                                          ParserConfigurationException, 
-                                                                          TransformerConfigurationException, 
-                                                                          TransformerException,
-                                                                          JDOMException {
-        String toBeWritten = BasicTranscriptionToTEI(bt);
-        System.out.println("started writing document...");
-        java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(path));
-        fos.write(toBeWritten.getBytes("UTF-8"));
-        fos.close();
-        System.out.println("document written.");        
-    }
-
-    /** transforms the basic transcription and writes a TEI file to path
-     * according to the method described by Natacha Niemants (Modena) */
-    @Deprecated
-    public void writeModenaTEIToFile(BasicTranscription bt, String path) throws SAXException,
-                                                                                IOException,
-                                                                                ParserConfigurationException,
-                                                                                TransformerConfigurationException,
-                                                                                TransformerException,
-                                                                                JDOMException {
-        String toBeWritten = BasicTranscriptionToTEI(bt, true);
-        System.out.println("started writing document...");
-        java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(path));
-        fos.write(toBeWritten.getBytes("UTF-8"));
-        fos.close();
-        System.out.println("document written.");
-    }
-
-    @Deprecated
-    public void writeHIATTEIToFile(BasicTranscription bt, String path) throws SAXException, 
-                                                                              FSMException, 
-                                                                              XSLTransformException, 
-                                                                              JDOMException, 
-                                                                              IOException, 
-                                                                              Exception {
-        // added 13-12-2013
-        BasicTranscription copyBT = bt.makeCopy();
-        copyBT.normalize();
-
-        System.out.println("started writing document...");
-        HIATSegmentation segmentation = new HIATSegmentation();
-        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
-        String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
-        TEIMerger teiMerger = new TEIMerger();
-        Document stdoc = FileIO.readDocumentFromString(st.toXML());
-        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event");
-        FileIO.writeDocumentToLocalFile(path, teiDoc);
-        System.out.println("document written.");                
-    }
-
-    @Deprecated
-    public void writeNewHIATTEIToFile(BasicTranscription bt, String filename) throws SAXException,
-                                                                              FSMException,
-                                                                              XSLTransformException,
-                                                                              JDOMException,
-                                                                              IOException,
-                                                                              Exception {
-        writeNewHIATTEIToFile(bt, filename, true);
-    }
-
-    @Deprecated
-    public void writeNewHIATTEIToFile(BasicTranscription bt, String filename, boolean generateWordIDs) throws SAXException,
-                                                                              FSMException,
-                                                                              XSLTransformException,
-                                                                              JDOMException,
-                                                                              IOException,
-                                                                              Exception {
-
-        // added 13-12-2013
-        BasicTranscription copyBT = bt.makeCopy();
-        copyBT.normalize();
-        
-        System.out.println("started writing document...");
-        HIATSegmentation segmentation = new HIATSegmentation();
-        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
-        String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
-        TEIMerger teiMerger = new TEIMerger();
-        Document stdoc = FileIO.readDocumentFromString(st.toXML());
-        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
-
-        /*StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/transformhiattei.xsl", IOUtilities.documentToString(teiDoc));
-        Document transformedTEIDoc = IOUtilities.readDocumentFromString(result);
-        FileIO.writeDocumentToLocalFile(filename, transformedTEIDoc);*/
-        if (generateWordIDs){
-            generateWordIDs(teiDoc);
-        }
-        FileIO.writeDocumentToLocalFile(filename, teiDoc);
-        System.out.println("document written.");
-
-    }
-
-    
-    @Deprecated
-    public void writeFOLKERTEIToFile(BasicTranscription bt, String path) throws SAXException, 
-                                                                                ParserConfigurationException, 
-                                                                                IOException, 
-                                                                                TransformerConfigurationException, 
-                                                                                TransformerException, 
-                                                                                JDOMException{
-        EventListTranscription elt = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt);
-        elt.updateContributions();
-        Element e = elt.toJDOMElement(new File(path));
-        Document doc = new Document(e);
-        GATParser parser = new GATParser(org.exmaralda.folker.utilities.Constants.getAlphabetLanguage());
-        for (int level=1; level<=2; level++){
-            parser.parseDocument(doc, level);
-        }
-        StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2tei.xsl", IOUtilities.documentToString(doc));
-        Document d = IOUtilities.readDocumentFromString(result);
-        generateWordIDs(d);
-        IOUtilities.writeDocumentToLocalFile(path, d);                
-    }
-
-    @Deprecated
-    public void writeGenericTEIToFile(BasicTranscription bt, String path) throws SAXException,
-                                                                                ParserConfigurationException,
-                                                                                JDOMException,
-                                                                                IOException,
-                                                                                TransformerConfigurationException,
-                                                                                TransformerException {
-        StylesheetFactory sf = new StylesheetFactory(true);
-        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2tei.xsl", bt.toXML());
-        Document d = IOUtilities.readDocumentFromString(result);
-        IOUtilities.writeDocumentToLocalFile(path, d);
-    }
-
-
 
     //****************************************************
     //********* private processing methods ***************
     //****************************************************
 
-    /*private void generateWordIDs(Document document) throws JDOMException{
-        XPath wordXPath = XPath.newInstance("//tei:w"); 
-        wordXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
-        
-        List words = wordXPath.selectNodes(document);
-        int count=0;
-        for (Object o : words){
-            count++;
-            Element word = (Element)o;
-            String wordID = "w" + Integer.toString(count);
-            word.setAttribute("id", wordID, Namespace.XML_NAMESPACE);
-        }
-        
-        XPath pcXPath = XPath.newInstance("//tei:pc"); 
-        pcXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
-        
-        List pcs = pcXPath.selectNodes(document);
-        count=0;
-        for (Object o : pcs){
-            count++;
-            Element pc = (Element)o;
-            String pcID = "pc" + Integer.toString(count);
-            pc.setAttribute("id", pcID, Namespace.XML_NAMESPACE);
-        }
-        
-    } */
 
     HashSet<String> allExistingIDs = new HashSet<String>();
     
@@ -661,6 +489,205 @@ public class TEIConverter {
         
     }
 
+    /*********************************************/
+    /** DEPRECATED METHODS, COMPLICATED SHADOWS **/
+    /*********************************************/
+
+    @Deprecated
+    public String BasicTranscriptionToTEI(BasicTranscription bt) throws SAXException,
+                                                                        IOException,
+                                                                        ParserConfigurationException,
+                                                                        TransformerConfigurationException,
+                                                                        TransformerException,
+                                                                        JDOMException {
+        return BasicTranscriptionToTEI(bt, false);
+    }
+
+    @Deprecated
+    public String BasicTranscriptionToTEI(BasicTranscription bt, boolean callBracketReplacer) throws SAXException,
+                                                                                                     IOException,
+                                                                                                     ParserConfigurationException,
+                                                                                                     TransformerConfigurationException,
+                                                                                                     TransformerException,
+                                                                                                     JDOMException {
+        SegmentedTranscription st = bt.toSegmentedTranscription();
+        ListTranscription lt = st.toListTranscription(new SegmentedToListInfo(st, SegmentedToListInfo.TURN_SEGMENTATION));
+        // CHANGED FOR VERSION 1.3.3, 20-10-2006
+        lt.getBody().sort();
+        // CHANGED 30-08-2010: use XSLT2
+        StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString(EXMARaLDA2TEI_XSL, lt.toXML());
+        if (callBracketReplacer){
+            return replaceBrackets(result);
+        }
+        return result;
+    }
+    
+    @Deprecated
+    public void writeTEIToFile(BasicTranscription bt, String path, int method) throws SAXException, 
+                                                                                      IOException, 
+                                                                                      ParserConfigurationException, 
+                                                                                      TransformerConfigurationException, 
+                                                                                      TransformerException, 
+                                                                                      JDOMException, 
+                                                                                      FSMException, 
+                                                                                      XSLTransformException, 
+                                                                                      Exception{
+        switch (method){
+            case GENERIC_METHOD :
+                writeGenericTEIToFile(bt,path);
+            case AZM_METHOD :
+                writeTEIToFile(bt, path);
+                break;
+            case MODENA_METHOD :
+                writeModenaTEIToFile(bt, path);
+                break;
+            case HIAT_METHOD :
+                writeHIATTEIToFile(bt, path);
+                break;
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////
+    //////////////// OLDER METHODS, NOT NEEDED SINCE ISO /////////////
+    //////////////////////////////////////////////////////////////////
+    
+    /** transforms the basic transcription and writes a TEI file to path
+     * according to the method described in Schmidt 2005 */
+    @Deprecated
+    public void writeTEIToFile(BasicTranscription bt, String path) throws SAXException,
+                                                                          IOException, 
+                                                                          ParserConfigurationException, 
+                                                                          TransformerConfigurationException, 
+                                                                          TransformerException,
+                                                                          JDOMException {
+        String toBeWritten = BasicTranscriptionToTEI(bt);
+        System.out.println("started writing document...");
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(path));
+        fos.write(toBeWritten.getBytes("UTF-8"));
+        fos.close();
+        System.out.println("document written.");        
+    }
+
+    /** transforms the basic transcription and writes a TEI file to path
+     * according to the method described by Natacha Niemants (Modena) */
+    @Deprecated
+    public void writeModenaTEIToFile(BasicTranscription bt, String path) throws SAXException,
+                                                                                IOException,
+                                                                                ParserConfigurationException,
+                                                                                TransformerConfigurationException,
+                                                                                TransformerException,
+                                                                                JDOMException {
+        String toBeWritten = BasicTranscriptionToTEI(bt, true);
+        System.out.println("started writing document...");
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(path));
+        fos.write(toBeWritten.getBytes("UTF-8"));
+        fos.close();
+        System.out.println("document written.");
+    }
+
+    @Deprecated
+    public void writeHIATTEIToFile(BasicTranscription bt, String path) throws SAXException, 
+                                                                              FSMException, 
+                                                                              XSLTransformException, 
+                                                                              JDOMException, 
+                                                                              IOException, 
+                                                                              Exception {
+        // added 13-12-2013
+        BasicTranscription copyBT = bt.makeCopy();
+        copyBT.normalize();
+
+        System.out.println("started writing document...");
+        HIATSegmentation segmentation = new HIATSegmentation();
+        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
+        String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
+        TEIMerger teiMerger = new TEIMerger();
+        Document stdoc = FileIO.readDocumentFromString(st.toXML());
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event");
+        FileIO.writeDocumentToLocalFile(path, teiDoc);
+        System.out.println("document written.");                
+    }
+
+    @Deprecated
+    public void writeNewHIATTEIToFile(BasicTranscription bt, String filename) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              Exception {
+        writeNewHIATTEIToFile(bt, filename, true);
+    }
+
+    @Deprecated
+    public void writeNewHIATTEIToFile(BasicTranscription bt, String filename, boolean generateWordIDs) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              Exception {
+
+        // added 13-12-2013
+        BasicTranscription copyBT = bt.makeCopy();
+        copyBT.normalize();
+        
+        System.out.println("started writing document...");
+        HIATSegmentation segmentation = new HIATSegmentation();
+        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
+        String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
+        TEIMerger teiMerger = new TEIMerger();
+        Document stdoc = FileIO.readDocumentFromString(st.toXML());
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
+
+        /*StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/transformhiattei.xsl", IOUtilities.documentToString(teiDoc));
+        Document transformedTEIDoc = IOUtilities.readDocumentFromString(result);
+        FileIO.writeDocumentToLocalFile(filename, transformedTEIDoc);*/
+        if (generateWordIDs){
+            generateWordIDs(teiDoc);
+        }
+        FileIO.writeDocumentToLocalFile(filename, teiDoc);
+        System.out.println("document written.");
+
+    }
+
+    
+    @Deprecated
+    public void writeFOLKERTEIToFile(BasicTranscription bt, String path) throws SAXException, 
+                                                                                ParserConfigurationException, 
+                                                                                IOException, 
+                                                                                TransformerConfigurationException, 
+                                                                                TransformerException, 
+                                                                                JDOMException{
+        EventListTranscription elt = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt);
+        elt.updateContributions();
+        Element e = elt.toJDOMElement(new File(path));
+        Document doc = new Document(e);
+        GATParser parser = new GATParser(org.exmaralda.folker.utilities.Constants.getAlphabetLanguage());
+        for (int level=1; level<=2; level++){
+            parser.parseDocument(doc, level);
+        }
+        StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/folker2tei.xsl", IOUtilities.documentToString(doc));
+        Document d = IOUtilities.readDocumentFromString(result);
+        generateWordIDs(d);
+        IOUtilities.writeDocumentToLocalFile(path, d);                
+    }
+
+    @Deprecated
+    public void writeGenericTEIToFile(BasicTranscription bt, String path) throws SAXException,
+                                                                                ParserConfigurationException,
+                                                                                JDOMException,
+                                                                                IOException,
+                                                                                TransformerConfigurationException,
+                                                                                TransformerException {
+        StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString("/org/exmaralda/tei/xml/exmaralda2tei.xsl", bt.toXML());
+        Document d = IOUtilities.readDocumentFromString(result);
+        IOUtilities.writeDocumentToLocalFile(path, d);
+    }
+
+
+    
 
 
 

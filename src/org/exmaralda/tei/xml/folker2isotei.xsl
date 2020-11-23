@@ -222,14 +222,14 @@
                         <xsl:apply-templates select="//contribution"/>
                     </body>
                 </xsl:variable>
-                <body>
+                <!-- <body> -->
                     <!--<xsl:apply-templates select="//contribution"/> -->
                     <xsl:for-each select="$ANNOTATION_BLOCKS/child::*">                        
                         <xsl:sort select="exmaralda:timeline-position(@start)" data-type="number"/>
                         <xsl:sort select="exmaralda:timeline-position(@end)" order="descending" data-type="number"/>
                         <xsl:copy-of select="current()"/>
                     </xsl:for-each>
-                </body>
+                <!-- </body> -->
             </text>
         </TEI>            
     </xsl:template>
