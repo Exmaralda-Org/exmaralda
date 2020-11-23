@@ -4,7 +4,7 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <xsl:import href="../../../inelutilities/flextext2exb.xsl"/>
+    <xsl:import href="/data/Documents/inelutilities/flextext2exb.xsl"/>
     
     <xsl:param name="PROJECTNAME" select="'Selkup'" as="xs:string"/>
     <xsl:param name="BASE-LANGUAGE" select="'sel'" as="xs:string"/><!-- get from flextext -->

@@ -4,7 +4,7 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <xsl:import href="../../../inelutilities/flextext2exb.xsl"/>
+    <xsl:import href="../../../utilities/inelutilities/flextext2exb.xsl"/>
     
     <xsl:param name="PROJECTNAME" select="'Selkup'" as="xs:string"/>
     <xsl:param name="BASE-LANGUAGE" select="'sel'" as="xs:string"/><!-- get from flextext -->
@@ -19,7 +19,7 @@
     <xsl:param name="TIER-DEFINITIONS">
         <tiers>
             <tier name="ref" type="a" cleanup="renum" itemtype="segnum" lang="en" template="tier-sent"/>
-            <tier name="st" type="a" cleanup="brackets" itemtype="lit" lang="sel-Cyrl-x-source" template="tier-sent"/>
+            <tier name="st" type="a" cleanup="brackets" itemtype="lit" lang="sel-x-source" template="tier-sent"/>
             <tier name="stl" type="a" cleanup="brackets" itemtype="lit" lang="sel-Latn-x-source" template="tier-sent"/>
             <tier name="ts" type="a" cleanup="brackets, tx" template="tier-sent-join"/>
             <tier name="tx" type="t" cleanup="brackets, tx" itemtype="txt" template="tier-tx"/>
@@ -40,10 +40,10 @@
             <tier name="fe" type="a" cleanup="brackets" itemtype="gls" lang="en" template="tier-sent"/>
             <tier name="fg" type="a" cleanup="brackets" itemtype="gls" lang="de" template="tier-sent"/>
             <tier name="fr" type="a" cleanup="brackets" itemtype="gls" lang="ru" template="tier-sent"/>
-            <!--<tier name="ltr" type="a" cleanup="brackets" itemtype="lit" lang="ru" template="tier-sent"/>-->            <!-- Kuzmina's literal Russian - when it's in Lit/Rus line -->            
-            <tier name="ltr" type="a" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/>            <!-- Kuzmina's literal Russian - when it's in Free/Sel-SC line -->
+            <tier name="ltr" type="a" cleanup="brackets" itemtype="lit" lang="ru" template="tier-sent"/>            <!-- Kuzmina's literal Russian - when it's in Lit/Rus line -->            
+            <!--<tier name="ltr" type="a" template="tier-sent" itemtype="gls" lang="sel-Cyrl-x-source" cleanup="brackets"/>  -->          <!-- Kuzmina's literal Russian - when it's in Free/Sel-SC line -->
             <tier name="nt" type="a" cleanup="brackets" itemtype="note" lang="en" template="tier-sent"/>
-            <tier name="nto" type="a" cleanup="brackets" itemtype="note" lang="sel-Cyrl-x-source" template="tier-sent"/>
+            <tier name="nto" type="a" cleanup="brackets" itemtype="note" lang="sel-x-source" template="tier-sent"/>
         </tiers>
     </xsl:param>
     
