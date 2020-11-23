@@ -20,7 +20,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter SimpleExmaraldaFileFilter = new ParameterFileFilter("txt", "Simple EXMARaLDA text file (*.txt)");
     public ParameterFileFilter RioDeJaneiroFileFilter = new ParameterFileFilter("txt", "Rio de Janeiro style text transcription (*.txt)");
     public ParameterFileFilter TASXFileFilter = new ParameterFileFilter("xml", "TASX Annotation File (*.xml)");
-    public ParameterFileFilter TEIFileFilter = new ParameterFileFilter("xml", "TEI file (*.xml)");
+    public ParameterFileFilter TEIFileFilter = new ParameterFileFilter("xml", "ISO/TEI file (*.xml)");
     static String[] tcf_suff = {"tcf", "xml"};
     public ParameterFileFilter TCFFileFilter = new ParameterFileFilter(tcf_suff, "TCF file (*.tcf, *.xml)");
     public ParameterFileFilter TEIModenaFileFilter = new ParameterFileFilter("xml", "Modena TEI file (*.xml)");
@@ -60,6 +60,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter VTTFileFilter = new ParameterFileFilter("vtt", "Web Video Text Tracks file (*.vtt)");
     static String[] tsv_suff = {"tsv", "csv", "txt"};
     public ParameterFileFilter TsvFileFilter = new ParameterFileFilter(tsv_suff, " tsv file (*.tsv, *.csv, *.txt)");
+    
 
 
 
