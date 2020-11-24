@@ -20,7 +20,8 @@
             Based on the batch version based on interlinear-eaf2exmaralda.xsl v1.11.
             
             v4.0: Changes by Anne Ferger, 23.11.2020
-                   - version to be added to EXMARaLDA
+                   - to be added to EXMARaLDA
+                   - a version entry is now mandated in a settings file and added to ud metadata in exb
             v3.4: Changes by Anne Ferger, 23.11.2020
                    - only support files with single interlinear text
             v3.3.1: Changes by Anne Ferger, 17.11.2020
@@ -55,10 +56,22 @@
     <!-- *** START: GLOBAL PARAMETERS *** -->
 
     <!-- version of the flextext2exb conversion: goes into ud-meta-information -->
-    <xsl:variable name="VERSION" select="'3.4'"/>
+    <xsl:variable name="VERSION" select="'4.0'"/>
 
     <xsl:param name="SETTINGS-FILE" as="xs:string" required="no"/>
-
+    
+    <xsl:param name="SETTINGS-FILE-VERSION" 
+        select="
+        (: test if there is a settings-file-version :)
+        if ($settings//xsl:param[@name = 'SETTINGS-FILE-VERSION']/@select)
+        then
+        (replace($settings//xsl:param[@name = 'SETTINGS-FILE-VERSION']/@select, '^''|''$', ''), '')[1]
+        (: throw an error if there are more than one :)
+        else
+        error((), '***ERROR: : Your settings file does not contain version info - please use the most recent settings file or add the version info to your settings file.')"
+        
+        as="xs:string"/>
+    
     <!-- project-name: goes into meta-information -->
     <xsl:param name="PROJECTNAME"
         select="(replace($settings//xsl:param[@name = 'PROJECTNAME']/@select, '^''|''$', ''), '')[1]"
@@ -251,7 +264,7 @@
                 <xsl:copy-of select="$settings/*/*"/>
             </conversion-settings>-->
             <interlinear-text name="{$filename}"/>
-            <xsl:if test="$multiple-texts">
+            <xsl:if test="not($multiple-texts)">
                 <xsl:result-document method="xml" indent="yes" encoding="utf-8"
                     omit-xml-declaration="no" href="{$output-directory}{$filename}.exb">
                     <basic-transcription>
@@ -269,7 +282,7 @@
                                         <xsl:value-of select="$VERSION"/>
                                     </ud-information>
                                     <ud-information attribute-name="flex2exb-settings">
-                                        <xsl:value-of select="$SETTINGS-FILE"/>
+                                        <xsl:value-of select="$SETTINGS-FILE-VERSION"/>
                                     </ud-information>
                                     <ud-information attribute-name="flex2exb-timestamp">
                                         <xsl:value-of select="current-dateTime()"/>

@@ -6,6 +6,7 @@
       
       <!--<xsl:import href="../../../inelutilities/flextext2exb.xsl"/>-->
       
+      <xsl:param name="SETTINGS-FILE-VERSION" select="'kamas_flextext2exb_1.0'" as="xs:string"/>
       <xsl:param name="PROJECTNAME" select="'Kamas'" as="xs:string"/>
       <xsl:param name="BASE-LANGUAGE" select="'xas'" as="xs:string"/><!-- get from flextext -->
       <xsl:param name="SPEAKER-CODE-POSITION" select="1" as="xs:integer"/>
