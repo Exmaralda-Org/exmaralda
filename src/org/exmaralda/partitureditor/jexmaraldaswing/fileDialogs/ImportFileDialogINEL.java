@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  * @author thomas
  */
-public class ImportFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
+public class ImportFileDialogINEL extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
 
     public JComboBox encodingComboBox;
     private JPanel accessoryPanel;
@@ -24,7 +24,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
 
     /** Creates new ImportFileDialog
      * @param startDirectory */
-    public ImportFileDialog(String startDirectory) {
+    public ImportFileDialogINEL(String startDirectory) {
         super();
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
         if (thisIsAMac){
@@ -33,33 +33,8 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         setCurrentDirectory(new File(startDirectory).getParentFile());
         setDialogTitle("Import file");
         setAcceptAllFileFilterUsed(false);
-        addChoosableFileFilter(EAFFileFilter);
-        addChoosableFileFilter(PraatFileFilter);
-        addChoosableFileFilter(FOLKERTranscriptionFileFilter);
-        addChoosableFileFilter(CHATTranscriptFileFilter);
-        addChoosableFileFilter(TranscriberFileFilter);
-        addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
-        addChoosableFileFilter(WinPitchFileFilter);
-        addChoosableFileFilter(AnvilFileFilter);
-        addChoosableFileFilter(TASXFileFilter);
-        addChoosableFileFilter(AGFileFilter);
-        addChoosableFileFilter(SimpleExmaraldaFileFilter);
-        // added 17-11-2017: issue #119
-        addChoosableFileFilter(VTTFileFilter);
-        addChoosableFileFilter(RioDeJaneiroFileFilter);
-        addChoosableFileFilter(TextFileFilter);
-        addChoosableFileFilter(AudacityLabelFileFilter);
-        addChoosableFileFilter(TreeTaggerFilter);
-        addChoosableFileFilter(TEIFileFilter);
-        addChoosableFileFilter(XSLStylesheetImportFilter);
-        addChoosableFileFilter(HIATDOSFileFilter);
-        addChoosableFileFilter(PhonFileFilter);
-        addChoosableFileFilter(TransanaXMLFileFilter);
         addChoosableFileFilter(FlexTextXMLFileFilter);
-        addChoosableFileFilter(exSyncFileFilter);
-        addChoosableFileFilter(TCFFileFilter);
-        addChoosableFileFilter(TsvFileFilter);
-        setFileFilter(PraatFileFilter);
+        setFileFilter(FlexTextXMLFileFilter);
         setMultiSelectionEnabled(false);
         initAccessory();
         addPropertyChangeListener("fileFilterChanged", this);
