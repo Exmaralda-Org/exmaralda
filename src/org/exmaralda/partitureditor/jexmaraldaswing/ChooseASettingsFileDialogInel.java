@@ -116,7 +116,7 @@ public class ChooseASettingsFileDialogInel extends javax.swing.JDialog {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
 
-        setSize(300, 125);
+        setSize(600, 125);
     }// </editor-fold>                        
 
     private void dropDownActionPerformed(java.awt.event.ActionEvent evt) {
