@@ -6,6 +6,7 @@
     
     <!--<xsl:import href="../../../inelutilities/flextext2exb.xsl"/>-->
     
+    <xsl:param name="SETTINGS-FILE-VERSION" select="'dolgan_flextext2exb_1.0'" as="xs:string"/>
     <xsl:param name="PROJECTNAME" select="'Dolgan'" as="xs:string"/>
     <xsl:param name="BASE-LANGUAGE" select="'dlg'" as="xs:string"/><!-- get from flextext -->
     <xsl:param name="SPEAKER-CODE-POSITION" select="1" as="xs:integer"/>

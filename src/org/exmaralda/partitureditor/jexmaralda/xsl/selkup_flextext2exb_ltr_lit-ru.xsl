@@ -4,8 +4,9 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <xsl:import href="../../../inelutilities/flextext2exb.xsl"/>
+    <xsl:import href="/data/Documents/inelutilities/flextext2exb.xsl"/>
     
+    <xsl:param name="SETTINGS-FILE-VERSION" select="'selkup_flextext2exb_ltr_lit-ru_1.0'" as="xs:string"/>
     <xsl:param name="PROJECTNAME" select="'Selkup'" as="xs:string"/>
     <xsl:param name="BASE-LANGUAGE" select="'sel'" as="xs:string"/><!-- get from flextext -->
     <xsl:param name="SPEAKER-CODE-POSITION" select="1" as="xs:integer"/>

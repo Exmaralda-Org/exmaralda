@@ -6,6 +6,7 @@
     
     <!--<xsl:import href="../../../inelutilities/flextext2exb.xsl"/>-->
     
+    <xsl:param name="SETTINGS-FILE-VERSION" select="'evenki_flextext2exb_1.0'" as="xs:string"/>
     <xsl:param name="PROJECTNAME" select="'Evenki'" as="xs:string"/>
     <xsl:param name="BASE-LANGUAGE" select="'evn'" as="xs:string"/><!-- get from flextext -->
     <xsl:param name="SPEAKER-CODE-POSITION" select="1" as="xs:integer"/>
@@ -14,7 +15,8 @@
     <xsl:param name="TIER-DEFINITIONS">
         <tiers>
             <tier name="ref" type="a" cleanup="renum" itemtype="segnum" lang="en" template="tier-sent"/>
-            <tier name="st" type="a" cleanup="brackets" itemtype="lit" lang="evn-x-source" template="tier-sent"/>
+            <tier name="stl" type="a" cleanup="brackets" itemtype="lit" lang="evn-Latn-x-source" template="tier-sent"/>
+			<tier name="st" type="a" cleanup="brackets" itemtype="lit" lang="evn-Cyrl-x-source" template="tier-sent"/>
             <tier name="ts" type="a" cleanup="brackets, tx" template="tier-sent-join"/>
             <tier name="tx" type="t" cleanup="brackets, tx" itemtype="txt" template="tier-tx"/>
             <tier name="mb" type="a" cleanup="brackets, morph" sep="" template="tier-morph"/>
@@ -40,7 +42,6 @@
             <tier name="ltr" type="a" cleanup="brackets" itemtype="lit" lang="ru" template="tier-sent"/>
             <tier name="nt" type="a" cleanup="brackets" itemtype="note" lang="en" template="tier-sent"/>
         </tiers>
-    </xsl:param>
-    
+    </xsl:param>    
     
 </xsl:stylesheet>
