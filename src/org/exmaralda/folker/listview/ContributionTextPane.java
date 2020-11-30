@@ -43,9 +43,9 @@ public class ContributionTextPane extends javax.swing.JTextPane
     javax.swing.border.LineBorder RED_BORDER =
             new javax.swing.border.LineBorder(java.awt.Color.RED, 3);
     
-    Hashtable<org.exmaralda.folker.data.Event,javax.swing.text.Position> eventPositionMappings = new Hashtable<org.exmaralda.folker.data.Event,javax.swing.text.Position>();        
+    Map<org.exmaralda.folker.data.Event,javax.swing.text.Position> eventPositionMappings = new HashMap<>();        
     
-    Vector<ContributionTextPaneListener> listeners = new Vector<ContributionTextPaneListener>();
+    List<ContributionTextPaneListener> listeners = new ArrayList<>();
     
     /** Creates a new instance of ContributionTextPane */
     public ContributionTextPane() {
@@ -65,15 +65,13 @@ public class ContributionTextPane extends javax.swing.JTextPane
             setMargin(new java.awt.Insets(10,10,10,10));
             addKeyListener(this);
             getDocument().addDocumentListener(this);
-        } catch (JDOMException ex) {
-            Logger.getLogger(ContributionTextPane.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (JDOMException | IOException ex) {
             Logger.getLogger(ContributionTextPane.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void addContributionTextPaneListener(ContributionTextPaneListener l){
-        listeners.addElement(l);
+        listeners.add(l);
     }
     
     public void fireContributionValidated(){
@@ -162,7 +160,7 @@ public class ContributionTextPane extends javax.swing.JTextPane
                 getDocument().insertString(getCaretPosition(), last, attributeSet);                    
             }
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ContributionTextPane.class.getName()).log(Level.SEVERE, null, ex);          
         }
     }
     
@@ -176,7 +174,9 @@ public class ContributionTextPane extends javax.swing.JTextPane
             result.append("((");
             String match = originalText.substring(m.start(), m.end());
             for (int i=0; i<match.length()-4; i++){
-                result.append("*");
+                // change this because * is now a boundary symbol, you honk (issue #226)
+                //result.append("*");
+                result.append("#");
             }
             result.append("))");
             lastMatchPosition = m.end();
@@ -194,7 +194,9 @@ public class ContributionTextPane extends javax.swing.JTextPane
             result2.append("(");
             String match = intermediateText.substring(m.start(), m.end());
             for (int i=0; i<match.length()-2; i++){
-                result2.append("*");
+                // change this because * is now a boundary symbol, you honk (issue #226)
+                //result2.append("*");
+                result2.append("#");                
             }
             result2.append(")");
             lastMatchPosition = m.end();
@@ -221,7 +223,7 @@ public class ContributionTextPane extends javax.swing.JTextPane
                 event.setText(text);
                 //System.out.println(pos + " " + offset1 + " " + text);
             } catch (BadLocationException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(ContributionTextPane.class.getName()).log(Level.SEVERE, null, ex);          
             }
         }
         
@@ -236,7 +238,7 @@ public class ContributionTextPane extends javax.swing.JTextPane
             text = text.replaceAll("\\n", "");
             lastEvent.setText(text);
         } catch (BadLocationException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ContributionTextPane.class.getName()).log(Level.SEVERE, null, ex);          
         }
     }
     
@@ -330,6 +332,7 @@ public class ContributionTextPane extends javax.swing.JTextPane
             e.consume();
             firePropertyChange("contributionValidated", true, true);
             SwingUtilities.invokeLater(new Runnable(){
+               @Override
                public void run() {
                    setContribution(contribution);
                    fireContributionValidated();
