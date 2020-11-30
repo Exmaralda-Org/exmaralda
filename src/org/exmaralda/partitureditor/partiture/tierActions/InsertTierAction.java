@@ -9,7 +9,6 @@ package org.exmaralda.partitureditor.partiture.tierActions;
 import org.exmaralda.partitureditor.jexmaraldaswing.NewTierDialog;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;

@@ -93,7 +93,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         } else {
             //System.out.println("THE REAL THANG!");
             setTranscriptionAndTierFormatTable(t, t.getTierFormatTable());            
-        }
+        }        
     }
     
     /** sets transcription and format table in one go (this can be reasonable for performance reasons

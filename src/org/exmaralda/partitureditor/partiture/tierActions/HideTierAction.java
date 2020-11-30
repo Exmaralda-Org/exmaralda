@@ -32,7 +32,7 @@ public class HideTierAction extends org.exmaralda.partitureditor.partiture.Abstr
     
     private void hideTier(){
         for (int row=table.selectionStartRow; row<=table.selectionEndRow; row++){
-            table.setRowHidden(row, true);
+            table.hideRow(row);            
         }
         table.getModel().fireAreaChanged(0, table.getModel().getNumColumns());
     }

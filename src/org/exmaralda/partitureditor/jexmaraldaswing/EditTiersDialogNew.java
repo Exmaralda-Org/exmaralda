@@ -40,11 +40,6 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
         tiersTable.setModel(editTiersTableModel);
         tiersTable.setDefaultRenderer(String.class, new EditTiersTableCellRenderer());
         tiersTable.setDefaultRenderer(Integer.class, new EditTiersTableCellRenderer());
-        
-        
-        
-
-
 
         tiersTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         tiersTable.getColumnModel().getColumn(2).setPreferredWidth(200);

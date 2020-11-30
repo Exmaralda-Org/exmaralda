@@ -48,7 +48,7 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 10;
+        return 11;
     }
 
     @Override
@@ -64,6 +64,7 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
             case 7 : return "# Events";
             case 8 : return "Parent tier ID";
             case 9 : return "# Annotation mismatches";
+            case 10 : return "Show";
             default: return "";
         }
     }
@@ -73,13 +74,14 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
         switch (columnIndex){
             case 7 : 
             case 9 : return Integer.class;
+            case 10 : return Boolean.class;
             default: return String.class; 
         }
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (columnIndex==1 || columnIndex==2 || columnIndex==3 || columnIndex==6);
+        return (columnIndex==1 || columnIndex==2 || columnIndex==3 || columnIndex==6 || columnIndex==10);
     }
 
     @Override
@@ -118,6 +120,7 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
                 if (mismatches!=null){
                     return mismatches.length;
                 }
+            case 10 : return (!("true".equals(tier.getUDTierInformation().getValueOfAttribute("exmaralda:hidden"))));   
             default : return null;    
         }
     }
@@ -144,9 +147,18 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
                 tier.setSpeaker((String)aValue);
                 fireTableDataChanged();
                 changed = true;
-                break;                
+                break;
+            case 10 :
+                if ((Boolean)aValue){
+                    // show the tier
+                    tier.getUDTierInformation().removeAttribute("exmaralda:hidden");
+                } else {
+                    // hide the tier
+                    tier.getUDTierInformation().setAttribute("exmaralda:hidden", "true");                    
+                }
+                changed = true;
         }
-        this.fireTableCellUpdated(rowIndex, columnIndex);
+        fireTableCellUpdated(rowIndex, columnIndex);
     }
 
     @Override

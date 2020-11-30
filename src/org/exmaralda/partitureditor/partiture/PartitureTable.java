@@ -11,6 +11,7 @@ import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import com.klg.jclass.table.*;
 import java.awt.Color;
 import java.util.*;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
 
 /**
  * implements the abstract methods of the parent class and provides the interface
@@ -180,12 +181,14 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
 //************** (METHODS HANDLING CHANGES IN THE MODEL)  *******************************************    
 
     /**Reset all data */
+    @Override
     public void resetData () {  
         selectionStartRow=0;
         selectionEndRow=0;
         selectionStartCol=0;
         selectionEndCol=0;
         showAllTiers();
+
         System.out.println("Data reset started at " + new java.util.Date().toString());
         progressBar.setString("Resetting data...");
         progressBar.setValue(0);

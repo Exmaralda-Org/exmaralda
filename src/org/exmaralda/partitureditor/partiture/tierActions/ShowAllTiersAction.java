@@ -23,7 +23,10 @@ public class ShowAllTiersAction extends org.exmaralda.partitureditor.partiture.A
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("showAllTiersAction!");
         table.commitEdit(true);
-        table.showAllTiers();        
+        table.showAllTiers(); 
+        for (int i=0; i<table.getModel().getTranscription().getBody().getNumberOfTiers(); i++){
+            table.getModel().getTranscription().getBody().getTierAt(i).getUDTierInformation().removeAttribute("exmaralda:hidden");
+        }
     }
     
     

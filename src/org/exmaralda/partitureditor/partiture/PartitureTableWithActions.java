@@ -52,7 +52,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import org.exmaralda.common.ExmaraldaApplication;
-import org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebLichtAction;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebMAUSAction;
@@ -2738,6 +2737,27 @@ public class PartitureTableWithActions extends PartitureTable
     public void popupMenuCanceled(PopupMenuEvent e) {
         // do nothing
     }
+
+    
+    public void hideRow(int row) {
+        setRowHidden(row, true);  
+        //getModel().getTier(row).getUDTierInformation().setAttribute("exmaralda:hidden", "true");
+        getModel().getTranscription().getBody().getTierAt(row).getUDTierInformation().setAttribute("exmaralda:hidden", "true");
+    }
+
+    @Override
+    public void resetData() {
+        super.resetData(); //To change body of generated methods, choose Tools | Templates.
+        // new 30-11-2020: issue #232
+        for (int i=0; i<this.getModel().getTranscription().getBody().getNumberOfTiers(); i++){
+            Tier tier = this.getModel().getTranscription().getBody().getTierAt(i);
+            if ("true".equals(tier.getUDTierInformation().getValueOfAttribute("exmaralda:hidden"))){
+                hideRow(i);
+            }
+        }        
+    }
+    
+    
 
 
 
