@@ -85,7 +85,9 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
         if (args.length>0){
             String fileNameToOpen = args[0];
-            File fileToOpen = new File(fileNameToOpen);
+            // dirty fix for #216
+            File fileToOpen = new File(StringUtilities.fixFilePath(fileNameToOpen));                                                        
+            //File fileToOpen = new File(fileNameToOpen);
             if ((fileNameToOpen.toLowerCase().endsWith(".fln")) || ((fileNameToOpen.toLowerCase().endsWith(".flk")))){
                 applicationControl.openTranscriptionFile(fileToOpen);
             } else  {

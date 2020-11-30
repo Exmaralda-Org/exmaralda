@@ -135,7 +135,9 @@
         -->
         <tli>
             <xsl:attribute name="id" select="@xml:id"/>
-            <xsl:attribute name="time" select="@interval"/>
+            <xsl:if test="@interval">
+                <xsl:attribute name="time" select="@interval"/>
+            </xsl:if>
         </tli>
         
     </xsl:template>

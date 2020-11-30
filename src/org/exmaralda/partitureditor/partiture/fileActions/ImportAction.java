@@ -15,7 +15,11 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import org.exmaralda.common.ExmaraldaApplication;
+import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -30,27 +34,66 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
     private final String[] encodings = {"US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE"};
 
+    BasicTranscription importedTranscription = null;  
+    boolean needsStratification = false;
+    boolean needsCleanup = false;
+    File importedFile;
+    
+    ProgressBarDialog pbd = new ProgressBarDialog((JFrame)(table.getTopLevelAncestor()), false);
+    
     /** Creates a new instance of ExportAGAction
      * @param t
      * @param icon */
     public ImportAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Import...", icon, t);
     }
+    
+    public void setImportedTranscription(BasicTranscription bt, File importedFile, boolean needsStratification, boolean needsCleanup){
+        importedTranscription = bt;        
+        this.importedFile = importedFile;
+        this.needsStratification = needsStratification;
+        this.needsCleanup = needsCleanup;
+    }
+
+    final Runnable doThreadImportFinished = new Runnable() {
+        @Override
+        public void run() {
+            pbd.setVisible(false);
+            if (needsStratification){
+                table.stratify(importedTranscription);
+            }
+            if (needsCleanup){
+                table.cleanup(importedTranscription);
+            }            
+            table.getModel().setTranscription(importedTranscription);
+            table.setupMedia();
+            table.setupPraatPanel();
+            table.setFilename("untitled.exb");
+            table.linkPanelDialog.getLinkPanel().emptyContents();
+            table.largeTextField.setText("");
+            table.restoreAction.setEnabled(false);
+            table.reconfigureAutoSaveThread();   
+            table.status("File " + importedFile.getAbsolutePath() + " imported");
+        }
+    };
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
-        System.out.println("importAction!");
-        table.commitEdit(true);
         try {
+            System.out.println("importAction!");
+            table.commitEdit(true);
             importFile();
             table.clearUndo();
             table.clearSearchResult();
-        } catch (IOException | ParserConfigurationException | TransformerException | JexmaraldaException | JDOMException | SAXException ex) {
-            ex.printStackTrace();
+        } catch (SAXException | IOException | ParserConfigurationException | TransformerException | JexmaraldaException | JDOMException ex) {
+            Logger.getLogger(ImportAction.class.getName()).log(Level.SEVERE, null, ex);
             String message = "File could not be imported:\n" + ex.getLocalizedMessage();
-            javax.swing.JOptionPane.showMessageDialog(table, message);
+            javax.swing.JOptionPane.showMessageDialog(table, message);            
         }
     }
+    
+    
+    
 
     private void importFile() throws SAXException, IOException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException, JDOMException{
         // check if the user wants to save changes
@@ -75,8 +118,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         settings.put("LastImportDirectory", selectedFile.getParent());
         String filename = selectedFile.getAbsolutePath();
 
-        // now do the real import
-        BasicTranscription importedTranscription = null;
+        // now do the real import        
 
         if (selectedFileFilter==dialog.TASXFileFilter){
             TASXConverter tc = new TASXConverter();
@@ -137,8 +179,48 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             ELANConverter ec = new ELANConverter();
             importedTranscription = ec.readELANFromFile(filename);
         } else if (selectedFileFilter==dialog.TEIFileFilter){
-            TEIConverter teic = new TEIConverter();
-            importedTranscription = teic.readTEIFromFile(filename);
+            // *************************************************
+            // new 23-11-2020
+            // issue #215
+            // *************************************************            
+            //importedTranscription = teic.readTEIFromFile(filename);
+
+            final TEIConverter teic = new TEIConverter();
+            
+            pbd.setLocationRelativeTo(this.table);
+            pbd.setTitle("Importing ISO/TEI: " + selectedFile.getName() + ". Be patient.");
+            pbd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/tei/swing/tei.png")));
+            pbd.setVisible(true);
+            
+            teic.addConverterListener(new ConverterListener(){
+                @Override
+                public void processConverterEvent(ConverterEvent converterEvent) {
+                    System.out.println(converterEvent.getMessage());
+                    pbd.processMatchListEvent(converterEvent.getMessage(), converterEvent.getProgress());
+                }
+            });
+
+
+            Thread importThread = new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        BasicTranscription threadTranscription = teic.readISOTEIFromFile(filename);
+                        setImportedTranscription(threadTranscription, selectedFile, true, false);
+                        javax.swing.SwingUtilities.invokeLater(doThreadImportFinished);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ImportAction.class.getName()).log(Level.SEVERE, null, ex);
+                        pbd.setVisible(false);
+                        String message = "File could not be imported:\n" + ex.getLocalizedMessage();
+                        javax.swing.JOptionPane.showMessageDialog(table, message);            
+                    }
+                }
+            };
+
+            System.out.println("ISO/TEI import thread started");
+            importThread.start();
+            ActionUtilities.memorizeFileFilter("last-import-filter", table.getTopLevelAncestor(), dialog);            
+            return;
         } else if (selectedFileFilter==dialog.TextFileFilter){
             ChooseTextSplitterDialog ctsd = new ChooseTextSplitterDialog(null, true);
             ctsd.setVisible(true);
@@ -270,12 +352,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     || (selectedFileFilter==dialog.WinPitchFileFilter)){
                 table.stratify(importedTranscription);
             }
+            
             table.getModel().setTranscription(importedTranscription);
-            //try {
-                table.setupMedia();
-            /*} catch (Exception e){
-                JOptionPane.showMessageDialog(table, "Problem setting up media:\n" + e.getLocalizedMessage());
-            }*/
+            table.setupMedia();
             table.setupPraatPanel();
 
             table.setFilename("untitled.exb");
@@ -288,6 +367,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             ActionUtilities.memorizeFileFilter("last-import-filter", table.getTopLevelAncestor(), dialog);
 
             table.status("File " + filename + " imported");
+        } else {
+            System.out.println("Not setting the imported transcription because it is NULL.");            
         }
     }
 

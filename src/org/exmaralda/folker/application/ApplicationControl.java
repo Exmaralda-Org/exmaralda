@@ -217,7 +217,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             CHECK_REGEX_BASIC_EVENT = pr.getPattern(3, "GAT_EVENT", Constants.getAlphabetLanguage());
             CHECK_REGEX_BASIC_CONTRIBUTION = pr.getPattern(3, "GAT_CONTRIBUTION", Constants.getAlphabetLanguage());
             NO_SPEAKER_CHECK_REGEX_BASIC_CONTRIBUTION = pr.getPattern(3, "GAT_NO_SPEAKER_CONTRIBUTION", Constants.getAlphabetLanguage());
-        } catch (Exception ex) {
+        } catch (IOException | JDOMException ex) {
             // do nothing
             ex.printStackTrace();
         }

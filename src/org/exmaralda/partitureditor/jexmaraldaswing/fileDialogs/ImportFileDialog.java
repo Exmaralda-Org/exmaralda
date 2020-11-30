@@ -33,6 +33,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         setCurrentDirectory(new File(startDirectory).getParentFile());
         setDialogTitle("Import file");
         setAcceptAllFileFilterUsed(false);
+        addChoosableFileFilter(TEIFileFilter);
         addChoosableFileFilter(EAFFileFilter);
         addChoosableFileFilter(PraatFileFilter);
         addChoosableFileFilter(FOLKERTranscriptionFileFilter);

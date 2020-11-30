@@ -13,6 +13,7 @@ package org.exmaralda.common.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
 import org.exmaralda.exakt.search.SearchEvent;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.partitureditor.sound.SilenceDetectorListener;
@@ -48,6 +49,10 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
         timer.start();
     }
     
+    public void setIcon(Icon icon){
+        iconLabel.setIcon(icon);
+    }
+    
     public void enableTimeEstimate(boolean enable){
         estimateTime = enable;
         estimatePanel.setVisible(enable);        
@@ -74,13 +79,16 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
         elapsedTimeLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         remainingTimeLabel = new javax.swing.JLabel();
+        iconPanel = new javax.swing.JPanel();
+        iconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(640, 150));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        progressBar.setMaximumSize(new java.awt.Dimension(400, 19));
-        progressBar.setPreferredSize(new java.awt.Dimension(400, 19));
+        progressBar.setMaximumSize(new java.awt.Dimension(500, 80));
+        progressBar.setPreferredSize(new java.awt.Dimension(500, 80));
         progressBar.setStringPainted(true);
         jPanel1.add(progressBar);
 
@@ -102,6 +110,11 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
 
         getContentPane().add(estimatePanel, java.awt.BorderLayout.SOUTH);
 
+        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/othericons/Wait-32.png"))); // NOI18N
+        iconPanel.add(iconLabel);
+
+        getContentPane().add(iconPanel, java.awt.BorderLayout.WEST);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -110,9 +123,11 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 ProgressBarDialog dialog = new ProgressBarDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -125,6 +140,8 @@ public class ProgressBarDialog extends javax.swing.JDialog implements org.exmara
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel elapsedTimeLabel;
     private javax.swing.JPanel estimatePanel;
+    private javax.swing.JLabel iconLabel;
+    private javax.swing.JPanel iconPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

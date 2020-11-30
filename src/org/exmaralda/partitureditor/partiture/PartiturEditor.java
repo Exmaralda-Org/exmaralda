@@ -12,8 +12,11 @@
 package org.exmaralda.partitureditor.partiture;
 
 //import com.apple.eawt.ApplicationEvent;
+import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -24,13 +27,9 @@ import org.exmaralda.partitureditor.partiture.menus.*;
 import org.exmaralda.partitureditor.partiture.toolbars.*;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.common.helpers.Internationalizer;
+import org.xml.sax.SAXException;
 
 
-
-
-// *************************************************************************************
-
-// WHY?
 
 //=========================================================
 /**
@@ -157,6 +156,7 @@ public class PartiturEditor extends javax.swing.JFrame
             
             // new 02-03-2020
             java.awt.Desktop.getDesktop().setOpenFileHandler(new java.awt.desktop.OpenFilesHandler(){
+                    @Override
                     public void openFiles(OpenFilesEvent e){
                         try{
                             boolean proceed = true;
@@ -171,8 +171,8 @@ public class PartiturEditor extends javax.swing.JFrame
                             table.setupMedia();
                             table.homeDirectory = filename;
                             //pe.table.transcriptionChanged = true;
-                        } catch (Exception ex){
-                            ex.printStackTrace();
+                        } catch (JexmaraldaException | SAXException ex){
+                            Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
                             JOptionPane.showMessageDialog(table.getTopLevelAncestor(), ex.getLocalizedMessage());
                         }                        
                     }
@@ -284,26 +284,12 @@ public class PartiturEditor extends javax.swing.JFrame
      */
     public static void main(final String args[]) {
         System.out.println("java.library.path=" + System.getProperty("java.library.path"));
-        boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
-        try{
-            /*if (thisIsAMac){
-                System.out.println("Setting Quaqua L&F");
-                Set includes = new HashSet();
-                includes.add("ColorChooser");
-                includes.add("FileChooser");
-                includes.add("Component");
-                includes.add("Browser");
-                includes.add("Tree");
-                includes.add("SplitPane");
-                ch.randelshofer.quaqua.QuaquaManager.setIncludedUIs(includes);
-                UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-            } else {*/
-                System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
-                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            //}
+        try {
+            System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         }           
-        catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();        
+        catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
         } 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -326,9 +312,9 @@ public class PartiturEditor extends javax.swing.JFrame
                         pe.table.reconfigureAutoSaveThread();
                         
                         //pe.table.transcriptionChanged = true;
-                    } catch (Exception e){
-                        e.printStackTrace();
-                        String message =  e.getLocalizedMessage() + ": ";
+                    } catch (JexmaraldaException | SAXException ex){
+                        Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
+                        String message =  ex.getLocalizedMessage() + ": ";
                         message+="(\nError trying to read " + args[0] + ")";
                         JOptionPane.showMessageDialog(pe, message);
                     }
@@ -347,7 +333,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 exitForm(null);
             }
         };
-        String os = System.getProperty("os.name").substring(0,3);
+        //String os = System.getProperty("os.name").substring(0,3);
         //if (!(os.equalsIgnoreCase("mac"))) {
             menuBar.fileMenu.addSeparator();
             exitMenuItem = menuBar.fileMenu.add(this.exitAction);
@@ -384,8 +370,8 @@ public class PartiturEditor extends javax.swing.JFrame
 
                 table.makeVisible(tierID, timeID2);
             } catch (JexmaraldaException ex) {
+                Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
                 javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
-                ex.printStackTrace();
             }
         }
    }
@@ -526,7 +512,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 int yPosition = Math.min(screenSize.height-20,Math.max(0,y2));
                 setLocation(xPosition,yPosition);
             } catch (NumberFormatException nfe){
-                nfe.printStackTrace();
+                Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, nfe);
             }
 
             partiturTimelinePanel.loadSettings(getPreferencesNode());
@@ -534,9 +520,9 @@ public class PartiturEditor extends javax.swing.JFrame
             table.praatPanel.praatControl.configure(this);
 
 
-        } catch (Exception e){
+        } catch (HeadlessException ex){
+            Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Settings could not be read");
-            e.printStackTrace();
         }
     }
     
@@ -665,7 +651,7 @@ public class PartiturEditor extends javax.swing.JFrame
             JOptionPane.showMessageDialog(table, "Preferences reset.\nRestart the editor.");
             loadSettings();
         } catch (BackingStoreException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());
         }        
     }
@@ -707,8 +693,8 @@ public class PartiturEditor extends javax.swing.JFrame
     }
     
     void registerKeyStrokes(){
-        InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        ActionMap am = getRootPane().getActionMap();
+        //InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        //ActionMap am = getRootPane().getActionMap();
         
         //
         // 15-12-2017 : issue #113 - these three bindings should go
