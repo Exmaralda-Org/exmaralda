@@ -37,7 +37,7 @@ public class OpenRemoteCorpusDialog extends javax.swing.JDialog {
         if (parent instanceof ExmaraldaApplication){
             ExmaraldaApplication ea = (ExmaraldaApplication)parent;
             Preferences prefs = java.util.prefs.Preferences.userRoot().node(ea.getPreferencesNode());
-            String url = prefs.get("Remote-Corpus", "http://");
+            String url = prefs.get("Remote-Corpus", "https://s3-uhh.lzs.uni-hamburg.de/gwiss-exmaralda/remote/demokorpus-1.1/EXMARaLDA_DemoKorpus.coma");
             String username = prefs.get("Remote-Corpus-Username", "");
             urlTextField.setText(url);
             usernameTextField.setText(username);

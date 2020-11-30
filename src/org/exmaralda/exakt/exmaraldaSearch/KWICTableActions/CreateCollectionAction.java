@@ -1,17 +1,12 @@
 package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -44,6 +39,7 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
     }
 
     
+    @Override
     public void actionPerformed(ActionEvent e) {
 
         //open modal dialogue
@@ -62,7 +58,7 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
             String searchResultString = null;
             try{
                 SearchResultList list = exaktFrame.getActiveSearchPanel().getSearchResultList();
-                Vector<String[]> meta = exaktFrame.getActiveSearchPanel().getMeta();
+                List<String[]> meta = exaktFrame.getActiveSearchPanel().getMeta();
                 Document searchResultDoc = org.exmaralda.exakt.utilities.FileIO.COMASearchResultListToXML(list, corpus, meta, exaktFrame.getActiveSearchPanel().getCorpus().getCorpusPath());
                 searchResultString = org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(searchResultDoc);
                 searchResultSource = new StreamSource(new StringReader(searchResultString));

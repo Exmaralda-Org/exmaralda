@@ -54,10 +54,10 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         segmentedXSLStylesheet = prefs.get("xsl-segmented-tool", "");
         segmentedOutputStylesheetTextField.setText(segmentedXSLStylesheet);
         
-        kwicTableFont = prefs.get("kwic-table-font-name", "Times New Roman");
+        kwicTableFont = prefs.get("kwic-table-font-name", "Arial");
         kwicTableFontComboBox.setSelectedItem(kwicTableFont);
         
-        kwicTableFontSize = prefs.getInt("kwic-table-font-size", 10);
+        kwicTableFontSize = prefs.getInt("kwic-table-font-size", 12);
         kwicTableFontSizeSpinner.setValue(kwicTableFontSize);
         
         maxSearchResults = prefs.getInt("max-search-results", 10000);

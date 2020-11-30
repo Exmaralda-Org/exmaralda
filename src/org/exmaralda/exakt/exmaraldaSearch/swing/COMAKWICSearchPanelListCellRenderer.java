@@ -30,6 +30,7 @@ public class COMAKWICSearchPanelListCellRenderer extends javax.swing.DefaultList
     }
 
     
+    @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
          COMAKWICSearchPanel panel = (COMAKWICSearchPanel)(value);
          SearchResultList srl = panel.getSearchResultList();

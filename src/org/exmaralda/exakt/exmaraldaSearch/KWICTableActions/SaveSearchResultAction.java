@@ -40,6 +40,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
         super(ef, title, icon);
     }
     
+    @Override
     public void actionPerformed(ActionEvent e) {   
         File file = exaktFrame.getActiveSearchPanel().getCurrentSearchResultFile();
         if (file==null){
@@ -55,7 +56,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
             
             SearchResultList list = exaktFrame.getActiveSearchPanel().getSearchResultList();
             COMACorpusInterface corpus = exaktFrame.getActiveSearchPanel().getCorpus();
-            Vector<String[]> meta = exaktFrame.getActiveSearchPanel().getMeta();
+            List<String[]> meta = exaktFrame.getActiveSearchPanel().getMeta();
             
             
             //get the current KWIC results

@@ -35,7 +35,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     private SearchHistory searchHistory = new SearchHistory();
     private COMACorpusInterface corpus = new COMACorpus();
     private SearchResultList searchResultList = new SearchResultList();
-    private Vector<String[]> meta = new Vector<String[]>();
+    private List<String[]> meta = new ArrayList<>();
     COMASearchResultListTableModel tableModel;
 
     boolean isApplet = false;
@@ -66,7 +66,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     ActionListener actionListener3;
     ActionListener actionListener4;
     
-    Vector<COMAKWICSearchPanelListener> listenerList = new Vector<COMAKWICSearchPanelListener>();
+    List<COMAKWICSearchPanelListener> listenerList = new ArrayList<>();
 
     
     /** Creates new form COMAKWICSearchPanel */
@@ -193,12 +193,12 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         if (!isApplet){
             try{
                 Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
-                String fontName = prefs.get("kwic-table-font-name","Times New Roman");
-                int fontSize = prefs.getInt("kwic-table-font-size", 10);
+                String fontName = prefs.get("kwic-table-font-name","Arial");
+                int fontSize = prefs.getInt("kwic-table-font-size", 12);
                 java.awt.Font font = new java.awt.Font(fontName, java.awt.Font.PLAIN, fontSize);
                 kwicTable.setFont(font);
                 // new 31-03-2016
-                kwicTable.setRowHeight(Math.max(12, fontSize + 4));
+                kwicTable.setRowHeight(Math.max(12, fontSize + 6));
                 // changed 28-05-2014
                 
                 java.awt.Font font2 = new java.awt.Font(fontName, java.awt.Font.PLAIN, Math.max(12, fontSize));
@@ -1199,11 +1199,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         ((COMAKWICTable)(kwicTable)).setCellEditors();
     }
     
-    public Vector<String[]> getMeta() {
+    public List<String[]> getMeta() {
         return meta;
     }
 
-    public void setMeta(Vector<String[]> meta) {
+    public void setMeta(List<String[]> meta) {
         this.meta = meta;
         ((COMAKWICTable)(kwicTable)).copyAction.setMeta(meta);
         tableModel.setMetaIdentifiers(getMeta());        

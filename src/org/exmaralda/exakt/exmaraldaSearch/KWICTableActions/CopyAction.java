@@ -20,10 +20,15 @@ import javax.swing.Action;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.exakt.search.SearchResultInterface;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
 import org.exmaralda.exakt.exmaraldaSearch.swing.*;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -32,7 +37,7 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.*;
 public class CopyAction extends AbstractKWICTableAction {
     
     private COMACorpusInterface corpus;
-    private Vector<String[]> meta;
+    private List<String[]> meta;
     
     
     /** Creates a new instance of WordWiseReversedSortAction */
@@ -68,8 +73,8 @@ public class CopyAction extends AbstractKWICTableAction {
                 String result = 
                         ssf.applyExternalStylesheetToString(pathToXSL, org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(doc));
                 doc = org.exmaralda.exakt.utilities.FileIO.readDocumentFromString(result);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (IOException | ParserConfigurationException | TransformerException | JDOMException | SAXException ex) {
+                Logger.getLogger(CopyAction.class.getName()).log(Level.SEVERE, null, ex);          
                 String message = "There is a problem with " + pathToXSL + ": \n";
                 message += ex.getMessage() + "\n";
                 message += "Using default stylesheet instead.";
@@ -88,7 +93,7 @@ public class CopyAction extends AbstractKWICTableAction {
                 String message = "Stylesheet transformation failed:";
                 message += ex.getMessage() + "\n";
                 javax.swing.JOptionPane.showMessageDialog(table, message);
-                ex.printStackTrace();
+                Logger.getLogger(CopyAction.class.getName()).log(Level.SEVERE, null, ex);          
                 return;
             }
         }                    
@@ -96,10 +101,8 @@ public class CopyAction extends AbstractKWICTableAction {
             String text = org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(doc);
             org.exmaralda.exakt.utilities.HTMLSelection html = new org.exmaralda.exakt.utilities.HTMLSelection(text);
             table.getToolkit().getSystemClipboard().setContents(html,null);
-        } catch (HeadlessException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (HeadlessException | IOException ex) {
+            Logger.getLogger(CopyAction.class.getName()).log(Level.SEVERE, null, ex);          
         }
     }
 
@@ -107,7 +110,7 @@ public class CopyAction extends AbstractKWICTableAction {
         this.corpus = corpus;
     }
 
-    public void setMeta(Vector<String[]> meta) {
+    public void setMeta(List<String[]> meta) {
         this.meta = meta;
     }
     

@@ -22,11 +22,11 @@ import org.exmaralda.exakt.exmaraldaSearch.*;
  */
 public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.swing.SearchResultListTableModel {
     
-    private COMACorpusInterface corpus;
-    Vector<String[]> metaIdentifiers;
+    private final COMACorpusInterface corpus;
+    List<String[]> metaIdentifiers;
     
     /** Creates a new instance of COMASearchResultListTableModel */
-    public COMASearchResultListTableModel(SearchResultList d, COMACorpusInterface c, Vector<String[]>mi) {
+    public COMASearchResultListTableModel(SearchResultList d, COMACorpusInterface c, List<String[]>mi) {
         super(d);
         corpus = c;
         metaIdentifiers = mi;
@@ -40,7 +40,8 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
         if (retValue==null){
             if (column==1) return "Communication";
             else if (column==2) return "Speaker";
-            retValue = getMetaIdentifiers().elementAt(column-(super.getColumnCount() + 2))[1] + "[" + getMetaIdentifiers().elementAt(column-(super.getColumnCount() + 2))[0] + "]";
+            //retValue = getMetaIdentifiers().elementAt(column-(super.getColumnCount() + 2))[1] + "[" + getMetaIdentifiers().elementAt(column-(super.getColumnCount() + 2))[0] + "]";
+            retValue = getMetaIdentifiers().get(column-(super.getColumnCount() + 2))[1] + "[" + getMetaIdentifiers().get(column-(super.getColumnCount() + 2))[0] + "]";
         }
         return retValue;
     }
@@ -63,7 +64,7 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
             }
             
             // if we get here, this means this is one of the custom meta data columns
-            Vector<String[]> mis = getMetaIdentifiers();
+            List<String[]> mis = getMetaIdentifiers();
             
             // the following lines test if the data is available at all
             // it may not be when a column is an annotation column
@@ -71,7 +72,8 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
             if (mis==null){return "";}
             int shiftedIndex = columnIndex-(super.getColumnCount() + 2);
             if (shiftedIndex > mis.size()-1){return "";}
-            String[] mi = mis.elementAt(shiftedIndex);
+            //String[] mi = mis.elementAt(shiftedIndex);
+            String[] mi = mis.get(shiftedIndex);
             if (mi==null){return "";}
             if (mi.length!=2){return "";}
             
@@ -96,11 +98,11 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
         return getMetaIdentifiers().size() + super.getColumnCount() + 2;
     }
 
-    public Vector<String[]> getMetaIdentifiers() {
+    public List<String[]> getMetaIdentifiers() {
         return metaIdentifiers;
     }
 
-    public void setMetaIdentifiers(Vector<String[]> mi) {
+    public void setMetaIdentifiers(List<String[]> mi) {
         metaIdentifiers = mi;
         fireTableStructureChanged();
     }
@@ -140,7 +142,7 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
     }
     
     public HashSet<String> getTypes(int columnIndex){
-        HashSet<String> returnValue = new HashSet<String>();
+        HashSet<String> returnValue = new HashSet<>();
         for (int rowIndex=0; rowIndex<this.getRowCount(); rowIndex++){
             // changed to accomodate binary values from binary analysis
             Object value = null;

@@ -38,10 +38,12 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
         }
         
 
-        if (!pathToSoundFile.startsWith("http://")){
+        if (!(pathToSoundFile.startsWith("http://") || (pathToSoundFile.startsWith("https://")))){
             urlString = "file:///" + pathToSoundFile;
             soundFilePath = pathToSoundFile;
         }
+        
+        System.out.println("******* URLString=" + urlString);
 
         MediaDescriptor mediaDescriptor =
                 mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(urlString);

@@ -24,7 +24,7 @@ public class ChooseCOMAAttributesDialog extends org.exmaralda.exakt.search.swing
                                         Set<String> speakerAttributes, 
                                         Set<String> communicationAttributes,
                                         Set<String> transcriptionAttributes, 
-                                        Vector<String[]> selectedAttributes){
+                                        List<String[]> selectedAttributes){
         super(parent, modal);
         setTitle("Choose COMA Attributes");
         panel = new ChooseCOMAAttributesPanel(speakerAttributes, communicationAttributes, transcriptionAttributes, selectedAttributes);

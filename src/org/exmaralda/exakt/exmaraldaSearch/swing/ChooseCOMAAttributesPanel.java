@@ -22,7 +22,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
     public ChooseCOMAAttributesPanel(Set<String> speakerAttributes, 
                                      Set<String> communicationAttributes,
                                      Set<String> transcriptionAttributes, 
-                                     Vector<String[]> selectedAttributes) {
+                                     List<String[]> selectedAttributes) {
         initComponents();
         initLists(speakerAttributes, communicationAttributes, transcriptionAttributes, selectedAttributes);
     }
@@ -354,9 +354,9 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
     private void initLists(Set<String> speakerAttributes, 
                            Set<String> communicationAttributes,
                            Set<String> transcriptionAttributes, 
-                           Vector<String[]> selectedAttributes){
+                           List<String[]> selectedAttributes){
         
-        HashSet<String> sel = new HashSet<String>();
+        HashSet<String> sel = new HashSet<>();
         for (String[] s : selectedAttributes){
             sel.add(s[1] + "[" + s[0] + "]");
         }        

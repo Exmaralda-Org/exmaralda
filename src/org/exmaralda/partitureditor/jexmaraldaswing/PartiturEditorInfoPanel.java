@@ -10,8 +10,6 @@
  */
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
-import java.awt.event.ActionEvent;
-
 /**
  *
  * @author thomas

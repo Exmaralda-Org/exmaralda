@@ -10,6 +10,8 @@
 package org.exmaralda.exakt.exmaraldaSearch.swing;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableModelEvent;
@@ -34,7 +36,7 @@ public class COMAKWICTable  extends javax.swing.JTable
                                          javax.swing.event.TableModelListener {
     
     
-    Vector<KWICTableListener> listenerList = new Vector<KWICTableListener>();
+    List<KWICTableListener> localListenerList = new ArrayList<>();
     boolean tableInitialised = false;
     
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.PraatAction praatAction;
@@ -59,10 +61,10 @@ public class COMAKWICTable  extends javax.swing.JTable
     
     /** Creates a new instance of COMAKWICTable */
     public COMAKWICTable() {
-        putClientProperty("Quaqua.Table.style", "striped");
+        //putClientProperty("Quaqua.Table.style", "striped");
         setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //this.setColumnSelectionAllowed(true);
-        setWrappedModel(new COMASearchResultListTableModel(new SearchResultList(), new COMACorpus(), new Vector<String[]>()));
+        setWrappedModel(new COMASearchResultListTableModel(new SearchResultList(), new COMACorpus(), new ArrayList<>()));
 
         //formatTable();
         //tableInitialised = true;
@@ -71,6 +73,20 @@ public class COMAKWICTable  extends javax.swing.JTable
 
         //this.setAutoCreateColumnsFromModel(true);
         
+        setShowGrid(false);
+        TableCellRenderer headTableCellRenderer = new DefaultTableCellRenderer(){
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                c.setBackground(Color.DARK_GRAY);
+                c.setForeground(Color.WHITE);
+                c.setFont(c.getFont().deriveFont(Font.BOLD));
+                return c;
+            };            
+        };
+        
+        getTableHeader().setDefaultRenderer(headTableCellRenderer);
+        
         addMouseListener(this);
         getTableHeader().addMouseListener(this);
         getSelectionModel().addListSelectionListener(this);
@@ -78,7 +94,7 @@ public class COMAKWICTable  extends javax.swing.JTable
     }
     
     public void addKWICTableListener(KWICTableListener ktl){
-         listenerList.addElement(ktl);        
+         localListenerList.add(ktl);        
     }
     
     private void initActions(){
@@ -195,9 +211,10 @@ public class COMAKWICTable  extends javax.swing.JTable
                         dtcr2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);        
                         return dtcr2;
             case 5 :    // match text column
-                        DefaultTableCellRenderer dtcr3 = new DefaultTableCellRenderer();
+                        //DefaultTableCellRenderer dtcr3 = new DefaultTableCellRenderer();
+                        DefaultTableCellRenderer dtcr3 = new KWICTableCellRenderer(Color.RED);                        
                         dtcr3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);        
-                        dtcr3.setForeground(java.awt.Color.RED);
+                        //dtcr3.setForeground(java.awt.Color.RED);
                         return dtcr3;
             case 6 :    // right context column
                         DefaultTableCellRenderer dtcr6 = new KWICTableCellRenderer(Color.BLACK);
@@ -209,8 +226,9 @@ public class COMAKWICTable  extends javax.swing.JTable
                         if ((getWrappedModel().isAnalysisColumn(column-1)) 
                             && (!(getWrappedModel().getAnalysisForColumn(column-1) instanceof BinaryAnalysis))){
                             //((java.awt.Component)(retValue)).setBackground(java.awt.Color.YELLOW);
-                            DefaultTableCellRenderer dtcr4 = new DefaultTableCellRenderer();
-                            dtcr4.setForeground(new java.awt.Color(0,128,64));
+                            //DefaultTableCellRenderer dtcr4 = new DefaultTableCellRenderer();
+                            DefaultTableCellRenderer dtcr4 = new KWICTableCellRenderer(new java.awt.Color(0,128,64));
+                            //dtcr4.setForeground(new java.awt.Color(0,128,64));
                             return dtcr4;
                         } else {
                             retValue = super.getCellRenderer(row, column);
@@ -329,8 +347,8 @@ public class COMAKWICTable  extends javax.swing.JTable
     protected void fireEvent(KWICTableEvent ev){
         // Process the listeners last to first, notifying
         // those that are interested in this event
-        for (int i = listenerList.size()-1; i>=0; i-=1) {           
-            listenerList.elementAt(i).processEvent(ev);
+        for (int i = localListenerList.size()-1; i>=0; i-=1) {           
+            localListenerList.get(i).processEvent(ev);
          }                        
     }
     

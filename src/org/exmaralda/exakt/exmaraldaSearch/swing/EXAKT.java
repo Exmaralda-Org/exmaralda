@@ -20,12 +20,16 @@ import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.sax.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.awt.Cursor;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import javax.swing.JOptionPane;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.common.helpers.RelativePath;
 import org.exmaralda.exakt.search.*;
@@ -72,7 +76,7 @@ public class EXAKT extends javax.swing.JFrame
     String PATH_TO_STYLESHEET = "/org/exmaralda/exakt/resources/FormatTable4Partitur.xsl";
     String SEGMENTED_STYLESHEET = "/org/exmaralda/exakt/resources/ST2SCList.xsl";
     
-    private static final Cursor WAIT_CURSOR = Cursor.getPredefinedCursor( Cursor.WAIT_CURSOR );
+    private static final Cursor EXAKT_WAIT_CURSOR = Cursor.getPredefinedCursor( Cursor.WAIT_CURSOR );
     private static final Cursor ORDINARY_CURSOR = Cursor.getPredefinedCursor( Cursor.DEFAULT_CURSOR );
     
     COMACorpusListInternalFrame corpusListInternalFrame;
@@ -97,7 +101,7 @@ public class EXAKT extends javax.swing.JFrame
     double playStart = 0.0;
     double playEnd = 0.0;
     
-    public Hashtable<COMAKWICSearchPanel,Integer> panelIndex = new Hashtable<COMAKWICSearchPanel,Integer>();
+    public Hashtable<COMAKWICSearchPanel,Integer> panelIndex = new Hashtable<>();
     
     public OpenCorpusAction openCorpusAction;
     public OpenRemoteCorpusAction openRemoteCorpusAction;
@@ -158,7 +162,7 @@ public class EXAKT extends javax.swing.JFrame
             setIconImage(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")).getImage());
         } catch (Throwable t){
             System.out.println("Dann setzen wir halt kein Icon");
-            t.printStackTrace();
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, t);          
         }
 
         initMenuBar();
@@ -212,18 +216,6 @@ public class EXAKT extends javax.swing.JFrame
         
         setTitle("EXMARaLDA EXAKT " + getVersion());
 
-        // if this is a MAC OS: init the MAC OS X specific actions
-        String os = System.getProperty("os.name").substring(0,3);
-        /*if (os.equalsIgnoreCase("mac")) {
-            try {
-            	new MacSpecials(this);
-            }
-            catch(Exception e) {
-                System.out.println("Failed to init MAC OS X specific actions.");
-                System.out.println(e.getLocalizedMessage());
-            }
-        }*/
-        
         //NEW 10-11-2015
         praatControl = new PraatControl();
         praatControl.configure(this);
@@ -349,6 +341,7 @@ public class EXAKT extends javax.swing.JFrame
         // new 13-02-2020
         String playerType = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("PlayerType", "");
         mediaButtonsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(playerType));
+        playerInfoLabel.setText(playerType);
         
         
     }
@@ -403,7 +396,7 @@ public class EXAKT extends javax.swing.JFrame
         try {
             regexLibraryDialog.saveUserLibrary();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
             JOptionPane.showMessageDialog(this, "Could not save user regex library:\n" + ex.getLocalizedMessage());
         }
 
@@ -478,6 +471,9 @@ public class EXAKT extends javax.swing.JFrame
         preferencesButton = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
+        infoPanel = new javax.swing.JPanel();
+        playerLabel = new javax.swing.JLabel();
+        playerInfoLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -749,10 +745,21 @@ public class EXAKT extends javax.swing.JFrame
         getContentPane().add(toolBar, java.awt.BorderLayout.NORTH);
 
         statusPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        statusPanel.setLayout(new javax.swing.BoxLayout(statusPanel, javax.swing.BoxLayout.LINE_AXIS));
+        statusPanel.setLayout(new java.awt.BorderLayout());
 
         statusLabel.setText("jLabel1");
-        statusPanel.add(statusLabel);
+        statusPanel.add(statusLabel, java.awt.BorderLayout.CENTER);
+
+        infoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        playerLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        playerLabel.setText("Player: ");
+        infoPanel.add(playerLabel);
+
+        playerInfoLabel.setText("jLabel1");
+        infoPanel.add(playerInfoLabel);
+
+        statusPanel.add(infoPanel, java.awt.BorderLayout.EAST);
 
         getContentPane().add(statusPanel, java.awt.BorderLayout.PAGE_END);
         setJMenuBar(menuBar);
@@ -818,25 +825,11 @@ public class EXAKT extends javax.swing.JFrame
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
-        try{
-            /*if (thisIsAMac){
-                System.out.println("Setting Quaqua L&F");
-                Set includes = new HashSet();
-                includes.add("ColorChooser");
-                includes.add("FileChooser");
-                includes.add("Component");
-                includes.add("Browser");
-                includes.add("Tree");
-                includes.add("SplitPane");
-                ch.randelshofer.quaqua.QuaquaManager.setIncludedUIs(includes);
-                UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-            } else {*/
-                System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
-                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            //}
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-          e.printStackTrace();        
+        try {
+            System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
         }
         EXAKT ex = new EXAKT();
         if (args.length>0){
@@ -845,7 +838,7 @@ public class EXAKT extends javax.swing.JFrame
                 // dirty fix for #216
                 ex.doOpen(new File(org.exmaralda.partitureditor.partiture.StringUtilities.fixFilePath(args[0]))); 
             } catch (Exception e){
-                e.printStackTrace();
+                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, e);          
             }
         }
         ex.setVisible(true);
@@ -866,6 +859,7 @@ public class EXAKT extends javax.swing.JFrame
     private javax.swing.JScrollPane corpusListScrollPane;
     private javax.swing.JButton exportRTFPartiturButton;
     private javax.swing.JButton generateCorpusButton;
+    private javax.swing.JPanel infoPanel;
     private javax.swing.JSplitPane innerSplitPane;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane leftSideSplitPane;
@@ -884,6 +878,8 @@ public class EXAKT extends javax.swing.JFrame
     private javax.swing.JPanel partiturViewPanel;
     private javax.swing.JRadioButton partiturViewRadioButton;
     private javax.swing.JButton playButton;
+    private javax.swing.JLabel playerInfoLabel;
+    private javax.swing.JLabel playerLabel;
     private javax.swing.JButton preferencesButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel progressBarPanel;
@@ -961,12 +957,12 @@ public class EXAKT extends javax.swing.JFrame
                     pbd.setVisible(false);
                     try {
                         javax.swing.SwingUtilities.invokeAndWait(doUpdateWordListList);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    } catch (InterruptedException | InvocationTargetException ex) {
+                        Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     }
                     setCursor(ORDINARY_CURSOR);
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     showErrorDialog(ex);
                     progressBar.setValue(100);
                     progressBar.setString("Error");
@@ -986,6 +982,7 @@ public class EXAKT extends javax.swing.JFrame
     }
     
     final Runnable doUpdateCorpusList = new Runnable() {
+         @Override
          public void run() {
              updateCorpusList();
          }
@@ -995,7 +992,7 @@ public class EXAKT extends javax.swing.JFrame
     /** open a corpus from the file system
      * @param f */
     public void doOpen(File f){
-        setCursor(WAIT_CURSOR);
+        setCursor(EXAKT_WAIT_CURSOR);
         final File file = f;
         final COMACorpus corpus = new COMACorpus();
         corpus.addSearchListener(this);
@@ -1008,14 +1005,12 @@ public class EXAKT extends javax.swing.JFrame
                     corpusToBeAdded = corpus;
                     try {
                         javax.swing.SwingUtilities.invokeAndWait(doUpdateCorpusList);
-                    } catch (InvocationTargetException ex) {
-                        ex.printStackTrace();
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                    } catch (InvocationTargetException | InterruptedException ex) {
+                        Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     }
                     setCursor(ORDINARY_CURSOR);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (IOException | JDOMException ex) {
+                    Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     showErrorDialog(ex);
                     progressBar.setValue(100);
                     progressBar.setString("Error");
@@ -1030,7 +1025,7 @@ public class EXAKT extends javax.swing.JFrame
     /** open a remote corpus
      * @param u */
     public void doOpen(URL u){
-        setCursor(WAIT_CURSOR);
+        setCursor(EXAKT_WAIT_CURSOR);
         final URL url = u;
         final COMARemoteCorpus corpus = new COMARemoteCorpus();
         corpus.addSearchListener(this);
@@ -1043,14 +1038,12 @@ public class EXAKT extends javax.swing.JFrame
                     corpusToBeAdded = corpus;
                     try {
                         javax.swing.SwingUtilities.invokeAndWait(doUpdateCorpusList);
-                    } catch (InvocationTargetException ex) {
-                        ex.printStackTrace();
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                    } catch (InvocationTargetException | InterruptedException ex) {
+                        Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     }
                     setCursor(ORDINARY_CURSOR);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (IOException | URISyntaxException | JDOMException ex) {
+                    Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     showErrorDialog(ex);
                     progressBar.setValue(100);
                     progressBar.setString("Error");
@@ -1068,7 +1061,7 @@ public class EXAKT extends javax.swing.JFrame
      * @param usr
      * @param pwd */
     public void doOpenDB(final String corpusName, final String connection, final String usr, final String pwd){
-        setCursor(WAIT_CURSOR);
+        setCursor(EXAKT_WAIT_CURSOR);
         final COMADBCorpus corpus = new COMADBCorpus();
         corpus.addSearchListener(this);
         isOpening = true;
@@ -1080,14 +1073,12 @@ public class EXAKT extends javax.swing.JFrame
                     corpusToBeAdded = corpus;
                     try {
                         javax.swing.SwingUtilities.invokeAndWait(doUpdateCorpusList);
-                    } catch (InvocationTargetException ex) {
-                        ex.printStackTrace();
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
+                    } catch (InvocationTargetException | InterruptedException ex) {
+                        Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     }
                     setCursor(ORDINARY_CURSOR);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                     showErrorDialog(ex);
                     progressBar.setValue(100);
                     progressBar.setString("Error");
@@ -1142,7 +1133,7 @@ public class EXAKT extends javax.swing.JFrame
             String title = "No results";
             if (srl.size()>0) title = srl.elementAt(0).getMatchTextAsString();
             COMAKWICSearchPanel panel = (COMAKWICSearchPanel)(ev.getParentComponent());
-            int index = panelIndex.get(panel).intValue();
+            int index = panelIndex.get(panel);
             tabbedPane.setTitleAt(index, panel.getCorpus().getCorpusName() + " (" + srl.size() + " results)");
             tabbedPane.setToolTipTextAt(index, title);   
             concordanceListModel.fireContentsChanged(panel,0,concordanceListModel.getSize());
@@ -1181,7 +1172,7 @@ public class EXAKT extends javax.swing.JFrame
             partitur.player.stopPlayback();
         }
         SimpleSearchResult searchResult = (SimpleSearchResult)(event.getSelectedSearchResult());
-        setCursor(WAIT_CURSOR);
+        setCursor(EXAKT_WAIT_CURSOR);
         int dl = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT").getInt("full-display-limit", 50);
         //System.out.println("FILENAME: " + filename);
         try {
@@ -1194,14 +1185,15 @@ public class EXAKT extends javax.swing.JFrame
             final String tierID = searchResult.getAdditionalData()[0];
             final String timeID = searchResult.getAdditionalData()[2];
             SwingUtilities.invokeLater(new Runnable(){
+                @Override
                 public void run() {
                     ((ListTable)listTable).makeVisible(tierID, timeID);
                 }
             });
 
-        } catch (Exception e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e.getLocalizedMessage());
+        } catch (SAXException ex){
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
         }
         setCursor(ORDINARY_CURSOR);
     }
@@ -1247,28 +1239,27 @@ public class EXAKT extends javax.swing.JFrame
                                                               javax.swing.JOptionPane.WARNING_MESSAGE);
                     
                 } catch (IOException ex){
-                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
-                String message = "Error while opening Praat:\n"
-                        + ex.getLocalizedMessage() + "\n\n";
-                
-                message+="Praat path: " + praatControl.getPraatPath() + "\n";
-                if (praatControl.checkPraat()){
-                    message+="Path exists and is executable. \n\n";
-                } else {
-                    message+="Path does not exist and/or is not executable. \n\n";                    
-                }
-                
-                message+="Make sure that\n"
-                        + "   * Praat and Sendpraat paths are set correctly\n\n";
-                
-                Object[] options = {"OK"};
-                JOptionPane.showOptionDialog(partiturPanel, message, "Praat error", 
-                        JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, 
-                        new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif")),
-                        options, options[0]);
-                }
-                return;
-                
+                    Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+                    String message = "Error while opening Praat:\n"
+                            + ex.getLocalizedMessage() + "\n\n";
+
+                    message+="Praat path: " + praatControl.getPraatPath() + "\n";
+                    if (praatControl.checkPraat()){
+                        message+="Path exists and is executable. \n\n";
+                    } else {
+                        message+="Path does not exist and/or is not executable. \n\n";                    
+                    }
+
+                    message+="Make sure that\n"
+                            + "   * Praat and Sendpraat paths are set correctly\n\n";
+
+                    Object[] options = {"OK"};
+                    JOptionPane.showOptionDialog(partiturPanel, message, "Praat error", 
+                            JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, 
+                            new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif")),
+                            options, options[0]);
+                    }
+                    return;                
             }
                         
             try {
@@ -1372,7 +1363,7 @@ public class EXAKT extends javax.swing.JFrame
         if (partitur.player!=null){
             partitur.player.stopPlayback();
         }
-        setCursor(WAIT_CURSOR);
+        setCursor(EXAKT_WAIT_CURSOR);
         int dl = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT").getInt("full-display-limit", 50);
         SimpleSearchResult searchResult = (SimpleSearchResult)(event.getSelectedSearchResult());
         try{
@@ -1413,7 +1404,7 @@ public class EXAKT extends javax.swing.JFrame
                 } else {
                     try{
                         formatString = sf.applyExternalStylesheetToString(pathToPartiturStylesheet, bt.toXML());
-                    } catch (Exception e){
+                    } catch (IOException | ParserConfigurationException | TransformerException | SAXException e){
                         formatString = sf.applyInternalStylesheetToString(PATH_TO_STYLESHEET, bt.toXML());                        
                     }
                 }
@@ -1433,16 +1424,16 @@ public class EXAKT extends javax.swing.JFrame
             System.out.println(tierID +  "  "  + timeID2);
             getPartitur().makeVisible(tierID, timeID2);
             lastLoadedPartitur = searchResult.getSearchableSegmentLocator().getCorpusComponentFilename();
-        } catch (Exception e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, e.getLocalizedMessage());
+        } catch (IOException | ParserConfigurationException | TransformerException | JexmaraldaException | SAXException ex){
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
         }
         setCursor(ORDINARY_CURSOR);        
     }
     
     public void showHTML(KWICTableEvent event) {    
         lastKWICTableEvent = event;
-        setCursor(WAIT_CURSOR);
+        setCursor(EXAKT_WAIT_CURSOR);
         SimpleSearchResult searchResult = (SimpleSearchResult)(event.getSelectedSearchResult());
         String filename = (String)(searchResult.getSearchableSegmentLocator().getCorpusComponentFilename());
         Document xmlDocument;
@@ -1454,11 +1445,8 @@ public class EXAKT extends javax.swing.JFrame
             }
             String reference = searchResult.getAdditionalData()[2];
             org.exmaralda.exakt.utilities.FileIO.reduceSegmentedTranscription(xmlDocument,reference);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return;
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
+        } catch (IOException | JDOMException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
             return;
         }
         
@@ -1478,8 +1466,8 @@ public class EXAKT extends javax.swing.JFrame
                         ssf.applyExternalStylesheetToString(pathToXSL, org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(xmlDocument));
                 System.out.println(result);
                 transformedDocument = org.exmaralda.exakt.utilities.FileIO.readDocumentFromString(result);                
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (IOException | ParserConfigurationException | TransformerException | JDOMException | SAXException ex) {
+                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                 String message = "There is a problem with " + pathToXSL + ": \n";
                 message += ex.getMessage() + "\n";
                 message += "Using default stylesheet instead.";
@@ -1493,7 +1481,7 @@ public class EXAKT extends javax.swing.JFrame
                 XSLTransformer transformer = new XSLTransformer(is);
                 transformedDocument = transformer.transform(xmlDocument);
             } catch (XSLTransformException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
                 return;
             }
         }
@@ -1505,13 +1493,14 @@ public class EXAKT extends javax.swing.JFrame
             HTMLEditorPane.scrollToReference(reference);
             HTMLEditorPane.scrollToReference("#" + reference);
             SwingUtilities.invokeLater(new Runnable() {
+                    @Override
                     public void run() {
                             HTMLEditorPane.scrollToReference(reference);
                     }
             });     
             setCursor(ORDINARY_CURSOR);                        
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
         }
     }
     
@@ -1607,7 +1596,7 @@ public class EXAKT extends javax.swing.JFrame
             java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).clear();                
             JOptionPane.showMessageDialog(rootPane, "Preferences reset.\nRestart the editor.");
         } catch (BackingStoreException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());
         }        
     }

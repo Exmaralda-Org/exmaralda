@@ -2505,58 +2505,78 @@ public class PartitureTableWithActions extends PartitureTable
         // changed 11-10-2011: make sure that default player
         // is always used under EXAKT
         // why??? 02-12-2015
-        if (parent instanceof EXAKT){
-            playerType = defaultPlayer;
-            //playerType = "BAS-Audio-Player";
-        }
-        
-        if (playerType.equals("JMF-Player")){
-            settings.put("PlayerType", "BAS-Audio-Player");
-            String message = "The JMF Player is no longer used. \n"
-                                + ".\nCreating BAS Audio player instead.\n"
-                                + "Changed settings accordingly.";
-            javax.swing.JOptionPane.showMessageDialog(this, message);
-            return new BASAudioPlayer();
-        } else if (playerType.equals("DirectShow-Player")){
-            settings.put("PlayerType", "JDS-Player");
-            String message = "The ELAN DS Player is no longer used. \n"
-                                + ".\nCreating JDS player instead.\n"
-                                + "Changed settings accordingly.";
-            javax.swing.JOptionPane.showMessageDialog(this, message);
-            //return new ELANDSPlayer();
-            return new JDSPlayer();
-        } else if (playerType.equals("JDS-Player")){
-            return new JDSPlayer();
-        } else if (playerType.equals("JavaFX-Player")){
-            return new JavaFXPlayer();
-        } else if (playerType.equals("AVF-Player")){
-            return new AVFPlayer();
-        } else if (playerType.equals("MMF-Player")){
-            MMFPlayer thePlayer = new MMFPlayer();            
-            return thePlayer;
-        } else if (playerType.equals("BAS-Audio-Player")){
-            return new BASAudioPlayer();
-        } else if (playerType.equals("ELAN-Quicktime-Player")){
-            settings.put("PlayerType", "BAS-Audio-Player");
-            String message = "The ELAN-Quicktime Player is no longer used. \n"
-                                + ".\nCreating BAS Audio player instead.\n"
-                                + "Changed settings accordingly.";
-            javax.swing.JOptionPane.showMessageDialog(this, message);
-            return new BASAudioPlayer();
-        } else if (playerType.equals("CocoaQT-Player")){
-            settings.put("PlayerType", "BAS-Audio-Player");
-            String message = "The CocoaQT-Player is no longer used. \n"
-                                + ".\nCreating AVF player instead.\n"
-                                + "Changed settings accordingly.";
-            javax.swing.JOptionPane.showMessageDialog(this, message);
-            return new AVFPlayer();
-        } else if (playerType.equals("Quicktime-Player")){
-            settings.put("PlayerType", "ELAN-Quicktime-Player");
-            String message = "Do not want to create old Quicktime player. \n"
-                                + ".\nCreating AVF player instead.\n"
-                                + "Changed settings accordingly.";
-            javax.swing.JOptionPane.showMessageDialog(this, message);
-            return new AVFPlayer();
+        // take this away, 28-11-2020
+        /*if (parent instanceof EXAKT){
+        //playerType = defaultPlayer;
+        //playerType = "BAS-Audio-Player";
+        //}*/
+        switch (playerType) {
+            /******************************************/
+            /******************************************/
+            /******************************************/
+            // These are the real players...
+            case "JDS-Player":
+                return new JDSPlayer();
+            case "JavaFX-Player":
+                return new JavaFXPlayer();
+            case "AVF-Player":
+                return new AVFPlayer();
+            case "MMF-Player":
+                MMFPlayer thePlayer = new MMFPlayer();
+                return thePlayer;
+            case "BAS-Audio-Player":
+                return new BASAudioPlayer();
+            /******************************************/
+            /******************************************/
+            /******************************************/
+            // And these are outdated players, must be overridden
+            case "JMF-Player":
+                {
+                    settings.put("PlayerType", "BAS-Audio-Player");
+                    String message = "The JMF Player is no longer used. \n"
+                            + ".\nCreating BAS Audio player instead.\n"
+                            + "Changed settings accordingly.";
+                    javax.swing.JOptionPane.showMessageDialog(this, message);
+                    return new BASAudioPlayer();
+                }
+            case "DirectShow-Player":
+                {
+                    settings.put("PlayerType", "JDS-Player");
+                    String message = "The ELAN DS Player is no longer used. \n"
+                            + ".\nCreating JDS player instead.\n"
+                            + "Changed settings accordingly.";
+                    javax.swing.JOptionPane.showMessageDialog(this, message);
+                    return new JDSPlayer();
+                }
+            case "ELAN-Quicktime-Player":
+                {
+                    settings.put("PlayerType", "BAS-Audio-Player");
+                    String message = "The ELAN-Quicktime Player is no longer used. \n"
+                            + ".\nCreating BAS Audio player instead.\n"
+                            + "Changed settings accordingly.";
+                    javax.swing.JOptionPane.showMessageDialog(this, message);
+                    return new BASAudioPlayer();
+                }
+            case "CocoaQT-Player":
+                {
+                    settings.put("PlayerType", "BAS-Audio-Player");
+                    String message = "The CocoaQT-Player is no longer used. \n"
+                            + ".\nCreating AVF player instead.\n"
+                            + "Changed settings accordingly.";
+                    javax.swing.JOptionPane.showMessageDialog(this, message);
+                    return new AVFPlayer();
+                }
+            case "Quicktime-Player":
+                {
+                    settings.put("PlayerType", "ELAN-Quicktime-Player");
+                    String message = "Do not want to create old Quicktime player. \n"
+                            + ".\nCreating AVF player instead.\n"
+                            + "Changed settings accordingly.";
+                    javax.swing.JOptionPane.showMessageDialog(this, message);
+                    return new AVFPlayer();
+                }
+            default:
+                break;
         }
         return new BASAudioPlayer();
     }

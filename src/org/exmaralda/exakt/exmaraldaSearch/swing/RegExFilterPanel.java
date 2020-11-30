@@ -19,7 +19,7 @@ public class RegExFilterPanel extends javax.swing.JPanel {
     
     InputHelperDialog inputHelperDialog = new InputHelperDialog(this);
     DefaultComboBoxModel columnSelectionComboBoxModel;
-    Vector<String[]> meta;
+    List<String[]> meta;
     String[] fixedColumns = {"Left context",  "Match text", "Right context", "Communication", "Speaker"};
     COMASearchResultListTableModel tableModel;
     private int selectedColumn = -1;

@@ -24,9 +24,12 @@ import java.io.IOException;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
 import org.exmaralda.exakt.exmaraldaSearch.COMADBCorpus;
 import org.exmaralda.exakt.exmaraldaSearch.COMARemoteCorpus;
+import org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction;
 import org.exmaralda.exakt.search.AnnotationSearchResult;
 import org.exmaralda.exakt.search.SearchResultInterface;
 import org.exmaralda.exakt.search.SearchResultList;
@@ -93,7 +96,7 @@ public class FileIO {
     
     public static Document COMASearchResultListToXML(SearchResultList list, 
                                                  COMACorpusInterface corpus,
-                                                 Vector<String[]> metaIdentifier,
+                                                 List<String[]> metaIdentifier,
                                                  String pathToCorpus
             ){
             Document result = new Document();
@@ -117,7 +120,7 @@ public class FileIO {
                     // HERE OR SOMEWHERE ELSE?
                     uriString = new URL(new URL(corpus.getCorpusPath()), ".").toString();
                 } catch (MalformedURLException ex) {
-                    ex.printStackTrace();
+                    Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);          
                 }
             } else if (corpus instanceof COMADBCorpus){
                 //TODO:
