@@ -39,6 +39,8 @@ public class OpenAction extends AbstractApplicationAction {
         ApplicationControl ac = (ApplicationControl)applicationControl;
         ac.checkLog();
         if (!ac.checkSave()) return;
+        
+        // bring up the file chooser
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.open"));
         fileChooser.setFileFilter(new org.exmaralda.folker.utilities.FolkerFileFilter());
@@ -49,6 +51,8 @@ public class OpenAction extends AbstractApplicationAction {
         fileChooser.setAccessory(imageLabel);        
         int retValue = fileChooser.showOpenDialog(ac.getFrame());
         if (retValue==JFileChooser.CANCEL_OPTION) return;
+        
+        
         File f = fileChooser.getSelectedFile();
         PreferencesUtilities.setProperty("workingDirectory", f.getParent());        
         ac.openTranscriptionFile(f);

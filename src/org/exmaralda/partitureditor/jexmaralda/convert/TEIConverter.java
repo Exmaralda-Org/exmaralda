@@ -33,6 +33,8 @@ import org.exmaralda.common.corpusbuild.TEIMerger;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.data.GATParser;
+import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
+import org.exmaralda.orthonormal.io.XMLReaderWriter;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
 import org.jdom.Attribute;
@@ -50,8 +52,6 @@ import org.jdom.xpath.XPath;
  */
 public class TEIConverter extends AbstractConverter {
     
-    public static String EXMARaLDA2TEI_XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/EXMARaLDA2TEI.xsl";
-    public static String TEI2EXMARaLDA_XSL = "/org/exmaralda/tei/xml/tei2exmaralda.xsl";
     
     public static String EXMARaLDA2GENERIC_ISO_TEI_XSL = "/org/exmaralda/tei/xml/exmaralda2isotei.xsl";
     public static String EXMARaLDA2EVENT_TOKEN_ISO_TEI_XSL = "/org/exmaralda/tei/xml/exmaralda2isotei_eventToken.xsl";
@@ -73,6 +73,15 @@ public class TEIConverter extends AbstractConverter {
     public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences_optimized.xsl";
     public static String ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL = "/org/exmaralda/tei/xml/detokenize.xsl";
     public static String ISOTEI2EXMARaLDA_4_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2exmaralda.xsl";
+    
+    public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    public static String ISOTEI2FOLKER_2_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2folker.xsl";
+    
+    
+    // I think these are rather deprecated
+    public static String EXMARaLDA2TEI_XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/EXMARaLDA2TEI.xsl";
+    public static String TEI2EXMARaLDA_XSL = "/org/exmaralda/tei/xml/tei2exmaralda.xsl";
+    
     
     public static final int GENERIC_METHOD = 0;
     public static final int AZM_METHOD = 1;
@@ -244,6 +253,7 @@ public class TEIConverter extends AbstractConverter {
         IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc);                
     }
     
+    // issue #215
     public BasicTranscription readISOTEIFromFile(String path) throws IOException{
         try {
             StylesheetFactory sf = new StylesheetFactory(true);
@@ -267,6 +277,28 @@ public class TEIConverter extends AbstractConverter {
             throw new IOException(ex);
         }        
     }
+    
+    // issue #222
+    public NormalizedFolkerTranscription readFOLKERISOTEIFromFile(String path) throws IOException {
+        try {
+            StylesheetFactory sf = new StylesheetFactory(true);
+            Document doc = IOUtilities.readDocumentFromLocalFile(path);
+            String docString = IOUtilities.documentToString(doc);
+            String transform1 = sf.applyInternalStylesheetToString(ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL, docString);
+            String flnString = sf.applyInternalStylesheetToString(ISOTEI2FOLKER_2_TRANSFORM_XSL, transform1);
+            NormalizedFolkerTranscription nft = XMLReaderWriter.readNormalizedFolkerTranscription(flnString);
+            
+            // set the media path correctly
+            String resolvedPath = XMLReaderWriter.resolveMediaPath(nft.getDocument(), new File(path));
+            
+            nft.setMediaPath(resolvedPath);
+            return nft;
+        } catch (JDOMException | IOException | SAXException | ParserConfigurationException | TransformerException ex) {
+            Logger.getLogger(TEIConverter.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
+        }
+    }
+    
     
     
     
@@ -685,6 +717,7 @@ public class TEIConverter extends AbstractConverter {
         Document d = IOUtilities.readDocumentFromString(result);
         IOUtilities.writeDocumentToLocalFile(path, d);
     }
+
 
 
     

@@ -64,6 +64,11 @@
                                         <translation lang="de" trans="Importieren... "/>
                                         <translation lang="fr" trans="Importer..."/>
                                 </item>
+                                <item id="file_menu.import">
+                                        <translation lang="en" trans="Import..."/>
+                                        <translation lang="de" trans="Importieren..."/>
+                                        <translation lang="fr" trans="Importer..."/>
+                                </item>
                                 <item id="file_menu.export">
                                         <translation lang="en" trans="Export..."/>
                                         <translation lang="de" trans="Exportieren..."/>
@@ -1432,11 +1437,11 @@
                 <subdomain name="miscellaneous">
                         <item id="misc.basicTranscription">
                                 <translation lang="en"
-                                        trans="EXMARaLDA Basic Transcription (*.exb, *.xml)"/>
+                                        trans="EXMARaLDA Basic Transcription (*.exb)"/>
                                 <translation lang="de"
-                                        trans="EXMARaLDA Basistranskription (*.exb, *.xml)"/>
+                                        trans="EXMARaLDA Basistranskription (*.exb)"/>
                                 <translation lang="fr"
-                                        trans="EXMARaLDA Transcription de base (*.exb, *.xml)"/>
+                                        trans="EXMARaLDA Transcription de base (*.exb)"/>
                         </item>
                         <item id="misc.audacityLabelFile">
                                 <translation lang="en"

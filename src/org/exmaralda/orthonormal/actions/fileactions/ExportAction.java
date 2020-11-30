@@ -13,6 +13,8 @@ import org.exmaralda.orthonormal.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
@@ -20,6 +22,8 @@ import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFil
 import org.exmaralda.partitureditor.jexmaralda.convert.TCFConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.jdom.Document;
+import org.jdom.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -98,7 +102,7 @@ public class ExportAction extends AbstractApplicationAction {
             } else if (fileChooser.getFileFilter()==subtitlePlainTextFileFilter){
             }
 
-        } catch (Exception ex) {
+        } catch (IOException | ParserConfigurationException | TransformerException | JDOMException | SAXException ex) {
             applicationControl.displayException(ex);
             return;
         }

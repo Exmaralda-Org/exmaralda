@@ -16,29 +16,37 @@
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
             
-            <tei:spanGrp type="norm">                
-                <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
-                    <xsl:with-param name="ATTRIBUTE_NAME">norm</xsl:with-param>
-                </xsl:apply-templates>
-            </tei:spanGrp>
+            <xsl:if test="descendant::tei:w/@norm">
+                <tei:spanGrp type="norm">                
+                    <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
+                        <xsl:with-param name="ATTRIBUTE_NAME">norm</xsl:with-param>
+                    </xsl:apply-templates>
+                </tei:spanGrp>
+            </xsl:if>
             
-            <tei:spanGrp type="lemma">                
-                <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
-                    <xsl:with-param name="ATTRIBUTE_NAME">lemma</xsl:with-param>
-                </xsl:apply-templates>
-            </tei:spanGrp>
+            <xsl:if test="descendant::tei:w/@lemma">
+                <tei:spanGrp type="lemma">                
+                    <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
+                        <xsl:with-param name="ATTRIBUTE_NAME">lemma</xsl:with-param>
+                    </xsl:apply-templates>
+                </tei:spanGrp>
+            </xsl:if>
 
-            <tei:spanGrp type="pos">                
-                <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
-                    <xsl:with-param name="ATTRIBUTE_NAME">pos</xsl:with-param>
-                </xsl:apply-templates>
-            </tei:spanGrp>
+            <xsl:if test="descendant::tei:w/@pos">
+                <tei:spanGrp type="pos">                
+                    <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
+                        <xsl:with-param name="ATTRIBUTE_NAME">pos</xsl:with-param>
+                    </xsl:apply-templates>
+                </tei:spanGrp>
+            </xsl:if>
             
-            <tei:spanGrp type="phon">                
-                <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
-                    <xsl:with-param name="ATTRIBUTE_NAME">phon</xsl:with-param>
-                </xsl:apply-templates>
-            </tei:spanGrp>
+            <xsl:if test="descendant::tei:w/@phon">
+                <tei:spanGrp type="phon">                
+                    <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
+                        <xsl:with-param name="ATTRIBUTE_NAME">phon</xsl:with-param>
+                    </xsl:apply-templates>
+                </tei:spanGrp>
+            </xsl:if>
             
         </xsl:copy>
     </xsl:template>

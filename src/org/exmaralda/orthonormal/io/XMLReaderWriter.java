@@ -53,7 +53,7 @@ public class XMLReaderWriter {
         return t;
     }
 
-    private static String resolveMediaPath(Document d, File f) throws JDOMException {
+    public static String resolveMediaPath(Document d, File f) throws JDOMException {
             Attribute a = (Attribute)XPath.selectSingleNode(d, "//recording/@path");
             if (a!=null){
                 String relativePath = a.getValue();

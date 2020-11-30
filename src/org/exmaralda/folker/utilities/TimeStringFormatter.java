@@ -164,6 +164,7 @@ public class TimeStringFormatter {
             }
         }
     }
+    
     public static String formatMiliseconds(double miliseconds, boolean doHours){
         
         int seconds = (int)(miliseconds / 1000);

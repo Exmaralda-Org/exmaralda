@@ -15,6 +15,9 @@ import ipsk.audio.player.event.PlayerStopEvent;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.exmaralda.partitureditor.partiture.fileActions.ImportAction;
 
 
 /**
@@ -71,7 +74,7 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
             wrappedPlayer.open();
             fireSoundfileSet();
         } catch (PlayerException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(BASAudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
         } /*catch (MalformedURLException mue){
             mue.printStackTrace();;

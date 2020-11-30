@@ -73,6 +73,7 @@ import org.exmaralda.orthonormal.utilities.PreferencesUtilities;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
+import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.exmaralda.tagging.PostProcessingRules;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -120,6 +121,7 @@ public final class ApplicationControl implements  ListSelectionListener,
     org.exmaralda.orthonormal.actions.fileactions.OpenAction openAction;
     org.exmaralda.orthonormal.actions.fileactions.SaveAction saveAction;
     org.exmaralda.orthonormal.actions.fileactions.SaveAsAction saveAsAction;
+    org.exmaralda.orthonormal.actions.fileactions.ImportAction importAction;
     org.exmaralda.orthonormal.actions.fileactions.ExportAction exportAction;
     org.exmaralda.orthonormal.actions.fileactions.OutputAction outputAction;
     org.exmaralda.orthonormal.actions.fileactions.ImportCMCAction importCMCAction;    
@@ -347,11 +349,13 @@ public final class ApplicationControl implements  ListSelectionListener,
         playAction = new org.exmaralda.orthonormal.actions.playeractions.PlayAction(this, "" , c.getIcon(Constants.PLAY_ICON));
         stopAction = new org.exmaralda.orthonormal.actions.playeractions.StopAction(this, "", c.getIcon(Constants.STOP_ICON));
 
-        openAction = new org.exmaralda.orthonormal.actions.fileactions.OpenAction(this, "Öffnen...", c.getIcon(Constants.OPEN_ICON));
-        saveAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAction(this, "Speichern", c.getIcon(Constants.SAVE_ICON));
-        saveAsAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAsAction(this, "Speichern unter...", c.getIcon(Constants.SAVE_AS_ICON));
-        exportAction = new org.exmaralda.orthonormal.actions.fileactions.ExportAction(this, "Export...", c.getIcon(Constants.EXPORT_ICON));        
-        outputAction = new org.exmaralda.orthonormal.actions.fileactions.OutputAction(this, "Ausgabe...", c.getIcon(Constants.OUTPUT_ICON));
+        //newAction = new org.exmaralda.folker.actions.fileactions.NewAction(this, FOLKERInternationalizer.getString("file_menu.new"), c.getIcon(Constants.NEW_ICON));
+        openAction = new org.exmaralda.orthonormal.actions.fileactions.OpenAction(this, FOLKERInternationalizer.getString("file_menu.open"), c.getIcon(Constants.OPEN_ICON));
+        saveAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAction(this, FOLKERInternationalizer.getString("file_menu.save"), c.getIcon(Constants.SAVE_ICON));
+        saveAsAction = new org.exmaralda.orthonormal.actions.fileactions.SaveAsAction(this, FOLKERInternationalizer.getString("file_menu.saveAs"), c.getIcon(Constants.SAVE_AS_ICON));
+        importAction = new org.exmaralda.orthonormal.actions.fileactions.ImportAction(this, FOLKERInternationalizer.getString("file_menu.import"), c.getIcon(Constants.IMPORT_ICON));        
+        exportAction = new org.exmaralda.orthonormal.actions.fileactions.ExportAction(this, FOLKERInternationalizer.getString("file_menu.export"), c.getIcon(Constants.EXPORT_ICON));        
+        outputAction = new org.exmaralda.orthonormal.actions.fileactions.OutputAction(this, FOLKERInternationalizer.getString("file_menu.output"), c.getIcon(Constants.OUTPUT_ICON));
         
         importCMCAction = new org.exmaralda.orthonormal.actions.fileactions.ImportCMCAction(this, "CMC-Datei importieren...", c.getIcon(Constants.IMPORT_ICON));
         exportCMCAction = new org.exmaralda.orthonormal.actions.fileactions.ExportCMCAction(this, "CMC-Datei exportieren...", c.getIcon(Constants.EXPORT_ICON));
@@ -360,10 +364,10 @@ public final class ApplicationControl implements  ListSelectionListener,
         exportTGDPAction = new org.exmaralda.orthonormal.actions.fileactions.ExportTGDPAction(this, "TGDP-Datei exportieren...", c.getIcon(Constants.EXPORT_ICON));
 
         
-        editRecordingAction = new org.exmaralda.orthonormal.actions.fileactions.EditRecordingAction(this, "Aufnahme...", c.getIcon(Constants.EDIT_RECORDING_ICON));
-        exitAction = new org.exmaralda.orthonormal.actions.fileactions.ExitAction(this, "Beenden", null);
+        editRecordingAction = new org.exmaralda.orthonormal.actions.fileactions.EditRecordingAction(this, FOLKERInternationalizer.getString("transcription_menu.recording"), c.getIcon(Constants.EDIT_RECORDING_ICON));
+        exitAction = new org.exmaralda.orthonormal.actions.fileactions.ExitAction(this, FOLKERInternationalizer.getString("file_menu.exit"), null);
 
-        editPreferencesAction = new org.exmaralda.orthonormal.actions.editActions.EditPreferencesAction(this, "Voreinstellungen...", c.getIcon(Constants.EDIT_PREFERENCES_ICON));
+        editPreferencesAction = new org.exmaralda.orthonormal.actions.editActions.EditPreferencesAction(this, FOLKERInternationalizer.getString("edit_menu.preferences"), c.getIcon(Constants.EDIT_PREFERENCES_ICON));
         //updateRDBLexiconAction = new org.exmaralda.orthonormal.actions.editActions.UpdateRDBLexiconAction(this, "Datenbank-Lexikon aktualisieren...", null);
         saveLexiconAction = new org.exmaralda.orthonormal.actions.editActions.SaveLexiconAction(this, "Lexikon speichern...", null);
         searchInDirectoryAction = new org.exmaralda.orthonormal.actions.editActions.SearchInDirectoryAction(this, "Verzeichnis durchsuchen...", c.getIcon(Constants.SEARCH_ICON));
@@ -379,6 +383,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         jmi3.setAccelerator(KeyStroke.getKeyStroke("control S"));
         applicationFrame.fileMenu.add(saveAsAction);
         applicationFrame.fileMenu.addSeparator();
+        applicationFrame.fileMenu.add(importAction);
         applicationFrame.fileMenu.add(exportAction);
         applicationFrame.fileMenu.add(outputAction);
         
@@ -1026,6 +1031,7 @@ public final class ApplicationControl implements  ListSelectionListener,
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if ((e!=null) && (e.getValueIsAdjusting())) return;
+        if (nft==null) return;
         // the selected contribution(s) in the contribution view have changed
         int firstSelectedRow = contributionListTable.getSelectedRow();
         if (firstSelectedRow<0) return;
@@ -1858,6 +1864,16 @@ public final class ApplicationControl implements  ListSelectionListener,
             displayException(ex);
         } 
     }
+    
+    public void importISOTEIFile(File f) throws IOException {
+        TEIConverter teiConverter = new TEIConverter();
+        NormalizedFolkerTranscription importedNFT = teiConverter.readFOLKERISOTEIFromFile(f.getAbsolutePath());
+        File temp = File.createTempFile("ISOTEI", ".fln");
+        FileIO.writeDocumentToLocalFile(temp, importedNFT.getDocument());
+        this.openTranscriptionFile(temp);
+        
+    }
+    
 
     /**************************/
     /* CMC DATA Functionality */
@@ -2193,6 +2209,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             displayException(ex);
         }
     }
+
 
 
     
