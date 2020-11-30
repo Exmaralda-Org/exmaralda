@@ -9,6 +9,8 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -40,6 +42,8 @@ import org.xml.sax.SAXException;
 public class TransformationAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
     TransformationDialog transformationDialog;
+    
+    int rememberTheStart = 0;
 
     /** Creates a new instance of AddBookmarkAction */
     public TransformationAction(PartitureTableWithActions t) {
@@ -47,8 +51,10 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
         transformationDialog = new TransformationDialog(table.parent, true, (ExmaraldaApplication)(table.parent));
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("transformationAction");
+        rememberTheStart = table.getSelectionStartPosition();
         table.commitEdit(true);
         transformation();
     }
@@ -62,8 +68,8 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
             if (transformationDialog.approved){
                 transform();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (IOException | ParserConfigurationException | TransformerException | FSMException | JexmaraldaException | JDOMException | SAXException ex) {
+            Logger.getLogger(TransformationAction.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(table, "Transformation failed: \n" + ex.getLocalizedMessage());
         }
     }
@@ -130,6 +136,8 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
             BasicTranscription selfTransformedTranscription = new BasicTranscription();
             selfTransformedTranscription.BasicTranscriptionFromString(resultString);
             table.getModel().setTranscription(selfTransformedTranscription);
+            // issue #231
+            table.makeColumnVisible(rememberTheStart);
             return;
         }
 
