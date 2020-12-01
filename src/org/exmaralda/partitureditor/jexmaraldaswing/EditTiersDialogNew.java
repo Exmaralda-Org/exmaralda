@@ -92,7 +92,9 @@ public class EditTiersDialogNew extends javax.swing.JDialog implements ListSelec
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 800));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        tiersTableScrollPane.setPreferredSize(new java.awt.Dimension(450, 250));
 
         tiersTable.setAutoCreateRowSorter(true);
         tiersTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N

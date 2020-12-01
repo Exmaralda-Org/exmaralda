@@ -11,9 +11,12 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.awt.HeadlessException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -25,6 +28,7 @@ import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.ChooseStylesheetDialog;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 
 /**
  *
@@ -38,7 +42,7 @@ public class TransformationDialog extends javax.swing.JDialog {
 
     public boolean approved = false;
 
-    List scenarios = new Vector();
+    List scenarios = new ArrayList();
 
     /** Creates new form TransformationDialog */
     public TransformationDialog(java.awt.Frame parent, boolean modal, ExmaraldaApplication a) {
@@ -174,7 +178,7 @@ public class TransformationDialog extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(100, 14));
         jPanel6.add(jLabel3);
 
-        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "GENERIC", "HIAT", "GAT", "CHAT", "DIDA", "IPA" }));
+        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "GENERIC", "HIAT", "GAT", "cGAT_MINIMAL", "CHAT", "DIDA", "IPA" }));
         segmentationComboBox.setEnabled(false);
         segmentationComboBox.setMaximumSize(new java.awt.Dimension(150, 20));
         segmentationComboBox.setMinimumSize(new java.awt.Dimension(150, 20));
@@ -282,9 +286,9 @@ public class TransformationDialog extends javax.swing.JDialog {
         try {
             Document builtInScenarios = new IOUtilities().readDocumentFromResource(BUILT_IN_SCENARIOS);
             scenarios.addAll(builtInScenarios.getRootElement().getChildren());
-        } catch (Exception ex) {
+        } catch (IOException | JDOMException ex) {
+            Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);     
             JOptionPane.showMessageDialog(this, "Could not read built-in scenarios: \n" + ex.getLocalizedMessage());
-            ex.printStackTrace();
         }
 
         // 2. Load user scenarios
@@ -295,10 +299,10 @@ public class TransformationDialog extends javax.swing.JDialog {
                 try {
                     Document userScenarios = IOUtilities.readDocumentFromLocalFile(path);
                     scenarios.addAll(userScenarios.getRootElement().getChildren());
-                } catch (Exception ex) {
+                } catch (IOException | JDOMException ex) {
                     JOptionPane.showMessageDialog(this, "Could not read user scenarios: \n" + ex.getLocalizedMessage());
                     settings.put("TRANSFORMATION_SCENARIOS_FILE", "");
-                    ex.printStackTrace();
+                    Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);     
                 }
             }
         }
@@ -366,7 +370,7 @@ public class TransformationDialog extends javax.swing.JDialog {
                     IOUtilities.writeDocumentToLocalFile(path, doc);
                     settings.put("TRANSFORMATION_SCENARIOS_FILE", path);
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);     
                     JOptionPane.showMessageDialog(this, "Could not write user scenarios: \n" + ex.getLocalizedMessage());
                     return;
                 }
@@ -406,6 +410,7 @@ public class TransformationDialog extends javax.swing.JDialog {
             dcbm.addElement(name);
             
             SwingUtilities.invokeLater(new Runnable(){
+                @Override
                 public void run() {
                     transformationScenariosComboBox.setSelectedIndex(transformationScenariosComboBox.getModel().getSize() - 1);
                 }
@@ -413,10 +418,9 @@ public class TransformationDialog extends javax.swing.JDialog {
             Document userScenariosDoc = IOUtilities.readDocumentFromLocalFile(path);
             userScenariosDoc.getRootElement().addContent(scenarioElement);
             IOUtilities.writeDocumentToLocalFile(path, userScenariosDoc);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (HeadlessException | IOException | JDOMException ex) {
+            Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);     
             JOptionPane.showMessageDialog(this, "Could not access user scenarios: \n" + ex.getLocalizedMessage());
-            return;
         }
 
 

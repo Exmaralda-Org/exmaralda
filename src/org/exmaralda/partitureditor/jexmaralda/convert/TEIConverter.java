@@ -161,7 +161,9 @@ public class TEIConverter extends AbstractConverter {
                                                                               XSLTransformException,
                                                                               JDOMException,
                                                                               IOException,
-                                                                              Exception {
+                                                                              ParserConfigurationException,
+                                                                              TransformerException
+                                                                              {
         writeHIATISOTEIToFile(bt, filename, false);
     }
     
@@ -170,7 +172,9 @@ public class TEIConverter extends AbstractConverter {
                                                                               XSLTransformException,
                                                                               JDOMException,
                                                                               IOException,
-                                                                              Exception {
+                                                                              ParserConfigurationException,
+                                                                              TransformerException
+                                                                              {
         // added 13-12-2013
         BasicTranscription copyBT = bt.makeCopy();
         copyBT.normalize();        
@@ -198,7 +202,9 @@ public class TEIConverter extends AbstractConverter {
                                                                               XSLTransformException,
                                                                               JDOMException,
                                                                               IOException,
-                                                                              Exception {
+                                                                              ParserConfigurationException,
+                                                                              TransformerException
+                                                                              {
         // added 13-12-2013
         BasicTranscription copyBT = bt.makeCopy();
         copyBT.normalize();        

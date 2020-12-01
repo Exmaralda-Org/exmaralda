@@ -205,6 +205,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
 
    /** prepare the reset, i.e. cancel editing activities etc. */
+    @Override
     void prepareReset(){
         setTrackCursor(false);
         setCursor(java.awt.Cursor.WAIT_CURSOR);
@@ -214,6 +215,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
 
     /** change the value in the specified cell */
+    @Override
     void changeValue(int row, int col){
         transcriptionChanged = true;
         cancelEdit(true);
@@ -222,6 +224,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
 
     /** add a row at the specified position */
+    @Override
     void addRow(int row){
         if (row<tableModel.getNumColumns()-1){ // i.e. this is not the last row --> push the spans downwards
             progressBar.setString("Pushing tiers...");
@@ -246,6 +249,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
     
     /** remove the row at the specified position */
+    @Override
     void removeRow(int row){
         progressBar.setString("Removing tier...");
 
@@ -271,13 +275,14 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
           
     
     /** swap the specified rows */
+    @Override
     void exchangeRows(int row1, int row2) {        
         progressBar.setString("Swapping tiers...");
-        Vector rangeVector = new Vector();
+        List rangeVector = new ArrayList();
         for (int col=0; col<getModel().getNumColumns(); col++){ //remove all spans from the first row, but store them in a vector
             JCCellRange range = this.getSpannedRange(row1,col);
             if (range!=null){
-                rangeVector.addElement(range);
+                rangeVector.add(range);
                 this.removeSpannedRange(range);
             }
         }
@@ -291,7 +296,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
         }
         
         for (int pos=0; pos<rangeVector.size(); pos++){ // copy the spans stored in the Vector to the second row and then fuck off
-            JCCellRange range = (JCCellRange)rangeVector.elementAt(pos);
+            JCCellRange range = (JCCellRange)rangeVector.get(pos);
             JCCellRange newRange = new JCCellRange(row2,range.start_column, row2, range.end_column);
             this.addSpannedRange(newRange);
         }
@@ -302,6 +307,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
 
     /** add a column at the specified position */
+    @Override
     void addColumn(int col){
         
         if (col==tableModel.getNumColumns()-1){ // i.e. this is the last column
@@ -344,11 +350,13 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
        
     /** does nothing */
+    @Override
     void removeColumn(int col) {
     }
 
     /** set the selection to the specified position, begin edit at this position if required 
      *  this method is overriden in PartitureTableWithActions */
+    @Override
     void setNewSelection(int row, int col, boolean beginEdit){        
         clearSelection();
         makeVisible(row,col);
@@ -392,6 +400,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
 
     /** reset the format of the whole table, i.e. set formats and calculate cell widths */
+    @Override
     public void resetFormat(boolean updatePG) {
         progressBar.setString("Resetting format...");
         if (updatePG) {
@@ -417,6 +426,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
     
     /** format the row labels */
+    @Override
     void formatRowLabels(){
         progressBar.setString("Formatting row labels...");
         TierFormat labelFormat = tableModel.getRowLabelFormat();
@@ -455,6 +465,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
 
 
     /** format the column labels */
+    @Override
     void formatColumnLabels(){ 
         progressBar.setString("Formatting column labels...");
         TierFormat labelFormat = tableModel.getColumnLabelFormat();
@@ -488,6 +499,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
 
     
     /** format the specified cell */
+    @Override
     void formatCell(int row, int col){
         TierFormat tierFormat = tableModel.getFormat(row);
         TierFormat emptyFormat = tableModel.getEmptyFormat();
@@ -512,6 +524,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
     
     /** format the specified row */
+    @Override
     void formatRow(int row){
         TierFormat tierFormat = tableModel.getFormat(row);
         JCCellStyle style = new JCCellStyle();
@@ -561,6 +574,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     
  
     /** set the cell span of the specified cell */
+    @Override
     void changeCellSpan(int row, int col) {
         JCCellRange oldRange = getSpannedRange(row,col);
         int currentSpan = tableModel.getCellSpan(row,col);        
@@ -586,6 +600,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }    
 
     /** recalculate cell widths between the specified columns */
+    @Override
     void changeArea(int col1, int col2) {
         progressBar.setString("Calculating widths...");
         //timer.setStart();
@@ -694,21 +709,22 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     
     /** returns the indeces of visible rows */
     public int[] getIndicesOfVisibleRows(){
-        Vector resultVector = new Vector();
+        List resultVector = new ArrayList();
         for (int row=0; row<getModel().getNumRows(); row++){
             if (!isRowHidden(row)){
-                resultVector.addElement(row);
+                resultVector.add(row);
             }
         }
         int[] result = new int[resultVector.size()];
         for (int pos=0; pos<resultVector.size(); pos++){
-            result[pos] = ((Integer)resultVector.elementAt(pos));
+            result[pos] = ((Integer)resultVector.get(pos));
         }
         return result;
     }
     
     /** for Link Panel listener: if a link has been added or
      *  removed, the corresponding cell must be reformatted */
+    @Override
     public void linkChanged(int row, int col) {
         formatCell(row,col);        
     }    

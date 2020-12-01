@@ -19,6 +19,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.partitureditor.jexmaralda.convert.EXMARaLDATransformer;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -77,7 +78,14 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
     public void transform() throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException{
         BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
         String[] parameters = transformationDialog.getParameters();
-        Document baseDocument = null;
+        AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);
+        
+        // new 01-12-2020, for DULKO, issue #229
+        EXMARaLDATransformer exmaraldaTransformer = new EXMARaLDATransformer(transcription, segmentation, parameters);
+        String resultString = exmaraldaTransformer.transform();
+        
+        
+        /*Document baseDocument = null;
         if (parameters[0].startsWith("basic")){
             baseDocument = IOUtilities.readDocumentFromString(transcription.toXML());
         } else if ((parameters[0].startsWith("segmented")) || (parameters[0].startsWith("list"))){
@@ -129,7 +137,7 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
             }
         } else {
             resultString = IOUtilities.documentToString(baseDocument);
-        }
+        }*/
 
         if (parameters[4].equals("self-transformation")){
             table.checkSave();

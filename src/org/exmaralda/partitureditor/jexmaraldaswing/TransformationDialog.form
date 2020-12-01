@@ -6,6 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -186,14 +187,15 @@
             <Component class="javax.swing.JComboBox" name="segmentationComboBox">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="7">
+                  <StringArray count="8">
                     <StringItem index="0" value="NONE"/>
                     <StringItem index="1" value="GENERIC"/>
                     <StringItem index="2" value="HIAT"/>
                     <StringItem index="3" value="GAT"/>
-                    <StringItem index="4" value="CHAT"/>
-                    <StringItem index="5" value="DIDA"/>
-                    <StringItem index="6" value="IPA"/>
+                    <StringItem index="4" value="cGAT_MINIMAL"/>
+                    <StringItem index="5" value="CHAT"/>
+                    <StringItem index="6" value="DIDA"/>
+                    <StringItem index="7" value="IPA"/>
                   </StringArray>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
