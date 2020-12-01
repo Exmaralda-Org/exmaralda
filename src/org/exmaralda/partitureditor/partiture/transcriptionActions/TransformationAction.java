@@ -18,21 +18,14 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.ExmaraldaApplication;
-import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.EXMARaLDATransformer;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.jexmaralda.ListTranscription;
-import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
-import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
-import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
-import org.exmaralda.partitureditor.jexmaralda.segment.SegmentedToListInfo;
 import org.exmaralda.partitureditor.jexmaraldaswing.TransformationDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.partiture.*;
-import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -47,8 +40,8 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
     int rememberTheStart = 0;
 
     /** Creates a new instance of AddBookmarkAction */
-    public TransformationAction(PartitureTableWithActions t) {
-        super("Transformation...", t);
+    public TransformationAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
+        super("Transformation...", icon, t);
         transformationDialog = new TransformationDialog(table.parent, true, (ExmaraldaApplication)(table.parent));
     }
     

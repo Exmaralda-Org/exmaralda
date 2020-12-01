@@ -71,7 +71,7 @@ public class CatalogLookupDialog extends javax.swing.JDialog implements ListSele
         if (parent instanceof ExmaraldaApplication){
             ExmaraldaApplication ea = (ExmaraldaApplication)parent;
             Preferences prefs = java.util.prefs.Preferences.userRoot().node(ea.getPreferencesNode());
-            String url = prefs.get("Catalog-URL", "http://www.exmaralda.org/xml/EXMARaLDACorpusCatalog.xml");
+            String url = prefs.get("Catalog-URL", "http://agd.ids-mannheim.de/xml/EXMARaLDACorpusCatalog.xml");
             catalogURLTextField.setText(url);
         }
 

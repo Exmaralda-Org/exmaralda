@@ -9,12 +9,19 @@
 
 package org.exmaralda.common.corpusbuild;
 
+import java.io.IOException;
 import org.jdom.*;
 import org.jdom.xpath.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
+import org.exmaralda.partitureditor.jexmaraldaswing.TransformationDialog;
 import org.jdom.transform.*;
+import org.xml.sax.SAXException;
 //import net.sf.saxon.jdom.DocumentWrapper;
 
 
@@ -80,14 +87,14 @@ public class TEIMerger {
     public Document SegmentedTranscriptionToTEITranscription(Document segmentedTranscription,
                                                                     String nameOfDeepSegmentation,
                                                                     String nameOfFlatSegmentation)
-                                                                    throws XSLTransformException, JDOMException, Exception {
+                                                                    throws XSLTransformException, JDOMException, SAXException, ParserConfigurationException, IOException, TransformerException  {
         return SegmentedTranscriptionToTEITranscription(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, false);
     }
 
     public Document SegmentedTranscriptionToTEITranscription(Document segmentedTranscription,
                                                              String nameOfDeepSegmentation, 
                                                              String nameOfFlatSegmentation,
-                                                             boolean useNewStylesheets) throws XSLTransformException, JDOMException, Exception {
+                                                             boolean useNewStylesheets) throws XSLTransformException, JDOMException, SAXException, ParserConfigurationException, IOException, TransformerException  {
         return SegmentedTranscriptionToTEITranscription(segmentedTranscription, 
                 nameOfDeepSegmentation, 
                 nameOfFlatSegmentation, 
@@ -99,7 +106,7 @@ public class TEIMerger {
                                                              String nameOfDeepSegmentation, 
                                                              String nameOfFlatSegmentation,
                                                              boolean useNewStylesheets,
-                                                             boolean includeFullText) throws XSLTransformException, JDOMException, Exception {
+                                                             boolean includeFullText) throws XSLTransformException, JDOMException, SAXException, ParserConfigurationException, IOException, TransformerException {
         
         String skeleton_stylesheet = TEIMerger.TEI_SKELETON_STYLESHEET_NEW;
         if (ISO) skeleton_stylesheet = TEIMerger.TEI_SKELETON_STYLESHEET_ISO;
@@ -204,7 +211,7 @@ public class TEIMerger {
         return finalDocument;
     }
     
-    public static Vector TEIMerge(Document segmentedTranscription, String nameOfDeepSegmentation, String nameOfFlatSegmentation) throws Exception{                
+    public static Vector TEIMerge(Document segmentedTranscription, String nameOfDeepSegmentation, String nameOfFlatSegmentation) throws IOException {                
         return TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, false);
     }
     /** this method will take the segmented transcription and, for each speaker contribution in the segmentation with
@@ -222,11 +229,11 @@ public class TEIMerger {
     public static Vector TEIMerge(Document segmentedTranscription, 
             String nameOfDeepSegmentation, 
             String nameOfFlatSegmentation,
-            boolean includeFullText) throws Exception{                
+            boolean includeFullText) throws IOException {                
         try {
             
             // Make a map of the timeline
-            Hashtable timelineItems = new Hashtable();
+            Map timelineItems = new HashMap();
             String xpath = "//tli";
             XPath xpx = XPath.newInstance(xpath);
             List tlis = xpx.selectNodes(segmentedTranscription);
@@ -253,7 +260,7 @@ public class TEIMerger {
                     //this means that no corresponding top level
                     //element was found in the second segmentation
                     //which should not happen
-                    throw new Exception(tierref + " " + start + " " + end);
+                    throw new IOException(tierref + " " + start + " " + end);
                 }
                 // this is where the magic happens
                 Element mergedElement = merge(sc,sc2);
@@ -326,9 +333,11 @@ public class TEIMerger {
             
             return returnValue;
         } catch (JDOMException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(TEIMerger.class.getName()).log(Level.SEVERE, null, ex);     
+            throw new IOException(ex);
+
         }
-        return null;
+        //return null;
     }
     
     static Element merge(Element e1, Element e2){

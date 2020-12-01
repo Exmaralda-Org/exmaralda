@@ -8,7 +8,6 @@ package org.exmaralda.partitureditor.partiture.toolbars;
 
 import org.exmaralda.partitureditor.partiture.*;
 import javax.swing.*;
-import org.exmaralda.common.helpers.Internationalizer;
 
 /**
  *
@@ -16,17 +15,18 @@ import org.exmaralda.common.helpers.Internationalizer;
  */
 public class FileToolBar extends AbstractTableToolBar {
     
-    private JButton newButton;
-    private JButton openButton;
-    private JButton saveButton;
+    private final JButton newButton;
+    private final JButton openButton;
+    private final JButton saveButton;
     
-    private JButton editMetaInformationButton;
-    private JButton editSpeakertableButton;
-    private JButton editRecordingsButton;
+    private final JButton editMetaInformationButton;
+    private final JButton editSpeakertableButton;
+    private final JButton editRecordingsButton;
     
     //private JButton importButton;
-    private JButton outputButton;
-    private JButton sendHTMLToBrowserButton;
+    private final JButton outputButton;
+    private final JButton sendHTMLToBrowserButton;
+    private final JButton transformationButton; // issue #230
     
     
     /** Creates a new instance of FileToolBar */
@@ -54,7 +54,11 @@ public class FileToolBar extends AbstractTableToolBar {
               
         // ADDED IN 1.2.1. (22-Oct-2002)
         sendHTMLToBrowserButton = this.add(table.sendHTMLPartitureToBrowserAction);
-        sendHTMLToBrowserButton.setPreferredSize(new java.awt.Dimension(24,24));         
+        sendHTMLToBrowserButton.setPreferredSize(new java.awt.Dimension(24,24));       
+        
+        // added 01-12-2020 issue #230
+        transformationButton = this.add(table.transformationAction);
+        transformationButton.setPreferredSize(new java.awt.Dimension(24,24));       
 
         addSeparator();
 
