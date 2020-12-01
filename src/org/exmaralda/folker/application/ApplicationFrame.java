@@ -10,8 +10,11 @@ package org.exmaralda.folker.application;
 import java.awt.desktop.OpenFilesEvent;
 import javax.swing.ImageIcon;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.partitureditor.partiture.StringUtilities;
@@ -84,7 +87,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
                                 applicationControl.newTranscriptionFile(fileToOpen);
                             }
                         } catch (Exception ex){
-                            ex.printStackTrace();
+                            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);  
                             JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
                         }
                     }
@@ -219,16 +222,17 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try{
+        try {
             System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-                e.printStackTrace();        
+        } catch (java.lang.ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);              
         }
         
         final String[] theArgs = args;
         
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 ApplicationFrame af = new ApplicationFrame(theArgs);                    
                 af.setVisible(true);
@@ -285,80 +289,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
             java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).clear();                
             JOptionPane.showMessageDialog(rootPane, "Preferences reset.\nRestart the editor.");
         } catch (BackingStoreException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);  
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());
         }        
     }
-    
-    /** added 01-03-2010 */
-    /*private void setupMacOSXApplicationListener() {
-        final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
-        application.setEnabledAboutMenu(true); // damit ein "Ueber " Menu erscheint
-        application.addPreferencesMenuItem(); // "Einstellen..." Dialog
-        application.setEnabledPreferencesMenu(true); // diesen Dialog auch
-        application.addApplicationListener(new com.apple.eawt.ApplicationListener() {
-
-            @Override
-            public void handleAbout(com.apple.eawt.ApplicationEvent ae) {
-                ((HelpMenu)helpMenu).aboutAction.actionPerformed(null);
-                ae.setHandled(true); // habe fertig...
-            }
-
-            // app wird ueber den finder geoeffnet. wie auch sonst.
-            // (lies: total unnuetz!)
-            @Override
-            public void handleOpenApplication(ApplicationEvent ae) {
-            }
-
-            @Override
-            public void handlePreferences(ApplicationEvent ae) {
-                applicationControl.editPreferencesAction.actionPerformed(null);
-                ae.setHandled(true);
-            }
-
-            @Override
-            public void handlePrintFile(ApplicationEvent ae) {
-                System.out.println("Drucken?!");
-                JOptionPane.showMessageDialog(rootPane, "Drucken wird nicht unterstuetzt.\b Bitte nutzen Sie die Funktionen unter\bDatei > Ausgabe...");
-                ae.setHandled(true);
-            }
-
-            @Override
-            public void handleQuit(ApplicationEvent ae) {
-                boolean reallyQuit = applicationControl.exitApplication();
-                ae.setHandled(reallyQuit); // da wird wohl nichts mehr draus!
-            }
-
-            // anwendung laeuft bereits und jemand startet es nochmal
-            @Override
-            public void handleReOpenApplication(ApplicationEvent ae) {
-                System.out.println("Laeuft schon");
-                // will ich mehrere instanzen? nein
-                //JOptionPane.showMessageDialog(new JFrame(), "You already have an instance\nof the EXMARaLDA Partitur-Editor running.");
-                ae.setHandled(true);
-            }
-
-            // anwendung laeuft schon, dokument wird ueber den finder geoeffnet
-            @Override
-            public void handleOpenFile(ApplicationEvent ae) {
-                try{
-                    boolean proceed = true;
-                    if (applicationControl.DOCUMENT_CHANGED){
-                        proceed = applicationControl.checkSave();
-                    }
-                    if (!proceed) return;
-                    String fileNameToOpen = ae.getFilename();
-                    File fileToOpen = new File(fileNameToOpen);
-                    if (!(fileNameToOpen.toLowerCase().endsWith(".wav"))){
-                        applicationControl.openTranscriptionFile(fileToOpen);
-                    } else {
-                        applicationControl.newTranscriptionFile(fileToOpen);
-                    }
-                } catch (Exception e){
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(rootPane, e.getLocalizedMessage());
-                }
-            }
-           });
-	}*/
 }
