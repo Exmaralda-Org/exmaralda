@@ -31,11 +31,17 @@ public class EXMARaLDATransformer {
     BasicTranscription transcription;
     AbstractSegmentation segmentation;
     String[] parameters;
+    String[][] xslParameters;
 
     public EXMARaLDATransformer(BasicTranscription transcription, AbstractSegmentation segmentation, String[] parameters) {
         this.transcription = transcription;
         this.segmentation = segmentation;
         this.parameters = parameters;
+    }
+
+    public EXMARaLDATransformer(BasicTranscription transcription, AbstractSegmentation segmentation, String[] parameters, String[][] xslParameters) {
+        this(transcription, segmentation, parameters);
+        this.xslParameters = xslParameters;
     }
     
     /*
@@ -105,9 +111,9 @@ public class EXMARaLDATransformer {
             StylesheetFactory sf = new StylesheetFactory(true);
             String sourceString = IOUtilities.documentToString(baseDocument);
             if (parameters[3].startsWith("/")){
-                resultString = sf.applyInternalStylesheetToString(parameters[3], sourceString);
+                resultString = sf.applyInternalStylesheetToString(parameters[3], sourceString, xslParameters);
             } else {
-                resultString = sf.applyExternalStylesheetToString(parameters[3], sourceString);
+                resultString = sf.applyExternalStylesheetToString(parameters[3], sourceString, xslParameters);
             }
         } else {
             resultString = IOUtilities.documentToString(baseDocument);
