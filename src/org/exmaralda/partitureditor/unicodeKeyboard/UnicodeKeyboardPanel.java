@@ -43,7 +43,9 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Armenian.xml",
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Diacritics.xml",
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/SyncWriterConversion.xml",
-                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/MiscSymbols.xml"
+                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/MiscSymbols.xml",
+                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Emojis_Windows.xml",
+                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Emojis_Mac.xml"
                                                        };
     
     private static final String[] BUILT_IN_CHARACTER_SET_NAMES = {"HIAT", 
@@ -70,7 +72,9 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
                                                             "Armenian Alphabet",
                                                             "Combining Diacritics",
                                                             "SyncWriter Conversion",
-                                                            "Miscellaneous Symbols"
+                                                            "Miscellaneous Symbols",
+                                                            "Emojis (Windows)",
+                                                            "Emojis (Mac)"
                                                            };
     
     private static String[] EXTERNAL_CHARACTER_SETS;
