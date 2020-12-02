@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.EditPreferencesDialog;
 import org.exmaralda.partitureditor.partiture.*;
+import org.exmaralda.tagging.TaggingProfiles;
 
 /**
  *
@@ -130,7 +131,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             
             System.out.println("Changed player type settings to " + newValues[16]);
             
-            table.underlineWithDiacritics = new Boolean(newValues[17]).booleanValue();
+            table.underlineWithDiacritics = Boolean.parseBoolean(newValues[17]);
             table.underlineCategory = newValues[18];
 
             table.preferredSegmentation = newValues[19];
@@ -142,14 +143,14 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    
                    pe.menuBar.transcriptionMenu.insertHIATUtteranceNumbersMenuItem.setVisible(table.preferredSegmentation.equals("HIAT"));
 
-                   pe.menuBar.sfb538Menu.setVisible(new Boolean(newValues[20]).booleanValue());
-                   pe.menuBar.sinMenu.setVisible(new Boolean(newValues[21]).booleanValue());
-                   pe.menuBar.odtstdMenu.setVisible(new Boolean(newValues[22]).booleanValue());
-                   pe.menuBar.inelMenu.setVisible(new Boolean(newValues[23]).booleanValue());
+                   pe.menuBar.sfb538Menu.setVisible(Boolean.parseBoolean(newValues[20]));
+                   pe.menuBar.sinMenu.setVisible(Boolean.parseBoolean(newValues[21]));
+                   pe.menuBar.odtstdMenu.setVisible(Boolean.parseBoolean(newValues[22]));
+                   pe.menuBar.inelMenu.setVisible(Boolean.parseBoolean(newValues[23]));
             }
 
-            table.AUTO_ANCHOR = new Boolean(newValues[24]).booleanValue();
-            table.AUTO_REMOVE_UNUSED_TLI = new Boolean(newValues[25]).booleanValue();
+            table.AUTO_ANCHOR = Boolean.parseBoolean(newValues[24]);
+            table.AUTO_REMOVE_UNUSED_TLI = Boolean.parseBoolean(newValues[25]);
 
             // pause notation
             table.pausePrefix = newValues[26];
@@ -158,7 +159,10 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.pauseDecimalComma = Boolean.parseBoolean(newValues[29]);
             table.undoEnabled = Boolean.parseBoolean(newValues[30]);
             table.undoAction.setEnabled(table.undoAction.isEnabled() && table.undoEnabled);
-            table.getModel().INTERPOLATE_WHEN_SPLITTING = new Boolean(newValues[31]).booleanValue();
+            table.getModel().INTERPOLATE_WHEN_SPLITTING = Boolean.parseBoolean(newValues[31]);
+            
+            // new 02-12-2020, issue #228
+            TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], null);
             
             table.status("Preferences changed");
 

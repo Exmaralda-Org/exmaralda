@@ -93,7 +93,8 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         jLabel1.setText("Tree Tagger Directory: ");
         jPanel1.add(jLabel1);
 
-        directoryTextField.setPreferredSize(new java.awt.Dimension(450, 20));
+        directoryTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        directoryTextField.setPreferredSize(new java.awt.Dimension(300, 20));
         jPanel1.add(directoryTextField);
 
         browseForDirectoryButton.setText("Browse...");
@@ -114,10 +115,12 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         jLabel2.setPreferredSize(new java.awt.Dimension(113, 14));
         jPanel2.add(jLabel2);
 
-        parametersFileTextField.setPreferredSize(new java.awt.Dimension(450, 20));
+        parametersFileTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        parametersFileTextField.setPreferredSize(new java.awt.Dimension(300, 20));
         jPanel2.add(parametersFileTextField);
 
         encodingComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "iso8859-1", "utf-8" }));
+        encodingComboBox.setMaximumSize(new java.awt.Dimension(32767, 30));
         jPanel2.add(encodingComboBox);
 
         browseForParametersFileButton.setText("Browse...");
@@ -187,5 +190,9 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
     private javax.swing.JTextField parametersFileTextField;
     private javax.swing.JCheckBox postagsCheckBox;
     // End of variables declaration//GEN-END:variables
+
+    public void hideLemmaPOS() {
+        this.optionsPanel.setVisible(false);
+    }
 
 }
