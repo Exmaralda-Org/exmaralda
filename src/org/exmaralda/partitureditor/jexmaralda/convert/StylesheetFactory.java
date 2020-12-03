@@ -55,13 +55,14 @@ public class StylesheetFactory {
                                                   TransformerException{
 
         // this does not work, but also no harm...
-        tFactory.setURIResolver(new URIResolver(){
+        // well, maybe it DOES do harm, see issue #243
+        /*tFactory.setURIResolver(new URIResolver(){
             @Override
             public Source resolve(String href, String base) throws TransformerException {
                 InputStream is = getClass().getResourceAsStream("/" + href);
                 return new javax.xml.transform.stream.StreamSource(is,href);
             }            
-        });
+        });*/
 
         // set up the transformer         
         java.io.InputStream is2 = getClass().getResourceAsStream(pathToInternalStyleSheet);
