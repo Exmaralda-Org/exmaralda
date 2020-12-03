@@ -29,7 +29,7 @@ public class AnnotationSpecification {
     
     public static String[][] BUILT_IN_ANNOTATION_SPECIFICATIONS = {
         {"HaMaTac : Disfluency", "/org/exmaralda/partitureditor/annotation/disfluency-annotation-panel.xml"},
-        {"Dulko : Errors", "/org/exmaralda/partitureditor/annotation/dulko-annotation-panel.xml"},
+        {"Dulko : Annotation", "/org/exmaralda/partitureditor/annotation/dulko-annotation-panel.xml"},
         {"FOLK : STTS 2.0 POS", "/org/exmaralda/partitureditor/annotation/folk_stts_2_0-annotation-panel.xml"},
         {"SegCor : Macro syntax", "/org/exmaralda/partitureditor/annotation/segcor-macrosyntax-annotation-panel.xml"}
     };
