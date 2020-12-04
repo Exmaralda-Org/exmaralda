@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 10.1 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 11.0 -->
+<!-- Andreas Nolda 2020-12-04 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -114,7 +114,7 @@
 <xsl:template name="tokenize-apostrophe">
   <!-- internal apostrophe -->
   <xsl:analyze-string select="."
-                      regex="{'''\w+'}"><!-- e.g. "'s" -->
+                      regex="{'''\p{L}+'}"><!-- e.g. "'s" -->
     <xsl:matching-substring>
       <token>
         <xsl:value-of select="."/>
@@ -159,9 +159,9 @@
     <xsl:non-matching-substring>
       <xsl:choose>
         <!-- simple URLs: -->
-        <xsl:when test="matches(.,'^\W*(\p{L}+://)?\w+([.-]\w+)*\.\p{L}+\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*(\p{L}+://)?[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+\p{P}*$')">
           <xsl:analyze-string select="."
-                              regex="{'(\p{L}+://)?\w+([.-]\w+)*\.\p{L}+'}">
+                              regex="{'(\p{L}+://)?[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -171,9 +171,9 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- e-mail addresses: -->
-        <xsl:when test="matches(.,'^\W*\w+(.\w+)@\w+([.-]\w+)*\.\p{L}+\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*[\p{L}\p{N}]+(.[\p{L}\p{N}]+)@[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+\p{P}*$')">
           <xsl:analyze-string select="."
-                              regex="{'\w+(.\w+)@\w+([.-]\w+)*\.\p{L}+'}">
+                              regex="{'[\p{L}\p{N}]+(.[\p{L}\p{N}]+)@[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -183,7 +183,7 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- ordinal number ranges -->
-        <xsl:when test="matches(.,'^\W*\d+\.-\d+\.\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*\d+\.-\d+\.\p{P}*$')">
           <xsl:analyze-string select="."
                               regex="{'\d+\.-\d+\.'}"><!-- e.g. "9.-12." -->
             <xsl:matching-substring>
@@ -195,7 +195,7 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- cardinal number ranges -->
-        <xsl:when test="matches(.,'^\W*\d+-\d+\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*\d+-\d+\p{P}*$')">
           <xsl:analyze-string select="."
                               regex="{'\d+-\d+'}"><!-- e.g. "9-12" -->
             <xsl:matching-substring>
@@ -207,7 +207,7 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- ordinal numbers -->
-        <xsl:when test="matches(.,'^\W*\d+\.\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*\d+\.\p{P}*$')">
           <xsl:analyze-string select="."
                               regex="{'\d+\.'}"><!-- e.g. "12." -->
             <xsl:matching-substring>
@@ -219,9 +219,9 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- one-letter abbreviations with period -->
-        <xsl:when test="matches(.,'^\W*\w\.\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*\p{L}\.\p{P}*$')">
           <xsl:analyze-string select="."
-                              regex="{'\w\.'}">
+                              regex="{'\p{L}\.'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -231,11 +231,11 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- other abbreviations with period -->
-        <xsl:when test="$abbreviations/abbr[matches(current(),concat('^\W*',.,'\W*$')) or
-                                            matches(current(),concat('^\W*',upper-case(substring(.,1,1)),substring(.,2),'\W*$'))]"><!-- capitalised version -->
+        <xsl:when test="$abbreviations/abbr[matches(current(),concat('^\p{P}*',.,'\p{P}*$')) or
+                                            matches(current(),concat('^\p{P}*',upper-case(substring(.,1,1)),substring(.,2),'\p{P}*$'))]"><!-- capitalised version -->
           <!-- abbreviation components with period -->
           <xsl:analyze-string select="."
-                              regex="{'\w+\.'}">
+                              regex="{'\p{L}+\.'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -245,9 +245,9 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- internal apostrophes -->
-        <xsl:when test="matches(.,'^\W*\w+''\w+\W*$')">
+        <xsl:when test="matches(.,'^\p{P}*\p{L}+''\p{L}+\p{P}*$')">
           <xsl:analyze-string select="."
-                              regex="{'\w+''\w+'}"><!-- e.g. "hat's" -->
+                              regex="{'\p{L}+''\p{L}+'}"><!-- e.g. "hat's" -->
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-apostrophe"/>
             </xsl:matching-substring>
@@ -259,7 +259,7 @@
         <xsl:otherwise>
           <!-- tokenize words -->
           <xsl:analyze-string select="."
-                              regex="{'\w+(-\w+)*'}"><!-- e.g. "Mecklenburg" or "Mecklenburg-Vorpommern" -->
+                              regex="{'\p{L}+(-\p{L}+)*'}"><!-- e.g. "Mecklenburg" or "Mecklenburg-Vorpommern" -->
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>

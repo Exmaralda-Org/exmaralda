@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-s.xsl -->
-<!-- Version 11.7 -->
-<!-- Andreas Nolda 2019-10-27 -->
+<!-- Version 12.0 -->
+<!-- Andreas Nolda 2020-12-04 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -128,7 +128,7 @@
   <!-- cf. Michael Kay, "XSLT 2.0 and XPath 2.0", 4th ed., p. 895 -->
   <xsl:variable name="title-words"
                 select="tokenize(replace(normalize-space(/basic-transcription/head/meta-information/ud-meta-information/ud-information[@attribute-name='text_title']),
-                                         '(\w+|\p{P})\s*','$1#'),
+                                         '(\p{L}+(-\p{L}+)*|\d+|\p{P})\s*','$1#'),
                                  '#')[.]"/>
   <xsl:variable name="starts-with-title"
                 select="count($title-words)&gt;0 and
