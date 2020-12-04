@@ -36,8 +36,11 @@
         </Component>
         <Component class="javax.swing.JTextField" name="directoryTextField">
           <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[2147483647, 30]"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[450, 20]"/>
+              <Dimension value="[300, 20]"/>
             </Property>
           </Properties>
         </Component>
@@ -71,8 +74,11 @@
         </Component>
         <Component class="javax.swing.JTextField" name="parametersFileTextField">
           <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[2147483647, 30]"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[450, 20]"/>
+              <Dimension value="[300, 20]"/>
             </Property>
           </Properties>
         </Component>
@@ -83,6 +89,9 @@
                 <StringItem index="0" value="iso8859-1"/>
                 <StringItem index="1" value="utf-8"/>
               </StringArray>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[32767, 30]"/>
             </Property>
           </Properties>
         </Component>

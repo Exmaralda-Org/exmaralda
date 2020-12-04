@@ -55,13 +55,15 @@ public class TaggingProfiles {
             preferences.put("directory", directory);
             preferences.put("parameter-file", parameterFile);
             preferences.put("parameter-file-encoding", parameterFileEncoding);
-            preferences.putBoolean("lemma-option", false);
-            preferences.putBoolean("token-option", false);
-            for (String o : options){
-                if (o.equals("lemma")){
-                    preferences.putBoolean("lemma-option", true);
-                } else if (o.equals("token")){
-                    preferences.putBoolean("token-option", true);
+            if (options!=null){
+                preferences.putBoolean("lemma-option", false);
+                preferences.putBoolean("token-option", false);
+                for (String o : options){
+                    if (o.equals("lemma")){
+                        preferences.putBoolean("lemma-option", true);
+                    } else if (o.equals("token")){
+                        preferences.putBoolean("token-option", true);
+                    }
                 }
             }
         
@@ -79,5 +81,6 @@ public class TaggingProfiles {
             preferences.putBoolean("integrate-sextant", integrateSextant);
             preferences.put("sextant-suffix", sextantSuffix);
     }
+
 
 }

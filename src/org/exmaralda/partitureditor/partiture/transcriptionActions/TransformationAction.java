@@ -71,10 +71,11 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
     public void transform() throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException{
         BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
         String[] parameters = transformationDialog.getParameters();
+        String[][] xslParameters = transformationDialog.getXSLParameters();
         AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);
         
         // new 01-12-2020, for DULKO, issue #229
-        EXMARaLDATransformer exmaraldaTransformer = new EXMARaLDATransformer(transcription, segmentation, parameters);
+        EXMARaLDATransformer exmaraldaTransformer = new EXMARaLDATransformer(transcription, segmentation, parameters, xslParameters);
         String resultString = exmaraldaTransformer.transform();
         
         
