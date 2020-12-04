@@ -11,26 +11,38 @@ import static java.io.File.separator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerWrapper;
+import org.exmaralda.tagging.TaggingProfiles;
 
 public class TreeTagger {
+  
   TreeTaggerWrapper tt = null;
   List<String> tagList = null;
 
   public TreeTagger(String lang) throws Exception {
     tt = new TreeTaggerWrapper<String>();
-    if (lang.equals("de")) {
-      tt.setModel(System.getenv("TREETAGGER_HOME") + separator + "lib"
-                                                   + separator + "german-utf8.par");
-    } else {
-      throw new IllegalArgumentException("Language \"" + lang + "\" unsupported.");
-    }
+
+    // changed 04-12-2020, for issue #228      
+    String ENVIRONMENT_TREE_TAGGER_HOME = System.getenv("TREETAGGER_HOME");
+    String MODEL_FALLBACK_PATH = ENVIRONMENT_TREE_TAGGER_HOME + separator + "lib" + separator + "german-utf8.par";
+    String MODEL_PATH = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("parameter-file", MODEL_FALLBACK_PATH);    
+    tt.setModel(MODEL_PATH);
+    
+    // do we still need a distinction by lang if the user can set the language specific parameter file?
+    //if (lang.equals("de")) {
+      /*tt.setModel(System.getenv("TREETAGGER_HOME") + separator + "lib"
+                                                   + separator + "german-utf8.par");*/
+    //} else {
+    //  throw new IllegalArgumentException("Language \"" + lang + "\" unsupported.");
+    //}
   }
 
   public String[] pos(String[] tokenArray) throws Exception {
     tagList = new ArrayList<String>();
     tt.setHandler(new TokenHandler<String>() {
+      @Override
       public void token(String token, String pos, String lemma) {
         tagList.add(pos);
       }
@@ -48,6 +60,7 @@ public class TreeTagger {
   public String[] lemma(String[] tokenArray) throws Exception {
     tagList = new ArrayList<String>();
     tt.setHandler(new TokenHandler<String>() {
+      @Override
       public void token(String token, String pos, String lemma) {
         tagList.add(lemma);
       }
