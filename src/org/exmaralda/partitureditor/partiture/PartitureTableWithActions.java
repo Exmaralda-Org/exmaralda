@@ -965,7 +965,7 @@ public class PartitureTableWithActions extends PartitureTable
         countAction = new CountAction(this);
         wordListAction = new WordlistAction(this);
         //transformationAction = new TransformationAction(this);
-        transformationAction = new TransformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/objects_transform.png")));
+        transformationAction = new TransformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Transform.gif")));
         insertUtteranceNumbersAction = new InsertHIATUtteranceNumbersAction(this);
         autoAnnotationAction = new AutoAnnotationAction(this);
         addTokenLayerAction = new AddTokenLayerAction(this);
