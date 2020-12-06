@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 11.0 -->
-<!-- Andreas Nolda 2020-12-04 -->
+<!-- Version 12.0 -->
+<!-- Andreas Nolda 2020-12-06 -->
 
 <xsl:stylesheet version="2.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:tt="java:org.exmaralda.dulko.treetagger.TreeTagger"
+                exclude-result-prefixes="tt">
 
 <!-- We cannot include the master stylesheet because we want to change the $zh-number value. -->
 <xsl:import href="exb2exb-tiers.xsl"/>
@@ -12,7 +14,52 @@
 <!-- Changing the user-visible parameter into a variable. -->
 <xsl:variable name="zh-number">0</xsl:variable>
 
+<xsl:include href="lang.xsl"/>
+
+<xsl:param name="tagger-home"
+           select="tt:home(tt:new())"/>
+
+<xsl:param name="tagger-abbreviations-uri">
+  <xsl:if test="string-length($tagger-lang)&gt;0">
+    <xsl:text>file://</xsl:text>
+    <xsl:choose>
+      <!-- Microsoft Windows: -->
+      <xsl:when test="matches($tagger-home,'^[A-Z]:\\')">
+        <xsl:text>/</xsl:text>
+        <xsl:value-of select="translate($tagger-home,'\','/')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$tagger-home"/>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>/lib/</xsl:text>
+    <xsl:value-of select="$tagger-lang"/>
+    <xsl:text>-abbreviations</xsl:text>
+  </xsl:if>
+</xsl:param>
+
+<xsl:variable name="abbreviations">
+  <xsl:if test="string-length($tagger-abbreviations-uri)&gt;0">
+    <xsl:if test="unparsed-text-available($tagger-abbreviations-uri)">
+      <xsl:analyze-string select="unparsed-text($tagger-abbreviations-uri)"
+                          regex="\n">
+        <xsl:non-matching-substring>
+          <abbr>
+            <xsl:value-of select="."/>
+          </abbr>
+        </xsl:non-matching-substring>
+      </xsl:analyze-string>
+    </xsl:if>
+  </xsl:if>
+</xsl:variable>
+
 <xsl:template match="basic-body">
+  <xsl:if test="$abbreviations/abbr">
+    <xsl:message>
+      <xsl:text>Using abbreviations in </xsl:text>
+      <xsl:value-of select="$tagger-abbreviations-uri"/>
+    </xsl:message>
+  </xsl:if>
   <xsl:variable name="potential-events">
     <xsl:for-each select="common-timeline/tli">
       <xsl:choose>
@@ -75,18 +122,6 @@
     <xsl:apply-templates select="tier[preceding-sibling::tier[@id=$reference-id]]"/>
   </basic-body>
 </xsl:template>
-
-<xsl:variable name="abbreviations">
-  <abbr>bzw.</abbr>
-  <abbr>etc.</abbr>
-  <abbr>u.a.</abbr>
-  <abbr>u.ä.</abbr>
-  <abbr>usw.</abbr>
-  <abbr>z.B.</abbr>
-  <abbr>z.T.</abbr>
-  <abbr>z.Z.</abbr>
-  <!-- ... -->
-</xsl:variable>
 
 <xsl:template name="tokenize-word">
   <token>
@@ -158,6 +193,20 @@
                       regex="{'\s+'}">
     <xsl:non-matching-substring>
       <xsl:choose>
+        <!-- abbreviations -->
+        <xsl:when test="$abbreviations/abbr[contains(current(),.) and
+                                            matches(substring-before(current(),.),'^\p{P}*$') and
+                                            matches(substring-after(current(),.),'^\p{P}*$')]">
+          <xsl:analyze-string select="."
+                              regex="{'\p{L}+(\.?-\p{L}+)*\.'}">
+            <xsl:matching-substring>
+              <xsl:call-template name="tokenize-word"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+              <xsl:call-template name="tokenize-punctuation"/>
+            </xsl:non-matching-substring>
+          </xsl:analyze-string>
+        </xsl:when>
         <!-- simple URLs: -->
         <xsl:when test="matches(.,'^\p{P}*(\p{L}+://)?[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+\p{P}*$')">
           <xsl:analyze-string select="."
@@ -210,32 +259,6 @@
         <xsl:when test="matches(.,'^\p{P}*\d+\.\p{P}*$')">
           <xsl:analyze-string select="."
                               regex="{'\d+\.'}"><!-- e.g. "12." -->
-            <xsl:matching-substring>
-              <xsl:call-template name="tokenize-word"/>
-            </xsl:matching-substring>
-            <xsl:non-matching-substring>
-              <xsl:call-template name="tokenize-punctuation"/>
-            </xsl:non-matching-substring>
-          </xsl:analyze-string>
-        </xsl:when>
-        <!-- one-letter abbreviations with period -->
-        <xsl:when test="matches(.,'^\p{P}*\p{L}\.\p{P}*$')">
-          <xsl:analyze-string select="."
-                              regex="{'\p{L}\.'}">
-            <xsl:matching-substring>
-              <xsl:call-template name="tokenize-word"/>
-            </xsl:matching-substring>
-            <xsl:non-matching-substring>
-              <xsl:call-template name="tokenize-punctuation"/>
-            </xsl:non-matching-substring>
-          </xsl:analyze-string>
-        </xsl:when>
-        <!-- other abbreviations with period -->
-        <xsl:when test="$abbreviations/abbr[matches(current(),concat('^\p{P}*',.,'\p{P}*$')) or
-                                            matches(current(),concat('^\p{P}*',upper-case(substring(.,1,1)),substring(.,2),'\p{P}*$'))]"><!-- capitalised version -->
-          <!-- abbreviation components with period -->
-          <xsl:analyze-string select="."
-                              regex="{'\p{L}+\.'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
