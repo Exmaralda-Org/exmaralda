@@ -102,7 +102,7 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
         }
         
         EXTERNAL_CHARACTER_SETS = externalCharsets;
-        Vector externalCharsetNames = new Vector();
+        List externalCharsetNames = new ArrayList();
         for (String externalCharset : externalCharsets) {
             filename = externalCharset;
             try{
@@ -117,7 +117,7 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
         ALL_CHARACTER_SET_NAMES = new String[BUILT_IN_CHARACTER_SET_NAMES.length + externalCharsetNames.size()];
         System.arraycopy(BUILT_IN_CHARACTER_SET_NAMES, 0, ALL_CHARACTER_SET_NAMES, 0, BUILT_IN_CHARACTER_SET_NAMES.length);
         for (int pos=0; pos<externalCharsetNames.size(); pos++){
-            ALL_CHARACTER_SET_NAMES[pos + BUILT_IN_CHARACTER_SET_NAMES.length] = (String)(externalCharsetNames.elementAt(pos));
+            ALL_CHARACTER_SET_NAMES[pos + BUILT_IN_CHARACTER_SET_NAMES.length] = (String)(externalCharsetNames.get(pos));
         }
         initComponents ();
         

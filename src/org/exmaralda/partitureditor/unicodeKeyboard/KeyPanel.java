@@ -65,7 +65,7 @@ public class KeyPanel extends javax.swing.JPanel {
             String text = key.content;
             boolean canDisplayAll = true;
             for (char c : text.toCharArray()){
-                if (!key.font.canDisplay(c)){
+                if (!(key.font.canDisplay(c))){
                     canDisplayAll = false;
                     break;
                 }
@@ -84,11 +84,18 @@ public class KeyPanel extends javax.swing.JPanel {
                     keys[i].setFont(generalPurposeFont);
                 }
             }
+            // issue #234 enforce font for emojis because it thinks it can't 
+            // display but it can
+            if (key.font.getName().contains("Emoji")){
+                keys[i].setFont(key.font);
+            }
+            
             keys[i].setText(text);
             keys[i].setEnabled(true);           
             keys[i].setPreferredSize (new java.awt.Dimension(Math.max(25,stringWidth(keys[i].getFont(),text)+6),25));
             keys[i].setMinimumSize (new java.awt.Dimension(25, 25));
-            keys[i].setToolTipText(key.description);
+            String hexValue = String.format("%04x", (int) key.content.charAt(0));
+            keys[i].setToolTipText(key.description + " / " + hexValue + " / " + key.font.getFontName());
             this.add(keys[i]);
         }        
         this.setPreferredSize(this.getPreferredSize());

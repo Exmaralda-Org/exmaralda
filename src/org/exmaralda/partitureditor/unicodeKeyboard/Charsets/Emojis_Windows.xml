@@ -70,25 +70,21 @@
         <description>smiling face with halo</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F970;</content>
         <description>smiling face with hearts</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F60D;</content>
         <description>smiling face with heart-eyes</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F929;</content>
         <description>star-struck</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F618;</content>
         <description>face blowing a kiss</description>
@@ -114,13 +110,11 @@
         <description>kissing face with smiling eyes</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F972;</content>
         <description>smiling face with tear</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F60B;</content>
         <description>face savoring food</description>
@@ -136,13 +130,11 @@
         <description>winking face with tongue</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F92A;</content>
         <description>zany face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F61D;</content>
         <description>squinting face with tongue</description>
@@ -158,20 +150,16 @@
         <description>hugging face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F92D;</content>
         <description>face with hand over mouth</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
-    <!--
     <key>
         <content>&#x1F92B;</content>
         <description>shushing face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F914;</content>
         <description>thinking face</description>
@@ -182,13 +170,11 @@
         <description>zipper-mouth face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F92B;</content>
         <description>face with raised eyebrow</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F610;</content>
         <description>neutral face</description>
@@ -274,70 +260,56 @@
         <description>nauseated face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F92E;</content>
         <description>face vomiting</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F927;</content>
         <description>sneezing face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F975;</content>
         <description>hot face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
-    <!--
     <key>
         <content>&#x1F976;</content>
         <description>cold face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
-    <!--
     <key>
         <content>&#x1F974;</content>
         <description>woozy face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F635;</content>
         <description>knocked-out face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F92F;</content>
         <description>exploding head</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F920;</content>
         <description>cowboy hat face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F973;</content>
         <description>partying face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
-    <!--
     <key>
         <content>&#x1F978;</content>
         <description>disguised face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F60E;</content>
         <description>smiling face with sunglasses</description>
@@ -348,13 +320,11 @@
         <description>nerd face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F9D0;</content>
         <description>face with monocle</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F615;</content>
         <description>confused face</description>
@@ -395,13 +365,11 @@
         <description>flushed face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F97A;</content>
         <description>pleading face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F626;</content>
         <description>frowning face with open mouth</description>
@@ -472,13 +440,11 @@
         <description>tired face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F971;</content>
         <description>yawning face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F624;</content>
         <description>face with steam from nose</description>
@@ -494,13 +460,11 @@
         <description>angry face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F92C;</content>
         <description>face with symbols on mouth</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F608;</content>
         <description>smiling face with horns</description>
@@ -591,20 +555,16 @@
         <description>OK hand</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F90C;</content>
         <description>pinched fingers</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
-    <!--
     <key>
         <content>&#x1F90F;</content>
         <description>pinching hand</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x270C;</content>
         <description>victory hand</description>
@@ -615,13 +575,11 @@
         <description>crossed fingers</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F91F;</content>
         <description>love-you gesture</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F918;</content>
         <description>sign of the horns</description>
@@ -707,13 +665,11 @@
         <description>open hands</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    <!--
     <key>
         <content>&#x1F932;</content>
         <description>palms up together</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
-    -->
     <key>
         <content>&#x1F91D;</content>
         <description>handshake</description>
