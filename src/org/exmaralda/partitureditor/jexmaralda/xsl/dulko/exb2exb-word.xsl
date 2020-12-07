@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
 <!-- Version 12.0 -->
-<!-- Andreas Nolda 2020-12-06 -->
+<!-- Andreas Nolda 2020-12-07 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -16,8 +16,11 @@
 
 <xsl:include href="lang.xsl"/>
 
+<xsl:variable name="tagger"
+              select="tt:new()"/>
+
 <xsl:param name="tagger-home"
-           select="tt:home(tt:new())"/>
+           select="tt:getHome($tagger)"/>
 
 <xsl:param name="tagger-abbreviations-uri">
   <xsl:if test="string-length($tagger-lang)&gt;0">
