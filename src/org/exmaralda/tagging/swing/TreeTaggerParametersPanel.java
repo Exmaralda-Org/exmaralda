@@ -85,12 +85,12 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         postagsCheckBox = new javax.swing.JCheckBox();
         lemmasCheckBox = new javax.swing.JCheckBox();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Tree Tagger Parameters"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder("TreeTagger Parameters"));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel1.setText("Tree Tagger Directory: ");
+        jLabel1.setText("TreeTagger Directory: ");
         jPanel1.add(jLabel1);
 
         directoryTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -166,7 +166,7 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
     private void browseForParametersFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForParametersFileButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Locate a TreeTagger parameters file");
-        jfc.setFileFilter(new ParameterFileFilter("par", "Tree Tagger Parameter Files (*.par)"));
+        jfc.setFileFilter(new ParameterFileFilter("par", "TreeTagger Parameter Files (*.par)"));
         jfc.setCurrentDirectory(new File(directoryTextField.getText()));
         int a = jfc.showOpenDialog(this);
         if (a == JFileChooser.APPROVE_OPTION){

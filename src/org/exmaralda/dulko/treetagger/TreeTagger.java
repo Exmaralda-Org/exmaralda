@@ -1,6 +1,6 @@
 // TreeTagger.java -- A class for tagging tokens by TreeTagger
-// Version 1.2
-// Andreas Nolda 2020-12-01
+// Version 2.1
+// Andreas Nolda, Thomas Schmidt 2020-12-06
 
 // cf. TreeTaggerWrapper.java at https://github.com/reckart/tt4j
 // and TreeTagger.java at https://github.com/Camille31/Swip
@@ -19,46 +19,35 @@ import org.annolab.tt4j.TreeTaggerWrapper;
 import org.exmaralda.tagging.TaggingProfiles;
 
 public class TreeTagger {
-  
   TreeTaggerWrapper tt = null;
   List<String> tagList = null;
 
-  public TreeTagger(String lang) throws IOException {
-    tt = new TreeTaggerWrapper<String>();        
+  String ENVIRONMENT_TREETAGGER_HOME = System.getenv("TREETAGGER_HOME");
+  String TREETAGER_HOME_PATH = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("directory", ENVIRONMENT_TREETAGGER_HOME);
+  String MODEL_FALLBACK_PATH = ENVIRONMENT_TREETAGGER_HOME + separator + "lib" + separator + "german.par";
+  String MODEL_PATH = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("parameter-file", MODEL_FALLBACK_PATH);
+  String MODEL_ENCODING = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("parameter-file-encoding", "UTF-8");
 
-    // changed 04-12-2020, for issue #228      
-    String ENVIRONMENT_TREE_TAGGER_HOME = System.getenv("TREETAGGER_HOME");
-    String MODEL_FALLBACK_PATH = ENVIRONMENT_TREE_TAGGER_HOME + separator + "lib" + separator + "german-utf8.par";        
+  public TreeTagger() throws IOException {
+    tt = new TreeTaggerWrapper<String>();
 
-    String TREETAGER_EXECUTABLE_PATH = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("directory", ENVIRONMENT_TREE_TAGGER_HOME);    
-    String MODEL_PATH = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("parameter-file", MODEL_FALLBACK_PATH);  
-    String MODEL_ENCODING = Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE).get("parameter-file-encoding", "UTF-8");  
-    
-    // do some checks
-    System.out.println("Initialising tagger");
-    File f1 = new File(TREETAGER_EXECUTABLE_PATH);
-    if (!f1.exists()){throw new IOException("Command file " + TREETAGER_EXECUTABLE_PATH + " does not exist.");}
-    if (!f1.canExecute()){throw new IOException("Command file " + TREETAGER_EXECUTABLE_PATH + " is not exectuable.");}
+    File f1 = new File(TREETAGER_HOME_PATH);
+    if (!f1.exists()){throw new IOException("TreeTagger home directory " + TREETAGER_HOME_PATH + " does not exist.");}
+    if (!f1.canRead()){throw new IOException("TreeTagger home directory " + TREETAGER_HOME_PATH + " cannot be read.");}
     File f2 = new File(MODEL_PATH);
-    if (!f2.exists()){throw new IOException("Parameter file " + MODEL_PATH + " does not exist.");}
-    if (!f2.canRead()){throw new IOException("Parameter file " + MODEL_PATH + " cannot be read.");}
-    
-    
-    System.setProperty("treetagger.home", TREETAGER_EXECUTABLE_PATH);
-    //tt.setModel(MODEL_PATH);
-    tt.setModel(MODEL_PATH + ":" + MODEL_ENCODING);
+    if (!f2.exists()){throw new IOException("TreeTagger parameter file " + MODEL_PATH + " does not exist.");}
+    if (!f2.canRead()){throw new IOException("TreeTagger parameter file " + MODEL_PATH + " cannot be read.");}
 
-    
-    
-    
-    
-    // do we still need a distinction by lang if the user can set the language specific parameter file?
-    //if (lang.equals("de")) {
-      /*tt.setModel(System.getenv("TREETAGGER_HOME") + separator + "lib"
-                                                   + separator + "german-utf8.par");*/
-    //} else {
-    //  throw new IllegalArgumentException("Language \"" + lang + "\" unsupported.");
-    //}
+    System.setProperty("treetagger.home", TREETAGER_HOME_PATH);
+    tt.setModel(MODEL_PATH + ":" + MODEL_ENCODING);
+  }
+
+  public String home() {
+    return TREETAGER_HOME_PATH;
+  }
+
+  public String model() {
+    return MODEL_PATH;
   }
 
   public String[] pos(String[] tokenArray) throws Exception {
