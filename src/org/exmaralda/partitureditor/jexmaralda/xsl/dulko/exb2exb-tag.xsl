@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-tag.xsl -->
 <!-- Version 12.0 -->
-<!-- Andreas Nolda 2020-12-06 -->
+<!-- Andreas Nolda 2020-12-07 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -13,8 +13,11 @@
 
 <xsl:include href="lang.xsl"/>
 
+<xsl:variable name="tagger"
+              select="tt:new()"/>
+
 <xsl:param name="tagger-model"
-           select="tt:model(tt:new())"/>
+           select="tt:getModel($tagger)"/>
 
 <xsl:param name="tagger-model-uri">
   <xsl:if test="string-length($tagger-lang)&gt;0">
@@ -38,11 +41,11 @@
       <xsl:message terminate="yes">Error: The first language used in the speakertable is unsupported by the tagger.</xsl:message>
     </xsl:when>
     <xsl:when test="not(matches($tagger-model-uri,concat('/[^/.]*',$tagger-lang)))">
-      <xsl:message terminate="yes">Error: The first language used in the speakertable does not match the model used by the tagger.</xsl:message>
+      <xsl:message terminate="yes">Error: The first language used in the speakertable does not match the parameter file used by TreeTagger.</xsl:message>
     </xsl:when>
     <xsl:otherwise>
       <xsl:message>
-        <xsl:text>Using tagger model in </xsl:text>
+        <xsl:text>Using TreeTagger parameter file </xsl:text>
         <xsl:value-of select="$tagger-model-uri"/>
       </xsl:message>
       <xsl:variable name="preceding-tiers">
@@ -133,10 +136,10 @@
 
 <xsl:template name="pos-events">
   <xsl:param name="reference-tier"/>
-  <xsl:variable name="words" as="xs:string *">
+  <xsl:variable name="words" as="xs:string*">
     <xsl:sequence select="$reference-tier/event"/>
   </xsl:variable>
-  <xsl:variable name="tags" select="tt:pos(tt:new(),$words)"/>
+  <xsl:variable name="tags" select="tt:pos($tagger,$words)"/>
   <xsl:for-each select="$tags">
     <xsl:variable name="position"
                   select="position()"/>
@@ -150,10 +153,10 @@
 
 <xsl:template name="lemma-events">
   <xsl:param name="reference-tier"/>
-  <xsl:variable name="words" as="xs:string *">
+  <xsl:variable name="words" as="xs:string*">
     <xsl:sequence select="$reference-tier/event"/>
   </xsl:variable>
-  <xsl:variable name="tags" select="tt:lemma(tt:new(),$words)"/>
+  <xsl:variable name="tags" select="tt:lemma($tagger,$words)"/>
   <xsl:for-each select="$tags">
     <xsl:variable name="position"
                   select="position()"/>
