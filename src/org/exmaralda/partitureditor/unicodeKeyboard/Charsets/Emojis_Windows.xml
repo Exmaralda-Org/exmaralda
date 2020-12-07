@@ -3,6 +3,7 @@
     Emojis for windows font: Segoe UI Emoji
     full Emoji list, v13.1 from: https://unicode.org/emoji/charts/full-emoji-list.html
     symbols: 1-107 (without 38, 43 and 60) and 157-187
+    symbols not supported by browser: 14, 22, 56, 57, 58, 63, 64, 76, 91, 163, 164
 -->
 <unicode-keyboard name="Emoji">
     <key>
@@ -70,11 +71,13 @@
         <description>smiling face with halo</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F970;</content>
         <description>smiling face with hearts</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x1F60D;</content>
         <description>smiling face with heart-eyes</description>
@@ -110,11 +113,13 @@
         <description>kissing face with smiling eyes</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F972;</content>
         <description>smiling face with tear</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x1F60B;</content>
         <description>face savoring food</description>
@@ -270,21 +275,27 @@
         <description>sneezing face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F975;</content>
         <description>hot face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
+    <!-- not supported by browser
     <key>
         <content>&#x1F976;</content>
         <description>cold face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
+    <!-- not supported by browser
     <key>
         <content>&#x1F974;</content>
         <description>woozy face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x1F635;</content>
         <description>knocked-out face</description>
@@ -300,16 +311,20 @@
         <description>cowboy hat face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F973;</content>
         <description>partying face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
+    <!-- not supported by browser
     <key>
         <content>&#x1F978;</content>
         <description>disguised face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x1F60E;</content>
         <description>smiling face with sunglasses</description>
@@ -365,11 +380,13 @@
         <description>flushed face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F97A;</content>
         <description>pleading face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x1F626;</content>
         <description>frowning face with open mouth</description>
@@ -440,11 +457,13 @@
         <description>tired face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F971;</content>
         <description>yawning face</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x1F624;</content>
         <description>face with steam from nose</description>
@@ -555,16 +574,20 @@
         <description>OK hand</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    <!-- not supported by browser
     <key>
         <content>&#x1F90C;</content>
         <description>pinched fingers</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
+    <!-- not supported by browser
     <key>
         <content>&#x1F90F;</content>
         <description>pinching hand</description>
         <font name="Segoe UI Emoji" size="20" face="plain"/>
     </key>
+    -->
     <key>
         <content>&#x270C;</content>
         <description>victory hand</description>
