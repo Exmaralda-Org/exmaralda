@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-tag.xsl -->
-<!-- Version 12.0 -->
-<!-- Andreas Nolda 2020-12-07 -->
+<!-- Version 12.1 -->
+<!-- Andreas Nolda 2020-12-08 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -16,11 +16,15 @@
 <xsl:variable name="tagger"
               select="tt:new()"/>
 
+<xsl:param name="tagger-home"
+           select="tt:getHome($tagger)"/>
+
 <xsl:param name="tagger-model"
            select="tt:getModel($tagger)"/>
 
 <xsl:param name="tagger-model-uri">
-  <xsl:if test="string-length($tagger-lang)&gt;0">
+  <xsl:if test="string-length($tagger-lang)&gt;0 and
+                string-length($tagger-model)&gt;0">
     <xsl:text>file://</xsl:text>
     <xsl:choose>
       <!-- Microsoft Windows: -->
@@ -38,7 +42,13 @@
 <xsl:template match="basic-body">
   <xsl:choose>
     <xsl:when test="string-length($tagger-lang)=0">
-      <xsl:message terminate="yes">Error: The first language used in the speakertable is unsupported by the tagger.</xsl:message>
+      <xsl:message terminate="yes">Error: The first language used in the speakertable is unsupported by TreeTagger.</xsl:message>
+    </xsl:when>
+    <xsl:when test="string-length($tagger-home)=0">
+      <xsl:message terminate="yes">Error: The TreeTagger directory is unset.</xsl:message>
+    </xsl:when>
+    <xsl:when test="string-length($tagger-model)=0">
+      <xsl:message terminate="yes">Error: The parameter file to be used by TreeTagger is unset.</xsl:message>
     </xsl:when>
     <xsl:when test="not(matches($tagger-model-uri,concat('/[^/.]*',$tagger-lang)))">
       <xsl:message terminate="yes">Error: The first language used in the speakertable does not match the parameter file used by TreeTagger.</xsl:message>

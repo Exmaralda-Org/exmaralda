@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.0 -->
-<!-- Andreas Nolda 2020-12-07 -->
+<!-- Version 12.1 -->
+<!-- Andreas Nolda 2020-12-08 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -23,7 +23,8 @@
            select="tt:getHome($tagger)"/>
 
 <xsl:param name="tagger-abbreviations-uri">
-  <xsl:if test="string-length($tagger-lang)&gt;0">
+  <xsl:if test="string-length($tagger-lang)&gt;0 and
+                string-length($tagger-home)&gt;0">
     <xsl:text>file://</xsl:text>
     <xsl:choose>
       <!-- Microsoft Windows: -->
