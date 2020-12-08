@@ -240,7 +240,7 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Locate a TreeTagger abbreviations file");
         // abbreviation file(s) don't seem to have a suffix??
-        jfc.setFileFilter(new ParameterFileFilter("abbreviations", "TreeTagger Abbreviations file (*-abbreviations)"));
+        //jfc.setFileFilter(new ParameterFileFilter("abbreviations", "TreeTagger Abbreviations file (*-abbreviations)"));
         jfc.setCurrentDirectory(new File(directoryTextField.getText()));
         int a = jfc.showOpenDialog(this);
         if (a == JFileChooser.APPROVE_OPTION){
@@ -273,7 +273,7 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox postagsCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    public void hideLemmaPOS() {
+    public void hideOptionsPanel() {
         this.optionsPanel.setVisible(false);
     }
 
