@@ -28,8 +28,8 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
 
     @Override
     public void setSoundFile(String pathToSoundFile) throws IOException {
-        System.out.println("This is the JavaFXPlayer setting media file to " + pathToSoundFile);
         String urlString = pathToSoundFile;
+        System.out.println("This is the JavaFXPlayer setting media file to " + pathToSoundFile);
         if ((pathToSoundFile==null) && (wrappedPlayer!=null)){
             wrappedPlayer.stop();
         }
@@ -39,7 +39,9 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
         
 
         if (!(pathToSoundFile.startsWith("http://") || (pathToSoundFile.startsWith("https://")))){
-            urlString = "file:///" + pathToSoundFile;
+            //urlString = "file:///" + URLEncoder.encode(pathToSoundFile, StandardCharsets.ISO_8859_1.toString());
+            // only this version seems to do it -- this is for issue #
+            urlString = "file:///" + pathToSoundFile.replaceAll(" ", "%20");
             soundFilePath = pathToSoundFile;
         }
         
