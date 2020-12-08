@@ -71,12 +71,15 @@ public class TreeTaggerAction extends AbstractApplicationAction {
             String TTD = treeTaggerParametersPanel.getTreeTaggerDirectory();
             String PF = treeTaggerParametersPanel.getParameterFile();
             String PFE = treeTaggerParametersPanel.getParameterFileEncoding();
+            String AF = treeTaggerParametersPanel.getAbbreviationsFile();
+            String AFE = treeTaggerParametersPanel.getAbbreviationsFileEncoding();
             String[] OPT = treeTaggerParametersPanel.getOptions();
             final TreeTagger tt = new TreeTagger(TTD, PF, PFE, OPT);
             System.out.println("Tree Tagger initialised");
             
             //2a. setting up was succcessful so we can write the preferences
-            TaggingProfiles.writePreferences(TTD, PF, PFE, OPT);
+            //TaggingProfiles.writePreferences(TTD, PF, PFE, OPT);
+            TaggingProfiles.writePreferences(TTD, PF, PFE, AF, AFE, OPT);
             
             
             PostProcessingRules ppr = new PostProcessingRules();

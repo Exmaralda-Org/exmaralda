@@ -25,6 +25,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         super("Preferences...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editPreferencesAction!");
         table.commitEdit(true);
@@ -39,16 +40,16 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         if (table.parent instanceof org.exmaralda.common.ExmaraldaApplication){
             app = (org.exmaralda.common.ExmaraldaApplication)table.parent;
         }
-        Boolean showSFB538Menu = new Boolean(false);
-        Boolean showSinMenu = new Boolean(false);
-        Boolean showODTSTDMenu = new Boolean(false);
-        Boolean showInelMenu = new Boolean(false);
+        Boolean showSFB538Menu = false;
+        Boolean showSinMenu = false;
+        Boolean showODTSTDMenu = false;
+        Boolean showInelMenu = false;
         if (app instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)app;
-            showSFB538Menu = new Boolean(pe.menuBar.sfb538Menu.isShowing());
-            showSinMenu = new Boolean(pe.menuBar.sinMenu.isShowing());
-            showODTSTDMenu = new Boolean(pe.menuBar.odtstdMenu.isShowing());
-            showInelMenu = new Boolean(pe.menuBar.inelMenu.isShowing());
+            showSFB538Menu = pe.menuBar.sfb538Menu.isShowing();
+            showSinMenu = pe.menuBar.sinMenu.isShowing();
+            showODTSTDMenu = pe.menuBar.odtstdMenu.isShowing();
+            showInelMenu = pe.menuBar.inelMenu.isShowing();
         }
         
         String oldMediaPlayer = mediaPlayer;
@@ -60,7 +61,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             table.transcription2FormattableStylesheet,
                             table.freeStylesheetVisualisationStylesheet,
                             table.HIATUtteranceList2HTMLStylesheet,
-                            new Boolean(table.autoSave).toString(),
+                            Boolean.toString(table.autoSave),
                             table.autoSaveThread.FILENAME,
                             table.autoSaveThread.PATH,
                             Integer.toString(table.autoSaveThread.SAVE_INTERVAL/60000),
@@ -70,22 +71,22 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             table.chatFSM,
                             table.language, 
                             mediaPlayer,
-                            new Boolean(table.underlineWithDiacritics).toString(),
+                            Boolean.toString(table.underlineWithDiacritics),
                             table.underlineCategory,
                             table.preferredSegmentation,
                             showSFB538Menu.toString(),
                             showSinMenu.toString(),
                             showODTSTDMenu.toString(),
                             showInelMenu.toString(),
-                            new Boolean(table.AUTO_ANCHOR).toString(),
-                            new Boolean(table.AUTO_REMOVE_UNUSED_TLI).toString(),
+                            Boolean.toString(table.AUTO_ANCHOR),
+                            Boolean.toString(table.AUTO_REMOVE_UNUSED_TLI),
                             // pause notation
                             table.pausePrefix,
                             table.pauseSuffix,
                             Integer.toString(table.pauseDigits),
                             Boolean.toString(table.pauseDecimalComma),
                             Boolean.toString(table.undoEnabled),
-                            new Boolean(table.getModel().INTERPOLATE_WHEN_SPLITTING).toString(),
+                            Boolean.toString(table.getModel().INTERPOLATE_WHEN_SPLITTING),
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -111,7 +112,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.HIATUtteranceList2HTMLStylesheet = newValues[6];
             
             table.stopAutoSaveThread();
-            table.autoSave = new Boolean(newValues[7]).booleanValue();
+            table.autoSave = Boolean.valueOf(newValues[7]);
             table.autoSaveThread.FILENAME = newValues[8];
             table.autoSaveThread.PATH = newValues[9];
             table.autoSaveThread.setSaveInterval(Integer.parseInt(newValues[10])*60);
@@ -161,8 +162,9 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.undoAction.setEnabled(table.undoAction.isEnabled() && table.undoEnabled);
             table.getModel().INTERPOLATE_WHEN_SPLITTING = Boolean.parseBoolean(newValues[31]);
             
-            // new 02-12-2020, issue #228
-            TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], null);
+            // new 02-12-2020, issue #228, changed 08-12-2020, issue #228
+            //TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], null);
+            TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], newValues[35], newValues[36], dialog.getTaggingOptions());
             
             table.status("Preferences changed");
 
