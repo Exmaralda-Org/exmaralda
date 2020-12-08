@@ -49,37 +49,56 @@ public class TaggingProfiles {
         return "";
     }
 
-    public static void writePreferences(String directory,
-            String parameterFile, String parameterFileEncoding, String[] options) {
-            Preferences preferences = java.util.prefs.Preferences.userRoot().node(PREFERENCES_NODE);
-            preferences.put("directory", directory);
-            preferences.put("parameter-file", parameterFile);
-            preferences.put("parameter-file-encoding", parameterFileEncoding);
-            if (options!=null){
-                preferences.putBoolean("lemma-option", false);
-                preferences.putBoolean("token-option", false);
-                for (String o : options){
-                    if (o.equals("lemma")){
-                        preferences.putBoolean("lemma-option", true);
-                    } else if (o.equals("token")){
-                        preferences.putBoolean("token-option", true);
-                    }
+    public static void writePreferences(String directory, String parameterFile, String parameterFileEncoding, 
+            String abbreviationsFile, String abbreviationsFileEncoding, String[] options) {
+
+        Preferences preferences = java.util.prefs.Preferences.userRoot().node(PREFERENCES_NODE);
+        preferences.put("directory", directory);
+        preferences.put("parameter-file", parameterFile);
+        preferences.put("parameter-file-encoding", parameterFileEncoding);
+        preferences.put("abbreviations-file", abbreviationsFile);
+        preferences.put("abbreviations-file-encoding", abbreviationsFileEncoding);
+        if (options!=null){
+            preferences.putBoolean("lemma-option", false);
+            preferences.putBoolean("token-option", false);
+            preferences.putBoolean("nounkown-option", false);
+            for (String o : options){
+                if (o.equals("-lemma")){
+                    preferences.putBoolean("lemma-option", true);
+                } else if (o.equals("-token")){
+                    preferences.putBoolean("token-option", true);
+                } else if (o.equals("-no-unknown")){
+                    preferences.putBoolean("nounknown-option", true);
                 }
             }
+        }        
         
     }
+
+    public static void writePreferences(String directory, String parameterFile, String parameterFileEncoding, String[] options) {
+        writePreferences(directory, parameterFile, parameterFileEncoding, "", "", options);
+    }
+
+    public static void writePreferences(String directory,
+            String parameterFile, String parameterFileEncoding, String abbreviationsFile, String abbreviationsFileEncoding, String[] options,
+            String taggingProfileName, boolean writeSextant, boolean integrateSextant, String sextantSuffix) {
+
+        writePreferences(directory, parameterFile, parameterFileEncoding, abbreviationsFile, abbreviationsFileEncoding, options);
+
+        Preferences preferences = java.util.prefs.Preferences.userRoot().node(PREFERENCES_NODE);
+        preferences.put("tagging-profile-name", taggingProfileName);
+        preferences.putBoolean("write-sextant", writeSextant);
+        preferences.putBoolean("integrate-sextant", integrateSextant);
+        preferences.put("sextant-suffix", sextantSuffix);
+        
+        
+    }
+
 
     public static void writePreferences(String directory,
             String parameterFile, String parameterFileEncoding, String[] options,
             String taggingProfileName, boolean writeSextant, boolean integrateSextant, String sextantSuffix) {
-            
-            writePreferences(directory, parameterFile, parameterFileEncoding, options);
-
-            Preferences preferences = java.util.prefs.Preferences.userRoot().node(PREFERENCES_NODE);
-            preferences.put("tagging-profile-name", taggingProfileName);
-            preferences.putBoolean("write-sextant", writeSextant);
-            preferences.putBoolean("integrate-sextant", integrateSextant);
-            preferences.put("sextant-suffix", sextantSuffix);
+        writePreferences(directory, parameterFile, parameterFileEncoding, "", "", options, taggingProfileName, writeSextant, integrateSextant, sextantSuffix);    
     }
 
 

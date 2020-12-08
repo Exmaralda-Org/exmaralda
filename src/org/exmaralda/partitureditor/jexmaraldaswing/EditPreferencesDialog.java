@@ -45,7 +45,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         if (pd.length()>0){
             praatDirectoryLabel.setText(pd);
         }
-        ((TreeTaggerParametersPanel)treeTaggerPanel).hideLemmaPOS();
+        //((TreeTaggerParametersPanel)treeTaggerPanel).hideLemmaPOS();
         
         Internationalizer.internationalizeDialogToolTips(this);
         
@@ -123,7 +123,13 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         result[32] = ((TreeTaggerParametersPanel)treeTaggerPanel).getTreeTaggerDirectory();
         result[33] = ((TreeTaggerParametersPanel)treeTaggerPanel).getParameterFile();
         result[34] = ((TreeTaggerParametersPanel)treeTaggerPanel).getParameterFileEncoding();
+        result[35] = ((TreeTaggerParametersPanel)treeTaggerPanel).getAbbreviationsFile();
+        result[36] = ((TreeTaggerParametersPanel)treeTaggerPanel).getAbbreviationsFileEncoding();
         return result;        
+    }
+    
+    public String[] getTaggingOptions(){
+        return ((TreeTaggerParametersPanel)treeTaggerPanel).getOptions();
     }
     
     /** This method is called from within the constructor to

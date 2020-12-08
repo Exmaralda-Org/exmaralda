@@ -12,8 +12,9 @@ public class TestSound
   public static void main(String[] args)
   throws Exception
   { 
-    AbstractPlayer p = new JDSPlayer();
-    p.setSoundFile("https://s3-uhh.lzs.uni-hamburg.de/gwiss-exmaralda/remote/demokorpus-1.1/AnneWill/AnneWill.wav");
+    AbstractPlayer p = new JavaFXPlayer();
+    //p.setSoundFile("N:\\Workspace\\EXMARaLDA\\EXMARaLDA-Testbatterie\\Beckhams_Test_Batterie_01.mp4");
+    p.setSoundFile("N:\\Workspace\\EXMARaLDA\\EXMARaLDA-Testbatterie\\Beckhams_Test_Batterie_01 - Kopie.mp4");
     System.exit(0);
     // open the sound file as a Java input stream
     /*InputStream in = new BufferedInputStream(new FileInputStream("D:\\Dropbox\\IDS\\FOLK\\FOLK_WGCA_01_A01\\FOLK_WGCA_01_A01b_mask.WAV"));
