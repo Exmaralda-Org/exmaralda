@@ -9,7 +9,11 @@ package org.exmaralda.partitureditor.jexmaralda.convert;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
  
 import org.xml.sax.SAXException;
@@ -19,6 +23,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPathException;
 
 
 
@@ -418,8 +423,17 @@ public class StylesheetFactory implements javax.xml.transform.ErrorListener {
 
     // NEW 09-12-2020: issue #233
     private void setupMessageHandler(Transformer transformer) {
-        transformer.setErrorListener(this);
-        ((net.sf.saxon.Controller)transformer).setMessageEmitter(new net.sf.saxon.event.MessageWarner());
+        try {
+            transformer.setErrorListener(this);
+            net.sf.saxon.event.MessageWarner saxonWarner = new net.sf.saxon.event.MessageWarner();
+            Properties props = new Properties();
+            props.setProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            saxonWarner.setOutputProperties(props);
+            saxonWarner.setOutputStream(System.err);
+            ((net.sf.saxon.Controller)transformer).setMessageEmitter(saxonWarner);
+        } catch (net.sf.saxon.trans.XPathException ex) {
+            Logger.getLogger(StylesheetFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

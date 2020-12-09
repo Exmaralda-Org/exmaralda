@@ -493,6 +493,8 @@ public class PartiturEditor extends javax.swing.JFrame
             menuBar.sinMenu.setVisible(settings.get("SHOW-SiNMenu","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.odtstdMenu.setVisible(settings.get("SHOW-ODTSTDMenu","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.inelMenu.setVisible(settings.get("SHOW-INELMenu","FALSE").equalsIgnoreCase("TRUE"));
+            
+            getTransformationComboBox().setVisible(settings.get("SHOW-TransformationDropdown","FALSE").equalsIgnoreCase("TRUE"));
 
             System.out.println("Settings read and set.");
 
@@ -542,6 +544,8 @@ public class PartiturEditor extends javax.swing.JFrame
         settings.put("SHOW-SiNMenu", Boolean.toString(menuBar.sinMenu.isShowing()));
         settings.put("SHOW-ODTSTDMenu", Boolean.toString(menuBar.odtstdMenu.isShowing()));
         settings.put("SHOW-INELMenu", Boolean.toString(menuBar.inelMenu.isShowing()));
+        
+        settings.put("SHOW-TransformationDropdown", Boolean.toString(getTransformationComboBox().isShowing()));
 
         System.out.println("Settings stored.");        
     }
@@ -882,6 +886,10 @@ public class PartiturEditor extends javax.swing.JFrame
         
         
         
+    }
+
+    public JComboBox getTransformationComboBox() {
+        return ((FileToolBar)(toolBarPanel.fileToolBar)).transformationComboBox;
     }
     
 

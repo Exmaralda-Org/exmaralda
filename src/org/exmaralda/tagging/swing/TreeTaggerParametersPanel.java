@@ -79,7 +79,13 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         if (nounknownCheckBox.isSelected()){
             optionsList.add("-no-unknown");
         }
-        String[] result = (String[]) optionsList.toArray();
+        String[] result = new String[optionsList.size()];
+        int i=0;
+        for (String s : optionsList){
+            result[i] = s;
+            i++;
+        }
+        //(String[]) optionsList.toArray();
         return result;
     }
 

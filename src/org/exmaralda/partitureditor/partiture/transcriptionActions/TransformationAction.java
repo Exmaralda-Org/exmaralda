@@ -60,7 +60,11 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
             transformationDialog.approved=false;
             transformationDialog.setVisible(true);
             if (transformationDialog.approved){
-                transform();
+                BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
+                String[] parameters = transformationDialog.getParameters();
+                String[][] xslParameters = transformationDialog.getXSLParameters();
+                AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);
+                transform(transcription, segmentation, parameters, xslParameters);
             }
         } catch (IOException | ParserConfigurationException | FSMException | JexmaraldaException | JDOMException | SAXException ex) {
             Logger.getLogger(TransformationAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,11 +72,11 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
         }
     }
 
-    public void transform() throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, JexmaraldaException{
-        BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
+    public void transform(BasicTranscription transcription, AbstractSegmentation segmentation, String[] parameters, String[][] xslParameters) throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, JexmaraldaException{
+        /*BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
         String[] parameters = transformationDialog.getParameters();
         String[][] xslParameters = transformationDialog.getXSLParameters();
-        AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);
+        AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);*/
         
         // new 01-12-2020, for DULKO, issue #229
         EXMARaLDATransformer exmaraldaTransformer = new EXMARaLDATransformer(transcription, segmentation, parameters, xslParameters);

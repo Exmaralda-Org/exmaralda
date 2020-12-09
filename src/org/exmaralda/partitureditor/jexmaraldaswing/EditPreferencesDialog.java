@@ -83,7 +83,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[35];
+        String[] result = new String[38];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -125,6 +125,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         result[34] = ((TreeTaggerParametersPanel)treeTaggerPanel).getParameterFileEncoding();
         result[35] = ((TreeTaggerParametersPanel)treeTaggerPanel).getAbbreviationsFile();
         result[36] = ((TreeTaggerParametersPanel)treeTaggerPanel).getAbbreviationsFileEncoding();
+
+        // new 09-12-2020, issue #230
+        result[37] = Boolean.toString(transformationDropdownCheckBox.isSelected());
+
         return result;        
     }
     
@@ -266,6 +270,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         sinMenuCheckBox = new javax.swing.JCheckBox();
         odtstdMenuCheckBox = new javax.swing.JCheckBox();
         inelMenuCheckBox = new javax.swing.JCheckBox();
+        transformationDropdownCheckBox = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         resetButton = new javax.swing.JButton();
 
@@ -938,7 +943,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         inelMenuCheckBox.setText("INEL Menu");
         menusPanel.add(inelMenuCheckBox);
 
-        tabbedPane.addTab("Menus", menusPanel);
+        transformationDropdownCheckBox.setText("Transformation dropdown in toolbar");
+        menusPanel.add(transformationDropdownCheckBox);
+
+        tabbedPane.addTab("Menus & Toolbars", menusPanel);
 
         mainPanel.add(tabbedPane, java.awt.BorderLayout.CENTER);
 
@@ -1291,6 +1299,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel tierFontPanel;
     private javax.swing.JPanel topPanel;
     private javax.swing.JTextField transcription2FormattableTextField;
+    private javax.swing.JCheckBox transformationDropdownCheckBox;
     private javax.swing.JPanel treeTaggerPanel;
     private javax.swing.ButtonGroup underlineButtonGroup;
     private javax.swing.JTextField underlineCategoryTextField;
@@ -1343,17 +1352,19 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         //mediaPlayerComboBox.setSelectedItem(values[16]);
         
         String mp = values[16];
-        elanDSPlayerRadioButton.setSelected("DirectShow-Player".equals(mp));
         jdsPlayerRadioButton.setSelected("JDS-Player".equals(mp));
         mmfPlayerRadioButton.setSelected("MMF-Player".equals(mp));
-        elanQuicktimeRadioButton.setSelected("ELAN-Quicktime-Player".equals(mp));
-        cocoaQuicktimePlayerRadioButton.setSelected("CocoaQT-Player".equals(mp));
-        jmfPlayerRadioButton.setSelected("JMF-Player".equals(mp));
         basPlayerRadioButton.setSelected("BAS-Audio-Player".equals(mp));
         javaFXPlayerRadioButton.setSelected("JavaFX-Player".equals(mp));
         avfPlayerRadioButton.setSelected("AVF-Player".equals(mp));
         
+        // old players
+        elanDSPlayerRadioButton.setSelected("DirectShow-Player".equals(mp));
+        elanQuicktimeRadioButton.setSelected("ELAN-Quicktime-Player".equals(mp));
+        cocoaQuicktimePlayerRadioButton.setSelected("CocoaQT-Player".equals(mp));
+        jmfPlayerRadioButton.setSelected("JMF-Player".equals(mp));
 
+        
         underlineCharRadioButton.setSelected(Boolean.parseBoolean(values[17]));
         underlineTierRadioButton.setSelected(!(Boolean.parseBoolean(values[17])));
         underlineCategoryTextField.setText(values[18]);
@@ -1364,6 +1375,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         sinMenuCheckBox.setSelected(Boolean.parseBoolean(values[21]));
         odtstdMenuCheckBox.setSelected(Boolean.parseBoolean(values[22]));
         inelMenuCheckBox.setSelected(Boolean.parseBoolean(values[23]));
+        
+        transformationDropdownCheckBox.setSelected(Boolean.parseBoolean(values[37]));
+        
         autoAnchorCheckBox.setSelected(Boolean.parseBoolean(values[24]));
         autoRemoveTLICheckBox.setSelected(Boolean.parseBoolean(values[25]));
 

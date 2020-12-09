@@ -44,12 +44,14 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         Boolean showSinMenu = false;
         Boolean showODTSTDMenu = false;
         Boolean showInelMenu = false;
+        Boolean showTransformationDropdown = false;
         if (app instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)app;
             showSFB538Menu = pe.menuBar.sfb538Menu.isShowing();
             showSinMenu = pe.menuBar.sinMenu.isShowing();
             showODTSTDMenu = pe.menuBar.odtstdMenu.isShowing();
             showInelMenu = pe.menuBar.inelMenu.isShowing();
+            showTransformationDropdown = pe.getTransformationComboBox().isShowing();
         }
         
         String oldMediaPlayer = mediaPlayer;
@@ -87,6 +89,14 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             Boolean.toString(table.pauseDecimalComma),
                             Boolean.toString(table.undoEnabled),
                             Boolean.toString(table.getModel().INTERPOLATE_WHEN_SPLITTING),
+                            // TreeTagger options need not be set because the panel sets them
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            // show transformation dropdown, issue #230
+                            Boolean.toString(showTransformationDropdown)
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -148,6 +158,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    pe.menuBar.sinMenu.setVisible(Boolean.parseBoolean(newValues[21]));
                    pe.menuBar.odtstdMenu.setVisible(Boolean.parseBoolean(newValues[22]));
                    pe.menuBar.inelMenu.setVisible(Boolean.parseBoolean(newValues[23]));
+                   
+                   pe.getTransformationComboBox().setVisible(Boolean.parseBoolean(newValues[37]));
             }
 
             table.AUTO_ANCHOR = Boolean.parseBoolean(newValues[24]);

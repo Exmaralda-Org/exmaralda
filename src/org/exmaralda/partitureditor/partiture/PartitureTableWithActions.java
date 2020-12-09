@@ -51,14 +51,19 @@ import java.util.logging.Logger;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import javax.xml.parsers.ParserConfigurationException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
+import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebLichtAction;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebMAUSAction;
 import org.exmaralda.partitureditor.partiture.clarinActions.WebMAUSFineAlignmentAction;
 import org.exmaralda.partitureditor.partiture.undo.RestoreCellInfo;
 import org.exmaralda.partitureditor.partiture.undo.UndoHandler;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -1834,7 +1839,7 @@ public class PartitureTableWithActions extends PartitureTable
         undoEnabled = settings.getBoolean("ENABLE-UNDO", true);
         
         // player
-        String playerType = settings.get("PlayerType", "JMF-Player");
+        String playerType = settings.get("PlayerType", "JavaFX-Player");
         if (infoPanel!=null){
             infoPanel.playerLabel.setText(playerType);
         }
@@ -2756,6 +2761,50 @@ public class PartitureTableWithActions extends PartitureTable
                 hideRow(i);
             }
         }        
+    }
+
+    public void applyTransformationScenario(Element transformationScenario) {        
+        String[] parameters = new String[]{
+            transformationScenario.getChild("input").getAttributeValue("type"),
+            transformationScenario.getChild("segmentation").getAttributeValue("type"),
+            transformationScenario.getChildText("list-unit"),
+            transformationScenario.getChildText("stylesheet"),
+            transformationScenario.getChild("output").getAttributeValue("suffix")
+        };
+        
+        String[][] xslParameters = null;
+        Element p = transformationScenario.getChild("parameters");
+        if (p!=null){
+            List l = p.getChildren("parameter");
+            int i=0;
+            for (Object o : l){
+                Element e = (Element)o;
+                xslParameters[i][0] = e.getAttributeValue("name");
+                xslParameters[i][1] = e.getText();
+                i++;                
+            }
+        }
+        
+        try {
+            ((TransformationAction)transformationAction).transform(getModel().getTranscription().makeCopy(), getAbstractSegmentation(preferredSegmentation), parameters, xslParameters);
+        } catch (JDOMException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FSMException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
     }
     
     

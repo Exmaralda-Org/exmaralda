@@ -29,12 +29,12 @@ import org.exmaralda.coma.actions.AbstractXMLSaveAsDialog;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.convert.EXMARaLDATransformationScenarios;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.ChooseStylesheetDialog;
 import org.exmaralda.partitureditor.partiture.PartiturEditor;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
 
 /**
  *
@@ -42,7 +42,7 @@ import org.jdom.xpath.XPath;
  */
 public class TransformationDialog extends javax.swing.JDialog {
 
-    static String BUILT_IN_SCENARIOS = "/org/exmaralda/partitureditor/partiture/transcriptionActions/TransformationScenarios.xml";
+    static String BUILT_IN_SCENARIOS = EXMARaLDATransformationScenarios.BUILT_IN_SCENARIOS;
     ExmaraldaApplication app;
     BasicTranscription transcription;
 
@@ -340,47 +340,22 @@ public class TransformationDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initScenarios() {
-        String[] scenarioNames = new String[scenarios.size()];
-        int count=0;
-        for (Object o : scenarios){
-            Element scenario = (Element)o;
-            scenarioNames[count]=scenario.getChildText("name");
-            count++;
-        }
-        transformationScenariosComboBox.setModel(new DefaultComboBoxModel(scenarioNames));
+        transformationScenariosComboBox.setModel(EXMARaLDATransformationScenarios.getComboBoxModel(scenarios));
+        //transformationScenariosComboBox.setModel(new DefaultComboBoxModel(scenarioNames));
         transformationScenariosComboBox.setSelectedIndex(0);
     }
     private void loadScenarios() {
-        // 1. Load built-in scenarios
         try {
-            Document builtInScenarios = new IOUtilities().readDocumentFromResource(BUILT_IN_SCENARIOS);
-            scenarios.addAll(builtInScenarios.getRootElement().getChildren());
-        } catch (IOException | JDOMException ex) {
-            Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);     
-            JOptionPane.showMessageDialog(this, "Could not read built-in scenarios: \n" + ex.getLocalizedMessage());
+            scenarios = EXMARaLDATransformationScenarios.readScenarios(app);
+        } catch (IOException ex) {
+            Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "<html>Could not read scenarios: <br/><br/>" + ex.getLocalizedMessage() + "</html>");
         }
-
-        // 2. Load user scenarios
-        if (app!=null){
-            java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(app.getPreferencesNode());
-            String path = settings.get("TRANSFORMATION_SCENARIOS_FILE", "");
-            if (path.length()>0){
-                try {
-                    Document userScenarios = IOUtilities.readDocumentFromLocalFile(path);
-                    scenarios.addAll(userScenarios.getRootElement().getChildren());
-                } catch (IOException | JDOMException ex) {
-                    JOptionPane.showMessageDialog(this, "Could not read user scenarios: \n" + ex.getLocalizedMessage());
-                    settings.put("TRANSFORMATION_SCENARIOS_FILE", "");
-                    Logger.getLogger(TransformationDialog.class.getName()).log(Level.SEVERE, null, ex);     
-                }
-            }
-        }
-
     }
 
     private void transformationBaseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformationBaseComboBoxActionPerformed
        int selection = transformationBaseComboBox.getSelectedIndex();
-        segmentationComboBox.setEnabled(selection==1 || selection==2);
+       segmentationComboBox.setEnabled(selection==1 || selection==2);
        listUnitTextField.setEnabled(selection==2);
     }//GEN-LAST:event_transformationBaseComboBoxActionPerformed
 

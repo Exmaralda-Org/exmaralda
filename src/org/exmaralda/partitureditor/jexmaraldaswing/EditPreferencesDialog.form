@@ -1474,8 +1474,8 @@
             <Container class="javax.swing.JPanel" name="menusPanel">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Menus">
-                    <Property name="tabTitle" type="java.lang.String" value="Menus"/>
+                  <JTabbedPaneConstraints tabName="Menus &amp; Toolbars">
+                    <Property name="tabTitle" type="java.lang.String" value="Menus &amp; Toolbars"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -1502,6 +1502,11 @@
                 <Component class="javax.swing.JCheckBox" name="inelMenuCheckBox">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="INEL Menu"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="transformationDropdownCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Transformation dropdown in toolbar"/>
                   </Properties>
                 </Component>
               </SubComponents>
