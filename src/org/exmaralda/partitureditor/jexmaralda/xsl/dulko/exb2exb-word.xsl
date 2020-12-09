@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.0 -->
-<!-- Andreas Nolda 2020-12-07 -->
+<!-- Version 12.2 -->
+<!-- Andreas Nolda 2020-12-08 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -23,7 +23,8 @@
            select="tt:getHome($tagger)"/>
 
 <xsl:param name="tagger-abbreviations-uri">
-  <xsl:if test="string-length($tagger-lang)&gt;0">
+  <xsl:if test="string-length($tagger-lang)&gt;0 and
+                string-length($tagger-home)&gt;0">
     <xsl:text>file://</xsl:text>
     <xsl:choose>
       <!-- Microsoft Windows: -->
@@ -196,7 +197,19 @@
                       regex="{'\s+'}">
     <xsl:non-matching-substring>
       <xsl:choose>
-        <!-- abbreviations -->
+        <!-- one-letter abbreviations: -->
+        <xsl:when test="matches(.,'^\p{P}*\p{L}\.\p{P}*$')">
+          <xsl:analyze-string select="."
+                              regex="{'\p{L}\.'}">
+            <xsl:matching-substring>
+              <xsl:call-template name="tokenize-word"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+              <xsl:call-template name="tokenize-punctuation"/>
+            </xsl:non-matching-substring>
+          </xsl:analyze-string>
+        </xsl:when>
+        <!-- other abbreviations: -->
         <xsl:when test="$abbreviations/abbr[contains(current(),.) and
                                             matches(substring-before(current(),.),'^\p{P}*$') and
                                             matches(substring-after(current(),.),'^\p{P}*$')]">
