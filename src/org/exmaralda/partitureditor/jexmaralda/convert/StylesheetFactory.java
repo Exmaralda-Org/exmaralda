@@ -6,7 +6,11 @@
 
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
  
 import org.xml.sax.SAXException;
 
@@ -17,17 +21,16 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamResult;
 
 
-import java.io.*;
-import javax.xml.transform.Source;
-import javax.xml.transform.URIResolver;
 
 /**
  *
  * @author  thomas
  */
-public class StylesheetFactory {
+public class StylesheetFactory implements javax.xml.transform.ErrorListener {
     
     TransformerFactory tFactory; // = TransformerFactory.newInstance();
+    // New 09-12-2020, issue #233
+    List<String> warnings = new ArrayList<>();
 
     /** Creates a new instance of StylesheetFactory */
     public StylesheetFactory() {
@@ -43,6 +46,10 @@ public class StylesheetFactory {
             //System.setProperty("javax.xml.transform.TransformerFactory", "org.apache.xalan.processor.TransformerFactoryImpl");                
             tFactory = TransformerFactory.newInstance("org.apache.xalan.processor.TransformerFactoryImpl", null);            
         }
+    }
+    
+    public List<String> getWarnings(){
+        return warnings;
     }
     
     public String applyInternalStylesheetToString(final String pathToInternalStyleSheet, 
@@ -74,6 +81,9 @@ public class StylesheetFactory {
         styleSource.setSystemId(styleURL.toExternalForm());
         
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
+
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
         
         java.io.StringReader sr = new java.io.StringReader(sourceString);
         javax.xml.transform.stream.StreamSource ss = new javax.xml.transform.stream.StreamSource(sr);
@@ -115,6 +125,9 @@ public class StylesheetFactory {
         styleSource.setSystemId(styleURL.toExternalForm());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);       
+        
         java.io.StringReader sr = new java.io.StringReader(sourceString);
         javax.xml.transform.stream.StreamSource ss = new javax.xml.transform.stream.StreamSource(sr);
 
@@ -152,6 +165,9 @@ public class StylesheetFactory {
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
         styleSource.setSystemId(styleURL.toExternalForm());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
+
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
                 
         // set up the output stream for the first transformation
         java.io.StringWriter sw = new java.io.StringWriter();
@@ -194,6 +210,9 @@ public class StylesheetFactory {
         styleSource.setSystemId(styleURL.toExternalForm());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
                 
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
+
         // set up the output stream for the first transformation
         java.io.StringWriter sw = new java.io.StringWriter();
         javax.xml.transform.stream.StreamResult inputStream = new StreamResult(sw);
@@ -228,6 +247,8 @@ public class StylesheetFactory {
         styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
         
         java.io.StringReader sr = new java.io.StringReader(sourceString);
         javax.xml.transform.stream.StreamSource ss = new javax.xml.transform.stream.StreamSource(sr);
@@ -262,6 +283,8 @@ public class StylesheetFactory {
         styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
         
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
         
         java.io.StringReader sr = new java.io.StringReader(sourceString);
         javax.xml.transform.stream.StreamSource ss = new javax.xml.transform.stream.StreamSource(sr);
@@ -303,6 +326,12 @@ public class StylesheetFactory {
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
         styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
+        
+        
+        
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
+        
 
         // set up a SAX source as input to the transformer
         java.io.File inputFile  = new java.io.File(pathToExternalXMLFile);        
@@ -341,6 +370,10 @@ public class StylesheetFactory {
         javax.xml.transform.stream.StreamSource styleSource = new javax.xml.transform.stream.StreamSource(is2);
         styleSource.setSystemId(inputFile2.toURL().toString());
         javax.xml.transform.Transformer transformer = tFactory.newTransformer(styleSource);
+        
+        // NEW 09-12-2020: issue #233
+        setupMessageHandler(transformer);
+       
 
         // set up a SAX source as input to the transformer
         java.io.File inputFile  = new java.io.File(pathToExternalXMLFile);        
@@ -366,6 +399,27 @@ public class StylesheetFactory {
                 
         // convert the ouput stream to a string and return it
         return sw2.toString();        
+    }
+
+    @Override
+    public void warning(TransformerException exception) throws TransformerException {
+        warnings.add(exception.getLocalizedMessage());
+    }
+
+    @Override
+    public void error(TransformerException exception) throws TransformerException {
+        warnings.add(exception.getLocalizedMessage());
+    }
+
+    @Override
+    public void fatalError(TransformerException exception) throws TransformerException {
+        warnings.add(exception.getLocalizedMessage());
+    }
+
+    // NEW 09-12-2020: issue #233
+    private void setupMessageHandler(Transformer transformer) {
+        transformer.setErrorListener(this);
+        ((net.sf.saxon.Controller)transformer).setMessageEmitter(new net.sf.saxon.event.MessageWarner());
     }
 
 }
