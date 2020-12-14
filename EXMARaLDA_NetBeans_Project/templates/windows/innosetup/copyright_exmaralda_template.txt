@@ -7,24 +7,23 @@ Corpus Manager Version @coma-version@
 EXAKT Search tool Version @exakt-version@
 FOLKER Version @folker-version@
 OrthoNormal Version @orthonormal-version@
-TEI-Drop
-Sextant
+TEI-Drop @teidrop-version@
 
-EXMARaLDA tools are free to use. EXMARaLDA's source code is licensed under an open source license and available from GitHub (https://github.com/EXMARaLDA/exmaralda/).
+EXMARaLDA tools are free to use. EXMARaLDA's source code is licensed under an open source license (GPL 2.0) and available from GitHub (https://github.com/EXMARaLDA/exmaralda/).
 
-The tools are developed by Thomas Schmidt (IDS Mannheim) and Kai Woerner (University of Hamburg) with support from Hanna Hedeland, Daniel Jettka (HZSK Hamburg) and other contributors.
+The tools are developed by Thomas Schmidt (IDS Mannheim) and Kai Woerner (University of Hamburg) with support from Hanna Hedeland, Daniel Jettka, Anne Ferger (HZSK Hamburg) and other contributors.
 
-Work on EXMARaLDA was and is funded by the German Research Association (DFG), the Bundesministerium fuer Bildung und Forschung (BMBF), the University of Hamburg, and the Institut fuer Deutsche Sprache (IDS).
+The Dulko functionality is developed by Andreas Nolda (BBAW Berlin)
+
+Work on EXMARaLDA was funded by the German Research Association (DFG), the Bundesministerium fuer Bildung und Forschung (BMBF), the University of Hamburg, and the Institut fuer Deutsche Sprache (IDS).
 
 Localisations were done with support from Annette Schnieders (German), Tulay Selcuk (Turkish), Hanna Hedeland (Swedish), Petr Porizka (Czech), Silke Merkel (Spanish) and Fan Junjun (Chinese).
 
-EXMARaLDA uses the following libraries:
+EXMARaLDA uses the following third party libraries:
 * parts of the ELAN code (http://www.lat-mpi.eu/tools/elan/)
-* parts of the BAS code (http://www.phonetik.uni-muenchen.de/forschung/bay_arch_sprsig/index.html)
+* parts of the BAS code (https://www.phonetik.uni-muenchen.de/forschung/Bas/)
 * TreeTagger for Java (https://www.openhub.net/p/tt4j)
 * JDOM (http://www.jdom.org/)
-* FOBS for JMF (http://fobs.sourceforge.net/)
-* Quaqua (http://www.randelshofer.ch/quaqua/)
 * Saxon, Xalan, Bounce and Cobra.
 
 For questions, updates etc. please consult the EXMARaLDA website:
