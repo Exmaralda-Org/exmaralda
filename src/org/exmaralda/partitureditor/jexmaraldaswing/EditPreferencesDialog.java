@@ -17,6 +17,8 @@ import javax.swing.event.DocumentListener;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.ChooseStylesheetDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.AbstractXMLOpenDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
+import org.exmaralda.partitureditor.partiture.PartiturEditor;
+import org.exmaralda.tagging.swing.TreeTaggerParametersPanel;
 
 /**
  *
@@ -43,6 +45,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         if (pd.length()>0){
             praatDirectoryLabel.setText(pd);
         }
+        //((TreeTaggerParametersPanel)treeTaggerPanel).hideLemmaPOS();
         
         Internationalizer.internationalizeDialogToolTips(this);
         
@@ -80,7 +83,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[32];
+        String[] result = new String[38];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -115,7 +118,22 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         result[29] = Boolean.toString(decimalCommaRadioButton.isSelected());
         result[30] = Boolean.toString(enableUndoCheckBox.isSelected());
         result[31] = Boolean.toString(autoInterpolateCheckBox.isSelected());
+        
+        // new 02-12-2020, issue #228
+        result[32] = ((TreeTaggerParametersPanel)treeTaggerPanel).getTreeTaggerDirectory();
+        result[33] = ((TreeTaggerParametersPanel)treeTaggerPanel).getParameterFile();
+        result[34] = ((TreeTaggerParametersPanel)treeTaggerPanel).getParameterFileEncoding();
+        result[35] = ((TreeTaggerParametersPanel)treeTaggerPanel).getAbbreviationsFile();
+        result[36] = ((TreeTaggerParametersPanel)treeTaggerPanel).getAbbreviationsFileEncoding();
+
+        // new 09-12-2020, issue #230
+        result[37] = Boolean.toString(transformationDropdownCheckBox.isSelected());
+
         return result;        
+    }
+    
+    public String[] getTaggingOptions(){
+        return ((TreeTaggerParametersPanel)treeTaggerPanel).getOptions();
     }
     
     /** This method is called from within the constructor to
@@ -136,7 +154,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         mainPanel = new javax.swing.JPanel();
         tabbedPane = new javax.swing.JTabbedPane();
         fontsPanel = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
+        fontSelectionPanel = new javax.swing.JPanel();
         tierFontPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tierFontLabel = new javax.swing.JLabel();
@@ -229,6 +247,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         javaFXPlayerRadioButton = new javax.swing.JRadioButton();
         mmfPlayerRadioButton = new javax.swing.JRadioButton();
         avfPlayerRadioButton = new javax.swing.JRadioButton();
+        deprecatedPlayersPanel = new javax.swing.JPanel();
         elanDSPlayerRadioButton = new javax.swing.JRadioButton();
         elanQuicktimeRadioButton = new javax.swing.JRadioButton();
         jmfPlayerRadioButton = new javax.swing.JRadioButton();
@@ -245,11 +264,13 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         praatPanel = new javax.swing.JPanel();
         praatDirectoryLabel = new javax.swing.JLabel();
         changePraatDirectoryButton = new javax.swing.JButton();
+        treeTaggerPanel = new TreeTaggerParametersPanel();
         menusPanel = new javax.swing.JPanel();
         sfb538MenuCheckBox = new javax.swing.JCheckBox();
         sinMenuCheckBox = new javax.swing.JCheckBox();
         odtstdMenuCheckBox = new javax.swing.JCheckBox();
         inelMenuCheckBox = new javax.swing.JCheckBox();
+        transformationDropdownCheckBox = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         resetButton = new javax.swing.JButton();
 
@@ -290,13 +311,12 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        tabbedPane.setMaximumSize(new java.awt.Dimension(800, 600));
         tabbedPane.setMinimumSize(new java.awt.Dimension(120, 22));
         tabbedPane.setPreferredSize(new java.awt.Dimension(600, 300));
 
-        fontsPanel.setLayout(new javax.swing.BoxLayout(fontsPanel, javax.swing.BoxLayout.Y_AXIS));
+        fontsPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Fonts"));
+        fontSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Fonts"));
 
         tierFontPanel.setLayout(new javax.swing.BoxLayout(tierFontPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -325,7 +345,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         });
         tierFontPanel.add(changeTierFontButton);
 
-        jPanel15.add(tierFontPanel);
+        fontSelectionPanel.add(tierFontPanel);
 
         generalPurposeFontPanel.setLayout(new javax.swing.BoxLayout(generalPurposeFontPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -355,11 +375,12 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         });
         generalPurposeFontPanel.add(changeGeneralPurposeFontButton);
 
-        jPanel15.add(generalPurposeFontPanel);
+        fontSelectionPanel.add(generalPurposeFontPanel);
 
-        fontsPanel.add(jPanel15);
+        fontsPanel.add(fontSelectionPanel, java.awt.BorderLayout.CENTER);
 
         underlineMethodPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Underline Method"));
+        underlineMethodPanel.setMaximumSize(new java.awt.Dimension(32767, 200));
 
         underlineButtonGroup.add(underlineTierRadioButton);
         underlineTierRadioButton.setSelected(true);
@@ -384,7 +405,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         underlineMethodPanel.add(jPanel11);
 
-        fontsPanel.add(underlineMethodPanel);
+        fontsPanel.add(underlineMethodPanel, java.awt.BorderLayout.SOUTH);
 
         tabbedPane.addTab("Fonts", fontsPanel);
 
@@ -797,6 +818,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         mediaPanel.setLayout(new java.awt.BorderLayout());
 
         playerSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose a media player"));
+        playerSelectionPanel.setMaximumSize(new java.awt.Dimension(2147483647, 5000));
+        playerSelectionPanel.setMinimumSize(new java.awt.Dimension(166, 260));
+        playerSelectionPanel.setPreferredSize(new java.awt.Dimension(1211, 260));
         playerSelectionPanel.setLayout(new javax.swing.BoxLayout(playerSelectionPanel, javax.swing.BoxLayout.Y_AXIS));
 
         mediaPlayersButtonGroup.add(basPlayerRadioButton);
@@ -824,26 +848,30 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         avfPlayerRadioButton.setText("<html><b>AVF Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Apple's AV Foundation framework to playback audio and video files. <b><i>New since 2020</i></b>. Recommended player on <b>MAC OS</b></html>");
         playerSelectionPanel.add(avfPlayerRadioButton);
 
+        deprecatedPlayersPanel.setEnabled(false);
+
         mediaPlayersButtonGroup.add(elanDSPlayerRadioButton);
         elanDSPlayerRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         elanDSPlayerRadioButton.setText("<html><b>ELAN DS Player:</b> A player provided by the language Archive at the MPI Nijmegen, also used in older versions of ELAN. Uses Window's native Direct Show framework to playback audio and video files. Not used anymore. </html>");
         elanDSPlayerRadioButton.setEnabled(false);
-        playerSelectionPanel.add(elanDSPlayerRadioButton);
+        deprecatedPlayersPanel.add(elanDSPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(elanQuicktimeRadioButton);
         elanQuicktimeRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         elanQuicktimeRadioButton.setText("<html><b>ELAN Quicktime Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Requires Quicktime for Java.</html>");
-        playerSelectionPanel.add(elanQuicktimeRadioButton);
+        deprecatedPlayersPanel.add(elanQuicktimeRadioButton);
 
         mediaPlayersButtonGroup.add(jmfPlayerRadioButton);
         jmfPlayerRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         jmfPlayerRadioButton.setText("<html><b>JMF Player:</b> Uses the Java Media framework to playback audio and video files. Only option for video files on <b>Linuxes</b> (also available, but <b>not recommended on Windows and MAC</b>).</html>");
-        playerSelectionPanel.add(jmfPlayerRadioButton);
+        deprecatedPlayersPanel.add(jmfPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(cocoaQuicktimePlayerRadioButton);
         cocoaQuicktimePlayerRadioButton.setForeground(new java.awt.Color(153, 153, 153));
         cocoaQuicktimePlayerRadioButton.setText("<html><b>Cocoa Quicktime Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses the Quicktime framework to playback audio and video files. Recommended for video files on the <b>MAC</b>.</html>");
-        playerSelectionPanel.add(cocoaQuicktimePlayerRadioButton);
+        deprecatedPlayersPanel.add(cocoaQuicktimePlayerRadioButton);
+
+        playerSelectionPanel.add(deprecatedPlayersPanel);
 
         mediaPanel.add(playerSelectionPanel, java.awt.BorderLayout.CENTER);
 
@@ -868,7 +896,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         tabbedPane.addTab("Media", mediaPanel);
 
-        pathsPanel.setLayout(new javax.swing.BoxLayout(pathsPanel, javax.swing.BoxLayout.Y_AXIS));
+        pathsPanel.setLayout(new java.awt.BorderLayout());
 
         logPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Log file directory"));
 
@@ -880,7 +908,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         setLogDirectoryButton.setText("Change log file directory...");
         logPanel.add(setLogDirectoryButton);
 
-        pathsPanel.add(logPanel);
+        pathsPanel.add(logPanel, java.awt.BorderLayout.SOUTH);
 
         praatPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Praat directory"));
 
@@ -896,7 +924,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         });
         praatPanel.add(changePraatDirectoryButton);
 
-        pathsPanel.add(praatPanel);
+        pathsPanel.add(praatPanel, java.awt.BorderLayout.NORTH);
+        pathsPanel.add(treeTaggerPanel, java.awt.BorderLayout.CENTER);
 
         tabbedPane.addTab("Paths", pathsPanel);
 
@@ -914,7 +943,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         inelMenuCheckBox.setText("INEL Menu");
         menusPanel.add(inelMenuCheckBox);
 
-        tabbedPane.addTab("Menus", menusPanel);
+        transformationDropdownCheckBox.setText("Transformation dropdown in toolbar");
+        menusPanel.add(transformationDropdownCheckBox);
+
+        tabbedPane.addTab("Menus & Toolbars", menusPanel);
 
         mainPanel.add(tabbedPane, java.awt.BorderLayout.CENTER);
 
@@ -1140,7 +1172,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        //new EditPreferencesDialog(new javax.swing.JFrame(), true).show();
+        new EditPreferencesDialog(new javax.swing.JFrame(), true, new PartiturEditor()).show();
     }
     
     
@@ -1176,6 +1208,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton cocoaQuicktimePlayerRadioButton;
     private javax.swing.JRadioButton decimalCommaRadioButton;
     private javax.swing.JRadioButton decimalPointRadioButton;
+    private javax.swing.JPanel deprecatedPlayersPanel;
     private javax.swing.JSpinner digitsSpinner;
     private javax.swing.JRadioButton elanDSPlayerRadioButton;
     private javax.swing.JRadioButton elanQuicktimeRadioButton;
@@ -1183,6 +1216,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel enableAutoSavePanel;
     private javax.swing.JCheckBox enableUndoCheckBox;
     private javax.swing.JPanel enableUndoPanel;
+    private javax.swing.JPanel fontSelectionPanel;
     private javax.swing.JPanel fontsPanel;
     private javax.swing.JTextField freeStylesheetVisualisationTextField;
     private javax.swing.JPanel fsmPanel;
@@ -1217,7 +1251,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1266,6 +1299,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel tierFontPanel;
     private javax.swing.JPanel topPanel;
     private javax.swing.JTextField transcription2FormattableTextField;
+    private javax.swing.JCheckBox transformationDropdownCheckBox;
+    private javax.swing.JPanel treeTaggerPanel;
     private javax.swing.ButtonGroup underlineButtonGroup;
     private javax.swing.JTextField underlineCategoryTextField;
     private javax.swing.JRadioButton underlineCharRadioButton;
@@ -1317,17 +1352,19 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         //mediaPlayerComboBox.setSelectedItem(values[16]);
         
         String mp = values[16];
-        elanDSPlayerRadioButton.setSelected("DirectShow-Player".equals(mp));
         jdsPlayerRadioButton.setSelected("JDS-Player".equals(mp));
         mmfPlayerRadioButton.setSelected("MMF-Player".equals(mp));
-        elanQuicktimeRadioButton.setSelected("ELAN-Quicktime-Player".equals(mp));
-        cocoaQuicktimePlayerRadioButton.setSelected("CocoaQT-Player".equals(mp));
-        jmfPlayerRadioButton.setSelected("JMF-Player".equals(mp));
         basPlayerRadioButton.setSelected("BAS-Audio-Player".equals(mp));
         javaFXPlayerRadioButton.setSelected("JavaFX-Player".equals(mp));
         avfPlayerRadioButton.setSelected("AVF-Player".equals(mp));
         
+        // old players
+        elanDSPlayerRadioButton.setSelected("DirectShow-Player".equals(mp));
+        elanQuicktimeRadioButton.setSelected("ELAN-Quicktime-Player".equals(mp));
+        cocoaQuicktimePlayerRadioButton.setSelected("CocoaQT-Player".equals(mp));
+        jmfPlayerRadioButton.setSelected("JMF-Player".equals(mp));
 
+        
         underlineCharRadioButton.setSelected(Boolean.parseBoolean(values[17]));
         underlineTierRadioButton.setSelected(!(Boolean.parseBoolean(values[17])));
         underlineCategoryTextField.setText(values[18]);
@@ -1338,6 +1375,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         sinMenuCheckBox.setSelected(Boolean.parseBoolean(values[21]));
         odtstdMenuCheckBox.setSelected(Boolean.parseBoolean(values[22]));
         inelMenuCheckBox.setSelected(Boolean.parseBoolean(values[23]));
+        
+        transformationDropdownCheckBox.setSelected(Boolean.parseBoolean(values[37]));
+        
         autoAnchorCheckBox.setSelected(Boolean.parseBoolean(values[24]));
         autoRemoveTLICheckBox.setSelected(Boolean.parseBoolean(values[25]));
 

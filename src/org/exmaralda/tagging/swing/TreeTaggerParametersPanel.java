@@ -12,6 +12,7 @@
 package org.exmaralda.tagging.swing;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
@@ -28,11 +29,16 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         initComponents();
         Preferences preferences = java.util.prefs.Preferences.userRoot().node(TaggingProfiles.PREFERENCES_NODE);
         directoryTextField.setText(preferences.get("directory", ""));
+        
         parametersFileTextField.setText(preferences.get("parameter-file", ""));
-        encodingComboBox.setSelectedItem(preferences.get("parameter-file-encoding", "iso8859-1"));
+        parametersFileEncodingComboBox.setSelectedItem(preferences.get("parameter-file-encoding", "utf-8"));
+        
+        abbFileTextField.setText(preferences.get("abbreviations-file", ""));
+        abbFileEncodingComboBox.setSelectedItem(preferences.get("abbreviations-file-encoding", "utf-8"));
+
         lemmasCheckBox.setSelected(preferences.getBoolean("lemma-option", true));
         postagsCheckBox.setSelected(preferences.getBoolean("token-option", true));
-
+        nounknownCheckBox.setSelected(preferences.getBoolean("nounknown-option", true));
     }
 
     public String treeTaggerDirectory = "S:\\TP-Z2\\TAGGING\\TreeTagger\\bin\\tree-tagger.exe";
@@ -48,18 +54,39 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
     }
 
     public String getParameterFileEncoding(){
-        return (String)(encodingComboBox.getSelectedItem());
+        return (String)(parametersFileEncodingComboBox.getSelectedItem());
     }
 
+    public String getAbbreviationsFile(){
+        return abbFileTextField.getText();
+    }
+
+    public String getAbbreviationsFileEncoding(){
+        return (String)(abbFileEncodingComboBox.getSelectedItem());
+    }
+
+
     public String[] getOptions(){
-        if (lemmasCheckBox.isSelected() && postagsCheckBox.isSelected()){
-            return new String[] {"-token","-lemma","-sgml","-no-unknown"};
-        } else if (lemmasCheckBox.isSelected()){
-            return new String[] {"-lemma","-sgml","-no-unknown"};
-        } else if (postagsCheckBox.isSelected()){
-            return new String[] {"-token","-sgml","-no-unknown"};
+        // 08-12-2020, changed for issue #228
+        ArrayList<String> optionsList = new ArrayList<>();
+        optionsList.add("-sgml");
+        if (postagsCheckBox.isSelected()){
+            optionsList.add("-token");
         }
-        return new String[] {"-sgml","-no-unknown"};
+        if (lemmasCheckBox.isSelected()){
+            optionsList.add("-lemma");
+        }
+        if (nounknownCheckBox.isSelected()){
+            optionsList.add("-no-unknown");
+        }
+        String[] result = new String[optionsList.size()];
+        int i=0;
+        for (String s : optionsList){
+            result[i] = s;
+            i++;
+        }
+        //(String[]) optionsList.toArray();
+        return result;
     }
 
     /** This method is called from within the constructor to
@@ -71,30 +98,38 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        directoryPanel = new javax.swing.JPanel();
+        directoryLabel = new javax.swing.JLabel();
         directoryTextField = new javax.swing.JTextField();
         browseForDirectoryButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        parameterFilePanel = new javax.swing.JPanel();
+        parametersFileLabel = new javax.swing.JLabel();
         parametersFileTextField = new javax.swing.JTextField();
-        encodingComboBox = new javax.swing.JComboBox();
+        parametersFileEncodingComboBox = new javax.swing.JComboBox();
         browseForParametersFileButton = new javax.swing.JButton();
+        abbFilePanel = new javax.swing.JPanel();
+        abbFileLabel = new javax.swing.JLabel();
+        abbFileTextField = new javax.swing.JTextField();
+        abbFileEncodingComboBox = new javax.swing.JComboBox();
+        browseForAbbFileButton = new javax.swing.JButton();
         optionsPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         postagsCheckBox = new javax.swing.JCheckBox();
         lemmasCheckBox = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        nounknownCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Tree Tagger Parameters"));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        directoryPanel.setLayout(new javax.swing.BoxLayout(directoryPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel1.setText("Tree Tagger Directory: ");
-        jPanel1.add(jLabel1);
+        directoryLabel.setText("Tree Tagger Directory: ");
+        directoryPanel.add(directoryLabel);
 
-        directoryTextField.setPreferredSize(new java.awt.Dimension(450, 20));
-        jPanel1.add(directoryTextField);
+        directoryTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        directoryTextField.setPreferredSize(new java.awt.Dimension(300, 20));
+        directoryPanel.add(directoryTextField);
 
         browseForDirectoryButton.setText("Browse...");
         browseForDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,23 +137,25 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
                 browseForDirectoryButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(browseForDirectoryButton);
+        directoryPanel.add(browseForDirectoryButton);
 
-        add(jPanel1);
+        add(directoryPanel);
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        parameterFilePanel.setLayout(new javax.swing.BoxLayout(parameterFilePanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel2.setText("Parameters file: ");
-        jLabel2.setMaximumSize(new java.awt.Dimension(113, 14));
-        jLabel2.setMinimumSize(new java.awt.Dimension(113, 14));
-        jLabel2.setPreferredSize(new java.awt.Dimension(113, 14));
-        jPanel2.add(jLabel2);
+        parametersFileLabel.setText("Parameters file: ");
+        parametersFileLabel.setMaximumSize(new java.awt.Dimension(113, 14));
+        parametersFileLabel.setMinimumSize(new java.awt.Dimension(113, 14));
+        parametersFileLabel.setPreferredSize(new java.awt.Dimension(113, 14));
+        parameterFilePanel.add(parametersFileLabel);
 
-        parametersFileTextField.setPreferredSize(new java.awt.Dimension(450, 20));
-        jPanel2.add(parametersFileTextField);
+        parametersFileTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        parametersFileTextField.setPreferredSize(new java.awt.Dimension(300, 20));
+        parameterFilePanel.add(parametersFileTextField);
 
-        encodingComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "iso8859-1", "utf-8" }));
-        jPanel2.add(encodingComboBox);
+        parametersFileEncodingComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "utf-8", "iso8859-1" }));
+        parametersFileEncodingComboBox.setMaximumSize(new java.awt.Dimension(32767, 30));
+        parameterFilePanel.add(parametersFileEncodingComboBox);
 
         browseForParametersFileButton.setText("Browse...");
         browseForParametersFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -126,9 +163,35 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
                 browseForParametersFileButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(browseForParametersFileButton);
+        parameterFilePanel.add(browseForParametersFileButton);
 
-        add(jPanel2);
+        add(parameterFilePanel);
+
+        abbFilePanel.setLayout(new javax.swing.BoxLayout(abbFilePanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        abbFileLabel.setText("Abbreviations file: ");
+        abbFileLabel.setMaximumSize(new java.awt.Dimension(113, 14));
+        abbFileLabel.setMinimumSize(new java.awt.Dimension(113, 14));
+        abbFileLabel.setPreferredSize(new java.awt.Dimension(113, 14));
+        abbFilePanel.add(abbFileLabel);
+
+        abbFileTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        abbFileTextField.setPreferredSize(new java.awt.Dimension(300, 20));
+        abbFilePanel.add(abbFileTextField);
+
+        abbFileEncodingComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "utf-8", "iso8859-1" }));
+        abbFileEncodingComboBox.setMaximumSize(new java.awt.Dimension(32767, 30));
+        abbFilePanel.add(abbFileEncodingComboBox);
+
+        browseForAbbFileButton.setText("Browse...");
+        browseForAbbFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseForAbbFileButtonActionPerformed(evt);
+            }
+        });
+        abbFilePanel.add(browseForAbbFileButton);
+
+        add(abbFilePanel);
 
         optionsPanel.setLayout(new javax.swing.BoxLayout(optionsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -145,6 +208,14 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         lemmasCheckBox.setSelected(true);
         lemmasCheckBox.setText("Lemmas");
         optionsPanel.add(lemmasCheckBox);
+
+        jLabel1.setText("Further options: ");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        optionsPanel.add(jLabel1);
+
+        nounknownCheckBox.setSelected(true);
+        nounknownCheckBox.setText("no unknown");
+        optionsPanel.add(nounknownCheckBox);
 
         add(optionsPanel);
     }// </editor-fold>//GEN-END:initComponents
@@ -163,7 +234,7 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
     private void browseForParametersFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForParametersFileButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Locate a TreeTagger parameters file");
-        jfc.setFileFilter(new ParameterFileFilter("par", "Tree Tagger Parameter Files (*.par)"));
+        jfc.setFileFilter(new ParameterFileFilter("par", "TreeTagger Parameter Files (*.par)"));
         jfc.setCurrentDirectory(new File(directoryTextField.getText()));
         int a = jfc.showOpenDialog(this);
         if (a == JFileChooser.APPROVE_OPTION){
@@ -171,21 +242,45 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_browseForParametersFileButtonActionPerformed
 
+    private void browseForAbbFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseForAbbFileButtonActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Locate a TreeTagger abbreviations file");
+        // abbreviation file(s) don't seem to have a suffix??
+        //jfc.setFileFilter(new ParameterFileFilter("abbreviations", "TreeTagger Abbreviations file (*-abbreviations)"));
+        jfc.setCurrentDirectory(new File(directoryTextField.getText()));
+        int a = jfc.showOpenDialog(this);
+        if (a == JFileChooser.APPROVE_OPTION){
+            abbFileTextField.setText(jfc.getSelectedFile().getAbsolutePath());
+        }
+
+    }//GEN-LAST:event_browseForAbbFileButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox abbFileEncodingComboBox;
+    private javax.swing.JLabel abbFileLabel;
+    private javax.swing.JPanel abbFilePanel;
+    private javax.swing.JTextField abbFileTextField;
+    private javax.swing.JButton browseForAbbFileButton;
     private javax.swing.JButton browseForDirectoryButton;
     private javax.swing.JButton browseForParametersFileButton;
+    private javax.swing.JLabel directoryLabel;
+    private javax.swing.JPanel directoryPanel;
     private javax.swing.JTextField directoryTextField;
-    private javax.swing.JComboBox encodingComboBox;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JCheckBox lemmasCheckBox;
+    private javax.swing.JCheckBox nounknownCheckBox;
     private javax.swing.JPanel optionsPanel;
+    private javax.swing.JPanel parameterFilePanel;
+    private javax.swing.JComboBox parametersFileEncodingComboBox;
+    private javax.swing.JLabel parametersFileLabel;
     private javax.swing.JTextField parametersFileTextField;
     private javax.swing.JCheckBox postagsCheckBox;
     // End of variables declaration//GEN-END:variables
+
+    public void hideOptionsPanel() {
+        this.optionsPanel.setVisible(false);
+    }
 
 }

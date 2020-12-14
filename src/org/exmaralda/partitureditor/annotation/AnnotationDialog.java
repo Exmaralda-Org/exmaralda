@@ -18,7 +18,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -50,7 +53,15 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     public AnnotationDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        DefaultComboBoxModel cbm = new DefaultComboBoxModel();
+        for (String[] s : AnnotationSpecification.BUILT_IN_ANNOTATION_SPECIFICATIONS){
+            cbm.addElement(s[0]);
+        }
+        internalAnnotationSpecificationCombBox.setModel(cbm);
+        
         ActionListener actionListener2 = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 gotoNextSearchResult();
             }
@@ -58,6 +69,13 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         };
         KeyStroke stroke =  KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         getRootPane().registerKeyboardAction(actionListener2, stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
+        
+        try {
+            loadInternal();
+        } catch (JDOMException | IOException ex) {
+            Logger.getLogger(AnnotationDialog.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error reading internal specification:\n" + ex);            
+        }
     }
 
     private void gotoNextSearchResult() {
@@ -78,11 +96,8 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
             try {
                 File f = new File(path);
                 readSpecification(f);
-            } catch (JDOMException ex) {
-                ex.printStackTrace();
-                settings.put("LAST-ANNOTATION-FILE", "");
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (JDOMException | IOException ex) {
+                Logger.getLogger(AnnotationDialog.class.getName()).log(Level.SEVERE, null, ex);
                 settings.put("LAST-ANNOTATION-FILE", "");
             }
         }
@@ -155,61 +170,95 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
 
         topPanel = new javax.swing.JPanel();
         annotationSpecificationPanel = new javax.swing.JPanel();
+        openExternalPanel = new javax.swing.JPanel();
         openAnnotationSpecificationButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        openInternalPanel = new javax.swing.JPanel();
+        internalAnnotationSpecificationCombBox = new javax.swing.JComboBox<>();
+        openInternalButton = new javax.swing.JButton();
+        filenamePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         currentFileLabel = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
+        autoJumpPanel = new javax.swing.JPanel();
         autoJumpCheckBox = new javax.swing.JCheckBox();
         annotationSetsTabbedPane = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        descriptionScrollPane = new javax.swing.JScrollPane();
         descriptionEditorPane = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Annotation Panel");
+        setPreferredSize(new java.awt.Dimension(450, 610));
 
         topPanel.setLayout(new java.awt.BorderLayout());
 
         openAnnotationSpecificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif"))); // NOI18N
-        openAnnotationSpecificationButton.setText("Open...");
+        openAnnotationSpecificationButton.setText("Open specification...");
         openAnnotationSpecificationButton.setToolTipText("Open an annotation specification file");
         openAnnotationSpecificationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openAnnotationSpecificationButtonActionPerformed(evt);
             }
         });
-        annotationSpecificationPanel.add(openAnnotationSpecificationButton);
+        openExternalPanel.add(openAnnotationSpecificationButton);
 
-        topPanel.add(annotationSpecificationPanel, java.awt.BorderLayout.PAGE_START);
+        annotationSpecificationPanel.add(openExternalPanel);
+
+        openInternalPanel.setLayout(new javax.swing.BoxLayout(openInternalPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        internalAnnotationSpecificationCombBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        internalAnnotationSpecificationCombBox.setToolTipText("Built-in annotation specifications");
+        internalAnnotationSpecificationCombBox.setMinimumSize(new java.awt.Dimension(150, 33));
+        internalAnnotationSpecificationCombBox.setPreferredSize(new java.awt.Dimension(150, 33));
+        internalAnnotationSpecificationCombBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                internalAnnotationSpecificationCombBoxActionPerformed(evt);
+            }
+        });
+        openInternalPanel.add(internalAnnotationSpecificationCombBox);
+
+        openInternalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/document-open.png"))); // NOI18N
+        openInternalButton.setToolTipText("Load built-in annotation specification");
+        openInternalButton.setMaximumSize(new java.awt.Dimension(49, 33));
+        openInternalButton.setMinimumSize(new java.awt.Dimension(49, 33));
+        openInternalButton.setPreferredSize(new java.awt.Dimension(49, 33));
+        openInternalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openInternalButtonActionPerformed(evt);
+            }
+        });
+        openInternalPanel.add(openInternalButton);
+
+        annotationSpecificationPanel.add(openInternalPanel);
+
+        topPanel.add(annotationSpecificationPanel, java.awt.BorderLayout.CENTER);
 
         jLabel1.setText("Current File: ");
-        jPanel1.add(jLabel1);
+        filenamePanel.add(jLabel1);
 
         currentFileLabel.setForeground(java.awt.SystemColor.activeCaption);
         currentFileLabel.setText("none");
-        jPanel1.add(currentFileLabel);
+        filenamePanel.add(currentFileLabel);
 
-        topPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
+        topPanel.add(filenamePanel, java.awt.BorderLayout.SOUTH);
 
         getContentPane().add(topPanel, java.awt.BorderLayout.NORTH);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
         autoJumpCheckBox.setText("Auto jump");
-        jPanel3.add(autoJumpCheckBox);
+        autoJumpPanel.add(autoJumpCheckBox);
 
-        jPanel2.add(jPanel3, java.awt.BorderLayout.SOUTH);
+        mainPanel.add(autoJumpPanel, java.awt.BorderLayout.SOUTH);
 
         annotationSetsTabbedPane.setPreferredSize(new java.awt.Dimension(200, 400));
-        jPanel2.add(annotationSetsTabbedPane, java.awt.BorderLayout.CENTER);
+        mainPanel.add(annotationSetsTabbedPane, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 100));
-        jScrollPane1.setViewportView(descriptionEditorPane);
+        descriptionScrollPane.setPreferredSize(new java.awt.Dimension(250, 100));
+        descriptionScrollPane.setViewportView(descriptionEditorPane);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(descriptionScrollPane, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -231,23 +280,41 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
                     java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(ea.getPreferencesNode());
                     settings.put("LAST-ANNOTATION-FILE", fc.getSelectedFile().getAbsolutePath());
                 }
-            } catch (JDOMException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
-            } catch (IOException ex) {
+            } catch (JDOMException | IOException ex) {
+                Logger.getLogger(AnnotationDialog.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
             }
         }
     }//GEN-LAST:event_openAnnotationSpecificationButtonActionPerformed
+
+    private void internalAnnotationSpecificationCombBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_internalAnnotationSpecificationCombBoxActionPerformed
+        try {
+            loadInternal();
+        } catch (JDOMException | IOException ex) {
+            Logger.getLogger(AnnotationDialog.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error reading internal specification:\n" + ex);
+        }
+    }//GEN-LAST:event_internalAnnotationSpecificationCombBoxActionPerformed
+
+    private void openInternalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openInternalButtonActionPerformed
+        try {
+            this.loadInternal();
+        } catch (JDOMException | IOException ex) {
+            Logger.getLogger(AnnotationDialog.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error reading internal specification:\n" + ex);
+        }
+    }//GEN-LAST:event_openInternalButtonActionPerformed
 
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 AnnotationDialog dialog = new AnnotationDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
@@ -261,21 +328,27 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     private javax.swing.JTabbedPane annotationSetsTabbedPane;
     private javax.swing.JPanel annotationSpecificationPanel;
     private javax.swing.JCheckBox autoJumpCheckBox;
+    private javax.swing.JPanel autoJumpPanel;
     private javax.swing.JLabel currentFileLabel;
     private javax.swing.JEditorPane descriptionEditorPane;
+    private javax.swing.JScrollPane descriptionScrollPane;
+    private javax.swing.JPanel filenamePanel;
+    private javax.swing.JComboBox<String> internalAnnotationSpecificationCombBox;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JButton openAnnotationSpecificationButton;
+    private javax.swing.JPanel openExternalPanel;
+    private javax.swing.JButton openInternalButton;
+    private javax.swing.JPanel openInternalPanel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void beforeSelect(JCSelectEvent arg0) {
 
     }
 
+    @Override
     public void select(JCSelectEvent evt) {
         if (!isShowing()) return;
         selectionStartRow = Math.min(evt.getStartRow(), evt.getEndRow());
@@ -309,26 +382,42 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
 
     }
 
+    @Override
     public void afterSelect(JCSelectEvent arg0) {
 
     }
 
     private void readSpecification(File selectedFile) throws JDOMException, IOException {
         annotationSpecification.read(selectedFile);
+        setupSpecification();
+        currentFileLabel.setText(selectedFile.getName());
+        currentFileLabel.setToolTipText(selectedFile.getAbsolutePath());        
+    }
+
+    private void loadInternal() throws JDOMException, IOException {
+        int index = internalAnnotationSpecificationCombBox.getSelectedIndex();
+        String name = AnnotationSpecification.BUILT_IN_ANNOTATION_SPECIFICATIONS[index][0];
+        String path = AnnotationSpecification.BUILT_IN_ANNOTATION_SPECIFICATIONS[index][1];
+        annotationSpecification.read(path);
+        setupSpecification();
+        currentFileLabel.setText(name);
+        currentFileLabel.setToolTipText(path);        
+    }
+
+    private void setupSpecification() {
         annotationSetsTabbedPane.removeAll();
         for (String category : annotationSpecification.exmaraldaTierCategories){
             AnnotationSetPanel asp = new AnnotationSetPanel(annotationSpecification.getAnnotationSet(category));
             asp.setAnnotationDialog(this);
             annotationSetsTabbedPane.add(category, asp);
         }
-        currentFileLabel.setText(selectedFile.getName());
-        currentFileLabel.setToolTipText(selectedFile.getAbsolutePath());
         int count=0;
         for (String shortcut : annotationSpecification.keyboardShortcuts.keySet()){
             count++;
             final String tag = annotationSpecification.keyboardShortcuts.get(shortcut);
 
             AbstractAction action = new AbstractAction(){
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     //System.out.println("ACTION " + tag);
                     processTag(tag);
@@ -344,7 +433,6 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
 
 
         }
-
     }
 
 }

@@ -43,7 +43,9 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Armenian.xml",
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Diacritics.xml",
                                                        "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/SyncWriterConversion.xml",
-                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/MiscSymbols.xml"
+                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/MiscSymbols.xml",
+                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Emojis_Windows.xml",
+                                                       "/org/exmaralda/partitureditor/unicodeKeyboard/Charsets/Emojis_Mac.xml"
                                                        };
     
     private static final String[] BUILT_IN_CHARACTER_SET_NAMES = {"HIAT", 
@@ -70,7 +72,9 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
                                                             "Armenian Alphabet",
                                                             "Combining Diacritics",
                                                             "SyncWriter Conversion",
-                                                            "Miscellaneous Symbols"
+                                                            "Miscellaneous Symbols",
+                                                            "Emojis (Windows)",
+                                                            "Emojis (Mac)"
                                                            };
     
     private static String[] EXTERNAL_CHARACTER_SETS;
@@ -98,7 +102,7 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
         }
         
         EXTERNAL_CHARACTER_SETS = externalCharsets;
-        Vector externalCharsetNames = new Vector();
+        List externalCharsetNames = new ArrayList();
         for (String externalCharset : externalCharsets) {
             filename = externalCharset;
             try{
@@ -113,7 +117,7 @@ public class UnicodeKeyboardPanel extends javax.swing.JPanel implements javax.sw
         ALL_CHARACTER_SET_NAMES = new String[BUILT_IN_CHARACTER_SET_NAMES.length + externalCharsetNames.size()];
         System.arraycopy(BUILT_IN_CHARACTER_SET_NAMES, 0, ALL_CHARACTER_SET_NAMES, 0, BUILT_IN_CHARACTER_SET_NAMES.length);
         for (int pos=0; pos<externalCharsetNames.size(); pos++){
-            ALL_CHARACTER_SET_NAMES[pos + BUILT_IN_CHARACTER_SET_NAMES.length] = (String)(externalCharsetNames.elementAt(pos));
+            ALL_CHARACTER_SET_NAMES[pos + BUILT_IN_CHARACTER_SET_NAMES.length] = (String)(externalCharsetNames.get(pos));
         }
         initComponents ();
         

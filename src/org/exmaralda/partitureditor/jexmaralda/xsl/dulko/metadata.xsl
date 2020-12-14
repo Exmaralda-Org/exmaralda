@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- metadata.xsl -->
-<!-- Version 3.0 -->
-<!-- Andreas Nolda 2020-10-18 -->
+<!-- Version 3.1 -->
+<!-- Andreas Nolda 2020-12-07 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -198,7 +198,7 @@
         <xsl:variable name="files"
                       select="collection(concat(resolve-uri($corpus,base-uri()),
                                                 '?select=*.exb;recurse=yes'))"/>
-        <xsl:variable name="numbers" as="xs:double *">
+        <xsl:variable name="numbers" as="xs:integer*">
           <xsl:for-each select="$files">
             <xsl:sequence select="count(/basic-transcription/basic-body/tier[@category=$word]/event)"/>
           </xsl:for-each>

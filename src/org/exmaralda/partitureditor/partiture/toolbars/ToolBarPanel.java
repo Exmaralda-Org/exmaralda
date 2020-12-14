@@ -17,7 +17,7 @@ import org.exmaralda.partitureditor.partiture.*;
 public class ToolBarPanel extends javax.swing.JPanel {
     
     /** the file tool bar */
-    private final JToolBar fileToolBar;
+    public final JToolBar fileToolBar;
     /** the tier tool bar */
     private final JToolBar tierToolBar;
     /** the event tool bar */

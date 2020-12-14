@@ -60,77 +60,42 @@ public class TransformationAction extends org.exmaralda.partitureditor.partiture
             transformationDialog.approved=false;
             transformationDialog.setVisible(true);
             if (transformationDialog.approved){
-                transform();
+                BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
+                String[] parameters = transformationDialog.getParameters();
+                String[][] xslParameters = transformationDialog.getXSLParameters();
+                AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);
+                transform(transcription, segmentation, parameters, xslParameters);
             }
-        } catch (IOException | ParserConfigurationException | TransformerException | FSMException | JexmaraldaException | JDOMException | SAXException ex) {
+        } catch (IOException | ParserConfigurationException | FSMException | JexmaraldaException | JDOMException | SAXException ex) {
             Logger.getLogger(TransformationAction.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(table, "Transformation failed: \n" + ex.getLocalizedMessage());
         }
     }
 
-    public void transform() throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException{
-        BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
+    public void transform(BasicTranscription transcription, AbstractSegmentation segmentation, String[] parameters, String[][] xslParameters) throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, JexmaraldaException{
+        /*BasicTranscription transcription = table.getModel().getTranscription().makeCopy();
         String[] parameters = transformationDialog.getParameters();
-        AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);
+        String[][] xslParameters = transformationDialog.getXSLParameters();
+        AbstractSegmentation segmentation = table.getAbstractSegmentation(parameters[1]);*/
         
         // new 01-12-2020, for DULKO, issue #229
-        EXMARaLDATransformer exmaraldaTransformer = new EXMARaLDATransformer(transcription, segmentation, parameters);
-        String resultString = exmaraldaTransformer.transform();
-        
-        
-        /*Document baseDocument = null;
-        if (parameters[0].startsWith("basic")){
-            baseDocument = IOUtilities.readDocumentFromString(transcription.toXML());
-        } else if ((parameters[0].startsWith("segmented")) || (parameters[0].startsWith("list"))){
-            SegmentedTranscription st = null;
-            if (parameters[1].equals("NONE")){
-                st = transcription.toSegmentedTranscription();
-            } else {
-                AbstractSegmentation as = table.getAbstractSegmentation(parameters[1]);
-                st = as.BasicToSegmented(transcription);
+        EXMARaLDATransformer exmaraldaTransformer = new EXMARaLDATransformer(transcription, segmentation, parameters, xslParameters);
+        String resultString;
+        try {
+            resultString = exmaraldaTransformer.transform();
+        } catch (TransformerException ex) {
+            Logger.getLogger(TransformationAction.class.getName()).log(Level.SEVERE, null, ex);
+            String message = "<html><b>Transformation failed: </b><br/>" + ex.getLocalizedMessage();
+            if (!(exmaraldaTransformer.getWarnings().isEmpty())){
+                message+="<br/><br/><b>Messages:</b><br/>";
+                for (String w : exmaraldaTransformer.getWarnings()){
+                    message+=w + "<br/>";
+                }
             }
-            if (parameters[0].startsWith("segmented")){
-                baseDocument = IOUtilities.readDocumentFromString(st.toXML());
-            } else {
-                ListTranscription lt = null;
-                int listConversionType = 0;
-                if ((parameters[1].equals("HIAT")) && (parameters[2].equals("HIAT:u"))){
-                    listConversionType = 1;
-                }
-                if ((parameters[1].equals("CHAT")) && (parameters[2].equals("CHAT:u"))){
-                    listConversionType = 3;
-                }
-                if ((parameters[1].equals("GAT")) && (parameters[2].equals("GAT:pe"))){
-                    listConversionType = 3;
-                }
-                lt = st.toListTranscription(new SegmentedToListInfo(st, listConversionType));
-                lt.getBody().sort();
-                baseDocument = IOUtilities.readDocumentFromString(lt.toXML());
-            }
-        } else if (parameters[0].startsWith("Modena")){
-            File temp = File.createTempFile("modena_temp", "xml");
-            temp.deleteOnExit();
-            new TEIConverter("/org/exmaralda/partitureditor/jexmaralda/xsl/EXMARaLDA2TEI_Modena.xsl").writeModenaTEIToFile(transcription, temp.getAbsolutePath());
-            baseDocument = IOUtilities.readDocumentFromLocalFile(temp.getAbsolutePath());
-        } else if (parameters[0].startsWith("TEI")){
-            File temp = File.createTempFile("tei_temp", "xml");
-            temp.deleteOnExit();
-            new TEIConverter().writeGenericTEIToFile(transcription, temp.getAbsolutePath());
-            baseDocument = IOUtilities.readDocumentFromLocalFile(temp.getAbsolutePath());
+            message+="</html>";
+            JOptionPane.showMessageDialog(table, message, "Transformation Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-
-        String resultString = "";
-        if (parameters[3].length()>0){
-            StylesheetFactory sf = new StylesheetFactory(true);
-            String sourceString = IOUtilities.documentToString(baseDocument);
-            if (parameters[3].startsWith("/")){
-                resultString = sf.applyInternalStylesheetToString(parameters[3], sourceString);
-            } else {
-                resultString = sf.applyExternalStylesheetToString(parameters[3], sourceString);
-            }
-        } else {
-            resultString = IOUtilities.documentToString(baseDocument);
-        }*/
 
         if (parameters[4].equals("self-transformation")){
             table.checkSave();

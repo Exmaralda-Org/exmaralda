@@ -2,6 +2,22 @@
 <transformation-scenarios>
 
     <transformation-scenario>
+        <name>Test with parameters</name>
+        <description>Test new feature for passing parameters to the stylesheet</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit></list-unit>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/TestParameters.xsl</stylesheet>
+        <output suffix="html"/>
+        <parameters>
+            <parameter name="PARAMETER_1">Tick</parameter>
+            <parameter name="PARAMETER_2">Trick</parameter>
+            <parameter name="PARAMETER_3">Track</parameter>
+        </parameters>
+    </transformation-scenario>
+
+
+    <transformation-scenario>
         <name>HTML Column notation transcript</name>
         <description>A visualisation of the basic transcription in column notation</description>
         <input type="basic-transcription"/>

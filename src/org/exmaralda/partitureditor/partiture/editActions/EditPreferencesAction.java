@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.EditPreferencesDialog;
 import org.exmaralda.partitureditor.partiture.*;
+import org.exmaralda.tagging.TaggingProfiles;
 
 /**
  *
@@ -24,6 +25,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         super("Preferences...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editPreferencesAction!");
         table.commitEdit(true);
@@ -38,16 +40,18 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         if (table.parent instanceof org.exmaralda.common.ExmaraldaApplication){
             app = (org.exmaralda.common.ExmaraldaApplication)table.parent;
         }
-        Boolean showSFB538Menu = new Boolean(false);
-        Boolean showSinMenu = new Boolean(false);
-        Boolean showODTSTDMenu = new Boolean(false);
-        Boolean showInelMenu = new Boolean(false);
+        Boolean showSFB538Menu = false;
+        Boolean showSinMenu = false;
+        Boolean showODTSTDMenu = false;
+        Boolean showInelMenu = false;
+        Boolean showTransformationDropdown = false;
         if (app instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)app;
-            showSFB538Menu = new Boolean(pe.menuBar.sfb538Menu.isShowing());
-            showSinMenu = new Boolean(pe.menuBar.sinMenu.isShowing());
-            showODTSTDMenu = new Boolean(pe.menuBar.odtstdMenu.isShowing());
-            showInelMenu = new Boolean(pe.menuBar.inelMenu.isShowing());
+            showSFB538Menu = pe.menuBar.sfb538Menu.isShowing();
+            showSinMenu = pe.menuBar.sinMenu.isShowing();
+            showODTSTDMenu = pe.menuBar.odtstdMenu.isShowing();
+            showInelMenu = pe.menuBar.inelMenu.isShowing();
+            showTransformationDropdown = pe.getTransformationComboBox().isShowing();
         }
         
         String oldMediaPlayer = mediaPlayer;
@@ -59,7 +63,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             table.transcription2FormattableStylesheet,
                             table.freeStylesheetVisualisationStylesheet,
                             table.HIATUtteranceList2HTMLStylesheet,
-                            new Boolean(table.autoSave).toString(),
+                            Boolean.toString(table.autoSave),
                             table.autoSaveThread.FILENAME,
                             table.autoSaveThread.PATH,
                             Integer.toString(table.autoSaveThread.SAVE_INTERVAL/60000),
@@ -69,22 +73,30 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             table.chatFSM,
                             table.language, 
                             mediaPlayer,
-                            new Boolean(table.underlineWithDiacritics).toString(),
+                            Boolean.toString(table.underlineWithDiacritics),
                             table.underlineCategory,
                             table.preferredSegmentation,
                             showSFB538Menu.toString(),
                             showSinMenu.toString(),
                             showODTSTDMenu.toString(),
                             showInelMenu.toString(),
-                            new Boolean(table.AUTO_ANCHOR).toString(),
-                            new Boolean(table.AUTO_REMOVE_UNUSED_TLI).toString(),
+                            Boolean.toString(table.AUTO_ANCHOR),
+                            Boolean.toString(table.AUTO_REMOVE_UNUSED_TLI),
                             // pause notation
                             table.pausePrefix,
                             table.pauseSuffix,
                             Integer.toString(table.pauseDigits),
                             Boolean.toString(table.pauseDecimalComma),
                             Boolean.toString(table.undoEnabled),
-                            new Boolean(table.getModel().INTERPOLATE_WHEN_SPLITTING).toString(),
+                            Boolean.toString(table.getModel().INTERPOLATE_WHEN_SPLITTING),
+                            // TreeTagger options need not be set because the panel sets them
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            // show transformation dropdown, issue #230
+                            Boolean.toString(showTransformationDropdown)
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -110,7 +122,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.HIATUtteranceList2HTMLStylesheet = newValues[6];
             
             table.stopAutoSaveThread();
-            table.autoSave = new Boolean(newValues[7]).booleanValue();
+            table.autoSave = Boolean.valueOf(newValues[7]);
             table.autoSaveThread.FILENAME = newValues[8];
             table.autoSaveThread.PATH = newValues[9];
             table.autoSaveThread.setSaveInterval(Integer.parseInt(newValues[10])*60);
@@ -130,7 +142,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             
             System.out.println("Changed player type settings to " + newValues[16]);
             
-            table.underlineWithDiacritics = new Boolean(newValues[17]).booleanValue();
+            table.underlineWithDiacritics = Boolean.parseBoolean(newValues[17]);
             table.underlineCategory = newValues[18];
 
             table.preferredSegmentation = newValues[19];
@@ -142,14 +154,16 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    
                    pe.menuBar.transcriptionMenu.insertHIATUtteranceNumbersMenuItem.setVisible(table.preferredSegmentation.equals("HIAT"));
 
-                   pe.menuBar.sfb538Menu.setVisible(new Boolean(newValues[20]).booleanValue());
-                   pe.menuBar.sinMenu.setVisible(new Boolean(newValues[21]).booleanValue());
-                   pe.menuBar.odtstdMenu.setVisible(new Boolean(newValues[22]).booleanValue());
-                   pe.menuBar.inelMenu.setVisible(new Boolean(newValues[23]).booleanValue());
+                   pe.menuBar.sfb538Menu.setVisible(Boolean.parseBoolean(newValues[20]));
+                   pe.menuBar.sinMenu.setVisible(Boolean.parseBoolean(newValues[21]));
+                   pe.menuBar.odtstdMenu.setVisible(Boolean.parseBoolean(newValues[22]));
+                   pe.menuBar.inelMenu.setVisible(Boolean.parseBoolean(newValues[23]));
+                   
+                   pe.getTransformationComboBox().setVisible(Boolean.parseBoolean(newValues[37]));
             }
 
-            table.AUTO_ANCHOR = new Boolean(newValues[24]).booleanValue();
-            table.AUTO_REMOVE_UNUSED_TLI = new Boolean(newValues[25]).booleanValue();
+            table.AUTO_ANCHOR = Boolean.parseBoolean(newValues[24]);
+            table.AUTO_REMOVE_UNUSED_TLI = Boolean.parseBoolean(newValues[25]);
 
             // pause notation
             table.pausePrefix = newValues[26];
@@ -158,7 +172,11 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.pauseDecimalComma = Boolean.parseBoolean(newValues[29]);
             table.undoEnabled = Boolean.parseBoolean(newValues[30]);
             table.undoAction.setEnabled(table.undoAction.isEnabled() && table.undoEnabled);
-            table.getModel().INTERPOLATE_WHEN_SPLITTING = new Boolean(newValues[31]).booleanValue();
+            table.getModel().INTERPOLATE_WHEN_SPLITTING = Boolean.parseBoolean(newValues[31]);
+            
+            // new 02-12-2020, issue #228, changed 08-12-2020, issue #228
+            //TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], null);
+            TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], newValues[35], newValues[36], dialog.getTaggingOptions());
             
             table.status("Preferences changed");
 

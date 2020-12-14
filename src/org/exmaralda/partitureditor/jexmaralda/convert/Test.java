@@ -7,10 +7,14 @@ package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -22,14 +26,32 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        new Test().doit();
+        //new Test().doit();
+        StylesheetFactory sf = new StylesheetFactory(true);
         try {
+            String s = sf.applyExternalStylesheetToExternalXMLFile("C:\\Users\\thomas.schmidt\\Desktop\\Terminate.xsl", "C:\\Users\\thomas.schmidt\\Desktop\\out3.xml");
+        } catch (SAXException ex) {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SAXException");
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("TransformerException");
+            List<String> warnings = sf.getWarnings();
+            for (String w : warnings){
+                System.out.println(w);
+            }
+        }
+        try {
+            
+            
             /*TranscriberConverter tc = new TranscriberConverter();
             BasicTranscription bt = tc.readTranscriberFromFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3 (2).trs");
             bt.writeXMLToFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Slovene\\Gordan_NZosnmdopr-jg0909141900_s3.exb", "none");*/
-            BasicTranscription bt = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File("D:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK\\FOLK_E_00069_SE_01_T_01_DF_01.fln"));
-            SubtitleConverter sc = new SubtitleConverter(bt);
-            sc.writeVTT(new File("D:\\WebApplication3\\web\\data\\FOLK_E_00069_SE_01_T_01.vtt"));
+            //BasicTranscription bt = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File("D:\\AGD-DATA\\dgd2_data\\transcripts\\FOLK\\FOLK_E_00069_SE_01_T_01_DF_01.fln"));
+            //SubtitleConverter sc = new SubtitleConverter(bt);
+            //sc.writeVTT(new File("D:\\WebApplication3\\web\\data\\FOLK_E_00069_SE_01_T_01.vtt"));
             //try {
                 //CHATConverter cc = new CHATConverter(new File("F:\\Dropbox\\DEBUG\\issue99\\liean11a.1.cha"));
                 //CHATConverter cc = new CHATConverter(new File("T:\\TP-Z2\\DATEN\\EXMARaLDA_DemoKorpus\\EnglishTranslator\\export\\EnglishTranslator.cha"));

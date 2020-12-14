@@ -21,7 +21,7 @@ public class UnicodeKey {
     }
     
     public String toXML(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<key>");
             sb.append("<content>");
                 sb.append(content);

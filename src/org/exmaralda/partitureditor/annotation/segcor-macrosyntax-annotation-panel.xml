@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<annotation-specification>
+<annotation-set exmaralda-tier-category="macrosyntax">
+<category name="iu">
+  <tag name="full" keyboard-shortcut="alt 1"/> 
+  <description>Vollständige IU, inklusive eingebettete und den Diskurs unterbrechende IUs</description> 
+</category>
+<category name="iu">
+  <tag name="emb" keyboard-shortcut="alt 2"/> 
+  <description>Eingebettete IU, die eine Redewiedergabe darstellt und Teil einer größeren IU ist, weil sie ein notwendiges Komplement (in Form einer Folgestruktur) der Vorgängeräußerung da, Selbstgespräche, wenn sie dem Muster der direkten Redewiedergabe folgt.
+</description> 
+</category>
+<category name="rest">
+ 	 <tag name="inc" keyboard-shortcut="alt 3"/> 
+ 	 <desctiption>bei Abbrüchen (syntaktische Strukturen werden, anders als bei Reparaturen, nicht nochmal im fortlaufenden Diskurs aufgenommen und repariert)
+</desctiption> 
+</category>
+<category name="rest">
+ 	 <tag name="dm" keyboard-shortcut="alt 4"/> 
+ 	 <desctiption>Diskursmarker können Teil einer IU sein, beispielsweise in Form von In-Nuklei. Treten sie jedoch alleine auf, beispielsweise wenn ein Sprecher spricht und ein zweiter Sprecher stets ein ja überlappen oder allein stehend äußert, so hat diese Partikel die Funktion den Diskurs zu gliedern und dem Sprecher anzuzeigen, dass er keinen Turnwechsel anstrebt. Wichtig ist, dass Diskursmarker(-partikel) über keine eigene Semantik verfügen und daher auch keine illokutiven Akt konstituieren können
+</desctiption>
+</category>
+<category name="rest">
+	  <tag name="int" keyboard-shortcut="alt 5"/> 
+	  <description>Der Sprecher unterbricht die vorangehende IU und führt sie nach der Unterbrechung fort. 
+</description> 
+</category>
+<category name="rest">
+  	<tag name="amb" keyboard-shortcut="alt 6"/> 
+	  <description>Der Tag AMB wird vergeben, wenn unklar ist, welcher Tag einer Struktur zugeordnet werden muss.</description> 
+</category>
+<category name="rest">
+  	<tag name="non" keyboard-shortcut="alt 7"/> 
+	  <description>Der Tag NON wird bei nonverbalen Gesprächselementen wie Lachen, Schnauben, Schniefen, Ein- und Ausatmen notiert, wenn solch ein Element separat auftritt
+</description> 
+</category>
+<category name="rest">
+<tag name="undef" keyboard-shortcut="alt 8"/> 
+<description>Der Tag undef wird dann vergeben, wenn Phänomene überhaupt nicht zugeordnet werden können, wie z.B. ein einzelnes Wort nach einer Maskierung (ohne Zusammenhang) oder wenn etwas unverständlich ist und dadurch kein illokutiver Zweck erkennbar ist </description> 
+</category>
+<category name="rest">
+  <tag name="exp" keyboard-shortcut="alt 9"/> 
+  <description>Der Tag EXP wird vergeben, wenn paradigmatische Ersetzungen (Muster der Reparatur) außerhalb der rechten Satzklammer stattfinden, die prosodisch abgesetzt sind (eigentlich bereits syntaktischer Abschlusspunkt erreicht)
+</description> 
+</category>
+<category name="rest">
+  <tag name="col1" keyboard-shortcut="alt 10"/> 
+  <description>Wenn ein Turn kollaborativ von zwei Sprechern durchgeführt und  zum Ende gebracht wird. Erster Teil des kollaborativen Turns.
+</description> 
+</category>
+<category name="rest">
+  <tag name="col2" keyboard-shortcut="alt 11"/> 
+  <description>Wenn ein Turn kollaborativ von zwei Sprechern durchgeführt und  zum Ende gebracht wird. Zweiter Teil des kollaborativen Turns.</description> 
+</category>
+<category name="rest">
+  <tag name="part" keyboard-shortcut="alt 12"/> 
+  <description>Partikeln sind unflektierbare Wörter, die formal zur Wortart Partikel gezählt werden. Es gibt Gliederungs-, Grad- und Modalpartikeln. 
+Es werden Partikeln mit dem Tag PART ausgezeichnet, die nicht über eine gesprächssteuernde Funktion verfügen (s.o. DM). 
+</description> 
+</category>
+</annotation-set>
+</annotation-specification>

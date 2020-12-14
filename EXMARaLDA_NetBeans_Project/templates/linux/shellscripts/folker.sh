@@ -14,26 +14,31 @@ export DYLD_LIBRARY_PATH
 # if [ -z "$JAVA_HOME" ]; then
 #     JAVA_CMD="java"
 # fi
-JAVA_CMD="$WORKINGDIR/java-8-oracle/bin/java"
+JAVA_CMD="$WORKINGDIR/adoptopenjdk-11-hotspot-amd64/bin/java"
 
 
-#CP_JAVA=$WORKINGDIR/lib/ipsk.jar:$WORKINGDIR/lib/QTJava.zip:$WORKINGDIR/lib/AppleJavaExtensions.jar:$WORKINGDIR/lib/xercesImpl.jar:$WORKINGDIR/lib/xml-apis.jar:$WORKINGDIR/lib/xmlParserAPIs.jar:$WORKINGDIR/lib/jaxen-1.1.1.jar:$WORKINGDIR/lib/jmf.jar:$WORKINGDIR/lib/fobs4jmf.jar:$WORKINGDIR/lib/EXMARaLDA.jar:$WORKINGDIR/lib/jl1.0.jar:$WORKINGDIR/lib/mp3spi1.9.4.jar:$WORKINGDIR/lib/tritonus_share.jar:$WORKINGDIR/lib/basicplayer3.0.jar:$WORKINGDIR/lib/jctable.jar:$WORKINGDIR/lib/commons-logging-1.1.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/saxon8.jar:$WORKINGDIR/lib/jdom.jar
+JAVA_CMD="$WORKINGDIR/adoptopenjdk-11-hotspot-amd64/bin/java"
 
 # BASE
 CP_JAVA_1=$WORKINGDIR/lib/EXMARaLDA.jar:$WORKINGDIR/lib/jctable.jar
+
 # XML
-CP_JAVA_2=$WORKINGDIR/lib/jdom.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/xercesImpl.jar:$WORKINGDIR/lib/xml-apis.jar:$WORKINGDIR/lib/saxon9he.jar:$WORKINGDIR/lib/serializer.jar:$WORKINGDIR/lib/jaxen-1.1.6.jar
-# MAC OS
-CP_JAVA_3=$WORKINGDIR/lib/mrj.jar:$WORKINGDIR/lib/AppleJavaExtensions.jar:$WORKINGDIR/lib/QTJava.zip
+CP_JAVA_2=$WORKINGDIR/lib/jdom.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/xercesImpl.jar:$WORKINGDIR/lib/saxon9.jar:$WORKINGDIR/lib/saxon9-dom.jar:$WORKINGDIR/lib/serializer.jar:$WORKINGDIR/lib/jaxen-1.1.6.jar:$WORKINGDIR/lib/jaxb-api-2.3.0.jar
+
+
 # AUDIO/VIDEO
-CP_JAVA_4=$WORKINGDIR/lib/fobs4jmf.jar:$WORKINGDIR/lib/jmf.jar:$WORKINGDIR/lib/ipsk.jar:$WORKINGDIR/lib/elan.jar:$WORKINGDIR/lib/tritonus_share-0.3.6.jar
+CP_JAVA_4=$WORKINGDIR/lib/ips.audiotools.jar:$WORKINGDIR/lib/ips.commons.jar:$WORKINGDIR/lib/elan-5.8.jar
+CP_JAVA_4b=$WORKINGDIR/lib/javafx-base-11.jar:$WORKINGDIR/lib/javafx-base-11-linux.jar:$WORKINGDIR/lib/javafx-controls-11.jar:$WORKINGDIR/lib/javafx-graphics-11.jar:$WORKINGDIR/lib/javafx-graphics-11-linux.jar:$WORKINGDIR/lib/javafx-media-11.jar:$WORKINGDIR/lib/javafx-media-11-linux.jar:$WORKINGDIR/lib/javafx-swing-11.jar:$WORKINGDIR/lib/javafx-swing-11-linux.jar
+
 # HTTP CLIENT
 CP_JAVA_5=$WORKINGDIR/lib/httpcore-4.4.3.jar:$WORKINGDIR/lib/httpclient-4.5.1.jar:$WORKINGDIR/lib/httpmime-4.5.1.jar
+
 # OTHER STUFF
-CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/swing-worker-1.2.jar    
+CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/BATIK.jar:$WORKINGDIR/lib/tt4j.jar:$WORKINGDIR/lib/weblicht.jar
+
     
 # ALL COMBINED
-CP_JAVA=$CP_JAVA_1:$CP_JAVA_2:$CP_JAVA_3:$CP_JAVA_4:$CP_JAVA_5:$CP_JAVA_6
+CP_JAVA=$CP_JAVA_1:$CP_JAVA_2:$CP_JAVA_4:$CP_JAVA_4b:$CP_JAVA_5:$CP_JAVA_6
 
 
 echo $JAVA_CMD -classpath $CP_JAVA -Djava.library.path=$DYLD_LIBRARY_PATH org.exmaralda.folker.application.ApplicationFrame

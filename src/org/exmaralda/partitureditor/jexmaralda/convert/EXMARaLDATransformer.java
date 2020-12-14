@@ -7,6 +7,7 @@ package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
@@ -31,12 +32,26 @@ public class EXMARaLDATransformer {
     BasicTranscription transcription;
     AbstractSegmentation segmentation;
     String[] parameters;
+    String[][] xslParameters;
+    
+    List<String> warnings;
 
     public EXMARaLDATransformer(BasicTranscription transcription, AbstractSegmentation segmentation, String[] parameters) {
         this.transcription = transcription;
         this.segmentation = segmentation;
         this.parameters = parameters;
     }
+
+    public EXMARaLDATransformer(BasicTranscription transcription, AbstractSegmentation segmentation, String[] parameters, String[][] xslParameters) {
+        this(transcription, segmentation, parameters);
+        this.xslParameters = xslParameters;
+    }
+
+    public List<String> getWarnings() {
+        return warnings;
+    }
+    
+    
     
     /*
         parameters[0] -- transformation base -- one of (basic-transcription, segmented-transcription, list-transcription, Modena TEI, TEI)
@@ -104,10 +119,15 @@ public class EXMARaLDATransformer {
         if (parameters[3].length()>0){
             StylesheetFactory sf = new StylesheetFactory(true);
             String sourceString = IOUtilities.documentToString(baseDocument);
-            if (parameters[3].startsWith("/")){
-                resultString = sf.applyInternalStylesheetToString(parameters[3], sourceString);
-            } else {
-                resultString = sf.applyExternalStylesheetToString(parameters[3], sourceString);
+            try {
+                if (parameters[3].startsWith("/")){
+                    resultString = sf.applyInternalStylesheetToString(parameters[3], sourceString, xslParameters);
+                } else {
+                    resultString = sf.applyExternalStylesheetToString(parameters[3], sourceString, xslParameters);
+                }
+            } catch (TransformerException ex){
+                warnings = sf.getWarnings();
+                throw(ex);
             }
         } else {
             resultString = IOUtilities.documentToString(baseDocument);
