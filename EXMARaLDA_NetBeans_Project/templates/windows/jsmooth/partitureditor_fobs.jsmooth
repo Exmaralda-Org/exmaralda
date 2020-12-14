@@ -29,6 +29,18 @@
     <!-- AUDIO / VIDEO -->
     <classPath>..\..\..\temp\FobsJMF\fobs4jmf.jar</classPath>
     <classPath>..\..\..\temp\FobsJMF\jmf.jar</classPath>
+    
+    <!-- Java FX -->
+    <!-- <classPath>..\..\..\temp\javafx-base-11-win.jar</classPath>
+    <classPath>..\..\..\temp\javafx-base-11.jar</classPath>
+    <classPath>..\..\..\temp\javafx-controls-11-win.jar</classPath>
+    <classPath>..\..\..\temp\javafx-controls-11.jar</classPath>
+    <classPath>..\..\..\temp\javafx-graphics-11-win.jar</classPath>
+    <classPath>..\..\..\temp\javafx-graphics-11.jar</classPath>
+    <classPath>..\..\..\temp\javafx-media-11-win.jar</classPath>
+    <classPath>..\..\..\temp\javafx-media-11.jar</classPath>
+    <classPath>..\..\..\temp\javafx-swing-11-win.jar</classPath>
+    <classPath>..\..\..\temp\javafx-swing-11.jar</classPath>    --> 
 
     <!-- BAS -->
     <!-- change 16-01-2016 -->
@@ -53,6 +65,7 @@
     <classPath>..\..\..\temp\commons-logging-1.2.jar</classPath>
     <classPath>..\..\..\temp\swing-worker-1.2.jar</classPath>
     <classPath>..\..\..\temp\BATIK.jar</classPath>
+    <!-- <classPath>..\..\..\temp\jaxb-api-2.3.0.jar</classPath> -->
     
     
 
@@ -87,6 +100,9 @@
     <maximumVersion></maximumVersion>
     <minimumVersion>1.6</minimumVersion>
     <skeletonName>Windowed Wrapper</skeletonName>
+    <!-- new 07-11-2019 -->
+    <!-- <skeletonName>Windowed Wrapper x64</skeletonName> -->
+    
     <skeletonProperties>
         <key>Message</key>
         <value>Java has not been found on your computer in a version 1.6 or higher. Do you want to download it? --- Auf Ihrem
