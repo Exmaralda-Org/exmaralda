@@ -91,7 +91,21 @@ function toggle_visibility(className) {
                                             <xsl:attribute name="class">
                                                 <xsl:value-of select="@type"/>
                                             </xsl:attribute>
-                                            <xsl:value-of select="text()"/>
+                                            <xsl:analyze-string select="text()" regex="#\d+">
+                                                <xsl:matching-substring>
+                                                    <a>
+                                                        <xsl:attribute name="title">Click here to view the corresponding issue on GitHub</xsl:attribute>
+                                                        <xsl:attribute name="href">
+                                                            <xsl:text>https://github.com/EXMARaLDA/exmaralda/issues/</xsl:text>
+                                                            <xsl:value-of select="substring-after(., '#')"/>
+                                                        </xsl:attribute>
+                                                        <xsl:value-of select="."/>
+                                                    </a>
+                                                </xsl:matching-substring>
+                                                <xsl:non-matching-substring>
+                                                    <xsl:value-of select="."/>                                                    
+                                                </xsl:non-matching-substring>
+                                            </xsl:analyze-string>
                                         </td>
                                     </tr>
                                 </xsl:when>
