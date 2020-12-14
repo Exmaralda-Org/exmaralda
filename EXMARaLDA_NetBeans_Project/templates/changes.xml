@@ -10,6 +10,10 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="all" type="change" version="1.13" date="14.12.2020">First attempt at new Linux distributions (issue #238)</change>
+    <change tool="partitureditor" type="feature" version="1.7" date="09.12.2020">Transformation dropdown in toolbar (issue #230)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="09.12.2020">Handle (terminal) messages in transformations (issue #233)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="08.12.2020">Fixed white space bug for Java FX Player (issue #250)</change>
     <change tool="partitureditor" type="change" version="1.7" date="08.12.2020">Further options for the TreeTagger (issue #228)</change>
     <change tool="partitureditor" type="change" version="1.7" date="07.12.2020">Enforce font for emojis (issue #234)</change>
     <change tool="partitureditor" type="change" version="1.7" date="04.12.2020">Initialise DULKO TreeTagger according to EXMARaLDA preferences (issue #228)</change>
