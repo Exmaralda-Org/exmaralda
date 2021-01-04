@@ -430,7 +430,10 @@ public class StylesheetFactory implements javax.xml.transform.ErrorListener {
             props.setProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             saxonWarner.setOutputProperties(props);
             saxonWarner.setOutputStream(System.err);
-            ((net.sf.saxon.Controller)transformer).setMessageEmitter(saxonWarner);
+            // changed 04-01-2021: Ticket#2021010400000041 
+            if (transformer instanceof net.sf.saxon.Controller){
+                ((net.sf.saxon.Controller)transformer).setMessageEmitter(saxonWarner);
+            }
         } catch (net.sf.saxon.trans.XPathException ex) {
             Logger.getLogger(StylesheetFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
