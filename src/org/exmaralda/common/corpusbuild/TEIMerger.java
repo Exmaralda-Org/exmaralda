@@ -340,7 +340,7 @@ public class TEIMerger {
         //return null;
     }
     
-    static Element merge(Element e1, Element e2){
+    public static Element merge(Element e1, Element e2){
         
         Iterator i1 = e1.getDescendants();
         Vector pcData1 = new Vector();

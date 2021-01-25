@@ -165,7 +165,14 @@
           </xsl:element>
     </xsl:template>
 
-    <xsl:template match="*[not(self::*:pause) and not(self::*:uncertain-start) and preceding-sibling::*:uncertain-start and following-sibling::*:uncertain-end]">
+	<!-- added 25-01-2021 -->
+	<xsl:template match="*:anchor[not(self::*:uncertain-start) and preceding-sibling::*:uncertain-start and following-sibling::*:uncertain-end]" mode="grab_em">
+		<xsl:element name="anchor">
+			<xsl:attribute name="synch" select="@synch"/>
+		</xsl:element>
+	</xsl:template>
+	
+	<xsl:template match="*[not(self::*:pause) and not(self::*:uncertain-start) and preceding-sibling::*:uncertain-start and following-sibling::*:uncertain-end]">
             <!-- do nothing if you encounter this while NOT in mode="grab_em"-->
     </xsl:template>
 	

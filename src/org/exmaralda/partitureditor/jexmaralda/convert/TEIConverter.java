@@ -177,7 +177,11 @@ public class TEIConverter extends AbstractConverter {
                                                                               {
         // added 13-12-2013
         BasicTranscription copyBT = bt.makeCopy();
-        copyBT.normalize();        
+        copyBT.normalize();      
+        
+        // added 25-01-2021
+        //copyBT.getBody().getCommonTimeline().completeTimes();
+        
         System.out.println("started writing document...");
         HIATSegmentation segmentation = new HIATSegmentation();
         SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
