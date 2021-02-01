@@ -194,7 +194,7 @@ public class TEIMerger {
             textNode.addContent(teiEvent);
         }
 
-        //IOUtilities.writeDocumentToLocalFile("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\Intermediate_TEI.xml", transformedDocument);
+        //IOUtilities.writeDocumentToLocalFile("N:\\Workspace\\HMAT\\HAMATAC\\transcripts\\Intermediate_TEI.xml", transformedDocument);
 
         
         Document finalDocument = null;

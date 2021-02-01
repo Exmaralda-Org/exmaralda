@@ -8,6 +8,10 @@
         <xsl:strip-space elements="*"/>
         <xsl:template match="/">
             <folker-transcription>
+                <xsl:if test="/tei:TEI/tei:idno[@type='AGD-ID']">
+                    <xsl:attribute name="dgd-id" select="/tei:TEI/tei:idno[@type='AGD-ID']"/>
+                    <xsl:attribute name="corpus-dgd-id" select="substring(/tei:TEI/tei:idno[@type='AGD-ID'],1, 4)"/>
+                </xsl:if>
                 <head></head>
                 <xsl:call-template name="MAKE_SPEAKERTABLE"/>
                 <recording>
@@ -19,8 +23,9 @@
         </xsl:template>
         
         <xsl:template match="tei:annotationBlock">
+            <xsl:variable name="WHO" select="@who"/>
             <contribution>
-                <xsl:attribute name="speaker-reference" select="@who"/>
+                <xsl:attribute name="speaker-reference" select="//tei:person[@xml:id=$WHO]/@n"/>
                 <xsl:attribute name="start-reference" select="@start"/>
                 <xsl:attribute name="end-reference" select="@end"/>
                 <xsl:attribute name="parse-level">2</xsl:attribute>
@@ -150,6 +155,9 @@
             <speakers>
                 <xsl:for-each select="//tei:person">
                     <speaker>
+                        <xsl:if test="tei:idno[@type='AGD-ID']">
+                            <xsl:attribute name="dgd-id" select="/tei:TEI/tei:idno[@type='AGD-ID']"/>
+                        </xsl:if>
                         <xsl:attribute name="speaker-id" select="@n"/>
                         <name></name>
                     </speaker>

@@ -31,8 +31,8 @@ public class TESTTEIMerge {
     private void doit() throws JDOMException, IOException {
         Document doc = FileIO.readDocumentFromLocalFile(new File("N:\\Workspace\\HMAT\\HAMATAC\\Elisa_Hitomi\\MT_180410_Elisa\\MT_180410_Elisa_s_DEBUG.exs"));
         
-        Element el1 = (Element) XPath.selectSingleNode(doc, "//ts[@id='Seg_17252']");
-        Element el2 = (Element) XPath.selectSingleNode(doc, "//ts[@id='Seg_19816']");
+        Element el1 = (Element) XPath.selectSingleNode(doc, "//ts[@id='Seg_17024']");
+        Element el2 = (Element) XPath.selectSingleNode(doc, "//ts[@id='Seg_19718']");
         Element merged = TEIMerger.merge(el1, el2);
         
         System.out.println(IOUtilities.elementToString(merged));

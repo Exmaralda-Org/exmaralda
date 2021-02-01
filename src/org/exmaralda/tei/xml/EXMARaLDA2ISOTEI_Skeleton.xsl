@@ -39,6 +39,17 @@
 		</xsl:choose>		
 	</xsl:function>
 	
+	<xsl:function name="tesla:determine-mime-type">
+		<xsl:param name="path"/>
+		<xsl:choose>
+			<xsl:when test="ends-with(lower-case($path), '.wav')">audio/wav</xsl:when>
+			<xsl:when test="ends-with(lower-case($path), '.mp3')">audio/mpeg</xsl:when>
+			<xsl:when test="ends-with(lower-case($path), '.mpeg')">video/mpeg</xsl:when>
+			<xsl:when test="ends-with(lower-case($path), '.mpg')">video/mpeg</xsl:when>
+			<xsl:when test="ends-with(lower-case($path), '.mp4')">video/mp4</xsl:when>
+		</xsl:choose>		
+	</xsl:function>
+
 	<!-- memorizes position of timeline items for quicker reference -->
 	<xsl:variable name="timeline-positions">
 		<positions>
@@ -102,34 +113,32 @@
 				<!-- ***************************************************** -->
 				<fileDesc>
 					<titleStmt><title></title></titleStmt>
-					<publicationStmt>
+					<!-- <publicationStmt>
 						<authority><xsl:comment>Fill me in</xsl:comment></authority>
 						<availability>
-							<licence target="someurl"/>
+							<licence target="http://someurl.com"/>
 							<p><xsl:comment>Fill me in</xsl:comment></p>
 						</availability>
 						<distributor><xsl:comment>Fill me in</xsl:comment></distributor>
 						<address>
                             <addrLine><xsl:comment>Fill me in</xsl:comment></addrLine>  
                         </address>
-					</publicationStmt>
+					</publicationStmt> -->
 					<!-- ***************************************************** -->
 					<sourceDesc>
 						<recordingStmt>
-							<recording type="video">
-								<!-- element from TEI P5, but not allowed there as a child of recording -->
-								<xsl:apply-templates select="//referenced-file"/>
-								<broadcast>
-									<ab><xsl:comment>Fill me in</xsl:comment></ab>
-								</broadcast>
-								<!-- information about the equipment used for creating the recording -->
-								<!-- where recordings are made by the researcher, this would be -->
-								<!-- place to specify the recording equipment (e.g. Camcorder) -->
-								<equipment>
-									<ab><xsl:comment>Fill me in</xsl:comment></ab>
-									<ab><xsl:comment>Fill me in</xsl:comment></ab>
-								</equipment>                  
-							</recording>
+							<xsl:apply-templates select="//referenced-file"/>
+							<!-- element from TEI P5, but not allowed there as a child of recording -->
+							<!-- <broadcast>
+								<ab><xsl:comment>Fill me in</xsl:comment></ab>
+							</broadcast> -->
+							<!-- information about the equipment used for creating the recording -->
+							<!-- where recordings are made by the researcher, this would be -->
+							<!-- place to specify the recording equipment (e.g. Camcorder) -->
+							<!-- <equipment>
+								<ab><xsl:comment>Fill me in</xsl:comment></ab>
+								<ab><xsl:comment>Fill me in</xsl:comment></ab>
+							</equipment> -->                  
 						</recordingStmt>                                        
 					</sourceDesc>
 					<!-- ... -->
@@ -141,12 +150,12 @@
 						<xsl:apply-templates select="//speaker"/>
 					</particDesc>        
 					<!-- ***************************************************** -->                
-					<settingDesc>
+					<!-- <settingDesc>
 						<place><xsl:comment>Fill me in</xsl:comment></place>
 						<setting>
 							<activity><xsl:comment>Fill me in</xsl:comment></activity>
 						</setting>
-					</settingDesc>                    
+					</settingDesc>   -->                 
 				</profileDesc>
 				<encodingDesc>
 					<appInfo>
@@ -190,10 +199,13 @@
 	<!-- ************************************************* -->
 	<!-- ************************************************* -->
 	<xsl:template match="referenced-file">
-		<media  xmlns="http://www.tei-c.org/ns/1.0">
-			<xsl:attribute name="mimeType"><xsl:value-of select="tesla:determine-recording-type(@url)"/>/xxx</xsl:attribute>
-			<xsl:attribute name="url"><xsl:value-of select="@url"/></xsl:attribute>
-		</media>        
+		<recording xmlns="http://www.tei-c.org/ns/1.0">
+			<xsl:attribute name="type" select="tesla:determine-recording-type(@url)"/>
+			<media  xmlns="http://www.tei-c.org/ns/1.0">
+				<xsl:attribute name="mimeType"><xsl:value-of select="tesla:determine-mime-type(@url)"/></xsl:attribute>
+				<xsl:attribute name="url"><xsl:value-of select="@url"/></xsl:attribute>
+			</media>
+		</recording>
 	</xsl:template>
 	
 	<!-- ************************************************* -->

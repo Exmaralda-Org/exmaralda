@@ -54,7 +54,8 @@
 		<!-- Comma -->
 		<char>,</char>
 		<!-- Hyphen -->
-		<char>-</char>
+                <!-- changed 31-01-2021: should maybe be treated as part of compound?? -->
+		<!-- <char>-</char> -->
 		<!-- Underscore -->
 		<char>_</char>
 		<!-- Ligatur sign -->
