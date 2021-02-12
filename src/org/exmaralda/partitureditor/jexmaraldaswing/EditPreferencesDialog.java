@@ -6,11 +6,14 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import org.exmaralda.common.helpers.Internationalizer;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentListener;
@@ -80,6 +83,15 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         };
         pausePrefixTextField.getDocument().addDocumentListener(dl);
         pauseSuffixTextField.getDocument().addDocumentListener(dl);
+        
+        Dictionary labels = new Hashtable<Integer,JLabel>();
+        labels.put(10, new JLabel("10"));
+        labels.put(20, new JLabel("20"));
+        labels.put(30, new JLabel("30"));
+        labels.put(40, new JLabel("40"));
+        labels.put(50, new JLabel("50"));
+        labels.put(60, new JLabel("60"));
+        this.autoSaveIntervalSlider.setLabelTable(labels);
     }
     
     public String[] getValues(){
@@ -766,7 +778,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         autoSaveIntervalPanel.add(jLabel10);
 
         autoSaveIntervalSlider.setMajorTickSpacing(10);
-        autoSaveIntervalSlider.setMaximum(61);
+        autoSaveIntervalSlider.setMaximum(60);
         autoSaveIntervalSlider.setMinimum(1);
         autoSaveIntervalSlider.setMinorTickSpacing(2);
         autoSaveIntervalSlider.setPaintLabels(true);

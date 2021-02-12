@@ -372,6 +372,9 @@ public class PartitureTableWithActions extends PartitureTable
     public void setFilename(String f){
         filename = f;
         fireFilenameChanged();
+        if (autoSaveThread!=null){
+            autoSaveThread.setFilePath(filename);
+        }
     }
     
     /** returns the filename of the current transcription
@@ -892,8 +895,9 @@ public class PartitureTableWithActions extends PartitureTable
         newFromSpeakertableAction = new NewFromSpeakertableAction(this, null);
         newFromTimelineAction = new NewFromTimelineAction(this);
         newFromSilenceDetectionAction = new NewFromSilenceDetectionAction(this);
-        openAction = new OpenAction(this,new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif")));       
+        openAction = new OpenAction(this,new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif")));               
         restoreAction = new RestoreAction(this);
+        restoreAutoBackupAction = new RestoreAutoBackupAction(this);
         saveAction = new SaveAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Save.gif")));
         saveAsAction = new SaveAsAction (this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SaveAs.gif")));
 
@@ -1495,6 +1499,8 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction newFromSilenceDetectionAction;
     /** Action for opening an existing transcription file (Menu File --> Open)*/
     public javax.swing.AbstractAction openAction;
+    /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    
+    public javax.swing.AbstractAction restoreAutoBackupAction;
     /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    
     public javax.swing.AbstractAction restoreAction;
     /** Action for saving the current transcription file under its current name (Menu File --> Save)*/
@@ -2803,6 +2809,74 @@ public class PartitureTableWithActions extends PartitureTable
         
         
         
+        
+        
+    }
+
+    // new 12-02-2021, issue #221
+    public void cleanupAutoSave() {
+        File[] existingFiles = new File(autoSaveThread.PATH).listFiles(new FilenameFilter(){
+            @Override
+            public boolean accept(File dir, String name) {
+                return (name.startsWith(autoSaveThread.FILENAME) && name.endsWith(".exb"));
+            }            
+        });
+        System.out.println("Found " + existingFiles.length + " auto save files");
+        if (existingFiles.length < 10) return;
+        String message = "<html><p>Found " + existingFiles.length + " auto backup files in folder </p>"
+                + "<p><b>" + autoSaveThread.PATH + "</b></p>"
+                + "<p>That's a lot. What do you want to do?</p></html>";
+        CleanupAutoSavePanel casp = new CleanupAutoSavePanel();
+        casp.setMessage(message);
+        
+        JOptionPane.showMessageDialog(this, casp, "Cleanup auto backup files", JOptionPane.OK_CANCEL_OPTION, 
+            new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/32x32/emblems/emblem-important.png"))
+        );
+        
+        List<File> toBeDeleted = new ArrayList<>();
+        if (casp.deleteOlderRadioButton.isSelected()){
+            long days = (int) casp.deleteOlderSpinner.getValue();
+            long now = System.currentTimeMillis();
+            System.out.println("Now: " + now);
+            System.out.println("Days: " + (days * 24 * 60 * 60 * 1000));
+            for (File f : existingFiles){
+                long lastModified = f.lastModified();
+                if ((now - lastModified) > (days * 24 * 60 * 60 * 1000)){
+                    toBeDeleted.add(f);
+                }
+            }
+            
+        } else if (casp.keepRecentRadioButton.isSelected()){
+            int from = (int) casp.keepRecentSpinner.getValue();
+            Arrays.sort(existingFiles, new Comparator<File>(){
+                @Override
+                public int compare(File o1, File o2) {
+                    return Long.compare(o2.lastModified(), o1.lastModified());
+                }                
+            });
+            for (int i = from; i<existingFiles.length; i++){
+                toBeDeleted.add(existingFiles[i]);
+            }            
+        }
+        
+        if (toBeDeleted.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No auto backup files will be deleted");
+            return;
+        }
+        
+        int really = JOptionPane.showConfirmDialog(this, 
+                toBeDeleted.size() + " files will be deleted from\n " + autoSaveThread.PATH + "\nAre you sure?", 
+                "Confirm delete of auto backup files",
+                JOptionPane.YES_NO_OPTION);
+        
+        if (really==JOptionPane.YES_OPTION){
+            for (File f : toBeDeleted){
+                f.delete();
+            }
+            JOptionPane.showMessageDialog(this, toBeDeleted.size() + " files deleted from\n " + autoSaveThread.PATH );            
+        } else {
+            JOptionPane.showMessageDialog(this, "No auto backup files will be deleted");            
+        }
         
         
     }

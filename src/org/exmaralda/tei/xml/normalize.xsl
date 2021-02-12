@@ -25,6 +25,7 @@
         </tei:annotationBlock>
     </xsl:template>
     
+    
     <!-- <u> which do not have exlusively <seg> as children -->
     <xsl:template match="tei:u[*[not(self::tei:seg)]]">
         <xsl:copy>

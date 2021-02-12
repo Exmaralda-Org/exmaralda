@@ -24,6 +24,8 @@ public class AutoSave implements Runnable {
     private Thread thread;
     private BasicTranscription transcription;
     
+    private String filePath;
+    
     /** Creates a new instance of AutoSave
      * @param bt */
     public AutoSave(BasicTranscription bt) {
@@ -32,6 +34,10 @@ public class AutoSave implements Runnable {
         FILENAME =  "EXMARaLDA_AutoBackup";
         SAVE_INTERVAL = 600000;
         timestamp = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(new java.util.Date());
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
     
     public void setTranscription(BasicTranscription bt){
@@ -48,6 +54,7 @@ public class AutoSave implements Runnable {
             
             // new 14-06-2017, issue #102            
             BasicTranscription copyTranscription = transcription.makeCopy();
+            copyTranscription.getHead().getMetaInformation().getUDMetaInformation().setAttribute("AUTO-BACKUP-FROM", filePath);
             copyTranscription.writeXMLToFile(filename, "none");            
             //transcription.writeXMLToFile(filename, "none");
             

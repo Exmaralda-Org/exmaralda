@@ -473,6 +473,9 @@ public class PartiturEditor extends javax.swing.JFrame
             );
 
             table.setSettings(getPreferencesNode());
+            
+            // 12-02-2021 issue #221
+            table.cleanupAutoSave();
 
             // menus
             menuBar.fileMenu.setupOpenRecentMenu(table.recentFiles);

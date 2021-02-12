@@ -1109,7 +1109,7 @@
                     <Component class="javax.swing.JSlider" name="autoSaveIntervalSlider">
                       <Properties>
                         <Property name="majorTickSpacing" type="int" value="10"/>
-                        <Property name="maximum" type="int" value="61"/>
+                        <Property name="maximum" type="int" value="60"/>
                         <Property name="minimum" type="int" value="1"/>
                         <Property name="minorTickSpacing" type="int" value="2"/>
                         <Property name="paintLabels" type="boolean" value="true"/>

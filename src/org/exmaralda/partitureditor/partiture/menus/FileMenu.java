@@ -55,6 +55,7 @@ public class FileMenu extends AbstractTableMenu {
         openMenuItem.setToolTipText("Open a basic transcription (*.exb) from file");
         
         add(table.restoreAction).setToolTipText("Go back to the last saved version of the current transcription");
+        add(table.restoreAutoBackupAction).setToolTipText("Restore an automatic backup of some transcription");
         
         saveMenuItem = this.add(table.saveAction);
         saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
