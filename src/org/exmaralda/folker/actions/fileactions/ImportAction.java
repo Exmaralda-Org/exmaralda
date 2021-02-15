@@ -23,6 +23,7 @@ import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.AudacityConverter;
+import org.exmaralda.partitureditor.jexmaralda.convert.F4Converter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -37,6 +38,7 @@ public class ImportAction extends AbstractApplicationAction {
     ParameterFileFilter exmaraldaFileFilter = new ParameterFileFilter(exmaraldaSuffixes, FOLKERInternationalizer.getString("misc.basicTranscription"));
     ParameterFileFilter audacityFileFilter = new ParameterFileFilter("txt", FOLKERInternationalizer.getString("misc.audacityLabelFile"));
     ParameterFileFilter teiFileFilter = new ParameterFileFilter("xml", "ISO/TEI File (*.xml)");
+    ParameterFileFilter f4FileFilter = new ParameterFileFilter("txt", "F4 Transcript (*.txt)");
     
     /** Creates a new instance of OpenAction */
     public ImportAction(ApplicationControl ac, String name, Icon icon) {
@@ -53,6 +55,7 @@ public class ImportAction extends AbstractApplicationAction {
         fileChooser.addChoosableFileFilter(exmaraldaFileFilter);
         fileChooser.addChoosableFileFilter(teiFileFilter);
         fileChooser.addChoosableFileFilter(audacityFileFilter);
+        fileChooser.addChoosableFileFilter(f4FileFilter);
         fileChooser.setFileFilter(exmaraldaFileFilter);
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));        
@@ -97,6 +100,17 @@ public class ImportAction extends AbstractApplicationAction {
                 mediaPath = nft.getMediaPath();
                 importedTranscription = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXML(nft.getDocument(), 0);
             } catch (IOException | JexmaraldaException | JDOMException | SAXException | ParserConfigurationException | TransformerException | IllegalArgumentException ex) {
+                applicationControl.displayException(ex);
+                return;
+            }
+        } else if (fileChooser.getFileFilter()==f4FileFilter){
+            try {
+                F4Converter converter = new F4Converter();
+                converter.readText(f, "UTF-8");
+                BasicTranscription bt = converter.importF4(true);
+                bt.getBody().getCommonTimeline().completeTimes(false, bt);
+                importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
+            } catch (IOException | IllegalArgumentException ex) {
                 applicationControl.displayException(ex);
                 return;
             }
