@@ -26,6 +26,14 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
+        F4Converter f4Converter = new F4Converter();
+        f4Converter.readText(new File("N:\\Workspace\\IS\\ISZ_Ergaenzung_Luppi_2019\\Transkripte\\ISZ-Luppi-AGD\\f4-Transkripte\\Biran_1.txt"));
+        BasicTranscription importF4 = f4Converter.importF4(true);
+        importF4.getBody().getCommonTimeline().completeTimes();
+        importF4.getHead().getMetaInformation().setReferencedFile("N:\\Workspace\\IS\\ISZ_Ergaenzung_Luppi_2019\\Audio\\s_2_Archiv_Format\\Biran_2019_05_22.wav");
+        importF4.writeXMLToFile("N:\\Workspace\\IS\\ISZ_Ergaenzung_Luppi_2019\\Transkripte\\ISZ-Luppi-AGD\\Test.exb", "none");
+
+        System.exit(0);
         //new Test().doit();
         StylesheetFactory sf = new StylesheetFactory(true);
         try {

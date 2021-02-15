@@ -364,7 +364,7 @@ public class Timeline extends Vector {
         if (tli.getTime()<0){
             String id = getMaxTimeID();
             if (id==null){  // i.e. there are no absolute time values in this timeline
-                tli.setTime(new Double(getNumberOfTimelineItems()-1).doubleValue());
+                tli.setTime(getNumberOfTimelineItems()-1);
                 tli.setType("intp");
             }
             else {

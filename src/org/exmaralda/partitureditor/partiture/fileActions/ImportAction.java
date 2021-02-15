@@ -118,8 +118,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         settings.put("LastImportDirectory", selectedFile.getParent());
         String filename = selectedFile.getAbsolutePath();
 
-        // now do the real import        
-
+        // now do the real import      
+        
         if (selectedFileFilter==dialog.TASXFileFilter){
             TASXConverter tc = new TASXConverter();
             importedTranscription = tc.readTASXFromFile(filename);
@@ -232,6 +232,15 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 tc.readText(selectedFile,dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
             }
             importedTranscription = tc.convert();
+        } else if (selectedFileFilter==dialog.F4TextFileFilter){
+            F4Converter f4Converter = new F4Converter();
+            if (dialog.encodingComboBox.getSelectedIndex()==0){
+                f4Converter.readText(selectedFile);
+            } else {
+                f4Converter.readText(selectedFile,dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
+            }
+            boolean splitSentences = dialog.splitSentencesCheckBox.isSelected();
+            importedTranscription = f4Converter.importF4(splitSentences);
         } else if (selectedFileFilter==dialog.AudacityLabelFileFilter){
             importedTranscription = new AudacityConverter().readAudacityFromFile(selectedFile);
         } else if (selectedFileFilter==dialog.TreeTaggerFilter){

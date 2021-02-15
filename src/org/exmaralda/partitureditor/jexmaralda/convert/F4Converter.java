@@ -14,6 +14,8 @@ import javax.xml.transform.TransformerException;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.*;
 import org.xml.sax.SAXException;
 /**
@@ -49,6 +51,7 @@ public class F4Converter {
         System.out.println("Started reading document " + file.getAbsolutePath());
         int lineCount=0;
         while ((nextLine = br.readLine()) != null){
+            if (nextLine.trim().length()==0) continue;
             // remove komisches Zeichen am Anfang von Unicode-kodierten Dateien
             if (lineCount==0 && encoding.startsWith("UTF") && nextLine.charAt(0)=='\uFEFF'){
                 nextLine = nextLine.substring(1);
@@ -60,7 +63,97 @@ public class F4Converter {
         System.out.println("Document read.");                
     }
     
+    public BasicTranscription importF4(boolean splitAtPeriod){
+        try {
+            BasicTranscription bt = new BasicTranscription();
+            Speakertable st = bt.getHead().getSpeakertable();
+            Speaker speaker = new Speaker();
+            speaker.setID("SPK0");
+            speaker.setAbbreviation("X");
+            st.addSpeaker(speaker);
+            Timeline timeline = bt.getBody().getCommonTimeline();
+            String tliID = timeline.addTimelineItem();
+            TimelineItem lastTLI = timeline.getTimelineItemWithID(tliID);
+            lastTLI.setTime(0.0);
+            
+            Tier textTier = new Tier();
+            textTier.setID("TIE0");
+            textTier.setCategory("txt");
+            textTier.setType("t");
+            textTier.setDisplayName("X [txt]");
+            textTier.setSpeaker("SPK0");
+            Map<String, Tier> abb2TierMap = new HashMap<>();
+            abb2TierMap.put("X", textTier);
+            
+            bt.getBody().addTier(textTier);
+            
+            for (String line : lines){
+                // #00:00:20-5# Also ich war mit meinem Mann, wir waren mein Mann, ist geboren in Ludwigshafen am
+                // Rhein, und die Stadt hat ihn eingeladen, uns eingeladen, und wir fahren dort. Wir waren im Haus, wo er gewohnt hat, und wir sind sehr, sehr gut und Dead akzeptiert, und die waren wirklich fantastisch.
+                String restOfLine = line;
+                if (line.startsWith("#")){
+                    int endIndex = line.indexOf("#", 3);
+                    String timeStampString = line.substring(0, endIndex);
+                    restOfLine = line.substring(endIndex+1).trim();
+                    int h = Integer.parseInt(timeStampString.substring(1,3));
+                    int m = Integer.parseInt(timeStampString.substring(4,6));
+                    double s = Double.parseDouble(timeStampString.substring(7).replaceAll("\\-", ".").replaceAll("\\#", ""));
+                    //System.out.println(timeStampString + " : " + h + " / " + m + " / " + s);
+                    double seconds = 3600.0 * h + 60.0 * m + s;
+                    lastTLI.setTime(seconds);
+                    
+                    String sp = "X";
+                    if (restOfLine.matches("^[A-ZÄÖÜ][A-Za-zÄÖÜäöüß]{0,10}\\:.+")){
+                        int index = restOfLine.indexOf(":");
+                        sp = restOfLine.substring(0, index);
+                        restOfLine = restOfLine.substring(index+1);
+                    }
+                    
+                    if (!(abb2TierMap.containsKey(sp))){
+                        String tierID = bt.getBody().getFreeID();
+                        Tier newTier = new Tier(tierID, sp, "v", "t", sp + " [v]");
+                        abb2TierMap.put(sp, newTier);
+                        String speakerID = bt.getHead().getSpeakertable().getFreeID();
+                        Speaker newSpeaker = new Speaker();
+                        newSpeaker.setID(speakerID);
+                        st.addSpeaker(newSpeaker);
+                    }
+                    
+                    String[] sentences = {restOfLine};
+                    if (splitAtPeriod){
+                        sentences = restOfLine.split("(?<=\\. +)");
+                    }
+                    Tier thisTier = abb2TierMap.get(sp);
+                    for (String sentence : sentences){
+                        Event event = new Event();
+                        event.setStart(lastTLI.getID());
+                        String newTLIID = timeline.getFreeID();
+                        TimelineItem newTLI = new TimelineItem();
+                        newTLI.setID(newTLIID);
+                        timeline.addTimelineItem(newTLI);
+                        event.setEnd(newTLI.getID());
+                        lastTLI = newTLI;
+                        event.setDescription(sentence);
+                        thisTier.addEvent(event);
+                    }                    
+                }
+                
+            }
+            
+            
+            return bt;
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(F4Converter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
+    
+    // I don't quite understand (any more) what this is doing
+    // It does not seem to be used anywhere in the real EXMARaLDA code
+    // and maybe it is very old, I don't think it is my code
+    // I'm getting rid of it (14-02-2021)
+    @Deprecated
     public BasicTranscription importText(){
         BasicTranscription bt = new BasicTranscription();
         Speakertable st = bt.getHead().getSpeakertable();

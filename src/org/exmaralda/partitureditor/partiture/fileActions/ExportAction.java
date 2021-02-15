@@ -179,7 +179,10 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             new TreeTaggerConverter().writeText(trans, exportFile);
         } else if (selectedFileFilter==dialog.F4TextFileFilter){
             trans.getBody().getCommonTimeline().completeTimes(false, trans);
-            new F4Converter().writeText(trans, exportFile, F4Converter.SPEAKER_CONTRIBUTIONS, "RTF");
+            //new F4Converter().writeText(trans, exportFile, F4Converter.SPEAKER_CONTRIBUTIONS, "RTF");
+            // this I changed for issue #258
+            // I wouldn't know what the other variant is good for... 
+            new F4Converter().writeText(trans, exportFile, F4Converter.EVENTS_FROM_T_TIERS, "TXT");
         } else if (selectedFileFilter==dialog.TsvFileFilter){
             new TsvConverter().writeText(trans, exportFile);
         } else if (selectedFileFilter==dialog.SRTFileFilter){

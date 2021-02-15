@@ -18,6 +18,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
     public JComboBox encodingComboBox;
     private JPanel accessoryPanel;
     public JCheckBox appendSpacesCheckBox;
+    public JCheckBox splitSentencesCheckBox;
     public String[] encodingNames = {"[System-Default]", "7-Bit-ASCII", "ISO-8859-1 (Standard Latin)", "UTF-8", "UTF-16 (Big Endian)", "UTF-16 (Little Endian)"};
     public String[] encodings = {"", "US-ASCII", "ISO-8859-1", "UTF-8", "UTF-16BE", "UTF-16LE"};
 
@@ -60,6 +61,7 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         addChoosableFileFilter(exSyncFileFilter);
         addChoosableFileFilter(TCFFileFilter);
         addChoosableFileFilter(TsvFileFilter);
+        addChoosableFileFilter(F4TextFileFilter);
         setFileFilter(PraatFileFilter);
         setMultiSelectionEnabled(false);
         initAccessory();
@@ -77,6 +79,9 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         appendSpacesCheckBox = new JCheckBox("Append spaces");
         appendSpacesCheckBox.setSelected(true);
         accessoryPanel.add(appendSpacesCheckBox);
+        splitSentencesCheckBox = new JCheckBox("Split sentences");
+        splitSentencesCheckBox.setSelected(true);
+        accessoryPanel.add(splitSentencesCheckBox);
         org.exmaralda.common.helpers.Internationalizer.internationalizeComponentToolTips(accessoryPanel);
     }
 
@@ -93,10 +98,14 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
             setAccessory(accessoryPanel);
         }  else if (getFileFilter()==TsvFileFilter){
             setAccessory(accessoryPanel);
+        }  else if (getFileFilter()==F4TextFileFilter){
+            setAccessory(accessoryPanel);
+            encodingComboBox.setSelectedIndex(3); // set this to UTF-8
         } else {
             setAccessory(null);
         }
         appendSpacesCheckBox.setVisible(getFileFilter()==TreeTaggerFilter);
+        splitSentencesCheckBox.setVisible(getFileFilter()==F4TextFileFilter);
         revalidate();
     }
 
