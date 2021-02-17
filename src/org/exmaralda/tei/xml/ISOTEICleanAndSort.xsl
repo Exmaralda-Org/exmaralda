@@ -13,6 +13,10 @@
 	<!-- if this parameter is set to TRUE, XPointers will be used instead of IDREFs -->
 	<xsl:param name="USE_XPOINTER">FALSE</xsl:param>
 	
+	<!-- <transcriptionDesc ident="HIAT" version="2004"> -->
+	<xsl:param name="TRANSCRIPTION_SYSTEM" select="//*:transcriptionDesc/@ident"/>
+	
+	
 	
 	<xsl:variable name="XPOINTER_HASH">
 		<xsl:choose>
@@ -68,14 +72,33 @@
 	
 	<!-- events -->
 	<xsl:template match="*:event" mode="normal">
-		<xsl:element name="incident">
-			<xsl:copy-of select="@start"/>
-			<xsl:copy-of select="@end"/>
-			<xsl:copy-of select="@who"/>
-			<xsl:element name="desc">
-				<xsl:value-of select="@desc"/>
-			</xsl:element>
-		</xsl:element>
+		<!-- changed 16-02-2021 -->
+		<xsl:choose>
+			<xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT' and string-length(translate(@desc,'()0123456789,s',''))=0">
+				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
+					<xsl:copy-of select="@start"/>
+					<xsl:copy-of select="@end"/>
+					<xsl:attribute name="dur">
+						<xsl:variable name="DURATION" select="translate(@desc, '()', '')"/>
+						<xsl:text>PT</xsl:text>
+						<xsl:value-of select="translate($DURATION, ',s', '.S')"/>						
+					</xsl:attribute>
+					<xsl:attribute name="rend">
+						<xsl:value-of select="@desc"/>
+					</xsl:attribute>						
+				</xsl:element>				
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:element name="incident">
+					<xsl:copy-of select="@start"/>
+					<xsl:copy-of select="@end"/>
+					<xsl:copy-of select="@who"/>
+					<xsl:element name="desc">
+						<xsl:value-of select="@desc"/>
+					</xsl:element>
+				</xsl:element>				
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 	
 	<!-- u elements -->
@@ -268,9 +291,9 @@
 	
 	
 	
-	<xsl:template match="*:u/@*" mode="normal">
+	<xsl:template match="*:u/@start | *:u/@end" mode="normal"> -->
 		<!-- do nothing -->		
-	</xsl:template>
+	</xsl:template> 
 		
 	<xsl:template match="*:uncertain-end" mode="normal">
 		<!-- do nothing -->		

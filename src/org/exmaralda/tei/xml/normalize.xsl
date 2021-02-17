@@ -27,8 +27,10 @@
     
     
     <!-- <u> which do not have exlusively <seg> as children -->
-    <xsl:template match="tei:u[*[not(self::tei:seg)]]">
-        <xsl:copy>
+    <!-- 15-02-2021 : something's rotten here -->
+    <!-- <xsl:template match="tei:u[*[not(self::tei:seg)]]"> -->
+    <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)]]">
+            <xsl:copy>
             <!-- make them a <seg>  -->
             <tei:seg type="contribution">
                 <xsl:attribute name="xml:id" select="generate-id()"/>
@@ -56,13 +58,41 @@
             <xsl:apply-templates select="@*"/>
             <xsl:if test="not(*[1][self::tei:anchor])">
                 <tei:anchor>
-                    <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/>
+                    <!-- changed 15-02-2021 -->
+                    <xsl:attribute name="synch">
+                        <xsl:choose>
+                            <xsl:when test="preceding-sibling::*[1][self::tei:anchor]">
+                                <xsl:value-of select="preceding-sibling::*[1][self::tei:anchor]/@synch"/>
+                            </xsl:when>
+                            <xsl:when test="(preceding-sibling::tei:seg)[1]/*[last()][self::tei:anchor]">
+                                <xsl:value-of select="(preceding-sibling::tei:seg)[1]/tei:anchor[last()]/@synch"/>                                
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="ancestor-or-self::*[@start][1]/@start"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <!-- <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/> -->
                 </tei:anchor>
             </xsl:if>
             <xsl:apply-templates select="node()"/>
             <xsl:if test="not(*[last()][self::tei:anchor])">
                 <tei:anchor>
-                    <xsl:attribute name="synch" select="ancestor-or-self::*[@end][1]/@end"/>
+                    <!-- changed 15-02-2021 -->
+                    <xsl:attribute name="synch">
+                        <xsl:choose>
+                            <xsl:when test="following-sibling::*[1][self::tei:anchor]">
+                                <xsl:value-of select="following-sibling::*[1][self::tei:anchor]/@synch"/>
+                            </xsl:when>
+                            <xsl:when test="(following-sibling::tei:seg)[1]/*[1][self::tei:anchor]">
+                                <xsl:value-of select="(following-sibling::tei:seg)[1]/tei:anchor[1]/@synch"/>                                
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="ancestor-or-self::*[@end][1]/@end"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <!-- <xsl:attribute name="synch" select="ancestor-or-self::*[@end][1]/@end"/> -->
                 </tei:anchor>
             </xsl:if>                                                
         </xsl:copy>

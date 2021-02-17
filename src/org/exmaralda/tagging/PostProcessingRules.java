@@ -51,6 +51,20 @@ public class PostProcessingRules {
         return count;
     }
     
+    public int applyISOTEI(Document taggedDocument) throws JDOMException{
+        XPath xpath = XPath.newInstance("//tei:w");
+        xpath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");        
+        List l = xpath.selectNodes(taggedDocument);
+        int count = 0;
+        for (Object o : l){
+            Element word = (Element)o;
+            for (PostProcessingRule r : rules){
+                count+=r.apply(word);
+            }
+        }
+        return count;
+    }
+
     public int applyELAN(Document taggedELANDocument) throws JDOMException, IOException{
         List l = XPath.newInstance("//TIER[@LINGUISTIC_TYPE_REF='Tokenization']/descendant::ANNOTATION").selectNodes(taggedELANDocument);
         int count = 0;

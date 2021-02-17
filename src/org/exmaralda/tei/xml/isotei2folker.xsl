@@ -6,6 +6,10 @@
         version="2.0">
         <xsl:output method="xml" encoding="UTF-8"/>
         <xsl:strip-space elements="*"/>
+        
+        <!-- <transcriptionDesc ident="HIAT" version="2004"> -->
+        <xsl:param name="TRANSCRIPTION_SYSTEM" select="//tei:transcriptionDesc/@ident"/>
+        
         <xsl:template match="/">
             <folker-transcription>
                 <xsl:if test="/tei:TEI/tei:idno[@type='AGD-ID']">
@@ -34,6 +38,19 @@
             </contribution>
         </xsl:template>
         
+        <xsl:template match="tei:seg">
+            <xsl:apply-templates/>
+            <xsl:if test="$TRANSCRIPTION_SYSTEM='HIAT'">
+                <xsl:choose>
+                    <xsl:when test="@subtype='declarative'"><p>.</p></xsl:when>
+                    <xsl:when test="@subtype='interrogative'"><p>?</p></xsl:when>
+                    <xsl:when test="@subtype='exclamative'"><p>!</p></xsl:when>
+                    <xsl:when test="@subtype='interrupted'"><p>&#x2026;</p></xsl:when>
+                    <xsl:when test="@subtype='not_classified'"><p>&#x02D9;</p></xsl:when>
+                </xsl:choose>
+            </xsl:if>
+        </xsl:template>
+        
         <xsl:template match="tei:w">
             <xsl:variable name="WORD_ID" select="@xml:id"/>
             <w>
@@ -51,7 +68,7 @@
             </w>                    
         </xsl:template>
         
-        <xsl:template match="tei:p">
+        <xsl:template match="tei:pc">
             <p>
                 <xsl:attribute name="id" select="@xml:id"/>
                 <xsl:value-of select="text()"/>            

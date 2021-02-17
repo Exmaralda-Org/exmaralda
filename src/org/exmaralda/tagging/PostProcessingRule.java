@@ -96,6 +96,69 @@ class PostProcessingRule {
         }
     }
     
+    public int applyISOTEI(Element word){
+        if ("n".equals(setField)){
+            setField = "norm";
+        }
+        String textToBeMatched = "";
+        if ("word".equals(matchField)){
+            textToBeMatched = WordUtilities.getWordText(word);
+            if (textToBeMatched!=null && textToBeMatched.matches(matchRegex)){
+                word.setAttribute(setField, setString);
+                return 1;
+            } else {
+                return 0;
+            }  
+        } else {
+            // get a normalisation value anyway
+            if ("n".equals(matchField)){
+                if (word.getAttribute("norm")!=null){
+                    textToBeMatched = word.getAttributeValue("norm");     
+                } else {
+                    textToBeMatched = WordUtilities.getWordText(word);                
+                }
+            } else {
+                textToBeMatched = word.getAttributeValue("norm");            
+            } 
+            
+            
+            if (textToBeMatched==null){
+                return 0;
+            }
+            if (!(textToBeMatched.contains(" "))){
+                if (textToBeMatched.matches(matchRegex)){
+                    word.setAttribute(setField, setString);
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else {
+                // and this is the Kasus Knaxus!
+                // several items in @n, @pos or @lemma
+                String[] itemsToBeMatched = textToBeMatched.split(" ");
+                String[] correspondingItems = word.getAttributeValue(setField).split(" ");
+                String newValue="";
+                int count=0;
+                int index=0;
+                for (String item : itemsToBeMatched){
+                    if (item.matches(matchRegex)){
+                        newValue+=setString + " ";
+                        count++;
+                    } else {
+                        //newValue+=item + " ";
+                        if (index<correspondingItems.length){
+                            newValue+=correspondingItems[index] + " ";
+                        } else {
+                            newValue+="??? ";                            
+                        }
+                    }
+                    index++;
+                }
+                word.setAttribute(setField, newValue.trim());
+                return count;
+            }
+        }
+    }
     
     public int applyELAN(Element token) throws JDOMException, IOException {
         /*
