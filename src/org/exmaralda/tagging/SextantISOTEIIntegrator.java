@@ -70,6 +70,7 @@ public class SextantISOTEIIntegrator {
             for (Object o2 : fs){
                 Element f = (Element)o2;
                 String annotationCategory = f.getAttributeValue("name");
+                if ("p-pos".equals(annotationCategory)) continue;
                 String annotationValue = f.getChild("symbol").getAttributeValue("value");
                 Element referencedElement = ids2elements.get(id);
                 if (referencedElement==null) {
