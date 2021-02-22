@@ -12,7 +12,6 @@ import javax.swing.event.ListSelectionListener;
 import org.exmaralda.folker.application.ApplicationControl;
 import org.exmaralda.folker.data.Timepoint;
 import org.exmaralda.folker.listview.TimepointTableCellRenderer;
-import org.exmaralda.folker.timeview.TimeSelectionEvent;
 
 /**
  *
@@ -34,6 +33,7 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
         formatTable();
         maskTable.getSelectionModel().addListSelectionListener(this);
         maskTable.addMouseListener(this);
+        maskTable.setAutoCreateRowSorter(true);
         pack();
     }
     

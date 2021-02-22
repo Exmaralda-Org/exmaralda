@@ -26,6 +26,16 @@ public class MaskTableModel extends AbstractTableModel {
         //maskSegments.addAll(transcriptionHead.getHeadElement().getChild("mask").getChildren("mask-segment"));        
         maskSegments = transcriptionHead.getHeadElement().getChild("mask").getChildren("mask-segment");
     }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        switch (columnIndex){
+            case 0 : return Timepoint.class;
+            case 1 : return Timepoint.class;
+            case 2 : return String.class;
+        }
+        return super.getColumnClass(columnIndex); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

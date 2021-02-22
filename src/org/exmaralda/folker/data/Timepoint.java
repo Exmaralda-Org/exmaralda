@@ -16,7 +16,7 @@ import org.jdom.Element;
  *
  * @author thomas
  */
-public class Timepoint {
+public class Timepoint implements Comparable {
     
     private Timeline timeline;
     private double time;
@@ -58,6 +58,12 @@ public class Timepoint {
         result.setAttribute("timepoint-id", "TLI_" + Integer.toString(timeline.getTimepoints().indexOf(this)));
         result.setAttribute("absolute-time", Double.toString(getTime()/1000.0));
         return result;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Timepoint t = (Timepoint)o;
+        return Double.compare(getTime(),t.getTime());
     }
     
 
