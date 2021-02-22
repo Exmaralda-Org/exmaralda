@@ -196,7 +196,8 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }//GEN-LAST:event_playButtonActionPerformed
 
     private void increaseStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_increaseStartButtonActionPerformed
-        int row = maskTable.getSelectedRow();
+        int row = maskTable.getRowSorter().convertRowIndexToModel(maskTable.getSelectedRow());
+        //int row = maskTable.getSelectedRow();
         if (row<0) return;
         Timepoint maskTimeStartPoint = (Timepoint)tableModel.getValueAt(row, 0);
         Timepoint maskTimeEndPoint = (Timepoint)tableModel.getValueAt(row, 1);
@@ -207,7 +208,8 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }//GEN-LAST:event_increaseStartButtonActionPerformed
 
     private void decreaseStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decreaseStartButtonActionPerformed
-        int row = maskTable.getSelectedRow();
+        int row = maskTable.getRowSorter().convertRowIndexToModel(maskTable.getSelectedRow());
+        //int row = maskTable.getSelectedRow();
         if (row<0) return;
         Timepoint maskTimeStartPoint = (Timepoint)tableModel.getValueAt(row, 0);
         Timepoint maskTimeEndPoint = (Timepoint)tableModel.getValueAt(row, 1);
@@ -218,7 +220,8 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }//GEN-LAST:event_decreaseStartButtonActionPerformed
 
     private void decreaseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decreaseEndButtonActionPerformed
-        int row = maskTable.getSelectedRow();
+        int row = maskTable.getRowSorter().convertRowIndexToModel(maskTable.getSelectedRow());
+        //int row = maskTable.getSelectedRow();
         if (row<0) return;
         Timepoint maskTimeStartPoint = (Timepoint)tableModel.getValueAt(row, 0);
         Timepoint maskTimeEndPoint = (Timepoint)tableModel.getValueAt(row, 1);
@@ -229,7 +232,8 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }//GEN-LAST:event_decreaseEndButtonActionPerformed
 
     private void increaseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_increaseEndButtonActionPerformed
-        int row = maskTable.getSelectedRow();
+        int row = maskTable.getRowSorter().convertRowIndexToModel(maskTable.getSelectedRow());
+        //int row = maskTable.getSelectedRow();
         if (row<0) return;
         Timepoint maskTimeStartPoint = (Timepoint)tableModel.getValueAt(row, 0);
         Timepoint maskTimeEndPoint = (Timepoint)tableModel.getValueAt(row, 1);
@@ -245,7 +249,8 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }//GEN-LAST:event_opacitySliderStateChanged
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        int row = maskTable.getSelectedRow();
+        int row = maskTable.getRowSorter().convertRowIndexToModel(maskTable.getSelectedRow());
+        //int row = maskTable.getSelectedRow();
         if (row<0) return;
         getModel().removeEntry(row);
     }//GEN-LAST:event_removeButtonActionPerformed
@@ -316,7 +321,8 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount()!=2) return;
-        int row = maskTable.getSelectedRow();
+        int row = maskTable.getRowSorter().convertRowIndexToModel(maskTable.getSelectedRow());
+        //int row = maskTable.getSelectedRow();
         if (row<0) return;
         Timepoint maskTimeStartPoint = (Timepoint)tableModel.getValueAt(row, 0);
         Timepoint maskTimeEndPoint = (Timepoint)tableModel.getValueAt(row, 1);
