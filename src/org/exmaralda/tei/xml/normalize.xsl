@@ -29,26 +29,29 @@
     <!-- <u> which do not have exlusively <seg> as children -->
     <!-- 15-02-2021 : something's rotten here -->
     <!-- <xsl:template match="tei:u[*[not(self::tei:seg)]]"> -->
-    <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)]]">
+    <!-- 22-02-2021 : something is still rotten here -->
+    <!-- <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)]]"> -->
+    <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)] or text()]">
             <xsl:copy>
-            <!-- make them a <seg>  -->
-            <tei:seg type="contribution">
-                <xsl:attribute name="xml:id" select="generate-id()"/>
-                <!-- check if it needs a redundant start anchor -->
-                <xsl:if test="not(*[1][self::tei:anchor])">
-                    <tei:anchor>
-                        <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/>
-                    </tei:anchor>
-                </xsl:if>    
-                <!-- collect the descendants, but not the <seg>s -->
-                <xsl:apply-templates select="descendant::*[not(self::seg)]"/>
-                <!-- check if it needs a redundant end anchor -->
-                <xsl:if test="not(*[last()][self::tei:anchor])">
-                    <tei:anchor>
-                        <xsl:attribute name="synch" select="ancestor-or-self::*[@end][1]/@end"/>
-                    </tei:anchor>
-                </xsl:if>                                    
-            </tei:seg>
+                <xsl:apply-templates select="@*"/>
+                <!-- make them a <seg>  -->
+                <tei:seg type="contribution">
+                    <xsl:attribute name="xml:id" select="generate-id()"/>
+                    <!-- check if it needs a redundant start anchor -->
+                    <xsl:if test="not(*[1][self::tei:anchor])">
+                        <tei:anchor>
+                            <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/>
+                        </tei:anchor>
+                    </xsl:if>    
+                    <!-- collect the descendants, but not the <seg>s -->
+                    <xsl:apply-templates select="descendant::*[not(self::seg)]|text()"/>
+                    <!-- check if it needs a redundant end anchor -->
+                    <xsl:if test="not(*[last()][self::tei:anchor])">
+                        <tei:anchor>
+                            <xsl:attribute name="synch" select="ancestor-or-self::*[@end][1]/@end"/>
+                        </tei:anchor>
+                    </xsl:if>                                    
+                </tei:seg>
         </xsl:copy>
     </xsl:template>
     

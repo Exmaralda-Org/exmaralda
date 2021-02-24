@@ -186,9 +186,14 @@
     <xsl:template match="tli[position()=1]">
         <xsl:choose>
             <xsl:when test="@time=0" >
-                <when absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0">
+                <!-- <when absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:attribute name="xml:id" select="@id"/>
-                </when>
+                </when> -->
+                <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
+                    <xsl:attribute name="xml:id" select="@id"/>
+                    <xsl:attribute name="since" select="@id"/>
+                    <xsl:attribute name="interval" select="0.0"/>                    
+                </xsl:element>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">

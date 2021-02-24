@@ -18,6 +18,11 @@
                     <xsl:apply-templates select="@*|node()"/>
                 </xsl:copy>                                
             </xsl:when>
+            <xsl:when test="//tei:when[@since=$ID]">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>                                                
+            </xsl:when>
             <xsl:when test="//*[@start=$ID or @end=$ID or @from=$ID or @to=$ID or contains(@corresp, $ID)]">
                 <xsl:copy>
                     <xsl:apply-templates select="@*|node()"/>
