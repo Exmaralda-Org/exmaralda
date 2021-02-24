@@ -11,7 +11,6 @@
 
 package org.exmaralda.orthonormal.gui;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -23,6 +22,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import org.exmaralda.orthonormal.application.ApplicationFrame;
 import org.jdom.Element;
 
 /**
@@ -106,7 +106,10 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         };
         KeyStroke downStroke = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
         getRootPane().registerKeyboardAction(downKeyListener, downStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
-
+        
+        playSelectionButton.setAction(((ApplicationFrame)(parent)).applicationControl.playSelectionAction);
+        playSelectionButton.setToolTipText("Auswahl abspielen");
+        
     }
 
     public String getNormalizedForm(){
@@ -146,10 +149,13 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         transcribedFormPanel = new javax.swing.JPanel();
         wordLabel = new javax.swing.JLabel();
         editWordButton = new javax.swing.JButton();
         textField = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        playSelectionButton = new javax.swing.JButton();
         formsListScrollPane = new javax.swing.JScrollPane();
         formsList = new javax.swing.JList();
         dummyButtonsPanel = new javax.swing.JPanel();
@@ -164,7 +170,9 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
 
         mainPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 1, true), javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         mainPanel.setOpaque(false);
-        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
         transcribedFormPanel.setAlignmentX(0.0F);
         transcribedFormPanel.setLayout(new javax.swing.BoxLayout(transcribedFormPanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -190,7 +198,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         });
         transcribedFormPanel.add(editWordButton);
 
-        mainPanel.add(transcribedFormPanel);
+        jPanel1.add(transcribedFormPanel);
 
         textField.setForeground(new java.awt.Color(0, 102, 0));
         textField.setToolTipText("Normalisierte Form");
@@ -201,7 +209,14 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
                 textFieldActionPerformed(evt);
             }
         });
-        mainPanel.add(textField);
+        jPanel1.add(textField);
+
+        mainPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        playSelectionButton.setText(" [*]");
+        jPanel2.add(playSelectionButton);
+
+        mainPanel.add(jPanel2, java.awt.BorderLayout.EAST);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -345,7 +360,10 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
     private javax.swing.JButton editWordButton;
     private javax.swing.JList formsList;
     private javax.swing.JScrollPane formsListScrollPane;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton playSelectionButton;
     private javax.swing.JTextField textField;
     private javax.swing.JPanel transcribedFormPanel;
     private javax.swing.JLabel wordLabel;

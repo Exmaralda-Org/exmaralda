@@ -31,7 +31,7 @@ import org.jdom.JDOMException;
 public class ApplicationFrame extends javax.swing.JFrame implements org.exmaralda.common.ExmaraldaApplication {
 
     String[] HELP_MENU_TITLES = {"OrthoNormal im Web", "Über OrthoNormal", ""};
-    ApplicationControl applicationControl;
+    public ApplicationControl applicationControl;
 
     /** Creates new form ApplicationFrame
      * @param args */
