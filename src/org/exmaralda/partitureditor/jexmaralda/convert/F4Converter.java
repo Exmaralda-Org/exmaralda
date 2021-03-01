@@ -48,6 +48,7 @@ public class F4Converter {
         InputStreamReader isr = new InputStreamReader(fis, encoding);
         BufferedReader br = new BufferedReader(isr);
         String nextLine = new String();
+        lines = new ArrayList<String>();
         System.out.println("Started reading document " + file.getAbsolutePath());
         int lineCount=0;
         while ((nextLine = br.readLine()) != null){
