@@ -26,6 +26,8 @@ public class TEITCFMerger {
     Document teiDocument;
     Document tcfDocument;
     
+    String ID_PREFIX = ""; // set this to "#" if you must
+    
     public TEITCFMerger(File teiFile, File tcfFile) throws JDOMException, IOException{
         teiDocument = FileIO.readDocumentFromLocalFile(teiFile);
         tcfDocument = FileIO.readDocumentFromLocalFile(tcfFile);
@@ -175,8 +177,8 @@ public class TEITCFMerger {
                         Element tcfElement = elements.get(teiTokenID);
                         String[] tcfTokenIDs = tcfElement.getAttributeValue("tokenIDs").split(" ");
                         Element spanElement = new Element("span", spanGrp.getNamespace());
-                        spanElement.setAttribute("from", "#" + tcfTokenIDs[0]);
-                        spanElement.setAttribute("to", "#" + tcfTokenIDs[tcfTokenIDs.length-1]);
+                        spanElement.setAttribute("from", ID_PREFIX + tcfTokenIDs[0]);
+                        spanElement.setAttribute("to", ID_PREFIX + tcfTokenIDs[tcfTokenIDs.length-1]);
                         if ("text()".equals(valuePath)){
                             spanElement.setText(tcfElement.getText());
                         } else if (valuePath.startsWith("@")){
@@ -244,8 +246,8 @@ public class TEITCFMerger {
                             }
                             Element spanGrp = spanGrpsPerFeature.get(featureName);
                             Element spanElement = new Element("span", spanGrp.getNamespace());
-                            spanElement.setAttribute("from", "#" + tcfTokenIDs[0]);
-                            spanElement.setAttribute("to", "#" + tcfTokenIDs[tcfTokenIDs.length-1]);
+                            spanElement.setAttribute("from", ID_PREFIX + tcfTokenIDs[0]);
+                            spanElement.setAttribute("to", ID_PREFIX + tcfTokenIDs[tcfTokenIDs.length-1]);
                             spanElement.setText(feature.getText());
                             spanGrp.addContent(spanElement);
                         }

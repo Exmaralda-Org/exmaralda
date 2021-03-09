@@ -148,7 +148,7 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                         converter2.writeGenericISOTEIToFile(bt, teiInputFile.getAbsolutePath());                                                
                     }
                     
-                    // call WebLicht with the files and write the result to a temporary text grid file
+                    // call WebLicht with the files 
                     pbd.addText("Chain file: " + webLichtParameters.get("CHAIN"));
                     pbd.addText("TCF file: " + tcfInputFile.getAbsolutePath());
                     pbd.addText("API Key: " + webLichtParameters.get("API-KEY"));
@@ -170,6 +170,11 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                     //TEITCFMerger merger = new TEITCFMerger(tcfResultFile);
                     merger.merge();
                     Document mergedDocument = merger.getMergedDocument();
+                    
+                    // new 09-03-2021
+                    String normalizedMergedDocumentXML = new StylesheetFactory(true)
+                            .applyInternalStylesheetToString("/org/exmaralda/tei/xml/normalize.xsl", IOUtilities.documentToString(mergedDocument));
+                    Document normalizedMergedDocument = IOUtilities.readDocumentFromString(normalizedMergedDocumentXML);
 
                     String tcf = (String) webLichtParameters.get("TCF");
                     if (tcf!=null && tcf.length()>0){
@@ -180,7 +185,8 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
 
                     String tei = (String) webLichtParameters.get("TEI");
                     if (tei!=null && tei.length()>0){
-                        FileIO.writeDocumentToLocalFile(new File(tei), mergedDocument);
+                        //FileIO.writeDocumentToLocalFile(new File(tei), mergedDocument);
+                        FileIO.writeDocumentToLocalFile(new File(tei), normalizedMergedDocument);
                         pbd.addText("TEI written to " + tei);
                     }
 

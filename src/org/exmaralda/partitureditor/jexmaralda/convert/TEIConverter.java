@@ -69,6 +69,8 @@ public class TEIConverter extends AbstractConverter {
     */
     
     public static String ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    public static String ISOTEI2EXMARaLDA_1b_AUGMENTTIMELINE_XSL = "/org/exmaralda/tei/xml/augmentTimeline.xsl";
+    
     //public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences.xsl";
     public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences_optimized.xsl";
     public static String ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL = "/org/exmaralda/tei/xml/detokenize.xsl";
@@ -271,10 +273,17 @@ public class TEIConverter extends AbstractConverter {
             Document doc = IOUtilities.readDocumentFromLocalFile(path);
             String docString = IOUtilities.documentToString(doc);
             fireConverterEvent(new ConverterEvent(new File(path).getName() + " read, now transforming attributes to spans...", 0.1));
+            
             String transform1 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL, docString);
-            fireConverterEvent(new ConverterEvent("Transformed attributes to spans, now transforming token to time references...", 0.25));            
-            String transform2 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL, transform1);
+            fireConverterEvent(new ConverterEvent("Transformed attributes to spans, now augmenting timeline..", 0.25));            
+            
+            // new 09-03-2021
+            String transform1_b = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_1b_AUGMENTTIMELINE_XSL, transform1);
+            fireConverterEvent(new ConverterEvent("Augmented timeline, now transforming token to time references...", 0.35));            
+                        
+            String transform2 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL, transform1_b);
             fireConverterEvent(new ConverterEvent("Transformed token references to time references, now detokenizing...", 0.7));            
+            
             String transform3 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL, transform2);
             fireConverterEvent(new ConverterEvent("Detokenized, now transforming to EXB...", 0.85));            
             String exbString = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_4_TRANSFORM_XSL, transform3);

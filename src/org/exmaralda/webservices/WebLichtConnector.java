@@ -6,18 +6,18 @@ package org.exmaralda.webservices;
 
 import java.io.File;
 import java.io.IOException;
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.jdom.JDOMException;
 
@@ -43,27 +43,35 @@ public class WebLichtConnector {
     public String callWebLicht(File tcfFile, File chainFile, String apiKey) throws IOException, JDOMException{
         
         // setup a HTTP client
-        HttpClient httpClient = new DefaultHttpClient();
+        //HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient = HttpClientBuilder.create().build();
         
         // construct a multipart entity that will be sent via POST to the web service
-        MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);        
+        //MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);  
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();        
+
+        /* example for setting a HttpMultipartMode */
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+
                         
         // add the TCF file
-        FileBody fileBody = new FileBody(tcfFile, "application/xml");
-        entity.addPart("content", fileBody);
+        //FileBody fileBody = new FileBody(tcfFile, "application/xml");
+        FileBody fileBody = new FileBody(tcfFile, ContentType.APPLICATION_XML);      
+        //entity.addPart("content", fileBody);
+        builder.addPart("content", fileBody);
 
         // add the chain file
-        FileBody fileBody2 = new FileBody(chainFile, "application/xml");
-        entity.addPart("chains", fileBody2);
+        FileBody fileBody2 = new FileBody(chainFile, ContentType.APPLICATION_XML);
+        builder.addPart("chains", fileBody2);
         
         // add the API key
-        entity.addPart("apikey", new StringBody(apiKey));
-
+        builder.addPart("apikey", new StringBody(apiKey, ContentType.TEXT_PLAIN));
         //System.out.println("All entities added. ");
         
         // construct a POST request with the multipart entity
         HttpPost httpPost = new HttpPost(webLichtURL);
-        httpPost.setEntity(entity);
+        //httpPost.setEntity(entity);
+        httpPost.setEntity(builder.build());
         HttpResponse response = httpClient.execute(httpPost);
         HttpEntity result = response.getEntity();     
         
@@ -80,8 +88,10 @@ public class WebLichtConnector {
             // now we have the download link - just need to get the content as text
             //String praatTextGridString = downloadText(downloadLink);
             
-            result.consumeContent();
-            httpClient.getConnectionManager().shutdown();        
+            //result.consumeContent();
+            EntityUtils.consume(result);
+            //httpClient.getConnectionManager().shutdown(); 
+            ((CloseableHttpClient)(httpClient)).close();
             return resultAsString;
         } else {
             // something went wrong, throw an exception

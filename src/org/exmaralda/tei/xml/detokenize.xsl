@@ -9,7 +9,7 @@
         Converting from ISO/TEI to EXB is done in several steps:
         (1) move <w> attributes to <span> elements : attributes2spans.xsl
         (2) transform token references in <span> to time references : token2timeSpanReferences.xsl
-        ==> (3) turn explicit token markup into implicit charachter markup : detokenize.xsl
+        ==> (3) turn explicit token markup into implicit character markup : detokenize.xsl
         (4) transform this TEI document to EXB : isotei2exmaralda
         The assumption is that the input to (1) conforms to ZuMult's ISO/TEI schema
         Intermediate steps will still conform to ISO/TEI in general.
@@ -30,16 +30,42 @@
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="tei:seg">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+            <xsl:choose>
+                <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">
+                    <xsl:choose>
+                        <xsl:when test="@subtype='declarative'">. </xsl:when>
+                        <xsl:when test="@subtype='interrogative'">? </xsl:when>
+                        <xsl:when test="@subtype='exclamative'">! </xsl:when>
+                        <xsl:when test="@subtype='interrupted'">&#x2026; </xsl:when>
+                        <xsl:when test="@subtype='not_classified'">&#x02D9; </xsl:when>                        
+                    </xsl:choose>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:copy>
+        
+    </xsl:template>
 
     <xsl:template match="tei:w">
         <xsl:apply-templates/>
         <xsl:choose>
-            <xsl:when test="x"></xsl:when>
+            <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
             <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
-        </xsl:choose>
-        
+        </xsl:choose>        
     </xsl:template>
     
+    <xsl:template match="tei:pc">
+        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="x"></xsl:when>
+            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+        </xsl:choose>        
+    </xsl:template>
+    
+
     <xsl:template match="tei:seg/tei:pause">
         <xsl:choose>
             <!-- <pause xml:id="p495" rend="(0.71)" dur="PT0.71S" start="TLI_950" end="TLI_951"/>  -->
