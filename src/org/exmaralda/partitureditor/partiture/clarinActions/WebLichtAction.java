@@ -15,8 +15,11 @@ import javax.swing.SwingUtilities;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.fsm.FSMException;
+import org.exmaralda.partitureditor.jexmaralda.AbstractEventTier;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
+import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.exmaralda.partitureditor.jexmaralda.convert.TCFConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
@@ -37,7 +40,7 @@ import org.xml.sax.SAXException;
  * Menu: File --> New
  * @author  thomas
  */
-public class WebLichtAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
+public class WebLichtAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction implements ConverterListener {
     
     CLARINProgressDialog pbd;
     
@@ -59,23 +62,15 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
             table.clearUndo();
             table.clearSearchResult();
             table.setFrameEndPosition(-2);
-        } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (SAXException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (FSMException ex) {
+        } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
             ex.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    boolean IMPORT_TEI;
+    File teiFile;
+
     
     private void webLicht() throws JexmaraldaException, IOException, JDOMException, SAXException, FSMException{
         
@@ -118,6 +113,9 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
         pbd.setTitle("CLARIN-D & WebLicht... ");
         //pbd.setAlwaysOnTop(true);
         pbd.setVisible(true);
+        
+        IMPORT_TEI = (boolean) webLichtParameters.get("IMPORT-TEI");
+
 
         // do this in a thread so we can report progress
         Thread webLichtThread = new Thread(){
@@ -148,14 +146,27 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                         converter2.writeGenericISOTEIToFile(bt, teiInputFile.getAbsolutePath());                                                
                     }
                     
+                    File chainFile;
+                    boolean usePredefinedChain = (boolean) webLichtParameters.get("USE-PREDEFINED-CHAIN");
+                    if (!usePredefinedChain){
+                        chainFile = new File((String) webLichtParameters.get("CHAIN"));
+                    } else {
+                        String path = (String) webLichtParameters.get("PREDEFINED-CHAIN");
+                        Document doc = new IOUtilities().readDocumentFromResource(path);
+                        File tempFile = File.createTempFile("WEBLICHT_", ".xml");
+                        FileIO.writeDocumentToLocalFile(tempFile, doc);
+                        chainFile = tempFile;
+                        tempFile.deleteOnExit();
+                    }
+                    
                     // call WebLicht with the files 
-                    pbd.addText("Chain file: " + webLichtParameters.get("CHAIN"));
+                    pbd.addText("Chain file: " + chainFile.getName());
                     pbd.addText("TCF file: " + tcfInputFile.getAbsolutePath());
                     pbd.addText("API Key: " + webLichtParameters.get("API-KEY"));
                     
                     WebLichtConnector wc = new WebLichtConnector();
                     pbd.addText("Calling WebLicht at " + wc.webLichtURL + ".....");
-                    String result = wc.callWebLicht(tcfInputFile, new File((String) webLichtParameters.get("CHAIN")), (String) webLichtParameters.get("API-KEY"));
+                    String result = wc.callWebLicht(tcfInputFile, chainFile, (String) webLichtParameters.get("API-KEY"));
                     File tcfResultFile = File.createTempFile("TCF", ".tcf");
                     tcfResultFile.deleteOnExit();
                     FileIO.writeDocumentToLocalFile(tcfResultFile, IOUtilities.readDocumentFromString(result));
@@ -184,10 +195,16 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                     }
 
                     String tei = (String) webLichtParameters.get("TEI");
+                    boolean importTEI = (boolean) webLichtParameters.get("IMPORT-TEI");
                     if (tei!=null && tei.length()>0){
                         //FileIO.writeDocumentToLocalFile(new File(tei), mergedDocument);
-                        FileIO.writeDocumentToLocalFile(new File(tei), normalizedMergedDocument);
+                        teiFile = new File(tei);
+                        FileIO.writeDocumentToLocalFile(teiFile, normalizedMergedDocument);
                         pbd.addText("TEI written to " + tei);
+                    } else if (importTEI){
+                        teiFile = File.createTempFile("TEI_", ".xml");
+                        FileIO.writeDocumentToLocalFile(teiFile, normalizedMergedDocument);
+                        teiFile.deleteOnExit();
                     }
 
                     String html = (String) webLichtParameters.get("HTML");
@@ -208,7 +225,7 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                         @Override
                         public void run() {
                             try {
-                                pbd.addText("Done.");
+                                pbd.addText("WebLicht call done.");
                                 success();
                             } catch (IOException ex) {
                                 pbd.addText("Error: " + ex.getLocalizedMessage());
@@ -235,8 +252,32 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
     }
     
     public void success() throws IOException, JexmaraldaException{        
+        if (IMPORT_TEI){
+            boolean proceed = table.checkSave();
+            if (!proceed) return;
+            TEIConverter teiConverter = new TEIConverter();
+            teiConverter.addConverterListener(this);
+            BasicTranscription importedTranscription = teiConverter.readISOTEIFromFile(teiFile.getAbsolutePath());
+            importedTranscription.getBody().stratify(AbstractEventTier.STRATIFY_BY_DISTRIBUTION);
 
+            table.getModel().setTranscription(importedTranscription);
+            table.setupMedia();
+            table.setupPraatPanel();
+
+            table.setFilename("untitled.exb");
+            table.linkPanelDialog.getLinkPanel().emptyContents();
+            table.largeTextField.setText("");
+            table.restoreAction.setEnabled(false);
+            table.reconfigureAutoSaveThread();
+            
+        }
         
+    }
+
+    @Override
+    public void processConverterEvent(ConverterEvent converterEvent) {
+        System.out.println(converterEvent.getMessage());
+        pbd.addText(converterEvent.getMessage());
     }
 }
 

@@ -73,6 +73,8 @@ public class TEIConverter extends AbstractConverter {
     
     //public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences.xsl";
     public static String ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL = "/org/exmaralda/tei/xml/token2timeSpanReferences_optimized.xsl";
+    public static String ISOTEI2EXMARaLDA_2b_REMOVE_TIMEPOINTS_XSL = "/org/exmaralda/tei/xml/removeTimepointsWithoutAbsolute.xsl";
+
     public static String ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL = "/org/exmaralda/tei/xml/detokenize.xsl";
     public static String ISOTEI2EXMARaLDA_4_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2exmaralda.xsl";
     
@@ -282,14 +284,26 @@ public class TEIConverter extends AbstractConverter {
             fireConverterEvent(new ConverterEvent("Augmented timeline, now transforming token to time references...", 0.35));            
                         
             String transform2 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL, transform1_b);
-            fireConverterEvent(new ConverterEvent("Transformed token references to time references, now detokenizing...", 0.7));            
+            fireConverterEvent(new ConverterEvent("Transformed token references to time references, now remvoing unnecessary timepoint...", 0.7));            
+
+            // new 10-03-2021
+            String transform2_b = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2b_REMOVE_TIMEPOINTS_XSL, transform2);
+            fireConverterEvent(new ConverterEvent("Unnecessary timepoints removed, now detokenizing...", 0.8));            
+
             
-            String transform3 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL, transform2);
-            fireConverterEvent(new ConverterEvent("Detokenized, now transforming to EXB...", 0.85));            
+            String transform3 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL, transform2_b);
+            fireConverterEvent(new ConverterEvent("Detokenized, now transforming to EXB...", 0.9));            
             String exbString = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_4_TRANSFORM_XSL, transform3);
             fireConverterEvent(new ConverterEvent("Transformed to EXB", 0.95));            
             BasicTranscription bt = new BasicTranscription();
             bt.BasicTranscriptionFromString(exbString);
+            
+            String referencedFile = bt.getHead().getMetaInformation().getReferencedFile();
+            if (referencedFile.startsWith("file:/")){
+                bt.getHead().getMetaInformation().setReferencedFile(referencedFile.replaceAll("\\:\\/", ":///"));
+            }
+            
+            
             return bt;
         } catch (JDOMException | SAXException | JexmaraldaException | ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(TEIConverter.class.getName()).log(Level.SEVERE, null, ex);

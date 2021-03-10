@@ -4,8 +4,11 @@
  */
 package org.exmaralda.webservices.swing;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,6 +31,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
     public boolean approved = false;
     File defaultDirectory;
+    WebLichtChainComboBoxModel webLichtChainComboBoxModel = new WebLichtChainComboBoxModel();
     
     /**
      * Creates new form WebLichtParameterDialog
@@ -35,18 +39,25 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     public WebLichtParameterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        predefinedChainsComboBox.setModel(webLichtChainComboBoxModel);
+        predefinedChainsComboBox.setSelectedIndex(0);
+        predefinedChainsComboBox.setRenderer(new WebLichtChainListCellRenderer());
         updateOK();
     }
     
     public HashMap<String, Object> getWebLichtParameters() {
-        HashMap<String, Object> result = new HashMap<String, Object>();
+        HashMap<String, Object> result = new HashMap<>();
         result.put("CHAIN", chainTextField.getText());
+        String path = ((ChainDefinition)predefinedChainsComboBox.getSelectedItem()).getPath();
+        result.put("PREDEFINED-CHAIN", path);
+        result.put("USE-PREDEFINED-CHAIN", (Boolean)predefinedChainRadioButton.isSelected());            
         result.put("API-KEY", apiKeyTextField.getText());
         result.put("TCF", tcfTextField.getText());
         result.put("TEI", teiTextField.getText());
         result.put("HTML", htmlTextField.getText());
         result.put("LANG", (String)languageComboBox.getSelectedItem());
         result.put("SEGMENTATION", (String)segmentationComboBox.getSelectedItem());
+        result.put("IMPORT-TEI", (Boolean)importTEICheckBox.isSelected());
         
         return result;
     }
@@ -69,6 +80,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        chainButtonGroup = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         languagePanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -79,14 +91,20 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         segmentationComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         chainPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        chainExplainLabel = new javax.swing.JLabel();
+        chainMainPanel = new javax.swing.JPanel();
+        predefinedPanel = new javax.swing.JPanel();
+        predefinedChainRadioButton = new javax.swing.JRadioButton();
+        predefinedChainsComboBox = new javax.swing.JComboBox<>();
+        customPanel = new javax.swing.JPanel();
+        customChainRadioButton = new javax.swing.JRadioButton();
         chainTextField = new javax.swing.JTextField();
         chainBrowseButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         apikeyPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         apiKeyTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        getAPIKeyButton = new javax.swing.JButton();
         outputPanel = new javax.swing.JPanel();
         tcfPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -100,6 +118,8 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         htmlTextField = new javax.swing.JTextField();
         htmlBrowseButton = new javax.swing.JButton();
+        importTEIPanel = new javax.swing.JPanel();
+        importTEICheckBox = new javax.swing.JCheckBox();
         okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -107,6 +127,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("WebLicht Parameters");
 
+        mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         languagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
@@ -142,7 +163,38 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         chainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Chain definition"));
         chainPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        chainExplainLabel.setText("Please choose the file which defines the WebLicht processing chain");
+        chainPanel.add(chainExplainLabel, java.awt.BorderLayout.PAGE_START);
+
+        chainMainPanel.setLayout(new javax.swing.BoxLayout(chainMainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        predefinedPanel.setLayout(new javax.swing.BoxLayout(predefinedPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        chainButtonGroup.add(predefinedChainRadioButton);
+        predefinedChainRadioButton.setSelected(true);
+        predefinedChainRadioButton.setText("Predefined: ");
+        predefinedChainRadioButton.setMaximumSize(new java.awt.Dimension(85, 23));
+        predefinedChainRadioButton.setMinimumSize(new java.awt.Dimension(85, 23));
+        predefinedChainRadioButton.setPreferredSize(new java.awt.Dimension(85, 23));
+        predefinedPanel.add(predefinedChainRadioButton);
+
+        predefinedChainsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                predefinedChainsComboBoxActionPerformed(evt);
+            }
+        });
+        predefinedPanel.add(predefinedChainsComboBox);
+
+        chainMainPanel.add(predefinedPanel);
+
+        customPanel.setLayout(new javax.swing.BoxLayout(customPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        chainButtonGroup.add(customChainRadioButton);
+        customChainRadioButton.setText("Custom: ");
+        customChainRadioButton.setMaximumSize(new java.awt.Dimension(85, 23));
+        customChainRadioButton.setMinimumSize(new java.awt.Dimension(85, 23));
+        customChainRadioButton.setPreferredSize(new java.awt.Dimension(85, 23));
+        customPanel.add(customChainRadioButton);
 
         chainTextField.setMaximumSize(new java.awt.Dimension(500, 20));
         chainTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +202,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
                 chainTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(chainTextField);
+        customPanel.add(chainTextField);
 
         chainBrowseButton.setText("Browse...");
         chainBrowseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -158,12 +210,12 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
                 chainBrowseButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(chainBrowseButton);
+        customPanel.add(chainBrowseButton);
 
-        chainPanel.add(jPanel1, java.awt.BorderLayout.CENTER);
+        chainMainPanel.add(customPanel);
+        customPanel.getAccessibleContext().setAccessibleDescription("");
 
-        jLabel1.setText("Please choose the file which defines the WebLicht processing chain");
-        chainPanel.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+        chainPanel.add(chainMainPanel, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(chainPanel);
 
@@ -183,6 +235,15 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Please provide a valid API key for WebLicht as a Service");
         apikeyPanel.add(jLabel2, java.awt.BorderLayout.PAGE_START);
+
+        getAPIKeyButton.setBackground(java.awt.Color.blue);
+        getAPIKeyButton.setText("Get an API key from the WaaS website...");
+        getAPIKeyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getAPIKeyButtonActionPerformed(evt);
+            }
+        });
+        apikeyPanel.add(getAPIKeyButton, java.awt.BorderLayout.PAGE_END);
 
         mainPanel.add(apikeyPanel);
 
@@ -263,6 +324,12 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
         outputPanel.add(htmlPanel);
 
+        importTEICheckBox.setSelected(true);
+        importTEICheckBox.setText("Import TEI into Partitur Editor");
+        importTEIPanel.add(importTEICheckBox);
+
+        outputPanel.add(importTEIPanel);
+
         mainPanel.add(outputPanel);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
@@ -312,6 +379,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         }
         updateOK();
         updateChainLanguage();
+        customChainRadioButton.setSelected(true);
         
     }//GEN-LAST:event_chainBrowseButtonActionPerformed
 
@@ -367,6 +435,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
     private void apiKeyTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apiKeyTextFieldActionPerformed
         updateOK();
+        this.customChainRadioButton.setSelected(true);
     }//GEN-LAST:event_apiKeyTextFieldActionPerformed
 
     private void chainTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chainTextFieldActionPerformed
@@ -386,6 +455,20 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     private void htmlTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_htmlTextFieldActionPerformed
        updateOK();
     }//GEN-LAST:event_htmlTextFieldActionPerformed
+
+    private void getAPIKeyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAPIKeyButtonActionPerformed
+        try {
+            Desktop.getDesktop().browse(new URI("https://weblicht.sfs.uni-tuebingen.de/WaaS/apikey"));
+        } catch (URISyntaxException | IOException ex) {
+            Logger.getLogger(WebLichtParameterDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_getAPIKeyButtonActionPerformed
+
+    private void predefinedChainsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_predefinedChainsComboBoxActionPerformed
+        predefinedChainRadioButton.setSelected(true);
+        String language = ((ChainDefinition)predefinedChainsComboBox.getSelectedItem()).getLanguage();
+        languageComboBox.setSelectedItem(language);
+    }//GEN-LAST:event_predefinedChainsComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,19 +516,25 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel apikeyPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton chainBrowseButton;
+    private javax.swing.ButtonGroup chainButtonGroup;
+    private javax.swing.JLabel chainExplainLabel;
+    private javax.swing.JPanel chainMainPanel;
     private javax.swing.JPanel chainPanel;
     private javax.swing.JTextField chainTextField;
+    private javax.swing.JRadioButton customChainRadioButton;
+    private javax.swing.JPanel customPanel;
+    private javax.swing.JButton getAPIKeyButton;
     private javax.swing.JButton htmlBrowseButton;
     private javax.swing.JPanel htmlPanel;
     private javax.swing.JTextField htmlTextField;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JCheckBox importTEICheckBox;
+    private javax.swing.JPanel importTEIPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -455,6 +544,9 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
     private javax.swing.JPanel outputPanel;
+    private javax.swing.JRadioButton predefinedChainRadioButton;
+    private javax.swing.JComboBox<ChainDefinition> predefinedChainsComboBox;
+    private javax.swing.JPanel predefinedPanel;
     private javax.swing.JComboBox segmentationComboBox;
     private javax.swing.JPanel segmentationPanel;
     private javax.swing.JButton tcfBrowseButton;

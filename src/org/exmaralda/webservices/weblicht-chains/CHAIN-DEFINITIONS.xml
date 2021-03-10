@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chain-definitions>
+    <chain-definition>
+        <name>BBAW: Part-Of-Speech</name>
+        <language>de</language>
+        <path>/org/exmaralda/webservices/weblicht-chains/BBAW_PartOfSpeech_DE.xml</path>
+        <description>To do</description>
+    </chain-definition>
+
+    <chain-definition>
+        <name>SfS: Named Entity &amp; Geo Location</name>
+        <language>en</language>
+        <path>/org/exmaralda/webservices/weblicht-chains/SFS_NamedEntity_GeoLocation_EN.xml</path>
+        <description>To do</description>
+    </chain-definition>
+    
+
+</chain-definitions>

@@ -45,6 +45,11 @@
                     <xsl:apply-templates select="@*|node()"/>
                 </xsl:copy>
             </xsl:when>
+            <xsl:when test="//tei:span[@from=$ID or @to=$ID]">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:copy>                
+            </xsl:when>
             <xsl:otherwise/>
             
         </xsl:choose>

@@ -1,0 +1,29 @@
+
+<cmd:CLARIN-D xmlns:cmd="http://www.clarin.eu/cmd/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.clarin.eu/cmd/1 http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1320657629644/xsd">
+    <cmd:chains>
+        <cmd:CMD CMDVersion="1.2">
+            <cmd:Resources>
+                <cmd:ResourceProxyList/>
+                <cmd:JournalFileProxyList/>
+                <cmd:ResourceRelationList/>
+            </cmd:Resources>
+            <cmd:Components>
+                <cmd:WebServiceToolChain>
+                    <cmd:GeneralInfo>
+                        <cmd:Descriptions>
+                            <cmd:Description/>
+                        </cmd:Descriptions>
+                        <cmd:ResourceName>myChain</cmd:ResourceName>
+                        <cmd:ResourceClass>Toolchain</cmd:ResourceClass>
+                    </cmd:GeneralInfo>
+                    <cmd:Toolchain>
+                        <cmd:ToolInChain>
+                            <cmd:PID>https://hdl.handle.net/21.11120/0000-0008-3182-D</cmd:PID>
+                            <cmd:Parameter value="0.4" name="version"/>
+                        </cmd:ToolInChain>
+                    </cmd:Toolchain>
+                </cmd:WebServiceToolChain>
+            </cmd:Components>
+        </cmd:CMD>
+    </cmd:chains>
+</cmd:CLARIN-D>

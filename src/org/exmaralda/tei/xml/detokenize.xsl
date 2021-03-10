@@ -73,8 +73,23 @@
             <xsl:otherwise>
                 <xsl:variable name="DURATION" select="substring-after(substring-before(@dur,'S'), 'PT')"/>
                 <xsl:choose>
-                    <xsl:when test="$TRANSCRIPTION_SYSTEM='cGAT' or $TRANSCRIPTION_SYSTEM='GAT'">(<xsl:value-of select="$DURATION"/>)</xsl:when>
-                    <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">((<xsl:value-of select="$DURATION"/>s))</xsl:when>
+                    <xsl:when test="$TRANSCRIPTION_SYSTEM='cGAT' or $TRANSCRIPTION_SYSTEM='GAT'">
+                        <xsl:choose>
+                            <xsl:when test="@type='micro'">(.)</xsl:when>
+                            <xsl:when test="@type='short'">(-)</xsl:when>
+                            <xsl:when test="@type='medium'">(--)</xsl:when>
+                            <xsl:when test="@type='long'">(---)</xsl:when>
+                            <xsl:otherwise>(<xsl:value-of select="$DURATION"/>)</xsl:otherwise>
+                        </xsl:choose>                        
+                    </xsl:when>
+                    <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">
+                        <xsl:choose>
+                            <xsl:when test="@type='short'">&#x2022;</xsl:when>
+                            <xsl:when test="@type='medium'">&#x2022; &#x2022;</xsl:when>
+                            <xsl:when test="@type='long'">&#x2022; &#x2022; &#x2022;</xsl:when>
+                            <xsl:otherwise>((<xsl:value-of select="$DURATION"/>s))</xsl:otherwise>
+                        </xsl:choose>                                                
+                    </xsl:when>
                     <xsl:otherwise>(<xsl:value-of select="$DURATION"/>)</xsl:otherwise>
                 </xsl:choose>                
             </xsl:otherwise>

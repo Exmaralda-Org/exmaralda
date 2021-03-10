@@ -33,6 +33,7 @@ public class HIATSegmentation extends AbstractSegmentation {
     }
         
     
+    @Override
     public SegmentedTranscription BasicToSegmented(BasicTranscription bt) throws SAXException, FSMException {
          SegmentedTranscription st = bt.toSegmentedTranscription();
          FSMSaxReader sr = new FSMSaxReader();
