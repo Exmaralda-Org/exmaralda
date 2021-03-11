@@ -96,6 +96,9 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         predefinedPanel = new javax.swing.JPanel();
         predefinedChainRadioButton = new javax.swing.JRadioButton();
         predefinedChainsComboBox = new javax.swing.JComboBox<>();
+        descriptionPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descriptionTextArea = new javax.swing.JTextArea();
         customPanel = new javax.swing.JPanel();
         customChainRadioButton = new javax.swing.JRadioButton();
         chainTextField = new javax.swing.JTextField();
@@ -186,6 +189,22 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         predefinedPanel.add(predefinedChainsComboBox);
 
         chainMainPanel.add(predefinedPanel);
+
+        descriptionPanel.setLayout(new javax.swing.BoxLayout(descriptionPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        descriptionTextArea.setEditable(false);
+        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
+        descriptionTextArea.setColumns(20);
+        descriptionTextArea.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        descriptionTextArea.setLineWrap(true);
+        descriptionTextArea.setRows(5);
+        descriptionTextArea.setWrapStyleWord(true);
+        descriptionTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 10, 10));
+        jScrollPane1.setViewportView(descriptionTextArea);
+
+        descriptionPanel.add(jScrollPane1);
+
+        chainMainPanel.add(descriptionPanel);
 
         customPanel.setLayout(new javax.swing.BoxLayout(customPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -326,6 +345,11 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
         importTEICheckBox.setSelected(true);
         importTEICheckBox.setText("Import TEI into Partitur Editor");
+        importTEICheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importTEICheckBoxActionPerformed(evt);
+            }
+        });
         importTEIPanel.add(importTEICheckBox);
 
         outputPanel.add(importTEIPanel);
@@ -468,7 +492,14 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         predefinedChainRadioButton.setSelected(true);
         String language = ((ChainDefinition)predefinedChainsComboBox.getSelectedItem()).getLanguage();
         languageComboBox.setSelectedItem(language);
+        String description = ((ChainDefinition)predefinedChainsComboBox.getSelectedItem()).getDescription();
+        this.descriptionTextArea.setText(description);
+        
     }//GEN-LAST:event_predefinedChainsComboBoxActionPerformed
+
+    private void importTEICheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importTEICheckBoxActionPerformed
+        updateOK();
+    }//GEN-LAST:event_importTEICheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,6 +554,8 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     private javax.swing.JTextField chainTextField;
     private javax.swing.JRadioButton customChainRadioButton;
     private javax.swing.JPanel customPanel;
+    private javax.swing.JPanel descriptionPanel;
+    private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JButton getAPIKeyButton;
     private javax.swing.JButton htmlBrowseButton;
     private javax.swing.JPanel htmlPanel;
@@ -538,6 +571,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox languageComboBox;
     private javax.swing.JPanel languagePanel;
     private javax.swing.JPanel mainPanel;
@@ -559,9 +593,9 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
     private void updateOK() {
         boolean parametersSuffice = 
-                chainTextField.getText().length()>0
+                (predefinedChainRadioButton.isSelected() || chainTextField.getText().length()>0)
                 && apiKeyTextField.getText().length()>0
-                && (tcfTextField.getText().length()>0 || teiTextField.getText().length()>0 || htmlTextField.getText().length()>0);
+                && (tcfTextField.getText().length()>0 || teiTextField.getText().length()>0 || htmlTextField.getText().length()>0 || importTEICheckBox.isSelected());
         okButton.setEnabled(parametersSuffice);
     }
 
