@@ -93,6 +93,8 @@ public class PartitureTableWithActions extends PartitureTable
 
     /** added 04-02-2010: holds the current selection length in seconds */
     public double currentSelectionLength = 0.0;
+    public double currentSelectionStart = -1.0;
+    public double currentSelectionEnd = -1.0;
 
     /** determines whether certain actions auto-generate absolute timestamps
      * when the transcription is associated with a media file
@@ -359,6 +361,69 @@ public class PartitureTableWithActions extends PartitureTable
             editor.replaceSelection(pauseText);
             // new 17-11-2017: issue #122
             editor.requestFocus();
+        } else {
+            // 1. find the nn tier
+            Tier nn_t = null;
+            for (int i=0; i<getModel().getTranscription().getBody().getNumberOfTiers(); i++){
+                Tier tryTier = getModel().getTranscription().getBody().getTierAt(i);
+                if (tryTier.getCategory().equals("v") && tryTier.getType().equals("t") && tryTier.getSpeaker()==null){
+                    nn_t = tryTier;
+                    break;
+                }
+            }
+            boolean isOccupied = true;
+            // 2. create the nn tier if there isn't one
+            if (nn_t==null){
+                nn_t = new Tier();
+                nn_t.setCategory("v");
+                nn_t.setType("t");
+                nn_t.setSpeaker(null);
+                nn_t.setID("TIE_");
+                nn_t.setDisplayName("");
+                getModel().addTier(nn_t);
+                isOccupied = false;
+            }
+            
+            // 3. check if the nn_tier is occupied
+            if (isOccupied){
+                isOccupied = false;
+                for (int j=0; j<nn_t.getNumberOfEvents(); j++){
+                    try {
+                        Event e = nn_t.getEventAt(j);
+                        double start = getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemWithID(e.getStart()).getTime();
+                        double end = getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemWithID(e.getEnd()).getTime();
+                        if (((start>=currentSelectionStart) && (start<=currentSelectionEnd))
+                                || ((end>=currentSelectionStart) && (end<=currentSelectionEnd))){
+                            isOccupied = true;
+                            break;                    
+                        }
+                    } catch (JexmaraldaException ex) {
+                        Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
+                        return;
+                    }                    
+                }
+            }
+            
+            if (isOccupied){
+                JOptionPane.showMessageDialog(this, "Cannot insert pause: position in nn tier is occupied. ");
+                return;
+            }
+            
+            int[] cols = getModel().insertInterval(currentSelectionStart, currentSelectionEnd, 0.01);
+            int col1 = cols[0];
+            int col2 = cols[1];
+
+            TimelineItem tli1 = getModel().getTimelineItem(col1);
+            TimelineItem tli2 = getModel().getTimelineItem(col2);
+            Event newEvent = new Event(tli1.getID(), tli2.getID(), pauseText);            
+            nn_t.addEvent(newEvent);
+            int row = getModel().getTranscription().getBody().lookupID(nn_t.getID());
+
+            getModel().fireEventAdded(row, col1, col2);            
+            makeColumnVisible(col1+1);
+            setNewSelection(row, col1, true);
+            
         }
     }
 
@@ -2601,6 +2666,8 @@ public class PartitureTableWithActions extends PartitureTable
 
     @Override
     public void processTimeSelectionEvent(TimeSelectionEvent event) {
+        currentSelectionStart = event.getStartTime() / 1000.0;
+        currentSelectionEnd = event.getEndTime() / 1000.0;
         currentSelectionLength = (event.getEndTime()-event.getStartTime())/1000.0;
         insertPauseAction.setEnabled(currentSelectionLength>0.0);
         mediaPanelDialog.setTimeSelection(event);

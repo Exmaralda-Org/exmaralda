@@ -236,8 +236,6 @@ public class MainPanel extends javax.swing.JPanel {
 
         rateSpinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.5d, 1.5d, 0.1d));
         rateSpinner.setToolTipText("Change media playback rate (1=normal speed)");
-        rateSpinner.setMinimumSize(new java.awt.Dimension(47, 20));
-        rateSpinner.setPreferredSize(new java.awt.Dimension(47, 20));
         playerControlsPanel.add(rateSpinner);
 
         selectionControlsPanel.setLayout(new javax.swing.BoxLayout(selectionControlsPanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -405,6 +403,11 @@ public class MainPanel extends javax.swing.JPanel {
 
         insertPauseInPartiturButton.setText("jButton1");
         insertPauseInPartiturButton.setPreferredSize(new java.awt.Dimension(24, 24));
+        insertPauseInPartiturButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertPauseInPartiturButtonActionPerformed(evt);
+            }
+        });
         partiturViewButtonPanel.add(insertPauseInPartiturButton);
 
         removeEventInPartiturButton.setText("jButton1");
@@ -575,6 +578,10 @@ public class MainPanel extends javax.swing.JPanel {
     private void addMaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaskButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addMaskButtonActionPerformed
+
+    private void insertPauseInPartiturButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertPauseInPartiturButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertPauseInPartiturButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -25,6 +25,7 @@ public class InsertPauseAction extends org.exmaralda.partitureditor.partiture.Ab
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("insertPauseAction!");
         insertPause();

@@ -2384,41 +2384,45 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 case 0 :
                 case 2 : // i.e. we are NOT coming from the partitur view                    
                     commitEdit();
-                    if (newSelectedPanelIndex==0){
-                        // i.e. we are going (from the contribution view) to the event view
-                        System.out.println("[*** Going from the contribution to the event view ***]");
-                        correspondingEvent.setFolkerEvent((org.exmaralda.folker.data.Event)selection);
-                        eventListTableModel.fireTableDataChanged();
-                    } else if (newSelectedPanelIndex==1){
-                        // i.e. we are going to the partiturview
-                        System.out.println("[*** Going to the partitur view ***]");
-                        applicationFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        BasicTranscription bt = org.exmaralda.folker.io.EventListTranscriptionConverter
-                                .exportBasicTranscription(getTranscription(), 
-                                (org.exmaralda.folker.data.Event)selection, correspondingEvent);
-                        System.out.println("Basic transcription calculated.");
-                        bt.getHead().getMetaInformation().setReferencedFile(currentMediaPath);
-                        // stratify the transcription
-                        System.out.println("Starting to stratify...");
-                        bt.getBody().stratify(Tier.STRATIFY_BY_DISTRIBUTION);
-                        
-                        partitur.getModel().setTranscription(bt);
-
-                        // added 06-04-2009
-                        partitur.protectLastColumn = true;
-                        // added 19-01-2010
-                        partitur.getModel().protectLastColumn = true;
-
-                        partitur.getModel().anchorTimeline(0.0, player.getTotalLength());
-                        applicationFrame.setCursor(Cursor.getDefaultCursor());
-                    } else if (newSelectedPanelIndex==2){
-                        // i.e. we are going (from the event view) to the contribution view
-                        System.out.println("[*** Going from the event to the contribution view ***]");
-                        correspondingEvent.setFolkerEvent((org.exmaralda.folker.data.Event)selection);
-                        getTranscription().updateContributions();
-                        contributionListTableModel.fireTableDataChanged();                                                
+                    switch (newSelectedPanelIndex) {
+                        case 0:
+                            // i.e. we are going (from the contribution view) to the event view
+                            System.out.println("[*** Going from the contribution to the event view ***]");
+                            correspondingEvent.setFolkerEvent((org.exmaralda.folker.data.Event)selection);
+                            eventListTableModel.fireTableDataChanged();
+                            break;
+                        case 1:
+                            // i.e. we are going to the partiturview
+                            System.out.println("[*** Going to the partitur view ***]");
+                            applicationFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                            BasicTranscription bt = org.exmaralda.folker.io.EventListTranscriptionConverter
+                                    .exportBasicTranscription(getTranscription(),
+                                            (org.exmaralda.folker.data.Event)selection, correspondingEvent);
+                            System.out.println("Basic transcription calculated.");
+                            bt.getHead().getMetaInformation().setReferencedFile(currentMediaPath);
+                            // stratify the transcription
+                            System.out.println("Starting to stratify...");
+                            bt.getBody().stratify(Tier.STRATIFY_BY_DISTRIBUTION);
+                            partitur.getModel().setTranscription(bt);
+                            // added 06-04-2009
+                            partitur.protectLastColumn = true;
+                            // added 19-01-2010
+                            partitur.getModel().protectLastColumn = true;
+                            partitur.getModel().anchorTimeline(0.0, player.getTotalLength());
+                            applicationFrame.setCursor(Cursor.getDefaultCursor());
+                            break;
+                        case 2:
+                            // i.e. we are going (from the event view) to the contribution view
+                            System.out.println("[*** Going from the event to the contribution view ***]");
+                            correspondingEvent.setFolkerEvent((org.exmaralda.folker.data.Event)selection);
+                            getTranscription().updateContributions();
+                            contributionListTableModel.fireTableDataChanged();
+                            break;
+                        default:
+                            break;
                     }
                     break;
+
             }
                       
             timeViewer.removeSelection();

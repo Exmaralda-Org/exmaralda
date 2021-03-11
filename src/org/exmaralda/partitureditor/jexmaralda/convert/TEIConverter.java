@@ -68,6 +68,8 @@ public class TEIConverter extends AbstractConverter {
         Intermediate steps will still conform to ISO/TEI in general.
     */
     
+    public static String ISOTEI2EXMARaLDA_0_NORMALIZE = "/org/exmaralda/tei/xml/normalize.xsl";
+    
     public static String ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
     public static String ISOTEI2EXMARaLDA_1b_AUGMENTTIMELINE_XSL = "/org/exmaralda/tei/xml/augmentTimeline.xsl";
     
@@ -274,9 +276,14 @@ public class TEIConverter extends AbstractConverter {
             fireConverterEvent(new ConverterEvent("Reading " + new File(path).getName(), 0.05));
             Document doc = IOUtilities.readDocumentFromLocalFile(path);
             String docString = IOUtilities.documentToString(doc);
-            fireConverterEvent(new ConverterEvent(new File(path).getName() + " read, now transforming attributes to spans...", 0.1));
+            fireConverterEvent(new ConverterEvent(new File(path).getName() + " read, now normalizing...", 0.1));
             
-            String transform1 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL, docString);
+            // new 10-03-2021
+            String transform0 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_0_NORMALIZE, docString);
+            fireConverterEvent(new ConverterEvent("Normalized, now transforming attributes to spans...", 0.15));            
+
+
+            String transform1 = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL, transform0);
             fireConverterEvent(new ConverterEvent("Transformed attributes to spans, now augmenting timeline..", 0.25));            
             
             // new 09-03-2021
