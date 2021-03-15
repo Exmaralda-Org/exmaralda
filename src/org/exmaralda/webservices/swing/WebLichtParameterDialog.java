@@ -82,14 +82,11 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
         chainButtonGroup = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
-        languagePanel = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        languageComboBox = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        segmentationPanel = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        segmentationComboBox = new javax.swing.JComboBox();
-        jLabel7 = new javax.swing.JLabel();
+        apikeyPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        apiKeyTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        getAPIKeyButton = new javax.swing.JButton();
         chainPanel = new javax.swing.JPanel();
         chainExplainLabel = new javax.swing.JLabel();
         chainMainPanel = new javax.swing.JPanel();
@@ -103,11 +100,14 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         customChainRadioButton = new javax.swing.JRadioButton();
         chainTextField = new javax.swing.JTextField();
         chainBrowseButton = new javax.swing.JButton();
-        apikeyPanel = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        apiKeyTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        getAPIKeyButton = new javax.swing.JButton();
+        languagePanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        languageComboBox = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        segmentationPanel = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        segmentationComboBox = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
         outputPanel = new javax.swing.JPanel();
         tcfPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -133,35 +133,33 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        languagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
-        languagePanel.setLayout(new java.awt.BorderLayout());
+        apikeyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("API key"));
+        apikeyPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
-        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "de", "en", "cs", "es", "fr", "it", "nl", "ro" }));
-        jPanel3.add(languageComboBox);
+        apiKeyTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apiKeyTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel2.add(apiKeyTextField);
 
-        languagePanel.add(jPanel3, java.awt.BorderLayout.CENTER);
+        apikeyPanel.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jLabel6.setText("Please specify the language of the input and the toolchain");
-        languagePanel.add(jLabel6, java.awt.BorderLayout.NORTH);
+        jLabel2.setText("Please provide a valid API key for WebLicht as a Service");
+        apikeyPanel.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
-        mainPanel.add(languagePanel);
+        getAPIKeyButton.setBackground(java.awt.Color.blue);
+        getAPIKeyButton.setText("Get an API key from the WaaS website...");
+        getAPIKeyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getAPIKeyButtonActionPerformed(evt);
+            }
+        });
+        apikeyPanel.add(getAPIKeyButton, java.awt.BorderLayout.PAGE_END);
 
-        segmentationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Segmentation"));
-        segmentationPanel.setLayout(new java.awt.BorderLayout());
-
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
-
-        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HIAT", "GENERIC", "cGAT Minimal" }));
-        jPanel4.add(segmentationComboBox);
-
-        segmentationPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        jLabel7.setText("Please specify which algorithm to use for segmenting (=tokenising) the input");
-        segmentationPanel.add(jLabel7, java.awt.BorderLayout.NORTH);
-
-        mainPanel.add(segmentationPanel);
+        mainPanel.add(apikeyPanel);
 
         chainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Chain definition"));
         chainPanel.setLayout(new java.awt.BorderLayout());
@@ -238,33 +236,35 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
         mainPanel.add(chainPanel);
 
-        apikeyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("API key"));
-        apikeyPanel.setLayout(new java.awt.BorderLayout());
+        languagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
+        languagePanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
-        apiKeyTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apiKeyTextFieldActionPerformed(evt);
-            }
-        });
-        jPanel2.add(apiKeyTextField);
+        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "de", "en", "cs", "es", "fr", "it", "nl", "ro" }));
+        jPanel3.add(languageComboBox);
 
-        apikeyPanel.add(jPanel2, java.awt.BorderLayout.CENTER);
+        languagePanel.add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setText("Please provide a valid API key for WebLicht as a Service");
-        apikeyPanel.add(jLabel2, java.awt.BorderLayout.PAGE_START);
+        jLabel6.setText("Please specify the language of the input and the toolchain");
+        languagePanel.add(jLabel6, java.awt.BorderLayout.NORTH);
 
-        getAPIKeyButton.setBackground(java.awt.Color.blue);
-        getAPIKeyButton.setText("Get an API key from the WaaS website...");
-        getAPIKeyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getAPIKeyButtonActionPerformed(evt);
-            }
-        });
-        apikeyPanel.add(getAPIKeyButton, java.awt.BorderLayout.PAGE_END);
+        mainPanel.add(languagePanel);
 
-        mainPanel.add(apikeyPanel);
+        segmentationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Segmentation"));
+        segmentationPanel.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+
+        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HIAT", "GENERIC", "cGAT Minimal" }));
+        jPanel4.add(segmentationComboBox);
+
+        segmentationPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        jLabel7.setText("Please specify which algorithm to use for segmenting (=tokenising) the input");
+        segmentationPanel.add(jLabel7, java.awt.BorderLayout.NORTH);
+
+        mainPanel.add(segmentationPanel);
 
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Output"));
         outputPanel.setLayout(new javax.swing.BoxLayout(outputPanel, javax.swing.BoxLayout.Y_AXIS));

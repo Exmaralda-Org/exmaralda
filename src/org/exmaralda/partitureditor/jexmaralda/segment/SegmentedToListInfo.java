@@ -121,7 +121,7 @@ public class SegmentedToListInfo {
                 }
             }
             break;
-            case GAT_INTONATIONUNIT_SEGMENTATION :
+        case GAT_INTONATIONUNIT_SEGMENTATION :
                 for (int pos=0; pos<st.getBody().getNumberOfTiers(); pos++){
                    SegmentedTier tier = (SegmentedTier)(st.getBody().elementAt(pos));
                    for (int pos2=0; pos2<tier.size(); pos2++){
@@ -130,10 +130,26 @@ public class SegmentedToListInfo {
                          && (asv.getName().equals("SpeakerContribution_IntonationUnit_Event"))
                          && (tier.getSpeaker()!=null)){
                             addMain(tier.getSpeaker(), tier.getID(), "SpeakerContribution_IntonationUnit_Event", "GAT:pe");
-                        }
+                        } 
                     }
                 }
+                
+                for (int pos=0; pos<st.getBody().getNumberOfTiers(); pos++){
+                     SegmentedTier tier = (SegmentedTier)(st.getBody().elementAt(pos));
+                     for (int pos2=0; pos2<tier.size(); pos2++){
+                         AbstractSegmentVector asv = (AbstractSegmentVector)(tier.elementAt(pos2));
+                         if (!(asv instanceof Annotation)){
+                             if (((asv.getName().equals("Event")) &&
+                                 (tier.getSpeaker()!=null)) && (main.containsKey(tier.getSpeaker()))){
+                             addDependent(tier.getSpeaker(),tier.getID(),"Event");
+                         }
+                     } else if (tier.getSpeaker()!=null){
+                         addAnnotation(tier.getSpeaker(), tier.getID(), asv.getName());
+                     }
+                   }
+                }
                 break;
+                
            case EVENT_SEGMENTATION :
                     for (int pos=0; pos<st.getBody().getNumberOfTiers(); pos++){
                         SegmentedTier tier = (SegmentedTier)(st.getBody().elementAt(pos));

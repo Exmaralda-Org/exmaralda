@@ -35,6 +35,7 @@ import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.data.GATParser;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.io.XMLReaderWriter;
+import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
 import org.jdom.Attribute;
@@ -237,6 +238,38 @@ public class TEIConverter extends AbstractConverter {
         FileIO.writeDocumentToLocalFile(filename, teiDoc);
         System.out.println("document written.");        
     }
+    
+    public void writeGenericSegmentedISOTEIToFile(BasicTranscription bt, String filename, String customFSM) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              ParserConfigurationException,
+                                                                              TransformerException
+                                                                              {
+        // added 13-12-2013
+        BasicTranscription copyBT = bt.makeCopy();
+        copyBT.normalize();        
+        System.out.println("started writing document...");
+        GenericSegmentation segmentation;
+        if (customFSM==null || customFSM.length()==0){
+            segmentation = new GenericSegmentation();
+        } else {
+            segmentation = new GenericSegmentation(customFSM);
+        }
+        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
+        System.out.println("Segmented transcription created");
+        String nameOfDeepSegmentation = "SpeakerContribution_Word";
+        TEIMerger teiMerger = new TEIMerger(true);
+        Document stdoc = FileIO.readDocumentFromString(st.toXML());
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
+        System.out.println("Merged");
+        generateWordIDs(teiDoc);
+        setDocLanguage(teiDoc, language);        
+        FileIO.writeDocumentToLocalFile(filename, teiDoc);
+        System.out.println("document written.");        
+    }
+    
 
     public void writeFOLKERISOTEIToFile(BasicTranscription bt, String path) throws SAXException, 
                                                                                 ParserConfigurationException, 

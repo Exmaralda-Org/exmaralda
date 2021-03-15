@@ -143,7 +143,7 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                     } else if ("cGAT Minimal".equals(segName)){
                         converter2.writeCGATMINIMALISOTEIToFile(bt, teiInputFile.getAbsolutePath(), "");                        
                     } else if ("GENERIC".equals(segName)){
-                        converter2.writeGenericISOTEIToFile(bt, teiInputFile.getAbsolutePath());                                                
+                        converter2.writeGenericSegmentedISOTEIToFile(bt, teiInputFile.getAbsolutePath(), "");                                                
                     }
                     
                     File chainFile;

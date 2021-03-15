@@ -13,9 +13,11 @@ import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.ListTranscription;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.SegmentedToListInfo;
 import org.jdom.Document;
 import org.jdom.JDOMException;
@@ -63,7 +65,7 @@ public class EXMARaLDATransformer {
     
     
 
-    public String transform() throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, TransformerException{
+    public String transform() throws JDOMException, IOException, SAXException, FSMException, ParserConfigurationException, TransformerException, JexmaraldaException{
         Document baseDocument = null;
         if (parameters[0].startsWith("basic")){
             baseDocument = IOUtilities.readDocumentFromString(transcription.toXML());
@@ -79,18 +81,21 @@ public class EXMARaLDATransformer {
             if (parameters[0].startsWith("segmented")){
                 baseDocument = IOUtilities.readDocumentFromString(st.toXML());
             } else {
+                // reviewed 12-03-2021
                 ListTranscription lt = null;
-                int listConversionType = 0;
+                int listConversionType = SegmentedToListInfo.TURN_SEGMENTATION;
+                System.out.println("%%%%%%%%%% " + parameters[0] + " / " + parameters[1]);
                 if ((parameters[1].equals("HIAT")) && (parameters[2].equals("HIAT:u"))){
-                    listConversionType = 1;
+                    listConversionType = SegmentedToListInfo.HIAT_UTTERANCE_SEGMENTATION;
+                    lt = st.toListTranscription(new SegmentedToListInfo(st, listConversionType));
+                } else if ((parameters[1].equals("CHAT")) && (parameters[2].equals("CHAT:u"))){
+                    listConversionType = SegmentedToListInfo.CHAT_UTTERANCE_WORD_SEGMENTATION;
+                    lt = st.toListTranscription(new SegmentedToListInfo(st, listConversionType));
+                } else if ((parameters[1].equals("GAT")) && (parameters[2].equals("GAT:pe"))){
+                    lt = new GATSegmentation().BasicToIntonationUnitList(transcription);
+                } else {
+                    lt = st.toListTranscription(new SegmentedToListInfo(st, listConversionType));                    
                 }
-                if ((parameters[1].equals("CHAT")) && (parameters[2].equals("CHAT:u"))){
-                    listConversionType = 3;
-                }
-                if ((parameters[1].equals("GAT")) && (parameters[2].equals("GAT:pe"))){
-                    listConversionType = 3;
-                }
-                lt = st.toListTranscription(new SegmentedToListInfo(st, listConversionType));
                 lt.getBody().sort();
                 baseDocument = IOUtilities.readDocumentFromString(lt.toXML());
             }

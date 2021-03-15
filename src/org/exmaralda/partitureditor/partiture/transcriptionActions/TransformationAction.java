@@ -15,7 +15,6 @@ import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaralda.convert.EXMARaLDATransformer;
