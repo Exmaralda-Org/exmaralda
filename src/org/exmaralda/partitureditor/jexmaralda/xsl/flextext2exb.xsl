@@ -15,10 +15,14 @@
             This is the transform from SIL FLEx flextext format into EXMARaLDA exb, with configurable settings.
             See interlinear-eaf2exmaralda.xsl for conversion from ELAN.
             (c) Alexandre Arkhipov, 2015-2019.
-            This transform is for a single file containing multiple texts. 
+            This transform is for a single file containing multiple texts.
             Based on transform for Nganasan.
             Based on the batch version based on interlinear-eaf2exmaralda.xsl v1.11.
-            
+
+            v4.0.1: Changes by Andreas Nolda, 26.3.2021
+                   - rename "inel:treat-as-puntuation" to "inel:treat-as-punctuation"
+                   - avoid "\w" in the definition of "inel:treat-as-punctuation"
+                     (unreliable with Saxon <= 9.3.0 and Java >= 11)
             v4.0: Changes by Anne Ferger, 23.11.2020
                    - to be added to EXMARaLDA
                    - a version entry is now mandated in a settings file and added to ud metadata in exb
@@ -48,8 +52,8 @@
                    NB: the cleanup functions are NOT yet called according to the settings file, but controlled internally
             v1.21: ... is replaced with … and both are counted as a (punctuation) word. (27.02.2016)
             v1.20: Transform for single files.
-            
-            
+
+
     -->
 
     <!-- ******************************** -->
@@ -59,8 +63,8 @@
     <xsl:variable name="VERSION" select="'4.0'"/>
 
     <xsl:param name="SETTINGS-FILE" as="xs:string" required="no"/>
-    
-    <xsl:param name="SETTINGS-FILE-VERSION" 
+
+    <xsl:param name="SETTINGS-FILE-VERSION"
         select="
         (: test if there is a settings-file-version :)
         if ($settings//xsl:param[@name = 'SETTINGS-FILE-VERSION']/@select)
@@ -69,9 +73,9 @@
         (: throw an error if there are more than one :)
         else
         error((), '***ERROR: : Your settings file does not contain version info - please use the most recent settings file or add the version info to your settings file.')"
-        
+
         as="xs:string"/>
-    
+
     <!-- project-name: goes into meta-information -->
     <xsl:param name="PROJECTNAME"
         select="(replace($settings//xsl:param[@name = 'PROJECTNAME']/@select, '^''|''$', ''), '')[1]"
@@ -96,8 +100,8 @@
     <!-- tier definition: XML representation of tiers -->
     <xsl:param name="TIER-DEFINITIONS" select="$settings//xsl:param[@name = 'TIER-DEFINITIONS']"/>
 
-    <!-- timeline: 
-         start:  offset before the first word (in seconds) 
+    <!-- timeline:
+         start:  offset before the first word (in seconds)
          step:   duration for one word (in seconds)
     -->
     <!--<xsl:param name="TIMELINE-START" select="0.0" as="xs:decimal"/>
@@ -106,7 +110,7 @@
     <!-- only used internally for now to identify distinct timeline items -->
 
     <!-- text-name: extracted from one of items under interlinear-text
-         from-item: specify "title" or "abbreviation" 
+         from-item: specify "title" or "abbreviation"
          from-lang: specify writing system
     -->
 <!--    <xsl:param name="TEXT-NAME-FROM-ITEM" select="'title-abbreviation'" as="xs:string"/>
@@ -115,7 +119,7 @@
     <!-- sentence-number: set @format to "flat", "para", or "both"
          flat: number sentences consecutively throughout the text
          para: get sentence numbers from segnum items, expecting para.sent if dot is present
-         both: flat numbering followed by para.sent numbering in brackets 
+         both: flat numbering followed by para.sent numbering in brackets
     -->
     <xsl:param name="SENTENCE-NUMBER-FORMAT" select="'both'" as="xs:string"/>
 
@@ -521,11 +525,11 @@
     </xsl:template>
 
     <!-- ignore punctuation, except ((...)) -->
-    <xsl:template match="word[inel:treat-as-puntuation(item[1])]" mode="preprocess-punctuation"/>
+    <xsl:template match="word[inel:treat-as-punctuation(item[1])]" mode="preprocess-punctuation"/>
 
     <!-- merge punctuation into "real" words -->
     <xsl:template match="word" mode="preprocess-punctuation">
-        <!-- do not consider leading dash (see XPath predicate) 
+        <!-- do not consider leading dash (see XPath predicate)
         <xsl:variable name="preceding-texts" select="preceding-sibling::word[not(position() = 1 and matches(item[1], '^[\-–]$'))]/item[1]" as="xs:string*"/>-->
         <!-- also consider leading dash because undecidable if it marks speaker change or direct speech -->
         <xsl:variable name="preceding-texts-in-phrase" select="preceding-sibling::word/item[1]"
@@ -828,7 +832,7 @@
 
             <!-- no punctuation left in preceding or following sequence of strings -->
             <xsl:when
-                test="not(inel:treat-as-puntuation($preceding-texts[last()]) or inel:treat-as-puntuation($following-texts[1]))">
+                test="not(inel:treat-as-punctuation($preceding-texts[last()]) or inel:treat-as-punctuation($following-texts[1]))">
                 <xsl:value-of select="concat($result, ' ')"/>
             </xsl:when>
             <!-- if there is more punctuation that could not be appended -->
@@ -845,10 +849,10 @@
         <xsl:value-of select="($item/@type = 'punct') and ($item/@lang = $BASE-LANGUAGE)"/>
     </xsl:function>
 
-    <xsl:function name="inel:treat-as-puntuation" as="xs:boolean">
+    <xsl:function name="inel:treat-as-punctuation" as="xs:boolean">
         <xsl:param name="str" as="xs:string?"/>
         <xsl:copy-of
-            select="matches($str, '^[^\w]|[^\w\-]$') and not(matches($str, concat('^', $regex.ellipsis, '(', $regex.sentpunct, '+)*', '$')))"
+            select="matches($str, '^\p{P}|[\p{P}-[-]]$') and not(matches($str, concat('^', $regex.ellipsis, '(', $regex.sentpunct, '+)*', '$')))"
         />
     </xsl:function>
 
@@ -1042,7 +1046,7 @@
             select="($end-time - $start-time) div count($whitespaced-words)" as="xs:double"/>
         <xsl:choose>
             <xsl:when test="$index &lt;= count($whitespaced-words)">
-                <!-- 
+                <!--
                     (1) if the text of this word contains an opening parantheses, but not a closing one, and does not end with a whitespace (necessary for multi-worded paranthesed sequences)
                     (2) if the text of this word does not match the above (it's a simple word)
                 -->
