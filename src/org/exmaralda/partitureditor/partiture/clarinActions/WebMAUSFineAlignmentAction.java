@@ -50,19 +50,7 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
             table.clearUndo();
             table.clearSearchResult();
             table.setFrameEndPosition(-2);
-        } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (SAXException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (FSMException ex) {
+        } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
             ex.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }

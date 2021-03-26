@@ -51,6 +51,18 @@
             </xsl:if>
         </xsl:template>
         
+        <!-- is it true that I like totally forgot anchors??? -->
+        <xsl:template match="tei:anchor">
+            <xsl:variable name="PARENT-ID" select="ancestor-or-self::tei:annotationBlock/@xml:id"/>
+            <xsl:variable name="SYNCH" select="@synch"/>
+            <xsl:if test="not(preceding::tei:anchor[@synch=$SYNCH and ancestor::tei:annotationBlock/@xml:id=$PARENT-ID])">
+                <!--         <time timepoint-reference="TLI_0" time="0.0"/> -->
+                <time>
+                    <xsl:attribute name="timepoint-reference" select="$SYNCH"/>
+                </time>
+            </xsl:if>
+        </xsl:template>
+        
         <xsl:template match="tei:w">
             <xsl:variable name="WORD_ID" select="@xml:id"/>
             <w>
