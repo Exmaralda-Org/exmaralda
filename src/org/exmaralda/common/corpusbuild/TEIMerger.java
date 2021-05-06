@@ -145,7 +145,7 @@ public class TEIMerger {
         Element textNode = (Element)(xp.selectSingleNode(teiDocument));
         textNode.addContent(uElements);
 
-        //FileIO.writeDocumentToLocalFile("C:\\Users\\Schmidt\\Desktop\\TEI\\intermediate2.xml", teiDocument);
+        //FileIO.writeDocumentToLocalFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\IT_2021\\MIKO2_TEI_MERGED.xml", teiDocument);
         //System.out.println("STEP 2 completed.");
 
         Document transformedDocument = null;
@@ -341,6 +341,8 @@ public class TEIMerger {
     }
     
     public static Element merge(Element e1, Element e2){
+        
+        //System.out.println("Merging " + IOUtilities.elementToString(e1) + " with " + IOUtilities.elementToString(e2));
         
         Iterator i1 = e1.getDescendants();
         Vector pcData1 = new Vector();

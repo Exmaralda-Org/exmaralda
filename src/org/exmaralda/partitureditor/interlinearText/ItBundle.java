@@ -92,6 +92,7 @@ public class ItBundle extends java.util.Vector
     }
     
     /** returns the height of this object in pixels  */
+    @Override
     public double getHeight() {
         return getHeight(true);
     }
@@ -106,26 +107,31 @@ public class ItBundle extends java.util.Vector
         return result;
     }
     /** returns the format of this object  */
+    @Override
     public Format getFormat() {
         return format;
     }
     
     /** return true iff this bundle has ud info */
+    @Override
     public boolean hasUdInformation() {
         return (udInfo!=null);
     }
     
     /** sets the ud info of this bundle to the specified value */
+    @Override
     public void setUdInformation(UdInformation udi) {
         udInfo = udi;
     }
     
     /** writes a string representing this object in XML to the specified output stream */
+    @Override
     public void writeXML(java.io.FileOutputStream fo) throws java.io.IOException {
         fo.write(toXML().getBytes("UTF-8"));
     }
     
     /** returns the width of this object in pixels  */
+    @Override
     public double getWidth() {
         return getSyncPoints().getWidth();
     }
@@ -156,11 +162,13 @@ public class ItBundle extends java.util.Vector
     }
     
     /** returns the ud info of this bundle */
+    @Override
     public UdInformation getUdInformation() {
         return udInfo;
     }
     
     /** augments the format by the properties in the given format  */
+    @Override
     public void augmentFormat(Format f) {
         Format newFormat = getFormat().makeCopy();
         newFormat.augment(f);
@@ -168,21 +176,25 @@ public class ItBundle extends java.util.Vector
     }
     
     /** sets the format of this object  */
+    @Override
     public void setFormat(Format f) {
         format = f;
     }
     
     /** always returns true */
+    @Override
     public boolean isItBundle() {
         return true;
     }
     
     /** returns true iff this bundle has been assigned a format  */
+    @Override
     public boolean hasFormat() {
         return (getFormat()!=null);        
     }
     
     /** propagates this object's format to its children that don't have formats  */
+    @Override
     public void propagateFormat() {
         for (int pos=0; pos<getNumberOfItLines(); pos++){
             if (!getItLineAt(pos).hasFormat()){

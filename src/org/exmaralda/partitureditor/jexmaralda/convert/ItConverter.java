@@ -16,7 +16,6 @@ import org.exmaralda.partitureditor.interlinearText.SyncPoint;
 import org.exmaralda.partitureditor.interlinearText.ItLabel;
 import org.exmaralda.partitureditor.interlinearText.Format;
 import org.exmaralda.partitureditor.interlinearText.Run;
-import org.exmaralda.partitureditor.interlinearText.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 /**
  *

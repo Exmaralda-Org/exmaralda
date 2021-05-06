@@ -31,7 +31,8 @@
     <!-- <xsl:template match="tei:u[*[not(self::tei:seg)]]"> -->
     <!-- 22-02-2021 : something is still rotten here -->
     <!-- <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)]]"> -->
-    <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)] or text()]">
+    <!-- 21-04-2021 : something is still rotten here -->
+    <xsl:template match="tei:u[*[not(self::tei:seg or self::tei:anchor)] or text()]">            
             <xsl:copy>
                 <xsl:apply-templates select="@*"/>
                 <!-- make them a <seg>  -->
@@ -70,8 +71,11 @@
                             <xsl:when test="(preceding-sibling::tei:seg)[1]/*[last()][self::tei:anchor]">
                                 <xsl:value-of select="(preceding-sibling::tei:seg)[1]/tei:anchor[last()]/@synch"/>                                
                             </xsl:when>
-                            <xsl:otherwise>
+                            <xsl:when test="not(preceding-sibling::tei:seg)">
                                 <xsl:value-of select="ancestor-or-self::*[@start][1]/@start"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:message terminate="yes">UNSOLVABLE TIME PROBLEM</xsl:message>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>
@@ -84,14 +88,22 @@
                     <!-- changed 15-02-2021 -->
                     <xsl:attribute name="synch">
                         <xsl:choose>
+                            <!-- is the element following this <seg> an <anchor> ? If yes, copy that --> 
                             <xsl:when test="following-sibling::*[1][self::tei:anchor]">
                                 <xsl:value-of select="following-sibling::*[1][self::tei:anchor]/@synch"/>
                             </xsl:when>
+                            <!-- does the <seg> element following this <seg> have an <anchor> as its first element ? If yes, copy that --> 
                             <xsl:when test="(following-sibling::tei:seg)[1]/*[1][self::tei:anchor]">
                                 <xsl:value-of select="(following-sibling::tei:seg)[1]/tei:anchor[1]/@synch"/>                                
                             </xsl:when>
-                            <xsl:otherwise>
+                            <xsl:when test="not(following-sibling::tei:seg)">
                                 <xsl:value-of select="ancestor-or-self::*[@end][1]/@end"/>
+                            </xsl:when>
+                            <!-- in all other cases : go up the document tree until you find an element with an @end attribute and copy that -->
+                            <!-- BUT (2021-04-21) : this is wrong!! -->
+                            <xsl:otherwise>
+                               <!-- <xsl:value-of select="ancestor-or-self::*[@end][1]/@end"/> -->
+                                <xsl:message terminate="yes">UNSOLVABLE TIME PROBLEM</xsl:message>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>

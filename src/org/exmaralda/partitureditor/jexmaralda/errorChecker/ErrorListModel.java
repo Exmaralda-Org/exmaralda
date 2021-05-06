@@ -27,6 +27,7 @@ public class ErrorListModel extends javax.swing.AbstractListModel {
         d = errorDocument;
     }
 
+    @Override
     public Object getElementAt(int index) {
         return errorList.get(index);
     }

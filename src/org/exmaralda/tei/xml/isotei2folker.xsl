@@ -39,7 +39,7 @@
         </xsl:template>
         
         <xsl:template match="tei:seg">
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="*[not(self::tei:anchor and not(following-sibling::*))]"/>
             <xsl:if test="$TRANSCRIPTION_SYSTEM='HIAT'">
                 <xsl:choose>
                     <xsl:when test="@subtype='declarative'"><p>.</p></xsl:when>
@@ -49,6 +49,7 @@
                     <xsl:when test="@subtype='not_classified'"><p>&#x02D9;</p></xsl:when>
                 </xsl:choose>
             </xsl:if>
+            <xsl:apply-templates select="*[self::tei:anchor and not(following-sibling::*)]"/>
         </xsl:template>
         
         <!-- is it true that I like totally forgot anchors??? -->

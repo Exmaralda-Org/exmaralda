@@ -30,11 +30,11 @@ public class FLN_TEIConversion {
     //String CORPUS="ISW";
     //String CORPUS ="MEND";
     //String CORPUS ="DH";
-    //String CORPUS ="DNAM";
+    String CORPUS ="DNAM";
     //String CORPUS = "ZW";
     //String CORPUS ="BETV";
     //String CORPUS ="FGOP";
-    String CORPUS ="DH";
+    //String CORPUS ="DH";
     String IN = "D:\\AGD-DATA\\dgd2_data\\transcripts\\" + CORPUS;
     //String IN = "D:\\Dropbox\\IDS\\AGD\\MEND-Mennonitendeutsch-Goez\\Transkripte\\5";
     String OUT = "D:\\AGD-DATA\\dgd2_data\\iso-transcripts\\" + CORPUS;
@@ -46,17 +46,7 @@ public class FLN_TEIConversion {
     public static void main(String[] args) {
         try {
             new FLN_TEIConversion().doit();
-        } catch (JDOMException ex) {
-            Logger.getLogger(FLN_TEIConversion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FLN_TEIConversion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(FLN_TEIConversion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(FLN_TEIConversion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(FLN_TEIConversion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
+        } catch (JDOMException | IOException | SAXException | ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(FLN_TEIConversion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

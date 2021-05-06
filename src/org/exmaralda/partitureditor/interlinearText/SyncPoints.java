@@ -50,7 +50,9 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     private int lookupID(String id){
         Integer pos = (Integer)positions.get(id);
         if (pos==null) {
-            System.out.println("The evil man is " + id);
+            // 2021-04-21: This is a real bug. Can I fix it?
+            System.out.println("The very evil man is " + id);
+            //return -1;
         }
         return pos.intValue();
     }
@@ -60,14 +62,14 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     private void updatePositions(){
         positions.clear();
         for (int pos=0; pos<getNumberOfSyncPoints(); pos++){
-            positions.put(getSyncPointAt(pos).getID(), new Integer(pos));
+            positions.put(getSyncPointAt(pos).getID(), pos);
         }       
     }
     
     /** adds the given sync point */
     public void addSyncPoint(SyncPoint sp){
         addElement(sp);
-        positions.put(sp.getID(),new Integer(getNumberOfSyncPoints()-1));  
+        positions.put(sp.getID(), getNumberOfSyncPoints()-1);  
         if (!sp.hasFormat()){
             sp.setFormat(this.getFormat());
         }                
@@ -85,6 +87,7 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     }
     
     /** augments the format by the properties in the given format  */
+    @Override
     public void augmentFormat(Format f) {
         Format newFormat = getFormat().makeCopy();
         newFormat.augment(f);
@@ -92,6 +95,7 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     }
     
     /** returns a string representing this object in XML  */
+    @Override
     public String toXML() {
         StringBuffer buffer = new StringBuffer();
         if (hasFormat()){
@@ -110,11 +114,13 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     }
     
     /** writes a string representing this object in XML to the specified output stream */
+    @Override
     public void writeXML(java.io.FileOutputStream fo) throws java.io.IOException {
         fo.write(toXML().getBytes("UTF-8"));
     }
     
     /** returns the width of this object in pixels  */
+    @Override
     public double getWidth() {
         return -1;
     }
@@ -130,31 +136,37 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     }
     
     /** sets the format of this object  */
+    @Override
     public void setFormat(Format f) {
         format = f;
     }
     
     /** returns the format of this object  */
+    @Override
     public Format getFormat() {
         return format;
     }
     
     /** returns true iff this object has ud info */
+    @Override
     public boolean hasUdInformation() {
         return (udInfo!=null);
     }
     
     /** sets the ud info */
+    @Override
     public void setUdInformation(UdInformation udi) {
         udInfo = udi;
     }
     
     /** returns the ud info */
+    @Override
     public UdInformation getUdInformation() {
         return udInfo;
     }
     
     /** returns the height of this object in pixels  */
+    @Override
     public double getHeight() {
         double result=0;
         for (int pos=0; pos<getNumberOfSyncPoints();pos++){
@@ -163,6 +175,7 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
         return result;
     }
     
+    @Override
     public double getDescent() {
         double result=0;
         for (int pos=0; pos<getNumberOfSyncPoints();pos++){
@@ -171,11 +184,13 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
         return result;
     }
     
+    @Override
     public boolean hasFormat() {
         return (getFormat()!=null);        
     }
     
     /** propagates this object's format to its children that don't have formats  */
+    @Override
     public void propagateFormat() {
         for (int pos=0; pos<getNumberOfSyncPoints(); pos++){
             if (!getSyncPointAt(pos).hasFormat()){
@@ -208,6 +223,7 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
         // change the offset of the new syncPoint
         // because it is now the first of the remaining ones
         newSyncPoint.setOffset(getSyncPointAt(0).getOffset());
+        //System.out.println("NEW SYNC POINT : " + newSyncPoint.getID());
 
         // the text of the critical syncPoint in the result may take up more space than the available pixels
         // not sure how to deal with this intelligently, for the moment: just delete the text if this situation occurs...
@@ -226,11 +242,13 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     }
     
     /** writes an HTML representation of this object to the specified file output stream */
+    @Override
     public void writeHTML(java.io.FileOutputStream fos, HTMLParameters param) throws java.io.IOException {
         fos.write(toHTML(param).getBytes("UTF-8"));
     }
     
     /** returns a HTML representation of this object */
+    @Override
     public String toHTML(HTMLParameters param) {
         StringBuffer sb = new StringBuffer();
         sb.append("<tr");
@@ -328,6 +346,7 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     }
     
     
+    @Override
     public void addUdInformation(String propertyName, String propertyValue) {
         udInfo.setProperty(propertyName, propertyValue);
     }
