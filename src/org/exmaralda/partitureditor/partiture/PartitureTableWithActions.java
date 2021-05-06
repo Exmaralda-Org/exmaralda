@@ -2860,17 +2860,7 @@ public class PartitureTableWithActions extends PartitureTable
         
         try {
             ((TransformationAction)transformationAction).transform(getModel().getTranscription().makeCopy(), getAbstractSegmentation(preferredSegmentation), parameters, xslParameters);
-        } catch (JDOMException ex) {
-            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FSMException ex) {
-            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JexmaraldaException ex) {
+        } catch (JDOMException | IOException | SAXException | FSMException | ParserConfigurationException | JexmaraldaException ex) {
             Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -2888,6 +2878,10 @@ public class PartitureTableWithActions extends PartitureTable
                 return (name.startsWith(autoSaveThread.FILENAME) && name.endsWith(".exb"));
             }            
         });
+        if (existingFiles==null){
+            System.out.println("List files returned null for " + autoSaveThread.FILENAME);
+            return;
+        }
         System.out.println("Found " + existingFiles.length + " auto save files");
         if (existingFiles.length < 10) return;
         String message = "<html><p>Found " + existingFiles.length + " auto backup files in folder </p>"
