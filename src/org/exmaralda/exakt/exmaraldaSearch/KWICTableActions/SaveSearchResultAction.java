@@ -167,10 +167,18 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
             }
             
             try {
-                FileWriter fileWriter = new FileWriter(file);
+                // issue #267?
+                /*FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write(searchResultString);
                 fileWriter.flush();
-                fileWriter.close();
+                fileWriter.close();*/
+                Writer out = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(file), "UTF-8"));
+                try {
+                    out.write(searchResultString);
+                } finally {
+                    out.close();
+                }                
                 exaktFrame.setLastSearchResultPath(file);
                 exaktFrame.getActiveSearchPanel().setCurrentSearchResultFile(file);
                 exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);                

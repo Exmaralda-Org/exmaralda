@@ -52,6 +52,9 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
         if (pos==null) {
             // 2021-04-21: This is a real bug. Can I fix it?
             System.out.println("The very evil man is " + id);
+            // This does not help
+            updatePositions();
+            pos = (Integer)positions.get(id);
             //return -1;
         }
         return pos.intValue();

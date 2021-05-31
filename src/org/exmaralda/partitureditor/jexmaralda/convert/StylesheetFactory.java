@@ -23,7 +23,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPathException;
 
 
 
@@ -423,6 +422,13 @@ public class StylesheetFactory implements javax.xml.transform.ErrorListener {
 
     // NEW 09-12-2020: issue #233
     private void setupMessageHandler(Transformer transformer) {
+        // NEW 17-05-2020
+        try {
+            Class.forName("net.sf.saxon.event.MessageWarner");
+        } catch (ClassNotFoundException cnfe){
+            System.out.println("No net.sf.saxon.event.MessageWarner in classpath.");
+            return;
+        }
         try {
             transformer.setErrorListener(this);
             net.sf.saxon.event.MessageWarner saxonWarner = new net.sf.saxon.event.MessageWarner();
