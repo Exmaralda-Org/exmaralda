@@ -7,7 +7,7 @@
     version="2.0">
     
     <xsl:param name="normalisationLexicon" 
-        select="document('https://raw.githubusercontent.com/Exmaralda-Org/exmaralda/master/src/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_MAY_2020.xml')"/>
+        select="document('https://raw.githubusercontent.com/Exmaralda-Org/exmaralda/master/src/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JUNE_2021.xml')"/>
     
     <xsl:template match="@*|node()">
         <xsl:copy>
