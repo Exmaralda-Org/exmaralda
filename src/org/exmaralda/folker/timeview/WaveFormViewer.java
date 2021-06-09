@@ -33,6 +33,7 @@ public class WaveFormViewer extends TimelineViewer{
     
     @Override
     public void setSoundFile(String soundFilePath) throws IOException{
+        System.out.println("WaveFormViewer setting sound file to " + soundFilePath);
         ELANWaveSampler ews = new ELANWaveSampler(soundFilePath);
         waveSamplerWrapper = new ELANWaveSamplerWrapper(ews);
         soundDuration = ews.getDuration();

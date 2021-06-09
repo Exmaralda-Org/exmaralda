@@ -1,68 +1,53 @@
 /*
- * File:     WAVHeader.java
- * Project:  MPI Linguistic Application
- * Date:     12 December 2007
- *
- * Copyright (C) 2001-2008  Max Planck Institute for Psycholinguistics
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
-/*
- * $Id: WAVHeader.java 8519 2007-04-05 15:29:38Z klasal $
+ * $Id$
  */
 package org.exmaralda.folker.timeview;
+
+
+/*
+    changed this 09-06-2021 because of issue #268
+*/
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-
 /**
- * Reads the Header of a wav-file. If used standalone, it takes the name of the
- * wav-file as first argument.
+ * Reads the Header of a WAV file. If used standalone, it takes the name of the
+ * WAV file as first argument. Access to the file is based on the facilities of
+ * {@code RandomAccessFile}.
  *
  * @author Alexander Klassmann
  * @version april 2003
  */
 public class ELANWaveHeader {
-    /** Holds value of property DOCUMENT ME! */
+    /** constant for WAVE uncompressed format */
     public static final short WAVE_FORMAT_UNCOMPRESSED = 0;
 
-    /** Holds value of property DOCUMENT ME! */
+    /** constant for WAVE PCM (uncompressed) format */
     public static final short WAVE_FORMAT_PCM = 1;
 
-    /** Holds value of property DOCUMENT ME! */
+    /** constant for WAVE IEEE float format */
     public static final short WAVE_FORMAT_IEEE_FLOAT = 3;
 
-    /** Holds value of property DOCUMENT ME! */
+    /** constant for WAVE a-law format */
     public static final short WAVE_FORMAT_ALAW = 6;
 
-    /** Holds value of property DOCUMENT ME! */
+    /** constant for WAVE mu-law format */
     public static final short WAVE_FORMAT_MULAW = 7;
+    /** constant for WAVE Format Extensible */
+    public static final short WAVE_FORMAT_EXTENSIBLE = -2; //= 65534 unsigned  
 
-    /** Holds value of property DOCUMENT ME! */
+    /** array of WAVE (sub)format descriptions */
     public static final String[] formatDescriptions = {
-        "Unknown", "PCM (uncompressed)", "MS ADPCM", "IEEE float", "",
-        "IBM CVSD", "8-bit ITU-T G.711 A-law", "8-bit ITU-T G.711 \u00B5-law"
-    };
-    private HashMap infos = new HashMap();
+            "Unknown", "PCM (uncompressed)", "MS ADPCM", "IEEE float", "",
+            "IBM CVSD", "8-bit ITU-T G.711 A-law",
+            "8-bit ITU-T G.711 \u00B5-law", "WAVE Format Extensible"
+        };
+    private HashMap<String, String> infos = new HashMap<String, String>();
     private ELANWaveCuePoint[] cuePoints = new ELANWaveCuePoint[0];
     private ELANWaveCueSection[] cueSections = new ELANWaveCueSection[0];
     private char[] dID = new char[4];
@@ -76,15 +61,33 @@ public class ELANWaveHeader {
     private int nAvgBytesPerSec;
     private int nSamplesPerSec;
     private int rLen;
+    private long rLenLong;
     private long fileSize;
     private short nBlockAlign;
     private short nChannels;
     private short wFormatTag;
-
+    // HS added the bits per sample value that appears before the extension part of fmt in PCM files
+    private short wBitsPerSample;
+    private short cbSize; // extension size
+    // HS fact chunk additions
+    private char[] factID;
+    private int factLen;
+    private int dwSampleLength;
+    // HS March 2017 the size of the data chunk is encoded as unsigned int. The old implementation 
+    // in dLen implies a maximum of 2 GB. In order to support the 4 GB of the Wave format, use a long. 
+    private long dataLengthLong = 0L;
+    // HS Dec 2019 for files that exceed 4GB the first four bytes read "RF64" instead of "RIFF",
+    // the 32-bit chunk size field at offset 4 in the file is set to -1, and a "ds64" chunk is
+    // inserted before the "fmt" chunk, containing the 64-bits size(s) of the DATA chunk(s)
+    private char[] ds64ID;
+    private int    ds64Len;
+    private long   ds64SampleCount;
+    private long   ds64TableLength;
+    
     /**
      * Creates a new WAVHeader object.
      *
-     * @param fileName Location of the wav file.
+     * @param fileName location of the WAV file
      */
     public ELANWaveHeader(String fileName) {
         try {
@@ -93,21 +96,46 @@ public class ELANWaveHeader {
             System.out.println("File " + fileName + " not found.");
 
             return;
+    	} catch (IOException e) {
+    		setInvalid();    		
         }
     }
 
     /**
      * Creates a new WAVHeader object.
      *
-     * @param soundFile The wav file.
+     * @param soundFile The wav file
      */
     public ELANWaveHeader(RandomAccessFile soundFile) {
-        read(soundFile);
+    	try {
+    		read(soundFile);
+    	} catch (IOException e) {
+    		setInvalid();    		
+    	}
     }
 
     /**
-     * Returns the compression code, one of the following:
-     *
+     * Set all members to innocuous values, in case there was
+     * no valid file to read;
+     */
+    private void setInvalid() {
+    	headerSize = 0;
+    	nChannels = 0;
+    	wFormatTag = 0;
+    	dLen = 0;
+    	dataLengthLong = 0L;
+    	fileSize = 0;
+    	nSamplesPerSec = 1;
+    	nBlockAlign = 1;
+        infos = new HashMap<String, String>();
+        cuePoints = new ELANWaveCuePoint[0];
+        cueSections = new ELANWaveCueSection[0];
+    }
+    
+    /**
+     * Returns the compression code.
+     * The code is one of the following:
+     * 
      * <ul>
      * <li>
      * 0 - Unknown
@@ -140,54 +168,90 @@ public class ELANWaveHeader {
      * 80 - MPEG
      * </li>
      * </ul>
-     *
+     * 
      *
      * @return The compression code.
      */
     public short getCompressionCode() {
         return wFormatTag;
     }
+    
+    /**
+     * Returns a string representation of the format and/or compression type 
+     * of the file.
+     * 
+     * @param compressionCode the code as returned by {@link #getCompressionCode()}
+     * @return a string representation, a description of the detected compression
+     */
+    public String getCompressionString(short compressionCode) {
+    	switch (compressionCode) {
+    	case 0:
+    		return formatDescriptions[0];
+    	case 1:
+    		return formatDescriptions[1];
+    	case 2:
+    		return formatDescriptions[2];
+    	case 6:
+    		return formatDescriptions[6];
+    	case 7:
+    		return formatDescriptions[7];
+    	case 17:
+    		return "IMA ADPCM";
+    	case 20:
+    		return "ITU G.723 ADPCM";
+    	case 49:
+    		return "GSM 6.10";
+    	case 64:
+    		return "ITU G.721 ADPCM";
+    	case 80:
+    		return "MPEG";
+    	case -2:// 0xfffe or, unsigned, 65534
+    		return formatDescriptions[8];
+    		default:
+    			return formatDescriptions[0];	
+    	}    	
+    }
 
     /**
-     * returns cue points which may be present in the tail of the file
+     * Returns cue points which may be present in the tail of the file.
      *
-     * @return WAVCuePoint[]
+     * @return an array of {@code WAVCuePoint}, may be empty
      */
     public ELANWaveCuePoint[] getCuePoints() {
         return cuePoints;
     }
 
     /**
-     * returns cue section which may be present in the tail of the file
+     * Returns cue sections which may be present in the tail of the file.
      *
-     * @return WAVCueSection[]
+     * @return an array of {@code WAVCueSection}, may be empty
      */
     public ELANWaveCueSection[] getCueSections() {
         return cueSections;
     }
 
     /**
-     * Returns the size of the data (in bytes)
+     * Returns the size of the data (in bytes).
      *
-     * @return int
+     * @return the length of the data chuck as a long
      */
-    public int getDataLength() {
-        return dLen;
+    public long getDataLength() {
+        return dataLengthLong;
     }
 
     /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
+     * Returns the size of the file in bytes.
+     * 
+     * @return the size of the file in bytes
      */
     public long getFileSize() {
         return fileSize;
     }
 
     /**
-     * Returns the sample frequency (e.g. 44100 for CD)
+     * Returns the sample frequency (e.g. 44100 Hz for CD).
      *
-     * @return int
+     * @return the number of samples per second
      */
     public int getFrequency() {
         return nSamplesPerSec;
@@ -196,21 +260,21 @@ public class ELANWaveHeader {
     /**
      * Returns the size of the header (in bytes)
      *
-     * @return int
+     * @return the size of the header in bytes
      */
     public int getHeaderSize() {
         return headerSize;
     }
 
     /**
-     * returns summary of info in wav trail
+     * Returns a summary of the info chunk in the tail of the WAV file.
      *
-     * @return String
+     * @return a multiple line string containing the info key - value pairs 
      */
     public String getInfo() {
-        StringBuffer info = new StringBuffer();
+        StringBuilder info = new StringBuilder();
 
-        for (Iterator iter = infos.keySet().iterator(); iter.hasNext();) {
+        for (Iterator<String> iter = infos.keySet().iterator(); iter.hasNext();) {
             Object key = iter.next();
             info.append("\n" + key + " : " + infos.get(key));
         }
@@ -221,26 +285,26 @@ public class ELANWaveHeader {
     /**
      * Returns the number of channels (1 = mono; 2 = stereo)
      *
-     * @return short
+     * @return the number of channels
      */
     public short getNumberOfChannels() {
         return nChannels;
     }
 
     /**
-     * Returns the size (in bytes) of a single sample
+     * Returns the size (in bytes) of a single sample or all channels.
      *
-     * @return short
+     * @return the bytes per sample value (also known as BlockAlign)
      */
     public short getSampleSize() {
         return nBlockAlign;
     }
 
     /**
-     * For standalone use. First parameter has to be the filename of the
-     * wav-file
+     * For standalone use, prints the header information. 
+     * First parameter has to be the filename of the WAV file.
      *
-     * @param args
+     * @param args the file path
      */
     public static void main(String[] args) {
         try {
@@ -254,29 +318,44 @@ public class ELANWaveHeader {
     }
 
     /**
-     * Reads the header of the specified wav-file and sets the attributes of
+     * Reads the header of the specified WAV file and sets the attributes of
      * this WAVHeader instance.
      *
-     * @param soundFile DOCUMENT ME!
+     * @param soundFile the {@code RandomAccessFile} for the WAV file
+     * 
+     * @throws IOException any IO exception
+     * @throws InvalidHeaderException if the file is not a (proper) WAV file or 
+     * an inconsistency is encountered in the header 
      */
-    public void read(RandomAccessFile soundFile) {
-        try {
+    public void read(RandomAccessFile soundFile) throws IOException, InvalidHeaderException {
             fileSize = soundFile.length();
 
             byte[] b;
+            int rc;
 
             //read first 12 bytes (3 groups of 4 bytes: RIFF identifier, size, RIFF type ("WAVE"))
             b = new byte[12];
-            soundFile.read(b);
+            rc = soundFile.read(b);
+            if (rc != b.length) {
+            	throw new InvalidHeaderException();
+            }
 
             for (int i = 0; i < 4; i++) {
                 riff[i] = (char) b[i];
             }
+            
+            String riffMark = new String(riff);
+            if (! "RIFF".equals(riffMark) && ! "RF64".equals(riffMark)) {
+            	throw new InvalidHeaderException("neither RIFF nor RF64 marker found");
+            }
 
-            rLen = getInt(b[4], b[5], b[6], b[7]);
+            rLen = getInt(b[4], b[5], b[6], b[7]);// if -1, rLen will be defined in ds64 chunk
 
             for (int i = 0; i < 4; i++) {
                 wID[i] = (char) b[8 + i];
+            }
+            if (! "WAVE".equals(new String(wID))) {
+            	throw new InvalidHeaderException("WAVE marker not found");
             }
 
             headerSize = 12;
@@ -288,26 +367,60 @@ public class ELANWaveHeader {
             while (true) {
                 //read chunk header consisting of identifier (4 bytes) and specification of chunk data length (4 bytes)
                 b = new byte[8];
-                soundFile.read(b);
+                rc = soundFile.read(b);
+                if (rc != b.length) {
+                	throw new InvalidHeaderException();
+                }
                 headerSize += 8;
 
                 chunkID = getString(b, 4);
                 chunkDataSize = getInt(b[4], b[5], b[6], b[7]);
-
+                
                 if ("data".equalsIgnoreCase(chunkID)) { //end of header reached, so break from loop
                     dID = chunkID.toCharArray();
                     dLen = chunkDataSize;
-
+                    
+                    if (chunkDataSize == -1) {
+                    	// rf64 data size
+                    } else if (chunkDataSize < 0) {
+                    	// if the size > 2Gb the integer value will be negative. Try a long value                    
+                    	//System.out.println(String.format("Chunk size: %d  %#x", chunkDataSize, chunkDataSize));
+                    	//System.out.println(Long.toString(Long.decode(String.format("%#x", chunkDataSize))));
+                    	try {
+                    		// quick fix as a workaround to convert to a long. Java 1.8 has parseUnsignedLong(String s)
+                    		dataLengthLong = Long.decode(String.format("%#x", chunkDataSize));
+                    	} catch (NumberFormatException nfe) {
+                    		throw new InvalidHeaderException(nfe);
+                    	}
+                    	if (dataLengthLong < 0) {
+                    		throw new InvalidHeaderException("Failed to detect the data chunk size");
+                    	} /*else if (dataLengthLong > 4294967295L) {
+                    		throw new InvalidHeaderException("File too big, > 4GB");
+                    	}*/            	
+                    } else {
+                    	dataLengthLong = dLen;
+                    }
+                    
                     break;
                 }
 
-                //read contents of chunk
+                if (chunkDataSize < 0) {
+                	throw new InvalidHeaderException("Cannot read the size of the data size chunk");
+                }
+                //read contents of chunk. 
                 b = new byte[chunkDataSize];
-                soundFile.read(b);
+	            rc = soundFile.read(b);
+	            if (rc != b.length) {
+	            	throw new InvalidHeaderException();
+	            }
+              
 
                 if ("fmt ".equals(chunkID)) {
+                	if (chunkDataSize < 14) {
+                    	throw new InvalidHeaderException("Failed to read the fmt section");
+                	}
                     fID = chunkID.toCharArray();
-                    fLen = chunkDataSize;
+                    fLen = chunkDataSize;// fLen should be 16, 18 or 40  (not 20 like for some IMA ADPCM?)
 
                     //assign instance attributes
                     //1. parse common fmt bytes
@@ -318,48 +431,99 @@ public class ELANWaveHeader {
                     nBlockAlign = getShort(b[12], b[13]);
 
                     //2. parse format-specific bytes
-                    int fslength = fLen - 14;
+                    int index = 14;
+                    int fslength = fLen - index;
+                    // HS for PCM files the wBitsPerSample should be set
+                    if  (fslength >= 2) {
+                    	wBitsPerSample = getShort(b[14], b[15]);
+                    	fslength -= 2;
+                    	index += 2;
+                    }
+                    // if chunkDataSize > 16 the next two bytes should be cbSize, the size of the extension
+                    // with value 0 or 22 (not 2 like for some IMA ADPCM files?)
                     formatSpecific = new short[fslength / 2];
 
                     for (int i = 0; i < fslength; i += 2) {
-                        formatSpecific[i / 2] = getShort(b[14 + i], b[15 + i]);
+                        formatSpecific[i / 2] = getShort(b[index + i], b[index + 1 + i]);
                     }
+                } else if ("fact".equals(chunkID)){
+                	factID = chunkID.toCharArray();
+                	factLen = chunkDataSize;
+                	dwSampleLength = getInt(b[0], b[1], b[2], b[3]);
+                	//System.out.println(fID + " " + fLen + " dwSampleLength: " + dwSampleLength);
+                } else if ("ds64".equals(chunkID)) {
+                	// RF64 variant, supports files > 4GB
+                	ds64ID = chunkID.toCharArray();
+                	// chunkDataSize should be at least 28
+                	if (chunkDataSize < 28) {
+                		throw new InvalidHeaderException(
+                				String.format("ds64 chunk data size is invalid (< 28): %s", chunkDataSize));
+                	}
+                	ds64Len = chunkDataSize;
+                	// following sizes are 64bits; 3 fields, 
+                	// each consisting of 2 32bits values, high and low 4 byte
+                	rLenLong = getLong(b[0], b[1], b[2], b[3],
+                			b[4], b[5], b[6], b[7]);
+                	dataLengthLong = getLong(b[8], b[9], b[10], b[11],
+                			b[12], b[13], b[14], b[15]);
+                	ds64SampleCount = getLong(b[16], b[17], b[18], b[19],
+                			b[20], b[21], b[22], b[23]);
+                	ds64TableLength = getInt(b[24], b[25], b[26], b[27]);
+                	headerSize += ds64TableLength;// add to the header size?
+                } else if ("r64m".equals(chunkID)) {
+                	System.out.println("r64m marker chunk not supported (ignored)");
+                	// the header size will be updated, contents ignored
+                } else if ("JUNK".equals(chunkID)) {
+                	// the chunk data size will be added to the header size, 
+                	// this content is ignored
                 } else {
-                    // removed 05-08-2010
-                    // this goes wrong with some wave files
-                    // leading to enourmous sizes of the log file
-                    // see (mail from Claudia Scharioth)
-                    //System.out.println(chunkID +
-                    //    " header found - ignoring contents...");
+                    System.out.println(chunkID +
+                        " header found - ignoring contents...");
                 }
 
                 headerSize += chunkDataSize;
             }
-
-            if (fileSize > (28 + fLen + dLen)) {
-                readCues(soundFile);
+            
+            if (fileSize > (28 + fLen + dataLengthLong)) {
+            	try {
+            		readCues(soundFile);
+            	} catch (IOException e) {
+            		// Ignore errors in the cues.
+            	}
             }
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
+        //System.out.println(toString());
     }
 
     /**
-     * Returns the whole header information in table form
+     * Returns the whole header information in table form.
      *
      * @see java.lang.Object#toString()
      */
-    public String toString() {
-        StringBuffer output = new StringBuffer("File size: " + fileSize +
+    @Override
+	public String toString() {
+        StringBuilder output = new StringBuilder("File size: " + fileSize +
                 " Bytes");
+        output.append("\nHeader Size: "+ headerSize);
 
-        //NOTE: byte numbers shown in this toString() method are only correct whe just fmt and data header are present!!!
+        //NOTE: byte numbers shown in this toString() method are only correct when just fmt and data header are present!!!
         try {
             output.append("\n00-03 Letters                 : ").append(riff);
             output.append("\n04-07 Length of rdata chunk   : ").append(rLen);
-            output.append("\n================ rdata chunk ===================");
+            output.append("\n================= rdata chunk ==================");
             output.append("\n08-11 Letters                 : ").append(wID);
-            output.append("\n=============== format chunk ================");
+            if (ds64ID != null) {
+            	output.append("\n================== ds64 chunk ==================");
+            	output.append("\n12-15 Letters                 : ").append(ds64ID);
+            	output.append("\n16-19 Length of rest of chunk : ").append(ds64Len);
+            	output.append("\n20-27 Length of rfdata chunk  : ").append(rLenLong);
+            	output.append("\n28-35 Length of data chunk    : ").append(dataLengthLong);
+            	output.append("\n36-43 Sample count            : ").append(ds64SampleCount);
+            	output.append("\n44-47 Table length            : ").append(ds64TableLength);
+            	if (ds64TableLength > 0) {
+            		output.append("\n44-   Table data              : ");
+            	}
+            }
+            output.append("\n================= format chunk =================");
             output.append("\n12-15 Letters                 : ").append(fID);
             output.append("\n16-19 Length of rest of chunk : ").append(fLen);
             output.append("\n20-21 WAV Format Tag          : ").append(wFormatTag);
@@ -367,18 +531,26 @@ public class ELANWaveHeader {
             output.append("\n24-27 Sample frequency        : ").append(nSamplesPerSec);
             output.append("\n28-31 nAvgBytesPerSec         : ").append(nAvgBytesPerSec);
             output.append("\n32-33 nBlockAlign             : ").append(nBlockAlign);
-
+            output.append("\n34-35 wBitsPerSample          : ").append(wBitsPerSample);
+            
             for (int i = 0; i < formatSpecific.length; i++) {
-                output.append("\n").append((34 + (i * 2)) + "-" +
-                    (35 + (i * 2)));
+                output.append("\n").append((36 + (i * 2)) + "-" +
+                    (37 + (i * 2)));
                 output.append(" Format specific data    : ").append(formatSpecific[i]);
             }
-
-            output.append("\n================ data chunk =================");
-            output.append("\n" + (20 + fLen) + "-" + (23 + fLen)).append(" Letters                 : ");
-            output.append(dID).append("\n" + (24 + fLen) + "-" + (27 + fLen));
+            //HS 07-2011 added info from "fact" chunk in header
+            if (factID != null) {
+            	output.append("\n================== fact chunk ==================");
+                output.append("\n" + (20 + fLen) + "-" + (23 + fLen) + " Letters                 : ").append(factID);
+                output.append("\n" + (24 + fLen) + "-" + (27 + fLen) + " Length of rest of chunk : ").append(factLen);
+                output.append("\n" + (28 + fLen) + "-" + (31 + fLen) + " dwSampleLength          : ").append(dwSampleLength);
+            }
+            
+            output.append("\n================== data chunk ==================");
+            output.append("\n" + (20 + fLen + factLen) + "-" + (23 + fLen + factLen)).append(" Letters                 : ");
+            output.append(dID).append("\n" + (24 + fLen + factLen) + "-" + (27 + fLen + factLen));
             output.append(" Length of following data: ")
-                  .append(dLen + "\n" + (28 + fLen) + "-" + (28 + fLen + dLen))
+                  .append(dataLengthLong + "\n" + (28 + fLen + factLen) + "-" + (28 + fLen + factLen + dataLengthLong))
                   .append(" (data)");
 
             if (cuePoints.length > 0) {
@@ -412,10 +584,14 @@ public class ELANWaveHeader {
     private static ELANWaveCuePoint[] getCuePoints(RandomAccessFile soundFile)
         throws IOException {
         byte[] b = new byte[4];
-        soundFile.read(b); //cueChunkDataSize
-        soundFile.read(b);
+        int rc;
+        
+        rc = soundFile.read(b); //cueChunkDataSize
+        if (rc != b.length) {
+        	throw new InvalidHeaderException();
+        }
 
-        int numCuePoints = getInt(b);
+        int numCuePoints = getInt(b, soundFile);
         ELANWaveCuePoint[] cuePoints = new ELANWaveCuePoint[numCuePoints];
         int ID;
         int position;
@@ -425,18 +601,12 @@ public class ELANWaveHeader {
         int sampleOffset;
 
         for (int i = 0; i < cuePoints.length; i++) {
-            soundFile.read(b);
-            ID = getInt(b);
-            soundFile.read(b);
-            position = getInt(b);
-            soundFile.read(b);
-            dataChunkID = getString(b);
-            soundFile.read(b);
-            chunkStart = getInt(b);
-            soundFile.read(b);
-            blockStart = getInt(b);
-            soundFile.read(b);
-            sampleOffset = getInt(b);
+            ID = getInt(b, soundFile);
+            position = getInt(b, soundFile);
+            dataChunkID = getString(b, soundFile);
+            chunkStart = getInt(b, soundFile);
+            blockStart = getInt(b, soundFile);
+            sampleOffset = getInt(b, soundFile);
 
             if ("data".equals(dataChunkID)) {
                 cuePoints[i] = new ELANWaveCuePoint(ID, position, chunkStart,
@@ -471,30 +641,22 @@ public class ELANWaveHeader {
         String label;
 
         long seek = soundFile.getFilePointer();
-        soundFile.read(b);
 
-        int chunkDataSize = getInt(b);
+        int chunkDataSize = getInt(b, soundFile);
 
-        soundFile.read(b);
-        cuePointID = getInt(b);
+        cuePointID = getInt(b, soundFile);
 
-        soundFile.read(b);
-        sampleLength = getInt(b);
+        sampleLength = getInt(b, soundFile);
 
-        soundFile.read(b);
-        purposeID = getString(b);
+        purposeID = getString(b, soundFile);
 
-        soundFile.read(s);
-        country = getShort(s);
+        country = getShort(s, soundFile);
 
-        soundFile.read(s);
-        language = getShort(s);
+        language = getShort(s, soundFile);
 
-        soundFile.read(s);
-        dialect = getShort(s);
+        dialect = getShort(s, soundFile);
 
-        soundFile.read(s);
-        codePage = getShort(s);
+        codePage = getShort(s, soundFile);
 
         if ((chunkDataSize - 20 - 1) >= 0) {
             t = new byte[chunkDataSize - 20 - 1];
@@ -526,14 +688,12 @@ public class ELANWaveHeader {
         throws IOException {
         String info = "";
         byte[] b = new byte[4];
-        soundFile.read(b);
 
-        int chunkDataSize = getInt(b);
+        int chunkDataSize = getInt(b, soundFile);
 
         if (chunkDataSize > 0) {
             byte[] t = new byte[chunkDataSize];
-            soundFile.read(t);
-            info = getString(t);
+            info = getString(t, soundFile);
         }
 
         soundFile.seek(soundFile.getFilePointer() +
@@ -542,17 +702,72 @@ public class ELANWaveHeader {
         return info;
     }
 
+    /**
+     * Compose the first 4 bytes from the array little-endian to an integer.
+     * However, RIFF chunk sizes are really unsigned integers, so we won't
+     * be able to handle files of 2 GB or larger.
+     * @return
+     */
     private static int getInt(byte[] bytes) {
         return getInt(bytes[0], bytes[1], bytes[2], bytes[3]);
     }
 
+    private static int getInt(byte[] bytes, RandomAccessFile file) throws IOException {
+    	int rc = file.read(bytes);
+    	if (rc != bytes.length) {
+    		throw new InvalidHeaderException();
+    	}
+        return getInt(bytes[0], bytes[1], bytes[2], bytes[3]);
+    }
+
+    /**
+     * Compose the byte parameters little-endian to an integer.
+     * @param b1 first and least-significant byte
+     * @param b2
+     * @param b3
+     * @param b4 last and most-significant byte
+     * 
+     * @return the {@code int} value based on the bytes 
+     */
     private static int getInt(byte b1, byte b2, byte b3, byte b4) {
         return (b1 & 0xff) | ((b2 & 0xff) << 8) | ((b3 & 0xff) << 16) |
         ((b4 & 0xff) << 24);
     }
+    
+    /**
+     * 32-bits / 4 bytes version of creating a long value. 
+     * @param b1 least significant byte
+     * @param b2
+     * @param b3
+     * @param b4 most significant byte
+     * 
+     * @return the composed value of the 4 bytes as a {@code long}
+     */
+    private static long getLong(byte b1, byte b2, byte b3, byte b4) {
+    	return (long) (b1 & 0xff) | ((b2 & 0xff) << 8) | ((b3 & 0xff) << 16) |
+    	        ((b4 & 0xff) << 24);
+    }
 
+    /**
+     * 64-bits / 8 bytes version of creating a long
+     * @return the corresponding value of the 8 bytes as a {@code long}
+     */
+    private static long getLong(byte b1, byte b2, byte b3, byte b4, 
+    		byte b5, byte b6, byte b7, byte b8) {
+  	
+    	return (getLong(b1, b2, b3, b4) & 0xffffffff) | (getLong(b5, b6, b7, b8) & 0xffffffff) << 32;
+    }
+    
     private static short getShort(byte[] s) {
         return getShort(s[0], s[1]);
+    }
+
+    private static short getShort(byte[] bytes, RandomAccessFile file) throws IOException {
+    	int rc = file.read(bytes);
+    	if (rc != bytes.length) {
+    		throw new InvalidHeaderException();
+    	}
+        return getShort(bytes[0], bytes[1]);
     }
 
     private static short getShort(byte b1, byte b2) {
@@ -560,6 +775,14 @@ public class ELANWaveHeader {
     }
 
     private static String getString(byte[] bytes) {
+        return getString(bytes, bytes.length);
+    }
+
+    private static String getString(byte[] bytes, RandomAccessFile file) throws IOException {
+    	int rc = file.read(bytes);
+    	if (rc != bytes.length) {
+    		throw new InvalidHeaderException();
+    	}
         return getString(bytes, bytes.length);
     }
 
@@ -573,34 +796,31 @@ public class ELANWaveHeader {
         return new String(asChar);
     }
 
-    private void readAssociatedDataList(RandomAccessFile soundFile) {
-        ArrayList cueSectionList = new ArrayList();
+    private void readAssociatedDataList(RandomAccessFile soundFile)
+    		throws InvalidHeaderException, IOException {
+        ArrayList<ELANWaveCueSection> cueSectionList = new ArrayList<ELANWaveCueSection>();
         byte[] b = new byte[4];
 
-        try {
             while (soundFile.getFilePointer() < soundFile.length()) {
-                soundFile.read(b);
+            	String chunkId = getString(b, soundFile);
 
-                if ("ltxt".equals(getString(b))) {
+                if ("ltxt".equals(chunkId)) {
                     ELANWaveCueSection cueSection = getCueSection(soundFile,
                             cuePoints);
 
                     if (cueSection != null) {
                         cueSectionList.add(cueSection);
                     }
-                } else if ("labl".equals(getString(b))) {
+                } else if ("labl".equals(chunkId)) {
                     readCuePointLabels(soundFile, cuePoints);
-                } else if ("note".equals(getString(b))) {
+                } else if ("note".equals(chunkId)) {
                     readCuePointNotes(soundFile, cuePoints);
                 } else {
                     break;
                 }
             }
 
-            cueSections = (ELANWaveCueSection[]) cueSectionList.toArray(new ELANWaveCueSection[0]);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+            cueSections = cueSectionList.toArray(new ELANWaveCueSection[0]);
     }
 
     private static void readCuePointLabels(RandomAccessFile soundFile,
@@ -609,19 +829,16 @@ public class ELANWaveHeader {
         byte[] t;
         String label;
         long seek = soundFile.getFilePointer();
-        soundFile.read(b);
 
-        int chunkDataSize = getInt(b);
-        soundFile.read(b);
+        int chunkDataSize = getInt(b, soundFile);
 
-        int cuePointID = getInt(b);
+        int cuePointID = getInt(b, soundFile);
 
         if ((chunkDataSize - 4 - 1) >= 0) {
             t = new byte[chunkDataSize - 4 - 1];
 
             // minus cuePoint bytes minus string end byte (&x00)
-            soundFile.read(t);
-            label = getString(t);
+            label = getString(t, soundFile);
 
             for (int i = 0; i < cuePoints.length; i++) {
                 if (cuePoints[i].getID() == cuePointID) {
@@ -643,19 +860,16 @@ public class ELANWaveHeader {
         byte[] t;
         String label;
         long seek = soundFile.getFilePointer();
-        soundFile.read(b);
 
-        int chunkDataSize = getInt(b);
-        soundFile.read(b);
+        int chunkDataSize = getInt(b, soundFile);
 
-        int cuePointID = getInt(b);
+        int cuePointID = getInt(b, soundFile);
 
         if ((chunkDataSize - 4 - 1) >= 0) {
             t = new byte[chunkDataSize - 4 - 1];
 
             // minus cuePoint bytes minus string end byte (&x00)
-            soundFile.read(t);
-            label = getString(t);
+            label = getString(t, soundFile);
 
             for (int i = 0; i < cuePoints.length; i++) {
                 if (cuePoints[i].getID() == cuePointID) {
@@ -671,42 +885,59 @@ public class ELANWaveHeader {
         soundFile.seek(seek);
     }
 
-    private void readCues(RandomAccessFile soundFile) {
+    private void readCues(RandomAccessFile soundFile) throws IOException {
         byte[] b = new byte[4];
 
-        try {
-            soundFile.seek(28 + fLen + dLen);
+            soundFile.seek(28 + fLen + dataLengthLong);
 
             int listChunkSize = 0;
 
             while (soundFile.getFilePointer() < soundFile.length()) {
-                soundFile.read(b);
+            	//System.out.println("fp1: " + soundFile.getFilePointer() + " l: " + soundFile.length());
+                String chunkId = getString(b, soundFile);
 
-                if ("list".equals(getString(b).toLowerCase())) {
-                    soundFile.read(b);
-                    listChunkSize = getInt(b);
+                if ("list".equals(chunkId.toLowerCase())) {
+                    listChunkSize = getInt(b, soundFile);
                 }
 
-                if ("cue ".equals(getString(b))) {
+                if ("cue ".equals(chunkId)) {
                     cuePoints = getCuePoints(soundFile);
 
                     continue;
-                } else if ("adtl".equals(getString(b))) {
+                } else if ("adtl".equals(chunkId)) {
                     readAssociatedDataList(soundFile);
 
                     continue;
-                } else if ("info".equals(getString(b).toLowerCase())) {
+                } else if ("info".equals(chunkId.toLowerCase())) {
                     long endOfChunk = (soundFile.getFilePointer() +
                         listChunkSize) - 4;
-
-                    while (soundFile.getFilePointer() < endOfChunk) {
-                        soundFile.read(b);
-                        infos.put(getString(b), getInfo(soundFile));
+                    // HS May 2008: sometimes endOfChunk is greater then the length of the file
+                    while (soundFile.getFilePointer() < endOfChunk && soundFile.getFilePointer() < soundFile.length()) {
+                    	//System.out.println("fp2: " + soundFile.getFilePointer() + " eoc: " + endOfChunk);
+                        String str = getString(b, soundFile);
+                        infos.put(str, getInfo(soundFile));
                     }
+                } else {
+                	// Unknown chunk. Probably the end of the cues...
+                	break;
                 }
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
+    
+    @SuppressWarnings("serial")
+	private static class InvalidHeaderException extends IOException {
+
+		public InvalidHeaderException() {
+			super();
+		}
+
+		public InvalidHeaderException(String message) {
+			super(message);
+		}
+
+		public InvalidHeaderException(Throwable cause) {
+			super(cause);
+		}
+    	
+    };
 }
