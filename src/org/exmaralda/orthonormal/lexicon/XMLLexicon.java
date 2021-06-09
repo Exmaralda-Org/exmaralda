@@ -102,7 +102,12 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     public int getFrequency(String form, String correspondingForm) {
         //System.out.println("### " + form + " +++  "+ correspondingForm);
         NormalisationInfo info = map.get(form);
-        return info.getFrequency(correspondingForm);
+        // added 09-06-2021 issue #270
+        if (info!=null){
+            return info.getFrequency(correspondingForm);
+        } else {
+            return 0;
+        }
     }
 
     @Override
