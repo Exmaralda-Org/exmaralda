@@ -191,6 +191,10 @@ public class Masker {
                     double lowerLimit = 0.0-rms;
                     double upperLimit = rms;
                     //BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(lowerLimit,upperLimit);
+                    // issue #269
+                    if (lowerLimit>=upperLimit){
+                        lowerLimit = upperLimit - 0.001;
+                    }
                     BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(lowerLimit,upperLimit,(upperLimit - lowerLimit) / 20,0.02,currentValue);
                     for (int pos=c; pos<mask.length; pos+=numChannels){
                         mask[pos]=brownNoiseGenerator.getNext();
