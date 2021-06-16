@@ -50,10 +50,38 @@
     </xsl:template>
 
     <xsl:template match="tei:w">
-        <xsl:apply-templates/>
         <xsl:choose>
-            <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
-            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+            <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">
+                <xsl:choose>
+                    <xsl:when test="@type='uncertain'">
+                        <xsl:text>(</xsl:text>
+                        <xsl:apply-templates/>
+                        <xsl:text>)</xsl:text>
+                        <xsl:choose>
+                            <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
+                            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="@type='repair'">
+                        <xsl:apply-templates/>
+                        <xsl:text>/ </xsl:text>
+                    </xsl:when> 
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>
+                        <xsl:choose>
+                            <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
+                            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>                       
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+                <xsl:choose>
+                    <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
+                    <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
         </xsl:choose>        
     </xsl:template>
     
