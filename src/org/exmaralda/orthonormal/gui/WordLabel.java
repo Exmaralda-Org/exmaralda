@@ -19,6 +19,7 @@ import javax.swing.border.BevelBorder;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.orthonormal.lexicon.LexiconException;
 import org.exmaralda.orthonormal.lexicon.SimpleXMLFileLexicon;
+import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.jdom.Element;
 import org.jdom.filter.AbstractFilter;
 
@@ -253,7 +254,12 @@ public class WordLabel extends JLabel implements MouseListener {
     void editWord(){
         if (applicationControl.getMode()==ApplicationControl.NORMALIZATION_MODE){
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            WordNormalizationDialog dialog = new WordNormalizationDialog((JFrame)(getTopLevelAncestor()), true, wordElement, applicationControl.queryLexicon(wordElement.getText()));
+            WordNormalizationDialog dialog = new WordNormalizationDialog((JFrame)(getTopLevelAncestor()), true, 
+                    wordElement, 
+                    //applicationControl.queryLexicon(wordElement.getText())
+                    // changed 17-06-2021 : issue #271
+                    applicationControl.queryLexicon(WordUtilities.getWordText(wordElement))
+            );
             Point p = this.getLocationOnScreen();
             p.translate(0, -dialog.getHeight());
             dialog.setLocation(p);

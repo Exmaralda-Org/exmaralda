@@ -320,7 +320,10 @@ public final class ApplicationControl implements  ListSelectionListener,
     public List<String> queryLexicon(Element[] wordElements){
         HashSet<String> forms = new HashSet<String>();
         for (Element word : wordElements){
-            forms.add(word.getText());
+            // changed 17-06-2021 : issue #271
+            // forms.add(word.getText());
+            forms.add(WordUtilities.getWordText(word));
+            System.out.println("FORM: " + WordUtilities.getWordText(word));
         }
         Vector<String> result = new Vector<String>();
         for (String form : forms){
