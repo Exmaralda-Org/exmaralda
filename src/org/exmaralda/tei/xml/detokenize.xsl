@@ -149,7 +149,8 @@
             </xsl:otherwise>
         </xsl:choose>
         <xsl:choose>
-            <xsl:when test="x"></xsl:when>
+            <!-- here we don't want spaces if a <pc> follows (which is really weird, but happens) -->
+            <xsl:when test="following-sibling::*[1][self::tei:pc] or (following-sibling::*[1][self::tei:anchor] and following-sibling::*[2][self::tei:pc])"></xsl:when>
             <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
         </xsl:choose>        
     </xsl:template>
