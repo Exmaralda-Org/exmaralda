@@ -33,7 +33,10 @@
     
     <xsl:template match="tei:seg">
         <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
+            <xsl:apply-templates select="@*"/>
+            <!-- select all but the ending anchor before the utterance etc. end symbol is inserted -->
+            <xsl:apply-templates select="*[not(self::tei:anchor and not(following-sibling::*))]"/>
+            <!-- insert utterance etc. end symbol -->
             <xsl:choose>
                 <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">
                     <xsl:choose>
@@ -45,15 +48,48 @@
                     </xsl:choose>
                 </xsl:when>
             </xsl:choose>
+            <!-- now select the ending anchor -->
+            <xsl:apply-templates select="*[self::tei:anchor and not(following-sibling::*)]"/>
         </xsl:copy>
-        
     </xsl:template>
 
+<!-- for the words we need some word-level symbols and to decide whether or not to add space -->
     <xsl:template match="tei:w">
-        <xsl:apply-templates/>
         <xsl:choose>
-            <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
-            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+            <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">
+                <xsl:choose>
+                    <xsl:when test="@type='uncertain'">
+                        <xsl:text>(</xsl:text>
+                        <xsl:apply-templates/>
+                        <xsl:text>)</xsl:text>
+                        <xsl:choose>
+                            <!-- no space before pc, utterance end symbols will be inserted later after last <w> -->
+                            <xsl:when test="following-sibling::*[1][self::tei:pc] or not(following-sibling::*[self::tei:w])"></xsl:when>
+                            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="@type='repair'">
+                        <xsl:apply-templates/>
+                        <xsl:text>/ </xsl:text>
+                    </xsl:when> 
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>
+                        <xsl:choose>
+                            <!-- no space before pc, utterance end symbols will be inserted later after last <w> -->
+                            <xsl:when test="following-sibling::*[1][self::tei:pc] or not(following-sibling::*[self::tei:w])"></xsl:when>
+                            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>                       
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+                <xsl:choose>
+                    <!-- no space before pc, utterance end symbols will be inserted later after last <w> -->
+                    <xsl:when test="following-sibling::*[1][self::tei:pc] or not(following-sibling::*[self::tei:w])"></xsl:when>
+                    <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
         </xsl:choose>        
     </xsl:template>
     
@@ -113,7 +149,8 @@
             </xsl:otherwise>
         </xsl:choose>
         <xsl:choose>
-            <xsl:when test="x"></xsl:when>
+            <!-- here we don't want spaces if a <pc> follows (which is really weird, but happens) -->
+            <xsl:when test="following-sibling::*[1][self::tei:pc] or (following-sibling::*[1][self::tei:anchor] and following-sibling::*[2][self::tei:pc])"></xsl:when>
             <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
         </xsl:choose>        
     </xsl:template>
