@@ -21,8 +21,10 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[A-Za-zÄÖÜäöüß]", // 1 : GERMAN
         "[A-Za-z\u00C2\u00C7\u011E\u0130\u00CE\u00D6\u015E\u0160\u00DB\u00DC\u00E2\u00E7\u011F\u00EE\u0131\u00F6\u015F\u0161\u00FB\u00FC]", // 2 : TURKISH
         "[A-Za-z\u00C6\u00E6\u00C5\u00E5\u00C4\u00E4\u00D0\u00F0\u00D8\u00F8\u00D6\u00F6\u00DE\u00FE]", // 3 : SCANDINAVIAN
-        "[A-Za-zÄÖÜäöü]", // 4 : PORTUGUESE
-        "[A-Za-zÄÖÜäöü]", // 5 : EXTENDED LATIN
+        "[A-Za-zÀÁÂÃÇÉÊÍÓÔÕÚàáâãçéêíóôõú]", // 4 : PORTUGUESE
+        "[A-Za-zÀÈÉÌÍÎÓÒÚÙàèéìíîóòúù]", // 5 : ITALIAN
+        "[\\p{L}]" // 6 : ANY KIND OF ALPHABET
+        
     };
     
     private static String[] UPPER_CASE_CHARACTER = {
@@ -30,8 +32,9 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[A-ZÄÖÜ]", // 1 : GERMAN
         "[A-Z\u00C2\u00C7\u011E\u0130\u00CE\u00D6\u015E\u0160\u00DB\u00DC]", // 2 : TURKISH
         "[A-Za-z\u00C6\u00C5\u00C4\u00D0\u00D8\u00D6\u00DE]", // 3 : SCANDINAVIAN
-        "[A-Za-zÄÖÜäöü]", // 4 : PORTUGUESE
-        "[A-Za-zÄÖÜäöü]", // 5 : EXTENDED LATIN
+        "[A-Za-zÀÁÂÃÇÉÊÍÓÔÕÚ]", // 4 : PORTUGUESE
+        "[A-Za-zÀÈÉÌÍÎÓÒÚÙ]", // 5 : ITALIAN
+        "[\\p{Lu}]"
     };
 
     private static String[] LOWER_CASE_CHARACTER = {
@@ -39,8 +42,9 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[a-zäöüß]", // 1 : GERMAN
         "[a-z\u00E2\u00E7\u011F\u00EE\u0131\u00F6\u015F\u0161\u00FB\u00FC]", // 2 : TURKISH
         "[A-Za-z\u00E6\u00E5\u00E4\u00F0\u00F8\u00F6\u00FE]", // 3 : SCANDINAVIAN
-        "[A-Za-zÄÖÜäöü]", // 4 : PORTUGUESE
-        "[A-Za-zÄÖÜäöü]", // 5 : EXTENDED LATIN
+        "[A-Za-zàáâãçéêíóôõú]", // 4 : PORTUGUESE
+        "[A-Za-zàèéìíîóòúù]", // 5 : ITALIAN
+        "[\\p{Ll}]"
     };
     
     Comparator<String> caseIgnoringComparator = new java.util.Comparator<String>() {
@@ -211,7 +215,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         jSeparator3.setPreferredSize(new java.awt.Dimension(2, 25));
         standardRegexPanel.add(jSeparator3);
 
-        ZeroOrOneButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        ZeroOrOneButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         ZeroOrOneButton.setText("0-1");
         ZeroOrOneButton.setToolTipText("Once or not at all");
         ZeroOrOneButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -224,7 +228,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(ZeroOrOneButton);
 
-        ZeroOrMoreButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        ZeroOrMoreButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         ZeroOrMoreButton.setText("0-n");
         ZeroOrMoreButton.setToolTipText("Zero or more times");
         ZeroOrMoreButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -237,7 +241,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(ZeroOrMoreButton);
 
-        OneOrMoreButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        OneOrMoreButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         OneOrMoreButton.setText("1-n");
         OneOrMoreButton.setToolTipText("One or more times");
         OneOrMoreButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -255,7 +259,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         jSeparator1.setPreferredSize(new java.awt.Dimension(2, 25));
         standardRegexPanel.add(jSeparator1);
 
-        AnyAlphabeticButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        AnyAlphabeticButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         AnyAlphabeticButton.setText("Aa");
         AnyAlphabeticButton.setToolTipText("Any alphabetic character (A,a,B,b,..)");
         AnyAlphabeticButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -268,7 +272,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(AnyAlphabeticButton);
 
-        UpperAlphabeticButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        UpperAlphabeticButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         UpperAlphabeticButton.setText("AB");
         UpperAlphabeticButton.setToolTipText("Any uppercase alphabetic character");
         UpperAlphabeticButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -281,7 +285,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(UpperAlphabeticButton);
 
-        LowerAlphabeticButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        LowerAlphabeticButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         LowerAlphabeticButton.setText("ab");
         LowerAlphabeticButton.setToolTipText("Any lowercase alphabetic character");
         LowerAlphabeticButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -294,7 +298,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(LowerAlphabeticButton);
 
-        AnyDigitButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        AnyDigitButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         AnyDigitButton.setText("01");
         AnyDigitButton.setToolTipText("Any digit (0,1,...,9)");
         AnyDigitButton.setMaximumSize(new java.awt.Dimension(45, 25));
@@ -307,7 +311,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(AnyDigitButton);
 
-        AnyCharacterButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        AnyCharacterButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         AnyCharacterButton.setText("Any");
         AnyCharacterButton.setToolTipText("Any character");
         AnyCharacterButton.setMaximumSize(new java.awt.Dimension(50, 25));
@@ -325,7 +329,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         jSeparator2.setPreferredSize(new java.awt.Dimension(2, 25));
         standardRegexPanel.add(jSeparator2);
 
-        OrButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        OrButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         OrButton.setText("OR");
         OrButton.setToolTipText("Alternative");
         OrButton.setMaximumSize(new java.awt.Dimension(50, 25));
@@ -338,7 +342,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         });
         standardRegexPanel.add(OrButton);
 
-        NotButton.setFont(new java.awt.Font("Tahoma", 0, 9));
+        NotButton.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         NotButton.setText("Not");
         NotButton.setToolTipText("Alternative");
         NotButton.setMaximumSize(new java.awt.Dimension(50, 25));
@@ -588,7 +592,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         jLabel5.setText("Alphabet: ");
         alphabetPanel.add(jLabel5);
 
-        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German", "Turkish", "Scandinavian", "Portuguese (todo)", "Extended Latin (todo)" }));
+        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German", "Turkish", "Scandinavian", "Portuguese", "Italian", "Any character" }));
         alphabetComboBox.setMaximumSize(new java.awt.Dimension(55, 22));
         alphabetPanel.add(alphabetComboBox);
 
