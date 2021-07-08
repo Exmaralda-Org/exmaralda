@@ -103,6 +103,21 @@ public abstract class AbstractPlayer implements Playable {
             l.processPlayableEvent(e);
         }
     }
+    
+    public String determineMimeType(String filePath){
+        int index = filePath.lastIndexOf(".");
+        if (index<0) return "audio/wav";
+        if (index>filePath.length()-2) return "audio/wav";
+        String suffix = filePath.substring(index+1).toLowerCase();
+        switch (suffix){
+            case "wav" : return "audio/wav";
+            case "mp4" : return "video/mp4";
+            case "mp3" : return "audio/mpeg";
+            case "mpg" : 
+            case "mpeg" : return "video/mpeg";
+            default : return "audio/wav";
+        }
+    }
         
 
     

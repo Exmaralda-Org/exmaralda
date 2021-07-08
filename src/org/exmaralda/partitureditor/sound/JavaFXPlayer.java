@@ -41,14 +41,16 @@ public class JavaFXPlayer extends AbstractPlayer implements ControllerListener {
         if (!(pathToSoundFile.startsWith("http://") || (pathToSoundFile.startsWith("https://")))){
             //urlString = "file:///" + URLEncoder.encode(pathToSoundFile, StandardCharsets.ISO_8859_1.toString());
             // only this version seems to do it -- this is for issue #
-            urlString = "file:///" + pathToSoundFile.replaceAll(" ", "%20");
+            urlString = "file:///" + pathToSoundFile.replaceAll(" ", "%20").replaceAll("\\\\", "/");
             soundFilePath = pathToSoundFile;
         }
         
         System.out.println("******* URLString=" + urlString);
 
         MediaDescriptor mediaDescriptor =
-                mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(urlString);
+                // changed 08-07-2021, issue # 275
+                //mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(urlString);
+                new MediaDescriptor(urlString, determineMimeType(urlString));
         try {
             // added 04-06-2009
             if (wrappedPlayer!=null){

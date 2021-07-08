@@ -42,7 +42,9 @@ public class MMFPlayer extends AbstractPlayer implements ControllerListener, Str
         }
 
         MediaDescriptor mediaDescriptor =
-                mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(urlString);
+                // changed 08-07-2021, issue # 275
+                //mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(urlString);
+                new MediaDescriptor(urlString, determineMimeType(urlString));
         try {
             // added 04-06-2009
             if (wrappedPlayer!=null){

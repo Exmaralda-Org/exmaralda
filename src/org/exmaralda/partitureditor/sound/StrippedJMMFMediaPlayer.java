@@ -7,8 +7,6 @@ package org.exmaralda.partitureditor.sound;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -826,6 +824,12 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
     } 
     
     // end experiment
+
+    @Override
+    public boolean isPlayingInterval() {
+        if (jmmfPlayer==null) return false;
+        return jmmfPlayer.isPlaying();
+    }
 
 	
 //##############

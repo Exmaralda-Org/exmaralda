@@ -12,6 +12,7 @@
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import mpi.eudico.server.corpora.clomimpl.abstr.MediaDescriptor;
+import org.exmaralda.partitureditor.sound.AbstractPlayer;
 
 /**
  *
@@ -19,6 +20,7 @@ import mpi.eudico.server.corpora.clomimpl.abstr.MediaDescriptor;
  */
 public class MediaInfoDialog extends javax.swing.JDialog {
 
+    
     /** Creates new form MediaInfoDialog */
     public MediaInfoDialog(java.awt.Frame parent, boolean modal, String mediaURL) {
         super(parent, modal);
@@ -34,8 +36,10 @@ public class MediaInfoDialog extends javax.swing.JDialog {
 
         boolean thisIsWindows = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("win");
         if (thisIsWindows){
-            MediaDescriptor mediaDescriptor =
-                mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(fullURL);
+            /*MediaDescriptor mediaDescriptor =
+                // changed 08-07-2021, issue # 275
+                //mpi.eudico.client.annotator.linkedmedia.MediaDescriptorUtil.createMediaDescriptor(urlString);
+                new MediaDescriptor(fullURL, determineMimeType(fullURL));*/
 
             return;
         }
