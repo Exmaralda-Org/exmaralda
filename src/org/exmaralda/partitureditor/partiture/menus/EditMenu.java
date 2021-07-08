@@ -27,6 +27,7 @@ public class EditMenu extends AbstractTableMenu {
     private final JMenuItem searchInEventsMenuItem;
     private final JMenuItem findNextMenuItem;
     private final JMenuItem replaceInEventsMenuItem;
+    private final JMenuItem lowerUpperCaseMenuItem;
 
     private final JMenuItem exaktSearchMenuItem;
 
@@ -76,6 +77,9 @@ public class EditMenu extends AbstractTableMenu {
         replaceInEventsMenuItem = this.add(table.replaceInEventsAction);
         replaceInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         replaceInEventsMenuItem.setToolTipText("Search and replace text in events");
+        
+        lowerUpperCaseMenuItem = this.add(table.lowerUpperCaseAction);
+        replaceInEventsMenuItem.setToolTipText("Replace upper with lower case letters or vice versa");
 
         add(table.gotoAction).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 

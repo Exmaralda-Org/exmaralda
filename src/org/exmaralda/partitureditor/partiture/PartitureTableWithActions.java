@@ -995,6 +995,8 @@ public class PartitureTableWithActions extends PartitureTable
         findNextAction = new FindNextAction(this);
         replaceInEventsAction = new ReplaceInEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Replace.gif")));
         gotoAction = new GotoAction(this);
+        // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        lowerUpperCaseAction = new LowerUpperCaseAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/upper-and-lower-case-a-letter.png")));
 
         exaktSearchAction = new ExaktSearchAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")));
 
@@ -1603,6 +1605,8 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction findNextAction;
     public javax.swing.AbstractAction replaceInEventsAction;
     public javax.swing.AbstractAction gotoAction;
+    // #274
+    public javax.swing.AbstractAction lowerUpperCaseAction;
 
     public javax.swing.AbstractAction exaktSearchAction;    
     

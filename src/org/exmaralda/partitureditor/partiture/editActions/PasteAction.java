@@ -6,7 +6,6 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
@@ -25,6 +24,7 @@ public class PasteAction extends org.exmaralda.partitureditor.partiture.Abstract
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("pasteAction!");
         paste();        

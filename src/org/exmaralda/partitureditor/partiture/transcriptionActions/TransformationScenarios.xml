@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation-scenarios>
 
-    <transformation-scenario>
+    <!-- <transformation-scenario>
         <name>Test with parameters</name>
         <description>Test new feature for passing parameters to the stylesheet</description>
         <input type="basic-transcription"/>
@@ -14,7 +14,7 @@
             <parameter name="PARAMETER_2">Trick</parameter>
             <parameter name="PARAMETER_3">Track</parameter>
         </parameters>
-    </transformation-scenario>
+    </transformation-scenario> -->
 
 
     <transformation-scenario>

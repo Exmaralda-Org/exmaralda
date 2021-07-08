@@ -748,6 +748,7 @@ public class PartiturEditor extends javax.swing.JFrame
             try {
                 if (wf!=null){
                     try{
+                        System.out.println("Initialising timelineViewer");
                         timelineViewer = new org.exmaralda.folker.timeview.WaveFormViewer();
                         timelineViewer.setPixelsPerSecond(150.0);
                         table.getModel().setPixelsPerSecond(150.0);
