@@ -46,6 +46,13 @@ public class Masker {
         numFrames = wavFileIn.getNumFrames();
         wavFileOut = WavFile.newWavFile(fileOut, numChannels, numFrames, wavFileIn.getValidBits(), wavFileIn.getSampleRate());
         initBrownNoiseWavFile();
+        
+        // issue #269
+        // Create a buffer of 1 frame
+        lastBufferValues = new double[1 * numChannels];
+        // Read frames into buffer
+        wavFileIn.readFrames(lastBufferValues, 1);
+        
     }
 
     private double[] initBrownNoiseWavFile() throws URISyntaxException, IOException, WavFileException, ClassNotFoundException{
@@ -76,8 +83,8 @@ public class Masker {
                 maskFrames((long) maskEnd, method);
             }
             else {
-            // write mask  to t[1]
-            maskFrames((long) maskEnd, method);
+                // write mask  to t[1]
+                maskFrames((long) maskEnd, method);
             }
             lastEnd = maskEnd;
         }
