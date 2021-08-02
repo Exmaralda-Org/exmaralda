@@ -114,7 +114,12 @@
         <TEI xmlns="http://www.tei-c.org/ns/1.0">
             <!-- new 25-04-2018: this is for pointing to the corresponding AGD-ID -->
             <xsl:if test="/*/@dgd-id ">
-                <idno type="AGD-ID"><xsl:value-of select="/*/@dgd-id"/></idno>
+                <idno type="AGD-ID">
+                    <!-- changed 02-08-2021, issue #60 in ZuMult -->
+                
+                    <!-- <xsl:value-of select="/*/@dgd-id"/> -->
+                    <xsl:value-of select="substring-before(concat(/*/@dgd-id, '_DF_'), '_DF_')"/>
+                </idno>
             </xsl:if>            
             <teiHeader>
                 <!-- ***************************************************** -->
