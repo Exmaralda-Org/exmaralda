@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tei="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="xs tei" version="2.0" xmlns="http://www.tei-c.org/ns/1.0">
-    
+
     <!-- The four UK QualiBank TEI Profiles as described by D Bell 04-Jul-2014 all share the <teiHeader> section,
      but vary in the <text> section. Profile 1 to 4 mainly consist of a "standard interviewer/respondent(s) transcript",
      modelled as a list of <u>, and 2 to 4 also include "structural notes" of various @type:s. These can be interviewers'
@@ -74,13 +74,29 @@
                 <xsl:attribute name="unit">
                     <xsl:text>s</xsl:text>
                 </xsl:attribute>
-                <when xml:id="TLI_0"/>
                 <xsl:for-each select="//tei:u">
+                    <xsl:variable name="n" select="@n"/>
                     <when>
                         <xsl:attribute name="xml:id">
-                            <xsl:value-of select="concat('TLI_', @n)"/>
+                            <xsl:value-of select="concat('TLI_', $n)"/>
                         </xsl:attribute>
                     </when>
+                    
+                    <!-- Check here if it will be split and if so, create more <when> -->
+                    <!-- fix to whatch out for non-tokenizable text() -->
+                    
+                    <xsl:variable name="segs" select="count(tokenize(text(), '[!\?\.…]+( [A-Z]|$)'))"/>
+                    <xsl:if test="$segs &gt; 2">
+                        <xsl:for-each select="tokenize(text(), '[-!\?\.…\)]+( |$)')">
+                        <xsl:if test="position() &lt; $segs -1">
+                        <when>
+                            <xsl:attribute name="xml:id">
+                                <xsl:value-of select="concat('TLI_', $n, '_', position())"/>
+                            </xsl:attribute>
+                        </when>
+                        </xsl:if>
+                    </xsl:for-each>
+                    </xsl:if>
                 </xsl:for-each>
             </timeline>
             <xsl:apply-templates/>
@@ -88,84 +104,86 @@
     </xsl:template>
 
     <xsl:template match="//tei:u[not(tei:note)]">
+        <xsl:variable name="id" select="@xml:id"/>
+        <xsl:variable name="n" select="@n"/>
         <annotationBlock>
             <xsl:attribute name="xml:id">
-                <xsl:value-of select="concat('aB_', @xml:id)"/>
+                <xsl:value-of select="concat('aB_', $id)"/>
             </xsl:attribute>
             <xsl:attribute name="who">
                 <xsl:value-of select="@who"/>
             </xsl:attribute>
             <xsl:attribute name="start">
-                <xsl:value-of select="concat('TLI_', number(@n) - 1)"/>
+                <xsl:value-of select="concat('TLI_', $n)"/>
             </xsl:attribute>
             <xsl:attribute name="end">
-                <xsl:value-of select="concat('TLI_', @n)"/>
+                <xsl:value-of select="concat('TLI_', number($n) +1)"/>
             </xsl:attribute>
             <u>
                 <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@xml:id"/>
+                    <xsl:value-of select="$id"/>
                 </xsl:attribute>
-                <seg>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="concat('seg_', @xml:id)"/>
-                    </xsl:attribute>
-                    <anchor>
-                        <xsl:attribute name="synch">
-                            <xsl:value-of select="concat('TLI_', number(@n) - 1)"/>
-                        </xsl:attribute>
-                    </anchor>
-                    <xsl:value-of select="concat(./text(), ' ')"/>
-                    <anchor>
-                        <xsl:attribute name="synch">
-                            <xsl:value-of select="concat('TLI_', @n)"/>
-                        </xsl:attribute>
-                    </anchor>
-                </seg>
+                <!-- The text of the contribution needs to be parsed into <seg>s. -->
+                <xsl:apply-templates select="text()"/>
             </u>
         </annotationBlock>
     </xsl:template>
-    
+
+    <!-- This is where we parse the <u> text content into segs according to punctuation -->
+    <xsl:template match="//tei:u[not(tei:note)]/text()">
+        <xsl:variable name="id" select="ancestor::tei:u/@xml:id"/>
+        <xsl:variable name="n" select="ancestor::tei:u/@n"/>
+        <!-- We have to include all characters used, also transcription conventions symbols, tokenizing is done later -->
+        <!-- If the utterance end symbol is missing, TEI will be bad, text ends up here: //u/text(). -->
+        <!-- If there's a capital letter after a pause, this will become a new <seg>, sorry. -->
+        <xsl:analyze-string select="." regex="([-{{}}\(\)’',;/ 0-9\p{{L}}]|([-…]|\.{{2,}}) ?['\p{{Ll}}])+[-!\?\.…\)]+( |$)">
+            <xsl:matching-substring>
+                <seg>
+                    <!-- The position() is the number of the <seg> being created somehow. -->
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="concat('seg', position(), '_', $id)"/>
+                    </xsl:attribute>
+                    <anchor>
+                        <xsl:attribute name="synch">
+                            <xsl:choose>
+                                <xsl:when test="position()=1">
+                                    <xsl:value-of select="concat('TLI_', $n)"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="concat('TLI_', $n, '_', position() - 1)"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </anchor>
+                    <!-- remove all trailing spaces, then add one, to avoid double spaces -->
+                    <xsl:value-of select="concat(normalize-space(.), ' ')"/>
+                    <!-- only write the last original TLI if there is no matching-substring -->
+                    <anchor>
+                        <xsl:attribute name="synch">
+                            <xsl:choose>
+                                <xsl:when test="position()=last()">
+                                    <xsl:value-of select="concat('TLI_', number($n) + 1)"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="concat('TLI_', $n, '_', position())"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </anchor>
+                </seg>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:apply-templates select=".">
+                    <xsl:with-param name="id" select="$id"/>
+                    <xsl:with-param name="n" select="$n"/>
+                </xsl:apply-templates>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:template>
+
     
     <!-- Interviewer comment notes are treated as incidents, since they describe things, though they are in fact annotations without bases -->
-    
-    <xsl:template match="//tei:u[not(tei:note)]">
-        <annotationBlock>
-            <xsl:attribute name="xml:id">
-                <xsl:value-of select="concat('aB_', @xml:id)"/>
-            </xsl:attribute>
-            <xsl:attribute name="who">
-                <xsl:value-of select="@who"/>
-            </xsl:attribute>
-            <xsl:attribute name="start">
-                <xsl:value-of select="concat('TLI_', number(@n) - 1)"/>
-            </xsl:attribute>
-            <xsl:attribute name="end">
-                <xsl:value-of select="concat('TLI_', @n)"/>
-            </xsl:attribute>
-            <u>
-                <xsl:attribute name="xml:id">
-                    <xsl:value-of select="@xml:id"/>
-                </xsl:attribute>
-                <seg>
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="concat('seg_', @xml:id)"/>
-                    </xsl:attribute>
-                    <anchor>
-                        <xsl:attribute name="synch">
-                            <xsl:value-of select="concat('TLI_', number(@n) - 1)"/>
-                        </xsl:attribute>
-                    </anchor>
-                    <xsl:value-of select="concat(./text(), ' ')"/>
-                    <anchor>
-                        <xsl:attribute name="synch">
-                            <xsl:value-of select="concat('TLI_', @n)"/>
-                        </xsl:attribute>
-                    </anchor>
-                </seg>
-            </u>
-        </annotationBlock>
-    </xsl:template>
-    
+
     <xsl:template match="note[ancestor::tei:u]">
         <spanGrp>
             <xsl:attribute name="type">
@@ -180,13 +198,13 @@
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </span>
-        </spanGrp> 
+        </spanGrp>
     </xsl:template>
-    
-    
+
+
     <!-- independent <note>s appearing as siblings of <u>s, in some cases they are rather really long spans, 
          but this is good enough for now since the scope is not made explicit. -->
-         
+
     <xsl:template match="note[not(ancestor::tei:u)]">
         <incident>
             <!-- the independent notes have their own numbering (@n) -->
@@ -203,7 +221,7 @@
             <desc>
                 <xsl:value-of select="text()"/>
             </desc>
-         </incident> 
+        </incident>
     </xsl:template>
-
+    
 </xsl:stylesheet>
