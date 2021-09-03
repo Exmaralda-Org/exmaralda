@@ -110,9 +110,12 @@
                 <!-- ******************************** -->
                 <!-- ******************************** -->
                 <!-- ******************************** -->
-                <tier type="d" category="nn" id="TIE_GLOBAL_NN">
-                    <xsl:apply-templates select="//tei:body/tei:incident | //tei:body/tei:pause"></xsl:apply-templates>
-                </tier>    
+                <!-- check if there are nv events or pauses not belonging to a speaker -->
+                <xsl:if test="//tei:body/tei:incident | //tei:body/tei:pause">
+                    <tier type="d" category="nn" id="TIE_GLOBAL_NN">
+                        <xsl:apply-templates select="//tei:body/tei:incident | //tei:body/tei:pause"/>
+                    </tier>
+                </xsl:if>
                 <!-- ******************************** -->
                 <!-- ******************************** -->
                 <!-- ******************************** -->
