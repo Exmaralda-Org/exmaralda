@@ -170,6 +170,7 @@
             <xsl:attribute name="end" select="@end"/>
             <xsl:choose>
                 <xsl:when test="tei:desc/@rend"><xsl:value-of select="tei:desc/@rend"/></xsl:when>
+                <xsl:when test="contains(tei:desc, '((')"><xsl:value-of select="tei:desc"/></xsl:when>
                 <xsl:otherwise>
                     <xsl:text>((</xsl:text>
                     <xsl:value-of select="tei:desc"/>
