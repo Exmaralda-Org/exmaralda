@@ -63,8 +63,9 @@
                         <xsl:apply-templates/>
                         <xsl:text>)</xsl:text>
                         <xsl:choose>
-                            <!-- no space before pc, utterance end symbols will be inserted later after last <w> -->
-                            <xsl:when test="following-sibling::*[1][self::tei:pc] or not(following-sibling::*[self::tei:w])"></xsl:when>
+                            <!-- no space before pc unless it's the first quotation mark in a pair (yes this is ugly)
+                                 utterance end symbols will be inserted later after last <w> -->
+                            <xsl:when test="(following-sibling::*[1][self::tei:pc] and not(text()='&quot;' and following-sibling::*[self::tei:pc[text()='&quot;']])) or not(following-sibling::*[self::tei:w])"></xsl:when>
                             <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
@@ -75,8 +76,9 @@
                     <xsl:otherwise>
                         <xsl:apply-templates/>
                         <xsl:choose>
-                            <!-- no space before pc, utterance end symbols will be inserted later after last <w> -->
-                            <xsl:when test="following-sibling::*[1][self::tei:pc] or not(following-sibling::*[self::tei:w])"></xsl:when>
+                            <!-- no space before pc unless it's the first quotation mark in a pair (yes this is ugly) 
+                                 utterance end symbols will be inserted later after last <w> -->
+                            <xsl:when test="(following-sibling::*[1][self::tei:pc] and not(text()='&quot;' and following-sibling::*[self::tei:pc[text()='&quot;']])) or not(following-sibling::*[self::tei:w])"></xsl:when>
                             <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>                       
@@ -94,11 +96,34 @@
     </xsl:template>
     
     <xsl:template match="tei:pc">
-        <xsl:apply-templates/>
         <xsl:choose>
-            <xsl:when test="x"></xsl:when>
-            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
-        </xsl:choose>        
+            <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">
+                <xsl:choose> 
+                    <!-- no space before pc unless it's the first quotation mark in a pair (yes this is ugly)
+                                 utterance end symbols will be inserted later after last <w> -->
+                    <xsl:when test="text()='&quot;' and following-sibling::*[self::tei:pc[text()='&quot;']]">
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>
+                        <xsl:choose>
+                            <!-- no space before pc, a closing quotation mark can be right before the utternace end sign, ugly -->
+                            <xsl:when test="following-sibling::*[1][self::tei:pc] or not(following-sibling::*[self::tei:w])"></xsl:when>
+                            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>  
+                <xsl:apply-templates/>
+                <xsl:choose>
+                    <!-- no space before pc -->
+                    <xsl:when test="following-sibling::*[1][self::tei:pc]"></xsl:when>
+                    <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose> 
     </xsl:template>
     
 
