@@ -53,6 +53,12 @@ public class Masker {
         // Read frames into buffer
         wavFileIn.readFrames(lastBufferValues, 1);
         
+        // issue #280 fix of bugfix #269 (Jan Gorisch)
+        // as the first frame that was just read is never written, we need to 
+        // re-load the wav file to reset all pointers
+        wavFileIn.close(); // close
+        wavFileIn = WavFile.openWavFile(fileIn); // re-open        
+        
     }
 
     private double[] initBrownNoiseWavFile() throws URISyntaxException, IOException, WavFileException, ClassNotFoundException{
