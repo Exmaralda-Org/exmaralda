@@ -50,13 +50,16 @@
                     <xsl:apply-templates select="@*|node()"/>
                 </xsl:copy>                
             </xsl:when>
-            <xsl:otherwise/>
-            
+            <xsl:otherwise/>          
         </xsl:choose>
-        
-        
-        
     </xsl:template>
+    
+    <!-- we need to keep the redundant <anchor>s in the <seg>s -->
+    <xsl:template match="//tei:seg/*[1][@synch] | //tei:seg/*[last()][@synch]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>                
+    </xsl:template>    
     
     
 </xsl:stylesheet>
