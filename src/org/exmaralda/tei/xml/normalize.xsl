@@ -71,6 +71,19 @@
                             <xsl:when test="(preceding-sibling::tei:seg)[1]/*[last()][self::tei:anchor]">
                                 <xsl:value-of select="(preceding-sibling::tei:seg)[1]/tei:anchor[last()]/@synch"/>                                
                             </xsl:when>
+                            <!-- if the previous <seg> has no <anchor> as its last element, it gets complicated --> 
+                            <xsl:when test="preceding-sibling::tei:seg and not((preceding-sibling::tei:seg)[1]/*[1][self::tei:anchor])">
+                                <xsl:variable name="start" select="ancestor-or-self::*[@start][1]/@start"/>
+                                <xsl:choose>
+                                    <xsl:when test="ancestor-or-self::*[@start][1][(following-sibling::*|preceding-sibling::*)[descendant-or-self::tei:seg[2]][@start=$start]]">
+                                        <!-- we won't be able to sort the inserted anchor>s, for now, we don't like that -->
+                                        <xsl:message terminate="yes">UNSOLVABLE TIME PROBLEM</xsl:message> 
+                                    </xsl:when>   
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat($start, '_', @xml:id)"/>                                        
+                                    </xsl:otherwise>
+                                </xsl:choose>                            
+                            </xsl:when>
                             <xsl:when test="not(preceding-sibling::tei:seg)">
                                 <xsl:value-of select="ancestor-or-self::*[@start][1]/@start"/>
                             </xsl:when>
@@ -96,6 +109,20 @@
                             <xsl:when test="(following-sibling::tei:seg)[1]/*[1][self::tei:anchor]">
                                 <xsl:value-of select="(following-sibling::tei:seg)[1]/tei:anchor[1]/@synch"/>                                
                             </xsl:when>
+                            <!-- if the next <seg> has no <anchor> as its first element, it gets complicated --> 
+                            <xsl:when test="following-sibling::tei:seg and not((following-sibling::tei:seg)[1]/*[1][self::tei:anchor])">
+                                <xsl:variable name="end" select="ancestor-or-self::*[@end][1]/@end"/>
+                                <xsl:choose>
+                                    <xsl:when test="ancestor-or-self::*[@end][1][(following-sibling::*|preceding-sibling::*)[descendant-or-self::tei:seg[2]][@end=$end]]">                                         
+                                        <!-- we won't be able to sort the <seg> <anchor>s, for now, we don't like that -->
+                                        <xsl:message terminate="yes">UNSOLVABLE TIME PROBLEM</xsl:message>
+                                    </xsl:when>   
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat($end, '_', @xml:id)"/>
+                                    </xsl:otherwise>                            
+                                </xsl:choose>
+                            </xsl:when>
+                            <!-- if this is the last <seg> sibling, it's safe to take the @end from the ancestor -->
                             <xsl:when test="not(following-sibling::tei:seg)">
                                 <xsl:value-of select="ancestor-or-self::*[@end][1]/@end"/>
                             </xsl:when>
