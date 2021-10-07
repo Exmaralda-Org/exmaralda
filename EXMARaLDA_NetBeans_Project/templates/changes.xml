@@ -10,6 +10,28 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="bug" version="1.7" date="17.09.2021">Bug fix: Masker (issue #280)</change>
+    <change tool="partitureditor" type="feature" version="1.7" date="08.07.2021">Lower/upper case action (issue #274)</change>
+    <change tool="orthonormal" type="bug" version="0.9.9" date="17.06.2021">Bug fix for normalisation candidates in basic transcriptions (issue #271)</change>
+    <change tool="orthonormal" type="bug" version="0.9.9" date="09.06.2021">Bug fix for auto normalisation (issue #270)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="09.06.2021">Bug fix for brown noise generator (issue #269)</change>
+    <change tool="folker" type="bug" version="1.3" date="09.06.2021">Bug fix for brown noise generator (issue #269)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="09.06.2021">Bug fix WAV header with markers (issue #268)</change>
+    <change tool="orthonormal" type="change" version="0.9.9" date="02.06.2021">Update OrthoNormal normalisation lexicon to FOLK 2.16 (issue #74)</change>
+    <change tool="exakt" type="bug" version="1.4" date="31.05.2021">Character encoding bug in Save concordance (issue #267)</change>
+    <change tool="folker" type="bug" version="1.3" date="22.05.2021">Possible bug in Save As...</change>
+    <change tool="partitureditor" type="change" version="1.7" date="29.03.2021">Bug fix for INEL export (issue #265)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="15.03.2021">Improvements to GAT List transformation (issue #264)</change>
+    <change tool="folker" type="change" version="1.3" date="11.03.2021">Improvements to Insert Pause (issue #263)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="11.03.2021">Improvements to Insert Pause (issue #263)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="10.03.2021">Improvements to WebLicht connection (issue #262)</change>
+    <change tool="orthonormal" type="feature" version="0.9.9" date="25.02.2021">Play selection button in word normalisation dialog (issue #261)</change>
+    <change tool="folker" type="feature" version="1.3" date="22.02.2021">Sort mask table (issue #260)</change>
+    <change tool="folker" type="feature" version="1.3" date="15.02.2021">F4 import (issue #258)</change>
+    <change tool="partitureditor" type="feature" version="1.7" date="15.02.2021">F4 import + change for F4 export (issue #258)</change>
+    <change tool="partitureditor" type="feature" version="1.7" date="12.02.2021">File -- Restore from auto backup (issue #221)</change>
+    <change tool="partitureditor" type="feature" version="1.7" date="12.02.2021">Check need for cleanup of auto backups (issue #221)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="04.01.2021">Bug, see Ticket#2021010400000041  (issue #233)</change>
     <change tool="all" type="change" version="1.13" date="14.12.2020">First attempt at new Linux distributions (issue #238)</change>
     <change tool="partitureditor" type="feature" version="1.7" date="09.12.2020">Transformation dropdown in toolbar (issue #230)</change>
     <change tool="partitureditor" type="change" version="1.7" date="09.12.2020">Handle (terminal) messages in transformations (issue #233)</change>
