@@ -20,7 +20,7 @@ EXMARaLDA is used by researchers world wide in different contexts in which spoke
 - phonetics and phonology,
 - dialectology and sociolinguistics.
 
-EXMARaLDA was developed in the project “Computer assisted methods for the creation and analysis of multilingual data” at the Collaborative Research Center “Multilingualism” (Sonderforschungsbereich “Mehrsprachigkeit” – SFB 538) at the University of Hamburg. Since July 2011, the development of EXMARaLDA is continued at the Hamburg Centre for Language Corpora, since November 2011 in cooperation with the Archive for Spoken German at the Institute for the German Language in Mannheim.
+EXMARaLDA was developed in the project “Computer assisted methods for the creation and analysis of multilingual data” at the Collaborative Research Center “Multilingualism” (Sonderforschungsbereich “Mehrsprachigkeit” – SFB 538) at the University of Hamburg. Afterwards, development was continued at the Hamburg Centre for Language Corpora in cooperation with the Archive for Spoken German at the Institute for the German Language in Mannheim.
 
 # Downloads
 
