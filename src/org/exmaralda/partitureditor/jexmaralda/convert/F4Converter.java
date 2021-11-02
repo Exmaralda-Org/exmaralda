@@ -124,16 +124,17 @@ public class F4Converter {
 
                 //System.out.println(sp);
                 if (!(abb2TierMap.containsKey(sp))){
-                    String tierID = bt.getBody().getFreeID();
-                    Tier newTier = new Tier(tierID, sp, "v", "t", sp + " [v]");
-                    bt.getBody().addTier(newTier);
-                    abb2TierMap.put(sp, newTier);
-                    
                     String speakerID = bt.getHead().getSpeakertable().getFreeID();
                     Speaker newSpeaker = new Speaker();
                     newSpeaker.setID(speakerID);
                     newSpeaker.setAbbreviation(sp);
                     st.addSpeaker(newSpeaker);
+                    
+                    String tierID = bt.getBody().getFreeID();
+                    Tier newTier = new Tier(tierID, speakerID, "v", "t", sp + " [v]");
+                    bt.getBody().addTier(newTier);
+                    abb2TierMap.put(sp, newTier);
+                    
                     
                 }
 
