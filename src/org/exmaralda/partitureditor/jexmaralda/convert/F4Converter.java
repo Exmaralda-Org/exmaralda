@@ -37,7 +37,7 @@ public class F4Converter {
         String nextLine = new String();
         System.out.println("Started reading document");
         while ((nextLine = br.readLine()) != null){
-            lines.add(nextLine);
+            lines.add(nextLine.trim());
         }
         br.close();
     }
@@ -57,7 +57,7 @@ public class F4Converter {
             if (lineCount==0 && encoding.startsWith("UTF") && nextLine.charAt(0)=='\uFEFF'){
                 nextLine = nextLine.substring(1);
             }
-            lines.add(nextLine);
+            lines.add(nextLine.trim());
             lineCount++;
         }
         br.close();
@@ -89,56 +89,79 @@ public class F4Converter {
             bt.getBody().addTier(textTier);
             
             for (String line : lines){
+                if (line.length()==0) continue;
                 // #00:00:20-5# Also ich war mit meinem Mann, wir waren mein Mann, ist geboren in Ludwigshafen am
                 // Rhein, und die Stadt hat ihn eingeladen, uns eingeladen, und wir fahren dort. Wir waren im Haus, wo er gewohnt hat, und wir sind sehr, sehr gut und Dead akzeptiert, und die waren wirklich fantastisch.
+                
+                // or so (issue #258):
+                // .: eehm e <palabra_cortada/> encontrar un un ambiente<alargamiento/> lleno de<alargamiento/> de <énfasis> 
+                // luces </énfasis> de <énfasis> limpieza </énfasis> de <énfasis> orden </énfasis> .h: / entonc <palabra_cortada/> 
+                // eso fue lo primero que me llamo la atención sí #00:01:10-2#  
+                
+                // or so (no time)
+                // I.: sí vine solo 
+
+                
                 String restOfLine = line;
                 if (line.startsWith("#")){
                     int endIndex = line.indexOf("#", 3);
                     String timeStampString = line.substring(0, endIndex);
                     restOfLine = line.substring(endIndex+1).trim();
-                    int h = Integer.parseInt(timeStampString.substring(1,3));
-                    int m = Integer.parseInt(timeStampString.substring(4,6));
-                    double s = Double.parseDouble(timeStampString.substring(7).replaceAll("\\-", ".").replaceAll("\\#", ""));
-                    //System.out.println(timeStampString + " : " + h + " / " + m + " / " + s);
-                    double seconds = 3600.0 * h + 60.0 * m + s;
+                    double seconds = parseTimeStampString(timeStampString);
                     lastTLI.setTime(seconds);
+                } else if (line.endsWith("#")){
+                    int startIndex = line.substring(0, line.length()-2).lastIndexOf("#");
+                    restOfLine = line.substring(0, startIndex);     
+                }
+                //System.out.println(restOfLine);
                     
-                    String sp = "X";
-                    if (restOfLine.matches("^[A-ZÄÖÜ][A-Za-zÄÖÜäöüß]{0,10}\\:.+")){
-                        int index = restOfLine.indexOf(":");
-                        sp = restOfLine.substring(0, index);
-                        restOfLine = restOfLine.substring(index+1);
-                    }
+                String sp = "X";
+                if (restOfLine.matches("^[A-ZÄÖÜ][A-Za-zÄÖÜäöüß]{0,10}(\\.)?\\:.+")){
+                    int index = restOfLine.indexOf(":");
+                    sp = restOfLine.substring(0, index);
+                    restOfLine = restOfLine.substring(index+1);
+                }
+
+                //System.out.println(sp);
+                if (!(abb2TierMap.containsKey(sp))){
+                    String tierID = bt.getBody().getFreeID();
+                    Tier newTier = new Tier(tierID, sp, "v", "t", sp + " [v]");
+                    bt.getBody().addTier(newTier);
+                    abb2TierMap.put(sp, newTier);
                     
-                    if (!(abb2TierMap.containsKey(sp))){
-                        String tierID = bt.getBody().getFreeID();
-                        Tier newTier = new Tier(tierID, sp, "v", "t", sp + " [v]");
-                        abb2TierMap.put(sp, newTier);
-                        String speakerID = bt.getHead().getSpeakertable().getFreeID();
-                        Speaker newSpeaker = new Speaker();
-                        newSpeaker.setID(speakerID);
-                        st.addSpeaker(newSpeaker);
-                    }
+                    String speakerID = bt.getHead().getSpeakertable().getFreeID();
+                    Speaker newSpeaker = new Speaker();
+                    newSpeaker.setID(speakerID);
+                    newSpeaker.setAbbreviation(sp);
+                    st.addSpeaker(newSpeaker);
                     
-                    String[] sentences = {restOfLine};
-                    if (splitAtPeriod){
-                        sentences = restOfLine.split("(?<=\\. +)");
-                    }
-                    Tier thisTier = abb2TierMap.get(sp);
-                    for (String sentence : sentences){
-                        Event event = new Event();
-                        event.setStart(lastTLI.getID());
-                        String newTLIID = timeline.getFreeID();
-                        TimelineItem newTLI = new TimelineItem();
-                        newTLI.setID(newTLIID);
-                        timeline.addTimelineItem(newTLI);
-                        event.setEnd(newTLI.getID());
-                        lastTLI = newTLI;
-                        event.setDescription(sentence);
-                        thisTier.addEvent(event);
-                    }                    
+                }
+
+                String[] sentences = {restOfLine};
+                if (splitAtPeriod){
+                    sentences = restOfLine.split("(?<=\\. +)");
+                }
+                Tier thisTier = abb2TierMap.get(sp);
+                for (String sentence : sentences){
+                    Event event = new Event();
+                    event.setStart(lastTLI.getID());
+                    String newTLIID = timeline.getFreeID();
+                    TimelineItem newTLI = new TimelineItem();
+                    newTLI.setID(newTLIID);
+                    timeline.addTimelineItem(newTLI);
+                    event.setEnd(newTLI.getID());
+                    lastTLI = newTLI;
+                    event.setDescription(sentence);
+                    thisTier.addEvent(event);
+                }   
+                if (line.endsWith("#")){
+                    int startIndex = line.substring(0, line.length()-2).lastIndexOf("#");
+                    String timeStampString = line.substring(startIndex);
+                    double seconds = parseTimeStampString(timeStampString);
+                    lastTLI.setTime(seconds);
                 }
                 
+
             }
             
             
@@ -146,9 +169,19 @@ public class F4Converter {
         } catch (JexmaraldaException ex) {
             Logger.getLogger(F4Converter.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return null;
     }
     
+    private double parseTimeStampString(String timeStampString) {
+        int h = Integer.parseInt(timeStampString.substring(1,3));
+        int m = Integer.parseInt(timeStampString.substring(4,6));
+        double s = Double.parseDouble(timeStampString.substring(7).replaceAll("\\-", ".").replaceAll("\\#", ""));
+        //System.out.println(timeStampString + " : " + h + " / " + m + " / " + s);
+        double seconds = 3600.0 * h + 60.0 * m + s;
+        return seconds;
+
+    }
     
     // I don't quite understand (any more) what this is doing
     // It does not seem to be used anywhere in the real EXMARaLDA code
