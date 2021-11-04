@@ -20,7 +20,9 @@ public class CLARINMenu extends AbstractTableMenu {
     public CLARINMenu(PartitureTableWithActions t) {
         super(t);
 
-        this.setText("CLARIN");
+        // changed 04-11-2021, issue #285
+        //this.setText("CLARIN");
+        this.setText("Web Services");
         
         add(table.webMAUSAction);
         add(table.webMAUSFineAlignmentAction);
