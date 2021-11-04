@@ -125,13 +125,16 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         directoryPanel.setLayout(new javax.swing.BoxLayout(directoryPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         directoryLabel.setText("Tree Tagger Directory: ");
+        directoryLabel.setToolTipText("Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the \"bin\" directory!");
         directoryPanel.add(directoryLabel);
 
+        directoryTextField.setToolTipText("Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the \"bin\" directory!");
         directoryTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
         directoryTextField.setPreferredSize(new java.awt.Dimension(300, 20));
         directoryPanel.add(directoryTextField);
 
         browseForDirectoryButton.setText("Browse...");
+        browseForDirectoryButton.setToolTipText("Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the \"bin\" directory!");
         browseForDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 browseForDirectoryButtonActionPerformed(evt);
@@ -144,6 +147,7 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
         parameterFilePanel.setLayout(new javax.swing.BoxLayout(parameterFilePanel, javax.swing.BoxLayout.LINE_AXIS));
 
         parametersFileLabel.setText("Parameters file: ");
+        parametersFileLabel.setToolTipText("Choose a suitable tree tagger parameter file (suffix *.par)");
         parametersFileLabel.setMaximumSize(new java.awt.Dimension(113, 14));
         parametersFileLabel.setMinimumSize(new java.awt.Dimension(113, 14));
         parametersFileLabel.setPreferredSize(new java.awt.Dimension(113, 14));

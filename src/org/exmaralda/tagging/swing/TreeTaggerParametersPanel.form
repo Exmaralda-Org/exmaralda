@@ -32,10 +32,12 @@
         <Component class="javax.swing.JLabel" name="directoryLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tree Tagger Directory: "/>
+            <Property name="toolTipText" type="java.lang.String" value="Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the &quot;bin&quot; directory!"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="directoryTextField">
           <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the &quot;bin&quot; directory!"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[2147483647, 30]"/>
             </Property>
@@ -47,6 +49,7 @@
         <Component class="javax.swing.JButton" name="browseForDirectoryButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Browse..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the &quot;bin&quot; directory!"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseForDirectoryButtonActionPerformed"/>
@@ -61,6 +64,7 @@
         <Component class="javax.swing.JLabel" name="parametersFileLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Parameters file: "/>
+            <Property name="toolTipText" type="java.lang.String" value="Choose a suitable tree tagger parameter file (suffix *.par)"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[113, 14]"/>
             </Property>
