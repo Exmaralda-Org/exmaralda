@@ -118,6 +118,7 @@ public class PartitureTableWithActions extends PartitureTable
     public boolean multipleColumnsSelected = false;
     public boolean aWholeColumnIsSelected;
     public boolean aSeriesOfColumnsIsSelected;
+    public boolean aRectangleOfEventsIsSelected;    
 
 
     /** true iff the grid in the partitur is hidden */
@@ -691,7 +692,7 @@ public class PartitureTableWithActions extends PartitureTable
         boolean cellSpanIsGreaterThanOne = (aSingleCellIsSelected && getModel().getCellSpan(selectionStartRow,selectionStartCol)>1);
         boolean columnIsGap = (aWholeColumnIsSelected && getModel().isGap(selectionStartCol));
         boolean isTranscriptionTypeTier = ((selectionStartRow>=0) && (selectionStartRow == selectionEndRow) && getModel().getTier(selectionStartRow).getType().equals("t"));
-        boolean aRectangleOfEventsIsSelected = (selectionStartCol!=selectionEndCol) && (selectionStartRow>=0) && (selectionEndRow>=0) && (selectionStartCol>=0);
+        aRectangleOfEventsIsSelected = (selectionStartCol!=selectionEndCol) && (selectionStartRow>=0) && (selectionEndRow>=0) && (selectionStartCol>=0);
                 
         multipleColumnsSelected = aSeriesOfColumnsIsSelected;
         

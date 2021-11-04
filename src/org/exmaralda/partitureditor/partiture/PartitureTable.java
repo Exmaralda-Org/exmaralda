@@ -11,7 +11,6 @@ import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import com.klg.jclass.table.*;
 import java.awt.Color;
 import java.util.*;
-import org.exmaralda.partitureditor.jexmaralda.Tier;
 
 /**
  * implements the abstract methods of the parent class and provides the interface
@@ -220,7 +219,12 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
         transcriptionChanged = true;
         cancelEdit(true);
         try {linkPanelDialog.getLinkPanel().setEvent(getModel().getEvent(row,col), row, col);}
-        catch(JexmaraldaException je){} // should never get here?            
+        catch(JexmaraldaException je){} // should never get here? 
+        
+        // CAUTION: NEW 04-11-2021, could have unintendes side effects?
+        if (col+1 < this.getNumColumns()){
+            changeArea(col, col+1);
+        }
     }
 
     /** add a row at the specified position */
