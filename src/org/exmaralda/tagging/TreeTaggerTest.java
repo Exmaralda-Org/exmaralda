@@ -6,11 +6,6 @@
 package org.exmaralda.tagging;
 
 import java.io.File;
-import java.util.List;
-import org.exmaralda.exakt.utilities.FileIO;
-import org.jdom.Attribute;
-import org.jdom.Document;
-import org.jdom.xpath.XPath;
 
 /**
  *
@@ -18,7 +13,12 @@ import org.jdom.xpath.XPath;
  */
 public class TreeTaggerTest {
 
-    public static String TTC = "c:\\TreeTagger";
+    // 04-11-2021, issue #286 : this one works
+    public static String TTC = "D:\\Dropbox\\TreeTagger";
+
+    // 04-11-2021, issue #286 : and this one doesn't
+    //public static String TTC = "c:\\TreeTagger";
+    
     //public static String PF = "c:\\TreeTagger\\lib\\german-utf8.par";
     public static String PF = "C:\\TreeTagger\\lib\\italian.par";
     
@@ -42,7 +42,7 @@ public class TreeTaggerTest {
             TreeTaggableOrthonormalTranscription ttont = new TreeTaggableOrthonormalTranscription(new File(INPUT), true);
             //ttont.setXPathToTokens("//w|//p[not(text()=',')]");
             //ttont.clearTagging();
-            //ttont.setVerbose(true);
+            ttont.setVerbose(true);
             File output = File.createTempFile("FLN",".xml");
             //output.deleteOnExit();
             System.out.println("***" + output.getAbsolutePath());
