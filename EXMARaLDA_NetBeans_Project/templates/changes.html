@@ -42,7 +42,7 @@ function toggle_visibility(className) {
                         display:none;
                     }</style></head>
    <body>
-      <h1>EXMARaLDA changes</h1><a href="#partitureditor">partitureditor</a> | <a href="#orthonormal">orthonormal</a> | <a href="#folker">folker</a> | <a href="#exakt">exakt</a> | <a href="#all">all</a> | <a href="#sextant">sextant</a> | <a href="#coma">coma</a> | <a href="#teidrop">teidrop</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
+      <h1>EXMARaLDA changes</h1><a href="#partitureditor">partitureditor</a> | <a href="#exakt">exakt</a> | <a href="#orthonormal">orthonormal</a> | <a href="#folker">folker</a> | <a href="#all">all</a> | <a href="#sextant">sextant</a> | <a href="#coma">coma</a> | <a href="#teidrop">teidrop</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
       <h2><a name="partitureditor"></a>partitureditor
       </h2>
       <table rules="all" frame="box" width="60%">
@@ -50,6 +50,18 @@ function toggle_visibility(className) {
             <th>Date</th>
             <th>Version</th>
             <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">04.11.2021</td>
+            <td class="change">1.7</td>
+            <td class="change">Refined upper/lower case action (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/274">#274</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">04.11.2021</td>
+            <td class="change">1.7</td>
+            <td class="change">Renamed CLARIN menu to "Web Services" (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/285">#285</a>)
+            </td>
          </tr>
          <tr>
             <td class="bug">17.09.2021</td>
@@ -1730,6 +1742,355 @@ function toggle_visibility(className) {
          <!--04.12.2007;  ;  playback mode ()-->
          <!--04.12.2007;  ;  fine synchronisation mode ()-->
       </table>
+      <h2><a name="exakt"></a>exakt
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">04.11.2021</td>
+            <td class="bug">1.4</td>
+            <td class="bug">Bug fix: CSV export with empty left or right context (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/277">#277</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">31.05.2021</td>
+            <td class="bug">1.4</td>
+            <td class="bug">Character encoding bug in Save concordance (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/267">#267</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2020</td>
+            <td class="change">1.4</td>
+            <td class="change">Resurrected remote corpus function (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/155">#155</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">30.11.2020</td>
+            <td class="change">1.4</td>
+            <td class="change">Cosmetic changes (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/225">#225</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">11.09.2020</td>
+            <td class="change">1.4</td>
+            <td class="change">XML should be default when saving a KWIC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/221">#221</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2019</td>
+            <td class="change">1.3.1</td>
+            <td class="change">added new option to save a result list from the concordance in CSV format (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/188">#188</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.10.2018</td>
+            <td class="change">1.3.1</td>
+            <td class="change">Alphabetic ordering description tiers in search and annotatio… (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/182">#182</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">15.10.2018</td>
+            <td class="bug">1.3.1</td>
+            <td class="bug">added attribute @category to output of new tiers from template (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/165">#165</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">11.07.2018</td>
+            <td class="change">1.3.1</td>
+            <td class="change"> the names of the annotations are now sorted alphabetically (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/160">#160</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">28.08.2017</td>
+            <td class="feature">1.3.1</td>
+            <td class="feature">Improvements to EXAKT enhancements (DJ, AF) (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/121">#121</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">12.07.2017</td>
+            <td class="feature">1.3.1</td>
+            <td class="feature">First versions of EXAKT enhancements (DJ, AF): collections (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/104">#104</a>) and XSLT 2.0 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/114">#114</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">27.02.2017</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in XSL search: need to set base directory (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/60">#60</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">22.11.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">"Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/36">#36</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">11.11.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Removed Open DB corpus item from file menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/28">#28</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">18.04.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">revert to old version of BAS player (MAC)</td>
+         </tr>
+         <tr>
+            <td class="change">08.04.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">revert to old version of BAS player (Windows)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Icon for word list</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Adapt KWIC row height to font size</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Start Praat if it is not already running (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Better error handling for Praat functionality (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="feature">10.11.2015</td>
+            <td class="feature">1.3</td>
+            <td class="feature">first attempt at Praat functionality (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="change">23.06.2014</td>
+            <td class="change">1.3</td>
+            <td class="change">catch splash screen transparency error (lubuntu)</td>
+         </tr>
+         <tr>
+            <td class="feature">28.05.2014</td>
+            <td class="feature">1.3</td>
+            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
+         </tr>
+         <tr>
+            <td class="bug">17.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">15.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">14.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
+         </tr>
+         <tr>
+            <td class="bug">16.01.2013</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">10.01.2013</td>
+            <td class="change">1.2</td>
+            <td class="change">Accept fln files for FOLKER wizard</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
+         </tr>
+         <tr>
+            <td class="bug">22.11.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Bug in add annotation when analyses are also present</td>
+         </tr>
+         <tr>
+            <td class="bug">12.03.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
+         </tr>
+         <tr>
+            <td class="change">25.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
+         </tr>
+         <tr>
+            <td class="feature">25.01.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Unselected KWIC rows in gray</td>
+         </tr>
+         <tr>
+            <td class="bug">18.01.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
+         </tr>
+         <tr>
+            <td class="bug">21.11.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
+         </tr>
+         <tr>
+            <td class="change">08.09.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Further modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Some modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="feature">05.07.2011</td>
+            <td class="feature">1.1</td>
+            <td class="feature">Frequency sort as option for word list output</td>
+         </tr>
+         <tr>
+            <td class="bug">07.06.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
+         </tr>
+         <tr>
+            <td class="bug">30.05.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
+         </tr>
+         <tr>
+            <td class="change">17.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">FOLKER import now does automatic stratification by distribution</td>
+         </tr>
+         <tr>
+            <td class="change">23.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Catalog functionality for remote and DB corpora</td>
+         </tr>
+         <tr>
+            <td class="change">18.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">First elements of RDB functionality added (Hanna!)</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">escape type strings in input helper</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Input helper always on top (for filter and for search)</td>
+         </tr>
+         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
+         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
+         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
+         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
+         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
+         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
+         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
+         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
+         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
+         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
+         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
+         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
+         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
+         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
+         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
+         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
+         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
+         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
+         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
+         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
+         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
+         <!--16.03.2010;  0.8;  list view (feature)-->
+         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
+         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
+         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
+         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
+         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
+         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
+         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
+         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
+         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
+         <!--20.10.2009;  0.7;  view menu (change)-->
+         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
+         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
+         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
+         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
+         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
+         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
+         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
+         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
+         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
+         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
+         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
+         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
+         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
+         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
+         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
+         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
+         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
+         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
+         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
+         <!--26.03.2008;  ;  added function for subtracting dates ()-->
+         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
+         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
+         <!--19.03.2008;  ;  new function: import analyses ()-->
+         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
+         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
+         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
+         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
+         <!--18.02.2008;  ;  annotation search working ()-->
+         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
+      </table>
       <h2><a name="orthonormal"></a>orthonormal
       </h2>
       <table rules="all" frame="box" width="60%">
@@ -3291,349 +3652,6 @@ function toggle_visibility(className) {
          <!--07.08.2008;  ;  made application implement the EXMARaLDA application interface - -> help menu, logging funcionality ()-->
          <!--07.08.2008;  ;  added 'detach selection' action ()-->
          <!--07.08.2008;  ;  added row numbering to event and contribution view ()-->
-      </table>
-      <h2><a name="exakt"></a>exakt
-      </h2>
-      <table rules="all" frame="box" width="60%">
-         <tr>
-            <th>Date</th>
-            <th>Version</th>
-            <th>Change</th>
-         </tr>
-         <tr>
-            <td class="bug">31.05.2021</td>
-            <td class="bug">1.4</td>
-            <td class="bug">Character encoding bug in Save concordance (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/267">#267</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">01.12.2020</td>
-            <td class="change">1.4</td>
-            <td class="change">Resurrected remote corpus function (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/155">#155</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">30.11.2020</td>
-            <td class="change">1.4</td>
-            <td class="change">Cosmetic changes (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/225">#225</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">11.09.2020</td>
-            <td class="change">1.4</td>
-            <td class="change">XML should be default when saving a KWIC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/221">#221</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">09.05.2019</td>
-            <td class="change">1.3.1</td>
-            <td class="change">added new option to save a result list from the concordance in CSV format (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/188">#188</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">15.10.2018</td>
-            <td class="change">1.3.1</td>
-            <td class="change">Alphabetic ordering description tiers in search and annotatio… (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/182">#182</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">15.10.2018</td>
-            <td class="bug">1.3.1</td>
-            <td class="bug">added attribute @category to output of new tiers from template (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/165">#165</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">11.07.2018</td>
-            <td class="change">1.3.1</td>
-            <td class="change"> the names of the annotations are now sorted alphabetically (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/160">#160</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">28.08.2017</td>
-            <td class="feature">1.3.1</td>
-            <td class="feature">Improvements to EXAKT enhancements (DJ, AF) (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/121">#121</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">12.07.2017</td>
-            <td class="feature">1.3.1</td>
-            <td class="feature">First versions of EXAKT enhancements (DJ, AF): collections (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/104">#104</a>) and XSLT 2.0 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/114">#114</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">27.02.2017</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Bug in XSL search: need to set base directory (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/60">#60</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">22.11.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">"Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/36">#36</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">11.11.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Removed Open DB corpus item from file menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/28">#28</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">18.04.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">revert to old version of BAS player (MAC)</td>
-         </tr>
-         <tr>
-            <td class="change">08.04.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">revert to old version of BAS player (Windows)</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Icon for word list</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Adapt KWIC row height to font size</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Start Praat if it is not already running (Jens Lanwer)</td>
-         </tr>
-         <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Better error handling for Praat functionality (Jens Lanwer)</td>
-         </tr>
-         <tr>
-            <td class="feature">10.11.2015</td>
-            <td class="feature">1.3</td>
-            <td class="feature">first attempt at Praat functionality (Jens Lanwer)</td>
-         </tr>
-         <tr>
-            <td class="change">23.06.2014</td>
-            <td class="change">1.3</td>
-            <td class="change">catch splash screen transparency error (lubuntu)</td>
-         </tr>
-         <tr>
-            <td class="feature">28.05.2014</td>
-            <td class="feature">1.3</td>
-            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
-         </tr>
-         <tr>
-            <td class="bug">17.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
-         </tr>
-         <tr>
-            <td class="bug">15.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
-         </tr>
-         <tr>
-            <td class="bug">14.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
-         </tr>
-         <tr>
-            <td class="bug">05.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
-         </tr>
-         <tr>
-            <td class="bug">16.01.2013</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
-         </tr>
-         <tr>
-            <td class="change">10.01.2013</td>
-            <td class="change">1.2</td>
-            <td class="change">Accept fln files for FOLKER wizard</td>
-         </tr>
-         <tr>
-            <td class="feature">22.11.2012</td>
-            <td class="feature">1.2</td>
-            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
-         </tr>
-         <tr>
-            <td class="bug">22.11.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Bug in add annotation when analyses are also present</td>
-         </tr>
-         <tr>
-            <td class="bug">12.03.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
-         </tr>
-         <tr>
-            <td class="change">16.02.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
-         </tr>
-         <tr>
-            <td class="change">16.02.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
-         </tr>
-         <tr>
-            <td class="change">25.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
-         </tr>
-         <tr>
-            <td class="feature">25.01.2012</td>
-            <td class="feature">1.2</td>
-            <td class="feature">Unselected KWIC rows in gray</td>
-         </tr>
-         <tr>
-            <td class="bug">18.01.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
-         </tr>
-         <tr>
-            <td class="change">18.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
-         </tr>
-         <tr>
-            <td class="change">18.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
-         </tr>
-         <tr>
-            <td class="bug">21.11.2011</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
-         </tr>
-         <tr>
-            <td class="bug">18.10.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
-         </tr>
-         <tr>
-            <td class="bug">05.10.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
-         </tr>
-         <tr>
-            <td class="change">08.09.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Further modifications in the catalog lookup dialog</td>
-         </tr>
-         <tr>
-            <td class="change">20.08.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Some modifications in the catalog lookup dialog</td>
-         </tr>
-         <tr>
-            <td class="feature">05.07.2011</td>
-            <td class="feature">1.1</td>
-            <td class="feature">Frequency sort as option for word list output</td>
-         </tr>
-         <tr>
-            <td class="bug">07.06.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
-         </tr>
-         <tr>
-            <td class="bug">30.05.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
-         </tr>
-         <tr>
-            <td class="change">17.05.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
-         </tr>
-         <tr>
-            <td class="change">09.05.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">FOLKER import now does automatic stratification by distribution</td>
-         </tr>
-         <tr>
-            <td class="change">23.03.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Catalog functionality for remote and DB corpora</td>
-         </tr>
-         <tr>
-            <td class="change">18.03.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">First elements of RDB functionality added (Hanna!)</td>
-         </tr>
-         <tr>
-            <td class="change">17.01.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">escape type strings in input helper</td>
-         </tr>
-         <tr>
-            <td class="change">17.01.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Input helper always on top (for filter and for search)</td>
-         </tr>
-         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
-         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
-         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
-         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
-         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
-         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
-         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
-         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
-         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
-         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
-         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
-         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
-         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
-         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
-         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
-         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
-         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
-         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
-         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
-         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
-         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
-         <!--16.03.2010;  0.8;  list view (feature)-->
-         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
-         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
-         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
-         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
-         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
-         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
-         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
-         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
-         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
-         <!--20.10.2009;  0.7;  view menu (change)-->
-         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
-         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
-         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
-         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
-         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
-         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
-         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
-         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
-         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
-         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
-         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
-         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
-         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
-         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
-         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
-         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
-         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
-         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
-         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
-         <!--26.03.2008;  ;  added function for subtracting dates ()-->
-         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
-         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
-         <!--19.03.2008;  ;  new function: import analyses ()-->
-         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
-         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
-         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
-         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
-         <!--18.02.2008;  ;  annotation search working ()-->
-         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
       </table>
       <h2><a name="all"></a>all
       </h2>

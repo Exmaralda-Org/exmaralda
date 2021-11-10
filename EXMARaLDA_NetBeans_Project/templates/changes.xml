@@ -10,6 +10,9 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="change" version="1.7" date="04.11.2021">Refined upper/lower case action (issue #274)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="04.11.2021">Renamed CLARIN menu to "Web Services" (issue #285)</change>
+    <change tool="exakt" type="bug" version="1.4" date="04.11.2021">Bug fix: CSV export with empty left or right context (issue #277)</change>
     <change tool="partitureditor" type="bug" version="1.7" date="17.09.2021">Bug fix: Masker (issue #280)</change>
     <change tool="partitureditor" type="feature" version="1.7" date="08.07.2021">Lower/upper case action (issue #274)</change>
     <change tool="orthonormal" type="bug" version="0.9.9" date="17.06.2021">Bug fix for normalisation candidates in basic transcriptions (issue #271)</change>
