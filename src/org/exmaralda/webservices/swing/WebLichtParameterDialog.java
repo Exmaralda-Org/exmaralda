@@ -442,6 +442,7 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
 
     private void htmlBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_htmlBrowseButtonActionPerformed
         JFileChooser jfc = new JFileChooser();
+        jfc.setCurrentDirectory(defaultDirectory);        
         jfc.setFileFilter(new ParameterFileFilter("html", "HTML file (*.html)"));
         int result = jfc.showSaveDialog(getParent());
         if (result==JFileChooser.APPROVE_OPTION){
