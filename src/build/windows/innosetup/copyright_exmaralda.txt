@@ -1,0 +1,34 @@
+EXMARaLDA
+
+This EXMARaLDA distribution contains the following software tools:
+
+Partitur Editor Version 1.7
+Corpus Manager Version 2.0.2
+EXAKT Search tool Version 1.4
+FOLKER Version 1.3
+OrthoNormal Version 0.9.9
+TEI-Drop 0.5
+
+EXMARaLDA tools are free to use. EXMARaLDA's source code is licensed under an open source license (GPL 2.0) and available from GitHub (https://github.com/EXMARaLDA/exmaralda/).
+
+The tools are developed by Thomas Schmidt (IDS Mannheim) and Kai Woerner (University of Hamburg) with support from Hanna Hedeland, Daniel Jettka, Anne Ferger (HZSK Hamburg) and other contributors.
+
+The Dulko functionality is developed by Andreas Nolda (BBAW Berlin)
+
+Work on EXMARaLDA was funded by the German Research Association (DFG), the Bundesministerium fuer Bildung und Forschung (BMBF), the University of Hamburg, and the Institut fuer Deutsche Sprache (IDS).
+
+Localisations were done with support from Annette Schnieders (German), Tulay Selcuk (Turkish), Hanna Hedeland (Swedish), Petr Porizka (Czech), Silke Merkel (Spanish) and Fan Junjun (Chinese).
+
+EXMARaLDA uses the following third party libraries:
+* parts of the ELAN code (http://www.lat-mpi.eu/tools/elan/)
+* parts of the BAS code (https://www.phonetik.uni-muenchen.de/forschung/Bas/)
+* TreeTagger for Java (https://www.openhub.net/p/tt4j)
+* JDOM (http://www.jdom.org/)
+* Saxon, Xalan, Bounce and Cobra.
+
+For questions, updates etc. please consult the EXMARaLDA website:
+
+http://www.exmaralda.org
+
+Thank you for using EXMARaLDA. We appreciate your feedback.
+
