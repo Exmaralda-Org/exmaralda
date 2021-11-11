@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!ELEMENT fsm (char-set*, start-state, end-state, transitions+)>
+<!ELEMENT char-set (char+)>
+<!ATTLIST char-set id ID #REQUIRED>
+<!ELEMENT char (#PCDATA)>
+<!ELEMENT start-state EMPTY>
+<!ATTLIST start-state id IDREF #REQUIRED>
+<!ELEMENT end-state EMPTY>
+<!ATTLIST end-state id IDREF #REQUIRED>
+<!ELEMENT transitions (transition+)>
+<!ATTLIST transitions source ID #REQUIRED>
+<!ELEMENT transition ((input-char | input-char-set | input-other | input-end), target, output?)>
+<!ELEMENT input-char (#PCDATA)>
+<!ELEMENT input-char-set EMPTY>
+<!ATTLIST input-char-set id IDREF #REQUIRED>
+<!ELEMENT input-other EMPTY>
+<!ELEMENT input-end EMPTY>
+<!ELEMENT target EMPTY>
+<!ATTLIST target id IDREF #REQUIRED>
+<!ELEMENT output (prefix?, suffix?)>
+<!ATTLIST output oo (yes | no) #REQUIRED>
+<!ELEMENT prefix (#PCDATA)>
+<!ELEMENT suffix (#PCDATA)>

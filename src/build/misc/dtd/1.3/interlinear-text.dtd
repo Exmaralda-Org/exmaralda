@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT formats (format*)>
+<!ELEMENT format (property*)>
+<!ELEMENT property (#PCDATA)>
+<!ATTLIST format
+	id ID #REQUIRED
+>
+<!-- change in version 1.2.5. (24-07-2003): replaced attribute names of type "font:name" -->
+<!-- to attribute names of type "font-name". This is to avoid collisions with namespace conventions in XML -->
+<!-- change in version 1.2.5. (25-08-2003): added attribute "row-height-calculation" (possible values: 'Generous' and 'Miserly') -->
+<!-- change in version 1.2.6. (08-10-2003): added attribute "fixed-row-height" (forgotten in 1.2.5.) -->
+<!ATTLIST property
+	name (font-name | font-face | font-size | font-color | bg-color | text-alignment | frame | chunk-border | chunk-border-color | chunk-border-style | row-height-calculation | fixed-row-height) #REQUIRED
+>
+<!ELEMENT interlinear-text (ud-information?, formats, (line | it-bundle | page-break)*)>
+<!ELEMENT line (ud-information?, anchor*, run*)>
+<!ELEMENT it-bundle (ud-information?, anchor*, sync-points, (it-line*, frame-end?, it-line*))>
+<!ELEMENT sync-points (ud-information?, sync-point*)>
+<!ELEMENT sync-point (#PCDATA)>
+<!ELEMENT it-line (ud-information?, it-label?, it-chunk*)>
+<!ELEMENT it-label (ud-information?, link*, run*)>
+<!ELEMENT it-chunk (ud-information?, link*, run*)>
+<!ELEMENT link EMPTY>
+<!ELEMENT anchor (#PCDATA)>
+<!ELEMENT run (#PCDATA)>
+<!ELEMENT page-break EMPTY>
+<!ELEMENT frame-end EMPTY>
+<!ELEMENT ud-information (ud-attribute*)>
+<!ELEMENT ud-attribute (#PCDATA)>
+<!ATTLIST interlinear-text
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST line
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST it-bundle
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST it-label
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST it-chunk
+	start-sync CDATA #REQUIRED
+	end-sync CDATA #IMPLIED
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST sync-points
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST it-line
+	breaktype (NB_TIME | NB_NOTIME | NB_DEP | NB_LNK | B | IMG | OTH) #REQUIRED
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST run
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST link
+	url CDATA #REQUIRED
+	type (aud | vid | img | txt | oth) #IMPLIED
+>
+<!ATTLIST sync-point
+	id CDATA #REQUIRED
+	offset CDATA #IMPLIED
+	formatref IDREF #IMPLIED
+>
+<!ATTLIST ud-attribute
+	name CDATA #REQUIRED
+>

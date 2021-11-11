@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- created 11-April-2001 -->
+<!-- by Thomas Schmidt -->
+<!-- thomas.schmidt@uni-hamburg.de -->
+<!-- ************ Top level element ************ -->
+<!ELEMENT list-transcription (head, list-body)>
+<!-- ********************************************** -->
+<!-- ************ Head (same for all transcriptions ************ -->
+<!ELEMENT head (meta-information, speakertable)>
+<!-- ************************************ -->
+<!ELEMENT meta-information (project-name, transcription-name, referenced-file, ud-meta-information, comment, transcription-convention)>
+<!ELEMENT project-name (#PCDATA)>
+<!ELEMENT transcription-name (#PCDATA)>
+<!ELEMENT referenced-file EMPTY>
+<!ATTLIST referenced-file url CDATA #REQUIRED>
+<!ELEMENT ud-meta-information (ud-information*)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT transcription-convention (#PCDATA)>
+<!ELEMENT ud-information (#PCDATA)>
+<!ATTLIST ud-information attribute-name CDATA #REQUIRED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT speakertable (speaker*)>
+<!ELEMENT speaker (abbreviation, sex, languages-used, l1, l2, ud-speaker-information, comment)>
+<!ATTLIST speaker id ID #REQUIRED>
+<!ELEMENT abbreviation (#PCDATA)>
+<!ELEMENT sex EMPTY>
+<!ATTLIST sex value (m | f | u) #REQUIRED>
+<!ELEMENT languages-used (language+)>
+<!ELEMENT l1 (language*)>
+<!ELEMENT l2 (language*)>
+<!ELEMENT language EMPTY>
+<!ATTLIST language xml:lang NMTOKEN #REQUIRED>
+<!ELEMENT ud-speaker-information (ud-information*)>
+<!-- ************************************ -->
+<!-- ************ ************************************** ************ -->
+<!-- ************ Body (different for all transcriptions) ************ -->
+<!ELEMENT list-body (common-timeline, tier-references, list-item*)>
+<!-- ************************************ -->
+<!ELEMENT common-timeline (tli*)>
+<!ELEMENT tli EMPTY>
+<!ATTLIST tli id ID #REQUIRED
+	time CDATA #IMPLIED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT tier-references (tier-reference*)>
+<!ELEMENT tier-reference EMPTY>
+<!ATTLIST tier-reference id ID #REQUIRED
+	speaker IDREF #REQUIRED
+	category CDATA #REQUIRED
+	type (t | d | a | l | u) #REQUIRED>
+<!-- ************************************ -->
+<!-- ************************************ -->
+<!ELEMENT list-item (list-tier+)>
+<!ATTLIST list-item name CDATA #REQUIRED
+				    start IDREF #REQUIRED
+				    end IDREF #REQUIRED
+				    speaker IDREF #REQUIRED>
+<!ELEMENT list-tier (event* | link*)>
+<!ATTLIST list-tier level (main | dependent | annotation | links) #REQUIRED
+				  tierref IDREF #REQUIRED>
+<!ELEMENT event (#PCDATA)>
+<!ATTLIST event start IDREF #REQUIRED
+	end IDREF #REQUIRED>
+<!ELEMENT link (#PCDATA)>
+<!ATTLIST link start IDREF #REQUIRED
+	end IDREF #REQUIRED
+	medium (aud | vid | img | txt | oth) #REQUIRED
+	url CDATA #REQUIRED>
+<!-- ************************************ -->

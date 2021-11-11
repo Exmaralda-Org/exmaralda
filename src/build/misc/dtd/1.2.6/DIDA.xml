@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unicode-keyboard name="DIDA">
+	<key>
+		<content>&#x2190;&#x2192;</content>
+		<description>Arrow left / Arrow right (slower)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2192;&#x2190;</content>
+		<description>Arrow right / Arrow left (faster)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2191;</content>
+		<description>Arrow up (rising intonation)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2193;</content>
+		<description>Arrow down(falling intonation)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2191;&#x2191;</content>
+		<description>Two arrows up (echo question)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>	
+	</key>
+	<key>
+		<content>*</content>
+		<description>Pause &lt;= 0.5s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>	
+	</key>
+	<key>
+		<content>**</content>
+		<description>Pause &lt;= 1s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>	
+	</key>
+</unicode-keyboard>
