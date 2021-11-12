@@ -12,12 +12,12 @@ import org.exmaralda.partitureditor.partiture.*;
  *
  * @author  thomas
  */
-public class CLARINMenu extends AbstractTableMenu {
+public class WebServicesMenu extends AbstractTableMenu {
     
 
     /** Creates a new instance of EventMenu
      * @param t */
-    public CLARINMenu(PartitureTableWithActions t) {
+    public WebServicesMenu(PartitureTableWithActions t) {
         super(t);
 
         // changed 04-11-2021, issue #285

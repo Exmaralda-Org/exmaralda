@@ -33,7 +33,7 @@ public class PartiturMenuBar extends javax.swing.JMenuBar {
     public FormatMenu formatMenu;
     /** the segmentation menu */
     //public SegmentationMenu segmentationMenu;
-    public CLARINMenu clarinMenu;
+    public WebServicesMenu clarinMenu;
     
     /** project specific menus */
     public SFB538Menu sfb538Menu;
@@ -53,7 +53,7 @@ public class PartiturMenuBar extends javax.swing.JMenuBar {
         timelineMenu = new TimelineMenu(table);
         formatMenu = new FormatMenu(table);       
         //segmentationMenu = new SegmentationMenu(table);
-        clarinMenu = new CLARINMenu(table);
+        clarinMenu = new WebServicesMenu(table);
         
         sfb538Menu = new SFB538Menu(table);
         sinMenu = new SinMenu(table);

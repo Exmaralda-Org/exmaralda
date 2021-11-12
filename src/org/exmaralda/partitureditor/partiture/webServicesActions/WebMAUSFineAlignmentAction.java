@@ -4,7 +4,7 @@
  * Created on 16. Juni 2003, 16:23
  */
 
-package org.exmaralda.partitureditor.partiture.clarinActions;
+package org.exmaralda.partitureditor.partiture.webServicesActions;
 
 import java.io.File;
 import java.io.IOException;
