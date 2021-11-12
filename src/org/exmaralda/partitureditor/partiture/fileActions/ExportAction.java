@@ -71,7 +71,9 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             int confirm =
                 javax.swing.JOptionPane.showConfirmDialog(table, exportFile.getAbsolutePath() + "\nalready exists. Overwrite?");
             if (confirm==javax.swing.JOptionPane.CANCEL_OPTION) return;
-            if (confirm==javax.swing.JOptionPane.NO_OPTION) export();
+            // issue #292 : this is quite obviously utter nonsense
+            //if (confirm==javax.swing.JOptionPane.NO_OPTION) export();
+            if (confirm==javax.swing.JOptionPane.NO_OPTION) return;
         }
 
         // now do the real export
