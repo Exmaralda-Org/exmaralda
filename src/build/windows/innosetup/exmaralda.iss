@@ -56,8 +56,8 @@ Name: associateComa; Description: "{cm:AssocFileExtension,Coma,coma}"; GroupDesc
 [Files]
 ; ************************ New: Result from jpackage!
 Source: "@tempdir@\EXMARaLDA\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project\templates\windows\icons\*document*.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project\templates\windows\icons\exmaralda.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "D:\EXMARaLDA_GIT\exmaralda\src\build\windows\icons\*document*.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "D:\EXMARaLDA_GIT\exmaralda\src\build\windows\icons\exmaralda.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 
 

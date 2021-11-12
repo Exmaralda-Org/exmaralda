@@ -3,6 +3,7 @@
 =================
 partitureditor
 =================
+04.11.2021                 Refined upper/lower case action (issue #274)
 04.11.2021                 Renamed CLARIN menu to "Web Services" (issue #285)
 17.09.2021                 Bug fix: Masker (issue #280)
 08.07.2021                 Lower/upper case action (issue #274)
