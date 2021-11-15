@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="changeme" default="make_dmgs" basedir=".">
+<project name="changeme" default="BUILD_MAC" basedir=".">
     
     <description>Builds, tests, and runs the project EXMARaLDA.</description>
     
@@ -235,6 +235,10 @@
         </exec> 
     </target>
     
+    
+    <target name="BUILD_MAC" depends="make_dmgs">
+        <!-- do nothing, just defining the main target -->
+    </target>    
     
     
     

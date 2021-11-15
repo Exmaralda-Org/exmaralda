@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EXMARaLDA" default="BUILD_WINDOWS" basedir=".">
+
+    <description>Builds, tests, and runs the project EXMARaLDA.</description>
+    
+    
+    <!-- *************************************************************** -->
+    <!-- *****************          VARIABLES         ****************** -->
+    <!-- *************************************************************** -->
+
+    <!-- directory where to put the final results -->
+    <property name="target_directory" value="D:\EXMARaLDA_BUILD"/>
+    <!-- a copy in a cloud folder -->
+    <property name="shared_directory" value="D:\Dropbox\EXMARaLDA_Build"/>
+    <!-- ??? -->
+    <property name="target_lib_directory" value="D:\EXMARaLDA_BUILD\Libraries"/>
+
+   
+    <!-- version numbers -->
+    <property name="exmaralda_version" value="1.13"/>
+    <property name="partitureditor_version" value="1.7"/>
+    <property name="coma_version" value="2.0.2"/>
+    <property name="exakt_version" value="1.4"/>
+    <property name="teidrop_version" value="0.5"/>
+    <property name="folker_version" value="1.3"/>
+    <property name="orthonormal_version" value="0.9.9"/>
+
+    
+    <property name="base_directory" location="D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project"/>
+    
+    <!-- path to the java archive with the EXMARaLDA code -->
+    <property name="exmaralda_jar" location="${base_directory}/dist/EXMARaLDA_NetBeans_Project.jar"/>
+    <property name="application_jar" location="${base_directory}/dist/EXMARaLDA_APPLICATION.jar"/>
+    
+    <!-- directory for temporarily placing built stuff -->
+    <property name="temp_directory" location="D:\EXMARaLDA_BUILD\temp"/>
+           
+    <!-- path to the inno setup executable -->
+    <property name="inno_setup_exe" location="D:\Dropbox\EXMARaLDA_Build\2021_ISSUE_291_BINARIES\Inno Setup 5\ISCC.exe"/>
+    
+    <!-- directory with all template files -->
+    <property name="template_directory" location="D:\EXMARaLDA_GIT\exmaralda\src\build"/> 
+    <!-- directory with icon files -->
+    <property name="icons_directory" location="${template_directory}/windows/icons"/>
+    
+    <property name="windows_native_media_template_directory" location="${template_directory}/windows/NativeMedia"/>
+
+    <!-- inno setup configuration file -->
+    <property name="inno_setup_exmaralda" location="${template_directory}/windows/innosetup/exmaralda.iss"/>
+    
+
+    <!-- *************************************************************** -->
+    <!-- *****************          PREPARATIONS      ****************** -->
+    <!-- *************************************************************** -->
+
+    <target name="-pre-compile">
+        <tstamp/>
+        <echo message="Updating EXMARaLDA Constants"/>
+        <copy file="${template_directory}/EXMARaLDAConstants.java.txt" tofile="D:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\common\EXMARaLDAConstants.java" overwrite="true">
+            <filterset>
+               <filter token="PARTITUREDITOR_VERSION" value="${partitureditor_version}"/>
+               <filter token="EXAKT_VERSION" value="${exakt_version}"/>
+               <filter token="FOLKER_VERSION" value="${folker_version}"/>
+               <filter token="ORTHONORMAL_VERSION" value="${orthonormal_version}"/>
+               <filter token="SURFER_VERSION" value="${surfer_version}"/>
+               <filter token="ORTHONORMAL_VERSION" value="${orthonormal_version}"/>
+               <filter token="BUILD_TIME" value="${DSTAMP}.${TSTAMP}"/>
+            </filterset>
+        </copy>
+        
+        <delete file="${template_directory}/changes.html"/>
+        <delete file="${template_directory}/coma_changes.html"/>
+        <delete file="${template_directory}/folker_changes.html"/>
+        <delete file="${template_directory}/orthonormal_changes.html"/>
+        <delete file="${template_directory}/windows/innosetup/releasenotes_exmaralda.txt"/>
+        <delete file="${template_directory}/windows/innosetup/releasenotes_folker.txt"/>
+        <delete file="${template_directory}/windows/innosetup/releasenotes_orthonormal.txt"/>
+
+        <xslt classpath=".\lib\saxon8.jar" in="${template_directory}/changes/changes.xml" out="${template_directory}/changes/changes.html" style="${template_directory}/changes/changes2html.xsl">
+                <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
+        </xslt>
+        
+        <xslt classpath=".\lib\saxon8.jar" in="${template_directory}/changes/changes.xml" out="${template_directory}/windows/innosetup/releasenotes_exmaralda.txt" style="${template_directory}/changes/changes2txt.xsl">
+                <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
+        </xslt>
+
+        <xslt classpath=".\lib\saxon8.jar" in="${template_directory}/changes/changes.xml" out="C:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\coma\resources\version.properties" style="${template_directory}/changes/changes2version_properties.xsl">
+                <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
+        </xslt>
+        
+        <property file="C:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\coma\resources\version.properties" />    
+        <property name="coma_version" value="${comaversion}"/>
+        <property name="BUILD_TIME" value="${DSTAMP}.${TSTAMP}"/>
+        
+    </target>
+    
+    
+    <!-- *************************************************************** -->
+    <!-- *****************          TEMP COPY         ****************** -->
+    <!-- *************************************************************** -->
+
+    <!-- copy files into the temp folder -->
+    <target name="copy_temp" depends="application_jar">
+        <delete dir="${temp_directory}"/>
+        <mkdir dir="${temp_directory}"/>
+        <copy file="${application_jar}" todir="${target_lib_directory}"/>
+        <move file="${target_lib_directory}\EXMARaLDA_APPLICATION.jar" tofile="${target_lib_directory}\EXMARaLDA.jar"/>
+        <copy file="${application_jar}" todir="${temp_directory}"/>
+        <move file="${temp_directory}/EXMARaLDA_APPLICATION.jar" tofile="${temp_directory}/EXMARaLDA.jar"/>
+        <copy todir="${temp_directory}">
+            <fileset dir="${icons_directory}">
+                <include name="*.ico"/>
+                <include name="*.bmp"/>
+            </fileset>
+        </copy>        
+    </target>
+    
+    <!-- *************************************************************** -->
+    <!-- *****************          WINDOWS           ****************** -->
+    <!-- *************************************************************** -->
+
+    
+    <property name="jpackage_excecutable" location="C:\Program Files\Java\jdk-14\bin\jpackage.exe"/>
+    <property name="jpackage_source" location="D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project\dist"/>
+    <property name="jpackage_target" location="D:\EXMARaLDA_NEW_BUILD_TEST"/>
+
+    <target name="prepare_jpackage">
+        <delete dir="${jpackage_target}/PartiturEditor"/>
+        <delete dir="${jpackage_target}/Coma"/>
+        <delete dir="${jpackage_target}/EXAKT"/>
+        <delete dir="${jpackage_target}/FOLKER"/>
+        <delete dir="${jpackage_target}/OrthoNormal"/>
+        <delete dir="${jpackage_target}/TeiDrop"/>        
+        <delete dir="${jpackage_target}/EXMARaLDA"/>        
+    </target>
+    
+    <target name="windows_executables_jpackage" depends="prepare_jpackage">
+
+        <!-- Partitur-Editor -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            
+                   
+            <arg value="--app-version"/><arg value="${partitureditor_version}"/>
+            <arg value="--icon"/><arg value="${template_directory}\windows\icons\partitureditor.ico"/>
+        </exec>    
+        
+        <!-- COMA -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            <!-- -->
+            <arg value="--main-class"/><arg value="org.exmaralda.coma.launcher.Launcher"/>
+            <arg value="--app-version"/><arg value="${coma_version}"/>
+            <arg value="--icon"/><arg value="${template_directory}\windows\icons\coma.ico"/>
+            <arg value="--name"/><arg value="Coma"/>
+        </exec>    
+        
+        <!-- EXAKT -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            <!-- -->
+            <arg value="--main-class"/><arg value="org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT"/>
+            <arg value="--app-version"/><arg value="${exakt_version}"/>
+            <arg value="--icon"/><arg value="${template_directory}\windows\icons\exakt.ico"/>
+            <arg value="--name"/><arg value="EXAKT"/>
+        </exec>    
+        
+        <!-- FOLKER -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            <!-- -->
+            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${folker_version}"/>
+            <arg value="--icon"/><arg value="${template_directory}\windows\icons\folker.ico"/>
+            <arg value="--name"/><arg value="FOLKER"/>
+        </exec>    
+
+        <!-- OrthoNormal -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            <!-- -->
+            <arg value="--main-class"/><arg value="org.exmaralda.orthonormal.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${orthonormal_version}"/>
+            <arg value="--icon"/><arg value="${template_directory}\windows\icons\orthonormal.ico"/>
+            <arg value="--name"/><arg value="OrthoNormal"/>
+        </exec>    
+
+        <!-- TeiDrop -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            <!-- -->
+            <arg value="--main-class"/><arg value="org.exmaralda.tei.swing.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${teidrop_version}"/>
+            <arg value="--icon"/><arg value="${template_directory}\windows\icons\teidropicon.ico"/>
+            <arg value="--name"/><arg value="TeiDrop"/>
+        </exec>    
+        
+        <copy todir="${jpackage_target}/PartiturEditor/app/native">
+            <fileset dir="D:\EXMARaLDA_LIBS_2020\native"/> 
+        </copy>
+        
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/Coma/Coma.exe"/>
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/Coma/Coma.ico"/>
+        <copy todir="${jpackage_target}/PartiturEditor/app" file="${jpackage_target}/Coma/app/Coma.cfg"/>
+
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/EXAKT/EXAKT.exe"/>
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/EXAKT/EXAKT.ico"/>
+        <copy todir="${jpackage_target}/PartiturEditor/app" file="${jpackage_target}/EXAKT/app/EXAKT.cfg"/>
+
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/FOLKER/FOLKER.exe"/>
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/FOLKER/FOLKER.ico"/>
+        <copy todir="${jpackage_target}/PartiturEditor/app" file="${jpackage_target}/FOLKER/app/FOLKER.cfg"/>
+        
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/OrthoNormal/OrthoNormal.exe"/>
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/OrthoNormal/OrthoNormal.ico"/>
+        <copy todir="${jpackage_target}/PartiturEditor/app" file="${jpackage_target}/OrthoNormal/app/OrthoNormal.cfg"/>
+        
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/TeiDrop/TeiDrop.exe"/>
+        <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/TeiDrop/TeiDrop.ico"/>
+        <copy todir="${jpackage_target}/PartiturEditor/app" file="${jpackage_target}/TeiDrop/app/TeiDrop.cfg"/>
+        
+        <move file="${jpackage_target}/PartiturEditor" tofile="${jpackage_target}/EXMARaLDA"/>
+        
+        <delete dir="${jpackage_target}/Coma"/>
+        <delete dir="${jpackage_target}/EXAKT"/>
+        <delete dir="${jpackage_target}/FOLKER"/>
+        <delete dir="${jpackage_target}/OrthoNormal"/>
+        <delete dir="${jpackage_target}/TeiDrop"/>        
+        
+
+    </target>
+    
+
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+
+
+    <target name="prepare_target_directory">
+        <delete dir="${target_directory}/${exmaralda_version}"/>
+        <mkdir dir="${target_directory}/${exmaralda_version}/windows"/>        
+        <mkdir dir="${target_directory}/${exmaralda_version}/mac"/>        
+        <mkdir dir="${target_directory}/${exmaralda_version}/linux"/>        
+    </target>
+
+    <!-- generates the windows setup files using inno setup -->
+    <target name="windows_setups" depends="windows_executables_jpackage, prepare_target_directory, copy_temp">
+        <!-- START EXMARaLDA -->
+        <copy file="${template_directory}/windows/innosetup/copyright_exmaralda_template.txt" tofile="${template_directory}/windows/innosetup/copyright_exmaralda.txt" overwrite="true">
+            <filterset>
+                <filter token="partitureditor-version" value="${partitureditor_version}"/>
+                <filter token="coma-version" value="${coma_version}"/>
+                <filter token="exakt-version" value="${exakt_version}"/>
+                <filter token="folker-version" value="${folker_version}"/>
+                <filter token="orthonormal-version" value="${orthonormal_version}"/>
+                <filter token="teidrop-version" value="${teidrop_version}"/>
+            </filterset>
+        </copy>
+
+        <copy file="${inno_setup_exmaralda}" todir="${temp_directory}">
+            <filterset>
+                <filter token="version" value="${exmaralda_version}"/>
+                <filter token="build-time" value="${BUILD_TIME}"/>
+                <filter token="tempdir" value="${jpackage_target}"/>
+                <filter token="templatesdir" value="${template_directory}"/>
+                <filter token="targetdir" value="${target_directory}"/>
+            </filterset>
+        </copy>
+        <exec executable="${inno_setup_exe}">
+           <arg file="${temp_directory}/exmaralda.iss"/>
+        </exec>
+        <copy file="${temp_directory}/Output/mysetup.exe" tofile="${target_directory}/${exmaralda_version}/windows/exmaralda_setup.exe"/>
+        <!-- END EXMARaLDA -->
+
+    </target>
+    
+    
+    
+    <target name="cleanup_the_mess" depends="windows_setups">
+        <delete dir="${shared_directory}/${exmaralda_version}"/>        
+        <mkdir dir="${shared_directory}/${exmaralda_version}"/>
+        <copy todir="${shared_directory}/${exmaralda_version}" verbose="true">
+            <fileset dir="${target_directory}/${exmaralda_version}"/>
+        </copy>
+        <delete dir="${temp_directory}"/>        
+    </target>
+    
+    <target name="BUILD_WINDOWS" depends="cleanup_the_mess">
+        <!-- do nothing, just defining the main target -->
+    </target>
+    
+    <!-- ******************************************** -->
+    <!-- ******************************************** -->
+    <!-- ******************************************** -->
+    <!-- ******************************************** -->
+     
+    <target name="application_jar">
+        <jar basedir="${base_directory}\build\classes" destfile="${application_jar}">
+            <exclude name="**/partitureditor/deprecated/**"/>
+            <exclude name="**/partitureditor/DIDA/**"/>
+
+            <exclude name="**/exakt/applet/**"/>
+            
+            <exclude name="**/stan/**"/>
+            <exclude name="**/teide/**"/>
+            <exclude name="**/zrcola/**"/>
+            <exclude name="**/zecke/**"/>
+            <exclude name="**/dgd/**"/>
+            <exclude name="**/sbcsae/**"/>
+            <exclude name="**/fedora/**"/>
+            <exclude name="**/ffmpeg/**"/>
+            <exclude name="**/hzsk/**"/>
+
+            <exclude name="**/*.form"/>            
+        </jar>
+    </target>
+    
+</project>
+
+
+

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<project name="EXMARaLDA" default="BUILD_LINUX" basedir=".">
+
+    <description>Builds, tests, and runs the project EXMARaLDA.</description>
+    
+
+    <!-- *************************************************************** -->
+    <!-- *****************          VARIABLES         ****************** -->
+    <!-- *************************************************************** -->
+
+    <!-- directory where to put the final results -->
+    <property name="target_directory" value="D:\EXMARaLDA_BUILD"/>
+    <!-- a copy in a cloud folder -->
+    <property name="shared_directory" value="D:\Dropbox\EXMARaLDA_Build"/>
+    <!-- ??? -->
+    <property name="target_lib_directory" value="D:\EXMARaLDA_BUILD\Libraries"/>
+
+   
+    <!-- version numbers -->
+    <property name="exmaralda_version" value="1.13"/>
+    <property name="partitureditor_version" value="1.7"/>
+    <property name="coma_version" value="2.0.2"/>
+    <property name="exakt_version" value="1.4"/>
+    <property name="teidrop_version" value="0.5"/>
+    <property name="folker_version" value="1.3"/>
+    <property name="orthonormal_version" value="0.9.9"/>
+
+    
+    <property name="base_directory" location="D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project"/>
+    
+    <!-- path to the java archive with the EXMARaLDA code -->
+    <property name="exmaralda_jar" location="${base_directory}/dist/EXMARaLDA_NetBeans_Project.jar"/>
+    <property name="application_jar" location="${base_directory}/dist/EXMARaLDA_APPLICATION.jar"/>
+    
+    <!-- directory for temporarily placing built stuff -->
+    <property name="temp_directory" location="D:\EXMARaLDA_BUILD\temp"/>
+           
+    
+    <!-- directory with all template files -->
+    <property name="template_directory" location="D:\EXMARaLDA_GIT\exmaralda\src\build"/> 
+
+    <property name="libraries_directory" location="D:\Dropbox\EXMARaLDA_Build\2020_LIBS"/>    
+    
+    <!-- a copy in a cloud folder -->
+    <property name="shared_directory" value="D:\Dropbox\EXMARaLDA_Build"/>
+
+
+    
+
+    <!-- *************************************************************** -->
+    <!-- *****************          PREPARATIONS      ****************** -->
+    <!-- *************************************************************** -->
+
+    
+    
+    <!-- *************************************************************** -->
+    <!-- *****************          TEMP COPY         ****************** -->
+    <!-- *************************************************************** -->
+
+    <!-- copy files into the temp folder -->
+    <target name="copy_temp">
+        <delete dir="${temp_directory}"/>
+        <mkdir dir="${temp_directory}"/>
+        <copy file="${application_jar}" todir="${target_lib_directory}"/>
+        <move file="${target_lib_directory}\EXMARaLDA_APPLICATION.jar" tofile="${target_lib_directory}\EXMARaLDA.jar"/>
+        <copy file="${application_jar}" todir="${temp_directory}"/>
+        <move file="${temp_directory}/EXMARaLDA_APPLICATION.jar" tofile="${temp_directory}/EXMARaLDA.jar"/>
+        <!-- <copy todir="${temp_directory}">
+            <fileset dir="${icons_directory}">
+                <include name="*.ico"/>
+                <include name="*.bmp"/>
+            </fileset>
+        </copy> -->        
+    </target>
+    
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+
+
+    <target name="prepare_target_directory">
+        <delete dir="${target_directory}/${exmaralda_version}"/>
+        <mkdir dir="${target_directory}/${exmaralda_version}/linux"/>        
+    </target>
+
+    
+    <!-- *************************************************************** -->
+    <!-- *****************          LINUX             ****************** -->
+    <!-- *************************************************************** -->
+
+
+    <!-- you need to have adoptopenjdk-14 on your machine, this will contain the jpackage executable -->
+    <property name="jpackage_excecutable_lnx" location="/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64/bin/jpackage"/>
+    <property name="jpackage_source_lnx" location="/home/moos/NetBeansProjects/exmaralda/EXMARaLDA_NetBeans_Project/dist"/>
+    <property name="jpackage_target_lnx" location="/home/moos/Desktop/JPACKAGE_BUILD"/>
+
+    <target name="prepare_jpackage_lnx">
+        <delete dir="${jpackage_target_lnx}/PartiturEditor"/>
+        <delete dir="${jpackage_target_lnx}/Coma"/>
+        <delete dir="${jpackage_target_lnx}/EXAKT"/>
+        <delete dir="${jpackage_target_lnx}/FOLKER"/>
+        <delete dir="${jpackage_target_lnx}/OrthoNormal"/>
+        <delete dir="${jpackage_target_lnx}/TeiDrop"/>        
+        <delete dir="${jpackage_target_lnx}/EXMARaLDA"/>        
+    </target>
+    
+    <!-- build a debian package with jpackage - not sure if this works -->
+    <target name="linux_distributions_jpackage" depends="prepare_jpackage_lnx">
+
+        <!-- Partitur-Editor -->
+        <exec executable="${jpackage_excecutable_lnx}">
+            <!-- <arg value="\-\-type"/><arg value="RPM"/> -->
+            <arg value="--input"/><arg value="${jpackage_source_lnx}"/>
+            <arg value="--dest"/><arg value="${jpackage_target_lnx}"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
+            
+                   
+            <arg value="--app-version"/><arg value="${partitureditor_version}"/>
+            <arg value="--icon"/><arg value="/home/moos/NetBeansProjects/exmaralda/EXMARaLDA_NetBeans_Project/templates/windows/icons/partitureditor.ico"/>
+        </exec>    
+    </target>
+    
+    <!-- ******************************************* -->
+    <!-- ******************************************* -->
+    <!-- ******************************************* -->
+    <!-- ******************************************* -->
+    <!-- ******************************************* -->
+    
+    <property name="JAVA_DIR" value="D:\Dropbox\EXMARaLDA_Build\2021_ISSUE_291_BINARIES\Linux JRE\OpenJDK11U-jdk_x64_linux_hotspot_11.0.13_8\jdk-11.0.13+8"/>
+    <property name="JAVA_BIN_DIR" value="${JAVA_DIR}/bin"/>
+    
+    <!-- build a vintage gnuzipped tarball with shell scripts - I think this one works -->
+    <target name="linux_tarballs" depends="prepare_target_directory, copy_temp">
+        
+        <tar destfile="${temp_directory}/EXMARaLDA_64bit_JDK_11.tar">                   
+            <!-- Shell scripts in executable mode (seems to work fine) -->
+            <tarfileset dir="${template_directory}/linux/shellscripts" prefix="exmaralda${exmaralda_version}" filemode="755">
+                <include name="*.sh"/>
+            </tarfileset>
+            <!-- txt files from the same directory, do not need executable mode -->
+            <tarfileset dir="${template_directory}/linux/shellscripts" prefix="exmaralda${exmaralda_version}">
+                <include name="*.txt"/>
+            </tarfileset>
+
+            <!-- The EXMARaLDA jar itself -->
+            <tarfileset file="${temp_directory}/EXMARaLDA.jar" prefix="exmaralda${exmaralda_version}/lib"/>
+
+            <!-- EXMARaLDA libraries (except for some) -->
+            <tarfileset dir="${libraries_directory}" prefix="exmaralda${exmaralda_version}/lib">
+                <include name="*.jar"/>
+                <include name="*.zip"/>
+                <exclude name="*11-win.jar"/>
+                <exclude name="ojdbc6.jar"/>
+                <exclude name="ant.jar"/>
+                <exclude name="vlcj-2.1.0.jar"/>                                            
+            </tarfileset>
+            
+            <!-- The java binaries in executable mode (does not seem to work fine) -->
+            <tarfileset dir="${JAVA_BIN_DIR}" prefix="exmaralda${exmaralda_version}/adoptopenjdk-11-hotspot-amd64/bin/" filemode="755">
+                <include name="*"/>
+            </tarfileset>          
+            <!-- All but the java binaries do not need executable mode -->
+            <tarfileset dir="${JAVA_DIR}" prefix="exmaralda${exmaralda_version}/adoptopenjdk-11-hotspot-amd64">
+                <include name="**"/>
+                <exclude name="**/bin/**"/>
+                <exclude name="**/src.zip"/>
+            </tarfileset>
+            
+
+        </tar>
+        
+        <gzip src="${temp_directory}/EXMARaLDA_64bit_JDK_11.tar" destfile="${temp_directory}/EXMARaLDA_64bit_JDK_11.tar.gz"/>
+        <copy file="${temp_directory}/EXMARaLDA_64bit_JDK_11.tar.gz" tofile="${target_directory}/${exmaralda_version}/linux/EXMARaLDA_64bit_JDK_11.tar.gz"/>
+    </target>
+
+
+
+    
+    <!-- <target name="cleanup_the_mess" depends="windows_setups, mac_applications, mac_applications_ppc, linux_tarballs"> -->
+    <target name="cleanup_the_mess" depends="linux_tarballs">
+        <delete dir="${shared_directory}/${exmaralda_version}"/>        
+        <mkdir dir="${shared_directory}/${exmaralda_version}"/>
+        <copy todir="${shared_directory}/${exmaralda_version}" verbose="true">
+            <fileset dir="${target_directory}/${exmaralda_version}"/>
+        </copy>
+        <delete dir="${temp_directory}"/>        
+    </target>
+    
+    <target name="BUILD_LINUX" depends="cleanup_the_mess">
+        <!-- do nothing, just defining the main target -->
+    </target>
+    
+
+</project>
