@@ -1,0 +1,40 @@
+===== GUI
+jctable.jar --- the Swing component for the partitur
+
+===== Audio / Video
+elan-5.8.jar --- for AVFPlayer, MMFPlayer, JDSPlayer, JavaFXPlayer
+ips.audiotools.jar --- for BASAudioPlayer
+ips.commons.jar --- for BASAudioPlayer
+javafx-*-11.jar --- used by JavaFXPlayer
+
+===== XML processing
+jaxen-1.1.6.jar
+jdom.jar
+saxon9he.jar
+serializer.jar
+xalan.jar
+xercesImpl.jar
+
+
+===== Miscellaneous
+weblicht.jar --- for TCF conversion
+stax-utils.jar --- used by the weblicht classes
+jaxb-api-2.3.0.jar --- used by the weblicht classes
+
+tt4j.jar --- for TreeTagger POS tagging
+
+BATIK.jar --- for the SVG panel
+
+bounce.jar --- for the XML component in OrthoNormal
+jcalendar-1.4.jar --- for the calendar component in COMA
+
+httpclient-4.51.jar --- for connection to CLARIN webservices
+httpcore-4.3.3.jar --- for connection to CLARIN webservices
+httpmime-4.5.1.jar --- for connection to CLARIN webservices 
+
+commons-io-2.4.jar
+commons-lang-2.5.jar
+commons-logging-1.2.jar
+
+
+
