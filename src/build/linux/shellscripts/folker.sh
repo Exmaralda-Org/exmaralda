@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# this shell script has been tested successfully on SUSE Linux with Java 6
-# this shell script has been tested successfully on UBUNTU Linux with Java 6
-
 # WORKINGDIR=${0%/*}
 WORKINGDIR=$(dirname "$0")
 
@@ -41,5 +38,5 @@ CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/BATIK.jar:$WOR
 CP_JAVA=$CP_JAVA_1:$CP_JAVA_2:$CP_JAVA_4:$CP_JAVA_4b:$CP_JAVA_5:$CP_JAVA_6
 
 
-echo $JAVA_CMD -classpath $CP_JAVA -Djava.library.path=$DYLD_LIBRARY_PATH org.exmaralda.folker.application.ApplicationFrame
-exec $JAVA_CMD -classpath $CP_JAVA -Djava.library.path=$DYLD_LIBRARY_PATH org.exmaralda.folker.application.ApplicationFrame
+echo $JAVA_CMD -classpath $CP_JAVA -Djava.library.path=$DYLD_LIBRARY_PATH org.exmaralda.folker.application.ApplicationFrame $1
+exec $JAVA_CMD -classpath $CP_JAVA -Djava.library.path=$DYLD_LIBRARY_PATH org.exmaralda.folker.application.ApplicationFrame $1
