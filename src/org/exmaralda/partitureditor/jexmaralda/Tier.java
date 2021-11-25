@@ -233,6 +233,20 @@ public class Tier extends AbstractEventTier {
         }
     }
 
+    // for #295
+    public Map<String, Integer> getTypesTable() {
+        Map<String, Integer> result = new HashMap<>();
+        for (int pos=0; pos<getNumberOfEvents(); pos++){
+            Event event = getEventAt(pos);
+            String token = event.getDescription();
+            if (!(result.containsKey(token))){
+                result.put(token, 0);
+            }
+            result.put(token, result.get(token) + 1);
+        }
+        return result;
+    }
+
     
 
 

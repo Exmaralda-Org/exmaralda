@@ -704,6 +704,7 @@ public class PartitureTableWithActions extends PartitureTable
 
         // 1. Tier actions
         addTierAction.setEnabled(!locked);
+        typesAction.setEnabled(aWholeRowIsSelected);
         removeEmptyEventsAction.setEnabled(aWholeRowIsSelected && !locked);
         moveTierUpAction.setEnabled(aWholeRowIsSelected && selectionStartRow!=0 && !locked);
         insertTierAction.setEnabled(aWholeRowIsSelected && !locked);
@@ -1064,6 +1065,8 @@ public class PartitureTableWithActions extends PartitureTable
         removeEmptyEventsAction = new RemoveEmptyEventsAction(this);
 
         editTiersAction = new EditTiersAction(this);
+        
+        typesAction = new TypesAction(this);
 
         //*********************************************************************************************
         //***************************************** EVENT ACTIONS *************************************
@@ -1242,6 +1245,7 @@ public class PartitureTableWithActions extends PartitureTable
         editTierFormatAction.setEnabled(false);
         setFrameEndAction.setEnabled(false);
         underlineAction.setEnabled(false);
+        typesAction.setEnabled(false);
     }
     
     // *********************************************************************************** //
@@ -1674,6 +1678,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction showAllTiersAction;
     public javax.swing.AbstractAction removeEmptyEventsAction;
     public javax.swing.AbstractAction editTiersAction;
+    public javax.swing.AbstractAction typesAction; // issue #295
 
     //*******************************************************************
 

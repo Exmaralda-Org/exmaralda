@@ -17,10 +17,10 @@ import java.awt.Toolkit;
  */
 public class TierMenu extends AbstractTableMenu {
     
-    private JMenuItem addTierMenuItem;
-    private JMenuItem insertTierMenuItem;
-    private JMenuItem moveTierUpMenuItem;
-    private JMenuItem hideTierMenuItem;
+    private final JMenuItem addTierMenuItem;
+    private final JMenuItem insertTierMenuItem;
+    private final JMenuItem moveTierUpMenuItem;
+    private final JMenuItem hideTierMenuItem;
 
     /** Creates a new instance of TierMenu */
     public TierMenu(PartitureTableWithActions t) {
@@ -32,6 +32,10 @@ public class TierMenu extends AbstractTableMenu {
         add(table.editTierAction);
         add(table.editTiersAction);
 
+        addSeparator();
+        
+        add(table.typesAction); // issue #295
+        
         addSeparator();
         
         addTierMenuItem = add(table.addTierAction);

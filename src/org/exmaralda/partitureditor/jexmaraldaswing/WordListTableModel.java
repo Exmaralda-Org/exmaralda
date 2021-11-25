@@ -6,13 +6,10 @@
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 //import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
-import org.jdom.Document;
 import org.jdom.Element;
 
 /**

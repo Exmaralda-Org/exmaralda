@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
  * Implements PartiturTableListener so that it can react to a change of filename
  * (this will cause the frame title to update)
  * @author  Thomas
- * @version
+ * @version 1.7
  */
 
 public class PartiturEditor extends javax.swing.JFrame 
