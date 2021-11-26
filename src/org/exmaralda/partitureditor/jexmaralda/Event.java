@@ -34,7 +34,7 @@ public class Event extends Object implements Timeable, Describable, Linkable {
         start = new String();
         end = new String();
         description = new String();
-        medium = new String("none");
+        medium = "none";
         URL = new String();
         udEventInformation = new UDInformationHashtable();
     }
@@ -55,7 +55,7 @@ public class Event extends Object implements Timeable, Describable, Linkable {
         end = e;
         description = d;
         medium = m;
-        URL = new String(u);
+        URL = u;
         udEventInformation = new UDInformationHashtable();
     }
 
@@ -92,7 +92,7 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     @Override
     public void setEnd(String e){
         //if (e==null) System.out.println(this.toXML());
-        end = new String(e);
+        end = e;
     }
     
     /** returns the description of this event */
@@ -102,26 +102,31 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     }
     
     /** sets the description of this event to the specified value */
+    @Override
     public void setDescription(String d){
         description = d;
     }
 
     /** returns the link medium of this event */
+    @Override
     public String getMedium(){
         return medium;
     }
     
     /** sets the link medium of this event to the specified value */
+    @Override
     public void setMedium(String m){
         medium = m;
     }
     
     /** returns the link URL of this event */
+    @Override
     public String getURL(){
         return URL;
     }
     
     /** sets the link URL of this event to the specified value */
+    @Override
     public void setURL(String u){
         URL = u;
     }

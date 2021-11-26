@@ -1,6 +1,5 @@
 package org.exmaralda.partitureditor.jexmaralda;
 
-import java.io.*;
 import org.exmaralda.partitureditor.interlinearText.RTFUtilities;
 /*
  * Speaker.java
