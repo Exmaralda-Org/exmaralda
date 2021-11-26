@@ -7,6 +7,7 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.AbstractTableModel;
@@ -30,6 +31,7 @@ public class TypeTableModel extends AbstractTableModel {
             typesList.add(type);
         });
         Collections.sort(typesList);
+        mappings = new HashMap<>();
         types.keySet().forEach(type -> {
             mappings.put(type, type);
         });

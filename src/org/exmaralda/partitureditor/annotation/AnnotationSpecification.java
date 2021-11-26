@@ -9,11 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Document;
@@ -38,7 +36,19 @@ public class AnnotationSpecification {
     List<String> exmaraldaTierCategories = new ArrayList<>();
     Map<String,String> dependencies = new HashMap<>();
     Map<String,String> keyboardShortcuts = new HashMap<>();
+    
+    Document annotationSpecificationDocument;
 
+    public Document getAnnotationSpecificationDocument() {
+        return annotationSpecificationDocument;
+    }
+
+    public void setAnnotationSpecificationDocument(Document annotationSpecificationDocument) {
+        init(annotationSpecificationDocument);
+    }
+
+    
+    
     public Map<String, String> getKeyboardShortcuts() {
         return keyboardShortcuts;
     }
@@ -52,6 +62,39 @@ public class AnnotationSpecification {
         Document doc = new IOUtilities().readDocumentFromResource(pathToResource);
         init(doc);
     }
+    
+    /*
+    <annotation-specification>
+      <annotation-set exmaralda-tier-category="POS">
+            <category name="Apellativa">
+                <tag name="NN"/>
+                <description>Tisch, Herr, [das] Reisen</description>
+            </category>
+            <category name="Eigennamen">
+                <tag name="NE"/>
+                <description>Hans, Hamburg, HSV</description>
+            </category>
+      </annotation-set>
+    </annotation-specification>
+    
+    */
+    // issue #295
+    public void build(List<String> tagList, String tierCategory){
+        Document doc = new Document(new Element("annotation-specification"));
+        Element annotationSetElement = new Element("annotation-set");
+        annotationSetElement.setAttribute("exmaralda-tier-category", tierCategory);
+        doc.getRootElement().addContent(annotationSetElement);
+        for (String tag : tagList){
+            Element categoryElement = new Element("category");
+            annotationSetElement.addContent(categoryElement);
+            categoryElement.setAttribute("name", tag);
+            Element tagElement = new Element("tag");
+            categoryElement.addContent(tagElement);
+            tagElement.setAttribute("name", tag);
+            categoryElement.addContent(new Element("description").setText("to do"));
+        }
+        init(doc);
+    }
 
 
     public Category getAnnotationSet(String name) {
@@ -59,6 +102,7 @@ public class AnnotationSpecification {
     }
 
     private void init(Document doc) {
+        annotationSpecificationDocument = doc;
         annotationSets.clear();
         exmaraldaTierCategories.clear();
         for (Object o : doc.getRootElement().getChildren("annotation-set")){

@@ -7,6 +7,8 @@
 package org.exmaralda.partitureditor.partiture.tierActions;
 
 import java.util.Map;
+import javax.swing.JOptionPane;
+import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaraldaswing.TypesDialog;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
@@ -38,11 +40,28 @@ public class TypesAction extends org.exmaralda.partitureditor.partiture.Abstract
         Tier tier = table.getModel().getTranscription().getBody().getTierAt(row);
         Map<String, Integer> typesTable = tier.getTypesTable();
         TypesDialog typesDialog = new TypesDialog(table.parent, true);
-        typesDialog.setData(typesTable);
+        typesDialog.setData(typesTable, tier);
         typesDialog.setLocationRelativeTo(table);
         typesDialog.setVisible(true);
         if (typesDialog.approved){
             Map<String,String> mappings = typesDialog.getMappings();
+            int count = 0;
+            for (String sourceType : mappings.keySet()){
+                String targetType = mappings.get(sourceType);
+                if (!(sourceType.equals(targetType))){
+                    for (int pos=0 ; pos<tier.getNumberOfEvents(); pos++){
+                        Event event = tier.getEventAt(pos);
+                        if (sourceType.equals(event.getDescription())){
+                            event.setDescription(targetType);
+                            count++;
+                        }
+                    }
+                }
+            }
+            if (count>0){
+                JOptionPane.showMessageDialog(table, Integer.toString(count) + " entries changed in " + tier.getDisplayName() + ".");
+                table.getModel().fireRowChanged(row);
+            }
         }
     }
     

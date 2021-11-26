@@ -5,7 +5,23 @@
  */
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import org.exmaralda.common.ExmaraldaApplication;
+import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.partitureditor.annotation.AnnotationSpecification;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
+import org.exmaralda.partitureditor.partiture.PartiturEditor;
 
 
 /**
@@ -16,6 +32,7 @@ import java.util.Map;
 public class TypesDialog extends javax.swing.JDialog {
 
     public boolean approved = false;
+    Tier tier;
     /**
      * Creates new form TypesDialog
      */
@@ -92,6 +109,11 @@ public class TypesDialog extends javax.swing.JDialog {
         annotationSpecification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/document-save-as.png"))); // NOI18N
         annotationSpecification.setText("Export annotation specification...");
         annotationSpecification.setToolTipText("Make an XML file with all types which can be used for the annotation panel");
+        annotationSpecification.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annotationSpecificationActionPerformed(evt);
+            }
+        });
         topPanel.add(annotationSpecification);
 
         getContentPane().add(topPanel, java.awt.BorderLayout.PAGE_START);
@@ -108,6 +130,42 @@ public class TypesDialog extends javax.swing.JDialog {
         approved = false;
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void annotationSpecificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annotationSpecificationActionPerformed
+        JFileChooser jf = new JFileChooser();
+        jf.setFileFilter(new ParameterFileFilter("xml", "Annotation Specification File (*.xml)"));        
+        if (this.getParent() instanceof ExmaraldaApplication){
+            ExmaraldaApplication ea = (ExmaraldaApplication)this.getParent();
+            java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(ea.getPreferencesNode());
+            String path = settings.get("LAST-ANNOTATION-FILE", System.getProperty("user.dir"));
+            jf.setSelectedFile(new File(path));
+        }     
+        int result = jf.showSaveDialog(this);
+        if (result==JFileChooser.APPROVE_OPTION){
+            File file = jf.getSelectedFile();
+            if (!(file.getName().contains("."))){
+                file = new File(file.getParentFile(), file.getName() + ".xml");
+            }
+            if (file.exists()){
+                int r = JOptionPane.showConfirmDialog(rootPane, file.getAbsoluteFile() + " exists.\nOverwrite?");
+                if (r!=JOptionPane.OK_OPTION) return;
+            }
+            AnnotationSpecification as = new AnnotationSpecification();
+            List<String> tagList = new ArrayList<>();
+            tagList.addAll(getMappings().values());
+            as.build(tagList, tier.getCategory());
+            try {
+                IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), as.getAnnotationSpecificationDocument());
+            } catch (IOException ex) {
+                Logger.getLogger(TypesDialog.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
+                ((PartiturEditor) this.getParent()).getPartitur().status(ex.getLocalizedMessage());
+                return;
+            }
+            ((PartiturEditor) this.getParent()).getPartitur().status("Annotation specification saved as " + file.getAbsolutePath());
+            
+        }
+    }//GEN-LAST:event_annotationSpecificationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,9 +209,14 @@ public class TypesDialog extends javax.swing.JDialog {
         });
     }
     
-    public void setData(Map<String,Integer> typesMap){
+    public void setData(Map<String,Integer> typesMap, Tier tier){
         TypeTableModel typeTableModel = new TypeTableModel(typesMap);
-        this.typesTable.setModel(typeTableModel);
+        typesTable.setModel(typeTableModel);
+        typesTable.setDefaultRenderer(String.class, new TypeTableCellRenderer());
+        typesTable.setDefaultRenderer(Integer.class, new TypeTableCellRenderer());
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(typesTable.getModel());
+        typesTable.setRowSorter(sorter);   
+        this.tier = tier;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
