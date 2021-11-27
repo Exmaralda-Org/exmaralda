@@ -59,7 +59,8 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter SRTFileFilter = new ParameterFileFilter("srt", "SubRip Subtitle file (*.srt)");
     public ParameterFileFilter VTTFileFilter = new ParameterFileFilter("vtt", "Web Video Text Tracks file (*.vtt)");
     static String[] tsv_suff = {"tsv", "csv", "txt"};
-    public ParameterFileFilter TsvFileFilter = new ParameterFileFilter(tsv_suff, " tsv file (*.tsv, *.csv, *.txt)");
+    public ParameterFileFilter TsvFileFilter = new ParameterFileFilter(tsv_suff, "TSV file (*.tsv, *.csv, *.txt)");
+    public ParameterFileFilter FrazierADCFileFilter = new ParameterFileFilter("adc", "Frazier audio description file (*.adc)");
     
 
 

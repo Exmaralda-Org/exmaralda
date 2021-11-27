@@ -147,6 +147,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.WinPitchFileFilter){
             WinPitchConverter tc = new WinPitchConverter();
             importedTranscription = tc.readWinPitchFromFile(filename);
+        } else if (selectedFileFilter==dialog.FrazierADCFileFilter){ // issue #296
+            FrazierADCConverter tc = new FrazierADCConverter();
+            importedTranscription = tc.readFrazierADCFromFile(new File(filename));
         } else if (selectedFileFilter==dialog.AnvilFileFilter){
             AnvilConverter tc = new AnvilConverter();
             importedTranscription = tc.readAnvilFromFile(filename);
@@ -358,6 +361,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 table.cleanup(importedTranscription);
             } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter)
                     || (selectedFileFilter==dialog.AudacityLabelFileFilter)
+                    || (selectedFileFilter==dialog.FrazierADCFileFilter)
                     || (selectedFileFilter==dialog.WinPitchFileFilter)){
                 table.stratify(importedTranscription);
             }

@@ -41,28 +41,34 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         addChoosableFileFilter(CHATTranscriptFileFilter);
         addChoosableFileFilter(TranscriberFileFilter);
         addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
-        addChoosableFileFilter(WinPitchFileFilter);
+        // added 27-11-2021: issue #296
+        addChoosableFileFilter(FrazierADCFileFilter);
         addChoosableFileFilter(AnvilFileFilter);
-        addChoosableFileFilter(TASXFileFilter);
-        addChoosableFileFilter(AGFileFilter);
         addChoosableFileFilter(SimpleExmaraldaFileFilter);
         // added 17-11-2017: issue #119
         addChoosableFileFilter(VTTFileFilter);
-        addChoosableFileFilter(RioDeJaneiroFileFilter);
         addChoosableFileFilter(TextFileFilter);
         addChoosableFileFilter(AudacityLabelFileFilter);
         addChoosableFileFilter(TreeTaggerFilter);
-        addChoosableFileFilter(TEIFileFilter);
+        //addChoosableFileFilter(TEIFileFilter);
         addChoosableFileFilter(XSLStylesheetImportFilter);
         addChoosableFileFilter(HIATDOSFileFilter);
         addChoosableFileFilter(PhonFileFilter);
-        addChoosableFileFilter(TransanaXMLFileFilter);
         addChoosableFileFilter(FlexTextXMLFileFilter);
-        addChoosableFileFilter(exSyncFileFilter);
         addChoosableFileFilter(TCFFileFilter);
         addChoosableFileFilter(TsvFileFilter);
         addChoosableFileFilter(F4TextFileFilter);
         setFileFilter(PraatFileFilter);
+
+        addChoosableFileFilter(exSyncFileFilter);
+        addChoosableFileFilter(RioDeJaneiroFileFilter);
+        addChoosableFileFilter(TASXFileFilter);
+        addChoosableFileFilter(WinPitchFileFilter);
+        addChoosableFileFilter(AGFileFilter);
+        addChoosableFileFilter(TransanaXMLFileFilter);
+
+
+
         setMultiSelectionEnabled(false);
         initAccessory();
         addPropertyChangeListener("fileFilterChanged", this);

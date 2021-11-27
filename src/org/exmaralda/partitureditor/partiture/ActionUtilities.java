@@ -70,6 +70,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("SRT")) {dialog.setFileFilter(dialog.SRTFileFilter);}
             else if (lastFileFilter.equals("VTT")) {dialog.setFileFilter(dialog.VTTFileFilter);}
             else if (lastFileFilter.equals("Flextext")) {dialog.setFileFilter(dialog.FlexTextXMLFileFilter);}
+            else if (lastFileFilter.equals("FrazierADC")) {dialog.setFileFilter(dialog.FrazierADCFileFilter);}
         }
     }
 
@@ -122,6 +123,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.SRTFileFilter) {lastFileFilter = "SRT";}
             else if (selectedFileFilter==dialog.VTTFileFilter) {lastFileFilter = "VTT";}
             else if (selectedFileFilter==dialog.FlexTextXMLFileFilter) {lastFileFilter = "Flextext";}
+            else if (selectedFileFilter==dialog.FrazierADCFileFilter) {lastFileFilter = "FrazierADC";}
 
 
             settings.put(propName, lastFileFilter);
