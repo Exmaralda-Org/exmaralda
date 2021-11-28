@@ -770,5 +770,35 @@ public class BasicBody extends AbstractTierBody {
         return result.getID();
     }
 
+    public String[] getCategories() {
+        Set<String> allCategories = new HashSet<>();
+        for (int pos=0; pos<getNumberOfTiers(); pos++){
+            allCategories.add(getTierAt(pos).getCategory());
+        }
+        String[] result = new String[allCategories.size()];
+        int i=0;
+        for (String s : allCategories){
+            result[i] = s;
+            i++;
+        }
+        return result;
+    }
+
+    public int[] findTiersWithCategory(String tierCategory) {
+        List<Integer> tierPositions = new ArrayList<>();
+        for (int pos=0; pos<getNumberOfTiers(); pos++){
+            if (getTierAt(pos).getCategory().equals(tierCategory)){
+                tierPositions.add(pos);
+            }
+        }
+        int[] result = new int[tierPositions.size()];
+        int i=0;
+        for (int ii : tierPositions){
+            result[i] = ii;
+            i++;
+        }
+        return result;        
+    }
+
       
 }

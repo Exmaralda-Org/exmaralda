@@ -61,6 +61,7 @@ import org.exmaralda.partitureditor.partiture.webServicesActions.WebMAUSFineAlig
 import org.exmaralda.partitureditor.partiture.undo.RestoreCellInfo;
 import org.exmaralda.partitureditor.partiture.undo.UndoHandler;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
+import org.exmaralda.partitureditor.partiture.webServicesActions.DeepLAction;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -1155,6 +1156,7 @@ public class PartitureTableWithActions extends PartitureTable
         webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/mickey-mouse-9-24.gif")));
         webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/mickey-mouse-9-24.gif")));
         webLichtAction = new WebLichtAction(this);
+        deepLAction = new DeepLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/deepl_logo_icon_170284.png")));
 
         //-------------------------------- NAVIGATION ACTIONS --------------------------------------------------
 
@@ -1765,6 +1767,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction webMAUSAction;
     public javax.swing.AbstractAction webMAUSFineAlignmentAction;
     public javax.swing.AbstractAction webLichtAction; 
+    public javax.swing.AbstractAction deepLAction; 
     
     //*******************************************************************
 

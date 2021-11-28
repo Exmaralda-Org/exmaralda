@@ -67,7 +67,6 @@ public class WebLichtParameterDialog extends javax.swing.JDialog {
         apiKeyTextField.setText(apiKey);
         defaultDirectory = new File(outputDirectory);
         updateOK();
-        
     }
     
 
