@@ -87,29 +87,32 @@ public class SimpleExmaraldaReader extends Vector {
             String main = parts[2];
             String annotation = parts[3];
             
-            if (!speakertable.containsSpeakerWithID(speaker)){
+            // changed 08-12-2021, issue #299
+            String speakerID = makeSpeakerID(speaker);
+            
+            if (!speakertable.containsSpeakerWithID(speakerID)){
                 Speaker newSpeaker = new Speaker();
-                newSpeaker.setID(speaker);
+                newSpeaker.setID(speakerID);
                 newSpeaker.setAbbreviation(speaker);
                 speakertable.addSpeaker(newSpeaker);
 
                 Tier commentTier = new Tier();
                 commentTier.setID(t.getBody().getFreeID());
-                commentTier.setSpeaker(speaker);
+                commentTier.setSpeaker(speakerID);
                 commentTier.setType("d");
                 commentTier.setCategory("c");
                 t.getBody().addTier(commentTier);
 
                 Tier mainTier = new Tier();
                 mainTier.setID(t.getBody().getFreeID());
-                mainTier.setSpeaker(speaker);
+                mainTier.setSpeaker(speakerID);
                 mainTier.setType("t");
                 mainTier.setCategory("v");
                 t.getBody().addTier(mainTier);
             
                 Tier annTier = new Tier();
                 annTier.setID(t.getBody().getFreeID());
-                annTier.setSpeaker(speaker);
+                annTier.setSpeaker(speakerID);
                 annTier.setType("a");
                 annTier.setCategory("a");
                 t.getBody().addTier(annTier);
@@ -117,7 +120,7 @@ public class SimpleExmaraldaReader extends Vector {
             
             Event[] events = getEvents(main, timeline);
             //System.out.println("Processing " + main);
-            String[] ids = t.getBody().getTiersWithProperties(speaker, "t");
+            String[] ids = t.getBody().getTiersWithProperties(speakerID, "t");
             Tier mainTier = t.getBody().getTierWithID(ids[0]);
             for (int pos2=0; pos2<events.length; pos2++){
                 mainTier.addEvent(events[pos2]);
@@ -126,7 +129,7 @@ public class SimpleExmaraldaReader extends Vector {
             String start = events[0].getStart();
             String end = events[events.length-1].getEnd();
             if (comment.length()>0){
-                String[] ids2 = t.getBody().getTiersWithProperties(speaker, "d");
+                String[] ids2 = t.getBody().getTiersWithProperties(speakerID, "d");
                 Tier commentTier = t.getBody().getTierWithID(ids2[0]);
                 Event event = new Event();
                 event.setStart(start);
@@ -136,7 +139,7 @@ public class SimpleExmaraldaReader extends Vector {
             }
             
             if (annotation.length()>0){
-                String[] ids3 = t.getBody().getTiersWithProperties(speaker, "a");
+                String[] ids3 = t.getBody().getTiersWithProperties(speakerID, "a");
                 Tier annotationTier = t.getBody().getTierWithID(ids3[0]);
                 Event event = new Event();
                 event.setStart(start);
@@ -349,5 +352,10 @@ public class SimpleExmaraldaReader extends Vector {
     
 
 // ****************************************************************************************************************
+
+    // issue #299
+    private String makeSpeakerID(String speaker) {
+        return speaker.replaceAll(" ", "_").replaceAll("[^A-Za-zÄÖÜäöüß0-9_-]", "x");
+    }
     
 }
