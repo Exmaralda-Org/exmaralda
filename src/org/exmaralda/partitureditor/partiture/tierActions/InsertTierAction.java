@@ -36,7 +36,10 @@ public class InsertTierAction extends org.exmaralda.partitureditor.partiture.Abs
     }
     
     private void insertTier(){
+        int row = table.selectionStartRow;
         NewTierDialog dialog = new NewTierDialog(table.parent, true, table.getModel().getTranscription());
+        // new 15-12-2021, issue #300
+        dialog.guessNewTier(row);
         if (dialog.makeNewTier()){
             Tier newTier = dialog.getNewTier();
             if (dialog.speakertableChanged){
@@ -54,7 +57,6 @@ public class InsertTierAction extends org.exmaralda.partitureditor.partiture.Abs
                     table.addUndo(undoInfo);
                 }
             }
-            int row = table.selectionStartRow;
             table.getModel().insertTier(newTier, row);
             if (row<=table.getFrameEndPosition()){
                 table.setFrameEndPosition(table.getFrameEndPosition()+1);

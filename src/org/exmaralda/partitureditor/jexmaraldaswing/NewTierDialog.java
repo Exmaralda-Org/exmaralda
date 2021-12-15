@@ -471,4 +471,29 @@ public class NewTierDialog extends JEscapeDialog {
         }
         warningLabel.setText("No warnings.");
     }
+
+    // issue #300
+    public void guessNewTier(int row) {
+        String speaker = null;
+        for (int pos=row; pos>=0; pos--){
+            Tier tier = transcription.getBody().getTierAt(pos);
+            if (tier.getType().equals("t") && tier.getSpeaker()!=null){
+                int index = Arrays.asList(speakerIDs).indexOf(tier.getSpeaker());
+                speakerComboBox.setSelectedIndex(index);
+                typeComboBox.setSelectedIndex(2);
+                return;
+            }
+        }
+        
+        // try forwards...
+        for (int pos=row; pos<transcription.getBody().getNumberOfTiers(); pos++){
+            Tier tier = transcription.getBody().getTierAt(pos);
+            if (tier.getType().equals("t") && tier.getSpeaker()!=null){
+                int index = Arrays.asList(speakerIDs).indexOf(tier.getSpeaker());
+                speakerComboBox.setSelectedIndex(index);
+                typeComboBox.setSelectedIndex(2);
+                return;
+            }            
+        }
+    }
 }

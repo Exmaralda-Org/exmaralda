@@ -26,6 +26,7 @@ public class AddTierAction extends org.exmaralda.partitureditor.partiture.Abstra
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                        
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("addTierAction!");
         table.commitEdit(true);
@@ -34,7 +35,11 @@ public class AddTierAction extends org.exmaralda.partitureditor.partiture.Abstra
     }    
 
     private void addTier(){
+        int row = table.selectionStartRow;
         NewTierDialog dialog = new NewTierDialog(table.parent, true, table.getModel().getTranscription());
+        // new 15-12-2021, issue #300
+        dialog.guessNewTier(row);
+
         if (dialog.makeNewTier()){
             Tier newTier = dialog.getNewTier();
             if (dialog.speakertableChanged){
