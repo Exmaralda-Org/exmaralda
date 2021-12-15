@@ -10,6 +10,7 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="feature" version="1.7" date="15.12.2021">DeepL translation web service (issue #297)</change>
     <change tool="partitureditor" type="feature" version="1.7" date="27.11.2021">Frazier ADC import (issue #296)</change>
     <change tool="partitureditor" type="feature" version="1.7" date="26.11.2021">Tier -- Types action (issue #295)</change>
     <change tool="partitureditor" type="change" version="1.7" date="04.11.2021">Refined upper/lower case action (issue #274)</change>
