@@ -39,7 +39,7 @@ class StringConstants extends Object {
     
     static String XML_DOCTYPE_SEGMENTED_TO_LIST_CONVERSION_INFO = "<!DOCTYPE segmented-to-list-conversion-info SYSTEM \"segmented-to-list-conversion-info.dtd\">\n";
     
-    static String XML_COPYRIGHT_COMMENT ="<!-- (c) http://www.rrz.uni-hamburg.de/exmaralda -->\n";
+    static String XML_COPYRIGHT_COMMENT ="<!-- http://www.exmaralda.org -->\n";
     
     static String HTML_HEADER = "<HTML>\n<HEAD>\n<META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n";
     

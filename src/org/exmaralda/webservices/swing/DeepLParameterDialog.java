@@ -349,6 +349,7 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         jPanel2.add(segmentChainRadioButton);
 
         segmentCheckBox.setText("Use segmentation: ");
+        segmentCheckBox.setToolTipText("Not yet implemented!");
         segmentCheckBox.setEnabled(false);
         segmentCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -476,8 +477,9 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
 
     
     private void updateSegmentationPanel(){
-        segmentCheckBox.setEnabled(segmentChainRadioButton.isSelected());
-        segmentationComboBox.setEnabled(segmentChainRadioButton.isSelected() && segmentCheckBox.isSelected());        
+        // need to uncomment the following two lines when and iff segmentation is implemented
+        //segmentCheckBox.setEnabled(segmentChainRadioButton.isSelected());
+        //segmentationComboBox.setEnabled(segmentChainRadioButton.isSelected() && segmentCheckBox.isSelected());        
     }
     /**
      * @param args the command line arguments

@@ -320,6 +320,7 @@
                     <Component class="javax.swing.JCheckBox" name="segmentCheckBox">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Use segmentation: "/>
+                        <Property name="toolTipText" type="java.lang.String" value="Not yet implemented!"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>

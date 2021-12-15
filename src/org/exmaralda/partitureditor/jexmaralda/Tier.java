@@ -247,6 +247,27 @@ public class Tier extends AbstractEventTier {
         return result;
     }
 
+
+    public List<List<Event>> getSegmentChains(Timeline commonTimeline) {
+        this.sort(commonTimeline);
+        List<List<Event>> result = new ArrayList<>();
+        List<Event> currentEventList = new ArrayList<>();
+        String lastEnd = "";
+        for (int pos=0; pos<getNumberOfEvents(); pos++){
+            Event currentEvent = getEventAt(pos);
+            if ((lastEnd.length()==0) || currentEvent.getStart().equals(lastEnd)){
+                currentEventList.add(currentEvent);
+            } else {
+                result.add(currentEventList);
+                currentEventList = new ArrayList<>();
+                currentEventList.add(currentEvent);
+            }
+            lastEnd = currentEvent.getEnd();
+        }
+        result.add(currentEventList);
+        return result;
+    }
+
     
 
 

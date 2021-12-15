@@ -23,12 +23,12 @@ public class TestFrazierADCConverter {
         new TestFrazierADCConverter().doit();
     }
     
-    String inFile = "D:\\Dropbox\\IDS\\Veranstaltungen\\EXMARaLDA-Schulung_Paris_November_2021\\MATERIAL\\in-den-gaengen-de-fr-in-den-gaengen-ad-fps_25.adc";
+    String inFile = "D:\\Dropbox\\IDS\\Veranstaltungen\\EXMARaLDA-Schulung_Paris_November_2021\\MATERIAL\\test_frazier.json";
 
     private void doit() throws IOException, JexmaraldaException {
         FrazierADCConverter converter = new FrazierADCConverter();
         BasicTranscription bt = converter.readFrazierADCFromFile(new File(inFile)); 
-        bt.writeXMLToFile(inFile.replaceAll("\\.adc", ".exb"), "none");
+        bt.writeXMLToFile(inFile.replaceAll("\\.[a-z]+", ".exb"), "none");
     }
     
     

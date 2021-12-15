@@ -6,6 +6,7 @@
 package org.exmaralda.partitureditor.jexmaralda;
 
 import java.io.IOException;
+import java.util.List;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation;
 import org.xml.sax.SAXException;
@@ -20,9 +21,19 @@ public class TEST {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SAXException, JexmaraldaException, FSMException, IOException {
-        GATSegmentation gs = new GATSegmentation();
-        ListTranscription l = gs.BasicToIntonationUnitList(new BasicTranscription("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Godhusen\\Probierdatei_GAT_EDIT.exb"));
-        l.writeXMLToFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\Godhusen\\Probierdatei_GAT_EDIT_LIST_2.xml", "none");
+        new TEST().doit();
+    }
+
+    private void doit() throws SAXException, JexmaraldaException {
+        BasicTranscription bt = new BasicTranscription("N:\\Workspace\\EXMARaLDA\\EXMARaLDA-DemoKorpus\\AnneWill\\AnneWill.exb");
+        Tier tier = bt.getBody().getTierAt(0);
+        List<List<Event>> segmentChains = tier.getSegmentChains(bt.getBody().getCommonTimeline());
+        for (List<Event> sc : segmentChains){
+            for (Event e : sc){
+                System.out.println(e.toXML());
+            }
+            System.out.println("===========");
+        }
     }
     
 }

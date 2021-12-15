@@ -19,6 +19,7 @@ import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaralda.TierFormat;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
@@ -97,6 +98,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
         String targetLanguage = (String) deepLParameters.get("TARGET-LANGUAGE");
         String formalityLevel = (String) deepLParameters.get("FORMALITY-LEVEL");
         boolean addLanguageTiers = (Boolean) deepLParameters.get("LANGUAGE-TIER");
+        boolean useSegmentation = (Boolean) deepLParameters.get("USE-SEGMENTATION");
 
         // do this in a thread so we can report progress
         Thread deepLThread = new Thread(){
@@ -124,6 +126,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                         Tier targetTier = new Tier(table.getModel().getTranscription().getBody().getFreeID(), sourceTier.getSpeaker(), "DeepL-" + targetLanguage, "a");
                         targetTier.setDisplayName("[DeepL-" + targetLanguage + "]");
                         table.getModel().getTranscription().getBody().insertTierAt(targetTier, adjustedTierPosition + 1);
+                        table.getModel().getTierFormatTable().addTierFormat(new TierFormat("a", targetTier.getID()));
                         tiersAdded++;
                         //resultTiers.add(targetTier);
                         
@@ -131,6 +134,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                         languageTier.setDisplayName("lang");
                         if (addLanguageTiers){
                             table.getModel().getTranscription().getBody().insertTierAt(languageTier, adjustedTierPosition + 2);                             
+                            table.getModel().getTierFormatTable().addTierFormat(new TierFormat("a", languageTier.getID()));
                             tiersAdded++;
                         }
                         //languageTiers.add(languageTier);
@@ -154,6 +158,32 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                     languageEvent.setEnd(event.getEnd());
                                     languageEvent.setDescription(translation[1]);                                    
                                     languageTier.addEvent(languageEvent);
+                                }
+                            }
+                        } else {
+                            List<List<Event>> segmentChains = sourceTier.getSegmentChains(table.getModel().getTranscription().getBody().getCommonTimeline());
+                            for (List<Event> segmentChain : segmentChains){
+                                if (!(useSegmentation)){
+                                    String originalText = "";
+                                    for (Event e : segmentChain){
+                                        originalText+=e.getDescription();
+                                    }
+                                    String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
+                                    pbd.addText(translation[0] + " " + translation[1]);
+                                    Event translationEvent = new Event();
+                                    translationEvent.setStart(segmentChain.get(0).getStart());
+                                    translationEvent.setEnd(segmentChain.get(segmentChain.size()-1).getEnd());
+                                    translationEvent.setDescription(translation[0]);
+                                    targetTier.addEvent(translationEvent);
+
+                                    if (addLanguageTiers){
+                                        Event languageEvent = new Event();
+                                        languageEvent.setStart(segmentChain.get(0).getStart());
+                                        languageEvent.setEnd(segmentChain.get(segmentChain.size()-1).getEnd());
+                                        languageEvent.setDescription(translation[1]);                                    
+                                        languageTier.addEvent(languageEvent);
+                                    }
+                                    
                                 }
                             }
                         }

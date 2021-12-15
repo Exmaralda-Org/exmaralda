@@ -75,7 +75,7 @@ public class DeepLConnector {
             urlString+="&formality=" + formality;
         }
         
-        if (!("auto_detect").equals("sourceLanguage")){
+        if (!("auto_detect").equals(sourceLanguage)){
             urlString+="&source_lang=" + sourceLanguage + "";
         }
         
