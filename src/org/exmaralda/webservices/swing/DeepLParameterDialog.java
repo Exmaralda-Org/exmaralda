@@ -277,6 +277,7 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         formalityPanel.add(jLabel4, java.awt.BorderLayout.NORTH);
 
         formalityButtonGroup.add(defaultFormalityRadioButton);
+        defaultFormalityRadioButton.setSelected(true);
         defaultFormalityRadioButton.setText("Default");
         jPanel4.add(defaultFormalityRadioButton);
 
