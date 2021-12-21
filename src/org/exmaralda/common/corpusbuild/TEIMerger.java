@@ -19,7 +19,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
-import org.exmaralda.partitureditor.jexmaraldaswing.TransformationDialog;
 import org.jdom.transform.*;
 import org.xml.sax.SAXException;
 //import net.sf.saxon.jdom.DocumentWrapper;

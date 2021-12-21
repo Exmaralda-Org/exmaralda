@@ -15,6 +15,9 @@ import ipsk.audio.player.event.PlayerStopEvent;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.partitureditor.partiture.fileActions.ImportAction;
@@ -62,18 +65,22 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         }
 
         if (!pathToSoundFile.startsWith("http://")){            
-            urlString = "file:///" + pathToSoundFile;
+            urlString = "file:///" + pathToSoundFile.replaceAll("\\\\", "/");
             soundFilePath = pathToSoundFile;
         }
 
         try {
             //changed 19-01-2016
             //wrappedPlayer = new ipsk.audio.player.Player(new URL(urlString));
-            wrappedPlayer.setAudioSource(new FileAudioSource(new File(soundFilePath))); 
+            System.out.println(new FileAudioSource(new File(soundFilePath)).getFile().getAbsolutePath());
+            wrappedPlayer.setAudioSource(new FileAudioSource(new File(new URI(soundFilePath)))); 
             wrappedPlayer.addPlayerListener(this);
             wrappedPlayer.open();
             fireSoundfileSet();
         } catch (PlayerException ex) {
+            Logger.getLogger(BASAudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
+        } catch (URISyntaxException ex) {
             Logger.getLogger(BASAudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
         } /*catch (MalformedURLException mue){

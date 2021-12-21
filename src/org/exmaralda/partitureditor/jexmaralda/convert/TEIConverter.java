@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.*;
+import java.net.URI;
 import java.util.HashSet;
 
 import java.util.Iterator;
@@ -338,10 +339,15 @@ public class TEIConverter extends AbstractConverter {
             BasicTranscription bt = new BasicTranscription();
             bt.BasicTranscriptionFromString(exbString);
             
-            String referencedFile = bt.getHead().getMetaInformation().getReferencedFile();
-            if (referencedFile.startsWith("file:/")){
-                bt.getHead().getMetaInformation().setReferencedFile(referencedFile.replaceAll("\\:\\/", ":///"));
+            Vector<String> correctedReferencedFiles = new Vector<>();
+            for (String referencedFile : bt.getHead().getMetaInformation().getReferencedFiles()){
+                if (referencedFile.startsWith("file:/")){
+                    correctedReferencedFiles.add(referencedFile.replaceAll("file\\:\\/+", ""));
+                } else {
+                    correctedReferencedFiles.add(referencedFile);
+                }
             }
+            bt.getHead().getMetaInformation().setReferencedFiles(correctedReferencedFiles);
             
             
             return bt;

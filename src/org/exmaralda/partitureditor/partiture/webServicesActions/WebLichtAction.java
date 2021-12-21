@@ -18,6 +18,7 @@ import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.AbstractEventTier;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
@@ -27,7 +28,7 @@ import org.exmaralda.partitureditor.jexmaralda.convert.TEITCFMerger;
 import org.exmaralda.partitureditor.partiture.BrowserLauncher;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.WebLichtConnector;
-import org.exmaralda.webservices.swing.CLARINProgressDialog;
+import org.exmaralda.webservices.swing.WebServiceProgessDialog;
 import org.exmaralda.webservices.swing.WebLichtParameterDialog;
 import org.jdom.Document;
 import org.jdom.JDOMException;
@@ -42,7 +43,7 @@ import org.xml.sax.SAXException;
  */
 public class WebLichtAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction implements ConverterListener {
     
-    CLARINProgressDialog pbd;
+    WebServiceProgessDialog pbd;
     
     static String XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/MergedTEI2HTML.xsl";
 
@@ -108,7 +109,7 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
         final BasicTranscription bt = table.getModel().getTranscription();
         
 
-        pbd = new CLARINProgressDialog(table.parent, false);
+        pbd = new WebServiceProgessDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);
         pbd.setTitle("CLARIN-D & WebLicht... ");
         //pbd.setAlwaysOnTop(true);
@@ -260,7 +261,8 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
             BasicTranscription importedTranscription = teiConverter.readISOTEIFromFile(teiFile.getAbsolutePath());
             importedTranscription.getBody().stratify(AbstractEventTier.STRATIFY_BY_DISTRIBUTION);
 
-            table.getModel().setTranscription(importedTranscription);
+            TierFormatTable ttf = new TierFormatTable(importedTranscription);
+            table.getModel().setTranscriptionAndTierFormatTable(importedTranscription, ttf);
             table.setupMedia();
             table.setupPraatPanel();
 

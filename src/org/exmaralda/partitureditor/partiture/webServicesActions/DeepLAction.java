@@ -24,7 +24,7 @@ import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.DeepLConnector;
-import org.exmaralda.webservices.swing.CLARINProgressDialog;
+import org.exmaralda.webservices.swing.WebServiceProgessDialog;
 import org.exmaralda.webservices.swing.DeepLParameterDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -38,7 +38,7 @@ import org.xml.sax.SAXException;
  */
 public class DeepLAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction implements ConverterListener {
     
-    CLARINProgressDialog pbd;
+    WebServiceProgessDialog pbd;
     
 
     /** Creates a new instance of NewAction
@@ -83,7 +83,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
         if (!deepLParameterDialog.approved) return;
         final HashMap<String, Object> deepLParameters = deepLParameterDialog.getDeepLParameters();
         
-        pbd = new CLARINProgressDialog(table.parent, false);
+        pbd = new WebServiceProgessDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);
         pbd.setTitle("DeepL translation... ");
         pbd.setVisible(true);

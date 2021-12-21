@@ -454,7 +454,7 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         try {
             Desktop.getDesktop().browse(new URI("https://www.deepl.com/de/pro#developer"));
         } catch (URISyntaxException | IOException ex) {
-            Logger.getLogger(WebLichtParameterDialog.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeepLParameterDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_getAPIKeyButtonActionPerformed
 

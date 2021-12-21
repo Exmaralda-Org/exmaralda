@@ -24,7 +24,7 @@ import org.exmaralda.partitureditor.jexmaralda.convert.PraatConverter;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.MAUS4EXMARaLDA;
 import org.exmaralda.webservices.MAUSConnector;
-import org.exmaralda.webservices.swing.CLARINProgressDialog;
+import org.exmaralda.webservices.swing.WebServiceProgessDialog;
 import org.exmaralda.webservices.swing.MAUSParameterDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -38,7 +38,7 @@ import org.xml.sax.SAXException;
  */
 public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    CLARINProgressDialog pbd;
+    WebServiceProgessDialog pbd;
     MAUSParameterDialog mausParameterDialog;
     
     /** Creates a new instance of NewAction
@@ -103,7 +103,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
         int span = table.getModel().getCellSpan(table.selectionStartRow, table.selectionEndCol);
         final String endID = bt.getBody().getCommonTimeline().getTimelineItemAt(table.selectionEndCol+span).getID();
 
-        pbd = new CLARINProgressDialog(table.parent, false);
+        pbd = new WebServiceProgessDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);
         pbd.setTitle("CLARIN-D & WebMAUS... ");
         //pbd.setAlwaysOnTop(true);

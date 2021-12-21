@@ -15,7 +15,7 @@ import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
-import org.exmaralda.webservices.swing.CLARINProgressDialog;
+import org.exmaralda.webservices.swing.WebServiceProgessDialog;
 import org.exmaralda.webservices.swing.MAUSFineAlignmentParameterDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
  */
 public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    CLARINProgressDialog pbd;
+    WebServiceProgessDialog pbd;
     MAUSFineAlignmentParameterDialog mausFineAlignmentParameterDialog;
     
     /** Creates a new instance of NewAction
@@ -74,7 +74,7 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
         final HashMap<String, Object> mausParameters = mausFineAlignmentParameterDialog.getMAUSFineAlignmentParameters();
                        
 
-        pbd = new CLARINProgressDialog(table.parent, false);
+        pbd = new WebServiceProgessDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);
         pbd.setTitle("CLARIN-D & WebMAUS... ");
         //pbd.setAlwaysOnTop(true);
