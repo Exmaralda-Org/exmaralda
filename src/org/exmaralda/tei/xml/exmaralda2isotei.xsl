@@ -382,18 +382,36 @@
     <!-- returns the position number of the timeline item with the given id -->
     <xsl:function name="exmaralda:timeline-position" as="xs:integer">
         <xsl:param name="timeline-id"/>
-        <xsl:value-of select="$timeline-positions/descendant::item[@id=$timeline-id]/@position"/>
+        <xsl:sequence select="$timeline-positions/descendant::item[@id=$timeline-id]/@position"/>
+        <!-- <xsl:value-of select="$timeline-positions/descendant::item[@id=$timeline-id]/@position"/> -->
     </xsl:function>
     
+    
+    <!-- 
+        FROM : https://stackoverflow.com/questions/70434184/too-many-nested-function-calls-in-xslt-tail-recursive
+        The reason your function isn't tail-recursive is that a tail-recursive function must return the result of 
+        the recursive call as is, without further processing. Your call requests further processing: 
+        the xsl:value-of instruction asks for the result to be converted to a text node.
+
+        Saxon can sometimes work out that you didn't really want this conversion, 
+        but it can only do that if you declare the type of the function result.
+
+        So you should make two improvements to your code, both of which are standard good coding practice: 
+        (a) use xsl:sequence rather than xsl:value-of to return function results, and 
+        (b) use an as attribute on xsl:function and xsl:param to declare the types of the function parameters and result.        
+    -->
+    
+    
     <!-- returns latest event that is connected to the given event through an uninterrupted chain of other events -->
-    <xsl:function name="exmaralda:last-endpoint-of-segment-chain">
-        <xsl:param name="event"/>
+    <xsl:function name="exmaralda:last-endpoint-of-segment-chain" as="xs:string">
+        <xsl:param name="event" as="node()"/>
         <xsl:choose>
             <xsl:when test="not($event/following-sibling::event) or exmaralda:timeline-position($event/following-sibling::event[1]/@start)&gt;exmaralda:timeline-position($event/@end)">
                 <xsl:value-of select="$event/@end"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/>
+                <!-- <xsl:value-of select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/> -->
+                <xsl:sequence select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/>
             </xsl:otherwise>
         </xsl:choose>        
     </xsl:function>
