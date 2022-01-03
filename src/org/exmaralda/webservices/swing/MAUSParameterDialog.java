@@ -23,7 +23,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     // gsw-CH-ZH, hun-HU, ita-IT, jpn-JP, gup-AU, mlt-MT, nor-NO, pol-PL, ron-RO, rus-RU, spa-ES, 
     // guf-AU, cat, deu, eng, fra, hun, ita, mlt, nld, pol, nze, fin, ron, spa] 
     
-    static String[][] LANGUAGES = {
+    public static String[][] LANGUAGES = {
         {"deu", "German"},
         {"eng", "English"},
         {"nld", "Dutch ; Flemish"},

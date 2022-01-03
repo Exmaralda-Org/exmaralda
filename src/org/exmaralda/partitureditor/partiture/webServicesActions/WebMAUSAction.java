@@ -59,19 +59,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
             table.clearUndo();
             table.clearSearchResult();
             table.setFrameEndPosition(-2);
-        } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (SAXException ex) {
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } catch (FSMException ex) {
+        } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
             ex.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
@@ -105,7 +93,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
 
         pbd = new WebServiceProgessDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);
-        pbd.setTitle("CLARIN-D & WebMAUS... ");
+        pbd.setTitle("WebMAUS... ");
         //pbd.setAlwaysOnTop(true);
         pbd.setVisible(true);
 

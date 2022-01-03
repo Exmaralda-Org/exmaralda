@@ -6,17 +6,20 @@
 
 package org.exmaralda.partitureditor.partiture.webServicesActions;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import org.exmaralda.alignment.FineAligner;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
-import org.exmaralda.webservices.swing.WebServiceProgessDialog;
+import org.exmaralda.webservices.WebServiceProgressListener;
 import org.exmaralda.webservices.swing.MAUSFineAlignmentParameterDialog;
+import org.exmaralda.webservices.swing.WebServiceProgessDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -27,7 +30,9 @@ import org.xml.sax.SAXException;
  * Menu: File --> New
  * @author  thomas
  */
-public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
+public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction
+        implements WebServiceProgressListener 
+        {
     
     WebServiceProgessDialog pbd;
     MAUSFineAlignmentParameterDialog mausFineAlignmentParameterDialog;
@@ -44,6 +49,8 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         try {
             table.commitEdit(true);
+            boolean proceed = table.checkSave();
+            if (!proceed) {return;}
             System.out.println("WebMAUSFineAlignmentAction!");
             webMAUSFineAlignment();
             table.transcriptionChanged = false;
@@ -76,20 +83,42 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
 
         pbd = new WebServiceProgessDialog(table.parent, false);
         pbd.setLocationRelativeTo(table.parent);
-        pbd.setTitle("CLARIN-D & WebMAUS... ");
+        pbd.setTitle("WebMAUS Fine alignment... ");
         //pbd.setAlwaysOnTop(true);
         pbd.setVisible(true);
         
+        
         BasicTranscription inputBT = table.getModel().getTranscription().makeCopy();
-        final FineAligner fineAligner = new FineAligner(inputBT);
-        fineAligner.doFineAlignment();
-        BasicTranscription outputBT = fineAligner.getTranscription(); 
+        //final FineAligner fineAligner = new FineAligner(inputBT);
+        
+        final FineAligner fineAligner = new FineAligner(inputBT, 
+                (double) mausParameters.get("MIN-INTERVAL-LENGTH"),
+                (double) mausParameters.get("MAX-INTERVAL-LENGTH"),
+                (String) mausParameters.get("LANGUAGE")
+        );
+        fineAligner.addProgressListener(this);
 
         // do this in a thread so we can report progress
         Thread mausThread = new Thread(){
             @Override
             public void run() {
-                // todo
+                try {
+                    fineAligner.doFineAlignment(); 
+                    BasicTranscription outputBT = fineAligner.getTranscription();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {   
+                                success(outputBT);
+                            } catch (IOException | JexmaraldaException ex) {
+                                Logger.getLogger(WebMAUSFineAlignmentAction.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }                        
+                    });
+                    
+                } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
+                    Logger.getLogger(WebMAUSFineAlignmentAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
         };
@@ -98,10 +127,16 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
         
     }
     
-    public void success(File praatFile, File wavFile, HashMap<String, Object> mausParameters,
-            String tierID, String startID, String endID) throws IOException, JexmaraldaException{
+    public void success(BasicTranscription transcription) throws IOException, JexmaraldaException{
         // todo
-        table.resetData();           
+        pbd.addText("Fine alignment done.");
+        table.getModel().setTranscription(transcription);
+        //table.resetData();           
+    }
+
+    @Override
+    public void processProgress(String message, double progress) {
+        pbd.addText(message);
     }
 }
 

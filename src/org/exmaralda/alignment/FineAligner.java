@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
 import org.exmaralda.partitureditor.jexmaralda.convert.PraatConverter;
 import org.exmaralda.webservices.MAUS4EXMARaLDA;
 import org.exmaralda.webservices.MAUSConnector;
+import org.exmaralda.webservices.WebServiceProgressListener;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -39,10 +41,19 @@ public class FineAligner {
     double maximumIntervalLength = 10.0;
     double minimumIntervalLength = 5.0;
     double MAX_ALIGNABLE_DURATION = 120.0;
+    String language = "deu";
 
     public FineAligner(BasicTranscription transcription) {
         this.transcription = transcription;
     }
+
+    public FineAligner(BasicTranscription transcription, double maximumIntervalLength, double minimumIntervalLength, String language) {
+        this.transcription = transcription;
+        this.maximumIntervalLength = maximumIntervalLength;
+        this.minimumIntervalLength = minimumIntervalLength;
+        this.language = language;
+    }
+
 
     public BasicTranscription getTranscription() {
         return transcription;
@@ -74,6 +85,8 @@ public class FineAligner {
         transcription.getBody().removeUnusedTimelineItems();
         Timeline timeline = transcription.getBody().getCommonTimeline();
         for (int i=0; i<timeline.getNumberOfTimelineItems()-1; i++){
+            fireProgress("**** Processing TLI " + Integer.toString(i+1)  + " of " + timeline.getNumberOfTimelineItems(), 0.0);
+            
             TimelineItem thisTimelineItem = timeline.getTimelineItemAt(i);
             TimelineItem nextTimelineItem = timeline.getTimelineItemAt(i+1);
             
@@ -86,6 +99,7 @@ public class FineAligner {
             // don't try if the interval is too long
             if ((nextTimelineItem.getTime() - thisTimelineItem.getTime())>MAX_ALIGNABLE_DURATION) {
                 System.out.println("Interval is too long: " + thisTimelineItem.getID());
+                fireProgress("Interval is too long: " + thisTimelineItem.getID(), 0.0);
                 continue;
             }
 
@@ -103,6 +117,7 @@ public class FineAligner {
                 }
                 if (eventsForThisInterval.size()>1) break;
             }
+            // don't do anything if there are more than two events in this interval
             if (eventsForThisInterval.size()!=1) continue;
             
             // this is for the case that the only event here merely intersects the interval
@@ -131,9 +146,15 @@ public class FineAligner {
             }
             text = text.trim();
             // if there are no letters (=phonemes) we can't align
-            if (text.length()==0) continue;
+            if (text.length()==0) {
+                fireProgress("No text to align." , 0.0);
+                continue;
+            }
             // if there is just one word, something's dodgy, so we better do not align
-            if (!(text.contains(" ")))continue;
+            if (!(text.contains(" "))){
+                fireProgress("Text is dodgy, just one word?", 0.0);
+                continue;
+            }
             
             System.out.println("TEXT: " + text);
             // prepare a text file
@@ -148,10 +169,11 @@ public class FineAligner {
             File wavFile = new File(transcription.getHead().getMetaInformation().getReferencedFile());
             File audioFile = m4e.convertAudioFileToMono(m4e.cutAudioFile(wavFile, thisTimelineItem.getTime(), nextTimelineItem.getTime()));
             
-            // do da WebMaus!
+            // call WebMaus!
+            fireProgress("Calling WebMaus with text: " + text.substring(0, Math.min(text.length(), 20)), 0.0);
             MAUSConnector mc = new MAUSConnector();
             HashMap<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("LANGUAGE", "deu");
+            parameters.put("LANGUAGE", language);
 
             
             // get the result as praat text grid string and write it to a temp file
@@ -163,6 +185,7 @@ public class FineAligner {
             fos2.close();                    
 
 
+            // convert Praat to a basic transcription
             PraatConverter pc = new PraatConverter();
             BasicTranscription alignedTranscription = pc.readPraatFromFile(temp.getAbsolutePath(), "UTF-8");
             alignedTranscription.getHead().getMetaInformation().setReferencedFile(audioFile.getAbsolutePath());
@@ -177,6 +200,10 @@ public class FineAligner {
             
             Timeline alignedTimeline = alignedTranscription.getBody().getCommonTimeline();
             int index = 0;
+            
+            
+// should be another loop here to make use of everything that MAUS has returned
+            
             while (index<alignedTimeline.getNumberOfTimelineItems()-1 && alignedTimeline.getTimelineItemAt(index).getTime()<minimumIntervalLength){
                 index++;
             }
@@ -198,7 +225,9 @@ public class FineAligner {
             tliNew.setTime(halfTime);
             tliNew.setType("intp");
             timeline.insertAccordingToTime(tliNew);
-            i--;
+            
+            // well: this is the easy way out
+            //i--;
 
             event.setEnd(tliNew.getID());
             event.setDescription(desc1);
@@ -212,10 +241,25 @@ public class FineAligner {
 
             transcription.getBody().getTierWithID(tierID).sort(timeline);
             
+// and said loop should end here
+            
+            
             
             
         }
         
+    }
+    
+    List<WebServiceProgressListener> listenerList = new ArrayList<>();
+
+    public void addProgressListener(WebServiceProgressListener progressListener) {
+        listenerList.add(progressListener);
+    }
+    
+    public void fireProgress(String message, double progress){
+        for (WebServiceProgressListener listener : listenerList){
+            listener.processProgress(message, progress);
+        }
     }
     
     

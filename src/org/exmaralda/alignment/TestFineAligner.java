@@ -40,8 +40,8 @@ public class TestFineAligner {
     }
 
     private void doit() throws SAXException, JexmaraldaException, IOException, JDOMException, FSMException {
-        BasicTranscription bt = new BasicTranscription("F:\\AGD-DATA\\dgd2_data\\exb-transcripts\\ISW\\ISW-_E_00023_SE_01_T_08_DF_01.exb");
-        bt.getHead().getMetaInformation().setReferencedFile("Y:\\media\\audio\\ISW\\ISW-_E_00023_SE_01_A_01_DF_01.WAV");
+        BasicTranscription bt = new BasicTranscription("C:\\Users\\thomas.schmidt\\Desktop\\TEST.exb");
+        bt.getHead().getMetaInformation().setReferencedFile("N:\\ARCHIV\\ISW\\ISW-_E_00001\\ISW-_E_00001_SE_01_A_01_DF_01.WAV");
         FineAligner fa = new FineAligner(bt);
         fa.doFineAlignment();
         BasicTranscription alignedTranscription = fa.getTranscription();

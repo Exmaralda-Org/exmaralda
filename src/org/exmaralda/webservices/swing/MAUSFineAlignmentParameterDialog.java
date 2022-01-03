@@ -21,7 +21,10 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
     public MAUSFineAlignmentParameterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.languageComboBox.setRenderer(new MAUSLanguagesComboBoxRenderer());        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,60 +36,94 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        intervalPanel = new javax.swing.JPanel();
         minLabel = new javax.swing.JLabel();
         minSpinner = new javax.swing.JSpinner();
-        minSlider = new javax.swing.JSlider();
-        maxSlider = new javax.swing.JSlider();
         maxSpinner = new javax.swing.JSpinner();
         maxLabel = new javax.swing.JLabel();
+        languagePanel = new javax.swing.JPanel();
+        languageLabel = new javax.swing.JLabel();
+        languageComboBox = new javax.swing.JComboBox<>();
         okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("MAUS Fine Alignment");
 
-        mainPanel.setLayout(new java.awt.BorderLayout());
+        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         minLabel.setText("Minimum Interval Length (s)");
-        jPanel1.add(minLabel);
+        intervalPanel.add(minLabel);
 
         minSpinner.setModel(new javax.swing.SpinnerNumberModel(5.0d, 0.0d, 10.0d, 0.2d));
-        jPanel1.add(minSpinner);
-
-        minSlider.setMajorTickSpacing(1);
-        minSlider.setMaximum(10);
-        minSlider.setPaintTicks(true);
-        minSlider.setValue(5);
-        jPanel1.add(minSlider);
-
-        maxSlider.setMajorTickSpacing(2);
-        maxSlider.setMaximum(25);
-        maxSlider.setMinimum(5);
-        maxSlider.setPaintTicks(true);
-        maxSlider.setValue(10);
-        jPanel1.add(maxSlider);
+        minSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                minSpinnerStateChanged(evt);
+            }
+        });
+        intervalPanel.add(minSpinner);
 
         maxSpinner.setModel(new javax.swing.SpinnerNumberModel(10.0d, 5.0d, 25.0d, 0.5d));
-        jPanel1.add(maxSpinner);
+        maxSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                maxSpinnerStateChanged(evt);
+            }
+        });
+        intervalPanel.add(maxSpinner);
 
         maxLabel.setText("Maximum Interval Length (s)");
-        jPanel1.add(maxLabel);
+        intervalPanel.add(maxLabel);
 
-        mainPanel.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        mainPanel.add(intervalPanel);
+
+        languageLabel.setText("Language: ");
+        languagePanel.add(languageLabel);
+
+        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(MAUSParameterDialog.LANGUAGES));
+        languagePanel.add(languageComboBox);
+
+        mainPanel.add(languagePanel);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
         okCancelPanel.add(okButton);
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         okCancelPanel.add(cancelButton);
 
         getContentPane().add(okCancelPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void minSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_minSpinnerStateChanged
+        harmonizeSpinners();
+    }//GEN-LAST:event_minSpinnerStateChanged
+
+    private void maxSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_maxSpinnerStateChanged
+        harmonizeSpinners();
+    }//GEN-LAST:event_maxSpinnerStateChanged
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        approved = true;
+        dispose();
+    }//GEN-LAST:event_okButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+       dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,20 +169,34 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
     }
 
     public HashMap<String, Object> getMAUSFineAlignmentParameters() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        result.put("LANGUAGE", ((String[])languageComboBox.getSelectedItem())[0]);
+        result.put("MIN-INTERVAL-LENGTH", minSpinner.getValue());
+        result.put("MAX-INTERVAL-LENGTH", maxSpinner.getValue());
+        
+        return result;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel intervalPanel;
+    private javax.swing.JComboBox<String> languageComboBox;
+    private javax.swing.JLabel languageLabel;
+    private javax.swing.JPanel languagePanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel maxLabel;
-    private javax.swing.JSlider maxSlider;
     private javax.swing.JSpinner maxSpinner;
     private javax.swing.JLabel minLabel;
-    private javax.swing.JSlider minSlider;
     private javax.swing.JSpinner minSpinner;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
     // End of variables declaration//GEN-END:variables
+
+    private void harmonizeSpinners() {
+        double min = (double) minSpinner.getValue();
+        double max = (double) maxSpinner.getValue();
+        if (min>max){
+            minSpinner.setValue(max);
+        }
+    }
 }
