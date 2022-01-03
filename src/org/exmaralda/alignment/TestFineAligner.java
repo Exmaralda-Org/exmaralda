@@ -45,7 +45,7 @@ public class TestFineAligner {
         FineAligner fa = new FineAligner(bt);
         fa.doFineAlignment();
         BasicTranscription alignedTranscription = fa.getTranscription();
-        alignedTranscription.writeXMLToFile("Y:\\thomas\\ISW2FLK\\4\\TEST.exb", "none");
+        alignedTranscription.writeXMLToFile("C:\\Users\\thomas.schmidt\\Desktop\\TEST_OUT.exb", "none");
         
     }
     

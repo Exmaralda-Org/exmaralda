@@ -170,10 +170,11 @@ public class FineAligner {
             File audioFile = m4e.convertAudioFileToMono(m4e.cutAudioFile(wavFile, thisTimelineItem.getTime(), nextTimelineItem.getTime()));
             
             // call WebMaus!
-            fireProgress("Calling WebMaus with text: " + text.substring(0, Math.min(text.length(), 20)), 0.0);
+            fireProgress("Calling WebMaus with text: " + text.substring(0, Math.min(text.length(), 12)) + "...", 0.0);
             MAUSConnector mc = new MAUSConnector();
             HashMap<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("LANGUAGE", language);
+            
 
             
             // get the result as praat text grid string and write it to a temp file
@@ -184,6 +185,7 @@ public class FineAligner {
             fos2.write(result.getBytes("UTF-8"));
             fos2.close();                    
 
+            audioFile.delete();
 
             // convert Praat to a basic transcription
             PraatConverter pc = new PraatConverter();
@@ -201,52 +203,69 @@ public class FineAligner {
             Timeline alignedTimeline = alignedTranscription.getBody().getCommonTimeline();
             int index = 0;
             
+            double timeConsumedSoFar = 0.0;
+            int lastOffset = 0;
+            Event currentEvent = event;
             
-// should be another loop here to make use of everything that MAUS has returned
-            
-            while (index<alignedTimeline.getNumberOfTimelineItems()-1 && alignedTimeline.getTimelineItemAt(index).getTime()<minimumIntervalLength){
-                index++;
-            }
-            
-            // not sure why this would happen, but it happens
-            if (index>=tokenIndices.size()) continue;
-            
-            int charOffset = tokenIndices.get(index);
-            
-            String desc1 = eventDescription.substring(0, charOffset);
-            String desc2 = eventDescription.substring(charOffset);
-            System.out.println(desc1 + " --- " + desc2);
+            // should be another loop here to make use of everything that MAUS has returned
+            while (index<alignedTimeline.getNumberOfTimelineItems()-1){
 
-            double halfTime = thisTimelineItem.getTime() + alignedTimeline.getTimelineItemAt(index).getTime();
-            System.out.println(halfTime);
 
-            TimelineItem tliNew = new TimelineItem();
-            tliNew.setID(timeline.getFreeID());
-            tliNew.setTime(halfTime);
-            tliNew.setType("intp");
-            timeline.insertAccordingToTime(tliNew);
+                // changed
+                while (index<alignedTimeline.getNumberOfTimelineItems()-1 
+                    && (alignedTimeline.getTimelineItemAt(index).getTime() - timeConsumedSoFar) <minimumIntervalLength){
+                    index++;
+                }
+                timeConsumedSoFar = alignedTimeline.getTimelineItemAt(index).getTime();
+
+                // not sure why this would happen, but it happens
+                if (index>=tokenIndices.size()) continue;
+
+                int charOffset = tokenIndices.get(index);
+
+                String desc1 = eventDescription.substring(lastOffset, charOffset);
+                lastOffset = charOffset;
+
+                //String desc2 = eventDescription.substring(charOffset);
+                //System.out.println(desc1 + " --- " + desc2);
+
+                double halfTime = thisTimelineItem.getTime() + alignedTimeline.getTimelineItemAt(index).getTime();
+                System.out.println(halfTime);
+
+                TimelineItem tliNew = new TimelineItem();
+                tliNew.setID(timeline.getFreeID());
+                tliNew.setTime(halfTime);
+                tliNew.setType("intp");
+                timeline.insertAccordingToTime(tliNew);
+
+                i++;
+
+                // well: this is the easy way out
+                //i--;
+
+                //event.setEnd(tliNew.getID());
+                //event.setDescription(desc1);
+                currentEvent.setEnd(tliNew.getID());
+                currentEvent.setDescription(desc1);
+
+                Event newEvent = new Event();
+                newEvent.setStart(tliNew.getID());
+                newEvent.setEnd(nextTimelineItem.getID());
+                //newEvent.setDescription(desc2);
+                currentEvent = newEvent;
+
+                transcription.getBody().getTierWithID(tierID).addEvent(newEvent);
+
+                transcription.getBody().getTierWithID(tierID).sort(timeline);
+
+            // and said loop should end here
+            }            
             
-            // well: this is the easy way out
-            //i--;
-
-            event.setEnd(tliNew.getID());
-            event.setDescription(desc1);
-
-            Event newEvent = new Event();
-            newEvent.setStart(tliNew.getID());
-            newEvent.setEnd(nextTimelineItem.getID());
-            newEvent.setDescription(desc2);
-
-            transcription.getBody().getTierWithID(tierID).addEvent(newEvent);
-
-            transcription.getBody().getTierWithID(tierID).sort(timeline);
-            
-// and said loop should end here
-            
-            
+            currentEvent.setDescription(eventDescription.substring(lastOffset));
             
             
         }
+        
         
     }
     
