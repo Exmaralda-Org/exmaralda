@@ -41,7 +41,7 @@ public class FineTuneSelectionAction extends AbstractApplicationAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** FineTuneSelectionAction ***]");
-        applicationControl.fineTuneSelection(boundary, amount);
+        applicationControl.fineTuneSelection(boundary, amount);        
     }
     
 }

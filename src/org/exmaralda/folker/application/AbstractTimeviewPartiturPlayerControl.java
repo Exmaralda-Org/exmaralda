@@ -126,6 +126,9 @@ public abstract class AbstractTimeviewPartiturPlayerControl
 
 
     public void fineTuneSelection(int boundary, int amount) {
+        // this is for issue #185
+        if (!partitur.isEditing) return;
+        
         if (boundary==FineTuneSelectionAction.LEFT_BOUNDARY){
             timeViewer.fineTuneSelectionStart(amount);
         } else {
