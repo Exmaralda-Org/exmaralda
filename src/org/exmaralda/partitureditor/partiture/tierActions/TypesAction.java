@@ -73,8 +73,7 @@ public class TypesAction extends org.exmaralda.partitureditor.partiture.Abstract
                         if (sourceType.equals(event.getDescription())){
                             event.setDescription(targetType);
                             int col = table.getModel().getTranscription().getBody().getCommonTimeline().lookupID(event.getStart());
-                            table.getModel().fireValueChanged(pos, col);
-                            count++;
+                            table.getModel().fireValueChanged(row, col);
                             count++;
                         }
                     }
@@ -102,7 +101,7 @@ public class TypesAction extends org.exmaralda.partitureditor.partiture.Abstract
                 if (optionChosen==1){
                     where = "tiers of category '" + tier.getCategory() + "'";
                 }
-                JOptionPane.showMessageDialog(table, Integer.toString(count) + " entries changed in " + tier.getDisplayName() + ".");
+                JOptionPane.showMessageDialog(table, Integer.toString(count) + " entries changed in " + where + ".");
             }
         }
     }
