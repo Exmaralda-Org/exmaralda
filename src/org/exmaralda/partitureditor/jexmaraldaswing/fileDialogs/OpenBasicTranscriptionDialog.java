@@ -8,10 +8,6 @@ package org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs;
 
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
-import org.exmaralda.partitureditor.jexmaralda.*;
-
-import java.io.*;
-import java.net.*;
 import org.xml.sax.*;
 
 /**
@@ -50,10 +46,11 @@ public class OpenBasicTranscriptionDialog extends AbstractXMLOpenDialog {
     
     
     public boolean openTranscription(java.awt.Component parent){
-        boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
+        // guess this should go -- issue #218?
+        /*boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
         if (thisIsAMac){
             setPreferredSize(new java.awt.Dimension(800, 600));
-        }
+        }*/
         int returnVal = showOpenDialog(parent);
         if(returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
             setFilename(getSelectedFile().toString());

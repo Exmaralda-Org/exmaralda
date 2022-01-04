@@ -1153,8 +1153,8 @@ public class PartitureTableWithActions extends PartitureTable
         //*************************************  CLARIN ACTIONS ***************************************
         //*********************************************************************************************
 
-        webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/mickey-mouse-9-24.gif")));
-        webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/mickey-mouse-9-24.gif")));
+        webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
+        webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
         webLichtAction = new WebLichtAction(this);
         deepLAction = new DeepLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/deepl_logo_icon_170284.png")));
 

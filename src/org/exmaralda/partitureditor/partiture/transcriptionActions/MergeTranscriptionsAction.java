@@ -6,10 +6,17 @@
 
 package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.OpenBasicTranscriptionDialog;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaralda.TierFormat;
+import org.exmaralda.partitureditor.jexmaraldaswing.MergeDialog;
 import org.exmaralda.partitureditor.partiture.*;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -32,17 +39,28 @@ public class MergeTranscriptionsAction extends org.exmaralda.partitureditor.part
     
     private void mergeTranscriptions(){
         // Create a dialog for the user to select the file he wants to open
-        OpenBasicTranscriptionDialog dialog = new OpenBasicTranscriptionDialog(table.homeDirectory);
+        //OpenBasicTranscriptionDialog dialog = new OpenBasicTranscriptionDialog(table.homeDirectory);
+        
+        MergeDialog dialog = new MergeDialog(table.parent, true);
+        dialog.setLocationRelativeTo(table);
+        dialog.setVisible(true);
         // tell the dialog to show itself and open the transcription the user selects
         // If the user hasn't cancelled and nothing has gone wrong with opening the selected file...
-        if (dialog.openTranscription(table.parent)){
+        if (dialog.approved){
             // ... get the newly read transcription from the dialog...
-            BasicTranscription newTranscription = dialog.getTranscription();
-            try {
-                table.getModel().getTranscription().merge(newTranscription);
-            } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
-                javax.swing.JOptionPane.showMessageDialog(table.parent, "Merge failed : " + ex.getMessage());                
+            for (File f : dialog.getFilesToBeMerged()){
+                try {
+                    BasicTranscription newTranscription = new BasicTranscription(f.getAbsolutePath());
+                    table.getModel().getTranscription().merge(newTranscription);
+                    for (int pos=0; pos<newTranscription.getBody().getNumberOfTiers(); pos++){
+                        Tier tier = newTranscription.getBody().getTierAt(pos);
+                        table.getModel().getTierFormatTable().addTierFormat(new TierFormat(tier.getType(), tier.getID()));                        
+                    }
+                } catch (JexmaraldaException | SAXException ex) {
+                    Logger.getLogger(MergeTranscriptionsAction.class.getName()).log(Level.SEVERE, null, ex);
+                    javax.swing.JOptionPane.showMessageDialog(table.parent, "Merge failed : " + ex.getMessage());                
+                }
+                
             }
             table.stratify(table.getModel().getTranscription());
             table.resetData();
