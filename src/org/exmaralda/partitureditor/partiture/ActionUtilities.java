@@ -58,7 +58,12 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("GATHTML5")) {dialog.setFileFilter(dialog.GATWithHTML5AudioFileFilter);}
             else if (lastFileFilter.equals("SimpleTextTranscript")) {dialog.setFileFilter(dialog.SimpleTextTranscriptFileFilter);}
             else if (lastFileFilter.equals("CHATTranscript")) {dialog.setFileFilter(dialog.CHATTranscriptFileFilter);}
+            
             else if (lastFileFilter.equals("FOLKERTranscription")) {dialog.setFileFilter(dialog.FOLKERTranscriptionFileFilter);}
+            else if (lastFileFilter.equals("FLKTranscription")) {dialog.setFileFilter(dialog.FLKTranscriptionFileFilter);}
+            else if (lastFileFilter.equals("FLNTranscription")) {dialog.setFileFilter(dialog.FLNTranscriptionFileFilter);}
+            
+            
             else if (lastFileFilter.equals("TreeTagger")) {dialog.setFileFilter(dialog.TreeTaggerFilter);}
             else if (lastFileFilter.equals("XSLImport")) {dialog.setFileFilter(dialog.XSLStylesheetImportFilter);}
             else if (lastFileFilter.equals("Transcriber")) {dialog.setFileFilter(dialog.TranscriberFileFilter);}
@@ -111,7 +116,11 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.GATWithHTML5AudioFileFilter) {lastFileFilter = "GATHTML5";}
             else if (selectedFileFilter==dialog.SimpleTextTranscriptFileFilter) {lastFileFilter = "SimpleTextTranscript";}            
             else if (selectedFileFilter==dialog.CHATTranscriptFileFilter) {lastFileFilter = "CHATTranscript";}
+            
             else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter) {lastFileFilter = "FOLKERTranscription";}
+            else if (selectedFileFilter==dialog.FLKTranscriptionFileFilter) {lastFileFilter = "FLKTranscription";}
+            else if (selectedFileFilter==dialog.FLNTranscriptionFileFilter) {lastFileFilter = "FLNTranscription";}
+            
             else if (selectedFileFilter==dialog.TreeTaggerFilter) {lastFileFilter = "TreeTagger";}
             else if (selectedFileFilter==dialog.XSLStylesheetImportFilter) {lastFileFilter = "XSLImport";}
             else if (selectedFileFilter==dialog.TranscriberFileFilter) {lastFileFilter = "Transcriber";}

@@ -1365,7 +1365,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         }
     }
     
-    public void saveTranscriptionFileAs(File f, boolean checkOverwrite){
+     public void saveTranscriptionFileAs(File f, boolean checkOverwrite){
         // check if the file exists
         // if yes, ask for user confirmation
         commitEdit();

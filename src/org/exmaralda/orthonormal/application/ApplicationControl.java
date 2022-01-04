@@ -597,18 +597,10 @@ public final class ApplicationControl implements  ListSelectionListener,
             } else {
                     nft = org.exmaralda.orthonormal.io.XMLReaderWriter.readFolkerTranscription(f);
             }
-        } catch (JDOMException ex) {
-            ex.printStackTrace();    
+        } catch (JDOMException | IOException | IllegalArgumentException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             displayException(ex);
             return;
-        } catch (IOException ex) {
-            ex.printStackTrace();    
-            displayException(ex);
-            return;
-        } catch (IllegalArgumentException ex){
-            ex.printStackTrace();    
-            displayException(ex);
-            return;            
         }
 
         mediaPath = nft.getMediaPath();            
@@ -619,7 +611,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                 setMedia(mediaPath);
                 mediaSet = true;
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                 mediaPath = displayRecordingNotFoundDialog(mediaPath, ex);
                 nft.setMediaPath(mediaPath);
             }

@@ -45,8 +45,13 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter F4TextFileFilter = new ParameterFileFilter(f4_suff, "F4 transcript (*.txt)");
     public ParameterFileFilter SimpleTextTranscriptFileFilter = new ParameterFileFilter("txt", "Simple text output (*.txt)");
     public ParameterFileFilter CHATTranscriptFileFilter = new ParameterFileFilter("cha", "CHAT transcript (*.cha)");
+    
     static String[] fl_suff = {"flk", "fln"};
     public ParameterFileFilter FOLKERTranscriptionFileFilter = new ParameterFileFilter(fl_suff, "FOLKER transcription (*.flk, *.fln)");
+    // issue #108
+    public ParameterFileFilter FLKTranscriptionFileFilter = new ParameterFileFilter("flk", "FOLKER transcription (*.flk)");
+    public ParameterFileFilter FLNTranscriptionFileFilter = new ParameterFileFilter("fln", "OrthoNormal transcription (*.fln)");
+    
     public ParameterFileFilter TreeTaggerFilter = new ParameterFileFilter("txt", "Tree Tagger Output (*.txt)");
     public ParameterFileFilter XSLStylesheetImportFilter = new ParameterFileFilter("xml", "Import via XSL Stylesheet (*.xml)");
     public ParameterFileFilter TranscriberFileFilter = new ParameterFileFilter("trs", "Transcriber file (*.trs)");

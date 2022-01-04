@@ -15,7 +15,12 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.data.EventListTranscription;
+import org.exmaralda.folker.utilities.PreferencesUtilities;
+import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.segment.CHATSegmentation;
 import org.jdom.JDOMException;
@@ -39,19 +44,27 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
-        System.out.println("exportAction!");
-        table.commitEdit(true);
         try {
+            System.out.println("exportAction!");
+            table.commitEdit(true);
             export();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(ExportAction.class.getName()).log(Level.SEVERE, null, ex);
             String message = "File could not be exported:\n" + ex.getLocalizedMessage();
-            ex.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(table, message);
+            javax.swing.JOptionPane.showMessageDialog(table, message);            
+        } catch (ParserConfigurationException | TransformerException | JexmaraldaException | FSMException | JDOMException ex) {
+            Logger.getLogger(ExportAction.class.getName()).log(Level.SEVERE, null, ex);
+            String message = "File could not be exported:\n" + ex.getLocalizedMessage();
+            javax.swing.JOptionPane.showMessageDialog(table, message);            
+        } catch (Exception ex) {
+            Logger.getLogger(ExportAction.class.getName()).log(Level.SEVERE, null, ex);
+            String message = "File could not be exported:\n" + ex.getLocalizedMessage();
+            javax.swing.JOptionPane.showMessageDialog(table, message);            
         }
     }
 
     private void export() throws SAXException, IOException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException, FSMException, JDOMException, XSLTransformException, Exception{
-        ExportFileDialog dialog = new ExportFileDialog(table.homeDirectory);
+        ExportFileDialog dialog = new ExportFileDialog(PreferencesUtilities.getProperty("workingDirectory", ""));
         ActionUtilities.setFileFilter("last-export-filter", table.getTopLevelAncestor(), dialog);
 
         int retValue = dialog.showSaveDialog(table.parent);
@@ -174,9 +187,17 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             SegmentedTranscription st = trans.toSegmentedTranscription();
             st.setEXBSource(table.filename);
             st.writeXMLToFile(filename, "none");
-        } else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter){
+        } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter) || (selectedFileFilter==dialog.FLKTranscriptionFileFilter)){
             EventListTranscription elt = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(trans, true);
             org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(elt, exportFile, new org.exmaralda.folker.data.GATParser(), 0);
+        } else if (selectedFileFilter==dialog.FLNTranscriptionFileFilter){
+            // issue #108
+            EventListTranscription elt = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(trans, true);
+            File tempFile = File.createTempFile("TEMP_FLK", "FLK");
+            tempFile.deleteOnExit();
+            org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(elt, tempFile, new org.exmaralda.folker.data.GATParser(), 2);
+            NormalizedFolkerTranscription normalizedFolkerTranscription = org.exmaralda.orthonormal.io.XMLReaderWriter.readFolkerTranscription(tempFile);
+            IOUtilities.writeDocumentToLocalFile(exportFile.getAbsolutePath(), normalizedFolkerTranscription.getDocument());            
         } else if (selectedFileFilter==dialog.TreeTaggerFilter){
             new TreeTaggerConverter().writeText(trans, exportFile);
         } else if (selectedFileFilter==dialog.F4TextFileFilter){

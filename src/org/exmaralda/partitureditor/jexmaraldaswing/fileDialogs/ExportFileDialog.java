@@ -32,9 +32,12 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         setAcceptAllFileFilterUsed(false);
         addChoosableFileFilter(EAFFileFilter);
         addChoosableFileFilter(PraatFileFilter);
-        addChoosableFileFilter(FOLKERTranscriptionFileFilter);
-        addChoosableFileFilter(TASXFileFilter);
-        addChoosableFileFilter(AGFileFilter);
+        
+        // issue #108
+        //addChoosableFileFilter(FOLKERTranscriptionFileFilter);
+        addChoosableFileFilter(FLKTranscriptionFileFilter);
+        addChoosableFileFilter(FLNTranscriptionFileFilter);
+        
         addChoosableFileFilter(TEIFileFilter);
         addChoosableFileFilter(TCFFileFilter);
         //addChoosableFileFilter(TEIModenaFileFilter);
@@ -44,6 +47,8 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         addChoosableFileFilter(F4TextFileFilter);
         addChoosableFileFilter(SRTFileFilter);
         addChoosableFileFilter(TsvFileFilter);
+        addChoosableFileFilter(TASXFileFilter);
+        addChoosableFileFilter(AGFileFilter);
         // removed 10-04-2013
         //addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
         setFileFilter(PraatFileFilter);
