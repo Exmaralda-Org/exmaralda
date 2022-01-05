@@ -32,6 +32,7 @@ public class SearchAction extends AbstractApplicationAction {
 
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** SearchAction ***]");
         ((ApplicationControl)(applicationControl)).searchDialog.setTitle(FOLKERInternationalizer.getString("dialog.search"));

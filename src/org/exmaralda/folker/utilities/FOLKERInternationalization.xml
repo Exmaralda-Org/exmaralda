@@ -526,9 +526,14 @@
                                 <translation lang="fr" trans="Demande de confirmation"/>
                         </item>
                         <item id="option.endofdocument">
-                                <translation lang="en" trans="Reached end of document."/>
-                                <translation lang="de" trans="Ende des Dokuments erreicht."/>
-                                <translation lang="fr" trans="Fin de document atteinte."/>
+                                <translation lang="en" trans="Reached end of document. "/>
+                                <translation lang="de" trans="Ende des Dokuments erreicht. "/>
+                                <translation lang="fr" trans="Fin de document atteinte. "/>
+                        </item>
+                        <item id="option.endofdocument2">
+                                <translation lang="en" trans="Reached end of document. Continue at start?"/>
+                                <translation lang="de" trans="Ende des Dokuments erreicht. Am Anfang weitermachen?"/>
+                                <translation lang="fr" trans="Fin de document atteinte. Continuer au début?"/>
                         </item>
                         <item id="option.replaceall1">
                                 <translation lang="en" trans="Replacements were made in "/>

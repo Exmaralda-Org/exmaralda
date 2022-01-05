@@ -73,10 +73,7 @@ public class ImportAction extends AbstractApplicationAction {
                 BasicTranscription bt = new BasicTranscription(f.getAbsolutePath());
                 mediaPath = bt.getHead().getMetaInformation().getReferencedFile("wav");
                 importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
-            } catch (SAXException ex) {
-                applicationControl.displayException(ex);
-                return;
-            } catch (JexmaraldaException ex) {
+            } catch (SAXException | JexmaraldaException ex) {
                 applicationControl.displayException(ex);
                 return;
             }
@@ -86,10 +83,7 @@ public class ImportAction extends AbstractApplicationAction {
                 BasicTranscription bt = converter.readAudacityFromFile(f, AudacityConverter.GAT_PAUSE_DESCRIPTOR);     
                 //System.out.println(bt.toXML());
                 importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt);
-            } catch (IOException ex) {
-                applicationControl.displayException(ex);
-                return;
-            } catch (JexmaraldaException ex) {
+            } catch (IOException | JexmaraldaException ex) {
                 applicationControl.displayException(ex);
                 return;
             }
@@ -134,7 +128,7 @@ public class ImportAction extends AbstractApplicationAction {
                 int optionChosen = ac.displayRecordingNotFoundDialog(mediaPath, ex);
                 if (optionChosen==JOptionPane.NO_OPTION) return;
                 JFileChooser mediaFileChooser = new JFileChooser();
-                mediaFileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording"));
+                mediaFileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording") + ": " + f.getName());
                 mediaFileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
                 mediaFileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));
                 int retValue2 = mediaFileChooser.showOpenDialog(ac.getFrame());

@@ -14,6 +14,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import javax.swing.text.BadLocationException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,6 +30,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.Inet4Address;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
@@ -219,7 +221,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             NO_SPEAKER_CHECK_REGEX_BASIC_CONTRIBUTION = pr.getPattern(3, "GAT_NO_SPEAKER_CONTRIBUTION", Constants.getAlphabetLanguage());
         } catch (IOException | JDOMException ex) {
             // do nothing
-            ex.printStackTrace();
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -1082,6 +1084,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     player.setSoundFile(currentMediaPath);
                 } catch (IOException ex) {
                     myself.displayException(ex);
+                    Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);                    
                 }
                 timeViewScrollPane.revalidate();
                 playerState=PLAYER_IDLE;
@@ -1133,6 +1136,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         try {
             setMedia(mediaPath);
         } catch (IOException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             displayException(ex);            
             return;
         }
@@ -1187,8 +1191,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
 
             status(FOLKERInternationalizer.getString("status.new1") + elt.getMediaPath() + FOLKERInternationalizer.getString("status.new2"));
         } catch (IOException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             displayException(ex);
-            return;
         }
     }
 
@@ -1198,9 +1202,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         EventListTranscription elt;
         try {
             elt = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXML(f);
-        } catch (Exception ex) {
+        } catch (IOException | IllegalArgumentException | ParserConfigurationException | TransformerException | JexmaraldaException | JDOMException | SAXException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             displayException(ex);
-            ex.printStackTrace();
             status(FOLKERInternationalizer.getString("error.reading") + f.getAbsolutePath() + ". ");
             return;
         }
@@ -1256,24 +1260,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             DOCUMENT_CHANGED = true;
             status(FOLKERInternationalizer.getString("status.split1") + f.getAbsolutePath() + FOLKERInternationalizer.getString("status.split2"));
 
-        } catch (SAXException ex) {
+        } catch (SAXException | JDOMException | ParserConfigurationException | TransformerException | IOException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             displayException(ex);
-            return;
-        } catch (JDOMException ex) {
-            displayException(ex);
-            return;
-        } catch (ParserConfigurationException ex) {
-            displayException(ex);
-            return;
-        } catch (TransformerConfigurationException ex) {
-            displayException(ex);
-            return;
-        } catch (TransformerException ex) {
-            displayException(ex);
-            return;
-        } catch (IOException ex) {
-            displayException(ex);
-            return;
         }
 
     }
@@ -1295,8 +1284,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 JOptionPane.showMessageDialog(applicationFrame, "Es wurden " + Integer.toString(howMany) + " Maskierungssegmente\nverschoben.");
             }
             mediaPath = elt.getMediaPath();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (HeadlessException | IOException | IllegalArgumentException | ParserConfigurationException | TransformerException | JexmaraldaException | JDOMException | SAXException ex) {
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             if (ex.getMessage().contains("Content is not allowed in prolog")){
                 String message = FOLKERInternationalizer.getString("error.opening1") 
                         + "\n" + f.getAbsolutePath() + "\n" +
@@ -1304,12 +1293,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                         + "\n" + FOLKERInternationalizer.getString("error.opening3") + "\n"
                         + ex.getLocalizedMessage();
                 displayException(message);
-                ex.printStackTrace();
                 status(FOLKERInternationalizer.getString("error.reading") + f.getAbsolutePath() + ". ");
                 return;                
             } else {
                 displayException(ex);
-                ex.printStackTrace();
                 status(FOLKERInternationalizer.getString("error.reading") + f.getAbsolutePath() + ". ");
                 return;
             }
@@ -1325,12 +1312,13 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 setMedia(mediaPath);
                 mediaSet = true;
             } catch (IOException ex) {
+                Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                 int optionChosen = displayRecordingNotFoundDialog(mediaPath, ex);
                 if (optionChosen==JOptionPane.NO_OPTION) return;
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording"));
+                fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording") + ": " + f.getName());
                 fileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
-                fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));
+                fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("default-audio-path", "")));
                 int retValue = fileChooser.showOpenDialog(getFrame());
                 if (retValue==JFileChooser.CANCEL_OPTION) return;
                 mediaPath = fileChooser.getSelectedFile().getAbsolutePath();
@@ -1439,7 +1427,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     partitur.transcriptionChanged = false;
                     System.out.println("Done saving...");
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                     displayException(ex);
                     status(FOLKERInternationalizer.getString("status.saveerror") + finalFile.getAbsolutePath() + ".");
                 } finally {
@@ -1939,7 +1927,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 status(FOLKERInternationalizer.getString("status.insertpause1") + Integer.toString(eventListTable.getSelectedRow()+ 1) + FOLKERInternationalizer.getString("status.insertpause2"));
                 DOCUMENT_CHANGED = true;
             } catch (BadLocationException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -2109,6 +2097,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             }
         } catch (UnknownHostException ex) {
             System.out.println("Could not get IP-Address");
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
         status(FOLKERInternationalizer.getString("status.start") + Integer.toString(parseLevel) + " / Player: " + PreferencesUtilities.getProperty("PlayerType", getDefaultPlayer()));
@@ -2865,16 +2855,16 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         Pattern p;
         try {
             p = Pattern.compile(searchExpression);
-        } catch (PatternSyntaxException pse){
-            pse.printStackTrace();
-            JOptionPane.showMessageDialog(getFrame(), pse.getLocalizedMessage());
+        } catch (PatternSyntaxException ex){
+            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(getFrame(), ex.getLocalizedMessage());
             return;
         }
         switch (selectedPanelIndex){
             case 0 : // segment view
                 eventListTable.requestFocusInWindow();
-                int startRow = eventListTable.getSelectedRow();
-                startRow = Math.max(0, startRow);
+                int selectedStartRow = eventListTable.getSelectedRow();                
+                int startRow = Math.max(0, selectedStartRow);
                 int startPos = 0;
                 if (eventListTable.isEditing()){
                     startPos = ((JTextField)(eventListTable.getEditorComponent())).getCaretPosition();
@@ -2883,6 +2873,17 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 //System.out.println("startRow=" + startRow + " startPos=" + startPos);
                 int[] found = eventListTableModel.getTranscription().findInSegments(p, startRow, startPos);
                 if (found==null){
+                    //JOptionPane.showMessageDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument"));
+                    // changed for issue #171
+                    if (selectedStartRow>0){
+                        int choice = JOptionPane.showConfirmDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument2"), "Continue?", JOptionPane.YES_NO_OPTION);
+                        if (choice==JOptionPane.YES_OPTION){
+                            eventListTable.getSelectionModel().clearSelection();
+                            eventListTable.getSelectionModel().setSelectionInterval(0, 0);      
+                            search(searchExpression);
+                            return;
+                        }
+                    }
                     JOptionPane.showMessageDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument"));
                     status("'" + searchExpression + "'" + FOLKERInternationalizer.getString("status.notfound"));
                     return;
@@ -2901,10 +2902,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 break;
             case 1 : // partitur view
                 partitur.requestFocusInWindow();
-                int startTier = partitur.selectionStartRow;
-                startTier = Math.max(0, startTier);
-                int startTLI = partitur.selectionStartCol;
-                startTLI = Math.max(0, startTLI);
+                int selectedStartTier = partitur.selectionStartRow;
+                int startTier = Math.max(0, selectedStartTier);
+                int selectedStartTLI = partitur.selectionStartCol;
+                int startTLI = Math.max(0, selectedStartTLI);
                 int startPos2 = 0;
                 if (partitur.isEditing){
                     startPos2 = ((JTextField)(partitur.getEditingComponent())).getCaretPosition();
@@ -2914,6 +2915,18 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
 
                 int[] found2 = partitur.getModel().findInEvents(p, startTier, startTLI, startPos2);
                 if (found2==null){
+                    //JOptionPane.showMessageDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument"));
+                    // changed for issue #171
+                    if (selectedStartTLI>0){
+                        int choice = JOptionPane.showConfirmDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument2"), "Continue?", JOptionPane.YES_NO_OPTION);
+                        if (choice==JOptionPane.YES_OPTION){
+                            partitur.clearSelection();
+                            partitur.setNewSelection(0, 0, true);
+                            search(searchExpression);
+                            return;
+                        }
+                    }
+                    
                     JOptionPane.showMessageDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument"));
                     status("'" + searchExpression  + "'" + FOLKERInternationalizer.getString("status.notfound"));
                     return;
@@ -2928,8 +2941,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 break;
             case 2 : // contribution view
                 contributionListTable.requestFocusInWindow();
-                int startRow3 = contributionListTable.getSelectedRow();
-                startRow3 = Math.max(0, startRow3);
+                int selectedStartRow3 = contributionListTable.getSelectedRow();
+                int startRow3 = Math.max(0, selectedStartRow3);
                 int startPos3 = 0;
                 if ((contributionTextPane.getText().length()>0) && (contributionTextPane.isEditable())){
                     startPos3 = contributionTextPane.getCaretPosition();
@@ -2937,6 +2950,19 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 }
                 int[] found3 = contributionListTableModel.getTranscription().findInContributions(p, startRow3, startPos3);
                 if (found3==null){
+                    //JOptionPane.showMessageDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument"));
+
+                    // changed for issue #171
+                    if (selectedStartRow3 > 0){
+                        int choice = JOptionPane.showConfirmDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument2"), "Continue?", JOptionPane.YES_NO_OPTION);
+                        if (choice==JOptionPane.YES_OPTION){
+                            contributionListTable.getSelectionModel().clearSelection();
+                            contributionListTable.getSelectionModel().setSelectionInterval(0, 0);      
+                            search(searchExpression);
+                            return;
+                        }
+                    }
+                    
                     JOptionPane.showMessageDialog(getFrame(), FOLKERInternationalizer.getString("option.endofdocument"));
                     status("'" + searchExpression + "'" + FOLKERInternationalizer.getString("status.notfound"));
                     return;
@@ -2949,9 +2975,14 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 contributionTextPane.requestFocusInWindow();
                 contributionTextPane.setSelectionStart(c.offsetToCaretPosition(found3[1]));
                 contributionTextPane.setSelectionEnd(c.offsetToCaretPosition(found3[2]));
-                status(FOLKERInternationalizer.getString("status.found1") + contributionTextPane.getSelectedText() + FOLKERInternationalizer.getString("status.found4") + (found3[0]+1) + FOLKERInternationalizer.getString("status.found3"));
+                status(FOLKERInternationalizer.getString("status.found1") + contributionTextPane.getSelectedText() 
+                        + FOLKERInternationalizer.getString("status.found4") + (found3[0]+1) + FOLKERInternationalizer.getString("status.found3"));
                 break;
 
+        }
+        // new for issue #171
+        if (this.searchDialog.isShowing()){
+            searchDialog.requestFocus();
         }
     }
 
@@ -2989,6 +3020,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 contributionTextPane.validateContribution();
                 this.validateContribution();
                 break;
+        }
+        // new for issue #171
+        if (this.searchDialog.isShowing()){
+            searchDialog.requestFocus();
         }
 
     }
@@ -3125,27 +3160,18 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                                 pbd.setVisible(false);
                                 try {
                                         javax.swing.SwingUtilities.invokeAndWait(doDisplayMaskDone);
-                                } catch (Exception ex) {
-                                        ex.printStackTrace();
+                                } catch (InterruptedException | InvocationTargetException ex) {
+                                    Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                        } catch (Exception ex) {
-                                ex.printStackTrace();
+                        } catch (IOException | ClassNotFoundException | URISyntaxException | WavFileException ex) {
+                                    Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
             };
             maskThread.start();
 
-        } catch (IOException ex) {
+        } catch (IOException | WavFileException | URISyntaxException | ClassNotFoundException ex) {
             Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-            displayException(ex);
-        } catch (WavFileException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-            displayException(ex);
-        } catch (URISyntaxException ex){
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-            displayException(ex);
-        } catch (ClassNotFoundException ex){
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);            
             displayException(ex);
         }
         
@@ -3162,6 +3188,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             try {
                 this.setMedia(out.getAbsolutePath());
             } catch (IOException ex) {
+                Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                 displayException(ex);
             }
         }
