@@ -50,7 +50,7 @@
                         
                     </tr>
                     <tr class="even">
-                        <th class="category">Contributions (length)</th>
+                        <th class="category">Contributions (duration in s)</th>
                         <xsl:for-each select="//speaker">                            
                             <td>
                                 <xsl:variable name="CONTRIBUTION-LENGTH">
@@ -186,7 +186,7 @@
                         
                     </tr>
                     <tr class="odd">
-                        <th class="category">Measured pauses (length)</th>
+                        <th class="category">Measured pauses (duration in s)</th>
                         <xsl:for-each select="//speaker">
                             <td>
                                 <xsl:value-of select="round(100*sum(//contribution[@speaker-reference=current()/@speaker-id]/descendant::pause[not(@duration='micro' or @duration='short' or @duration='medium' or @duration='long')]/@duration)) div 100.0"/>
