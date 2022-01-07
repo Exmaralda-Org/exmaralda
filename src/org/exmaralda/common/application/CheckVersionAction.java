@@ -5,6 +5,10 @@
 
 package org.exmaralda.common.application;
 
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
 import org.exmaralda.common.*;
 import org.exmaralda.common.helpers.Internationalizer;
 
@@ -35,13 +39,16 @@ public class CheckVersionAction extends javax.swing.AbstractAction {
                           + java.net.URLEncoder.encode(System.getProperty("java.version"), "UTF-8")
 		          + "&os=" + java.net.URLEncoder.encode( System.getProperty("os.name"))
 		          + "&osversion=" + java.net.URLEncoder.encode( System.getProperty("os.version"));            
-            org.exmaralda.partitureditor.partiture.BrowserLauncher.openURL(url);
+            //org.exmaralda.partitureditor.partiture.BrowserLauncher.openURL(url);
+            Desktop.getDesktop().browse(new URI(url));
         } catch (java.io.IOException ioe){
             javax.swing.JOptionPane errorDialog = new javax.swing.JOptionPane();
             errorDialog.showMessageDialog(  null,
                                             ioe.getLocalizedMessage(),
                                             "IO Error",
                                             javax.swing.JOptionPane.INFORMATION_MESSAGE);                           
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(CheckVersionAction.class.getName()).log(Level.SEVERE, null, ex);
         }                        
     }
 
