@@ -32,7 +32,6 @@
         </publicationStmt>
     </xsl:template>
 
-
     <!-- teiHeader extension: profileDesc/particDesc and revisionDesc -->
     <xsl:template match="//tei:teiHeader[../tei:text/tei:body/tei:u/@who]">
         <xsl:copy>
@@ -81,23 +80,12 @@
                             <xsl:value-of select="concat('TLI_', $n)"/>
                         </xsl:attribute>
                     </when>
-                    
-                    <!-- Check here if it will be split and if so, create more <when> -->
-                    <!-- fix to whatch out for non-tokenizable text() -->
-                    
-                    <xsl:variable name="segs" select="count(tokenize(text(), '[!\?\.…]+( [A-Z]|$)'))"/>
-                    <xsl:if test="$segs &gt; 2">
-                        <xsl:for-each select="tokenize(text(), '[-!\?\.…\)]+( |$)')">
-                        <xsl:if test="position() &lt; $segs -1">
-                        <when>
-                            <xsl:attribute name="xml:id">
-                                <xsl:value-of select="concat('TLI_', $n, '_', position())"/>
-                            </xsl:attribute>
-                        </when>
-                        </xsl:if>
-                    </xsl:for-each>
-                    </xsl:if>
                 </xsl:for-each>
+                <when>
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="concat('TLI_', count(//tei:u) + 1)"/>
+                    </xsl:attribute>
+                </when>
             </timeline>
             <xsl:apply-templates/>
         </xsl:copy>
@@ -123,64 +111,29 @@
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="$id"/>
                 </xsl:attribute>
-                <!-- The text of the contribution needs to be parsed into <seg>s. -->
-                <xsl:apply-templates select="text()"/>
-            </u>
-        </annotationBlock>
-    </xsl:template>
-
-    <!-- This is where we parse the <u> text content into segs according to punctuation -->
-    <xsl:template match="//tei:u[not(tei:note)]/text()">
-        <xsl:variable name="id" select="ancestor::tei:u/@xml:id"/>
-        <xsl:variable name="n" select="ancestor::tei:u/@n"/>
-        <!-- We have to include all characters used, also transcription conventions symbols, tokenizing is done later -->
-        <!-- If the utterance end symbol is missing, TEI will be bad, text ends up here: //u/text(). -->
-        <!-- If there's a capital letter after a pause, this will become a new <seg>, sorry. -->
-        <xsl:analyze-string select="." regex="([-{{}}\(\)’',;/ 0-9\p{{L}}]|([-…]|\.{{2,}}) ?['\p{{Ll}}])+[-!\?\.…\)]+( |$)">
-            <xsl:matching-substring>
                 <seg>
-                    <!-- The position() is the number of the <seg> being created somehow. -->
+                    <xsl:attribute name="type">
+                        <xsl:text>contribution</xsl:text>
+                    </xsl:attribute>
                     <xsl:attribute name="xml:id">
-                        <xsl:value-of select="concat('seg', position(), '_', $id)"/>
+                        <xsl:value-of select="concat('seg', '_', $id)"/>
                     </xsl:attribute>
                     <anchor>
                         <xsl:attribute name="synch">
-                            <xsl:choose>
-                                <xsl:when test="position()=1">
-                                    <xsl:value-of select="concat('TLI_', $n)"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat('TLI_', $n, '_', position() - 1)"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:value-of select="concat('TLI_', $n)"/>
                         </xsl:attribute>
                     </anchor>
                     <!-- remove all trailing spaces, then add one, to avoid double spaces -->
-                    <xsl:value-of select="concat(normalize-space(.), ' ')"/>
-                    <!-- only write the last original TLI if there is no matching-substring -->
+                    <xsl:value-of select="concat(normalize-space(text()), ' ')"/>
                     <anchor>
                         <xsl:attribute name="synch">
-                            <xsl:choose>
-                                <xsl:when test="position()=last()">
-                                    <xsl:value-of select="concat('TLI_', number($n) + 1)"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat('TLI_', $n, '_', position())"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:value-of select="concat('TLI_', number($n) + 1)"/>
                         </xsl:attribute>
                     </anchor>
                 </seg>
-            </xsl:matching-substring>
-            <xsl:non-matching-substring>
-                <xsl:apply-templates select=".">
-                    <xsl:with-param name="id" select="$id"/>
-                    <xsl:with-param name="n" select="$n"/>
-                </xsl:apply-templates>
-            </xsl:non-matching-substring>
-        </xsl:analyze-string>
+            </u>
+        </annotationBlock>
     </xsl:template>
-
     
     <!-- Interviewer comment notes are treated as incidents, since they describe things, though they are in fact annotations without bases -->
 
@@ -200,7 +153,6 @@
             </span>
         </spanGrp>
     </xsl:template>
-
 
     <!-- independent <note>s appearing as siblings of <u>s, in some cases they are rather really long spans, 
          but this is good enough for now since the scope is not made explicit. -->
