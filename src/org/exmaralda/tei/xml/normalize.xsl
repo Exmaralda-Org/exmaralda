@@ -39,7 +39,8 @@
                 <tei:seg type="contribution">
                     <xsl:attribute name="xml:id" select="generate-id()"/>
                     <!-- check if it needs a redundant start anchor -->
-                    <xsl:if test="not(*[1][self::tei:anchor])">
+                    <!-- if this is untokenized ISO/TEI there might be text before the <anchor> -->
+                    <xsl:if test="not(node()[self::tei:anchor and position()=1])">
                         <tei:anchor>
                             <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/>
                         </tei:anchor>
@@ -47,7 +48,7 @@
                     <!-- collect the descendants, but not the <seg>s -->
                     <xsl:apply-templates select="descendant::*[not(self::seg)]|text()"/>
                     <!-- check if it needs a redundant end anchor -->
-                    <xsl:if test="not(*[last()][self::tei:anchor])">
+                    <xsl:if test="not(node()[self::tei:anchor and position()=last()])">
                         <tei:anchor>
                             <xsl:attribute name="synch" select="ancestor-or-self::*[@end][1]/@end"/>
                         </tei:anchor>
