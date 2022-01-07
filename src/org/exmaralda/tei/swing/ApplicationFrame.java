@@ -13,6 +13,7 @@ package org.exmaralda.tei.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
@@ -33,6 +34,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.utilities.HTMLDisplayDialog;
 import org.exmaralda.partitureditor.fsm.FSMException;
@@ -47,6 +50,7 @@ import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter; 
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -607,8 +611,9 @@ public class ApplicationFrame extends javax.swing.JFrame {
             fos.write(htmlString.getBytes("UTF-8"));
             fos.close();
             System.out.println("document written.");
-            BrowserLauncher.openURL(tempHTML.toURI().toURL().toString());
-        } catch (Exception ex) {
+            //BrowserLauncher.openURL(tempHTML.toURI().toURL().toString());
+            Desktop.getDesktop().browse(tempHTML.toURI());
+        } catch (IOException | ParserConfigurationException | TransformerException | SAXException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
         }

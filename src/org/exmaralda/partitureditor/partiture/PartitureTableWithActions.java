@@ -38,6 +38,7 @@ import org.exmaralda.partitureditor.partiture.menus.EventPopupMenu;
 import org.exmaralda.partitureditor.partiture.menus.TablePopupMenu;
 
 import com.klg.jclass.table.*;
+import java.awt.Desktop;
 import java.awt.Font;
 
 import javax.swing.*;
@@ -46,6 +47,8 @@ import java.util.*;
 import java.io.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.DocumentListener;
@@ -1291,23 +1294,30 @@ public class PartitureTableWithActions extends PartitureTable
                           + java.net.URLEncoder.encode(System.getProperty("java.version"), "UTF-8")
 		          + "&os=" + java.net.URLEncoder.encode( System.getProperty("os.name"))
 		          + "&osversion=" + java.net.URLEncoder.encode( System.getProperty("os.version"));            
-            BrowserLauncher.openURL(url);
+            //BrowserLauncher.openURL(url);
+            Desktop.getDesktop().browse(new URI(url));
+            
         } catch (IOException ioe){
             javax.swing.JOptionPane.showMessageDialog(
                     this,ioe.getLocalizedMessage(),"IO Error",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
         }                        
     }
     
     /** opens the EXMARaLDA website */
     void exmaraldaOnTheWeb(){
         try{
-            String url = "http://www.rrz.uni-hamburg.de/exmaralda";
-            BrowserLauncher.openURL(url);
+            String url = "http://www.exmaralda.org";
+            Desktop.getDesktop().browse(new URI(url));
+            
         } catch (IOException ioe){
             javax.swing.JOptionPane.showMessageDialog(  this,
             ioe.getLocalizedMessage(),
             "IO Error",
             javax.swing.JOptionPane.INFORMATION_MESSAGE);                           
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
     
@@ -2090,12 +2100,16 @@ public class PartitureTableWithActions extends PartitureTable
     public void launchBrowser(File file){
         try{
             String url = file.toURI().toString();
-            BrowserLauncher.openURL(url);
+            //BrowserLauncher.openURL(url);
+            Desktop.getDesktop().browse(new URI(url));
+            
         } catch (IOException ioe){
             javax.swing.JOptionPane.showMessageDialog(  this,
             ioe.getLocalizedMessage(),
             "IO Error",
             javax.swing.JOptionPane.INFORMATION_MESSAGE);                           
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

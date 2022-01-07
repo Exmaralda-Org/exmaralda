@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.fileActions;
 
+import java.awt.Desktop;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -16,6 +17,7 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.common.corpusbuild.FileIO;
@@ -163,7 +165,9 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         ActionUtilities.memorizeFileFilter("last-output-filter", table.getTopLevelAncestor(), dialog);
         
         if (filename.endsWith("html") || filename.endsWith("htm")){
-            BrowserLauncher.openURL(new File(filename).toURI().toURL().toString());
+            //BrowserLauncher.openURL(new File(filename).toURI().toURL().toString());
+            Desktop.getDesktop().browse(new File(filename).toURI());
+            
         }
 
         table.status("Transcription output as " + filename);

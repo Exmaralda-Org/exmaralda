@@ -9,12 +9,15 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 import org.exmaralda.common.helpers.Internationalizer;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JList;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -511,8 +514,12 @@ public class EditLanguagesDialog extends JEscapeDialog {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         try {
             org.exmaralda.partitureditor.partiture.BrowserLauncher.openURL("http://www.ethnologue.com/");
+            Desktop.getDesktop().browse(new URI("http://www.ethnologue.com/"));
+            
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EditLanguagesDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 

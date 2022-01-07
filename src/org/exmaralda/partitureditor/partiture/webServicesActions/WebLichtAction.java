@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.webServicesActions;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +26,6 @@ import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.exmaralda.partitureditor.jexmaralda.convert.TCFConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEITCFMerger;
-import org.exmaralda.partitureditor.partiture.BrowserLauncher;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.WebLichtConnector;
 import org.exmaralda.webservices.swing.WebServiceProgessDialog;
@@ -218,7 +218,9 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                         fos.write(transformed.getBytes("UTF-8"));
                         fos.close();    
                         pbd.addText("HTML written to " + html);
-                        BrowserLauncher.openURL(htmlFile.toURI().toURL().toString());                        
+                        //BrowserLauncher.openURL(htmlFile.toURI().toURL().toString());                        
+                        Desktop.getDesktop().browse(htmlFile.toURI());
+                        
                     }
                     
                     

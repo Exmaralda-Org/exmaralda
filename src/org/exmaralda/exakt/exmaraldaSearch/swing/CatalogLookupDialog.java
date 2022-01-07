@@ -11,10 +11,15 @@
 
 package org.exmaralda.exakt.exmaraldaSearch.swing;
 
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -28,7 +33,6 @@ import javax.xml.transform.TransformerException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
-import org.exmaralda.partitureditor.partiture.BrowserLauncher;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -332,10 +336,14 @@ public class CatalogLookupDialog extends javax.swing.JDialog implements ListSele
         if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
             String url = e.getURL().toString();
             try {
-                BrowserLauncher.openURL(url);
+                //BrowserLauncher.openURL(url);
+                Desktop.getDesktop().browse(new URI(url.toString()));
+                
             } catch (IOException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(CatalogLookupDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
