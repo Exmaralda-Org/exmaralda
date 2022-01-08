@@ -513,7 +513,7 @@ public class EditLanguagesDialog extends JEscapeDialog {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         try {
-            org.exmaralda.partitureditor.partiture.BrowserLauncher.openURL("http://www.ethnologue.com/");
+            //org.exmaralda.partitureditor.partiture.BrowserLauncher.openURL("http://www.ethnologue.com/");
             Desktop.getDesktop().browse(new URI("http://www.ethnologue.com/"));
             
         } catch (IOException ex) {

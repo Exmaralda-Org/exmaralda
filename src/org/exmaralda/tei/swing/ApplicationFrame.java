@@ -45,7 +45,6 @@ import org.exmaralda.partitureditor.jexmaralda.convert.ELANConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TranscriberConverter;
-import org.exmaralda.partitureditor.partiture.BrowserLauncher;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.output.Format;
