@@ -100,6 +100,7 @@ public class TEIConverter extends AbstractConverter {
     public static final int HIAT_ISO_METHOD = 7;
     public static final int CGAT_MINIMAL_ISO_METHOD = 8;
     public static final int ISO_EVENT_TOKEN_METHOD = 9;
+    public static final int ISO_GENERIC_METHOD = 10;
 
     
     String language = "en";

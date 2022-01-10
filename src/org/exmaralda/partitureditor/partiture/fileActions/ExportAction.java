@@ -160,6 +160,11 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
                     ec.writeEventTokenISOTEIToFile(trans, filename);
                     break;
+                case TEIConverter.ISO_GENERIC_METHOD :
+                    ec = new TEIConverter();
+                    ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
+                    ec.writeGenericSegmentedISOTEIToFile(trans, filename, null);
+                    break;
             }
         } else if (selectedFileFilter==dialog.TEIModenaFileFilter){
             TEIConverter ec = new TEIConverter("/org/exmaralda/partitureditor/jexmaralda/xsl/EXMARaLDA2TEI_Modena.xsl");
