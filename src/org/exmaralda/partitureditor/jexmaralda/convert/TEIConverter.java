@@ -7,7 +7,6 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.*;
-import java.net.URI;
 import java.util.HashSet;
 
 import java.util.Iterator;
@@ -97,7 +96,7 @@ public class TEIConverter extends AbstractConverter {
     public static final int HIAT_METHOD = 3;
     public static final int CGAT_METHOD = 4;
     public static final int HIAT_NEW_METHOD = 5;
-    public static final int ISO_GENERIC_METHOD = 6;
+    public static final int ISO_NON_SEGMENTED_METHOD = 6;
     public static final int HIAT_ISO_METHOD = 7;
     public static final int CGAT_MINIMAL_ISO_METHOD = 8;
     public static final int ISO_EVENT_TOKEN_METHOD = 9;
@@ -147,7 +146,7 @@ public class TEIConverter extends AbstractConverter {
     }
     
     
-    public void writeGenericISOTEIToFile(BasicTranscription bt, String path) throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
+    public void writeNonSegmentedISOTEIToFile(BasicTranscription bt, String path) throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
         StylesheetFactory sf = new StylesheetFactory(true);
         String result = sf.applyInternalStylesheetToString(EXMARaLDA2GENERIC_ISO_TEI_XSL, bt.toXML());
         Document teiDoc = IOUtilities.readDocumentFromString(result);

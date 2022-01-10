@@ -115,7 +115,7 @@ public class EXMARaLDATransformer {
             } else if (parameters[1].startsWith("cGAT_MINIMAL")){
                 teiConverter.writeCGATMINIMALISOTEIToFile(transcription, temp.getAbsolutePath(), null); 
             } else {
-                teiConverter.writeGenericISOTEIToFile(transcription, temp.getAbsolutePath());
+                teiConverter.writeNonSegmentedISOTEIToFile(transcription, temp.getAbsolutePath());
             }
             baseDocument = IOUtilities.readDocumentFromLocalFile(temp.getAbsolutePath());
         }

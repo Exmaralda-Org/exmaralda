@@ -42,7 +42,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         if (hiatISORadioButton2.isSelected()) return TEIConverter.HIAT_ISO_METHOD;
         if (cGatSegmentationRadioButton.isSelected()) return TEIConverter.CGAT_METHOD;
         if (genericRadioButton.isSelected()) return TEIConverter.GENERIC_METHOD;
-        if (isoGenericRadioButton.isSelected()) return TEIConverter.ISO_GENERIC_METHOD;
+        if (isoGenericRadioButton.isSelected()) return TEIConverter.ISO_NON_SEGMENTED_METHOD;
         if (modenaMethodRadioButton.isSelected()) return TEIConverter.MODENA_METHOD;
         return TEIConverter.GENERIC_METHOD;
     }
@@ -93,7 +93,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         isoGenericRadioButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         isoGenericRadioButton.setForeground(new java.awt.Color(0, 0, 102));
         isoGenericRadioButton.setSelected(true);
-        isoGenericRadioButton.setText("ISO - Generic");
+        isoGenericRadioButton.setText("ISO - No segmentation");
         isoGenericRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isoGenericRadioButtonActionPerformed(evt);
