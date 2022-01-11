@@ -58,7 +58,7 @@
 			</xsl:when>
 			<!-- <xsl:when test="string-length(translate(text(),'&#x2026;&#x02D9;.?!',''))=0"> -->
 			<!-- issue #308 : rather than doing nothing, it should spit out puncutation, as long as it is not HIAT and not a space character -->
-			<xsl:when test="string-length(translate(text(),'&#x0020;&#x2026;&#x02D9;.?!',''))=0 and starts-with(name(), 'HIAT')">
+			<xsl:when test="string-length(translate(text(),'&#x0020;&#x2026;&#x02D9;.?!',''))=0 and starts-with(@n, 'HIAT')">
 				<!-- do nothing -->
 			</xsl:when>
 			<xsl:when test="name(preceding-sibling::*[1])='nts' and preceding-sibling::*[1]/text()='(' and text()='('">
