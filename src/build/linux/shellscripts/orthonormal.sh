@@ -25,7 +25,9 @@ CP_JAVA_2=$WORKINGDIR/lib/jdom.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/xer
 
 # AUDIO/VIDEO
 CP_JAVA_4=$WORKINGDIR/lib/ips.audiotools.jar:$WORKINGDIR/lib/ips.commons.jar:$WORKINGDIR/lib/elan-5.8.jar
-CP_JAVA_4b=$WORKINGDIR/lib/javafx-base-11.jar:$WORKINGDIR/lib/javafx-base-11-linux.jar:$WORKINGDIR/lib/javafx-controls-11.jar:$WORKINGDIR/lib/javafx-graphics-11.jar:$WORKINGDIR/lib/javafx-graphics-11-linux.jar:$WORKINGDIR/lib/javafx-media-11.jar:$WORKINGDIR/lib/javafx-media-11-linux.jar:$WORKINGDIR/lib/javafx-swing-11.jar:$WORKINGDIR/lib/javafx-swing-11-linux.jar
+##CP_JAVA_4b=$WORKINGDIR/lib/javafx-base-11.jar:$WORKINGDIR/lib/javafx-base-11-linux.jar:$WORKINGDIR/lib/javafx-controls-11.jar:$WORKINGDIR/lib/javafx-graphics-11.jar:$WORKINGDIR/lib/javafx-graphics-11-linux.jar:$WORKINGDIR/lib/javafx-media-11.jar:$WORKINGDIR/lib/javafx-media-11-linux.jar:$WORKINGDIR/lib/javafx-swing-11.jar:$WORKINGDIR/lib/javafx-swing-11-linux.jar
+## changed for issue #246
+CP_JAVA_4b=$WORKINGDIR/lib/javafx.base.jar:$WORKINGDIR/lib/javafx.controls.jar:$WORKINGDIR/lib/javafx.media.jar:$WORKINGDIR/lib/javafx.swing.jar:$WORKINGDIR/lib/javafx.graphics.jar
 
 # HTTP CLIENT
 CP_JAVA_5=$WORKINGDIR/lib/httpcore-4.4.3.jar:$WORKINGDIR/lib/httpclient-4.5.1.jar:$WORKINGDIR/lib/httpmime-4.5.1.jar
