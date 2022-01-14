@@ -33,7 +33,7 @@
     
     <!-- path to the java archive with the EXMARaLDA code -->
     <property name="exmaralda_jar" location="${base_directory}/dist/EXMARaLDA_NetBeans_Project.jar"/>
-    <property name="application_jar" location="${base_directory}/dist/EXMARaLDA_APPLICATION.jar"/>
+    <property name="application_jar" location="${base_directory}/dist/EXMARaLDA_NetBeans_Project.jar"/>
     
     <!-- directory for temporarily placing built stuff -->
     <property name="temp_directory" location="D:\EXMARaLDA_BUILD\temp"/>
@@ -65,9 +65,9 @@
         <delete dir="${temp_directory}"/>
         <mkdir dir="${temp_directory}"/>
         <copy file="${application_jar}" todir="${target_lib_directory}"/>
-        <move file="${target_lib_directory}\EXMARaLDA_APPLICATION.jar" tofile="${target_lib_directory}\EXMARaLDA.jar"/>
+        <move file="${target_lib_directory}\EXMARaLDA_NetBeans_Project.jar" tofile="${target_lib_directory}\EXMARaLDA.jar"/>
         <copy file="${application_jar}" todir="${temp_directory}"/>
-        <move file="${temp_directory}/EXMARaLDA_APPLICATION.jar" tofile="${temp_directory}/EXMARaLDA.jar"/>
+        <move file="${temp_directory}/EXMARaLDA_NetBeans_Project.jar" tofile="${temp_directory}/EXMARaLDA.jar"/>
         <!-- <copy todir="${temp_directory}">
             <fileset dir="${icons_directory}">
                 <include name="*.ico"/>
@@ -132,6 +132,7 @@
     
     <property name="JAVA_DIR" value="D:\Dropbox\EXMARaLDA_Build\2021_ISSUE_291_BINARIES\Linux JRE\OpenJDK11U-jdk_x64_linux_hotspot_11.0.13_8\jdk-11.0.13+8"/>
     <property name="JAVA_BIN_DIR" value="${JAVA_DIR}/bin"/>
+    <property name="JAVA_FX_LIB_DIRECTORY" value="D:\EXMARaLDA_GIT\exmaralda\src\build\linux\javafx-sdk-17.0.1\lib"/>
     
     <!-- build a vintage gnuzipped tarball with shell scripts - I think this one works -->
     <target name="linux_tarballs" depends="prepare_target_directory, copy_temp">
@@ -154,15 +155,25 @@
                 <include name="*.jar"/>
                 <include name="*.zip"/>
                 <exclude name="*11-win.jar"/>
+                <exclude name="*11-mac.jar"/>
                 <exclude name="ojdbc6.jar"/>
                 <exclude name="ant.jar"/>
                 <exclude name="vlcj-2.1.0.jar"/>                                            
+                <exclude name="elan-5.8.jar"/>                                            
             </tarfileset>
+            
+            <!-- new for issue #246 -->
+            <tarfileset dir="${JAVA_FX_LIB_DIRECTORY}" prefix="exmaralda${exmaralda_version}/lib">
+                <include name="*.jar"/>
+                <include name="*.so"/>
+            </tarfileset>
+            
             
             <!-- The java binaries in executable mode (does not seem to work fine) -->
             <tarfileset dir="${JAVA_BIN_DIR}" prefix="exmaralda${exmaralda_version}/adoptopenjdk-11-hotspot-amd64/bin/" filemode="755">
                 <include name="*"/>
             </tarfileset>          
+            
             <!-- All but the java binaries do not need executable mode -->
             <tarfileset dir="${JAVA_DIR}" prefix="exmaralda${exmaralda_version}/adoptopenjdk-11-hotspot-amd64">
                 <include name="**"/>
