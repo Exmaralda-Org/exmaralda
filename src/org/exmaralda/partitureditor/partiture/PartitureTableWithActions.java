@@ -2145,7 +2145,7 @@ public class PartitureTableWithActions extends PartitureTable
      * @return  */
     public boolean setupMedia(){
         
-        System.out.println("(1a) PartiturTableWithActions: setupMedia");
+        System.out.println("(1a) PartiturEditor: setupMedia");
         // the partitur editor must handle the setup of the time viewer
         // this is awkward but I'm only human
         if (getTopLevelAncestor() instanceof PartiturEditor){
@@ -2590,7 +2590,7 @@ public class PartitureTableWithActions extends PartitureTable
                 java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");
 
         String os = System.getProperty("os.name").substring(0,3);
-        String jreVersion = System.getProperty("java.version");
+        //String jreVersion = System.getProperty("java.version");
         String defaultPlayer = "BAS-Audio-Player";
         if (os.equalsIgnoreCase("mac")){
             defaultPlayer = "AVF-Player";

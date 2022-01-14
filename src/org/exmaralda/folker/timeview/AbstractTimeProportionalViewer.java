@@ -98,47 +98,66 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             //player = new JMFPlayer();
             player = new BASAudioPlayer();
             player.setSoundFile(soundFilePath);
-        } catch (Exception ioe){
+            System.out.println("File for timeviewer set via BASAudioPlayer.");
+        } catch (IOException ioe){
+            // rearranged this 14-01-2022, the linux case was not catered for
+            System.out.println("BASAudioPlayer could not set file for TimeViewer");
             String os = System.getProperty("os.name").substring(0,3);
-            if (os.equalsIgnoreCase("mac")) {
-                try {
-                    //player = new QuicktimePlayer();
-                    player = new AVFPlayer();
-                    player.setSoundFile(soundFilePath);
-                } catch (IOException ex) {
+            switch(os.toLowerCase()){
+                // ******************************************
+                case "mac" :
                     try {
-                        player = new JavaFXPlayer();
+                        player = new AVFPlayer();
                         player.setSoundFile(soundFilePath);
-                    } catch (IOException ex3){
-                        throw new IOException("No available player can open this file");                                                    
-                    }
-                }
-            } else if (os.equalsIgnoreCase("win")){
-                try {
-                    //player = new ELANDSPlayer();
-                    player = new JDSPlayer();
-                    player.setSoundFile(soundFilePath);
-                } catch (IOException ex) {
-                    //if (QuicktimePlayer.isQuicktimeAvailable()){
-                            //player = new QuicktimePlayer();
-                    System.out.println("JDSPlayer could not set file for TimeViewer");
-                    try {
-                        player = new JavaFXPlayer();
-                        player.setSoundFile(soundFilePath);
-                    } catch (IOException ex2){
-                        System.out.println("JavaFXPlayer could not set file for TimeViewer");
+                        System.out.println("File for timeviewer set via AVFPlayer.");
+                    } catch (IOException ex) {
                         try {
-                            player = new MMFPlayer();
+                            System.out.println("AVFPlayer could not set file for TimeViewer");
+                            player = new JavaFXPlayer();
                             player.setSoundFile(soundFilePath);
-                            System.out.println("MMFPlayer could not set file for TimeViewer");
+                            System.out.println("File for timeviewer set via JavaFXPlayer.");
                         } catch (IOException ex3){
+                            System.out.println("JavaFXPlayer could not set file for TimeViewer");
                             throw new IOException("No available player can open this file");                                                    
                         }
                     }
-                   //}
-                }
-            } else {
-                throw new IOException(ioe);
+                    break;                    
+                // ******************************************
+                case "win" :
+                    try {
+                        player = new JDSPlayer();
+                        player.setSoundFile(soundFilePath);
+                        System.out.println("File for timeviewer set via JDSPlayer.");
+                    } catch (IOException ex) {
+                        System.out.println("JDSPlayer could not set file for TimeViewer");
+                        try {
+                            player = new JavaFXPlayer();
+                            player.setSoundFile(soundFilePath);
+                            System.out.println("File for timeviewer set via JavaFXPlayer.");
+                        } catch (IOException ex2){
+                            System.out.println("JavaFXPlayer could not set file for TimeViewer");
+                            try {
+                                player = new MMFPlayer();
+                                player.setSoundFile(soundFilePath);
+                                System.out.println("File for timeviewer set via MMFPlayer.");
+                            } catch (IOException ex3){
+                                System.out.println("MMFPlayer could not set file for TimeViewer");
+                                throw new IOException("No available player can open this file");                                                    
+                            }
+                        }
+                    }
+                    break;
+                // ******************************************
+                case "linux" :
+                    try {
+                        player = new JavaFXPlayer();
+                        player.setSoundFile(soundFilePath);
+                        System.out.println("File for timeviewer set via BASPlayer.");
+                    } catch (IOException ex) {
+                        System.out.println("JavaFXPlayer could not set file for TimeViewer");
+                        throw new IOException("No available player can open this file");                                                                            
+                    }
+                    break;
             }
         }
         // need a better, more reliable way to detect sound duration here
