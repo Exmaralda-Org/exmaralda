@@ -340,10 +340,10 @@ public class PartitureTableWithActions extends PartitureTable
 
         ipaPanel = new org.exmaralda.partitureditor.ipapanel.IPADialog(parent, false);
         
-        if (parent instanceof PartiturEditor){
+        /*if (parent instanceof PartiturEditor){
             quickMediaOpenDialog = new QuickMediaOpenDialog(parent, this, false);    
             quickMediaOpenDialog.setLocationRelativeTo(parent);
-        }
+        }*/
         
         if (parent instanceof PartiturEditor){
             multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);

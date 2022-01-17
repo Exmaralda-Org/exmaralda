@@ -112,7 +112,7 @@ public class PartiturEditor extends javax.swing.JFrame
         table.annotationDialog.addWindowListener(this);
         table.ipaPanel.addWindowListener(this);
         table.multimodalDialog.addWindowListener(this);
-        table.quickMediaOpenDialog.addWindowListener(this);
+        //table.quickMediaOpenDialog.addWindowListener(this);
         table.svgDialog.addWindowListener(this);
              
         // init the other GUI components      
@@ -580,9 +580,9 @@ public class PartiturEditor extends javax.swing.JFrame
             menuBar.viewMenu.showMultimodalPanelCheckBoxMenuItem.setSelected(false);
         } else if (source==table.svgDialog){
             menuBar.viewMenu.showSVGPanelCheckBoxMenuItem.setSelected(false);
-        } else if (source==table.quickMediaOpenDialog){
+        } /*else if (source==table.quickMediaOpenDialog){
             menuBar.viewMenu.showQuickMediaOpenCheckBoxMenuItem.setSelected(false);
-        } else { // i.e. source is this
+        } */ else { // i.e. source is this
         }
     }
     
