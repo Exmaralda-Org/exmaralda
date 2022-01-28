@@ -148,16 +148,18 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
                     }
                     break;
                 // ******************************************
-                case "linux" :
+                case "lin" :
                     try {
                         player = new JavaFXPlayer();
                         player.setSoundFile(soundFilePath);
-                        System.out.println("File for timeviewer set via BASPlayer.");
+                        System.out.println("File for timeviewer set via JavaFXPlayer.");
                     } catch (IOException ex) {
                         System.out.println("JavaFXPlayer could not set file for TimeViewer");
                         throw new IOException("No available player can open this file");                                                                            
                     }
                     break;
+                default : 
+                    throw new IOException("OS not recognized. Could not try native player for " + os);
             }
         }
         // need a better, more reliable way to detect sound duration here

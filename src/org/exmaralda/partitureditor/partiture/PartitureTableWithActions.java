@@ -2514,6 +2514,9 @@ public class PartitureTableWithActions extends PartitureTable
                     checkSave();
                 }
                 BasicTranscription bt = new BasicTranscription(file);
+                // # issue #315
+                stratify(bt);
+                
                 getModel().setTranscription(bt);
                 this.setFilename(file);
                 this.setupMedia();

@@ -36,6 +36,7 @@ public class CheckStructureErrorsAction
 		super(text, icon, c);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent e) {
 		final File file = coma.getData().getOpenFile();
 		if (file == null) {
