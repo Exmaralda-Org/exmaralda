@@ -709,6 +709,7 @@ public class PartitureTableWithActions extends PartitureTable
         // 1. Tier actions
         addTierAction.setEnabled(!locked);
         typesAction.setEnabled(aWholeRowIsSelected);
+        listEventsAction.setEnabled(aWholeRowIsSelected);
         removeEmptyEventsAction.setEnabled(aWholeRowIsSelected && !locked);
         moveTierUpAction.setEnabled(aWholeRowIsSelected && selectionStartRow!=0 && !locked);
         insertTierAction.setEnabled(aWholeRowIsSelected && !locked);
@@ -1070,7 +1071,11 @@ public class PartitureTableWithActions extends PartitureTable
 
         editTiersAction = new EditTiersAction(this);
         
+        listEventsAction = new ListEventsAction(this);
+        
         typesAction = new TypesAction(this);
+        
+        listEventsAction = new ListEventsAction(this);
 
         //*********************************************************************************************
         //***************************************** EVENT ACTIONS *************************************
@@ -1703,6 +1708,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction showAllTiersAction;
     public javax.swing.AbstractAction removeEmptyEventsAction;
     public javax.swing.AbstractAction editTiersAction;
+    public javax.swing.AbstractAction listEventsAction; // issue #316
     public javax.swing.AbstractAction typesAction; // issue #295
 
     //*******************************************************************
@@ -2418,7 +2424,7 @@ public class PartitureTableWithActions extends PartitureTable
         if ((colNo>0) && getColumnPixelWidth(colNo-1)<300){
             setLeftColumn(colNo-1);
         }
-        this.setSelectedCells(new JCCellRange(rowNo, colNo, rowNo, colNo));
+        setSelectedCells(new JCCellRange(rowNo, colNo, rowNo, colNo));
     }
     
     /** processes a replace result from the replace dialog
@@ -2534,7 +2540,7 @@ public class PartitureTableWithActions extends PartitureTable
                 this.setFilename(file);
                 this.setupMedia();
             }
-        } catch (Exception ex) {
+        } catch (JexmaraldaException | SAXException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
         }
