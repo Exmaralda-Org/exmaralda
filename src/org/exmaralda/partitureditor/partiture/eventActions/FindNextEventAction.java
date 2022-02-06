@@ -20,6 +20,7 @@ public class FindNextEventAction extends org.exmaralda.partitureditor.partiture.
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("findNextEventAction!");
         findEvent();

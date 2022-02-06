@@ -1339,6 +1339,19 @@ public class PartitureTableWithActions extends PartitureTable
             makeColumnVisible(col);
             this.setNewSelection(selectionStartRow, col, true);
             //setSelectedCells(new JCCellRange(selectionStartRow, col, selectionStartRow, col));
+        } else {
+            // issue #316
+            if (selectionStartRow>0){
+                int continueSearch = JOptionPane.showConfirmDialog(this, "No events found after cursor position. \n"
+                        + "Continue at start?", "Continue search", JOptionPane.YES_NO_OPTION);
+                if (continueSearch==JOptionPane.OK_OPTION){
+                    makeColumnVisible(col);
+                    setNewSelection(selectionStartRow, 0, true);                    
+                    findEvent();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nothing found. ");
+            }
         }
     }
 
