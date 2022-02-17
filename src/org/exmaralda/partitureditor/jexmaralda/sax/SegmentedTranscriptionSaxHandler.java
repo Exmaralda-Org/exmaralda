@@ -90,7 +90,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
 
             case SAXUtilities.TLI                   :   TimelineItem tli = new TimelineItem();
                                                         tli.setID(atts.getValue("id"));
-                                                        try{tli.setTime(Double.parseDouble(atts.getValue("time")));} catch (NumberFormatException t) {/*thrown if no abs time is present*/}
+                                                        try{tli.setTime(Double.parseDouble(atts.getValue("time")));} catch (Throwable t) {/*thrown if no abs time is present*/}
                                                         tli.setBookmark(atts.getValue("bookmark"));
                                                         try{
                                                             if (((String)(openElements.elementAt(openElements.size()-2))).equals("common-timeline")){
