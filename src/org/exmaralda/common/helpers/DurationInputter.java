@@ -74,7 +74,7 @@ public class DurationInputter extends JPanel {
 		int i = 0;
 		if (tf.getText() != null) {
 			if (tf.getText().length() > 0) {
-				i = new Integer(tf.getText()).intValue();
+				i = Integer.parseInt(tf.getText());
 			}
 		}
 		return i;
@@ -115,8 +115,7 @@ class DigitsDocument extends PlainDocument {
 			c = addedFigures[i - 1];
 			if (Character.isDigit(c)) {
 				// System.out.println(Inserting digit... + c);
-				super.insertString(offs,
-						new String(new Character(c).toString()), a);
+				super.insertString(offs, Character.toString(c), a);
 			}
 		}
 		// super.insertString(offs, , a);

@@ -73,6 +73,11 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
             }
         ));
         backupFilesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        backupFilesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backupFilesTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(backupFilesTable);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -143,6 +148,11 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void backupFilesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backupFilesTableMouseClicked
+        if (evt.getClickCount()!=2) return;
+        openButtonActionPerformed(null);
+    }//GEN-LAST:event_backupFilesTableMouseClicked
 
     /**
      * @param args the command line arguments

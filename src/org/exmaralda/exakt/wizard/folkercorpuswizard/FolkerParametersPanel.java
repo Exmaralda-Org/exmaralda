@@ -24,9 +24,9 @@ public class FolkerParametersPanel extends javax.swing.JPanel {
 
     Object[] getParameters() {
         Object[] returnValue = new Object[3];
-        returnValue[0] = new Boolean(separateRadioButton.isSelected());
+        returnValue[0] = separateRadioButton.isSelected();
         returnValue[1] = directoryTextField.getText();
-        returnValue[2] = new Boolean(writeBasicCheckBox.isSelected());
+        returnValue[2] = writeBasicCheckBox.isSelected();
 
         return returnValue;
     }

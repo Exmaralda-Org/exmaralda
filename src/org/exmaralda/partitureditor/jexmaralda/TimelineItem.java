@@ -82,12 +82,12 @@ public class TimelineItem extends Object {
     
     /** returns time as string */
     public String getTimeAsString(){
-        return ((new Double(time)).toString());
+        return (Double.toString(time));
     }
     
     /** returns time as string with soundsoviel Nachkommastellen*/
     public String getTimeAsString(int afterComma){
-        String result = (new Double(time)).toString();
+        String result = Double.toString(time);
         if (result.indexOf('.')>0){
             result = result.substring(0,Math.min(result.length()-1,result.indexOf('.')+afterComma+1));
         }

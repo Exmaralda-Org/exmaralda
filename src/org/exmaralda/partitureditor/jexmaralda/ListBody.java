@@ -53,7 +53,7 @@ public class ListBody extends AbstractBody implements XMLable {
             positions.put(sc.getMain().getStart(),new Vector());
         }
         Vector v = (Vector)(positions.get(sc.getMain().getStart()));
-        v.add(new Integer(size()-1));
+        v.add(size()-1);
     }
     
     public SpeakerContribution getSpeakerContributionAt(int pos){
@@ -126,7 +126,7 @@ public class ListBody extends AbstractBody implements XMLable {
                 int index = ((Integer)(v.elementAt(pos))).intValue();
                 SpeakerContribution sc = (SpeakerContribution)(elementAt(index));
                 if (getCommonTimeline().calculateSpan(sc.getMain().getStart(),sc.getMain().getEnd()) == length){
-                    result.add(new Integer(index));
+                    result.add(index);
                     v.removeElementAt(pos);
                     // added version 1.2.7.
                     pos--;

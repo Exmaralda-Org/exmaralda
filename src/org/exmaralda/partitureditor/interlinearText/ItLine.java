@@ -135,10 +135,10 @@ public class ItLine extends java.util.Vector implements XMLElement, Formattable,
     public void addItChunk(ItChunk itc){
         addElement(itc);
         // update the start points hashtable accordingly
-        starts.put(itc.getStart().getID(),new Integer(getNumberOfItChunks()-1));  
+        starts.put(itc.getStart().getID(), getNumberOfItChunks()-1);  
         if (itc.getEnd()!=null){
             // update the end points hashtable accordingly
-            ends.put(itc.getEnd().getID(),new Integer(getNumberOfItChunks()-1));  
+            ends.put(itc.getEnd().getID(), getNumberOfItChunks()-1);  
         }
         if (!itc.hasFormat()){
             // if the chunk doesn't have a format, make it inherit this line's format
@@ -220,8 +220,8 @@ public class ItLine extends java.util.Vector implements XMLElement, Formattable,
         starts.clear();
         ends.clear();
         for (int pos=0; pos<getNumberOfItChunks(); pos++){
-            starts.put(getItChunkAt(pos).getStart().getID(), new Integer(pos));
-            ends.put(getItChunkAt(pos).getEnd().getID(), new Integer(pos));
+            starts.put(getItChunkAt(pos).getStart().getID(), pos);
+            ends.put(getItChunkAt(pos).getEnd().getID(), pos);
         }       
     }
     

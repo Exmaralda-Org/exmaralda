@@ -155,7 +155,7 @@ public class TranscriptionTableModel extends AbstractTableModel {
     }
 
     void setTime(int r, int c, double d) {
-        times[r][c] = new Double(d);
+        times[r][c] = d;
         fireTableCellUpdated(r, c);
     }
 

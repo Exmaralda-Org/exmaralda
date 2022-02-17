@@ -546,7 +546,7 @@ public class TEITagger {
 							htmlString += "<a href=# id=" + idCount + ">"
 									+ handlePunctuation(temp.getText())
 									+ "</a>";
-							ids.put(new Integer(idCount).toString(), temp);
+							ids.put(Integer.toString(idCount), temp);
 							idCount++;
 						}
 					}
@@ -604,7 +604,7 @@ public class TEITagger {
 						+ colorString + "><b><u>"
 						+ getElementHTML(mySibling, true)
 						+ "</u></b></font></a>";
-				ids.put(new Integer(idCount).toString(), mySibling);
+				ids.put(Integer.toString(idCount), mySibling);
 				idCount++;
 				// htmlString+="<div style=\"background-color:"+colorString+"; font-weight:bold; font-decoration:underline;\">"+mySibling.getText()+"</div>";
 				if (showAtts) {
@@ -615,7 +615,7 @@ public class TEITagger {
 			} else {
 				htmlString += "<a href='#' id='" + idCount + "'>"
 						+ handlePunctuation(mySibling.getText()) + "</a>";
-				ids.put(new Integer(idCount).toString(), mySibling);
+				ids.put(Integer.toString(idCount), mySibling);
 				idCount++;
 			}
 		}
@@ -783,8 +783,7 @@ public class TEITagger {
 
 	public void tag(String myOption) {
 		System.out.println(myOption);
-		TagOption to = (TagOption) options
-				.get(new Integer(myOption).intValue());
+		TagOption to = (TagOption) options.get(Integer.parseInt(myOption));
 		if (to.isReplace()) {
 			System.out.println(to.getAttName() + "=" + to.getNewVal());
 			actualElement.setAttribute(to.getAttName(), to.getNewVal());
@@ -1138,7 +1137,7 @@ public class TEITagger {
 		if ((numTag.length() > 0) && (numNum.length() > 0)
 				&& (attName.length() > 0)) {
 			System.out.println("-->" + numTag + "/" + numNum);
-			int count = new Integer(numNum).intValue();
+			int count = Integer.parseInt(numNum);
 			String pattern = "";
 			for (int i = 0; i < numNum.length(); i++) {
 				pattern += "0";

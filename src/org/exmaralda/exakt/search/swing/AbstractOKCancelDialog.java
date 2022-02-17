@@ -6,13 +6,11 @@
 
 package org.exmaralda.exakt.search.swing;
 
-import java.applet.Applet;
 import java.awt.Dialog;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRootPane;
 import javax.swing.JComponent;
 
 

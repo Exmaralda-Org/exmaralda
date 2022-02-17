@@ -168,8 +168,8 @@ public class HIATDOSReader extends Vector {
         for (int pos=0; pos<size(); pos++){
             String line = (String)(elementAt(pos));
             if (line.length()>1){
-                Integer partiturFlaechenNummer = new Integer(line.substring(3,7).trim());
-                Integer length = new Integer(line.substring(7,9).trim());
+                Integer partiturFlaechenNummer = Integer.parseInt(line.substring(3,7).trim());
+                Integer length = Integer.parseInt(line.substring(7,9).trim());
                 if (!maxLengthOfPartiturFlaeche.containsKey(partiturFlaechenNummer)){
                     maxLengthOfPartiturFlaeche.put(partiturFlaechenNummer, length);
                 } else{
@@ -186,7 +186,7 @@ public class HIATDOSReader extends Vector {
             String line = (String)(elementAt(pos));
             if (line.length()>1){
                 String id = line.substring(0,3);
-                Integer partiturFlaechenNummer = new Integer(line.substring(3,7).trim());
+                Integer partiturFlaechenNummer = Integer.parseInt(line.substring(3,7).trim());
                 String content = line.substring(24);
                 if (!tiers.containsKey(id)){
                     tiers.put(id, new StringBuffer());
@@ -262,7 +262,7 @@ public class HIATDOSReader extends Vector {
     
     public void calculateSyncPoints(boolean startANDend){
         syncPoints = new Vector();
-        syncPoints.addElement(new Integer(0));
+        syncPoints.addElement(0);
         Vector v = new Vector();
         String[] allTiers = getTiersAsArray(v);
         for (int pos=0; pos<allTiers.length; pos++){
@@ -270,13 +270,13 @@ public class HIATDOSReader extends Vector {
             for (int index=0; index<tier.length()-2;index++){
                 String check = tier.substring(index,index+3);
                 if (check.charAt(0)==' ' && check.charAt(1)==' ' && check.charAt(2)!=' '){
-                    syncPoints.addElement(new Integer(index+2));
+                    syncPoints.addElement(index+2);
                 } else if (startANDend && check.charAt(0)!=' ' && check.charAt(1)==' ' && check.charAt(2)==' '){
-                    syncPoints.addElement(new Integer(index+1));
+                    syncPoints.addElement(index+1);
                 }
             }
         }
-        syncPoints.addElement(new Integer(allTiers[0].length()));
+        syncPoints.addElement(allTiers[0].length());
         Collections.sort(syncPoints);
         for (int pos=0; pos<syncPoints.size()-1; pos++){
             Integer i1 = (Integer)(syncPoints.elementAt(pos));

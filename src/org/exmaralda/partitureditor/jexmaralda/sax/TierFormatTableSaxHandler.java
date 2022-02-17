@@ -69,7 +69,7 @@ class TierFormatTableSaxHandler extends org.xml.sax.helpers.DefaultHandler {
                                                         if (atts.getIndex("style-name")>=0)
                                                             {currentTierFormat.setStyleName(atts.getValue("style-name"));}
                                                         if (atts.getIndex("size")>=0)
-                                                            {currentTierFormat.setSize(new Integer(atts.getValue("size")).intValue());}
+                                                            {currentTierFormat.setSize(Integer.parseInt(atts.getValue("size")));}
                                                         if (atts.getIndex("alignment-name")>=0)
                                                             {currentTierFormat.setAlignmentName(atts.getValue("alignment-name"));}
                                                         if (atts.getIndex("textcolor-name")>=0)

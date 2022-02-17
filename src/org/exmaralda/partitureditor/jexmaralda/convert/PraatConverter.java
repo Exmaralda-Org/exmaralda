@@ -297,8 +297,8 @@ public final class PraatConverter {
     private Object getLineValue(String line, short type) throws IOException{
         try {
             switch (type){
-                case XMIN : return new Double(Double.parseDouble(line.substring(7)));                
-                case XMAX : return new Double(Double.parseDouble(line.substring(7)));
+                case XMIN : return Double.parseDouble(line.substring(7));                
+                case XMAX : return Double.parseDouble(line.substring(7));
                 case NAME : return new String(line.substring(8,line.length()-1));
                 case TEXT : return new String(line.substring(8,line.length()-1));
                 case BROKEN_TEXT : return new String(line.substring(8,line.length()));
@@ -351,10 +351,10 @@ public final class PraatConverter {
             if (c=='"'){
                 sb.append("\"\"");              // append two quotes, not one
 //            } else if (pum.unicodePraat.containsKey(Character.toString(c))){                
-                } else if (pum.unicodePraat.containsKey(new Character(c).toString())){                
+                } else if (pum.unicodePraat.containsKey(Character.toString(c))){                
                 // ACHTUNG!!! replaceAll() scheint eine 1.4. Methode zu sein!
                 //sb.append(pum.getPraatForUnicode(Character.toString(c)).replaceAll("\"", "\"\""));
-                String replaceString = pum.getPraatForUnicode(new Character(c).toString());
+                String replaceString = pum.getPraatForUnicode(Character.toString(c));
                 for (int pos2=0; pos2<replaceString.length(); pos2++){
                     if (replaceString.charAt(pos2)=='\"'){
                         sb.append("\"\"");

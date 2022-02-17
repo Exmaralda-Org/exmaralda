@@ -50,7 +50,7 @@ public class RTFUtilities {
                 String hex = "\\'" + Integer.toHexString(c).toLowerCase();
                 currentRun.append(hex);
             } else {    // double byte run
-                currentRun.append("\\u" + new Integer(c).toString());
+                currentRun.append("\\u" + Integer.toString(Character.getNumericValue(c)));
                 currentRun.append("\\'3f");
             }
         }
@@ -116,7 +116,7 @@ public class RTFUtilities {
                     currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace) + " ");
                 }
                 currentRunType = DB_RUN;
-                currentRun.append("\\u" + new Integer(c).toString());
+                currentRun.append("\\u" + Integer.toString(Character.getNumericValue(c)));
                 currentRun.append("\\'3f");
             }
         }

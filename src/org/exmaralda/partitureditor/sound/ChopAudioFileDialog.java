@@ -348,10 +348,10 @@ public class ChopAudioFileDialog extends org.exmaralda.partitureditor.jexmaralda
             System.out.println(firstTime + "//" + nextTime);
             if (nextTime>firstTime){
                 Object[] o = new Object[4];
-                o[0] = new Double(firstTime);
-                o[1] = new String(firstID);
-                o[2] = new Double(nextTime);
-                o[3] = new String(nextID);
+                o[0] = firstTime;
+                o[1] = firstID;
+                o[2] = nextTime;
+                o[3] = nextID;
                 result.addElement(o);
                 firstTime = nextTime;
                 firstID = nextID;
@@ -369,10 +369,10 @@ public class ChopAudioFileDialog extends org.exmaralda.partitureditor.jexmaralda
             double start = timeline.getPreviousTime(event.getStart());
             double end = timeline.getNextTime(event.getEnd());
             Object[] o = new Object[4];
-            o[0] = new Double(start);
-            o[1] = new String(event.getStart());
-            o[2] = new Double(end);
-            o[3] = new String(event.getEnd());
+            o[0] = start;
+            o[1] = event.getStart();
+            o[2] = end;
+            o[3] = event.getEnd();
             result.addElement(o);
         }
         return result;

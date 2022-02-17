@@ -40,8 +40,8 @@ public class RTFParameters extends PageOutputParameters{
     public int addFontMapping(String name){
         if (fontMapping.containsKey(name))return ((Integer)fontMapping.get(name)).intValue();
         int no=0;
-        while (fontMapping.containsValue(new Integer(no))){no++;}
-        fontMapping.put(name,new Integer(no));
+        while (fontMapping.containsValue(no)){no++;}
+        fontMapping.put(name, no);
         return no;
     }
     
@@ -54,8 +54,8 @@ public class RTFParameters extends PageOutputParameters{
         color = color.toUpperCase();
         if (colorMapping.containsKey(color))return ((Integer)colorMapping.get(color)).intValue();
         int no=0;
-        while (colorMapping.containsValue(new Integer(no))){no++;}
-        colorMapping.put(color,new Integer(no));
+        while (colorMapping.containsValue(no)){no++;}
+        colorMapping.put(color, no);
         return no;    
     }
     

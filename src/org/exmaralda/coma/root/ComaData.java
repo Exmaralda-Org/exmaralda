@@ -615,7 +615,7 @@ public class ComaData {
 	}
 
 	public void setSchemaVersion(String versionString) {
-		this.schemaVersion = new Integer(versionString);
+		this.schemaVersion = Integer.parseInt(versionString);
 	}
 
 	public int getSchemaVersion() {

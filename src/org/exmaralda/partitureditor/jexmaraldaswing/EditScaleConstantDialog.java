@@ -25,7 +25,7 @@ public class EditScaleConstantDialog extends JEscapeDialog {
         labelTable = new Hashtable();
         for (int pos=0; pos<=20; pos+=5){
             javax.swing.JLabel label = new javax.swing.JLabel(Integer.toString(pos-10));
-            labelTable.put(new Integer(pos), label);
+            labelTable.put(pos, label);
         }
         valueSlider.setLabelTable(labelTable);
         oldConstant=sc;

@@ -6,8 +6,8 @@ public class KeyboardShortcut {
 
 	public static String getLabel(String shortcutString) {
 		String label = "";
-		int modifier = new Integer(shortcutString.split(";")[1]).intValue();
-		int skey = new Integer(shortcutString.split(";")[0]).intValue();
+		int modifier = Integer.parseInt(shortcutString.split(";")[1]);
+		int skey = Integer.parseInt(shortcutString.split(";")[0]);
 		if (modifier + skey > 0) {
 			if (modifier < 1) {
 				label = KeyEvent.getKeyText(skey);

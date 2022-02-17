@@ -30,7 +30,7 @@ public class HTMLParametersPanel extends javax.swing.JPanel implements ChangeLis
             noBreaksButton.setSelected(true);
         } else {
             breaksButton.setSelected(true);
-            int width = new Double(param.getWidth()).intValue();
+            int width = (int)(param.getWidth());
             widthSlider.setValue(Math.max(200,width));
             widthLabel.setText(Integer.toString(Math.max(200,width)) + "px");
         }

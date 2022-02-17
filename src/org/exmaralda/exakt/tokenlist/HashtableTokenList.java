@@ -272,7 +272,8 @@ public class HashtableTokenList extends AbstractTokenList {
         } else if (howtosort==AbstractTokenList.FREQUENCY_SORTED){
             Comparator c = new Comparator<String>() {
                 public int compare(String o1, String o2) {
-                    return new Integer(getTokenCount(o2)).compareTo(new Integer(getTokenCount(o1)));
+                    //return new Integer(getTokenCount(o2)).compareTo(new Integer(getTokenCount(o1)));
+                    return Integer.compare(getTokenCount(o2), getTokenCount(o1));
                 }
             };
             Collections.sort(result, c);

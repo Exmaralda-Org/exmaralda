@@ -23,8 +23,7 @@ public class TagOption implements Comparable<TagOption> {
 			if (f.getAttributeValue("name").equals("sextantShortcut")) {
 				shortcut = f.getChild("symbol").getAttributeValue("value");
 			} else if (f.getAttributeValue("name").equals("sextantColor")) {
-				color = new Color(new Integer(f.getChild("symbol")
-						.getAttributeValue("value")));
+				color = new Color(Integer.parseInt(f.getChild("symbol").getAttributeValue("value")));
 			} else {
 				key = f.getAttributeValue("name");
 				if (((Element) f.getChildren().get(0)).getName().equals(
@@ -44,8 +43,7 @@ public class TagOption implements Comparable<TagOption> {
 		if (f.getAttributeValue("name").equals("sextantShortcut")) {
 			shortcut = f.getChild("symbol").getAttributeValue("value");
 		} else if (f.getAttributeValue("name").equals("sextantColor")) {
-			color = new Color(new Integer(f.getChild("symbol")
-					.getAttributeValue("value")));
+			color = new Color(Integer.parseInt(f.getChild("symbol").getAttributeValue("value")));
 		} else {
 			key = f.getAttributeValue("name");
 			if (((Element) f.getChildren().get(0)).getName().equals("symbol")) {

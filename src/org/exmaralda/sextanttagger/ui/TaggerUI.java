@@ -684,11 +684,10 @@ public class TaggerUI extends javax.swing.JFrame
 		segSlider.setMaximum(app.getShowSegments().size());
 
 		Hashtable<Integer, JComponent> sLabelTable = new Hashtable<Integer, JComponent>();
-		sLabelTable.put(new Integer(0), new JLabel("0"));
-		sLabelTable.put(new Integer(app.getShowSegments().size() / 2),
+		sLabelTable.put(0, new JLabel("0"));
+		sLabelTable.put(app.getShowSegments().size() / 2,
 				new JLabel(showSegment));
-		sLabelTable.put(new Integer(app.getShowSegments().size()), new JLabel(
-				"" + app.getShowSegments().size()));
+		sLabelTable.put(app.getShowSegments().size(), new JLabel("" + app.getShowSegments().size()));
 		segSlider.setLabelTable(sLabelTable);
 		segSlider.setPaintLabels(true);
 		segSlider.setValue(app.getSegmentShowing());
@@ -703,11 +702,9 @@ public class TaggerUI extends javax.swing.JFrame
 			tagSlider.setMinimum(0);
 			tagSlider.setMaximum(app.getTaggables().size());
 			Hashtable<Integer, JComponent> tLabelTable = new Hashtable<Integer, JComponent>();
-			tLabelTable.put(new Integer(0), new JLabel("0"));
-			tLabelTable.put(new Integer(app.getTaggables().size() / 2),
-					new JLabel(tagSegment));
-			tLabelTable.put(new Integer(app.getTaggables().size()), new JLabel(
-					"" + app.getTaggables().size()));
+			tLabelTable.put(0, new JLabel("0"));
+			tLabelTable.put(app.getTaggables().size() / 2,	new JLabel(tagSegment));
+			tLabelTable.put(app.getTaggables().size(), new JLabel("" + app.getTaggables().size()));
 			tagSlider.setLabelTable(tLabelTable);
 			tagSlider.setPaintLabels(true);
 			tagSlider.setValue(app.getTagShowing());

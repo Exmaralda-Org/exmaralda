@@ -253,11 +253,11 @@ public class EditLocationDialog extends JDialog implements ActionListener {
 		}
 		long showDuration;
 		try {
-			showDuration = new Long(
+			showDuration = Long.parseLong(
 					period.getChildText("PeriodDuration") == null ? "0"
 							: period.getChildText("PeriodDuration"));
 		} catch (NumberFormatException ex) {
-			showDuration = new Long("0");
+			showDuration = 0;
 		}
 		periodDuration.setText(showDuration);
 		descriptionPanel.updateTableModel(new Description(fe

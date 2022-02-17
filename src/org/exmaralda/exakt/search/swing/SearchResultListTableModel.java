@@ -163,7 +163,7 @@ public abstract class SearchResultListTableModel extends javax.swing.table.Abstr
         SearchResultInterface searchResult = getSearchResultAt(rowIndex);
         if (columnIndex==0) {
             // first column: check boxes
-            return new Boolean(searchResult.isSelected());
+            return searchResult.isSelected();
         } else if (columnIndex==lcci) {
             // left context
             String leftContext = searchResult.getLeftContextAsString();

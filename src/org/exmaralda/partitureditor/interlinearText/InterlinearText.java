@@ -137,27 +137,31 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
     }
 
     public void addPageBreak(int pos){
-        pageBreaks.addElement(new Integer(pos));
+        pageBreaks.addElement(pos);
     }
 
     boolean isElementFollowedByPageBreak(int pos){
-        return pageBreaks.contains(new Integer(pos));
+        return pageBreaks.contains(pos);
     }
     
+    @Override
     public boolean hasUdInformation() {
         return (udInfo!=null);
     }
     
+    @Override
     public void setUdInformation(UdInformation udi) {
         udInfo = udi;
     }
     
     /** writes a string representing this object in XML to the specified output stream */
+    @Override
     public void writeXML(java.io.FileOutputStream fo) throws java.io.IOException {
         fo.write(toXML().getBytes("UTF-8"));
     }
     
     /** returns a string representing this object in XML  */
+    @Override
     public String toXML() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("<interlinear-text>");
@@ -310,7 +314,7 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
             sb.append(param.additionalStuff);
         }
         for (int pos=0; pos<this.getNumberOfItElements(); pos++){
-            param.isFirstParagraph = (((param.additionalStuff.length()>0) && pos==0) || pageBreaks.contains(new Integer(pos)));
+            param.isFirstParagraph = (((param.additionalStuff.length()>0) && pos==0) || pageBreaks.contains(pos));
             sb.append(((RTFable)getItElementAt(pos)).toRTF(param));
         }
         sb.append("}");
@@ -342,7 +346,7 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
                 if (lastKeepTogether>=0){
                     currentElementPosition=lastKeepTogether-1;                    
                 }
-                pageBreaks.addElement(new Integer(currentElementPosition));
+                pageBreaks.addElement(currentElementPosition);
             } else {    // i.e. this element fits
                 if (!currentItElement.keepTogetherWithNext()){
                     lastKeepTogether=-1;
