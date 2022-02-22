@@ -20,7 +20,8 @@ public class ItLineComparator implements java.util.Comparator<ItLine> {
     public int compare(ItLine o1, ItLine o2) {
         int start1 = syncPoints.indexOf(o1.getItChunkAt(0).getStart());
         int start2 = syncPoints.indexOf(o2.getItChunkAt(0).getStart());
-        return new Integer(start1).compareTo(new Integer(start2));
+        return Integer.compare(start1, start2);
+        //return new Integer(start1).compareTo(new Integer(start2));
     }
     
 }

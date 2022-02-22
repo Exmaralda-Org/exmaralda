@@ -20,7 +20,7 @@ public class RTFParametersPanel extends javax.swing.JPanel {
     /** Creates new form RTFParametersPanel */
     public RTFParametersPanel(org.exmaralda.partitureditor.interlinearText.RTFParameters param) {
         initComponents();
-        criticalSizeSlider.setValue(new Double(Math.round(param.criticalSizePercentage*100)).intValue());
+        criticalSizeSlider.setValue((int)(Math.round(param.criticalSizePercentage*100)));
         rightMarginBufferSlider.setValue(param.rightMarginBuffer);
         glueAdjacentCheckBox.setSelected(param.glueAdjacent);
         glueEmptyCheckBox.setSelected(param.glueEmpty);

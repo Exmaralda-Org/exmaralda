@@ -62,7 +62,7 @@ public class LevenshteinComparator {
                 // I'd rather choose cyrillic letters because
                 // sampe does hove captital letters
                 char r = (char)(1024+pos);
-                String replacement = new Character(r).toString();
+                String replacement = Character.toString(r);
                 modifiedItem1 = modifiedItem1.replace(combination, replacement);
             }
             // now go through the other list (this comes from the lexicon) item by item
@@ -73,7 +73,7 @@ public class LevenshteinComparator {
                     String combination = combinations.elementAt(pos);
                     //char r = (char)(65+pos);
                     char r = (char)(1024+pos);
-                    String replacement = new Character(r).toString();
+                    String replacement = Character.toString(r);
                     modifiedItem2 = modifiedItem2.replace(combination, replacement);
                 }
 

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="changeme" default="BUILD_MAC" basedir=".">
+    
+    <description>Builds, tests, and runs the project EXMARaLDA.</description>
+    
+   
+    <!-- directory where to put the final results, i.e. the disk images -->
+    <property name="local_directory" value="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
+    
+    <!-- the jpackage executable, should be part of newer OpenJDKs -->
+    <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/bin/jpackage"/>
+    <!-- the jar with compiled EXMARaLDA Java code -->
+    <property name="jpackage_source" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/EXMARaLDA_NetBeansProject/dist"/>
+    <!-- the target folder for what jpackage writes -->
+    <property name="jpackage_target" location="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
+    
+    <!-- folder with icons for the individual apps, partly also document icons -->
+    <property name="icons_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/icons"/>
+    <!-- file assocation configurations for jpackage -->
+    <property name="file_ass_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/jpackage_file_ass"/>
+    
+    <!-- version numbers -->
+    <property name="exmaralda_version" value="1.12"/>
+    <property name="partitureditor_version" value="1.7"/>
+    <property name="coma_version" value="2.0"/>
+    <property name="exakt_version" value="1.4"/>
+    <property name="folker_version" value="1.3"/>
+    <property name="orthonormal_version" value="1.0"/>
+    <property name="teidrop_version" value="1.0"/>
+    
+
+
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+
+
+    <!-- STEP 1: delete left-overs from previous builds -->
+    
+    <target name="prepare_jpackage">
+        <delete dir="${jpackage_source}/native"/>
+
+        <delete dir="${jpackage_target}/PartiturEditor_13_64"/>
+        <delete dir="${jpackage_target}/Coma_13_64"/>
+        <delete dir="${jpackage_target}/EXAKT_13_64"/>
+        <delete dir="${jpackage_target}/FOLKER_13_64"/>
+        <delete dir="${jpackage_target}/OrthoNormal_13_64"/>
+        <delete dir="${jpackage_target}/TeiDrop_13_64"/>   
+        
+        <copy todir="${jpackage_source}/native">
+            <fileset dir="/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2020_LIBS/native-mac-m1"/> 
+        </copy>             
+    </target>
+    
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+
+    <!-- STEP 2: build the apps with jpackage -->
+    <target name="mac_executables_jpackage" depends="prepare_jpackage">
+
+        <!-- FOLKER -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_13_64"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=FOLKER"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${folker_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/folker.icns"/>
+            <arg value="--name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-identifier"/><arg value="FOLKER"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/folker_file_ass.properties"/>
+            
+        </exec>    
+
+        <!-- Partitur-Editor -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_13_64"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>            
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=PartiturEditor"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.partitureditor.partiture.PartiturEditor"/>
+            <arg value="--app-version"/><arg value="${partitureditor_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/partitureditor.icns"/>
+            <arg value="--name"/><arg value="PartiturEditor"/>
+            <arg value="--mac-package-name"/><arg value="PartiturEditor"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/partitureditor_file_ass.properties"/>
+        </exec>    
+        
+        <!-- COMA -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/Coma_13_64"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=Coma"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.coma.launcher.Launcher"/>
+            <arg value="--app-version"/><arg value="${coma_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/coma.icns"/>
+            <arg value="--name"/><arg value="Coma"/>
+            <arg value="--mac-package-name"/><arg value="Coma"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/coma_file_ass.properties"/>
+            
+        </exec>    
+        
+        <!-- EXAKT -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/EXAKT_13_64"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=EXAKT"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT"/>
+            <arg value="--app-version"/><arg value="${exakt_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/exakt.icns"/>
+            <arg value="--name"/><arg value="EXAKT"/>
+            <arg value="--mac-package-name"/><arg value="EXAKT"/>
+            
+        </exec>    
+        
+
+        <!-- OrthoNormal -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/OrthoNormal_13_64"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=OrthoNormal"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.orthonormal.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${orthonormal_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/orthonormal.icns"/>
+            <arg value="--name"/><arg value="OrthoNormal"/>
+            <arg value="--mac-package-name"/><arg value="OrthoNormal"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/orthonormal_file_ass.properties"/>
+            
+            
+        </exec>    
+
+        <!-- TeiDrop -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/TeiDrop_13_64"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=TeiDrop"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.tei.swing.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${teidrop_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/teidrop.icns"/>
+            <arg value="--name"/><arg value="TeiDrop"/>
+            <arg value="--mac-package-name"/><arg value="TeiDrop"/>
+            
+        </exec>  
+    </target>    
+    
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+
+    <!-- step 3: remove faulty signatures -->
+    <target name="remove_signatures" depends="mac_executables_jpackage">
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/PartiturEditor_13_64/PartiturEditor.app"/>            
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/FOLKER_13_64/FOLKER.app"/>            
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/EXAKT_13_64/EXAKT.app"/>            
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/Coma_13_64/Coma.app"/>            
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/OrthoNormal_13_64/OrthoNormal.app"/>            
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/TeiDrop_13_64/TeiDrop.app"/>            
+        </exec>
+        
+    </target>
+    
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    
+    <!-- step 4: put the apps into disk images -->
+    <target name="make_dmgs" depends="remove_signatures">  
+        <delete file="${local_directory}/Folker.dmg"/>
+        <delete file="${local_directory}/PartiturEditor.dmg"/>
+        <delete file="${local_directory}/Exakt.dmg"/>
+        <delete file="${local_directory}/OrthoNormal.dmg"/>
+        <delete file="${local_directory}/TeiDrop.dmg"/>
+        <delete file="${local_directory}/Coma.dmg"/>
+        
+        
+        <exec command="hdiutil">
+            <arg line="create -srcfolder ${local_directory}/FOLKER_13_64 ${local_directory}/Folker.dmg"/>
+        </exec> 
+        <exec command="hdiutil">
+            <arg line="create -srcfolder ${local_directory}/PartiturEditor_13_64 ${local_directory}/PartiturEditor.dmg"/>
+        </exec> 
+        <exec command="hdiutil">
+            <arg line="create -srcfolder ${local_directory}/Coma_13_64 ${local_directory}/Coma.dmg"/>
+        </exec> 
+        <exec command="hdiutil">
+            <arg line="create -srcfolder ${local_directory}/OrthoNormal_13_64 ${local_directory}/OrthoNormal.dmg"/>
+        </exec> 
+        <exec command="hdiutil">
+            <arg line="create -srcfolder ${local_directory}/TeiDrop_13_64 ${local_directory}/TeiDrop.dmg"/>
+        </exec> 
+        <exec command="hdiutil">
+            <arg line="create -srcfolder ${local_directory}/EXAKT_13_64 ${local_directory}/Exakt.dmg"/>
+        </exec> 
+    </target>
+    
+    
+    <target name="BUILD_MAC" depends="make_dmgs">
+        <!-- do nothing, just defining the main target -->
+    </target>    
+    
+    
+    
+    
+</project>
+
+

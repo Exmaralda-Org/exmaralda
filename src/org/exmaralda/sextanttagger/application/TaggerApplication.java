@@ -1141,9 +1141,8 @@ public class TaggerApplication
 			shortcutLabel.setForeground(new Color(255 - po.getColor().getRed(),
 					255 - po.getColor().getGreen(), 255 - po.getColor()
 							.getBlue()));
-			int modifier = new Integer(po.getShortcut().split(";")[1])
-					.intValue();
-			int skey = new Integer(po.getShortcut().split(";")[0]).intValue();
+			int modifier = Integer.parseInt(po.getShortcut().split(";")[1]);
+			int skey = Integer.parseInt(po.getShortcut().split(";")[0]);
 			if (modifier + skey > 0) {
 				if (modifier < 1) {
 					shortcutLabel.setText(KeyEvent.getKeyText(skey));

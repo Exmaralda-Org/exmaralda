@@ -81,7 +81,7 @@ public class FiniteStateMachine extends Hashtable {
                 //System.out.println("result : " + result.toString());
             }
             
-            Character c = new Character(input.charAt(pos));
+            Character c = input.charAt(pos);
             Hashtable transitions = (Hashtable)get(currentState);
             if (transitions.containsKey("###FORBIDDEN###")){
                 currentForbidden = (String)(transitions.get("###FORBIDDEN###"));

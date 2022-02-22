@@ -84,7 +84,7 @@ public class Speakertable extends Vector {
     public void updatePositions(){
         positions.clear();
         for (int pos=0; pos<getNumberOfSpeakers(); pos++){
-            positions.put(getSpeakerAt(pos).getID(), new Integer(pos));
+            positions.put(getSpeakerAt(pos).getID(), pos);
         }       
     }
 
@@ -98,16 +98,16 @@ public class Speakertable extends Vector {
     public void addSpeaker(Speaker s) throws JexmaraldaException {
       if (positions.containsKey(s.getID())){throw new JexmaraldaException(11, "Speaker " + s.getID() + " already in speakertable");}
       addElement(s);
-      positions.put(s.getID(),new Integer(getNumberOfSpeakers()-1));       
+      positions.put(s.getID(), getNumberOfSpeakers()-1);       
     }        
     
     /** returns a free id */
     public String getFreeID(){
         int i=0;
-        while (positions.containsKey((String)("SPK" + new Integer(i).toString()))){
+        while (positions.containsKey((String)("SPK" + Integer.toString(i)))){
             i++;
         }
-        return (String)("SPK" + new Integer(i));
+        return (String)("SPK" + i);
     }
     
     /** returns a string array with the speaker IDs of the speakertable */

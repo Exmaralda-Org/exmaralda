@@ -87,25 +87,25 @@ public class UpdateDialogPane extends JDialog {
 			text = Ui.getText("updateCheck.downloadFailed");
 
 		} else {
-			int installedMajor = new Integer(version.split("\\.")[0]
+			int installedMajor = Integer.parseInt(version.split("\\.")[0]
 					+ version.split("\\.")[1]);
 			System.out.println("Installed Major:" + installedMajor);
-			int releaseMajor = new Integer(releasedVerString.split("\\.")[0]
+			int releaseMajor = Integer.parseInt(releasedVerString.split("\\.")[0]
 					+ releasedVerString.split("\\.")[1]);
 			System.out.println("Latest Release:" + releaseMajor);
-			int lastestMajor = new Integer(latestVerString.split("\\.")[0]
+			int lastestMajor = Integer.parseInt(latestVerString.split("\\.")[0]
 					+ latestVerString.split("\\.")[1]);
 			System.out.println("Latest Preview:" + installedMajor);
 			int installedMinor = (version.split("\\.").length > 2
-					? new Integer(version
+					? Integer.parseInt(version
 							.substring(version.lastIndexOf(".") + 1))
 					: 0);
 			int releasedMinor = (releasedVerString.split("\\.").length > 2
-					? new Integer(releasedVerString.substring(releasedVerString
+					? Integer.parseInt(releasedVerString.substring(releasedVerString
 							.lastIndexOf(".") + 1))
 					: 0);
 			int latestMinor = (latestVerString.split("\\.").length > 2
-					? new Integer(latestVerString.substring(latestVerString
+					? Integer.parseInt(latestVerString.substring(latestVerString
 							.lastIndexOf(".") + 1))
 					: 0);
 			Ui.prefs.putLong("updateLastChecked", System.currentTimeMillis()); // set

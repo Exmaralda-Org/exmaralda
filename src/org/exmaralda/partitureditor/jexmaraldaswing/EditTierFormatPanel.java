@@ -508,7 +508,7 @@ public class EditTierFormatPanel extends javax.swing.JPanel {
 
   private void sizeComboBoxActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeComboBoxActionPerformed
 // Add your handling code here:
-    Integer newSize = new Integer((String)sizeComboBox.getSelectedItem());
+    Integer newSize = Integer.parseInt((String)sizeComboBox.getSelectedItem());
     tierFormat.setSize(newSize.intValue());
     formatTestField();
   }//GEN-LAST:event_sizeComboBoxActionPerformed

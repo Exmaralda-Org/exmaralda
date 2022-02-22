@@ -122,8 +122,8 @@ public class Timeline extends Vector {
     public String getFreeID(){
         if (getNumberOfTimelineItems()>0) {
             int i=0;
-            while (positions.containsKey((String)("T" + new Integer(i).toString()))){i++;}
-            return (String)("T" + new Integer(i));
+            while (positions.containsKey((String)("T" + Integer.toString(i)))){i++;}
+            return (String)("T" + i);
         }
         return "T0";
     }
@@ -177,13 +177,13 @@ public class Timeline extends Vector {
         String newID = tli.getID();
         if (positions.containsKey(newID)){throw new JexmaraldaException(2, new String("ID " + newID + " already exists in this timeline. "));}
         addElement(tli);
-        positions.put(newID, new Integer(getNumberOfTimelineItems()-1));
+        positions.put(newID, getNumberOfTimelineItems()-1);
     }
 
     void updatePositions(){
         positions.clear();
         for (int i=0; i<getNumberOfTimelineItems(); i++){
-            positions.put(getTimelineItemAt(i).getID(), new Integer(i));
+            positions.put(getTimelineItemAt(i).getID(), i);
         }       
     }
         

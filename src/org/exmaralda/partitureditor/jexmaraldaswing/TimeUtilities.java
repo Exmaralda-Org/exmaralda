@@ -36,7 +36,7 @@ public class TimeUtilities {
 
         if (text.lastIndexOf(':')<0){   // i.e. format MUST BE xxxx.yyyyyy
             Double.parseDouble(text);
-            return new Double(text).doubleValue();
+            return Double.parseDouble(text);
         }
         
         // format is hh:mm:ss.xxxx

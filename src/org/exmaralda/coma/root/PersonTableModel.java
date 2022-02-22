@@ -200,7 +200,7 @@ public class PersonTableModel extends AbstractTableModel {
 		}
 		if (add) {
 			data.add(elm);
-			data.add(new Boolean(false));
+			data.add(false);
 			if (elm.getChild("Sigle").getText().equals("")) {
 				data.add("n/a");
 			} else {
@@ -214,7 +214,7 @@ public class PersonTableModel extends AbstractTableModel {
 	public void setRow(org.jdom.Element elm, int row) {
 		String strOut;
 		data.set(row * 4, elm);
-		data.set(row * 4 + 1, new Boolean(false));
+		data.set(row * 4 + 1, false);
 		data.set((row * 4) + 2, elm.getChild("Sigle").getText());
 		try {
 			List results = commXPath.selectNodes(elm);
@@ -270,9 +270,9 @@ public class PersonTableModel extends AbstractTableModel {
 		for (int i = 0; i < getRowCount(); i++) {
 			if (personIds.contains(((Element) data.get(i * 4))
 					.getAttributeValue("Id"))) {
-				data.set((i * 4) + 1, new Boolean(true));
+				data.set((i * 4) + 1, true);
 			} else {
-				data.set((i * 4) + 1, new Boolean(false));
+				data.set((i * 4) + 1, false);
 			}
 			fireTableRowsUpdated(i, i);
 		}

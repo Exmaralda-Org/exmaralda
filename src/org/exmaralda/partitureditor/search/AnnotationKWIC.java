@@ -53,7 +53,7 @@ public class AnnotationKWIC {
         outputFileName = args[2];
         if (args.length==4){
             try{
-                maxChars = new Integer(args[3]).intValue();
+                maxChars = Integer.parseInt(args[3]);
                 if (maxChars<0) throw new NumberFormatException();
             } catch (java.lang.NumberFormatException nfe){
                 System.out.println(args[3] + " ist keine positive ganze Zahl.");

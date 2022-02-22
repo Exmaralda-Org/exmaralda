@@ -117,10 +117,10 @@ public class CHATSegmentation extends AbstractSegmentation {
                 String key = epe.getStart() + "#" + epe.getEnd();
                 if (overlaps.containsKey(key)){
                     Integer i = (Integer)(overlaps.get(key));
-                    Integer i_plus_one = new Integer(i.intValue()+1);
+                    Integer i_plus_one = i+1;
                     overlaps.put(key, i_plus_one);
                 } else {
-                    overlaps.put(key, new Integer(1));
+                    overlaps.put(key, 1);
                 }
             }
         }

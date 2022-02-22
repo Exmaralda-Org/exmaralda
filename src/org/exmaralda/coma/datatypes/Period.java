@@ -28,7 +28,7 @@ public class Period extends ComaDatatype {
 
 		if (p.getChild("PeriodDuration") != null) {
 			try {
-				periodDuration = new Long(p.getChildText("PeriodDuration"));
+				periodDuration = Long.parseLong(p.getChildText("PeriodDuration"));
 			} catch (NumberFormatException ex) {
 				periodDuration = 0;
 			}
@@ -40,8 +40,7 @@ public class Period extends ComaDatatype {
 		Element p = new Element("Period");
 		p.addContent(new Element("PeriodStart").setText(ComaDateTime
 				.xsDateTimeFromDate(periodStart)));
-		p.addContent(new Element("PeriodDuration").setText(new Long(
-				periodDuration).toString()));
+		p.addContent(new Element("PeriodDuration").setText(Long.toString(periodDuration)));
 
 		return p;
 	}

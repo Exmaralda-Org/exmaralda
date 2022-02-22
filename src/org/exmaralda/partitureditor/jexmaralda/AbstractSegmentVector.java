@@ -55,25 +55,25 @@ public class AbstractSegmentVector extends Vector {
     public void addSegment(TimedSegment ts){
         this.addElement(ts);
         if (ts.getID()!=null){
-            id2Position.put(ts.getID(), new Integer(size()-1));
+            id2Position.put(ts.getID(), size()-1);
         }
-        start2Position.put(ts.getStart(), new Integer(size()-1));
+        start2Position.put(ts.getStart(), size()-1);
     }
 
     public void addSegment(AtomicTimedSegment ats){
         this.addElement(ats);
         if (ats.getID()!=null){
-            id2Position.put(ats.getID(), new Integer(size()-1));
+            id2Position.put(ats.getID(), size()-1);
         }
-        start2Position.put(ats.getStart(), new Integer(size()-1));
+        start2Position.put(ats.getStart(), size()-1);
     }
 
     public void addSegment(TimedAnnotation ta){
         this.addElement(ta);
         if (ta.getID()!=null){
-            id2Position.put(ta.getID(), new Integer(size()-1));
+            id2Position.put(ta.getID(), size()-1);
         }
-        start2Position.put(ta.getStart(), new Integer(size()-1));
+        start2Position.put(ta.getStart(), size()-1);
     }
     
     

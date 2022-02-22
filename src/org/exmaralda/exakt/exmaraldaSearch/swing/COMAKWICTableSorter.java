@@ -252,15 +252,15 @@ public class COMAKWICTableSorter extends AbstractTableModel {
     public void setComparatorForColumn(Comparator c, int column){
         // changed for row numbering in version 0.4, 22-Jan-2008
         //comparatorMap.put(new Integer(column), c);
-        comparatorMap.put(new Integer(column+1), c);
+        comparatorMap.put(column+1, c);
     }
     
     protected Comparator getComparator(int column) {
         
         //System.out.println("Getting comparator for column " + column);
         
-        if (comparatorMap.containsKey(new Integer(column))){
-             return comparatorMap.get(new Integer(column));
+        if (comparatorMap.containsKey(column)){
+             return comparatorMap.get(column);
         }
         
         //System.out.println("Could not find comparator in the map");
@@ -351,10 +351,11 @@ public class COMAKWICTableSorter extends AbstractTableModel {
         return tableModel.isCellEditable(modelIndex(row), column-1);
     }
 
+    @Override
     public Object getValueAt(int row, int column) {
         // added for row numbering in version 0.4, 22-Jan-2008
         if (column==0){
-            return new Integer(row+1);
+            return row+1;
         }
         // changed for row numbering in version 0.4, 22-Jan-2008
         //return tableModel.getValueAt(modelIndex(row), column);

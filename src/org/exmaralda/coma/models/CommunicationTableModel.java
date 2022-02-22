@@ -92,7 +92,7 @@ public class CommunicationTableModel extends DefaultTableModel {
 		Vector tmp = new Vector();
 		tmp.add(elm);
 		tmp.add(elm.getAttributeValue("Id"));
-		tmp.add(new Boolean(false));
+		tmp.add(false);
 		tmp.add(elm.getAttributeValue("Name"));
 		tmp.add(strOut);
 		return tmp;

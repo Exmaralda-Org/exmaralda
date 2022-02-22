@@ -1346,11 +1346,11 @@ public class DataPanel extends JPanel implements ActionListener,
 												.substring(2))).intValue();
 									}
 									a = a
-											+ new Integer(trKey.getText())
-													.intValue();
+											+ Integer
+													.parseInt(trKey.getText());
 									segments.put(trKey
 											.getAttributeValue("Name")
-											.substring(2), new Integer(a));
+											.substring(2), a);
 								}
 							}
 						}
@@ -1369,7 +1369,7 @@ public class DataPanel extends JPanel implements ActionListener,
 			countTableModel.addColumn("Segments", segments.keySet().toArray());
 			countTableModel.addColumn("Count", segments.values().toArray());
 			countTableModel.addRow(new String[] { "Transcriptions",
-					(new Integer(segTranscriptionCount)).toString() });
+					(Integer.toString(segTranscriptionCount)) });
 			JTable segmentTable = new JTable(countTableModel);
 			countSegmentDialog.add(segmentTable, BorderLayout.CENTER);
 			countSegmentDialog.add(new JButton(new AbstractAction("OK", null) {

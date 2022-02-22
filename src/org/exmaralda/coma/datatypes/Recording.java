@@ -63,7 +63,7 @@ public class Recording extends ComaDatatype {
 						.getText());
 			//
 			if (myElm.getName().equals("RecordingDuration"))
-				recordingDuration = new Long(myElm.getText());
+				recordingDuration = Long.parseLong(myElm.getText());
 			if (myElm.getName().equals("Availability"))
 				availability = new Availability(myElm, coma);
 		}

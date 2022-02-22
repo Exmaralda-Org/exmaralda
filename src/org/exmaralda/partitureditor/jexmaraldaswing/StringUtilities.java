@@ -67,7 +67,7 @@ class StringUtilities extends Object {
                 result+=symbol;
             }
             else {
-                result+="\\u" + new Integer(symbol).toString() + " ";
+                result+="\\u" + Integer.toString(Character.getNumericValue(symbol)) + " ";
             }
         }
         return result;
@@ -79,8 +79,7 @@ class StringUtilities extends Object {
 
     /** returns true if checkString contains checkChar, false otherwise */
     static boolean contains(String checkString, char checkChar){
-        if (checkString.indexOf(checkChar)>=0){return true;}
-        return false;
+        return checkString.indexOf(checkChar)>=0;
     }
 
     static boolean stringArrayContains(String[] array, String searchString){

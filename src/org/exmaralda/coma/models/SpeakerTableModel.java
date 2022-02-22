@@ -118,7 +118,7 @@ public class SpeakerTableModel extends DefaultTableModel {
 		Vector<Object> tmp = new Vector<Object>();
 		tmp.add(elm); // the element
 		tmp.add(elm.getAttributeValue("Id"));
-		tmp.add(new Boolean(false)); // for communication-linking
+		tmp.add(false); // for communication-linking
 		tmp.add(c1); // the sigle (on display)
 		tmp.add(strOut); // display for the 2nd column
 		return tmp;

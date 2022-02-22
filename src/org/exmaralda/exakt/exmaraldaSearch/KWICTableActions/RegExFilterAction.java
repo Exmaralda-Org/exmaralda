@@ -9,12 +9,10 @@
 
 package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
-import java.applet.Applet;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 
 /**
@@ -43,14 +41,7 @@ public class RegExFilterAction extends AbstractKWICTableAction {
         } else if (c instanceof JDialog){
             javax.swing.JDialog exaktDialog = (javax.swing.JDialog)(table.getTopLevelAncestor());
             filterDialog = new org.exmaralda.exakt.search.swing.AbstractOKCancelDialog(exaktDialog,true,regexFilterPanel);
-        } else if (c instanceof Applet){
-            ////////////////////////////////////////////////////////////
-            // added 13-02-2013: quick hack to enable filtering in Applet
-            ////////////////////////////////////////////////////////////
-            JFrame dummyFrame = null;
-            filterDialog = new org.exmaralda.exakt.search.swing.AbstractOKCancelDialog(dummyFrame,true,regexFilterPanel);            
-            ////////////////////////////////////////////////////////////
-        }
+        } 
         filterDialog.setTitle("Filter");
         filterDialog.setPreferredSize(new java.awt.Dimension(500, filterDialog.getPreferredSize().height));
         java.awt.Dimension dialogSize = filterDialog.getPreferredSize();

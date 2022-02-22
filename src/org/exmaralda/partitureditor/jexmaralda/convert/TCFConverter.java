@@ -453,7 +453,7 @@ public class TCFConverter {
         Map <String, Token> tokenEnds = new HashMap<String, Token>();
         for (int pos = 0; pos < tokenTier.getNumberOfEvents(); pos++) {
             Event e = tokenTier.getEventAt(pos);
-            String token_id = "t_" + new Integer(pos + 1).toString();
+            String token_id = "t_" + Integer.toString(pos + 1);
             long tokenstart = 0;
             long tokenend = 0;
             try {

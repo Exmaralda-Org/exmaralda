@@ -120,7 +120,7 @@ public class StringUtilities extends Object {
                 result+=hex;
                 }
             else {
-                result+="\\u" + new Integer(symbol).toString() + " ";
+                result+="\\u" + Integer.toString(Character.getNumericValue(symbol)) + " ";
             }
         }
         return result;
@@ -213,7 +213,7 @@ public class StringUtilities extends Object {
     }    
   
     static double stringWidth(java.awt.Font font, char ch){
-        String text = new Character(ch).toString(); 
+        String text = Character.toString(ch);
         java.awt.font.TextLayout textLayout = new java.awt.font.TextLayout(text, font, new java.awt.font.FontRenderContext(null, false, true));
         return textLayout.getAdvance();
     }
@@ -270,18 +270,18 @@ public class StringUtilities extends Object {
     // ********************************************
 
     static String rtfPaperFormat(int[] paperFormat){      
-        String paperw = new Integer(paperFormat[0]).toString();
-        String paperh = new Integer(paperFormat[1]).toString();
-        String margl = new Integer(paperFormat[2]).toString();
-        String margr = new Integer(paperFormat[3]).toString();
-        String margt = new Integer(paperFormat[4]).toString();
-        String margb = new Integer(paperFormat[5]).toString();
-        String result = new String( "\\paperw" + paperw +
-                                    "\\paperh" + paperh +
-                                    "\\margl" + margl +
-                                    "\\margr" + margr +
-                                    "\\margt" + margt +
-                                    "\\margb" + margb);
+        String paperw = Integer.toString(paperFormat[0]);
+        String paperh = Integer.toString(paperFormat[1]);
+        String margl = Integer.toString(paperFormat[2]);
+        String margr = Integer.toString(paperFormat[3]);
+        String margt = Integer.toString(paperFormat[4]);
+        String margb = Integer.toString(paperFormat[5]);
+        String result = "\\paperw" + paperw +
+                "\\paperh" + paperh +
+                "\\margl" + margl +
+                "\\margr" + margr +
+                "\\margt" + margt +
+                "\\margb" + margb;
         return result;
     }
     
