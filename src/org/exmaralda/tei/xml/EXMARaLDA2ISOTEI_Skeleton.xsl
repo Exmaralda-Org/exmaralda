@@ -221,7 +221,7 @@
 					<xsl:otherwise>#T_START</xsl:otherwise>
 				</xsl:choose>                
 			</xsl:attribute> -->
-			<xsl:if test="//common-timeline/tli[1]/@time&gt;0.0">
+			<xsl:if test="//common-timeline/tli[1]/@time&gt;0.0 or //common-timeline/tli[1][not(@time)]">
 				<!-- <when xml:id="T_START" absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0"/> -->
 				<when xml:id="T_START" interval="0.0" since="T_START" xmlns="http://www.tei-c.org/ns/1.0"/>				
 			</xsl:if>
