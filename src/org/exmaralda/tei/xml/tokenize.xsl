@@ -18,7 +18,7 @@
     <xsl:template match="tei:seg/text()[//tei:transcriptionDesc/@ident='cGAT']">
         <xsl:variable name="SEG_ID" select="parent::tei:seg/@xml:id"/>
         <!-- The first parse is for non-verbal descriptions such as ((laughs)) -->
-        <xsl:analyze-string select="." regex="\(\(([\p{{L}}]+)( *([\p{{L}}]+))*\)\)">
+        <xsl:analyze-string select="." regex="\(\([^\)]+\)\)">
             <xsl:matching-substring>
                 <tei:incident>
                     <xsl:variable name="DUMMY_W"><w/></xsl:variable>
@@ -36,7 +36,7 @@
                     <xsl:matching-substring>
                         <tei:w>
                             <xsl:variable name="DUMMY_W"><w/></xsl:variable>
-                            <xsl:attribute name="xml:id" select="generate-id($DUMMY_W)"/>
+                            <xsl:attribute name="xml:id" select="concat(generate-id($DUMMY_W),'_', position())"/>
                             <xsl:value-of select="normalize-space(.)"/>
                         </tei:w>
                     </xsl:matching-substring>
@@ -106,7 +106,7 @@
     <xsl:template match="tei:seg/text()[//tei:publisher/text()='QualiBank']">
         <xsl:variable name="SEG_ID" select="parent::tei:seg/@xml:id"/>
         <!-- The first parse is for non-verbal descriptions such as (laughter) -->
-        <xsl:analyze-string select="." regex="\(([\p{{L}}]+)( *([\p{{L}}]+))*\)">
+        <xsl:analyze-string select="." regex="\(([\p{{L}}]+)( *([\p{{L}},\\.0-9]+))*\)">
             <xsl:matching-substring>
                 <tei:incident>
                     <xsl:attribute name="xml:id" select="concat('i', '_', position(), '_', substring-after($SEG_ID, '_'))"/>

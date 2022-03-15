@@ -80,7 +80,7 @@ public class SubtitleConverter {
         return getSRT(false,false);
     }
     
-    public static BasicTranscription readSRT(File srtFile) throws UnsupportedEncodingException, IOException, Exception{
+    public static BasicTranscription readSRT(File srtFile) throws UnsupportedEncodingException, IOException, JexmaraldaException {
         FileInputStream fis = new FileInputStream(srtFile);
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
@@ -148,7 +148,7 @@ public class SubtitleConverter {
         
         BasicTranscription bt = new BasicTranscription();
         
-        Tier tier = new Tier("TIE0", null, "v", "t");
+        Tier tier = new Tier("TIE0", null, "v", "t", "SRT");
         for (org.exmaralda.partitureditor.jexmaralda.Event e : events) tier.addEvent(e);
         bt.getBody().addTier(tier);
         
@@ -320,14 +320,6 @@ public class SubtitleConverter {
             BasicTranscription bt = SubtitleConverter.readSRT(f);
             bt.writeXMLToFile("/Users/thomasschmidt/Dropbox/BASEL/LEHRE_FJS_2022/SEMINAR_MAP_TASKS--edited.exb", "none");
         } catch (IOException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JDOMException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JexmaraldaException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);

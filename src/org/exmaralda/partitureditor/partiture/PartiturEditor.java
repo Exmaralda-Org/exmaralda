@@ -4,6 +4,7 @@
  * Created on 21. August 2001, 15:32
  *	Last change:  TS    6 Nov 2002   11:30 am
  *                    TS    16 June 2003    Restructured package. Put Actions into
+
  *                                          separate classes
  *                    TS    09 March 2004   Restructured again. Put toolbar and menu
  *                                       &   into separate classes
