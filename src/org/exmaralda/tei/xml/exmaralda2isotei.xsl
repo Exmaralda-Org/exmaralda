@@ -345,6 +345,11 @@
                     <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="../@speaker"/>
                 </xsl:attribute>                
             </xsl:if>
+            <!-- new 17-03-2022 -->
+            <xsl:attribute name="xml:id">
+                <xsl:text>inc_</xsl:text>
+                <xsl:value-of select="generate-id()"/>
+            </xsl:attribute>            
             <xsl:attribute name="type">
                 <xsl:value-of select="../@category"/>
             </xsl:attribute>
