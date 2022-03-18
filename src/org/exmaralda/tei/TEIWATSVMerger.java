@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -28,8 +29,6 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author Hedeland, master of c/p :)
- *
  * This class merges an ISO/TEI file, optionally converted from a FLN file, with
  * a WebAnno TSV 3.3 file
  * (https://inception-project.github.io/releases/22.5/docs/user-guide.html#sect_webannotsv)
@@ -40,12 +39,17 @@ import org.xml.sax.SAXException;
  * i.e. identifier is at position 6 and value at position 7, and token IDs (for
  * w and p elements in the ISO/TEI) at position 9.
  *
- * It needs an input folder and will by default take all TEI files and merge
- * them with TSV files having the same filename, creating new suffixed files in
- * the same folder.
+ * It needs an input folder and will by default take all TEI files (.xml) and
+ * merge them with TSV files having the same filename, creating new suffixed
+ * files in the same folder. The suffix can be set individually to replace the
+ * last four characters, i.e. the dot and the extension (but beware of the loop
+ * if IN=OUT).
  *
- * NB: It only cares for the identifier (resource URI) and the value (class) of
- * the Named Entity annotation!
+ * NB: This class only cares for the identifier (resource URI) and the value
+ * (class) of the Named Entity annotation!
+ *
+ * It puts both features in one spanGrp with the value as the text of the span
+ * element and the identifier as a target attrbute (cf. corpus MEND).
  *
  */
 public class TEIWATSVMerger {
@@ -54,18 +58,15 @@ public class TEIWATSVMerger {
     String FORMAT;
     String TSV;
     String OUT;
+    String SUFFIX;
     Namespace TEI;
+    Namespace TEI4XPATH = Namespace.getNamespace("tei", "http://www.tei-c.org/ns/1.0");
     ArrayList<String[]> lines;
     Document teiDocument;
 
     /**
      * @param args the command line arguments
      *
-     * args[1] the input folder for the source TEI or FLN files args[0] the
-     * input format: TEI (.tei) or FLN (.fln), defaults to TEI args[1] the input
-     * folder for WebAnno TSV files, defaults to args[1] args[2] the output
-     * folder for enriched TEI files, defaults to args[1] args[3] the suffix for
-     * the target TEI files, defaults to _NE
      */
     public static void main(String[] args) {
         try {
@@ -80,33 +81,48 @@ public class TEIWATSVMerger {
         }
     }
 
-    public TEIWATSVMerger(String inDir) {
+    public TEIWATSVMerger(String inputDir) {
 
-        IN = inDir;
-        FORMAT = "TEI";
-        TSV = inDir;
-        OUT = inDir;
-        TEI = Namespace.getNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        this(inputDir, "TEI", inputDir, inputDir, "_NE.xml");
 
     }
 
-    public TEIWATSVMerger(String inDir, String inputFormat) {
+    public TEIWATSVMerger(String inputDir, String inputFormat) {
 
-        IN = inDir;
-        FORMAT = inputFormat;
-        TSV = inDir;
-        OUT = inDir;
-        TEI = Namespace.getNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        this(inputDir, inputFormat, inputDir, inputDir, "_NE.xml");
+
+    }
+
+    public TEIWATSVMerger(String inputDir, String inputFormat, String tsvDir) {
+
+        this(inputDir, inputFormat, tsvDir, inputDir, "_NE.xml");
 
     }
 
     public TEIWATSVMerger(String inputDir, String inputFormat, String tsvDir, String outputDir) {
 
+        this(inputDir, inputFormat, tsvDir, outputDir, "_NE.xml");
+
+    }
+
+    /**
+     * @param inputDir the input folder for the source TEI or FLN files
+     * @param inputFormat the input format: TEI (.xml) or FLN (.fln), defaults
+     * to TEI
+     * @param tsvDir the input folder for WebAnno TSV files, defaults to
+     * inputDir
+     * @param outputDir the output folder for enriched TEI files, defaults to
+     * inputDir
+     * @param suffix the suffix for the target files, replaces last for chars,
+     * defaults to _NE.xml
+     */
+    public TEIWATSVMerger(String inputDir, String inputFormat, String tsvDir, String outputDir, String suffix) {
+
         IN = inputDir;
         FORMAT = inputFormat;
         TSV = tsvDir;
         OUT = outputDir;
-        TEI = Namespace.getNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        SUFFIX = suffix;
 
     }
 
@@ -116,8 +132,8 @@ public class TEIWATSVMerger {
 
             @Override
             public boolean accept(File dir, String name) {
-                //return name.toUpperCase().endsWith(".TEI"); won't work for the same in/out dir...
-                return name.toUpperCase().replaceAll("_NE\\.TEI", ".NOTEI").endsWith(".TEI");
+                //some extra stuff might help avoiding silly looping when IN=OUT
+                return (name.toUpperCase().replaceAll("_NE\\.XML", "").endsWith(".XML"));
             }
 
         });
@@ -126,12 +142,13 @@ public class TEIWATSVMerger {
 
             SAXBuilder builder = new SAXBuilder();
             teiDocument = (Document) builder.build(teiFile);
+            TEI = teiDocument.getRootElement().getNamespace();
 
-            File tsvFile = new File(TSV + teiFile.getName().replaceAll("\\.tei", ".tsv"));
+            File tsvFile = new File(TSV + teiFile.getName().replaceAll("\\.xml", ".tsv"));
 
             lines = new ArrayList<>();
 
-            // we read the file and add all relevant lines as String[] to a list 
+            // we read the file and add all lines with annotations as String[] to a list 
             // to have the values ready and some context for multi-unit annotations
             try (BufferedReader br = new BufferedReader(new FileReader(tsvFile))) {
 
@@ -139,22 +156,27 @@ public class TEIWATSVMerger {
 
                 while ((line = br.readLine()) != null) {
 
-                    if (line.contains("wikidata")) {
+                    // we only want to use lines with annotations
+                    if (Pattern.compile("^[0-9]").matcher(line).find()) {
 
                         String[] items = line.split("\\t");
-                        lines.add(items);
 
+                        // items[6] holds the value, like ORG, PLACE etc.
+                        // if there is no annotation, there is an underscore
+                        if (items[6].length() > 1) {
+                            lines.add(items);
+                        }
                     }
                 }
             }
 
-            System.out.println("Done reading " + tsvFile.getAbsolutePath() + ", " + lines.size() + " entries found.");
+            System.out.println(tsvFile.getAbsolutePath() + " read.");
 
             addNELayer();
 
-            System.out.println("Done with TEI file: " + OUT + teiFile.getName().replaceAll("\\.tei", "_NE.tei"));
+            System.out.println(OUT + teiFile.getName().replaceAll("\\.xml", SUFFIX) + " written.");
 
-            IOUtilities.writeDocumentToLocalFile(OUT + teiFile.getName().replaceAll("\\.tei", "_NE.tei"), teiDocument);
+            IOUtilities.writeDocumentToLocalFile(OUT + teiFile.getName().replaceAll("\\.xml", SUFFIX), teiDocument);
         }
     }
 
@@ -190,6 +212,7 @@ public class TEIWATSVMerger {
                 String identifier = identifiers[i];
                 String value = values[i];
 
+                // handle multi-unit annotations
                 if (identifier.contains("[")) {
 
                     // disambiguator IDs are used to chain together multi-unit annotations
@@ -204,40 +227,36 @@ public class TEIWATSVMerger {
                         //System.out.println("Found another one of " + disambiguator + ", not doing anything.");
                     } else {
                         //System.out.println("Now creating mutliple-token annotation");
-                        Element spanIdentifier = new Element("span", TEI);
-                        Element spanValue = new Element("span", TEI);
+                        Element span = new Element("span", TEI);
                         String to = findToId(j, disambiguator);
 
-                        spanIdentifier.setAttribute("from", id);
-                        spanIdentifier.setAttribute("to", to);
-                        spanIdentifier.setText(identifier);
-
+                        span.setAttribute("from", id);
+                        span.setAttribute("to", to);
+                        // if there is no WD link, we don't want the attribute?
+                        if (!identifier.contains("*")) {
+                            span.setAttribute("target", identifier);
+                        }
+                        span.setText(value);
                         //System.out.println("Created annotation span from " + id + " to " + to);
-                        spanValue.setAttribute("from", id);
-                        spanValue.setAttribute("to", to);
-                        spanValue.setText(value);
 
-                        addSpans(id, spanIdentifier, spanValue);
+                        addSpan(id, span, "NE");
                     }
 
                 } else {
                     // System.out.println("Now creating single-token annotation");
-                    Element spanIdentifier = new Element("span", TEI);
-                    Element spanValue = new Element("span", TEI);
+                    Element span = new Element("span", TEI);
 
-                    spanIdentifier.setAttribute("from", id);
-                    spanIdentifier.setAttribute("to", id);
-                    spanIdentifier.setText(identifier);
-
+                    span.setAttribute("from", id);
+                    span.setAttribute("to", id);
+                    // if there is no WD link, we don't want the attribute?
+                    if (!identifier.contains("*")) {
+                        span.setAttribute("target", identifier);
+                    }
+                    span.setText(value);
                     //  System.out.println("Created annotation span from " + id + " to " + id);
-                    spanValue.setAttribute("from", id);
-                    spanValue.setAttribute("to", id);
-                    spanValue.setText(value);
-
-                    addSpans(id, spanIdentifier, spanValue);
+                    addSpan(id, span, "NE");
                 }
             }
-
         }
     }
 
@@ -256,53 +275,39 @@ public class TEIWATSVMerger {
 
     /**
      * @param id the id of the start/from token element
-     * @param spanIdentifier the span for the identifier sublayer
-     * @param spanValue the span for the value sublayer
+     * @param span the span element for the anntotation
+     * @param type the annotation layer (attribute type)
      *
-     * The method adds spans to the identifier and value sublayers of the NE
+     * The method adds a span to the identifier and value sublayers of the NE
      * annotation layer
      */
-    private void addSpans(String id, Element spanIdentifier, Element spanValue) throws JDOMException {
+    private void addSpan(String id, Element span, String type) throws JDOMException {
 
-        //this is where we want to attach the span elements
-        Element spanGrpIdentifier;
-        Element spanGrpValue;
+        //this is where we want to attach the span element
+        Element spanGrp;
 
-        // we try to find already inserted <spanGrp> elements to only add a <span>
-        String pathToSpanGrpIdentifier = "//tei:annotationBlock[descendant::tei:*[@xml:id='" + id + "']]/tei:spanGrp[@type='NE' and @subtype='identifier']";
-        XPath xp2 = XPath.newInstance(pathToSpanGrpIdentifier);
-        xp2.addNamespace(TEI);
-        spanGrpIdentifier = (Element) xp2.selectSingleNode(teiDocument);
+        // we try to find already inserted <spanGrp> element to only add a <span>
+        String pathToSpanGrp = "//tei:annotationBlock[descendant::tei:*[@xml:id='" + id + "']]/tei:spanGrp[@type='" + type + "']";
+        XPath xp2 = XPath.newInstance(pathToSpanGrp);
+        xp2.addNamespace(TEI4XPATH);
+        spanGrp = (Element) xp2.selectSingleNode(teiDocument);
 
-        // if we could retrieve the spanGrp, we have both already and can add to them
-        if (spanGrpIdentifier != null) {
-            String pathToSpanGrpValue = "//tei:annotationBlock[descendant::tei:*[@xml:id='" + id + "']]/tei:spanGrp[@type='NE' and @subtype='value']";
-            XPath xp3 = XPath.newInstance(pathToSpanGrpValue);
-            xp3.addNamespace(TEI);
-            spanGrpValue = (Element) xp3.selectSingleNode(teiDocument);
+        // if we could retrieve the spanGrp elemnt, we can add to it
+        if (spanGrp == null) {
 
-        } else {
-            // if there were none, we fetch the annotationBlock and add the annotations as <span> elements
-            // in the <spanGrp type="NE" suptype="identifier"> child element of the annotationBlock
+            // if there was none, we fetch the annotationBlock and add the annotations
+            // to a new spanGrp child element of the annotationBlock
             String pathToAB = "//tei:annotationBlock[descendant::tei:*[@xml:id='" + id + "']]";
             XPath xp = XPath.newInstance(pathToAB);
-            xp.addNamespace(TEI);
+            xp.addNamespace(TEI4XPATH);
             Element annotationBlock = (Element) xp.selectSingleNode(teiDocument);
 
-            spanGrpIdentifier = new Element("spanGrp", TEI);
-            spanGrpIdentifier.setAttribute("type", "NE");
-            spanGrpIdentifier.setAttribute("subtype", "identifier");
-            annotationBlock.addContent(spanGrpIdentifier);
-            spanGrpValue = new Element("spanGrp", TEI);
-            spanGrpValue.setAttribute("type", "NE");
-            spanGrpValue.setAttribute("subtype", "value");
-            annotationBlock.addContent(spanGrpValue);
-
+            spanGrp = new Element("spanGrp", TEI);
+            spanGrp.setAttribute("type", "NE");
+            annotationBlock.addContent(spanGrp);
         }
 
-        spanGrpIdentifier.addContent(spanIdentifier);
-        spanGrpValue.addContent(spanValue);
-
+        spanGrp.addContent(span);
     }
 
     private void convert() throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
@@ -318,7 +323,7 @@ public class TEIWATSVMerger {
         StylesheetFactory sf = new StylesheetFactory(true);
 
         for (File file : FLNfiles) {
-            File out = new File(new File(IN), file.getName().replaceAll("\\.fln", ".tei"));
+            File out = new File(new File(IN), file.getName().replaceAll("\\.fln", ".xml"));
             String[][] parameters = {
                 {"LANGUAGE", "de"},
                 {"MAKE_INLINE_ATTRIBUTES", "TRUE"}
