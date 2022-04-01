@@ -340,10 +340,10 @@ public class PartitureTableWithActions extends PartitureTable
 
         ipaPanel = new org.exmaralda.partitureditor.ipapanel.IPADialog(parent, false);
         
-        if (parent instanceof PartiturEditor){
+        /*if (parent instanceof PartiturEditor){
             quickMediaOpenDialog = new QuickMediaOpenDialog(parent, this, false);    
             quickMediaOpenDialog.setLocationRelativeTo(parent);
-        }
+        }*/
         
         if (parent instanceof PartiturEditor){
             multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);
@@ -709,6 +709,7 @@ public class PartitureTableWithActions extends PartitureTable
         // 1. Tier actions
         addTierAction.setEnabled(!locked);
         typesAction.setEnabled(aWholeRowIsSelected);
+        listEventsAction.setEnabled(aWholeRowIsSelected);
         removeEmptyEventsAction.setEnabled(aWholeRowIsSelected && !locked);
         moveTierUpAction.setEnabled(aWholeRowIsSelected && selectionStartRow!=0 && !locked);
         insertTierAction.setEnabled(aWholeRowIsSelected && !locked);
@@ -1070,7 +1071,11 @@ public class PartitureTableWithActions extends PartitureTable
 
         editTiersAction = new EditTiersAction(this);
         
+        listEventsAction = new ListEventsAction(this);
+        
         typesAction = new TypesAction(this);
+        
+        listEventsAction = new ListEventsAction(this);
 
         //*********************************************************************************************
         //***************************************** EVENT ACTIONS *************************************
@@ -1339,6 +1344,19 @@ public class PartitureTableWithActions extends PartitureTable
             makeColumnVisible(col);
             this.setNewSelection(selectionStartRow, col, true);
             //setSelectedCells(new JCCellRange(selectionStartRow, col, selectionStartRow, col));
+        } else {
+            // issue #316
+            if (selectionStartRow>0){
+                int continueSearch = JOptionPane.showConfirmDialog(this, "No events found after cursor position. \n"
+                        + "Continue at start?", "Continue search", JOptionPane.YES_NO_OPTION);
+                if (continueSearch==JOptionPane.OK_OPTION){
+                    makeColumnVisible(col);
+                    setNewSelection(selectionStartRow, 0, true);                    
+                    findEvent();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nothing found. ");
+            }
         }
     }
 
@@ -1690,6 +1708,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction showAllTiersAction;
     public javax.swing.AbstractAction removeEmptyEventsAction;
     public javax.swing.AbstractAction editTiersAction;
+    public javax.swing.AbstractAction listEventsAction; // issue #316
     public javax.swing.AbstractAction typesAction; // issue #295
 
     //*******************************************************************
@@ -2145,7 +2164,7 @@ public class PartitureTableWithActions extends PartitureTable
      * @return  */
     public boolean setupMedia(){
         
-        System.out.println("(1a) PartiturTableWithActions: setupMedia");
+        System.out.println("(1a) PartiturEditor: setupMedia");
         // the partitur editor must handle the setup of the time viewer
         // this is awkward but I'm only human
         if (getTopLevelAncestor() instanceof PartiturEditor){
@@ -2405,7 +2424,7 @@ public class PartitureTableWithActions extends PartitureTable
         if ((colNo>0) && getColumnPixelWidth(colNo-1)<300){
             setLeftColumn(colNo-1);
         }
-        this.setSelectedCells(new JCCellRange(rowNo, colNo, rowNo, colNo));
+        setSelectedCells(new JCCellRange(rowNo, colNo, rowNo, colNo));
     }
     
     /** processes a replace result from the replace dialog
@@ -2514,11 +2533,14 @@ public class PartitureTableWithActions extends PartitureTable
                     checkSave();
                 }
                 BasicTranscription bt = new BasicTranscription(file);
+                // # issue #315
+                stratify(bt);
+                
                 getModel().setTranscription(bt);
                 this.setFilename(file);
                 this.setupMedia();
             }
-        } catch (Exception ex) {
+        } catch (JexmaraldaException | SAXException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
         }
@@ -2590,7 +2612,7 @@ public class PartitureTableWithActions extends PartitureTable
                 java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");
 
         String os = System.getProperty("os.name").substring(0,3);
-        String jreVersion = System.getProperty("java.version");
+        //String jreVersion = System.getProperty("java.version");
         String defaultPlayer = "BAS-Audio-Player";
         if (os.equalsIgnoreCase("mac")){
             defaultPlayer = "AVF-Player";

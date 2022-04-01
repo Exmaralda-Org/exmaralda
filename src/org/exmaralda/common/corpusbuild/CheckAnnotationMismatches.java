@@ -24,6 +24,7 @@ public class CheckAnnotationMismatches extends AbstractBasicTranscriptionChecker
     }
     
 
+    @Override
     public void processTranscription(BasicTranscription bt, String currentFilename) throws URISyntaxException, org.xml.sax.SAXException  {
         for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
             Tier t = bt.getBody().getTierAt(pos);

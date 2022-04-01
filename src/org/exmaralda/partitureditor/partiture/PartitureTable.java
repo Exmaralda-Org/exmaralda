@@ -60,7 +60,7 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     /** the SVG Panel */
     public org.exmaralda.partitureditor.svgPanel.SVGDialog svgDialog;
     /** the quick media open dialog */
-    public org.exmaralda.partitureditor.jexmaraldaswing.QuickMediaOpenDialog quickMediaOpenDialog;
+    //public org.exmaralda.partitureditor.jexmaraldaswing.QuickMediaOpenDialog quickMediaOpenDialog;
     /** the segmentation panel (no longer used)*/
     //public org.exmaralda.partitureditor.segmentationPanel.SegmentationPanel segmentationPanel;
     //****************************************************************************

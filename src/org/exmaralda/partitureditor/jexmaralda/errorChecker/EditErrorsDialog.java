@@ -38,7 +38,7 @@ public class EditErrorsDialog extends org.exmaralda.partitureditor.jexmaraldaswi
     public void setErrorList(Document errorDocument){
         listModel = new ErrorListModel(errorDocument);
         errorList.setModel(listModel);
-        countLabel.setText(listModel.getSize() + " errors");
+        countLabel.setText(listModel.getSize() + " errors in " + listModel.getTranscriptionCount() + " transcriptions");
     }
     
     public void addErrorCheckerListener(ErrorCheckerListener ecl){
@@ -99,6 +99,7 @@ public class EditErrorsDialog extends org.exmaralda.partitureditor.jexmaraldaswi
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif"))); // NOI18N
+        openButton.setText("Open...");
         openButton.setToolTipText("Open error list");
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +109,7 @@ public class EditErrorsDialog extends org.exmaralda.partitureditor.jexmaraldaswi
         jPanel3.add(openButton);
 
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Save.gif"))); // NOI18N
+        saveButton.setText("Save");
         saveButton.setToolTipText("Save error list");
         saveButton.setEnabled(false);
         saveButton.addActionListener(new java.awt.event.ActionListener() {

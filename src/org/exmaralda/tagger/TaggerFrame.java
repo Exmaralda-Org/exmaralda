@@ -819,12 +819,9 @@ public class TaggerFrame extends JFrame implements ChangeListener,
 	 * 
 	 */
 	private void changeSurrounding() {
-		tagger.setItemsBefore((new Integer(beforeTextField.getText()))
-				.intValue());
+		tagger.setItemsBefore((Integer.parseInt(beforeTextField.getText())));
 		prefs.put("before", beforeTextField.getText());
-		tagger
-				.setItemsAfter((new Integer(afterTextField.getText()))
-						.intValue());
+		tagger.setItemsAfter((Integer.parseInt(afterTextField.getText())));
 		prefs.put("after", afterTextField.getText());
 	}
 
@@ -1134,9 +1131,10 @@ public class TaggerFrame extends JFrame implements ChangeListener,
 		}
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == progressTextField) {
-			jumpToIndex(new Integer(progressTextField.getText()).intValue());
+			jumpToIndex(Integer.parseInt(progressTextField.getText()));
 		} else if (e.getSource().getClass() == javax.swing.JCheckBox.class) {
 			tagger.updateOptions(showAtt.isSelected(), showTag.isSelected(),
 					ignoreTagged.isSelected(), showFirst.isSelected());
@@ -1293,7 +1291,7 @@ class MyTableModel extends AbstractTableModel {
 			data.add(((TagOption) options.get(i)).getReplaceVal());
 			data.add(((TagOption) options.get(i)).getNewVal());
 			data.add(((TagOption) options.get(i)).getKey());
-			data.add(new Boolean(((TagOption) options.get(i)).isReplace()));
+			data.add(((TagOption) options.get(i)).isReplace());
 			fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
 		}
 		// TODO Auto-generated method stub
@@ -1311,10 +1309,12 @@ class MyTableModel extends AbstractTableModel {
 		return columnNames[col];
 	}
 
+        @Override
 	public Object getValueAt(int row, int col) {
 		return data.get((row * getColumnCount()) + col);
 	}
 
+        @Override
 	public Class getColumnClass(int c) {
 		return getValueAt(0, c).getClass();
 	}
@@ -1324,13 +1324,14 @@ class MyTableModel extends AbstractTableModel {
 		data.add("");
 		data.add("");
 		data.add("");
-		data.add(new Boolean(false));
+		data.add(false);
 		fireTableRowsInserted(getRowCount() + 1, getRowCount() + 1);
 	}
 
 	/*
 	 * Don't need to implement this method unless your table's editable.
 	 */
+        @Override
 	public boolean isCellEditable(int row, int col) {
 		return true;
 	}
@@ -1338,6 +1339,7 @@ class MyTableModel extends AbstractTableModel {
 	/*
 	 * Don't need to implement this method unless your table's data can change.
 	 */
+        @Override
 	public void setValueAt(Object value, int row, int col) {
 		data.set((row * getColumnCount()) + col, value);
 		fireTableCellUpdated(row, col);

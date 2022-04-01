@@ -165,8 +165,8 @@ public class BasicTranscription2COMA {
 				communicationElement);
 		Object[] returnValue = new Object[3];
 		returnValue[0] = communicationElement.getAttributeValue("Name");
-		returnValue[1] = new Integer(countNew);
-		returnValue[2] = new Integer(countExisting);
+		returnValue[1] = countNew;
+		returnValue[2] = countExisting;
 		return returnValue;
 	}
 

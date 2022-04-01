@@ -123,7 +123,7 @@ public class FSMSaxHandler extends org.xml.sax.helpers.DefaultHandler{
                                                                                 break;
                                                         case CHAR_SET_TYPE  :   String charSet = (String)charSets.get(currentInput);
                                                                                 for (int pos=0; pos<charSet.length(); pos++){
-                                                                                    String c = new Character(charSet.charAt(pos)).toString();
+                                                                                    String c = Character.toString(charSet.charAt(pos));
                                                                                     fsm.putTransition(currentSource, currentTarget, c, currentOutput);
                                                                                 }
                                                                                 break;

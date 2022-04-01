@@ -8,6 +8,9 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import java.net.URISyntaxException;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.errorChecker.EditErrorsDialog;
 import org.exmaralda.partitureditor.partiture.*;
 import org.jdom.Document;
@@ -88,9 +91,17 @@ public class GetStructureErrorsAction extends org.exmaralda.partitureditor.parti
         text = "Annotation mismatch";
         for (String tierID : annotationMismatches.keySet()){
             String[] eventIDs = annotationMismatches.get(tierID);
+            
+            // issue #315
+            String category = "";
+            try {
+                category = table.getModel().getTranscription().getBody().getTierWithID(tierID).getCategory();
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(GetStructureErrorsAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (String eventID : eventIDs){
                 try {
-                    Element error = org.exmaralda.partitureditor.jexmaralda.errorChecker.Utilities.makeError(filename, tierID, eventID, text);
+                    Element error = org.exmaralda.partitureditor.jexmaralda.errorChecker.Utilities.makeError(filename, tierID, eventID, text + " [" + category + "]");
                     errors.addContent(error);
                 } catch (URISyntaxException ex) {
                     ex.printStackTrace();

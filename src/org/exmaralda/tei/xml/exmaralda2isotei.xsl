@@ -155,7 +155,7 @@
                     <xsl:otherwise><xsl:value-of select="$XPOINTER_HASH"/>T_START</xsl:otherwise>
                 </xsl:choose>                
             </xsl:attribute> -->
-            <xsl:if test="//tli[1]/@time&gt;0.0">
+            <xsl:if test="//tli[1]/@time&gt;0.0 or //tli[1][not(@time)]">
                 <when xml:id="T_START" xmlns="http://www.tei-c.org/ns/1.0" interval="0.0" since="T_START"/>                        
             </xsl:if>
             <xsl:apply-templates select="//tli"/>
@@ -163,7 +163,7 @@
     </xsl:template>
     
     <!-- CHANGE FOR ISO: use decimal seconds notation, use intervals and since instead of absoulute -->
-    <xsl:template match="tli[position()&gt;1]">
+    <xsl:template match="tli[preceding-sibling::tli]">
         <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
@@ -183,7 +183,7 @@
     </xsl:template>
     
     <!-- CHANGE FOR ISO: special treatment for first -->
-    <xsl:template match="tli[position()=1]">
+    <xsl:template match="tli[not(preceding-sibling::tli)]"> 
         <xsl:choose>
             <xsl:when test="@time=0" >
                 <!-- <when absolute="00:00:00.0" xmlns="http://www.tei-c.org/ns/1.0">
@@ -194,7 +194,7 @@
                     <xsl:attribute name="since" select="@id"/>
                     <xsl:attribute name="interval" select="0.0"/>                    
                 </xsl:element>
-            </xsl:when>
+            </xsl:when> 
             <xsl:otherwise>
                 <xsl:element name="when" xmlns="http://www.tei-c.org/ns/1.0">
                     <xsl:attribute name="xml:id">
@@ -345,6 +345,11 @@
                     <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="../@speaker"/>
                 </xsl:attribute>                
             </xsl:if>
+            <!-- new 17-03-2022 -->
+            <xsl:attribute name="xml:id">
+                <xsl:text>inc_</xsl:text>
+                <xsl:value-of select="generate-id()"/>
+            </xsl:attribute>            
             <xsl:attribute name="type">
                 <xsl:value-of select="../@category"/>
             </xsl:attribute>

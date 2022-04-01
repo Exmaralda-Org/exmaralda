@@ -31,7 +31,7 @@ public class ViewMenu extends AbstractTableMenu {
     public JCheckBoxMenuItem showIPAPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showMultimodalPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showSVGPanelCheckBoxMenuItem;
-    public JCheckBoxMenuItem showQuickMediaOpenCheckBoxMenuItem;
+    //public JCheckBoxMenuItem showQuickMediaOpenCheckBoxMenuItem;
     //public JCheckBoxMenuItem showSegmentationPanelCheckBoxMenuItem;
     public JCheckBoxMenuItem showToolbarCheckBoxMenuItem;
     public JCheckBoxMenuItem showLargeTextFieldCheckBoxMenuItem;
@@ -82,7 +82,7 @@ public class ViewMenu extends AbstractTableMenu {
             }
         });
         
-        showQuickMediaOpenCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
+        /*showQuickMediaOpenCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showQuickMediaOpenCheckBoxMenuItem.setSelected(false);
         showQuickMediaOpenCheckBoxMenuItem.setText(Internationalizer.getString("Quick media open panel"));
         showQuickMediaOpenCheckBoxMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +90,7 @@ public class ViewMenu extends AbstractTableMenu {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showQuickMediaOpenCheckBoxMenuItemActionPerformed(evt);
             }
-        });
+        });*/
 
         showPraatPanelCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         showPraatPanelCheckBoxMenuItem.setSelected(true);
@@ -153,7 +153,7 @@ public class ViewMenu extends AbstractTableMenu {
         addSeparator();
         add(showMultimodalPanelCheckBoxMenuItem).setToolTipText("The panel with annotation symbols for non-verbal actions, facial expression etc.");
         add(showSVGPanelCheckBoxMenuItem).setToolTipText("The panel for working with external SVG files");
-        add(showQuickMediaOpenCheckBoxMenuItem);
+        //add(showQuickMediaOpenCheckBoxMenuItem);
         //add(showSegmentationPanelCheckBoxMenuItem);
         addSeparator();
         
@@ -270,9 +270,9 @@ public class ViewMenu extends AbstractTableMenu {
         }
     }
     
-    private void showQuickMediaOpenCheckBoxMenuItemActionPerformed(ActionEvent evt) {
+    /*private void showQuickMediaOpenCheckBoxMenuItemActionPerformed(ActionEvent evt) {
         table.quickMediaOpenDialog.setVisible(showQuickMediaOpenCheckBoxMenuItem.isSelected());
-    }
+    }*/
     
     
     private void showKeyboardCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {

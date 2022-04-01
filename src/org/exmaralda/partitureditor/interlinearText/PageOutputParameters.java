@@ -54,7 +54,7 @@ public class PageOutputParameters extends OutputParameters {
     public double getPaperMeasure(String propertyName, short unit){
         try{
             String propertyValue = getProperty(propertyName);
-            double twipsValue = new Double(propertyValue).doubleValue();
+            double twipsValue = Double.parseDouble(propertyValue);
             switch (unit) {
                 case CM_UNIT : return twipsValue / 567;
                 case INCH_UNIT : return twipsValue / 1440;

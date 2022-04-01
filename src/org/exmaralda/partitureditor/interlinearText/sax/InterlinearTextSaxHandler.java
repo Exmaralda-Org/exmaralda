@@ -93,7 +93,7 @@ public class InterlinearTextSaxHandler extends org.xml.sax.helpers.DefaultHandle
                                                         {
                                                             try {
                                                                 String value = atts.getValue("offset");
-                                                                double doubleValue = new Double(value).doubleValue();
+                                                                double doubleValue = Double.parseDouble(value);
                                                                 currentSyncPoint.setOffset(doubleValue);
                                                             } catch (NumberFormatException nfe){
                                                                 throw new SAXException("Wrong number format");

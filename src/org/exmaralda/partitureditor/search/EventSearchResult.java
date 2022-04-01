@@ -22,6 +22,7 @@ public class EventSearchResult {
     public EventSearchResult() {
     }
     
+    @Override
     public String toString(){
         String result = tierName + "\t" + tierID + "\t" + Integer.toString(offset) + "\t" + Integer.toString(length) + "\t";
         result+= event.getDescription() + "\t" + event.getStart() + "\t" + event.getEnd();

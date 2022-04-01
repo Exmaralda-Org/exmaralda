@@ -338,6 +338,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter==dialog.VTTFileFilter) {
             // added 17-11-2017: issue #119
             importedTranscription = SubtitleConverter.readVTT(selectedFile);
+        } else if (selectedFileFilter==dialog.SRTFileFilter) {
+            // added 17-11-2017: issue #119
+            importedTranscription = SubtitleConverter.readSRT(selectedFile);
         } else if (selectedFileFilter == dialog.TsvFileFilter) {
             TsvConverter itc = new TsvConverter();
             if (dialog.encodingComboBox.getSelectedIndex()==0){

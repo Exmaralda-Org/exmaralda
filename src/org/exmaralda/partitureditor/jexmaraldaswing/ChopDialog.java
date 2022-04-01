@@ -21,10 +21,10 @@ public class ChopDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Integer value = new Integer(Math.round(maxValue/10)); 
-        Integer min = new Integer(0);
-        Integer max = new Integer(maxValue); 
-        Integer step = new Integer(1); 
+        Integer value = Math.round(maxValue/10); 
+        Integer min = 0;
+        Integer max = maxValue; 
+        Integer step = 1; 
         SpinnerNumberModel model = new SpinnerNumberModel(value, min, max, step); 
         tliNumberSpinner.setModel(model);
         Internationalizer.internationalizeDialogToolTips(this);                

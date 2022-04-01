@@ -36,13 +36,13 @@ public class SegmentCountForMetaInformation {
                     System.out.println("Segmentation " + s.getName());
                     HashSet segmentHashSet = s.getAllSegmentNames();                    
                     for (Iterator i = segmentHashSet.iterator(); i.hasNext(); ){
-                       String segmentName = new String((String)i.next());
+                       String segmentName = (String)i.next();
                        int count = (s.getAllSegmentsWithName(segmentName)).size();
                        if (!allSegmentCounts.containsKey(segmentName)){
-                           allSegmentCounts.put(segmentName, new Integer(0));
+                           allSegmentCounts.put(segmentName, 0);
                        }
                        Integer c = (Integer)(allSegmentCounts.get(segmentName));
-                       allSegmentCounts.put (segmentName,new Integer(c.intValue()+count));
+                       allSegmentCounts.put (segmentName, c.intValue()+count);
                     }                    
                 }
             }

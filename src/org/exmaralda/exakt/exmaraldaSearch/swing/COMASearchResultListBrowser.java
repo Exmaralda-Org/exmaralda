@@ -41,7 +41,7 @@ public class COMASearchResultListBrowser extends javax.swing.JPanel {
         String countString = countTextField.getText();
         int position = Integer.parseInt(countString)-1;
         // changed 12-03-2012
-        tableModel.setValueAt(new Boolean(selectionCheckBox.isSelected()), position, 1);
+        tableModel.setValueAt(selectionCheckBox.isSelected(), position, 1);
         
         int count = 0;
         for (int col=1; col<tableModel.getColumnCount(); col++){

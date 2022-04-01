@@ -25,9 +25,9 @@ public class TestTT4J {
     }
 
     // 04-11-2021, issue #286 : this one works
-    //public static String TTC = "D:\\Dropbox\\TreeTagger";
+    public static String TTC = "D:\\Dropbox\\TreeTagger";
     // 04-11-2021, issue #286 : and this one doesn't
-    public static String TTC = "c:\\TreeTagger";
+    //public static String TTC = "c:\\TreeTagger";
     public String parameterFile = "C:\\TreeTagger\\lib\\italian.par";
     public String[] options = {"-token","-lemma","-sgml","-no-unknown"};
     String parameterFileEncoding = "UTF-8"; 
@@ -55,6 +55,7 @@ public class TestTT4J {
              System.out.println("Tagger setup complete");
              
              System.out.println("*** FlushSequence: " + tt.getModel().getFlushSequence());
+             
              
              String[] tokenArray = {"uno", "due", "tre", 
                  "uno", "due", "tre", 

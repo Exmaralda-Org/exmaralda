@@ -43,7 +43,7 @@ public class EventListTableModel extends javax.swing.table.AbstractTableModel{
             case 1 : return ei.getEndTime() * 1000.0;
             case 2 : return ei.getSpeakerID();
             case 3 : return ei.getDescription();
-            case 4 : return new Boolean(ei.getDescription().matches(org.exmaralda.folker.utilities.Constants.GAT_EVENT));
+            case 4 : return ei.getDescription().matches(org.exmaralda.folker.utilities.Constants.GAT_EVENT);
         }
         return null;
     }

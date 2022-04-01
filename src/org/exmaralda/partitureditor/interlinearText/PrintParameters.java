@@ -28,11 +28,11 @@ public class PrintParameters extends PageOutputParameters {
     }
     
     public void resetCurrentX(){
-        currentX = new Double(getPaperMeasure("margin:left",OutputParameters.PX_UNIT)).floatValue();
+        currentX = Float.parseFloat(Double.toString(getPaperMeasure("margin:left",OutputParameters.PX_UNIT)));
     }
     
     public void resetCurrentY(){
-        currentY = new Double(getPaperMeasure("margin:top",OutputParameters.PX_UNIT)).floatValue();
+        currentY = Float.parseFloat(Double.toString(getPaperMeasure("margin:top",OutputParameters.PX_UNIT)));
     }
 
 }

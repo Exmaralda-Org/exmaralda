@@ -26,7 +26,7 @@ public class ChooseTimelineItemDialog extends JEscapeDialog {
         timeline = t;
         timelineItemsListModel = new javax.swing.DefaultListModel();        
         for (int pos=1; pos<timeline.getNumberOfTimelineItems()-1; pos++){
-            String index = new Integer(beginIndex+pos-1).toString();
+            String index = Integer.toString(beginIndex+pos-1);
             TimelineItem tli = timeline.getTimelineItemAt(pos);
             String listEntry = new String(index + ":");
             if (tli.getTime()>=0){

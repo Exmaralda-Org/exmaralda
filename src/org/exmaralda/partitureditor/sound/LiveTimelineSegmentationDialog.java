@@ -63,12 +63,12 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
         //System.out.println("Adding " + t);
         if ((times.size()>0) && maxIntervalCheckBox.isSelected()){
             double lastTime = times.get(times.size()-1);
-            int maxTime = ((Integer)maxIntervalSpinner.getValue()).intValue();
+            int maxTime = ((Integer)maxIntervalSpinner.getValue());
             if ((t - lastTime) > maxTime){
                 int intermediateIntervalCount = ((int) (t-lastTime)) / (int) maxTime +1;
                 double intermediateIntervalLength = (t-lastTime)/intermediateIntervalCount;
                 for (double time=lastTime + intermediateIntervalLength; time<t; time+=intermediateIntervalLength){
-                    times.addElement(new Double(time));
+                    times.addElement(time);
                     String timeString = "[" + TimeStringFormatter.formatMiliseconds(time*1000.0,2) + "]";
                     listModel.addElement(timeString);
                     tliList.scrollRectToVisible(tliList.getCellBounds(listModel.size()-1, listModel.size()-1));
@@ -90,7 +90,7 @@ public class LiveTimelineSegmentationDialog extends javax.swing.JDialog implemen
             Vector<Double> otherTimes = new Vector<Double>();
             double intervalLength = ((Integer)maxIntervalSpinner.getValue()).intValue();
             for (double d = 0.0; d<this.getPlayer().getTotalLength(); d+=intervalLength){
-                otherTimes.add(new Double(d));
+                otherTimes.add(d);
             }
             return otherTimes;
         }

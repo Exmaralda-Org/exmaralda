@@ -33,10 +33,10 @@ public class DurationHelper {
 	// timeSpans for update-intervals
 	public static HashMap<String, Long> timeSpans() {
 		HashMap<String, Long> ts = new HashMap<String, Long>();
-		ts.put("timespanNever", new Long("0"));
-		ts.put("timespanDaily", new Long("86400000"));
-		ts.put("timespanWeekly", new Long("604800000"));
-		ts.put("timespanMonthly", new Long("2628000000"));
+		ts.put("timespanNever", (long)0);
+		ts.put("timespanDaily", (long)86400000);
+		ts.put("timespanWeekly", (long)604800000);
+		ts.put("timespanMonthly", Long.parseLong("2628000000"));
 		return ts;
 	}
 

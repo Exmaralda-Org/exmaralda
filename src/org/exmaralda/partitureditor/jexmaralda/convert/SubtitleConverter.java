@@ -10,7 +10,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,6 +26,9 @@ import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaralda.Timeline;
+import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -34,6 +39,14 @@ import org.xml.sax.SAXException;
  * @author Schmidt
  */
 public class SubtitleConverter {
+
+    private static double parseTime(String timeString) {
+        int hours = Integer.parseInt(timeString.substring(0, 2));
+        int minutes = Integer.parseInt(timeString.substring(3, 5));
+        double seconds = Double.parseDouble(timeString.substring(7).replace(",", "."));
+        double time = 3600 * hours + 60 * minutes + seconds;
+        return time;
+    }
 
     EventListTranscription transcription;
     
@@ -65,6 +78,91 @@ public class SubtitleConverter {
     //wünschen dürfte!    
     public String getSRT(){
         return getSRT(false,false);
+    }
+    
+    public static BasicTranscription readSRT(File srtFile) throws UnsupportedEncodingException, IOException, JexmaraldaException {
+        FileInputStream fis = new FileInputStream(srtFile);
+        InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+        BufferedReader br = new BufferedReader(isr);
+        String nextLine = "";
+        System.out.println("Started reading document");
+        
+        /*
+                1
+                00:00:00,389 --> 00:00:07,910
+                And led you to put them up to ask. OK,
+                so I guess you have to start then you move
+
+                2
+                00:00:08,010 --> 00:00:16,309
+                to the right until you arrive at the I guess
+                it's something like a real z
+
+                3
+                00:00:16,530 --> 00:00:22,940
+                and then you go down like one
+                centimeter before you arrive at the real, you go
+        
+        
+        */
+        boolean started = false;
+        String text = "";
+        String startTLI = null;
+        String endTLI = null;
+        List<org.exmaralda.partitureditor.jexmaralda.Event> events = new ArrayList<>();
+        List<TimelineItem> tlis = new ArrayList<>();
+        while ((nextLine = br.readLine()) != null){
+            if (nextLine.trim().matches("\\d+") && started){
+                // flush
+                org.exmaralda.partitureditor.jexmaralda.Event event = new org.exmaralda.partitureditor.jexmaralda.Event();
+                event.setStart(startTLI);
+                event.setEnd(endTLI);
+                event.setDescription(text);
+                events.add(event);
+                text="";
+            } else if (nextLine.trim().length()==0){
+                // nothing
+            } else if (nextLine.contains("-->")){
+                // times
+                String timeString1 = nextLine.substring(0, nextLine.indexOf("-->")).trim();
+                String timeString2 = nextLine.substring(nextLine.indexOf("-->") + 3).trim();
+                
+                startTLI = "TLI_" + timeString1.replaceAll("[\\:\\,]", "_");
+                endTLI = "TLI_" + timeString2.replaceAll("[\\:\\,]", "_");
+                
+                double startTime = parseTime(timeString1);
+                double endTime = parseTime(timeString2);
+                
+                TimelineItem tli1 = new TimelineItem(startTLI, startTime);
+                TimelineItem tli2 = new TimelineItem(endTLI, endTime);
+                
+                tlis.add(tli1);
+                tlis.add(tli2);
+
+                
+            } else {
+                text+=nextLine + " ";
+            }
+            started = true;
+        }
+        
+        BasicTranscription bt = new BasicTranscription();
+        
+        Tier tier = new Tier("TIE0", null, "v", "t", "SRT");
+        for (org.exmaralda.partitureditor.jexmaralda.Event e : events) tier.addEvent(e);
+        bt.getBody().addTier(tier);
+        
+        
+        Timeline timeline = new Timeline();
+        for (TimelineItem tli : tlis){
+            timeline.addTimelineItem(tli);
+        }
+        
+        bt.getBody().setCommonTimeline(timeline);
+        
+        return bt;
+        
+        
     }
 
     public String getSRT(boolean frames, boolean plainText){
@@ -217,21 +315,15 @@ public class SubtitleConverter {
     }
     
     public static void main(String[] args){
-        File f = new File("F:\\Dropbox\\IDS\\AGD\\BETV\\BETV_E_00003_SE_01_T_01.vtt");
+        File f = new File("/Users/thomasschmidt/Dropbox/BASEL/LEHRE_FJS_2022/SEMINAR_MAP_TASKS--edited.srt");
         try {
-            BasicTranscription bt = SubtitleConverter.readVTT(f);
-            bt.writeXMLToFile("F:\\Dropbox\\IDS\\AGD\\BETV\\BETV_E_00003_SE_01_T_01.exb", "none");
+            BasicTranscription bt = SubtitleConverter.readSRT(f);
+            bt.writeXMLToFile("/Users/thomasschmidt/Dropbox/BASEL/LEHRE_FJS_2022/SEMINAR_MAP_TASKS--edited.exb", "none");
         } catch (IOException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JDOMException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JexmaraldaException ex) {
+            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

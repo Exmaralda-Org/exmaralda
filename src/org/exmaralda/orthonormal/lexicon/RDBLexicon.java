@@ -74,9 +74,9 @@ public class RDBLexicon extends AbstractNormalizationLexicon {
             while (srs.next()) {
                String lemma = srs.getString("Lemma");
                if (!(formsWithFrequencies.containsKey(lemma))){
-                   formsWithFrequencies.put(lemma, new Integer(1));
+                   formsWithFrequencies.put(lemma, 1);
                } else {
-                   formsWithFrequencies.put(lemma, new Integer(formsWithFrequencies.get(lemma).intValue()+1));
+                   formsWithFrequencies.put(lemma, formsWithFrequencies.get(lemma)+1);
                }
             }
         } catch (SQLException ex) {

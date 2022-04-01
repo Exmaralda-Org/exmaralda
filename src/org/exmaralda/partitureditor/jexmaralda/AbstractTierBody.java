@@ -37,7 +37,7 @@ public class AbstractTierBody extends AbstractBody {
     public void addTier (AbstractTier t) throws JexmaraldaException {
         if (lookupID(t.getID())!=-1){throw new JexmaraldaException(6, new String("ID " + t.getID() + " already exists in this transcription."));}
         addElement(t);
-        positions.put(t.getID(),new Integer(getNumberOfTiers()-1));       
+        positions.put(t.getID(), getNumberOfTiers()-1);       
     }            
 
     /** removes the tier at the specified position */
@@ -51,7 +51,7 @@ public class AbstractTierBody extends AbstractBody {
     public void updatePositions(){
         positions.clear();
         for (int i=0; i<getNumberOfTiers(); i++){
-            positions.put(((AbstractTier)elementAt(i)).getID(), new Integer(i));
+            positions.put(((AbstractTier)elementAt(i)).getID(), i);
         }       
     }
     
@@ -136,8 +136,8 @@ public class AbstractTierBody extends AbstractBody {
     public String getFreeID(){
         if (getNumberOfTiers()>0) {
             int i=0;
-            while (positions.containsKey((String)("TIE" + new Integer(i).toString()))){i++;}
-            return (String)("TIE" + new Integer(i));
+            while (positions.containsKey((String)("TIE" + Integer.toString(i)))){i++;}
+            return (String)("TIE" + i);
         }
         return "TIE0";
     }

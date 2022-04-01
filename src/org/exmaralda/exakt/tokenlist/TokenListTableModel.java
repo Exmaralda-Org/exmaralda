@@ -32,20 +32,23 @@ public class TokenListTableModel extends AbstractTableModel {
 
 
 
+    @Override
     public int getRowCount() {
         return theTokens.size();
     }
 
+    @Override
     public int getColumnCount() {
         return 2;
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         String token = theTokens.get(rowIndex);
         if (columnIndex==0){
             return token;
         } else if (columnIndex==1){
-            return new Integer(tokenList.getTokenCount(token));
+            return tokenList.getTokenCount(token);
         }
         return "";
     }

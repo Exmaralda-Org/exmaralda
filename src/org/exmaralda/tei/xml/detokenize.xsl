@@ -31,6 +31,13 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- For untokenized <seg> content -->
+    <xsl:template match="tei:seg[text()]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
     <xsl:template match="tei:seg">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>

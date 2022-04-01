@@ -87,7 +87,7 @@ public class AbstractEventTier extends AbstractTier {
     /** adds event e */
     public void addEvent(Event e) {
         addElement(e);
-        positions.put(e.getStart(),new Integer(getNumberOfEvents()-1));
+        positions.put(e.getStart(), getNumberOfEvents()-1);
     }
    
     /** checks if the tier contains at least one event with start id id */
@@ -417,7 +417,8 @@ public class AbstractEventTier extends AbstractTier {
                 int length1 = timeline.calculateSpan(e1.getStart(),e1.getEnd());
                 int length2 = timeline.calculateSpan(e2.getStart(),e2.getEnd());
                 
-                return new Integer(length1).compareTo(new Integer(length2));
+                //return new Integer(length1).compareTo(new Integer(length2));
+                return Integer.compare(length1, length2);
             }
             
         });

@@ -58,7 +58,7 @@ public class Formats extends Vector implements XMLElement, HTMLable {
             return false;
         }
         addElement(f);
-        positions.put(f.getID(),new Integer(getNumberOfFormats()-1));
+        positions.put(f.getID(), getNumberOfFormats()-1);
         return true;
     }
     

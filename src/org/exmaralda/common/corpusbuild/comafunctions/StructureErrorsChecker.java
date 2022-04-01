@@ -7,8 +7,12 @@ package org.exmaralda.common.corpusbuild.comafunctions;
 
 import java.net.URISyntaxException;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.common.corpusbuild.AbstractCorpusChecker;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.partiture.transcriptionActions.GetStructureErrorsAction;
 import org.xml.sax.SAXException;
 
 /**
@@ -65,10 +69,18 @@ public class StructureErrorsChecker extends AbstractCorpusChecker {
         if (checkAnnotationMismatches){
             Hashtable<String, String[]> annotationMismatches = bt.getAnnotationMismatches();
             String text = "Annotation mismatch";
+            // issue #315
+            
             for (String tierID : annotationMismatches.keySet()){
                 String[] eventIDs = annotationMismatches.get(tierID);
+                String category = "";
+                try {
+                    category = bt.getBody().getTierWithID(tierID).getCategory();
+                } catch (JexmaraldaException ex) {
+                    Logger.getLogger(GetStructureErrorsAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 for (String eventID : eventIDs){
-                    addError(currentFilename, tierID, eventID, text);
+                    addError(currentFilename, tierID, eventID, text + " [" + category + "]");
                 }
             }
         }

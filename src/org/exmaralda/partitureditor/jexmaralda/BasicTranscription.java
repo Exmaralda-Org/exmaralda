@@ -289,7 +289,7 @@ public class BasicTranscription extends AbstractTranscription {
         for (int pos=0; pos<getBody().getNumberOfTiers();pos++){
             Tier t = getBody().getTierAt(pos);
             if (t.getDescription(getHead().getSpeakertable()).equals(t.getDisplayName())){
-                resultVector.add(new Integer(pos));
+                resultVector.add(pos);
             }
         }
         int[] result = new int[resultVector.size()];

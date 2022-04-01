@@ -23,10 +23,10 @@ public class PrintUtilities {
     static void drawBorder(Graphics2D graphics, Rectangle2D.Double r, 
                            String border, String borderStyle, Color borderColor, Color backgroundColor){
        // convert the boundaries to integers
-       int x = Math.round(new Double(r.x).floatValue());
-       int y = Math.round(new Double(r.y).floatValue());   
-       int w = Math.round(new Double(r.width).floatValue());;
-       int h = Math.round(new Double(r.height).floatValue());;
+       int x = Math.round((float)(r.x));
+       int y = Math.round((float)(r.y));   
+       int w = Math.round((float)(r.width));
+       int h = Math.round((float)(r.height));
        // fill the specified space with the specified background color
        if (!backgroundColor.equals(Color.white)){   // no need to fill white areas (GIBT NUR AEGER)
             graphics.setColor(backgroundColor);

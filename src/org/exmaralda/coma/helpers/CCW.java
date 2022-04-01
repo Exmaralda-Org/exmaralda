@@ -793,7 +793,7 @@ public class CCW extends javax.swing.JDialog implements PropertyChangeListener,
 			header.add("segmented");
 			for (File f : transcriptions.keySet()) {
 				Vector<Object> innen = new Vector<Object>();
-				innen.add(new Boolean(true));
+				innen.add(true);
 				innen.add(f);
 				innen.add(f.getParent());
 				innen.add(transcriptions.get(f).isSegmented());

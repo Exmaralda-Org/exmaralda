@@ -203,7 +203,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
         HashSet<Integer> numbers = new HashSet<Integer>();
         while((numbers.size()<howMany) && numbers.size()<size()){
             int number = random.nextInt(size());
-            numbers.add(new Integer(number));
+            numbers.add(number);
         }
         for (int pos=0; pos<size(); pos++){
             SearchResultInterface r = elementAt(pos);

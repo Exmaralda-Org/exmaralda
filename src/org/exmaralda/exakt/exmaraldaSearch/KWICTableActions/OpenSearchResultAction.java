@@ -74,7 +74,7 @@ public class OpenSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                 String panelTitle = corpus.getCorpusName() + " (" + file.getName() + ")";
                 exaktFrame.tabbedPane.add(panelTitle,newPanel);        
                 exaktFrame.tabbedPane.setSelectedComponent(newPanel);
-                exaktFrame.panelIndex.put(newPanel, new Integer(exaktFrame.tabbedPane.getTabCount()-1));    
+                exaktFrame.panelIndex.put(newPanel, exaktFrame.tabbedPane.getTabCount()-1);    
                 exaktFrame.concordanceListModel.addElement(newPanel);
                 exaktFrame.concordanceList.setSelectedValue(exaktFrame.getActiveSearchPanel(),true);
                 newPanel.setCellEditors();

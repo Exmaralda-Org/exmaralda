@@ -252,7 +252,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
                             switch (parseMethodComboBox.getSelectedIndex()){
                                 case 0 :
                                     //teiConverter.writeGenericTEIToFile(bt, OUTPUT_NAME);                                    
-                                    teiConverter.writeGenericISOTEIToFile(bt, OUTPUT_NAME);
+                                    teiConverter.writeNonSegmentedISOTEIToFile(bt, OUTPUT_NAME);
                                     break;
                                 case 1 : // cGAT
                                     //teiConverter.writeFOLKERTEIToFile(bt, OUTPUT_NAME);

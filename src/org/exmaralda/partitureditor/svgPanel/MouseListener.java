@@ -56,8 +56,8 @@ public class MouseListener implements EventListener {
 				SVGRect rect = new SVGOMRect();
 				rect.setHeight(1.0f);
 				rect.setWidth(1.0f);
-				rect.setX(new Float(x));
-				rect.setY(new Float(y));
+				rect.setX((float)(x));
+				rect.setY((float)(y));
 
 				GraphicsNode gvtRoot = canvas.getCanvasGraphicsNode();
 				List<?> it = gvtRoot.getRoot().getChildren();

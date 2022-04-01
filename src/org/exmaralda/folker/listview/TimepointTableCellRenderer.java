@@ -52,7 +52,7 @@ public class TimepointTableCellRenderer extends javax.swing.table.DefaultTableCe
         String formatted = "";
         if (value!=null){
             Timepoint tp = (Timepoint)value;
-            Double miliseconds = new Double(tp.getTime());
+            Double miliseconds = tp.getTime();
             formatted = org.exmaralda.folker.utilities.TimeStringFormatter.formatMiliseconds(miliseconds,2);
         }
         retValue = super.getTableCellRendererComponent(table, formatted, isSelected, hasFocus, row, column);

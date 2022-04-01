@@ -105,6 +105,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/org/exmaralda/partitureditor/partiture/Icons/Open.gif"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Open..."/>
                     <Property name="toolTipText" type="java.lang.String" value="Open error list"/>
                   </Properties>
                   <Events>
@@ -116,6 +117,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/org/exmaralda/partitureditor/partiture/Icons/Save.gif"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Save"/>
                     <Property name="toolTipText" type="java.lang.String" value="Save error list"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>

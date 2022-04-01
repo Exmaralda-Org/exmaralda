@@ -39,7 +39,7 @@ public class ColorHelper {
 	 * @return
 	 */
 	public static Color getColorForIndex(int index,int max) {
-		return Color.getHSBColor(new Float(new Float(index)
-				/ new Float(max)), 1, 1);
+		return Color.getHSBColor((float)((float)(index)
+				/ (float)(max)), 1, 1);
 	}
 }

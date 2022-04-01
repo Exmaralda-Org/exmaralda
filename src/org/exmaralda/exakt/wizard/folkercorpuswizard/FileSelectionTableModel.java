@@ -23,7 +23,7 @@ public class FileSelectionTableModel extends AbstractTableModel {
         this.files = files;
         selections = new Vector<Boolean>();
         for (File f : files){
-            Boolean truth = new Boolean(true);
+            Boolean truth = true;
             selections.addElement(truth);
 
         }
@@ -67,7 +67,7 @@ public class FileSelectionTableModel extends AbstractTableModel {
 
     void toggleSelection(int index) {
         boolean s = selections.elementAt(index).booleanValue();
-        Boolean newValue = new Boolean(!s);
+        Boolean newValue = !s;
         selections.setElementAt(newValue, index);
         this.fireTableCellUpdated(index, 0);
     }
