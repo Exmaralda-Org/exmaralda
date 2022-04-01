@@ -8,10 +8,38 @@
     </chain-definition>
 
     <chain-definition>
-        <name>SFS: Morphology (English)</name>
+        <name>BBAW : Person Name</name>
+        <language>de</language>
+        <path>/org/exmaralda/webservices/weblicht-chains/BBAW_PersonName_DE.xml</path>
+        <description>Recognition of person names</description>
+    </chain-definition>
+
+    <chain-definition>
+        <name>SFS: Morphology</name>
+        <language>de</language>
+        <path>/org/exmaralda/webservices/weblicht-chains/SFS_Morphology_DE.xml</path>
+        <description>Morphological tagging</description>
+    </chain-definition>
+
+    <chain-definition>
+        <name>SFS: Morphology</name>
         <language>en</language>
         <path>/org/exmaralda/webservices/weblicht-chains/SFS_Morphology_EN.xml</path>
         <description>Morphological tagging</description>
+    </chain-definition>
+
+    <chain-definition>
+        <name>SFS: Named Entity</name>
+        <language>de</language>
+        <path>/org/exmaralda/webservices/weblicht-chains/SFS_NamedEntity_DE.xml</path>
+        <description>Named Entity Recognition</description>
+    </chain-definition>
+
+    <chain-definition>
+        <name>SFS: Named Entity</name>
+        <language>en</language>
+        <path>/org/exmaralda/webservices/weblicht-chains/SFS_NamedEntity_EN.xml</path>
+        <description>Named Entity Recognition</description>
     </chain-definition>
 
 
