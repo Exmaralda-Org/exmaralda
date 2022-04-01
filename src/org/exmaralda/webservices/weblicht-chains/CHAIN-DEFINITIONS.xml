@@ -16,13 +16,6 @@
 
     <chain-definition>
         <name>SFS: Morphology</name>
-        <language>de</language>
-        <path>/org/exmaralda/webservices/weblicht-chains/SFS_Morphology_DE.xml</path>
-        <description>Morphological tagging</description>
-    </chain-definition>
-
-    <chain-definition>
-        <name>SFS: Morphology</name>
         <language>en</language>
         <path>/org/exmaralda/webservices/weblicht-chains/SFS_Morphology_EN.xml</path>
         <description>Morphological tagging</description>

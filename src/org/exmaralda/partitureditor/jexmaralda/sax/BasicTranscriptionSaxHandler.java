@@ -145,7 +145,11 @@ class BasicTranscriptionSaxHandler extends org.xml.sax.helpers.DefaultHandler {
                                                             tli.setType(atts.getValue("type"));
                                                         }
 
-                                                        try{tli.setTime(Double.parseDouble(atts.getValue("time")));} catch (Throwable t) {/*thrown if no abs time is present*/}
+                                                        try{
+                                                            if (atts.getValue("time")!=null){
+                                                                tli.setTime(Double.parseDouble(atts.getValue("time")));
+                                                            }
+                                                        } catch (Throwable t) {/*thrown if no abs time is present*/}
                                                         tli.setBookmark(atts.getValue("bookmark"));
                                                         try{transcription.getBody().getCommonTimeline().addTimelineItem(tli);} catch (JexmaraldaException je) {}
                                                         break;

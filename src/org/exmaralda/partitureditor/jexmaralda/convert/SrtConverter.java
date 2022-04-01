@@ -8,7 +8,6 @@ package org.exmaralda.partitureditor.jexmaralda.convert;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.folker.utilities.TimeStringFormatter;

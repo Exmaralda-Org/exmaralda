@@ -43,7 +43,7 @@ public class SubtitleConverter {
     private static double parseTime(String timeString) {
         int hours = Integer.parseInt(timeString.substring(0, 2));
         int minutes = Integer.parseInt(timeString.substring(3, 5));
-        double seconds = Double.parseDouble(timeString.substring(7).replace(",", "."));
+        double seconds = Double.parseDouble(timeString.substring(6).replace(",", "."));
         double time = 3600 * hours + 60 * minutes + seconds;
         return time;
     }

@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
  *
  * @author thomas.schmidt
  */
-public class DeepLConnector {
+public class WordCloudConnector {
     
     /*
     curl https://api.deepl.com/v2/translate \
@@ -39,7 +39,7 @@ public class DeepLConnector {
     private String authKey = "";
     public static enum API_TYPE {FREE, PROFESSIONAL};
 
-    public DeepLConnector(String authKey) {
+    public WordCloudConnector(String authKey) {
         this.authKey = authKey;
     }
     
@@ -97,8 +97,8 @@ public class DeepLConnector {
     }
     
     public static void main(String[] args) throws IOException, URISyntaxException{
-        DeepLConnector deepLConnector = new DeepLConnector("f8ff5708-f449-7a57-65b0-6ac4524cf64c:fx");
-        String[] translation = deepLConnector.callDeepL("Ich möchte gerne einen Käse kaufen", "de", "fr", "more", DeepLConnector.API_TYPE.FREE);
+        WordCloudConnector deepLConnector = new WordCloudConnector("f8ff5708-f449-7a57-65b0-6ac4524cf64c:fx");
+        String[] translation = deepLConnector.callDeepL("Ich möchte gerne einen Käse kaufen", "de", "fr", "more", WordCloudConnector.API_TYPE.FREE);
         System.out.println(translation[0] + " " + translation[1]);
     }
 
