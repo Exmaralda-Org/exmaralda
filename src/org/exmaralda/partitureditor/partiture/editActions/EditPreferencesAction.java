@@ -96,7 +96,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             "",
                             "",
                             // show transformation dropdown, issue #230
-                            Boolean.toString(showTransformationDropdown)
+                            Boolean.toString(showTransformationDropdown),
+                            table.genericFSM
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -134,6 +135,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.didaFSM = newValues[12];
             table.gatFSM = newValues[13];
             table.chatFSM = newValues[14];
+            table.genericFSM = newValues[38];
          
             table.language = newValues[15];
             

@@ -21,17 +21,27 @@ public class GenericSegmentation extends AbstractSegmentation {
 
     /** Creates a new instance of GenericSegmentation */
     public GenericSegmentation() {
+        super();
     }
 
     public GenericSegmentation(String ptef) {
+        super(ptef);        
     }
     
+    @Override
     public SegmentedTranscription BasicToSegmented(BasicTranscription bt) throws SAXException, FSMException {
          SegmentedTranscription st = bt.toSegmentedTranscription();
          FSMSaxReader sr = new FSMSaxReader();
 
-         java.io.InputStream is2 = getClass().getResourceAsStream(wordFSM);
-         FiniteStateMachine fsm = sr.readFromStream(is2);
+         FiniteStateMachine fsm = null;
+         
+         if (pathToExternalFSM.length()<=0){
+            java.io.InputStream is2 = getClass().getResourceAsStream(wordFSM);
+            fsm = sr.readFromStream(is2);
+         } else {
+             fsm = sr.readFromFile(pathToExternalFSM);
+         }
+         
          
          for (int pos=0; pos<st.getBody().getNumberOfTiers(); pos++){
              SegmentedTier t = (SegmentedTier)(st.getBody().elementAt(pos));

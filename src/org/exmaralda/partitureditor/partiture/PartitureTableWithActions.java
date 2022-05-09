@@ -172,6 +172,8 @@ public class PartitureTableWithActions extends PartitureTable
     public String chatFSM = "";
     /** path to the FSM used for IPA segmentation (optional) */
     public String ipaFSM = "";
+    /** path to the FSM used for generic segmentation (optional) */
+    public String genericFSM = "";
     
     /** The separate thread in which auto saving takes place */
     public AutoSave autoSaveThread;
@@ -290,6 +292,7 @@ public class PartitureTableWithActions extends PartitureTable
         if (preferredSegmentation.equals("GAT")) return gatFSM;
         if (preferredSegmentation.equals("CHAT")) return chatFSM;
         if (preferredSegmentation.equals("DIDA")) return didaFSM;
+        if (preferredSegmentation.equals("Generic")) return genericFSM;
         return "";
     }
 
@@ -313,7 +316,7 @@ public class PartitureTableWithActions extends PartitureTable
         if (preferredSegmentation.equals("IPA"))
             return new org.exmaralda.partitureditor.jexmaralda.segment.IPASegmentation();
         if (preferredSegmentation.equals("GENERIC"))
-            return new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation();
+            return new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation(genericFSM);
         return new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation();
     }
 
@@ -1921,6 +1924,7 @@ public class PartitureTableWithActions extends PartitureTable
         gatFSM = settings.get("GAT-FSM","");
         chatFSM = settings.get("CHAT-FSM","");
         ipaFSM = settings.get("IPA-FSM","");
+        genericFSM = settings.get("GENERIC-FSM","");
 
         // Partitur Parameters
         rtfParameters.setSettings(usernode);
@@ -2025,6 +2029,7 @@ public class PartitureTableWithActions extends PartitureTable
         settings.put("GAT-FSM", this.gatFSM);
         settings.put("CHAT-FSM", this.chatFSM);
         settings.put("IPA-FSM", this.ipaFSM);
+        settings.put("GENERIC-FSM", this.genericFSM);
         // Break Parameters
         settings.put("Break-RespectWordBoundaries", Boolean.toString(rtfParameters.respectWordBoundaries[0]));
 
