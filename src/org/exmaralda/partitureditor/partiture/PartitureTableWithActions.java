@@ -174,6 +174,8 @@ public class PartitureTableWithActions extends PartitureTable
     public String ipaFSM = "";
     /** path to the FSM used for generic segmentation (optional) */
     public String genericFSM = "";
+    /** path to the FSM used for generic segmentation (optional) */
+    public String cGATMinimalFSM = "";
     
     /** The separate thread in which auto saving takes place */
     public AutoSave autoSaveThread;
@@ -292,7 +294,8 @@ public class PartitureTableWithActions extends PartitureTable
         if (preferredSegmentation.equals("GAT")) return gatFSM;
         if (preferredSegmentation.equals("CHAT")) return chatFSM;
         if (preferredSegmentation.equals("DIDA")) return didaFSM;
-        if (preferredSegmentation.equals("Generic")) return genericFSM;
+        if (preferredSegmentation.equals("GENERIC")) return genericFSM;
+        if (preferredSegmentation.equals("cGAT_MINIMAL")) return cGATMinimalFSM;
         return "";
     }
 
@@ -306,7 +309,7 @@ public class PartitureTableWithActions extends PartitureTable
         if (preferredSegmentation.equals("GAT"))
             return new org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation(gatFSM);
         if (preferredSegmentation.equals("cGAT_MINIMAL"))
-            return new org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation();
+            return new org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation(cGATMinimalFSM);
         if (preferredSegmentation.equals("CHAT"))
             return new org.exmaralda.partitureditor.jexmaralda.segment.CHATSegmentation(chatFSM);
         if (preferredSegmentation.equals("CHAT_MINIMAL"))
@@ -1925,6 +1928,7 @@ public class PartitureTableWithActions extends PartitureTable
         chatFSM = settings.get("CHAT-FSM","");
         ipaFSM = settings.get("IPA-FSM","");
         genericFSM = settings.get("GENERIC-FSM","");
+        cGATMinimalFSM = settings.get("CGAT-MINIMAL-FSM","");
 
         // Partitur Parameters
         rtfParameters.setSettings(usernode);
@@ -2030,6 +2034,7 @@ public class PartitureTableWithActions extends PartitureTable
         settings.put("CHAT-FSM", this.chatFSM);
         settings.put("IPA-FSM", this.ipaFSM);
         settings.put("GENERIC-FSM", this.genericFSM);
+        settings.put("CGAT-MINIMAL-FSM", this.cGATMinimalFSM);
         // Break Parameters
         settings.put("Break-RespectWordBoundaries", Boolean.toString(rtfParameters.respectWordBoundaries[0]));
 

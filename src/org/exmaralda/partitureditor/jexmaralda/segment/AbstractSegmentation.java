@@ -30,7 +30,8 @@ public abstract class AbstractSegmentation {
     public static final int GAT_MINIMAL_SEGMENTATION = 7;
     public static final int CHAT_MINIMAL_SEGMENTATION = 8;
 
-    /** Creates a new instance of AbstractSegmentation */
+    /** Creates a new instance of AbstractSegmentation
+     * @param ptef */
     public AbstractSegmentation(String ptef) {
         pathToExternalFSM = ptef;        
     }

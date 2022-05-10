@@ -41,6 +41,7 @@ public class cGATMinimalSegmentation extends AbstractSegmentation {
             fsm = sr.readFromStream(is2);
          } else {
              fsm = sr.readFromFile(pathToExternalFSM);
+             System.out.println("Read " + pathToExternalFSM);
          }
          
          for (int pos=0; pos<st.getBody().getNumberOfTiers(); pos++){

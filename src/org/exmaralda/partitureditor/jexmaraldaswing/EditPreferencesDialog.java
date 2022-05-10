@@ -95,7 +95,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[39];
+        String[] result = new String[40];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -141,6 +141,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         // new 09-12-2020, issue #230
         result[37] = Boolean.toString(transformationDropdownCheckBox.isSelected());
         result[38] = genericTextField.getText();
+        result[39] = cGATMinimalTextField.getText();
 
         return result;        
     }
@@ -216,6 +217,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel21 = new javax.swing.JLabel();
         genericTextField = new javax.swing.JTextField();
         changeGenericButton = new javax.swing.JButton();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        cGATMinimalTextField = new javax.swing.JTextField();
+        changecGATMinimalButton = new javax.swing.JButton();
         preferredSegmentationPanel = new javax.swing.JPanel();
         preferredSegmentationComboBox = new javax.swing.JComboBox();
         pauseNotationPanel = new javax.swing.JPanel();
@@ -652,6 +657,33 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jPanel15.add(changeGenericButton);
 
         fsmPanel.add(jPanel15);
+
+        jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel22.setText("cGAT Minimal: ");
+        jLabel22.setMaximumSize(new java.awt.Dimension(90, 20));
+        jLabel22.setMinimumSize(new java.awt.Dimension(180, 20));
+        jLabel22.setPreferredSize(new java.awt.Dimension(90, 20));
+        jPanel17.add(jLabel22);
+
+        cGATMinimalTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        cGATMinimalTextField.setMinimumSize(new java.awt.Dimension(180, 20));
+        cGATMinimalTextField.setPreferredSize(new java.awt.Dimension(180, 20));
+        jPanel17.add(cGATMinimalTextField);
+
+        changecGATMinimalButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        changecGATMinimalButton.setText("Change...");
+        changecGATMinimalButton.setMaximumSize(new java.awt.Dimension(100, 20));
+        changecGATMinimalButton.setMinimumSize(new java.awt.Dimension(80, 20));
+        changecGATMinimalButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changecGATMinimalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changecGATMinimalButtonActionPerformed(evt);
+            }
+        });
+        jPanel17.add(changecGATMinimalButton);
+
+        fsmPanel.add(jPanel17);
 
         segmentationPanel.add(fsmPanel, java.awt.BorderLayout.CENTER);
 
@@ -1213,13 +1245,21 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_mmfPlayerRadioButtonActionPerformed
 
     private void changeGenericButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeGenericButtonActionPerformed
-        AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(hiatTextField.getText());
-        dialog.setFileFilter(new ParameterFileFilter("xml", "Finite State Machine (*.xml"));
+        AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(genericTextField.getText());
+        dialog.setFileFilter(new ParameterFileFilter("xml", "Finite State Machine (*.xml)"));
         if (dialog.showDialog(this,"Choose")==javax.swing.JFileChooser.APPROVE_OPTION){
             genericTextField.setText(dialog.getSelectedFile().getPath());
         }                                
 
     }//GEN-LAST:event_changeGenericButtonActionPerformed
+
+    private void changecGATMinimalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changecGATMinimalButtonActionPerformed
+       AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(cGATMinimalTextField.getText());
+        dialog.setFileFilter(new ParameterFileFilter("xml", "Finite State Machine (*.xml)"));
+        if (dialog.showDialog(this,"Choose")==javax.swing.JFileChooser.APPROVE_OPTION){
+            cGATMinimalTextField.setText(dialog.getSelectedFile().getPath());
+        }                                
+    }//GEN-LAST:event_changecGATMinimalButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1245,6 +1285,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton basPlayerRadioButton;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton browseForAutoSavePathButton;
+    private javax.swing.JTextField cGATMinimalTextField;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton changeCHATButton;
     private javax.swing.JButton changeFreeStylesheetVisualisationButton;
@@ -1258,6 +1299,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton changeSpeakertable2TranscriptionButton;
     private javax.swing.JButton changeTierFontButton;
     private javax.swing.JButton changeTranscription2FormattableButton;
+    private javax.swing.JButton changecGATMinimalButton;
     private javax.swing.JTextField chatTextField;
     private javax.swing.JRadioButton cocoaQuicktimePlayerRadioButton;
     private javax.swing.JRadioButton decimalCommaRadioButton;
@@ -1294,6 +1336,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -1309,6 +1352,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1447,6 +1491,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         autoInterpolateCheckBox.setSelected(Boolean.parseBoolean(values[31]));
         
         genericTextField.setText(values[38]);
+        cGATMinimalTextField.setText(values[39]);
         
 
         show();
