@@ -199,7 +199,15 @@ public class NormalizedFolkerTranscription {
     }
 
     public boolean hasWordID(String testID) {
-        return wordIDs.contains(testID);
+        try {
+            // #322
+            // return wordIDs.contains(testID);
+            Object o = XPath.selectSingleNode(xmlDocument, "//*[@id='" + testID + "']");
+            return (o!=null);
+        } catch (JDOMException ex) {
+            Logger.getLogger(NormalizedFolkerTranscription.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     public double getNormalisationRatio() {

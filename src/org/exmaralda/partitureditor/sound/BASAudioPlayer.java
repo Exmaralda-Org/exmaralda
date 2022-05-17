@@ -72,18 +72,21 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         try {
             //changed 19-01-2016
             //wrappedPlayer = new ipsk.audio.player.Player(new URL(urlString));
-            System.out.println(new FileAudioSource(new File(soundFilePath)).getFile().getAbsolutePath());
-            wrappedPlayer.setAudioSource(new FileAudioSource(new File(new URI(soundFilePath)))); 
+            //System.out.println(new FileAudioSource(new File(soundFilePath)).getFile().getAbsolutePath());
+            //System.out.println("$$$$$" + new URI(soundFilePath).toString());
+            //changed 20-05-2022 : #321
+            wrappedPlayer.setAudioSource(new FileAudioSource(new File(new URI(urlString)))); 
             wrappedPlayer.addPlayerListener(this);
             wrappedPlayer.open();
             fireSoundfileSet();
-        } catch (PlayerException ex) {
+        } catch (PlayerException | URISyntaxException ex) {
             Logger.getLogger(BASAudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(BASAudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
-            throw new IOException(ex);
-        } /*catch (MalformedURLException mue){
+        }
+        /*catch (MalformedURLException mue){
+        mue.printStackTrace();;
+        throw new IOException(mue);
+        }*/  /*catch (MalformedURLException mue){
             mue.printStackTrace();;
             throw new IOException(mue);
         }*/

@@ -3,13 +3,13 @@
 <fsm name="Generic: Words">
 	<char-set id="OpenParenthesis">
 		<comment>Characters whose appearance signals the beginning of a non-phonological segment</comment>
-		<!-- Open square bracket -->
-		<char>[</char>
+		<!-- Open round bracket -->
+		<char>(</char>
 	</char-set>
 	<char-set id="CloseParenthesis">
 		<comment>Characters whose appearance signals the end of a non-phonological segment</comment>
-		<!-- Closed square bracket -->
-		<char>]</char>
+		<!-- Closed round bracket -->
+		<char>)</char>
 	</char-set>
 	<char-set id="Punctuation">
 		<comment>Characters that are not part of words an do not signal the start or end of a non-phonological segment</comment>

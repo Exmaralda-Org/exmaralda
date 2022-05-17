@@ -10,14 +10,14 @@
     <!-- the jpackage executable, should be part of newer OpenJDKs -->
     <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home/bin/jpackage"/>
     <!-- the jar with compiled EXMARaLDA Java code -->
-    <property name="jpackage_source" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_2/exmaralda/JavaProject3/dist"/>
+    <property name="jpackage_source" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_3/exmaralda/EXMARaLDA_OFFICIAL/dist"/>
     <!-- the target folder for what jpackage writes -->
     <property name="jpackage_target" location="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
     
     <!-- folder with icons for the individual apps, partly also document icons -->
-    <property name="icons_folder" location="/Users/thomasschmidt/Desktop/GIT/exmaralda/EXMARaLDA_NetBeans_Project/templates/mac/icons"/>
+    <property name="icons_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_3/exmaralda/src/build/mac/icons"/>
     <!-- file assocation configurations for jpackage -->
-    <property name="file_ass_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_2/exmaralda/EXMARaLDA_NetBeans_Project/templates/mac/jpackage_file_ass"/>
+    <property name="file_ass_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_3/exmaralda/src/build/mac/jpackage_file_ass"/>
     
     <!-- version numbers -->
     <property name="exmaralda_version" value="1.12"/>
@@ -46,6 +46,7 @@
         <delete dir="${jpackage_target}/FOLKER_13_64"/>
         <delete dir="${jpackage_target}/OrthoNormal_13_64"/>
         <delete dir="${jpackage_target}/TeiDrop_13_64"/>   
+        <delete file="${jpackage_target}/*.dmg"/>
         
         <copy todir="${jpackage_source}/native">
             <fileset dir="/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2020_LIBS/native-mac"/> 
@@ -64,7 +65,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
@@ -84,7 +85,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>            
             <!-- -->
@@ -102,7 +103,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/Coma_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
@@ -121,7 +122,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/EXAKT_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
@@ -140,7 +141,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/OrthoNormal_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
@@ -160,7 +161,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/TeiDrop_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->

@@ -43,6 +43,7 @@ public class ActionUtilities {
             else if (lastFileFilter.equals("Text")) {dialog.setFileFilter(dialog.TextFileFilter);}
             else if (lastFileFilter.equals("exSync")) {dialog.setFileFilter(dialog.exSyncFileFilter);}
             else if (lastFileFilter.equals("HTMLPartitur")) {dialog.setFileFilter(dialog.HTMLPartiturFileFilter);}
+            else if (lastFileFilter.equals("HTMLPartiturCompact")) {dialog.setFileFilter(dialog.HTMLPartiturCompactFilter);}
             else if (lastFileFilter.equals("RTFPartitur")) {dialog.setFileFilter(dialog.RTFPartiturFileFilter);}
             else if (lastFileFilter.equals("SVGPartitur")) {dialog.setFileFilter(dialog.SVGPartiturFileFilter);}
             else if (lastFileFilter.equals("XMLPartitur")) {dialog.setFileFilter(dialog.XMLPartiturFileFilter);}
@@ -101,6 +102,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.TextFileFilter) {lastFileFilter = "Text";}
             else if (selectedFileFilter==dialog.exSyncFileFilter) {lastFileFilter = "exSync";}
             else if (selectedFileFilter==dialog.HTMLPartiturFileFilter) {lastFileFilter = "HTMLPartitur";}
+            else if (selectedFileFilter==dialog.HTMLPartiturCompactFilter) {lastFileFilter = "HTMLPartiturCompact";}
             else if (selectedFileFilter==dialog.HTMLPartiturWithSVGFileFilter) {lastFileFilter = "HTMLPartiturSVG";}
             else if (selectedFileFilter==dialog.RTFPartiturFileFilter) {lastFileFilter = "RTFPartitur";}
             else if (selectedFileFilter==dialog.SVGPartiturFileFilter) {lastFileFilter = "SVGPartitur";}

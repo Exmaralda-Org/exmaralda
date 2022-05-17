@@ -11,6 +11,7 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -125,7 +126,9 @@ public class EXMARaLDATransformer {
             StylesheetFactory sf = new StylesheetFactory(true);
             String sourceString = IOUtilities.documentToString(baseDocument);
             try {
-                if (parameters[3].startsWith("/")){
+                // changed 12-07-2022 : issue #324
+                //if ((parameters[3].startsWith("/")) && (EXMARaLDATransformer.class.getResource(parameters[3])!=null)){
+                if (FileIO.isInternalResource(parameters[3])){
                     resultString = sf.applyInternalStylesheetToString(parameters[3], sourceString, xslParameters);
                 } else {
                     resultString = sf.applyExternalStylesheetToString(parameters[3], sourceString, xslParameters);

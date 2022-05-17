@@ -146,17 +146,7 @@
 	</xsl:template>	
 	
 	<xsl:template match="ts">
-		<xsl:if test="not(*)">
-			<xsl:variable name="START" select="@s"/>
-			<xsl:variable name="COUNT_START" select="count(//ts[not(*) and @s=$START])"/>
-			<xsl:if test="$COUNT_START&gt;1">[</xsl:if>			
-		</xsl:if>	
 		<xsl:apply-templates/>
-		<xsl:if test="not(*)">
-			<xsl:variable name="END" select="@e"/>
-			<xsl:variable name="COUNT_END" select="count(//ts[not(*) and @e=$END])"/>
-			<xsl:if test="$COUNT_END&gt;1">]</xsl:if>			
-		</xsl:if>	
 	</xsl:template>
 
 	
