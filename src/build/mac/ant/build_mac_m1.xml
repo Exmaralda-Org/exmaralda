@@ -65,7 +65,7 @@
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_13_64"/>
             <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
-            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=FOLKER"/>
@@ -85,7 +85,7 @@
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_13_64"/>
             <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
-            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>            
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=PartiturEditor"/>
@@ -103,7 +103,7 @@
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/Coma_13_64"/>
             <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
-            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=Coma"/>
@@ -122,7 +122,7 @@
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/EXAKT_13_64"/>
             <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
-            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=EXAKT"/>
@@ -141,7 +141,7 @@
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/OrthoNormal_13_64"/>
             <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
-            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=OrthoNormal"/>
@@ -161,7 +161,7 @@
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}/TeiDrop_13_64"/>
             <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
-            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=TeiDrop"/>
@@ -180,24 +180,6 @@
 
     <!-- step 3: remove faulty signatures -->
     <target name="remove_signatures" depends="mac_executables_jpackage">
-        <exec executable="codesign">
-            <arg value="--remove-signature"/><arg value="${jpackage_target}/PartiturEditor_13_64/PartiturEditor.app"/>            
-        </exec>
-        <exec executable="codesign">
-            <arg value="--remove-signature"/><arg value="${jpackage_target}/FOLKER_13_64/FOLKER.app"/>            
-        </exec>
-        <exec executable="codesign">
-            <arg value="--remove-signature"/><arg value="${jpackage_target}/EXAKT_13_64/EXAKT.app"/>            
-        </exec>
-        <exec executable="codesign">
-            <arg value="--remove-signature"/><arg value="${jpackage_target}/Coma_13_64/Coma.app"/>            
-        </exec>
-        <exec executable="codesign">
-            <arg value="--remove-signature"/><arg value="${jpackage_target}/OrthoNormal_13_64/OrthoNormal.app"/>            
-        </exec>
-        <exec executable="codesign">
-            <arg value="--remove-signature"/><arg value="${jpackage_target}/TeiDrop_13_64/TeiDrop.app"/>            
-        </exec>
         
     </target>
     
@@ -207,31 +189,31 @@
     
     <!-- step 4: put the apps into disk images -->
     <target name="make_dmgs" depends="remove_signatures">  
-        <delete file="${local_directory}/Folker.dmg"/>
-        <delete file="${local_directory}/PartiturEditor.dmg"/>
-        <delete file="${local_directory}/Exakt.dmg"/>
-        <delete file="${local_directory}/OrthoNormal.dmg"/>
-        <delete file="${local_directory}/TeiDrop.dmg"/>
-        <delete file="${local_directory}/Coma.dmg"/>
+        <delete file="${local_directory}/Folker_M1.dmg"/>
+        <delete file="${local_directory}/PartiturEditor_M1.dmg"/>
+        <delete file="${local_directory}/Exakt_M1.dmg"/>
+        <delete file="${local_directory}/OrthoNormal_M1.dmg"/>
+        <delete file="${local_directory}/TeiDrop_M1.dmg"/>
+        <delete file="${local_directory}/Coma_M1.dmg"/>
         
         
         <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/FOLKER_13_64 ${local_directory}/Folker.dmg"/>
+            <arg line="create -srcfolder ${local_directory}/FOLKER_13_64 ${local_directory}/Folker_M1.dmg"/>
         </exec> 
         <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/PartiturEditor_13_64 ${local_directory}/PartiturEditor.dmg"/>
+            <arg line="create -srcfolder ${local_directory}/PartiturEditor_13_64 ${local_directory}/PartiturEditor_M1.dmg"/>
         </exec> 
         <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/Coma_13_64 ${local_directory}/Coma.dmg"/>
+            <arg line="create -srcfolder ${local_directory}/Coma_13_64 ${local_directory}/Coma_M1.dmg"/>
         </exec> 
         <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/OrthoNormal_13_64 ${local_directory}/OrthoNormal.dmg"/>
+            <arg line="create -srcfolder ${local_directory}/OrthoNormal_13_64 ${local_directory}/OrthoNormal_M1.dmg"/>
         </exec> 
         <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/TeiDrop_13_64 ${local_directory}/TeiDrop.dmg"/>
+            <arg line="create -srcfolder ${local_directory}/TeiDrop_13_64 ${local_directory}/TeiDrop_M1.dmg"/>
         </exec> 
         <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/EXAKT_13_64 ${local_directory}/Exakt.dmg"/>
+            <arg line="create -srcfolder ${local_directory}/EXAKT_13_64 ${local_directory}/Exakt_M1.dmg"/>
         </exec> 
     </target>
     
