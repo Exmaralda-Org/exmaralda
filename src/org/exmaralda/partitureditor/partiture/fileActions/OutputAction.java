@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.common.corpusbuild.FileIO;
 import org.exmaralda.common.jdomutilities.IOUtilities;
+import static org.exmaralda.folker.actions.fileactions.OutputAction.COMPACT_PARTITUR_AUDIO_STYLESHEET;
 import org.exmaralda.partitureditor.interlinearText.*;
 import org.exmaralda.partitureditor.interlinearText.swing.ChooseSettingsForXMLExportPanel;
 import org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation;
@@ -52,7 +53,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         table.commitEdit(true);
         try {
             output();
-        } catch (Exception ex) {
+        } catch (IOException | ParserConfigurationException | TransformerException | FSMException | JexmaraldaException | JDOMException | SAXException ex) {
             String message = "Output failed:\n" + ex.getLocalizedMessage();
             javax.swing.JOptionPane.showMessageDialog(table, message);
             ex.printStackTrace();
@@ -105,6 +106,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         /******************************************/
         if ((selectedFileFilter==dialog.HTMLPartiturFileFilter) 
                 || (selectedFileFilter==dialog.HTMLPartiturWithHTML5AudioFileFilter) 
+                || (selectedFileFilter==dialog.HTMLPartiturCompactFilter) 
                 || (selectedFileFilter==dialog.RTFPartiturFileFilter) 
                 || (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter) 
                 || (selectedFileFilter==dialog.SVGPartiturFileFilter)
@@ -141,6 +143,10 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             } else if (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter){
                 // HTML Partitur with FLASH
                 exportHTMLPartiturWithFlash(it, filename);
+            } else if (selectedFileFilter==dialog.HTMLPartiturCompactFilter){
+                //compact HTML partitur
+                System.out.println("COMAPCT");
+                exportHTMLPartiturCompact(it, filename);
             }
         /******************************************/
         /******** non-partitur output methods *****/
@@ -185,14 +191,9 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             fos = new FileOutputStream(new File(filename));
             fos.write(resultText.getBytes("UTF-8"));
             System.out.println("document written.");
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException | SAXException | ParserConfigurationException | TransformerException ex) {
+            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 fos.close();
@@ -202,6 +203,40 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         }
     
     }
+
+    void exportHTMLPartiturCompact(InterlinearText it, String filename) throws IOException {
+        try {
+            it.markOverlaps("[", "]");
+            HTMLParameters parameters = table.htmlParameters;
+            parameters.setWidth(480.0);
+            parameters.smoothRightBoundary = true;
+            parameters.includeSyncPoints = false;
+            parameters.putSyncPointsOutside = false;
+            
+            it.trim(parameters);
+            
+            it.reorder();
+            Document itDocument = IOUtilities.readDocumentFromString(it.toXML());
+            Document btDocument = IOUtilities
+                    .readDocumentFromString(table.getModel().getTranscription().toXML(table.getModel().getTranscription().getTierFormatTable()));
+            Element btRootElement = btDocument.getRootElement();
+            btRootElement.detach();
+            itDocument.getRootElement().addContent(btRootElement);
+            
+            StylesheetFactory sf = new StylesheetFactory(true);
+            String resultString = sf.applyInternalStylesheetToString(COMPACT_PARTITUR_AUDIO_STYLESHEET, IOUtilities.documentToString(itDocument));
+            FileOutputStream fos = new FileOutputStream(new File(filename));
+            fos.write(resultString.getBytes("UTF-8"));                    
+            fos.close();
+        } catch (JDOMException | SAXException | ParserConfigurationException | TransformerException ex) {
+            Logger.getLogger(OutputAction.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
+        }
+        
+        
+        
+    }
+
     
     void exportHTMLPartitur(InterlinearText it, String filename, boolean useFrames) throws IOException{
         Head head = table.getModel().getTranscription().getHead();
