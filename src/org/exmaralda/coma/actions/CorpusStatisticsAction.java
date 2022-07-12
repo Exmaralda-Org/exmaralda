@@ -19,6 +19,7 @@ import org.exmaralda.coma.root.Coma;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.corpusbuild.comafunctions.SegmentsCounter;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
+import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseStylesheetDialog;
 import org.jdom.Document;
@@ -165,12 +166,12 @@ public class CorpusStatisticsAction extends ComaAction {
 				org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory ssf = new org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory(
 						true);
 				String html = "";
-				if (xslPath.startsWith("/")) {
-					html = ssf.applyInternalStylesheetToExternalXMLFile(
-							xslPath, OUT_FILE.getAbsolutePath());
+				// changed 12-07-2022, issue #324
+                                //if (xslPath.startsWith("/")) {
+                                if (FileIO.isInternalResource(xslPath)){
+					html = ssf.applyInternalStylesheetToExternalXMLFile(xslPath, OUT_FILE.getAbsolutePath());
 				} else {
-					html = ssf.applyExternalStylesheetToExternalXMLFile(
-							xslPath, OUT_FILE.getAbsolutePath());
+					html = ssf.applyExternalStylesheetToExternalXMLFile(xslPath, OUT_FILE.getAbsolutePath());
 				}
 				FileOutputStream fos = new FileOutputStream(OUT_FILE2);
 				fos.write(html.getBytes("UTF-8"));

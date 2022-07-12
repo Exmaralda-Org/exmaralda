@@ -321,4 +321,10 @@ public class FileIO {
           org.jdom.ProcessingInstruction pi = new org.jdom.ProcessingInstruction( "xml-stylesheet", piMap );
           doc.getContent().add( 0, pi );                
     }
+    
+    
+    // new 12-07-2022, issue #324ß
+    public static boolean isInternalResource(String path){
+        return ((path.startsWith("/")) && (FileIO.class.getResource(path)!=null));
+    }
 }

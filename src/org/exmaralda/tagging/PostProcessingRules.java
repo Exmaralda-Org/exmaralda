@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.exmaralda.common.corpusbuild.FileIO;
-import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -26,7 +25,9 @@ public class PostProcessingRules {
     ArrayList<PostProcessingRule> rules = new ArrayList<PostProcessingRule>();
     
     public void read(String path) throws JDOMException, IOException{
-        if (path.startsWith("/")){
+        // changed 12-07-2022 : issue #324
+        //if (path.startsWith("/")){
+        if (org.exmaralda.exakt.utilities.FileIO.isInternalResource(path)){
             java.io.InputStream is = getClass().getResourceAsStream(path);
             xmlDocument = FileIO.readDocumentFromInputStream(is, false);
         } else {
