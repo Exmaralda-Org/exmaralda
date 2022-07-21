@@ -39,6 +39,7 @@ public class BASWebServiceResult {
     
     public BASWebServiceResult(String xml) throws JDOMException, IOException{
         // read the XML result string
+        //System.out.println(xml);
         Document doc = FileIO.readDocumentFromString(xml);
         // check if success == true
         Element successElement = (Element) XPath.selectSingleNode(doc, "//success");
