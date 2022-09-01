@@ -183,19 +183,23 @@ public class G2PConnector {
     
     public String g2pURL = "https://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runG2P";
     
-    public String callG2P(File bpfInFile, HashMap<String, Object> otherParameters) throws IOException, JDOMException{
+    public String callG2P(File inFile, HashMap<String, Object> otherParameters) throws IOException, JDOMException{
         
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();       
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();  
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         
         if (otherParameters!=null){
-            builder.addTextBody("lng", (String) otherParameters.get("lng"));
+            for (String parameterName : otherParameters.keySet()){
+                String parameterValue = (String) otherParameters.get(parameterName);
+                builder.addTextBody(parameterName, parameterValue);
+            }
+            //builder.addTextBody("lng", (String) otherParameters.get("lng"));
         }
         
         // add the text file
-        builder.addTextBody("iform", "bpf");
-        builder.addBinaryBody("i", bpfInFile);
+        //builder.addTextBody("iform", (String) otherParameters.get("iform"));
+        builder.addBinaryBody("i", inFile);
         
         // construct a POST request with the multipart entity
         HttpPost httpPost = new HttpPost(g2pURL);        

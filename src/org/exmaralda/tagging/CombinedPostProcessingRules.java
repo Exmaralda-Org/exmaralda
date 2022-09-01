@@ -26,7 +26,9 @@ class CombinedPostProcessingRules {
     ArrayList<PostProcessingRule> rules = new ArrayList<PostProcessingRule>();
     
     public void read(String path) throws JDOMException, IOException{
-        if (path.startsWith("/")){
+        // changed 12-07-2022 : issue #324
+        //if (path.startsWith("/")){
+        if (org.exmaralda.exakt.utilities.FileIO.isInternalResource(path)){
             java.io.InputStream is = getClass().getResourceAsStream(path);
             xmlDocument = FileIO.readDocumentFromInputStream(is, false);
         } else {

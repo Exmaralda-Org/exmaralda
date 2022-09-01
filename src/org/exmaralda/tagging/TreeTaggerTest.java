@@ -14,21 +14,23 @@ import java.io.File;
 public class TreeTaggerTest {
 
     // 04-11-2021, issue #286 : this one works
-    public static String TTC = "D:\\Dropbox\\TreeTagger";
+    //public static String TTC = "D:\\Dropbox\\TreeTagger";
+    public static String TTC = "/Users/thomasschmidt/Desktop/tree-tagger-MacOSX-3.2.3";
+    
 
     // 04-11-2021, issue #286 : and this one doesn't
     //public static String TTC = "c:\\TreeTagger";
     
     //public static String PF = "c:\\TreeTagger\\lib\\german-utf8.par";
-    public static String PF = "C:\\TreeTagger\\lib\\italian.par";
+    public static String PF = "/Volumes/DATA/Dropbox/TreeTagger/english.par";
     
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
     //public static String INPUT="Y:\\thomas\\DR2FLK\\TagVerschiebung_shortest.xml";
     //public static String INPUT="C:\\Users\\Schmidt\\Desktop\\HAMATAC\\David_Rufus\\MT_091209_David_s.exs";
     //public static String INPUT="N:\\Workspace\\DH\\Lesetext1\\04-LT1_Fln\\DH--_E_00001_SE_01_T_01_DF_01.fln";
-    public static String INPUT = "M:\\GeWiss\\1-NON-DE\\FLN\\ita\\GWSS_E_03017_SE_01_T_01_DF_01.fln";
+    public static String INPUT = "/Volumes/DATA/FOLK/00194_Jour_Fixe/FOLK_E_00194_SE_01_T_01.fln";
     //public static String INPUT="S:\\TP-Z2\\DATEN\\MAPTASK\\0.2\\MAPTASK.coma";
-    public static String OUTPUT="M:\\GeWiss\\1-NON-DE\\Debug_ITA_POS.xml";
+    public static String OUTPUT="/Volumes/DATA/FOLK/00194_Jour_Fixe/FOLK_E_00194_SE_01_T_01_out.fln";
     //public static String OUTPUT="C:\\Users\\Schmidt\\Desktop\\HAMATAC\\David_Rufus\\MT_091209_David_s_out.exs";
     /**
      * @param args the command line arguments
