@@ -14,7 +14,8 @@ preferred-citation:
     - familiy-names: Wörner
       given-names: Kai
   title: "EXMARaLDA"
-  type: article
+  collection-type: book  
+  type: generic
   publisher: Oxford University Press
   journal: Handbook on Corpus Phonology
   year: 2014
