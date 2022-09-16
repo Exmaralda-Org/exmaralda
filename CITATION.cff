@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Schmidt"
+  given-names: "Thomas"
+  orcid: "https://orcid.org/0000-0003-0026-6450"
+- family-names: "Wörner"
+  given-names: "Kai"
+  orcid: "https://orcid.org/0000-0001-8939-4437"
+preferred-citation:
+  authors:
+    - family-names: Schmidt
+      given-names: Thomas
+    - familiy-names: Wörner
+      given-names: Kai
+  title: "EXMARaLDA"
+  type: article
+  publisher: Oxford University Press
+  journal: Handbook on Corpus Phonology
+  year: 2014
+title: "EXMARaLDA"
+version: 1.7
+doi: 10.5281/zenodo.1234
+date-released: 2022-09-16
+url: "https://github.com/Exmaralda-Org/exmaralda"
