@@ -553,7 +553,6 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
         }
     }
 
-        @Override
 	public void setMilliSecondsPerSample(long milliSeconds) {
 		if (!frameRateAutoDetected) {
 			this.millisPerSample = milliSeconds;
@@ -829,6 +828,13 @@ public class StrippedJMMFMediaPlayer extends ControllerManager implements
     public boolean isPlayingInterval() {
         if (jmmfPlayer==null) return false;
         return jmmfPlayer.isPlaying();
+    }
+
+    @Override
+    public void setMilliSecondsPerSample(double milliSeconds) {
+        if (!frameRateAutoDetected) {
+                this.millisPerSample = milliSeconds;
+        }
     }
 
 	
