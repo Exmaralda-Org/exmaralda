@@ -5,14 +5,15 @@
     
    
     <!-- directory where to put the final results, i.e. the disk images -->
-    <property name="local_directory" value="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
+    <property name="local_directory" value="/Volumes/DATA/EXMARaLDA_Build"/>
     
     <!-- the jpackage executable, should be part of newer OpenJDKs -->
-    <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home/bin/jpackage"/>
+    <!-- <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home/bin/jpackage"/> -->
+    <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin/jpackage"/>
     <!-- the jar with compiled EXMARaLDA Java code -->
     <property name="jpackage_source" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_3/exmaralda/EXMARaLDA_OFFICIAL/dist"/>
     <!-- the target folder for what jpackage writes -->
-    <property name="jpackage_target" location="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
+    <property name="jpackage_target" location="/Volumes/DATA/EXMARaLDA_Build"/>
     
     <!-- folder with icons for the individual apps, partly also document icons -->
     <property name="icons_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda_3/exmaralda/src/build/mac/icons"/>
@@ -25,8 +26,8 @@
     <property name="coma_version" value="2.0"/>
     <property name="exakt_version" value="1.4"/>
     <property name="folker_version" value="1.3"/>
-    <property name="orthonormal_version" value="0.9.9"/>
-    <property name="teidrop_version" value="0.5"/>
+    <property name="orthonormal_version" value="1.0"/>
+    <property name="teidrop_version" value="1.0"/>
     
 
 
@@ -49,7 +50,7 @@
         <delete file="${jpackage_target}/*.dmg"/>
         
         <copy todir="${jpackage_source}/native">
-            <fileset dir="/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2020_LIBS/native-mac"/> 
+            <fileset dir="/Volumes/DATA/Dropbox/EXMARaLDA_Build/2020_LIBS/native-mac"/> 
         </copy>             
     </target>
     
@@ -216,23 +217,41 @@
         <delete file="${local_directory}/Coma.dmg"/>
         
         
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/FOLKER_13_64 ${local_directory}/Folker.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/FOLKER_13_64"/>
+            <arg value="${local_directory}/Folker.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/PartiturEditor_13_64 ${local_directory}/PartiturEditor.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/PartiturEditor_13_64"/>
+            <arg value="${local_directory}/PartiturEditor.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/Coma_13_64 ${local_directory}/Coma.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/Coma_13_64"/>
+            <arg value="${local_directory}/Coma.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/OrthoNormal_13_64 ${local_directory}/OrthoNormal.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/OrthoNormal_13_64"/>
+            <arg value="${local_directory}/OrthoNormal.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/TeiDrop_13_64 ${local_directory}/TeiDrop.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/TeiDrop_13_64"/>
+            <arg value="${local_directory}/TeiDrop.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/EXAKT_13_64 ${local_directory}/Exakt.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/EXAKT_13_64"/>
+            <arg value="${local_directory}/Exakt.dmg"/>
         </exec> 
     </target>
     
@@ -241,8 +260,29 @@
         <!-- do nothing, just defining the main target -->
     </target>    
     
+    <target name="mac_DMGS_jpackage_EXPERIMENTAL" depends="prepare_jpackage">
+
+        <!-- FOLKER -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_DMG"/>
+            <arg value="--main-jar"/><arg value="EXMARaLDA_OFFICIAL.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=FOLKER"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${folker_version}"/>
+            <arg value="--icon"/><arg value="${icons_folder}/folker.icns"/>
+            <arg value="--name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-identifier"/><arg value="FOLKER"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/folker_file_ass.properties"/>
+            
+        </exec>    
     
-    
+    </target>
     
 </project>
 
