@@ -9,11 +9,11 @@
     <!-- *************************************************************** -->
 
     <!-- directory where to put the final results -->
-    <property name="target_directory" value="D:\EXMARaLDA_BUILD"/>
+    <property name="target_directory" value="C:\exmaralda\EXMARaLDA_Build"/>
     <!-- a copy in a cloud folder -->
-    <property name="shared_directory" value="D:\Dropbox\EXMARaLDA_Build"/>
+    <property name="shared_directory" value="C:\Users\bernd\Dropbox\EXMARaLDA_Build"/>
     <!-- ??? -->
-    <property name="target_lib_directory" value="D:\EXMARaLDA_BUILD\Libraries"/>
+    <property name="target_lib_directory" value="C:\exmaralda\EXMARaLDA_Build\Libraries"/>
 
    
     <!-- version numbers -->
@@ -21,25 +21,27 @@
     <property name="partitureditor_version" value="1.7"/>
     <property name="coma_version" value="2.0.2"/>
     <property name="exakt_version" value="1.4"/>
-    <property name="teidrop_version" value="0.5"/>
+    <property name="teidrop_version" value="1.0"/>
     <property name="folker_version" value="1.3"/>
-    <property name="orthonormal_version" value="0.9.9"/>
+    <property name="orthonormal_version" value="1.0"/>
 
     
-    <property name="base_directory" location="D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project"/>
+    <property name="project_directory" location="C:\exmaralda\exmaralda"/>
+    <property name="base_directory" location="${project_directory}\EXMARaLDA_nb"/>
     
     <!-- path to the java archive with the EXMARaLDA code -->
-    <property name="exmaralda_jar" location="${base_directory}/dist/EXMARaLDA_NetBeans_Project.jar"/>
-    <property name="application_jar" location="${base_directory}/dist/EXMARaLDA_APPLICATION.jar"/>
+    <property name="project_jar_name" value="EXMARaLDA_nb.jar"></property>
+    <property name="exmaralda_jar" location="${base_directory}/dist/${project_jar_name}"/>
+    <property name="application_jar" location="${base_directory}/dist/${project_jar_name}"/>
     
     <!-- directory for temporarily placing built stuff -->
-    <property name="temp_directory" location="D:\EXMARaLDA_BUILD\temp"/>
+    <property name="temp_directory" location="${target_directory}\temp"/>
            
     <!-- path to the inno setup executable -->
-    <property name="inno_setup_exe" location="D:\Dropbox\EXMARaLDA_Build\2021_ISSUE_291_BINARIES\Inno Setup 5\ISCC.exe"/>
+    <property name="inno_setup_exe" location="${shared_directory}\2021_ISSUE_291_BINARIES\Inno Setup 5\ISCC.exe"/>
     
     <!-- directory with all template files -->
-    <property name="template_directory" location="D:\EXMARaLDA_GIT\exmaralda\src\build"/> 
+    <property name="template_directory" location="${project_directory}\src\build"/> 
     <!-- directory with icon files -->
     <property name="icons_directory" location="${template_directory}/windows/icons"/>
     
@@ -56,7 +58,7 @@
     <target name="-pre-compile">
         <tstamp/>
         <echo message="Updating EXMARaLDA Constants"/>
-        <copy file="${template_directory}/EXMARaLDAConstants.java.txt" tofile="D:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\common\EXMARaLDAConstants.java" overwrite="true">
+        <copy file="${template_directory}/EXMARaLDAConstants.java.txt" tofile="${project_directory}\src\org\exmaralda\common\EXMARaLDAConstants.java" overwrite="true">
             <filterset>
                <filter token="PARTITUREDITOR_VERSION" value="${partitureditor_version}"/>
                <filter token="EXAKT_VERSION" value="${exakt_version}"/>
@@ -88,7 +90,7 @@
                 <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
         </xslt>
         
-        <property file="C:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\coma\resources\version.properties" />    
+        <property file="${project_directory}\src\org\exmaralda\coma\resources\version.properties" />    
         <property name="coma_version" value="${comaversion}"/>
         <property name="BUILD_TIME" value="${DSTAMP}.${TSTAMP}"/>
         
@@ -104,9 +106,9 @@
         <delete dir="${temp_directory}"/>
         <mkdir dir="${temp_directory}"/>
         <copy file="${application_jar}" todir="${target_lib_directory}"/>
-        <move file="${target_lib_directory}\EXMARaLDA_APPLICATION.jar" tofile="${target_lib_directory}\EXMARaLDA.jar"/>
+        <move file="${target_lib_directory}\EXMARaLDA_nb.jar" tofile="${target_lib_directory}\EXMARaLDA.jar"/>
         <copy file="${application_jar}" todir="${temp_directory}"/>
-        <move file="${temp_directory}/EXMARaLDA_APPLICATION.jar" tofile="${temp_directory}/EXMARaLDA.jar"/>
+        <move file="${temp_directory}/EXMARaLDA_nb.jar" tofile="${temp_directory}/EXMARaLDA.jar"/>
         <copy todir="${temp_directory}">
             <fileset dir="${icons_directory}">
                 <include name="*.ico"/>
@@ -120,9 +122,9 @@
     <!-- *************************************************************** -->
 
     
-    <property name="jpackage_excecutable" location="C:\Program Files\Java\jdk-14\bin\jpackage.exe"/>
-    <property name="jpackage_source" location="D:\EXMARaLDA_GIT\exmaralda\EXMARaLDA_NetBeans_Project\dist"/>
-    <property name="jpackage_target" location="D:\EXMARaLDA_NEW_BUILD_TEST"/>
+    <property name="jpackage_excecutable" location="C:\Program Files\Java\jdk-17.0.3+7\bin\jpackage.exe"/>
+    <property name="jpackage_source" location="${base_directory}\dist"/>
+    <property name="jpackage_target" location="${target_directory}\JPACKAGE"/>
 
     <target name="prepare_jpackage">
         <delete dir="${jpackage_target}/PartiturEditor"/>
@@ -141,7 +143,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--main-jar"/><arg value="${project_jar_name}"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
             
                    
@@ -154,7 +156,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--main-jar"/><arg value="${project_jar_name}"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
             <!-- -->
             <arg value="--main-class"/><arg value="org.exmaralda.coma.launcher.Launcher"/>
@@ -168,7 +170,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--main-jar"/><arg value="${project_jar_name}"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
             <!-- -->
             <arg value="--main-class"/><arg value="org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT"/>
@@ -182,7 +184,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--main-jar"/><arg value="${project_jar_name}"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
             <!-- -->
             <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
@@ -196,7 +198,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--main-jar"/><arg value="${project_jar_name}"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
             <!-- -->
             <arg value="--main-class"/><arg value="org.exmaralda.orthonormal.application.ApplicationFrame"/>
@@ -210,7 +212,7 @@
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
             <arg value="--dest"/><arg value="${jpackage_target}"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA_NetBeans_Project.jar"/>
+            <arg value="--main-jar"/><arg value="${project_jar_name}"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR\app\native"/>
             <!-- -->
             <arg value="--main-class"/><arg value="org.exmaralda.tei.swing.ApplicationFrame"/>
@@ -220,7 +222,7 @@
         </exec>    
         
         <copy todir="${jpackage_target}/PartiturEditor/app/native">
-            <fileset dir="D:\EXMARaLDA_LIBS_2020\native"/> 
+            <fileset dir="${shared_directory}\2020_LIBS\native-win"/> 
         </copy>
         
         <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/Coma/Coma.exe"/>

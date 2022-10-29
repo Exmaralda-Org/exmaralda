@@ -11,6 +11,8 @@ TEI-Drop @teidrop-version@
 
 EXMARaLDA tools are free to use. EXMARaLDA's source code is licensed under an open source license (GPL 2.0) and available from GitHub (https://github.com/EXMARaLDA/exmaralda/).
 
+EXMARaLDA distributions are made by Thomas Schmidt at LinguisticBits (http://linguisticbits.de)
+
 The tools are developed by Thomas Schmidt (IDS Mannheim) and Kai Woerner (University of Hamburg) with support from Hanna Hedeland, Daniel Jettka, Anne Ferger (HZSK Hamburg) and other contributors.
 
 The Dulko functionality is developed by Andreas Nolda (BBAW Berlin)

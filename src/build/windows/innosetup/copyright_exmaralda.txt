@@ -6,8 +6,8 @@ Partitur Editor Version 1.7
 Corpus Manager Version 2.0.2
 EXAKT Search tool Version 1.4
 FOLKER Version 1.3
-OrthoNormal Version 0.9.9
-TEI-Drop 0.5
+OrthoNormal Version 1.0
+TEI-Drop 1.0
 
 EXMARaLDA tools are free to use. EXMARaLDA's source code is licensed under an open source license (GPL 2.0) and available from GitHub (https://github.com/EXMARaLDA/exmaralda/).
 
