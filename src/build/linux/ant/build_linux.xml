@@ -91,7 +91,7 @@
 
 
     <target name="prepare_target_directory">
-        <delete dir="${target_directory}/${exmaralda_version}"/>
+        <delete dir="${target_directory}/${exmaralda_version}/linux"/>
         <mkdir dir="${target_directory}/${exmaralda_version}/linux"/>        
     </target>
 
