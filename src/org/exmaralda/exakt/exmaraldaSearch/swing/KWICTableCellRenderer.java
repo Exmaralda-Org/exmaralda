@@ -6,9 +6,6 @@ package org.exmaralda.exakt.exmaraldaSearch.swing;
 
 import java.awt.Color;
 import java.awt.Component;
-import javafx.scene.layout.Border;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
