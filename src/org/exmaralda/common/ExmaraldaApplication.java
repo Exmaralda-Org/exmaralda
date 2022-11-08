@@ -24,13 +24,16 @@ public interface ExmaraldaApplication {
     /* returns the version string */
     public String getVersion();
     
-    /** returns the application name */
+    /** returns the application name
+     * @return  */
     public String getApplicationName();
     
-    /** returns the top level node for writing preferences */
+    /** returns the top level node for writing preferences
+     * @return  */
     public String getPreferencesNode();
     
-    /** returns the path to the welcome screen */
+    /** returns the path to the welcome screen
+     * @return  */
     public javax.swing.ImageIcon getWelcomeScreen();
 
     public void resetSettings();

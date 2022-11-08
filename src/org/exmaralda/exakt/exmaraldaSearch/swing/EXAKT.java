@@ -1587,7 +1587,7 @@ public class EXAKT extends javax.swing.JFrame
     
     @Override
     public ImageIcon getWelcomeScreen() {
-        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/SplashScreen.png"));
+        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/splashscreen.png"));
     }
     
     @Override

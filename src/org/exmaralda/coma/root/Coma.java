@@ -1036,7 +1036,7 @@ public class Coma extends JFrame implements ChangeListener,
 
     @Override
     public ImageIcon getWelcomeScreen() {
-        return IconFactory.createImageIcon("splash.png");
+        return IconFactory.createImageIcon("splashscreen.png");
     }
 
     // this must go, see issue #199

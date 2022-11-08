@@ -579,7 +579,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements TimeSelectio
 
     @Override
     public ImageIcon getWelcomeScreen() {
-        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/orthonormal/gui/OrthoSplashScreen.png"));
+        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/orthonormal/gui/splashscreen.png"));
     }
     
     @Override

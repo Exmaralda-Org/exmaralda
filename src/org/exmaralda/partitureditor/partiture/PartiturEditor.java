@@ -648,7 +648,7 @@ public class PartiturEditor extends javax.swing.JFrame
     
     @Override
     public ImageIcon getWelcomeScreen() {
-        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SplashScreen.png"));
+        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/splashscreen.png"));
     }
     
     @Override

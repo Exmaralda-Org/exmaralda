@@ -280,7 +280,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
 
     @Override
     public ImageIcon getWelcomeScreen() {
-        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/gui/SplashScreen.png"));
+        return new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/gui/splashscreen.png"));
     }
     
     @Override
