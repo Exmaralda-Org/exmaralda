@@ -56,7 +56,7 @@ public class StartupSplashScreen extends JWindow {
 
     /** Creates new StartupSplashScreen */
     public StartupSplashScreen(JFrame f) {
-        this(f, "/org/exmaralda/folker/gui/SplashScreen.png");
+        this(f, "/org/exmaralda/folker/gui/splashscreen.png");
     }
     
     
