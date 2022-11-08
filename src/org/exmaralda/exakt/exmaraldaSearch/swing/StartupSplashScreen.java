@@ -16,12 +16,13 @@ import java.awt.*;
  */
 public class StartupSplashScreen extends JWindow {
 
-    /** Creates new StartupSplashScreen */
+    /** Creates new StartupSplashScreen
+     * @param f */
     public StartupSplashScreen(JFrame f) {
         super(f);
         JLabel label = new JLabel();
         label.setOpaque(false);
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/SplashScreen.png")));
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/splashscreen.png")));
         label.repaint();
         Color transparentColor = new Color(1,1,1,Color.TRANSLUCENT);
         this.setBackground(transparentColor);

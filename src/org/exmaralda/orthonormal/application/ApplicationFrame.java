@@ -36,7 +36,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     /** Creates new form ApplicationFrame
      * @param args */
     public ApplicationFrame(String[] args) {
-        new StartupSplashScreen(this, "/org/exmaralda/orthonormal/gui/OrthoSplashScreen.png");
+        new StartupSplashScreen(this, "/org/exmaralda/orthonormal/gui/splashscreen.png");
 
         org.exmaralda.common.Logger.initialiseLogger(this);
 

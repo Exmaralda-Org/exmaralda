@@ -4,10 +4,12 @@
 package org.exmaralda.coma.launch;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.prefs.Preferences;
 
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.exmaralda.coma.resources.ResourceHandler;
 import org.exmaralda.coma.root.Coma;
@@ -35,14 +37,14 @@ public class ComaLauncher {
 			try {
 				UIManager.setLookAndFeel(UIManager
 						.getSystemLookAndFeelClassName());
-			} catch (Exception f) {
+			} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException f) {
 				System.err.println("failed setting system look&feel");
 			}
 		} else {
 			try {
 				UIManager
 						.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-			} catch (Exception g) {
+			} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException g) {
 				System.err
 						.println("failed setting Quaqua look&feel (don't bother if you don't use a mac).");
 
@@ -54,7 +56,7 @@ public class ComaLauncher {
 		java.util.Properties props = new java.util.Properties();
 		try {
 			props.load(pURL.openStream());
-		} catch (Exception err) {
+		} catch (IOException err) {
 			// can't get version number
 			err.printStackTrace();
 		}

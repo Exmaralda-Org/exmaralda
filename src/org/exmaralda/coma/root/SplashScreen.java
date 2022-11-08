@@ -26,7 +26,7 @@ public class SplashScreen extends JPanel implements MouseListener {
 			System.err.println("LXDE, eh?");
 		}
 		setLayout(new BorderLayout());
-		ImageIcon ii = IconFactory.createImageIcon("splash.png");
+		ImageIcon ii = IconFactory.createImageIcon("splashscreen.png");
 		setSize(coma.getSize());
 		setLocation(0, 0);
 		JLabel l = new JLabel(ii);

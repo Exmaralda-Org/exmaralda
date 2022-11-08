@@ -22,7 +22,7 @@ public class StartupSplashScreen extends JWindow {
         super(f);
         JLabel label = new JLabel();
         label.setOpaque(false);
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SplashScreen.png")));
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/splashscreen.png")));
         label.repaint();
 
         Color transparentColor = new Color(1,1,1,Color.TRANSLUCENT);
