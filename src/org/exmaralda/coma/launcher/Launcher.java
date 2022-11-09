@@ -31,6 +31,8 @@ public class Launcher {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+                // added 09-11-2022: issue #344
+                System.setProperty("apple.awt.application.name", "Corpus Manager");        
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
 		System.setProperty("com.apple.mrj.application.apple.menu.about.name",
 				"Corpus Manager");

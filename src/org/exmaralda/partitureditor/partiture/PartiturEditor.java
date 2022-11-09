@@ -284,6 +284,8 @@ public class PartiturEditor extends javax.swing.JFrame
      * transcription open
      */
     public static void main(final String args[]) {
+        // added 09-11-2022: issue #344
+        System.setProperty("apple.awt.application.name", "Partitur-Editor");        
         System.out.println("java.library.path=" + System.getProperty("java.library.path"));
         try {
             System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());

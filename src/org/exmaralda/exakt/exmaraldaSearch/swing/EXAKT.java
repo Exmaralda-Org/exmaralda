@@ -825,6 +825,8 @@ public class EXAKT extends javax.swing.JFrame
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        // added 09-11-2022: issue #344
+        System.setProperty("apple.awt.application.name", "EXAKT");        
         try {
             System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
