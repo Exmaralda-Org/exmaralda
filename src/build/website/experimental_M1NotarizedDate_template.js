@@ -1,0 +1,1 @@
+var M1NotarizedDate = "@CURRENT_DATE_TIME@";

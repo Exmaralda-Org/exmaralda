@@ -1,0 +1,1 @@
+var IntelNotarizedDate = "@CURRENT_DATE_TIME@";
