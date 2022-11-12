@@ -4,6 +4,7 @@
 package org.exmaralda.coma.launcher;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.prefs.Preferences;
 
@@ -24,7 +25,6 @@ public class Launcher {
 	// always change launchertemplate.java
 	// another git test
 
-	private static Coma comaInstance;
 	Preferences prefs = Ui.prefs;
 
 	/**
@@ -34,65 +34,22 @@ public class Launcher {
                 // added 09-11-2022: issue #344
                 System.setProperty("apple.awt.application.name", "Corpus Manager");        
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
-		System.setProperty("com.apple.mrj.application.apple.menu.about.name",
-				"Corpus Manager");
-		if (Ui.prefs.getBoolean("prefs.useNimbusLookAndFeel", false)) {
-			try {
-				for (LookAndFeelInfo info : UIManager
-						.getInstalledLookAndFeels()) {
-					if ("Nimbus".equals(info.getName())) {
-						UIManager.setLookAndFeel(info.getClassName());
-						break;
-					}
-				}
-			} catch (Exception e) {
-				if (!Coma.os.equals("mac")) {
-					try {
-						UIManager.setLookAndFeel(UIManager
-								.getSystemLookAndFeelClassName());
-					} catch (Exception f) {
-						System.err.println("failed setting system look&feel");
-					}
-				} else {
-					try {
-						UIManager
-								.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-					} catch (Exception g) {
-						System.err
-								.println("failed setting Quaqua look&feel (don't bother if you don't use a mac).");
+		System.setProperty("com.apple.mrj.application.apple.menu.about.name","Corpus Manager");
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception f) {
+                    System.err.println("failed setting system look&feel");
+                }
 
-					}
-				}
-
-			}
-		} else {
-			if (!Coma.os.equals("mac")) {
-				try {
-					UIManager.setLookAndFeel(UIManager
-							.getSystemLookAndFeelClassName());
-				} catch (Exception f) {
-					System.err.println("failed setting system look&feel");
-				}
-			} else {
-				try {
-					UIManager
-							.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-				} catch (Exception g) {
-					System.err
-							.println("failed setting Quaqua look&feel (don't bother if you don't use a mac).");
-
-				}
-			}
-
-		}
 		checkFirstRun();
 		java.net.URL pURL = new ResourceHandler().propertiesURL();
 		java.util.Properties props = new java.util.Properties();
 		try {
-			props.load(pURL.openStream());
-		} catch (Exception err) {
-			// can't get version number
-			err.printStackTrace();
+                    props.load(pURL.openStream());
+		} catch (IOException err) {
+                    // can't get version number
+                    err.printStackTrace();
+                    System.out.println(err.getLocalizedMessage());
 		}
 		String version = props.getProperty("comaversion");
 		System.out.println(version);
@@ -107,21 +64,22 @@ public class Launcher {
 		String inputFile = "";
 		boolean logging = true;
 		if (args.length > 0) {
-			if (new File(args[0]).exists()) {
-				//inputFile = args[0];
-                                // dirty fix for #216
-                                inputFile = StringUtilities.fixFilePath(args[0]);
-			}
+                    System.out.println(args[0] + " passed as file to open. ");
+                    if (new File(args[0]).exists()) {
+                        // dirty fix for #216
+                        inputFile = StringUtilities.fixFilePath(args[0]);
+                        System.out.println(inputFile + " set as input file. ");                        
+                    }
 
-			if (args.length > 1) {
-
-				if (args[1].equals("nologging")) {
-					logging = false;
-
-				}
-			}
-		}
-		comaInstance = new Coma(inputFile, version, revision, logging);
+                    if (args.length > 1) {
+                        if (args[1].equals("nologging")) {
+                            logging = false;
+                        }
+                    }
+		} else {
+                    System.out.println("No arguments passed to Coma.");
+                }
+		Coma comaInstance = new Coma(inputFile, version, revision, logging);
 	}
 
 	/**
