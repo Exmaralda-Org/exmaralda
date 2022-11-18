@@ -3,6 +3,7 @@ package org.exmaralda.coma.root;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.desktop.OpenFilesEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -12,6 +13,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 import javax.swing.ImageIcon;
@@ -65,6 +68,7 @@ import org.jdom.xpath.XPath;
 
 import java.util.prefs.BackingStoreException;
 import java.util.regex.Pattern;
+import org.exmaralda.folker.application.ApplicationFrame;
 
 /**
  * Coma.java<br>
@@ -115,8 +119,8 @@ public class Coma extends JFrame implements ChangeListener,
     private ProgressMonitor progressMonitor;
     private RefreshTranscriptionTask task;
     private RefreshRecordingsTask rTask;
-    public static String os = (System.getProperty("mrj.version") == null ? "win"
-            : "mac");
+    // this is dangerous, there is no mrj any longer afaiks
+    public static String os = (System.getProperty("mrj.version") == null ? "win" : "mac");
     private List<Element> transcriptions;
     private String revision;
     private List<Element> rCommunications;
@@ -127,10 +131,17 @@ public class Coma extends JFrame implements ChangeListener,
     private int recordingsRemoved;
     private boolean removeStats;
 
-    public Coma(String inputFile, String version, String revision,
-                boolean logging) {
+    
+    
+    
+    
+    
+    
+    public Coma(String inputFile, String version, String revision, boolean logging) {
         super("Coma " + version);
         System.out.println(">>" + version);
+        String thisOs = System.getProperty("os.name").substring(0,3);
+        
         coma = this;
         data = new ComaData(coma);
         if (os.equals("mac")) {
@@ -141,24 +152,17 @@ public class Coma extends JFrame implements ChangeListener,
         coma.setVersion(version);
         coma.setRevision(revision);
         if (logging) {
-            System.out.println("logger enabled. logging to: "
-                    + prefs.get("LOG-Directory", "unknown"));
+            System.out.println("logger enabled. logging to: " + prefs.get("LOG-Directory", "unknown"));
             org.exmaralda.common.Logger.initialiseLogger(this);
+            System.out.println("Logging intitalised");
         } else {
             System.out.println("logging disabled!");
             System.out.println(getData());
         }
-        System.out.println("eh?");
         String className = this.getClass().getName().replace('.', '/');
-        String classJar = this.getClass()
-                .getResource("/" + className + ".class").toString();
+        String classJar = this.getClass().getResource("/" + className + ".class").toString();
         debugging = (!classJar.startsWith("jar:"));
-        try {
-            System.setProperty(
-                    "com.apple.mrj.application.apple.menu.about.name", "Coma");
-        } catch (Exception e) {
-            status(e.toString());
-        }
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Coma");
         getRootPane().addNotify();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -174,8 +178,27 @@ public class Coma extends JFrame implements ChangeListener,
 
         setSize(prefs.getInt("winWidth", 900), prefs.getInt("winHeigth", 600));
         setLocation(prefs.getInt("winX", 20), prefs.getInt("winY", 50));
-// yes?
         SplashScreen about = new SplashScreen(this, true);
+
+
+        if (thisOs.equalsIgnoreCase("mac")) {
+            // new 12-11-2022
+            System.out.println("Setting an OpenFilesHandler");
+            java.awt.Desktop.getDesktop().setOpenFileHandler(new java.awt.desktop.OpenFilesHandler(){
+                    @Override
+                    public void openFiles(OpenFilesEvent e){
+                        try{
+                            String inputFileFromOpenFilesHandler = e.getFiles().get(0).getAbsolutePath();
+                            File fileToOpen = new File(inputFileFromOpenFilesHandler);                                                        
+                            openComaXML(fileToOpen);
+                        } catch (Exception ex){
+                            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);  
+                            JOptionPane.showMessageDialog(Coma.getFrames()[0], ex.getLocalizedMessage());
+                        }
+                    }
+            });
+        }
+
 
         if (inputFile.length() > 0) {
             openComaXML(new File(inputFile));
@@ -183,10 +206,8 @@ public class Coma extends JFrame implements ChangeListener,
         }
         if ((new File(prefs.get("defaultTemplatesFile", "")).exists())
                 && (prefs.getBoolean("cmd.autoLoadTemplates", false))) {
-            if (!data.getTemplates().loadTemplates(
-                    new File(prefs.get("defaultTemplatesFile", "")))) {
-                JOptionPane.showMessageDialog(this,
-                        Ui.getText("err.invalidTemplatesFile"));
+            if (!data.getTemplates().loadTemplates(new File(prefs.get("defaultTemplatesFile", "")))) {
+                JOptionPane.showMessageDialog(this, Ui.getText("err.invalidTemplatesFile"));
                 prefs.putBoolean("cmd.autoLoadTemplates", false);
                 prefs.remove("defaultTemplatesFile");
 
@@ -201,13 +222,13 @@ public class Coma extends JFrame implements ChangeListener,
         }
         setVisible(true);
         // auto-update-check
-        String ucp = prefs.get("prefs.updateCheckTimespan", "timespanNever");
+        // better get rid of this? 12-11-2022
+        /*String ucp = prefs.get("prefs.updateCheckTimespan", "timespanNever");
         long updateCheckTimespan = DurationHelper.timeSpans().get(ucp);
         long updateLastChecked = prefs.getLong("updateLastChecked", 0);
         long now = System.currentTimeMillis();
         if (updateCheckTimespan > 0) {
-            System.out
-                    .println("next update check in "
+            System.out.println("next update check in "
                             + ((updateLastChecked + updateCheckTimespan - now) / 3600000)
                             + " hours");
             if (updateLastChecked + updateCheckTimespan < now) {
@@ -215,8 +236,7 @@ public class Coma extends JFrame implements ChangeListener,
                         + getVersion() + "),(" + getRevision() + ")");
                 System.out.println();
                 try {
-                    UpdateDialogPane udp = new UpdateDialogPane(this,
-                            getVersion());
+                    UpdateDialogPane udp = new UpdateDialogPane(this,getVersion());
                     if (udp.isUpdateAvailable()) {
                         System.out.println("update available.");
                         udp.setLocationRelativeTo(this);
@@ -234,7 +254,7 @@ public class Coma extends JFrame implements ChangeListener,
         } else {
             Ui.prefs.putLong("updateLastChecked", 0);
             System.out.println("automatic update checks disabled");
-        }
+        }*/
         xmlSaved(); // nothing has changed yet!
     }
 

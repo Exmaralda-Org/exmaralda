@@ -3,11 +3,8 @@
  */
 package org.exmaralda.coma.actions;
 
-import java.awt.FileDialog;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FilenameFilter;
 
 import javax.swing.JFileChooser;
 
@@ -39,6 +36,7 @@ public class OpenTemplatesAction extends ComaAction {
 		file = selectedFile;
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		open();
 	}
@@ -49,7 +47,7 @@ public class OpenTemplatesAction extends ComaAction {
 		} else {
 
 			File file = null;
-			if (Coma.os.equals("mac")) {
+			/*if (Coma.os.equals("mac")) {
 				// use the native file dialog on the mac
 				FileDialog dialog = new FileDialog((Frame) coma, Ui.getText("cmd.openTemplates"), FileDialog.LOAD);
 				dialog.setFilenameFilter(new FilenameFilter() {
@@ -60,13 +58,13 @@ public class OpenTemplatesAction extends ComaAction {
 				dialog.show();
 				if (dialog.getFile() != null)
 					file = new File(dialog.getDirectory() + dialog.getFile());
-			} else {
+			} else {*/
 				// use a swing file dialog on the other platforms
 				fc = new JFileChooser();
 				fc.addChoosableFileFilter(new ExmaraldaFileFilter("Coma-Templates", new String[] { "ctf" }, true));
 				int dialogStatus = fc.showOpenDialog(coma);
 				file = fc.getSelectedFile();
-			}
+			//}
 			if (file != null) {
 				coma.getData().getTemplates().loadTemplates(file);
 				coma.getData().setTemplateFile(file);
