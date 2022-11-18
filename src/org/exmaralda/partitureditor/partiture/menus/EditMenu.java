@@ -21,6 +21,7 @@ public class EditMenu extends AbstractTableMenu {
     private final JMenuItem undoMenuItem;
 
     private final JMenuItem copyTextMenuItem;
+    private final JMenuItem copyHTMLMenuItem; // #338
     private final JMenuItem pasteMenuItem;
     private final JMenuItem cutMenuItem;
 
@@ -57,6 +58,8 @@ public class EditMenu extends AbstractTableMenu {
         copyTextMenuItem = this.add(table.copyTextAction);
         copyTextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         
+        copyHTMLMenuItem = this.add(table.copyHTMLAction);
+
         pasteMenuItem = this.add(table.pasteAction);
         pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         

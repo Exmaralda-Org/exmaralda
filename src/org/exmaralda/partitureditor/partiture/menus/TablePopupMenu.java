@@ -31,6 +31,7 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
     private final JMenuItem addBookmarkMenuItem;
     private final JMenuItem formatTierMenuItem;
     private JMenuItem copyMenuItem;
+    private JMenuItem copyHTMLMenuItem;
         
     
     /** Creates a new instance of TablePopupMenu
@@ -104,6 +105,12 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
         copyMenuItem.setIcon(null);
         copyMenuItem.setAccelerator(null);
         copyMenuItem.setText(Internationalizer.getString("Copy"));
+
+        copyHTMLMenuItem = this.add(table.copyHTMLAction);
+        copyHTMLMenuItem.setIcon(null);
+        copyHTMLMenuItem.setAccelerator(null);
+        copyHTMLMenuItem.setText(Internationalizer.getString("Copy HTML"));
+
 
         this.add(new javax.swing.JPopupMenu.Separator());
         

@@ -15,7 +15,6 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.util.ArrayList;
 import java.io.Reader;
 import java.io.StringReader;
-import java.io.InputStream;
 
 /**
  *
@@ -32,7 +31,7 @@ public class HTMLSelection implements Transferable {
             htmlFlavors.add(new DataFlavor("text/html;class=java.io.Reader"));
             htmlFlavors.add(new DataFlavor("text/html;charset=unicode;class=java.io.InputStream"));
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
     }
 
@@ -42,14 +41,17 @@ public class HTMLSelection implements Transferable {
         this.html = html;
     }
 
+    @Override
     public DataFlavor[] getTransferDataFlavors() {
         return (DataFlavor[]) htmlFlavors.toArray(new DataFlavor[htmlFlavors.size()]);
     }
 
+    @Override
     public boolean isDataFlavorSupported(DataFlavor flavor) {
         return htmlFlavors.contains(flavor);
     }
 
+    @Override
     public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
         if (String.class.equals(flavor.getRepresentationClass())) {
             return html;

@@ -25,7 +25,9 @@ public class CopyTextAction extends org.exmaralda.partitureditor.partiture.Abstr
     
     public boolean markOverlaps = false;
 
-    /** Creates a new instance of CopyTextAction */
+    /** Creates a new instance of CopyTextAction
+     * @param t
+     * @param icon */
     public CopyTextAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Copy", icon, t);
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                
@@ -42,11 +44,13 @@ public class CopyTextAction extends org.exmaralda.partitureditor.partiture.Abstr
     private void copyText(){
         String text = new String();
         if (table.isEditing){
+            // if the table is editing, we just want to selected text of the editing component
             javax.swing.JTextField editingComponent = (javax.swing.JTextField)(table.getEditingComponent());
             if (editingComponent!=null){
                 text = editingComponent.getSelectedText();
             }
         } else {
+            // meaning: the table is not editing
             int startR = 0; int endR = table.getModel().getNumRows();
             int startC = 0; int endC = table.getModel().getNumColumns();
             if ((table.selectionStartRow >=0) && (table.selectionEndRow>=0) && (table.selectionStartCol>=0) && (table.selectionEndCol>=0)){
@@ -63,7 +67,9 @@ public class CopyTextAction extends org.exmaralda.partitureditor.partiture.Abstr
                 int timelineStart = table.selectionStartCol;
                 org.exmaralda.partitureditor.interlinearText.InterlinearText it =
                     ItConverter.BasicTranscriptionToInterlinearText(newTranscription, table.getModel().getTierFormatTable(), timelineStart);
-                if (table.getFrameEndPosition()>=0){((org.exmaralda.partitureditor.interlinearText.ItBundle)it.getItElementAt(0)).frameEndPosition=table.getFrameEndPosition();}
+                if (table.getFrameEndPosition()>=0){
+                    ((org.exmaralda.partitureditor.interlinearText.ItBundle)it.getItElementAt(0)).frameEndPosition=table.getFrameEndPosition();
+                }
                 // added 15-06-2009
                 if (markOverlaps){
                     it.markOverlaps("[", "]");
@@ -91,41 +97,4 @@ public class CopyTextAction extends org.exmaralda.partitureditor.partiture.Abstr
         java.awt.datatransfer.StringSelection ss = new java.awt.datatransfer.StringSelection(text);
         table.getToolkit().getSystemClipboard().setContents(ss,ss);
     }
-    
-    /**private void copyText(){
-        String text = new String();
-        if (table.isEditing){
-            javax.swing.JTextField editingComponent = (javax.swing.JTextField)(table.getEditingComponent());
-            if (editingComponent!=null){
-                text = editingComponent.getSelectedText();
-            }
-        } else {
-            int startR = 0; int endR = table.getModel().getNumRows();
-            int startC = 0; int endC = table.getModel().getNumColumns();
-            if ((table.selectionStartRow >=0) && (table.selectionEndRow>=0) && (table.selectionStartCol>=0) && (table.selectionEndCol>=0)){
-                // some arbitrary area is selected
-                startR = table.selectionStartRow; endR = table.selectionEndRow+1;
-                startC = table.selectionEndCol; endC = table.selectionEndCol+1;
-            } else if ((table.selectionStartCol<0) && (table.selectionStartRow>=0) && (table.selectionEndRow>=0)){
-                // one or several complete rows are selected
-                startR = table.selectionStartRow; endR = table.selectionEndRow+1;
-            } else if ((table.selectionStartRow<0) && (table.selectionStartCol>=0) && (table.selectionEndCol>=0)){
-                // one or several complete columns are selected
-                startC = table.selectionStartCol; endC = table.selectionEndCol+1;
-            }
-            for (int row=startR; row<endR; row++){
-                for (int col=startC; col<endC; col++){
-                    try{
-                        Event event = table.getModel().getEvent(row,col);
-                        text+=event.getDescription();
-                    } catch (JexmaraldaException je){}
-                }
-                text+=System.getProperty("line.separator");
-            }
-        }
-        java.awt.datatransfer.StringSelection ss = new java.awt.datatransfer.StringSelection(text);
-        table.getToolkit().getSystemClipboard().setContents(ss,ss);
-    }**/
-    
-    
 }

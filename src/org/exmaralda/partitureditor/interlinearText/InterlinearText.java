@@ -131,7 +131,7 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
     public int[] getPageBreaksAsArray(){
         int[] result=new int[pageBreaks.size()];
         for (int pos=0; pos<pageBreaks.size(); pos++){
-            result[pos]=((Integer)pageBreaks.elementAt(pos)).intValue();
+            result[pos]=((Integer)pageBreaks.elementAt(pos));
         }
         return result;        
     }
@@ -154,16 +154,19 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
         udInfo = udi;
     }
     
-    /** writes a string representing this object in XML to the specified output stream */
+    /** writes a string representing this object in XML to the specified output stream
+     * @param fo
+     * @throws java.io.IOException */
     @Override
     public void writeXML(java.io.FileOutputStream fo) throws java.io.IOException {
         fo.write(toXML().getBytes("UTF-8"));
     }
     
-    /** returns a string representing this object in XML  */
+    /** returns a string representing this object in XML
+     * @return  */
     @Override
     public String toXML() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append("<interlinear-text>");
         buffer.append(getFormats().toXML());
         for (int pos=0; pos<getNumberOfItElements(); pos++){
@@ -222,6 +225,7 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
         System.out.println("document written.");        
     }
     
+    @Override
     public UdInformation getUdInformation() {
         return udInfo;
     }
@@ -267,7 +271,7 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
     
     public void copyRTFToClipboard(RTFParameters param){
         String rtfString = toRTF(param);
-        RTFSelection ss = new RTFSelection(rtfString);
+        ClipboardSelection ss = new ClipboardSelection(rtfString);
         new javax.swing.JFrame().getToolkit().getSystemClipboard().setContents(ss,null);        
     }
 
@@ -280,14 +284,16 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
         System.out.println("document written.");
     }
     
+    @Override
     public void writeHTML(java.io.FileOutputStream fos, HTMLParameters param) throws java.io.IOException {
         fos.write(toHTML(param).getBytes("UTF-8"));
     }
     
+    @Override
     public String toHTML(HTMLParameters param) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
-        sb.append("<base target=\"" + param.linkTarget + "\"/>");
+        sb.append("<base target=\"").append(param.linkTarget).append("\"/>");
         if (param.useJavaScript){
             sb.append(HTMLUtilities.makeJavaScriptFunctions(param));
         }
@@ -296,15 +302,16 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
         sb.append("<body>");
         sb.append(param.additionalStuff);
         for (int pos=0; pos < getNumberOfItElements(); pos++){
-            sb.append(((HTMLable)elementAt(pos)).toHTML(param));;
+            sb.append(((HTMLable)elementAt(pos)).toHTML(param));
         }
         sb.append("</body>");
         sb.append("</html>");
         return sb.toString();
     }
     
+    @Override
     public String toRTF(RTFParameters param) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(RTFUtilities.RTF_HEAD);
         sb.append(getFormats().toRTFFontTable(param));
         sb.append(getFormats().toRTFColorTable(param));
@@ -322,13 +329,16 @@ public class InterlinearText extends java.util.Vector implements XMLElement, UdI
     }
     
     
+    @Override
     public void addUdInformation(String propertyName, String propertyValue) {
         if (!hasUdInformation()) {udInfo = new UdInformation();}
         udInfo.setProperty(propertyName, propertyValue);
     }
     
     /** calculates the page breaks on the basis of the paper height specified in the page output parameters
-     * returns the number of pages */
+     * returns the number of pages
+     * @param pageParameters
+     * @return  */
     public int[] calculatePageBreaks(PageOutputParameters pageParameters){
         pageBreaks = new java.util.Vector();
         double currentHeight = 0;

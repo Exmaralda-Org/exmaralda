@@ -19,30 +19,35 @@ import java.io.ByteArrayInputStream;
  *
  * @author thomas
  */
-public class RTFSelection implements Transferable {
+
+// renamed for issue #338
+public class ClipboardSelection implements Transferable {
 
     DataFlavor rtfFlavor;
     DataFlavor[] supportedFlavors;
     private String content;
     
-    public RTFSelection(String s) {
+    public ClipboardSelection(String s) {
         content = s;
         try {
             rtfFlavor = new DataFlavor("text/rtf; class=java.io.InputStream");
-            supportedFlavors = new DataFlavor[]{rtfFlavor, DataFlavor.stringFlavor};
+            supportedFlavors = new DataFlavor[]{rtfFlavor, DataFlavor.stringFlavor, DataFlavor.allHtmlFlavor};
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
     }
 
+    @Override
     public boolean isDataFlavorSupported(DataFlavor flavor) {
         return flavor.equals(rtfFlavor) || flavor.equals(DataFlavor.stringFlavor);
     }
 
+    @Override
     public java.awt.datatransfer.DataFlavor[] getTransferDataFlavors() {
         return supportedFlavors;
     }
 
+    @Override
     public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
 
         if (flavor.equals(DataFlavor.stringFlavor)) {
@@ -50,7 +55,9 @@ public class RTFSelection implements Transferable {
         } else if (flavor.equals(rtfFlavor)) {
             byte[] byteArray = content.getBytes();
             return new ByteArrayInputStream(byteArray);
-        } 
+        } else if (flavor.equals(DataFlavor.allHtmlFlavor)) {
+          // to do issue #338   
+        }
         throw new UnsupportedFlavorException(flavor);
      }
 }

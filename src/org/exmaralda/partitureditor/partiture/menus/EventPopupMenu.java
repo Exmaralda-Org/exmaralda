@@ -35,6 +35,7 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     
     
     private final JMenuItem copyMenuItem;
+    private final JMenuItem copyHTMLMenuItem; // #338
     private final JMenuItem pasteMenuItem;
     private final JMenuItem cutMenuItem;
     private final JMenuItem underlineMenuItem;
@@ -94,6 +95,12 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
         copyMenuItem.setAccelerator(null);
         copyMenuItem.setText(Internationalizer.getString("Copy"));
         
+        copyHTMLMenuItem  = this.add(table.copyHTMLAction);      
+        copyHTMLMenuItem.setIcon(null);
+        copyHTMLMenuItem.setAccelerator(null);
+        copyHTMLMenuItem.setText(Internationalizer.getString("Copy HTML"));
+
+
         pasteMenuItem  = this.add(table.pasteAction);
         pasteMenuItem.setIcon(null);
         pasteMenuItem.setAccelerator(null);
