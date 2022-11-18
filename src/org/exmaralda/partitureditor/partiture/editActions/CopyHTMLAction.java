@@ -6,6 +6,8 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.exmaralda.partitureditor.jexmaralda.convert.ItConverter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
@@ -47,7 +49,31 @@ public class CopyHTMLAction extends org.exmaralda.partitureditor.partiture.Abstr
             }
             return;
         }
-        BasicTranscription newTranscription = table.getCurrentSelectionAsNewTranscription();
+        //BasicTranscription newTranscription = table.getCurrentSelectionAsNewTranscription();
+        int startR = 0; int endR = table.getModel().getNumRows();
+        int startC = 0; int endC = table.getModel().getNumColumns();
+        if ((table.selectionStartRow >=0) && (table.selectionEndRow>=0) && (table.selectionStartCol>=0) && (table.selectionEndCol>=0)){
+            // some arbitrary area is selected
+             startR = table.selectionStartRow; endR = table.selectionEndRow+1;
+             startC = table.selectionStartCol; endC = table.selectionEndCol+1;
+        } else if ((table.selectionStartCol<0) && (table.selectionStartRow>=0) && (table.selectionEndRow>=0)){
+            // one or several complete rows are selected
+            startR = table.selectionStartRow; endR = table.selectionEndRow+1;
+        } else if ((table.selectionStartRow<0) && (table.selectionStartCol>=0) && (table.selectionEndCol>=0)){
+             startC = table.selectionStartCol; endC = table.selectionEndCol+1;
+        }
+        List<Integer> rowList = new ArrayList<>();
+        
+        for (int r=startR; r<endR; r++){
+            if (table.isRowVisible(r)){
+                rowList.add(r);
+            }
+        }       
+        int[] rowArray = new int[rowList.size()];
+        for (int i=0; i<rowArray.length; i++){
+            rowArray[i] = rowList.get(i);
+        }
+        BasicTranscription newTranscription = table.getModel().getPartOfTranscription(rowArray, startC, endC);
         int timelineStart = table.selectionStartCol;
         org.exmaralda.partitureditor.interlinearText.InterlinearText it =
             ItConverter.BasicTranscriptionToInterlinearText(newTranscription, table.getModel().getTierFormatTable(), timelineStart);
