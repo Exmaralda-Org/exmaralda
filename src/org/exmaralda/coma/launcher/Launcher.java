@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.prefs.Preferences;
 
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.exmaralda.coma.resources.ResourceHandler;
 import org.exmaralda.coma.root.Coma;

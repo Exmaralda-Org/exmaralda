@@ -145,7 +145,7 @@ public class EXAKT extends javax.swing.JFrame
     public EXAKT() {
         new StartupSplashScreen(this);        
         
-        org.exmaralda.common.Logger.initialiseLogger(this);
+        //org.exmaralda.common.Logger.initialiseLogger(this);
 
         initActions();
         partitur = new PartitureTableWithActions(this);           
@@ -399,6 +399,17 @@ public class EXAKT extends javax.swing.JFrame
             Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
             JOptionPane.showMessageDialog(this, "Could not save user regex library:\n" + ex.getLocalizedMessage());
         }
+        
+        
+        String localizedMessage = org.exmaralda.common.helpers.Internationalizer.getString("exakt.exit.confirm");
+        String localizedTitle = org.exmaralda.common.helpers.Internationalizer.getString("Exit");
+        int choice = JOptionPane.showConfirmDialog(this, localizedMessage, localizedTitle, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt.png")));
+        
+        if (choice!=JOptionPane.YES_OPTION){
+            System.out.println("Second thoughts on leaving...");
+            return;
+        }
 
         if (proceed){
             getPartitur().getSettings(getPreferencesNode());
@@ -476,7 +487,7 @@ public class EXAKT extends javax.swing.JFrame
         playerInfoLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("EXAKT (PV8 0.4)");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
