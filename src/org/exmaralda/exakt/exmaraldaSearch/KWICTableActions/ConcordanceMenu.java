@@ -9,7 +9,6 @@
 
 package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
-import java.awt.event.ActionEvent;
 import javax.swing.*;
 import org.exmaralda.exakt.exmaraldaSearch.swing.*;
 
@@ -18,11 +17,12 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.*;
  *
  * @author thomas
  */
-public class ConcordanceMenu extends javax.swing.JMenu {
+public final class ConcordanceMenu extends javax.swing.JMenu {
     
     EXAKT exaktFrame;
 
-    /** Creates a new instance of FileMenu */
+    /** Creates a new instance of FileMenu
+     * @param ef */
     public ConcordanceMenu(EXAKT ef) {
         setText("Concordance");
         exaktFrame = ef;

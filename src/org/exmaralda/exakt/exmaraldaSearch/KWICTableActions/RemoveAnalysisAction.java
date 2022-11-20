@@ -13,8 +13,6 @@ import java.awt.event.ActionEvent;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import javax.swing.*;
 import org.exmaralda.exakt.search.analyses.AnalysisInterface;
-import org.exmaralda.exakt.search.swing.AbstractOKCancelDialog;
-import org.exmaralda.exakt.search.swing.AnalysisSelectionPanel;
 /**
  *
  * @author thomas
@@ -25,7 +23,9 @@ public class RemoveAnalysisAction extends AbstractKWICTableAction {
     int selectedColumn;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public RemoveAnalysisAction(COMAKWICTable t, String title) {
         super(t,title);
     }

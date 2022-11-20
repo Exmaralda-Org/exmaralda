@@ -11,7 +11,6 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.Component;
 import javax.swing.*;
-import org.exmaralda.exakt.exmaraldaSearch.*;
 import org.exmaralda.exakt.exmaraldaSearch.swing.*;
 
 /**
@@ -31,7 +30,8 @@ public class KWICTablePopupMenu extends javax.swing.JPopupMenu {
     JMenuItem removeAnalysisMenuItem;
     JMenuItem calculateAnalysisMenuItem;
     
-    /** Creates a new instance of KWICTablePopupMenu */
+    /** Creates a new instance of KWICTablePopupMenu
+     * @param t */
     public KWICTablePopupMenu(COMAKWICTable t) {        
         
         table = t;

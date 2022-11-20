@@ -27,7 +27,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private int kwicContextLimit;
     private int fullDisplayContextLimit;
     
-    private String[] FONTS;
+    private final String[] FONTS;
     
     /** Creates new form EditPreferencesPanel */
     public EditPreferencesPanel() {
@@ -87,8 +87,12 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
             fullDisplayContextLimitSpinner.setValue(fullDisplayContextLimit);
         }
         
-        this.praatPathTextField.setText(prefs.get("PRAAT-Directory", ""));
+        this.praatPathTextField.setText(prefs.get("PRAAT-Directory", ""));                
                 
+    }
+    
+    public void selectTab(int index){
+        this.tabbedPane.setSelectedIndex(index);        
     }
 
     public int getKwicTableFontSize() {

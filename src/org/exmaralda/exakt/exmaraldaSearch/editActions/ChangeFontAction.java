@@ -18,19 +18,20 @@ import java.util.prefs.Preferences;
  *
  * @author thomas
  */
-public class EditPreferencesAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
+public class ChangeFontAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
     /** Creates a new instance of EditPreferencesAction
      * @param ef
      * @param title
      * @param icon */
-    public EditPreferencesAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
+    public ChangeFontAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         EditPreferencesPanel p = new EditPreferencesPanel();
+        p.selectTab(1);
         AbstractOKCancelDialog dialog = new AbstractOKCancelDialog(exaktFrame,true,p);
         dialog.setTitle("Edit preferences");
         dialog.setVisible(true);

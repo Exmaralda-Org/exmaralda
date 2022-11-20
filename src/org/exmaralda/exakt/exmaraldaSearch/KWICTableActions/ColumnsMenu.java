@@ -18,24 +18,26 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.*;
  *
  * @author thomas
  */
-public class ColumnsMenu extends javax.swing.JMenu {
+public final class ColumnsMenu extends javax.swing.JMenu {
     
     EXAKT exaktFrame;
     
-    private JMenuItem filterMenuItem;
-    private JMenuItem specifyMetadataMenuItem;
-    private JMenuItem addAnnotationMenuItem;
-    private JMenuItem addAnalysisMenuItem;
-    private JMenuItem importAnalysesMenuItem;
+    private final JMenuItem filterMenuItem;
+    private final JMenuItem specifyMetadataMenuItem;
+    private final JMenuItem addAnnotationMenuItem;
+    private final JMenuItem addAnalysisMenuItem;
+    private final JMenuItem importAnalysesMenuItem;
     
     
-    /** Creates a new instance of FileMenu */
+    /** Creates a new instance of FileMenu
+     * @param ef */
     public ColumnsMenu(EXAKT ef) {
         setText("Columns");
         exaktFrame = ef;
 
         filterMenuItem = new JMenuItem("Filter...");
         filterMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 filter(e);
             }
@@ -46,6 +48,7 @@ public class ColumnsMenu extends javax.swing.JMenu {
 
         specifyMetadataMenuItem = new JMenuItem("Metadata...");
         specifyMetadataMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 specifyMetadata(e);
             }
@@ -57,6 +60,7 @@ public class ColumnsMenu extends javax.swing.JMenu {
 
         addAnnotationMenuItem = new JMenuItem("Add annotation...");
         addAnnotationMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 addAnnotation(e);
             }
@@ -65,6 +69,7 @@ public class ColumnsMenu extends javax.swing.JMenu {
 
         addAnalysisMenuItem = new JMenuItem("Add analysis...");
         addAnalysisMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 addAnalysis(e);
             }
@@ -74,6 +79,7 @@ public class ColumnsMenu extends javax.swing.JMenu {
 
         importAnalysesMenuItem = new JMenuItem("Import analyses...");
         importAnalysesMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 importAnalyses(e);
             }

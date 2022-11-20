@@ -27,7 +27,9 @@ public class EditAnalysisAction extends AbstractKWICTableAction {
     int selectedColumn;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public EditAnalysisAction(COMAKWICTable t, String title) {
         super(t,title);
         asp = new AnalysisSelectionPanel();
@@ -44,6 +46,7 @@ public class EditAnalysisAction extends AbstractKWICTableAction {
     }
     
     
+    @Override
     public void actionPerformed(ActionEvent e) {
         asp.setAnalysis(table.getWrappedModel().getAnalysisForColumn(selectedColumn));
         dialog.setVisible(true);
@@ -52,6 +55,7 @@ public class EditAnalysisAction extends AbstractKWICTableAction {
             table.getWrappedModel().setAnalysisForColumn(selectedColumn,ai);            
             table.getWrappedModel().fireTableStructureChanged();
             table.setCellEditors();
+            table.adjustColumns();
         }
         selectedColumn = -1;
     }

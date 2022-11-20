@@ -11,10 +11,7 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
-import java.util.HashSet;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.exmaralda.exakt.exmaraldaSearch.swing.AddAnnotationDialog;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import org.exmaralda.exakt.search.SearchResultList;
 /**
@@ -26,7 +23,9 @@ public class AddTimesAction extends AbstractKWICTableAction {
     int count=0;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public AddTimesAction(COMAKWICTable t, String title) {
         super(t,title);
     }
@@ -41,6 +40,7 @@ public class AddTimesAction extends AbstractKWICTableAction {
             //SearchResultList newsrl = srl.addAnnotationAsAnalysis(aad.getCategory(), table.getWrappedModel().getCorpus(), aad.getType());
             table.getWrappedModel().setData(newsrl);
             table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            table.adjustColumns();
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(table, ex.getLocalizedMessage());

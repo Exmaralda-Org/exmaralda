@@ -35,7 +35,10 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
     
     public static final String PATH_TO_INTERNAL_STYLESHEET = "/org/exmaralda/exakt/resources/SearchResult2HTML.xsl";
     
-    /** Creates a new instance of SaveSearchResultAction */
+    /** Creates a new instance of SaveSearchResultAction
+     * @param ef
+     * @param title
+     * @param icon */
     public SaveSearchResultAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
@@ -71,7 +74,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                 String message = "Exception getting the KWIC result:";
                 message += ioE.getMessage() + "\n";
                 javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
-                ioE.printStackTrace();
+                System.out.println(ioE.getLocalizedMessage());
                 return;
             }
             

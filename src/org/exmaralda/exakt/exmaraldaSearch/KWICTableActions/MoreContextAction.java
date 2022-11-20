@@ -18,15 +18,19 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
  */
 public class MoreContextAction extends AbstractKWICTableAction {
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public MoreContextAction(COMAKWICTable t, String title) {
         super(t,title);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         int newContextSize = table.getWrappedModel().getMaxContextSize()+3;
         table.getWrappedModel().setMaxContextSize(newContextSize);
-        table.setCellEditors();
+        table.setCellEditors();        
+        table.adjustColumns();
     }
     
 }

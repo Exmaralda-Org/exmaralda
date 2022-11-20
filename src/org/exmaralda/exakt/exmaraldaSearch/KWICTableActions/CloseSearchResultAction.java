@@ -17,11 +17,15 @@ import java.awt.event.ActionEvent;
  */
 public class CloseSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
-    /** Creates a new instance of CloseSearchResultAction */
+    /** Creates a new instance of CloseSearchResultAction
+     * @param ef
+     * @param title
+     * @param icon */
     public CloseSearchResultAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         exaktFrame.closeActiveSearchPanel();
     }

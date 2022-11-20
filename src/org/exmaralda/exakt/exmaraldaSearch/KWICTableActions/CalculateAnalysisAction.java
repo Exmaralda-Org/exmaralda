@@ -12,7 +12,6 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import javax.swing.*;
-import javax.swing.table.*;
 import org.exmaralda.exakt.search.SimpleSearchResult;
 import org.exmaralda.exakt.search.swing.AbstractOKCancelDialog;
 import org.exmaralda.exakt.exmaraldaSearch.*;
@@ -31,7 +30,9 @@ public class CalculateAnalysisAction extends AbstractKWICTableAction {
     int selectedColumn;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public CalculateAnalysisAction(COMAKWICTable t, String title) {
         super(t,title);
     }
@@ -46,6 +47,7 @@ public class CalculateAnalysisAction extends AbstractKWICTableAction {
     }
     
     
+    @Override
     public void actionPerformed(ActionEvent e) {
         COMACorpusInterface corpus = table.getWrappedModel().getCorpus();
         cap = new CalculateAnalysisPanel(corpus);
@@ -73,14 +75,34 @@ public class CalculateAnalysisAction extends AbstractKWICTableAction {
                 String speakerID = rowData.getAdditionalData()[1];
 
                 String v1 = null;
-                if (firstType=='S') v1 = corpus.getSpeakerData(transcriptionLocator, speakerID, firstAttribute);
-                else if (firstType=='C') v1 = corpus.getCommunicationData(transcriptionLocator, firstAttribute);
-                else if (firstType=='T') v1 = corpus.getTranscriptionData(transcriptionLocator, firstAttribute);
+                switch (firstType) {
+                    case 'S':
+                        v1 = corpus.getSpeakerData(transcriptionLocator, speakerID, firstAttribute);
+                        break;
+                    case 'C':
+                        v1 = corpus.getCommunicationData(transcriptionLocator, firstAttribute);
+                        break;
+                    case 'T':
+                        v1 = corpus.getTranscriptionData(transcriptionLocator, firstAttribute);
+                        break;
+                    default:
+                        break;
+                }
 
                 String v2 = null;
-                if (secondType=='S') v2 = corpus.getSpeakerData(transcriptionLocator, speakerID, secondAttribute);
-                else if (secondType=='C') v2 = corpus.getCommunicationData(transcriptionLocator, secondAttribute);
-                else if (secondType=='T') v2 = corpus.getTranscriptionData(transcriptionLocator, secondAttribute);
+                switch (secondType) {
+                    case 'S':
+                        v2 = corpus.getSpeakerData(transcriptionLocator, speakerID, secondAttribute);
+                        break;
+                    case 'C':
+                        v2 = corpus.getCommunicationData(transcriptionLocator, secondAttribute);
+                        break;
+                    case 'T':
+                        v2 = corpus.getTranscriptionData(transcriptionLocator, secondAttribute);
+                        break;
+                    default:
+                        break;
+                }
                 
                 String calculatedValue = "???";
                 if (v[3].equals("Date") && v[1].endsWith("(Minus)")){
@@ -102,6 +124,7 @@ public class CalculateAnalysisAction extends AbstractKWICTableAction {
             }
         }
         selectedColumn = -1;
+        table.adjustColumns();
     }
     
 }

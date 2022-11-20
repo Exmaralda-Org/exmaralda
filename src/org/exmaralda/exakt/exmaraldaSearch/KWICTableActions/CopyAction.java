@@ -40,7 +40,9 @@ public class CopyAction extends AbstractKWICTableAction {
     private List<String[]> meta;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public CopyAction(COMAKWICTable t, String title) {
         super(t,title);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                        

@@ -12,10 +12,7 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
-import java.util.*;
 import org.jdom.*;
-import org.jdom.transform.*;
-import java.util.prefs.Preferences;
 import org.exmaralda.exakt.search.SearchResultList;
 
 /**
@@ -26,11 +23,15 @@ public class AppendSearchResultAction extends org.exmaralda.exakt.exmaraldaSearc
     
     public static final String PATH_TO_INTERNAL_STYLESHEET = "/org/exmaralda/exakt/resources/SearchResult2HTML.xsl";
     
-    /** Creates a new instance of SaveSearchResultAction */
+    /** Creates a new instance of SaveSearchResultAction
+     * @param ef
+     * @param title
+     * @param icon */
     public AppendSearchResultAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(exaktFrame.getLastSearchResultPath());
@@ -39,7 +40,7 @@ public class AppendSearchResultAction extends org.exmaralda.exakt.exmaraldaSearc
         
         int retValue = fileChooser.showOpenDialog(exaktFrame);
 
-        if (retValue==fileChooser.APPROVE_OPTION){
+        if (retValue==JFileChooser.APPROVE_OPTION){
             File file = fileChooser.getSelectedFile();
             try {
                 SearchResultList appendToList = exaktFrame.getActiveSearchPanel().getSearchResultList();
@@ -48,20 +49,19 @@ public class AppendSearchResultAction extends org.exmaralda.exakt.exmaraldaSearc
                 SearchResultList newList = appendToList.merge(appendedList, true);
                 
                 exaktFrame.getActiveSearchPanel().setSearchResultList(newList);
-                exaktFrame.getActiveSearchPanel().setCellEditors();                
+                exaktFrame.getActiveSearchPanel().setCellEditors();  
+                exaktFrame.getActiveSearchPanel().getKWICTable().adjustColumns();
 
             } catch (JDOMException ex) {
                 String message = "JDOM Exception:";
                 message += ex.getMessage() + "\n";
                 javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
                 ex.printStackTrace();
-                return;
             } catch (IOException ex) {
                 String message = "IOException:";
                 message += ex.getMessage() + "\n";
                 javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
                 ex.printStackTrace();
-                return;
             }
         }
         

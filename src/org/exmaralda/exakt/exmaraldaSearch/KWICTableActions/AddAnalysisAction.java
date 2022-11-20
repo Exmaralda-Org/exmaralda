@@ -26,7 +26,9 @@ public class AddAnalysisAction extends AbstractKWICTableAction {
     AbstractOKCancelDialog dialog;
     
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public AddAnalysisAction(COMAKWICTable t, String title) {
         super(t,title);
         asp = new AnalysisSelectionPanel();
@@ -34,6 +36,7 @@ public class AddAnalysisAction extends AbstractKWICTableAction {
         dialog.setTitle("Add analysis");
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         asp.init();
         dialog.setVisible(true);
@@ -41,6 +44,7 @@ public class AddAnalysisAction extends AbstractKWICTableAction {
             AnalysisInterface ai = asp.getAnalysis();
             int i = table.getWrappedModel().addAnalysis(ai);
             table.setCellEditors();
+            table.adjustColumns();
         }
     }
     
