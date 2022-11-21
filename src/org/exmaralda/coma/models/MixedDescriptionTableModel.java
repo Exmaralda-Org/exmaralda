@@ -146,10 +146,6 @@ public class MixedDescriptionTableModel extends AbstractTableModel {
 		return super.equals(arg0);
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	@Override
 	public int hashCode() {

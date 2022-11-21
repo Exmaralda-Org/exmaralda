@@ -261,10 +261,6 @@ public class ComaTableModel extends DefaultTableModel {
 		return super.equals(arg0);
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	@Override
 	public int hashCode() {
