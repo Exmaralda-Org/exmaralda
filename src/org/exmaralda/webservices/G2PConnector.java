@@ -8,6 +8,7 @@ package org.exmaralda.webservices;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -204,6 +205,7 @@ public class G2PConnector {
         // construct a POST request with the multipart entity
         HttpPost httpPost = new HttpPost(g2pURL);        
         httpPost.setEntity(builder.build());
+        System.out.println("Sending " + httpPost.toString());
         HttpResponse response = httpClient.execute(httpPost);
         HttpEntity result = response.getEntity();     
         
@@ -229,5 +231,6 @@ public class G2PConnector {
             throw new IOException(reason);
         }
     }        
+    
     
 }

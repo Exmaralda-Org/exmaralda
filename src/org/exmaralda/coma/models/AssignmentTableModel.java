@@ -279,10 +279,6 @@ public class AssignmentTableModel extends DefaultTableModel {
 		return super.equals(obj);
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	@Override
 	public int hashCode() {

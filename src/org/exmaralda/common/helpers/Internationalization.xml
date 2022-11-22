@@ -3921,8 +3921,7 @@
 					<translation lang="de" trans="Absoluter Zeitwert"/>
 					<translation lang="fr" trans="Valeur du temps absolue"/>
 					<translation lang="cz" trans="Celkový čas"/>
-					<translation lang="es" trans="Valor de tiempo 
-absoluto"/>
+					<translation lang="es" trans="Valor de tiempo absoluto"/>
 					<translation lang="zh" trans="绝对时间值"/>
 				</item>
 				<item id="No value">
@@ -4389,7 +4388,16 @@ absoluto"/>
 			<translation lang="cz" trans="Uložit transkripci jako"/>
 			<translation lang="es" trans="Guardar transcripción como"/>
 			<translation lang="zh" trans="基本转写另存为"/>
-
+		</item>
+		<item id="exakt.exit.confirm">
+			<translation lang="en" trans="This will terminate EXAKT. Continue?"/>
+			<translation lang="de" trans="EXAKT wird beendet. Fortfahren?"/>
+			<translation lang="fr" trans="EXAKT va être terminé. Continuer?"/>
+		</item>
+		<item id="coma.exit.confirm">
+			<translation lang="en" trans="This will terminate CoMa Continue?"/>
+			<translation lang="de" trans="CoMa wird beendet. Fortfahren?"/>
+			<translation lang="fr" trans="CoMa va être terminé. Continuer?"/>
 		</item>
 	</translations>
 </internationalization>

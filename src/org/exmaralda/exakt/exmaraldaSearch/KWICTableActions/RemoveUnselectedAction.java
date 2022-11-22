@@ -19,17 +19,21 @@ import javax.swing.JOptionPane;
  */
 public class RemoveUnselectedAction extends AbstractKWICTableAction {
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public RemoveUnselectedAction(COMAKWICTable t, String title) {
         super(t,title);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         String message = "Are you sure you want to remove unselected search results?";
         int returnValue =  JOptionPane.showConfirmDialog(table.getTopLevelAncestor(), message, "Remove unselected search results", JOptionPane.YES_NO_OPTION);
         if (returnValue==JOptionPane.OK_OPTION){
             table.getWrappedModel().removeUnselected();
             table.setCellEditors();
+            table.adjustColumns();
         }
     }
     

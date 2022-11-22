@@ -26,7 +26,9 @@ public class RegExFilterAction extends AbstractKWICTableAction {
     
     private int selectedColumn = -1;
             
-    /** Creates a new instance of RegExFilterAction */
+    /** Creates a new instance of RegExFilterAction
+     * @param t
+     * @param title */
     public RegExFilterAction(COMAKWICTable t, String title) {
         super(t,title);
     }
@@ -55,6 +57,7 @@ public class RegExFilterAction extends AbstractKWICTableAction {
             boolean invert = regexFilterPanel.getInvert();
             table.getWrappedModel().filter(column, regex, invert);
             table.setCellEditors();
+            table.adjustColumns();
         }
         selectedColumn = -1;
     }

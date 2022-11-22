@@ -22,8 +22,8 @@ import org.jdom.xpath.XPath;
  */
 public class TagDirectoryISOTEI {
 
-    public static String TTC = "c:\\TreeTagger";
-    public static String PF = "c:\\TreeTagger\\lib\\german-utf8.par";
+    public static String TTC = "C:\\Users\\bernd\\Dropbox\\TreeTagger";
+    public static String PF = "C:\\Users\\bernd\\Dropbox\\TreeTagger\\lib\\ParameterFile_ORIGINAL_ALL.par";
     public static String ENC = "UTF-8";
     //public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
@@ -32,6 +32,11 @@ public class TagDirectoryISOTEI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        if (args.length==0){
+            String[] customArgs = {"C:\\Users\\bernd\\switchdrive\\Datenbeispiel Thomas Schmidt\\TRANSFORMATION\\5-FINALIZED", 
+                "C:\\Users\\bernd\\switchdrive\\Datenbeispiel Thomas Schmidt\\TRANSFORMATION\\6-TAGGED"};
+            args = customArgs;
+        }
         if ((args.length!=2) && (args.length!=7)){
             System.out.println("usage: tagDirectory inputDir ouputDir [ttDir] [ttParamFile] [applyPP] [encoding] [xpathToTokens]");
             System.out.println(" inputDir  = directory with normalised FOLKER transcriptions (*.fln)");

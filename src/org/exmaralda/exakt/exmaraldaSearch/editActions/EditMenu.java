@@ -24,7 +24,7 @@ public class EditMenu extends javax.swing.JMenu {
     
     EXAKT exaktFrame;
     
-    private JMenuItem copyMenuItem;
+    private final JMenuItem copyMenuItem;
     
     /** Creates a new instance of FileMenu */
     public EditMenu(EXAKT ef) {

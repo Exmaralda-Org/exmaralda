@@ -19,13 +19,18 @@ public abstract class AbstractKWICTableAction extends javax.swing.AbstractAction
     
     public COMAKWICTable table;
     
-    /** Creates a new instance of AbstractKWICTableAction */
+    /** Creates a new instance of AbstractKWICTableAction
+     * @param t
+     * @param title
+     * @param icon */
     public AbstractKWICTableAction(COMAKWICTable t, String title, javax.swing.ImageIcon icon) {
         super(title, icon);
         table = t;
     }
         
-    /** Creates a new instance of AbstractAction */
+    /** Creates a new instance of AbstractAction
+     * @param t
+     * @param title */
     public AbstractKWICTableAction(COMAKWICTable t, String title) {
         super(title);
         table = t;

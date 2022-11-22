@@ -68,6 +68,7 @@ import org.jdom.xpath.XPath;
 
 import java.util.prefs.BackingStoreException;
 import java.util.regex.Pattern;
+import javax.swing.WindowConstants;
 import org.exmaralda.folker.application.ApplicationFrame;
 
 /**
@@ -143,6 +144,9 @@ public class Coma extends JFrame implements ChangeListener,
         String thisOs = System.getProperty("os.name").substring(0,3);
         
         coma = this;
+        
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        
         data = new ComaData(coma);
         if (os.equals("mac")) {
             //setupMacOSXApplicationListener();
@@ -325,6 +329,18 @@ public class Coma extends JFrame implements ChangeListener,
      * checks whether changes needs to be saved, then exits the program
      */
     public void quit() {
+        String localizedMessage = org.exmaralda.common.helpers.Internationalizer.getString("coma.exit.confirm");
+        String localizedTitle = org.exmaralda.common.helpers.Internationalizer.getString("Exit");
+        int choice = JOptionPane.showConfirmDialog(this, localizedMessage, localizedTitle, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/coma/resources/images/coma64px.png")));
+        
+        if (choice!=JOptionPane.YES_OPTION){
+            System.out.println("Second thoughts on leaving...");
+            return;
+        }
+        
+        
+        
         if (changesChecked()) {
             prefs.put("winWidth", "" + this.getWidth());
             prefs.put("winHeigth", "" + this.getHeight());

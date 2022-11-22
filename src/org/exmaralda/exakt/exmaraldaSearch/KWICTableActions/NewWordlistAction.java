@@ -18,11 +18,15 @@ import org.exmaralda.exakt.exmaraldaSearch.*;
  */
 public class NewWordlistAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
-    /** Creates a new instance of NewSearchPanelAction */
+    /** Creates a new instance of NewSearchPanelAction
+     * @param ef
+     * @param title
+     * @param icon */
     public NewWordlistAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         COMACorpusInterface corpus = (COMACorpusInterface)(exaktFrame.corpusList.getSelectedValue());
         if (corpus==null) return;

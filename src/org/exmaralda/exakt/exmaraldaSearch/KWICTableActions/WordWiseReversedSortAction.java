@@ -18,11 +18,14 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
  */
 public class WordWiseReversedSortAction extends AbstractKWICTableAction {
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public WordWiseReversedSortAction(COMAKWICTable t, String title) {
         super(t,title);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
     }
     

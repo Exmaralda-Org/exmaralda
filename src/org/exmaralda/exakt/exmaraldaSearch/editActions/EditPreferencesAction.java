@@ -20,7 +20,10 @@ import java.util.prefs.Preferences;
  */
 public class EditPreferencesAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
-    /** Creates a new instance of EditPreferencesAction */
+    /** Creates a new instance of EditPreferencesAction
+     * @param ef
+     * @param title
+     * @param icon */
     public EditPreferencesAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }

@@ -20,11 +20,14 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.COMASearchResultListTableModel;
  */
 public class SampleAction extends AbstractKWICTableAction {
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public SampleAction(COMAKWICTable t, String title) {
         super(t,title);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         COMASearchResultListTableModel model = table.getWrappedModel();
         int howMany = 100;
@@ -36,9 +39,10 @@ public class SampleAction extends AbstractKWICTableAction {
             howMany = Integer.parseInt(numberString);
             table.getWrappedModel().sample(Math.abs(howMany));
             table.setCellEditors();
+            table.adjustColumns();
         } catch (NumberFormatException nfe){
             JOptionPane.showMessageDialog(table, numberString + " could not be parsed as number.");
-            nfe.printStackTrace();
+            System.out.println(nfe.getLocalizedMessage());
         }
     }
     

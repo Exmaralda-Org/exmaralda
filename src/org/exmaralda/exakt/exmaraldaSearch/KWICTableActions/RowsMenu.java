@@ -22,23 +22,25 @@ public class RowsMenu extends javax.swing.JMenu {
     
     EXAKT exaktFrame;
     
-    private JMenuItem sampleMenuItem;
-    private JMenuItem selectAllMenuItem;
-    private JMenuItem deselectAllMenuItem;
-    private JMenuItem selectHighlightedMenuItem;
-    private JMenuItem deselectHighlightedMenuItem;
-    private JMenuItem removeUnselectedMenuItem;
+    private final JMenuItem sampleMenuItem;
+    private final JMenuItem selectAllMenuItem;
+    private final JMenuItem deselectAllMenuItem;
+    private final JMenuItem selectHighlightedMenuItem;
+    private final JMenuItem deselectHighlightedMenuItem;
+    private final JMenuItem removeUnselectedMenuItem;
    
     
     
     
-    /** Creates a new instance of FileMenu */
+    /** Creates a new instance of FileMenu
+     * @param ef */
     public RowsMenu(EXAKT ef) {
         setText("Rows");
         exaktFrame = ef;
 
         removeUnselectedMenuItem = new JMenuItem("Remove unselected");
         removeUnselectedMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 removeUnselected(e);
             }
@@ -49,6 +51,7 @@ public class RowsMenu extends javax.swing.JMenu {
 
         sampleMenuItem = new JMenuItem("Sample...");
         sampleMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 sample(e);
             }
@@ -57,6 +60,7 @@ public class RowsMenu extends javax.swing.JMenu {
 
         selectAllMenuItem = new JMenuItem("Select all");
         selectAllMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 selectAll(e);
             }
@@ -65,6 +69,7 @@ public class RowsMenu extends javax.swing.JMenu {
 
         deselectAllMenuItem = new JMenuItem("Deselect all");
         deselectAllMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 deselectAll(e);
             }
@@ -73,6 +78,7 @@ public class RowsMenu extends javax.swing.JMenu {
 
         selectHighlightedMenuItem = new JMenuItem("Select highlighted");
         selectHighlightedMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 selectHighlighted(e);
             }
@@ -81,6 +87,7 @@ public class RowsMenu extends javax.swing.JMenu {
 
         deselectHighlightedMenuItem = new JMenuItem("Deselect highlighted");
         deselectHighlightedMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 deselectHighlighted(e);
             }

@@ -1001,6 +1001,8 @@ public class PartitureTableWithActions extends PartitureTable
         undoAction = new UndoAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/edit-undo.png")));
 
         copyTextAction = new CopyTextAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
+        // new for #338
+        copyHTMLAction = new CopyHTMLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
         pasteAction = new PasteAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Paste.gif")));
         cutAction = new CutAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cut.gif")));
 
@@ -1637,6 +1639,8 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction undoAction;
     /** Action for copying currently selected text to the clipboard */
     public javax.swing.AbstractAction copyTextAction;
+    /** Action for copying currently selected text to the clipboard as HTML (#338)*/
+    public javax.swing.AbstractAction copyHTMLAction;
     /** Action for pasting the clipboard at the current cursor position */
     public javax.swing.AbstractAction pasteAction;
     /** Action for cutting currently selected text to the clipboard */

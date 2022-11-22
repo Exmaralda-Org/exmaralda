@@ -1,0 +1,1 @@
+var LinuxDate = "@CURRENT_DATE_TIME@";

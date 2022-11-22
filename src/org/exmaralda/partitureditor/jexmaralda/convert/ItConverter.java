@@ -31,13 +31,20 @@ public final class ItConverter {
     public ItConverter() {
     }
     
-    /** converts the given basic transcription with the given tier format table to an interlinear text object */
+    /** converts the given basic transcription with the given tier format table to an interlinear text object
+     * @param t
+     * @param tft
+     * @return  */
     public static InterlinearText BasicTranscriptionToInterlinearText(BasicTranscription t, TierFormatTable tft){
         return BasicTranscriptionToInterlinearText(t,tft,0);
     }
     
     /** converts the given basic transcription with the given tier format table to an interlinear text object, 
-     *  starts the count of timeline items at the specified value */
+     *  starts the count of timeline items at the specified value
+     * @param t
+     * @param tft
+     * @param timelineStart
+     * @return  */
     public static InterlinearText BasicTranscriptionToInterlinearText(BasicTranscription t, TierFormatTable tft, int timelineStart){
         InterlinearText result = new InterlinearText(); 
         formats = TierFormatTableToFormats(tft);

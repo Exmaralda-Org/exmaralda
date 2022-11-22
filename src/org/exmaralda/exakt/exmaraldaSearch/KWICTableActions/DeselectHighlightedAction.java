@@ -10,7 +10,6 @@
 package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.event.ActionEvent;
-import org.exmaralda.exakt.exmaraldaSearch.*;
 import org.exmaralda.exakt.exmaraldaSearch.swing.*;
 
 
@@ -20,11 +19,14 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.*;
  */
 public class DeselectHighlightedAction extends AbstractKWICTableAction {
     
-    /** Creates a new instance of WordWiseReversedSortAction */
+    /** Creates a new instance of WordWiseReversedSortAction
+     * @param t
+     * @param title */
     public DeselectHighlightedAction(COMAKWICTable t, String title) {
         super(t,title);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         int[] selectedRows = table.getSelectedRows();
         int[] modelRows = new int[selectedRows.length];
@@ -33,6 +35,7 @@ public class DeselectHighlightedAction extends AbstractKWICTableAction {
         }
         table.getWrappedModel().deselectRange(modelRows);
         table.setCellEditors();
+        table.adjustColumns();
     }
     
 }

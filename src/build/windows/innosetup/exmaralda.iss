@@ -6,7 +6,7 @@ ArchitecturesInstallIn64BitMode=x64
 
 AppName=EXMARaLDA
 AppVerName=EXMARaLDA @version@
-AppPublisher=Thomas Schmidt, Kai Woerner
+AppPublisher=Thomas Schmidt, Kai Woerner, linguisticbits.de
 AppPublisherURL=http://www.exmaralda.org
 AppSupportURL=http://www.exmaralda.org
 AppUpdatesURL=http://www.exmaralda.org
@@ -21,7 +21,7 @@ SetupIconFile=exmaralda_install.ico
 WizardImageFile=exmaralda_install_wizard.bmp
 WizardSmallImageFile=exmaralda_install.bmp
 ChangesAssociations=yes
-VersionInfoCompany=Archiv für Gesprochenes Deutsch, IDS Mannheim
+VersionInfoCompany=Musical Bits GmbH
 VersionInfoCopyright=Thomas Schmidt, Kai Wörner
 VersionInfoDescription=Version @version@ (Build time: @build-time@)
 VersionInfoVersion=@version@ 

@@ -10,6 +10,7 @@
 package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.Cursor;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.util.HashSet;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import org.exmaralda.exakt.exmaraldaSearch.swing.AddAnnotationDialog;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import org.exmaralda.exakt.search.SearchResultList;
+import org.xml.sax.SAXException;
 /**
  *
  * @author thomas
@@ -53,7 +55,8 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
             //SearchResultList newsrl = srl.addAnnotationAsAnalysis(aad.getCategory(), table.getWrappedModel().getCorpus(), aad.getType());
             table.getWrappedModel().setData(newsrl);
             table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        } catch (Exception ex) {
+            table.adjustColumns();
+        } catch (HeadlessException | SAXException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(table, ex.getLocalizedMessage());
         }

@@ -59,6 +59,10 @@ public class COMAKWICTable  extends javax.swing.JTable
     
     org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.KWICTablePopupMenu popup;
     
+    // #331
+    public TableColumnAdjuster tableColumnAdjuster;
+    
+    
     /** Creates a new instance of COMAKWICTable */
     public COMAKWICTable() {
         //putClientProperty("Quaqua.Table.style", "striped");
@@ -90,7 +94,16 @@ public class COMAKWICTable  extends javax.swing.JTable
         addMouseListener(this);
         getTableHeader().addMouseListener(this);
         getSelectionModel().addListSelectionListener(this);
+        
+        // #331
+        tableColumnAdjuster = new TableColumnAdjuster(this);
                 
+    }
+    
+    // #331
+    public void adjustColumns(){
+        // 20-11-2022 new for #331
+        tableColumnAdjuster.adjustColumns();        
     }
     
     public void addKWICTableListener(KWICTableListener ktl){
@@ -260,6 +273,7 @@ public class COMAKWICTable  extends javax.swing.JTable
             }
 
             setCellEditors();
+            adjustColumns();
             tableInitialised = false;
         }
         formatTable();

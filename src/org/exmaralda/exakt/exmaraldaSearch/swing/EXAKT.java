@@ -124,6 +124,7 @@ public class EXAKT extends javax.swing.JFrame
     
     public BrowsingModeAction browsingModeAction;
     public EditPreferencesAction editPreferencesAction;
+    public ChangeFontAction changeFontAction;
     
     private File lastSearchResultPath;
     private File lastCorpusPath;
@@ -268,6 +269,7 @@ public class EXAKT extends javax.swing.JFrame
         newWordlistAction = new NewWordlistAction(this, "New wordlist", null);
 
         editPreferencesAction = new EditPreferencesAction(this, "EXAKT preferences...", null);
+        changeFontAction = new ChangeFontAction(this, "Change font...", null);
         
         browsingModeAction = new BrowsingModeAction(this, "Browsing mode...", null);
 
@@ -399,6 +401,17 @@ public class EXAKT extends javax.swing.JFrame
             Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
             JOptionPane.showMessageDialog(this, "Could not save user regex library:\n" + ex.getLocalizedMessage());
         }
+        
+        
+        String localizedMessage = org.exmaralda.common.helpers.Internationalizer.getString("exakt.exit.confirm");
+        String localizedTitle = org.exmaralda.common.helpers.Internationalizer.getString("Exit");
+        int choice = JOptionPane.showConfirmDialog(this, localizedMessage, localizedTitle, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")));
+        
+        if (choice!=JOptionPane.YES_OPTION){
+            System.out.println("Second thoughts on leaving...");
+            return;
+        }
 
         if (proceed){
             getPartitur().getSettings(getPreferencesNode());
@@ -469,6 +482,7 @@ public class EXAKT extends javax.swing.JFrame
         newConcordanceButton = new javax.swing.JButton();
         separator2 = new javax.swing.JToolBar.Separator();
         preferencesButton = new javax.swing.JButton();
+        formatButton = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
         infoPanel = new javax.swing.JPanel();
@@ -476,7 +490,7 @@ public class EXAKT extends javax.swing.JFrame
         playerInfoLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("EXAKT (PV8 0.4)");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -740,7 +754,21 @@ public class EXAKT extends javax.swing.JFrame
         preferencesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/Preferences.gif"))); // NOI18N
         preferencesButton.setText(null);
         preferencesButton.setToolTipText("EXAKT preferences...");
+        preferencesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preferencesButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(preferencesButton);
+
+        formatButton.setAction(changeFontAction);
+        formatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/format-text-bold.png"))); // NOI18N
+        formatButton.setText(null);
+        formatButton.setToolTipText("Change font...");
+        formatButton.setFocusable(false);
+        formatButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        formatButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolBar.add(formatButton);
 
         getContentPane().add(toolBar, java.awt.BorderLayout.NORTH);
 
@@ -820,6 +848,10 @@ public class EXAKT extends javax.swing.JFrame
             showList(lastKWICTableEvent);
         }
     }//GEN-LAST:event_listViewRadioButtonActionPerformed
+
+    private void preferencesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferencesButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_preferencesButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -860,6 +892,7 @@ public class EXAKT extends javax.swing.JFrame
     private javax.swing.JPanel corpusListPanel;
     private javax.swing.JScrollPane corpusListScrollPane;
     private javax.swing.JButton exportRTFPartiturButton;
+    private javax.swing.JButton formatButton;
     private javax.swing.JButton generateCorpusButton;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JSplitPane innerSplitPane;

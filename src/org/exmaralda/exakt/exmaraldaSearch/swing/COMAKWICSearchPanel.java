@@ -38,7 +38,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     private List<String[]> meta = new ArrayList<>();
     COMASearchResultListTableModel tableModel;
 
-    boolean isApplet = false;
+    //boolean isApplet = false;
     
     
     
@@ -67,15 +67,15 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     ActionListener actionListener4;
     
     List<COMAKWICSearchPanelListener> listenerList = new ArrayList<>();
-
     
-    /** Creates new form COMAKWICSearchPanel */
+    
+    /** Creates new form COMAKWICSearchPanel
+     * @param corpus */
     public COMAKWICSearchPanel(COMACorpusInterface corpus) {
         this(corpus, false);
     }
 
     public COMAKWICSearchPanel(COMACorpusInterface c, boolean configureForApplet) {
-        isApplet = configureForApplet;
         corpus = c;
         tableModel = new COMASearchResultListTableModel(getSearchResultList(), corpus, getMeta());
         getSearchHistory().addHistory("", new HashSet<String>());
@@ -86,6 +86,8 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         ((COMAKWICTable)(kwicTable)).setAutoCreateColumnsFromModel(false);
         ((COMAKWICTable)(kwicTable)).addKWICTableListener(this);
         ((COMAKWICTable)(kwicTable)).getWrappedModel().addTableModelListener(this);
+               
+        
         //((COMAKWICTableSorter)(kwicTable.getModel())).setTable((COMAKWICTable)(kwicTable));
         rightSideButtonsPanel.add(javax.swing.Box.createVerticalGlue());
                 
@@ -189,32 +191,27 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         };
         descriptionRegExField.addActionListener(actionListener4);*/
 
-        // this one is throwing a security exception in the applet
-        if (!isApplet){
-            try{
-                Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
-                String fontName = prefs.get("kwic-table-font-name","Arial");
-                int fontSize = prefs.getInt("kwic-table-font-size", 12);
-                java.awt.Font font = new java.awt.Font(fontName, java.awt.Font.PLAIN, fontSize);
-                kwicTable.setFont(font);
-                // new 31-03-2016
-                kwicTable.setRowHeight(Math.max(12, fontSize + 6));
-                // changed 28-05-2014
-                
-                java.awt.Font font2 = new java.awt.Font(fontName, java.awt.Font.PLAIN, Math.max(12, fontSize));
-                searchExpressionComboBox.setFont(font2);
-                annotationRegExField.setFont(font2);
-                descriptionRegExField.setFont(font2);
-                completeTextEditorPane.setFont(font2);
-                String bodyRule = "body { font-family: " + font.getFamily() + "; " +
-                    "font-size: " + Math.max(12, font.getSize()) + "pt; }";
-                ((HTMLDocument)completeTextEditorPane.getDocument()).getStyleSheet().addRule(bodyRule);                
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        
+        Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
+        String fontName = prefs.get("kwic-table-font-name","Arial");
+        int fontSize = prefs.getInt("kwic-table-font-size", 12);
+        java.awt.Font font = new java.awt.Font(fontName, java.awt.Font.PLAIN, fontSize);
+        kwicTable.setFont(font);
+        // new 31-03-2016
+        kwicTable.setRowHeight(Math.max(12, fontSize + 6));
+        // changed 28-05-2014
+
+        java.awt.Font font2 = new java.awt.Font(fontName, java.awt.Font.PLAIN, Math.max(12, fontSize));
+        searchExpressionComboBox.setFont(font2);
+        annotationRegExField.setFont(font2);
+        descriptionRegExField.setFont(font2);
+        completeTextEditorPane.setFont(font2);
+        String bodyRule = "body { font-family: " + font.getFamily() + "; " +
+            "font-size: " + Math.max(12, font.getSize()) + "pt; }";
+        ((HTMLDocument)completeTextEditorPane.getDocument()).getStyleSheet().addRule(bodyRule);           
+
         MACOSHarmonizer.harmonize(this);
+        
+        ((COMAKWICTable)(kwicTable)).adjustColumns(); 
         
     }
 
@@ -541,7 +538,6 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         ));
         kwicTable.setToolTipText("KWIC concordance");
         kwicTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        kwicTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
         kwicTable.setMaximumSize(null);
         kwicTable.setMinimumSize(null);
         kwicTable.setPreferredSize(null);
@@ -700,6 +696,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         moreContextButton.setMaximumSize(new java.awt.Dimension(57, 33));
         moreContextButton.setMinimumSize(new java.awt.Dimension(57, 33));
         moreContextButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        moreContextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moreContextButtonActionPerformed(evt);
+            }
+        });
         rightSideButtonsPanel.add(moreContextButton);
 
         lessContextButton.setAction(((COMAKWICTable)(kwicTable)).lessContextAction);
@@ -833,6 +834,10 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     private void praatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_praatButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_praatButtonActionPerformed
+
+    private void moreContextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreContextButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_moreContextButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -939,7 +944,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     
     private void performSearch(){
         
-        if (getSearchResultList().getAnalyses().size()>0){
+        if (!getSearchResultList().getAnalyses().isEmpty()){
             String message = "You have " + getSearchResultList().getAnalyses().size() + " analysis columns for this concordance.\n";
             message+="These will be deleted for the new search.\n";
             message+="Do you want to continue?";
@@ -1035,14 +1040,8 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         
 
         // DO SEARCH
-        try {
-            // this one is throwing a security exception when used in an applet
-            int cl = -1;
-            if (!isApplet){
-                cl = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT").getInt("kwic-context-limit", -1);
-            }
-            parameters.setContextLimit(cl);
-        } catch (Exception e){e.printStackTrace();}
+        int cl = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT").getInt("kwic-context-limit", -1);
+        parameters.setContextLimit(cl);
         if (getCorpus() instanceof COMACorpus){
             ((COMACorpus)getCorpus()).setXPathToSearchableSegment(xpath);
         } else if (getCorpus() instanceof COMARemoteCorpus){
@@ -1051,20 +1050,16 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
             //TODO: maybe nothing
         }
         search = new Search(corpus,parameters);
-        try {
-            // this one is throwing a security exception when used in an applet
-            int mnrs = 10000;
-            if (!isApplet){
-                mnrs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT").getInt("max-search-results", 10000);
-            }
-            search.setMaxNumberOfSearchResults(mnrs);
-        } catch (Exception e){e.printStackTrace();}
+        //int mnrs = 10000;
+        int mnrs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT").getInt("max-search-results", 10000);
+        search.setMaxNumberOfSearchResults(mnrs);
         search.addSearchListener(this);
         isSearching = true;
         searchExpressionPanel.setVisible(false);
         progressBarPanel.setVisible(true);
         searchDescriptionLabel.setText("   Searching for " + searchExpression.substring(0,Math.min(50, searchExpression.length())) + "   ");
         final Runnable doUpdateSearchResult = new Runnable() {
+             @Override
              public void run() {
                  updateSearchResult();
              }
@@ -1114,6 +1109,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                 );
         this.fireCOMAKWICSearchPanelEvent(ev);
         
+        ((COMAKWICTable)(kwicTable)).adjustColumns();
+        
+        
     }
 
     public SearchHistory getSearchHistory() {
@@ -1133,6 +1131,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     }
     
 
+    @Override
     public void processSearchEvent(SearchEvent se) {
         short type = se.getType();
         if (type==SearchEvent.SEARCH_PROGRESS_CHANGED){
@@ -1206,13 +1205,15 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     public void setMeta(List<String[]> meta) {
         this.meta = meta;
         ((COMAKWICTable)(kwicTable)).copyAction.setMeta(meta);
-        tableModel.setMetaIdentifiers(getMeta());        
+        tableModel.setMetaIdentifiers(getMeta());    
+        getKWICTable().adjustColumns();
     }
 
     /**
      * This fine grain notification tells listeners the exact range
      * of cells, rows, or columns that changed.
      */
+    @Override
     public void tableChanged(TableModelEvent e) {
         updateLabels();
     }

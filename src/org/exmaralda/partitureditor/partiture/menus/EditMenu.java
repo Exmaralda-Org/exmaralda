@@ -10,6 +10,8 @@ import javax.swing.*;
 import org.exmaralda.partitureditor.partiture.*;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import static java.awt.event.ActionEvent.ALT_MASK;
 import org.exmaralda.common.helpers.Internationalizer;
 
 /**
@@ -21,6 +23,7 @@ public class EditMenu extends AbstractTableMenu {
     private final JMenuItem undoMenuItem;
 
     private final JMenuItem copyTextMenuItem;
+    private final JMenuItem copyHTMLMenuItem; // #338
     private final JMenuItem pasteMenuItem;
     private final JMenuItem cutMenuItem;
 
@@ -57,6 +60,10 @@ public class EditMenu extends AbstractTableMenu {
         copyTextMenuItem = this.add(table.copyTextAction);
         copyTextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         
+        copyHTMLMenuItem = this.add(table.copyHTMLAction);
+        copyHTMLMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK+ActionEvent.SHIFT_MASK));
+        
+
         pasteMenuItem = this.add(table.pasteAction);
         pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         

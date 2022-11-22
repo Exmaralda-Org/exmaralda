@@ -21,7 +21,10 @@ public class SaveSearchResultAsAction extends org.exmaralda.exakt.exmaraldaSearc
     
     public static final String PATH_TO_INTERNAL_STYLESHEET = "/org/exmaralda/exakt/resources/SearchResult2HTML.xsl";
     
-    /** Creates a new instance of SaveSearchResultAction */
+    /** Creates a new instance of SaveSearchResultAction
+     * @param ef
+     * @param title
+     * @param icon */
     public SaveSearchResultAsAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }

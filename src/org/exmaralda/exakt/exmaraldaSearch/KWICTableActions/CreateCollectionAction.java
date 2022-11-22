@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.JFrame;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -33,7 +32,10 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
     public static final String CREATE_COLLECTION_FROM_SEARCH_RESULTS_XSLT = "/org/exmaralda/exakt/resources/SearchResults2EXBs.xsl";
 
     
-    /** Creates a new instance of CreateCollectionAction */
+    /** Creates a new instance of CreateCollectionAction
+     * @param ef
+     * @param title
+     * @param icon */
     public CreateCollectionAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
@@ -83,8 +85,8 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
                 t.setParameter("OUTPUT_DIRECTORY", dialog.getOutputDirectory());
                 t.setParameter("OUTPUT_NAME", dialog.getOutputName());
                 t.setParameter("TEMPLATE_FILE", dialog.getTemplateFile());
-                t.setParameter("LEFT_CONTEXT", dialog.getLeftContext().intValue());
-                t.setParameter("RIGHT_CONTEXT", dialog.getRightContext().intValue());
+                t.setParameter("LEFT_CONTEXT", dialog.getLeftContext());
+                t.setParameter("RIGHT_CONTEXT", dialog.getRightContext());
                 t.setParameter("RESET_TIMES", dialog.getResetTime().toString());
                 t.setParameter("ANNOTATION_TEXT", dialog.getAnnotationText());                
                 t.setParameter("OPERATING_SYSTEM", System.getProperty("os.name"));
@@ -104,7 +106,6 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
                 message += ex.getMessage() + "\n";
                 javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
                 ex.printStackTrace();
-                return;
             }
 
         }

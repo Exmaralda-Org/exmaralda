@@ -19,7 +19,10 @@ import org.exmaralda.exakt.exmaraldaSearch.swing.*;
  */
 public class NewSearchPanelAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
-    /** Creates a new instance of NewSearchPanelAction */
+    /** Creates a new instance of NewSearchPanelAction
+     * @param ef
+     * @param title
+     * @param icon */
     public NewSearchPanelAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
