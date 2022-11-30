@@ -10,6 +10,7 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="feature" version="1.7" date="30.11.2022">CalculateTimeAction: max length increased from 32 to 150 (issue #351)</change>
     <change tool="exakt" type="change" version="1.4" date="20.11.2022">Auto adjust columns widths, change font action (issue #331)</change>
     <change tool="exakt" type="feature" version="1.4" date="19.11.2022">Confirm exit (issue #332)</change>
     <change tool="coma" type="feature" version="2.0" date="19.11.2022">Confirm exit (issue #332)</change>
