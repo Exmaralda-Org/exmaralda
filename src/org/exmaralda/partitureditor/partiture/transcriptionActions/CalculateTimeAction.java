@@ -22,11 +22,16 @@ import java.util.HashMap;
  */
 public class CalculateTimeAction extends AbstractFSMSegmentationAction {
 
-    /** Creates a new instance of CountDIDAAction */
+    //int MAX_LENGTH = 32;
+    int MAX_LENGTH = 150;
+    
+    /** Creates a new instance of CalculateTimeAction
+     * @param t */
     public CalculateTimeAction(PartitureTableWithActions t) {
         super("Calculate annotated time...", t);
     }
 
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("calculateTimeAction!");
         table.commitEdit(true);
@@ -44,8 +49,7 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
          html+="<tr><th>Tier</th><th>Time</th></tr>\n";
          for (int i = 0; i < bt.getBody().getNumberOfTiers(); i++){
              Tier tier = bt.getBody().getTierAt(i);
-             double time = 
-                 tier.calculateEventTime(commonTimeline);
+             double time = tier.calculateEventTime(commonTimeline);
              html+= "<tr><td>" + 
                  tier.getDescription(bt.getHead().getSpeakertable()) + "</td>";
              html+= "<td>" + 
@@ -57,7 +61,7 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
          html += "<h2>Labels (per Tier)</h2>\n";
          html += "<table>\n";
          html += "<tr><th>Label</th><th>Time</th></tr>\n";
-         Map<String, Double> totalLabelTimes = new HashMap<String, Double>();
+         Map<String, Double> totalLabelTimes = new HashMap<>();
          for (int i = 0; i < bt.getBody().getNumberOfTiers(); i++) {
             Tier tier = bt.getBody().getTierAt(i);
             System.out.println(tier.getType());
@@ -65,14 +69,12 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
                 html += "<tr><th colspan='2'>" + 
                     tier.getDescription(bt.getHead().getSpeakertable()) + 
                     "</th></tr>\n";
-                Map<String, Double> labelTimes = new HashMap<String, Double>();
+                Map<String, Double> labelTimes = new HashMap<>();
                 for (int j = 0; j < tier.getNumberOfEvents(); j++) {
                     Event e = tier.getEventAt(j);
                     try {
-                        double timestart = commonTimeline.getTimelineItemWithID(
-                                e.getStart()).getTime();
-                        double timeend = commonTimeline.getTimelineItemWithID(
-                                e.getEnd()).getTime();
+                        double timestart = commonTimeline.getTimelineItemWithID(e.getStart()).getTime();
+                        double timeend = commonTimeline.getTimelineItemWithID(e.getEnd()).getTime();
                         double time = timeend - timestart;
                         String descr = e.getDescription().trim();
                         if (labelTimes.containsKey(descr)) {
@@ -88,16 +90,16 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
                             totalLabelTimes.put(descr, time);
                         }
                     } catch (JexmaraldaException je) {
-                        je.printStackTrace();
+                        System.out.println(je.getMessage());
                     }
                 }
                 for (Map.Entry<String, Double> entry : labelTimes.entrySet()) {
-                    if (entry.getKey().length() < 32) {
+                    if (entry.getKey().length() < MAX_LENGTH) {
                         html += "<tr><td>" + entry.getKey() + "</td>\n<td>" + 
                             TimeStringFormatter.formatMiliseconds(
                                     entry.getValue() * 1000.0, 2) + "</td></tr>\n";
                     } else {
-                        html += "<tr><td>" + entry.getKey().substring(0, 32) + 
+                        html += "<tr><td>" + entry.getKey().substring(0, MAX_LENGTH) + 
                             "<span style='color:red'>... [[truncated]]</span>" +
                             "</td>\n<td>" + TimeStringFormatter.formatMiliseconds(
                                     entry.getValue() * 1000.0, 2) +
@@ -118,12 +120,12 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
          }
          html += "<tr><th colspan='2'><strong>Totals</strong></th></tr>\n";
          for (Map.Entry<String, Double> entry : totalLabelTimes.entrySet()) {
-            if (entry.getKey().length() < 32) {
+            if (entry.getKey().length() < MAX_LENGTH) {
                 html += "<tr><td>" + entry.getKey() + "</td>\n<td>" + 
                     TimeStringFormatter.formatMiliseconds(
                             entry.getValue() * 1000.0, 2) + "</td></tr>\n";
             } else {
-                html += "<tr><td>" + entry.getKey().substring(0, 32) + 
+                html += "<tr><td>" + entry.getKey().substring(0, MAX_LENGTH) + 
                     "<span style='color: red'>... [[truncated]]</span>" +
                     "</td>\n<td>" + 
                     TimeStringFormatter.formatMiliseconds(
@@ -137,8 +139,7 @@ public class CalculateTimeAction extends AbstractFSMSegmentationAction {
                  new org.exmaralda.partitureditor.exSync.swing.MessageDialog(
                          (javax.swing.JFrame)table.parent, true,
                          new StringBuffer(html));
-         md.setTitle(org.exmaralda.common.helpers.Internationalizer.getString(
-                     "Annotated time"));
+         md.setTitle(org.exmaralda.common.helpers.Internationalizer.getString("Annotated time"));
          md.show();
 
     }
