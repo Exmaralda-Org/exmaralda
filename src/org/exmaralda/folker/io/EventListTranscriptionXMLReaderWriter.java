@@ -19,6 +19,7 @@ import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
 import org.exmaralda.folker.data.AbstractParser;
 import org.exmaralda.folker.data.TranscriptionHead;
+import org.jdom.output.Format;
 import org.xml.sax.SAXException;
 
 
@@ -83,7 +84,9 @@ public class EventListTranscriptionXMLReaderWriter {
             }
         }
                 
-        org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc);
+        // changed for #340
+        //org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc);
+        org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc, Format.getPrettyFormat());
     }
     
     public static EventListTranscription readXML(File file) throws JDOMException, IOException, SAXException,

@@ -71,10 +71,7 @@ public class XMLReaderWriter {
                         System.out.println("************** The path " + relativePath + " is absolute");
                         return relativePath;
                     }
-                } catch (IllegalArgumentException ex){
-                    System.out.println("************** The path " + relativePath + " cannot be resolved");
-                    return relativePath;
-                } catch (URISyntaxException ex){
+                } catch (IllegalArgumentException | URISyntaxException ex){
                     System.out.println("************** The path " + relativePath + " cannot be resolved");
                     return relativePath;
                 } 

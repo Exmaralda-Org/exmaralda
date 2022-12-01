@@ -22,11 +22,15 @@ import org.exmaralda.orthonormal.application.ApplicationControl;
  */
 public class SaveAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public SaveAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** SaveAction ***]");
         ApplicationControl ac = (ApplicationControl)applicationControl;
