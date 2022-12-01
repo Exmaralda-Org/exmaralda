@@ -56,6 +56,7 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.xml.parsers.ParserConfigurationException;
 import org.exmaralda.common.ExmaraldaApplication;
+import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.partiture.webServicesActions.WebLichtAction;
@@ -221,7 +222,7 @@ public class PartitureTableWithActions extends PartitureTable
     public TablePopupMenu tablePopupMenu;
     
     // new 11-01-2019, issue #176
-    public JMenu moveMenu = new JMenu("Move to tier");
+    public JMenu moveMenu = new JMenu(Internationalizer.getString("Move to tier"));
     
     public java.awt.Color defaultSelectionBg;
     public java.awt.Color defaultSelectionColor;
@@ -2286,12 +2287,37 @@ public class PartitureTableWithActions extends PartitureTable
     /** returns the currently selected portion of non-hidden tiers as a new transcription
      * @return  */
     public BasicTranscription getCurrentSelectionAsNewTranscription(){
-        if ((!(selectionStartCol<0)) && (selectionStartRow==-1)){
+        if ((selectionStartCol>=0) && (selectionStartRow==-1)){
+            // a set of colums is selected
             int selectionEnd=Math.min(selectionEndCol+1, getModel().getNumColumns()-1);
             return getModel().getPartOfTranscription(getIndicesOfVisibleRows(),selectionStartCol,selectionEnd);
-        } else {
-            return getModel().getPartOfTranscription(getIndicesOfVisibleRows(),0,getModel().getNumColumns()-1);
-        }                
+        } else if ((selectionStartCol>=0) && selectionStartRow>=0){
+            // a real selection inside the partitur, i.e. not of rows and not of columns
+            // not of the flesh, but over flesh
+            List<Integer> rowIndices = new ArrayList<>();
+            for (int rowIndex : getIndicesOfVisibleRows()){
+                if (rowIndex>=selectionStartRow && rowIndex<=selectionEndRow){
+                    rowIndices.add(rowIndex);
+                }
+            }
+           int[] rowIndicesArray = new int[rowIndices.size()];
+           for (int i=0; i<rowIndices.size(); i++) rowIndicesArray[i] = rowIndices.get(i);
+           int selectionEnd=Math.min(selectionEndCol+1, getModel().getNumColumns()-1);
+           return getModel().getPartOfTranscription(rowIndicesArray, selectionStartCol,selectionEnd);
+        } else if ((selectionStartCol==-1) && (selectionStartRow>=0)){
+            // a set of rows is selected
+            List<Integer> rowIndices = new ArrayList<>();
+            for (int rowIndex : getIndicesOfVisibleRows()){
+                if (rowIndex>=selectionStartRow && rowIndex<=selectionEndRow){
+                    rowIndices.add(rowIndex);
+                }
+            }
+           int[] rowIndicesArray = new int[rowIndices.size()];
+           for (int i=0; i<rowIndices.size(); i++) rowIndicesArray[i] = rowIndices.get(i);
+           return getModel().getPartOfTranscription(rowIndicesArray, 0,getModel().getNumColumns()-1);
+            
+        }       
+        return getModel().getPartOfTranscription(getIndicesOfVisibleRows(),0,getModel().getNumColumns()-1);
     }
     
     /** sets the speaker contribution of the segmentation panel if
