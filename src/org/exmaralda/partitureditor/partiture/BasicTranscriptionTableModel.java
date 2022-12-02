@@ -176,29 +176,35 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         } catch (JexmaraldaException je) {} // should never get here               
     }
     
-    /** removes the tier at the specified position */
+    /** removes the tier at the specified position
+     * @param row */
     public void removeTier(int row){
         Tier tier = transcription.getBody().getTierAt(row);
         try{ 
             transcription.getBody().removeTierWithID(tier.getID());
+            formats.remove(tier.getID());
             fireRowDeleted(row,1);
         } catch (JexmaraldaException je){} // should never get here
         fireSelectionChanged(Math.max(0,row-1),-1,false);
     }
     
-    /** removes the tiers at the specified position */
+    /** removes the tiers at the specified position
+     * @param startRow
+     * @param endRow */
     public void removeTiers(int startRow, int endRow){
         for (int i=startRow; i<=endRow; i++){
             Tier tier = transcription.getBody().getTierAt(startRow);
             try{ 
                 transcription.getBody().removeTierWithID(tier.getID());
+                formats.remove(tier.getID());
                 fireRowDeleted(startRow,1);
             } catch (JexmaraldaException je){} // should never get here
         }
         fireSelectionChanged(Math.max(0,startRow-1),-1,false);
     }
 
-    /** moves the tier at the specified position one row upwards, i.e.
+    /** moves the tier aswaps this tier with the one abovet the spe
+     * @param row.e.
         swaps this tier with the one above */
     public void moveTierUp(int row){
         transcription.getBody().swapTiers(row-1,row);
@@ -206,13 +212,15 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         fireSelectionChanged(row-1,-1,false);
     }
     
-    /** remove all empty events in tier that is held by the specified row */
+    /** remove all empty events in tier that is held by the specified row
+     * @param row */
     public void removeEmptyEvents(int row){
         transcription.getBody().getTierAt(row).removeEmptyEvents();
         fireDataReset();
     }
     
-    /** adds a tier at the end */
+    /** adds a tier at the end
+     * @param tier */
     public void addTier(Tier tier){
         try {
             transcription.getBody().addTier(tier);
@@ -433,7 +441,13 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
 
     
-    /** underlines the selected text in the specified event */
+    /** underlines the selected text in the specified event
+     * @param row
+     * @param col
+     * @param textStartPos
+     * @param textEndPos
+     * @param useDiacritics
+     * @param category */
     public void underline(int row, int col, int textStartPos, int textEndPos, boolean useDiacritics, String category){
         if (textStartPos==textEndPos) return;
         int span = getCellSpan(row,col);
@@ -512,8 +526,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
             
             
         } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
-            return;
+            System.out.println(ex.getLocalizedMessage());
         }
         
     }
@@ -587,12 +600,16 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
             else {  // i.e. the span of this cell is bigger than 1
                 // do nothing (for now...)
             } // end else
-        } catch (JexmaraldaException je){je.printStackTrace();}        
+        } catch (JexmaraldaException je){
+            System.out.println(je.getLocalizedMessage());
+        }        
     }
     
     
     /** moves the corresponding cell one column to the right
-        or: shifts the corresponding event forwards in the timeline */
+        or: shifts the corresponding event forwards in the timeline
+     * @param row
+     * @param col */
     public void moveRight(int row, int col){
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
