@@ -66,6 +66,7 @@ import org.exmaralda.partitureditor.partiture.undo.RestoreCellInfo;
 import org.exmaralda.partitureditor.partiture.undo.UndoHandler;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 import org.exmaralda.partitureditor.partiture.webServicesActions.DeepLAction;
+import org.exmaralda.partitureditor.partiture.webServicesActions.G2PAction;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -1172,6 +1173,7 @@ public class PartitureTableWithActions extends PartitureTable
 
         webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
         webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
+        g2pAction = new G2PAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Schwa.png")));
         webLichtAction = new WebLichtAction(this);
         deepLAction = new DeepLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/deepl_logo_icon_170284.png")));
 
@@ -1803,9 +1805,10 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction stadtspracheWordSegmentationAction;
     public javax.swing.AbstractAction stadtspracheTierSegmentationAction;
     
-    /* CLARIN */
+    /* Web Services */
     public javax.swing.AbstractAction webMAUSAction;
     public javax.swing.AbstractAction webMAUSFineAlignmentAction;
+    public javax.swing.AbstractAction g2pAction;
     public javax.swing.AbstractAction webLichtAction; 
     public javax.swing.AbstractAction deepLAction; 
     

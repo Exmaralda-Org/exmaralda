@@ -17,6 +17,10 @@ public class WebServiceProgessDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public void setTextAreaBackgroundColor(java.awt.Color color){
+        this.textArea.setBackground(color);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
