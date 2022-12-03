@@ -17,7 +17,6 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
-import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.common.corpusbuild.FileIO;

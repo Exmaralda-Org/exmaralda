@@ -34,7 +34,9 @@ public class TierFormatTable extends Hashtable {
         timelineItemFormat = new TimelineItemFormat();
     }
     
-    /** Creates new Tier format table from the specified file */
+    /** Creates new Tier format table from the specified file
+     * @param inputFileName
+     * @throws org.xml.sax.SAXException */
     public TierFormatTable (String inputFileName) throws SAXException{
         super();
         referencedFiles = new Vector();
@@ -46,8 +48,7 @@ public class TierFormatTable extends Hashtable {
             String id = (String)e.nextElement();
             try {addTierFormat(t.getTierFormatForTier(id));}
             catch (JexmaraldaException je) {
-                System.out.println("SKANDAL!!!");
-                je.printStackTrace();
+                System.out.println(je.getLocalizedMessage());
             }
         }
         String[] files = t.getAllReferencedFiles();
@@ -60,8 +61,7 @@ public class TierFormatTable extends Hashtable {
     
     public void TierFormatTableFromString (String inputString) throws SAXException {
         org.exmaralda.partitureditor.jexmaralda.sax.TierFormatTableSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.TierFormatTableSaxReader();
-        TierFormatTable t = new TierFormatTable();
-        t = reader.readFromString(inputString);
+        TierFormatTable t = reader.readFromString(inputString);
         this.clear();
         for (Enumeration e = t.keys(); e.hasMoreElements(); ){
             String id = (String)e.nextElement();
@@ -105,7 +105,7 @@ public class TierFormatTable extends Hashtable {
             result.getTierFormatForTier("COLUMN-LABEL").setSize(8);
             result.getTierFormatForTier("COLUMN-LABEL").setTextcolorName("gray");
         } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
         // added 26-02-2010
         result.timelineItemFormat.setMilisecondsDigits((short)0);
@@ -131,7 +131,7 @@ public class TierFormatTable extends Hashtable {
             result.getTierFormatForTier("COLUMN-LABEL").setSize(8);
             result.getTierFormatForTier("COLUMN-LABEL").setTextcolorName("gray");
         } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
         // added 26-02-2010
         result.timelineItemFormat.setMilisecondsDigits((short)0);
@@ -167,7 +167,9 @@ public class TierFormatTable extends Hashtable {
                 TierFormat tf = this.getTierFormatForTier(id);
                 result.addTierFormat(tf.makeCopy());
             }
-            catch (JexmaraldaException je) {}
+            catch (JexmaraldaException je) {
+                System.out.println(je.getLocalizedMessage());
+            }
         }
         return result;
     }
@@ -182,7 +184,7 @@ public class TierFormatTable extends Hashtable {
     public String[] getAllTierIDs(){
         Vector resultVector = new Vector();
         for (Enumeration e = this.keys(); e.hasMoreElements(); ){
-           String tierID = new String((String)e.nextElement());
+           String tierID = (String)e.nextElement();
            resultVector.addElement(tierID);
         }        
         return StringUtilities.stringVectorToArray(resultVector);
@@ -195,7 +197,7 @@ public class TierFormatTable extends Hashtable {
 
     public void addTierFormat (TierFormat tf) throws JexmaraldaException {
         if (containsKey(tf.getTierref())){
-            throw new JexmaraldaException(30, new String ("Table already contains tier format for tier " + tf.getTierref()));}
+            throw new JexmaraldaException(30, ("Table already contains tier format for tier " + tf.getTierref()));}
         put(tf.getTierref(),tf);
     }
     
@@ -208,7 +210,7 @@ public class TierFormatTable extends Hashtable {
 
     public TierFormat getTierFormatForTier(String tierref) throws JexmaraldaException {
         if (!containsKey(tierref)){
-            throw new JexmaraldaException(31, new String ("No such tier id - " + tierref));}
+            throw new JexmaraldaException(31, ("No such tier id - " + tierref));}
         return (TierFormat)get(tierref);    
     }
 
@@ -245,7 +247,7 @@ public class TierFormatTable extends Hashtable {
     // ********************************************    
     
     String toXML(boolean includeFileReferences){
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         result.append("<tierformat-table>");
         String[] files = getAllReferencedFiles();
         if (includeFileReferences) {
@@ -279,7 +281,10 @@ public class TierFormatTable extends Hashtable {
     }
     
     /** writes an XML file with the specified file name and the specified path to
-     *  the dtd */
+     *  the dtd
+     * @param filename
+     * @param pathToDTD
+     * @throws java.io.IOException */
     public void writeXMLToFile(String filename, String pathToDTD)throws IOException {
         try {
             System.out.println("started writing document...");
@@ -315,14 +320,14 @@ public class TierFormatTable extends Hashtable {
     }
     
     public String toTDCSS(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (Enumeration e = keys(); e.hasMoreElements(); ){
            String id = (String)e.nextElement();
-           String text = new String("td." + id + "{\n");
+           String text = "td." + id + "{\n";
            sb.append(text);
            TierFormat tierFormat = (TierFormat)get(id);
            sb.append(tierFormat.toCSS());
-           text = new String("}\n");
+           text = "}\n";
            sb.append(text);
         }
         return sb.toString();
@@ -332,11 +337,11 @@ public class TierFormatTable extends Hashtable {
         fos.write("<STYLE>".getBytes("UTF-8"));
         for (Enumeration e = keys(); e.hasMoreElements(); ){
            String id = (String)e.nextElement();
-           String text = new String("td." + id + "{\n");
+           String text = "td." + id + "{\n";
            fos.write(text.getBytes("UTF-8"));
            TierFormat tierFormat = (TierFormat)get(id);
            fos.write(tierFormat.toCSS().getBytes("UTF-8"));
-           text = new String("}\n");
+           text = "}\n";
            fos.write(text.getBytes("UTF-8"));
         }
         fos.write("</STYLE>".getBytes("UTF-8"));

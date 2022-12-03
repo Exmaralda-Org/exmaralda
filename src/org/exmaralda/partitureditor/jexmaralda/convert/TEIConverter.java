@@ -45,6 +45,7 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.Text;
 import org.jdom.filter.ElementFilter;
+import org.jdom.output.Format;
 import org.jdom.xpath.XPath;
 
 /**
@@ -109,7 +110,8 @@ public class TEIConverter extends AbstractConverter {
     public TEIConverter() {
     }
     
-    /** Creates a new instance of TEIConverter */
+    /** Creates a new instance of TEIConverter
+     * @param ss */
     public TEIConverter(String ss) {
         EXMARaLDA2TEI_XSL = ss;
     }
@@ -152,7 +154,8 @@ public class TEIConverter extends AbstractConverter {
         String result = sf.applyInternalStylesheetToString(EXMARaLDA2GENERIC_ISO_TEI_XSL, bt.toXML());
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
-        IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc, Format.getPrettyFormat());
     }
     
     public void writeEventTokenISOTEIToFile(BasicTranscription bt, String path)  throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
@@ -160,7 +163,8 @@ public class TEIConverter extends AbstractConverter {
         String result = sf.applyInternalStylesheetToString(EXMARaLDA2EVENT_TOKEN_ISO_TEI_XSL, bt.toXML());
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
-        IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc, Format.getPrettyFormat());
     }
     
 
@@ -205,7 +209,8 @@ public class TEIConverter extends AbstractConverter {
         System.out.println("Merged");
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);
-        FileIO.writeDocumentToLocalFile(filename, teiDoc);
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, Format.getPrettyFormat());
         System.out.println("document written.");        
     }
     
@@ -236,7 +241,8 @@ public class TEIConverter extends AbstractConverter {
         System.out.println("Merged");
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        
-        FileIO.writeDocumentToLocalFile(filename, teiDoc);
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, Format.getPrettyFormat());
         System.out.println("document written.");        
     }
     
@@ -267,7 +273,8 @@ public class TEIConverter extends AbstractConverter {
         System.out.println("Merged");
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        
-        FileIO.writeDocumentToLocalFile(filename, teiDoc);
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, Format.getPrettyFormat());
         System.out.println("document written.");        
     }
     
@@ -291,7 +298,8 @@ public class TEIConverter extends AbstractConverter {
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);                
-        IOUtilities.writeDocumentToLocalFile(path, teiDoc);                
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc, Format.getPrettyFormat());                
     }
     
     public void writeFOLKERISOTEIToFile(Document flnDoc, String absolutePath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException {
@@ -300,7 +308,8 @@ public class TEIConverter extends AbstractConverter {
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);                
-        IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc);                
+        // changed for #340
+        IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc, Format.getPrettyFormat());                
     }
     
     // issue #215
@@ -387,7 +396,7 @@ public class TEIConverter extends AbstractConverter {
     //****************************************************
 
 
-    HashSet<String> allExistingIDs = new HashSet<String>();
+    HashSet<String> allExistingIDs = new HashSet<>();
     
     // new 30-03-2016
     private void generateWordIDs(Document document) throws JDOMException{
@@ -541,7 +550,7 @@ public class TEIConverter extends AbstractConverter {
         }
         for (Element seg : allSegments){
             if (!(seg.getAttributeValue("type").equals("segmental"))) continue;
-            Vector<Content> newContent = new Vector<Content>();
+            Vector<Content> newContent = new Vector<>();
             for (Object o : seg.getContent()){
                 Content c = (Content)o;
                 if (!(c instanceof Text)) {

@@ -130,6 +130,7 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
     public void success(BasicTranscription transcription) throws IOException, JexmaraldaException{
         // todo
         pbd.addText("Fine alignment done.");
+        pbd.setTextAreaBackgroundColor(java.awt.Color.decode("#356811"));        
         table.getModel().setTranscription(transcription);
         //table.resetData();           
     }

@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import java.util.prefs.Preferences;
@@ -22,6 +24,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import org.exmaralda.common.helpers.XMLFormatter;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
 
@@ -135,7 +138,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
             }
             
             //if CSV is desired
-            if (type.startsWith("CSV")){
+            else if (type.startsWith("CSV")){
                 // prepare the transformation  
                 XSLTransformer transformer = null;
                 boolean failed = false;
@@ -160,13 +163,24 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                     // result is not saved anywhere (could be done for debugging)
                     searchResultString = resultWriter.toString();  
                     
-                }  catch (Exception ex) {
-                    String message = "General problem with CSV export:" + ": \n";
+                }  catch (TransformerException ex) {
+                    String message = """
+                                     General problem with CSV export:: 
+                                     """;
                     message += ex.getMessage() + "\n";
                     failed = true;
                     javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);
                 } 
                 
+            }
+            
+            // not HTML and not CSV, must be XML
+            else {
+                try {
+                    searchResultString = XMLFormatter.formatXML(searchResultString, false);
+                } catch (JDOMException | IOException ex) {
+                    Logger.getLogger(SaveSearchResultAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
             try {
@@ -187,7 +201,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                 exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);                
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(exaktFrame, ex.getMessage());
-                ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
             }
         
         }        

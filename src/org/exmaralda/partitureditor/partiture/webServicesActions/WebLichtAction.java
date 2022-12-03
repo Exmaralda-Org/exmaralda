@@ -229,6 +229,7 @@ public class WebLichtAction extends org.exmaralda.partitureditor.partiture.Abstr
                         public void run() {
                             try {
                                 pbd.addText("WebLicht call done.");
+                                pbd.setTextAreaBackgroundColor(java.awt.Color.decode("#356811"));                              
                                 success();
                             } catch (IOException ex) {
                                 pbd.addText("Error: " + ex.getLocalizedMessage());

@@ -6,9 +6,8 @@
 
 package org.exmaralda.partitureditor.partiture.tierActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -17,11 +16,14 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class RemoveTierAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveTierAction */
+    /** Creates a new instance of RemoveTierAction
+     * @param t
+     * @param icon */
     public RemoveTierAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Remove tier...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("removeTierAction!");
         table.commitEdit(true);
@@ -30,8 +32,8 @@ public class RemoveTierAction extends org.exmaralda.partitureditor.partiture.Abs
     }
     
     private void removeTier(){
-        javax.swing.JOptionPane askDialog = new javax.swing.JOptionPane();
-        int confirmation = askDialog.showConfirmDialog( table,
+        //javax.swing.JOptionPane askDialog = new javax.swing.JOptionPane();
+        int confirmation = JOptionPane.showConfirmDialog( table,
             "Are you sure you want to remove the selected tier(s)? ",
             "Question",
             javax.swing.JOptionPane.YES_NO_OPTION,

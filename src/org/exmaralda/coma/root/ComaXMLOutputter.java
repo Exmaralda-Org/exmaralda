@@ -19,7 +19,9 @@ public class ComaXMLOutputter extends XMLOutputter {
 	 */
 	public ComaXMLOutputter() {
 		super();
-		Format format = Format.getRawFormat();
+		//changed for #340
+                //Format format = Format.getRawFormat();
+                Format format = Format.getPrettyFormat();
 		format.setEncoding("UTF-8");
 		this.setFormat(format);
 	}

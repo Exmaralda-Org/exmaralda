@@ -3,6 +3,9 @@ package org.exmaralda.partitureditor.jexmaralda;
 
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.exmaralda.common.helpers.XMLFormatter;
 import org.xml.sax.*;
 import org.jdom.*;
 
@@ -33,7 +36,7 @@ public class BasicTranscription extends AbstractTranscription {
         return tierFormatTable;
     }
 
-    public void setTierFormatTable(TierFormatTable tft) {
+    public final void setTierFormatTable(TierFormatTable tft) {
         tierFormatTable = tft;
     }
         
@@ -57,8 +60,7 @@ public class BasicTranscription extends AbstractTranscription {
         super();
         body = new BasicBody();
         org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader();
-        BasicTranscription t = new BasicTranscription();
-        t = reader.readFromFile(inputFileName);
+        BasicTranscription t = reader.readFromFile(inputFileName);
         if (check){
             t.check();
         }
@@ -143,8 +145,7 @@ public class BasicTranscription extends AbstractTranscription {
     public void BasicTranscriptionFromString (String inputString) throws SAXException, JexmaraldaException {
         body = new BasicBody();
         org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader();
-        BasicTranscription t = new BasicTranscription();
-        t = reader.readFromString(inputString);
+        BasicTranscription t = reader.readFromString(inputString);
         //t.check();
         setHead(t.getHead());
         setBody(t.getBody());
@@ -179,13 +180,15 @@ public class BasicTranscription extends AbstractTranscription {
     // ********************************************
 
     
-    /** returns the body of the transcription */
+    /** returns the body of the transcription
+     * @return  */
     public BasicBody getBody(){
         return body;
     }
     
-    /** sets the body of the transcription to the specified value */
-    public void setBody(BasicBody b){
+    /** sets the body of the transcription to the specified value
+     * @param b */
+    public final void setBody(BasicBody b){
         body = b;
     }
            
@@ -193,14 +196,18 @@ public class BasicTranscription extends AbstractTranscription {
     // ********** BASIC MANIPULATION **************
     // ********************************************
 
-    /** checks the well-formedness of this transcription, i.e.
-     * everything that is not covered by the DTD */
+    /** *  checks the well-formedness of this transcription, i.e.everything that is not covered by the DTD
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void check() throws JexmaraldaException {
         getBody().check();
     }
 
     /** returns a part of this transcription: all events from the specified tiers that
-     * lie between the specified start and end point */
+     * lie between the specified start and end point
+     * @param tierIDs
+     * @param startTLI
+     * @param endTLI
+     * @return  */
     public BasicTranscription getPartOfTranscription(String[] tierIDs, String startTLI, String endTLI){
         return getPartOfTranscription(tierIDs, startTLI, endTLI, false);
     }
@@ -219,7 +226,8 @@ public class BasicTranscription extends AbstractTranscription {
 
     /** checks if all the speakers referred to from the tiers appear in the speakertable *
      * if not, sets the speaker of the tiers in question to null 
-     * returns true if such a change has been made, false otherwise */
+     * returns true if such a change has been made, false otherwise
+     * @return  */
     public boolean checkSpeakers(){
         boolean result = false;
         for (int pos=0; pos<getBody().getNumberOfTiers();pos++){
@@ -234,11 +242,12 @@ public class BasicTranscription extends AbstractTranscription {
         return result;
     }
     
-    /** checks if there is a parent tier for every annotation tier *
+    /** *  checks if there is a parent tier for every annotation tier *
      * for each tier: sets the corresponding return value to -1 if *
-     * the check is not applicable (i.e. if the respective tier is not of type 'a') *
-     * sets the return value to 0 if there is no parent tier, sets *
-     * the return value to 1 if there is a parent tier */
+     * the check is not applicable (i.e.if the respective tier is not of type 'a') *
+        sets the return value to 0 if there is no parent tier, sets *
+        the return value to 1 if there is a parent tier
+     * @return  */
     public int[] checkAnnotationTierDependencies(){
         int tiercount = getBody().getNumberOfTiers();
         int[] returnvalue = new int[tiercount];
@@ -283,7 +292,8 @@ public class BasicTranscription extends AbstractTranscription {
 
      /** returns the positions of those tiers whose display name
      * corresponds to the name generated from speaker abbreviation and 
-     * category */
+     * category
+     * @return  */
     public int[] getTierNumbersWithAutoDisplayName(){
         Vector resultVector = new Vector();
         for (int pos=0; pos<getBody().getNumberOfTiers();pos++){
@@ -294,13 +304,14 @@ public class BasicTranscription extends AbstractTranscription {
         }
         int[] result = new int[resultVector.size()];
         for (int pos=0; pos<resultVector.size(); pos++){
-            result[pos] = ((Integer)(resultVector.elementAt(pos))).intValue();
+            result[pos] = ((Integer)(resultVector.elementAt(pos)));
         }
         return result;
     }
     
     /** generates display names automatically (this is for compatability with
-     * transcriptions before version 1.2.5.) */
+     * transcriptions before version 1.2.5.)
+     * @param tierNos */
     public void makeAutoDisplayName(int[] tierNos){
         for (int pos=0; pos<tierNos.length; pos++){
             Tier t = getBody().getTierAt(tierNos[pos]);
@@ -320,8 +331,9 @@ public class BasicTranscription extends AbstractTranscription {
     }
     
     /**
-     * Maps the tiers of this transcription to the tiers of the other transcription.
-     * Returns a vector with string arrays [ID1, ID2] that contain matching tier IDs.
+     * Maps the tiers of this transcription to the tiers of the other transcription.Returns a vector with string arrays [ID1, ID2] that contain matching tier IDs.
+     * @param otherTrans
+     * @return 
      */    
     public Vector makeTierIDMappings(BasicTranscription otherTrans){
         Vector resultVector = new Vector();
@@ -330,7 +342,7 @@ public class BasicTranscription extends AbstractTranscription {
             String speakerAbb = "";
             try {
                 speakerAbb = getHead().getSpeakertable().getSpeakerWithID(tier.getSpeaker()).getAbbreviation();
-            } catch (Exception e1) {}
+            } catch (JexmaraldaException e1) {}
             String category = tier.getCategory();
             String type = tier.getType();
             for (int pos2=0; pos2<otherTrans.getBody().getNumberOfTiers(); pos2++){
@@ -338,18 +350,18 @@ public class BasicTranscription extends AbstractTranscription {
                 String otherSpeakerAbb = "";
                 try {
                     otherSpeakerAbb = otherTrans.getHead().getSpeakertable().getSpeakerWithID(otherTier.getSpeaker()).getAbbreviation();
-                } catch (Exception e2) {}
-                String otherCategory = otherTier.getCategory();
-                String otherType = otherTier.getType();
-                if (speakerAbb.equals(otherSpeakerAbb) &&
-                    category.equals(otherCategory) &&
-                    type.equals(otherType)){
-                        String id1 = tier.getID();
-                        String id2 = otherTier.getID();
-                        String[] mapping = {id1, id2};
-                        resultVector.add(mapping);
-                        break;
-                }
+                } catch (JexmaraldaException e2) {}
+                    String otherCategory = otherTier.getCategory();
+                    String otherType = otherTier.getType();
+                    if (speakerAbb.equals(otherSpeakerAbb) &&
+                        category.equals(otherCategory) &&
+                        type.equals(otherType)){
+                            String id1 = tier.getID();
+                            String id2 = otherTier.getID();
+                            String[] mapping = {id1, id2};
+                            resultVector.add(mapping);
+                            break;
+                    }
             }
         }
         return resultVector;
@@ -358,6 +370,9 @@ public class BasicTranscription extends AbstractTranscription {
     /**
      * Glues the other transcription to the end of this transcription
      * using the given tier mappings
+     * @param otherTrans
+     * @param tierIDMappings
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException
      */    
     public void glue(BasicTranscription otherTrans, String[][] tierIDMappings) throws JexmaraldaException {
         glue(otherTrans,tierIDMappings,false);
@@ -373,7 +388,7 @@ public class BasicTranscription extends AbstractTranscription {
         
     public void merge(BasicTranscription otherTrans, boolean useIDs) throws JexmaraldaException{
         // merge speakertables
-        Map<String,String> speakerMappings = new HashMap<String,String>();
+        Map<String,String> speakerMappings = new HashMap<>();
         Speakertable thisSpeakertable = getHead().getSpeakertable();
         Speakertable otherSpeakertable = otherTrans.getHead().getSpeakertable();
         for (int pos=0; pos<otherSpeakertable.getNumberOfSpeakers(); pos++){
@@ -415,7 +430,7 @@ public class BasicTranscription extends AbstractTranscription {
         }
         
         //merge tiers
-        Map<String, Tier> tierMemory = new HashMap<String,Tier>();
+        Map<String, Tier> tierMemory = new HashMap<>();
         if (useIDs){
             for (int pos=0; pos<getBody().getNumberOfTiers(); pos++){
                 Tier tier = getBody().getTierAt(pos);
@@ -463,10 +478,10 @@ public class BasicTranscription extends AbstractTranscription {
     }
     
     /**
-     * Chops this transcription into several smaller Basic Transcriptions.
-     * The parameter determines the minimum number of timeline items
-     * that the resulting transcriptions will contain.
-     * Returns the resulting transcriptions as an array.
+     * Chops this transcription into several smaller Basic Transcriptions.The parameter determines the minimum number of timeline items
+ that the resulting transcriptions will contain.Returns the resulting transcriptions as an array.
+     * @param minNumberOfTimelineItems
+     * @return 
      */    
     public BasicTranscription[] chop(int minNumberOfTimelineItems){
         BasicBody[] bodies = getBody().chop(minNumberOfTimelineItems);
@@ -480,10 +495,12 @@ public class BasicTranscription extends AbstractTranscription {
     }
     
     
-    /** second attempt, more generic, no reference tier */
+    /** second attempt, more generic, no reference tier
+     * @param unhackTierID
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void unhack2(String unhackTierID) throws JexmaraldaException{
         
-        HashSet<String> tliIDsUsedOnOtherTiers = new HashSet<String>();
+        HashSet<String> tliIDsUsedOnOtherTiers = new HashSet<>();
         for (int pos=0; pos<getBody().getNumberOfTiers(); pos++){
             Tier thisTier = getBody().getTierAt(pos);
             if (thisTier.getID().equals(unhackTierID)) continue;
@@ -498,8 +515,8 @@ public class BasicTranscription extends AbstractTranscription {
         Timeline tl = getBody().getCommonTimeline();
         unhackTier.sort(tl);
         
-        ArrayList<ArrayList<Event>> scs = new ArrayList<ArrayList<Event>>();        
-        ArrayList<Event> currentSc = new ArrayList<Event>();
+        ArrayList<ArrayList<Event>> scs = new ArrayList<>();        
+        ArrayList<Event> currentSc = new ArrayList<>();
         
         String lastEnd="";        
         for (int pos=0; pos<unhackTier.getNumberOfEvents(); pos++){
@@ -508,14 +525,14 @@ public class BasicTranscription extends AbstractTranscription {
                 if (!currentSc.isEmpty()){
                     scs.add(currentSc);
                 }
-                currentSc = new ArrayList<Event>();
+                currentSc = new ArrayList<>();
             }
             currentSc.add(event);
             lastEnd = event.getEnd();
         }
         scs.add(currentSc);
         
-        ArrayList<Event> newEvents = new ArrayList<Event>();
+        ArrayList<Event> newEvents = new ArrayList<>();
         for (ArrayList<Event> sc : scs){
             Event currentEvent = null;
             for (Event event : sc){
@@ -545,13 +562,16 @@ public class BasicTranscription extends AbstractTranscription {
     
     }
     
-    /** new 30-10-2012, for SiN data, remove superfluous event boundaries */
+    /** new 30-10-2012, for SiN data, remove superfluous event boundaries
+     * @param unhackTierID
+     * @param referenceTierID
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void unhack(String unhackTierID, String referenceTierID) throws JexmaraldaException{
         Tier unhackTier = getBody().getTierWithID(unhackTierID);
         Tier referenceTier = getBody().getTierWithID(referenceTierID);
         Timeline tl = getBody().getCommonTimeline();
         referenceTier.sort(tl);
-        ArrayList<Event> unhackedEvents = new ArrayList<Event>();
+        ArrayList<Event> unhackedEvents = new ArrayList<>();
         for (int pos=0; pos<referenceTier.getNumberOfEvents(); pos++){
               Event e = referenceTier.getEventAt(pos);              
               String startTLI = e.getStart();
@@ -624,7 +644,9 @@ public class BasicTranscription extends AbstractTranscription {
     // ********************************************
 
     /** returns the transcription as an XML element &lt;basic-transcription&gt; as
-     *  specified in the corresponding dtd */
+     *  specified in the corresponding dtd
+     * @param tft
+     * @return  */
     public String toXML(TierFormatTable tft) {
         StringBuilder sb=new StringBuilder();
         sb.append("<basic-transcription>\n");
@@ -637,13 +659,18 @@ public class BasicTranscription extends AbstractTranscription {
         return sb.toString();
     }
 
+    @Override
     public String toXML() {
         return toXML(null);
     }
 
     
     /** writes an XML file with the specified file name and the specified path to
-     *  the dtd */
+     *  the dtd
+     * @param filename
+     * @param pathToDTD
+     * @param tft
+     * @throws java.io.IOException */
     public void writeXMLToFile(String filename, String pathToDTD, TierFormatTable tft)throws IOException {
         // changed 11-05-2010: new method can also produce relative paths that
         // go via parent folders, i.e. including one or more ..s
@@ -653,12 +680,17 @@ public class BasicTranscription extends AbstractTranscription {
         //getHead().getMetaInformation().relativizeReferencedFile(filename);
         relativizeLinks(filename);
         System.out.println("started writing document" + filename + "...");
-        FileOutputStream fos = new FileOutputStream(new File(filename));
-        fos.write(StringConstants.XML_HEADER.getBytes("UTF-8"));        
-        fos.write(StringUtilities.makeXMLDoctypeBasicTranscription(pathToDTD).getBytes("UTF-8"));
-        fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));        
-        fos.write(toXML(tft).getBytes("UTF-8"));
-        fos.close();
+        try (FileOutputStream fos = new FileOutputStream(new File(filename))) {
+            fos.write(StringConstants.XML_HEADER.getBytes("UTF-8"));
+            fos.write(StringUtilities.makeXMLDoctypeBasicTranscription(pathToDTD).getBytes("UTF-8"));
+            //fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
+            // issue #340
+            //fos.write(toXML(tft).getBytes("UTF-8"));
+            fos.write(XMLFormatter.formatXML(toXML(tft), true).getBytes("UTF-8"));
+        } catch (JDOMException ex) {
+            Logger.getLogger(BasicTranscription.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
+        }
         System.out.println("document written.");
         // ".." in relative paths allowed now
         getHead().getMetaInformation().resolveReferencedFile(filename, MetaInformation.NEW_METHOD);
@@ -733,7 +765,7 @@ public class BasicTranscription extends AbstractTranscription {
         }
     }
 
-    public void resolveLinks(String relativeToWhat){
+    public final void resolveLinks(String relativeToWhat){
         for (int pos=0; pos<body.getNumberOfTiers(); pos++){
             Tier t = body.getTierAt(pos);
             for (int i=0; i<t.getNumberOfEvents(); i++){

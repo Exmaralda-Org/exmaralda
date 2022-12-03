@@ -63,13 +63,21 @@ public class IOUtilities {
 
     public static void writeDocumentToLocalFile(String pathToDocument, Document document) throws IOException{
         XMLOutputter xmlOutputter = new XMLOutputter();
-        //String docString = xmlOutputter.outputString(document);        
         FileOutputStream fos = new FileOutputStream(new File(pathToDocument));        
         xmlOutputter.output(document,fos);
-        //fos.write(docString.getBytes("UTF-8"));
         fos.close();    
     }
 
+    // new for #340
+    public static void writeDocumentToLocalFile(String pathToDocument, Document document, Format format) throws IOException{
+        XMLOutputter xmlOutputter = new XMLOutputter(format);
+        FileOutputStream fos = new FileOutputStream(new File(pathToDocument));        
+        xmlOutputter.output(document,fos);
+        fos.close();    
+    }
+    
+    
+    
     public static void writeDocumentToLocalFile(String pathToDocument, Document document, boolean omitXMLDeclaration) throws IOException{
         XMLOutputter xmlOutputter = new XMLOutputter();
         FileOutputStream fos = new FileOutputStream(new File(pathToDocument));

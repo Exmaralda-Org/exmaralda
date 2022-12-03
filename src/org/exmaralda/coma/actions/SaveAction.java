@@ -53,6 +53,7 @@ public class SaveAction extends ComaAction {
 		this(c, null, sa);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		System.out.println("Save " + (saveAs ? "as" : ""));
 		if ((!saveAs) && (coma.getData().getOpenFile().exists())) {
@@ -63,7 +64,8 @@ public class SaveAction extends ComaAction {
 	}
 
 	/**
-	 * saves the open file. calls saveAs() if it has not been saved yet.
+	 * saves the open file.calls saveAs() if it has not been saved yet.
+     * @return 
 	 */
 	public boolean save() {
 		if (coma.getData().getOpenFile().exists()) {
@@ -93,8 +95,9 @@ public class SaveAction extends ComaAction {
 		JFileChooser fc = new JFileChooser();
 		fc.setCurrentDirectory(coma.getData().getOpenFile() == null ? new File(
 				"/") : coma.getData().getOpenFile().getParentFile());
-		fc.addChoosableFileFilter(new ExmaraldaFileFilter("Coma-Files",
-				new String[] { "coma", "xml" }, true));
+		//fc.addChoosableFileFilter(new ExmaraldaFileFilter("Coma-Files",	new String[] { "coma", "xml" }, true));
+                // changed 01-12-2022
+                fc.setFileFilter(new ExmaraldaFileFilter("Coma-Files (COMA, XML)",	new String[] { "coma", "xml" }, true));
 		int returnVal = fc.showSaveDialog(coma);
 		if (fc.getSelectedFile() != null) {
 			file = fc.getSelectedFile();

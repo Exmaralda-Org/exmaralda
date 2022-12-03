@@ -26,6 +26,7 @@ public class WebServicesMenu extends AbstractTableMenu {
         
         add(table.webMAUSAction);
         add(table.webMAUSFineAlignmentAction);
+        add(table.g2pAction);
         add(table.webLichtAction);
         add(table.deepLAction);
     }

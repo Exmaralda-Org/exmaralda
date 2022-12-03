@@ -240,6 +240,16 @@
 					<translation lang="es" trans="Copiar"/>
 					<translation lang="zh" trans="复制"/>
 				</item>
+				<item id="Copy HTML">
+					<translation lang="en" trans="Copy HTML"/>
+					<translation lang="de" trans="Als HTML Kopieren"/>
+					<translation lang="fr" trans="Copier HTML"/>
+					<translation lang="sv" trans="Kopiera HTML"/>
+					<translation lang="tr" trans="Kopyala HTML"/>
+					<translation lang="cz" trans="Kopírovat HTML"/>
+					<translation lang="es" trans="Copiar HTML"/>
+					<translation lang="zh" trans="复制 HTML"/>
+				</item>
 				<item id="Paste">
 					<translation lang="en" trans="Paste"/>
 					<translation lang="de" trans="Einfügen"/>
@@ -4399,5 +4409,10 @@
 			<translation lang="de" trans="CoMa wird beendet. Fortfahren?"/>
 			<translation lang="fr" trans="CoMa va être terminé. Continuer?"/>
 		</item>
+                <item id="Move to tier">
+                        <translation lang="en" trans="Move to tier"/>
+                        <translation lang="de" trans="In Spur verschieben"/>
+                </item>
+                
 	</translations>
 </internationalization>

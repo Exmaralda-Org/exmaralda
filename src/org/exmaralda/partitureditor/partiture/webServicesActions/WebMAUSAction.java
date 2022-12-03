@@ -128,6 +128,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
                         public void run() {
                             try {
                                 pbd.addText("Done.");
+                                pbd.setTextAreaBackgroundColor(java.awt.Color.decode("#356811"));                                
                                 success(temp, files[1], mausParameters, tierID, m4e.modifiedStartID, m4e.modifiedEndID);
                             } catch (IOException ex) {
                                 pbd.addText("Error: " + ex.getLocalizedMessage());

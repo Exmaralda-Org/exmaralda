@@ -79,6 +79,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
+import org.jdom.output.Format;
 import org.jdom.xpath.XPath;
 import org.xml.sax.SAXException;
 
@@ -729,7 +730,9 @@ public final class ApplicationControl implements  ListSelectionListener,
             
             System.out.println("Start saving...");
             setBookmark(d, contributionListTable.getSelectedRow());
-            IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d);
+            // changed for #340
+            //IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d);
+            IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d, Format.getPrettyFormat());
             //currentFilePath = f.getAbsolutePath();
             setCurrentFilePath(f.getAbsolutePath());
             DOCUMENT_CHANGED = false;
@@ -739,7 +742,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         } catch (IOException ex) {
             displayException(ex);
             status("Fehler beim Speichern von " + f.getAbsolutePath() + ".");
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
     
     }
@@ -769,7 +772,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                 }            
             }
         } catch (JDOMException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
     }
     
