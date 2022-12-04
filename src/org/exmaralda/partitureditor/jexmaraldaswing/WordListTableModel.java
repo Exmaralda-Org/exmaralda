@@ -30,20 +30,23 @@ public class WordListTableModel extends javax.swing.table.AbstractTableModel {
             // changed 25-05-2009: generating the wordlist with a stylesheet is very slow
             // use a custom method instead
             words = st.getBody().getWordList();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {            
+            System.out.println(ex.getLocalizedMessage());
             // do nothing
         }
     }
 
+    @Override
     public int getRowCount() {
         return words.size();
     }
 
+    @Override
     public int getColumnCount() {
         return 2;
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Element word = (Element)(words.get(rowIndex));
         switch (columnIndex){
@@ -69,7 +72,7 @@ public class WordListTableModel extends javax.swing.table.AbstractTableModel {
     }
 
     public int getTypeCount(){
-        HashSet<String> types = new HashSet<String>();
+        HashSet<String> types = new HashSet<>();
         for (int pos=0; pos<getTokenCount(); pos++){
             types.add((String)(getValueAt(pos, 0)));
         }

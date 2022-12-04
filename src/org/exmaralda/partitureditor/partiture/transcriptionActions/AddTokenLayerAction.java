@@ -31,7 +31,8 @@ import org.xml.sax.SAXException;
  */
 public class AddTokenLayerAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of GetHIATSegmentationErrorsAction */
+    /** Creates a new instance of GetHIATSegmentationErrorsAction
+     * @param t */
     public AddTokenLayerAction(PartitureTableWithActions t) {
         super("Add Token Tiers...", t);
     }

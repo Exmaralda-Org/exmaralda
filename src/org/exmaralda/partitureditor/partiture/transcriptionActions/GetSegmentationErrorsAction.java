@@ -16,7 +16,8 @@ import org.exmaralda.partitureditor.partiture.*;
  */
 public class GetSegmentationErrorsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of GetHIATSegmentationErrorsAction */
+    /** Creates a new instance of GetHIATSegmentationErrorsAction
+     * @param t */
     public GetSegmentationErrorsAction(PartitureTableWithActions t) {
         super("Segmentation errors...", t);
     }

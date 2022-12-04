@@ -10,7 +10,6 @@ import org.exmaralda.partitureditor.fsm.FSMSaxReader;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.fsm.FiniteStateMachine;
 import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.fsm.*;
 import java.util.*;
 import org.xml.sax.*;
 
@@ -34,6 +33,7 @@ public class DIDASegmentation extends AbstractSegmentation {
         super(ptef);
     }
 
+    @Override
     public SegmentedTranscription BasicToSegmented(BasicTranscription bt) throws SAXException, FSMException {
          SegmentedTranscription st = bt.toSegmentedTranscription();
          FSMSaxReader sr = new FSMSaxReader();

@@ -236,7 +236,7 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
     }
 
     public Vector<Element> getWordList(){
-        Vector<Element> result = new Vector<Element>();
+        Vector<Element> result = new Vector<>();
         for (int pos=0; pos<size(); pos++){
             SegmentedTier st = (SegmentedTier)(elementAt(pos));
             for (int pos2=0; pos2<st.size(); pos2++){
@@ -245,7 +245,7 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
                     Segmentation s = (Segmentation)o;
                     HashSet segmentHashSet = s.getAllSegmentNames();
                     for (Iterator i = segmentHashSet.iterator(); i.hasNext(); ){
-                       String segmentName = new String((String)i.next());
+                       String segmentName = (String)i.next();
                        if (!(segmentName.endsWith(":w"))) continue;
                        SegmentList thisWordList  = (s.getAllSegmentsWithName(segmentName));
                        for (Object w : thisWordList){

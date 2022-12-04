@@ -8,19 +8,30 @@ package org.exmaralda.partitureditor.partiture.webServicesActions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.exmaralda.partitureditor.fsm.FSMException;
+import org.exmaralda.partitureditor.jexmaralda.AbstractSegment;
+import org.exmaralda.partitureditor.jexmaralda.AbstractSegmentVector;
+import org.exmaralda.partitureditor.jexmaralda.Describable;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.SegmentList;
+import org.exmaralda.partitureditor.jexmaralda.Segmentation;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTier;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.TierFormat;
+import org.exmaralda.partitureditor.jexmaralda.TimedSegment;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
+import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.DeepLConnector;
 import org.exmaralda.webservices.swing.WebServiceProgessDialog;
@@ -114,6 +125,12 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                     String tierCategory = (String) deepLParameters.get("TIER-CATEGORY");
                     tierPositions = table.getModel().getTranscription().getBody().findTiersWithCategory(tierCategory);                         
                 }
+                
+                int segmentationCode = AbstractSegmentation.getSegmentationCode((String) deepLParameters.get("SEGMENTATION-ALGORITHM"));
+                AbstractSegmentation segmentationAlgorithm = AbstractSegmentation.getSegmentationAlgorithm(segmentationCode);
+                String wordSegmentationName = AbstractSegmentation.getWordSegmentationName(segmentationCode);
+
+                
 
                 //resultTiers = new ArrayList<>();
                 //languageTiers = new ArrayList<>();
@@ -133,9 +150,9 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                         Tier languageTier = new Tier(table.getModel().getTranscription().getBody().getFreeID(), sourceTier.getSpeaker(), "DeepL-Lang", "a");
                         languageTier.setDisplayName("lang");
                         if (addLanguageTiers){
-                            table.getModel().getTranscription().getBody().insertTierAt(languageTier, adjustedTierPosition + 2);                             
+                            table.getModel().getTranscription().getBody().insertTierAt(languageTier, adjustedTierPosition + 2);
                             table.getModel().getTierFormatTable().addTierFormat(new TierFormat("a", languageTier.getID()));
-                            tiersAdded++;
+                            tiersAdded++;                                
                         }
                         //languageTiers.add(languageTier);
                         
@@ -145,54 +162,56 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 Event event = sourceTier.getEventAt(pos);
                                 String originalText = event.getDescription();
                                 String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
-                                pbd.addText(translation[0] + " " + translation[1]);
-                                Event translationEvent = new Event();
-                                translationEvent.setStart(event.getStart());
-                                translationEvent.setEnd(event.getEnd());
-                                translationEvent.setDescription(translation[0]);
-                                targetTier.addEvent(translationEvent);
-                                
-                                if (addLanguageTiers){
-                                    Event languageEvent = new Event();
-                                    languageEvent.setStart(event.getStart());
-                                    languageEvent.setEnd(event.getEnd());
-                                    languageEvent.setDescription(translation[1]);                                    
-                                    languageTier.addEvent(languageEvent);
-                                }
+                                addEvent(translation, event.getStart(), event.getEnd(), targetTier, languageTier);
                             }
-                        } else {
+                        } else if (!(useSegmentation)){
+                            String originalText = "";
+                            
                             List<List<Event>> segmentChains = sourceTier.getSegmentChains(table.getModel().getTranscription().getBody().getCommonTimeline());
                             for (List<Event> segmentChain : segmentChains){
-                                if (!(useSegmentation)){
-                                    String originalText = "";
-                                    for (Event e : segmentChain){
-                                        originalText+=e.getDescription();
-                                    }
-                                    String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
-                                    pbd.addText(translation[0] + " " + translation[1]);
-                                    Event translationEvent = new Event();
-                                    translationEvent.setStart(segmentChain.get(0).getStart());
-                                    translationEvent.setEnd(segmentChain.get(segmentChain.size()-1).getEnd());
-                                    translationEvent.setDescription(translation[0]);
-                                    targetTier.addEvent(translationEvent);
-
-                                    if (addLanguageTiers){
-                                        Event languageEvent = new Event();
-                                        languageEvent.setStart(segmentChain.get(0).getStart());
-                                        languageEvent.setEnd(segmentChain.get(segmentChain.size()-1).getEnd());
-                                        languageEvent.setDescription(translation[1]);                                    
-                                        languageTier.addEvent(languageEvent);
-                                    }                                    
-                                } else {
-                                    // to do : segmentation is used
+                                for (Event e : segmentChain){
+                                    originalText+=e.getDescription();
                                 }
+                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
+                                addEvent(translation, segmentChain.get(0).getStart(), segmentChain.get(segmentChain.size()-1).getEnd(), targetTier, languageTier);
+                            }
+                        } else {
+                            // segmentation is used
+                            SegmentedTranscription segmentedTranscription = segmentationAlgorithm.BasicToSegmented(table.getModel().getTranscription());
+                            SegmentedTier segmentedSourceTier = segmentedTranscription.getBody().getSegmentedTierAt(adjustedTierPosition);
+                            Segmentation wordSegmentation = segmentedSourceTier.getSegmentationWithName(wordSegmentationName);
+                            SegmentList allContributionChains = wordSegmentation.getAllSegmentsWithName("sc");
+                            for (Object o : allContributionChains){
+                                TimedSegment segmentChain = (TimedSegment)o;
+                                Vector allSegmentsMatching = segmentChain.getAllSegmentsMatching("[A-Za-z]*:(w|ip)");
+                                List<String> tokens = new ArrayList<>();
+                                for (Object o2 : allSegmentsMatching){
+                                    Describable d = (Describable)o2;
+                                    if(!(d.equals("(")||d.equals(")")||d.equals("[")||d.equals("]"))){
+                                        tokens.add(d.getDescription());
+                                    }
+                                }
+                                originalText = String.join(" ", tokens);
+                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
+                                addEvent(translation, segmentChain.getStart(), segmentChain.getEnd(), targetTier, languageTier);
+                                
                             }
                         }
-                    } catch (JexmaraldaException | IOException | URISyntaxException ex) {
+                    } catch (JexmaraldaException | IOException | URISyntaxException | SAXException ex) {
                         Logger.getLogger(DeepLAction.class.getName()).log(Level.SEVERE, null, ex);
                         pbd.addText("Error: " + ex.getLocalizedMessage());
+                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                            
+                        JOptionPane.showMessageDialog(pbd, ex);
+                    } catch (FSMException ex) {
+                        pbd.addText("Segmentation error.");
+                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                            
+                        int optionChosen = JOptionPane
+                                .showConfirmDialog(table, "Segmentation Error(s):\n " + ex.getLocalizedMessage() + "\nEdit errors?",
+                                "Segmentation Error(s)", JOptionPane.OK_CANCEL_OPTION);
+                        if (optionChosen==JOptionPane.OK_OPTION){
+                            table.getSegmentationErrorsAction.actionPerformed(null);
+                        }
                     }
-                        
                 }
                 
                 SwingUtilities.invokeLater(new Runnable() {
@@ -204,6 +223,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                             success();
                         } catch (IOException | JexmaraldaException ex) {
                             pbd.addText("Error: " + ex.getLocalizedMessage());
+                            pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                            
                             JOptionPane.showMessageDialog(pbd, ex);
                         }
                     }
@@ -212,32 +232,35 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                     
 
             }
+
+            private void addEvent(String[] translation, String start, String end, Tier targetTier, Tier languageTier) {
+                pbd.addText(translation[0] + " " + translation[1]);
+                Event translationEvent = new Event();
+                translationEvent.setStart(start);
+                translationEvent.setEnd(end);
+                translationEvent.setDescription(translation[0]);
+                targetTier.addEvent(translationEvent);
+
+                if (addLanguageTiers){
+                    Event languageEvent = new Event();
+                    languageEvent.setStart(start);
+                    languageEvent.setEnd(end);
+                    languageEvent.setDescription(translation[1]);                                    
+                    languageTier.addEvent(languageEvent);
+                }
+            }
             
         };
+        
+        
         deepLThread.start();
 
         
     }
     
     public void success() throws IOException, JexmaraldaException{       
-        /*int add = 1;
-        for (int tierPos : tierPositions){
-            Tier tier = resultTiers.get(tierPos);
-            table.getModel().getTranscription().getBody().insertTierAt(tier, tierPos + add);
-            add++;
-            System.out.println("Added " + tier.toXML());
-        }
-        if (languageTier){
-            int add2 = 2;
-            for (int tierPos : tierPositions){
-                Tier tier = languageTiers.get(tierPos);
-                table.getModel().getTranscription().getBody().insertTierAt(tier, tierPos + add);
-                add2+=2;
-                System.out.println("Added " + tier.toXML());
-            }
-            
-        }*/
         table.getModel().fireDataReset();
+        table.transcriptionChanged = true;
     }
 
     @Override

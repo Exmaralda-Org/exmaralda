@@ -710,7 +710,8 @@ public class BasicTranscription extends AbstractTranscription {
     // ********** EXMARALDA CONVERSIONS ***********
     // ********************************************
 
-    /** converts this BasicTranscription to a SegmentedTranscription */
+    /** converts this BasicTranscription to a SegmentedTranscription
+     * @return  */
     public SegmentedTranscription toSegmentedTranscription(){
         SegmentedTranscription result = new SegmentedTranscription();
         result.setHead(this.getHead());

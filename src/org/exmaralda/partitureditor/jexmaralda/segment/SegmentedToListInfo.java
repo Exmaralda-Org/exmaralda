@@ -35,7 +35,8 @@ public class SegmentedToListInfo {
         annotations = new Hashtable();
     }
     
-    /** creates a default conversion info of the given type */
+    /** creates a default conversion info of the given type
+     * @param st */
     public SegmentedToListInfo(SegmentedTranscription st, int type){
         this();
         switch (type){
