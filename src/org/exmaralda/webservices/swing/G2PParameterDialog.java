@@ -457,8 +457,8 @@ public class G2PParameterDialog extends javax.swing.JDialog {
     
     private void updateSegmentationPanel(){
         // need to uncomment the following two lines when and iff segmentation is implemented
-        //segmentCheckBox.setEnabled(segmentChainRadioButton.isSelected());
-        //segmentationComboBox.setEnabled(segmentChainRadioButton.isSelected() && segmentCheckBox.isSelected());        
+        segmentCheckBox.setEnabled(segmentChainRadioButton.isSelected());
+        segmentationComboBox.setEnabled(segmentChainRadioButton.isSelected() && segmentCheckBox.isSelected());        
     }
     /**
      * @param args the command line arguments

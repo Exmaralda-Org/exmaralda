@@ -19,6 +19,7 @@ import javax.swing.SwingUtilities;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.AbstractSegment;
 import org.exmaralda.partitureditor.jexmaralda.AbstractSegmentVector;
+import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Describable;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -80,6 +81,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
     
     private void deepL() throws JexmaraldaException, IOException, JDOMException, SAXException, FSMException{
         
+        
         // let the user define parameters
         DeepLParameterDialog deepLParameterDialog = new DeepLParameterDialog(table.parent, true);
         java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");
@@ -112,7 +114,8 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
         boolean useSegmentation = (Boolean) deepLParameters.get("USE-SEGMENTATION");
 
         // do this in a thread so we can report progress
-        Thread deepLThread = new Thread(){
+        Thread deepLThread;
+        deepLThread = new Thread(){
             @Override
             public void run() {
                 boolean useSelectedTier = (boolean) deepLParameters.get("SELECTED-TIER");
@@ -129,9 +132,9 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                 int segmentationCode = AbstractSegmentation.getSegmentationCode((String) deepLParameters.get("SEGMENTATION-ALGORITHM"));
                 AbstractSegmentation segmentationAlgorithm = AbstractSegmentation.getSegmentationAlgorithm(segmentationCode);
                 String wordSegmentationName = AbstractSegmentation.getWordSegmentationName(segmentationCode);
-
                 
 
+                
                 //resultTiers = new ArrayList<>();
                 //languageTiers = new ArrayList<>();
                 
@@ -164,7 +167,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
                                 addEvent(translation, event.getStart(), event.getEnd(), targetTier, languageTier);
                             }
-                        } else if (!(useSegmentation)){
+                        } else if (!(useSegmentation) || !(sourceTier.getType().equals("t"))){
                             String originalText = "";
                             
                             List<List<Event>> segmentChains = sourceTier.getSegmentChains(table.getModel().getTranscription().getBody().getCommonTimeline());
@@ -177,8 +180,16 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                             }
                         } else {
                             // segmentation is used
-                            SegmentedTranscription segmentedTranscription = segmentationAlgorithm.BasicToSegmented(table.getModel().getTranscription());
-                            SegmentedTier segmentedSourceTier = segmentedTranscription.getBody().getSegmentedTierAt(adjustedTierPosition);
+                            BasicTranscription copyTranscription = table.getModel().getTranscription().makeCopy();
+                            for (int pos=0; pos<copyTranscription.getBody().getNumberOfTiers(); pos++){
+                                Tier t = copyTranscription.getBody().getTierAt(pos);
+                                if (!(t.getID().equals(sourceTier.getID()))) {
+                                    copyTranscription.getBody().removeTierWithID(t.getID());
+                                    pos--;
+                                }
+                            }
+                            SegmentedTranscription segmentedTranscription = segmentationAlgorithm.BasicToSegmented(copyTranscription);
+                            SegmentedTier segmentedSourceTier = segmentedTranscription.getBody().getSegmentedTierAt(0);
                             Segmentation wordSegmentation = segmentedSourceTier.getSegmentationWithName(wordSegmentationName);
                             SegmentList allContributionChains = wordSegmentation.getAllSegmentsWithName("sc");
                             for (Object o : allContributionChains){
@@ -187,7 +198,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 List<String> tokens = new ArrayList<>();
                                 for (Object o2 : allSegmentsMatching){
                                     Describable d = (Describable)o2;
-                                    if(!(d.equals("(")||d.equals(")")||d.equals("[")||d.equals("]"))){
+                                    if(!(d.getDescription().equals("(")||d.getDescription().equals(")")||d.getDescription().equals("[")||d.getDescription().equals("]"))){
                                         tokens.add(d.getDescription());
                                     }
                                 }
@@ -197,21 +208,12 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 
                             }
                         }
-                    } catch (JexmaraldaException | IOException | URISyntaxException | SAXException ex) {
+                    } catch (JexmaraldaException | IOException | URISyntaxException | SAXException | FSMException ex) {
                         Logger.getLogger(DeepLAction.class.getName()).log(Level.SEVERE, null, ex);
                         pbd.addText("Error: " + ex.getLocalizedMessage());
-                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                            
+                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);             
                         JOptionPane.showMessageDialog(pbd, ex);
-                    } catch (FSMException ex) {
-                        pbd.addText("Segmentation error.");
-                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                            
-                        int optionChosen = JOptionPane
-                                .showConfirmDialog(table, "Segmentation Error(s):\n " + ex.getLocalizedMessage() + "\nEdit errors?",
-                                "Segmentation Error(s)", JOptionPane.OK_CANCEL_OPTION);
-                        if (optionChosen==JOptionPane.OK_OPTION){
-                            table.getSegmentationErrorsAction.actionPerformed(null);
-                        }
-                    }
+                    } 
                 }
                 
                 SwingUtilities.invokeLater(new Runnable() {
@@ -229,8 +231,8 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                     }
                 });
                 
-                    
-
+                
+                
             }
 
             private void addEvent(String[] translation, String start, String end, Tier targetTier, Tier languageTier) {
