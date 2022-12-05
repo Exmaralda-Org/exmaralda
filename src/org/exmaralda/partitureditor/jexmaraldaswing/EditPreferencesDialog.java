@@ -297,7 +297,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         resetButton = new javax.swing.JButton();
 
         setTitle("Preferences");
-        setPreferredSize(new java.awt.Dimension(600, 450));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -333,10 +332,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        tabbedPane.setMinimumSize(new java.awt.Dimension(120, 22));
-        tabbedPane.setPreferredSize(new java.awt.Dimension(600, 300));
-
-        fontsPanel.setLayout(new java.awt.BorderLayout());
+        fontsPanel.setLayout(new javax.swing.BoxLayout(fontsPanel, javax.swing.BoxLayout.Y_AXIS));
 
         fontSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Fonts"));
 
@@ -357,9 +353,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeTierFontButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeTierFontButton.setText("Change...");
-        changeTierFontButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeTierFontButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeTierFontButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeTierFontButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeTierFontButtonActionPerformed(evt);
@@ -387,9 +380,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeGeneralPurposeFontButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeGeneralPurposeFontButton.setText("Change...");
-        changeGeneralPurposeFontButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeGeneralPurposeFontButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeGeneralPurposeFontButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeGeneralPurposeFontButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeGeneralPurposeFontButtonActionPerformed(evt);
@@ -399,7 +389,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         fontSelectionPanel.add(generalPurposeFontPanel);
 
-        fontsPanel.add(fontSelectionPanel, java.awt.BorderLayout.CENTER);
+        fontsPanel.add(fontSelectionPanel);
 
         underlineMethodPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Underline Method"));
         underlineMethodPanel.setMaximumSize(new java.awt.Dimension(32767, 200));
@@ -427,7 +417,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         underlineMethodPanel.add(jPanel11);
 
-        fontsPanel.add(underlineMethodPanel, java.awt.BorderLayout.SOUTH);
+        fontsPanel.add(underlineMethodPanel);
 
         tabbedPane.addTab("Fonts", fontsPanel);
 
@@ -443,9 +433,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeHead2HTMLButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeHead2HTMLButton.setText("Change...");
-        changeHead2HTMLButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeHead2HTMLButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeHead2HTMLButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeHead2HTMLButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeHead2HTMLButtonActionPerformed(evt);
@@ -465,9 +452,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeSpeakertable2TranscriptionButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeSpeakertable2TranscriptionButton.setText("Change...");
-        changeSpeakertable2TranscriptionButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeSpeakertable2TranscriptionButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeSpeakertable2TranscriptionButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeSpeakertable2TranscriptionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeSpeakertable2TranscriptionButtonActionPerformed(evt);
@@ -487,9 +471,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeTranscription2FormattableButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeTranscription2FormattableButton.setText("Change...");
-        changeTranscription2FormattableButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeTranscription2FormattableButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeTranscription2FormattableButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeTranscription2FormattableButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeTranscription2FormattableButtonActionPerformed(evt);
@@ -509,9 +490,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeFreeStylesheetVisualisationButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeFreeStylesheetVisualisationButton.setText("Change...");
-        changeFreeStylesheetVisualisationButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeFreeStylesheetVisualisationButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeFreeStylesheetVisualisationButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeFreeStylesheetVisualisationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeFreeStylesheetVisualisationButtonActionPerformed(evt);
@@ -531,9 +509,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeHIATUtteranceList2HTMLButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeHIATUtteranceList2HTMLButton.setText("Change...");
-        changeHIATUtteranceList2HTMLButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeHIATUtteranceList2HTMLButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeHIATUtteranceList2HTMLButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeHIATUtteranceList2HTMLButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeHIATUtteranceList2HTMLButtonActionPerformed(evt);
@@ -896,7 +871,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         playerSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose a media player"));
         playerSelectionPanel.setMaximumSize(new java.awt.Dimension(2147483647, 5000));
         playerSelectionPanel.setMinimumSize(new java.awt.Dimension(166, 260));
-        playerSelectionPanel.setPreferredSize(new java.awt.Dimension(1211, 260));
+        playerSelectionPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
         playerSelectionPanel.setLayout(new javax.swing.BoxLayout(playerSelectionPanel, javax.swing.BoxLayout.Y_AXIS));
 
         mediaPlayersButtonGroup.add(basPlayerRadioButton);
