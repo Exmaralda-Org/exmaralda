@@ -124,8 +124,12 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
 
         directoryPanel.setLayout(new javax.swing.BoxLayout(directoryPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        directoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         directoryLabel.setText("Tree Tagger Directory: ");
         directoryLabel.setToolTipText("Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the \"bin\" directory!");
+        directoryLabel.setMaximumSize(new java.awt.Dimension(200, 18));
+        directoryLabel.setMinimumSize(new java.awt.Dimension(200, 18));
+        directoryLabel.setPreferredSize(new java.awt.Dimension(200, 18));
         directoryPanel.add(directoryLabel);
 
         directoryTextField.setToolTipText("Choose the TOP LEVEL folder of your TreeTagger installation, i.e. the folder containing the \"bin\" directory!");
@@ -146,11 +150,12 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
 
         parameterFilePanel.setLayout(new javax.swing.BoxLayout(parameterFilePanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        parametersFileLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         parametersFileLabel.setText("Parameters file: ");
         parametersFileLabel.setToolTipText("Choose a suitable tree tagger parameter file (suffix *.par)");
-        parametersFileLabel.setMaximumSize(new java.awt.Dimension(113, 14));
-        parametersFileLabel.setMinimumSize(new java.awt.Dimension(113, 14));
-        parametersFileLabel.setPreferredSize(new java.awt.Dimension(113, 14));
+        parametersFileLabel.setMaximumSize(new java.awt.Dimension(200, 18));
+        parametersFileLabel.setMinimumSize(new java.awt.Dimension(200, 18));
+        parametersFileLabel.setPreferredSize(new java.awt.Dimension(200, 18));
         parameterFilePanel.add(parametersFileLabel);
 
         parametersFileTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -173,10 +178,11 @@ public class TreeTaggerParametersPanel extends javax.swing.JPanel {
 
         abbFilePanel.setLayout(new javax.swing.BoxLayout(abbFilePanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        abbFileLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         abbFileLabel.setText("Abbreviations file: ");
-        abbFileLabel.setMaximumSize(new java.awt.Dimension(113, 14));
-        abbFileLabel.setMinimumSize(new java.awt.Dimension(113, 14));
-        abbFileLabel.setPreferredSize(new java.awt.Dimension(113, 14));
+        abbFileLabel.setMaximumSize(new java.awt.Dimension(200, 18));
+        abbFileLabel.setMinimumSize(new java.awt.Dimension(200, 18));
+        abbFileLabel.setPreferredSize(new java.awt.Dimension(200, 18));
         abbFilePanel.add(abbFileLabel);
 
         abbFileTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));

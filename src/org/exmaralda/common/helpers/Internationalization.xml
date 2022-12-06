@@ -1892,22 +1892,22 @@
 					<translation lang="zh" trans="偏好设置..."/>
 				</item>
 				<item id="Default tier font">
-					<translation lang="en" trans="Default tier font"/>
-					<translation lang="de" trans="Standard-Spurschriftart"/>
-					<translation lang="fr" trans="Police du piste standard"/>
-					<translation lang="tr" trans="Standart şerit yazı tipi"/>
-					<translation lang="cz" trans="Font stopy"/>
-					<translation lang="es" trans="Tipo de letra capa estándar"/>
-					<translation lang="zh" trans="层默认字体..."/>
+					<translation lang="en" trans="Default tier font: "/>
+					<translation lang="de" trans="Standard-Spurschriftart: "/>
+					<translation lang="fr" trans="Police du piste standard: "/>
+					<translation lang="tr" trans="Standart şerit yazı tipi: "/>
+					<translation lang="cz" trans="Font stopy: "/>
+					<translation lang="es" trans="Tipo de letra capa estándar: "/>
+					<translation lang="zh" trans="层默认字体: "/>
 				</item>
 				<item id="Default general purpose font">
-					<translation lang="en" trans="Default general purpose font"/>
-					<translation lang="de" trans="Standard-Schriftart"/>
-					<translation lang="fr" trans="Police standard"/>
-					<translation lang="tr" trans="Standart yazı tipi"/>
-					<translation lang="cz" trans="Standardní font"/>
-					<translation lang="es" trans="Tipo de letra estándar"/>
-					<translation lang="zh" trans="默认通用字体..."/>
+					<translation lang="en" trans="Default general purpose font: "/>
+					<translation lang="de" trans="Standard-Schriftart: "/>
+					<translation lang="fr" trans="Police standard: "/>
+					<translation lang="tr" trans="Standart yazı tipi: "/>
+					<translation lang="cz" trans="Standardní font: "/>
+					<translation lang="es" trans="Tipo de letra estándar: "/>
+					<translation lang="zh" trans="默认通用字体: "/>
 				</item>
 				<item id="Set the default tier font">
 					<translation lang="en" trans="Set the default tier font"/>
@@ -2037,31 +2037,31 @@
 					<translation lang="zh" trans="启用自动保存"/>
 				</item>
 				<item id="Auto save filename">
-					<translation lang="en" trans="Filename"/>
-					<translation lang="de" trans="Dateiname"/>
-					<translation lang="fr" trans="Nom de fichier"/>
-					<translation lang="tr" trans="Dosya adı"/>
-					<translation lang="cz" trans="Jméno souboru"/>
-					<translation lang="es" trans="Nobre de archivo"/>
-					<translation lang="zh" trans="自动保存文件名"/>
+					<translation lang="en" trans="Auto save filename: "/>
+					<translation lang="de" trans="Dateiname: "/>
+					<translation lang="fr" trans="Nom de fichier: "/>
+					<translation lang="tr" trans="Dosya adı: "/>
+					<translation lang="cz" trans="Jméno souboru: "/>
+					<translation lang="es" trans="Nobre de archivo: "/>
+					<translation lang="zh" trans="自动保存文件名: "/>
 				</item>
 				<item id="Auto save path">
-					<translation lang="en" trans="Directory"/>
-					<translation lang="de" trans="Verzeichnis"/>
-					<translation lang="fr" trans="Dossier"/>
-					<translation lang="tr" trans="Dizin"/>
-					<translation lang="cz" trans="Adresář"/>
-					<translation lang="es" trans="Directorio"/>
-					<translation lang="zh" trans="自动保存路径"/>
+					<translation lang="en" trans="Auto save path: "/>
+					<translation lang="de" trans="Verzeichnis: "/>
+					<translation lang="fr" trans="Dossier: "/>
+					<translation lang="tr" trans="Dizin: "/>
+					<translation lang="cz" trans="Adresář: "/>
+					<translation lang="es" trans="Directorio: "/>
+					<translation lang="zh" trans="自动保存路径: "/>
 				</item>
 				<item id="Auto save interval">
-					<translation lang="en" trans="Interval"/>
-					<translation lang="de" trans="Speicherintervall"/>
-					<translation lang="fr" trans="Intervalle d'enrégistrement"/>
-					<translation lang="tr" trans="Ara"/>
-					<translation lang="cz" trans="Interval ukládání"/>
-					<translation lang="es" trans="Intervalo para guardar"/>
-					<translation lang="zh" trans="自动保存时段"/>
+					<translation lang="en" trans="Auto save interval: "/>
+					<translation lang="de" trans="Speicherintervall: "/>
+					<translation lang="fr" trans="Intervalle d'enrégistrement: "/>
+					<translation lang="tr" trans="Ara: "/>
+					<translation lang="cz" trans="Interval ukládání: "/>
+					<translation lang="es" trans="Intervalo para guardar: "/>
+					<translation lang="zh" trans="自动保存时段: "/>
 				</item>
 				<item id="min">
 					<translation lang="en" trans="min"/>
