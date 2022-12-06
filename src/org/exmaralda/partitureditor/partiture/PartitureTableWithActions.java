@@ -285,7 +285,7 @@ public class PartitureTableWithActions extends PartitureTable
             timelineItemTableCellRenderer = new org.exmaralda.partitureditor.partiture.TimelineItemTableCellRenderer(this);
             setCellRenderer(Class.forName("org.exmaralda.partitureditor.jexmaralda.TimelineItem"), timelineItemTableCellRenderer);
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
 
     }
