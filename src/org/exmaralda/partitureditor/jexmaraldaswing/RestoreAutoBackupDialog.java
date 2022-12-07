@@ -22,13 +22,21 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
     public boolean restore = false;
     
     
-    /** Creates new form RestoreAutoBackupDialog */
+    /** Creates new form RestoreAutoBackupDialog
+     * @param parent
+     * @param modal
+     * @param table */
     public RestoreAutoBackupDialog(java.awt.Frame parent, boolean modal, PartitureTableWithActions table) {
         super(parent, modal);
         initComponents();
         tableModel = new AutoBackupTableModel(table.autoSaveThread.PATH, table.autoSaveThread.FILENAME);
         this.backupFilesTable.setModel(tableModel);
         backupFilesTable.getSelectionModel().addListSelectionListener(this);
+        backupFilesTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        backupFilesTable.getColumnModel().getColumn(0).setPreferredWidth(350);
+        backupFilesTable.getColumnModel().getColumn(0).setPreferredWidth(300);
+        backupFilesTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+        backupFilesTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
     
     public File getSelectedFile(){
@@ -45,7 +53,7 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tableScrollPane = new javax.swing.JScrollPane();
         backupFilesTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         openButton = new javax.swing.JButton();
@@ -60,6 +68,9 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Restore Auto Backup");
+        setPreferredSize(new java.awt.Dimension(900, 509));
+
+        tableScrollPane.setPreferredSize(new java.awt.Dimension(600, 400));
 
         backupFilesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,9 +89,9 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
                 backupFilesTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(backupFilesTable);
+        tableScrollPane.setViewportView(backupFilesTable);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(tableScrollPane, java.awt.BorderLayout.CENTER);
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/document-open.png"))); // NOI18N
         openButton.setText("Restore backup");
@@ -207,8 +218,8 @@ public class RestoreAutoBackupDialog extends javax.swing.JDialog implements List
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton openButton;
+    private javax.swing.JScrollPane tableScrollPane;
     // End of variables declaration//GEN-END:variables
 
     @Override
