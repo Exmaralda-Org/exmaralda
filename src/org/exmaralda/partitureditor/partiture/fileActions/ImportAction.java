@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
+import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -104,7 +105,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         ExmaraldaApplication ea = (ExmaraldaApplication)(table.parent);
         String userNode = ea.getPreferencesNode();
         java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(userNode);
-        String startDirectory = settings.get("LastImportDirectory", "");
+        String startDirectory = settings.get("LastImportDirectory", PreferencesUtilities.getProperty("workingDirectory", ""));
 
         // determine what to import
         ImportFileDialog dialog = new ImportFileDialog(startDirectory);
@@ -115,7 +116,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         if (retValue!=javax.swing.JFileChooser.APPROVE_OPTION) return;
         ParameterFileFilter selectedFileFilter = (ParameterFileFilter)(dialog.getFileFilter());
         File selectedFile = dialog.getSelectedFile();
-        settings.put("LastImportDirectory", selectedFile.getParent());
+        settings.put("LastImportDirectory", selectedFile.getAbsolutePath());
         String filename = selectedFile.getAbsolutePath();
 
         // now do the real import      
