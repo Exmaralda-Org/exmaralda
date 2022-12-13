@@ -21,26 +21,32 @@ public class AbstractTierBody extends AbstractBody {
     // **************** METHODS FOR MANIPULATING TIERS IN GENERAL *************************
     
     /** returns position of tier with specified id, -1 if there is 
-    no such tier*/
+    no such ti
+     * @param id
+     * @return */
     public int lookupID(String id){
-        if (positions.containsKey(id)) { return ((Integer)positions.get(id)).intValue(); }
+        if (positions.containsKey(id)) { return ((Integer)positions.get(id)); }
         return -1;
     }
 
-    /** returns true if the body contains a tier with the specified id, false otherwise */
+    /** returns true if the body contains a tier with the specified id, false otherwise
+     * @param id
+     * @return  */
     public boolean containsTierWithID(String id){
-        if (positions.containsKey(id)) { return true; }
-        return false;
+        return positions.containsKey(id);
     }
 
-    /** adds tier t under its ID if this ID is free, otherwise throws a JexmaraldaException (code 6) */
+    /** adds tier t under its ID if this ID is free, otherwise throws a JexmaraldaException (code 6)
+     * @param t
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void addTier (AbstractTier t) throws JexmaraldaException {
-        if (lookupID(t.getID())!=-1){throw new JexmaraldaException(6, new String("ID " + t.getID() + " already exists in this transcription."));}
+        if (lookupID(t.getID())!=-1){throw new JexmaraldaException(6, ("ID " + t.getID() + " already exists in this transcription."));}
         addElement(t);
         positions.put(t.getID(), getNumberOfTiers()-1);       
     }            
 
-    /** removes the tier at the specified position */
+    /** removes the tier at the specified position
+     * @param position */
     public void removeTierAt(int position) {        
         positions.remove(((AbstractTier)elementAt(position)).getID());
         remove(position);
@@ -58,7 +64,7 @@ public class AbstractTierBody extends AbstractBody {
     /** returns the tier with the given ID. If no such tier exists, throws
      * a corresponding Jexmaralda Exception */
     AbstractTier getAbstractTierWithID(String id) throws JexmaraldaException{
-        if (lookupID(id)==-1) { throw new JexmaraldaException(5, new String("No such tier: " + id));}
+        if (lookupID(id)==-1) { throw new JexmaraldaException(5, ("No such tier: " + id));}
         return (AbstractTier)elementAt(lookupID(id));
     }
 
@@ -67,12 +73,14 @@ public class AbstractTierBody extends AbstractBody {
         return (AbstractTier)elementAt(pos);
     }
 
-    /** returns number of tiers in the transcription */
+    /** returns number of tiers in the transcription
+     * @return  */
     public int getNumberOfTiers(){
         return size();
     }
     
-    /** returns an array with all tier IDs in this body */
+    /** returns an array with all tier IDs in this body
+     * @return  */
     public String[] getAllTierIDs(){
         Vector result = new Vector();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
@@ -81,8 +89,11 @@ public class AbstractTierBody extends AbstractBody {
         return StringUtilities.stringVectorToArray(result);
     }    
     
-    /** returns the IDs of all tiers that match the specified properties,
-     * i.e. that have the specified speaker and are of the specified type */
+    /** *  returns the IDs of all tiers that match the specified properties,
+     * i.e.that have the specified speaker and are of the specified type
+     * @param speakerID
+     * @param t
+     * @return  */
     public String[] getTiersWithProperties(String speakerID, String t){
         Vector result = new Vector();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
@@ -94,8 +105,10 @@ public class AbstractTierBody extends AbstractBody {
         return StringUtilities.stringVectorToArray(result);
     }    
     
-    /** returns the IDs of all tiers that match the specified properties,
-     * i.e. that have the specified speaker and are of the specified type */
+    /** *  returns the IDs of all tiers that match the specified properties,
+     * i.e.that have the specified speaker and are of the specified type
+     * @param t
+     * @return  */
     public String[] getTiersOfType(String t){
         Vector result = new Vector();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
@@ -108,31 +121,40 @@ public class AbstractTierBody extends AbstractBody {
     }    
 
     /** inserts the specified tier before the one with the specified ID
-     *  throws an exception if the latter does not exist */
+     *  throws an exception if the latter does not exist
+     * @param tier
+     * @param id
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void insertTierBeforeTierWithID(AbstractTier tier, String id) throws JexmaraldaException {
-        if (lookupID(id)==-1) { throw new JexmaraldaException(5, new String("No such tier: " + id));}
-        if (lookupID(tier.getID())!=-1){throw new JexmaraldaException(6, new String("ID " + tier.getID() + " already exists in this transcription."));}
+        if (lookupID(id)==-1) { throw new JexmaraldaException(5, ("No such tier: " + id));}
+        if (lookupID(tier.getID())!=-1){throw new JexmaraldaException(6, ("ID " + tier.getID() + " already exists in this transcription."));}
         int position = lookupID(id);
         this.insertElementAt(tier, position);
         updatePositions();
     }
     
-    /** inserts the given tier at the given position */
+    /** inserts the given tier at the given position
+     * @param tier
+     * @param pos
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void insertTierAt(AbstractTier tier, int pos) throws JexmaraldaException {
-        if (lookupID(tier.getID())!=-1){throw new JexmaraldaException(6, new String("ID " + tier.getID() + " already exists in this transcription."));}
+        if (lookupID(tier.getID())!=-1){throw new JexmaraldaException(6, ("ID " + tier.getID() + " already exists in this transcription."));}
         this.insertElementAt(tier, pos);
         updatePositions();
     }
     
     
-    /** removes the tier with the specified id */
+    /** removes the tier with the specified id
+     * @param id
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void removeTierWithID (String id) throws JexmaraldaException {
-        if (lookupID(id)==-1) { throw new JexmaraldaException(5, new String("No such tier: " + id));}
+        if (lookupID(id)==-1) { throw new JexmaraldaException(5, ("No such tier: " + id));}
         removeTierAt(lookupID(id));
     }
 
     
-    /** returns a free id */
+    /** returns a free id
+     * @return  */
     public String getFreeID(){
         if (getNumberOfTiers()>0) {
             int i=0;

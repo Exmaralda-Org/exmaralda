@@ -2,6 +2,8 @@ package org.exmaralda.partitureditor.jexmaralda;
 
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /*
  * Timeline.java
  *
@@ -611,12 +613,19 @@ public class Timeline extends Vector {
             return;
         }
         String id2 = getNextTimeID(tli.getTime());
-        if (id2==null){ // i.e. no tli after
-            try {addTimelineItem(tli);}
-            catch (JexmaraldaException je){je.printStackTrace();}
+        if (id2==null){ 
+            try {
+            // i.e. no tli after
+            addTimelineItem(tli);
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(Timeline.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-            try {insertTimelineItemBefore(id2,tli);}
-            catch (JexmaraldaException je){je.printStackTrace();}
+            try {
+                insertTimelineItemBefore(id2,tli);
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(Timeline.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }                
     }
     
@@ -662,7 +671,7 @@ public class Timeline extends Vector {
     }
 
     /** makes uniform timeline IDs */
-    Hashtable normalize(){
+    public Hashtable normalize(){
         Hashtable mappings = new Hashtable();
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
             TimelineItem tli = getTimelineItemAt(pos);

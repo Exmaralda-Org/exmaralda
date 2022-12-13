@@ -51,16 +51,21 @@ public class BasicTranscription extends AbstractTranscription {
     }
 
     /** reads in a new BasicTranscription from the specified file
-     * @param inputFileName */
+     * @param inputFileName
+     * @throws org.xml.sax.SAXException
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public BasicTranscription (String inputFileName) throws SAXException, JexmaraldaException{
         this(inputFileName, true);
     }
     
     public BasicTranscription(String inputFileName, boolean check) throws SAXException, JexmaraldaException {
         super();
+        System.out.println("Reading Basic Transcription from " + inputFileName);
         body = new BasicBody();
         org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader();
         BasicTranscription t = reader.readFromFile(inputFileName);
+        System.out.println(inputFileName + " read.");
+        
         if (check){
             t.check();
         }
@@ -71,13 +76,12 @@ public class BasicTranscription extends AbstractTranscription {
             // changed 13-08-2010
             // ".." in relative paths allowed now
         getHead().getMetaInformation().resolveReferencedFile(inputFileName, MetaInformation.NEW_METHOD);
-        //}
         resolveLinks(inputFileName);  
         
     }
 
     public Hashtable<String, String[]> getAnnotationMismatches() {
-        Hashtable<String, String[]> allMismatches = new Hashtable<String, String[]>();
+        Hashtable<String, String[]> allMismatches = new Hashtable<>();
         for (int pos=0; pos<getBody().getNumberOfTiers(); pos++){
             Tier t = getBody().getTierAt(pos);
             String[] theseMismatches = t.getAnnotationMismatches(this);

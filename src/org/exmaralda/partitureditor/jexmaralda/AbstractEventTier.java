@@ -181,7 +181,7 @@ public class AbstractEventTier extends AbstractTier {
                         result.add(e);
                     }
                 } catch (JexmaraldaException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getLocalizedMessage());
                 }
             }
         }
@@ -219,23 +219,26 @@ public class AbstractEventTier extends AbstractTier {
     }
 
 
-    /** removes the event with start id id, does nothing if there is no fragment with start id 
+    /** *  removes the event with start id id, does nothing if there is no fragment with start id 
      *  N.B.: if the tier is not stratified, this may remove only one event although
      *  there are several events with the specified start id
-     *  to make sure to remove all events (i.e. if not sure that the tier is stratified)
-     *  use removeEvent<b>s</b>AtStartPoint(id) */
+     *  to make sure to remove all events (i.e.if not sure that the tier is stratified)
+  use removeEvent<b>s</b>AtStartPoint(id)
+     * @param id
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void removeEventAtStartPoint (String id) throws JexmaraldaException{
         if (!containsEventAtStartPoint(id)){
-            throw new JexmaraldaException(7, new String ("No event starting at " + id));
+            throw new JexmaraldaException(7, ("No event starting at " + id));
         }
         removeElementAt(lookupID(id));
         updatePositions();
     }
         
-    /** removes all events starting at the specified start point 
+    /** *  removes all events starting at the specified start point 
      *  N.B.: this will be slower then removeEventAtStartPoint
-     *  but will remove ALL events, i.e. works fine also for 
-     *  non-stratified tiers */
+     *  but will remove ALL events, i.e.works fine also for 
+  non-stratified tiers
+     * @param id */
     public void removeEventsAtStartPoint(String id){
         for (int pos=0; pos<getNumberOfEvents(); pos++){
             if (getEventAt(pos).getStart().equals(id)){
@@ -248,8 +251,9 @@ public class AbstractEventTier extends AbstractTier {
     
     // ******* METHODS TO DO WITH THE TIMELINE *********
     
-    /** makes uniform timeline IDs */
-    void normalize(Hashtable timelineMappings){
+    /** makes uniform timeline IDs
+     * @param timelineMappings */
+    public void normalize(Hashtable timelineMappings){
         for (int pos=0; pos<getNumberOfEvents(); pos++){
             Event event = getEventAt(pos);
             String oldStart = event.getStart();
@@ -262,8 +266,10 @@ public class AbstractEventTier extends AbstractTier {
         updatePositions();
     }
 
-    /** checks if this tier respects the specified timeline, i.e. returns true iff it contains no events
-     * that use a timeline item not contained in this timeline */
+    /** *  checks if this tier respects the specified timeline, i.e.returns true iff it contains no events
+        that use a timeline item not contained in this timeline
+     * @param tl
+     * @return  */
     public boolean respectsTimeline(Timeline tl){
         if (getNumberOfEvents()==0) {return true;}
         String[] startIDs = this.getAllStartIDs();
@@ -425,30 +431,6 @@ public class AbstractEventTier extends AbstractTier {
         
        return unsortedEvents;
        
-        /*Event[] sortedEvents = new Event[unsortedEvents.length];
-        int count = 0;
-        int checkLength=0;
-        System.out.println(unsortedEvents.length);
-        while (count<unsortedEvents.length) {
-            for (int i=0; i<unsortedEvents.length; i++){
-                String start = unsortedEvents[i].getStart();
-                String end = unsortedEvents[i].getEnd();
-                //System.out.println(start + " / " + end + " / " + timeline.calculateSpan(start,end) + " / " + checkLength);
-                if (timeline.calculateSpan(start,end)==checkLength){
-                    sortedEvents[count]=unsortedEvents[i].makeCopy();
-                    count++;
-                }
-            }
-            checkLength++;
-        }
-        // reverse the order
-        count = 0;
-        Event[] result = new Event[unsortedEvents.length];
-        for (int i=sortedEvents.length-1; i>=0; i--){
-            result[count] = sortedEvents[i];
-            count++;
-        }
-        return result;*/
     }
     
     /** returns true if this tier, according to the given timeline
@@ -465,13 +447,13 @@ public class AbstractEventTier extends AbstractTier {
     
     // ********** STRATIFICATION **************
 
-    /** checks the well-formedness of this tier, i.e.
-     * everything that is not covered by the DTD 
-     * deprecated since version 1.1.1. 
-     * reintroduced in version 1.3.3., 22-03-2007 */
+    /** *  checks the well-formedness of this tier, i.e.everything that is not covered by the DTD 
+ deprecated since version 1.1.1.reintroduced in version 1.3.3., 22-03-2007
+     * @param timeline
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void check (Timeline timeline) throws JexmaraldaException{
         String message = "";
-        Vector<Event> badEvents = new Vector<Event>();
+        Vector<Event> badEvents = new Vector<>();
         for (int pos=0; pos<getNumberOfEvents();pos++){
             Event e = getEventAt(pos);
             int start = timeline.lookupID(e.getStart());
@@ -493,7 +475,7 @@ public class AbstractEventTier extends AbstractTier {
      * @param timeline
      */
     public String repair(Timeline timeline){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int pos=0; pos<getNumberOfEvents();pos++){
             Event e = getEventAt(pos);
             int start = timeline.lookupID(e.getStart());
@@ -605,7 +587,7 @@ public class AbstractEventTier extends AbstractTier {
             }
             sort(timeline);
         }
-        if (stratifyingMethod==this.STRATIFY_BY_DISTRIBUTION){
+        if (stratifyingMethod==AbstractEventTier.STRATIFY_BY_DISTRIBUTION){
             // make new tiers and distribute the removed elements onto these
             Vector<Tier> newTiers = new Vector<Tier>();
             while (!removedEvents.isEmpty()){
@@ -634,7 +616,7 @@ public class AbstractEventTier extends AbstractTier {
 
     /** returns the meta information as an XML-element &lt;ud-tier-information&gt; */
     String udInformationToXML(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (udTierInformation.getNumberOfAttributes()>0){
             sb.append("<ud-tier-information>");
             sb.append(udTierInformation.toXML());
@@ -645,7 +627,7 @@ public class AbstractEventTier extends AbstractTier {
     
     /** returns all events as an XML-string */
     String eventsToXML(){ 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int pos=0; pos<getNumberOfEvents(); pos++){
            sb.append(getEventAt(pos).toXML());
         }

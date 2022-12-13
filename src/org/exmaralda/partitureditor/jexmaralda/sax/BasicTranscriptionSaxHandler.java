@@ -7,12 +7,9 @@ import org.exmaralda.partitureditor.jexmaralda.*;
  *
  * Created on 7. Maerz 2001, 09:57
  */
-import java.io.*;
 import java.util.*;
 import org.xml.sax.*;
-import org.xml.sax.helpers.XMLReaderFactory;
 //import com.sun.xml.parser.Resolver;
-import org.exmaralda.partitureditor.jexmaralda.sax.SAXUtilities;
 
 
 /**
@@ -61,14 +58,16 @@ class BasicTranscriptionSaxHandler extends org.xml.sax.helpers.DefaultHandler {
         return rootElementName;
     }
     
+    @Override
     public void startDocument(){
-      System.out.println("started reading document...");
+      //System.out.println("started reading document...");
       transcription = new BasicTranscription();
     }
 
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void endDocument(){
-        System.out.println("document read.");
+        //System.out.println("document read.");
         transcription.setTierFormatTable(tierFormatTableSaxHandler.getTierFormatTable());
     }
 
