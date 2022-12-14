@@ -25,18 +25,22 @@ import org.jdom.filter.ElementFilter;
  */
 public class DerewoWordlist {
 
-    HashSet<String> allWords = new HashSet<String>();
+    HashSet<String> allWords = new HashSet<>();
     String DEREWO_PATH = "/org/exmaralda/orthonormal/lexicon/derewo_wordlist.txt";
     
     public DerewoWordlist() throws IOException {
         // read the Wordlist from the internal file
         java.io.InputStream is = getClass().getResourceAsStream(DEREWO_PATH);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        String nextLine = new String();
+        String nextLine;
         while ((nextLine = br.readLine()) != null){
             allWords.add(nextLine);
         }
         br.close();                
+    }
+    
+    public boolean wordExists(String word){
+        return allWords.contains(word);
     }
     
     public int checkNormalizedFolkerTranscription(Document doc){
@@ -61,9 +65,7 @@ public class DerewoWordlist {
             Document doc = FileIO.readDocumentFromLocalFile("C:\\Users\\Schmidt\\Desktop\\FOLK\\FOLK-Normal\\transcripts\\1-Tagged-Normal\\FOLK_E_00047_SE_01_T_02_DF_01.fln");
             derewoWordlist.checkNormalizedFolkerTranscription(doc);
             FileIO.writeDocumentToLocalFile(new File("C:\\Users\\Schmidt\\Desktop\\derewo_test.fln"), doc);
-        } catch (JDOMException ex) {
-            Logger.getLogger(DerewoWordlist.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (JDOMException | IOException ex) {
             Logger.getLogger(DerewoWordlist.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

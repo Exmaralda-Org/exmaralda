@@ -36,12 +36,21 @@ public class Tier extends AbstractEventTier {
         super();
     }
 
-    /** Creates new Tier with id i, speaker id s, category c, type t*/
+    /** Creates new Tier with id i, speaker id s, category c, type
+     * @param i
+     * @param s
+     * @param c
+     * @param t*/
     public Tier(String i, String s, String c, String t) {
         super(i,s,c,t);
     }
     
-    /** Creates new Tier with id i, speaker id s, category c, type t, display-name d*/
+    /** Creates new Tier with id i, speaker id s, category c, type t, display-name
+     * @param i
+     * @param s
+     * @param c
+     * @param t
+     * @param d*/
     public Tier(String i, String s, String c, String t, String d) {
         super(i,s,c,t,d);
     }
@@ -61,7 +70,7 @@ public class Tier extends AbstractEventTier {
         }
         if (parentTier==null) return null;
         
-        Vector<String> startPoints = new Vector<String>();
+        Vector<String> startPoints = new Vector<>();
         for (int pos2=0; pos2<getNumberOfEvents(); pos2++){
             Event annotation = getEventAt(pos2);
             String s = annotation.getStart();
@@ -141,7 +150,7 @@ public class Tier extends AbstractEventTier {
                 double time2 = timeline.getTimelineItemWithID(event.getEnd()).getTime();
                 totalTime += (time2-time1);
             } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
             }
         }
         return totalTime;

@@ -105,7 +105,9 @@ public class IOUtilities {
     public static String elementToString(Element element, boolean prettyPrint){
         XMLOutputter xmlOutputter = new XMLOutputter();
         if (prettyPrint) {
-            xmlOutputter.setFormat(Format.getPrettyFormat());
+            Format prettyFormat = Format.getPrettyFormat();
+            prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);
+            xmlOutputter.setFormat(prettyFormat);
         }
         return xmlOutputter.outputString(element);
     }

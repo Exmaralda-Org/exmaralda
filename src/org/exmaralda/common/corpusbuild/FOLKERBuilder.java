@@ -9,8 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -38,21 +42,25 @@ import org.xml.sax.SAXException;
  */
 public class FOLKERBuilder {
 
+
+    public enum BUILD_METHODS {BUILD_VIA_EXB, BUILD_VIA_EXS, BUILD_VIA_ISO}
+    
     File resultFile;
-    Vector<File> folkerFiles;
-    Hashtable<String,File[]> communicationsWithExmaraldaFiles = new Hashtable<String, File[]>();
-    Hashtable<String,File> communicationsWithFOLKERFiles = new Hashtable<String, File>();
-    Hashtable<String, Element> speakers = new Hashtable<String, Element>();
+    List<File> folkerFiles;
+    Map<String,File[]> communicationsWithExmaraldaFiles = new Hashtable<>();
+    Map<String,File> communicationsWithFOLKERFiles = new Hashtable<>();
+    Map<String, Element> speakers = new Hashtable<>();
     String directory;
     boolean separateDirectory;
     boolean writeBasic;
     int countSegmentationErrors = 0;
+    BUILD_METHODS buildMethod = BUILD_METHODS.BUILD_VIA_EXB;
 
-    private Vector<SearchListenerInterface> listenerList = new Vector<SearchListenerInterface>();
+    private List<SearchListenerInterface> listenerList = new ArrayList<>();
 
     File directoryFile;
 
-    public FOLKERBuilder(File resultFile, Vector<File> folkerFiles, String directory, boolean separateDirectory, boolean writeBasic) throws IOException {
+    public FOLKERBuilder(File resultFile, List<File> folkerFiles, String directory, boolean separateDirectory, boolean writeBasic) throws IOException {
         this.resultFile = resultFile;
         this.folkerFiles = folkerFiles;
         this.directory = directory;
@@ -77,7 +85,7 @@ public class FOLKERBuilder {
     
 
     public void addSearchListener(SearchListenerInterface sli) {
-        listenerList.addElement(sli);
+        listenerList.add(sli);
     }
 
     protected void fireCorpusInit(double progress, String message) {
@@ -85,11 +93,15 @@ public class FOLKERBuilder {
         // those that are interested in this event
         for (int i = listenerList.size() - 1; i >= 0; i -= 1) {
             SearchEvent se = new SearchEvent(SearchEvent.CORPUS_INIT_PROGRESS, progress, message);
-            listenerList.elementAt(i).processSearchEvent(se);
+            listenerList.get(i).processSearchEvent(se);
         }
     }
 
     public void doBuild() throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException, URISyntaxException{
+        doBuild(BUILD_METHODS.BUILD_VIA_EXB);
+    }
+    
+    public void doBuild(BUILD_METHODS method) throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException, URISyntaxException{
         // write an empty COMA file
         Document comaDocument = new IOUtilities().readDocumentFromResource("/org/exmaralda/common/resources/EmptyComaDocument.coma");
         comaDocument.getRootElement().setAttribute("Name", resultFile.getName().substring(0,resultFile.getName().lastIndexOf(".")));
@@ -107,71 +119,13 @@ public class FOLKERBuilder {
             String fileNameWithSuffix = folkerFile.getName();
             String fileNameWithoutSuffix = fileNameWithSuffix.substring(0, fileNameWithSuffix.lastIndexOf("."));
 
-            // read the FOLKER file as a Basic Transcription
-            BasicTranscription bt = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(folkerFile);
-            // added 09-05-2011
-            bt.getBody().stratify(Tier.STRATIFY_BY_DISTRIBUTION);
-
-            // find a suitable name for the transcription (will become the communication name)
-            String transcriptionName = fileNameWithoutSuffix;
-            int number = 2;
-            while (communicationsWithExmaraldaFiles.containsKey(transcriptionName)){
-                transcriptionName = fileNameWithoutSuffix + Integer.toString(number);
-                number++;
+            if (method==BUILD_METHODS.BUILD_VIA_EXB){
+                convertViaEXB(folkerFile, fileNameWithoutSuffix);
             }
-            bt.getHead().getMetaInformation().setTranscriptionName(transcriptionName);
-            Calendar cal = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' hh:mm:ss z");
-            bt.getHead().getMetaInformation().setComment("Imported from " + folkerFile.getAbsolutePath() + " on " + sdf.format(cal.getTime()));
-            bt.getHead().getMetaInformation().getUDMetaInformation().setAttribute("FOLKER-Original", folkerFile.getAbsolutePath());
-            
-            // added 18-01-2012
-            for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
-                Tier tier = bt.getBody().getTierAt(pos);
-                if (tier.getSpeaker()==null){
-                    tier.setType("d");
-                }
-            }
-
-            cGATMinimalSegmentation segmentor = new cGATMinimalSegmentation();
-            SegmentedTranscription st = null;
-            try {
-                st = segmentor.BasicToSegmented(bt);
-            } catch (FSMException ex) {
-                System.out.println("Segmentation error");
-                st = bt.toSegmentedTranscription();
-                countSegmentationErrors++;
-            }
-            
-
-            File thisDirectoryFile = folkerFile.getParentFile();
-            if (separateDirectory){
-                thisDirectoryFile = directoryFile;
-            }
-
-            String stName = new File(thisDirectoryFile, transcriptionName + ".exs").getAbsolutePath();
-            System.out.println("+++ Writing segmented transcription to " + stName);
-
-            if (this.writeBasic){
-                String btName = new File(thisDirectoryFile, transcriptionName + ".exb").getAbsolutePath();
-                System.out.println("+++ Writing basic transcription to " + btName);
-                bt.writeXMLToFile(btName, "none");
-                st.setEXBSource(btName);
-                File[] files = new File[2];
-                files[0] = new File(stName);
-                files[1] = new File(btName);
-                communicationsWithExmaraldaFiles.put(transcriptionName, files);
-            } else {
-                File[] files = new File[1];
-                files[0] = new File(stName);
-                communicationsWithExmaraldaFiles.put(transcriptionName, files);
-            }
-            st.writeXMLToFile(stName, "none");
-            communicationsWithFOLKERFiles.put(transcriptionName, folkerFile);
         }
 
         // Now build the COMA Document
-        Vector<Element> allElements = new Vector<Element>();
+        List<Element> allElements = new ArrayList<>();
         for (String name : communicationsWithExmaraldaFiles.keySet()){
             count++;
             double prog = (double)count/(double)(folkerFiles.size()*2);
@@ -287,4 +241,73 @@ public class FOLKERBuilder {
 
 
 
+    // ********************************************************
+    
+    private void convertViaEXB(File folkerFile, String fileNameWithoutSuffix) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
+        // read the FOLKER file as a Basic Transcription
+        BasicTranscription bt = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(folkerFile);
+        // added 09-05-2011
+        bt.getBody().stratify(Tier.STRATIFY_BY_DISTRIBUTION);
+
+        // find a suitable name for the transcription (will become the communication name)
+        String transcriptionName = fileNameWithoutSuffix;
+        int number = 2;
+        while (communicationsWithExmaraldaFiles.containsKey(transcriptionName)){
+            transcriptionName = fileNameWithoutSuffix + Integer.toString(number);
+            number++;
+        }
+        bt.getHead().getMetaInformation().setTranscriptionName(transcriptionName);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' hh:mm:ss z");
+        bt.getHead().getMetaInformation().setComment("Imported from " + folkerFile.getAbsolutePath() + " on " + sdf.format(cal.getTime()));
+        bt.getHead().getMetaInformation().getUDMetaInformation().setAttribute("FOLKER-Original", folkerFile.getAbsolutePath());
+
+        // added 18-01-2012
+        for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
+            Tier tier = bt.getBody().getTierAt(pos);
+            if (tier.getSpeaker()==null){
+                tier.setType("d");
+            }
+        }
+
+        cGATMinimalSegmentation segmentor = new cGATMinimalSegmentation();
+        SegmentedTranscription st = null;
+        try {
+            st = segmentor.BasicToSegmented(bt);
+        } catch (FSMException ex) {
+            System.out.println("Segmentation error");
+            st = bt.toSegmentedTranscription();
+            countSegmentationErrors++;
+        }
+
+
+        File thisDirectoryFile = folkerFile.getParentFile();
+        if (separateDirectory){
+            thisDirectoryFile = directoryFile;
+        }
+
+        String stName = new File(thisDirectoryFile, transcriptionName + ".exs").getAbsolutePath();
+        System.out.println("+++ Writing segmented transcription to " + stName);
+
+        if (this.writeBasic){
+            String btName = new File(thisDirectoryFile, transcriptionName + ".exb").getAbsolutePath();
+            System.out.println("+++ Writing basic transcription to " + btName);
+            bt.writeXMLToFile(btName, "none");
+            st.setEXBSource(btName);
+            File[] files = new File[2];
+            files[0] = new File(stName);
+            files[1] = new File(btName);
+            communicationsWithExmaraldaFiles.put(transcriptionName, files);
+        } else {
+            File[] files = new File[1];
+            files[0] = new File(stName);
+            communicationsWithExmaraldaFiles.put(transcriptionName, files);
+        }
+        st.writeXMLToFile(stName, "none");
+        communicationsWithFOLKERFiles.put(transcriptionName, folkerFile);
+    }
+    
+    
+    
+    
 }

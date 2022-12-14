@@ -14,6 +14,7 @@ import java.util.Vector;
  */
 public abstract class AbstractNormalizationLexicon implements LexiconInterface {
 
+    @Override
     public List<String> getCandidateForms(String form) throws LexiconException {
         Vector<String> result = new Vector<String>();
         result.add(form);

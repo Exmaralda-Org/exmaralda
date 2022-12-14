@@ -689,9 +689,11 @@ public class BasicTranscription extends AbstractTranscription {
             fos.write(StringUtilities.makeXMLDoctypeBasicTranscription(pathToDTD).getBytes("UTF-8"));
             //fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
             // issue #340
-            //fos.write(toXML(tft).getBytes("UTF-8"));
+            // THIS WILL NOT WORK!!!!
+            // Pretty Printing removes spaces at the end of event text!!!
             fos.write(XMLFormatter.formatXML(toXML(tft), true).getBytes("UTF-8"));
-        } catch (JDOMException ex) {
+            //fos.write(toXML(tft).getBytes("UTF-8"));
+        } catch (Exception ex) {
             Logger.getLogger(BasicTranscription.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
         }

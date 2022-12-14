@@ -235,6 +235,8 @@ public class WordListEditor extends JFrame {
 		}
 		Format format = Format.getPrettyFormat();
 		format.setEncoding("UTF-8");
+                format.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+                
 		XMLOutputter op = new XMLOutputter();
 		op.setFormat(format);
 		try {

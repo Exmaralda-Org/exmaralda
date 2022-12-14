@@ -39,7 +39,10 @@ public class Event extends Object implements Timeable, Describable, Linkable {
         udEventInformation = new UDInformationHashtable();
     }
 
-    /** Creates new Event with start point s, end point e and description d*/
+    /** Creates new Event with start point s, end point e and description
+     * @param s
+     * @param e
+     * @param d*/
     public Event(String s, String e, String d) {
         start = s;
         end = e;
@@ -49,7 +52,13 @@ public class Event extends Object implements Timeable, Describable, Linkable {
         udEventInformation = new UDInformationHashtable();
     }
 
-    /** Creates new Event with start point s, end point e, description d, medium m and URL u*/
+    /** Creates new Event with start point s, end point e, description d, medium m and URL
+     * @param s
+     * @param e
+     * @param d
+     * @param m
+     * @param u
+     */
     public Event(String s, String e, String d, String m, String u) {
         start = s;
         end = e;
@@ -59,7 +68,8 @@ public class Event extends Object implements Timeable, Describable, Linkable {
         udEventInformation = new UDInformationHashtable();
     }
 
-    /** returns a copy of this event */
+    /** returns a copy of this event
+     * @return  */
     public Event makeCopy() {
         Event newEvent = new Event(this.getStart(), this.getEnd(), this.getDescription(), this.getMedium(), this.getURL());
         newEvent.setUDEventInformation(this.getUDEventInformation().makeCopy());
@@ -70,62 +80,72 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     // ********** GET AND SET METHODS *************
     // ********************************************
 
-    /** returns the id of the start point of this event */
+    /** returns the id of the start point of this event
+     * @return  */
     @Override
     public String getStart(){
         return start;
     }
     
-    /** sets the start point to the specified value */
+    /** sets the start point to the specified value
+     * @param s */
     @Override
     public void setStart(String s){
         start = s;
     }
     
-    /** returns the id of the end point of this event */
+    /** returns the id of the end point of this event
+     * @return  */
     @Override
     public String getEnd(){
         return end;
     }
     
-    /** sets the end point of this event to the specified value */
+    /** sets the end point of this event to the specified value
+     * @param e */
     @Override
     public void setEnd(String e){
         //if (e==null) System.out.println(this.toXML());
         end = e;
     }
     
-    /** returns the description of this event */
+    /** returns the description of this event
+     * @return  */
     @Override
     public String getDescription(){
         return description;
     }
     
-    /** sets the description of this event to the specified value */
+    /** sets the description of this event to the specified value
+     * @param d */
     @Override
     public void setDescription(String d){
         description = d;
     }
 
-    /** returns the link medium of this event */
+    /** returns the link medium of this event
+     * @return  */
     @Override
     public String getMedium(){
         return medium;
     }
     
-    /** sets the link medium of this event to the specified value */
+    /** sets the link medium of this event to the specified value
+     * @param m */
     @Override
     public void setMedium(String m){
         medium = m;
     }
     
-    /** returns the link URL of this event */
+    /** returns the link URL of this event
+     * @return  */
     @Override
     public String getURL(){
         return URL;
     }
     
-    /** sets the link URL of this event to the specified value */
+    /** sets the link URL of this event to the specified value
+     * @param u */
     @Override
     public void setURL(String u){
         URL = u;
@@ -140,7 +160,7 @@ public class Event extends Object implements Timeable, Describable, Linkable {
             URL = relativeURI.toString();            
         } catch (Exception e){
             System.out.println("Error relativizing " + URL);
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
             // do nothing
             return false;
         }
@@ -156,7 +176,7 @@ public class Event extends Object implements Timeable, Describable, Linkable {
             URL = new File(absoluteURI).getAbsolutePath();
         } catch (Exception e){
             System.out.println("Error resolving " + URL);
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
             // do nothing
             return false;
         }
@@ -176,8 +196,9 @@ public class Event extends Object implements Timeable, Describable, Linkable {
     // ********** BASIC MANIPULATION **************
     // ********************************************
 
-    /** checks the well-formedness of this event, i.e.
-     * everything that is not covered by the DTD */    
+    /** checks the well-formedeverything that is not covered by the DTD
+     * @param timeline    
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */    
     public void check (Timeline timeline) throws JexmaraldaException{
         if (timeline.before(getEnd(), getStart())){
             throw new JexmaraldaException(52, "End time before start time : " + getStart() + " " + getEnd() );}            
@@ -265,14 +286,18 @@ public class Event extends Object implements Timeable, Describable, Linkable {
    }
 
     
-    /** returns true iff this event has been assigned a start and an end point */
+    /** returns true iff this event has been assigned a start and an end point
+     * @return  */
+    @Override
     public boolean isTimed() {
         return ((start!=null) && (end!=null) && (start.length()>0) && (end.length()>0));        
     }
     
+    @Override
     public void timeUp() {
     }
 
+    @Override
     public java.util.Hashtable indexTLIs() {
         java.util.Hashtable result = new java.util.Hashtable();
         result.put(getStart(),this);

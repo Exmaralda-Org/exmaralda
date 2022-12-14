@@ -20,6 +20,8 @@ public class XMLFormatter {
     
     public static String formatXML(String unformattedXML, boolean omitDeclaration) throws JDOMException, IOException{
         Format prettyFormat = Format.getPrettyFormat();
+        // very important, issue#340
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);
         prettyFormat.setOmitDeclaration(omitDeclaration);
         String prettyXml = new XMLOutputter(prettyFormat).
                          outputString(new SAXBuilder().build(new StringReader(unformattedXML)));

@@ -108,16 +108,19 @@ public class AbstractEventTier extends AbstractTier {
     }
 
 
-    /** returns event with start id id, null if there is no fragment with start id 
+    /** *  returns event with start id id, null if there is no fragment with start id 
      *  N.B.: if the tier is not stratified, this may return only one event although
      *  there are several events with the specified start id
-     *  to make sure to get all events (i.e. if not sure that the tier is stratified)
-     *  use getEvent<b>s</b>AtStartPoint(id) */
+     *  to make sure to get all events (i.e.if not sure that the tier is stratified)
+  use getEvent<b>s</b>AtStartPoint(id)
+     * @param id
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public Event getEventAtStartPoint(String id) throws JexmaraldaException {
         if (containsEventAtStartPoint(id)){
             return (Event)elementAt(lookupID(id));
         }
-        throw new JexmaraldaException(7, new String ("No event starting at " + id));
+        throw new JexmaraldaException(7, ("No event starting at " + id));
     }
     
     /** returns all events starting at the specified start point 
@@ -171,7 +174,7 @@ public class AbstractEventTier extends AbstractTier {
      * @return
      */
     public Vector<Event> getEventsBetween(Timeline tl, String id1, String id2){
-        Vector<Event> result = new Vector<Event>();
+        Vector<Event> result = new Vector<>();
         for (int pos=tl.lookupID(id1); pos<=tl.lookupID(id2); pos++){
             String tli = tl.getTimelineItemAt(pos).getID();
             if (containsEventAtStartPoint(tli)){
@@ -196,7 +199,7 @@ public class AbstractEventTier extends AbstractTier {
      * @return
      */
     public Vector<Event> getEventsIntersecting(Timeline tl, String id1, String id2){
-        Vector<Event> result = new Vector<Event>();
+        Vector<Event> result = new Vector<>();
         sort(tl);
         if (this.getNumberOfEvents()==0) return result;
         Event firstEvent = this.getFirstEventBeforeStartPoint(tl, id1);
