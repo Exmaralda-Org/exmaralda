@@ -141,27 +141,11 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
                     });
 
 
-                } catch (JexmaraldaException ex) {
-                    pbd.addText("EXMARaLDA Error: " + ex.getLocalizedMessage());
-                    ex.printStackTrace();
+                } catch (JexmaraldaException | IOException | SAXException | FSMException | JDOMException ex) {
+                    pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                                
+                    pbd.addText("Error: " + ex.getLocalizedMessage());
                     JOptionPane.showMessageDialog(pbd, ex);
-                } catch (IOException ex) {
-                    pbd.addText("I/O Error: " + ex.getLocalizedMessage());
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(pbd, ex);
-                } catch (SAXException ex) {
-                    pbd.addText("SAX Error: " + ex.getLocalizedMessage());
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(pbd, ex);
-                } catch (FSMException ex) {
-                    pbd.addText("FSM Error: " + ex.getLocalizedMessage());
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(pbd, ex);
-                } catch (JDOMException ex) {
-                    pbd.addText("JDOM Error: " + ex.getLocalizedMessage());
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(pbd, ex);
-                }
+                } 
             }
             
         };

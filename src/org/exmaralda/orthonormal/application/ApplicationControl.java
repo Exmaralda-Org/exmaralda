@@ -732,7 +732,9 @@ public final class ApplicationControl implements  ListSelectionListener,
             setBookmark(d, contributionListTable.getSelectedRow());
             // changed for #340
             //IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d);
-            IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d, Format.getPrettyFormat());
+            Format prettyFormat = Format.getPrettyFormat();
+            prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);        
+            IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d, prettyFormat);
             //currentFilePath = f.getAbsolutePath();
             setCurrentFilePath(f.getAbsolutePath());
             DOCUMENT_CHANGED = false;

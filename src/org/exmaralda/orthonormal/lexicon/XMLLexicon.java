@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +30,7 @@ import org.jdom.xpath.XPath;
 public class XMLLexicon extends AbstractNormalizationLexicon {
 
     
-    HashMap<String, NormalisationInfo> map = new HashMap<String, NormalisationInfo>();
+    HashMap<String, NormalisationInfo> map = new HashMap<>();
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2016.xml";
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_APRIL_2017.xml";
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_MAY_2018.xml";
@@ -39,7 +40,7 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2022.xml";
     
     String CAPITAL_ONLY_LIST = "/org/exmaralda/orthonormal/lexicon/dereko_capital_only.txt";
-    HashSet<String> capitalOnly = new HashSet<String>(240000, 1.0f);
+    HashSet<String> capitalOnly = new HashSet<>(240000, 1.0f);
 
     
     @Override
@@ -138,6 +139,7 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
         update(d);
     }
     
+    @Override
     public void update(Document d) throws SQLException, JDOMException, LexiconException{
         String transcriptionID = d.getRootElement().getAttributeValue("id");
         List l = XPath.newInstance("//w").selectNodes(d);
@@ -156,8 +158,17 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     
     @Override
     public List<String> getCandidateForms(String form) throws /*up*/ LexiconException {
+        return getCandidateForms(form, true);
+        
+    }
+
+    public List<String> getCandidateForms(String form, boolean addSelf) throws /*up*/ LexiconException {
         if (!map.containsKey(form)){
-            return super.getCandidateForms(form);
+            if (addSelf){
+                return super.getCandidateForms(form);
+            } else {
+                return new ArrayList<>();
+            }
         }
         NormalisationInfo info = map.get(form);
         return info.getCandidateForms();

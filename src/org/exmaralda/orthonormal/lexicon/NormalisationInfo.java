@@ -18,7 +18,7 @@ import org.jdom.Element;
 public class NormalisationInfo {
     
     String form;
-    HashMap<String, Integer> frequencyMap = new HashMap<String, Integer>();
+    HashMap<String, Integer> frequencyMap = new HashMap<>();
 
     public NormalisationInfo(String form) {
         this.form = form;
@@ -33,7 +33,11 @@ public class NormalisationInfo {
         form = e.getAttributeValue("form");
         for (Object o : e.getChildren("n")){
             Element n = (Element)o;
-            frequencyMap.put(n.getAttributeValue("corr"), Integer.parseInt(n.getAttributeValue("freq")));
+            String nForm = n.getAttributeValue("corr");
+            if (!(frequencyMap.containsKey(nForm))){
+                frequencyMap.put(nForm, 0);
+            }
+            frequencyMap.put(nForm, frequencyMap.get(nForm) + Integer.parseInt(n.getAttributeValue("freq")));
         }
         
     }
@@ -65,13 +69,14 @@ public class NormalisationInfo {
     }
 
     List<String> getCandidateForms() {
-        ArrayList<FormAndFrequency> v = new ArrayList<FormAndFrequency>();
+        ArrayList<FormAndFrequency> v = new ArrayList<>();
         for (String lemma : frequencyMap.keySet()){
-            v.add(new FormAndFrequency(lemma, frequencyMap.get(lemma).intValue()));
+            v.add(new FormAndFrequency(lemma, frequencyMap.get(lemma)));
         }
         Collections.sort(v, new Comparator<FormAndFrequency>(){
             @Override
             public int compare(FormAndFrequency o1, FormAndFrequency o2) {
+                //System.out.println(o1.frequency + " --- " + o2.frequency);
                 if (o1.frequency>o2.frequency) return -1;
                 if (o1.frequency<o2.frequency) return +1;
                 return (o1.form.compareTo(o2.form));
@@ -81,8 +86,12 @@ public class NormalisationInfo {
         ArrayList<String> result = new ArrayList<String>();
         for (FormAndFrequency faf : v){
             result.add(faf.form);
+            //System.out.println("Added " + faf.form);
         }        
+        
+        //System.out.println("--------------");
         return result;
+        
     }
     
     

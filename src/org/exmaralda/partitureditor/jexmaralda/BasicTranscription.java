@@ -51,16 +51,21 @@ public class BasicTranscription extends AbstractTranscription {
     }
 
     /** reads in a new BasicTranscription from the specified file
-     * @param inputFileName */
+     * @param inputFileName
+     * @throws org.xml.sax.SAXException
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public BasicTranscription (String inputFileName) throws SAXException, JexmaraldaException{
         this(inputFileName, true);
     }
     
     public BasicTranscription(String inputFileName, boolean check) throws SAXException, JexmaraldaException {
         super();
+        System.out.println("Reading Basic Transcription from " + inputFileName);
         body = new BasicBody();
         org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader();
         BasicTranscription t = reader.readFromFile(inputFileName);
+        System.out.println(inputFileName + " read.");
+        
         if (check){
             t.check();
         }
@@ -71,13 +76,12 @@ public class BasicTranscription extends AbstractTranscription {
             // changed 13-08-2010
             // ".." in relative paths allowed now
         getHead().getMetaInformation().resolveReferencedFile(inputFileName, MetaInformation.NEW_METHOD);
-        //}
         resolveLinks(inputFileName);  
         
     }
 
     public Hashtable<String, String[]> getAnnotationMismatches() {
-        Hashtable<String, String[]> allMismatches = new Hashtable<String, String[]>();
+        Hashtable<String, String[]> allMismatches = new Hashtable<>();
         for (int pos=0; pos<getBody().getNumberOfTiers(); pos++){
             Tier t = getBody().getTierAt(pos);
             String[] theseMismatches = t.getAnnotationMismatches(this);
@@ -685,9 +689,11 @@ public class BasicTranscription extends AbstractTranscription {
             fos.write(StringUtilities.makeXMLDoctypeBasicTranscription(pathToDTD).getBytes("UTF-8"));
             //fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
             // issue #340
-            //fos.write(toXML(tft).getBytes("UTF-8"));
+            // THIS WILL NOT WORK!!!!
+            // Pretty Printing removes spaces at the end of event text!!!
             fos.write(XMLFormatter.formatXML(toXML(tft), true).getBytes("UTF-8"));
-        } catch (JDOMException ex) {
+            //fos.write(toXML(tft).getBytes("UTF-8"));
+        } catch (Exception ex) {
             Logger.getLogger(BasicTranscription.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
         }
@@ -710,7 +716,8 @@ public class BasicTranscription extends AbstractTranscription {
     // ********** EXMARALDA CONVERSIONS ***********
     // ********************************************
 
-    /** converts this BasicTranscription to a SegmentedTranscription */
+    /** converts this BasicTranscription to a SegmentedTranscription
+     * @return  */
     public SegmentedTranscription toSegmentedTranscription(){
         SegmentedTranscription result = new SegmentedTranscription();
         result.setHead(this.getHead());

@@ -17,6 +17,7 @@ import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
@@ -64,13 +65,19 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
     }
 
     private void export() throws SAXException, IOException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JexmaraldaException, FSMException, JDOMException, XSLTransformException, Exception{
-        ExportFileDialog dialog = new ExportFileDialog(PreferencesUtilities.getProperty("workingDirectory", ""));
+        ExmaraldaApplication ea = (ExmaraldaApplication)(table.parent);
+        String userNode = ea.getPreferencesNode();
+        java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(userNode);
+        String startDirectory = settings.get("LastExportDirectory", PreferencesUtilities.getProperty("workingDirectory", ""));
+
+        ExportFileDialog dialog = new ExportFileDialog(startDirectory);
         ActionUtilities.setFileFilter("last-export-filter", table.getTopLevelAncestor(), dialog);
 
         int retValue = dialog.showSaveDialog(table.parent);
         if (retValue!=javax.swing.JFileChooser.APPROVE_OPTION) return;
         ParameterFileFilter selectedFileFilter = (ParameterFileFilter)(dialog.getFileFilter());
         File selectedFile = dialog.getSelectedFile();
+        settings.put("LastExportDirectory", selectedFile.getAbsolutePath());        
         String filename = selectedFile.getAbsolutePath();
 
         //check whether or not the selected file has an extension
@@ -153,7 +160,8 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 case TEIConverter.HIAT_ISO_METHOD :
                     ec = new TEIConverter();
                     ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
-                    ec.writeHIATISOTEIToFile(trans, filename);
+                    // #152
+                    ec.writeHIATISOTEIToFile(trans, filename, table.hiatFSM, false); 
                     break;
                 case TEIConverter.ISO_EVENT_TOKEN_METHOD :
                     ec = new TEIConverter();
@@ -163,7 +171,8 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 case TEIConverter.ISO_GENERIC_METHOD :
                     ec = new TEIConverter();
                     ec.setLanguage(dialog.teiExportAccessoryPanel.getLanguage());
-                    ec.writeGenericSegmentedISOTEIToFile(trans, filename, null);
+                    // #152 
+                    ec.writeGenericSegmentedISOTEIToFile(trans, filename, table.genericFSM);
                     break;
             }
         } else if (selectedFileFilter==dialog.TEIModenaFileFilter){

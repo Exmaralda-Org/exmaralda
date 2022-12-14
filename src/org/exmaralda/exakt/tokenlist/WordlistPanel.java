@@ -27,7 +27,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import org.exmaralda.common.helpers.LevenshteinComparator;
 import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
 import org.exmaralda.exakt.search.swing.RegularExpressionTextField;
@@ -124,6 +123,11 @@ public class WordlistPanel extends javax.swing.JPanel implements MouseListener {
             }
             
         });
+        
+        // new 05-12-2022
+        for (int i=0; i<tokenTable.getRowCount(); i++){
+            tokenTable.setRowHeight(i, fontSize+2);        
+        }
         
         selectionList.setFont(font);
     }

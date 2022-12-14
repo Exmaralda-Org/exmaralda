@@ -26,9 +26,11 @@ public class OpenBasicTranscriptionDialog extends AbstractXMLOpenDialog {
         setDialogTitle("Open transcription from file");
         addPropertyChangeListener(tpp);
         setAccessory(tpp);
+        
     }
 
-    /** Creates new OpenBasicTranscriptionDialog and sets start directory */
+    /** Creates new OpenBasicTranscriptionDialog and sets start directory
+     * @param startDirectory */
     public OpenBasicTranscriptionDialog(String startDirectory){
         super(startDirectory);
         setDialogTitle("Open transcription from file");

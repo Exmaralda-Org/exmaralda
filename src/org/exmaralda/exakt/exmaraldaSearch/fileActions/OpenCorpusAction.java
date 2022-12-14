@@ -18,20 +18,26 @@ import javax.swing.*;
  */
 public class OpenCorpusAction extends org.exmaralda.exakt.exmaraldaSearch.swing.AbstractEXAKTAction {
     
-    /** Creates a new instance of OpenCorpusAction */
+    /** Creates a new instance of OpenCorpusAction
+     * @param ef
+     * @param title
+     * @param icon */
     public OpenCorpusAction(org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT ef, String title, javax.swing.ImageIcon icon){
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(exaktFrame.getLastCorpusPath());
         fileChooser.setDialogTitle("Open COMA Corpus file");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+            @Override
             public boolean accept(File f) {
                 String name = f.getAbsolutePath();
                 return (f.isDirectory() || name.substring(Math.max(0,name.length()-3)).equalsIgnoreCase("XML") || name.substring(Math.max(0,name.length()-4)).equalsIgnoreCase("COMA"));
             }
+            @Override
             public String getDescription() {
                 return "XML files, CoMa files (*.xml, *.coma)";
             }

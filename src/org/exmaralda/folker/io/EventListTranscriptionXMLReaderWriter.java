@@ -86,7 +86,9 @@ public class EventListTranscriptionXMLReaderWriter {
                 
         // changed for #340
         //org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc);
-        org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc, Format.getPrettyFormat());
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);        
+        org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc, prettyFormat);
     }
     
     public static EventListTranscription readXML(File file) throws JDOMException, IOException, SAXException,

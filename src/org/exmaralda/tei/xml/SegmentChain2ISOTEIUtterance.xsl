@@ -79,10 +79,10 @@
 			<xsl:when test="preceding-sibling::*[1][self::ats and @n='cGAT:pause'] and text()=')'">
 				<!-- do nothing -->				
 			</xsl:when>
-			<xsl:when test="text()='('">
+			<xsl:when test="text()='(' and not(starts-with(@n,'GEN'))">
 				<xsl:element name="uncertain-start"/>
 			</xsl:when>
-			<xsl:when test="text()=')'">
+			<xsl:when test="text()=')' and not(starts-with(@n,'GEN'))">
 				<xsl:element name="uncertain-end"/>
 			</xsl:when>
 			<xsl:when test="text()='/'">

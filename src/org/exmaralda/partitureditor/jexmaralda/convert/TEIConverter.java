@@ -155,7 +155,9 @@ public class TEIConverter extends AbstractConverter {
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(path, teiDoc, Format.getPrettyFormat());
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc, prettyFormat);
     }
     
     public void writeEventTokenISOTEIToFile(BasicTranscription bt, String path)  throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException {
@@ -164,7 +166,9 @@ public class TEIConverter extends AbstractConverter {
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(path, teiDoc, Format.getPrettyFormat());
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc, prettyFormat);
     }
     
 
@@ -179,7 +183,20 @@ public class TEIConverter extends AbstractConverter {
         writeHIATISOTEIToFile(bt, filename, false);
     }
     
+
     public void writeHIATISOTEIToFile(BasicTranscription bt, String filename, boolean includeFullText) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              ParserConfigurationException,
+                                                                              TransformerException
+                                                                              {
+         writeHIATISOTEIToFile(bt, filename, null, includeFullText);
+    }
+
+
+    public void writeHIATISOTEIToFile(BasicTranscription bt, String filename, String customFSM, boolean includeFullText) throws SAXException,
                                                                               FSMException,
                                                                               XSLTransformException,
                                                                               JDOMException,
@@ -195,7 +212,16 @@ public class TEIConverter extends AbstractConverter {
         //copyBT.getBody().getCommonTimeline().completeTimes();
         
         System.out.println("started writing document...");
-        HIATSegmentation segmentation = new HIATSegmentation();
+        
+        //HIATSegmentation segmentation = new HIATSegmentation();
+        // issue #152
+        HIATSegmentation segmentation;
+        if (customFSM==null || customFSM.length()==0){
+            segmentation = new HIATSegmentation();
+        } else {
+            segmentation = new HIATSegmentation(customFSM);
+        }
+        
         SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
         System.out.println("Segmented transcription created");
         String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
@@ -210,7 +236,9 @@ public class TEIConverter extends AbstractConverter {
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, Format.getPrettyFormat());
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, prettyFormat);
         System.out.println("document written.");        
     }
     
@@ -242,7 +270,9 @@ public class TEIConverter extends AbstractConverter {
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, Format.getPrettyFormat());
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, prettyFormat);
         System.out.println("document written.");        
     }
     
@@ -274,7 +304,9 @@ public class TEIConverter extends AbstractConverter {
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, Format.getPrettyFormat());
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc, prettyFormat);
         System.out.println("document written.");        
     }
     
@@ -299,7 +331,9 @@ public class TEIConverter extends AbstractConverter {
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);                
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(path, teiDoc, Format.getPrettyFormat());                
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                        
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc, prettyFormat);                
     }
     
     public void writeFOLKERISOTEIToFile(Document flnDoc, String absolutePath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException {
@@ -309,7 +343,9 @@ public class TEIConverter extends AbstractConverter {
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);                
         // changed for #340
-        IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc, Format.getPrettyFormat());                
+        Format prettyFormat = Format.getPrettyFormat();
+        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
+        IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc, prettyFormat);                
     }
     
     // issue #215

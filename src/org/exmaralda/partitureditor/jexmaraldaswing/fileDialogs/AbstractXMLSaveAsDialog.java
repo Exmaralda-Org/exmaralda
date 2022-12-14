@@ -24,22 +24,22 @@ public abstract class AbstractXMLSaveAsDialog extends javax.swing.JFileChooser {
         this(true);
     }
     
-    /** Creates new AbstractXMLSaveAsDialog */
+    /** Creates new AbstractXMLSaveAsDialog
+     * @param showDTDPanel */
     public AbstractXMLSaveAsDialog(boolean showDTDPanel) {
         setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
         setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ExmaraldaFileFilter());
-        setMinimumSize(new java.awt.Dimension(400, 350));
+        /*setMinimumSize(new java.awt.Dimension(400, 350));
         setPreferredSize(new java.awt.Dimension(600, 400));
-        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMaximumSize(new java.awt.Dimension(800, 600));*/
         success=false;
     }
-    /** Creates new AbstractXMLSaveAsDialog and sets start directory*/
+    /** Creates new AbstractXMLSaveAsDialog and sets start director
+     * @param startDirectory
+     */
     public AbstractXMLSaveAsDialog(String startDirectory) {
         this();
-        try {
-            setCurrentDirectory(new File(startDirectory));
-        }
-        catch (Throwable dummy){}  
+        setCurrentDirectory(new File(startDirectory));
     }
 
     public AbstractXMLSaveAsDialog(String startDirectory, boolean showDTDPanel) {
@@ -70,7 +70,7 @@ public abstract class AbstractXMLSaveAsDialog extends javax.swing.JFileChooser {
     }
     
     public void checkExtension(){
-        setFilename(new String(getSelectedFile().toString()));
+        setFilename(getSelectedFile().toString());
         if (getFilename().indexOf('.')<getFilename().lastIndexOf(File.separatorChar)){
             filename = filename + ".exb";
         }
@@ -86,6 +86,7 @@ public abstract class AbstractXMLSaveAsDialog extends javax.swing.JFileChooser {
         success=false;
     }
 
+    @Override
     public void setDialogTitle(String dialogTitle) {
         String dt = org.exmaralda.common.helpers.Internationalizer.getString(dialogTitle);
         super.setDialogTitle(dt);

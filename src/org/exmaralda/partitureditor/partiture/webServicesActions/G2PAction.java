@@ -13,19 +13,29 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.exmaralda.partitureditor.fsm.FSMException;
+import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.Describable;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.SegmentList;
+import org.exmaralda.partitureditor.jexmaralda.Segmentation;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTier;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.TierFormat;
+import org.exmaralda.partitureditor.jexmaralda.TimedSegment;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
 import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
+import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.DeepLConnector;
 import org.exmaralda.webservices.G2PConnector;
@@ -131,6 +141,11 @@ public class G2PAction extends org.exmaralda.partitureditor.partiture.AbstractTa
                     String tierCategory = (String) g2pParameters.get("TIER-CATEGORY");
                     tierPositions = table.getModel().getTranscription().getBody().findTiersWithCategory(tierCategory);                         
                 }
+                
+                int segmentationCode = AbstractSegmentation.getSegmentationCode((String) g2pParameters.get("SEGMENTATION-ALGORITHM"));
+                AbstractSegmentation segmentationAlgorithm = AbstractSegmentation.getSegmentationAlgorithm(segmentationCode);
+                String wordSegmentationName = AbstractSegmentation.getWordSegmentationName(segmentationCode);
+                
 
                 //resultTiers = new ArrayList<>();
                 //languageTiers = new ArrayList<>();
@@ -170,41 +185,89 @@ public class G2PAction extends org.exmaralda.partitureditor.partiture.AbstractTa
                                 g2pEvent.setDescription(result);
                                 targetTier.addEvent(g2pEvent);                             
                             }
-                        } else {
+                        } else if (!(useSegmentation) || !(sourceTier.getType().equals("t"))){
                             List<List<Event>> segmentChains = sourceTier.getSegmentChains(table.getModel().getTranscription().getBody().getCommonTimeline());
                             for (List<Event> segmentChain : segmentChains){
-                                if (!(useSegmentation)){
-                                    String originalText = "";
-                                    for (Event e : segmentChain){
-                                        originalText+=e.getDescription();
-                                    }
-                                    File tempInputFile = createTempInputFile(originalText);
-                                    String result = g2pConnector.callG2P(tempInputFile, webServiceParameters).replace("\n", "");
-                                    if (!useSpaces){
-                                        result = result.replace(" ", "");
-                                    }
-                                    if (useBrackets){
-                                        result = "[" + result.replaceAll("\\t", "]  [") + "]"; 
-                                    } else {
-                                        result = result.replaceAll("\\t", "  ");                                    
-                                    }
-                                    pbd.addText(originalText + " --> " + result);
-                                    Event g2pevent = new Event();
-                                    g2pevent.setStart(segmentChain.get(0).getStart());
-                                    g2pevent.setEnd(segmentChain.get(segmentChain.size()-1).getEnd());
-                                    g2pevent.setDescription(result);
-                                    targetTier.addEvent(g2pevent);
-                                } else {
-                                    // to do : segmentation is used
+                                String originalText = "";
+                                for (Event e : segmentChain){
+                                    originalText+=e.getDescription();
                                 }
-                                
+                                File tempInputFile = createTempInputFile(originalText);
+                                String result = g2pConnector.callG2P(tempInputFile, webServiceParameters).replace("\n", "");
+                                if (!useSpaces){
+                                    result = result.replace(" ", "");
+                                }
+                                if (useBrackets){
+                                    result = "[" + result.replaceAll("\\t", "]  [") + "]"; 
+                                } else {
+                                    result = result.replaceAll("\\t", "  ");                                    
+                                }
+                                pbd.addText(originalText + " --> " + result);
+                                Event g2pevent = new Event();
+                                g2pevent.setStart(segmentChain.get(0).getStart());
+                                g2pevent.setEnd(segmentChain.get(segmentChain.size()-1).getEnd());
+                                g2pevent.setDescription(result);
+                                targetTier.addEvent(g2pevent);
                             }
+                        } else {
+                            BasicTranscription copyTranscription = table.getModel().getTranscription().makeCopy();
+                            for (int pos=0; pos<copyTranscription.getBody().getNumberOfTiers(); pos++){
+                                Tier t = copyTranscription.getBody().getTierAt(pos);
+                                if (!(t.getID().equals(sourceTier.getID()))) {
+                                    copyTranscription.getBody().removeTierWithID(t.getID());
+                                    pos--;
+                                }
+                            }
+                            SegmentedTranscription segmentedTranscription = segmentationAlgorithm.BasicToSegmented(copyTranscription);
+                            SegmentedTier segmentedSourceTier = segmentedTranscription.getBody().getSegmentedTierAt(0);
+                            Segmentation wordSegmentation = segmentedSourceTier.getSegmentationWithName(wordSegmentationName);
+                            SegmentList allContributionChains = wordSegmentation.getAllSegmentsWithName("sc");
+                            for (Object o : allContributionChains){
+                                TimedSegment segmentChain = (TimedSegment)o;
+                                Vector allSegmentsMatching = segmentChain.getAllSegmentsMatching("[A-Za-z]*:w");
+                                List<String> tokens = new ArrayList<>();
+                                for (Object o2 : allSegmentsMatching){
+                                    Describable d = (Describable)o2;
+                                    if(!(d.getDescription().equals("(")||d.getDescription().equals(")")||d.getDescription().equals("[")||d.getDescription().equals("]"))){
+                                        tokens.add(d.getDescription());
+                                    }
+                                }
+                                String result = "-";
+                                if (!(tokens.isEmpty())){
+                                    originalText = String.join(" ", tokens);
+                                    File tempInputFile = createTempInputFile(originalText);
+                                    result = g2pConnector.callG2P(tempInputFile, webServiceParameters).replace("\n", "");
+                                }
+                                if (!useSpaces){
+                                    result = result.replace(" ", "");
+                                }
+                                if (useBrackets){
+                                    result = "[" + result.replaceAll("\\t", "]  [") + "]"; 
+                                } else {
+                                    result = result.replaceAll("\\t", "  ");                                    
+                                }
+                                pbd.addText(originalText + " --> " + result);
+                                Event g2pevent = new Event();
+                                g2pevent.setStart(segmentChain.getStart());
+                                g2pevent.setEnd(segmentChain.getEnd());
+                                g2pevent.setDescription(result);
+                                targetTier.addEvent(g2pevent);                                
+                            }                            
                         }
-                    } catch (JexmaraldaException | IOException  ex) {
+                                    
+                    } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
                         Logger.getLogger(G2PAction.class.getName()).log(Level.SEVERE, null, ex);
                         pbd.addText("Error: " + ex.getLocalizedMessage());
-                    } catch (JDOMException ex) {
-                        Logger.getLogger(G2PAction.class.getName()).log(Level.SEVERE, null, ex);
+                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);   
+
+                        StringBuilder sb = new StringBuilder(ex.getLocalizedMessage());
+                        int i = 0;
+                        while ((i = sb.indexOf(" ", i + 80)) != -1) {
+                            sb.replace(i, i + 1, "\n");
+                        }
+                        
+                        JOptionPane.showMessageDialog(pbd, sb.toString());
+                        
                     }
                         
                 }
@@ -250,24 +313,8 @@ public class G2PAction extends org.exmaralda.partitureditor.partiture.AbstractTa
     }
     
     public void success() throws IOException, JexmaraldaException{       
-        /*int add = 1;
-        for (int tierPos : tierPositions){
-            Tier tier = resultTiers.get(tierPos);
-            table.getModel().getTranscription().getBody().insertTierAt(tier, tierPos + add);
-            add++;
-            System.out.println("Added " + tier.toXML());
-        }
-        if (languageTier){
-            int add2 = 2;
-            for (int tierPos : tierPositions){
-                Tier tier = languageTiers.get(tierPos);
-                table.getModel().getTranscription().getBody().insertTierAt(tier, tierPos + add);
-                add2+=2;
-                System.out.println("Added " + tier.toXML());
-            }
-            
-        }*/
         table.getModel().fireDataReset();
+        table.transcriptionChanged = true;
     }
 
     @Override

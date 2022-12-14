@@ -547,12 +547,13 @@ public class ApplicationFrame extends javax.swing.JFrame {
         Document teidoc;
         try {
             teidoc = IOUtilities.readDocumentFromLocalFile(f.getAbsolutePath());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (IOException | JDOMException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
+            System.out.println(ex.getLocalizedMessage());
             return;
         }
         Format format = Format.getPrettyFormat();
+        format.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
         XMLOutputter outputter = new XMLOutputter(format);
         // Get the text pane's document
         JTextPane textPane = new JTextPane();

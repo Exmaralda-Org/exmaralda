@@ -5,7 +5,6 @@
 package org.exmaralda.orthonormal.lexicon;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -77,7 +76,7 @@ public class AutoNormalizer {
                 boolean lookupGotResult = false;
                 // 1. lookup the form in the lexicon
                 List<String> forms = lexicon.getCandidateForms(wordText);
-                if (forms.size()>0){
+                if (!forms.isEmpty()){
                     String form = forms.get(0);
                     //System.out.println(form + " " + lexicon.getFrequency(wordText, form));
                     if (!(form.equals(word.getText()))){
@@ -93,7 +92,7 @@ public class AutoNormalizer {
                 }
 
                 // 2. if you can, try the capitals only list
-                if (!(lookupGotResult) && lexicon.hasCapitalInformation() && wordText.matches("[a-zהצ].+")){
+                if (!(lookupGotResult) && lexicon.hasCapitalInformation() && wordText.matches("[a-zäöüß].+")){
                     try {
                         String capitalWord = wordText.substring(0,1).toUpperCase() + wordText.substring(1);
                         if (lexicon.isCapitalOnly(capitalWord)){
@@ -103,7 +102,7 @@ public class AutoNormalizer {
                         }
                     } catch (LexiconException ex) {
                         // should not get here...
-                        ex.printStackTrace();
+                        System.out.println(ex.getLocalizedMessage());
                     }
                 }
             }

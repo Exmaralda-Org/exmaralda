@@ -15,6 +15,7 @@ import org.exmaralda.partitureditor.fsm.*;
  * @author  thomas
  */
 public abstract class AbstractSegmentation {
+
     
     public Hashtable beforeAugment = new Hashtable();
     public Hashtable afterAugment = new Hashtable();
@@ -54,5 +55,32 @@ public abstract class AbstractSegmentation {
         if (segName.equals("CHAT_MINIMAL")) return CHAT_MINIMAL_SEGMENTATION;
         return NO_SEGMENTATION;
     }
+    
+    public static AbstractSegmentation getSegmentationAlgorithm(int segmentationCode){
+        switch (segmentationCode){
+            case AbstractSegmentation.HIAT_SEGMENTATION : return new HIATSegmentation();
+            case AbstractSegmentation.DIDA_SEGMENTATION : return new DIDASegmentation();
+            case AbstractSegmentation.GAT_SEGMENTATION : return new GATSegmentation();
+            case AbstractSegmentation.CHAT_SEGMENTATION : return new CHATSegmentation();
+            case AbstractSegmentation.IPA_SEGMENTATION : return new IPASegmentation();
+            case AbstractSegmentation.GENERIC_SEGMENTATION : return new GenericSegmentation();
+            case AbstractSegmentation.GAT_MINIMAL_SEGMENTATION : return new GATMinimalSegmentation();
+            case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION : return new CHATMinimalSegmentation();            
+        }
+        return null;
+    }
+    
+    public static String getWordSegmentationName(int segmentationCode) {
+        switch (segmentationCode){
+            case AbstractSegmentation.HIAT_SEGMENTATION : return "SpeakerContribution_Utterance_Word";
+            case AbstractSegmentation.DIDA_SEGMENTATION : return "SpeakerContribution_Word";
+            case AbstractSegmentation.IPA_SEGMENTATION : return "SegmentChain_Word_Syllable";
+            case AbstractSegmentation.GENERIC_SEGMENTATION : return "SpeakerContribution_Word";
+            case AbstractSegmentation.GAT_MINIMAL_SEGMENTATION : return "SpeakerContribution_Word";
+            case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION : return "SpeakerContribution_Utterance_Word";            
+        }
+        return null;
+    }
+
     
 }

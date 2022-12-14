@@ -127,8 +127,8 @@ public class TEIMerger {
             teiDocument = transformer.transform(segmentedTranscription);            
         }
         
-        //FileIO.writeDocumentToLocalFile("C:\\Users\\Schmidt\\Desktop\\TEI\\intermediate1.xml", teiDocument);      
-        //System.out.println("STEP 1 completed.");
+        //FileIO.writeDocumentToLocalFile("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST\\intermediate1.xml", teiDocument);      
+        System.out.println("STEP 1 completed.");
         
         Vector uElements = TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, includeFullText);
         
@@ -144,8 +144,8 @@ public class TEIMerger {
         Element textNode = (Element)(xp.selectSingleNode(teiDocument));
         textNode.addContent(uElements);
 
-        //FileIO.writeDocumentToLocalFile("C:\\Users\\thomas.schmidt\\Desktop\\DEBUG\\IT_2021\\MIKO2_TEI_MERGED.xml", teiDocument);
-        //System.out.println("STEP 2 completed.");
+        //FileIO.writeDocumentToLocalFile("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST\\intermediate2.xml", teiDocument);
+        System.out.println("STEP 2 completed.");
 
         Document transformedDocument = null;
         if (useNewStylesheets){
@@ -160,8 +160,8 @@ public class TEIMerger {
             textNode = (Element)(xp.selectSingleNode(transformedDocument));
         }
 
-        //FileIO.writeDocumentToLocalFile("C:\\Users\\Schmidt\\Desktop\\TEI\\intermediate3.xml", transformedDocument);
-        //System.out.println("STEP 3 completed.");
+        //FileIO.writeDocumentToLocalFile("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST\\intermediate3.xml", transformedDocument);
+        System.out.println("STEP 3 completed.");
 
         // now take care of the events from tiers of type 'd'
         XPath xp2 = XPath.newInstance("//segmentation[@name='Event']/ats");

@@ -242,6 +242,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         autoSavePanel = new javax.swing.JPanel();
         enableAutoSavePanel = new javax.swing.JPanel();
         enableAutoSaveCheckBox = new javax.swing.JCheckBox();
+        enableUndoPanel = new javax.swing.JPanel();
+        enableUndoCheckBox = new javax.swing.JCheckBox();
+        autoSaveMainPanel = new javax.swing.JPanel();
         autoSaveFilenamePanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         autoSaveFilenameTextField = new javax.swing.JTextField();
@@ -253,8 +256,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         autoSaveIntervalSlider = new javax.swing.JSlider();
         jLabel11 = new javax.swing.JLabel();
-        enableUndoPanel = new javax.swing.JPanel();
-        enableUndoCheckBox = new javax.swing.JCheckBox();
         languagePanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         languagesComboBox = new javax.swing.JComboBox();
@@ -297,7 +298,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         resetButton = new javax.swing.JButton();
 
         setTitle("Preferences");
-        setPreferredSize(new java.awt.Dimension(600, 450));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -333,19 +333,19 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        tabbedPane.setMinimumSize(new java.awt.Dimension(120, 22));
-        tabbedPane.setPreferredSize(new java.awt.Dimension(600, 300));
-
         fontsPanel.setLayout(new java.awt.BorderLayout());
 
         fontSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Fonts"));
+        fontSelectionPanel.setLayout(new javax.swing.BoxLayout(fontSelectionPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        tierFontPanel.setMaximumSize(new java.awt.Dimension(32767, 40));
         tierFontPanel.setLayout(new javax.swing.BoxLayout(tierFontPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("Default tier font: ");
-        jLabel1.setMaximumSize(new java.awt.Dimension(180, 20));
-        jLabel1.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel1.setPreferredSize(new java.awt.Dimension(180, 20));
+        jLabel1.setMaximumSize(new java.awt.Dimension(220, 20));
+        jLabel1.setMinimumSize(new java.awt.Dimension(220, 20));
+        jLabel1.setPreferredSize(new java.awt.Dimension(220, 20));
         tierFontPanel.add(jLabel1);
 
         tierFontLabel.setForeground(new java.awt.Color(51, 102, 255));
@@ -357,9 +357,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeTierFontButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeTierFontButton.setText("Change...");
-        changeTierFontButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeTierFontButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeTierFontButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeTierFontButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeTierFontButtonActionPerformed(evt);
@@ -369,12 +366,14 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         fontSelectionPanel.add(tierFontPanel);
 
+        generalPurposeFontPanel.setMaximumSize(new java.awt.Dimension(32767, 40));
         generalPurposeFontPanel.setLayout(new javax.swing.BoxLayout(generalPurposeFontPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Default general purpose font: ");
-        jLabel3.setMaximumSize(new java.awt.Dimension(180, 20));
-        jLabel3.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel3.setPreferredSize(new java.awt.Dimension(180, 20));
+        jLabel3.setMaximumSize(new java.awt.Dimension(220, 20));
+        jLabel3.setMinimumSize(new java.awt.Dimension(220, 20));
+        jLabel3.setPreferredSize(new java.awt.Dimension(220, 20));
         generalPurposeFontPanel.add(jLabel3);
 
         generalPurposeFontLabel.setForeground(new java.awt.Color(51, 51, 255));
@@ -387,9 +386,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeGeneralPurposeFontButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeGeneralPurposeFontButton.setText("Change...");
-        changeGeneralPurposeFontButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeGeneralPurposeFontButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeGeneralPurposeFontButton.setPreferredSize(new java.awt.Dimension(100, 20));
         changeGeneralPurposeFontButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeGeneralPurposeFontButtonActionPerformed(evt);
@@ -443,9 +439,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeHead2HTMLButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeHead2HTMLButton.setText("Change...");
-        changeHead2HTMLButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeHead2HTMLButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeHead2HTMLButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeHead2HTMLButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeHead2HTMLButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeHead2HTMLButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeHead2HTMLButtonActionPerformed(evt);
@@ -465,9 +460,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeSpeakertable2TranscriptionButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeSpeakertable2TranscriptionButton.setText("Change...");
-        changeSpeakertable2TranscriptionButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeSpeakertable2TranscriptionButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeSpeakertable2TranscriptionButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeSpeakertable2TranscriptionButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeSpeakertable2TranscriptionButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeSpeakertable2TranscriptionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeSpeakertable2TranscriptionButtonActionPerformed(evt);
@@ -487,9 +481,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeTranscription2FormattableButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeTranscription2FormattableButton.setText("Change...");
-        changeTranscription2FormattableButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeTranscription2FormattableButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeTranscription2FormattableButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeTranscription2FormattableButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeTranscription2FormattableButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeTranscription2FormattableButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeTranscription2FormattableButtonActionPerformed(evt);
@@ -509,9 +502,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeFreeStylesheetVisualisationButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeFreeStylesheetVisualisationButton.setText("Change...");
-        changeFreeStylesheetVisualisationButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeFreeStylesheetVisualisationButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeFreeStylesheetVisualisationButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeFreeStylesheetVisualisationButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeFreeStylesheetVisualisationButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeFreeStylesheetVisualisationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeFreeStylesheetVisualisationButtonActionPerformed(evt);
@@ -531,9 +523,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeHIATUtteranceList2HTMLButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeHIATUtteranceList2HTMLButton.setText("Change...");
-        changeHIATUtteranceList2HTMLButton.setMaximumSize(new java.awt.Dimension(100, 20));
-        changeHIATUtteranceList2HTMLButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeHIATUtteranceList2HTMLButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeHIATUtteranceList2HTMLButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeHIATUtteranceList2HTMLButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeHIATUtteranceList2HTMLButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeHIATUtteranceList2HTMLButtonActionPerformed(evt);
@@ -552,10 +543,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel12.setText("HIAT:");
-        jLabel12.setMaximumSize(new java.awt.Dimension(90, 20));
-        jLabel12.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel12.setPreferredSize(new java.awt.Dimension(90, 20));
+        jLabel12.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel12.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel12.setPreferredSize(new java.awt.Dimension(150, 20));
         jPanel6.add(jLabel12);
 
         hiatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -565,9 +557,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeHIATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeHIATButton.setText("Change...");
-        changeHIATButton.setMaximumSize(new java.awt.Dimension(100, 20));
+        changeHIATButton.setMaximumSize(new java.awt.Dimension(100, 30));
         changeHIATButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeHIATButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeHIATButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeHIATButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeHIATButtonActionPerformed(evt);
@@ -579,10 +571,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel14.setText("GAT:");
-        jLabel14.setMaximumSize(new java.awt.Dimension(90, 20));
-        jLabel14.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel14.setPreferredSize(new java.awt.Dimension(90, 20));
+        jLabel14.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel14.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel14.setPreferredSize(new java.awt.Dimension(150, 20));
         jPanel8.add(jLabel14);
 
         gatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -592,9 +585,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeGATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeGATButton.setText("Change...");
-        changeGATButton.setMaximumSize(new java.awt.Dimension(100, 20));
+        changeGATButton.setMaximumSize(new java.awt.Dimension(100, 30));
         changeGATButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeGATButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeGATButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeGATButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeGATButtonActionPerformed(evt);
@@ -606,10 +599,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel15.setText("CHAT: ");
-        jLabel15.setMaximumSize(new java.awt.Dimension(90, 20));
-        jLabel15.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel15.setPreferredSize(new java.awt.Dimension(90, 20));
+        jLabel15.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel15.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel15.setPreferredSize(new java.awt.Dimension(150, 20));
         jPanel9.add(jLabel15);
 
         chatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -619,9 +613,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeCHATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeCHATButton.setText("Change...");
-        changeCHATButton.setMaximumSize(new java.awt.Dimension(100, 20));
+        changeCHATButton.setMaximumSize(new java.awt.Dimension(100, 30));
         changeCHATButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeCHATButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeCHATButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeCHATButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeCHATButtonActionPerformed(evt);
@@ -633,10 +627,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel21.setText("Generic: ");
-        jLabel21.setMaximumSize(new java.awt.Dimension(90, 20));
-        jLabel21.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel21.setPreferredSize(new java.awt.Dimension(90, 20));
+        jLabel21.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel21.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel21.setPreferredSize(new java.awt.Dimension(150, 20));
         jPanel15.add(jLabel21);
 
         genericTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -646,9 +641,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changeGenericButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeGenericButton.setText("Change...");
-        changeGenericButton.setMaximumSize(new java.awt.Dimension(100, 20));
+        changeGenericButton.setMaximumSize(new java.awt.Dimension(100, 30));
         changeGenericButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeGenericButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changeGenericButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changeGenericButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeGenericButtonActionPerformed(evt);
@@ -660,10 +655,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel22.setText("cGAT Minimal: ");
-        jLabel22.setMaximumSize(new java.awt.Dimension(90, 20));
-        jLabel22.setMinimumSize(new java.awt.Dimension(180, 20));
-        jLabel22.setPreferredSize(new java.awt.Dimension(90, 20));
+        jLabel22.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel22.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel22.setPreferredSize(new java.awt.Dimension(150, 20));
         jPanel17.add(jLabel22);
 
         cGATMinimalTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
@@ -673,9 +669,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         changecGATMinimalButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changecGATMinimalButton.setText("Change...");
-        changecGATMinimalButton.setMaximumSize(new java.awt.Dimension(100, 20));
+        changecGATMinimalButton.setMaximumSize(new java.awt.Dimension(100, 30));
         changecGATMinimalButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changecGATMinimalButton.setPreferredSize(new java.awt.Dimension(100, 20));
+        changecGATMinimalButton.setPreferredSize(new java.awt.Dimension(100, 30));
         changecGATMinimalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changecGATMinimalButtonActionPerformed(evt);
@@ -787,40 +783,52 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         tabbedPane.addTab("Segmentation", segmentationPanel);
 
-        autoSavePanel.setLayout(new javax.swing.BoxLayout(autoSavePanel, javax.swing.BoxLayout.Y_AXIS));
+        autoSavePanel.setLayout(new java.awt.BorderLayout());
 
         enableAutoSavePanel.setLayout(new javax.swing.BoxLayout(enableAutoSavePanel, javax.swing.BoxLayout.LINE_AXIS));
 
         enableAutoSaveCheckBox.setText("Enable auto save");
         enableAutoSavePanel.add(enableAutoSaveCheckBox);
 
-        autoSavePanel.add(enableAutoSavePanel);
+        autoSavePanel.add(enableAutoSavePanel, java.awt.BorderLayout.NORTH);
+
+        enableUndoPanel.setLayout(new javax.swing.BoxLayout(enableUndoPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        enableUndoCheckBox.setSelected(true);
+        enableUndoCheckBox.setText("Enable Undo");
+        enableUndoPanel.add(enableUndoCheckBox);
+
+        autoSavePanel.add(enableUndoPanel, java.awt.BorderLayout.SOUTH);
+
+        autoSaveMainPanel.setLayout(new javax.swing.BoxLayout(autoSaveMainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         autoSaveFilenamePanel.setLayout(new javax.swing.BoxLayout(autoSaveFilenamePanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Auto save filename: ");
-        jLabel8.setMaximumSize(new java.awt.Dimension(117, 16));
-        jLabel8.setPreferredSize(new java.awt.Dimension(117, 16));
+        jLabel8.setMaximumSize(new java.awt.Dimension(180, 16));
+        jLabel8.setPreferredSize(new java.awt.Dimension(180, 16));
         autoSaveFilenamePanel.add(jLabel8);
 
         autoSaveFilenameTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
-        autoSaveFilenameTextField.setMinimumSize(new java.awt.Dimension(180, 20));
-        autoSaveFilenameTextField.setPreferredSize(new java.awt.Dimension(180, 20));
+        autoSaveFilenameTextField.setMinimumSize(new java.awt.Dimension(250, 20));
+        autoSaveFilenameTextField.setPreferredSize(new java.awt.Dimension(250, 20));
         autoSaveFilenamePanel.add(autoSaveFilenameTextField);
 
-        autoSavePanel.add(autoSaveFilenamePanel);
+        autoSaveMainPanel.add(autoSaveFilenamePanel);
 
         autoSavePathPanel.setLayout(new javax.swing.BoxLayout(autoSavePathPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel9.setText("Auto save path: ");
-        jLabel9.setMaximumSize(new java.awt.Dimension(117, 16));
+        jLabel9.setMaximumSize(new java.awt.Dimension(180, 16));
         jLabel9.setMinimumSize(new java.awt.Dimension(117, 16));
-        jLabel9.setPreferredSize(new java.awt.Dimension(117, 16));
+        jLabel9.setPreferredSize(new java.awt.Dimension(180, 16));
         autoSavePathPanel.add(jLabel9);
 
         autoSavePathTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
-        autoSavePathTextField.setMinimumSize(new java.awt.Dimension(180, 20));
-        autoSavePathTextField.setPreferredSize(new java.awt.Dimension(180, 20));
+        autoSavePathTextField.setMinimumSize(new java.awt.Dimension(250, 20));
+        autoSavePathTextField.setPreferredSize(new java.awt.Dimension(250, 20));
         autoSavePathPanel.add(autoSavePathTextField);
 
         browseForAutoSavePathButton.setText("Browse...");
@@ -831,14 +839,15 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         });
         autoSavePathPanel.add(browseForAutoSavePathButton);
 
-        autoSavePanel.add(autoSavePathPanel);
+        autoSaveMainPanel.add(autoSavePathPanel);
 
         autoSaveIntervalPanel.setLayout(new javax.swing.BoxLayout(autoSaveIntervalPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Auto save interval: ");
-        jLabel10.setMaximumSize(new java.awt.Dimension(117, 16));
+        jLabel10.setMaximumSize(new java.awt.Dimension(180, 16));
         jLabel10.setMinimumSize(new java.awt.Dimension(117, 16));
-        jLabel10.setPreferredSize(new java.awt.Dimension(117, 16));
+        jLabel10.setPreferredSize(new java.awt.Dimension(180, 16));
         autoSaveIntervalPanel.add(jLabel10);
 
         autoSaveIntervalSlider.setMajorTickSpacing(10);
@@ -854,15 +863,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel11.setText("min");
         autoSaveIntervalPanel.add(jLabel11);
 
-        autoSavePanel.add(autoSaveIntervalPanel);
+        autoSaveMainPanel.add(autoSaveIntervalPanel);
 
-        enableUndoPanel.setLayout(new javax.swing.BoxLayout(enableUndoPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        enableUndoCheckBox.setSelected(true);
-        enableUndoCheckBox.setText("Enable Undo");
-        enableUndoPanel.add(enableUndoCheckBox);
-
-        autoSavePanel.add(enableUndoPanel);
+        autoSavePanel.add(autoSaveMainPanel, java.awt.BorderLayout.CENTER);
 
         tabbedPane.addTab("Auto save", null, autoSavePanel, "");
 
@@ -896,7 +899,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         playerSelectionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose a media player"));
         playerSelectionPanel.setMaximumSize(new java.awt.Dimension(2147483647, 5000));
         playerSelectionPanel.setMinimumSize(new java.awt.Dimension(166, 260));
-        playerSelectionPanel.setPreferredSize(new java.awt.Dimension(1211, 260));
+        playerSelectionPanel.setPreferredSize(new java.awt.Dimension(1200, 600));
         playerSelectionPanel.setLayout(new javax.swing.BoxLayout(playerSelectionPanel, javax.swing.BoxLayout.Y_AXIS));
 
         mediaPlayersButtonGroup.add(basPlayerRadioButton);
@@ -1278,6 +1281,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField autoSaveFilenameTextField;
     private javax.swing.JPanel autoSaveIntervalPanel;
     private javax.swing.JSlider autoSaveIntervalSlider;
+    private javax.swing.JPanel autoSaveMainPanel;
     private javax.swing.JPanel autoSavePanel;
     private javax.swing.JPanel autoSavePathPanel;
     private javax.swing.JTextField autoSavePathTextField;

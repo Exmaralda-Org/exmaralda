@@ -26,13 +26,15 @@ public class AbstractXMLOpenDialog extends javax.swing.JFileChooser {
         super();
         setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
         setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ExmaraldaFileFilter());
-        setMinimumSize(new java.awt.Dimension(400, 350));
+        /*setMinimumSize(new java.awt.Dimension(400, 350));
         setPreferredSize(new java.awt.Dimension(600, 400));
-        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMaximumSize(new java.awt.Dimension(800, 600));*/
         success=false;
     }
 
-    /** Creates new AbstractXMLOpenDialog and sets start directory*/
+    /** Creates new AbstractXMLOpenDialog and sets start director
+     * @param startDirectory
+     */
     public AbstractXMLOpenDialog(String startDirectory) {
         this();
         try {
@@ -50,7 +52,6 @@ public class AbstractXMLOpenDialog extends javax.swing.JFileChooser {
     }
     
     public void showSAXErrorDialog (SAXException se, java.awt.Component parent){
-        javax.swing.JOptionPane errorDialog = new javax.swing.JOptionPane();
         JOptionPane.showMessageDialog(  parent,
                                         "File could not be read." + System.getProperty("line.separator")
                                         + "Error message was:" + System.getProperty("line.separator")
@@ -61,14 +62,14 @@ public class AbstractXMLOpenDialog extends javax.swing.JFileChooser {
     }
     
     public void showJexmaraldaErrorDialog(JexmaraldaException je, java.awt.Component parent){
-        javax.swing.JOptionPane errorDialog = new javax.swing.JOptionPane();
-        errorDialog.showMessageDialog(  parent,
+        JOptionPane.showMessageDialog(  parent,
                                         "File does not seem to be valid: " + je.getMessage(),
                                         "jexmaralda error",
                                         javax.swing.JOptionPane.ERROR_MESSAGE);
         success=false;    
     }
 
+    @Override
     public void setDialogTitle(String dialogTitle) {
         String dt = org.exmaralda.common.helpers.Internationalizer.getString(dialogTitle);
         super.setDialogTitle(dt);

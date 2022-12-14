@@ -23,7 +23,8 @@ public class WordlistAction extends AbstractFSMSegmentationAction {
     
     WordListDialog wordListDialog;
 
-    /** Creates a new instance of CountDIDAAction */
+    /** Creates a new instance of CountDIDAAction
+     * @param t */
     public WordlistAction(PartitureTableWithActions t) {
         super("Word list...", t);
         wordListDialog = new WordListDialog((JFrame)(table.getTopLevelAncestor()), false);

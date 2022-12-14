@@ -1,6 +1,5 @@
 package org.exmaralda.partitureditor.jexmaralda.sax;
 
-import java.net.*;
 import java.io.*;
 import org.xml.sax.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
@@ -32,7 +31,10 @@ public class BasicTranscriptionSaxReader extends Object {
     
     
 
-    /** reads transcription from XML file and returns it */
+    /** reads transcription from XML file and returns it
+     * @param inputFileName
+     * @return 
+     * @throws org.xml.sax.SAXException */
     public BasicTranscription readFromFile(String inputFileName) throws SAXException {
         // Create a JAXP SAXParserFactory and configure it
         try{
@@ -63,7 +65,11 @@ public class BasicTranscriptionSaxReader extends Object {
             throw new SAXException ("Parser Configuration error", pce);
         }        
     }
-    /** reads transcription from XML file and returns it */
+    /** reads transcription from XML file and returns it
+     * @param inputFileName
+     * @param readOnlyHead
+     * @return 
+     * @throws org.xml.sax.SAXException */
     public BasicTranscription readFromFile(String inputFileName, boolean readOnlyHead) throws SAXException {
         // Create a JAXP SAXParserFactory and configure it
         try{
@@ -100,6 +106,9 @@ public class BasicTranscriptionSaxReader extends Object {
     /** reads transcription from XML string and returns it 
      *
      * added by JTM, 23.11.2001
+     * @param inputString
+     * @return 
+     * @throws org.xml.sax.SAXException
      */
     
     public BasicTranscription readFromString(String inputString) throws SAXException {

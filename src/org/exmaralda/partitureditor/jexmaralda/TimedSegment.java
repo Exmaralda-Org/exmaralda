@@ -53,10 +53,12 @@ public class TimedSegment extends DefaultMutableTreeNode implements Identifiable
         t.setURL(this.getURL());
     }
     
+    @Override
     public void setDescription(String d) {
         description = d;
     }
     
+    @Override
     public void setEnd(String e) {
         end = e;
     }
@@ -65,21 +67,25 @@ public class TimedSegment extends DefaultMutableTreeNode implements Identifiable
         id = i;
     }
     
+    @Override
     public String getID() {
         return id;
     }
     
+    @Override
     public String getStart() {
         return start;
     }
     
+    @Override
     public void setName(String n) {
         name = n;
     }
     
+    @Override
     public String getDescription() {
         if (this.getChildCount()>0){
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int pos=0; pos<this.getChildCount(); pos++){
                 sb.append(((Describable)getChildAt(pos)).getDescription());
             }
@@ -89,44 +95,61 @@ public class TimedSegment extends DefaultMutableTreeNode implements Identifiable
         }                
     }
     
+    @Override
     public String getEnd() {
         return end;
     }
     
+    @Override
     public void setStart(String s) {
         start = s;
     }
     
+    @Override
     public String getName() {
         return name;
     }
     
-    /** returns the link URL of this event  */
+    /** returns the link URL of this event
+     * @return  */
+    @Override
     public String getURL() {
         return url;        
     }    
     
-    /** sets the link medium of this event to the specified value  */
+    /** sets the link medium of this event to the specified value
+     * @param m */
+    @Override
     public void setMedium(String m) {
         medium = m;
     }
     
-    /** returns the link medium of this event  */
+    /** returns the link medium of this event
+     * @return  */
+    @Override
     public String getMedium() {
         return medium;
     }
     
-    /** sets the link URL of this event to the specified value  */
+    /** sets the link URL of this event to the specified value
+     * @param u */
+    @Override
     public void setURL(String u) {
         url = u;
     }
     
+    /**
+     *
+     * @return
+     */
+    @Override
     public boolean getAllowsChildren(){
         return true;
     }
     
+    @Override
     public String toString(){
-        return new String(getName() + " : " + getDescription());
+        return getName() + " : " + getDescription();
     }
     
     public Vector getLeaves(){
@@ -173,6 +196,22 @@ public class TimedSegment extends DefaultMutableTreeNode implements Identifiable
         return result;
     }
     
+
+    public Vector getAllSegmentsMatching(String regex){
+        Vector result = new Vector();
+        for (int pos=0; pos<this.getChildCount(); pos++){
+            Identifiable i = (Identifiable)this.getChildAt(pos);
+            if (i.getName().matches(regex)){
+                result.addElement(i);
+            }
+            if (i instanceof TimedSegment){
+                result.addAll(((TimedSegment)i).getAllSegmentsMatching(regex));
+            }
+        }        
+        return result;
+    }
+
+
     public HashSet getAllSegmentNames(){
         HashSet names = new HashSet();
         for (int pos=0; pos<this.getChildCount(); pos++){
@@ -185,6 +224,7 @@ public class TimedSegment extends DefaultMutableTreeNode implements Identifiable
         return names;
     }
     
+    @Override
     public Hashtable indexTLIs(){
         Hashtable result = new Hashtable();
         result.put(getStart(),this);
