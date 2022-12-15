@@ -30,7 +30,9 @@ public abstract class AbstractPartitureTable extends JCTable implements JCTableD
         progressBar.setMaximum(100);
     }
 
-    /** processes change events in the data model */
+    /** processes change events in the data model
+     * @param evt */
+    @Override
     public void dataChanged(final com.klg.jclass.table.JCTableDataEvent evt) {
         setEnabled(false);
         int command = evt.getCommand();
