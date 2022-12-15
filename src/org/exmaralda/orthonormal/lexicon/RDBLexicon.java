@@ -259,15 +259,14 @@ public class RDBLexicon extends AbstractNormalizationLexicon {
         //return capitals.contains(form);
     }
 
-}
-class FormAndFrequency {
-    String form;
-    int frequency;
-
-    public FormAndFrequency(String form, int frequency) {
-        this.form = form;
-        this.frequency = frequency;
+    @Override
+    public boolean hasLanguageInformation() {
+        return false;
     }
 
+    @Override
+    public String getLanguageForPair(String token, String bestForm) {
+        return "x";
+    }
 
 }

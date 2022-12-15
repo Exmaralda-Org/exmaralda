@@ -123,6 +123,16 @@ public class SimpleXMLFileLexicon extends AbstractNormalizationLexicon {
             put(form, lemma, transcriptionID, wordID);
         }                
     }
+
+    @Override
+    public boolean hasLanguageInformation() {
+        return false;
+    }
+
+    @Override
+    public String getLanguageForPair(String token, String bestForm) {
+        return "x";
+    }
     
 
 

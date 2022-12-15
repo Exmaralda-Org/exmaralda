@@ -19,6 +19,9 @@ public class NormalisationInfo {
     
     String form;
     HashMap<String, Integer> frequencyMap = new HashMap<>();
+    HashMap<FormLanguagePair, Integer> frequencyMapWithLanguage = new HashMap<>();
+    
+    static String DEFAULT_LANGUAGE = "deu";
 
     public NormalisationInfo(String form) {
         this.form = form;
@@ -34,10 +37,18 @@ public class NormalisationInfo {
         for (Object o : e.getChildren("n")){
             Element n = (Element)o;
             String nForm = n.getAttributeValue("corr");
+            int freq = Integer.parseInt(n.getAttributeValue("freq"));
             if (!(frequencyMap.containsKey(nForm))){
                 frequencyMap.put(nForm, 0);
             }
-            frequencyMap.put(nForm, frequencyMap.get(nForm) + Integer.parseInt(n.getAttributeValue("freq")));
+            frequencyMap.put(nForm, frequencyMap.get(nForm) + freq);
+
+            String lang = e.getAttributeValue("lang");
+            if (lang==null){
+                lang = DEFAULT_LANGUAGE;
+            }
+            FormLanguagePair formLanguage = new FormLanguagePair(nForm, lang);
+            frequencyMapWithLanguage.put(formLanguage, freq);
         }
         
     }
@@ -73,26 +84,43 @@ public class NormalisationInfo {
         for (String lemma : frequencyMap.keySet()){
             v.add(new FormAndFrequency(lemma, frequencyMap.get(lemma)));
         }
-        Collections.sort(v, new Comparator<FormAndFrequency>(){
-            @Override
-            public int compare(FormAndFrequency o1, FormAndFrequency o2) {
-                //System.out.println(o1.frequency + " --- " + o2.frequency);
-                if (o1.frequency>o2.frequency) return -1;
-                if (o1.frequency<o2.frequency) return +1;
-                return (o1.form.compareTo(o2.form));
-            }            
+        Collections.sort(v, (FormAndFrequency o1, FormAndFrequency o2) -> {
+            //System.out.println(o1.frequency + " --- " + o2.frequency);
+            if (o1.frequency>o2.frequency) return -1;
+            if (o1.frequency<o2.frequency) return +1;
+            return (o1.form.compareTo(o2.form));            
         });
 
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (FormAndFrequency faf : v){
             result.add(faf.form);
-            //System.out.println("Added " + faf.form);
         }        
         
-        //System.out.println("--------------");
         return result;
         
     }
     
+    List<FormLanguagePair> getCandidateFormsWithLanguage() {
+        ArrayList<FormLanguagePairAndFrequency> v = new ArrayList<>();
+        for (FormLanguagePair form : frequencyMapWithLanguage.keySet()){
+            v.add(new FormLanguagePairAndFrequency(form, frequencyMapWithLanguage.get(form)));
+        }
+        Collections.sort(v, new Comparator<FormLanguagePairAndFrequency>(){
+            @Override
+            public int compare(FormLanguagePairAndFrequency o1, FormLanguagePairAndFrequency o2) {
+                //System.out.println(o1.frequency + " --- " + o2.frequency);
+                if (o1.frequency>o2.frequency) return -1;
+                if (o1.frequency<o2.frequency) return +1;
+                return (o1.formLanguagePair.compareTo(o2.formLanguagePair)); 
+            }            
+        });
+
+        ArrayList<FormLanguagePair> result = new ArrayList<>();
+        for (FormLanguagePairAndFrequency faf : v){
+            result.add(faf.formLanguagePair);
+        }                
+        return result;
+        
+    }
     
 }

@@ -110,4 +110,14 @@ public class SimpleRDBLexicon extends AbstractNormalizationLexicon {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean hasLanguageInformation() {
+        return false;
+    }
+
+    @Override
+    public String getLanguageForPair(String token, String bestForm) {
+        return "x";
+    }
+
 }

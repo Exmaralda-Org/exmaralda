@@ -10,12 +10,12 @@ import java.io.IOException;
  *
  * @author Schmidt
  */
-public class DerewoWordlist extends AbstractSimpleWordlist {
+public class CocaWordlist extends AbstractSimpleWordlist {
 
-    String DEREWO_PATH = "/org/exmaralda/orthonormal/lexicon/derewo_wordlist.txt";
+    String COCA_PATH = "/org/exmaralda/orthonormal/lexicon/coca_wordlist.txt";
     
-    public DerewoWordlist() throws IOException {
-        init(DEREWO_PATH);
+    public CocaWordlist() throws IOException {
+        init(COCA_PATH);
     }
     
     
