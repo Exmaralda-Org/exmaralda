@@ -42,7 +42,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
     }
     
     public String toXML(){
-        StringBuffer sb=new StringBuffer();
+        StringBuilder sb=new StringBuilder();
         sb.append(StringUtilities.makeXMLOpenElement("segmented-transcription", null) + "\n");
         sb.append(super.toXML());
         sb.append(getBody().toXML());
@@ -65,7 +65,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
         FileOutputStream fos = new FileOutputStream(new File(filename));
         fos.write(StringConstants.XML_HEADER.getBytes("UTF-8"));        
         fos.write(StringUtilities.makeXMLDoctypeSegmentedTranscription(pathToDTD).getBytes("UTF-8"));
-        fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
+        //fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
         fos.write(toXML().getBytes("UTF-8"));
         fos.close();
         System.out.println("document written.");

@@ -22,6 +22,9 @@ public class ComaXMLOutputter extends XMLOutputter {
 		//changed for #340
                 //Format format = Format.getRawFormat();
                 Format format = Format.getPrettyFormat();
+                // need to be really conservative here
+                // because this class is used to write segmented transcriptions?
+                format.setTextMode(Format.TextMode.PRESERVE);
 		format.setEncoding("UTF-8");
 		this.setFormat(format);
 	}

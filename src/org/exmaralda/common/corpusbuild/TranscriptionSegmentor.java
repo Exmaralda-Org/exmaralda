@@ -197,8 +197,7 @@ public class TranscriptionSegmentor {
 						}
 						return false;
 					case ERRORS_FAILSAFE:
-						System.out
-								.println("Switched to default because of error");
+						System.out.println("Switched to default because of error");
 						st = bt.toSegmentedTranscription();
 						st.setEXBSource(f.getAbsolutePath());
 					}
