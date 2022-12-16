@@ -70,7 +70,7 @@ public class EventListTranscriptionConverter {
                 timelineTolerance);
         
         // import speakers and memorize the id mappings
-        Hashtable<String,String> speakerIDMappings = new Hashtable<String,String>();
+        Hashtable<String,String> speakerIDMappings = new Hashtable<>();
         for (int pos=0; pos<bt.getHead().getSpeakertable().getNumberOfSpeakers(); pos++){
             org.exmaralda.partitureditor.jexmaralda.Speaker importedSpeaker 
                     = bt.getHead().getSpeakertable().getSpeakerAt(pos);
@@ -142,7 +142,7 @@ public class EventListTranscriptionConverter {
                 timeline.addTimelineItem(tli);
                 count++;
             } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
             }
         }
 
@@ -157,7 +157,7 @@ public class EventListTranscriptionConverter {
             try {
                 st.addSpeaker(sp);
             } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
             }
             
             Tier t = new Tier();
@@ -169,7 +169,7 @@ public class EventListTranscriptionConverter {
             try {
                 result.getBody().addTier(t);
             } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
             }
         }
         
@@ -183,7 +183,7 @@ public class EventListTranscriptionConverter {
         try {
             result.getBody().addTier(nn_t);
         } catch (JexmaraldaException ex) {
-            ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
         }
 
         // put events into tiers
@@ -206,7 +206,7 @@ public class EventListTranscriptionConverter {
                     evt.getUDEventInformation().setAttribute("Tier-ID", t.getID());
                 }
             } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getLocalizedMessage());
             }
         }
                 
