@@ -9,7 +9,7 @@
  * Created on 23.03.2010, 15:17:24
  */
 
-package org.exmaralda.exakt.wizard.folkercorpuswizard;
+package org.exmaralda.exakt.wizard.corpuswizards;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

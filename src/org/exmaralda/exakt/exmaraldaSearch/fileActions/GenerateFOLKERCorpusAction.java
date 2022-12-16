@@ -21,7 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.corpusbuild.FOLKERBuilder;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.wizard.folkercorpuswizard.FolkerCorpusWizard;
+import org.exmaralda.exakt.wizard.corpuswizards.FolkerCorpusWizard;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;

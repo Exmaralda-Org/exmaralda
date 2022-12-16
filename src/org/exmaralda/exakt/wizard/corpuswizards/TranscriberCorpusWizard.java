@@ -7,34 +7,31 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.exakt.wizard.folkercorpuswizard;
+package org.exmaralda.exakt.wizard.corpuswizards;
 
 import java.awt.Cursor;
-import java.lang.reflect.InvocationTargetException;
 import org.exmaralda.exakt.wizard.*;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Vector;
 import javax.swing.*;
-import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.search.SearchEvent;
 
 /**
  *
  * @author thomas
  */
-public class FolkerCorpusWizard extends AbstractWizardDialog{
+public class TranscriberCorpusWizard extends AbstractWizardDialog{
     
     String CORPUS_PATH_EXPLANATION = "<html><p style='font-family:sans-serif;font-size:11pt;'><b>Corpus File and Directory</b><br/>Specify the <span style='color:blue; font-weight:bold'>corpus file</span> to be "
-            + "generated. The wizard will look for FOLKER transcriptions in and beneath the directory in which this file is located.</p></html>";
+            + "generated. The wizard will look for Transcriber files in and beneath the directory in which this file is located.</p></html>";
     
-    String TRANSCRIPTIONS_EXPLANATION = "<html><p style='font-family:sans-serif;font-size:11pt;'><b>Transcription(s)</b><br/>Select the FOLKER transcriptions to be included in the corpus. "
+    String TRANSCRIPTIONS_EXPLANATION = "<html><p style='font-family:sans-serif;font-size:11pt;'><b>Transcription(s)</b><br/>Select the Transcriber files to be included in the corpus. "
             + "Double click on any entry to change its state from 'included' (green check mark) to 'excluded' (red X) or vice versa. ";
 
     String PARAMETERS_EXPLANATION = "<html><p style='font-family:sans-serif;font-size:11pt;'><b>Parameters</b><br/>Specify parameters for generating the EXMARaLDA corpus.<br/> "
             + "Choose <span style='color:blue; font-weight:bold'>separate folder</span> if you want all generated EXMARaLDA transcriptions to be written to a separate folder"
             + "underneath the top level folder. This makes it easier to remove the generated files later. <br/>"
-            + "Choose <span style='color:blue; font-weight:bold'>same folder</span> if you want all generated EXMARaLDA transcriptions to be written to the same folder as the original FOLKER transcription"
+            + "Choose <span style='color:blue; font-weight:bold'>same folder</span> if you want all generated EXMARaLDA transcriptions to be written to the same folder as the original Transcriber file. "
             + "This ensures that relative audio links are kept and remain valid even if you move the corpus folder.<br/>"
             + "Choose <span style='color:blue; font-weight:bold'>Generate Basic Transcriptions</span> if you want to write EXMARaLDA basic transcriptions alongside the EXMARaLDA segemented transcriptions"
             + "This will require additional space, but enables you to edit transcriptions with the EXMARaLDA editor. ";
@@ -47,10 +44,10 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
     int dirCount = 0;
 
     /** Creates a new instance of WizardTemplate */
-    public FolkerCorpusWizard(java.awt.Frame parent, boolean modal) {        
+    public TranscriberCorpusWizard(java.awt.Frame parent, boolean modal) {        
         //super(parent,modal);
         this.setModal(modal);
-        setTitle("Generate Corpus from FOLKER Transcriptions");
+        setTitle("Generate Corpus from Transcriber files");
         initPanels();
         initialise();
         loadSettings();
@@ -100,7 +97,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
                 } catch (UnsupportedLookAndFeelException ex) {
                     ex.printStackTrace();
                 }
-                new FolkerCorpusWizard(new javax.swing.JFrame(), true).setVisible(true);
+                new TranscriberCorpusWizard(new javax.swing.JFrame(), true).setVisible(true);
             }
         });
     }
@@ -118,7 +115,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
                 new Thread(){
                     @Override
                     public void run() {
-                        Vector<File> folkerFiles = listFolkerFiles(directory);
+                        Vector<File> folkerFiles = listTranscriberFiles(directory);
                         folkerTranscriptionsWizardPanel.setFiles(folkerFiles);
                     }                    
                 }.start();
@@ -131,7 +128,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
         }
     }
 
-    public Vector<File> listFolkerFiles(File directory){
+    public Vector<File> listTranscriberFiles(File directory){
         dirCount++;
         /*String text = "Scanning directories";
         for (int pos=0; pos<(dirCount/5)%10; pos++){
@@ -142,7 +139,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
         Vector<File> result = new Vector<File>();
         File[] folkerFiles = directory.listFiles(new FileFilter(){
             public boolean accept(File pathname) {
-                return (pathname.getName().toLowerCase().endsWith("flk") || pathname.getName().toLowerCase().endsWith("fln"));
+                return pathname.getName().toLowerCase().endsWith("trs");
             }
         });
         for (File f : folkerFiles){result.addElement(f);}
@@ -152,7 +149,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
             }
         });
         for (File subd : subDirectories){
-            result.addAll(listFolkerFiles(subd));
+            result.addAll(listTranscriberFiles(subd));
         }
         return result;
     }
@@ -162,7 +159,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
     public void loadSettings() {
         java.util.prefs.Preferences preferences =
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
-        String comaPath = preferences.get("folkerwizard.comapath", "");
+        String comaPath = preferences.get("transcriberwizard.comapath", "");
         corpusNameAndPathPanel.setPath(comaPath);
         corpusNameAndPathPanel.lastDirectory = new File(comaPath);
 
@@ -172,7 +169,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
         java.util.prefs.Preferences preferences =
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
         String comapath = corpusNameAndPathPanel.getPath();
-        preferences.put("folkerwizard.comapath", comapath);
+        preferences.put("transcriberwizard.comapath", comapath);
 
     }
 

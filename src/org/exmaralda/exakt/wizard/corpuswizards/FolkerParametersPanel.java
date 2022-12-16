@@ -9,7 +9,7 @@
  * Created on 23.03.2010, 16:36:42
  */
 
-package org.exmaralda.exakt.wizard.folkercorpuswizard;
+package org.exmaralda.exakt.wizard.corpuswizards;
 
 /**
  *
