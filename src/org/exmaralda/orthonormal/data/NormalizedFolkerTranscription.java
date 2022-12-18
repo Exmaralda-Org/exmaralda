@@ -313,25 +313,27 @@ public class NormalizedFolkerTranscription {
             Document transformResultDocument = IOUtilities.readDocumentFromString(transformResult);
             List timelineForks = XPath.selectNodes(transformResultDocument, "//timeline-fork");
             for (Object o2 : timelineForks){
-                Element tlfElement = (Element)((Element)o2).clone();
-                segmentedTierElement.addContent(index - 1, tlfElement);
-                index++;                
+                if (!((Element)o2).getChildren().isEmpty()){
+                    Element tlfElement = (Element)((Element)o2).clone();
+                    segmentedTierElement.addContent(index - 1, tlfElement);
+                    index++;                
+                }
             }
             
             Element tsElement = (Element) XPath.selectSingleNode(transformResultDocument, "//ts[@n='sc']");
             segmentationElement.addContent(tsElement.detach());
             
-            Element normElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@n='norm']");
+            Element normElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='norm']");
             if (normElement!=null){
-                normAnnotations.get(speaker).addContent(normElement);
+                normAnnotations.get(speaker).addContent(normElement.detach());
             }
-            Element lemmaElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@n='lemma']");
-            if (normElement!=null){
-                lemmaAnnotations.get(speaker).addContent(lemmaElement);
+            Element lemmaElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='lemma']");
+            if (lemmaElement!=null){
+                lemmaAnnotations.get(speaker).addContent(lemmaElement.detach());
             }
-            Element posElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@n='pos']");
+            Element posElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='pos']");
             if (posElement!=null){
-                posAnnotations.get(speaker).addContent(posElement);
+                posAnnotations.get(speaker).addContent(posElement.detach());
             }
         }
         

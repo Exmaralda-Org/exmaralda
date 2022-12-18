@@ -290,7 +290,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
         // and for each entry
         // look into the transcription
         // and find annotations of the specified category
-        Vector<AnalysisInterface> newAnalyses = new Vector<AnalysisInterface>();
+        Vector<AnalysisInterface> newAnalyses = new Vector<>();
         newAnalyses.addAll(this.getAnalyses());
         FreeAnalysis additionalAnalysis = new FreeAnalysis(annotationCategory);
         newAnalyses.add(additionalAnalysis);
@@ -321,7 +321,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
                     // make a basic version from the segmented one
                     bt = st.toBasicTranscription();
                 } catch (JexmaraldaException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getLocalizedMessage());
                 }
             }
             String tierID = sr.getAdditionalData()[0];

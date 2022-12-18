@@ -57,7 +57,7 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
             table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             table.adjustColumns();
         } catch (HeadlessException | SAXException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(table, ex.getLocalizedMessage());
         }
     }

@@ -25,7 +25,7 @@
                     <xsl:otherwise>0</xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>           
-            <timeline-fork>
+            <timeline-fork type="normal">
                 <xsl:attribute name="start">
                     <xsl:choose>
                         <xsl:when test="preceding-sibling::time"><xsl:value-of select="preceding-sibling::time[1]/@timepoint-reference"/></xsl:when>
@@ -54,9 +54,19 @@
             </timeline-fork>
         </xsl:for-each>
         <xsl:if test="not(*[last()][self::time])">
-            <timeline-fork>
+            <timeline-fork type="last">
                 <xsl:variable name="LAST_POSITION" select="count(time[last()]/preceding-sibling::*)"/>
-                <xsl:attribute name="start" select="time[last()]/@timepoint-reference"/>
+                <!-- <xsl:attribute name="start" select="time[last()]/@timepoint-reference"/> -->
+                <xsl:attribute name="start">
+                    <xsl:choose>
+                        <xsl:when test="time[last()]">
+                            <xsl:value-of select="time[last()]/@timepoint-reference"/>                           
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@start-reference"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
                 <xsl:attribute name="end" select="@end-reference"/>
                 <xsl:for-each select="(w|pause|breath)[
                     count(preceding-sibling::*)&gt;$LAST_POSITION

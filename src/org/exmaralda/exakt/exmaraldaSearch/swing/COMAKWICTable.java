@@ -18,6 +18,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.*;
 import javax.swing.*;
 import java.util.*;
+import static javax.swing.SwingConstants.RIGHT;
+import javax.swing.border.LineBorder;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.search.analyses.AnalysisInterface;
 import org.exmaralda.exakt.search.analyses.BinaryAnalysis;
@@ -85,6 +87,8 @@ public class COMAKWICTable  extends javax.swing.JTable
                 c.setBackground(Color.DARK_GRAY);
                 c.setForeground(Color.WHITE);
                 c.setFont(c.getFont().deriveFont(Font.BOLD));
+                ((JLabel)c).setHorizontalAlignment(CENTER);
+                ((JLabel)c).setBorder(new LineBorder(java.awt.Color.LIGHT_GRAY));
                 return c;
             };            
         };
@@ -171,9 +175,9 @@ public class COMAKWICTable  extends javax.swing.JTable
 
                 javax.swing.table.TableColumn leftContextColumn = getColumnModel().getColumn(4);
                 leftContextColumn.setMaxWidth(800);
-                leftContextColumn.setPreferredWidth(Math.max(leftContextColumn.getPreferredWidth(),270));
-
-                javax.swing.table.TableColumn matchTextColumn = getColumnModel().getColumn(5);
+                leftContextColumn.setPreferredWidth(Math.max(leftContextColumn.getPreferredWidth(),270));                
+                
+                javax.swing.table.TableColumn matchTextColumn = getColumnModel().getColumn(5);                
                 matchTextColumn.setMaxWidth(800);
                 matchTextColumn.setPreferredWidth(Math.max(matchTextColumn.getPreferredWidth(),70));
 
@@ -182,6 +186,7 @@ public class COMAKWICTable  extends javax.swing.JTable
                 rightContextColumn.setPreferredWidth(Math.max(rightContextColumn.getPreferredWidth(),270));
             }
             javax.swing.table.JTableHeader header = this.getTableHeader();
+            
             //header.setPreferredSize(new java.awt.Dimension(header.getPreferredSize().width, 30));
             header.revalidate();
             header.repaint();
