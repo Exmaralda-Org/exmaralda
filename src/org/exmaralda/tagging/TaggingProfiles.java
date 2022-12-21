@@ -28,23 +28,29 @@ public class TaggingProfiles {
     public static String PREFERENCES_NODE = "org.sfb538.exmaralda.treeTagger";
 
     public static String getSegmentationXPathForProfile(String profileName){
-        if (profileName.equals("HIAT transcription - words and punctuation")){
-            return HIAT_WORDS_PUNCTUATION_SEGMENTATION_XPATH;
-        } else if (profileName.equals("Generic - words and punctuation")){
-            return GENERIC_WORDS_PUNCTUATION_SEGMENTATION_XPATH;            
-        } else if (profileName.equals("cGAT minimal transcription - words")){
-            return CGAT_MINIMAL_WORDS_SEGMENTATION_XPATH;            
+        switch (profileName) {
+            case "HIAT transcription - words and punctuation":
+                return HIAT_WORDS_PUNCTUATION_SEGMENTATION_XPATH;
+            case "Generic - words and punctuation":
+                return GENERIC_WORDS_PUNCTUATION_SEGMENTATION_XPATH;
+            case "cGAT minimal transcription - words":            
+                return CGAT_MINIMAL_WORDS_SEGMENTATION_XPATH;
+            default:
+                break;
         }
         return "";
     }
 
     public static String getTokenXPathForProfile(String profileName){
-        if (profileName.equals("HIAT transcription - words and punctuation")){
-            return HIAT_WORDS_PUNCTUATION_TOKEN_XPATH;
-        } else if (profileName.equals("Generic - words and punctuation")){
-            return GENERIC_WORDS_PUNCTUATION_TOKEN_XPATH;            
-        } else if (profileName.equals("cGAT minimal transcription - words")){
-            return CGAT_MINIMAL_WORDS_TOKEN_XPATH;            
+        switch (profileName) {
+            case "HIAT transcription - words and punctuation":
+                return HIAT_WORDS_PUNCTUATION_TOKEN_XPATH;
+            case "Generic - words and punctuation":
+                return GENERIC_WORDS_PUNCTUATION_TOKEN_XPATH;
+            case "cGAT minimal transcription - words":            
+                return CGAT_MINIMAL_WORDS_TOKEN_XPATH;
+            default:
+                break;
         }
         return "";
     }

@@ -29,10 +29,8 @@ public class SextantTokenHandler implements org.annolab.tt4j.ProbabilityHandler<
             //Element root = new Element("annotation");
             //sextantDocument = new Document(root);
             sextantDocument = new IOUtilities().readDocumentFromResource("/org/exmaralda/tagging/DummySextantAnnotation.exa");
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (JDOMException | IOException ex) {
+            System.out.println(ex.getLocalizedMessage());
         }
     }
 

@@ -16,7 +16,6 @@ import org.annolab.tt4j.TreeTaggerWrapper;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Attribute;
 import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
 
@@ -43,8 +42,8 @@ public class UNSD_DebugTagging {
     private void doit() throws IOException, JDOMException, TreeTaggerException {
         String xpathToTokens = TreeTaggableOrthonormalTranscription.XPATH_NO_XY;
         boolean applyPP = true;    
-        String TTC = "c:\\TreeTagger";
-        String PF = "C:\\TreeTagger\\lib\\italian.par";
+        String TTC = "C:\\Users\\bernd\\Dropbox\\TreeTagger";
+        String PF = "C:\\Users\\bernd\\Dropbox\\TreeTagger\\lib\\english-bnc.par";
         String ENC = "UTF-8";
         String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
         String transcript = "M:\\GeWiss\\1-NON-DE\\FLN\\ita\\GWSS_E_03017_SE_01_T_01_DF_01.fln";
@@ -63,7 +62,7 @@ public class UNSD_DebugTagging {
             }
              
          });
-         String[] tokens = {"ihr", "seid"};
+         String[] tokens = {"ihr", "seid", "schon", "ganz", "schön", "lange", "nicht", "mehr", "hier", "gewesen"};
          ttw.process(tokens);
         
         //System.exit(0);

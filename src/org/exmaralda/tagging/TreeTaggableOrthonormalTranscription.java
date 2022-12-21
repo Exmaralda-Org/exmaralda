@@ -82,7 +82,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
 
     @Override
     public List<String> getTokensAt(int pos) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         Element contribution = contributions.get(pos);
         try {
             List l = XPath.newInstance(xpathToTokens).selectNodes(contribution);
@@ -121,7 +121,7 @@ public class TreeTaggableOrthonormalTranscription implements TreeTaggableDocumen
 
     @Override
     public List<String> getIDs() throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (Element contribution : contributions){
             try {
                 List l = XPath.newInstance(xpathToTokens).selectNodes(contribution);
