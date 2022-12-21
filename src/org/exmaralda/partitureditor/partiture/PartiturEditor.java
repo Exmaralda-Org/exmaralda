@@ -812,7 +812,8 @@ public class PartiturEditor extends javax.swing.JFrame
     }
 
 
-    /** added 09-06-2009: replaces older mac app handler in inner class */
+    /** added 09-06-2009: replaces older mac app handler in inner class
+     * @param proportional */
     /*private void setupMacOSXApplicationListener() {
         //final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
         

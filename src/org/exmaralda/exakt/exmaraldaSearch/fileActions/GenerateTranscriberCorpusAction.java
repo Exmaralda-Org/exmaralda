@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.Vector;
 import org.exmaralda.common.corpusbuild.TranscriberBuilder;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.wizard.folkercorpuswizard.TranscriberCorpusWizard;
+import org.exmaralda.exakt.wizard.corpuswizards.TranscriberCorpusWizard;
 /**
  *
  * @author thomas

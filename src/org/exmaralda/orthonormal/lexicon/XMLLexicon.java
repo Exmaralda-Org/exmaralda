@@ -73,8 +73,9 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
         for (Object o : d.getRootElement().getChildren()){
             Element e = (Element)o;
             NormalisationInfo info = new NormalisationInfo(e);
-            map.put(info.form, info);
+            map.put(info.form, info);            
         }
+
         
         InputStream in = getClass().getResourceAsStream(CAPITAL_ONLY_LIST);
         BufferedReader input = new BufferedReader(new InputStreamReader(in));        
@@ -173,6 +174,26 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
         NormalisationInfo info = map.get(form);
         return info.getCandidateForms();
         
+    }
+
+
+    public List<FormLanguagePair> getCandidateFormsWithLanguages(String form) throws /*up*/ LexiconException {
+        if (!map.containsKey(form)){
+                return new ArrayList<>();
+        }
+        NormalisationInfo info = map.get(form);
+        return info.getCandidateFormsWithLanguage();
+    }
+
+
+    @Override
+    public String getLanguageForPair(String token, String bestForm) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean hasLanguageInformation() {
+        return true;
     }
     
     

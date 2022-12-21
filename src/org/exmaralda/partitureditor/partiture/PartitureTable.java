@@ -427,6 +427,14 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
             progressBar.setValue(100);
             progressBar.setString("Done.");
         }
+        
+        // experiment for #333
+        /*for (int row=0; row<this.getNumRows(); row++){
+            for (int col=0; col<this.getNumColumns(); col++){
+                this.formatCell(row, col);
+            }
+        }*/
+        
     }
     
     /** format the row labels */
@@ -524,6 +532,16 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
         } else {
             style.setCellBorderColorMode(JCTableEnum.BASE_ON_BACKGROUND);
         }
+        
+        // experiment for #333
+        /*if (getModel().containsEvent(row, col)){
+            if (col%2==0){
+                style.setBackground(Color.YELLOW);
+            } else {
+                style.setBackground(Color.PINK);
+            }
+        }*/
+        
         setCellStyle(row,col,style);          
     }
     
@@ -727,7 +745,9 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
     }
     
     /** for Link Panel listener: if a link has been added or
-     *  removed, the corresponding cell must be reformatted */
+     *  removed, the corresponding cell must be reformatted
+     * @param row
+     * @param col */
     @Override
     public void linkChanged(int row, int col) {
         formatCell(row,col);        

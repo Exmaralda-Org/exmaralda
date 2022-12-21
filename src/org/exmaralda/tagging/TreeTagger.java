@@ -8,6 +8,9 @@ package org.exmaralda.tagging;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.annolab.tt4j.ProbabilityHandler;
 import org.annolab.tt4j.TreeTaggerException;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.exmaralda.exakt.utilities.FileIO;
@@ -40,16 +43,21 @@ public class TreeTagger {
     }
 
     public void tag(TreeTaggableDocument input, File outputFile) throws IOException{
+         SextantTokenHandler tokenHandler = new SextantTokenHandler();
+         tokenHandler.setIDList(input.getIDs());        
+         tag(input, outputFile, tokenHandler);
+    }
+    
+    
+    public void tag(TreeTaggableDocument input, File outputFile, ProbabilityHandler tokenHandler) throws IOException{
          System.out.println("Setting up tagger");
          System.setProperty("treetagger.home", treeTaggerDirectory);
          TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
          //uncomment next line to make TreeTaggerWrapper verbose
          //tt.TRACE = true;
          tt.setProbabilityThreshold(0.999999);
-         SextantTokenHandler tokenHandler = new SextantTokenHandler();
-         tokenHandler.setIDList(input.getIDs());
          try {
-             System.out.println("   Setting model");
+             System.out.println("   Setting model:  " + parameterFile + ":" + parameterFileEncoding);
              tt.setModel(parameterFile + ":" + parameterFileEncoding);
              System.out.println("   Setting arguments");
              tt.setArguments(options);
@@ -63,17 +71,20 @@ public class TreeTagger {
              for (int pos=0; pos<input.getNumberOfTaggableSegments(); pos++){
                  System.out.print("\rProcessing " + (pos+1) + " of " + input.getNumberOfTaggableSegments());
                  List tokens = input.getTokensAt(pos);
+                 //for (int i=0; i<100; i++){tokens.add("ja");}
                  System.out.println(" (" + tokens.size() + " tokens to tag).                ");
                  //for (Object t: tokens){System.out.println(t.toString());}
-                 tt.process(tokens);
+                 try {
+                     tt.process(tokens);
+                 } catch (TreeTaggerException ex) {
+                     System.out.println("PROBLEM WITH: "  + String.join(" ", tokens));
+                     Logger.getLogger(TreeTagger.class.getName()).log(Level.SEVERE, null, ex);
+                 }
              }
              System.out.println("Tagging complete.");
-         } catch (TreeTaggerException ex) {
-            ex.printStackTrace();
+         } catch (IOException ex) {
+             System.out.println(ex.getLocalizedMessage());
             throw new IOException(ex.getLocalizedMessage());
-         } catch (Exception ex){
-             ex.printStackTrace();
-             throw new IOException(ex.getLocalizedMessage());
          } finally {
             /* <annotation xmlns:xlink="http://www.w3.org/1999/xlink"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -81,11 +92,13 @@ public class TreeTagger {
             xsi:noNamespaceSchemaLocation="http://xml.exmaralda.org/sextant.xsd" xml:base="MiniTest.exs"
             target="MiniTest.exs" id="MiniTest.exs_pos" targetId="n/a"
             type="pos-annotation from sextant tagger"> */
-            tokenHandler.sextantDocument.getRootElement().setAttribute("target", input.getBase());
-            tokenHandler.sextantDocument.getRootElement().setAttribute("base", input.getBase());
-            tokenHandler.sextantDocument.getRootElement().setAttribute("id", input.getBase() + "_pos");
-            FileIO.writeDocumentToLocalFile(outputFile, tokenHandler.sextantDocument);
-            tt.destroy();
+            if (tokenHandler instanceof SextantTokenHandler carsten){
+                carsten.sextantDocument.getRootElement().setAttribute("target", input.getBase());
+                carsten.sextantDocument.getRootElement().setAttribute("base", input.getBase());
+                carsten.sextantDocument.getRootElement().setAttribute("id", input.getBase() + "_pos");
+                FileIO.writeDocumentToLocalFile(outputFile, carsten.sextantDocument);
+                tt.destroy();
+            }
          }
 
     }

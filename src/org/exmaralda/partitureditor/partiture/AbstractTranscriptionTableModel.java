@@ -77,12 +77,14 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
 
     // Get & Set Methods for the fields of this class
     
-    /** returns the basic transcription that this model works with */
+    /** returns the basic transcription that this model works with
+     * @return  */
     public BasicTranscription getTranscription() {
         return transcription;
     }
     
-    /** sets the basic transcription that this model works with */
+    /** sets the basic transcription that this model works with
+     * @param t */
     public void setTranscription(BasicTranscription t) {
         if (t.getTierFormatTable()==null){
             //System.out.println("NOT THE REAL THANG!");
@@ -365,6 +367,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         JCTableDataEvent event = new JCTableDataEvent(this, 0, 0, 0, 0, RESET_APPROACHING);
         fireTableDataEvent(event);
         super.fireDataReset();    
+        
     }
 
     /** notifies the listeners that all formats have been reset */

@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.Vector;
 import org.exmaralda.common.corpusbuild.CHATBuilder;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.wizard.folkercorpuswizard.CHATCorpusWizard;
+import org.exmaralda.exakt.wizard.corpuswizards.CHATCorpusWizard;
 /**
  *
  * @author thomas

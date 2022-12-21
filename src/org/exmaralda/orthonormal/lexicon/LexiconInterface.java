@@ -31,9 +31,13 @@ public interface LexiconInterface {
     
     public boolean hasCapitalInformation();
     
+    public boolean hasLanguageInformation();
+
     public boolean isCapitalOnly(String form) throws LexiconException;
 
     public void update(Document d) throws Exception;
+
+    String getLanguageForPair(String token, String bestForm);
 
 
     

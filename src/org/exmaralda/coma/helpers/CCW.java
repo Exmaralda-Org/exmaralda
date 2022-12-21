@@ -22,6 +22,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -675,10 +676,10 @@ public class CCW extends javax.swing.JDialog implements PropertyChangeListener,
 
 	}
 
+        @Override
 	public void tableChanged(TableModelEvent e) {
 		transTableChanged = true;
-		nextButton
-				.setEnabled(transcriptionTableModel.getSelectedFiles().size() > 0);
+		nextButton.setEnabled(transcriptionTableModel.getSelectedFiles().size() > 0);
 	}
 
 	/**
@@ -704,7 +705,7 @@ public class CCW extends javax.swing.JDialog implements PropertyChangeListener,
 			outputter.output(coma, out);
 			out.close();
 			resultFile = comaFile;
-		} catch (Exception err) {
+		} catch (IOException err) {
 			err.printStackTrace();
 			resultFile = null;
 		}

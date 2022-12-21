@@ -15,7 +15,7 @@ import java.util.Vector;
 import org.exmaralda.common.corpusbuild.CHATBuilder;
 import org.exmaralda.common.corpusbuild.EAFBuilder;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.wizard.folkercorpuswizard.EAFCorpusWizard;
+import org.exmaralda.exakt.wizard.corpuswizards.EAFCorpusWizard;
 /**
  *
  * @author thomas

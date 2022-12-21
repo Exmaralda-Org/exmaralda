@@ -42,7 +42,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
     }
     
     public String toXML(){
-        StringBuffer sb=new StringBuffer();
+        StringBuilder sb=new StringBuilder();
         sb.append(StringUtilities.makeXMLOpenElement("segmented-transcription", null) + "\n");
         sb.append(super.toXML());
         sb.append(getBody().toXML());
@@ -65,7 +65,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
         FileOutputStream fos = new FileOutputStream(new File(filename));
         fos.write(StringConstants.XML_HEADER.getBytes("UTF-8"));        
         fos.write(StringUtilities.makeXMLDoctypeSegmentedTranscription(pathToDTD).getBytes("UTF-8"));
-        fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
+        //fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
         fos.write(toXML().getBytes("UTF-8"));
         fos.close();
         System.out.println("document written.");
@@ -136,7 +136,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
                             Annotation aSeg = aSt.getAnnotationWithName(aSegmentationName);
                             AbstractSegmentVector partOfaSeg = aSeg.getSegments(getBody().getCommonTimeline(), TLIMapping, ts.getStart(), ts.getEnd());
                             partOfaSeg.setTierReference(aSeg.getTierReference());
-                            if (partOfaSeg.size()>0){
+                            if (!partOfaSeg.isEmpty()){
                                 sc.addAnnotation(partOfaSeg);
                             }
                         }
@@ -221,7 +221,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
             tl.addTimelineItem(tli);
         }
         result.getBody().setCommonTimeline(tl);
-        HashSet<String> processedIDs = new HashSet<String>();
+        HashSet<String> processedIDs = new HashSet<>();
         for (int pos=0; pos<conversionInfo.getTierConversionInfos().size(); pos++){
             String[] info = (String[])(conversionInfo.getTierConversionInfos().elementAt(pos));
             SegmentedTier st = getBody().getSegmentedTierWithID(info[0]);

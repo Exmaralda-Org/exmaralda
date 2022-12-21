@@ -9,7 +9,7 @@
  * Created on 25.01.2010, 14:57:54
  */
 
-package org.exmaralda.exakt.wizard.folkercorpuswizard;
+package org.exmaralda.exakt.wizard.corpuswizards;
 
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -55,7 +55,7 @@ public class CorpusNameAndPathPanel extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Corpus file: ");
         jPanel1.add(jLabel1, java.awt.BorderLayout.WEST);
 

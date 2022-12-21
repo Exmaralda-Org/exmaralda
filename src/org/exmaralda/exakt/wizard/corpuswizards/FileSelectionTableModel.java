@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.exakt.wizard.folkercorpuswizard;
+package org.exmaralda.exakt.wizard.corpuswizards;
 
 import java.io.File;
 import java.util.Collections;

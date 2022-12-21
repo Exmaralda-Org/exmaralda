@@ -21,7 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.common.corpusbuild.FOLKERBuilder;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.wizard.folkercorpuswizard.FolkerCorpusWizard;
+import org.exmaralda.exakt.wizard.corpuswizards.FolkerCorpusWizard;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -81,7 +81,20 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
                 @Override
                 public void run(){
                     try {
-                        theBuilder.doBuild();
+                        FOLKERBuilder.BUILD_METHODS buildMethod = FOLKERBuilder.BUILD_METHODS.BUILD_VIA_EXB;
+                        boolean isOnlyFln = true;
+                        for (File f : folkerFiles){
+                            if (!(f.getName().toLowerCase().endsWith(".fln"))){
+                                isOnlyFln = false;
+                                System.out.println("Building via EXB");
+                                break;
+                            }
+                        }
+                        if (isOnlyFln){
+                            buildMethod = FOLKERBuilder.BUILD_METHODS.BUILD_VIA_EXS;
+                            System.out.println("Building via EXS");
+                        }
+                        theBuilder.doBuild(buildMethod);
                         if (theBuilder.getCountSegmentationErrors()>0){
                             String message = Integer.toString(theBuilder.getCountSegmentationErrors())
                                     + " transcriptions could not be segmented using\n"

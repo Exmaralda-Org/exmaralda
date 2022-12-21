@@ -24,7 +24,9 @@ import java.awt.Toolkit;
 public class OpenAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
 
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param t
+     * @param icon */
     public OpenAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         // call super class, set name and icon of the action,
         // set the pointer to the partitur
@@ -33,7 +35,8 @@ public class OpenAction extends org.exmaralda.partitureditor.partiture.AbstractT
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                
     }
     
-    /** implements the abstract method of the superclass */
+    /** implements the abstract method of the superclass
+     * @param actionEvent */
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         // finish any editing actions that might still be in progress on the partitur

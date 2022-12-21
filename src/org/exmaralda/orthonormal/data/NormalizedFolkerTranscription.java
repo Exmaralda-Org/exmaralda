@@ -6,25 +6,38 @@
 package org.exmaralda.orthonormal.data;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.folker.data.Speaker;
 import org.exmaralda.folker.data.Timepoint;
+import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
+import org.exmaralda.orthonormal.io.XMLReaderWriter;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTier;
+import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
+import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
+import org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.filter.ElementFilter;
 import org.jdom.xpath.XPath;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -99,7 +112,7 @@ public class NormalizedFolkerTranscription {
             xmlDocument.getRootElement().getChild("recording").setAttribute("path", mp);
             System.out.println("************** Path set from " + path + " to " + mp);
         } catch (MalformedURLException | IllegalArgumentException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
     }
 
@@ -120,7 +133,7 @@ public class NormalizedFolkerTranscription {
     }
 
     final void index(){
-        contributions = new ArrayList<Element>();
+        contributions = new ArrayList<>();
         List l = xmlDocument.getRootElement().getChildren("contribution");
         for (Object o : l){
             Element contribution = (Element)o;
@@ -128,7 +141,7 @@ public class NormalizedFolkerTranscription {
             highestParseLevel = Math.max(highestParseLevel, Integer.parseInt(contribution.getAttributeValue("parse-level")));
         }
 
-        timeMappings  = new HashMap<String, Timepoint>();
+        timeMappings  = new HashMap<>();
         List l2 = xmlDocument.getRootElement().getChild("timeline").getChildren("timepoint");
         for (Object o : l2){
             Element timepoint = (Element)o;
@@ -140,8 +153,8 @@ public class NormalizedFolkerTranscription {
 
         indexSpeakers();
 
-        wordMappings = new HashMap<Element, ArrayList<Element>>();
-        wordIDs = new HashSet<String>();
+        wordMappings = new HashMap<>();
+        wordIDs = new HashSet<>();
         for (Element contribution : contributions){
             ArrayList<Element> wordVector = new ArrayList<Element>();
             Iterator i = contribution.getDescendants(new ElementFilter("w"));
@@ -221,7 +234,7 @@ public class NormalizedFolkerTranscription {
     }
 
     public void indexSpeakers() {
-        speakerMappings  = new HashMap<String, Speaker>();
+        speakerMappings  = new HashMap<>();
         List l3 = xmlDocument.getRootElement().getChild("speakers").getChildren("speaker");
         for (Object o : l3){
             Element speakerElement = (Element)o;
@@ -232,6 +245,118 @@ public class NormalizedFolkerTranscription {
             speakerMappings.put(id, speaker);
         }
     }
+    
+    String CONTRIBUTION2TIMEDSEGMENT_XSL = "/org/exmaralda/orthonormal/data/FLNContribution2EXSTimedSegmentAndAnnotations.xsl";
+    
+    public SegmentedTranscription toSegmentedTranscription() throws JDOMException, SAXException, ParserConfigurationException, IOException, TransformerException, TransformerConfigurationException, JexmaraldaException{
+        SegmentedTranscription st = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(getDocument()).toSegmentedTranscription();
+        
+        Document segmentedDoc = IOUtilities.readDocumentFromString(st.toXML());
+        
+        Map<String, Element> segTiers = new HashMap<>();
+        Map<String, Element> segmentations = new HashMap<>();
+        Map<String, Element> normAnnotations = new HashMap<>();
+        Map<String, Element> lemmaAnnotations = new HashMap<>();
+        Map<String, Element> posAnnotations = new HashMap<>();
+        for (Object o : XPath.selectNodes(segmentedDoc, "//segmented-tier")){
+            Element segTier = (Element)o;
+            segTiers.put(segTier.getAttributeValue("speaker"), segTier);
+            
+            // <segmentation name="SpeakerContribution_Word" tierref="TIE_V_HM">
+            Element segmentationElement = new Element("segmentation")
+                    .setAttribute("name", "SpeakerContribution_Word")
+                    .setAttribute("tierref", segTier.getAttributeValue("id")); 
+
+
+            // <annotation name="norm" tierref="TIE_norm_HM">
+            Element normAnnotationElement = new Element("annotation")
+                    .setAttribute("name", "norm")
+                    .setAttribute("tierref", segTier.getAttributeValue("id"));
+
+            Element lemmaAnnotationElement = new Element("annotation")
+                    .setAttribute("name", "lemma")
+                    .setAttribute("tierref", segTier.getAttributeValue("id"));
+
+            Element posAnnotationElement = new Element("annotation")
+                    .setAttribute("name", "pos")
+                    .setAttribute("tierref", segTier.getAttributeValue("id"));
+            
+            // /segmented-transcription/segmented-body[1]/segmented-tier[1]/annotation[2]
+            
+
+            segTier.addContent(segmentationElement);
+            segTier.addContent(normAnnotationElement);
+            segTier.addContent(lemmaAnnotationElement);
+            segTier.addContent(posAnnotationElement);
+            
+            segmentations.put(segTier.getAttributeValue("speaker"), segmentationElement);
+            normAnnotations.put(segTier.getAttributeValue("speaker"), normAnnotationElement);
+            lemmaAnnotations.put(segTier.getAttributeValue("speaker"), lemmaAnnotationElement);
+            posAnnotations.put(segTier.getAttributeValue("speaker"), posAnnotationElement);
+        }
+        
+        
+        StylesheetFactory ssf = new StylesheetFactory(true);
+        List contributionList = XPath.selectNodes(getDocument(), "//contribution");
+        
+        for (Object o : contributionList){
+            //System.out.println("Working!");
+            Element contributionElement = (Element)o;
+            String speaker = contributionElement.getAttributeValue("speaker-reference");
+            Element segmentedTierElement = segTiers.get(speaker);
+            Element segmentationElement = segmentations.get(speaker);
+            int index = segmentedTierElement.indexOf(segmentationElement);
+            String transformResult = ssf.applyInternalStylesheetToString(CONTRIBUTION2TIMEDSEGMENT_XSL, IOUtilities.elementToString(contributionElement));
+            /*System.out.println(IOUtilities.elementToString(contributionElement));
+            System.out.println("----------");
+            System.out.println(transformResult);*/
+            Document transformResultDocument = IOUtilities.readDocumentFromString(transformResult);
+            List timelineForks = XPath.selectNodes(transformResultDocument, "//timeline-fork");
+            for (Object o2 : timelineForks){
+                if (!((Element)o2).getChildren().isEmpty()){
+                    Element tlfElement = (Element)((Element)o2).clone();
+                    segmentedTierElement.addContent(index - 1, tlfElement);
+                    index++;                
+                }
+            }
+            
+            Element tsElement = (Element) XPath.selectSingleNode(transformResultDocument, "//ts[@n='sc']");
+            segmentationElement.addContent(tsElement.detach());
+            
+            Element normElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='norm']");
+            if (normElement!=null){
+                normAnnotations.get(speaker).addContent(normElement.detach());
+            }
+            Element lemmaElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='lemma']");
+            if (lemmaElement!=null){
+                lemmaAnnotations.get(speaker).addContent(lemmaElement.detach());
+            }
+            Element posElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='pos']");
+            if (posElement!=null){
+                posAnnotations.get(speaker).addContent(posElement.detach());
+            }
+        }
+        
+        for (String key : posAnnotations.keySet()){
+            Element e = posAnnotations.get(key);
+            if (e.getChildren().isEmpty()) e.detach();
+        }
+
+        for (String key : lemmaAnnotations.keySet()){
+            Element e = lemmaAnnotations.get(key);
+            if (e.getChildren().isEmpty()) e.detach();
+        }
+
+        
+        File tempFile = File.createTempFile("Seg", ".exs");
+        tempFile.deleteOnExit();
+        FileIO.writeDocumentToLocalFile(tempFile, segmentedDoc);
+        SegmentedTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader();
+        SegmentedTranscription result = reader.readFromFile(tempFile.getAbsolutePath());    
+        return result;
+    }
+    
+    
 
 
 }
