@@ -30,7 +30,7 @@ public class AutoNormalizer {
 
     LexiconInterface lexicon;
     
-    private List<SearchListenerInterface> listenerList = new ArrayList<>();
+    private final List<SearchListenerInterface> listenerList = new ArrayList<>();
     
     static final Namespace teiNamespace = Namespace.getNamespace("tei", "http://www.tei-c.org/ns/1.0");
     
@@ -71,7 +71,7 @@ public class AutoNormalizer {
         String attributeName = "n";
         ElementFilter elementFilter = new ElementFilter("w");
         if (!(name.equals("contribution"))){
-            elementFilter = new ElementFilter("tei:w", teiNamespace);
+            elementFilter = new ElementFilter("w", teiNamespace);
             attributeName = "norm";
         }
 
@@ -80,8 +80,12 @@ public class AutoNormalizer {
         while (i.hasNext()){
             Element word = (Element)(i.next());
             String wordText = WordUtilities.getWordText(word);
+            //System.out.println("Looking up " + wordText);
             //System.out.println("??? " + wordText);
-            if (word.getAttribute("n")==null || OVERWRITE_EXISTING){
+            if (word.getAttribute(attributeName)==null || OVERWRITE_EXISTING){
+                if (OVERWRITE_EXISTING){
+                    word.removeAttribute(attributeName);
+                }
                 boolean lookupGotResult = false;
                 // 1. lookup the form in the lexicon
                 List<String> forms = lexicon.getCandidateForms(wordText);

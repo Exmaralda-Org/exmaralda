@@ -10,14 +10,11 @@
 package org.exmaralda.exakt.wizard.corpuswizards;
 
 import java.awt.Cursor;
-import java.lang.reflect.InvocationTargetException;
 import org.exmaralda.exakt.wizard.*;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Vector;
 import javax.swing.*;
-import org.exmaralda.common.dialogs.ProgressBarDialog;
-import org.exmaralda.exakt.search.SearchEvent;
 
 /**
  *
@@ -46,7 +43,9 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
 
     int dirCount = 0;
 
-    /** Creates a new instance of WizardTemplate */
+    /** Creates a new instance of WizardTemplate
+     * @param parent
+     * @param modal */
     public FolkerCorpusWizard(java.awt.Frame parent, boolean modal) {        
         //super(parent,modal);
         this.setModal(modal);
@@ -71,6 +70,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
         stepPanels[2] = new AbstractWizardPanel("3. Parameters", PARAMETERS_EXPLANATION, parametersPanel);
     }
     
+    @Override
     public String getStep(int n) {
         switch(n){
             case 0  : return "1. Corpus File";
@@ -81,24 +81,20 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
     }
 
 
+    @Override
     public int getNumberOfSteps() {
         return 3;
     }
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
                 try {
                     javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (InstantiationException ex) {
-                    ex.printStackTrace();
-                } catch (IllegalAccessException ex) {
-                    ex.printStackTrace();
-                } catch (UnsupportedLookAndFeelException ex) {
-                    ex.printStackTrace();
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                    System.out.println(ex.getLocalizedMessage());
                 }
                 new FolkerCorpusWizard(new javax.swing.JFrame(), true).setVisible(true);
             }
@@ -141,12 +137,14 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
         folkerTranscriptionsWizardPanel.countLabel.setText(text);
         Vector<File> result = new Vector<File>();
         File[] folkerFiles = directory.listFiles(new FileFilter(){
+            @Override
             public boolean accept(File pathname) {
                 return (pathname.getName().toLowerCase().endsWith("flk") || pathname.getName().toLowerCase().endsWith("fln"));
             }
         });
         for (File f : folkerFiles){result.addElement(f);}
         File[] subDirectories = directory.listFiles(new FileFilter(){
+            @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory();
             }
@@ -159,6 +157,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
 
 
 
+    @Override
     public void loadSettings() {
         java.util.prefs.Preferences preferences =
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
@@ -168,6 +167,7 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
 
     }
 
+    @Override
     public void storeSettings() {
         java.util.prefs.Preferences preferences =
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
