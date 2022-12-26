@@ -32,6 +32,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -666,8 +667,8 @@ public final class ApplicationControl implements  ListSelectionListener,
                                         javax.swing.SwingUtilities.invokeAndWait(setTrans);                                        
                                         //status("Transkription " + f.getAbsolutePath() + " geöffnet.");
                                         //notifyAll();
-                                    } catch (Exception ex) {
-                                            ex.printStackTrace();
+                                    } catch (InterruptedException | InvocationTargetException | LexiconException | JDOMException ex) {
+                                            System.out.println(ex.getLocalizedMessage());
                                     }
                             }
                     };        
