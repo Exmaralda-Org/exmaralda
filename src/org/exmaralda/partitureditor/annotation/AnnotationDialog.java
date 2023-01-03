@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -26,6 +27,7 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
@@ -107,9 +109,9 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     private ExmaraldaApplication getApplication() {
         if (partitur==null) return null;
         Object o = partitur.getTopLevelAncestor();
-        if (o instanceof ExmaraldaApplication){
+        if (o instanceof ExmaraldaApplication exmaraldaApplication){
             //System.out.println("Jippie!");
-            return (ExmaraldaApplication)o;
+            return exmaraldaApplication;
         }
         return null;
     }
@@ -128,7 +130,21 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
                 // changed 09-09-2010: need to consider cells with span
                 int span = partitur.getModel().getCellSpan(selectionStartRow, selectionEndCol);
                 if (selectionEndCol+span<partitur.getModel().getTranscription().getBody().getCommonTimeline().getNumberOfTimelineItems()-1){
-                    partitur.setNewSelection(selectionStartRow, selectionEndCol+span, true);
+                    if (nextEventRadioButton.isSelected()){
+                        partitur.setNewSelection(selectionStartRow, selectionEndCol+span, true);
+                    } else {
+                        partitur.findEvent();
+                    }
+                    // new 03-01-2023 for #356
+                    SwingUtilities.invokeLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            PartitureCellStringEditor newEditor = (PartitureCellStringEditor)(partitur.getEditingComponent());
+                            newEditor.selectAll();                        
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(partitur, "Reached end of tier");
                 }
             }
         } else if (partitur.aSeriesOfCellsIsSelected){
@@ -168,6 +184,7 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nextTypeButtonGroup = new javax.swing.ButtonGroup();
         topPanel = new javax.swing.JPanel();
         annotationSpecificationPanel = new javax.swing.JPanel();
         openExternalPanel = new javax.swing.JPanel();
@@ -181,6 +198,8 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         mainPanel = new javax.swing.JPanel();
         autoJumpPanel = new javax.swing.JPanel();
         autoJumpCheckBox = new javax.swing.JCheckBox();
+        nextEventRadioButton = new javax.swing.JRadioButton();
+        nextNonEmptyEventRadioButton = new javax.swing.JRadioButton();
         annotationSetsTabbedPane = new javax.swing.JTabbedPane();
         descriptionScrollPane = new javax.swing.JScrollPane();
         descriptionEditorPane = new javax.swing.JEditorPane();
@@ -190,6 +209,8 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         setPreferredSize(new java.awt.Dimension(450, 610));
 
         topPanel.setLayout(new java.awt.BorderLayout());
+
+        annotationSpecificationPanel.setPreferredSize(new java.awt.Dimension(500, 50));
 
         openAnnotationSpecificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif"))); // NOI18N
         openAnnotationSpecificationButton.setText("Open specification...");
@@ -208,7 +229,7 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         internalAnnotationSpecificationCombBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         internalAnnotationSpecificationCombBox.setToolTipText("Built-in annotation specifications");
         internalAnnotationSpecificationCombBox.setMinimumSize(new java.awt.Dimension(150, 33));
-        internalAnnotationSpecificationCombBox.setPreferredSize(new java.awt.Dimension(150, 33));
+        internalAnnotationSpecificationCombBox.setPreferredSize(new java.awt.Dimension(220, 33));
         internalAnnotationSpecificationCombBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 internalAnnotationSpecificationCombBoxActionPerformed(evt);
@@ -245,8 +266,24 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        autoJumpCheckBox.setText("Auto jump");
+        autoJumpCheckBox.setText("Auto jump to: ");
+        autoJumpCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autoJumpCheckBoxActionPerformed(evt);
+            }
+        });
         autoJumpPanel.add(autoJumpCheckBox);
+
+        nextTypeButtonGroup.add(nextEventRadioButton);
+        nextEventRadioButton.setSelected(true);
+        nextEventRadioButton.setText("Next event");
+        nextEventRadioButton.setEnabled(false);
+        autoJumpPanel.add(nextEventRadioButton);
+
+        nextTypeButtonGroup.add(nextNonEmptyEventRadioButton);
+        nextNonEmptyEventRadioButton.setText("Next non-empty event");
+        nextNonEmptyEventRadioButton.setEnabled(false);
+        autoJumpPanel.add(nextNonEmptyEventRadioButton);
 
         mainPanel.add(autoJumpPanel, java.awt.BorderLayout.SOUTH);
 
@@ -305,6 +342,11 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         }
     }//GEN-LAST:event_openInternalButtonActionPerformed
 
+    private void autoJumpCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoJumpCheckBoxActionPerformed
+        nextEventRadioButton.setEnabled(autoJumpCheckBox.isSelected());
+        nextNonEmptyEventRadioButton.setEnabled(autoJumpCheckBox.isSelected());
+    }//GEN-LAST:event_autoJumpCheckBoxActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -336,6 +378,9 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     private javax.swing.JComboBox<String> internalAnnotationSpecificationCombBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JRadioButton nextEventRadioButton;
+    private javax.swing.JRadioButton nextNonEmptyEventRadioButton;
+    private javax.swing.ButtonGroup nextTypeButtonGroup;
     private javax.swing.JButton openAnnotationSpecificationButton;
     private javax.swing.JPanel openExternalPanel;
     private javax.swing.JButton openInternalButton;
