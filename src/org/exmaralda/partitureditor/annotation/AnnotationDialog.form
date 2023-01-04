@@ -169,6 +169,18 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
+            <Component class="javax.swing.JButton" name="jumpButton">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/org/exmaralda/partitureditor/partiture/Icons/forward.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Jump"/>
+                <Property name="toolTipText" type="java.lang.String" value="Jump to next event without making changes to the current one"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jumpButtonActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JCheckBox" name="autoJumpCheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Auto jump to: "/>

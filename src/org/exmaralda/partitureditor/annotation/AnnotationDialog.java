@@ -126,26 +126,7 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
             PartitureCellStringEditor editor = (PartitureCellStringEditor)(partitur.getEditingComponent());
             editor.replaceSelection(tag);
             if (autoJumpCheckBox.isSelected()){
-                partitur.commitEdit(true);
-                // changed 09-09-2010: need to consider cells with span
-                int span = partitur.getModel().getCellSpan(selectionStartRow, selectionEndCol);
-                if (selectionEndCol+span<partitur.getModel().getTranscription().getBody().getCommonTimeline().getNumberOfTimelineItems()-1){
-                    if (nextEventRadioButton.isSelected()){
-                        partitur.setNewSelection(selectionStartRow, selectionEndCol+span, true);
-                    } else {
-                        partitur.findEvent();
-                    }
-                    // new 03-01-2023 for #356
-                    SwingUtilities.invokeLater(new Runnable(){
-                        @Override
-                        public void run() {
-                            PartitureCellStringEditor newEditor = (PartitureCellStringEditor)(partitur.getEditingComponent());
-                            newEditor.selectAll();                        
-                        }
-                    });
-                } else {
-                    JOptionPane.showMessageDialog(partitur, "Reached end of tier");
-                }
+                autoJump();
             }
         } else if (partitur.aSeriesOfCellsIsSelected){
             Tier tier = partitur.getModel().getTier(selectionStartRow);
@@ -197,6 +178,7 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         currentFileLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         autoJumpPanel = new javax.swing.JPanel();
+        jumpButton = new javax.swing.JButton();
         autoJumpCheckBox = new javax.swing.JCheckBox();
         nextEventRadioButton = new javax.swing.JRadioButton();
         nextNonEmptyEventRadioButton = new javax.swing.JRadioButton();
@@ -265,6 +247,16 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         getContentPane().add(topPanel, java.awt.BorderLayout.NORTH);
 
         mainPanel.setLayout(new java.awt.BorderLayout());
+
+        jumpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/forward.png"))); // NOI18N
+        jumpButton.setText("Jump");
+        jumpButton.setToolTipText("Jump to next event without making changes to the current one");
+        jumpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jumpButtonActionPerformed(evt);
+            }
+        });
+        autoJumpPanel.add(jumpButton);
 
         autoJumpCheckBox.setText("Auto jump to: ");
         autoJumpCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -347,6 +339,10 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
         nextNonEmptyEventRadioButton.setEnabled(autoJumpCheckBox.isSelected());
     }//GEN-LAST:event_autoJumpCheckBoxActionPerformed
 
+    private void jumpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumpButtonActionPerformed
+        autoJump();
+    }//GEN-LAST:event_jumpButtonActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -377,6 +373,7 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     private javax.swing.JPanel filenamePanel;
     private javax.swing.JComboBox<String> internalAnnotationSpecificationCombBox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jumpButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JRadioButton nextEventRadioButton;
     private javax.swing.JRadioButton nextNonEmptyEventRadioButton;
@@ -477,6 +474,29 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
             //System.out.println("*****" + actionName + " / " + shortcut + " " + tag);
 
 
+        }
+    }
+
+    private void autoJump() {
+        partitur.commitEdit(true);
+        // changed 09-09-2010: need to consider cells with span
+        int span = partitur.getModel().getCellSpan(selectionStartRow, selectionEndCol);
+        if (selectionEndCol+span<partitur.getModel().getTranscription().getBody().getCommonTimeline().getNumberOfTimelineItems()-1){
+            if (nextEventRadioButton.isSelected()){
+                partitur.setNewSelection(selectionStartRow, selectionEndCol+span, true);
+            } else {
+                partitur.findEvent();
+            }
+            // new 03-01-2023 for #356
+            SwingUtilities.invokeLater(new Runnable(){
+                @Override
+                public void run() {
+                    PartitureCellStringEditor newEditor = (PartitureCellStringEditor)(partitur.getEditingComponent());
+                    newEditor.selectAll();                        
+                }
+            });
+        } else {
+            JOptionPane.showMessageDialog(partitur, "Reached end of tier");
         }
     }
 
