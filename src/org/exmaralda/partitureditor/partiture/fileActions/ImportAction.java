@@ -353,6 +353,12 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                         dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
             }
             importedTranscription = itc.importText();
+        } else if (selectedFileFilter == dialog.WhisperJSONFileFilter) {
+            // added 15-01-2023: issue #357
+            importedTranscription = WhisperJSONConverter.readWhisperJSON(selectedFile);
+        } else if (selectedFileFilter == dialog.AmberscriptJSONFileFilter) {
+            // added 15-01-2023: issue #358
+            importedTranscription = AmberscriptJSONConverter.readAmberscriptJSON(selectedFile);
         }
 
         if (importedTranscription!=null){
@@ -370,6 +376,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                     || (selectedFileFilter==dialog.VTTFileFilter)
                     || (selectedFileFilter==dialog.SRTFileFilter)
                     || (selectedFileFilter==dialog.FrazierADCFileFilter)
+                    || (selectedFileFilter==dialog.WhisperJSONFileFilter) // #357
+                    || (selectedFileFilter==dialog.AmberscriptJSONFileFilter) // #358
                     || (selectedFileFilter==dialog.WinPitchFileFilter)){
                 table.stratify(importedTranscription);
             }

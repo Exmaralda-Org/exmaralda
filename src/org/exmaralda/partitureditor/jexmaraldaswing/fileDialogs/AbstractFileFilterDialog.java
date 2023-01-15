@@ -67,6 +67,8 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     static String[] tsv_suff = {"tsv", "csv", "txt"};
     public ParameterFileFilter TsvFileFilter = new ParameterFileFilter(tsv_suff, "TSV file (*.tsv, *.csv, *.txt)");
     public ParameterFileFilter FrazierADCFileFilter = new ParameterFileFilter("adc", "Frazier audio description file (*.adc)");
+    public ParameterFileFilter WhisperJSONFileFilter = new ParameterFileFilter("json", "Whisper JSON file (*.json)"); // issue #357
+    public ParameterFileFilter AmberscriptJSONFileFilter = new ParameterFileFilter("json", "Amberscript JSON file (*.json)"); // issue #358
     
 
 
