@@ -4,15 +4,30 @@
  */
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
+import fr.noop.subtitle.model.SubtitleCue;
+import fr.noop.subtitle.model.SubtitleLine;
+import fr.noop.subtitle.model.SubtitleParsingException;
+import fr.noop.subtitle.model.SubtitleText;
+import fr.noop.subtitle.srt.SrtCue;
+import fr.noop.subtitle.srt.SrtObject;
+import fr.noop.subtitle.srt.SrtParser;
+import fr.noop.subtitle.util.SubtitleTimeCode;
+import fr.noop.subtitle.vtt.VttCue;
+import fr.noop.subtitle.vtt.VttLine;
+import fr.noop.subtitle.vtt.VttObject;
+import fr.noop.subtitle.vtt.VttParser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,6 +41,7 @@ import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.Speaker;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
@@ -80,7 +96,7 @@ public class SubtitleConverter {
         return getSRT(false,false);
     }
     
-    public static BasicTranscription readSRT(File srtFile) throws UnsupportedEncodingException, IOException, JexmaraldaException {
+    public static BasicTranscription readSRTOld(File srtFile) throws UnsupportedEncodingException, IOException, JexmaraldaException {
         FileInputStream fis = new FileInputStream(srtFile);
         InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
         BufferedReader br = new BufferedReader(isr);
@@ -249,7 +265,10 @@ public class SubtitleConverter {
     static String PSEUDO_VTT_XSL = "/org/exmaralda/partitureditor/jexmaralda/xsl/VTTPseudoXML2FLK.xsl";
     // 22-08-2017: quick hack for issue #119
     // meant to work for VTT output of YouTube ASR
-    public static BasicTranscription readVTT(File file) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException{
+    // * @deprecated use {@link #readVTT()} instead. 
+    
+    @Deprecated
+    public static  BasicTranscription readVTTOld(File file) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException{
         // 00:00:00.000 --> 00:00:05.370 align:start position:19%
         // in<c.colorCCCCCC><00:00:00.750><c> böblingen</c></c><c.colorE5E5E5><00:00:01.050><c> treten</c><00:00:01.770><c> zwei</c><00:00:02.100><c> listen</c><00:00:02.639><c> an</c><00:00:02.820><c> und</c></c>
         String timeRegEx = "\\d{2}\\:\\d{2}\\:\\d{2}\\.\\d{3}";
@@ -315,17 +334,165 @@ public class SubtitleConverter {
     }
     
     public static void main(String[] args){
-        File f = new File("/Users/thomasschmidt/Dropbox/BASEL/LEHRE_FJS_2022/SEMINAR_MAP_TASKS--edited.srt");
-        try {
-            BasicTranscription bt = SubtitleConverter.readSRT(f);
-            bt.writeXMLToFile("/Users/thomasschmidt/Dropbox/BASEL/LEHRE_FJS_2022/SEMINAR_MAP_TASKS--edited.exb", "none");
-        } catch (IOException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
+    
+    public static BasicTranscription readVTT(File file) throws FileNotFoundException, IOException, JexmaraldaException{
+        return readVTT(file, "utf-8");
+    }
+    
+    public static BasicTranscription readVTT(File file, String encoding) throws FileNotFoundException, IOException, JexmaraldaException {
+        BasicTranscription result = new BasicTranscription();
+        Tier defaultTier = new Tier("TIE0", null, "v", "t", "VTT");
+        result.getBody().addTier(defaultTier);
+        try {
+            VttParser parser = new VttParser(encoding);          
+            VttObject subtitle = parser.parse(new FileInputStream(file), false);
+            List<SubtitleCue> cues = subtitle.getCues();
+            Set<String> timelineIDs = new HashSet<>();
+            //Set<String> tierIDs = new HashSet<>();
+            
+            for (SubtitleCue c : cues){
+                VttCue cue = (VttCue)c;
+                SubtitleTimeCode startTime = cue.getStartTime();
+                double startTimeInSeconds = startTime.getHour()*3600
+                        + startTime.getMinute()*60
+                        + startTime.getSecond()
+                        + (startTime.getMillisecond() / 1000.0);
+                String startID = "TLI_" + Double.toString(startTimeInSeconds).replace('.', '_');
+                if (!(timelineIDs.contains(startID))){
+                    TimelineItem tli = new TimelineItem();
+                    tli.setID(startID);
+                    tli.setTime(startTimeInSeconds);
+                    result.getBody().getCommonTimeline().insertAccordingToTime(tli);
+                    timelineIDs.add(startID);
+                }
+
+                SubtitleTimeCode endTime = cue.getEndTime();
+                double endTimeInSeconds = endTime.getHour()*3600
+                        + endTime.getMinute()*60
+                        + endTime.getSecond()
+                        + (endTime.getMillisecond() / 1000.0);
+                String endID = "TLI_" + Double.toString(endTimeInSeconds).replace('.', '_');
+                if (!(timelineIDs.contains(endID))){
+                    TimelineItem tli = new TimelineItem();
+                    tli.setID(endID);
+                    tli.setTime(endTimeInSeconds);
+                    result.getBody().getCommonTimeline().insertAccordingToTime(tli);
+                    timelineIDs.add(endID);
+                }
+
+
+
+                List<SubtitleLine> lines4Cue = cue.getLines();
+                String allTheText = "";
+                for (SubtitleLine l : lines4Cue){
+                    VttLine line = (VttLine)l;
+                    String voice = line.getVoice();
+                    List<SubtitleText> texts4Line = line.getTexts();
+                    for (SubtitleText text : texts4Line){
+                        String textString = text.toString();
+                        allTheText+=" " + textString;
+                    }
+                    
+                    //System.out.println(startTimeInSeconds + "\t" + endTimeInSeconds + "\t" + voice + "\t" + allTheText);
+                }
+                org.exmaralda.partitureditor.jexmaralda.Event event = 
+                        new org.exmaralda.partitureditor.jexmaralda.Event(startID, endID, 
+                                allTheText.trim().replaceAll(" +", " "));
+                //if (voice==null){
+                    defaultTier.addEvent(event);
+                /*} else {
+                    String tierID = "TIE_" + voice;
+                    if (!(result.getBody().containsTierWithID(tierID))){
+                        String speakerID = "SPK_" + voice;
+                        Speaker newSpeaker = new Speaker();
+                        newSpeaker.setID(speakerID);
+                        result.getHead().getSpeakertable().addSpeaker(newSpeaker);
+                        Tier newTier = new Tier(tierID, speakerID, "v", "t", "VTT");
+                    }
+                    result.getBody().getTierWithID(tierID).addEvent(event);
+                }*/
+            }
+        } catch (SubtitleParsingException ex) {
+            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
+            // better wrap this so we won't have to carry around noop everywhere
+            throw new IOException(ex);
+        }
+        return result;
+    }
+    
+    public static BasicTranscription readSRT(File srtFile) throws IOException, FileNotFoundException, JexmaraldaException{
+        return readSRT(srtFile, "utf-8");
+    }
+    
+    public static BasicTranscription readSRT(File file, String encoding) throws FileNotFoundException, IOException, JexmaraldaException {
+        BasicTranscription result = new BasicTranscription();
+        Tier defaultTier = new Tier("TIE0", null, "v", "t", "SRT");
+        result.getBody().addTier(defaultTier);
+        try {
+            SrtParser parser = new SrtParser(encoding);          
+            SrtObject subtitle = parser.parse(new FileInputStream(file), false);
+            List<SubtitleCue> cues = subtitle.getCues();
+            Set<String> timelineIDs = new HashSet<>();
+            //Set<String> tierIDs = new HashSet<>();
+            
+            for (SubtitleCue c : cues){
+                SrtCue cue = (SrtCue)c;
+                SubtitleTimeCode startTime = cue.getStartTime();
+                double startTimeInSeconds = startTime.getHour()*3600
+                        + startTime.getMinute()*60
+                        + startTime.getSecond()
+                        + (startTime.getMillisecond() / 1000.0);
+                String startID = "TLI_" + Double.toString(startTimeInSeconds).replace('.', '_');
+                if (!(timelineIDs.contains(startID))){
+                    TimelineItem tli = new TimelineItem();
+                    tli.setID(startID);
+                    tli.setTime(startTimeInSeconds);
+                    result.getBody().getCommonTimeline().insertAccordingToTime(tli);
+                    timelineIDs.add(startID);
+                }
+
+                SubtitleTimeCode endTime = cue.getEndTime();
+                double endTimeInSeconds = endTime.getHour()*3600
+                        + endTime.getMinute()*60
+                        + endTime.getSecond()
+                        + (endTime.getMillisecond() / 1000.0);
+                String endID = "TLI_" + Double.toString(endTimeInSeconds).replace('.', '_');
+                if (!(timelineIDs.contains(endID))){
+                    TimelineItem tli = new TimelineItem();
+                    tli.setID(endID);
+                    tli.setTime(endTimeInSeconds);
+                    result.getBody().getCommonTimeline().insertAccordingToTime(tli);
+                    timelineIDs.add(endID);
+                }
+
+
+
+                List<SubtitleLine> lines4Cue = cue.getLines();
+                String allTheText = "";
+                for (SubtitleLine line : lines4Cue){
+                    //SrtLine line = (SrtLine)l;
+                    //String voice = line.getVoice();
+                    List<SubtitleText> texts4Line = line.getTexts();
+                    for (SubtitleText text : texts4Line){
+                        String textString = text.toString();
+                        allTheText+=" " + textString;
+                    }
+                    
+                    //System.out.println(startTimeInSeconds + "\t" + endTimeInSeconds + "\t" + voice + "\t" + allTheText);
+                }
+                org.exmaralda.partitureditor.jexmaralda.Event event = 
+                        new org.exmaralda.partitureditor.jexmaralda.Event(startID, endID, 
+                                allTheText.trim().replaceAll(" +", " "));
+                defaultTier.addEvent(event);
+            }
+        } catch (SubtitleParsingException ex) {
+            Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);
+            // better wrap this so we won't have to carry around noop everywhere
+            throw new IOException(ex);
+        }
+        return result;
+    }
+    
     
 }

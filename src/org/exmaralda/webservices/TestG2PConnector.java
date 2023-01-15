@@ -23,9 +23,7 @@ public class TestG2PConnector {
     public static void main(String[] args) {
         try {
             new TestG2PConnector().doit();
-        } catch (IOException ex) {
-            Logger.getLogger(TestG2PConnector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JDOMException ex) {
+        } catch (IOException | JDOMException ex) {
             Logger.getLogger(TestG2PConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -125,7 +125,7 @@ public class TreeTaggerAction extends AbstractApplicationAction {
                                             taggingDone(output2);
                                     }
                                 });
-                        } catch (Exception ex) {
+                        } catch (IOException | JDOMException ex) {
                                 ex.printStackTrace();
                         }
                     }
@@ -133,9 +133,7 @@ public class TreeTaggerAction extends AbstractApplicationAction {
             tagThread.start();
             
             
-        } catch (IOException ex) {
-            Logger.getLogger(TreeTaggerAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JDOMException ex) {
+        } catch (IOException | JDOMException ex) {
             Logger.getLogger(TreeTaggerAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         ac.status("File tagged");

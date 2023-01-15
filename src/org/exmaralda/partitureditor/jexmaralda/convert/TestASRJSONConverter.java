@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
@@ -18,44 +17,46 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author thomas.schmidt
+ * @author bernd
  */
-public class TestSubtitleConverter {
+
+// issue #357
+public class TestASRJSONConverter {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
-        new TestSubtitleConverter().doit();
+        new TestASRJSONConverter().doit();
     }
 
     private void doit() throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
-        File[] vttFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
+        File[] jsonFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
             @Override
             public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".vtt");
+                return name.endsWith("_WHISPER.json");
             }            
         });
-        for (File vttFile : vttFiles){
-            BasicTranscription bt = SubtitleConverter.readVTT(vttFile);
-            String outFilename = vttFile.getName().replace(".vtt", ".exb");
-            bt.writeXMLToFile(new File(vttFile.getParent(), outFilename).getAbsolutePath(), "none");
+        for (File jsonFile : jsonFiles){
+            BasicTranscription bt = WhisperJSONConverter.readWhisperJSON(jsonFile);
+            String outFilename = jsonFile.getName().replace(".json", ".exb");
+            bt.writeXMLToFile(new File(jsonFile.getParent(), outFilename).getAbsolutePath(), "none");
             //System.out.println(bt.toXML());            
         }
-        
-        File[] srtFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
+
+        jsonFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
             @Override
             public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".srt");
+                return name.endsWith("_AMBERSCRIPT.json");
             }            
         });
-        for (File srtFile : srtFiles){
-            BasicTranscription bt = SubtitleConverter.readSRT(srtFile);
-            String outFilename = srtFile.getName().replace(".srt", "_SRT.exb");
-            bt.writeXMLToFile(new File(srtFile.getParent(), outFilename).getAbsolutePath(), "none");
+        for (File jsonFile : jsonFiles){
+            BasicTranscription bt = AmberscriptJSONConverter.readAmberscriptJSON(jsonFile);
+            String outFilename = jsonFile.getName().replace(".json", ".exb");
+            bt.writeXMLToFile(new File(jsonFile.getParent(), outFilename).getAbsolutePath(), "none");
             //System.out.println(bt.toXML());            
         }
-        
+
     }
     
 }

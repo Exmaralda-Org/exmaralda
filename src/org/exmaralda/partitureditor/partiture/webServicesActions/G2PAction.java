@@ -128,7 +128,7 @@ public class G2PAction extends org.exmaralda.partitureditor.partiture.AbstractTa
         boolean useSegmentation = (Boolean) g2pParameters.get("USE-SEGMENTATION");
 
         // do this in a thread so we can report progress
-        Thread deepLThread = new Thread(){
+        Thread g2pThread = new Thread(){
             @Override
             public void run() {
                 boolean useSelectedTier = (boolean) g2pParameters.get("SELECTED-TIER");
@@ -292,6 +292,7 @@ public class G2PAction extends org.exmaralda.partitureditor.partiture.AbstractTa
 
             private File createTempInputFile(String originalText) throws IOException {
                 File tempInputFile = File.createTempFile("G2P", ".txt");
+                tempInputFile.deleteOnExit();
                 Writer out = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(tempInputFile), "UTF-8"));
                 try {
@@ -307,7 +308,7 @@ public class G2PAction extends org.exmaralda.partitureditor.partiture.AbstractTa
             }
             
         };
-        deepLThread.start();
+        g2pThread.start();
 
         
     }

@@ -48,6 +48,12 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         // added 17-11-2017: issue #119
         addChoosableFileFilter(VTTFileFilter);
         addChoosableFileFilter(SRTFileFilter);
+        
+        //added 15-01-2023: issue #357
+        addChoosableFileFilter(WhisperJSONFileFilter);
+        //added 15-01-2023: issue #358
+        addChoosableFileFilter(AmberscriptJSONFileFilter);
+        
         addChoosableFileFilter(TextFileFilter);
         addChoosableFileFilter(AudacityLabelFileFilter);
         addChoosableFileFilter(TreeTaggerFilter);

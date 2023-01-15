@@ -338,6 +338,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             importedTranscription = tc.readTCFFromFile(filename);
         } else if (selectedFileFilter==dialog.VTTFileFilter) {
             // added 17-11-2017: issue #119
+            // changed 15-01-2023: issue #119
+            //importedTranscription = SubtitleConverter.readVTTOld(selectedFile);
             importedTranscription = SubtitleConverter.readVTT(selectedFile);
         } else if (selectedFileFilter==dialog.SRTFileFilter) {
             // added 17-11-2017: issue #119
@@ -351,6 +353,12 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                         dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
             }
             importedTranscription = itc.importText();
+        } else if (selectedFileFilter == dialog.WhisperJSONFileFilter) {
+            // added 15-01-2023: issue #357
+            importedTranscription = WhisperJSONConverter.readWhisperJSON(selectedFile);
+        } else if (selectedFileFilter == dialog.AmberscriptJSONFileFilter) {
+            // added 15-01-2023: issue #358
+            importedTranscription = AmberscriptJSONConverter.readAmberscriptJSON(selectedFile);
         }
 
         if (importedTranscription!=null){
@@ -365,7 +373,11 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 table.cleanup(importedTranscription);
             } else if ((selectedFileFilter==dialog.FOLKERTranscriptionFileFilter)
                     || (selectedFileFilter==dialog.AudacityLabelFileFilter)
+                    || (selectedFileFilter==dialog.VTTFileFilter)
+                    || (selectedFileFilter==dialog.SRTFileFilter)
                     || (selectedFileFilter==dialog.FrazierADCFileFilter)
+                    || (selectedFileFilter==dialog.WhisperJSONFileFilter) // #357
+                    || (selectedFileFilter==dialog.AmberscriptJSONFileFilter) // #358
                     || (selectedFileFilter==dialog.WinPitchFileFilter)){
                 table.stratify(importedTranscription);
             }

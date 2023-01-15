@@ -11,7 +11,6 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,8 @@ import org.exmaralda.common.helpers.BasicTranscription2COMA;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.search.SearchEvent;
 import org.exmaralda.exakt.search.SearchListenerInterface;
+import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
+import org.exmaralda.orthonormal.io.XMLReaderWriter;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -121,6 +122,8 @@ public class FOLKERBuilder {
 
             if (method==BUILD_METHODS.BUILD_VIA_EXB){
                 convertViaEXB(folkerFile, fileNameWithoutSuffix);
+            } else if (method==BUILD_METHODS.BUILD_VIA_EXS){
+                convertViaEXS(folkerFile, fileNameWithoutSuffix);                
             }
         }
 
@@ -239,6 +242,54 @@ public class FOLKERBuilder {
 
     }
 
+    // ********************************************************
+    
+     private void convertViaEXS(File folkerFile, String fileNameWithoutSuffix) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
+        NormalizedFolkerTranscription nft = XMLReaderWriter.readNormalizedFolkerTranscription(folkerFile);
+        SegmentedTranscription st = nft.toSegmentedTranscription();
+
+        // find a suitable name for the transcription (will become the communication name)
+        String transcriptionName = fileNameWithoutSuffix;
+        int number = 2;
+        while (communicationsWithExmaraldaFiles.containsKey(transcriptionName)){
+            transcriptionName = fileNameWithoutSuffix + Integer.toString(number);
+            number++;
+        }
+        st.getHead().getMetaInformation().setTranscriptionName(transcriptionName);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' hh:mm:ss z");
+        st.getHead().getMetaInformation().setComment("Imported from " + folkerFile.getAbsolutePath() + " on " + sdf.format(cal.getTime()));
+        st.getHead().getMetaInformation().getUDMetaInformation().setAttribute("FOLKER-Original", folkerFile.getAbsolutePath());
+
+        File thisDirectoryFile = folkerFile.getParentFile();
+        if (separateDirectory){
+            thisDirectoryFile = directoryFile;
+        }
+
+        String stName = new File(thisDirectoryFile, transcriptionName + ".exs").getAbsolutePath();
+        System.out.println("+++ Writing segmented transcription to " + stName);
+
+        if (this.writeBasic){
+            BasicTranscription bt = org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(folkerFile);
+            // added 09-05-2011
+            bt.getBody().stratify(Tier.STRATIFY_BY_DISTRIBUTION);
+            String btName = new File(thisDirectoryFile, transcriptionName + ".exb").getAbsolutePath();
+            System.out.println("+++ Writing basic transcription to " + btName);
+            bt.writeXMLToFile(btName, "none");
+            st.setEXBSource(btName);
+            File[] files = new File[2];
+            files[0] = new File(stName);
+            files[1] = new File(btName);
+            communicationsWithExmaraldaFiles.put(transcriptionName, files);
+        } else {
+            File[] files = new File[1];
+            files[0] = new File(stName);
+            communicationsWithExmaraldaFiles.put(transcriptionName, files);
+        }
+        st.writeXMLToFile(stName, "none");
+        communicationsWithFOLKERFiles.put(transcriptionName, folkerFile);
+
+     }
 
 
     // ********************************************************

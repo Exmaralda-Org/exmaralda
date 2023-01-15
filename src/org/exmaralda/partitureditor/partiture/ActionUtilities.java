@@ -24,59 +24,155 @@ public class ActionUtilities {
             String userNode = ea.getPreferencesNode();
             java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(userNode);
             String def = "Praat";
-            if (propName.indexOf("output")>=0){
+            if (propName.contains("output")){
                 def = "HTMLPartitur";
             }
             String lastFileFilter = settings.get(propName, def);
-            if (lastFileFilter.equals("AG")) {dialog.setFileFilter(dialog.AGFileFilter);}
-            else if (lastFileFilter.equals("EAF")) {dialog.setFileFilter(dialog.EAFFileFilter);}
-            else if (lastFileFilter.equals("HIAT-DOS")) {dialog.setFileFilter(dialog.HIATDOSFileFilter);}
-            else if (lastFileFilter.equals("Praat")) {dialog.setFileFilter(dialog.PraatFileFilter);}
-            else if (lastFileFilter.equals("SimpleExmaralda")) {dialog.setFileFilter(dialog.SimpleExmaraldaFileFilter);}
-            else if (lastFileFilter.equals("RioDeJaneiro")) {dialog.setFileFilter(dialog.RioDeJaneiroFileFilter);}
-            else if (lastFileFilter.equals("TASX")) {dialog.setFileFilter(dialog.TASXFileFilter);}
-            else if (lastFileFilter.equals("ANVIL")) {dialog.setFileFilter(dialog.AnvilFileFilter);}
-            else if (lastFileFilter.equals("TEI")) {dialog.setFileFilter(dialog.TEIFileFilter);}
-            else if (lastFileFilter.equals("TCF")) {dialog.setFileFilter(dialog.TCFFileFilter);}
-            //else if (lastFileFilter.equals("TEIModena")) {dialog.setFileFilter(dialog.TEIModenaFileFilter);}
-            else if (lastFileFilter.equals("TEIModena")) {dialog.setFileFilter(dialog.TEIFileFilter);}
-            else if (lastFileFilter.equals("Text")) {dialog.setFileFilter(dialog.TextFileFilter);}
-            else if (lastFileFilter.equals("exSync")) {dialog.setFileFilter(dialog.exSyncFileFilter);}
-            else if (lastFileFilter.equals("HTMLPartitur")) {dialog.setFileFilter(dialog.HTMLPartiturFileFilter);}
-            else if (lastFileFilter.equals("HTMLPartiturCompact")) {dialog.setFileFilter(dialog.HTMLPartiturCompactFilter);}
-            else if (lastFileFilter.equals("RTFPartitur")) {dialog.setFileFilter(dialog.RTFPartiturFileFilter);}
-            else if (lastFileFilter.equals("SVGPartitur")) {dialog.setFileFilter(dialog.SVGPartiturFileFilter);}
-            else if (lastFileFilter.equals("XMLPartitur")) {dialog.setFileFilter(dialog.XMLPartiturFileFilter);}
-            else if (lastFileFilter.equals("HTMLSegmentChain")) {dialog.setFileFilter(dialog.HTMLSegmentChainFileFilter);}
-            else if (lastFileFilter.equals("FreeStylesheet")) {dialog.setFileFilter(dialog.FreeStylesheetFileFilter);}
-            else if (lastFileFilter.equals("HTMLPartiturFlash")) {dialog.setFileFilter(dialog.HTMLPartiturWithFlashFileFilter);}
-            else if (lastFileFilter.equals("HTML5Partitur")) {dialog.setFileFilter(dialog.HTMLPartiturWithHTML5AudioFileFilter);}
-            else if (lastFileFilter.equals("HTML5PartiturSVG")) {dialog.setFileFilter(dialog.HTMLPartiturWithSVGFileFilter);}
-            else if (lastFileFilter.equals("HTMLListFlash")) {dialog.setFileFilter(dialog.HTMLSegmentChainWithFlashFileFilter);}
-            else if (lastFileFilter.equals("HTML5List")) {dialog.setFileFilter(dialog.HTMLSegmentChainWithHTML5AudioFileFilter);}
-            else if (lastFileFilter.equals("ExmaraldaSegmented")) {dialog.setFileFilter(dialog.ExmaraldaSegmentedTranscriptionFileFilter);}
-            else if (lastFileFilter.equals("GATTranscript")) {dialog.setFileFilter(dialog.GATTranscriptFileFilter);}
-            else if (lastFileFilter.equals("GATHTML5")) {dialog.setFileFilter(dialog.GATWithHTML5AudioFileFilter);}
-            else if (lastFileFilter.equals("SimpleTextTranscript")) {dialog.setFileFilter(dialog.SimpleTextTranscriptFileFilter);}
-            else if (lastFileFilter.equals("CHATTranscript")) {dialog.setFileFilter(dialog.CHATTranscriptFileFilter);}
-            
-            else if (lastFileFilter.equals("FOLKERTranscription")) {dialog.setFileFilter(dialog.FOLKERTranscriptionFileFilter);}
-            else if (lastFileFilter.equals("FLKTranscription")) {dialog.setFileFilter(dialog.FLKTranscriptionFileFilter);}
-            else if (lastFileFilter.equals("FLNTranscription")) {dialog.setFileFilter(dialog.FLNTranscriptionFileFilter);}
-            
-            
-            else if (lastFileFilter.equals("TreeTagger")) {dialog.setFileFilter(dialog.TreeTaggerFilter);}
-            else if (lastFileFilter.equals("XSLImport")) {dialog.setFileFilter(dialog.XSLStylesheetImportFilter);}
-            else if (lastFileFilter.equals("Transcriber")) {dialog.setFileFilter(dialog.TranscriberFileFilter);}
-            else if (lastFileFilter.equals("WinPitch")) {dialog.setFileFilter(dialog.WinPitchFileFilter);}
-            else if (lastFileFilter.equals("Audacity")) {dialog.setFileFilter(dialog.AudacityLabelFileFilter);}
-            else if (lastFileFilter.equals("Phon")) {dialog.setFileFilter(dialog.PhonFileFilter);}
-            else if (lastFileFilter.equals("TransanaXML")) {dialog.setFileFilter(dialog.TransanaXMLFileFilter);}
-            else if (lastFileFilter.equals("F4Text")) {dialog.setFileFilter(dialog.F4TextFileFilter);}
-            else if (lastFileFilter.equals("SRT")) {dialog.setFileFilter(dialog.SRTFileFilter);}
-            else if (lastFileFilter.equals("VTT")) {dialog.setFileFilter(dialog.VTTFileFilter);}
-            else if (lastFileFilter.equals("Flextext")) {dialog.setFileFilter(dialog.FlexTextXMLFileFilter);}
-            else if (lastFileFilter.equals("FrazierADC")) {dialog.setFileFilter(dialog.FrazierADCFileFilter);}
+            switch (lastFileFilter) {
+                case "AG":
+                    dialog.setFileFilter(dialog.AGFileFilter);
+                    break;
+                case "EAF":
+                    dialog.setFileFilter(dialog.EAFFileFilter);
+                    break;
+                case "HIAT-DOS":
+                    dialog.setFileFilter(dialog.HIATDOSFileFilter);
+                    break;
+                case "Praat":
+                    dialog.setFileFilter(dialog.PraatFileFilter);
+                    break;
+                case "SimpleExmaralda":
+                    dialog.setFileFilter(dialog.SimpleExmaraldaFileFilter);
+                    break;
+                case "RioDeJaneiro":
+                    dialog.setFileFilter(dialog.RioDeJaneiroFileFilter);
+                    break;
+                case "TASX":
+                    dialog.setFileFilter(dialog.TASXFileFilter);
+                    break;
+                case "ANVIL":
+                    dialog.setFileFilter(dialog.AnvilFileFilter);
+                    break;
+                case "TEI":
+                    dialog.setFileFilter(dialog.TEIFileFilter);
+                    break;
+                case "TCF":
+                    dialog.setFileFilter(dialog.TCFFileFilter);
+                    break;
+                case "TEIModena":
+                    dialog.setFileFilter(dialog.TEIFileFilter);
+                    break;
+                case "Text":
+                    dialog.setFileFilter(dialog.TextFileFilter);
+                    break;
+                case "exSync":
+                    dialog.setFileFilter(dialog.exSyncFileFilter);
+                    break;
+                case "HTMLPartitur":
+                    dialog.setFileFilter(dialog.HTMLPartiturFileFilter);
+                    break;
+                case "HTMLPartiturCompact":
+                    dialog.setFileFilter(dialog.HTMLPartiturCompactFilter);
+                    break;
+                case "RTFPartitur":
+                    dialog.setFileFilter(dialog.RTFPartiturFileFilter);
+                    break;
+                case "SVGPartitur":
+                    dialog.setFileFilter(dialog.SVGPartiturFileFilter);
+                    break;
+                case "XMLPartitur":
+                    dialog.setFileFilter(dialog.XMLPartiturFileFilter);
+                    break;
+                case "HTMLSegmentChain":
+                    dialog.setFileFilter(dialog.HTMLSegmentChainFileFilter);
+                    break;
+                case "FreeStylesheet":
+                    dialog.setFileFilter(dialog.FreeStylesheetFileFilter);
+                    break;
+                case "HTMLPartiturFlash":
+                    dialog.setFileFilter(dialog.HTMLPartiturWithFlashFileFilter);
+                    break;
+                case "HTML5Partitur":
+                    dialog.setFileFilter(dialog.HTMLPartiturWithHTML5AudioFileFilter);
+                    break;
+                case "HTML5PartiturSVG":
+                    dialog.setFileFilter(dialog.HTMLPartiturWithSVGFileFilter);
+                    break;
+                case "HTMLListFlash":
+                    dialog.setFileFilter(dialog.HTMLSegmentChainWithFlashFileFilter);
+                    break;
+                case "HTML5List":
+                    dialog.setFileFilter(dialog.HTMLSegmentChainWithHTML5AudioFileFilter);
+                    break;
+                case "ExmaraldaSegmented":
+                    dialog.setFileFilter(dialog.ExmaraldaSegmentedTranscriptionFileFilter);
+                    break;
+                case "GATTranscript":
+                    dialog.setFileFilter(dialog.GATTranscriptFileFilter);
+                    break;
+                case "GATHTML5":
+                    dialog.setFileFilter(dialog.GATWithHTML5AudioFileFilter);
+                    break;
+                case "SimpleTextTranscript":
+                    dialog.setFileFilter(dialog.SimpleTextTranscriptFileFilter);
+                    break;
+                case "CHATTranscript":
+                    dialog.setFileFilter(dialog.CHATTranscriptFileFilter);
+                    break;
+                case "FOLKERTranscription":
+                    dialog.setFileFilter(dialog.FOLKERTranscriptionFileFilter);
+                    break;
+                case "FLKTranscription":
+                    dialog.setFileFilter(dialog.FLKTranscriptionFileFilter);
+                    break;
+                case "FLNTranscription":
+                    dialog.setFileFilter(dialog.FLNTranscriptionFileFilter);
+                    break;
+                case "TreeTagger":
+                    dialog.setFileFilter(dialog.TreeTaggerFilter);
+                    break;
+                case "XSLImport":
+                    dialog.setFileFilter(dialog.XSLStylesheetImportFilter);
+                    break;
+                case "Transcriber":
+                    dialog.setFileFilter(dialog.TranscriberFileFilter);
+                    break;
+                case "WinPitch":
+                    dialog.setFileFilter(dialog.WinPitchFileFilter);
+                    break;
+                case "Audacity":
+                    dialog.setFileFilter(dialog.AudacityLabelFileFilter);
+                    break;
+                case "Phon":
+                    dialog.setFileFilter(dialog.PhonFileFilter);
+                    break;
+                case "TransanaXML":
+                    dialog.setFileFilter(dialog.TransanaXMLFileFilter);
+                    break;
+                case "F4Text":
+                    dialog.setFileFilter(dialog.F4TextFileFilter);
+                    break;
+                case "SRT":
+                    dialog.setFileFilter(dialog.SRTFileFilter);
+                    break;
+                case "VTT":
+                    dialog.setFileFilter(dialog.VTTFileFilter);
+                    break;
+                case "Flextext":
+                    dialog.setFileFilter(dialog.FlexTextXMLFileFilter);
+                    break;
+                case "FrazierADC":
+                    dialog.setFileFilter(dialog.FrazierADCFileFilter);
+                    break;
+                case "WhisperJSON":
+                    dialog.setFileFilter(dialog.WhisperJSONFileFilter);
+                    break;
+                case "AmberscriptJSON":
+                    dialog.setFileFilter(dialog.AmberscriptJSONFileFilter);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -135,6 +231,8 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.VTTFileFilter) {lastFileFilter = "VTT";}
             else if (selectedFileFilter==dialog.FlexTextXMLFileFilter) {lastFileFilter = "Flextext";}
             else if (selectedFileFilter==dialog.FrazierADCFileFilter) {lastFileFilter = "FrazierADC";}
+            else if (selectedFileFilter==dialog.WhisperJSONFileFilter) {lastFileFilter = "WhisperJSON";}
+            else if (selectedFileFilter==dialog.AmberscriptJSONFileFilter) {lastFileFilter = "AmberscriptJSON";}
 
 
             settings.put(propName, lastFileFilter);

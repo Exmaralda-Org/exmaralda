@@ -13,6 +13,8 @@ import org.exmaralda.folker.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.folker.application.ApplicationControl;
@@ -22,9 +24,12 @@ import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.jexmaralda.*;
+import org.exmaralda.partitureditor.jexmaralda.convert.AmberscriptJSONConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.AudacityConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.F4Converter;
+import org.exmaralda.partitureditor.jexmaralda.convert.SubtitleConverter;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
+import org.exmaralda.partitureditor.jexmaralda.convert.WhisperJSONConverter;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -39,8 +44,18 @@ public class ImportAction extends AbstractApplicationAction {
     ParameterFileFilter audacityFileFilter = new ParameterFileFilter("txt", FOLKERInternationalizer.getString("misc.audacityLabelFile"));
     ParameterFileFilter teiFileFilter = new ParameterFileFilter("xml", "ISO/TEI File (*.xml)");
     ParameterFileFilter f4FileFilter = new ParameterFileFilter("txt", "F4 Transcript (*.txt)");
+
+    // new 15-01-2023: issues #119, #357 and #358
+    ParameterFileFilter WhisperJSONFileFilter = new ParameterFileFilter("json", "Whisper JSON file (*.json)"); // issue #357
+    ParameterFileFilter AmberscriptJSONFileFilter = new ParameterFileFilter("json", "Amberscript JSON file (*.json)"); // issue #358
+    ParameterFileFilter SRTFileFilter = new ParameterFileFilter("srt", "SubRip Subtitle file (*.srt)");
+    ParameterFileFilter VTTFileFilter = new ParameterFileFilter("vtt", "Web Video Text Tracks file (*.vtt)");
     
-    /** Creates a new instance of OpenAction */
+    
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public ImportAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
@@ -56,6 +71,13 @@ public class ImportAction extends AbstractApplicationAction {
         fileChooser.addChoosableFileFilter(teiFileFilter);
         fileChooser.addChoosableFileFilter(audacityFileFilter);
         fileChooser.addChoosableFileFilter(f4FileFilter);
+
+        // new 15-01-2023: issues #119, #357 and #358
+        fileChooser.addChoosableFileFilter(WhisperJSONFileFilter);
+        fileChooser.addChoosableFileFilter(AmberscriptJSONFileFilter);
+        fileChooser.addChoosableFileFilter(SRTFileFilter);
+        fileChooser.addChoosableFileFilter(VTTFileFilter);
+
         fileChooser.setFileFilter(exmaraldaFileFilter);
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));        
@@ -105,6 +127,38 @@ public class ImportAction extends AbstractApplicationAction {
                 bt.getBody().getCommonTimeline().completeTimes(false, bt);
                 importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
             } catch (IOException | IllegalArgumentException ex) {
+                applicationControl.displayException(ex);
+                return;
+            }
+        } else if (fileChooser.getFileFilter()==VTTFileFilter){
+            try {
+                BasicTranscription bt = SubtitleConverter.readVTT(f);
+                importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
+            } catch (IOException | IllegalArgumentException | JexmaraldaException ex) {
+                applicationControl.displayException(ex);
+                return;
+            }
+        } else if (fileChooser.getFileFilter()==SRTFileFilter){
+            try {
+                BasicTranscription bt = SubtitleConverter.readSRT(f);
+                importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
+            } catch (IOException | IllegalArgumentException | JexmaraldaException ex) {
+                applicationControl.displayException(ex);
+                return;
+            }
+        } else if (fileChooser.getFileFilter()==WhisperJSONFileFilter){
+            try {
+                BasicTranscription bt = WhisperJSONConverter.readWhisperJSON(f);
+                importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
+            } catch (IOException | IllegalArgumentException | JexmaraldaException ex) {
+                applicationControl.displayException(ex);
+                return;
+            }
+        } else if (fileChooser.getFileFilter()==AmberscriptJSONFileFilter){
+            try {
+                BasicTranscription bt = AmberscriptJSONConverter.readAmberscriptJSON(f);
+                importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
+            } catch (IOException | IllegalArgumentException | JexmaraldaException ex) {
                 applicationControl.displayException(ex);
                 return;
             }

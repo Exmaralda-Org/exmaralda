@@ -28,7 +28,8 @@ public class AnnotationSetPanel extends javax.swing.JPanel implements MouseListe
 
     AnnotationDialog annotationDialog = null;
 
-    /** Creates new form AnnotationSetPanel */
+    /** Creates new form AnnotationSetPanel
+     * @param c */
     public AnnotationSetPanel(Category c) {
         initComponents();
         AnnotationSetTreeModel astm = new AnnotationSetTreeModel(c, false);
@@ -113,6 +114,7 @@ public class AnnotationSetPanel extends javax.swing.JPanel implements MouseListe
     // End of variables declaration//GEN-END:variables
 
 
+    @Override
     public void mouseClicked(MouseEvent e) {
         if (annotationDialog==null) return;
         if (e.getClickCount()==2){
@@ -124,18 +126,23 @@ public class AnnotationSetPanel extends javax.swing.JPanel implements MouseListe
         }
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
     }
 
+    @Override
     public void valueChanged(TreeSelectionEvent e) {
         if (annotationDialog==null) return;
         Category c = (Category)categoryTree.getLastSelectedPathComponent();
