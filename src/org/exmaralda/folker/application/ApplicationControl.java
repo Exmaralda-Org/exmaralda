@@ -1452,6 +1452,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     
     
     public void setMedia(String path) throws IOException{
+        if (path==null){
+            throw new IOException("No media path provided.");
+        }
         File tryFile = new File(path);
         String defaultAudioPath = PreferencesUtilities.getProperty("default-audio-path", "");
         String tryPath = path;
