@@ -21,6 +21,9 @@ CP_JAVA_1=$WORKINGDIR/lib/EXMARaLDA.jar:$WORKINGDIR/lib/jctable.jar
 # XML
 CP_JAVA_2=$WORKINGDIR/lib/jdom.jar:$WORKINGDIR/lib/xalan.jar:$WORKINGDIR/lib/xercesImpl.jar:$WORKINGDIR/lib/saxon9.jar:$WORKINGDIR/lib/saxon9-dom.jar:$WORKINGDIR/lib/serializer.jar:$WORKINGDIR/lib/jaxen-1.1.6.jar:$WORKINGDIR/lib/jaxb-api-2.3.0.jar
 
+#JSON
+CP_JAVA_3=$WORKINGDIR/lib/jackson-annotations-2.9.10.jar:$WORKINGDIR/lib/jackson-core-2.9.10.jar:$WORKINGDIR/lib/jackson-databind-2.9.10.jar
+
 
 # AUDIO/VIDEO
 CP_JAVA_4=$WORKINGDIR/lib/ips.audiotools.jar:$WORKINGDIR/lib/ips.commons.jar:$WORKINGDIR/lib/elan-6.4.jar
@@ -34,7 +37,7 @@ CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/BATIK.jar:$WOR
 
     
 # ALL COMBINED
-CP_JAVA=$CP_JAVA_1:$CP_JAVA_2:$CP_JAVA_4:$CP_JAVA_4b:$CP_JAVA_5:$CP_JAVA_6
+CP_JAVA=$CP_JAVA_1:$CP_JAVA_2:$CP_JAVA_3:$CP_JAVA_4:$CP_JAVA_4b:$CP_JAVA_5:$CP_JAVA_6
 
 
 echo $JAVA_CMD -classpath $CP_JAVA -Djava.library.path=$DYLD_LIBRARY_PATH org.exmaralda.partitureditor.partiture.PartiturEditor $1
