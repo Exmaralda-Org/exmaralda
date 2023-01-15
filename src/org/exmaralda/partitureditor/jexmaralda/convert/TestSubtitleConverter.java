@@ -6,6 +6,7 @@
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -29,8 +30,20 @@ public class TestSubtitleConverter {
     }
 
     private void doit() throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
-        BasicTranscription bt = SubtitleConverter.readVTT(new File("D:\\Dropbox\\BASEL\\LEHRE_FJS_2022\\SEMINAR_MAP_TASKS--edited.vtt"));
-        System.out.println(bt.toXML());
+        File[] vttFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().endsWith(".vtt");
+            }            
+        });
+        for (File vttFile : vttFiles){
+            BasicTranscription bt = SubtitleConverter.readVTT(vttFile);
+            String outFilename = vttFile.getName().replace(".vtt", ".exb");
+            bt.writeXMLToFile(new File(vttFile.getParent(), outFilename).getAbsolutePath(), "none");
+            //System.out.println(bt.toXML());            
+        }
+        
+        
     }
     
 }
