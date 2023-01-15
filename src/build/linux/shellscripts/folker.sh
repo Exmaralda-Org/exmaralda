@@ -29,7 +29,7 @@ CP_JAVA_4b=$WORKINGDIR/lib/javafx-base-18.0.1-linux.jar:$WORKINGDIR/lib/javafx-c
 CP_JAVA_5=$WORKINGDIR/lib/httpcore-4.4.3.jar:$WORKINGDIR/lib/httpclient-4.5.1.jar:$WORKINGDIR/lib/httpmime-4.5.1.jar
 
 # OTHER STUFF
-CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/BATIK.jar:$WORKINGDIR/lib/tt4j.jar:$WORKINGDIR/lib/weblicht.jar
+CP_JAVA_6=$WORKINGDIR/lib/commons-logging-1.2.jar:$WORKINGDIR/lib/BATIK.jar:$WORKINGDIR/lib/tt4j.jar:$WORKINGDIR/lib/weblicht.jar:$WORKINGDIR/lib/subtitle-0.9.2-SNAPSHOT-jar-with-dependencies.jar
 
     
 # ALL COMBINED
