@@ -194,8 +194,9 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
 
         getContentPane().add(speakersPanel, java.awt.BorderLayout.WEST);
 
+        buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         buttonPanel.setMaximumSize(new java.awt.Dimension(600, 40));
-        buttonPanel.setPreferredSize(new java.awt.Dimension(360, 30));
+        buttonPanel.setPreferredSize(new java.awt.Dimension(360, 40));
 
         okButton.setText("OK");
         okButton.setMaximumSize(new java.awt.Dimension(110, 27));

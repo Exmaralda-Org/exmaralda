@@ -5,8 +5,6 @@
  */
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
-
-import java.util.*;
 /**
  *
  * @author  Thomas
@@ -16,7 +14,8 @@ public class UDInformationTableModel extends javax.swing.table.DefaultTableModel
 
     boolean[] canEdit = new boolean [] {false, true};
                       
-    /** Creates new UDInformationTableModel */
+    /** Creates new UDInformationTableModel
+     * @param udInfo */
     public UDInformationTableModel(org.exmaralda.partitureditor.jexmaralda.UDInformationHashtable udInfo) {
         super(new Object[][] {}, new String[] {"Attributes", "Values"});
         String[] allAttributes = udInfo.getAllAttributes();
@@ -29,6 +28,7 @@ public class UDInformationTableModel extends javax.swing.table.DefaultTableModel
         }
     }
     
+    @Override
    public boolean isCellEditable (int rowIndex, int columnIndex) {
      return canEdit [columnIndex];
    }

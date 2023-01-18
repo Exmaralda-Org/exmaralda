@@ -16,9 +16,9 @@ import java.io.*;
  */
 public class EditMetaInformationDialog extends JEscapeDialog {
 
-    private org.exmaralda.partitureditor.jexmaralda.MetaInformation metaInformation;
-    private org.exmaralda.partitureditor.udInformationTable.UDInformationPanel tablePanel;
-    private javax.swing.JButton templateButton;
+    private final org.exmaralda.partitureditor.jexmaralda.MetaInformation metaInformation;
+    private final org.exmaralda.partitureditor.udInformationTable.UDInformationPanel tablePanel;
+    private final javax.swing.JButton templateButton;
     private String currentFilename;
     //private UDInformationTableModel tableModel;
     
@@ -32,6 +32,7 @@ public class EditMetaInformationDialog extends JEscapeDialog {
         templateButton.setMinimumSize (new java.awt.Dimension(150, 27));
         templateButton.setText ("Template...");
         templateButton.addActionListener (new java.awt.event.ActionListener () {
+            @Override
             public void actionPerformed (java.awt.event.ActionEvent evt) {
                 templateButtonActionPerformed (evt);
             }

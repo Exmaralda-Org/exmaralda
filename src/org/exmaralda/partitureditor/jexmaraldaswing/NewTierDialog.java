@@ -169,17 +169,20 @@ public class NewTierDialog extends JEscapeDialog {
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
-        propertiesPanel.setMaximumSize(new java.awt.Dimension(320, 100));
+        propertiesPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        propertiesPanel.setMaximumSize(new java.awt.Dimension(600, 200));
+        propertiesPanel.setPreferredSize(new java.awt.Dimension(500, 200));
         propertiesPanel.setLayout(new javax.swing.BoxLayout(propertiesPanel, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel3.setAlignmentX(0.0F);
         jPanel3.setAlignmentY(0.0F);
+        jPanel3.setPreferredSize(new java.awt.Dimension(500, 25));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel2.setText("Speaker: ");
-        jLabel2.setMaximumSize(new java.awt.Dimension(60, 16));
-        jLabel2.setMinimumSize(new java.awt.Dimension(60, 16));
-        jLabel2.setPreferredSize(new java.awt.Dimension(60, 16));
+        jLabel2.setText("Speaker:");
+        jLabel2.setMaximumSize(new java.awt.Dimension(100, 20));
+        jLabel2.setMinimumSize(new java.awt.Dimension(80, 20));
+        jLabel2.setPreferredSize(new java.awt.Dimension(80, 20));
         jPanel3.add(jLabel2);
 
         speakerComboBox.setMaximumSize(new java.awt.Dimension(300, 27));
@@ -191,9 +194,8 @@ public class NewTierDialog extends JEscapeDialog {
         });
         jPanel3.add(speakerComboBox);
 
+        editSpeakerTableButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditSpeakerTable.gif"))); // NOI18N
         editSpeakerTableButton.setText("Edit speakertable...");
-        editSpeakerTableButton.setMaximumSize(new java.awt.Dimension(160, 27));
-        editSpeakerTableButton.setPreferredSize(new java.awt.Dimension(160, 27));
         editSpeakerTableButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editSpeakerTableButtonActionPerformed(evt);
@@ -205,12 +207,13 @@ public class NewTierDialog extends JEscapeDialog {
 
         jPanel4.setAlignmentX(0.0F);
         jPanel4.setAlignmentY(0.0F);
+        jPanel4.setPreferredSize(new java.awt.Dimension(500, 25));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel3.setText("Type: ");
-        jLabel3.setMaximumSize(new java.awt.Dimension(60, 16));
-        jLabel3.setMinimumSize(new java.awt.Dimension(60, 16));
-        jLabel3.setPreferredSize(new java.awt.Dimension(60, 16));
+        jLabel3.setText("Type:");
+        jLabel3.setMaximumSize(new java.awt.Dimension(100, 20));
+        jLabel3.setMinimumSize(new java.awt.Dimension(80, 20));
+        jLabel3.setPreferredSize(new java.awt.Dimension(80, 20));
         jPanel4.add(jLabel3);
 
         typeComboBox.setMaximumSize(new java.awt.Dimension(200, 27));
@@ -226,12 +229,13 @@ public class NewTierDialog extends JEscapeDialog {
 
         jPanel5.setAlignmentX(0.0F);
         jPanel5.setAlignmentY(0.0F);
+        jPanel5.setPreferredSize(new java.awt.Dimension(500, 25));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel4.setText("Category: ");
-        jLabel4.setMaximumSize(new java.awt.Dimension(60, 16));
-        jLabel4.setMinimumSize(new java.awt.Dimension(60, 16));
-        jLabel4.setPreferredSize(new java.awt.Dimension(60, 16));
+        jLabel4.setText("Category:");
+        jLabel4.setMaximumSize(new java.awt.Dimension(100, 20));
+        jLabel4.setMinimumSize(new java.awt.Dimension(80, 20));
+        jLabel4.setPreferredSize(new java.awt.Dimension(80, 20));
         jPanel5.add(jLabel4);
 
         categoryTextField.setText("v");
@@ -256,6 +260,7 @@ public class NewTierDialog extends JEscapeDialog {
 
         jPanel6.setAlignmentX(0.0F);
         jPanel6.setAlignmentY(0.0F);
+        jPanel6.setPreferredSize(new java.awt.Dimension(500, 25));
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
         copyTierCheckBox.setText("Copy events from: ");
