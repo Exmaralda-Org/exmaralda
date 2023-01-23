@@ -1559,7 +1559,7 @@ bu bağlantıyı aç.&lt;/html&gt;&lt;/body&gt;"/>
 		<uiItem name="filter.commsWithRecordings" lang="tk" value="kayıtlarla"/>
 
 		<uiItem name="ccw.algorithm" lang="deu" value="Segmentierungs-Algorithmus"/>
-		<uiItem name="ccw.algorithm" lang="eng" value="segmentation algorithm"/>
+		<uiItem name="ccw.algorithm" lang="eng" value="Segmentation algorithm"/>
 		<uiItem name="ccw.algorithm" lang="tk" value=" bölümleme algoritması"/>
 
 		<uiItem name="ccw.fileName" lang="deu" value="Coma-Datei"/>

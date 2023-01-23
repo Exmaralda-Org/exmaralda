@@ -8,6 +8,7 @@ package org.exmaralda.partitureditor.partiture.fileActions;
 
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.OpenBasicTranscriptionDialog;
 import com.klg.jclass.table.*;
+import java.awt.Cursor;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
 import javax.swing.Action;
@@ -63,6 +64,11 @@ public class OpenAction extends org.exmaralda.partitureditor.partiture.AbstractT
         // tell the dialog to show itself and open the transcription the user selects
         // If the user hasn't cancelled and nothing has gone wrong with opening the selected file...
         if (dialog.openTranscription(table.parent)){
+            
+
+            Cursor rememberCursor = table.getCursor();
+            table.setCursor(Cursor.WAIT_CURSOR);
+
             // ... get the newly read transcription from the dialog...
             BasicTranscription newTranscription = dialog.getTranscription();
             // ... stratify the new transcription
@@ -96,6 +102,7 @@ public class OpenAction extends org.exmaralda.partitureditor.partiture.AbstractT
             table.transcriptionChanged = false;
             table.formatChanged = false;
             
+            table.setCursor(rememberCursor);
 
             table.status("Transcription " + dialog.getFilename() + " opened");
             

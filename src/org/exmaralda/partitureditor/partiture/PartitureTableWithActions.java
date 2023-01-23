@@ -2187,7 +2187,17 @@ public class PartitureTableWithActions extends PartitureTable
         // this is awkward but I'm only human
         if (getTopLevelAncestor() instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)(getTopLevelAncestor());
-            pe.setupMedia();
+            boolean goon = pe.setupMedia();
+            if (!goon){     
+                if (player instanceof AbstractPlayer) ((AbstractPlayer)player).reset();
+                mediaPanelDialog.reset();
+                protectLastColumn = false;
+                // added 19-01-2010
+                getModel().protectLastColumn = false;
+
+                getModel().fireColumnLabelsChanged();
+                return false;                
+            }
         }
         // end of awkward, human-only part
         // code is immaculate from here on
