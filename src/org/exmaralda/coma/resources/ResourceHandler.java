@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Vector;
 
-import org.xml.sax.InputSource;
 
 public class ResourceHandler {
 

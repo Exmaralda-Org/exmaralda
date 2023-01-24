@@ -66,7 +66,7 @@ public class Ui {
 			Iterator iterator = allElements.iterator();
 			while (iterator.hasNext()) {
 				Element myElement = (Element) iterator.next();
-				if (myElement.getName() == "uiItem" && myElement.getAttributeValue("name") != null && myElement.getAttributeValue("value") != null && myElement.getAttributeValue("lang").equals(languageCode)) {
+				if ("uiItem".equals(myElement.getName()) && myElement.getAttributeValue("name") != null && myElement.getAttributeValue("value") != null && myElement.getAttributeValue("lang").equals(languageCode)) {
 					UiElements.put(myElement.getAttributeValue("name"), myElement.getAttributeValue("value"));
 				} else {
 					//					System.err.println("uiElement in Languagefile invalid!");
@@ -75,7 +75,6 @@ public class Ui {
 
 		} catch (JDOMException e) {
 			System.err.println("Languagefile invalid!");
-			e.printStackTrace();
 		} catch (IOException e) {
 			System.err.println("Languagefile missing!");
 		}

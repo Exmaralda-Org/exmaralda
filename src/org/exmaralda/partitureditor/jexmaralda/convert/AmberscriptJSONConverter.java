@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import org.exmaralda.common.helpers.Rounder;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -120,8 +121,11 @@ public class AmberscriptJSONConverter {
             Iterator<JsonNode> iterator3 = segmentNode.get("words").elements();
             while (iterator3.hasNext()){
                 JsonNode wordNode = iterator3.next();
-                double startTimeInSeconds = wordNode.get("start").asDouble();
-                double endTimeInSeconds = wordNode.get("end").asDouble();
+
+                // round to miliseconds to avoid overlaps which aren't overlaps
+                double startTimeInSeconds = Rounder.round(wordNode.get("start").asDouble(),3);
+                double endTimeInSeconds = Rounder.round(wordNode.get("end").asDouble(),3);
+                
                 String text = wordNode.get("text").asText();
                 String confidence = wordNode.get("conf").asText();
                 String pristine = wordNode.get("pristine").asText();

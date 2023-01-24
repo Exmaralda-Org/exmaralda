@@ -25,8 +25,8 @@ public class Test {
         try {
             FSMSaxReader sr = new FSMSaxReader();
             FiniteStateMachine fsm = 
-                    sr.readFromFile("D:\\EXMARaLDA_GIT\\exmaralda\\src\\org\\exmaralda\\partitureditor\\fsm\\xml\\cGAT_Minimal.xml");
-            String result = fsm.process("a-b");
+                    sr.readFromFile("C:\\exmaralda\\exmaralda\\src\\org\\exmaralda\\partitureditor\\fsm\\xml\\cGAT_Minimal_EQ_SP.xml");
+            String result = fsm.process("(0.9) eso es poco agradable (¿eh?) ");
             System.out.println(result);
         } catch (Exception e){
             System.out.println(e.getMessage());

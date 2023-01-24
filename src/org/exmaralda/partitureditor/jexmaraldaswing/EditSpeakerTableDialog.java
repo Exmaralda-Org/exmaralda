@@ -17,7 +17,7 @@ import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.*;
  */
 public class EditSpeakerTableDialog extends JEscapeDialog {
 
-    private static String[] sex = {"(unknown / n.a.)","female","male"};
+    private static final String[] sex = {"(unknown / n.a.)","female","male"};
     private org.exmaralda.partitureditor.jexmaralda.Speakertable speakertable;
     private javax.swing.DefaultListModel speakerListModel;
     //private UDInformationTableModel tableModel;
@@ -27,7 +27,10 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
     private javax.swing.JButton templateButton;
     private Vector speakerIDs = new Vector();
     
-    /** Creates new form SpeakerTableDialog */
+    /** Creates new form SpeakerTableDialog
+     * @param parent
+     * @param modal
+     * @param st */
     public EditSpeakerTableDialog(java.awt.Frame parent,boolean modal,org.exmaralda.partitureditor.jexmaralda.Speakertable st) {
         super (parent, modal);
         collectAttButton = new javax.swing.JButton();
@@ -36,6 +39,7 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         collectAttButton.setMinimumSize (new java.awt.Dimension(150, 27));
         collectAttButton.setText ("Collect attributes");
         collectAttButton.addActionListener (new java.awt.event.ActionListener () {
+            @Override
             public void actionPerformed (java.awt.event.ActionEvent evt) {
                 collectAttButtonActionPerformed (evt);
             }
@@ -60,7 +64,7 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         String[] ids = speakertable.getAllSpeakerIDs();
         for (int pos=0; pos<ids.length; pos++){
             try{
-                String listEntry = new String(ids[pos] + " [" + speakertable.getSpeakerWithID(ids[pos]).getAbbreviation() + "]");
+                String listEntry = ids[pos] + " [" + speakertable.getSpeakerWithID(ids[pos]).getAbbreviation() + "]";
                 speakerListModel.addElement(listEntry);
                 speakerIDs.addElement(ids[pos]);
             } catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je){};
@@ -194,8 +198,9 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
 
         getContentPane().add(speakersPanel, java.awt.BorderLayout.WEST);
 
+        buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         buttonPanel.setMaximumSize(new java.awt.Dimension(600, 40));
-        buttonPanel.setPreferredSize(new java.awt.Dimension(360, 30));
+        buttonPanel.setPreferredSize(new java.awt.Dimension(360, 40));
 
         okButton.setText("OK");
         okButton.setMaximumSize(new java.awt.Dimension(110, 27));
@@ -490,7 +495,7 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
         // removed for version 1.2.2., 18/11/2002
         //speakertable.getSpeakerWithID(newID).getLanguagesUsed().addLanguage("de");
     } catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je) {}
-    speakerListModel.addElement(new String(newID + " [" + newID + "]"));
+    speakerListModel.addElement((newID + " [" + newID + "]"));
     speakerIDs.addElement(newID);
     speakerList.setSelectedIndex(speakerIDs.size()-1);
   }//GEN-LAST:event_addSpeakerButtonActionPerformed
@@ -594,7 +599,8 @@ public class EditSpeakerTableDialog extends JEscapeDialog {
          java.awt.Dimension dialogSize = this.getPreferredSize();
          java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
          this.setLocation(screenSize.width/2 - dialogSize.width/2, screenSize.height/2 - dialogSize.height/2);
-         this.show();
+         //this.show();
+         this.setVisible(true);
          return change;
     }
 }

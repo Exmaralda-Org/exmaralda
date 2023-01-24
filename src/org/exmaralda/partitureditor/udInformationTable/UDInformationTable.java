@@ -7,11 +7,10 @@
 package org.exmaralda.partitureditor.udInformationTable;
 
 import java.awt.Component;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import static java.awt.Font.BOLD;
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.table.TableCellEditor;
+import javax.swing.table.DefaultTableCellRenderer;
 /**
  *
  * @author  Thomas
@@ -27,9 +26,12 @@ public class UDInformationTable extends JTable implements TableModelListener {
         tableModel = new UDInformationTableModel();
         setModel(tableModel);
         tableModel.addTableModelListener(this);
+        setRowHeight(getRowHeight() + 4);
+        this.getColumnModel().getColumn(0).setCellRenderer(new UDInformationTableCellRenderer());
     }
 
-    /** Creates new UDInformationTable */
+    /** Creates new UDInformationTable
+     * @param udi */
     public UDInformationTable(org.exmaralda.partitureditor.jexmaralda.UDInformationHashtable udi) {
         tableModel = new UDInformationTableModel(udi);
         setModel(tableModel);
@@ -50,6 +52,7 @@ public class UDInformationTable extends JTable implements TableModelListener {
         tableModel.addAttribute();
         this.changeSelection(getRowCount()-1, 0, false, false);
         this.editCellAt(getRowCount()-1, 0);
+        
     }
     
     public void removeAttribute(){        
@@ -97,6 +100,23 @@ public class UDInformationTable extends JTable implements TableModelListener {
         if (this.isEditing()){
             this.getCellEditor().stopCellEditing();
         }
+    }
+
+    private static class UDInformationTableCellRenderer extends DefaultTableCellRenderer {
+
+        public UDInformationTableCellRenderer() {
+        }
+        
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+            boolean hasFocus, int row, int column)
+        {
+            
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            c.setFont(c.getFont().deriveFont(BOLD)); 
+
+            return c;
+        }        
     }
 
             

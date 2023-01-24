@@ -7,10 +7,6 @@
 		<char>&#x0020;</char>
 		<!-- Underscore -->
 		<char>_</char>		
-                <char>?</char>
-                <char>¿</char>
-                <char>!</char>
-                <char>¡</char>
 	</char-set>
 	<char-set id="OpenParenthesis">
 		<comment>characters whose double appearance signals the beginning of a non-phonological segment and whose single appearance signals the beginning of an uncertain passage</comment>
@@ -57,6 +53,10 @@
 		<!-- <char>-</char> -->
 	</char-set>
 	<char-set id="MiscellaneousPunctuation">
+		<char>?</char>
+		<char>¿</char>
+		<char>!</char>
+		<char>¡</char>
 		<!-- Plain quotation mark -->
 		<char>"</char>
 		<!-- Apostrophe -->
@@ -139,7 +139,11 @@
 		</transition>
 		<transition>
 			<input-char-set id="MiscellaneousPunctuation"/>
-			<target id="Error"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
 		</transition>
 		<transition>
 			<input-other/>
@@ -192,7 +196,11 @@
 		</transition>
 		<transition>
 			<input-char-set id="MiscellaneousPunctuation"/>
-			<target id="Error"/>
+			<target id="TurnOpen_UncertainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
 		</transition>
 		<transition>
 			<input-other/>
@@ -299,7 +307,11 @@
 		</transition>
 		<transition>
 			<input-char-set id="MiscellaneousPunctuation"/>
-			<target id="Error"/>
+			<target id="TurnOpen_UncertainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
 		</transition>
 		<transition>
 			<input-other/>
@@ -369,7 +381,11 @@
 		</transition>
 		<transition>
 			<input-char-set id="CloseParenthesis"/>
-			<target id="Error"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
 		</transition>
 		<transition>
 			<input-char-set id="Alternative"/>
@@ -393,7 +409,11 @@
 		</transition>
 		<transition>
 			<input-char-set id="MiscellaneousPunctuation"/>
-			<target id="Error"/>
+			<target id="TurnOpen_UncertainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>			
 		</transition>
 		<transition>
 			<input-other/>
@@ -448,7 +468,11 @@
 		</transition>		
 		<transition>
 			<input-char-set id="MiscellaneousPunctuation"/>
-			<target id="Error"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
 		</transition>
 		<transition>
 			<input-other/>
@@ -608,7 +632,11 @@
 		</transition>		
 		<transition>
 			<input-char-set id="MiscellaneousPunctuation"/>
-			<target id="Error"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="cGAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
 		</transition>
 		<transition>
 			<input-other/>

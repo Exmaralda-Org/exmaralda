@@ -15,6 +15,7 @@ package org.exmaralda.partitureditor.partiture;
 //import com.apple.eawt.ApplicationEvent;
 import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -742,15 +743,20 @@ public class PartiturEditor extends javax.swing.JFrame
 
     }
 
-    public void setupMedia() {
+    public boolean setupMedia() {
         System.out.println("(2) PartiturEditor: setupMedia");
         BasicTranscription bt = table.getModel().getTranscription();
         String rf = bt.getHead().getMetaInformation().getReferencedFile();
         if (rf.length()>1){
-            String wf = bt.getHead().getMetaInformation().getReferencedFile("wav");
+            String wf = bt.getHead().getMetaInformation().getReferencedFile("wav");            
             try {
                 if (wf!=null){
+                    // we have a WAV file and can try it
                     try{
+                        //... but only if it exists
+                        if (!(new File(wf).exists())){
+                            throw new IOException("File " + wf + " does not exist");
+                        }
                         System.out.println("Initialising timelineViewer");
                         timelineViewer = new org.exmaralda.folker.timeview.WaveFormViewer();
                         timelineViewer.setPixelsPerSecond(150.0);
@@ -759,6 +765,10 @@ public class PartiturEditor extends javax.swing.JFrame
                     } catch (IOException ioe){
                         // added 09-06-2009: fallback onto first media file
                         // if the WAV file cannot be opened
+                        //... but only if it exists
+                        if (!(new File(rf).exists())){
+                            throw new IOException("File " + rf + " does not exist");
+                        }
                         System.out.println("One goes wrong, other one may go right");
                         //ioe.printStackTrace();
                         System.out.println("Error message: " + ioe.getMessage());
@@ -768,6 +778,11 @@ public class PartiturEditor extends javax.swing.JFrame
                         timelineViewer.setSoundFile(rf);
                     }
                 } else {
+                    // we have a file and can try it
+                    //... but only if it exists
+                    if (!(new File(rf).exists())){
+                        throw new IOException("File " + rf + " does not exist");
+                    }
                     timelineViewer = new org.exmaralda.folker.timeview.TimelineViewer();
                     timelineViewer.setPixelsPerSecond(150.0);
                     table.getModel().setPixelsPerSecond(150.0);
@@ -801,6 +816,7 @@ public class PartiturEditor extends javax.swing.JFrame
                     partiturTimelinePanel.setTimelineViewer(timelineViewer);
                     partiturTimelinePanel.setTimeViewVisible(false);
                     menuBar.viewMenu.setProportionButtonsVisible(false);
+                    return false;
                 }
             }
         } else {
@@ -809,6 +825,7 @@ public class PartiturEditor extends javax.swing.JFrame
             partiturTimelinePanel.setTimeViewVisible(false);
             menuBar.viewMenu.setProportionButtonsVisible(false);
         }
+        return true;
     }
 
 

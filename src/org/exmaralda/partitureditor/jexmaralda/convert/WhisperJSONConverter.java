@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import org.exmaralda.common.helpers.Rounder;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -85,8 +86,9 @@ public class WhisperJSONConverter {
             if (segmentNode.get("start")==null){
                 throw new IOException("Error in format.");
             }
-            double startTimeInSeconds = segmentNode.get("start").asDouble();
-            double endTimeInSeconds = segmentNode.get("end").asDouble();
+            // round to miliseconds to avoid overlaps which aren't overlaps
+            double startTimeInSeconds = Rounder.round(segmentNode.get("start").asDouble(),3);
+            double endTimeInSeconds = Rounder.round(segmentNode.get("end").asDouble(),3);
             String text = segmentNode.get("text").asText();
             String temperature = segmentNode.get("temperature").asText();
             String avg_logprob = segmentNode.get("avg_logprob").asText();

@@ -43,7 +43,7 @@
                     <description>[du] bist, [wir] werden</description>
                 </category>
                 <category name="Imperativ, aux">
-                    <tag name="VVIMP"/>
+                    <tag name="VAIMP"/>
                     <description>sei [ruhig!]</description>
                 </category>
                 <category name="Infinitiv, aux">
@@ -266,8 +266,8 @@
                     <tag name="PTKA"/>
                     <description>am [schönsten], zu [schnell]</description>
                 </category>
-				 <category name="Intensitäts-, Fokus- oder Gradpartikel">
-                    <tag name="PTKFIG"/>
+		<category name="Intensitäts-, Fokus- oder Gradpartikel">
+                    <tag name="PTKIFG"/>
                     <description>sehr, nur, ziemlich</description>
                 </category>
 				 <category name="Modal- und Abtönungspartikel">
