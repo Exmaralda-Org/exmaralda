@@ -6,7 +6,11 @@
 package org.exmaralda.tagging;
 
 import java.io.File;
+import java.io.IOException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.jdom.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -82,7 +86,7 @@ public class TreeTaggerTest {
             TreeTagger tt = new TreeTagger(TTC, PF, OPT);
             TreeTaggableSegmentedTranscription ttst = new TreeTaggableSegmentedTranscription(new File("S:\\TP-Z2\\TAGGING\\SegSexTest.exs"), segmentationXPath, tokenXPath);
             tt.tag(ttst, new File("S:\\TP-Z2\\TAGGING\\SegSexTest.esa"));*/
-        } catch (Exception ex) {
+        } catch (IOException | JexmaraldaException | JDOMException | SAXException ex) {
             ex.printStackTrace();
         }
     }

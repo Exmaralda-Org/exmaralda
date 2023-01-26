@@ -63,7 +63,7 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         }
 
         if (!pathToSoundFile.startsWith("http://")){            
-            urlString = "file:///" + pathToSoundFile.replaceAll("\\\\", "/").replaceAll(" ", "%20");
+            urlString = "file:///" + pathToSoundFile.replaceAll("\\\\", "/").replaceAll(" ", "%20").replaceAll("'", "%27");
             soundFilePath = pathToSoundFile;
         }
 

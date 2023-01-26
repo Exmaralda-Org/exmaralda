@@ -94,7 +94,7 @@ public class AbstractTierBody extends AbstractBody {
      * @param speakerID
      * @param t
      * @return  */
-    public String[] getTiersWithProperties(String speakerID, String t){
+    public String[] getTiersOfSpeakerAndType(String speakerID, String t){
         Vector result = new Vector();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             AbstractTier tier = (AbstractTier)elementAt(pos);
@@ -105,6 +105,17 @@ public class AbstractTierBody extends AbstractBody {
         return StringUtilities.stringVectorToArray(result);
     }    
     
+    public String[] getTiersOfSpeakerAndCategory(String speakerID, String c){
+        Vector result = new Vector();
+        for (int pos=0; pos<getNumberOfTiers(); pos++){
+            AbstractTier tier = (AbstractTier)elementAt(pos);
+            if ((tier.getSpeaker()!=null) && (tier.getSpeaker().equals(speakerID)) && (tier.getCategory().equals(c))){
+                result.addElement(tier.getID());
+            }
+        }
+        return StringUtilities.stringVectorToArray(result);
+    }    
+
     /** *  returns the IDs of all tiers that match the specified properties,
      * i.e.that have the specified speaker and are of the specified type
      * @param t
@@ -114,6 +125,17 @@ public class AbstractTierBody extends AbstractBody {
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             AbstractTier tier = (AbstractTier)elementAt(pos);
             if (tier.getType().equals(t)){
+                result.addElement(tier.getID());
+            }
+        }
+        return StringUtilities.stringVectorToArray(result);
+    }    
+
+    public String[] getTiersOfCategory(String c){
+        Vector result = new Vector();
+        for (int pos=0; pos<getNumberOfTiers(); pos++){
+            AbstractTier tier = (AbstractTier)elementAt(pos);
+            if (tier.getCategory().equals(c)){
                 result.addElement(tier.getID());
             }
         }

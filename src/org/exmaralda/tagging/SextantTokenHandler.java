@@ -42,6 +42,8 @@ public class SextantTokenHandler implements org.annolab.tt4j.ProbabilityHandler<
     @Override
     public void token(String token, String pos, String lemma) {
         beenToProbabilityFlag = false;
+        // 26-01-2023 redirected for #286
+        probability(pos, lemma, 0.99);
         //System.out.println("HERE BE TOKEN!");
         
         /*<ann xlink:href="#Seg_4" id="MyTheory_s_exs_pos_5">
