@@ -55,7 +55,8 @@ public class TreeTagger {
          TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
          //uncomment next line to make TreeTaggerWrapper verbose
          //tt.TRACE = true;
-         tt.setProbabilityThreshold(0.999999);
+         // 26-01-2023 : leave this away for #286
+         //tt.setProbabilityThreshold(0.999999);
          try {
              System.out.println("   Setting model:  " + parameterFile + ":" + parameterFileEncoding);
              tt.setModel(parameterFile + ":" + parameterFileEncoding);

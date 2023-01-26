@@ -303,15 +303,15 @@ public class BasicBody extends AbstractTierBody {
     public String[] makeCanonicalTierOrder(String[] speakerIDs){
         Vector result = new Vector();
         for (String speakerID : speakerIDs) {
-            String[] tiersOfTypeT = getTiersWithProperties(speakerID, "t");
+            String[] tiersOfTypeT = getTiersOfSpeakerAndType(speakerID, "t");
             StringUtilities.addStringArrayToVector(tiersOfTypeT, result);
-            String[] tiersOfTypeA = getTiersWithProperties(speakerID, "a");
+            String[] tiersOfTypeA = getTiersOfSpeakerAndType(speakerID, "a");
             StringUtilities.addStringArrayToVector(tiersOfTypeA, result);
-            String[] tiersOfTypeD = getTiersWithProperties(speakerID, "d");
+            String[] tiersOfTypeD = getTiersOfSpeakerAndType(speakerID, "d");
             StringUtilities.addStringArrayToVector(tiersOfTypeD, result);
-            String[] tiersOfTypeL = getTiersWithProperties(speakerID, "l");            
+            String[] tiersOfTypeL = getTiersOfSpeakerAndType(speakerID, "l");            
             StringUtilities.addStringArrayToVector(tiersOfTypeL, result);
-            String[] tiersOfTypeUD = getTiersWithProperties(speakerID, "ud");            
+            String[] tiersOfTypeUD = getTiersOfSpeakerAndType(speakerID, "ud");            
             StringUtilities.addStringArrayToVector(tiersOfTypeUD, result);
         }
         return StringUtilities.stringVectorToArray(result);
