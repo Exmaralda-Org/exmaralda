@@ -669,7 +669,7 @@ public class PartitureTableWithActions extends PartitureTable
             try{
                 linkPanelDialog.getLinkPanel().setEvent(getModel().getEvent(selectionStartRow, selectionStartCol), selectionStartRow, selectionStartCol);
             } catch(JexmaraldaException je){
-                je.printStackTrace();
+                System.out.println(je.getMessage());
             }
             linkPanelDialog.getLinkPanel().setEnabled(true);
         } else {
@@ -1896,7 +1896,10 @@ public class PartitureTableWithActions extends PartitureTable
         keyboardDialog.setPreferredSize(new java.awt.Dimension(w,h));
         keyboardDialog.setSize(new java.awt.Dimension(w,h));
         int x = settings.getInt("VIRTUAL-KEYBOARD-X", keyboardDialog.getX());
-        int y = settings.getInt("VIRTUAL-KEYBOARD-Y", keyboardDialog.getY());
+        int y = settings.getInt("VIRTUAL-KEYBOARD-Y", keyboardDialog.getY());        
+        // 04-02-2023: issue #72 
+        x = correctXForScreenSize(x);
+        y = correctYForScreenSize(y);        
         keyboardDialog.setLocation(x, y);
         keyboardDialog.getKeyboardPanel().setKeySize(settings.getInt("VIRTUAL-KEYBOARD-KEYSIZE", 100));
         //keyboardDialog.pack();
@@ -1914,6 +1917,9 @@ public class PartitureTableWithActions extends PartitureTable
         // IPA Panel
         int x3 = settings.getInt("IPA-PANEL-X", keyboardDialog.getX());
         int y3 = settings.getInt("IPA-PANEL-Y", keyboardDialog.getY());
+        // 04-02-2023: issue #72 
+        x3 = correctXForScreenSize(x3);
+        y3 = correctYForScreenSize(y3);        
         ipaPanel.setLocation(x3, y3);
 
 
@@ -3042,6 +3048,22 @@ public class PartitureTableWithActions extends PartitureTable
         }
         
         
+    }
+
+    private int correctXForScreenSize(int x) {
+        int screenWidth = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        if (x>=screenWidth-10){
+            return screenWidth - 50;
+        }
+        return x;
+    }
+
+    private int correctYForScreenSize(int y) {
+        int screenHeight = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        if (y>=screenHeight){
+            return screenHeight - 50;
+        }
+        return y;
     }
     
     
