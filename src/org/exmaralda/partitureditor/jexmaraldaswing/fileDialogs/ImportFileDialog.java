@@ -48,6 +48,9 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
         // added 17-11-2017: issue #119
         addChoosableFileFilter(VTTFileFilter);
         addChoosableFileFilter(SRTFileFilter);
+        // added 07-02-2023: issue #363
+        addChoosableFileFilter(AdobePremiereCSVFilter);
+        
         
         //added 15-01-2023: issue #357
         addChoosableFileFilter(WhisperJSONFileFilter);

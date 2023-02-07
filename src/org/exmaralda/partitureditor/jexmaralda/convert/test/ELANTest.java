@@ -4,9 +4,10 @@
  * Created on 13. Oktober 2003, 15:02
  */
 
-package org.exmaralda.partitureditor.jexmaralda.convert;
+package org.exmaralda.partitureditor.jexmaralda.convert.test;
 
 import org.exmaralda.partitureditor.jexmaralda.*;
+import org.exmaralda.partitureditor.jexmaralda.convert.ELANConverter;
 /**
  *
  * @author  thomas

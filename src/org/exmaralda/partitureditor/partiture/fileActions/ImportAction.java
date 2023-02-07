@@ -359,6 +359,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else if (selectedFileFilter == dialog.AmberscriptJSONFileFilter) {
             // added 15-01-2023: issue #358
             importedTranscription = AmberscriptJSONConverter.readAmberscriptJSON(selectedFile);
+        } else if (selectedFileFilter == dialog.AdobePremiereCSVFilter) {
+            // added 07-02-2023: issue #363
+            importedTranscription = AdobePremiereCSVConverter.readAdobePremiereCSV(selectedFile);
         }
 
         if (importedTranscription!=null){
