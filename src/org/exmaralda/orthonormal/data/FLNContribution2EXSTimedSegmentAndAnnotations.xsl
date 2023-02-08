@@ -155,7 +155,8 @@
             <xsl:attribute name="id" select="@id"/>
             <xsl:attribute name="s" select="exmaralda:getStart(current())"/>
             <xsl:attribute name="e" select="exmaralda:getEnd(current())"/>
-            <xsl:value-of select="text()"/>
+            <!-- <xsl:value-of select="text()"/> -->
+            <xsl:value-of select="normalize-space(text())"/>
         </ts>        
         <xsl:if test="not(following-sibling::*[1][self::p])">
             <nts n="cGAT:p">
