@@ -1,7 +1,6 @@
 package org.exmaralda.partitureditor.jexmaralda;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,7 +48,7 @@ public class BasicBody extends AbstractTierBody {
 
     public void smoothTimeline(double THRESHHOLD) {
         //double THRESHHOLD = 0.1;
-        Hashtable<String,String> tliMappings = new Hashtable<String, String>();
+        Map<String,String> tliMappings = new HashMap<>();
         Timeline tl = getCommonTimeline();
         tl.completeTimes();
         double lastTime = tl.getTimelineItemAt(0).getTime();
@@ -116,8 +115,8 @@ public class BasicBody extends AbstractTierBody {
     // ********** BASIC MANIPULATION **************
     // ********************************************
 
-    /** checks the well-formedness of this body, i.e.
-     * everything that is not covered by the DTD */
+    /** *  checks the well-formedness of this body, i.e.everything that is not covered by the DTD
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void check() throws JexmaraldaException {
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             getTierAt(pos).check(getCommonTimeline());
@@ -125,7 +124,7 @@ public class BasicBody extends AbstractTierBody {
     }
                  
     public String repair() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             sb.append(getTierAt(pos).repair(getCommonTimeline()));
         }
@@ -133,9 +132,9 @@ public class BasicBody extends AbstractTierBody {
     }
     
     public void glue(BasicBody otherBody, String[][] tierIDMappings, boolean merge) throws JexmaraldaException {
-        Hashtable tliMappings = new Hashtable();
+        Map<String,String> tliMappings = new HashMap();
         int start = 1;
-        if ((!merge) && (getCommonTimeline().size()>0) && (otherBody.getCommonTimeline().size()>0)){
+        if ((!merge) && (!getCommonTimeline().isEmpty()) && (!otherBody.getCommonTimeline().isEmpty())){
             // first tli of new is mapped to last tli of old
             tliMappings.put(otherBody.getCommonTimeline().getTimelineItemAt(0).getID(),
                             getCommonTimeline().getTimelineItemAt(getCommonTimeline().size()-1).getID());
@@ -187,19 +186,19 @@ public class BasicBody extends AbstractTierBody {
     public BasicBody[] chop (int minNumberOfTimelineItems){
         int[] clearCuts = getClearCuts();
         int lastChop = 0;
-        Vector whereToCut = new Vector();
-        whereToCut.addElement(0);
+        List<Integer> whereToCut = new ArrayList();
+        whereToCut.add(0);
         for (int pos=0; pos<clearCuts.length; pos++){
             if ((clearCuts[pos]-lastChop)>minNumberOfTimelineItems){
-                whereToCut.addElement(clearCuts[pos]);
+                whereToCut.add(clearCuts[pos]);
                 lastChop = clearCuts[pos];
             }
         }
-        whereToCut.addElement(getCommonTimeline().getNumberOfTimelineItems()-1);
+        whereToCut.add(getCommonTimeline().getNumberOfTimelineItems()-1);
         BasicBody[] result = new BasicBody[whereToCut.size()-1];
         for (int pos=0; pos<whereToCut.size()-1; pos++){
-            int from = ((Integer)(whereToCut.elementAt(pos)));
-            int to = ((Integer)(whereToCut.elementAt(pos+1)));
+            int from = (whereToCut.get(pos));
+            int to = (whereToCut.get(pos+1));
             String fromID = getCommonTimeline().getTimelineItemAt(from).getID();
             String toID = getCommonTimeline().getTimelineItemAt(to).getID();
             try{
@@ -274,19 +273,26 @@ public class BasicBody extends AbstractTierBody {
         return result;
     }
     
-    /** returns the tier at the specified position */
+    /** returns the tier at the specified position
+     * @param position
+     * @return  */
     public Tier getTierAt(int position){
         return (Tier)elementAt(position);
     }
     
     
-    /** returns the tier with the specified id */
+    /** returns the tier with the specified id
+     * @param id
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public Tier getTierWithID(String id) throws JexmaraldaException {
         return (Tier)getAbstractTierWithID(id);
     }
 
 
-    /** swaps the tiers at the specified positions */
+    /** swaps the tiers at the specified positions
+     * @param position1
+     * @param position2 */
     public void swapTiers(int position1, int position2){
         Tier tier1 = getTierAt(position1).makeCopy();
         Tier tier2 = getTierAt(position2).makeCopy();

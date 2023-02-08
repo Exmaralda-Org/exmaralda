@@ -69,6 +69,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter FrazierADCFileFilter = new ParameterFileFilter("adc", "Frazier audio description file (*.adc)");
     public ParameterFileFilter WhisperJSONFileFilter = new ParameterFileFilter("json", "Whisper JSON file (*.json)"); // issue #357
     public ParameterFileFilter AmberscriptJSONFileFilter = new ParameterFileFilter("json", "Amberscript JSON file (*.json)"); // issue #358
+    public ParameterFileFilter AdobePremiereCSVFilter = new ParameterFileFilter("csv", "Adobe Premiere CSV (*.csv)"); // issue #363
     
 
 

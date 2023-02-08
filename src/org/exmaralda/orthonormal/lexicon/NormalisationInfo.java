@@ -43,7 +43,7 @@ public class NormalisationInfo {
             }
             frequencyMap.put(nForm, frequencyMap.get(nForm) + freq);
 
-            String lang = e.getAttributeValue("lang");
+            String lang = n.getAttributeValue("lang");
             if (lang==null){
                 lang = DEFAULT_LANGUAGE;
             }

@@ -76,9 +76,9 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
     public void assignActions(final AbstractTimeviewPartiturPlayerControl atppc){
         playSelectionButton.setAction(atppc.playSelectionAction);
-        playSelectionButton.setToolTipText("Play selection");
+        playSelectionButton.setToolTipText("Play selection (CTRL + SPACE)");
         playLastSecondOfSelectionButton.setAction(atppc.playLastSecondOfSelectionAction);
-        playLastSecondOfSelectionButton.setToolTipText("Play last second of selection");
+        playLastSecondOfSelectionButton.setToolTipText("Play last second of selection (CTRL + SHIFT + SPACE)");
         playFirstSecondOfSelectionButton.setAction(atppc.playFirstSecondOfSelectionAction);
         playFirstSecondOfSelectionButton.setToolTipText("Play first second of selection");
         playFirstSecondBeforeSelectionButton.setAction(atppc.playFirstSecondBeforeSelectionAction);
@@ -91,18 +91,18 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         pauseButton.setAction(atppc.pauseAction);
         pauseButton.setToolTipText("Pause");
         stopButton.setAction(atppc.stopAction);
-        stopButton.setToolTipText("Stop");
+        stopButton.setToolTipText("Stop (CTRL + F5)");
         shiftSelectionButton.setAction(atppc.shiftSelectionAction);
-        shiftSelectionButton.setToolTipText("Shift selection");
+        shiftSelectionButton.setToolTipText("Shift selection (CTRL + SHIFT + S");
         detachSelectionButton.setAction(atppc.detachSelectionAction);
         detachSelectionButton.setToolTipText("Detach selection");
         atppc.setAddEventInvoker(addEventButton);
 
         addEventButton.setAction(atppc.addEventInPartiturAction);
-        addEventButton.setToolTipText("Add event");
+        addEventButton.setToolTipText("Add event (CTRL + '+')");
 
         appendIntervalButton.setAction(atppc.appendIntervalInPartiturAction);
-        appendIntervalButton.setToolTipText("Append interval");
+        appendIntervalButton.setToolTipText("Append interval (ALT + '+')");
 
         assignTimesButton.setAction(atppc.assignTimesAction);
         assignTimesButton.setToolTipText("Assign times");
@@ -449,6 +449,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     public javax.swing.JToggleButton zoomToggleButton;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void processTimeSelectionEvent(TimeSelectionEvent event) {
         double s = event.getStartTime();
         double e = event.getEndTime();

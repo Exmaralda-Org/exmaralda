@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.partitureditor.jexmaralda.convert;
+package org.exmaralda.partitureditor.jexmaralda.convert.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
+import org.exmaralda.partitureditor.jexmaralda.convert.ConverterListener;
+import org.exmaralda.partitureditor.jexmaralda.convert.F4Converter;
+import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
+import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
 import org.xml.sax.SAXException;
 
 /**

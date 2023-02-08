@@ -170,6 +170,9 @@ public class ActionUtilities {
                 case "AmberscriptJSON":
                     dialog.setFileFilter(dialog.AmberscriptJSONFileFilter);
                     break;
+                case "AdobePremiereCSV":
+                    dialog.setFileFilter(dialog.AdobePremiereCSVFilter);
+                    break;
                 default:
                     break;
             }
@@ -233,6 +236,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.FrazierADCFileFilter) {lastFileFilter = "FrazierADC";}
             else if (selectedFileFilter==dialog.WhisperJSONFileFilter) {lastFileFilter = "WhisperJSON";}
             else if (selectedFileFilter==dialog.AmberscriptJSONFileFilter) {lastFileFilter = "AmberscriptJSON";}
+            else if (selectedFileFilter==dialog.AdobePremiereCSVFilter) {lastFileFilter = "AdobePremiereCSV";}
 
 
             settings.put(propName, lastFileFilter);

@@ -157,6 +157,12 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    pe.menuBar.transcriptionMenu.segmentationLabel.setText(" Segmentation (" + table.preferredSegmentation + ")");
                    
                    pe.menuBar.transcriptionMenu.insertHIATUtteranceNumbersMenuItem.setVisible(table.preferredSegmentation.equals("HIAT"));
+                   pe.menuBar.transcriptionMenu.addTokenLayerMenuItem.setVisible(
+                            table.preferredSegmentation.equals("GENERIC") ||
+                            table.preferredSegmentation.equals("cGAT_MINIMAL") ||
+                            table.preferredSegmentation.equals("HIAT")
+                    );
+                   
 
                    pe.menuBar.sfb538Menu.setVisible(Boolean.parseBoolean(newValues[20]));
                    pe.menuBar.sinMenu.setVisible(Boolean.parseBoolean(newValues[21]));

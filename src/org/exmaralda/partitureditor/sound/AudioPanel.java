@@ -448,7 +448,9 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                     String message = "Going to save audio snippet in background.\nThis may take a while.";
                     JOptionPane.showMessageDialog(this, message);
                 }
-                final String filename = dialog.getFilename();
+                String fn = dialog.getFilename();
+                if (!fn.contains(".")) fn+=".wav";                
+                final String filename = fn;
                 final boolean sendLink = dialog.sendLink();
                 final AudioPanel myself = this;
                 Thread backgroundThread = new Thread(new Runnable(){
@@ -484,14 +486,14 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         // TODO add your handling code here:        
         java.awt.Image img = null;
 
-        if (getPlayer() instanceof JDSPlayer){
-            img = ((JDSPlayer)getPlayer()).grabFrame();            
-        } else if (getPlayer() instanceof MMFPlayer){
-            img = ((MMFPlayer)getPlayer()).grabFrame();            
-        } else if (getPlayer() instanceof JavaFXPlayer){
-            img = ((JavaFXPlayer)getPlayer()).grabFrame();  
-        } else if (getPlayer() instanceof AVFPlayer){
-            img = ((AVFPlayer)getPlayer()).grabFrame();  
+        if (getPlayer() instanceof JDSPlayer jDSPlayer){
+            img = jDSPlayer.grabFrame();            
+        } else if (getPlayer() instanceof MMFPlayer mMFPlayer){
+            img = mMFPlayer.grabFrame();            
+        } else if (getPlayer() instanceof JavaFXPlayer javaFXPlayer){
+            img = javaFXPlayer.grabFrame();  
+        } else if (getPlayer() instanceof AVFPlayer aVFPlayer){
+            img = aVFPlayer.grabFrame();  
         }
 
         if (img==null) return;
@@ -624,7 +626,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         try {
             player.setSoundFile("/Users/thomasschmidt/Desktop/MEDIA-TEST/BECKHAMS_MPEG-1.mpg");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         AudioPanel ap = new AudioPanel(new javax.swing.JFrame(), true, player);
         ap.show();
@@ -697,38 +699,22 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
          
             // 1. determine the actual size of the video
             // this may work differently in different players
-            if (getPlayer() instanceof JDSPlayer){
-                JDSPlayer jdsp = (JDSPlayer)getPlayer();
+            if (getPlayer() instanceof JDSPlayer jdsp){
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JDSPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } else if (getPlayer() instanceof JavaFXPlayer){
-                JavaFXPlayer jdsp = (JavaFXPlayer)getPlayer();
+            } else if (getPlayer() instanceof JavaFXPlayer jdsp){
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JavaFXPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } else if (getPlayer() instanceof AVFPlayer){
-                AVFPlayer jdsp = (AVFPlayer)getPlayer();
+            } else if (getPlayer() instanceof AVFPlayer jdsp){
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("AVFPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } /*else if (getPlayer() instanceof CocoaQTPlayer) {
-                 CocoaQTPlayer cqtp = (CocoaQTPlayer)getPlayer();
-                 sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
-                 sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
-                 System.out.println("CocoaQTPlayer says the movie " + new File(filename).getName() 
-                         + " has width " + sourceWidth + " and  height " + sourceHeight);
-                 // New 06-12-2016: try to at least get some sensible aspect ratio
-                 if ((sourceWidth==1) && (sourceHeight==1)){
-                    sourceWidth = 480;
-                    sourceHeight = 270;
-                    System.out.println("CocoaQTPlayer has set movie width/height to 480/270");
-                 }
-            } */else if (getPlayer() instanceof MMFPlayer) {
-                 MMFPlayer cqtp = (MMFPlayer)getPlayer();
+            }else if (getPlayer() instanceof MMFPlayer cqtp) {
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
                  sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
                  System.out.println("MMFPlayer says the movie " + new File(filename).getName() 
@@ -742,6 +728,19 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
                 System.out.println("JMFPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);                
             }
+            /*else if (getPlayer() instanceof CocoaQTPlayer) {
+            CocoaQTPlayer cqtp = (CocoaQTPlayer)getPlayer();
+            sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
+            sourceHeight = cqtp.wrappedPlayer.getSourceHeight();
+            System.out.println("CocoaQTPlayer says the movie " + new File(filename).getName()
+            + " has width " + sourceWidth + " and  height " + sourceHeight);
+            // New 06-12-2016: try to at least get some sensible aspect ratio
+            if ((sourceWidth==1) && (sourceHeight==1)){
+            sourceWidth = 480;
+            sourceHeight = 270;
+            System.out.println("CocoaQTPlayer has set movie width/height to 480/270");
+            }
+            } */ 
             
             
             // 2. set the initial size to a maximum of 480 width
@@ -927,6 +926,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         java.awt.Dimension dialogSize = this.getPreferredSize();
         this.setLocation(Math.round((screenSize.width - dialogSize.width)/2), screenSize.height - dialogSize.height - 30);
+        //super.setVisible(true);
         super.show();
     }
     

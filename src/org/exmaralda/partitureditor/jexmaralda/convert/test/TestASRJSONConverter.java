@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package org.exmaralda.partitureditor.jexmaralda.convert;
+package org.exmaralda.partitureditor.jexmaralda.convert.test;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -12,6 +12,8 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.convert.AmberscriptJSONConverter;
+import org.exmaralda.partitureditor.jexmaralda.convert.WhisperJSONConverter;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 

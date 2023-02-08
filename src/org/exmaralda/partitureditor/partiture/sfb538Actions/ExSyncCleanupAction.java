@@ -6,20 +6,12 @@
 
 package org.exmaralda.partitureditor.partiture.sfb538Actions;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.exSync.ExSyncCleanup;
 import org.exmaralda.partitureditor.exSync.swing.ExSyncCleanupDialog;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
-import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
-import org.exmaralda.partitureditor.jexmaralda.convert.K8MysteryConverter;
-import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.partiture.*;
 
 /**

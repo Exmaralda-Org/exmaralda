@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.exmaralda.partitureditor.jexmaralda.convert;
+package org.exmaralda.partitureditor.jexmaralda.convert.test;
 
 import java.io.File;
 import java.io.IOException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.convert.FrazierADCConverter;
 
 /**
  *
