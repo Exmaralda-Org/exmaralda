@@ -9,6 +9,7 @@
     <!-- adaptations for basic transcript -->
 
     <xsl:output encoding="UTF-8" method="xml"/>
+    
     <xsl:template match="/">
         <basic-transcription>
             <head>
@@ -145,7 +146,9 @@
     
     <xsl:template match="w/text()" mode="transform-parsed-to-unparsed">
         <xsl:if test="string-length(normalize-space())&gt;0">
-            <xsl:value-of select="."/>
+            <!-- <xsl:value-of select="."/> -->
+            <!-- changed 08-02-2023, issue #340 -->
+            <xsl:value-of select="normalize-space(.)"/>
         </xsl:if>
     </xsl:template>
         
@@ -337,7 +340,11 @@
                     </xsl:otherwise>
                 </xsl:choose>                                
             </xsl:attribute>
-            <xsl:value-of select="."/>
+            <!-- <xsl:value-of select="."/> -->
+            <!-- changed 08-02-2023, issue #340 -->
+            <xsl:value-of select="normalize-space(.)"/>
+            <!-- <xsl:if test="matches(substring-before(concat(., '&#10;'), '&#10;'),'.+[^ ] $')"><xsl:text> </xsl:text></xsl:if> -->
+            <xsl:if test="contains(. , ' &#10;') or (not(contains(. , '&#10;')) and ends-with(., ' '))"><xsl:text> </xsl:text></xsl:if>
         </xsl:element>
     </xsl:template>
 

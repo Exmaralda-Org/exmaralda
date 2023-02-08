@@ -88,6 +88,7 @@ public class EventListTranscriptionXMLReaderWriter {
         //org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc);
         Format prettyFormat = Format.getPrettyFormat();
         prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);        
+        //prettyFormat.setTextMode(Format.TextMode.PRESERVE);        
         org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc, prettyFormat);
     }
     
