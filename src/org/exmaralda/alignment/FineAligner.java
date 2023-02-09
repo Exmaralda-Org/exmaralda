@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.exmaralda.common.helpers.Rounder;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
@@ -172,7 +173,7 @@ public class FineAligner {
             // call WebMaus!
             fireProgress("Calling WebMaus with text: " + text.substring(0, Math.min(text.length(), 12)) + "...", 0.0);
             MAUSConnector mc = new MAUSConnector();
-            HashMap<String, Object> parameters = new HashMap<String, Object>();
+            HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("LANGUAGE", language);
             
 
@@ -234,7 +235,11 @@ public class FineAligner {
 
                 TimelineItem tliNew = new TimelineItem();
                 tliNew.setID(timeline.getFreeID());
-                tliNew.setTime(halfTime);
+                // changed 09-02-2023
+                //tliNew.setTime(halfTime);
+                double roundedHalfTime = Rounder.round(halfTime , 2);
+                tliNew.setTime(roundedHalfTime);
+                
                 tliNew.setType("intp");
                 timeline.insertAccordingToTime(tliNew);
 

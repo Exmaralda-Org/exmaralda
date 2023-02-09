@@ -51,6 +51,7 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MAUS Fine Alignment");
 
+        mainPanel.setPreferredSize(new java.awt.Dimension(600, 150));
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         minLabel.setText("Minimum Interval Length (s)");
