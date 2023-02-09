@@ -3,7 +3,7 @@
  *
  * Created on 17. Juni 2003, 11:00
  */
-package org.exmaralda.partitureditor.partiture.fileActions;
+package org.exmaralda.partitureditor.partiture.legacyActions;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;

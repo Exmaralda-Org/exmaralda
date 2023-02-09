@@ -4,7 +4,7 @@
  * Created on 17. Juni 2003, 13:51
  */
 
-package org.exmaralda.partitureditor.partiture.editActions;
+package org.exmaralda.partitureditor.partiture.legacyActions;
 
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;

@@ -4,7 +4,7 @@
  * Created on 22. April 2004, 11:48
  */
 
-package org.exmaralda.partitureditor.partiture.sfb538Actions;
+package org.exmaralda.partitureditor.partiture.legacyActions;
 
 import java.io.File;
 import javax.swing.JFileChooser;

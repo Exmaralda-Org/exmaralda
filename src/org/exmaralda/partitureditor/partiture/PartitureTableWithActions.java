@@ -6,6 +6,14 @@
 
 package org.exmaralda.partitureditor.partiture;
 
+import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncEventShrinkerAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.ImportActionInel;
+import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheWordSegmentationAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheTierSegmentationAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.MakeSyllableStructureTierAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.AppendSpaceAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncCleanupAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.K8MysteryConverterAction;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.partitureditor.interlinearText.PrintParameters;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
@@ -30,8 +38,6 @@ import org.exmaralda.partitureditor.partiture.transcriptionActions.*;
 import org.exmaralda.partitureditor.partiture.tierActions.*;
 import org.exmaralda.partitureditor.partiture.timelineActions.*;
 import org.exmaralda.partitureditor.partiture.eventActions.*;
-import org.exmaralda.partitureditor.partiture.sfb538Actions.*;
-import org.exmaralda.partitureditor.partiture.sinActions.*;
 
 
 import org.exmaralda.partitureditor.partiture.menus.EventPopupMenu;
