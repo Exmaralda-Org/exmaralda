@@ -11,7 +11,6 @@ import org.exmaralda.partitureditor.partiture.*;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import static java.awt.event.ActionEvent.ALT_MASK;
 import org.exmaralda.common.helpers.Internationalizer;
 
 /**
@@ -35,19 +34,20 @@ public class EditMenu extends AbstractTableMenu {
     private final JMenuItem exaktSearchMenuItem;
 
     
-    private final javax.swing.JMenu selectionMenu;
+    //private final javax.swing.JMenu selectionMenu;
 
 
-    /** Creates a new instance of EditMenu */
+    /** Creates a new instance of EditMenu
+     * @param t */
     public EditMenu(PartitureTableWithActions t) {
         super(t);
         
         this.setText("Edit");
         this.setMnemonic(java.awt.event.KeyEvent.VK_E);
         
-        selectionMenu = new javax.swing.JMenu();
+        /*selectionMenu = new javax.swing.JMenu();
         selectionMenu.setText(Internationalizer.getString("Selection"));
-        selectionMenu.setToolTipText("Operations for the current selection");
+        selectionMenu.setToolTipText("Operations for the current selection");*/
 
         
         undoMenuItem = this.add(table.undoAction);
@@ -99,15 +99,15 @@ public class EditMenu extends AbstractTableMenu {
                 
         this.add(new javax.swing.JSeparator());
         //-------------------------------------------------
-        selectionMenu.add(table.selectionToNewAction).setToolTipText("Make a new transcription from the current selection");
-        selectionMenu.add(table.leftPartToNewAction).setToolTipText("Make a new transcription out of the part on the left of the cursor");
-        selectionMenu.add(table.rightPartToNewAction).setToolTipText("Make a new transcription out of the part on the right of the cursor");
+        add(table.selectionToNewAction).setToolTipText("Make a new transcription from the current selection");
+        add(table.leftPartToNewAction).setToolTipText("Make a new transcription out of the part on the left of the cursor");
+        add(table.rightPartToNewAction).setToolTipText("Make a new transcription out of the part on the right of the cursor");
         /*selectionMenu.add(new javax.swing.JSeparator());
         selectionMenu.add(table.selectionToRTFAction).setToolTipText("Output the current selection as an RTF file (for MS Word)");
         selectionMenu.add(table.selectionToHTMLAction).setToolTipText("Output the current selection as an HTML file (for a browser)");
         selectionMenu.add(table.printSelectionAction).setToolTipText("");*/
         
-        this.add(selectionMenu);
+        //this.add(selectionMenu);
         
         this.addSeparator();
         //-------------------------------------------------

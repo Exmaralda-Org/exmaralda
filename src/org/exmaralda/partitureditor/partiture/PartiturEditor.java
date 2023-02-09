@@ -496,10 +496,10 @@ public class PartiturEditor extends javax.swing.JFrame
             largeTextFieldPanel.setVisible(showLTF);
             menuBar.viewMenu.showLargeTextFieldCheckBoxMenuItem.setSelected(showLTF);
 
-            menuBar.sfb538Menu.setVisible(settings.get("SHOW-SFB538Menu","FALSE").equalsIgnoreCase("TRUE"));
-            menuBar.sinMenu.setVisible(settings.get("SHOW-SiNMenu","FALSE").equalsIgnoreCase("TRUE"));
+            menuBar.legacyMenu.setVisible(settings.get("SHOW-SFB538Menu","FALSE").equalsIgnoreCase("TRUE"));
+            /*menuBar.sinMenu.setVisible(settings.get("SHOW-SiNMenu","FALSE").equalsIgnoreCase("TRUE"));
             menuBar.odtstdMenu.setVisible(settings.get("SHOW-ODTSTDMenu","FALSE").equalsIgnoreCase("TRUE"));
-            menuBar.inelMenu.setVisible(settings.get("SHOW-INELMenu","FALSE").equalsIgnoreCase("TRUE"));
+            menuBar.inelMenu.setVisible(settings.get("SHOW-INELMenu","FALSE").equalsIgnoreCase("TRUE"));*/
             
             getTransformationComboBox().setVisible(settings.get("SHOW-TransformationDropdown","FALSE").equalsIgnoreCase("TRUE"));
 
@@ -547,10 +547,10 @@ public class PartiturEditor extends javax.swing.JFrame
         settings.put("SHOW-LargeTextField", Boolean.toString(largeTextFieldPanel.isShowing()));
 
 
-        settings.put("SHOW-SFB538Menu", Boolean.toString(menuBar.sfb538Menu.isShowing()));
-        settings.put("SHOW-SiNMenu", Boolean.toString(menuBar.sinMenu.isShowing()));
-        settings.put("SHOW-ODTSTDMenu", Boolean.toString(menuBar.odtstdMenu.isShowing()));
-        settings.put("SHOW-INELMenu", Boolean.toString(menuBar.inelMenu.isShowing()));
+        settings.put("SHOW-SFB538Menu", Boolean.toString(menuBar.legacyMenu.isShowing()));
+        settings.put("SHOW-SiNMenu", Boolean.toString(false));
+        settings.put("SHOW-ODTSTDMenu", Boolean.toString(false));
+        settings.put("SHOW-INELMenu", Boolean.toString(false));
         
         settings.put("SHOW-TransformationDropdown", Boolean.toString(getTransformationComboBox().isShowing()));
 

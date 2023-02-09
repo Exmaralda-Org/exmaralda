@@ -109,7 +109,7 @@ public class EditTiersTableModel extends javax.swing.table.AbstractTableModel {
                 if (speakerID==null) return "### ERROR";
                 for (int i=0; i<transcription.getBody().getNumberOfTiers(); i++){
                     Tier tryTier = transcription.getBody().getTierAt(i);
-                    if (tryTier.getType().equals("t") && tryTier.getSpeaker().equals(speakerID)){
+                    if (tryTier.getType().equals("t") && tryTier.getSpeaker()!=null && tryTier.getSpeaker().equals(speakerID)){
                         return tryTier.getID();
                     }
                 }

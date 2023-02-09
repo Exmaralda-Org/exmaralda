@@ -117,10 +117,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         result[17] = Boolean.toString(underlineCharRadioButton.isSelected());
         result[18] = underlineCategoryTextField.getText();
         result[19] = (String)(preferredSegmentationComboBox.getSelectedItem());
-        result[20] = Boolean.toString(sfb538MenuCheckBox.isSelected());
-        result[21] = Boolean.toString(sinMenuCheckBox.isSelected());
-        result[22] = Boolean.toString(odtstdMenuCheckBox.isSelected());
-        result[23] = Boolean.toString(inelMenuCheckBox.isSelected());
+        result[20] = Boolean.toString(legacyMenuCheckBox.isSelected());
+        result[21] = Boolean.toString(false);
+        result[22] = Boolean.toString(false);
+        result[23] = Boolean.toString(false);
         result[24] = Boolean.toString(autoAnchorCheckBox.isSelected());
         result[25] = Boolean.toString(autoRemoveTLICheckBox.isSelected());
         // pause notation
@@ -289,10 +289,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         changePraatDirectoryButton = new javax.swing.JButton();
         treeTaggerPanel = new TreeTaggerParametersPanel();
         menusPanel = new javax.swing.JPanel();
-        sfb538MenuCheckBox = new javax.swing.JCheckBox();
-        sinMenuCheckBox = new javax.swing.JCheckBox();
-        odtstdMenuCheckBox = new javax.swing.JCheckBox();
-        inelMenuCheckBox = new javax.swing.JCheckBox();
+        legacyMenuCheckBox = new javax.swing.JCheckBox();
         transformationDropdownCheckBox = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         resetButton = new javax.swing.JButton();
@@ -1010,17 +1007,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         menusPanel.setLayout(new javax.swing.BoxLayout(menusPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        sfb538MenuCheckBox.setText("SFB 538/632 Menu");
-        menusPanel.add(sfb538MenuCheckBox);
-
-        sinMenuCheckBox.setText("SiN Menu");
-        menusPanel.add(sinMenuCheckBox);
-
-        odtstdMenuCheckBox.setText("ODT/STD Menu");
-        menusPanel.add(odtstdMenuCheckBox);
-
-        inelMenuCheckBox.setText("INEL Menu");
-        menusPanel.add(inelMenuCheckBox);
+        legacyMenuCheckBox.setText("Legacy Menu");
+        menusPanel.add(legacyMenuCheckBox);
 
         transformationDropdownCheckBox.setText("Transformation dropdown in toolbar");
         menusPanel.add(transformationDropdownCheckBox);
@@ -1326,7 +1314,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField genericTextField;
     private javax.swing.JTextField head2HTMLTextField;
     private javax.swing.JTextField hiatTextField;
-    private javax.swing.JCheckBox inelMenuCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1370,6 +1357,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jmfPlayerRadioButton;
     private javax.swing.JPanel languagePanel;
     private javax.swing.JComboBox languagesComboBox;
+    private javax.swing.JCheckBox legacyMenuCheckBox;
     private javax.swing.JLabel logDirectoryLabel;
     private javax.swing.JPanel logPanel;
     private javax.swing.JPanel mainPanel;
@@ -1377,7 +1365,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup mediaPlayersButtonGroup;
     private javax.swing.JPanel menusPanel;
     private javax.swing.JRadioButton mmfPlayerRadioButton;
-    private javax.swing.JCheckBox odtstdMenuCheckBox;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
     private javax.swing.JPanel otherOptionsPanel;
@@ -1394,8 +1381,6 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton resetButton;
     private javax.swing.JPanel segmentationPanel;
     private javax.swing.JButton setLogDirectoryButton;
-    private javax.swing.JCheckBox sfb538MenuCheckBox;
-    private javax.swing.JCheckBox sinMenuCheckBox;
     private javax.swing.JTextField speakertable2TranscriptionTextField;
     private javax.swing.JPanel stylesheetsPanel;
     private javax.swing.JTabbedPane tabbedPane;
@@ -1476,10 +1461,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         preferredSegmentationComboBox.setSelectedItem(values[19]);
 
-        sfb538MenuCheckBox.setSelected(Boolean.parseBoolean(values[20]));
-        sinMenuCheckBox.setSelected(Boolean.parseBoolean(values[21]));
+        legacyMenuCheckBox.setSelected(Boolean.parseBoolean(values[20]));
+        /*sinMenuCheckBox.setSelected(Boolean.parseBoolean(values[21]));
         odtstdMenuCheckBox.setSelected(Boolean.parseBoolean(values[22]));
-        inelMenuCheckBox.setSelected(Boolean.parseBoolean(values[23]));
+        inelMenuCheckBox.setSelected(Boolean.parseBoolean(values[23]));*/
         
         transformationDropdownCheckBox.setSelected(Boolean.parseBoolean(values[37]));
         

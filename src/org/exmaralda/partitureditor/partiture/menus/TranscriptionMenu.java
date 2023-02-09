@@ -24,7 +24,8 @@ public class TranscriptionMenu extends AbstractTableMenu implements MouseListene
     public JMenuItem insertHIATUtteranceNumbersMenuItem;
     public JMenuItem addTokenLayerMenuItem;
 
-    /** Creates a new instance of FileMenu */
+    /** Creates a new instance of FileMenu
+     * @param t */
     public TranscriptionMenu(PartitureTableWithActions t) {
         super(t);
         segmentationLabel.setFont(segmentationLabel.getFont().deriveFont(10.0f).deriveFont(Font.BOLD));
@@ -72,8 +73,8 @@ public class TranscriptionMenu extends AbstractTableMenu implements MouseListene
         addSeparator();
         add(table.maskAudioAction);
         add(table.chopAudioAction);
-        addSeparator();
-        add(table.exSyncEventShrinkerAction);
+        /*addSeparator();
+        add(table.exSyncEventShrinkerAction);*/
 
         
     }

@@ -1589,24 +1589,9 @@
                 <Property name="axis" type="int" value="1"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="sfb538MenuCheckBox">
+                <Component class="javax.swing.JCheckBox" name="legacyMenuCheckBox">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="SFB 538/632 Menu"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="sinMenuCheckBox">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="SiN Menu"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="odtstdMenuCheckBox">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="ODT/STD Menu"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="inelMenuCheckBox">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="INEL Menu"/>
+                    <Property name="text" type="java.lang.String" value="Legacy Menu"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="transformationDropdownCheckBox">

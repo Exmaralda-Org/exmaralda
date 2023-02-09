@@ -47,10 +47,13 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         Boolean showTransformationDropdown = false;
         if (app instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)app;
-            showSFB538Menu = pe.menuBar.sfb538Menu.isShowing();
-            showSinMenu = pe.menuBar.sinMenu.isShowing();
+            showSFB538Menu = pe.menuBar.legacyMenu.isShowing();
+            /*showSinMenu = pe.menuBar.sinMenu.isShowing();
             showODTSTDMenu = pe.menuBar.odtstdMenu.isShowing();
-            showInelMenu = pe.menuBar.inelMenu.isShowing();
+            showInelMenu = pe.menuBar.inelMenu.isShowing();*/
+            showSinMenu = false;
+            showODTSTDMenu = false;
+            showInelMenu = false;
             showTransformationDropdown = pe.getTransformationComboBox().isShowing();
         }
         
@@ -164,10 +167,10 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                     );
                    
 
-                   pe.menuBar.sfb538Menu.setVisible(Boolean.parseBoolean(newValues[20]));
-                   pe.menuBar.sinMenu.setVisible(Boolean.parseBoolean(newValues[21]));
+                   pe.menuBar.legacyMenu.setVisible(Boolean.parseBoolean(newValues[20]));
+                   /*pe.menuBar.sinMenu.setVisible(Boolean.parseBoolean(newValues[21]));
                    pe.menuBar.odtstdMenu.setVisible(Boolean.parseBoolean(newValues[22]));
-                   pe.menuBar.inelMenu.setVisible(Boolean.parseBoolean(newValues[23]));
+                   pe.menuBar.inelMenu.setVisible(Boolean.parseBoolean(newValues[23]));*/
                    
                    pe.getTransformationComboBox().setVisible(Boolean.parseBoolean(newValues[37]));
             }
