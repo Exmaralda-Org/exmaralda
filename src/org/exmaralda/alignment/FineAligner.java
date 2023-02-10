@@ -105,10 +105,12 @@ public class FineAligner {
             }
 
             // now it is clear that the current interval is longer than minimum
-            ArrayList<Event> eventsForThisInterval = new ArrayList<Event>();
+            ArrayList<Event> eventsForThisInterval = new ArrayList<>();
             String tierID = "";
             for (int j=0; j<transcription.getBody().getNumberOfTiers(); j++){
                 Tier tier = transcription.getBody().getTierAt(j);
+                // added 10-02-2023
+                if (!(tier.getType().equals("t"))) continue;
                 Vector<Event> eventsForThisTier = tier.getEventsIntersecting(timeline, thisTimelineItem.getID(), nextTimelineItem.getID());
                 if (!eventsForThisTier.isEmpty()){
                     for (Event e : eventsForThisTier){
