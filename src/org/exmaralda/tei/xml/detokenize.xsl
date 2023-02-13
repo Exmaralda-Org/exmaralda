@@ -32,7 +32,8 @@
     </xsl:template>
     
     <!-- For untokenized <seg> content -->
-    <xsl:template match="tei:seg[text()]">
+    <!-- changed 11-02-2023 to get rid of unwanted whitespace -->
+    <xsl:template match="tei:seg[not(*) and text()]">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>

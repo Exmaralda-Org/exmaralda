@@ -145,7 +145,9 @@
         
     </xsl:template>
     
-    <xsl:template match="tei:seg/tei:anchor[following-sibling::tei:anchor]">
+    <!-- changed 11-02-2023 : only for segs with no further child segs -->
+    <!-- <xsl:template match="tei:seg/tei:anchor[following-sibling::tei:anchor]"> -->
+    <xsl:template match="tei:seg[not(tei:seg)]/tei:anchor[following-sibling::tei:anchor]">
         <event>
             <xsl:attribute name="start" select="@synch"/>
             <xsl:attribute name="end" select="following-sibling::tei:anchor[1]/@synch"/>

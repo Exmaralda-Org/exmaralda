@@ -121,10 +121,10 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
         // now do the real import      
         
-        if (selectedFileFilter==dialog.TASXFileFilter){
+        /*if (selectedFileFilter==dialog.TASXFileFilter){
             TASXConverter tc = new TASXConverter();
             importedTranscription = tc.readTASXFromFile(filename);
-        } else if (selectedFileFilter==dialog.TranscriberFileFilter){
+        } else */ if (selectedFileFilter==dialog.TranscriberFileFilter){
             TranscriberConverter tc = new TranscriberConverter();
             importedTranscription = tc.readTranscriberFromFile(filename);
         } else if (selectedFileFilter==dialog.ExmaraldaSegmentedTranscriptionFileFilter){
@@ -145,10 +145,10 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         }  else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
             CHATConverter tc = new CHATConverter(new File(filename));
             importedTranscription = tc.convert();
-        } else if (selectedFileFilter==dialog.WinPitchFileFilter){
+        } /*else if (selectedFileFilter==dialog.WinPitchFileFilter){
             WinPitchConverter tc = new WinPitchConverter();
             importedTranscription = tc.readWinPitchFromFile(filename);
-        } else if (selectedFileFilter==dialog.FrazierADCFileFilter){ // issue #296
+        } */ else if (selectedFileFilter==dialog.FrazierADCFileFilter){ // issue #296
             FrazierADCConverter tc = new FrazierADCConverter();
             importedTranscription = tc.readFrazierADCFromFile(new File(filename));
         } else if (selectedFileFilter==dialog.AnvilFileFilter){
@@ -170,16 +170,16 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             }
             PraatConverter pc = new PraatConverter();
             importedTranscription = pc.readPraatFromFile(filename, encoding);
-        } else if (selectedFileFilter==dialog.AGFileFilter){
+        } /*else if (selectedFileFilter==dialog.AGFileFilter){
             AIFConverter ac = new AIFConverter();
             importedTranscription = ac.readAIFFromFile(filename);
-        } else if (selectedFileFilter==dialog.PhonFileFilter){
+        } */ else if (selectedFileFilter==dialog.PhonFileFilter){
             PhonConverter pc = new PhonConverter();
             importedTranscription = pc.readPhonFromFile(filename);
-        } else if (selectedFileFilter==dialog.TransanaXMLFileFilter){
+        } /*else if (selectedFileFilter==dialog.TransanaXMLFileFilter){
             TransanaConverter tc = new TransanaConverter();
             importedTranscription = tc.readTransanaFromXMLFile(selectedFile);
-        } else if (selectedFileFilter==dialog.EAFFileFilter){
+        } */ else if (selectedFileFilter==dialog.EAFFileFilter){
             ELANConverter ec = new ELANConverter();
             importedTranscription = ec.readELANFromFile(filename);
         } else if (selectedFileFilter==dialog.TEIFileFilter){
@@ -265,7 +265,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 ser = new SimpleExmaraldaReader(filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
             }
             importedTranscription = ser.parseBasicTranscription();
-        } else if (selectedFileFilter==dialog.RioDeJaneiroFileFilter){
+        } /*else if (selectedFileFilter==dialog.RioDeJaneiroFileFilter){
             RioDeJaneiroTextConverter ser = null;
             if (dialog.encodingComboBox.getSelectedIndex()==0){
                 ser = new RioDeJaneiroTextConverter(filename);
@@ -292,7 +292,7 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             org.exmaralda.partitureditor.exSync.swing.MessageDialog md =
                     new org.exmaralda.partitureditor.exSync.swing.MessageDialog(table.parent, true, messages);
             md.show();
-        } else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter){
+        } */else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter){
             importedTranscription =
                     org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File(filename));
         }

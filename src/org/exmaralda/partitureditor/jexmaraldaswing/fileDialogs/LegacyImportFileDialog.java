@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  * @author thomas
  */
-public class ImportFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
+public class LegacyImportFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
 
     public JComboBox encodingComboBox;
     private JPanel accessoryPanel;
@@ -25,57 +25,22 @@ public class ImportFileDialog extends AbstractFileFilterDialog implements java.b
 
     /** Creates new ImportFileDialog
      * @param startDirectory */
-    public ImportFileDialog(String startDirectory) {
+    public LegacyImportFileDialog(String startDirectory) {
         super();
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
         if (thisIsAMac){
             setPreferredSize(new java.awt.Dimension(800, 600));
         }
         setCurrentDirectory(new File(startDirectory).getParentFile());
-        setDialogTitle("Import file");
+        setDialogTitle("Import file (Legacy formats)");
         setAcceptAllFileFilterUsed(false);
-        addChoosableFileFilter(TEIFileFilter);
-        addChoosableFileFilter(EAFFileFilter);
-        addChoosableFileFilter(PraatFileFilter);
-        addChoosableFileFilter(FOLKERTranscriptionFileFilter);
-        addChoosableFileFilter(CHATTranscriptFileFilter);
-        addChoosableFileFilter(TranscriberFileFilter);
-        addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
-        // added 27-11-2021: issue #296
-        addChoosableFileFilter(FrazierADCFileFilter);
-        addChoosableFileFilter(AnvilFileFilter);
-        addChoosableFileFilter(SimpleExmaraldaFileFilter);
-        // added 17-11-2017: issue #119
-        addChoosableFileFilter(VTTFileFilter);
-        addChoosableFileFilter(SRTFileFilter);
-        // added 07-02-2023: issue #363
-        addChoosableFileFilter(AdobePremiereCSVFilter);
-        
-        
-        //added 15-01-2023: issue #357
-        addChoosableFileFilter(WhisperJSONFileFilter);
-        //added 15-01-2023: issue #358
-        addChoosableFileFilter(AmberscriptJSONFileFilter);
-        
-        addChoosableFileFilter(TextFileFilter);
-        addChoosableFileFilter(AudacityLabelFileFilter);
-        addChoosableFileFilter(TreeTaggerFilter);
-        //addChoosableFileFilter(TEIFileFilter);
-        addChoosableFileFilter(XSLStylesheetImportFilter);
         addChoosableFileFilter(HIATDOSFileFilter);
-        addChoosableFileFilter(PhonFileFilter);
-        addChoosableFileFilter(FlexTextXMLFileFilter);
-        addChoosableFileFilter(TCFFileFilter);
-        addChoosableFileFilter(TsvFileFilter);
-        addChoosableFileFilter(F4TextFileFilter);
-        setFileFilter(PraatFileFilter);
-
-        /*addChoosableFileFilter(exSyncFileFilter);
+        addChoosableFileFilter(exSyncFileFilter);
         addChoosableFileFilter(RioDeJaneiroFileFilter);
         addChoosableFileFilter(TASXFileFilter);
         addChoosableFileFilter(WinPitchFileFilter);
+        addChoosableFileFilter(TransanaXMLFileFilter);
         addChoosableFileFilter(AGFileFilter);
-        addChoosableFileFilter(TransanaXMLFileFilter);*/
 
 
 

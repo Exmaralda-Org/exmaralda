@@ -25,6 +25,15 @@ public class LegacyMenu extends AbstractTableMenu {
         this.setText("Legacy");
         this.setForeground(Color.BLUE);
 
+        JLabel fileLabel = new JLabel("File");
+        fileLabel.setForeground(Color.GRAY);
+        add(fileLabel);
+        add(table.legacyImportAction);
+        add(table.legacyExportAction);
+        add(table.legacyOutputAction);
+
+        addSeparator();
+
         JLabel sfb538Label = new JLabel("SFB 538");
         sfb538Label.setForeground(Color.GRAY);
         add(sfb538Label);
@@ -52,7 +61,6 @@ public class LegacyMenu extends AbstractTableMenu {
         inelLabel.setForeground(Color.GRAY);
         add(inelLabel);
         add(table.importActionInel);
-        addSeparator();
 
         /*JLabel transcriptionLabel = new JLabel("Transcription");
         transcriptionLabel.setForeground(Color.GRAY);

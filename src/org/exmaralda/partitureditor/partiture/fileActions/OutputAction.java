@@ -107,7 +107,6 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 || (selectedFileFilter==dialog.HTMLPartiturWithHTML5AudioFileFilter) 
                 || (selectedFileFilter==dialog.HTMLPartiturCompactFilter) 
                 || (selectedFileFilter==dialog.RTFPartiturFileFilter) 
-                || (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter) 
                 || (selectedFileFilter==dialog.SVGPartiturFileFilter)
                 || (selectedFileFilter==dialog.XMLPartiturFileFilter)) {
                 
@@ -139,9 +138,6 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             } else if (selectedFileFilter==dialog.XMLPartiturFileFilter){
                 // XML partitur
                 exportXMLPartitur(it, filename, dialog.chooseSettingsForXMLExportPanel.getSelection());                                
-            } else if (selectedFileFilter==dialog.HTMLPartiturWithFlashFileFilter){
-                // HTML Partitur with FLASH
-                exportHTMLPartiturWithFlash(it, filename);
             } else if (selectedFileFilter==dialog.HTMLPartiturCompactFilter){
                 //compact HTML partitur
                 System.out.println("COMAPCT");
@@ -156,8 +152,6 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
             exportFreeStylesheet(filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
         } else if (selectedFileFilter==dialog.HTMLSegmentChainFileFilter){
             exportHTMLSegmentChainList(trans, filename, table.getModel().getTierFormatTable());
-        } else if (selectedFileFilter==dialog.HTMLSegmentChainWithFlashFileFilter){
-            exportHTMLSegmentChainListWithFlash(trans, filename);
         } else if (selectedFileFilter==dialog.HTMLSegmentChainWithHTML5AudioFileFilter){
             exportHTMLSegmentChainListWithHTML5Audio(trans, filename);
         } else if (selectedFileFilter==dialog.GATTranscriptFileFilter){
@@ -389,33 +383,6 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
     }
 
-    void exportHTMLSegmentChainListWithFlash(BasicTranscription bt, String filename) throws IOException, SAXException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException, JDOMException{
-         if (table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("mp3")==null){
-             throw new IOException("Transcription does not reference an MP3 file.\nPlease add an MP3 file under \nTranscription > Recordings...");
-         }
-         SegmentedTranscription st = bt.toSegmentedTranscription();
-         SegmentedToListInfo info = new SegmentedToListInfo(st, SegmentedToListInfo.TURN_SEGMENTATION);
-         ListTranscription lt = st.toListTranscription(info);
-         // added 24-11-2009
-         lt.getHead().getMetaInformation().relativizeReferencedFile(filename);
-         lt.getBody().sort();
-
-         StylesheetFactory sf = new StylesheetFactory(true);
-         String xslString = "/org/exmaralda/partitureditor/jexmaralda/xsl/List2FlashHTML.xsl";
-         String result = sf.applyInternalStylesheetToString(xslString, lt.toXML());
-
-         String s1 = "HTML";
-         String s2 = "-//W3C//DTD HTML 4.01//EN";
-         Document resultDoc = FileIO.readDocumentFromString(result);
-         FileIO.writeDocumentToLocalFile(filename,resultDoc, true, s1, s2);
-         //lt.writeHTMLToFile(filename, filename);
-         //lt.writeHTMLToFile(filename);
-         table.htmlDirectory = filename;
-         copy("/org/exmaralda/common/flashplayer/player.swf", filename);
-         copy("/org/exmaralda/common/flashplayer/seeker.swf", filename);
-         copy("/org/exmaralda/common/flashplayer/seeker.html", filename);
-    }
-
     void transformPartiturViaStylesheet(InterlinearText it, String filename, String stylesheetPath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException{
         HTMLParameters param = table.htmlParameters;                        
         it.trim(param);
@@ -507,24 +474,6 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
         table.htmlParameters.additionalStuff = "";                
     }
 
-    void exportHTMLPartiturWithFlash(InterlinearText it, String filename) throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException{
-            
-        if (table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("mp3")==null){
-             throw new IOException("Transcription does not reference an MP3 file.\nPlease add an MP3 file under \nTranscription > Recordings...");
-        }
-
-        String xslString = "/org/exmaralda/partitureditor/jexmaralda/xsl/Partitur2FlashHTML.xsl";        
-        transformPartiturViaStylesheet(it, filename, xslString);
-        
-        copy("/org/exmaralda/common/flashplayer/player.swf", filename);
-        copy("/org/exmaralda/common/flashplayer/seeker.swf", filename);
-        copy("/org/exmaralda/common/flashplayer/seeker.html", filename);
-
-        table.htmlDirectory = filename;
-        table.htmlParameters.additionalStuff = "";                
-        
-    }
-    
     void exportGATWithHTML5Audio(BasicTranscription bt, String filename) throws FSMException, SAXException, JexmaraldaException, FileNotFoundException, ParserConfigurationException, IOException, TransformerException{
          // segment the basic transcription and transform it into a list transcription
          GATSegmentation segmenter = new org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation(table.gatFSM);

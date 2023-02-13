@@ -47,11 +47,11 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         addChoosableFileFilter(F4TextFileFilter);
         addChoosableFileFilter(SRTFileFilter);
         addChoosableFileFilter(TsvFileFilter);
-        addChoosableFileFilter(TASXFileFilter);
-        addChoosableFileFilter(AGFileFilter);
+        /*addChoosableFileFilter(TASXFileFilter);
+        addChoosableFileFilter(AGFileFilter);*/
         // removed 10-04-2013
         //addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
-        setFileFilter(PraatFileFilter);
+        setFileFilter(TEIFileFilter);
         setMultiSelectionEnabled(false);
         addPropertyChangeListener("fileFilterChanged", this);
     }

@@ -65,6 +65,9 @@ import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.partitureditor.fsm.FSMException;
+import org.exmaralda.partitureditor.partiture.legacyActions.LegacyExportAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.LegacyImportAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.LegacyOutputAction;
 import org.exmaralda.partitureditor.partiture.webServicesActions.WebLichtAction;
 import org.exmaralda.partitureditor.partiture.webServicesActions.WebMAUSAction;
 import org.exmaralda.partitureditor.partiture.webServicesActions.WebMAUSFineAlignmentAction;
@@ -999,7 +1002,6 @@ public class PartitureTableWithActions extends PartitureTable
         
         outputAction = new OutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
         importAction = new ImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
-        importActionInel = new ImportActionInel(this, null);
         exportAction = new ExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
         
         //*********************************************************************************************
@@ -1027,16 +1029,15 @@ public class PartitureTableWithActions extends PartitureTable
         leftPartToNewAction = new LeftPartToNewAction(this, null);
         rightPartToNewAction = new RightPartToNewAction(this, null);
         
-        selectionToHTMLAction = new SelectionToHTMLAction(this,null);
+        /*selectionToHTMLAction = new SelectionToHTMLAction(this,null);
         selectionToRTFAction = new SelectionToRTFAction(this,null);
-        printSelectionAction = new PrintSelectionAction(this,null);
+        printSelectionAction = new PrintSelectionAction(this,null);*/
 
         editPreferencesAction = new EditPreferencesAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Settings.gif")));
 
         mergeTranscriptionsAction = new MergeTranscriptionsAction(this, null);
         glueTranscriptionsAction = new GlueTranscriptionsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Pattex.gif")));
         chopTranscriptionAction = new ChopTranscriptionAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Chop.gif")));
-        exSyncEventShrinkerAction = new ExSyncEventShrinkerAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExSyncEventShrinker.gif")));
         cleanupAction = new CleanupAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cleanup.png")));
         editErrorsAction = new EditErrorsAction(this);        
         
@@ -1068,6 +1069,7 @@ public class PartitureTableWithActions extends PartitureTable
         insertUtteranceNumbersAction = new InsertHIATUtteranceNumbersAction(this);
         autoAnnotationAction = new AutoAnnotationAction(this);
         addTokenLayerAction = new AddTokenLayerAction(this);
+        
         //*********************************************************************************************
         //*************************************** TIER ACTIONS ****************************************
         //*********************************************************************************************
@@ -1161,20 +1163,27 @@ public class PartitureTableWithActions extends PartitureTable
         
         
         //*********************************************************************************************
-        //*************************************  PROJECT ACTIONS **************************************
+        //*************************************  LEGACY ACTIONS **************************************
         //*********************************************************************************************
+
+        legacyImportAction = new LegacyImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
+        legacyExportAction = new LegacyExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
+        legacyOutputAction = new LegacyOutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
 
         syllableStructureAction = new MakeSyllableStructureTierAction(this);
         k8MysteryConverterAction = new K8MysteryConverterAction(this);
         appendSpaceAction = new AppendSpaceAction(this);
         exSyncCleanupAction = new ExSyncCleanupAction(this);
+        exSyncEventShrinkerAction = new ExSyncEventShrinkerAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExSyncEventShrinker.gif")));
+        
+        importActionInel = new ImportActionInel(this, null);
 
         stadtspracheWordSegmentationAction = new StadtspracheWordSegmentationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/hamburg.png")));
         stadtspracheTierSegmentationAction = new StadtspracheTierSegmentationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/hamburg.png")));
 
 
         //*********************************************************************************************
-        //*************************************  CLARIN ACTIONS ***************************************
+        //*************************************  WEBSERVICE ACTIONS ***************************************
         //*********************************************************************************************
 
         webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
@@ -1667,14 +1676,13 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction selectionToNewAction;
     public javax.swing.AbstractAction leftPartToNewAction;
     public javax.swing.AbstractAction rightPartToNewAction;
-    public javax.swing.AbstractAction selectionToHTMLAction;
+    /*public javax.swing.AbstractAction selectionToHTMLAction;
     public javax.swing.AbstractAction selectionToRTFAction;
-    public javax.swing.AbstractAction printSelectionAction;
+    public javax.swing.AbstractAction printSelectionAction;*/
     
     public javax.swing.AbstractAction glueTranscriptionsAction;
     public javax.swing.AbstractAction mergeTranscriptionsAction;
     public javax.swing.AbstractAction chopTranscriptionAction;
-    public javax.swing.AbstractAction exSyncEventShrinkerAction;
     public javax.swing.AbstractAction cleanupAction;
     public javax.swing.AbstractAction editErrorsAction;
 
@@ -1797,12 +1805,21 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction setFrameEndAction;
 
     public javax.swing.AbstractAction underlineAction;
-    //*******************************************************************
-    /* Project menu actions */
     
+    //*******************************************************************
+    //*******************************************************************
+    //*******************************************************************
+    /* Legacy menu actions */
+    
+    /* File */
+    public javax.swing.AbstractAction legacyImportAction;
+    public javax.swing.AbstractAction legacyExportAction;
+    public javax.swing.AbstractAction legacyOutputAction;
+
     /* SFB 538 */
     public javax.swing.AbstractAction syllableStructureAction;
     public javax.swing.AbstractAction k8MysteryConverterAction;
+    public javax.swing.AbstractAction exSyncEventShrinkerAction;
     public javax.swing.AbstractAction exSyncCleanupAction;
     /* SFB 632 */
     public javax.swing.AbstractAction appendSpaceAction;
@@ -1810,6 +1827,8 @@ public class PartitureTableWithActions extends PartitureTable
     /* SiN */
     public javax.swing.AbstractAction stadtspracheWordSegmentationAction;
     public javax.swing.AbstractAction stadtspracheTierSegmentationAction;
+    
+    
     
     /* Web Services */
     public javax.swing.AbstractAction webMAUSAction;

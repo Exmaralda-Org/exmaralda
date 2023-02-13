@@ -14,13 +14,11 @@ import javax.swing.*;
  *
  * @author thomas
  */
-public final class OutputFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
+public final class LegacyOutputFileDialog extends AbstractFileFilterDialog implements java.beans.PropertyChangeListener {
 
     
     public SVGAccessoryPanel svgAccessory = new SVGAccessoryPanel();   
     public HTMLFramesOptionPanel framesAccessory = new HTMLFramesOptionPanel();
-    public org.exmaralda.partitureditor.interlinearText.swing.ChooseSettingsForXMLExportPanel chooseSettingsForXMLExportPanel
-            = new org.exmaralda.partitureditor.interlinearText.swing.ChooseSettingsForXMLExportPanel();
 
     public JComboBox encodingComboBox;
     private JPanel encodingPanel;
@@ -33,34 +31,19 @@ public final class OutputFileDialog extends AbstractFileFilterDialog implements 
     
     /** Creates new ExportTASXDialog
      * @param startDirectory */
-    public OutputFileDialog(String startDirectory) {
+    public LegacyOutputFileDialog(String startDirectory) {
         super();
         boolean thisIsAMac = System.getProperty("os.name").substring(0,3).equalsIgnoreCase("mac");
         if (thisIsAMac){
             setPreferredSize(new java.awt.Dimension(800, 600));
         }
         setCurrentDirectory(new File(startDirectory).getParentFile());
-        setDialogTitle("Output file");       
+        setDialogTitle("Output file (Legacy formats)");       
         setAcceptAllFileFilterUsed(false);
-        addChoosableFileFilter(HTMLPartiturFileFilter);
-        addChoosableFileFilter(HTMLPartiturWithHTML5AudioFileFilter);
-        addChoosableFileFilter(HTMLPartiturCompactFilter);
-        addChoosableFileFilter(RTFPartiturFileFilter);
-        addChoosableFileFilter(HTMLSegmentChainFileFilter);
-        addChoosableFileFilter(HTMLSegmentChainWithHTML5AudioFileFilter);
-        addChoosableFileFilter(HTMLPartiturWithSVGFileFilter);
-        addChoosableFileFilter(GATTranscriptFileFilter);
-        addChoosableFileFilter(GATWithHTML5AudioFileFilter);
-        addChoosableFileFilter(SimpleTextTranscriptFileFilter);
-        
-        // from here on: not so useful outputs
-        addChoosableFileFilter(FreeStylesheetFileFilter);
-        //addChoosableFileFilter(HTMLPartiturWithFlashFileFilter);
-        addChoosableFileFilter(SVGPartiturFileFilter);
-        addChoosableFileFilter(XMLPartiturFileFilter);
-        //addChoosableFileFilter(HTMLSegmentChainWithFlashFileFilter);
+        addChoosableFileFilter(HTMLPartiturWithFlashFileFilter);
+        addChoosableFileFilter(HTMLSegmentChainWithFlashFileFilter);
 
-        setFileFilter(HTMLPartiturFileFilter);
+        setFileFilter(HTMLPartiturWithFlashFileFilter);
         setMultiSelectionEnabled(false);
         addPropertyChangeListener("fileFilterChanged", this);
         initAccessory();
@@ -83,21 +66,7 @@ public final class OutputFileDialog extends AbstractFileFilterDialog implements 
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (!(evt.getPropertyName().equals("fileFilterChanged"))) return;
-        if (getFileFilter()==SVGPartiturFileFilter){
-            setAccessory(svgAccessory);
-        } else if (getFileFilter()==HTMLPartiturFileFilter){
-            setAccessory(framesAccessory);
-        } else if (getFileFilter()==XMLPartiturFileFilter){
-            setAccessory(chooseSettingsForXMLExportPanel);
-        } else if (getFileFilter()==this.FreeStylesheetFileFilter){
-            setAccessory(encodingPanel);
-        } else if (getFileFilter()==GATTranscriptFileFilter){
-            setAccessory(encodingPanel);
-        } else {
-            setAccessory(null);
-        }
-        revalidate();
+        // do nothing
     }
 
     @Override
