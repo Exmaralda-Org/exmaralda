@@ -57,7 +57,7 @@ public class BasicTranscriptionTokenHandler implements org.annolab.tt4j.Probabil
     @Override
     public void probability(String pos, String lemma, double probability) {
         try {
-            //System.out.println(lemma + " " + pos);
+            System.out.println(lemma + " " + pos);
             
             beenToProbabilityFlag = true;
             if (count>=idList.size()){
@@ -114,6 +114,8 @@ public class BasicTranscriptionTokenHandler implements org.annolab.tt4j.Probabil
     public void token(String token, String pos, String lemma) {
         //System.out.println(token + " / " + pos + " / " + lemma);
         beenToProbabilityFlag = false;
+        
+        probability(pos, lemma, 0.99);        
         
     }
 

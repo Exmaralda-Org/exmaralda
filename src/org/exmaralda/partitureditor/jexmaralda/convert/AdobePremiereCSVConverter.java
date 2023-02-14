@@ -4,8 +4,6 @@
  */
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,11 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.exmaralda.common.helpers.Rounder;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -33,7 +28,7 @@ import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
 // issue #357
 public class AdobePremiereCSVConverter {
     
-    
+    static double TOLERANCE = 2.0;
     
     public static BasicTranscription readAdobePremiereCSV(File csvFile) throws IOException, JexmaraldaException{
         // read json file via Jackson
@@ -81,15 +76,37 @@ public class AdobePremiereCSVConverter {
         
         Timeline timeline = result.getBody().getCommonTimeline();
         
-        for (String line : lines){
+        //for (String line : lines){
+        for (int i=0; i<lines.size(); i++){
+            String line = lines.get(i);
+            
             String[] bits = line.split("\\\",\\\"");
             if (bits.length!=4) continue;
+            
             String speakerName = bits[0].substring(1);
             String startTimeString = bits[1];
             String endTimeString = bits[2];
             String text = bits[3].replaceAll("\"$", "");
             
             double startTime = timeCodeToSeconds(startTimeString);
+            double endTime = timeCodeToSeconds(endTimeString);
+
+
+            // if the next start time is near the current end time
+            // then it may be better to use the next start time as the current end time
+            if (i<lines.size()-1){
+                String nextLine = lines.get(i+1);
+                String[] nextBits = nextLine.split("\\\",\\\"");
+                if (nextBits.length==4){
+                    String nextStartTimeString = nextBits[1];
+                    double nextStartTime = timeCodeToSeconds(nextStartTimeString);
+                    double difference = nextStartTime - endTime;
+                    if (difference>0 && difference<TOLERANCE){
+                        endTime = nextStartTime;
+                    }
+                }
+            }
+            
             int i1 = timeline.findTimelineItem(startTime, 0.01);
             TimelineItem startTLI;
             if (i1>0){
@@ -101,7 +118,6 @@ public class AdobePremiereCSVConverter {
                 timeline.insertAccordingToTime(startTLI);
             }
             
-            double endTime = timeCodeToSeconds(endTimeString);
             int i2 = timeline.findTimelineItem(endTime, 0.01);
             TimelineItem endTLI;
             if (i2>0){

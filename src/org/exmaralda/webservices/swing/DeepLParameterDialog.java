@@ -377,6 +377,11 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
+        apiKeyTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                apiKeyTextFieldFocusLost(evt);
+            }
+        });
         apiKeyTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apiKeyTextFieldActionPerformed(evt);
@@ -475,6 +480,10 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         String selectedTargetLanguage = ((String[])targetLanguageComboBox.getSelectedItem())[0];
         formalityPanel.setVisible(Arrays.asList(FORMALITY_SUPPORTED).contains(selectedTargetLanguage));
     }//GEN-LAST:event_targetLanguageComboBoxActionPerformed
+
+    private void apiKeyTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apiKeyTextFieldFocusLost
+        updateOK();
+    }//GEN-LAST:event_apiKeyTextFieldFocusLost
 
     
     private void updateSegmentationPanel(){

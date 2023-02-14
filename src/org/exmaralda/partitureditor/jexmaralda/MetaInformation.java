@@ -110,7 +110,7 @@ public class MetaInformation extends Object {
     /** returns the referenced file
      * @return  */
     public String getReferencedFile(){
-        if (referencedFiles.size()>0){
+        if (!referencedFiles.isEmpty()){
             return referencedFiles.elementAt(0);
         }
         return "";

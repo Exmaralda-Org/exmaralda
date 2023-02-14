@@ -137,7 +137,7 @@ public class FineAligner {
             String eventDescription = event.getDescription();
             Pattern p = Pattern.compile("[\\p{IsLetter}]+");
             Matcher m = p.matcher(eventDescription);
-            ArrayList<Integer> tokenIndices = new ArrayList<Integer>();
+            ArrayList<Integer> tokenIndices = new ArrayList<>();
             String text = "";
             while (m.find()){
                 int i1 = m.start();
@@ -169,7 +169,7 @@ public class FineAligner {
             
             // prepare a wav file
             MAUS4EXMARaLDA m4e = new MAUS4EXMARaLDA();
-            File wavFile = new File(transcription.getHead().getMetaInformation().getReferencedFile());
+            File wavFile = new File(transcription.getHead().getMetaInformation().getReferencedFile("wav"));
             File audioFile = m4e.convertAudioFileToMono(m4e.cutAudioFile(wavFile, thisTimelineItem.getTime(), nextTimelineItem.getTime()));
             
             // call WebMaus!
