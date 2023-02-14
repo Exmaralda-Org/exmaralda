@@ -272,9 +272,15 @@
 	
 	<xsl:template match="*:pause[not(@dur='micro' or @dur='short' or @dur='medium' or @dur='long')]" mode="normal">
 		<xsl:element name="pause">
+			<xsl:variable name="PAUSE_NOTATION">
+				<xsl:choose>
+					<xsl:when test="contains(@dur, ',') and ends-with(@dur, 's')"><xsl:value-of select="translate(@dur, ',s', '.S')"/></xsl:when>
+					<xsl:otherwise><xsl:value-of select="concat(@dur, 'S')"/></xsl:otherwise> 
+				</xsl:choose>
+			</xsl:variable>
 			<xsl:attribute name="dur">
 				<xsl:text>PT</xsl:text>
-				<xsl:value-of select="translate(@dur, ',s', '.S')"/>
+				<xsl:value-of select="$PAUSE_NOTATION"/>
 			</xsl:attribute>
 			<xsl:apply-templates select="@*[not(name()='dur')] | node()" mode="normal"/>
 			<!-- <xsl:apply-templates select="@*[not(name()='dur')]"/> -->

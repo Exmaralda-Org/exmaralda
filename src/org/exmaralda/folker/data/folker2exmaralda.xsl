@@ -27,6 +27,20 @@
                 </meta-information>
                 <speakertable>
                       <xsl:apply-templates select="//speaker"/>
+                      
+                    <!-- new 13-02-2023 : add a dummy speaker for the speakerless contributions -->
+                      <speaker id="SPK_NOSPK">
+                          <abbreviation></abbreviation>
+                          <sex value="u"/>
+                          <languages-used/>
+                          <l1/>
+                          <l2/>
+                          <ud-speaker-information>
+                              <ud-information attribute-name="Name"></ud-information>
+                          </ud-speaker-information>
+                          <comment/>            
+                      </speaker> 
+                
                 </speakertable>
             </head>
             <basic-body>
@@ -87,7 +101,8 @@
             <xsl:attribute name="type">t</xsl:attribute>
             <xsl:attribute name="category">v</xsl:attribute>
             <xsl:attribute name="id">TIE_NOSP</xsl:attribute>
-            <xsl:attribute name="display-name"></xsl:attribute>                
+            <xsl:attribute name="display-name"></xsl:attribute>    
+            <xsl:attribute name="speaker">SPK_NOSPK</xsl:attribute>            
             <xsl:apply-templates select="//contribution[not(@speaker-reference)]"/>
         </xsl:element>
     </xsl:template>

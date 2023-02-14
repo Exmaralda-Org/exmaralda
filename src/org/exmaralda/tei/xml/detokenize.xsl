@@ -159,6 +159,9 @@
                             <xsl:otherwise>((<xsl:value-of select="$DURATION"/>s))</xsl:otherwise>
                         </xsl:choose>                                                
                     </xsl:when>
+                    <xsl:when test="$TRANSCRIPTION_SYSTEM='GENERIC'">
+                        <xsl:text>[</xsl:text><xsl:value-of select="$DURATION"/><xsl:text>]</xsl:text>
+                    </xsl:when>
                     <xsl:otherwise>(<xsl:value-of select="$DURATION"/>)</xsl:otherwise>
                 </xsl:choose>                
             </xsl:otherwise>
@@ -176,6 +179,9 @@
     <xsl:template match="tei:seg/tei:vocal | tei:seg/tei:incident">
         <xsl:choose>
             <xsl:when test="tei:desc/@rend"><xsl:value-of select="tei:desc/@rend"/></xsl:when>
+            <xsl:when test="$TRANSCRIPTION_SYSTEM='GENERIC'">
+                <xsl:text>[</xsl:text><xsl:value-of select="tei:desc"/><xsl:text>]</xsl:text>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:text>((</xsl:text>
                 <xsl:value-of select="tei:desc"/>

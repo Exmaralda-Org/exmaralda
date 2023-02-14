@@ -87,6 +87,58 @@ public class TestRoundtrip {
             reRead(outFile);
         }
 
+        String[] CGAT_FILES = {
+            "C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_11_ISSUE_367\\cGAT_EXB_FOLK_56\\cGAT_IN.exb",
+        };
+        
+        for (String path : CGAT_FILES){
+            File inFile = new File(path);
+            BasicTranscription bt = new BasicTranscription(inFile.getAbsolutePath());
+            File outFile = new File(inFile.getParentFile(), "0_CGAT_OUT.xml");
+            teiConverter.writeCGATMINIMALISOTEIToFile(bt, outFile.getAbsolutePath(), null);
+            reRead(outFile);
+        }
+
+
+        String[] EVENT_FILES = {
+            "C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_11_ISSUE_367\\EVENT_FOLK_56\\EVENT_IN.exb",
+        };
+        
+        for (String path : EVENT_FILES){
+            File inFile = new File(path);
+            BasicTranscription bt = new BasicTranscription(inFile.getAbsolutePath());
+            File outFile = new File(inFile.getParentFile(), "0_EVENT_OUT.xml");
+            teiConverter.writeEventTokenISOTEIToFile(bt, outFile.getAbsolutePath());
+            reRead(outFile);
+        }
+
+
+        String[] GENERIC_FILES = {
+            "C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_11_ISSUE_367\\GENERIC\\GENERIC_IN.exb",
+
+        };
+        
+        for (String path : GENERIC_FILES){
+            File inFile = new File(path);
+            BasicTranscription bt = new BasicTranscription(inFile.getAbsolutePath());
+            File outFile = new File(inFile.getParentFile(), "0_GENERIC_OUT.xml");
+            teiConverter.writeGenericSegmentedISOTEIToFile(bt, outFile.getAbsolutePath(), null);
+            reRead(outFile);
+        }
+
+
+        String[] FLN_FILES = {
+            "C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_11_ISSUE_367\\FLN_FOLK_56\\FLN_IN.fln",
+        };
+        
+        for (String path : FLN_FILES){
+            File inFile = new File(path);
+            Document flnDoc = FileIO.readDocumentFromLocalFile(inFile);
+            teiConverter.setLanguage("de");
+            File outFile = new File(inFile.getParentFile(), "0_FLN_OUT.xml");
+            teiConverter.writeFOLKERISOTEIToFile(flnDoc, outFile.getAbsolutePath()); 
+            reRead(outFile);
+        }
 
 
     }

@@ -85,6 +85,18 @@
 			<xsl:when test="text()=')' and not(starts-with(@n,'GEN'))">
 				<xsl:element name="uncertain-end"/>
 			</xsl:when>
+			<!-- 
+                    <nts n="GEN:ip" id="Seg_44">[</nts>
+                    <ats n="GEN:non-pho" id="Seg_45" s="T0" e="T7">0.3</ats>
+                    <nts n="GEN:ip" id="Seg_46">]</nts>						
+			-->
+			<xsl:when test="following-sibling::*[1][self::ats and @n='GEN:non-pho'] and text()='['">
+				<!-- do nothing -->				
+			</xsl:when>
+			<xsl:when test="preceding-sibling::*[1][self::ats and @n='GEN:non-pho'] and text()=']'">
+				<!-- do nothing -->				
+			</xsl:when>
+			
 			<xsl:when test="text()='/'">
 				<xsl:element name="repair"/>
 			</xsl:when>
@@ -139,7 +151,7 @@
 	<xsl:template match="*:ats">
 		<xsl:choose>
 			<!-- <ats n="HIAT:non-pho" id="Seg_14" s="T2" e="T2.TIE0.1">0,2s</ats> -->
-			<xsl:when test="string-length(translate(text()[1],'0123456789,s',''))=0">
+			<xsl:when test="string-length(translate(text()[1],'0123456789,s.',''))=0">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">
 						<xsl:value-of select="text()"/>

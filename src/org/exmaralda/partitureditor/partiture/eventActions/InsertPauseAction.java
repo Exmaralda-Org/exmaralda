@@ -18,7 +18,10 @@ public class InsertPauseAction extends org.exmaralda.partitureditor.partiture.Ab
 
 
 
-    /** Creates a new instance of EditEventAction */
+    /** Creates a new instance of EditEventAction
+     * @param t
+     * @param text
+     * @param icon */
     public InsertPauseAction(PartitureTableWithActions t, String text, javax.swing.ImageIcon icon) {
         super(text, icon, t);
         //this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));

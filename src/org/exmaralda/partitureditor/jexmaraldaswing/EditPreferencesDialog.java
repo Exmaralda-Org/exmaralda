@@ -1205,6 +1205,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
             pauseSuffixTextField.setText(")");
             digitsSpinner.setValue(2);
             decimalPointRadioButton.setSelected(true);
+        } else if ((seg.equals("GENERIC"))){
+            pausePrefixTextField.setText("[");
+            pauseSuffixTextField.setText("]");
+            digitsSpinner.setValue(1);
+            decimalPointRadioButton.setSelected(true);
         }
 
         updatePauseExample();

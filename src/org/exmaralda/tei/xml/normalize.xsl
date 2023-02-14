@@ -67,7 +67,22 @@
             <!-- make them a <seg>  -->
             <tei:seg type="contribution">
                 <xsl:attribute name="xml:id" select="generate-id()"/>
-                <xsl:apply-templates select="*"/>                
+                
+                <!-- check if it needs a redundant start anchor -->
+                <!-- if this is untokenized ISO/TEI there might be text before the <anchor> -->
+                <xsl:if test="not(node()[self::tei:anchor and position()=1])">
+                    <tei:anchor>
+                        <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/>
+                    </tei:anchor>
+                </xsl:if>
+
+                <xsl:apply-templates select="*"/>        
+                
+                <xsl:if test="not(node()[self::tei:anchor and position()=last()])">
+                    <tei:anchor>
+                        <xsl:attribute name="synch" select="ancestor-or-self::*[@end][1]/@end"/>
+                    </tei:anchor>
+                </xsl:if>            
             </tei:seg>
         </xsl:copy>
     </xsl:template>
