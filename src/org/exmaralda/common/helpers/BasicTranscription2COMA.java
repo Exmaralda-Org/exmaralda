@@ -50,12 +50,11 @@ public class BasicTranscription2COMA {
 				.getAbsolutePath());
                 // ".." in relative paths allowed now
 		bt.getHead().getMetaInformation().resolveReferencedFile(basicTranscriptionFile.getAbsolutePath(), MetaInformation.NEW_METHOD);
-		String skeletonString = ssf.applyInternalStylesheetToString(
-				SKELETON_XSL_PATH, bt.toXML());
+		String skeletonString = ssf.applyInternalStylesheetToString(SKELETON_XSL_PATH, bt.toXML());
 
-		Document skeletonDocument = IOUtilities
-				.readDocumentFromString(skeletonString);
-		for (Object o : skeletonDocument.getRootElement().getChildren()) {
+		Document skeletonDocument = IOUtilities.readDocumentFromString(skeletonString);
+		
+                for (Object o : skeletonDocument.getRootElement().getChildren()) {
 			Element e = (Element) o;
 			result.addElement(e);
 		}
@@ -63,12 +62,14 @@ public class BasicTranscription2COMA {
 		Element communicationElement = result.elementAt(0);
 		communicationElement.setAttribute("Id", new GUID().makeID());
 		if (communicationElement.getAttributeValue("Name").trim().length() == 0) {
-			communicationElement.setAttribute("Name", basicTranscriptionFile
-					.getName());
+                    // changed 15-02-2023
+                    //communicationElement.setAttribute("Name", basicTranscriptionFile.getName());
+                    String name = basicTranscriptionFile.getName().substring(0, basicTranscriptionFile.getName().lastIndexOf("."));
+                    communicationElement.setAttribute("Name", name);
 		}
-		Element transcriptionElement = communicationElement
-				.getChild("Transcription");
-		transcriptionElement.setAttribute("Id", new GUID().makeID());
+		Element transcriptionElement = communicationElement.getChild("Transcription");
+		
+                transcriptionElement.setAttribute("Id", new GUID().makeID());
 		transcriptionElement.getChild("Filename").setText(
 				basicTranscriptionFile.getName());
 
@@ -87,8 +88,7 @@ public class BasicTranscription2COMA {
 			relativeURI = uri2.relativize(uri1);
 			mediaElement.getChild("NSLink").setText(relativeURI.toString());
 			mediaElement.getChild("Filename").setText(mediaFile.getName());
-			double dur = RecordingPropertiesCalculator
-					.getRecordingDuration(mediaFile);
+			double dur = RecordingPropertiesCalculator.getRecordingDuration(mediaFile);
 			// System.out.println(">>>>" + dur);
 			if (dur >= 0) {
 				recordingElement.getChild("RecordingDuration").setText(

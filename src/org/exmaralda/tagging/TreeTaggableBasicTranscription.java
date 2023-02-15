@@ -43,13 +43,20 @@ public class TreeTaggableBasicTranscription implements TreeTaggableDocument {
                 for(Event e : sc){
                     //System.out.print(e.getDescription() + " ");
                     if ((e.getDescription()!=null) && e.getDescription().trim().length()>0){
-                        thisTokens.add(e.getDescription().replaceAll("\\u00A0", " ").trim());
-                        String[] idSeries = {
-                            tier.getID(),
-                            e.getStart(),
-                            e.getEnd()
-                        };
-                        ids.add(idSeries);
+                        //thisTokens.add(e.getDescription().replaceAll("\\u00A0", " ").trim());
+                        String[] subTokens = e.getDescription().replaceAll("\\u00A0", " ").trim().split(" ");
+                        for (String subToken : subTokens){
+                            if (subToken.contains("|")){
+                                subToken = subToken.split("\\|")[0].replaceAll("\\*", "");
+                            }
+                            thisTokens.add(subToken);
+                            String[] idSeries = {
+                                tier.getID(),
+                                e.getStart(),
+                                e.getEnd()
+                            };
+                            ids.add(idSeries);
+                        }
                     } else {
                         System.out.println("EMPTY TOKEN!");
                     }

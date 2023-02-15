@@ -24,10 +24,8 @@ import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.folker.data.Speaker;
 import org.exmaralda.folker.data.Timepoint;
 import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
-import org.exmaralda.orthonormal.io.XMLReaderWriter;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.jexmaralda.SegmentedTier;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader;
@@ -253,6 +251,8 @@ public class NormalizedFolkerTranscription {
         
         Document segmentedDoc = IOUtilities.readDocumentFromString(st.toXML());
         
+        //System.out.println(st.toXML());
+        
         Map<String, Element> segTiers = new HashMap<>();
         Map<String, Element> segmentations = new HashMap<>();
         Map<String, Element> normAnnotations = new HashMap<>();
@@ -303,6 +303,9 @@ public class NormalizedFolkerTranscription {
             //System.out.println("Working!");
             Element contributionElement = (Element)o;
             String speaker = contributionElement.getAttributeValue("speaker-reference");
+            if (speaker==null){
+                speaker = "SPK_NOSPK";
+            }
             Element segmentedTierElement = segTiers.get(speaker);
             Element segmentationElement = segmentations.get(speaker);
             int index = segmentedTierElement.indexOf(segmentationElement);

@@ -9,7 +9,8 @@
 
 package org.exmaralda.exakt.search;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.util.Vector;
 public class Search {
     
     private SearchResultList searchResult = new SearchResultList();
-    private Vector<SearchListenerInterface> listenerList = new Vector<SearchListenerInterface>();    
+    private final List<SearchListenerInterface> listenerList = new ArrayList<>();    
     private SearchParametersInterface searchParameters;
     private CorpusInterface corpus;
     private int MAX_NUMBER_OF_SEARCH_RESULTS = 10000;
@@ -46,7 +47,7 @@ public class Search {
     }
     
     public void addSearchListener(SearchListenerInterface sli){
-         listenerList.addElement(sli);        
+         listenerList.add(sli);        
     }
     
     public SearchResultList getSearchResult(){
@@ -58,7 +59,7 @@ public class Search {
     }
     
     
-    public void doSearch(){
+    public boolean doSearch(){
         long start = new java.util.Date().getTime();
         CorpusInterface c = getCorpus();
         int allSegments = c.getNumberOfSearchableSegments();
@@ -69,6 +70,7 @@ public class Search {
 
         // !!!!!!!!!!!!!
         searchResult = new SearchResultList();
+        boolean maxExceeded = false;
         while(c.hasNext()){
             CorpusComponentInterface cc = c.next();
             String id = cc.getIdentifier();
@@ -83,12 +85,14 @@ public class Search {
             fireSearchProgress((double)countComponents/(double)c.getNumberOfCorpusComponents(),  countMatches + " matches", id);
             if ((MAX_NUMBER_OF_SEARCH_RESULTS>0) && (countMatches>MAX_NUMBER_OF_SEARCH_RESULTS)){
                 fireSearchStopped((double)countSegments/(double)allSegments,  "Search stopped at " + countMatches + " results.");
+                maxExceeded = true;
                 break;
             }
         }
         long end = new java.util.Date().getTime();
         this.timeForLastSearch = (end-start)/1000.0;
         fireSearchCompleted();
+        return maxExceeded;
     }
     
     protected void fireSearchProgress(double progress, String message, String id){
@@ -106,13 +110,14 @@ public class Search {
     
     protected void fireSearchCompleted(){
         SearchEvent se = new SearchEvent(SearchEvent.SEARCH_COMPLETED, 1.0, searchResult);        
+        fireSearchEvent(se);
     }
     
     protected void fireSearchEvent(SearchEvent se){
         // Process the listeners last to first, notifying
         // those that are interested in this event
         for (int i = listenerList.size()-1; i>=0; i-=1) {
-            listenerList.elementAt(i).processSearchEvent(se);
+            listenerList.get(i).processSearchEvent(se);
          }                        
     }
 }

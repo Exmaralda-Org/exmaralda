@@ -1067,11 +1067,14 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         /*Thread*/ searchThread = new Thread(){
             @Override
             public void run(){
-                search.doSearch();
+                boolean exceeded = search.doSearch();
                 javax.swing.SwingUtilities.invokeLater(doUpdateSearchResult);
                 progressBarPanel.setVisible(false);      
                 searchExpressionPanel.setVisible(true);
                 isSearching = false;
+                if (exceeded){
+                    JOptionPane.showMessageDialog(searchExpressionPanel, "Search was interrupted after \nmaximum number of search results was exceeded.");
+                }
             }
         };
         //SwingUtilities.invokeLater(searchThread);

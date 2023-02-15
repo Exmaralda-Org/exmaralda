@@ -222,7 +222,7 @@
         <!-- <contribution speaker-reference="HM" start-reference="TLI_0" end-reference="TLI_4" parse-level="2"> -->
         <!-- <ts n="sc" id="Seg_0" s="TLI_0" e="TLI_4"> -->
         <xsl:if test="*[@n]">
-            <annotation name="n">
+            <annotation name="norm">
                 <xsl:apply-templates select="descendant::*[@n]/@n" mode="ANNOTATION"></xsl:apply-templates>
             </annotation>        
         </xsl:if>

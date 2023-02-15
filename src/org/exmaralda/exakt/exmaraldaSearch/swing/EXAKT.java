@@ -92,7 +92,7 @@ public class EXAKT extends javax.swing.JFrame
     boolean isOpening = false;
     public final static int UPDATE_TIME = 100;
     javax.swing.Timer timer;
-    Vector<String[]> recentCorpora = new Vector<String[]>();
+    Vector<String[]> recentCorpora = new Vector<>();
     
     PartitureTableWithActions partitur;
     String lastLoadedPartitur = "";

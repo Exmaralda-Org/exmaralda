@@ -165,6 +165,9 @@ public class FOLKERBuilder {
                 otherElement.getChild("NSLink").setText(otherElement.getChild("NSLink").getText().replace(".exb", ".exs"));
                 otherElement.getChild("Description").getChild("Key").setText("true");
                 communicationElement.addContent(otherElement);
+                
+                // added 15-02-2023
+                //communicationElement.
             } else {
                 // replace the existing one with the segmented fucker
                 transcriptionElement.getChild("Filename").setText(files[0].getName());
@@ -191,7 +194,14 @@ public class FOLKERBuilder {
 
             Element attachedFileElement = new Element("File");
             attachedFileElement.setAttribute("Id", new GUID().makeID());
+            
+            
             File ff = communicationsWithFOLKERFiles.get(communicationElement.getAttributeValue("Name"));
+            /*if (ff==null){
+                System.out.println("NAME IS : " + communicationElement.getAttributeValue("Name"));
+                System.out.println("KEYS ARE: " + String.join(" - ", communicationsWithFOLKERFiles.keySet()));
+            }*/
+
             Element fn = new Element("filename");
             fn.setText(ff.getName());
             attachedFileElement.addContent(fn);

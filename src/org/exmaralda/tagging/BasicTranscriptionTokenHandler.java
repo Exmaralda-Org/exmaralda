@@ -94,13 +94,24 @@ public class BasicTranscriptionTokenHandler implements org.annolab.tt4j.Probabil
 
 
 
-            Event posEvent = new Event(ids[1], ids[2], pos);
-            Event lemmaEvent = new Event(ids[1], ids[2], lemma);
-            Event probabilityEvent = new Event(ids[1], ids[2], Double.toString(probability));
-            
-            speaker2LemmaTiers.get(speaker).addEvent(lemmaEvent);
-            speaker2PosTiers.get(speaker).addEvent(posEvent);
-            speaker2ProbTiers.get(speaker).addEvent(probabilityEvent);
+            if (!(speaker2LemmaTiers.get(speaker).containsEventAtStartPoint(ids[1]))){
+                Event posEvent = new Event(ids[1], ids[2], pos);
+                Event lemmaEvent = new Event(ids[1], ids[2], lemma);
+                Event probabilityEvent = new Event(ids[1], ids[2], Double.toString(probability));
+
+                speaker2LemmaTiers.get(speaker).addEvent(lemmaEvent);
+                speaker2PosTiers.get(speaker).addEvent(posEvent);
+                speaker2ProbTiers.get(speaker).addEvent(probabilityEvent);
+            } else {
+                Event posEvent = speaker2PosTiers.get(speaker).getEventAtStartPoint(ids[1]);
+                Event lemmaEvent = speaker2LemmaTiers.get(speaker).getEventAtStartPoint(ids[1]);
+                Event probabilityEvent = speaker2ProbTiers.get(speaker).getEventAtStartPoint(ids[1]);
+                
+                posEvent.setDescription(posEvent.getDescription() + " " + pos);
+                lemmaEvent.setDescription(lemmaEvent.getDescription() + " " + lemma);
+                probabilityEvent.setDescription(probabilityEvent.getDescription() + " " + Double.toString(probability));
+                
+            }
             
             
             count++;
