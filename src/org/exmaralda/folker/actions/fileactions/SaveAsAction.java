@@ -25,7 +25,10 @@ import org.exmaralda.folker.utilities.PreferencesUtilities;
  */
 public class SaveAsAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public SaveAsAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }

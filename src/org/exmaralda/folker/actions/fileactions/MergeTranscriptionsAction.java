@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
 import org.exmaralda.folker.application.ApplicationControl;
-import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
 
@@ -25,11 +24,15 @@ import org.exmaralda.folker.utilities.PreferencesUtilities;
  */
 public class MergeTranscriptionsAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public MergeTranscriptionsAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** MergeTranscriptionsAction ***]");
         ApplicationControl ac = (ApplicationControl)applicationControl;

@@ -21,11 +21,15 @@ import org.exmaralda.folker.application.ApplicationControl;
  */
 public class AppendTranscriptionAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public AppendTranscriptionAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** AppendTranscriptionAction ***]");
         ApplicationControl ac = (ApplicationControl)applicationControl;

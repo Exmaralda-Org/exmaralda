@@ -44,7 +44,10 @@ public class EventListTranscription {
         updateContributions();
     }
 
-    /** creates a new EventListTranscription which continues where the given one ends */
+    /** creates a new EventListTranscription which continues where the given one ends
+     * @param t
+     * @return 
+     * @throws java.io.IOException */
     public static EventListTranscription AppendTranscription(EventListTranscription t) throws IOException{
         t.updateTimeline();
         double lastTime = t.getTimeline().getMaximumTime();
@@ -56,6 +59,15 @@ public class EventListTranscription {
         elt.speakerlist = t.getSpeakerlist();
         elt.setMediaPath(t.getMediaPath());
         elt.addEvent(lastTime, lastTime + 2000.0);
+        /*
+         ISSUE 313:
+            Wenn man Transkripte "fortsetzt", wird in den zweiten Transkriptteil T02 nicht nur der hinterlegte Maskierungsschlüssel 
+            (also die Liste mit allen maskierungsbedürftigen Namen/Informationen und ihrer Pseudonymisierung) kopiert, sondern auch die Maskierungsvorlage 
+            aus T01, also alle zu maskierenden Stellen im Transkript. 
+            Das ist aber gar nicht erwünscht, weil die dann alle gelöscht werden sollten zwecks Korrektur.         
+        */
+        
+        
         return elt;
     }
     
@@ -490,6 +502,10 @@ public class EventListTranscription {
            toBeRemoved.add(event);
         }
         eventlist.events.removeAll(toBeRemoved);
+        
+        
+        
+        
         updateTimeline();
         return elt;
     }

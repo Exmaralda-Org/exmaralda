@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.jdom.Document;
@@ -38,6 +39,10 @@ public class TranscriptionHead {
             generateKeyElement();
         }
         headElement.detach();
+    }
+
+    public TranscriptionHead(Element headElement) {
+        this.headElement = headElement;
     }
 
     public TranscriptionHead() {
@@ -106,7 +111,7 @@ public class TranscriptionHead {
         Vector<Event> allEvents = elt.getEventlist().getEvents();
         int count=0;
         int moveCount = 0;
-        ArrayList<Integer> toBeRemoved = new ArrayList<Integer>(); 
+        ArrayList<Integer> toBeRemoved = new ArrayList<>(); 
         for (Event e : allEvents){
             String text = e.getText();
             if (text!=null && text.startsWith("[[[") && text.endsWith("]]]")){
@@ -132,5 +137,55 @@ public class TranscriptionHead {
         getMaskElement().removeContent();
         generateKeyElement();
     }
+    
+    // New 18-02-2023 : issue #313
+    public void removeMaskSegmentsBefore(double time){
+      //<mask-segment start="2.2675730519480517" end="2.4289935064935064">FRANK --&gt; FRUNK</mask-segment>
+      //<mask-segment start="3.827970779220779" end="4.058571428571429">FRINK --&gt; FRONK</mask-segment>
+      if (getMaskElement()==null) return;
+      Element maskElement = getMaskElement();
+      List l = maskElement.getChildren("mask-segment");
+      List<Element> toBeRemoved = new ArrayList<>();
+      for (Object o : l){
+          Element maskSegment = (Element)o;
+          double end = Double.parseDouble(maskSegment.getAttributeValue("end"));
+          if (end<time){
+              toBeRemoved.add(maskSegment);
+          }
+      }
+      for (Element e : toBeRemoved){
+          maskElement.removeContent(e);
+      }      
+    }
+    
+    // New 18-02-2023 : issue #313
+    public void removeMaskSegmentsAfter(double time){
+      //<mask-segment start="2.2675730519480517" end="2.4289935064935064">FRANK --&gt; FRUNK</mask-segment>
+      //<mask-segment start="3.827970779220779" end="4.058571428571429">FRINK --&gt; FRONK</mask-segment>
+      if (getMaskElement()==null) return;
+      Element maskElement = getMaskElement();
+      List l = maskElement.getChildren("mask-segment");
+      List<Element> toBeRemoved = new ArrayList<>();
+      for (Object o : l){
+          Element maskSegment = (Element)o;
+          double start = Double.parseDouble(maskSegment.getAttributeValue("start"));
+          if (start>time){
+              toBeRemoved.add(maskSegment);
+          }
+      }
+      for (Element e : toBeRemoved){
+          maskElement.removeContent(e);
+      }
+      
+    }
+    
+
+    public TranscriptionHead cloneHead() {
+        Element clonedHeadElement = new Element("head");
+        clonedHeadElement.addContent(headElement.cloneContent());
+        return new TranscriptionHead(clonedHeadElement);
+    }
+    
+    
     
 }

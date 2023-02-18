@@ -1174,6 +1174,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
 
             setTranscription(elt);
             setCurrentFilePath(null);
+            
+            // New 18-02-2023 : issue #313
+            getTranscriptionHead().removeMaskSegmentsBefore(elt.getEventAt(0).getStartpoint().getTime());
+            maskDialog.setData();
 
             setGeneralDocumentActionsEnabled(true);
             timeViewScrollPane.getHorizontalScrollBar().setValue(0);
@@ -1255,9 +1259,27 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         applicationFrame.mainPanel.textViewsTabbedPane.setEnabledAt(2,true);
         try {
             EventListTranscription part2 = getTranscription().splitTranscription(splitTime);
-            org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(part2, f, parser, PARSE_LEVEL);
+            /* ISSUE #313
+                Dagegen: Wenn man ein Transkript irgendwo "teilt", wäre es wünschenswert, wenn der Maskierungsschlüssel kopiert wird, die Maskierungsvorlage aber ebenfalls an der 
+                entsprechenden Stelle geteilt würde - aktuell ist das nicht so und man muss ggf. alle Maskierungseinträge nach dem Teilen des Transkriptes neu erstellen. 
+                Kommt nicht oft vor, kann aber sehr nervig sein.        
+            */           
+            TranscriptionHead head2 = getTranscriptionHead().cloneHead();
+            head2.removeMaskSegmentsBefore(splitTime);
+
+            org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(part2, f, parser, PARSE_LEVEL, head2);
             this.eventListTableModel.fireTableDataChanged();
             DOCUMENT_CHANGED = true;
+            
+            
+            // ISSUE #313
+            getTranscriptionHead().removeMaskSegmentsAfter(splitTime);
+            maskDialog.setData();
+            
+            
+            
+            
+            
             status(FOLKERInternationalizer.getString("status.split1") + f.getAbsolutePath() + FOLKERInternationalizer.getString("status.split2"));
 
         } catch (SAXException | JDOMException | ParserConfigurationException | TransformerException | IOException ex) {
