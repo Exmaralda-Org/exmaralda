@@ -22,7 +22,7 @@ public class SerializeWAVFile {
     
     private void doit() throws IOException, WavFileException{
         // Serialize an int[]
-        WavFile in = WavFile.openWavFile(new File("C:\\Users\\Schmidt\\Dropbox\\IDS\\FOLK\\BrownNoise\\Brownsches_Rauschen_9db.wav"));
+        WavFile in = WavFile.openWavFile(new File("C:\\Users\\bernd\\Dropbox\\IDS\\FOLK\\BrownNoise\\Brownsches_Rauschen_9db.wav"));
         
         double[] samples = new double[100000];
         
@@ -31,7 +31,7 @@ public class SerializeWAVFile {
         in.readFrames(samples, 50000);
         
         
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("C:\\EXMARaLDA_FRESHEST\\src\\org\\exmaralda\\masker\\ImmerzBrownNoise_9db.ser")));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("C:\\exmaralda\\exmaralda\\src\\org\\exmaralda\\masker\\ImmerzBrownNoise_9db.ser")));
         out.writeObject(samples);
         out.flush();
         out.close();

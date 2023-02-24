@@ -6,6 +6,7 @@ package org.exmaralda.masker;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Arrays;
  */
 public class Masker {
 
-    ArrayList<MaskerListener> listeners = new ArrayList<MaskerListener>(); 
+    ArrayList<MaskerListener> listeners = new ArrayList<>(); 
     
     WavFile wavFileIn;
     WavFile wavFileOut;
@@ -62,14 +63,22 @@ public class Masker {
     }
 
     private double[] initBrownNoiseWavFile() throws URISyntaxException, IOException, WavFileException, ClassNotFoundException{
-        //URL resource = getClass().getResource("/org/exmaralda/masker/ImmerzBrownNoise_9db.ser");
+        double[] samples;
+        ClassLoader cl = this.getClass().getClassLoader();            
+        try ( //URL resource = getClass().getResource("/org/exmaralda/masker/ImmerzBrownNoise_9db.ser");
         //File brownNoiseFile = new File(resource.toURI());
         // Deserialize the int[]
         //ObjectInputStream in = new ObjectInputStream(new FileInputStream(brownNoiseFile));
-        ObjectInputStream in = new ObjectInputStream(getClass().getResourceAsStream("/org/exmaralda/masker/ImmerzBrownNoise_9db.ser"));
-        double[] samples = (double[]) in.readObject();
-        in.close();    
-        return samples;
+            // changed 24-02-2023 for #372
+                
+                ObjectInputStream in = new ObjectInputStream(Masker.class.getResourceAsStream("/org/exmaralda/masker/ImmerzBrownNoise_9db.ser"))) {
+                //ObjectInputStream in = new ObjectInputStream(cl.getResource("/org/exmaralda/masker/ImmerzBrownNoise_9db.ser").openStream())) {            
+                samples = (double[]) in.readObject();
+                return samples;
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+            throw new IOException(ex);
+        }
     }
     
     public void mask(int method, double[][] maskTimes) throws IOException, WavFileException, URISyntaxException, ClassNotFoundException{

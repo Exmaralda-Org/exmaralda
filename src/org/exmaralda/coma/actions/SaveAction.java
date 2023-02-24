@@ -99,7 +99,8 @@ public class SaveAction extends ComaAction {
                 // changed 01-12-2022
                 fc.setFileFilter(new ExmaraldaFileFilter("Coma-Files (COMA, XML)",	new String[] { "coma", "xml" }, true));
 		int returnVal = fc.showSaveDialog(coma);
-		if (fc.getSelectedFile() != null) {
+		if (returnVal==JFileChooser.CANCEL_OPTION) return false;
+                if (fc.getSelectedFile() != null) {
 			file = fc.getSelectedFile();
 
 		}

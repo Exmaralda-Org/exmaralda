@@ -21,7 +21,9 @@ public class Timepoint implements Comparable {
     private Timeline timeline;
     private double time;
     
-    /** Creates a new instance of Timepoint */
+    /** Creates a new instance of Timepoint
+     * @param t
+     * @param time */
     public Timepoint(Timeline t, double time) {
         timeline = t;
         this.time = time;

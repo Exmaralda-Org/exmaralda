@@ -1176,7 +1176,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             setCurrentFilePath(null);
             
             // New 18-02-2023 : issue #313
-            getTranscriptionHead().removeMaskSegmentsBefore(elt.getEventAt(0).getStartpoint().getTime());
+            getTranscriptionHead().removeMaskSegmentsBefore(elt.getEventAt(0).getStartpoint().getTime() / 1000.0);
             maskDialog.setData();
 
             setGeneralDocumentActionsEnabled(true);
@@ -1265,7 +1265,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 Kommt nicht oft vor, kann aber sehr nervig sein.        
             */           
             TranscriptionHead head2 = getTranscriptionHead().cloneHead();
-            head2.removeMaskSegmentsBefore(splitTime);
+            head2.removeMaskSegmentsBefore(splitTime / 1000.0);
 
             org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(part2, f, parser, PARSE_LEVEL, head2);
             this.eventListTableModel.fireTableDataChanged();
@@ -1273,7 +1273,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             
             
             // ISSUE #313
-            getTranscriptionHead().removeMaskSegmentsAfter(splitTime);
+            //JOptionPane.showMessageDialog(this.applicationFrame, splitTime);
+            getTranscriptionHead().removeMaskSegmentsAfter(splitTime / 1000.0);
             maskDialog.setData();
             
             
