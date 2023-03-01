@@ -7,12 +7,9 @@
 package org.exmaralda.partitureditor.jexmaralda.sax;
 
 import org.exmaralda.partitureditor.jexmaralda.*;
-import java.io.*;
 import java.util.*;
 import org.xml.sax.*;
-import org.xml.sax.helpers.XMLReaderFactory;
 //import com.sun.xml.parser.Resolver;
-import org.exmaralda.partitureditor.jexmaralda.sax.SAXUtilities;
 
 
 /**
@@ -23,7 +20,7 @@ import org.exmaralda.partitureditor.jexmaralda.sax.SAXUtilities;
 public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.DefaultHandler {
 
     private SegmentedTranscription transcription;
-    private Vector openElements;
+    private List<String> openElements;
     private String currentPCData;
     private String currentAttributeName;
     private String currentType;
@@ -35,17 +32,18 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
     private AbstractSegmentVector currentSegmentVector;
     private TimelineFork currentTimelineFork;
     private TimedAnnotation currentTA;
-    private Vector segmentStack;
+    private List segmentStack;
     
     /** Creates new SegmentedTranscriptionSaxHandler */
     public SegmentedTranscriptionSaxHandler() {
-        openElements = new Vector();
+        openElements = new ArrayList<>();
     }
     
     public SegmentedTranscription getTranscription(){
         return transcription;
     }
     
+    @Override
     public void startDocument(){
       System.out.println("started reading document...");
       transcription = new SegmentedTranscription();
@@ -53,21 +51,23 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
     }
 
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void endDocument(){
         System.out.println("document read.");
     }
 
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void startElement(String namespaceURI, String localName, String name, Attributes atts ) {        
 //        System.out.println("element " + name + " open.");
-        openElements.addElement(name);
+        openElements.add(name);
         int id = SAXUtilities.getIDForElementName(name);
         switch (id) {
             case SAXUtilities.UD_META_INFORMATION   :   currentUDInformation = new UDInformationHashtable(); 
                                                         break;
             case SAXUtilities.REFERENCED_FILE       :   transcription.getHead().getMetaInformation().addReferencedFile(atts.getValue(0));
                                                         break;
-            case SAXUtilities.UD_INFORMATION        :   currentAttributeName = new String(atts.getValue("attribute-name"));
+            case SAXUtilities.UD_INFORMATION        :   currentAttributeName = atts.getValue("attribute-name");
                                                         currentUDValue = new String();
                                                         break;
             case SAXUtilities.SPEAKER               :   currentSpeaker = new Speaker();
@@ -75,7 +75,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         break;
             case SAXUtilities.SEX                   :   currentSpeaker.setSex(atts.getValue("value").charAt(0));
                                                         break;
-            case SAXUtilities.LANGUAGE              :   int id2 = SAXUtilities.getIDForElementName((String)openElements.elementAt(openElements.size()-2));
+            case SAXUtilities.LANGUAGE              :   int id2 = SAXUtilities.getIDForElementName(openElements.get(openElements.size()-2));
                                                         String language = new String();
                                                         if (atts.getIndex("xml:lang")>=0){
                                                             language = atts.getValue("xml:lang");}
@@ -93,13 +93,14 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         try{tli.setTime(Double.parseDouble(atts.getValue("time")));} catch (Throwable t) {/*thrown if no abs time is present*/}
                                                         tli.setBookmark(atts.getValue("bookmark"));
                                                         try{
-                                                            if (((String)(openElements.elementAt(openElements.size()-2))).equals("common-timeline")){
+                                                            if (((openElements.get(openElements.size()-2))).equals("common-timeline")){
                                                                 transcription.getBody().getCommonTimeline().addTimelineItem(tli);
                                                             } else {
                                                                 currentTimelineFork.addTimelineItem(tli);
                                                             }
                                                         } catch (JexmaraldaException je) {}
                                                         break;
+
 
             case SAXUtilities.SEGMENTED_TIER        :   currentTier = new SegmentedTier();
                                                         currentTier.setID(atts.getValue("id"));
@@ -116,7 +117,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
             case SAXUtilities.SEGMENTATION          :   currentSegmentVector = new Segmentation();
                                                         currentSegmentVector.setName(atts.getValue("name"));
                                                         currentSegmentVector.setTierReference(atts.getValue("tierref"));
-                                                        segmentStack = new Vector();
+                                                        segmentStack = new ArrayList();
                                                         break;
             case SAXUtilities.ANNOTATION            :   currentSegmentVector = new Annotation();
                                                         currentSegmentVector.setName(atts.getValue("name"));
@@ -130,7 +131,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         }
                                                         ts.setStart(atts.getValue("s"));
                                                         ts.setEnd(atts.getValue("e"));
-                                                        segmentStack.addElement(ts);
+                                                        segmentStack.add(ts);
                                                         break;
             case SAXUtilities.ATS                   :   AtomicTimedSegment ats = new AtomicTimedSegment();                                            
                                                         currentPCData = new String();
@@ -140,7 +141,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         }
                                                         ats.setStart(atts.getValue("s"));
                                                         ats.setEnd(atts.getValue("e"));
-                                                        segmentStack.addElement(ats);
+                                                        segmentStack.add(ats);
                                                         break;                                                        
             case SAXUtilities.NTS                   :   NonTimedSegment nts = new NonTimedSegment();                                            
                                                         currentPCData = new String();
@@ -148,7 +149,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         if (atts.getIndex("id")>=0){
                                                             nts.setID(atts.getValue("id"));
                                                         }
-                                                        segmentStack.addElement(nts);
+                                                        segmentStack.add(nts);
                                                         break;                                                        
             case SAXUtilities.TA                    :   currentTA = new TimedAnnotation();
                                                         currentPCData = new String();
@@ -195,8 +196,9 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
     }
 
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void endElement(String namespaceURI, String localName, String name){               
-        openElements.removeElementAt(openElements.size()-1);
+        openElements.remove(openElements.size()-1);
         int id = SAXUtilities.getIDForElementName(name);
         switch (id) {
             case SAXUtilities.UD_META_INFORMATION   :   transcription.getHead().getMetaInformation().setUDMetaInformation(currentUDInformation.makeCopy());
@@ -210,7 +212,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         break;
             case SAXUtilities.UD_INFORMATION        :   currentUDInformation.setAttribute(currentAttributeName,currentUDValue);
                                                         break;
-            case SAXUtilities.COMMENT               :   int id2 = SAXUtilities.getIDForElementName(((String)openElements.lastElement()));
+            case SAXUtilities.COMMENT               :   int id2 = SAXUtilities.getIDForElementName(((String)openElements.get(openElements.size()-1)));
                                                         if (id2 == SAXUtilities.META_INFORMATION){
                                                             transcription.getHead().getMetaInformation().setComment(currentPCData);
                                                         } else if (id2 == SAXUtilities.SPEAKER){
@@ -237,10 +239,12 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
             case SAXUtilities.TIMELINE_FORK          :  currentTier.addTimelineFork(currentTimelineFork);
                                                         break;
             case SAXUtilities.SEGMENTATION          :   currentTier.addElement(currentSegmentVector);
+                                                        System.out.println(currentSegmentVector.getName());
                                                         break;
             case SAXUtilities.ANNOTATION            :   currentTier.addElement(currentSegmentVector);
+                                                        System.out.println(currentSegmentVector.getName());
                                                         break;
-            case SAXUtilities.TS                    :   TimedSegment ts = ((TimedSegment)(segmentStack.lastElement()));
+            case SAXUtilities.TS                    :   TimedSegment ts = ((TimedSegment)(segmentStack.get(segmentStack.size()-1)));
                                                         if (currentPCData.length()>0){
                                                             ts.setDescription(currentPCData);
                                                         }
@@ -248,32 +252,32 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         int stackSize = segmentStack.size();
                                                         if (stackSize==1){
                                                             ((Segmentation)currentSegmentVector).addSegment(ts);
-                                                        } else if (segmentStack.elementAt(stackSize-2) instanceof TimedSegment){
-                                                            ((TimedSegment)(segmentStack.elementAt(stackSize-2))).add(ts);
+                                                        } else if (segmentStack.get(stackSize-2) instanceof TimedSegment){
+                                                            ((TimedSegment)(segmentStack.get(stackSize-2))).add(ts);
                                                         }
-                                                        segmentStack.removeElementAt(stackSize-1);
+                                                        segmentStack.remove(stackSize-1);
                                                         break;
-            case SAXUtilities.ATS                    :  AtomicTimedSegment ats = ((AtomicTimedSegment)(segmentStack.lastElement()));
+            case SAXUtilities.ATS                    :  AtomicTimedSegment ats = ((AtomicTimedSegment)(segmentStack.get(segmentStack.size()-1)));
                                                         ats.setDescription(currentPCData);
                                                         currentPCData = new String();
                                                         int stackSize2 = segmentStack.size();
                                                         if (stackSize2==1){
                                                             ((Segmentation)currentSegmentVector).addSegment(ats);
-                                                        } else if (segmentStack.elementAt(stackSize2-2) instanceof TimedSegment){
-                                                            ((TimedSegment)(segmentStack.elementAt(stackSize2-2))).add(ats);
+                                                        } else if (segmentStack.get(stackSize2-2) instanceof TimedSegment){
+                                                            ((TimedSegment)(segmentStack.get(stackSize2-2))).add(ats);
                                                         }
-                                                        segmentStack.removeElementAt(stackSize2-1);
+                                                        segmentStack.remove(stackSize2-1);
                                                         break;
-            case SAXUtilities.NTS                    :  NonTimedSegment nts = ((NonTimedSegment)(segmentStack.lastElement()));
+            case SAXUtilities.NTS                    :  NonTimedSegment nts = ((NonTimedSegment)(segmentStack.get(segmentStack.size()-1)));
                                                         nts.setDescription(currentPCData);
                                                         currentPCData = new String();
                                                         int stackSize3 = segmentStack.size();
                                                         if (stackSize3==1){
                                                             // this is an error!!
-                                                        } else if (segmentStack.elementAt(stackSize3-2) instanceof TimedSegment){
-                                                            ((TimedSegment)(segmentStack.elementAt(stackSize3-2))).add(nts);
+                                                        } else if (segmentStack.get(stackSize3-2) instanceof TimedSegment){
+                                                            ((TimedSegment)(segmentStack.get(stackSize3-2))).add(nts);
                                                         }
-                                                        segmentStack.removeElementAt(stackSize3-1);
+                                                        segmentStack.remove(stackSize3-1);
                                                         break;
             case SAXUtilities.TA                    :   currentTA.setDescription(currentPCData);
                                                         currentPCData = new String();
@@ -282,14 +286,15 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
         }           
     }
         
+    @Override
     public void characters (char buff[], int offset, int length){
-        StringBuffer newData = new StringBuffer();
+        StringBuilder newData = new StringBuilder();
         for (int pos=offset; pos<offset+length; pos++){
             if ((buff[pos]!='\n') && (buff[pos]!='\t')){
                 newData.append(buff[pos]); //ignore newline and tabs
             }
         }
-        int id = SAXUtilities.getIDForElementName(((String)openElements.lastElement()));
+        int id = SAXUtilities.getIDForElementName(((String)openElements.get(openElements.size()-1)));
         if (id==SAXUtilities.UD_INFORMATION){
             currentUDValue+=newData.substring(0);
         } else {
@@ -298,6 +303,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
     } // end characters
             
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void error (SAXParseException e) throws SAXParseException {
         System.out.println("Error: " + e.getMessage());
         throw e;
@@ -306,11 +312,13 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
     
 
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void setDocumentLocator (Locator l){
     }
 
 
 // ----------------------------------------------------------------------------------------------------------- 
+    @Override
     public void ignorableWhitespace (char buf [], int offset, int len)
     throws SAXException {
         // do nothing

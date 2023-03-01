@@ -330,15 +330,15 @@ public class NormalizedFolkerTranscription {
             
             Element normElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='norm']");
             if (normElement!=null){
-                normAnnotations.get(speaker).addContent(normElement.detach());
+                normAnnotations.get(speaker).addContent(normElement.removeContent());
             }
             Element lemmaElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='lemma']");
             if (lemmaElement!=null){
-                lemmaAnnotations.get(speaker).addContent(lemmaElement.detach());
+                lemmaAnnotations.get(speaker).addContent(lemmaElement.removeContent());
             }
             Element posElement = (Element) XPath.selectSingleNode(transformResultDocument, "//annotation[@name='pos']");
             if (posElement!=null){
-                posAnnotations.get(speaker).addContent(posElement.detach());
+                posAnnotations.get(speaker).addContent(posElement.removeContent());
             }
         }
         
@@ -356,6 +356,7 @@ public class NormalizedFolkerTranscription {
         File tempFile = File.createTempFile("Seg", ".exs");
         tempFile.deleteOnExit();
         FileIO.writeDocumentToLocalFile(tempFile, segmentedDoc);
+        //FileIO.writeDocumentToLocalFile(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_24_ISSUE_313\\FOLK_MEET_03_A01_MASK_TAGGED_TEST_INTERM.exs"), segmentedDoc);
         SegmentedTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader();
         SegmentedTranscription result = reader.readFromFile(tempFile.getAbsolutePath());    
         return result;

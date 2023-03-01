@@ -26,7 +26,9 @@ public class SegmentedTranscriptionSaxReader {
     public SegmentedTranscriptionSaxReader() {
     }
     
-    /** reads transcription from XML file and returns it */
+    /** reads transcription from XML file and returns it
+     * @param inputFileName
+     * @throws org.xml.sax.SAXException */
     public SegmentedTranscription readFromFile(String inputFileName) throws SAXException {
         // Create a JAXP SAXParserFactory and configure it
         try{
