@@ -47,8 +47,10 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         this.wordElement = wordElement;
         this.parent = parent;
         
-        wordLabel.setText(wordElement.getText());
-        normalizedWord = wordElement.getText();
+        //wordLabel.setText(wordElement.getText());
+        // 01-03-2023 changed for issue #340
+        wordLabel.setText(wordElement.getText().replaceAll("\\s", ""));
+        normalizedWord = wordElement.getText().replaceAll("\\s", "");
         if (wordElement.getAttribute("n")!=null){
             normalizedWord = wordElement.getAttributeValue("n");
         }

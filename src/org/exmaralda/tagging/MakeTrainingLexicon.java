@@ -81,7 +81,8 @@ public class MakeTrainingLexicon {
                 Element token = (Element)o;
                 String n = token.getAttributeValue("n");
                 if (n==null){
-                    n = WordUtilities.getWordText(token);
+                    // 01-03-2023, issue #340
+                    n = WordUtilities.getWordText(token, true);
                 }
                 String pos = token.getAttributeValue("pos");
                 String lemma = token.getAttributeValue("lemma");

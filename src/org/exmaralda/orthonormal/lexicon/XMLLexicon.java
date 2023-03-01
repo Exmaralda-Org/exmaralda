@@ -148,7 +148,8 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
             Element w = (Element)o;
             // <w id="w67" n="frage">frag</w>
             String wordID = w.getAttributeValue("id");
-            String form = WordUtilities.getWordText(w);
+            // 01-03-2023, issue #340
+            String form = WordUtilities.getWordText(w, true);
             String lemma = form;
             if (w.getAttribute("n")!=null){
                   lemma = w.getAttributeValue("n");

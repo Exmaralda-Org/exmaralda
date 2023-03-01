@@ -46,7 +46,8 @@ public class MatchListTableModel extends AbstractTableModel {
             Element matchToken = (Element) XPath.selectSingleNode(match, "descendant::w[@id='" + matchID + "']");
             switch(columnIndex){
                 case 0 : 
-                    return WordUtilities.getWordText(matchToken);
+                    // 01-03-2023, issue #340
+                    return WordUtilities.getWordText(matchToken, true);
                 case 1 :     
                     String n = matchToken.getAttributeValue("n");
                     if (n!=null) return n;

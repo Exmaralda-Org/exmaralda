@@ -58,7 +58,8 @@ public class AutoNormalizer {
         
         while (i.hasNext()){
             Element word = (Element)(i.next());
-            String wordText = WordUtilities.getWordText(word);
+            // 01-03-2023, issue #340
+            String wordText = WordUtilities.getWordText(word, true);
             if (normalizationMap.containsKey(wordText)){
                 word.setAttribute(attributeName, normalizationMap.get(wordText));
             }
@@ -79,7 +80,8 @@ public class AutoNormalizer {
         int count=0;
         while (i.hasNext()){
             Element word = (Element)(i.next());
-            String wordText = WordUtilities.getWordText(word);
+            // 01-03-2023, issue #340
+            String wordText = WordUtilities.getWordText(word, true);
             //System.out.println("Looking up " + wordText);
             //System.out.println("??? " + wordText);
             if (word.getAttribute(attributeName)==null || OVERWRITE_EXISTING){

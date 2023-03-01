@@ -316,18 +316,19 @@ public final class ApplicationControl implements  ListSelectionListener,
             ex.printStackTrace();
             displayException(ex);
         }
-        return new Vector<String>();
+        return new Vector<>();
     }
 
     public List<String> queryLexicon(Element[] wordElements){
-        HashSet<String> forms = new HashSet<String>();
+        HashSet<String> forms = new HashSet<>();
         for (Element word : wordElements){
             // changed 17-06-2021 : issue #271
             // forms.add(word.getText());
-            forms.add(WordUtilities.getWordText(word));
-            System.out.println("FORM: " + WordUtilities.getWordText(word));
+            // changed 01-03-2023 : isse #340
+            forms.add(WordUtilities.getWordText(word, true));
+            //System.out.println("FORM: " + WordUtilities.getWordText(word));
         }
-        Vector<String> result = new Vector<String>();
+        Vector<String> result = new Vector<>();
         for (String form : forms){
             try {
                 result.addAll(lexicon.getCandidateForms(form));
@@ -1358,14 +1359,16 @@ public final class ApplicationControl implements  ListSelectionListener,
                 dialog.setVisible(true);
                 if (!dialog.escaped){
                     String normalizedForm = dialog.getNormalizedForm();
-                    String newWordForm = WordUtilities.getWordText(dialog.getWordElement());
+                    // 01-03-2023, issue #340
+                    String newWordForm = WordUtilities.getWordText(dialog.getWordElement(), true);
                     
                     for (int row : applicationFrame.wordTable.getSelectedRows()){
                         int mRow = applicationFrame.wordTable.convertRowIndexToModel(row);
                         Element thisWordElement = (Element) wordListTableModel.getValueAt(mRow,0);
                         // changed 03-09-2014
                         //String form = thisWordElement.getText();
-                        String form = WordUtilities.getWordText(thisWordElement);
+                        // 01-03-2023, issue #340
+                        String form = WordUtilities.getWordText(thisWordElement, true);
                         
                         String lemma = form;
                         if (!(normalizedForm.equals(form))){
@@ -1601,21 +1604,23 @@ public final class ApplicationControl implements  ListSelectionListener,
             // changed 20-01-2014            
             EventListTranscription elt = Contribution.getTranscriptionForContributionFromOrthoNormalDocument(getTranscription().getDocument(), firstSelectedRow);
             //System.out.println("2: " + IOUtilities.elementToString(elt.getContributionAt(0).toJDOMElement(elt.getTimeline())));
-            HashMap<String,String> originalNormalizations = new HashMap<String, String>();
+            HashMap<String,String> originalNormalizations = new HashMap<>();
             List l1 = XPath.selectNodes(originalContributionElement, "descendant::w[@n]");
             for (Object o : l1){
                 Element w = (Element)o;
-                String word = WordUtilities.getWordText(w);
+                // 01-03-2023, issue #340
+                String word = WordUtilities.getWordText(w, true);
                 String normalization = w.getAttributeValue("n");
                 originalNormalizations.put(word, normalization);
             }
 
-            HashMap<String,String> originalLemmas = new HashMap<String, String>();
-            HashMap<String,String> originalPOS = new HashMap<String, String>();
+            HashMap<String,String> originalLemmas = new HashMap<>();
+            HashMap<String,String> originalPOS = new HashMap<>();
             List l2 = XPath.selectNodes(originalContributionElement, "descendant::w[@lemma and @pos]");
             for (Object o : l2){
                 Element w = (Element)o;
-                String word = WordUtilities.getWordText(w);
+                // 01-03-2023, issue #340
+                String word = WordUtilities.getWordText(w, true);
                 String lemma = w.getAttributeValue("lemma");
                 String pos = w.getAttributeValue("pos");
                 originalLemmas.put(word, lemma);
@@ -1709,7 +1714,8 @@ public final class ApplicationControl implements  ListSelectionListener,
             if (!originalLemmas.isEmpty()){
                 for (Object o : l){
                     Element w = (Element)o;
-                    String word = WordUtilities.getWordText(w);
+                    // 01-03-2023, issue #340
+                    String word = WordUtilities.getWordText(w, true);
                     if (originalLemmas.containsKey(word)){
                         w.setAttribute("lemma", originalLemmas.get(word));
                     } else {

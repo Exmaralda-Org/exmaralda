@@ -63,6 +63,7 @@ public class NormalizedFolkerTranscription {
         this.xmlDocument = xmlDocument;
         documentId = xmlDocument.getRootElement().getAttributeValue("id");
         index();
+        // issue 
         if (removeIdentical){
             removeIdentical();
         }
@@ -154,7 +155,7 @@ public class NormalizedFolkerTranscription {
         wordMappings = new HashMap<>();
         wordIDs = new HashSet<>();
         for (Element contribution : contributions){
-            ArrayList<Element> wordVector = new ArrayList<Element>();
+            ArrayList<Element> wordVector = new ArrayList<>();
             Iterator i = contribution.getDescendants(new ElementFilter("w"));
             while (i.hasNext()){
                 Element word = (Element)(i.next());
@@ -166,7 +167,7 @@ public class NormalizedFolkerTranscription {
     }
     
     public void reindexContribution(Element contribution){
-            ArrayList<Element> wordVector = new ArrayList<Element>();
+            ArrayList<Element> wordVector = new ArrayList<>();
             Iterator i = contribution.getDescendants(new ElementFilter("w"));
             while (i.hasNext()){
                 Element word = (Element)(i.next());
@@ -189,7 +190,8 @@ public class NormalizedFolkerTranscription {
         List<Element> l = this.getWords();
         for (Element w : l){
             Attribute n = w.getAttribute("n");
-            if ((n!=null) && (n.getValue().equals(WordUtilities.getWordText(w)))){
+            // 01-03-2023, issue #340
+            if ((n!=null) && (n.getValue().equals(WordUtilities.getWordText(w, true)))){
                 w.removeAttribute(n);
             }
         }

@@ -104,7 +104,8 @@ public class Aligner {
         List l = XPath.newInstance("descendant::w").selectNodes(c);
         for (Object o : l){
             Element w = (Element)o;
-            result+=WordUtilities.getWordText(w) + " ";
+            // 01-03-2023, issue #340
+            result+=WordUtilities.getWordText(w, true) + " ";
         }
         
         return result;

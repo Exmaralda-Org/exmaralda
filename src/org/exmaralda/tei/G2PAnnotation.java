@@ -74,7 +74,8 @@ public class G2PAnnotation {
                 String originalText = "";
                 for (Object o2 : l2){
                     Element wElement = (Element)o2;
-                    originalText+=WordUtilities.getWordText(wElement) + "\n";
+                    // 01-03-2023, issue #340
+                    originalText+=WordUtilities.getWordText(wElement, true) + "\n";
                 }
                 File tempInputFile = File.createTempFile("G2P", ".txt");
                 Writer out = new BufferedWriter(new OutputStreamWriter(
@@ -89,7 +90,7 @@ public class G2PAnnotation {
                 int countLines = 0;
                 for (Object o2 : l2){
                     Element wElement = (Element)o2;
-                    originalText+=WordUtilities.getWordText(wElement) + "\n";
+                    originalText+=WordUtilities.getWordText(wElement, true) + "\n";
                     String line = lines[countLines];
                     String[] bits = line.split(";");
                     String pho = bits[1].replaceAll(" ", "");

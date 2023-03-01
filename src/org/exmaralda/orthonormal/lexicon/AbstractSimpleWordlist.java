@@ -28,7 +28,8 @@ public class AbstractSimpleWordlist {
         int count = 0;
         while (i.hasNext()) {
             Element word = (Element) (i.next());
-            String wordText = WordUtilities.getWordText(word);
+            // 01-03-2023, issue #340
+            String wordText = WordUtilities.getWordText(word, true);
             if (allWords.contains(wordText)) {
                 word.setAttribute("i", "y");
             } else {

@@ -56,7 +56,8 @@ public class Evaluate {
            int countIdeolect = 0;
            for (Object o : normalizedWords){
                Element w = (Element)o;
-               String wordText = WordUtilities.getWordText(w);
+                // 01-03-2023, issue #340
+               String wordText = WordUtilities.getWordText(w, true);
                String normalization = w.getAttributeValue("n");
                if (normalization.contains(" ")) countOneToMany++;
                if (normalization.contains("#")) countNonLexicalised++;

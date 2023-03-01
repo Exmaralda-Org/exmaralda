@@ -38,7 +38,8 @@ class PostProcessingRule {
     public int apply(Element word){
         String textToBeMatched = "";
         if ("word".equals(matchField)){
-            textToBeMatched = WordUtilities.getWordText(word);
+            // 01-03-2023, issue #340
+            textToBeMatched = WordUtilities.getWordText(word, true);
             if (textToBeMatched!=null && textToBeMatched.matches(matchRegex)){
                 word.setAttribute(setField, setString);
                 return 1;
@@ -51,7 +52,8 @@ class PostProcessingRule {
                 if (word.getAttribute("n")!=null){
                     textToBeMatched = word.getAttributeValue(matchField);     
                 } else {
-                    textToBeMatched = WordUtilities.getWordText(word);                
+                    // 01-03-2023, issue #340
+                    textToBeMatched = WordUtilities.getWordText(word, true);                
                 }
             } else {
                 textToBeMatched = word.getAttributeValue(matchField);            
@@ -102,7 +104,8 @@ class PostProcessingRule {
         }
         String textToBeMatched = "";
         if ("word".equals(matchField)){
-            textToBeMatched = WordUtilities.getWordText(word);
+            // 01-03-2023, issue #340
+            textToBeMatched = WordUtilities.getWordText(word, true);
             if (textToBeMatched!=null && textToBeMatched.matches(matchRegex)){
                 word.setAttribute(setField, setString);
                 return 1;
@@ -115,7 +118,8 @@ class PostProcessingRule {
                 if (word.getAttribute("norm")!=null){
                     textToBeMatched = word.getAttributeValue("norm");     
                 } else {
-                    textToBeMatched = WordUtilities.getWordText(word);                
+                    // 01-03-2023, issue #340
+                    textToBeMatched = WordUtilities.getWordText(word, true);                
                 }
             } else {
                 textToBeMatched = word.getAttributeValue("norm");            

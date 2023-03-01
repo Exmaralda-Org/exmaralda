@@ -29,12 +29,22 @@ public class WordUtilities {
     };
 
     public static String getWordText(Element wordElement){        
+        return getWordText(wordElement, false);
+    }
+    
+    // 01-03-2023: added stripSpace because of issue #340
+    public static String getWordText(Element wordElement, boolean stripSpace){        
         Iterator i = wordElement.getDescendants(textFilter);
         StringBuilder result = new StringBuilder();
         while (i.hasNext()){
             result.append(((org.jdom.Text)(i.next())).getText());
         }
-        return result.toString();
+        if (!(stripSpace)){
+            return result.toString();
+        } else {
+            return result.toString().replaceAll("\\s", "");
+        }
+            
     }    
 
     public static String getLiteralWordText(Element wordElement){        

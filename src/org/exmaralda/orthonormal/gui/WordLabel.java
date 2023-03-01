@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.orthonormal.lexicon.LexiconException;
-import org.exmaralda.orthonormal.lexicon.SimpleXMLFileLexicon;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
 import org.jdom.Element;
 import org.jdom.filter.AbstractFilter;
@@ -65,7 +64,10 @@ public class WordLabel extends JLabel implements MouseListener {
         while (i.hasNext()){
             result.append(((org.jdom.Text)(i.next())).getText());
         }
-        return result.toString();
+        //return result.toString();
+        // 01-03-2023 changed for #340
+        return result.toString().replaceAll("\\s", "");
+        
     }
 
     void setWord(boolean lexiconUpdateNecessary){
@@ -258,7 +260,8 @@ public class WordLabel extends JLabel implements MouseListener {
                     wordElement, 
                     //applicationControl.queryLexicon(wordElement.getText())
                     // changed 17-06-2021 : issue #271
-                    applicationControl.queryLexicon(WordUtilities.getWordText(wordElement))
+                    // 01-03-2023, issue #340                    
+                    applicationControl.queryLexicon(WordUtilities.getWordText(wordElement, true))
             );
             Point p = this.getLocationOnScreen();
             p.translate(0, -dialog.getHeight());

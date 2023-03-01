@@ -98,7 +98,8 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
                    if (normalizedForm==null){
                        //result.add(e.getText());                       
                        // changed 03-02-2015
-                       result.add(WordUtilities.getWordText(e));
+                        // 01-03-2023, issue #340
+                       result.add(WordUtilities.getWordText(e, true));
                    } else {
                        //String[] tokens = normalizedForm.split(" ");
                        // change 07/11/2014: trim before splitting, causes problems otherwise
@@ -108,7 +109,8 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
                 } else {
                     //result.add(e.getText());
                     // changed 03-02-2015
-                    result.add(WordUtilities.getWordText(e));
+                    // 01-03-2023, issue #340
+                    result.add(WordUtilities.getWordText(e, true));
                 }
                     
             }

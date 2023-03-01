@@ -108,7 +108,8 @@ public class MatchListCellRenderer extends javax.swing.DefaultListCellRenderer {
             String matchID = element.getAttributeValue("match");
             String result = "";
             Element w = (Element) XPath.selectSingleNode(element, "descendant::w[@id='" + matchID + "']");
-            result+=WordUtilities.getWordText(w) + " ";
+            // 01-03-2023, issue #340
+            result+=WordUtilities.getWordText(w, true) + " ";
             return result;
         } catch (JDOMException ex) {
             Logger.getLogger(MatchListCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,7 +125,8 @@ public class MatchListCellRenderer extends javax.swing.DefaultListCellRenderer {
             for (Object o : l){
                 Element w = (Element)o;
                 if (w.getAttributeValue("id").equals(matchID)) break;
-                result+=WordUtilities.getWordText(w) + " ";
+                // 01-03-2023, issue #340
+                result+=WordUtilities.getWordText(w, true) + " ";
             }
             if (result.length()>30){
                 result = "..." + result.substring(result.length()-30);
@@ -146,7 +148,8 @@ public class MatchListCellRenderer extends javax.swing.DefaultListCellRenderer {
             for (Object o : l){
                 Element w = (Element)o;
                 if (in){
-                    result+=WordUtilities.getWordText(w) + " ";
+                    // 01-03-2023, issue #340
+                    result+=WordUtilities.getWordText(w, true) + " ";
                 }
                 in = in || w.getAttributeValue("id").equals(matchID);
             }

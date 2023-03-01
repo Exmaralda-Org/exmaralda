@@ -32,7 +32,9 @@ public class WordListTableCellRenderer extends javax.swing.table.DefaultTableCel
         while (i.hasNext()){
             result.append(((org.jdom.Text)(i.next())).getText());
         }
-        return result.toString();
+        //return result.toString();
+        // 01-03-2023 changed for #340
+        return result.toString().replaceAll("\\s", "");
     }
 
     @Override
