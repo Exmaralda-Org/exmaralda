@@ -156,7 +156,9 @@
             <xsl:attribute name="s" select="exmaralda:getStart(current())"/>
             <xsl:attribute name="e" select="exmaralda:getEnd(current())"/>
             <!-- <xsl:value-of select="text()"/> -->
-            <xsl:value-of select="normalize-space(text())"/>
+            <!-- <xsl:value-of select="normalize-space(text())"/> -->
+            <!-- changed 01-03-2023 : issue #328 -->
+            <xsl:value-of select="exmaralda:getWordText(.)"/>
         </ts>        
         <xsl:if test="not(following-sibling::*[1][self::p])">
             <nts n="cGAT:p">
@@ -165,6 +167,14 @@
             </nts>            
         </xsl:if>
     </xsl:template>
+    
+    <!-- added 01-03-2023 : issue #328 -->
+    <xsl:function name="exmaralda:getWordText">
+        <xsl:param name="ELEMENT"/>
+        <xsl:for-each select="$ELEMENT/descendant::text()">
+            <xsl:value-of select="normalize-space()"/>
+        </xsl:for-each>        
+    </xsl:function>
     
     <xsl:template match="pause" mode="TRANSCRIPTION">
         <!-- <pause duration="micro"/> -->
