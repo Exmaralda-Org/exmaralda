@@ -75,7 +75,7 @@ public class TestRoundtrip {
     private void doit() throws SAXException, JexmaraldaException, FSMException, JDOMException, XSLTransformException, IOException, ParserConfigurationException, TransformerException {
         
         reRead(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_03_04_ISSUE_375\\DNAM_E_00003_SE_01_T_01_DF_01.xml"));
-        System.exit(0);
+        //System.exit(0);
         
         
         TEIConverter teiConverter = new TEIConverter();

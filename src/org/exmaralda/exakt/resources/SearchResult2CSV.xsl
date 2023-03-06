@@ -13,7 +13,7 @@
     </xsl:variable>
     
     <xsl:template match="/">
-        <xsl:value-of select="$base-fields"/>
+        <!-- <xsl:value-of select="$base-fields"/> -->
         
         <!-- first line of CSV - keys -->
         <xsl:value-of select="string-join(($base-fields, $meta-fields, $analysis-fields), ',')"/>
@@ -32,7 +32,7 @@
                     <xsl:when test="string-length($LEFT_CONTEXT) &gt; 0"><xsl:value-of select="$LEFT_CONTEXT"/></xsl:when>
                     <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
                 </xsl:choose>
-            </xsl:variable> select="concat(substring(left-context,string-length(left-context)-40), ' ')"
+            </xsl:variable> 
             <xsl:variable name="RIGHT_CONTEXT" select="substring(right-context,1,40)"/>
             <xsl:variable name="RIGHT_CONTEXT_FIX">
                 <xsl:choose>

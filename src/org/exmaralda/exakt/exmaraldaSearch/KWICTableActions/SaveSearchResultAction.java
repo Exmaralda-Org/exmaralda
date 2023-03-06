@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import java.util.prefs.Preferences;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -27,6 +28,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.exmaralda.common.helpers.XMLFormatter;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -98,7 +100,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                         searchResultString = ssf.applyExternalStylesheetToString(pathToXSL, searchResultString);
                         
                         //transformer = new XSLTransformer(pathToXSL);
-                    } catch (Exception ex) {
+                    } catch (IOException | ParserConfigurationException | TransformerException | SAXException ex) {
                         String message = "There is a problem with " + pathToXSL + ": \n";
                         message += ex.getMessage() + "\n";
                         message += "Using default stylesheet instead.";
