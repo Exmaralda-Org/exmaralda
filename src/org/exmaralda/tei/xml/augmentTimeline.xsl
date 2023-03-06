@@ -6,11 +6,15 @@
     version="2.0">
        
     
+   
+    
     <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
+    
+   
     
     <xsl:template match="tei:when">
         <xsl:copy>

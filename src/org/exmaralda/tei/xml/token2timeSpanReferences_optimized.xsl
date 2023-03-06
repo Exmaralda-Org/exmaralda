@@ -64,10 +64,10 @@
         <!-- the current value of the from attribute -->
         <xsl:variable name="FROM_SOURCE" select="substring-after(@from, $XPOINTER_HASH)"/>
         <!-- get the corresponding anchor -->
-        <xsl:variable name="FROM_TARGET" select="$TOKEN_TIME_MAP/*/token[@id=$FROM_SOURCE]/@synch-before"/>
+        <xsl:variable name="FROM_TARGET" select="$TOKEN_TIME_MAP/*/token[@id=$FROM_SOURCE][1]/@synch-before"/>
         
         <xsl:variable name="TO_SOURCE" select="substring-after(@to, $XPOINTER_HASH)"/>        
-        <xsl:variable name="TO_TARGET" select="$TOKEN_TIME_MAP/*/token[@id=$TO_SOURCE]/@synch-after"/>
+        <xsl:variable name="TO_TARGET" select="$TOKEN_TIME_MAP/*/token[@id=$TO_SOURCE][1]/@synch-after"/>
         
         
         <xsl:copy>

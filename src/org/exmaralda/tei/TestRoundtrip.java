@@ -6,6 +6,13 @@ package org.exmaralda.tei;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,19 +22,15 @@ import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.jexmaralda.convert.ConverterEvent;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_0_NORMALIZE;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_1_ATTRIBUTES2SPANS_XSL;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_1b_AUGMENTTIMELINE_XSL;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_2_TOKEN2TIMEREFS_XSL;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_2b_REMOVE_TIMEPOINTS_XSL;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL;
-import static org.exmaralda.partitureditor.jexmaralda.convert.TEIConverter.ISOTEI2EXMARaLDA_4_TRANSFORM_XSL;
+import org.jdom.Attribute;
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.transform.XSLTransformException;
+import org.jdom.xpath.XPath;
 import org.xml.sax.SAXException;
 
 /**
@@ -70,6 +73,11 @@ public class TestRoundtrip {
 
 
     private void doit() throws SAXException, JexmaraldaException, FSMException, JDOMException, XSLTransformException, IOException, ParserConfigurationException, TransformerException {
+        
+        reRead(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_03_04_ISSUE_375\\DNAM_E_00003_SE_01_T_01_DF_01.xml"));
+        System.exit(0);
+        
+        
         TEIConverter teiConverter = new TEIConverter();
         
         String[] HIAT_FILES = {
@@ -165,7 +173,8 @@ public class TestRoundtrip {
             FileIO.writeDocumentToLocalFile(new File(exportedFile.getParentFile(), "4_" + nakedFilename + "_TOKEN2TIMEREFS.xml"), IOUtilities.readDocumentFromString(transform2));
 
             // new 10-03-2021
-            String transform2_b = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2b_REMOVE_TIMEPOINTS_XSL, transform2);
+            //String transform2_b = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2b_REMOVE_TIMEPOINTS_XSL, transform2);
+            String transform2_b = removeTimepoints(transform2);
             FileIO.writeDocumentToLocalFile(new File(exportedFile.getParentFile(), "5_" + nakedFilename + "_REMOVE_TIMEPOINTS.xml"), IOUtilities.readDocumentFromString(transform2_b));
             
             String transform2_c = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2c_DESEGMENT_XSL, transform2_b);
@@ -188,5 +197,98 @@ public class TestRoundtrip {
             bt.BasicTranscriptionFromString(exbString);
         
     }
+    
+    private String removeTimepoints(String in) throws SAXException, ParserConfigurationException, IOException, TransformerException, JDOMException {
+        
+        // THAT WAS THE OLD WAY
+        /*StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString(ISOTEI2EXMARaLDA_2b_REMOVE_TIMEPOINTS_XSL, in);
+        return result;*/
+        
+        System.out.println("Started");
+        
+        Document inDoc = IOUtilities.readDocumentFromString(in);
+        
+        Set<String> referredIDs = new HashSet<>();
+        List l1 = XPath.selectNodes(inDoc, "//@*[name()='start' or name()='end' or name()='from' or name()='to' or name()='corresp']");
+        for (Object o : l1){
+            Attribute a = (Attribute)o;
+            String value = a.getValue();
+            referredIDs.addAll(Arrays.asList(value.split(" ")));
+        }
+        
+        System.out.println("Referred IDs finished");
+
+        Map<String,Integer> anchorCounts = new HashMap<>();
+        XPath anchorXPath = XPath.newInstance("//tei:anchor"); 
+        anchorXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        List anchors = anchorXPath.selectNodes(inDoc);
+        for (Object o : anchors){
+            Element anchor = (Element)o;
+            String synch = anchor.getAttributeValue("synch");
+            if (!(anchorCounts.containsKey(synch))){
+                anchorCounts.put(synch, 0);
+            }
+            anchorCounts.put(synch, anchorCounts.get(synch) + 1);
+        }
+        
+        System.out.println("Anchor counts finished");
+
+        XPath timelineXPath = XPath.newInstance("//tei:timeline"); 
+        timelineXPath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        Element timeline = (Element)(timelineXPath.selectSingleNode(inDoc));
+        Set<String> sinces = new HashSet<>();
+        Set<String> remaining = new HashSet<>();
+        List l2 = timeline.getChildren();
+        List<Element> toBeDetached = new ArrayList<>();
+        for (Object o : l2){
+            Element whenElement = (Element)o;
+            String id = whenElement.getAttributeValue("id", Namespace.XML_NAMESPACE);
+            if (whenElement.getAttribute("since")!=null) {
+                sinces.add(whenElement.getAttributeValue("since"));
+                remaining.add(id);
+                continue;
+            }
+            if (whenElement.getAttribute("interval")!=null) {
+                remaining.add(id);
+                continue;
+            }
+            if (anchorCounts.containsKey(id) && anchorCounts.get(id) > 1) {
+                remaining.add(id);
+                continue;
+            }
+            if (referredIDs.contains(id)) {
+                remaining.add(id);
+                continue;
+            }
+            if (sinces.contains(id)) {
+                remaining.add(id);
+                continue;
+            }
+            
+            toBeDetached.add(whenElement);
+        }
+        
+        System.out.println("Timeline finished");
+        
+        for (Object o : anchors){
+            Element anchor = (Element)o;
+            String synch = anchor.getAttributeValue("synch");
+            if (remaining.contains(synch)) continue;
+            if (anchorCounts.containsKey(synch) && anchorCounts.get(synch) > 1) continue;
+            if (referredIDs.contains(synch)) continue;
+            
+            toBeDetached.add(anchor);
+        }        
+        
+        for (Element e : toBeDetached){
+            e.detach();
+        }
+        
+        
+        return IOUtilities.documentToString(inDoc);
+    }
+
+    
     
 }
