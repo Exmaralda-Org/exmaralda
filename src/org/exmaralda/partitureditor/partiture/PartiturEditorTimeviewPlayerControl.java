@@ -53,37 +53,34 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
         // TODO?
         // changed 11-02-2020
         super.processTimeSelectionEvent(event);
+        // possible place for issue #377
         super.moveTimepoints(event);
         if ((playerState==PLAYER_IDLE)){
-             if (player instanceof JDSPlayer){
-                JDSPlayer jmfp = (JDSPlayer)player;
+             if (player instanceof JDSPlayer jds){
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
+                    jds.updateVideo(selectionStart/1000.0);
                 } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
+                    jds.updateVideo(selectionEnd/1000.0);
                 }
-            } else if (player instanceof JavaFXPlayer){
-                JavaFXPlayer jmfp = (JavaFXPlayer)player;
+            } else if (player instanceof JavaFXPlayer jfx){
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
+                    jfx.updateVideo(selectionStart/1000.0);
                 } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
+                    jfx.updateVideo(selectionEnd/1000.0);
                 } 
-            } else if (player instanceof AVFPlayer){
-                AVFPlayer jmfp = (AVFPlayer)player;
+            } else if (player instanceof AVFPlayer avf){
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
+                    avf.updateVideo(selectionStart/1000.0);
                 } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
+                    avf.updateVideo(selectionEnd/1000.0);
                 }            
-            } else if (player instanceof MMFPlayer){
+            } else if (player instanceof MMFPlayer mmf){
                 //HEY HO BERND THE BUILDER!
-                //Timeview cursor update may cause problems?
-                MMFPlayer jmfp = (MMFPlayer)player;
+                 //Timeview cursor update may cause problems?
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
-                    jmfp.updateVideo(selectionStart/1000.0);
+                    mmf.updateVideo(selectionStart/1000.0);
                 } else {
-                    jmfp.updateVideo(selectionEnd/1000.0);
+                    mmf.updateVideo(selectionEnd/1000.0);
                 }
             } 
         }

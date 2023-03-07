@@ -574,6 +574,52 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                 partitur.sizeColumnWidth(col);
             }
         }
+        
+        // 07-03-2023: new for issue #377
+        if ((startPoint!=null) && (endPoint!=null)){
+            Timeline timeline = partitur.getModel().getTranscription().getBody().getCommonTimeline();
+            int position1 = timeline.lookupID(((TimelineItem)startPoint).getID());
+            int position2 = timeline.lookupID(((TimelineItem)endPoint).getID());
+            if (position2-position1 > 1){
+                // now do it: shift all times in between
+                System.out.println("#377 : shifting times");
+                double minTime = ((TimelineItem)startPoint).getTime();
+                double maxTime = ((TimelineItem)endPoint).getTime();
+                double duration = (maxTime - minTime) / (position2 - position1);
+                for (int pos=position1+1; pos<position2; pos++){
+                    TimelineItem thisTLI = timeline.getTimelineItemAt(pos);
+                    if (thisTLI.getTime()<=minTime){
+                        double newTime = minTime + duration;
+                        thisTLI.setTime(newTime);
+                        minTime = newTime;
+                    } else {
+                        //we're fine
+                        break;
+                    }
+                }
+                for (int pos=position2-1; pos>position1; pos--){
+                    TimelineItem thisTLI = timeline.getTimelineItemAt(pos);
+                    if (thisTLI.getTime()>=maxTime){
+                        double newTime = maxTime - duration;
+                        thisTLI.setTime(newTime);
+                        maxTime = newTime;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            partitur.getModel().fireColumnLabelsChanged();
+            if (partitur.getModel().timeProportional){
+                for (int col=position1-1; col<position2; col++){
+                    if (col>0){
+                        partitur.sizeColumnWidth(col-1);
+                    }
+                    partitur.sizeColumnWidth(col);
+                }
+            }
+        }
+        
+        
         if ((partitur.undoEnabled) && (tli!=null) && ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED) || (event.getType()==TimeSelectionEvent.END_TIME_CHANGED))){
             // Undo information
             UndoInformation undoInfo = new UndoInformation(partitur, "Move timepoint");

@@ -183,7 +183,10 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
     
     /***************************/
     /* TIME <-> PIXEL METHODS **/
-    /***************************/       
+    /**
+     * @param pixel
+     * @return 
+     *************************/       
     
     public double getMilisecondForPixel(float pixel){
         if (this.soundDuration<=0) return -1;

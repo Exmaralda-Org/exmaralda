@@ -28,35 +28,38 @@ public class UDInformationHashtable extends Vector {
     // ********** CONSTRUCTORS ********************
     // ********************************************
 
-    private Hashtable values;
+    private Map<String, String> values;
     
     /** Creates new empty UDInformationHashtable */
     public UDInformationHashtable() {
         super();
-        values = new Hashtable();        
+        values = new HashMap<>();        
     }
     
-    /** Creates new UDInformationHashtable with the specified Attributes */
+    /** Creates new UDInformationHashtable with the specified Attributes
+     * @param attributeNames */
     public UDInformationHashtable(String[] attributeNames) {
         super();
-        values = new Hashtable();
-        for (int i=0; i<attributeNames.length; i++){
-            addElement(attributeNames[i]);
-            values.put(attributeNames[i],new String());
+        values = new HashMap<>();
+        for (String attributeName : attributeNames) {
+            addElement(attributeName);
+            values.put(attributeName, new String());
         }
     }
     
-    /** Creates new UDInformationHashtable with the attributes and values specified in udi*/
+    /** Creates new UDInformationHashtable with the attributes and values specified in ud
+     * @param udi */
     public UDInformationHashtable(String[][] udi){
         super();
-        values = new Hashtable();
+        values = new HashMap<>();
         for (int pos=0; pos<udi[0].length; pos++){
             addElement(udi[0][pos]); 
             values.put(udi[0][pos],udi[1][pos]);
        }        
     }
     
-    /** returns a copy of this UDInformationHashtable */
+    /** returns a copy of this UDInformationHashtable *
+     * @return */
     public UDInformationHashtable makeCopy(){
         UDInformationHashtable result = new UDInformationHashtable();
         for (int pos=0; pos<getNumberOfAttributes(); pos++){
@@ -65,6 +68,7 @@ public class UDInformationHashtable extends Vector {
         return result;    
     }
     
+    @Override
     public void clear(){
         super.clear();
         values.clear();
@@ -151,16 +155,18 @@ public class UDInformationHashtable extends Vector {
     // ********************************************
 
     /** returns a string corresponding to XML-elements &lt;ud-information&gt;
-     *  as specified in the corresponding dtds */
+     *  as specified in the corresponding dtds
+     * @return  */
     public String toXML(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String[] allAttributes = getAllAttributes();
         if (allAttributes!=null){
-            for (int i=0; i< allAttributes.length; i++){
+            for (String allAttribute : allAttributes) {
+                if (allAttribute.length()==0) continue;
                 sb.append("<ud-information attribute-name=\"");
-                sb.append(StringUtilities.toXMLString(allAttributes[i]));
+                sb.append(StringUtilities.toXMLString(allAttribute));
                 sb.append("\">");
-                sb.append(StringUtilities.checkCDATA(getValueOfAttribute(allAttributes[i])));
+                sb.append(StringUtilities.checkCDATA(getValueOfAttribute(allAttribute)));
                 sb.append("</ud-information>");            
             }
         }
@@ -173,13 +179,13 @@ public class UDInformationHashtable extends Vector {
     // ********************************************
     
     public String toRTF(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String[] allAttributes = getAllAttributes();
         if (allAttributes!=null){
             for (int i=0; i< allAttributes.length; i++){
                 //sb.append("{\\fs20\\tab\\b " + StringUtilities.toANSI(allAttributes[i]) + ": \\plain\\fs20 ");
                 // changed 01-02-2010: need to escape characters for RTF output
-                sb.append("{\\fs20\\tab\\b " + RTFUtilities.toEscapedRTFString(allAttributes[i]) + ": \\plain\\fs20 ");
+                sb.append("{\\fs20\\tab\\b ").append(RTFUtilities.toEscapedRTFString(allAttributes[i])).append(": \\plain\\fs20 ");
                 //sb.append(StringUtilities.toANSI(getValueOfAttribute(allAttributes[i])));
                 sb.append(RTFUtilities.toEscapedRTFString(getValueOfAttribute(allAttributes[i])));
                 sb.append("}\\par");

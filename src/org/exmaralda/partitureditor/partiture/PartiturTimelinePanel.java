@@ -454,6 +454,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         double s = event.getStartTime();
         double e = event.getEndTime();
         if ((s>=0) && (e>=0)){
+            // these are the labels above the waveform
             startTimeLabel.setText(TimeStringFormatter.formatMiliseconds(s, 2));
             endTimeLabel.setText(TimeStringFormatter.formatMiliseconds(e, 2));
             double duration = e-s;
