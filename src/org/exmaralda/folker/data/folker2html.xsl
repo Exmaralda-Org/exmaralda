@@ -117,7 +117,9 @@
     </xsl:template>
     
     <xsl:template match="w/text()" mode="transform-parsed-to-unparsed">
-        <xsl:value-of select="."/>
+            <!-- 08-03-2023: changed for issue # 340 -->
+            <!-- <xsl:value-of select="."/> -->
+            <xsl:value-of select="translate(.,' &#xD;&#xA;','')"/>
     </xsl:template>
     
     <xsl:template match="time" mode="transform-parsed-to-unparsed">

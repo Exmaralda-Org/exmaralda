@@ -7,6 +7,10 @@
     <!-- symbol for unintelligible is now + instead of * -->
 
     <xsl:output encoding="UTF-8" method="html"/>
+    
+    <!-- 08-03-2023: changed for issue # 340 -->
+    <xsl:strip-space elements="w"/>
+    
     <xsl:template match="/">
         <html>
             <body>
@@ -14,7 +18,9 @@
             </body>
         </html>
     </xsl:template>
+
     
+            
     
     <xsl:template match="contribution[not(unparsed) and not(segment)]">
         <xsl:variable name="transformed">
@@ -65,7 +71,9 @@
     
     <xsl:template match="w/text()" mode="transform-parsed-to-unparsed">
         <xsl:if test="string-length(normalize-space())&gt;0">
-            <xsl:value-of select="."/>
+            <!-- 08-03-2023: changed for issue # 340 -->
+            <!-- <xsl:value-of select="."/> -->
+            <xsl:value-of select="translate(.,' &#xD;&#xA;','')"/>
         </xsl:if>
     </xsl:template>
     

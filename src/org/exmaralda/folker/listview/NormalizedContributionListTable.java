@@ -30,7 +30,7 @@ public class NormalizedContributionListTable extends JTable  {
         setIntercellSpacing(new java.awt.Dimension(0, 2));
         setShowHorizontalLines(false);        
         //setSelectionMode(getSelectionModel().SINGLE_SELECTION);
-        setSelectionMode(getSelectionModel().SINGLE_SELECTION);
+        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setRowHeight(20);
 
     }        

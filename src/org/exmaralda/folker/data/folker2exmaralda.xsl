@@ -163,7 +163,9 @@
         <xsl:if test="string-length(normalize-space())&gt;0">
             <!-- <xsl:value-of select="."/> -->
             <!-- changed 08-02-2023, issue #340 -->
-            <xsl:value-of select="normalize-space(.)"/>
+            <!-- 08-03-2023: changed for issue # 340 -->
+            <!-- <xsl:value-of select="."/> -->
+            <xsl:value-of select="translate(.,' &#xD;&#xA;','')"/>
         </xsl:if>
     </xsl:template>
         

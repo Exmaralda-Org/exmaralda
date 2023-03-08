@@ -15,16 +15,20 @@ package org.exmaralda.folker.listview;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.io.IOException;
 import javax.swing.text.html.HTMLEditorKit;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.jdom.Element;
+import org.xml.sax.SAXException;
 
 //public class NormalizedContributionTableCellRenderer extends JTextArea implements TableCellRenderer {
 public class NormalizedContributionTableCellRenderer extends JEditorPane implements TableCellRenderer {
   
     private final DefaultTableCellRenderer adaptee =  new DefaultTableCellRenderer();
-    private int ADDITIONAL_HEIGHT = 5;
+    private final int ADDITIONAL_HEIGHT = 5;
     StylesheetFactory ssf = new StylesheetFactory(true);
     String XSL_PATH = "/org/exmaralda/folker/data/parsedContribution2Text.xsl";
 
@@ -61,8 +65,8 @@ public class NormalizedContributionTableCellRenderer extends JEditorPane impleme
         try {
             celltext = ssf.applyInternalStylesheetToString(XSL_PATH, IOUtilities.elementToString(element));
             //System.out.println(celltext);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (IOException | ParserConfigurationException | TransformerException | SAXException ex) {
+            System.out.println(ex.getMessage());
         }
 
         // set the colours, etc. using the standard for that platform
