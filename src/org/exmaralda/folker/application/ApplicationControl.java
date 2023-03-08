@@ -2756,7 +2756,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
 
     @Override
     public void componentResized(ComponentEvent e) {        
-        // #378
+        // #378 
         if (applicationFrame.mainPanel.zoomToggleButton.isShowing()){
             java.awt.Point p = applicationFrame.mainPanel.zoomToggleButton.getLocationOnScreen();
             changeZoomDialog.setLocation(p.x, p.y + applicationFrame.mainPanel.zoomToggleButton.getHeight());    
