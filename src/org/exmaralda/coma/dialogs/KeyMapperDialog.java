@@ -38,65 +38,68 @@ import org.jdom.xpath.XPath;
  */
 public class KeyMapperDialog extends JDialog {
 
-	private JButton okButton;
+	private final JButton okButton;
 	private boolean updateAvailable;
-	private JButton disposeButton;
-	private HarmonizeTableModel model;
-	private Coma coma;
-	private JTable keysTable;
-	private TreeMap<String, String> keyMap;
+	private final JButton disposeButton;
+	private final HarmonizeTableModel model;
+	private final Coma coma;
+	private final JTable keysTable;
+	private final TreeMap<String, String> keyMap;
 	private String keyXPath = "//Key";
 
 	public KeyMapperDialog(Coma owner) {
-		super(owner);
-		coma = owner;
-		keyMap = new TreeMap<String, String>();
+            super(owner);
+            coma = owner;
+            keyMap = new TreeMap<>();
 
-		this.setLayout(new BorderLayout());
-		String[] showStrings = { "All", "Communications", "Speakers" };
-		JComboBox selectionBox = new JComboBox(showStrings);
-		selectionBox.addActionListener(new ActionListener() {
+            this.setLayout(new BorderLayout());
+            String[] showStrings = { "All", "Communications", "Speakers" };
+            JComboBox selectionBox = new JComboBox(showStrings);
+            selectionBox.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				JComboBox cb = (JComboBox) e.getSource();
-				int showWhat = cb.getSelectedIndex();
-				updateXPath(showWhat);
-			}
-		});
-		this.add(selectionBox, BorderLayout.NORTH);
-		this.setTitle(Ui.getText("keyMapper.windowTitle"));
-		model = new HarmonizeTableModel(keyMap);
-		// for (String k : keyMap.keySet()) {
-		// model.addRow(new Object[] { k, keyMap.get(k) });
-		// }
-		keysTable = new JTable(model);
-		keysTable.getColumnModel().getColumn(0)
-				.setCellRenderer(new MyTableCellRenderer());
-		keysTable.getColumnModel().getColumn(1)
-				.setCellRenderer(new MyTableCellRenderer());
-		this.add(new JScrollPane(keysTable), BorderLayout.CENTER);
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-		this.add(buttonPanel, BorderLayout.SOUTH);
-		disposeButton = new JButton(Ui.getText("cancel"));
-		disposeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            JComboBox cb = (JComboBox) e.getSource();
+                            int showWhat = cb.getSelectedIndex();
+                            updateXPath(showWhat);
+                    }
+            });
+            this.add(selectionBox, BorderLayout.NORTH);
+            this.setTitle(Ui.getText("keyMapper.windowTitle"));
+            model = new HarmonizeTableModel(keyMap);
+            // for (String k : keyMap.keySet()) {
+            // model.addRow(new Object[] { k, keyMap.get(k) });
+            // }
+            keysTable = new JTable(model);
+            keysTable.getColumnModel().getColumn(0)
+                            .setCellRenderer(new MyTableCellRenderer());
+            keysTable.getColumnModel().getColumn(1)
+                            .setCellRenderer(new MyTableCellRenderer());
+            this.add(new JScrollPane(keysTable), BorderLayout.CENTER);
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+            this.add(buttonPanel, BorderLayout.SOUTH);
+            disposeButton = new JButton(Ui.getText("cancel"));
+            disposeButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            dispose();
+                    }
+            });
 
-		okButton = new JButton(Ui.getText("OK"));
-		okButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				harmonize();
-			}
-		});
+            okButton = new JButton(Ui.getText("OK"));
+            okButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                            harmonize();
+                    }
+            });
 
-		buttonPanel.add(okButton);
-		buttonPanel.add(Box.createHorizontalGlue());
-		buttonPanel.add(disposeButton);
-		pack();
-		selectionBox.setSelectedIndex(0);
+            buttonPanel.add(okButton);
+            buttonPanel.add(Box.createHorizontalGlue());
+            buttonPanel.add(disposeButton);
+            pack();
+            selectionBox.setSelectedIndex(0);
 	}
 
 	protected void updateXPath(int what) {
@@ -118,65 +121,59 @@ public class KeyMapperDialog extends JDialog {
 			keysTable.getCellEditor().stopCellEditing();
 		}
 		int changes = 0;
-		HashMap<String, String> tableMap = new HashMap<String, String>();
-		HashSet<Element> conflicts = new HashSet<Element>();
+		HashMap<String, String> tableMap = new HashMap<>();
+		HashSet<Element> conflicts = new HashSet<>();
 		tableMap = model.getDataAsMap();
 		XPath xp;
 		for (String key : tableMap.keySet()) {
-			if (tableMap.get(key).length() == 0) {
-				System.out.println("removing key " + key);
-				try {
-					xp = XPath.newInstance("//Key[@Name='" + key + "']");
-					List<Element> keys = xp.selectNodes(coma.getData()
-							.getDocument().getRootElement());
-					for (Element e : keys) {
-						e.getParent().removeContent(e);
-						changes++;
-					}
-				} catch (JDOMException e1) {
-					e1.printStackTrace();
-				}
+                    if (tableMap.get(key).length() == 0) {
+                        System.out.println("removing key " + key);
+                        try {
+                            xp = XPath.newInstance("//Key[@Name='" + key + "']");
+                            List<Element> keys = xp.selectNodes(coma.getData().getDocument().getRootElement());
+                            for (Element e : keys) {
+                                e.getParent().removeContent(e);
+                                changes++;
+                            }
+                        } catch (JDOMException e1) {
+                            e1.printStackTrace();
+                        }
 
-			}
+                    }
 		}
 		for (String tm : tableMap.keySet()) {
 			System.out.println(">>" + tm);
 		}
 
 		try {
-			xp = XPath.newInstance(keyXPath);
-			List<Element> keys = xp.selectNodes(coma.getData().getDocument()
-					.getRootElement());
-			for (Element e : keys) {
-				if (!tableMap.get(e.getAttributeValue("Name")).equals(
-						e.getAttributeValue("Name"))) { // value changed
-					Element theDescription = e.getParentElement();
-					HashSet<String> keyNames = new HashSet<String>();
-					for (Element dc : (List<Element>) theDescription
-							.getChildren()) {
-						keyNames.add(dc.getAttributeValue("Name"));
-					}
-					if (keyNames.contains(e.getAttributeValue("Name"))
-							&& keyNames.contains(tableMap.get(e
-									.getAttributeValue("Name")))) {
-						conflicts.add(e);
-					} else {
-						// change key!
-						e.setAttribute("Name",
-								tableMap.get(e.getAttributeValue("Name")));
-						changes++;
-					}
+                    xp = XPath.newInstance(keyXPath);
+                    List<Element> keys = xp.selectNodes(coma.getData().getDocument().getRootElement());
+                    for (Element e : keys) {
+                        if (!tableMap.get(e.getAttributeValue("Name")).equals(e.getAttributeValue("Name"))) { // value changed
+                            Element theDescription = e.getParentElement();
+                            HashSet<String> keyNames = new HashSet<>();
+                            for (Element dc : (List<Element>) theDescription.getChildren()) {
+                                    keyNames.add(dc.getAttributeValue("Name"));
+                            }
+                            if (keyNames.contains(e.getAttributeValue("Name"))
+                                            && keyNames.contains(tableMap.get(e.getAttributeValue("Name")))) {
+                                    conflicts.add(e);
+                            } else {
+                                    // change key!
+                                    e.setAttribute("Name",
+                                                    tableMap.get(e.getAttributeValue("Name")));
+                                    changes++;
+                            }
 
-				}
-
-			}
-		} catch (Exception ex) {
+                        }
+                    }
+		} catch (JDOMException ex) {
 			System.out.println("xpath doof!");
 			ex.printStackTrace();
 		}
 		coma.getData().disableCommFilters();
 		coma.getData().disableSpeakerFilters();
-		HashSet<Element> conflictContexts = new HashSet<Element>();
+		HashSet<Element> conflictContexts = new HashSet<>();
 		for (Element e : conflicts) {
 			conflictContexts.add(ComaXML.getContextElement(e));
 		}
@@ -203,7 +200,7 @@ public class KeyMapperDialog extends JDialog {
 				keyMap.put(e.getAttributeValue("Name"),
 						e.getAttributeValue("Name"));
 			}
-		} catch (Exception ex) {
+		} catch (JDOMException ex) {
 			System.out.println("fail");
 		}
 		model.setData(keyMap);

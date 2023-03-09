@@ -282,7 +282,7 @@ public class HarmonizeTableModel extends DefaultTableModel {
 	}
 
 	public HashMap<String, String> getDataAsMap() {
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map = new HashMap<>();
 		for (Object v : super.getDataVector()) {
 			Object[] rowVector = ((Vector) v).toArray();
 			map.put((String) rowVector[0], (String) rowVector[1]);
