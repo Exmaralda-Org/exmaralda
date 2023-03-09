@@ -294,7 +294,7 @@ public class COMAKWICTable  extends javax.swing.JTable
             //int column = columnModel.getColumn(viewColumn).getModelIndex();
             if (viewColumn==0) return;
             int column = columnModel.getColumn(viewColumn-1).getModelIndex();
-            System.out.println(column);
+            //System.out.println(column);
             //super.mouseReleased(e);
             if (e.isPopupTrigger()){
                 showPopup(e, column);
@@ -312,7 +312,7 @@ public class COMAKWICTable  extends javax.swing.JTable
             //int column = columnModel.getColumn(viewColumn).getModelIndex();
             if ((viewColumn==0) || (viewColumn>=columnModel.getColumnCount())) return;
             int column = columnModel.getColumn(viewColumn-1).getModelIndex();
-            System.out.println(column);
+            //System.out.println(column);
             //super.mousePressed(e);
             if (e.isPopupTrigger()){
                 showPopup(e, column);

@@ -122,7 +122,7 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
                 
                 // added 16-02-2012: also take care of descriptions underneath languages
                 String keyPath = locationPath + "/Description/Key/@Name";
-                System.out.println("KeyPath: " + keyPath);
+                //System.out.println("KeyPath: " + keyPath);
                 XPath xp = XPath.newInstance("//Speaker/" + keyPath);
                 HashSet<String> allDescriptionNames = new HashSet<String>();
                 for (Object o : xp.selectNodes(comaDocument)){
@@ -183,7 +183,7 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
                 
                 // added 16-02-2012: also take care of desceriptions underneath languages
                 String keyPath = locationPath + "/Description/Key/@Name";
-                System.out.println("KeyPath: " + keyPath);
+                //System.out.println("KeyPath: " + keyPath);
                 XPath xp = XPath.newInstance("//Speaker/" + keyPath);
                 HashSet<String> allDescriptionNames = new HashSet<String>();
                 for (Object o : xp.selectNodes(comaDocument)){

@@ -299,7 +299,7 @@ public class HashtableTokenList extends AbstractTokenList {
            count++;
         }
         xpath+="]/@id";
-        System.out.println(xpath);
+        //System.out.println(xpath);
         List speakerIDs = XPath.newInstance(xpath).selectNodes(speakerTable);
         
         if (speakerIDs.isEmpty()){
@@ -319,7 +319,7 @@ public class HashtableTokenList extends AbstractTokenList {
         }
         xpath2+="]";
         xpath2+="/descendant::ts[@n='" + wordSegmentName + "']";
-        System.out.println(xpath2);
+        //System.out.println(xpath2);
         return XPath.newInstance(xpath2);
     }
 
