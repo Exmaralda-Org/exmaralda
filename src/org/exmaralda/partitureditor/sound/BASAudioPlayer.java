@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,7 +65,10 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
         }
 
         if (!pathToSoundFile.startsWith("http://")){            
-            urlString = "file:///" + pathToSoundFile.replaceAll("\\\\", "/").replaceAll(" ", "%20").replaceAll("'", "%27");
+            //urlString = "file:///" + pathToSoundFile.replaceAll("\\\\", "/").replaceAll(" ", "%20").replaceAll("'", "%27");
+            // issue #321
+            urlString = "file:///" + URLEncoder.encode(pathToSoundFile.replaceAll("\\\\", "/"), StandardCharsets.UTF_8.toString());
+            System.out.println("BASPlayer : "  + pathToSoundFile + " is represented as URL " + urlString);
             soundFilePath = pathToSoundFile;
         }
 

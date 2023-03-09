@@ -239,10 +239,10 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
             case SAXUtilities.TIMELINE_FORK          :  currentTier.addTimelineFork(currentTimelineFork);
                                                         break;
             case SAXUtilities.SEGMENTATION          :   currentTier.addElement(currentSegmentVector);
-                                                        System.out.println(currentSegmentVector.getName());
+                                                        //System.out.println(currentSegmentVector.getName());
                                                         break;
             case SAXUtilities.ANNOTATION            :   currentTier.addElement(currentSegmentVector);
-                                                        System.out.println(currentSegmentVector.getName());
+                                                        //System.out.println(currentSegmentVector.getName());
                                                         break;
             case SAXUtilities.TS                    :   TimedSegment ts = ((TimedSegment)(segmentStack.get(segmentStack.size()-1)));
                                                         if (currentPCData.length()>0){
