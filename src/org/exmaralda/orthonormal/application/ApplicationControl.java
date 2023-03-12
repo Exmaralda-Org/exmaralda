@@ -734,9 +734,17 @@ public final class ApplicationControl implements  ListSelectionListener,
             setBookmark(d, contributionListTable.getSelectedRow());
             // changed for #340
             //IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d);
-            Format prettyFormat = Format.getPrettyFormat();
-            prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);        
-            IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d, prettyFormat);
+            boolean prettyPrint =  Boolean.parseBoolean(PreferencesUtilities.getProperty("pretty-print-enabled-orthonormal", "FALSE"));
+            
+            Format format = Format.getRawFormat();
+            // prefs.put("pretty-print-enabled-folker", Boolean.toString(enablePrettyPrintCheckBox.isSelected()));
+            if (prettyPrint){
+                Format prettyFormat = Format.getPrettyFormat();
+                prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);     
+                format = prettyFormat;
+            }
+            IOUtilities.writeDocumentToLocalFile(f.getAbsolutePath(), d, format);
+            
             //currentFilePath = f.getAbsolutePath();
             setCurrentFilePath(f.getAbsolutePath());
             DOCUMENT_CHANGED = false;

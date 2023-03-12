@@ -22,6 +22,8 @@ public class SaveBasicTranscriptionAsDialog extends AbstractXMLSaveAsDialog {
     private BasicTranscription transcription;
     private TierFormatTable tierFormatTable;
     
+    public boolean prettyPrint = false;
+    
     JCheckBox saveTierFormatTableCheckBox = new JCheckBox(
             org.exmaralda.common.helpers.Internationalizer.getString("Save formats")
             );
@@ -89,9 +91,9 @@ public class SaveBasicTranscriptionAsDialog extends AbstractXMLSaveAsDialog {
         }
         try {
             if (saveTierFormatTableCheckBox.isSelected()){ 
-                transcription.writeXMLToFile(getFilename(),"none", tierFormatTable);                 
+                transcription.writeXMLToFile(getFilename(),"none", tierFormatTable, prettyPrint);                 
             } else {
-                transcription.writeXMLToFile(getFilename(),"none");                 
+                transcription.writeXMLToFile(getFilename(),"none", null, prettyPrint);                 
             }
             success=true;
         }

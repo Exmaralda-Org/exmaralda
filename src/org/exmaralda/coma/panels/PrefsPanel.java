@@ -109,10 +109,10 @@ public class PrefsPanel extends JPanel implements ActionListener {
 		if (new File(t).exists()) {
 			selectTemplatesFileButton.setText(t);
 		} else {
-			selectTemplatesFileButton.setText(Ui
-					.getText("cmd.selectDefaultTemplateFile"));
+			selectTemplatesFileButton.setText(Ui.getText("cmd.selectDefaultTemplateFile"));
 		}
 		selectTemplatesFileButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				selectDefaultTemplatesFile();
 			}
@@ -123,16 +123,12 @@ public class PrefsPanel extends JPanel implements ActionListener {
 		optionsPanel.add(new PrefsCheckBox("cmd.autoSaveTemplates", false));
 
 		// Transcription-Handling
-		optionsPanel.add(new BoldLabel(Ui
-				.getText("prefs.transcriptionHandling")));
-		optionsPanel
-				.add(new PrefsCheckBox("prefs.writeCIDsWhenUpdating", true));
-		optionsPanel
-				.add(new PrefsCheckBox("prefs.writeCIDWhenAssigning", true));
+		optionsPanel.add(new BoldLabel(Ui.getText("prefs.transcriptionHandling")));
+		optionsPanel.add(new PrefsCheckBox("prefs.writeCIDsWhenUpdating", true));
+		optionsPanel.add(new PrefsCheckBox("prefs.writeCIDWhenAssigning", true));
 
 		// auto-update
-		optionsPanel
-				.add(new PrefsRadioGroup("prefs.updateCheckTimespan",
+		optionsPanel.add(new PrefsRadioGroup("prefs.updateCheckTimespan",
 						new String[] { "timespanNever", "timespanDaily",
 								"timespanWeekly", "timespanMonthly" },
 						"timespanNever"));
@@ -141,17 +137,25 @@ public class PrefsPanel extends JPanel implements ActionListener {
 
 		// logging
 		optionsPanel.add(new BoldLabel(Ui.getText("prefs.loggingDir")));
-		selectLogdirButton = new JButton(prefs.get("LOG-Directory", System
-				.getProperty("user.home")));
+		selectLogdirButton = new JButton(prefs.get("LOG-Directory", System.getProperty("user.home")));
 		selectLogdirButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				selectLoggingDir();
 			}
 		});
 		optionsPanel.add(selectLogdirButton);
+		
+                
+                // pretty printing
+		optionsPanel.add(new PrefsCheckBox("prefs.enablePrettyPrint", false));
+                
+                
+                
 		optionsPanel.add(new BoldLabel(Ui.getText("cmd.prefs")));
-		JButton resetPrefsButton = new JButton(Ui.getText("prefs.resetPrefs"));
+                JButton resetPrefsButton = new JButton(Ui.getText("prefs.resetPrefs"));
 		resetPrefsButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				refreshPanel();
 			}
@@ -260,18 +264,17 @@ public class PrefsPanel extends JPanel implements ActionListener {
 	 * @return javax.swing.JPanel
 	 */
 	private JPanel getDirPanel() {
-		if (dirPanel == null) {
-			dirPanel = new JPanel();
-			dirPanel.setLayout(new BoxLayout(dirPanel, BoxLayout.Y_AXIS));
-			dirPanel
-					.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
-			jexmaraldaDirBtn = new JButton(prefs.get("path.jexmaralda", "..."));
-			jexmaraldaDirBtn.setActionCommand("chooseJexmaraldaDir");
-			jexmaraldaDirBtn.addActionListener(this);
-			dirPanel.add(new JLabel(Ui.getText("pathToJexmaralda")));
-			dirPanel.add(jexmaraldaDirBtn, null);
-		}
-		return dirPanel;
+            if (dirPanel == null) {
+                dirPanel = new JPanel();
+                dirPanel.setLayout(new BoxLayout(dirPanel, BoxLayout.Y_AXIS));
+                dirPanel.setComponentOrientation(java.awt.ComponentOrientation.LEFT_TO_RIGHT);
+                jexmaraldaDirBtn = new JButton(prefs.get("path.jexmaralda", "..."));
+                jexmaraldaDirBtn.setActionCommand("chooseJexmaraldaDir");
+                jexmaraldaDirBtn.addActionListener(this);
+                dirPanel.add(new JLabel(Ui.getText("pathToJexmaralda")));
+                dirPanel.add(jexmaraldaDirBtn, null);
+            }
+            return dirPanel;
 	}
 
 	/**
@@ -294,6 +297,7 @@ public class PrefsPanel extends JPanel implements ActionListener {
 		this.add(getOptionsPanel(),java.awt.BorderLayout.CENTER);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent evt) {
 		coma.status("@" + evt.getActionCommand());
 		if (Ui.getText("OK").equals(evt.getActionCommand())) {
@@ -374,6 +378,7 @@ public class PrefsPanel extends JPanel implements ActionListener {
 			super(Ui.getText(command));
 			cmd = command;
 			this.addActionListener(new ActionListener() {
+                                @Override
 				public void actionPerformed(ActionEvent e) {
 					prefs.putBoolean(((PrefsCheckBox) e.getSource()).cmd,
 							((PrefsCheckBox) e.getSource()).isSelected());
@@ -405,6 +410,7 @@ public class PrefsPanel extends JPanel implements ActionListener {
 					button[count].setSelected(true);
 				button[count].setActionCommand(preference + "=" + s);
 				button[count].addActionListener(new ActionListener() {
+                                        @Override
 					public void actionPerformed(ActionEvent e) {
 						prefs.put(e.getActionCommand().split("=")[0], e
 								.getActionCommand().split("=")[1]);

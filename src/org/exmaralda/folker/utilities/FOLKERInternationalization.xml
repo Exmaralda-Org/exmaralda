@@ -1234,6 +1234,11 @@
                                         <translation lang="de" trans="Logging aktivieren"/>
                                         <translation lang="fr" trans="Activer logging"/>
                                 </item>
+                                <item id="dialog.preferences.enablePrettyPrint">
+                                        <translation lang="en" trans="Enable XML pretty print"/>
+                                        <translation lang="de" trans="Formatierte XML-Ausgabe aktivieren"/>
+                                        <translation lang="fr" trans="Activer XML pretty print"/>
+                                </item>
                                 <item id="dialog.preferences.languagehint">
                                         <translation lang="en"
                                                 trans="Changes to language preferences will only take effect after a restart of FOLKER."/>

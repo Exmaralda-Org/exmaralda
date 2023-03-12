@@ -198,6 +198,7 @@ public class PartitureTableWithActions extends PartitureTable
     public String underlineCategory = "akz";
     /** determines whether or not to save the tier format table with the transcriptio */
     public boolean saveTierFormatTable = false;
+    public boolean prettyPrint = false;
 
     /** the page format used for printing */
     public java.awt.print.PageFormat pageFormat = new java.awt.print.PageFormat();
@@ -212,7 +213,7 @@ public class PartitureTableWithActions extends PartitureTable
     
     public String language = "en";
     
-    Vector<PartitureTableListener> thisListenerList = new Vector<PartitureTableListener>();
+    Vector<PartitureTableListener> thisListenerList = new Vector<>();
     
     public java.awt.Font currentFont;
     public javax.swing.JTextField dummyTextField = new javax.swing.JTextField();

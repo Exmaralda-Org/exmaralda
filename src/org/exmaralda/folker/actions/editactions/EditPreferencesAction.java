@@ -24,7 +24,10 @@ import org.exmaralda.folker.utilities.PreferencesUtilities;
  */
 public class EditPreferencesAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public EditPreferencesAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
@@ -47,7 +50,7 @@ public class EditPreferencesAction extends AbstractApplicationAction {
         int parseLevel = Integer.parseInt(PreferencesUtilities.getProperty("parse-level", "2"));
         ac.setParseLevel(parseLevel);
         ac.contributionTextPane.MAKE_LINE_BREAK_AFTER_BOUNDARY_SYMBOLS=(parseLevel==3);        
-        ac.TIME_BETWEEN_LOOPS = Integer.parseInt(PreferencesUtilities.getProperty("loop-time", "500"));
+        ApplicationControl.TIME_BETWEEN_LOOPS = Integer.parseInt(PreferencesUtilities.getProperty("loop-time", "500"));
         ac.updateInfoPanel();
 
         ac.setFont();

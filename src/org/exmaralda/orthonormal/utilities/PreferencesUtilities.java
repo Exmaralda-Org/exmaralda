@@ -27,6 +27,9 @@ public class PreferencesUtilities {
         return preferences.getBoolean(propertyName, defaultValue);
     }
     
+    public static void setBooleanProperty(String propertyName, boolean value) {
+        preferences.putBoolean(propertyName, value);
+    }
     
     public static String getProperty(String propertyName, String defaultValue){
         return preferences.get(propertyName, defaultValue);

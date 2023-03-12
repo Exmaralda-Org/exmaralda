@@ -24,14 +24,16 @@ import org.jdom.input.SAXBuilder;
  * 
  */
 public class Ui {
-	private static final HashMap<String, String> UiElements = new HashMap<String, String>();
+	private static final HashMap<String, String> UiElements = new HashMap<>();
 
 	public static final Preferences prefs = Preferences.userRoot().node("org.exmaralda.coma");
 
 	private static String languageCode="";
 
 
-	/** Returns localized UI-Element-names */
+	/** Returns localized UI-Element-names
+     * @param key
+     * @return  */
 	public static String getText(String key) {
 		String value;
 		if (UiElements.get(key) != null) {
@@ -47,7 +49,7 @@ public class Ui {
 	}
 	
 	public static Vector<File> getHelpFiles() {
-		Vector<File> helpFiles = new Vector<File>();
+		Vector<File> helpFiles = new Vector<>();
 
 		return helpFiles;
 	}

@@ -245,7 +245,7 @@ public class COMAKWICTable  extends javax.swing.JTable
                             && (!(getWrappedModel().getAnalysisForColumn(column-1) instanceof BinaryAnalysis))){
                             //((java.awt.Component)(retValue)).setBackground(java.awt.Color.YELLOW);
                             //DefaultTableCellRenderer dtcr4 = new DefaultTableCellRenderer();
-                            DefaultTableCellRenderer dtcr4 = new KWICTableCellRenderer(new java.awt.Color(0,128,64));
+                            DefaultTableCellRenderer dtcr4 = new KWICTableCellRenderer(KWICTableCellRenderer.ANNOTATION_COLOR);
                             //dtcr4.setForeground(new java.awt.Color(0,128,64));
                             return dtcr4;
                         } else {
@@ -286,14 +286,13 @@ public class COMAKWICTable  extends javax.swing.JTable
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getSource() instanceof JTableHeader){
-            JTableHeader h = (JTableHeader) e.getSource();
-            TableColumnModel columnModel = h.getColumnModel();
-            int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+        if (e.getSource() instanceof JTableHeader h){
+            TableColumnModel thisColumnModel = h.getColumnModel();
+            int viewColumn = thisColumnModel.getColumnIndexAtX(e.getX());
             // changed for row numbering in version 0.4, 22-Jan-2008
             //int column = columnModel.getColumn(viewColumn).getModelIndex();
             if (viewColumn==0) return;
-            int column = columnModel.getColumn(viewColumn-1).getModelIndex();
+            int column = thisColumnModel.getColumn(viewColumn-1).getModelIndex();
             //System.out.println(column);
             //super.mouseReleased(e);
             if (e.isPopupTrigger()){
@@ -304,14 +303,13 @@ public class COMAKWICTable  extends javax.swing.JTable
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getSource() instanceof JTableHeader){
-            JTableHeader h = (JTableHeader) e.getSource();
-            TableColumnModel columnModel = h.getColumnModel();
-            int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+        if (e.getSource() instanceof JTableHeader h){
+            TableColumnModel thisColumnModel = h.getColumnModel();
+            int viewColumn = thisColumnModel.getColumnIndexAtX(e.getX());
             // changed for row numbering in version 0.4, 22-Jan-2008
             //int column = columnModel.getColumn(viewColumn).getModelIndex();
-            if ((viewColumn==0) || (viewColumn>=columnModel.getColumnCount())) return;
-            int column = columnModel.getColumn(viewColumn-1).getModelIndex();
+            if ((viewColumn==0) || (viewColumn>=thisColumnModel.getColumnCount())) return;
+            int column = thisColumnModel.getColumn(viewColumn-1).getModelIndex();
             //System.out.println(column);
             //super.mousePressed(e);
             if (e.isPopupTrigger()){

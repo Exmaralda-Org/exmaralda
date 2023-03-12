@@ -125,6 +125,9 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         boolean logging = prefs.getBoolean("logging-enabled", false);
         enableLoggingCheckBox.setSelected(logging);
         
+        boolean prettyPrint = prefs.getBoolean("pretty-print-enabled-folker", false);
+        enablePrettyPrintCheckBox.setSelected(prettyPrint);
+        
         String defaultAudio = prefs.get("default-audio-path", "");
         defaultAudioTextField.setText(defaultAudio);
     }
@@ -175,6 +178,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         if (frenchRadioButton.isSelected()) prefs.put("language", "fr");
         
         prefs.put("logging-enabled", Boolean.toString(enableLoggingCheckBox.isSelected()));
+        prefs.put("pretty-print-enabled-folker", Boolean.toString(enablePrettyPrintCheckBox.isSelected()));
         
         prefs.put("default-audio-path", defaultAudioTextField.getText());
 
@@ -192,7 +196,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         parseLevelButtonGroup = new javax.swing.ButtonGroup();
         languagesButtonGroup = new javax.swing.ButtonGroup();
         videoPlayerButtonGroup = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        maineTabbedPane = new javax.swing.JTabbedPane();
         parsePanel = new javax.swing.JPanel();
         parseOptionsPanel = new javax.swing.JPanel();
         normalizeWhiteSpaceCheckBox = new javax.swing.JCheckBox();
@@ -250,6 +254,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         advancedOptionsPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         enableLoggingCheckBox = new javax.swing.JCheckBox();
+        enablePrettyPrintCheckBox = new javax.swing.JCheckBox();
         okPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
 
@@ -347,7 +352,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         parsePanel.add(middlePanel, java.awt.BorderLayout.CENTER);
 
-        jTabbedPane1.addTab(FOLKERInternationalizer.getString("dialog.preferences.transcriptlevel"), parsePanel);
+        maineTabbedPane.addTab(FOLKERInternationalizer.getString("dialog.preferences.transcriptlevel"), parsePanel);
 
         playerOptionsPanel.setLayout(new java.awt.BorderLayout());
 
@@ -460,7 +465,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         playerOptionsPanel.add(playerSelectionPanel, java.awt.BorderLayout.CENTER);
 
-        jTabbedPane1.addTab("Player", playerOptionsPanel);
+        maineTabbedPane.addTab("Player", playerOptionsPanel);
 
         fontOptionsPanel.setLayout(new java.awt.BorderLayout());
 
@@ -500,7 +505,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         fontOptionsPanel.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jTabbedPane1.addTab(FOLKERInternationalizer.getString("dialog.preferences.font"), fontOptionsPanel);
+        maineTabbedPane.addTab(FOLKERInternationalizer.getString("dialog.preferences.font"), fontOptionsPanel);
 
         languageOptionsPanel.setLayout(new java.awt.BorderLayout());
 
@@ -541,7 +546,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
         languageOptionsPanel.add(restartHintPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedPane1.addTab(FOLKERInternationalizer.getString("dialog.preferences.language"), languageOptionsPanel);
+        maineTabbedPane.addTab(FOLKERInternationalizer.getString("dialog.preferences.language"), languageOptionsPanel);
 
         advancedOptionsPanel.setLayout(new java.awt.BorderLayout());
 
@@ -550,12 +555,15 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         enableLoggingCheckBox.setText(FOLKERInternationalizer.getString("dialog.preferences.enableLogging"));
         mainPanel.add(enableLoggingCheckBox);
 
+        enablePrettyPrintCheckBox.setText(FOLKERInternationalizer.getString("dialog.preferences.enablePrettyPrint"));
+        mainPanel.add(enablePrettyPrintCheckBox);
+
         advancedOptionsPanel.add(mainPanel, java.awt.BorderLayout.CENTER);
 
-        jTabbedPane1.addTab(FOLKERInternationalizer.getString("dialog.preferences.advanced"), advancedOptionsPanel);
+        maineTabbedPane.addTab(FOLKERInternationalizer.getString("dialog.preferences.advanced"), advancedOptionsPanel);
 
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
-        jTabbedPane1.getAccessibleContext().setAccessibleName("Player");
+        add(maineTabbedPane, java.awt.BorderLayout.CENTER);
+        maineTabbedPane.getAccessibleContext().setAccessibleName("Player");
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -630,6 +638,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JPanel defaultAudioPanel;
     private javax.swing.JTextField defaultAudioTextField;
     private javax.swing.JCheckBox enableLoggingCheckBox;
+    private javax.swing.JCheckBox enablePrettyPrintCheckBox;
     private javax.swing.JRadioButton englishRadioButton;
     private javax.swing.JPanel fontOptionsPanel;
     private javax.swing.JTextField fontTestTextField;
@@ -646,7 +655,6 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton javaFXRadioButton;
     private javax.swing.JRadioButton javaFXRadioButton1;
     private javax.swing.JRadioButton jdsRadioButton;
@@ -661,6 +669,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JPanel loopTimePanel;
     private javax.swing.JSlider loopTimeSlider;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTabbedPane maineTabbedPane;
     private javax.swing.JPanel middlePanel;
     private javax.swing.JCheckBox normalizeWhiteSpaceCheckBox;
     private javax.swing.JButton okButton;

@@ -17,7 +17,8 @@ public class KWICTableCellRenderer extends DefaultTableCellRenderer {
 
     Color defaultForeground;
     
-    static Color STRIPED_COLOR = new java.awt.Color(245, 245, 245);
+    public static Color STRIPED_COLOR = new java.awt.Color(245, 245, 245);
+    public static Color ANNOTATION_COLOR = new java.awt.Color(0,128,64);
     
     public KWICTableCellRenderer(Color df) {
         super();
@@ -34,7 +35,11 @@ public class KWICTableCellRenderer extends DefaultTableCellRenderer {
         if (!thisOneIsSelected){
             c.setForeground(Color.GRAY);            
         } else {
-            c.setForeground(defaultForeground);            
+            if (isSelected && defaultForeground.equals(ANNOTATION_COLOR)){
+                c.setForeground(Color.WHITE);
+            } else {
+                c.setForeground(defaultForeground);            
+            }
         }
         
         if (row%2==0 && !(isSelected)){

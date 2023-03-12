@@ -32,6 +32,7 @@ public class PrefsAction extends ComaAction {
 	}
 
 	/** Displays the about screen */
+        @Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		PrefsWindow prefsW = new PrefsWindow(coma);
 	}

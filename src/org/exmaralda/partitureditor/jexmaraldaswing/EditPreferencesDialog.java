@@ -7,7 +7,9 @@
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import org.exmaralda.common.helpers.Internationalizer;
@@ -84,7 +86,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         pausePrefixTextField.getDocument().addDocumentListener(dl);
         pauseSuffixTextField.getDocument().addDocumentListener(dl);
         
-        Dictionary labels = new Hashtable<Integer,JLabel>();
+        Dictionary<Integer,JLabel> labels = new Hashtable<Integer,JLabel>();
         labels.put(10, new JLabel("10"));
         labels.put(20, new JLabel("20"));
         labels.put(30, new JLabel("30"));
@@ -95,7 +97,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[40];
+        String[] result = new String[41];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -142,6 +144,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         result[37] = Boolean.toString(transformationDropdownCheckBox.isSelected());
         result[38] = genericTextField.getText();
         result[39] = cGATMinimalTextField.getText();
+        
+        result[40] = Boolean.toString(enablePrettyPrintCheckBox.isSelected());
+        
 
         return result;        
     }
@@ -240,11 +245,11 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jPanel14 = new javax.swing.JPanel();
         testLabel = new javax.swing.JLabel();
         autoSavePanel = new javax.swing.JPanel();
-        enableAutoSavePanel = new javax.swing.JPanel();
-        enableAutoSaveCheckBox = new javax.swing.JCheckBox();
         enableUndoPanel = new javax.swing.JPanel();
         enableUndoCheckBox = new javax.swing.JCheckBox();
         autoSaveMainPanel = new javax.swing.JPanel();
+        enableAutoSavePanel = new javax.swing.JPanel();
+        enableAutoSaveCheckBox = new javax.swing.JCheckBox();
         autoSaveFilenamePanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         autoSaveFilenameTextField = new javax.swing.JTextField();
@@ -256,6 +261,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         autoSaveIntervalSlider = new javax.swing.JSlider();
         jLabel11 = new javax.swing.JLabel();
+        prettyPrintPanel = new javax.swing.JPanel();
+        enablePrettyPrintCheckBox = new javax.swing.JCheckBox();
         languagePanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         languagesComboBox = new javax.swing.JComboBox();
@@ -782,15 +789,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         autoSavePanel.setLayout(new java.awt.BorderLayout());
 
-        enableAutoSavePanel.setLayout(new javax.swing.BoxLayout(enableAutoSavePanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        enableAutoSaveCheckBox.setText("Enable auto save");
-        enableAutoSavePanel.add(enableAutoSaveCheckBox);
-
-        autoSavePanel.add(enableAutoSavePanel, java.awt.BorderLayout.NORTH);
-
         enableUndoPanel.setLayout(new javax.swing.BoxLayout(enableUndoPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        enableUndoCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         enableUndoCheckBox.setSelected(true);
         enableUndoCheckBox.setText("Enable Undo");
         enableUndoPanel.add(enableUndoCheckBox);
@@ -798,6 +799,14 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         autoSavePanel.add(enableUndoPanel, java.awt.BorderLayout.SOUTH);
 
         autoSaveMainPanel.setLayout(new javax.swing.BoxLayout(autoSaveMainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        enableAutoSavePanel.setLayout(new javax.swing.BoxLayout(enableAutoSavePanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        enableAutoSaveCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enableAutoSaveCheckBox.setText("Enable auto save");
+        enableAutoSavePanel.add(enableAutoSaveCheckBox);
+
+        autoSaveMainPanel.add(enableAutoSavePanel);
 
         autoSaveFilenamePanel.setLayout(new javax.swing.BoxLayout(autoSaveFilenamePanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -864,7 +873,15 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         autoSavePanel.add(autoSaveMainPanel, java.awt.BorderLayout.CENTER);
 
-        tabbedPane.addTab("Auto save", null, autoSavePanel, "");
+        prettyPrintPanel.setLayout(new javax.swing.BoxLayout(prettyPrintPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        enablePrettyPrintCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        enablePrettyPrintCheckBox.setText("Enable XML pretty print ");
+        prettyPrintPanel.add(enablePrettyPrintCheckBox);
+
+        autoSavePanel.add(prettyPrintPanel, java.awt.BorderLayout.PAGE_START);
+
+        tabbedPane.addTab("(Auto) save", null, autoSavePanel, "");
 
         languagePanel.setLayout(new javax.swing.BoxLayout(languagePanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -1307,6 +1324,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton elanQuicktimeRadioButton;
     private javax.swing.JCheckBox enableAutoSaveCheckBox;
     private javax.swing.JPanel enableAutoSavePanel;
+    private javax.swing.JCheckBox enablePrettyPrintCheckBox;
     private javax.swing.JCheckBox enableUndoCheckBox;
     private javax.swing.JPanel enableUndoPanel;
     private javax.swing.JPanel fontSelectionPanel;
@@ -1383,6 +1401,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel praatPanel;
     private javax.swing.JComboBox preferredSegmentationComboBox;
     private javax.swing.JPanel preferredSegmentationPanel;
+    private javax.swing.JPanel prettyPrintPanel;
     private javax.swing.JButton resetButton;
     private javax.swing.JPanel segmentationPanel;
     private javax.swing.JButton setLogDirectoryButton;
@@ -1432,6 +1451,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         freeStylesheetVisualisationTextField.setText(values[5]);
         HIATUtteranceList2HTMLTextField.setText(values[6]);
         enableAutoSaveCheckBox.setSelected(Boolean.parseBoolean(values[7]));
+        enablePrettyPrintCheckBox.setSelected(Boolean.parseBoolean(values[40]));
         autoSaveFilenameTextField.setText(values[8]);
         autoSavePathTextField.setText(values[9]);
         try {

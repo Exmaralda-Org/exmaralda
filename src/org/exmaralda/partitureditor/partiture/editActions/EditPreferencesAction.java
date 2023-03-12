@@ -101,7 +101,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             // show transformation dropdown, issue #230
                             Boolean.toString(showTransformationDropdown),
                             table.genericFSM,
-                            table.cGATMinimalFSM
+                            table.cGATMinimalFSM,
+                            Boolean.toString(table.prettyPrint)
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){

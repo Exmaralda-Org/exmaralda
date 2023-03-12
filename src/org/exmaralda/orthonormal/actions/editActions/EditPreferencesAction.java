@@ -22,7 +22,10 @@ import org.exmaralda.orthonormal.gui.EditPreferencesDialog;
  */
 public class EditPreferencesAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public EditPreferencesAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }

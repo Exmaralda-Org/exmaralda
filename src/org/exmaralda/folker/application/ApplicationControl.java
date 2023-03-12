@@ -1438,7 +1438,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     exitAction.setEnabled(false);
                     //System.out.println("STATION 1");
                     status(FOLKERInternationalizer.getString("status.saving") + finalFile.getAbsolutePath() + "...");
-                    org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(finalTranscription, finalFile, parser, PARSE_LEVEL, finalTranscriptionHead);
+                    // issue #340
+                    // prefs.put("pretty-print-enabled-folker", Boolean.toString(enablePrettyPrintCheckBox.isSelected()));                    
+                    boolean prettyPrint =  Boolean.parseBoolean(PreferencesUtilities.getProperty("pretty-print-enabled-folker", "FALSE"));
+                    org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.writeXML(finalTranscription, finalFile, parser, PARSE_LEVEL, finalTranscriptionHead, prettyPrint);
                     //System.out.println("STATION 2");
                     setCurrentFilePath(finalFile.getAbsolutePath());
                     status(FOLKERInternationalizer.getString("status.saved1") 

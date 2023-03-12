@@ -20,12 +20,15 @@ import java.awt.Toolkit;
  */
 public class SaveAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of SaveAction */
+    /** Creates a new instance of SaveAction
+     * @param t
+     * @param icon */
     public SaveAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Save", icon, t);
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                        
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         table.commitEdit(true);
         System.out.println("saveAction!");
@@ -36,9 +39,9 @@ public class SaveAction extends org.exmaralda.partitureditor.partiture.AbstractT
         if (!table.getFilename().equals("untitled.exb")){
             try{
                 if (table.saveTierFormatTable){
-                    table.getModel().getTranscription().writeXMLToFile(table.getFilename(),"none", table.getModel().getTierFormatTable());
+                    table.getModel().getTranscription().writeXMLToFile(table.getFilename(),"none", table.getModel().getTierFormatTable(), table.prettyPrint);
                 } else {
-                    table.getModel().getTranscription().writeXMLToFile(table.getFilename(),"none");                    
+                    table.getModel().getTranscription().writeXMLToFile(table.getFilename(),"none", null, table.prettyPrint);                    
                 }
                 table.transcriptionChanged = false;        
                 table.status("Transcription " + table.getFilename() + " saved");

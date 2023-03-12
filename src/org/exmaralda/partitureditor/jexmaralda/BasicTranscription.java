@@ -675,7 +675,7 @@ public class BasicTranscription extends AbstractTranscription {
      * @param pathToDTD
      * @param tft
      * @throws java.io.IOException */
-    public void writeXMLToFile(String filename, String pathToDTD, TierFormatTable tft)throws IOException {
+    public void writeXMLToFile(String filename, String pathToDTD, TierFormatTable tft, boolean prettyPrint)throws IOException {
         // changed 11-05-2010: new method can also produce relative paths that
         // go via parent folders, i.e. including one or more ..s
         getHead().getMetaInformation().relativizeReferencedFile(filename, MetaInformation.NEW_METHOD);
@@ -691,8 +691,11 @@ public class BasicTranscription extends AbstractTranscription {
             // issue #340
             // THIS WILL NOT WORK!!!!
             // Pretty Printing removes spaces at the end of event text!!!
-            fos.write(XMLFormatter.formatXML(toXML(tft), true).getBytes("UTF-8"));
-            //fos.write(toXML(tft).getBytes("UTF-8"));
+            if (prettyPrint){
+                fos.write(XMLFormatter.formatXML(toXML(tft), true).getBytes("UTF-8"));
+            } else {
+                fos.write(toXML(tft).getBytes("UTF-8"));
+            }
         } catch (Exception ex) {
             Logger.getLogger(BasicTranscription.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
@@ -706,6 +709,11 @@ public class BasicTranscription extends AbstractTranscription {
     public void writeXMLToFile(String filename, String pathToDTD) throws IOException {
         writeXMLToFile(filename, pathToDTD, null);
     }
+    
+    public void writeXMLToFile(String filename, String pathToDTD, TierFormatTable tft)throws IOException {
+        writeXMLToFile(filename, pathToDTD, tft, false);        
+    }
+    
     
     public org.jdom.Document toJDOMDocument() throws JDOMException, IOException{
         return org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString(this.toXML());

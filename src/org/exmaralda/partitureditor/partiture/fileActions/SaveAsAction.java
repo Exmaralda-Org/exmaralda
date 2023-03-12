@@ -16,11 +16,14 @@ import org.exmaralda.partitureditor.partiture.*;
  */
 public class SaveAsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of SaveAsAction */
+    /** Creates a new instance of SaveAsAction
+     * @param t
+     * @param icon */
     public SaveAsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Save as...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         table.commitEdit(true);
         System.out.println("saveAsAction!");
@@ -30,6 +33,7 @@ public class SaveAsAction extends org.exmaralda.partitureditor.partiture.Abstrac
     private void saveTranscription(){
         SaveBasicTranscriptionAsDialog dialog = new SaveBasicTranscriptionAsDialog(table.homeDirectory, table.getModel().getTranscription(), table.getModel().getTierFormatTable());
         dialog.setSaveTierFormatTable(table.saveTierFormatTable);
+        dialog.prettyPrint = table.prettyPrint;
         boolean success = dialog.saveTranscriptionAs(table.parent);
         table.transcriptionChanged = !success;        
         table.restoreAction.setEnabled(true);

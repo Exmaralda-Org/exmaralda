@@ -251,8 +251,8 @@
 		<uiItem name="cmd.MergeComaDocument" lang="deu" value="Coma-Datei hinzufügen..."/>
 		<uiItem name="cmd.MergeComaDocument" lang="eng" value="Merge coma document..."/>
 		
-		<uiItem name="cmd.preferences" lang="deu" value="Einstellungen"/>
-		<uiItem name="cmd.preferences" lang="eng" value="preferences"/>
+		<uiItem name="cmd.preferences" lang="deu" value="Einstellungen..."/>
+		<uiItem name="cmd.preferences" lang="eng" value="Preferences..."/>
 		
 		<uiItem name="cmd.printValues" lang="deu" value="Werte drucken"/>
 		<uiItem name="cmd.printValues" lang="eng" value="print values"/>
@@ -1210,7 +1210,12 @@ CoMa geçici olarak iç düzeni kullanıyor&lt;/html&gt;&lt;/body&gt;"/>
 		<uiItem name="prefs.loggingDir" lang="eng" value="Logging directory"/>
 		<uiItem name="prefs.loggingDir" lang="tk" value="Hata protokolü buraya kopyala"/>
 
-		<uiItem name="prefs.newFiltersAdd" lang="deu"
+
+		<uiItem name="prefs.enablePrettyPrint" lang="deu" value="Formatierte XML-Ausgabe aktivieren"/>
+		<uiItem name="prefs.enablePrettyPrint" lang="eng" value="Enable XML pretty print"/>
+
+
+                <uiItem name="prefs.newFiltersAdd" lang="deu"
 			value="Neue Filterergebnisse standardmässig addieren (logisch 'oder' statt 'und')"/>
 		<uiItem name="prefs.newFiltersAdd" lang="eng"
 			value="Add results of new Filter (instead of retaining them)"/>

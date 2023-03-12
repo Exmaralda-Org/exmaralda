@@ -69,6 +69,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         urlTextField.setText(RDB_URL);
         usernameTextField.setText(RDB_USERNAME);
         passwordField.setText(RDB_PASSWORD);
+        
+        boolean prettyPrint = PreferencesUtilities.getBooleanProperty("pretty-print-enabled-orthonormal", false);
+        enablePrettyPrintCheckBox.setSelected(prettyPrint);
+        
 
 
 
@@ -87,9 +91,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         playerButtonGroup = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        mainTabbedPane = new javax.swing.JTabbedPane();
         lexiconPanel = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        lexiconTypePanel = new javax.swing.JPanel();
         internalRadioButton = new javax.swing.JRadioButton();
         xmlRadioButton = new javax.swing.JRadioButton();
         rdbRadioButton = new javax.swing.JRadioButton();
@@ -108,7 +112,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         tagsetPanel = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        tagsetTypePanel = new javax.swing.JPanel();
         internalPOSRadioButton = new javax.swing.JRadioButton();
         xmlPOSRadioButton = new javax.swing.JRadioButton();
         xmlPOSParametersPanel = new javax.swing.JPanel();
@@ -134,7 +138,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         defaultAudioTextField = new javax.swing.JTextField();
         defaultAudioBrowseButton = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        savePanel = new javax.swing.JPanel();
+        enablePrettyPrintPanel = new javax.swing.JPanel();
+        enablePrettyPrintCheckBox = new javax.swing.JCheckBox();
+        okPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -149,7 +156,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 internalRadioButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(internalRadioButton);
+        lexiconTypePanel.add(internalRadioButton);
 
         buttonGroup1.add(xmlRadioButton);
         xmlRadioButton.setText("Lokales XML-Lexikon");
@@ -158,7 +165,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 xmlRadioButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(xmlRadioButton);
+        lexiconTypePanel.add(xmlRadioButton);
 
         buttonGroup1.add(rdbRadioButton);
         rdbRadioButton.setText("Datenbank-Lexikon");
@@ -168,9 +175,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 rdbRadioButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(rdbRadioButton);
+        lexiconTypePanel.add(rdbRadioButton);
 
-        lexiconPanel.add(jPanel2, java.awt.BorderLayout.NORTH);
+        lexiconPanel.add(lexiconTypePanel, java.awt.BorderLayout.NORTH);
 
         xmlParamatersPanel.setLayout(new javax.swing.BoxLayout(xmlParamatersPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -232,19 +239,18 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         lexiconPanel.add(rdbParamatersPanel, java.awt.BorderLayout.EAST);
 
-        jTabbedPane1.addTab("Lexikon", lexiconPanel);
+        mainTabbedPane.addTab("Lexikon", lexiconPanel);
 
         tagsetPanel.setLayout(new java.awt.BorderLayout());
 
         buttonGroup2.add(internalPOSRadioButton);
-        internalPOSRadioButton.setSelected(true);
         internalPOSRadioButton.setText("Internes Tagset");
         internalPOSRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 internalPOSRadioButtonActionPerformed(evt);
             }
         });
-        jPanel6.add(internalPOSRadioButton);
+        tagsetTypePanel.add(internalPOSRadioButton);
 
         buttonGroup2.add(xmlPOSRadioButton);
         xmlPOSRadioButton.setText("Lokales XML-Tagset");
@@ -253,9 +259,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 xmlPOSRadioButtonActionPerformed(evt);
             }
         });
-        jPanel6.add(xmlPOSRadioButton);
+        tagsetTypePanel.add(xmlPOSRadioButton);
 
-        tagsetPanel.add(jPanel6, java.awt.BorderLayout.NORTH);
+        tagsetPanel.add(tagsetTypePanel, java.awt.BorderLayout.NORTH);
 
         xmlPOSParametersPanel.setLayout(new javax.swing.BoxLayout(xmlPOSParametersPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -277,7 +283,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         tagsetPanel.add(xmlPOSParametersPanel, java.awt.BorderLayout.WEST);
 
-        jTabbedPane1.addTab("POS Tagset", tagsetPanel);
+        mainTabbedPane.addTab("POS Tagset", tagsetPanel);
 
         playerOptionsPanel.setLayout(new java.awt.BorderLayout());
 
@@ -367,9 +373,18 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         playerOptionsPanel.add(optionsPanel, java.awt.BorderLayout.PAGE_END);
 
-        jTabbedPane1.addTab("Player", playerOptionsPanel);
+        mainTabbedPane.addTab("Player", playerOptionsPanel);
 
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
+        savePanel.setLayout(new java.awt.BorderLayout());
+
+        enablePrettyPrintCheckBox.setText("Enable XML pretty print");
+        enablePrettyPrintPanel.add(enablePrettyPrintCheckBox);
+
+        savePanel.add(enablePrettyPrintPanel, java.awt.BorderLayout.NORTH);
+
+        mainTabbedPane.addTab("Save", savePanel);
+
+        getContentPane().add(mainTabbedPane, java.awt.BorderLayout.PAGE_START);
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -377,9 +392,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 okButtonActionPerformed(evt);
             }
         });
-        jPanel5.add(okButton);
+        okPanel.add(okButton);
 
-        getContentPane().add(jPanel5, java.awt.BorderLayout.CENTER);
+        getContentPane().add(okPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -429,6 +444,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         //if (this.javaFXPlayerRadioButton.isSelected()) playerType = "CocoaQT-Player";
         
         PreferencesUtilities.setProperty("PlayerType", playerType);
+        
+        PreferencesUtilities.setBooleanProperty("pretty-print-enabled-orthonormal", enablePrettyPrintCheckBox.isSelected());
         
 
         setVisible(false);
@@ -499,6 +516,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton defaultAudioBrowseButton;
     private javax.swing.JPanel defaultAudioPanel;
     private javax.swing.JTextField defaultAudioTextField;
+    private javax.swing.JCheckBox enablePrettyPrintCheckBox;
+    private javax.swing.JPanel enablePrettyPrintPanel;
     private javax.swing.JRadioButton internalPOSRadioButton;
     private javax.swing.JRadioButton internalRadioButton;
     private javax.swing.JLabel jLabel1;
@@ -509,19 +528,18 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton javaFXRadioButton;
     private javax.swing.JRadioButton jdsRadioButton;
     private javax.swing.JPanel lexiconPanel;
+    private javax.swing.JPanel lexiconTypePanel;
     private javax.swing.JPanel loopTimePanel;
     private javax.swing.JSlider loopTimeSlider;
+    private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JButton okButton;
+    private javax.swing.JPanel okPanel;
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.ButtonGroup playerButtonGroup;
@@ -531,7 +549,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton rdbRadioButton;
     private javax.swing.JPanel restartHintPanel;
     private javax.swing.JTextArea restartHintTextArea;
+    private javax.swing.JPanel savePanel;
     private javax.swing.JPanel tagsetPanel;
+    private javax.swing.JPanel tagsetTypePanel;
     private javax.swing.JTextField urlTextField;
     private javax.swing.JCheckBox useControlCheckBox;
     private javax.swing.JPanel useControlCheckBoxPanel;

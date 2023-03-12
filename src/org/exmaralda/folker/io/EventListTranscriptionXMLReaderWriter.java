@@ -32,6 +32,7 @@ public class EventListTranscriptionXMLReaderWriter {
     public static String EXMARALDA2FOLKER_STYLESHEET = "/org/exmaralda/folker/data/exmaralda2folker.xsl";
     public static String FOLKER2EXMARALDA_STYLESHEET = "/org/exmaralda/folker/data/folker2exmaralda.xsl";
     
+    
     /** Creates a new instance of EventListTranscriptionXMLReader */
     public EventListTranscriptionXMLReaderWriter() {
     }
@@ -71,6 +72,14 @@ public class EventListTranscriptionXMLReaderWriter {
     public static void writeXML(EventListTranscription elt, File file, AbstractParser ap, int parseLevel, TranscriptionHead transcriptionHead) throws
             SAXException, IOException, JDOMException,
             ParserConfigurationException, TransformerConfigurationException, TransformerException {
+
+        writeXML(elt, file, ap, parseLevel, transcriptionHead, false);
+    }
+    
+    public static void writeXML(EventListTranscription elt, File file, AbstractParser ap, int parseLevel, TranscriptionHead transcriptionHead, boolean prettyPrint) throws
+            SAXException, IOException, JDOMException,
+            ParserConfigurationException, TransformerConfigurationException, TransformerException {
+    
         elt.updateContributions();
         org.jdom.Document doc = toJDOMDocument(elt, file, transcriptionHead);
         // TODO: take care of parse level 3
@@ -86,10 +95,15 @@ public class EventListTranscriptionXMLReaderWriter {
                 
         // changed for #340
         //org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc);
-        Format prettyFormat = Format.getPrettyFormat();
-        prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);        
+        Format format = Format.getRawFormat();
+        // prefs.put("pretty-print-enabled-folker", Boolean.toString(enablePrettyPrintCheckBox.isSelected()));
+        if (prettyPrint){
+            Format prettyFormat = Format.getPrettyFormat();
+            prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);     
+            format = prettyFormat;
+        }
         //prettyFormat.setTextMode(Format.TextMode.PRESERVE);        
-        org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc, prettyFormat);
+        org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(file.getAbsolutePath(), doc, format);
     }
     
     public static EventListTranscription readXML(File file) throws JDOMException, IOException, SAXException,
