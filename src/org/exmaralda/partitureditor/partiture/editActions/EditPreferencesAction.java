@@ -135,6 +135,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             if (table.autoSave){
                 table.startAutoSaveThread();
             }            
+            table.prettyPrint = Boolean.valueOf(newValues[40]);
             
             table.hiatFSM = newValues[11];
             table.didaFSM = newValues[12];

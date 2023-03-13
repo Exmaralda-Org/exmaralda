@@ -29,7 +29,6 @@ import java.util.logging.Logger;
 import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
 import org.exmaralda.exakt.exmaraldaSearch.COMADBCorpus;
 import org.exmaralda.exakt.exmaraldaSearch.COMARemoteCorpus;
-import org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction;
 import org.exmaralda.exakt.search.AnnotationSearchResult;
 import org.exmaralda.exakt.search.SearchResultInterface;
 import org.exmaralda.exakt.search.SearchResultList;
@@ -289,19 +288,19 @@ public class FileIO {
     }
     
     public static String getPlainText(Content c){
-        if (c instanceof org.jdom.Text){
-            return ((org.jdom.Text)c).getText();
-        } else if (c instanceof org.jdom.CDATA){
-            return (((org.jdom.CDATA)c).getText());                
+        if (c instanceof org.jdom.Text text){
+            return text.getText();
+        } else if (c instanceof org.jdom.CDATA cdata){
+            return (cdata.getText());                
         } else {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             Element e = (Element)c;            
             List children = e.getChildren();
             //List children = e.getContent();
             // if this element has element children
             // process just those, else get all the content 
             // - it should be text
-            if (children.size()==0){
+            if (children.isEmpty()){
                 children = e.getContent();
             }
             for (int pos=0; pos<children.size(); pos++){

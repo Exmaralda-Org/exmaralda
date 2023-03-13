@@ -178,11 +178,11 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
             
             // not HTML and not CSV, must be XML
             else {
-                try {
+                /*try {
                     searchResultString = XMLFormatter.formatXML(searchResultString, false);
                 } catch (JDOMException | IOException ex) {
                     Logger.getLogger(SaveSearchResultAction.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             }
             
             try {

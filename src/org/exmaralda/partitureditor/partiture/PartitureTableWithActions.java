@@ -1893,6 +1893,9 @@ public class PartitureTableWithActions extends PartitureTable
             }
             startAutoSaveThread();
         }
+        
+        prettyPrint = settings.getBoolean("pretty-print-enabled-partitureditor", false);
+        
         //saveTierFormatTable = settings.get("SaveTierFormatTable", "TRUE").equalsIgnoreCase("TRUE");        
 
         // View options
@@ -2144,6 +2147,8 @@ public class PartitureTableWithActions extends PartitureTable
         // changed 09-03-2009
         settings.put("AutoSave-Interval", Integer.toString(Math.max(60000,autoSaveThread.SAVE_INTERVAL)/60000));
         //settings.put("SaveTierFormatTable", new Boolean(this.saveTierFormatTable).toString());
+
+        settings.put("pretty-print-enabled-partitureditor", Boolean.toString(prettyPrint));
         
         // underline preferences
         settings.put("UNDERLINE-Diacritics", Boolean.toString(underlineWithDiacritics));      

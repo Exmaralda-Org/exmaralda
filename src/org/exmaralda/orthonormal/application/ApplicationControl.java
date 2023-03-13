@@ -407,12 +407,12 @@ public final class ApplicationControl implements  ListSelectionListener,
         applicationFrame.fileMenu.add(editRecordingAction);
         applicationFrame.fileMenu.addSeparator();
 
-        applicationFrame.editMenu.add(editPreferencesAction);
-        applicationFrame.editMenu.addSeparator();
         //applicationFrame.editMenu.add(updateRDBLexiconAction);
         applicationFrame.editMenu.add(saveLexiconAction);
         applicationFrame.editMenu.addSeparator();
         applicationFrame.editMenu.add(searchInDirectoryAction);
+        applicationFrame.editMenu.addSeparator();
+        applicationFrame.editMenu.add(editPreferencesAction);
         
 
         playSelectionAction.setEnabled(false);

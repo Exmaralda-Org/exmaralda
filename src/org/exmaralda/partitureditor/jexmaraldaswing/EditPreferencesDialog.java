@@ -1441,6 +1441,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public boolean editPreferences(String[] values){
+        System.out.println("Pretty Print [40] is " + values[40]);
         tierFontLabel.setText(values[0]);
         tierFontLabel.setFont(new java.awt.Font(values[0], java.awt.Font.PLAIN, 12));
         generalPurposeFontLabel.setText(values[1]);
