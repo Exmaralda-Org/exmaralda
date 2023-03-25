@@ -50,49 +50,34 @@ public class BASAudioPlayer extends AbstractPlayer implements ipsk.audio.player.
     
     @Override
     public void setSoundFile(String pathToSoundFile) throws IOException {
-        System.out.println("This is the BASAudioPlayer setting media file to " + pathToSoundFile);
-        if ((pathToSoundFile==null)){
-            return;
-        }
-        if (!(pathToSoundFile.toUpperCase().endsWith(".WAV"))){
-            String message = "BASAudioPlayer can only be used with *.wav files.";
-            throw new IOException(message);
-        }
-        String urlString = pathToSoundFile;
-        //if ((pathToSoundFile==null) && (wrappedPlayer!=null)){
-        if (wrappedPlayer!=null){
-            wrappedPlayer.stop();
-        }
-
-        if (!pathToSoundFile.startsWith("http://")){            
-            //urlString = "file:///" + pathToSoundFile.replaceAll("\\\\", "/").replaceAll(" ", "%20").replaceAll("'", "%27");
-            // issue #321
-            urlString = "file:///" + URLEncoder.encode(pathToSoundFile.replaceAll("\\\\", "/"), StandardCharsets.UTF_8.toString());
-            System.out.println("BASPlayer : "  + pathToSoundFile + " is represented as URL " + urlString);
-            soundFilePath = pathToSoundFile;
-        }
-
         try {
-            //changed 19-01-2016
-            //wrappedPlayer = new ipsk.audio.player.Player(new URL(urlString));
-            //System.out.println(new FileAudioSource(new File(soundFilePath)).getFile().getAbsolutePath());
-            //System.out.println("$$$$$" + new URI(soundFilePath).toString());
-            //changed 20-05-2022 : #321
-            wrappedPlayer.setAudioSource(new FileAudioSource(new File(new URI(urlString)))); 
+            System.out.println("This is the BASAudioPlayer setting media file to " + pathToSoundFile);
+            if ((pathToSoundFile==null)){
+                return;
+            }
+            if (!(pathToSoundFile.toUpperCase().endsWith(".WAV"))){
+                String message = "BASAudioPlayer can only be used with *.wav files.";
+                throw new IOException(message);
+            }
+            //if ((pathToSoundFile==null) && (wrappedPlayer!=null)){
+            if (wrappedPlayer!=null){
+                wrappedPlayer.stop();
+            }
+            
+            // 25-03-2023 completely new for #321, getting rid of all the URI/URL stuff
+            System.out.println("BASPlayer : "  + pathToSoundFile);
+            soundFilePath = pathToSoundFile;
+            
+            FileAudioSource fileAudioSource = new FileAudioSource(new File(pathToSoundFile));
+            wrappedPlayer.setAudioSource(fileAudioSource);
             wrappedPlayer.addPlayerListener(this);
             wrappedPlayer.open();
             fireSoundfileSet();
-        } catch (PlayerException | URISyntaxException ex) {
+
+        } catch (PlayerException ex) {
             Logger.getLogger(BASAudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
         }
-        /*catch (MalformedURLException mue){
-        mue.printStackTrace();;
-        throw new IOException(mue);
-        }*/  /*catch (MalformedURLException mue){
-            mue.printStackTrace();;
-            throw new IOException(mue);
-        }*/
     }
 
     @Override
