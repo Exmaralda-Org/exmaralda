@@ -507,11 +507,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     }//GEN-LAST:event_filterTextFieldActionPerformed
 
     private void editContributionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editContributionButtonActionPerformed
-        try {                
-            applicationControl.editContribution();
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        applicationControl.editContribution();
     }//GEN-LAST:event_editContributionButtonActionPerformed
 
     private void changeSpeakerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSpeakerButtonActionPerformed

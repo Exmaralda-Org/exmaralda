@@ -102,7 +102,7 @@ public class EventListTranscription {
     }
     
     public Contribution getContributionAt(int index){
-        if ((contributions.size()>0) && index<contributions.size()){
+        if ((!contributions.isEmpty()) && index<contributions.size()){
             return contributions.elementAt(index);
         }
         return null;

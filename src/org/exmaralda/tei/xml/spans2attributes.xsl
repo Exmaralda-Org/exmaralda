@@ -17,7 +17,14 @@
             <xsl:if test="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='norm']">
                 <xsl:attribute name="norm">
                     <xsl:variable name="id" select="@xml:id"/>
-                    <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='norm']/descendant::tei:span[@from=$id]"/>
+                    <xsl:choose>
+                        <xsl:when test="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='norm']/descendant::tei:span[@from=$id]">
+                            <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='norm']/descendant::tei:span[@from=$id]"/>                            
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="text()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:attribute>
             </xsl:if>
 

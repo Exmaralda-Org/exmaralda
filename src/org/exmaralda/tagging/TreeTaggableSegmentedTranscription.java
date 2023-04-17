@@ -55,13 +55,14 @@ public class TreeTaggableSegmentedTranscription implements TreeTaggableDocument 
 
     @Override
     public List<String> getTokensAt(int pos) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         Element segmentChain = segmentChains.get(pos);
         try {
             List l = XPath.newInstance(xpathToTokens).selectNodes(segmentChain);
             for (Object o : l){
                 Element e = (Element)o;
-                result.add(e.getText());
+                String normalizedToken = normalizeToken(e.getText());
+                result.add(normalizedToken);
             }
         } catch (JDOMException ex) {
             throw new IOException(ex);
@@ -71,7 +72,7 @@ public class TreeTaggableSegmentedTranscription implements TreeTaggableDocument 
 
     @Override
     public List<String> getIDs() throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (Element segmentChain : segmentChains){
             try {
                 List l = XPath.newInstance(xpathToTokens).selectNodes(segmentChain);
@@ -89,6 +90,10 @@ public class TreeTaggableSegmentedTranscription implements TreeTaggableDocument 
     @Override
     public String getBase() {
         return base;
+    }
+
+    public String normalizeToken(String text) {
+        return text;
     }
 
 }

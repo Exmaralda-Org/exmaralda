@@ -72,7 +72,7 @@ public class Contribution implements TimeAssigned, SpeakerAssigned {
 
     @Override
     public Speaker getSpeaker() {
-        if (eventlist.getEvents().size()>0){
+        if (!eventlist.getEvents().isEmpty()){
             return eventlist.getEventAt(0).getSpeaker();
         }
         return null;
@@ -80,14 +80,14 @@ public class Contribution implements TimeAssigned, SpeakerAssigned {
     
     @Override
     public void setStartpoint(Timepoint startpoint) {
-        if (eventlist.getEvents().size()>0){
+        if (!eventlist.getEvents().isEmpty()){
             eventlist.getEventAt(0).setStartpoint(startpoint);
         }
     }
 
     @Override
     public void setEndpoint(Timepoint endpoint) {
-        if (eventlist.getEvents().size()>0){
+        if (!eventlist.getEvents().isEmpty()){
             eventlist.getEventAt(eventlist.getEvents().size()-1).setEndpoint(endpoint);
         }
     }
@@ -95,7 +95,7 @@ public class Contribution implements TimeAssigned, SpeakerAssigned {
 
     @Override
     public Timepoint getStartpoint() {
-        if (eventlist.getEvents().size()>0){
+        if (!eventlist.getEvents().isEmpty()){
             return eventlist.getEventAt(0).getStartpoint();
         }
         return null;
@@ -104,14 +104,14 @@ public class Contribution implements TimeAssigned, SpeakerAssigned {
 
     @Override
     public Timepoint getEndpoint() {
-        if (eventlist.getEvents().size()>0){
+        if (!eventlist.getEvents().isEmpty()){
             return eventlist.getEventAt(eventlist.getEvents().size()-1).getEndpoint();
         }
         return null;
     }
     
     public String getText(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (Event e : eventlist.getEvents()){
             sb.append(e.getText());
         }

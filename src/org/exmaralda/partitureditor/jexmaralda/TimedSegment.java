@@ -453,7 +453,7 @@ public class TimedSegment extends DefaultMutableTreeNode implements Identifiable
         Vector leaves = this.getLeaves();
         if (offset>=this.getDescription().length()){
             // return start of the last timeable leave
-            System.out.println("Halolalodri!");
+            //System.out.println("Halolalodri!");
             for (int pos=leaves.size()-1; pos>=0; pos--){
                 if (leaves.elementAt(pos) instanceof Timeable){
                     return ((Timeable)(leaves.elementAt(pos))).getStart();

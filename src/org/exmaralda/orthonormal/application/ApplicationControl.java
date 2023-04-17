@@ -1586,195 +1586,193 @@ public final class ApplicationControl implements  ListSelectionListener,
     }
 
     
-    void editContribution() throws JexmaraldaException {
+    void editContribution() {
+        int firstSelectedRow = contributionListTable.getSelectedRow();
+        if (firstSelectedRow<0) return;
+        Element originalContributionElement = getTranscription().getContributionAt(firstSelectedRow);
+        // new 17-04-2023
+        Element originalContributionElementClone = (Element) originalContributionElement.clone();
         try {
-            int firstSelectedRow = contributionListTable.getSelectedRow();
-            if (firstSelectedRow<0) return;
-
-            //EventListTranscription elt = EventListTranscriptionXMLReaderWriter.readXML(getTranscription().getDocument(), 0);
-            //elt.updateContributions();
-            
-            
-            //Contribution c = elt.getContributionAt(firstSelectedRow);
-            Element originalContributionElement = getTranscription().getContributionAt(firstSelectedRow);
-            // CLEANUP - 01-12-2014
-            String badTimes = "//contribution/descendant::time[(not(following-sibling::*) and not(following-sibling::text())) or following-sibling::node()[1][self::time]]";
-            List bt = XPath.selectNodes(originalContributionElement, badTimes);
-            for (Object o : bt){
-                Element t = (Element)o;
-                t.detach();
-            }
-            // END CLEANUP
-            
-            
-            //System.out.println("--------- INPUT -----------------");
-            //System.out.println("1: " + IOUtilities.elementToString(originalContributionElement));
-            // changed 20-01-2014            
-            EventListTranscription elt = Contribution.getTranscriptionForContributionFromOrthoNormalDocument(getTranscription().getDocument(), firstSelectedRow);
-            //System.out.println("2: " + IOUtilities.elementToString(elt.getContributionAt(0).toJDOMElement(elt.getTimeline())));
-            HashMap<String,String> originalNormalizations = new HashMap<>();
-            List l1 = XPath.selectNodes(originalContributionElement, "descendant::w[@n]");
-            for (Object o : l1){
-                Element w = (Element)o;
-                // 01-03-2023, issue #340
-                String word = WordUtilities.getWordText(w, true);
-                String normalization = w.getAttributeValue("n");
-                originalNormalizations.put(word, normalization);
-            }
-
-            HashMap<String,String> originalLemmas = new HashMap<>();
-            HashMap<String,String> originalPOS = new HashMap<>();
-            List l2 = XPath.selectNodes(originalContributionElement, "descendant::w[@lemma and @pos]");
-            for (Object o : l2){
-                Element w = (Element)o;
-                // 01-03-2023, issue #340
-                String word = WordUtilities.getWordText(w, true);
-                String lemma = w.getAttributeValue("lemma");
-                String pos = w.getAttributeValue("pos");
-                originalLemmas.put(word, lemma);
-                originalPOS.put(word, pos);
-            }
-            
-            
-            int parseLevel = Integer.parseInt(originalContributionElement.getAttributeValue("parse-level"));
-            
-            EditContributionDialog dialog = new EditContributionDialog(applicationFrame, this, true);
-            dialog.setContribution(elt.getContributionAt(0));
-            dialog.setLocationRelativeTo(applicationFrame.getContentPane());
-            dialog.addContributionTextPaneListener(this);
-            dialog.setVisible(true);            
-            
-            player.stopPlayback();
-            
-            if(!dialog.ok) return;
-            
-            applicationFrame.getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            
-            //Contribution modifiedContribution = dialog.getContribution();
-                       
-            GATParser parser = new GATParser();
-                    
-            Document eltDocument = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, null);
-            parser.parseDocument(eltDocument, 1);
-            parser.parseDocument(eltDocument, parseLevel);
-            
-            //System.out.println("***********************");
-            //System.out.println(IOUtilities.documentToString(eltDocument));
-            
-            
-            Element modifiedContributionElement = 
-                    (Element) XPath.selectNodes(eltDocument, "//contribution").get(0);
-            
-            
-
-            int newParseLevel = Integer.parseInt(modifiedContributionElement.getAttributeValue("parse-level"));
-            if (!(parseLevel==newParseLevel)){
-                applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
-                JOptionPane.showMessageDialog(applicationFrame, "Der bearbeitete Beitrag konnte nicht auf dem selben \n"
-                        + "Parse-Level geparst werden wie der Ausgangsbeitrag.\n"
-                        + "Die Änderungen wurden nicht angenommen.");
-                return;
-            }
-            
-            //modifiedContributionElement should now be correct, but it contains wrong timeline IDs
-            //take the original one and insert them into the new one
-            modifiedContributionElement.setAttribute("start-reference", originalContributionElement.getAttributeValue("start-reference"));
-            modifiedContributionElement.setAttribute("end-reference", originalContributionElement.getAttributeValue("end-reference"));
-            List tModified = XPath.selectNodes(modifiedContributionElement, "descendant::time");
-            List tOriginal = XPath.selectNodes(originalContributionElement, "descendant::time");
-            if (tModified.size()!=tOriginal.size()){
-                applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
-                JOptionPane.showMessageDialog(applicationFrame, "Es gab Probleme beim Zuordnen von Zeitpunkten. \n"
-                        + "Die Änderungen wurden nicht angenommen.");
-                return;                
-            }
-            for (int i=0; i<tModified.size(); i++){
-                Element eModified = (Element) tModified.get(i);
-                Element eOriginal = (Element) tOriginal.get(i);
-                eModified.setAttribute("timepoint-reference", eOriginal.getAttributeValue("timepoint-reference"));
                 
-            }
-            
-           
-            // make new IDs for words
-            // changed 16-06-2022 : issue #322
-            //List l = XPath.selectNodes(modifiedContributionElement, "descendant::w");
-            List l = XPath.selectNodes(modifiedContributionElement, "descendant::*[@id]");
-            int i=1;
-            HashSet<String> newIDs = new HashSet<String>();
-            for (Object o : l){
-                Element w = (Element)o;
-                String testID = "w1";                
-                while (getTranscription().hasWordID(testID)||newIDs.contains(testID)){
-                    i++;
-                    testID = "w" + Integer.toString(i);
+                // CLEANUP - 01-12-2014
+                String badTimes = "//contribution/descendant::time[(not(following-sibling::*) and not(following-sibling::text())) or following-sibling::node()[1][self::time]]";
+                List bt;
+                try {
+                    bt = XPath.selectNodes(originalContributionElement, badTimes);
+                    for (Object o : bt){
+                        Element t = (Element)o;
+                        t.detach();
+                    }
+                    // END CLEANUP
+                } catch (JDOMException ex) {
+                    Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+                    // changed 17-04-2023
+                    displayException(ex);
+                    return;
                 }
-                w.setAttribute("id", testID);
-                newIDs.add(testID);
-                i++;
-            }
-            System.out.println("*************************");
-            //System.out.println(IOUtilities.elementToString(modifiedContributionElement));
-            // reinsert original normalizations
-            autoNormalizer.normalize(modifiedContributionElement, originalNormalizations);
-            
-            // reinsert original lemmatisation and POS-tagging
-            if (!originalLemmas.isEmpty()){
-                for (Object o : l){
+                
+                
+                
+                //System.out.println("--------- INPUT -----------------");
+                //System.out.println("1: " + IOUtilities.elementToString(originalContributionElement));
+                // changed 20-01-2014
+                EventListTranscription elt = Contribution.getTranscriptionForContributionFromOrthoNormalDocument(getTranscription().getDocument(), firstSelectedRow);
+                
+                
+                //System.out.println("2: " + IOUtilities.elementToString(elt.getContributionAt(0).toJDOMElement(elt.getTimeline())));
+                HashMap<String,String> originalNormalizations = new HashMap<>();
+                List l1 = XPath.selectNodes(originalContributionElement, "descendant::w[@n]");
+                for (Object o : l1){
                     Element w = (Element)o;
                     // 01-03-2023, issue #340
                     String word = WordUtilities.getWordText(w, true);
-                    if (originalLemmas.containsKey(word)){
-                        w.setAttribute("lemma", originalLemmas.get(word));
-                    } else {
-                        w.setAttribute("lemma", word);
-                    }                    
-                    if (originalPOS.containsKey(word)){
-                        w.setAttribute("pos", originalPOS.get(word));
-                    } else {
-                        w.setAttribute("pos", "---");
-                    }                    
-                }                
-            }
-            
-            getTranscription().unindexContribution(originalContributionElement);
-            originalContributionElement.setContent(modifiedContributionElement.removeContent());            
-            getTranscription().reindexContribution(originalContributionElement);
-            
-            System.out.println("--------- RESULT -----------------");
-            System.out.println(IOUtilities.elementToString(originalContributionElement));
-            
-            updateContribution();
-            valueChanged(null);         
-            
-            wordListTableModel = new WordListTableModel(nft.getWords());
-            applicationFrame.wordTable.setModel(wordListTableModel);
-            setWordListCellRenderers();
-            wordListTableRowSorter = new WordListTableRowSorter(wordListTableModel);
-            applicationFrame.wordTable.setRowSorter(wordListTableRowSorter);
-            
-            
-            applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
-            
-            this.DOCUMENT_CHANGED = true;
-        } catch (JDOMException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+                    String normalization = w.getAttributeValue("n");
+                    originalNormalizations.put(word, normalization);
+                }
+                
+                HashMap<String,String> originalLemmas = new HashMap<>();
+                HashMap<String,String> originalPOS = new HashMap<>();
+                List l2 = XPath.selectNodes(originalContributionElement, "descendant::w[@lemma and @pos]");
+                for (Object o : l2){
+                    Element w = (Element)o;
+                    // 01-03-2023, issue #340
+                    String word = WordUtilities.getWordText(w, true);
+                    String lemma = w.getAttributeValue("lemma");
+                    String pos = w.getAttributeValue("pos");
+                    originalLemmas.put(word, lemma);
+                    originalPOS.put(word, pos);
+                }
+                
+                
+                int parseLevel = Integer.parseInt(originalContributionElement.getAttributeValue("parse-level"));
+                                
+                
+                EditContributionDialog dialog = new EditContributionDialog(applicationFrame, this, true);
+                dialog.setContribution(elt.getContributionAt(0));
+                dialog.setLocationRelativeTo(applicationFrame.getContentPane());
+                dialog.addContributionTextPaneListener(this);
+                dialog.setVisible(true);
+                
+                player.stopPlayback();
+                
+                if(!dialog.ok) return;
+                
+                applicationFrame.getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                
+                //Contribution modifiedContribution = dialog.getContribution();
+                
+                GATParser parser = new GATParser();
+                
+                Document eltDocument = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, null);
+                parser.parseDocument(eltDocument, 1);
+                parser.parseDocument(eltDocument, parseLevel);
+                
+                //System.out.println("***********************");
+                //System.out.println(IOUtilities.documentToString(eltDocument));
+                
+                
+                Element modifiedContributionElement =
+                        (Element) XPath.selectNodes(eltDocument, "//contribution").get(0);
+                
+                
+                
+                int newParseLevel = Integer.parseInt(modifiedContributionElement.getAttributeValue("parse-level"));
+                if (!(parseLevel==newParseLevel)){
+                    applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
+                    JOptionPane.showMessageDialog(applicationFrame, "Der bearbeitete Beitrag konnte nicht auf dem selben \n"
+                            + "Parse-Level geparst werden wie der Ausgangsbeitrag.\n"
+                            + "Die Änderungen wurden nicht angenommen.");
+                    return;
+                }
+                
+                //modifiedContributionElement should now be correct, but it contains wrong timeline IDs
+                //take the original one and insert them into the new one
+                modifiedContributionElement.setAttribute("start-reference", originalContributionElement.getAttributeValue("start-reference"));
+                modifiedContributionElement.setAttribute("end-reference", originalContributionElement.getAttributeValue("end-reference"));
+                List tModified = XPath.selectNodes(modifiedContributionElement, "descendant::time");
+                List tOriginal = XPath.selectNodes(originalContributionElement, "descendant::time");
+                if (tModified.size()!=tOriginal.size()){
+                    applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
+                    JOptionPane.showMessageDialog(applicationFrame, "Es gab Probleme beim Zuordnen von Zeitpunkten. \n"
+                            + "Die Änderungen wurden nicht angenommen.");
+                    return;
+                }
+                for (int i=0; i<tModified.size(); i++){
+                    Element eModified = (Element) tModified.get(i);
+                    Element eOriginal = (Element) tOriginal.get(i);
+                    eModified.setAttribute("timepoint-reference", eOriginal.getAttributeValue("timepoint-reference"));
+                    
+                }
+                
+                
+                // make new IDs for words
+                // changed 16-06-2022 : issue #322
+                //List l = XPath.selectNodes(modifiedContributionElement, "descendant::w");
+                List l = XPath.selectNodes(modifiedContributionElement, "descendant::*[@id]");
+                int i=1;
+                HashSet<String> newIDs = new HashSet<>();
+                for (Object o : l){
+                    Element w = (Element)o;
+                    String testID = "w1";
+                    while (getTranscription().hasWordID(testID)||newIDs.contains(testID)){
+                        i++;
+                        testID = "w" + Integer.toString(i);
+                    }
+                    w.setAttribute("id", testID);
+                    newIDs.add(testID);
+                    i++;
+                }
+                System.out.println("*************************");
+                //System.out.println(IOUtilities.elementToString(modifiedContributionElement));
+                // reinsert original normalizations
+                autoNormalizer.normalize(modifiedContributionElement, originalNormalizations);
+                
+                // reinsert original lemmatisation and POS-tagging
+                if (!originalLemmas.isEmpty()){
+                    for (Object o : l){
+                        Element w = (Element)o;
+                        // 01-03-2023, issue #340
+                        String word = WordUtilities.getWordText(w, true);
+                        if (originalLemmas.containsKey(word)){
+                            w.setAttribute("lemma", originalLemmas.get(word));
+                        } else {
+                            w.setAttribute("lemma", word);
+                        }
+                        if (originalPOS.containsKey(word)){
+                            w.setAttribute("pos", originalPOS.get(word));
+                        } else {
+                            w.setAttribute("pos", "---");
+                        }
+                    }
+                }
+                
+                getTranscription().unindexContribution(originalContributionElement);
+                originalContributionElement.setContent(modifiedContributionElement.removeContent());
+                getTranscription().reindexContribution(originalContributionElement);
+                
+                System.out.println("--------- RESULT -----------------");
+                System.out.println(IOUtilities.elementToString(originalContributionElement));
+                
+                updateContribution();
+                valueChanged(null);
+                
+                wordListTableModel = new WordListTableModel(nft.getWords());
+                applicationFrame.wordTable.setModel(wordListTableModel);
+                setWordListCellRenderers();
+                wordListTableRowSorter = new WordListTableRowSorter(wordListTableModel);
+                applicationFrame.wordTable.setRowSorter(wordListTableRowSorter);
+                
+                
+                applicationFrame.getContentPane().setCursor(Cursor.getDefaultCursor());
+                
+                this.DOCUMENT_CHANGED = true;
+                
+            } catch (JDOMException | IOException | SAXException | ParserConfigurationException | TransformerException | JexmaraldaException ex) {
+                Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+                // new 17-04-2023
+                displayException(ex);
+                originalContributionElement.setContent(originalContributionElementClone.removeContent());
+            }         
     }
 
     void changeSpeaker() {
