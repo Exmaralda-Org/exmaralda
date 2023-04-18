@@ -27,7 +27,6 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         applicationControl = new ApplicationControl(this);  
         applicationControl.assignActions();
         initComponents();
-        applicationControl.retrieveSettings();                 
     }
 
     /**

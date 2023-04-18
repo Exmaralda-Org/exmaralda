@@ -28,6 +28,7 @@ public class NewWordlistAction extends org.exmaralda.exakt.exmaraldaSearch.swing
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** NEW WORD LIST ACTION");
         COMACorpusInterface corpus = (COMACorpusInterface)(exaktFrame.corpusList.getSelectedValue());
         if (corpus==null) return;
 

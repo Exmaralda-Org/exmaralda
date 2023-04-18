@@ -45,7 +45,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
     
     @Override
     public void startDocument(){
-      System.out.println("started reading document...");
+      //System.out.println("started reading document...");
       transcription = new SegmentedTranscription();
       currentPCData = new String();
     }
@@ -53,7 +53,7 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
 // ----------------------------------------------------------------------------------------------------------- 
     @Override
     public void endDocument(){
-        System.out.println("document read.");
+        //System.out.println("document read.");
     }
 
 // ----------------------------------------------------------------------------------------------------------- 

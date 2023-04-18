@@ -38,6 +38,7 @@ public class AddAnalysisAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** ADD ANALYSIS ACTION");
         asp.init();
         dialog.setVisible(true);
         if (dialog.isApproved()){

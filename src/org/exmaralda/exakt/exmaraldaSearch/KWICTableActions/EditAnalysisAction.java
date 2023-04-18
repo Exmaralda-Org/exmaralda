@@ -48,6 +48,7 @@ public class EditAnalysisAction extends AbstractKWICTableAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** EDIT ANALYSIS ACTION");
         asp.setAnalysis(table.getWrappedModel().getAnalysisForColumn(selectedColumn));
         dialog.setVisible(true);
         if (dialog.isApproved()){

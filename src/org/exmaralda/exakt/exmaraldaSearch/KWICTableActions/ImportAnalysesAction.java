@@ -34,6 +34,7 @@ public class ImportAnalysesAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** IMPORT ANALYSES ACTION");
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose a concordance");
         fileChooser.setFileFilter(new org.exmaralda.exakt.utilities.XMLFileFilter());

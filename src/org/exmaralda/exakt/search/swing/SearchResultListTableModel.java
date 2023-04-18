@@ -42,6 +42,10 @@ public abstract class SearchResultListTableModel extends javax.swing.table.Abstr
         }
     }
     
+    public SearchResultList getSearchResultList(){
+        return data;
+    }
+    
     
     public AnalysisInterface getAnalysisForColumn(int c){
         if (!isAnalysisColumn(c)) return null;

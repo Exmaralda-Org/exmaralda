@@ -27,6 +27,7 @@ public class CloseSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** CLOSE SEARCH RESULT ACTION");
         exaktFrame.closeActiveSearchPanel();
     }
     

@@ -49,6 +49,7 @@ public class CalculateAnalysisAction extends AbstractKWICTableAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** CALCULATE ANALYSIS ACTION");
         COMACorpusInterface corpus = table.getWrappedModel().getCorpus();
         cap = new CalculateAnalysisPanel(corpus);
         dialog = new AbstractOKCancelDialog((JFrame)(table.getTopLevelAncestor()), true, cap);

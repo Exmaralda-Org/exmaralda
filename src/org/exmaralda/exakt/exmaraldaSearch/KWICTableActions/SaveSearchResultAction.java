@@ -13,8 +13,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jdom.*;
 import org.jdom.transform.*;
 import java.util.prefs.Preferences;
@@ -25,7 +23,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import org.exmaralda.common.helpers.XMLFormatter;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.exmaraldaSearch.*;
 import org.xml.sax.SAXException;
@@ -50,6 +47,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
     
     @Override
     public void actionPerformed(ActionEvent e) {   
+        System.out.println("*** SAVE SEARCH RESULT ACTION");
         File file = exaktFrame.getActiveSearchPanel().getCurrentSearchResultFile();
         if (file==null){
             exaktFrame.saveSearchResultAsAction.actionPerformed(e);

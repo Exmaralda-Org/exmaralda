@@ -28,6 +28,7 @@ public class RemoveUnselectedAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** REMOVE UNSELECTED ACTION");
         String message = "Are you sure you want to remove unselected search results?";
         int returnValue =  JOptionPane.showConfirmDialog(table.getTopLevelAncestor(), message, "Remove unselected search results", JOptionPane.YES_NO_OPTION);
         if (returnValue==JOptionPane.OK_OPTION){

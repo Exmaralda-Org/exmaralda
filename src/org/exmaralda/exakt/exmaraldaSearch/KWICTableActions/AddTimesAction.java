@@ -32,6 +32,7 @@ public class AddTimesAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** ADD TIMES ACTION");
         try {
             table.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             SearchResultList srl = table.getWrappedModel().getData();

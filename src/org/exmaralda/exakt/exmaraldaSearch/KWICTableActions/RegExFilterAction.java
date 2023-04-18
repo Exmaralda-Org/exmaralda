@@ -35,6 +35,7 @@ public class RegExFilterAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** REGEX FILTER ACTION");
         regexFilterPanel = new org.exmaralda.exakt.exmaraldaSearch.swing.RegExFilterPanel(table.getWrappedModel());
         Container c = table.getTopLevelAncestor();
         if (c instanceof JFrame){

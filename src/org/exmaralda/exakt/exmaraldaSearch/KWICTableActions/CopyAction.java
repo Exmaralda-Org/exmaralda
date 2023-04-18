@@ -50,6 +50,7 @@ public class CopyAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** COPY ACTION");
         COMAKWICTable t = this.table;
         int[] viewSelections = t.getSelectedRows();
         if (viewSelections.length<=0) return;

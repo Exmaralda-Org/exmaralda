@@ -43,6 +43,7 @@ public class CreateCollectionAction extends org.exmaralda.exakt.exmaraldaSearch.
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** CREATE COLLECTION ACTION");
 
         //open modal dialogue
         CreateCollectionDialog dialog = new CreateCollectionDialog(new JFrame(), true);

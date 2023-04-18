@@ -27,6 +27,8 @@ public class WordWiseReversedSortAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** WORD WISE REVERSED SORT ACTION");
+        
     }
     
 }

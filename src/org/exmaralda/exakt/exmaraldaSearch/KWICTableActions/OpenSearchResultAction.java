@@ -38,6 +38,7 @@ public class OpenSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** OPEN SEARCH RESULT ACTION");
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(exaktFrame.getLastSearchResultPath());
         fileChooser.setDialogTitle("Open a concordance");

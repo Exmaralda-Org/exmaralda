@@ -31,6 +31,7 @@ public class SaveSearchResultAsAction extends org.exmaralda.exakt.exmaraldaSearc
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** SAVE SEARCH RESULT AS ACTION");
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(exaktFrame.getLastSearchResultPath());
         fileChooser.setDialogTitle("Save a concordance");

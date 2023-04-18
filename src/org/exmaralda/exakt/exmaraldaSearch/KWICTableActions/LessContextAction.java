@@ -25,6 +25,7 @@ public class LessContextAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** LESS CONTEXT ACTION");
         int newContextSize = Math.max(1,table.getWrappedModel().getMaxContextSize()-3);
         table.getWrappedModel().setMaxContextSize(newContextSize);   
         table.setCellEditors();

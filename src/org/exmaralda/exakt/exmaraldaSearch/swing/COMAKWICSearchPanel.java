@@ -1218,6 +1218,15 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
      */
     @Override
     public void tableChanged(TableModelEvent e) {
+        System.out.println("Table changed");
+        SearchResultList modelList = ((COMAKWICTable)kwicTable).getWrappedModel().getSearchResultList();
+        // 2023-04-18: this is new for #380
+        if (modelList!=searchResultList){
+            System.out.println("Updating COMAKWICSearchPanel result list from result list of wrapped model");
+            //setSearchResultList(modelList);
+            searchResultList = modelList;
+
+        }
         updateLabels();
     }
 
@@ -1228,6 +1237,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     }
     
     private void updateLabels(){
+        
         updateSelectionLabel();
         tokensLabel.setText(Integer.toString(getSearchResultList().size()));
         typesLabel.setText(Integer.toString(getSearchResultList().getTypes().size()));

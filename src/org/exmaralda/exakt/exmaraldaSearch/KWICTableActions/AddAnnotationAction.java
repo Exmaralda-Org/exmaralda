@@ -16,6 +16,7 @@ import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.exmaralda.exakt.exmaraldaSearch.swing.AddAnnotationDialog;
+import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICSearchPanel;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.xml.sax.SAXException;
@@ -37,6 +38,7 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** ADD ANNOTATION ACTION");
         try {
             HashSet<String> annotationNames = table.getWrappedModel().getCorpus().getAnnotationNames();
             if (annotationNames.size()<=0){
@@ -56,6 +58,11 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
             table.getWrappedModel().setData(newsrl);
             table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             table.adjustColumns();
+            
+            
+            
+            
+            
         } catch (HeadlessException | SAXException ex) {
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(table, ex.getLocalizedMessage());

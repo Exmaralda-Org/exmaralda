@@ -183,11 +183,14 @@ public class SearchResultList extends Vector<SearchResultInterface> {
     }
     
     public void removeUnselected(){
-        Vector<SearchResultInterface> toBeRemoved = new Vector<SearchResultInterface>();
+        List<SearchResultInterface> toBeRemoved = new ArrayList<>();
         for (SearchResultInterface r : this){
-            if (!r.isSelected()) toBeRemoved.addElement(r);
+            if (!r.isSelected()) toBeRemoved.add(r);
         }
+        System.out.println("Before removal: " + this.size() + " search results");        
         this.removeAll(toBeRemoved);        
+        System.out.println("After removal: " + this.size() + " search results");
+        
     }
     
     public int getSelectedCount(){
@@ -200,7 +203,7 @@ public class SearchResultList extends Vector<SearchResultInterface> {
 
     public void sample(int howMany){
         Random random = new Random(new java.util.Date().getTime());
-        HashSet<Integer> numbers = new HashSet<Integer>();
+        HashSet<Integer> numbers = new HashSet<>();
         while((numbers.size()<howMany) && numbers.size()<size()){
             int number = random.nextInt(size());
             numbers.add(number);

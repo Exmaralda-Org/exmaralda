@@ -41,6 +41,7 @@ public class RemoveAnalysisAction extends AbstractKWICTableAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** REMOVE ANALYSIS ACTION");
         
         AnalysisInterface analysis = table.getWrappedModel().getAnalysisForColumn(selectedColumn);
         String text = "Are you sure you want to remove\n the analysis '" + analysis.getName() +"'?'";

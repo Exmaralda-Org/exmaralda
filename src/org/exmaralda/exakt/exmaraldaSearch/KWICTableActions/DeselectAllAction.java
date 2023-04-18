@@ -27,6 +27,7 @@ public class DeselectAllAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** DESELECT ALL ACTION");
         table.getWrappedModel().deselectAll();
         table.setCellEditors();
         table.adjustColumns();

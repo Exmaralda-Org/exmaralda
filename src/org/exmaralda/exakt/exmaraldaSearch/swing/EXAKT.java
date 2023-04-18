@@ -162,7 +162,7 @@ public class EXAKT extends javax.swing.JFrame
         try {
             setIconImage(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")).getImage());
         } catch (Throwable t){
-            System.out.println("Dann setzen wir halt kein Icon");
+            System.out.println("Icon could not be set");
             Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, t);          
         }
 

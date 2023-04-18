@@ -28,6 +28,7 @@ public class DeselectHighlightedAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** DESELECT HIGHLIGHTED ACTION");
         int[] selectedRows = table.getSelectedRows();
         int[] modelRows = new int[selectedRows.length];
         for (int i=0; i<selectedRows.length; i++){

@@ -33,6 +33,7 @@ public class AppendSearchResultAction extends org.exmaralda.exakt.exmaraldaSearc
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** APPEND SEARCH RESULT ACTION");
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(exaktFrame.getLastSearchResultPath());
         fileChooser.setDialogTitle("Append a concordance");

@@ -27,6 +27,7 @@ public class SelectAllAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** SELECT ALL ACTION");
         table.getWrappedModel().selectAll();
         table.setCellEditors();
         table.adjustColumns();

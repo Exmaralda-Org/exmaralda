@@ -29,6 +29,7 @@ public class NewSearchPanelAction extends org.exmaralda.exakt.exmaraldaSearch.sw
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** NEW SEARCH PANEL ACTION");
         COMACorpusInterface corpus = (COMACorpusInterface)(exaktFrame.corpusList.getSelectedValue());
         if (corpus==null) return;
         COMAKWICSearchPanel newPanel = new COMAKWICSearchPanel(corpus);

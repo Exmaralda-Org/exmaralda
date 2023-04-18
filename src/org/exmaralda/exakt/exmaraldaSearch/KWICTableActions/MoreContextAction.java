@@ -27,6 +27,7 @@ public class MoreContextAction extends AbstractKWICTableAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("*** MORE CONTEXT ACTION");
         int newContextSize = table.getWrappedModel().getMaxContextSize()+3;
         table.getWrappedModel().setMaxContextSize(newContextSize);
         table.setCellEditors();        
