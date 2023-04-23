@@ -7,8 +7,10 @@
 package org.exmaralda.partitureditor.partiture.tierActions;
 
 import org.exmaralda.partitureditor.jexmaralda.Tier;
-import org.exmaralda.partitureditor.jexmaraldaswing.ListEventsDialog;
+import org.exmaralda.partitureditor.jexmaraldaswing.ListEventsTableDialog;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
+
+// changed for #382
 
 
 /**
@@ -33,7 +35,8 @@ public class ListEventsAction extends org.exmaralda.partitureditor.partiture.Abs
     
     private void listEvents(){
         Tier tier = table.getModel().getTranscription().getBody().getTierAt(table.selectionStartRow);
-        ListEventsDialog dialog = new ListEventsDialog(table.parent, false, tier);
+        //ListEventsDialog dialog = new ListEventsDialog(table.parent, false, tier);
+        ListEventsTableDialog dialog = new ListEventsTableDialog(table.parent, false, table.getModel().getTranscription(), tier);
         dialog.setLocationRelativeTo(table);
         dialog.addSearchResultListener(table);
         dialog.setVisible(true);

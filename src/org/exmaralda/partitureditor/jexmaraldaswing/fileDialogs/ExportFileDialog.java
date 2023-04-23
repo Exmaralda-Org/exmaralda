@@ -51,7 +51,7 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         addChoosableFileFilter(AGFileFilter);*/
         // removed 10-04-2013
         //addChoosableFileFilter(ExmaraldaSegmentedTranscriptionFileFilter);
-        setFileFilter(TEIFileFilter);
+        //setFileFilter(TEIFileFilter);
         setMultiSelectionEnabled(false);
         addPropertyChangeListener("fileFilterChanged", this);
     }

@@ -9,8 +9,6 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import java.util.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.partiture.*;
 
 /**
  *
@@ -52,6 +50,7 @@ public class EventNavigationDialog extends javax.swing.JDialog {
         gotoButton = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
@@ -67,6 +66,7 @@ public class EventNavigationDialog extends javax.swing.JDialog {
 
         gotoButton.setText("Go to");
         gotoButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gotoButtonActionPerformed(evt);
             }
@@ -118,6 +118,7 @@ public class EventNavigationDialog extends javax.swing.JDialog {
     private javax.swing.JList scList;
     // End of variables declaration
     
+    @Override
     public void show(){
         java.awt.Dimension dialogSize = this.getPreferredSize();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
