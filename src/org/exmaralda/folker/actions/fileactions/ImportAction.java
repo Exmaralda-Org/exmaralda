@@ -148,7 +148,7 @@ public class ImportAction extends AbstractApplicationAction {
             }
         } else if (fileChooser.getFileFilter()==WhisperJSONFileFilter){
             try {
-                BasicTranscription bt = WhisperJSONConverter.readWhisperJSON(f);
+                BasicTranscription bt = WhisperJSONConverter.readWhisperJSON(f, false);
                 importedTranscription = org.exmaralda.folker.io.EventListTranscriptionConverter.importExmaraldaBasicTranscription(bt, true);
             } catch (IOException | IllegalArgumentException | JexmaraldaException ex) {
                 applicationControl.displayException(ex);

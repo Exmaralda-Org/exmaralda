@@ -26,8 +26,11 @@ import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
 public class WhisperJSONConverter {
     
     
-    
     public static BasicTranscription readWhisperJSON(File jsonFile) throws IOException, JexmaraldaException{
+        return readWhisperJSON(jsonFile, true);
+    }
+
+        public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords) throws IOException, JexmaraldaException{
         // read json file via Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonRoot = objectMapper.readValue(jsonFile, JsonNode.class);        
@@ -78,6 +81,14 @@ public class WhisperJSONConverter {
         
         */
         
+        boolean hasWordLevel = (jsonRoot.findValue("words")!=null);
+        Tier wordTier = new Tier("TIE5", "SPK0", "w", "t", "X [words]");
+        if (hasWordLevel && wantsWords){
+            textTier.setType("a");
+            result.getBody().insertTierAt(wordTier, 0);
+            
+        }
+        
         JsonNode segmentsNode = jsonRoot.findValue("segments");
         Iterator<JsonNode> iterator = segmentsNode.elements();
         Timeline timeline = result.getBody().getCommonTimeline();
@@ -116,6 +127,42 @@ public class WhisperJSONConverter {
             avgLogProbTier.addEvent(new Event(startID, endID, avg_logprob));
             compressionRatioTier.addEvent(new Event(startID, endID, compression_ratio));
             noSpeechProbTier.addEvent(new Event(startID, endID, no_speech_prob));
+            
+            if (hasWordLevel){
+                JsonNode wordsNode = segmentNode.findValue("words");
+                Iterator<JsonNode> wordIterator = wordsNode.elements();
+                while (wordIterator.hasNext()){
+                    JsonNode wordNode = wordIterator.next();
+                    if (wordNode.get("start")==null){
+                        throw new IOException("Error in format.");
+                    }
+
+                    // round to miliseconds to avoid overlaps which aren't overlaps
+                    double wStartTimeInSeconds = Rounder.round(wordNode.get("start").asDouble(),3);
+                    double wEndTimeInSeconds = Rounder.round(wordNode.get("end").asDouble(),3);
+                    String wText = wordNode.get("word").asText();
+
+                    String wStartID = "TLI_" + Double.toString(wStartTimeInSeconds).replace('.', '_');
+                    if (!(timeline.containsTimelineItemWithID(wStartID))){
+                        TimelineItem tli = new TimelineItem();
+                        tli.setID(wStartID);
+                        tli.setTime(wStartTimeInSeconds);
+                        timeline.insertAccordingToTime(tli);
+                    }
+
+                    String wEndID = "TLI_" + Double.toString(wEndTimeInSeconds).replace('.', '_');
+                    if (!(timeline.containsTimelineItemWithID(wEndID))){
+                        TimelineItem tli = new TimelineItem();
+                        tli.setID(wEndID);
+                        tli.setTime(wEndTimeInSeconds);
+                        timeline.insertAccordingToTime(tli);
+                    }
+                    
+                    wordTier.addEvent(new Event(wStartID, wEndID, wText));
+
+                    
+                }
+            }
             
         }
         
