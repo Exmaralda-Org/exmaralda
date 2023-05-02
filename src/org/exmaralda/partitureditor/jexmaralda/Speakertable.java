@@ -216,6 +216,17 @@ public class Speakertable extends Vector {
         this.updatePositions();
         return mappings;
     }
+
+    public Speaker findSpeakerWithAbbreviation(String speakerAbb) {
+        for (int pos=0; pos<getNumberOfSpeakers(); pos++){
+            Speaker speaker = getSpeakerAt(pos);
+            if (speaker.getAbbreviation().equals(speakerAbb)){
+                return speaker;
+            }                
+        }    
+        
+        return null;
+    }
     
 
 }

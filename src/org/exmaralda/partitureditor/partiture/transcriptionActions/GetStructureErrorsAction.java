@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.errorChecker.EditErrorsDialog;
 import org.exmaralda.partitureditor.partiture.*;
@@ -36,12 +37,13 @@ public class GetStructureErrorsAction extends org.exmaralda.partitureditor.parti
     }
     
     private void getStructureErrors() {
-        String[] duplicateTranscriptionTiers = table.getModel().getTranscription().getDuplicateTranscriptionTiers();
-        String[] orphanedTranscriptionTiers = table.getModel().getTranscription().getOrphanedTranscriptionTiers();
-        String[] orphanedAnnotationTiers = table.getModel().getTranscription().getOrphanedAnnotationTiers();
-        String[] temporalAnomalies = table.getModel().getTranscription().getBody().getCommonTimeline().getInconsistencies();
+        BasicTranscription bt = table.getModel().getTranscription();
+        String[] duplicateTranscriptionTiers = bt.getDuplicateTranscriptionTiers();
+        String[] orphanedTranscriptionTiers = bt.getOrphanedTranscriptionTiers();
+        String[] orphanedAnnotationTiers = bt.getOrphanedAnnotationTiers();
+        String[] temporalAnomalies = bt.getBody().getCommonTimeline().getInconsistencies();
         // this returns a hashtable with tierIDs/array of event IDs
-        Hashtable<String, String[]> annotationMismatches = table.getModel().getTranscription().getAnnotationMismatches();
+        Hashtable<String, String[]> annotationMismatches = bt.getAnnotationMismatches();
 
         Document errorsDocument = org.exmaralda.partitureditor.jexmaralda.errorChecker.Utilities.makeEmptyDocument();
         Element errors = errorsDocument.getRootElement().getChild("errors");

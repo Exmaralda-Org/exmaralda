@@ -54,9 +54,10 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/exmaralda/texgut/application/elan.png"/>
+              <Image iconType="3" name="/org/exmaralda/texgut/application/file-plus-solid.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="New ELAN transcription... "/>
+            <Property name="iconTextGap" type="int" value="20"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newEAFButtonActionPerformed"/>
@@ -68,9 +69,10 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/org/exmaralda/texgut/application/checkmark.png"/>
+              <Image iconType="3" name="/org/exmaralda/texgut/application/file-check-sharp-solid.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Check ELAN transcription... "/>
+            <Property name="iconTextGap" type="int" value="20"/>
           </Properties>
         </Component>
       </SubComponents>

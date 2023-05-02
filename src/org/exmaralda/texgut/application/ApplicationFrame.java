@@ -61,8 +61,9 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         mainPanel.setLayout(new java.awt.GridLayout(2, 1));
 
         newEAFButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        newEAFButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/elan.png"))); // NOI18N
+        newEAFButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/file-plus-solid.png"))); // NOI18N
         newEAFButton.setText("New ELAN transcription... ");
+        newEAFButton.setIconTextGap(20);
         newEAFButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newEAFButtonActionPerformed(evt);
@@ -71,8 +72,9 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         mainPanel.add(newEAFButton);
 
         checkEAFButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        checkEAFButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/checkmark.png"))); // NOI18N
+        checkEAFButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/file-check-sharp-solid.png"))); // NOI18N
         checkEAFButton1.setText("Check ELAN transcription... ");
+        checkEAFButton1.setIconTextGap(20);
         mainPanel.add(checkEAFButton1);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);

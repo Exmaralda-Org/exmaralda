@@ -302,10 +302,11 @@ public class Timeline extends Vector {
                 // changed 28-04-2009: don't allow identical timestamps
                 // changed again 22-06-2009: don't mistreat the first TLI!
                 if ((pos>0) && (currentTime<=minTime)) {
-                    result.addElement(getTimelineItemAt(pos).getID());
-                } else {
+                    result.addElement(getTimelineItemAt(pos).getID());                    
+                } /*else {
                     minTime = currentTime;
-                }
+                }*/
+                minTime = currentTime;
             }
         }
         return result.toArray(new String[0]);

@@ -11,6 +11,7 @@ import java.util.*;
 import javax.swing.DefaultListModel;
 import java.io.*;
 import javax.swing.event.ListSelectionEvent;
+import org.exmaralda.partitureditor.partiture.PartiturEditor;
 /**
  *
  * @author  thomas
@@ -19,6 +20,7 @@ public class EditReferencedFilesDialog extends javax.swing.JDialog implements ja
 
     DefaultListModel listModel;
     public String defaultDirectory = "";
+
     
     /** Creates new form EditReferencedFilesDialog */
     public EditReferencedFilesDialog(java.awt.Frame parent, boolean modal, Vector<String> rf) {
@@ -165,7 +167,18 @@ private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     fc.setFileFilter(new org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.RecommendedMediaFileFilter());
     fc.setMultiSelectionEnabled(true);
     if ((listModel.getSize()>0) && (((String)(listModel.get(0))).length()>0)){
-        fc.setCurrentDirectory(new File((String)(listModel.get(0))).getParentFile());
+        File directory = new File((String)(listModel.get(0))).getParentFile();
+        if (directory.exists()){
+            fc.setCurrentDirectory(directory);        
+        } else {
+            if (getParent()!=null && getParent() instanceof PartiturEditor){
+                String filename = ((PartiturEditor)getParent()).getPartitur().filename;
+                File tryFile = new File(filename);
+                if (tryFile.exists()){
+                    fc.setCurrentDirectory(tryFile.getParentFile());
+                }
+            }
+        }
     } else {
         fc.setCurrentDirectory(new File(defaultDirectory));
     }

@@ -6,6 +6,8 @@
 
 package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
+import java.awt.Container;
+import javax.swing.JFrame;
 import org.exmaralda.partitureditor.jexmaraldaswing.EditMetaInformationDialog;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
@@ -19,11 +21,13 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class EditRecordingsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditMetaInformationAction */
+    /** Creates a new instance of EditMetaInformationAction
+     * @param t */
     public EditRecordingsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Recordings...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editRecordingsAction!");
         table.commitEdit(true);
@@ -32,7 +36,12 @@ public class EditRecordingsAction extends org.exmaralda.partitureditor.partiture
     
     private void editRecordings(){
         BasicTranscription transcription = table.getModel().getTranscription();
-        EditReferencedFilesDialog dialog = new EditReferencedFilesDialog(null, true, transcription.getHead().getMetaInformation().getReferencedFiles());
+        JFrame frame = null;
+        Container c = table.getTopLevelAncestor();
+        if (c instanceof JFrame){
+            frame = (JFrame)c;
+        }
+        EditReferencedFilesDialog dialog = new EditReferencedFilesDialog(frame, true, transcription.getHead().getMetaInformation().getReferencedFiles());
         dialog.defaultDirectory = table.getFilename();
         dialog.setLocationRelativeTo(this.table);
         dialog.setVisible(true);
