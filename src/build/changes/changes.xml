@@ -10,6 +10,22 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">Import Whisper word level  (issue #357)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">Improve start folder selection for Add recording  (issue #384)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">List events in table rather than list (issue #382)</change>
+    <change tool="exakt" type="bug" version="1.4" date="18.04.2023">Fix for inconsistent data update after "Add annotation" (issue #380)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="24.03.2023">Fixed bug in RTF output (issue #379)</change>
+    <change tool="folker" type="bug" version="1.3" date="13.03.2023">Optional pretty print (issue #340)</change>
+    <change tool="orthonormal" type="bug" version="1.0" date="13.03.2023">Optional pretty print (issue #340)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="13.03.2023">Optional pretty print (issue #340)</change>
+    <change tool="orthonormal" type="bug" version="1.0" date="08.03.2023">Fixed another problem related to pretty printing of words with internal time anchors (issue #340)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="07.03.2023">Consider intermediate timeline items when changing boundaries of spanned events (issue #377)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="06.03.2023">Fix for bug in CSV export (issue #376)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="06.03.2023">Fix for bug and performance improvement in ISO/TEI import (issue #367)</change>
+    <change tool="exakt" type="change" version="1.4" date="01.03.2023">Fixed problems with FLN import wizard (issue #328)</change>
+    <change tool="orthonormal" type="bug" version="1.0" date="01.03.2023">Fixed problem related to pretty printing of words with internal time anchors (issue #340)</change>
+    <change tool="folker" type="bug" version="1.3" date="24.02.2023">Fix for bug in masking (issue #372)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="24.02.2023">Fix for bug in masking (issue #372)</change>
     <change tool="folker" type="change" version="1.3" date="18.02.2023">Better handling of masking information in continuing/splitting transcripts (issue #313)</change>
     <change tool="exakt" type="change" version="1.4" date="15.02.2023">Message when max number of search results exceeded (issue #370)</change>
     <change tool="exakt" type="change" version="1.4" date="15.02.2023">Fixes for FOLKER corpus wizard (issue #328)</change>
