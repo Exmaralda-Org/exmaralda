@@ -10,7 +10,7 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
-    <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">Import Whisper word level  (issue #357)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="02.05.2023">Import Whisper word level  (issue #357)</change>
     <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">Improve start folder selection for Add recording  (issue #384)</change>
     <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">List events in table rather than list (issue #382)</change>
     <change tool="exakt" type="bug" version="1.4" date="18.04.2023">Fix for inconsistent data update after "Add annotation" (issue #380)</change>
