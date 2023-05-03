@@ -74,6 +74,12 @@ public class EventListTranscriptionConverter {
         for (int pos=0; pos<bt.getHead().getSpeakertable().getNumberOfSpeakers(); pos++){
             org.exmaralda.partitureditor.jexmaralda.Speaker importedSpeaker 
                     = bt.getHead().getSpeakertable().getSpeakerAt(pos);
+            
+            // new 03-05-2023, issue #386
+            if (importedSpeaker.getID().equals("SPK_NOSPK")){
+                continue;
+            }
+            
             String newID = result.addSpeaker(importedSpeaker.getAbbreviation());
             speakerIDMappings.put(importedSpeaker.getID(), newID);
             if (importedSpeaker!=null){
@@ -87,7 +93,9 @@ public class EventListTranscriptionConverter {
             org.exmaralda.partitureditor.jexmaralda.Tier tier = bt.getBody().getTierAt(pos);
             if (!(tier.getType().equals("t"))) continue;
             org.exmaralda.folker.data.Speaker speaker = null;
-            if (tier.getSpeaker()!=null){
+            // change 03-05-2023 for issue #386
+            //if (tier.getSpeaker()!=null && !(tier.getSpeaker().equals("SPK_NOSPK"))){
+            if (tier.getSpeaker()!=null && !(tier.getSpeaker().equals("SPK_NOSPK"))){
                 speaker = result.getSpeakerWithID(speakerIDMappings.get(tier.getSpeaker()));
             }
             for (int i=0; i<tier.getNumberOfEvents(); i++){
@@ -101,7 +109,7 @@ public class EventListTranscriptionConverter {
                         correspondingEvent.setFolkerEvent(result.getEventAt(index));
                     }
                 } catch (JexmaraldaException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
                 }
             }
         }

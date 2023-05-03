@@ -25,8 +25,8 @@ public class Speakerlist {
     /** Creates a new instance of Speakerlist */
     public Speakerlist(EventListTranscription t) {
         transcription = t;
-        speakers = new Vector<Speaker>();
-        ids = new HashSet<String>();
+        speakers = new Vector<>();
+        ids = new HashSet<>();
     }
     
     public String getFreeID(String suggestedID){

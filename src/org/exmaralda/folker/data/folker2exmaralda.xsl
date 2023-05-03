@@ -36,7 +36,9 @@
                           <l1/>
                           <l2/>
                           <ud-speaker-information>
-                              <ud-information attribute-name="Name"></ud-information>
+                              <!-- 03-05-2023 : changed for issue #386 -->
+                              <!-- <ud-information attribute-name="Name"></ud-information> -->
+                              <ud-information attribute-name="Name">***SPK_NOSPK***</ud-information>
                           </ud-speaker-information>
                           <comment/>            
                       </speaker> 

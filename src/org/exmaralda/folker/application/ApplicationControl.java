@@ -1452,7 +1452,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     contributionListTableModel.DOCUMENT_CHANGED = false;
                     partitur.transcriptionChanged = false;
                     System.out.println("Done saving...");
-                } catch (Exception ex) {
+                } catch (IOException | ParserConfigurationException | TransformerException | JDOMException | SAXException ex) {
                     Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                     displayException(ex);
                     status(FOLKERInternationalizer.getString("status.saveerror") + finalFile.getAbsolutePath() + ".");
