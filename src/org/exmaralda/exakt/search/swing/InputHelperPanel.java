@@ -16,38 +16,45 @@ import javax.swing.*;
  */
 public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeyboardListener {
     
-    private static String[] ANY_CHARACTER = {
+    private static final String[] ANY_CHARACTER = {
         "[A-Za-z]", // 0 : DEFAULT
         "[A-Za-zÄÖÜäöüß]", // 1 : GERMAN
         "[A-Za-z\u00C2\u00C7\u011E\u0130\u00CE\u00D6\u015E\u0160\u00DB\u00DC\u00E2\u00E7\u011F\u00EE\u0131\u00F6\u015F\u0161\u00FB\u00FC]", // 2 : TURKISH
         "[A-Za-z\u00C6\u00E6\u00C5\u00E5\u00C4\u00E4\u00D0\u00F0\u00D8\u00F8\u00D6\u00F6\u00DE\u00FE]", // 3 : SCANDINAVIAN
         "[A-Za-zÀÁÂÃÇÉÊÍÓÔÕÚàáâãçéêíóôõú]", // 4 : PORTUGUESE
         "[A-Za-zÀÈÉÌÍÎÓÒÚÙàèéìíîóòúù]", // 5 : ITALIAN
-        "[\\p{L}]" // 6 : ANY KIND OF ALPHABET
+        "[A-Za-zÑñ]", // 6 : SPANISH
+        "[A-Za-zÀÂÇÉÈÊËÎÏÔŒÙÛàâçéèêëïîôœûù]", // 7 : FRENCH
+        "[\\p{L}]" // 8 : ANY KIND OF ALPHABET
         
     };
     
-    private static String[] UPPER_CASE_CHARACTER = {
+    private static final String[] UPPER_CASE_CHARACTER = {
         "[A-Z]", // 0 : DEFAULT
         "[A-ZÄÖÜ]", // 1 : GERMAN
         "[A-Z\u00C2\u00C7\u011E\u0130\u00CE\u00D6\u015E\u0160\u00DB\u00DC]", // 2 : TURKISH
-        "[A-Za-z\u00C6\u00C5\u00C4\u00D0\u00D8\u00D6\u00DE]", // 3 : SCANDINAVIAN
-        "[A-Za-zÀÁÂÃÇÉÊÍÓÔÕÚ]", // 4 : PORTUGUESE
-        "[A-Za-zÀÈÉÌÍÎÓÒÚÙ]", // 5 : ITALIAN
-        "[\\p{Lu}]"
+        "[A-Z\u00C6\u00C5\u00C4\u00D0\u00D8\u00D6\u00DE]", // 3 : SCANDINAVIAN
+        "[A-ZÀÁÂÃÇÉÊÍÓÔÕÚ]", // 4 : PORTUGUESE
+        "[A-ZÀÈÉÌÍÎÓÒÚÙ]", // 5 : ITALIAN
+        "[A-ZÑ]", // 6 : SPANISH
+        "[A-ZÀÂÇÉÈÊËÎÏÔŒÙÛ]", // 7 : FRENCH
+        "[\\p{Lu}]" // 8 : ANY KIND OF ALPHABET
     };
 
-    private static String[] LOWER_CASE_CHARACTER = {
+    private static final String[] LOWER_CASE_CHARACTER = {
         "[a-z]", // 0 : DEFAULT
         "[a-zäöüß]", // 1 : GERMAN
         "[a-z\u00E2\u00E7\u011F\u00EE\u0131\u00F6\u015F\u0161\u00FB\u00FC]", // 2 : TURKISH
-        "[A-Za-z\u00E6\u00E5\u00E4\u00F0\u00F8\u00F6\u00FE]", // 3 : SCANDINAVIAN
-        "[A-Za-zàáâãçéêíóôõú]", // 4 : PORTUGUESE
-        "[A-Za-zàèéìíîóòúù]", // 5 : ITALIAN
-        "[\\p{Ll}]"
+        "[a-z\u00E6\u00E5\u00E4\u00F0\u00F8\u00F6\u00FE]", // 3 : SCANDINAVIAN
+        "[a-zàáâãçéêíóôõú]", // 4 : PORTUGUESE
+        "[a-zàèéìíîóòúù]", // 5 : ITALIAN
+        "[a-záéíñóúü]", // 6 : SPANISH
+        "[a-zàâçéèêëïîôœûù]", // 7 : FRENCH
+        "[\\p{Ll}]" // 8 : ANY KIND OF ALPHABET
     };
     
-    Comparator<String> caseIgnoringComparator = new java.util.Comparator<String>() {
+    Comparator<String> caseIgnoringComparator = new java.util.Comparator<>() {
+        @Override
         public int compare(String s1, String s2) {
             return s1.toUpperCase().compareTo(s2.toUpperCase());
         }
@@ -56,7 +63,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
     DefaultListModel unselectedListModel = new DefaultListModel();;
     DefaultListModel selectedListModel = new DefaultListModel();;
     
-    private UnicodeKeyboardPanel keyboardPanel;
+    private final UnicodeKeyboardPanel keyboardPanel;
     //private SearchHistoryComboBox searchHistoryComboBox;
     RegularExpressionTextField textField;
             
@@ -90,7 +97,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
     }
     
     public void setTypes(HashSet<String> types){
-        Vector<String> v = new Vector<String>();
+        Vector<String> v = new Vector<>();
         v.addAll(types);
         Collections.sort(v, caseIgnoringComparator);
         unselectedListModel = new DefaultListModel();
@@ -103,6 +110,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         selectedTypesList.setModel(selectedListModel);
     }
 
+    @Override
     public void performUnicodeKeyboardAction(UnicodeKeyboardEvent event) {
         insertText(event.getText());
     }
@@ -592,7 +600,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         jLabel5.setText("Alphabet: ");
         alphabetPanel.add(jLabel5);
 
-        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German", "Turkish", "Scandinavian", "Portuguese", "Italian", "Any character" }));
+        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German", "Turkish", "Scandinavian", "Portuguese", "Italian", "Spanish", "French", "Any character" }));
         alphabetComboBox.setMaximumSize(new java.awt.Dimension(55, 22));
         alphabetPanel.add(alphabetComboBox);
 
@@ -641,7 +649,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
     }//GEN-LAST:event_selectButtonActionPerformed
 
     private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
-        StringBuffer all = new StringBuffer();
+        StringBuilder all = new StringBuilder();
         for (int pos=0; pos<selectedTypesList.getModel().getSize(); pos++){
             String type = (String)(selectedTypesList.getModel().getElementAt(pos));
             all.append(type + "\n");
