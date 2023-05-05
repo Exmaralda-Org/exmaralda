@@ -156,7 +156,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                 
 
                     //transform and fetch result as string
-                    StreamSource resultSource = new StreamSource(new StringReader(searchResultString));
+                    //StreamSource resultSource = new StreamSource(new StringReader(searchResultString));
                     StringWriter resultWriter = new StringWriter();
                     t.transform(searchResultSource, new StreamResult(resultWriter));
                 
