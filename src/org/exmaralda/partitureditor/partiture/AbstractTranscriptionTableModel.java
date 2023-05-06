@@ -46,27 +46,27 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
 
     // constants for identifying events 
     /** user has changed selection */
-    static final int SELECTION_CHANGED = 15;    
+    public static final int SELECTION_CHANGED = 15;    
     /** a data reset is to be prepared */
-    static final int RESET_APPROACHING = 16;    
+    public static final int RESET_APPROACHING = 16;    
     /** a row has been inserted */
-    static final int ROW_INSERTED = 17;
+    public static final int ROW_INSERTED = 17;
     /** the format has been reset */
-    static final int FORMAT_RESET = 18;
+    public static final int FORMAT_RESET = 18;
     /** the format of a specific cell has changed */
-    static final int CELL_FORMAT_CHANGED = 19;
+    public static final int CELL_FORMAT_CHANGED = 19;
     /** the format of an entire row has changed */
-    static final int ROW_FORMAT_CHANGED = 20;
+    public static final int ROW_FORMAT_CHANGED = 20;
     /** the format of the row labels has changed */
-    static final int ROW_LABEL_FORMAT_CHANGED = 21;
+    public static final int ROW_LABEL_FORMAT_CHANGED = 21;
     /** the format of the column labels has changed */
-    static final int COLUMN_LABEL_FORMAT_CHANGED = 22;
+    public static final int COLUMN_LABEL_FORMAT_CHANGED = 22;
     /** rows have been swapped */
-    static final int ROWS_SWAPPED = 23;
+    public static final int ROWS_SWAPPED = 23;
     /** an area of the partitur has changed */
-    static final int AREA_CHANGED = 24;
+    public static final int AREA_CHANGED = 24;
     /** a cell span has changed */
-    static final int CELL_SPAN_CHANGED = 25;
+    public static final int CELL_SPAN_CHANGED = 25;
 
     
     /** Creates new AbstractTranscriptionTableModel */
@@ -106,9 +106,11 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         formats = new TierFormatTable(transcription);   // first create a default format table
         formats.setTimelineItemFormat(tft.getTimelineItemFormat());
         String[] tierIDs = tft.getAllTierIDs();
-        for (int pos=0; pos<tierIDs.length; pos++){     // then set the formats contained in the given format table (ensures that everything has a format
-            try {formats.setTierFormat(tft.getTierFormatForTier(tierIDs[pos]));}
-            catch (JexmaraldaException je){
+        for (String tierID : tierIDs) {
+            // then set the formats contained in the given format table (ensures that everything has a format
+            try {
+                formats.setTierFormat(tft.getTierFormatForTier(tierID));
+            }catch (JexmaraldaException je){
                 // should never get here
             }   
         }
@@ -575,7 +577,9 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     }
     
     /** returns the nearest column to the left of the 
-     * specified column at which a clear cut is possible */
+     * specified column at which a clear cut is possible
+     * @param col
+     * @return  */
     public int lower (int col){
         int leftmostColumn = 0;
         for (int col2=col; col2>=0; col2--){
@@ -588,7 +592,9 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     }
     
     /** returns the nearest column to the right of the 
-     * specified column at which a clear cut is possible */
+     * specified column at which a clear cut is possible
+     * @param col
+     * @return  */
     public int upper (int col){
         int rightmostColumn = getNumColumns();
         for (int col2=col+1; col2<getNumColumns(); col2++){
@@ -600,8 +606,11 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         return rightmostColumn;
     }
     
-    /** returns the required (not actual!) cell span of the specified cell 
-     * i.e. how many intervals on the timeline does this event span? */
+    /** *  returns the required (not actual!) cell span of the specified cell 
+     * i.e.how many intervals on the timeline does this event span?
+     * @param row
+     * @param col
+     * @return  */
     public int getCellSpan(int row, int col){
         Timeline timeline = transcription.getBody().getCommonTimeline();
         try {
@@ -642,8 +651,12 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         }
     }
 
-    /** returns the required (not actual!) cell width of the specified cell
-     * i.e. what is the width of the corresponding event description? */
+    /** *  returns the required (not actual!) cell width of the specified cell
+     * i.e.what is the width of the corresponding event description?
+     * @param row
+     * @param col
+     * @param scaleFactor
+     * @return  */
     public int getCellWidth(int row, int col, int scaleFactor){
         if (!timeProportional){
             final int EXTRA_SPACE = 6;       // additional pixels for each cell
@@ -668,6 +681,8 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
 
     /**
      * deletes the event
+     * @param row
+     * @param col
      */
     public void deleteEvent(int row, int col) {
         Tier tier = transcription.getBody().getTierAt(row);

@@ -9,7 +9,6 @@ package org.exmaralda.partitureditor.linkPanel;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import com.klg.jclass.table.*;
 import java.io.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import javax.swing.*;
 /**
  *
@@ -21,9 +20,9 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
     private Event event;
     private int row;
     private int col;
-    private static String[] MEDIUM_TYPES = {"none", "Audio", "Video", "Image", "Text", "Other"};    
+    private static final String[] MEDIUM_TYPES = {"none", "Audio", "Video", "Image", "Text", "Other"};    
     private String directory;
-    javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();    
+    javax.swing.event.EventListenerList eventListenerList;    
     ScrollablePicture scrollablePicture;
     org.exmaralda.partitureditor.sound.JavaFXPlayer player = null;
     JLabel errorLabel;
@@ -31,6 +30,7 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
     
     /** Creates new form LinkPanel */
     public LinkPanel() {
+        this.eventListenerList = new javax.swing.event.EventListenerList();
         scrollablePicture = new ScrollablePicture(null, 10);
         initComponents ();
         event = new Event();
@@ -51,34 +51,38 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
         mediumComboBox.setEnabled(true);
         urlTextField.setText(event.getURL());
         descriptionTextLabel.setText(event.getDescription());
-        if (event.getMedium().equals("none")){
-            mediumComboBox.setSelectedIndex(0);
-            urlTextField.setEnabled(false);
-            browseButton.setEnabled(false);
-            displayPanel.setVisible(false);
-            packLinkPanel();
+        switch (event.getMedium()) {
+            case "none":
+                mediumComboBox.setSelectedIndex(0);
+                urlTextField.setEnabled(false);
+                browseButton.setEnabled(false);
+                displayPanel.setVisible(false);
+                packLinkPanel();
+                break;
+            case "aud":
+                mediumComboBox.setSelectedIndex(1);
+                setAudioVideo();
+                break;
+            case "vid":
+                mediumComboBox.setSelectedIndex(2);
+                setAudioVideo();
+                break;
+            case "img":
+                mediumComboBox.setSelectedIndex(3);
+                setImage();
+                break;
+            case "txt":
+                mediumComboBox.setSelectedIndex(4);
+                setText();
+                break;
+            case "oth":
+                mediumComboBox.setSelectedIndex(5);
+                displayPanel.setVisible(false);
+                packLinkPanel();
+                break;
+            default:
+                break;
         }
-        else if (event.getMedium().equals("aud")){
-            mediumComboBox.setSelectedIndex(1);
-            setAudioVideo();
-        }
-        else if (event.getMedium().equals("vid")){
-            mediumComboBox.setSelectedIndex(2);
-            setAudioVideo();
-        }
-        else if (event.getMedium().equals("img")){
-            mediumComboBox.setSelectedIndex(3);
-            setImage();
-        }
-        else if (event.getMedium().equals("txt")){
-            mediumComboBox.setSelectedIndex(4);
-            setText();
-        }
-        else if (event.getMedium().equals("oth")){
-            mediumComboBox.setSelectedIndex(5);
-            displayPanel.setVisible(false);
-            packLinkPanel();
-        }        
     }
     
     public void setDirectory(String d){
@@ -286,20 +290,21 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
     private javax.swing.JTextField urlTextField;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void dataChanged(final com.klg.jclass.table.JCTableDataEvent p1) {
     }
     
     public void addLinkPanelListener(LinkPanelListener l) {
-         listenerList.add(LinkPanelListener.class, l);
+         eventListenerList.add(LinkPanelListener.class, l);
     }
     
     public void removeAllListeners(){
-        listenerList = new javax.swing.event.EventListenerList();
+        eventListenerList = new javax.swing.event.EventListenerList();
     }
     
     protected void fireLinkChanged() {
          // Guaranteed to return a non-null array
-        Object[] listeners = listenerList.getListenerList();
+        Object[] listeners = eventListenerList.getListenerList();
         // Process the listeners last to first, notifying
         // those that are interested in this event
         for (int i = listeners.length-2; i>=0; i-=2) {

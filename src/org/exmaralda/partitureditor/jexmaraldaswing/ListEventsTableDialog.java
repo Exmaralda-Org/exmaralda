@@ -5,11 +5,21 @@
  */
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import com.klg.jclass.table.JCTableDataEvent;
+import com.klg.jclass.table.JCTableDataListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.partiture.AbstractTranscriptionTableModel;
 import org.exmaralda.partitureditor.search.EventSearchResult;
 import org.exmaralda.partitureditor.search.SearchResultListener;
 
@@ -20,33 +30,72 @@ import org.exmaralda.partitureditor.search.SearchResultListener;
  *
  * @author thomas.schmidt
  */
-public class ListEventsTableDialog extends javax.swing.JDialog {
+public class ListEventsTableDialog extends javax.swing.JDialog implements JCTableDataListener, TableModelListener {
 
-    List<SearchResultListener> listenerList = new ArrayList<>();
+    List<SearchResultListener> searchResultListenerList = new ArrayList<>();
+    List<JCTableDataListener> tableDataListenerList = new ArrayList<>();
     Tier tier;
+    ListEventsTableModel tableModel;
+    
+    int rowIndex;
     
     /**
      * Creates new form ListEventsDialog
+     * @param parent
+     * @param modal
+     * @param transcription
+     * @param tier
+     * @param rowIndex
      */
-    public ListEventsTableDialog(java.awt.Frame parent, boolean modal, BasicTranscription transcription, Tier tier) {
+    public ListEventsTableDialog(java.awt.Frame parent, boolean modal, BasicTranscription transcription, Tier tier, int rowIndex) {
         super(parent, modal);
         this.tier = tier;
         initComponents();
-        ListEventsTableModel tableModel = new ListEventsTableModel(transcription, tier);
+        tableModel = new ListEventsTableModel(transcription, tier, rowIndex);
+        tableModel.addTableModelListener(this);
+        tableModel.fireTableDataChanged();
         eventTable.setModel(tableModel);
         eventTable.setDefaultRenderer(Double.class, new ListEventsTableCellRenderer());
+        eventTable.getColumnModel().getColumn(0).setPreferredWidth(100);
+        eventTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        eventTable.getColumnModel().getColumn(2).setMinWidth(400);
+        eventTable.setRowHeight(18);
         displayNameLabel.setText(tier.getDisplayName());
+        this.rowIndex = rowIndex;
+        
+        KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        getRootPane().registerKeyboardAction(
+                new ActionListener() {     
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        dispose();
+                    }
+                }, 
+                stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
+        
     }
     
     public void addSearchResultListener(SearchResultListener listener){
-        listenerList.add(listener);
+        searchResultListenerList.add(listener);
     }
     
+    public void addTableDataListener(JCTableDataListener listener){
+        tableDataListenerList.add(listener);
+    }
+
+
     public void fireSearchResult(EventSearchResult esr){
-        for (SearchResultListener listener : listenerList){
+        for (SearchResultListener listener : searchResultListenerList){
             listener.processSearchResult(esr);
         }
     }
+
+    public void fireDataChanged(JCTableDataEvent evt){
+        for (JCTableDataListener listener : tableDataListenerList){
+            listener.dataChanged(evt);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,17 +107,22 @@ public class ListEventsTableDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         eventListPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        ebentTableScrollPane = new javax.swing.JScrollPane();
         eventTable = new javax.swing.JTable();
         topPanel = new javax.swing.JPanel();
         displayNameLabel = new javax.swing.JLabel();
+        bottomPanel = new javax.swing.JPanel();
+        closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("List events");
 
         eventListPanel.setLayout(new java.awt.BorderLayout());
 
+        ebentTableScrollPane.setPreferredSize(new java.awt.Dimension(620, 400));
+
         eventTable.setAutoCreateRowSorter(true);
+        eventTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         eventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -86,9 +140,9 @@ public class ListEventsTableDialog extends javax.swing.JDialog {
                 eventTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(eventTable);
+        ebentTableScrollPane.setViewportView(eventTable);
 
-        eventListPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        eventListPanel.add(ebentTableScrollPane, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(eventListPanel, java.awt.BorderLayout.CENTER);
 
@@ -96,6 +150,16 @@ public class ListEventsTableDialog extends javax.swing.JDialog {
         topPanel.add(displayNameLabel);
 
         getContentPane().add(topPanel, java.awt.BorderLayout.PAGE_START);
+
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+        bottomPanel.add(closeButton);
+
+        getContentPane().add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,6 +178,10 @@ public class ListEventsTableDialog extends javax.swing.JDialog {
             fireSearchResult(esr);
         }
     }//GEN-LAST:event_eventTableMouseClicked
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,10 +228,71 @@ public class ListEventsTableDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JButton closeButton;
     private javax.swing.JLabel displayNameLabel;
+    private javax.swing.JScrollPane ebentTableScrollPane;
     private javax.swing.JPanel eventListPanel;
     private javax.swing.JTable eventTable;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void dataChanged(JCTableDataEvent evt) {
+        int command = evt.getCommand();
+        switch(command){
+            case JCTableDataEvent.RESET :
+                this.dispose();
+                break;
+                
+            case JCTableDataEvent.CHANGE_VALUE : 
+                if (evt.getRow()==rowIndex){
+                    tableModel.fireTableDataChanged();
+                }
+                break;
+                
+            case JCTableDataEvent.REMOVE_ROW :
+                if (evt.getRow()==rowIndex){
+                    dispose();
+                }
+                break;
+                
+            case JCTableDataEvent.ADD_COLUMN :
+                tableModel.fireTableDataChanged();
+                break;
+            
+            case JCTableDataEvent.REMOVE_COLUMN :
+                tableModel.fireTableDataChanged();
+                break;
+                
+            case JCTableDataEvent.CHANGE_ROW_LABEL :
+                if (evt.getRow()==rowIndex){
+                    tableModel.fireTableDataChanged();                    
+                }
+                break;
+                
+                               
+            case AbstractTranscriptionTableModel.ROWS_SWAPPED :
+                break;
+                
+            case AbstractTranscriptionTableModel.AREA_CHANGED :
+                break;
+            
+            case AbstractTranscriptionTableModel.CELL_SPAN_CHANGED :
+                if (evt.getRow()==rowIndex){
+                    tableModel.fireTableDataChanged();
+                }
+                break;
+        }
+
+
+    }
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        if (e.getType()==TableModelEvent.UPDATE){
+            JCTableDataEvent event = new JCTableDataEvent(this, rowIndex, e.getFirstRow(), 0, 0, JCTableDataEvent.CHANGE_VALUE );
+            this.fireDataChanged(event);
+        }
+    }
 }

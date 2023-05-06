@@ -4,6 +4,7 @@
  */
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import com.klg.jclass.table.JCTableDataEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
@@ -23,10 +24,12 @@ public class ListEventsTableModel extends AbstractTableModel {
 
     BasicTranscription transcription;
     Tier tier;
+    int row;
 
-    public ListEventsTableModel(BasicTranscription transcription, Tier tier) {
+    public ListEventsTableModel(BasicTranscription transcription, Tier tier, int row) {
         this.transcription = transcription;
         this.tier = tier;
+        this.row = row;
     }
     
     
@@ -77,5 +80,17 @@ public class ListEventsTableModel extends AbstractTableModel {
         }
         return Object.class;
     }    
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return (columnIndex==2); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        String newDescription = (String)aValue;
+        tier.getEventAt(rowIndex).setDescription(newDescription);
+        this.fireTableCellUpdated(rowIndex, columnIndex);
+    }
     
 }

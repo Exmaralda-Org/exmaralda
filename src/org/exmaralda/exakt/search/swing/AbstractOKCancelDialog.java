@@ -29,6 +29,7 @@ public class AbstractOKCancelDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         actionListener = new ActionListener() {     
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ok = false;
                 closeDialog();

@@ -23,7 +23,11 @@ public class ListEventsTableCellRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (column==0 || column==1){
-            c.setForeground(Color.BLUE);
+            if (column==0) {
+                c.setForeground(Color.GREEN);
+            } else {
+                c.setForeground(Color.RED);
+            }
             double dValue = (double)value;
             String timeString = TimeStringFormatter.formatSeconds(dValue, true, 2);
             ((JLabel)c).setText(timeString);
