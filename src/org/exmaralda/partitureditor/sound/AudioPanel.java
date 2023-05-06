@@ -220,7 +220,7 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         availableFilesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--- no media files available ---", " " }));
         availableFilesComboBox.setEnabled(false);
         availableFilesComboBox.setMaximumSize(new java.awt.Dimension(1000, 40));
-        availableFilesComboBox.setPreferredSize(new java.awt.Dimension(400, 40));
+        availableFilesComboBox.setPreferredSize(new java.awt.Dimension(400, 80));
         availableFilesComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 availableFilesComboBoxActionPerformed(evt);
