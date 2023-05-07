@@ -39,6 +39,25 @@ public class SearchResultListCellRenderer implements ListCellRenderer {
          tierNameLabel.setBackground(bc);
          tierNameLabel.setText(" " + esr.tierName + "   ");         
 
+         // 07-05-2023 issue #127
+         // check if the offset is valid
+         // if not add an error label and return
+         if (esr.event.getDescription().length()<=esr.offset + esr.length){
+             JLabel errorLabel = new JLabel();
+            errorLabel.setFont(arialUnicodeMS);
+            errorLabel.setForeground(java.awt.Color.white);
+            errorLabel.setOpaque(true);
+            errorLabel.setBackground(java.awt.Color.red);
+            errorLabel.setText("### ERROR ###");
+            errorLabel.setToolTipText("This search result does not seem to be valid any more");
+            result.add(tierNameLabel);
+            result.add(errorLabel);
+            return result;
+            
+         }
+         
+         
+         
          JLabel beforeLabel = new JLabel();
          beforeLabel.setFont(arialUnicodeMS);
          beforeLabel.setForeground(java.awt.Color.black);
@@ -49,13 +68,13 @@ public class SearchResultListCellRenderer implements ListCellRenderer {
 	 //at org.exmaralda.partitureditor.search.SearchResultListCellRenderer.getListCellRendererComponent(SearchResultListCellRenderer.java:46)
          beforeLabel.setText(esr.event.getDescription().substring(0,esr.offset));
 
-         JLabel searchLabel = new JLabel();
-         searchLabel.setFont(arialUnicodeMS);
-         searchLabel.setForeground(java.awt.Color.red);
-         searchLabel.setOpaque(true);
-         searchLabel.setBackground(bc);
-         searchLabel.setText(esr.event.getDescription().substring(esr.offset, esr.offset+esr.length));
-         searchLabel.setBorder(new javax.swing.border.LineBorder(java.awt.Color.darkGray));
+         JLabel matchLabel = new JLabel();
+         matchLabel.setFont(arialUnicodeMS);
+         matchLabel.setForeground(java.awt.Color.red);
+         matchLabel.setOpaque(true);
+         matchLabel.setBackground(bc);
+         matchLabel.setText(esr.event.getDescription().substring(esr.offset, esr.offset+esr.length));
+         matchLabel.setBorder(new javax.swing.border.LineBorder(java.awt.Color.darkGray));
          
          JLabel afterLabel = new JLabel();
          afterLabel.setFont(arialUnicodeMS);
@@ -66,7 +85,7 @@ public class SearchResultListCellRenderer implements ListCellRenderer {
 
          result.add(tierNameLabel);
          result.add(beforeLabel);
-         result.add(searchLabel);
+         result.add(matchLabel);
          result.add(afterLabel);
          
          return result;        

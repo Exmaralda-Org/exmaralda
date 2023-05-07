@@ -16,12 +16,16 @@ public class SearchInEventsAction extends org.exmaralda.partitureditor.partiture
     
     public org.exmaralda.partitureditor.search.FindDialog dialog;
     
-    /** Creates a new instance of SearchInEventsAction */
+    /** Creates a new instance of SearchInEventsAction
+     * @param t
+     * @param icon */
     public SearchInEventsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Search in events...", icon, t);
+        // this dialog is non-modal, and it is kept over different actions
         dialog = new org.exmaralda.partitureditor.search.FindDialog(table.parent, false, table.externalKeyboardPaths, table.generalPurposeFontName);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("searchInEventsAction!");
         table.commitEdit(true);

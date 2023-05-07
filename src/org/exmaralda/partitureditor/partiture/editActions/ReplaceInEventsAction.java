@@ -16,11 +16,14 @@ public class ReplaceInEventsAction extends org.exmaralda.partitureditor.partitur
     
 
 
-    /** Creates a new instance of ReplaceInEventsAction */
+    /** Creates a new instance of ReplaceInEventsAction
+     * @param t
+     * @param icon */
     public ReplaceInEventsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Replace in events...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("replaceInEventsAction!");
         table.commitEdit(true);
@@ -28,6 +31,7 @@ public class ReplaceInEventsAction extends org.exmaralda.partitureditor.partitur
     }
     
     private void replaceInEvents(){        
+        // this dialog is modal, and it is created anew for each invocation of the action
         org.exmaralda.partitureditor.search.ReplaceDialog dialog = new org.exmaralda.partitureditor.search.ReplaceDialog(table.parent, true, table.externalKeyboardPaths, table.generalPurposeFontName);
         dialog.setTranscription(table.getModel().getTranscription());
         dialog.addSearchResultListener(table);

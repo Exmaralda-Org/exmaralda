@@ -91,11 +91,11 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
     
     public void setSearchArea(String[] tierIDs){
         String text = new String();
-        for (int pos=0; pos<tierIDs.length; pos++){
-            try{
-                String desc = transcription.getBody().getTierWithID(tierIDs[pos]).getDescription(transcription.getHead().getSpeakertable());
+        for (String tierID : tierIDs) {
+            try {
+                String desc = transcription.getBody().getTierWithID(tierID).getDescription(transcription.getHead().getSpeakertable());
                 text+=desc + " ";
-            } catch (JexmaraldaException je){}
+            }catch (JexmaraldaException je){}
         }
         if (text.length()>100){
             text = text.substring(0,100) + "...";
@@ -394,7 +394,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
 
     private void refreshResultList(Vector result){
         resultList.setListData(result);
-        if (result.size()>0){
+        if (!result.isEmpty()){
             resultList.setSelectedIndex(0);
             gotoButton.setEnabled(true);
             nextButton.setEnabled(true);
@@ -434,6 +434,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
          }
     }
     
+    @Override
     public void show(){
         System.out.println("Showing search dialog");
         java.awt.Dimension dialogSize = this.getPreferredSize();

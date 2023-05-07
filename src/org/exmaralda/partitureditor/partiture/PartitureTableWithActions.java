@@ -2491,8 +2491,9 @@ public class PartitureTableWithActions extends PartitureTable
 
     
     
-    /** processes a search result from the search dialog, i.e.
-     *  scrolls the partitur to the appropriate position */
+    /** *  processes a search result from the search dialog, i.e.scrolls the partitur to the appropriate position
+     * @param esr 
+     */
     @Override
     public void processSearchResult(org.exmaralda.partitureditor.search.EventSearchResult esr) {
         System.out.println("processing search result");
@@ -2506,7 +2507,7 @@ public class PartitureTableWithActions extends PartitureTable
         int colNo = Math.max(0, getModel().getColumnNumber(esr.event.getStart()));
         int rowNo = Math.max(0, getModel().getRowNumber(esr.tierID));
         this.makeVisible(rowNo, colNo);
-        //this.setSelection(rowNo, colNo, rowNo, colNo);
+        // this.setSelection(rowNo, colNo, rowNo, colNo);
         // added 08-10-2009 to ensure that the event is question
         // is not at the right edge of the screen
         // but rather towards the centre

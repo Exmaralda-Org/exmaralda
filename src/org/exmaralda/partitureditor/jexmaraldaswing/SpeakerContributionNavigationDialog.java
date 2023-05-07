@@ -11,8 +11,6 @@ import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.SpeakerContribution;
 import java.util.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.partiture.*;
 
 /**
  *
