@@ -24,7 +24,7 @@ public class ListEventsTableCellRenderer extends DefaultTableCellRenderer {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (column==0 || column==1){
             if (column==0) {
-                c.setForeground(Color.GREEN);
+                c.setForeground(Color.GREEN.darker().darker());
             } else {
                 c.setForeground(Color.RED);
             }
