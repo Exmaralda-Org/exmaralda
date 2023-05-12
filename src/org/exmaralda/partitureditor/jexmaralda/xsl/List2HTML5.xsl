@@ -182,13 +182,13 @@
 	<xsl:template name="EMBED_AUDIO_PLAYER">
 		<audio controls="controls">
 			<xsl:variable name="AUDIO_FILE">
-				<xsl:value-of select="//referenced-file[ends-with(@url,'.wav') or ends-with(@url,'ogg')][1]/@url"/>
+				<xsl:value-of select="//referenced-file[ends-with(lower-case(@url),'.wav') or ends-with(lower-case(@url),'.ogg')][1]/@url"/>
 			</xsl:variable>
 			<xsl:element name="source">
 				<xsl:attribute name="src"><xsl:value-of select="$AUDIO_FILE"/></xsl:attribute>
 				<xsl:attribute name="type">
 					<xsl:choose>
-						<xsl:when test="ends-with($AUDIO_FILE,'wav')">audio/wav</xsl:when>
+						<xsl:when test="ends-with(lower-case($AUDIO_FILE),'wav')">audio/wav</xsl:when>
 						<xsl:otherwise>audio/ogg</xsl:otherwise>
 					</xsl:choose>
 				</xsl:attribute>
