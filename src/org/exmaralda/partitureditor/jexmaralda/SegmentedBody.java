@@ -102,8 +102,9 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
         return result;
     }
     
+    @Override
     public String toXML() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(StringUtilities.makeXMLOpenElement("segmented-body", null));
         sb.append(StringUtilities.makeXMLOpenElement("common-timeline", null));
         sb.append(getCommonTimeline().toXML());
@@ -121,27 +122,22 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
             SegmentedTier st = (SegmentedTier)(elementAt(pos));
             for (int pos2=0; pos2<st.size(); pos2++){
                 Object o = st.elementAt(pos2);
-                if (o instanceof Segmentation){
-                    Segmentation s = (Segmentation)o;
+                if (o instanceof Segmentation s){
                     for (int pos3=0; pos3<s.getNumberOfSegments(); pos3++){
                         Object o2 = s.elementAt(pos3);
-                        if (o2 instanceof TimedSegment){
-                            TimedSegment ts = (TimedSegment)o2;
+                        if (o2 instanceof TimedSegment ts){
                             idno = ts.makeIDs(idno);
                         }
-                        else if (o2 instanceof AtomicTimedSegment){
-                            AtomicTimedSegment ats = (AtomicTimedSegment)o2;
+                        else if (o2 instanceof AtomicTimedSegment ats){
                             ats.setID("Seg_" + Integer.toString(idno));
                             idno++;
                         }
                     }
                 }
-                else if (o instanceof Annotation){
-                    Annotation a = (Annotation)o;
+                else if (o instanceof Annotation a){
                     for (int pos3=0; pos3<a.getNumberOfSegments(); pos3++){
                         Object o2 = a.elementAt(pos3);
-                        if (o2 instanceof TimedAnnotation){
-                            TimedAnnotation ta = (TimedAnnotation)o2;
+                        if (o2 instanceof TimedAnnotation ta){
                             ta.setID("Seg_" + Integer.toString(idno));
                             idno++;
                         }
@@ -184,38 +180,36 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
     //TODO: Das sieht scheisse aus.
     public String countSegments(Speakertable spkt){
         String nl = System.getProperty("line.separator");
-        StringBuffer sb = new StringBuffer();
-        sb.append("<html><head><title>Count segments</title><style type=\"text/css\">td{vertical-align:top;border:1px solid black;}</style></head><body><table rules=\"all\">" + nl);
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><head><title>Count segments</title><style type=\"text/css\">td{vertical-align:top;border:1px solid black;}</style></head><body><table rules=\"all\">").append(nl);
         for (int pos=0; pos<size(); pos++){
             SegmentedTier st = (SegmentedTier)(elementAt(pos));
-            sb.append("<tr><td valign=\"top\"><b>Tier " + st.getDescription(spkt) + "</b></td>" + nl);
+            sb.append("<tr><td valign=\"top\"><b>Tier ").append(st.getDescription(spkt)).append("</b></td>").append(nl);
             for (int pos2=0; pos2<st.size(); pos2++){
                 Object o = st.elementAt(pos2);
-                if (o instanceof Segmentation){
-                    Segmentation s = (Segmentation)o;
+                if (o instanceof Segmentation s){
                     //sb.append(nl + "Segmentation " + s.getName()+ nl);
                    sb.append("<td valign=\"top\">");
                     HashSet segmentHashSet = s.getAllSegmentNames();
                     for (Iterator i = segmentHashSet.iterator(); i.hasNext(); ){
-                       String segmentName = new String((String)i.next());
+                       String segmentName = (String)i.next();
                        int count = (s.getAllSegmentsWithName(segmentName)).size();
-                       sb.append(Integer.toString(count) + "  <i>" + segmentName + "</i><br/>");
+                       sb.append(Integer.toString(count)).append("  <i>").append(segmentName).append("</i><br/>");
                     }
-                    sb.append("<b>[" + s.getName() + "]</b><br/>");
+                    sb.append("<b>[").append(s.getName()).append("]</b><br/>");
                     sb.append("</td>");
                 }
-                else if (o instanceof Annotation){
-                    Annotation a = (Annotation)o;
+                else if (o instanceof Annotation a){
                     int count = a.size();
                    sb.append("<td valign=\"top\">");
-                    sb.append(Integer.toString(count) + " " + a.name);
+                    sb.append(Integer.toString(count)).append(" ").append(a.name);
                    sb.append("<b>[Annotation]</b><br/>");
                     sb.append("</td>");
                 }
             }
             sb.append("</tr>");
         }
-        sb.append(nl + "</table></body></html>" + nl);
+        sb.append(nl).append("</table></body></html>").append(nl);
         return sb.toString();
     }
     

@@ -142,7 +142,7 @@ public class MetaInformation extends Object {
         }
     }
     
-    public void addReferencedFile(String url){
+    public final void addReferencedFile(String url){
         if ((referencedFiles.size()==1) && (referencedFiles.elementAt(0).length()==0)){
             setReferencedFile(url);
         } else {
@@ -158,7 +158,8 @@ public class MetaInformation extends Object {
         this.referencedFiles = rf;
     }
     
-    /** returns the user defined information */
+    /** returns the user defined information
+     * @return  */
     public UDInformationHashtable getUDMetaInformation(){
         return udMetaInformation;
     }
@@ -168,14 +169,15 @@ public class MetaInformation extends Object {
         udMetaInformation = information;
     }
     
-    /** returns the comment */
+    /** returns the comment
+     * @return  */
     public String getComment(){
         return comment;
     }
     
     /** sets the comment to the specified value */
     public void setComment(String text){
-        comment = new String(text);
+        comment = text;
     }
     
     public String getTranscriptionConvention(){
@@ -276,7 +278,7 @@ public class MetaInformation extends Object {
                     referencedFiles.setElementAt(referencedFile, count);
                     returnValue= true;
                 } catch (URISyntaxException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
                 }
             }
             count++;
@@ -290,12 +292,13 @@ public class MetaInformation extends Object {
     // ********************************************
 
     /** returns a string corresponding to the XML-element &lt;meta-information&gt;
-     *  as specified in the corresponding dtd*/
+     *  as specified in the corresponding dt
+     * @return d*/
     public String toXML() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<meta-information>");
-        sb.append("<project-name>" + StringUtilities.checkCDATA(getProjectName()) + "</project-name>");
-        sb.append("<transcription-name>" + StringUtilities.checkCDATA(getTranscriptionName()) + "</transcription-name>");
+        sb.append("<project-name>").append(StringUtilities.checkCDATA(getProjectName())).append("</project-name>");
+        sb.append("<transcription-name>").append(StringUtilities.checkCDATA(getTranscriptionName())).append("</transcription-name>");
         for (String referencedFile : referencedFiles){
             // changed 11-10-2011: try to write URL for absolute paths
             //sb.append("<referenced-file url=\"" + StringUtilities.toXMLString(referencedFile) + "\"/>");
@@ -305,7 +308,7 @@ public class MetaInformation extends Object {
                 try {
                     sb.append(StringUtilities.toXMLString(f.toURI().toURL().toString()));
                 } catch (MalformedURLException ex) {
-                    ex.printStackTrace();
+                    System.out.println(ex.getMessage());
                     sb.append(StringUtilities.toXMLString(referencedFile));
                 }
             } else {
@@ -315,12 +318,12 @@ public class MetaInformation extends Object {
         }
         // changed 30-05-2012
         //always write a referenced file even if there is none
-        if (referencedFiles.size()==0){
+        if (referencedFiles.isEmpty()){
             sb.append("<referenced-file url=\"\"/>");
         }
-        sb.append("<ud-meta-information>" + getUDMetaInformation().toXML() + "</ud-meta-information>");
-        sb.append("<comment>" + StringUtilities.checkCDATA(getComment()) + "</comment>");
-        sb.append("<transcription-convention>" + StringUtilities.checkCDATA(getTranscriptionConvention()) + "</transcription-convention>");
+        sb.append("<ud-meta-information>").append(getUDMetaInformation().toXML()).append("</ud-meta-information>");
+        sb.append("<comment>").append(StringUtilities.checkCDATA(getComment())).append("</comment>");
+        sb.append("<transcription-convention>").append(StringUtilities.checkCDATA(getTranscriptionConvention())).append("</transcription-convention>");
         sb.append("</meta-information>");
         return sb.toString();
     }
@@ -332,29 +335,29 @@ public class MetaInformation extends Object {
     // ********************************************
     
     public String toRTF(){
-        StringBuffer sb = new StringBuffer();
-        sb.append("\\pard{\\fs28\\b " + RTFUtilities.toEscapedRTFString(getTranscriptionName()) + "}\\par\\par");
+        StringBuilder sb = new StringBuilder();
+        sb.append("\\pard{\\fs28\\b ").append(RTFUtilities.toEscapedRTFString(getTranscriptionName())).append("}\\par\\par");
         if (getProjectName().length()>0){
             sb.append("{\\fs20\\b Project Name: \\plain\\fs20 ");
             //sb.append(StringUtilities.toANSI(getProjectName()) + "}\\par");
-            sb.append(RTFUtilities.toEscapedRTFString(getProjectName()) + "}\\par");
+            sb.append(RTFUtilities.toEscapedRTFString(getProjectName())).append("}\\par");
         }
         if (getReferencedFile().length()>0){
             sb.append("{\\fs20\\b Referenced file: \\plain\\fs20 ");
             //sb.append(StringUtilities.toANSI(getReferencedFile()) + "}\\par");
-            sb.append(RTFUtilities.toEscapedRTFString(getReferencedFile()) + "}\\par");
+            sb.append(RTFUtilities.toEscapedRTFString(getReferencedFile())).append("}\\par");
         }
         if (getTranscriptionConvention().length()>0){
             sb.append("{\\fs20\\b Transcription Convention: \\plain\\fs20 ");
             //sb.append(StringUtilities.toANSI(getTranscriptionConvention()) + "}\\par");
-            sb.append(RTFUtilities.toEscapedRTFString(getTranscriptionConvention()) + "}\\par");
+            sb.append(RTFUtilities.toEscapedRTFString(getTranscriptionConvention())).append("}\\par");
         }
         if (getComment().length()>0){
             sb.append("{\\fs20\\b Comment: \\plain\\fs20 ");
             //sb.append(StringUtilities.toANSI(getComment()) + "}\\par");
-            sb.append(RTFUtilities.toEscapedRTFString(getComment()) + "}\\par");
+            sb.append(RTFUtilities.toEscapedRTFString(getComment())).append("}\\par");
         }
-        if (getUDMetaInformation().size()>0){
+        if (!getUDMetaInformation().isEmpty()){
             sb.append("\\par{\\fs20\\ul User defined attributes: }\\par ");
             sb.append(getUDMetaInformation().toRTF());
             sb.append("\\par");
@@ -371,10 +374,10 @@ public class MetaInformation extends Object {
     
     public void makeUDAttributesFromTemplate(MetaInformation template){
         String[] allAttributes = template.getUDMetaInformation().getAllAttributes();
-        for (int pos=0; pos<allAttributes.length; pos++){
-                if (!getUDMetaInformation().containsAttribute(allAttributes[pos])){
-                    getUDMetaInformation().setAttribute(allAttributes[pos], "---unknown---");
-                }
+        for (String allAttribute : allAttributes) {
+            if (!getUDMetaInformation().containsAttribute(allAttribute)) {
+                getUDMetaInformation().setAttribute(allAttribute, "---unknown---");
+            }
         }            
     }
     

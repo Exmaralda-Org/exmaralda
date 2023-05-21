@@ -582,7 +582,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
             int position2 = timeline.lookupID(((TimelineItem)endPoint).getID());
             if (position2-position1 > 1){
                 // now do it: shift all times in between
-                System.out.println("#377 : shifting times");
+                //System.out.println("#377 : shifting times");
                 double minTime = ((TimelineItem)startPoint).getTime();
                 double maxTime = ((TimelineItem)endPoint).getTime();
                 double duration = (maxTime - minTime) / (position2 - position1);

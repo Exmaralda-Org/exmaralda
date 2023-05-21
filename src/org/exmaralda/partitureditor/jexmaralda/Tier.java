@@ -2,12 +2,7 @@ package org.exmaralda.partitureditor.jexmaralda;
 
 import java.util.*;
 import java.io.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-/*
- * Tier.java
- *
- * Created on 6. Februar 2001, 13:03
- */
+
 
 
 /* Revision History
@@ -57,7 +52,9 @@ public class Tier extends AbstractEventTier {
 
     /** if this is a tier of type 'a': returns the start points of all events for which no
      * corresponding (chain of) event(s) in a parent tier exists
-     * returns null if the tier is not of type 'a' or if there is no parent tier */
+     * returns null if the tier is not of type 'a' or if there is no parent tier
+     * @param bt
+     * @return  */
     public String[] getAnnotationMismatches(BasicTranscription bt){
         if (!getType().equals("a")) return null;
         Tier parentTier = null;
@@ -70,7 +67,7 @@ public class Tier extends AbstractEventTier {
         }
         if (parentTier==null) return null;
         
-        Vector<String> startPoints = new Vector<>();
+        List<String> startPoints = new ArrayList<>();
         for (int pos2=0; pos2<getNumberOfEvents(); pos2++){
             Event annotation = getEventAt(pos2);
             String s = annotation.getStart();
@@ -79,13 +76,13 @@ public class Tier extends AbstractEventTier {
             try {
                 correspondingEvent = parentTier.getEventAtStartPoint(s);
             } catch (JexmaraldaException ex) {
-                 startPoints.addElement(s);               
+                 startPoints.add(s);               
             }
             while ((correspondingEvent!=null) && (!correspondingEvent.getEnd().equals(e))){
                 try {
                     correspondingEvent = parentTier.getEventAtStartPoint(correspondingEvent.getEnd());
                 } catch (JexmaraldaException ex) {
-                    startPoints.addElement(s);
+                    startPoints.add(s);
                     break;
                 }
             }

@@ -72,7 +72,7 @@ public abstract class AbstractPlayer implements Playable {
     }
     
     protected void firePlaybackStopped(){
-        System.out.println("Firing playback stopped");
+        //System.out.println("Firing playback stopped");
         PlayableEvent event = new PlayableEvent(PlayableEvent.PLAYBACK_STOPPED, getCurrentPosition());
         firePlayableEvent(event);
     }

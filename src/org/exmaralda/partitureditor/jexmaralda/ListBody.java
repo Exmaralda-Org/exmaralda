@@ -82,9 +82,10 @@ public class ListBody extends AbstractBody implements XMLable {
         return result;
     }
     
+    @Override
     public String toXML() {
         //sort();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(StringUtilities.makeXMLOpenElement("list-body", null));
         sb.append(StringUtilities.makeXMLOpenElement("common-timeline", null));
         sb.append(getCommonTimeline().toXML());
@@ -100,7 +101,7 @@ public class ListBody extends AbstractBody implements XMLable {
     }
     
     public String toHTML(Speakertable st){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<table>");
         for (int pos=0; pos<getNumberOfSpeakerContributions(); pos++){
             sb.append(getSpeakerContributionAt(pos).toHTML(st));

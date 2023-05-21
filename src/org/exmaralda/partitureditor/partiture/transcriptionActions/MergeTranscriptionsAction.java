@@ -43,6 +43,7 @@ public class MergeTranscriptionsAction extends org.exmaralda.partitureditor.part
         
         MergeDialog dialog = new MergeDialog(table.parent, true);
         dialog.setLocationRelativeTo(table);
+        dialog.setCurrentDirectory(new File(table.homeDirectory));
         dialog.setVisible(true);
         // tell the dialog to show itself and open the transcription the user selects
         // If the user hasn't cancelled and nothing has gone wrong with opening the selected file...

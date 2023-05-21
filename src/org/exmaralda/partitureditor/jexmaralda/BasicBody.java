@@ -277,6 +277,21 @@ public class BasicBody extends AbstractTierBody {
      * @param position
      * @return  */
     public Tier getTierAt(int position){
+        /* added 21-05-2023 to get rid
+           of error message in PE log:
+                java.lang.ArrayIndexOutOfBoundsException: Index -999 out of bounds for length 20
+                at java.base/java.util.Vector.elementData(Unknown Source)
+                at java.base/java.util.Vector.elementAt(Unknown Source)
+                at org.exmaralda.partitureditor.jexmaralda.BasicBody.getTierAt(BasicBody.java:280)
+                at org.exmaralda.partitureditor.partiture.AbstractTranscriptionTableModel.getEvent(AbstractTranscriptionTableModel.java:450)
+                at org.exmaralda.partitureditor.partiture.AbstractTranscriptionTableModel.getTableDataItem(AbstractTranscriptionTableModel.java:166)
+                at com.klg.jclass.table.TableDataView.getTableDataItem(Unknown Source)
+                at com.klg.jclass.table.BaseDataView.getCellEditor(Unknown Source)
+                at com.klg.jclass.table.MouseInputHandler.mouseReleased(Unknown Source)
+                at com.klg.jclass.table.JCTable.processMouseEvent(Unknown Source)
+                at org.exmaralda.partitureditor.partiture.PartitureTableWithActions.processMouseEvent(PartitureTableWithActions.java:489)
+                at java.desktop/java.awt.Component.processEvent(Unknown Source) */
+        if (position<0) return null;
         return (Tier)elementAt(position);
     }
     

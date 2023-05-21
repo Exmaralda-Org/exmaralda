@@ -38,23 +38,27 @@ public class TimelineItem extends Object {
         type = "unsp";
     }
     
-    /** Creates new TimeLineItem with id i*/
+    /** Creates new TimeLineItem with id
+     * @param i*/
     public TimelineItem(String i){
         super();
-        id = new String(i);
+        id = i;
         time = -0.1;
         type = "unsp";
     }
     
-    /** Creates new TimeLineItem with id i and time t*/
+    /** Creates new TimeLineItem with id i and time
+     * @param i
+     * @param t*/
     public TimelineItem(String i, double t){
         super();
-        id = new String(i);
+        id = i;
         time = t;
         type = "unsp";
     }
 
-    /** returns a copy of this timeline item */
+    /** returns a copy of this timeline item
+     * @return  */
     public TimelineItem makeCopy(){
         TimelineItem result = new TimelineItem(this.getID(), this.getTime());
         result.setType(this.getType());
@@ -66,12 +70,14 @@ public class TimelineItem extends Object {
     // ********** GET AND SET METHODS *************
     // ********************************************
 
-    /** returns ID */
+    /** returns ID
+     * @return  */
     public String getID(){
         return id;
     }
     
-    /** returns time as double value */
+    /** returns time as double value
+     * @return  */
     public double getTime(){
         return time;
     }
@@ -80,12 +86,15 @@ public class TimelineItem extends Object {
         return type;
     }
     
-    /** returns time as string */
+    /** returns time as string
+     * @return  */
     public String getTimeAsString(){
         return (Double.toString(time));
     }
     
-    /** returns time as string with soundsoviel Nachkommastellen*/
+    /** returns time as string with soundsoviel Nachkommastellen
+     * @param afterComma
+     * @return  */
     public String getTimeAsString(int afterComma){
         String result = Double.toString(time);
         if (result.indexOf('.')>0){
@@ -94,12 +103,14 @@ public class TimelineItem extends Object {
         return result;
     }
 
-    /** sets id to the value of i */
+    /** sets id to the value of i
+     * @param i */
     public void setID (String i){
         id = i;
     }
     
-    /** sets time to the value of t */
+    /** sets time to the value of t
+     * @param t */
     public void setTime (double t){
         time = t;
     }
@@ -125,14 +136,14 @@ public class TimelineItem extends Object {
     }
     
     public String getDescription(int count, TimelineItemFormat tlif){
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         if ((tlif.getNthNumbering()>0) && ((count)%tlif.getNthNumbering()==0)){
             result.append(Integer.toString(count));
         }
         if ((getTime()>=0) && (tlif.getNthAbsolute()>0) && ((count)%tlif.getNthAbsolute()==0)){
             if (result.length()>0) {result.append(" ");}
             if (tlif.getAbsoluteTimeFormat().equals("decimal")){
-                result.append("[" + getTimeAsString(tlif.getMilisecondsDigits()) + "]");
+                result.append("[").append(getTimeAsString(tlif.getMilisecondsDigits())).append("]");
             } else {
                 /*String timeFormat = "hh:mm:ss.";
                 if (getTime()<60) {timeFormat="ss";}
@@ -161,24 +172,26 @@ public class TimelineItem extends Object {
     // ********** XML OUTPUT **********************
     // ********************************************
 
-    /** returns an XML-element &lt;tli&gt; */
+    /** returns an XML-element &lt;tli&gt;
+     * @return  */
     public String toXML(){
-        StringBuffer sb = new StringBuffer();
-        sb.append("<tli id=\"" + id + "\"");
+        StringBuilder sb = new StringBuilder();
+        sb.append("<tli id=\"").append(id).append("\"");
         if (getTime()>= 0){
-            sb.append(" time=\"" + getTimeAsString() +"\"");
+            sb.append(" time=\"").append(getTimeAsString()).append("\"");
             if ((getType().length()>0) && (!getType().equals("unsp"))){
-                sb.append(" type=\"" + getType() +"\"");
+                sb.append(" type=\"").append(getType()).append("\"");
             }
         }
         if ((getBookmark()!=null) && getBookmark().length()>0){
-            sb.append(" bookmark=\"" + StringUtilities.toXMLString(getBookmark()) +"\"");
+            sb.append(" bookmark=\"").append(StringUtilities.toXMLString(getBookmark())).append("\"");
         }
         sb.append("/>\n");
         return sb.toString();
     }
     
-    /** returns an XML-element &lt;tpr&gt; */
+    /** returns an XML-element &lt;tpr&gt;
+     * @return  */
     public String toTimepointReferenceXML(){
         String result = new String();
         result+="<tpr id=\"" + id + "\"";
@@ -186,7 +199,8 @@ public class TimelineItem extends Object {
         return result;
     }
 
-    /** returns an XML-element &lt;timepoint&gt; */
+    /** returns an XML-element &lt;timepoint&gt;
+     * @return  */
     public String toTimepointXML(){
         String result = new String();
         result+="<timepoint id=\"" + id + "\"";

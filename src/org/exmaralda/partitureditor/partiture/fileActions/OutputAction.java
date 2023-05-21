@@ -238,7 +238,7 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 try{
                     org.exmaralda.partitureditor.jexmaralda.convert.HTMLConverter converter = new org.exmaralda.partitureditor.jexmaralda.convert.HTMLConverter();
                     table.htmlParameters.additionalStuff = converter.HeadToHTML(head, table.head2HTMLStylesheet);
-                } catch (Exception e){
+                } catch (IOException | ParserConfigurationException | TransformerException | JexmaraldaException | SAXException e){
                     String text = "There was a problem with " + System.getProperty("line.separator");
                     text+=table.head2HTMLStylesheet + " : " + System.getProperty("line.separator");
                     text+=e.getLocalizedMessage() + System.getProperty("line.separator");

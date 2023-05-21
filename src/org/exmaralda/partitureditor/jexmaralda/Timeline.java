@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 public class Timeline extends Vector {
 
-    private Hashtable positions;
+    private final Map<String, Integer> positions;
 
     // ********************************************
     // ********** CONSTRUCTORS ********************
@@ -31,11 +31,12 @@ public class Timeline extends Vector {
     /** Creates new empty Timeline */
     public Timeline() {
         super();
-        positions = new Hashtable();
+        positions = new HashMap<>();
     }
 
     
-    /** returns a copy of this timeline */
+    /** returns a copy of this timeline
+     * @return  */
     public Timeline makeCopy(){
         Timeline result = new Timeline();
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
@@ -50,29 +51,37 @@ public class Timeline extends Vector {
     // ********** BASIC MANIPULATION **************
     // ********************************************
 
-    /** returns the timelineitem at the specified position */
+    /** returns the timelineitem at the specified position
+     * @param position
+     * @return  */
     public TimelineItem getTimelineItemAt(int position){
-        if (position>=size()) return null;
+        if (position>=size() || position<0) return null;
         return (TimelineItem)elementAt(position);
     }
     
-    /** returns true if the timeline contains a timeline item with the specified id, false otherwise */
+    /** returns true if the timeline contains a timeline item with the specified id, false otherwise
+     * @param id
+     * @return  */
     public boolean containsTimelineItemWithID(String id){
-        if (lookupID(id)==-1) {return false;}
-        return true;
+        return lookupID(id) != -1;
     }
     
-    /** returns the timeline item with the specified id */
+    /** returns the timeline item with the specified id
+     * @param id
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public TimelineItem getTimelineItemWithID (String id) throws JexmaraldaException{
-        if (lookupID(id)==-1) {throw new JexmaraldaException(3, new String("No such timeline-item: " + id));}
+        if (lookupID(id)==-1) {throw new JexmaraldaException(3, ("No such timeline-item: " + id));}
         return getTimelineItemAt(lookupID(id));
     }
     
-    /** returns the position of the timeline item with the specified id, if it is
-    in the timeline. returns -1 otherwise */
+    /** *  returns the position of the timeline item with the specified id, if it is
+    in the timeline.returns -1 otherwise
+     * @param id
+     * @return  */
     public int lookupID(String id){
         if (positions.containsKey(id)){ 
-            return ((Integer)positions.get(id)).intValue(); 
+            return (positions.get(id)); 
         }
         return -1;
     }
@@ -87,12 +96,15 @@ public class Timeline extends Vector {
         return t;
     }
     
-    /** returns a timeline consisting of the time line items between the items with id1 and id2 (inclusively).
-    throws a JexmaraldaException if either of the ids does not exist or if the item with id2 is before the item with id 1*/
+    /** *  returns a timeline consisting of the time line items between the items with id1 and id2 (inclusively).throws a JexmaraldaException if either of the ids does not exist or if the item with id2 is before the item with id 1
+     * @param id1
+     * @param id2
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException*/
     public Timeline getTimelineBetween(String id1, String id2) throws JexmaraldaException {
-        if (lookupID(id1)==-1) { throw new JexmaraldaException(3, new String("No such timeline item : " + id1)); }
-        if (lookupID(id2)==-1) { throw new JexmaraldaException(3, new String("No such timeline item : " + id2)); }
-        if (lookupID(id2)<lookupID(id1)){throw new JexmaraldaException(4, new String("Wrong order of timeline-items: " + id1 + " " + id2)); }
+        if (lookupID(id1)==-1) { throw new JexmaraldaException(3, ("No such timeline item : " + id1)); }
+        if (lookupID(id2)==-1) { throw new JexmaraldaException(3, ("No such timeline item : " + id2)); }
+        if (lookupID(id2)<lookupID(id1)){throw new JexmaraldaException(4, ("Wrong order of timeline-items: " + id1 + " " + id2)); }
         Timeline t = new Timeline ();
         for (int i=lookupID(id1); i<=lookupID(id2); i++){
             t.addElement(getTimelineItemAt(i));
@@ -120,7 +132,8 @@ public class Timeline extends Vector {
         return !(oneTwo || twoOne);        
     }
     
-    /** returns a free id */
+    /** returns a free id
+     * @return  */
     public String getFreeID(){
         if (getNumberOfTimelineItems()>0) {
             int i=0;
@@ -145,7 +158,7 @@ public class Timeline extends Vector {
                 addTimelineItem(newTLI);
                 itemAdded = true;
             } catch (JexmaraldaException ex) {
-                ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
         }
         return itemAdded;
@@ -159,13 +172,11 @@ public class Timeline extends Vector {
        
 
     public boolean isLastTimelineItem(String id){
-        if (lookupID(id)==getNumberOfTimelineItems()-1){
-            return true;
-        }
-        return false;
+        return lookupID(id)==getNumberOfTimelineItems()-1;
     }
     
-    /** adds the time line item tli to the end of the time line */
+    /** adds the time line item tli to the end of the time line
+     * @return  */
     public String addTimelineItem() {
         String id = getFreeID();
         TimelineItem tli = new TimelineItem(id);
@@ -174,10 +185,12 @@ public class Timeline extends Vector {
         return id;
     }
 
-    /** adds the time line item tli to the end of the time line */
+    /** adds the time line item tli to the end of the time line
+     * @param tli
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void addTimelineItem(TimelineItem tli) throws JexmaraldaException {
         String newID = tli.getID();
-        if (positions.containsKey(newID)){throw new JexmaraldaException(2, new String("ID " + newID + " already exists in this timeline. "));}
+        if (positions.containsKey(newID)){throw new JexmaraldaException(2, ("ID " + newID + " already exists in this timeline. "));}
         addElement(tli);
         positions.put(newID, getNumberOfTimelineItems()-1);
     }
@@ -189,17 +202,23 @@ public class Timeline extends Vector {
         }       
     }
         
-    /** inserts a new time line item after the one with the specified id */
+    /** inserts a new time line item after the one with the specified id
+     * @param id
+     * @param tli
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void insertTimelineItemAfter(String id, TimelineItem tli) throws JexmaraldaException {
-        if (lookupID(id)==-1) {throw new JexmaraldaException(3, new String("No such timeline item : " + id)); }
-        if (lookupID(tli.getID())!=-1) {throw new JexmaraldaException(2, new String("ID " + tli.getID() + " already exists in this timeline. ")); }       
+        if (lookupID(id)==-1) {throw new JexmaraldaException(3, ("No such timeline item : " + id)); }
+        if (lookupID(tli.getID())!=-1) {throw new JexmaraldaException(2, ("ID " + tli.getID() + " already exists in this timeline. ")); }       
         insertElementAt(tli, lookupID(id)+1);
         updatePositions();
     }
 
-    /** inserts a new time line item after the one with the specified id */
+    /** inserts a new time line item after the one with the specified id
+     * @param id
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public String insertTimelineItemAfter(String id) throws JexmaraldaException {
-        if (lookupID(id)==-1) {throw new JexmaraldaException(3, new String("No such timeline item : " + id)); }
+        if (lookupID(id)==-1) {throw new JexmaraldaException(3, ("No such timeline item : " + id)); }
         String newID = getFreeID();
         TimelineItem tli = new TimelineItem(newID);
         insertElementAt(tli, lookupID(id)+1);
@@ -207,17 +226,23 @@ public class Timeline extends Vector {
         return newID;
     }
 
-    /** inserts a new time line item after the one with the specified id */
+    /** inserts a new time line item after the one with the specified id
+     * @param id
+     * @param tli
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void insertTimelineItemBefore(String id, TimelineItem tli) throws JexmaraldaException {
-        if (lookupID(id)==-1) {throw new JexmaraldaException(3, new String("No such timeline item : " + id)); }
-        if (lookupID(tli.getID())!=-1) {throw new JexmaraldaException(2, new String("ID " + tli.getID() + " already exists in this timeline. ")); }       
+        if (lookupID(id)==-1) {throw new JexmaraldaException(3, ("No such timeline item : " + id)); }
+        if (lookupID(tli.getID())!=-1) {throw new JexmaraldaException(2, ("ID " + tli.getID() + " already exists in this timeline. ")); }       
         insertElementAt(tli, lookupID(id));
         updatePositions();
     }
 
-    /** inserts a new time line item after the one with the specified id */
+    /** inserts a new time line item after the one with the specified id
+     * @param id
+     * @return 
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public String insertTimelineItemBefore(String id) throws JexmaraldaException {
-        if (lookupID(id)==-1) {throw new JexmaraldaException(3, new String("No such timeline item : " + id)); }
+        if (lookupID(id)==-1) {throw new JexmaraldaException(3, ("No such timeline item : " + id)); }
         String newID = getFreeID();
         TimelineItem tli = new TimelineItem(newID);
         insertElementAt(tli, lookupID(id));
@@ -232,7 +257,8 @@ public class Timeline extends Vector {
 
 
 
-    /** removes the timeline item at the specified position */
+    /** removes the timeline item at the specified position
+     * @param position */
     public void removeTimelineItemAt(int position){
         removeElementAt(position);
         updatePositions();
@@ -250,18 +276,25 @@ public class Timeline extends Vector {
         return (getTimelineItemAt(lookupID(id)+1).getID());
     }
 
-    /** returns true if id1 comes before id2 in this timeline */
+    /** returns true if id1 comes before id2 in this timeline
+     * @param id1
+     * @param id2
+     * @return  */
     public boolean before(String id1, String id2){
         return (lookupID(id1) < lookupID(id2));
     }
     
-    /** returns the span between the two specified timeline items */
+    /** returns the span between the two specified timeline items
+     * @param start
+     * @param end
+     * @return  */
     public int calculateSpan(String start, String end){
         return (lookupID(end)-lookupID(start));
     }
 
     /** returns true if absolute time values are monotonously increasing 
-    *  false otherwise */
+    *  false otherwise
+     * @return  */
     public boolean isConsistent(){
         double minTime = 0;
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
@@ -275,7 +308,8 @@ public class Timeline extends Vector {
     }
     
     /** kicks out all absolute time values that would make the timeline non-consistent 
-    * returns true if changes to the timeline had to be made, false otherwise */
+    * returns true if changes to the timeline had to be made, false otherwise
+     * @return  */
     public boolean makeConsistent(){
         double minTime = 0;
         boolean result=false;        
@@ -295,21 +329,21 @@ public class Timeline extends Vector {
 
     public String[] getInconsistencies(){
         double minTime = 0;
-        Vector<String> result = new Vector<String>();
+        List<String> result = new ArrayList<>();
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
             double currentTime=getTimelineItemAt(pos).getTime();
             if (currentTime>=0){
                 // changed 28-04-2009: don't allow identical timestamps
                 // changed again 22-06-2009: don't mistreat the first TLI!
                 if ((pos>0) && (currentTime<=minTime)) {
-                    result.addElement(getTimelineItemAt(pos).getID());                    
+                    result.add(getTimelineItemAt(pos).getID());                    
                 } /*else {
                     minTime = currentTime;
                 }*/
                 minTime = currentTime;
             }
         }
-        return result.toArray(new String[0]);
+        return result.toArray(String[]::new);
     }
     
     public void shiftAbsoluteTimes(double amount){

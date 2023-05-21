@@ -12,6 +12,7 @@
 package org.exmaralda.partitureditor.ipapanel;
 
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.exmaralda.partitureditor.unicodeKeyboard.UnicodeKeyboardEvent;
 import org.exmaralda.partitureditor.unicodeKeyboard.UnicodeKeyboardListener;
 
@@ -23,17 +24,19 @@ public class IPADialog extends javax.swing.JDialog implements UnicodeKeyboardLis
 
     public IPAPanel ipaPanel;
 
-    /** Creates new form IPADialog */
+    /** Creates new form IPADialog
+     * @param parent
+     * @param modal */
     public IPADialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        long t0 = System.currentTimeMillis();
+        //long t0 = System.currentTimeMillis();
         ipaPanel = new IPAPanel();
         this.getContentPane().add(ipaPanel);
         //ipaPanel.addUnicodeListener(this);
         pack();
-        long t1 = System.currentTimeMillis();
-        System.out.println("TIMEX: " + Long.toString(t1-t0));
+        //long t1 = System.currentTimeMillis();
+        //System.out.println("TIMEX: " + Long.toString(t1-t0));
     }
 
     /** This method is called from within the constructor to
@@ -61,10 +64,11 @@ public class IPADialog extends javax.swing.JDialog implements UnicodeKeyboardLis
                 UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
             }
-            catch (Exception e) {
-                    e.printStackTrace();
+            catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+                 System.out.println(e.getMessage());
             }
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 IPADialog dialog = new IPADialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -78,6 +82,7 @@ public class IPADialog extends javax.swing.JDialog implements UnicodeKeyboardLis
         });
     }
 
+    @Override
     public void performUnicodeKeyboardAction(UnicodeKeyboardEvent event) {
         System.out.println("***" + event.getText());
     }

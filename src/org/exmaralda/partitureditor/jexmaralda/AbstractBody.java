@@ -19,7 +19,7 @@ import java.util.*;
 public abstract class AbstractBody extends Vector {
 
     Timeline commonTimeline;
-    Hashtable positions;
+    Map<String, Integer> positions;
     
     // ********************************************
     // ********** CONSTRUCTORS ********************
@@ -29,7 +29,7 @@ public abstract class AbstractBody extends Vector {
     public AbstractBody() {
         super();
         commonTimeline = new Timeline();
-        positions=new Hashtable();        
+        positions=new HashMap();        
     }
     
 
@@ -37,12 +37,14 @@ public abstract class AbstractBody extends Vector {
     // ********** GET AND SET METHODS *************
     // ********************************************
 
-    /** returns the common timeline */
+    /** returns the common timeline
+     * @return  */
     public Timeline getCommonTimeline(){
         return commonTimeline;
     }
     
-    /** sets the common timeline to the specified value */
+    /** sets the common timeline to the specified value
+     * @param tl */
     public void setCommonTimeline(Timeline tl){
         commonTimeline = tl;
     }

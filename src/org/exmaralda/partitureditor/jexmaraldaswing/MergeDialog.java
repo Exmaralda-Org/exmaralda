@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ExmaraldaFileFilter;
 
 /**
@@ -31,12 +32,17 @@ public class MergeDialog extends javax.swing.JDialog {
         initComponents();
         fileChooser.setControlButtonsAreShown(false);
         fileChooser.setFileFilter(new ExmaraldaFileFilter());
-        
+               
         fileList.setModel(listModel);
     }
 
     public List<File> getFilesToBeMerged() {
         return filesToBeMerged;
+    }
+    
+    // new 16-05-2023
+    public void setCurrentDirectory(File f){
+        fileChooser.setCurrentDirectory(f);
     }
 
 

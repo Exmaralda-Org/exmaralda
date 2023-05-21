@@ -60,34 +60,35 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
             }
 
             // get the background images
-            long t0 = System.currentTimeMillis();
+            //long t0 = System.currentTimeMillis();
             vowelsImage = new javax.swing.ImageIcon(getClass().getResource(pathToVowelsImage));
             suprasegmentalsImage = new javax.swing.ImageIcon(getClass().getResource(pathToSuprasegmentalsImage));
             consonantsImage = new javax.swing.ImageIcon(getClass().getResource(pathToConsonantsImage));
             diacriticsImage = new javax.swing.ImageIcon(getClass().getResource(pathToDiacriticsImage));
             long t1 = System.currentTimeMillis();
 
-            System.out.println("TIME: " + Long.toString(t1-t0));
+            //System.out.println("TIME: " + Long.toString(t1-t0));
 
             initComponents();
             
             // read the button definitions
-            long t2 = System.currentTimeMillis();
+            //long t2 = System.currentTimeMillis();
             vowelsDefinition = new IOUtilities().readDocumentFromResource(pathToVowelsDefinition);
             suprasegmentalsDefinition = new IOUtilities().readDocumentFromResource(pathToSuprasegmentalsDefinition);
             consonantsDefinition = new IOUtilities().readDocumentFromResource(pathToConsonantsDefinition);
             diacriticsDefinition = new IOUtilities().readDocumentFromResource(pathToDiacriticsDefinition);
-            long t3 = System.currentTimeMillis();
-            System.out.println("TIME2: " + Long.toString(t3-t2));
+            //long t3 = System.currentTimeMillis();
+            //System.out.println("TIME2: " + Long.toString(t3-t2));
 
             // add the buttons
-            long t4 = System.currentTimeMillis();
+            //long t4 = System.currentTimeMillis();
             for (Object o : vowelsDefinition.getRootElement().getChildren("phoneme")){
                 Element phoneme = (Element)o;
                 int x = Integer.parseInt(phoneme.getAttributeValue("x"));
                 int y = Integer.parseInt(phoneme.getAttributeValue("y"));
                 IPAButton button = new IPAButton(phoneme, fontName, 14.0f);
                 button.addActionListener(new ActionListener(){
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         buttonPressed(e);
                     }
@@ -103,6 +104,7 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
                 int y = Integer.parseInt(phoneme.getAttributeValue("y"));
                 IPAButton button = new IPAButton(phoneme, fontName, 14.0f);
                 button.addActionListener(new ActionListener(){
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         buttonPressed(e);
                     }
@@ -118,6 +120,7 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
                 int y = Integer.parseInt(phoneme.getAttributeValue("y"));
                 IPAButton button = new IPAButton(phoneme, fontName, 12.0f);
                 button.addActionListener(new ActionListener(){
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         buttonPressed(e);
                     }
@@ -137,6 +140,7 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
                 int y = Integer.parseInt(phoneme.getAttributeValue("y"));
                 IPAButton button = new IPAButton(phoneme, fontName, 14.0f);
                 button.addActionListener(new ActionListener(){
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         buttonPressed(e);
                     }
@@ -145,14 +149,14 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
                 diacriticsPanel.add(button);
                 button.setBounds((int)Math.round(x)-2, (int)Math.round(y)-2, 48, 24);
             }
-            long t5 = System.currentTimeMillis();
-            System.out.println("TIME3: " + Long.toString(t5-t4));
+            //long t5 = System.currentTimeMillis();
+            //System.out.println("TIME3: " + Long.toString(t5-t4));
 
 
         } catch (JDOMException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -261,15 +265,19 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
     private javax.swing.JPanel vowelsSuprasegmentalPanel;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void mouseClicked(MouseEvent e) {
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e) {
        if (e.getSource() instanceof IPAButton){
            IPAButton b = (IPAButton)(e.getSource());
@@ -278,6 +286,7 @@ public class IPAPanel extends javax.swing.JPanel implements java.awt.event.Mouse
        }
     }
 
+    @Override
     public void mouseExited(MouseEvent e) {
         magnifyLabel.setText(null);
         descriptionLabel.setText(null);
