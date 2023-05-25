@@ -23,6 +23,7 @@ public class EventMenu extends AbstractTableMenu {
     private final JMenuItem splitMenuItem;
     private final JMenuItem doubleSplitMenuItem;
     private final JMenuItem deleteEventMenuItem;
+    private final JMenuItem deleteEventsMenuItem;
     private final JMenuItem extendRightMenuItem;
     private final JMenuItem extendLeftMenuItem;
     private final JMenuItem shrinkRightMenuItem;
@@ -45,6 +46,10 @@ public class EventMenu extends AbstractTableMenu {
         deleteEventMenuItem = this.add(table.deleteEventAction);
         deleteEventMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         deleteEventMenuItem.setToolTipText("Delete the current event");
+        
+        deleteEventsMenuItem = this.add(table.deleteEventsAction);
+        //deleteEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        deleteEventsMenuItem.setToolTipText("Delete the currently selected events");
 
         addSeparator();
 
