@@ -27,8 +27,8 @@ public class DeleteEventsAction extends org.exmaralda.partitureditor.partiture.A
     /** Creates a new instance of DeleteEventAction
      * @param t
      * @param icon */
-    public DeleteEventsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
-        super("Remove events", icon, t);
+    public DeleteEventsAction(PartitureTableWithActions t) {
+        super("Remove events", t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control shift D"));            
     }
     

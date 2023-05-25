@@ -1107,7 +1107,7 @@ public class PartitureTableWithActions extends PartitureTable
         splitAction = new SplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Split.png")));
         doubleSplitAction = new DoubleSplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DoubleSplit.png")));
         deleteEventAction = new DeleteEventAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DeleteEvent.png")));
-        deleteEventsAction = new DeleteEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DeleteEvent.png")));
+        deleteEventsAction = new DeleteEventsAction(this);
         extendRightAction = new ExtendRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendRight.png")));
         extendLeftAction = new ExtendLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendLeft.png")));
         shrinkRightAction = new ShrinkRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShrinkRight.png")));
