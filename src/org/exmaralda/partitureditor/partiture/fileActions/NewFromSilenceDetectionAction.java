@@ -120,14 +120,8 @@ public class NewFromSilenceDetectionAction extends org.exmaralda.partitureditor.
                                         setupTranscription(newTranscription);
                                     }
                                 });
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        } catch (WavFileException ex) {
-                            ex.printStackTrace();
-                        } catch (JexmaraldaException ex) {
-                            ex.printStackTrace();
-                        } catch (UnsupportedAudioFileException ex) {
-                            ex.printStackTrace();
+                        } catch (IOException | WavFileException | JexmaraldaException | UnsupportedAudioFileException ex) {
+                            System.out.println(ex.getMessage());
                         }
                 }
             };

@@ -697,6 +697,34 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         }
     }
     
+        /**
+     * deletes the event
+     * @param startRow - the first row of the area to be deleted
+     * @param endRow
+     * @param startCol
+     * @param endCol
+     */
+     // 25-05-2023 : issue #389
+    public void deleteEvents(int startRow, int endRow, int startCol, int endCol) {
+        for (int row=startRow; row<=endRow; row++){
+            Tier tier = transcription.getBody().getTierAt(row);
+            for(int col=startCol; col<=endCol; col++){
+                if (!containsEvent(row, col)) continue;
+                String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
+                try {
+                    tier.removeEventAtStartPoint(tli);
+                    fireCellSpanChanged(row, col);
+                    fireCellFormatChanged(row, col);
+                    fireValueChanged(row, col);
+                    fireAreaChanged(lower(col), upper(col));
+                } catch (JexmaraldaException je) {
+                }                
+            }
+        }
+        
+    }
+
+    
 
     
 

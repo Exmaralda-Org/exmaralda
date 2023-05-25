@@ -18,7 +18,6 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.*;
 import javax.swing.*;
 import java.util.*;
-import static javax.swing.SwingConstants.RIGHT;
 import javax.swing.border.LineBorder;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.search.analyses.AnalysisInterface;

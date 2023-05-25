@@ -40,7 +40,7 @@ public class ListEventsTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -50,7 +50,11 @@ public class ListEventsTableModel extends AbstractTableModel {
             switch(column){
                 case 0 : return transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getStart()).getTime();
                 case 1 : return transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getEnd()).getTime();
-                case 2 : return event.getDescription();
+                case 2 : 
+                    double duration = transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getEnd()).getTime()
+                            - transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getStart()).getTime();
+                    return duration;
+                case 3 : return event.getDescription();
             }
         } catch (JexmaraldaException ex) {
             Logger.getLogger(ListEventsTableModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +67,8 @@ public class ListEventsTableModel extends AbstractTableModel {
         switch(columnIndex){
             case 0 : return "Start";
             case 1 : return "End";
-            case 2 : return "Description";
+            case 2 : return "Length";
+            case 3 : return "Description";
         }
         return null;
     }
@@ -76,14 +81,15 @@ public class ListEventsTableModel extends AbstractTableModel {
         switch(columnIndex){
             case 0 : return Double.class;
             case 1 : return Double.class;
-            case 2 : return String.class;
+            case 2 : return Double.class;
+            case 3 : return String.class;
         }
         return Object.class;
     }    
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (columnIndex==2); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return (columnIndex==3); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override

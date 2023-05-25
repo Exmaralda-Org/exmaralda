@@ -41,6 +41,7 @@ public class ListEventsAction extends org.exmaralda.partitureditor.partiture.Abs
         dialog.addTableDataListener(table);
         dialog.setLocationRelativeTo(table);
         dialog.addSearchResultListener(table);
+        dialog.setPlayer(table.player);
         dialog.setVisible(true);
         
     }

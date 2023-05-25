@@ -18,9 +18,11 @@ import org.exmaralda.coma.root.Coma;
 import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.corpusbuild.comafunctions.SegmentationErrorsChecker;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseSegmentationDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.jdom.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  * 
@@ -62,6 +64,7 @@ public class CheckSegmentationErrorsAction
 			pbd.setVisible(true);
 
 			final Runnable doDisplaySaveDialog = new Runnable() {
+                                @Override
 				public void run() {
 					displaySaveDialog(checker);
 				}
@@ -75,7 +78,7 @@ public class CheckSegmentationErrorsAction
 								file.getParent());
 						javax.swing.SwingUtilities
 								.invokeLater(doDisplaySaveDialog);
-					} catch (Exception ex) {
+					} catch (URISyntaxException | JexmaraldaException | JDOMException | SAXException ex) {
 						ex.printStackTrace();
 						JOptionPane.showMessageDialog(coma, ex);
 						pbd.setVisible(false);

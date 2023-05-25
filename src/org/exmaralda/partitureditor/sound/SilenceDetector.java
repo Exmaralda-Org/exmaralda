@@ -410,7 +410,7 @@ public class SilenceDetector {
         
         
         ArrayList<ArrayList<double[]>> all = new ArrayList<ArrayList<double[]>>();
-        fireProgress(0, totalIterations, startTime, startTime);
+        fireProgress(1, totalIterations, startTime, startTime);
         for (double threshhold = startThreshHold; threshhold < endThreshHold; threshhold+=stepThreshHold){
             for (double minLength=startMinLength; minLength<=endMinLength; minLength+=stepMinLength){
                 SilenceDetector sd = new SilenceDetector(audioFile);
@@ -420,7 +420,7 @@ public class SilenceDetector {
                 all.add(shrunkSilenceIntervals);
                 countIterations++;
                 long time = System.currentTimeMillis();
-                fireProgress(countIterations, totalIterations, startTime, time);
+                fireProgress(countIterations+1, totalIterations, startTime, time);
             }
         }
         
@@ -454,7 +454,7 @@ public class SilenceDetector {
             double[] parameters = {0.0,1.0,3.0,7.0,10.0, audioLength};
             
             BasicTranscription bt = new BasicTranscription();
-            ArrayList<ArrayList<double[]>> all = new ArrayList<ArrayList<double[]>>();
+            ArrayList<ArrayList<double[]>> all = new ArrayList<>();
             for (double threshhold = 0.01; threshhold < 0.02; threshhold+=0.002){
                 //double minLength=0.1;
                 for (double minLength=0.1; minLength<=0.2; minLength+=0.1){
@@ -481,11 +481,7 @@ public class SilenceDetector {
             
             bt.writeXMLToFile("C:\\Users\\Schmidt\\Dropbox\\IDS\\AGD\\Peters\\BEISPIEL\\NEW_TEST.exb", "none");
             System.exit(0);
-        } catch (IOException ex) {
-            Logger.getLogger(SilenceDetector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (WavFileException ex) {
-            Logger.getLogger(SilenceDetector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JexmaraldaException ex) {
+        } catch (IOException | WavFileException | JexmaraldaException ex) {
             Logger.getLogger(SilenceDetector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

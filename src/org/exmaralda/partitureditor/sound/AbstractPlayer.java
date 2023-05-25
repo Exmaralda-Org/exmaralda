@@ -17,7 +17,7 @@ public abstract class AbstractPlayer implements Playable {
     
     public double startTime = 0;
     public double endTime = 0;
-    Vector listenerList;
+    List<PlayableListener> listenerList;
 
     String soundFilePath;
     
@@ -25,7 +25,7 @@ public abstract class AbstractPlayer implements Playable {
     
     /** Creates a new instance of AbstractPlayer */
     public AbstractPlayer() {
-        listenerList = new Vector();        
+        listenerList = new ArrayList<>();        
     }
 
     @Override
@@ -55,7 +55,7 @@ public abstract class AbstractPlayer implements Playable {
             endTime = 0;
             setSoundFile(null);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -63,7 +63,7 @@ public abstract class AbstractPlayer implements Playable {
     
     @Override
     public void addPlayableListener(PlayableListener l) {
-        listenerList.addElement(l);
+        listenerList.add(l);
     }
 
     protected void firePlaybackStarted(){
@@ -99,8 +99,8 @@ public abstract class AbstractPlayer implements Playable {
     
     private void firePlayableEvent(PlayableEvent e){
         for (int pos=0; pos<listenerList.size(); pos++){
-            PlayableListener l = (PlayableListener)(listenerList.elementAt(pos));
-            l.processPlayableEvent(e);
+            listenerList.get(pos)
+             .processPlayableEvent(e);
         }
     }
     

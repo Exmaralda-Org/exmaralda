@@ -738,6 +738,7 @@ public class PartitureTableWithActions extends PartitureTable
         // 2. Event actions
         editEventAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
         deleteEventAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
+        deleteEventsAction.setEnabled(aRectangleOfEventsIsSelected && !locked);
         extendRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
         extendLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheLeftIsFree && !locked);
         moveRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
@@ -1106,6 +1107,7 @@ public class PartitureTableWithActions extends PartitureTable
         splitAction = new SplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Split.png")));
         doubleSplitAction = new DoubleSplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DoubleSplit.png")));
         deleteEventAction = new DeleteEventAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DeleteEvent.png")));
+        deleteEventsAction = new DeleteEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DeleteEvent.png")));
         extendRightAction = new ExtendRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendRight.png")));
         extendLeftAction = new ExtendLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendLeft.png")));
         shrinkRightAction = new ShrinkRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShrinkRight.png")));
@@ -1245,6 +1247,7 @@ public class PartitureTableWithActions extends PartitureTable
         chopAudioAction.setEnabled(false);
         
         deleteEventAction.setEnabled(false);
+        deleteEventsAction.setEnabled(false);
         extendRightAction.setEnabled(false);
         extendLeftAction.setEnabled(false);
         shrinkRightAction.setEnabled(false);
@@ -1744,6 +1747,8 @@ public class PartitureTableWithActions extends PartitureTable
     /* Event menu actions */
     
     public javax.swing.AbstractAction deleteEventAction;
+    public javax.swing.AbstractAction deleteEventsAction;
+
     public javax.swing.AbstractAction extendRightAction;
     public javax.swing.AbstractAction extendLeftAction;
     public javax.swing.AbstractAction shrinkRightAction;

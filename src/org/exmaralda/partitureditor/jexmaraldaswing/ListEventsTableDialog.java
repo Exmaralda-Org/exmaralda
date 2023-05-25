@@ -12,16 +12,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.partiture.AbstractTranscriptionTableModel;
 import org.exmaralda.partitureditor.search.EventSearchResult;
 import org.exmaralda.partitureditor.search.SearchResultListener;
+import org.exmaralda.partitureditor.sound.Playable;
 
 // new for #382
 
@@ -34,10 +43,12 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
 
     List<SearchResultListener> searchResultListenerList = new ArrayList<>();
     List<JCTableDataListener> tableDataListenerList = new ArrayList<>();
+    BasicTranscription transcription;
     Tier tier;
     ListEventsTableModel tableModel;
     
     int rowIndex;
+    Playable player;
     
     /**
      * Creates new form ListEventsDialog
@@ -50,6 +61,7 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
     public ListEventsTableDialog(java.awt.Frame parent, boolean modal, BasicTranscription transcription, Tier tier, int rowIndex) {
         super(parent, modal);
         this.tier = tier;
+        this.transcription = transcription;
         initComponents();
         tableModel = new ListEventsTableModel(transcription, tier, rowIndex);
         tableModel.addTableModelListener(this);
@@ -58,7 +70,8 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
         eventTable.setDefaultRenderer(Double.class, new ListEventsTableCellRenderer());
         eventTable.getColumnModel().getColumn(0).setPreferredWidth(100);
         eventTable.getColumnModel().getColumn(1).setPreferredWidth(100);
-        eventTable.getColumnModel().getColumn(2).setMinWidth(400);
+        eventTable.getColumnModel().getColumn(2).setPreferredWidth(60);
+        eventTable.getColumnModel().getColumn(3).setMinWidth(250);
         eventTable.setRowHeight(18);
         displayNameLabel.setText(tier.getDisplayName());
         this.rowIndex = rowIndex;
@@ -73,6 +86,24 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
                 }, 
                 stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
         
+        eventTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                tableSelectionChanged(e);
+            }
+
+            private void tableSelectionChanged(ListSelectionEvent e) {
+                if (e.getFirstIndex()>=0){
+                    playButton.setEnabled(true);
+                }
+            }
+            
+        });
+        
+    }
+    
+    public void setPlayer(Playable player){
+        this.player = player;
     }
     
     public void addSearchResultListener(SearchResultListener listener){
@@ -113,6 +144,8 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
         displayNameLabel = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
         closeButton = new javax.swing.JButton();
+        rightSidePanel = new javax.swing.JPanel();
+        playButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("List events");
@@ -135,6 +168,7 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
             }
         ));
         eventTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        eventTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         eventTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eventTableMouseClicked(evt);
@@ -161,6 +195,20 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
 
         getContentPane().add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
+        rightSidePanel.setLayout(new javax.swing.BoxLayout(rightSidePanel, javax.swing.BoxLayout.Y_AXIS));
+
+        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/media-playback-start.png"))); // NOI18N
+        playButton.setToolTipText("Play the selected event(s)");
+        playButton.setEnabled(false);
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+        rightSidePanel.add(playButton);
+
+        getContentPane().add(rightSidePanel, java.awt.BorderLayout.LINE_END);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -182,6 +230,39 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        if (player==null) return;
+        if (eventTable.getSelectedRow()<0) return;
+        player.stopPlayback();
+        
+        int[] rowIndices = eventTable.getSelectedRows();
+        Timeline timeline = transcription.getBody().getCommonTimeline();
+        for (int row : rowIndices){
+            try {
+                System.out.println("Row " + row);
+                int modelIndex = eventTable.convertRowIndexToModel(row);
+                Event event = tier.getEventAt(modelIndex);
+                double startTime = timeline.getTimelineItemWithID(event.getStart()).getTime();
+                double endTime = timeline.getTimelineItemWithID(event.getEnd()).getTime();
+                player.setStartTime(startTime);
+                player.setEndTime(endTime);
+                player.startPlayback();
+                
+                //SwingUtilities.invokeAndWait(doRun);
+                
+                Timer timer = new Timer((int) ((endTime-startTime) * 1000 + 1000), (ActionEvent e) -> {
+                    System.out.println("Reached end of timer");
+                });
+                timer.setRepeats(false);
+                timer.start();                
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(ListEventsTableDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_playButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,6 +315,8 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
     private javax.swing.JScrollPane ebentTableScrollPane;
     private javax.swing.JPanel eventListPanel;
     private javax.swing.JTable eventTable;
+    private javax.swing.JButton playButton;
+    private javax.swing.JPanel rightSidePanel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 

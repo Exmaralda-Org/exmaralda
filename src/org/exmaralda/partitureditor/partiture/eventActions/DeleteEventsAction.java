@@ -18,22 +18,24 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  *
  * @author  thomas
  */
-public class DeleteEventAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
+
+// 25-05-2023 : issue #389
+public class DeleteEventsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
     public boolean safetyCheck = false;
 
     /** Creates a new instance of DeleteEventAction
      * @param t
      * @param icon */
-    public DeleteEventAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
-        super("Remove", icon, t);
-        putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control D"));            
+    public DeleteEventsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
+        super("Remove events", icon, t);
+        putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control shift D"));            
     }
     
     
     @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
-        System.out.println("deleteEventAction!");
+        System.out.println("deleteEventsAction!");
         table.commitEdit(true);
         if (safetyCheck){
             int retValue = JOptionPane.showConfirmDialog(table, 
@@ -44,15 +46,17 @@ public class DeleteEventAction extends org.exmaralda.partitureditor.partiture.Ab
                 return;
             }
         }
-        deleteEvent();
+        deleteEvents();
         table.transcriptionChanged = true;        
     }
     
-    private void deleteEvent(){
+    private void deleteEvents(){
         if (table.undoEnabled){
             // Undo information
+            // need a loop here
             int lower = table.getModel().lower(table.selectionStartCol);
-            int upper = table.getModel().upper(table.selectionStartCol + table.getModel().getCellSpan(table.selectionStartRow, table.selectionEndCol));
+            int upper = table.getModel().upper(table.selectionEndCol 
+                    + table.getModel().getCellSpan(table.selectionStartRow, table.selectionEndCol));
             //System.out.println("upper " + upper + " lower " + lower);
             UndoInformation undoInfo = new UndoInformation(table, "Remove event");
             undoInfo.memorizeRegion(table, lower, upper);
@@ -60,7 +64,13 @@ public class DeleteEventAction extends org.exmaralda.partitureditor.partiture.Ab
             //System.out.println("Added undo delete event");
             // end undo information
         }
-        table.getModel().deleteEvent(table.selectionStartRow, table.selectionStartCol);
+        table.getModel()
+                .deleteEvents(
+                        table.selectionStartRow, 
+                        table.selectionEndRow, 
+                        table.selectionStartCol,
+                        table.selectionEndCol
+                );
     }
         
 }
