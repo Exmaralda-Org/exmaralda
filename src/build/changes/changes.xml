@@ -10,6 +10,12 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="feature" version="1.7" date="25.05.2023">Delete several events in one go (issue #389)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="12.05.2023">HTML output: make audio selection case-insensitive (issue #387)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="07.05.2023">Check and error message for search results turned sour (issue #12)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="06.05.2023">Beautification of recording list cell renderer</change>
+    <change tool="partitureditor" type="change" version="1.7" date="06.05.2023">Perfected list events table (issue #382)</change>
+    <change tool="folker" type="bug" version="1.3" date="03.05.2023">Bugfix (issue #386)</change>
     <change tool="partitureditor" type="change" version="1.7" date="02.05.2023">Import Whisper word level  (issue #357)</change>
     <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">Improve start folder selection for Add recording  (issue #384)</change>
     <change tool="partitureditor" type="change" version="1.7" date="23.04.2023">List events in table rather than list (issue #382)</change>
