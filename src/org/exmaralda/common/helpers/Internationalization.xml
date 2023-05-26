@@ -798,6 +798,12 @@
 					<translation lang="es" trans="Edición de capas..."/>
 					<translation lang="zh" trans="编辑层..."/>
 				</item>
+				<!-- NEW -->
+				<item id="List events...">
+					<translation lang="en" trans="List events..."/>
+					<translation lang="de" trans="Ereignis-Liste..."/>
+					<translation lang="fr" trans="Liste d'événements..."/>
+				</item>
 				<item id="Add tier...">
 					<translation lang="en" trans="Add tier..."/>
 					<translation lang="de" trans="Spur anfügen..."/>
@@ -819,9 +825,9 @@
 					<translation lang="zh" trans="插入层..."/>
 				</item>
 				<item id="Remove tier...">
-					<translation lang="en" trans="Remove tier..."/>
-					<translation lang="de" trans="Spur entfernen..."/>
-					<translation lang="fr" trans="Effacer piste..."/>
+					<translation lang="en" trans="Remove tier(s)..."/>
+					<translation lang="de" trans="Spur(en) entfernen..."/>
+					<translation lang="fr" trans="Effacer piste(s)..."/>
 					<translation lang="sv" trans="Ta bort spår..."/>
 					<translation lang="tr" trans="Şeridi sil..."/>
 					<translation lang="cz" trans="Odstranit stopu..."/>
@@ -829,9 +835,9 @@
 					<translation lang="zh" trans="删除层..."/>
 				</item>
 				<item id="Remove tier">
-					<translation lang="en" trans="Remove tier"/>
-					<translation lang="de" trans="Spur entfernen"/>
-					<translation lang="fr" trans="Effacer piste"/>
+					<translation lang="en" trans="Remove tier(s)"/>
+					<translation lang="de" trans="Spur(en) entfernen"/>
+					<translation lang="fr" trans="Effacer piste(s)"/>
 					<translation lang="sv" trans="Ta bort spår"/>
 					<translation lang="tr" trans="Şeridi sil"/>
 					<translation lang="cz" trans="Odstranit stopu"/>
