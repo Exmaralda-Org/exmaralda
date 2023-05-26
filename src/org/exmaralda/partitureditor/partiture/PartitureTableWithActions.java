@@ -715,6 +715,7 @@ public class PartitureTableWithActions extends PartitureTable
         boolean columnIsGap = (aWholeColumnIsSelected && getModel().isGap(selectionStartCol));
         boolean isTranscriptionTypeTier = ((selectionStartRow>=0) && (selectionStartRow == selectionEndRow) && getModel().getTier(selectionStartRow).getType().equals("t"));
         aRectangleOfEventsIsSelected = (selectionStartCol!=selectionEndCol) && (selectionStartRow>=0) && (selectionEndRow>=0) && (selectionStartCol>=0);
+        boolean aVerticalSeriesOfEventsIsSelected = (selectionStartCol==selectionEndCol) && (selectionStartRow>=0) && !(selectionStartRow == selectionEndRow);
                 
         multipleColumnsSelected = aSeriesOfColumnsIsSelected;
         
@@ -738,7 +739,7 @@ public class PartitureTableWithActions extends PartitureTable
         // 2. Event actions
         editEventAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
         deleteEventAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);
-        deleteEventsAction.setEnabled(aRectangleOfEventsIsSelected && !locked);
+        deleteEventsAction.setEnabled((aRectangleOfEventsIsSelected || aVerticalSeriesOfEventsIsSelected) && !locked);
         extendRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
         extendLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheLeftIsFree && !locked);
         moveRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
