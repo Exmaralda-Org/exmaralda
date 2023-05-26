@@ -167,11 +167,11 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
                                 addEvent(translation, event.getStart(), event.getEnd(), targetTier, languageTier);
                             }
-                        } else if (!(useSegmentation) || !(sourceTier.getType().equals("t"))){
-                            String originalText = "";
-                            
+                        } else if (!(useSegmentation) || !(sourceTier.getType().equals("t"))){                            
                             List<List<Event>> segmentChains = sourceTier.getSegmentChains(table.getModel().getTranscription().getBody().getCommonTimeline());
                             for (List<Event> segmentChain : segmentChains){
+                                // 26-05-2023 -- moved this for #297
+                                String originalText = "";
                                 for (Event e : segmentChain){
                                     originalText+=e.getDescription();
                                 }
