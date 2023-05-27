@@ -723,11 +723,10 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         }
         
     }
-
-    
-
-    
-
-    
-    
 }
+    
+
+    
+
+    
+    
