@@ -30,6 +30,9 @@ public class EventMenu extends AbstractTableMenu {
     private final JMenuItem shrinkLeftMenuItem;
     private final JMenuItem moveRightMenuItem;
     private final JMenuItem moveLeftMenuItem;
+    private final JMenuItem moveDownLeftMenuItem;
+    private final JMenuItem moveDownRightMenuItem;
+    
     private final JMenuItem findNextEventMenuItem;
     private final JMenuItem splitLongEventMenuItem;
 
@@ -104,6 +107,13 @@ public class EventMenu extends AbstractTableMenu {
         moveLeftMenuItem  = this.add(table.moveLeftAction);
         moveLeftMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));      
         moveLeftMenuItem.setToolTipText("Move the current event one time interval to the left");
+        
+        moveDownLeftMenuItem = this.add(table.moveDownLeftAction);
+        moveDownLeftMenuItem.setToolTipText("Move the current event to the left in the following tier");
+        
+        moveDownRightMenuItem = this.add(table.moveDownRightAction);
+        moveDownLeftMenuItem.setToolTipText("Move the current event to the right in the following tier");
+        
 
         addSeparator();
                 

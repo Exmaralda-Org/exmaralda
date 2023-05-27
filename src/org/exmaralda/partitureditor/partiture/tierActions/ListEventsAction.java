@@ -30,7 +30,7 @@ public class ListEventsAction extends org.exmaralda.partitureditor.partiture.Abs
         System.out.println("listEventsAction!");
         table.commitEdit(true);
         listEvents();
-        table.transcriptionChanged = true;        
+        table.transcriptionChanged = true;      
     }
     
     private void listEvents(){

@@ -30,8 +30,9 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
     //public final JMenu moveMenu;
     
     // 24-06-2016 MuM-Multi new 
-    private final JMenuItem moveDownLeftMenuItem;
-    private final JMenuItem moveDownRightMenuItem;
+    // 27-05-2023 removed here
+    //private final JMenuItem moveDownLeftMenuItem;
+    //private final JMenuItem moveDownRightMenuItem;
     
     
     private final JMenuItem copyMenuItem;
@@ -81,12 +82,12 @@ public class EventPopupMenu extends javax.swing.JPopupMenu {
         
         // 26-07-2016 new
         //moveMenu = new JMenu();
-        //moveMenu.setText("Move to tier...");
+        //moveMenu.setText("Move to tier...");        
         add(table.moveMenu);
         
         // 24-06-2016 MuM-Multi new 
-        moveDownLeftMenuItem = this.add(table.moveDownLeftAction);
-        moveDownRightMenuItem = this.add(table.moveDownRightAction);
+        //moveDownLeftMenuItem = this.add(table.moveDownLeftAction);
+        //moveDownRightMenuItem = this.add(table.moveDownRightAction);
         
         add(new javax.swing.JPopupMenu.Separator());
 

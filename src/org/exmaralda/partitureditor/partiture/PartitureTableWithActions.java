@@ -297,6 +297,7 @@ public class PartitureTableWithActions extends PartitureTable
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
+        
 
     }
 
@@ -475,7 +476,7 @@ public class PartitureTableWithActions extends PartitureTable
     // ************************ LISTENER METHODS ***************************************** //
     // *********************************************************************************** //
     
-
+    
     /** checks if the event is a popup trigger
      *  if so, displays the table's popup menu
      * @param event */
@@ -484,17 +485,25 @@ public class PartitureTableWithActions extends PartitureTable
        //super.processMouseEvent(event);
        if (event.isPopupTrigger()) {
            tablePopupMenu.show(this, event.getX(), event.getY());
-       } else {
-             try {
+       } /*else if (event.getClickCount()==2 && !(event.isConsumed()) && this.selectionStartCol==-1 && this.selectionStartRow>=0){
+            // new 27-05-2023: double click with selected row will bring up list events
+            listEventsAction.actionPerformed(null);
+           //System.out.println("DOUBLE");
+           event.consume();
+       } */ else  {
+            try {
                 super.processMouseEvent(event);
             } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
+                 System.out.println(e.getMessage());
                 // do nothing
                 // catches the (harmless) array index out of bounds exception
             } catch (Exception e){
-                e.printStackTrace();
+                 System.out.println(e.getMessage());
             }
        }
+       
+        //System.out.println("CHECKING");
+       
     }
     
     public boolean waitForSelection = false;
@@ -2877,7 +2886,8 @@ public class PartitureTableWithActions extends PartitureTable
     // changed 11-01-2019 for issue #176
     @Override
     public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-        ((JPopupMenu)(e.getSource())).add(moveMenu);
+        if (!(e.getSource() instanceof EventPopupMenu)) return;
+        ((JPopupMenu)(e.getSource())).add(moveMenu, 6);
         moveMenu.removeAll();
         if (!(selectionStartRow==selectionEndRow && getModel().containsEvent(selectionStartRow, selectionStartCol) && getModel().containsEvent(selectionStartRow, selectionEndCol))){
             moveMenu.setEnabled(false);

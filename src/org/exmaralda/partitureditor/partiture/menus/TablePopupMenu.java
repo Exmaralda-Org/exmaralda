@@ -19,6 +19,7 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
     
     PartitureTableWithActions table;
 
+    private final JMenuItem listEventsMenuItem;
     private final JMenuItem editTierPropertiesMenuItem;
     private final JMenuItem insertTierMenuItem;
     private final JMenuItem deleteTierMenuItem;
@@ -44,7 +45,14 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
         editTierPropertiesMenuItem.setIcon(null);
         editTierPropertiesMenuItem.setAccelerator(null);
         editTierPropertiesMenuItem.setText(Internationalizer.getString("Tier properties"));
-        
+
+        listEventsMenuItem  = this.add(table.listEventsAction);      
+        listEventsMenuItem.setIcon(null);
+        listEventsMenuItem.setAccelerator(null);
+        listEventsMenuItem.setText(Internationalizer.getString("List events"));
+
+        this.add(new javax.swing.JPopupMenu.Separator());
+       
         insertTierMenuItem  = this.add(table.insertTierAction);      
         insertTierMenuItem.setIcon(null);
         insertTierMenuItem.setAccelerator(null);
@@ -114,7 +122,7 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
 
         this.add(new javax.swing.JPopupMenu.Separator());
         
-        this.add(table.moveMenu);
+        //this.add(table.moveMenu);
 
         this.pack();
     }
