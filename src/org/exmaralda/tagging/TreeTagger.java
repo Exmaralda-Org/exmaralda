@@ -93,7 +93,8 @@ public class TreeTagger {
             xsi:noNamespaceSchemaLocation="http://xml.exmaralda.org/sextant.xsd" xml:base="MiniTest.exs"
             target="MiniTest.exs" id="MiniTest.exs_pos" targetId="n/a"
             type="pos-annotation from sextant tagger"> */
-            if (tokenHandler instanceof SextantTokenHandler carsten){
+            if (tokenHandler instanceof SextantTokenHandler){
+                SextantTokenHandler carsten = (SextantTokenHandler)tokenHandler;
                 carsten.sextantDocument.getRootElement().setAttribute("target", input.getBase());
                 carsten.sextantDocument.getRootElement().setAttribute("base", input.getBase());
                 carsten.sextantDocument.getRootElement().setAttribute("id", input.getBase() + "_pos");

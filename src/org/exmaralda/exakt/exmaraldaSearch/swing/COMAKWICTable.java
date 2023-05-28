@@ -285,7 +285,8 @@ public class COMAKWICTable  extends javax.swing.JTable
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getSource() instanceof JTableHeader h){
+        if (e.getSource() instanceof JTableHeader){
+            JTableHeader h = (JTableHeader)e.getSource();
             TableColumnModel thisColumnModel = h.getColumnModel();
             int viewColumn = thisColumnModel.getColumnIndexAtX(e.getX());
             // changed for row numbering in version 0.4, 22-Jan-2008
@@ -302,7 +303,8 @@ public class COMAKWICTable  extends javax.swing.JTable
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getSource() instanceof JTableHeader h){
+        if (e.getSource() instanceof JTableHeader){
+            JTableHeader h = (JTableHeader)e.getSource();            
             TableColumnModel thisColumnModel = h.getColumnModel();
             int viewColumn = thisColumnModel.getColumnIndexAtX(e.getX());
             // changed for row numbering in version 0.4, 22-Jan-2008

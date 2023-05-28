@@ -164,9 +164,7 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                     searchResultString = resultWriter.toString();  
                     
                 }  catch (TransformerException ex) {
-                    String message = """
-                                     General problem with CSV export:: 
-                                     """;
+                    String message = "General problem with CSV export: ";
                     message += ex.getMessage() + "\n";
                     failed = true;
                     javax.swing.JOptionPane.showMessageDialog(exaktFrame, message);

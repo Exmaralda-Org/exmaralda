@@ -486,13 +486,17 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
         // TODO add your handling code here:        
         java.awt.Image img = null;
 
-        if (getPlayer() instanceof JDSPlayer jDSPlayer){
+        if (getPlayer() instanceof JDSPlayer){
+            JDSPlayer jDSPlayer = (JDSPlayer)getPlayer();
             img = jDSPlayer.grabFrame();            
-        } else if (getPlayer() instanceof MMFPlayer mMFPlayer){
+        } else if (getPlayer() instanceof MMFPlayer){
+            MMFPlayer mMFPlayer = (MMFPlayer)getPlayer();
             img = mMFPlayer.grabFrame();            
-        } else if (getPlayer() instanceof JavaFXPlayer javaFXPlayer){
+        } else if (getPlayer() instanceof JavaFXPlayer){
+            JavaFXPlayer javaFXPlayer = (JavaFXPlayer)getPlayer();
             img = javaFXPlayer.grabFrame();  
-        } else if (getPlayer() instanceof AVFPlayer aVFPlayer){
+        } else if (getPlayer() instanceof AVFPlayer){
+            AVFPlayer aVFPlayer = (AVFPlayer)getPlayer();
             img = aVFPlayer.grabFrame();  
         }
 
@@ -699,22 +703,26 @@ public class AudioPanel extends javax.swing.JDialog implements PlayableListener 
          
             // 1. determine the actual size of the video
             // this may work differently in different players
-            if (getPlayer() instanceof JDSPlayer jdsp){
+            if (getPlayer() instanceof JDSPlayer){
+                JDSPlayer jdsp = (JDSPlayer)getPlayer();
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JDSPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } else if (getPlayer() instanceof JavaFXPlayer jdsp){
+            } else if (getPlayer() instanceof JavaFXPlayer){
+                JavaFXPlayer jdsp = (JavaFXPlayer)getPlayer();
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("JavaFXPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            } else if (getPlayer() instanceof AVFPlayer jdsp){
+            } else if (getPlayer() instanceof AVFPlayer){
+                AVFPlayer jdsp = (AVFPlayer)getPlayer();
                 sourceWidth = jdsp.wrappedPlayer.getSourceWidth();
                 sourceHeight = jdsp.wrappedPlayer.getSourceHeight();           
                 System.out.println("AVFPlayer says the movie " + new File(filename).getName() 
                         + " has width " + sourceWidth + "and  height " + sourceHeight);
-            }else if (getPlayer() instanceof MMFPlayer cqtp) {
+            }else if (getPlayer() instanceof MMFPlayer) {
+                 MMFPlayer cqtp = (MMFPlayer)getPlayer();
                  sourceWidth = cqtp.wrappedPlayer.getSourceWidth();
                  sourceHeight = cqtp.wrappedPlayer.getSourceHeight();     
                  System.out.println("MMFPlayer says the movie " + new File(filename).getName() 

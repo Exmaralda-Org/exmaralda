@@ -56,25 +56,29 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
         // possible place for issue #377
         super.moveTimepoints(event);
         if ((playerState==PLAYER_IDLE)){
-             if (player instanceof JDSPlayer jds){
+             if (player instanceof JDSPlayer){
+                JDSPlayer jds = (JDSPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
                     jds.updateVideo(selectionStart/1000.0);
                 } else {
                     jds.updateVideo(selectionEnd/1000.0);
                 }
-            } else if (player instanceof JavaFXPlayer jfx){
+            } else if (player instanceof JavaFXPlayer){
+                JavaFXPlayer jfx = (JavaFXPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
                     jfx.updateVideo(selectionStart/1000.0);
                 } else {
                     jfx.updateVideo(selectionEnd/1000.0);
                 } 
-            } else if (player instanceof AVFPlayer avf){
+            } else if (player instanceof AVFPlayer){
+                AVFPlayer avf = (AVFPlayer)player;
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){
                     avf.updateVideo(selectionStart/1000.0);
                 } else {
                     avf.updateVideo(selectionEnd/1000.0);
                 }            
-            } else if (player instanceof MMFPlayer mmf){
+            } else if (player instanceof MMFPlayer){
+                MMFPlayer mmf = (MMFPlayer)player;
                 //HEY HO BERND THE BUILDER!
                  //Timeview cursor update may cause problems?
                 if ((event.getType()==TimeSelectionEvent.START_TIME_CHANGED)){

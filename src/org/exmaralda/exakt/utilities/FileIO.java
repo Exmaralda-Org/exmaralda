@@ -288,9 +288,11 @@ public class FileIO {
     }
     
     public static String getPlainText(Content c){
-        if (c instanceof org.jdom.Text text){
+        if (c instanceof org.jdom.Text){
+            org.jdom.Text text = (org.jdom.Text)c;
             return text.getText();
-        } else if (c instanceof org.jdom.CDATA cdata){
+        } else if (c instanceof org.jdom.CDATA){
+            org.jdom.CDATA cdata = (org.jdom.CDATA)c;
             return (cdata.getText());                
         } else {
             StringBuilder sb = new StringBuilder();

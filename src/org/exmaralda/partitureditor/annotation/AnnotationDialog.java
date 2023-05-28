@@ -18,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -109,7 +108,8 @@ public class AnnotationDialog extends javax.swing.JDialog implements com.klg.jcl
     private ExmaraldaApplication getApplication() {
         if (partitur==null) return null;
         Object o = partitur.getTopLevelAncestor();
-        if (o instanceof ExmaraldaApplication exmaraldaApplication){
+        if (o instanceof ExmaraldaApplication){
+            ExmaraldaApplication exmaraldaApplication = (ExmaraldaApplication)o;
             //System.out.println("Jippie!");
             return exmaraldaApplication;
         }

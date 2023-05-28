@@ -67,10 +67,9 @@ public class WebMAUSFineAlignmentAction extends org.exmaralda.partitureditor.par
         
         String wavPath = table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("wav");
         if (wavPath==null){
-            String message = """
-                             No WAV audio file assigned to this transcription. 
-                             WebMAUS cannot run without a WAV audio file. 
-                             Please use Transcription > Recording to assign a WAV audio file.""";
+            String message = "No WAV audio file assigned to this transcription.\n" 
+                             + "WebMAUS cannot run without a WAV audio file.\n" 
+                             + "Please use Transcription > Recording to assign a WAV audio file.";
             JOptionPane.showMessageDialog(table, message);
             return;
         }

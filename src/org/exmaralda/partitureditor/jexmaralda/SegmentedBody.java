@@ -122,22 +122,27 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
             SegmentedTier st = (SegmentedTier)(elementAt(pos));
             for (int pos2=0; pos2<st.size(); pos2++){
                 Object o = st.elementAt(pos2);
-                if (o instanceof Segmentation s){
+                if (o instanceof Segmentation){
+                    Segmentation s = (Segmentation)o;
                     for (int pos3=0; pos3<s.getNumberOfSegments(); pos3++){
                         Object o2 = s.elementAt(pos3);
-                        if (o2 instanceof TimedSegment ts){
+                        if (o2 instanceof TimedSegment){
+                            TimedSegment ts = (TimedSegment)o2;
                             idno = ts.makeIDs(idno);
                         }
-                        else if (o2 instanceof AtomicTimedSegment ats){
+                        else if (o2 instanceof AtomicTimedSegment){
+                            AtomicTimedSegment ats = (AtomicTimedSegment)o2;
                             ats.setID("Seg_" + Integer.toString(idno));
                             idno++;
                         }
                     }
                 }
-                else if (o instanceof Annotation a){
+                else if (o instanceof Annotation){
+                    Annotation a = (Annotation)o;
                     for (int pos3=0; pos3<a.getNumberOfSegments(); pos3++){
                         Object o2 = a.elementAt(pos3);
-                        if (o2 instanceof TimedAnnotation ta){
+                        if (o2 instanceof TimedAnnotation){
+                            TimedAnnotation ta = (TimedAnnotation)o2;
                             ta.setID("Seg_" + Integer.toString(idno));
                             idno++;
                         }
@@ -187,7 +192,8 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
             sb.append("<tr><td valign=\"top\"><b>Tier ").append(st.getDescription(spkt)).append("</b></td>").append(nl);
             for (int pos2=0; pos2<st.size(); pos2++){
                 Object o = st.elementAt(pos2);
-                if (o instanceof Segmentation s){
+                if (o instanceof Segmentation){
+                    Segmentation s = (Segmentation)o;
                     //sb.append(nl + "Segmentation " + s.getName()+ nl);
                    sb.append("<td valign=\"top\">");
                     HashSet segmentHashSet = s.getAllSegmentNames();
@@ -199,7 +205,8 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
                     sb.append("<b>[").append(s.getName()).append("]</b><br/>");
                     sb.append("</td>");
                 }
-                else if (o instanceof Annotation a){
+                else if (o instanceof Annotation){
+                    Annotation a = (Annotation)o;
                     int count = a.size();
                    sb.append("<td valign=\"top\">");
                     sb.append(Integer.toString(count)).append(" ").append(a.name);
