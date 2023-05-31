@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.folker.data;
+package org.exmaralda.folker.data.agd;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -12,28 +12,30 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.exmaralda.folker.data.AbstractParser;
+import org.exmaralda.folker.data.PatternReader;
+import org.exmaralda.folker.data.PositionTimeMapping;
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
-import org.jdom.filter.ElementFilter; 
 import org.jdom.transform.XSLTransformer;
 
 /**
  *
  * @author thomas
  */
-public class BWParser extends AbstractParser {
+public class ADParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/BWPatterns.xml";
+    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/ADPatterns.xml";
 
     Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/BW_transformcontribution.xsl";
+    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/AD_transformcontribution.xsl";
     XSLTransformer minimalTransformer;
     
 
-    public BWParser() {
+    public ADParser() {
         try {
             PatternReader pr = new PatternReader(PATTERNS_FILE_PATH);
 
@@ -121,31 +123,16 @@ public class BWParser extends AbstractParser {
                     continue;
                 }*/
                 try {
-                    text = parseText(text, "BW_PAUSE", minimalPatterns);
-                    text = parseText(text, "BW_SPACE", minimalPatterns);
-                    text = parseText(text, "BW_WORD", minimalPatterns);
-                    text = parseText(text, "BW_PUNCTUATION", minimalPatterns);
-                    System.out.println(text);
-                    List newContent = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + text +"</X>").getRootElement().removeContent();
+                    text = parseText(text, "AD_NONVERBAL", minimalPatterns);
+                    text = parseText(text, "AD_WORD", minimalPatterns);
+                    text = parseText(text, "AD_SPACE", minimalPatterns);
+                    text = parseText(text, "AD_PUNCTUATION", minimalPatterns);
+                    
+                    //System.out.println(text);
+                    List newContent = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + text.replaceAll("&", "&amp;") +"</X>").getRootElement().removeContent();
                     Element contribution = unparsed.getParentElement();
                     contribution.removeContent();
                     contribution.setContent(newContent);
-                    
-                    // take care of accent markup and lengthening...
-                    /*Iterator i3 = contribution.getDescendants(new ElementFilter("DS_WORD"));
-                    java.util.Vector<org.jdom.Element> words = new java.util.Vector<org.jdom.Element>();
-                    while (i3.hasNext()){
-                        Element w = (Element)(i3.next());
-                        words.add(w);
-                    }
-                    for (Element w : words){
-                        String wText = w.getText();
-                        wText = parseText(wText, "DS_LENGTHENING", minimalPatterns);
-                        List newContent3 = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + wText +"</X>").getRootElement().removeContent();
-                        w.removeContent();
-                        w.setContent(newContent3);
-                    }*/
-                    
 
                     contribution.setAttribute("parse-level", "2");
                     insertTimeReferences(contribution, timePositions);
@@ -155,11 +142,9 @@ public class BWParser extends AbstractParser {
                     Element contributionParent = contribution.getParentElement();
                     contributionParent.setContent(contributionParent.indexOf(contribution), transformedContribution);
                     //contributionParent.setContent(contributionParent.indexOf(contribution), contribution);
-                    
-                    
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    //continue;
+                    continue;
                 }
             }
         }
@@ -167,7 +152,7 @@ public class BWParser extends AbstractParser {
 
 
     String parseText(String text, String patternName, Hashtable<String,String> patterns) throws JDOMException, IOException{
-        String docString = "<X>" + text + "</X>";
+        String docString = "<X>" + text.replace("&", "&amp;") + "</X>";
         //System.out.println("=== " + docString);
         Element e = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString(docString).getRootElement();
         String returnText = "";
@@ -197,8 +182,8 @@ public class BWParser extends AbstractParser {
     }
 
     private void insertTimeReferences(Element contribution, Vector<PositionTimeMapping> timePositions) {
-        //System.out.println(org.exmaralda.common.jdomutilities.IOUtilities.elementToString(contribution));
-        /*for (PositionTimeMapping ptm : timePositions){
+        /*System.out.println(org.exmaralda.common.jdomutilities.IOUtilities.elementToString(contribution));
+        for (PositionTimeMapping ptm : timePositions){
             System.out.println(ptm.position + " / " + ptm.timeID);
         }*/
         Iterator i = contribution.getDescendants();
@@ -217,6 +202,7 @@ public class BWParser extends AbstractParser {
             if (timePositionCount>=timePositions.size()) break;
             int positionWanted = timePositions.elementAt(timePositionCount).position;
             String text = textElement.getText();
+            //System.out.println(text);
             while ((positionWanted>=0) && (offsetCount<=positionWanted) && (offsetCount+text.length()>=positionWanted)){
                 localTimePositions.add(new PositionTimeMapping(positionWanted-offsetCount, timePositions.elementAt(timePositionCount).timeID));
                 timePositionCount++;
@@ -236,18 +222,25 @@ public class BWParser extends AbstractParser {
                 for (PositionTimeMapping ptm : localTimePositions){
                     Text t = new Text(text.substring(offsetCount2, ptm.position));
                     newContent.addElement(t);
+                    //System.out.println(t.getText());
                     Element e = new Element("time");
                     e.setAttribute("timepoint-reference", ptm.timeID);
                     newContent.addElement(e);
                     offsetCount2=ptm.position;
+                    //System.out.println(org.exmaralda.common.jdomutilities.IOUtilities.elementToString(e));                                    
                 }
                 if (offsetCount2<text.length()){
                     Text t = new Text(text.substring(offsetCount2));
                     newContent.addElement(t);
+                    //System.out.println(t.getText());
                 }
                 parent.addContent(index, newContent);
+                //System.out.println(org.exmaralda.common.jdomutilities.IOUtilities.elementToString(parent));
             }
         }
+        //System.out.println("*********************");
+        
     }
+
 
 }

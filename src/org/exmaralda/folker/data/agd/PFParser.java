@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.folker.data;
+package org.exmaralda.folker.data.agd;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -12,28 +12,31 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.exmaralda.folker.data.AbstractParser;
+import org.exmaralda.folker.data.PatternReader;
+import org.exmaralda.folker.data.PositionTimeMapping;
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
-import org.jdom.filter.ElementFilter; 
+import org.jdom.filter.ElementFilter;
 import org.jdom.transform.XSLTransformer;
 
 /**
  *
  * @author thomas
  */
-public class DSParser extends AbstractParser {
+public class PFParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/DSPatterns.xml";
+    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/PFPatterns.xml";
 
     Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/DS_transformcontribution.xsl";
+    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/PF_transformcontribution.xsl";
     XSLTransformer minimalTransformer;
     
 
-    public DSParser() {
+    public PFParser() {
         try {
             PatternReader pr = new PatternReader(PATTERNS_FILE_PATH);
 
@@ -121,41 +124,23 @@ public class DSParser extends AbstractParser {
                     continue;
                 }*/
                 try {
-                    text = parseText(text, "DS_COMMENT", minimalPatterns);
-                    text = parseText(text, "DS_FRAGMENT", minimalPatterns);
-                    text = parseText(text, "DS_DIALECT", minimalPatterns);
-                    text = parseText(text, "DS_BOUNDARY", minimalPatterns);
-                    text = parseText(text, "DS_PAUSE", minimalPatterns);
-                    text = parseText(text, "DS_FILLED_PAUSE", minimalPatterns);
-                    text = parseText(text, "DS_LISTENER_SIGNAL", minimalPatterns);
-                    text = parseText(text, "DS_TEMPO", minimalPatterns);
-                    text = parseText(text, "DS_INTONATION", minimalPatterns);
-                    text = parseText(text, "DS_OVERLAP", minimalPatterns);
-                    text = parseText(text, "DS_LOUDNESS", minimalPatterns);
-                    text = parseText(text, "DS_SPACE", minimalPatterns);
-                    text = parseText(text, "DS_WORD", minimalPatterns);
-                    text = parseText(text, "DS_PUNCTUATION", minimalPatterns);
+                    text = parseText(text, "PF_NON_PHO_2", minimalPatterns);
+                    text = parseText(text, "PF_NON_PHO_3", minimalPatterns);
+                    text = parseText(text, "PF_NON_PHO_1", minimalPatterns);
+                    text = parseText(text, "PF_UNINTELLIGIBLE", minimalPatterns);
+                    text = parseText(text, "PF_FALSE_START", minimalPatterns);
+                    text = parseText(text, "PF_INLINE_OVERLAP", minimalPatterns);
+                    text = parseText(text, "PF_WORD", minimalPatterns);
+                    text = parseText(text, "PF_INTERRUPT", minimalPatterns);
+                    text = parseText(text, "PF_HESITATE", minimalPatterns);
+                    text = parseText(text, "PF_SPACE", minimalPatterns);
+                    text = parseText(text, "PF_BOUNDARY", minimalPatterns);
+                    text = parseText(text, "PF_PUNCTUATION", minimalPatterns);
                     //System.out.println(text);
                     List newContent = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + text +"</X>").getRootElement().removeContent();
                     Element contribution = unparsed.getParentElement();
                     contribution.removeContent();
                     contribution.setContent(newContent);
-                    
-                    // take care of accent markup and lengthening...
-                    Iterator i3 = contribution.getDescendants(new ElementFilter("DS_WORD"));
-                    java.util.Vector<org.jdom.Element> words = new java.util.Vector<org.jdom.Element>();
-                    while (i3.hasNext()){
-                        Element w = (Element)(i3.next());
-                        words.add(w);
-                    }
-                    for (Element w : words){
-                        String wText = w.getText();
-                        wText = parseText(wText, "DS_LENGTHENING", minimalPatterns);
-                        List newContent3 = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + wText +"</X>").getRootElement().removeContent();
-                        w.removeContent();
-                        w.setContent(newContent3);
-                    }
-                    
 
                     contribution.setAttribute("parse-level", "2");
                     insertTimeReferences(contribution, timePositions);
@@ -165,8 +150,6 @@ public class DSParser extends AbstractParser {
                     Element contributionParent = contribution.getParentElement();
                     contributionParent.setContent(contributionParent.indexOf(contribution), transformedContribution);
                     //contributionParent.setContent(contributionParent.indexOf(contribution), contribution);
-                    
-                    
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     continue;

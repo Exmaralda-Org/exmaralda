@@ -53,7 +53,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[\\p{Ll}]" // 8 : ANY KIND OF ALPHABET
     };
     
-    Comparator<String> caseIgnoringComparator = new java.util.Comparator<>() {
+    Comparator<String> caseIgnoringComparator = new java.util.Comparator<String>() {
         @Override
         public int compare(String s1, String s2) {
             return s1.toUpperCase().compareTo(s2.toUpperCase());

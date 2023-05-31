@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.folker.data;
+package org.exmaralda.folker.data.agd;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,9 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.folker.data.AbstractParser;
+import org.exmaralda.folker.data.PatternReader;
+import org.exmaralda.folker.data.PositionTimeMapping;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.jdom.Content;

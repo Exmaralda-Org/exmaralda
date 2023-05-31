@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.folker.data;
+package org.exmaralda.folker.data.agd;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -12,27 +12,31 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.exmaralda.folker.data.AbstractParser;
+import org.exmaralda.folker.data.PatternReader;
+import org.exmaralda.folker.data.PositionTimeMapping;
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
+import org.jdom.filter.ElementFilter;
 import org.jdom.transform.XSLTransformer;
 
 /**
  *
  * @author thomas
  */
-public class ADParser extends AbstractParser {
+public class ISParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/ADPatterns.xml";
+    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/ISPatterns.xml";
 
     Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/AD_transformcontribution.xsl";
+    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/IS_transformcontribution.xsl";
     XSLTransformer minimalTransformer;
     
 
-    public ADParser() {
+    public ISParser() {
         try {
             PatternReader pr = new PatternReader(PATTERNS_FILE_PATH);
 
@@ -120,10 +124,15 @@ public class ADParser extends AbstractParser {
                     continue;
                 }*/
                 try {
-                    text = parseText(text, "AD_NONVERBAL", minimalPatterns);
-                    text = parseText(text, "AD_WORD", minimalPatterns);
-                    text = parseText(text, "AD_SPACE", minimalPatterns);
-                    text = parseText(text, "AD_PUNCTUATION", minimalPatterns);
+                    text = parseText(text, "IS_PAUSE", minimalPatterns);
+                    text = parseText(text, "IS_INTERRUPT", minimalPatterns);
+                    text = parseText(text, "IS_BOUNDARY", minimalPatterns);
+                    text = parseText(text, "IS_INCOMPREHENSIBLE", minimalPatterns);
+                    text = parseText(text, "IS_COMMENT", minimalPatterns);
+                    text = parseText(text, "IS_WORD", minimalPatterns);
+                    text = parseText(text, "IS_OVERLAP", minimalPatterns);
+                    text = parseText(text, "IS_SPACE", minimalPatterns);
+                    text = parseText(text, "IS_PUNCTUATION", minimalPatterns);
                     
                     //System.out.println(text);
                     List newContent = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + text.replaceAll("&", "&amp;") +"</X>").getRootElement().removeContent();
@@ -131,6 +140,22 @@ public class ADParser extends AbstractParser {
                     contribution.removeContent();
                     contribution.setContent(newContent);
 
+                   Iterator i3 = contribution.getDescendants(new ElementFilter("IS_WORD"));
+                   java.util.Vector<org.jdom.Element> words = new java.util.Vector<org.jdom.Element>();
+                   while (i3.hasNext()){
+                       Element w = (Element)(i3.next());
+                       words.add(w);
+                   }
+                   for (Element w : words){
+                       String wText = w.getText();
+                       wText = parseText(wText, "IS_WORD_INTERNAL_OVERLAP", minimalPatterns);
+                       List newContent3 = org.exmaralda.common.jdomutilities.IOUtilities.readDocumentFromString("<X>" + wText +"</X>").getRootElement().removeContent();
+                       w.removeContent();
+                       w.setContent(newContent3);
+                   }
+                    
+                    
+                    
                     contribution.setAttribute("parse-level", "2");
                     insertTimeReferences(contribution, timePositions);
                     Vector v = new Vector();

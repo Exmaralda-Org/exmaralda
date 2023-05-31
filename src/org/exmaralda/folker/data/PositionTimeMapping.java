@@ -9,7 +9,7 @@ package org.exmaralda.folker.data;
  *
  * @author thomas
  */
-class PositionTimeMapping {
+public class PositionTimeMapping {
 
     public int position;
     public String timeID;
