@@ -30,6 +30,7 @@ import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.partiture.AbstractTranscriptionTableModel;
 import org.exmaralda.partitureditor.search.EventSearchResult;
 import org.exmaralda.partitureditor.search.SearchResultListener;
+import org.exmaralda.partitureditor.sound.PlaySampleChainThread;
 import org.exmaralda.partitureditor.sound.Playable;
 
 // new for #382
@@ -238,6 +239,7 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
         
         int[] rowIndices = eventTable.getSelectedRows();
         Timeline timeline = transcription.getBody().getCommonTimeline();
+        List<double[]> startEndPairs = new ArrayList<>();
         for (int row : rowIndices){
             try {
                 System.out.println("Row " + row);
@@ -245,21 +247,15 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
                 Event event = tier.getEventAt(modelIndex);
                 double startTime = timeline.getTimelineItemWithID(event.getStart()).getTime();
                 double endTime = timeline.getTimelineItemWithID(event.getEnd()).getTime();
-                player.setStartTime(startTime);
-                player.setEndTime(endTime);
-                player.startPlayback();
-                
-                //SwingUtilities.invokeAndWait(doRun);
-                
-                Timer timer = new Timer((int) ((endTime-startTime) * 1000 + 1000), (ActionEvent e) -> {
-                    System.out.println("Reached end of timer");
-                });
-                timer.setRepeats(false);
-                timer.start();                
+                double[] pair = {startTime, endTime};
+                startEndPairs.add(pair);
             } catch (JexmaraldaException ex) {
                 Logger.getLogger(ListEventsTableDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        PlaySampleChainThread playSampleChainThread = new PlaySampleChainThread(player, startEndPairs, 1000);
+        playSampleChainThread.start();
         
         
     }//GEN-LAST:event_playButtonActionPerformed

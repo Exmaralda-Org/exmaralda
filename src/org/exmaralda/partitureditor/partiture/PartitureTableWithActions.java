@@ -3077,23 +3077,26 @@ public class PartitureTableWithActions extends PartitureTable
         }
         
         if (toBeDeleted.isEmpty()){
-            JOptionPane.showMessageDialog(this, "No auto backup files will be deleted");
+            this.status("No auto backup files deleted");
+            //JOptionPane.showMessageDialog(this, "No auto backup files will be deleted");
             return;
         }
         
-        int really = JOptionPane.showConfirmDialog(this, 
+        // 31-05-2023 changed for #396
+        /*int really = JOptionPane.showConfirmDialog(this, 
                 toBeDeleted.size() + " files will be deleted from\n " + autoSaveThread.PATH + "\nAre you sure?", 
                 "Confirm delete of auto backup files",
                 JOptionPane.YES_NO_OPTION);
         
-        if (really==JOptionPane.YES_OPTION){
+        if (really==JOptionPane.YES_OPTION){*/
             for (File f : toBeDeleted){
                 f.delete();
             }
-            JOptionPane.showMessageDialog(this, toBeDeleted.size() + " files deleted from\n " + autoSaveThread.PATH );            
+            this.status(toBeDeleted.size() + " files deleted from\n " + autoSaveThread.PATH);
+            /*JOptionPane.showMessageDialog(this, toBeDeleted.size() + " files deleted from\n " + autoSaveThread.PATH );            
         } else {
             JOptionPane.showMessageDialog(this, "No auto backup files will be deleted");            
-        }
+        }*/
         
         
     }

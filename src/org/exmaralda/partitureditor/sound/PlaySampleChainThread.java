@@ -33,6 +33,8 @@ public class PlaySampleChainThread extends Thread {
                 double end = startEndPair[1];
                 player.setStartTime(start);
                 player.setEndTime(end);
+                System.out.println("Playing from " + start + " to " + end);
+                player.startPlayback();
                 wait((long) ((end-start)*1000));
                 wait(waitTimeInMiliseconds);
             } catch (InterruptedException ex) {

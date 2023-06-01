@@ -30,6 +30,8 @@ public class CleanupAutoSavePanel extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         messageLabel = new javax.swing.JLabel();
         selectionPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        doNothingRadioButton = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         deleteOlderRadioButton = new javax.swing.JRadioButton();
         deleteOlderSpinner = new javax.swing.JSpinner();
@@ -38,8 +40,6 @@ public class CleanupAutoSavePanel extends javax.swing.JPanel {
         keepRecentRadioButton = new javax.swing.JRadioButton();
         keepRecentSpinner = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        doNothingRadioButton = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -49,12 +49,24 @@ public class CleanupAutoSavePanel extends javax.swing.JPanel {
 
         selectionPanel.setLayout(new java.awt.GridLayout(3, 1));
 
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        buttonGroup1.add(doNothingRadioButton);
+        doNothingRadioButton.setSelected(true);
+        doNothingRadioButton.setText("Do nothing");
+        doNothingRadioButton.setPreferredSize(new java.awt.Dimension(205, 20));
+        jPanel3.add(doNothingRadioButton);
+
+        selectionPanel.add(jPanel3);
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
         buttonGroup1.add(deleteOlderRadioButton);
-        deleteOlderRadioButton.setSelected(true);
         deleteOlderRadioButton.setText("Delete all auto backups older than ");
         jPanel1.add(deleteOlderRadioButton);
 
         deleteOlderSpinner.setModel(new javax.swing.SpinnerNumberModel(30, 1, 365, 1));
+        deleteOlderSpinner.setMaximumSize(new java.awt.Dimension(67, 22));
         jPanel1.add(deleteOlderSpinner);
 
         jLabel1.setText(" days");
@@ -62,23 +74,21 @@ public class CleanupAutoSavePanel extends javax.swing.JPanel {
 
         selectionPanel.add(jPanel1);
 
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
         buttonGroup1.add(keepRecentRadioButton);
         keepRecentRadioButton.setText("Keep only the ");
+        keepRecentRadioButton.setPreferredSize(new java.awt.Dimension(205, 20));
         jPanel2.add(keepRecentRadioButton);
 
         keepRecentSpinner.setModel(new javax.swing.SpinnerNumberModel(5, 1, 100, 1));
+        keepRecentSpinner.setMaximumSize(new java.awt.Dimension(67, 22));
         jPanel2.add(keepRecentSpinner);
 
         jLabel2.setText("most recent auto backups ");
         jPanel2.add(jLabel2);
 
         selectionPanel.add(jPanel2);
-
-        buttonGroup1.add(doNothingRadioButton);
-        doNothingRadioButton.setText("Do nothing");
-        jPanel3.add(doNothingRadioButton);
-
-        selectionPanel.add(jPanel3);
 
         add(selectionPanel, java.awt.BorderLayout.CENTER);
         add(jPanel4, java.awt.BorderLayout.PAGE_END);
