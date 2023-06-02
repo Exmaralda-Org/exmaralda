@@ -10,8 +10,10 @@ import java.util.HashSet;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -21,18 +23,18 @@ public class UndoHandler {
 
     int MAX_UNDO = 20;
 
-    Vector<UndoInformation> undoInformation = new Vector<UndoInformation>();
+    Vector<UndoInformation> undoInformation = new Vector<>();
 
     public void addUndoInformation(UndoInformation undo){
         // Do not add if this is just another time change in the same item as before
-        if ((undoInformation.size()>0) && (undo.restoreType==UndoInformation.RESTORE_TIME) && (undoInformation.elementAt(0).restoreType==UndoInformation.RESTORE_TIME)){
+        if ((!undoInformation.isEmpty()) && (undo.restoreType==UndoInformation.RESTORE_TIME) && (undoInformation.elementAt(0).restoreType==UndoInformation.RESTORE_TIME)){
             RestoreTimeInfo rti1 = (RestoreTimeInfo)(undoInformation.elementAt(0).restoreObject);
             RestoreTimeInfo rti2 = (RestoreTimeInfo)(undo.restoreObject);
             if (rti1.timelineID.equals(rti2.timelineID)){
                 return;
             }            
         }
-        if ((undoInformation.size()>0) && (undo.equals(undoInformation.firstElement()))){
+        if ((!undoInformation.isEmpty()) && (undo.equals(undoInformation.firstElement()))){
             return;
         }
         undoInformation.insertElementAt(undo, 0);
@@ -112,7 +114,7 @@ public class UndoHandler {
                     
                     // issue #110: hide the tiers that were hidden before
                     int[] visibleRows = info.visibleRows;
-                    HashSet<Integer> vr = new HashSet<Integer>();
+                    HashSet<Integer> vr = new HashSet<>();
                     for (int i : visibleRows){
                         vr.add(i);
                     }
@@ -124,7 +126,7 @@ public class UndoHandler {
                 }                
             });
             undoInformation.removeElementAt(0);
-        } catch (Exception ex) {
+        } catch (JexmaraldaException | SAXException ex) {
             ex.printStackTrace();
         }
     }

@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.partiture.tierActions;
 
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
 import org.exmaralda.partitureditor.jexmaraldaswing.EditTiersDialogNew;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
@@ -34,6 +35,8 @@ public class EditTiersAction extends org.exmaralda.partitureditor.partiture.Abst
     private void editTiers(){
         //EditTiersDialog dialog = new EditTiersDialog(table.parent, true, table.getModel().getTranscription());
         BasicTranscription workingCopy = table.getModel().getTranscription().makeCopy();
+        // 02-06-2023 for issue #397
+        TierFormatTable originalTierFormatTable = table.getModel().getTierFormatTable();
         EditTiersDialogNew dialog = new EditTiersDialogNew(table.parent, true, workingCopy);
         dialog.setLocationRelativeTo(table);
         dialog.setTitle("Edit tiers");
@@ -46,6 +49,8 @@ public class EditTiersAction extends org.exmaralda.partitureditor.partiture.Abst
             }
             //table.getModel().editTiers(workingCopy);
             table.getModel().setTranscription(dialog.getTranscription());
+            // 02-06-2023 for issue #397            
+            table.getModel().setTranscriptionAndTierFormatTable(workingCopy, originalTierFormatTable);
         }
         /*if (dialog.editTiers()){
             if (table.undoEnabled){

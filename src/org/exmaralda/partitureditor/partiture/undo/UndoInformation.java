@@ -5,6 +5,7 @@
 
 package org.exmaralda.partitureditor.partiture.undo;
 
+import java.awt.Cursor;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
@@ -120,7 +121,12 @@ public class UndoInformation {
             restoreType = RESTORE_TRANSCRIPTION;
             File tempFile = File.createTempFile("EXMARaLDA_Restore", ".exb");
             tempFile.deleteOnExit();
-            table.getModel().getTranscription().makeCopy().writeXMLToFile(tempFile.getAbsolutePath(), "none");
+            //table.getModel().getTranscription().makeCopy().writeXMLToFile(tempFile.getAbsolutePath(), "none");
+            // 02-06-2023 for issue #397
+            Cursor rememberCursor = table.getCursor();
+            table.setCursor(Cursor.WAIT_CURSOR);
+            table.getModel().getTranscription().makeCopy().writeXMLToFile(tempFile.getAbsolutePath(), "none", table.getModel().getTierFormatTable());
+            table.setCursor(rememberCursor);
             restoreObject = tempFile;
         } catch (IOException ex) {
             ex.printStackTrace();
