@@ -12,6 +12,7 @@ import javax.swing.Action;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 /**
  * Saves the transcription under its current file name
@@ -45,7 +46,7 @@ public class SaveAction extends org.exmaralda.partitureditor.partiture.AbstractT
                 }
                 table.transcriptionChanged = false;        
                 table.status("Transcription " + table.getFilename() + " saved");
-            } catch (Throwable t){
+            } catch (IOException t){
                 saveTranscription();
             }
         }

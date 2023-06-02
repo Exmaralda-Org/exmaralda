@@ -1306,8 +1306,10 @@ public class PartitureTableWithActions extends PartitureTable
     private void save(){
         if (!getFilename().equals("untitled.exb")){
             try{
-                getModel().getTranscription().writeXMLToFile(getFilename(),"none");
-            } catch (Throwable t){
+                //getModel().getTranscription().writeXMLToFile(getFilename(),"none");
+                // 02-06-2023 issue #398
+                getModel().getTranscription().writeXMLToFile(getFilename(), "none", this.getModel().getTierFormatTable());
+            } catch (IOException t){
                 saveTranscription();
             }
         }
