@@ -46,6 +46,7 @@ public class NewEAFDialog extends javax.swing.JDialog {
         
         check();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -366,4 +367,24 @@ public class NewEAFDialog extends javax.swing.JDialog {
         
         
     }
+
+    public String[] getSpeakerNumbers() {
+        String text = this.speakerNumbersTextField.getText();
+        return text.split(", +");
+    }
+    
+    public String[] getInterviewerNumbers() {
+        String text = this.interviewerNumbersTextField.getText();
+        return text.split(", +");
+    }
+
+    public String getAudioFilepath() {
+        return this.audioFileTextField.getText();
+    }
+    
+    public String getTranscriptionFilepath(){
+        return this.transcriptFileTextField.getText();
+    }
+    
+    
 }

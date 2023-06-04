@@ -5,12 +5,14 @@
 package org.exmaralda.texgut.application;
 
 import java.awt.Frame;
+import java.util.List;
 import java.util.prefs.BackingStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.exmaralda.common.ExmaraldaApplication;
+import org.exmaralda.texgut.data.ELANMessageListModel;
 
 /**
  *
@@ -27,6 +29,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         applicationControl = new ApplicationControl(this);  
         applicationControl.assignActions();
         initComponents();
+        applicationControl.retrieveSettings();
+        applicationControl.setupConsole();
     }
 
     /**
@@ -38,10 +42,17 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mailboxLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
+        buttonPanel = new javax.swing.JPanel();
         newEAFButton = new javax.swing.JButton();
         checkEAFButton1 = new javax.swing.JButton();
+        mailboxLabel = new javax.swing.JLabel();
+        consolePanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        consoleList = new javax.swing.JList<>();
+        consoleButtonPanel = new javax.swing.JPanel();
+        removeMessagesButton = new javax.swing.JButton();
+        openInELANButton = new javax.swing.JButton();
         topPanel = new javax.swing.JPanel();
         transcriptFolderPanel = new javax.swing.JPanel();
         transcriptFolderLabel = new javax.swing.JLabel();
@@ -54,11 +65,15 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TEXas German UTility (TexGUt)");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
-        mailboxLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/Road3.png"))); // NOI18N
-        getContentPane().add(mailboxLabel, java.awt.BorderLayout.SOUTH);
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
-        mainPanel.setLayout(new java.awt.GridLayout(2, 1));
+        buttonPanel.setLayout(new java.awt.GridLayout(6, 1, 0, 5));
 
         newEAFButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         newEAFButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/file-plus-solid.png"))); // NOI18N
@@ -69,13 +84,59 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
                 newEAFButtonActionPerformed(evt);
             }
         });
-        mainPanel.add(newEAFButton);
+        buttonPanel.add(newEAFButton);
 
         checkEAFButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         checkEAFButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/file-check-sharp-solid.png"))); // NOI18N
-        checkEAFButton1.setText("Check ELAN transcription... ");
+        checkEAFButton1.setText("Check ELAN transcriptions... ");
         checkEAFButton1.setIconTextGap(20);
-        mainPanel.add(checkEAFButton1);
+        checkEAFButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkEAFButton1ActionPerformed(evt);
+            }
+        });
+        buttonPanel.add(checkEAFButton1);
+
+        mailboxLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/Road4.png"))); // NOI18N
+        mailboxLabel.setToolTipText("This does nothing. It is just a photo");
+        buttonPanel.add(mailboxLabel);
+
+        mainPanel.add(buttonPanel, java.awt.BorderLayout.WEST);
+
+        consolePanel.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(800, 400));
+
+        consoleList.setBackground(new java.awt.Color(0, 0, 0));
+        consoleList.setForeground(new java.awt.Color(51, 153, 0));
+        jScrollPane1.setViewportView(consoleList);
+
+        consolePanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        consoleButtonPanel.setLayout(new javax.swing.BoxLayout(consoleButtonPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        removeMessagesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/filter-list-solid.png"))); // NOI18N
+        removeMessagesButton.setToolTipText("Filter out non-error messages");
+        removeMessagesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeMessagesButtonActionPerformed(evt);
+            }
+        });
+        consoleButtonPanel.add(removeMessagesButton);
+
+        openInELANButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/elan.png"))); // NOI18N
+        openInELANButton.setToolTipText("Open selected file in ELAN");
+        openInELANButton.setEnabled(false);
+        openInELANButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openInELANButtonActionPerformed(evt);
+            }
+        });
+        consoleButtonPanel.add(openInELANButton);
+
+        consolePanel.add(consoleButtonPanel, java.awt.BorderLayout.EAST);
+
+        mainPanel.add(consolePanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -153,6 +214,22 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
 
     }//GEN-LAST:event_audioFolderBrowseButtonActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        applicationControl.storeSettings();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void checkEAFButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkEAFButton1ActionPerformed
+        applicationControl.checkEAF();
+    }//GEN-LAST:event_checkEAFButton1ActionPerformed
+
+    private void removeMessagesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMessagesButtonActionPerformed
+        applicationControl.removeNonErrorMessages();
+    }//GEN-LAST:event_removeMessagesButtonActionPerformed
+
+    private void openInELANButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openInELANButtonActionPerformed
+        applicationControl.openFileForMessageAtIndex(consoleList.getSelectedIndex());
+    }//GEN-LAST:event_openInELANButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -188,10 +265,17 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
     private javax.swing.JLabel audioFolderLabel;
     private javax.swing.JPanel audioFolderPanel;
     public javax.swing.JTextField audioFolderTextField;
+    private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton checkEAFButton1;
+    private javax.swing.JPanel consoleButtonPanel;
+    javax.swing.JList<String> consoleList;
+    private javax.swing.JPanel consolePanel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mailboxLabel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton newEAFButton;
+    javax.swing.JButton openInELANButton;
+    javax.swing.JButton removeMessagesButton;
     private javax.swing.JPanel topPanel;
     private javax.swing.JButton transcriptFolderBrowseButton;
     private javax.swing.JLabel transcriptFolderLabel;
