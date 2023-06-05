@@ -66,7 +66,16 @@ public class ELANChecker {
             result.addAll(checkAudio(eafFile, eafDoc));
             result.addAll(checkSchema(eafFile, eafDoc));
             result.addAll(validate(eafFile));
-            result.addAll(checkLinguisticTypes(eafFile, eafDoc));
+            int realErrors = 0;
+            for (ELANMessage m : result){
+                if (m.type==ELANMessageType.ERROR) realErrors++;
+            }
+            if (realErrors==0){
+                result.addAll(checkLinguisticTypes(eafFile, eafDoc));
+                result.addAll(checkTiers(eafFile, eafDoc));
+            } else {
+                result.add(new ELANMessage(ELANMessageType.ERROR, "Errors on top level checks, not checking tiers", eafFile));
+            }
             
             
         } catch (JDOMException ex) {
@@ -218,6 +227,49 @@ public class ELANChecker {
         return result;
         
     }
+
+    //////////////////////////////////////////////////////////////////
+    
+    private List<ELANMessage> checkTiers(File eafFile, Document eafDoc) throws JDOMException {
+        /*
+        <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="TRANSCRIPTION" PARTICIPANT="Speaker_0001"
+            TIER_ID="TRANSCRIPTION_Speaker_0001">        
+        */
+        List<ELANMessage> result = new ArrayList<>();
+        
+        int index1 = eafFile.getName().indexOf("-");
+        int index2 = eafFile.getName().indexOf("-", index1+1);
+        
+        String interviewerNumber = String.format("%04d", Integer.parseInt(eafFile.getName().substring(0, index1)));
+        String speakerNumber = String.format("%04d", Integer.parseInt(eafFile.getName().substring(index1+1, index2)));
+        
+        List speakerTranscriptionTiers = XPath.selectNodes(eafDoc, "//TIER[@LINGUISTIC_TYPE_REF='TRANSCRIPTION' and @PARTICIPANT='" + "Speaker_" + speakerNumber + "']");
+        if (!(speakerTranscriptionTiers.size()==1)){
+            String message = Integer.toString(speakerTranscriptionTiers.size()) + " transcription tiers with PARTICIPANT Speaker_" + speakerNumber;
+            result.add(new ELANMessage(ELANMessageType.ERROR, message, eafFile));                        
+        }
+        
+        List speakerTranslationTiers = XPath.selectNodes(eafDoc, "//TIER[@LINGUISTIC_TYPE_REF='TRANSLATION' and @PARTICIPANT='" + "Speaker_" + speakerNumber + "']");
+        if (!(speakerTranslationTiers.size()==1)){
+            String message = Integer.toString(speakerTranslationTiers.size()) + " translation tiers with PARTICIPANT Speaker_" + speakerNumber;
+            result.add(new ELANMessage(ELANMessageType.ERROR, message, eafFile));                        
+        }
+
+        List interviewerTranscriptionTiers = XPath.selectNodes(eafDoc, "//TIER[@LINGUISTIC_TYPE_REF='TRANSCRIPTION' and @PARTICIPANT='" + "Interviewer_" + interviewerNumber + "']");
+        if (!(interviewerTranscriptionTiers.size()==1)){
+            String message = Integer.toString(interviewerTranscriptionTiers.size()) + " transcription tiers with PARTICIPANT Interviewer_" + speakerNumber;
+            result.add(new ELANMessage(ELANMessageType.ERROR, message, eafFile));                        
+        }
+        
+        List interviewerTranslationTiers = XPath.selectNodes(eafDoc, "//TIER[@LINGUISTIC_TYPE_REF='TRANSLATION' and @PARTICIPANT='" + "Interviewer_" + interviewerNumber + "']");
+        if (!(interviewerTranslationTiers.size()==1)){
+            String message = Integer.toString(interviewerTranslationTiers.size()) + " translation tiers with PARTICIPANT Interviewer_" + interviewerNumber;
+            result.add(new ELANMessage(ELANMessageType.ERROR, message, eafFile));                        
+        }
+
+        return result;
+    }
+    
 
     
 }

@@ -5,14 +5,12 @@
 package org.exmaralda.texgut.application;
 
 import java.awt.Frame;
-import java.util.List;
 import java.util.prefs.BackingStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.exmaralda.common.ExmaraldaApplication;
-import org.exmaralda.texgut.data.ELANMessageListModel;
 
 /**
  *
@@ -53,6 +51,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         consoleButtonPanel = new javax.swing.JPanel();
         removeMessagesButton = new javax.swing.JButton();
         openInELANButton = new javax.swing.JButton();
+        xmlButton = new javax.swing.JButton();
         topPanel = new javax.swing.JPanel();
         transcriptFolderPanel = new javax.swing.JPanel();
         transcriptFolderLabel = new javax.swing.JLabel();
@@ -133,6 +132,18 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
             }
         });
         consoleButtonPanel.add(openInELANButton);
+
+        xmlButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/chevron-left-solid.png"))); // NOI18N
+        xmlButton.setToolTipText("Show XML");
+        xmlButton.setEnabled(false);
+        xmlButton.setMaximumSize(new java.awt.Dimension(42, 42));
+        xmlButton.setPreferredSize(new java.awt.Dimension(42, 42));
+        xmlButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xmlButtonActionPerformed(evt);
+            }
+        });
+        consoleButtonPanel.add(xmlButton);
 
         consolePanel.add(consoleButtonPanel, java.awt.BorderLayout.EAST);
 
@@ -230,6 +241,10 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         applicationControl.openFileForMessageAtIndex(consoleList.getSelectedIndex());
     }//GEN-LAST:event_openInELANButtonActionPerformed
 
+    private void xmlButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xmlButtonActionPerformed
+        applicationControl.showXMLForMessageAtIndex(consoleList.getSelectedIndex());
+    }//GEN-LAST:event_xmlButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +296,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
     private javax.swing.JLabel transcriptFolderLabel;
     private javax.swing.JPanel transcriptFolderPanel;
     public javax.swing.JTextField transcriptFolderTextField;
+    javax.swing.JButton xmlButton;
     // End of variables declaration//GEN-END:variables
 
     @Override

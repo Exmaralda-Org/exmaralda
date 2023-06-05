@@ -4,10 +4,14 @@
  */
 package org.exmaralda.texgut.application;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -16,14 +20,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.bounce.text.xml.XMLEditorKit;
+import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.texgut.data.EAFCreator;
 import org.exmaralda.texgut.data.ELANChecker;
@@ -34,6 +46,9 @@ import org.exmaralda.texgut.data.ELANMessageListModel;
 import org.exmaralda.texgut.gui.NewEAFDialog;
 import org.jdom.Document;
 import org.jdom.JDOMException;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -106,10 +121,10 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
             }
             
             String[] speakerNumbers = dialog.getSpeakerNumbers();
-            String[] interviewerNumbers = dialog.getSpeakerNumbers();
+            String[] interviewerNumbers = dialog.getInterviewerNumbers();
             String audioPath = dialog.getAudioFilepath();
             
-            EAFCreator eafCreator = new EAFCreator(speakerNumbers, interviewerNumbers, audioPath);
+            EAFCreator eafCreator = new EAFCreator(speakerNumbers, interviewerNumbers, audioPath, file);
             Document eafDocument = eafCreator.createEAF();
             
             boolean madeOne = file.getParentFile().mkdirs();
@@ -119,10 +134,11 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
             FileIO.writeDocumentToLocalFile(file, eafDocument);
             console(new ELANMessage(ELANMessageType.MESSAGE, file.getAbsolutePath() + " written.", file));
             
-        } catch (JDOMException | IOException ex) {
+        } catch (JDOMException | IOException | SAXException | ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(applicationFrame, "Error: " + ex.getMessage());
             console(new ELANMessage(ELANMessageType.ERROR, "Error: " + ex.getMessage()));             
+            
         }
     }
 
@@ -218,7 +234,13 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
     public void intervalAdded(ListDataEvent e) {
         if (updateCounter % 20 == 0){
             try{
-                applicationFrame.consoleList.ensureIndexIsVisible(messageListModel.getSize()-1);
+                SwingUtilities.invokeLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        applicationFrame.consoleList.ensureIndexIsVisible(messageListModel.getSize()-1);
+                    }
+                    
+                });
             } catch (Exception ex){
 
             }
@@ -239,6 +261,7 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
         int index = e.getFirstIndex();
         ELANMessage message = this.messageList.get(index);
         applicationFrame.openInELANButton.setEnabled(message.file!=null);
+        applicationFrame.xmlButton.setEnabled(message.file!=null);
     }
 
     void openFileForMessageAtIndex(int selectedIndex) {
@@ -264,6 +287,47 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
         this.messageList = remaining;
         this.messageListModel = new ELANMessageListModel(remaining);
         applicationFrame.consoleList.setModel(messageListModel);
+    }
+
+    void showXMLForMessageAtIndex(int selectedIndex) {
+        File file = this.messageList.get(selectedIndex).file;
+        if (file!=null){
+            try {
+                Document doc = FileIO.readDocumentFromLocalFile(file);
+                //String xmlString = IOUtilities.documentToString(doc);
+		XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+                StringWriter stringWriter = new StringWriter();
+                xmlOutputter.output(doc, stringWriter);
+                String xmlString = stringWriter.toString();
+                JPanel panel = new JPanel();
+                panel.setLayout(new BorderLayout());
+                
+                final JEditorPane xmlEditorPane = new JEditorPane();
+                XMLEditorKit xmlEditorKit = new XMLEditorKit(true);
+                xmlEditorKit.setWrapStyleWord(true);
+                xmlEditorPane.setFont(xmlEditorPane.getFont().deriveFont(11.0f));
+                xmlEditorPane.setEditorKit(xmlEditorKit);
+                xmlEditorPane.setText(xmlString);
+                xmlEditorPane.setPreferredSize(new Dimension(800, 400));
+                xmlEditorPane.setEditable(false);
+                xmlEditorPane.setCaretPosition(0);
+                xmlEditorPane.setBackground(new Color(230,230,230));
+                
+                JScrollPane scrollPane = new JScrollPane();
+                scrollPane.setViewportView(xmlEditorPane);
+                
+                
+                JDialog xmlDialog = new JDialog(applicationFrame, true);
+                xmlDialog.setTitle(file.getName());
+                xmlDialog.getContentPane().add(scrollPane);
+                xmlDialog.pack();
+                xmlDialog.setLocationRelativeTo(applicationFrame);
+                xmlDialog.setVisible(true);
+            } catch (JDOMException | IOException ex) {
+                Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
     }
     
     
