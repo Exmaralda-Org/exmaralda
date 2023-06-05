@@ -12,7 +12,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.XMLConstants;
@@ -73,6 +72,7 @@ public class ELANChecker {
             if (realErrors==0){
                 result.addAll(checkLinguisticTypes(eafFile, eafDoc));
                 result.addAll(checkTiers(eafFile, eafDoc));
+                result.addAll(checkSpeakers(eafFile, eafDoc));
             } else {
                 result.add(new ELANMessage(ELANMessageType.ERROR, "Errors on top level checks, not checking tiers", eafFile));
             }
@@ -270,6 +270,35 @@ public class ELANChecker {
         return result;
     }
     
+    //////////////////////////////////////////////////////////////////
+    
+    private List<ELANMessage> checkSpeakers(File eafFile, Document eafDoc) throws JDOMException {
+        /*
+        <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="TRANSCRIPTION" PARTICIPANT="Speaker_0001"
+            TIER_ID="TRANSCRIPTION_Speaker_0001">        
+        */
+        List<ELANMessage> result = new ArrayList<>();
+        
+        List allTiers = XPath.selectNodes(eafDoc, "//TIER");
+        for (Object o : allTiers){
+            Element tierElement = (Element)o;
+            String participant = tierElement.getAttributeValue("PARTICIPANT");
+            if (participant==null){
+                String message = "Tier " + tierElement.getAttributeValue("TIER_ID") + " has no PARTICIPANT attribute.";
+                result.add(new ELANMessage(ELANMessageType.WARNING, message, eafFile));                                        
+            } else {
+                if (!(participant.matches("(Speaker|Interviewer)_(\\d|N)(\\d{3})"))){
+                    String message = "Participant " + participant + " does not match pattern.";
+                    result.add(new ELANMessage(ELANMessageType.WARNING, message, eafFile));                                                            
+                }                
+            }
+        }
+        
+        
+        
+
+        return result;
+    }
 
     
 }

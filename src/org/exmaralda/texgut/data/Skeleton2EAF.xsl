@@ -4,7 +4,7 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <xsl:param name="SPEAKER_NUMBERS">1,2</xsl:param>
+    <xsl:param name="SPEAKER_NUMBERS">1,2,N5</xsl:param>
     <xsl:param name="INTERVIEWER_NUMBERS">3,4</xsl:param>
     <xsl:param name="AUDIO_PATH">file:///D:/tgdp_20230210/prod/sound_files/1-1-1/1-1-1-3-a.wav</xsl:param>
     <xsl:param name="RELATIVE_AUDIO_PATH">../AUDIO/1-1-1-3-a.wav</xsl:param>
@@ -32,12 +32,21 @@
         </xsl:copy>
         
         <xsl:for-each select="tokenize($SPEAKER_NUMBERS, ',')">
-            <xsl:variable name="CLEAN_SPEAKER_NUMBER" select="xs:integer(normalize-space(.))" as="xs:integer"/>
+            <xsl:variable name="CLEAN_SPEAKER_NUMBER">
+                <xsl:choose>
+                    <xsl:when test="starts-with(normalize-space(.), 'N')">
+                        <xsl:value-of select="concat('N', format-number(xs:integer(substring-after(normalize-space(.),'N')), '000'))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="format-number(xs:integer(normalize-space(.)), '0000')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <!-- <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="TRANSCRIPTION" PARTICIPANT="Speaker_0001"
                     TIER_ID="TRANSCRIPTION_Speaker_0001"> -->
             <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="TRANSCRIPTION">
-                <xsl:attribute name="PARTICIPANT" select="concat('Speaker_',format-number($CLEAN_SPEAKER_NUMBER, '0000'))"></xsl:attribute>
-                <xsl:attribute name="TIER_ID" select="concat('TRANSCRIPTION_Speaker_',format-number($CLEAN_SPEAKER_NUMBER, '0000'))"></xsl:attribute>
+                <xsl:attribute name="PARTICIPANT" select="concat('Speaker_',$CLEAN_SPEAKER_NUMBER)"></xsl:attribute>
+                <xsl:attribute name="TIER_ID" select="concat('TRANSCRIPTION_Speaker_', $CLEAN_SPEAKER_NUMBER)"></xsl:attribute>
             </TIER>
             
             <!-- 
@@ -46,9 +55,9 @@
                 TIER_ID="TRANSLATION_Interviewer_0001">            
             -->
             <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="TRANSLATION">
-                <xsl:attribute name="PARENT_REF" select="concat('TRANSCRIPTION_Speaker_',format-number($CLEAN_SPEAKER_NUMBER, '0000'))"></xsl:attribute>
-                <xsl:attribute name="PARTICIPANT" select="concat('Speaker_',format-number($CLEAN_SPEAKER_NUMBER, '0000'))"></xsl:attribute>
-                <xsl:attribute name="TIER_ID" select="concat('TRANSLATION_Speaker_',format-number($CLEAN_SPEAKER_NUMBER, '0000'))"></xsl:attribute>
+                <xsl:attribute name="PARENT_REF" select="concat('TRANSCRIPTION_Speaker_',$CLEAN_SPEAKER_NUMBER)"></xsl:attribute>
+                <xsl:attribute name="PARTICIPANT" select="concat('Speaker_',$CLEAN_SPEAKER_NUMBER)"></xsl:attribute>
+                <xsl:attribute name="TIER_ID" select="concat('TRANSLATION_Speaker_',$CLEAN_SPEAKER_NUMBER)"></xsl:attribute>
             </TIER>
         </xsl:for-each>
         

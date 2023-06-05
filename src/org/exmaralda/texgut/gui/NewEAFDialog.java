@@ -344,7 +344,7 @@ public class NewEAFDialog extends javax.swing.JDialog {
         } else {            
             interviewerNumbersTextField.setBackground(Color.white);
         }
-        boolean speakerNumbersMatch = speakerNumbers.matches("^(\\d|N)\\d{0,3}(, ?(\\d|N)\\d{0,3})*$");
+        boolean speakerNumbersMatch = speakerNumbers.matches("^(\\d|N)(\\d{1,3})?(, ?(\\d|N)(\\d{1,3})?)*$");
         if (!speakerNumbersMatch){
             speakerNumbersTextField.setBackground(Color.red);
         } else {

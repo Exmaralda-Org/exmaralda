@@ -259,6 +259,7 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
     @Override
     public void valueChanged(ListSelectionEvent e) {
         int index = e.getFirstIndex();
+        if (index<0 || index>messageList.size()-1) return;
         ELANMessage message = this.messageList.get(index);
         applicationFrame.openInELANButton.setEnabled(message.file!=null);
         applicationFrame.xmlButton.setEnabled(message.file!=null);

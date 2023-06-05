@@ -42,7 +42,7 @@ public class EAFCreator {
         
         File audioFile = new File(audioPath);
         String audioURL = audioFile.toURI().toString();        
-        String relativeAudioURL = audioFile.toPath().relativize(file.toPath()).toString();
+        String relativeAudioURL = file.toPath().relativize(audioFile.toPath()).toString();
         
         
         String[][] parameters = {
