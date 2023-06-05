@@ -11,11 +11,15 @@ TEI-Drop 1.0
 
 EXMARaLDA tools are free to use. EXMARaLDA's source code is licensed under an open source license (GPL 2.0) and available from GitHub (https://github.com/EXMARaLDA/exmaralda/).
 
-The tools are developed by Thomas Schmidt (IDS Mannheim) and Kai Woerner (University of Hamburg) with support from Hanna Hedeland, Daniel Jettka, Anne Ferger (HZSK Hamburg) and other contributors.
+EXMARaLDA distributions are made by Thomas Schmidt at LinguisticBits (https://linguisticbits.de).
 
-The Dulko functionality is developed by Andreas Nolda (BBAW Berlin)
+The tools are developed by Thomas Schmidt (LinguisticBits) and Kai Woerner (University of Hamburg) with support from Hanna Hedeland, Daniel Jettka, Anne Ferger (HZSK Hamburg) and other contributors.
+
+The Dulko functionality is developed by Andreas Nolda (BBAW Berlin).
 
 Work on EXMARaLDA was funded by the German Research Association (DFG), the Bundesministerium fuer Bildung und Forschung (BMBF), the University of Hamburg, and the Institut fuer Deutsche Sprache (IDS).
+
+Newer developments and maintenance are kindly enabled by holders of EXMARaLDA support licences. 
 
 Localisations were done with support from Annette Schnieders (German), Tulay Selcuk (Turkish), Hanna Hedeland (Swedish), Petr Porizka (Czech), Silke Merkel (Spanish) and Fan Junjun (Chinese).
 
@@ -24,6 +28,7 @@ EXMARaLDA uses the following third party libraries:
 * parts of the BAS code (https://www.phonetik.uni-muenchen.de/forschung/Bas/)
 * TreeTagger for Java (https://www.openhub.net/p/tt4j)
 * JDOM (http://www.jdom.org/)
+* Subtitles (https://github.com/noophq/subtitle)
 * Saxon, Xalan, Bounce and Cobra.
 
 For questions, updates etc. please consult the EXMARaLDA website:

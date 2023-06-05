@@ -1,147 +1,42 @@
 ***** EXMARaLDA changes *******
 
 =================
-orthonormal
-=================
-01.09.2022                 Update OrthoNormal normalisation lexicon to FOLK 2.18 (issue #74)
-16.06.2022                 Duplicate ID bug (issue #322)
-17.06.2021                 Bug fix for normalisation candidates in basic transcriptions (issue #271)
-09.06.2021                 Bug fix for auto normalisation (issue #270)
-02.06.2021                 Update OrthoNormal normalisation lexicon to FOLK 2.16 (issue #74)
-25.02.2021                 Play selection button in word normalisation dialog (issue #261)
-23.11.2020                 Import ISO/TEI (issue #222)
-06.05.2020                 Update OrthoNormal normalisation lexicon to FOLK 2.14 (issue #74)
-28.05.2019                 Update OrthoNormal normalisation lexicon to FOLK 2.12 (issue #74)
-27.05.2019                 Open file on double click on MAC (issue #184)
-27.05.2019                 Player trouble fixed (issue #189)
-19.02.2019                 Additional counting column (issue #179)
-24.08.2018                 Asterisk as possible phrase boundary (issue #162)
-29.06.2018                 Flag for token/probability in tagging (issue #157)
-25.06.2018                 Fine tuning of ISO/TEI export for ZuMult (issue #152)
-30.05.2018                 Update normalisation lexicon (issue #74)
-30.05.2018                 Configurable Quick Buttons for POS (issue #154)
-30.05.2018                 Function for applying rules (issue #153)
-26.02.2018                 function for importing TGDP data (issue #143)
-17.01.2018                 function for changing speaker IDs (issue #140)
-15.12.2017                 Button for correcting transcribed form in normalisation dialog (issue #135)
-24.04.2017                 Update normalisation lexicon (issue #74)
-12.04.2017                 Make sure frame is inside screen dimensions at startup (issue #72)
-02.03.2017                 force player change when running with JRE > 1.6 on MAC (issue #29)
-01.03.2017                 normalize whitespace in normalized forms (issue #62)
-14.12.2016                 Missing bounce.jar in library path on MAC (issue #29)
-16.11.2016                 TreeTaggerAction in new Annotation menu (issue #33)
-16.11.2016                 Export: Set language for ISO/TEI export (issue #9)
-18.04.2016                 revert to old version of BAS player (MAC)
-08.04.2016                 revert to old version of BAS player (Windows)
-06.04.2016                 Updated player preferences handling
-30.03.2016                 TEI and TCF exports must retain IDs (methods generateWordIDs())
-30.03.2016                 Wrong file filter for TCF export (txt instead of xml)
-03.03.2016                 Adapted TEI exports (annotationBlock etc.)
-22.02.2016                 Changes to output variant with normalisations only
-29.01.2016                 Output variant with normalisations only
-07.12.2015                 Table view in match list
-30.11.2015                 Improvements to directory search
-25.11.2015                 Directory search
-18.11.2015                 Disabled $ dummy symbol since it is no longer used in the conventions
-06.10.2015                 Build from git: jsmooth path changes for Windows (todo: Mac and Linux)
-10.08.2015                 Deadlock in lexicon setup
-31.07.2015                 Let's be version 0.9 now, splashscreen changed
-25.07.2015                 More functionality for chat corpus
-24.07.2015                 First functionality for chat corpus
-23.07.2015                 Adaptations to lexicon handling in preferences
-13.05.2015                 Embedded JRE
-14.04.2015                 Must escape XML for edit word dialog
-13.04.2015                 Always use BAS Audio Player
-12.03.2015                 TCF export
-12.03.2015                 ISO/TEI export
-12.03.2015                 Export menu
-03.03.2015                 Internal Normalisation and Capital-Only Lexicon
-01.12.2014                 Remove problematic time values before editing contribution (Franziska Wallner)
-03.09.2014                 enable bulk changes via wordlist
-12.08.2014                 player must be set to idle when stopped
-04.08.2014                 enable play buttons in edit contribution dialog (Wiki)
-04.08.2014                 OOV filter button (Wiki)
-16.07.2014                 auto complete for tag text field (Swantje)
-12.05.2014                 default audio path
-10.03.2014                 dummy button in normalization dialog commits edit directly (JW)
-26.02.2014                 modified tagset / tag buttons (SW)
-18.02.2014                 enable XML mode by password
-18.02.2014                 display normalisation ratio
-18.02.2014                 filter for split words
-29.01.2014                 Catch IllegalArgumentException when resolving media path
-28.01.2014                 Remove redundant time elements from DGD2 (Jenny)
-21.01.2014                 (Rare) bug in assigning contribution for editing removed (Tabea Mergel)
-25.11.2013                 more space for edit panel for looong contributions (F.Wallner, GeWiss)
-06.11.2013                 new quick tag buttons (SW)
-06.11.2013                 retag after edit contribution (SW)
-16.10.2013                 filtering for POS
-26.08.2013                 fixed (?) another bug in recording path resolving
-23.07.2013                 better renormalisation after edit contribution
-18.07.2013                 focus for textfield after dummy button
-18.07.2013                 some minor corrections to match list functionality
-09.07.2013                 match list
-08.05.2013                 dummy buttons
-18.04.2013                 Change speaker functionality
-18.04.2013                 Edit contribution functionality
-19.02.2013                 No Derewo marking when opening FLK files
-07.01.2013                 No Derewo marking when opening FLK files
-19.12.2012                 Use Derewo to mark suspicious forms
-22.11.2012                 Filter for word list
-20.11.2012                 Bookmarks
-06.11.2012                 index update issue in XML mode
-31.10.2012                 First Linux Preview
-31.10.2012                 First Mac Preview
-25.10.2012                 Info about parse-level when opening FLK
-02.10.2012                 XML mode
-21.09.2012                 word correction dialog
-12.09.2012                 buttons for quick tagging
-12.09.2012                 Some adaptations for legacy DGD1 transcripts
-12.09.2012                 Remove normalisations which are identical to forms when opening
-06.06.2012                 Include Linux-Shellscript in preview distribution (Piotr Banski)
-06.06.2012                 Tolerate missing p-pos in table
-30.05.2012                 RDB Lexicon Update action
-30.05.2012                 Removed Auto Normalize button
-09.05.2012                 More keyboard support (down key) for forms list in normalization dialog
-09.05.2012                 No live lexicon update / no single auto normalize for RDB lexicon
-26.04.2012                 Tag probabilities
-21.03.2012                 Auto advance option
-28.03.2012                 File extension checks for opening must not be case-sensitive
-21.03.2012                 Auto normalization option for new files
-20.03.2012                 Capitalization lexicon integrated
-09.03.2012                 Tagging functionality
-01.06.2011                 Adaptations for basic transcriptions
-01.06.2011                 Cancel in check save must cancel, not close
-01.06.2011                 Player displays complete recording, selection only changes cursor position
-20.05.2011                 Extra second before and after selection in audio player (WS: oc)
-20.05.2011                 Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)
-20.05.2011                 Right click on word will (de)capitalize it (WS: mail 19-05-2011)
-20.05.2011                 Edit recording action in file menu (WS: mail 19-05-2011)
-12.11.2010                 Exit action in file menu (WS: n)
-12.11.2010                 Modified save behaviour (WS: k)
-12.11.2010                 Play button and audio position slider (WS: h)
-12.11.2010                 Scroll bar for editing panel (WS: g)
-12.11.2010                 Audio can be rassigned (WS: a)
-11.11.2010                 Added some status messages (WS: e)
-11.11.2010                 Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f)
-11.11.2010                 Don't add FLK files to recent files (WS: d)
-11.11.2010                 Implemented double-click behaviour for application startup (WS: c)
-11.11.2010                 Introduced threshhold for auto normalisation (WS: b)
-11.11.2010                 Changed buggy behaviour when empty string was entered in normalization dialog (WS: j)
-28.09.2010                 Editor setup optimised
-28.09.2010                 Output action
-28.09.2010                 Exception handling for Lexicon lookup
-28.09.2010                 Oracle JDBC driver added
-23.09.2010                 Capitalization removed
-23.09.2010                 Several changes related to GUI updating
-23.09.2010                 Help menu
-23.09.2010                 Preferences action
-23.09.2010                 different implementation of RDB lexicon
-11.04.2010                 auto button
-10.04.2010                 word list
-22.03.2010                 First build of first prototype
-=================
 partitureditor
 =================
+01.06.2023                 Save Format should be default (issue #398)
+01.06.2023                 Fixed formatting issues (issue #397)
+01.06.2023                 Changes to auto save check on startup (issue #396)
+25.05.2023                 Delete several events in one go (issue #389)
+12.05.2023                 HTML output: make audio selection case-insensitive (issue #387)
+07.05.2023                 Check and error message for search results turned sour (issue #12)
+06.05.2023                 Beautification of recording list cell renderer
+06.05.2023                 Perfected list events table (issue #382)
+02.05.2023                 Import Whisper word level  (issue #357)
+23.04.2023                 Improve start folder selection for Add recording  (issue #384)
+23.04.2023                 List events in table rather than list (issue #382)
+24.03.2023                 Fixed bug in RTF output (issue #379)
+13.03.2023                 Optional pretty print (issue #340)
+07.03.2023                 Consider intermediate timeline items when changing boundaries of spanned events (issue #377)
+06.03.2023                 Fix for bug in CSV export (issue #376)
+06.03.2023                 Fix for bug and performance improvement in ISO/TEI import (issue #367)
+24.02.2023                 Fix for bug in masking (issue #372)
+14.02.2023                 Improved ISO/TEI (re-)import (issue #367)
+09.02.2023                 Improved WebMAUS fine alignement (issue #139)
+09.02.2023                 Moved all legacy functions/menu into Legacy menu (issue #366)
+07.02.2023                 Adobe Premiere CSV import (issue #363)
+04.02.2023                 Make sure IPA panel and virtual keyboard stay within screen boundaries (issue #72)
+24.01.2023                 Fixed two typos in the STTS annotation spec (issue #360)
+23.01.2023                 Shortcut for media setup when media file does not exist
+15.01.2023                 Amberscript JSON import (issue #358)
+15.01.2023                 Whisper JSON import (issue #357)
+15.01.2023                 Reworked SRT import (issue #119)
+15.01.2023                 Reworked VTT import (issue #119)
+03.01.2023                 Annotation panel: refined jump next behaviour (issue #356)
+02.12.2022                 G2P grapheme to phoneme conversion via BAS web service (issue #325)
+02.12.2022                 Bug: remove format when removing tier (issue #352)
+01.12.2022                 Pretty print XML output (issue #340)
+30.11.2022                 CalculateTimeAction: max length increased from 32 to 150 (issue #351)
+18.11.2022                 Copy HTML action (issue #338)
 06.02.2022                 List events action (issue #316)
 17.01.2022                 Removed Quick Open Media functionality (issue #314)
 10.01.2022                 Option for generic segmented ISO/TEI export (issue #312)
@@ -692,6 +587,16 @@ partitureditor
 =================
 folker
 =================
+03.05.2023                 Bugfix (issue #386)
+13.03.2023                 Optional pretty print (issue #340)
+24.02.2023                 Fix for bug in masking (issue #372)
+18.02.2023                 Better handling of masking information in continuing/splitting transcripts (issue #313)
+09.02.2023                 Fixed pretty printing problem for word with timestamp inside (issue #340)
+15.01.2023                 Amberscript JSON import (issue #358)
+15.01.2023                 Whisper JSON import (issue #357)
+15.01.2023                 SRT import (issue #119)
+15.01.2023                 VTT import (issue #119)
+01.12.2022                 Pretty print XML output (issue #340)
 05.01.2022                 Improvements to search (issue #171)
 09.06.2021                 Bug fix for brown noise generator (issue #269)
 22.05.2021                 Possible bug in Save As...
@@ -1017,6 +922,14 @@ folker
 =================
 exakt
 =================
+18.04.2023                 Fix for inconsistent data update after "Add annotation" (issue #380)
+01.03.2023                 Fixed problems with FLN import wizard (issue #328)
+15.02.2023                 Message when max number of search results exceeded (issue #370)
+15.02.2023                 Fixes for FOLKER corpus wizard (issue #328)
+18.12.2022                 FOLKER corpus wizard can now import FLN with token annotations (issue #328)
+01.12.2022                 Pretty print XML output (issue #340)
+20.11.2022                 Auto adjust columns widths, change font action (issue #331)
+19.11.2022                 Confirm exit (issue #332)
 04.11.2021                 Bug fix: CSV export with empty left or right context (issue #277)
 31.05.2021                 Character encoding bug in Save concordance (issue #267)
 01.12.2020                 Resurrected remote corpus function (issue #155)
@@ -1132,81 +1045,155 @@ exakt
 18.02.2008                 annotation search working
 21.01.2008                 line numbers in the KWIC concordance
 =================
-all
+orthonormal
 =================
-14.12.2020                 First attempt at new Linux distributions (issue #238)
-03.12.2020                 License statement (issue #239)
-02.12.2020                 Use saxon9 instead of saxon9he (issue #228)
-20.11.2020                 OpenJDK 15 is breaking the JDS player (issue #217), so going back to 14 with a dirty fix for the encoding problem (issue #216)
-16.11.2020                 Using OpenJDK 15, make the encoding problem go away (issue #216)
-02.03.2020                 New preview version with 64bit / OpenJDK / Java 11+ (issue #199)
-18.02.2020                 Experimental version with 64bit / OpenJDK / Java 11+ (issue #199)
-26.01.2017                 Wrong time stamp for build time (issue #54), added some more info about JRE etc. to log file
-13.12.2016                 Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue #51)
-04.12.2016                 ... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)
-04.12.2016                 FOBS and SUN JMF distributions for Linux (issue #30)
-03.12.2016                 Wrong libraries for BAS Player on Linux (issue #30)
-02.12.2016                 Embedded java binaries need executable permissions (issue #30)
-01.12.2016                 Exchange Linux Bundled JRE 64bit to 32bit (issue #30)
-19.01.2016                 Updated ipsk libraries for BASAudioPlayer
-17.12.2015                 Embedded JRE for Linux distributions
-16.10.2015                 Changed linux sh scripts and mac plists to new library sitchuaishon
-16.10.2015                 Moved fobs dll to bundled jre
+13.03.2023                 Optional pretty print (issue #340)
+08.03.2023                 Fixed another problem related to pretty printing of words with internal time anchors (issue #340)
+01.03.2023                 Fixed problem related to pretty printing of words with internal time anchors (issue #340)
+26.01.2023                 Fix/workaround for TreeTagger problem (issue #286)
+01.12.2022                 Pretty print XML output (issue #340)
+01.09.2022                 Update OrthoNormal normalisation lexicon to FOLK 2.18 (issue #74)
+16.06.2022                 Duplicate ID bug (issue #322)
+17.06.2021                 Bug fix for normalisation candidates in basic transcriptions (issue #271)
+09.06.2021                 Bug fix for auto normalisation (issue #270)
+02.06.2021                 Update OrthoNormal normalisation lexicon to FOLK 2.16 (issue #74)
+25.02.2021                 Play selection button in word normalisation dialog (issue #261)
+23.11.2020                 Import ISO/TEI (issue #222)
+06.05.2020                 Update OrthoNormal normalisation lexicon to FOLK 2.14 (issue #74)
+28.05.2019                 Update OrthoNormal normalisation lexicon to FOLK 2.12 (issue #74)
+27.05.2019                 Open file on double click on MAC (issue #184)
+27.05.2019                 Player trouble fixed (issue #189)
+19.02.2019                 Additional counting column (issue #179)
+24.08.2018                 Asterisk as possible phrase boundary (issue #162)
+29.06.2018                 Flag for token/probability in tagging (issue #157)
+25.06.2018                 Fine tuning of ISO/TEI export for ZuMult (issue #152)
+30.05.2018                 Update normalisation lexicon (issue #74)
+30.05.2018                 Configurable Quick Buttons for POS (issue #154)
+30.05.2018                 Function for applying rules (issue #153)
+26.02.2018                 function for importing TGDP data (issue #143)
+17.01.2018                 function for changing speaker IDs (issue #140)
+15.12.2017                 Button for correcting transcribed form in normalisation dialog (issue #135)
+24.04.2017                 Update normalisation lexicon (issue #74)
+12.04.2017                 Make sure frame is inside screen dimensions at startup (issue #72)
+02.03.2017                 force player change when running with JRE > 1.6 on MAC (issue #29)
+01.03.2017                 normalize whitespace in normalized forms (issue #62)
+14.12.2016                 Missing bounce.jar in library path on MAC (issue #29)
+16.11.2016                 TreeTaggerAction in new Annotation menu (issue #33)
+16.11.2016                 Export: Set language for ISO/TEI export (issue #9)
+18.04.2016                 revert to old version of BAS player (MAC)
+08.04.2016                 revert to old version of BAS player (Windows)
+06.04.2016                 Updated player preferences handling
+30.03.2016                 TEI and TCF exports must retain IDs (methods generateWordIDs())
+30.03.2016                 Wrong file filter for TCF export (txt instead of xml)
+03.03.2016                 Adapted TEI exports (annotationBlock etc.)
+22.02.2016                 Changes to output variant with normalisations only
+29.01.2016                 Output variant with normalisations only
+07.12.2015                 Table view in match list
+30.11.2015                 Improvements to directory search
+25.11.2015                 Directory search
+18.11.2015                 Disabled $ dummy symbol since it is no longer used in the conventions
 06.10.2015                 Build from git: jsmooth path changes for Windows (todo: Mac and Linux)
-10.07.2015                 Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)
-09.07.2015                 Fixed missing library in Linux distribution (Hanna)
-13.05.2015                 Bundle JRE on Windows
-05.05.2015                 some library cleanup for build, got rid of SUN JMF
-04.09.2013                 New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build
-04.09.2013                 new icons
-07.11.2012                 ipsk.jar for BAS-Player was missing from MAC plists
-06.11.2012                 end of official support for PPC Mac
-20.08.2012                 Parameter HTML witdth in write partitur method (Leipzig)
-16.11.2011                 IDs for words in TEI export
-19.10.2011                 Preparing release
-30.05.2011                 Command line version for Praat export (Singer)
-18.05.2011                 Changed segmented transcription format: ta's can now have ref-id's
-08.03.2011                 Added Sextant tagger to Windows and Linux distributions
-10.12.2010                 Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though)
-18.10.2010                 Simplified Windows distribution
-01.10.2010                 Added TEI drop to start menu on windows
-01.10.2010                 Removed SUN JMF versions of PE and EXAKT from start menu on windows
-24.08.2010                 Coloured splash screens
-23.08.2010                 Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly
-10.08.2010                 Added swingworker and QTJava to classpath on Linux
-31.03.2010                 Version info for Windows setup (Linde, RRZ)
-24.02.2010                 fixed bug in corpus builder, path separator must be os independent (Kerem)
-15.12.2009                 Linux: shell scripts take parameter (Timm!)
-23.06.2009                 Cleaned up build, smaller distribution size
-21.03.2009                 removed unused libs from linux distribution
-26.02.2009                 Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances
-09.02.2009                 Integration of ELAN.jar instead of copied MPI code
-09.02.2009                 Documentation updates
-28.01.2008                 Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS
-28.10.2008                 changed EXMARaLDA's build and template files for new media integration
-28.10.2008                 removed JLayer-Player because it is no longer needed (MP3 is fine in other players)
-27.10.2008                 integrated ELAN's DirectShowPlayer as a new player type
-22.10.2008                 fixed bug in log file handling which led to out of memory errors on certain Macs
-20.10.2008                 changed linux tarball: sh files are now executable
-13.10.2008                 changed linux tarball according to suggestions by Jörg Sommer
-13.10.2008                 changed info plist for mac applications to nake sure app runs on 32-bit-JVM
-06.10.2008                 changed basic and segmented transcription APIs to read and write more than one referenced file
-06.10.2008                 changed basic and segmented transcription DTD to allow more than one referenced file
-06.10.2008                 changed basic transcription DTD to allow format table
-16.09.2008                 updated XALAN libraries
-06.08.2008                 changed linux shell scripts (seem to work at least with Suse and Java 6 now)
-=================
-sextant
-=================
-31.07.2019                 repairs sextant linux launcher (#193)
-30.05.2011                 Logging enabled (METU)
-18.05.2011                 open tagset repaired
-24.03.2011                 Changes to the annotation panel
-28.02.2011                 moving inside taggables doesn't suck anymore
-28.02.2011                 Remove Attribute Button added
+10.08.2015                 Deadlock in lexicon setup
+31.07.2015                 Let's be version 0.9 now, splashscreen changed
+25.07.2015                 More functionality for chat corpus
+24.07.2015                 First functionality for chat corpus
+23.07.2015                 Adaptations to lexicon handling in preferences
+13.05.2015                 Embedded JRE
+14.04.2015                 Must escape XML for edit word dialog
+13.04.2015                 Always use BAS Audio Player
+12.03.2015                 TCF export
+12.03.2015                 ISO/TEI export
+12.03.2015                 Export menu
+03.03.2015                 Internal Normalisation and Capital-Only Lexicon
+01.12.2014                 Remove problematic time values before editing contribution (Franziska Wallner)
+03.09.2014                 enable bulk changes via wordlist
+12.08.2014                 player must be set to idle when stopped
+04.08.2014                 enable play buttons in edit contribution dialog (Wiki)
+04.08.2014                 OOV filter button (Wiki)
+16.07.2014                 auto complete for tag text field (Swantje)
+12.05.2014                 default audio path
+10.03.2014                 dummy button in normalization dialog commits edit directly (JW)
+26.02.2014                 modified tagset / tag buttons (SW)
+18.02.2014                 enable XML mode by password
+18.02.2014                 display normalisation ratio
+18.02.2014                 filter for split words
+29.01.2014                 Catch IllegalArgumentException when resolving media path
+28.01.2014                 Remove redundant time elements from DGD2 (Jenny)
+21.01.2014                 (Rare) bug in assigning contribution for editing removed (Tabea Mergel)
+25.11.2013                 more space for edit panel for looong contributions (F.Wallner, GeWiss)
+06.11.2013                 new quick tag buttons (SW)
+06.11.2013                 retag after edit contribution (SW)
+16.10.2013                 filtering for POS
+26.08.2013                 fixed (?) another bug in recording path resolving
+23.07.2013                 better renormalisation after edit contribution
+18.07.2013                 focus for textfield after dummy button
+18.07.2013                 some minor corrections to match list functionality
+09.07.2013                 match list
+08.05.2013                 dummy buttons
+18.04.2013                 Change speaker functionality
+18.04.2013                 Edit contribution functionality
+19.02.2013                 No Derewo marking when opening FLK files
+07.01.2013                 No Derewo marking when opening FLK files
+19.12.2012                 Use Derewo to mark suspicious forms
+22.11.2012                 Filter for word list
+20.11.2012                 Bookmarks
+06.11.2012                 index update issue in XML mode
+31.10.2012                 First Linux Preview
+31.10.2012                 First Mac Preview
+25.10.2012                 Info about parse-level when opening FLK
+02.10.2012                 XML mode
+21.09.2012                 word correction dialog
+12.09.2012                 buttons for quick tagging
+12.09.2012                 Some adaptations for legacy DGD1 transcripts
+12.09.2012                 Remove normalisations which are identical to forms when opening
+06.06.2012                 Include Linux-Shellscript in preview distribution (Piotr Banski)
+06.06.2012                 Tolerate missing p-pos in table
+30.05.2012                 RDB Lexicon Update action
+30.05.2012                 Removed Auto Normalize button
+09.05.2012                 More keyboard support (down key) for forms list in normalization dialog
+09.05.2012                 No live lexicon update / no single auto normalize for RDB lexicon
+26.04.2012                 Tag probabilities
+21.03.2012                 Auto advance option
+28.03.2012                 File extension checks for opening must not be case-sensitive
+21.03.2012                 Auto normalization option for new files
+20.03.2012                 Capitalization lexicon integrated
+09.03.2012                 Tagging functionality
+01.06.2011                 Adaptations for basic transcriptions
+01.06.2011                 Cancel in check save must cancel, not close
+01.06.2011                 Player displays complete recording, selection only changes cursor position
+20.05.2011                 Extra second before and after selection in audio player (WS: oc)
+20.05.2011                 Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)
+20.05.2011                 Right click on word will (de)capitalize it (WS: mail 19-05-2011)
+20.05.2011                 Edit recording action in file menu (WS: mail 19-05-2011)
+12.11.2010                 Exit action in file menu (WS: n)
+12.11.2010                 Modified save behaviour (WS: k)
+12.11.2010                 Play button and audio position slider (WS: h)
+12.11.2010                 Scroll bar for editing panel (WS: g)
+12.11.2010                 Audio can be rassigned (WS: a)
+11.11.2010                 Added some status messages (WS: e)
+11.11.2010                 Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f)
+11.11.2010                 Don't add FLK files to recent files (WS: d)
+11.11.2010                 Implemented double-click behaviour for application startup (WS: c)
+11.11.2010                 Introduced threshhold for auto normalisation (WS: b)
+11.11.2010                 Changed buggy behaviour when empty string was entered in normalization dialog (WS: j)
+28.09.2010                 Editor setup optimised
+28.09.2010                 Output action
+28.09.2010                 Exception handling for Lexicon lookup
+28.09.2010                 Oracle JDBC driver added
+23.09.2010                 Capitalization removed
+23.09.2010                 Several changes related to GUI updating
+23.09.2010                 Help menu
+23.09.2010                 Preferences action
+23.09.2010                 different implementation of RDB lexicon
+11.04.2010                 auto button
+10.04.2010                 word list
+22.03.2010                 First build of first prototype
 =================
 coma
 =================
+26.01.2023                 Fix/workaround for TreeTagger problem (issue #286)
+01.12.2022                 Pretty print XML output (issue #340)
+19.11.2022                 Confirm exit (issue #332)
 22.11.2017                 POS tagger would quit with null pointer because of tokens in tiers without speakers (issue #130)
 03.04.2017                 Switched CHAT/GAT in dropdown menu, now all right (issue #69)
 23.03.2017                 Set segmented=true for newly generated EXS (issue #66)
@@ -1474,6 +1461,80 @@ coma
 17.02.2008                 mehrere comms löschbar
 05.08.2008                 added segmentation functionality to the corpus creation wizard
 04.08.2008                 added 'Tools > EXAKT Search' function
+=================
+all
+=================
+08.11.2022                 New splashscreens (issues #341 and #37)
+14.12.2020                 First attempt at new Linux distributions (issue #238)
+03.12.2020                 License statement (issue #239)
+02.12.2020                 Use saxon9 instead of saxon9he (issue #228)
+20.11.2020                 OpenJDK 15 is breaking the JDS player (issue #217), so going back to 14 with a dirty fix for the encoding problem (issue #216)
+16.11.2020                 Using OpenJDK 15, make the encoding problem go away (issue #216)
+02.03.2020                 New preview version with 64bit / OpenJDK / Java 11+ (issue #199)
+18.02.2020                 Experimental version with 64bit / OpenJDK / Java 11+ (issue #199)
+26.01.2017                 Wrong time stamp for build time (issue #54), added some more info about JRE etc. to log file
+13.12.2016                 Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue #51)
+04.12.2016                 ... and SUN JMF distribution with 64bit Java embedded for Linux (issue #30)
+04.12.2016                 FOBS and SUN JMF distributions for Linux (issue #30)
+03.12.2016                 Wrong libraries for BAS Player on Linux (issue #30)
+02.12.2016                 Embedded java binaries need executable permissions (issue #30)
+01.12.2016                 Exchange Linux Bundled JRE 64bit to 32bit (issue #30)
+19.01.2016                 Updated ipsk libraries for BASAudioPlayer
+17.12.2015                 Embedded JRE for Linux distributions
+16.10.2015                 Changed linux sh scripts and mac plists to new library sitchuaishon
+16.10.2015                 Moved fobs dll to bundled jre
+06.10.2015                 Build from git: jsmooth path changes for Windows (todo: Mac and Linux)
+10.07.2015                 Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)
+09.07.2015                 Fixed missing library in Linux distribution (Hanna)
+13.05.2015                 Bundle JRE on Windows
+05.05.2015                 some library cleanup for build, got rid of SUN JMF
+04.09.2013                 New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build
+04.09.2013                 new icons
+07.11.2012                 ipsk.jar for BAS-Player was missing from MAC plists
+06.11.2012                 end of official support for PPC Mac
+20.08.2012                 Parameter HTML witdth in write partitur method (Leipzig)
+16.11.2011                 IDs for words in TEI export
+19.10.2011                 Preparing release
+30.05.2011                 Command line version for Praat export (Singer)
+18.05.2011                 Changed segmented transcription format: ta's can now have ref-id's
+08.03.2011                 Added Sextant tagger to Windows and Linux distributions
+10.12.2010                 Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though)
+18.10.2010                 Simplified Windows distribution
+01.10.2010                 Added TEI drop to start menu on windows
+01.10.2010                 Removed SUN JMF versions of PE and EXAKT from start menu on windows
+24.08.2010                 Coloured splash screens
+23.08.2010                 Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly
+10.08.2010                 Added swingworker and QTJava to classpath on Linux
+31.03.2010                 Version info for Windows setup (Linde, RRZ)
+24.02.2010                 fixed bug in corpus builder, path separator must be os independent (Kerem)
+15.12.2009                 Linux: shell scripts take parameter (Timm!)
+23.06.2009                 Cleaned up build, smaller distribution size
+21.03.2009                 removed unused libs from linux distribution
+26.02.2009                 Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances
+09.02.2009                 Integration of ELAN.jar instead of copied MPI code
+09.02.2009                 Documentation updates
+28.01.2008                 Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS
+28.10.2008                 changed EXMARaLDA's build and template files for new media integration
+28.10.2008                 removed JLayer-Player because it is no longer needed (MP3 is fine in other players)
+27.10.2008                 integrated ELAN's DirectShowPlayer as a new player type
+22.10.2008                 fixed bug in log file handling which led to out of memory errors on certain Macs
+20.10.2008                 changed linux tarball: sh files are now executable
+13.10.2008                 changed linux tarball according to suggestions by Jörg Sommer
+13.10.2008                 changed info plist for mac applications to nake sure app runs on 32-bit-JVM
+06.10.2008                 changed basic and segmented transcription APIs to read and write more than one referenced file
+06.10.2008                 changed basic and segmented transcription DTD to allow more than one referenced file
+06.10.2008                 changed basic transcription DTD to allow format table
+16.09.2008                 updated XALAN libraries
+06.08.2008                 changed linux shell scripts (seem to work at least with Suse and Java 6 now)
+=================
+sextant
+=================
+31.07.2019                 repairs sextant linux launcher (#193)
+30.05.2011                 Logging enabled (METU)
+18.05.2011                 open tagset repaired
+24.03.2011                 Changes to the annotation panel
+28.02.2011                 moving inside taggables doesn't suck anymore
+28.02.2011                 Remove Attribute Button added
 =================
 teidrop
 =================
