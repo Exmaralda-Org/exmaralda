@@ -23,7 +23,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
      * Creates new form ApplicationFrame 
      */
     public ApplicationFrame() {
-        //org.exmaralda.common.Logger.initialiseLogger(this);
+        org.exmaralda.common.Logger.initialiseLogger(this);
         applicationControl = new ApplicationControl(this);  
         applicationControl.assignActions();
         initComponents();
@@ -52,6 +52,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         removeMessagesButton = new javax.swing.JButton();
         openInELANButton = new javax.swing.JButton();
         xmlButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
         topPanel = new javax.swing.JPanel();
         transcriptFolderPanel = new javax.swing.JPanel();
         transcriptFolderLabel = new javax.swing.JLabel();
@@ -144,6 +145,15 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
             }
         });
         consoleButtonPanel.add(xmlButton);
+
+        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/texgut/application/broom-wide-solid.png"))); // NOI18N
+        clearButton.setToolTipText("Clear console messages");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+        consoleButtonPanel.add(clearButton);
 
         consolePanel.add(consoleButtonPanel, java.awt.BorderLayout.EAST);
 
@@ -245,6 +255,10 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
         applicationControl.showXMLForMessageAtIndex(consoleList.getSelectedIndex());
     }//GEN-LAST:event_xmlButtonActionPerformed
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        applicationControl.clearConsole();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,6 +296,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements ExmaraldaApp
     public javax.swing.JTextField audioFolderTextField;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton checkEAFButton1;
+    private javax.swing.JButton clearButton;
     private javax.swing.JPanel consoleButtonPanel;
     javax.swing.JList<String> consoleList;
     private javax.swing.JPanel consolePanel;

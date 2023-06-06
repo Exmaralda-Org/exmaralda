@@ -98,6 +98,10 @@ public class ELANChecker {
         if (!(eafFile.getName().matches(EAF_NAME_REGEX))){
             result.add(new ELANMessage(ELANMessageType.WARNING, "Filename " + eafFile.getName() + " does not match pattern.", eafFile));            
         }
+        String foldername = eafFile.getParentFile().getName();
+        if (!(eafFile.getName().startsWith(foldername))){
+            result.add(new ELANMessage(ELANMessageType.WARNING, eafFile.getName() + " does not correspond to folder name " + foldername + ".", eafFile));                        
+        }
         return result;        
     }
 

@@ -330,6 +330,14 @@ public class ApplicationControl implements ListDataListener, ListSelectionListen
             
         }
     }
+
+    void clearConsole() {
+        List<ELANMessage> fresh = new ArrayList<>();
+        fresh.add(new ELANMessage("All neat and tidy."));
+        this.messageList = fresh;
+        this.messageListModel = new ELANMessageListModel(fresh);
+        applicationFrame.consoleList.setModel(messageListModel);
+    }
     
     
 }
