@@ -247,6 +247,247 @@ public class PartitureTableWithActions extends PartitureTable
     public String pauseSuffix = "s))";
     public int pauseDigits = 1;
     public boolean pauseDecimalComma = true;
+    
+    // ************************************************************
+    // ***********     Action Declaration *************************
+    // ************************************************************
+    
+    /** Action for creating a new transcription file (Menu File --> New) */
+    public javax.swing.AbstractAction newAction;
+    /** Action for creating a new transcription file from a speakertable (Menu File --> New from speakertable)*/
+    public javax.swing.AbstractAction newFromWizardAction;
+    /** Action for creating a new transcription file from a speakertable (Menu File --> New from speakertable)*/
+    public javax.swing.AbstractAction newFromSpeakertableAction;
+    /** Action for creating a new transcription file from a timeline (Menu File --> New from timeline)*/
+    public javax.swing.AbstractAction newFromTimelineAction;
+    /** Action for creating a new transcription file from a silence detection (Menu File --> New from silence detection)*/
+    public javax.swing.AbstractAction newFromSilenceDetectionAction;
+    /** Action for opening an existing transcription file (Menu File --> Open)*/
+    public javax.swing.AbstractAction openAction;
+    /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    
+    public javax.swing.AbstractAction restoreAutoBackupAction;
+    /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    
+    public javax.swing.AbstractAction restoreAction;
+    /** Action for saving the current transcription file under its current name (Menu File --> Save)*/
+    public javax.swing.AbstractAction saveAction;
+    /** Action for saving the current transcription file under a new name (Menu File --> Save As)*/
+    public javax.swing.AbstractAction saveAsAction;
+       
+    /** Action for editing the page setup for the current transcription */
+    public javax.swing.AbstractAction pageSetupAction;
+    /** Action for sending the current transcription to a printer */
+    public javax.swing.AbstractAction printAction;
+    /** Action for editing the partitur parameters */
+    public javax.swing.AbstractAction editPartiturParametersAction;
+    
+    public javax.swing.AbstractAction sendHTMLPartitureToBrowserAction;
+    /** Action for outputting transcription into some visualisation format */
+    public javax.swing.AbstractAction outputAction;
+    /** Action for importing some 3rd party format to EXMARaLDA */
+    public javax.swing.AbstractAction importAction;
+    public javax.swing.AbstractAction importActionInel;
+    /** Action for exporting the transcription to some 3rd party format */
+    public javax.swing.AbstractAction exportAction;
+    //*******************************************************************
+
+    /* Edit menu actions */
+    public javax.swing.AbstractAction undoAction;
+    /** Action for copying currently selected text to the clipboard */
+    public javax.swing.AbstractAction copyTextAction;
+    /** Action for copying currently selected text to the clipboard as HTML (#338)*/
+    public javax.swing.AbstractAction copyHTMLAction;
+    /** Action for pasting the clipboard at the current cursor position */
+    public javax.swing.AbstractAction pasteAction;
+    /** Action for cutting currently selected text to the clipboard */
+    public javax.swing.AbstractAction cutAction;
+
+    public javax.swing.AbstractAction searchInEventsAction;
+    public javax.swing.AbstractAction findNextAction;
+    public javax.swing.AbstractAction replaceInEventsAction;
+    public javax.swing.AbstractAction gotoAction;
+    // #274
+    public javax.swing.AbstractAction lowerUpperCaseAction;
+
+    public javax.swing.AbstractAction exaktSearchAction;    
+    
+    public javax.swing.AbstractAction selectionToNewAction;
+    public javax.swing.AbstractAction leftPartToNewAction;
+    public javax.swing.AbstractAction rightPartToNewAction;
+    /*public javax.swing.AbstractAction selectionToHTMLAction;
+    public javax.swing.AbstractAction selectionToRTFAction;
+    public javax.swing.AbstractAction printSelectionAction;*/
+    
+    public javax.swing.AbstractAction glueTranscriptionsAction;
+    public javax.swing.AbstractAction mergeTranscriptionsAction;
+    public javax.swing.AbstractAction chopTranscriptionAction;
+    public javax.swing.AbstractAction cleanupAction;
+    public javax.swing.AbstractAction editErrorsAction;
+
+    public javax.swing.AbstractAction chopAudioAction;
+    public javax.swing.AbstractAction maskAudioAction;
+
+    public javax.swing.AbstractAction editPreferencesAction;
+
+    //*******************************************************************
+
+    /* View menu actions */
+    public javax.swing.AbstractAction showHideGridAction;
+    public javax.swing.AbstractAction changeScaleConstantAction;
+    public javax.swing.AbstractAction showSpecialCharactersAction;
+
+    //*******************************************************************
+
+    /* Transcription menu actions */
+
+    /** Action for editing the meta information of the current transcription (Menu File --> Meta information)*/
+    public javax.swing.AbstractAction editMetaInformationAction;
+    /** Action for editing the speakertable of the current transcription (Menu File --> Speakertable) */
+    public javax.swing.AbstractAction editSpeakertableAction;
+    /** Action for editing the recordings of the current transcription (Menu File --> Recordings) */
+    public javax.swing.AbstractAction editRecordingsAction;
+
+    public javax.swing.AbstractAction getStructureErrorsAction;
+    public javax.swing.AbstractAction calculateTimeAction;
+    public javax.swing.AbstractAction getSegmentationErrorsAction;
+    public javax.swing.AbstractAction segmentAndSaveTranscriptionAction;
+    public javax.swing.AbstractAction countAction;
+    public javax.swing.AbstractAction wordListAction;
+    public javax.swing.AbstractAction transformationAction;
+    public javax.swing.AbstractAction autoAnnotationAction;
+    public javax.swing.AbstractAction insertUtteranceNumbersAction;
+    public javax.swing.AbstractAction addTokenLayerAction;
+
+    
+    //*******************************************************************
+
+    /* Tier menu actions */
+    
+    public javax.swing.AbstractAction editTierAction;
+    public javax.swing.AbstractAction addTierAction;
+    public javax.swing.AbstractAction insertTierAction;
+    public javax.swing.AbstractAction removeTierAction;
+    public javax.swing.AbstractAction moveTierUpAction;
+    public javax.swing.AbstractAction changeTierOrderAction;
+    public javax.swing.AbstractAction hideTierAction;
+    public javax.swing.AbstractAction showAllTiersAction;
+    public javax.swing.AbstractAction removeEmptyEventsAction;
+    public javax.swing.AbstractAction editTiersAction;
+    public javax.swing.AbstractAction listEventsAction; // issue #316
+    public javax.swing.AbstractAction typesAction; // issue #295
+
+    //*******************************************************************
+
+    /* Event menu actions */
+    
+    public javax.swing.AbstractAction deleteEventAction;
+    public javax.swing.AbstractAction deleteEventsAction;
+
+    public javax.swing.AbstractAction extendRightAction;
+    public javax.swing.AbstractAction extendLeftAction;
+    public javax.swing.AbstractAction shrinkRightAction;
+    public javax.swing.AbstractAction shrinkLeftAction;
+    public javax.swing.AbstractAction moveRightAction;
+    public javax.swing.AbstractAction moveLeftAction;
+    public javax.swing.AbstractAction shiftRightAction;
+    public javax.swing.AbstractAction shiftLeftAction;
+    public javax.swing.AbstractAction mergeAction;
+    public javax.swing.AbstractAction splitAction;
+    public javax.swing.AbstractAction doubleSplitAction;
+    public javax.swing.AbstractAction editEventAction;
+    public javax.swing.AbstractAction findNextEventAction;
+    public javax.swing.AbstractAction splitLongEventAction;
+
+    public javax.swing.AbstractAction insertPauseAction;
+    
+    // 24-06-2016 MuM-Multi new 
+    public javax.swing.AbstractAction moveDownLeftAction;
+    public javax.swing.AbstractAction moveDownRightAction;
+    
+
+
+    //*******************************************************************
+
+    /* Timeline menu actions */
+    
+    public javax.swing.AbstractAction editTimelineItemAction;
+    public javax.swing.AbstractAction insertTimelineItemAction;
+    public javax.swing.AbstractAction anchorTimelineItemAction;
+    public javax.swing.AbstractAction smoothTimelineAction;
+    public javax.swing.AbstractAction removeGapAction;
+    public javax.swing.AbstractAction removeAllGapsAction;
+    public javax.swing.AbstractAction removeUnusedTimelineItemsAction;
+    public javax.swing.AbstractAction makeTimelineConsistentAction;
+    public javax.swing.AbstractAction completeTimelineAction;
+    public javax.swing.AbstractAction removeInterpolatedTimesAction;
+    public javax.swing.AbstractAction removeTimesAction;
+    public javax.swing.AbstractAction confirmTimelineItemAction;
+    public javax.swing.AbstractAction shiftAbsoluteTimesAction;
+    public javax.swing.AbstractAction addBookmarkAction;
+    public javax.swing.AbstractAction bookmarksAction;
+    public javax.swing.AbstractAction easyAlignmentAction;
+
+    //*******************************************************************
+
+    /* Format menu actions */
+
+    public javax.swing.AbstractAction reformatAction;
+
+    public javax.swing.AbstractAction openTierFormatTableAction;
+    public javax.swing.AbstractAction saveTierFormatTableAction;
+    public javax.swing.AbstractAction applyFormatStylesheetAction;    
+    public javax.swing.AbstractAction editTierFormatTableAction;
+    public javax.swing.AbstractAction editTierFormatAction;
+    public javax.swing.AbstractAction editRowLabelFormatAction;
+    public javax.swing.AbstractAction editColumnLabelFormatAction;
+    public javax.swing.AbstractAction editTimelineItemFormatAction;
+
+    public javax.swing.AbstractAction setFrameEndAction;
+
+    public javax.swing.AbstractAction underlineAction;
+    
+    //*******************************************************************
+    //*******************************************************************
+    //*******************************************************************
+    /* Legacy menu actions */
+    
+    /* File */
+    public javax.swing.AbstractAction legacyImportAction;
+    public javax.swing.AbstractAction legacyExportAction;
+    public javax.swing.AbstractAction legacyOutputAction;
+
+    /* SFB 538 */
+    public javax.swing.AbstractAction syllableStructureAction;
+    public javax.swing.AbstractAction k8MysteryConverterAction;
+    public javax.swing.AbstractAction exSyncEventShrinkerAction;
+    public javax.swing.AbstractAction exSyncCleanupAction;
+    /* SFB 632 */
+    public javax.swing.AbstractAction appendSpaceAction;
+    
+    /* SiN */
+    public javax.swing.AbstractAction stadtspracheWordSegmentationAction;
+    public javax.swing.AbstractAction stadtspracheTierSegmentationAction;
+    
+    // ************************************************************
+       
+    /* Web Services */
+    public javax.swing.AbstractAction webMAUSAction;
+    public javax.swing.AbstractAction webMAUSFineAlignmentAction;
+    public javax.swing.AbstractAction g2pAction;
+    public javax.swing.AbstractAction webLichtAction; 
+    public javax.swing.AbstractAction deepLAction; 
+    
+    //*******************************************************************
+
+    /* Navigation actions */
+    public javax.swing.AbstractAction jumpToStartAction;
+    public javax.swing.AbstractAction jumpToEndAction;
+    public javax.swing.AbstractAction scrollForwardsAction;
+    public javax.swing.AbstractAction scrollBackwardsAction;
+    
+    
+    // ************************************************************
+    // ************************************************************
+    
 
     public PartitureTableWithActions(java.awt.Frame p){
         this(p, true);
@@ -297,8 +538,6 @@ public class PartitureTableWithActions extends PartitureTable
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
-        
-
     }
 
 
@@ -337,6 +576,335 @@ public class PartitureTableWithActions extends PartitureTable
     }
 
 
+    // *********************************************************************************** //
+    // ************************ ACTION INITIALISATIONS *********************************** //
+    // *********************************************************************************** //
+    
+    
+    /** intialises the actions associated with menu items and toolbar buttons */
+    private void initActions(){
+        
+        //*********************************************************************************************
+        //*************************************** FILE ACTIONS ****************************************
+        //*********************************************************************************************
+
+        newAction = new NewAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/New.gif")));
+        newFromWizardAction = new NewFromWizardAction(this, null);
+        newFromSpeakertableAction = new NewFromSpeakertableAction(this, null);
+        newFromTimelineAction = new NewFromTimelineAction(this);
+        newFromSilenceDetectionAction = new NewFromSilenceDetectionAction(this);
+        openAction = new OpenAction(this,new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif")));               
+        restoreAction = new RestoreAction(this);
+        restoreAutoBackupAction = new RestoreAutoBackupAction(this);
+        saveAction = new SaveAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Save.gif")));
+        saveAsAction = new SaveAsAction (this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SaveAs.gif")));
+
+        editMetaInformationAction = new EditMetaInformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditMetaInformation.gif")));
+        editSpeakertableAction = new EditSpeakertableAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/speakertable.png")));
+        editRecordingsAction = new EditRecordingsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/video-x-generic.png")));
+
+        pageSetupAction = new PageSetupAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/PageSetup.gif")));
+        editPartiturParametersAction = new EditPartiturParametersAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/PageSetup.gif")));
+        printAction = new PrintAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Print.gif")));
+        
+        sendHTMLPartitureToBrowserAction = new SendHTMLPartitureToBrowserAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/apps/internet-web-browser.png")));
+        
+        outputAction = new OutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
+        importAction = new ImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
+        exportAction = new ExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
+        
+        //*********************************************************************************************
+        //*************************************** EDIT ACTIONS ****************************************
+        //*********************************************************************************************
+        
+        undoAction = new UndoAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/edit-undo.png")));
+
+        copyTextAction = new CopyTextAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
+        // new for #338
+        copyHTMLAction = new CopyHTMLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
+        pasteAction = new PasteAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Paste.gif")));
+        cutAction = new CutAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cut.gif")));
+
+        searchInEventsAction = new SearchInEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Search.gif")));
+        findNextAction = new FindNextAction(this);
+        replaceInEventsAction = new ReplaceInEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Replace.gif")));
+        gotoAction = new GotoAction(this);
+        // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        lowerUpperCaseAction = new LowerUpperCaseAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/upper-and-lower-case-a-letter.png")));
+
+        exaktSearchAction = new ExaktSearchAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")));
+
+        selectionToNewAction = new SelectionToNewAction(this, null);
+        leftPartToNewAction = new LeftPartToNewAction(this, null);
+        rightPartToNewAction = new RightPartToNewAction(this, null);
+        
+        editPreferencesAction = new EditPreferencesAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Settings.gif")));
+
+        mergeTranscriptionsAction = new MergeTranscriptionsAction(this, null);
+        glueTranscriptionsAction = new GlueTranscriptionsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Pattex.gif")));
+        chopTranscriptionAction = new ChopTranscriptionAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Chop.gif")));
+        cleanupAction = new CleanupAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cleanup.png")));
+        editErrorsAction = new EditErrorsAction(this);        
+        
+        chopAudioAction = new ChopAudioAction(this);
+        maskAudioAction = new MaskAudioAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/othericons/mask_black.png")));
+        
+        //*********************************************************************************************
+        //*************************************** VIEW ACTIONS ****************************************
+        //*********************************************************************************************
+
+        changeScaleConstantAction = new ChangeScaleConstantAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditScaleConstant.gif")));        
+        showSpecialCharactersAction = new ShowSpecialCharactersAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShowSpecialCharacters.gif")));
+
+        // All other view actions are implemented in menu classes, because
+        // I'm too stupid to connect a JCheckBoxMenuItem with an action
+        
+        //*********************************************************************************************
+        //*********************************** TRANSCRIPTION ACTIONS ***********************************
+        //*********************************************************************************************
+
+        getStructureErrorsAction = new GetStructureErrorsAction(this);
+        calculateTimeAction = new CalculateTimeAction(this);
+        getSegmentationErrorsAction = new GetSegmentationErrorsAction(this);
+        segmentAndSaveTranscriptionAction = new SegmentAndSaveTranscriptionAction(this);
+        countAction = new CountAction(this);
+        wordListAction = new WordlistAction(this);
+        //transformationAction = new TransformationAction(this);
+        transformationAction = new TransformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Transform.gif")));
+        insertUtteranceNumbersAction = new InsertHIATUtteranceNumbersAction(this);
+        autoAnnotationAction = new AutoAnnotationAction(this);
+        addTokenLayerAction = new AddTokenLayerAction(this);
+        
+        //*********************************************************************************************
+        //*************************************** TIER ACTIONS ****************************************
+        //*********************************************************************************************
+
+        editTierAction = new EditTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTier.png")));
+        addTierAction = new AddTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/AddTier.png")));
+        insertTierAction = new InsertTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/InsertTier.png")));
+        removeTierAction = new RemoveTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/RemoveTier.png")));        
+        moveTierUpAction = new MoveTierUpAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveTierUp.png")));
+        changeTierOrderAction = new ChangeTierOrderAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ChangeTierOrder.png")));        
+        hideTierAction = new HideTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/HideTier.png")));
+        showAllTiersAction = new ShowAllTiersAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShowAllTiers.png")));        
+        removeEmptyEventsAction = new RemoveEmptyEventsAction(this);
+        editTiersAction = new EditTiersAction(this);
+        listEventsAction = new ListEventsAction(this);
+        typesAction = new TypesAction(this);
+        listEventsAction = new ListEventsAction(this);
+
+        //*********************************************************************************************
+        //***************************************** EVENT ACTIONS *************************************
+        //*********************************************************************************************
+
+        shiftRightAction = new ShiftRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShiftRight.png")));
+        shiftLeftAction = new ShiftLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShiftLeft.png")));
+        mergeAction = new MergeAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Merge.png")));
+        splitAction = new SplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Split.png")));
+        doubleSplitAction = new DoubleSplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DoubleSplit.png")));
+        deleteEventAction = new DeleteEventAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DeleteEvent.png")));
+        deleteEventsAction = new DeleteEventsAction(this);
+        extendRightAction = new ExtendRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendRight.png")));
+        extendLeftAction = new ExtendLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendLeft.png")));
+        shrinkRightAction = new ShrinkRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShrinkRight.png")));
+        shrinkLeftAction = new ShrinkLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShrinkLeft.png")));
+        moveRightAction = new MoveRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveRight.png")));
+        moveLeftAction = new MoveLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveLeft.png")));
+        editEventAction = new EditEventAction(this);
+        findNextEventAction = new FindNextEventAction(this);
+        splitLongEventAction = new SplitLongEventAction(this);
+
+        insertPauseAction = new org.exmaralda.partitureditor.partiture.eventActions.InsertPauseAction(this, "Insert pause", new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/QuarterRestSmall.png")));
+
+        // 24-06-2016 MuM-Multi new 
+        moveDownLeftAction = new MoveDownLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-left.png")));
+        moveDownRightAction = new MoveDownRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-right.png")));
+        
+        //*********************************************************************************************
+        //***************************************** TIMELINE ACTIONS **********************************
+        //*********************************************************************************************
+
+        editTimelineItemAction = new EditTimelineItemAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTLI.png")));
+        insertTimelineItemAction = new InsertTimelineItemAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/InsertTLI.png")));
+        anchorTimelineItemAction = new AnchorTimelineAction(this);
+        smoothTimelineAction = new SmoothTimelineAction(this);
+        removeGapAction = new RemoveGapAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/RemoveGap.gif")));
+        removeAllGapsAction = new RemoveAllGapsAction(this);
+        removeUnusedTimelineItemsAction = new RemoveUnusedTimelineItemsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/RemoveUnusedTLI.png")));
+        makeTimelineConsistentAction = new MakeTimelineConsistentAction(this);
+        completeTimelineAction = new CompleteTimelineAction(this);
+        removeInterpolatedTimesAction = new RemoveInterpolatedTimesAction(this);
+        removeTimesAction = new RemoveTimesAction(this);
+        confirmTimelineItemAction = new ConfirmTimelineItemAction(this);
+        shiftAbsoluteTimesAction = new ShiftAbsoluteTimesAction(this);
+        addBookmarkAction = new AddBookmarkAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Bookmark.gif")));
+        bookmarksAction = new BookmarksAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Bookmark.gif")));
+        easyAlignmentAction = new EasyAlignmentAction(this);
+        
+        //*********************************************************************************************
+        //*************************************** FORMAT ACTIONS **************************************
+        //*********************************************************************************************
+
+        reformatAction = new ReformatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Reformat.gif")));
+
+        openTierFormatTableAction = new OpenTierFormatTableAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/OpenTierFormatTable.png")));
+        saveTierFormatTableAction = new SaveTierFormatTableAsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SaveTierFormatTableAs.png")));
+        applyFormatStylesheetAction = new ApplyFormatStylesheetAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/XSL.png")));
+        editTierFormatTableAction = new EditTierFormatTableAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTierFormatTable.png")));
+        editTierFormatAction = new EditTierFormatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTierFormat.png")));
+        editRowLabelFormatAction = new EditRowLabelFormatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditRowLabelFormat.png")));
+        editColumnLabelFormatAction = new EditColumnLabelFormatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditColumnLabelFormat.png")));
+        editTimelineItemFormatAction = new EditTimelineItemFormatAction(this);
+
+        setFrameEndAction = new SetFrameEndAction(this);
+
+        underlineAction = new UnderlineAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Underline.gif")));
+        
+        
+        //*********************************************************************************************
+        //*************************************  LEGACY ACTIONS **************************************
+        //*********************************************************************************************
+
+        legacyImportAction = new LegacyImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
+        legacyExportAction = new LegacyExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
+        legacyOutputAction = new LegacyOutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
+
+        syllableStructureAction = new MakeSyllableStructureTierAction(this);
+        k8MysteryConverterAction = new K8MysteryConverterAction(this);
+        appendSpaceAction = new AppendSpaceAction(this);
+        exSyncCleanupAction = new ExSyncCleanupAction(this);
+        exSyncEventShrinkerAction = new ExSyncEventShrinkerAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExSyncEventShrinker.gif")));
+        
+        importActionInel = new ImportActionInel(this, null);
+
+        stadtspracheWordSegmentationAction = new StadtspracheWordSegmentationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/hamburg.png")));
+        stadtspracheTierSegmentationAction = new StadtspracheTierSegmentationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/hamburg.png")));
+
+
+        //*********************************************************************************************
+        //*************************************  WEBSERVICE ACTIONS ***************************************
+        //*********************************************************************************************
+
+        webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
+        webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
+        g2pAction = new G2PAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Schwa.png")));
+        webLichtAction = new WebLichtAction(this);
+        deepLAction = new DeepLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/deepl_logo_icon_170284.png")));
+
+        //-------------------------------- NAVIGATION ACTIONS --------------------------------------------------
+
+        jumpToStartAction = new javax.swing.AbstractAction("Jump to start"){
+            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control HOME"));}
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.out.println("JumpToStartAction!");
+                commitEdit(true);
+                jumpToStart();
+            }
+        };
+        
+        jumpToEndAction = new javax.swing.AbstractAction("Jump to end"){
+            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control END"));}
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.out.println("JumpToEndAction!");
+                commitEdit(true);
+                jumpToEnd();
+            }
+        };
+        
+        scrollForwardsAction = new javax.swing.AbstractAction("Scroll forwards"){
+            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("alt PAGE_DOWN"));}
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.out.println("ScrollForwardsAction!");
+                commitEdit(true);
+                scrollForwards();
+            }
+        };
+        
+        scrollBackwardsAction = new javax.swing.AbstractAction("Scroll backwards"){
+            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("alt PAGE_DOWN"));}
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                System.out.println("ScrollBackwardsAction!");
+                commitEdit(true);
+                scrollBackwards();
+            }
+        };
+
+        
+        // initial enabling of actions
+        selectionToNewAction.setEnabled(true);
+        
+        undoAction.setEnabled(false);
+        pasteAction.setEnabled(false);
+        cutAction.setEnabled(false);
+        chopAudioAction.setEnabled(false);
+        
+        deleteEventAction.setEnabled(false);
+        deleteEventsAction.setEnabled(false);
+        extendRightAction.setEnabled(false);
+        extendLeftAction.setEnabled(false);
+        shrinkRightAction.setEnabled(false);
+        shrinkLeftAction.setEnabled(false);
+        moveRightAction.setEnabled(false);
+        moveLeftAction.setEnabled(false);
+        shiftRightAction.setEnabled(false);
+        shiftLeftAction.setEnabled(false);
+        mergeAction.setEnabled(false);
+        splitAction.setEnabled(false);
+        doubleSplitAction.setEnabled(false);
+        editEventAction.setEnabled(false);
+        insertPauseAction.setEnabled(false);
+        splitLongEventAction.setEnabled(false);
+        
+        // 24-06-2016 MuM-Multi new 
+        moveDownLeftAction.setEnabled(false);
+        moveDownRightAction.setEnabled(false);
+        
+        
+        insertTimelineItemAction.setEnabled(false);
+        makeTimelineConsistentAction.setEnabled(true);
+        removeUnusedTimelineItemsAction.setEnabled(true);
+        editTimelineItemAction.setEnabled(false);
+        removeGapAction.setEnabled(false);
+        
+        reformatAction.setEnabled(true);
+        editTierAction.setEnabled(false);
+        removeEmptyEventsAction.setEnabled(false);
+        insertTierAction.setEnabled(false);
+        removeTierAction.setEnabled(false);
+        moveTierUpAction.setEnabled(false);
+        hideTierAction.setEnabled(false);
+        showAllTiersAction.setEnabled(true);
+        editTierFormatAction.setEnabled(false);
+        setFrameEndAction.setEnabled(false);
+        underlineAction.setEnabled(false);
+        typesAction.setEnabled(false);
+    }
+    
+    /** initialises Keystrokes for navigation commands */
+    private void initKeystrokes(){
+
+        InputMap im = getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        ActionMap am = getActionMap();        
+        
+        // for jump to Start Action (Pos1 key)
+        im.put(KeyStroke.getKeyStroke("control HOME"), "jumpToStartAction");
+        getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("control HOME"), "jumpToStartAction");
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("control HOME"), "jumpToStartAction");
+        am.put("jumpToStartAction", jumpToStartAction);
+        
+        // for jump to End Action (End key)
+        im.put(KeyStroke.getKeyStroke("control END"), "jumpToEndAction");
+        getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("control END"), "jumpToEndAction");
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("control END"), "jumpToEndAction");
+        am.put("jumpToEndAction", jumpToEndAction);       
+                       
+    }
+    
+    
     
     /** initialises the virtual keyboard, the link panel, 
      *  the segmentation panel and the media panel */
@@ -358,11 +926,6 @@ public class PartitureTableWithActions extends PartitureTable
         annotationDialog.setPartitur(this);
 
         ipaPanel = new org.exmaralda.partitureditor.ipapanel.IPADialog(parent, false);
-        
-        /*if (parent instanceof PartiturEditor){
-            quickMediaOpenDialog = new QuickMediaOpenDialog(parent, this, false);    
-            quickMediaOpenDialog.setLocationRelativeTo(parent);
-        }*/
         
         if (parent instanceof PartiturEditor){
             multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);
@@ -926,377 +1489,9 @@ public class PartitureTableWithActions extends PartitureTable
         fireEvent(event);
     }
     
-    // *********************************************************************************** //
-    // ************************ ACTION INITIALISATIONS *********************************** //
-    // *********************************************************************************** //
-    
-    /** initialises Keystrokes for navigation commands */
-    private void initKeystrokes(){
-
-        InputMap im = getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        ActionMap am = getActionMap();        
-        
-        // for jump to Start Action (Pos1 key)
-        im.put(KeyStroke.getKeyStroke("control HOME"), "jumpToStartAction");
-        getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("control HOME"), "jumpToStartAction");
-        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("control HOME"), "jumpToStartAction");
-        am.put("jumpToStartAction", jumpToStartAction);
-        
-        // for jump to End Action (End key)
-        im.put(KeyStroke.getKeyStroke("control END"), "jumpToEndAction");
-        getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("control END"), "jumpToEndAction");
-        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("control END"), "jumpToEndAction");
-        am.put("jumpToEndAction", jumpToEndAction);       
-                       
-        // for audio/video panel actions (function keys)
-        // 15-12-2017 : I guess these better go - the actions are not active in the panel anymore
-        /*im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
-        am.put("F1_Pressed", mediaPanelDialog.playAction);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0),"F2_Pressed");
-        am.put("F2_Pressed", mediaPanelDialog.pauseAction);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0),"F3_Pressed");
-        am.put("F3_Pressed", mediaPanelDialog.stopAction);      
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),"F5_Pressed");
-        am.put("F5_Pressed", mediaPanelDialog.sendStartTimeAction);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0),"F6_Pressed");
-        am.put("F6_Pressed", mediaPanelDialog.sendPositionTimeAction);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0),"F7_Pressed");
-        am.put("F7_Pressed", mediaPanelDialog.sendStopTimeAction);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0),"F11_Pressed");
-        am.put("F11_Pressed", mediaPanelDialog.previousTLIAction);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0),"F12_Pressed");
-        am.put("F12_Pressed", mediaPanelDialog.nextTLIAction);*/
-
-        
-        // for scrolling forwards
-        /*getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke("alt PAGE_DOWN"), "scrollForwardsAction");
-        getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("alt PAGE_DOWN"), "scrollForwardsAction");
-        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("alt PAGE_DOWN"), "scrollForwardsAction");
-        getActionMap().put("scrollForwardsAction", scrollForwardsAction);       */
-        
-        /*this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke("F2"), "scrollBackwardsAction");
-        this.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("F2"), "scrollBackwardsAction");
-        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F2"), "scrollBackwardsAction");
-        this.getActionMap().put("scrollBackwardsAction", scrollBackwardsAction);       */
-    }
-    
  
         
         
-    
-    /** intialises the actions associated with menu items and toolbar buttons */
-    private void initActions(){
-        
-        //*********************************************************************************************
-        //*************************************** FILE ACTIONS ****************************************
-        //*********************************************************************************************
-
-        newAction = new NewAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/New.gif")));
-        newFromWizardAction = new NewFromWizardAction(this, null);
-        newFromSpeakertableAction = new NewFromSpeakertableAction(this, null);
-        newFromTimelineAction = new NewFromTimelineAction(this);
-        newFromSilenceDetectionAction = new NewFromSilenceDetectionAction(this);
-        openAction = new OpenAction(this,new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Open.gif")));               
-        restoreAction = new RestoreAction(this);
-        restoreAutoBackupAction = new RestoreAutoBackupAction(this);
-        saveAction = new SaveAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Save.gif")));
-        saveAsAction = new SaveAsAction (this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SaveAs.gif")));
-
-        editMetaInformationAction = new EditMetaInformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditMetaInformation.gif")));
-        editSpeakertableAction = new EditSpeakertableAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/speakertable.png")));
-        editRecordingsAction = new EditRecordingsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/video-x-generic.png")));
-
-        pageSetupAction = new PageSetupAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/PageSetup.gif")));
-        editPartiturParametersAction = new EditPartiturParametersAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/PageSetup.gif")));
-        printAction = new PrintAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Print.gif")));
-        
-        sendHTMLPartitureToBrowserAction = new SendHTMLPartitureToBrowserAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/apps/internet-web-browser.png")));
-        
-        outputAction = new OutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
-        importAction = new ImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
-        exportAction = new ExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
-        
-        //*********************************************************************************************
-        //*************************************** EDIT ACTIONS ****************************************
-        //*********************************************************************************************
-        
-        undoAction = new UndoAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/edit-undo.png")));
-
-        copyTextAction = new CopyTextAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
-        // new for #338
-        copyHTMLAction = new CopyHTMLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
-        pasteAction = new PasteAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Paste.gif")));
-        cutAction = new CutAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cut.gif")));
-
-        searchInEventsAction = new SearchInEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Search.gif")));
-        findNextAction = new FindNextAction(this);
-        replaceInEventsAction = new ReplaceInEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Replace.gif")));
-        gotoAction = new GotoAction(this);
-        // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-        lowerUpperCaseAction = new LowerUpperCaseAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/upper-and-lower-case-a-letter.png")));
-
-        exaktSearchAction = new ExaktSearchAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")));
-
-        selectionToNewAction = new SelectionToNewAction(this, null);
-        leftPartToNewAction = new LeftPartToNewAction(this, null);
-        rightPartToNewAction = new RightPartToNewAction(this, null);
-        
-        /*selectionToHTMLAction = new SelectionToHTMLAction(this,null);
-        selectionToRTFAction = new SelectionToRTFAction(this,null);
-        printSelectionAction = new PrintSelectionAction(this,null);*/
-
-        editPreferencesAction = new EditPreferencesAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Settings.gif")));
-
-        mergeTranscriptionsAction = new MergeTranscriptionsAction(this, null);
-        glueTranscriptionsAction = new GlueTranscriptionsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Pattex.gif")));
-        chopTranscriptionAction = new ChopTranscriptionAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Chop.gif")));
-        cleanupAction = new CleanupAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cleanup.png")));
-        editErrorsAction = new EditErrorsAction(this);        
-        
-        chopAudioAction = new ChopAudioAction(this);
-        maskAudioAction = new MaskAudioAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/othericons/mask_black.png")));
-        
-        //*********************************************************************************************
-        //*************************************** VIEW ACTIONS ****************************************
-        //*********************************************************************************************
-
-        changeScaleConstantAction = new ChangeScaleConstantAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditScaleConstant.gif")));        
-        showSpecialCharactersAction = new ShowSpecialCharactersAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShowSpecialCharacters.gif")));
-
-        // All other view actions are implemented in menu classes, because
-        // I'm too stupid to connect a JCheckBoxMenuItem with an action
-        
-        //*********************************************************************************************
-        //*********************************** TRANSCRIPTION ACTIONS ***********************************
-        //*********************************************************************************************
-
-        getStructureErrorsAction = new GetStructureErrorsAction(this);
-        calculateTimeAction = new CalculateTimeAction(this);
-        getSegmentationErrorsAction = new GetSegmentationErrorsAction(this);
-        segmentAndSaveTranscriptionAction = new SegmentAndSaveTranscriptionAction(this);
-        countAction = new CountAction(this);
-        wordListAction = new WordlistAction(this);
-        //transformationAction = new TransformationAction(this);
-        transformationAction = new TransformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Transform.gif")));
-        insertUtteranceNumbersAction = new InsertHIATUtteranceNumbersAction(this);
-        autoAnnotationAction = new AutoAnnotationAction(this);
-        addTokenLayerAction = new AddTokenLayerAction(this);
-        
-        //*********************************************************************************************
-        //*************************************** TIER ACTIONS ****************************************
-        //*********************************************************************************************
-
-        editTierAction = new EditTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTier.png")));
-        addTierAction = new AddTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/AddTier.png")));
-        insertTierAction = new InsertTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/InsertTier.png")));
-        removeTierAction = new RemoveTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/RemoveTier.png")));
-        
-        moveTierUpAction = new MoveTierUpAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveTierUp.png")));
-        changeTierOrderAction = new ChangeTierOrderAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ChangeTierOrder.png")));
-        
-        hideTierAction = new HideTierAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/HideTier.png")));
-        showAllTiersAction = new ShowAllTiersAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShowAllTiers.png")));
-        
-        removeEmptyEventsAction = new RemoveEmptyEventsAction(this);
-
-        editTiersAction = new EditTiersAction(this);
-        
-        listEventsAction = new ListEventsAction(this);
-        
-        typesAction = new TypesAction(this);
-        
-        listEventsAction = new ListEventsAction(this);
-
-        //*********************************************************************************************
-        //***************************************** EVENT ACTIONS *************************************
-        //*********************************************************************************************
-
-        shiftRightAction = new ShiftRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShiftRight.png")));
-        shiftLeftAction = new ShiftLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShiftLeft.png")));
-        mergeAction = new MergeAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Merge.png")));
-        splitAction = new SplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Split.png")));
-        doubleSplitAction = new DoubleSplitAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DoubleSplit.png")));
-        deleteEventAction = new DeleteEventAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/DeleteEvent.png")));
-        deleteEventsAction = new DeleteEventsAction(this);
-        extendRightAction = new ExtendRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendRight.png")));
-        extendLeftAction = new ExtendLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExtendLeft.png")));
-        shrinkRightAction = new ShrinkRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShrinkRight.png")));
-        shrinkLeftAction = new ShrinkLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ShrinkLeft.png")));
-        moveRightAction = new MoveRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveRight.png")));
-        moveLeftAction = new MoveLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/MoveLeft.png")));
-        editEventAction = new EditEventAction(this);
-        findNextEventAction = new FindNextEventAction(this);
-        splitLongEventAction = new SplitLongEventAction(this);
-
-        insertPauseAction = new org.exmaralda.partitureditor.partiture.eventActions.InsertPauseAction(this, "Insert pause", new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/QuarterRestSmall.png")));
-
-        // 24-06-2016 MuM-Multi new 
-        moveDownLeftAction = new MoveDownLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-left.png")));
-        moveDownRightAction = new MoveDownRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-right.png")));
-        
-        //*********************************************************************************************
-        //***************************************** TIMELINE ACTIONS **********************************
-        //*********************************************************************************************
-
-        editTimelineItemAction = new EditTimelineItemAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTLI.png")));
-        insertTimelineItemAction = new InsertTimelineItemAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/InsertTLI.png")));
-        anchorTimelineItemAction = new AnchorTimelineAction(this);
-        smoothTimelineAction = new SmoothTimelineAction(this);
-        removeGapAction = new RemoveGapAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/RemoveGap.gif")));
-        removeAllGapsAction = new RemoveAllGapsAction(this);
-        removeUnusedTimelineItemsAction = new RemoveUnusedTimelineItemsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/RemoveUnusedTLI.png")));
-        makeTimelineConsistentAction = new MakeTimelineConsistentAction(this);
-        completeTimelineAction = new CompleteTimelineAction(this);
-        removeInterpolatedTimesAction = new RemoveInterpolatedTimesAction(this);
-        removeTimesAction = new RemoveTimesAction(this);
-        confirmTimelineItemAction = new ConfirmTimelineItemAction(this);
-        shiftAbsoluteTimesAction = new ShiftAbsoluteTimesAction(this);
-        addBookmarkAction = new AddBookmarkAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Bookmark.gif")));
-        bookmarksAction = new BookmarksAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Bookmark.gif")));
-        easyAlignmentAction = new EasyAlignmentAction(this);
-        
-        //*********************************************************************************************
-        //*************************************** FORMAT ACTIONS **************************************
-        //*********************************************************************************************
-
-        reformatAction = new ReformatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Reformat.gif")));
-
-        openTierFormatTableAction = new OpenTierFormatTableAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/OpenTierFormatTable.png")));
-        saveTierFormatTableAction = new SaveTierFormatTableAsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/SaveTierFormatTableAs.png")));
-        applyFormatStylesheetAction = new ApplyFormatStylesheetAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/XSL.png")));
-        editTierFormatTableAction = new EditTierFormatTableAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTierFormatTable.png")));
-        editTierFormatAction = new EditTierFormatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditTierFormat.png")));
-        editRowLabelFormatAction = new EditRowLabelFormatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditRowLabelFormat.png")));
-        editColumnLabelFormatAction = new EditColumnLabelFormatAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/EditColumnLabelFormat.png")));
-        editTimelineItemFormatAction = new EditTimelineItemFormatAction(this);
-
-        setFrameEndAction = new SetFrameEndAction(this);
-
-        underlineAction = new UnderlineAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Underline.gif")));
-        
-        
-        //*********************************************************************************************
-        //*************************************  LEGACY ACTIONS **************************************
-        //*********************************************************************************************
-
-        legacyImportAction = new LegacyImportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Import.gif")));
-        legacyExportAction = new LegacyExportAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Export.gif")));
-        legacyOutputAction = new LegacyOutputAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/x-office-presentation.png")));
-
-        syllableStructureAction = new MakeSyllableStructureTierAction(this);
-        k8MysteryConverterAction = new K8MysteryConverterAction(this);
-        appendSpaceAction = new AppendSpaceAction(this);
-        exSyncCleanupAction = new ExSyncCleanupAction(this);
-        exSyncEventShrinkerAction = new ExSyncEventShrinkerAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExSyncEventShrinker.gif")));
-        
-        importActionInel = new ImportActionInel(this, null);
-
-        stadtspracheWordSegmentationAction = new StadtspracheWordSegmentationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/hamburg.png")));
-        stadtspracheTierSegmentationAction = new StadtspracheTierSegmentationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/hamburg.png")));
-
-
-        //*********************************************************************************************
-        //*************************************  WEBSERVICE ACTIONS ***************************************
-        //*********************************************************************************************
-
-        webMAUSAction = new WebMAUSAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
-        webMAUSFineAlignmentAction = new WebMAUSFineAlignmentAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/maus_24x24.png")));
-        g2pAction = new G2PAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Schwa.png")));
-        webLichtAction = new WebLichtAction(this);
-        deepLAction = new DeepLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/deepl_logo_icon_170284.png")));
-
-        //-------------------------------- NAVIGATION ACTIONS --------------------------------------------------
-
-        jumpToStartAction = new javax.swing.AbstractAction("Jump to start"){
-            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control HOME"));}
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                System.out.println("JumpToStartAction!");
-                commitEdit(true);
-                jumpToStart();
-            }
-        };
-        
-        jumpToEndAction = new javax.swing.AbstractAction("Jump to end"){
-            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control END"));}
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                System.out.println("JumpToEndAction!");
-                commitEdit(true);
-                jumpToEnd();
-            }
-        };
-        
-        scrollForwardsAction = new javax.swing.AbstractAction("Scroll forwards"){
-            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("alt PAGE_DOWN"));}
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                System.out.println("ScrollForwardsAction!");
-                commitEdit(true);
-                scrollForwards();
-            }
-        };
-        
-        scrollBackwardsAction = new javax.swing.AbstractAction("Scroll backwards"){
-            {putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("alt PAGE_DOWN"));}
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                System.out.println("ScrollBackwardsAction!");
-                commitEdit(true);
-                scrollBackwards();
-            }
-        };
-
-        
-        // initial enabling of actions
-        selectionToNewAction.setEnabled(true);
-        
-        undoAction.setEnabled(false);
-        pasteAction.setEnabled(false);
-        cutAction.setEnabled(false);
-        chopAudioAction.setEnabled(false);
-        
-        deleteEventAction.setEnabled(false);
-        deleteEventsAction.setEnabled(false);
-        extendRightAction.setEnabled(false);
-        extendLeftAction.setEnabled(false);
-        shrinkRightAction.setEnabled(false);
-        shrinkLeftAction.setEnabled(false);
-        moveRightAction.setEnabled(false);
-        moveLeftAction.setEnabled(false);
-        shiftRightAction.setEnabled(false);
-        shiftLeftAction.setEnabled(false);
-        mergeAction.setEnabled(false);
-        splitAction.setEnabled(false);
-        doubleSplitAction.setEnabled(false);
-        editEventAction.setEnabled(false);
-        insertPauseAction.setEnabled(false);
-        splitLongEventAction.setEnabled(false);
-        
-        // 24-06-2016 MuM-Multi new 
-        moveDownLeftAction.setEnabled(false);
-        moveDownRightAction.setEnabled(false);
-        
-        
-        insertTimelineItemAction.setEnabled(false);
-        makeTimelineConsistentAction.setEnabled(true);
-        removeUnusedTimelineItemsAction.setEnabled(true);
-        editTimelineItemAction.setEnabled(false);
-        removeGapAction.setEnabled(false);
-        
-        reformatAction.setEnabled(true);
-        editTierAction.setEnabled(false);
-        removeEmptyEventsAction.setEnabled(false);
-        insertTierAction.setEnabled(false);
-        removeTierAction.setEnabled(false);
-        moveTierUpAction.setEnabled(false);
-        hideTierAction.setEnabled(false);
-        showAllTiersAction.setEnabled(true);
-        editTierFormatAction.setEnabled(false);
-        setFrameEndAction.setEnabled(false);
-        underlineAction.setEnabled(false);
-        typesAction.setEnabled(false);
-    }
     
     // *********************************************************************************** //
     // ************************ ACTION METHODS ******************************************* //
@@ -1627,241 +1822,6 @@ public class PartitureTableWithActions extends PartitureTable
         return lastVisibleColumn;
     }
     
-    // --------------------------------------------------------------------------------------------------
-    // Action Declaration
-    // --------------------------------------------------------------------------------------------------
-    
-    /** Action for creating a new transcription file (Menu File --> New) */
-    public javax.swing.AbstractAction newAction;
-    /** Action for creating a new transcription file from a speakertable (Menu File --> New from speakertable)*/
-    public javax.swing.AbstractAction newFromWizardAction;
-    /** Action for creating a new transcription file from a speakertable (Menu File --> New from speakertable)*/
-    public javax.swing.AbstractAction newFromSpeakertableAction;
-    /** Action for creating a new transcription file from a timeline (Menu File --> New from timeline)*/
-    public javax.swing.AbstractAction newFromTimelineAction;
-    /** Action for creating a new transcription file from a silence detection (Menu File --> New from silence detection)*/
-    public javax.swing.AbstractAction newFromSilenceDetectionAction;
-    /** Action for opening an existing transcription file (Menu File --> Open)*/
-    public javax.swing.AbstractAction openAction;
-    /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    
-    public javax.swing.AbstractAction restoreAutoBackupAction;
-    /** Action for restoring the last saved version of the current transcription file (Menu File --> Restore)*/    
-    public javax.swing.AbstractAction restoreAction;
-    /** Action for saving the current transcription file under its current name (Menu File --> Save)*/
-    public javax.swing.AbstractAction saveAction;
-    /** Action for saving the current transcription file under a new name (Menu File --> Save As)*/
-    public javax.swing.AbstractAction saveAsAction;
-       
-    /** Action for editing the page setup for the current transcription */
-    public javax.swing.AbstractAction pageSetupAction;
-    /** Action for sending the current transcription to a printer */
-    public javax.swing.AbstractAction printAction;
-    /** Action for editing the partitur parameters */
-    public javax.swing.AbstractAction editPartiturParametersAction;
-    
-    public javax.swing.AbstractAction sendHTMLPartitureToBrowserAction;
-    /** Action for outputting transcription into some visualisation format */
-    public javax.swing.AbstractAction outputAction;
-    /** Action for importing some 3rd party format to EXMARaLDA */
-    public javax.swing.AbstractAction importAction;
-    public javax.swing.AbstractAction importActionInel;
-    /** Action for exporting the transcription to some 3rd party format */
-    public javax.swing.AbstractAction exportAction;
-    //*******************************************************************
-
-    /* Edit menu actions */
-    public javax.swing.AbstractAction undoAction;
-    /** Action for copying currently selected text to the clipboard */
-    public javax.swing.AbstractAction copyTextAction;
-    /** Action for copying currently selected text to the clipboard as HTML (#338)*/
-    public javax.swing.AbstractAction copyHTMLAction;
-    /** Action for pasting the clipboard at the current cursor position */
-    public javax.swing.AbstractAction pasteAction;
-    /** Action for cutting currently selected text to the clipboard */
-    public javax.swing.AbstractAction cutAction;
-
-    public javax.swing.AbstractAction searchInEventsAction;
-    public javax.swing.AbstractAction findNextAction;
-    public javax.swing.AbstractAction replaceInEventsAction;
-    public javax.swing.AbstractAction gotoAction;
-    // #274
-    public javax.swing.AbstractAction lowerUpperCaseAction;
-
-    public javax.swing.AbstractAction exaktSearchAction;    
-    
-    public javax.swing.AbstractAction selectionToNewAction;
-    public javax.swing.AbstractAction leftPartToNewAction;
-    public javax.swing.AbstractAction rightPartToNewAction;
-    /*public javax.swing.AbstractAction selectionToHTMLAction;
-    public javax.swing.AbstractAction selectionToRTFAction;
-    public javax.swing.AbstractAction printSelectionAction;*/
-    
-    public javax.swing.AbstractAction glueTranscriptionsAction;
-    public javax.swing.AbstractAction mergeTranscriptionsAction;
-    public javax.swing.AbstractAction chopTranscriptionAction;
-    public javax.swing.AbstractAction cleanupAction;
-    public javax.swing.AbstractAction editErrorsAction;
-
-    public javax.swing.AbstractAction chopAudioAction;
-    public javax.swing.AbstractAction maskAudioAction;
-
-    public javax.swing.AbstractAction editPreferencesAction;
-
-    //*******************************************************************
-
-    /* View menu actions */
-    public javax.swing.AbstractAction showHideGridAction;
-    public javax.swing.AbstractAction changeScaleConstantAction;
-    public javax.swing.AbstractAction showSpecialCharactersAction;
-
-    //*******************************************************************
-
-    /* Transcription menu actions */
-
-    /** Action for editing the meta information of the current transcription (Menu File --> Meta information)*/
-    public javax.swing.AbstractAction editMetaInformationAction;
-    /** Action for editing the speakertable of the current transcription (Menu File --> Speakertable) */
-    public javax.swing.AbstractAction editSpeakertableAction;
-    /** Action for editing the recordings of the current transcription (Menu File --> Recordings) */
-    public javax.swing.AbstractAction editRecordingsAction;
-
-    public javax.swing.AbstractAction getStructureErrorsAction;
-    public javax.swing.AbstractAction calculateTimeAction;
-    public javax.swing.AbstractAction getSegmentationErrorsAction;
-    public javax.swing.AbstractAction segmentAndSaveTranscriptionAction;
-    public javax.swing.AbstractAction countAction;
-    public javax.swing.AbstractAction wordListAction;
-    public javax.swing.AbstractAction transformationAction;
-    public javax.swing.AbstractAction autoAnnotationAction;
-    public javax.swing.AbstractAction insertUtteranceNumbersAction;
-    public javax.swing.AbstractAction addTokenLayerAction;
-
-    
-    //*******************************************************************
-
-    /* Tier menu actions */
-    
-    public javax.swing.AbstractAction editTierAction;
-    public javax.swing.AbstractAction addTierAction;
-    public javax.swing.AbstractAction insertTierAction;
-    public javax.swing.AbstractAction removeTierAction;
-    public javax.swing.AbstractAction moveTierUpAction;
-    public javax.swing.AbstractAction changeTierOrderAction;
-    public javax.swing.AbstractAction hideTierAction;
-    public javax.swing.AbstractAction showAllTiersAction;
-    public javax.swing.AbstractAction removeEmptyEventsAction;
-    public javax.swing.AbstractAction editTiersAction;
-    public javax.swing.AbstractAction listEventsAction; // issue #316
-    public javax.swing.AbstractAction typesAction; // issue #295
-
-    //*******************************************************************
-
-    /* Event menu actions */
-    
-    public javax.swing.AbstractAction deleteEventAction;
-    public javax.swing.AbstractAction deleteEventsAction;
-
-    public javax.swing.AbstractAction extendRightAction;
-    public javax.swing.AbstractAction extendLeftAction;
-    public javax.swing.AbstractAction shrinkRightAction;
-    public javax.swing.AbstractAction shrinkLeftAction;
-    public javax.swing.AbstractAction moveRightAction;
-    public javax.swing.AbstractAction moveLeftAction;
-    public javax.swing.AbstractAction shiftRightAction;
-    public javax.swing.AbstractAction shiftLeftAction;
-    public javax.swing.AbstractAction mergeAction;
-    public javax.swing.AbstractAction splitAction;
-    public javax.swing.AbstractAction doubleSplitAction;
-    public javax.swing.AbstractAction editEventAction;
-    public javax.swing.AbstractAction findNextEventAction;
-    public javax.swing.AbstractAction splitLongEventAction;
-
-    public javax.swing.AbstractAction insertPauseAction;
-    
-    // 24-06-2016 MuM-Multi new 
-    public javax.swing.AbstractAction moveDownLeftAction;
-    public javax.swing.AbstractAction moveDownRightAction;
-    
-
-
-    //*******************************************************************
-
-    /* Timeline menu actions */
-    
-    public javax.swing.AbstractAction editTimelineItemAction;
-    public javax.swing.AbstractAction insertTimelineItemAction;
-    public javax.swing.AbstractAction anchorTimelineItemAction;
-    public javax.swing.AbstractAction smoothTimelineAction;
-    public javax.swing.AbstractAction removeGapAction;
-    public javax.swing.AbstractAction removeAllGapsAction;
-    public javax.swing.AbstractAction removeUnusedTimelineItemsAction;
-    public javax.swing.AbstractAction makeTimelineConsistentAction;
-    public javax.swing.AbstractAction completeTimelineAction;
-    public javax.swing.AbstractAction removeInterpolatedTimesAction;
-    public javax.swing.AbstractAction removeTimesAction;
-    public javax.swing.AbstractAction confirmTimelineItemAction;
-    public javax.swing.AbstractAction shiftAbsoluteTimesAction;
-    public javax.swing.AbstractAction addBookmarkAction;
-    public javax.swing.AbstractAction bookmarksAction;
-    public javax.swing.AbstractAction easyAlignmentAction;
-
-    //*******************************************************************
-
-    /* Format menu actions */
-
-    public javax.swing.AbstractAction reformatAction;
-
-    public javax.swing.AbstractAction openTierFormatTableAction;
-    public javax.swing.AbstractAction saveTierFormatTableAction;
-    public javax.swing.AbstractAction applyFormatStylesheetAction;    
-    public javax.swing.AbstractAction editTierFormatTableAction;
-    public javax.swing.AbstractAction editTierFormatAction;
-    public javax.swing.AbstractAction editRowLabelFormatAction;
-    public javax.swing.AbstractAction editColumnLabelFormatAction;
-    public javax.swing.AbstractAction editTimelineItemFormatAction;
-
-    public javax.swing.AbstractAction setFrameEndAction;
-
-    public javax.swing.AbstractAction underlineAction;
-    
-    //*******************************************************************
-    //*******************************************************************
-    //*******************************************************************
-    /* Legacy menu actions */
-    
-    /* File */
-    public javax.swing.AbstractAction legacyImportAction;
-    public javax.swing.AbstractAction legacyExportAction;
-    public javax.swing.AbstractAction legacyOutputAction;
-
-    /* SFB 538 */
-    public javax.swing.AbstractAction syllableStructureAction;
-    public javax.swing.AbstractAction k8MysteryConverterAction;
-    public javax.swing.AbstractAction exSyncEventShrinkerAction;
-    public javax.swing.AbstractAction exSyncCleanupAction;
-    /* SFB 632 */
-    public javax.swing.AbstractAction appendSpaceAction;
-    
-    /* SiN */
-    public javax.swing.AbstractAction stadtspracheWordSegmentationAction;
-    public javax.swing.AbstractAction stadtspracheTierSegmentationAction;
-    
-    
-    
-    /* Web Services */
-    public javax.swing.AbstractAction webMAUSAction;
-    public javax.swing.AbstractAction webMAUSFineAlignmentAction;
-    public javax.swing.AbstractAction g2pAction;
-    public javax.swing.AbstractAction webLichtAction; 
-    public javax.swing.AbstractAction deepLAction; 
-    
-    //*******************************************************************
-
-    /* Navigation actions */
-    public javax.swing.AbstractAction jumpToStartAction;
-    public javax.swing.AbstractAction jumpToEndAction;
-    public javax.swing.AbstractAction scrollForwardsAction;
-    public javax.swing.AbstractAction scrollBackwardsAction;
     
     /** locks or unlocks the partitur 
      *  i.e. makes it uneditable or editable */

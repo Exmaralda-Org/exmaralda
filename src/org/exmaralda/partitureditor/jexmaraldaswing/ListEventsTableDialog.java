@@ -87,6 +87,17 @@ public class ListEventsTableDialog extends javax.swing.JDialog implements JCTabl
                 }, 
                 stroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
         
+        KeyStroke playKeystroke
+            = KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.CTRL_DOWN_MASK);
+        getRootPane().registerKeyboardAction(
+                new ActionListener() {     
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        playButtonActionPerformed(actionEvent);
+                    }
+                }, 
+                playKeystroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
+        
         eventTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent e) {

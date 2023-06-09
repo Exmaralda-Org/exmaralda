@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ExmaraldaFileFilter;
 
 /**
@@ -25,6 +24,8 @@ public class MergeDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form MergeDialog
+     * @param parent
+     * @param modal
      */
     public MergeDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

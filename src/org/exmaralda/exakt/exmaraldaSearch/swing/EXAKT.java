@@ -979,6 +979,7 @@ public class EXAKT extends javax.swing.JFrame
         }
         final COMACorpusInterface finalCorpus = corpus;
         final Runnable doUpdateWordListList = new Runnable() {
+             @Override
              public void run() {
                  updateWordListList();
              }

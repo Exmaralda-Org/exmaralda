@@ -15,6 +15,8 @@ public class LowerUpperCaseDialog extends javax.swing.JDialog {
     
     /**
      * Creates new form LowerUpperCaseDialog
+     * @param parent
+     * @param modal
      */
     public LowerUpperCaseDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

@@ -307,6 +307,7 @@ public class PartiturEditor extends javax.swing.JFrame
                         BasicTranscription bt = new BasicTranscription(filepath);
                         //BasicTranscription bt = new BasicTranscription(args[0]);
                         pe.table.stratify(bt);
+                        // 08-06-2023 : new for #398
                         pe.table.getModel().setTranscription(bt);
                         pe.table.setFilename(args[0]);
                         pe.table.setupMedia();
@@ -337,12 +338,9 @@ public class PartiturEditor extends javax.swing.JFrame
                 exitForm(null);
             }
         };
-        //String os = System.getProperty("os.name").substring(0,3);
-        //if (!(os.equalsIgnoreCase("mac"))) {
-            menuBar.fileMenu.addSeparator();
-            exitMenuItem = menuBar.fileMenu.add(this.exitAction);
-            exitMenuItem.setToolTipText("Programm beenden");
-        //}
+        menuBar.fileMenu.addSeparator();
+        exitMenuItem = menuBar.fileMenu.add(this.exitAction);
+        exitMenuItem.setToolTipText("Programm beenden");
     }
     
    /** listener method for the EXAKT search dialog
@@ -704,21 +702,6 @@ public class PartiturEditor extends javax.swing.JFrame
     }
     
     void registerKeyStrokes(){
-        //InputMap im = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        //ActionMap am = getRootPane().getActionMap();
-        
-        //
-        // 15-12-2017 : issue #113 - these three bindings should go
-        // since the respective buttons are disabled and invisible
-        /*im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),"F1_Pressed");
-        am.put("F1_Pressed", table.mediaPanelDialog.playAction);
-
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0),"F2_Pressed");
-        am.put("F2_Pressed", table.mediaPanelDialog.pauseAction);
-
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0),"F3_Pressed");
-        am.put("F3_Pressed", table.mediaPanelDialog.stopAction);*/
-        // **
 
         Object[][] generalAssignments = {
             {"control SPACE", "playSelection", controller.playSelectionAction},
@@ -829,78 +812,6 @@ public class PartiturEditor extends javax.swing.JFrame
     }
 
 
-    /** added 09-06-2009: replaces older mac app handler in inner class
-     * @param proportional */
-    /*private void setupMacOSXApplicationListener() {
-        //final com.apple.eawt.Application application = com.apple.eawt.Application.getApplication();
-        
-        application.setEnabledAboutMenu(true); // damit ein "Ueber " Menue erscheint
-        application.addPreferencesMenuItem(); // "Einstellen..." Dialog
-        application.setEnabledPreferencesMenu(true); // diesen Dialog auch
-        application.addApplicationListener(new com.apple.eawt.ApplicationListener() {
-
-            @Override
-            public void handleAbout(com.apple.eawt.ApplicationEvent ae) {
-                about();
-                ae.setHandled(true); // habe fertig...
-            }
-
-                // app wird ueber den finder geoeffnet. wie auch sonst.
-                // (lies: total unnütz!)
-            @Override
-            public void handleOpenApplication(ApplicationEvent ae) {
-            }
-
-            @Override
-            public void handlePreferences(ApplicationEvent ae) {
-                handlePrefs();
-                ae.setHandled(true);
-            }
-
-            @Override
-            public void handlePrintFile(ApplicationEvent ae) {
-                System.out.println("Drucken?!");
-                table.printAction.actionPerformed(null);
-                ae.setHandled(true);
-            }
-
-            @Override
-            public void handleQuit(ApplicationEvent ae) {
-                boolean reallyQuit = exit();
-                ae.setHandled(reallyQuit); // da wird wohl nichts mehr draus!
-            }
-
-            // coma laeuft bereits und jemand startet es nochmal
-            @Override
-            public void handleReOpenApplication(ApplicationEvent ae) {
-                System.out.println("Laeuft schon");
-                // will ich mehrere instanzen? nein
-                //JOptionPane.showMessageDialog(new JFrame(), "You already have an instance\nof the EXMARaLDA Partitur-Editor running.");
-                ae.setHandled(true);
-            }
-
-            // anwendung laeuft schon, dokument wird ueber den finder geoeffnet
-            @Override
-            public void handleOpenFile(ApplicationEvent ae) {
-                try{
-                    boolean proceed = true;
-                    if (table.transcriptionChanged){
-                        proceed = table.checkSave();
-                    }
-                    if (!proceed) return;
-                    BasicTranscription bt = new BasicTranscription(ae.getFilename());
-                    table.getModel().setTranscription(bt);
-                    table.setFilename(ae.getFilename());
-                    table.setupMedia();
-                    table.homeDirectory = ae.getFilename();
-                    //pe.table.transcriptionChanged = true;
-                } catch (Exception e){
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(table.getTopLevelAncestor(), e.getLocalizedMessage());
-                }
-            }
-          });
-	}*/
 
     public void setTimeViewBuffer(boolean proportional) {
         if (proportional){
@@ -921,36 +832,3 @@ public class PartiturEditor extends javax.swing.JFrame
 
 }
 
-/*class MacSpecials implements com.apple.mrj.MRJQuitHandler, com.apple.mrj.MRJPrefsHandler, com.apple.mrj.MRJAboutHandler {
-
-    PartiturEditor pe;
-
-    public MacSpecials(PartiturEditor theEditor) {
-		pe = theEditor;
-		// Set up the Application Menu
-		com.apple.mrj.MRJApplicationUtils.registerAboutHandler(this);
-		com.apple.mrj.MRJApplicationUtils.registerPrefsHandler(this);
-		com.apple.mrj.MRJApplicationUtils.registerQuitHandler(this);
-	}
-	
-    @Override
-    public void handleAbout() {
-		pe.about();
-	}
-	
-    @Override
-    public void handlePrefs() {
-        pe.handlePrefs();                
-	}
-	
-    @Override
-    public void handleQuit() {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                     pe.exit();
-                }
-            });
-            throw new IllegalStateException("Let the quit handler do it");
-	}
-}*/
