@@ -4,9 +4,9 @@
  */
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
-import com.klg.jclass.table.JCTableDataEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
@@ -25,6 +25,8 @@ public class ListEventsTableModel extends AbstractTableModel {
     BasicTranscription transcription;
     Tier tier;
     int row;
+    
+    JTable theTable;
 
     public ListEventsTableModel(BasicTranscription transcription, Tier tier, int row) {
         this.transcription = transcription;
@@ -40,7 +42,7 @@ public class ListEventsTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -48,13 +50,14 @@ public class ListEventsTableModel extends AbstractTableModel {
         try {
             Event event = tier.getEventAt(row);
             switch(column){
-                case 0 : return transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getStart()).getTime();
-                case 1 : return transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getEnd()).getTime();
-                case 2 : 
+                case 0 : return theTable.getRowSorter().convertRowIndexToView(row) + 1;
+                case 1 : return transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getStart()).getTime();
+                case 2 : return transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getEnd()).getTime();
+                case 3 : 
                     double duration = transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getEnd()).getTime()
                             - transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getStart()).getTime();
                     return duration;
-                case 3 : return event.getDescription();
+                case 4 : return event.getDescription();
             }
         } catch (JexmaraldaException ex) {
             Logger.getLogger(ListEventsTableModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,10 +68,11 @@ public class ListEventsTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         switch(columnIndex){
-            case 0 : return "Start";
-            case 1 : return "End";
-            case 2 : return "Length";
-            case 3 : return "Description";
+            case 0 : return "";
+            case 1 : return "Start";
+            case 2 : return "End";
+            case 3 : return "Length";
+            case 4 : return "Description";
         }
         return null;
     }
@@ -79,17 +83,18 @@ public class ListEventsTableModel extends AbstractTableModel {
             return Object.class;
         }
         switch(columnIndex){
-            case 0 : return Double.class;
+            case 0 : return Integer.class;
             case 1 : return Double.class;
             case 2 : return Double.class;
-            case 3 : return String.class;
+            case 3 : return Double.class;
+            case 4 : return String.class;
         }
         return Object.class;
     }    
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (columnIndex==3); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return (columnIndex==4); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override

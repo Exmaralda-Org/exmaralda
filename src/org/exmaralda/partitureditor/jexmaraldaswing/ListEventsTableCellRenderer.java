@@ -31,26 +31,47 @@ public class ListEventsTableCellRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (column==0 || column==1){
-            if (column==0) {
-                c.setForeground(Color.GREEN.darker().darker());
-            } else if (column==1) {
-                c.setForeground(Color.RED);
-            }
-            double dValue = (double)value;
-            String timeString = TimeStringFormatter.formatSeconds(dValue, true, 2);
-            ((JLabel)c).setText(timeString);
-        } else if (column==2){
-            c.setForeground(Color.BLUE);
-            double dValue = (double)value;
-            String formatted = df.format(dValue);
-            ((JLabel)c).setText(formatted);
+        switch (column) {
+            case 0:
+                {
+                    c.setForeground(Color.WHITE);
+                    c.setBackground(Color.DARK_GRAY);
+                    c.setFont(c.getFont().deriveFont(9.0f));
+                    int iValue = (int)value;
+                    String formatted = String.format("%04d", iValue);
+                    ((JLabel)c).setText(formatted);
+                    break;
+                }
+            case 1:
+            case 2:
+                {
+                    if (column==1) {
+                        c.setForeground(Color.GREEN.darker().darker());
+                    } else if (column==2) {
+                        c.setForeground(Color.RED);
+                    }       double dValue = (double)value;
+                    String timeString = TimeStringFormatter.formatSeconds(dValue, true, 2);
+                    ((JLabel)c).setText(timeString);
+                    break;
+                }
+            case 3:
+                {
+                    c.setForeground(Color.BLUE);
+                    double dValue = (double)value;
+                    String formatted = df.format(dValue);
+                    ((JLabel)c).setText(formatted);
+                    break;
+                }
+            default:
+                break;
         }
         
-        if (row%2==0 && !(isSelected)){
-            c.setBackground(STRIPED_COLOR);
-        } else {
-            c.setBackground(Color.WHITE);
+        if (column>0 && (!isSelected)){
+            if (row%2==0){
+                c.setBackground(STRIPED_COLOR);
+            } else {
+                c.setBackground(Color.WHITE);
+            }
         }
         
         return c;
