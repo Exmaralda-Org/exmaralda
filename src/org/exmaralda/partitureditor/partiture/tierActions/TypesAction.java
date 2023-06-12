@@ -39,9 +39,13 @@ public class TypesAction extends org.exmaralda.partitureditor.partiture.Abstract
     private void types(){
         int row = table.selectionStartRow;
         Tier tier = table.getModel().getTranscription().getBody().getTierAt(row);
-        String[] options = {"For the currently selected tier", "For all tiers with category '" + tier.getCategory() + "'"};
-        int optionChosen = JOptionPane.showOptionDialog(table, "For which tier(s) do you want to calculate types?", 
-                "Options for type calculation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        int tiersInThatCategory = table.getModel().getTranscription().getBody().getTiersOfCategory(tier.getCategory()).length;
+        int optionChosen = 0;
+        if (tiersInThatCategory > 1){
+            String[] options = {"For the currently selected tier", "For all " + Integer.toString(tiersInThatCategory) + " tiers with category '" + tier.getCategory() + "'"};
+            optionChosen = JOptionPane.showOptionDialog(table, "For which tier(s) do you want to calculate types?", 
+                    "Options for type calculation", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        }
         Map<String, Integer> typesTable = tier.getTypesTable();
         if (optionChosen==1){
             for (int pos=0; pos<table.getModel().getTranscription().getBody().getNumberOfTiers(); pos++){
