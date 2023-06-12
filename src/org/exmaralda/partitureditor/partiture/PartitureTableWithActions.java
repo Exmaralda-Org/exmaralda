@@ -2522,12 +2522,19 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
     
-    /** processes a request from the replace dialog to replace all found instances
-     * @param resultVector
-     * @param searchString
-     * @param replaceString */
+    // changed for issue #399
     @Override
     public void processReplaceAll(Vector resultVector, String searchString, String replaceString) {
+        processReplaceAll(resultVector, searchString, replaceString, false);
+    }
+
+        /** processes a request from the replace dialog to replace all found instances
+     * @param resultVector
+     * @param searchString
+     * @param replaceString
+     * @param regex */
+    @Override
+    public void processReplaceAll(Vector resultVector, String searchString, String replaceString, boolean regex) {
         if (undoEnabled){
             UndoInformation undoInfo = new UndoInformation(this, "Replace all");
             undoInfo.memorizeTranscription(this);
@@ -2555,22 +2562,18 @@ public class PartitureTableWithActions extends PartitureTable
                 Tier tier = getModel().getTranscription().getBody().getTierWithID(esr.tierID);
                 Event event = tier.getEventAtStartPoint(esr.event.getStart());
                 String desc = event.getDescription();
-                String newDesc = desc.replaceAll("\\Q" + searchString + "\\E", replaceString);
-                event.setDescription(newDesc);
-                /*int index = 0;
-                while (desc.indexOf(searchString, index)!=-1){
-                    index = desc.indexOf(searchString, index);
-                    String before = desc.substring(0,index);
-                    String after = desc.substring(index + searchString.length());
-                    String newDescription = before + replaceString + after;
-                    index+=replaceString.length();      
-                    event.setDescription(newDescription);
-                    desc = newDescription;
-                }*/
+                if (!regex){
+                    String newDesc = desc.replaceAll("\\Q" + searchString + "\\E", replaceString);
+                    event.setDescription(newDesc);
+                } else {                    
+                    String newDesc = desc.replaceAll(searchString, replaceString);
+                    event.setDescription(newDesc);                    
+                }
             } catch (JexmaraldaException je){
             }
         }
         getModel().fireFormatReset();
+        transcriptionChanged = true;
     }
     
     /** starts the auto save thread */

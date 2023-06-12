@@ -145,6 +145,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
         searchAreaLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         caseSensitiveCheckBox = new javax.swing.JCheckBox();
+        regexCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         searchButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -272,6 +273,14 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
         caseSensitiveCheckBox.setSelected(true);
         caseSensitiveCheckBox.setText("Case sensitive search");
         jPanel1.add(caseSensitiveCheckBox);
+
+        regexCheckBox.setText("Regular expression search");
+        regexCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regexCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(regexCheckBox);
         jPanel1.add(jPanel2);
 
         searchButton.setText("Search");
@@ -327,7 +336,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
         // Add your handling code here:
         if (searchStringTextField.getText().length()<=0) return;
         try{
-            resultVector = EventSearcher.search(searchStringTextField.getText(), transcription, searchArea, caseSensitiveCheckBox.isSelected());
+            resultVector = EventSearcher.search(searchStringTextField.getText(), transcription, searchArea, caseSensitiveCheckBox.isSelected(), this.regexCheckBox.isSelected());
             refreshResultList(resultVector);
         } catch (JexmaraldaException je){
             JOptionPane.showMessageDialog(this, "Jexmaralda Exception" + System.getProperty("line.separator") + je.getMessage());
@@ -357,6 +366,10 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         searchStringTextField.selectAll();
     }//GEN-LAST:event_formComponentShown
+
+    private void regexCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regexCheckBoxActionPerformed
+        this.caseSensitiveCheckBox.setEnabled(!(this.regexCheckBox.isSelected()));
+    }//GEN-LAST:event_regexCheckBoxActionPerformed
     
     /**
      * @param args the command line arguments
@@ -378,6 +391,7 @@ public class FindDialog extends javax.swing.JDialog /*implements java.awt.event.
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel keyboardPanelPanel;
     private javax.swing.JButton nextButton;
+    private javax.swing.JCheckBox regexCheckBox;
     private javax.swing.JPanel resultButtonPanel;
     private javax.swing.JList resultList;
     private javax.swing.JPanel resultPanel;

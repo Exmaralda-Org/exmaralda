@@ -23,10 +23,12 @@ public class EditRowLabelFormatAction extends org.exmaralda.partitureditor.parti
         super("Format tier labels...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editRowLabelFormatAction!");
         table.commitEdit(true);
         formatRowLabel();        
+        table.saveTierFormatTable = true;        
     }
     
     private void formatRowLabel(){

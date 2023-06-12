@@ -21,10 +21,13 @@ public class OpenTierFormatTableAction extends org.exmaralda.partitureditor.part
         super("Open format table...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("openTierFormatTableAction!");
         table.commitEdit(true);
-        openTierFormatTable();        
+        openTierFormatTable();       
+        table.saveTierFormatTable = true;
+        
     }
     
     private void openTierFormatTable(){

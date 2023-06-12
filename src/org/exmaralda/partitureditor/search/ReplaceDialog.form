@@ -221,6 +221,11 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
+            <Component class="javax.swing.JCheckBox" name="regexCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Regular expression search"/>
+              </Properties>
+            </Component>
             <Container class="javax.swing.JPanel" name="jPanel2">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>

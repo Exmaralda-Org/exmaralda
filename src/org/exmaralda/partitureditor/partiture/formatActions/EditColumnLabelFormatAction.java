@@ -23,10 +23,12 @@ public class EditColumnLabelFormatAction extends org.exmaralda.partitureditor.pa
         super("Format timeline...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editColumnLabelFormatAction!");
         table.commitEdit(true);
         formatColumnLabel();        
+        table.saveTierFormatTable = true;        
     }
     
     private void formatColumnLabel(){

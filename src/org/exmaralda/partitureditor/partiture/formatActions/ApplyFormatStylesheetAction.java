@@ -26,10 +26,12 @@ public class ApplyFormatStylesheetAction extends org.exmaralda.partitureditor.pa
         super("Apply stylesheet", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("applyFormatStylesheetAction!");
         table.commitEdit(true);
-        applyStylesheet();                
+        applyStylesheet();   
+        table.saveTierFormatTable = true;
     }
     
     private void applyStylesheet(){

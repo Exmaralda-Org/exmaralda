@@ -22,10 +22,13 @@ public class EditTimelineItemFormatAction extends org.exmaralda.partitureditor.p
         super("Format timeline items...", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("EditTimelineItemFormatAction!");
         table.commitEdit(true);
         editTimelineItemFormat();        
+        table.saveTierFormatTable = true;
+        
     }
     
     private void editTimelineItemFormat(){

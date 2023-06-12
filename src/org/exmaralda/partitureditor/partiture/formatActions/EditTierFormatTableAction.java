@@ -24,10 +24,12 @@ public class EditTierFormatTableAction extends org.exmaralda.partitureditor.part
         super("Edit format table...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editTierFormatTableAction!");
         table.commitEdit(true);
         editTierFormatTable();        
+        table.saveTierFormatTable = true;        
     }
     
     private void editTierFormatTable(){

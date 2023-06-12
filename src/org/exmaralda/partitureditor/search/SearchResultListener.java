@@ -19,5 +19,7 @@ public interface SearchResultListener extends java.util.EventListener {
     public void processReplaceResult(EventSearchResult esr, String replaceString);
     
     public void processReplaceAll(Vector resultVector, String searchString, String replaceString);
+
+    public void processReplaceAll(Vector resultVector, String searchString, String replaceString, boolean regex);
     
 }

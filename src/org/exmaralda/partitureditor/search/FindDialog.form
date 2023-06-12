@@ -229,6 +229,14 @@
                 <Property name="text" type="java.lang.String" value="Case sensitive search"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JCheckBox" name="regexCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Regular expression search"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regexCheckBoxActionPerformed"/>
+              </Events>
+            </Component>
             <Container class="javax.swing.JPanel" name="jPanel2">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>

@@ -21,10 +21,12 @@ public class EditTierFormatAction extends org.exmaralda.partitureditor.partiture
         //putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control F"));        
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editTierFormatAction!");
         table.commitEdit(true);
-        formatTier();        
+        formatTier();   
+        table.saveTierFormatTable = true;        
     }
     
     private void formatTier(){

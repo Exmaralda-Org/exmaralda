@@ -124,6 +124,7 @@ public class ReplaceDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         searchAreaLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        regexCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         searchButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -245,6 +246,8 @@ public class ReplaceDialog extends javax.swing.JDialog {
 
         searchParametersPanel.add(searchAreaPanel);
 
+        regexCheckBox.setText("Regular expression search");
+        jPanel1.add(regexCheckBox);
         jPanel1.add(jPanel2);
 
         searchButton.setText("Search");
@@ -284,7 +287,7 @@ public class ReplaceDialog extends javax.swing.JDialog {
     private void replaceAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replaceAllButtonActionPerformed
         if (searchStringTextField.getText().length()<=0) return;
         try{
-            resultVector = EventSearcher.search(searchStringTextField.getText(), transcription, searchArea, true);
+            resultVector = EventSearcher.search(searchStringTextField.getText(), transcription, searchArea, true, regexCheckBox.isSelected());
             int noItems = resultVector.size();
             refreshResultList(new Vector());
             fireReplaceAll(resultVector, searchStringTextField.getText(), replaceStringTextField.getText());
@@ -338,10 +341,9 @@ public class ReplaceDialog extends javax.swing.JDialog {
         // Add your handling code here:
         if (searchStringTextField.getText().length()<=0) return;
         try{
-            resultVector = EventSearcher.search(searchStringTextField.getText(), transcription, searchArea, true);
+            resultVector = EventSearcher.search(searchStringTextField.getText(), transcription, searchArea, true, regexCheckBox.isSelected());
             refreshResultList(resultVector);
         } catch (JexmaraldaException je){
-            javax.swing.JOptionPane errorDialog = new javax.swing.JOptionPane();
             JOptionPane.showMessageDialog(this, "Jexmaralda Exception" + System.getProperty("line.separator") + je.getMessage());
         }
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -380,6 +382,7 @@ public class ReplaceDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JCheckBox regexCheckBox;
     private javax.swing.JButton replaceAllButton;
     private javax.swing.JButton replaceButton;
     private javax.swing.JLabel replaceStringLabel;
@@ -398,7 +401,7 @@ public class ReplaceDialog extends javax.swing.JDialog {
 
     private void refreshResultList(Vector result){
         resultList.setListData(result);
-        if (result.size()>0){
+        if (!result.isEmpty()){
             resultList.setSelectedIndex(0);
             replaceButton.setEnabled(true);
             gotoButton.setEnabled(true);
@@ -457,7 +460,7 @@ public class ReplaceDialog extends javax.swing.JDialog {
         // those that are interested in this event
         for (int i = listeners.length-2; i>=0; i-=2) {
              if (listeners[i]==SearchResultListener.class) {                
-                ((SearchResultListener)listeners[i+1]).processReplaceAll(resultVector, searchString, replaceString);             
+                ((SearchResultListener)listeners[i+1]).processReplaceAll(resultVector, searchString, replaceString, regexCheckBox.isSelected());             
             }
          }
     }

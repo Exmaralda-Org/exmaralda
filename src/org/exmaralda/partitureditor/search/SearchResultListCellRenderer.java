@@ -42,7 +42,7 @@ public class SearchResultListCellRenderer implements ListCellRenderer {
          // 07-05-2023 issue #127
          // check if the offset is valid
          // if not add an error label and return
-         if (esr.event.getDescription().length()<=esr.offset + esr.length){
+         if (esr.event.getDescription().length()<esr.offset + esr.length){
              JLabel errorLabel = new JLabel();
             errorLabel.setFont(arialUnicodeMS);
             errorLabel.setForeground(java.awt.Color.white);
