@@ -2493,6 +2493,7 @@ public class PartitureTableWithActions extends PartitureTable
             setLeftColumn(colNo-1);
         }
         setSelectedCells(new JCCellRange(rowNo, colNo, rowNo, colNo));
+        this.requestFocus();
     }
     
     /** processes a replace result from the replace dialog
