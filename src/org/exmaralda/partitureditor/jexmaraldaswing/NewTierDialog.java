@@ -83,7 +83,7 @@ public class NewTierDialog extends JEscapeDialog {
         
         initComponents ();
         this.getRootPane().setDefaultButton(okButton);        
-        categoryTextField.setVisible(false);
+        //categoryTextField.setVisible(false);
         categoryComboBox.setSelectedItem("v");        
         pack ();
         
@@ -128,7 +128,6 @@ public class NewTierDialog extends JEscapeDialog {
         typeComboBox.setSelectedIndex(0);
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        categoryTextField = new javax.swing.JTextField();
         categoryComboBox = new javax.swing.JComboBox(categoriesComboBoxModel);
         jPanel6 = new javax.swing.JPanel();
         copyTierCheckBox = new javax.swing.JCheckBox();
@@ -238,20 +237,19 @@ public class NewTierDialog extends JEscapeDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(80, 20));
         jPanel5.add(jLabel4);
 
-        categoryTextField.setText("v");
-        categoryTextField.setMaximumSize(new java.awt.Dimension(100, 27));
-        categoryTextField.setMinimumSize(new java.awt.Dimension(50, 20));
-        categoryTextField.setPreferredSize(new java.awt.Dimension(100, 27));
-        jPanel5.add(categoryTextField);
-
         categoryComboBox.setEditable(true);
         categoryComboBox.setToolTipText("Enter category or choose from existing");
-        categoryComboBox.setMaximumSize(new java.awt.Dimension(123, 27));
+        categoryComboBox.setMaximumSize(new java.awt.Dimension(200, 27));
         categoryComboBox.setMinimumSize(new java.awt.Dimension(123, 27));
-        categoryComboBox.setPreferredSize(new java.awt.Dimension(123, 27));
+        categoryComboBox.setPreferredSize(new java.awt.Dimension(150, 27));
         categoryComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 categoryComboBoxFocusGained(evt);
+            }
+        });
+        categoryComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryComboBoxActionPerformed(evt);
             }
         });
         jPanel5.add(categoryComboBox);
@@ -388,12 +386,16 @@ public class NewTierDialog extends JEscapeDialog {
     }//GEN-LAST:event_typeComboBoxActionPerformed
 
     private void categoryComboBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_categoryComboBoxFocusGained
-        Object source = evt.getSource();
+        /*Object source = evt.getSource();
            if (source instanceof JTextComponent) {
                JTextComponent comp = (JTextComponent) source;
                comp.selectAll();
-           } 
+           } */
     }//GEN-LAST:event_categoryComboBoxFocusGained
+
+    private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryComboBoxActionPerformed
 
     /**
     * @param args the command line arguments
@@ -407,7 +409,6 @@ public class NewTierDialog extends JEscapeDialog {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox categoryComboBox;
-    private javax.swing.JTextField categoryTextField;
     private javax.swing.JCheckBox copyTextCheckBox;
     private javax.swing.JCheckBox copyTierCheckBox;
     private javax.swing.JComboBox copyTierComboBox;
