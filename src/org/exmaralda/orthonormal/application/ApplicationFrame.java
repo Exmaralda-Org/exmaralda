@@ -166,7 +166,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         viewMenu = new javax.swing.JMenu();
         showMatchListCheckBoxMenuItem = new javax.swing.JCheckBoxMenuItem();
         annotationMenu = new javax.swing.JMenu();
-        helpMenu = new org.exmaralda.common.application.HelpMenu("Hilfe", this, HELP_MENU_TITLES, "http://agd.ids-mannheim.de/folker.shtml")
+        helpMenu = new org.exmaralda.common.application.HelpMenu("Hilfe", this, HELP_MENU_TITLES, "https://exmaralda.org/de/orthonormal-de/")
         ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);

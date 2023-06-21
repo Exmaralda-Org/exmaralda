@@ -106,7 +106,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.exmaralda.common.application.HelpMenu(&quot;Hilfe&quot;, this, HELP_MENU_TITLES, &quot;http://agd.ids-mannheim.de/folker.shtml&quot;)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.exmaralda.common.application.HelpMenu(&quot;Hilfe&quot;, this, HELP_MENU_TITLES, &quot;https://exmaralda.org/de/folker-de/&quot;)"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Menu>

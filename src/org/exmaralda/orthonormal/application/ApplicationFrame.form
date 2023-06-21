@@ -58,7 +58,7 @@
             <Property name="text" type="java.lang.String" value="Hilfe"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.exmaralda.common.application.HelpMenu(&quot;Hilfe&quot;, this, HELP_MENU_TITLES, &quot;http://agd.ids-mannheim.de/folker.shtml&quot;)                &#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.exmaralda.common.application.HelpMenu(&quot;Hilfe&quot;, this, HELP_MENU_TITLES, &quot;https://exmaralda.org/de/orthonormal-de/&quot;)                &#xa;"/>
           </AuxValues>
         </Menu>
       </SubComponents>
