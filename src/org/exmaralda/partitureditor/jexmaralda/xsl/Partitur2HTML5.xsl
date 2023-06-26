@@ -241,7 +241,7 @@
                     </xsl:variable>
                     <xsl:element name="source">
                         <xsl:attribute name="src"><xsl:value-of select="$AUDIO_FILE"/></xsl:attribute>
-                        <xsl:attribute name="type">video/<xsl:value-of select="substring-after($AUDIO_FILE,'.')"/></xsl:attribute>
+                        <xsl:attribute name="type">audio/<xsl:value-of select="substring-after($AUDIO_FILE,'.')"/></xsl:attribute>
                         <!--                         <xsl:attribute name="type">
                             <xsl:choose>
                                 <xsl:when test="ends-with($AUDIO_FILE,'wav')">audio/wav</xsl:when>
