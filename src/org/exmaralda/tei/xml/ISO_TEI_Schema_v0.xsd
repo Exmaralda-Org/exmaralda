@@ -140,6 +140,7 @@
         </xs:choice>
       </xs:choice>
       <xs:attribute ref="xml:id" use="required"/>
+      <xs:attribute ref="xml:lang" use="optional"/>      
     </xs:complexType>
   </xs:element>
     
@@ -161,6 +162,7 @@
       <xs:attribute name="lemma" type="xs:string"/>
       <xs:attribute name="pos" type="xs:string"/>
       <xs:attribute name="phon" type="xs:string"/>
+      <xs:attribute ref="xml:lang" use="optional"/>            
     </xs:complexType>
   </xs:element>
   
@@ -257,7 +259,8 @@
       </xs:choice>
       <xs:attribute ref="xml:id" use="required"/>      
       <xs:attribute name="type" type="xs:NCName"/>      
-      <xs:attribute name="subtype" type="xs:string"/>      
+      <xs:attribute name="subtype" type="xs:string"/> 
+      <xs:attribute ref="xml:lang" use="optional"/>            
     </xs:complexType>
   </xs:element>
 
@@ -267,8 +270,9 @@
       <xs:simpleContent>
         <xs:extension base="xs:string">       
           <xs:attribute name="rend" type="xs:string"/>
+          <xs:attribute ref="xml:lang" use="optional"/>                
         </xs:extension>
-      </xs:simpleContent>      
+      </xs:simpleContent>         
     </xs:complexType>    
   </xs:element>
 
@@ -287,7 +291,8 @@
             <xs:enumeration value="time-based"/>
           </xs:restriction>
         </xs:simpleType>
-      </xs:attribute>      
+      </xs:attribute>  
+      <xs:attribute ref="xml:lang" use="optional"/>            
     </xs:complexType>
   </xs:element>
 
@@ -301,7 +306,8 @@
       <!-- added 12-12-2018 -->
       <xs:attribute name="target" type="xs:anyURI"/>
       <!-- added 28-10-2020 -->
-      <xs:attribute name="who" use="optional" type="xs:IDREF"/>     
+      <xs:attribute name="who" use="optional" type="xs:IDREF"/> 
+      <xs:attribute ref="xml:lang" use="optional"/>            
     </xs:complexType>
   </xs:element>
 
