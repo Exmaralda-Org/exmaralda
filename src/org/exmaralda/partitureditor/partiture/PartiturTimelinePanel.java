@@ -228,7 +228,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
         timeViewerValuesPanel.setLayout(new java.awt.BorderLayout());
 
-        startTimeLabel.setForeground(new java.awt.Color(102, 255, 0));
+        startTimeLabel.setForeground(new java.awt.Color(0, 204, 51));
         startTimeLabel.setText("-");
         startTimeLabel.setToolTipText("Selection start");
         numbersPanel.add(startTimeLabel);

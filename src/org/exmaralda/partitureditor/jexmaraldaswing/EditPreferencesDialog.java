@@ -6,10 +6,9 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.io.File;
 import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import org.exmaralda.common.helpers.Internationalizer;
@@ -1173,6 +1172,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Choose the directory with the Praat and Sendpraat binaries");
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        // 2023-07-13 : added for #401
+        jfc.setCurrentDirectory(new File(this.praatDirectoryLabel.getText()));
         int retValue = jfc.showOpenDialog(this);
         if (retValue==JFileChooser.APPROVE_OPTION){
             Preferences settings = java.util.prefs.Preferences.userRoot().node(application.getPreferencesNode());

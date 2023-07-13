@@ -53,15 +53,21 @@ public class SextantIntegrator {
     }
 
     public void integrate(String sd) throws JDOMException, IOException{
+        integrate(sd, true, true);
+    }
+    
+    public void integrate(String sd, boolean useRefIDs, boolean usePPos) throws JDOMException, IOException{
         Document sextantAnnotation = FileIO.readDocumentFromLocalFile(new File(sd));
-        HashSet<String> annotationNames = new HashSet<String>();
+        HashSet<String> annotationNames = new HashSet<>();
         List l = XPath.newInstance("//f//@name").selectNodes(sextantAnnotation);
         for (Object o : l){
             Attribute a = (Attribute)o;
-            annotationNames.add(a.getValue());
+            if (usePPos || (!(a.getValue().equals("p-pos")))){
+                annotationNames.add(a.getValue());
+            }
         }
         // make an annotation tier for each speaker and each annotation category
-        Hashtable<String, Element> speakersAndCategories2Annotations = new Hashtable<String, Element>();
+        Hashtable<String, Element> speakersAndCategories2Annotations = new Hashtable<>();
         for (Object o : tierList){
             Element tier = (Element)o;
             String speaker = tier.getAttributeValue("speaker");
@@ -109,6 +115,9 @@ public class SextantIntegrator {
                 String category = f.getAttributeValue("name");
                 //System.out.println("\tCategory: " + category);
                 Element annotation = speakersAndCategories2Annotations.get(speaker + "*****" + category);
+                // this should happen if we do not want p-pos
+                if (annotation==null) continue;
+                
                 Element referencedElement = ids2elements.get(id);
                 if (referencedElement==null) continue;
                 String start = referencedElement.getAttributeValue("s");
@@ -121,7 +130,9 @@ public class SextantIntegrator {
                 ta.setAttribute("id", "SA_" + Integer.toString(count));
                 ta.setAttribute("s", start);
                 ta.setAttribute("e", end);
-                ta.setAttribute("ref-id", id);
+                if (useRefIDs){
+                    ta.setAttribute("ref-id", id);
+                }
                 ta.setText(f.getChild("symbol").getAttributeValue("value"));
                 annotation.addContent(ta);
 
@@ -132,6 +143,7 @@ public class SextantIntegrator {
 
     public void writeDocument(String filename) throws IOException{
         IOUtilities.writeDocumentToLocalFile(filename, segmentedTranscription);
+        System.out.println(filename + " written");
     }
 
 

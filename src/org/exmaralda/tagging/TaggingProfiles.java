@@ -25,6 +25,8 @@ public class TaggingProfiles {
     public static String CGAT_MINIMAL_WORDS_TOKEN_XPATH = "descendant::*[not(self::ats) and not(descendant::*) "
             + "and not(text()='(') and not(text()=')') and not(text()='/') and string-length(normalize-space(text()))>0]";
 
+
+
     public static String PREFERENCES_NODE = "org.sfb538.exmaralda.treeTagger";
 
     public static String getSegmentationXPathForProfile(String profileName){

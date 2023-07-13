@@ -7,10 +7,13 @@
 package org.exmaralda.partitureditor.praatPanel;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 
 /**
@@ -41,12 +44,12 @@ public class PraatControl {
         tempScriptFilePath = System.getProperty("user.home") + System.getProperty("file.separator") + "Praat_scr.praat";
         isWindows = System.getProperty("os.name").toLowerCase().startsWith("win");
         isMac = System.getProperty("os.name").toLowerCase().startsWith("mac");
+        if (isWindows){
+            PRAAT = "Praat.exe";
+        }
         if (isMac){
-            /* /Users/thomasschmidt/Desktop/PRAAT/Praat.app/Contents/MacOS/Praat
-            /Users/thomasschmidt/Desktop/PRAAT/sendpraat_intel.dms */
-            //PRAAT = "Praat.app/Contents/MacOS/Praat";
             PRAAT = "Praat";
-            SENDPRAAT = "sendpraat_intel";
+            SENDPRAAT = "sendpraat-mac";
         }
         NL = System.getProperty("line.separator");
     }
@@ -74,22 +77,39 @@ public class PraatControl {
         String pd = settings.get("PRAAT-Directory", "");
         if (pd.length()>0){
             PRAATPATH = pd + System.getProperty("file.separator");
+            
+            // 2023-07-13 : new for #401
+            String praatPathToCheck = PRAATPATH + PRAAT;
+            File praatFileToCheck =new File(praatPathToCheck);
+            if (!praatFileToCheck.exists() || !praatFileToCheck.canExecute()){
+                JOptionPane.showMessageDialog(app.getApplicationFrame(), praatPathToCheck + " does not exist or cannot be executed");
+                System.out.println(praatPathToCheck + " does not exist or cannot be executed");
+            }
+            
+            String sendPraatPathToCheck = PRAATPATH + SENDPRAAT;
+            File sendpraatFileToCheck =new File(sendPraatPathToCheck);
+            if (!sendpraatFileToCheck.exists()){
+                if (isWindows){
+                    SENDPRAAT = "sendpraat-win.exe";
+                } else if (isMac){
+                    SENDPRAAT = "sendpraat-mac";                    
+                } else {
+                    SENDPRAAT = "sendpraat-linux";                                        
+                }
+                sendPraatPathToCheck = PRAATPATH + SENDPRAAT;
+                sendpraatFileToCheck =new File(sendPraatPathToCheck);
+                if (!sendpraatFileToCheck.exists() || !sendpraatFileToCheck.canExecute()){
+                    JOptionPane.showMessageDialog(app.getApplicationFrame(), sendPraatPathToCheck + " does not exist or cannot be executed");                    
+                    System.out.println(sendPraatPathToCheck + " does not exist or cannot be executed");
+                }
+            }
         }
+        
     }
     
     public void callPraatProcess(String cmd) throws IOException {
         try {
-            //String fullCmd = PRAATPATH + SENDPRAAT + " " + PRAAT + " \"" + cmd + "\"";
-            /*String fullCmd = PRAATPATH + SENDPRAAT + " " + "praat" + " \"" + cmd + "\"";
-            System.out.println("Executing command " + fullCmd + "...");
-            try {
-            Process p = Runtime.getRuntime().exec(fullCmd);
-            p.waitFor();
-            } catch (InterruptedException ie){
-            throw new IOException(ie.getLocalizedMessage());
-            }
-            System.out.println("Command executed.");*/
-            ProcessBuilder pb = new ProcessBuilder(PRAATPATH + SENDPRAAT, PRAAT, "\"" + cmd + "\"");
+            ProcessBuilder pb = new ProcessBuilder(PRAATPATH + SENDPRAAT, "Praat", "\"" + cmd + "\"");
             Process p = pb.start();
             p.waitFor();
             System.out.println("Command executed.");
@@ -101,28 +121,15 @@ public class PraatControl {
     
     public void callPraatProcess(String[] cmds) throws IOException {
         try {
-            Vector<String> command = new Vector<String>();
+            List<String> command = new ArrayList<>();
             command.add(PRAATPATH + SENDPRAAT);
-            command.add(PRAAT);
+            command.add("Praat");
             for (String c : cmds) {
                 command.add("\"" + c + "\"");
             }
             ProcessBuilder pb = new ProcessBuilder(command);
             Process p = pb.start();
             p.waitFor();
-            //String fullCmd = PRAATPATH + SENDPRAAT + " " + PRAAT + " ";
-            /*String fullCmd = PRAATPATH + SENDPRAAT + " " + "praat" + " ";
-            for (int pos=0; pos<cmds.length; pos++){
-            String cmd = cmds[pos];
-            fullCmd+="\"" + cmd + "\" ";
-            }
-            System.out.println("Executing command " + fullCmd + "...");
-            try {
-            Process p = Runtime.getRuntime().exec(fullCmd);
-            p.waitFor();
-            } catch (InterruptedException ie){
-            throw new IOException(ie.getLocalizedMessage());
-            }*/
             System.out.println("Command executed.");
         } catch (InterruptedException ex) {
             Logger.getLogger(PraatControl.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,16 +171,29 @@ public class PraatControl {
     public void selectSound(double startTime, double endTime) throws IOException{
         String start = Double.toString(startTime);
         String end = Double.toString(endTime);
-        callPraatProcess("editor LongSound " + windowName);
+        // 2023-07-13 : changed for #401
+        String[] cmds = {
+            "editor LongSound " + windowName,
+            "Zoom... " + start + " " + end,
+            "endeditor"
+        };
+        callPraatProcess(cmds);
+        /*callPraatProcess("editor LongSound " + windowName);
         callPraatProcess("Zoom... " + start + " " + end);
-        callPraatProcess("endeditor");
+        callPraatProcess("endeditor");*/
     }
     
     public double getCursorTime() throws IOException {
-        callPraatProcess("editor LongSound " + windowName);
-        String[] cmds = {"cursorPosition$ = Get cursor", "cursorPosition$ > " + storeResultFilePath};
+        //callPraatProcess("editor LongSound " + windowName);
+        // 2023-07-13 : changed for #401
+        String[] cmds = {
+            "editor LongSound " + windowName,
+            "cursorPosition$ = Get cursor", 
+            "cursorPosition$ > " + storeResultFilePath,
+            "endeditor"
+        };
         callPraatProcess(cmds);
-        callPraatProcess("endeditor");
+        //callPraatProcess("endeditor");
         FileReader fr = new FileReader(storeResultFilePath);
         BufferedReader br = new BufferedReader(fr);
         String line = br.readLine();
