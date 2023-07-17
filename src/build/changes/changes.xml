@@ -10,6 +10,12 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="bug" version="1.7" date="17.07.2023">Dulko fixes and improvements (issue #405 and #407)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="13.07.2023">Maintenance changes for Praat panel (issue #401)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="12.06.2023">RegEx in Search &amp; Replace (issue #399)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="01.06.2023">Save Format should be default (issue #398)</change>
+    <change tool="partitureditor" type="bug" version="1.7" date="01.06.2023">Fixed formatting issues (issue #397)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="01.06.2023">Changes to auto save check on startup (issue #396)</change>
     <change tool="partitureditor" type="feature" version="1.7" date="25.05.2023">Delete several events in one go (issue #389)</change>
     <change tool="partitureditor" type="bug" version="1.7" date="12.05.2023">HTML output: make audio selection case-insensitive (issue #387)</change>
     <change tool="partitureditor" type="bug" version="1.7" date="07.05.2023">Check and error message for search results turned sour (issue #12)</change>
