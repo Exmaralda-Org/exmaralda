@@ -26,7 +26,8 @@ public class FileMenu extends AbstractTableMenu {
 
 
    
-    /** Creates a new instance of FileMenu */
+    /** Creates a new instance of FileMenu
+     * @param t */
     public FileMenu(PartitureTableWithActions t) {
         super(t);
 
@@ -47,6 +48,7 @@ public class FileMenu extends AbstractTableMenu {
         add(table.newFromSpeakertableAction).setToolTipText("Define speakers, then create a new transcription with one tier for each speaker");
         add(table.newFromTimelineAction).setToolTipText("Choose a media file, then pre-segment it and create a new transcription with the resulting time intervals");
         add(table.newFromSilenceDetectionAction).setToolTipText("Run a silence detection on a WAV file and create a new transcription with the resulting time intervals");
+        add(table.newFromDulkoTemplateAction).setToolTipText("Load the Dulko template as a new transcription");
 
         addSeparator();
         

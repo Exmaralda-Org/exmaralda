@@ -28,6 +28,7 @@ public class NewAction extends org.exmaralda.partitureditor.partiture.AbstractTa
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));        
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         table.commitEdit(true);
         System.out.println("newAction!");
