@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.2 -->
-<!-- Andreas Nolda 2020-12-08 -->
+<!-- Version 12.3 -->
+<!-- Andreas Nolda 2023-07-17 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -19,33 +19,42 @@
 <xsl:variable name="tagger"
               select="tt:new()"/>
 
-<xsl:param name="tagger-home"
-           select="tt:getHome($tagger)"/>
+<xsl:param name="tagger-abbreviations"
+           select="tt:getAbbrPath($tagger)"/>
 
-<xsl:param name="tagger-abbreviations-uri">
-  <xsl:if test="string-length($tagger-lang)&gt;0 and
-                string-length($tagger-home)&gt;0">
+<xsl:param name="tagger-abbreviations-encoding"
+           select="tt:getAbbrEncoding($tagger)"/>
+
+<xsl:variable name="tagger-abbreviations-uri">
+  <xsl:if test="string-length($tagger-abbreviations)&gt;0">
     <xsl:text>file://</xsl:text>
     <xsl:choose>
       <!-- Microsoft Windows: -->
-      <xsl:when test="matches($tagger-home,'^[A-Z]:\\')">
+      <xsl:when test="matches($tagger-abbreviations,'^[A-Z]:\\')">
         <xsl:text>/</xsl:text>
-        <xsl:value-of select="translate($tagger-home,'\','/')"/>
+        <xsl:value-of select="translate($tagger-abbreviations,'\','/')"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="$tagger-home"/>
+        <xsl:value-of select="$tagger-abbreviations"/>
       </xsl:otherwise>
     </xsl:choose>
-    <xsl:text>/lib/</xsl:text>
-    <xsl:value-of select="$tagger-lang"/>
-    <xsl:text>-abbreviations</xsl:text>
   </xsl:if>
-</xsl:param>
+</xsl:variable>
 
 <xsl:variable name="abbreviations">
   <xsl:if test="string-length($tagger-abbreviations-uri)&gt;0">
-    <xsl:if test="unparsed-text-available($tagger-abbreviations-uri)">
-      <xsl:analyze-string select="unparsed-text($tagger-abbreviations-uri)"
+    <xsl:variable name="uri"
+                  select="$tagger-abbreviations-uri"/>
+    <xsl:variable name="encoding">
+      <xsl:choose>
+        <xsl:when test="string-length($tagger-abbreviations-encoding)&gt;0">
+          <xsl:value-of select="$tagger-abbreviations-encoding"/>
+        </xsl:when>
+        <xsl:otherwise>UTF-8</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="unparsed-text-available($uri,$encoding)">
+      <xsl:analyze-string select="unparsed-text($uri,$encoding)"
                           regex="\n">
         <xsl:non-matching-substring>
           <abbr>
@@ -58,73 +67,86 @@
 </xsl:variable>
 
 <xsl:template match="basic-body">
-  <xsl:if test="$abbreviations/abbr">
-    <xsl:message>
-      <xsl:text>Using abbreviations in </xsl:text>
-      <xsl:value-of select="$tagger-abbreviations-uri"/>
-    </xsl:message>
-  </xsl:if>
-  <xsl:variable name="potential-events">
-    <xsl:for-each select="common-timeline/tli">
-      <xsl:choose>
-        <!-- There is a corresponding non-annotated event on the reference tier. -->
-        <xsl:when test="../following-sibling::tier[@id=$reference-id]/event[@start=current()/@id]
-                                                                           [not(@start=../following-sibling::tier/event/@start)]/@start">
-          <event>
-            <xsl:attribute name="start"
-                           select="@id"/>
-            <xsl:for-each select="../following-sibling::tier[@id=$reference-id]/event[@start=current()/@id]">
-              <xsl:copy-of select="@end"/>
-              <!-- Tokenize it. -->
-              <xsl:call-template name="tokenize"/>
-            </xsl:for-each>
-          </event>
-        </xsl:when>
-        <!-- There is a no such event on the reference tier. -->
-        <xsl:otherwise>
-          <!-- Don't tokenize it. -->
-          <event>
-            <xsl:attribute name="start"
-                           select="@id"/>
-            <xsl:for-each select="../following-sibling::tier[@id=$reference-id]/event[@start=current()/@id]">
-              <xsl:copy-of select="@end"/>
+  <xsl:choose>
+    <xsl:when test="string-length($tagger-abbreviations)=0">
+      <xsl:message>Warning: The TreeTagger abbreviations file is unset.</xsl:message>
+    </xsl:when>
+    <xsl:when test="string-length($lang)&gt;0 and
+                    string-length($tagger-lang)=0">
+      <xsl:message>Warning: The first language used in the speakertable is unsupported by TreeTagger.</xsl:message>
+    </xsl:when>
+    <xsl:when test="string-length($lang)&gt;0 and
+                    not(matches($tagger-abbreviations-uri,concat('/[^/.]*',$tagger-lang)))">
+      <xsl:message terminate="yes">Error: The first language used in the speakertable does not match the TreeTagger abbreviations file.</xsl:message>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:message>
+        <xsl:text>Using TreeTagger abbreviations </xsl:text>
+        <xsl:value-of select="$tagger-abbreviations"/>
+      </xsl:message>
+      <xsl:variable name="potential-events">
+        <xsl:for-each select="common-timeline/tli">
+          <xsl:choose>
+            <!-- There is a corresponding non-annotated event on the reference tier. -->
+            <xsl:when test="../following-sibling::tier[@id=$reference-id]/event[@start=current()/@id]
+                                                                               [not(@start=../following-sibling::tier/event/@start)]/@start">
+              <event>
+                <xsl:attribute name="start"
+                               select="@id"/>
+                <xsl:for-each select="../following-sibling::tier[@id=$reference-id]/event[@start=current()/@id]">
+                  <xsl:copy-of select="@end"/>
+                  <!-- Tokenize it. -->
+                  <xsl:call-template name="tokenize"/>
+                </xsl:for-each>
+              </event>
+            </xsl:when>
+            <!-- There is a no such event on the reference tier. -->
+            <xsl:otherwise>
               <!-- Don't tokenize it. -->
-              <xsl:value-of select="."/>
-          </xsl:for-each>
-          </event>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:for-each>
-  </xsl:variable>
-  <xsl:variable name="preceding-tiers">
-    <!-- tiers preceding the reference tier -->
-    <xsl:apply-templates select="tier[following-sibling::tier[@id=$reference-id]]"/>
-  </xsl:variable>
-  <xsl:variable name="preceding-tier-number"
-                select="count($preceding-tiers/tier)"/>
-  <basic-body>
-    <xsl:call-template name="timeline">
-      <xsl:with-param name="potential-events"
-                      select="$potential-events"/>
-    </xsl:call-template>
-    <xsl:copy-of select="$preceding-tiers"/>
-    <!-- reference tier -->
-    <xsl:call-template name="tier">
-      <xsl:with-param name="preceding-tier-number"
-                      select="$preceding-tier-number"/>
-      <xsl:with-param name="category"
-                      select="$word"/>
-      <xsl:with-param name="type">t</xsl:with-param>
-      <xsl:with-param name="events">
-        <xsl:call-template name="word-events">
+              <event>
+                <xsl:attribute name="start"
+                               select="@id"/>
+                <xsl:for-each select="../following-sibling::tier[@id=$reference-id]/event[@start=current()/@id]">
+                  <xsl:copy-of select="@end"/>
+                  <!-- Don't tokenize it. -->
+                  <xsl:value-of select="."/>
+              </xsl:for-each>
+              </event>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:variable>
+      <xsl:variable name="preceding-tiers">
+        <!-- tiers preceding the reference tier -->
+        <xsl:apply-templates select="tier[following-sibling::tier[@id=$reference-id]]"/>
+      </xsl:variable>
+      <xsl:variable name="preceding-tier-number"
+                    select="count($preceding-tiers/tier)"/>
+      <basic-body>
+        <xsl:call-template name="timeline">
           <xsl:with-param name="potential-events"
                           select="$potential-events"/>
         </xsl:call-template>
-      </xsl:with-param>
-    </xsl:call-template>
-    <!-- tiers following the reference tier -->
-    <xsl:apply-templates select="tier[preceding-sibling::tier[@id=$reference-id]]"/>
-  </basic-body>
+        <xsl:copy-of select="$preceding-tiers"/>
+        <!-- reference tier -->
+        <xsl:call-template name="tier">
+          <xsl:with-param name="preceding-tier-number"
+                          select="$preceding-tier-number"/>
+          <xsl:with-param name="category"
+                          select="$word"/>
+          <xsl:with-param name="type">t</xsl:with-param>
+          <xsl:with-param name="events">
+            <xsl:call-template name="word-events">
+              <xsl:with-param name="potential-events"
+                              select="$potential-events"/>
+            </xsl:call-template>
+          </xsl:with-param>
+        </xsl:call-template>
+        <!-- tiers following the reference tier -->
+        <xsl:apply-templates select="tier[preceding-sibling::tier[@id=$reference-id]]"/>
+      </basic-body>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template name="tokenize-word">
