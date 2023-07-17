@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- dulko.template.exb -->
-<!-- Version 5.0 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 6.0 -->
+<!-- Andreas Nolda 2023-07-17 -->
 
 <basic-transcription>
   <head>
     <!-- for the metadata variables cf. Granger/Paquot (2017) -->
     <meta-information>
-      <project-name>Deutsch-ungarisches Lernerkorpus (Dulko), Universität Szeged</project-name><!-- "corpus_title", "distributor" -->
+      <project-name></project-name><!-- "corpus_title", "distributor" -->
       <transcription-name><!-- filename without extension --></transcription-name><!-- "text_ID" -->
       <ud-meta-information>
         <!-- document: -->
         <ud-information attribute-name="text_title"><!-- heading of the learner text, if any --></ud-information>
         <ud-information attribute-name="date"><!-- date in ISO form --></ud-information>
-        <ud-information attribute-name="country">Hungary</ud-information>
-        <ud-information attribute-name="institution">University of Szeged</ud-information>
+        <ud-information attribute-name="country"><!-- country of data collection --></ud-information>
+        <ud-information attribute-name="institution"><!-- institution of data collection --></ud-information>
         <ud-information attribute-name="task_type"><!-- "in-class activity"/"examination" --></ud-information>
         <ud-information attribute-name="task_instructions"><!-- exercise instructions --></ud-information>
         <ud-information attribute-name="written_task"><!-- "translation"/"argumentative essay" --></ud-information>
-        <ud-information attribute-name="written_ref_tools">no</ud-information>
+        <ud-information attribute-name="written_ref_tools"><!-- "yes"/"no" --></ud-information>
         <ud-information attribute-name="task_document"><!-- "yes"/"no" --></ud-information>
         <ud-information attribute-name="task_document_ID"><!-- filename without extension --></ud-information>
         <!-- corpus: -->
-        <ud-information attribute-name="corpus_title">Deutsch-ungarisches Lernerkorpus</ud-information>
-        <ud-information attribute-name="corpus_acronym">Dulko</ud-information>
-        <ud-information attribute-name="distributor">University of Szeged</ud-information>
-        <ud-information attribute-name="availability">free of charge</ud-information>
-        <ud-information attribute-name="license">CLARIN PUB+BY+SA+PRIV</ud-information>
+        <ud-information attribute-name="corpus_title"><!-- full corpus title --></ud-information>
+        <ud-information attribute-name="corpus_acronym"><!-- corpus acronym --></ud-information>
+        <ud-information attribute-name="distributor"><!-- institution --></ud-information>
+        <ud-information attribute-name="availability"><!-- e.g. "free of charge" --></ud-information>
+        <ud-information attribute-name="license"><!-- licence name --></ud-information>
         <ud-information attribute-name="character_markup">UTF-8</ud-information>
         <ud-information attribute-name="markup_language">XML</ud-information>
         <ud-information attribute-name="corpus_size"><!-- tokens of the current text --></ud-information><!-- filled in by "exb2exb.xsl" --><!-- summed up by "exb2metadata.xsl" -->
         <ud-information attribute-name="corpus_mode">written</ud-information>
-        <ud-information attribute-name="editorial_decisions">punctuation normalised to ASCII characters</ud-information>
+        <ud-information attribute-name="editorial_decisions"><!-- normalisation --></ud-information>
         <ud-information attribute-name="transcription_guidelines">Dulko-Handbuch</ud-information>
-        <ud-information attribute-name="written_process">no</ud-information>
-        <ud-information attribute-name="longitudinal">no</ud-information>
-        <ud-information attribute-name="field">general language</ud-information>
-        <ud-information attribute-name="comp_data">no</ud-information>
+        <ud-information attribute-name="written_process"><!-- "yes"/"no" --></ud-information>
+        <ud-information attribute-name="longitudinal"><!-- "yes"/"no" --></ud-information>
+        <ud-information attribute-name="field"><!-- "general language"/"specialized language" --></ud-information>
+        <ud-information attribute-name="comp_data"><!-- "learner L1 data"/"target language data"/"no" --></ud-information>
         <ud-information attribute-name="annotation">no</ud-information><!-- updated by "exb2exb.xsl" -->
-        <ud-information attribute-name="annotation_complete">no</ud-information>
+        <ud-information attribute-name="annotation_complete"><!-- "yes"/"no" --></ud-information>
         <ud-information attribute-name="pos_tagged">no</ud-information><!-- updated by "exb2exb.xsl" -->
         <ud-information attribute-name="pos_tagset"><!-- "STTS" --></ud-information><!-- filled in by "exb2exb.xsl" -->
         <ud-information attribute-name="parsed">no</ud-information>
@@ -47,7 +47,7 @@
         <ud-information attribute-name="annotation_other"><!-- "lemmata", "sentence spans", "target hypotheses", "differences", "translated text" --></ud-information><!-- filled in by "exb2exb.xsl" -->
       </ud-meta-information>
       <comment></comment>
-      <transcription-convention>Punctuation was normalised to ASCII characters. For details cf. the Dulko-Handbuch.</transcription-convention><!-- "editorial_decisions", "transcription_guidelines" -->
+      <transcription-convention></transcription-convention><!-- "editorial_decisions", "transcription_guidelines" -->
     </meta-information>
     <speakertable>
       <speaker id="SPK0">
@@ -57,7 +57,7 @@
           <language lang="deu"/><!-- "L2_language" (corpus) -->
         </languages-used>
         <l1>
-          <language lang="hun"/><!-- "L1_language" (corpus), "L1" (learner) -->
+          <!-- "L1_language" (corpus), "L1" (learner) -->
           <!-- ... --><!-- "L1" (learner) -->
         </l1>
         <l2>
@@ -68,22 +68,22 @@
           <!-- document: -->
           <ud-information attribute-name="learner_status"><!-- "L2 learner"/"trainee translator" --></ud-information>
           <ud-information attribute-name="age"><!-- years (integer) --></ud-information>
-          <ud-information attribute-name="learner_proficiency_level_type">internally rated</ud-information>
-          <ud-information attribute-name="learner_proficiency_rating_scale">onSET<!-- or "TestDaF" --></ud-information>
+          <ud-information attribute-name="learner_proficiency_level_type"><!-- "self-rated"/"externally rated"/"internally rated" --></ud-information>
+          <ud-information attribute-name="learner_proficiency_rating_scale"><!-- e.g. "TestDaF" --></ud-information>
           <ud-information attribute-name="learner_proficiency"><!-- rating (integer) --></ud-information>
-          <ud-information attribute-name="learner_level_CEFR_conversion"><!-- "B2"/"C1" --></ud-information>
+          <ud-information attribute-name="learner_level_CEFR_conversion"><!-- "A1"/"A2"/"B1"/"B2"/"C1"/"C2" --></ud-information>
           <ud-information attribute-name="study_level"><!-- "undergraduate"/"graduate" --></ud-information>
           <ud-information attribute-name="study_area"><!-- "German studies"/"translation studies"/"German teacher training" --></ud-information>
           <ud-information attribute-name="L2_study_years"><!-- years (integer) --></ud-information>
           <ud-information attribute-name="L2_study_institutions"><!-- "primary school", "secondary school", "language school", "private lessons", "university" --></ud-information>
           <ud-information attribute-name="time_spent_L2_country"><!-- months (integer) --></ud-information>
-          <ud-information attribute-name="L2_region"><!-- Bundesland, Kanton --></ud-information>
+          <ud-information attribute-name="L2_region"><!-- e.g. Bundesland --></ud-information>
           <!-- corpus: -->
-          <ud-information attribute-name="L2_target">mono_L2</ud-information>
-          <ud-information attribute-name="proficiency_level">intermediate</ud-information>
-          <ud-information attribute-name="proficiency_level_type">learner-based</ud-information>
-          <ud-information attribute-name="proficiency_level_descriptors">onSET<!-- or "TestDaF" --></ud-information>
-          <ud-information attribute-name="official_language_testing">no</ud-information>
+          <ud-information attribute-name="L2_target"><!-- "mono_L2"/"multi_L2" --></ud-information>
+          <ud-information attribute-name="proficiency_level"><!-- "beginner"/"intermediate"/"advanced" --></ud-information>
+          <ud-information attribute-name="proficiency_level_type"><!-- "learner-based"/"text-based" --></ud-information>
+          <ud-information attribute-name="proficiency_level_descriptors"><!-- e.g. "TestDaF" --></ud-information>
+          <ud-information attribute-name="official_language_testing"><!-- "yes"/"no" --></ud-information>
         </ud-speaker-information>
         <comment></comment>
       </speaker>
