@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- metadata.xsl -->
-<!-- Version 3.2 -->
-<!-- Andreas Nolda 2023-07-17 -->
+<!-- Version 3.3 -->
+<!-- Andreas Nolda 2023-07-18 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -252,45 +252,12 @@
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="project-name"
-              mode="corpus-metadata">
-  <xsl:if test="not(../ud-meta-information/ud-information[@attribute-name='corpus_title'][string-length()&gt;0])">
-    <meta variable="corpus_title">
-      <xsl:value-of select="substring-before(.,'(')"/>
-    </meta>
-  </xsl:if>
-  <xsl:if test="not(../ud-meta-information/ud-information[@attribute-name='corpus_acronym'][string-length()&gt;0])">
-    <meta variable="corpus_acronym">
-      <xsl:value-of select="substring-before(substring-after(.,'('),')')"/>
-    </meta>
-  </xsl:if>
-  <xsl:if test="not(../ud-meta-information/ud-information[@attribute-name='distributor'][string-length()&gt;0])">
-    <meta variable="distributor">
-      <xsl:value-of select="substring-after(.,', ')"/>
-    </meta>
-  </xsl:if>
-</xsl:template>
-
 <xsl:template match="transcription-name"
               mode="document-metadata">
   <xsl:if test="not(../ud-meta-information/ud-information[@attribute-name='text_ID'][string-length()&gt;0])">
   <meta variable="text_ID">
     <xsl:value-of select="."/>
   </meta>
-  </xsl:if>
-</xsl:template>
-
-<xsl:template match="transcription-convention"
-              mode="corpus-metadata">
-  <xsl:if test="not(../ud-meta-information/ud-information[@attribute-name='editorial_decisions'][string-length()&gt;0])">
-    <meta variable="editorial_decisions">
-      <xsl:value-of select="concat(substring-before(.,'. '),'.')"/>
-    </meta>
-  </xsl:if>
-  <xsl:if test="not(../ud-meta-information/ud-information[@attribute-name='transcription_guidelines'][string-length()&gt;0])">
-    <meta variable="transcription_guidelines">
-      <xsl:value-of select="substring-after(.,'. ')"/>
-    </meta>
   </xsl:if>
 </xsl:template>
 

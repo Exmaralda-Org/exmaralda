@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-annis.xsl -->
-<!-- Version 11.0 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 12.0 -->
+<!-- Andreas Nolda 2023-07-18 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:import href="exb2exb-tiers.xsl"/>
+
+<!-- remove <project-name> in order to let Pepper construct ANNIS document names
+     from source file names instead of the project name -->
+<xsl:template match="project-name"/>
 
 <xsl:variable name="document-metadata-in-meta-information">
   <xsl:call-template name="get-document-metadata-in-meta-information"/>
@@ -23,6 +27,22 @@
       </ud-information>
     </xsl:for-each>
   </ud-meta-information>
+</xsl:template>
+
+<!-- shorten speaker ID and add "SPK" prefix in order to make ANNIS metadata tables
+     more readable -->
+<xsl:template match="speakertable/speaker/abbreviation">
+  <abbreviation>
+    <xsl:text>SPK_</xsl:text>
+    <xsl:choose>
+      <xsl:when test="string-length()&gt;4">
+        <xsl:value-of select="substring(.,1,4)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="."/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </abbreviation>
 </xsl:template>
 
 <xsl:variable name="document-metadata-in-speakertable">
