@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-tiers.xsl -->
-<!-- Version 1.4 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 1.5 -->
+<!-- Andreas Nolda 2023-07-17 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -19,14 +19,7 @@
       <xsl:message terminate="yes">Error: The $zh-number value "<xsl:value-of select="$zh-number"/>" is not a number.</xsl:message>
     </xsl:when>
     <xsl:when test="$zh-number=0">
-      <xsl:choose>
-        <xsl:when test="/basic-transcription/basic-body/tier[@category=$word]">
-          <xsl:value-of select="/basic-transcription/basic-body/tier[@category=$word]/@id"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="/basic-transcription/basic-body/tier[1]/@id"/>
-        </xsl:otherwise>
-      </xsl:choose>
+      <xsl:value-of select="/basic-transcription/basic-body/tier[@category=$word]/@id"/>
     </xsl:when>
     <xsl:when test="$zh-number&gt;0">
       <xsl:value-of select="/basic-transcription/basic-body/tier[@category='ZH'][position()=$zh-number]/@id"/>
