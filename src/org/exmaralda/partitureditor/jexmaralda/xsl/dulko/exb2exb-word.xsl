@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.3 -->
+<!-- Version 12.4 -->
 <!-- Andreas Nolda 2023-07-17 -->
 
 <xsl:stylesheet version="2.0"
@@ -132,8 +132,7 @@
         <xsl:call-template name="tier">
           <xsl:with-param name="preceding-tier-number"
                           select="$preceding-tier-number"/>
-          <xsl:with-param name="category"
-                          select="$word"/>
+          <xsl:with-param name="category">word</xsl:with-param>
           <xsl:with-param name="type">t</xsl:with-param>
           <xsl:with-param name="events">
             <xsl:call-template name="word-events">

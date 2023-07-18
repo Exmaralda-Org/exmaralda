@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- format.xsl -->
-<!-- Version 1.6 -->
-<!-- Andreas Nolda 2019-05-06 -->
+<!-- Version 1.7 -->
+<!-- Andreas Nolda 2023-07-17 -->
 
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><!-- ApplyFormatStylesheetAction.java only supports XSLT 1.0 -->
@@ -70,9 +70,9 @@
 
 <xsl:template name="format-tiers">
   <xsl:choose>
-    <xsl:when test="@category='orig' or
+    <xsl:when test="@type='t' or
+                    @category='orig' or
                     substring-after(@category,'::')='orig' or
-                    @category='tok' or
                     @category='word' or
                     substring-after(@category,'::')='word' or
                     @category='ZH' or
