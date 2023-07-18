@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- metadata.xsl -->
-<!-- Version 3.1 -->
-<!-- Andreas Nolda 2020-12-07 -->
+<!-- Version 3.2 -->
+<!-- Andreas Nolda 2023-07-17 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -17,7 +17,9 @@
 
 <xsl:variable name="word">
   <xsl:choose>
-    <xsl:when test="/basic-transcription/basic-body/tier[@category='tok']">tok</xsl:when><!-- deprecated -->
+    <xsl:when test="/basic-transcription/basic-body/tier[@type='t']">
+      <xsl:value-of select="/basic-transcription/basic-body/tier[@type='t'][1]/@category"/>
+    </xsl:when>
     <xsl:otherwise>word</xsl:otherwise>
   </xsl:choose>
 </xsl:variable>
@@ -158,7 +160,7 @@
 <xsl:template match="ud-information[@attribute-name='error_annotation_tool']"
               mode="corpus-metadata">
   <meta variable="error_annotation_tool">
-    <xsl:if test="/basic-transcription/basic-body/tier[contains(@category,'Fehler')]">EXMARaLDA (Dulko)</xsl:if>
+    <xsl:if test="/basic-transcription/basic-body/tier[contains(@category,'Fehler')]">EXMARaLDA</xsl:if>
   </meta>
 </xsl:template>
 
