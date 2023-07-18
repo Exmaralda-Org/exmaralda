@@ -294,6 +294,16 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
     </tranformation-scenario>
 
     <tranformation-scenario>
+        <name>Dulko: learner text</name>
+        <description>Exports learner text.</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit/>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2text.xsl</stylesheet>
+        <output suffix="txt"/>
+    </tranformation-scenario>
+
+    <tranformation-scenario>
         <name>Dulko: HTML version</name>
         <description>Exports annotated data to HTML.
 Requires existing S-, pos-, and lemma-tiers.</description>
