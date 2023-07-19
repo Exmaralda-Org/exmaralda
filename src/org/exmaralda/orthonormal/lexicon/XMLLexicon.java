@@ -41,7 +41,7 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2023.xml";
     
     String CAPITAL_ONLY_LIST = "/org/exmaralda/orthonormal/lexicon/dereko_capital_only.txt";
-    HashSet<String> capitalOnly = new HashSet<>(240000, 1.0f);
+    HashSet<String> capitalOnly = new HashSet<>(240000, 1.0f); 
 
     
     @Override
