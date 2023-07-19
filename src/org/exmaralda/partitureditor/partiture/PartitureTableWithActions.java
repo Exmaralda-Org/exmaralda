@@ -1913,8 +1913,8 @@ public class PartitureTableWithActions extends PartitureTable
         keyboardDialog.getKeyboardPanel().setKeySize(settings.getInt("VIRTUAL-KEYBOARD-KEYSIZE", 100));
         //keyboardDialog.pack();
 
-        // Annotation Panel
-        int w2 = settings.getInt("ANNOTATION-PANEL-WIDTH", annotationDialog.getWidth());
+        // Annotation Panel        
+        int w2 = settings.getInt("ANNOTATION-PANEL-WIDTH", Math.max(annotationDialog.getWidth(), 700));
         int h2 = settings.getInt("ANNOTATION-PANEL-HEIGHT", annotationDialog.getHeight());
         annotationDialog.setPreferredSize(new java.awt.Dimension(w2,h2));
         annotationDialog.setSize(new java.awt.Dimension(w2,h2));
