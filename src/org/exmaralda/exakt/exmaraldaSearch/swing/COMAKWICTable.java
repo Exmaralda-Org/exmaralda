@@ -26,6 +26,7 @@ import org.exmaralda.exakt.search.analyses.ClosedCategoryListAnalysis;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
 import org.exmaralda.exakt.search.swing.KWICTableListener;
 import org.exmaralda.exakt.exmaraldaSearch.*;
+import org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction;
 
 
 /**
@@ -44,6 +45,7 @@ public class COMAKWICTable  extends javax.swing.JTable
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction copyAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ImportAnalysesAction importAnalysesAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction sampleAction;
+    public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ShuffleAction shuffleAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SelectAllAction selectAllAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.DeselectAllAction deselectAllAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SelectHighlightedAction selectHighlightedAction;
@@ -118,6 +120,7 @@ public class COMAKWICTable  extends javax.swing.JTable
         copyAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction(this, "Copy");
         importAnalysesAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ImportAnalysesAction(this, "Import analyses...");
         sampleAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction(this, "Sample...");
+        shuffleAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ShuffleAction(this, "Shuffle");
         selectAllAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SelectAllAction(this, "Select all");
         deselectAllAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.DeselectAllAction(this, "Deselect all");
         selectHighlightedAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SelectHighlightedAction(this, "Select highlighted");

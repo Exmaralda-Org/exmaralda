@@ -197,5 +197,6 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
     }
 
 
+
     
 }

@@ -123,6 +123,12 @@ public abstract class SearchResultListTableModel extends javax.swing.table.Abstr
         data.sample(howMany);
         fireTableDataChanged();
     }
+    
+    // 09-08-2023: new for issue #362
+    public void shuffle() {
+        data.shuffle();
+    }
+    
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {

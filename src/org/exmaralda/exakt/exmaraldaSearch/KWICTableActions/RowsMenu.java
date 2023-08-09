@@ -23,6 +23,7 @@ public class RowsMenu extends javax.swing.JMenu {
     EXAKT exaktFrame;
     
     private final JMenuItem sampleMenuItem;
+    private final JMenuItem shuffleMenuItem;
     private final JMenuItem selectAllMenuItem;
     private final JMenuItem deselectAllMenuItem;
     private final JMenuItem selectHighlightedMenuItem;
@@ -57,6 +58,17 @@ public class RowsMenu extends javax.swing.JMenu {
             }
         });
         this.add(sampleMenuItem);
+
+
+        shuffleMenuItem = new JMenuItem("Shuffle");
+        shuffleMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                shuffle(e);
+            }
+        });
+        this.add(shuffleMenuItem);
+        
 
         selectAllMenuItem = new JMenuItem("Select all");
         selectAllMenuItem.addActionListener(new javax.swing.AbstractAction() {
@@ -100,6 +112,11 @@ public class RowsMenu extends javax.swing.JMenu {
     void sample(ActionEvent e){
         if (exaktFrame.getActiveSearchPanel()==null) return;
         exaktFrame.getActiveSearchPanel().getKWICTable().sampleAction.actionPerformed(e);
+    }
+
+    void shuffle(ActionEvent e){
+        if (exaktFrame.getActiveSearchPanel()==null) return;
+        exaktFrame.getActiveSearchPanel().getKWICTable().shuffleAction.actionPerformed(e);
     }
 
     void selectAll(ActionEvent e){

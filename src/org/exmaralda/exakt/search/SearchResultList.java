@@ -35,7 +35,7 @@ import org.xml.sax.SAXException;
 public class SearchResultList extends Vector<SearchResultInterface> {
     
     String baseDirectory = "";   
-    Vector<AnalysisInterface> analyses = new Vector<AnalysisInterface>();
+    Vector<AnalysisInterface> analyses = new Vector<>();
     COMASearchResultListTableModel tableModel;
 
     
@@ -214,6 +214,12 @@ public class SearchResultList extends Vector<SearchResultInterface> {
         }        
     }
     
+
+    public void shuffle(){
+        Collections.shuffle(this, new Random(System.currentTimeMillis()));
+    }
+
+
     public Element toXML(){
         Element returnValue = new Element("search-result-list");
         
