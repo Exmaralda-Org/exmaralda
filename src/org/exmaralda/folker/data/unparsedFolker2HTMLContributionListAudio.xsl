@@ -46,7 +46,7 @@
             <body ondblclick="stop();">
                 <div class="top">
                     <xsl:variable name="AUDIO_FILE">
-                        <xsl:value-of select="//recording/@path"/>
+                        <xsl:value-of select="concat('file:/',replace(//recording/@path,'\\','/'))"/> <!-- #404: add "file:/" at the beginning of the path and replace backslash by forwardslash in order to make the audio play on klick; before, select was ="//recording/@path" only --> 
                     </xsl:variable>
                     <audio>
                         <xsl:element name="source">
@@ -97,7 +97,15 @@
             </td>
             <td class="speaker">
                 <!-- <xsl:value-of select="ancestor::contribution/@speaker-reference"/> -->
-                <xsl:value-of select="@speaker-reference"/>
+                <!-- #403 Making Transkripts more readable (having speaker IDs only when the speaker changes) -->
+                <!-- <xsl:value-of select="@speaker-reference"/> --> <!-- this was the code before replaced by the following lines -->
+                <xsl:choose>
+                    <xsl:when test="position() = 1 or preceding-sibling::contribution[1]/@speaker-reference != @speaker-reference"> <!-- boundary condition... first contribution (position() = 1) should always have a speaker ID displayed; this comes out of sync when lines (contributions) occur without speaker reference at all. In that case, the next linw will not receive a speaker ID, as the when-condition is not met. -->
+                        <xsl:value-of select="@speaker-reference"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                    </xsl:otherwise>
+                </xsl:choose>
             </td>
             <td>
                 <xsl:attribute name="class">
