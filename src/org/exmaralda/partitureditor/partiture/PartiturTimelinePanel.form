@@ -60,7 +60,7 @@
                     <Component class="javax.swing.JLabel" name="startTimeLabel">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="33" green="cc" red="0" type="rgb"/>
+                          <Color blue="0" green="99" red="33" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="-"/>
                         <Property name="toolTipText" type="java.lang.String" value="Selection start"/>
