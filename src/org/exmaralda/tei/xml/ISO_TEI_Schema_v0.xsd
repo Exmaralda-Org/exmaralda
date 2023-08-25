@@ -95,7 +95,8 @@
   <xs:element name="body">
     <xs:complexType>
       <xs:sequence>
-        <xs:choice maxOccurs="unbounded">
+        <!-- changed 25-08-2023: Allow empty transcripts -->
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
           <!-- <xs:element ref="tei:anchor"/> -->
           <xs:element ref="tei:annotationBlock"/>
           <xs:element ref="tei:pause"/>
