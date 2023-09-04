@@ -2855,11 +2855,19 @@ public class PartitureTableWithActions extends PartitureTable
     // changed 11-01-2019 for issue #176
     @Override
     public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-        if (!(e.getSource() instanceof EventPopupMenu)) return;
+        //System.out.println("popupMenuWillBecomeVisible");
+        // issue #176 : this is wrong, need both EventPopupMenu and TablePopupMenu
+        if (!(e.getSource() instanceof EventPopupMenu) && !(e.getSource() instanceof TablePopupMenu)) {
+            System.out.println(e.getSource().toString());
+            return;
+        }
         ((JPopupMenu)(e.getSource())).add(moveMenu, 6);
         moveMenu.removeAll();
-        if (!(selectionStartRow==selectionEndRow && getModel().containsEvent(selectionStartRow, selectionStartCol) && getModel().containsEvent(selectionStartRow, selectionEndCol))){
+        if (!(selectionStartRow==selectionEndRow 
+                && getModel().containsEvent(selectionStartRow, selectionStartCol) 
+                && getModel().containsEvent(selectionStartRow, selectionEndCol))){
             moveMenu.setEnabled(false);
+            System.out.println("Not doing it");
             return;
         } 
         Event firstEvent = null;
