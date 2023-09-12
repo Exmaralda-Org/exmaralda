@@ -14,7 +14,6 @@ import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.text.JTextComponent;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 
 /**
@@ -63,7 +62,7 @@ public class NewTierDialog extends JEscapeDialog {
         String[] tierIDs = transcription.getBody().getAllTierIDs();
         TierDescriptions tierDescriptions = new TierDescriptions(transcription);                
         Vector tiersVector = new Vector();
-        HashSet<String> categories = new HashSet<String>();
+        HashSet<String> categories = new HashSet<>();
         categories.add("v");
         for (String tierID : tierIDs) {
             String listEntry = tierID + " (" + tierDescriptions.getTierDescriptionForTierID(tierID) + ")";
@@ -134,6 +133,7 @@ public class NewTierDialog extends JEscapeDialog {
         copyTierComboBox = new javax.swing.JComboBox(tiers);
         copyTierComboBox.setEnabled(false);
         copyTextCheckBox = new javax.swing.JCheckBox();
+        copyTextCheckBox.setEnabled(false);
         warningPanel = new javax.swing.JPanel();
         warningLabel = new javax.swing.JLabel();
 
@@ -300,7 +300,7 @@ public class NewTierDialog extends JEscapeDialog {
                    String listEntry = speakerID + " [" + speakertable.getSpeakerWithID(speakerID).getAbbreviation() + "]";
                    speakersVector.addElement(listEntry);
                }catch (org.exmaralda.partitureditor.jexmaralda.JexmaraldaException je){
-                   je.printStackTrace();
+                   System.out.println(je.getMessage());
                }
            }
             speakersVector.addElement("[no speaker]");

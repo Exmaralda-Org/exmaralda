@@ -295,6 +295,9 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Copy text"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="copyTextCheckBox.setEnabled(false);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
