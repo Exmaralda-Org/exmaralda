@@ -3,6 +3,7 @@
  */
 package org.exmaralda.coma.actions;
 
+import java.awt.FileDialog;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -69,17 +70,17 @@ public class OpenAction extends ComaAction {
 			coma.status(file);
 			coma.openComaXML(file);
 		} else {
-			fc = new JFileChooser(coma.prefs.get("recentDir", "/"));
-			fc.addChoosableFileFilter(new ExmaraldaFileFilter("Coma-Files",
-					new String[] { "coma", "xml" }, true));
-			int dialogStatus = fc.showOpenDialog(coma);
-			if (dialogStatus == 0) {
-				coma.openComaXML(fc.getSelectedFile());
+			FileDialog fd = new FileDialog(coma, "Open", FileDialog.LOAD);
+			fd.setDirectory(coma.prefs.get("recentDir", "/"));
+			fd.setFilenameFilter((dir, name) -> name.endsWith(".coma") || name.endsWith(".xml"));
+			fd.setVisible(true);
+			if (fd.getFile() != null) {
+				File selectedFile = new File(fd.getDirectory(), fd.getFile());
+				coma.openComaXML(selectedFile);
 			} else {
-				coma.status("@open cancelled" + dialogStatus);
+				coma.status("@open cancelled");
 			}
 		}
-
 	}
 
 }

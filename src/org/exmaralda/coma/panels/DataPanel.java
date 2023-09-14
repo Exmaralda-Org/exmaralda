@@ -9,6 +9,7 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -204,7 +205,6 @@ public class DataPanel extends JPanel implements ActionListener,
 
 	private JTable speakerTable;
 
-
 	private JButton addSpeakerButton;
 
 	private JButton removeSpeakerButton;
@@ -383,9 +383,6 @@ public class DataPanel extends JPanel implements ActionListener,
 				tmpButton.putClientProperty(keyVal[0], keyVal[1]);
 			}
 		}
-		tmpButton.setPreferredSize(new Dimension(48, 48));
-		tmpButton.setMinimumSize(new Dimension(48, 48));
-		tmpButton.setMaximumSize(new Dimension(48, 48));
 		return tmpButton;
 	}
 
@@ -507,8 +504,7 @@ public class DataPanel extends JPanel implements ActionListener,
 		perTransRec.addTab(Ui.getText("speakers"),
 				IconFactory.createImageIcon("speaker.png"), speakerPanel);
 
-		JPanel commButtons = new JPanel(); // the this holding the add/remove
-		// buttons
+		JPanel commButtons = new JPanel(new FlowLayout()); // the this holding the add/remove buttons
 		// northPanel holds xPathPanel and FilterPanel
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
@@ -876,7 +872,7 @@ public class DataPanel extends JPanel implements ActionListener,
 	 * column
 	 * 
 	 * @param isXPath
-	 *            true if text in descName is a xPath-expression
+	 *                true if text in descName is a xPath-expression
 	 */
 	public void updateRenderer(String parmText, boolean isXPath) {
 		// !!! removeCommSelection();
@@ -1052,12 +1048,14 @@ public class DataPanel extends JPanel implements ActionListener,
 			System.out.println(cmd.substring(8));
 			coma.setCommFilter(
 					coma.getData().getcFilterPresets().get(cmd.substring(8))
-							.getXPath(), true);
+							.getXPath(),
+					true);
 		} else if (cmd.startsWith("SFilter:")) {
 			System.out.println(cmd.substring(8));
 			coma.setSpeakerFilter(
 					coma.getData().getsFilterPresets().get(cmd.substring(8))
-							.getXPath(), true);
+							.getXPath(),
+					true);
 		} else if (cmd.equals("commToBasket")) {
 			commToBasket();
 		} else if (cmd.equals("removeCFilter")) {
@@ -1996,8 +1994,9 @@ public class DataPanel extends JPanel implements ActionListener,
 					new FileOutputStream(temp), "UTF8"));
 			out.write(lastSelected == COMMUNICATION ? new Communication(data
 					.getSelectedCommunications().values().iterator().next(),
-					coma).toHTML(false) : new Speaker(coma, data
-					.getSelectedPersons().get(0), false).toHTML(false));
+					coma).toHTML(false)
+					: new Speaker(coma, data
+							.getSelectedPersons().get(0), false).toHTML(false));
 			out.close();
 			Desktop.getDesktop().open(temp);
 		} catch (IOException e) {
