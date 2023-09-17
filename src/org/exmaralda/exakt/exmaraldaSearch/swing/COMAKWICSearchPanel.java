@@ -478,9 +478,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/Find24.gif"))); // NOI18N
         searchButton.setToolTipText("Perform search");
-        searchButton.setMaximumSize(new java.awt.Dimension(55, 31));
+        searchButton.setMaximumSize(new java.awt.Dimension(100, 31));
         searchButton.setMinimumSize(new java.awt.Dimension(55, 31));
-        searchButton.setPreferredSize(new java.awt.Dimension(55, 31));
+        searchButton.setPreferredSize(new java.awt.Dimension(100, 31));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
