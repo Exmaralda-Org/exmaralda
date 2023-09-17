@@ -551,50 +551,60 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         rightSidePanel.setLayout(new java.awt.BorderLayout());
 
         searchInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
+        searchInfoPanel.setMaximumSize(new java.awt.Dimension(100, 120));
+        searchInfoPanel.setPreferredSize(new java.awt.Dimension(100, 120));
         searchInfoPanel.setLayout(new javax.swing.BoxLayout(searchInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
         types.setText("Types:");
+        types.setMaximumSize(new java.awt.Dimension(100, 14));
+        types.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(types);
 
         typesLabel.setForeground(new java.awt.Color(51, 102, 255));
         typesLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         typesLabel.setText("0");
-        typesLabel.setMaximumSize(new java.awt.Dimension(57, 14));
+        typesLabel.setMaximumSize(new java.awt.Dimension(100, 14));
         typesLabel.setMinimumSize(new java.awt.Dimension(57, 14));
-        typesLabel.setPreferredSize(new java.awt.Dimension(57, 14));
+        typesLabel.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(typesLabel);
 
         tokens.setText("Tokens: ");
+        tokens.setMaximumSize(new java.awt.Dimension(100, 14));
+        tokens.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(tokens);
 
         tokensLabel.setForeground(new java.awt.Color(51, 102, 255));
         tokensLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tokensLabel.setText("0");
-        tokensLabel.setMaximumSize(new java.awt.Dimension(57, 14));
+        tokensLabel.setMaximumSize(new java.awt.Dimension(100, 14));
         tokensLabel.setMinimumSize(new java.awt.Dimension(57, 14));
-        tokensLabel.setPreferredSize(new java.awt.Dimension(57, 14));
+        tokensLabel.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(tokensLabel);
 
         selected.setText("Selected:");
+        selected.setMaximumSize(new java.awt.Dimension(100, 14));
+        selected.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(selected);
 
         selectedLabel.setForeground(new java.awt.Color(51, 102, 255));
         selectedLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         selectedLabel.setText("0");
-        selectedLabel.setMaximumSize(new java.awt.Dimension(57, 14));
+        selectedLabel.setMaximumSize(new java.awt.Dimension(100, 14));
         selectedLabel.setMinimumSize(new java.awt.Dimension(57, 14));
-        selectedLabel.setPreferredSize(new java.awt.Dimension(57, 14));
+        selectedLabel.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(selectedLabel);
 
         time.setText("Time:");
+        time.setMaximumSize(new java.awt.Dimension(100, 14));
+        time.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(time);
 
         timeLabel.setForeground(new java.awt.Color(51, 102, 255));
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         timeLabel.setText("0");
-        timeLabel.setMaximumSize(new java.awt.Dimension(57, 14));
+        timeLabel.setMaximumSize(new java.awt.Dimension(100, 14));
         timeLabel.setMinimumSize(new java.awt.Dimension(57, 14));
-        timeLabel.setPreferredSize(new java.awt.Dimension(57, 14));
+        timeLabel.setPreferredSize(new java.awt.Dimension(100, 14));
         searchInfoPanel.add(timeLabel);
 
         rightSidePanel.add(searchInfoPanel, java.awt.BorderLayout.SOUTH);
@@ -605,9 +615,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         filterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/Filter.gif"))); // NOI18N
         filterButton.setText(null);
         filterButton.setToolTipText("Filter the search result");
-        filterButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        filterButton.setMaximumSize(new java.awt.Dimension(100, 33));
         filterButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        filterButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        filterButton.setPreferredSize(new java.awt.Dimension(100, 33));
         filterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterButtonActionPerformed(evt);
@@ -617,9 +627,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         metaDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/mail-attachment.png"))); // NOI18N
         metaDataButton.setToolTipText("Specify meta data");
-        metaDataButton.setMaximumSize(new java.awt.Dimension(56, 31));
+        metaDataButton.setMaximumSize(new java.awt.Dimension(100, 33));
         metaDataButton.setMinimumSize(new java.awt.Dimension(56, 31));
-        metaDataButton.setPreferredSize(new java.awt.Dimension(56, 31));
+        metaDataButton.setPreferredSize(new java.awt.Dimension(100, 33));
         metaDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 metaDataButtonActionPerformed(evt);
@@ -631,9 +641,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         addAnalysisButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/analysis_22.png"))); // NOI18N
         addAnalysisButton.setText(null);
         addAnalysisButton.setToolTipText("Add an analysis");
-        addAnalysisButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        addAnalysisButton.setMaximumSize(new java.awt.Dimension(100, 33));
         addAnalysisButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        addAnalysisButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        addAnalysisButton.setPreferredSize(new java.awt.Dimension(100, 33));
         rightSideButtonsPanel.add(addAnalysisButton);
         rightSideButtonsPanel.add(jSeparator1);
 
@@ -642,9 +652,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         praatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Praat.gif"))); // NOI18N
         praatButton.setText(null);
         praatButton.setToolTipText("Open the corresponding WAV file in Praat");
-        praatButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        praatButton.setMaximumSize(new java.awt.Dimension(100, 33));
         praatButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        praatButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        praatButton.setPreferredSize(new java.awt.Dimension(100, 33));
         praatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 praatButtonActionPerformed(evt);
@@ -657,9 +667,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         copyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/Copy.gif"))); // NOI18N
         copyButton.setText(null);
         copyButton.setToolTipText("Copy the selected search result");
-        copyButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        copyButton.setMaximumSize(new java.awt.Dimension(100, 33));
         copyButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        copyButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        copyButton.setPreferredSize(new java.awt.Dimension(100, 33));
         copyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copyButtonActionPerformed(evt);
@@ -671,17 +681,17 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         removeUnselectedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/Delete24.gif"))); // NOI18N
         removeUnselectedButton.setText(null);
         removeUnselectedButton.setToolTipText("Remove unselected search results");
-        removeUnselectedButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        removeUnselectedButton.setMaximumSize(new java.awt.Dimension(100, 33));
         removeUnselectedButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        removeUnselectedButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        removeUnselectedButton.setPreferredSize(new java.awt.Dimension(100, 33));
         rightSideButtonsPanel.add(removeUnselectedButton);
         rightSideButtonsPanel.add(jSeparator2);
 
         showPartiturButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/view-refresh.png"))); // NOI18N
         showPartiturButton.setToolTipText("Update view");
-        showPartiturButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        showPartiturButton.setMaximumSize(new java.awt.Dimension(100, 33));
         showPartiturButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        showPartiturButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        showPartiturButton.setPreferredSize(new java.awt.Dimension(100, 33));
         showPartiturButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showPartiturButtonActionPerformed(evt);
@@ -693,9 +703,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         moreContextButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/MoreContext.gif"))); // NOI18N
         moreContextButton.setText(null);
         moreContextButton.setToolTipText("Show more context");
-        moreContextButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        moreContextButton.setMaximumSize(new java.awt.Dimension(100, 33));
         moreContextButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        moreContextButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        moreContextButton.setPreferredSize(new java.awt.Dimension(100, 33));
         moreContextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moreContextButtonActionPerformed(evt);
@@ -707,9 +717,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         lessContextButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/LessContext.gif"))); // NOI18N
         lessContextButton.setText(null);
         lessContextButton.setToolTipText("Show less context");
-        lessContextButton.setMaximumSize(new java.awt.Dimension(57, 33));
+        lessContextButton.setMaximumSize(new java.awt.Dimension(100, 33));
         lessContextButton.setMinimumSize(new java.awt.Dimension(57, 33));
-        lessContextButton.setPreferredSize(new java.awt.Dimension(57, 33));
+        lessContextButton.setPreferredSize(new java.awt.Dimension(100, 33));
         lessContextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lessContextButtonActionPerformed(evt);
