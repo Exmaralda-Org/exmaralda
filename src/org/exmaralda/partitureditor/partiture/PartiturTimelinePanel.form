@@ -127,6 +127,11 @@
                         </Property>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JButton" name="whisperButton">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Whisper"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="zoomPanel">

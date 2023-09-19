@@ -129,7 +129,7 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
     }
     
     public HashMap<String, Object> getDeepLParameters() {
-        HashMap<String, Object> result = new HashMap<String, Object>();
+        HashMap<String, Object> result = new HashMap<>();
         result.put("SOURCE-LANGUAGE", ((String[])sourceLanguageComboBox.getSelectedItem())[0]);
         result.put("TARGET-LANGUAGE", ((String[])targetLanguageComboBox.getSelectedItem())[0]);
         

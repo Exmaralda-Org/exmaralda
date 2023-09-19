@@ -76,6 +76,7 @@ import org.exmaralda.partitureditor.partiture.undo.UndoHandler;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 import org.exmaralda.partitureditor.partiture.webServicesActions.DeepLAction;
 import org.exmaralda.partitureditor.partiture.webServicesActions.G2PAction;
+import org.exmaralda.partitureditor.partiture.webServicesActions.WhisperAction;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -477,6 +478,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction g2pAction;
     public javax.swing.AbstractAction webLichtAction; 
     public javax.swing.AbstractAction deepLAction; 
+    public javax.swing.AbstractAction whisperAction; 
     
     //*******************************************************************
 
@@ -793,6 +795,7 @@ public class PartitureTableWithActions extends PartitureTable
         g2pAction = new G2PAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Schwa.png")));
         webLichtAction = new WebLichtAction(this);
         deepLAction = new DeepLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/deepl_logo_icon_170284.png")));
+        whisperAction = new WhisperAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/openai-svgrepo-com.png")));
 
         //-------------------------------- NAVIGATION ACTIONS --------------------------------------------------
 

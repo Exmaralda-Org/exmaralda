@@ -6,9 +6,11 @@ package org.exmaralda.tagging;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Attribute;
@@ -26,7 +28,9 @@ public class SextantISOTEIIntegrator {
     
     Document isoteiTranscription;
     Namespace xlinkNS;
-    Hashtable<String, Element> ids2elements = new Hashtable<>();
+    Map<String, Element> ids2elements = new HashMap<>();
+    
+    Map<String, String> annotationCategoryMappings = new HashMap<>();
     
     public SextantISOTEIIntegrator(String fln) throws JDOMException, IOException {
         xlinkNS = Namespace.getNamespace("xlink", "http://www.w3.org/1999/xlink");
@@ -41,9 +45,13 @@ public class SextantISOTEIIntegrator {
         }
     }
     
+    public void addAnnotationCategoryMapping(String value, String replaceValue){
+        annotationCategoryMappings.put(value, replaceValue);
+    }
+    
     public void integrate(String sd) throws JDOMException, IOException{
         Document sextantAnnotation = FileIO.readDocumentFromLocalFile(new File(sd));
-        HashSet<String> annotationNames = new HashSet<String>();
+        HashSet<String> annotationNames = new HashSet<>();
         List l = XPath.newInstance("//f//@name").selectNodes(sextantAnnotation);
         for (Object o : l){
             Attribute a = (Attribute)o;
@@ -70,6 +78,8 @@ public class SextantISOTEIIntegrator {
             for (Object o2 : fs){
                 Element f = (Element)o2;
                 String annotationCategory = f.getAttributeValue("name");
+                // new 20-08-2023
+                annotationCategory = annotationCategoryMappings.getOrDefault(annotationCategory, annotationCategory);
                 if ("p-pos".equals(annotationCategory)) continue;
                 String annotationValue = f.getChild("symbol").getAttributeValue("value");
                 Element referencedElement = ids2elements.get(id);

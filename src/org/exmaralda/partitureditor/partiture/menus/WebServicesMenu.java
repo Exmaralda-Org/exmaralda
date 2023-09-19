@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.menus;
 
+import javax.swing.JSeparator;
 import org.exmaralda.partitureditor.partiture.*;
 
 /**
@@ -27,8 +28,12 @@ public class WebServicesMenu extends AbstractTableMenu {
         add(table.webMAUSAction);
         add(table.webMAUSFineAlignmentAction);
         add(table.g2pAction);
+        add(new JSeparator());
         add(table.webLichtAction);
+        add(new JSeparator());
         add(table.deepLAction);
+        add(new JSeparator());
+        add(table.whisperAction);
     }
     
 }

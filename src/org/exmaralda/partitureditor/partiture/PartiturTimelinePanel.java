@@ -21,6 +21,7 @@ import javax.swing.*;
 import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
 import org.exmaralda.folker.timeview.*;
 import org.exmaralda.folker.utilities.TimeStringFormatter;
+import org.exmaralda.partitureditor.partiture.webServicesActions.ProtoWhisperAction;
 import org.exmaralda.partitureditor.praatPanel.PraatPanelEvent;
 
 /**
@@ -54,6 +55,8 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         if (os.equalsIgnoreCase("mac")) {
             configureForMac();
         }
+        
+        whisperButton.setAction(new ProtoWhisperAction(partitur));
 
 
     }
@@ -189,6 +192,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         endTimeLabel = new javax.swing.JLabel();
         navigationPanel = new javax.swing.JPanel();
         navigateButton = new javax.swing.JButton();
+        whisperButton = new javax.swing.JButton();
         zoomPanel = new javax.swing.JPanel();
         zoomToggleButton = new javax.swing.JToggleButton();
         timeViewerControlPanel = new javax.swing.JPanel();
@@ -260,6 +264,9 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
         navigateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/othericons/compass_icon.gif"))); // NOI18N
         navigationPanel.add(navigateButton);
+
+        whisperButton.setText("Whisper");
+        navigationPanel.add(whisperButton);
 
         timeViewerValuesPanel.add(navigationPanel, java.awt.BorderLayout.WEST);
 
@@ -445,6 +452,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     private javax.swing.JPanel timeViewerPanel;
     private javax.swing.JScrollPane timeViewerScrollPane;
     private javax.swing.JPanel timeViewerValuesPanel;
+    private javax.swing.JButton whisperButton;
     private javax.swing.JPanel zoomPanel;
     public javax.swing.JToggleButton zoomToggleButton;
     // End of variables declaration//GEN-END:variables

@@ -26,9 +26,9 @@ public class RTFUtilities {
     }
     
     private static String toRTFFontProperties(String fontSize, String fontColor, String fontFace){
-        StringBuffer sb = new StringBuffer();
-        sb.append("\\fs" + fontSize);   // font size (in half points!)
-        sb.append("\\cf" + fontColor); // font color (reference to the color table)
+        StringBuilder sb = new StringBuilder();
+        sb.append("\\fs").append(fontSize);   // font size (in half points!)
+        sb.append("\\cf").append(fontColor); // font color (reference to the color table)
         if (fontFace.equalsIgnoreCase("Bold")){sb.append("\\b");}   // turn on bold
         if (fontFace.equalsIgnoreCase("Italic")){sb.append("\\i");} // turn on italic
         return sb.toString();
@@ -36,7 +36,7 @@ public class RTFUtilities {
 
     // added 01-02-2010: used for escaping strings inside metadata
     public static String toEscapedRTFString(String original){
-        StringBuffer currentRun = new StringBuffer();
+        StringBuilder currentRun = new StringBuilder();
         for (int pos=0; pos<original.length(); pos++){
             char c = original.charAt(pos);
             if ((c>=0) && (c<=127)){        // low byte run
@@ -50,7 +50,7 @@ public class RTFUtilities {
                 String hex = "\\'" + Integer.toHexString(c).toLowerCase();
                 currentRun.append(hex);
             } else {    // double byte run
-                currentRun.append("\\u" + new Integer(c).toString());
+                currentRun.append("\\u").append(new Integer(c).toString());
                 //currentRun.append("\\u" + Integer.toString(Character.getNumericValue(c)));
                 currentRun.append("\\'3f");
             }
@@ -60,7 +60,7 @@ public class RTFUtilities {
 
     public static String toEscapedRTFString(String original, String fontNo, String fontSize, String fontColor, String fontFace){
         if (original.length()==0) {return new String();}
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         short currentRunType = 0;
         StringBuffer currentRun = new StringBuffer();
         for (int pos=0; pos<original.length(); pos++){
@@ -73,8 +73,8 @@ public class RTFUtilities {
                 if (currentRunType!=LB_RUN){
                     currentRun=new StringBuffer();
                     currentRun.append("{");
-                    currentRun.append("\\f" + fontNo);
-                    currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace) + " ");
+                    currentRun.append("\\f").append(fontNo);
+                    currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace)).append(" ");
                 }
                 currentRunType = LB_RUN;
                 switch (c){
@@ -92,12 +92,12 @@ public class RTFUtilities {
                 if (currentRunType!=HB_RUN){
                     currentRun=new StringBuffer();
                     currentRun.append("{");
-                    currentRun.append("\\f" + fontNo);
+                    currentRun.append("\\f").append(fontNo);
                     // added 26-04-2004 / take 1
-                    currentRun.append("\\loch\\af" + fontNo);
-                    currentRun.append("\\hich\\af" + fontNo);                    
-                    currentRun.append("\\dbch\\f" + fontNo);       
-                    currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace) + " ");
+                    currentRun.append("\\loch\\af").append(fontNo);
+                    currentRun.append("\\hich\\af").append(fontNo);                    
+                    currentRun.append("\\dbch\\f").append(fontNo);       
+                    currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace)).append(" ");
                 }
                 currentRunType = HB_RUN;
                 String hex = "\\'" + Integer.toHexString(c).toLowerCase();
@@ -111,13 +111,13 @@ public class RTFUtilities {
                     currentRun=new StringBuffer();
                     currentRun.append("{");
 
-                    currentRun.append("\\loch\\af" + fontNo);
-                    currentRun.append("\\hich\\af" + fontNo);                    
-                    currentRun.append("\\dbch\\f" + fontNo);       
-                    currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace) + " ");
+                    currentRun.append("\\loch\\af").append(fontNo);
+                    currentRun.append("\\hich\\af").append(fontNo);                    
+                    currentRun.append("\\dbch\\f").append(fontNo);       
+                    currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace)).append(" ");
                 }
                 currentRunType = DB_RUN;
-                currentRun.append("\\u" + new Integer(c).toString());
+                currentRun.append("\\u").append(new Integer(c).toString());
                 //currentRun.append("\\u" + Integer.toString(Character.getNumericValue(c)));
                 currentRun.append("\\'3f");
             }
@@ -139,21 +139,21 @@ public class RTFUtilities {
     
     public static String toRTFBorderDefinition(Format format, RTFParameters param){
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         // left border
         sb.append("\\clbrdrl");
         if (param.drawFrame && param.isFirstChunk && param.frame.indexOf('l')>=0 && (!param.isOutside)){
             sb.append(toRTFBorderStyleString(param.frameStyle));
             param.addColorMapping(param.frameColor);
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(param.frameColor)); // black            
+            sb.append("\\brdrcf").append(param.getColorMapping(param.frameColor)); // black            
         }
         else if (format.getProperty("chunk-border").indexOf('l')<0){    // no left border
             sb.append("\\brdrnone");
         } else {    // set border style and color
             sb.append(toRTFBorderStyleString(format.getProperty("chunk-border-style")));
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(format.getProperty("chunk-border-color")));
+            sb.append("\\brdrcf").append(param.getColorMapping(format.getProperty("chunk-border-color")));
         }
         
         // right border
@@ -162,14 +162,14 @@ public class RTFUtilities {
             sb.append(toRTFBorderStyleString(param.frameStyle));
             param.addColorMapping(param.frameColor);
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(param.frameColor));            
+            sb.append("\\brdrcf").append(param.getColorMapping(param.frameColor));            
         }
         else if (format.getProperty("chunk-border").indexOf('r')<0){    // no right border
             sb.append("\\brdrnone");
         } else {    // set border style and color
             sb.append(toRTFBorderStyleString(format.getProperty("chunk-border-style")));
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(format.getProperty("chunk-border-color")));
+            sb.append("\\brdrcf").append(param.getColorMapping(format.getProperty("chunk-border-color")));
         }
 
         // top border
@@ -178,14 +178,14 @@ public class RTFUtilities {
             sb.append(toRTFBorderStyleString(param.frameStyle));
             param.addColorMapping(param.frameColor);
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(param.frameColor));             
+            sb.append("\\brdrcf").append(param.getColorMapping(param.frameColor));             
         }
         else if (format.getProperty("chunk-border").indexOf('t')<0){    // no top border
             sb.append("\\brdrnone");
         } else {    // set border style and color
             sb.append(toRTFBorderStyleString(format.getProperty("chunk-border-style")));
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(format.getProperty("chunk-border-color")));
+            sb.append("\\brdrcf").append(param.getColorMapping(format.getProperty("chunk-border-color")));
         }
 
         // bottom border
@@ -194,14 +194,14 @@ public class RTFUtilities {
             sb.append(toRTFBorderStyleString(param.frameStyle));
             param.addColorMapping(param.frameColor);
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(param.frameColor));             
+            sb.append("\\brdrcf").append(param.getColorMapping(param.frameColor));             
         }
         else if (format.getProperty("chunk-border").indexOf('b')<0){    // no bottom border
             sb.append("\\brdrnone");
         } else {    // set border style and color
             sb.append(toRTFBorderStyleString(format.getProperty("chunk-border-style")));
             sb.append("\\brdrw10"); // border width in twips
-            sb.append("\\brdrcf" + param.getColorMapping(format.getProperty("chunk-border-color")));
+            sb.append("\\brdrcf").append(param.getColorMapping(format.getProperty("chunk-border-color")));
         }
         return sb.toString();
     }
