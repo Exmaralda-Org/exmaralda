@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.4 -->
-<!-- Andreas Nolda 2023-07-17 -->
+<!-- Version 12.5 -->
+<!-- Andreas Nolda 2023-09-21 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -235,7 +235,7 @@
                                             matches(substring-before(current(),.),'^\p{P}*$') and
                                             matches(substring-after(current(),.),'^\p{P}*$')]">
           <xsl:analyze-string select="."
-                              regex="{'\p{L}+(\.?-\p{L}+)*\.'}">
+                              regex="{'[\p{L}\d]+(\.?-[\p{L}\d]+)*\.'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -245,9 +245,9 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- simple URLs: -->
-        <xsl:when test="matches(.,'^\p{P}*(\p{L}+://)?[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+\p{P}*$')">
+        <xsl:when test="matches(.,'^\p{P}*(\p{L}+://)?[\p{L}\d]+([.-][\p{L}\d]+)*\.\p{L}+\p{P}*$')">
           <xsl:analyze-string select="."
-                              regex="{'(\p{L}+://)?[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+'}">
+                              regex="{'(\p{L}+://)?[\p{L}\d]+([.-][\p{L}\d]+)*\.\p{L}+'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -257,9 +257,9 @@
           </xsl:analyze-string>
         </xsl:when>
         <!-- e-mail addresses: -->
-        <xsl:when test="matches(.,'^\p{P}*[\p{L}\p{N}]+(.[\p{L}\p{N}]+)@[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+\p{P}*$')">
+        <xsl:when test="matches(.,'^\p{P}*[\p{L}\d]+(.[\p{L}\d]+)@[\p{L}\d]+([.-][\p{L}\d]+)*\.\p{L}+\p{P}*$')">
           <xsl:analyze-string select="."
-                              regex="{'[\p{L}\p{N}]+(.[\p{L}\p{N}]+)@[\p{L}\p{N}]+([.-][\p{L}\p{N}]+)*\.\p{L}+'}">
+                              regex="{'[\p{L}\d]+(.[\p{L}\d]+)@[\p{L}\d]+([.-][\p{L}\d]+)*\.\p{L}+'}">
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
@@ -319,7 +319,7 @@
         <xsl:otherwise>
           <!-- tokenize words -->
           <xsl:analyze-string select="."
-                              regex="{'\p{L}+(-\p{L}+)*'}"><!-- e.g. "Mecklenburg" or "Mecklenburg-Vorpommern" -->
+                              regex="{'[\p{L}\d]+(-[\p{L}\d]+)*'}"><!-- e.g. "Mecklenburg" or "Mecklenburg-Vorpommern" -->
             <xsl:matching-substring>
               <xsl:call-template name="tokenize-word"/>
             </xsl:matching-substring>
