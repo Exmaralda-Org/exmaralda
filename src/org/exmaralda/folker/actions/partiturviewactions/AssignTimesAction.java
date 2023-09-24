@@ -19,11 +19,15 @@ import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
  */
 public class AssignTimesAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of PlayAction */
+    /** Creates a new instance of PlayAction
+     * @param ac
+     * @param name
+     * @param icon */
     public AssignTimesAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** AssignTimesAction ***]");
         applicationControl.assignTimes();

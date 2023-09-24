@@ -19,7 +19,10 @@ import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
  */
 public class AddEventInPartiturAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of PlayAction */
+    /** Creates a new instance of PlayAction
+     * @param ac
+     * @param name
+     * @param icon */
     public AddEventInPartiturAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }

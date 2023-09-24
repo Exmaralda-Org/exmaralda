@@ -40,7 +40,7 @@ public class WhisperAction extends org.exmaralda.partitureditor.partiture.Abstra
         try {
             table.commitEdit(true);
             System.out.println("WhisperAction!");
-            deepL();
+            whisper();
             table.transcriptionChanged = false;
             table.clearUndo();
             table.clearSearchResult();
@@ -55,7 +55,7 @@ public class WhisperAction extends org.exmaralda.partitureditor.partiture.Abstra
     //List<Tier> languageTiers;
     
     
-    private void deepL() throws JexmaraldaException, IOException, JDOMException, SAXException, FSMException{
+    private void whisper() throws JexmaraldaException, IOException, JDOMException, SAXException, FSMException{
         
         
         // let the user define parameters

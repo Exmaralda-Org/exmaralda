@@ -5,6 +5,7 @@
 
 package org.exmaralda.folker.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -33,6 +34,11 @@ public class TierSelectionListCellRenderer extends javax.swing.DefaultListCellRe
             String tooltip = tier.getDescription(transcription.getHead().getSpeakertable());
             Component c = super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
             ((JLabel)c).setToolTipText(tooltip);
+            if ("t".equals(tier.getType())){
+                ((JLabel)c).setFont(c.getFont().deriveFont(java.awt.Font.BOLD));
+            } else if ("d".equals(tier.getType())){
+                ((JLabel)c).setForeground(Color.DARK_GRAY);
+            }
             return c;
         }
         return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

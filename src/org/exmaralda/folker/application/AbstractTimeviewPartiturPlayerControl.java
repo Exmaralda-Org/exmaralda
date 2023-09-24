@@ -96,6 +96,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
     public org.exmaralda.folker.actions.partiturviewactions.AddEventInPartiturAction addEventInPartiturAction;
     public org.exmaralda.folker.actions.partiturviewactions.AppendIntervalInPartiturAction appendIntervalInPartiturAction;
     public org.exmaralda.folker.actions.partiturviewactions.AssignTimesAction assignTimesAction;
+    public org.exmaralda.folker.actions.partiturviewactions.WhisperASRAction whisperASRAction;
     // ---------------------------
     public org.exmaralda.folker.actions.waveformactions.ChangeZoomAction changeZoomAction;
 
@@ -174,6 +175,10 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                 Internationalizer.getString("Add event..."), c.getIcon(Constants.ADD_EVENT_ICON));
         appendIntervalInPartiturAction = new org.exmaralda.folker.actions.partiturviewactions.AppendIntervalInPartiturAction(this, 
                 Internationalizer.getString("Append interval"), c.getIcon(Constants.APPEND_INTERVAL_ICON));
+
+        whisperASRAction = new org.exmaralda.folker.actions.partiturviewactions.WhisperASRAction(this, 
+                "", c.getIcon(Constants.WHISPER_ASR_ICON));
+
         assignTimesAction = new org.exmaralda.folker.actions.partiturviewactions.AssignTimesAction(this, "", c.getIcon(Constants.TIMESTAMP_EVENT_ICON));
         assignTimesAction.setEnabled(false);
 
@@ -307,6 +312,8 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         detachSelectionAction.setEnabled(false);
     }
 
+
+
     public void addInterval(){
         partitur.commitEdit(true);
         // Added 08-04-2011
@@ -367,6 +374,10 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         
         partitur.setNewSelection(-1, -1, col1, col2-1);
         playSelection();
+    }
+
+    public void whisperASR() {
+        //override in subclasses
     }
 
     public void addMask(){
@@ -818,6 +829,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
             loopThread.stopLoop();
         }
     }
+
 
 
 

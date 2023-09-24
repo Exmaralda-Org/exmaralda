@@ -8,10 +8,8 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import java.awt.Container;
 import javax.swing.JFrame;
-import org.exmaralda.partitureditor.jexmaraldaswing.EditMetaInformationDialog;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;
 /**
  *

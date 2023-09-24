@@ -47,29 +47,14 @@ public class Whisper4EXMARaLDA {
     public String modifiedStartID;
     public String modifiedEndID;
 
-    public File createWhisperInputFile(BasicTranscription bt, String tierID, String startID, String endID) throws JexmaraldaException, IOException, SAXException, FSMException, JDOMException{
+    public File createWhisperInputFile(BasicTranscription bt, double startTime, double endTime) throws JexmaraldaException, IOException, SAXException, FSMException, JDOMException{
                         
         
-        // **************************************
-        // 0. check the selection
-        // **************************************
-        int selectionStartCol = bt.getBody().getCommonTimeline().lookupID(startID);
-        int selectionStartRow = bt.getBody().lookupID(tierID);
-        if (selectionStartRow<0 || selectionStartCol<0){
-            throw new JexmaraldaException(112, "Invalid selection");
-        } else if (!(bt.getBody().getTierWithID(tierID).containsEventAtStartPoint(startID))){
-            throw new JexmaraldaException(112, "Selection is on empty event.");
-        }
-
         
         // **************************************
         // 3. convert and write the audio file
         // **************************************
         // make sure all timeline items have absolute times
-        bt.getBody().getCommonTimeline().completeTimes(false, bt, true);                
-        double startTime = bt.getBody().getCommonTimeline().getTimelineItemWithID(startID).getTime();
-        double endTime = bt.getBody().getCommonTimeline().getTimelineItemWithID(endID).getTime();
-        
         String wavPath = bt.getHead().getMetaInformation().getReferencedFile("wav");
         File wavFile = new File(wavPath);
         File audioFile = convertAudioFileToMono(cutAudioFile(wavFile, startTime, endTime));
@@ -97,7 +82,7 @@ public class Whisper4EXMARaLDA {
         try {
             BasicTranscription bt = new BasicTranscription("C:\\Users\\bernd\\Dropbox\\EXMARaLDA-Demokorpus\\PaulMcCartney\\PaulMcCartney.exb");
             Whisper4EXMARaLDA m4e = new Whisper4EXMARaLDA();
-            File file = m4e.createWhisperInputFile(bt, "TIE0", "T1", "T2");
+            File file = m4e.createWhisperInputFile(bt, 0.8, 1.6);
             WhisperConnector whisperConnector = new WhisperConnector("");           
             String result = whisperConnector.callWhisperSimple(file);            
             System.out.println(result);

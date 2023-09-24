@@ -165,7 +165,8 @@ public class Timeline extends Vector {
     }
     
     
-    /** returns the number of timeline items in the time line */
+    /** returns the number of timeline items in the time line
+     * @return  */
     public int getNumberOfTimelineItems(){
         return size();
     }
@@ -253,6 +254,16 @@ public class Timeline extends Vector {
     public void insertTimelineItemAt(TimelineItem tli, int position) {
         insertElementAt(tli, position);
         updatePositions();
+    }
+    
+    public String insertTimelineItemWithTime(double time, double tolerance){
+        int index = findTimelineItem(time, tolerance);
+        if (index>=0){
+            return this.getTimelineItemAt(index).getID();
+        }
+        TimelineItem newTLI = new TimelineItem(getFreeID(), time);
+        insertAccordingToTime(newTLI);
+        return newTLI.getID();
     }
 
 

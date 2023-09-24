@@ -8,7 +8,6 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,18 +42,18 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         listed above but the quality will be low. */
     
     static String[][] SOURCE_LANGUAGES = {
-        {"auto_detect", "Auto detect"},
-        {"XX","Afrikaans"},
-        {"XX","Arabic"},
-        {"XX","Armenian"},
-        {"XX","Azerbaijani"},
-        {"XX","Belarusian"},
-        {"XX","Bosnian"},
+        {"", "Auto detect"},
+        {"AF","Afrikaans"},
+        {"AR","Arabic"},
+        {"HY","Armenian"},
+        {"AZ","Azerbaijani"},
+        {"BE","Belarusian"},
+        {"BS","Bosnian"},
         {"BG","Bulgarian"},
         
-        {"XX","Catalan"},
+        {"CA","Catalan"},
         {"ZH","Chinese"},        
-        {"XX","Croatian"},
+        {"HR","Croatian"},
         {"CS","Czech"},
         
         {"DA","Danish"},
@@ -63,16 +62,16 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         {"ET","Estonian"},
         {"FI","Finnish"},
         {"FR","French"},
-        {"XX","Galician"},
+        {"GL","Galician"},
         {"DE","German"},
         {"EL","Greek"},
 
-        {"XX","Hebrew"},
+        {"HE","Hebrew"},
         {"XX","Hindu"},
         {"HU","Hungarian"},
 
-        {"XX","Icelandic"},
-        {"XX","Indonesian"},
+        {"IS","Icelandic"},
+        {"ID","Indonesian"},
         {"IT","Italian"},
         {"JA","Japanese"},
 

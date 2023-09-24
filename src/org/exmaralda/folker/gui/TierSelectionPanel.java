@@ -19,7 +19,6 @@ import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
@@ -33,9 +32,12 @@ import org.exmaralda.partitureditor.jexmaralda.Timeline;
 public class TierSelectionPanel extends javax.swing.JPanel {
 
     DefaultListModel listModel;
-    HashMap<Integer,Integer> list2tierIndex = new HashMap<Integer, Integer>();
+    HashMap<Integer,Integer> list2tierIndex = new HashMap<>();
 
-    /** Creates new form TierSelectionPanel */
+    /** Creates new form TierSelectionPanel
+     * @param bt
+     * @param id1
+     * @param id2 */
     public TierSelectionPanel(BasicTranscription bt, String id1, String id2) {
         initComponents();
         listModel = new DefaultListModel();

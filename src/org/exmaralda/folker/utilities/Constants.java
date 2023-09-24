@@ -81,6 +81,8 @@ public class Constants {
     
     public static final int GO_BACK_ICON = 41;
     
+    public static final int WHISPER_ASR_ICON = 42;
+
     private static String[] ICON_PATHS = {
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/document-new.png",    // new
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/document-open.png",    // open
@@ -136,8 +138,9 @@ public class Constants {
         "/org/exmaralda/folker/tangoicons/othericons/folkerlogo_small.png",           // small folker
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/actions/appointment-new.png",      // big timestamp event
         "/org/exmaralda/folker/tangoicons/othericons/mask_black.png",          // mask
-        "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/media-seek-backward.png"   // move back cursor
+        "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/media-seek-backward.png",   // move back cursor
             
+        "/org/exmaralda/partitureditor/partiture/Icons/openai-16-green.png"       // whisper ASR
     };
 
     // MUSS ... POSSESSIVE ... QUANTIFIERS ... VERWENDEN ...
