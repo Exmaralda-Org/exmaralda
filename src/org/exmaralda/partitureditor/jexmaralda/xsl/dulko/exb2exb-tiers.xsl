@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-tiers.xsl -->
-<!-- Version 1.5 -->
-<!-- Andreas Nolda 2023-07-17 -->
+<!-- Version 2.0 -->
+<!-- Andreas Nolda 2023-09-27 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:include href="exb2exb.xsl"/>
 
-<xsl:param name="zh-number">
-  <xsl:value-of select="count(/basic-transcription/basic-body/tier[@category='ZH'])"/>
-</xsl:param>
+<xsl:param name="zh-number"/>
 <!-- "0": word tier, "1": first ZH tier, etc. -->
+<!-- empty value: last word or ZH tier -->
+
+<xsl:variable name="zh-decrement">0</xsl:variable>
+<!-- set to "1" for ZH tiers to be created -->
 
 <xsl:variable name="reference-id">
   <xsl:choose>
+    <xsl:when test="string-length($zh-number)=0">
+      <xsl:value-of select="/basic-transcription/basic-body/tier[@category=$word or
+                                                                 @category='ZH'][last()]/@id"/>
+    </xsl:when>
     <xsl:when test="string(number($zh-number))='NaN'">
       <xsl:message terminate="yes">Error: The $zh-number value "<xsl:value-of select="$zh-number"/>" is not a number.</xsl:message>
     </xsl:when>
-    <xsl:when test="$zh-number=0">
+    <xsl:when test="floor(number($zh-number))!=number($zh-number)">
+      <xsl:message terminate="yes">Error: The $zh-number value "<xsl:value-of select="$zh-number"/>" is not an integer.</xsl:message>
+    </xsl:when>
+    <xsl:when test="number($zh-number) - $zh-decrement=0">
       <xsl:value-of select="/basic-transcription/basic-body/tier[@category=$word]/@id"/>
     </xsl:when>
-    <xsl:when test="$zh-number&gt;0">
-      <xsl:value-of select="/basic-transcription/basic-body/tier[@category='ZH'][position()=$zh-number]/@id"/>
+    <xsl:when test="number($zh-number) - $zh-decrement&gt;0">
+      <xsl:value-of select="/basic-transcription/basic-body/tier[@category='ZH'][position()=number($zh-number) - $zh-decrement]/@id"/>
     </xsl:when>
   </xsl:choose>
 </xsl:variable>

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-zh.xsl -->
-<!-- Version 9.1 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 9.2 -->
+<!-- Andreas Nolda 2023-09-27 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:include href="exb2exb-tiers.xsl"/>
+<!-- We cannot include the master stylesheet because we want to change the $zh-decrement value. -->
+<xsl:import href="exb2exb-tiers.xsl"/>
+
+<!-- decrement $zh-number by 1 -->
+<xsl:variable name="zh-decrement">1</xsl:variable>
 
 <xsl:template match="basic-body">
   <xsl:variable name="preceding-tiers">

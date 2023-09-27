@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-trans.xsl -->
-<!-- Version 8.2 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 8.3 -->
+<!-- Andreas Nolda 2023-09-27 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<!-- We cannot include the master stylesheet because we want to change the $zh-number value. -->
-<xsl:import href="exb2exb-tiers.xsl"/>
-
-<!-- Changing the user-visible parameter into a variable (actually, a constant). -->
-<xsl:variable name="zh-number">0</xsl:variable>
+<xsl:include href="exb2exb-tiers.xsl"/>
 
 <xsl:template match="basic-body">
   <xsl:variable name="s-id"

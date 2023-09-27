@@ -94,6 +94,7 @@
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-metadata-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -103,7 +104,8 @@
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txtword-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-word-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -113,7 +115,8 @@
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txtorig-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-orig-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -123,18 +126,24 @@
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txttag-txts-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-tag-s-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">0</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
     <tranformation-scenario>
         <name>Dulko: Diff-tier (learner text)</name>
-        <description>Adds or updates a diff-tier relative to the word-tier.
+        <description>Adds or updates a Diff-tier relative to the word-tier.
 Requires existing orig-, S-, pos-, and lemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txtdiff-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-diff-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">0</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -145,7 +154,8 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txtlayout-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-layout-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -155,7 +165,8 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txtgraph-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-graph-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -166,7 +177,10 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-txttrans-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-trans-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">0</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -176,7 +190,10 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh1-zh1fehler-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh-fehler-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">1</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -186,7 +203,10 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh1tag-zh1s-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-tag-s-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">1</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -197,7 +217,10 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh1diff-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-diff-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">1</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -207,7 +230,10 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh2-zh2fehler-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh-fehler-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">2</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -217,7 +243,10 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh2tag-zh2s-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-tag-s-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">2</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -228,7 +257,10 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
-        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh2diff-format.xsl</stylesheet>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-diff-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">2</parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -239,6 +271,9 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-zh-fehler-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number"></parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -249,6 +284,9 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-tag-s-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number"></parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -260,6 +298,9 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-diff-format.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number"></parameter>
+        </parameters>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -270,6 +311,7 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-spans-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -280,6 +322,7 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-displayname-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
@@ -290,16 +333,59 @@ Requires existing ZH-, ZHS-, ZHpos-, and ZHlemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-timeline-format.xsl</stylesheet>
+        <parameters/>
         <output suffix="self-transformation"/>
     </tranformation-scenario>
 
     <tranformation-scenario>
-        <name>Dulko: learner text</name>
+        <name>Dulko: text (learner text)</name>
         <description>Exports learner text.</description>
         <input type="basic-transcription"/>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2text.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">0</parameter>
+        </parameters>
+        <output suffix="txt"/>
+    </tranformation-scenario>
+
+    <tranformation-scenario>
+        <name>Dulko: text (1st target hypothesis)</name>
+        <description>Exports text of the 1st target hypothesis.</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit/>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2text.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">1</parameter>
+        </parameters>
+        <output suffix="txt"/>
+    </tranformation-scenario>
+
+    <tranformation-scenario>
+        <name>Dulko: text (2nd target hypothesis)</name>
+        <description>Exports text of the 2nd target hypothesis.</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit/>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2text.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number">2</parameter>
+        </parameters>
+        <output suffix="txt"/>
+    </tranformation-scenario>
+
+    <tranformation-scenario>
+        <name>Dulko: text (last target hypothesis)</name>
+        <description>Exports text of the last target hypothesis.</description>
+        <input type="basic-transcription"/>
+        <segmentation type="NONE"/>
+        <list-unit/>
+        <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2text.xsl</stylesheet>
+        <parameters>
+            <parameter name="zh-number"></parameter>
+        </parameters>
         <output suffix="txt"/>
     </tranformation-scenario>
 
@@ -311,6 +397,7 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2html.xsl</stylesheet>
+        <parameters/>
         <output suffix="html"/>
     </tranformation-scenario>
 
@@ -322,6 +409,7 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2exb-annis.xsl</stylesheet>
+        <parameters/>
         <output suffix="xml"/>
     </tranformation-scenario>
 
@@ -332,6 +420,7 @@ Requires existing S-, pos-, and lemma-tiers.</description>
         <segmentation type="NONE"/>
         <list-unit/>
         <stylesheet>/org/exmaralda/partitureditor/jexmaralda/xsl/dulko/exb2metadata.xsl</stylesheet>
+        <parameters/>
         <output suffix="txt"/>
     </tranformation-scenario>
 

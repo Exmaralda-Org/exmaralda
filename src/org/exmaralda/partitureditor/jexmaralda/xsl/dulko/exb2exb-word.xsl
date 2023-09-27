@@ -11,7 +11,7 @@
 <!-- We cannot include the master stylesheet because we want to change the $zh-number value. -->
 <xsl:import href="exb2exb-tiers.xsl"/>
 
-<!-- Changing the user-visible parameter into a variable. -->
+<!-- change the user-visible parameter into a variable (actually, a constant) -->
 <xsl:variable name="zh-number">0</xsl:variable>
 
 <xsl:include href="lang.xsl"/>
