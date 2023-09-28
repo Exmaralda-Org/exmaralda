@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,7 +43,7 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         listed above but the quality will be low. */
     
     static String[][] SOURCE_LANGUAGES = {
-        {"", "Auto detect"},
+        {"--", "Auto detect"},
         {"AF","Afrikaans"},
         {"AR","Arabic"},
         {"HY","Armenian"},
@@ -98,13 +99,15 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        warningPanel = new javax.swing.JPanel();
+        showWarningButton = new javax.swing.JButton();
         sourceLanguagePanel = new javax.swing.JPanel();
         sourceLanguageLabel = new javax.swing.JLabel();
         sourceLanguageComboBox = new javax.swing.JComboBox();
         promptsPanel = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        promptComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        promptTextArea = new javax.swing.JTextArea();
         apikeyPanel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         apiKeyTextField = new javax.swing.JTextField();
@@ -118,6 +121,17 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         setTitle("Whisper Parameters");
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        showWarningButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/hexagon-exclamation-solid.png"))); // NOI18N
+        showWarningButton.setText("Information about Whisper webservice");
+        showWarningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showWarningButtonActionPerformed(evt);
+            }
+        });
+        warningPanel.add(showWarningButton);
+
+        mainPanel.add(warningPanel);
 
         sourceLanguagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Source Language"));
         sourceLanguagePanel.setLayout(new java.awt.BorderLayout());
@@ -133,12 +147,20 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         promptsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Prompts"));
         promptsPanel.setLayout(new java.awt.BorderLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        promptsPanel.add(jComboBox1, java.awt.BorderLayout.NORTH);
+        promptComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HIAT (en)", "HIAT (de)", "GAT (en)", "GAT (de)" }));
+        promptComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                promptComboBoxActionPerformed(evt);
+            }
+        });
+        promptsPanel.add(promptComboBox, java.awt.BorderLayout.NORTH);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        promptTextArea.setColumns(20);
+        promptTextArea.setLineWrap(true);
+        promptTextArea.setRows(5);
+        promptTextArea.setText("Euh, ((cough)) well, I ain't ((2,3s)) gonna do that. Whatcha think?");
+        promptTextArea.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(promptTextArea);
 
         promptsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -227,6 +249,45 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_getAPIKeyButtonActionPerformed
 
+    private void promptComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promptComboBoxActionPerformed
+        int selectedIndex = promptComboBox.getSelectedIndex();
+        String text = "";
+        switch (selectedIndex){
+            case 0 : 
+                // HIAT en
+                text = "Euh, ((cough)) well, I ain't ((2,3s)) gonna do that. Whatcha think?";
+                break;
+            case 1 : 
+                // HIAT de
+                text = "Ähm, ((hustet)) nö, ick mach dat nich ((2,3s)). Haste verstanden?";
+                break;
+            case 2 : 
+                // GAT en
+                text = "euh ((cough)) well I ain_t (2.3) gonna do that whatcha think";
+                break;
+            case 3 : 
+                // GAT de
+                text = "ähm ((hustet)) nö ick mach dat nich (2.3) haste verstanden";
+                break;
+        }
+        promptTextArea.setText(text);
+    }//GEN-LAST:event_promptComboBoxActionPerformed
+
+    private void showWarningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWarningButtonActionPerformed
+        String html = "<html>"
+                + "To use the Whisper webservice for automatic speech recoginition, "
+                + "you need an <b>account with OpenAI</b>. <br/>"
+                + "Calling the webservice will result in your OpanAI account "
+                + "being <b>charged in proportion to the amount of data</b> you send to the web service. <br/>"
+                + "This is a third party-service, not related to EXMARaLDA. <br/>"
+                + "Please note that your data (audio) is sent to an <b>external server</b>. <br/>"
+                + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
+                + "which may apply to your data. "                
+                + "</html>";
+        
+        JOptionPane.showMessageDialog(this, html, "Information about Whisper webservice", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_showWarningButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -295,17 +356,19 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel apikeyPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton getAPIKeyButton;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
+    private javax.swing.JComboBox<String> promptComboBox;
+    private javax.swing.JTextArea promptTextArea;
     private javax.swing.JPanel promptsPanel;
+    private javax.swing.JButton showWarningButton;
     private javax.swing.JComboBox sourceLanguageComboBox;
     private javax.swing.JLabel sourceLanguageLabel;
     private javax.swing.JPanel sourceLanguagePanel;
+    private javax.swing.JPanel warningPanel;
     // End of variables declaration//GEN-END:variables
 }

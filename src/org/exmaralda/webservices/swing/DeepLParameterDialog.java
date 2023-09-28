@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 
 /**
@@ -195,6 +196,8 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         apiTypeButtonGroup = new javax.swing.ButtonGroup();
         formalityButtonGroup = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
+        warningPanel = new javax.swing.JPanel();
+        showWarningButton = new javax.swing.JButton();
         sourceLanguagePanel = new javax.swing.JPanel();
         sourceLanguageLabel = new javax.swing.JLabel();
         sourceLanguageComboBox = new javax.swing.JComboBox();
@@ -240,6 +243,17 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         setTitle("DeepL Parameters");
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        showWarningButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/hexagon-exclamation-solid.png"))); // NOI18N
+        showWarningButton.setText("Information about DeepL webservice");
+        showWarningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showWarningButtonActionPerformed(evt);
+            }
+        });
+        warningPanel.add(showWarningButton);
+
+        mainPanel.add(warningPanel);
 
         sourceLanguagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Source Language"));
         sourceLanguagePanel.setLayout(new java.awt.BorderLayout());
@@ -485,6 +499,21 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         updateOK();
     }//GEN-LAST:event_apiKeyTextFieldFocusLost
 
+    private void showWarningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWarningButtonActionPerformed
+        String html = "<html>"
+        + "To use the DeepL webservice for automatic translation, "
+        + "you need an <b>account with DeepL</b>. <br/>"
+        + "Depending on your subscription mode, calling the webservice will result in your DeepL account "
+        + "being <b>charged in proportion to the amount of data</b> you send to the web service. <br/>"
+        + "This is a third party-service, not related to EXMARaLDA. <br/>"
+        + "Please note that your data (text from the transcription) is sent to an <b>external server</b>. <br/>"
+        + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
+        + "which may apply to your data. "
+        + "</html>";
+
+        JOptionPane.showMessageDialog(this, html, "Information about DeepL webservice", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_showWarningButtonActionPerformed
+
     
     private void updateSegmentationPanel(){
         // need to uncomment the following two lines when and iff segmentation is implemented
@@ -572,6 +601,7 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton selectedTierRadioButton;
     private javax.swing.ButtonGroup selectionButtonGroup;
     private javax.swing.JPanel selectionPanel;
+    private javax.swing.JButton showWarningButton;
     private javax.swing.JComboBox sourceLanguageComboBox;
     private javax.swing.JLabel sourceLanguageLabel;
     private javax.swing.JPanel sourceLanguagePanel;
@@ -581,6 +611,7 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> tierCategoriesComboBox;
     private javax.swing.JPanel tiersWithCategoryPanel;
     private javax.swing.JRadioButton tiersWithCategoryRadioButton;
+    private javax.swing.JPanel warningPanel;
     // End of variables declaration//GEN-END:variables
 
 }
