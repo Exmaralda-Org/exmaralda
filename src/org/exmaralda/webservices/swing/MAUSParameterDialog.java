@@ -5,6 +5,7 @@
 package org.exmaralda.webservices.swing;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -110,6 +111,8 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         outputButtonGroup = new javax.swing.ButtonGroup();
         selectionButtonGroup = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
+        warningPanel = new javax.swing.JPanel();
+        showWarningButton = new javax.swing.JButton();
         languagePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         languageComboBox = new javax.swing.JComboBox();
@@ -144,6 +147,17 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         setTitle("MAUS Parameters");
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        showWarningButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/hexagon-exclamation-solid.png"))); // NOI18N
+        showWarningButton.setText("Information about BAS webservices");
+        showWarningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showWarningButtonActionPerformed(evt);
+            }
+        });
+        warningPanel.add(showWarningButton);
+
+        mainPanel.add(warningPanel);
 
         languagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
         languagePanel.setLayout(new java.awt.BorderLayout());
@@ -280,6 +294,21 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void showWarningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWarningButtonActionPerformed
+        String html = "<html>"
+        + "The  webservices for automatic alignment and grapheme to phoneme conversion "
+        + "are kindly provided by <br/> the <b>Bavarian Archive for Speech Signals (BAS)</b> "
+        + "at the Ludwig-Maximilians-University (LMU) of Munich. <br/>"
+        + "Free usage of the services is permissible for academic research. "
+        + "Please refer to the BAS website for details on usage and how to cite the services. <br/>"
+        + "Please note that your data (audio text from the transcription) is sent to an <b>external server</b>. <br/>"
+        + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
+        + "which may apply to your data. "
+        + "</html>";
+
+        JOptionPane.showMessageDialog(this, html, "Information about BAS webservices", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_showWarningButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -353,7 +382,9 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel segmentationPanel;
     private javax.swing.ButtonGroup selectionButtonGroup;
     private javax.swing.JPanel selectionPanel;
+    private javax.swing.JButton showWarningButton;
     private javax.swing.JRadioButton textAsIsRadioButton;
+    private javax.swing.JPanel warningPanel;
     private javax.swing.JCheckBox wordsOrthoCheckBox;
     private javax.swing.JCheckBox wordsSAMPACheckBox;
     // End of variables declaration//GEN-END:variables

@@ -6,6 +6,7 @@
 package org.exmaralda.webservices.swing;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +37,8 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        warningPanel = new javax.swing.JPanel();
+        showWarningButton = new javax.swing.JButton();
         intervalPanel = new javax.swing.JPanel();
         minLabel = new javax.swing.JLabel();
         minSpinner = new javax.swing.JSpinner();
@@ -54,9 +57,22 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
         mainPanel.setPreferredSize(new java.awt.Dimension(600, 150));
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        showWarningButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/hexagon-exclamation-solid.png"))); // NOI18N
+        showWarningButton.setText("Information about BAS webservices");
+        showWarningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showWarningButtonActionPerformed(evt);
+            }
+        });
+        warningPanel.add(showWarningButton);
+
+        mainPanel.add(warningPanel);
+
+        minLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         minLabel.setText("Minimum Interval Length (s)");
         intervalPanel.add(minLabel);
 
+        minSpinner.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         minSpinner.setModel(new javax.swing.SpinnerNumberModel(5.0d, 0.0d, 10.0d, 0.2d));
         minSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -65,6 +81,7 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
         });
         intervalPanel.add(minSpinner);
 
+        maxSpinner.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         maxSpinner.setModel(new javax.swing.SpinnerNumberModel(10.0d, 5.0d, 25.0d, 0.5d));
         maxSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -73,14 +90,17 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
         });
         intervalPanel.add(maxSpinner);
 
+        maxLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         maxLabel.setText("Maximum Interval Length (s)");
         intervalPanel.add(maxLabel);
 
         mainPanel.add(intervalPanel);
 
+        languageLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         languageLabel.setText("Language: ");
         languagePanel.add(languageLabel);
 
+        languageComboBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(MAUSParameterDialog.LANGUAGES));
         languagePanel.add(languageComboBox);
 
@@ -125,6 +145,21 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
        dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void showWarningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWarningButtonActionPerformed
+        String html = "<html>"
+        + "The  webservices for automatic alignment and grapheme to phoneme conversion "
+        + "are kindly provided by <br/> the <b>Bavarian Archive for Speech Signals (BAS)</b> "
+        + "at the Ludwig-Maximilians-University (LMU) of Munich. <br/>"
+        + "Free usage of the services is permissible for academic research. "
+        + "Please refer to the BAS website for details on usage and how to cite the services. <br/>"
+        + "Please note that your data (audio text from the transcription) is sent to an <b>external server</b>. <br/>"
+        + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
+        + "which may apply to your data. "
+        + "</html>";
+
+        JOptionPane.showMessageDialog(this, html, "Information about BAS webservices", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_showWarningButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +226,8 @@ public class MAUSFineAlignmentParameterDialog extends javax.swing.JDialog {
     private javax.swing.JSpinner minSpinner;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
+    private javax.swing.JButton showWarningButton;
+    private javax.swing.JPanel warningPanel;
     // End of variables declaration//GEN-END:variables
 
     private void harmonizeSpinners() {

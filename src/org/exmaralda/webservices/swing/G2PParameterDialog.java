@@ -6,6 +6,7 @@ package org.exmaralda.webservices.swing;
 
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 
 /**
@@ -180,6 +181,8 @@ public class G2PParameterDialog extends javax.swing.JDialog {
         segmentationButtonGroup = new javax.swing.ButtonGroup();
         selectionButtonGroup = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
+        warningPanel = new javax.swing.JPanel();
+        showWarningButton = new javax.swing.JButton();
         sourceLanguagePanel = new javax.swing.JPanel();
         sourceLanguageLabel = new javax.swing.JLabel();
         sourceLanguageComboBox = new javax.swing.JComboBox();
@@ -221,6 +224,17 @@ public class G2PParameterDialog extends javax.swing.JDialog {
         setTitle("G2P Parameters");
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        showWarningButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/webservices/swing/hexagon-exclamation-solid.png"))); // NOI18N
+        showWarningButton.setText("Information about BAS webservices");
+        showWarningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showWarningButtonActionPerformed(evt);
+            }
+        });
+        warningPanel.add(showWarningButton);
+
+        mainPanel.add(warningPanel);
 
         sourceLanguagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Source Language"));
         sourceLanguagePanel.setLayout(new java.awt.BorderLayout());
@@ -454,6 +468,21 @@ public class G2PParameterDialog extends javax.swing.JDialog {
         outputOptionsChanged();
     }//GEN-LAST:event_bracketsCheckBoxActionPerformed
 
+    private void showWarningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWarningButtonActionPerformed
+        String html = "<html>"
+        + "The  webservices for automatic alignment and grapheme to phoneme conversion "
+        + "are kindly provided by <br/> the <b>Bavarian Archive for Speech Signals (BAS)</b> "
+        + "at the Ludwig-Maximilians-University (LMU) of Munich. <br/>"
+        + "Free usage of the services is permissible for academic research. "
+        + "Please refer to the BAS website for details on usage and how to cite the services. <br/>"
+        + "Please note that your data (audio text from the transcription) is sent to an <b>external server</b>. <br/>"
+        + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
+        + "which may apply to your data. "
+        + "</html>";
+
+        JOptionPane.showMessageDialog(this, html, "Information about BAS webservices", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_showWarningButtonActionPerformed
+
     
     private void updateSegmentationPanel(){
         // need to uncomment the following two lines when and iff segmentation is implemented
@@ -536,6 +565,7 @@ public class G2PParameterDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton selectedTierRadioButton;
     private javax.swing.ButtonGroup selectionButtonGroup;
     private javax.swing.JPanel selectionPanel;
+    private javax.swing.JButton showWarningButton;
     private javax.swing.JComboBox sourceLanguageComboBox;
     private javax.swing.JLabel sourceLanguageLabel;
     private javax.swing.JPanel sourceLanguagePanel;
@@ -548,6 +578,7 @@ public class G2PParameterDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> tierCategoriesComboBox;
     private javax.swing.JPanel tiersWithCategoryPanel;
     private javax.swing.JRadioButton tiersWithCategoryRadioButton;
+    private javax.swing.JPanel warningPanel;
     private javax.swing.JCheckBox wordStressCheckBox;
     // End of variables declaration//GEN-END:variables
 
