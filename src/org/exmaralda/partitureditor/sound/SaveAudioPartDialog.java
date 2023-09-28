@@ -12,7 +12,11 @@ package org.exmaralda.partitureditor.sound;
  */
 public class SaveAudioPartDialog extends AbstractSaveMediaDialog {
     
-    /** Creates new form SaveAudioPartDialog */
+    /** Creates new form SaveAudioPartDialog
+     * @param parent
+     * @param modal
+     * @param fn
+     * @param enableLink */
     public SaveAudioPartDialog(java.awt.Frame parent, boolean modal, String fn, boolean enableLink) {
         super(parent, modal, fn, enableLink);
         this.setTitle("Save media snippet");

@@ -6,14 +6,13 @@
 
 package org.exmaralda.partitureditor.partiture.formatActions;
 
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import javax.swing.Action;
-import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -21,7 +20,9 @@ import java.awt.Toolkit;
  */
 public class ApplyFormatStylesheetAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ApplyFormatStylesheetAction */
+    /** Creates a new instance of ApplyFormatStylesheetAction
+     * @param t
+     * @param icon */
     public ApplyFormatStylesheetAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Apply stylesheet", icon, t);
     }
@@ -57,13 +58,13 @@ public class ApplyFormatStylesheetAction extends org.exmaralda.partitureditor.pa
                 table.getModel().setTierFormatTable(tft);            
                 done = true;
                 table.formatChanged = true;
-             } catch (Exception e){                
+             } catch (IOException | ParserConfigurationException | TransformerException | SAXException e){                
                 javax.swing.JOptionPane dialog = new javax.swing.JOptionPane();
-                String text = new String("There was a problem with " + System.getProperty("line.separator"));
+                String text = "There was a problem with " + System.getProperty("line.separator");
                 text+=table.transcription2FormattableStylesheet + " : " + System.getProperty("line.separator");
                 text+=e.getLocalizedMessage() + System.getProperty("line.separator");
                 text+="Using internal stylesheet instead.";                    
-                dialog.showMessageDialog(table.getParent(), text);           
+                JOptionPane.showMessageDialog(table.getParent(), text);           
              }                
         }
         // if no custom stylesheet is specified,
@@ -79,7 +80,7 @@ public class ApplyFormatStylesheetAction extends org.exmaralda.partitureditor.pa
                 table.getModel().setTierFormatTable(tft);            
                 done = true;
                 table.formatChanged = true;
-             } catch (Exception e){
+             } catch (IOException | ParserConfigurationException | TransformerException | SAXException e){
                  e.printStackTrace();
                 // should never get here if build was correct
              } 

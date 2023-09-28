@@ -6,10 +6,9 @@
 
 package org.exmaralda.partitureditor.partiture.menus;
 
-import javax.swing.*;
+import javax.swing.JMenu;
 import org.exmaralda.partitureditor.partiture.*;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
+import org.exmaralda.partitureditor.partiture.formatActions.ApplyBuiltInFormatStylesheetAction;
 
 
 /**
@@ -18,8 +17,14 @@ import java.awt.Toolkit;
  */
 public class FormatMenu extends AbstractTableMenu {
     
+    String[][] builtInStylesheets = {
+        {"Default", "/org/exmaralda/partitureditor/jexmaralda/xsl/FormatTable4BasicTranscription.xsl"},
+        {"DULKO", "/org/exmaralda/partitureditor/jexmaralda/xsl/FormatTable4BasicTranscription.xsl"}
+    };
     
-    /** Creates a new instance of FormatMenu */
+    public JMenu builtInStylesheetsMenu;
+    /** Creates a new instance of FormatMenu
+     * @param t */
     public FormatMenu(PartitureTableWithActions t) {
         super(t);
         
@@ -28,6 +33,18 @@ public class FormatMenu extends AbstractTableMenu {
         this.setMnemonic(java.awt.event.KeyEvent.VK_R);
         
         add(table.applyFormatStylesheetAction);
+        
+        addSeparator();
+
+        builtInStylesheetsMenu = new JMenu("Built-in stylesheets");
+        add(builtInStylesheetsMenu);
+        
+        for (String[] pair : this.builtInStylesheets){
+            ApplyBuiltInFormatStylesheetAction abifssa =
+                    new ApplyBuiltInFormatStylesheetAction(t, pair[0], pair[1]);
+            builtInStylesheetsMenu.add(abifssa);
+        }
+        
         
         addSeparator();
         
