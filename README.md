@@ -8,13 +8,13 @@ Two further tools were developed for the workflow of the FOLK project: Another t
 
 EXMARaLDA’s features include:
 
-time-aligned transcription of digital audio or video
-flexible annotation for freely choosable categories,
-systematic documentation of a corpus through metadata
-flexible output of transcription data in various layouts and formats (notation, document)
-computer-assisted querying of transcription, annotation and metadata
-interoperable as it works with XML based data formats that allow for data exchange with other tools (like Praat, ELAN, Transcriber etc.) and enable a flexible processing and sustainable usage of the data.
-webservices for automation (forced alignment, annotation, ASR)
+- time-aligned transcription of digital audio or video
+- flexible annotation for freely choosable categories,
+- systematic documentation of a corpus through metadata
+- flexible output of transcription data in various layouts and formats (notation, document)
+- computer-assisted querying of transcription, annotation and metadata
+- interoperable as it works with XML based data formats that allow for data exchange with other tools (like Praat, ELAN, Transcriber etc.) and enable a flexible processing and sustainable usage of the data.
+- webservices for automation (forced alignment, annotation, ASR)
 EXMARaLDA is used by researchers world wide in different contexts in which spoken language is analysed, these include:
 
 - conversation and discourse analysis,
