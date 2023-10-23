@@ -98,6 +98,19 @@ public class Whisper4EXMARaLDA {
         return apiKey;
     }
     
+    public static String getWhisperLanguage() {
+        java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");        
+        // retrieve values from preferences
+        String lang = settings.get("WHISPER-LANGUAGE", "");
+        return lang;        
+    }
+    
+    public static String getWhisperPrompt() {
+        java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor");        
+        // retrieve values from preferences
+        String prompt = settings.get("WHISPER-PROMPT", "");
+        return prompt;        
+    }
     
     
 }

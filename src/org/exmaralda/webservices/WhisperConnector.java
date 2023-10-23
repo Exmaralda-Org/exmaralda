@@ -99,10 +99,16 @@ public class WhisperConnector {
     public String callWhisperSimple(File audioFile) throws IOException, URISyntaxException {
         String result = callWhisper(audioFile, "whisper-1", "", "json", 0.2, "en");    
         // {"text":"Here we go, here's my voice message. So why do you need that?"}
-        return result.substring(9, result.length() -2);
-            
+        return result.substring(9, result.length() -2);            
     }
     
+    public String callWhisperRegular(File audioFile, String language, String prompt) throws IOException, URISyntaxException {
+        String result = callWhisper(audioFile, "whisper-1", prompt, "json", 0.2, language);    
+        // {"text":"Here we go, here's my voice message. So why do you need that?"}
+        return result.substring(9, result.length() -2);            
+    }
+
+
     public String callWhisper(File audioFile, 
             String modelID, 
             String prompt, 
@@ -136,12 +142,15 @@ public class WhisperConnector {
         builder.addTextBody("prompt", prompt);
         builder.addTextBody("response_format", responseFormat);
         builder.addTextBody("temperature", Double.toString(temperature));
-        builder.addTextBody("language", language);
+        if (!(language.equals(("--")))){
+            builder.addTextBody("language", language);
+        }
         
         // construct a POST request with the multipart entity
         HttpPost httpPost = new HttpPost(whisperWebServiceURL);        
         //httpPost.addHeader("Authorization", bearer + " " + authKey);
         httpPost.addHeader("Authorization", "Bearer " + authKey);
+        httpPost.addHeader("Accept-Charset", "utf-8");
         //httpPost.addHeader("Content-Type", "multipart/form-data");
         httpPost.setEntity(builder.build());
         
@@ -159,7 +168,7 @@ public class WhisperConnector {
         int statusCode = statusLine.getStatusCode();
         
         if (statusCode==200 && result != null) {
-            String resultAsString = EntityUtils.toString(result);
+            String resultAsString = EntityUtils.toString(result, "utf-8");
             EntityUtils.consume(result);
             httpClient.close();
             
@@ -167,7 +176,7 @@ public class WhisperConnector {
             return resultAsString;
         } else {
             // something went wrong, throw an exception
-            System.out.println(EntityUtils.toString(result));
+            System.out.println(EntityUtils.toString(result, "utf-8"));
             String reason = statusLine.getReasonPhrase();
             System.out.println(statusLine.getStatusCode());
             System.out.println(reason);

@@ -64,17 +64,23 @@ public class WhisperAction extends org.exmaralda.partitureditor.partiture.Abstra
         
         // retrieve values from preferences
         String apiKey = settings.get("WHISPER-API-KEY", "");
+        String prompt = settings.get("WHISPER-PROMPT", "");
+        String language = settings.get("WHISPER-LANGUAGE", "--");
 
-        whisperParameterDialog.setParameters(apiKey);
+        whisperParameterDialog.setParameters(apiKey, prompt, language);
         
         whisperParameterDialog.setLocationRelativeTo(table);
         whisperParameterDialog.setVisible(true);
         if (!whisperParameterDialog.approved) return;
-        final HashMap<String, Object> deepLParameters = whisperParameterDialog.getWhisperParameters();
+        final HashMap<String, Object> whisperParameters = whisperParameterDialog.getWhisperParameters();
         
         // write the parameters to the preferences
-        String apiKeyInput = (String) deepLParameters.get("API-KEY");
+        String apiKeyInput = (String) whisperParameters.get("API-KEY");
         settings.put("WHISPER-API-KEY", apiKeyInput);        
+        String promptInput = (String)whisperParameters.get("PROMPT");
+        settings.put("WHISPER-PROMPT", promptInput);        
+        String languageInput = (String)whisperParameters.get("SOURCE-LANGUAGE");
+        settings.put("WHISPER-LANGUAGE", languageInput);        
     }
     
 }

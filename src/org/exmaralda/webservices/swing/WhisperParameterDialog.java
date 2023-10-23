@@ -105,9 +105,13 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         sourceLanguageLabel = new javax.swing.JLabel();
         sourceLanguageComboBox = new javax.swing.JComboBox();
         promptsPanel = new javax.swing.JPanel();
-        promptComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         promptTextArea = new javax.swing.JTextArea();
+        promptButtonPanel = new javax.swing.JPanel();
+        hiatENButton = new javax.swing.JButton();
+        hiatDEButton = new javax.swing.JButton();
+        gatENButton = new javax.swing.JButton();
+        gatDEButton = new javax.swing.JButton();
         apikeyPanel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         apiKeyTextField = new javax.swing.JTextField();
@@ -147,14 +151,6 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         promptsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Prompts"));
         promptsPanel.setLayout(new java.awt.BorderLayout());
 
-        promptComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HIAT (en)", "HIAT (de)", "GAT (en)", "GAT (de)" }));
-        promptComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promptComboBoxActionPerformed(evt);
-            }
-        });
-        promptsPanel.add(promptComboBox, java.awt.BorderLayout.NORTH);
-
         promptTextArea.setColumns(20);
         promptTextArea.setLineWrap(true);
         promptTextArea.setRows(5);
@@ -163,6 +159,46 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(promptTextArea);
 
         promptsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        promptButtonPanel.setLayout(new javax.swing.BoxLayout(promptButtonPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        hiatENButton.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        hiatENButton.setText("HIAT (en)");
+        hiatENButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hiatENButtonActionPerformed(evt);
+            }
+        });
+        promptButtonPanel.add(hiatENButton);
+
+        hiatDEButton.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        hiatDEButton.setText("HIAT (de)");
+        hiatDEButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hiatDEButtonActionPerformed(evt);
+            }
+        });
+        promptButtonPanel.add(hiatDEButton);
+
+        gatENButton.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        gatENButton.setText("GAT (en)");
+        gatENButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gatENButtonActionPerformed(evt);
+            }
+        });
+        promptButtonPanel.add(gatENButton);
+
+        gatDEButton.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        gatDEButton.setText("GAT (de)");
+        gatDEButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gatDEButtonActionPerformed(evt);
+            }
+        });
+        promptButtonPanel.add(gatDEButton);
+
+        promptsPanel.add(promptButtonPanel, java.awt.BorderLayout.EAST);
 
         mainPanel.add(promptsPanel);
 
@@ -249,37 +285,13 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_getAPIKeyButtonActionPerformed
 
-    private void promptComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promptComboBoxActionPerformed
-        int selectedIndex = promptComboBox.getSelectedIndex();
-        String text = "";
-        switch (selectedIndex){
-            case 0 : 
-                // HIAT en
-                text = "Euh, ((cough)) well, I ain't ((2,3s)) gonna do that. Whatcha think?";
-                break;
-            case 1 : 
-                // HIAT de
-                text = "Ähm, ((hustet)) nö, ick mach dat nich ((2,3s)). Haste verstanden?";
-                break;
-            case 2 : 
-                // GAT en
-                text = "euh ((cough)) well I ain_t (2.3) gonna do that whatcha think";
-                break;
-            case 3 : 
-                // GAT de
-                text = "ähm ((hustet)) nö ick mach dat nich (2.3) haste verstanden";
-                break;
-        }
-        promptTextArea.setText(text);
-    }//GEN-LAST:event_promptComboBoxActionPerformed
-
     private void showWarningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWarningButtonActionPerformed
         String html = "<html>"
                 + "To use the Whisper webservice for automatic speech recoginition, "
                 + "you need an <b>account with OpenAI</b>. <br/>"
                 + "Calling the webservice will result in your OpanAI account "
                 + "being <b>charged in proportion to the amount of data</b> you send to the web service. <br/>"
-                + "This is a third party-service, not related to EXMARaLDA. <br/>"
+                + "This is a third party service, not related to EXMARaLDA. <br/>"
                 + "Please note that your data (audio) is sent to an <b>external server</b>. <br/>"
                 + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
                 + "which may apply to your data. "                
@@ -287,6 +299,40 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         
         JOptionPane.showMessageDialog(this, html, "Information about Whisper webservice", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_showWarningButtonActionPerformed
+
+    private void hiatENButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hiatENButtonActionPerformed
+        String text = "Euh, ((cough)) well, I ain't ((2,3s)) gonna do that. Whatcha think? I did this three or four times. "
+                        + "It must've been on the fourth of July nineteen-hundred and seventy-seven. "
+                        + "I had about four thousand five hundred sixty-one dollars in my bank account. ";
+        promptTextArea.setText(text);
+
+    }//GEN-LAST:event_hiatENButtonActionPerformed
+
+    private void hiatDEButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hiatDEButtonActionPerformed
+        String text = "Ähm, ((hustet)) nö, ick mach dat nich ((2,3s)). Haste verstanden?"
+                + "Was hammer gelacht, damals. So um neunzehnhundertzweiundachtzig muss das gewesen sein! "
+                + "Oder war das zwei, drei Jahre früher? "
+                + "Kann auch sechsundvierzigtausendachthundertzweiunddreißig Jahre her sein. "
+                + "Was weiß denn ich? ";
+        promptTextArea.setText(text);
+    }//GEN-LAST:event_hiatDEButtonActionPerformed
+
+    private void gatENButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gatENButtonActionPerformed
+        String text = "euh ((cough)) well I ain_t (2.3) gonna do that whatcha think"
+                        + "it must_ve been on the fourth of july nineteen hundred and seventy seven  "
+                        + "i had about four thousand five hundred sixty one dollars in my bank account  ";
+        promptTextArea.setText(text);
+        
+    }//GEN-LAST:event_gatENButtonActionPerformed
+
+    private void gatDEButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gatDEButtonActionPerformed
+        String text = "ähm ((hustet)) nö ick mach dat nich (2.3) haste verstanden "
+                + "hammer des früher anners gemacht so neunzehnhundertachtundsiebzig "
+                + "das ist höchstens vier oder zwölf oder achtundzwanzig jahre her"
+                + "oder auch vierhunderttausendfünhundertzwölf sekunden ";
+        promptTextArea.setText(text);
+        
+    }//GEN-LAST:event_gatDEButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,14 +376,24 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         });
     }
     
-    public void setParameters(String apiKey){
+    public void setParameters(String apiKey, String prompt, String language){
         apiKeyTextField.setText(apiKey);
+        promptTextArea.setText(prompt);
+        int index = 0;
+        for (int i=0; i<SOURCE_LANGUAGES.length; i++){
+            if (SOURCE_LANGUAGES[i][0].equals(language)){
+                index = i;
+                break;
+            }
+        }
+        sourceLanguageComboBox.setSelectedIndex(index);
         updateOK();
     }
     
     public HashMap<String, Object> getWhisperParameters() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("SOURCE-LANGUAGE", ((String[])sourceLanguageComboBox.getSelectedItem())[0]);
+        result.put("PROMPT", promptTextArea.getText());
         result.put("API-KEY", apiKeyTextField.getText());
         return result;
     }
@@ -355,14 +411,18 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
     private javax.swing.JTextField apiKeyTextField;
     private javax.swing.JPanel apikeyPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton gatDEButton;
+    private javax.swing.JButton gatENButton;
     private javax.swing.JButton getAPIKeyButton;
+    private javax.swing.JButton hiatDEButton;
+    private javax.swing.JButton hiatENButton;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
-    private javax.swing.JComboBox<String> promptComboBox;
+    private javax.swing.JPanel promptButtonPanel;
     private javax.swing.JTextArea promptTextArea;
     private javax.swing.JPanel promptsPanel;
     private javax.swing.JButton showWarningButton;

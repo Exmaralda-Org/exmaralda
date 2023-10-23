@@ -7,22 +7,9 @@
 package org.exmaralda.folker.actions.partiturviewactions;
 
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import javax.swing.Icon;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import org.exmaralda.folker.actions.AbstractApplicationAction;
 import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
-import org.exmaralda.partitureditor.fsm.FSMException;
-import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
-import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
-import org.exmaralda.webservices.Whisper4EXMARaLDA;
-import org.exmaralda.webservices.WhisperConnector;
-import org.jdom.JDOMException;
-import org.xml.sax.SAXException;
 
 
 

@@ -172,7 +172,11 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                     String whisperKey = Whisper4EXMARaLDA.getWhisperKey();
                     WhisperConnector wc = new WhisperConnector(whisperKey);
                     System.out.println("Trying Whisper with " + audioFile.getAbsolutePath() + Double.toString(endTime));
-                    String result = wc.callWhisperSimple(audioFile);
+                    //String result = wc.callWhisperSimple(audioFile);
+                    String language = Whisper4EXMARaLDA.getWhisperLanguage();
+                    String prompt = Whisper4EXMARaLDA.getWhisperPrompt();
+                    String result = wc.callWhisperRegular(audioFile, language, prompt);
+                    
 
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
@@ -231,6 +235,8 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                 partitur.getModel().fireEventAdded(row, partitur.getModel().getColumnNumber(tli1), partitur.getModel().getColumnNumber(tli2));
                 
                 partitur.setNewSelection(row, partitur.getModel().getColumnNumber(tli1), true);
+                
+                partitur.transcriptionChanged = true;
                 
             }
         }
