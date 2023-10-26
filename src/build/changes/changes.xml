@@ -10,8 +10,15 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
-    <change tool="partitureditor" type="bug" version="1.7" date="17.07.2023">Dulko fixes and improvements (issue #405 and #407)</change>
-    <change tool="partitureditor" type="bug" version="1.7" date="13.07.2023">Maintenance changes for Praat panel (issue #401)</change>
+    <change tool="all" type="change" version="1.14" date="26.10.2023">Citation info in About dialogs (#433)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="26.10.2023">Rearrange transcription controls (#433)</change>
+    <change tool="partitureditor" type="feature" version="1.8" date="26.10.2023">Whisper webservice integration (#421)</change>
+    <change tool="partitureditor" type="bug" version="1.8" date="04.09.2023">Bug in TablePopupMenu: Move to tier does not appear (#176)</change>
+    <change tool="exakt" type="feature" version="1.4.1" date="10.08.2023">Shuffle (issue #362)</change>
+    <change tool="folker" type="change" version="1.3.1" date="09.08.2023">Improvements to HTML output (issue #403 and issue #404)</change>
+    <change tool="orthonormal" type="change" version="1.0" date="19.07.2023">Update OrthoNormal normalisation lexicon to FOLK 2.20 (issue #74)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="17.07.2023">Dulko fixes and improvements (issue #405, #407 and #409)</change>
+    <change tool="partitureditor" type="change" version="1.7" date="13.07.2023">Maintenance changes for Praat panel (issue #401)</change>
     <change tool="partitureditor" type="change" version="1.7" date="12.06.2023">RegEx in Search &amp; Replace (issue #399)</change>
     <change tool="partitureditor" type="change" version="1.7" date="01.06.2023">Save Format should be default (issue #398)</change>
     <change tool="partitureditor" type="bug" version="1.7" date="01.06.2023">Fixed formatting issues (issue #397)</change>
