@@ -7,6 +7,7 @@
 package org.exmaralda.common.application;
 import javax.swing.JOptionPane;
 import org.exmaralda.common.*;
+import org.exmaralda.exakt.utilities.HTMLSelection;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 
 /**
@@ -35,7 +36,7 @@ public class AboutDialog extends javax.swing.JDialog {
 
         // added 19-05-2009: Folker always German
         // changed 17-06-2010: Folker now internationalized
-        if (app.getApplicationName().toUpperCase().indexOf("FOLKER")>=0){
+        if (app.getApplicationName().toUpperCase().contains("FOLKER")){
             setTitle(FOLKERInternationalizer.getString("dialog.about.about") + app.getApplicationName() + " " + app.getVersion());
             jLabel1.setText(FOLKERInternationalizer.getString("dialog.about.os"));
             jLabel3.setText(FOLKERInternationalizer.getString("dialog.about.osversion"));
@@ -60,9 +61,8 @@ public class AboutDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        basePanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
-        iconLabel = new javax.swing.JLabel();
         versionInfoPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         osLabel = new javax.swing.JLabel();
@@ -74,18 +74,22 @@ public class AboutDialog extends javax.swing.JDialog {
         softwareVersionLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         buildTimeLabel = new javax.swing.JLabel();
+        citationPanel = new javax.swing.JPanel();
+        citationLabel = new javax.swing.JLabel();
+        copyCitationButton = new javax.swing.JButton();
+        iconPanel = new javax.swing.JPanel();
+        iconLabel = new javax.swing.JLabel();
         buttonsPanel = new javax.swing.JPanel();
         copyDebugButton = new javax.swing.JButton();
+        displayDebugButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        basePanel.setLayout(new java.awt.BorderLayout());
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        iconLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        mainPanel.add(iconLabel, java.awt.BorderLayout.CENTER);
-
+        versionInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Version Info"));
         versionInfoPanel.setLayout(new java.awt.GridLayout(5, 2));
 
         jLabel1.setText("Operating system: ");
@@ -118,11 +122,34 @@ public class AboutDialog extends javax.swing.JDialog {
         buildTimeLabel.setText("jLabel1");
         versionInfoPanel.add(buildTimeLabel);
 
-        mainPanel.add(versionInfoPanel, java.awt.BorderLayout.SOUTH);
+        mainPanel.add(versionInfoPanel, java.awt.BorderLayout.NORTH);
 
-        jPanel1.add(mainPanel, java.awt.BorderLayout.CENTER);
+        citationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Citation"));
 
+        citationLabel.setText("<html>\nPlease cite the following references when working with EXMARaLDA: <br/><br/>\n<b>Schmidt, Thomas / Wörner, Kai (2023)</b>: <br/>\n<i>EXMARaLDA.</i> Software. [https://exmaralda.org] <br/> <br/>\n<b>Schmidt, Thomas / Wörner, Kai (2014)</b>: <i>EXMARaLDA</i>. <br/> \nIn: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): <br/>\nHandbook on Corpus Phonology, pp. 402-419. Oxford University Press.<br/>\n</html>");
+        citationPanel.add(citationLabel);
+
+        copyCitationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif"))); // NOI18N
+        copyCitationButton.setToolTipText("Copy references to clipboard");
+        copyCitationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyCitationButtonActionPerformed(evt);
+            }
+        });
+        citationPanel.add(copyCitationButton);
+
+        mainPanel.add(citationPanel, java.awt.BorderLayout.SOUTH);
+
+        iconLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        iconPanel.add(iconLabel);
+
+        mainPanel.add(iconPanel, java.awt.BorderLayout.CENTER);
+
+        basePanel.add(mainPanel, java.awt.BorderLayout.CENTER);
+
+        copyDebugButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif"))); // NOI18N
         copyDebugButton.setText("Copy debug info");
+        copyDebugButton.setToolTipText("Copy debug info / log file information to the clipboard");
         copyDebugButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 copyDebugButtonActionPerformed(evt);
@@ -130,9 +157,18 @@ public class AboutDialog extends javax.swing.JDialog {
         });
         buttonsPanel.add(copyDebugButton);
 
-        jPanel1.add(buttonsPanel, java.awt.BorderLayout.SOUTH);
+        displayDebugButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ImportSimpleExmaralda.png"))); // NOI18N
+        displayDebugButton.setText("Display debug info");
+        displayDebugButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayDebugButtonActionPerformed(evt);
+            }
+        });
+        buttonsPanel.add(displayDebugButton);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        basePanel.add(buttonsPanel, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(basePanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -143,6 +179,27 @@ private void copyDebugButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     this.getToolkit().getSystemClipboard().setContents(ss,ss);
     JOptionPane.showMessageDialog(rootPane, "Debug information copied to the system clipboard. \n Please paste in email or text document as appropriate.");
 }//GEN-LAST:event_copyDebugButtonActionPerformed
+
+    private void copyCitationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyCitationButtonActionPerformed
+        String CITATION_HTML = "<html>\n" +
+            "<p><b>Schmidt, Thomas / Wörner, Kai (2023)</b>: " +
+            "<i>EXMARaLDA.</i> Software. [https://exmaralda.org] </p>" +
+            "<p><b>Schmidt, Thomas / Wörner, Kai (2014)</b>: <i>EXMARaLDA</i>. " +
+            "In: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): " +
+            "Handbook on Corpus Phonology, pp. 402-419. Oxford University Press. </p>" +
+            "</html>";
+        this.getToolkit().getSystemClipboard().setContents(new HTMLSelection(CITATION_HTML),null);            
+
+    }//GEN-LAST:event_copyCitationButtonActionPerformed
+
+    private void displayDebugButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayDebugButtonActionPerformed
+        String debugInfo = Logger.getLog(application);
+        DisplayTextDialog displayDialog = new DisplayTextDialog(application.getApplicationFrame(), true);
+        displayDialog.setTitle("Debug info for " + application.getApplicationName());
+        displayDialog.setText(debugInfo);
+        displayDialog.setLocationRelativeTo(this);
+        displayDialog.setVisible(true);
+    }//GEN-LAST:event_displayDebugButtonActionPerformed
 
     /**
     * @param args the command line arguments
@@ -162,16 +219,21 @@ private void copyDebugButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel basePanel;
     private javax.swing.JLabel buildTimeLabel;
     private javax.swing.JPanel buttonsPanel;
+    private javax.swing.JLabel citationLabel;
+    private javax.swing.JPanel citationPanel;
+    private javax.swing.JButton copyCitationButton;
     private javax.swing.JButton copyDebugButton;
+    private javax.swing.JButton displayDebugButton;
     private javax.swing.JLabel iconLabel;
+    private javax.swing.JPanel iconPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel javaVersionLabel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel osLabel;
