@@ -96,7 +96,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[41];
+        String[] result = new String[42];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -146,7 +146,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         result[40] = Boolean.toString(enablePrettyPrintCheckBox.isSelected());
         
-
+        // new 25-10-2023, issue #433
+        result[41] = Boolean.toString(rearrangeTranscriptionControlsCheckBox.isSelected());
+        
         return result;        
     }
     
@@ -297,6 +299,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         menusPanel = new javax.swing.JPanel();
         legacyMenuCheckBox = new javax.swing.JCheckBox();
         transformationDropdownCheckBox = new javax.swing.JCheckBox();
+        rearrangeTranscriptionControlsCheckBox = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         resetButton = new javax.swing.JButton();
 
@@ -1029,6 +1032,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         transformationDropdownCheckBox.setText("Transformation dropdown in toolbar");
         menusPanel.add(transformationDropdownCheckBox);
 
+        rearrangeTranscriptionControlsCheckBox.setText("New arrangement for transcription controls (below player buttons)");
+        menusPanel.add(rearrangeTranscriptionControlsCheckBox);
+
         tabbedPane.addTab("Menus & Toolbars", menusPanel);
 
         mainPanel.add(tabbedPane, java.awt.BorderLayout.CENTER);
@@ -1403,6 +1409,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox preferredSegmentationComboBox;
     private javax.swing.JPanel preferredSegmentationPanel;
     private javax.swing.JPanel prettyPrintPanel;
+    private javax.swing.JCheckBox rearrangeTranscriptionControlsCheckBox;
     private javax.swing.JButton resetButton;
     private javax.swing.JPanel segmentationPanel;
     private javax.swing.JButton setLogDirectoryButton;
@@ -1442,7 +1449,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public boolean editPreferences(String[] values){
-        System.out.println("Pretty Print [40] is " + values[40]);
+        //System.out.println("Pretty Print [40] is " + values[40]);
         tierFontLabel.setText(values[0]);
         tierFontLabel.setFont(new java.awt.Font(values[0], java.awt.Font.PLAIN, 12));
         generalPurposeFontLabel.setText(values[1]);
@@ -1509,6 +1516,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         genericTextField.setText(values[38]);
         cGATMinimalTextField.setText(values[39]);
         
+        // issue #433
+        rearrangeTranscriptionControlsCheckBox.setSelected(Boolean.parseBoolean(values[41]));
 
         show();
         return changed;

@@ -12,6 +12,7 @@
 package org.exmaralda.partitureditor.partiture;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -38,9 +39,21 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     int dividerLocation= 150;
     PartitureTableWithActions partitur;
 
-    /** Creates new form PartiturTimelinePanel */
+    /** Creates new form PartiturTimelinePanel
+     * @param largeTextFieldPanel
+     * @param tv
+     * @param partitur */
     public PartiturTimelinePanel(JPanel largeTextFieldPanel, AbstractTimeProportionalViewer tv, PartitureTableWithActions partitur) {
         initComponents();
+        
+        // issue #433
+        Container c = partitur.getTopLevelAncestor();
+        if (c instanceof PartiturEditor){
+            PartiturEditor pe = (PartiturEditor)c;
+            boolean rearrange = java.util.prefs.Preferences.userRoot().node(pe.getPreferencesNode()).getBoolean("rearrange-transcription-controls", false);
+            rearrangeTrancriptionControls(rearrange);
+        }
+        
         partiturPanel.add(partitur);
         this.partitur = partitur;
         add(largeTextFieldPanel, java.awt.BorderLayout.NORTH);
@@ -215,8 +228,9 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         playbackModeToggleButton = new javax.swing.JToggleButton();
         eventControlPanel = new javax.swing.JPanel();
         addEventButton = new javax.swing.JButton();
-        appendIntervalButton = new javax.swing.JButton();
         whisperASRButton = new javax.swing.JButton();
+        appendIntervalButton = new javax.swing.JButton();
+        transcriptionControlsPanel = new javax.swing.JPanel();
         timeViewerScrollPane = new javax.swing.JScrollPane();
         bufferPanel = new javax.swing.JPanel();
         partiturPanel = new javax.swing.JPanel();
@@ -232,7 +246,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
         timeViewerValuesPanel.setLayout(new java.awt.BorderLayout());
 
-        startTimeLabel.setForeground(new java.awt.Color(51, 153, 0));
+        startTimeLabel.setForeground(new java.awt.Color(0, 102, 51));
         startTimeLabel.setText("-");
         startTimeLabel.setToolTipText("Selection start");
         numbersPanel.add(startTimeLabel);
@@ -353,13 +367,14 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         });
         eventControlPanel.add(addEventButton);
 
-        appendIntervalButton.setText("jButton1");
-        eventControlPanel.add(appendIntervalButton);
-
         whisperASRButton.setText("jButton1");
         eventControlPanel.add(whisperASRButton);
 
+        appendIntervalButton.setText("jButton1");
+        eventControlPanel.add(appendIntervalButton);
+
         timeViewerControlPanel.add(eventControlPanel, java.awt.BorderLayout.WEST);
+        timeViewerControlPanel.add(transcriptionControlsPanel, java.awt.BorderLayout.SOUTH);
 
         timeViewerPanel.add(timeViewerControlPanel, java.awt.BorderLayout.SOUTH);
         timeViewerPanel.add(timeViewerScrollPane, java.awt.BorderLayout.CENTER);
@@ -452,6 +467,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     private javax.swing.JPanel timeViewerPanel;
     private javax.swing.JScrollPane timeViewerScrollPane;
     private javax.swing.JPanel timeViewerValuesPanel;
+    private javax.swing.JPanel transcriptionControlsPanel;
     private javax.swing.JButton whisperASRButton;
     private javax.swing.JPanel zoomPanel;
     public javax.swing.JToggleButton zoomToggleButton;
@@ -468,7 +484,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
             double duration = e-s;
             durationLabel.setText(Double.toString(Math.round(duration)/1000.0));
             if (event.isSelectionAttached()){
-                startTimeLabel.setForeground(Color.GREEN);
+                startTimeLabel.setForeground(Color.GREEN.darker().darker());
                 endTimeLabel.setForeground(Color.RED);
             } else {
                 startTimeLabel.setForeground(Color.BLUE);
@@ -504,6 +520,16 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         bufferPanel.setPreferredSize(d);
         bufferPanel.setSize(d);
         this.revalidate();
+    }
+
+    // issue #433
+    public void rearrangeTrancriptionControls(boolean rearrangeTranscriptionControls) {
+        if (rearrangeTranscriptionControls){
+            timeViewerControlPanel.remove(selectionControlPanel);
+            timeViewerControlPanel.remove(eventControlPanel);
+            transcriptionControlsPanel.add(eventControlPanel);
+            transcriptionControlsPanel.add(selectionControlPanel);
+        }
     }
 
 

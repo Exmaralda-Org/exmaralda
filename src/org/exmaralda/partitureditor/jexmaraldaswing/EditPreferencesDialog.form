@@ -1619,6 +1619,11 @@
                     <Property name="text" type="java.lang.String" value="Transformation dropdown in toolbar"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JCheckBox" name="rearrangeTranscriptionControlsCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="New arrangement for transcription controls (below player buttons)"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

@@ -60,7 +60,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
             table.clearSearchResult();
             table.setFrameEndPosition(-2);
         } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -130,10 +130,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
                                 pbd.addText("Done.");
                                 pbd.setTextAreaBackgroundColor(java.awt.Color.decode("#356811"));                                
                                 success(temp, files[1], mausParameters, tierID, m4e.modifiedStartID, m4e.modifiedEndID);
-                            } catch (IOException ex) {
-                                pbd.addText("Error: " + ex.getLocalizedMessage());
-                                JOptionPane.showMessageDialog(pbd, ex);
-                            } catch (JexmaraldaException ex) {
+                            } catch (IOException | JexmaraldaException ex) {
                                 pbd.addText("Error: " + ex.getLocalizedMessage());
                                 JOptionPane.showMessageDialog(pbd, ex);
                             }
@@ -231,12 +228,9 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
             table.formatChanged = false;
 
             table.status("Transcription " + temp2.getAbsolutePath() + " opened");        
-            
-            
         } else {
             // merge the bleeding two
-            HashMap<String, String> timelineMappings = new HashMap<String, String>();
-            
+            HashMap<String, String> timelineMappings = new HashMap<>();
             Timeline targetTimeline = table.getModel().getTranscription().getBody().getCommonTimeline();
             double startTime = targetTimeline.getTimelineItemWithID(startID).getTime();
             System.out.println("START-TIME " + startTime);

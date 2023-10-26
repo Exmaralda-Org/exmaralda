@@ -102,7 +102,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             Boolean.toString(showTransformationDropdown),
                             table.genericFSM,
                             table.cGATMinimalFSM,
-                            Boolean.toString(table.prettyPrint)
+                            Boolean.toString(table.prettyPrint),
+                            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("rearrange-transcription-controls", "false") // issue #433
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -192,6 +193,10 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             // new 02-12-2020, issue #228, changed 08-12-2020, issue #228
             //TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], null);
             TaggingProfiles.writePreferences(newValues[32], newValues[33], newValues[34], newValues[35], newValues[36], dialog.getTaggingOptions());
+            
+            // issue #433
+            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").put("rearrange-transcription-controls", newValues[41]); // issue #433            
+            
             
             table.status("Preferences changed");
 

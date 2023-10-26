@@ -13,6 +13,7 @@
 package org.exmaralda.partitureditor.partiture;
 
 //import com.apple.eawt.ApplicationEvent;
+import java.awt.BorderLayout;
 import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
 import java.io.File;
@@ -126,7 +127,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 
         System.out.println("Application initialized.");
         
-        //this.checkRegistration();
+        doInitialChecks();
                        
         loadSettings();
         menuBar.transcriptionMenu.segmentationLabel.setText(" Segmentation (" + table.preferredSegmentation + ")");
@@ -826,6 +827,45 @@ public class PartiturEditor extends javax.swing.JFrame
 
     public JComboBox getTransformationComboBox() {
         return ((FileToolBar)(toolBarPanel.fileToolBar)).transformationComboBox;
+    }
+
+    private void doInitialChecks() {
+        //checkRegistration();
+        
+        checkRearrangeTranscriptionControls();
+    }
+
+    // issue #433
+    private void checkRearrangeTranscriptionControls() {
+        String what = java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).get("rearrange-transcription-controls", "undecided");
+        if ("undecided".equals(what)){
+            String[] options = {"Try the new arrangement", "Do not change the arrangement"};
+            ImageIcon imageIcon = new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/rearrange-transcription-controls.png"));            
+            String message = "<html>We recommend trying the new option of <b>rearranging the transcription controls</b>.<br/> "
+                    + "They will be placed <b>beneath the player buttons</b> instead of the left and right hand sides.<br/>" 
+                    + "This is probably more ergonomic for transcribing.<br/>" 
+                    + "You can always revise your decision via the <b>Preferences</b>.<br/>" 
+                    + "Please make a choice." 
+                    ;
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            JLabel label = new JLabel(message);
+            panel.add(label, java.awt.BorderLayout.CENTER);
+            JLabel label2 = new JLabel("");
+            label2.setIcon(imageIcon);
+            panel.add(label2, java.awt.BorderLayout.NORTH);
+            
+            int choice = JOptionPane.showOptionDialog(rootPane, panel, "Rearrange transcription controls?", JOptionPane.YES_NO_OPTION,  JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            if (choice == JOptionPane.YES_OPTION){
+                java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).put("rearrange-transcription-controls", "true");
+                partiturTimelinePanel.rearrangeTrancriptionControls(true);
+            } else if (choice == JOptionPane.NO_OPTION){
+                java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).put("rearrange-transcription-controls", "false");                
+            }
+        } else {
+            partiturTimelinePanel.rearrangeTrancriptionControls(                
+                    java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).getBoolean("rearrange-transcription-controls", false));
+        }
     }
     
 

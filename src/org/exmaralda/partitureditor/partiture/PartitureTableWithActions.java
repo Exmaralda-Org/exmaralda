@@ -2870,7 +2870,7 @@ public class PartitureTableWithActions extends PartitureTable
                 && getModel().containsEvent(selectionStartRow, selectionStartCol) 
                 && getModel().containsEvent(selectionStartRow, selectionEndCol))){
             moveMenu.setEnabled(false);
-            System.out.println("Not doing it");
+            //System.out.println("Not doing it");
             return;
         } 
         Event firstEvent = null;
