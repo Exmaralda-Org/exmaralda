@@ -105,9 +105,10 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         sourceLanguageLabel = new javax.swing.JLabel();
         sourceLanguageComboBox = new javax.swing.JComboBox();
         promptsPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        promptTextAreaScrollPane = new javax.swing.JScrollPane();
         promptTextArea = new javax.swing.JTextArea();
         promptButtonPanel = new javax.swing.JPanel();
+        noPromptButton = new javax.swing.JButton();
         hiatENButton = new javax.swing.JButton();
         hiatDEButton = new javax.swing.JButton();
         gatENButton = new javax.swing.JButton();
@@ -154,13 +155,22 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         promptTextArea.setColumns(20);
         promptTextArea.setLineWrap(true);
         promptTextArea.setRows(5);
-        promptTextArea.setText("Euh, ((cough)) well, I ain't ((2,3s)) gonna do that. Whatcha think?");
         promptTextArea.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(promptTextArea);
+        promptTextAreaScrollPane.setViewportView(promptTextArea);
 
-        promptsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        promptsPanel.add(promptTextAreaScrollPane, java.awt.BorderLayout.CENTER);
 
         promptButtonPanel.setLayout(new javax.swing.BoxLayout(promptButtonPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        noPromptButton.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        noPromptButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/edit-clear.png"))); // NOI18N
+        noPromptButton.setText("None");
+        noPromptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noPromptButtonActionPerformed(evt);
+            }
+        });
+        promptButtonPanel.add(noPromptButton);
 
         hiatENButton.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         hiatENButton.setText("HIAT (en)");
@@ -334,6 +344,10 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
         
     }//GEN-LAST:event_gatDEButtonActionPerformed
 
+    private void noPromptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noPromptButtonActionPerformed
+        promptTextArea.setText("");
+    }//GEN-LAST:event_noPromptButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,12 +432,13 @@ public class WhisperParameterDialog extends javax.swing.JDialog {
     private javax.swing.JButton hiatENButton;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton noPromptButton;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
     private javax.swing.JPanel promptButtonPanel;
     private javax.swing.JTextArea promptTextArea;
+    private javax.swing.JScrollPane promptTextAreaScrollPane;
     private javax.swing.JPanel promptsPanel;
     private javax.swing.JButton showWarningButton;
     private javax.swing.JComboBox sourceLanguageComboBox;
