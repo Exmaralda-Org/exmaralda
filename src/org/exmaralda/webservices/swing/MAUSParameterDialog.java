@@ -84,7 +84,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     }
     
     public HashMap<String, Object> getMAUSParameters() {
-        HashMap<String, Object> result = new HashMap<String, Object>();
+        HashMap<String, Object> result = new HashMap<>();
         result.put("LANGUAGE", ((String[])languageComboBox.getSelectedItem())[0]);
         result.put("SEGMENT-CHAIN-SELECTION", segmentChainSelectionRadioButton.isSelected());
         result.put("USE-SEGMENTATION", segmentRadioButton.isSelected());
@@ -93,6 +93,8 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         result.put("WORDS-SAMPA", wordsSAMPACheckBox.isSelected());
         result.put("PHONEMES", phonemesCheckBox.isSelected());
         result.put("MERGE", mergeWithExistingRadioButton.isSelected());
+        result.put("TOLERANCE", toleranceSpinner.getValue());
+        result.put("FORCE", forceCheckBox.isSelected());
         
         return result;
     }
@@ -139,6 +141,11 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         openAsNewRadioButton = new javax.swing.JRadioButton();
         mergeWithExistingRadioButton = new javax.swing.JRadioButton();
+        jPanel6 = new javax.swing.JPanel();
+        toleranceLabel = new javax.swing.JLabel();
+        toleranceSpinner = new javax.swing.JSpinner();
+        secondsLabel = new javax.swing.JLabel();
+        forceCheckBox = new javax.swing.JCheckBox();
         okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -251,13 +258,42 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         outputButtonGroup.add(openAsNewRadioButton);
         openAsNewRadioButton.setSelected(true);
         openAsNewRadioButton.setText("Open it as a new file");
+        openAsNewRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openAsNewRadioButtonActionPerformed(evt);
+            }
+        });
         jPanel3.add(openAsNewRadioButton);
 
         outputButtonGroup.add(mergeWithExistingRadioButton);
         mergeWithExistingRadioButton.setText("Merge it with the existing transcription");
+        mergeWithExistingRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mergeWithExistingRadioButtonActionPerformed(evt);
+            }
+        });
         jPanel3.add(mergeWithExistingRadioButton);
 
         outputPanel.add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        toleranceLabel.setText("Timeline tolerance: ");
+        toleranceLabel.setToolTipText("Timeline items with difference below the tolerance will be treated as identical");
+        toleranceLabel.setEnabled(false);
+        jPanel6.add(toleranceLabel);
+
+        toleranceSpinner.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.0d, 0.2d, 0.01d));
+        toleranceSpinner.setEnabled(false);
+        jPanel6.add(toleranceSpinner);
+
+        secondsLabel.setText("s");
+        secondsLabel.setEnabled(false);
+        jPanel6.add(secondsLabel);
+
+        forceCheckBox.setText("Force start and end points");
+        forceCheckBox.setEnabled(false);
+        jPanel6.add(forceCheckBox);
+
+        outputPanel.add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
         mainPanel.add(outputPanel);
 
@@ -301,13 +337,21 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         + "at the Ludwig-Maximilians-University (LMU) of Munich. <br/>"
         + "Free usage of the services is permissible for academic research. "
         + "Please refer to the BAS website for details on usage and how to cite the services. <br/>"
-        + "Please note that your data (audio text from the transcription) is sent to an <b>external server</b>. <br/>"
+        + "Please note that your data (audio and text from the transcription) is sent to an <b>external server</b>. <br/>"
         + "It is your responsibility to ensure that this conforms to <b>data protection</b> regulations "
         + "which may apply to your data. "
         + "</html>";
 
         JOptionPane.showMessageDialog(this, html, "Information about BAS webservices", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_showWarningButtonActionPerformed
+
+    private void openAsNewRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openAsNewRadioButtonActionPerformed
+      adjustToleranceControls();
+    }//GEN-LAST:event_openAsNewRadioButtonActionPerformed
+
+    private void mergeWithExistingRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mergeWithExistingRadioButtonActionPerformed
+      adjustToleranceControls();
+    }//GEN-LAST:event_mergeWithExistingRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,6 +399,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel annotationLevelsPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JRadioButton eventsSelectionRadioButton;
+    private javax.swing.JCheckBox forceCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -365,6 +410,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JComboBox languageComboBox;
     private javax.swing.JPanel languagePanel;
     private javax.swing.JPanel mainPanel;
@@ -375,6 +421,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup outputButtonGroup;
     private javax.swing.JPanel outputPanel;
     private javax.swing.JCheckBox phonemesCheckBox;
+    private javax.swing.JLabel secondsLabel;
     private javax.swing.JRadioButton segmentChainSelectionRadioButton;
     private javax.swing.JRadioButton segmentRadioButton;
     private javax.swing.ButtonGroup segmentationButtonGroup;
@@ -384,9 +431,19 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel selectionPanel;
     private javax.swing.JButton showWarningButton;
     private javax.swing.JRadioButton textAsIsRadioButton;
+    private javax.swing.JLabel toleranceLabel;
+    private javax.swing.JSpinner toleranceSpinner;
     private javax.swing.JPanel warningPanel;
     private javax.swing.JCheckBox wordsOrthoCheckBox;
     private javax.swing.JCheckBox wordsSAMPACheckBox;
     // End of variables declaration//GEN-END:variables
+
+    private void adjustToleranceControls() {
+        boolean merge = mergeWithExistingRadioButton.isSelected();
+        this.toleranceLabel.setEnabled(merge);
+        this.toleranceSpinner.setEnabled(merge);
+        this.secondsLabel.setEnabled(merge);
+        this.forceCheckBox.setEnabled(merge);
+    }    
 
 }

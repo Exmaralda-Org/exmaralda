@@ -230,14 +230,24 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
             table.status("Transcription " + temp2.getAbsolutePath() + " opened");        
         } else {
             // merge the bleeding two
+            // 27-10-2023: #432
+            double tolerance = (double) mausParameters.get("TOLERANCE");
+            boolean force = (boolean) mausParameters.get("FORCE");
             HashMap<String, String> timelineMappings = new HashMap<>();
             Timeline targetTimeline = table.getModel().getTranscription().getBody().getCommonTimeline();
             double startTime = targetTimeline.getTimelineItemWithID(startID).getTime();
+            double endTime = targetTimeline.getTimelineItemWithID(endID).getTime();
             System.out.println("START-TIME " + startTime);
             for (int i = 0; i<bt2.getBody().getCommonTimeline().getNumberOfTimelineItems(); i++){
                 TimelineItem tli = bt2.getBody().getCommonTimeline().getTimelineItemAt(i);
                 tli.setTime(tli.getTime()+ startTime);
-                int found = targetTimeline.findTimelineItem(tli.getTime(), 0.01);
+                if (i==0 && force){
+                    tli.setTime(startTime);
+                }
+                if (i==bt2.getBody().getCommonTimeline().getNumberOfTimelineItems()-1 && force){
+                    tli.setTime(endTime);
+                }
+                int found = targetTimeline.findTimelineItem(tli.getTime(), tolerance);
                 if (found<0){
                     String newID = targetTimeline.getFreeID();
                     timelineMappings.put(tli.getID(), newID);

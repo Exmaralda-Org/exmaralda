@@ -6,8 +6,6 @@
 
 package org.exmaralda.partitureditor.partiture.editActions;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.exmaralda.partitureditor.jexmaralda.convert.ItConverter;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.partiture.*;

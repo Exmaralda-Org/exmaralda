@@ -210,15 +210,7 @@ public class MAUS4EXMARaLDA {
             BasicTranscription bt2 = pc.readPraatFromFile(temp.getAbsolutePath(), "UTF-8");
             bt2.getHead().getMetaInformation().setReferencedFile(files[1].getAbsolutePath());
             bt2.writeXMLToFile("C:\\Users\\Schmidt\\Desktop\\TEST\\MausOut2.exb", "none");
-        } catch (IOException ex) {
-            Logger.getLogger(MAUS4EXMARaLDA.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(MAUS4EXMARaLDA.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(MAUS4EXMARaLDA.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JDOMException ex) {
-            Logger.getLogger(MAUS4EXMARaLDA.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FSMException ex) {
+        } catch (IOException | SAXException | JexmaraldaException | JDOMException | FSMException ex) {
             Logger.getLogger(MAUS4EXMARaLDA.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
