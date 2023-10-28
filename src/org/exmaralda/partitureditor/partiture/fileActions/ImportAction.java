@@ -15,6 +15,7 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.WhisperImportPostProcessDialog;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -121,13 +123,16 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
         // now do the real import      
         
-        /*if (selectedFileFilter==dialog.TASXFileFilter){
-            TASXConverter tc = new TASXConverter();
-            importedTranscription = tc.readTASXFromFile(filename);
-        } else */ if (selectedFileFilter==dialog.TranscriberFileFilter){
+        if (selectedFileFilter==dialog.TranscriberFileFilter){
+            /**************************************************/
+            /************       TRANSCRIBER      **************/
+            /**************************************************/
             TranscriberConverter tc = new TranscriberConverter();
             importedTranscription = tc.readTranscriberFromFile(filename);
         } else if (selectedFileFilter==dialog.ExmaraldaSegmentedTranscriptionFileFilter){
+            /**************************************************/
+            /***** EXMARaLDA SEGMENTED TRANSCRIPTION      *****/
+            /**************************************************/
             org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader reader
                 = new org.exmaralda.partitureditor.jexmaralda.sax.SegmentedTranscriptionSaxReader();
             SegmentedTranscription st = reader.readFromFile(filename);
@@ -143,21 +148,29 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             // 06-07-2017: issue #111 (Helau!)
             importedTranscription.getHead().getMetaInformation().resolveReferencedFile(filename, MetaInformation.NEW_METHOD);
         }  else if (selectedFileFilter==dialog.CHATTranscriptFileFilter){
+            /**************************************************/
+            /********             CHAT                    *****/
+            /**************************************************/
             CHATConverter tc = new CHATConverter(new File(filename));
             importedTranscription = tc.convert();
-        } /*else if (selectedFileFilter==dialog.WinPitchFileFilter){
-            WinPitchConverter tc = new WinPitchConverter();
-            importedTranscription = tc.readWinPitchFromFile(filename);
-        } */ else if (selectedFileFilter==dialog.FrazierADCFileFilter){ // issue #296
+        } else if (selectedFileFilter==dialog.FrazierADCFileFilter){ // issue #296
+            /**************************************************/
+            /********             FRAZIER                 *****/
+            /**************************************************/
             FrazierADCConverter tc = new FrazierADCConverter();
             importedTranscription = tc.readFrazierADCFromFile(new File(filename));
         } else if (selectedFileFilter==dialog.AnvilFileFilter){
+            /**************************************************/
+            /********             ANVIL                   *****/
+            /**************************************************/
             AnvilConverter tc = new AnvilConverter();
             importedTranscription = tc.readAnvilFromFile(filename);
         } else if (selectedFileFilter==dialog.PraatFileFilter){
+            /**************************************************/
+            /********             PRAAT                   *****/
+            /**************************************************/
             // detect the encoding first
-            String encoding = "";
-            encoding = EncodingDetector.detectEncoding(selectedFile);
+            String encoding = EncodingDetector.detectEncoding(selectedFile);
             if (encoding.length()==0){
                 Object o = javax.swing.JOptionPane.showInputDialog(table,
                             "Cannot detect the file encoding. Please select",
@@ -170,19 +183,22 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             }
             PraatConverter pc = new PraatConverter();
             importedTranscription = pc.readPraatFromFile(filename, encoding);
-        } /*else if (selectedFileFilter==dialog.AGFileFilter){
-            AIFConverter ac = new AIFConverter();
-            importedTranscription = ac.readAIFFromFile(filename);
-        } */ else if (selectedFileFilter==dialog.PhonFileFilter){
+        } else if (selectedFileFilter==dialog.PhonFileFilter){
+            /**************************************************/
+            /********             PHON                    *****/
+            /**************************************************/
             PhonConverter pc = new PhonConverter();
             importedTranscription = pc.readPhonFromFile(filename);
-        } /*else if (selectedFileFilter==dialog.TransanaXMLFileFilter){
-            TransanaConverter tc = new TransanaConverter();
-            importedTranscription = tc.readTransanaFromXMLFile(selectedFile);
-        } */ else if (selectedFileFilter==dialog.EAFFileFilter){
+        } else if (selectedFileFilter==dialog.EAFFileFilter){
+            /**************************************************/
+            /********             ELAN/EAF                *****/
+            /**************************************************/
             ELANConverter ec = new ELANConverter();
             importedTranscription = ec.readELANFromFile(filename);
         } else if (selectedFileFilter==dialog.TEIFileFilter){
+            /**************************************************/
+            /********             ISO/TEI                 *****/
+            /**************************************************/
             // *************************************************
             // new 23-11-2020
             // issue #215
@@ -226,7 +242,10 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             ActionUtilities.memorizeFileFilter("last-import-filter", table.getTopLevelAncestor(), dialog);            
             return;
         } else if (selectedFileFilter==dialog.TextFileFilter){
-            ChooseTextSplitterDialog ctsd = new ChooseTextSplitterDialog(null, true);
+            /**************************************************/
+            /********             TEXT FILE               *****/
+            /**************************************************/
+            ChooseTextSplitterDialog ctsd = new ChooseTextSplitterDialog(table.parent, true);
             ctsd.setVisible(true);
             String regex = ctsd.getRegex();
             TextConverter tc = new TextConverter(regex);
@@ -237,6 +256,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             }
             importedTranscription = tc.convert();
         } else if (selectedFileFilter==dialog.F4TextFileFilter){
+            /**************************************************/
+            /********             F4                      *****/
+            /**************************************************/
             F4Converter f4Converter = new F4Converter();
             if (dialog.encodingComboBox.getSelectedIndex()==0){
                 f4Converter.readText(selectedFile);
@@ -246,8 +268,14 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             boolean splitSentences = dialog.splitSentencesCheckBox.isSelected();
             importedTranscription = f4Converter.importF4(splitSentences);
         } else if (selectedFileFilter==dialog.AudacityLabelFileFilter){
+            /**************************************************/
+            /********             AUDACITY                *****/
+            /**************************************************/
             importedTranscription = new AudacityConverter().readAudacityFromFile(selectedFile);
         } else if (selectedFileFilter==dialog.TreeTaggerFilter){
+            /**************************************************/
+            /********             TreeTagger              *****/
+            /**************************************************/
             // NEW 06-07-2009 for Anne Siekmeyer
             TreeTaggerConverter ttc = new TreeTaggerConverter();
             ttc.appendSpaces = dialog.appendSpacesCheckBox.isSelected();
@@ -258,6 +286,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             }
             importedTranscription = ttc.importText();
         } else if (selectedFileFilter==dialog.SimpleExmaraldaFileFilter){
+            /**************************************************/
+            /********             Simple EXMARaLDA        *****/
+            /**************************************************/
             SimpleExmaraldaReader ser = null;
             if (dialog.encodingComboBox.getSelectedIndex()==0){
                 ser = new SimpleExmaraldaReader(filename);
@@ -265,43 +296,19 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 ser = new SimpleExmaraldaReader(filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
             }
             importedTranscription = ser.parseBasicTranscription();
-        } /*else if (selectedFileFilter==dialog.RioDeJaneiroFileFilter){
-            RioDeJaneiroTextConverter ser = null;
-            if (dialog.encodingComboBox.getSelectedIndex()==0){
-                ser = new RioDeJaneiroTextConverter(filename);
-            } else {
-                ser = new RioDeJaneiroTextConverter(filename, dialog.encodings[dialog.encodingComboBox.getSelectedIndex()]);
-            }
-            importedTranscription = ser.parseBasicTranscription();
-
-        } else if (selectedFileFilter==dialog.HIATDOSFileFilter){
-            org.exmaralda.partitureditor.exHIATDOS.swing.ImportHIATDOSDialog ihdd =
-                    new org.exmaralda.partitureditor.exHIATDOS.swing.ImportHIATDOSDialog(table.parent, true);
-            ihdd.setDatFile(filename);
-            boolean success = ihdd.importHIATDOS();
-            if (success){
-                importedTranscription = ihdd.getTranscription();
-            }
-
-        } else if (selectedFileFilter==dialog.exSyncFileFilter){
-            org.exmaralda.partitureditor.exSync.ExSyncDocument esd
-                    = new org.exmaralda.partitureditor.exSync.ExSyncDocument(filename);
-            StringBuffer messages = new StringBuffer();
-            esd.messages = messages;
-            importedTranscription = esd.toBasicTranscription();
-            org.exmaralda.partitureditor.exSync.swing.MessageDialog md =
-                    new org.exmaralda.partitureditor.exSync.swing.MessageDialog(table.parent, true, messages);
-            md.show();
-        } */else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter){
+        } else if (selectedFileFilter==dialog.FOLKERTranscriptionFileFilter){
+            /**************************************************/
+            /********           FOLKER                    *****/
+            /**************************************************/
             importedTranscription =
                     org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File(filename));
-        }
-         else if (selectedFileFilter==dialog.FlexTextXMLFileFilter){
+        } else if (selectedFileFilter==dialog.FlexTextXMLFileFilter){
+            /**************************************************/
+            /********           FLEX                      *****/
+            /**************************************************/
             //new for INEL 2017-05-02
             org.exmaralda.partitureditor.jexmaraldaswing.ChooseXMLSettingsFileDialog flexDialog =
                     new org.exmaralda.partitureditor.jexmaraldaswing.ChooseXMLSettingsFileDialog(table.parent, true);
-            //String xmlPath = settings.get("ImportXML", "");
-            //flexDialog.setPath(xmlPath);
             flexDialog.setLocationRelativeTo(table);
             flexDialog.setVisible(true);
             if (flexDialog.returnStatus){
@@ -311,6 +318,9 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             importedTranscription = fc.readFlexTextFromTextFile(selectedFile, xmlSelectedFile);
             }
          } else if (selectedFileFilter==dialog.XSLStylesheetImportFilter){
+            /**************************************************/
+            /********           XSL                       *****/
+            /**************************************************/
             // added 24-09-2009
             org.exmaralda.partitureditor.jexmaraldaswing.ChooseXSLStylesheetDialog xslDialog =
                     new org.exmaralda.partitureditor.jexmaraldaswing.ChooseXSLStylesheetDialog(table.parent, true);
@@ -334,17 +344,29 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 return;
             }
         } else if (selectedFileFilter==dialog.TCFFileFilter) {
+            /**************************************************/
+            /********           TCF                       *****/
+            /**************************************************/
             TCFConverter tc = new TCFConverter();
             importedTranscription = tc.readTCFFromFile(filename);
         } else if (selectedFileFilter==dialog.VTTFileFilter) {
+            /**************************************************/
+            /********           VTT                       *****/
+            /**************************************************/
             // added 17-11-2017: issue #119
             // changed 15-01-2023: issue #119
             //importedTranscription = SubtitleConverter.readVTTOld(selectedFile);
             importedTranscription = SubtitleConverter.readVTT(selectedFile);
         } else if (selectedFileFilter==dialog.SRTFileFilter) {
+            /**************************************************/
+            /********           SRT                       *****/
+            /**************************************************/
             // added 17-11-2017: issue #119
             importedTranscription = SubtitleConverter.readSRT(selectedFile);
         } else if (selectedFileFilter == dialog.TsvFileFilter) {
+            /**************************************************/
+            /********           TSV                       *****/
+            /**************************************************/
             TsvConverter itc = new TsvConverter();
             if (dialog.encodingComboBox.getSelectedIndex()==0){
                 itc.readText(selectedFile);
@@ -354,12 +376,26 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             }
             importedTranscription = itc.importText();
         } else if (selectedFileFilter == dialog.WhisperJSONFileFilter) {
+            /**************************************************/
+            /********           WHISPER JSON              *****/
+            /**************************************************/
             // added 15-01-2023: issue #357
             importedTranscription = WhisperJSONConverter.readWhisperJSON(selectedFile);
+            WhisperImportPostProcessDialog wippd = new WhisperImportPostProcessDialog(table.parent, true);
+            wippd.setLocationRelativeTo(table);
+            wippd.setVisible(true);
+            Map<String, Boolean> parameters = wippd.getParameters();
+            WhisperJSONConverter.postProcess(importedTranscription, parameters);
         } else if (selectedFileFilter == dialog.AmberscriptJSONFileFilter) {
+            /**************************************************/
+            /********        AMBERSCRIPT JSON             *****/
+            /**************************************************/
             // added 15-01-2023: issue #358
             importedTranscription = AmberscriptJSONConverter.readAmberscriptJSON(selectedFile);
         } else if (selectedFileFilter == dialog.AdobePremiereCSVFilter) {
+            /**************************************************/
+            /********        PREMIERE CSV                 *****/
+            /**************************************************/
             // added 07-02-2023: issue #363
             importedTranscription = AdobePremiereCSVConverter.readAdobePremiereCSV(selectedFile);
         }
@@ -399,6 +435,8 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             ActionUtilities.memorizeFileFilter("last-import-filter", table.getTopLevelAncestor(), dialog);
 
             table.status("File " + filename + " imported");
+            
+            table.transcriptionChanged = true;
         } else {
             System.out.println("Not setting the imported transcription because it is NULL.");            
         }

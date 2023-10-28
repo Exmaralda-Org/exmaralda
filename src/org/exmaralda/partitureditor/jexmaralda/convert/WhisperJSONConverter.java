@@ -8,7 +8,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import org.exmaralda.common.helpers.Rounder;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
@@ -30,26 +34,25 @@ public class WhisperJSONConverter {
         return readWhisperJSON(jsonFile, true);
     }
 
-        public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords) throws IOException, JexmaraldaException{
+    public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords) throws IOException, JexmaraldaException{
+        
+        Map<String, List<Tier>> speakersToTiers = new HashMap<>();    
+
         // read json file via Jackson
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonRoot = objectMapper.readValue(jsonFile, JsonNode.class);        
         
         BasicTranscription result = new BasicTranscription();
-        Speaker speaker = new Speaker();
-        speaker.setID("SPK0");
-        speaker.setAbbreviation("X");
-        result.getHead().getSpeakertable().addSpeaker(speaker);
-        Tier textTier = new Tier("TIE0", "SPK0", "v", "t", "X [text]");
-        Tier temperatureTier = new Tier("TIE1", "SPK0", "temp", "a", "X [temperature]");
-        Tier avgLogProbTier = new Tier("TIE2", "SPK0", "avg", "a", "X [avg_logprob]");
-        Tier compressionRatioTier = new Tier("TIE3", "SPK0", "cr", "a", "X [compression_ratio]");
-        Tier noSpeechProbTier = new Tier("TIE4", "SPK0", "nsp", "a", "X [no_speech_prob]");
-        result.getBody().addTier(textTier);
-        result.getBody().addTier(temperatureTier);
-        result.getBody().addTier(avgLogProbTier);
-        result.getBody().addTier(compressionRatioTier);
-        result.getBody().addTier(noSpeechProbTier);
+        
+        Speaker dummySpeaker = new Speaker();
+        dummySpeaker.setID("SPK0");
+        dummySpeaker.setAbbreviation("X");
+        result.getHead().getSpeakertable().addSpeaker(dummySpeaker);
+        
+        boolean hasWordLevel = (jsonRoot.findValue("words")!=null);
+
+        speakersToTiers.put(null, makeTiersForSpeaker(dummySpeaker, result, hasWordLevel, wantsWords));
+        
         
         
         /*
@@ -81,14 +84,6 @@ public class WhisperJSONConverter {
         
         */
         
-        boolean hasWordLevel = (jsonRoot.findValue("words")!=null);
-        Tier wordTier = new Tier("TIE5", "SPK0", "w", "t", "X [words]");
-        if (hasWordLevel && wantsWords){
-            textTier.setType("a");
-            result.getBody().insertTierAt(wordTier, 0);
-            
-        }
-        
         JsonNode segmentsNode = jsonRoot.findValue("segments");
         Iterator<JsonNode> iterator = segmentsNode.elements();
         Timeline timeline = result.getBody().getCommonTimeline();
@@ -100,11 +95,26 @@ public class WhisperJSONConverter {
             // round to miliseconds to avoid overlaps which aren't overlaps
             double startTimeInSeconds = Rounder.round(segmentNode.get("start").asDouble(),3);
             double endTimeInSeconds = Rounder.round(segmentNode.get("end").asDouble(),3);
+            
+            // this can happen, although it shouldn't
+            if (startTimeInSeconds > endTimeInSeconds){
+                double reminder = startTimeInSeconds;
+                startTimeInSeconds = endTimeInSeconds;
+                endTimeInSeconds = reminder;
+            }
+
+            // this can happen, although it shouldn't
+            if (startTimeInSeconds == endTimeInSeconds){
+                endTimeInSeconds += 0.001;
+            }
+            
+            
             String text = segmentNode.get("text").asText();
             String temperature = segmentNode.get("temperature").asText();
             String avg_logprob = segmentNode.get("avg_logprob").asText();
             String compression_ratio = segmentNode.get("compression_ratio").asText();
             String no_speech_prob = segmentNode.get("no_speech_prob").asText();
+            
             
             String startID = "TLI_" + Double.toString(startTimeInSeconds).replace('.', '_');
             if (!(timeline.containsTimelineItemWithID(startID))){
@@ -121,6 +131,30 @@ public class WhisperJSONConverter {
                 tli.setTime(endTimeInSeconds);
                 timeline.insertAccordingToTime(tli);
             }
+            
+            String segmentSpeaker = null;
+            JsonNode speakerNode = segmentNode.get("speaker");
+            if (speakerNode!=null){
+                segmentSpeaker = speakerNode.asText();
+            }
+            
+            if(!(speakersToTiers.containsKey(segmentSpeaker))){
+                Speaker speaker = new Speaker();
+                speaker.setID(result.getHead().getSpeakertable().getFreeID());
+                speaker.setAbbreviation(segmentSpeaker);
+                result.getHead().getSpeakertable().addSpeaker(speaker);
+                speakersToTiers.put(segmentSpeaker, makeTiersForSpeaker(speaker, result, hasWordLevel, wantsWords));
+            }
+            
+            List<Tier> tiersForThisSpeaker = speakersToTiers.get(segmentSpeaker);
+            
+            Tier textTier = tiersForThisSpeaker.get(0);
+            Tier temperatureTier = tiersForThisSpeaker.get(1);
+            Tier avgLogProbTier = tiersForThisSpeaker.get(2);
+            Tier compressionRatioTier = tiersForThisSpeaker.get(3);
+            Tier noSpeechProbTier = tiersForThisSpeaker.get(4);
+            Tier wordTier = tiersForThisSpeaker.get(5);
+            
             
             textTier.addEvent(new Event(startID, endID, text));
             temperatureTier.addEvent(new Event(startID, endID, temperature));
@@ -141,6 +175,19 @@ public class WhisperJSONConverter {
                     double wStartTimeInSeconds = Rounder.round(wordNode.get("start").asDouble(),3);
                     double wEndTimeInSeconds = Rounder.round(wordNode.get("end").asDouble(),3);
                     String wText = wordNode.get("word").asText();
+                    
+                    // this can happen, although it shouldn't
+                    if (wStartTimeInSeconds > wEndTimeInSeconds){
+                        double reminder = wStartTimeInSeconds;
+                        wStartTimeInSeconds = wEndTimeInSeconds;
+                        wEndTimeInSeconds = reminder;
+                    }
+
+                    // this can happen, although it shouldn't
+                    if (wStartTimeInSeconds == wEndTimeInSeconds){
+                        wEndTimeInSeconds += 0.001;
+                    }
+                    
 
                     String wStartID = "TLI_" + Double.toString(wStartTimeInSeconds).replace('.', '_');
                     if (!(timeline.containsTimelineItemWithID(wStartID))){
@@ -166,12 +213,61 @@ public class WhisperJSONConverter {
             
         }
         
-        
-        
-        
         return result;
         
         
+    }
+
+    private static List<Tier> makeTiersForSpeaker(Speaker speaker, BasicTranscription transcription, boolean hasWordLevel, boolean wantsWords) throws JexmaraldaException {
+        String speakerID = speaker.getID();    
+        String speakerAbb = speaker.getAbbreviation();
+        List<Tier> resultList = new ArrayList<>();
+        
+        Tier textTier = new Tier(transcription.getBody().getFreeID(), speakerID, "v", "t", speakerAbb + " [text]");
+        transcription.getBody().addTier(textTier);
+
+        Tier temperatureTier = new Tier(transcription.getBody().getFreeID(), speakerID, "temp", "a", speakerAbb + " [temperature]");
+        transcription.getBody().addTier(temperatureTier);
+
+        Tier avgLogProbTier = new Tier(transcription.getBody().getFreeID(), speakerID, "avg", "a", speakerAbb + " [avg_logprob]");
+        transcription.getBody().addTier(avgLogProbTier);
+
+        Tier compressionRatioTier = new Tier(transcription.getBody().getFreeID(), speakerID, "cr", "a", speakerAbb + " [compression_ratio]");
+        transcription.getBody().addTier(compressionRatioTier);
+
+        Tier noSpeechProbTier = new Tier(transcription.getBody().getFreeID(), speakerID, "nsp", "a", speakerAbb + " [no_speech_prob]");
+        transcription.getBody().addTier(noSpeechProbTier);
+        
+        resultList.add(textTier);
+        resultList.add(temperatureTier);
+        resultList.add(avgLogProbTier);
+        resultList.add(compressionRatioTier);
+        resultList.add(noSpeechProbTier);
+        
+        Tier wordTier = new Tier(transcription.getBody().getFreeID(), speakerID, "w", "t", speakerAbb + " [words]");
+        resultList.add(wordTier);
+        if (hasWordLevel && wantsWords){
+            textTier.setType("a");
+            transcription.getBody().insertTierAt(wordTier, transcription.getBody().lookupID(textTier.getID()));            
+        }
+        
+        return resultList;
+        
+    }
+
+    public static void postProcess(BasicTranscription importedTranscription, Map<String, Boolean> parameters) {
+        boolean empty = parameters.getOrDefault("EMPTY", Boolean.FALSE);
+        for (int pos=0; pos<importedTranscription.getBody().getNumberOfTiers(); pos++){
+            Tier tier = importedTranscription.getBody().getTierAt(pos);
+
+            boolean select = parameters.getOrDefault(tier.getCategory(), Boolean.FALSE);
+            if (!select || (tier.getNumberOfEvents()==0 && !empty)){
+                importedTranscription.getBody().removeTierAt(pos);
+                pos--;
+            }
+        }
+        
+        importedTranscription.getBody().removeUnusedTimelineItems();
     }
     
 }

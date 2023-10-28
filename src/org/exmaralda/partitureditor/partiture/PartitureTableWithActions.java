@@ -1743,10 +1743,10 @@ public class PartitureTableWithActions extends PartitureTable
             Tier tier = t.getBody().getTierAt(pos);
             if (!tier.isStratified(tl)){
                 StratifyTierDialog dialog = new StratifyTierDialog(parent, true, tier, tl);
+                dialog.setLocationRelativeTo(this);
                 dialog.stratifyTier();
                 if (dialog.getAdditionalTiers()!=null){
-                    for (int i=0; i<dialog.getAdditionalTiers().length; i++){
-                        Tier newTier = dialog.getAdditionalTiers()[i];
+                    for (Tier newTier : dialog.getAdditionalTiers()) {
                         newTier.setID(t.getBody().getFreeID());
                         pos++;
                         try{
