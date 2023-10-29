@@ -182,6 +182,8 @@ public class PartiturEditor extends javax.swing.JFrame
             });
             
         }
+        
+        //controller.setupWhisperASR();
 
         // register shortcuts for media playback
         // registerKeyStrokes();
@@ -778,6 +780,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 timelineViewer.addTimeSelectionListener(partiturTimelinePanel);
                 timelineViewer.resetDragBoundaries();
                 controller = new PartiturEditorTimeviewPlayerControl(this, timelineViewer, getPartitur(), getPartitur().player);
+                controller.setupWhisperASR();                
                 controller.zoomToggleButton = this.partiturTimelinePanel.zoomToggleButton;
                 registerKeyStrokes();
                 partiturTimelinePanel.assignActions(controller);

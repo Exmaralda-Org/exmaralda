@@ -6,14 +6,6 @@
 
 package org.exmaralda.partitureditor.partiture;
 
-import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncEventShrinkerAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.ImportActionInel;
-import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheWordSegmentationAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheTierSegmentationAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.MakeSyllableStructureTierAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.AppendSpaceAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncCleanupAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.K8MysteryConverterAction;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.partitureditor.interlinearText.PrintParameters;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
@@ -38,6 +30,15 @@ import org.exmaralda.partitureditor.partiture.transcriptionActions.*;
 import org.exmaralda.partitureditor.partiture.tierActions.*;
 import org.exmaralda.partitureditor.partiture.timelineActions.*;
 import org.exmaralda.partitureditor.partiture.eventActions.*;
+
+import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncEventShrinkerAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.ImportActionInel;
+import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheWordSegmentationAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheTierSegmentationAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.MakeSyllableStructureTierAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.AppendSpaceAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncCleanupAction;
+import org.exmaralda.partitureditor.partiture.legacyActions.K8MysteryConverterAction;
 
 
 import org.exmaralda.partitureditor.partiture.menus.EventPopupMenu;
@@ -1266,6 +1267,7 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
     
+    
     /** called after the user selection has changed 
      * takes care of enabling and diabling actions according
      * to the new selection */
@@ -1463,7 +1465,7 @@ public class PartitureTableWithActions extends PartitureTable
         thisListenerList.removeAllElements();
     }
     
-    protected void fireEvent(PartitureTableEvent e){
+    public void fireEvent(PartitureTableEvent e){
         for (PartitureTableListener l : thisListenerList){
             l.partitureTablePropertyChanged(e);
         }
@@ -2907,41 +2909,6 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
 
-    /*@Override
-    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-        eventPopupMenu.moveMenu.removeAll();
-        if (!getModel().containsEvent(selectionStartRow, selectionStartCol)){
-            eventPopupMenu.moveMenu.setEnabled(false);
-            return;
-        } 
-        Event event = null;
-        try {
-            event = getModel().getEvent(selectionStartRow, selectionStartCol);
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String startID = event.getStart();
-        String endID = event.getEnd();
-        String sourceTierID = getModel().getTranscription().getBody().getTierAt(selectionStartRow).getID();
-        for (int i=0; i<getModel().getTranscription().getBody().getNumberOfTiers(); i++){
-            if (i==selectionStartRow) continue;
-            Tier tier = getModel().getTranscription().getBody().getTierAt(i);
-            if (tier.getEventsIntersecting(getModel().getTranscription().getBody().getCommonTimeline(), startID, endID).isEmpty()){
-                try {
-                    // this means the tier is free in this place
-                    MoveEventAction thisAction = new MoveEventAction(this, sourceTierID, tier.getID(), startID);
-                    JMenuItem thisMenuItem = eventPopupMenu.moveMenu.add(thisAction);
-                    if (tier.getType().equals("t")){
-                        thisMenuItem.setFont(thisMenuItem.getFont().deriveFont(Font.BOLD));
-                    }
-                    eventPopupMenu.moveMenu.setEnabled(true);
-                } catch (JexmaraldaException ex) {
-                    Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
-        }
-    }*/
 
     @Override
     public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
@@ -3096,6 +3063,8 @@ public class PartitureTableWithActions extends PartitureTable
         }
         return y;
     }
+    
+    
     
     
 

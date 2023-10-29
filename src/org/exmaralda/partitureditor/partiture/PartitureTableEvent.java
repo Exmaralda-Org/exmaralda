@@ -19,6 +19,7 @@ public class PartitureTableEvent extends java.awt.AWTEvent {
     public static int FILENAME_CHANGED = 1;
     public static int MEDIA_TIME_CHANGED = 2;
     public static int UNDO_CHANGED = 3;
+    public static int WHISPER_PARAMETERS_CHANGED = 4;
     
     /** Creates new PartitureTableEvent */
     public PartitureTableEvent(Object source, int index, Object o) {

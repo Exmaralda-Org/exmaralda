@@ -34,6 +34,7 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 import org.exmaralda.partitureditor.sound.Playable;
 import org.exmaralda.partitureditor.sound.PlayableEvent;
 import org.exmaralda.partitureditor.sound.PlayableListener;
+import org.exmaralda.webservices.Whisper4EXMARaLDA;
 
 /**
  *
@@ -121,8 +122,6 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         }
 
         initActions();
-
-
     }
 
 
@@ -187,6 +186,21 @@ public abstract class AbstractTimeviewPartiturPlayerControl
 
         moveBackCursorAction = new org.exmaralda.folker.actions.waveformactions.MoveBackCursorAction(this, "", c.getIcon(Constants.GO_BACK_ICON)); // new 13-12-2017 for issue #113
     }
+    
+    public void setupWhisperASR(){
+        String wavPath = partitur.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile("wav");
+        if (wavPath==null){
+            whisperASRAction.setEnabled(false);
+            return;
+        }        
+        String whisperKey = Whisper4EXMARaLDA.getWhisperKey();
+        if (whisperKey==null || whisperKey.length()==0){
+            whisperASRAction.setEnabled(false);
+            return;            
+        }
+        whisperASRAction.setEnabled(true);        
+    }
+    
 
  /***************** PLAYING MEDIA ******************************/
 
@@ -508,7 +522,8 @@ public abstract class AbstractTimeviewPartiturPlayerControl
             timeViewer.setRightDragBoundary(nextTime*1000.0);
 
             detachSelectionAction.setEnabled(true);            
-
+        } else if (e.getID()==PartitureTableEvent.WHISPER_PARAMETERS_CHANGED){
+            setupWhisperASR();
         }
     }
 

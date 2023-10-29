@@ -368,6 +368,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         eventControlPanel.add(addEventButton);
 
         whisperASRButton.setText("jButton1");
+        whisperASRButton.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/wifi-duotone.png"))); // NOI18N
         eventControlPanel.add(whisperASRButton);
 
         appendIntervalButton.setText("jButton1");

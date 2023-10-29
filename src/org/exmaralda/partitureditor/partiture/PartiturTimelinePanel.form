@@ -301,6 +301,9 @@
                     <Component class="javax.swing.JButton" name="whisperASRButton">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="jButton1"/>
+                        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/org/exmaralda/partitureditor/partiture/Icons/wifi-duotone.png"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="appendIntervalButton">

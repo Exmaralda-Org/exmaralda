@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.partiture.PartitureTableEvent;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 import org.exmaralda.webservices.swing.WebServiceProgessDialog;
 import org.exmaralda.webservices.swing.WhisperParameterDialog;
@@ -45,6 +46,11 @@ public class WhisperAction extends org.exmaralda.partitureditor.partiture.Abstra
             table.clearUndo();
             table.clearSearchResult();
             table.setFrameEndPosition(-2);
+            
+            PartitureTableEvent event = new PartitureTableEvent(this, PartitureTableEvent.WHISPER_PARAMETERS_CHANGED, null);
+            table.fireEvent(event);
+            
+            
         } catch (JexmaraldaException | IOException | JDOMException | SAXException | FSMException ex) {
             System.out.println(ex.getLocalizedMessage());
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getLocalizedMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);

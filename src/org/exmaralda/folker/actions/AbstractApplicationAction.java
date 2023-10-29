@@ -20,7 +20,10 @@ public abstract class AbstractApplicationAction extends javax.swing.AbstractActi
     
     public AbstractTimeviewPartiturPlayerControl applicationControl;
     
-    /** Creates a new instance of AbstractApplicationAction */
+    /** Creates a new instance of AbstractApplicationAction
+     * @param ac
+     * @param name
+     * @param icon */
     public AbstractApplicationAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon) {
         super(name, icon);
         applicationControl = ac;

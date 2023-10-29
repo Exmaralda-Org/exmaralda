@@ -44,11 +44,9 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
 
     public PartiturEditorTimeviewPlayerControl(ExmaraldaApplication ac, AbstractTimeProportionalViewer tv, PartitureTableWithActions pt, Playable p) {
         super(ac, tv, pt, p);
-
         changeZoomDialog = new ChangeZoomDialog((JFrame)ac, false);
         changeZoomDialog.zoomLevelSlider.addChangeListener(this);
         changeZoomDialog.magnifyLevelSlider.addChangeListener(this);
-
     }
 
     @Override
@@ -142,7 +140,11 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
         final int editRowF = editRow;
         final int editColF = editCol;
 
-        if ((selectionStart<0) || (selectionEnd<0)) return;
+        if ((selectionStart<0) || (selectionEnd<0) || (selectionStart==selectionEnd)) {
+            String message = "Select a stretch of the waveform to send it to Whisper." ;
+            JOptionPane.showMessageDialog(partitur, message);            
+            return;
+        }
         
         final double startTime = selectionStart / 1000.0;
         final double endTime = selectionEnd / 1000.0;
@@ -201,6 +203,7 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
         
         
         whisperASRAction.setEnabled(false);
+        
         whisperThread.start();
 
         
@@ -239,7 +242,7 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                 partitur.transcriptionChanged = true;
                 
             }
-        }
+        }        
         whisperASRAction.setEnabled(true);        
     }
     
