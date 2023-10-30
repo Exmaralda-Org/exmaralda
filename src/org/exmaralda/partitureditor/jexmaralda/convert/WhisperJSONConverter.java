@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.common.helpers.Rounder;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
@@ -262,7 +264,19 @@ public class WhisperJSONConverter {
 
             boolean select = parameters.getOrDefault(tier.getCategory(), Boolean.FALSE);
             if (!select || (tier.getNumberOfEvents()==0 && !empty)){
-                importedTranscription.getBody().removeTierAt(pos);
+                Tier removalCandidate = importedTranscription.getBody().getTierAt(pos);
+                if (removalCandidate.getType().equals("t") && removalCandidate.getCategory().equals("w")){
+                    // if a t-(word)-tier is removed, the text tier has to become t-tier
+                    String[] otherTiers = importedTranscription.getBody().getTiersOfSpeakerAndCategory(removalCandidate.getSpeaker(), "v");
+                    if (otherTiers.length==1){
+                        try {
+                            importedTranscription.getBody().getTierWithID(otherTiers[0]).setType("t");
+                        } catch (JexmaraldaException ex) {
+                            Logger.getLogger(WhisperJSONConverter.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+                importedTranscription.getBody().removeTierAt(pos);                
                 pos--;
             }
         }

@@ -76,6 +76,11 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
 
         wordTiersCheckbox.setSelected(true);
         wordTiersCheckbox.setText("Word tier(s)");
+        wordTiersCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wordTiersCheckboxActionPerformed(evt);
+            }
+        });
         tiersPanel.add(wordTiersCheckbox);
 
         temperatureTiersCheckbox.setText("Temperature tier(s)");
@@ -112,7 +117,7 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
         okPanel.setLayout(okPanelLayout);
         okPanelLayout.setHorizontalGroup(
             okPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 368, Short.MAX_VALUE)
             .addGroup(okPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(okPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -139,6 +144,13 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void wordTiersCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wordTiersCheckboxActionPerformed
+        // cannot not import both text and word tiers
+        if (!wordTiersCheckbox.isSelected()){
+            textTiersCheckbox.setSelected(true);
+        }
+    }//GEN-LAST:event_wordTiersCheckboxActionPerformed
 
     /**
      * @param args the command line arguments
