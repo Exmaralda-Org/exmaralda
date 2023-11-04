@@ -335,6 +335,7 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
             java.awt.Dimension size = new java.awt.Dimension(image.getIconWidth(), image.getIconHeight());
             System.out.println(image.getIconWidth() + " / " + image.getIconHeight());
             displayPanel.setVisible(true);
+            displayPanel2.setPreferredSize(size);            
             displayPanel2.setPreferredSize(size);
             displayPanel2.setMaximumSize(size);
         } else {
@@ -388,8 +389,8 @@ public class LinkPanel extends javax.swing.JPanel implements JCTableDataListener
             String url = urlTextField.getText();
             FileReader fr = new FileReader(url);
             BufferedReader br = new BufferedReader(fr);
-            String nextLine = new String();
-            StringBuffer sb = new StringBuffer();
+            String nextLine;
+            StringBuilder sb = new StringBuilder();
             int lineCount = 0;
             while ((nextLine = br.readLine()) != null){
                 sb.append(nextLine + System.getProperty("line.separator"));

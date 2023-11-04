@@ -38,7 +38,10 @@ public class AddTierAction extends org.exmaralda.partitureditor.partiture.Abstra
         int row = table.selectionStartRow;
         NewTierDialog dialog = new NewTierDialog(table.parent, true, table.getModel().getTranscription());
         // new 15-12-2021, issue #300
-        dialog.guessNewTier(row);
+        // 04-11-2023, there is a bug here
+        if (row>=0){
+            dialog.guessNewTier(row);
+        }
 
         if (dialog.makeNewTier()){
             Tier newTier = dialog.getNewTier();

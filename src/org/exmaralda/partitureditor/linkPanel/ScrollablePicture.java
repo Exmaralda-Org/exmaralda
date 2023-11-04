@@ -39,13 +39,16 @@ public class ScrollablePicture extends JLabel
     }
 
     //Methods required by the MouseMotionListener interface:
+    @Override
     public void mouseMoved(MouseEvent e) { }
+    @Override
     public void mouseDragged(MouseEvent e) {
         //The user is dragging us, so scroll!
         Rectangle r = new Rectangle(e.getX(), e.getY(), 1, 1);
         scrollRectToVisible(r);
     }
 
+    @Override
     public Dimension getPreferredSize() {
         if (missingPicture) {
             return new Dimension(20, 20);
@@ -55,16 +58,18 @@ public class ScrollablePicture extends JLabel
         }
     }
 
+    @Override
     public Dimension getPreferredScrollableViewportSize() {
         return new Dimension(200,200);
         //return getPreferredSize();
     }
 
+    @Override
     public int getScrollableUnitIncrement(Rectangle visibleRect,
                                           int orientation,
                                           int direction) {
         //Get the current position.
-        int currentPosition = 0;
+        int currentPosition;
         if (orientation == SwingConstants.HORIZONTAL) {
             currentPosition = visibleRect.x;
         } else {
@@ -85,6 +90,7 @@ public class ScrollablePicture extends JLabel
         }
     }
 
+    @Override
     public int getScrollableBlockIncrement(Rectangle visibleRect,
                                            int orientation,
                                            int direction) {
@@ -95,10 +101,12 @@ public class ScrollablePicture extends JLabel
         }
     }
 
+    @Override
     public boolean getScrollableTracksViewportWidth() {
         return false;
     }
 
+    @Override
     public boolean getScrollableTracksViewportHeight() {
         return false;
     }

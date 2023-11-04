@@ -933,6 +933,7 @@ public class PartitureTableWithActions extends PartitureTable
         annotationDialog.setPartitur(this);
 
         ipaPanel = new org.exmaralda.partitureditor.ipapanel.IPADialog(parent, false);
+        ipaPanel.setLocationRelativeTo(this);
         
         if (parent instanceof PartiturEditor){
             multimodalDialog = new org.exmaralda.partitureditor.multimodalPanel.MultimodalDialog(parent, false);
