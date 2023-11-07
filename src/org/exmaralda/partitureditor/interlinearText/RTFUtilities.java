@@ -38,19 +38,21 @@ public class RTFUtilities {
     public static String toEscapedRTFString(String original){
         StringBuilder currentRun = new StringBuilder();
         for (int pos=0; pos<original.length(); pos++){
-            char c = original.charAt(pos);
-            if ((c>=0) && (c<=127)){        // low byte run
-                switch (c){
+            char currentCharacter = original.charAt(pos);
+            if ((currentCharacter>=0) && (currentCharacter<=127)){        // low byte run
+                switch (currentCharacter){
                     case '\\' : currentRun.append("\\\\"); break;   // replace back slash by two back slashes
                     case '{'  : currentRun.append("\\{");  break;   // replace opening curly bracket by back slash plus ocb
                     case '}'  : currentRun.append("\\}");  break;   // replace closing curly bracket by back slash plus ccb
-                    default   : currentRun.append(c); break;        // c is proper ANSI character
+                    default   : currentRun.append(currentCharacter); break;        // c is proper ANSI character
                 }
-            } else if ((c>=128) && (c<=255)){        // high byte run
-                String hex = "\\'" + Integer.toHexString(c).toLowerCase();
+            } else if ((currentCharacter>=128) && (currentCharacter<=255)){        // high byte run
+                String hex = "\\'" + Integer.toHexString(currentCharacter).toLowerCase();
                 currentRun.append(hex);
-            } else {    // double byte run
-                currentRun.append("\\u").append(new Integer(c).toString());
+            } else {    // double byte run                
+                // changed 07-11-2023: issue #317
+                currentRun.append("\\u").append(Integer.valueOf(currentCharacter).toString());
+                //currentRun.append("\\u").append(new Integer(currentCharacter).toString());
                 //currentRun.append("\\u" + Integer.toString(Character.getNumericValue(c)));
                 currentRun.append("\\'3f");
             }
@@ -64,8 +66,8 @@ public class RTFUtilities {
         short currentRunType = 0;
         StringBuffer currentRun = new StringBuffer();
         for (int pos=0; pos<original.length(); pos++){
-            char c = original.charAt(pos);
-            if ((c>=0) && (c<=127)){        // low byte run
+            char currentCharacter = original.charAt(pos);
+            if ((currentCharacter>=0) && (currentCharacter<=127)){        // low byte run
                 if (currentRunType!=LB_RUN && pos!=0){
                     currentRun.append("}");
                     sb.append(currentRun.toString());
@@ -77,14 +79,14 @@ public class RTFUtilities {
                     currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace)).append(" ");
                 }
                 currentRunType = LB_RUN;
-                switch (c){
+                switch (currentCharacter){
                     case '\\' : currentRun.append("\\\\"); break;   // replace back slash by two back slashes
                     case '{'  : currentRun.append("\\{");  break;   // replace opening curly bracket by back slash plus ocb
                     case '}'  : currentRun.append("\\}");  break;   // replace closing curly bracket by back slash plus ccb
-                    default   : currentRun.append(c); break;        // c is proper ANSI character
+                    default   : currentRun.append(currentCharacter); break;        // c is proper ANSI character
                                 
                 }
-            } else if ((c>=128) && (c<=255)){        // high byte run
+            } else if ((currentCharacter>=128) && (currentCharacter<=255)){        // high byte run
                 if (currentRunType!=HB_RUN && pos!=0){
                     currentRun.append("}");
                     sb.append(currentRun.toString());
@@ -100,7 +102,7 @@ public class RTFUtilities {
                     currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace)).append(" ");
                 }
                 currentRunType = HB_RUN;
-                String hex = "\\'" + Integer.toHexString(c).toLowerCase();
+                String hex = "\\'" + Integer.toHexString(currentCharacter).toLowerCase();
                 currentRun.append(hex);
             } else {    // double byte run
                 if (currentRunType!=DB_RUN && pos!=0){
@@ -117,7 +119,9 @@ public class RTFUtilities {
                     currentRun.append(toRTFFontProperties(fontSize,fontColor,fontFace)).append(" ");
                 }
                 currentRunType = DB_RUN;
-                currentRun.append("\\u").append(new Integer(c).toString());
+                // changed 07-11-2023: issue #317
+                currentRun.append("\\u").append(Integer.valueOf(currentCharacter).toString());
+                //currentRun.append("\\u").append(new Integer(c).toString());
                 //currentRun.append("\\u" + Integer.toString(Character.getNumericValue(c)));
                 currentRun.append("\\'3f");
             }
