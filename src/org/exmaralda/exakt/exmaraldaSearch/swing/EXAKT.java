@@ -30,6 +30,7 @@ import org.jdom.transform.*;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import org.exmaralda.common.application.ProConnector;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.common.helpers.RelativePath;
 import org.exmaralda.exakt.search.*;
@@ -49,6 +50,8 @@ import org.exmaralda.partitureditor.jexmaralda.segment.SegmentedToListInfo;
 import org.exmaralda.partitureditor.listTable.ListTable;
 import org.exmaralda.partitureditor.listTable.ListTableModel;
 import org.exmaralda.partitureditor.praatPanel.PraatControl;
+import org.exmaralda.pro.ProUtilities;
+import org.exmaralda.pro.swing.GetRegisteredDialog;
 import org.xml.sax.SAXException;
 
 
@@ -222,6 +225,8 @@ public class EXAKT extends javax.swing.JFrame
         praatControl.configure(this);
         
         status("EXAKT started.");
+        
+        this.initProActions();
 
                 
     }
@@ -1710,6 +1715,29 @@ public class EXAKT extends javax.swing.JFrame
         }
         
     }
+    
+    private void initProActions() {
+        boolean isProPresent = ProConnector.isProPresent();
+        if (!isProPresent){
+            //JOptionPane.showMessageDialog(rootPane, "No Pro, bro!");
+            return;
+        }
+        //JOptionPane.showMessageDialog(rootPane, "we are pro, bro!");
+        ProUtilities proUtilities = new ProUtilities(this);
+        boolean isRegisteredUser = proUtilities.isRegisteredUser();
+        int usagesIncludingThisOne = proUtilities.incrementUsageCount();
+        System.out.println("Usage counter: " + usagesIncludingThisOne);
+        if ((usagesIncludingThisOne%5==0) && !isRegisteredUser){
+        //if (true){
+            GetRegisteredDialog getRegisteredDialog = new GetRegisteredDialog(this, true);
+            getRegisteredDialog.setLocationRelativeTo(this);
+            String htmlText = proUtilities.getRegisterText();
+            getRegisteredDialog.setText(htmlText);
+            getRegisteredDialog.setVisible(true);
+        }
+    }
+    
+    
 
 
     

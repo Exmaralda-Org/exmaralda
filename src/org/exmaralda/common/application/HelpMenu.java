@@ -24,7 +24,7 @@ public class HelpMenu extends javax.swing.JMenu {
         add(new EXMARaLDAOnTheWebAction("EXMARaLDA on the web...", app));
         aboutAction = new AboutAction("About...", app);
         add(aboutAction);
-        add(new CheckVersionAction("Check version...", app));
+        //add(new CheckVersionAction("Check version...", app));
         
         if (ProConnector.isProPresent()){
             add(new EnterRegistrationKeyAction("Enter support/registration key...", app));
@@ -38,6 +38,9 @@ public class HelpMenu extends javax.swing.JMenu {
         add(aboutAction);
         if (menuTitles[2].length()>0){
             add(new CheckVersionAction(menuTitles[2], app));
+        }
+        if (ProConnector.isProPresent()){
+            add(new EnterRegistrationKeyAction("Enter support/registration key...", app));
         }
         autoInternationalize = false;
     }

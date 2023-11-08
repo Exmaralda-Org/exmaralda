@@ -20,8 +20,11 @@ import java.util.prefs.BackingStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.exmaralda.common.application.ProConnector;
 import org.exmaralda.folker.gui.StartupSplashScreen;
 import org.exmaralda.partitureditor.partiture.StringUtilities;
+import org.exmaralda.pro.ProUtilities;
+import org.exmaralda.pro.swing.GetRegisteredDialog;
 import org.jdom.JDOMException;
 
 /**
@@ -53,6 +56,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         applicationControl.retrieveSettings();
 
         contributionTableScrollPane.setViewportView(applicationControl.contributionListTable);
+        
+        this.initProActions();
 
         // if this is a MAC OS: init the MAC OS X specific actions (added 27-05-2019: issue #184)
         String os = System.getProperty("os.name").substring(0,3);
@@ -690,6 +695,30 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         }        
     }  
     
+
+
+    private void initProActions() {
+        boolean isProPresent = ProConnector.isProPresent();
+        if (!isProPresent){
+            //JOptionPane.showMessageDialog(rootPane, "No Pro, bro!");
+            return;
+        }
+        //JOptionPane.showMessageDialog(rootPane, "we are pro, bro!");
+        ProUtilities proUtilities = new ProUtilities(this);
+        boolean isRegisteredUser = proUtilities.isRegisteredUser();
+        int usagesIncludingThisOne = proUtilities.incrementUsageCount();
+        System.out.println("Usage counter: " + usagesIncludingThisOne);
+        if ((usagesIncludingThisOne%5==0) && !isRegisteredUser){
+        //if (true){
+            GetRegisteredDialog getRegisteredDialog = new GetRegisteredDialog(this, true);
+            getRegisteredDialog.setLocationRelativeTo(this);
+            String htmlText = proUtilities.getRegisterText();
+            getRegisteredDialog.setText(htmlText);
+            getRegisteredDialog.setVisible(true);
+        }
+    }
+    
+
     
     
 }
