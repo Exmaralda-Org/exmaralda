@@ -25,11 +25,14 @@ import org.exmaralda.exakt.search.swing.KWICTableEvent;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import java.util.prefs.BackingStoreException;
+import org.exmaralda.common.application.ProConnector;
 import org.exmaralda.exakt.search.AnnotationSearchResult;
 import org.exmaralda.partitureditor.partiture.menus.*;
 import org.exmaralda.partitureditor.partiture.toolbars.*;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.common.helpers.Internationalizer;
+import org.exmaralda.pro.ProUtilities;
+import org.exmaralda.pro.swing.GetRegisteredDialog;
 import org.xml.sax.SAXException;
 
 
@@ -147,6 +150,8 @@ public class PartiturEditor extends javax.swing.JFrame
 
         
         table.getModel().resetTranscription();
+        
+        initProActions();
         
       
         // if this is a MAC OS: init the MAC OS X specific actions
@@ -868,6 +873,27 @@ public class PartiturEditor extends javax.swing.JFrame
         } else {
             partiturTimelinePanel.rearrangeTrancriptionControls(                
                     java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).getBoolean("rearrange-transcription-controls", false));
+        }
+    }
+
+    private void initProActions() {
+        boolean isProPresent = ProConnector.isProPresent();
+        if (!isProPresent){
+            //JOptionPane.showMessageDialog(rootPane, "No Pro, bro!");
+            return;
+        }
+        //JOptionPane.showMessageDialog(rootPane, "we are pro, bro!");
+        ProUtilities proUtilities = new ProUtilities(this);
+        boolean isRegisteredUser = proUtilities.isRegisteredUser();
+        int usagesIncludingThisOne = proUtilities.incrementUsageCount();
+        System.out.println("Usage counter: " + usagesIncludingThisOne);
+        if ((usagesIncludingThisOne%5==0) && !isRegisteredUser){
+        //if (true){
+            GetRegisteredDialog getRegisteredDialog = new GetRegisteredDialog(this, true);
+            getRegisteredDialog.setLocationRelativeTo(this);
+            String htmlText = proUtilities.getRegisterText();
+            getRegisteredDialog.setText(htmlText);
+            getRegisteredDialog.setVisible(true);
         }
     }
     

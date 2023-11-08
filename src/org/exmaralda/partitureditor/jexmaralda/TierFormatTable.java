@@ -1,5 +1,6 @@
 package org.exmaralda.partitureditor.jexmaralda;
 
+import java.awt.Color;
 import java.util.*;
 import java.io.*;
 import org.xml.sax.*;
@@ -173,6 +174,11 @@ public class TierFormatTable extends Hashtable {
         }
         return result;
     }
+    
+    public static Color getLinkedEventsBackgroundColor(){
+        return new Color(247,244,181);        
+    }
+    
     // ********************************************
     // ********** BASIC MANIPULATION **************
     // ********************************************

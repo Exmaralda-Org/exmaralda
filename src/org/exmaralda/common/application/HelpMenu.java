@@ -8,6 +8,7 @@ package org.exmaralda.common.application;
 
 import org.exmaralda.common.*;
 import org.exmaralda.common.helpers.Internationalizer;
+import org.exmaralda.pro.actions.EnterRegistrationKeyAction;
 /**
  *
  * @author thomas
@@ -24,6 +25,10 @@ public class HelpMenu extends javax.swing.JMenu {
         aboutAction = new AboutAction("About...", app);
         add(aboutAction);
         add(new CheckVersionAction("Check version...", app));
+        
+        if (ProConnector.isProPresent()){
+            add(new EnterRegistrationKeyAction("Enter support/registration key...", app));
+        }
     }
     
     public HelpMenu(String s, ExmaraldaApplication app, String[] menuTitles, String url) {

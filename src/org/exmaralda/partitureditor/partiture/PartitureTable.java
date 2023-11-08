@@ -11,6 +11,7 @@ import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import com.klg.jclass.table.*;
 import java.awt.Color;
 import java.util.*;
+import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
 
 /**
  * implements the abstract methods of the parent class and provides the interface
@@ -529,6 +530,8 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
         if (getModel().containsLink(row,col) && diffBgCol){
             style.setCellBorderColorMode(JCTableEnum.USE_CELL_BORDER_COLOR);            
             style.setCellBorderColor(java.awt.Color.red);
+            // 04-11-2023: added for issue #434
+            style.setBackground(TierFormatTable.getLinkedEventsBackgroundColor());
         } else {
             style.setCellBorderColorMode(JCTableEnum.BASE_ON_BACKGROUND);
         }
@@ -567,6 +570,8 @@ public class PartitureTable extends AbstractPartitureTable implements org.exmara
             JCCellStyle linkStyle = (JCCellStyle)style.clone();
             linkStyle.setCellBorderColorMode(JCTableEnum.USE_CELL_BORDER_COLOR);
             linkStyle.setCellBorderColor(java.awt.Color.red);
+            // 04-11-2023: added for issue #434
+            linkStyle.setBackground(TierFormatTable.getLinkedEventsBackgroundColor());
 
             int noEvents = tableModel.getTranscription().getBody().getTierAt(row).getNumberOfEvents();
             int noTLIs = tableModel.getTranscription().getBody().getCommonTimeline().getNumberOfTimelineItems();

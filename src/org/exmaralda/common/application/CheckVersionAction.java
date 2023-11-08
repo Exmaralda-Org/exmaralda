@@ -28,6 +28,7 @@ public class CheckVersionAction extends javax.swing.AbstractAction {
 
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         try{
  	    String url = "http://www.exmaralda.org/update/index.php"
