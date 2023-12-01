@@ -533,7 +533,10 @@ public class PartiturEditor extends javax.swing.JFrame
             partiturTimelinePanel.loadSettings(getPreferencesNode());
 
             table.praatPanel.praatControl.configure(this);
-
+            
+            // 01-12-2023: new for #442
+            double tolerance = settings.getDouble("TIMELINE-TOLERANCE", 0.05);
+            timelineViewer.setTolerance(tolerance * 1000);
 
         } catch (HeadlessException ex){
             Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
@@ -559,6 +562,11 @@ public class PartiturEditor extends javax.swing.JFrame
         settings.put("SHOW-INELMenu", Boolean.toString(false));
         
         settings.put("SHOW-TransformationDropdown", Boolean.toString(getTransformationComboBox().isShowing()));
+        
+        // 01-12-2023: new for #442
+        /*double tol = timelineViewer.getTolerance() / 1000.0;
+        System.out.println("TOLERANCE IN STORE SETTINGS: " + tol);
+        settings.put("TIMELINE-TOLERANCE", Double.toString(tol));*/
 
         System.out.println("Settings stored.");        
     }
@@ -753,6 +761,10 @@ public class PartiturEditor extends javax.swing.JFrame
                         timelineViewer.setPixelsPerSecond(150.0);
                         table.getModel().setPixelsPerSecond(150.0);
                         timelineViewer.setSoundFile(wf);
+                        
+                        // 01-12-2023: new for #442
+                        double tolerance = settings.getDouble("TIMELINE-TOLERANCE", 0.05);
+                        timelineViewer.setTolerance(tolerance * 1000);
                     } catch (IOException ioe){
                         // added 09-06-2009: fallback onto first media file
                         // if the WAV file cannot be opened
@@ -766,6 +778,9 @@ public class PartiturEditor extends javax.swing.JFrame
                         timelineViewer = new org.exmaralda.folker.timeview.TimelineViewer();
                         timelineViewer.setPixelsPerSecond(150.0);
                         table.getModel().setPixelsPerSecond(150.0);
+                        // 01-12-2023: new for #442
+                        double tolerance = settings.getDouble("TIMELINE-TOLERANCE", 0.05);
+                        timelineViewer.setTolerance(tolerance * 1000);
                         timelineViewer.setSoundFile(rf);
                     }
                 } else {

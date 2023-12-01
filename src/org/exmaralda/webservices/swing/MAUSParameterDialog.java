@@ -5,7 +5,9 @@
 package org.exmaralda.webservices.swing;
 
 import java.util.HashMap;
+import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
+import org.exmaralda.common.ExmaraldaApplication;
 
 /**
  *
@@ -71,6 +73,7 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
     };   
 
     public boolean approved = false;
+    java.awt.Frame parent;
     
     /**
      * Creates new form MAUSParameterDialog
@@ -79,8 +82,43 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
      */
     public MAUSParameterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
         this.languageComboBox.setRenderer(new MAUSLanguagesComboBoxRenderer());
+        // #441
+        if (parent instanceof ExmaraldaApplication){
+            ExmaraldaApplication exmaraldaApplication = (ExmaraldaApplication)parent;
+            Preferences prefNode = java.util.prefs.Preferences.userRoot().node(exmaraldaApplication.getPreferencesNode());
+            getPreferences(prefNode);
+        }
+    }
+    
+    // #441
+    private void getPreferences(Preferences prefNode) {
+        languageComboBox.setSelectedIndex(prefNode.getInt("MAUS-LANGUAGE-INDEX", 0));
+        segmentChainSelectionRadioButton.setSelected(prefNode.getBoolean("MAUS-SEGMENT-CHAIN-SELECTION", false));
+        segmentRadioButton.setSelected(prefNode.getBoolean("MAUS-USE-SEGMENTATION", false));
+        segmentationComboBox.setSelectedItem(prefNode.get("MAUS-SEGMENTATION-ALGORITHM", "HIAT"));
+        wordsOrthoCheckBox.setSelected(prefNode.getBoolean("MAUS-WORDS-ORTHOGRAPHIC", true));
+        wordsSAMPACheckBox.setSelected(prefNode.getBoolean("MAUS-WORDS-SAMPA", true));
+        phonemesCheckBox.setSelected(prefNode.getBoolean("MAUS-PHONEMES", false));
+        mergeWithExistingRadioButton.setSelected(prefNode.getBoolean("MAUS-MERGE", false));
+        toleranceSpinner.setValue(prefNode.getDouble("MAUS-TOLERANCE", 0.01));
+        forceCheckBox.setSelected(prefNode.getBoolean("MAUS-FORCE", false));
+    }
+    
+    // #441
+    private void setPreferences(Preferences prefNode) {
+        prefNode.putInt("MAUS-LANGUAGE-INDEX", languageComboBox.getSelectedIndex());
+        prefNode.putBoolean("MAUS-SEGMENT-CHAIN-SELECTION", segmentChainSelectionRadioButton.isSelected());
+        prefNode.putBoolean("MAUS-USE-SEGMENTATION", segmentRadioButton.isSelected());
+        prefNode.put("MAUS-SEGMENTATION-ALGORITHM", (String) segmentationComboBox.getSelectedItem());
+        prefNode.putBoolean("MAUS-WORDS-ORTHOGRAPHIC", wordsOrthoCheckBox.isSelected());
+        prefNode.putBoolean("MAUS-WORDS-SAMPA", wordsSAMPACheckBox.isSelected());
+        prefNode.putBoolean("MAUS-PHONEMES", phonemesCheckBox.isSelected());
+        prefNode.putBoolean("MAUS-MERGE", mergeWithExistingRadioButton.isSelected());
+        prefNode.putDouble("MAUS-TOLERANCE", (double) toleranceSpinner.getValue());
+        prefNode.putBoolean("MAUS-FORCE", forceCheckBox.isSelected());
     }
     
     public HashMap<String, Object> getMAUSParameters() {
@@ -322,6 +360,14 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         approved = true;
+        
+        // #441
+        if (this.parent instanceof ExmaraldaApplication){
+            ExmaraldaApplication exmaraldaApplication = (ExmaraldaApplication)parent;
+            Preferences prefNode = java.util.prefs.Preferences.userRoot().node(exmaraldaApplication.getPreferencesNode());
+            setPreferences(prefNode);
+        }
+        
         dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -445,5 +491,6 @@ public class MAUSParameterDialog extends javax.swing.JDialog {
         this.secondsLabel.setEnabled(merge);
         this.forceCheckBox.setEnabled(merge);
     }    
+
 
 }

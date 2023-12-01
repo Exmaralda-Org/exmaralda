@@ -103,7 +103,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             table.genericFSM,
                             table.cGATMinimalFSM,
                             Boolean.toString(table.prettyPrint),
-                            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("rearrange-transcription-controls", "false") // issue #433
+                            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("rearrange-transcription-controls", "false"), // issue #433
+                            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("TIMELINE-TOLERANCE", "0.05") // issue #442
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -197,6 +198,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             // issue #433
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").put("rearrange-transcription-controls", newValues[41]); // issue #433            
             
+            // issue #442
+            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").put("TIMELINE-TOLERANCE", newValues[42]); // issue #433            
             
             table.status("Preferences changed");
 

@@ -96,7 +96,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[42];
+        String[] result = new String[43];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -148,6 +148,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         // new 25-10-2023, issue #433
         result[41] = Boolean.toString(rearrangeTranscriptionControlsCheckBox.isSelected());
+        
+        // 01-12-2023: new for #442
+        result[42] = ((Double) timelineToleranceSpinner.getValue()).toString();
+        
         
         return result;        
     }
@@ -284,9 +288,13 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jmfPlayerRadioButton = new javax.swing.JRadioButton();
         cocoaQuicktimePlayerRadioButton = new javax.swing.JRadioButton();
         otherOptionsPanel = new javax.swing.JPanel();
+        optionsPanel1 = new javax.swing.JPanel();
         autoAnchorCheckBox = new javax.swing.JCheckBox();
-        autoRemoveTLICheckBox = new javax.swing.JCheckBox();
         autoInterpolateCheckBox = new javax.swing.JCheckBox();
+        autoRemoveTLICheckBox = new javax.swing.JCheckBox();
+        optionsPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        timelineToleranceSpinner = new javax.swing.JSpinner();
         topPanel = new javax.swing.JPanel();
         pathsPanel = new javax.swing.JPanel();
         logPanel = new javax.swing.JPanel();
@@ -971,18 +979,30 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         mediaPanel.add(playerSelectionPanel, java.awt.BorderLayout.CENTER);
 
         otherOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Additional Options"));
-        otherOptionsPanel.setLayout(new javax.swing.BoxLayout(otherOptionsPanel, javax.swing.BoxLayout.Y_AXIS));
+        otherOptionsPanel.setLayout(new java.awt.GridLayout(1, 2));
+
+        optionsPanel1.setLayout(new javax.swing.BoxLayout(optionsPanel1, javax.swing.BoxLayout.Y_AXIS));
 
         autoAnchorCheckBox.setSelected(true);
         autoAnchorCheckBox.setText("Auto anchor transcription to media");
-        otherOptionsPanel.add(autoAnchorCheckBox);
-
-        autoRemoveTLICheckBox.setText("Auto remove unused timeline items after merge");
-        otherOptionsPanel.add(autoRemoveTLICheckBox);
+        optionsPanel1.add(autoAnchorCheckBox);
 
         autoInterpolateCheckBox.setSelected(true);
         autoInterpolateCheckBox.setText("Auto interpolate when splitting");
-        otherOptionsPanel.add(autoInterpolateCheckBox);
+        optionsPanel1.add(autoInterpolateCheckBox);
+
+        autoRemoveTLICheckBox.setText("Auto remove unused timeline items after merge");
+        optionsPanel1.add(autoRemoveTLICheckBox);
+
+        otherOptionsPanel.add(optionsPanel1);
+
+        jLabel2.setText("Timeline tolerance: ");
+        optionsPanel2.add(jLabel2);
+
+        timelineToleranceSpinner.setModel(new javax.swing.SpinnerNumberModel(0.05d, 0.001d, 0.5d, 0.001d));
+        optionsPanel2.add(timelineToleranceSpinner);
+
+        otherOptionsPanel.add(optionsPanel2);
 
         mediaPanel.add(otherOptionsPanel, java.awt.BorderLayout.SOUTH);
 
@@ -1355,6 +1375,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1397,6 +1418,8 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton mmfPlayerRadioButton;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
+    private javax.swing.JPanel optionsPanel1;
+    private javax.swing.JPanel optionsPanel2;
     private javax.swing.JPanel otherOptionsPanel;
     private javax.swing.JPanel pathsPanel;
     private javax.swing.ButtonGroup pauseNotationButtonGroup;
@@ -1419,6 +1442,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel testLabel;
     private javax.swing.JLabel tierFontLabel;
     private javax.swing.JPanel tierFontPanel;
+    private javax.swing.JSpinner timelineToleranceSpinner;
     private javax.swing.JPanel topPanel;
     private javax.swing.JTextField transcription2FormattableTextField;
     private javax.swing.JCheckBox transformationDropdownCheckBox;
@@ -1518,6 +1542,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         // issue #433
         rearrangeTranscriptionControlsCheckBox.setSelected(Boolean.parseBoolean(values[41]));
+        
+        // issue #442
+        timelineToleranceSpinner.setValue(Double.parseDouble(values[42]));
 
         show();
         return changed;

@@ -29,6 +29,7 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
                                                             MouseWheelListener,
                                                             PlayableListener {
     
+    // is this the tolerance in milliseconds, ie. 0.05 seconds? That is quite a lot
     double tolerance = 50;
 
     boolean BUFFER_REDRAW_NECESSARY = true;
@@ -73,7 +74,7 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
     boolean rightDrag;
     public boolean selectionAttached = false;
             
-    Vector<TimeSelectionListener> timeSelectionListeners = new Vector<TimeSelectionListener>();
+    Vector<TimeSelectionListener> timeSelectionListeners = new Vector<>();
 
     public TimeviewNavigationDialog navigationDialog;
 
@@ -87,6 +88,18 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
         setToolTipText("00:00.00");
         navigationDialog = new TimeviewNavigationDialog((JFrame)(getTopLevelAncestor()), false, this);
     }
+
+    // 01-12-2023: new for #442
+    public double getTolerance() {
+        return tolerance;
+    }
+
+    // 01-12-2023: new for #442
+    public void setTolerance(double tolerance) {
+        this.tolerance = tolerance;
+    }
+    
+    
 
             
     // this is overridden in WaveFormViewer

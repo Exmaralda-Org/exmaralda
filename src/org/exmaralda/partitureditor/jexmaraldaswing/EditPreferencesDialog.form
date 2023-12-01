@@ -1469,27 +1469,54 @@
                     </Constraint>
                   </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
-                    <Property name="axis" type="int" value="1"/>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="2"/>
+                    <Property name="rows" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JCheckBox" name="autoAnchorCheckBox">
-                      <Properties>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Auto anchor transcription to media"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="autoRemoveTLICheckBox">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Auto remove unused timeline items after merge"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JCheckBox" name="autoInterpolateCheckBox">
-                      <Properties>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Auto interpolate when splitting"/>
-                      </Properties>
-                    </Component>
+                    <Container class="javax.swing.JPanel" name="optionsPanel1">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                        <Property name="axis" type="int" value="1"/>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JCheckBox" name="autoAnchorCheckBox">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Auto anchor transcription to media"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="autoInterpolateCheckBox">
+                          <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Auto interpolate when splitting"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="autoRemoveTLICheckBox">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Auto remove unused timeline items after merge"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="optionsPanel2">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="jLabel2">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Timeline tolerance: "/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JSpinner" name="timelineToleranceSpinner">
+                          <Properties>
+                            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                              <SpinnerModel initial="0.05" maximum="0.5" minimum="0.001" numberType="java.lang.Double" stepSize="0.001" type="number"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="topPanel">
