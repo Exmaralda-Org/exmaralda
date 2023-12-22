@@ -40,11 +40,8 @@ public class MakeCapitalWordList {
         try {
             new MakeCapitalWordList().doit();
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
         } catch (IOException ex) {
-            ex.printStackTrace();
         } catch (SQLException ex){
-            ex.printStackTrace();            
         }
     }
 
