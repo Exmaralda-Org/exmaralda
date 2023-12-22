@@ -10,7 +10,14 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
-    <change tool="all" type="change" version="1.14" date="26.10.2023">Citation info in About dialogs (#433)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="01.12.2023">Timeline tolerance configurable (issue #442)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="01.12.2023">Remember parameters for WebMAUS (issue #441)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="16.11.2023">Additional option for WebMAUS (issue #432)</change>
+    <change tool="partitureditor" type="bug" version="1.8" date="16.11.2023">Dependencies for SVG panel (issue #438)</change>
+    <change tool="all" type="feature" version="1.14" date="16.11.2023">Integrate pro functionality, step 1 (#437)</change>
+    <change tool="all" type="change" version="1.14" date="16.11.2023">Remove version checker (#436)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="28.10.2023">Improvements to Whisper import (issue #357)</change>
+    <change tool="all" type="change" version="1.14" date="26.10.2023">Citation info in About dialogs (#429)</change>
     <change tool="partitureditor" type="change" version="1.8" date="26.10.2023">Rearrange transcription controls (#433)</change>
     <change tool="partitureditor" type="feature" version="1.8" date="26.10.2023">Whisper webservice integration (#421)</change>
     <change tool="partitureditor" type="bug" version="1.8" date="04.09.2023">Bug in TablePopupMenu: Move to tier does not appear (#176)</change>
