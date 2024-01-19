@@ -5,14 +5,14 @@
     exclude-result-prefixes="xs"
     version="2.0">
     <xsl:template match="@*|node()">
-        <xsl:message>DEFAULT TEMPLATE</xsl:message>
+        <!-- <xsl:message>DEFAULT TEMPLATE</xsl:message> -->
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
     
     <xsl:variable name="ITEM-COUNT">
-        <xsl:message>ITEM-COUNT START</xsl:message>
+        <!-- <xsl:message>ITEM-COUNT START</xsl:message> -->
         <items>
             <xsl:for-each-group select="//@*[name()='start' or name()='end' or name()='from' or name()='to']" group-by=".">
                 <item>
@@ -21,11 +21,11 @@
                 </item>
             </xsl:for-each-group>
         </items>
-        <xsl:message>ITEM-COUNT END</xsl:message>
+        <!-- <xsl:message>ITEM-COUNT END</xsl:message> -->
     </xsl:variable>
     
     <xsl:variable name="TIMELINE_MAP">
-        <xsl:message>TIMELINE START</xsl:message>
+        <!-- <xsl:message>TIMELINE START</xsl:message> -->
         <timeline>
             <xsl:for-each select="//tei:when[not(@interval) and not(@since)]">
                 <xsl:variable name="ID" select="@xml:id"/>
@@ -46,11 +46,11 @@
                 </when>
             </xsl:for-each>
         </timeline>
-        <xsl:message>TIMELINE END</xsl:message>
+        <!-- <xsl:message>TIMELINE END</xsl:message> -->
     </xsl:variable>
     
     <xsl:variable name="ANCHOR_MAP">
-        <xsl:message>ANCHOR START</xsl:message>
+        <!-- <xsl:message>ANCHOR START</xsl:message> -->
         <anchors>
             <xsl:for-each-group select="//tei:anchor" group-by="@synch">
                 <anchor>
@@ -60,13 +60,13 @@
                 </anchor>
             </xsl:for-each-group>
         </anchors>    
-        <xsl:message>ANCHOR END</xsl:message>
+        <!-- <xsl:message>ANCHOR END</xsl:message> -->
     </xsl:variable>    
     
     
     <xsl:template match="tei:when[not(@interval) and not(@since)]">
         <xsl:variable name="ID" select="@xml:id"/>
-        <xsl:message>WHEN TEMPLATE <xsl:value-of select="$ID"/></xsl:message>
+        <!-- <xsl:message>WHEN TEMPLATE <xsl:value-of select="$ID"/></xsl:message> -->
         <xsl:choose>
             <!-- <xsl:when test="count(//tei:anchor[@synch=$ID])&gt;1"> -->
             <xsl:when test="$TIMELINE_MAP/descendant::when[@id=$ID] and $TIMELINE_MAP/descendant::when[@id=$ID]/@anchor-count &gt; 1">
@@ -91,7 +91,7 @@
     
     <xsl:template match="tei:anchor">
         <xsl:variable name="ID" select="@synch"/>
-        <xsl:message>ANCHOR TEMPLATE <xsl:value-of select="$ID"/></xsl:message>
+        <!-- <xsl:message>ANCHOR TEMPLATE <xsl:value-of select="$ID"/></xsl:message> -->
         <xsl:choose>
             <xsl:when test="//tei:when[@xml:id=$ID][@interval or @since]">
                 <xsl:copy>
