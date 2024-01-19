@@ -31,5 +31,5 @@ More information, as well as downloadable binaries, can be found at [the EXMARaL
 # Citation
 
 Please cite the following references when working with EXMARaLDA:
-* Schmidt, Thomas / Wörner, Kai (2023): EXMARaLDA. Software. [https://exmaralda.org]
+* Schmidt, Thomas / Wörner, Kai (2024): EXMARaLDA. Software. [https://exmaralda.org]
 * Schmidt, Thomas / Wörner, Kai (2014): EXMARaLDA. In: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): Handbook on Corpus Phonology, pp. 402-419. Oxford University Press.
