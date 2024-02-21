@@ -38,8 +38,8 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_MAY_2020.xml";
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JUNE_2021.xml";
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2022.xml";
+
     String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2023.xml";
-    
     String CAPITAL_ONLY_LIST = "/org/exmaralda/orthonormal/lexicon/dereko_capital_only.txt";
     HashSet<String> capitalOnly = new HashSet<>(240000, 1.0f); 
 
@@ -57,12 +57,19 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     @Override
     public void read(Object source) throws IOException {
         Document d;
-        if (source!=null){
+        if (source!=null && (source instanceof File)){
             try {
                 File f = (File)source;
                 d = IOUtilities.readDocumentFromLocalFile(f.getAbsolutePath());
             } catch (JDOMException ex) {
                 throw new IOException(ex);
+            }
+        } else if (source!=null) {
+            try {
+                String internalPath = (String)source;
+                d = new IOUtilities().readDocumentFromResource(internalPath);
+            } catch (JDOMException ex) {
+              throw new IOException(ex);
             }
         } else {
             try {

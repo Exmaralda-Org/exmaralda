@@ -23,11 +23,20 @@ import org.jdom.xpath.XPath;
 public class TagDirectoryISOTEI {
 
     public static String TTC = "C:\\Users\\bernd\\Dropbox\\TreeTagger";
-    public static String PF = "C:\\Users\\bernd\\Dropbox\\TreeTagger\\lib\\ParameterFile_ORIGINAL_ALL.par";
+    //public static String PF = "C:\\Users\\bernd\\Dropbox\\TreeTagger\\lib\\ParameterFile_ORIGINAL_ALL.par";
+    // better use this one and, while we're at it, put it into the TGDP project for future reference
+    public static String PF = "C:\\linguisticbits_nb\\src\\de\\linguisticbits\\austin\\tgdp\\march_2023\\tagger\\2021-04-16_ParameterFile_ORIGINAL_ALL_FINAL.par";
+    // is it UTF-8 or isn't it??
     public static String ENC = "UTF-8";
     //public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
+
+    public TagDirectoryISOTEI() {
+    }
     
+
+
+
     /**
      * @param args the command line arguments
      */
