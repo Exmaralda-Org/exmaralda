@@ -25,6 +25,8 @@ public class TreeTagger {
     public String parameterFile = "S:\\TP-Z2\\TAGGING\\TreeTagger\\lib\\german.par";
     public String[] options = {"-token","-lemma","-sgml","-no-unknown"};
     String parameterFileEncoding = "iso8859-1"; 
+    
+    public boolean verbose = true;
 
     public TreeTagger(String treeTaggerDirectory, String parameterFile, String parameterFileEncoding, String[] options) throws IOException{
         System.out.println("Initialising tagger");
@@ -39,7 +41,9 @@ public class TreeTagger {
         this.parameterFile = parameterFile;
         this.parameterFileEncoding = parameterFileEncoding;
         this.options = options;
-        System.out.println("Tagger initialised");
+        if (verbose){
+            System.out.println("Tagger initialised");
+        }
     }
 
     public void tag(TreeTaggableDocument input, File outputFile) throws IOException{
@@ -50,7 +54,9 @@ public class TreeTagger {
     
     
     public void tag(TreeTaggableDocument input, File outputFile, ProbabilityHandler tokenHandler) throws IOException{
-         System.out.println("Setting up tagger");
+         if (verbose){
+            System.out.println("Setting up tagger");
+         }
          System.setProperty("treetagger.home", treeTaggerDirectory);
          TreeTaggerWrapper tt = new TreeTaggerWrapper<String>();
          //uncomment next line to make TreeTaggerWrapper verbose
@@ -58,22 +64,22 @@ public class TreeTagger {
          // 26-01-2023 : leave this away for #286
          //tt.setProbabilityThreshold(0.999999);
          try {
-             System.out.println("   Setting model:  " + parameterFile + ":" + parameterFileEncoding);
+             if (verbose) System.out.println("   Setting model:  " + parameterFile + ":" + parameterFileEncoding);
              tt.setModel(parameterFile + ":" + parameterFileEncoding);
-             System.out.println("   Setting arguments");
+             if (verbose) System.out.println("   Setting arguments");
              tt.setArguments(options);
-             System.out.println("   Setting handler");
+             if (verbose) System.out.println("   Setting handler");
              tt.setHandler(tokenHandler);
-             System.out.println("Tagger setup complete");
+             if (verbose) System.out.println("Tagger setup complete");
              
              //System.out.println("");
              //System.out.println(input.getNumberOfTaggableSegments() + " tokens to tag");
              
              for (int pos=0; pos<input.getNumberOfTaggableSegments(); pos++){
-                 System.out.print("\rProcessing " + (pos+1) + " of " + input.getNumberOfTaggableSegments());
+                 if (verbose) System.out.print("\rProcessing " + (pos+1) + " of " + input.getNumberOfTaggableSegments());
                  List tokens = input.getTokensAt(pos);
                  //for (int i=0; i<100; i++){tokens.add("ja");}
-                 System.out.println(" (" + tokens.size() + " tokens to tag).                ");
+                 if (verbose) System.out.println(" (" + tokens.size() + " tokens to tag).                ");
                  //for (Object t: tokens){System.out.println(t.toString());}
                  try {
                      tt.process(tokens);
@@ -82,7 +88,7 @@ public class TreeTagger {
                      Logger.getLogger(TreeTagger.class.getName()).log(Level.SEVERE, null, ex);
                  }
              }
-             System.out.println("Tagging complete.");
+             if (verbose) System.out.println("Tagging complete.");
          } catch (IOException ex) {
              System.out.println(ex.getLocalizedMessage());
             throw new IOException(ex.getLocalizedMessage());
