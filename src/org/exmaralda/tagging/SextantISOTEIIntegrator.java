@@ -101,6 +101,10 @@ public class SextantISOTEIIntegrator {
     public void writeDocument(String filename) throws IOException{
         IOUtilities.writeDocumentToLocalFile(filename, isoteiTranscription);
     }
+    
+    public Document getDocument(){
+        return isoteiTranscription;
+    }
 
     
     
