@@ -8,7 +8,6 @@ package org.exmaralda.partitureditor.jexmaralda;
 import java.io.IOException;
 import java.util.List;
 import org.exmaralda.partitureditor.fsm.FSMException;
-import org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation;
 import org.xml.sax.SAXException;
 
 /**
@@ -25,7 +24,7 @@ public class TEST {
     }
 
     private void doit() throws SAXException, JexmaraldaException {
-        BasicTranscription bt = new BasicTranscription("N:\\Workspace\\EXMARaLDA\\EXMARaLDA-DemoKorpus\\AnneWill\\AnneWill.exb");
+        BasicTranscription bt = new BasicTranscription("");
         Tier tier = bt.getBody().getTierAt(0);
         List<List<Event>> segmentChains = tier.getSegmentChains(bt.getBody().getCommonTimeline());
         for (List<Event> sc : segmentChains){

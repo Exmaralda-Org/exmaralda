@@ -246,6 +246,23 @@ public class BasicTranscription extends AbstractTranscription {
         return result;
     }
     
+    // new 06-03-2024, issue #452
+    public int removeUnusedSpeakers() throws JexmaraldaException{
+        Set<String> speakerIDsUsed = new HashSet<>();
+        for (int i=0; i<getBody().getNumberOfTiers(); i++){
+            Tier tier = getBody().getTierAt(i);
+            speakerIDsUsed.add(tier.getSpeaker());
+        }
+        Set<String> speakerIDs = new HashSet<>();
+        speakerIDs.addAll(Arrays.asList(getHead().getSpeakertable().getAllSpeakerIDs()));
+        
+        speakerIDs.removeAll(speakerIDsUsed);
+        for (String speakerID : speakerIDs){
+            getHead().getSpeakertable().removeSpeakerWithID(speakerID);
+        }
+        return speakerIDs.size();        
+    }
+    
     /** *  checks if there is a parent tier for every annotation tier *
      * for each tier: sets the corresponding return value to -1 if *
      * the check is not applicable (i.e.if the respective tier is not of type 'a') *
