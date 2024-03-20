@@ -42,632 +42,7 @@ function toggle_visibility(className) {
                         display:none;
                     }</style></head>
    <body>
-      <h1>EXMARaLDA changes</h1><a href="#orthonormal">orthonormal</a> | <a href="#partitureditor">partitureditor</a> | <a href="#folker">folker</a> | <a href="#exakt">exakt</a> | <a href="#all">all</a> | <a href="#sextant">sextant</a> | <a href="#coma">coma</a> | <a href="#teidrop">teidrop</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
-      <h2><a name="orthonormal"></a>orthonormal
-      </h2>
-      <table rules="all" frame="box" width="60%">
-         <tr>
-            <th>Date</th>
-            <th>Version</th>
-            <th>Change</th>
-         </tr>
-         <tr>
-            <td class="change">01.09.2022</td>
-            <td class="change">0.9.9</td>
-            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.18 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">16.06.2022</td>
-            <td class="feature">0.9.9</td>
-            <td class="feature">Duplicate ID bug (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/322">#322</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">17.06.2021</td>
-            <td class="bug">0.9.9</td>
-            <td class="bug">Bug fix for normalisation candidates in basic transcriptions (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/271">#271</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">09.06.2021</td>
-            <td class="bug">0.9.9</td>
-            <td class="bug">Bug fix for auto normalisation (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/270">#270</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">02.06.2021</td>
-            <td class="change">0.9.9</td>
-            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.16 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">25.02.2021</td>
-            <td class="feature">0.9.9</td>
-            <td class="feature">Play selection button in word normalisation dialog (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/261">#261</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">23.11.2020</td>
-            <td class="feature">0.9.9</td>
-            <td class="feature">Import ISO/TEI (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/222">#222</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">06.05.2020</td>
-            <td class="change">0.9.9</td>
-            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.14 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">28.05.2019</td>
-            <td class="change">0.9.1</td>
-            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.12 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">27.05.2019</td>
-            <td class="bug">0.9.1</td>
-            <td class="bug">Open file on double click on MAC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/184">#184</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">27.05.2019</td>
-            <td class="bug">0.9.1</td>
-            <td class="bug">Player trouble fixed (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/189">#189</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">19.02.2019</td>
-            <td class="change">0.9.1</td>
-            <td class="change">Additional counting column (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/179">#179</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">24.08.2018</td>
-            <td class="change">0.9.1</td>
-            <td class="change">Asterisk as possible phrase boundary (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/162">#162</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">29.06.2018</td>
-            <td class="bug">0.9.1</td>
-            <td class="bug">Flag for token/probability in tagging (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/157">#157</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">25.06.2018</td>
-            <td class="change">0.9.1</td>
-            <td class="change">Fine tuning of ISO/TEI export for ZuMult (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/152">#152</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">30.05.2018</td>
-            <td class="change">0.9.1</td>
-            <td class="change">Update normalisation lexicon (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">30.05.2018</td>
-            <td class="feature">0.9.1</td>
-            <td class="feature">Configurable Quick Buttons for POS (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/154">#154</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">30.05.2018</td>
-            <td class="feature">0.9.1</td>
-            <td class="feature">Function for applying rules (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/153">#153</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">26.02.2018</td>
-            <td class="feature">0.9.1</td>
-            <td class="feature">function for importing TGDP data (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/143">#143</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">17.01.2018</td>
-            <td class="change">0.9.1</td>
-            <td class="change">function for changing speaker IDs (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/140">#140</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">15.12.2017</td>
-            <td class="change">0.9.1</td>
-            <td class="change">Button for correcting transcribed form in normalisation dialog (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/135">#135</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">24.04.2017</td>
-            <td class="change">0.9</td>
-            <td class="change">Update normalisation lexicon (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">12.04.2017</td>
-            <td class="change">0.9</td>
-            <td class="change">Make sure frame is inside screen dimensions at startup (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/72">#72</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">02.03.2017</td>
-            <td class="change">0.9</td>
-            <td class="change">force player change when running with JRE &gt; 1.6 on MAC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/29">#29</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">01.03.2017</td>
-            <td class="change">0.9</td>
-            <td class="change">normalize whitespace in normalized forms (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/62">#62</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">14.12.2016</td>
-            <td class="bug">0.9</td>
-            <td class="bug">Missing bounce.jar in library path on MAC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/29">#29</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="feature">16.11.2016</td>
-            <td class="feature">0.9</td>
-            <td class="feature">TreeTaggerAction in new Annotation menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/33">#33</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">16.11.2016</td>
-            <td class="change">0.9</td>
-            <td class="change">Export: Set language for ISO/TEI export (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/9">#9</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">18.04.2016</td>
-            <td class="change">0.9</td>
-            <td class="change">revert to old version of BAS player (MAC)</td>
-         </tr>
-         <tr>
-            <td class="change">08.04.2016</td>
-            <td class="change">0.9</td>
-            <td class="change">revert to old version of BAS player (Windows)</td>
-         </tr>
-         <tr>
-            <td class="change">06.04.2016</td>
-            <td class="change">0.9</td>
-            <td class="change">Updated player preferences handling</td>
-         </tr>
-         <tr>
-            <td class="bug">30.03.2016</td>
-            <td class="bug">0.9</td>
-            <td class="bug">TEI and TCF exports must retain IDs (methods generateWordIDs())</td>
-         </tr>
-         <tr>
-            <td class="bug">30.03.2016</td>
-            <td class="bug">0.9</td>
-            <td class="bug">Wrong file filter for TCF export (txt instead of xml)</td>
-         </tr>
-         <tr>
-            <td class="change">03.03.2016</td>
-            <td class="change">0.9</td>
-            <td class="change">Adapted TEI exports (annotationBlock etc.)</td>
-         </tr>
-         <tr>
-            <td class="change">22.02.2016</td>
-            <td class="change">0.9</td>
-            <td class="change">Changes to output variant with normalisations only</td>
-         </tr>
-         <tr>
-            <td class="feature">29.01.2016</td>
-            <td class="feature">0.9</td>
-            <td class="feature">Output variant with normalisations only</td>
-         </tr>
-         <tr>
-            <td class="change">07.12.2015</td>
-            <td class="change">0.9</td>
-            <td class="change">Table view in match list</td>
-         </tr>
-         <tr>
-            <td class="change">30.11.2015</td>
-            <td class="change">0.9</td>
-            <td class="change">Improvements to directory search</td>
-         </tr>
-         <tr>
-            <td class="feature">25.11.2015</td>
-            <td class="feature">0.9</td>
-            <td class="feature">Directory search</td>
-         </tr>
-         <tr>
-            <td class="change">18.11.2015</td>
-            <td class="change">0.9</td>
-            <td class="change">Disabled $ dummy symbol since it is no longer used in the conventions</td>
-         </tr>
-         <tr>
-            <td class="change">06.10.2015</td>
-            <td class="change">0.9</td>
-            <td class="change">Build from git: jsmooth path changes for Windows (todo: Mac and Linux)</td>
-         </tr>
-         <tr>
-            <td class="bug">10.08.2015</td>
-            <td class="bug">0.9</td>
-            <td class="bug">Deadlock in lexicon setup</td>
-         </tr>
-         <tr>
-            <td class="change">31.07.2015</td>
-            <td class="change">0.9</td>
-            <td class="change">Let's be version 0.9 now, splashscreen changed</td>
-         </tr>
-         <tr>
-            <td class="change">25.07.2015</td>
-            <td class="change">0.6</td>
-            <td class="change">More functionality for chat corpus</td>
-         </tr>
-         <tr>
-            <td class="change">24.07.2015</td>
-            <td class="change">0.6</td>
-            <td class="change">First functionality for chat corpus</td>
-         </tr>
-         <tr>
-            <td class="change">23.07.2015</td>
-            <td class="change">0.6</td>
-            <td class="change">Adaptations to lexicon handling in preferences</td>
-         </tr>
-         <tr>
-            <td class="change">13.05.2015</td>
-            <td class="change">0.6</td>
-            <td class="change">Embedded JRE</td>
-         </tr>
-         <tr>
-            <td class="bug">14.04.2015</td>
-            <td class="bug">0.6</td>
-            <td class="bug">Must escape XML for edit word dialog</td>
-         </tr>
-         <tr>
-            <td class="change">13.04.2015</td>
-            <td class="change">0.6</td>
-            <td class="change">Always use BAS Audio Player</td>
-         </tr>
-         <tr>
-            <td class="feature">12.03.2015</td>
-            <td class="feature">0.6</td>
-            <td class="feature">TCF export</td>
-         </tr>
-         <tr>
-            <td class="feature">12.03.2015</td>
-            <td class="feature">0.6</td>
-            <td class="feature">ISO/TEI export</td>
-         </tr>
-         <tr>
-            <td class="feature">12.03.2015</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Export menu</td>
-         </tr>
-         <tr>
-            <td class="change">03.03.2015</td>
-            <td class="change">0.6</td>
-            <td class="change">Internal Normalisation and Capital-Only Lexicon</td>
-         </tr>
-         <tr>
-            <td class="change">01.12.2014</td>
-            <td class="change">0.6</td>
-            <td class="change">Remove problematic time values before editing contribution (Franziska Wallner)</td>
-         </tr>
-         <tr>
-            <td class="feature">03.09.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">enable bulk changes via wordlist</td>
-         </tr>
-         <tr>
-            <td class="bug">12.08.2014</td>
-            <td class="bug">0.6</td>
-            <td class="bug">player must be set to idle when stopped</td>
-         </tr>
-         <tr>
-            <td class="feature">04.08.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">enable play buttons in edit contribution dialog (Wiki)</td>
-         </tr>
-         <tr>
-            <td class="feature">04.08.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">OOV filter button (Wiki)</td>
-         </tr>
-         <tr>
-            <td class="feature">16.07.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">auto complete for tag text field (Swantje)</td>
-         </tr>
-         <tr>
-            <td class="feature">12.05.2014</td>
-            <td class="feature">1.2</td>
-            <td class="feature">default audio path</td>
-         </tr>
-         <tr>
-            <td class="change">10.03.2014</td>
-            <td class="change">0.6</td>
-            <td class="change">dummy button in normalization dialog commits edit directly (JW)</td>
-         </tr>
-         <tr>
-            <td class="change">26.02.2014</td>
-            <td class="change">0.6</td>
-            <td class="change">modified tagset / tag buttons (SW)</td>
-         </tr>
-         <tr>
-            <td class="feature">18.02.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">enable XML mode by password</td>
-         </tr>
-         <tr>
-            <td class="feature">18.02.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">display normalisation ratio</td>
-         </tr>
-         <tr>
-            <td class="feature">18.02.2014</td>
-            <td class="feature">0.6</td>
-            <td class="feature">filter for split words</td>
-         </tr>
-         <tr>
-            <td class="bug">29.01.2014</td>
-            <td class="bug">0.6</td>
-            <td class="bug">Catch IllegalArgumentException when resolving media path</td>
-         </tr>
-         <tr>
-            <td class="bug">28.01.2014</td>
-            <td class="bug">0.6</td>
-            <td class="bug">Remove redundant time elements from DGD2 (Jenny)</td>
-         </tr>
-         <tr>
-            <td class="bug">21.01.2014</td>
-            <td class="bug">0.6</td>
-            <td class="bug">(Rare) bug in assigning contribution for editing removed (Tabea Mergel)</td>
-         </tr>
-         <tr>
-            <td class="change">25.11.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">more space for edit panel for looong contributions (F.Wallner, GeWiss)</td>
-         </tr>
-         <tr>
-            <td class="change">06.11.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">new quick tag buttons (SW)</td>
-         </tr>
-         <tr>
-            <td class="change">06.11.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">retag after edit contribution (SW)</td>
-         </tr>
-         <tr>
-            <td class="feature">16.10.2013</td>
-            <td class="feature">0.6</td>
-            <td class="feature">filtering for POS</td>
-         </tr>
-         <tr>
-            <td class="change">26.08.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">fixed (?) another bug in recording path resolving</td>
-         </tr>
-         <tr>
-            <td class="change">23.07.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">better renormalisation after edit contribution</td>
-         </tr>
-         <tr>
-            <td class="change">18.07.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">focus for textfield after dummy button</td>
-         </tr>
-         <tr>
-            <td class="change">18.07.2013</td>
-            <td class="change">0.6</td>
-            <td class="change">some minor corrections to match list functionality</td>
-         </tr>
-         <tr>
-            <td class="feature">09.07.2013</td>
-            <td class="feature">0.6</td>
-            <td class="feature">match list</td>
-         </tr>
-         <tr>
-            <td class="feature">08.05.2013</td>
-            <td class="feature">0.6</td>
-            <td class="feature">dummy buttons</td>
-         </tr>
-         <tr>
-            <td class="feature">18.04.2013</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Change speaker functionality</td>
-         </tr>
-         <tr>
-            <td class="feature">18.04.2013</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Edit contribution functionality</td>
-         </tr>
-         <tr>
-            <td class="bug">19.02.2013</td>
-            <td class="bug">0.6</td>
-            <td class="bug">No Derewo marking when opening FLK files</td>
-         </tr>
-         <tr>
-            <td class="bug">07.01.2013</td>
-            <td class="bug">0.6</td>
-            <td class="bug">No Derewo marking when opening FLK files</td>
-         </tr>
-         <tr>
-            <td class="feature">19.12.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Use Derewo to mark suspicious forms</td>
-         </tr>
-         <tr>
-            <td class="feature">22.11.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Filter for word list</td>
-         </tr>
-         <tr>
-            <td class="feature">20.11.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Bookmarks</td>
-         </tr>
-         <tr>
-            <td class="bug">06.11.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">index update issue in XML mode</td>
-         </tr>
-         <tr>
-            <td class="feature">31.10.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">First Linux Preview</td>
-         </tr>
-         <tr>
-            <td class="feature">31.10.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">First Mac Preview</td>
-         </tr>
-         <tr>
-            <td class="change">25.10.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">Info about parse-level when opening FLK</td>
-         </tr>
-         <tr>
-            <td class="feature">02.10.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">XML mode</td>
-         </tr>
-         <tr>
-            <td class="feature">21.09.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">word correction dialog</td>
-         </tr>
-         <tr>
-            <td class="change">12.09.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">buttons for quick tagging</td>
-         </tr>
-         <tr>
-            <td class="change">12.09.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">Some adaptations for legacy DGD1 transcripts</td>
-         </tr>
-         <tr>
-            <td class="change">12.09.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">Remove normalisations which are identical to forms when opening</td>
-         </tr>
-         <tr>
-            <td class="change">06.06.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">Include Linux-Shellscript in preview distribution (Piotr Banski)</td>
-         </tr>
-         <tr>
-            <td class="change">06.06.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">Tolerate missing p-pos in table</td>
-         </tr>
-         <tr>
-            <td class="feature">30.05.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">RDB Lexicon Update action</td>
-         </tr>
-         <tr>
-            <td class="change">30.05.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">Removed Auto Normalize button</td>
-         </tr>
-         <tr>
-            <td class="change">09.05.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">More keyboard support (down key) for forms list in normalization dialog</td>
-         </tr>
-         <tr>
-            <td class="change">09.05.2012</td>
-            <td class="change">0.6</td>
-            <td class="change">No live lexicon update / no single auto normalize for RDB lexicon</td>
-         </tr>
-         <tr>
-            <td class="feature">26.04.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Tag probabilities</td>
-         </tr>
-         <tr>
-            <td class="feature">21.03.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Auto advance option</td>
-         </tr>
-         <tr>
-            <td class="bug">28.03.2012</td>
-            <td class="bug">0.6</td>
-            <td class="bug">File extension checks for opening must not be case-sensitive</td>
-         </tr>
-         <tr>
-            <td class="feature">21.03.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Auto normalization option for new files</td>
-         </tr>
-         <tr>
-            <td class="feature">20.03.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Capitalization lexicon integrated</td>
-         </tr>
-         <tr>
-            <td class="feature">09.03.2012</td>
-            <td class="feature">0.6</td>
-            <td class="feature">Tagging functionality</td>
-         </tr>
-         <tr>
-            <td class="feature">01.06.2011</td>
-            <td class="feature">0.5</td>
-            <td class="feature">Adaptations for basic transcriptions</td>
-         </tr>
-         <tr>
-            <td class="bug">01.06.2011</td>
-            <td class="bug">0.5</td>
-            <td class="bug">Cancel in check save must cancel, not close</td>
-         </tr>
-         <tr>
-            <td class="change">01.06.2011</td>
-            <td class="change">0.5</td>
-            <td class="change">Player displays complete recording, selection only changes cursor position</td>
-         </tr>
-         <tr>
-            <td class="change">20.05.2011</td>
-            <td class="change">0.5</td>
-            <td class="change">Extra second before and after selection in audio player (WS: oc)</td>
-         </tr>
-         <tr>
-            <td class="change">20.05.2011</td>
-            <td class="change">0.5</td>
-            <td class="change">Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)</td>
-         </tr>
-         <tr>
-            <td class="change">20.05.2011</td>
-            <td class="change">0.5</td>
-            <td class="change">Right click on word will (de)capitalize it (WS: mail 19-05-2011)</td>
-         </tr>
-         <tr>
-            <td class="feature">20.05.2011</td>
-            <td class="feature">0.5</td>
-            <td class="feature">Edit recording action in file menu (WS: mail 19-05-2011)</td>
-         </tr>
-         <!--12.11.2010;  0.5;  Exit action in file menu (WS: n) (feature)-->
-         <!--12.11.2010;  0.5;  Modified save behaviour (WS: k) (change)-->
-         <!--12.11.2010;  0.5;  Play button and audio position slider (WS: h) (feature)-->
-         <!--12.11.2010;  0.5;  Scroll bar for editing panel (WS: g) (change)-->
-         <!--12.11.2010;  0.5;  Audio can be rassigned (WS: a) (feature)-->
-         <!--11.11.2010;  0.5;  Added some status messages (WS: e) (change)-->
-         <!--11.11.2010;  0.5;  Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f) (feature)-->
-         <!--11.11.2010;  0.5;  Don't add FLK files to recent files (WS: d) (change)-->
-         <!--11.11.2010;  0.5;  Implemented double-click behaviour for application startup (WS: c) (feature)-->
-         <!--11.11.2010;  0.5;  Introduced threshhold for auto normalisation (WS: b) (change)-->
-         <!--11.11.2010;  0.5;  Changed buggy behaviour when empty string was entered in normalization dialog (WS: j) (bug)-->
-         <!--28.09.2010;  0.5;  Editor setup optimised (change)-->
-         <!--28.09.2010;  0.5;  Output action (feature)-->
-         <!--28.09.2010;  0.5;  Exception handling for Lexicon lookup (change)-->
-         <!--28.09.2010;  0.5;  Oracle JDBC driver added (change)-->
-         <!--23.09.2010;  0.5;  Capitalization removed (change)-->
-         <!--23.09.2010;  0.5;  Several changes related to GUI updating (change)-->
-         <!--23.09.2010;  0.5;  Help menu (feature)-->
-         <!--23.09.2010;  0.5;  Preferences action (feature)-->
-         <!--23.09.2010;  0.5;  different implementation of RDB lexicon (change)-->
-         <!--11.04.2010;  0.1;  auto button (feature)-->
-         <!--10.04.2010;  0.1;  word list (feature)-->
-         <!--22.03.2010;  0.1;  First build of first prototype (feature)-->
-      </table>
+      <h1>EXMARaLDA changes</h1><a href="#partitureditor">partitureditor</a> | <a href="#all">all</a> | <a href="#exakt">exakt</a> | <a href="#folker">folker</a> | <a href="#orthonormal">orthonormal</a> | <a href="#coma">coma</a> | <a href="#sextant">sextant</a> | <a href="#teidrop">teidrop</a> | <a href="#tagger">tagger</a> | <br><br> (<span class="bug" id="bug"><a href="#" onclick="toggle_visibility('bug');">bug</a></span>; <span class="feature" id="feature"><a href="#" onclick="toggle_visibility('feature');">feature</a></span>; <span class="change" id="change"><a href="#" onclick="toggle_visibility('change');">change</a></span>) 
       <h2><a name="partitureditor"></a>partitureditor
       </h2>
       <table rules="all" frame="box" width="60%">
@@ -675,6 +50,274 @@ function toggle_visibility(className) {
             <th>Date</th>
             <th>Version</th>
             <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">01.12.2023</td>
+            <td class="change">1.8</td>
+            <td class="change">Timeline tolerance configurable (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/442">#442</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2023</td>
+            <td class="change">1.8</td>
+            <td class="change">Remember parameters for WebMAUS (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/441">#441</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2023</td>
+            <td class="change">1.8</td>
+            <td class="change">Additional option for WebMAUS (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/432">#432</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">16.11.2023</td>
+            <td class="bug">1.8</td>
+            <td class="bug">Dependencies for SVG panel (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/438">#438</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">28.10.2023</td>
+            <td class="change">1.8</td>
+            <td class="change">Improvements to Whisper import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/357">#357</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">26.10.2023</td>
+            <td class="change">1.8</td>
+            <td class="change">Rearrange transcription controls (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/433">#433</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">26.10.2023</td>
+            <td class="feature">1.8</td>
+            <td class="feature">Whisper webservice integration (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/421">#421</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">04.09.2023</td>
+            <td class="bug">1.8</td>
+            <td class="bug">Bug in TablePopupMenu: Move to tier does not appear (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/176">#176</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">17.07.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Dulko fixes and improvements (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/405">#405</a>, <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/407">#407</a> and <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/409">#409</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">13.07.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Maintenance changes for Praat panel (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/401">#401</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">12.06.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">RegEx in Search &amp; Replace (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/399">#399</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.06.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Save Format should be default (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/398">#398</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">01.06.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Fixed formatting issues (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/397">#397</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.06.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Changes to auto save check on startup (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/396">#396</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">25.05.2023</td>
+            <td class="feature">1.7</td>
+            <td class="feature">Delete several events in one go (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/389">#389</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">12.05.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">HTML output: make audio selection case-insensitive (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/387">#387</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">07.05.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Check and error message for search results turned sour (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/12">#12</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">06.05.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Beautification of recording list cell renderer</td>
+         </tr>
+         <tr>
+            <td class="change">06.05.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Perfected list events table (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/382">#382</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">02.05.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Import Whisper word level  (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/357">#357</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">23.04.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Improve start folder selection for Add recording  (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/384">#384</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">23.04.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">List events in table rather than list (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/382">#382</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">24.03.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Fixed bug in RTF output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/379">#379</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">13.03.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Optional pretty print (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">07.03.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Consider intermediate timeline items when changing boundaries of spanned events (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/377">#377</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">06.03.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Fix for bug in CSV export (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/376">#376</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">06.03.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Fix for bug and performance improvement in ISO/TEI import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/367">#367</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">24.02.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Fix for bug in masking (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/372">#372</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">14.02.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Improved ISO/TEI (re-)import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/367">#367</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">09.02.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Improved WebMAUS fine alignement (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/139">#139</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">09.02.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Moved all legacy functions/menu into Legacy menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/366">#366</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">07.02.2023</td>
+            <td class="feature">1.7</td>
+            <td class="feature">Adobe Premiere CSV import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/363">#363</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">04.02.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Make sure IPA panel and virtual keyboard stay within screen boundaries (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/72">#72</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">24.01.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Fixed two typos in the STTS annotation spec (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/360">#360</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">23.01.2023</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Shortcut for media setup when media file does not exist</td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2023</td>
+            <td class="feature">1.7</td>
+            <td class="feature">Amberscript JSON import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/358">#358</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2023</td>
+            <td class="feature">1.7</td>
+            <td class="feature">Whisper JSON import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/357">#357</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.01.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Reworked SRT import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/119">#119</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.01.2023</td>
+            <td class="change">1.7</td>
+            <td class="change">Reworked VTT import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/119">#119</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">03.01.2023</td>
+            <td class="feature">1.7</td>
+            <td class="feature">Annotation panel: refined jump next behaviour (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/356">#356</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">02.12.2022</td>
+            <td class="feature">1.7</td>
+            <td class="feature">G2P grapheme to phoneme conversion via BAS web service (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/325">#325</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">02.12.2022</td>
+            <td class="bug">1.7</td>
+            <td class="bug">Bug: remove format when removing tier (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/352">#352</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2022</td>
+            <td class="change">1.7</td>
+            <td class="change">Pretty print XML output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">30.11.2022</td>
+            <td class="feature">1.7</td>
+            <td class="feature">CalculateTimeAction: max length increased from 32 to 150 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/351">#351</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">18.11.2022</td>
+            <td class="feature">1.7</td>
+            <td class="feature">Copy HTML action (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/338">#338</a>)
+            </td>
          </tr>
          <tr>
             <td class="feature">06.02.2022</td>
@@ -2427,6 +2070,650 @@ function toggle_visibility(className) {
          <!--04.12.2007;  ;  playback mode ()-->
          <!--04.12.2007;  ;  fine synchronisation mode ()-->
       </table>
+      <h2><a name="all"></a>all
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="feature">16.11.2023</td>
+            <td class="feature">1.14</td>
+            <td class="feature">Integrate pro functionality, step 1 (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/437">#437</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2023</td>
+            <td class="change">1.14</td>
+            <td class="change">Remove version checker (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/436">#436</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">26.10.2023</td>
+            <td class="change">1.14</td>
+            <td class="change">Citation info in About dialogs (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/429">#429</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">08.11.2022</td>
+            <td class="change">1.13</td>
+            <td class="change">New splashscreens (issues <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/341">#341</a> and <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/37">#37</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">14.12.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">First attempt at new Linux distributions (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/238">#238</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">03.12.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">License statement (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/239">#239</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">02.12.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">Use saxon9 instead of saxon9he (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/228">#228</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">20.11.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">OpenJDK 15 is breaking the JDS player (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/217">#217</a>), so going back to 14 with a dirty fix for the encoding problem (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/216">#216</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">Using OpenJDK 15, make the encoding problem go away (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/216">#216</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">02.03.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">New preview version with 64bit / OpenJDK / Java 11+ (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/199">#199</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">18.02.2020</td>
+            <td class="change">1.13</td>
+            <td class="change">Experimental version with 64bit / OpenJDK / Java 11+ (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/199">#199</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">26.01.2017</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Wrong time stamp for build time (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/54">#54</a>), added some more info about JRE etc. to log file
+            </td>
+         </tr>
+         <tr>
+            <td class="change">13.12.2016</td>
+            <td class="change">1.10</td>
+            <td class="change">Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue
+               <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/51">#51</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">04.12.2016</td>
+            <td class="change">1.10</td>
+            <td class="change">... and SUN JMF distribution with 64bit Java embedded for Linux (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">04.12.2016</td>
+            <td class="change">1.10</td>
+            <td class="change">FOBS and SUN JMF distributions for Linux (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">03.12.2016</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Wrong libraries for BAS Player on Linux (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">02.12.2016</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Embedded java binaries need executable permissions (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">01.12.2016</td>
+            <td class="bug">1.10</td>
+            <td class="bug">Exchange Linux Bundled JRE 64bit to 32bit (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">19.01.2016</td>
+            <td class="change">2.0</td>
+            <td class="change">Updated ipsk libraries for BASAudioPlayer</td>
+         </tr>
+         <tr>
+            <td class="change">17.12.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Embedded JRE for Linux distributions</td>
+         </tr>
+         <tr>
+            <td class="change">16.10.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Changed linux sh scripts and mac plists to new library sitchuaishon</td>
+         </tr>
+         <tr>
+            <td class="change">16.10.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Moved fobs dll to bundled jre</td>
+         </tr>
+         <tr>
+            <td class="change">06.10.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Build from git: jsmooth path changes for Windows (todo: Mac and Linux)</td>
+         </tr>
+         <tr>
+            <td class="change">10.07.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)</td>
+         </tr>
+         <tr>
+            <td class="change">09.07.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Fixed missing library in Linux distribution (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="change">13.05.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">Bundle JRE on Windows</td>
+         </tr>
+         <tr>
+            <td class="change">05.05.2015</td>
+            <td class="change">2.0</td>
+            <td class="change">some library cleanup for build, got rid of SUN JMF</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">2.0</td>
+            <td class="change">New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build</td>
+         </tr>
+         <tr>
+            <td class="change">04.09.2013</td>
+            <td class="change">2.0</td>
+            <td class="change">new icons</td>
+         </tr>
+         <tr>
+            <td class="bug">07.11.2012</td>
+            <td class="bug">1.9</td>
+            <td class="bug">ipsk.jar for BAS-Player was missing from MAC plists</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2012</td>
+            <td class="change">1.9</td>
+            <td class="change">end of official support for PPC Mac</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2012</td>
+            <td class="change">1.9</td>
+            <td class="change">Parameter HTML witdth in write partitur method (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2011</td>
+            <td class="change">1.9</td>
+            <td class="change">IDs for words in TEI export</td>
+         </tr>
+         <tr>
+            <td class="change">19.10.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Preparing release</td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2011</td>
+            <td class="feature">1.8</td>
+            <td class="feature">Command line version for Praat export (Singer)</td>
+         </tr>
+         <tr>
+            <td class="change">18.05.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Changed segmented transcription format: ta's can now have ref-id's</td>
+         </tr>
+         <tr>
+            <td class="change">08.03.2011</td>
+            <td class="change">1.8</td>
+            <td class="change">Added Sextant tagger to Windows and Linux distributions</td>
+         </tr>
+         <!--10.12.2010;  1.8;  Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though) (change)-->
+         <!--18.10.2010;  1.7;  Simplified Windows distribution (change)-->
+         <!--01.10.2010;  1.7;  Added TEI drop to start menu on windows (change)-->
+         <!--01.10.2010;  1.7;  Removed SUN JMF versions of PE and EXAKT from start menu on windows (change)-->
+         <!--24.08.2010;  1.7;  Coloured splash screens (change)-->
+         <!--23.08.2010;  1.7;  Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly (change)-->
+         <!--10.08.2010;  1.7;  Added swingworker and QTJava to classpath on Linux (change)-->
+         <!--31.03.2010;  1.6;  Version info for Windows setup (Linde, RRZ) (change)-->
+         <!--24.02.2010;  1.6;  fixed bug in corpus builder, path separator must be os independent (Kerem) (bug)-->
+         <!--15.12.2009;  1.6.515;  Linux: shell scripts take parameter (Timm!) (feature)-->
+         <!--23.06.2009;  1.4.3.;  Cleaned up build, smaller distribution size (bug)-->
+         <!--21.03.2009;  1.4.2.;  removed unused libs from linux distribution (change)-->
+         <!--26.02.2009;  1.2.;  Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances (feature)-->
+         <!--09.02.2009;  1.4.1.;  Integration of ELAN.jar instead of copied MPI code (change)-->
+         <!--09.02.2009;  1.2.;  Documentation updates (feature)-->
+         <!--28.01.2008;  1.4.;  Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS (change)-->
+         <!--28.10.2008;  ;  changed EXMARaLDA's build and template files for new media integration (change)-->
+         <!--28.10.2008;  ;  removed JLayer-Player because it is no longer needed (MP3 is fine in other players) (change)-->
+         <!--27.10.2008;  ;  integrated ELAN's DirectShowPlayer as a new player type (festure)-->
+         <!--22.10.2008;  1.1;  fixed bug in log file handling which led to out of memory errors on certain Macs (bug)-->
+         <!--20.10.2008;  ;  changed linux tarball: sh files are now executable (bug)-->
+         <!--13.10.2008;  ;  changed linux tarball according to suggestions by Jörg Sommer (bug)-->
+         <!--13.10.2008;  ;  changed info plist for mac applications to nake sure app runs on 32-bit-JVM (bug)-->
+         <!--06.10.2008;  ;  changed basic and segmented transcription APIs to read and write more than one referenced file (feature)-->
+         <!--06.10.2008;  ;  changed basic and segmented transcription DTD to allow more than one referenced file (feature)-->
+         <!--06.10.2008;  ;  changed basic transcription DTD to allow format table (feature)-->
+         <!--16.09.2008;  ;  updated XALAN libraries ()-->
+         <!--06.08.2008;  ;  changed linux shell scripts (seem to work at least with Suse and Java 6 now) ()-->
+      </table>
+      <h2><a name="exakt"></a>exakt
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="feature">10.08.2023</td>
+            <td class="feature">1.4.1</td>
+            <td class="feature">Shuffle (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/362">#362</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">18.04.2023</td>
+            <td class="bug">1.4</td>
+            <td class="bug">Fix for inconsistent data update after "Add annotation" (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/380">#380</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.03.2023</td>
+            <td class="change">1.4</td>
+            <td class="change">Fixed problems with FLN import wizard (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/328">#328</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.02.2023</td>
+            <td class="change">1.4</td>
+            <td class="change">Message when max number of search results exceeded (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/370">#370</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.02.2023</td>
+            <td class="change">1.4</td>
+            <td class="change">Fixes for FOLKER corpus wizard (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/328">#328</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">18.12.2022</td>
+            <td class="change">1.4</td>
+            <td class="change">FOLKER corpus wizard can now import FLN with token annotations (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/328">#328</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2022</td>
+            <td class="change">1.4</td>
+            <td class="change">Pretty print XML output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">20.11.2022</td>
+            <td class="change">1.4</td>
+            <td class="change">Auto adjust columns widths, change font action (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/331">#331</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">19.11.2022</td>
+            <td class="feature">1.4</td>
+            <td class="feature">Confirm exit (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/332">#332</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">04.11.2021</td>
+            <td class="bug">1.4</td>
+            <td class="bug">Bug fix: CSV export with empty left or right context (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/277">#277</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">31.05.2021</td>
+            <td class="bug">1.4</td>
+            <td class="bug">Character encoding bug in Save concordance (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/267">#267</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2020</td>
+            <td class="change">1.4</td>
+            <td class="change">Resurrected remote corpus function (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/155">#155</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">30.11.2020</td>
+            <td class="change">1.4</td>
+            <td class="change">Cosmetic changes (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/225">#225</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">11.09.2020</td>
+            <td class="change">1.4</td>
+            <td class="change">XML should be default when saving a KWIC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/221">#221</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2019</td>
+            <td class="change">1.3.1</td>
+            <td class="change">added new option to save a result list from the concordance in CSV format (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/188">#188</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.10.2018</td>
+            <td class="change">1.3.1</td>
+            <td class="change">Alphabetic ordering description tiers in search and annotatio… (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/182">#182</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">15.10.2018</td>
+            <td class="bug">1.3.1</td>
+            <td class="bug">added attribute @category to output of new tiers from template (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/165">#165</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">11.07.2018</td>
+            <td class="change">1.3.1</td>
+            <td class="change"> the names of the annotations are now sorted alphabetically (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/160">#160</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">28.08.2017</td>
+            <td class="feature">1.3.1</td>
+            <td class="feature">Improvements to EXAKT enhancements (DJ, AF) (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/121">#121</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">12.07.2017</td>
+            <td class="feature">1.3.1</td>
+            <td class="feature">First versions of EXAKT enhancements (DJ, AF): collections (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/104">#104</a>) and XSLT 2.0 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/114">#114</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">27.02.2017</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in XSL search: need to set base directory (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/60">#60</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">22.11.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">"Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/36">#36</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">11.11.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Removed Open DB corpus item from file menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/28">#28</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">18.04.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">revert to old version of BAS player (MAC)</td>
+         </tr>
+         <tr>
+            <td class="change">08.04.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">revert to old version of BAS player (Windows)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Icon for word list</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Adapt KWIC row height to font size</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Start Praat if it is not already running (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="change">31.03.2016</td>
+            <td class="change">1.3</td>
+            <td class="change">Better error handling for Praat functionality (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="feature">10.11.2015</td>
+            <td class="feature">1.3</td>
+            <td class="feature">first attempt at Praat functionality (Jens Lanwer)</td>
+         </tr>
+         <tr>
+            <td class="change">23.06.2014</td>
+            <td class="change">1.3</td>
+            <td class="change">catch splash screen transparency error (lubuntu)</td>
+         </tr>
+         <tr>
+            <td class="feature">28.05.2014</td>
+            <td class="feature">1.3</td>
+            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
+         </tr>
+         <tr>
+            <td class="bug">17.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">15.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+         </tr>
+         <tr>
+            <td class="bug">14.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2013</td>
+            <td class="bug">1.3</td>
+            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
+         </tr>
+         <tr>
+            <td class="bug">16.01.2013</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
+         </tr>
+         <tr>
+            <td class="change">10.01.2013</td>
+            <td class="change">1.2</td>
+            <td class="change">Accept fln files for FOLKER wizard</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
+         </tr>
+         <tr>
+            <td class="bug">22.11.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Bug in add annotation when analyses are also present</td>
+         </tr>
+         <tr>
+            <td class="bug">12.03.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
+         </tr>
+         <tr>
+            <td class="change">16.02.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
+         </tr>
+         <tr>
+            <td class="change">25.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
+         </tr>
+         <tr>
+            <td class="feature">25.01.2012</td>
+            <td class="feature">1.2</td>
+            <td class="feature">Unselected KWIC rows in gray</td>
+         </tr>
+         <tr>
+            <td class="bug">18.01.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
+         </tr>
+         <tr>
+            <td class="change">18.01.2012</td>
+            <td class="change">1.2</td>
+            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
+         </tr>
+         <tr>
+            <td class="bug">21.11.2011</td>
+            <td class="bug">1.2</td>
+            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
+         </tr>
+         <tr>
+            <td class="bug">05.10.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
+         </tr>
+         <tr>
+            <td class="change">08.09.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Further modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="change">20.08.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Some modifications in the catalog lookup dialog</td>
+         </tr>
+         <tr>
+            <td class="feature">05.07.2011</td>
+            <td class="feature">1.1</td>
+            <td class="feature">Frequency sort as option for word list output</td>
+         </tr>
+         <tr>
+            <td class="bug">07.06.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
+         </tr>
+         <tr>
+            <td class="bug">30.05.2011</td>
+            <td class="bug">1.1</td>
+            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
+         </tr>
+         <tr>
+            <td class="change">17.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">FOLKER import now does automatic stratification by distribution</td>
+         </tr>
+         <tr>
+            <td class="change">23.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Catalog functionality for remote and DB corpora</td>
+         </tr>
+         <tr>
+            <td class="change">18.03.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">First elements of RDB functionality added (Hanna!)</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">escape type strings in input helper</td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2011</td>
+            <td class="change">1.1</td>
+            <td class="change">Input helper always on top (for filter and for search)</td>
+         </tr>
+         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
+         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
+         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
+         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
+         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
+         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
+         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
+         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
+         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
+         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
+         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
+         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
+         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
+         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
+         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
+         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
+         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
+         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
+         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
+         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
+         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
+         <!--16.03.2010;  0.8;  list view (feature)-->
+         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
+         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
+         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
+         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
+         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
+         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
+         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
+         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
+         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
+         <!--20.10.2009;  0.7;  view menu (change)-->
+         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
+         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
+         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
+         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
+         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
+         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
+         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
+         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
+         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
+         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
+         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
+         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
+         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
+         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
+         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
+         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
+         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
+         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
+         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
+         <!--26.03.2008;  ;  added function for subtracting dates ()-->
+         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
+         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
+         <!--19.03.2008;  ;  new function: import analyses ()-->
+         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
+         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
+         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
+         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
+         <!--18.02.2008;  ;  annotation search working ()-->
+         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
+      </table>
       <h2><a name="folker"></a>folker
       </h2>
       <table rules="all" frame="box" width="60%">
@@ -2434,6 +2721,72 @@ function toggle_visibility(className) {
             <th>Date</th>
             <th>Version</th>
             <th>Change</th>
+         </tr>
+         <tr>
+            <td class="change">09.08.2023</td>
+            <td class="change">1.3.1</td>
+            <td class="change">Improvements to HTML output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/403">#403</a> and issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/404">#404</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">03.05.2023</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Bugfix (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/386">#386</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">13.03.2023</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Optional pretty print (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">24.02.2023</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Fix for bug in masking (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/372">#372</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">18.02.2023</td>
+            <td class="change">1.3</td>
+            <td class="change">Better handling of masking information in continuing/splitting transcripts (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/313">#313</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">09.02.2023</td>
+            <td class="bug">1.3</td>
+            <td class="bug">Fixed pretty printing problem for word with timestamp inside (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2023</td>
+            <td class="feature">1.3</td>
+            <td class="feature">Amberscript JSON import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/358">#358</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2023</td>
+            <td class="feature">1.3</td>
+            <td class="feature">Whisper JSON import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/357">#357</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2023</td>
+            <td class="feature">1.3</td>
+            <td class="feature">SRT import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/119">#119</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">15.01.2023</td>
+            <td class="feature">1.3</td>
+            <td class="feature">VTT import (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/119">#119</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2022</td>
+            <td class="change">1.3</td>
+            <td class="change">Pretty print XML output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
          </tr>
          <tr>
             <td class="change">05.01.2022</td>
@@ -3382,7 +3735,7 @@ function toggle_visibility(className) {
          <!--07.08.2008;  ;  added 'detach selection' action ()-->
          <!--07.08.2008;  ;  added row numbering to event and contribution view ()-->
       </table>
-      <h2><a name="exakt"></a>exakt
+      <h2><a name="orthonormal"></a>orthonormal
       </h2>
       <table rules="all" frame="box" width="60%">
          <tr>
@@ -3391,602 +3744,657 @@ function toggle_visibility(className) {
             <th>Change</th>
          </tr>
          <tr>
-            <td class="bug">04.11.2021</td>
-            <td class="bug">1.4</td>
-            <td class="bug">Bug fix: CSV export with empty left or right context (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/277">#277</a>)
+            <td class="change">19.07.2023</td>
+            <td class="change">1.0</td>
+            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.20 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
             </td>
          </tr>
          <tr>
-            <td class="bug">31.05.2021</td>
-            <td class="bug">1.4</td>
-            <td class="bug">Character encoding bug in Save concordance (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/267">#267</a>)
+            <td class="bug">13.03.2023</td>
+            <td class="bug">1.0</td>
+            <td class="bug">Optional pretty print (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">01.12.2020</td>
-            <td class="change">1.4</td>
-            <td class="change">Resurrected remote corpus function (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/155">#155</a>)
+            <td class="bug">08.03.2023</td>
+            <td class="bug">1.0</td>
+            <td class="bug">Fixed another problem related to pretty printing of words with internal time anchors (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">30.11.2020</td>
-            <td class="change">1.4</td>
-            <td class="change">Cosmetic changes (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/225">#225</a>)
+            <td class="bug">01.03.2023</td>
+            <td class="bug">1.0</td>
+            <td class="bug">Fixed problem related to pretty printing of words with internal time anchors (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">11.09.2020</td>
-            <td class="change">1.4</td>
-            <td class="change">XML should be default when saving a KWIC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/221">#221</a>)
+            <td class="bug">26.01.2023</td>
+            <td class="bug">1.0</td>
+            <td class="bug">Fix/workaround for TreeTagger problem (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/286">#286</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">09.05.2019</td>
-            <td class="change">1.3.1</td>
-            <td class="change">added new option to save a result list from the concordance in CSV format (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/188">#188</a>)
+            <td class="change">01.12.2022</td>
+            <td class="change">1.0</td>
+            <td class="change">Pretty print XML output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">15.10.2018</td>
-            <td class="change">1.3.1</td>
-            <td class="change">Alphabetic ordering description tiers in search and annotatio… (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/182">#182</a>)
+            <td class="change">01.09.2022</td>
+            <td class="change">0.9.9</td>
+            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.18 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
             </td>
          </tr>
          <tr>
-            <td class="bug">15.10.2018</td>
-            <td class="bug">1.3.1</td>
-            <td class="bug">added attribute @category to output of new tiers from template (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/165">#165</a>)
+            <td class="feature">16.06.2022</td>
+            <td class="feature">0.9.9</td>
+            <td class="feature">Duplicate ID bug (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/322">#322</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">11.07.2018</td>
-            <td class="change">1.3.1</td>
-            <td class="change"> the names of the annotations are now sorted alphabetically (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/160">#160</a>)
+            <td class="bug">17.06.2021</td>
+            <td class="bug">0.9.9</td>
+            <td class="bug">Bug fix for normalisation candidates in basic transcriptions (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/271">#271</a>)
             </td>
          </tr>
          <tr>
-            <td class="feature">28.08.2017</td>
-            <td class="feature">1.3.1</td>
-            <td class="feature">Improvements to EXAKT enhancements (DJ, AF) (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/121">#121</a>)
+            <td class="bug">09.06.2021</td>
+            <td class="bug">0.9.9</td>
+            <td class="bug">Bug fix for auto normalisation (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/270">#270</a>)
             </td>
          </tr>
          <tr>
-            <td class="feature">12.07.2017</td>
-            <td class="feature">1.3.1</td>
-            <td class="feature">First versions of EXAKT enhancements (DJ, AF): collections (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/104">#104</a>) and XSLT 2.0 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/114">#114</a>)
+            <td class="change">02.06.2021</td>
+            <td class="change">0.9.9</td>
+            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.16 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
             </td>
          </tr>
          <tr>
-            <td class="bug">27.02.2017</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Bug in XSL search: need to set base directory (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/60">#60</a>)
+            <td class="feature">25.02.2021</td>
+            <td class="feature">0.9.9</td>
+            <td class="feature">Play selection button in word normalisation dialog (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/261">#261</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">22.11.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">"Add annotation as analysis" for annotations that are not in the common timeline, filthy fix (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/36">#36</a>)
+            <td class="feature">23.11.2020</td>
+            <td class="feature">0.9.9</td>
+            <td class="feature">Import ISO/TEI (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/222">#222</a>)
             </td>
          </tr>
          <tr>
-            <td class="change">11.11.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Removed Open DB corpus item from file menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/28">#28</a>)
+            <td class="change">06.05.2020</td>
+            <td class="change">0.9.9</td>
+            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.14 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">28.05.2019</td>
+            <td class="change">0.9.1</td>
+            <td class="change">Update OrthoNormal normalisation lexicon to FOLK 2.12 (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">27.05.2019</td>
+            <td class="bug">0.9.1</td>
+            <td class="bug">Open file on double click on MAC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/184">#184</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">27.05.2019</td>
+            <td class="bug">0.9.1</td>
+            <td class="bug">Player trouble fixed (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/189">#189</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">19.02.2019</td>
+            <td class="change">0.9.1</td>
+            <td class="change">Additional counting column (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/179">#179</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">24.08.2018</td>
+            <td class="change">0.9.1</td>
+            <td class="change">Asterisk as possible phrase boundary (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/162">#162</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">29.06.2018</td>
+            <td class="bug">0.9.1</td>
+            <td class="bug">Flag for token/probability in tagging (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/157">#157</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">25.06.2018</td>
+            <td class="change">0.9.1</td>
+            <td class="change">Fine tuning of ISO/TEI export for ZuMult (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/152">#152</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">30.05.2018</td>
+            <td class="change">0.9.1</td>
+            <td class="change">Update normalisation lexicon (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2018</td>
+            <td class="feature">0.9.1</td>
+            <td class="feature">Configurable Quick Buttons for POS (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/154">#154</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2018</td>
+            <td class="feature">0.9.1</td>
+            <td class="feature">Function for applying rules (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/153">#153</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">26.02.2018</td>
+            <td class="feature">0.9.1</td>
+            <td class="feature">function for importing TGDP data (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/143">#143</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">17.01.2018</td>
+            <td class="change">0.9.1</td>
+            <td class="change">function for changing speaker IDs (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/140">#140</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">15.12.2017</td>
+            <td class="change">0.9.1</td>
+            <td class="change">Button for correcting transcribed form in normalisation dialog (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/135">#135</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">24.04.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">Update normalisation lexicon (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/74">#74</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">12.04.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">Make sure frame is inside screen dimensions at startup (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/72">#72</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">02.03.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">force player change when running with JRE &gt; 1.6 on MAC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/29">#29</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.03.2017</td>
+            <td class="change">0.9</td>
+            <td class="change">normalize whitespace in normalized forms (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/62">#62</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="bug">14.12.2016</td>
+            <td class="bug">0.9</td>
+            <td class="bug">Missing bounce.jar in library path on MAC (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/29">#29</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">16.11.2016</td>
+            <td class="feature">0.9</td>
+            <td class="feature">TreeTaggerAction in new Annotation menu (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/33">#33</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">16.11.2016</td>
+            <td class="change">0.9</td>
+            <td class="change">Export: Set language for ISO/TEI export (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/9">#9</a>)
             </td>
          </tr>
          <tr>
             <td class="change">18.04.2016</td>
-            <td class="change">1.3</td>
+            <td class="change">0.9</td>
             <td class="change">revert to old version of BAS player (MAC)</td>
          </tr>
          <tr>
             <td class="change">08.04.2016</td>
-            <td class="change">1.3</td>
+            <td class="change">0.9</td>
             <td class="change">revert to old version of BAS player (Windows)</td>
          </tr>
          <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Icon for word list</td>
+            <td class="change">06.04.2016</td>
+            <td class="change">0.9</td>
+            <td class="change">Updated player preferences handling</td>
          </tr>
          <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Adapt KWIC row height to font size</td>
+            <td class="bug">30.03.2016</td>
+            <td class="bug">0.9</td>
+            <td class="bug">TEI and TCF exports must retain IDs (methods generateWordIDs())</td>
          </tr>
          <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Start Praat if it is not already running (Jens Lanwer)</td>
+            <td class="bug">30.03.2016</td>
+            <td class="bug">0.9</td>
+            <td class="bug">Wrong file filter for TCF export (txt instead of xml)</td>
          </tr>
          <tr>
-            <td class="change">31.03.2016</td>
-            <td class="change">1.3</td>
-            <td class="change">Better error handling for Praat functionality (Jens Lanwer)</td>
+            <td class="change">03.03.2016</td>
+            <td class="change">0.9</td>
+            <td class="change">Adapted TEI exports (annotationBlock etc.)</td>
          </tr>
          <tr>
-            <td class="feature">10.11.2015</td>
-            <td class="feature">1.3</td>
-            <td class="feature">first attempt at Praat functionality (Jens Lanwer)</td>
+            <td class="change">22.02.2016</td>
+            <td class="change">0.9</td>
+            <td class="change">Changes to output variant with normalisations only</td>
          </tr>
          <tr>
-            <td class="change">23.06.2014</td>
-            <td class="change">1.3</td>
-            <td class="change">catch splash screen transparency error (lubuntu)</td>
+            <td class="feature">29.01.2016</td>
+            <td class="feature">0.9</td>
+            <td class="feature">Output variant with normalisations only</td>
          </tr>
          <tr>
-            <td class="feature">28.05.2014</td>
-            <td class="feature">1.3</td>
-            <td class="feature">Apply font preferences to full text area and word list (Tibetan)</td>
+            <td class="change">07.12.2015</td>
+            <td class="change">0.9</td>
+            <td class="change">Table view in match list</td>
          </tr>
          <tr>
-            <td class="bug">17.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Superfluous space in communication values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+            <td class="change">30.11.2015</td>
+            <td class="change">0.9</td>
+            <td class="change">Improvements to directory search</td>
          </tr>
          <tr>
-            <td class="bug">15.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Superfluous space in speaker values makes filtering confusing (Anne-Sophie Ghyselen)</td>
+            <td class="feature">25.11.2015</td>
+            <td class="feature">0.9</td>
+            <td class="feature">Directory search</td>
          </tr>
          <tr>
-            <td class="bug">14.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">Bug in add annotation when there is more than one tier for a given category and speaker (Hanna - LLN)</td>
-         </tr>
-         <tr>
-            <td class="bug">05.10.2013</td>
-            <td class="bug">1.3</td>
-            <td class="bug">UTF-8 mix up in InputHelperPanel</td>
-         </tr>
-         <tr>
-            <td class="bug">16.01.2013</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Saved wordlist got wrong suffix txt when saving html (Leipzig)</td>
-         </tr>
-         <tr>
-            <td class="change">10.01.2013</td>
-            <td class="change">1.2</td>
-            <td class="change">Accept fln files for FOLKER wizard</td>
-         </tr>
-         <tr>
-            <td class="feature">22.11.2012</td>
-            <td class="feature">1.2</td>
-            <td class="feature">Remove analysis function (Darsow, FiSS)</td>
-         </tr>
-         <tr>
-            <td class="bug">22.11.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Bug in add annotation when analyses are also present</td>
-         </tr>
-         <tr>
-            <td class="bug">12.03.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Un/select in Browsing mode not working correctly (Antenne Zwergenstaat)</td>
-         </tr>
-         <tr>
-            <td class="change">16.02.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">Improved handling of locations and languages (Type attribute!) metadata for speakers</td>
-         </tr>
-         <tr>
-            <td class="change">16.02.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">Refactored local and remote COMA corpus to a common superclass</td>
-         </tr>
-         <tr>
-            <td class="change">25.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">Different color for count label in token list (hardly visible on the MAC)</td>
-         </tr>
-         <tr>
-            <td class="feature">25.01.2012</td>
-            <td class="feature">1.2</td>
-            <td class="feature">Unselected KWIC rows in gray</td>
-         </tr>
-         <tr>
-            <td class="bug">18.01.2012</td>
-            <td class="bug">1.2</td>
-            <td class="bug">FOLKER wizard: use 0 as default recording length in COMA communications</td>
-         </tr>
-         <tr>
-            <td class="change">18.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">FOLKER wizard: add warning for segmentation errors</td>
-         </tr>
-         <tr>
-            <td class="change">18.01.2012</td>
-            <td class="change">1.2</td>
-            <td class="change">FOLKER wizard: make speakerless tiers description tiers to avoid structure errors</td>
-         </tr>
-         <tr>
-            <td class="bug">21.11.2011</td>
-            <td class="bug">1.2</td>
-            <td class="bug">Annotation search result must be saved/opened differently (Daniel Jettka)</td>
-         </tr>
-         <tr>
-            <td class="bug">18.10.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">KWIC update causes hang when an annotation column is sorted (Hanna)</td>
-         </tr>
-         <tr>
-            <td class="bug">05.10.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">KWIC HTML output must have meta tag specifying UTF-8 encoding (Günes)</td>
-         </tr>
-         <tr>
-            <td class="change">08.09.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Further modifications in the catalog lookup dialog</td>
-         </tr>
-         <tr>
-            <td class="change">20.08.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Some modifications in the catalog lookup dialog</td>
-         </tr>
-         <tr>
-            <td class="feature">05.07.2011</td>
-            <td class="feature">1.1</td>
-            <td class="feature">Frequency sort as option for word list output</td>
-         </tr>
-         <tr>
-            <td class="bug">07.06.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">Special characters (apostrophe) in key names cause trouble for metadata handling</td>
-         </tr>
-         <tr>
-            <td class="bug">30.05.2011</td>
-            <td class="bug">1.1</td>
-            <td class="bug">Null corpus name causes app to hang when closing (GEWISS)</td>
-         </tr>
-         <tr>
-            <td class="change">17.05.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Changed annotation search to work with Sextant annotations integrated</td>
-         </tr>
-         <tr>
-            <td class="change">09.05.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">FOLKER import now does automatic stratification by distribution</td>
-         </tr>
-         <tr>
-            <td class="change">23.03.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Catalog functionality for remote and DB corpora</td>
-         </tr>
-         <tr>
-            <td class="change">18.03.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">First elements of RDB functionality added (Hanna!)</td>
-         </tr>
-         <tr>
-            <td class="change">17.01.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">escape type strings in input helper</td>
-         </tr>
-         <tr>
-            <td class="change">17.01.2011</td>
-            <td class="change">1.1</td>
-            <td class="change">Input helper always on top (for filter and for search)</td>
-         </tr>
-         <!--23.11.2010;  1.0;  Transcriber Import Corpus Wizard (feature)-->
-         <!--28.10.2010;  1.0;  Savin/Opening KWIC with remote corpus was buggy (bug)-->
-         <!--27.10.2010;  1.0;  ELAN Import Corpus Wizard (feature)-->
-         <!--11.10.2010;  1.0;  bug in corpus generator: CHAT and GAT segmentation algorithms were confounded (bug)-->
-         <!--16.09.2010;  1.0;  info plist must have library path also for PPC versions because of Quaqua (bug)-->
-         <!--16.09.2010;  1.0;  CHAT/FOLKER wizard must show Save, not Open dialog when asking for coma file (bug)-->
-         <!--14.09.2010;  1.0;  Fixed very nasty bug in description search: search expression text field had two Action Listeners. This lead to two concurrent searches getting in each others way. (bug)-->
-         <!--02.09.2010;  1.0;  Sample functionality (feature)-->
-         <!--17.08.2010;  0.9;  Added counting and levenshtein functionality to word list panel (feature)-->
-         <!--06.08.2010;  0.9;  First attempt at multi-layer functionality (add annotation action) (feature)-->
-         <!--05.08.2010;  0.9;  First components of regex library functionality (feature)-->
-         <!--03.08.2010;  0.9;  Some changes to the layout and menu structure (change)-->
-         <!--23.07.2010;  0.9;  CHAT corpus generator (feature)-->
-         <!--19.07.2010;  0.9;  Scandinavian alphabet in input helper (change)-->
-         <!--27.04.2010;  0.8;  update transcription views when view type changes (change)-->
-         <!--23.04.2010;  0.8;  fixed bug wrt to concordance update in annotation search (bug)-->
-         <!--23.04.2010;  0.8;  annotation view for remote corpus was using wrong searchable segment XPath (bug)-->
-         <!--30.03.2010;  0.8;  Selection functionailty for word list (feature)-->
-         <!--29.03.2010;  0.8;  Word list functionality (feature)-->
-         <!--29.03.2010;  0.8;  Double click on corpus opens new concordance (feature)-->
-         <!--24.03.2010;  0.8;  FOLKER corpus generator (feature)-->
-         <!--16.03.2010;  0.8;  list view (feature)-->
-         <!--16.03.2010;  0.8;  popup menu for regular expresssion text field (feature)-->
-         <!--21.01.2010;  0.8;  automatically open a KWIC when a new corpus has been loaded (change)-->
-         <!--01.12.2009;  0.7;  updated and supplemented documentation (change)-->
-         <!--03.11.2009;  0.7;  added GENERIC and cGAT_MINIMAL to segmentation options in the wizard (change)-->
-         <!--29.10.2009;  0.7;  media support for remote corpora (Windows only) (change)-->
-         <!--29.10.2009;  0.7;  combo box ugliness fixed (change)-->
-         <!--28.10.2009;  0.7;  remote corpus support (no media yet) (feature)-->
-         <!--20.10.2009;  0.7;  some changes to the tool bar (change)-->
-         <!--20.10.2009;  0.7;  recent files in file menu (change)-->
-         <!--20.10.2009;  0.7;  view menu (change)-->
-         <!--20.10.2009;  0.7;  don't reset column widths after operations like adding an analysis (change)-->
-         <!--01.07.2009;  0.6;  possible bug in generate corpus: must catch the case where basic transcription has no suffix (bug)-->
-         <!--01.07.2009;  0.6;  generate corpus: different swing worker needs to be used to be compatible with 1.5 (bug)-->
-         <!--15.06.2009;  1.4.3.;  Changed to quaqua L&F (change)-->
-         <!--02.06.2009;  0.6.;  Bug in Segmentor: must be aware of new suffixes (bug)-->
-         <!--07.05.2009;  0.6.;  MAC OS specific actions (feature)-->
-         <!--07.05.2009;  0.6.;  Enabled buttons in input helper (change)-->
-         <!--07.05.2009;  0.6.;  Increased font-size in search expression fields (change)-->
-         <!--07.05.2009;  0.6.;  Playback must be stopped when new transcription (part) is loaded (bug)-->
-         <!--05.05.2009;  0.6.;  Add analysis panel: the design guru wished the size of controls to change when dialog is resized. I complied. (change)-->
-         <!--14.04.2009;  0.5.;  Changed mac build to include SwingWorker.jar, necessary for corpus generator (bug)-->
-         <!--19.01.2009;  0.5;  fixed three bugs in the corpus generator (bug)-->
-         <!--07.01.2009;  0.5.;  removed save and open buttons for search expressions (change)-->
-         <!--21.11.2008;  0.5;  fixed bug in annotation search (bug)-->
-         <!--22.10.2008;  0.5;  changed mac plist to set bigger maximum heap size (bug)-->
-         <!--23.09.2008;  ;  swapped rtf export action for partitur against generic output action ()-->
-         <!--07.08.2008;  ;  modified annotation search: annotated item is now displayed in KWIC, annotating item in extra column ()-->
-         <!--06.08.2008;  ;  changed some dialogs to make them look better on MAC OS X ()-->
-         <!--06.08.2008;  ;  integrated corpus creation wizard into file menu ()-->
-         <!--26.03.2008;  ;  added function for subtracting dates ()-->
-         <!--20.03.2008;  ;  fixed bug in reconversion of segmented to basic transcriptions ()-->
-         <!--19.03.2008;  ;  adapted buttons for MAC OS X ()-->
-         <!--19.03.2008;  ;  new function: import analyses ()-->
-         <!--29.02.2008;  ;  fixed two bugs according to mail from AH ()-->
-         <!--19.02.2008;  ;  added KWIC browsing mode ()-->
-         <!--18.02.2008;  ;  several changes according to list by AH, JR ()-->
-         <!--18.02.2008;  ;  increased maximum heap space to avoid out of memory errors ()-->
-         <!--18.02.2008;  ;  annotation search working ()-->
-         <!--21.01.2008;  ;  line numbers in the KWIC concordance ()-->
-      </table>
-      <h2><a name="all"></a>all
-      </h2>
-      <table rules="all" frame="box" width="60%">
-         <tr>
-            <th>Date</th>
-            <th>Version</th>
-            <th>Change</th>
-         </tr>
-         <tr>
-            <td class="change">14.12.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">First attempt at new Linux distributions (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/238">#238</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">03.12.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">License statement (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/239">#239</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">02.12.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">Use saxon9 instead of saxon9he (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/228">#228</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">20.11.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">OpenJDK 15 is breaking the JDS player (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/217">#217</a>), so going back to 14 with a dirty fix for the encoding problem (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/216">#216</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">16.11.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">Using OpenJDK 15, make the encoding problem go away (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/216">#216</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">02.03.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">New preview version with 64bit / OpenJDK / Java 11+ (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/199">#199</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">18.02.2020</td>
-            <td class="change">1.13</td>
-            <td class="change">Experimental version with 64bit / OpenJDK / Java 11+ (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/199">#199</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">26.01.2017</td>
-            <td class="bug">1.10</td>
-            <td class="bug">Wrong time stamp for build time (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/54">#54</a>), added some more info about JRE etc. to log file
-            </td>
-         </tr>
-         <tr>
-            <td class="change">13.12.2016</td>
-            <td class="change">1.10</td>
-            <td class="change">Changes to the installations script: FOLKER and OrthoNormal now officially part of the Windows EXMARaLDA distribution (issue
-               <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/51">#51</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">04.12.2016</td>
-            <td class="change">1.10</td>
-            <td class="change">... and SUN JMF distribution with 64bit Java embedded for Linux (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">04.12.2016</td>
-            <td class="change">1.10</td>
-            <td class="change">FOBS and SUN JMF distributions for Linux (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">03.12.2016</td>
-            <td class="bug">1.10</td>
-            <td class="bug">Wrong libraries for BAS Player on Linux (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">02.12.2016</td>
-            <td class="bug">1.10</td>
-            <td class="bug">Embedded java binaries need executable permissions (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="bug">01.12.2016</td>
-            <td class="bug">1.10</td>
-            <td class="bug">Exchange Linux Bundled JRE 64bit to 32bit (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/30">#30</a>)
-            </td>
-         </tr>
-         <tr>
-            <td class="change">19.01.2016</td>
-            <td class="change">2.0</td>
-            <td class="change">Updated ipsk libraries for BASAudioPlayer</td>
-         </tr>
-         <tr>
-            <td class="change">17.12.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Embedded JRE for Linux distributions</td>
-         </tr>
-         <tr>
-            <td class="change">16.10.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Changed linux sh scripts and mac plists to new library sitchuaishon</td>
-         </tr>
-         <tr>
-            <td class="change">16.10.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Moved fobs dll to bundled jre</td>
+            <td class="change">18.11.2015</td>
+            <td class="change">0.9</td>
+            <td class="change">Disabled $ dummy symbol since it is no longer used in the conventions</td>
          </tr>
          <tr>
             <td class="change">06.10.2015</td>
-            <td class="change">2.0</td>
+            <td class="change">0.9</td>
             <td class="change">Build from git: jsmooth path changes for Windows (todo: Mac and Linux)</td>
          </tr>
          <tr>
-            <td class="change">10.07.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Bundled JRE 8 instead of 7 (WebLicht issue, Diffie-Hellmann)</td>
+            <td class="bug">10.08.2015</td>
+            <td class="bug">0.9</td>
+            <td class="bug">Deadlock in lexicon setup</td>
          </tr>
          <tr>
-            <td class="change">09.07.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Fixed missing library in Linux distribution (Hanna)</td>
+            <td class="change">31.07.2015</td>
+            <td class="change">0.9</td>
+            <td class="change">Let's be version 0.9 now, splashscreen changed</td>
+         </tr>
+         <tr>
+            <td class="change">25.07.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">More functionality for chat corpus</td>
+         </tr>
+         <tr>
+            <td class="change">24.07.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">First functionality for chat corpus</td>
+         </tr>
+         <tr>
+            <td class="change">23.07.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Adaptations to lexicon handling in preferences</td>
          </tr>
          <tr>
             <td class="change">13.05.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">Bundle JRE on Windows</td>
+            <td class="change">0.6</td>
+            <td class="change">Embedded JRE</td>
          </tr>
          <tr>
-            <td class="change">05.05.2015</td>
-            <td class="change">2.0</td>
-            <td class="change">some library cleanup for build, got rid of SUN JMF</td>
+            <td class="bug">14.04.2015</td>
+            <td class="bug">0.6</td>
+            <td class="bug">Must escape XML for edit word dialog</td>
          </tr>
          <tr>
-            <td class="change">04.09.2013</td>
-            <td class="change">2.0</td>
-            <td class="change">New splashscreens, removed desktop icons for Sextant and TEIDrop in Windows Build</td>
+            <td class="change">13.04.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Always use BAS Audio Player</td>
          </tr>
          <tr>
-            <td class="change">04.09.2013</td>
-            <td class="change">2.0</td>
-            <td class="change">new icons</td>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">0.6</td>
+            <td class="feature">TCF export</td>
          </tr>
          <tr>
-            <td class="bug">07.11.2012</td>
-            <td class="bug">1.9</td>
-            <td class="bug">ipsk.jar for BAS-Player was missing from MAC plists</td>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">0.6</td>
+            <td class="feature">ISO/TEI export</td>
          </tr>
          <tr>
-            <td class="change">06.11.2012</td>
-            <td class="change">1.9</td>
-            <td class="change">end of official support for PPC Mac</td>
+            <td class="feature">12.03.2015</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Export menu</td>
          </tr>
          <tr>
-            <td class="change">20.08.2012</td>
-            <td class="change">1.9</td>
-            <td class="change">Parameter HTML witdth in write partitur method (Leipzig)</td>
+            <td class="change">03.03.2015</td>
+            <td class="change">0.6</td>
+            <td class="change">Internal Normalisation and Capital-Only Lexicon</td>
          </tr>
          <tr>
-            <td class="change">16.11.2011</td>
-            <td class="change">1.9</td>
-            <td class="change">IDs for words in TEI export</td>
+            <td class="change">01.12.2014</td>
+            <td class="change">0.6</td>
+            <td class="change">Remove problematic time values before editing contribution (Franziska Wallner)</td>
          </tr>
          <tr>
-            <td class="change">19.10.2011</td>
-            <td class="change">1.8</td>
-            <td class="change">Preparing release</td>
+            <td class="feature">03.09.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">enable bulk changes via wordlist</td>
          </tr>
          <tr>
-            <td class="feature">30.05.2011</td>
-            <td class="feature">1.8</td>
-            <td class="feature">Command line version for Praat export (Singer)</td>
+            <td class="bug">12.08.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">player must be set to idle when stopped</td>
          </tr>
          <tr>
-            <td class="change">18.05.2011</td>
-            <td class="change">1.8</td>
-            <td class="change">Changed segmented transcription format: ta's can now have ref-id's</td>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">enable play buttons in edit contribution dialog (Wiki)</td>
          </tr>
          <tr>
-            <td class="change">08.03.2011</td>
-            <td class="change">1.8</td>
-            <td class="change">Added Sextant tagger to Windows and Linux distributions</td>
-         </tr>
-         <!--10.12.2010;  1.8;  Keep links also for timed annotations when segmenting basic transcriptions (still won't work in EXAKT though) (change)-->
-         <!--18.10.2010;  1.7;  Simplified Windows distribution (change)-->
-         <!--01.10.2010;  1.7;  Added TEI drop to start menu on windows (change)-->
-         <!--01.10.2010;  1.7;  Removed SUN JMF versions of PE and EXAKT from start menu on windows (change)-->
-         <!--24.08.2010;  1.7;  Coloured splash screens (change)-->
-         <!--23.08.2010;  1.7;  Minimum required Java version for Windows is now 1.6 - changed jsmooth files accordingly (change)-->
-         <!--10.08.2010;  1.7;  Added swingworker and QTJava to classpath on Linux (change)-->
-         <!--31.03.2010;  1.6;  Version info for Windows setup (Linde, RRZ) (change)-->
-         <!--24.02.2010;  1.6;  fixed bug in corpus builder, path separator must be os independent (Kerem) (bug)-->
-         <!--15.12.2009;  1.6.515;  Linux: shell scripts take parameter (Timm!) (feature)-->
-         <!--23.06.2009;  1.4.3.;  Cleaned up build, smaller distribution size (bug)-->
-         <!--21.03.2009;  1.4.2.;  removed unused libs from linux distribution (change)-->
-         <!--26.02.2009;  1.2.;  Modified setup.exe to associate 'coma' suffix with coma files, 'exb' suffix with Basic Transcriptions, exs suffix for segmented transcriptions, exc suffix for EXAKT concordances (feature)-->
-         <!--09.02.2009;  1.4.1.;  Integration of ELAN.jar instead of copied MPI code (change)-->
-         <!--09.02.2009;  1.2.;  Documentation updates (feature)-->
-         <!--28.01.2008;  1.4.;  Made Linux distribution with SUN JMF (Linux performance pack) instead of FOBS (change)-->
-         <!--28.10.2008;  ;  changed EXMARaLDA's build and template files for new media integration (change)-->
-         <!--28.10.2008;  ;  removed JLayer-Player because it is no longer needed (MP3 is fine in other players) (change)-->
-         <!--27.10.2008;  ;  integrated ELAN's DirectShowPlayer as a new player type (festure)-->
-         <!--22.10.2008;  1.1;  fixed bug in log file handling which led to out of memory errors on certain Macs (bug)-->
-         <!--20.10.2008;  ;  changed linux tarball: sh files are now executable (bug)-->
-         <!--13.10.2008;  ;  changed linux tarball according to suggestions by Jörg Sommer (bug)-->
-         <!--13.10.2008;  ;  changed info plist for mac applications to nake sure app runs on 32-bit-JVM (bug)-->
-         <!--06.10.2008;  ;  changed basic and segmented transcription APIs to read and write more than one referenced file (feature)-->
-         <!--06.10.2008;  ;  changed basic and segmented transcription DTD to allow more than one referenced file (feature)-->
-         <!--06.10.2008;  ;  changed basic transcription DTD to allow format table (feature)-->
-         <!--16.09.2008;  ;  updated XALAN libraries ()-->
-         <!--06.08.2008;  ;  changed linux shell scripts (seem to work at least with Suse and Java 6 now) ()-->
-      </table>
-      <h2><a name="sextant"></a>sextant
-      </h2>
-      <table rules="all" frame="box" width="60%">
-         <tr>
-            <th>Date</th>
-            <th>Version</th>
-            <th>Change</th>
+            <td class="feature">04.08.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">OOV filter button (Wiki)</td>
          </tr>
          <tr>
-            <td class="bug">31.07.2019</td>
-            <td class="bug">0.2.1026</td>
-            <td class="bug">repairs sextant linux launcher (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/193">#193</a>)
-            </td>
+            <td class="feature">16.07.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">auto complete for tag text field (Swantje)</td>
          </tr>
          <tr>
-            <td class="change">30.05.2011</td>
-            <td class="change">0.2.1029</td>
-            <td class="change">Logging enabled (METU)</td>
+            <td class="feature">12.05.2014</td>
+            <td class="feature">1.2</td>
+            <td class="feature">default audio path</td>
          </tr>
          <tr>
-            <td class="bug">18.05.2011</td>
-            <td class="bug">0.2.1026</td>
-            <td class="bug">open tagset repaired</td>
+            <td class="change">10.03.2014</td>
+            <td class="change">0.6</td>
+            <td class="change">dummy button in normalization dialog commits edit directly (JW)</td>
          </tr>
          <tr>
-            <td class="change">24.03.2011</td>
-            <td class="change">0.2.982</td>
-            <td class="change">Changes to the annotation panel</td>
+            <td class="change">26.02.2014</td>
+            <td class="change">0.6</td>
+            <td class="change">modified tagset / tag buttons (SW)</td>
          </tr>
          <tr>
-            <td class="bug">28.02.2011</td>
-            <td class="bug">0.3</td>
-            <td class="bug">moving inside taggables doesn't suck anymore</td>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">enable XML mode by password</td>
          </tr>
          <tr>
-            <td class="feature">28.02.2011</td>
-            <td class="feature">0.3</td>
-            <td class="feature">Remove Attribute Button added</td>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">display normalisation ratio</td>
          </tr>
+         <tr>
+            <td class="feature">18.02.2014</td>
+            <td class="feature">0.6</td>
+            <td class="feature">filter for split words</td>
+         </tr>
+         <tr>
+            <td class="bug">29.01.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">Catch IllegalArgumentException when resolving media path</td>
+         </tr>
+         <tr>
+            <td class="bug">28.01.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">Remove redundant time elements from DGD2 (Jenny)</td>
+         </tr>
+         <tr>
+            <td class="bug">21.01.2014</td>
+            <td class="bug">0.6</td>
+            <td class="bug">(Rare) bug in assigning contribution for editing removed (Tabea Mergel)</td>
+         </tr>
+         <tr>
+            <td class="change">25.11.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">more space for edit panel for looong contributions (F.Wallner, GeWiss)</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">new quick tag buttons (SW)</td>
+         </tr>
+         <tr>
+            <td class="change">06.11.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">retag after edit contribution (SW)</td>
+         </tr>
+         <tr>
+            <td class="feature">16.10.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">filtering for POS</td>
+         </tr>
+         <tr>
+            <td class="change">26.08.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">fixed (?) another bug in recording path resolving</td>
+         </tr>
+         <tr>
+            <td class="change">23.07.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">better renormalisation after edit contribution</td>
+         </tr>
+         <tr>
+            <td class="change">18.07.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">focus for textfield after dummy button</td>
+         </tr>
+         <tr>
+            <td class="change">18.07.2013</td>
+            <td class="change">0.6</td>
+            <td class="change">some minor corrections to match list functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">09.07.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">match list</td>
+         </tr>
+         <tr>
+            <td class="feature">08.05.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">dummy buttons</td>
+         </tr>
+         <tr>
+            <td class="feature">18.04.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Change speaker functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">18.04.2013</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Edit contribution functionality</td>
+         </tr>
+         <tr>
+            <td class="bug">19.02.2013</td>
+            <td class="bug">0.6</td>
+            <td class="bug">No Derewo marking when opening FLK files</td>
+         </tr>
+         <tr>
+            <td class="bug">07.01.2013</td>
+            <td class="bug">0.6</td>
+            <td class="bug">No Derewo marking when opening FLK files</td>
+         </tr>
+         <tr>
+            <td class="feature">19.12.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Use Derewo to mark suspicious forms</td>
+         </tr>
+         <tr>
+            <td class="feature">22.11.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Filter for word list</td>
+         </tr>
+         <tr>
+            <td class="feature">20.11.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Bookmarks</td>
+         </tr>
+         <tr>
+            <td class="bug">06.11.2012</td>
+            <td class="bug">1.2</td>
+            <td class="bug">index update issue in XML mode</td>
+         </tr>
+         <tr>
+            <td class="feature">31.10.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">First Linux Preview</td>
+         </tr>
+         <tr>
+            <td class="feature">31.10.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">First Mac Preview</td>
+         </tr>
+         <tr>
+            <td class="change">25.10.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Info about parse-level when opening FLK</td>
+         </tr>
+         <tr>
+            <td class="feature">02.10.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">XML mode</td>
+         </tr>
+         <tr>
+            <td class="feature">21.09.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">word correction dialog</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">buttons for quick tagging</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Some adaptations for legacy DGD1 transcripts</td>
+         </tr>
+         <tr>
+            <td class="change">12.09.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Remove normalisations which are identical to forms when opening</td>
+         </tr>
+         <tr>
+            <td class="change">06.06.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Include Linux-Shellscript in preview distribution (Piotr Banski)</td>
+         </tr>
+         <tr>
+            <td class="change">06.06.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Tolerate missing p-pos in table</td>
+         </tr>
+         <tr>
+            <td class="feature">30.05.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">RDB Lexicon Update action</td>
+         </tr>
+         <tr>
+            <td class="change">30.05.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">Removed Auto Normalize button</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">More keyboard support (down key) for forms list in normalization dialog</td>
+         </tr>
+         <tr>
+            <td class="change">09.05.2012</td>
+            <td class="change">0.6</td>
+            <td class="change">No live lexicon update / no single auto normalize for RDB lexicon</td>
+         </tr>
+         <tr>
+            <td class="feature">26.04.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Tag probabilities</td>
+         </tr>
+         <tr>
+            <td class="feature">21.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Auto advance option</td>
+         </tr>
+         <tr>
+            <td class="bug">28.03.2012</td>
+            <td class="bug">0.6</td>
+            <td class="bug">File extension checks for opening must not be case-sensitive</td>
+         </tr>
+         <tr>
+            <td class="feature">21.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Auto normalization option for new files</td>
+         </tr>
+         <tr>
+            <td class="feature">20.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Capitalization lexicon integrated</td>
+         </tr>
+         <tr>
+            <td class="feature">09.03.2012</td>
+            <td class="feature">0.6</td>
+            <td class="feature">Tagging functionality</td>
+         </tr>
+         <tr>
+            <td class="feature">01.06.2011</td>
+            <td class="feature">0.5</td>
+            <td class="feature">Adaptations for basic transcriptions</td>
+         </tr>
+         <tr>
+            <td class="bug">01.06.2011</td>
+            <td class="bug">0.5</td>
+            <td class="bug">Cancel in check save must cancel, not close</td>
+         </tr>
+         <tr>
+            <td class="change">01.06.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Player displays complete recording, selection only changes cursor position</td>
+         </tr>
+         <tr>
+            <td class="change">20.05.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Extra second before and after selection in audio player (WS: oc)</td>
+         </tr>
+         <tr>
+            <td class="change">20.05.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Ctrl + Right click on word will remove normalization (WS: mail 19-05-2011)</td>
+         </tr>
+         <tr>
+            <td class="change">20.05.2011</td>
+            <td class="change">0.5</td>
+            <td class="change">Right click on word will (de)capitalize it (WS: mail 19-05-2011)</td>
+         </tr>
+         <tr>
+            <td class="feature">20.05.2011</td>
+            <td class="feature">0.5</td>
+            <td class="feature">Edit recording action in file menu (WS: mail 19-05-2011)</td>
+         </tr>
+         <!--12.11.2010;  0.5;  Exit action in file menu (WS: n) (feature)-->
+         <!--12.11.2010;  0.5;  Modified save behaviour (WS: k) (change)-->
+         <!--12.11.2010;  0.5;  Play button and audio position slider (WS: h) (feature)-->
+         <!--12.11.2010;  0.5;  Scroll bar for editing panel (WS: g) (change)-->
+         <!--12.11.2010;  0.5;  Audio can be rassigned (WS: a) (feature)-->
+         <!--11.11.2010;  0.5;  Added some status messages (WS: e) (change)-->
+         <!--11.11.2010;  0.5;  Keyboard shortcuts for Play selection and stop as in FOLKER (WS: f) (feature)-->
+         <!--11.11.2010;  0.5;  Don't add FLK files to recent files (WS: d) (change)-->
+         <!--11.11.2010;  0.5;  Implemented double-click behaviour for application startup (WS: c) (feature)-->
+         <!--11.11.2010;  0.5;  Introduced threshhold for auto normalisation (WS: b) (change)-->
+         <!--11.11.2010;  0.5;  Changed buggy behaviour when empty string was entered in normalization dialog (WS: j) (bug)-->
+         <!--28.09.2010;  0.5;  Editor setup optimised (change)-->
+         <!--28.09.2010;  0.5;  Output action (feature)-->
+         <!--28.09.2010;  0.5;  Exception handling for Lexicon lookup (change)-->
+         <!--28.09.2010;  0.5;  Oracle JDBC driver added (change)-->
+         <!--23.09.2010;  0.5;  Capitalization removed (change)-->
+         <!--23.09.2010;  0.5;  Several changes related to GUI updating (change)-->
+         <!--23.09.2010;  0.5;  Help menu (feature)-->
+         <!--23.09.2010;  0.5;  Preferences action (feature)-->
+         <!--23.09.2010;  0.5;  different implementation of RDB lexicon (change)-->
+         <!--11.04.2010;  0.1;  auto button (feature)-->
+         <!--10.04.2010;  0.1;  word list (feature)-->
+         <!--22.03.2010;  0.1;  First build of first prototype (feature)-->
       </table>
       <h2><a name="coma"></a>coma
       </h2>
@@ -3995,6 +4403,24 @@ function toggle_visibility(className) {
             <th>Date</th>
             <th>Version</th>
             <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">26.01.2023</td>
+            <td class="bug">2.0</td>
+            <td class="bug">Fix/workaround for TreeTagger problem (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/286">#286</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">01.12.2022</td>
+            <td class="change">2.0</td>
+            <td class="change">Pretty print XML output (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/340">#340</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="feature">19.11.2022</td>
+            <td class="feature">2.0</td>
+            <td class="feature">Confirm exit (issue <a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/332">#332</a>)
+            </td>
          </tr>
          <tr>
             <td class="bug">22.11.2017</td>
@@ -4462,6 +4888,46 @@ function toggle_visibility(className) {
          <!--17.02.2008;  1.0beta1;  mehrere comms löschbar (feature)-->
          <!--05.08.2008;  ;  added segmentation functionality to the corpus creation wizard (feature)-->
          <!--04.08.2008;  ;  added 'Tools > EXAKT Search' function (feature)-->
+      </table>
+      <h2><a name="sextant"></a>sextant
+      </h2>
+      <table rules="all" frame="box" width="60%">
+         <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Change</th>
+         </tr>
+         <tr>
+            <td class="bug">31.07.2019</td>
+            <td class="bug">0.2.1026</td>
+            <td class="bug">repairs sextant linux launcher (<a title="Click here to view the corresponding issue on GitHub" href="https://github.com/EXMARaLDA/exmaralda/issues/193">#193</a>)
+            </td>
+         </tr>
+         <tr>
+            <td class="change">30.05.2011</td>
+            <td class="change">0.2.1029</td>
+            <td class="change">Logging enabled (METU)</td>
+         </tr>
+         <tr>
+            <td class="bug">18.05.2011</td>
+            <td class="bug">0.2.1026</td>
+            <td class="bug">open tagset repaired</td>
+         </tr>
+         <tr>
+            <td class="change">24.03.2011</td>
+            <td class="change">0.2.982</td>
+            <td class="change">Changes to the annotation panel</td>
+         </tr>
+         <tr>
+            <td class="bug">28.02.2011</td>
+            <td class="bug">0.3</td>
+            <td class="bug">moving inside taggables doesn't suck anymore</td>
+         </tr>
+         <tr>
+            <td class="feature">28.02.2011</td>
+            <td class="feature">0.3</td>
+            <td class="feature">Remove Attribute Button added</td>
+         </tr>
       </table>
       <h2><a name="teidrop"></a>teidrop
       </h2>

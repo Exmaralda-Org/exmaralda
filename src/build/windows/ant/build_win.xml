@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="EXMARaLDA" default="BUILD_WINDOWS" basedir=".">
+<project name="EXMARaLDA_Build_Windows" default="BUILD_WINDOWS" basedir="C:\exmaralda\exmaralda\EXMARaLDA_nb">
 
     <description>Builds, tests, and runs the project EXMARaLDA.</description>
     
-    
+    <import file="C:\exmaralda\exmaralda\EXMARaLDA_nb\nbproject\build-impl.xml"/>
+        
     <!-- *************************************************************** -->
     <!-- *****************          VARIABLES         ****************** -->
     <!-- *************************************************************** -->
@@ -17,13 +18,13 @@
 
    
     <!-- version numbers -->
-    <property name="exmaralda_version" value="1.13"/>
-    <property name="partitureditor_version" value="1.7"/>
-    <property name="coma_version" value="2.0.2"/>
-    <property name="exakt_version" value="1.4"/>
-    <property name="teidrop_version" value="1.0"/>
-    <property name="folker_version" value="1.3"/>
-    <property name="orthonormal_version" value="1.0"/>
+    <property name="exmaralda_version" value="1.14"/>
+    <property name="partitureditor_version" value="1.8"/>
+    <property name="coma_version" value="2.0.3"/>
+    <property name="exakt_version" value="1.4.1"/>
+    <property name="teidrop_version" value="1.0.1"/>
+    <property name="folker_version" value="1.3.1"/>
+    <property name="orthonormal_version" value="1.0.1"/>
 
     
     <property name="project_directory" location="C:\exmaralda\exmaralda"/>
@@ -39,11 +40,15 @@
            
     <!-- path to the inno setup executable -->
     <property name="inno_setup_exe" location="${shared_directory}\2021_ISSUE_291_BINARIES\Inno Setup 5\ISCC.exe"/>
+
+    <!-- this is for signing -->
+    <property name="signtool_exe" location="C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe"/>
+    <property name="pfx_certificate_with_private_key" location="C:\Users\bernd\Dropbox\work\LinguisticBits\WindowsCertificate\user.pem.pfx"/>
     
     <!-- directory with all template files -->
     <property name="template_directory" location="${project_directory}\src\build"/> 
     <!-- directory with icon files -->
-    <property name="icons_directory" location="${template_directory}/windows/icons"/>
+    <property name="icons_directory" location="${template_directory}\windows\icons"/>
     
     <property name="windows_native_media_template_directory" location="${template_directory}/windows/NativeMedia"/>
 
@@ -77,16 +82,18 @@
         <delete file="${template_directory}/windows/innosetup/releasenotes_exmaralda.txt"/>
         <delete file="${template_directory}/windows/innosetup/releasenotes_folker.txt"/>
         <delete file="${template_directory}/windows/innosetup/releasenotes_orthonormal.txt"/>
+        
+        <property name="SAXON_PATH" location="C:\Users\bernd\Dropbox\EXMARaLDA_Build\2020_LIBS\saxon9.jar"/>
 
-        <xslt classpath=".\lib\saxon8.jar" in="${template_directory}/changes/changes.xml" out="${template_directory}/changes/changes.html" style="${template_directory}/changes/changes2html.xsl">
+        <xslt classpath="${SAXON_PATH}" in="${template_directory}/changes/changes.xml" out="${template_directory}/changes/changes.html" style="${template_directory}/changes/changes2html.xsl">
                 <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
         </xslt>
         
-        <xslt classpath=".\lib\saxon8.jar" in="${template_directory}/changes/changes.xml" out="${template_directory}/windows/innosetup/releasenotes_exmaralda.txt" style="${template_directory}/changes/changes2txt.xsl">
+        <xslt classpath="${SAXON_PATH}" in="${template_directory}/changes/changes.xml" out="${template_directory}/windows/innosetup/releasenotes_exmaralda.txt" style="${template_directory}/changes/changes2txt.xsl">
                 <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
         </xslt>
 
-        <xslt classpath=".\lib\saxon8.jar" in="${template_directory}/changes/changes.xml" out="C:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\coma\resources\version.properties" style="${template_directory}/changes/changes2version_properties.xsl">
+        <xslt classpath="${SAXON_PATH}" in="${template_directory}/changes/changes.xml" out="C:\EXMARaLDA_GIT\exmaralda\src\org\exmaralda\coma\resources\version.properties" style="${template_directory}/changes/changes2version_properties.xsl">
                 <factory name="net.sf.saxon.TransformerFactoryImpl"/>            
         </xslt>
         
@@ -127,6 +134,7 @@
     <property name="jpackage_target" location="${target_directory}\JPACKAGE"/>
 
     <target name="prepare_jpackage">
+        <echo message="PREPARING JPACKAGE"/>
         <delete dir="${jpackage_target}/PartiturEditor"/>
         <delete dir="${jpackage_target}/Coma"/>
         <delete dir="${jpackage_target}/EXAKT"/>
@@ -136,9 +144,43 @@
         <delete dir="${jpackage_target}/EXMARaLDA"/>        
     </target>
     
+    <!-- *********************************** -->
+    <!-- *********************************** -->
+    <!-- *********************************** -->
+    <!-- *********************************** -->
+
+    
+    <!-- note that this should be preceeded by a JDK 11 build to really make sense -->
+    <target name="windows_batch_zip">
+        <echo message="MAKING WINDOWS BATCH ZIP"/>
+        <delete file="${target_directory}/EXMARaLDA.zip"/>
+        
+        <zip destfile="${target_directory}/EXMARaLDA.zip">
+            <zipfileset file="${template_directory}/windows/batchscripts/partitureditor.bat" prefix="exmaralda${exmaralda_version}"/>
+            <zipfileset file="${application_jar}" prefix="exmaralda${exmaralda_version}"/>
+            <zipfileset dir="C:\Users\bernd\Dropbox\EXMARaLDA_Build\2020_LIBS" prefix="exmaralda${exmaralda_version}/lib">
+                <include name="*.jar"/>
+                <include name="*.zip"/>
+                <exclude name="*-linux*"/>
+                <exclude name="*-mac*"/>
+                <exclude name="*-11*"/>
+                <exclude name="ojdbc6.jar"/>
+                <exclude name="ant.jar"/>
+                <exclude name="vlcj-2.1.0.jar"/>                                            
+                <exclude name="elan-5.8.jar"/>                                            
+                <exclude name="elan-6.2.jar"/>                                             
+            </zipfileset>
+            <zipfileset dir="C:\Users\bernd\Dropbox\EXMARaLDA_Build\2020_LIBS\native-win" prefix="exmaralda${exmaralda_version}/lib/native">
+                <include name="*.dll"/>                
+            </zipfileset>
+          
+        </zip>        
+    </target>
+    
     <target name="windows_executables_jpackage" depends="prepare_jpackage">
 
         <!-- Partitur-Editor -->
+        <echo message="BUILDING PARTITUR-EDITOR VIA JPACKAGE"/>
         <exec executable="${jpackage_excecutable}">
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
@@ -152,6 +194,7 @@
         </exec>    
         
         <!-- COMA -->
+        <echo message="BUILDING COMA VIA JPACKAGE"/>
         <exec executable="${jpackage_excecutable}">
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
@@ -166,6 +209,7 @@
         </exec>    
         
         <!-- EXAKT -->
+        <echo message="BUILDING EXAKT VIA JPACKAGE"/>
         <exec executable="${jpackage_excecutable}">
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
@@ -180,6 +224,7 @@
         </exec>    
         
         <!-- FOLKER -->
+        <echo message="BUILDING FOLKER VIA JPACKAGE"/>
         <exec executable="${jpackage_excecutable}">
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
@@ -194,6 +239,7 @@
         </exec>    
 
         <!-- OrthoNormal -->
+        <echo message="BUILDING ORTHONORMAL VIA JPACKAGE"/>
         <exec executable="${jpackage_excecutable}">
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
@@ -208,6 +254,7 @@
         </exec>    
 
         <!-- TeiDrop -->
+        <echo message="BUILDING TEIDROP VIA JPACKAGE"/>
         <exec executable="${jpackage_excecutable}">
             <arg value="--type"/><arg value="app-image"/>
             <arg value="--input"/><arg value="${jpackage_source}"/>
@@ -220,6 +267,7 @@
             <arg value="--icon"/><arg value="${template_directory}\windows\icons\teidropicon.ico"/>
             <arg value="--name"/><arg value="TeiDrop"/>
         </exec>    
+        
         
         <copy todir="${jpackage_target}/PartiturEditor/app/native">
             <fileset dir="${shared_directory}\2020_LIBS\native-win"/> 
@@ -245,6 +293,7 @@
         <copy todir="${jpackage_target}/PartiturEditor" file="${jpackage_target}/TeiDrop/TeiDrop.ico"/>
         <copy todir="${jpackage_target}/PartiturEditor/app" file="${jpackage_target}/TeiDrop/app/TeiDrop.cfg"/>
         
+
         <move file="${jpackage_target}/PartiturEditor" tofile="${jpackage_target}/EXMARaLDA"/>
         
         <delete dir="${jpackage_target}/Coma"/>
@@ -271,6 +320,7 @@
 
     <!-- generates the windows setup files using inno setup -->
     <target name="windows_setups" depends="windows_executables_jpackage, prepare_target_directory, copy_temp">
+        <echo message="BUILDING SETUPS VIA INNOSETUP"/>
         <!-- START EXMARaLDA -->
         <copy file="${template_directory}/windows/innosetup/copyright_exmaralda_template.txt" tofile="${template_directory}/windows/innosetup/copyright_exmaralda.txt" overwrite="true">
             <filterset>
@@ -300,9 +350,25 @@
 
     </target>
     
+    <target name="CODESIGN" depends="windows_setups">
+        <exec executable="${signtool_exe}">
+            <arg value="sign"/>
+            <arg value="/debug"/>
+            <arg value="/fd"/><arg value="SHA256"/>
+            <arg value="/f"/><arg file="${pfx_certificate_with_private_key}"/>
+            <arg file="${target_directory}/${exmaralda_version}/windows/exmaralda_setup.exe"/>
+        </exec>
+        <!-- "C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe" -->
+        <!-- "C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool.exe" sign 
+        /debug /fd SHA256 
+        /f C:\Users\bernd\Dropbox\work\LinguisticBits\WindowsCertificate\user.pem.pfx 
+        C:\Users\bernd\Dropbox\EXMARaLDA_Build\1.12\windows\exmaralda_setup.exe -->
+    </target>
     
     
-    <target name="cleanup_the_mess" depends="windows_setups">
+    
+    <target name="cleanup_the_mess" depends="CODESIGN">
+        <echo message="CLEANING UP"/>
         <delete dir="${shared_directory}/${exmaralda_version}"/>        
         <mkdir dir="${shared_directory}/${exmaralda_version}"/>
         <copy todir="${shared_directory}/${exmaralda_version}" verbose="true">
@@ -320,7 +386,9 @@
     <!-- ******************************************** -->
     <!-- ******************************************** -->
      
-    <target name="application_jar">
+    <target name="application_jar" depends="jar">
+        <echo message="BUILDING APPLICATION JAR"/>
+
         <jar basedir="${base_directory}\build\classes" destfile="${application_jar}">
             <exclude name="**/partitureditor/deprecated/**"/>
             <exclude name="**/partitureditor/DIDA/**"/>
@@ -340,6 +408,93 @@
             <exclude name="**/*.form"/>            
         </jar>
     </target>
+    
+    <!-- ******************************************** -->
+    <!-- ******************************************** -->
+    <!-- ******************************************** -->
+    <!-- ******************************************** -->
+    
+    
+    <target name="web_jar" depends="compile">
+        <echo message="BUILDING WEB JAR"/>
+        <jar basedir="C:\exmaralda\exmaralda\EXMARaLDA_nb\build\classes" destfile="C:\Users\bernd\Dropbox\EXMARaLDA_Build\WEB_JAR\EXMARaLDA_WEB.jar">
+            <exclude name="**/partitureditor/DIDA/**"/>
+            <exclude name="**/partitureditor/exHIATDOS/**"/>
+            <exclude name="**/partitureditor/exSync/**"/>
+            <exclude name="**/partitureditor/ipapanel/**"/>
+            <exclude name="**/partitureditor/segmentationpanel/**"/>
+            <exclude name="**/partitureditor/svgpanel/**"/>
+            <exclude name="**/partitureditor/multimodalpanel/**"/>
+            <exclude name="**/partitureditor/jexmaralda/command/**"/>
+            <exclude name="**/partitureditor/jexmaralda/errorChecker/**"/>
+            <exclude name="**/partitureditor/unicodeKeyboard/**"/>
+            <exclude name="**/partitureditor/praatPanel/**"/>
+            <exclude name="**/partitureditor/linkPanel/**"/>
+            <exclude name="**/partitureditor/listTable/**"/>
+            <exclude name="**/partitureditor/annotation/**"/>
+            <exclude name="**/partitureditor/partiture/**"/>
+            <exclude name="**/partitureditor/udInformationTable/**"/>
+            <exclude name="**/partitureditor/jexmaraldaswing/**"/>
+            <exclude name="**/partitureditor/sound/AudioPanel.class"/>
+            <exclude name="**/partitureditor/sound/ChopAudioFileDialog.class"/>
+            <exclude name="**/partitureditor/sound/LiveTimelineSegmentationDialog.class"/>
+            <exclude name="**/partitureditor/sound/*.gif"/>
+            <exclude name="**/partiture/Icons/*.ico"/>
+            <exclude name="**/partiture/Icons/**"/>
+
+            <exclude name="**/exakt/applet/**"/>
+            <exclude name="**/exakt/tokenlist/**"/>
+            <exclude name="**/exakt/wizard/**"/>
+            <exclude name="**/exakt/exmaraldaSearch/swing/**"/>
+            
+            <exclude name="**/orthonormal/gui/**"/>
+            <exclude name="**/orthonormal/application/**"/>
+            <exclude name="**/orthonormal/actions/**"/>
+            <!-- <exclude name="**/orthonormal/lexicon/**"/> -->
+            
+            <exclude name="**/folker/gui/**"/>
+            <exclude name="**/folker/application/**"/>
+            <exclude name="**/folker/actions/**"/>
+            <exclude name="**/folker/experiment/**"/>
+            <exclude name="**/folker/tangoicons/**"/>
+
+            <exclude name="**/tei/swing/**"/>
+
+            <exclude name="**/aligner/**"/>
+            <exclude name="**/annolab/**"/>
+            <exclude name="**/coma/**"/>
+            <exclude name="**/sextanttagger/**"/>
+            <exclude name="**/sextant/**"/>
+            <exclude name="**/stan/**"/>
+            <exclude name="**/tagger/**"/>
+            <!-- <exclude name="**/tagging/**"/> -->
+            <exclude name="**/teide/**"/>
+            <exclude name="**/zrcola/**"/>
+            <exclude name="**/zecke/**"/>
+            <exclude name="**/dgd/**"/>
+            <exclude name="**/command/**"/>
+            <exclude name="**/sbcsae/**"/>
+            <exclude name="**/fedora/**"/>
+            
+            <exclude name="**/alignment/**"/>
+            <exclude name="**/dulko/**"/>
+            <exclude name="**/hzsk/**"/>
+            <exclude name="**/masker/**"/>
+            <exclude name="**/TestSound"/>
+
+            <exclude name="**/*.form"/>
+            <exclude name="**/*.html"/>
+            <exclude name="**/Makefile.in"/>
+            <exclude name="**/Thumbs.db"/>            
+        </jar>
+    </target>
+    
+    <target name="single_batik_jar">
+        <zip destfile="C:\Users\bernd\Dropbox\EXMARaLDA_Build\2020_LIBS\batik-1.17.jar">
+            <zipgroupfileset dir="C:\Users\bernd\Dropbox\EXMARaLDA_Build\2020_LIBS\batik-1.17\lib" includes="*.jar"/>
+        </zip>        
+    </target>
+    
     
 </project>
 
