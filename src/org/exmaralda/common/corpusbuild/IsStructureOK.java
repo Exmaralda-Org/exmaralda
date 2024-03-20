@@ -6,10 +6,8 @@
 package org.exmaralda.common.corpusbuild;
 
 import java.util.Hashtable;
-import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
-import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.xml.sax.SAXException;
 
 /**

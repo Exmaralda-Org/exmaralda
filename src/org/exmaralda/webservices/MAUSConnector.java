@@ -33,8 +33,22 @@ import org.jdom.xpath.XPath;
  */
 public class MAUSConnector {
     
-    //String webMausURL = "http://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUSBasicGerman";
-    public String webMausURL = "http://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUSBasic";
+    private boolean useGeneralMAUSVersion = false;
+
+    public String webMausBasicURL = "http://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUSBasic";
+    public String webMausGeneralURL = "http://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUS";
+
+    public MAUSConnector() {
+    }
+
+    public MAUSConnector(boolean useGeneral) {
+        useGeneralMAUSVersion = useGeneral;
+    }
+    
+    private String getWebServiceURL(){
+        if (useGeneralMAUSVersion) return webMausGeneralURL;
+        return webMausBasicURL;
+    }
     
     // callMAUS with the given text file, audio file and additional parameters
     // return the String that represents the resulting text grid
@@ -70,7 +84,7 @@ public class MAUSConnector {
         builder.addBinaryBody("SIGNAL", audioFile);
 
         // construct a POST request with the multipart entity
-        HttpPost httpPost = new HttpPost(webMausURL);        
+        HttpPost httpPost = new HttpPost(getWebServiceURL());        
         //httpPost.setEntity(entity); // deprecated
         httpPost.setEntity(builder.build());
         HttpResponse response = httpClient.execute(httpPost);

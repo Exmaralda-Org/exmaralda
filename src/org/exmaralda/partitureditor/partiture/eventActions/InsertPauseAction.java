@@ -6,7 +6,6 @@
 
 package org.exmaralda.partitureditor.partiture.eventActions;
 
-import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
 import org.exmaralda.partitureditor.partiture.PartitureTableWithActions;
 
 

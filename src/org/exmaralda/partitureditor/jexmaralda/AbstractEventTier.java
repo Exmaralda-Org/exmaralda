@@ -226,7 +226,7 @@ public class AbstractEventTier extends AbstractTier {
      *  N.B.: if the tier is not stratified, this may remove only one event although
      *  there are several events with the specified start id
      *  to make sure to remove all events (i.e.if not sure that the tier is stratified)
-  use removeEvent<b>s</b>AtStartPoint(id)
+     *  use removeEvent<b>s</b>AtStartPoint(id)
      * @param id
      * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void removeEventAtStartPoint (String id) throws JexmaraldaException{

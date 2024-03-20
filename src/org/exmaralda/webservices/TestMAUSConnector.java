@@ -33,10 +33,10 @@ public class TestMAUSConnector {
     }
 
     private void doit() throws IOException, JDOMException {
-        MAUSConnector mc = new MAUSConnector();
+        MAUSConnector mc = new MAUSConnector(true);
          
-        File textFile = new File("C:\\Users\\Schmidt\\Desktop\\Alignment\\FIX\\TXT\\DS--_E_00064_SE_01_A_01_DF_01_537.TXT");
-        File signalFile = new File("C:\\Users\\Schmidt\\Desktop\\Alignment\\FIX\\WAV\\DS--_E_00064_SE_01_A_01_DF_01_537.WAV");
+        File textFile = new File("C:\\Users\\bernd\\OneDrive\\Desktop\\MAUS_TEST.TXT");
+        File signalFile = new File("C:\\Users\\bernd\\OneDrive\\Desktop\\MAUS_TEST.WAV");
         
         String[][] parameters = {
             {"LANGUAGE","deu"}
@@ -52,7 +52,7 @@ public class TestMAUSConnector {
         
         PraatConverter pc = new PraatConverter();
         BasicTranscription bt = pc.readPraatFromFile(temp.getAbsolutePath(), "UTF-8");
-        bt.writeXMLToFile("C:\\Users\\Schmidt\\Desktop\\TEST\\MausOut.exb", "none");
+        bt.writeXMLToFile("C:\\Users\\bernd\\OneDrive\\Desktop\\MAUS_TEST.exb", "none");
         
         System.out.println(result);
     }

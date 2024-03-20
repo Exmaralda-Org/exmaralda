@@ -113,7 +113,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
                     // call MAUS with the files and write the result to a temporary text grid file
                     MAUSConnector mc = new MAUSConnector();
                     pbd.addText("Language Parameter: " + mausParameters.get("LANGUAGE"));
-                    pbd.addText("Calling WebMAUS at " + mc.webMausURL + ".....");
+                    pbd.addText("Calling WebMAUS at " + mc.webMausBasicURL + ".....");
                     String result = mc.callMAUS(files[0], files[1], mausParameters);
                     final File temp = File.createTempFile("MAUSRESULT", ".textGrid");
                     temp.deleteOnExit();
