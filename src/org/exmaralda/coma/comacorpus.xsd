@@ -229,12 +229,14 @@
 							pseudos</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="Sex" type="xs:anySimpleType" minOccurs="0" maxOccurs="1">
-					<xs:restriction base="xs:string">
-      						<xs:enumeration value="male"/>
-      						<xs:enumeration value="female"/>
-      						<xs:enumeration value="unknown"/>
-    					</xs:restriction>				
+				<xs:element name="Sex" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+	      						<xs:enumeration value="male"/>
+	      						<xs:enumeration value="female"/>
+	      						<xs:enumeration value="unknown"/>
+	    					</xs:restriction>	
+					</xs:simpleType>						
 				</xs:element>
 				<xs:element name="Location" type="LocationType" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element name="Description" type="DescriptionType" minOccurs="0" maxOccurs="1"/>
