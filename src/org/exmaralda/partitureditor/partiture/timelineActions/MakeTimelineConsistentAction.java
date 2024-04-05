@@ -6,9 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -17,11 +15,13 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class MakeTimelineConsistentAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of MakeTimelineConsistentAction */
+    /** Creates a new instance of MakeTimelineConsistentAction
+     * @param t */
     public MakeTimelineConsistentAction(PartitureTableWithActions t) {
         super("Make timeline consistent", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("makeTimelineConsistentAction!");
         table.commitEdit(true);

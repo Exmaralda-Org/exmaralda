@@ -6,9 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 
 /**
  *
@@ -16,11 +14,13 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class RemoveInterpolatedTimesAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveInterpolatedTimesAction */
+    /** Creates a new instance of RemoveInterpolatedTimesAction
+     * @param t */
     public RemoveInterpolatedTimesAction(PartitureTableWithActions t) {
         super("Remove interpolated times", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("removeInterpolatedTimesAction!");
         table.commitEdit(true);

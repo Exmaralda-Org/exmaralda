@@ -19,11 +19,14 @@ import org.exmaralda.partitureditor.praatPanel.*;
  */
 public class EditTimelineItemAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditTimelineItemAction */
+    /** Creates a new instance of EditTimelineItemAction
+     * @param t
+     * @param icon */
     public EditTimelineItemAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Edit timeline item...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editTimelineItemAction!");
         table.commitEdit(true);

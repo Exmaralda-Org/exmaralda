@@ -36,14 +36,19 @@ public class SaveBasicTranscriptionAsDialog extends AbstractXMLSaveAsDialog {
         setDialogTitle("Save basic transcription as");
     }
     
-    /** Creates new SaveBasicTranscriptionAsDialog */
+    /** Creates new SaveBasicTranscriptionAsDialog
+     * @param startDirectory
+     * @param t */
     public SaveBasicTranscriptionAsDialog(String startDirectory, BasicTranscription t) {
         super(startDirectory);
         transcription = t;
         setDialogTitle("Save basic transcription as");
     }
     
-    /** Creates new SaveBasicTranscriptionAsDialog */
+    /** Creates new SaveBasicTranscriptionAsDialog
+     * @param startDirectory
+     * @param t
+     * @param tft */
     public SaveBasicTranscriptionAsDialog(String startDirectory, BasicTranscription t, TierFormatTable tft) {
         super(startDirectory);
                 
@@ -56,7 +61,10 @@ public class SaveBasicTranscriptionAsDialog extends AbstractXMLSaveAsDialog {
     }
     
     
-    /** Creates new SaveBasicTranscriptionAsDialog */
+    /** Creates new SaveBasicTranscriptionAsDialog
+     * @param startDirectory
+     * @param t
+     * @param showDTDPanel */
     public SaveBasicTranscriptionAsDialog(String startDirectory, BasicTranscription t, boolean showDTDPanel) {
         super(startDirectory, showDTDPanel);
         transcription = t;
@@ -87,7 +95,10 @@ public class SaveBasicTranscriptionAsDialog extends AbstractXMLSaveAsDialog {
                 checkExtension();
                 proceed=checkOverwrite(parent);
             }
-            else {success = false; return success;}
+            else {
+                success = false; 
+                return success;
+            }
         }
         try {
             if (saveTierFormatTableCheckBox.isSelected()){ 

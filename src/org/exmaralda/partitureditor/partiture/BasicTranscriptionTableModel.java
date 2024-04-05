@@ -1008,7 +1008,9 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
     
     
-    /** sets the timeline item at the specified position to a new value */
+    /** sets the timeline item at the specified position to a new value
+     * @param col
+     * @param newTimelineItem */
     public void editTimelineItem(int col, TimelineItem newTimelineItem){
         TimelineItem tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col);
         tli.setTime(newTimelineItem.getTime());
@@ -1027,7 +1029,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
             TimelineItem tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(c);
             tli.setType("");
             fireColumnLabelChanged(c);
-        }
+        }        
     }
 
     

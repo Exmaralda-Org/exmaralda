@@ -112,6 +112,11 @@ public class ModifyAbsoluteTimesDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(FOLKERInternationalizer.getString("dialog.times.title"));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -255,8 +260,8 @@ public class ModifyAbsoluteTimesDialog extends javax.swing.JDialog {
             double m = targetMS / sourceMS;
             scaleTextField.setText(Double.toString(m));
             
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, FOLKERInternationalizer.getString("dialog.times.wrongformat"));
         }
     }//GEN-LAST:event_useCheckPointButtonActionPerformed
@@ -267,7 +272,7 @@ public class ModifyAbsoluteTimesDialog extends javax.swing.JDialog {
             approved = true;
             dispose();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, FOLKERInternationalizer.getString("dialog.times.wrongformat"));
         }
 
@@ -277,6 +282,10 @@ public class ModifyAbsoluteTimesDialog extends javax.swing.JDialog {
         approved = false;
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        this.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
@@ -308,6 +317,7 @@ public class ModifyAbsoluteTimesDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 ModifyAbsoluteTimesDialog dialog = new ModifyAbsoluteTimesDialog(null, 0, new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

@@ -6,9 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -17,11 +15,13 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class RemoveAllGapsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveAllGapsAction */
+    /** Creates a new instance of RemoveAllGapsAction
+     * @param t */
     public RemoveAllGapsAction(PartitureTableWithActions t) {
         super("Remove all gaps", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("removeAllGapsAction!");
         table.commitEdit(true);

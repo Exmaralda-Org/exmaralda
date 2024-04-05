@@ -343,6 +343,8 @@ public class PartiturEditor extends javax.swing.JFrame
        exitAction = new javax.swing.AbstractAction(Internationalizer.getString("Exit")){
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                // 05-04-2024: new for #456
+                if (table.IS_SAVING_IN_BACKGROUND) return;
                 exitForm(null);
             }
         };

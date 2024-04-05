@@ -8,9 +8,7 @@ package org.exmaralda.partitureditor.partiture.timelineActions;
 
 import org.exmaralda.partitureditor.jexmaraldaswing.AddBookmarkDialog;
 import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 
 /**
  *
@@ -18,11 +16,14 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class AddBookmarkAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of AddBookmarkAction */
+    /** Creates a new instance of AddBookmarkAction
+     * @param t
+     * @param icon */
     public AddBookmarkAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Add bookmark...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("addBookmarkAction!");
         table.commitEdit(true);
@@ -33,7 +34,9 @@ public class AddBookmarkAction extends org.exmaralda.partitureditor.partiture.Ab
     private void addBookmark(){
         TimelineItem timelineItem = table.getModel().getTimelineItem(table.selectionStartCol);
         AddBookmarkDialog dialog = new AddBookmarkDialog(table.parent, true, timelineItem);
-        dialog.show();
+        dialog.setLocationRelativeTo(table.parent);
+        dialog.setVisible(true);
+        dialog.requestFocus();
         if (dialog.change){
             table.getModel().editBookmark(table.selectionStartCol, dialog.getTimelineItem());
         }

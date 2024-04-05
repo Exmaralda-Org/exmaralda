@@ -6,9 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 
 /**
  *
@@ -16,11 +14,13 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class SmoothTimelineAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveAllGapsAction */
+    /** Creates a new instance of RemoveAllGapsAction
+     * @param t */
     public SmoothTimelineAction(PartitureTableWithActions t) {
         super("Smooth timeline...", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("smoothTimelineAction!");
         table.commitEdit(true);
@@ -33,7 +33,7 @@ public class SmoothTimelineAction extends org.exmaralda.partitureditor.partiture
             table.transcriptionChanged = true;
         } catch (NumberFormatException ex) {
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), "Invalid number format");
-            ex.printStackTrace();
+            System.out.println(ex.getLocalizedMessage());
         }
 
     }

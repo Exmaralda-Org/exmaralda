@@ -6,9 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -17,11 +15,14 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class RemoveUnusedTimelineItemsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveUnusedTimelineItemsAction */
+    /** Creates a new instance of RemoveUnusedTimelineItemsAction
+     * @param t
+     * @param icon */
     public RemoveUnusedTimelineItemsAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Remove unused timeline items", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("removeUnusedTimelineItemsAction!");
         table.commitEdit(true);

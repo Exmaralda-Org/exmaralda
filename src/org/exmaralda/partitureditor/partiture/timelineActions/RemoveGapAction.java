@@ -6,9 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -17,11 +15,14 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class RemoveGapAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveGapAction */
+    /** Creates a new instance of RemoveGapAction
+     * @param t
+     * @param icon */
     public RemoveGapAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Remove gap", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("removeGapAction!");
         table.commitEdit(true);

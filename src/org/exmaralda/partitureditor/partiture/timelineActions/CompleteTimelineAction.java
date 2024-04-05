@@ -17,7 +17,8 @@ import org.exmaralda.partitureditor.jexmaraldaswing.*;
  */
 public class CompleteTimelineAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of CompleteTimelineAction */
+    /** Creates a new instance of CompleteTimelineAction
+     * @param t */
     public CompleteTimelineAction(PartitureTableWithActions t) {
         super("Interpolate timeline...", t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control shift I"));                    

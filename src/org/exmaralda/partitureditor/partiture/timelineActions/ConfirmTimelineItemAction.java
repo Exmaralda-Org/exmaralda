@@ -7,10 +7,7 @@
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
-import org.exmaralda.partitureditor.praatPanel.*;
 
 /**
  *
@@ -18,11 +15,13 @@ import org.exmaralda.partitureditor.praatPanel.*;
  */
 public class ConfirmTimelineItemAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ConfirmTimelineItemAction */
+    /** Creates a new instance of ConfirmTimelineItemAction
+     * @param t */
     public ConfirmTimelineItemAction(PartitureTableWithActions t) {
         super("Confirm timeline item(s)",  t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("confirmTimelineItemAction!");
         table.commitEdit(true);

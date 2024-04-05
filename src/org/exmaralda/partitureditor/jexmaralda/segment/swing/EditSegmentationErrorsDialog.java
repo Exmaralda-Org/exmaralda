@@ -306,6 +306,7 @@ public class EditSegmentationErrorsDialog extends javax.swing.JDialog implements
         super.show();
     }
     
+    @Override
     public void valueChanged(javax.swing.event.ListSelectionEvent e) {
         if (tableIsUpdating || e.getValueIsAdjusting()) return;        
         int row = errorsTable.getSelectedRow();

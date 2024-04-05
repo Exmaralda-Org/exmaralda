@@ -15,11 +15,13 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class AnchorTimelineAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of CompleteTimelineAction */
+    /** Creates a new instance of CompleteTimelineAction
+     * @param t */
     public AnchorTimelineAction(PartitureTableWithActions t) {
         super("Anchor timeline", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("anchorTimelineAction!");
         table.commitEdit(true);

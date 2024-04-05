@@ -11,10 +11,8 @@ import org.exmaralda.partitureditor.search.EventSearchResult;
 import org.exmaralda.partitureditor.search.SearchResultListener;
 import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import javax.swing.*;
 import java.util.*;
-import org.exmaralda.partitureditor.search.*;
 
 /**
  *
@@ -28,7 +26,10 @@ public class BookmarksDialog extends javax.swing.JDialog {
     javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();
     
     
-    /** Creates new form BookmarksDialog */
+    /** Creates new form BookmarksDialog
+     * @param parent
+     * @param modal
+     * @param tl */
     public BookmarksDialog(java.awt.Frame parent, boolean modal, Timeline tl) {
         super(parent, modal);
         timeline = tl;
@@ -39,7 +40,7 @@ public class BookmarksDialog extends javax.swing.JDialog {
             bookmarksListModel.addElement(tli.getBookmark());
         }
         bookmarksList.setModel(bookmarksListModel);
-        if (allBookmarks.size()>0){
+        if (!allBookmarks.isEmpty()){
             bookmarksList.setSelectedIndex(0);
         }
         Internationalizer.internationalizeDialogToolTips(this);        

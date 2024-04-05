@@ -8,6 +8,8 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author  Thomas
@@ -17,7 +19,10 @@ public class EditTimelineItemDialog extends JEscapeDialog {
 
     org.exmaralda.partitureditor.jexmaralda.TimelineItem timelineItem;
     
-    /** Creates new form EditTimelineItemDialog */
+    /** Creates new form EditTimelineItemDialog
+     * @param parent
+     * @param modal
+     * @param tli */
     public EditTimelineItemDialog(java.awt.Frame parent,boolean modal, org.exmaralda.partitureditor.jexmaralda.TimelineItem tli) {
         super (parent, modal);
         timelineItem = tli.makeCopy();
@@ -61,6 +66,11 @@ public class EditTimelineItemDialog extends JEscapeDialog {
         absoluteTimeTextField = new javax.swing.JTextField();
 
         setTitle("Edit timeline item");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -149,6 +159,10 @@ public class EditTimelineItemDialog extends JEscapeDialog {
         dispose ();
     }//GEN-LAST:event_closeDialog
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+       absoluteTimeTextField.requestFocus();
+    }//GEN-LAST:event_formComponentShown
+
     /**
     * @param args the command line arguments
     */
@@ -172,8 +186,10 @@ public class EditTimelineItemDialog extends JEscapeDialog {
         java.awt.Dimension dialogSize = this.getPreferredSize();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(screenSize.width/2 - dialogSize.width/2, screenSize.height/2 - dialogSize.height/2);
-        show();
-        absoluteTimeTextField.requestFocus();
+        //show();
+        setVisible(true);
+        //requestFocus();
+        //absoluteTimeTextField.requestFocus();
         return change;
     }
     
@@ -187,8 +203,7 @@ public class EditTimelineItemDialog extends JEscapeDialog {
             dispose ();
         }
         catch (NumberFormatException nfe){
-            javax.swing.JOptionPane errorDialog = new javax.swing.JOptionPane();
-            errorDialog.showMessageDialog(this, "The number format is not correct." + nfe.getLocalizedMessage());       
+            JOptionPane.showMessageDialog(this, "The number format is not correct." + nfe.getLocalizedMessage());       
             absoluteTimeTextField.setText(new String());
         }   
     }

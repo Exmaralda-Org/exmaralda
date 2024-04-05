@@ -45,6 +45,7 @@ import org.exmaralda.partitureditor.partiture.menus.EventPopupMenu;
 import org.exmaralda.partitureditor.partiture.menus.TablePopupMenu;
 
 import com.klg.jclass.table.*;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
 
@@ -58,14 +59,22 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.helpers.Internationalizer;
+import org.exmaralda.folker.application.ApplicationControl;
+import org.exmaralda.folker.data.EventListTranscription;
+import org.exmaralda.folker.data.TranscriptionHead;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
+import org.exmaralda.folker.utilities.FOLKERInternationalizer;
+import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.fsm.FSMException;
+import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
 import org.exmaralda.partitureditor.partiture.legacyActions.LegacyExportAction;
 import org.exmaralda.partitureditor.partiture.legacyActions.LegacyImportAction;
 import org.exmaralda.partitureditor.partiture.legacyActions.LegacyOutputAction;
@@ -1165,6 +1174,9 @@ public class PartitureTableWithActions extends PartitureTable
         setupLinkPanel();
     }
     
+    // 05-04-2023: new for #458
+    Border editorBorder = BorderFactory.createMatteBorder(1, 2, 0, 0, Color.BLUE);    
+    
     /** called when editing of an event starts
      * @param evt */
     @Override
@@ -1177,6 +1189,8 @@ public class PartitureTableWithActions extends PartitureTable
         }
         editor = (PartitureCellStringEditor)(evt.getEditingComponent());
         editor.setPopupMenu(eventPopupMenu);
+        // 05-04-2023: new for #458
+        editor.setBorder(editorBorder);
         keyboardDialog.getKeyboardPanel().addListener(editor);
         // changed 09-05-2017 - issue #87
         if (multimodalDialog!=null && (multimodalDialog.multimodalPanel!=null)){
@@ -1512,7 +1526,9 @@ public class PartitureTableWithActions extends PartitureTable
             try{
                 //getModel().getTranscription().writeXMLToFile(getFilename(),"none");
                 // 02-06-2023 issue #398
-                getModel().getTranscription().writeXMLToFile(getFilename(), "none", this.getModel().getTierFormatTable());
+                //getModel().getTranscription().writeXMLToFile(getFilename(), "none", this.getModel().getTierFormatTable());
+                // 05-04-2023 issue #456
+                saveInThread();
             } catch (IOException t){
                 saveTranscription();
             }
@@ -1521,6 +1537,74 @@ public class PartitureTableWithActions extends PartitureTable
             saveTranscription();
         }
     }
+    
+    // 05-04-2024: new for #456
+    public boolean IS_SAVING_IN_BACKGROUND = false;
+    
+    // 05-04-2024: new for #456
+    private void saveInThread() throws IOException { 
+        // changed 12-05-2009: do the saving in a thread
+        // changed 29-05-2009: take care not to close the application while the save thread is running
+        final BasicTranscription finalTranscription = getModel().getTranscription();
+        final TierFormatTable finalTierFormatTable = getModel().getTierFormatTable();
+        final String finalFilename = getFilename();
+        Thread saveThread = new Thread(new Runnable(){
+
+            @Override
+            public void run() {
+                // now this is really weird: the writeXML method first transforms the event list transcription
+                // into an EXMARaLDA basic transcription. Then this basic transcription is transformed via a stylesheet
+                // into a FOLKER transcription
+                try {
+                    System.out.println("Start saving...");
+                    IS_SAVING_IN_BACKGROUND = true;
+                    //applicationFrame.mainPanel.progressBar.setVisible(true);
+                    newAction.setEnabled(false);
+                    saveAction.setEnabled(false);
+                    saveAsAction.setEnabled(false);
+                    openAction.setEnabled(false);
+                    importAction.setEnabled(false);
+                    exportAction.setEnabled(false);
+                    //exitAction.setEnabled(false);
+                    //System.out.println("STATION 1");
+                    status(FOLKERInternationalizer.getString("status.saving") + finalFilename + "...");
+                    progressBar.setVisible(true);
+                    
+                    
+                    finalTranscription.writeXMLToFile(finalFilename, "none", finalTierFormatTable);
+
+                    //System.out.println("STATION 2");
+                    //setCurrentFilePath(finalFilename);
+                    status(FOLKERInternationalizer.getString("status.saved1") 
+                            + finalFilename 
+                            + FOLKERInternationalizer.getString("status.saved2"));
+                    transcriptionChanged = false;
+                    System.out.println("Done saving...");
+                } catch (IOException ex) {
+                    Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(parent, ex.getMessage());
+                    status(FOLKERInternationalizer.getString("status.saveerror") + finalFilename + ".");
+                } finally {
+                    //exitAction.setEnabled(true);
+                    newAction.setEnabled(true);
+                    openAction.setEnabled(true);
+                    importAction.setEnabled(true);
+                    exportAction.setEnabled(true);
+                    saveAction.setEnabled(true);
+                    saveAsAction.setEnabled(true);
+                    progressBar.setVisible(false);
+                    IS_SAVING_IN_BACKGROUND = false;
+                    System.out.println("SAVE_THREAD_FINALLY");
+                }
+            }
+
+        });
+
+        System.out.println("STARTING SAVE THREAD");
+        saveThread.start();        
+        
+    }
+    
 
     /** saves the current transcription under a new name */
     private void saveTranscription(){
@@ -1632,8 +1716,7 @@ public class PartitureTableWithActions extends PartitureTable
         if (transcriptionChanged){
             proceed = checkSave();
         }
-        if (!proceed) return false;
-        return true;
+        return proceed;
     }
     
     // *********************************************************************************** //
@@ -2173,12 +2256,14 @@ public class PartitureTableWithActions extends PartitureTable
         }
     }
     
-    /** does nothing */
+    /** does nothing
+     * @param documentEvent */
     @Override
     public void changedUpdate(javax.swing.event.DocumentEvent documentEvent) {
     }    
     
-    /** adjusts the width of the current cell when the user enters text */
+    /** adjusts the width of the current cell when the user enters text
+     * @param documentEvent */
     @Override
     public void insertUpdate(javax.swing.event.DocumentEvent documentEvent) {
         if ((getModel().timeProportional) || (!currentCellHasSpanOne)) return;
@@ -2622,7 +2707,7 @@ public class PartitureTableWithActions extends PartitureTable
                 this.setupMedia();
             }
         } catch (JexmaraldaException | SAXException ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage());
         }
         // added 09-04-2010
@@ -2840,12 +2925,12 @@ public class PartitureTableWithActions extends PartitureTable
     }
 
     void setMediaPlaybackRate(double newRate) {
-        if (player instanceof JDSPlayer){
-            ((JDSPlayer)player).setPlaybackRate(newRate); 
-        } else if (player instanceof AVFPlayer){
-            ((AVFPlayer)player).setPlaybackRate(newRate);             
-        } else if (player instanceof JavaFXPlayer){
-            ((JavaFXPlayer)player).setPlaybackRate(newRate);             
+        if (player instanceof JDSPlayer jDSPlayer){
+            jDSPlayer.setPlaybackRate(newRate); 
+        } else if (player instanceof AVFPlayer aVFPlayer){
+            aVFPlayer.setPlaybackRate(newRate);             
+        } else if (player instanceof JavaFXPlayer javaFXPlayer){
+            javaFXPlayer.setPlaybackRate(newRate);             
         }
     }
 
