@@ -91,6 +91,13 @@ public class WhisperJSONConverter {
         Timeline timeline = result.getBody().getCommonTimeline();
         while (iterator.hasNext()){
             JsonNode segmentNode = iterator.next();
+            String text = segmentNode.get("text").asText();
+            
+            if (text.trim().length()==0){
+                // ignore empty text nodes
+                continue;
+            }
+            
             if (segmentNode.get("start")==null){
                 throw new IOException("Error in format.");
             }
@@ -111,7 +118,6 @@ public class WhisperJSONConverter {
             }
             
             
-            String text = segmentNode.get("text").asText();
             String temperature = segmentNode.get("temperature").asText();
             String avg_logprob = segmentNode.get("avg_logprob").asText();
             String compression_ratio = segmentNode.get("compression_ratio").asText();
