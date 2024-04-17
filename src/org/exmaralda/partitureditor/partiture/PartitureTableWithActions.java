@@ -1175,7 +1175,7 @@ public class PartitureTableWithActions extends PartitureTable
     }
     
     // 05-04-2023: new for #458
-    Border editorBorder = BorderFactory.createMatteBorder(1, 2, 0, 0, Color.BLUE);    
+    Border editorBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLUE);    
     
     /** called when editing of an event starts
      * @param evt */

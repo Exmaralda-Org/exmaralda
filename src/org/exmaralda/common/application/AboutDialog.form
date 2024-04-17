@@ -130,7 +130,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="citationLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Please cite the following references when working with EXMARaLDA: &lt;br/&gt;&lt;br/&gt;&#xa;&lt;b&gt;Schmidt, Thomas / W&#xf6;rner, Kai (2023)&lt;/b&gt;: &lt;br/&gt;&#xa;&lt;i&gt;EXMARaLDA.&lt;/i&gt; Software. [https://exmaralda.org] &lt;br/&gt; &lt;br/&gt;&#xa;&lt;b&gt;Schmidt, Thomas / W&#xf6;rner, Kai (2014)&lt;/b&gt;: &lt;i&gt;EXMARaLDA&lt;/i&gt;. &lt;br/&gt; &#xa;In: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): &lt;br/&gt;&#xa;Handbook on Corpus Phonology, pp. 402-419. Oxford University Press.&lt;br/&gt;&#xa;&lt;/html&gt;"/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Please cite the following references when working with EXMARaLDA: &lt;br/&gt;&lt;br/&gt;&#xa;&lt;b&gt;Schmidt, Thomas / W&#xf6;rner, Kai (2024)&lt;/b&gt;: &lt;br/&gt;&#xa;&lt;i&gt;EXMARaLDA.&lt;/i&gt; Software. [https://exmaralda.org] &lt;br/&gt; &lt;br/&gt;&#xa;&lt;b&gt;Schmidt, Thomas / W&#xf6;rner, Kai (2014)&lt;/b&gt;: &lt;i&gt;EXMARaLDA&lt;/i&gt;. &lt;br/&gt; &#xa;In: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): &lt;br/&gt;&#xa;Handbook on Corpus Phonology, pp. 402-419. Oxford University Press.&lt;br/&gt;&#xa;&lt;/html&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="copyCitationButton">

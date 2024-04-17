@@ -126,7 +126,7 @@ public class AboutDialog extends javax.swing.JDialog {
 
         citationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Citation"));
 
-        citationLabel.setText("<html>\nPlease cite the following references when working with EXMARaLDA: <br/><br/>\n<b>Schmidt, Thomas / Wörner, Kai (2023)</b>: <br/>\n<i>EXMARaLDA.</i> Software. [https://exmaralda.org] <br/> <br/>\n<b>Schmidt, Thomas / Wörner, Kai (2014)</b>: <i>EXMARaLDA</i>. <br/> \nIn: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): <br/>\nHandbook on Corpus Phonology, pp. 402-419. Oxford University Press.<br/>\n</html>");
+        citationLabel.setText("<html>\nPlease cite the following references when working with EXMARaLDA: <br/><br/>\n<b>Schmidt, Thomas / Wörner, Kai (2024)</b>: <br/>\n<i>EXMARaLDA.</i> Software. [https://exmaralda.org] <br/> <br/>\n<b>Schmidt, Thomas / Wörner, Kai (2014)</b>: <i>EXMARaLDA</i>. <br/> \nIn: Jacques Durand, Ulrike Gut, Gjert Kristoffersen (eds.): <br/>\nHandbook on Corpus Phonology, pp. 402-419. Oxford University Press.<br/>\n</html>");
         citationPanel.add(citationLabel);
 
         copyCitationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif"))); // NOI18N
