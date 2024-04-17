@@ -65,7 +65,8 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
             table.commitEdit(true);
             System.out.println("DeepLAction!");
             deepL();
-            table.transcriptionChanged = false;
+            // changed for #465
+            table.transcriptionChanged = true;
             table.clearUndo();
             table.clearSearchResult();
             table.setFrameEndPosition(-2);
