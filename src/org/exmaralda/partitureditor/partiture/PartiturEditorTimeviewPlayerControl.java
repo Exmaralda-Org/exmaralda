@@ -210,6 +210,7 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
     }
     
     public void whisperSuccess(String result, int editRow, int editCol, double startTime, double endTime) throws IOException, JexmaraldaException{
+        result = postProcessWhisperResult(result);
         if ((editRow>=0) && (editCol>=0)){
             partitur.getModel().setTableDataItem(result, editRow, editCol);
         } else {
@@ -244,6 +245,16 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
             }
         }        
         whisperASRAction.setEnabled(true);        
+    }
+
+    private String postProcessWhisperResult(String result) {
+        // ": "We're really good friends on top of everything."
+        if (result.startsWith("\": \"") && result.trim().endsWith("\"")){
+            String better = result.substring(4);
+            better = better.substring(0, better.lastIndexOf("\""));
+            return better;
+        }
+        return result;
     }
     
     
