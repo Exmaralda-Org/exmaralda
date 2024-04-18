@@ -1707,8 +1707,10 @@ public final class ApplicationControl implements  ListSelectionListener,
                 
                 // make new IDs for words
                 // changed 16-06-2022 : issue #322
+                // changed again 18-04-2024 : issue #322
                 //List l = XPath.selectNodes(modifiedContributionElement, "descendant::w");
-                List l = XPath.selectNodes(modifiedContributionElement, "descendant::*[@id]");
+                //List l = XPath.selectNodes(modifiedContributionElement, "descendant::*[@id]");
+                List l = XPath.selectNodes(modifiedContributionElement, "descendant::w|descendant::pause|descendant::breathe|descendant::non-phonological");
                 int i=1;
                 HashSet<String> newIDs = new HashSet<>();
                 for (Object o : l){
