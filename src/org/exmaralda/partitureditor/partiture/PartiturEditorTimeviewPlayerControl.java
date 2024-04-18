@@ -22,6 +22,7 @@ import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
 import org.exmaralda.partitureditor.sound.AVFPlayer;
 import org.exmaralda.partitureditor.sound.JDSPlayer;
 import org.exmaralda.partitureditor.sound.JavaFXPlayer;
@@ -230,15 +231,21 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
                 String tli2 = partitur.getModel().getTranscription().getBody().getCommonTimeline().insertTimelineItemWithTime(endTime, 0.01);
                 partitur.getModel().fireColumnLabelsChanged();*/
                 int[] indices = partitur.getModel().insertInterval(startTime, endTime, 0.01);
-                String tli1 = partitur.getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemAt(indices[0]).getID();
-                String tli2 = partitur.getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemAt(indices[1]).getID();
+                int col1 = indices[0];
+                int col2 = indices[1];
+                TimelineItem tli1 = partitur.getModel().getTimelineItem(col1);
+                TimelineItem tli2 = partitur.getModel().getTimelineItem(col2); 
+                //String tli1 = partitur.getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemAt(indices[0]).getID();
+                //String tli2 = partitur.getModel().getTranscription().getBody().getCommonTimeline().getTimelineItemAt(indices[1]).getID();
                 
-                Event newEvent = new Event(tli1, tli2, text);
+                Event newEvent = new Event(tli1.getID(), tli2.getID(), text);
                 tier.addEvent(newEvent);
                 int row = partitur.getModel().getTranscription().getBody().lookupID(tier.getID());                
-                partitur.getModel().fireEventAdded(row, partitur.getModel().getColumnNumber(tli1), partitur.getModel().getColumnNumber(tli2));
+                partitur.getModel().fireEventAdded(row, col1, col2);
+                partitur.getModel().fireFormatReset();
+                //partitur.getModel().fireEventAdded(row, partitur.getModel().getColumnNumber(tli1), partitur.getModel().getColumnNumber(tli2));
                 
-                partitur.setNewSelection(row, partitur.getModel().getColumnNumber(tli1), true);
+                partitur.setNewSelection(row, col1, true);
                 
                 partitur.transcriptionChanged = true;
                 

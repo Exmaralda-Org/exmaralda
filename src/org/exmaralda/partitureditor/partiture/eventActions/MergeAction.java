@@ -49,7 +49,7 @@ public class MergeAction extends org.exmaralda.partitureditor.partiture.Abstract
             // end undo information
         }
         table.getModel().merge(table.selectionStartRow, table.selectionEndRow, table.selectionStartCol, table.selectionEndCol);
-        table.status("Merged events [" + table.selectionStartRow + "-" + table.selectionEndRow +  "/" + table.selectionStartCol + "-" + table.selectionEndCol + "]");
+        table.status("Merged events [" + table.selectionStartRow + "-" + table.selectionEndRow +  "/" + startCol + "-" + endCol + "]");
         
         int r = table.selectionStartRow;
         int c = table.selectionStartCol;
