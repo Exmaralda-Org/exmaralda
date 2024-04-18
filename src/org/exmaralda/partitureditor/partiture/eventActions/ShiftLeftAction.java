@@ -7,12 +7,8 @@
 package org.exmaralda.partitureditor.partiture.eventActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -21,13 +17,16 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class ShiftLeftAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ShiftLeftAction */
+    /** Creates a new instance of ShiftLeftAction
+     * @param t
+     * @param icon */
     public ShiftLeftAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Shift characters to the left", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control shift L"));            
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("shiftLeftAction!");
         shiftLeft();
@@ -49,6 +48,8 @@ public class ShiftLeftAction extends org.exmaralda.partitureditor.partiture.Abst
             //// end undo information
         }
         table.getModel().shiftLeft(table.selectionStartRow, table.selectionStartCol, pos);
+        table.status("Shifted characters left [" + table.selectionStartRow +  "/" + table.selectionStartCol + "]");
+        
     }
     
     

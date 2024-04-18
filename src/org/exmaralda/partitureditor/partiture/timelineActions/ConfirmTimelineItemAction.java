@@ -31,6 +31,8 @@ public class ConfirmTimelineItemAction extends org.exmaralda.partitureditor.part
     
     private void confirmTimelineItem(){
         table.getModel().confirmTimelineItems(table.selectionStartCol, table.selectionEndCol);
+        table.status("Confirmed timeline items [" + table.selectionStartCol + "-" + table.selectionEndCol + "]");
+        
     }
     
     

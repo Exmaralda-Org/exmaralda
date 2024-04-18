@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.partiture.*;
 
 /**
@@ -30,7 +31,11 @@ public class RemoveInterpolatedTimesAction extends org.exmaralda.partitureditor.
     
     
     private void removeInterpolatedTimes(){
-        table.getModel().removeInterpolatedTimes();
+        int count = table.getModel().removeInterpolatedTimes();
+        String message = "Removed " + Integer.toString(count) + " interpolated time values.";
+        JOptionPane.showMessageDialog(table, message, "Remove interpolated times", JOptionPane.INFORMATION_MESSAGE);
+        table.status(message);
+        
     }
     
     

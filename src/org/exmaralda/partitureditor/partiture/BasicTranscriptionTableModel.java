@@ -642,7 +642,9 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
     
     /** moves the corresponding cell one column to the right
-        or: shifts the corresponding event backwards in the timeline */
+        or: shifts the corresponding event backwards in the timeline
+     * @param row
+     * @param col */
     public void moveLeft (int row, int col){
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
@@ -968,38 +970,45 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
 
     
     /** throws out all timeline items whose absolute
-     *  time values do not fit into a monotonously increasing sequence */
-    public void makeTimelineConsistent(){
-        transcription.getBody().getCommonTimeline().makeConsistent();
-        fireColumnLabelsChanged();        
+     *  time values do not fit into a monotonously increasing sequence
+     * @return  */
+    public int makeTimelineConsistent(){
+        int count = transcription.getBody().getCommonTimeline().makeConsistent();
+        fireColumnLabelsChanged();    
+        return count;
     }
     
     /** removes all timeline items that are neither the start nor the
-     * end point of any event */
-    public void removeUnusedTimelineItems(){
+     * end point of any event
+     * @return  */
+    public int removeUnusedTimelineItems(){
         int before = transcription.getBody().getCommonTimeline().getNumberOfTimelineItems();
-        transcription.getBody().removeUnusedTimelineItems();
+        int countRemoved = transcription.getBody().removeUnusedTimelineItems();
         int after = transcription.getBody().getCommonTimeline().getNumberOfTimelineItems();
         if (before!=after){
             fireDataReset();
         }
+        return countRemoved;
     }
 
-    public void removeUnusedTimelineItems(int selectionStartCol, int selectionEndCol) {
+    public int removeUnusedTimelineItems(int selectionStartCol, int selectionEndCol) {
         int before = transcription.getBody().getCommonTimeline().getNumberOfTimelineItems();
-        transcription.getBody().removeUnusedTimelineItems(selectionStartCol, selectionEndCol);
+        int countRemoved = transcription.getBody().removeUnusedTimelineItems(selectionStartCol, selectionEndCol);
         int after = transcription.getBody().getCommonTimeline().getNumberOfTimelineItems();
         if (before!=after){
             fireDataReset();
         }
+        return countRemoved;
     }
 
     
     /** removes the absolute time values that have come about
-     *  by interpolation */
-    public void removeInterpolatedTimes(){
-        transcription.getBody().getCommonTimeline().removeInterpolatedTimes();
+     *  by interpolation
+     * @return  */
+    public int removeInterpolatedTimes(){
+        int count = transcription.getBody().getCommonTimeline().removeInterpolatedTimes();
         fireColumnLabelsChanged();
+        return count;
     }
     
     public void removeTimes() {
@@ -1021,7 +1030,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     public void editBookmark(int col, TimelineItem newTimelineItem){
         TimelineItem tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col);
         tli.setBookmark(newTimelineItem.getBookmark());
-        fireColumnLabelChanged(col);        
+        fireColumnLabelChanged(col);                
     }
 
     public void confirmTimelineItems(int startCol, int endCol) {
@@ -1038,10 +1047,12 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         completeTimeline(true);
     }
 
-    /** interpolates absolute time values on the timeline */
-    public void completeTimeline(boolean linear){
-        transcription.getBody().getCommonTimeline().completeTimes(linear, getTranscription());
+    /** interpolates absolute time values on the timeline
+     * @param linear */
+    public int completeTimeline(boolean linear){
+        int countChanged = transcription.getBody().getCommonTimeline().completeTimes(linear, getTranscription());
         fireColumnLabelsChanged();
+        return countChanged;
     }
 
     public void anchorTimeline(double first, double last) {
@@ -1066,7 +1077,8 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     }
     
     
-    /** removes the gap at the specified position */
+    /** removes the gap at the specified position
+     * @param col */
     public void removeGap(int col){
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
         transcription.getBody().removeGap(tli);
@@ -1074,15 +1086,18 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         fireSelectionChanged(0,col,false);
     }
     
-    /** removes all gaps from the transcription */
-    public void removeAllGaps(){
-        transcription.getBody().removeAllGaps();
+    /** removes all gaps from the transcription
+     * @return  */
+    public int removeAllGaps(){
+        int count = transcription.getBody().removeAllGaps();
         fireDataReset();
+        return count;
     }
 
-    public void smoothTimeline(double threshhold) {
-        transcription.getBody().smoothTimeline(threshhold);
+    public int smoothTimeline(double threshhold) {
+        int count = transcription.getBody().smoothTimeline(threshhold);
         fireDataReset();
+        return count;
     }
 
 

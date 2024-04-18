@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
@@ -35,7 +36,11 @@ public class RemoveAllGapsAction extends org.exmaralda.partitureditor.partiture.
             undoInfo.memorizeTranscription(table);
             table.addUndo(undoInfo);
         }
-        table.getModel().removeAllGaps();
+        int count = table.getModel().removeAllGaps();
+        String message = "Removed " + Integer.toString(count) + " gaps.";
+        JOptionPane.showMessageDialog(table, message, "Remove all gaps", JOptionPane.INFORMATION_MESSAGE);
+        table.status(message);
+        
     }
     
     

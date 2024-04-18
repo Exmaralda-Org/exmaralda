@@ -9,7 +9,6 @@ package org.exmaralda.partitureditor.partiture.tierActions;
 import org.exmaralda.partitureditor.jexmaraldaswing.EditTierDialog;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -18,11 +17,14 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class EditTierAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of EditTierAction */
+    /** Creates a new instance of EditTierAction
+     * @param t
+     * @param icon */
     public EditTierAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Tier properties...", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("editTierAction!");
         table.commitEdit(true);
@@ -42,6 +44,7 @@ public class EditTierAction extends org.exmaralda.partitureditor.partiture.Abstr
                 table.addUndo(undoInfo);
             }
             table.getModel().editTier(table.selectionStartRow, dialog.getTier());
+            table.status("Tier " + dialog.getTier().getDisplayName() + " edited");
         }
     }
     

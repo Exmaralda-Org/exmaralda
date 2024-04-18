@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
@@ -38,10 +39,13 @@ public class RemoveUnusedTimelineItemsAction extends org.exmaralda.partituredito
         }
         int r = table.selectionStartRow;
         int c = table.selectionStartCol;
-        table.getModel().removeUnusedTimelineItems();
+        int countRemoved = table.getModel().removeUnusedTimelineItems();
+        String message = "Removed " + Integer.toString(countRemoved) + " unused timeline items.";
+        JOptionPane.showMessageDialog(table, message, "Remove unused timeline items", JOptionPane.INFORMATION_MESSAGE);
         if ((r<table.getNumRows()) && (c<table.getNumColumns())){
             table.setNewSelection(r, c, false);
         }
+        table.status(message);
 
     }
     

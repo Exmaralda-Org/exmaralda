@@ -15,11 +15,13 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class RemoveEmptyEventsAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of RemoveEmptyEventsAction */
+    /** Creates a new instance of RemoveEmptyEventsAction
+     * @param t */
     public RemoveEmptyEventsAction(PartitureTableWithActions t) {
         super("Remove empty events", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("removeEmptyEventsAction!");
         table.commitEdit(true);
@@ -33,6 +35,8 @@ public class RemoveEmptyEventsAction extends org.exmaralda.partitureditor.partit
             table.addUndo(undoInfo);
         }
         table.getModel().removeEmptyEvents(table.selectionStartRow);
+        table.status("Empty events in tiers " + table.selectionStartRow + " removed");
+        
     }
     
 }

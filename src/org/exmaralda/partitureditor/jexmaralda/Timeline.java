@@ -321,9 +321,9 @@ public class Timeline extends Vector {
     /** kicks out all absolute time values that would make the timeline non-consistent 
     * returns true if changes to the timeline had to be made, false otherwise
      * @return  */
-    public boolean makeConsistent(){
+    public int makeConsistent(){
+        int count = 0;
         double minTime = 0;
-        boolean result=false;        
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
             double currentTime=getTimelineItemAt(pos).getTime();
             if (currentTime>=0){
@@ -331,11 +331,13 @@ public class Timeline extends Vector {
                 // changed again 22-06-2009: don't mistreat the first TLI!
                 if ((pos>0) && (currentTime<=minTime)) {
                     getTimelineItemAt(pos).setTime(-0.1);
-                    result=true;
-                } else {minTime = currentTime;}
+                    count++;
+                } else {
+                    minTime = currentTime;
+                }
             }
         }
-        return result;
+        return count;
     }
 
     public String[] getInconsistencies(){
@@ -383,17 +385,19 @@ public class Timeline extends Vector {
     
     /** interpolates the timeline
      * @param linear
-     * @param bt */
-    public void completeTimes(boolean linear, BasicTranscription bt){
-        completeTimes(linear, bt, true);
+     * @param bt
+     * @return  */
+    public int completeTimes(boolean linear, BasicTranscription bt){
+        return completeTimes(linear, bt, true);
     }
     /** interpolates the timeline
      * @param linear
      * @param bt
-     * @param reinterpolate */
-    public void completeTimes(boolean linear, BasicTranscription bt, boolean reinterpolate){
+     * @param reinterpolate
+     * @return  */
+    public int completeTimes(boolean linear, BasicTranscription bt, boolean reinterpolate){
 
-        if (getNumberOfTimelineItems()==0) {return;}
+        if (getNumberOfTimelineItems()==0) {return 0;}
         
         // added 12-03-2015: force linear if we do not have tiers of type t
         linear = linear || bt.getBody().getTiersOfType("t").length==0;
@@ -407,6 +411,8 @@ public class Timeline extends Vector {
         // Make sure the absolute times are consistent
         makeConsistent();
 
+        
+        int countChanged = 0;
         // Make sure first and last timeline items have absolute time value
         TimelineItem tli = getTimelineItemAt(getNumberOfTimelineItems()-1);
         if (tli.getTime()<0){
@@ -420,11 +426,13 @@ public class Timeline extends Vector {
                 tli.setTime(time);
                 tli.setType("intp");
             }
+            countChanged++;
         }
         tli = getTimelineItemAt(0);
         if (tli.getTime()<0){
             tli.setTime(0);
             tli.setType("intp");
+            countChanged++;
         }
         
         
@@ -440,6 +448,7 @@ public class Timeline extends Vector {
                     TimelineItem tli2 = getTimelineItemAt(lookupID(id2));
                     tli.setTime(tli1.getTime()+(tli2.getTime()-tli1.getTime())/(lookupID(id2)-lookupID(id1)));
                     tli.setType("intp");
+                    countChanged++;                    
                 }
             }
         } else {
@@ -497,6 +506,8 @@ public class Timeline extends Vector {
                         double time = tli1.getTime()+(tli2.getTime()-tli1.getTime())*proportion;
                         tli.setTime(time);
                         tli.setType("intp");
+                        countChanged++;
+                        
                     }
 
                     //System.out.println("=================");
@@ -505,17 +516,22 @@ public class Timeline extends Vector {
                 }
             }
         }
+        
+        return countChanged;
     }
     
 
     /** remove absolute times that have been interpolated */
-    public void removeInterpolatedTimes(){
+    public int removeInterpolatedTimes(){
+        int count=0;
         for (int pos=0; pos<getNumberOfTimelineItems(); pos++){
             TimelineItem tli = getTimelineItemAt(pos);
             if ((tli.getTime()>=0) && (tli.getType().equals("intp"))){
                 tli.setTime(-1);
+                count++;
             }
         }
+        return count;
     }
     
     public void removeTimes() {

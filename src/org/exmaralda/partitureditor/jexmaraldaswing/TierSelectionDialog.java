@@ -10,7 +10,6 @@ import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import javax.swing.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
 
 /**
  *

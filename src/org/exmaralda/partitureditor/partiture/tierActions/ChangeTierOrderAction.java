@@ -8,8 +8,6 @@ package org.exmaralda.partitureditor.partiture.tierActions;
 
 import org.exmaralda.partitureditor.jexmaraldaswing.EditTierOrderDialog;
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -18,11 +16,14 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class ChangeTierOrderAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ChangeTierOrderAction */
+    /** Creates a new instance of ChangeTierOrderAction
+     * @param t
+     * @param icon */
     public ChangeTierOrderAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Change tier order...", icon, t);     
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("changeTierOrderAction!");
         table.commitEdit(true);
@@ -40,6 +41,7 @@ public class ChangeTierOrderAction extends org.exmaralda.partitureditor.partitur
                 table.addUndo(undoInfo);
             }
             table.getModel().changeTierOrder(dialog.getTierOrder());
+            table.status("Tier order changed");
         }
     }
     

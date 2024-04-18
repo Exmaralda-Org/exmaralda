@@ -37,6 +37,8 @@ public class RemoveGapAction extends org.exmaralda.partitureditor.partiture.Abst
             table.addUndo(undoInfo);
         }
         table.getModel().removeGap(table.selectionStartCol);
+        table.status("Removed gap [" + table.selectionStartCol + "]");
+        
     }
     
     

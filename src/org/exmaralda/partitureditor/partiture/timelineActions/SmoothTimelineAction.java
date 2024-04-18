@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.partiture.*;
 
 /**
@@ -39,7 +40,11 @@ public class SmoothTimelineAction extends org.exmaralda.partitureditor.partiture
     }
     
     private void smoothTimeline(double threshhold){
-        table.getModel().smoothTimeline(threshhold);
+        int count = table.getModel().smoothTimeline(threshhold);
+        String message = "Smoothed " + Integer.toString(count) + " timeline items.";
+        JOptionPane.showMessageDialog(table, message, "Smooth timeline", JOptionPane.INFORMATION_MESSAGE);
+        table.status(message);
+        
     }
     
     

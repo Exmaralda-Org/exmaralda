@@ -49,6 +49,8 @@ public class MergeAction extends org.exmaralda.partitureditor.partiture.Abstract
             // end undo information
         }
         table.getModel().merge(table.selectionStartRow, table.selectionEndRow, table.selectionStartCol, table.selectionEndCol);
+        table.status("Merged events [" + table.selectionStartRow + "-" + table.selectionEndRow +  "/" + table.selectionStartCol + "-" + table.selectionEndCol + "]");
+        
         int r = table.selectionStartRow;
         int c = table.selectionStartCol;
         if (table.AUTO_REMOVE_UNUSED_TLI){

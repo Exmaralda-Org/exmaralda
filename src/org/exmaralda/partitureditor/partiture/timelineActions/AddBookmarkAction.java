@@ -39,6 +39,8 @@ public class AddBookmarkAction extends org.exmaralda.partitureditor.partiture.Ab
         dialog.requestFocus();
         if (dialog.change){
             table.getModel().editBookmark(table.selectionStartCol, dialog.getTimelineItem());
+            String bookmark = dialog.getTimelineItem().getBookmark();
+            table.status("Added bookmark '" + bookmark + "'");
         }
     }
     

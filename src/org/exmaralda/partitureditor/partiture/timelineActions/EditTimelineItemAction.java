@@ -48,6 +48,8 @@ public class EditTimelineItemAction extends org.exmaralda.partitureditor.partitu
             }
             TimelineItem tli = dialog.getTimelineItem();
             table.getModel().editTimelineItem(table.selectionStartCol, tli );
+            table.status("Edited timeline item [" + table.selectionStartCol + "]");
+            
             PraatPanelEvent ppe = new PraatPanelEvent(tli.getTime());
             table.mediaPanelDialog.setStartTime(tli.getTime());
         }

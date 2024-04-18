@@ -61,6 +61,7 @@ public class DeleteEventAction extends org.exmaralda.partitureditor.partiture.Ab
             // end undo information
         }
         table.getModel().deleteEvent(table.selectionStartRow, table.selectionStartCol);
+        table.status("Deleted event [" + table.selectionStartRow + "/" + table.selectionStartCol + "]");
     }
         
 }

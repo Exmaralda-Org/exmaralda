@@ -14,7 +14,9 @@ import org.exmaralda.partitureditor.partiture.*;
  */
 public class ShowAllTiersAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ShowAllTiersAction */
+    /** Creates a new instance of ShowAllTiersAction
+     * @param t
+     * @param icon */
     public ShowAllTiersAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Show all tiers", icon, t); 
     }
@@ -27,6 +29,7 @@ public class ShowAllTiersAction extends org.exmaralda.partitureditor.partiture.A
         for (int i=0; i<table.getModel().getTranscription().getBody().getNumberOfTiers(); i++){
             table.getModel().getTranscription().getBody().getTierAt(i).getUDTierInformation().removeAttribute("exmaralda:hidden");
         }
+        table.status("All tiers showing");
     }
     
     

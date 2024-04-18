@@ -18,13 +18,19 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class ExtendLeftAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ExtendLeftAction */
+    /** Creates a new instance of ExtendLeftAction
+     * @param t
+     * @param icon */
     public ExtendLeftAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Extend to the left", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control shift LEFT"));            
     }
     
-        
+    /**
+     *
+     * @param actionEvent
+     */
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("extendLeftAction!");
         extendLeft();
@@ -45,6 +51,7 @@ public class ExtendLeftAction extends org.exmaralda.partitureditor.partiture.Abs
             // end undo information
         }
         table.getModel().extendLeft(table.selectionStartRow, table.selectionStartCol);
+        table.status("Left extended event [" + table.selectionStartRow + "/" + table.selectionStartCol + "]");        
     }
     
     

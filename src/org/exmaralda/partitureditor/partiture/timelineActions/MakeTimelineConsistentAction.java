@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
@@ -35,7 +36,11 @@ public class MakeTimelineConsistentAction extends org.exmaralda.partitureditor.p
             undoInfo.memorizeTranscription(table);
             table.addUndo(undoInfo);
         }
-        table.getModel().makeTimelineConsistent();
+        int count = table.getModel().makeTimelineConsistent();
+        String message = "Removed absolute time for " + Integer.toString(count) + " inconcistent timeline items.";
+        JOptionPane.showMessageDialog(table, message, "Make timeline consistent", JOptionPane.INFORMATION_MESSAGE);
+        table.status(message);
+        
     }
     
     

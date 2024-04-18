@@ -49,6 +49,7 @@ public class RemoveTierAction extends org.exmaralda.partitureditor.partiture.Abs
             if (!aSeriesOfRowsIsSelected){
                 int row = table.selectionStartRow;
                 table.getModel().removeTier(row);
+                table.status("Tier " + row + " removed");
                 if (row <= table.getFrameEndPosition()){
                     table.setFrameEndPosition(table.getFrameEndPosition()-1);
                     table.getModel().fireRowLabelsFormatChanged();                    
@@ -58,11 +59,13 @@ public class RemoveTierAction extends org.exmaralda.partitureditor.partiture.Abs
                 int firstRow = table.selectionStartRow;
                 int lastRow = table.selectionEndRow;
                 table.getModel().removeTiers(firstRow, lastRow);
+                table.status("Tiers " + firstRow + "-" + lastRow + " removed");
                 if (firstRow <= table.getFrameEndPosition()){
                     table.setFrameEndPosition(table.getFrameEndPosition() - (Math.min(table.getFrameEndPosition(), lastRow) - firstRow +1));
                     table.getModel().fireRowLabelsFormatChanged();                                        
                 }
             }
+            
         }
     }
     

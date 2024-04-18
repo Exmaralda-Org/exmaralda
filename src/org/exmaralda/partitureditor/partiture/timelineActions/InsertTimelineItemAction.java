@@ -37,6 +37,8 @@ public class InsertTimelineItemAction extends org.exmaralda.partitureditor.parti
             table.addUndo(undoInfo);
         }
         table.getModel().insertTimelineItem(table.selectionStartCol);
+        table.status("Confirmed timeline items [" + table.selectionStartCol + "]");
+        
     }
     
     

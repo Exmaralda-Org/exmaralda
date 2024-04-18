@@ -39,6 +39,7 @@ public class AnchorTimelineAction extends org.exmaralda.partitureditor.partiture
             double first = 0.0;
             double last = table.player.getTotalLength();
             table.getModel().anchorTimeline(first, last);
+            table.status("Timeline anchored. ");
         }
     }
     

@@ -7,12 +7,8 @@
 package org.exmaralda.partitureditor.partiture.eventActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -21,13 +17,16 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class MoveLeftAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of MoveLeftAction */
+    /** Creates a new instance of MoveLeftAction
+     * @param t
+     * @param icon */
     public MoveLeftAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Move to the left", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control LEFT"));            
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("moveLeftAction!");
         moveLeft();
@@ -48,6 +47,8 @@ public class MoveLeftAction extends org.exmaralda.partitureditor.partiture.Abstr
             // end undo information
         }
         table.getModel().moveLeft(table.selectionStartRow, table.selectionStartCol);
+        table.status("Moved event left [" + table.selectionStartRow +  "/" + table.selectionStartCol + "]");
+        
     }
     
     

@@ -61,6 +61,8 @@ public class DoubleSplitAction extends org.exmaralda.partitureditor.partiture.Ab
             // end undo information
         }
         table.getModel().doubleSplit(table.selectionStartRow, table.selectionStartCol, pos1, pos2);
+        table.status("Double split event [" + table.selectionStartRow + "/" + table.selectionStartCol + "]");
+        
     }
     
     

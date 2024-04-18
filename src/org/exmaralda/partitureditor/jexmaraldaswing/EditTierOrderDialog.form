@@ -61,6 +61,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="upButton">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-up.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Up"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[107, 27]"/>
@@ -81,6 +84,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="downButton">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-down.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Down"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[107, 27]"/>

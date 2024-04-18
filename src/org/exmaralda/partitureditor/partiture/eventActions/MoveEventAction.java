@@ -65,7 +65,9 @@ public class MoveEventAction extends org.exmaralda.partitureditor.partiture.Abst
             // end undo information
         }
         try {  
-            table.getModel().moveToTier(sourceTierID, targetTierID, startID, endID);            
+            table.getModel().moveToTier(sourceTierID, targetTierID, startID, endID); 
+            table.status("Moved event [" + table.selectionStartRow + "/" + table.selectionStartCol + "] from " + sourceTierID + " to " + targetTierID);
+            
         } catch (JexmaraldaException ex) {
             Logger.getLogger(MoveEventAction.class.getName()).log(Level.SEVERE, null, ex);
         }

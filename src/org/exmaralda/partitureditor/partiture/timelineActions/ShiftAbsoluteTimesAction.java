@@ -52,10 +52,12 @@ public class ShiftAbsoluteTimesAction extends org.exmaralda.partitureditor.parti
             if (dialog.getModificationType()==ModifyAbsoluteTimesDialog.SHIFT_MODIFICATION){
                 double shift = dialog.getShiftAmount();
                 System.out.println("Shifting by: " + shift);
-                table.getModel().shiftTimes(shift);             
+                table.getModel().shiftTimes(shift);     
+                table.status("Shifted times by " + Double.toString(shift));                
             } else if (dialog.getModificationType()==ModifyAbsoluteTimesDialog.SCALE_MODIFICATION){
                 double scale = dialog.getScaleAmount();
                 table.getModel().scaleTimes(scale);             
+                table.status("Scaled times by " + Double.toString(scale));                
             }
         }
     }

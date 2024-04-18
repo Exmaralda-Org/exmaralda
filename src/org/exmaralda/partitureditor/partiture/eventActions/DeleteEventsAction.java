@@ -71,6 +71,8 @@ public class DeleteEventsAction extends org.exmaralda.partitureditor.partiture.A
                         table.selectionStartCol,
                         table.selectionEndCol
                 );
+        table.status("Deleted events [" + table.selectionStartRow + "-" + table.selectionEndRow +  "/" + table.selectionStartCol + "-" + table.selectionEndCol + "]");
+        
     }
         
 }

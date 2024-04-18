@@ -7,9 +7,9 @@
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import org.exmaralda.common.helpers.Internationalizer;
-import org.exmaralda.partitureditor.jexmaralda.TierDescriptions;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import java.util.*;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
 /**
  *
  * @author  Thomas
@@ -17,8 +17,9 @@ import java.util.*;
  */
 public class EditTierOrderDialog extends JEscapeDialog {
 
-    private final javax.swing.DefaultListModel tiersListModel;
+    private final TierListModel tiersListModel;
     private String[] tierOrder;
+    BasicTranscription copyBT;
     
     /** Creates new form EditTierOrderDialog
      * @param parent
@@ -26,14 +27,17 @@ public class EditTierOrderDialog extends JEscapeDialog {
      * @param transcription */
     public EditTierOrderDialog(java.awt.Frame parent,boolean modal, BasicTranscription transcription) {
         super (parent, modal);
-        tierOrder = transcription.getBody().getAllTierIDs();
+        copyBT = transcription.makeCopy();
+        tiersListModel = new TierListModel(copyBT);
+        /*tierOrder = transcription.getBody().getAllTierIDs();
         tiersListModel = new javax.swing.DefaultListModel();
         TierDescriptions td = new TierDescriptions(transcription);
         for (String tierOrder1 : tierOrder) {
             String listEntry = tierOrder1 + " (" + td.getTierDescriptionForTierID(tierOrder1) + ")";
             tiersListModel.addElement(listEntry);
-        }
+        }*/
         initComponents ();
+        tiersList.setCellRenderer(new TierListCellRenderer(copyBT));
         this.getRootPane().setDefaultButton(okButton);
         pack ();
         Internationalizer.internationalizeDialogToolTips(this);
@@ -85,6 +89,7 @@ public class EditTierOrderDialog extends JEscapeDialog {
 
         moveButtonPanel.setLayout(new javax.swing.BoxLayout(moveButtonPanel, javax.swing.BoxLayout.Y_AXIS));
 
+        upButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-up.png"))); // NOI18N
         upButton.setText("Up");
         upButton.setMaximumSize(new java.awt.Dimension(107, 27));
         upButton.setMinimumSize(new java.awt.Dimension(107, 27));
@@ -96,6 +101,7 @@ public class EditTierOrderDialog extends JEscapeDialog {
         });
         moveButtonPanel.add(upButton);
 
+        downButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-down.png"))); // NOI18N
         downButton.setText("Down");
         downButton.setMaximumSize(new java.awt.Dimension(107, 27));
         downButton.setMinimumSize(new java.awt.Dimension(107, 27));
@@ -145,8 +151,10 @@ public class EditTierOrderDialog extends JEscapeDialog {
 // Add your handling code here:
     Vector result = new Vector();
     for (int pos=0; pos<tiersListModel.getSize(); pos++){
-        String value = (String)tiersListModel.elementAt(pos);
-        String tierID = value.substring(0, value.indexOf(" ("));
+        //String value = (String)tiersListModel.elementAt(pos);
+        Tier tier = (Tier)tiersListModel.getElementAt(pos);
+        //String tierID = value.substring(0, value.indexOf(" ("));
+        String tierID = tier.getID();
         result.addElement(tierID);
     }
     tierOrder = StringUtilities.stringVectorToArray(result);
@@ -158,20 +166,24 @@ public class EditTierOrderDialog extends JEscapeDialog {
   private void downButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
 // Add your handling code here:
     int selection = tiersList.getSelectedIndex();
-    String value = (String)tiersListModel.getElementAt(selection);
-    String valueBelow = (String)tiersListModel.getElementAt(selection+1);
-    tiersListModel.setElementAt(value, selection+1);
-    tiersListModel.setElementAt(valueBelow, selection);
+    tiersListModel.swap(selection, selection+1);
+    
+    
+    //String value = (String)tiersListModel.getElementAt(selection);
+    //String valueBelow = (String)tiersListModel.getElementAt(selection+1);
+    //tiersListModel.setElementAt(value, selection+1);
+    //tiersListModel.setElementAt(valueBelow, selection);
     tiersList.setSelectedIndex(selection+1);    
   }//GEN-LAST:event_downButtonActionPerformed
 
   private void upButtonActionPerformed (java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
 // Add your handling code here:
     int selection = tiersList.getSelectedIndex();
-    String value = (String)tiersListModel.getElementAt(selection);
-    String valueAbove = (String)tiersListModel.getElementAt(selection-1);
-    tiersListModel.setElementAt(value, selection-1);
-    tiersListModel.setElementAt(valueAbove, selection);
+    tiersListModel.swap(selection-1, selection);
+    //String value = (String)tiersListModel.getElementAt(selection);
+    //String valueAbove = (String)tiersListModel.getElementAt(selection-1);
+    //tiersListModel.setElementAt(value, selection-1);
+    //tiersListModel.setElementAt(valueAbove, selection);
     tiersList.setSelectedIndex(selection-1);
   }//GEN-LAST:event_upButtonActionPerformed
 
@@ -218,7 +230,8 @@ public class EditTierOrderDialog extends JEscapeDialog {
        java.awt.Dimension dialogSize = this.getPreferredSize();
        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
        this.setLocation(screenSize.width/2 - dialogSize.width/2, screenSize.height/2 - dialogSize.height/2);
-       show();
+       //show();
+       setVisible(true);
        return change;
     }
 }

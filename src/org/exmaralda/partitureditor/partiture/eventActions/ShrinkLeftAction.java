@@ -7,12 +7,8 @@
 package org.exmaralda.partitureditor.partiture.eventActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -21,13 +17,16 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class ShrinkLeftAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ShrinkLeftAction */
+    /** Creates a new instance of ShrinkLeftAction
+     * @param t
+     * @param icon */
     public ShrinkLeftAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Shrink on the left", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control alt LEFT"));            
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("shrinkLeftAction!");
         shrinkLeft();
@@ -48,6 +47,8 @@ public class ShrinkLeftAction extends org.exmaralda.partitureditor.partiture.Abs
             // end undo information
         }
         table.getModel().shrinkLeft(table.selectionStartRow, table.selectionStartCol);
+        table.status("Shrunk event left [" + table.selectionStartRow +  "/" + table.selectionStartCol + "]");
+        
     }
     
     

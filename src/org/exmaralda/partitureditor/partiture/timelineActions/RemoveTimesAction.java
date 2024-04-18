@@ -34,6 +34,8 @@ public class RemoveTimesAction extends org.exmaralda.partitureditor.partiture.Ab
     
     private void removeTimes(){
         table.getModel().removeTimes();
+        table.status("Removed absolute times from timeline");
+        
     }
     
     

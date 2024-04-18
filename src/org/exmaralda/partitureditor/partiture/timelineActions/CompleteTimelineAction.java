@@ -7,6 +7,7 @@
 package org.exmaralda.partitureditor.partiture.timelineActions;
 
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaraldaswing.*;
@@ -38,7 +39,11 @@ public class CompleteTimelineAction extends org.exmaralda.partitureditor.partitu
         dialog.setVisible(true);
         if (dialog.approved){
             boolean linear = dialog.getLinearInterpolation();
-            table.getModel().completeTimeline(linear);
+            int countChanged = table.getModel().completeTimeline(linear);
+            String message = "Calculated absolute times for " + Integer.toString(countChanged) + " timeline items.";
+            JOptionPane.showMessageDialog(table, message, "Interpolate timeline", JOptionPane.INFORMATION_MESSAGE);
+            table.status(message);
+            
         }
     }
     

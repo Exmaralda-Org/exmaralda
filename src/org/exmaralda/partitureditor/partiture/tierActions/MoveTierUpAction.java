@@ -16,12 +16,15 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class MoveTierUpAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of MoveTierUpAction */
+    /** Creates a new instance of MoveTierUpAction
+     * @param t
+     * @param icon */
     public MoveTierUpAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Move tier upwards", icon, t);        
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control UP"));
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("moveTierUpAction!");
         table.commitEdit(true);
@@ -37,6 +40,7 @@ public class MoveTierUpAction extends org.exmaralda.partitureditor.partiture.Abs
             table.addUndo(undoInfo);
         }
         table.getModel().moveTierUp(table.selectionStartRow);
+        table.status("Tier " + table.selectionStartRow + " moved up");
     }
     
     

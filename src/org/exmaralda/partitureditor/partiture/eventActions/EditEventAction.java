@@ -48,6 +48,7 @@ public class EditEventAction extends org.exmaralda.partitureditor.partiture.Abst
         boolean done = table.getModel().editEvent(table.selectionStartRow, table.selectionStartCol, table.parent, table.generalPurposeFontName);
         if (done){
             table.addUndo(undoEditCellInfo);
+            table.status("Edited event [" + table.selectionStartRow + "/" + table.selectionStartCol + "]");            
         }
     }
     

@@ -7,12 +7,8 @@
 package org.exmaralda.partitureditor.partiture.eventActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -21,13 +17,16 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class MoveRightAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of MoveRightAction */
+    /** Creates a new instance of MoveRightAction
+     * @param t
+     * @param icon */
     public MoveRightAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Move to the right", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control RIGHT"));            
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("moveRightAction!");
         moveRight();
@@ -47,6 +46,8 @@ public class MoveRightAction extends org.exmaralda.partitureditor.partiture.Abst
             // end undo information
         }
         table.getModel().moveRight(table.selectionStartRow, table.selectionStartCol);
+        table.status("Moved event right [" + table.selectionStartRow +  "/" + table.selectionStartCol + "]");
+        
     }
     
     

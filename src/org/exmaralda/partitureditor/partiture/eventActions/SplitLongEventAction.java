@@ -62,7 +62,9 @@ public class SplitLongEventAction extends org.exmaralda.partitureditor.partiture
                     // end undo information
                 }
                 int splitPosition = dialog.getCursorPosition();
-                table.getModel().split(table.selectionStartRow, table.selectionStartCol, splitPosition, table.parent);                
+                table.getModel().split(table.selectionStartRow, table.selectionStartCol, splitPosition, table.parent);     
+                table.status("Split long event [" + table.selectionStartRow + "/" + table.selectionStartCol + "]");
+                
             }
 
         } catch (JexmaraldaException ex) {

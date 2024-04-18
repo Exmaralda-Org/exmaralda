@@ -35,6 +35,7 @@ public class HideTierAction extends org.exmaralda.partitureditor.partiture.Abstr
             table.hideRow(row);            
         }
         table.getModel().fireAreaChanged(0, table.getModel().getNumColumns());
+        table.status("Tiers [" + table.selectionStartRow + "-" + table.selectionEndRow + "] hidden"); 
     }
     
     

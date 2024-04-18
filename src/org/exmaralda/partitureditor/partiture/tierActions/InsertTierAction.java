@@ -21,7 +21,9 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class InsertTierAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of InsertTierAction */
+    /** Creates a new instance of InsertTierAction
+     * @param t
+     * @param icon */
     public InsertTierAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Insert tier...", icon, t);
         this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_I, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));                        
@@ -61,6 +63,7 @@ public class InsertTierAction extends org.exmaralda.partitureditor.partiture.Abs
                 }
             }
             table.getModel().insertTier(newTier, row);
+            table.status("Inserted tier: " + newTier.getDisplayName());            
             if (row<=table.getFrameEndPosition()){
                 table.setFrameEndPosition(table.getFrameEndPosition()+1);
             }

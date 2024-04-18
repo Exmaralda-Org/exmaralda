@@ -34,7 +34,7 @@ public class BookmarksDialog extends javax.swing.JDialog {
         super(parent, modal);
         timeline = tl;
         initComponents();
-        allBookmarks = tl.getAllBookmarks();
+        allBookmarks = timeline.getAllBookmarks();
         for (int pos=0; pos<allBookmarks.size(); pos++){
             TimelineItem tli = (TimelineItem)(allBookmarks.elementAt(pos));
             bookmarksListModel.addElement(tli.getBookmark());
@@ -71,7 +71,7 @@ public class BookmarksDialog extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        gotoButton.setText("Go to...");
+        gotoButton.setText("Go to selected bookmark");
         gotoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gotoButtonActionPerformed(evt);

@@ -40,28 +40,42 @@ public class InterpolationDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
         characterRadioButton = new javax.swing.JRadioButton();
+        characterLabel = new javax.swing.JLabel();
         linearRadioButton = new javax.swing.JRadioButton();
-        jPanel2 = new javax.swing.JPanel();
+        lienarLabel = new javax.swing.JLabel();
+        okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Interpolation");
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         buttonGroup.add(characterRadioButton);
         characterRadioButton.setSelected(true);
         characterRadioButton.setText("Character Count Interpolation (clever)");
-        jPanel1.add(characterRadioButton);
+        mainPanel.add(characterRadioButton);
+
+        characterLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        characterLabel.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        characterLabel.setText("<html>Calculates missing time values <br/>on the basis of character counts in the corresponding events</htlm>");
+        characterLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 20, 1));
+        mainPanel.add(characterLabel);
 
         buttonGroup.add(linearRadioButton);
         linearRadioButton.setText("Linear Interpolation (fast)");
-        jPanel1.add(linearRadioButton);
+        mainPanel.add(linearRadioButton);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        lienarLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lienarLabel.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        lienarLabel.setText("<html>Calculates missing time values <br/>through linear interpolation between existing time values</htlm>");
+        lienarLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 20, 1));
+        mainPanel.add(lienarLabel);
+
+        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         okButton.setText("OK");
         okButton.setMaximumSize(new java.awt.Dimension(65, 23));
@@ -72,7 +86,7 @@ public class InterpolationDialog extends javax.swing.JDialog {
                 okButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(okButton);
+        okCancelPanel.add(okButton);
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,9 +94,9 @@ public class InterpolationDialog extends javax.swing.JDialog {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(cancelButton);
+        okCancelPanel.add(cancelButton);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(okCancelPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -116,11 +130,13 @@ public class InterpolationDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel characterLabel;
     private javax.swing.JRadioButton characterRadioButton;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lienarLabel;
     private javax.swing.JRadioButton linearRadioButton;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JButton okButton;
+    private javax.swing.JPanel okCancelPanel;
     // End of variables declaration//GEN-END:variables
 
 }

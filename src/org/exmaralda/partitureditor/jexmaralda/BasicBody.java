@@ -42,12 +42,18 @@ public class BasicBody extends AbstractTierBody {
         return result;
     }
 
-    public void smoothTimeline() {
-        smoothTimeline(0.1);
+    public int smoothTimeline() {
+        return smoothTimeline(0.1);
     }
 
-    public void smoothTimeline(double THRESHHOLD) {
+    /**
+     *
+     * @param THRESHHOLD
+     * @return
+     */
+    public int smoothTimeline(double THRESHHOLD) {
         //double THRESHHOLD = 0.1;
+        int count=0;
         Map<String,String> tliMappings = new HashMap<>();
         Timeline tl = getCommonTimeline();
         tl.completeTimes();
@@ -95,7 +101,10 @@ public class BasicBody extends AbstractTierBody {
         }
         for (String id : tliMappings.keySet()){
             tl.removeTimelineItemWithID(id);
+            count++;            
         }
+        
+        return count;
     }
 
 
@@ -338,7 +347,9 @@ public class BasicBody extends AbstractTierBody {
         return StringUtilities.stringVectorToArray(result);
     }
     
-    /** reorders the tiers according to the order in the specified array */
+    /** reorders the tiers according to the order in the specified array
+     * @param tierIDs
+     * @throws org.exmaralda.partitureditor.jexmaralda.JexmaraldaException */
     public void reorderTiers(String[] tierIDs) throws JexmaraldaException{
         BasicBody result = new BasicBody();
         result.setCommonTimeline(this.getCommonTimeline());
@@ -358,7 +369,7 @@ public class BasicBody extends AbstractTierBody {
      * @return
      */
     public String getLastUsedTimelineItem() {
-        HashSet<String> allEndIDs = new HashSet<String>();
+        HashSet<String> allEndIDs = new HashSet<>();
         for (int pos=0; pos<getNumberOfTiers(); pos++){
             Tier tier = getTierAt(pos);
             allEndIDs.addAll(Arrays.asList(tier.getAllEndIDs()));
@@ -374,14 +385,15 @@ public class BasicBody extends AbstractTierBody {
     }
 
     // added 05-11-2009
-    public void removeUnusedTimelineItems(int selectionStartCol, int selectionEndCol) {
+    public int removeUnusedTimelineItems(int selectionStartCol, int selectionEndCol) {
+        int countRemoved = 0;
         String[] allIDs = {""};
         for (int pos=0; pos<this.getNumberOfTiers(); pos++){
             Tier tier = getTierAt(pos);
             allIDs = StringUtilities.mergeStringArrays(allIDs, tier.getAllStartIDs());
             allIDs = StringUtilities.mergeStringArrays(allIDs, tier.getAllEndIDs());
         }
-        Hashtable usedIDs = new Hashtable();
+        Map<String, String> usedIDs = new HashMap<>();
         for (String allID : allIDs) {
             usedIDs.put(allID, "");
         }
@@ -389,24 +401,28 @@ public class BasicBody extends AbstractTierBody {
             String id = getCommonTimeline().getTimelineItemAt(pos).getID();
             if (!usedIDs.containsKey(id)){
                 getCommonTimeline().removeTimelineItemAt(pos);
+                countRemoved++;
                 pos--;
             }
         }
         if (getCommonTimeline().getNumberOfTimelineItems()==0){
             getCommonTimeline().addTimelineItem();
         }
+        return countRemoved;
     }
 
     /** removes all timeline items that are not the start or end point of
-     * at least one event */
-    public void removeUnusedTimelineItems(){
+     * at least one event
+     * @return  */
+    public int removeUnusedTimelineItems(){
+        int countRemoved = 0;
         String[] allIDs = {""};
         for (int pos=0; pos<this.getNumberOfTiers(); pos++){            
             Tier tier = getTierAt(pos);
             allIDs = StringUtilities.mergeStringArrays(allIDs, tier.getAllStartIDs());
             allIDs = StringUtilities.mergeStringArrays(allIDs, tier.getAllEndIDs());
         }
-        Hashtable usedIDs = new Hashtable();
+        Map<String, String> usedIDs = new HashMap<>();
         for (String allID : allIDs) {
             usedIDs.put(allID, "");
         }
@@ -417,12 +433,14 @@ public class BasicBody extends AbstractTierBody {
             if (!usedIDs.containsKey(id)){
                 //System.out.println("Removing tli " + id);
                 getCommonTimeline().removeTimelineItemAt(pos);
+                countRemoved++;
                 pos--;
             }
         }     
         if (getCommonTimeline().getNumberOfTimelineItems()==0){
             getCommonTimeline().addTimelineItem();
         }
+        return countRemoved;
     }
     
     /** returns true if [a) the specified timeline item does not have an absolute time assigned] and
@@ -460,14 +478,17 @@ public class BasicBody extends AbstractTierBody {
     }
     
     /** remove all gaps in the transcription */
-    public void removeAllGaps(){
+    public int removeAllGaps(){
+        int count=0;
         for (int pos=0; pos<getCommonTimeline().getNumberOfTimelineItems(); pos++){
             TimelineItem tli = getCommonTimeline().getTimelineItemAt(pos);
             if (isGap(tli.getID())) {
                 removeGap(tli.getID());
                 pos--;
+                count++;
             }
         }
+        return count;
     }
     
     public boolean areAllEventsOneIntervalLong(Vector eventsThatAreNot){

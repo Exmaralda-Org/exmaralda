@@ -965,6 +965,7 @@ public class PartitureTableWithActions extends PartitureTable
             editor.replaceSelection(pauseText);
             // new 17-11-2017: issue #122
             editor.requestFocus();
+            status("Inserted pause [" + selectionStartRow + "/" + selectionStartCol + "]");                    
         } else {
             // 1. find the nn tier
             Tier nn_t = null;
@@ -1024,7 +1025,9 @@ public class PartitureTableWithActions extends PartitureTable
             nn_t.addEvent(newEvent);
             int row = getModel().getTranscription().getBody().lookupID(nn_t.getID());
 
-            getModel().fireEventAdded(row, col1, col2);            
+            getModel().fireEventAdded(row, col1, col2);  
+            status("Inserted pause in new event [" + row + "/" + col1 + "]");                    
+            
             makeColumnVisible(col1+1);
             setNewSelection(row, col1, true);
             

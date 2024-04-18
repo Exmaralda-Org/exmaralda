@@ -7,12 +7,8 @@
 package org.exmaralda.partitureditor.partiture.eventActions;
 
 import org.exmaralda.partitureditor.partiture.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
-import org.exmaralda.partitureditor.jexmaraldaswing.*;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
 
 /**
@@ -21,13 +17,16 @@ import org.exmaralda.partitureditor.partiture.undo.UndoInformation;
  */
 public class SplitAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of SplitAction */
+    /** Creates a new instance of SplitAction
+     * @param t
+     * @param icon */
     public SplitAction(PartitureTableWithActions t, javax.swing.ImageIcon icon) {
         super("Split", icon, t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control 2"));            
     }
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("splitAction!");
         split();
@@ -49,6 +48,8 @@ public class SplitAction extends org.exmaralda.partitureditor.partiture.Abstract
             // end undo information
         }
         table.getModel().split(table.selectionStartRow, table.selectionStartCol, pos, table.parent);
+        table.status("Split event [" + table.selectionStartRow + "/" + table.selectionStartCol + "]");
+        
     }
     
     
