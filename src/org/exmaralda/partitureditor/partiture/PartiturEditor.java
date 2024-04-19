@@ -743,8 +743,28 @@ public class PartiturEditor extends javax.swing.JFrame
         controller.processAssignments(generalAssignments, partiturTimelinePanel, JComponent.WHEN_IN_FOCUSED_WINDOW);
 
     }
+    
+    // 19-04-2024 -- new for #469
+    public Object[] rememberSelection(){
+        double rememberStartTime = timelineViewer.getSelectionStartTime();
+        double rememberEndTime = timelineViewer.getSelectionEndTime();
+        boolean rememberAttached = timelineViewer.selectionAttached;
+        Object[] result = {rememberStartTime, rememberEndTime, rememberAttached};
+        return result;        
+    }
+    
+    public void restoreSelection(Object[] rememberedValues){
+        double rememberStartTime = (double) rememberedValues[0];
+        if (rememberStartTime>=0.0){
+            double rememberEndTime = (double) rememberedValues[1];
+            boolean rememberAttached = (boolean) rememberedValues[2];
+            //System.out.println("Restoring selection: " + rememberStartTime + " " + rememberEndTime);
+            timelineViewer.setSelectionInterval(rememberStartTime, rememberEndTime, rememberAttached, true);
+        }
+        
+    }
 
-    public boolean setupMedia() {
+    public boolean setupMedia() {        
         System.out.println("(2) PartiturEditor: setupMedia");
         BasicTranscription bt = table.getModel().getTranscription();
         String rf = bt.getHead().getMetaInformation().getReferencedFile();
@@ -834,6 +854,7 @@ public class PartiturEditor extends javax.swing.JFrame
             partiturTimelinePanel.setTimeViewVisible(false);
             menuBar.viewMenu.setProportionButtonsVisible(false);
         }
+        
         return true;
     }
 

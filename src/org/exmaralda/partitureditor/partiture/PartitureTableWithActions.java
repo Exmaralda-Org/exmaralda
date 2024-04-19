@@ -2309,14 +2309,20 @@ public class PartitureTableWithActions extends PartitureTable
      * @return  */
     public boolean setupMedia(){
         
+        // 19-04-2024, new for #469            
+        Object[] rememberedSelection = null;
+        
         System.out.println("(1a) PartiturEditor: setupMedia");
         // the partitur editor must handle the setup of the time viewer
         // this is awkward but I'm only human
         if (getTopLevelAncestor() instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)(getTopLevelAncestor());
+            // 19-04-2024, new for #469            
+            rememberedSelection = pe.rememberSelection();
+            
             boolean goon = pe.setupMedia();
             if (!goon){     
-                if (player instanceof AbstractPlayer) ((AbstractPlayer)player).reset();
+                if (player instanceof AbstractPlayer abstractPlayer) abstractPlayer.reset();
                 mediaPanelDialog.reset();
                 protectLastColumn = false;
                 // added 19-01-2010
@@ -2372,6 +2378,10 @@ public class PartitureTableWithActions extends PartitureTable
                     getModel().protectLastColumn = true;
                     getModel().anchorTimeline(0.0, player.getTotalLength());
                 }
+                if (success && getTopLevelAncestor() instanceof PartiturEditor){
+                    PartiturEditor pe = (PartiturEditor)(getTopLevelAncestor());
+                    pe.restoreSelection(rememberedSelection);
+                }
                 return success;
             } catch (IOException ex) {
                 //ex.printStackTrace();
@@ -2389,7 +2399,7 @@ public class PartitureTableWithActions extends PartitureTable
                     editRecordingsAction.actionPerformed(null);
                     return true;
                 } else {
-                    if (player instanceof AbstractPlayer) ((AbstractPlayer)player).reset();
+                    if (player instanceof AbstractPlayer abstractPlayer) abstractPlayer.reset();
                     mediaPanelDialog.reset();
                     protectLastColumn = false;
                     // added 19-01-2010
@@ -2400,14 +2410,18 @@ public class PartitureTableWithActions extends PartitureTable
                 }
             }
         } else {
-            if (player instanceof AbstractPlayer) ((AbstractPlayer)player).reset();
+            if (player instanceof AbstractPlayer abstractPlayer) abstractPlayer.reset();
             protectLastColumn = false;
             // added 19-01-2010
             getModel().protectLastColumn = false;
 
             getModel().fireColumnLabelsChanged();
             return mediaPanelDialog.reset();
-        }           
+        }        
+        
+        
+        
+        
 
 
     }
@@ -2534,7 +2548,7 @@ public class PartitureTableWithActions extends PartitureTable
             int index = event.getIndex();
             String path = getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles().elementAt(index);
             getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles().removeElementAt(index);
-            getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles().insertElementAt(path, 0);
+            getModel().getTranscription().getHead().getMetaInformation().getReferencedFiles().insertElementAt(path, 0);           
             setupMedia();
             return;
         }

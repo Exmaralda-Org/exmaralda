@@ -61,7 +61,8 @@ public class AbstractEventTier extends AbstractTier {
     // ********** GET AND SET METHODS *************
     // ********************************************
 
-    /** returns the user defined information of this tier */
+    /** returns the user defined information of this tier
+     * @return  */
     public UDInformationHashtable getUDTierInformation(){
         return udTierInformation;
     }
@@ -79,25 +80,30 @@ public class AbstractEventTier extends AbstractTier {
     
     // ********** ADDING, REMOVING, GETTING INFO ABOUT EVENTS **************
     
-    /** returns number of fragments contained in tier */
+    /** returns number of fragments contained in tier
+     * @return  */
     public int getNumberOfEvents(){
         return size();
     }
 
-    /** adds event e */
+    /** adds event e
+     * @param e */
     public void addEvent(Event e) {
         addElement(e);
         positions.put(e.getStart(), getNumberOfEvents()-1);
     }
    
-    /** checks if the tier contains at least one event with start id id */
+    /** checks if the tier contains at least one event with start id id
+     * @param id
+     * @return  */
     public boolean containsEventAtStartPoint(String id){
-        if (positions.containsKey(id)) { return true; }
-        return false;
+        return positions.containsKey(id);
     }    
 
    
-    /** returns event at position */
+    /** returns event at position
+     * @param position
+     * @return  */
     public Event getEventAt(int position){
         return (Event)elementAt(position);
     }
