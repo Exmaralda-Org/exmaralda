@@ -352,91 +352,94 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
             String leftHalf = oldEvent.getDescription().substring(0,textPos);
             String rightHalf = oldEvent.getDescription().substring(textPos);
             int span = getCellSpan(row,col);
-            if (span==1){
-                String tli3 = oldEvent.getEnd();
-                double time1 = transcription.getBody().getCommonTimeline().getTimelineItemWithID(tli).getTime();
-                double time2 = transcription.getBody().getCommonTimeline().getTimelineItemWithID(tli3).getTime();
-
-                // added 05-MARCH-2009 to make sure that no timepoints with identical times are created
-                if ((INTERPOLATE_WHEN_SPLITTING) &&  ((time1>=0) && (time2>=0)) && ((time2-time1)<=0.1)){
-                    String text = "Cannot split: Resulting events would be shorter than 0.05 seconds.";
-                    JOptionPane.showMessageDialog(parent, text);
-                    return;
-                }
-
-                String tli2 = transcription.getBody().getCommonTimeline().insertTimelineItemAfter(tli);
-                
-                // added 19-JUNE-2008
-                if (this.INTERPOLATE_WHEN_SPLITTING){
-                    if ((time1>=0) && (time2>=0)){
-                        TimelineItem newTLI = transcription.getBody().getCommonTimeline().getTimelineItemWithID(tli2);
-                        newTLI.setType("intp");
-                        // changed 05-MARCH-2009 to make sure that no timepoints with identical times are created
-                        // changed 01-JULY-2010 to avoid division by zero
-                        double splitRatio = 0.5;
-                        if (oldEvent.getDescription().length()>0){
-                            splitRatio = ((double)textPos/oldEvent.getDescription().length());
-                        }
-                        double newTime = time1 + (time2-time1)*0.5;
-                        if (time2-time1>0.1){
-                            newTime = Math.max(time1+0.051, Math.min(time2-0.051, time1 + (time2-time1)*splitRatio));
-                        }
-                        newTLI.setTime(newTime);
+            switch (span) {
+                case 1:
+                    {
+                        String tli3 = oldEvent.getEnd();
+                        double time1 = transcription.getBody().getCommonTimeline().getTimelineItemWithID(tli).getTime();
+                        double time2 = transcription.getBody().getCommonTimeline().getTimelineItemWithID(tli3).getTime();
+                        // added 05-MARCH-2009 to make sure that no timepoints with identical times are created
+                        if ((INTERPOLATE_WHEN_SPLITTING) &&  ((time1>=0) && (time2>=0)) && ((time2-time1)<=0.1)){
+                            String text = "Cannot split: Resulting events would be shorter than 0.05 seconds.";
+                            JOptionPane.showMessageDialog(parent, text);
+                            return;
+                        }       String tli2 = transcription.getBody().getCommonTimeline().insertTimelineItemAfter(tli);
+                        // added 19-JUNE-2008
+                        if (this.INTERPOLATE_WHEN_SPLITTING){
+                            if ((time1>=0) && (time2>=0)){
+                                TimelineItem newTLI = transcription.getBody().getCommonTimeline().getTimelineItemWithID(tli2);
+                                newTLI.setType("intp");
+                                // changed 05-MARCH-2009 to make sure that no timepoints with identical times are created
+                                // changed 01-JULY-2010 to avoid division by zero
+                                double splitRatio = 0.5;
+                                if (oldEvent.getDescription().length()>0){
+                                    splitRatio = ((double)textPos/oldEvent.getDescription().length());
+                                }
+                                double newTime = time1 + (time2-time1)*0.5;
+                                if (time2-time1>0.1){
+                                    newTime = Math.max(time1+0.051, Math.min(time2-0.051, time1 + (time2-time1)*splitRatio));
+                                }
+                                newTLI.setTime(newTime);
+                            }
+                        }       tier.removeEventAtStartPoint(tli);
+                        Event leftEvent = new Event(tli,tli2,leftHalf, oldEvent.getMedium(), oldEvent.getURL());
+                        Event rightEvent = new Event (tli2, tli3, rightHalf, oldEvent.getMedium(), oldEvent.getURL());
+                        tier.addEvent(leftEvent);
+                        tier.addEvent(rightEvent);
+                        fireColumnsAdded(col+1,col+1);
+                        fireValueChanged(row,col);
+                        fireCellSpanChanged(row,col);
+                        fireCellFormatChanged(row,col+1);
+                        fireValueChanged(row,col+1);
+                        fireCellSpanChanged(row,col+1);
+                        fireAreaChanged(lower(col),upper(col+1));
+                        fireSelectionChanged(row,col,true);
+                        break;
                     }
-                }
-                
-                tier.removeEventAtStartPoint(tli);
-                Event leftEvent = new Event(tli,tli2,leftHalf, oldEvent.getMedium(), oldEvent.getURL());
-                Event rightEvent = new Event (tli2, tli3, rightHalf, oldEvent.getMedium(), oldEvent.getURL());
-                tier.addEvent(leftEvent);
-                tier.addEvent(rightEvent);
-                fireColumnsAdded(col+1,col+1);
-                fireValueChanged(row,col);
-                fireCellSpanChanged(row,col);
-                fireCellFormatChanged(row,col+1);
-                fireValueChanged(row,col+1);
-                fireCellSpanChanged(row,col+1);
-                fireAreaChanged(lower(col),upper(col+1));
-                fireSelectionChanged(row,col,true);                                
+                case 2:
+                    {
+                        String tli2 = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+1).getID();
+                        String tli3 = oldEvent.getEnd();
+                        tier.removeEventAtStartPoint(tli);
+                        Event leftEvent = new Event(tli,tli2,leftHalf,oldEvent.getMedium(), oldEvent.getURL());
+                        Event rightEvent = new Event (tli2, tli3, rightHalf,oldEvent.getMedium(), oldEvent.getURL());
+                        tier.addEvent(leftEvent);
+                        tier.addEvent(rightEvent);
+                        fireCellSpanChanged(row,col);
+                        fireValueChanged(row,col);
+                        fireValueChanged(row,col+1);
+                        fireCellSpanChanged(row,col+1);
+                        fireCellFormatChanged(row,col+1);
+                        fireAreaChanged(lower(col),upper(col+1));                                
+                        fireSelectionChanged(row,col,true);
+                        break;
+                    }
+                default:
+                    {
+                        // i.e. cell span > 2
+                        String tli3 = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+span).getID();
+                        Timeline timeline = transcription.getBody().getCommonTimeline().getTimelineBetween(tli,tli3);
+                        ChooseTimelineItemDialog dialog = new ChooseTimelineItemDialog(parent, true, timeline, col+1);
+                        dialog.setLocationRelativeTo(parent);
+                        if (dialog.chooseTimelineItem()){
+                            String tli2 = dialog.getTimelineItem().getID();
+                            tier.removeEventAtStartPoint(tli);
+                            Event leftEvent = new Event(tli,tli2,leftHalf,oldEvent.getMedium(), oldEvent.getURL());
+                            Event rightEvent = new Event (tli2, tli3, rightHalf,oldEvent.getMedium(), oldEvent.getURL());
+                            tier.addEvent(leftEvent);
+                            tier.addEvent(rightEvent);
+                            fireValueChanged(row,col);
+                            fireCellSpanChanged(row,col);
+                            int span2 = getCellSpan(row,col);
+                            fireCellFormatChanged(row,col+span2);
+                            fireValueChanged(row,col+span2);
+                            fireCellSpanChanged(row,col+span2);
+                            fireAreaChanged(lower(col),upper(col+span2));
+                            fireSelectionChanged(row,col,true);
+                        } // end if
+                        break;
+                    } // end else
             }
-            else if (span==2){
-                String tli2 = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+1).getID();
-                String tli3 = oldEvent.getEnd();                   
-                tier.removeEventAtStartPoint(tli);
-                Event leftEvent = new Event(tli,tli2,leftHalf,oldEvent.getMedium(), oldEvent.getURL());
-                Event rightEvent = new Event (tli2, tli3, rightHalf,oldEvent.getMedium(), oldEvent.getURL());
-                tier.addEvent(leftEvent);
-                tier.addEvent(rightEvent);
-                fireCellSpanChanged(row,col);
-                fireValueChanged(row,col);
-                fireValueChanged(row,col+1);
-                fireCellSpanChanged(row,col+1);
-                fireCellFormatChanged(row,col+1);
-                fireAreaChanged(lower(col),upper(col+1));
-                fireSelectionChanged(row,col,true);
-            }
-            else { // i.e. cell span > 2
-                String tli3 = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+span).getID();
-                Timeline timeline = transcription.getBody().getCommonTimeline().getTimelineBetween(tli,tli3);
-                ChooseTimelineItemDialog dialog = new ChooseTimelineItemDialog(parent, true, timeline, col+1);
-                dialog.setLocationRelativeTo(parent);
-                if (dialog.chooseTimelineItem()){
-                    String tli2 = dialog.getTimelineItem().getID();
-                    tier.removeEventAtStartPoint(tli);
-                    Event leftEvent = new Event(tli,tli2,leftHalf,oldEvent.getMedium(), oldEvent.getURL());
-                    Event rightEvent = new Event (tli2, tli3, rightHalf,oldEvent.getMedium(), oldEvent.getURL());
-                    tier.addEvent(leftEvent);
-                    tier.addEvent(rightEvent);
-                    fireValueChanged(row,col);
-                    fireCellSpanChanged(row,col);
-                    int span2 = getCellSpan(row,col);
-                    fireCellFormatChanged(row,col+span2);
-                    fireValueChanged(row,col+span2);
-                    fireCellSpanChanged(row,col+span2);
-                    fireAreaChanged(lower(col),upper(col+span2));
-                    fireSelectionChanged(row,col,true);                    
-                } // end if
-            } // end else
         } catch (JexmaraldaException je){je.printStackTrace();}        
     }
 
@@ -641,6 +644,48 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         } catch (JexmaraldaException je){je.printStackTrace();}         // should never get here           
     }
     
+
+    // new for #467
+    public void moveRight(int startRow, int endRow, int startCol, int endCol){
+        for (int row=startRow; row<=endRow; row++){
+            Tier tier = transcription.getBody().getTierAt(row);
+            for (int col=endCol; col>=startCol; col--){
+                String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
+                try {
+                    if (!(tier.containsEventAtStartPoint(tli))) continue;
+                    Event oldEvent = tier.getEventAtStartPoint(tli);
+                    if (transcription.getBody().getCommonTimeline().isLastTimelineItem(oldEvent.getEnd())){
+                        transcription.getBody().getCommonTimeline().addTimelineItem();
+                        fireColumnsAdded(getNumColumns()-1, getNumColumns()-1);
+                    }
+                    int span = getCellSpan(row,col);
+
+                    String newStart = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+1).getID();
+                    String newEnd = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+span+1).getID();
+                    Event newEvent = new Event(newStart, newEnd, oldEvent.getDescription(),oldEvent.getMedium(), oldEvent.getURL());
+
+                    tier.removeEventAtStartPoint(tli);  // remove old element
+                    fireValueChanged(row,col);
+                    fireCellFormatChanged(row,col);
+                    fireCellSpanChanged(row,col);
+
+                    tier.addEvent(newEvent);    // add new element
+                    fireValueChanged(row,col+1); 
+                    fireCellFormatChanged(row,col+1);
+                    fireCellSpanChanged(row,col+1);
+
+                    fireAreaChanged(lower(col),upper(col+span));
+
+                    fireSelectionChanged(row,col+1,false);
+                } catch (JexmaraldaException je){je.printStackTrace();}         // should never get here           
+            }
+        }
+    }
+
+
+
+
+
     /** moves the corresponding cell one column to the right
         or: shifts the corresponding event backwards in the timeline
      * @param row
@@ -675,6 +720,51 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         } catch (JexmaraldaException je){}            // should never get here        
     }
     
+    /** moves the corresponding cell one column to the right
+        or: shifts the corresponding event backwards in the timeline
+     * @param startRow
+     * @param endRow
+     * @param startCol
+     * @param endCol */
+    // new for #467
+    public void moveLeft (int startRow, int endRow, int startCol, int endCol){
+        for (int row=startRow; row<=endRow; row++){
+            Tier tier = transcription.getBody().getTierAt(row);
+            for (int col=startCol; col<=endCol; col++){
+                String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
+                if (!(tier.containsEventAtStartPoint(tli))) continue;
+                 try {
+                    Event oldEvent = tier.getEventAtStartPoint(tli);
+                    if (col==0){
+                        transcription.getBody().getCommonTimeline().insertTimelineItemBefore(oldEvent.getStart());
+                        fireColumnsAdded(0,0);
+                        col++;
+                    }
+                    int span = getCellSpan(row,col);
+                    String newStart = transcription.getBody().getCommonTimeline().getTimelineItemAt(col-1).getID();
+                    String newEnd = transcription.getBody().getCommonTimeline().getTimelineItemAt(col+span-1).getID();
+                    Event newEvent = new Event(newStart, newEnd, oldEvent.getDescription(),oldEvent.getMedium(), oldEvent.getURL());
+
+                    tier.removeEventAtStartPoint(tli);  // remove old element
+                    fireValueChanged(row,col);
+                    fireCellFormatChanged(row,col);
+                    fireCellSpanChanged(row,col);
+
+                    tier.addEvent(newEvent);    // add new event
+                    fireValueChanged(row,col-1);                    
+                    fireCellFormatChanged(row,col-1);
+                    fireCellSpanChanged(row,col-1);
+
+                    fireAreaChanged(lower(col-1),upper(col+span));
+                    fireSelectionChanged(row,col-1,false);
+                } catch (JexmaraldaException je){}            // should never get here        
+            }
+        }
+    }
+
+
+
+
     /** extends the cell one column to the right
         or: lets the corresponding event end one timepoint later*/
     public void extendRight(int row, int col){

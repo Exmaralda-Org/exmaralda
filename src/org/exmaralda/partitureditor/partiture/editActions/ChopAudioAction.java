@@ -15,11 +15,13 @@ import org.exmaralda.partitureditor.sound.*;
  */
 public class ChopAudioAction extends org.exmaralda.partitureditor.partiture.AbstractTableAction {
     
-    /** Creates a new instance of ChopAudioAction */
+    /** Creates a new instance of ChopAudioAction
+     * @param t */
     public ChopAudioAction(PartitureTableWithActions t) {
         super("Chop audio...", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("ChopAudioAction");
         table.commitEdit(true);

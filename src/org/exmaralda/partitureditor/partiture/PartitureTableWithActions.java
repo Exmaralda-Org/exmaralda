@@ -64,15 +64,11 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.helpers.Internationalizer;
 import org.exmaralda.folker.application.ApplicationControl;
-import org.exmaralda.folker.data.EventListTranscription;
-import org.exmaralda.folker.data.TranscriptionHead;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
-import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
 import org.exmaralda.partitureditor.partiture.legacyActions.LegacyExportAction;
@@ -1113,7 +1109,7 @@ public class PartitureTableWithActions extends PartitureTable
     /** called when the user selection changes
      * @param evt */
     @Override
-    public void select(final com.klg.jclass.table.JCSelectEvent evt) {
+    public void select(final com.klg.jclass.table.JCSelectEvent evt) {        
         //System.out.println("select");
         selectionStartRow = Math.min(evt.getStartRow(), evt.getEndRow());
         selectionEndRow = Math.max(evt.getStartRow(), evt.getEndRow());
@@ -1290,10 +1286,10 @@ public class PartitureTableWithActions extends PartitureTable
      * takes care of enabling and diabling actions according
      * to the new selection */
     private void selectionChanged(){
-        //System.out.println("selectionChanged");
-        //System.out.println("Row= " + selectionStartRow);
-        //System.out.println("Col= " + selectionStartCol);
-        //System.out.println("**************");
+        /*System.out.println("selectionChanged");
+        System.out.println("Row= " + selectionStartRow);
+        System.out.println("Col= " + selectionStartCol);
+        System.out.println("**************");*/
         if ((selectionStartCol>=getModel().getNumColumns()) || (selectionStartRow>=getModel().getNumRows())){
             // illegal value, can happen during data reset, don't understand---
             return;
@@ -1313,6 +1309,22 @@ public class PartitureTableWithActions extends PartitureTable
         boolean columnIsGap = (aWholeColumnIsSelected && getModel().isGap(selectionStartCol));
         boolean isTranscriptionTypeTier = ((selectionStartRow>=0) && (selectionStartRow == selectionEndRow) && getModel().getTier(selectionStartRow).getType().equals("t"));
         aRectangleOfEventsIsSelected = (selectionStartCol!=selectionEndCol) && (selectionStartRow>=0) && (selectionEndRow>=0) && (selectionStartCol>=0);
+        
+        // new 19-04-2024: issue #467
+        boolean cellsToTheLeftAreFree = true;
+        if ((selectionStartRow>=0) && (!(aSingleCellIsSelected))){
+            for (int row=selectionStartRow; row<=selectionEndRow; row++){
+                cellsToTheLeftAreFree = cellsToTheLeftAreFree && getModel().cellToTheLeftIsFree(row, selectionStartCol);
+            }
+        }
+        boolean cellsToTheRightAreFree = true;
+        if ((selectionStartRow>=0) && (!(aSingleCellIsSelected))){
+            for (int row=selectionStartRow; row<=selectionEndRow; row++){
+                cellsToTheRightAreFree = cellsToTheRightAreFree && getModel().cellToTheRightIsFree(row, selectionEndCol);
+            }
+        }
+        
+        
         boolean aVerticalSeriesOfEventsIsSelected = (selectionStartCol==selectionEndCol) && (selectionStartRow>=0) && !(selectionStartRow == selectionEndRow);
                 
         multipleColumnsSelected = aSeriesOfColumnsIsSelected;
@@ -1340,8 +1352,12 @@ public class PartitureTableWithActions extends PartitureTable
         deleteEventsAction.setEnabled((aRectangleOfEventsIsSelected || aVerticalSeriesOfEventsIsSelected) && !locked);
         extendRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
         extendLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheLeftIsFree && !locked);
-        moveRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
-        moveLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheLeftIsFree && !locked);
+        //moveRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree && !locked);
+        //moveLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellToTheLeftIsFree && !locked);
+        // 19-04-2024: changed for #467
+        moveRightAction.setEnabled(((aSingleCellIsSelected && cellContainsEvent && cellToTheRightIsFree) || ((aRectangleOfEventsIsSelected || aVerticalSeriesOfEventsIsSelected) && cellsToTheRightAreFree)) && !locked);
+        moveLeftAction.setEnabled(((aSingleCellIsSelected && cellContainsEvent && cellToTheLeftIsFree) || ((aRectangleOfEventsIsSelected || aVerticalSeriesOfEventsIsSelected) && cellsToTheLeftAreFree)) && !locked);
+        
         shrinkRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellSpanIsGreaterThanOne && !locked);
         shrinkLeftAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && cellSpanIsGreaterThanOne && !locked);
         shiftRightAction.setEnabled(aSingleCellIsSelected && cellContainsEvent && !locked);

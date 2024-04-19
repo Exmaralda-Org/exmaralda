@@ -46,8 +46,10 @@ public class MoveLeftAction extends org.exmaralda.partitureditor.partiture.Abstr
             //System.out.println("Added undo move left");
             // end undo information
         }
-        table.getModel().moveLeft(table.selectionStartRow, table.selectionStartCol);
-        table.status("Moved event left [" + table.selectionStartRow +  "/" + table.selectionStartCol + "]");
+        //table.getModel().moveLeft(table.selectionStartRow, table.selectionStartCol);
+        // changed 19-04-2024 for #467
+        table.getModel().moveLeft(table.selectionStartRow, table.selectionEndRow, table.selectionStartCol, table.selectionEndCol);
+        table.status("Moved event left [" + table.selectionStartRow + "-" + table.selectionEndRow + "/" + table.selectionStartCol + "-" + table.selectionEndCol + "]");
         
     }
     
