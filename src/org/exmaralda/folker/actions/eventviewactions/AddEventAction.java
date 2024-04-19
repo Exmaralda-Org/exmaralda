@@ -21,7 +21,10 @@ import org.exmaralda.folker.application.ApplicationControl;
  */
 public class AddEventAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public AddEventAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
