@@ -41,18 +41,22 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
         conversionInfo = ci;
     }
     
+    @Override
     public String toXML(){
         StringBuilder sb=new StringBuilder();
-        sb.append(StringUtilities.makeXMLOpenElement("segmented-transcription", null) + "\n");
+        sb.append(StringUtilities.makeXMLOpenElement("segmented-transcription", null)).append("\n");
         sb.append(super.toXML());
         sb.append(getBody().toXML());
         sb.append(getConversionInfo().toXML());
-        sb.append(StringUtilities.makeXMLCloseElement("segmented-transcription") + "\n");
+        sb.append(StringUtilities.makeXMLCloseElement("segmented-transcription")).append("\n");
         return sb.toString();
     }
     
     /** writes an XML file with the specified file name and the specified path to
-     *  the dtd */
+     *  the dtd
+     * @param filename
+     * @param pathToDTD
+     * @throws java.io.IOException */
     public void writeXMLToFile(String filename, String pathToDTD) throws IOException {
         // changed 11-05-2010: new method can also produce relative paths that
         // go via parent folders, i.e. including one or more ..s

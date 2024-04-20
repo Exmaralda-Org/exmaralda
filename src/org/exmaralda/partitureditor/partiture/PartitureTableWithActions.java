@@ -582,6 +582,8 @@ public class PartitureTableWithActions extends PartitureTable
             return new org.exmaralda.partitureditor.jexmaralda.segment.IPASegmentation();
         if (preferredSegmentation.equals("GENERIC"))
             return new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation(genericFSM);
+        if (preferredSegmentation.equals("INEL_EVENT_BASED"))
+            return new org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation();
         return new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation();
     }
 

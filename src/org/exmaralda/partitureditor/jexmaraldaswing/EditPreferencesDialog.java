@@ -699,7 +699,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         preferredSegmentationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Preferred Segmentation"));
 
-        preferredSegmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "GENERIC", "HIAT", "DIDA", "GAT", "cGAT_MINIMAL", "CHAT", "CHAT_MINIMAL", "IPA" }));
+        preferredSegmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "GENERIC", "HIAT", "DIDA", "GAT", "cGAT_MINIMAL", "CHAT", "CHAT_MINIMAL", "IPA", "INEL_EVENT_BASED", " " }));
         preferredSegmentationComboBox.setMinimumSize(new java.awt.Dimension(100, 18));
         preferredSegmentationComboBox.setPreferredSize(new java.awt.Dimension(130, 27));
         preferredSegmentationComboBox.addActionListener(new java.awt.event.ActionListener() {

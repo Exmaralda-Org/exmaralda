@@ -8,10 +8,12 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import java.io.File;
 import javax.swing.JOptionPane;
+import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.SaveSegmentedTranscriptionAsDialog;
 import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -47,7 +49,7 @@ public class SegmentAndSaveTranscriptionAction extends AbstractFSMSegmentationAc
                 dialog.setFilename(exsFile.getName());                
             }
             dialog.saveTranscriptionAs(table);
-        } catch (Exception ex) {
+        } catch (FSMException | SAXException ex) {
             int optionChosen = JOptionPane
                     .showConfirmDialog(table, "Segmentation Error(s):\n " + ex.getLocalizedMessage() + "\nEdit errors?",
                     "Segmentation Error(s)", JOptionPane.OK_CANCEL_OPTION);

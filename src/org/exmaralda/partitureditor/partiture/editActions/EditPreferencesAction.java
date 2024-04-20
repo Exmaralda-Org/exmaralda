@@ -130,14 +130,14 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.HIATUtteranceList2HTMLStylesheet = newValues[6];
             
             table.stopAutoSaveThread();
-            table.autoSave = Boolean.valueOf(newValues[7]);
+            table.autoSave = Boolean.parseBoolean(newValues[7]);
             table.autoSaveThread.FILENAME = newValues[8];
             table.autoSaveThread.PATH = newValues[9];
             table.autoSaveThread.setSaveInterval(Integer.parseInt(newValues[10])*60);
             if (table.autoSave){
                 table.startAutoSaveThread();
             }            
-            table.prettyPrint = Boolean.valueOf(newValues[40]);
+            table.prettyPrint = Boolean.parseBoolean(newValues[40]);
             
             table.hiatFSM = newValues[11];
             table.didaFSM = newValues[12];
