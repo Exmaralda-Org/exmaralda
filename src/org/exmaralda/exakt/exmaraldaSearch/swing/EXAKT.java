@@ -885,27 +885,49 @@ public class EXAKT extends javax.swing.JFrame
     }
     
     private void openPartiturEditorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPartiturEditorButtonActionPerformed
-        // 21-04-2024: new for #417
-        SearchResultInterface searchResult = getSelectedSearchResult();
-        if (searchResult==null){
-            String message = "No search result selected in active KWIC panel ";
-            JOptionPane.showMessageDialog(partiturPanel, message);
-            return;
-        }        
-        String filename = searchResult.getSearchableSegmentLocator().getCorpusComponentFilename();
-        String timeID = searchResult.getAdditionalData()[2];
-        String pathToBT = determineBTPath(filename);
-        if (pathToBT==null){
-            String message = "Could not determine basic transcription for " + filename;
-            JOptionPane.showMessageDialog(partiturPanel, message);
-            return;
+        try {
+            // 21-04-2024: new for #417
+            SimpleSearchResult searchResult = (SimpleSearchResult)getSelectedSearchResult();
+            if (searchResult==null){
+                String message = "No search result selected in active KWIC panel ";
+                JOptionPane.showMessageDialog(this.tabbedPane, message);
+                return;
+            }
+            SegmentedTranscription st = getTranscriptionForSearchResult(searchResult);
+            String filename = searchResult.getSearchableSegmentLocator().getCorpusComponentFilename();
+            BasicTranscription bt = st.toBasicTranscription();
+            String tierID = searchResult.getAdditionalData()[0];
+            Tier tier = bt.getBody().getTierWithID(tierID);
+            String timeID = searchResult.getAdditionalData()[2];
+            
+            if (!(searchResult instanceof AnnotationSearchResult)){
+                // find the exact startpoint
+                int count = 0;
+                int s = searchResult.getOriginalMatchStart();
+                while (count + tier.getEventAtStartPoint(timeID).getDescription().length() <= s){
+                    count+=tier.getEventAtStartPoint(timeID).getDescription().length();
+                    timeID = tier.getEventAtStartPoint(timeID).getEnd();                            
+                }
+            }
+            
+            
+            String pathToBT = determineBTPath(filename);
+            if (pathToBT==null){
+                String message = "Could not determine basic transcription for " + filename;
+                JOptionPane.showMessageDialog(this.tabbedPane, message);
+                return;
+            }
+            
+            String[] args = {
+                pathToBT,
+                timeID
+            };
+            PartiturEditor.main(args);
+        } catch (SAXException | JexmaraldaException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+            String message = "Error opening Partitur-Editor " + ex.getMessage();
+            JOptionPane.showMessageDialog(this.tabbedPane, message);
         }
-        
-        String[] args = {
-            pathToBT,
-            timeID
-        };
-        PartiturEditor.main(args);
         
     }//GEN-LAST:event_openPartiturEditorButtonActionPerformed
     

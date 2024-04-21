@@ -80,7 +80,7 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <!-- WORD -->
-                                        <xsl:analyze-string select="text()" regex="[\(\) …\.\?!,–—\-=]">
+                                        <xsl:analyze-string select="text()" regex="[\(\) …\.\?!,–—\-=&quot;]">
                                             <xsl:matching-substring>
                                                 <nts n="INEL:ip">
                                                     <xsl:attribute name="id" select="concat('nts_', $ID, '_', position())"></xsl:attribute>

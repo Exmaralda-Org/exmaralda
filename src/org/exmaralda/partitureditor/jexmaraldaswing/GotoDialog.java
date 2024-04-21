@@ -28,7 +28,10 @@ public class GotoDialog extends javax.swing.JDialog {
 
     PartitureTableWithActions partitur;
 
-    /** Creates new form GotoDialog */
+    /** Creates new form GotoDialog
+     * @param parent
+     * @param modal
+     * @param p */
     public GotoDialog(java.awt.Frame parent, boolean modal, PartitureTableWithActions p) {
         super(parent, modal);
         initComponents();
@@ -62,7 +65,7 @@ public class GotoDialog extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Could not parse time string");
             }
         } else {
-            int col = ((Integer)(timelineItemSpinner.getValue())).intValue();
+            int col = ((Integer)(timelineItemSpinner.getValue()));
             partitur.makeColumnVisible(col);
         }
     }

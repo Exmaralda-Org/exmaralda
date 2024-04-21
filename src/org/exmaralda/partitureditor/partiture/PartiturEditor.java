@@ -13,6 +13,7 @@
 package org.exmaralda.partitureditor.partiture;
 
 //import com.apple.eawt.ApplicationEvent;
+import com.klg.jclass.table.JCTableEnum;
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
@@ -56,6 +57,8 @@ public class PartiturEditor extends javax.swing.JFrame
                                     org.exmaralda.exakt.search.swing.KWICTableListener
                                     { 
     
+    
+    boolean wasCalledFromOutside = false;
                          
     /** the table component containing the partitur */
     private final PartitureTableWithActions table;
@@ -281,7 +284,12 @@ public class PartiturEditor extends javax.swing.JFrame
             System.out.println("Application terminated. ");
             System.out.println(new java.util.Date().toString());
             System.out.println("________________________");
-            System.exit(0);
+            if (this.wasCalledFromOutside){
+                // new for #417: if I do System.exit, EXAKT will also quit
+                dispose();
+            } else {
+                System.exit(0);
+            }
         }
         return proceed;
     }
@@ -327,7 +335,10 @@ public class PartiturEditor extends javax.swing.JFrame
                             // 21-04-2024: new for #417
                             String tliID = args[1];
                             int column = pe.table.getModel().getColumnNumber(tliID);
-                            pe.table.makeColumnVisible(column);
+                            pe.table.setNewSelection(-1, column, false);
+                            pe.table.traverse(JCTableEnum.TRAVERSE_RIGHT);
+                            pe.table.setLeftColumn(column);
+                            pe.wasCalledFromOutside = true;
                         }
                         
                         //pe.table.transcriptionChanged = true;

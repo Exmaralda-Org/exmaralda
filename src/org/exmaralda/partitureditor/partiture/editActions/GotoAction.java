@@ -16,7 +16,8 @@ public class GotoAction extends org.exmaralda.partitureditor.partiture.AbstractT
     
     GotoDialog dialog;
 
-    /** Creates a new instance of ChopAudioAction */
+    /** Creates a new instance of ChopAudioAction
+     * @param t */
     public GotoAction(PartitureTableWithActions t) {
         super("Go to...", t);
         dialog = new GotoDialog(t.parent, true, t);
