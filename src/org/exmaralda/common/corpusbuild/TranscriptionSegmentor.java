@@ -25,7 +25,9 @@ import org.exmaralda.partitureditor.jexmaralda.segment.GATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.IPASegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
+import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
 /**
@@ -94,154 +96,158 @@ public class TranscriptionSegmentor {
 		return doSegmentation();
 	}
 
-	public boolean doSegmentation() throws SAXException, JexmaraldaException,
-			IOException {
-		switch (segmentationAlgorithm) {
-		case AbstractSegmentation.NO_SEGMENTATION:
-			segmentation = null;
-			break;
-		case AbstractSegmentation.HIAT_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new HIATSegmentation();
-                        } else {
-                            segmentation = new HIATSegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.GAT_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new GATSegmentation();
-                        } else {
-                            segmentation = new GATSegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.DIDA_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new DIDASegmentation();
-                        } else {
-                            segmentation = new DIDASegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.CHAT_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new CHATSegmentation();
-                        } else {
-                            segmentation = new CHATSegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.IPA_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new IPASegmentation();
-                        } else {
-                            segmentation = new IPASegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.GENERIC_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new GenericSegmentation();
-                        } else {
-                            segmentation = new GenericSegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.GAT_MINIMAL_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new cGATMinimalSegmentation();
-                        } else {
-                            segmentation = new cGATMinimalSegmentation(customFSMPath);                            
-                        }
-			break;
-		case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION:
-			if (customFSMPath.length()==0){
-                            segmentation = new CHATMinimalSegmentation();
-                        } else {
-                            segmentation = new CHATMinimalSegmentation(customFSMPath);                            
-                        }
-			break;
-		}
-		// create target directory if it ain't bloody there
-		if ((targetDirectory != null) && (!targetDirectory.exists())) {
-			targetDirectory.mkdir();
-		}
+	public boolean doSegmentation() throws SAXException, JexmaraldaException, IOException {
+            switch (segmentationAlgorithm) {
+                case AbstractSegmentation.NO_SEGMENTATION:
+                    segmentation = null;
+                    break;
+                case AbstractSegmentation.HIAT_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new HIATSegmentation();
+                    } else {
+                        segmentation = new HIATSegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.GAT_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new GATSegmentation();
+                    } else {
+                        segmentation = new GATSegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.DIDA_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new DIDASegmentation();
+                    } else {
+                        segmentation = new DIDASegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.CHAT_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new CHATSegmentation();
+                    } else {
+                        segmentation = new CHATSegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.IPA_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new IPASegmentation();
+                    } else {
+                        segmentation = new IPASegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.GENERIC_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new GenericSegmentation();
+                    } else {
+                        segmentation = new GenericSegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.GAT_MINIMAL_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new cGATMinimalSegmentation();
+                    } else {
+                        segmentation = new cGATMinimalSegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION:
+                    if (customFSMPath.length()==0){
+                        segmentation = new CHATMinimalSegmentation();
+                    } else {
+                        segmentation = new CHATMinimalSegmentation(customFSMPath);                            
+                    }
+                    break;
+                case AbstractSegmentation.INEL_EVENT_BASED:
+                    segmentation = new InelEventBasedSegmentation();
+                    break;
+            }
+            // create target directory if it ain't bloody there
+            if ((targetDirectory != null) && (!targetDirectory.exists())) {
+                    targetDirectory.mkdir();
+            }
 
-		int count = 0;
-		// now do the real job
-		for (File f : basicTranscriptions) {
-			count++;
-			if (progressMonitor != null) {
-				progressMonitor.setProgress(count);
-			}
-			double prog = (double) count
-					/ (double) (basicTranscriptions.length);
-			System.out.println("Segmenting " + f.getName());
-			fireCorpusInit(prog, "Segmenting " + f.getName());
+            int count = 0;
+            // now do the real job
+            for (File f : basicTranscriptions) {
+                    count++;
+                    if (progressMonitor != null) {
+                            progressMonitor.setProgress(count);
+                    }
+                    double prog = (double) count
+                                    / (double) (basicTranscriptions.length);
+                    System.out.println("Segmenting " + f.getName());
+                    fireCorpusInit(prog, "Segmenting " + f.getName());
 
-			BasicTranscription bt = new BasicTranscription(f.getAbsolutePath());
-			SegmentedTranscription st = null;
-			if (segmentationAlgorithm == AbstractSegmentation.NO_SEGMENTATION) {
-				st = bt.toSegmentedTranscription();
-				st.setEXBSource(f.getAbsolutePath());
-			} else {
-				try {
-					st = segmentation.BasicToSegmented(bt);
-					st.setEXBSource(f.getAbsolutePath());
-				} catch (FSMException ex) {
-					ex.printStackTrace();
-					switch (errorHandling) {
-					case ERRORS_IGNORE:
-						System.out.println("Ignoring error");
-						continue; // just continue
-					case ERRORS_CANCEL:
-						System.out.println("Canceling because of error");
-						// need to delete the ones that were already written
-						for (File ff : segmentedTranscriptions.keySet()) {
-							ff.delete();
-						}
-						return false;
-					case ERRORS_FAILSAFE:
-						System.out.println("Switched to default because of error");
-						st = bt.toSegmentedTranscription();
-						st.setEXBSource(f.getAbsolutePath());
-					}
-					if (writeErrorList) {
-						try {
-							segmentationChecker.processTranscription(bt,
-									f.getAbsolutePath());
-						} catch (URISyntaxException ex1) {
-							ex1.printStackTrace();
-						}
-					}
-				}
-			}
+                    BasicTranscription bt = new BasicTranscription(f.getAbsolutePath());
+                    SegmentedTranscription st = null;
+                    if (segmentationAlgorithm == AbstractSegmentation.NO_SEGMENTATION) {
+                            st = bt.toSegmentedTranscription();
+                            st.setEXBSource(f.getAbsolutePath());
+                    } else {
+                            try {
+                                    st = segmentation.BasicToSegmented(bt);
+                                    st.setEXBSource(f.getAbsolutePath());
+                            } catch (FSMException ex) {
+                                    //ex.printStackTrace();
+                                    System.out.println(ex.getMessage());
+                                    switch (errorHandling) {
+                                        case ERRORS_IGNORE:
+                                            System.out.println("Ignoring error");
+                                            continue; // just continue
+                                        case ERRORS_CANCEL:
+                                            System.out.println("Canceling because of error");
+                                            // need to delete the ones that were already written
+                                            for (File ff : segmentedTranscriptions.keySet()) {
+                                                    ff.delete();
+                                            }
+                                            return false;
+                                        case ERRORS_FAILSAFE:
+                                            System.out.println("Switched to default because of error");
+                                            st = bt.toSegmentedTranscription();
+                                            st.setEXBSource(f.getAbsolutePath());
+                                    }
+                                    if (writeErrorList) {
+                                        try {
+                                            segmentationChecker.processTranscription(bt, f.getAbsolutePath());
+                                        } catch (URISyntaxException ex1) {
+                                            System.out.println(ex1.getMessage());
+                                            throw new IOException(ex1);
+                                        }
+                                    }
+                            }
+                    }
 
-			// now the segmented transcription is there... need to write it
-			// change 01-07-2009: take care not to schnibbel ze schdring falsch
-			int index = f.getName().lastIndexOf(".");
-			if (index < 0) {
-				index = f.getName().length() - 1;
-			}
-			String outFilename = f.getName().substring(0, index);
-			outFilename += suffix + ".exs";
-			String outPath = "";
-			if (targetDirectory == null) {
-				outPath = f.getParent();
-			} else {
-				outPath = targetDirectory.getAbsolutePath();
-			}
-			String segPath = outPath + System.getProperty("file.separator")
-					+ outFilename;
-			org.exmaralda.partitureditor.jexmaralda.segment.SegmentCountForMetaInformation
-					.count(st);
-			System.out.println("Writing segmented transcription " + segPath);
-			st.writeXMLToFile(segPath, "none");
-			segmentedTranscriptions.put(new File(segPath), f);
-		}
-		if (writeErrorList) {
-			try {
-				segmentationChecker.output(errorListPath.getAbsolutePath());
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		return true;
+                    // now the segmented transcription is there... need to write it
+                    // change 01-07-2009: take care not to schnibbel ze schdring falsch
+                    int index = f.getName().lastIndexOf(".");
+                    if (index < 0) {
+                            index = f.getName().length() - 1;
+                    }
+                    String outFilename = f.getName().substring(0, index);
+                    outFilename += suffix + ".exs";
+                    String outPath = "";
+                    if (targetDirectory == null) {
+                            outPath = f.getParent();
+                    } else {
+                            outPath = targetDirectory.getAbsolutePath();
+                    }
+                    String segPath = outPath + System.getProperty("file.separator")
+                                    + outFilename;
+                    org.exmaralda.partitureditor.jexmaralda.segment.SegmentCountForMetaInformation
+                                    .count(st);
+                    System.out.println("Writing segmented transcription " + segPath);
+                    st.writeXMLToFile(segPath, "none");
+                    segmentedTranscriptions.put(new File(segPath), f);
+            }
+            if (writeErrorList) {
+                try {
+                    segmentationChecker.output(errorListPath.getAbsolutePath());
+                } catch (IOException | URISyntaxException | JDOMException ex) {
+                    System.out.println(ex.getMessage());
+                    throw new IOException(ex);
+                }
+            }
+            return true;
 	}
 
 	public void addSearchListener(SearchListenerInterface sli) {
@@ -252,9 +258,8 @@ public class TranscriptionSegmentor {
 		// Process the listeners last to first, notifying
 		// those that are interested in this event
 		for (int i = listenerList.size() - 1; i >= 0; i -= 1) {
-			SearchEvent se = new SearchEvent(SearchEvent.CORPUS_INIT_PROGRESS,
-					progress, message);
-			listenerList.elementAt(i).processSearchEvent(se);
+                    SearchEvent se = new SearchEvent(SearchEvent.CORPUS_INIT_PROGRESS, progress, message);
+                    listenerList.elementAt(i).processSearchEvent(se);
 		}
 	}
 

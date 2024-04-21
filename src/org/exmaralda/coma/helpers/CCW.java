@@ -1630,7 +1630,7 @@ public class CCW extends javax.swing.JDialog implements PropertyChangeListener,
         // row 2
         segSelectLabel = new JLabel(Ui.getText("ccw.algorithm"));
         String[] segAlgs = {"default", "HIAT", "DIDA", "CHAT", "GAT", "IPA",
-            "GENERIC", "cGAT_MINIMAL", "CHAT_MINIMAL"};
+            "GENERIC", "cGAT_MINIMAL", "CHAT_MINIMAL", "INEL_EVENT_BASED"};
         ComboBoxModel segSelectorModel = new DefaultComboBoxModel(segAlgs);
         segSelector = new JComboBox();
         segSelector.setModel(segSelectorModel);

@@ -773,10 +773,12 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         //fileChooser.setCurrentDirectory(new File(startDirectory));
         fileChooser.setDialogTitle("Choose a stylesheet");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+            @Override
             public boolean accept(File f) {
                 String name = f.getAbsolutePath();
                 return (f.isDirectory() || name.substring(Math.max(0,name.length()-3)).equalsIgnoreCase("XSL"));
             }
+            @Override
             public String getDescription() {
                 return "XSL files (*.xsl)";
             }
@@ -1157,6 +1159,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         }
     }
 
+    @Override
     public void processEvent(KWICTableEvent ev) {
         if (ev.getType()==KWICTableEvent.SELECTION){
             updateSelectionLabel();
@@ -1164,7 +1167,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
             completeTextEditorPane.setText(r.getKWICAsHTML());
             completeTextEditorPane.setCaretPosition(r.getLeftContextAsString().length());
             
-            StringBuffer sb2 = new StringBuffer();
+            StringBuilder sb2 = new StringBuilder();
             sb2.append("<html><head><style type=\"text/css\">");
             sb2.append("td.evenRow {background-color:rgb(210,210,210);font-family:Arial,sans-serif;font-size:10pt}");
             sb2.append("td.oddRow  {background-color:rgb(255,255,255);font-family:Arial,sans-serif;font-size:10pt}");
@@ -1177,12 +1180,12 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                 if (col%2==0) {sb2.append("#DDDDDD");} else {sb2.append("#FFFFFF");}
                 String colName = "";
                 if (kwicTable.getColumnName(col)!=null) {colName = kwicTable.getColumnName(col);}
-                sb2.append("\"><b>" + colName + "</b></td>");
+                sb2.append("\"><b>").append(colName).append("</b></td>");
                 sb2.append("<td bgcolor=\"");
                 if (col%2==0) {sb2.append("#DDDDDD");} else {sb2.append("#FFFFFF");}
                 String colValue = null;
                 if (kwicTable.getValueAt(row,col)!=null) {colValue = kwicTable.getValueAt(row,col).toString();}
-                sb2.append("\">" + colValue + "</td></tr>");                                
+                sb2.append("\">").append(colValue).append("</td></tr>");                                
             }            
             sb2.append("</table></body></html>");
             additionalDataEditorPane.setText(sb2.toString());
@@ -1330,6 +1333,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     }
 
     public class SortIgnoreCase implements Comparator<Object> {
+        @Override
         public int compare(Object o1, Object o2) {
             String s1 = (String) o1;
             String s2 = (String) o2;

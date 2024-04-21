@@ -49,6 +49,7 @@ public class SegmentAndSaveTranscriptionAction extends AbstractFSMSegmentationAc
                 dialog.setFilename(exsFile.getName());                
             }
             dialog.saveTranscriptionAs(table);
+            table.status("Segmented transcription saved as " + dialog.filename);
         } catch (FSMException | SAXException ex) {
             int optionChosen = JOptionPane
                     .showConfirmDialog(table, "Segmentation Error(s):\n " + ex.getLocalizedMessage() + "\nEdit errors?",

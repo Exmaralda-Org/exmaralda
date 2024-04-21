@@ -323,6 +323,12 @@ public class PartiturEditor extends javax.swing.JFrame
                         pe.table.homeDirectory = args[0];
                         // added 31-08-2012
                         pe.table.reconfigureAutoSaveThread();
+                        if (args.length==2){
+                            // 21-04-2024: new for #417
+                            String tliID = args[1];
+                            int column = pe.table.getModel().getColumnNumber(tliID);
+                            pe.table.makeColumnVisible(column);
+                        }
                         
                         //pe.table.transcriptionChanged = true;
                     } catch (JexmaraldaException | SAXException ex){

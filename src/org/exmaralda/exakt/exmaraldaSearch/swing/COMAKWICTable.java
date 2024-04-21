@@ -26,7 +26,6 @@ import org.exmaralda.exakt.search.analyses.ClosedCategoryListAnalysis;
 import org.exmaralda.exakt.search.swing.KWICTableEvent;
 import org.exmaralda.exakt.search.swing.KWICTableListener;
 import org.exmaralda.exakt.exmaraldaSearch.*;
-import org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction;
 
 
 /**

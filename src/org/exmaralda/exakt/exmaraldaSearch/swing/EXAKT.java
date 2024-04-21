@@ -470,7 +470,7 @@ public class EXAKT extends javax.swing.JFrame
         visualizeButtonsPanel = new javax.swing.JPanel();
         sendPartiturToBrowserButton = new javax.swing.JButton();
         exportRTFPartiturButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        otherPanel = new javax.swing.JPanel();
         changeScaleConstantButton = new javax.swing.JButton();
         listViewPanel = new javax.swing.JPanel();
         listScrollPane = new javax.swing.JScrollPane();
@@ -488,6 +488,7 @@ public class EXAKT extends javax.swing.JFrame
         separator2 = new javax.swing.JToolBar.Separator();
         preferencesButton = new javax.swing.JButton();
         formatButton = new javax.swing.JButton();
+        openPartiturEditorButton = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
         infoPanel = new javax.swing.JPanel();
@@ -666,15 +667,15 @@ public class EXAKT extends javax.swing.JFrame
 
         partiturButtonPanel.add(visualizeButtonsPanel);
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        otherPanel.setLayout(new javax.swing.BoxLayout(otherPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         changeScaleConstantButton.setAction(partitur.changeScaleConstantAction);
         changeScaleConstantButton.setMaximumSize(new java.awt.Dimension(28, 28));
         changeScaleConstantButton.setMinimumSize(new java.awt.Dimension(28, 28));
         changeScaleConstantButton.setPreferredSize(new java.awt.Dimension(28, 28));
-        jPanel2.add(changeScaleConstantButton);
+        otherPanel.add(changeScaleConstantButton);
 
-        partiturButtonPanel.add(jPanel2);
+        partiturButtonPanel.add(otherPanel);
 
         partiturViewPanel.add(partiturButtonPanel, java.awt.BorderLayout.WEST);
 
@@ -775,6 +776,20 @@ public class EXAKT extends javax.swing.JFrame
         formatButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(formatButton);
 
+        openPartiturEditorButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/pe_small.png"))); // NOI18N
+        openPartiturEditorButton.setFocusable(false);
+        openPartiturEditorButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        openPartiturEditorButton.setMaximumSize(new java.awt.Dimension(28, 28));
+        openPartiturEditorButton.setMinimumSize(new java.awt.Dimension(28, 28));
+        openPartiturEditorButton.setPreferredSize(new java.awt.Dimension(28, 28));
+        openPartiturEditorButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        openPartiturEditorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openPartiturEditorButtonActionPerformed(evt);
+            }
+        });
+        toolBar.add(openPartiturEditorButton);
+
         getContentPane().add(toolBar, java.awt.BorderLayout.NORTH);
 
         statusPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -857,6 +872,75 @@ public class EXAKT extends javax.swing.JFrame
     private void preferencesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferencesButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_preferencesButtonActionPerformed
+
+    
+    public SearchResultInterface getSelectedSearchResult(){
+        COMAKWICSearchPanel activeSearchPanel = getActiveSearchPanel();
+        if (activeSearchPanel==null) return null;
+        int selectedViewIndex = activeSearchPanel.getKWICTable().getSelectedRow();
+        if (selectedViewIndex<0) return null;
+        int selectedRow = ((COMAKWICTableSorter)(activeSearchPanel.getKWICTable().getModel())).modelIndex(selectedViewIndex);
+        SearchResultInterface searchResult = activeSearchPanel.getKWICTable().getWrappedModel().getSearchResultAt(selectedRow);
+        return searchResult;
+    }
+    
+    private void openPartiturEditorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPartiturEditorButtonActionPerformed
+        // 21-04-2024: new for #417
+        SearchResultInterface searchResult = getSelectedSearchResult();
+        if (searchResult==null){
+            String message = "No search result selected in active KWIC panel ";
+            JOptionPane.showMessageDialog(partiturPanel, message);
+            return;
+        }        
+        String filename = searchResult.getSearchableSegmentLocator().getCorpusComponentFilename();
+        String timeID = searchResult.getAdditionalData()[2];
+        String pathToBT = determineBTPath(filename);
+        if (pathToBT==null){
+            String message = "Could not determine basic transcription for " + filename;
+            JOptionPane.showMessageDialog(partiturPanel, message);
+            return;
+        }
+        
+        String[] args = {
+            pathToBT,
+            timeID
+        };
+        PartiturEditor.main(args);
+        
+    }//GEN-LAST:event_openPartiturEditorButtonActionPerformed
+    
+    // 21-04-2024: new for #417
+    private String determineBTPath(String filename){
+        try {
+            if (filename==null) return null;
+            SegmentedTranscription currentTranscription = new SegmentedTranscriptionSaxReader().readFromFile(filename);
+            String exbSource = currentTranscription.getHead().getMetaInformation().getUDMetaInformation().getValueOfAttribute("# EXB-SOURCE");
+            if (exbSource!=null){
+                File exbFile = new File(exbSource);
+                if (exbFile.exists()){
+                    return exbSource;
+                }
+            }
+            File[] exbFilesInSameDirectory = new File(filename).getParentFile().listFiles(new FilenameFilter(){
+                @Override
+                public boolean accept(File dir, String name) {
+                    //System.out.println(name + " / " + new File(currentFilename).getName().startsWith(name.substring(0, name.lastIndexOf("."))));
+                    return name.toUpperCase().endsWith(".EXB") && new File(filename).getName().startsWith(name.substring(0, name.lastIndexOf(".")));
+                }
+            });
+            if (exbFilesInSameDirectory!=null && exbFilesInSameDirectory.length==1){
+                return exbFilesInSameDirectory[0].getAbsolutePath();
+            }
+            
+            // here would be the place to try more complicated things
+            
+            
+            return null;
+        } catch (SAXException ex) {
+            Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }        
+    }
     
     /**
      * @param args the command line arguments
@@ -901,7 +985,6 @@ public class EXAKT extends javax.swing.JFrame
     private javax.swing.JButton generateCorpusButton;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JSplitPane innerSplitPane;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane leftSideSplitPane;
     private javax.swing.JPanel listButtonPanel;
     private javax.swing.JScrollPane listScrollPane;
@@ -912,6 +995,8 @@ public class EXAKT extends javax.swing.JFrame
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newConcordanceButton;
     private javax.swing.JButton openCorpusButton;
+    private javax.swing.JButton openPartiturEditorButton;
+    private javax.swing.JPanel otherPanel;
     private javax.swing.JSplitPane outerSplitPane;
     private javax.swing.JPanel partiturButtonPanel;
     private javax.swing.JPanel partiturPanel;
@@ -1172,7 +1257,7 @@ public class EXAKT extends javax.swing.JFrame
         if (ev.getType()==COMAKWICSearchPanelEvent.NEW_SEARCH_RESULT){
             SearchResultList srl = ev.getSearchResultList();
             String title = "No results";
-            if (srl.size()>0) title = srl.elementAt(0).getMatchTextAsString();
+            if (!srl.isEmpty()) title = srl.elementAt(0).getMatchTextAsString();
             COMAKWICSearchPanel panel = (COMAKWICSearchPanel)(ev.getParentComponent());
             int index = panelIndex.get(panel);
             tabbedPane.setTitleAt(index, panel.getCorpus().getCorpusName() + " (" + srl.size() + " results)");
@@ -1397,6 +1482,8 @@ public class EXAKT extends javax.swing.JFrame
         }
             
     }
+    
+    
     
     public void showPartitur(KWICTableEvent event) {
         lastKWICTableEvent = event;
