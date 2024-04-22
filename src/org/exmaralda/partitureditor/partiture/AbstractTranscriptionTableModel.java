@@ -538,7 +538,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     /** returns true if the cell to the right of the specified cell is free, false otherwise
      * if the specified cell is on the right edge of the transcription, also returns true */
     boolean cellToTheRightIsFree(int row, int col){
-        if ((row>=this.getNumRows()) || (col>=this.getNumColumns())) return false;
+        if ((row>=this.getNumRows()) || (col>=this.getNumColumns() || (row<0) || col<0)) return false;
         Tier tier = transcription.getBody().getTierAt(row);
         int span = getCellSpan(row,col);
         if ((col+span) >= getNumColumns()){return true;}
@@ -549,7 +549,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
     /** returns true if the cell to the left of the specified cell is free, false otherwise
      * if the specified cell is on the left edge of the transcription, also returns true */
     boolean cellToTheLeftIsFree(int row, int col){
-        if ((row>=this.getNumRows()) || (col>=this.getNumColumns())) return false;
+        if ((row>=this.getNumRows()) || (col>=this.getNumColumns() || (row<0) || col<0)) return false;
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
         Event eventBefore = tier.getFirstEventBeforeStartPoint(transcription.getBody().getCommonTimeline(),tli);

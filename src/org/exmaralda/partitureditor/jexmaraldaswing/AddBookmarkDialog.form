@@ -33,11 +33,14 @@
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="bookmarkNameLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bookmark name: "/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[120, 16]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="bookmarkNameTextField">

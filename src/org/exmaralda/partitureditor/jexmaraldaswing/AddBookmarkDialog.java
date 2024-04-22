@@ -57,9 +57,8 @@ public class AddBookmarkDialog extends JEscapeDialog {
             }
         });
 
-        mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.LINE_AXIS));
-
         bookmarkNameLabel.setText("Bookmark name: ");
+        bookmarkNameLabel.setMaximumSize(new java.awt.Dimension(120, 16));
         mainPanel.add(bookmarkNameLabel);
 
         bookmarkNameTextField.setPreferredSize(new java.awt.Dimension(200, 20));
