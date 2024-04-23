@@ -9,13 +9,9 @@ package org.exmaralda.partitureditor.partiture.fileActions;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import com.klg.jclass.table.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.partiture.*;
 import java.io.*;
-import java.net.*;
 import org.xml.sax.*;
-import javax.swing.Action;
-import java.awt.Toolkit;
 
 /**
  *
@@ -25,12 +21,15 @@ public class OpenRecentAction extends org.exmaralda.partitureditor.partiture.Abs
     
     String fileToOpen;
     
-    /** Creates a new instance of OpenRecentAction */
+    /** Creates a new instance of OpenRecentAction
+     * @param t
+     * @param filename */
     public OpenRecentAction(PartitureTableWithActions t, String filename) {
         super(new File(filename).getName(), t);
         fileToOpen = filename;
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         System.out.println("OpenRecentAction!");
         // finish any editing actions that might still be in progress on the partitur
@@ -64,6 +63,10 @@ public class OpenRecentAction extends org.exmaralda.partitureditor.partiture.Abs
             table.setupPraatPanel();
             table.transcriptionChanged = false;
             table.formatChanged = false;
+            
+            // added 23-04-2024 for issue #398
+            table.saveTierFormatTable = newTranscription.getTierFormatTable()!=null;
+            
             table.status("Transcription " + fileToOpen + " opened");
 
         } catch (JexmaraldaException je){

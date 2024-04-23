@@ -331,6 +331,11 @@ public class PartiturEditor extends javax.swing.JFrame
                         pe.table.homeDirectory = args[0];
                         // added 31-08-2012
                         pe.table.reconfigureAutoSaveThread();
+                        
+                        // added 23-04-2024 for issue #398
+                        pe.table.saveTierFormatTable = bt.getTierFormatTable()!=null;
+                        
+                        
                         if (args.length==2){
                             // 21-04-2024: new for #417
                             String tliID = args[1];

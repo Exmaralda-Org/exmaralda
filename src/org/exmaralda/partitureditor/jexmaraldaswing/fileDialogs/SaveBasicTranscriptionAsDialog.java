@@ -53,6 +53,7 @@ public class SaveBasicTranscriptionAsDialog extends AbstractXMLSaveAsDialog {
         super(startDirectory);
                 
         accessory.add(saveTierFormatTableCheckBox);
+        saveTierFormatTableCheckBox.setSelected(true);
         setAccessory(accessory);        
         
         transcription = t;
