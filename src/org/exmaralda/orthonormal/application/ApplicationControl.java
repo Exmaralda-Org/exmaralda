@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -143,7 +144,7 @@ public final class ApplicationControl implements  ListSelectionListener,
     
     public String currentFilePath = null;
     public String currentMediaPath = null;
-    Vector<File> recentFiles = new Vector<File>();
+    Vector<File> recentFiles = new Vector<>();
 
     public boolean DOCUMENT_CHANGED = false;
 
@@ -616,7 +617,12 @@ public final class ApplicationControl implements  ListSelectionListener,
             } catch (IOException ex) {
                 Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                 mediaPath = displayRecordingNotFoundDialog(mediaPath, ex);
-                nft.setMediaPath(mediaPath);
+                if (mediaPath!=null){
+                    nft.setMediaPath(mediaPath);
+                } else {
+                    applicationFrame.playerControlsPanel.setVisible(false);
+                    mediaSet = true;
+                }
             }
         }
 
@@ -821,6 +827,8 @@ public final class ApplicationControl implements  ListSelectionListener,
 
         applicationFrame.playerSlider.setMinimum(0);
         applicationFrame.playerSlider.setMaximum((int)Math.round(player.getTotalLength()*1000.0));
+        applicationFrame.playerControlsPanel.setVisible(true);
+        
 
 
     }
@@ -1010,7 +1018,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         String message = e.getLocalizedMessage();
         JOptionPane.showMessageDialog(getFrame(), message, title, JOptionPane.ERROR_MESSAGE);
         status(title + ": " + message);
-        e.printStackTrace();
+        System.out.println(e.getMessage());
     }
     
     public void displayException(String message){
@@ -1023,8 +1031,15 @@ public final class ApplicationControl implements  ListSelectionListener,
     public String displayRecordingNotFoundDialog(String mediaPath, Exception ex){
         String message = "Fehler beim Lesen der Aufnahme \n" + mediaPath +".\nFehlermeldung:\n" + ex.getLocalizedMessage()
                 + "\nBitte ordnen Sie die Aufnahme neu zu.";
-        JOptionPane.showMessageDialog(applicationFrame, message);
+        //JOptionPane.showMessageDialog(applicationFrame, message);
+        String[] options = {"Aufnahme neu zuordnen", "Ohne Aufnahme fortfahren"};
+        int optionChosen = JOptionPane.showOptionDialog(applicationFrame, message, "Aufnhame nicht gefunden", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, new Constants().getIcon(Constants.RECORDING_WARNING_ICON), options, "Aufnahme neu zuordnen");
 
+        if (optionChosen==JOptionPane.NO_OPTION){
+            return null;
+        }
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Aufnahme zuordnen");
         fileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
@@ -1103,10 +1118,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                         nft.reindexContribution(contribution);
                         wordListTableModel.fireTableDataChanged();
                         contributionListTableModel.fireTableCellUpdated(contributionListTable.getSelectedRow(), 4);
-                    } catch (JDOMException ex) {
-                        Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(xmlEditorPane, ex.getLocalizedMessage());
-                    } catch (IOException ex) {
+                    } catch (JDOMException | IOException ex) {
                         Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                         JOptionPane.showMessageDialog(xmlEditorPane, ex.getLocalizedMessage());
                     }
@@ -1399,7 +1411,6 @@ public final class ApplicationControl implements  ListSelectionListener,
                             try {
                                 lexicon.put(form, lemma, getTranscription().getID(), thisWordElement.getAttributeValue("id"));
                             } catch (LexiconException ex) {
-                                ex.printStackTrace();
                                 displayException(ex);
                             }
                         }    
@@ -1445,8 +1456,6 @@ public final class ApplicationControl implements  ListSelectionListener,
         status(Integer.toString(count) + " Wörter automatisch normalisiert. ");
     }
     
-    private void autoNormalizeAll() {
-    }
     
 
     public void updateContribution() {
@@ -1783,7 +1792,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         Element originalContributionElement = getTranscription().getContributionAt(firstSelectedRow);
         String currentSpeakerID = originalContributionElement.getAttributeValue("speaker-reference");
         try {
-            Vector<Speaker> speakerlist = new Vector<Speaker>();
+            Vector<Speaker> speakerlist = new Vector<>();
             List l = XPath.selectNodes(nft.getDocument(), "//speaker");
             Speaker currentSpeaker = null;
             for (Object o: l){
@@ -1877,7 +1886,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             this.openTranscriptionFile(temp);
             
             
-        } catch (Exception ex) {
+        } catch (IOException | ParserConfigurationException | TransformerException | JDOMException | SAXException ex) {
             displayException(ex);
         } 
     }
@@ -1930,7 +1939,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             //reset();        
             setupForCMCEditing();
             status("CMC-Datei " + f.getAbsolutePath() + " importiert.");
-        } catch (Exception ex) {
+        } catch (HeadlessException | IOException | ParserConfigurationException | TransformerException | LexiconException | JDOMException | SAXException ex) {
             ex.printStackTrace();
             displayException(ex);
         }
@@ -2024,9 +2033,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             status("TGDP-Datei " + f.getAbsolutePath() + " exportiert.");
             
             
-        } catch (JDOMException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (JDOMException | IOException ex) {
             Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -2065,8 +2072,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             FileIO.writeDocumentToLocalFile(f, targetDocument, "ISO-8859-1");
             status("CMC-Datei " + f.getAbsolutePath() + " exportiert.");
             
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (IOException | JDOMException ex) {
             displayException(ex);
         } 
         
@@ -2137,10 +2143,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             matchListDialog.setWorkingDirectory(sidd.getDirectory());
             matchListDialog.displayList(ml);
             matchListDialog.setVisible(true);
-        } catch (JDOMException ex) {
-            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
-            displayException(ex);
-        } catch (IOException ex) {
+        } catch (JDOMException | IOException ex) {
             Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
             displayException(ex);
         }
@@ -2156,8 +2159,8 @@ public final class ApplicationControl implements  ListSelectionListener,
             ArrayList<String[]> mappings = dialog.getMappings();
             
             //checkMappings
-            HashSet<String> oldAbbs = new HashSet<String>();
-            HashSet<String> newAbbs = new HashSet<String>();
+            HashSet<String> oldAbbs = new HashSet<>();
+            HashSet<String> newAbbs = new HashSet<>();
             for (String[] pair : mappings){
                 oldAbbs.add(pair[0]);
                 if (pair[0].equals(pair[1])) continue;
@@ -2220,9 +2223,7 @@ public final class ApplicationControl implements  ListSelectionListener,
             
 
             
-        } catch (JDOMException ex) {
-            displayException(ex);
-        } catch (IOException ex) {
+        } catch (JDOMException | IOException ex) {
             displayException(ex);
         }
     }
