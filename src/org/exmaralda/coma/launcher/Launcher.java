@@ -54,9 +54,9 @@ public class Launcher {
             System.out.println(version);
             String revision;
             if (version.split("\\.").length > 2) {
-                    revision = version.substring(version.lastIndexOf(".") + 1);
+                revision = version.substring(version.lastIndexOf(".") + 1);
             } else {
-                    revision = "0";
+                revision = "0";
             }
             System.out.println("Coma" + version + "(" + revision + ")");
 

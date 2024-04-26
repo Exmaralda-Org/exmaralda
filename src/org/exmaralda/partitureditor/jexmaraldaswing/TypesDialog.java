@@ -162,7 +162,9 @@ public class TypesDialog extends javax.swing.JDialog {
                 ((PartiturEditor) this.getParent()).getPartitur().status(ex.getLocalizedMessage());
                 return;
             }
-            ((PartiturEditor) this.getParent()).getPartitur().status("Annotation specification saved as " + file.getAbsolutePath());
+            if (this.getParent() instanceof PartiturEditor){
+                ((PartiturEditor) this.getParent()).getPartitur().status("Annotation specification saved as " + file.getAbsolutePath());
+            }
             
         }
     }//GEN-LAST:event_annotationSpecificationActionPerformed
@@ -214,7 +216,7 @@ public class TypesDialog extends javax.swing.JDialog {
         typesTable.setModel(typeTableModel);
         typesTable.setDefaultRenderer(String.class, new TypeTableCellRenderer());
         typesTable.setDefaultRenderer(Integer.class, new TypeTableCellRenderer());
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(typesTable.getModel());
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(typesTable.getModel());
         typesTable.setRowSorter(sorter);   
         this.tier = tier;
     }

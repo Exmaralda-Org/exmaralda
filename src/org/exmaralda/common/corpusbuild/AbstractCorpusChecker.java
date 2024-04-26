@@ -6,6 +6,7 @@
 package org.exmaralda.common.corpusbuild;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -28,7 +29,7 @@ public abstract class AbstractCorpusChecker extends AbstractBasicTranscriptionCh
     Element currentElement;
     String currentFilename;
     int count = 0;
-    private Vector<SearchListenerInterface> listenerList = new Vector<SearchListenerInterface>();
+    private List<SearchListenerInterface> listenerList = new ArrayList<>();
     public Document corpusDocument;
 
 
@@ -61,7 +62,7 @@ public abstract class AbstractCorpusChecker extends AbstractBasicTranscriptionCh
 
 
     public void addSearchListener(SearchListenerInterface sli) {
-        listenerList.addElement(sli);
+        listenerList.add(sli);
     }
 
     protected void fireCorpusInit(double progress, String message) {
@@ -69,7 +70,7 @@ public abstract class AbstractCorpusChecker extends AbstractBasicTranscriptionCh
         // those that are interested in this event
         for (int i = listenerList.size() - 1; i >= 0; i -= 1) {
             SearchEvent se = new SearchEvent(SearchEvent.CORPUS_INIT_PROGRESS, progress, message);
-            listenerList.elementAt(i).processSearchEvent(se);
+            listenerList.get(i).processSearchEvent(se);
         }
     }
 

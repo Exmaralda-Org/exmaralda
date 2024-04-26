@@ -28,9 +28,7 @@ import org.xml.sax.SAXException;
  * 
  * @author thomas Second attempt at application crossover! Bleeding hell!!!!!
  */
-public class CheckSegmentationErrorsAction
-		extends
-		ComaAction {
+public class CheckSegmentationErrorsAction extends ComaAction {
 
 	ProgressBarDialog pbd;
 
@@ -40,124 +38,95 @@ public class CheckSegmentationErrorsAction
 
         @Override
 	public void actionPerformed(ActionEvent e) {
-		final File file = coma.getData().getOpenFile();
-		if (file == null) {
-			JOptionPane.showMessageDialog(coma,
-					Ui.getText("err.noCorpusLoaded"));
-			return;
-		}
-		try {
+            final File file = coma.getData().getOpenFile();
+            if (file == null) {
+                    JOptionPane.showMessageDialog(coma, Ui.getText("err.noCorpusLoaded"));
+                    return;
+            }
+            ChooseSegmentationDialog dialog = new ChooseSegmentationDialog(this.coma, true);
+            dialog.setLocationRelativeTo(this.coma);
+            dialog.setVisible(true);
 
-			ChooseSegmentationDialog dialog = new ChooseSegmentationDialog(
-					this.coma, true);
-			dialog.setLocationRelativeTo(this.coma);
-			dialog.setVisible(true);
+            final SegmentationErrorsChecker checker 
+                    = new SegmentationErrorsChecker(dialog.getSegmentationCode(), dialog.getCustomFSMPath());
 
-			final SegmentationErrorsChecker checker = new SegmentationErrorsChecker(
-					dialog.getSegmentationCode(), dialog.getCustomFSMPath());
+            pbd = new ProgressBarDialog(coma, false);
+            pbd.setLocationRelativeTo(coma);
+            pbd.setTitle(Ui.getText("progress.checkSegErrors")  + coma.getData().getOpenFile().getName());
+            checker.addSearchListener(pbd);
+            pbd.setVisible(true);
 
-			pbd = new ProgressBarDialog(coma, false);
-			pbd.setLocationRelativeTo(coma);
-			pbd.setTitle(Ui.getText("progress.checkSegErrors")
-					+ coma.getData().getOpenFile().getName());
-			checker.addSearchListener(pbd);
-			pbd.setVisible(true);
+            final Runnable doDisplaySaveDialog = new Runnable() {
+                @Override
+                public void run() {
+                    displaySaveDialog(checker);
+                }
 
-			final Runnable doDisplaySaveDialog = new Runnable() {
-                                @Override
-				public void run() {
-					displaySaveDialog(checker);
-				}
-
-			};
-			Thread checkThread = new Thread() {
-				@Override
-				public void run() {
-					try {
-						checker.checkCorpus(coma.getData().getDocument(),
-								file.getParent());
-						javax.swing.SwingUtilities
-								.invokeLater(doDisplaySaveDialog);
-					} catch (URISyntaxException | JexmaraldaException | JDOMException | SAXException ex) {
-						ex.printStackTrace();
-						JOptionPane.showMessageDialog(coma, ex);
-						pbd.setVisible(false);
-					}
-				}
-			};
-			checkThread.start();
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			JOptionPane.showMessageDialog(coma, ex.getMessage());
-		}
+            };
+            Thread checkThread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        checker.checkCorpus(coma.getData().getDocument(),file.getParent());
+                        javax.swing.SwingUtilities.invokeLater(doDisplaySaveDialog);
+                    } catch (URISyntaxException | JexmaraldaException | JDOMException | SAXException ex) {
+                        System.out.println(ex.getMessage());
+                        JOptionPane.showMessageDialog(coma, ex);
+                        pbd.setVisible(false);
+                    }
+                }
+            };
+            checkThread.start();
 
 	}
 
 	private void displaySaveDialog(SegmentationErrorsChecker checker) {
-		pbd.setVisible(false);
-		int errorCount = checker.getErrors().getChildren().size();
-		if (errorCount == 0) {
-			String message = Ui.getText("result.noSegErrors");
-			JOptionPane.showMessageDialog(coma, message);
-			return;
-		} else {
-			String message = Integer.toString(errorCount)
-					+ Ui.getText("result.segErrorsFound");
-			int choice = JOptionPane.showConfirmDialog(coma, message,
-					Ui.getText("prompt.saveErrorList"),
-					JOptionPane.YES_NO_OPTION);
-			if (choice == JOptionPane.YES_OPTION) {
-				JFileChooser fc = new JFileChooser();
-				fc.setCurrentDirectory(coma.getData().getOpenFile());
-				fc.setFileFilter(new ParameterFileFilter("xml", "XML files"));
-				fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				boolean goon = false;
-				while (!goon) {
-					int ret = fc.showSaveDialog(coma);
-					if (ret == JFileChooser.APPROVE_OPTION) {
-						try {
-							String filename = fc.getSelectedFile()
-									.getAbsolutePath();
-							if (fc.getSelectedFile().getName().indexOf(".") < 0) {
-								filename += ".xml";
-							}
-							if (new File(filename).exists()) {
-								int ret2 = JOptionPane
-										.showConfirmDialog(
-												coma,
-												filename
-														+ "\n"
-														+ Ui.getText("msg.overwriteWarning"),
-												"", JOptionPane.YES_NO_OPTION);
-								if (ret2 == JOptionPane.NO_OPTION)
-									continue;
-							}
-							System.out.println("Writing error list to "
-									+ filename);
-							// org.exmaralda.common.jdomutilities.IOUtilities.writeDocumentToLocalFile(fc.getSelectedFile().getAbsolutePath(),
-							// checker.getErrorsDocoument());
-							checker.output(filename);
-							goon = true;
-						} catch (JDOMException ex) {
-							ex.printStackTrace();
-							JOptionPane.showMessageDialog(coma,
-									ex.getLocalizedMessage());
-						} catch (URISyntaxException ex) {
-							ex.printStackTrace();
-							JOptionPane.showMessageDialog(coma,
-									ex.getLocalizedMessage());
-						} catch (IOException ex) {
-							ex.printStackTrace();
-							JOptionPane.showMessageDialog(coma,
-									ex.getLocalizedMessage());
-						}
-					} else {
-						goon = true;
-					}
-				}
-			}
-		}
+            pbd.setVisible(false);
+            int errorCount = checker.getErrors().getChildren().size();
+            if (errorCount == 0) {
+                String message = Ui.getText("result.noSegErrors");
+                JOptionPane.showMessageDialog(coma, message);
+            } else {
+                String message = Integer.toString(errorCount)
+                                + Ui.getText("result.segErrorsFound");
+                int choice = JOptionPane.showConfirmDialog(coma, message,
+                                Ui.getText("prompt.saveErrorList"),
+                                JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    JFileChooser fc = new JFileChooser();
+                    fc.setCurrentDirectory(coma.getData().getOpenFile());
+                    fc.setFileFilter(new ParameterFileFilter("xml", "XML files"));
+                    fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    boolean goon = false;
+                    while (!goon) {
+                        int ret = fc.showSaveDialog(coma);
+                        if (ret == JFileChooser.APPROVE_OPTION) {
+                            try {
+                                String filename = fc.getSelectedFile().getAbsolutePath();
+                                if (!fc.getSelectedFile().getName().contains(".")) {
+                                        filename += ".xml";
+                                }
+                                if (new File(filename).exists()) {
+                                    int ret2 = JOptionPane.showConfirmDialog(
+                                        coma,
+                                        filename + "\n" + Ui.getText("msg.overwriteWarning"),
+                                        "", JOptionPane.YES_NO_OPTION);
+                                    if (ret2 == JOptionPane.NO_OPTION)
+                                            continue;
+                                }
+                                System.out.println("Writing error list to " + filename);
+                                checker.output(filename);
+                                goon = true;
+                            } catch (JDOMException | URISyntaxException | IOException ex) {
+                                System.out.println(ex.getMessage());
+                                JOptionPane.showMessageDialog(coma, ex.getLocalizedMessage());
+                            }
+                        } else {
+                                goon = true;
+                        }
+                    }
+                }
+            }
 	}
 
 }

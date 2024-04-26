@@ -36,188 +36,167 @@ public class ComaMenuBar extends JMenuBar {
 	private JMenu editMenu;
 
 	public ComaMenuBar(Coma c) {
-		coma = c;
-		JMenu fileMenu = new JMenu(Ui.getText("menu.fileMenu"));
+            coma = c;
+            JMenu fileMenu = new JMenu(Ui.getText("menu.fileMenu"));
 
-		// VIEW MENU
-		JMenu viewmenu = new JMenu(Ui.getText("menu.viewMenu"));
-		JCheckBoxMenuItem showSpeakers = new JCheckBoxMenuItem(
-				Ui.getText("menu.viewMenu.showSpeakers"));
-		showSpeakers.setSelected(prefs.getBoolean("menu.viewMenu.showSpeakers",
-				false));
-		showSpeakers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				prefs.putBoolean("menu.viewMenu.showSpeakers",
-						((JCheckBoxMenuItem) e.getSource()).isSelected());
-				coma.refreshDisplay(true);
-			}
-		});
-		viewmenu.add(showSpeakers);
-		
-		
-		JCheckBoxMenuItem showMillis = new JCheckBoxMenuItem(
-				Ui.getText("menu.viewMenu.showMillis"));
-		showMillis.setSelected(prefs.getBoolean("menu.viewMenu.showSpeakers",
-				false));
-		showMillis.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				prefs.putBoolean("menu.viewMenu.showMillis",
-						((JCheckBoxMenuItem) e.getSource()).isSelected());
-				coma.refreshDisplay(true);
-			}
-		});
-		viewmenu.add(showMillis);
-		
-		
-		
-		JCheckBoxMenuItem showMachineTags = new JCheckBoxMenuItem(
-				Ui.getText("menu.viewMenu.showMachineTags"));
-		showMachineTags.setSelected(prefs.getBoolean(
-				"menu.viewMenu.showMachineTags", false));
-		showMachineTags.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				prefs.putBoolean("menu.viewMenu.showMachineTags",
-						((JCheckBoxMenuItem) e.getSource()).isSelected());
-				coma.refreshDisplay(true);
+            // VIEW MENU
+            JMenu viewmenu = new JMenu(Ui.getText("menu.viewMenu"));
+            JCheckBoxMenuItem showSpeakers = new JCheckBoxMenuItem(Ui.getText("menu.viewMenu.showSpeakers"));
+            showSpeakers.setSelected(prefs.getBoolean("menu.viewMenu.showSpeakers", false));
+            showSpeakers.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prefs.putBoolean("menu.viewMenu.showSpeakers", ((JCheckBoxMenuItem) e.getSource()).isSelected());
+                    coma.refreshDisplay(true);
+                }
+            });
+            viewmenu.add(showSpeakers);
 
-			}
-		});
-		viewmenu.add(showMachineTags);
 
-		JCheckBoxMenuItem showLangNames = new JCheckBoxMenuItem(
-				Ui.getText("menu.viewMenu.showLangNames"));
-		showLangNames.setSelected(prefs.getBoolean(
-				"menu.viewMenu.showLangNames", false));
-		showLangNames.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				prefs.putBoolean("menu.viewMenu.showLangNames",
-						((JCheckBoxMenuItem) e.getSource()).isSelected());
-			}
-		});
-		viewmenu.add(showLangNames);
+            JCheckBoxMenuItem showMillis = new JCheckBoxMenuItem(Ui.getText("menu.viewMenu.showMillis"));
+            showMillis.setSelected(prefs.getBoolean("menu.viewMenu.showSpeakers", false));
+            showMillis.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prefs.putBoolean("menu.viewMenu.showMillis",((JCheckBoxMenuItem) e.getSource()).isSelected());
+                    coma.refreshDisplay(true);
+                }
+            });
+            viewmenu.add(showMillis);
 
-		// a group of radio button menu items
-		viewmenu.addSeparator();
-		ButtonGroup group = new ButtonGroup();
-		JRadioButtonMenuItem colored = new JRadioButtonMenuItem(
-				Ui.getText("menu.viewMenu.colored"));
-		colored.setSelected(prefs.get("menu.viewMenu.colorMode", "colored")
-				.equals("colored"));
-		colored.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				prefs.put("menu.viewMenu.colorMode", "colored");
-				coma.refreshDisplay(true);
-			}
-		});
-		group.add(colored);
-		viewmenu.add(colored);
+            JCheckBoxMenuItem showMachineTags = new JCheckBoxMenuItem(Ui.getText("menu.viewMenu.showMachineTags"));
+            showMachineTags.setSelected(prefs.getBoolean("menu.viewMenu.showMachineTags", false));
+            showMachineTags.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prefs.putBoolean("menu.viewMenu.showMachineTags",((JCheckBoxMenuItem) e.getSource()).isSelected());
+                    coma.refreshDisplay(true);
+               }
+            });
+            viewmenu.add(showMachineTags);
 
-		JRadioButtonMenuItem bw = new JRadioButtonMenuItem(
-				Ui.getText("menu.viewMenu.bw"));
-		bw.setSelected(!prefs.get("menu.viewMenu.colorMode", "colored").equals(
-				"colored"));
-		bw.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				prefs.put("menu.viewMenu.colorMode", "bw");
-				coma.refreshDisplay(true);
-			}
-		});
-		group.add(bw);
-		viewmenu.add(bw);
-		// MAINTENANCE MENU
-		JMenu maintenanceMenu = new JMenu(Ui.getText("menu.maintenanceMenu"));
-		maintenanceMenu.add(new JLabel("<html><b>"
-				+ Ui.getText("transcriptions") + "</b></html>"));
-		maintenanceMenu
-				.add(new org.exmaralda.coma.actions.SegmentTranscriptionAction(
-						Ui.getText("cmd.segmentTranscriptions"), null, coma));
-		maintenanceMenu
-				.add(new org.exmaralda.coma.actions.CheckStructureErrorsAction(
-						Ui.getText("cmd.checkStructureErrors"), null, coma));
-		maintenanceMenu
-				.add(new org.exmaralda.coma.actions.CheckSegmentationErrorsAction(
-						Ui.getText("cmd.checkSegmentationErrors"), null, coma));
+            JCheckBoxMenuItem showLangNames = new JCheckBoxMenuItem(Ui.getText("menu.viewMenu.showLangNames"));
+            showLangNames.setSelected(prefs.getBoolean("menu.viewMenu.showLangNames", false));
+            showLangNames.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prefs.putBoolean("menu.viewMenu.showLangNames", ((JCheckBoxMenuItem) e.getSource()).isSelected());
+                }
+            });
+            viewmenu.add(showLangNames);
 
-		maintenanceMenu.add(new org.exmaralda.coma.actions.CheckSpeakersAction(
-				Ui.getText("cmd.checkSpeakers"), null, coma));
+            // a group of radio button menu items
+            viewmenu.addSeparator();
+            ButtonGroup group = new ButtonGroup();
+            JRadioButtonMenuItem colored = new JRadioButtonMenuItem(Ui.getText("menu.viewMenu.colored"));
+            colored.setSelected(prefs.get("menu.viewMenu.colorMode", "colored").equals("colored"));
+            colored.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prefs.put("menu.viewMenu.colorMode", "colored");
+                    coma.refreshDisplay(true);
+                }
+            });
+            group.add(colored);
+            viewmenu.add(colored);
 
-		maintenanceMenu.add(new TranscriptionSearchAndReplaceAction(coma));
-		maintenanceMenu.addSeparator();
-		maintenanceMenu.add(new JLabel("<html><b>" + Ui.getText("metadata")
-				+ "</b></html>"));
-		maintenanceMenu.add(new RefreshTranscriptionStatsAction(coma));
-		maintenanceMenu.add(new UpdateRecordingsAction(coma));// .setEnabled(false);
-		maintenanceMenu.add(new HarmonizeDescriptionKeysAction(coma));
-		maintenanceMenu.add(new DumpCorpusAction(coma));
+            JRadioButtonMenuItem bw = new JRadioButtonMenuItem(Ui.getText("menu.viewMenu.bw"));
+            bw.setSelected(!prefs.get("menu.viewMenu.colorMode", "colored").equals("colored"));
+            bw.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    prefs.put("menu.viewMenu.colorMode", "bw");
+                    coma.refreshDisplay(true);
+                }
+            });
+            group.add(bw);
+            viewmenu.add(bw);
+            
+            // MAINTENANCE MENU
+            JMenu maintenanceMenu = new JMenu(Ui.getText("menu.maintenanceMenu"));
 
-		// maintenanceMenu.add(new UpdateTranscriptionDescriptionsAction(coma));
-		// einmal sollte ja vielleicht reichen!
 
-		// ANALYSIS MENU
-		JMenu analysisMenu = new JMenu(Ui.getText("menu.analysisMenu"));
-		analysisMenu.add(new org.exmaralda.coma.actions.ExaktSearchAction(Ui
-				.getText("cmd.searchInExakt"), null, coma));
-		analysisMenu.add(new org.exmaralda.coma.actions.CorpusStatisticsAction(
-				Ui.getText("cmd.corpusStatistics"), null, coma));
-		analysisMenu.add(new org.exmaralda.coma.actions.CorpusWordListAction(Ui
-				.getText("cmd.wordList"), null, coma));
-		analysisMenu.add(new org.exmaralda.coma.actions.SpeakerSpecificWordListAction(Ui
-				.getText("cmd.speakerSpecificWordList"), null, coma));
+            maintenanceMenu.add(new JLabel("<html><b>" + Ui.getText("transcriptions") + "</b></html>"));
+            maintenanceMenu.add(new SegmentTranscriptionAction(Ui.getText("cmd.segmentTranscriptions"), null, coma));
+            maintenanceMenu.addSeparator();
+            maintenanceMenu.add(new CheckStructureErrorsAction(Ui.getText("cmd.checkStructureErrors"), null, coma));
+            maintenanceMenu.add(new CheckSegmentationErrorsAction(Ui.getText("cmd.checkSegmentationErrors"), null, coma));
+            maintenanceMenu.add(new CheckSpeakersAction(Ui.getText("cmd.checkSpeakers"), null, coma));
+            maintenanceMenu.add(new CollectTierCategoriesTypesAction(Ui.getText("cmd.collectTierCategoriesTypes"), null, coma));
+            maintenanceMenu.add(new CollectTypesAction(Ui.getText("cmd.collectTypes"), null, coma));
 
-		// TOOLS MENU
-		JMenu toolsmenu = new JMenu(Ui.getText("name.toolsMenu"));
-		toolsmenu.add(new TreeTaggerAction(Ui.getText("cmd.treeTag"), null,
-				coma));
+            maintenanceMenu.addSeparator();
+            maintenanceMenu.add(new TranscriptionSearchAndReplaceAction(coma));
+            maintenanceMenu.addSeparator();
+            maintenanceMenu.add(new JLabel("<html><b>" + Ui.getText("metadata") + "</b></html>"));
+            maintenanceMenu.add(new RefreshTranscriptionStatsAction(coma));
+            maintenanceMenu.add(new UpdateRecordingsAction(coma));// .setEnabled(false);
+            maintenanceMenu.add(new HarmonizeDescriptionKeysAction(coma));
+            maintenanceMenu.add(new DumpCorpusAction(coma));
+
+            // maintenanceMenu.add(new UpdateTranscriptionDescriptionsAction(coma));
+            // einmal sollte ja vielleicht reichen!
+
+            // ANALYSIS MENU
+            JMenu analysisMenu = new JMenu(Ui.getText("menu.analysisMenu"));
+            analysisMenu.add(new org.exmaralda.coma.actions.ExaktSearchAction(Ui.getText("cmd.searchInExakt"), null, coma));
+            analysisMenu.add(new org.exmaralda.coma.actions.CorpusStatisticsAction(Ui.getText("cmd.corpusStatistics"), null, coma));
+            analysisMenu.add(new org.exmaralda.coma.actions.CorpusWordListAction(Ui.getText("cmd.wordList"), null, coma));
+            analysisMenu.add(new org.exmaralda.coma.actions.SpeakerSpecificWordListAction(Ui.getText("cmd.speakerSpecificWordList"), null, coma));
+
+            // TOOLS MENU
+            JMenu toolsmenu = new JMenu(Ui.getText("name.toolsMenu"));
+            toolsmenu.add(new TreeTaggerAction(Ui.getText("cmd.treeTag"), null,coma));
 /*		ROLES!
- * 		toolsmenu.add(new IntroduceRolesAction(coma));
- */
-		// toolsmenu.add(new DumpCorpusAction(coma));
+* 		toolsmenu.add(new IntroduceRolesAction(coma));
+*/
+            // toolsmenu.add(new DumpCorpusAction(coma));
 
-		// ATTENTION: added by the evil TS!!!!!
-		// toolsmenu.add(new org.exmaralda.coma.actions.ExaktSearchAction(Ui
-		// .getText("cmd.searchInExakt"), null, coma));
-		// toolsmenu
-		// .add(new org.exmaralda.coma.actions.CheckStructureErrorsAction(
-		// Ui.getText("cmd.checkStructureErrors"), null, coma));
-		// toolsmenu
-		// .add(new org.exmaralda.coma.actions.CheckSegmentationErrorsAction(
-		// Ui.getText("cmd.checkSegmentationErrors"), null, coma));
-		// toolsmenu.add(new
-		// org.exmaralda.coma.actions.CorpusStatisticsAction(Ui
-		// .getText("cmd.corpusStatistics"), null, coma));
-		// END: addition by the evil TS
-		//
-		// toolsmenu.add(new RefreshTranscriptionStatsAction(coma));
-		// toolsmenu.addSeparator();
-		// toolsmenu.add(new HarmonizeDescriptionKeysAction(coma));
-		// toolsmenu.add(new HarmonizeDescriptionValuesAction(coma));
-		JMenu helpmenu = new JMenu(Ui.getText("name.helpMenu"));
-		helpmenu.add(new org.exmaralda.coma.actions.HelpAction(coma));
-		helpmenu.add(new UpdateCheckAction(coma));
-		helpmenu.add(new CopyDebugInfoAction(coma));
+            // ATTENTION: added by the evil TS!!!!!
+            // toolsmenu.add(new org.exmaralda.coma.actions.ExaktSearchAction(Ui
+            // .getText("cmd.searchInExakt"), null, coma));
+            // toolsmenu
+            // .add(new org.exmaralda.coma.actions.CheckStructureErrorsAction(
+            // Ui.getText("cmd.checkStructureErrors"), null, coma));
+            // toolsmenu
+            // .add(new org.exmaralda.coma.actions.CheckSegmentationErrorsAction(
+            // Ui.getText("cmd.checkSegmentationErrors"), null, coma));
+            // toolsmenu.add(new
+            // org.exmaralda.coma.actions.CorpusStatisticsAction(Ui
+            // .getText("cmd.corpusStatistics"), null, coma));
+            // END: addition by the evil TS
+            //
+            // toolsmenu.add(new RefreshTranscriptionStatsAction(coma));
+            // toolsmenu.addSeparator();
+            // toolsmenu.add(new HarmonizeDescriptionKeysAction(coma));
+            // toolsmenu.add(new HarmonizeDescriptionValuesAction(coma));
+            JMenu helpmenu = new JMenu(Ui.getText("name.helpMenu"));
+            helpmenu.add(new org.exmaralda.coma.actions.HelpAction(coma));
+            helpmenu.add(new UpdateCheckAction(coma));
+            helpmenu.add(new CopyDebugInfoAction(coma));
 
-		helpmenu.addSeparator();
-		helpmenu.add(new AboutAction(coma));
+            helpmenu.addSeparator();
+            helpmenu.add(new AboutAction(coma));
 //		helpmenu.add(new EasterEggAction(coma));
-		Ui.getText("");
+            Ui.getText("");
 
-		// aboutness
-		add(getFileMenu());
-		add(getEditMenu());
-		add(viewmenu);
-		add(toolsmenu);
-		add(analysisMenu);
-		add(maintenanceMenu);
-		add(helpmenu);
+            // aboutness
+            add(getFileMenu());
+            add(getEditMenu());
+            add(viewmenu);
+            add(toolsmenu);
+            add(analysisMenu);
+            add(maintenanceMenu);
+            add(helpmenu);
 	}
 
 	private JMenu getEditMenu() {
-		if (this.editMenu == null) {
-			this.editMenu = new JMenu(Ui.getText("name.editMenu"));
-		}
-		editMenu.removeAll();
-		editMenu.add(new PrefsAction(coma));
-		return editMenu;
+            if (this.editMenu == null) {
+                this.editMenu = new JMenu(Ui.getText("name.editMenu"));
+            }
+            editMenu.removeAll();
+            editMenu.add(new PrefsAction(coma));
+            return editMenu;
 	}
 
 	private JMenu getFileMenu() {
@@ -232,7 +211,7 @@ public class ComaMenuBar extends JMenuBar {
 		fileMenu.addSeparator();
 		File of = new File("");
 		int count = 0;
-		if (coma.getData().getRecentFiles().size() > 0) {
+		if (!coma.getData().getRecentFiles().isEmpty()) {
 			for (File f : coma.getData().getRecentFiles()) {
 				if (!f.equals(of)) {
 					fileMenu.add(new OpenAction(coma, f)).setToolTipText(
@@ -261,6 +240,7 @@ public class ComaMenuBar extends JMenuBar {
 		autoload.setEnabled(new File(prefs.get("defaultTemplatesFile", ""))
 				.exists());
 		autoload.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				prefs.putBoolean("cmd.autoLoadTemplates",
 						((JCheckBoxMenuItem) e.getSource()).isSelected());

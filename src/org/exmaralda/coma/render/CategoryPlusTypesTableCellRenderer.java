@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.partitureditor.jexmaraldaswing;
+package org.exmaralda.coma.render;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -15,11 +15,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author thomas
  */
-class TypeTableCellRenderer implements javax.swing.table.TableCellRenderer {
+public class CategoryPlusTypesTableCellRenderer implements javax.swing.table.TableCellRenderer {
 
     DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
     
-    public TypeTableCellRenderer() {
+    public CategoryPlusTypesTableCellRenderer() {
     }
 
     @Override
@@ -29,18 +29,14 @@ class TypeTableCellRenderer implements javax.swing.table.TableCellRenderer {
         switch (column){
             case 0 :
                 c.setForeground(Color.BLUE);
+                c.setFont(c.getFont().deriveFont(Font.BOLD));
                 break;
             case 1 :
                 c.setForeground(Color.BLACK);
                 c.setFont(c.getFont().deriveFont(Font.BOLD));
                 break;
             case 2 :
-                String sourceValue = (String) table.getModel().getValueAt(table.convertRowIndexToModel(row), 0);
-                if (sourceValue.equals(value)){
-                    c.setForeground(Color.LIGHT_GRAY);
-                } else {
-                    c.setForeground(Color.red);
-                }
+                break;
         }
         return c;
 

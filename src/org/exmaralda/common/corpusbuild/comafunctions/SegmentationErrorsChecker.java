@@ -42,6 +42,8 @@ public class SegmentationErrorsChecker extends AbstractCorpusChecker {
                 segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.DIDASegmentation();
             } else if (segmentationName.equals("IPA")){
                 segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.IPASegmentation();
+            } else if (segmentationName.equals("INEL_EVENT_BASED")){
+                segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation();
             } else {
                 segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation();
             }
@@ -60,6 +62,8 @@ public class SegmentationErrorsChecker extends AbstractCorpusChecker {
                 segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.DIDASegmentation(customFSMPath);
             } else if (segmentationName.equals("IPA")){
                 segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.IPASegmentation(customFSMPath);
+            } else if (segmentationName.equals("INEL_EVENT_BASED")){
+                segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation();
             } else {
                 segmentation = new org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation(customFSMPath);
             }            

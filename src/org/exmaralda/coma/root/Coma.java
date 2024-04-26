@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -91,11 +92,11 @@ public class Coma extends JFrame implements ChangeListener,
      */
     private static final long serialVersionUID = 1L;
     private ComaData data;
-    private HashMap<String, ComaDatatype> editableItems = new HashMap<String, ComaDatatype>();
+    private HashMap<String, ComaDatatype> editableItems = new HashMap<>();
     public static Preferences prefs = Ui.prefs;
     public static final String FILE_SCHEME = "file://";
-    private HashMap<String, Element> speakerIndex = new HashMap<String, Element>();
-    private HashMap<String, Element> commIndex = new HashMap<String, Element>();
+    private HashMap<String, Element> speakerIndex = new HashMap<>();
+    private HashMap<String, Element> commIndex = new HashMap<>();
     // private HashSet<Element> basketHS;
     public Element nowSpeaker;
     private Document basket;
@@ -171,6 +172,7 @@ public class Coma extends JFrame implements ChangeListener,
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
 
+            @Override
             public void windowClosing(WindowEvent evt) {
                 quit();
             }
@@ -310,17 +312,14 @@ public class Coma extends JFrame implements ChangeListener,
         newCorpus();
     }
 
+    @Override
     public final void stateChanged(ChangeEvent e) {
-        if (elementTabbedPane.getTitleAt(elementTabbedPane.getSelectedIndex()) == Ui
-                .getText("data")) {
+        if (elementTabbedPane.getTitleAt(elementTabbedPane.getSelectedIndex()).equals(Ui.getText("data"))) {
             dataPanel.updateLists();
             dataPanel.validate();
-        } else if (elementTabbedPane.getTitleAt(elementTabbedPane
-                .getSelectedIndex()) == Ui.getText("person")) {
+        } else if (elementTabbedPane.getTitleAt(elementTabbedPane.getSelectedIndex()).equals(Ui.getText("person"))) {
             // personPanel.updateLists();
-        } else if (elementTabbedPane.getTitleAt(
-                elementTabbedPane.getSelectedIndex()).startsWith(
-                Ui.getText("basket"))) {
+        } else if (elementTabbedPane.getTitleAt(elementTabbedPane.getSelectedIndex()).startsWith(Ui.getText("basket"))) {
             basketPanel.updateDisplay();
         }
     }
@@ -530,7 +529,7 @@ public class Coma extends JFrame implements ChangeListener,
                     parsed = true;
                     this.setCursor(Cursor.DEFAULT_CURSOR);
                     return tempDoc;
-                } catch (Exception e) {
+                } catch (IOException | JDOMException e) {
                     status(e.getMessage());
                     status("xml operation failed: ", false);
                     JOptionPane.showMessageDialog(

@@ -26,6 +26,7 @@ public abstract class AbstractBasicTranscriptionProcessor extends AbstractCorpus
         super(corpusPath);
     }
 
+    @Override
     public void process(String filename) throws JexmaraldaException, SAXException {
         BasicTranscription bt = new BasicTranscription(filename);
         System.out.println(filename + " read successfully.");
@@ -33,6 +34,7 @@ public abstract class AbstractBasicTranscriptionProcessor extends AbstractCorpus
         processTranscription(bt);                        
     }
 
+    @Override
     public String getXpathToTranscriptions() {
         return BASIC_FILE_XPATH;
     }
