@@ -72,6 +72,7 @@ public class CollectTypesAction extends ComaAction {
                 pbd = new ProgressBarDialog(coma, false);
                 pbd.setLocationRelativeTo(coma);
                 pbd.setTitle(Ui.getText("progress.collectTypes") + coma.getData().getOpenFile().getName());
+                collector.addSearchListener(pbd);                
                 pbd.setVisible(true);
                 
                 final Runnable doDisplaySaveDialog = new Runnable() {

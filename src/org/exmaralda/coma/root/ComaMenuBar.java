@@ -122,6 +122,9 @@ public class ComaMenuBar extends JMenuBar {
             maintenanceMenu.add(new CheckStructureErrorsAction(Ui.getText("cmd.checkStructureErrors"), null, coma));
             maintenanceMenu.add(new CheckSegmentationErrorsAction(Ui.getText("cmd.checkSegmentationErrors"), null, coma));
             maintenanceMenu.add(new CheckSpeakersAction(Ui.getText("cmd.checkSpeakers"), null, coma));
+
+            maintenanceMenu.addSeparator();
+
             maintenanceMenu.add(new CollectTierCategoriesTypesAction(Ui.getText("cmd.collectTierCategoriesTypes"), null, coma));
             maintenanceMenu.add(new CollectTypesAction(Ui.getText("cmd.collectTypes"), null, coma));
 

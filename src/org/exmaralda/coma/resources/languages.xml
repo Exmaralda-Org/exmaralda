@@ -227,14 +227,14 @@
                 <uiItem name="cmd.collectTierCategoriesTypes" lang="deu" value="Spurkategorien und -typen einsammeln..."/>
 		<uiItem name="cmd.collectTierCategoriesTypes" lang="eng" value="Collect tier categories and types..."/>
 
-                <uiItem name="progress.collectTierCategoriesTypes" lang="deu" value="Sammele Spurkategorien und -typen"/>
-		<uiItem name="cprogress.collectTierCategoriesTypes" lang="eng" value="Collecting tier categories and types..."/>
+                <uiItem name="progress.collectTierCategoriesTypes" lang="deu" value="Sammele Spurkategorien und -typen "/>
+		<uiItem name="progress.collectTierCategoriesTypes" lang="eng" value="Collecting tier categories and types "/>
 
                 <uiItem name="cmd.collectTypes" lang="deu" value="Types in Spuren einsammeln..."/>
 		<uiItem name="cmd.collectTypes" lang="eng" value="Collect types in tiers..."/>
                 
-                <uiItem name="progress.collectTypes" lang="deu" value="Sammele Types in Spuren"/>
-		<uiItem name="progress.collectTypes" lang="eng" value="Collecting types in tiers"/>
+                <uiItem name="progress.collectTypes" lang="deu" value="Sammele Types in Spuren "/>
+		<uiItem name="progress.collectTypes" lang="eng" value="Collecting types in tiers "/>
 
                 <uiItem name="cmd.clearRecentFileList" lang="deu" value="Liste löschen"/>
 		<uiItem name="cmd.clearRecentFileList" lang="eng" value="Clear list"/>

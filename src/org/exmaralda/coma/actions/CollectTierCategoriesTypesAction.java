@@ -51,6 +51,8 @@ public class CollectTierCategoriesTypesAction extends ComaAction {
             pbd = new ProgressBarDialog(coma, false);
             pbd.setLocationRelativeTo(coma);
             pbd.setTitle(Ui.getText("progress.collectTierCategoriesTypes") + coma.getData().getOpenFile().getName());			
+            collector.addSearchListener(pbd);
+            
             pbd.setVisible(true);
 
             final Runnable doDisplaySaveDialog = new Runnable() {
