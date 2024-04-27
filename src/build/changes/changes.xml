@@ -10,6 +10,24 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="feature" version="1.8" date="27.04.2023">Copy/paste structure actions (issue #471)</change>
+    <change tool="coma" type="feature" version="2.0.3" date="26.04.2024">Type collection (issue #475)</change>
+    <change tool="orthonormal" type="change" version="1.0.1" date="26.04.2024">Tolerate missing audio (issue #472)</change>
+    <change tool="partitureditor" type="bug" version="1.8" date="23.04.2023">Check for format table also when opening via double-click or recent files (issue #398)</change>
+    <change tool="exakt" type="feature" version="1.4.1" date="21.04.2023">Open Partitur-Editor action (issue #417)</change>
+    <change tool="exakt" type="feature" version="1.4.1" date="21.04.2023">Event-based segmentation for INEL (issue #470)</change>
+    <change tool="coma" type="feature" version="2.0.3" date="21.04.2023">Event-based segmentation for INEL (issue #470)</change>
+    <change tool="partitureditor" type="feature" version="1.8" date="21.04.2023">Event-based segmentation for INEL (issue #470)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="19.04.2023">Remember selection after switching audio (issue #469)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="19.04.2023">Bulk move event left/right (issue #467)</change>
+    <change tool="orthonormal" type="bug" version="1.8" date="18.04.2023">Reinsert IDs everywhere after "Edit contribution" (issue #322)</change>
+    <change tool="partitureditor" type="bug" version="1.8" date="18.04.2023">Partiture corrupted in some cases of Whisper ASR (issue #421)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="18.04.2023">Status feedback for actions (issue #466)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="18.04.2023">Post-processing whisper output: remove random puncutation (issue #421)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="17.04.2023">Fixed focus issue for some dialogs (issue #462)</change>
+    <change tool="all" type="change" version="1.8" date="16.04.2023">Build windows distribution with new certificate (issue #450)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="16.04.2023">Make sure editor does not exit while saving (issue #456)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="16.04.2023">More promintent marker for editing cell (issue #458)</change>
     <change tool="partitureditor" type="change" version="1.8" date="01.12.2023">Timeline tolerance configurable (issue #442)</change>
     <change tool="partitureditor" type="change" version="1.8" date="01.12.2023">Remember parameters for WebMAUS (issue #441)</change>
     <change tool="partitureditor" type="change" version="1.8" date="16.11.2023">Additional option for WebMAUS (issue #432)</change>
