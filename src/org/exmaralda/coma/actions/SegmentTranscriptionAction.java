@@ -27,6 +27,7 @@ import org.exmaralda.common.corpusbuild.TranscriptionSegmentor;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
 
 /**
@@ -37,10 +38,9 @@ public class SegmentTranscriptionAction extends
 		ComaAction {
 
 	ProgressBarDialog pbd;
-	SegmentationOptionsDialog dialog = new SegmentationOptionsDialog(this.coma,
-			true);
+	SegmentationOptionsDialog dialog = new SegmentationOptionsDialog(this.coma, true);
 	Vector<File> basicTr;
-	HashSet<File> existingSegs = new HashSet<File>();
+	HashSet<File> existingSegs = new HashSet<>();
 	Hashtable<File, Element> basicTr2Communication;
 	Document comaDocument;
 
@@ -52,16 +52,14 @@ public class SegmentTranscriptionAction extends
 	public void actionPerformed(ActionEvent e) {
 		final File file = coma.getData().getOpenFile();
 		if (file == null) {
-			JOptionPane.showMessageDialog(coma,
-					Ui.getText("err.noCorpusLoaded"));
-			return;
+                    JOptionPane.showMessageDialog(coma, Ui.getText("err.noCorpusLoaded"));
+                    return;
 		}
 
 		dialog.setLocationRelativeTo(this.coma);
 		dialog.setVisible(true);
 
-		if (!dialog.approved)
-			return;
+		if (!dialog.approved) return;
 
 		comaDocument = coma.getData().getDocument();
 		String CORPUS_BASEDIRECTORY = coma.getData().getOpenFile().getParent();
@@ -72,24 +70,24 @@ public class SegmentTranscriptionAction extends
 		basicTr2Communication = new Hashtable<File, Element>();
 
 		try {
-			basicTransNSLinks = XPath.newInstance(
-					AbstractCorpusProcessor.BASIC_FILE_XPATH).selectNodes(
-					comaDocument);
-			segmentedTransNSLinks = XPath.newInstance(
-					AbstractCorpusProcessor.SEGMENTED_FILE_XPATH).selectNodes(
-					comaDocument);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+                    basicTransNSLinks = XPath.newInstance(
+                                    AbstractCorpusProcessor.BASIC_FILE_XPATH).selectNodes(
+                                    comaDocument);
+                    segmentedTransNSLinks = XPath.newInstance(
+                                    AbstractCorpusProcessor.SEGMENTED_FILE_XPATH).selectNodes(
+                                    comaDocument);
+		} catch (JDOMException ex) {
+                    ex.printStackTrace();
 		}
 		for (Object o : basicTransNSLinks) {
-			Element nslink = (Element) (o);
-			String fullTranscriptionName = CORPUS_BASEDIRECTORY
-					+ System.getProperty("file.separator", "/")
-					+ nslink.getText();
-			File transcriptionFile = new File(fullTranscriptionName);
-			basicTr.add(transcriptionFile);
-			basicTr2Communication.put(transcriptionFile, nslink
-					.getParentElement().getParentElement());
+                    Element nslink = (Element) (o);
+                    String fullTranscriptionName = CORPUS_BASEDIRECTORY
+                                    + System.getProperty("file.separator", "/")
+                                    + nslink.getText();
+                    File transcriptionFile = new File(fullTranscriptionName);
+                    basicTr.add(transcriptionFile);
+                    basicTr2Communication.put(transcriptionFile, nslink
+                                    .getParentElement().getParentElement());
 		}
 		for (Object o : segmentedTransNSLinks) {
 			Element nslink = (Element) (o);

@@ -210,7 +210,7 @@ public class TransformationDialog extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(100, 14));
         segmentationPanel.add(jLabel3);
 
-        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "GENERIC", "HIAT", "GAT", "cGAT_MINIMAL", "CHAT", "DIDA", "IPA" }));
+        segmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NONE", "GENERIC", "HIAT", "GAT", "cGAT_MINIMAL", "CHAT", "DIDA", "IPA", "INEL_EVENT_BASED", " " }));
         segmentationComboBox.setEnabled(false);
         segmentationComboBox.setMaximumSize(new java.awt.Dimension(150, 20));
         segmentationComboBox.setMinimumSize(new java.awt.Dimension(150, 20));

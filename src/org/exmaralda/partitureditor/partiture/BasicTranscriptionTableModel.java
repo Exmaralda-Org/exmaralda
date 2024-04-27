@@ -1459,6 +1459,38 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         } catch (JexmaraldaException je){}            // should never get here        
     }
 
+    void pasteStructure(BasicTranscription structureClipboard, int selectionStartRow, int selectionEndRow, int selectionStartCol, int selectionEndCol) {
+        int lengthOfSelection = selectionEndCol - selectionStartCol + 1;
+        int lengthOfClipboard = structureClipboard.getBody().getCommonTimeline().getNumberOfTimelineItems() - 1;
+
+        while (lengthOfSelection<lengthOfClipboard){
+            insertTimelineItem(selectionEndCol + 1);
+            lengthOfSelection++;
+        }
+        
+        System.out.println(structureClipboard.getBody().toXML());
+        
+        for (int row=selectionStartRow; row<=selectionEndRow; row++){
+            Tier sourceTier = structureClipboard.getBody().getTierAt(row-selectionStartRow);
+            Tier targetTier = getTier(row);
+            for (int pos=0; pos<sourceTier.getNumberOfEvents(); pos++){
+                Event event = sourceTier.getEventAt(pos);
+                int startIndex = structureClipboard.getBody().getCommonTimeline().lookupID(event.getStart());
+                int endIndex = structureClipboard.getBody().getCommonTimeline().lookupID(event.getEnd());
+                String startTLI = getTranscription().getBody().getCommonTimeline().getTimelineItemAt(selectionStartCol + startIndex).getID();
+                String endTLI = getTranscription().getBody().getCommonTimeline().getTimelineItemAt(selectionStartCol + endIndex).getID();
+                Event newEvent = new Event(startTLI, endTLI, event.getDescription());
+                System.out.println(newEvent.toXML());
+                targetTier.addEvent(newEvent);                
+                fireEventAdded(row, selectionStartCol + startIndex, selectionStartCol + endIndex);
+                fireCellSpanChanged(row, selectionStartCol + startIndex);
+                fireCellFormatChanged(row, selectionStartCol + startIndex);
+            }
+        }
+        
+        fireAreaChanged(selectionStartCol, selectionEndCol);
+    }
+
 
 
 

@@ -65,6 +65,7 @@ public class ChooseSegmentationDialog extends javax.swing.JDialog {
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
         jRadioButton8 = new javax.swing.JRadioButton();
+        jRadioButton9 = new javax.swing.JRadioButton();
         customFSMPanel = new javax.swing.JPanel();
         customFSMTextField = new javax.swing.JTextField();
         customFSMBrowseButton = new javax.swing.JButton();
@@ -85,7 +86,7 @@ public class ChooseSegmentationDialog extends javax.swing.JDialog {
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         segmentationPickerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Built-in segmentation algorithms"));
-        segmentationPickerPanel.setLayout(new java.awt.GridLayout(4, 2));
+        segmentationPickerPanel.setLayout(new java.awt.GridLayout(3, 3));
 
         buttonGroup1.add(jRadioButton7);
         jRadioButton7.setSelected(true);
@@ -119,6 +120,10 @@ public class ChooseSegmentationDialog extends javax.swing.JDialog {
         buttonGroup1.add(jRadioButton8);
         jRadioButton8.setText("CHAT_MINIMAL");
         segmentationPickerPanel.add(jRadioButton8);
+
+        buttonGroup1.add(jRadioButton9);
+        jRadioButton9.setText("INEL_EVENT_BASED");
+        segmentationPickerPanel.add(jRadioButton9);
 
         mainPanel.add(segmentationPickerPanel, java.awt.BorderLayout.CENTER);
 
@@ -188,6 +193,7 @@ public class ChooseSegmentationDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel segmentationPickerPanel;

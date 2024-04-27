@@ -22,6 +22,8 @@
         <characters>
             <character>(</character> <!-- opening round parenthesis -->
             <character>)</character> <!-- closing round parenthesis -->
+            <character>[</character> <!-- opening square bracket -->
+            <character>]</character> <!-- closing square bracket -->
             <character> </character> <!-- space -->
             <character>…</character> <!-- ellipsis (one symbol) -->
             <character>.</character> <!-- period -->

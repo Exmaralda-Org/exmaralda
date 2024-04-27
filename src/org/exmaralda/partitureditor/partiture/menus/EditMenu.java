@@ -23,7 +23,9 @@ public class EditMenu extends AbstractTableMenu {
 
     private final JMenuItem copyTextMenuItem;
     private final JMenuItem copyHTMLMenuItem; // #338
+    private final JMenuItem copyStructureMenuItem; // #471
     private final JMenuItem pasteMenuItem;
+    private final JMenuItem pasteStructureMenuItem; // #471
     private final JMenuItem cutMenuItem;
 
     private final JMenuItem searchInEventsMenuItem;
@@ -51,50 +53,58 @@ public class EditMenu extends AbstractTableMenu {
 
         
         undoMenuItem = this.add(table.undoAction);
-        undoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        undoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
         undoMenuItem.setToolTipText("Undo the last action");
         
         addSeparator();
 
         // edit menu
         copyTextMenuItem = this.add(table.copyTextAction);
-        copyTextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        copyTextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
         
         copyHTMLMenuItem = this.add(table.copyHTMLAction);
         copyHTMLMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK+ActionEvent.SHIFT_MASK));
+        copyHTMLMenuItem.setToolTipText("Copy the current selection as HTML");
         
+        copyStructureMenuItem = this.add(table.copyStructureAction);
+        copyStructureMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK+ActionEvent.ALT_MASK));
+        copyHTMLMenuItem.setToolTipText("Copy the current selection as a transcript structure");
 
         pasteMenuItem = this.add(table.pasteAction);
-        pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        pasteMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
         
+        pasteStructureMenuItem = this.add(table.pasteStructureAction);
+        pasteStructureMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK+ActionEvent.ALT_MASK));
+        pasteStructureMenuItem.setToolTipText("Paste the current transcript structure from the clipboard");
+
         cutMenuItem = this.add(table.cutAction);
-        cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        cutMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
         
         this.add(new javax.swing.JSeparator());
         //-------------------------------------------------
 
         searchInEventsMenuItem = this.add(table.searchInEventsAction);
-        searchInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        searchInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
         searchInEventsMenuItem.setToolTipText("Search for text in events");
         
         findNextMenuItem = this.add(table.findNextAction);
-        findNextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        findNextMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
         findNextMenuItem.setToolTipText("Find the next item for the last search in events");
 
         replaceInEventsMenuItem = this.add(table.replaceInEventsAction);
-        replaceInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        replaceInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
         replaceInEventsMenuItem.setToolTipText("Search and replace text in events");
         
         lowerUpperCaseMenuItem = this.add(table.lowerUpperCaseAction);
         replaceInEventsMenuItem.setToolTipText("Replace upper with lower case letters or vice versa");
 
-        add(table.gotoAction).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        add(table.gotoAction).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
 
         this.add(new javax.swing.JSeparator());
         //-------------------------------------------------
 
         exaktSearchMenuItem = this.add(table.exaktSearchAction);
-        exaktSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK + Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        exaktSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
         exaktSearchMenuItem.setToolTipText("Use EXAKT interface to do a search on this transcription");
                 
         this.add(new javax.swing.JSeparator());

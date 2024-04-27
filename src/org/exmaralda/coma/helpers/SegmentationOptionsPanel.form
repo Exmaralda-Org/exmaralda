@@ -98,7 +98,7 @@
             <Component class="javax.swing.JComboBox" name="segSelector">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="10">
                     <StringItem index="0" value="default"/>
                     <StringItem index="1" value="HIAT"/>
                     <StringItem index="2" value="DIDA"/>
@@ -108,6 +108,7 @@
                     <StringItem index="6" value="GENERIC"/>
                     <StringItem index="7" value="cGAT_MINIMAL"/>
                     <StringItem index="8" value="CHAT_MINIMAL"/>
+                    <StringItem index="9" value="INEL_EVENT_BASED"/>
                   </StringArray>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

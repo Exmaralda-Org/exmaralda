@@ -305,8 +305,12 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction copyTextAction;
     /** Action for copying currently selected text to the clipboard as HTML (#338)*/
     public javax.swing.AbstractAction copyHTMLAction;
+    /** Action for copying the current selection as a transcription (#471) */
+    public javax.swing.AbstractAction copyStructureAction;
     /** Action for pasting the clipboard at the current cursor position */
     public javax.swing.AbstractAction pasteAction;
+    /** Action for pasting the structure clipboard at the current position (#471) */
+    public javax.swing.AbstractAction pasteStructureAction;
     /** Action for cutting currently selected text to the clipboard */
     public javax.swing.AbstractAction cutAction;
 
@@ -322,9 +326,6 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction selectionToNewAction;
     public javax.swing.AbstractAction leftPartToNewAction;
     public javax.swing.AbstractAction rightPartToNewAction;
-    /*public javax.swing.AbstractAction selectionToHTMLAction;
-    public javax.swing.AbstractAction selectionToRTFAction;
-    public javax.swing.AbstractAction printSelectionAction;*/
     
     public javax.swing.AbstractAction glueTranscriptionsAction;
     public javax.swing.AbstractAction mergeTranscriptionsAction;
@@ -635,7 +636,11 @@ public class PartitureTableWithActions extends PartitureTable
         copyTextAction = new CopyTextAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
         // new for #338
         copyHTMLAction = new CopyHTMLAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
+        // new for #471
+        copyStructureAction = new CopyStructureAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Copy.gif")));
         pasteAction = new PasteAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Paste.gif")));
+        // new for #471
+        pasteStructureAction = new PasteStructureAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Paste.gif")));
         cutAction = new CutAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Cut.gif")));
 
         searchInEventsAction = new SearchInEventsAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Search.gif")));
@@ -1052,6 +1057,75 @@ public class PartitureTableWithActions extends PartitureTable
     public String getFilename(){
         return filename;
     }
+    
+    // *********************************************************************************** //
+    // ************************ STRUCTURE CLIPBOARD ************************************** //
+    // *********************************************************************************** //
+
+
+    BasicTranscription structureClipboard;
+    
+    public void setStructureClipboard(BasicTranscription newTranscription) {
+        structureClipboard = newTranscription;
+    }
+    
+    public BasicTranscription getStructureClipboard(){
+        return structureClipboard;
+    }
+    
+    public void pasteStructureClipboard() {
+        boolean clipboardFits = false;
+        
+        int lengthOfSelection = selectionEndCol - selectionStartCol + 1;
+        int lengthOfClipboard = structureClipboard.getBody().getCommonTimeline().getNumberOfTimelineItems() - 1;
+        
+        String rememberSelectionEndColID = getModel().getTimelineItem(selectionEndCol).getID();
+        
+        if (lengthOfSelection==1 || lengthOfSelection==lengthOfClipboard){
+            // that's the good case
+            int heightOfSelection = selectionEndRow - selectionStartRow + 1;
+            int heightOfClipboard = structureClipboard.getBody().getNumberOfTiers();
+            if (heightOfSelection==heightOfClipboard){
+                // that's an even better case
+                clipboardFits = true;
+            }
+        }
+        
+        if (!clipboardFits){
+            String message = "The structure in the clipboard does not match the structure of the selection";
+            JOptionPane.showMessageDialog(this, message);
+            return;
+        }
+        
+        boolean targetIsEmpty = true;
+        for (int col=selectionStartCol; col<=selectionEndCol; col++){
+            for (int row=selectionStartRow; row<=selectionEndRow; row++){
+                targetIsEmpty = targetIsEmpty && (!getModel().containsEvent(row, col));
+            }
+        }
+        
+        if (!targetIsEmpty){
+            String message = "The target structure is not empty.\n Overwrite?";
+            int optionChosen = JOptionPane.showConfirmDialog(this, message, "Overwrite target?", JOptionPane.YES_NO_OPTION);
+            if (optionChosen == JOptionPane.YES_OPTION){
+                getModel().deleteEvents(selectionStartRow, selectionEndRow, selectionStartCol, selectionEndCol);                
+            } else {
+                return;
+            }
+        }
+       
+        getModel().pasteStructure(this.getStructureClipboard(), selectionStartRow, selectionEndRow, selectionStartCol, selectionEndCol);
+        
+        transcriptionChanged = true;
+        
+        int newSelectionEndCol = getModel().getTranscription().getBody().getCommonTimeline().lookupID(rememberSelectionEndColID) + 1;
+        
+        setSelection(selectionStartRow, selectionEndRow, selectionStartCol, newSelectionEndCol);
+        
+        
+    }
+
+    
             
     // *********************************************************************************** //
     // ************************ LISTENER METHODS ***************************************** //
@@ -3184,6 +3258,8 @@ public class PartitureTableWithActions extends PartitureTable
         }
         return y;
     }
+
+
     
     
     

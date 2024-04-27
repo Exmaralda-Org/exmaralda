@@ -81,7 +81,8 @@ public class SegmentedBody extends AbstractTierBody implements XMLable {
         }
     }
     
-    /** returns a hashtable where each tli is assigned the nearest tli on the common timeline */
+    /** returns a hashtable where each tli is assigned the nearest tli on the common timeline
+     * @return  */
     public Hashtable makeTLIHashtable(){
         Hashtable result = new Hashtable();
         for (int pos=0; pos<getCommonTimeline().getNumberOfTimelineItems(); pos++){

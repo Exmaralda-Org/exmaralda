@@ -100,7 +100,7 @@ public class SegmentationOptionsPanel extends javax.swing.JPanel {
         algorithmPanel.setAlignmentX(0.0F);
         algorithmPanel.setLayout(new java.awt.BorderLayout());
 
-        segSelector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "default", "HIAT", "DIDA", "CHAT", "GAT", "IPA", "GENERIC", "cGAT_MINIMAL", "CHAT_MINIMAL" }));
+        segSelector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "default", "HIAT", "DIDA", "GAT", "CHAT", "IPA", "GENERIC", "cGAT_MINIMAL", "CHAT_MINIMAL", "INEL_EVENT_BASED" }));
         segSelector.setMaximumSize(new java.awt.Dimension(300, 20));
         segSelector.setPreferredSize(new java.awt.Dimension(200, 20));
         algorithmPanel.add(segSelector, java.awt.BorderLayout.NORTH);

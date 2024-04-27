@@ -37,6 +37,7 @@ public class EditTimelineItemDialog extends JEscapeDialog {
             numberLabel.setText(Double.toString(timelineItem.getTime()) + " [seconds]");
             timeLabel.setText(TimeUtilities.makeTimeString(timelineItem.getTime(),"hh:mm:ss.xxx"));
         }
+        this.setTitle("Edit timeline item: " + tli.getID());
         pack ();
         absoluteTimeTextField.requestFocus();
         org.exmaralda.common.helpers.Internationalizer.internationalizeDialogToolTips(this);

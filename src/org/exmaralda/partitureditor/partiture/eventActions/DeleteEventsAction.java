@@ -25,8 +25,7 @@ public class DeleteEventsAction extends org.exmaralda.partitureditor.partiture.A
     public boolean safetyCheck = false;
 
     /** Creates a new instance of DeleteEventAction
-     * @param t
-     * @param icon */
+     * @param t */
     public DeleteEventsAction(PartitureTableWithActions t) {
         super("Remove events", t);
         putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("control shift D"));            

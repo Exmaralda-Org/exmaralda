@@ -32,7 +32,8 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
     
     @Override
     public Vector getSegmentationErrors(BasicTranscription bt) throws SAXException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // just return empty for now
+        return new Vector();
     }
 
     @Override

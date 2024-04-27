@@ -71,8 +71,8 @@
           </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="2"/>
-            <Property name="rows" type="int" value="4"/>
+            <Property name="columns" type="int" value="3"/>
+            <Property name="rows" type="int" value="3"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JRadioButton" name="jRadioButton7">
@@ -138,6 +138,14 @@
                   <ComponentRef name="buttonGroup1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CHAT_MINIMAL"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="jRadioButton9">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroup1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="INEL_EVENT_BASED"/>
               </Properties>
             </Component>
           </SubComponents>
