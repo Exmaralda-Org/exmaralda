@@ -41,7 +41,6 @@ Name: "EXMARaLDA\CorpusManager"; Description: "Corpus-Manager"; Types: full comp
 Name: "EXMARaLDA\EXAKT"; Description: "EXAKT"; Types: full compact EXMARaLDAOnly
 Name: "EXMARaLDA\TEIDrop"; Description: "TEI-Drop"; Types: full EXMARaLDAOnly
 Name: "EXMARaLDA\Sextant"; Description: "Sextant"; Types: full EXMARaLDAOnly
-Name: "EXMARaLDA\TexGUt"; Description: "TexGUt"; Types: full EXMARaLDAOnly
 Name: "FOLK"; Description: "FOLK tools"; Types: full
 Name: "FOLK\FOLKER"; Description: "FOLKER editor"; Types: full compact FOLKOnly
 Name: "FOLK\OrthoNormal"; Description: "OrthoNormal"; Types: full compact FOLKOnly
@@ -57,8 +56,8 @@ Name: associateComa; Description: "{cm:AssocFileExtension,Coma,coma}"; GroupDesc
 [Files]
 ; ************************ New: Result from jpackage!
 Source: "@tempdir@\EXMARaLDA\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "C:\exmaralda\exmaralda\src\build\windows\icons\*document*.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "C:\exmaralda\exmaralda\src\build\windows\icons\exmaralda.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "C:\exmaralda\src\build\windows\icons\*document*.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "C:\exmaralda\src\build\windows\icons\exmaralda.ico"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 
 
@@ -86,7 +85,6 @@ Name: "{group}\EXAKT"; IconFilename: "{app}\EXAKT.ico"; Filename: "{app}\EXAKT.e
 Name: "{group}\TEI Drop"; IconFilename: "{app}\TeidDrop.ico"; Filename: "{app}\TeiDrop.exe"; Components: EXMARaLDA\TEIDrop
 Name: "{group}\FOLKER"; IconFilename: "{app}\FOLKER.ico"; Filename: "{app}\FOLKER.exe"; Components: FOLK\FOLKER
 Name: "{group}\OrthoNormal"; IconFilename: "{app}\OrthoNormal.ico"; Filename: "{app}\OrthoNormal.exe"; Components: FOLK\OrthoNormal
-Name: "{group}\TexGUt"; IconFilename: "{app}\TexGUt.ico"; Filename: "{app}\TexGUt.exe"; Components: EXMARaLDA\TexGUt
 Name: "{group}\EXMARaLDA on the Web"; IconFilename: "{app}\exmaralda.ico"; Filename: "{app}\exmaralda.url"
 Name: "{group}\Uninstall EXMARaLDA"; Filename: "{uninstallexe}"
 

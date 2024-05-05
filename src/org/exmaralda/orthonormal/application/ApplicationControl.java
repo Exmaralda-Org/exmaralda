@@ -1033,7 +1033,7 @@ public final class ApplicationControl implements  ListSelectionListener,
                 + "\nBitte ordnen Sie die Aufnahme neu zu.";
         //JOptionPane.showMessageDialog(applicationFrame, message);
         String[] options = {"Aufnahme neu zuordnen", "Ohne Aufnahme fortfahren"};
-        int optionChosen = JOptionPane.showOptionDialog(applicationFrame, message, "Aufnhame nicht gefunden", 
+        int optionChosen = JOptionPane.showOptionDialog(applicationFrame, message, "Aufnahme nicht gefunden", 
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, new Constants().getIcon(Constants.RECORDING_WARNING_ICON), options, "Aufnahme neu zuordnen");
 
         if (optionChosen==JOptionPane.NO_OPTION){

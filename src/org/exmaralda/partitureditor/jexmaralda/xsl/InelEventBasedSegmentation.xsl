@@ -20,15 +20,15 @@
     <xsl:variable name="WORD_EXTERNAL_PUNCUTATION">
         <!-- regex="[\(\) …\.\?!,–—\-=&quot;] -->
         <characters>
-            <character>(</character> <!-- opening round parenthesis -->
-            <character>)</character> <!-- closing round parenthesis -->
-            <character>[</character> <!-- opening square bracket -->
-            <character>]</character> <!-- closing square bracket -->
-            <character> </character> <!-- space -->
-            <character>…</character> <!-- ellipsis (one symbol) -->
-            <character>.</character> <!-- period -->
-            <character>?</character> <!-- question mark -->
+            <character>\s</character> <!-- white space -->
+            <character>\(</character> <!-- opening round parenthesis -->
+            <character>\)</character> <!-- closing round parenthesis -->
+            <character>\[</character> <!-- opening square bracket -->
+            <character>\]</character> <!-- closing square bracket -->
+            <character>\.</character> <!-- period -->
+            <character>\?</character> <!-- question mark -->
             <character>!</character> <!-- exclamation mark -->
+            <character>…</character> <!-- ellipsis (one symbol) -->
             <character>,</character> <!-- comma -->
             <character>–</character> <!-- n-dash -->
             <character>—</character> <!-- m-dash -->
@@ -45,9 +45,11 @@
         </characters>
     </xsl:variable>
     <xsl:variable name="WORD_EXTERNAL_PUNCUTATION_REGEX">
-        <xsl:text>[\\Q</xsl:text>
+        <xsl:text>[</xsl:text>
+        <!-- XML has a similar but different convention, it uses &#xhhhh; -->
+        <!-- <xsl:for-each select="$WORD_EXTERNAL_PUNCUTATION/descendant::character">&amp;#<xsl:value-of select="string-to-codepoints(text())[1]"/>;</xsl:for-each> -->
         <xsl:for-each select="$WORD_EXTERNAL_PUNCUTATION/descendant::character"><xsl:value-of select="text()"/></xsl:for-each>
-        <xsl:text>\\E]</xsl:text>
+        <xsl:text>]</xsl:text>
     </xsl:variable>
         
     <xsl:function name="exmaralda:timelinePosition" as="xs:integer">
@@ -113,8 +115,8 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <!-- WORD -->
-                                        <xsl:analyze-string select="text()" regex="[\(\) …\.\?!,–—\-=&quot;]">
-                                        <!-- <xsl:analyze-string select="text()" regex="{$WORD_EXTERNAL_PUNCUTATION_REGEX}"> -->    
+                                        <!-- <xsl:analyze-string select="text()" regex="[\(\) …\.\?!,–—\-=&quot;]"> -->
+                                        <xsl:analyze-string select="text()" regex="{$WORD_EXTERNAL_PUNCUTATION_REGEX}">    
                                             <xsl:matching-substring>
                                                 <nts n="INEL:ip">
                                                     <xsl:attribute name="id" select="concat('nts_', $ID, '_', position())"></xsl:attribute>
