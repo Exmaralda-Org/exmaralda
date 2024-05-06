@@ -25,11 +25,11 @@ public class FSMException extends Exception {
         tierID = new String();
     }
     
-    public FSMException(String message, String po, String tl, String ti) {
+    public FSMException(String message, String processedOutput, String tli, String tierID) {
         super(message);
-        processedOutput = po;
-        tli = tl;
-        tierID = ti;
+        this.processedOutput = processedOutput;
+        this.tli = tli;
+        this.tierID = tierID;
     }
 
     public String getProcessedOutput(){
