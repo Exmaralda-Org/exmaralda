@@ -57,7 +57,7 @@ public class GATMinimalSegmentation extends AbstractSegmentation {
 
     @Override
     public Vector getSegmentationErrors(BasicTranscription bt) throws SAXException {
-         Vector<FSMException> result = new Vector<FSMException>();
+         Vector<FSMException> result = new Vector<>();
          SegmentedTranscription st = bt.toSegmentedTranscription();
          for (String tierID : st.getBody().getAllTierIDs()){
              SegmentedTier tier = st.getBody().getSegmentedTierWithID(tierID);

@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -19,12 +21,15 @@ import org.exmaralda.partitureditor.jexmaralda.AbstractSegment;
 import org.exmaralda.partitureditor.jexmaralda.Annotation;
 import org.exmaralda.partitureditor.jexmaralda.AtomicTimedSegment;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Identifiable;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.NonTimedSegment;
 import org.exmaralda.partitureditor.jexmaralda.SegmentList;
 import org.exmaralda.partitureditor.jexmaralda.Segmentation;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTier;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.TimedAnnotation;
 import org.exmaralda.partitureditor.jexmaralda.TimedSegment;
 import org.xml.sax.SAXException;
@@ -66,7 +71,24 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
     @Override
     public Vector getSegmentationErrors(BasicTranscription bt) throws SAXException {
         // just return empty for now
-        return new Vector();
+        Vector<FSMException> result = new Vector<>();
+        String[] tTierIDs = bt.getBody().getTiersOfType("t");
+        for (String tierID : tTierIDs){
+            try {
+                Tier tier = bt.getBody().getTierWithID(tierID);
+                for (int pos=0; pos<tier.getNumberOfEvents(); pos++){
+                    Event event = tier.getEventAt(pos);
+                    if (event.getDescription().startsWith("((") && (!event.getDescription().trim().endsWith("))"))){
+                        FSMException ex = new FSMException("Unclosed double round brackets", event.getDescription(), event.getStart(), tierID);
+                        result.add(ex);
+                    }
+                }
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(InelEventBasedSegmentation.class.getName()).log(Level.SEVERE, null, ex);
+                throw new SAXException(ex);
+            }
+        }
+        return result;
     }
 
     @Override
