@@ -54,7 +54,7 @@ import org.xml.sax.SAXException;
  *
  * @author Schmidt
  */
-public class SubtitleConverter {
+public class SubtitleConverter { 
 
     private static double parseTime(String timeString) {
         int hours = Integer.parseInt(timeString.substring(0, 2));
@@ -342,7 +342,7 @@ public class SubtitleConverter {
     
     public static BasicTranscription readVTT(File file, String encoding) throws FileNotFoundException, IOException, JexmaraldaException {
         BasicTranscription result = new BasicTranscription();
-        Tier defaultTier = new Tier("TIE0", null, "v", "t", "VTT");
+        Tier defaultTier = new Tier("TIE0", null, "v", "t", "[vtt]");
         result.getBody().addTier(defaultTier);
         try {
             VttParser parser = new VttParser(encoding);          
@@ -388,6 +388,7 @@ public class SubtitleConverter {
                 for (SubtitleLine l : lines4Cue){
                     VttLine line = (VttLine)l;
                     String voice = line.getVoice();
+                    System.out.println("VOICE: " + voice);
                     List<SubtitleText> texts4Line = line.getTexts();
                     for (SubtitleText text : texts4Line){
                         String textString = text.toString();
@@ -395,23 +396,25 @@ public class SubtitleConverter {
                     }
                     
                     //System.out.println(startTimeInSeconds + "\t" + endTimeInSeconds + "\t" + voice + "\t" + allTheText);
-                }
-                org.exmaralda.partitureditor.jexmaralda.Event event = 
-                        new org.exmaralda.partitureditor.jexmaralda.Event(startID, endID, 
-                                allTheText.trim().replaceAll(" +", " "));
-                //if (voice==null){
-                    defaultTier.addEvent(event);
-                /*} else {
-                    String tierID = "TIE_" + voice;
-                    if (!(result.getBody().containsTierWithID(tierID))){
-                        String speakerID = "SPK_" + voice;
-                        Speaker newSpeaker = new Speaker();
-                        newSpeaker.setID(speakerID);
-                        result.getHead().getSpeakertable().addSpeaker(newSpeaker);
-                        Tier newTier = new Tier(tierID, speakerID, "v", "t", "VTT");
+                    org.exmaralda.partitureditor.jexmaralda.Event event = 
+                            new org.exmaralda.partitureditor.jexmaralda.Event(startID, endID, 
+                                    allTheText.trim().replaceAll(" +", " "));
+                    if (voice==null){
+                        defaultTier.addEvent(event);
+                    } else {
+                        String tierID = "TIE_" + voice;
+                        if (!(result.getBody().containsTierWithID(tierID))){
+                            String speakerID = "SPK_" + voice;
+                            Speaker newSpeaker = new Speaker();
+                            newSpeaker.setID(speakerID);
+                            newSpeaker.setAbbreviation(voice);
+                            result.getHead().getSpeakertable().addSpeaker(newSpeaker);
+                            Tier newTier = new Tier(tierID, speakerID, "v", "t", voice + " [vtt]");
+                            result.getBody().addTier(newTier);
+                        }
+                        result.getBody().getTierWithID(tierID).addEvent(event);
                     }
-                    result.getBody().getTierWithID(tierID).addEvent(event);
-                }*/
+                }
             }
         } catch (SubtitleParsingException ex) {
             Logger.getLogger(SubtitleConverter.class.getName()).log(Level.SEVERE, null, ex);

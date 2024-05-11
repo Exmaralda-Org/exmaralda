@@ -32,19 +32,21 @@ public class TestSubtitleConverter {
 
     private void doit() throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
         File[] vttFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
+        //File[] vttFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2024_05_11_VTT_NO_SCRIBE").listFiles(new FilenameFilter(){
             @Override
             public boolean accept(File dir, String name) {
                 return name.toLowerCase().endsWith(".vtt");
             }            
         });
         for (File vttFile : vttFiles){
+            System.out.println(vttFile.getName());
             BasicTranscription bt = SubtitleConverter.readVTT(vttFile);
             String outFilename = vttFile.getName().replace(".vtt", ".exb");
             bt.writeXMLToFile(new File(vttFile.getParent(), outFilename).getAbsolutePath(), "none");
             //System.out.println(bt.toXML());            
         }
         
-        File[] srtFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
+        /*File[] srtFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
             @Override
             public boolean accept(File dir, String name) {
                 return name.toLowerCase().endsWith(".srt");
@@ -55,7 +57,7 @@ public class TestSubtitleConverter {
             String outFilename = srtFile.getName().replace(".srt", "_SRT.exb");
             bt.writeXMLToFile(new File(srtFile.getParent(), outFilename).getAbsolutePath(), "none");
             //System.out.println(bt.toXML());            
-        }
+        }*/
         
     }
     

@@ -935,7 +935,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         playerSelectionPanel.add(jdsPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(javaFXPlayerRadioButton);
-        javaFXPlayerRadioButton.setText("<html><b>Java FX Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Java's FX framework to playback audio and video files. <b><i>New since 2020</i></b>. Try this player for<b> MPEG-4 videos under Windows</b>. </html>");
+        javaFXPlayerRadioButton.setText("<html><b>Java FX Player:</b> A player provided by the Language Archive at the MPI Nijmegen, also used inside ELAN. Uses Java's FX framework to playback audio and video files. Try this player for<b> MPEG-4 videos under Windows</b>. </html>");
         playerSelectionPanel.add(javaFXPlayerRadioButton);
 
         mediaPlayersButtonGroup.add(mmfPlayerRadioButton);
