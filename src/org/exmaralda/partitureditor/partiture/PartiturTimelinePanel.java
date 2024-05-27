@@ -105,7 +105,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         stopButton.setAction(atppc.stopAction);
         stopButton.setToolTipText("Stop (CTRL + F5)");
         shiftSelectionButton.setAction(atppc.shiftSelectionAction);
-        shiftSelectionButton.setToolTipText("Shift selection (CTRL + SHIFT + S");
+        shiftSelectionButton.setToolTipText("Shift selection (CTRL + SHIFT + S)");
         detachSelectionButton.setAction(atppc.detachSelectionAction);
         detachSelectionButton.setToolTipText("Detach selection");
         atppc.setAddEventInvoker(addEventButton);
