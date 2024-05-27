@@ -978,7 +978,7 @@ CoMa geçici olarak iç düzeni kullanıyor&lt;/html&gt;&lt;/body&gt;"/>
 
 
 		<uiItem name="err.noCorpusLoaded" lang="deu" value="&lt;html&gt;&lt;body&gt;Laden (oder speichern) Sie zuerst&lt;br&gt;eine Coma-Datei.&lt;/html&gt;&lt;/body&gt;"/>
-		<uiItem name="err.noCorpusLoaded" lang="eng" value="&lt;html&gt;&lt;body&gt;Please load (or save)&lt;br&gt;na coma-file first.&lt;/html&gt;&lt;/body&gt;"/>
+		<uiItem name="err.noCorpusLoaded" lang="eng" value="&lt;html&gt;&lt;body&gt;Please load (or save)&lt;br&gt;a COMA file first.&lt;/html&gt;&lt;/body&gt;"/>
 
 		<uiItem name="err.noDescriptionKeys" lang="deu" value="Es existieren keine Description-Schlüssel!"/>
 		<uiItem name="err.noDescriptionKeys" lang="eng" value="There are no description-keys to harmonize!"/>
@@ -1094,8 +1094,8 @@ CoMa geçici olarak iç düzeni kullanıyor&lt;/html&gt;&lt;/body&gt;"/>
 		<!-- Messages (message.*) -->
 		<uiItem name="msg.changesTranscriptionsWarning" lang="deu" value="&lt;html&gt;&lt;b&gt;Achtung!&lt;/b&gt;&lt;br/&gt;Diese Funktion &lt;b&gt;modifiziert&lt;/b&gt; die Basistranskriptionen im Korpus.&lt;br/&gt;Benutzen Sie diese Funktion nur, wenn Sie genau wissen, was Sie tun!&lt;/html&gt;"/>
 		<uiItem name="msg.changesTranscriptionsWarning" lang="eng" value="&lt;html&gt;&lt;b&gt;Warning!&lt;/b&gt;&lt;br/&gt;This Operation  &lt;b&gt;modifies&lt;/b&gt; basic transcriptions in your corpus.&lt;br/&gt;Please use with extreme caution!&lt;/html&gt;"/>
-		<uiItem name="message.comaGenerated" lang="deu" value="Coma-File geschrieben."/>
-		<uiItem name="message.comaGenerated" lang="eng" value="Coma-file written."/>
+		<uiItem name="message.comaGenerated" lang="deu" value="Coma-Datei geschrieben."/>
+		<uiItem name="message.comaGenerated" lang="eng" value="Coma file written."/>
 		<uiItem name="message.comaGenerated" lang="tk" value="Coma-dosyası yazıldı."/>
 		
 		<uiItem name="metadata" lang="deu" value="Metadaten"/>

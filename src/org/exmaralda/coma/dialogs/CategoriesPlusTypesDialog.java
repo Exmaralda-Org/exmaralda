@@ -5,6 +5,8 @@
 package org.exmaralda.coma.dialogs;
 
 import java.util.Map;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.exmaralda.coma.models.CategoryPlusTypesTableModel;
@@ -18,9 +20,13 @@ import org.exmaralda.common.corpusbuild.CategoryPlusType;
 public class CategoriesPlusTypesDialog extends javax.swing.JDialog {
 
     public boolean approved = false;
+    boolean selectMode = false;
     
     /**
      * Creates new form CategoriesPlusTypesDialog
+     * @param parent
+     * @param modal
+     * @param categoryPlusTypeMap
      */
     public CategoriesPlusTypesDialog(java.awt.Frame parent, boolean modal, Map<CategoryPlusType, Integer> categoryPlusTypeMap) {
         super(parent, modal);
@@ -30,7 +36,24 @@ public class CategoriesPlusTypesDialog extends javax.swing.JDialog {
         categoriesPlusTypesTable.setDefaultRenderer(String.class, new CategoryPlusTypesTableCellRenderer());
         categoriesPlusTypesTable.setDefaultRenderer(Integer.class, new CategoryPlusTypesTableCellRenderer());
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(categoriesPlusTypesTable.getModel());
-        categoriesPlusTypesTable.setRowSorter(sorter);           
+        categoriesPlusTypesTable.setRowSorter(sorter);       
+        
+        
+        categoriesPlusTypesTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                okButton.setEnabled(categoriesPlusTypesTable.getSelectedRow()>=0);
+            }
+            
+        });
+    }
+    
+    public void setSelectMode(boolean selectMode){
+        this.selectMode = selectMode;
+        if (selectMode){
+            okButton.setText("Select");
+            okButton.setEnabled(categoriesPlusTypesTable.getSelectedRow()>=0);
+        }
     }
     
     public String getSelectedCategory(){

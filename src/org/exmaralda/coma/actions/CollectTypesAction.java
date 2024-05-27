@@ -21,6 +21,7 @@ import org.exmaralda.coma.root.Ui;
 import org.exmaralda.common.corpusbuild.CategoryPlusType;
 import org.exmaralda.common.corpusbuild.CollectTierCategoriesTypes;
 import org.exmaralda.common.corpusbuild.CollectTypesInCategory;
+import org.exmaralda.common.corpusbuild.ReplaceTypesInCategory;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
@@ -57,6 +58,7 @@ public class CollectTypesAction extends ComaAction {
                 preCollector.checkCorpus(coma.getData().getDocument(), file.getParent());
                 Map<CategoryPlusType, Integer> categoryPlusTypeMap = preCollector.getCategoryPlusTypeMap();
                 CategoriesPlusTypesDialog dialog = new CategoriesPlusTypesDialog(coma, true, categoryPlusTypeMap);
+                dialog.setSelectMode(true);
                 dialog.setLocationRelativeTo(coma);
                 dialog.setVisible(true);
                 
@@ -104,10 +106,59 @@ public class CollectTypesAction extends ComaAction {
             pbd.setVisible(false);
             Map<String, Integer> typesTable = collector.getTypesTable();
             Tier dummyTier = new Tier("idx", null, category, type);
-            TypesDialog dialog = new TypesDialog(coma, true);
-            dialog.setData(typesTable, dummyTier);
-            dialog.setLocationRelativeTo(coma);
-            dialog.setVisible(true);
+            TypesDialog typesDialog = new TypesDialog(coma, true);
+            typesDialog.setData(typesTable, dummyTier);
+            typesDialog.setLocationRelativeTo(coma);
+            typesDialog.setVisible(true);
+            
+            if (typesDialog.approved){
+                Map<String,String> mappings = typesDialog.getMappings();            
+                int countMappings = 0;
+                for (String source : mappings.keySet()){
+                    String target = mappings.get(source);
+                    if (!source.equals(target)) countMappings++;
+                }
+                if (countMappings==0) return;
+                
+                
+                String message = Integer.toString(countMappings) + " types will be mapped to a different value. \nAre you sure that you want to continue?";
+                int optionChosen = JOptionPane.showConfirmDialog(coma, message, "Confirm replace", JOptionPane.YES_NO_OPTION);
+                if (optionChosen != JOptionPane.YES_OPTION) return;
+                
+                final ReplaceTypesInCategory executor = new ReplaceTypesInCategory(category, type, mappings);
+                
+                pbd = new ProgressBarDialog(coma, false);
+                pbd.setLocationRelativeTo(coma);
+                pbd.setTitle(Ui.getText("progress.replaceTypes") + coma.getData().getOpenFile().getName());
+                executor.addSearchListener(pbd);                
+                pbd.setVisible(true);
+                
+                final Runnable doDisplayReplacementDoneDialog = new Runnable() {
+                    @Override
+                    public void run() {
+                        //displayEditDialog(collector, category, type);
+                        String message = Integer.toString(executor.allReplacementCounts) + " replacements were made. <br/> Resegmentation may be necessary. ";
+                        JOptionPane.showMessageDialog(coma, message);
+                    }
+                };
+                Thread replaceThread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            executor.checkCorpus(coma.getData().getDocument(), coma.getData().getOpenFile().getParent());
+                            javax.swing.SwingUtilities.invokeLater(doDisplayReplacementDoneDialog);
+                        } catch (URISyntaxException | JexmaraldaException | JDOMException | SAXException ex) {
+                            JOptionPane.showMessageDialog(coma, ex);
+                            System.out.println(ex.getMessage());
+                            pbd.setVisible(false);
+                        }
+                    }
+                };
+                replaceThread.start();
+                
+                
+            }
+            
 	}
 
 }

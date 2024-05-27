@@ -1061,7 +1061,7 @@ public class Coma extends JFrame implements ChangeListener,
     public void resetSettings() {
         try {
             java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).clear();
-            JOptionPane.showMessageDialog(rootPane, "Preferences reset.\nRestart the editor.");
+            JOptionPane.showMessageDialog(rootPane, "<html>Preferences reset.<br/><b>Restart the editor.</b></html>");
         } catch (BackingStoreException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());
