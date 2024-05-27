@@ -67,7 +67,7 @@ public class TypesAction extends org.exmaralda.partitureditor.partiture.Abstract
         typesDialog.setLocationRelativeTo(table);
         typesDialog.setVisible(true);
         if (typesDialog.approved){
-            Map<String,String> mappings = typesDialog.getMappings();
+            Map<String,String> mappings = typesDialog.getMappings();            
             int count = 0;
             for (String sourceType : mappings.keySet()){
                 String targetType = mappings.get(sourceType);

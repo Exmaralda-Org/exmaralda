@@ -88,7 +88,7 @@ public class TypesDialog extends javax.swing.JDialog {
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
-        okButton.setText("OK");
+        okButton.setText("OK (Map types)");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -96,7 +96,7 @@ public class TypesDialog extends javax.swing.JDialog {
         });
         okCancelPanel.add(okButton);
 
-        cancelButton.setText("Cancel");
+        cancelButton.setText("Close");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);

@@ -294,7 +294,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
     public void resetSettings(){
         try {
             java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).clear();                
-            JOptionPane.showMessageDialog(rootPane, "Preferences reset.\nRestart the editor.");
+            JOptionPane.showMessageDialog(rootPane, "<html>Preferences reset.<br/><b>Restart the editor.</b></html>");
         } catch (BackingStoreException ex) {
             Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);  
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());

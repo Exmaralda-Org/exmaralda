@@ -30,6 +30,7 @@ public class MediaFileFilter extends javax.swing.filechooser.FileFilter {
         return ext;
     }
     
+    @Override
     public boolean accept(File f) {
         if (f.isDirectory()) {
             return true;
@@ -37,16 +38,17 @@ public class MediaFileFilter extends javax.swing.filechooser.FileFilter {
 
         String extension = getExtension(f);
 	if (extension != null) {
-                for (int i=0; i<ACCEPTED_SUFFIXES.length; i++){
-                    if (extension.equalsIgnoreCase(ACCEPTED_SUFFIXES[i])){
-                        return true;
-                    }
+            for (String ACCEPTED_SUFFIX : ACCEPTED_SUFFIXES) {
+                if (extension.equalsIgnoreCase(ACCEPTED_SUFFIX)) {
+                    return true;
                 }
+            }
         }
         return false;
     }
     
     // The description of this filter
+    @Override
     public String getDescription() {
         return "Common media files (WAV, MP3, MPG, MPV, AVI, DIVX, MP4, AIF, WMV, OGG)";
     }    

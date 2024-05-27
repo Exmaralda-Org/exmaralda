@@ -691,7 +691,7 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
             JOptionPane.showMessageDialog(rootPane, "Preferences reset.\nRestart the editor.");
         } catch (BackingStoreException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(rootPane, "<html>Preferences reset.<br/><b>Restart the editor.</b></html>");
         }        
     }  
     

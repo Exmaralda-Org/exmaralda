@@ -15,15 +15,22 @@ import org.exmaralda.partitureditor.partiture.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.convert.*;
 import java.io.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
+import org.exmaralda.partitureditor.jexmaraldaswing.SelectMediaFileDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.WhisperImportPostProcessDialog;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.MediaFileFilter;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -421,6 +428,14 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
                 table.stratify(importedTranscription);
             }
             
+            //System.out.println("RF: " + importedTranscription.getHead().getMetaInformation().getReferencedFile());
+            // weird check to really know whether or not there is a referenced file
+            if (importedTranscription.getHead().getMetaInformation().getReferencedFile()==null 
+                || importedTranscription.getHead().getMetaInformation().getReferencedFile().trim().length()==0
+                || importedTranscription.getHead().getMetaInformation().getReferencedFiles().isEmpty()){                
+                guessMedia(importedTranscription, filename);
+            }
+            
             table.getModel().setTranscription(importedTranscription);
             table.setupMedia();
             table.setupPraatPanel();
@@ -440,6 +455,47 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
         } else {
             System.out.println("Not setting the imported transcription because it is NULL.");            
         }
+    }
+
+    private void guessMedia(BasicTranscription importedTranscription, String filename) {
+        Set<String> permissibleSuffixes = new HashSet<>();
+        permissibleSuffixes.addAll(Arrays.asList(MediaFileFilter.ACCEPTED_SUFFIXES));
+        File file = new File(filename);
+        File[] mediaFileCandidates = file.getParentFile().listFiles(new FilenameFilter(){
+            @Override
+            public boolean accept(File dir, String name) {
+                int index = name.lastIndexOf(".");
+                if (index<0) return false;
+                String suffix = name.substring(index+1);
+                return permissibleSuffixes.contains(suffix.toLowerCase());
+            }        
+        });
+        if (mediaFileCandidates.length>0){
+            Arrays.sort(mediaFileCandidates, new Comparator<File>(){
+                @Override
+                public int compare(File o1, File o2) {
+                    String name1 = o1.getName().substring(0, o1.getName().lastIndexOf("."));
+                    String name2 = o2.getName().substring(0, o2.getName().lastIndexOf("."));
+                    if (filename.startsWith(name1)){
+                        return -1;
+                    }
+                    if (filename.startsWith(name2)){
+                        return 1;
+                    }
+                    return 0;
+                }
+                
+            });
+            
+            SelectMediaFileDialog dialog = new SelectMediaFileDialog(table.parent, true, mediaFileCandidates);
+            dialog.setLocationRelativeTo(table);
+            dialog.setVisible(true);
+            if (dialog.approved){
+                importedTranscription.getHead().getMetaInformation().setReferencedFile(dialog.getSelectedFile().getAbsolutePath());
+            }
+        } 
+        
+        
     }
 
 

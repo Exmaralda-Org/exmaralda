@@ -91,6 +91,10 @@ public class WhisperJSONConverter {
         Timeline timeline = result.getBody().getCommonTimeline();
         while (iterator.hasNext()){
             JsonNode segmentNode = iterator.next();
+            if (segmentNode.get("text")==null){
+                String message = "Expected text node not found. Format may be wrong.";
+                throw new IOException(message);
+            }
             String text = segmentNode.get("text").asText();
             
             if (text.trim().length()==0){

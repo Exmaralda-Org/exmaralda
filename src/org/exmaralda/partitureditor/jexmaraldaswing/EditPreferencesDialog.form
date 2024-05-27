@@ -1305,17 +1305,17 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel18">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Choose your language, then restart the Partitur-Editor."/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;Choose your language, then &lt;b&gt;restart the Partitur-Editor.&lt;/b&gt;&lt;/html&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Waehlen Sie Ihre Sprache, und starten Sie dann den Partitur-Editor neu."/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;W&#xe4;hlen Sie Ihre Sprache, und &lt;b&gt;starten Sie dann den Partitur-Editor neu.&lt;/b&gt;&lt;/html&gt;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel20">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Choisissez votre langue, puis red&#xe9;marrez le Partitur-Editor."/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;Choisissez votre langue, puis &lt;b&gt;red&#xe9;marrez le Partitur-Editor.&lt;/b&gt;&lt;/html&gt;"/>
                   </Properties>
                 </Component>
               </SubComponents>

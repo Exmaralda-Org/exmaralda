@@ -204,9 +204,9 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             table.status("Preferences changed");
 
             if (!newValues[16].equals(oldMediaPlayer)){
-                String message = "You have changed the player from \n"
-                        + oldMediaPlayer + " to " + newValues[16] + ".\n"
-                        + "You must restart the Partitur-Editor \nfor this change to take effect.";
+                String message = "<html>You have changed the player from <br/><b>"
+                        + oldMediaPlayer + "</b> to <b>" + newValues[16] + "</b>.<br/>"
+                        + "You must <b>restart the Partitur-Editor </b><br/>for this change to take effect.</html>";
                 JOptionPane.showMessageDialog(table, message);
             }
 

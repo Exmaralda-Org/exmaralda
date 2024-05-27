@@ -968,6 +968,10 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     /** inserts a new timeline item to the left of the specified column */
     public void insertTimelineItem(int col){
        Timeline timeline = transcription.getBody().getCommonTimeline();
+       if (col>timeline.getNumberOfTimelineItems()-1){
+           timeline.addTimelineItem();
+           fireColumnsAdded(col,col);           
+       }
        String tli = timeline.getTimelineItemAt(col).getID();     
        String previousTLI = "";
        if (col>0){

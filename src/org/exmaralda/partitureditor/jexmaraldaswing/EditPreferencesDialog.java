@@ -907,13 +907,13 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel17.setText(" ");
         languagePanel.add(jLabel17);
 
-        jLabel18.setText("Choose your language, then restart the Partitur-Editor.");
+        jLabel18.setText("<html>Choose your language, then <b>restart the Partitur-Editor.</b></html>");
         languagePanel.add(jLabel18);
 
-        jLabel19.setText("Waehlen Sie Ihre Sprache, und starten Sie dann den Partitur-Editor neu.");
+        jLabel19.setText("<html>Wählen Sie Ihre Sprache, und <b>starten Sie dann den Partitur-Editor neu.</b></html>");
         languagePanel.add(jLabel19);
 
-        jLabel20.setText("Choisissez votre langue, puis redémarrez le Partitur-Editor.");
+        jLabel20.setText("<html>Choisissez votre langue, puis <b>redémarrez le Partitur-Editor.</b></html>");
         languagePanel.add(jLabel20);
 
         tabbedPane.addTab("Language", languagePanel);

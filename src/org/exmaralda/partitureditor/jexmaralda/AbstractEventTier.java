@@ -298,8 +298,12 @@ public class AbstractEventTier extends AbstractTier {
     
     /** bridges gaps, i.e. intervals (according to the given timeline)
      * that contain no events, if their duration (according to the absolute
-     * time values of the given timeline) is smaller than the parameter maxDiff */
-    public void bridgeGaps(double maxDiff, Timeline tl){
+     * time values of the given timeline) is smaller than the parameter maxDiff
+     * @param maxDiff
+     * @param tl
+     * @return  */
+    public int bridgeGaps(double maxDiff, Timeline tl){
+        int count=0;
         tl.makeConsistent();
         sort(tl);
         for (int pos=0; pos<getNumberOfEvents()-1; pos++){
@@ -311,12 +315,16 @@ public class AbstractEventTier extends AbstractTier {
             try {
                 endTime = tl.getTimelineItemWithID(event.getEnd()).getTime();
                 startTime = tl.getTimelineItemWithID(nextEvent.getStart()).getTime();
-            } catch (JexmaraldaException je) {return;}
+            } catch (JexmaraldaException je) {
+                return -1;
+            }
             if (endTime>=0 && startTime>=0 && startTime-endTime<maxDiff){
                 event.setEnd(nextEvent.getStart());
+                count++;
             }
             updatePositions();
         }
+        return count;
     }
     
     /** returns the IDs of all start points of the events contained in this tier */
@@ -503,16 +511,20 @@ public class AbstractEventTier extends AbstractTier {
     
  
     /** removes all empty events from this tier, i.e.
-     * all events that contain nothing but white space */
-    public void removeEmptyEvents(){
+     * all events that contain nothing but white space
+     * @return  */
+    public int removeEmptyEvents(){
+        int count=0;
         for (int pos=0; pos<getNumberOfEvents(); pos++){
             Event event = getEventAt(pos);
             if (event.getDescription().trim().length()<=0){
                 this.removeElementAt(pos);
                 pos--;
+                count++;
             }
         }
         updatePositions();
+        return count;
     }
 
     /** checks whether this tier is stratified, i.e. whether it does not contain any

@@ -25,6 +25,11 @@ public class CleanupDialog extends JEscapeDialog {
         Internationalizer.internationalizeDialogToolTips(this);        
     }
 
+    public boolean removeUnusedSpeakers(){
+        return removeUnusedSpeakersCheckBox.isSelected();        
+    }
+
+
     public boolean removeEmptyEvents(){
         return removeEmptyEventsCheckBox.isSelected();        
     }
@@ -67,26 +72,28 @@ public class CleanupDialog extends JEscapeDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
+        removeUnusedSpeakersPanel = new javax.swing.JPanel();
+        removeUnusedSpeakersCheckBox = new javax.swing.JCheckBox();
+        removeEmtpyEventsPanel = new javax.swing.JPanel();
         removeEmptyEventsCheckBox = new javax.swing.JCheckBox();
-        jPanel8 = new javax.swing.JPanel();
+        smoothTimelinePanel = new javax.swing.JPanel();
         smoothTimelineCheckBox = new javax.swing.JCheckBox();
         smoothTimelineSlider = new javax.swing.JSlider();
         jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        bridgeGapsPanel = new javax.swing.JPanel();
         bridgeGapsCheckBox = new javax.swing.JCheckBox();
         bridgeGapsSlider = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        removeUnusedTimelineITemsPanel = new javax.swing.JPanel();
         removeUnusedTLICheckBox = new javax.swing.JCheckBox();
-        jPanel6 = new javax.swing.JPanel();
+        removeGapsPanel = new javax.swing.JPanel();
         removeGapsCheckBox = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        normalizeIDsPanel = new javax.swing.JPanel();
         normalizeIDsCheckBox = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -97,23 +104,32 @@ public class CleanupDialog extends JEscapeDialog {
             }
         });
 
-        jPanel1.setLayout(new java.awt.GridLayout(6, 1));
+        mainPanel.setLayout(new java.awt.GridLayout(7, 1));
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        removeUnusedSpeakersPanel.setLayout(new javax.swing.BoxLayout(removeUnusedSpeakersPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        removeUnusedSpeakersCheckBox.setSelected(true);
+        removeUnusedSpeakersCheckBox.setText("Remove unused speakers");
+        removeUnusedSpeakersCheckBox.setToolTipText("Remove events without a description");
+        removeUnusedSpeakersPanel.add(removeUnusedSpeakersCheckBox);
+
+        mainPanel.add(removeUnusedSpeakersPanel);
+
+        removeEmtpyEventsPanel.setLayout(new javax.swing.BoxLayout(removeEmtpyEventsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         removeEmptyEventsCheckBox.setSelected(true);
         removeEmptyEventsCheckBox.setText("Remove empty events");
         removeEmptyEventsCheckBox.setToolTipText("Remove events without a description");
-        jPanel3.add(removeEmptyEventsCheckBox);
+        removeEmtpyEventsPanel.add(removeEmptyEventsCheckBox);
 
-        jPanel1.add(jPanel3);
+        mainPanel.add(removeEmtpyEventsPanel);
 
-        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+        smoothTimelinePanel.setLayout(new javax.swing.BoxLayout(smoothTimelinePanel, javax.swing.BoxLayout.LINE_AXIS));
 
         smoothTimelineCheckBox.setSelected(true);
         smoothTimelineCheckBox.setText("Smooth timeline with a threshhold of");
         smoothTimelineCheckBox.setToolTipText("Treat nearby timeline items as identical ");
-        jPanel8.add(smoothTimelineCheckBox);
+        smoothTimelinePanel.add(smoothTimelineCheckBox);
 
         smoothTimelineSlider.setMajorTickSpacing(50);
         smoothTimelineSlider.setMaximum(200);
@@ -122,70 +138,70 @@ public class CleanupDialog extends JEscapeDialog {
         smoothTimelineSlider.setPaintTicks(true);
         smoothTimelineSlider.setValue(10);
         smoothTimelineSlider.setPreferredSize(new java.awt.Dimension(180, 47));
-        jPanel8.add(smoothTimelineSlider);
+        smoothTimelinePanel.add(smoothTimelineSlider);
 
         jLabel2.setText(" ms");
-        jPanel8.add(jLabel2);
+        smoothTimelinePanel.add(jLabel2);
 
-        jPanel1.add(jPanel8);
+        mainPanel.add(smoothTimelinePanel);
 
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+        bridgeGapsPanel.setLayout(new javax.swing.BoxLayout(bridgeGapsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         bridgeGapsCheckBox.setSelected(true);
         bridgeGapsCheckBox.setText("Bridge gaps smaller than ");
         bridgeGapsCheckBox.setToolTipText("Treat nearby timeline items as identical if the corresponding interval is a gap");
-        jPanel4.add(bridgeGapsCheckBox);
+        bridgeGapsPanel.add(bridgeGapsCheckBox);
 
         bridgeGapsSlider.setMajorTickSpacing(250);
         bridgeGapsSlider.setMaximum(1000);
         bridgeGapsSlider.setMinorTickSpacing(100);
         bridgeGapsSlider.setPaintLabels(true);
         bridgeGapsSlider.setPaintTicks(true);
-        jPanel4.add(bridgeGapsSlider);
+        bridgeGapsPanel.add(bridgeGapsSlider);
 
         jLabel1.setText(" ms");
-        jPanel4.add(jLabel1);
+        bridgeGapsPanel.add(jLabel1);
 
-        jPanel1.add(jPanel4);
+        mainPanel.add(bridgeGapsPanel);
 
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+        removeUnusedTimelineITemsPanel.setLayout(new javax.swing.BoxLayout(removeUnusedTimelineITemsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         removeUnusedTLICheckBox.setSelected(true);
         removeUnusedTLICheckBox.setText("Remove unused timeline items");
         removeUnusedTLICheckBox.setToolTipText("Remove timeline items where no event starts or ends");
-        jPanel5.add(removeUnusedTLICheckBox);
+        removeUnusedTimelineITemsPanel.add(removeUnusedTLICheckBox);
 
-        jPanel1.add(jPanel5);
+        mainPanel.add(removeUnusedTimelineITemsPanel);
 
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        removeGapsPanel.setLayout(new javax.swing.BoxLayout(removeGapsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         removeGapsCheckBox.setText("Remove gaps");
         removeGapsCheckBox.setToolTipText("Remove gaps in the timeline (i.e. join events interrupted only by stretches of empty events, remove the intervening timeline items)");
-        jPanel6.add(removeGapsCheckBox);
+        removeGapsPanel.add(removeGapsCheckBox);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(java.awt.Color.red);
         jLabel4.setText("   [USE WITH CAUTION!]");
         jLabel4.setToolTipText("Removing gaps s can have unintended side effects. Use this option only if you are very sure you know what you are doing. Make a safety backup of your file first.");
-        jPanel6.add(jLabel4);
+        removeGapsPanel.add(jLabel4);
 
-        jPanel1.add(jPanel6);
+        mainPanel.add(removeGapsPanel);
 
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+        normalizeIDsPanel.setLayout(new javax.swing.BoxLayout(normalizeIDsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         normalizeIDsCheckBox.setText("Normalize IDs");
         normalizeIDsCheckBox.setToolTipText("Normalize speaker, tier and timeline IDs - disabled, suspected to cause a serious bug with larg files");
-        jPanel7.add(normalizeIDsCheckBox);
+        normalizeIDsPanel.add(normalizeIDsCheckBox);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(java.awt.Color.red);
         jLabel3.setText("   [USE WITH CAUTION!]");
         jLabel3.setToolTipText("Normalizing IDs can have unintended side effects. Use this option only if you are very sure you know what you are doing.  Make a safety backup of your file first.");
-        jPanel7.add(jLabel3);
+        normalizeIDsPanel.add(jLabel3);
 
-        jPanel1.add(jPanel7);
+        mainPanel.add(normalizeIDsPanel);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         okButton.setText("OK");
         okButton.setMaximumSize(new java.awt.Dimension(110, 27));
@@ -196,7 +212,7 @@ public class CleanupDialog extends JEscapeDialog {
                 okButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(okButton);
+        okCancelPanel.add(okButton);
 
         cancelButton.setText("Cancel");
         cancelButton.setMaximumSize(new java.awt.Dimension(110, 27));
@@ -206,9 +222,9 @@ public class CleanupDialog extends JEscapeDialog {
                 cancelButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(cancelButton);
+        okCancelPanel.add(cancelButton);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(okCancelPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,26 +260,28 @@ public class CleanupDialog extends JEscapeDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox bridgeGapsCheckBox;
+    private javax.swing.JPanel bridgeGapsPanel;
     private javax.swing.JSlider bridgeGapsSlider;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JCheckBox normalizeIDsCheckBox;
+    private javax.swing.JPanel normalizeIDsPanel;
     private javax.swing.JButton okButton;
+    private javax.swing.JPanel okCancelPanel;
     private javax.swing.JCheckBox removeEmptyEventsCheckBox;
+    private javax.swing.JPanel removeEmtpyEventsPanel;
     private javax.swing.JCheckBox removeGapsCheckBox;
+    private javax.swing.JPanel removeGapsPanel;
+    private javax.swing.JCheckBox removeUnusedSpeakersCheckBox;
+    private javax.swing.JPanel removeUnusedSpeakersPanel;
     private javax.swing.JCheckBox removeUnusedTLICheckBox;
+    private javax.swing.JPanel removeUnusedTimelineITemsPanel;
     private javax.swing.JCheckBox smoothTimelineCheckBox;
+    private javax.swing.JPanel smoothTimelinePanel;
     private javax.swing.JSlider smoothTimelineSlider;
     // End of variables declaration//GEN-END:variables
 

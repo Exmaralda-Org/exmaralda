@@ -73,8 +73,12 @@ public class Utilities {
     public static Element makeError(String path, String tier, String start, String text) throws URISyntaxException{
         Element e = new Element("error");
         e.setAttribute("file", path);
-        e.setAttribute("tier", tier);
-        e.setAttribute("start", start);
+        if (tier!=null){
+            e.setAttribute("tier", tier);
+        }
+        if (start!=null){
+            e.setAttribute("start", start);
+        }
         e.setAttribute("done", "no");
         e.setText(text);
         return e;

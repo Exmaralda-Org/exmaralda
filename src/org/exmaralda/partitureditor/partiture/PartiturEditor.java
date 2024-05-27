@@ -494,7 +494,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 int optionChosen = JOptionPane.showConfirmDialog(rootPane, message);
                 if (optionChosen == JOptionPane.YES_OPTION){
                     settings.put("PlayerType", defaultPlayer);
-                    JOptionPane.showMessageDialog(rootPane, "Please restart the Partitur-Editor \nfor the changes to take effect.");
+                    JOptionPane.showMessageDialog(rootPane, "<html>Please <b>restart the Partitur-Editor</b> <br/>for the changes to take effect.</html>");
                 }
                 settings.putBoolean("PlayerTypeConfirmed", true);
             }

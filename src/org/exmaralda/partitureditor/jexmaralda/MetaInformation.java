@@ -28,7 +28,7 @@ public class MetaInformation extends Object {
     private String projectName;
     private String transcriptionName;
     //private String referencedFile;
-    private Vector<String> referencedFiles = new Vector<String>();;
+    private Vector<String> referencedFiles = new Vector<>();;
     private UDInformationHashtable udMetaInformation;
     private String comment;
     private String transcriptionConvention;
