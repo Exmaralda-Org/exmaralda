@@ -125,6 +125,9 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
         navigateButton.setAction(atppc.navigateAction);
         navigateButton.setToolTipText("Navigate in the recording");
+        
+        scrollToTimeButton.setAction(atppc.scrollToTimeAction);
+        scrollToTimeButton.setToolTipText("Scroll partitur to time");
 
         zoomToggleButton.setAction(atppc.changeZoomAction);
         zoomToggleButton.setToolTipText("Zoom in/out");
@@ -205,6 +208,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
         endTimeLabel = new javax.swing.JLabel();
         navigationPanel = new javax.swing.JPanel();
         navigateButton = new javax.swing.JButton();
+        scrollToTimeButton = new javax.swing.JButton();
         zoomPanel = new javax.swing.JPanel();
         zoomToggleButton = new javax.swing.JToggleButton();
         timeViewerControlPanel = new javax.swing.JPanel();
@@ -278,6 +282,9 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
 
         navigateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/othericons/compass_icon.gif"))); // NOI18N
         navigationPanel.add(navigateButton);
+
+        scrollToTimeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-down.png"))); // NOI18N
+        navigationPanel.add(scrollToTimeButton);
 
         timeViewerValuesPanel.add(navigationPanel, java.awt.BorderLayout.WEST);
 
@@ -457,6 +464,7 @@ public class PartiturTimelinePanel extends javax.swing.JPanel
     private javax.swing.JPanel playerControlsPanel;
     private javax.swing.JPanel progressBarPanel;
     public javax.swing.JSpinner rateSpinner;
+    private javax.swing.JButton scrollToTimeButton;
     private javax.swing.JPanel selectionControlPanel;
     private javax.swing.JPanel selectionControlsPanel;
     private javax.swing.JButton shiftSelectionButton;

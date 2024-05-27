@@ -1120,7 +1120,7 @@ public class PartitureTableWithActions extends PartitureTable
         
         int newSelectionEndCol = getModel().getTranscription().getBody().getCommonTimeline().lookupID(rememberSelectionEndColID) + 1;
         
-        setSelection(selectionStartRow, selectionEndRow, selectionStartCol, newSelectionEndCol);
+        setSelection(selectionStartRow, selectionStartCol, selectionEndRow, newSelectionEndCol);
         
         
     }
@@ -1789,7 +1789,8 @@ public class PartitureTableWithActions extends PartitureTable
     public void findNext() {
         ((SearchInEventsAction)searchInEventsAction).dialog.gotoNextSearchResult();
     }
-
+    
+    
     
     private void scrollForwards(){
         System.out.println("Left col " + this.getLeftColumn());

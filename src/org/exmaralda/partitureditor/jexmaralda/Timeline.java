@@ -605,9 +605,9 @@ public class Timeline extends Vector {
             double thisTime = getTimelineItemAt(pos).getTime();
             if (Math.abs(thisTime-time)<tolerance) return pos;
         }
-        return -1;
-        
+        return -1;        
     }
+    
     
     /** returns the index of the last timeline item whose absolute time value is *
      * not greater than the specified value */
@@ -745,6 +745,7 @@ public class Timeline extends Vector {
         updatePositions();
         return mappings;
     }
+
 
 
 

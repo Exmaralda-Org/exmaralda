@@ -264,6 +264,13 @@ public class PartiturEditorTimeviewPlayerControl extends AbstractTimeviewPartitu
         return result;
     }
     
+    public void scrollToTime(double time) {
+        int index3 = partitur.getModel().getTranscription().getBody().getCommonTimeline().getPositionForTime(time);
+        partitur.setLeftColumn(index3);
+        partitur.setSelection(-1, index3, -1, index3);
+    }
+    
+    
     
 
 

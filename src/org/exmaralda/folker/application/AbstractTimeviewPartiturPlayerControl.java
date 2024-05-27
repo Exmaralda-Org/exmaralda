@@ -92,6 +92,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
     public org.exmaralda.folker.actions.waveformactions.FineTuneSelectionAction decreaseSelectionEndAction;
     public org.exmaralda.folker.actions.waveformactions.FineTuneSelectionAction increaseSelectionEndAction;
     public org.exmaralda.folker.actions.waveformactions.NavigateAction navigateAction;
+    public org.exmaralda.folker.actions.waveformactions.ScrollToTimeAction scrollToTimeAction;
     public org.exmaralda.folker.actions.waveformactions.MoveBackCursorAction moveBackCursorAction; // new 15-12-2017 for issue #113
     // ---------------------------
     public org.exmaralda.folker.actions.partiturviewactions.AddEventInPartiturAction addEventInPartiturAction;
@@ -169,6 +170,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         decreaseSelectionEndAction = new org.exmaralda.folker.actions.waveformactions.FineTuneSelectionAction(this, "", c.getIcon(Constants.REWIND_ICON), FineTuneSelectionAction.RIGHT_BOUNDARY, -1);
         increaseSelectionEndAction = new org.exmaralda.folker.actions.waveformactions.FineTuneSelectionAction(this, "", c.getIcon(Constants.FORWARD_ICON), FineTuneSelectionAction.RIGHT_BOUNDARY, +1);
         navigateAction = new org.exmaralda.folker.actions.waveformactions.NavigateAction(this, "", c.getIcon(Constants.NAVIGATE_ICON));
+        scrollToTimeAction = new org.exmaralda.folker.actions.waveformactions.ScrollToTimeAction(this, "", c.getIcon(Constants.SCROLL_TO_TIME_ICON));
 
         addEventInPartiturAction = new org.exmaralda.folker.actions.partiturviewactions.AddEventInPartiturAction(this, 
                 Internationalizer.getString("Add event..."), c.getIcon(Constants.ADD_EVENT_ICON));
@@ -310,6 +312,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         timeViewer.navigationDialog.updateTimes();
         timeViewer.navigationDialog.setVisible(true);
     }
+    
 
     public void shiftSelection(){
         timeViewer.shiftSelection();

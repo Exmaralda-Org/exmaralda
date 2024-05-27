@@ -3111,6 +3111,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     private void scrollToTime(double time, String speakerID) {
         scrollToTime(time, speakerID, true);
     }
+
     private void scrollToTime(double time, String speakerID, boolean select) {
                 commitEdit();
         switch (selectedPanelIndex){
@@ -3228,6 +3229,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             }
         }
     }
+
 
 
     

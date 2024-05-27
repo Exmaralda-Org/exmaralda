@@ -127,6 +127,13 @@
                         </Property>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JButton" name="scrollToTimeButton">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-down.png"/>
+                        </Property>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="zoomPanel">
