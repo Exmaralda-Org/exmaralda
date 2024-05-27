@@ -7,6 +7,7 @@ package org.exmaralda.common.corpusbuild.comafunctions;
 
 import java.net.URISyntaxException;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.common.corpusbuild.AbstractCorpusChecker;
@@ -27,7 +28,17 @@ public class StructureErrorsChecker extends AbstractCorpusChecker {
     boolean checkOrphanedAnnotationTiers = true;
     boolean checkAnnotationMismatches = true;
     boolean checkTemporalAnomalies = true;
+    boolean checkStratification = true;
 
+
+    public StructureErrorsChecker(boolean orphanedT, boolean duplicateT, boolean orphanedA, boolean aMismatch, boolean tAnomalie, boolean strat) {
+        checkOrphanedTranscriptionTiers = orphanedT;
+        checkDuplicateTranscriptionTiers = duplicateT;
+        checkOrphanedAnnotationTiers = orphanedA;
+        checkAnnotationMismatches = aMismatch;
+        checkTemporalAnomalies = tAnomalie;
+        checkStratification = strat;
+    }
 
     public StructureErrorsChecker(boolean orphanedT, boolean duplicateT, boolean orphanedA, boolean aMismatch, boolean tAnomalie) {
         checkOrphanedTranscriptionTiers = orphanedT;
@@ -35,8 +46,8 @@ public class StructureErrorsChecker extends AbstractCorpusChecker {
         checkOrphanedAnnotationTiers = orphanedA;
         checkAnnotationMismatches = aMismatch;
         checkTemporalAnomalies = tAnomalie;
+        checkStratification = false;
     }
-
 
 
     @Override
@@ -91,6 +102,15 @@ public class StructureErrorsChecker extends AbstractCorpusChecker {
             for (String tliID : temporalAnomalies){
                 addError(currentFilename, "", tliID, text);
             }
+        }
+        
+        if (checkStratification){
+            List<String> nonStratifiedTiers = bt.getBody().getNonStratifiedTiers();
+            String text = "Tier is not stratified";
+            for (String tierID : nonStratifiedTiers){
+               addError(currentFilename, tierID, "", text);
+            }
+            
         }
 
 

@@ -646,7 +646,18 @@ public class BasicBody extends AbstractTierBody {
                     }
                 }
             }
+        }        
+    }
+    
+    public List<String> getNonStratifiedTiers(){
+        List<String> result = new ArrayList<>();
+        for (int pos=0; pos<getNumberOfTiers(); pos++){
+            Tier t = getTierAt(pos);
+            if (!t.isStratified(getCommonTimeline())){
+                result.add(t.getID());
+            }
         }
+        return result;
         
     }
 

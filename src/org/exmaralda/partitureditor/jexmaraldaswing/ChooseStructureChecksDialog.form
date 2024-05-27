@@ -7,6 +7,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -32,13 +33,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
         <Property name="columns" type="int" value="1"/>
-        <Property name="rows" type="int" value="5"/>
+        <Property name="rows" type="int" value="6"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="orphanedTranscriptionTiersCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Orphaned transcription tiers"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Orphaned transcription tiers&lt;/b&gt; - Transcription tiers without a speaker&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -47,8 +48,7 @@
         <Component class="javax.swing.JCheckBox" name="duplicateTranscriptionTiersCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Duplicate transcription tiers"/>
-            <Property name="actionCommand" type="java.lang.String" value="Duplicate transcription tiers"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Duplicate transcription tiers&lt;/b&gt; - Two or more transcription tiers with the same speaker&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -57,7 +57,7 @@
         <Component class="javax.swing.JCheckBox" name="orphanedAnnotationTiersCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Orphaned annotation tiers"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Orphaned annotation tiers&lt;/b&gt; - Annotation tiers without a transcription tier with the same speaker&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -66,7 +66,7 @@
         <Component class="javax.swing.JCheckBox" name="annotationMismatchesCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Annotation mismatches"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Annotation mismatches&lt;/b&gt; - Annotations without a matching sequence of events in the corresponding transcription tier&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -75,7 +75,16 @@
         <Component class="javax.swing.JCheckBox" name="temporalAnomaliesCheckBox">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Temporal anomalies"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Temporal anomalies&lt;/b&gt; - Absolute time values in the timeline not making sense&lt;/html&gt;"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="stratificationCheckBox">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Stratification&lt;/b&gt; - Overlapping events within a tier&lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

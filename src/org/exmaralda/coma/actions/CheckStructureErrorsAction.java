@@ -54,7 +54,8 @@ public class CheckStructureErrorsAction
                                 dialog.duplicateTranscriptionTiersCheckBox.isSelected(),
                                 dialog.orphanedAnnotationTiersCheckBox.isSelected(),
                                 dialog.annotationMismatchesCheckBox.isSelected(),
-                                dialog.temporalAnomaliesCheckBox.isSelected()
+                                dialog.temporalAnomaliesCheckBox.isSelected(),
+                                dialog.stratificationCheckBox.isSelected()
                                 );
 
 			pbd = new ProgressBarDialog(coma, false);

@@ -38,34 +38,38 @@ public class ChooseStructureChecksDialog extends javax.swing.JDialog {
         orphanedAnnotationTiersCheckBox = new javax.swing.JCheckBox();
         annotationMismatchesCheckBox = new javax.swing.JCheckBox();
         temporalAnomaliesCheckBox = new javax.swing.JCheckBox();
+        stratificationCheckBox = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Structure checks");
 
-        mainPanel.setLayout(new java.awt.GridLayout(5, 1));
+        mainPanel.setLayout(new java.awt.GridLayout(6, 1));
 
         orphanedTranscriptionTiersCheckBox.setSelected(true);
-        orphanedTranscriptionTiersCheckBox.setText("Orphaned transcription tiers");
+        orphanedTranscriptionTiersCheckBox.setText("<html><b>Orphaned transcription tiers</b> - Transcription tiers without a speaker</html>");
         mainPanel.add(orphanedTranscriptionTiersCheckBox);
 
         duplicateTranscriptionTiersCheckBox.setSelected(true);
-        duplicateTranscriptionTiersCheckBox.setText("Duplicate transcription tiers");
-        duplicateTranscriptionTiersCheckBox.setActionCommand("Duplicate transcription tiers");
+        duplicateTranscriptionTiersCheckBox.setText("<html><b>Duplicate transcription tiers</b> - Two or more transcription tiers with the same speaker</html>");
         mainPanel.add(duplicateTranscriptionTiersCheckBox);
 
         orphanedAnnotationTiersCheckBox.setSelected(true);
-        orphanedAnnotationTiersCheckBox.setText("Orphaned annotation tiers");
+        orphanedAnnotationTiersCheckBox.setText("<html><b>Orphaned annotation tiers</b> - Annotation tiers without a transcription tier with the same speaker</html>");
         mainPanel.add(orphanedAnnotationTiersCheckBox);
 
         annotationMismatchesCheckBox.setSelected(true);
-        annotationMismatchesCheckBox.setText("Annotation mismatches");
+        annotationMismatchesCheckBox.setText("<html><b>Annotation mismatches</b> - Annotations without a matching sequence of events in the corresponding transcription tier</html>");
         mainPanel.add(annotationMismatchesCheckBox);
 
         temporalAnomaliesCheckBox.setSelected(true);
-        temporalAnomaliesCheckBox.setText("Temporal anomalies");
+        temporalAnomaliesCheckBox.setText("<html><b>Temporal anomalies</b> - Absolute time values in the timeline not making sense</html>");
         mainPanel.add(temporalAnomaliesCheckBox);
+
+        stratificationCheckBox.setSelected(true);
+        stratificationCheckBox.setText("<html><b>Stratification</b> - Overlapping events within a tier</html>");
+        mainPanel.add(stratificationCheckBox);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -111,6 +115,7 @@ public class ChooseStructureChecksDialog extends javax.swing.JDialog {
     private javax.swing.JButton okButton;
     public javax.swing.JCheckBox orphanedAnnotationTiersCheckBox;
     public javax.swing.JCheckBox orphanedTranscriptionTiersCheckBox;
+    public javax.swing.JCheckBox stratificationCheckBox;
     public javax.swing.JCheckBox temporalAnomaliesCheckBox;
     // End of variables declaration//GEN-END:variables
 
