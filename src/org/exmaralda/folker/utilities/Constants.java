@@ -107,7 +107,8 @@ public class Constants {
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/media-playback-stop.png",    // stop
         //------------------------------------
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/system-search.png",    // zoom
-        "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-next.png",          // shift selection
+        // "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-next.png",          // shift selection
+        "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/go-next-blue.png",          // shift selection, #477
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/mail-send-receive.png",          // detach selection
         //------------------------------------
         "/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/actions/list-add.png",          // add event
