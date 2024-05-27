@@ -1744,7 +1744,7 @@ public class EXAKT extends javax.swing.JFrame
     public void resetSettings(){
         try {
             java.util.prefs.Preferences.userRoot().node(getPreferencesNode()).clear();                
-            JOptionPane.showMessageDialog(rootPane, "Preferences reset.\nRestart the editor.");
+            JOptionPane.showMessageDialog(rootPane, "<html>Preferences reset.<br/><b>Restart the editor.</b></html>");
         } catch (BackingStoreException ex) {
             Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
             JOptionPane.showMessageDialog(rootPane, "Problem resetting preferences:\n" + ex.getLocalizedMessage());

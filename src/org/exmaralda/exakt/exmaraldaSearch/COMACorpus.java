@@ -74,10 +74,12 @@ public class COMACorpus extends AbstractCOMACorpus  {
         fetchAttributes("//Transcription", transcriptionAttributes, FIXED_TRANSCRIPTION_ATTRIBUTES);
     }
     
+    @Override
     public String getXPathToSearchableSegment() {
         return XPATH_TO_SEARCHABLE_SEGMENT;
     }
     
+    @Override
     public void setXPathToSearchableSegment(String xp){
         XPATH_TO_SEARCHABLE_SEGMENT = xp;
     }

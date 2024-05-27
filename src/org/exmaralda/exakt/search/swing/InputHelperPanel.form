@@ -763,7 +763,7 @@
                     <Component class="javax.swing.JComboBox" name="alphabetComboBox">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="9">
+                          <StringArray count="10">
                             <StringItem index="0" value="Default"/>
                             <StringItem index="1" value="German"/>
                             <StringItem index="2" value="Turkish"/>
@@ -772,7 +772,8 @@
                             <StringItem index="5" value="Italian"/>
                             <StringItem index="6" value="Spanish"/>
                             <StringItem index="7" value="French"/>
-                            <StringItem index="8" value="Any character"/>
+                            <StringItem index="8" value="Slovene"/>
+                            <StringItem index="9" value="Any character"/>
                           </StringArray>
                         </Property>
                         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

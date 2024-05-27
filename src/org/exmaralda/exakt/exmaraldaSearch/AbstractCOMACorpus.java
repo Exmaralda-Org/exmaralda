@@ -4,9 +4,11 @@
  */
 package org.exmaralda.exakt.exmaraldaSearch;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.exmaralda.exakt.search.AbstractXMLFileListCorpus;
 import org.exmaralda.partitureditor.jexmaralda.StringUtilities;
@@ -34,13 +36,13 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
     String XPATH_TO_SEARCHABLE_SEGMENT = "//segmentation[@name='SpeakerContribution_Event']/ts";
     static String XPATH_TO_SEGMENT_NAMES = "//*[self::ts or self::ats or self::nts]/@n";
     
-    Hashtable<String,Element> speakerMappings = new Hashtable<String,Element>();
-    Hashtable<String,Element> communicationMappings = new Hashtable<String,Element>();
-    Hashtable<String,Element> transcriptionMappings = new Hashtable<String,Element>();
+    Map<String,Element> speakerMappings = new HashMap<>();
+    Map<String,Element> communicationMappings = new HashMap<>();
+    Map<String,Element> transcriptionMappings = new HashMap<>();
     
-    Hashtable<String,XPath> speakerAttributes = new Hashtable<String,XPath>();
-    Hashtable<String,XPath> communicationAttributes = new Hashtable<String,XPath>();
-    Hashtable<String,XPath> transcriptionAttributes = new Hashtable<String,XPath>();        
+    Map<String,XPath> speakerAttributes = new HashMap<>();
+    Map<String,XPath> communicationAttributes = new HashMap<>();
+    Map<String,XPath> transcriptionAttributes = new HashMap<>();        
     
     static String[][] FIXED_SPEAKER_ATTRIBUTES = {
                                                         {"Sigle*","Sigle/text()"},
@@ -60,12 +62,12 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
                                                         {"Filename*","Filename/text()"}
                                                     };
     
-    HashSet<String> segmentationNames = new HashSet<String>();
-    HashSet<String> annotationNames = new HashSet<String>();
-    HashSet<String> descriptionNames = new HashSet<String>();
-    HashSet<String> segmentNames = new HashSet<String>();
+    HashSet<String> segmentationNames = new HashSet<>();
+    HashSet<String> annotationNames = new HashSet<>();
+    HashSet<String> descriptionNames = new HashSet<>();
+    HashSet<String> segmentNames = new HashSet<>();
 
-    void fetchAttributes(String xpathToStartElement, Hashtable<String, XPath> index, String[][] fixedAttributes) {
+    void fetchAttributes(String xpathToStartElement, Map<String, XPath> index, String[][] fixedAttributes) {
         String searchString = xpathToStartElement + "/Description/Key/@Name";
         try {
             XPath xp = XPath.newInstance(searchString);
@@ -124,7 +126,7 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
                 String keyPath = locationPath + "/Description/Key/@Name";
                 //System.out.println("KeyPath: " + keyPath);
                 XPath xp = XPath.newInstance("//Speaker/" + keyPath);
-                HashSet<String> allDescriptionNames = new HashSet<String>();
+                HashSet<String> allDescriptionNames = new HashSet<>();
                 for (Object o : xp.selectNodes(comaDocument)){
                         Attribute a = (Attribute) o;
                         allDescriptionNames.add(a.getValue());

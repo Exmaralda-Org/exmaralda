@@ -152,7 +152,7 @@ public class RegExFilterPanel extends javax.swing.JPanel {
 
     private void columnSelectionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_columnSelectionComboBoxActionPerformed
         int index = columnSelectionComboBox.getSelectedIndex();
-        HashSet<String> types = new HashSet<String>();
+        HashSet<String> types = new HashSet<>();
         if (index==1) types = tableModel.getData().getTypes();
         else if (index==3) types = tableModel.getTypes(1);
         else if (index==4) types = tableModel.getTypes(2);

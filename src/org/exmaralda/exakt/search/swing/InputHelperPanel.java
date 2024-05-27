@@ -25,7 +25,8 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[A-Za-zÀÈÉÌÍÎÓÒÚÙàèéìíîóòúù]", // 5 : ITALIAN
         "[A-Za-zÑñ]", // 6 : SPANISH
         "[A-Za-zÀÂÇÉÈÊËÎÏÔŒÙÛàâçéèêëïîôœûù]", // 7 : FRENCH
-        "[\\p{L}]" // 8 : ANY KIND OF ALPHABET
+        "[A-Za-zČŠŽčšž]", // 8 : SLOVENE
+        "[\\p{L}]" // 9 : ANY KIND OF ALPHABET
         
     };
     
@@ -38,7 +39,8 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[A-ZÀÈÉÌÍÎÓÒÚÙ]", // 5 : ITALIAN
         "[A-ZÑ]", // 6 : SPANISH
         "[A-ZÀÂÇÉÈÊËÎÏÔŒÙÛ]", // 7 : FRENCH
-        "[\\p{Lu}]" // 8 : ANY KIND OF ALPHABET
+        "[A-ZČŠŽ]", // 8 : SLOVENE
+        "[\\p{Lu}]" // 9 : ANY KIND OF ALPHABET
     };
 
     private static final String[] LOWER_CASE_CHARACTER = {
@@ -50,7 +52,8 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         "[a-zàèéìíîóòúù]", // 5 : ITALIAN
         "[a-záéíñóúü]", // 6 : SPANISH
         "[a-zàâçéèêëïîôœûù]", // 7 : FRENCH
-        "[\\p{Ll}]" // 8 : ANY KIND OF ALPHABET
+        "[a-zčšž]", // 8 : SLOVENE        
+        "[\\p{Ll}]" // 9 : ANY KIND OF ALPHABET
     };
     
     Comparator<String> caseIgnoringComparator = new java.util.Comparator<String>() {
@@ -600,7 +603,7 @@ public class InputHelperPanel extends javax.swing.JPanel implements UnicodeKeybo
         jLabel5.setText("Alphabet: ");
         alphabetPanel.add(jLabel5);
 
-        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German", "Turkish", "Scandinavian", "Portuguese", "Italian", "Spanish", "French", "Any character" }));
+        alphabetComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Default", "German", "Turkish", "Scandinavian", "Portuguese", "Italian", "Spanish", "French", "Slovene", "Any character" }));
         alphabetComboBox.setMaximumSize(new java.awt.Dimension(55, 22));
         alphabetPanel.add(alphabetComboBox);
 
