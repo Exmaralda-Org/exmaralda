@@ -10,6 +10,11 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="exakt" type="change" version="1.4.1" date="28.05.2024">Case-insensitive sorting for all transcription columns (issue #422)</change>
+    <change tool="coma" type="feature" version="2.0.3" date="27.05.2024">Replace after type collection (issue #475)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="27.05.2024">Go from timeline display to partitur (issue #418)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="11.05.2024">VTT import: use voice tags for speaker assignment (issue #119)</change>
+    <change tool="partitureditor" type="change" version="1.8" date="06.05.2024">Faster INEL segmentation (issue #470)</change>
     <change tool="partitureditor" type="feature" version="1.8" date="27.04.2024">Copy/paste structure actions (issue #471)</change>
     <change tool="coma" type="feature" version="2.0.3" date="26.04.2024">Type collection (issue #475)</change>
     <change tool="orthonormal" type="change" version="1.0.1" date="26.04.2024">Tolerate missing audio (issue #472)</change>
