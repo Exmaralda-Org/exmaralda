@@ -92,18 +92,21 @@ public class COMAKWICTableSorter extends AbstractTableModel {
     //private COMAKWICTable table;
 
     public static final Comparator COMPARABLE_COMAPRATOR = new Comparator() {
+        @Override
         public int compare(Object o1, Object o2) {
             return ((Comparable) o1).compareTo(o2);
         }
     };
 
     public static final Comparator LEXICAL_COMPARATOR = new Comparator() {
+        @Override
         public int compare(Object o1, Object o2) {
             return o1.toString().compareToIgnoreCase(o2.toString());
         }
     };
     
     public static final Comparator REVERSED_COMPARATOR = new Comparator() {
+        @Override
         public int compare(Object o1, Object o2){
             String s1 = o1.toString();
             String s2 = o2.toString();
@@ -115,7 +118,7 @@ public class COMAKWICTableSorter extends AbstractTableModel {
     
     public static final Comparator REVERSED_WORDWISE_COMPARATOR = new org.exmaralda.exakt.search.ReversedWordWiseComparator();
 
-    private HashMap<Integer,Comparator> comparatorMap = new HashMap<Integer,Comparator>();
+    private HashMap<Integer,Comparator> comparatorMap = new HashMap<>();
     
     private Row[] viewToModel;
     private int[] modelToView;
@@ -192,7 +195,7 @@ public class COMAKWICTableSorter extends AbstractTableModel {
     }
 
     public boolean isSorting() {
-        return sortingColumns.size() != 0;
+        return !sortingColumns.isEmpty();
     }
 
     private Directive getDirective(int column) {
@@ -272,8 +275,20 @@ public class COMAKWICTableSorter extends AbstractTableModel {
             return REVERSED_COMPARATOR;
         }
         // changed for row numbering in version 0.4, 22-Jan-2008
-        if (column==0) return LEXICAL_COMPARATOR;
+        if (column==0){
+            return LEXICAL_COMPARATOR;
+        }
         //Class columnType = tableModel.getColumnClass(column);
+        
+        // changed for issue #422, 28-May-2024
+        // Use a normal lexical (=case-insensitive) comparator also for 
+        // column 5 (match) and
+        // column 6 (right context)
+        if (column==5 || column==6){
+            return LEXICAL_COMPARATOR;
+        }
+        
+        
         Class columnType = tableModel.getColumnClass(column-1);
         Comparator comparator = (Comparator) columnComparators.get(columnType);
         if (comparator != null) {
