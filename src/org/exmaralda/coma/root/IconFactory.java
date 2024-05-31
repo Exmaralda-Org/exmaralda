@@ -23,8 +23,8 @@ public class IconFactory extends ImageIcon {
 	 * @param name
 	 *              or path of the image file
 	 */
-	public IconFactory(Image arg0) {
-		super(arg0);
+	public IconFactory(Image name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
