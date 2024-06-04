@@ -35,6 +35,7 @@ public class TierMenu extends AbstractTableMenu {
         addSeparator();
         
         add(table.listEventsAction); // issue #316
+        add(table.tabulateEventsAction); // issue #446
         add(table.typesAction); // issue #295
         
         addSeparator();

@@ -83,6 +83,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="unselectedTiersListMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -188,6 +191,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="selectedTiersListMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

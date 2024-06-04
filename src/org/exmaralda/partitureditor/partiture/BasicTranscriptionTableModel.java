@@ -613,7 +613,8 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         or: shifts the corresponding event forwards in the timeline
      * @param row
      * @param col */
-    public void moveRight(int row, int col){
+    // this one is not used any longer
+    private void moveRight(int row, int col){
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
         try {
@@ -690,7 +691,8 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         or: shifts the corresponding event backwards in the timeline
      * @param row
      * @param col */
-    public void moveLeft (int row, int col){
+    // this one is not used any longer
+    private void moveLeft (int row, int col){
         Tier tier = transcription.getBody().getTierAt(row);
         String tli = transcription.getBody().getCommonTimeline().getTimelineItemAt(col).getID();
         try {
@@ -784,6 +786,8 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
         } catch (JexmaraldaException je){}            // should never get here        
     }
     
+
+
     /** extends the cell one column to the left
         or: lets the corresponding event begin one timepoint earlier*/
     public void extendLeft(int row, int col){

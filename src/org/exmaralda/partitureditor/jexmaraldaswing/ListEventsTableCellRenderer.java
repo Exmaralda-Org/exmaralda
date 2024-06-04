@@ -62,8 +62,15 @@ public class ListEventsTableCellRenderer extends DefaultTableCellRenderer {
                     ((JLabel)c).setText(formatted);
                     break;
                 }
+            case 4: 
+                {
+                    break;
+                }               
             default:
-                break;
+                {
+                    c.setForeground(Color.DARK_GRAY);
+                    break;
+                }
         }
         
         if (column>0 && (!isSelected)){

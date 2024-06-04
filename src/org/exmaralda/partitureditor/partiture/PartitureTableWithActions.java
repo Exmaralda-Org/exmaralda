@@ -383,6 +383,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction removeEmptyEventsAction;
     public javax.swing.AbstractAction editTiersAction;
     public javax.swing.AbstractAction listEventsAction; // issue #316
+    public javax.swing.AbstractAction tabulateEventsAction; // issue #446
     public javax.swing.AbstractAction typesAction; // issue #295
 
     //*******************************************************************
@@ -709,7 +710,7 @@ public class PartitureTableWithActions extends PartitureTable
         editTiersAction = new EditTiersAction(this);
         listEventsAction = new ListEventsAction(this);
         typesAction = new TypesAction(this);
-        listEventsAction = new ListEventsAction(this);
+        tabulateEventsAction = new TabulateEventsAction(this);
 
         //*********************************************************************************************
         //***************************************** EVENT ACTIONS *************************************
@@ -1415,6 +1416,7 @@ public class PartitureTableWithActions extends PartitureTable
         addTierAction.setEnabled(!locked);
         typesAction.setEnabled(aWholeRowIsSelected);
         listEventsAction.setEnabled(aWholeRowIsSelected);
+        tabulateEventsAction.setEnabled(aWholeRowIsSelected);
         removeEmptyEventsAction.setEnabled(aWholeRowIsSelected && !locked);
         moveTierUpAction.setEnabled(aWholeRowIsSelected && selectionStartRow!=0 && !locked);
         insertTierAction.setEnabled(aWholeRowIsSelected && !locked);
