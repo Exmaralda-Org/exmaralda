@@ -7,8 +7,10 @@ package org.exmaralda.folker.gui;
 //import com.sun.awt.AWTUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.RowSorter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
 import org.exmaralda.folker.application.ApplicationControl;
 import org.exmaralda.folker.data.Timepoint;
 import org.exmaralda.folker.listview.TimepointTableCellRenderer;
@@ -38,8 +40,10 @@ public class MaskDialog extends javax.swing.JDialog implements MouseListener, Li
     }
     
     public void setData(){
+        //RowSorter<? extends TableModel> rowSorter = maskTable.getRowSorter();
         tableModel = new MaskTableModel(applicationControl.getTranscriptionHead());
         maskTable.setModel(tableModel);        
+        //maskTable.setRowSorter(rowSorter);
         formatTable();
     }
 

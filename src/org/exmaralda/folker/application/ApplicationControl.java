@@ -1522,6 +1522,11 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     }
     
     public void setTranscription(EventListTranscription elt){
+        setTranscription(elt, true);
+    }
+
+
+    public void setTranscription(EventListTranscription elt, boolean resetMask){
         eventListTableModel = new EventListTableModel(elt);
         //eventListTableModel.setCheckRegex(checkRegex1);
         eventListTable.setModel(eventListTableModel);                        
@@ -1535,7 +1540,11 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         
         setParseLevel(PARSE_LEVEL);
         
-        maskDialog.setData();
+        // this was the place which causes issue #485
+        //maskDialog.setData();
+        if (resetMask){
+            maskDialog.setData();            
+        }
 
     }
     
@@ -2401,7 +2410,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     EventListTranscription elt = org.exmaralda.folker.io.EventListTranscriptionConverter.
                             importExmaraldaBasicTranscription(partitur.getModel().getTranscription(), 
                             (org.exmaralda.partitureditor.jexmaralda.Event)selection, correspondingEvent);
-                    setTranscription(elt);      
+                    // changed for issue #485
+                    //setTranscription(elt);      
+                    setTranscription(elt, false);      
                     break;
                 case 0 :
                 case 2 : // i.e. we are NOT coming from the partitur view                    
@@ -2669,7 +2680,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     /** process change events fired by either the event or the contribution view */
     @Override
     public void tableChanged(TableModelEvent e) {
-        if ((e.getType()==e.UPDATE) && (e.getColumn()==4)){
+        if ((e.getType()==TableModelEvent.UPDATE) && (e.getColumn()==4)){
             if (selectedPanelIndex==0){
                 eventListTable.getSelectionModel().setSelectionInterval(e.getFirstRow(), e.getLastRow());
             }
