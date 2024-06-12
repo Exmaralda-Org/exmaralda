@@ -75,27 +75,27 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
             
             // new 02-03-2020
             java.awt.Desktop.getDesktop().setOpenFileHandler(new java.awt.desktop.OpenFilesHandler(){
-                    @Override
-                    public void openFiles(OpenFilesEvent e){
-                        try{
-                            boolean proceed = true;
-                            if (applicationControl.DOCUMENT_CHANGED){
-                                proceed = applicationControl.checkSave();
-                            }
-                            if (!proceed) return;
-                            String fileNameToOpen = e.getFiles().get(0).getAbsolutePath();
-                            // dirty fix for #216
-                            File fileToOpen = new File(StringUtilities.fixFilePath(fileNameToOpen));                            
-                            if (!(fileNameToOpen.toLowerCase().endsWith(".wav"))){
-                                applicationControl.openTranscriptionFile(fileToOpen);
-                            } else {
-                                applicationControl.newTranscriptionFile(fileToOpen);
-                            }
-                        } catch (Exception ex){
-                            Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);  
-                            JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
+                @Override
+                public void openFiles(OpenFilesEvent e){
+                    try{
+                        boolean proceed = true;
+                        if (applicationControl.DOCUMENT_CHANGED){
+                            proceed = applicationControl.checkSave();
                         }
+                        if (!proceed) return;
+                        String fileNameToOpen = e.getFiles().get(0).getAbsolutePath();
+                        // dirty fix for #216
+                        File fileToOpen = new File(StringUtilities.fixFilePath(fileNameToOpen));                            
+                        if (!(fileNameToOpen.toLowerCase().endsWith(".wav"))){
+                            applicationControl.openTranscriptionFile(fileToOpen);
+                        } else {
+                            applicationControl.newTranscriptionFile(fileToOpen);
+                        }
+                    } catch (Exception ex){
+                        Logger.getLogger(ApplicationFrame.class.getName()).log(Level.SEVERE, null, ex);  
+                        JOptionPane.showMessageDialog(rootPane, ex.getLocalizedMessage());
                     }
+                }
             });
             
         }

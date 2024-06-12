@@ -37,6 +37,7 @@ public class EventListTable extends AbstractListTranscriptionTable  {
         setRowHeight(22);
         setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
+        
     }
 
     /*@Override

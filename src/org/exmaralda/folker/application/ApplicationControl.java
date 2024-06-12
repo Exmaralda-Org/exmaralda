@@ -170,6 +170,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     org.exmaralda.folker.actions.eventviewactions.MergeEventsInListAction mergeEventsInListAction;
     org.exmaralda.folker.actions.eventviewactions.InsertPauseAction insertPauseAction;
     org.exmaralda.folker.actions.eventviewactions.NextErrorAction nextErrorAction;
+    org.exmaralda.folker.actions.eventviewactions.AssignSpeakerAction assignSpeakerAction;
     // ---------------------------
     org.exmaralda.folker.actions.eventviewactions.SplitInContributionAction splitInContributionAction;
     // ---------------------------
@@ -232,6 +233,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         //timeViewer = new WaveFormViewer();
 
         eventListTable = new EventListTable();
+        
         //eventListTable.setCheckRegex(checkRegex1);
 
         contributionListTable = new ContributionListTable();
@@ -293,8 +295,19 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         };
         
         initVideoPanel();
+        
+        
+        initContextMenu();
+                
 
-
+    }
+    
+    private void initContextMenu(){
+        JPopupMenu contextMenu = new JPopupMenu();
+        contextMenu.add(assignSpeakerAction);
+        contextMenu.add(mergeEventsInListAction).setText(FOLKERInternationalizer.getString("segmentactions.mergeSegments"));
+        eventListTable.setComponentPopupMenu(contextMenu); 
+        
     }
 
     public TranscriptionHead getTranscriptionHead() {
@@ -582,6 +595,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         mergeEventsInListAction = new org.exmaralda.folker.actions.eventviewactions.MergeEventsInListAction(this,"",c.getIcon(Constants.MERGE_EVENTS_ICON));
         insertPauseAction = new org.exmaralda.folker.actions.eventviewactions.InsertPauseAction(this,"",c.getIcon(Constants.INSERT_PAUSE_ICON));
         nextErrorAction = new org.exmaralda.folker.actions.eventviewactions.NextErrorAction(this,"",c.getIcon(Constants.NEXT_ERROR_ICON));
+        assignSpeakerAction = new org.exmaralda.folker.actions.eventviewactions.AssignSpeakerAction(this,FOLKERInternationalizer.getString("context_menu.assignSpeaker"),c.getIcon(Constants.EDIT_SPEAKERS_ICON));
         // -----------------
         splitInContributionAction = new org.exmaralda.folker.actions.eventviewactions.SplitInContributionAction(this,"",c.getIcon(Constants.SPLIT_EVENT_ICON));
         // -----------------
@@ -1801,6 +1815,40 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         DOCUMENT_CHANGED = true;
         status(FOLKERInternationalizer.getString("status.mergesegments1") + Integer.toString(rows[0]+1) + FOLKERInternationalizer.getString("status.mergesegments2"));
     }
+    
+    public void assignSpeaker() {
+        int[] rows = eventListTable.getSelectedRows();
+        if (rows.length<1) return;
+        commitEdit();
+        Speakerlist speakerlist = getTranscription().getSpeakerlist();
+        if (speakerlist.getSpeakers().isEmpty()) return;
+        String[] speakerIDs = speakerlist.getSpeakerIDs();
+        speakerIDs = Arrays.copyOf(speakerIDs, speakerIDs.length+1);
+        speakerIDs[speakerIDs.length-1] = "---";
+        
+        // showInputDialog(Component parentComponent, Object message, String title, int messageType, Icon icon, Object[] selectionValues, Object initialSelectionValue)
+        Object o = JOptionPane.showInputDialog(
+                applicationFrame, 
+                FOLKERInternationalizer.getString("context_menu.assignSpeaker"), 
+                FOLKERInternationalizer.getString("context_menu.assignSpeaker"), 
+                JOptionPane.QUESTION_MESSAGE, new Constants().getIcon(Constants.EDIT_SPEAKERS_ICON), speakerIDs, speakerIDs[0]);
+        
+        String selectedSpeakerID = (String)o;
+        
+        if (selectedSpeakerID.equals("---")){
+            selectedSpeakerID = null;
+        }
+        
+        for (int row : rows){
+            eventListTableModel.getTranscription().getEventAt(row).setSpeaker(speakerlist.getSpeaker(selectedSpeakerID));
+            eventListTableModel.fireTableCellUpdated(row, 3);
+            eventListTableModel.fireTableCellUpdated(row, 5);
+            eventListTableModel.fireTableCellUpdated(row, 6);
+        }        
+        DOCUMENT_CHANGED = true;                
+        status("Speakers assigned for " + rows.length + " segments");
+    }
+    
     
    
     public void splitEventInList(){
@@ -3243,6 +3291,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             }
         }
     }
+
 
 
 

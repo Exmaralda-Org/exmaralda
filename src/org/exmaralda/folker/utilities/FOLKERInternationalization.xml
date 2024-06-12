@@ -283,6 +283,14 @@
 
                             </subdomain>
                         </subdomain>
+                        <subdomain name="context_menu">
+                            <item id="context_menu.assignSpeaker">
+                                    <translation lang="en" trans="Assign speaker"/>
+                                    <translation lang="de" trans="Sprecher zuordnen"/>
+                                    <translation lang="fr" trans="Assigner locuteur"/>
+                            </item>
+                            context_menu.assignSpeaker
+                        </subdomain>
                 </subdomain>
                 <!-- ************************************************************************************* -->
                 <!-- *************************** END MENUS **************************************** -->
