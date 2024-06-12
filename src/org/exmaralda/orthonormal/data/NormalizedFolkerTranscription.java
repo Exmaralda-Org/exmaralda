@@ -50,7 +50,7 @@ public class NormalizedFolkerTranscription {
     HashMap<String, Timepoint> timeMappings;
     HashMap<String, Speaker> speakerMappings;
     HashMap<Element, ArrayList<Element>> wordMappings;
-    HashSet<String> wordIDs;
+    HashSet<String> tokenIDs;
     List<Element> words;
     int highestParseLevel = 0;
 
@@ -153,14 +153,16 @@ public class NormalizedFolkerTranscription {
         indexSpeakers();
 
         wordMappings = new HashMap<>();
-        wordIDs = new HashSet<>();
+        tokenIDs = new HashSet<>();
         for (Element contribution : contributions){
             ArrayList<Element> wordVector = new ArrayList<>();
-            Iterator i = contribution.getDescendants(new ElementFilter("w"));
+            Iterator i = contribution.getDescendants(new ElementFilter());
             while (i.hasNext()){
-                Element word = (Element)(i.next());
-                wordVector.add(word);
-                wordIDs.add(word.getAttributeValue("id"));
+                Element token = (Element)(i.next());
+                if (token.getName().equals("w")){
+                    wordVector.add(token);
+                }                
+                tokenIDs.add(token.getAttributeValue("id"));
             }
             wordMappings.put(contribution, wordVector);
         }
@@ -168,20 +170,22 @@ public class NormalizedFolkerTranscription {
     
     public void reindexContribution(Element contribution){
             ArrayList<Element> wordVector = new ArrayList<>();
-            Iterator i = contribution.getDescendants(new ElementFilter("w"));
+            Iterator i = contribution.getDescendants(new ElementFilter());
             while (i.hasNext()){
-                Element word = (Element)(i.next());
-                wordVector.add(word);
-                wordIDs.add(word.getAttributeValue("id"));
+                Element token = (Element)(i.next());
+                if (token.getName().equals("w")){
+                    wordVector.add(token);
+                }
+                tokenIDs.add(token.getAttributeValue("id"));
             }
             wordMappings.put(contribution, wordVector);        
     }
     
     public void unindexContribution(Element contribution){
-            Iterator i = contribution.getDescendants(new ElementFilter("w"));
+            Iterator i = contribution.getDescendants(new ElementFilter());
             while (i.hasNext()){
                 Element word = (Element)(i.next());
-                wordIDs.remove(word.getAttributeValue("id"));
+                tokenIDs.remove(word.getAttributeValue("id"));
             }
             wordMappings.remove(contribution);
     }
@@ -211,16 +215,18 @@ public class NormalizedFolkerTranscription {
         return contributions.indexOf(currentElement);
     }
 
-    public boolean hasWordID(String testID) {
-        try {
+    public boolean hasTokenID(String testID) {
+        //try {
             // #322
             // return wordIDs.contains(testID);
-            Object o = XPath.selectSingleNode(xmlDocument, "//*[@id='" + testID + "']");
-            return (o!=null);
-        } catch (JDOMException ex) {
+            // #483 : this is a performance catastrophe
+            //Object o = XPath.selectSingleNode(xmlDocument, "//*[@id='" + testID + "']");
+            //return (o!=null);     
+            return tokenIDs.contains(testID);
+        /*} catch (JDOMException ex) {
             Logger.getLogger(NormalizedFolkerTranscription.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }
+        }*/
     }
 
     public double getNormalisationRatio() {

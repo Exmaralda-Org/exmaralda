@@ -1621,7 +1621,6 @@ public final class ApplicationControl implements  ListSelectionListener,
                 }
                 
                 
-                
                 //System.out.println("--------- INPUT -----------------");
                 //System.out.println("1: " + IOUtilities.elementToString(originalContributionElement));
                 // changed 20-01-2014
@@ -1668,6 +1667,8 @@ public final class ApplicationControl implements  ListSelectionListener,
                 
                 applicationFrame.getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 
+                //long start = System.currentTimeMillis();
+                
                 //Contribution modifiedContribution = dialog.getContribution();
                 
                 GATParser parser = new GATParser();
@@ -1675,6 +1676,9 @@ public final class ApplicationControl implements  ListSelectionListener,
                 Document eltDocument = EventListTranscriptionXMLReaderWriter.toJDOMDocument(elt, null);
                 parser.parseDocument(eltDocument, 1);
                 parser.parseDocument(eltDocument, parseLevel);
+                
+                //System.out.println("Parsed : " + ((System.currentTimeMillis() - start) / 1000.0));
+                
                 
                 //System.out.println("***********************");
                 //System.out.println(IOUtilities.documentToString(eltDocument));
@@ -1713,27 +1717,35 @@ public final class ApplicationControl implements  ListSelectionListener,
                     
                 }
                 
+                //System.out.println("Times consolidated : " + ((System.currentTimeMillis() - start) / 1000.0));
+                
+                
                 
                 // make new IDs for words
                 // changed 16-06-2022 : issue #322
                 // changed again 18-04-2024 : issue #322
+                // changed once more 12-06-2024: issue #483
                 //List l = XPath.selectNodes(modifiedContributionElement, "descendant::w");
                 //List l = XPath.selectNodes(modifiedContributionElement, "descendant::*[@id]");
                 List l = XPath.selectNodes(modifiedContributionElement, "descendant::w|descendant::pause|descendant::breathe|descendant::non-phonological");
-                int i=1;
+                // issue #483 let's start with 5000 so it becomes fast as lightning
+                //int i=1;
+                int i=5000;
                 HashSet<String> newIDs = new HashSet<>();
                 for (Object o : l){
                     Element w = (Element)o;
-                    String testID = "w1";
-                    while (getTranscription().hasWordID(testID)||newIDs.contains(testID)){
+                    String testID = "w5000";
+                    while (newIDs.contains(testID) || getTranscription().hasTokenID(testID)){
                         i++;
                         testID = "w" + Integer.toString(i);
                     }
                     w.setAttribute("id", testID);
                     newIDs.add(testID);
-                    i++;
+                    //i++;
                 }
                 System.out.println("*************************");
+
+                //System.out.println("Token IDs consolidated : " + ((System.currentTimeMillis() - start) / 1000.0));
                 //System.out.println(IOUtilities.elementToString(modifiedContributionElement));
                 // reinsert original normalizations
                 autoNormalizer.normalize(modifiedContributionElement, originalNormalizations);
