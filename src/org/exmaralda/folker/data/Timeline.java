@@ -20,62 +20,78 @@ public class Timeline {
     
     public double tolerance = 50;
     //double tolerance = 0;
-    
-    EventListTranscription transcription;
-    Vector<Timepoint> timepoints;    
+    List<Timepoint> timepoints;    
     TimepointComparator timepointComparator = new TimepointComparator(tolerance);
 
-    double maxTime;
-    
-    /** Creates a new instance of Timeline */
-    public Timeline(EventListTranscription t, double minimumTime, double maximumTime) {        
-        transcription = t;
-        timepoints = new Vector<Timepoint>();
-        timepoints.addElement(new Timepoint(this, minimumTime));
-        timepoints.addElement(new Timepoint(this, maximumTime));
-        maxTime = maximumTime;
+    public Timeline(){
+        timepoints = new ArrayList<>();        
     }
     
-    /** Creates a new instance of Timeline */
-    public Timeline(EventListTranscription t, double minimumTime, double maximumTime, int timelineTolerance) {        
+    /** Creates a new instance of Timeline
+     * @param minimumTime
+     * @param maximumTime */
+    public Timeline(double minimumTime, double maximumTime) {        
+        timepoints = new ArrayList<>();
+        timepoints.add(new Timepoint(this, minimumTime));
+        timepoints.add(new Timepoint(this, maximumTime));
+    }
+    
+    /** Creates a new instance of Timeline
+     * @param minimumTime
+     * @param maximumTime
+     * @param timelineTolerance */
+    public Timeline(double minimumTime, double maximumTime, int timelineTolerance) {        
         tolerance = timelineTolerance;
         timepointComparator = new TimepointComparator(tolerance);
-        transcription = t;
-        timepoints = new Vector<Timepoint>();
-        timepoints.addElement(new Timepoint(this, minimumTime));
-        timepoints.addElement(new Timepoint(this, maximumTime));
-        maxTime = maximumTime;
+        timepoints = new ArrayList<>();
+        timepoints.add(new Timepoint(this, minimumTime));
+        timepoints.add(new Timepoint(this, maximumTime));
+    }
+    
+    public Timeline makeCopy(){
+        Timeline copy = new Timeline();
+        copy.tolerance = this.tolerance;
+        copy.timepointComparator = new TimepointComparator(this.tolerance);
+        for (Timepoint timepoint : this.timepoints){
+            Timepoint copyTimepoint = new Timepoint(copy, timepoint.getTime());
+            copy.addTimepoint(copyTimepoint);
+        }
+        return copy;
     }
     
 
-    public Vector<Timepoint> getTimepoints(){
+    public List<Timepoint> getTimepoints(){
         return timepoints;
     }
     
     
     public Timepoint getTimepointAt(int index){
-        return timepoints.elementAt(index);
+        return timepoints.get(index);
     }
     
-    /** returns the absolute time of the first point in the timeline */
+    /** returns the absolute time of the first point in the timeline
+     * @return  */
     public double getMinimumTime(){
-        if (timepoints.size()>0){
-            return timepoints.elementAt(0).getTime();
+        if (!timepoints.isEmpty()){
+            return timepoints.get(0).getTime();
         }
         return 0.0;
     }
     
-    /** returns the absolute time of the first point in the timeline */
+    /** returns the absolute time of the first point in the timeline
+     * @return  */
     public double getMaximumTime(){
-        if (timepoints.size()>0){
-            return timepoints.elementAt(timepoints.size()-1).getTime();
+        if (!timepoints.isEmpty()){
+            return timepoints.get(timepoints.size()-1).getTime();
         }
         return 0.0;
     }
         
     /** Searches through the timeline for a timepoint with the specified absolute time, 
      *  using the tolerance value for this timeline. If such a timepoint is found,
-     *  it is returned, otherwise null is returned */
+     *  it is returned, otherwise null is returned
+     * @param time
+     * @return  */
     public Timepoint findTimepoint(double time){
         
         // check if the time is inside this timeline's range
@@ -90,7 +106,7 @@ public class Timeline {
         
         int index = Collections.binarySearch(timepoints, new Timepoint(null, time), timepointComparator);
         if (index<0) return null;
-        return timepoints.elementAt(index);
+        return timepoints.get(index);
 
     }
     
@@ -110,10 +126,17 @@ public class Timeline {
         Timepoint tp = findTimepoint(time);
         if (tp==null){
             tp = new Timepoint(this, time);
-            timepoints.addElement(tp);
+            timepoints.add(tp);
             Collections.sort(timepoints, timepointComparator);            
         }
         return tp;
+    }
+    
+    public Timepoint addTimepoint(Timepoint timepoint){
+        if (this.findTimepoint(timepoint.getTime())==null){
+            timepoints.add(timepoint);
+        }
+        return timepoint;
     }
 
     void removeUnusedTimepoints(HashSet<Timepoint> usedTimepoints) {
@@ -135,8 +158,8 @@ public class Timeline {
         boolean itHasBeenFound = (index>=0);
         boolean itIsTheFirst = (index==0);
         boolean itIsTheLast = (index==timepoints.size()-1);
-        boolean thePrecedingIsEarlier = (itHasBeenFound && (itIsTheFirst || (timepoints.elementAt(index-1).getTime()<time)));
-        boolean theFollowingIsLater = (itHasBeenFound && (itIsTheLast || (timepoints.elementAt(index+1).getTime()>time)));
+        boolean thePrecedingIsEarlier = (itHasBeenFound && (itIsTheFirst || (timepoints.get(index-1).getTime()<time)));
+        boolean theFollowingIsLater = (itHasBeenFound && (itIsTheLast || (timepoints.get(index+1).getTime()>time)));
         return (thePrecedingIsEarlier && theFollowingIsLater);
     }
 

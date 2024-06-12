@@ -33,6 +33,7 @@ public class Timepoint implements Comparable {
     public Timepoint(double time) {
         this.time = time;
     }
+    
 
     public Timeline getTimeline() {
         return timeline;
@@ -67,6 +68,7 @@ public class Timepoint implements Comparable {
         Timepoint t = (Timepoint)o;
         return Double.compare(getTime(),t.getTime());
     }
+
     
 
     

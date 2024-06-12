@@ -1416,7 +1416,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
 
         // changed 12-05-2009: do the saving in a thread
         // changed 29-05-2009: take care not to close the application while the save thread is running
-        final EventListTranscription finalTranscription = transcription;
+        // changed 11-06-2024: operate on a copy of the transcription?
+        // this may make everything even slower, but it may help to resolve issue #484
+        final EventListTranscription finalTranscription = transcription.makeCopy();
+        //final EventListTranscription finalTranscription = transcription;
         final TranscriptionHead finalTranscriptionHead = transcriptionHead;
         final File finalFile = f;
         Thread saveThread = new Thread(new Runnable(){

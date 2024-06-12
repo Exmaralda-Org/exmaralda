@@ -32,6 +32,8 @@ public class Event implements TimeAssigned, SpeakerAssigned {
         text = t;
         speaker = s;
     }
+    
+    
 
     public Timepoint getStartpoint() {
         return startpoint;
@@ -99,6 +101,7 @@ public class Event implements TimeAssigned, SpeakerAssigned {
         eventElement.setText(getText());
         return eventElement;
     }
+
 
     
 }

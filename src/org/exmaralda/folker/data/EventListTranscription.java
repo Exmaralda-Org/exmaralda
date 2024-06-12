@@ -27,22 +27,60 @@ public class EventListTranscription {
     Eventlist eventlist;
     String mediaPath;
     
-    Vector<Contribution> contributions = new Vector<Contribution>();
+    List<Contribution> contributions = new ArrayList<>();
    
     /** Creates a new instance of Transcription */
     public EventListTranscription(double minimumTime, double maximumTime) {
-        timeline = new Timeline(this, minimumTime, maximumTime);
+        timeline = new Timeline(minimumTime, maximumTime);
         speakerlist = new Speakerlist(this);
         eventlist = new Eventlist(this);
         updateContributions();
     }
 
     public EventListTranscription(double minimumTime, double maximumTime, int timelineTolerance) {
-        timeline = new Timeline(this, minimumTime, maximumTime, timelineTolerance);
+        timeline = new Timeline(minimumTime, maximumTime, timelineTolerance);
         speakerlist = new Speakerlist(this);
         eventlist = new Eventlist(this);
         updateContributions();
     }
+    
+    public EventListTranscription(){
+        timeline = new Timeline();
+        speakerlist = new Speakerlist(this);
+        eventlist = new Eventlist(this);
+        updateContributions();
+        
+    }
+    
+    // new 11-06-2024 for issue #484
+    public EventListTranscription makeCopy(){
+        EventListTranscription copy = new EventListTranscription();
+        copy.timeline = this.timeline.makeCopy();
+        copy.speakerlist = this.speakerlist.makeCopy(copy);
+        copy.mediaPath = this.mediaPath;
+        for (Event event : this.getEventlist().getEvents()){
+            if (event.getSpeaker()!=null){
+                Event copyEvent = new Event(
+                        copy.timeline.findTimepoint(event.getStartpoint().getTime()),
+                        copy.timeline.findTimepoint(event.getEndpoint().getTime()),
+                        event.getText(),
+                        copy.speakerlist.getSpeaker(event.getSpeaker().getIdentifier())
+                );
+                copy.addEvent(copyEvent);
+            } else {
+                Event copyEvent = new Event(
+                        copy.timeline.findTimepoint(event.getStartpoint().getTime()),
+                        copy.timeline.findTimepoint(event.getEndpoint().getTime()),
+                        event.getText(),
+                        null
+                );
+                copy.addEvent(copyEvent);
+                
+            }
+        }
+        return copy;
+    }
+    
 
     /** creates a new EventListTranscription which continues where the given one ends
      * @param t
@@ -103,7 +141,7 @@ public class EventListTranscription {
     
     public Contribution getContributionAt(int index){
         if ((!contributions.isEmpty()) && index<contributions.size()){
-            return contributions.elementAt(index);
+            return contributions.get(index);
         }
         return null;
     }
@@ -641,6 +679,8 @@ public class EventListTranscription {
             }
         }                
     }
+    
+    
 
     
 

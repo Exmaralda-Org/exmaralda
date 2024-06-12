@@ -29,6 +29,18 @@ public class Speakerlist {
         ids = new HashSet<>();
     }
     
+    public Speakerlist makeCopy(EventListTranscription t) {
+        Speakerlist copy = new Speakerlist(t);
+        for (Speaker speaker : speakers){
+            Speaker copySpeaker = new Speaker(speaker.identifier);
+            copySpeaker.name = speaker.name;
+            copy.speakers.add(copySpeaker);
+            copy.ids.add(copySpeaker.identifier);
+        }
+        return copy;
+    }
+    
+    
     public String getFreeID(String suggestedID){
         String testID = suggestedID;
         int count=1;
@@ -45,6 +57,15 @@ public class Speakerlist {
         speakers.add(newSpeaker);
         ids.add(testID);
         return testID;
+    }
+    
+    public Speaker getSpeaker(String id){
+        for (Speaker speaker : speakers){
+            if (speaker.getIdentifier().equals(id)){
+                return speaker;
+            }
+        }
+        return null;
     }
     
     public void removeSpeaker(Speaker s){
@@ -99,6 +120,7 @@ public class Speakerlist {
             this.addSpeaker(speaker.getIdentifier());
         }
     }
+
     
     
 }
