@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-s.xsl -->
-<!-- Version 12.0 -->
-<!-- Andreas Nolda 2020-12-04 -->
+<!-- Version 13.0 -->
+<!-- Andreas Nolda 2024-06-17 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:include href="exb2exb-tiers.xsl"/>
+
+<xsl:include href="lang.xsl"/>
 
 <xsl:template match="basic-body">
   <xsl:variable name="pos-id"
@@ -115,12 +117,79 @@
   </xsl:choose>
 </xsl:template>
 
+<xsl:param name="sentence-final-tags">
+  <xsl:choose>
+    <xsl:when test="$lang='bul'">
+      <tag>PT_SENT</tag>
+    </xsl:when>
+    <xsl:when test="$lang='csc'">
+      <tag>PUNCT.Final</tag>
+    </xsl:when>
+    <xsl:when test="$lang='deu'">
+      <tag>$.</tag>
+    </xsl:when>
+    <xsl:when test="$lang='est'">
+      <tag>Z.Sent</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='glg'">
+      <tag>Q.</tag>
+      <tag>Q!</tag>
+      <tag>Q?</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='hun'">
+      <tag>PUNCT.period</tag>
+      <tag>PUNCT.!</tag>
+      <tag>PUNCT.?</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='nld'">
+      <tag>$.</tag>
+    </xsl:when>
+    <xsl:when test="$lang='nor'">
+      <tag>PUNCT.Sent</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='pol'">
+      <tag>interp:sent</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='por'">
+      <tag>Fp</tag>
+      <tag>Fat</tag>
+      <tag>Fit</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='spa'">
+      <tag>FS</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:when test="$lang='swe'">
+      <tag>MAD</tag>
+      <!-- ... -->
+    </xsl:when>
+    <xsl:otherwise>
+      <tag>SENT</tag>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:param>
+
 <xsl:variable name="sentence-final-abbreviations">
-  <abbr><!-- u. -->a.</abbr>
-  <abbr><!-- u. -->ä.</abbr>
-  <abbr>etc.</abbr>
-  <abbr>usw.</abbr>
-  <!-- ... -->
+  <xsl:choose>
+    <xsl:when test="$lang='deu'">
+      <abbr><!-- u. -->a.</abbr>
+      <abbr><!-- u. -->ä.</abbr>
+      <abbr>etc.</abbr>
+      <abbr>usw.</abbr>
+      <!-- ... -->
+    </xsl:when>
+    <!-- ... -->
+    <xsl:otherwise>
+      <abbr>etc.</abbr>
+      <!-- ... -->
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:variable>
 
 <xsl:template name="s-events">
@@ -150,14 +219,14 @@
     <xsl:choose>
       <xsl:when test="$starts-with-title">
         <xsl:for-each select="tier[@id=$reference-id]/event[position()&gt;count($title-words)]
-                                                           [@start=../../tier[@id=$pos-id]/event[.='$.'][not(following-sibling::event[1][.='$.'])]/@start or
+                                                           [@start=../../tier[@id=$pos-id]/event[.=$sentence-final-tags/tag][not(following-sibling::event[1][.=$sentence-final-tags/tag])]/@start or
                                                             .=$sentence-final-abbreviations/abbr and
                                                               following-sibling::event[1][matches(substring(.,1,1),'\p{Lu}')]]">
           <xsl:call-template name="get-end-tli"/>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:for-each select="tier[@id=$reference-id]/event[@start=../../tier[@id=$pos-id]/event[.='$.'][not(following-sibling::event[1][.='$.'])]/@start or
+        <xsl:for-each select="tier[@id=$reference-id]/event[@start=../../tier[@id=$pos-id]/event[.=$sentence-final-tags/tag][not(following-sibling::event[1][.=$sentence-final-tags/tag])]/@start or
                                                             .=$sentence-final-abbreviations/abbr and
                                                               following-sibling::event[1][matches(substring(.,1,1),'\p{Lu}')]]">
           <xsl:call-template name="get-end-tli"/>
