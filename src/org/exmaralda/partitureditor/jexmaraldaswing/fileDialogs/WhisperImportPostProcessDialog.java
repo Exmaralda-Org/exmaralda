@@ -31,6 +31,7 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
         result.put("avg", avgLogprobTiersCheckbox.isSelected());
         result.put("cr", compressionRatioTiersCheckbox.isSelected());
         result.put("nsp", noSpechProbTiersCheckbox.isSelected());
+        result.put("score", scoreTiersCheckbox.isSelected());
         
         result.put("EMPTY", emptyTiersCheckbox.isSelected());
         
@@ -55,6 +56,7 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
         avgLogprobTiersCheckbox = new javax.swing.JCheckBox();
         compressionRatioTiersCheckbox = new javax.swing.JCheckBox();
         noSpechProbTiersCheckbox = new javax.swing.JCheckBox();
+        scoreTiersCheckbox = new javax.swing.JCheckBox();
         emptyTiersPanel = new javax.swing.JPanel();
         emptyTiersCheckbox = new javax.swing.JCheckBox();
         okPanel = new javax.swing.JPanel();
@@ -68,7 +70,7 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
         selectionsPanel.setLayout(new java.awt.BorderLayout());
 
         tiersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Tiers to import"));
-        tiersPanel.setLayout(new java.awt.GridLayout(3, 2));
+        tiersPanel.setLayout(new java.awt.GridLayout(4, 2));
 
         textTiersCheckbox.setSelected(true);
         textTiersCheckbox.setText("Text tier(s)");
@@ -96,6 +98,10 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
         noSpechProbTiersCheckbox.setText("No speech probability tier(s)");
         noSpechProbTiersCheckbox.setToolTipText("");
         tiersPanel.add(noSpechProbTiersCheckbox);
+
+        scoreTiersCheckbox.setText("Score tier(s) [WhisperX]");
+        scoreTiersCheckbox.setToolTipText("");
+        tiersPanel.add(scoreTiersCheckbox);
 
         selectionsPanel.add(tiersPanel, java.awt.BorderLayout.CENTER);
 
@@ -203,6 +209,7 @@ public class WhisperImportPostProcessDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox noSpechProbTiersCheckbox;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okPanel;
+    private javax.swing.JCheckBox scoreTiersCheckbox;
     private javax.swing.JPanel selectionsPanel;
     private javax.swing.JCheckBox temperatureTiersCheckbox;
     private javax.swing.JCheckBox textTiersCheckbox;

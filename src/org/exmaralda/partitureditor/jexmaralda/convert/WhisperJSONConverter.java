@@ -36,6 +36,7 @@ public class WhisperJSONConverter {
         return readWhisperJSON(jsonFile, true);
     }
 
+    // 24-06-2024, revised for WhisperX
     public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords) throws IOException, JexmaraldaException{
         
         Map<String, List<Tier>> speakersToTiers = new HashMap<>();    
@@ -87,15 +88,20 @@ public class WhisperJSONConverter {
         */
         
         JsonNode segmentsNode = jsonRoot.findValue("segments");
+        if (segmentsNode==null){
+            String message = "Expected segments node not found. Format may be wrong.";
+            throw new IOException(message);            
+        }
         Iterator<JsonNode> iterator = segmentsNode.elements();
         Timeline timeline = result.getBody().getCommonTimeline();
         while (iterator.hasNext()){
             JsonNode segmentNode = iterator.next();
-            if (segmentNode.get("text")==null){
+            JsonNode textNode = segmentNode.get("text");
+            if (textNode==null){
                 String message = "Expected text node not found. Format may be wrong.";
                 throw new IOException(message);
             }
-            String text = segmentNode.get("text").asText();
+            String text = textNode.asText();
             
             if (text.trim().length()==0){
                 // ignore empty text nodes
@@ -103,7 +109,7 @@ public class WhisperJSONConverter {
             }
             
             if (segmentNode.get("start")==null){
-                throw new IOException("Error in format.");
+                throw new IOException("Error in format : start node missing");
             }
             // round to miliseconds to avoid overlaps which aren't overlaps
             double startTimeInSeconds = Rounder.round(segmentNode.get("start").asDouble(),3);
@@ -122,10 +128,29 @@ public class WhisperJSONConverter {
             }
             
             
-            String temperature = segmentNode.get("temperature").asText();
-            String avg_logprob = segmentNode.get("avg_logprob").asText();
-            String compression_ratio = segmentNode.get("compression_ratio").asText();
-            String no_speech_prob = segmentNode.get("no_speech_prob").asText();
+            // 24-06-2024 : changed for WhisperX
+            JsonNode temperatureNode = segmentNode.get("temperature");
+            String temperature = "";
+            if (temperatureNode!=null){
+                temperature = temperatureNode.asText();
+            }
+            JsonNode avg_logprobNode = segmentNode.get("avg_logprob");
+            String avg_logprob = "";
+            if (avg_logprobNode!=null){
+                avg_logprob = avg_logprobNode.asText();
+            }
+            JsonNode compression_ratioNode = segmentNode.get("compression_ratio");
+            String compression_ratio = "";
+            if (compression_ratioNode!=null){
+                compression_ratio = compression_ratioNode.asText();
+            }
+            JsonNode no_speech_probNode = segmentNode.get("no_speech_prob");
+            String no_speech_prob = "";
+            if (no_speech_probNode!=null){
+                no_speech_prob = no_speech_probNode.asText();
+            }
+
+
             
             
             String startID = "TLI_" + Double.toString(startTimeInSeconds).replace('.', '_');
@@ -165,7 +190,8 @@ public class WhisperJSONConverter {
             Tier avgLogProbTier = tiersForThisSpeaker.get(2);
             Tier compressionRatioTier = tiersForThisSpeaker.get(3);
             Tier noSpeechProbTier = tiersForThisSpeaker.get(4);
-            Tier wordTier = tiersForThisSpeaker.get(5);
+            Tier scoreTier = tiersForThisSpeaker.get(5);
+            Tier wordTier = tiersForThisSpeaker.get(6);
             
             
             textTier.addEvent(new Event(startID, endID, text));
@@ -218,6 +244,15 @@ public class WhisperJSONConverter {
                     }
                     
                     wordTier.addEvent(new Event(wStartID, wEndID, wText));
+                    
+                    // 24-06-2024 : added for WhisperX
+                    JsonNode scoreNode = wordNode.get("score");
+                    String score = "";
+                    if (scoreNode!=null){
+                        score = scoreNode.asText();
+                    }
+                    scoreTier.addEvent(new Event(wStartID, wEndID, score));
+                    
 
                     
                 }
@@ -250,11 +285,16 @@ public class WhisperJSONConverter {
         Tier noSpeechProbTier = new Tier(transcription.getBody().getFreeID(), speakerID, "nsp", "a", speakerAbb + " [no_speech_prob]");
         transcription.getBody().addTier(noSpeechProbTier);
         
+        Tier scoreTier = new Tier(transcription.getBody().getFreeID(), speakerID, "score", "a", speakerAbb + " [score]");
+        transcription.getBody().addTier(scoreTier);
+
+
         resultList.add(textTier);
         resultList.add(temperatureTier);
         resultList.add(avgLogProbTier);
         resultList.add(compressionRatioTier);
         resultList.add(noSpeechProbTier);
+        resultList.add(scoreTier);
         
         Tier wordTier = new Tier(transcription.getBody().getFreeID(), speakerID, "w", "t", speakerAbb + " [words]");
         resultList.add(wordTier);

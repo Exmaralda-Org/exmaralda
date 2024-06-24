@@ -748,12 +748,17 @@ public class PartiturEditor extends javax.swing.JFrame
             {"control shift SPACE", "playLastSecondOfSelection", controller.playLastSecondOfSelectionAction},
             {"control F4", "play", controller.playAction},
             // 15-12-2017 : issue #113, additional binding to variants WITHOUT control key
-            {"F4", "play", controller.playAction},
+            //{"F4", "play", controller.playAction},
             {"control F5", "pause", controller.pauseAction},
             {"F5", "pause", controller.pauseAction},
             {"control F6", "stop", controller.stopAction},
             {"F6", "stop", controller.stopAction},
 
+            // temporary? For #490
+            {"F9", "playAndSelect", controller.playAndSelectAction},
+            {"F10", "stopAndSelect", controller.stopAndSelectAction},
+            {"F11", "addInterval", controller.addIntervalInPartiturAction},
+            
             {"alt shift LEFT", "decreaseSelectionStart", controller.decreaseSelectionStartAction},
             {"alt shift RIGHT", "increaseSelectionStart", controller.increaseSelectionStartAction},
             {"alt LEFT", "decreaseSelectionEnd", controller.decreaseSelectionEndAction},
