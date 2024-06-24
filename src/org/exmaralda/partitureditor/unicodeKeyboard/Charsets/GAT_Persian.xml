@@ -30,6 +30,12 @@
 		<description>Glottalverschluss</description>
 		<font name="Arial Unicode MS" size="16" face="plain"/>
 	</key>
+	<!-- issue #491 -->
+        <key>
+		<content>&#x0294;</content>
+		<description>Glottalverschluss (IPA-Symbol)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>                
 	<key>
 		<content>?</content>
 		<description>hoch steigend</description>
