@@ -81,6 +81,10 @@ public abstract class AbstractTimeviewPartiturPlayerControl
     public org.exmaralda.folker.actions.playeractions.LoopSelectionAction loopSelectionAction;
     public org.exmaralda.folker.actions.playeractions.PauseAction pauseAction;
     public org.exmaralda.folker.actions.playeractions.StopAction stopAction;
+
+    public org.exmaralda.folker.actions.playeractions.PlayAndSelectAction playAndSelectAction;
+    public org.exmaralda.folker.actions.playeractions.StopAndSelectAction stopAndSelectAction;
+
     // ---------------------------
     public org.exmaralda.folker.actions.playeractions.PlayNextSegmentAction playNextSegmentAction;
     
@@ -99,6 +103,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
     public org.exmaralda.folker.actions.partiturviewactions.AppendIntervalInPartiturAction appendIntervalInPartiturAction;
     public org.exmaralda.folker.actions.partiturviewactions.AssignTimesAction assignTimesAction;
     public org.exmaralda.folker.actions.partiturviewactions.WhisperASRAction whisperASRAction;
+    public org.exmaralda.folker.actions.partiturviewactions.AddIntervalInPartiturAction addIntervalInPartiturAction;
     // ---------------------------
     public org.exmaralda.folker.actions.waveformactions.ChangeZoomAction changeZoomAction;
 
@@ -158,6 +163,10 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         playAction = new org.exmaralda.folker.actions.playeractions.PlayAction(this, "", c.getIcon(Constants.PLAY_ICON));
         pauseAction = new org.exmaralda.folker.actions.playeractions.PauseAction(this, "", c.getIcon(Constants.PAUSE_ICON));
         stopAction = new org.exmaralda.folker.actions.playeractions.StopAction(this, "", c.getIcon(Constants.STOP_ICON));
+        
+        playAndSelectAction = new org.exmaralda.folker.actions.playeractions.PlayAndSelectAction(this, "", c.getIcon(Constants.PLAY_ICON));
+        stopAndSelectAction = new org.exmaralda.folker.actions.playeractions.StopAndSelectAction(this, "", c.getIcon(Constants.STOP_ICON));
+        
 
         playNextSegmentAction = new org.exmaralda.folker.actions.playeractions.PlayNextSegmentAction(this, "", c.getIcon(Constants.PLAY_NEXT_SEGMENT_ICON));
         
@@ -176,6 +185,8 @@ public abstract class AbstractTimeviewPartiturPlayerControl
                 Internationalizer.getString("Add event..."), c.getIcon(Constants.ADD_EVENT_ICON));
         appendIntervalInPartiturAction = new org.exmaralda.folker.actions.partiturviewactions.AppendIntervalInPartiturAction(this, 
                 Internationalizer.getString("Append interval"), c.getIcon(Constants.APPEND_INTERVAL_ICON));
+        addIntervalInPartiturAction = new org.exmaralda.folker.actions.partiturviewactions.AddIntervalInPartiturAction(this, 
+                Internationalizer.getString("Add interval"), c.getIcon(Constants.APPEND_INTERVAL_ICON));
 
         whisperASRAction = new org.exmaralda.folker.actions.partiturviewactions.WhisperASRAction(this, 
                 "", c.getIcon(Constants.WHISPER_ASR_ICON));
@@ -216,6 +227,31 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         }
         partitur.setNewSelection(-1, -1, newSelection, newSelection);
         playSelection();
+    }
+    
+    //following is new for #490
+    
+    boolean isPlayAndSelect = false;
+    
+    public void playAndSelect(){
+        System.out.println("Play and select");
+        isPlayAndSelect = true;
+        //playAndSelectStartTime = timeViewer.getCursorTime();
+        timeViewer.setPlayAndSelectStartTime();
+        stopAndSelectAction.setEnabled(true);
+        play();
+    }
+    
+    public void stopAndSelect(){
+        System.out.println("Stop and select");
+        if (!isPlayAndSelect || timeViewer.getPlayAndSelectStartTime()<0) return;
+        stop();
+        isPlayAndSelect = false;
+        double stopTime = timeViewer.getCursorTime();
+        timeViewer.setSelectionInterval(timeViewer.getPlayAndSelectStartTime(), stopTime, false);
+        timeViewer.resetPlayAndSelectStartTime();
+        timeViewer.setCursorTime(stopTime);
+        
     }
     
     /** plays from the cursor position or from the left corner of the visible signal */

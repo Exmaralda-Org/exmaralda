@@ -53,6 +53,7 @@ import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.folker.matchlist.MatchListDialog;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
+import org.exmaralda.folker.videopanel.VideoFrame;
 import org.exmaralda.folker.videopanel.VideoPanel;
 import org.exmaralda.masker.MaskFileDialog;
 import org.exmaralda.masker.MaskTimeCreator;
@@ -305,7 +306,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     private void initContextMenu(){
         JPopupMenu contextMenu = new JPopupMenu();
         contextMenu.add(assignSpeakerAction);
-        contextMenu.add(mergeEventsInListAction).setText(FOLKERInternationalizer.getString("segmentactions.mergeSegments"));
+        contextMenu.add(mergeEventsInListAction).setText(FOLKERInternationalizer.getString("context_menu.mergeSegments"));
+        contextMenu.add(removeEventAction).setText(FOLKERInternationalizer.getString("context_menu.removeSegment"));
         eventListTable.setComponentPopupMenu(contextMenu); 
         
     }
@@ -807,6 +809,13 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         applicationFrame.mainPanel.shrinkRightButton.setAction(partitur.shrinkRightAction);
         applicationFrame.mainPanel.shrinkRightButton.setText(null);
         applicationFrame.mainPanel.shrinkRightButton.setToolTipText(FOLKERInternationalizer.getString("partituractions.shrinkRight"));
+        
+        // 12-08-2024, issue #374
+        applicationFrame.mainPanel.assignTimesInPartiturButton.setAction(assignTimesAction);
+        applicationFrame.mainPanel.assignTimesInPartiturButton.setText(null);
+        applicationFrame.mainPanel.assignTimesInPartiturButton.setToolTipText("Zeit neu zuweisen");
+        
+        
 
         applicationFrame.mainPanel.extendLeftButton.setAction(partitur.extendLeftAction);
         applicationFrame.mainPanel.extendLeftButton.setText(null);
@@ -821,11 +830,6 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         applicationFrame.mainPanel.removeEventInPartiturButton.setToolTipText(FOLKERInternationalizer.getString("segmentactions.removeSegment"));
         applicationFrame.mainPanel.removeEventInPartiturButton.setIcon(new Constants().getIcon(Constants.REMOVE_EVENT_ICON));
 
-        // removed 04-03-2010 - this functionality is probably not needed in FOLKER
-        // it causes confusion
-        //applicationFrame.mainPanel.assignTimesInPartiturButton.setAction(assignTimesAction);
-        //applicationFrame.mainPanel.assignTimesInPartiturButton.setText(null);
-        //applicationFrame.mainPanel.assignTimesInPartiturButton.setToolTipText("Zeit neu zuweisen");
 
         // added 26-02-2010
         applicationFrame.mainPanel.insertPauseInPartiturButton.setAction(partitur.insertPauseAction);
@@ -1021,6 +1025,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         videoPanel = new VideoPanel(applicationFrame, false);
         timeViewer.addTimeSelectionListener(videoPanel);
         videoPanel.setLocationRelativeTo(applicationFrame);
+        
+        /*VideoFrame test = new VideoFrame(applicationFrame);
+        test.setVisible(true);*/
     }
     
     public void initPlayer(){
@@ -1792,11 +1799,11 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
     }
     
     public void removeEvent(){
+        int[] selRows = eventListTable.getSelectedRows();
         int retValue = JOptionPane.showConfirmDialog(applicationFrame, FOLKERInternationalizer.getString("option.sure"),
-                FOLKERInternationalizer.getString("segmentactions.removeSegment"), JOptionPane.YES_NO_OPTION);
+                FOLKERInternationalizer.getString("context_menu.removeSegment"), JOptionPane.YES_NO_OPTION);
         if (retValue!=JOptionPane.YES_OPTION) return;
         commitEdit();
-        int[] selRows = eventListTable.getSelectedRows();
         eventListTableModel.getTranscription().removeEvents(selRows);
         eventListTableModel.fireTableRowsDeleted(selRows[0], selRows[selRows.length-1]);
         eventListTable.getSelectionModel().clearSelection();

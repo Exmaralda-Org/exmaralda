@@ -91,6 +91,7 @@ public class MainPanel extends javax.swing.JPanel {
         selectionsControlPanel = new javax.swing.JPanel();
         shiftSelectionButton = new javax.swing.JButton();
         detachSelectionButton = new javax.swing.JButton();
+        assignTimesInPartiturButton = new javax.swing.JButton();
         playbackControlsPanel = new javax.swing.JPanel();
         playNextSegmentButton = new javax.swing.JButton();
         textViewPanel = new javax.swing.JPanel();
@@ -276,6 +277,9 @@ public class MainPanel extends javax.swing.JPanel {
 
         detachSelectionButton.setText("jButton1");
         selectionsControlPanel.add(detachSelectionButton);
+
+        assignTimesInPartiturButton.setText("jButton1");
+        selectionsControlPanel.add(assignTimesInPartiturButton);
 
         controlsPanel.add(selectionsControlPanel, java.awt.BorderLayout.EAST);
 
@@ -590,6 +594,7 @@ public class MainPanel extends javax.swing.JPanel {
     public javax.swing.JButton addEventInPartiturButton;
     public javax.swing.JButton addMaskButton;
     public javax.swing.JButton appendEventButton;
+    public javax.swing.JButton assignTimesInPartiturButton;
     javax.swing.JButton commentButton;
     private javax.swing.JPanel contributionTablePanel;
     private javax.swing.JPanel contributionTextButtonPanel;

@@ -21,11 +21,15 @@ import org.exmaralda.folker.application.ApplicationControl;
  */
 public class RemoveEventAction extends AbstractApplicationAction {
     
-    /** Creates a new instance of OpenAction */
+    /** Creates a new instance of OpenAction
+     * @param ac
+     * @param name
+     * @param icon */
     public RemoveEventAction(ApplicationControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("[*** RemoveEventAction ***]");
         ApplicationControl ac = (ApplicationControl)applicationControl;
