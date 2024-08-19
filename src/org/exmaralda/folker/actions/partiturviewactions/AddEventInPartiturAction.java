@@ -33,4 +33,5 @@ public class AddEventInPartiturAction extends AbstractApplicationAction {
         applicationControl.addEvent();
     }
     
+    //
 }
