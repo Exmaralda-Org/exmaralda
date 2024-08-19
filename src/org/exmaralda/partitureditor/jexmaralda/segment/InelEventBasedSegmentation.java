@@ -102,7 +102,7 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
                             int i = event.getDescription().lastIndexOf("))");
                             String remainingText = event.getDescription().substring(i);
                             if (!(remainingText.matches("[" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]*"))){
-                                FSMException ex = new FSMException("Word characters after double closing round parentheses", event.getDescription().substring(0, i), event.getStart(), null);
+                                FSMException ex = new FSMException("Word characters after double closing round parentheses", event.getDescription().substring(0, i), event.getStart(), tierID);
                                 result.add(ex);
                             }
                             
