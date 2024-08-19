@@ -6,10 +6,13 @@
 package org.exmaralda.folker.application;
 
 import java.awt.Component;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
@@ -24,6 +27,9 @@ import org.exmaralda.folker.timeview.ChangeZoomDialog;
 import org.exmaralda.folker.timeview.TimeSelectionEvent;
 import org.exmaralda.folker.timeview.TimeSelectionListener;
 import org.exmaralda.folker.utilities.Constants;
+import org.exmaralda.folker.utilities.FOLKERInternationalizer;
+import org.exmaralda.partitureditor.jexmaralda.Event;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.Timeline;
 import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
@@ -102,6 +108,7 @@ public abstract class AbstractTimeviewPartiturPlayerControl
     public org.exmaralda.folker.actions.partiturviewactions.AddEventInPartiturAction addEventInPartiturAction;
     public org.exmaralda.folker.actions.partiturviewactions.AppendIntervalInPartiturAction appendIntervalInPartiturAction;
     public org.exmaralda.folker.actions.partiturviewactions.AssignTimesAction assignTimesAction;
+    public org.exmaralda.folker.actions.partiturviewactions.AssignTimesToEventAction assignTimesToEventAction; // issue #374
     public org.exmaralda.folker.actions.partiturviewactions.WhisperASRAction whisperASRAction;
     public org.exmaralda.folker.actions.partiturviewactions.AddIntervalInPartiturAction addIntervalInPartiturAction;
     // ---------------------------
@@ -193,6 +200,9 @@ public abstract class AbstractTimeviewPartiturPlayerControl
 
         assignTimesAction = new org.exmaralda.folker.actions.partiturviewactions.AssignTimesAction(this, "", c.getIcon(Constants.TIMESTAMP_EVENT_ICON));
         assignTimesAction.setEnabled(false);
+
+        assignTimesToEventAction = new org.exmaralda.folker.actions.partiturviewactions.AssignTimesToEventAction(this, "", c.getIcon(Constants.TIMESTAMP_EVENT_ICON));
+        assignTimesToEventAction.setEnabled(false);
 
         // -----------------
         changeZoomAction = new org.exmaralda.folker.actions.waveformactions.ChangeZoomAction(this, "",  c.getIcon(Constants.ZOOM_ICON));
@@ -385,6 +395,64 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         } else if (timeViewer.getCursorTime()>=0){
             partitur.assignTimes(timeViewer.getCursorTime()/1000.0, timeViewer.getCursorTime()/1000.0);
             timeViewer.fireSelectionDetached();            
+        }
+    }
+    
+    public void assignTimesToEvent(){
+        try {
+            double selStart = selectionStart;
+            double selEnd = selectionEnd;
+            
+            Timeline timeline = partitur.getModel().getTranscription().getBody().getCommonTimeline();
+            // 17-08-2024, for issue #374
+            Event selectedEvent = partitur.getModel().getEvent(partitur.selectionStartRow, partitur.selectionStartCol);
+            
+
+            Tier tier = partitur.getModel().getTier(partitur.selectionStartRow);
+            for (int pos=0; pos<tier.getNumberOfEvents(); pos++){
+                Event existingEvent = tier.getEventAt(pos);
+                if (existingEvent.getStart().equals(selectedEvent.getStart())) continue;
+                double start = timeline.getTimelineItemWithID(existingEvent.getStart()).getTime();
+                double end = timeline.getTimelineItemWithID(existingEvent.getEnd()).getTime();
+                
+                boolean positionIsOccupied = 
+                    (start<selStart/1000.0 && end>selStart/1000.0) ||
+                    (start<selEnd/1000.0 && end>selEnd/1000.0);
+                
+                if (positionIsOccupied){
+                    JOptionPane.showMessageDialog(partitur, FOLKERInternationalizer.getString("misc.positionTaken"));
+                    return;
+                }
+                        
+                
+            }
+
+            Event newEvent = new Event();
+            newEvent.setDescription(selectedEvent.getDescription());
+            partitur.getModel().deleteEvent(partitur.selectionStartRow, partitur.selectionStartCol);
+            
+            
+            
+
+            partitur.commitEdit(true);
+            int[] cols = partitur.getModel().insertInterval(selStart/1000.0, selEnd/1000.0, 0.001);
+            int col1 = cols[0];
+            int col2 = cols[1];
+            
+            newEvent.setStart(timeline.getTimelineItemAt(col1).getID());
+            newEvent.setEnd(timeline.getTimelineItemAt(col2).getID());
+            
+            partitur.getModel().getTier(partitur.selectionStartRow).addEvent(newEvent);
+            int startCol = timeline.lookupID(newEvent.getStart());
+            int endCol = timeline.lookupID(newEvent.getEnd());
+            partitur.getModel().fireEventAdded(partitur.selectionStartRow, startCol, endCol);
+            partitur.getModel().fireCellSpanChanged(partitur.selectionStartRow, startCol);
+            partitur.setNewSelection(partitur.selectionStartRow, startCol, true);
+            
+            
+            
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(AbstractTimeviewPartiturPlayerControl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -593,6 +661,12 @@ public abstract class AbstractTimeviewPartiturPlayerControl
         assignTimesAction.setEnabled(
                 ((selectionStart!=selectionEnd) && (partitur.aWholeColumnIsSelected || partitur.aSeriesOfColumnsIsSelected))
                 || (selectionStart==selectionEnd) && (partitur.aWholeColumnIsSelected));
+
+        assignTimesToEventAction.setEnabled(
+                (selectionStart!=selectionEnd) //&& partitur.aSingleCellIsSelected
+                //&& partitur.isEditing
+                && partitur.getModel().containsEvent(partitur.selectionStartRow, partitur.selectionStartCol)
+        );
 
         decreaseSelectionStartAction.setEnabled(selectionStart!=selectionEnd);
         increaseSelectionStartAction.setEnabled(selectionStart!=selectionEnd);

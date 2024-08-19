@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package org.exmaralda.folker.actions.playeractions;
+package org.exmaralda.folker.actions.partiturviewactions;
 
 import java.awt.event.ActionEvent;
 import org.exmaralda.folker.actions.AbstractApplicationAction;
@@ -17,19 +17,20 @@ import org.exmaralda.folker.application.AbstractTimeviewPartiturPlayerControl;
  *
  * @author thomas
  */
-public class PlayAction extends AbstractApplicationAction {
+public class AssignTimesToEventAction extends AbstractApplicationAction {
     
     /** Creates a new instance of PlayAction
      * @param ac
      * @param name
      * @param icon */
-    public PlayAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon) {
+    public AssignTimesToEventAction(AbstractTimeviewPartiturPlayerControl ac, String name, Icon icon) {
         super(ac, name, icon);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        applicationControl.play();
+        System.out.println("[*** AssignTimesToEventAction ***]");
+        applicationControl.assignTimesToEvent();
     }
     
 }

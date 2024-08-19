@@ -285,11 +285,22 @@
                         </subdomain>
                         <subdomain name="context_menu">
                             <item id="context_menu.assignSpeaker">
-                                    <translation lang="en" trans="Assign speaker"/>
-                                    <translation lang="de" trans="Sprecher zuordnen"/>
-                                    <translation lang="fr" trans="Assigner locuteur"/>
+                                <translation lang="en" trans="Assign speaker"/>
+                                <translation lang="de" trans="Sprecher zuordnen"/>
+                                <translation lang="fr" trans="Assigner locuteur"/>
                             </item>
-                            context_menu.assignSpeaker
+                            <item id="context_menu.mergeSegments">
+                                <translation lang="en" trans="Merge segments"/>
+                                <translation lang="de" trans="Segmente verbinden"/>
+                                <translation lang="fr" trans="Fusionner les segments"/>
+                            </item>
+                            <item id="context_menu.removeSegment">
+                                    <translation lang="en" trans="Remove segment(s)"/>
+                                    <translation lang="de" trans="Segment(e) entfernen"/>
+                                    <translation lang="fr" trans="Supprimer un/des segment(s)"/>
+                            </item>
+                            
+                            
                         </subdomain>
                 </subdomain>
                 <!-- ************************************************************************************* -->
@@ -1453,6 +1464,14 @@
 
                 </subdomain>
                 <subdomain name="miscellaneous">
+                        <item id="misc.positionTaken">
+                                <translation lang="en"
+                                        trans="There is another event at this position. Cannot reassign times."/>
+                                <translation lang="de"
+                                        trans="Es gibt ein anderes Ereignis an dieser Position. Zeiten können nicht neu zugewiesen werden."/>
+                                <translation lang="fr"
+                                        trans="There is another event at this position. Cannot reassign times."/>
+                        </item>
                         <item id="misc.basicTranscription">
                                 <translation lang="en"
                                         trans="EXMARaLDA Basic Transcription (*.exb)"/>

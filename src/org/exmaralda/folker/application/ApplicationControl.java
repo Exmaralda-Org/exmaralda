@@ -53,7 +53,6 @@ import org.exmaralda.folker.io.EventListTranscriptionXMLReaderWriter;
 import org.exmaralda.folker.matchlist.MatchListDialog;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
-import org.exmaralda.folker.videopanel.VideoFrame;
 import org.exmaralda.folker.videopanel.VideoPanel;
 import org.exmaralda.masker.MaskFileDialog;
 import org.exmaralda.masker.MaskTimeCreator;
@@ -811,7 +810,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         applicationFrame.mainPanel.shrinkRightButton.setToolTipText(FOLKERInternationalizer.getString("partituractions.shrinkRight"));
         
         // 12-08-2024, issue #374
-        applicationFrame.mainPanel.assignTimesInPartiturButton.setAction(assignTimesAction);
+        applicationFrame.mainPanel.assignTimesInPartiturButton.setAction(assignTimesToEventAction);
         applicationFrame.mainPanel.assignTimesInPartiturButton.setText(null);
         applicationFrame.mainPanel.assignTimesInPartiturButton.setToolTipText("Zeit neu zuweisen");
         

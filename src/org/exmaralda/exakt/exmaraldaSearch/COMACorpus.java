@@ -72,6 +72,9 @@ public class COMACorpus extends AbstractCOMACorpus  {
         fetchAttributes("//Speaker", speakerAttributes, FIXED_SPEAKER_ATTRIBUTES);
         fetchAttributes("//Communication", communicationAttributes, FIXED_COMMUNICATION_ATTRIBUTES);
         fetchAttributes("//Transcription", transcriptionAttributes, FIXED_TRANSCRIPTION_ATTRIBUTES);
+        
+        // do something here for #492
+        // fetchAttributes("//Communication/Setting", communicationAttributes, FIXED_COMMUNICATION_ATTRIBUTES);
     }
     
     @Override

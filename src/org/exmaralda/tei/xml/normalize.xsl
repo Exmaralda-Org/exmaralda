@@ -75,8 +75,9 @@
                         <xsl:attribute name="synch" select="ancestor-or-self::*[@start][1]/@start"/>
                     </tei:anchor>
                 </xsl:if>
-
-                <xsl:apply-templates select="*"/>        
+                
+        
+                <xsl:apply-templates select="*|text()"/>        
                 
                 <xsl:if test="not(node()[self::tei:anchor and position()=last()])">
                     <tei:anchor>
@@ -224,6 +225,7 @@
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
+    
     
     
 </xsl:stylesheet>

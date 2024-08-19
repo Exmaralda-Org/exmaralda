@@ -333,6 +333,14 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             markTriangle.addPoint((int)(getMarkPixel()), 6);
             g.fillPolygon(markTriangle);
         }
+        
+        if (this.getPlayAndSelectStartTime()>=0){
+            float startPixel = this.getPixelForMilisecond(getPlayAndSelectStartTime());
+            float endPixel = this.getPixelForMilisecond(this.getCursorTime());
+            g.setColor(Color.GRAY);
+            g.fillRect((int)startPixel, 0, (int)(endPixel-startPixel), 20);
+        }
+        
     }        
         
     @Override
@@ -622,6 +630,7 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             repaint();
             BUFFER_REDRAW_NECESSARY = true;            
         }        
+                
     }
 
     public float getMarkPixel() {
@@ -836,10 +845,10 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             //SwingUtilities.invokeLater(new Runnable(){
             //    @Override
             //    public void run() {
-                    setCursorPositionPixel(pixel);
-                    BUFFER_REDRAW_NECESSARY = false;
-                    repaint();
-                    BUFFER_REDRAW_NECESSARY = true;            
+            setCursorPositionPixel(pixel);
+            BUFFER_REDRAW_NECESSARY = false;
+            repaint();
+            BUFFER_REDRAW_NECESSARY = true;            
             //    }
             //});
         } else if ((e.getType() == PlayableEvent.PLAYBACK_STOPPED)){
@@ -853,6 +862,24 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
             BUFFER_REDRAW_NECESSARY = true;                        
         }
     }
+
+    
+    // #490
+    double playAndSelectStartTime = -1.0;
+    
+    public void setPlayAndSelectStartTime() {
+        playAndSelectStartTime = this.getCursorTime();
+    }
+
+    public void resetPlayAndSelectStartTime() {
+        playAndSelectStartTime = -1.0;
+    }
+
+    public double getPlayAndSelectStartTime() {
+        return playAndSelectStartTime;
+    }
+    
+    
 
 
 

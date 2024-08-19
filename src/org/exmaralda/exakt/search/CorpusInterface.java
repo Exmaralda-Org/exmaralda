@@ -9,8 +9,6 @@
 
 package org.exmaralda.exakt.search;
 
-import java.util.*;
-
 /**
  *
  * @author thomas

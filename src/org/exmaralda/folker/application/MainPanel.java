@@ -91,7 +91,6 @@ public class MainPanel extends javax.swing.JPanel {
         selectionsControlPanel = new javax.swing.JPanel();
         shiftSelectionButton = new javax.swing.JButton();
         detachSelectionButton = new javax.swing.JButton();
-        assignTimesInPartiturButton = new javax.swing.JButton();
         playbackControlsPanel = new javax.swing.JPanel();
         playNextSegmentButton = new javax.swing.JButton();
         textViewPanel = new javax.swing.JPanel();
@@ -122,6 +121,7 @@ public class MainPanel extends javax.swing.JPanel {
         insertPauseInPartiturButton = new javax.swing.JButton();
         removeEventInPartiturButton = new javax.swing.JButton();
         maskInPartiturButton = new javax.swing.JButton();
+        assignTimesInPartiturButton = new javax.swing.JButton();
         contributionViewPanel = new javax.swing.JPanel();
         contributionViewSplitPane = new javax.swing.JSplitPane();
         contributionTablePanel = new javax.swing.JPanel();
@@ -278,9 +278,6 @@ public class MainPanel extends javax.swing.JPanel {
         detachSelectionButton.setText("jButton1");
         selectionsControlPanel.add(detachSelectionButton);
 
-        assignTimesInPartiturButton.setText("jButton1");
-        selectionsControlPanel.add(assignTimesInPartiturButton);
-
         controlsPanel.add(selectionsControlPanel, java.awt.BorderLayout.EAST);
 
         playNextSegmentButton.setText("jButton1");
@@ -420,6 +417,9 @@ public class MainPanel extends javax.swing.JPanel {
 
         maskInPartiturButton.setText("jButton1");
         partiturViewButtonPanel.add(maskInPartiturButton);
+
+        assignTimesInPartiturButton.setText("jButton1");
+        partiturViewButtonPanel.add(assignTimesInPartiturButton);
 
         partiturViewPanel.add(partiturViewButtonPanel, java.awt.BorderLayout.NORTH);
 
