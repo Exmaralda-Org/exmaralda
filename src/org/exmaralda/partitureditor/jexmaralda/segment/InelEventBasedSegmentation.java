@@ -83,6 +83,8 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
 
         String[] tTierIDs = bt.getBody().getTiersOfType("t");
         String wordRegEx = "^([" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]+)?[^" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]+([" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]+)?$";
+        // changed 21-08-2024
+        //String wordRegEx = "^([" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]+ ?)?[^" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]+( ?[" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]+)?$";
         
         
         
@@ -98,7 +100,7 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
                         if (!event.getDescription().contains("))")){
                             FSMException ex = new FSMException("Unclosed double round brackets", event.getDescription(), event.getStart(), tierID);
                             result.add(ex);
-                        } else {
+                        } else { 
                             int i = event.getDescription().lastIndexOf("))");
                             String remainingText = event.getDescription().substring(i);
                             if (!(remainingText.matches("[" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]*"))){
@@ -109,7 +111,8 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
                         }
                     } else {
                         if (!(event.getDescription().matches(wordRegEx))){
-                            FSMException ex = new FSMException("Punctutation between word characters", event.getDescription(), event.getStart(), tierID);                            
+                            //FSMException ex = new FSMException("Punctutation between word characters", event.getDescription(), event.getStart(), tierID);                            
+                            FSMException ex = new FSMException("Non-permissible sequence of word and punctuation characters", event.getDescription(), event.getStart(), tierID);                            
                             result.add(ex);
                         }      
                         if (event.getDescription().startsWith("(")){

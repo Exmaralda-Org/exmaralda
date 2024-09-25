@@ -186,7 +186,7 @@
                 <xsl:for-each select="//tei:person">
                     <speaker>
                         <xsl:if test="tei:idno[@type='AGD-ID']">
-                            <xsl:attribute name="dgd-id" select="/tei:TEI/tei:idno[@type='AGD-ID']"/>
+                            <xsl:attribute name="dgd-id" select="tei:idno[@type='AGD-ID']"/>
                         </xsl:if>
                         <xsl:attribute name="speaker-id" select="@n"/>
                         <name></name>
