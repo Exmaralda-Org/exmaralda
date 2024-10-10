@@ -344,6 +344,14 @@ public class BasicBody extends AbstractTierBody {
             String[] tiersOfTypeUD = getTiersOfSpeakerAndType(speakerID, "ud");            
             StringUtilities.addStringArrayToVector(tiersOfTypeUD, result);
         }
+        
+        for(int pos=0; pos<getNumberOfTiers(); pos++){
+            Tier tier = getTierAt(pos);
+            if (tier.getSpeaker()==null){
+                result.add(tier.getID());
+            }
+        }
+        
         return StringUtilities.stringVectorToArray(result);
     }
     

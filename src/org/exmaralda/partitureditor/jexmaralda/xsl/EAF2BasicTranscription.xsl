@@ -32,6 +32,8 @@
 			<body>
 				<common-timeline>
 					<xsl:for-each select="//TIME_ORDER/TIME_SLOT">
+                                            <!-- 10-10-2024: This is for issue #494 -->
+                                            <xsl:sort select="@TIME_VALUE" data-type="number"/>
 						<xsl:element name="tli">
 							<xsl:attribute name="id"><xsl:value-of select="@TIME_SLOT_ID"/></xsl:attribute>
 							<xsl:attribute name="time"><xsl:value-of select="@TIME_VALUE div 1000"/></xsl:attribute>
