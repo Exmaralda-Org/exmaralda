@@ -306,6 +306,7 @@ public class ItLine extends java.util.Vector implements XMLElement, Formattable,
         param.rowHeight = Math.round(this.getHeight());
         sb.append(getLabel().toHTML(param));
         for (int pos=0; pos<param.syncPoints.getNumberOfSyncPoints()-1; pos++){
+            //System.out.println(pos + " / " + param.syncPoints.getNumberOfSyncPoints());
             SyncPoint sp = param.syncPoints.getSyncPointAt(pos);
             if (hasItChunkStartingAtSyncPoint(sp.getID())){
                 ItChunk itc = getItChunkStartingAtSyncPoint(sp.getID());               

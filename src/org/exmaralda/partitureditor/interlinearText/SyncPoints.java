@@ -57,7 +57,7 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
             pos = (Integer)positions.get(id);
             //return -1;
         }
-        return pos.intValue();
+        return pos;
     }
     
     
@@ -85,8 +85,15 @@ public class SyncPoints extends java.util.Vector implements XMLElement, Formatta
     /** returns the span of the given it chunk,
      * i.e. the number of sync points it spans across */
     public int span(ItChunk itc){        
-        if (itc.getEnd()==null) return (getNumberOfSyncPoints()-lookupID(itc.getStart().getID()));
-        return (lookupID(itc.getEnd().getID())-lookupID(itc.getStart().getID()));
+        if (itc.getEnd()==null) {
+            //System.out.println("HERE");
+            return (getNumberOfSyncPoints()-lookupID(itc.getStart().getID()));
+        }
+        int span = lookupID(itc.getEnd().getID())-lookupID(itc.getStart().getID());
+        //System.out.println("THERE " + span + " / " + itc.getEnd().getID() + " / " + itc.getStart().getID());
+        //System.out.println(itc.toXML());
+        //return Math.max(1, span);
+        return span;
     }
     
     /** augments the format by the properties in the given format  */

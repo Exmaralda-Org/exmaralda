@@ -96,15 +96,26 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
                 
                 for (int pos=0; pos<tier.getNumberOfEvents(); pos++){
                     Event event = tier.getEventAt(pos);
-                    if (event.getDescription().startsWith("((")){
+                    //if (event.getDescription().startsWith("((")){
+                    if (event.getDescription().contains("((")){
                         if (!event.getDescription().contains("))")){
                             FSMException ex = new FSMException("Unclosed double round brackets", event.getDescription(), event.getStart(), tierID);
                             result.add(ex);
                         } else { 
-                            int i = event.getDescription().lastIndexOf("))");
-                            String remainingText = event.getDescription().substring(i);
+                            int i1 = event.getDescription().indexOf("((");
+                            if (i1>0){
+                                String precedingText = event.getDescription().substring(0, i1);
+                                if (!(precedingText.matches("[" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]*"))){
+                                    FSMException ex = new FSMException("Word characters before double opening round parentheses", event.getDescription().substring(0, i1), event.getStart(), tierID);
+                                    result.add(ex);
+                                }
+                            }
+
+
+                            int i2 = event.getDescription().lastIndexOf("))");
+                            String remainingText = event.getDescription().substring(i2);
                             if (!(remainingText.matches("[" + WORD_EXTERNAL_PUNCUTATION_REGEX + "]*"))){
-                                FSMException ex = new FSMException("Word characters after double closing round parentheses", event.getDescription().substring(0, i), event.getStart(), tierID);
+                                FSMException ex = new FSMException("Word characters after double closing round parentheses", event.getDescription().substring(0, i2), event.getStart(), tierID);
                                 result.add(ex);
                             }
                             
@@ -226,8 +237,12 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
         String text = event.getDescription();
         
         // ****************************
-        if (text.startsWith("((")){
-            result.addAll(makeNonTimedSegments("((", event.getID() + ".1"));
+        //if (text.startsWith("((")){
+        if (text.contains("((")){
+            int startIndex = text.indexOf("((");
+            String precedingText = text.substring(0,startIndex+2);
+            //result.addAll(makeNonTimedSegments("((", event.getID() + ".1"));
+            result.addAll(makeNonTimedSegments(precedingText, event.getID() + ".1"));
             int endIndex = text.lastIndexOf("))");
             if (endIndex<0){
                 FSMException ex = new FSMException("Unclosed double round brackets", text, event.getStart(), null);
@@ -237,7 +252,8 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
             ats.setStart(event.getStart());
             ats.setEnd(event.getEnd());        
             ats.setName(("INEL:non-pho"));
-            ats.setDescription(text.substring(2, endIndex));
+            //ats.setDescription(text.substring(2, endIndex));
+            ats.setDescription(text.substring(startIndex+2, endIndex));
             ats.setID(event.getID() + ".ats");
             result.add(ats);
             String remainingText = text.substring(endIndex);

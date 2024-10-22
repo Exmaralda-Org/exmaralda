@@ -78,7 +78,7 @@ public class AutoAnnotationAction extends org.exmaralda.partitureditor.partiture
             //table.getModel().setTranscriptionAndTierFormatTable(bt, tft);
             table.stratify(table.getModel().getTranscription());
             table.resetData();
-            table.showAllTiers();
+            //table.showAllTiers();
             table.linkPanelDialog.getLinkPanel().emptyContents();
             table.largeTextField.setText("");
             //table.setupMedia();
@@ -86,7 +86,7 @@ public class AutoAnnotationAction extends org.exmaralda.partitureditor.partiture
             table.transcriptionChanged = true;
             try {
                 List l = XPath.selectNodes(errorsDocument, "//error");
-                if (l.size()>0){
+                if (!l.isEmpty()){
                     for (Object o : l){
                         Element e = (Element)o;
                         e.setAttribute("file", table.filename);

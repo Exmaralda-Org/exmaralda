@@ -6,10 +6,16 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.awt.Color;
+import static java.awt.Color.white;
+import static java.awt.Font.BOLD;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.common.helpers.Internationalizer;
-import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import javax.swing.*;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.exmaralda.partitureditor.jexmaralda.Tier;
 
 /**
  *
@@ -27,9 +33,9 @@ public class TierSelectionDialog extends javax.swing.JDialog {
     public TierSelectionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        unselectedTiersList.setCellRenderer(new MyCellRenderer());
-        selectedTiersList.setCellRenderer(new MyCellRenderer());    
-        Internationalizer.internationalizeDialogToolTips(this);        
+        unselectedTiersList.setCellRenderer(new TierSelectionCellRenderer());
+        selectedTiersList.setCellRenderer(new TierSelectionCellRenderer());    
+        //Internationalizer.internationalizeDialogToolTips(this);        
     }
     
     public String[] getSelectedTierIDs(){
@@ -114,9 +120,10 @@ public class TierSelectionDialog extends javax.swing.JDialog {
         jPanel2.setPreferredSize(new java.awt.Dimension(60, 200));
 
         selectButton.setText(">");
-        selectButton.setMaximumSize(new java.awt.Dimension(50, 26));
-        selectButton.setMinimumSize(new java.awt.Dimension(50, 26));
-        selectButton.setPreferredSize(new java.awt.Dimension(50, 26));
+        selectButton.setToolTipText("Select tier");
+        selectButton.setMaximumSize(new java.awt.Dimension(70, 26));
+        selectButton.setMinimumSize(new java.awt.Dimension(70, 26));
+        selectButton.setPreferredSize(new java.awt.Dimension(70, 26));
         selectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectButtonActionPerformed(evt);
@@ -125,9 +132,10 @@ public class TierSelectionDialog extends javax.swing.JDialog {
         jPanel2.add(selectButton);
 
         selectAllButton.setText(">>");
-        selectAllButton.setMaximumSize(new java.awt.Dimension(50, 26));
-        selectAllButton.setMinimumSize(new java.awt.Dimension(50, 26));
-        selectAllButton.setPreferredSize(new java.awt.Dimension(50, 26));
+        selectAllButton.setToolTipText("Select all tiers");
+        selectAllButton.setMaximumSize(new java.awt.Dimension(70, 26));
+        selectAllButton.setMinimumSize(new java.awt.Dimension(70, 26));
+        selectAllButton.setPreferredSize(new java.awt.Dimension(70, 26));
         selectAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectAllButtonActionPerformed(evt);
@@ -136,9 +144,10 @@ public class TierSelectionDialog extends javax.swing.JDialog {
         jPanel2.add(selectAllButton);
 
         deselectButton.setText("<");
-        deselectButton.setMaximumSize(new java.awt.Dimension(50, 26));
-        deselectButton.setMinimumSize(new java.awt.Dimension(50, 26));
-        deselectButton.setPreferredSize(new java.awt.Dimension(50, 26));
+        deselectButton.setToolTipText("Unselect tier");
+        deselectButton.setMaximumSize(new java.awt.Dimension(70, 26));
+        deselectButton.setMinimumSize(new java.awt.Dimension(70, 26));
+        deselectButton.setPreferredSize(new java.awt.Dimension(70, 26));
         deselectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deselectButtonActionPerformed(evt);
@@ -147,9 +156,10 @@ public class TierSelectionDialog extends javax.swing.JDialog {
         jPanel2.add(deselectButton);
 
         deselectAllButton.setText("<<");
-        deselectAllButton.setMaximumSize(new java.awt.Dimension(50, 26));
-        deselectAllButton.setMinimumSize(new java.awt.Dimension(50, 26));
-        deselectAllButton.setPreferredSize(new java.awt.Dimension(50, 26));
+        deselectAllButton.setToolTipText("Unselect all tiers");
+        deselectAllButton.setMaximumSize(new java.awt.Dimension(70, 26));
+        deselectAllButton.setMinimumSize(new java.awt.Dimension(70, 26));
+        deselectAllButton.setPreferredSize(new java.awt.Dimension(70, 26));
         deselectAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deselectAllButtonActionPerformed(evt);
@@ -292,8 +302,8 @@ public class TierSelectionDialog extends javax.swing.JDialog {
     public boolean selectTiers(BasicTranscription t, String[] selectedTierIDs){
         transcription = t;
         if (selectedTierIDs!=null){
-            for (int pos=0; pos<selectedTierIDs.length; pos++){
-                selectedTiersListModel.addElement(selectedTierIDs[pos]);
+            for (String selectedTierID : selectedTierIDs) {
+                selectedTiersListModel.addElement(selectedTierID);
             }
         }
         selectedTiersList.setModel(selectedTiersListModel);
@@ -301,9 +311,9 @@ public class TierSelectionDialog extends javax.swing.JDialog {
             selectedTiersList.setSelectedIndex(0);
         }
         String[] allTierIDs = transcription.getBody().getAllTierIDs();
-        for (int pos=0; pos<allTierIDs.length; pos++){
-            if (!selectedTiersListModel.contains(allTierIDs[pos])){
-                unselectedTiersListModel.addElement(allTierIDs[pos]);
+        for (String allTierID : allTierIDs) {
+            if (!selectedTiersListModel.contains(allTierID)) {
+                unselectedTiersListModel.addElement(allTierID);
             }
         }
         unselectedTiersList.setModel(unselectedTiersListModel);
@@ -318,31 +328,37 @@ public class TierSelectionDialog extends javax.swing.JDialog {
         return change;
     }
     
-class MyCellRenderer implements ListCellRenderer {
+class TierSelectionCellRenderer implements ListCellRenderer {
 
-    public MyCellRenderer() {
+    public TierSelectionCellRenderer() {
     }
     
     @Override
     public java.awt.Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
      {         
-         JLabel result = new JLabel();
-         result.setOpaque(true);
-         String tierID = (String)value;
-         try{
-             String desc = transcription.getBody().getTierWithID(tierID).getDescription(transcription.getHead().getSpeakertable());             
-             result.setText(desc += " (" + tierID + ")");
-             if (!isSelected){
-                 result.setBackground(java.awt.Color.white);
-             } else {
-                 result.setBackground(java.awt.Color.lightGray);
-             }
-             return result;
-         } catch (JexmaraldaException je){
-            // should never get here
-            return null;
-         }         
-    }    
-}
+        try {
+            JLabel result = new JLabel();
+            result.setOpaque(true);
+            String tierID = (String)value;
+            Tier tier = transcription.getBody().getTierWithID(tierID);
+            String desc = tier.getDescription(transcription.getHead().getSpeakertable());
+            result.setText(desc += " (" + tierID + ")");
+            if (!isSelected){
+                result.setBackground(white);
+            } else {
+                result.setBackground(java.awt.Color.lightGray);
+            }
+            if (tier.getType().equals("t")){
+                result.setFont(result.getFont().deriveFont(BOLD));
+            } else if (tier.getType().equals("d")){
+                result.setForeground(Color.LIGHT_GRAY);
+            }
+            return result;
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(TierSelectionDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+     }
+    }
 
 }

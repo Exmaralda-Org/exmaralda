@@ -582,6 +582,7 @@ public class BasicBody extends AbstractTierBody {
             Tier t = getTierAt(pos);
             SegmentedTier st = new SegmentedTier();            
             if ((t.getSpeaker()!=null) && (t.getType().equals("t"))){
+                // tiers of type 't' having a speaker
                 Segmentation seg = (Segmentation)t.toSegmentVector(getCommonTimeline());
                 st.addElement(seg);
                 for (int pos2=0; pos2<getNumberOfTiers(); pos2++){
@@ -592,6 +593,7 @@ public class BasicBody extends AbstractTierBody {
                     }
                 }                
             } else if ((t.getType().equals("a")) && (t.getSpeaker()==null)){
+                // tiers of type 'a' having a speaker
                 Annotation an = (Annotation)t.toSegmentVector(getCommonTimeline());
                 st.addElement(an);                
             } else if (!t.getType().equals("a")) {
