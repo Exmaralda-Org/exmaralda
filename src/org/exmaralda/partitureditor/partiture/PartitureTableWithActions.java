@@ -3128,13 +3128,21 @@ public class PartitureTableWithActions extends PartitureTable
     @Override
     public void resetData() {
         super.resetData(); //To change body of generated methods, choose Tools | Templates.
+        // new 23-10-2024: issue #495
+        boolean hiddenTiers = false;
         // new 30-11-2020: issue #232
         for (int i=0; i<this.getModel().getTranscription().getBody().getNumberOfTiers(); i++){
             Tier tier = this.getModel().getTranscription().getBody().getTierAt(i);
             if ("true".equals(tier.getUDTierInformation().getValueOfAttribute("exmaralda:hidden"))){
                 hideRow(i);
+                // new 23-10-2024: issue #495
+                hiddenTiers = true;
             }
-        }        
+        }
+        // new 23-10-2024: issue #495
+        if (hiddenTiers){
+            this.resetFormat(true);
+        }
     }
 
     public void applyTransformationScenario(Element transformationScenario) {        
