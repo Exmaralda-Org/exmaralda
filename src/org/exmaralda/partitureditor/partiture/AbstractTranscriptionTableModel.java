@@ -107,7 +107,7 @@ public abstract class AbstractTranscriptionTableModel extends AbstractDataSource
         formats.setTimelineItemFormat(tft.getTimelineItemFormat());
         String[] tierIDs = tft.getAllTierIDs();
         for (String tierID : tierIDs) {
-            // then set the formats contained in the given format table (ensures that everything has a format
+            // then set the formats contained in the given format table (ensures that everything has a format)
             try {
                 formats.setTierFormat(tft.getTierFormatForTier(tierID));
             }catch (JexmaraldaException je){

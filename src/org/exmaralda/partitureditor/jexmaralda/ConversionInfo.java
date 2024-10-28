@@ -39,24 +39,24 @@ public class ConversionInfo {
     }
     
     public String toXML(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("<conversion-info>");
         sb.append("<basic-transcription-conversion-info>");
         sb.append("<conversion-timeline>");
         for (int pos=0; pos<timeline.getNumberOfTimelineItems(); pos++){
             TimelineItem tli = timeline.getTimelineItemAt(pos);
-            sb.append("<conversion-tli id=\"" + tli.getID() + "\"/>");
+            sb.append("<conversion-tli id=\"").append(tli.getID()).append("\"/>");
         }
         sb.append("</conversion-timeline>");
         for (int pos=0; pos<tiers.size(); pos++){
             String[] info = (String[])(tiers.elementAt(pos));
             sb.append("<conversion-tier ");
-            sb.append("segmented-tier-id=\"" + info[0] + "\" ");
+            sb.append("segmented-tier-id=\"").append(info[0]).append("\" ");
             // bug fix 12-03-2015
-            sb.append("name=\"" + StringUtilities.toXMLString(info[1]) + "\" ");
-            sb.append("category=\"" + StringUtilities.toXMLString(info[2]) + "\" ");
-            sb.append("display-name=\"" + StringUtilities.toXMLString(info[3]) + "\" ");
-            sb.append("type=\"" + info[4] + "\"");
+            sb.append("name=\"").append(StringUtilities.toXMLString(info[1])).append("\" ");
+            sb.append("category=\"").append(StringUtilities.toXMLString(info[2])).append("\" ");
+            sb.append("display-name=\"").append(StringUtilities.toXMLString(info[3])).append("\" ");
+            sb.append("type=\"").append(info[4]).append("\"");
             sb.append("/>");
         }
         sb.append("</basic-transcription-conversion-info>");

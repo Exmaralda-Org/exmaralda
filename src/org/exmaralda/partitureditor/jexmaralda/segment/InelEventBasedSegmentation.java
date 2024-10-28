@@ -60,6 +60,7 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
             "»", // right double angle quotation mark 
             ";", // semicolon 
             ":", // colon         
+            "/" // forward slash (added 28-10-2024)         
     };
     
     String WORD_EXTERNAL_PUNCUTATION_REGEX = String.join("", WORD_EXTERNAL_PUNCUTATION);
