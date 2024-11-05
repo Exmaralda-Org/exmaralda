@@ -81,6 +81,7 @@ public class WebMAUSAction extends org.exmaralda.partitureditor.partiture.Abstra
         mausParameterDialog.setVisible(true);
         if (!mausParameterDialog.approved) return;
         final HashMap<String, Object> mausParameters = mausParameterDialog.getMAUSParameters();
+        
                        
         // get the transcription and the current selection
         final BasicTranscription bt = table.getModel().getTranscription();

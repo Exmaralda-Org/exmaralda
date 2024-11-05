@@ -705,9 +705,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="openPartiturEditorButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="null"/>
-            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/org/exmaralda/exakt/exmaraldaSearch/swing/resources/pe_small.png"/>
             </Property>

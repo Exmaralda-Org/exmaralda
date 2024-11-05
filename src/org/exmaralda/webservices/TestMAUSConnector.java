@@ -25,18 +25,16 @@ public class TestMAUSConnector {
     public static void main(String[] args) {
         try {
             new TestMAUSConnector().doit();
-        } catch (IOException ex) {
-            Logger.getLogger(TestMAUSConnector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JDOMException ex) {
+        } catch (IOException | JDOMException ex) {
             Logger.getLogger(TestMAUSConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void doit() throws IOException, JDOMException {
-        MAUSConnector mc = new MAUSConnector(true);
+        MAUSConnector mc = new MAUSConnector(false);
          
-        File textFile = new File("C:\\Users\\bernd\\OneDrive\\Desktop\\MAUS_TEST.TXT");
-        File signalFile = new File("C:\\Users\\bernd\\OneDrive\\Desktop\\MAUS_TEST.WAV");
+        File textFile = new File("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST_MAUS\\TEST.TXT");
+        File signalFile = new File("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST_MAUS\\TEST.WAV");
         
         String[][] parameters = {
             {"LANGUAGE","deu"}
@@ -52,7 +50,7 @@ public class TestMAUSConnector {
         
         PraatConverter pc = new PraatConverter();
         BasicTranscription bt = pc.readPraatFromFile(temp.getAbsolutePath(), "UTF-8");
-        bt.writeXMLToFile("C:\\Users\\bernd\\OneDrive\\Desktop\\MAUS_TEST.exb", "none");
+        bt.writeXMLToFile("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST_MAUS\\MAUS_TEST.exb", "none");
         
         System.out.println(result);
     }

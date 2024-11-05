@@ -39,6 +39,7 @@ public class CorpusStatisticsAction extends ComaAction {
 		super(text, icon, c);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent e) {
 		final File file = coma.getData().getOpenFile();
 		if (file == null) {
@@ -58,6 +59,7 @@ public class CorpusStatisticsAction extends ComaAction {
 			pbd.setVisible(true);
 
 			final Runnable doDisplaySaveDialog = new Runnable() {
+                                @Override
 				public void run() {
 					displaySaveDialog(counter);
 				}
@@ -71,15 +73,7 @@ public class CorpusStatisticsAction extends ComaAction {
 								file.getParentFile());
 						javax.swing.SwingUtilities
 								.invokeLater(doDisplaySaveDialog);
-					} catch (IOException ex) {
-						ex.printStackTrace();
-					} catch (SAXException ex) {
-						ex.printStackTrace();
-					} catch (JexmaraldaException ex) {
-						ex.printStackTrace();
-					} catch (URISyntaxException ex) {
-						ex.printStackTrace();
-					} catch (JDOMException ex) {
+					} catch (IOException | SAXException | JexmaraldaException | URISyntaxException | JDOMException ex) {
 						ex.printStackTrace();
 					}
 				}
@@ -94,7 +88,7 @@ public class CorpusStatisticsAction extends ComaAction {
 	}
 
 	private void displaySaveDialog(SegmentsCounter counter) {
-		if (counter.getErrorList().size() > 0) {
+		if (!counter.getErrorList().isEmpty()) {
 			String out = "<html>" + Ui.getText("err.processingFiles") + "<br/>";
 			int countErr = 0;
 			for (String error : counter.getErrorList()) {

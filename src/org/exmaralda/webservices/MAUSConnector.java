@@ -35,8 +35,8 @@ public class MAUSConnector {
     
     private boolean useGeneralMAUSVersion = false;
 
-    public String webMausBasicURL = "http://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUSBasic";
-    public String webMausGeneralURL = "http://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUS";
+    public String webMausBasicURL = "https://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUSBasic";
+    public String webMausGeneralURL = "https://clarin.phonetik.uni-muenchen.de/BASWebServices/services/runMAUS";
 
     public MAUSConnector() {
     }
@@ -88,11 +88,19 @@ public class MAUSConnector {
         //httpPost.setEntity(entity); // deprecated
         httpPost.setEntity(builder.build());
         HttpResponse response = httpClient.execute(httpPost);
+        System.out.println("Now calling " + httpPost.toString());
         HttpEntity result = response.getEntity();     
         
         StatusLine statusLine = response.getStatusLine();
         int statusCode = statusLine.getStatusCode();
 
+        System.out.println("Got result! Status is " + statusCode);
+        
+        if (statusCode==302) {
+            String location = response.getFirstHeader("Location").getValue();
+            System.out.println("LOCATION: " + location);
+        }
+        
         if (statusCode==200 && result != null) {
             String resultAsString = EntityUtils.toString(result);
             // should look something like this

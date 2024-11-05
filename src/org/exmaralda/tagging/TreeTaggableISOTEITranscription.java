@@ -24,7 +24,7 @@ import org.jdom.xpath.XPath;
  */
 public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
 
-    public static String XPATH_TO_SEGS = "//tei:seg";
+    public static String XPATH_TO_SEGS = "//tei:seg[not(tei:seg)]";
     public static String XPATH_ALL_WORDS_AND_PUNCTUATION = "descendant::*[self::tei:w or self::tei:pc]";
     public static String XPATH_NO_XY = "descendant::*[(self::tei:w and not(@norm='&')) or self::tei:pc]"; 
     public static String XPATH_NO_DUMMIES = "descendant::*[(self::tei:w and not(@norm='&' or @norm='%' or @norm='§' or @norm='äh')) or self::pc]"; 

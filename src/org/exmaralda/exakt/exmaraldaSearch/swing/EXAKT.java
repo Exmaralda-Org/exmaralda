@@ -1569,6 +1569,7 @@ public class EXAKT extends javax.swing.JFrame
                 playButton.setEnabled(success);
                 stopButton.setEnabled(false);
                 getPartitur().getModel().setTranscriptionAndTierFormatTable(bt,tft);
+                
                 //getPartitur().setPlaybackMode(true);
             }
             System.out.println(tierID +  "  "  + timeID2);

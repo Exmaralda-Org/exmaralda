@@ -247,7 +247,10 @@ public class TEIMerger {
             // go through all top level segment chains
             for (Object segmentChain : segmentChains) {
                 Element sc = (Element) (segmentChain);
-                sc.setAttribute("speaker", sc.getParentElement().getParentElement().getAttributeValue("speaker"));
+                String parentSpeaker = sc.getParentElement().getParentElement().getAttributeValue("speaker");
+                if (parentSpeaker!=null){
+                    sc.setAttribute("speaker", parentSpeaker);
+                }
                 String tierref = sc.getParentElement().getAttributeValue("tierref");
                 String start = sc.getAttributeValue("s");
                 String end = sc.getAttributeValue("e");
