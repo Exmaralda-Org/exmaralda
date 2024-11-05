@@ -5,6 +5,8 @@
 		<xsl:choose>
 			<xsl:when test="//ts[@n='cGAT:w']">cGAT</xsl:when>
 			<xsl:when test="//ts[@n='GEN:w']">GEN</xsl:when>
+			<!-- added 05-11-2024 for issue #497 -->
+                        <xsl:when test="//ts[@n='INEL:w']">INEL</xsl:when>
 			<xsl:otherwise>HIAT</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -12,6 +14,8 @@
 		<xsl:choose>
 			<xsl:when test="$SEGMENTATION='cGAT'">SpeakerContribution_Word</xsl:when>
 			<xsl:when test="$SEGMENTATION='GEN'">SpeakerContribution_Word</xsl:when>
+			<!-- added 05-11-2024 for issue #497 -->
+			<xsl:when test="$SEGMENTATION='INEL'">SpeakerContribution_Utterance_Word</xsl:when>
 			<xsl:otherwise>SpeakerContribution_Utterance_Word</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -82,6 +86,25 @@
 							</xsl:attribute>
 						</xsl:element>
 					</xsl:if>
+                                        
+					<!-- ********** FOR INEL ONLY *************** -->
+
+                			<!-- added 05-11-2024 for issue #497 -->
+					<xsl:if test="$SEGMENTATION='INEL'">
+						<xsl:element name="count">
+							<xsl:attribute name="segment-name">Utterances</xsl:attribute>
+							<xsl:attribute name="count">
+								<xsl:value-of select="count(*//ts[@n='INEL:u'])"/>
+							</xsl:attribute>
+						</xsl:element>
+						<xsl:element name="count">
+							<xsl:attribute name="segment-name">Punctuation</xsl:attribute>
+							<xsl:attribute name="count">
+								<xsl:value-of select="count(*//nts[@n='INEL:ip'])"/>
+							</xsl:attribute>
+						</xsl:element>
+					</xsl:if>
+                                        
 				</xsl:element>
 			</xsl:for-each>
 		</xsl:element>

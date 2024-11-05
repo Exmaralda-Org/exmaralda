@@ -40,7 +40,7 @@ public class SegmentsCounter {
 	String currentFilename;
 	Element currentElement;
 	int count = 0;
-	private HashSet<String> errorList = new HashSet<String>();
+	private HashSet<String> errorList = new HashSet<>();
 
 	public SegmentsCounter() throws JDOMException, IOException {
 		Document xslDocument = new IOUtilities()
