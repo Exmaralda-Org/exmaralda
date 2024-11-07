@@ -39,6 +39,7 @@
                 <xsl:apply-templates select="current-group()[1]/preceding-sibling::tei:anchor[1]"/>
                 <xsl:if test="not(current-grouping-key()='0')">
                     <tei:seg type="intonation-unit">
+                        <xsl:attribute name="xml:id" select="generate-id()"/>
                         <xsl:apply-templates select="current-group()[not(self::tei:anchor)]"/>
                     </tei:seg>
                 </xsl:if>
