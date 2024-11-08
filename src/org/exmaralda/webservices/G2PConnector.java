@@ -185,7 +185,8 @@ public class G2PConnector {
     
     public String callG2P(File inFile, HashMap<String, Object> otherParameters) throws IOException, JDOMException{
         
-        CloseableHttpClient httpClient = HttpClientBuilder.create().build();       
+        //CloseableHttpClient httpClient = HttpClientBuilder.create().build();       
+        CloseableHttpClient httpClient = HttpClientBuilder.create().useSystemProperties().build();
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();  
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         
