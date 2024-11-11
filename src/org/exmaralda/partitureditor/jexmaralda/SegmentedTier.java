@@ -6,7 +6,6 @@
 
 package org.exmaralda.partitureditor.jexmaralda;
 
-import org.exmaralda.partitureditor.jexmaralda.*;
 import java.util.*;
 /**
  *
@@ -102,7 +101,7 @@ public class SegmentedTier extends AbstractTier implements XMLable {
     }
 
     public Vector<Annotation> getAnnotationsWithName(String name){
-        Vector<Annotation> r = new Vector<Annotation>();
+        Vector<Annotation> r = new Vector<>();
         for (int pos=0; pos<size(); pos++){
             if (elementAt(pos) instanceof Annotation){
                 if (((Annotation)(elementAt(pos))).getName().equals(name)){
@@ -114,7 +113,7 @@ public class SegmentedTier extends AbstractTier implements XMLable {
     }
 
     public Tier toBasicTier(String[] conversionInfo){
-        return toBasicTier(conversionInfo, new HashSet<String>());
+        return toBasicTier(conversionInfo, new HashSet<>());
     }
     
     public Tier toBasicTier(String[] conversionInfo, HashSet<String> processedIDs){
@@ -123,6 +122,9 @@ public class SegmentedTier extends AbstractTier implements XMLable {
         result.setCategory(conversionInfo[2]);
         result.setDisplayName(conversionInfo[3]);
         result.setType(conversionInfo[4]);
+        if (Boolean.parseBoolean(conversionInfo[5])){
+            result.getUDTierInformation().setAttribute("exmaralda:hidden", "true");
+        }
         if (conversionInfo[4].equals("t")){
             Segmentation s = getSegmentationWithName(conversionInfo[1], processedIDs);
             result.setID(s.getTierReference());

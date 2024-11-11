@@ -189,7 +189,11 @@ public class SegmentedTranscriptionSaxHandler extends org.xml.sax.helpers.Defaul
                                                         String s3 = atts.getValue("category");
                                                         String s4 = atts.getValue("display-name");
                                                         String s5 = atts.getValue("type");
-                                                        String[] info = {s1,s2,s3,s4,s5};
+                                                        String s6 = "false";
+                                                        if (atts.getValue("hidden")!=null){
+                                                            s6 = atts.getValue("hidden");
+                                                        }
+                                                        String[] info = {s1,s2,s3,s4,s5, s6};
                                                         transcription.getConversionInfo().addTierConversionInfo(info);
                                                         break;
         }

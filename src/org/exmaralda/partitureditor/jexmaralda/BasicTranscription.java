@@ -758,12 +758,23 @@ public class BasicTranscription extends AbstractTranscription {
         for (int pos=0; pos<body.getNumberOfTiers(); pos++){
             Tier t = body.getTierAt(pos);
             if (t.getType().equals("t")){
-                String[] info = { t.getID(), "SpeakerContribution_Event", t.getCategory(),
-                                  t.getDisplayName(), t.getType()};
+                String[] info = { 
+                    t.getID(), 
+                    "SpeakerContribution_Event", t.getCategory(),
+                    t.getDisplayName(), 
+                    t.getType(),
+                    Boolean.toString(t.isHidden())
+                };
                 result.addTierConversionInfo(info);
             } else if (t.getType().equals("d")){
-                String[] info = { t.getID(), "Event", t.getCategory(),
-                                  t.getDisplayName(), t.getType()};
+                String[] info = { 
+                    t.getID(), 
+                    "Event", 
+                    t.getCategory(),
+                    t.getDisplayName(), 
+                    t.getType(),
+                    Boolean.toString(t.isHidden())
+                };
                 result.addTierConversionInfo(info);                
             } else if (t.getType().equals("a") && (t.getSpeaker()!=null)){
                 // determine the parent ID for this annotation tier
@@ -771,16 +782,28 @@ public class BasicTranscription extends AbstractTranscription {
                     Tier t2 = body.getTierAt(pos2);
                     if (t2.getSpeaker()==null) continue;
                     if (t2.getSpeaker().equals(t.getSpeaker()) && t2.getType().equals("t")){
-                        String[] info = { t2.getID(), t.getCategory(), t.getCategory(),
-                                          t.getDisplayName(), t.getType()};
+                        String[] info = { 
+                            t2.getID(), 
+                            t.getCategory(), 
+                            t.getCategory(),
+                            t.getDisplayName(), 
+                            t.getType(),
+                            Boolean.toString(t.isHidden())
+                        };
                         result.addTierConversionInfo(info);
                         break;
                     }
                 }                
                 // annotation with speaker but without parent ID will be ignored!!!!!
             } else if (t.getType().equals("a")) {    // i.e. annotation with null speaker
-                 String[] info = { t.getID(), t.getCategory(), t.getCategory(),
-                                   t.getDisplayName(), t.getType()};                
+                 String[] info = { 
+                     t.getID(), 
+                     t.getCategory(), 
+                     t.getCategory(),
+                     t.getDisplayName(), 
+                     t.getType(),
+                     Boolean.toString(t.isHidden())
+                 };                
                  result.addTierConversionInfo(info);                
             } else {    // i.e. other type (l or u)
             }

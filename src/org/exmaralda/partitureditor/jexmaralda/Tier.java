@@ -273,6 +273,14 @@ public class Tier extends AbstractEventTier {
         result.add(currentEventList);
         return result;
     }
+    
+    public boolean isHidden(){
+        String hiddenString = getUDTierInformation().getValueOfAttribute("exmaralda:hidden");
+        if (hiddenString==null){
+            return false;
+        }
+        return Boolean.parseBoolean(hiddenString);
+    }
 
 
     

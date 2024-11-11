@@ -56,7 +56,8 @@ public class ConversionInfo {
             sb.append("name=\"").append(StringUtilities.toXMLString(info[1])).append("\" ");
             sb.append("category=\"").append(StringUtilities.toXMLString(info[2])).append("\" ");
             sb.append("display-name=\"").append(StringUtilities.toXMLString(info[3])).append("\" ");
-            sb.append("type=\"").append(info[4]).append("\"");
+            sb.append("type=\"").append(info[4]).append("\" ");
+            sb.append("hidden=\"").append(info[5]).append("\"");
             sb.append("/>");
         }
         sb.append("</basic-transcription-conversion-info>");
