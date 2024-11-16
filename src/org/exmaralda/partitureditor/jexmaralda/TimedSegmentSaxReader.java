@@ -6,10 +6,8 @@
 
 package org.exmaralda.partitureditor.jexmaralda;
 
-import java.net.*;
 import java.io.*;
 import org.xml.sax.*;
-import org.exmaralda.partitureditor.jexmaralda.*;
 import org.exmaralda.partitureditor.jexmaralda.sax.*;
 
 import javax.xml.parsers.SAXParserFactory;  

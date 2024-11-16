@@ -216,6 +216,10 @@ public class PartiturEditor extends javax.swing.JFrame
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
+                if (table.IS_SAVING_IN_BACKGROUND) {
+                    System.out.println("Saving in background, not exiting. ");
+                    return;
+                }
                 exitForm(null);
             }
         });
@@ -288,6 +292,12 @@ public class PartiturEditor extends javax.swing.JFrame
                 // new for #417: if I do System.exit, EXAKT will also quit
                 dispose();
             } else {
+                // 16-11-2024 changed this for #456
+                dispose();
+                while (table.IS_SAVING_IN_BACKGROUND){
+                    System.out.print(".");
+                }
+                System.out.println(".");
                 System.exit(0);
             }
         }
@@ -366,7 +376,10 @@ public class PartiturEditor extends javax.swing.JFrame
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 // 05-04-2024: new for #456
-                if (table.IS_SAVING_IN_BACKGROUND) return;
+                if (table.IS_SAVING_IN_BACKGROUND) {
+                    System.out.println("Saving in background, not exiting. ");
+                    return;
+                }
                 exitForm(null);
             }
         };
