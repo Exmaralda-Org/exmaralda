@@ -6,6 +6,8 @@ package org.exmaralda.common.corpusbuild;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
@@ -26,8 +28,12 @@ public class TestEXBBuilder {
     }
 
     private void doit() {
-        EXBBuilder exbBuilder = new EXBBuilder("MANV", new File("C:\\UDE\\PILOT_MANV\\ZUMULT-CORPUS\\MANV"), "descendant::ud-information[@attribute-name='uniqueID']", "default");
         try {
+            EXBBuilder exbBuilder = new EXBBuilder("MANV", new File("C:\\UDE\\PILOT_MANV\\ZUMULT-CORPUS\\MANV"), "descendant::ud-information[@attribute-name='uniqueID']", "default");
+            Set<String> dmk = new HashSet<>();
+            dmk.add("ELAN-Media-File");
+            dmk.add("ELAN-Mime-Type");
+            exbBuilder.setDeleteMetaKeys(dmk);
             exbBuilder.build();
         } catch (IOException | SAXException | JexmaraldaException | JDOMException ex) {
             Logger.getLogger(TestEXBBuilder.class.getName()).log(Level.SEVERE, null, ex);

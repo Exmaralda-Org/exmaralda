@@ -11,8 +11,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
 import java.util.stream.Stream;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
@@ -24,6 +27,7 @@ import org.exmaralda.partitureditor.jexmaralda.UDInformationHashtable;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.xml.sax.SAXException;
 
@@ -38,12 +42,18 @@ public class EXBBuilder {
     String uniqueSpeakerDistinction = "descendant::abbreviation";
     String segmentation = "default";
     
+    Set<String> deleteMetaKeys = new HashSet<>();
+    
     
     public EXBBuilder(String corpusName, File topDirectory, String uniqueSpeakerDistinction, String segmentation){
         this.corpusName = corpusName;
         this.topDirectory = topDirectory;
         this.uniqueSpeakerDistinction = uniqueSpeakerDistinction;
         this.segmentation = segmentation;
+    }
+    
+    public void setDeleteMetaKeys(Set<String> deleteMetaKeys){
+        this.deleteMetaKeys = deleteMetaKeys;
     }
     
     public void build() throws IOException, SAXException, JexmaraldaException, JDOMException{
@@ -80,19 +90,26 @@ public class EXBBuilder {
         comaDocument.getRootElement().setAttribute("uniqueSpeakerDistinction", "//speaker/" + this.uniqueSpeakerDistinction);
         comaDocument.getRootElement().setAttribute("Name", corpusName);
         comaDocument.getRootElement().setAttribute("Id", corpusName);
+        comaDocument.getRootElement().setAttribute("noNamespaceSchemaLocation", "http://www.exmaralda.org/xml/comacorpus.xsd", Namespace.getNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance"));
+        Namespace xsiNamespace = Namespace.getNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        comaDocument.getRootElement().addNamespaceDeclaration(xsiNamespace);
+        
+        Element corpusDataElement = new Element("CorpusData");
+        comaDocument.getRootElement().addContent(corpusDataElement);
         
         for (File exbFile : exbFiles){
             BasicTranscription exb = new BasicTranscription(exbFile.getAbsolutePath());            
             Element communicationElement = new Element("Communication")
                     .setAttribute("Name", exb.getHead().getMetaInformation().getTranscriptionName())
                     .setAttribute("Id", exb.getHead().getMetaInformation().getTranscriptionName());
-            comaDocument.getRootElement().addContent(communicationElement);
+            corpusDataElement.addContent(communicationElement);
             
             // Metadata
             Element communicationDescriptionElement = new Element("Description");
             communicationElement.addContent(communicationDescriptionElement);
             UDInformationHashtable udMetaInformation = exb.getHead().getMetaInformation().getUDMetaInformation();
             for (String attribute : udMetaInformation.getAllAttributes()){
+                if (deleteMetaKeys.contains(attribute)) continue;
                 String value = udMetaInformation.getValueOfAttribute(attribute);
                 Element keyElement = new Element("Key")
                         .setAttribute("Name", attribute)
@@ -162,12 +179,45 @@ public class EXBBuilder {
             transcriptionElement2.addContent(transcriptionDescriptionElement2);
             transcriptionDescriptionElement2.addContent(new Element("Key").setAttribute("Name", "segmented").setText("true"));
             
+            // Recordings
+            /*
+                <Recording Id="RID7D37BDAC-9DDB-B6CD-34D3-A50A67CBA980">
+                   <Name>AnneWill</Name>
+                   <RecordingDuration>360003</RecordingDuration>
+                   <Media Id="MID56777C50-5115-BD39-50AC-905E7CBC1DE9">
+                      <Description>
+                         <Key Name="Type">digital</Key>
+                      </Description>
+                      <NSLink>AnneWill/AnneWill.mp4</NSLink>
+                   </Media>
+            
+            */
+            Vector<String> referencedFiles = exb.getHead().getMetaInformation().getReferencedFiles();
+            int count = 0;
+            for (String referencedFile : referencedFiles){
+                count++;
+                Element recordingElement = new Element("Recording")
+                        .setAttribute("Id", exb.getHead().getMetaInformation().getTranscriptionName()+ "_REC_" + Integer.toString(count));
+                recordingElement.addContent(new Element("Name").setText(new File(referencedFile).getName()));
+                communicationElement.addContent(recordingElement);
+                Element mediaElement = new Element("Media")
+                        .setAttribute("Id", exb.getHead().getMetaInformation().getTranscriptionName()+ "_MED_" + Integer.toString(count));
+                recordingElement.addContent(mediaElement);
+                Element mediaDescriptionElement = new Element("Description");
+                mediaElement.addContent(mediaDescriptionElement);
+                mediaDescriptionElement.addContent(new Element("Key").setAttribute("Name", "type").setText("digital"));
+                
+                relativePath = topDirectory.toPath().relativize(new File(referencedFile).toPath());
+                mediaElement.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/')));
+                
+                
+            }
             
             
         }
         
         for (String id : speakerElements.keySet()){
-           comaDocument.getRootElement().addContent(speakerElements.get(id));
+           corpusDataElement.addContent(speakerElements.get(id));
         }
         
         File comaOutFile = new File(topDirectory, corpusName + ".coma");
@@ -203,6 +253,7 @@ public class EXBBuilder {
         speakerElement.addContent(speakerDescriptionElement);
         UDInformationHashtable udMetaInformation = s.getUDSpeakerInformation();
         for (String attribute : udMetaInformation.getAllAttributes()){
+            if (deleteMetaKeys.contains(attribute)) continue;
             String value = udMetaInformation.getValueOfAttribute(attribute);
             Element keyElement = new Element("Key")
                     .setAttribute("Name", attribute)
