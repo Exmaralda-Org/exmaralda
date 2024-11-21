@@ -9,7 +9,7 @@ import java.io.File;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import org.exmaralda.coma.helpers.CCW;
+import org.exmaralda.coma.helpers.StandaloneCCW;
 import org.exmaralda.coma.root.Coma;
 import org.exmaralda.coma.root.Ui;
 
@@ -66,7 +66,7 @@ public class CreateCorpusFromTranscriptionsAction extends ComaAction {
 
 		cf = null;
 
-		CCW ccwInst = new CCW(coma, true);
+		StandaloneCCW ccwInst = new StandaloneCCW(coma.getData().getCorpusName(), coma.getData().getOpenFile());
 		ccwInst.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		ccwInst.setLocationRelativeTo(coma);
 		ccwInst.setVisible(true);
