@@ -116,7 +116,7 @@ public class TEIConverter extends AbstractConverter {
     
     public void setLanguage(String l){
         language = l;
-        System.out.println("Language of converter set to " + language);
+        System.out.println("[TEIConverter] Language of converter set to " + language);
     }
 
     
@@ -131,6 +131,7 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);        
         setTranscriptionDesc(teiDoc, "-", "-");
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        System.out.println("[TEIConverter] Non segmented ISO TEI File written to " + path);
     }
     
     // *********************
@@ -175,7 +176,6 @@ public class TEIConverter extends AbstractConverter {
         // added 25-01-2021
         //copyBT.getBody().getCommonTimeline().completeTimes();
         
-        System.out.println("started writing document...");
         
         //HIATSegmentation segmentation = new HIATSegmentation();
         // issue #152
@@ -187,7 +187,7 @@ public class TEIConverter extends AbstractConverter {
         }
         
         SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);        
-        System.out.println("Segmented transcription created");
+        System.out.println("[TEIConverter] Segmented transcription created");
         // added 12-02-2023 to see what happens...
         //st.getBody().augmentCommonTimeline();
         String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
@@ -198,7 +198,7 @@ public class TEIConverter extends AbstractConverter {
                 "SpeakerContribution_Event", 
                 true,
                 includeFullText);
-        System.out.println("Merged");
+        System.out.println("[TEIConverter] Merged");
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);
         setTranscriptionDesc(teiDoc, "HIAT", "2004");
@@ -207,8 +207,9 @@ public class TEIConverter extends AbstractConverter {
         //Format prettyFormat = Format.getPrettyFormat();
         //prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
         //IOUtilities.writeDocumentToLocalFile(filename, teiDoc, prettyFormat);
+        System.out.println("[TEIConverter] Started writing document " + filename + "...");
         IOUtilities.writeDocumentToLocalFile(filename, teiDoc);
-        System.out.println("document written.");        
+        System.out.println("[TEIConverter] document " + filename + " written.");        
     }
     
     // *********************
@@ -729,7 +730,7 @@ public class TEIConverter extends AbstractConverter {
             Element textEl = (Element) xpathToTextElement.selectSingleNode(teiDoc);
             textEl.setAttribute("lang", language, Namespace.XML_NAMESPACE);
         }
-        System.out.println("Language of document set to " + language);        
+        System.out.println("[TEIConverter] Language of document set to " + language);        
     }
     
     private void setTranscriptionDesc(Document teiDoc, String ident, String version) throws JDOMException {

@@ -139,11 +139,11 @@ public class ELANConverter {
                                                                               ParserConfigurationException, 
                                                                               TransformerConfigurationException, 
                                                                               TransformerException {
-        System.out.println("started writing document...");
+        System.out.println("[ELANConverter] Started writing EAF document " + filename  + " ...");
         java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(filename));
         fos.write(BasicTranscriptionToELAN(t).getBytes("UTF-8"));
         fos.close();
-        System.out.println("document written.");
+        System.out.println("[ELANConverter] Document " + filename + " written.");
     }
     
     
@@ -202,7 +202,7 @@ public class ELANConverter {
         BasicBody bb = bt.getBody();
         for (int tierNo=0; tierNo<bb.getNumberOfTiers(); tierNo++){
             Tier tier = bb.getTierAt(tierNo);
-            System.out.println("Determining dependency level of tier " + tier.getID());
+            //System.out.println("Determining dependency level of tier " + tier.getID());
             Tier refTier = tier;
             int depLevel = 0;
             while (refTier.getUDTierInformation().getValueOfAttribute("ELAN-TimeAlignable").equals("false")){
@@ -246,7 +246,7 @@ public class ELANConverter {
         BasicBody bb = bt.getBody();
         for (int tierNo=0; tierNo<bb.getNumberOfTiers(); tierNo++){
             Tier tier = bb.getTierAt(tierNo);
-            System.out.println("Tier : " + tier.getDescription(bt.getHead().getSpeakertable()));
+            // System.out.println("Tier : " + tier.getDescription(bt.getHead().getSpeakertable()));
             UDInformationHashtable udTierInfo = tier.getUDTierInformation();
             //13-12-2016: leave that - there can be time-alignable annotations which refer to other annotations and not to the timeline issue #52
             //if (udTierInfo.getValueOfAttribute("ELAN-TimeAlignable").equalsIgnoreCase("true")) continue;
@@ -347,8 +347,8 @@ public class ELANConverter {
                     //do {
                     while (prevID.length()>0) {
                         visitedIDs.add(prevID);
-                        System.out.println(concatenatedDescription);
-                        System.out.println("ID of concatenated: " + previousEvent.getUDEventInformation().getValueOfAttribute("ELAN-ID"));                        
+                        //System.out.println(concatenatedDescription);
+                        //System.out.println("ID of concatenated: " + previousEvent.getUDEventInformation().getValueOfAttribute("ELAN-ID"));                        
                         concatenatedDescription = previousEvent.getDescription() + SEP_CHAR + concatenatedDescription;
                         previousEvent = (Event)(ELAN_IDs.get(prevID));
                         //System.out.println("Previous event(2): " + previousEvent.toXML());
@@ -362,7 +362,7 @@ public class ELANConverter {
                     //event.setDescription(concatenatedDescription);
                     for (Iterator i = visitedIDs.iterator(); i.hasNext();){
                         String s = (String)(i.next());
-                        System.out.println(s);
+                        //System.out.println(s);
                         ELAN_IDs.put(s, previousEvent);
                     }
                 }
@@ -386,15 +386,7 @@ public class ELANConverter {
             ELANConverter converter = new ELANConverter();
             BasicTranscription bt = converter.readELANFromFile(eafFilePath);
             bt.writeXMLToFile("F:\\Dropbox\\IDS\\TGDP\\1-1-1-3-a_OUT.exb", "none");
-        } catch (JexmaraldaException ex) {
-            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
+        } catch (JexmaraldaException | SAXException | IOException | ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(ELANConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

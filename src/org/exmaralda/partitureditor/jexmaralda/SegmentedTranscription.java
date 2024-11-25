@@ -65,14 +65,14 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
         // 13-08-2010: change reintroduced
         //getHead().getMetaInformation().relativizeReferencedFile(filename);
         relativizeLinks(filename);
-        System.out.println("started writing document" + filename + "...");
+        System.out.println("[SegmentedTranscription] started writing document " + filename + "...");
         FileOutputStream fos = new FileOutputStream(new File(filename));
         fos.write(StringConstants.XML_HEADER.getBytes("UTF-8"));        
         fos.write(StringUtilities.makeXMLDoctypeSegmentedTranscription(pathToDTD).getBytes("UTF-8"));
         //fos.write(StringConstants.XML_COPYRIGHT_COMMENT.getBytes("UTF-8"));
         fos.write(toXML().getBytes("UTF-8"));
         fos.close();
-        System.out.println("document written.");
+        System.out.println("[SegmentedTranscription] Document " + filename + " written.");
         // ".." in relative paths allowed now
         getHead().getMetaInformation().resolveReferencedFile(filename, MetaInformation.NEW_METHOD);
         resolveLinks(filename);        

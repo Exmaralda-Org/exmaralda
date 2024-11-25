@@ -80,7 +80,7 @@ public class EXBBuilder {
             SegmentedTranscription exs = exb.toSegmentedTranscription();
             File exsOut = new File(exbFile.getParentFile(), exbFile.getName().replaceAll("\\.exb", "_s.exs"));
             exs.writeXMLToFile(exsOut.getAbsolutePath(), "none");
-            System.out.println("[Segmented]: " + exbFile.getAbsolutePath() + " --> " + exsOut.getName());
+            System.out.println("[EXBBuilder]: Segmented " + exbFile.getAbsolutePath() + " --> " + exsOut.getName());
         }
     }
 
@@ -179,6 +179,17 @@ public class EXBBuilder {
             transcriptionElement2.addContent(transcriptionDescriptionElement2);
             transcriptionDescriptionElement2.addContent(new Element("Key").setAttribute("Name", "segmented").setText("true"));
             
+            Element transcriptionElement3 = new Element("Transcription")
+                    .setAttribute("Id", "ISO_" + exb.getHead().getMetaInformation().getTranscriptionName());
+            transcriptionElement3.addContent(new Element("Name").setText(exb.getHead().getMetaInformation().getTranscriptionName()));
+            transcriptionElement3.addContent(new Element("Filename").setText(exbFile.getName().replaceAll("\\.exb", ".xml")));
+            transcriptionElement3.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/').replaceAll("\\.exb", ".xml")));
+            communicationElement.addContent(transcriptionElement3);
+            Element transcriptionDescriptionElement3 = new Element("Description");
+            transcriptionElement3.addContent(transcriptionDescriptionElement3);
+            transcriptionDescriptionElement.addContent(new Element("Key").setAttribute("Name", "segmented").setText("false"));
+
+
             // Recordings
             /*
                 <Recording Id="RID7D37BDAC-9DDB-B6CD-34D3-A50A67CBA980">
@@ -222,6 +233,7 @@ public class EXBBuilder {
         
         File comaOutFile = new File(topDirectory, corpusName + ".coma");
         FileIO.writeDocumentToLocalFile(comaOutFile.getAbsolutePath(), comaDocument);
+        System.out.println("[EXBBuilder] " + comaOutFile.getAbsolutePath() + " written.");
         
     }
 

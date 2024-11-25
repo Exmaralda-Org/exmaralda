@@ -60,11 +60,11 @@ public class BasicTranscription extends AbstractTranscription {
     
     public BasicTranscription(String inputFileName, boolean check) throws SAXException, JexmaraldaException {
         super();
-        System.out.println("Reading Basic Transcription from " + inputFileName);
+        System.out.println("[BasicTranscription] Reading Basic Transcription from " + inputFileName);
         body = new BasicBody();
         org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader reader = new org.exmaralda.partitureditor.jexmaralda.sax.BasicTranscriptionSaxReader();
         BasicTranscription t = reader.readFromFile(inputFileName);
-        System.out.println(inputFileName + " read.");
+        System.out.println("[BasicTranscription] " + inputFileName + " read.");
         
         if (check){
             t.check();
@@ -700,7 +700,7 @@ public class BasicTranscription extends AbstractTranscription {
         // 13-08-2010: change reintroduced
         //getHead().getMetaInformation().relativizeReferencedFile(filename);
         relativizeLinks(filename);
-        System.out.println("started writing document" + filename + "...");
+        System.out.println("[BasicTranscription] Started writing document " + filename + "...");
         try (FileOutputStream fos = new FileOutputStream(new File(filename))) {
             fos.write(StringConstants.XML_HEADER.getBytes("UTF-8"));
             fos.write(StringUtilities.makeXMLDoctypeBasicTranscription(pathToDTD).getBytes("UTF-8"));
@@ -717,7 +717,7 @@ public class BasicTranscription extends AbstractTranscription {
             Logger.getLogger(BasicTranscription.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException(ex);
         }
-        System.out.println("document written.");
+        System.out.println("[BasicTranscription] Document " + filename + " written.");
         // ".." in relative paths allowed now
         getHead().getMetaInformation().resolveReferencedFile(filename, MetaInformation.NEW_METHOD);
         resolveLinks(filename);

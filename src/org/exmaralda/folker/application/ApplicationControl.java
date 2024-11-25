@@ -202,7 +202,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         // partitur configurations
         partitur.tablePopupMenu.configureForFolker();
         partitur.eventPopupMenu.configureForFolker();
-        partitur.undoEnabled = false;
+        //partitur.undoEnabled = false;
         ((CopyTextAction)(partitur.copyTextAction)).markOverlaps = true;
         ((DeleteEventAction)(partitur.deleteEventAction)).safetyCheck = true;
         partitur.pausePrefix= "(";
@@ -928,7 +928,9 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             //{"control shift RIGHT", "extendRight", partitur.extendRightAction},
             //{"control shift LEFT", "extendLeft", partitur.extendLeftAction},
             {"control alt RIGHT", "shrinkRight", partitur.shrinkRightAction},
-            {"control alt LEFT", "shrinkLeft", partitur.shrinkLeftAction}//,            
+            {"control alt LEFT", "shrinkLeft", partitur.shrinkLeftAction},
+            {"control Z", "undo", partitur.undoAction},
+            //,            
             //{"control RIGHT", "moveRight", partitur.moveRightAction},
             //{"control LEFT", "moveLeft", partitur.moveLeftAction},
             
