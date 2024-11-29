@@ -203,16 +203,25 @@ public class WhisperJSONConverter {
             if (hasWordLevel){
                 JsonNode wordsNode = segmentNode.findValue("words");
                 Iterator<JsonNode> wordIterator = wordsNode.elements();
+                int count=0;
+                double previousEnd = -1;
+                String danglingWords = "";
                 while (wordIterator.hasNext()){
                     JsonNode wordNode = wordIterator.next();
+                    String wText = wordNode.get("word").asText();
                     if (wordNode.get("start")==null){
-                        throw new IOException("Error in format.");
+                        // this can happen:
+                        // {"word": "2011"},
+                        // throw new IOException("Error in format: No start node for word " + count);
+                        // #357
+                        System.out.println("No start node for word " + count + " (" + wText + ")");
+                        danglingWords+=wText + " ";
+                        continue;
                     }
 
                     // round to miliseconds to avoid overlaps which aren't overlaps
                     double wStartTimeInSeconds = Rounder.round(wordNode.get("start").asDouble(),3);
                     double wEndTimeInSeconds = Rounder.round(wordNode.get("end").asDouble(),3);
-                    String wText = wordNode.get("word").asText();
                     
                     // this can happen, although it shouldn't
                     if (wStartTimeInSeconds > wEndTimeInSeconds){
@@ -226,6 +235,35 @@ public class WhisperJSONConverter {
                         wEndTimeInSeconds += 0.001;
                     }
                     
+                    if (danglingWords.length()>0){
+                        double danglingStart = startTimeInSeconds;
+                        if (previousEnd>=0){
+                            danglingStart = previousEnd + 0.001;
+                        }
+                        double danglingEnd = wStartTimeInSeconds - 0.001;
+                        String dStartID = "TLI_" + Double.toString(danglingStart).replace('.', '_');
+                        if (!(timeline.containsTimelineItemWithID(dStartID))){
+                            TimelineItem tli = new TimelineItem();
+                            tli.setID(dStartID);
+                            tli.setTime(danglingStart);
+                            timeline.insertAccordingToTime(tli);
+                        }
+
+                        String dEndID = "TLI_" + Double.toString(danglingEnd).replace('.', '_');
+                        if (!(timeline.containsTimelineItemWithID(dEndID))){
+                            TimelineItem tli = new TimelineItem();
+                            tli.setID(dEndID);
+                            tli.setTime(danglingEnd);
+                            timeline.insertAccordingToTime(tli);
+                        }
+
+                            wordTier.addEvent(new Event(dStartID, dEndID, danglingWords.trim()));
+                        
+                        danglingWords="";
+                        
+                    }
+                    
+                    previousEnd = wEndTimeInSeconds;
 
                     String wStartID = "TLI_" + Double.toString(wStartTimeInSeconds).replace('.', '_');
                     if (!(timeline.containsTimelineItemWithID(wStartID))){
@@ -245,6 +283,8 @@ public class WhisperJSONConverter {
                     
                     wordTier.addEvent(new Event(wStartID, wEndID, wText));
                     
+                    //System.out.println(wText + " added");
+                    
                     // 24-06-2024 : added for WhisperX
                     JsonNode scoreNode = wordNode.get("score");
                     String score = "";
@@ -252,6 +292,7 @@ public class WhisperJSONConverter {
                         score = scoreNode.asText();
                     }
                     scoreTier.addEvent(new Event(wStartID, wEndID, score));
+                    count++;
                     
 
                     

@@ -33,18 +33,21 @@ public class TestASRJSONConverter {
     }
 
     private void doit() throws IOException, JDOMException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
-        File[] jsonFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
+        /*File[] jsonFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith("_WHISPER.json");
             }            
-        });
+        });*/
+        File[] jsonFiles = {new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_04_23_ISSUE_357\\tagesschau-tagesschau_06_00_Uhr__04_07_2024-1444422770.json")};
         for (File jsonFile : jsonFiles){
             BasicTranscription bt = WhisperJSONConverter.readWhisperJSON(jsonFile);
             String outFilename = jsonFile.getName().replace(".json", ".exb");
             bt.writeXMLToFile(new File(jsonFile.getParent(), outFilename).getAbsolutePath(), "none");
             //System.out.println(bt.toXML());            
         }
+        
+        System.exit(0);
 
         jsonFiles = new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_01_13_ISSUE_119").listFiles(new FilenameFilter(){
             @Override
