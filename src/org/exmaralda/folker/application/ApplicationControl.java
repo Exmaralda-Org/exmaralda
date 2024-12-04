@@ -202,7 +202,7 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         // partitur configurations
         partitur.tablePopupMenu.configureForFolker();
         partitur.eventPopupMenu.configureForFolker();
-        //partitur.undoEnabled = false;
+        partitur.undoEnabled = false;
         ((CopyTextAction)(partitur.copyTextAction)).markOverlaps = true;
         ((DeleteEventAction)(partitur.deleteEventAction)).safetyCheck = true;
         partitur.pausePrefix= "(";

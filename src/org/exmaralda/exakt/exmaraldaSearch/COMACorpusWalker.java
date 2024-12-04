@@ -22,7 +22,7 @@ import org.exmaralda.exakt.search.SearchEvent;
  */
 public abstract class COMACorpusWalker {
     
-    private static String[] XPATH_TO_TRANSCRIPTIONS = 
+    private static final String[] XPATH_TO_TRANSCRIPTIONS = 
     {"//Transcription[Description/Key[@Name='segmented']/text()='false']/NSLink",
      "//Transcription[Description/Key[@Name='segmented']/text()='true']/NSLink",     
      "//Transcription[]/NSLink"};
@@ -37,7 +37,7 @@ public abstract class COMACorpusWalker {
     public String currentFilename;
     public String currentPath;
 
-    Vector<org.exmaralda.exakt.search.SearchListenerInterface> listeners = new Vector<org.exmaralda.exakt.search.SearchListenerInterface>();
+    Vector<org.exmaralda.exakt.search.SearchListenerInterface> listeners = new Vector<>();
 
     /** Creates a new instance of COMACorpusWalker */
     public COMACorpusWalker() {

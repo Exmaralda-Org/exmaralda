@@ -388,7 +388,7 @@ public class SubtitleConverter {
                 for (SubtitleLine l : lines4Cue){
                     VttLine line = (VttLine)l;
                     String voice = line.getVoice();
-                    System.out.println("VOICE: " + voice);
+                    //System.out.println("VOICE: " + voice);
                     List<SubtitleText> texts4Line = line.getTexts();
                     for (SubtitleText text : texts4Line){
                         String textString = text.toString();

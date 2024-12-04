@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
@@ -35,7 +36,7 @@ public class TestEXBBuilder {
             dmk.add("ELAN-Mime-Type");
             exbBuilder.setDeleteMetaKeys(dmk);
             exbBuilder.build();
-        } catch (IOException | SAXException | JexmaraldaException | JDOMException ex) {
+        } catch (IOException | SAXException | JexmaraldaException | JDOMException | FSMException ex) {
             Logger.getLogger(TestEXBBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

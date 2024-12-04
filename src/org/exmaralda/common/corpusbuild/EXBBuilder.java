@@ -18,12 +18,15 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.stream.Stream;
 import org.exmaralda.common.jdomutilities.IOUtilities;
+import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Speaker;
 import org.exmaralda.partitureditor.jexmaralda.Speakertable;
 import org.exmaralda.partitureditor.jexmaralda.UDInformationHashtable;
+import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -56,7 +59,7 @@ public class EXBBuilder {
         this.deleteMetaKeys = deleteMetaKeys;
     }
     
-    public void build() throws IOException, SAXException, JexmaraldaException, JDOMException{
+    public void build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
         List<File> exbFiles = collectEXBFiles();
         segmentEXBFiles(exbFiles);
         constructComa(exbFiles);
@@ -74,10 +77,26 @@ public class EXBBuilder {
         return result;
     }
 
-    private void segmentEXBFiles(List<File> exbFiles) throws SAXException, JexmaraldaException, IOException {
+    private void segmentEXBFiles(List<File> exbFiles) throws SAXException, JexmaraldaException, IOException, FSMException {
         for (File exbFile : exbFiles){
             BasicTranscription exb = new BasicTranscription(exbFile.getAbsolutePath());
-            SegmentedTranscription exs = exb.toSegmentedTranscription();
+            SegmentedTranscription exs;
+            switch (segmentation){
+                case "default" :
+                    exs = exb.toSegmentedTranscription();
+                    break;
+                case "GENERIC" :
+                    GenericSegmentation genericSegmentation = new GenericSegmentation();
+                    exs = genericSegmentation.BasicToSegmented(exb);
+                    break;
+                case "HIAT" :
+                    HIATSegmentation hiatSegmentation = new HIATSegmentation();
+                    exs = hiatSegmentation.BasicToSegmented(exb);
+                    break;
+                default :     
+                    exs = exb.toSegmentedTranscription();
+                    
+            }
             File exsOut = new File(exbFile.getParentFile(), exbFile.getName().replaceAll("\\.exb", "_s.exs"));
             exs.writeXMLToFile(exsOut.getAbsolutePath(), "none");
             System.out.println("[EXBBuilder]: Segmented " + exbFile.getAbsolutePath() + " --> " + exsOut.getName());
@@ -96,6 +115,12 @@ public class EXBBuilder {
         
         Element corpusDataElement = new Element("CorpusData");
         comaDocument.getRootElement().addContent(corpusDataElement);
+        
+        Element corpusDescriptionElement = new Element("Description");
+        comaDocument.getRootElement().addContent(corpusDescriptionElement);
+        corpusDescriptionElement.addContent(new Element("Key")
+                        .setAttribute("Name", "hzsk:corpusPrefix").setText(corpusName));
+        
         
         for (File exbFile : exbFiles){
             BasicTranscription exb = new BasicTranscription(exbFile.getAbsolutePath());            
@@ -207,6 +232,7 @@ public class EXBBuilder {
             int count = 0;
             for (String referencedFile : referencedFiles){
                 count++;
+                if (referencedFile.length()==0) continue;
                 Element recordingElement = new Element("Recording")
                         .setAttribute("Id", exb.getHead().getMetaInformation().getTranscriptionName()+ "_REC_" + Integer.toString(count));
                 recordingElement.addContent(new Element("Name").setText(new File(referencedFile).getName()));

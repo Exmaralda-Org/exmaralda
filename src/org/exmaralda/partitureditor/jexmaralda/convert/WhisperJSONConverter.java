@@ -293,10 +293,34 @@ public class WhisperJSONConverter {
                     }
                     scoreTier.addEvent(new Event(wStartID, wEndID, score));
                     count++;
-                    
-
-                    
                 }
+                
+                
+                // anything left?
+                if (danglingWords.length()>0){
+                    double danglingStart = startTimeInSeconds;
+                    if (previousEnd>=0){
+                        danglingStart = previousEnd + 0.001;
+                    }
+                    double danglingEnd = endTimeInSeconds;
+                    String dStartID = "TLI_" + Double.toString(danglingStart).replace('.', '_');
+                    if (!(timeline.containsTimelineItemWithID(dStartID))){
+                        TimelineItem tli = new TimelineItem();
+                        tli.setID(dStartID);
+                        tli.setTime(danglingStart);
+                        timeline.insertAccordingToTime(tli);
+                    }
+
+                    String dEndID = "TLI_" + Double.toString(danglingEnd).replace('.', '_');
+                    if (!(timeline.containsTimelineItemWithID(dEndID))){
+                        TimelineItem tli = new TimelineItem();
+                        tli.setID(dEndID);
+                        tli.setTime(danglingEnd);
+                        timeline.insertAccordingToTime(tli);
+                    }
+                    wordTier.addEvent(new Event(dStartID, dEndID, danglingWords.trim()));
+                }
+                
             }
             
         }
