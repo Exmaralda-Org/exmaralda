@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- Coordinates -->
     <groupId>org.exmaralda</groupId>
-    <artifactId>EXMARaLDA_WEB</artifactId> <!-- This is your artifactId -->
+    <artifactId>EXMARaLDA_WEB</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <!-- Metadata -->
+    <name>EXMARaLDA Web Library</name>
+    <description>A library for integrating EXMARaLDA functionality into web applications</description>
+    <url>https://github.com/Exmaralda-Org/exmaralda</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>berndmoos</id>
+            <name>Thomas Schmidt</name>
+            <email>thomas@linguisticbits.de</email>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/Exmaralda-Org/exmaralda</url>
+        <connection>scm:git:https://github.com/Exmaralda-Org/exmaralda.git</connection>
+    </scm>
+
+    <!-- Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+    </dependencies>
 </project>
