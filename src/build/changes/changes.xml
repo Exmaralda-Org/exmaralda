@@ -10,7 +10,15 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
-    <change tool="folker" type="change" version="1.3.2" date="13.08.2024">Assign times action from Partitur (issue #374)</change>
+    <change tool="partitureditor" type="change" version="1.8.1" date="01.12.2024">Make whisper import robust against words without timestamps (issue #357)</change>
+    <change tool="partitureditor" type="bug" version="1.8.1" date="16.11.2024">Fixed bug in making sure editor does not exit while saving (issue #456)</change>
+    <change tool="exakt" type="change" version="1.4.1" date="11.11.2024">Respect hidden tiers (issue #495)</change>
+    <change tool="orthonormal" type="change" version="1.0.2" date="06.05.2020">Update OrthoNormal normalisation lexicon to FOLK 2.22 (issue #74)</change>
+    <change tool="coma" type="bug" version="1.8.1" date="05.11.2024">COMA count would not see INEL segmentation (issue #497)</change>
+    <change tool="partitureditor" type="bug" version="1.8.1" date="05.11.2024">MAUS calls must go to https now (issue #496)</change>
+    <change tool="partitureditor" type="bug" version="1.8.1" date="23.10.2024">Reformat when opening transcript with hidden tiers (issue #495)</change>
+    <change tool="partitureditor" type="change" version="1.8.1" date="22.10.2024">Allow leading punctuation in double round bracket events (issue #470)</change>
+    <change tool="folker" type="change" version="1.3.2" date="14.08.2024">Assign times action from Partitur (issue #374)</change>
     <change tool="partitureditor" type="change" version="1.8.1" date="17.06.2024">Language-sensitive sentence span identification (issue #489)</change>
     <change tool="orthonormal" type="change" version="1.0.2" date="14.06.2024">Speed up processing after "Edit contribution" (issue #483)</change>
     <change tool="folker" type="change" version="1.3.2" date="14.06.2024">Context menu including assign speaker action (issue #487)</change>
