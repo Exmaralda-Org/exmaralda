@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules>
+    <rule>
+        <!-- normalisierte Formen, die in aller Regel als PTK zu taggen sind --> 
+        <match field="n">(hm|ja|mal|eigentlich|gell|halt|hä|hm|mh|jaja|m-m|na)</match>
+        <set field="pos">PTK</set>
+    </rule>
+    <rule>
+        <!-- Häsitationspartikel -->
+        <match field="n">äh</match>
+        <set field="pos">PTKHES</set>
+    </rule>
+    <rule>
+        <!-- normalisierte Formen, die in aller Regel als ITJ zu taggen sind --> 
+        <match field="n">(ah|ach|boah?|bum|e[iyh]|ha|igitt|oa?h|zack)</match>
+        <set field="pos">ITJ</set>
+    </rule>
+    <rule>
+        <!-- normalisierte Formen, die als unvollständig gekennzeichnet sind -->
+        <match field="n">[A-ZÄÖÜa-zäöüß]*\%</match>
+        <set field="pos">XY</set>
+    </rule>
+    <rule>
+        <!-- Unverständliches -->
+        <match field="word">(\+\+\+)+</match>
+        <set field="pos">XY</set>
+    </rule>
+</rules>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <level level="2" name="minimaltranskription">
+        <pattern name="FR_WORD">
+            <!--<regex>(Dr\.|'?[a-zäöüß]++|[A-ZÄÖÜ][a-zäöüß]++|[A-ZÄÖÜa-zäöüß]{2,}|[A-ZÄÖÜ]\.?)</regex>-->
+            <regex>([A-ZÄÖÜa-zäöü][A-ZÄÖÜa-zäöüß\:]*)</regex>
+            <comment>lowercase alphabetic letters, possibly interspersed with colon as lengthening symbol, possibly preceded by 6 or 7 to indicate fragment or dialect</comment>
+        </pattern>
+        <pattern name="FR_BOUNDARY">
+            <regex>\Q{/*/}\E</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="FR_ONE_PART_ANNOTATION">
+            <regex>\+[gp]\+</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="FR_TWO_PART_ANNOTATION">
+            <regex>(\+[\.\,sinzfk]|[\.\,sinzfk]\+)</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="FR_INTONATION">
+            <regex>[0-9]{1,2}</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="FR_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="FR_PUNCTUATION">            
+            <regex>[\W]</regex>
+            <comment></comment>
+        </pattern>                      
+        
+        <pattern name="FR_EMPHASIS">
+            <regex>:</regex>
+            <comment>One colon</comment>            
+        </pattern>
+        
+    </level>
+</patterns>

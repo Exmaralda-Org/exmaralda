@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />  
+  
+  <!-- ****************************************************************** -->
+  <!-- ********** ROOT AND TOP-LEVEL DOCUMENT STRUCTURE ***************** -->
+  <!-- ****************************************************************** --> 
+  
+  <xs:element name="TEI">
+    <xs:annotation>
+      <xs:documentation>The root element of the transcription document</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:idno" minOccurs="0"/>
+        <xs:element ref="tei:teiHeader"/>
+        <xs:element ref="tei:text"/>
+      </xs:sequence>
+    </xs:complexType>    
+  </xs:element>
+
+  <xs:element name="idno">
+    <xs:annotation>
+      <xs:documentation>
+        An (optional) reference to an external ID system. 
+        For AGD corpora, this will contain the DGD identifier of
+        the respective parent, e.g. FOLK_E_00001_SE_01_T_01 for the
+        transcript document as a whole.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" type="xs:NCName"/>          
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>    
+  </xs:element>
+
+  <xs:element name="teiHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:fileDesc"/>
+        <xs:element ref="tei:profileDesc"/>
+        <xs:element ref="tei:encodingDesc"/>
+        <xs:element ref="tei:revisionDesc" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="text">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:timeline"/>
+        <xs:element ref="tei:body"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:lang" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+  
+  <!-- ************************************* -->
+  <!-- ********** TIMELINE ***************** -->
+  <!-- ************************************* -->
+  
+  <xs:element name="timeline">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="2" maxOccurs="unbounded" ref="tei:when">
+          <xs:annotation>
+            <xs:documentation>timeline should contain at least two when elements</xs:documentation>
+          </xs:annotation>
+        </xs:element>      
+      </xs:sequence>
+      <xs:attribute name="unit" use="required" type="xs:string" fixed="s">
+        <xs:annotation>
+          <xs:documentation>Always give time absolute time in s(econds)</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="when">
+    <xs:complexType>
+      <xs:attribute ref="xml:id" use="required"/>
+      <xs:attribute name="interval" type="xs:decimal"/>
+      <xs:attribute name="since" type="xs:IDREF"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- ****************************************************************** -->
+  <!-- ********** BODY AND ACTUAL TRANSCRIPTION OBJECTS ***************** -->
+  <!-- ****************************************************************** -->
+  
+  <xs:element name="body">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- changed 25-08-2023: Allow empty transcripts -->
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <!-- <xs:element ref="tei:anchor"/> -->
+          <xs:element ref="tei:annotationBlock"/>
+          <xs:element ref="tei:pause"/>
+          <xs:element ref="tei:vocal"/>
+          <xs:element ref="tei:incident"/>
+          <!-- possibly further elements on the top level? -->
+        </xs:choice>
+        <!-- added 10-02-2020: allow global spanGrp at the end of the document -->
+        <xs:element ref="tei:spanGrp" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="annotationBlock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:u"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:spanGrp"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:id" use="required"/>      
+      <xs:attribute name="start" use="required" type="xs:IDREF"/>
+      <xs:attribute name="end" use="required" type="xs:IDREF"/>
+      <xs:attribute name="who" use="required" type="xs:IDREF"/>     
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="u">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="tei:seg"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="tei:anchor"/>
+          <xs:element ref="tei:w"/>
+          <xs:element ref="tei:pause"/>
+          <xs:element ref="tei:incident"/>
+          <!-- 05-07-2018: don't want this any more -->
+          <!-- <xs:element ref="tei:unclear"/> -->
+          <xs:element ref="tei:vocal"/>
+          <!-- 29-11-2018: added (for ISW) -->
+          <xs:element ref="tei:pc"/>          
+        </xs:choice>
+      </xs:choice>
+      <xs:attribute ref="xml:id" use="required"/>
+      <xs:attribute ref="xml:lang" use="optional"/>      
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="anchor">
+    <xs:complexType>
+      <xs:attribute name="synch" use="required" type="xs:IDREF"/>
+      <xs:attribute name="type" type="xs:string"/>      
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="w">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:anchor"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:id" use="required"/>
+      <xs:attribute name="type" type="xs:string"/>
+      <xs:attribute name="norm" type="xs:string"/>
+      <xs:attribute name="lemma" type="xs:string"/>
+      <xs:attribute name="pos" type="xs:string"/>
+      <xs:attribute name="phon" type="xs:string"/>
+      <xs:attribute ref="xml:lang" use="optional"/>            
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- new 26-04-2021 -->
+  <xs:simpleType name="NON-EMPTY-STRING">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- added 29-11-2018 (ISW) -->
+  <xs:element name="pc">
+    <xs:complexType>
+      <xs:simpleContent>
+        <!-- <xs:extension base="xs:string"> -->
+        <xs:extension base="tei:NON-EMPTY-STRING">
+          <xs:attribute ref="xml:id"/>
+          <xs:attribute name="type" type="xs:string"/>
+          <xs:attribute name="norm" type="xs:string"/>
+          <xs:attribute name="lemma" type="xs:string"/>
+          <xs:attribute name="pos" type="xs:string"/>
+        </xs:extension>        
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="pause">
+    <xs:complexType>
+      <xs:attribute ref="xml:id"/>
+      <xs:attribute name="start" type="xs:IDREF"/>
+      <xs:attribute name="end" type="xs:IDREF"/>
+      <xs:attribute name="type" type="xs:NCName"/>
+      <xs:attribute name="dur" type="xs:NCName"/>
+      <xs:attribute name="rend" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="incident">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:desc"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:id"/>
+      <xs:attribute name="start" type="xs:IDREF"/>
+      <xs:attribute name="end" type="xs:IDREF"/>
+      <!-- added 17-02-2021 -->
+      <xs:attribute name="who" type="xs:IDREF" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="vocal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:desc"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:id"/>
+      <xs:attribute name="start" type="xs:IDREF"/>
+      <xs:attribute name="end" type="xs:IDREF"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- 05-07-2018: don't want this any more -->
+  <!-- <xs:element name="unclear">
+    <xs:complexType>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" ref="tei:w"/>
+        </xs:sequence> -->
+        <!-- <xs:element ref="tei:choice"/> -->
+      <!-- </xs:choice>
+    </xs:complexType>
+  </xs:element> -->
+  
+  <!-- <xs:element name="choice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:seg" minOccurs="2" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> -->
+  
+  <xs:element name="seg">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="tei:anchor"/>
+        <xs:element ref="tei:w"/>
+        <xs:element ref="tei:pause"/>
+        <xs:element ref="tei:incident"/>
+        <!-- 05-07-2018: don't want this any more -->
+        <!-- <xs:element ref="tei:unclear"/> -->
+        <xs:element ref="tei:vocal"/>
+        <!-- 29-11-2018: added (for ISW) -->
+        <xs:element ref="tei:pc"/>          
+      </xs:choice>
+      <xs:attribute ref="xml:id" use="required"/>      
+      <xs:attribute name="type" type="xs:NCName"/>      
+      <xs:attribute name="subtype" type="xs:string"/> 
+      <xs:attribute ref="xml:lang" use="optional"/>            
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="desc">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">       
+          <xs:attribute name="rend" type="xs:string"/>
+          <xs:attribute ref="xml:lang" use="optional"/>                
+        </xs:extension>
+      </xs:simpleContent>         
+    </xs:complexType>    
+  </xs:element>
+
+  
+  <xs:element name="spanGrp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="tei:span"/>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+      <!-- added 28-10-2020 -->      
+      <xs:attribute name="subtype" use="optional" default="token-based">
+        <xs:simpleType>
+          <xs:restriction base="xs:NCName">
+            <xs:enumeration value="token-based"/>
+            <xs:enumeration value="time-based"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>  
+      <xs:attribute ref="xml:lang" use="optional"/>            
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="span">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:span"/>
+      </xs:sequence>
+      <xs:attribute name="from" type="xs:IDREF"/>
+      <xs:attribute name="to" type="xs:IDREF"/>
+      <!-- added 12-12-2018 -->
+      <xs:attribute name="target" type="xs:anyURI"/>
+      <!-- added 28-10-2020 -->
+      <xs:attribute name="who" use="optional" type="xs:IDREF"/> 
+      <xs:attribute ref="xml:lang" use="optional"/>            
+    </xs:complexType>
+  </xs:element>
+
+  <!-- **************************************** -->
+  <!-- ************ HEADER ELEMENTS *********** -->
+  <!-- **************************************** -->
+  
+  <xs:element name="particDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="tei:person"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="person">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:idno" minOccurs="0"/>
+        <xs:element ref="tei:persName"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:id" use="required"/>
+      <xs:attribute name="n" use="required" type="xs:NCName"/>
+      <xs:attribute name="sex" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="persName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:forename" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="tei:abbr"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="forename" type="xs:string"/>
+
+  <xs:element name="abbr" type="xs:NCName"/>
+
+ <xs:element name="fileDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:titleStmt" minOccurs="0"/>
+        <xs:element ref="tei:publicationStmt" minOccurs="0"/>
+        <xs:element ref="tei:sourceDesc"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="titleStmt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:title"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title" type="xs:string"/>
+  
+  <xs:element name="publicationStmt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:authority"/>
+        <xs:element ref="tei:availability"/>
+        <xs:element ref="tei:distributor"/>
+        <xs:element ref="tei:address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="authority">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="availability">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:licence"/>
+        <xs:element ref="tei:p"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="licence">
+    <xs:complexType>
+      <xs:attribute name="target" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="p">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="distributor">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="address">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:addrLine"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addrLine">
+    <xs:complexType/>
+  </xs:element>
+  
+  <xs:element name="sourceDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:recordingStmt"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="recordingStmt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:recording" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="recording">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:media" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element ref="tei:broadcast" minOccurs="0"/>
+        <xs:element ref="tei:equipment" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="media">
+    <xs:complexType>
+      <xs:attribute name="mimeType" use="required"/>
+      <xs:attribute name="url" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="broadcast">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:ab"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="equipment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="tei:ab"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="profileDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:particDesc"/>
+        <xs:element ref="tei:settingDesc" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="settingDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:place"/>
+        <xs:element ref="tei:setting"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="place">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="setting">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:activity"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="activity">
+    <xs:complexType/>
+  </xs:element>
+  
+  <xs:element name="encodingDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:appInfo"/>
+        <xs:element ref="tei:transcriptionDesc"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="appInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:application"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="application">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:label"/>
+        <xs:element ref="tei:desc"/>
+      </xs:sequence>
+      <xs:attribute name="ident" use="required" type="xs:NCName"/>
+      <xs:attribute name="version" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="transcriptionDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:desc"/>
+        <xs:element ref="tei:label"/>
+      </xs:sequence>
+      <xs:attribute name="ident" use="required" type="xs:NCName"/>
+      <xs:attribute name="version" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="revisionDesc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:change"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="change">
+    <xs:complexType mixed="true">
+      <xs:attribute name="when" use="required" type="xs:dateTime"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ab">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="label" type="xs:string"/>
+  
+
+</xs:schema>

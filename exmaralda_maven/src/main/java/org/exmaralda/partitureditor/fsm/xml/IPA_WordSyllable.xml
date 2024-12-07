@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : IPA_WordSyllable.xml
+    Created on : 23. Juni 2005, 09:53
+    Author     : thomas
+    Description:
+        Purpose of the document follows.
+-->
+
+<fsm name="IPA: Words and Syllables">
+	<char-set id="WordBoundaries">
+		<comment>Characters whose appearance signal the end of a word</comment>
+		<!-- Plain space character -->
+		<char><![CDATA[ ]]></char>
+	</char-set>
+	<char-set id="SyllableBoundaries">
+		<comment>Characters whose appearance signal the end of a syllable</comment>
+		<!-- Period -->
+		<char>.</char>
+	</char-set>
+	<start-state id="SegmentChainStarts"/>
+	<end-state id="SegmentChainParsedSuccessfully"/>
+	<transitions source="SegmentChainStarts">
+	<forbidden>No syllable or word boundary, no end of input allowed</forbidden>
+		<transition>
+                        <input-other/>
+                        <target id="SegmentChainOpen_WordOpen_SyllableOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="IPA:w">]]><![CDATA[<ts n="IPA:sl">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WordBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SyllableBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_WordOpen_SyllableOpen">
+	<forbidden></forbidden>
+		<transition>
+			<input-char-set id="WordBoundaries"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]><![CDATA[<nts n="IPA:wb">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SyllableBoundaries"/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="GEN:sb">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen_SyllableOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen">
+	<forbidden>No word or syllable boundaries allowed</forbidden>
+		<transition>
+			<input-char-set id="WordBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SyllableBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+                        <input-other/>
+                   	<target id="SegmentChainOpen_WordOpen_SyllableOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="IPA:w">]]><![CDATA[<ts n="IPA:sl">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_WordOpen">
+	<forbidden>No syllable or word boundary, no end of input allowed</forbidden>
+		<transition>
+			<input-char-set id="WordBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SyllableBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>                
+		<transition>
+			<input-other/>
+                   	<target id="SegmentChainOpen_WordOpen_SyllableOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="IPA:sl">]]></prefix>
+                        </output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainParsedSuccessfully">
+		<transition>
+			<input-char-set id="WordBoundaries"/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-char-set id="SyllableBoundaries"/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<transition>
+			<input-char-set id="WordBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SyllableBoundaries"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>
+

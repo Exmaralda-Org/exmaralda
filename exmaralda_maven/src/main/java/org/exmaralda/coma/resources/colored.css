@@ -1,0 +1,65 @@
+<style type="text/css" media="screen">
+h2 {
+font-size:larger;
+}
+table {
+font-family:Arial,Helvetica,sans-serif;
+font-size:10px;
+width:100%;
+}
+td {
+}
+.description {
+	background-color:#feffb0;
+	font-weight:bold;
+}
+.key{
+	background-color:#feffd7;
+}
+.keyodd{
+	background-color:#fefff0;
+}
+.keyeven{
+	background-color:#feffd0;
+}
+.speaker {
+	background-color:#ADC2D6;
+	font-size:larger;
+	font-weight:bold;
+}
+
+.roles {
+background-color:#c5b4c0;
+	text-align:right;
+}
+
+.transcription {
+background-color:#DDDDDD;
+font-weight:bold;
+}
+.file {
+background-color:#DDDDDD;
+font-weight:bold;
+}
+.language {
+background-color:#DDDDDD;
+font-weight:bold;
+}
+.recording {
+background-color:#DDDDDD;
+font-weight:bold;
+}
+.location {
+background-color:#DDDDDD;
+font-weight:bold;
+}
+.communication {
+background-color:#EBD699;
+font-size:larger;
+font-weight:bold;
+}
+a {
+text-decoration: none;
+color: black;
+} 
+</style>

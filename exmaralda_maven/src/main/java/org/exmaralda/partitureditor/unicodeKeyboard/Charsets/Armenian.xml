@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="Armenian">
+	<!-- LOWERCASE -->
+	<key>
+		<content>&#x0561;</content>
+		<description>small AYB</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0562;</content>
+		<description>small BEN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0563;</content>
+		<description>small GIM</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0564;</content>
+		<description>small DA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0565;</content>
+		<description>small ECH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0566;</content>
+		<description>small ZA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0567;</content>
+		<description>small EH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0568;</content>
+		<description>small ET</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0569;</content>
+		<description>small TO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x056A;</content>
+		<description>small ZHE</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x056B;</content>
+		<description>small INI</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x056C;</content>
+		<description>small LIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x056D;</content>
+		<description>small XEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x056E;</content>
+		<description>small CA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x056F;</content>
+		<description>small KEN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0570;</content>
+		<description>small HO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0571;</content>
+		<description>small JA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0572;</content>
+		<description>small GHAD</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0573;</content>
+		<description>small CHEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0574;</content>
+		<description>small MEN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0575;</content>
+		<description>small YI</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0576;</content>
+		<description>small NOW</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0577;</content>
+		<description>small SHA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0578;</content>
+		<description>small VO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0579;</content>
+		<description>small CHA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x057A;</content>
+		<description>small PEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x057B;</content>
+		<description>small JHEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x057C;</content>
+		<description>small RA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x057D;</content>
+		<description>small SEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x057E;</content>
+		<description>small VEW</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x057F;</content>
+		<description>small TIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0580;</content>
+		<description>small REH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0581;</content>
+		<description>small CO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0582;</content>
+		<description>small YIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0583;</content>
+		<description>small PIWR</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0584;</content>
+		<description>small KEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0585;</content>
+		<description>small OH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0586;</content>
+		<description>small FEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0587;</content>
+		<description>small ligature ECH YIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<!-- MODIFIERS -->
+	<key>
+		<content>&#x0559;</content>
+		<description>Left Half Ring</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x055A;</content>
+		<description>Apostrophe</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x055B;</content>
+		<description>Emphasis Mark (shesht)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x055C;</content>
+		<description>Exclamation Mark (batsaganchakan nshan)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x055D;</content>
+		<description>Comma (bowt)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x055E;</content>
+		<description>Question mark (hartsakan nshan)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x055F;</content>
+		<description>Abbreviation mark (patiw)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0589;</content>
+		<description>Full stop (vertsaket)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+<!--	<key>
+		<content>&#x058A;</content>
+		<description>Hyphen (yentamna)</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>-->
+	<!-- UPPERCASE -->
+	<key>
+		<content>&#x0531;</content>
+		<description>capital AYB</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0532;</content>
+		<description>capital BEN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0533;</content>
+		<description>capital GIM</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0534;</content>
+		<description>capital DA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0535;</content>
+		<description>capital ECH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0536;</content>
+		<description>capital ZA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0537;</content>
+		<description>capital EH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0538;</content>
+		<description>capital ET</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0539;</content>
+		<description>capital TO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x053A;</content>
+		<description>capital ZHE</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x053B;</content>
+		<description>capital INI</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x053C;</content>
+		<description>capital LIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x053D;</content>
+		<description>capital XEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x053E;</content>
+		<description>capital CA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x053F;</content>
+		<description>capital KEN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0540;</content>
+		<description>capital HO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0541;</content>
+		<description>capital JA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0542;</content>
+		<description>capital GHAD</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0543;</content>
+		<description>capital CHEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0544;</content>
+		<description>capital MEN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0545;</content>
+		<description>capital YI</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0546;</content>
+		<description>capital NOW</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0547;</content>
+		<description>capital SHA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0548;</content>
+		<description>capital VO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0549;</content>
+		<description>capital SHA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x054A;</content>
+		<description>capital PEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x054B;</content>
+		<description>capital JHEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x054C;</content>
+		<description>capital RA</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x054D;</content>
+		<description>capital SEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x054E;</content>
+		<description>capital VEW</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x054F;</content>
+		<description>capital TIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0550;</content>
+		<description>capital REH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0551;</content>
+		<description>capital CO</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0552;</content>
+		<description>capital YIWN</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0553;</content>
+		<description>capital PIWR</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0554;</content>
+		<description>capital KEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0555;</content>
+		<description>capital OH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0556;</content>
+		<description>capital FEH</description>
+		<font name="Arial Unicode MS" size="14" face="plain"/>
+	</key>
+</unicode-keyboard>

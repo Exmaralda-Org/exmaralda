@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.0" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+    <Property name="columns" type="int" value="1"/>
+    <Property name="rows" type="int" value="2"/>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="scaleFactorLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pixel width:  "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="pixelWidthSlider">
+          <Properties>
+            <Property name="paintLabels" type="boolean" value="true"/>
+            <Property name="paintTicks" type="boolean" value="true"/>
+            <Property name="minorTickSpacing" type="int" value="100"/>
+            <Property name="majorTickSpacing" type="int" value="400"/>
+            <Property name="minimum" type="int" value="200"/>
+            <Property name="toolTipText" type="java.lang.String" value="Breite der Partituren in Pixel"/>
+            <Property name="maximum" type="int" value="2200"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="px"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="scaleFactorLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Scale factor: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSlider" name="scaleFactorSlider">
+          <Properties>
+            <Property name="paintLabels" type="boolean" value="true"/>
+            <Property name="paintTicks" type="boolean" value="true"/>
+            <Property name="minorTickSpacing" type="int" value="20"/>
+            <Property name="majorTickSpacing" type="int" value="80"/>
+            <Property name="minimum" type="int" value="20"/>
+            <Property name="toolTipText" type="java.lang.String" value="Skalierungsfaktor"/>
+            <Property name="maximum" type="int" value="500"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="%"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

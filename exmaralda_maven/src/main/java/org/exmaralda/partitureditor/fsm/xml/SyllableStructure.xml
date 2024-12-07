@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<?xml-stylesheet type="text/xsl" href="D:\Edinburgh\D\EXMARaLDA_Stylesheets\FSM2HTML.xsl"?>
+
+<fsm name="SyllableStructure">
+	<char-set id="VOWELS">
+		<!-- front / close -->
+		<char>&#x0069;</char>
+		<!-- front / close / rounded -->
+		<char>&#x0079;</char>
+		<!-- central /close -->
+		<char>&#x0268;</char>
+		<!-- central / close / rounded -->
+		<char>&#x0289;</char>
+		<!--back / close -->
+		<char>&#x026F;</char>
+		<!-- back close / rounded -->
+		<char>&#x0075;</char>
+		<!-- front-central / close-close-mid -->
+		<char>&#x026A;</char>
+		<!-- front-central / close-close-mid / rounded -->
+		<char>&#x028F;</char>
+		<!-- central-back / close-close-mid / rounded -->
+		<char>&#x028A;</char>
+		<!-- front / close-mid -->
+		<char>&#x0065;</char>
+		<!-- front / close-mid / rounded -->
+		<char>&#x00F8;</char>
+		<!-- central / close-mid -->
+		<char>&#x0258;</char>
+		<!-- central / close-mid / rounded -->
+		<char>&#x0275;</char>
+		<!-- back / close-mid -->
+		<char>&#x0264;</char>
+		<!-- back / close-mid / rounded -->
+		<char>&#x006F;</char>
+		<!-- Schwa -->
+		<char>&#x0259;</char>
+		<!-- front / open-mid -->
+		<char>&#x025B;</char>
+		<!-- front / open-mid / rounded -->
+		<char>&#x0153;</char>
+		<!-- central / open-mid -->
+		<char>&#x025C;</char>
+		<!-- central / open-mid / rounded -->
+		<char>&#x025E;</char>
+		<!-- back / open-mid -->
+		<char>&#x028C;</char>
+		<!-- back / open-mid / rounded -->
+		<char>&#x0254;</char>
+		<!-- front-central / open-mid-open -->
+		<char>&#x00E6;</char>
+		<!-- central-back / open-mid-open -->
+		<char>&#x0250;</char>
+		<!-- central / open -->
+		<char>&#x0061;</char>
+		<!-- central / open / rounded -->
+		<char>&#x0276;</char>
+		<!-- back / open -->
+		<char>&#x0251;</char>
+		<!-- back / open / rounded -->
+		<char>&#x0252;</char>
+	</char-set>
+	<char-set id="CONSONANTS">
+		<!-- plosive / bilabial / voiceless -->
+		<char>&#x0070;</char>
+		<!-- plosive / bilabial / voiced -->
+		<char>&#x0062;</char>
+		<!-- plosive / alveolar / voiceless -->
+		<char>&#x0074;</char>
+		<!-- plosive / alveolar / voiced -->
+		<char>&#x0064;</char>
+		<!-- plosive / retroflex / voiceless -->
+		<char>&#x0288;</char>
+		<!-- plosive / retroflex / voiced -->
+		<char>&#x0256;</char>
+		<!-- plosive / palatal / voiceless -->
+		<char>c</char>
+		<!-- plosive / palatal / voiced -->
+		<char>&#x025F;</char>
+		<!-- plosive / velar / voiceless -->
+		<char>k</char>
+		<!-- plosive / velar / voiced -->
+		<char>&#x0261;</char>
+		<char>g</char>
+		<!-- plosive / uvular / voiceless -->
+		<char>&#x0071;</char>
+		<!-- plosive / uvular / voiced -->
+		<char>&#x0262;</char>
+		<!-- glottal stop -->
+		<char>&#x0294;</char>
+		<!-- nasal / bilabial -->
+		<char>&#x006D;</char>
+		<!-- nasal / labiodental -->
+		<char>&#x0271;</char>
+		<!-- nasal / alveolar -->
+		<char>n</char>
+		<!-- nasal / retroflex -->
+		<char>&#x0273;</char>
+		<!-- nasal / palatal -->
+		<char>&#x0272;</char>
+		<!-- nasal / velar -->
+		<char>&#x014B;</char>
+		<!-- nasal / uvular -->
+		<char>&#x0274;</char>
+		<!-- trill / bilabial -->
+		<char>&#x0299;</char>
+		<!-- trill / alveolar -->
+		<char>&#x0072;</char>
+		<!-- trill / uvular -->
+		<char>&#x0280;</char>
+		<!-- tap or flap / alveolar -->
+		<char>&#x027E;</char>
+		<!-- tap or flap / retroflex -->
+		<char>&#x027D;</char>
+		<!-- fricative / bilabial / voiceless -->
+		<char>&#x0278;</char>
+		<!-- fricative / bilabial / voiced -->
+		<char>&#x03B2;</char>
+		<!-- fricative / labiodental / voiceless -->
+		<char>&#x0066;</char>
+		<!-- fricative / labiodental / voiced -->
+		<char>&#x0076;</char>
+		<!-- fricative / dental / voiceless -->
+		<char>&#x03B8;</char>
+		<!-- fricative / dental / voiced -->
+		<char>&#x00F0;</char>
+		<!-- fricative / alveolar / voiceless -->
+		<char>&#x0073;</char>
+		<!-- fricative / alveolar / voiced -->
+		<char>&#x007A;</char>
+		<!-- fricative / postalveolar / voiceless -->
+		<char>&#x0283;</char>
+		<!-- fricative / postalveolar / voiced -->
+		<char>&#x0292;</char>
+		<!-- fricative / retroflex / voiceless -->
+		<char>&#x0282;</char>
+		<!-- fricative / retroflex / voiced -->
+		<char>&#x0290;</char>
+		<!-- fricative / palatal / voiceless -->
+		<char>&#x00E7;</char>
+		<!-- fricative / palatal / voiced -->
+		<char>&#x029D;</char>
+		<!-- fricative / velar / voiceless -->
+		<char>&#x0078;</char>
+		<!-- fricative / velar / voiced -->
+		<char>&#x0263;</char>
+		<!-- fricative / uvular / voiceless -->
+		<char>&#x03C7;</char>
+		<!-- fricative / uvular / voiced -->
+		<char>&#x0281;</char>
+		<!-- fricative / pharyngeal / voiceless -->
+		<char>&#x0127;</char>
+		<!-- fricative / pharyngeal / voiced -->
+		<char>&#x0295;</char>
+		<!-- fricative / glottal / voiceless -->
+		<char>&#x0068;</char>
+		<!-- fricative / glottal / voiced -->
+		<char>&#x0266;</char>
+		<!-- lateral fricative / alveolar / voiceless -->
+		<char>&#x026C;</char>
+		<!-- lateral fricative / alveolar / voiced -->
+		<char>&#x026E;</char>
+		<!-- approximant / labiodental -->
+		<char>&#x028B;</char>
+		<!-- approximant / alveolar -->
+		<char>&#x0279;</char>
+		<!-- approximant / retroflex -->
+		<char>&#x027B;</char>
+		<!-- approximant / palatal -->
+		<char>&#x006A;</char>
+		<!-- approximant / velar -->
+		<char>&#x0270;</char>
+		<!-- lateral approximant / alveolar -->
+		<char>&#x006C;</char>
+		<!-- lateral approximant / retroflex -->
+		<char>&#x026D;</char>
+		<!-- lateral approximant / palatal -->
+		<char>&#x028E;</char>
+		<!-- lateral approximant / velar -->
+		<char>&#x029F;</char>
+		<!-- ******* NON-PULMONIC CONSONANTS ****** -->
+		<!-- bilabial click -->
+		<char>&#x0298;</char>
+		<!-- dental click -->
+		<char>&#x01C0;</char>
+		<!-- alveolar click -->
+		<char>&#x01C3;</char>
+		<!-- palatoalveolar click -->
+		<char>&#x01C2;</char>
+		<!-- alveolar lateral click -->
+		<char>&#x01C1;</char>
+		<!-- bilabial implosive -->
+		<char>&#x0253;</char>
+		<!-- dental implosive -->
+		<char>&#x0257;</char>
+		<!-- palatal implosive -->
+		<char>&#x0284;</char>
+		<!-- velar implosive -->
+		<char>&#x0260;</char>
+		<!-- uvular implosive -->
+		<char>&#x029B;</char>
+		<!-- ******* AFFRICATES ******* -->
+		<!-- affricate : dz -->
+		<char>&#x02A3;</char>
+		<!-- affricate : d3 -->
+		<char>&#x02A4;</char>
+		<!-- affricate : dz, -->
+		<char>&#x02A5;</char>
+		<!-- affricate : tsch -->
+		<char>&#x02A7;</char>
+		<!-- affricate : ts -->
+		<char>&#x02A6;</char>
+		<!-- ******* OTHER SYMBOLS ******* -->
+		<!--Voiceless labial-velar fricative-->
+		<char>&#x028D;</char>
+		<!--Voiced labial-velar approximant-->
+		<char>&#x0077;</char>
+		<!--Voiced labial-palatal approximant-->
+		<char>&#x0265;</char>
+		<!--Voiced labial-palatal approximant-->
+		<char>&#x029C;</char>
+		<!--Voiced epiglottal fricative-->
+		<char>&#x02A2;</char>
+		<!--Epiglottal plosive-->
+		<char>&#x02A1;</char>
+		<!--Alveolo-palatal fricatives-->
+		<char>&#x0255;</char>
+		<char>&#x0291;</char>
+		<!--Voiced alveolar lateral flap-->
+		<char>&#x027A;</char>
+		<!--Simultaneous sch and ch-->
+		<char>&#x0267;</char>
+	</char-set>
+	<char-set id="TO_BE_COPIED">
+		<!-- Syllabic break -->
+		<char>&#x002E;</char>
+		<!-- Full stop (sometimes used instead of syllabic break symbol -->
+		<char>&#x002E;</char>
+		<!-- Lengthening -->
+		<char>&#x02D0;</char>
+		<!-- Colon (sometimes used instead of lengthening symbol) -->
+		<char>:</char>
+		<!-- Word boundary (?) -->
+		<char>*</char>
+		<!-- open angle bracket -->
+		<char><![CDATA[<]]></char>
+		<!-- close angle bracket -->
+		<char><![CDATA[>]]></char>
+		<!-- open square bracket -->
+		<char>[</char>
+		<!-- close square bracket -->
+		<char>]</char>
+		<!-- Major (intonation) group -->
+		<char>&#x2016;</char>
+	</char-set>
+	<char-set id="SYLLABIC_DIACRITIC">
+		<!-- Syllabic -->
+		<char>&#x0329;</char>
+	</char-set>
+	<char-set id="NON_SYLLABIC_DIACRITIC">
+		<!-- Non-Syllabic -->
+		<char>&#x032F;</char>
+	</char-set>
+	<char-set id="LIGATURE">
+		<!-- Linking (absence of a break)-->
+		<char>&#x203F;</char>
+	</char-set>
+	<char-set id="IGNORABLE">
+		<!-- primary stress -->
+		<char>&#x02C8;</char>
+		<!-- secondary stress -->
+		<char>&#x02CC;</char>
+		<!-- Plain space character -->
+		<char>&#x0020;</char>
+		<!-- ***** DIACRITICS ****** -->
+		<!-- diacritic: voiceless -->
+		<char>&#x0325;</char>
+		<!-- diacritic: voiced -->
+		<char>&#x032C;</char>
+		<!-- diacritic: aspirated -->
+		<char>&#x02B0;</char>
+		<!-- diacritic: more rounded -->
+		<char>&#x0339;</char>
+		<!-- diacritic: retracted -->
+		<char>&#x0314;</char>
+		<!-- diacritic: centralized -->
+		<char>&#x0308;</char>
+		<!-- diacritic: mid-centralized -->
+		<char>&#x033D;</char>
+		<!-- diacritic: rhoticity -->
+		<char>&#x02DE;</char>
+		<!-- diacritic: breathy voiced -->
+		<char>&#x0324;</char>
+		<!-- diacritic: creaky voiced -->
+		<char>&#x0330;</char>
+		<!-- diacritic: linguolabial -->
+		<char>&#x033C;</char>
+		<!-- diacritic: labialized -->
+		<char>&#x02B7;</char>
+		<!-- diacritic: palatalized -->
+		<char>&#x02B2;</char>
+		<!-- diacritic: velarized -->
+		<char>&#x02E0;</char>
+		<!-- diacritic: pharyngealized -->
+		<char>&#x02E4;</char>
+		<!-- diacritic: velarized or pharyngealized -->
+		<char>&#x0334;</char>
+		<!-- diacritic: raised -->
+		<char>&#x031D;</char>
+		<!-- diacritic: lowered -->
+		<char>&#x031E;</char>
+		<!-- diacritic: advanced tongue root -->
+		<char>&#x0318;</char>
+		<!-- diacritic: retracted tongue root -->
+		<char>&#x0319;</char>
+		<!-- diacritic: dental -->
+		<char>&#x032A;</char>
+		<!-- diacritic: apical -->
+		<char>&#x033A;</char>
+		<!-- diacritic: laminal -->
+		<char>&#x033B;</char>
+		<!-- diacritic: nasalized -->
+		<char>&#x0303;</char>
+		<!-- diacritic: nasal release -->
+		<char>&#x207F;</char>
+		<!-- diacritic: lateral release -->
+		<char>&#x02E1;</char>
+		<!-- diacritic: no audible release -->
+		<char>&#x031A;</char>
+	</char-set>
+	<start-state id="Neutral"/>
+	<end-state id="Parsed"/>
+	<transitions source="Neutral">
+		<transition>
+			<input-char-set id="VOWELS"/>
+			<target id="VowelEncountered"/>
+		</transition>
+		<transition>
+			<input-char-set id="CONSONANTS"/>
+			<target id="ConsonantEncountered"/>
+		</transition>
+		<transition>
+			<input-char-set id="LIGATURE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="NON_SYLLABIC_DIACRITIC"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SYLLABIC_DIACRITIC"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="TO_BE_COPIED"/>
+			<target id="Neutral"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="IGNORABLE"/>
+			<target id="Neutral"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Parsed"/>
+		</transition>
+	</transitions>
+	<transitions source="VowelEncountered">
+		<transition>
+			<input-char-set id="VOWELS"/>
+			<target id="VowelEncountered"/>
+			<output oo="no">
+				<prefix>V</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CONSONANTS"/>
+			<target id="ConsonantEncountered"/>
+			<output oo="no">
+				<prefix>V</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="LIGATURE"/>
+			<target id="VowelEncounteredLigatureEncountered"/>
+		</transition>
+		<transition>
+			<input-char-set id="NON_SYLLABIC_DIACRITIC"/>
+			<target id="Neutral"/>
+			<output oo="no">
+				<prefix>G</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SYLLABIC_DIACRITIC"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="TO_BE_COPIED"/>
+			<target id="Neutral"/>
+			<output oo="yes">
+				<prefix>V</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="IGNORABLE"/>
+			<target id="Neutral"/>
+			<output oo="no">
+				<prefix>V</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Parsed"/>
+			<output oo="no">
+				<prefix>V</prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="ConsonantEncountered">
+		<transition>
+			<input-char-set id="VOWELS"/>
+			<target id="VowelEncountered"/>
+			<output oo="no">
+				<prefix>C</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CONSONANTS"/>
+			<target id="ConsonantEncountered"/>
+			<output oo="no">
+				<prefix>C</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="LIGATURE"/>
+			<target id="ConsonantEncounteredLigatureEncountered"/>
+		</transition>
+		<transition>
+			<input-char-set id="NON_SYLLABIC_DIACRITIC"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SYLLABIC_DIACRITIC"/>
+			<target id="Neutral"/>
+			<output oo="no">
+				<prefix>S</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="TO_BE_COPIED"/>
+			<target id="Neutral"/>
+			<output oo="yes">
+				<prefix>C</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="IGNORABLE"/>
+			<target id="Neutral"/>
+			<output oo="no">
+				<prefix>C</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Parsed"/>
+			<output oo="no">
+				<prefix>C</prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="Parsed">
+		<transition>
+			<input-other/>
+			<target id="Parsed"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Parsed"/>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="ConsonantEncounteredLigatureEncountered">
+		<transition>
+			<input-char-set id="CONSONANTS"/>
+			<target id="Neutral"/>
+			<output oo="no">
+				<prefix>C</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="VowelEncounteredLigatureEncountered">
+		<transition>
+			<input-char-set id="VOWELS"/>
+			<target id="Neutral"/>
+			<output oo="no">
+				<prefix>V</prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

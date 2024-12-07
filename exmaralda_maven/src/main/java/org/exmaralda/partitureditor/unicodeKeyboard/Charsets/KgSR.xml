@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with UniRed by Jan Strunk (Ruhr-Universität Bochum) -->
+<unicode-keyboard name="KgSR">
+    <key>
+		<content>̣</content>   
+		<description>Kurzer Vokal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>:</content>
+		<description>Langer Vokal</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>̩</content>   
+		<description>Silbischer Konsonant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>̬</content>   
+		<description>Sonorisierter Konsonant</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>ʳ</content>   
+		<description>Vokalisiertes R</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>/</content>   
+		<description>Wortabbruch</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+    <key>
+		<content>=</content>   
+		<description>Kontraktion/Klitisierung</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>*</content>
+		<description>Pause ≈ 0,25s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>**</content>
+		<description>Pause ≈ 0,5s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>***</content>
+		<description>Pause ≈ 0,75s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[</content>
+		<description>Beginn - Überlappung</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>]</content>
+		<description>Ende - Überlappung</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>{</content>
+		<description>Beginn - Geräusch</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>}</content>
+		<description>Ende - Geräusch</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>(</content>
+		<description>Beginn - vermuteter Wortlaut</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>)</content>
+		<description>Ende - vermuteter Wortlaut</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>|</content>
+		<description>Alternative - vermuteter Wortlaut</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>?</content>
+		<description>Grenztonmuster - hoch steigend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>	
+	<key>
+		<content>,</content>
+		<description>Grenztonmuster - mittel steigend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>	
+	<key>
+		<content>-</content>
+		<description>Grenztonmuster - gleichbleibend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>	
+	<key>
+		<content>;</content>
+		<description>Grenztonmuster - mittel fallend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>	
+	<key>
+		<content>.</content>
+		<description>Grenztonmuster - tief fallend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>	
+	<key>
+		<content>́</content>
+		<description>Tonhöhenverlauf - steigend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>̀</content>
+		<description>Tonhöhenverlauf - fallend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>̌</content>
+		<description>Tonhöhenverlauf - fallend-steigend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>̂</content>
+		<description>Tonhöhenverlauf - steigend-fallend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>̄</content>
+		<description>Tonhöhenverlauf - gleichbleibend</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

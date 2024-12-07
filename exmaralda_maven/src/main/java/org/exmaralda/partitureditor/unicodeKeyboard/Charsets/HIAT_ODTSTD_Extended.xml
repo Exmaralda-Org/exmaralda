@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<unicode-keyboard name="HIAT for ODT-STD">
+	<key>
+		<content>.</content>
+		<description>Period (declarative utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>?</content>
+		<description>Question mark (interrogative utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>!</content>
+		<description>Exclamation mark (utterances with high-rising intonation)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2026;</content>
+		<description>Ellipsis (interrupted/cut-off utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02D9;</content>
+		<description>Dot above (backchannels/miscellaneous utterance type)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x203F;</content>
+		<description>Ligature (latching between utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; </content>
+		<description>Bullet point (pause &lt;0.1 seconds)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>((_._)) </content>
+		<description>Measured pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>((XXX)) </content>
+		<description>Unintelligible passage</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>/</content>
+		<description>Repaired sequence</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>[___]</content>
+		<description>&apos;Real&apos; comment in the comment tier</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+
+	<!-- (nn) tier comment list  -->
+	<key>
+		<content>clatter of tableware </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>eating </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>laughter </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>rustling </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>entering the house </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>loud noise </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>zipping </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>noise </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>footsteps </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>radio/TV noise </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>microphone noise </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+
+	<!-- Speech quality annotation (Speaker Transcription Tier) -->
+	<key>
+		<content>((laughs)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((short laugh)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((murmurs)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((sings)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((clears throat)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((swallows)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((coughs)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((inhales)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((hiccups)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+
+	<!-- Speech quality annotation (Speaker Comment Tier) -->
+	<key>
+		<content>((eats)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((laughing)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((fast)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((quietly)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((loudly)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+	<key>
+		<content>((softly)) </content>
+		<description/>
+		<font name="Arial Unicode MS" size="9" face="plain"/>
+	</key>
+
+</unicode-keyboard>

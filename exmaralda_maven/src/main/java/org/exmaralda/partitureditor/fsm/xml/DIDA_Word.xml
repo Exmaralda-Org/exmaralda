@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.5 NT (http://www.xmlspy.com) by Thomas Schmidt (Universität Hamburg) -->
+<?xml-stylesheet type="text/xsl" href="D:\Java\de\uni-hamburg\rrz\jexmaralda\fsm\xml\FSM2HTML.xsl"?>
+<fsm name="DIDA_Word">
+	<char-set id="CAPITALS">
+		<comment>capitals can only appear as part of a non-morphemic utterance</comment>
+		<char>A</char>
+		<char>B</char>
+		<char>C</char>
+		<char>D</char>
+		<char>E</char>
+		<char>F</char>
+		<char>G</char>
+		<char>H</char>
+		<char>I</char>
+		<char>J</char>
+		<char>K</char>
+		<char>L</char>
+		<char>M</char>
+		<char>N</char>
+		<char>O</char>
+		<char>P</char>
+		<char>Q</char>
+		<char>R</char>
+		<char>S</char>
+		<char>T</char>
+		<char>U</char>
+		<char>V</char>
+		<char>W</char>
+		<char>X</char>
+		<char>Y</char>
+		<char>Z</char>
+		<char>Ä</char>
+		<char>Ö</char>
+		<char>Ü</char>
+	</char-set>
+	<char-set id="PLUS">
+		<comment>a plus sign can only appear at the beginning of a speaker contribution, it marks a "schnelle Anschluss"</comment>
+		<char>+</char>
+	</char-set>
+	<char-set id="NUMBERS_AND_COMMA">
+		<comment>numbers and the comma can only appear as part of a pause or inside an unintelligible part</comment>
+		<char>0</char>
+		<char>1</char>
+		<char>2</char>
+		<char>3</char>
+		<char>4</char>
+		<char>5</char>
+		<char>6</char>
+		<char>7</char>
+		<char>8</char>
+		<char>9</char>
+		<char>,</char>
+	</char-set>
+	<char-set id="PAUSE">
+		<comment>Characters that represent a pause or that mark the beginning or end of a pause</comment>
+		<char>*</char>
+	</char-set>
+	<char-set id="WORD_SEPARATORS">
+		<comment>characters that only appear between words</comment>
+		<!-- arrow right -->
+		<char>&#x2192;</char>
+		<!-- arrow left -->
+		<char>&#x2190;</char>
+		<!-- arrow up -->
+		<char>&#x2191;</char>
+		<!-- arrow down -->
+		<char>&#x2193;</char>
+		<!-- less than -->
+		<char>&lt;</char>
+		<!-- greater than -->
+		<char>&gt;</char>
+		<!-- hyphen -->
+		<char>-</char>
+		<!-- forward slash -->
+		<char>/</char>
+	</char-set>
+	<char-set id="EQUALS_SIGN">
+		<comment>An equal sign marks a Verschleifung or a continued non-morphemic segment</comment>
+		<!-- equals sign -->
+		<char>=</char>
+	</char-set>
+	<char-set id="SPACE">
+		<comment>the space character</comment>
+		<!-- Plain space character -->
+		<char>&#x0020;</char>
+	</char-set>
+	<char-set id="OPEN_PARENTHESIS">
+		<comment>an opening parenthesis marks the beginning of an uncertain or unintelligible part</comment>
+		<char>(</char>
+	</char-set>
+	<char-set id="CLOSE_PARENTHESIS">
+		<comment>a closing parenthesis marks the end of an uncertain or unintelligible part</comment>
+		<char>)</char>
+	</char-set>
+	<char-set id="OPEN_SQUARE_BRACKET">
+		<comment>an opening square bracket marks the beginning of an omission</comment>
+		<char>[</char>
+	</char-set>
+	<char-set id="CLOSE_SQUARE_BRACKET">
+		<comment>a clsoing square bracket marks the end of an omission</comment>
+		<char>]</char>
+	</char-set>
+	<char-set id="AMPERSAND">
+		<comment>a sequence of two ampersands marks a reference in the comment tier</comment>
+		<char>&amp;</char>
+	</char-set>
+	<char-set id="PERIOD_OR_ELLIPSIS">
+		<comment>a period or an ellipsis can only appear inside an unintelligible part</comment>
+		<char>.</char>
+		<char/>
+		<!-- Three dots (ellipsis) -->
+		<char>…</char>
+	</char-set>
+	<char-set id="COLON">
+		<comment>a colon can either appear inside a word (as a symbol for lengthening) or inside a pause or an unintelligible part (as a part of a time)</comment>
+		<char>:</char>
+	</char-set>
+	<start-state id="SegmentChainStarts"/>
+	<end-state id="SegmentChainParsedSuccessfully"/>
+	<transitions source="SegmentChainStarts">
+		<forbidden>Nicht erlaubt: geschlossene Klammer, Zahl oder Komma, Doppelpunkt, Punkt oder Ellipse, Gleichheitszeichen</forbidden>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ats n="DIDA:nmä" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="SegmentChainOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ats n="DIDA:pause" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_OmissionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ats n="DIDA:om" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="SegmentChainOpen_OneAmpersandEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ats n="DIDA:ref" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="DIDA:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_NonMorphemicOpen">
+		<forbidden>Nicht erlaubt: offene Klammer, geschlossene Klammer, Zahl oder Komma, Doppelpunkt, Punkt oder Ellipse, Pausenzeichen, Prosodiezeichen, Wortbestandteil</forbidden>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen_SpaceEncountered"/>
+			<output oo="no"/>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ats>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_PauseOpen">
+		<forbidden>Nicht erlaubt: offene Klammer, geschlossene Klammer, Punkt oder Ellipse, Gleichheitszeichen, Großbuchstabe, Prosodiezeichen</forbidden>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="SegmentChainOpen_PauseOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="SegmentChainOpen_PauseOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen">
+		<forbidden>Nicht erlaubt: Zahl oder Komma, Doppelpunkt, geschlossene Klammer, Punkt oder Ellipse</forbidden>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="SegmentChainOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:pause" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:nmä" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_OmissionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:om" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="SegmentChainOpen_OneAmpersandEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:ref" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="DIDA:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_OpenParenthesisEncountered">
+		<forbidden>Nicht erlaubt: Pausenzeichen, Prosodiezeichen, offene Klammer, geschlossene Klammer, Großbuchstabe, Leerzeichen, Gleichheitszeichen</forbidden>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:unint" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:unint" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="DIDA:unint" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="DIDA:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_WordOpen">
+		<forbidden>Nicht erlaubt: Großbuchstabe, offene Klammer, geschlossene Klammer, Punkt oder Ellipse, Zahl oder Komma</forbidden>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainParsedSuccessfully">
+		<transition>
+			<input-other/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_NonMorphemicOpen_SpaceEncountered">
+		<forbidden>Nicht erlaubt: Punkt oder Ellipse, geschlossene Klammer, Zahl oder Komma, Doppelpunkt, Gleichheitszeichen</forbidden>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_NonMorphemicOpen_SpaceEncountered"/>
+			<output oo="no">
+				<prefix><![CDATA[ ]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="SegmentChainOpen_PauseOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[<ats n="DIDA:pause" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_OmissionOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[<ats n="DIDA:om" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="SegmentChainOpen_OneAmpersandEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[<ats n="DIDA:ref" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="SegmentChainOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[ ]]><![CDATA[</ats>]]><![CDATA[<ts n="DIDA:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_WordOpen_OpenParenthesisEncountered">
+		<forbidden>Nicht erlaubt: Zahl oder Komma, Punkt oder Ellipse, Pausenzeichen, offene Klammer, Großbuchstabe</forbidden>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="SegmentChainOpen_WordOpen_OpenParenthesisEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen_OpenParenthesisEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_NoWordOpen_OpenParenthesisOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="SegmentChainOpen_NoWordOpen_OpenParenthesisOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="SegmentChainOpen_NoWordOpen_OpenParenthesisOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_UnintelligibleOpen">
+		<forbidden>Nicht erlaubt: Pausenzeichen, Prosodiezeichen, offene Klammer, Großbuchstabe, Wortbestandteil</forbidden>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="SegmentChainOpen_UnintelligibleOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ats>]]><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_NoWordOpen_OpenParenthesisOpen">
+		<forbidden>Nicht erlaubt: Doppelpunkt, Gleichheitszeichen, Zahl oder Komma, Punkt oder Ellipse, Pausenzeichen, Prosodiezeichen, offene Klammer, Großbuchstabe</forbidden>
+		<transition>
+			<input-char-set id="NUMBERS_AND_COMMA"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PLUS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="WORD_SEPARATORS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_PARENTHESIS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CAPITALS"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EQUALS_SIGN"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="COLON"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_NoWordOpen_OpenParenthesisOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_PARENTHESIS"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="DIDA:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_WordOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="DIDA:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_OmissionOpen">
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD_OR_ELLIPSIS"/>
+			<target id="SegmentChainOpen_OmissionOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen_OneAmpersandEncountered">
+		<transition>
+			<input-char-set id="AMPERSAND"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

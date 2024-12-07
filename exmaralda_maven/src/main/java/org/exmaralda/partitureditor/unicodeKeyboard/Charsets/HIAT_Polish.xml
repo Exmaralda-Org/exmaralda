@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unicode-keyboard name="HIAT + Germanic languages supplement">
+	<key>
+		<content>&#x0254;</content>
+		<description>lower-mid back rounded vowel (for interjections)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0301;</content>
+		<description>m (rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0300;</content>
+		<description>m (falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x030C;</content>
+		<description>m (falling-rising tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0302;</content>
+		<description>m (rising-falling tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>m&#x0304;</content>
+		<description>m (steady tone)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0301;</content>
+		<description>Diacritic: rising tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0300;</content>
+		<description>Diacritic: falling tone</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x030C;</content>
+		<description>Diacritic: falling-rising</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0302;</content>
+		<description>Diacritic: rising-falling</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0304;</content>
+		<description>Diacritic: steady</description>
+		<font name="Arial Unicode MS" size="16" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2026;</content>
+		<description>Ellipsis (End symbol for interrupted utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x02D9;</content>
+		<description>Dot above (End symbol for modeless utterances)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2014;</content>
+		<description>m-dash (insertion)</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022;</content>
+		<description>Very short pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022;</content>
+		<description>Pause &lt;= 0.5s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x2022; &#x2022; &#x2022;</content>
+		<description>Pause &lt;= 1s</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>((_s))</content>
+		<description>Measured pause</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x203F;</content>
+		<description>Ligature</description>
+		<font name="Arial Unicode MS" size="12" face="plain"/>
+	</key>
+	<!-- START Polish Supplement Keys (Capital letters) -->
+	<key>
+		<content>&#x0104;</content>
+		<description>Ą</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0106;</content>
+		<description>Ć</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<!-- <key>
+		<content>&#x0110;</content>
+		<description>Đ</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key> -->
+	<key>
+		<content>&#x0118;</content>
+		<description>Ę</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0141;</content>
+		<description>Ł</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0143;</content>
+		<description>Ń</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00d3;</content>
+		<description>Ó</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x015a;</content>
+		<description>Ś</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0179;</content>
+		<description>Ź</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x017b;</content>
+		<description>Ż</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<!-- START Polish Supplement Keys (Small letters) -->
+	<key>
+		<content>&#x0105;</content>
+		<description>ą</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0107;</content>
+		<description>ć</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0119;</content>
+		<description>ę</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0142;</content>
+		<description>ł</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x0144;</content>
+		<description>ń</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00f3;</content>
+		<description>ó</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x015b;</content>
+		<description>ś</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x017a;</content>
+		<description>ź</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x017c;</content>
+		<description>ż</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+	<key>
+		<content>&#x00df;</content>
+		<description>ß</description>
+		<font name="Times New Roman" size="12" face="plain"/>
+	</key>
+</unicode-keyboard>

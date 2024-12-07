@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Corpus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/C:/Users/kai/Java/EXMARaLDA/src/org/exmaralda/coma/resources/comacorpus.xsd" Name="Name0" Id="ID000" Parent="ID000" uniqueSpeakerDistinction="uniqueSpeakerDistinction0" schemaVersion="schemaVersion0">
+    <DBNode>
+    </DBNode>
+    <Description>
+        <Key Name="Name1">Key0</Key>
+        <Key Name="Name2">Key1</Key>
+    </Description>
+        <CorpusData>
+                <Communication Id="ID001" Name="Name3">
+                        <Transcription Id="ID002">
+                            <Name>
+                            </Name>
+                            <File Id="ID003">
+                                <Availability>
+                                    <Available>false</Available>
+                                </Availability>
+                                <Description>
+                                </Description>
+                                <filename>filename0</filename>
+                                <mimetype>mimetype0</mimetype>
+                                <relPath>relPath0</relPath>
+                                <absPath>http://www.oxygenxml.com/</absPath>
+                                <URL>http://www.oxygenxml.com/</URL>
+                            </File>
+                            <FileStore>FileStore0</FileStore>
+                            <Filename>
+                            </Filename>
+                            <NSLink>http://www.oxygenxml.com/</NSLink>
+                            <Description>
+                                <Key Name="Name4">Key2</Key>
+                                <Key Name="Name5">Key3</Key>
+                            </Description>
+                            <Availability>
+                                <Available>false</Available>
+                                <URL>http://www.oxygenxml.com/</URL>
+                                <URL>http://www.oxygenxml.com/</URL>
+                                <Copyright>Copyright0</Copyright>
+                                <ObtainingInformation>
+                                </ObtainingInformation>
+                            </Availability>
+                            <Annotation Id="ID004" Name="Name6">
+                                <Description>
+                                </Description>
+                                <File Id="ID005">
+                                    <Availability>
+                                        <Available>false</Available>
+                                    </Availability>
+                                </File>
+                            </Annotation>
+                        </Transcription>
+                        <Transcription Id="ID006">
+                            <Name>
+                            </Name>
+                            <File Id="ID007">
+                                <Availability>
+                                    <Available>false</Available>
+                                </Availability>
+                                <Description>
+                                </Description>
+                                <filename>filename1</filename>
+                                <mimetype>mimetype1</mimetype>
+                                <relPath>relPath1</relPath>
+                                <absPath>http://www.oxygenxml.com/</absPath>
+                                <URL>http://www.oxygenxml.com/</URL>
+                            </File>
+                            <FileStore>FileStore1</FileStore>
+                            <Filename>
+                            </Filename>
+                            <NSLink>http://www.oxygenxml.com/</NSLink>
+                            <Description>
+                                <Key Name="Name7">Key4</Key>
+                                <Key Name="Name8">Key5</Key>
+                            </Description>
+                            <Availability>
+                                <Available>false</Available>
+                                <URL>http://www.oxygenxml.com/</URL>
+                                <URL>http://www.oxygenxml.com/</URL>
+                                <Copyright>Copyright1</Copyright>
+                                <ObtainingInformation>
+                                </ObtainingInformation>
+                            </Availability>
+                            <Annotation Id="ID008" Name="Name9">
+                                <Description>
+                                </Description>
+                                <File Id="ID009">
+                                    <Availability>
+                                        <Available>false</Available>
+                                    </Availability>
+                                </File>
+                            </Annotation>
+                        </Transcription>
+                        <AsocFile Id="ID010">
+                            <Name>
+                            </Name>
+                            <File Id="ID011">
+                                <Availability>
+                                    <Available>false</Available>
+                                </Availability>
+                                <Description>
+                                </Description>
+                                <filename>filename2</filename>
+                                <mimetype>mimetype2</mimetype>
+                                <relPath>relPath2</relPath>
+                                <absPath>http://www.oxygenxml.com/</absPath>
+                                <URL>http://www.oxygenxml.com/</URL>
+                            </File>
+                            <Description>
+                                <Key Name="Name10">Key6</Key>
+                                <Key Name="Name11">Key7</Key>
+                            </Description>
+                        </AsocFile>
+                        <AsocFile Id="ID012">
+                            <Name>
+                            </Name>
+                            <File Id="ID013">
+                                <Availability>
+                                    <Available>false</Available>
+                                </Availability>
+                                <Description>
+                                </Description>
+                                <filename>filename3</filename>
+                                <mimetype>mimetype3</mimetype>
+                                <relPath>relPath3</relPath>
+                                <absPath>http://www.oxygenxml.com/</absPath>
+                                <URL>http://www.oxygenxml.com/</URL>
+                            </File>
+                            <Description>
+                                <Key Name="Name12">Key8</Key>
+                                <Key Name="Name13">Key9</Key>
+                            </Description>
+                        </AsocFile>
+                </Communication>
+                <Communication Id="ID014" Name="Name14">
+                        <Setting>
+                                <Object Id="ID015">
+                                    <Name>Name15</Name>
+                                    <Description>
+                                    </Description>
+                                    <Availability>
+                                        <Available>false</Available>
+                                    </Availability>
+                                </Object>
+                                <Object Id="ID016">
+                                    <Name>Name16</Name>
+                                    <Description>
+                                    </Description>
+                                    <Availability>
+                                        <Available>false</Available>
+                                    </Availability>
+                                </Object>
+                                <Description>
+                                    <Key Name="Name17">Key10</Key>
+                                    <Key Name="Name18">Key11</Key>
+                                </Description>
+                        </Setting>
+                        <AsocFile Id="ID017">
+                            <Name>
+                            </Name>
+                            <File Id="ID018">
+                                <Availability>
+                                    <Available>false</Available>
+                                </Availability>
+                                <Description>
+                                </Description>
+                                <filename>filename4</filename>
+                                <mimetype>mimetype4</mimetype>
+                                <relPath>relPath4</relPath>
+                                <absPath>http://www.oxygenxml.com/</absPath>
+                                <URL>http://www.oxygenxml.com/</URL>
+                            </File>
+                            <Description>
+                                <Key Name="Name19">Key12</Key>
+                                <Key Name="Name20">Key13</Key>
+                            </Description>
+                        </AsocFile>
+                        <AsocFile Id="ID019">
+                            <Name>
+                            </Name>
+                            <File Id="ID020">
+                                <Availability>
+                                    <Available>false</Available>
+                                </Availability>
+                                <Description>
+                                </Description>
+                                <filename>filename5</filename>
+                                <mimetype>mimetype5</mimetype>
+                                <relPath>relPath5</relPath>
+                                <absPath>http://www.oxygenxml.com/</absPath>
+                                <URL>http://www.oxygenxml.com/</URL>
+                            </File>
+                            <Description>
+                                <Key Name="Name21">Key14</Key>
+                                <Key Name="Name22">Key15</Key>
+                            </Description>
+                        </AsocFile>
+                </Communication>
+                <Speaker Id="ID021">
+                        <KnownHuman>true</KnownHuman>
+                        <Sigle>Sigle0</Sigle>
+                </Speaker>
+                <Speaker Id="ID022">
+                        <Pseudo>Pseudo0</Pseudo>
+                        <Language Type="Type0">
+                            <LanguageCode>LanguageCode0</LanguageCode>
+                            <Description>
+                                <Key Name="Name23">Key16</Key>
+                                <Key Name="Name24">Key17</Key>
+                            </Description>
+                        </Language>
+                        <Language Type="Type1">
+                            <LanguageCode>LanguageCode1</LanguageCode>
+                            <Description>
+                                <Key Name="Name25">Key18</Key>
+                                <Key Name="Name26">Key19</Key>
+                            </Description>
+                        </Language>
+                </Speaker>
+        </CorpusData>
+</Corpus>

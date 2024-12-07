@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <phoneme x="99" y="82">
+        <unicode>p</unicode>
+        <description>voiceless bilabial plosive</description>
+    </phoneme>
+    <phoneme x="99" y="109">
+        <unicode>&#x0278;</unicode>
+        <description>voiceless bilabial fricative</description>
+    </phoneme>
+    <phoneme x="129" y="54">
+        <unicode>m</unicode>
+        <description>voiced bilabial nasal</description>
+    </phoneme>
+    <phoneme x="129" y="82">
+        <unicode>b</unicode>
+        <description>voiced bilabial plosive</description>
+    </phoneme>
+    <phoneme x="129" y="109">
+        <unicode>&#x03B2;</unicode>
+        <description>voiced bilabial fricative</description>
+    </phoneme>
+    <phoneme x="129" y="163">
+        <unicode>&#x0299;</unicode>
+        <description>voiced bilabial trill</description>
+    </phoneme>
+    <phoneme x="155" y="109">
+        <unicode>f</unicode>
+        <description>voiceless labiodental fricative</description>
+    </phoneme>
+    <phoneme x="185" y="55">
+        <unicode>&#x0271;</unicode>
+        <description>voiced labiodental nasal</description>
+    </phoneme>
+    <phoneme x="185" y="109">
+        <unicode>v</unicode>
+        <description>voiced labiodental fricative</description>
+    </phoneme>
+    <phoneme x="185" y="135">
+        <unicode>&#x028B;</unicode>
+        <description>voiced labiodental approximant</description>
+    </phoneme>
+    <phoneme x="185" y="190">
+        <unicode>&#x2C71;</unicode>
+        <description>voiced labiodental tap</description>
+    </phoneme>
+    <phoneme x="213" y="109">
+        <unicode>&#x03B8;</unicode>
+        <description>voiceless dental fricative</description>
+    </phoneme>
+    <phoneme x="236" y="109">
+        <unicode>&#x00F0;</unicode>
+        <description>voiced dental fricative</description>
+    </phoneme>
+    <phoneme x="264" y="81">
+        <unicode>t</unicode>
+        <description>voiceless alveolar plosive</description>
+    </phoneme>
+    <phoneme x="264" y="216">
+        <unicode>&#x026C;</unicode>
+        <description>voiceless alveolar lateral fricative</description>
+    </phoneme>
+    <phoneme x="264" y="109">
+        <unicode>s</unicode>
+        <description>voiceless alveolar fricative</description>
+    </phoneme>
+    <phoneme x="287" y="54">
+        <unicode>n</unicode>
+        <description>voiced alveolar nasal</description>
+    </phoneme>
+    <phoneme x="287" y="81">
+        <unicode>d</unicode>
+        <description>voiced alveolar plosive</description>
+    </phoneme>
+    <phoneme x="287" y="109">
+        <unicode>z</unicode>
+        <description>voiced alveolar fricative</description>
+    </phoneme>
+    <phoneme x="287" y="136">
+        <unicode>&#x0279;</unicode>
+        <description>voiced alveolar approximant</description>
+    </phoneme>
+    <phoneme x="287" y="163">
+        <unicode>r</unicode>
+        <description>voiced alveolar trill</description>
+    </phoneme>
+    <phoneme x="287" y="189">
+        <unicode>&#x027E;</unicode>
+        <description>voiced alveolar tap</description>
+    </phoneme>
+    <phoneme x="287" y="216">
+        <unicode>&#x026E;</unicode>
+        <description>voiced alveolar lateral fricative</description>
+    </phoneme>
+    <phoneme x="287" y="243">
+        <unicode>l</unicode>
+        <description>voiced alveolar lateral approximant</description>
+    </phoneme>
+    <phoneme x="287" y="270">
+        <unicode>&#x027A;</unicode>
+        <description>voiced alveolar lateral flap</description>
+    </phoneme>
+    <phoneme x="312" y="109">
+        <unicode>&#x0283;</unicode>
+        <description>voiceless palato-alveolar fricative</description>
+    </phoneme>
+    <phoneme x="335" y="109">
+        <unicode>&#x0292;</unicode>
+        <description>voiced palato-alveolar fricative</description>
+    </phoneme>
+    <phoneme x="362" y="82">
+        <unicode>&#x0288;</unicode>
+        <description>voiceless retroflex plosive</description>
+    </phoneme>
+    <phoneme x="362" y="109">
+        <unicode>&#x0282;</unicode>
+        <description>voiceless retroflex fricative</description>
+    </phoneme>
+    <phoneme x="390" y="55">
+        <unicode>&#x0273;</unicode>
+        <description>voiced retroflex nasal</description>
+    </phoneme>
+    <phoneme x="390" y="82">
+        <unicode>&#x0256;</unicode>
+        <description>voiced retroflex plosive</description>
+    </phoneme>
+    <phoneme x="390" y="109">
+        <unicode>&#x0291;</unicode>
+        <description>voiced retroflex fricative</description>
+    </phoneme>
+    <phoneme x="390" y="136">
+        <unicode>&#x027B;</unicode>
+        <description>voiced retroflex approximant</description>
+    </phoneme>
+    <phoneme x="390" y="190">
+        <unicode>&#x027D;</unicode>
+        <description>voiced retroflex tap</description>
+    </phoneme>
+    <phoneme x="390" y="244">
+        <unicode>&#x026D;</unicode>
+        <description>voiced retroflex lateral approximant</description>
+    </phoneme>
+    <phoneme x="419" y="81">
+        <unicode>c</unicode>
+        <description>voiceless palatal plosive</description>
+    </phoneme>
+    <phoneme x="419" y="108">
+        <unicode>&#x00E7;</unicode>
+        <description>voiceless palatal fricative</description>
+    </phoneme>
+    <phoneme x="447" y="54">
+        <unicode>&#x0272;</unicode>
+        <description>voiced palatal nasal</description>
+    </phoneme>
+    <phoneme x="447" y="81">
+        <unicode>&#x025F;</unicode>
+        <description>voiced palatal plosive</description>
+    </phoneme>
+    <phoneme x="447" y="108">
+        <unicode>&#x029D;</unicode>
+        <description>voiced palatal fricative</description>
+    </phoneme>
+    <phoneme x="447" y="135">
+        <unicode>j</unicode>
+        <description>voiced palatal approximant</description>
+    </phoneme>
+    <phoneme x="447" y="244">
+        <unicode>&#x028E;</unicode>
+        <description>voiced palatal lateral approximant</description>
+    </phoneme>
+    <phoneme x="476" y="81">
+        <unicode>k</unicode>
+        <description>voiceless velar plosive</description>
+    </phoneme>
+    <phoneme x="476" y="108">
+        <unicode>x</unicode>
+        <description>voiceless velar fricative</description>
+    </phoneme>
+    <phoneme x="503" y="54">
+        <unicode>&#x014B;</unicode>
+        <description>voiced velar nasal</description>
+    </phoneme>
+    <phoneme x="503" y="81">
+        <unicode>g</unicode>
+        <description>voiced velar plosive</description>
+    </phoneme>
+    <phoneme x="503" y="108">
+        <unicode>&#x0263;</unicode>
+        <description>voiced velar fricative</description>
+    </phoneme>
+    <phoneme x="503" y="135">
+        <unicode>&#x0270;</unicode>
+        <description>voiced velar approximant</description>
+    </phoneme>
+    <phoneme x="503" y="244">
+        <unicode>&#x029F;</unicode>
+        <description>voiced velar lateral approximant</description>
+    </phoneme>
+    <phoneme x="532" y="81">
+        <unicode>q</unicode>
+        <description>voiceless uvular plosive</description>
+    </phoneme>
+    <phoneme x="532" y="109">
+        <unicode>&#x03C7;</unicode>
+        <description>voiceless uvular fricative</description>
+    </phoneme>
+    <phoneme x="560" y="55">
+        <unicode>&#x0274;</unicode>
+        <description>voiced uvular nasal</description>
+    </phoneme>
+    <phoneme x="560" y="81">
+        <unicode>&#x0262;</unicode>
+        <description>voiced uvular plosive</description>
+    </phoneme>
+    <phoneme x="560" y="123">
+        <unicode>&#x0281;</unicode>
+        <description>voiced uvular fricative</description>
+    </phoneme>
+    <phoneme x="560" y="162">
+        <unicode>&#x0280;</unicode>
+        <description>voiced uvular trill</description>
+    </phoneme>
+    <phoneme x="588" y="109">
+        <unicode>&#x0127;</unicode>
+        <description>voiceless pharyngeal fricative</description>
+    </phoneme>
+    <phoneme x="616" y="123">
+        <unicode>&#x0295;</unicode>
+        <description>voiced pharyngeal fricative</description>
+    </phoneme>
+    <phoneme x="654" y="109">
+        <unicode>&#x029C;</unicode>
+        <description>voiceless epiglottal fricative</description>
+    </phoneme>
+    <phoneme x="669" y="81">
+        <unicode>&#x02A1;</unicode>
+        <description>epiglottal plosive</description>
+    </phoneme>
+    <phoneme x="682" y="123">
+        <unicode>&#x02A2;</unicode>
+        <description>voiced epiglottal fricative</description>
+    </phoneme>
+    <phoneme x="710" y="80">
+        <unicode>&#x0294;</unicode>
+        <description>voiceless glottal plosive</description>
+    </phoneme>
+    <phoneme x="711" y="123">
+        <unicode>h</unicode>
+        <description>voiceless glottal fricative</description>
+    </phoneme>
+    <phoneme x="739" y="123">
+        <unicode>&#x0266;</unicode>
+        <description>voiced glottal fricative</description>
+    </phoneme>
+</doc>
+

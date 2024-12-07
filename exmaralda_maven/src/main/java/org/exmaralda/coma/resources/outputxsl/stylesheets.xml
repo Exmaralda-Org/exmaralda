@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comaOutputStylesheets>
+	<stylesheet>
+		<filename>output_communications_description.xsl</filename>
+		<name>Communications with Descriptions</name>
+		<description>Outputs a table of all Communications with their Descriptions</description>
+		<outputExtension>html</outputExtension>
+		<options></options>
+	</stylesheet>
+	<stylesheet>
+		<filename>output_speaker_description.xsl</filename>
+		<name>Speakers with Descriptions</name>
+		<description>Outputs a table of all Speakers with their Descriptions</description>
+		<outputExtension>html</outputExtension>
+		<options></options>
+	</stylesheet>
+	<stylesheet>
+		<filename>output_descriptions_overview.xsl</filename>
+		<name>Metadata profile</name>
+		<description>Outputs a profile of metadata keys and values</description>
+		<outputExtension>html</outputExtension>
+		<options></options>
+	</stylesheet>
+	<stylesheet>
+		<filename>complete_inline_with_ages.xsl</filename>
+		<name>Complete inline metadata</name>
+		<description>Outputs all communication with their respective speakers inline. Tries to calculate the ages of the speakers at the time of the Communication (requires Location type='Geburt' or 'birth')</description>
+		<outputExtension>html</outputExtension>
+		<options></options>
+	</stylesheet>
+	<stylesheet>
+		<filename></filename>
+		<name>custom stylesheet</name>
+		<description>Select your own stylesheet</description>
+		<outputExtension>html</outputExtension>
+		<options></options>
+	</stylesheet>
+</comaOutputStylesheets>

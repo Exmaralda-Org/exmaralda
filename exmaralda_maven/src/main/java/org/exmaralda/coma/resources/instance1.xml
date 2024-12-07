@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Corpus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/C:/Users/kai/Java/EXMARaLDA/src/org/exmaralda/coma/resources/comacorpus.xsd" Name="Name0" Id="ID000" Parent="ID000" uniqueSpeakerDistinction="uniqueSpeakerDistinction0" schemaVersion="schemaVersion0">
+    <DBNode>
+    </DBNode>
+    <Description>
+        <Key Name="Name1">Key0</Key>
+        <Key Name="Name2">Key1</Key>
+    </Description>
+        <CorpusData>
+                <Speaker Id="ID001">
+                        <role Type="Type0" target="ID000">
+                                <Description>
+                                    <Key Name="Name3">Key2</Key>
+                                    <Key Name="Name4">Key3</Key>
+                                </Description>
+                                <Description>
+                                    <Key Name="Name5">Key4</Key>
+                                    <Key Name="Name6">Key5</Key>
+                                </Description>
+                        </role>
+                        <role Type="Type1" target="ID001">
+                                <Description>
+                                    <Key Name="Name7">Key6</Key>
+                                    <Key Name="Name8">Key7</Key>
+                                </Description>
+                                <Description>
+                                    <Key Name="Name9">Key8</Key>
+                                    <Key Name="Name10">Key9</Key>
+                                </Description>
+                        </role>
+                        <Pseudo>Pseudo0</Pseudo>
+                </Speaker>
+                <Speaker Id="ID002">
+                        <role Type="Type2" target="ID000">
+                                <Description>
+                                    <Key Name="Name11">Key10</Key>
+                                    <Key Name="Name12">Key11</Key>
+                                </Description>
+                                <Description>
+                                    <Key Name="Name13">Key12</Key>
+                                    <Key Name="Name14">Key13</Key>
+                                </Description>
+                        </role>
+                        <role Type="Type3" target="ID002">
+                                <Description>
+                                    <Key Name="Name15">Key14</Key>
+                                    <Key Name="Name16">Key15</Key>
+                                </Description>
+                                <Description>
+                                    <Key Name="Name17">Key16</Key>
+                                    <Key Name="Name18">Key17</Key>
+                                </Description>
+                        </role>
+                        <Pseudo>Pseudo1</Pseudo>
+                </Speaker>
+                <Speaker Id="ID003">
+                        <KnownHuman>true</KnownHuman>
+                        <Language Type="Type4">
+                            <LanguageCode>LanguageCode0</LanguageCode>
+                            <Description>
+                                <Key Name="Name19">Key18</Key>
+                                <Key Name="Name20">Key19</Key>
+                            </Description>
+                        </Language>
+                        <Language Type="Type5">
+                            <LanguageCode>LanguageCode1</LanguageCode>
+                            <Description>
+                                <Key Name="Name21">Key20</Key>
+                                <Key Name="Name22">Key21</Key>
+                            </Description>
+                        </Language>
+                </Speaker>
+                <Speaker Id="ID004">
+                        <Sex>Sex0</Sex>
+                        <Description>
+                            <Key Name="Name23">Key22</Key>
+                            <Key Name="Name24">Key23</Key>
+                        </Description>
+                </Speaker>
+        </CorpusData>
+</Corpus>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <!-- <meta http-equiv="refresh" content="1; URL=javascript:history.back()"/> -->
+    <title>SeekPlayer</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      function Werteliste(querystring) {
+        if(querystring == '') return;
+        var wertestring = unescape(querystring);
+        wertestring = wertestring.slice(1);
+        var paare = wertestring.split("&");
+        for (var i=0; i < paare.length; i++) {
+          var name = paare[i].substring(0, paare[i].indexOf("="));
+          var wert = paare[i].substring(paare[i].indexOf("=")+1, paare[i].length);
+          this[name] = wert;
+        }
+      }
+
+      var wliste = new Werteliste(window.location.search);
+      var seeker = 'seeker.swf?id=' + wliste['id'] + '&pos=' + wliste['pos'];
+
+      document.write('<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"');
+      document.write('        codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"');
+      document.write('        width="1" height="1" id="player" align="middle">');
+      document.write('  <param name="allowScriptAccess" value="sameDomain" />');
+      document.write('  <param name="movie" value="' + seeker + '" />');
+      document.write('  <param name="quality" value="high" />');
+      document.write('  <param name="bgcolor" value="#ffffff" />');
+      document.write('  <param name="swliveconnect" value="true" />');
+      document.write('  <EMBED src="' + seeker + '" quality="high"');
+      document.write('         swLiveConnect=true');
+      document.write('         bgcolor="#ffffff" width="1" height="1"');
+      document.write('         name="player" align="middle"');
+      document.write('         allowScriptAccess="sameDomain"');
+      document.write('         type="application/x-shockwave-flash"');
+      document.write('         pluginspage="http://www.macromedia.com/go/getflashplayer"></EMBED>');
+      document.write('</object>');
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- created on 10-01-2008 -->
+<?xml-stylesheet type="text/xsl" href="FSM2HTML.xsl"?>
+<fsm name="E4: Utterances and Words">
+	<char-set id="UtteranceEndSymbols">
+		<comment>Characters that signal the end of an utterance</comment>
+		<!-- Period -->
+		<char>.</char>
+		<!-- Exclamation mark -->
+		<char>!</char>
+		<!-- Question mark -->
+		<char>?</char>
+		<!-- Forward slash, moved here from miscellaneous punctuation on 08-April-2008 -->
+		<char>/</char>                
+	</char-set>
+	<char-set id="Period">
+		<comment></comment>
+		<!-- Period -->
+		<char>.</char>
+	</char-set>
+	<char-set id="SpaceSymbols">
+		<comment>Characters that follow a word, an utterance end symbol or a miscellaneous punctuation symbol</comment>
+		<!-- Plain space character -->
+		<char>&#x0020;</char>
+	</char-set>
+	<char-set id="OpenParenthesis">
+		<comment>Characters whose double appearance signals the beginning of a non-phonological segment</comment>
+		<!-- Open round bracket -->
+		<char>(</char>
+	</char-set>
+	<char-set id="CloseParenthesis">
+		<comment>Characters whose double appearance signals the end of a non-phonological segment</comment>
+		<!-- Closed round bracket -->
+		<char>)</char>
+	</char-set>
+	<char-set id="MiscellaneousPunctuation">
+		<!-- Apostrophe -->
+		<char>&apos;</char>
+		<!-- Colon -->
+		<char>:</char>
+		<!-- Semicolon -->
+		<char>;</char>
+		<!-- Comma -->
+		<char>,</char>
+		<!-- Hyphen -->
+		<char>-</char>
+		<!-- Underscore -->
+		<char>_</char>
+		<!-- Quote -->
+		<char>"</char>
+	</char-set>
+	<start-state id="TurnStarts"/>
+	<end-state id="TurnParsedSuccessfully"/>
+	<transitions source="TurnStarts">
+		<comment>Segment chain starts</comment>
+		<forbidden>Keine schließende Klammer, kein Äußerungsendzeichen am Turn-Beginn, keine leeren Kinder-Turns</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<ats n="E4:ell">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+                        <target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<ts n="E4:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen">
+		<comment>An utterance is open, but no word, no non-phonological segment and no open parenthesis has been encountered</comment>
+		<forbidden>Schließende Klammer ohne zugehörige öffnende Klammer, Turnende ohne Äußerungsendzeichen</forbidden>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+            <target id="Error"/>
+			<!-- <target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output> -->
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ats n="E4:ell">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="E4:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_OpenParenthesisEncountered">
+		<comment>An utterance is open, but no word, no non-phonological segment. One open parenthesis has been encountered, so maybe a non-phonological segment starts</comment>
+		<forbidden>Nach offener Klammer: nur Auslassungspunkte</forbidden>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+            <!-- <target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output> -->
+		</transition>
+		<transition>
+			<input-char-set id="Period"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisAndPeriodEncountered"/>
+			<output oo="yes"/>				
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+			<!-- <target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes"/>-->			
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_OpenParenthesisAndPeriodEncountered">
+		<comment>An utterance is open, but no word, no non-phonological segment. One open parenthesis has been encountered, so maybe a non-phonological segment starts</comment>
+		<forbidden>Nach offener Klammer und Auslassungspunkt: nur weitere Auslassungspunkte oder schließende Klammer</forbidden>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+            <target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="Period"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisAndPeriodEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+			<!-- <target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes"/>-->
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_WordOpen">
+		<comment>An utterance is open and a word is open</comment>
+		<forbidden>Schließende Klammer ohne zugehörige öffnende Klammer, Turnende ohne Äußerungsendzeichen</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ats n="E4:ell">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+            <target id="Error"/>
+            <!-- changed 27-01-2010: don't allow turn end without utterance end symbol -->
+			<!-- <target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output> -->
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="TurnOpen_UtteranceOpen_UtteranceEndEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen_UtteranceOpen_UtteranceEndEncountered">
+		<comment>An utterance is open, but no word, no non-phonological segment. An utterance end symbol has been encountered. Either a space will follow or a new utterance will begin or the turn ends here.</comment>
+		<forbidden>Keine schließende Klammer, kein weiteres Äußerungsendzeichen erlaubt</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<!-- changed for version 1.2.7. -->
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<ats n="E4:ell">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<ts n="E4:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TurnOpen">
+		<comment>A turn is open, but no utterance, no word, no non-phonological segment, and no open parenthesis or utterance end symbol has been encountered</comment>
+		<forbidden>Keine schließende Klammer, kein weiteres Äußerungsendzeichen erlaubt</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen_OpenParenthesisEncountered"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<ats n="E4:ip">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+                        <output oo="yes">
+				<prefix><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<nts n="E4:ip">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="E4:u" s="" e="">]]><![CDATA[<ts n="E4:w" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<comment>An error has been encountered</comment>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="UtteranceEndSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SpaceSymbols"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="MiscellaneousPunctuation"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="TurnParsedSuccessfully">
+		<comment>The segment chain has been parsed successfully</comment>
+		<transition>
+			<input-end/>
+			<target id="TurnParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+</fsm>

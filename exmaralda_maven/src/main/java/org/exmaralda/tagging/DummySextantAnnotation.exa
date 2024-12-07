@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotation xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xsi:noNamespaceSchemaLocation="http://xml.exmaralda.org/sextant.xsd"
+    xml:base="FILL_ME_IN"
+    target="FILL_ME_IN"
+    id="FILL_ME_IN"
+    targetId="n/a"
+    type="FILL_ME_IN">
+    <description>
+        <Key Name="created">*** fill me in ***</Key>
+        <Key Name="showSegment">sc</Key>
+        <Key Name="tagSegment">HIAT:w</Key>
+    </description>
+    <!-- actual annotations go here -->
+</annotation>

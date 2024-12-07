@@ -1,0 +1,81 @@
+/*
+ * PartiturMenuBar.java
+ *
+ * Created on 9. Maerz 2004, 09:31
+ */
+
+package org.exmaralda.partitureditor.partiture.menus;
+
+import javax.swing.*;
+import org.exmaralda.partitureditor.partiture.*;
+
+/**
+ *
+ * @author  thomas
+ */
+public class PartiturMenuBar extends javax.swing.JMenuBar {
+    
+    /** the file menu */
+    public FileMenu fileMenu;
+    /** the edit menu */
+    public EditMenu editMenu;
+    /** the view menu */
+    public ViewMenu viewMenu;
+    /** the transcription menu */
+    public TranscriptionMenu transcriptionMenu;
+    /** the tier menu */
+    public TierMenu tierMenu;
+    /** the event menu */
+    public EventMenu eventMenu;
+    /** the timeline menu */
+    public TimelineMenu timelineMenu;
+    /** the format menu */
+    public FormatMenu formatMenu;
+    /** the segmentation menu */
+    //public SegmentationMenu segmentationMenu;
+    public WebServicesMenu clarinMenu;
+    
+    /** project specific menus */
+    public LegacyMenu legacyMenu;
+    /*public SinMenu sinMenu;
+    public ODTSTDMenu odtstdMenu;
+    public InelMenu inelMenu;*/
+    
+    /** Creates a new instance of PartiturMenuBar */
+    public PartiturMenuBar(PartitureTableWithActions table) {
+        
+        fileMenu = new FileMenu(table);
+        editMenu = new EditMenu(table);
+        viewMenu = new ViewMenu(table);
+        transcriptionMenu = new TranscriptionMenu(table);
+        tierMenu = new TierMenu(table);
+        eventMenu = new EventMenu(table);
+        timelineMenu = new TimelineMenu(table);
+        formatMenu = new FormatMenu(table);       
+        //segmentationMenu = new SegmentationMenu(table);
+        clarinMenu = new WebServicesMenu(table);
+        
+        legacyMenu = new LegacyMenu(table);
+        /*sinMenu = new SinMenu(table);
+        odtstdMenu = new ODTSTDMenu(table);
+        inelMenu = new InelMenu(table);*/
+        
+        add(fileMenu);
+        add(editMenu);            
+        add(viewMenu);
+        add(transcriptionMenu);
+        add(tierMenu);
+        add(eventMenu);
+        add(timelineMenu);
+        add(formatMenu);
+        add(clarinMenu);
+        //add(segmentationMenu);
+
+        add(legacyMenu);
+        /*add(sinMenu);
+        add(odtstdMenu);
+        add(inelMenu);*/
+        
+    }
+    
+}

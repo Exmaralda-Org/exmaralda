@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+    Document   : SFBCorpora.xml
+    Created on : 28. Oktober 2009, 11:50
+    Author     : thomas
+    Description:
+        Purpose of the document follows.
+-->
+
+<corpus-list>
+    <corpus name="Z2: Demo Corpus" url="http://www1.uni-hamburg.de/exmaralda/files/demokorpus/EXMARaLDA_DemoKorpus.coma"/>
+    <corpus name="Z2: HAMATAC" url="http://www1.uni-hamburg.de/exmaralda/files/maptask/MAPTASK.coma"/>
+    <corpus name="K2: DiK (Interpreting in Hospitals)" url="http://www1.uni-hamburg.de/exmaralda/files/k2-korpus/K2_Corpus.xml"/>
+    <corpus name="K5: Scandinavian Semicommunication" url="http://www1.uni-hamburg.de/exmaralda/files/k5-korpus/Skand_Semiko_With_Transcriptions_Anonymized.coma"/>
+    <corpus name="K6: CoSi (Consecutive/Simultaneous Interpreting)" url="http://www1.uni-hamburg.de/exmaralda/files/k6-korpus/COSI.coma"/>
+    <corpus name="E3: PAIDUS (German and Spanish child language)" url="http://www1.uni-hamburg.de/exmaralda/files/e3-korpus/PAIDUS.coma"/>
+    <corpus name="E5: SKOBI/ENDFAS GOLD Standard (Turkish/German bilinguals)" url="http://www1.uni-hamburg.de/exmaralda/files/e5-goldstandard/ENDFAS_SKOBI_GoldStandard.coma"/>
+    <corpus name="E5: Rehbein-SKOBI / Rehbein-ENDFAS (Turkish/German bilinguals)" url="http://www1.uni-hamburg.de/exmaralda/files/e5-korpus/ENDFAS_SKOBI.coma"/>
+    <corpus name="E2: BIPODE (Portuguese/German bilinguals)" url="http://www1.uni-hamburg.de/exmaralda/files/e2-bipode/BIPODE.coma"/>
+    <corpus name="E2: DUFDE (French/German bilinguals)" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/DUFDE.coma"/>
+    <corpus name="E2: DUFDE - Annika" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Annika/DUFDE_Annika.coma"/>
+    <corpus name="E2: DUFDE - Caroline" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Caroline/DUFDE_Caroline.coma"/>
+    <corpus name="E2: DUFDE - Christophe" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Christophe/DUFDE_Christophe.coma"/>
+    <corpus name="E2: DUFDE - Francois" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Francois/DUFDE_Francois.coma"/>
+    <corpus name="E2: DUFDE - Ivar" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Ivar/DUFDE_Ivar.coma"/>
+    <corpus name="E2: DUFDE - Pascal" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Pascal/DUFDE_Pascal.coma"/>
+    <corpus name="E2: DUFDE - Pierre" url="http://www1.uni-hamburg.de/exmaralda/files/e2-dufde/Pierre/DUFDE_Pierre.coma"/>
+</corpus-list>

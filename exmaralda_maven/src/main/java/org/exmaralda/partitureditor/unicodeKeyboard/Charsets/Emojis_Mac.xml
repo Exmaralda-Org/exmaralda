@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Emojis for Mac font: Apple Color Emoji
+    full Emoji list, v13.1 from: https://unicode.org/emoji/charts/full-emoji-list.html
+    symbols: 1-107 (without 38, 43 and 60) and 157-187
+    symbols not supported by browser: 14, 22, 56, 57, 58, 63, 64, 76, 91, 163, 164
+-->
+<unicode-keyboard name="Emoji">
+    <key>
+        <content>&#x1F600;</content>
+        <description>grinning face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F603;</content>
+        <description>grinning face with big eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F604;</content>
+        <description>grinning face with smiling eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F601;</content>
+        <description>beaming face with smiling eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F606;</content>
+        <description>grinning squinting face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F605;</content>
+        <description>grinning face with sweat</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F923;</content>
+        <description>rolling on the floor laughing</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F602;</content>
+        <description>face with tears of joy</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F642;</content>
+        <description>slightly smiling face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F643;</content>
+        <description>upside-down face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F609;</content>
+        <description>winking face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F60A;</content>
+        <description>smiling face with smiling eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F607;</content>
+        <description>smiling face with halo</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F970;</content>
+        <description>smiling face with hearts</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x1F60D;</content>
+        <description>smiling face with heart-eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F929;</content>
+        <description>star-struck</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F618;</content>
+        <description>face blowing a kiss</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F617;</content>
+        <description>kissing face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x263A;</content>
+        <description>smiling face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F61A;</content>
+        <description>kissing face with closed eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F619;</content>
+        <description>kissing face with smiling eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F972;</content>
+        <description>smiling face with tear</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x1F60B;</content>
+        <description>face savoring food</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F61B;</content>
+        <description>face with tongue</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F61C;</content>
+        <description>winking face with tongue</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92A;</content>
+        <description>zany face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F61D;</content>
+        <description>squinting face with tongue</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F911;</content>
+        <description>money-mouth face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F917;</content>
+        <description>hugging face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92D;</content>
+        <description>face with hand over mouth</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92B;</content>
+        <description>shushing face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F914;</content>
+        <description>thinking face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F910;</content>
+        <description>zipper-mouth face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92B;</content>
+        <description>face with raised eyebrow</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F610;</content>
+        <description>neutral face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F611;</content>
+        <description>expressionless face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F636;</content>
+        <description>face without mouth</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F60F;</content>
+        <description>smirking face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F612;</content>
+        <description>unamused face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F644;</content>
+        <description>face with rolling eyes</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F62C;</content>
+        <description>grimacing face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F925;</content>
+        <description>lying face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F60C;</content>
+        <description>relieved face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F614;</content>
+        <description>pensive face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F62A;</content>
+        <description>sleepy face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F924;</content>
+        <description>drooling face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F634;</content>
+        <description>sleeping face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F637;</content>
+        <description>face with medical mask</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F912;</content>
+        <description>face with thermometer</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F915;</content>
+        <description>face with head-bandage</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F922;</content>
+        <description>nauseated face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92E;</content>
+        <description>face vomiting</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F927;</content>
+        <description>sneezing face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F975;</content>
+        <description>hot face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F976;</content>
+        <description>cold face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F974;</content>
+        <description>woozy face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x1F635;</content>
+        <description>knocked-out face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92F;</content>
+        <description>exploding head</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F920;</content>
+        <description>cowboy hat face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F973;</content>
+        <description>partying face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F978;</content>
+        <description>disguised face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x1F60E;</content>
+        <description>smiling face with sunglasses</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F913;</content>
+        <description>nerd face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F9D0;</content>
+        <description>face with monocle</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F615;</content>
+        <description>confused face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F61F;</content>
+        <description>worried face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F641;</content>
+        <description>slightly frowning face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x2639;</content>
+        <description>frowning face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F62E;</content>
+        <description>face with open mouth</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F62F;</content>
+        <description>hushed face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F632;</content>
+        <description>astonished face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F633;</content>
+        <description>flushed face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F97A;</content>
+        <description>pleading face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x1F626;</content>
+        <description>frowning face with open mouth</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F627;</content>
+        <description>anguished face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F628;</content>
+        <description>fearful face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F630;</content>
+        <description>anxious face with sweat</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F625;</content>
+        <description>sad but relieved face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F622;</content>
+        <description>crying face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F62D;</content>
+        <description>loudly crying face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F631;</content>
+        <description>face screaming in fear</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F616;</content>
+        <description>confounded face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F623;</content>
+        <description>persevering face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F61E;</content>
+        <description>disappointed face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F613;</content>
+        <description>downcast face with sweat</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F629;</content>
+        <description>weary face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F62B;</content>
+        <description>tired face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F971;</content>
+        <description>yawning face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x1F624;</content>
+        <description>face with steam from nose</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F621;</content>
+        <description>pouting face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F620;</content>
+        <description>angry face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F92C;</content>
+        <description>face with symbols on mouth</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F608;</content>
+        <description>smiling face with horns</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F47F;</content>
+        <description>angry face with horns</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F480;</content>
+        <description>skull</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x2620;</content>
+        <description>skull and crossbones</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F4A9;</content>
+        <description>pile of poo</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F921;</content>
+        <description>clown face</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F479;</content>
+        <description>ogre</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F47A;</content>
+        <description>goblin</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F47B;</content>
+        <description>ghost</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F47D;</content>
+        <description>alien</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F47E;</content>
+        <description>alien monster</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F916;</content>
+        <description>robot</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F44B;</content>
+        <description>waving hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F91A;</content>
+        <description>raised back of hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F590;</content>
+        <description>hand with fingers splayed</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x270B;</content>
+        <description>raised hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F596;</content>
+        <description>vulcan salute</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F44C;</content>
+        <description>OK hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F90C;</content>
+        <description>pinched fingers</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <!-- not supported by browser
+    <key>
+        <content>&#x1F90F;</content>
+        <description>pinching hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    -->
+    <key>
+        <content>&#x270C;</content>
+        <description>victory hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F91E;</content>
+        <description>crossed fingers</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F91F;</content>
+        <description>love-you gesture</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F918;</content>
+        <description>sign of the horns</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F919;</content>
+        <description>call me hand</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F448;</content>
+        <description>backhand index pointing left</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F449;</content>
+        <description>backhand index pointing right</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F446;</content>
+        <description>backhand index pointing up</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F595;</content>
+        <description>middle finger</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F447;</content>
+        <description>backhand index pointing down</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x261D;</content>
+        <description>index pointing up</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F44D;</content>
+        <description>thumbs up</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F44E;</content>
+        <description>thumbs down</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x270A;</content>
+        <description>raised fist</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F44A;</content>
+        <description>oncoming fist</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F91B;</content>
+        <description>left-facing fist</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F91C;</content>
+        <description>right-facing fist</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F44F;</content>
+        <description>clapping hands</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F64C;</content>
+        <description>raising hands</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F450;</content>
+        <description>open hands</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F932;</content>
+        <description>palms up together</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F91D;</content>
+        <description>handshake</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+    <key>
+        <content>&#x1F64F;</content>
+        <description>folded hands</description>
+        <font name="Apple Color Emoji" size="20" face="plain"/>
+    </key>
+</unicode-keyboard>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns>
+    <level level="2" name="minimaltranskription">
+        <pattern name="PF_WORD">
+            <!--<regex>(Dr\.|'?[a-zäöüß]++|[A-ZÄÖÜ][a-zäöüß]++|[A-ZÄÖÜa-zäöüß]{2,}|[A-ZÄÖÜ]\.?)</regex>-->
+            <regex>(VfB|Dr\.|([dz]')?[A-ZÄÖÜ'][a-zäöüß']++|[A-ZÄÖÜa-zäöüß']{2,}|[a-zäöüß']++|[A-ZÄÖÜ]\.?)</regex>
+            <comment>any sequence of alphabetic letters, possibly preceded by an apostrophe or a single capital letter followed by a period, or the abbreviation Dr.</comment>
+        </pattern>
+        <pattern name="PF_BOUNDARY">
+            <!-- ((1) Ja, (1)) -->
+            <regex>\Q{/*/}\E</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_NON_PHO_1">
+            <!-- ((1) Ja, (1)) -->
+            <regex>\(\(1\)|\(1\)\)</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_NON_PHO_2">            
+            <!-- ((2)Lachen(2)) -->
+            <regex>\(\(2\)[\dA-ZÄÖÜa-zäöüß\?\.\,\;\=\-\:\'\! ]+\(2\)\)</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_NON_PHO_3">            
+            <!-- ((2)Lachen(2)) -->
+            <regex>\(\(3\)[\dA-ZÄÖÜa-zäöüß\?\.\,\;\=\-\:\'\! ]+\(3\)\)</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_INTERRUPT">            
+            <regex>\.{3,}</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_HESITATE">            
+            <regex>\.\.</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_UNINTELLIGIBLE">            
+            <regex>-{3,}</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_FALSE_START">            
+            <regex>--</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_INLINE_OVERLAP">            
+            <regex>[\(\)]</regex>
+            <comment></comment>
+        </pattern>
+        <pattern name="PF_SPACE">
+            <regex> </regex>
+            <comment>the space symbol</comment>
+        </pattern>
+        <pattern name="PF_PUNCTUATION">            
+            <regex>[\W]</regex>
+            <comment></comment>
+        </pattern>        
+    </level>
+</patterns>

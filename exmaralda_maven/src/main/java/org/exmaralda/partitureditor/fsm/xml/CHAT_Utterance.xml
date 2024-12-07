@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="D:\Java\de\uni-hamburg\rrz\jexmaralda\fsm\xml\FSM2HTML.xsl"?>
+<fsm name="CHAT_Utterances">
+	<char-set id="PERIOD">
+		<char>.</char>
+	</char-set>
+	<char-set id="QUESTION_MARK">
+		<char>?</char>
+	</char-set>
+	<char-set id="EXCLAMATION_MARK">
+		<char>!</char>
+	</char-set>
+	<char-set id="SPACE">
+		<!-- Plain space character -->
+		<char>&#x0020;</char>
+	</char-set>
+	<char-set id="DIGIT">
+		<!-- Digits 0..9 -->
+		<char>0</char>
+		<char>1</char>
+		<char>2</char>
+		<char>3</char>
+		<char>4</char>
+		<char>5</char>
+		<char>6</char>
+		<char>7</char>
+		<char>8</char>
+		<char>9</char>		
+	</char-set>
+	<char-set id="PAUSE_SYMBOL">
+		<char>#</char>		
+	</char-set>
+	<char-set id="PAUSE_FLOATING_POINT">
+		<char>_</char>		
+	</char-set>
+	<char-set id="OPEN_SQUARE_BRACKET">
+		<char>[</char>            
+        </char-set>
+        <char-set id="CLOSE_SQUARE_BRACKET">
+		<char>]</char>            
+        </char-set>
+	<start-state id="SegmentChainStarts"/>
+	<end-state id="SegmentChainParsedSuccessfully"/>
+	<transitions source="SegmentChainStarts">
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_UtteranceOpen_SquareBracketOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<!-- added 20-May-2008 -->
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<!-- end added 20-May-2008 -->		
+	</transitions>
+	<transitions source="SegmentChainOpen_UtteranceOpen">
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<!-- added 20-May-2008 -->
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>		
+		<!-- end added 20-May-2008 -->		
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_UtteranceOpen_SquareBracketOpen"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="QuestionMarkEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="ExclamationMarkEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="OnePeriodEncountered"/>
+			<output oo="yes"/>
+		</transition>
+	</transitions>
+	<transitions source="QuestionMarkEncountered">
+		<!-- added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="UtteranceEndSymbolEncountered_PauseSymbolEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>		
+		<!-- end added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>                
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="ExclamationMarkEncountered">
+		<!-- added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="UtteranceEndSymbolEncountered_PauseSymbolEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>		
+		<!-- end added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>                
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="QuestionMarkEncountered"/>
+			<output oo="yes"/>
+		</transition>                
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="OnePeriodEncountered">
+		<!-- added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="UtteranceEndSymbolEncountered_PauseSymbolEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>		
+		<!-- end added 20 May 2008 -->
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>                                
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="TwoPeriodsEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ts>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="TwoPeriodsEncountered">
+		<!-- added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="Error"/>
+		</transition>		
+		<!-- end added 20 May 2008 -->
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>                
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="QuestionMarkEncountered"/>
+			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainOpen">
+		<!-- added 20 May 2008 -->
+		<transition>
+			<input-char-set id="PAUSE_SYMBOL"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="DIGIT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PAUSE_FLOATING_POINT"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>		
+		<!-- end added 20 May 2008 -->		
+		<transition>
+			<input-char-set id="PERIOD"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="QUESTION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="EXCLAMATION_MARK"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="SPACE"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_UtteranceOpen_SquareBracketOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+			</output>
+		</transition>
+	</transitions>
+	<transitions source="Error">
+		<transition>
+			<input-other/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+	</transitions>
+	<transitions source="SegmentChainParsedSuccessfully">
+		<transition>
+			<input-end/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainParsedSuccessfully"/>
+		</transition>
+	</transitions>
+        <transitions source="SegmentChainOpen_UtteranceOpen_SquareBracketOpen">
+		<transition>
+			<input-char-set id="OPEN_SQUARE_BRACKET"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CLOSE_SQUARE_BRACKET"/>
+			<target id="SegmentChainOpen_UtteranceOpen"/>
+             			<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="SegmentChainOpen_UtteranceOpen_SquareBracketOpen"/>
+             		<output oo="yes"/>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>                
+        </transitions>
+        <transitions source="UtteranceEndSymbolEncountered_PauseSymbolEncountered">
+    		<transition>
+    			<input-char-set id="DIGIT"/>
+    			<target id="UtteranceEndSymbolEncountered_InsidePause"/>	
+    			<output oo="yes"/>
+    		</transition>	
+        		<transition>
+        			<input-char-set id="PAUSE_FLOATING_POINT"/>
+        			<target id="UtteranceEndSymbolEncountered_InsidePause"/>	
+        			<output oo="yes"/>
+        		</transition>
+	        	<transition>
+	        		<input-char-set id="PAUSE_SYMBOL"/>
+	        		<target id="Error"/>        			
+	        	</transition>
+	        	<transition>
+	        		<input-end/>
+	        		<target id="SegmentChainParsedSuccessfully"/>
+	        		<output oo="no">
+	        			<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+	        		</output>
+	        	</transition>
+	        	<transition>
+	        		<input-char-set id="SPACE"/>
+	        		<target id="SegmentChainOpen"/>
+	        		<output oo="yes">
+	        			<suffix><![CDATA[</ts>]]></suffix>
+	        		</output>
+	        	</transition>
+	        	<transition>
+	        		<input-other/>
+	        		<target id="SegmentChainOpen_UtteranceOpen"/>
+	        		<output oo="yes">
+	        			<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+	        		</output>
+	        	</transition>
+        </transitions>	
+        <transitions source="UtteranceEndSymbolEncountered_InsidePause">
+        	<transition>
+        		<input-char-set id="DIGIT"/>
+        		<target id="UtteranceEndSymbolEncountered_InsidePause"/>	
+        		<output oo="yes"/>
+        	</transition>	
+        	<transition>
+        		<input-char-set id="PAUSE_FLOATING_POINT"/>
+        		<target id="UtteranceEndSymbolEncountered_InsidePause"/>	
+        		<output oo="yes"/>
+        	</transition>
+        	<transition>
+        		<input-char-set id="PAUSE_SYMBOL"/>
+        		<target id="Error"/>        			
+        	</transition>
+        	<transition>
+        		<input-end/>
+        		<target id="SegmentChainParsedSuccessfully"/>
+        		<output oo="no">
+        			<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+        		</output>
+        	</transition>
+        	<transition>
+        		<input-char-set id="SPACE"/>
+        		<target id="SegmentChainOpen"/>
+        		<output oo="yes">
+        			<suffix><![CDATA[</ts>]]></suffix>
+        		</output>
+        	</transition>
+        	<transition>
+        		<input-other/>
+        		<target id="SegmentChainOpen_UtteranceOpen"/>
+        		<output oo="yes">
+        			<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]></prefix>
+        		</output>
+        	</transition>
+        </transitions>
+</fsm>

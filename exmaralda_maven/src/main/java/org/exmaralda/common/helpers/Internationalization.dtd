@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT internationalization (languages, translations)>
+<!ELEMENT languages (language+)>
+<!ELEMENT language EMPTY>
+<!ATTLIST language
+		short ID #REQUIRED
+		long CDATA #REQUIRED
+>
+<!ELEMENT translations (subdomain+)>
+<!ELEMENT subdomain (subdomain+ | item+)>
+<!ATTLIST subdomain
+		name CDATA #IMPLIED>
+<!ELEMENT item (translation+)>
+<!ATTLIST item
+	id CDATA #REQUIRED>
+<!ELEMENT translation EMPTY>
+<!ATTLIST translation 
+	lang IDREF #REQUIRED
+	trans CDATA #REQUIRED>

@@ -1,0 +1,753 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<h1>HIAT: Utterances and Words</h1>
+<h2>Character Sets</h2>
+<table>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="UtteranceEndSymbols">UtteranceEndSymbols</a></td><td><b>.</b><span style="color:silver"> | </span><b>!</b><span style="color:silver"> | </span><b>?</b><span style="color:silver"> | </span><b>&hellip;</b><span style="color:silver"> | </span><b>&#729;</b><span style="color:silver"> | </span></td>
+</tr>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="SpaceSymbols">SpaceSymbols</a></td><td><b> </b><span style="color:silver"> | </span></td>
+</tr>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="Quote">Quote</a></td><td><b>"</b><span style="color:silver"> | </span></td>
+</tr>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="OpenParenthesis">OpenParenthesis</a></td><td><b>(</b><span style="color:silver"> | </span></td>
+</tr>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="CloseParenthesis">CloseParenthesis</a></td><td><b>)</b><span style="color:silver"> | </span></td>
+</tr>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="MiscellaneousPunctuation">MiscellaneousPunctuation</a></td><td><b>'</b><span style="color:silver"> | </span><b>:</b><span style="color:silver"> | </span><b>;</b><span style="color:silver"> | </span><b>,</b><span style="color:silver"> | </span><b>-</b><span style="color:silver"> | </span><b>_</b><span style="color:silver"> | </span><b>&#8255;</b><span style="color:silver"> | </span><b>&mdash;</b><span style="color:silver"> | </span><b>/</b><span style="color:silver"> | </span></td>
+</tr>
+<tr>
+<td style="font-family:'Times New Roman'; font-weight:bold"><a name="PauseSymbols">PauseSymbols</a></td><td><b>&bull;</b><span style="color:silver"> | </span><b>&middot;</b><span style="color:silver"> | </span></td>
+</tr>
+</table>
+<p></p>
+<h2>Transitions</h2>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnStarts">TurnStarts</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">Segment chain starts</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No parentheses closing, No utterance end symbol, No end of input allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, but no word, no non-phonological segment and no open parenthesis has been encountered</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Everything allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;/ts&gt;<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_UtteranceEndEncountered">TurnOpen_UtteranceOpen_UtteranceEndEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_OpenParenthesisEncountered</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, but no word, no non-phonological segment. One open parenthesis has been encountered, so maybe a non-phonological segment starts</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Everything allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="sc" s="" e=""&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>#closeUtterence;&lt;/ts&gt;<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_UtteranceEndEncountered">TurnOpen_UtteranceOpen_UtteranceEndEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open and a word is open</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No opening quote allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;/ts&gt;&lt;/ts&gt;<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_UtteranceEndEncountered">TurnOpen_UtteranceOpen_UtteranceEndEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_UtteranceEndEncountered">TurnOpen_UtteranceOpen_UtteranceEndEncountered</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, but no word, no non-phonological segment. An utterance end symbol has been encountered. Either a space will follow or a new utterance will begin or the turn ends here.</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No closed parenthesis, no further utterance end symbol allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;/ts&gt;<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;&lt;/ts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen">TurnOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ts n="HIAT:u" s="" e=""&gt;&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open and a non-phonological segment has started</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No end of input, no open parenthesis, no pause symbol allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ats&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_CloseParenthesisEncountered">TurnOpen_UtteranceOpen_CloseParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_NonphoOpen">TurnOpen_UtteranceOpen_NonphoOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen">TurnOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">A turn is open, but no utterance, no word, no non-phonological segment, and no open parenthesis or utterance end symbol has been encountered</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No close parenthesis, no utterance end symbol allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:u" s="" e=""&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:u" s="" e=""&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:u" s="" e=""&gt;&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_WordOpen">TurnOpen_UtteranceOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_CloseParenthesisEncountered">TurnOpen_UtteranceOpen_CloseParenthesisEncountered</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, a non-phonological segment is open and an open parenthesis has been encountered</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Only close parenthesis allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, but no word and no non-phonological segment, and a quotation mark has been encountered earlier</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No end of input allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_WordOpen">TurnOpen_UtteranceOpen_QuoteOpen_WordOpen</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_QuoteOpen_WordOpen">TurnOpen_UtteranceOpen_QuoteOpen_WordOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, a word is open, and a quotation mark has been encountered earlier</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No end of input allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_WordOpen">TurnOpen_UtteranceOpen_QuoteOpen_WordOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ts&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered">TurnOpen_UtteranceOpen_QuoteOpen_OpenParenthesisEncountered</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, but no word and no non-phonological segment, a quotation mark has been encountered earlier, and one open parenthesis has been encountered, so maybe a non-phonological segment starts</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No end of input allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ats n="HIAT:non-pho" s="" e=""&gt;<br>-<br>&lt;/ats&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen">TurnOpen_UtteranceOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;&lt;ats n="HIAT:non-pho" s="" e=""&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;ts n="HIAT:w" s="" e=""&gt;<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_WordOpen">TurnOpen_UtteranceOpen_QuoteOpen_WordOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, a quotation mark has been encountered earlier and a non-phonological segment has started</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">No end of input, no open parenthesis, no pause symbol allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>-<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen">TurnOpen_UtteranceOpen_QuoteOpen_NonphoOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;/ats&gt;&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen_CloseParenthesisEncountered">TurnOpen_UtteranceOpen_QuoteOpen_CloseParenthesisEncountered</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnOpen_UtteranceOpen_QuoteOpen_CloseParenthesisEncountered">TurnOpen_UtteranceOpen_QuoteOpen_CloseParenthesisEncountered</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An utterance is open, a quotation mark has been encountered earlier, a non-phonological segment is open and an open parenthesis has been encountered</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic">Only close parenthesis allowed</span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>&lt;nts n="HIAT:ip"&gt;<br>-<br>&lt;/nts&gt;</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnOpen_UtteranceOpen_QuoteOpen">TurnOpen_UtteranceOpen_QuoteOpen</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="Error">Error</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">An error has been encountered</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic"></span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#OpenParenthesis">OpenParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#CloseParenthesis">CloseParenthesis</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#UtteranceEndSymbols">UtteranceEndSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#SpaceSymbols">SpaceSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#PauseSymbols">PauseSymbols</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#MiscellaneousPunctuation">MiscellaneousPunctuation</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:yellow"><a href="#Quote">Quote</a></span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+</table>
+<br>
+<hr>
+<span style="font-family:'Times New Roman'; font-weight:bold"><a name="TurnParsedSuccessfully">TurnParsedSuccessfully</a></span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal">The segment chain has been parsed successfully</span>
+<br>
+<span style="font-family:'Times New Roman'; font-weight:normal; font-style:italic"></span>
+<br>
+<br>
+<table align="center" style="border:3px solid black">
+<tr>
+<th style="border:1px solid black">Input</th><th style="border:1px solid black">Output</th><th style="border:1px solid black">Target</th>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:red">END OF INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#TurnParsedSuccessfully">TurnParsedSuccessfully</a></td>
+</tr>
+<tr>
+<td style="font-size:8pt; border:1px solid black"><span style="background-color:lime">OTHER INPUT</span></td><td style="font-size:8pt; border:1px solid black"><b>
+<br>x<br>
+</b></td><td style="font-size:8pt; border:1px solid black"><a href="#Error">Error</a></td>
+</tr>
+</table>
+<br>
+<hr>
+</body>
+</html>
