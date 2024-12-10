@@ -211,6 +211,8 @@
       <xs:attribute name="end" type="xs:IDREF"/>
       <!-- added 17-02-2021 -->
       <xs:attribute name="who" type="xs:IDREF" use="optional"/>
+      <!-- added 10-12-2024 (issue # 502) -->
+      <xs:attribute name="type" type="xs:NCName" use="optional"/>
     </xs:complexType>
   </xs:element>
   
