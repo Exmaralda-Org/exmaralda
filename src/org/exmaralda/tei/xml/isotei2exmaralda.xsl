@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:tei="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="xs"
-    version="2.0">
-    
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    exclude-result-prefixes="xs" version="2.0">
+
     <xsl:param name="TRANSCRIPTION_SYSTEM">
         <!-- <transcriptionDesc ident="cGAT" version="2014"> -->
         <xsl:choose>
@@ -14,13 +12,15 @@
             <xsl:otherwise>GENERIC</xsl:otherwise>
         </xsl:choose>
     </xsl:param>
-    
+
     <xsl:template match="/">
         <basic-transcription>
             <head>
                 <meta-information>
-                    <project-name></project-name>
-                    <transcription-name><xsl:value-of select="//tei:title"/></transcription-name>
+                    <project-name/>
+                    <transcription-name>
+                        <xsl:value-of select="//tei:title"/>
+                    </transcription-name>
                     <xsl:for-each select="//tei:recording">
                         <xsl:for-each select="tei:media">
                             <referenced-file>
@@ -31,13 +31,17 @@
                     <ud-meta-information>
                         <xsl:if test="//tei:TEI/tei:idno">
                             <ud-information>
-                                <xsl:attribute name="attribute-name"><xsl:value-of select="//tei:TEI/tei:idno/@type"/></xsl:attribute>
+                                <xsl:attribute name="attribute-name">
+                                    <xsl:value-of select="//tei:TEI/tei:idno/@type"/>
+                                </xsl:attribute>
                                 <xsl:value-of select="//tei:TEI/tei:idno"/>
-                            </ud-information>                            
-                        </xsl:if>                           
+                            </ud-information>
+                        </xsl:if>
                     </ud-meta-information>
                     <comment/>
-                    <transcription-convention><xsl:value-of select="//tei:transcriptionDesc/@ident"/></transcription-convention>
+                    <transcription-convention>
+                        <xsl:value-of select="//tei:transcriptionDesc/@ident"/>
+                    </transcription-convention>
                 </meta-information>
                 <speakertable>
                     <xsl:for-each select="//tei:person">
@@ -58,7 +62,9 @@
                         -->
                         <speaker>
                             <xsl:attribute name="id" select="@xml:id"/>
-                            <abbreviation><xsl:value-of select="@n"/></abbreviation>
+                            <abbreviation>
+                                <xsl:value-of select="@n"/>
+                            </abbreviation>
                             <sex value="u"/>
                             <languages-used/>
                             <l1/>
@@ -66,12 +72,14 @@
                             <ud-speaker-information>
                                 <xsl:if test="tei:idno">
                                     <ud-information>
-                                        <xsl:attribute name="attribute-name"><xsl:value-of select="tei:idno/@type"/></xsl:attribute>
+                                        <xsl:attribute name="attribute-name">
+                                            <xsl:value-of select="tei:idno/@type"/>
+                                        </xsl:attribute>
                                         <xsl:value-of select="tei:idno"/>
                                     </ud-information>
                                 </xsl:if>
                             </ud-speaker-information>
-                            <comment/>                            
+                            <comment/>
                         </speaker>
                     </xsl:for-each>
                 </speakertable>
@@ -89,31 +97,60 @@
                 <xsl:for-each-group select="//tei:annotationBlock" group-by="@who">
                     <tier type="t" category="v">
                         <xsl:attribute name="id" select="concat('TIE_V_', current-grouping-key())"/>
-                        <xsl:attribute name="speaker" select="current-grouping-key()"></xsl:attribute>
+                        <xsl:attribute name="speaker" select="current-grouping-key()"/>
                         <xsl:for-each select="current-group()">
                             <xsl:apply-templates select="descendant::tei:u"/>
                         </xsl:for-each>
                     </tier>
-                    
-                    <xsl:for-each select="distinct-values(current-group()/descendant::tei:spanGrp/@type)">
+
+                    <xsl:for-each
+                        select="distinct-values(current-group()/descendant::tei:spanGrp/@type)">
                         <xsl:variable name="TYPE" select="current()"/>
                         <tier type="a">
                             <xsl:attribute name="category" select="current()"/>
-                            <xsl:attribute name="id" select="concat('TIE_' , current(), '_', current-grouping-key())"/>
-                            <xsl:attribute name="speaker" select="current-grouping-key()"></xsl:attribute>
+                            <xsl:attribute name="id"
+                                select="concat('TIE_', current(), '_', current-grouping-key())"/>
+                            <xsl:attribute name="speaker" select="current-grouping-key()"/>
                             <xsl:for-each select="current-group()">
-                                <xsl:apply-templates select="descendant::tei:spanGrp[@type=$TYPE]/tei:span"/>
+                                <xsl:apply-templates
+                                    select="descendant::tei:spanGrp[@type = $TYPE]/tei:span"/>
                             </xsl:for-each>
-                        </tier>                            
+                        </tier>
                     </xsl:for-each>
                 </xsl:for-each-group>
                 <!-- ******************************** -->
                 <!-- ******************************** -->
                 <!-- ******************************** -->
+                <!-- 10-12-2024, new for #503 -->
+                <xsl:for-each-group select="//tei:body/tei:incident[@who]" group-by="@who">
+                    <xsl:variable name="WHO" select="current-grouping-key()"/>
+                    <xsl:for-each-group select="current-group()" group-by="@type">
+                        <tier type="d">
+                            <xsl:attribute name="category" select="current-grouping-key()"/>
+                            <xsl:attribute name="id"
+                                select="concat('TIE_', $WHO, '_', current-grouping-key())"/>
+                            <xsl:attribute name="speaker" select="$WHO"/>
+                            <xsl:apply-templates select="current-group()"/>
+                        </tier>
+                    </xsl:for-each-group>
+                </xsl:for-each-group>
+                
+                <xsl:for-each-group select="//tei:body/tei:incident[not(@who) and @type]" group-by="@type">
+                    <tier type="d">
+                        <xsl:attribute name="category" select="current-grouping-key()"/>
+                        <xsl:attribute name="id"
+                            select="concat('TIE_', 'GLOBAL', '_', current-grouping-key())"/>
+                        <xsl:apply-templates select="current-group()"/>
+                    </tier>
+                </xsl:for-each-group>
+                <!-- ******************************** -->
+                <!-- ******************************** -->
+                <!-- ******************************** -->
                 <!-- check if there are nv events or pauses not belonging to a speaker -->
-                <xsl:if test="//tei:body/tei:incident | //tei:body/tei:pause">
+                <xsl:if test="//tei:body/tei:incident[not(@who) and not(@type)] | //tei:body/tei:pause">
                     <tier type="d" category="nn" id="TIE_GLOBAL_NN">
-                        <xsl:apply-templates select="//tei:body/tei:incident | //tei:body/tei:pause"/>
+                        <xsl:apply-templates select="//tei:body/tei:incident[not(@who)] | //tei:body/tei:pause"
+                        />
                     </tier>
                 </xsl:if>
                 <!-- ******************************** -->
@@ -125,12 +162,12 @@
                         <xsl:attribute name="category" select="@type"/>
                         <xsl:apply-templates select="tei:span"/>
                     </tier>
-                        
-                </xsl:for-each>                
+
+                </xsl:for-each>
             </basic-body>
-        </basic-transcription>                
+        </basic-transcription>
     </xsl:template>
-    
+
     <xsl:template match="tei:when">
         <!-- 
             <when interval="0.0" xml:id="TLI_0" since="TLI_0"/>
@@ -142,9 +179,9 @@
                 <xsl:attribute name="time" select="@interval"/>
             </xsl:if>
         </tli>
-        
+
     </xsl:template>
-    
+
     <!-- changed 11-02-2023 : only for segs with no further child segs -->
     <!-- <xsl:template match="tei:seg/tei:anchor[following-sibling::tei:anchor]"> -->
     <xsl:template match="tei:seg[not(tei:seg)]/tei:anchor[following-sibling::tei:anchor]">
@@ -154,56 +191,66 @@
             <xsl:value-of select="following-sibling::text()[1]"/>
         </event>
     </xsl:template>
-    
+
     <xsl:template match="tei:span">
         <!-- <tei:span from="TLI_1224" to="TLI_1225">fʏnf vɔlt </tei:span> -->
         <event>
             <xsl:attribute name="start" select="@from"/>
             <xsl:attribute name="end" select="@to"/>
-            <xsl:value-of select="text()"/>            
+            <xsl:value-of select="text()"/>
         </event>
     </xsl:template>
-    
+
     <xsl:template match="tei:seg/text()"/>
-    
+
     <xsl:template match="tei:body/tei:incident">
         <event>
             <xsl:attribute name="start" select="@start"/>
             <xsl:attribute name="end" select="@end"/>
             <xsl:choose>
-                <xsl:when test="tei:desc/@rend"><xsl:value-of select="tei:desc/@rend"/></xsl:when>
-                <xsl:when test="contains(tei:desc, '((')"><xsl:value-of select="tei:desc"/></xsl:when>
+                <xsl:when test="tei:desc/@rend">
+                    <xsl:value-of select="tei:desc/@rend"/>
+                </xsl:when>
+                <xsl:when test="contains(tei:desc, '((')">
+                    <xsl:value-of select="tei:desc"/>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:text>((</xsl:text>
                     <xsl:value-of select="tei:desc"/>
                     <xsl:text>))</xsl:text>
                 </xsl:otherwise>
-            </xsl:choose>            
+            </xsl:choose>
         </event>
     </xsl:template>
-    
+
     <xsl:template match="tei:body/tei:pause">
         <event>
             <xsl:attribute name="start" select="@start"/>
             <xsl:attribute name="end" select="@end"/>
             <xsl:choose>
                 <!-- <pause xml:id="p495" rend="(0.71)" dur="PT0.71S" start="TLI_950" end="TLI_951"/>  -->
-                <xsl:when test="@rend"><xsl:value-of select="@rend"/></xsl:when>
+                <xsl:when test="@rend">
+                    <xsl:value-of select="@rend"/>
+                </xsl:when>
                 <xsl:otherwise>
-                    <xsl:variable name="DURATION" select="substring-after(substring-before(@dur,'S'), 'PT')"/>
+                    <xsl:variable name="DURATION"
+                        select="substring-after(substring-before(@dur, 'S'), 'PT')"/>
                     <xsl:choose>
-                        <xsl:when test="$TRANSCRIPTION_SYSTEM='cGAT' or $TRANSCRIPTION_SYSTEM='GAT'">(<xsl:value-of select="$DURATION"/>)</xsl:when>
-                        <xsl:when test="$TRANSCRIPTION_SYSTEM='HIAT'">((<xsl:value-of select="$DURATION"/>s))</xsl:when>
+                        <xsl:when
+                            test="$TRANSCRIPTION_SYSTEM = 'cGAT' or $TRANSCRIPTION_SYSTEM = 'GAT'"
+                                >(<xsl:value-of select="$DURATION"/>)</xsl:when>
+                        <xsl:when test="$TRANSCRIPTION_SYSTEM = 'HIAT'">((<xsl:value-of
+                                select="$DURATION"/>s))</xsl:when>
                         <xsl:otherwise>(<xsl:value-of select="$DURATION"/>)</xsl:otherwise>
-                    </xsl:choose>                
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
         </event>
     </xsl:template>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 </xsl:stylesheet>

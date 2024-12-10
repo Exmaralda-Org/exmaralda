@@ -31,9 +31,24 @@ public class TagDirectoryISOTEI {
     //public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
 
-    public TagDirectoryISOTEI() {
+    public String xpathToTokens;
+    public boolean applyPP;
+    public TreeTagger tt;
+    PostProcessingRules ppr;
+    
+    public TagDirectoryISOTEI() throws IOException, JDOMException {
+        this(TTC, PF, ENC, OPT, TreeTaggableISOTEITranscription.XPATH_NO_XY, true);
     }
     
+    public TagDirectoryISOTEI(String treeTaggerDirectory, String parameterFile, String encoding, String[] treeTaggerOptions, String xpathToTokens, boolean applyPP) throws IOException, JDOMException {
+        this.xpathToTokens = xpathToTokens;
+        this.applyPP = applyPP;
+        
+        tt = new TreeTagger(treeTaggerDirectory, parameterFile, encoding, treeTaggerOptions);      
+        tt.verbose = false;
+        ppr = new PostProcessingRules();
+        ppr.read(PostProcessingRules.FOLK_RULES);
+    }
 
 
 
@@ -63,13 +78,14 @@ public class TagDirectoryISOTEI {
             Logger.getLogger(TagDirectoryISOTEI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
 
     void doit(String[] args) throws IOException, JDOMException {
         System.out.println("=================================");
         String inputDir = args[0];
         String outputDir = args[1];
-        String xpathToTokens = TreeTaggableISOTEITranscription.XPATH_NO_XY;
-        boolean applyPP = true;
+
         if (args.length>2){
             TTC = args[2];
             PF = args[3];
@@ -84,6 +100,8 @@ public class TagDirectoryISOTEI {
             if ("NO_DUMMIES".equals(args[6])){
                 xpathToTokens = TreeTaggableISOTEITranscription.XPATH_NO_DUMMIES;
             }
+            tt = new TreeTagger(TTC, PF, ENC, OPT);      
+            tt.verbose = false;
         }
         File in = new File(inputDir);
         File out = new File(outputDir); 
@@ -97,8 +115,6 @@ public class TagDirectoryISOTEI {
                 f.delete();
             }        
         }
-        TreeTagger tt = new TreeTagger(TTC, PF, ENC, OPT);      
-        tt.verbose = false;
         File[] transcriptFiles = in.listFiles(new FilenameFilter(){
             @Override
             public boolean accept(File dir, String name) {
@@ -106,7 +122,7 @@ public class TagDirectoryISOTEI {
             }               
         });
 
-        PostProcessingRules ppr = new PostProcessingRules();
+        ppr = new PostProcessingRules();
         ppr.read(PostProcessingRules.FOLK_RULES);
         
         CombinedPostProcessingRules pprCombined = new CombinedPostProcessingRules();
@@ -162,8 +178,49 @@ public class TagDirectoryISOTEI {
             }
             System.out.println("=================================");
             count2++;
-        }
+        }                
+    }
+    
+    public void tagFile(File input, File output) throws JDOMException, IOException{
+            Document trDoc = FileIO.readDocumentFromLocalFile(input);
+            
+            // get rid of all existing attributes for pos and lemma
+            List l = XPath.selectNodes(trDoc, "//@lemma|//@pos|//@p-pos");
+            for (Object o : l){
+                Attribute a = (Attribute)o;
+                a.detach();
+            }
+            File intermediate = File.createTempFile("ISO_TEI","TMP");
+            intermediate.deleteOnExit();
+            FileIO.writeDocumentToLocalFile(intermediate, trDoc);
+            
+            System.out.println("[TagDirectoryISOTEI] Tagging " + input.getName());
+            TreeTaggableISOTEITranscription ttont = new TreeTaggableISOTEITranscription(intermediate, true);
+            ttont.setXPathToTokens(xpathToTokens);
+                        
+            File tempOutput = File.createTempFile("ISO_TEI","TMP");
+            System.out.println("[TagDirectoryISOTEI] " + tempOutput.getAbsolutePath() + " created.");
+            tempOutput.deleteOnExit();
+            tt.tag(ttont, tempOutput);
+            System.out.println("[TagDirectoryISOTEI] Tagging done");
+            SextantISOTEIIntegrator soi = new SextantISOTEIIntegrator(intermediate.getAbsolutePath());
+            soi.integrate(tempOutput.getAbsolutePath());
+            System.out.println("[TagDirectoryISOTEI] Writing " + output.getAbsolutePath());
+            soi.writeDocument(output.getAbsolutePath());
+
+            
+            if (applyPP){
+                Document doc = FileIO.readDocumentFromLocalFile(output);
                 
+                // "Ordinary" Post Processing Rules : 1:1
+                int count = ppr.applyISOTEI(doc);
+                System.out.println("[TagDirectoryISOTEI] Applied 1:1 post processing rules on " + count + " elements. " );
+                
+                FileIO.writeDocumentToLocalFile(output, doc);
+            }
+            
+            tempOutput.delete();
+        
     }
     
 }

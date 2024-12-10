@@ -129,7 +129,7 @@ public class TEIConverter extends AbstractConverter {
         String result = sf.applyInternalStylesheetToString(EXMARaLDA2GENERIC_ISO_TEI_XSL, bt.toXML());
         Document teiDoc = IOUtilities.readDocumentFromString(result);
         setDocLanguage(teiDoc, language);        
-        setTranscriptionDesc(teiDoc, "-", "-");
+        setTranscriptionDesc(teiDoc, "unspecified", "unspecified");
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
         System.out.println("[TEIConverter] Non segmented ISO TEI File written to " + path);
     }
@@ -390,6 +390,9 @@ public class TEIConverter extends AbstractConverter {
             }
             bt.getHead().getMetaInformation().setReferencedFiles(correctedReferencedFiles);
             
+            // new 10-12-2024
+            String[] canonicalTierOrder = bt.getBody().makeCanonicalTierOrder(bt.getHead().getSpeakertable().getAllSpeakerIDs());
+            bt.getBody().reorderTiers(canonicalTierOrder);
             
             return bt;
         } catch (JDOMException | SAXException | JexmaraldaException | ParserConfigurationException | TransformerException ex) {

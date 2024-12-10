@@ -338,7 +338,7 @@
     </xsl:template>
     
     <xsl:template match="event[../@type='d']">
-        <xsl:message>HERE I GO!</xsl:message>
+        <!-- <xsl:message>HERE I GO!</xsl:message> -->
         <xsl:element name="incident" xmlns="http://www.tei-c.org/ns/1.0">
             <xsl:if test="../@speaker">
                 <xsl:attribute name="who">

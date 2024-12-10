@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
