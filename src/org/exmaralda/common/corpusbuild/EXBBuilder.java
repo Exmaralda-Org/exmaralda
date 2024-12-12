@@ -59,7 +59,7 @@ public class EXBBuilder {
         this.deleteMetaKeys = deleteMetaKeys;
     }
     
-    public void setCorpusMetadata(Set<String> deleteMetaKeys){
+    public void setCorpusMetadata(Map<String, String> corpusMetadata){
         this.corpusMetadata = corpusMetadata;
     }
     
