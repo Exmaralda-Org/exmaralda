@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,6 +45,7 @@ public class EXBBuilder {
     String segmentation = "default";
     
     Set<String> deleteMetaKeys = new HashSet<>();
+    Map<String, String> corpusMetadata = new HashMap<>();
     
     
     public EXBBuilder(String corpusName, File topDirectory, String uniqueSpeakerDistinction, String segmentation){
@@ -58,6 +58,11 @@ public class EXBBuilder {
     public void setDeleteMetaKeys(Set<String> deleteMetaKeys){
         this.deleteMetaKeys = deleteMetaKeys;
     }
+    
+    public void setCorpusMetadata(Set<String> deleteMetaKeys){
+        this.corpusMetadata = corpusMetadata;
+    }
+    
     
     public void build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
         List<File> exbFiles = collectEXBFiles();
@@ -120,6 +125,11 @@ public class EXBBuilder {
         comaDocument.getRootElement().addContent(corpusDescriptionElement);
         corpusDescriptionElement.addContent(new Element("Key")
                         .setAttribute("Name", "hzsk:corpusPrefix").setText(corpusName));
+        for (String key : corpusMetadata.keySet()){
+            corpusDescriptionElement.addContent(new Element("Key")
+                            .setAttribute("Name", key).setText(corpusMetadata.get(key)));
+            
+        }
         
         
         for (File exbFile : exbFiles){
