@@ -40,6 +40,15 @@
                 <xsl:if test="not(current-grouping-key()='0')">
                     <tei:seg type="intonation-unit">
                         <xsl:attribute name="xml:id" select="generate-id()"/>
+                        <xsl:attribute name="subtype">
+                            <xsl:choose>
+                                <xsl:when test="current-group()/descendant-or-self::tei:pc[last()]/text()='.'">low-falling</xsl:when>
+                                <xsl:when test="current-group()/descendant-or-self::tei:pc[last()]/text()=';'">mid-falling</xsl:when>
+                                <xsl:when test="current-group()/descendant-or-self::tei:pc[last()]/text()='-'">level</xsl:when>
+                                <xsl:when test="current-group()/descendant-or-self::tei:pc[last()]/text()=','">mid-rising</xsl:when>
+                                <xsl:when test="current-group()/descendant-or-self::tei:pc[last()]/text()='?'">high-rising</xsl:when>
+                            </xsl:choose>
+                        </xsl:attribute>
                         <xsl:apply-templates select="current-group()[not(self::tei:anchor)]"/>
                     </tei:seg>
                 </xsl:if>
