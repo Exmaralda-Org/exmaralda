@@ -359,6 +359,10 @@
             <xsl:attribute name="end">
                 <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@end"/>
             </xsl:attribute>
+            <!-- issue #504 -->
+            <xsl:attribute name="rend">
+                <xsl:value-of select="text()"/>
+            </xsl:attribute>
             <xsl:element name="desc">
                 <xsl:value-of select="text()"/>
             </xsl:element>

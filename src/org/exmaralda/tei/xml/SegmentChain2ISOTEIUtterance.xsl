@@ -116,33 +116,59 @@
 					<xsl:attribute name="dur">
 						<xsl:value-of select="text()"/>
 					</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:text>(</xsl:text>
+                                            <xsl:value-of select="text()"/>
+                                            <xsl:text>)</xsl:text>
+					</xsl:attribute>
 				</xsl:element>
 			</xsl:when>
 			<xsl:when test="text()='.'">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">micro</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:text>(.)</xsl:text>
+					</xsl:attribute>
 				</xsl:element>
 			</xsl:when>
 			<xsl:when test="text()='-'">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">short</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:text>(-)</xsl:text>
+					</xsl:attribute>
 				</xsl:element>
 			</xsl:when>
 			<xsl:when test="text()='--'">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">medium</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:text>(--)</xsl:text>
+					</xsl:attribute>
 				</xsl:element>
 			</xsl:when>
 			<xsl:when test="text()='---'">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">long</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:text>(---)</xsl:text>
+					</xsl:attribute>
 				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:element name="event" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="desc">
-						<xsl:value-of select="text()"/>
+                                            <xsl:value-of select="text()"/>
 					</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:value-of select="text()"/>
+					</xsl:attribute>                                        
 				</xsl:element>
 			</xsl:otherwise>
 		</xsl:choose>		
@@ -169,6 +195,10 @@
 			<xsl:when test="text()='&#x2022;'">
 				<xsl:element name="pause" xmlns="http://www.tei-c.org/ns/1.0">
 					<xsl:attribute name="dur">short</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:value-of select="text()"/>
+					</xsl:attribute>                                        
 				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
@@ -176,6 +206,10 @@
 					<xsl:attribute name="desc">
 						<xsl:value-of select="text()"/>
 					</xsl:attribute>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">
+                                            <xsl:value-of select="text()"/>
+					</xsl:attribute>                                        
 				</xsl:element>
 			</xsl:otherwise>
 		</xsl:choose>		

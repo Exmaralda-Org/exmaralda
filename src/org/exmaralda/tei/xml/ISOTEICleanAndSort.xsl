@@ -93,6 +93,10 @@
 					<xsl:copy-of select="@start"/>
 					<xsl:copy-of select="@end"/>
 					<xsl:copy-of select="@who"/>
+					<!-- issue #504 -->
+                                        <xsl:attribute name="rend">                                            
+                                            <xsl:value-of select="@desc"/>
+					</xsl:attribute>                                                                                
 					<xsl:element name="desc">
 						<xsl:value-of select="@desc"/>
 					</xsl:element>
