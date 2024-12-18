@@ -18,6 +18,11 @@ public class KeyTableModel extends AbstractTableModel {
     public KeyTableModel(Element keyElement) {
         this.keyElement = keyElement;
     }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return String.class; 
+    }
     
     
     

@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
 import org.jdom.Element;
 
@@ -40,6 +42,8 @@ public class MaskEntryDialog extends javax.swing.JDialog implements ListSelectio
         
         model = new KeyTableModel(keyElement);
         keyTable.setModel(model);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+        keyTable.setRowSorter(sorter);
         keyTable.getSelectionModel().addListSelectionListener(this);
         
     }
