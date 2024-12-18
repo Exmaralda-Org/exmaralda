@@ -10,11 +10,12 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="folker" type="change" version="1.3.2" date="18.12.2024">Make mask table entries sortable (issue #500)</change>
     <change tool="partitureditor" type="change" version="1.8.1" date="01.12.2024">Make whisper import robust against words without timestamps (issue #357)</change>
     <change tool="partitureditor" type="bug" version="1.8.1" date="16.11.2024">Fixed bug in making sure editor does not exit while saving (issue #456)</change>
-    <change tool="exakt" type="change" version="1.4.1" date="11.11.2024">Respect hidden tiers (issue #495)</change>
-    <change tool="orthonormal" type="change" version="1.0.2" date="06.05.2020">Update OrthoNormal normalisation lexicon to FOLK 2.22 (issue #74)</change>
-    <change tool="coma" type="bug" version="1.8.1" date="05.11.2024">COMA count would not see INEL segmentation (issue #497)</change>
+    <change tool="exakt" type="change" version="1.4.2" date="11.11.2024">Respect hidden tiers (issue #495)</change>
+    <change tool="orthonormal" type="change" version="1.0.2" date="09.11.2024">Update OrthoNormal normalisation lexicon to FOLK 2.22 (issue #74)</change>
+    <change tool="coma" type="bug" version="2.0.4" date="05.11.2024">COMA count would not see INEL segmentation (issue #497)</change>
     <change tool="partitureditor" type="bug" version="1.8.1" date="05.11.2024">MAUS calls must go to https now (issue #496)</change>
     <change tool="partitureditor" type="bug" version="1.8.1" date="23.10.2024">Reformat when opening transcript with hidden tiers (issue #495)</change>
     <change tool="partitureditor" type="change" version="1.8.1" date="22.10.2024">Allow leading punctuation in double round bracket events (issue #470)</change>
@@ -45,7 +46,7 @@
     <change tool="partitureditor" type="change" version="1.8" date="18.04.2024">Status feedback for actions (issue #466)</change>
     <change tool="partitureditor" type="change" version="1.8" date="18.04.2024">Post-processing whisper output: remove random puncutation (issue #421)</change>
     <change tool="partitureditor" type="change" version="1.8" date="17.04.2024">Fixed focus issue for some dialogs (issue #462)</change>
-    <change tool="all" type="change" version="1.8" date="16.04.2024">Build windows distribution with new certificate (issue #450)</change>
+    <change tool="all" type="change" version="1.14" date="16.04.2024">Build windows distribution with new certificate (issue #450)</change>
     <change tool="partitureditor" type="change" version="1.8" date="16.04.2024">Make sure editor does not exit while saving (issue #456)</change>
     <change tool="partitureditor" type="change" version="1.8" date="16.04.2024">More promintent marker for editing cell (issue #458)</change>
     <change tool="partitureditor" type="change" version="1.8" date="01.12.2023">Timeline tolerance configurable (issue #442)</change>
@@ -59,7 +60,7 @@
     <change tool="partitureditor" type="change" version="1.8" date="26.10.2023">Rearrange transcription controls (#433)</change>
     <change tool="partitureditor" type="feature" version="1.8" date="26.10.2023">Whisper webservice integration (#421)</change>
     <change tool="partitureditor" type="bug" version="1.8" date="04.09.2023">Bug in TablePopupMenu: Move to tier does not appear (#176)</change>
-    <change tool="exakt" type="feature" version="1.4.1" date="10.08.2023">Shuffle (issue #362)</change>
+    <change tool="exakt" type="feature" version="1.4" date="10.08.2023">Shuffle (issue #362)</change>
     <change tool="folker" type="change" version="1.3.1" date="09.08.2023">Improvements to HTML output (issue #403 and issue #404)</change>
     <change tool="orthonormal" type="change" version="1.0" date="19.07.2023">Update OrthoNormal normalisation lexicon to FOLK 2.20 (issue #74)</change>
     <change tool="partitureditor" type="change" version="1.7" date="17.07.2023">Dulko fixes and improvements (issue #405, #407 and #409)</change>
