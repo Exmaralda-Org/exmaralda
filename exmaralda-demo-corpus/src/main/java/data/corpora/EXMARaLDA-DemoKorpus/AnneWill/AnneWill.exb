@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) http://www.rrz.uni-hamburg.de/exmaralda -->
+<basic-transcription>
+   <head>
+      <meta-information>
+         <project-name>EXMARaLDA DemoKorpus</project-name>
+         <transcription-name>Anne Will: Halbes Wahlrecht</transcription-name>
+         <referenced-file url="AnneWill_web.mp4" />
+         <referenced-file url="AnneWill.wav" />
+         <ud-meta-information>
+            <ud-information attribute-name="" />
+         </ud-meta-information>
+         <comment />
+         <transcription-convention>HIAT (simplified)</transcription-convention>
+      </meta-information>
+      <speakertable>
+         <speaker id="SPK0">
+            <abbreviation>AW</abbreviation>
+            <sex value="f" />
+            <languages-used></languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information></ud-speaker-information>
+            <comment />
+         </speaker>
+         <speaker id="SPK1">
+            <abbreviation>GL</abbreviation>
+            <sex value="m" />
+            <languages-used></languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information></ud-speaker-information>
+            <comment />
+         </speaker>
+         <speaker id="SPK2">
+            <abbreviation>HG</abbreviation>
+            <sex value="m" />
+            <languages-used></languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information></ud-speaker-information>
+            <comment />
+         </speaker>
+         <speaker id="SPK3">
+            <abbreviation>GW</abbreviation>
+            <sex value="m" />
+            <languages-used></languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information></ud-speaker-information>
+            <comment />
+         </speaker>
+      </speakertable>
+   </head>
+   <basic-body>
+      <common-timeline>
+         <tli id="T0" time="0.0" />
+         <tli id="T1" time="3.906663956865139" />
+         <tli id="T2" time="5.09332980041803" />
+         <tli id="T3" time="7.093328413147624" />
+         <tli id="T4" time="7.633328038584614" />
+         <tli id="T5" time="10.893325777333851" />
+         <tli id="T6" time="12.526657977729686" />
+         <tli id="T7" time="14.66665649335035" />
+         <tli id="T8" time="17.35998795849287" />
+         <tli id="T9" time="21.013318757745594" />
+         <tli id="T10" time="23.64390449818162" />
+         <tli id="T11" time="24.37331642713131" />
+         <tli id="T12" time="25.13998256201099" />
+         <tli id="T13" time="28.64664679633021" />
+         <tli id="T14" time="30.039979163198492" />
+         <tli id="T15" time="33.03997708229288" />
+         <tli id="T16" time="34.17997629154875" />
+         <tli id="T17" time="35.47997538982298" />
+         <tli id="T18" time="38.59330656363872" />
+         <tli id="T19" time="39.89972631635736" />
+         <tli id="T20" time="41.086638167508276" />
+         <tli id="T21" time="42.10663746000037" />
+         <tli id="T22" time="44.1133027347724" />
+         <tli id="T23" time="46.866634158296804" />
+         <tli id="T24" time="48.69329955792316" />
+         <tli id="T25" time="51.5999642084235" />
+         <tli id="T26" time="53.739962724044176" />
+         <tli id="T27" time="55.48662817916135" />
+         <tli id="T28" time="56.90662719419936" />
+         <tli id="T29" time="59.15329230249894" />
+         <tli id="T30" time="60.846624461276654" />
+         <tli id="T31" time="62.89328970830327" />
+         <tli id="T32" time="66.03995419233117" />
+         <tli id="T33" time="70.01995143166306" />
+         <tli id="T34" time="71.93995009988348" />
+         <tli id="T35" time="73.91328206444334" />
+         <tli id="T36" time="76.2599471033794" />
+         <tli id="T37" time="77.22661309953203" />
+         <tli id="T38" time="77.49994624327174" />
+         <tli id="T39" time="77.97327924828441" />
+         <tli id="T40" time="78.1599457854725" />
+         <tli id="T41" time="78.48661222555167" />
+         <tli id="T42" time="79.08661180937055" />
+         <tli id="T43" time="82.53327608530788" />
+         <tli id="T44" time="83.599942012097" />
+         <tli id="T45" time="85.21327422636554" />
+         <tli id="T46" time="85.5399406664447" />
+         <tli id="T47" time="87.86660571925347" />
+         <tli id="T48" time="88.6866051504726" />
+         <tli id="T49" time="89.85327100789819" />
+         <tli id="T50" time="90.25993739248655" />
+         <tli id="T51" time="93.27993529770823" />
+         <tli id="T52" time="94.81993422951003" />
+         <tli id="T53" time="96.9465994210458" />
+         <tli id="T54" time="100.26659711817695" />
+         <tli id="T55" time="102.76659538408894" />
+         <tli id="T56" time="104.76659399681853" />
+         <tli id="T57" time="106.7543400138803" />
+         <tli id="T58" time="107.659925323234" />
+         <tli id="T59" time="110.79992314521947" />
+         <tli id="T60" time="113.25992143887687" />
+         <tli id="T61" time="114.81992035680595" />
+         <tli id="T62" time="117.36658525701496" />
+         <tli id="T63" time="118.29991794295543" />
+         <tli id="T64" time="119.22658396685348" />
+         <tli id="T65" time="120.42658313449124" />
+         <tli id="T66" time="121.45324908902577" />
+         <tli id="T67" time="123.73991416957995" />
+         <tli id="T68" time="125.75991276843683" />
+         <tli id="T69" time="127.67991143665724" />
+         <tli id="T70" time="131.57990873147992" />
+         <tli id="T71" time="135.70657253574532" />
+         <tli id="T72" time="138.81323704751864" />
+         <tli id="T73" time="140.81323704751864" />
+         <tli id="T74" time="143.139900713057" />
+         <tli id="T75" time="146.45989841018812" />
+         <tli id="T76" time="147.5798976333167" />
+         <tli id="T77" time="148.3532304302388" />
+         <tli id="T78" time="149.19322984758523" />
+         <tli id="T79" time="150.09322922331353" />
+         <tli id="T80" time="150.36656236705326" />
+         <tli id="T81" time="151.53989488652127" />
+         <tli id="T82" time="152.15589445924198" />
+         <tli id="T83" time="152.5665608410558" />
+         <tli id="T84" time="153.32656031389305" />
+         <tli id="T85" time="154.25989299983354" />
+         <tli id="T86" time="155.5665601474206" />
+         <tli id="T87" time="156.68655798327876" />
+         <tli id="T88" time="157.73322392394059" />
+         <tli id="T89" time="159.90655574977342" />
+         <tli id="T90" time="161.57988792242384" />
+         <tli id="T91" time="163.29322006732886" />
+         <tli id="T92" time="165.69321840260437" />
+         <tli id="T93" time="167.02655081109077" />
+         <tli id="T94" time="168.67321633557145" />
+         <tli id="T95" time="170.16654863307622" />
+         <tli id="T96" time="172.53988032018202" />
+         <tli id="T97" time="173.7865461221168" />
+         <tli id="T98" time="177.1865437637571" />
+         <tli id="T99" time="178.23987636646135" />
+         <tli id="T100" time="179.6398753953721" />
+         <tli id="T101" time="181.1865409892163" />
+         <tli id="T102" time="182.16654030945375" />
+         <tli id="T103" time="184.4598720520504" />
+         <tli id="T104" time="185.51987131679704" />
+         <tli id="T105" time="185.98653765976732" />
+         <tli id="T106" time="186.60653722971347" />
+         <tli id="T107" time="188.66653580082496" />
+         <tli id="T108" time="190.15320143628728" />
+         <tli id="T109" time="190.49320120045132" />
+         <tli id="T110" time="192.0065334840834" />
+         <tli id="T111" time="193.37319920278193" />
+         <tli id="T112" time="195.03319805134748" />
+         <tli id="T113" time="197.27986315964708" />
+         <tli id="T114" time="199.57986156428612" />
+         <tli id="T115" time="200.56652754656608" />
+         <tli id="T116" time="201.09319384791817" />
+         <tli id="T117" time="202.40652627027725" />
+         <tli id="T118" time="203.9131918918669" />
+         <tli id="T119" time="205.49319079592325" />
+         <tli id="T120" time="207.9331891034534" />
+         <tli id="T121" time="208.58652198361168" />
+         <tli id="T122" time="209.1131882849638" />
+         <tli id="T123" time="210.17318754971052" />
+         <tli id="T124" time="212.17318754971052" />
+         <tli id="T125" time="212.91318564915005" />
+         <tli id="T126" time="213.65318513586" />
+         <tli id="T127" time="215.9865168507112" />
+         <tli id="T128" time="216.399849897342" />
+         <tli id="T129" time="217.45318250004624" />
+         <tli id="T130" time="218.53318175092022" />
+         <tli id="T131" time="219.74651424264286" />
+         <tli id="T132" time="219.77318089081257" />
+         <tli id="T133" time="221.49317969776004" />
+         <tli id="T134" time="222.12651259179106" />
+         <tli id="T135" time="224.49317761685444" />
+         <tli id="T136" time="225.01984391820656" />
+         <tli id="T137" time="227.61984211475502" />
+         <tli id="T138" time="227.99317518913122" />
+         <tli id="T139" time="229.85984056101216" />
+         <tli id="T140" time="230.23984029743076" />
+         <tli id="T141" time="230.48650679300076" />
+         <tli id="T142" time="231.0798397147772" />
+         <tli id="T143" time="233.21983823039787" />
+         <tli id="T144" time="235.21983823039787" />
+         <tli id="T145" time="237.21983823039787" />
+         <tli id="T146" time="238.67316778110722" />
+         <tli id="T147" time="239.09983415182288" />
+         <tli id="T148" time="239.38840165999548" />
+         <tli id="T149" time="242.5664984138875" />
+         <tli id="T150" time="246.1931625649705" />
+         <tli id="T151" time="247.70649484860255" />
+         <tli id="T152" time="249.74649343358675" />
+         <tli id="T153" time="251.55315884708583" />
+         <tli id="T154" time="253.55315884708583" />
+         <tli id="T155" time="255.23315629450826" />
+         <tli id="T156" time="257.40648812034107" />
+         <tli id="T157" time="259.5731532841315" />
+         <tli id="T158" time="259.99315299280465" />
+         <tli id="T159" time="260.1998195161201" />
+         <tli id="T160" time="260.6864858452176" />
+         <tli id="T161" time="262.23315143906177" />
+         <tli id="T162" time="263.733150398609" />
+         <tli id="T163" time="264.31981665834303" />
+         <tli id="T164" time="265.04648282096815" />
+         <tli id="T165" time="267.8731475269593" />
+         <tli id="T166" time="268.1864806429536" />
+         <tli id="T167" time="270.1931459177256" />
+         <tli id="T168" time="272.4998109844071" />
+         <tli id="T169" time="272.9198106930803" />
+         <tli id="T170" time="275.8131420194958" />
+         <tli id="T171" time="278.26647365111074" />
+         <tli id="T172" time="278.64647338752934" />
+         <tli id="T173" time="280.5598053937073" />
+         <tli id="T174" time="281.5331380519024" />
+         <tli id="T175" time="281.9464710985332" />
+         <tli id="T176" time="283.3398034654015" />
+         <tli id="T177" time="284.2064695309177" />
+         <tli id="T178" time="285.5398047139448" />
+         <tli id="T179" time="288.89979960878975" />
+         <tli id="T180" time="290.7531316565858" />
+         <tli id="T181" time="294.04646270554724" />
+         <tli id="T182" time="296.15312791095573" />
+         <tli id="T183" time="297.38646038880563" />
+         <tli id="T184" time="298.5664595703161" />
+         <tli id="T185" time="298.9131259965225" />
+         <tli id="T186" time="299.80645871020846" />
+         <tli id="T187" time="300.49979156262134" />
+         <tli id="T188" time="301.59979079962267" />
+         <tli id="T189" time="301.6131241237075" />
+         <tli id="T190" time="303.2197896759336" />
+         <tli id="T191" time="304.1597890239165" />
+         <tli id="T192" time="307.0664536744169" />
+         <tli id="T193" time="308.1931195595879" />
+         <tli id="T194" time="309.6931185191351" />
+         <tli id="T195" time="310.093118241681" />
+         <tli id="T196" time="311.41978398812495" />
+         <tli id="T197" time="311.806450386586" />
+         <tli id="T198" time="315.12644808371715" />
+         <tli id="T199" time="315.95978083902116" />
+         <tli id="T200" time="318.03311273421747" />
+         <tli id="T201" time="319.2197785777704" />
+         <tli id="T202" time="320.8997774124632" />
+         <tli id="T203" time="321.7531101538945" />
+         <tli id="T204" time="322.69977616391986" />
+         <tli id="T205" time="325.9997738749237" />
+         <tli id="T206" time="327.9997738749237" />
+         <tli id="T207" time="330.326437540462" />
+         <tli id="T208" time="330.73977058709283" />
+         <tli id="T209" time="331.00643706879015" />
+         <tli id="T210" time="331.606436652609" />
+         <tli id="T211" time="331.99471763328347" />
+         <tli id="T212" time="332.20643623642786" />
+         <tli id="T213" time="333.3797687558959" />
+         <tli id="T214" time="333.7531018302721" />
+         <tli id="T215" time="335.6331005262379" />
+         <tli id="T216" time="337.74643239368885" />
+         <tli id="T217" time="338.1264321301075" />
+         <tli id="T218" time="340.77309696095296" />
+         <tli id="T219" time="341.06643009081995" />
+         <tli id="T220" time="343.0264287312949" />
+         <tli id="T221" time="345.4730937008675" />
+         <tli id="T222" time="345.7197601964375" />
+         <tli id="T223" time="348.01309193903404" />
+         <tli id="T224" time="348.37975835136785" />
+         <tli id="T225" time="349.8397573386605" />
+         <tli id="T226" time="350.9197565895345" />
+         <tli id="T227" time="351.9597558681538" />
+         <tli id="T228" time="352.58642210014244" />
+         <tli id="T229" time="354.86642051865414" />
+         <tli id="T230" time="356.39308612637103" />
+         <tli id="T231" time="357.20308556452653" />
+         <tli id="T232" time="359.4730839899746" />
+         <tli id="T233" time="360.419" />
+         <tli id="T234" time="360.463" />
+         <tli id="T235" time="360.803" />
+      </common-timeline>
+      <tier id="TIE0" speaker="SPK0" category="v" type="t" display-name="AW [v]" >
+         <event start="T0" end="T1">Nah/ CDU-Nahen oder der CDU-nahen Studentenverbindung </event>
+         <event start="T1" end="T2">des RCDS ist, </event>
+         <event start="T2" end="T3">das ist Gottfried Ludewig, herzlich willkommen! </event>
+         <event start="T5" end="T6">Sie sind nicht nur Vorsitzender des </event>
+         <event start="T6" end="T7">RCDS, Sie sind auch CDU-Mitglied, </event>
+         <event start="T7" end="T8">auch das muss man wissen, wenn man sich jetzt Ihren Vorschlag anhört. </event>
+         <event start="T8" end="T9">Sie haben nämlich gesagt, und damit sich ratzfatz auf Seite eins katapultiert </event>
+         <event start="T9" end="T10">((atmen)), dass man das Wahlrecht ändern sollten. </event>
+         <event start="T10" end="T11">Sie haben gesagt, </event>
+         <event start="T11" end="T12">((atmen 0,7s)) </event>
+         <event start="T12" end="T13">für diejenigen, die arbeiten, solle es ein doppeltes </event>
+         <event start="T13" end="T14">Wahlrecht geben, </event>
+         <event start="T14" end="T15">alle anderen haben nur ein einfaches Wahlrecht. </event>
+         <event start="T15" end="T16">Sagen Sie das… </event>
+         <event start="T16" end="T17">((1,3s)) </event>
+         <event start="T17" end="T18">Sagen Sie das ((0,5s)), um Arbeitslosen </event>
+         <event start="T18" end="T19">einen Anreiz zu geben, </event>
+         <event start="T19" end="T20">sich wieder n Job zu suchen? </event>
+         <event start="T37" end="T38">Ich will </event>
+         <event start="T38" end="T39">kurz bei der </event>
+         <event start="T39" end="T40">Wahl</event>
+         <event start="T40" end="T41">rechtsä </event>
+         <event start="T41" end="T42">nderung bleiben. </event>
+         <event start="T42" end="T43">Sie haben gesagt, doppeltes Wahlrecht für diejenigen, die arbeiten, </event>
+         <event start="T43" end="T44">die Sie als Leis</event>
+         <event start="T44" end="T45">tungsträger verstehn. </event>
+         <event start="T48" end="T49">Gut, bleiben wir bei den Leitungs </event>
+         <event start="T49" end="T50">trägern. </event>
+         <event start="T63" end="T64">Herr Ludewig, ich würde gerne noch</event>
+         <event start="T64" end="T65"> kurz bei dem Wahlrecht bleiben, </event>
+         <event start="T65" end="T66">dass wirs verstehen. </event>
+         <event start="T66" end="T67">((0,4s)) Sie wollen also dokumentiert sehen, </event>
+         <event start="T67" end="T68">dass die Stimme eines Arbeitslosen </event>
+         <event start="T68" end="T69">und auch die eines Rentners </event>
+         <event start="T69" end="T70">den zählen Sie nämlich nicht zu den Leistungsträgern, dass die weniger Wert ist. </event>
+         <event start="T76" end="T77">Also Sie hattens nicht </event>
+         <event start="T77" end="T78">ernst gemeint, Sie woll</event>
+         <event start="T78" end="T79">ten nur auf die Seite ein</event>
+         <event start="T79" end="T80">s. </event>
+         <event start="T97" end="T98">Wie viel positive Rückmeldungen haben Sie denn innerhalb der Partei bekomm? </event>
+         <event start="T115" end="T116">Herr Geissler, </event>
+         <event start="T116" end="T117">((1,3s)) </event>
+         <event start="T117" end="T118">wie beeindruckt sind Sie vom Vorschlag </event>
+         <event start="T118" end="T119">Ihres jungen Parteifreundes? </event>
+         <event start="T119" end="T122">((lacht)) </event>
+         <event start="T176" end="T177">Der Reihe… </event>
+         <event start="T185" end="T186">Herr Westerwelle! </event>
+         <event start="T202" end="T203">Herr Ludewig, </event>
+         <event start="T203" end="T204">((0,9s)) </event>
+         <event start="T204" end="T205">dass wär wirklich dumm gelaufen, als Vorsitzender eine Studentenverbindung. </event>
+         <event start="T209" end="T210">Erst mal </event>
+         <event start="T210" end="T211">haben wir ja </event>
+         <event start="T211" end="T212">Ihn </event>
+         <event start="T212" end="T213">geglaubt. </event>
+         <event start="T226" end="T227">Wir suchen nach anderen An</event>
+         <event start="T227" end="T228">tworten. </event>
+         <event start="T228" end="T229">das machen wir jetzt nämlich weiter in der Sendung. </event>
+         <event start="T229" end="T230">Danke zunächst mal, </event>
+         <event start="T230" end="T231">dass Sie bei uns sind. </event>
+         <event start="T231" end="T232">Vielen Dank, dass Sie ihren Vorschlag noch mal richtig geschildert… </event>
+      </tier>
+      <tier id="TIE1" speaker="SPK1" category="v" type="t" display-name="GL [v]" >
+         <event start="T3" end="T4">Hallo.</event>
+         <event start="T20" end="T21">((atmen 1,2s)) </event>
+         <event start="T21" end="T22">Momen, also erstmal in der Bildzeitung stand das so. </event>
+         <event start="T22" end="T23">Ich hab n Brief geschrieben an die Vorsitzende der Vereinigung der CDU </event>
+         <event start="T23" end="T24">in dem ich geschrieben habe, dass irgendwie </event>
+         <event start="T24" end="T25">aus meiner Sicht die Balance in diesem Land n bisschen auseinander kommt. </event>
+         <event start="T25" end="T26">Wir habens früher geschaft, die letzte Generation, </event>
+         <event start="T26" end="T27">hier n Sozialstaat zu etablieren, </event>
+         <event start="T27" end="T28">der gut funktioniert hat. </event>
+         <event start="T28" end="T29">Der funktioniert aber nur, wenn die Leistungsträger, </event>
+         <event start="T29" end="T30">also die Menschen die arbeiten gehen, </event>
+         <event start="T30" end="T31">diesen Sozialstaat auch weiter finanzieren können. </event>
+         <event start="T31" end="T32">Und da hab ich dann geschrieben, natürlich auch etwas provokant, </event>
+         <event start="T32" end="T33">eh, jung, hab ich geschrieben, wir könnten doch mal über das Wahlrecht nachdenken. </event>
+         <event start="T33" end="T34">Aber vor allem (um) den innerparteilichen, </event>
+         <event start="T34" end="T35">eigentlich gar keinen öffentlichen, so vor allem innerparteilichen </event>
+         <event start="T35" end="T36">Diskurs anzufangen darüber, was machen wir eigentlich </event>
+         <event start="T36" end="T37">für Leistungsträger? </event>
+         <event start="T38" end="T39">Was? </event>
+         <event start="T40" end="T41">Ja. </event>
+         <event start="T44" end="T45">Ich hab geschrieben "Leistungstr</event>
+         <event start="T45" end="T46">äger". </event>
+         <event start="T46" end="T47">Die Bildzeitung hat geschrieben, für die Leute die arbeiten. </event>
+         <event start="T47" end="T48">Also s is schon Untersch </event>
+         <event start="T48" end="T49">ied, was die Bildzeitung auf Seite eins </event>
+         <event start="T50" end="T51">Die Leistungsträger in dieser Gesellschaft, die Familien die arbeiten gehen, </event>
+         <event start="T51" end="T52">((atmen)) die, die Steuern zahlen, </event>
+         <event start="T52" end="T53">die trotzdem, obwohl sie zwa zwei Verdiener sind, </event>
+         <event start="T53" end="T54">den Spitzensteuersatz zahlen in dieser Bundesrepublik, sie zahlen nämlich die Spitzenmanager, </event>
+         <event start="T54" end="T55">wir haben ja keinen Spitzensteuersatz ab hundertundfünfzigtausend Euro. </event>
+         <event start="T55" end="T56">Und auch wenn Herr Heil, nur ganz kurz, </event>
+         <event start="T56" end="T57">vorhin immer gesagt hat, wir diskutieren das hier falsch. </event>
+         <event start="T57" end="T58">Wir diskutieren </event>
+         <event start="T58" end="T59">die gesamte Zeit immer nur aus den alt hergebrachten Positionen und sagt, </event>
+         <event start="T59" end="T60">wir müssen darüber diskutueren, wie wir Armut verhindern können, </event>
+         <event start="T60" end="T61">frag ich mich, wo sind denn die Maßnahmen? </event>
+         <event start="T61" end="T62">Also die Betreuungsrelation an den Universitäten ist immer noch schlecht </event>
+         <event start="T62" end="T63">die Betreuungsrelation </event>
+         <event start="T63" end="T64">an den Schulen auch. </event>
+         <event start="T70" end="T71">Ich möchte eine Debatte anfangen in der CDU, darüber wie wir diese Leistungsträger stärken. </event>
+         <event start="T71" end="T72">Ich hab das nicht so geschrieben, wie es in der Bildzeitung steht, ich habe geschrieben, </event>
+         <event start="T72" end="T73">lasst uns darüber nachdenken, </event>
+         <event start="T73" end="T74">lasst uns, nein, lasst uns darüber nachdenken, </event>
+         <event start="T74" end="T75">wie wir diesen Sozialstaat überhaupt noch finanzieren können. </event>
+         <event start="T75" end="T76">Es ist doch, wir machen doch immer </event>
+         <event start="T76" end="T77">den zweiten… </event>
+         <event start="T77" end="T78">Ganz kurz… </event>
+         <event start="T78" end="T79">Nein, nein! </event>
+         <event start="T79" end="T80">Ich woll</event>
+         <event start="T80" end="T81">te eine Debatte anfangen, </event>
+         <event start="T81" end="T82">darüber… </event>
+         <event start="T82" end="T83">Wir ma</event>
+         <event start="T83" end="T84">chen eine zwei… </event>
+         <event start="T84" end="T85">((0,9s)) </event>
+         <event start="T85" end="T86">Wir machen doch hier </event>
+         <event start="T86" end="T87">den zweiten Schritt </event>
+         <event start="T87" end="T88">vor dem ersten Schritt. </event>
+         <event start="T88" end="T89">Denn zwar, wir verteilen die gesamte Zeit </event>
+         <event start="T89" end="T90">Gelder um ((0,2s)) in dieser Gesellschaft, </event>
+         <event start="T90" end="T91">diskutieren aber nicht darüber, </event>
+         <event start="T91" end="T92">wie wir im ersten Schritt diese Gelder einholn, </event>
+         <event start="T92" end="T93">bei den Leuten, die arbeiten gehen. </event>
+         <event start="T93" end="T94">Und darüber eine Debatte zu starten, </event>
+         <event start="T94" end="T95">dass war das Ziel innerhalb der Partei. </event>
+         <event start="T95" end="T96">Dass es nachher bei der Bildzeitung auf Seite eins gekommen is, </event>
+         <event start="T98" end="T99">Sie glauben gar nich, </event>
+         <event start="T99" end="T100">vor allem, ehrlich gesagt, von Leuten, </event>
+         <event start="T100" end="T101">von Bürgern, die mir, uns, geschrieben haben, </event>
+         <event start="T101" end="T102">hab ich auch Emails bekommen, </event>
+         <event start="T102" end="T103">die geschrieben haben, es reicht mir, dass die gesamte Zeit über </event>
+         <event start="T103" end="T104">Hartz vier Sätze diskut</event>
+         <event start="T104" end="T105">iert wird … </event>
+         <event start="T105" end="T106">Was macht </event>
+         <event start="T106" end="T107">man eigentlich mit den, was macht man eigentlich mit </event>
+         <event start="T107" end="T108">den einfachen Bürgern, die arbeiten gehen? </event>
+         <event start="T108" end="T109">((0,3s)) </event>
+         <event start="T109" end="T110">Ja? Und und machen Sie weiter. </event>
+         <event start="T110" end="T111">Natürlich auch kritische Rückmeldung. </event>
+         <event start="T111" end="T112">Aber viele, die auch gefragt haben, </event>
+         <event start="T112" end="T113">wo setzen wir eigentlich die Schwerpunkte in diesem Land? </event>
+         <event start="T113" end="T114">Setzen wir sie bei den Leuten die arbeiten oder bei den Leuten, </event>
+         <event start="T114" end="T115">die eben nicht arbeiten gehen. </event>
+         <event start="T125" end="T126">Fünfundzwanzig. </event>
+         <event start="T139" end="T140">Ja, aber </event>
+         <event start="T140" end="T141">bei aller </event>
+         <event start="T141" end="T142">Achtung … </event>
+         <event start="T174" end="T175">Das hat ja </event>
+         <event start="T175" end="T176">Das hat ja, aber, ent</event>
+         <event start="T176" end="T177">schuldigung, </event>
+         <event start="T177" end="T178">Herr Geissler, Herr Geissler </event>
+         <event start="T178" end="T179">wenn, also, man muss sich nicht mit dem idiotischen Vorschlag im einzelnen auseinander setzen. </event>
+         <event start="T179" end="T180">Aber es ist schon so, wenn das Schule macht, </event>
+         <event start="T180" end="T181">wenn der junge Unionvorsitzenden, den Älteren gleichzeitig nich das Hüftgelenk </event>
+         <event start="T181" end="T182">((unv.)) will, dann ist das ne Denke, die dahinter steckt. </event>
+         <event start="T182" end="T183">Und das macht mir schon Sorge. </event>
+         <event start="T183" end="T184">Darüber müssen wir uns unterhalten. </event>
+         <event start="T187" end="T188">Ja, genau wie er eben. </event>
+         <event start="T189" end="T190">Aber offensichtlich ist das in we</event>
+         <event start="T190" end="T191">((unv.)) an der Stelle. </event>
+         <event start="T205" end="T206">Das wäre, das wäre wirklich dumm gelaufen, </event>
+         <event start="T206" end="T207">wenn man der Bildzeitung immer so hunderfünfzigprozentig </event>
+         <event start="T207" end="T208">glauben würde. </event>
+         <event start="T208" end="T209">((atmen 0,2s)) </event>
+         <event start="T209" end="T210">Ich wollte, </event>
+         <event start="T210" end="T211">ich, ((0,6s)) </event>
+         <event start="T212" end="T213">Ich wiederhole es noch mal. </event>
+         <event start="T213" end="T214">((atmen 0,3s)) </event>
+         <event start="T214" end="T215">Ich wollte einen Diskurs anstacheln und </event>
+         <event start="T215" end="T216">dass man da mal provoziert und nach vorne geht </event>
+         <event start="T216" end="T217">((atmen 0,3s)) </event>
+         <event start="T217" end="T218">find ich, nach meiner Meinung, ist für junge Leute in Ordnung. </event>
+         <event start="T218" end="T219">((atmen 0,2s)) </event>
+         <event start="T219" end="T220">Man muss diesen Diskurs anfangen, Herr Heil </event>
+         <event start="T220" end="T221">redet davon, dass wir unbedingt/ ganz kurz, </event>
+         <event start="T221" end="T222">((atmen 0,2s)) </event>
+         <event start="T222" end="T223">dass wir unbedingt andere Antworten finden müssen. </event>
+         <event start="T223" end="T224">((atmen 0,3s)) </event>
+         <event start="T224" end="T225">Ich sehe aber diese Antworten nich. </event>
+         <event start="T225" end="T226">((0,2s)) Wo is es denn… Nei </event>
+         <event start="T226" end="T227">n, ganz kurz ((unv.))˙ </event>
+         <event start="T227" end="T228">Wo ist denn </event>
+         <event start="T228" end="T229">wo is denn in der Bildungspolitik diese Antwort? </event>
+      </tier>
+      <tier id="TIE2" speaker="SPK2" category="v" type="t" display-name="HG [v]" >
+         <event start="T96" end="T97">((unverständlich)) gibs nich nur … </event>
+         <event start="T104" end="T105">Das ist ja was </event>
+         <event start="T105" end="T106">anderes. </event>
+         <event start="T120" end="T121">Also … </event>
+         <event start="T122" end="T123">Ähm, ich meine mit, </event>
+         <event start="T123" end="T124">ich weiß nich, wie al … Wi/ wir/ wir haben uns vorhin schon unterhalten, </event>
+         <event start="T124" end="T125">wie alt sind Sie denn? </event>
+         <event start="T126" end="T127">Also mit fünfundzwanzig Jahren kann man schon ein mal </event>
+         <event start="T127" end="T128">((0,4s)) </event>
+         <event start="T128" end="T129">ähm, etwas </event>
+         <event start="T129" end="T130">((1,0s)) </event>
+         <event start="T130" end="T132">Unsinniges sagen. </event>
+         <event start="T132" end="T134">Ähm, ich bin, ich bin froh, </event>
+         <event start="T134" end="T135">äh, deswegen sollte man Sie nicht in die Pfanne haun. </event>
+         <event start="T135" end="T136">((0,5s)) </event>
+         <event start="T136" end="T137">Äh, ich bin froh, dass nicht alle wissen, was ich mit fünfundzwanzig </event>
+         <event start="T137" end="T138">((0,3s)) </event>
+         <event start="T138" end="T139">äh, gesagt habe, ne, dass will ich auch hinzu fü </event>
+         <event start="T139" end="T140">gen. </event>
+         <event start="T141" end="T142">Aber </event>
+         <event start="T142" end="T143">aber, ähm, äh, wir dürfen eben </event>
+         <event start="T143" end="T144">da natürlich nicht auf die Schulter klopfen </event>
+         <event start="T144" end="T145">und sagen, Sie Sie haben was gescheites gesagt. </event>
+         <event start="T145" end="T146">Das war nicht sehr gescheit. </event>
+         <event start="T146" end="T147">((0,4s)) </event>
+         <event start="T147" end="T148">Nich wahr? </event>
+         <event start="T148" end="T149">((unv.)) Was machste mit de/ was machen Sie mit dem Opelarbeiter, </event>
+         <event start="T149" end="T150">der, äh, nun plötzlich weil in Denfer Kolo Kolorado, nich wahr, </event>
+         <event start="T150" end="T151">((stottert 1,5s))</event>
+         <event start="T151" end="T152">der dortige Bord von General Motors </event>
+         <event start="T152" end="T153">Mist gemacht hat und arbeitslos wird. </event>
+         <event start="T153" end="T154">Also vorher zwei Stimmen. </event>
+         <event start="T154" end="T155">Da wird er plötzlich arbeitslos, </event>
+         <event start="T155" end="T156">hat er dann bei der nächsten Landtagswahl nur noch eine. </event>
+         <event start="T156" end="T157">Also Sie kommen in unglauliche Schwierigkeiten, </event>
+         <event start="T157" end="T158">((atmen 0,4s)) </event>
+         <event start="T158" end="T159">Äh </event>
+         <event start="T159" end="T160">((0,4s)) </event>
+         <event start="T160" end="T161">der Grundansatz ist ja richtig. </event>
+         <event start="T161" end="T162">Wir müssen natürlich eine Politik machen, </event>
+         <event start="T162" end="T163">dass ist klar, </event>
+         <event start="T163" end="T164">für diejenigen, </event>
+         <event start="T164" end="T165">((atmen)) nich wahr, die die arbeiten, da is kein Gegensatz. </event>
+         <event start="T165" end="T166">((atmen 0,3s))</event>
+         <event start="T166" end="T167">Wir dürfen in dieser Gesellschaft nicht diejenigen, </event>
+         <event start="T167" end="T168">die ein Arbeitsplatz verloren haben, </event>
+         <event start="T168" end="T169">((atmen 0,4s)) </event>
+         <event start="T169" end="T170">nich wahr, und die die Hilfe, die Solidarität der anderen brauchn, </event>
+         <event start="T170" end="T171">gegen die anderen ausspielen. </event>
+         <event start="T171" end="T172">((atmen 0,3s)) </event>
+         <event start="T172" end="T173">Äh, eine endsolidarisierte Gesellschaft </event>
+         <event start="T173" end="T174">läuft ins Elend. </event>
+         <event start="T174" end="T175">Wir </event>
+         <event start="T175" end="T176">führn alle zusammen.</event>
+         <event start="T225" end="T226">Aber nich falsch. </event>
+      </tier>
+      <tier id="TIE3" speaker="SPK3" category="v" type="t" display-name="GW [v]" >
+         <event start="T190" end="T191">Leute, jetzt wolln ((unv.)) ers </event>
+         <event start="T191" end="T192">jetzt wollen wir nicht aus jedem Studentenwitz ne Staatsaffaire machen, </event>
+         <event start="T192" end="T193">an dieser Stelle hier. </event>
+         <event start="T193" end="T194">Auch mal festhalten hier, an der Sache. </event>
+         <event start="T194" end="T195">((atmen 0,4s)) </event>
+         <event start="T195" end="T196">Ich meine, halbes Wahlrecht, </event>
+         <event start="T196" end="T197">((atmen 0,3s)) </event>
+         <event start="T197" end="T198">halbes Wahlrecht für Rentner, und das hieße dann ja auch, </event>
+         <event start="T198" end="T199">((0,8s)) </event>
+         <event start="T199" end="T200">Kollege, halbes Wahlrecht für Studenten. </event>
+         <event start="T200" end="T201">Das wäre aber dumm gelaufen, oder? </event>
+      </tier>
+      <tier category="nn" display-name="[nn]" id="TIE4" type="d">
+         <event start="T3" end="T6">((applaudieren)) </event>
+         <event start="T15" end="T18">((Lachen und Unruhe)) </event>
+         <event start="T18" end="T19">((Lachen und Unruhe)) </event>
+         <event start="T72" end="T73">((Lachen)) </event>
+         <event start="T83" end="T88">((applaudieren)) </event>
+         <event start="T132" end="T133">((lachen)) </event>
+         <event start="T184" end="T189">((unverständlich)) </event>
+         <event start="T201" end="T205">((Publikum lacht und applaudiert)) </event>
+      </tier>
+   </basic-body>
+   <tierformat-table>
+      <timeline-item-format absolute-time-format="time"
+                            miliseconds-digits="2"
+                            show-every-nth-absolute="10"
+                            show-every-nth-numbering="1" />
+      <tier-format tierref="EMPTY">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">white</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">2</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="COLUMN-LABEL">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Bold</property>
+         <property name="font-color">#R99G99B99</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R99G99B99</property>
+         <property name="chunk-border">l</property>
+         <property name="font-size">6</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="ROW-LABEL">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Bold</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="TIE4">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">#R00G00Bff</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">10</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="TIE3">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="TIE2">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="TIE1">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="TIE0">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="EMPTY-EDITOR">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">white</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">lightGray</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">2</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="SUB-ROW-LABEL">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Right</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">8</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+   </tierformat-table>
+</basic-transcription>

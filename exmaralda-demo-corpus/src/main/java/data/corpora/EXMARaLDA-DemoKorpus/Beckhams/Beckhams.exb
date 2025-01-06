@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) http://www.rrz.uni-hamburg.de/exmaralda -->
+<basic-transcription>
+   <head>
+      <meta-information>
+         <project-name>EXMARaLDA DemoKorpus</project-name>
+         <transcription-name>Beckhams</transcription-name>
+         <referenced-file url="Beckhams_web.mp4" />
+         <referenced-file url="Beckhams.wav" />
+         <transcription-convention>HIAT (simplified)</transcription-convention>
+         <ud-meta-information>
+            <ud-information attribute-name="" />
+         </ud-meta-information>
+         <comment />
+      </meta-information>
+      <speakertable>
+         <speaker id="SPK0">
+            <abbreviation>PAR</abbreviation>
+            <sex value="m" />
+            <languages-used>
+               <language lang="eng" />
+            </languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information>
+               <ud-information attribute-name="Family: Marital status">Verheiratet</ud-information>
+               <ud-information attribute-name="Birth">28. März 1935 in Cudworth</ud-information>
+               <ud-information attribute-name="Occupation">Fernsehmoderator, Journalist, Autor</ud-information>
+               <ud-information attribute-name="Family: Children">3</ud-information>
+               <ud-information attribute-name="Name">Michael Parkinson</ud-information>
+            </ud-speaker-information>
+            <comment />
+         </speaker>
+         <speaker id="SPK1">
+            <abbreviation>VIC</abbreviation>
+            <sex value="f" />
+            <languages-used>
+               <language lang="eng" />
+            </languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information>
+               <ud-information attribute-name="Name">Victoria Beckham</ud-information>
+               <ud-information attribute-name="Family: Marital status">Verheiratet</ud-information>
+               <ud-information attribute-name="Family: Children">3 Söhn, 1 Tochter</ud-information>
+               <ud-information attribute-name="Occupation">Sängerin</ud-information>
+               <ud-information attribute-name="Birth">14. April 1974 in Hertfordshire</ud-information>
+            </ud-speaker-information>
+            <comment />
+         </speaker>
+         <speaker id="SPK2">
+            <abbreviation>DAV</abbreviation>
+            <sex value="m" />
+            <languages-used>
+               <language lang="eng" />
+            </languages-used>
+            <l1 />
+            <l2 />
+            <ud-speaker-information>
+               <ud-information attribute-name="Name">David Beckham</ud-information>
+               <ud-information attribute-name="Birth ">2. Mail 1975 in London</ud-information>
+               <ud-information attribute-name="Family: Marital status">Verheiratet</ud-information>
+               <ud-information attribute-name="Occupation">Professioneller Fußballspieler</ud-information>
+               <ud-information attribute-name="Family: Children">3 Söhne, 1 Tochter</ud-information>
+            </ud-speaker-information>
+            <comment />
+         </speaker>
+      </speakertable>
+   </head>
+   <basic-body>
+      <common-timeline>
+         <tli id="T0" time="0.0" />
+         <tli id="T1" time="2.1866329681774834" />
+         <tli id="T2" time="2.4399623974175575" />
+         <tli id="T3" time="2.706624954512373" />
+         <tli id="T4" time="3.746608927182151" />
+         <tli id="T5" time="4.713260696650855" />
+         <tli id="T6" time="5.0732551487288555" />
+         <tli id="T7" time="7.586549749347489" />
+         <tli id="T8" time="8.533201827034082" />
+         <tli id="T9" time="11.366491496166491" />
+         <tli id="T10" time="13.919785480349345" />
+         <tli id="T11" time="15.479761439354013" />
+         <tli id="T12" time="16.566411359515385" />
+         <tli id="T13" time="17.859724761425237" />
+         <tli id="T14" time="20.799679453395573" />
+         <tli id="T15" time="21.32633800365783" />
+         <tli id="T16" time="23.8996316796228" />
+         <tli id="T17" time="29.192883437954876" />
+         <tli id="T18" time="30.475523307812296" />
+         <tli id="T19" time="31.90592430921571" />
+         <tli id="T20" time="33.459484351471914" />
+         <tli id="T21" time="35.67945013928625" />
+         <tli id="T22" time="37.35942424898358" />
+         <tli id="T23" time="38.42763359312005" />
+         <tli id="T24" time="41.39269542504267" />
+         <tli id="T25" time="42.352680630584" />
+         <tli id="T26" time="46.60594841624631" />
+         <tli id="T27" time="47.505934546441296" />
+         <tli id="T28" time="51.00116062896764" />
+         <tli id="T29" time="52.15252960381845" />
+         <tli id="T30" time="53.97916811991794" />
+         <tli id="T31" time="56.28579923878808" />
+         <tli id="T32" time="59.19908767504894" />
+         <tli id="T33" time="59.7924118645849" />
+         <tli id="T34" time="60.61239922765146" />
+         <tli id="T35" time="61.36572095144431" />
+         <tli id="T36" time="62.619034969789936" />
+         <tli id="T37" time="63.13902695612483" />
+         <tli id="T38" time="65.96565006132987" />
+         <tli id="T39" time="66.26564543806154" />
+         <tli id="T40" time="67.53185508185396" />
+         <tli id="T41" time="68.5256106094401" />
+         <tli id="T42" time="69.05226915970235" />
+         <tli id="T43" time="69.35893110036139" />
+         <tli id="T44" time="69.61226052960147" />
+         <tli id="T45" time="71.01890551827661" />
+         <tli id="T46" time="73.41220196820258" />
+         <tli id="T47" time="74.39218686552601" />
+         <tli id="T48" time="77.31214186571425" />
+         <tli id="T49" time="79.55877390923807" />
+         <tli id="T50" time="80.19209748233826" />
+         <tli id="T51" time="81.54540995959444" />
+         <tli id="T52" time="81.85375414850432" />
+         <tli id="T53" time="83.01205402361593" />
+         <tli id="T54" time="83.23871719714651" />
+         <tli id="T55" time="85.10535509681021" />
+         <tli id="T56" time="87.27198837320559" />
+         <tli id="T57" time="87.91864251838838" />
+         <tli id="T58" time="90.7319350515108" />
+         <tli id="T59" time="93.20824440215493" />
+         <tli id="T60" time="96.67851007472518" />
+         <tli id="T61" time="97.67182809990338" />
+         <tli id="T62" time="98.51181515475206" />
+         <tli id="T63" time="101.30161995968729" />
+         <tli id="T64" time="102.7784160682691" />
+         <tli id="T65" time="104.5517220729496" />
+         <tli id="T66" time="106.13836428766375" />
+         <tli id="T67" time="107.02501729000402" />
+         <tli id="T68" time="109.63164378560583" />
+         <tli id="T69" time="113.77157998450284" />
+         <tli id="T70" time="114.37823730189355" />
+         <tli id="T71" time="115.08084919465172" />
+         <tli id="T72" time="118.91150077250539" />
+         <tli id="T73" time="119.68702248379489" />
+         <tli id="T74" time="122.0381192544421" />
+         <tli id="T75" time="123.0714366631845" />
+         <tli id="T76" time="124.9180748710661" />
+         <tli id="T77" time="126.39805206294233" />
+         <tli id="T78" time="129.69800120699065" />
+         <tli id="T79" time="134.37792908400468" />
+         <tli id="T80" time="136.27123323937784" />
+         <tli id="T81" time="137.31121721204764" />
+         <tli id="T82" time="139.53118299986198" />
+         <tli id="T83" />
+         <tli id="T84" time="139.9778427829958" />
+         <tli id="T85" time="140.9844939360287" />
+         <tli id="T86" time="141.778557219448" />
+         <tli id="T87" time="142.4044720525586" />
+         <tli id="T88" time="142.6978008653629" />
+         <tli id="T89" time="146.9777349067347" />
+         <tli id="T90" time="147.97105293191288" />
+         <tli id="T91" time="152.89063857386276" />
+         <tli id="T92" time="154.74428188212116" />
+         <tli id="T93" time="158.2908938914822" />
+         <tli id="T94" time="160.6862712357286" />
+         <tli id="T95" time="165.46411667733273" />
+         <tli id="T96" time="167.13742422310273" />
+         <tli id="T97" time="169.3173906273528" />
+         <tli id="T98" time="170.63737028497212" />
+         <tli id="T99" time="170.95736535348593" />
+         <tli id="T100" time="173.50399277374143" />
+         <tli id="T101" time="177.20393575343195" />
+         <tli id="T102" time="177.84392589045953" />
+         <tli id="T103" time="179.670564406559" />
+         <tli id="T104" time="180.61054992031822" />
+         <tli id="T105" time="181.65720045691538" />
+         <tli id="T106" time="182.33052341357975" />
+         <tli id="T107" time="182.59141437012374" />
+         <tli id="T108" time="183.20384328806531" />
+         <tli id="T109" time="183.77716778581916" />
+         <tli id="T110" time="186.26379613072834" />
+         <tli id="T111" time="186.98378503488428" />
+         <tli id="T112" time="190.57706299173694" />
+         <tli id="T113" time="190.78372647348542" />
+         <tli id="T114" time="191.010389647016" />
+         <tli id="T115" time="193.3303538937409" />
+         <tli id="T116" time="193.79701336865682" />
+         <tli id="T117" time="194.3436716107012" />
+         <tli id="T118" time="196.10364448752696" />
+         <tli id="T119" time="200.45024416817245" />
+         <tli id="T120" time="201.9502210518308" />
+         <tli id="T121" time="206.16348945392886" />
+         <tli id="T122" time="208.5901187234917" />
+         <tli id="T123" time="209.423439214413" />
+         <tli id="T124" time="212.04339883786952" />
+         <tli id="T125" time="216.05667032214652" />
+         <tli id="T126" time="217.75664412362596" />
+         <tli id="T127" time="218.36330144101663" />
+         <tli id="T128" time="219.92327740002133" />
+         <tli id="T129" time="221.20325767407644" />
+         <tli id="T130" time="225.1231972633702" />
+         <tli id="T131" time="227.99648631606684" />
+         <tli id="T132" time="230.3176962344605" />
+         <tli id="T133" time="232.0830900035449" />
+         <tli id="T134" time="235.31637350831954" />
+         <tli id="T135" time="238.09633066603297" />
+         <tli id="T136" time="239.43631001543443" />
+         <tli id="T137" time="240.33629614562943" />
+         <tli id="T138" time="240.68517097740667" />
+         <tli id="T139" time="242.70292633984593" />
+         <tli id="T140" time="244.9295586915876" />
+         <tli id="T141" time="245.8562110774921" />
+         <tli id="T142" time="246.7295309519776" />
+         <tli id="T143" time="248.18950845207172" />
+         <tli id="T144" time="249.02282894299304" />
+         <tli id="T145" time="250.41614080381342" />
+         <tli id="T146" time="251.12279658011468" />
+         <tli id="T147" time="251.82945235641594" />
+         <tli id="T148" time="253.11609919439843" />
+         <tli id="T149" time="254.35704361170696" />
+         <tli id="T150" time="255.23606652330224" />
+         <tli id="T151" time="256.3160498795362" />
+         <tli id="T152" time="258.5693484869874" />
+         <tli id="T159" time="259.1775209325434" type="intp" />
+         <tli id="T153" time="260.055992242791" />
+         <tli id="T154" time="260.7559814551649" />
+         <tli id="T155" time="261.15597529080713" />
+         <tli id="T156" />
+         <tli id="T157" time="262.17595957169476" />
+         <tli id="T158" time="265.691" />
+      </common-timeline>
+      <tier id="TIE0" speaker="SPK0" category="v" type="t" display-name="PAR [v]" >
+         <event start="T0" end="T1">And what it comes to is your determination </event>
+         <event start="T1" end="T2">at </event>
+         <event start="T2" end="T3">all </event>
+         <event start="T3" end="T4">cost to actually </event>
+         <event start="T4" end="T5">((0,3s)) succeed. </event>
+         <event start="T5" end="T6">I mean </event>
+         <event start="T6" end="T7">is that a/ sort of a message that you hope comes across to </event>
+         <event start="T7" end="T8">((0,4s)) to kids? </event>
+         <event start="T8" end="T9">Because a lot of kids think that people just become famous over night, don't they? </event>
+         <event start="T23" end="T24">And when/ and the other thing that comes to in the book, too, </event>
+         <event start="T24" end="T25">is/ is the/ </event>
+         <event start="T25" end="T26">the deep, affectionate love that yo/ that the two of you have for each other and the way that you are very ((0,4s)) </event>
+         <event start="T26" end="T27">family centered. </event>
+         <event start="T27" end="T28">((0,5s)) But when you first met him when you first met, the two/ yes, the two of you, </event>
+         <event start="T28" end="T29">I mean was it like ((0,4s)) </event>
+         <event start="T29" end="T30">bow, wham, ((0,5s)) smack? </event>
+         <event start="T30" end="T31">I mean did you think: "Good God this/ this is the guy, </event>
+         <event start="T31" end="T32">this is the girl I'm gonna get married to and live the rest of my life with?" </event>
+         <event start="T32" end="T33">((0,4s)) David? </event>
+         <event start="T34" end="T35">Did you?</event>
+         <event start="T37" end="T38">((laughing)) </event>
+         <event start="T38" end="T39">Was </event>
+         <event start="T39" end="T40">it really like that? </event>
+         <event start="T48" end="T49">And you obviously weren't disappointed when you got to</event>
+         <event start="T49" end="T50">gether. </event>
+         <event start="T50" end="T51">Ah, similar for you, Victoria? </event>
+         <event start="T63" end="T64">W/ do/ what's been the lowest? </event>
+         <event start="T64" end="T65">That's the/ the nice part of the marriage. </event>
+         <event start="T65" end="T66">What's been the lowest part </event>
+         <event start="T66" end="T67">of the/ of the marriage? </event>
+         <event start="T67" end="T68">There is a/ there is a piece in the book, which is quite/ quite moving actually. </event>
+         <event start="T68" end="T69">((0,5s)) And it's/ it's about when the/ the media accused David of having an affair. </event>
+         <event start="T69" end="T70">((0,6s)) </event>
+         <event start="T70" end="T71">Tell us about that. </event>
+         <event start="T84" end="T85">Hm˙ </event>
+         <event start="T85" end="T86">It wasn't true, </event>
+         <event start="T86" end="T87">the story? </event>
+         <event start="T88" end="T89">But nonetheless, it was/ it was in the papers, it was printed and/ and it affected your relationship. </event>
+         <event start="T101" end="T102">You whacked him? </event>
+         <event start="T105" end="T106">Three times? </event>
+         <event start="T107" end="T108">Yeah? </event>
+         <event start="T108" end="T109">Hurt you? </event>
+         <event start="T110" end="T111">Yeah. </event>
+         <event start="T111" end="T112">In fact, hurting so much that/ that's you/ you/ you were very depressed, weren't you? </event>
+         <event start="T112" end="T113">You… </event>
+         <event start="T114" end="T115">((0,6s)) Well, how depressed were you, what did you do</event>
+         <event start="T116" end="T117">((unv.)) </event>
+         <event start="T135" end="T136">You were looking out the window thinking… </event>
+         <event start="T137" end="T138">(so)</event>
+         <event start="T140" end="T141">(to jump) </event>
+         <event start="T145" end="T146">((laughing)) </event>
+         <event start="T146" end="T147">((laughing)) </event>
+         <event start="T147" end="T148">A surprising read, isn't it?</event>
+         <event start="T148" end="T149">It's/ it's/ it's/ it's ve/ </event>
+         <event start="T149" end="T150">it's very interesting </event>
+         <event start="T150" end="T151">v/ part of the book. </event>
+         <event start="T151" end="T152">I hope you got time to finish this book, you know, before </event>
+         <event start="T152" end="T159">to long. </event>
+         <event start="T159" end="T153">((laughing)) </event>
+         <event start="T154" end="T155">Eh </event>
+         <event start="T155" end="T156">eh eh… </event>
+         <event start="T156" end="T157">((laughing)) </event>
+      </tier>
+      <tier id="TIE1" speaker="SPK1" category="v" type="t" display-name="VIC [v]" >
+         <event start="T2" end="T3">Yeah˙ </event>
+         <event start="T5" end="T6">Mhm˙ </event>
+         <event start="T9" end="T10">((0,4s)) Yeah, I think that people don't realise that </event>
+         <event start="T10" end="T11">((0,4s)) it's all about hard work. </event>
+         <event start="T11" end="T12">I mean I worked hard when/ </event>
+         <event start="T12" end="T13">((0,4s)) when I was at school. </event>
+         <event start="T13" end="T14">I've always had it in my personality to want to ((0,4s)) </event>
+         <event start="T14" end="T15">succeed. </event>
+         <event start="T15" end="T16">You know, even when it was, you know, I wanna do my homework right. </event>
+         <event start="T16" end="T17">((0,5s)) Ehm ((0,6s)) but yeah, I mean, I'm one of these people, you know, when someone kicks me, you know, I </event>
+         <event start="T17" end="T18">try hard to get up again, </event>
+         <event start="T18" end="T19">((0,4s)) because I know what I wanna do. </event>
+         <event start="T19" end="T20">I love what I do at the end of the day. </event>
+         <event start="T20" end="T21">I know that I'm putting myself up for criticism </event>
+         <event start="T21" end="T22">and I'm very much aware of that, </event>
+         <event start="T22" end="T23">but I love what I do. </event>
+         <event start="T36" end="T37">((0,3s)) Yeah. </event>
+         <event start="T37" end="T38">((laughing))</event>
+         <event start="T40" end="T41">((laughing)) </event>
+         <event start="T42" end="T43">((laughing)) </event>
+         <event start="T51" end="T52">Yeah. </event>
+         <event start="T52" end="T53">((1,2s)) </event>
+         <event start="T54" end="T55">((laughing)) </event>
+         <event start="T55" end="T56">No, I mean, I knew as soon as I met him. </event>
+         <event start="T56" end="T57">I mean, ((0,4s)) </event>
+         <event start="T57" end="T58">the/ one of the most attractive things I found with David is that </event>
+         <event start="T58" end="T59">((0,3s)) he shared the same sort of family values as me. </event>
+         <event start="T59" end="T60">((0,3s))You know he was sitting there with his family and/ and I really liked that. </event>
+         <event start="T60" end="T61">And he is a very kind </event>
+         <event start="T61" end="T62">((0,5s)) person. </event>
+         <event start="T62" end="T63">And we/ we are really good friends, on top of everything. </event>
+         <event start="T71" end="T72">That was probably one of the most difficult things to actually write </event>
+         <event start="T72" end="T73">in the book. </event>
+         <event start="T73" end="T74">Obviously, it's lovely writing all the nice things that've happened </event>
+         <event start="T74" end="T75">but that was very difficult. </event>
+         <event start="T75" end="T76">I mean it was really a traumatic time for/ </event>
+         <event start="T76" end="T77">((0,4s)) for both of us. </event>
+         <event start="T77" end="T78">((0,3s)) Ehm, ((0,3s)) you know, I was pregnant at the time. </event>
+         <event start="T78" end="T79">And I think that a few girls wanted to launch a modelling career, so decided to drag </event>
+         <event start="T79" end="T80">((0,5s)) David's name into that. </event>
+         <event start="T80" end="T81">And, ((0,4s))</event>
+         <event start="T81" end="T82">you know I think that you took it too cool, didn't you? </event>
+         <event start="T82" end="T84">Eh </event>
+         <event start="T84" end="T85">a couple of the cases, </event>
+         <event start="T85" end="T86">but it was really… </event>
+         <event start="T89" end="T90">It did for a while. </event>
+         <event start="T90" end="T91">I mean as much as you can trust someone and someone can say "Honestly, I haven't done this. I don't know this person", </event>
+         <event start="T91" end="T92">as much as you want to believe that person </event>
+         <event start="T92" end="T93">((0,3s)) they've still put that element to doubt in your mind. </event>
+         <event start="T93" end="T94">You know, people can say what they want about me. </event>
+         <event start="T94" end="T95">((0,4s)) Ehm, but David is the one person and Brooklyn ((0,5s)) </event>
+         <event start="T95" end="T96">that ((stockt)) is mine. </event>
+         <event start="T96" end="T97">You know, ((0,3s)) people can't touch </event>
+         <event start="T97" end="T98">and won't touch. </event>
+         <event start="T98" end="T99">((laughing))</event>
+         <event start="T99" end="T100">And so when somebody tries to/ ((0,5s)) </event>
+         <event start="T100" end="T101">to cause problems in that area I mean that's ((0,7s)) how it gets me. </event>
+         <event start="T102" end="T103">((0,9s)) (T/ m/ ) right,</event>
+         <event start="T103" end="T104">I have whacked him. </event>
+         <event start="T104" end="T105">((laughing)) </event>
+         <event start="T106" end="T107">((laughing)) </event>
+         <event start="T140" end="T141">I actually, I took that out </event>
+         <event start="T141" end="T142">of the book but,… </event>
+         <event start="T142" end="T143">((laughing)) </event>
+         <event start="T143" end="T144">That eh yeah. </event>
+         <event start="T144" end="T145">((laughing))</event>
+         <event start="T147" end="T148">I didn't put it in there. </event>
+         <event start="T148" end="T149">((laughing)) </event>
+         <event start="T152" end="T154">((laughing))</event>
+      </tier>
+      <tier id="TIE2" speaker="SPK2" category="v" type="t" display-name="DAV [v]" >
+         <event start="T33" end="T34">I felt that, yeah. </event>
+         <event start="T34" end="T35">Definitely. </event>
+         <event start="T35" end="T36">You did I hope, didn't you? </event>
+         <event start="T37" end="T38">((laughing)) </event>
+         <event start="T38" end="T39">Yeah. </event>
+         <event start="T39" end="T40">Yeah, yeah, I was/ I was/ </event>
+         <event start="T40" end="T41">it was definitely. </event>
+         <event start="T41" end="T42">As soon as </event>
+         <event start="T42" end="T43">I see </event>
+         <event start="T43" end="T44">her. </event>
+         <event start="T44" end="T45">You know, I didn't even have to meet her. </event>
+         <event start="T45" end="T46">I seen her on the telly and I just wanted to meet her. </event>
+         <event start="T46" end="T47">You know, I just fancied her. </event>
+         <event start="T47" end="T48">((0,9s)) So, it was just a case of getting together then. </event>
+         <event start="T49" end="T50">Definitely not.</event>
+         <event start="T53" end="T54">What? </event>
+         <event start="T54" end="T55">Disappointed? </event>
+         <event start="T82" end="T83">Hm. </event>
+         <event start="T83" end="T84">((nodding)) </event>
+         <event start="T87" end="T88">No. </event>
+         <event start="T103" end="T104">Three times.</event>
+         <event start="T104" end="T105">Three times. </event>
+         <event start="T106" end="T107">Yeah. </event>
+         <event start="T109" end="T110">((0,5s)) Yeah, of course, but I was hurting anyway . </event>
+         <event start="T113" end="T114">Yeah. </event>
+         <event start="T115" end="T116">Ehm </event>
+         <event start="T116" end="T117">well, we went </event>
+         <event start="T117" end="T118">away for the weekend after that. </event>
+         <event start="T118" end="T119">And eh, obviously the worst thing for me was seeing Victoria hurting so much. </event>
+         <event start="T119" end="T120">((0,5s)) That hurt me more than anything. </event>
+         <event start="T120" end="T121">((0,6s)) You know, and trying to prove my innocence to someone that's ((0,7s)) </event>
+         <event start="T121" end="T122">hearing it from everyone else that I'm ((0,5s)) </event>
+         <event start="T122" end="T123">up to something </event>
+         <event start="T123" end="T124">((0,7s)) and then trying to prove that, is hard. </event>
+         <event start="T124" end="T125">You know, and trying to prove your innocence when you know for well that there's nothing that's gone on. </event>
+         <event start="T125" end="T126">((0,6s)) And that was the hardest thing. </event>
+         <event start="T126" end="T127">And then, </event>
+         <event start="T127" end="T128">you know, we tried to get away </event>
+         <event start="T128" end="T129">for a few days just to </event>
+         <event start="T129" end="T130">((0,3s)) sort of be together and be away from everything and eh ((0,4s)) </event>
+         <event start="T130" end="T131">it sort of, it/ it was good, but it was bad, </event>
+         <event start="T131" end="T132">because we was away and we was on our own and </event>
+         <event start="T132" end="T133">there was times where ((0,4s)) </event>
+         <event start="T133" end="T134">I was on my own in the room and it was very depressing and then ((0,3s)) </event>
+         <event start="T134" end="T135">and eh ((0,4s)) it was it wa/ was very hard. </event>
+         <event start="T136" end="T137">((0,8s)) </event>
+         <event start="T137" end="T138">It w/ w/ </event>
+         <event start="T138" end="T139">was on the edge of a Lake Como, </event>
+         <event start="T139" end="T140">So it was eh very tempting, but eh… </event>
+         <event start="T142" end="T143">Did you? </event>
+         <event start="T143" end="T144">I haven't acctually </event>
+         <event start="T144" end="T145">got to that part yet in the book. </event>
+         <event start="T152" end="T153">I know, I know well… </event>
+         <event start="T153" end="T154">((laughing)) </event>
+         <event start="T154" end="T155">Yeah. </event>
+         <event start="T155" end="T157">((laughing)) </event>
+      </tier>
+      <tier category="nn" display-name="[nn]" id="TIE3" type="d">
+         <event start="T37" end="T38">((laughter)) </event>
+         <event start="T54" end="T55">((laughter)) </event>
+         <event start="T103" end="T105">((laughter))</event>
+         <event start="T146" end="T148">((laughter)) </event>
+         <event start="T155" end="T157">((laughter)) </event>
+      </tier>
+   </basic-body>
+   <tierformat-table>
+      <timeline-item-format absolute-time-format="time"
+                            miliseconds-digits="2"
+                            show-every-nth-absolute="10"
+                            show-every-nth-numbering="1" />
+      <tier-format tierref="EMPTY">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">white</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">2</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="COLUMN-LABEL">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Bold</property>
+         <property name="font-color">#R99G99B99</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R99G99B99</property>
+         <property name="chunk-border">l</property>
+         <property name="font-size">6</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="ROW-LABEL">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Bold</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="TIE3">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">#R00G00Bff</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">10</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="TIE2">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="TIE1">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="TIE0">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">11</property>
+         <property name="font-name">Arial Unicode MS</property>
+      </tier-format>
+      <tier-format tierref="EMPTY-EDITOR">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">white</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">lightGray</property>
+         <property name="text-alignment">Left</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">2</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+      <tier-format tierref="SUB-ROW-LABEL">
+         <property name="row-height-calculation">Generous</property>
+         <property name="fixed-row-height">10</property>
+         <property name="font-face">Plain</property>
+         <property name="font-color">black</property>
+         <property name="chunk-border-style">solid</property>
+         <property name="bg-color">white</property>
+         <property name="text-alignment">Right</property>
+         <property name="chunk-border-color">#R00G00B00</property>
+         <property name="chunk-border" />
+         <property name="font-size">8</property>
+         <property name="font-name">Times New Roman</property>
+      </tier-format>
+   </tierformat-table>
+</basic-transcription>
