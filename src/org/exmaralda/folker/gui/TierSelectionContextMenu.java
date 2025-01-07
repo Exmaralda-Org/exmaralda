@@ -54,6 +54,7 @@ public class TierSelectionContextMenu extends javax.swing.JPopupMenu {
         addSeparator();
         JMenuItem doNothingMI = new JMenuItem("--- none ---");
         doNothingMI.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 System.out.println("**** do nothing ***");
                 partitur.setNewSelection(-1,-1, col1, col2-1);
