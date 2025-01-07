@@ -39,7 +39,7 @@
 					<xsl:otherwise>not_classified</xsl:otherwise>
 				</xsl:choose>				
 			</xsl:attribute>
-			<xsl:apply-templates></xsl:apply-templates>
+			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
 
@@ -58,9 +58,8 @@
 			</xsl:when>
 			<!-- <xsl:when test="string-length(translate(text(),'&#x2026;&#x02D9;.?!',''))=0"> -->
 			<!-- issue #308 : rather than doing nothing, it should spit out puncutation, as long as it is not HIAT and not a space character -->
-			<xsl:when test="string-length(translate(text(),'&#x0020;&#x2026;&#x02D9;.?!',''))=0 and starts-with(@n, 'HIAT')">
-				<!-- do nothing -->
-			</xsl:when>
+			<!-- <xsl:when test="string-length(translate(text(),'&#x0020;&#x2026;&#x02D9;.?!',''))=0 and starts-with(@n, 'HIAT')">
+			</xsl:when> -->
 			<xsl:when test="name(preceding-sibling::*[1])='nts' and preceding-sibling::*[1]/text()='(' and text()='('">
 				<!-- do nothing -->				
 			</xsl:when>
