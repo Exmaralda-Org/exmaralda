@@ -87,7 +87,7 @@ public class LayoutPrototype    extends javax.swing.JFrame
         player = new BASAudioPlayer();
 
         addEventAction = new AddEventAction(tableModel, tpv);
-        tpv.getInputMap(tpv.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), "addEvent");
+        tpv.getInputMap(AbstractTimeProportionalViewer.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), "addEvent");
         tpv.getActionMap().put("addEvent", addEventAction);  
         newEventButton.setAction(addEventAction);
 
