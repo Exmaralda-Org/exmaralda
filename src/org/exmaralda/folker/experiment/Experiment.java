@@ -18,7 +18,9 @@ import java.io.*;
  */
 public class Experiment {
     
-    /** Creates a new instance of Experiment */
+    /** Creates a new instance of Experiment
+     * @param soundFilename
+     * @throws java.lang.Exception */
     public Experiment(String soundFilename) throws Exception {
         File file = new File(soundFilename);
         AudioInputStream audioInputStream =
