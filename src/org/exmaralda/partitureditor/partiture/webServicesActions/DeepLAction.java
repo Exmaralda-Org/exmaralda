@@ -113,12 +113,20 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
         String formalityLevel = (String) deepLParameters.get("FORMALITY-LEVEL");
         boolean addLanguageTiers = (Boolean) deepLParameters.get("LANGUAGE-TIER");
         boolean useSegmentation = (Boolean) deepLParameters.get("USE-SEGMENTATION");
+        
+        boolean usePro = (Boolean) deepLParameters.get("USE-PRO");
+        
 
         // do this in a thread so we can report progress
         Thread deepLThread;
         deepLThread = new Thread(){
             @Override
             public void run() {
+                DeepLConnector.API_TYPE apiType = DeepLConnector.API_TYPE.FREE;
+                if (usePro){
+                    apiType = DeepLConnector.API_TYPE.PROFESSIONAL;
+                }
+                
                 boolean useSelectedTier = (boolean) deepLParameters.get("SELECTED-TIER");
                 int[] tierPositions;
                 int tiersAdded = 0;
@@ -165,7 +173,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                             for (int pos=0; pos<sourceTier.getNumberOfEvents(); pos++){
                                 Event event = sourceTier.getEventAt(pos);
                                 String originalText = event.getDescription();
-                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
+                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, apiType);
                                 addEvent(translation, event.getStart(), event.getEnd(), targetTier, languageTier);
                             }
                         } else if (!(useSegmentation) || !(sourceTier.getType().equals("t"))){                            
@@ -176,7 +184,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 for (Event e : segmentChain){
                                     originalText+=e.getDescription();
                                 }
-                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
+                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, apiType);
                                 addEvent(translation, segmentChain.get(0).getStart(), segmentChain.get(segmentChain.size()-1).getEnd(), targetTier, languageTier);
                             }
                         } else {
@@ -204,7 +212,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                     }
                                 }
                                 originalText = String.join(" ", tokens);
-                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, DeepLConnector.API_TYPE.FREE);
+                                String[] translation = deepLConnector.callDeepL(originalText, sourceLanguage, targetLanguage, formalityLevel, apiType);
                                 addEvent(translation, segmentChain.getStart(), segmentChain.getEnd(), targetTier, languageTier);
                                 
                             }
