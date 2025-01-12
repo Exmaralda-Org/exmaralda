@@ -1363,7 +1363,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording") + ": " + f.getName());
                 fileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
-                fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("default-audio-path", "")));
+                //fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("default-audio-path", "")));
+                fileChooser.setCurrentDirectory(f.getParentFile());
                 int retValue = fileChooser.showOpenDialog(getFrame());
                 if (retValue==JFileChooser.CANCEL_OPTION) return;
                 mediaPath = fileChooser.getSelectedFile().getAbsolutePath();
