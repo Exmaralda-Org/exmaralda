@@ -414,11 +414,11 @@
 		<uiItem name="cmd.NewAction" lang="bul" value="Нов документ"/>
 
 		<uiItem name="cmd.OpenAction" lang="deu" value="Dokument öffnen..."/>
-		<uiItem name="cmd.OpenAction" lang="eng" value="Open document"/>
-		<uiItem name="cmd.OpenAction" lang="tk" value="belgeyi aç"/>
-		<uiItem name="cmd.OpenAction" lang="fra" value="Ouvrir dossier"/>
-		<uiItem name="cmd.OpenAction" lang="spa" value="Abrir documento"/>
-		<uiItem name="cmd.OpenAction" lang="bul" value="Отвори документ"/>
+		<uiItem name="cmd.OpenAction" lang="eng" value="Open document..."/>
+		<uiItem name="cmd.OpenAction" lang="tk" value="belgeyi aç..."/>
+		<uiItem name="cmd.OpenAction" lang="fra" value="Ouvrir dossier..."/>
+		<uiItem name="cmd.OpenAction" lang="spa" value="Abrir documento..."/>
+		<uiItem name="cmd.OpenAction" lang="bul" value="Отвори документ..."/>
 
 		<uiItem name="cmd.OpenTemplatesAction" lang="deu" value="Templates öffnen..."/>
 		<uiItem name="cmd.OpenTemplatesAction" lang="eng" value="Open templates..."/>

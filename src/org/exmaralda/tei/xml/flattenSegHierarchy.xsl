@@ -18,7 +18,7 @@
     </xsl:variable>
     
     
-    <xsl:function name="exmaralda:position" as="xs:int">
+    <xsl:function name="exmaralda:position" as="xs:integer">
         <xsl:param name="WHEN_ID"/>
         <xsl:sequence select="$TIMELINE_COPY/descendant::*[@xml:id=$WHEN_ID]/@position" />
     </xsl:function>

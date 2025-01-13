@@ -28,7 +28,7 @@ public class ChooseTimelineItemDialog extends JEscapeDialog {
         for (int pos=1; pos<timeline.getNumberOfTimelineItems()-1; pos++){
             String index = Integer.toString(beginIndex+pos-1);
             TimelineItem tli = timeline.getTimelineItemAt(pos);
-            String listEntry = new String(index + ":");
+            String listEntry = index + ":";
             if (tli.getTime()>=0){
                 //listEntry+=new String(" [" + tli.getTimeAsString() + "]");
                 listEntry+=" [" + org.exmaralda.folker.utilities.TimeStringFormatter.formatMiliseconds(tli.getTime()*1000.0, 2) + "]";

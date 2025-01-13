@@ -157,8 +157,21 @@ public class DeepLParameterDialog extends javax.swing.JDialog {
         return result;
     }
     
-    public void setParameters(String apiKey, String segmentationAlgorithm, BasicTranscription transcription, int selectedRow){
+    public void setParameters(String apiKey, 
+            String sourceLanguage, String targetLanguage, String formalityLevel, // new for #507
+            boolean languageTier, boolean useSegmentation, boolean usePro, // new for #507
+            String segmentationAlgorithm, BasicTranscription transcription, int selectedRow){
+
         apiKeyTextField.setText(apiKey);
+        
+        // new for #507
+        sourceLanguageComboBox.setSelectedItem(sourceLanguage);
+        targetLanguageComboBox.setSelectedItem(targetLanguage);
+        lessFormalityRadioButton.setSelected("less".equals(formalityLevel));
+        moreFormalityRadioButton.setSelected("more".equals(formalityLevel));
+        segmentCheckBox.setSelected(useSegmentation);
+        this.proAPIRadioButton.setSelected(usePro);
+        
         updateOK();
         segmentationComboBox.setSelectedItem(segmentationAlgorithm);
         if (selectedRow>=0){

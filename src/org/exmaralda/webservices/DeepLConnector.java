@@ -90,6 +90,7 @@ public class DeepLConnector {
          */
         JsonNode translationNode = jsonRoot.path("translations");
         String translation = translationNode.findPath("text").textValue();
+        translation = translation.replaceAll(" {2,}", " ").replaceAll("^ ", "");
         String detected_source_language = translationNode.findPath("detected_source_language").textValue();
         String[] result = {translation, detected_source_language};
         

@@ -90,7 +90,17 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
         // retrieve values from preferences
         String apiKey = settings.get("DEEPL-API-KEY", "");
 
-        deepLParameterDialog.setParameters(apiKey, table.preferredSegmentation, table.getModel().getTranscription(), table.selectionStartRow);
+        deepLParameterDialog.setParameters(
+                apiKey, 
+                settings.get("DEEPL-SOURCE-LANGUAGE", "DE"),            // new for #507
+                settings.get("DEEPL-TARGET-LANGUAGE", "EN-GB"),         // new for #507    
+                settings.get("DEEPL-FORMALITY-LEVEL", "default"),       // new for #507
+                settings.getBoolean("DEEPL-LANGUAGE-TIER", false),      // new for #507
+                settings.getBoolean("DEEPL-USE-SEGMENTATION", false),   // new for #507
+                settings.getBoolean("DEEPL-USE-PRO", false),
+                table.preferredSegmentation, 
+                table.getModel().getTranscription(), 
+                table.selectionStartRow);
         
         deepLParameterDialog.setLocationRelativeTo(table);
         deepLParameterDialog.setVisible(true);
@@ -112,10 +122,16 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
         String targetLanguage = (String) deepLParameters.get("TARGET-LANGUAGE");
         String formalityLevel = (String) deepLParameters.get("FORMALITY-LEVEL");
         boolean addLanguageTiers = (Boolean) deepLParameters.get("LANGUAGE-TIER");
-        boolean useSegmentation = (Boolean) deepLParameters.get("USE-SEGMENTATION");
-        
+        boolean useSegmentation = (Boolean) deepLParameters.get("USE-SEGMENTATION");        
         boolean usePro = (Boolean) deepLParameters.get("USE-PRO");
         
+        // new for #507        
+        settings.put("DEEPL-SOURCE-LANGUAGE", sourceLanguage);
+        settings.put("DEEPL-TARGET-LANGUAGE", targetLanguage);
+        settings.put("DEEPL-FORMALITY-LEVEL", formalityLevel);
+        settings.put("DEEPL-LANGUAGE-TIER", Boolean.toString(addLanguageTiers));
+        settings.put("DEEPL-USE-SEGMENTATION", Boolean.toString(useSegmentation));
+        settings.put("DEEPL-USE-PRO", Boolean.toString(usePro));
 
         // do this in a thread so we can report progress
         Thread deepLThread;
@@ -220,8 +236,12 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                     } catch (JexmaraldaException | IOException | URISyntaxException | SAXException | FSMException ex) {
                         Logger.getLogger(DeepLAction.class.getName()).log(Level.SEVERE, null, ex);
                         pbd.addText("Error: " + ex.getLocalizedMessage());
-                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);             
-                        JOptionPane.showMessageDialog(pbd, ex);
+                        pbd.setTextAreaBackgroundColor(java.awt.Color.RED);
+                        String shortenedMessage = ex.getLocalizedMessage();
+                        if (shortenedMessage.length()>300){
+                            shortenedMessage = shortenedMessage.substring(0,300) + "...";
+                        }
+                        JOptionPane.showMessageDialog(pbd, shortenedMessage);
                     } 
                 }
                 
@@ -235,7 +255,11 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                         } catch (IOException | JexmaraldaException ex) {
                             pbd.addText("Error: " + ex.getLocalizedMessage());
                             pbd.setTextAreaBackgroundColor(java.awt.Color.RED);                            
-                            JOptionPane.showMessageDialog(pbd, ex);
+                            String shortenedMessage = ex.getLocalizedMessage();
+                            if (shortenedMessage.length()>300){
+                                shortenedMessage = shortenedMessage.substring(0,300) + "...";
+                            }
+                            JOptionPane.showMessageDialog(pbd, shortenedMessage);
                         }
                     }
                 });
