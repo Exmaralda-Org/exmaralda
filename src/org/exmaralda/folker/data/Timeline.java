@@ -94,6 +94,9 @@ public class Timeline {
      * @return  */
     public Timepoint findTimepoint(double time){
         
+        // new 06-02-2025, issue #509
+        if (timepoints.isEmpty()) return null;
+        
         // check if the time is inside this timeline's range
         if (time<getMinimumTime()){
             if (time>getMinimumTime()-tolerance) return getTimepointAt(0);

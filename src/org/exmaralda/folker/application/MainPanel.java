@@ -45,6 +45,20 @@ public class MainPanel extends javax.swing.JPanel {
         }
     }
     
+    // 06-02-2025 : issue #509
+    public void setTabSwitchEnabled(boolean enable){
+        if (enable){
+            textViewsTabbedPane.setEnabledAt(0, true);
+            textViewsTabbedPane.setEnabledAt(1, true);
+            textViewsTabbedPane.setEnabledAt(2, true);
+            return;
+        }
+        int selectedTab = textViewsTabbedPane.getSelectedIndex();
+        for (int i=0; i<3; i++){
+            textViewsTabbedPane.setEnabledAt(i, i==selectedTab);
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

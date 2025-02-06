@@ -1462,6 +1462,10 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     importAction.setEnabled(false);
                     exportAction.setEnabled(false);
                     exitAction.setEnabled(false);
+                    
+                    //new for #509
+                    applicationFrame.mainPanel.setTabSwitchEnabled(false);
+                    
                     //System.out.println("STATION 1");
                     status(FOLKERInternationalizer.getString("status.saving") + finalFile.getAbsolutePath() + "...");
                     // issue #340
@@ -1490,6 +1494,11 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
                     saveAction.setEnabled(true);
                     saveAsAction.setEnabled(true);
                     applicationFrame.mainPanel.progressBar.setVisible(false);
+                    
+                    //new for #509
+                    applicationFrame.mainPanel.setTabSwitchEnabled(true);
+                    
+                    
                     IS_SAVING_IN_BACKGROUND = false;
                     System.out.println("SAVE_THREAD_FINALLY");
                 }
