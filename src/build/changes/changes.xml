@@ -10,6 +10,9 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="folker" type="change" version="1.3.2" date="06.02.2025">Disable switch view while saving in background (issue #509)</change>
+    <change tool="folker" type="bug" version="1.3.2" date="06.02.2025">Take care of boundary case in copying: empty timeline (issue #509)</change>
+    <change tool="partitureditor" type="bug" version="1.8.2" date="12.01.2025">DeepL call would not use pro version (issue #507)</change>
     <change tool="folker" type="change" version="1.3.2" date="18.12.2024">Make mask table entries sortable (issue #500)</change>
     <change tool="partitureditor" type="change" version="1.8.1" date="01.12.2024">Make whisper import robust against words without timestamps (issue #357)</change>
     <change tool="partitureditor" type="bug" version="1.8.1" date="16.11.2024">Fixed bug in making sure editor does not exit while saving (issue #456)</change>
