@@ -7,9 +7,13 @@
 package org.exmaralda.exakt.exmaraldaSearch.swing;
 
 
+import java.awt.Frame;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
+import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
+import org.exmaralda.exakt.tokenlist.AbstractTokenList;
+import org.exmaralda.exakt.tokenlist.WordlistDialog;
 
 /**
  *
@@ -17,15 +21,20 @@ import javax.swing.event.ListSelectionEvent;
  */
 public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements javax.swing.event.ListSelectionListener {
     
-
+    COMACorpusInterface comaCorpus;
+    
     /** Creates new form ChooseCOMAAttributesPanel */
     public ChooseCOMAAttributesPanel(Set<String> speakerAttributes, 
                                      Set<String> communicationAttributes,
                                      Set<String> transcriptionAttributes, 
-                                     List<String[]> selectedAttributes) {
+                                     List<String[]> selectedAttributes,
+                                     COMACorpusInterface comaCorpus
+                                     ) {
+        this.comaCorpus = comaCorpus;
         initComponents();
         initLists(speakerAttributes, communicationAttributes, transcriptionAttributes, selectedAttributes);
     }
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -41,16 +50,19 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
         speakerAttributesList = new javax.swing.JList();
         speakerAttributesButtonsPanel = new javax.swing.JPanel();
         addSpeakerAttributeButton = new javax.swing.JButton();
+        inspectSpeakerAttributeButton = new javax.swing.JButton();
         communicationAttributesPanel = new javax.swing.JPanel();
         communicationAttributesScrollPane = new javax.swing.JScrollPane();
         communicationAttributesList = new javax.swing.JList();
         communicationAttributesButtonsPanel = new javax.swing.JPanel();
         addCommunicationAttributeButton = new javax.swing.JButton();
+        inspectCommunicationAttributeButton = new javax.swing.JButton();
         transcriptionAttributesPanel = new javax.swing.JPanel();
         transcriptionAttributesScrollPane = new javax.swing.JScrollPane();
         transcriptionAttributesList = new javax.swing.JList();
         transcriptionAttributesButtonsPanel = new javax.swing.JPanel();
         addTranscriptionAttributeButton = new javax.swing.JButton();
+        inspectTranscriptionAttributeButton = new javax.swing.JButton();
         selectedPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         selectedAttributesScrollPane = new javax.swing.JScrollPane();
@@ -66,7 +78,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
         unselectedPanel.setPreferredSize(new java.awt.Dimension(400, 480));
         unselectedPanel.setLayout(new java.awt.GridLayout(3, 1));
 
-        speakerAttributesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Speaker"));
+        speakerAttributesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Speaker [S]"));
         speakerAttributesPanel.setLayout(new java.awt.BorderLayout());
 
         speakerAttributesList.setModel(new javax.swing.AbstractListModel() {
@@ -79,6 +91,11 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
                 speakerAttributesListMouseClicked(evt);
             }
         });
+        speakerAttributesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                speakerAttributesListValueChanged(evt);
+            }
+        });
         speakerAttributesScrollPane.setViewportView(speakerAttributesList);
 
         speakerAttributesPanel.add(speakerAttributesScrollPane, java.awt.BorderLayout.CENTER);
@@ -87,6 +104,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
 
         addSpeakerAttributeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/list-add.png"))); // NOI18N
         addSpeakerAttributeButton.setToolTipText("Add the selected item(s)");
+        addSpeakerAttributeButton.setEnabled(false);
         addSpeakerAttributeButton.setMaximumSize(new java.awt.Dimension(49, 23));
         addSpeakerAttributeButton.setMinimumSize(new java.awt.Dimension(49, 23));
         addSpeakerAttributeButton.setPreferredSize(new java.awt.Dimension(49, 23));
@@ -97,11 +115,24 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
         });
         speakerAttributesButtonsPanel.add(addSpeakerAttributeButton);
 
+        inspectSpeakerAttributeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/status/dialog-information.png"))); // NOI18N
+        inspectSpeakerAttributeButton.setToolTipText("Show available values for selected attribute");
+        inspectSpeakerAttributeButton.setEnabled(false);
+        inspectSpeakerAttributeButton.setMaximumSize(new java.awt.Dimension(49, 23));
+        inspectSpeakerAttributeButton.setMinimumSize(new java.awt.Dimension(49, 23));
+        inspectSpeakerAttributeButton.setPreferredSize(new java.awt.Dimension(49, 23));
+        inspectSpeakerAttributeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inspectSpeakerAttributeButtonActionPerformed(evt);
+            }
+        });
+        speakerAttributesButtonsPanel.add(inspectSpeakerAttributeButton);
+
         speakerAttributesPanel.add(speakerAttributesButtonsPanel, java.awt.BorderLayout.EAST);
 
         unselectedPanel.add(speakerAttributesPanel);
 
-        communicationAttributesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Communication"));
+        communicationAttributesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Communication [C]"));
         communicationAttributesPanel.setLayout(new java.awt.BorderLayout());
 
         communicationAttributesList.setModel(new javax.swing.AbstractListModel() {
@@ -114,6 +145,11 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
                 communicationAttributesListMouseClicked(evt);
             }
         });
+        communicationAttributesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                communicationAttributesListValueChanged(evt);
+            }
+        });
         communicationAttributesScrollPane.setViewportView(communicationAttributesList);
 
         communicationAttributesPanel.add(communicationAttributesScrollPane, java.awt.BorderLayout.CENTER);
@@ -122,6 +158,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
 
         addCommunicationAttributeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/list-add.png"))); // NOI18N
         addCommunicationAttributeButton.setToolTipText("Add the selected item(s)");
+        addCommunicationAttributeButton.setEnabled(false);
         addCommunicationAttributeButton.setMaximumSize(new java.awt.Dimension(49, 23));
         addCommunicationAttributeButton.setMinimumSize(new java.awt.Dimension(49, 23));
         addCommunicationAttributeButton.setPreferredSize(new java.awt.Dimension(49, 23));
@@ -132,11 +169,24 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
         });
         communicationAttributesButtonsPanel.add(addCommunicationAttributeButton);
 
+        inspectCommunicationAttributeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/status/dialog-information.png"))); // NOI18N
+        inspectCommunicationAttributeButton.setToolTipText("Show available values for selected attribute");
+        inspectCommunicationAttributeButton.setEnabled(false);
+        inspectCommunicationAttributeButton.setMaximumSize(new java.awt.Dimension(49, 23));
+        inspectCommunicationAttributeButton.setMinimumSize(new java.awt.Dimension(49, 23));
+        inspectCommunicationAttributeButton.setPreferredSize(new java.awt.Dimension(49, 23));
+        inspectCommunicationAttributeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inspectCommunicationAttributeButtonActionPerformed(evt);
+            }
+        });
+        communicationAttributesButtonsPanel.add(inspectCommunicationAttributeButton);
+
         communicationAttributesPanel.add(communicationAttributesButtonsPanel, java.awt.BorderLayout.EAST);
 
         unselectedPanel.add(communicationAttributesPanel);
 
-        transcriptionAttributesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Transcription"));
+        transcriptionAttributesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Transcription [T]"));
         transcriptionAttributesPanel.setLayout(new java.awt.BorderLayout());
 
         transcriptionAttributesList.setModel(new javax.swing.AbstractListModel() {
@@ -149,6 +199,11 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
                 transcriptionAttributesListMouseClicked(evt);
             }
         });
+        transcriptionAttributesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                transcriptionAttributesListValueChanged(evt);
+            }
+        });
         transcriptionAttributesScrollPane.setViewportView(transcriptionAttributesList);
 
         transcriptionAttributesPanel.add(transcriptionAttributesScrollPane, java.awt.BorderLayout.CENTER);
@@ -157,6 +212,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
 
         addTranscriptionAttributeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/list-add.png"))); // NOI18N
         addTranscriptionAttributeButton.setToolTipText("Add the selected item(s)");
+        addTranscriptionAttributeButton.setEnabled(false);
         addTranscriptionAttributeButton.setMaximumSize(new java.awt.Dimension(49, 23));
         addTranscriptionAttributeButton.setMinimumSize(new java.awt.Dimension(49, 23));
         addTranscriptionAttributeButton.setPreferredSize(new java.awt.Dimension(49, 23));
@@ -166,6 +222,19 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
             }
         });
         transcriptionAttributesButtonsPanel.add(addTranscriptionAttributeButton);
+
+        inspectTranscriptionAttributeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/16x16/status/dialog-information.png"))); // NOI18N
+        inspectTranscriptionAttributeButton.setToolTipText("Show available values for selected attribute");
+        inspectTranscriptionAttributeButton.setEnabled(false);
+        inspectTranscriptionAttributeButton.setMaximumSize(new java.awt.Dimension(49, 23));
+        inspectTranscriptionAttributeButton.setMinimumSize(new java.awt.Dimension(49, 23));
+        inspectTranscriptionAttributeButton.setPreferredSize(new java.awt.Dimension(49, 23));
+        inspectTranscriptionAttributeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inspectTranscriptionAttributeButtonActionPerformed(evt);
+            }
+        });
+        transcriptionAttributesButtonsPanel.add(inspectTranscriptionAttributeButton);
 
         transcriptionAttributesPanel.add(transcriptionAttributesButtonsPanel, java.awt.BorderLayout.EAST);
 
@@ -321,6 +390,41 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
             ((DefaultListModel)(speakerAttributesList.getModel())).removeElement(attributeName);
         }        
     }//GEN-LAST:event_addSpeakerAttributeButtonActionPerformed
+
+    private void speakerAttributesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_speakerAttributesListValueChanged
+        this.addSpeakerAttributeButton.setEnabled(this.speakerAttributesList.getSelectedIndex()>=0);
+        this.inspectSpeakerAttributeButton.setEnabled(this.speakerAttributesList.getSelectedIndex()>=0);
+
+    }//GEN-LAST:event_speakerAttributesListValueChanged
+
+    private void communicationAttributesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_communicationAttributesListValueChanged
+        this.addCommunicationAttributeButton.setEnabled(this.communicationAttributesList.getSelectedIndex()>=0);
+        this.inspectCommunicationAttributeButton.setEnabled(this.communicationAttributesList.getSelectedIndex()>=0);
+
+    }//GEN-LAST:event_communicationAttributesListValueChanged
+
+    private void transcriptionAttributesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_transcriptionAttributesListValueChanged
+        this.addTranscriptionAttributeButton.setEnabled(this.transcriptionAttributesList.getSelectedIndex()>=0);
+        this.inspectTranscriptionAttributeButton.setEnabled(this.transcriptionAttributesList.getSelectedIndex()>=0);
+    }//GEN-LAST:event_transcriptionAttributesListValueChanged
+
+    private void inspectSpeakerAttributeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inspectSpeakerAttributeButtonActionPerformed
+        String attribute = (String) speakerAttributesList.getSelectedValue();
+        AbstractTokenList availableValues = comaCorpus.getAvailableValuesForSpeakerAttribute(attribute);
+        showAvailableValues(availableValues, "Values for speaker attribute '" + attribute + "'");
+    }//GEN-LAST:event_inspectSpeakerAttributeButtonActionPerformed
+
+    private void inspectCommunicationAttributeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inspectCommunicationAttributeButtonActionPerformed
+        String attribute = (String) this.communicationAttributesList.getSelectedValue();
+        AbstractTokenList availableValues = comaCorpus.getAvailableValuesForCommunicationAttribute(attribute);
+        showAvailableValues(availableValues, "Values for communication attribute '" + attribute + "'");
+    }//GEN-LAST:event_inspectCommunicationAttributeButtonActionPerformed
+
+    private void inspectTranscriptionAttributeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inspectTranscriptionAttributeButtonActionPerformed
+        String attribute = (String) this.transcriptionAttributesList.getSelectedValue();
+        AbstractTokenList availableValues = comaCorpus.getAvailableValuesForTranscriptionAttribute(attribute);
+        showAvailableValues(availableValues, "Values for transcription attribute '" + attribute + "'");
+    }//GEN-LAST:event_inspectTranscriptionAttributeButtonActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -332,6 +436,9 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
     private javax.swing.JList communicationAttributesList;
     private javax.swing.JPanel communicationAttributesPanel;
     private javax.swing.JScrollPane communicationAttributesScrollPane;
+    private javax.swing.JButton inspectCommunicationAttributeButton;
+    private javax.swing.JButton inspectSpeakerAttributeButton;
+    private javax.swing.JButton inspectTranscriptionAttributeButton;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton moveDownButton;
     private javax.swing.JButton moveUpButton;
@@ -377,7 +484,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
                                 JList list,                                 
                                 HashSet<String> selected, 
                                 String type){
-        Vector<String> v = new Vector();
+        List<String> v = new ArrayList<>();
         v.addAll(attributes);
         Collections.sort(v);
         DefaultListModel listModel = new DefaultListModel();
@@ -389,6 +496,7 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
         list.setModel(listModel);        
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) return;
         boolean onlyOneIsSelected = ((JList)(e.getSource())).getSelectedIndices().length==1;
@@ -407,6 +515,14 @@ public class ChooseCOMAAttributesPanel extends javax.swing.JPanel implements jav
             retValue.add(value);
         }
         return retValue;
+    }
+
+    private void showAvailableValues(AbstractTokenList availableValues, String title) {
+        WordlistDialog dialog = new WordlistDialog(new JFrame(), true, availableValues);
+        dialog.setTitle(title);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+        
     }
 
 }

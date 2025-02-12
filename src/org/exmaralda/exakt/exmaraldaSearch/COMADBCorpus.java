@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ import org.exmaralda.exakt.search.DBCorpusComponent;
 import org.exmaralda.exakt.search.SearchEvent;
 import org.exmaralda.exakt.search.SearchListenerInterface;
 import org.exmaralda.exakt.search.SearchableSegmentLocatorInterface;
+import org.exmaralda.exakt.tokenlist.AbstractTokenList;
 
 /**
  *
@@ -408,6 +410,22 @@ public class COMADBCorpus implements COMACorpusInterface {
     public String getUniqueSpeakerIdentifier() {
         // need to change this maybe
         return "//speaker/abbreviation";
+    }
+
+    @Override
+    public AbstractTokenList getAvailableValuesForSpeakerAttribute(String attributeName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+    @Override
+    public AbstractTokenList getAvailableValuesForTranscriptionAttribute(String attributeName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public AbstractTokenList getAvailableValuesForCommunicationAttribute(String attributeName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
       
 }

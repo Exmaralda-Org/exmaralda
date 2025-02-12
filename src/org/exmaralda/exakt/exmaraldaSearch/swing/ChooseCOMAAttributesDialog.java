@@ -10,6 +10,7 @@
 package org.exmaralda.exakt.exmaraldaSearch.swing;
 
 import java.util.*;
+import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
 
 /**
  *
@@ -24,10 +25,18 @@ public class ChooseCOMAAttributesDialog extends org.exmaralda.exakt.search.swing
                                         Set<String> speakerAttributes, 
                                         Set<String> communicationAttributes,
                                         Set<String> transcriptionAttributes, 
-                                        List<String[]> selectedAttributes){
+                                        List<String[]> selectedAttributes,
+                                        COMACorpusInterface comaCorpus
+                                        ){
         super(parent, modal);
         setTitle("Choose COMA Attributes");
-        panel = new ChooseCOMAAttributesPanel(speakerAttributes, communicationAttributes, transcriptionAttributes, selectedAttributes);
+        panel = new ChooseCOMAAttributesPanel(
+                speakerAttributes, 
+                communicationAttributes, 
+                transcriptionAttributes, 
+                selectedAttributes,
+                comaCorpus
+        );
         getContentPane().add(panel);
         pack();
     }
@@ -35,6 +44,7 @@ public class ChooseCOMAAttributesDialog extends org.exmaralda.exakt.search.swing
     public Vector<String[]> getSelectedAttributes(){
         return panel.getSelectedAttributes();
     }
+
     
     
 }

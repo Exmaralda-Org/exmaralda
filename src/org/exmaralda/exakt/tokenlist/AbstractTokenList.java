@@ -49,6 +49,9 @@ public abstract class AbstractTokenList {
     abstract public List<String> getTokens(int howtosort);
 
     abstract public boolean readWordsFromExmaraldaCorpus(COMACorpusInterface finalCorpus) throws Exception;
+    
+    abstract public boolean readAnnotationTokensFromExmaraldaCorpus(COMACorpusInterface finalCorpus, String annotationName)  throws Exception;
+    
 
 
     public String getName() {
@@ -66,6 +69,7 @@ public abstract class AbstractTokenList {
         }
         return count;
     }
+
 
 
 

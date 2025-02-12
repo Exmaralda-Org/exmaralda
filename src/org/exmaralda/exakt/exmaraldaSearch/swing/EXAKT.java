@@ -498,6 +498,7 @@ public class EXAKT extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("EXAKT (PV8 0.4)");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -548,7 +549,7 @@ public class EXAKT extends javax.swing.JFrame
 
         concWordSplitPane.setRightComponent(concordanceListPanel);
 
-        wordListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Word lists"));
+        wordListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Token lists"));
         wordListPanel.setLayout(new java.awt.BorderLayout());
 
         wordListList.setModel(new javax.swing.AbstractListModel() {
@@ -1061,17 +1062,72 @@ public class EXAKT extends javax.swing.JFrame
         corpusList.setSelectedIndex(corpusList.getModel().getSize()-1);
         // added 21-01-2010: automatically make a new concordance for each newly opened corpus
         newSearchPanelAction.actionPerformed(null);
-
-        if (corpusToBeAdded.isWordSegmented()){
-            int value = JOptionPane.showConfirmDialog(this,
-                    "The corpus contains a word segmentation.\nDo you want to create a word list?",
-                    "Word list",
-                    JOptionPane.YES_NO_OPTION);
-            if (value==JOptionPane.YES_OPTION){
-                readWordList(corpusToBeAdded);
+        
+        if (corpusToBeAdded.isWordSegmented() || !corpusToBeAdded.getAnnotationNames().isEmpty()){
+            ChooseTokenListsDialog dialog = new ChooseTokenListsDialog(this, true, corpusToBeAdded);
+            dialog.setLocationRelativeTo(this);
+            dialog.setVisible(true);
+            if (dialog.approved){
+                if (dialog.isWordListSelected()){
+                    readWordList(corpusToBeAdded);
+                }
+                List<String> annotationNames = dialog.getSelectedAnnotationNames();
+                for (String annotationName : annotationNames){ 
+                    readAnnotationTokenList(corpusToBeAdded, annotationName);
+                }
             }
         }
+
     }
+    
+    private void readAnnotationTokenList(COMACorpusInterface corpus, String annotationName) {
+        final ProgressBarDialog pbd = new ProgressBarDialog(this, false);
+        pbd.setTitle("Reading word list from " + corpus.getCorpusName());
+        pbd.setLocationRelativeTo(this);
+        pbd.setVisible(true);
+        
+        final AbstractTokenList l;
+        if (corpus instanceof COMADBCorpus){
+            l = new DBTokenList();
+            pbd.progressBar.setIndeterminate(true);
+            pbd.progressBar.setString("Getting tokens from database...");
+        } else {
+            l = new HashtableTokenList();
+            ((HashtableTokenList)l).addSearchListener(pbd);
+        }
+        final COMACorpusInterface finalCorpus = corpus;
+        final Runnable doUpdateWordListList = new Runnable() {
+             @Override
+             public void run() {
+                 updateWordListList();
+             }
+         };
+        Thread openThread = new Thread(){
+            @Override
+            public void run(){
+                try {
+                    l.readAnnotationTokensFromExmaraldaCorpus(finalCorpus, annotationName);
+                    wordlistsToBeAdded.add(l);
+                    pbd.setVisible(false);
+                    try {
+                        javax.swing.SwingUtilities.invokeAndWait(doUpdateWordListList);
+                    } catch (InterruptedException | InvocationTargetException ex) {
+                        Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
+                    }
+                    setCursor(ORDINARY_CURSOR);
+                } catch (Exception ex) {
+                    Logger.getLogger(EXAKT.class.getName()).log(Level.SEVERE, null, ex);          
+                    showErrorDialog(ex);
+                    progressBar.setValue(100);
+                    progressBar.setString("Error");
+                    setCursor(ORDINARY_CURSOR);
+                }
+            }
+        };
+        openThread.start();
+        
+    }
+    
 
 
     public void readWordList(COMACorpusInterface corpus){
@@ -1101,7 +1157,7 @@ public class EXAKT extends javax.swing.JFrame
             public void run(){
                 try {
                     l.readWordsFromExmaraldaCorpus(finalCorpus);
-                    wordlistToBeAdded = l;
+                    wordlistsToBeAdded.add(l);
                     pbd.setVisible(false);
                     try {
                         javax.swing.SwingUtilities.invokeAndWait(doUpdateWordListList);
@@ -1121,11 +1177,14 @@ public class EXAKT extends javax.swing.JFrame
         openThread.start();
     }
 
-    private AbstractTokenList wordlistToBeAdded = null;
+    private List<AbstractTokenList> wordlistsToBeAdded = new ArrayList<>();
 
     void updateWordListList(){
-        this.wordListListModel.addElement(wordlistToBeAdded);
-        status("Wordlist added.");
+        for (AbstractTokenList wordlistToBeAdded : wordlistsToBeAdded){
+            this.wordListListModel.addElement(wordlistToBeAdded);
+            wordlistsToBeAdded.remove(wordlistToBeAdded);
+            status("Token list " + wordlistToBeAdded.getName() + " added.");
+        }
         
     }
     
@@ -1846,6 +1905,7 @@ public class EXAKT extends javax.swing.JFrame
             getRegisteredDialog.setVisible(true);
         }
     }
+
     
     
 

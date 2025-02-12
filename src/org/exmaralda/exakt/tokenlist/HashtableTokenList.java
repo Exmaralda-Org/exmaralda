@@ -8,7 +8,6 @@ package org.exmaralda.exakt.tokenlist;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -35,10 +34,10 @@ import org.jdom.xpath.XPath;
  */
 public class HashtableTokenList extends AbstractTokenList {
 
-    Hashtable<String, Integer> theTokens = new Hashtable<String, Integer>();
-    Hashtable<String, Set<String>> tokensByDocument = new Hashtable<String, Set<String>>();
-    Hashtable<String, Set<String>> tokensByPOS = new Hashtable<String, Set<String>>();
-    private Vector<SearchListenerInterface> listenerList = new Vector<SearchListenerInterface>();
+    Hashtable<String, Integer> theTokens = new Hashtable<>();
+    Hashtable<String, Set<String>> tokensByDocument = new Hashtable<>();
+    Hashtable<String, Set<String>> tokensByPOS = new Hashtable<>();
+    private final Vector<SearchListenerInterface> listenerList = new Vector<>();
 
 
     public void addSearchListener(SearchListenerInterface sli) {
@@ -125,6 +124,29 @@ public class HashtableTokenList extends AbstractTokenList {
     public int removeToken(String token) {
         return theTokens.remove(token);
     }
+    
+    @Override
+    public boolean readAnnotationTokensFromExmaraldaCorpus(COMACorpusInterface corpus, String annotationName) throws Exception {
+        COMACorpus comacorpus = (COMACorpus)corpus;
+        //HashSet<String> segmentNames = comacorpus.getSegmentNames();
+        String XPATH_TO_TAS = "//annotation[@name='" + annotationName + "']/ta";            
+        XPath xp = XPath.newInstance(XPATH_TO_TAS);
+        for (int pos=0; pos<comacorpus.getNumberOfCorpusComponents(); pos++){
+            double prog = (double)pos/(double)(comacorpus.getNumberOfCorpusComponents());
+            File xmlFile = comacorpus.getFileList().elementAt(pos);
+            fireCorpusInit(prog, "Getting tokens for " + xmlFile.getName());
+            //System.out.println("Getting tokens from " + xmlFile.getName());
+            Document xmlDocument = org.exmaralda.exakt.utilities.FileIO.readDocumentFromLocalFile(xmlFile);
+            List l = xp.selectNodes(xmlDocument);
+            for (Object o : l){
+                Element e = (Element)o;
+                this.addToken(e.getText());
+            }
+        }
+        this.setName("Token list '" + annotationName + "' for " + comacorpus.getCorpusName());
+        return true;
+    }
+    
 
     @Override
     public boolean readWordsFromExmaraldaCorpus(COMACorpusInterface c) throws JDOMException, IOException {
@@ -336,6 +358,7 @@ public class HashtableTokenList extends AbstractTokenList {
         }
         tokensByPOS.get(tok).add(partOfSpeech);
     }
+
     
 
 

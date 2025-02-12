@@ -6,11 +6,14 @@ package org.exmaralda.exakt.exmaraldaSearch;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.exakt.search.AbstractXMLFileListCorpus;
+import org.exmaralda.exakt.tokenlist.AbstractTokenList;
+import org.exmaralda.exakt.tokenlist.HashtableTokenList;
 import org.exmaralda.partitureditor.jexmaralda.StringUtilities;
 import org.jdom.Attribute;
 import org.jdom.Document;
@@ -46,7 +49,7 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
     
     static String[][] FIXED_SPEAKER_ATTRIBUTES = {
                                                         {"Sigle*","Sigle/text()"},
-                                                        {"KnownHuman*","KnownHuman/text()"},
+                                                        /* {"KnownHuman*","KnownHuman/text()"},*/
                                                         {"Pseudo*","Pseudo/text()"},
                                                         {"Sex*","Sex/text()"}
                                                     };
@@ -67,7 +70,15 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
     HashSet<String> descriptionNames = new HashSet<>();
     HashSet<String> segmentNames = new HashSet<>();
 
+    
+    // 11-02-2025: for #492
     void fetchAttributes(String xpathToStartElement, Map<String, XPath> index, String[][] fixedAttributes) {
+        this.fetchAttributes(xpathToStartElement, index, fixedAttributes, "");
+    }
+    
+    
+    // 11-02-2025: for #492, add an optional prefix
+    void fetchAttributes(String xpathToStartElement, Map<String, XPath> index, String[][] fixedAttributes, String indexPrefix) {
         String searchString = xpathToStartElement + "/Description/Key/@Name";
         try {
             XPath xp = XPath.newInstance(searchString);
@@ -82,7 +93,7 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
                         xpathToValueString = "Description/Key[@Name=\"" + an + "\"]/text()";
                     }
                     XPath xpathToValue = XPath.newInstance(xpathToValueString);
-                    index.put(attributeName, xpathToValue);
+                    index.put(indexPrefix + attributeName, xpathToValue);
                 }
             }
             for (String[] fa : fixedAttributes) {
@@ -294,11 +305,62 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
     public Element getSpeakerData() {
         return null;
     }
+    
+    @Override
+    public AbstractTokenList getAvailableValuesForSpeakerAttribute(String attributeName){
+        try {            
+            return getAvailableValues("Speaker", speakerAttributes.get(attributeName));
+        } catch (JDOMException ex) {
+            Logger.getLogger(AbstractCOMACorpus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new HashtableTokenList();
+    }
+    
+    @Override
+    public AbstractTokenList getAvailableValuesForCommunicationAttribute(String attributeName){
+        try {            
+            return getAvailableValues("Communication", communicationAttributes.get(attributeName));
+        } catch (JDOMException ex) {
+            Logger.getLogger(AbstractCOMACorpus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new HashtableTokenList();
+    }
+
+    @Override
+    public AbstractTokenList getAvailableValuesForTranscriptionAttribute(String attributeName){
+        try {            
+            return getAvailableValues("Transcription", transcriptionAttributes.get(attributeName));
+        } catch (JDOMException ex) {
+            Logger.getLogger(AbstractCOMACorpus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new HashtableTokenList();
+    }
+
+
+    private AbstractTokenList getAvailableValues(String elementName, XPath xpath) throws JDOMException{
+        AbstractTokenList allValues = new HashtableTokenList();
+        if (xpath == null) {
+            return allValues;
+        }
+        List speakerL = XPath.selectNodes(comaDocument, "//" + elementName);
+        for (Object sO : speakerL){
+            Element speakerE = (Element)sO;
+            List l = xpath.selectNodes(speakerE);
+            for (Object o : l){
+                if (o instanceof Text) {
+                    allValues.addToken(((Text) o).getText());
+                } else if (o instanceof Attribute) {
+                    allValues.addToken(((Attribute) o).getValue());
+                }                
+            }
+        }
+        return allValues;
+    }
 
     @Override
     public String getSpeakerData(String transcriptionLocator, String speakerID, String attributeName) {
         XPath xpath = speakerAttributes.get(attributeName);
-        if (xpath == null) {
+        if (xpath == null) { 
             return UNDEFINED;
         }
         String combinedID = transcriptionLocator + "#" + speakerID;

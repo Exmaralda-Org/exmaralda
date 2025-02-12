@@ -360,9 +360,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
         searchExpressionButton.setText("Search: ");
         searchExpressionButton.setToolTipText("Click to open the input helper");
-        searchExpressionButton.setMaximumSize(new java.awt.Dimension(80, 31));
+        searchExpressionButton.setMaximumSize(new java.awt.Dimension(100, 31));
         searchExpressionButton.setMinimumSize(new java.awt.Dimension(80, 31));
-        searchExpressionButton.setPreferredSize(new java.awt.Dimension(80, 31));
+        searchExpressionButton.setPreferredSize(new java.awt.Dimension(100, 31));
         searchExpressionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchExpressionButtonActionPerformed(evt);
@@ -923,7 +923,10 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         ChooseCOMAAttributesDialog d = new ChooseCOMAAttributesDialog(null, true,
                 corpus.getSpeakerAttributes(),
                 corpus.getCommunicationAttributes(),
-                corpus.getTranscriptionAttributes(), getMeta());
+                corpus.getTranscriptionAttributes(), 
+                getMeta(),
+                getCorpus()
+        );
         d.setVisible(true);
         d.setLocationRelativeTo(kwicTable);
         setMeta(d.getSelectedAttributes());              

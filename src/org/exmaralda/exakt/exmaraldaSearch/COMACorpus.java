@@ -33,6 +33,7 @@ public class COMACorpus extends AbstractCOMACorpus  {
     public COMACorpus() {
     }
 
+    @Override
     public void readCorpus(File file) throws JDOMException, IOException {
         readCorpus(file,true);
     }
@@ -67,14 +68,18 @@ public class COMACorpus extends AbstractCOMACorpus  {
         if (index){
             index();
         }
+        
+        // look closer here for #492
         fetchSpeakerLocationAttributes();
         fetchSpeakerLanguageAttributes();
         fetchAttributes("//Speaker", speakerAttributes, FIXED_SPEAKER_ATTRIBUTES);
         fetchAttributes("//Communication", communicationAttributes, FIXED_COMMUNICATION_ATTRIBUTES);
         fetchAttributes("//Transcription", transcriptionAttributes, FIXED_TRANSCRIPTION_ATTRIBUTES);
         
-        // do something here for #492
-        // fetchAttributes("//Communication/Setting", communicationAttributes, FIXED_COMMUNICATION_ATTRIBUTES);
+        // 11-02-2025: added for #492
+        fetchAttributes("//Communication/Setting", communicationAttributes, new String[0][0], "Setting:");
+        fetchAttributes("//Communication/Location", communicationAttributes, new String[0][0], "Location:");
+        fetchAttributes("//Communication/Language", communicationAttributes, new String[0][0], "Language:");
     }
     
     @Override
@@ -89,7 +94,7 @@ public class COMACorpus extends AbstractCOMACorpus  {
     
     @Override
     public void index() throws JDOMException, IOException {
-        Hashtable<String,Element> speakersInComaIndex = new Hashtable<String,Element>();
+        Map<String,Element> speakersInComaIndex = new HashMap<>();
         String speakersInComa = "//Speaker/Sigle";
         XPath speakersInComaXPath = XPath.newInstance(speakersInComa);
         List speakersInComaList = speakersInComaXPath.selectNodes(comaDocument);
@@ -168,10 +173,12 @@ public class COMACorpus extends AbstractCOMACorpus  {
         setNumberOfSearchableSegments(countSegments);                
     }
     
+    @Override
     public String getCorpusName() {
         return corpusName;
     }
 
+    @Override
     public String getCorpusPath() {
         return corpusPath;
     }

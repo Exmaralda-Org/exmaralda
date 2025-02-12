@@ -21,7 +21,6 @@ import org.jdom.Element;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.exmaraldaSearch.COMACorpusInterface;
 import org.exmaralda.exakt.exmaraldaSearch.COMADBCorpus;
-import org.jdom.JDOMException;
 
 /**
  *
@@ -151,5 +150,10 @@ public class DBTokenList extends AbstractTokenList {
             Collections.sort(result, String.CASE_INSENSITIVE_ORDER);
         }
         return result;
+    }
+
+    @Override
+    public boolean readAnnotationTokensFromExmaraldaCorpus(COMACorpusInterface finalCorpus, String annotationName) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

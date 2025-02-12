@@ -6,8 +6,10 @@
 package org.exmaralda.exakt.exmaraldaSearch;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.exmaralda.exakt.search.CorpusInterface;
+import org.exmaralda.exakt.tokenlist.AbstractTokenList;
 
 /**
  *
@@ -56,6 +58,10 @@ public interface COMACorpusInterface extends CorpusInterface {
 
     /** returns the transcription metadata value of the given attribute name for the given transcription */
     String getTranscriptionData(String transcriptionLocator, String attributeName);
+
+    AbstractTokenList getAvailableValuesForSpeakerAttribute(String attributeName);
+    AbstractTokenList getAvailableValuesForCommunicationAttribute(String attributeName);
+    AbstractTokenList getAvailableValuesForTranscriptionAttribute(String attributeName);
 
 
 

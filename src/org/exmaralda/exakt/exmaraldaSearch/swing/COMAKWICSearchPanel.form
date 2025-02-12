@@ -91,13 +91,13 @@
                             <Property name="text" type="java.lang.String" value="Search: "/>
                             <Property name="toolTipText" type="java.lang.String" value="Click to open the input helper"/>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[80, 31]"/>
+                              <Dimension value="[100, 31]"/>
                             </Property>
                             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[80, 31]"/>
                             </Property>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[80, 31]"/>
+                              <Dimension value="[100, 31]"/>
                             </Property>
                           </Properties>
                           <Events>

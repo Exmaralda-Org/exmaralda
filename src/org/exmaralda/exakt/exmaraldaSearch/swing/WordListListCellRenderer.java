@@ -49,8 +49,12 @@ public class WordListListCellRenderer extends javax.swing.DefaultListCellRendere
          result.setBackground(bc);
          result.setOpaque(true);
          
-         nameLabel.setFont(nameLabel.getFont().deriveFont(java.awt.Font.BOLD));
-         nameLabel.setForeground(java.awt.Color.BLUE);
+         if (tokenList.getName().startsWith("Word")){
+            nameLabel.setFont(nameLabel.getFont().deriveFont(java.awt.Font.BOLD));
+            nameLabel.setForeground(java.awt.Color.BLUE);
+         } else {
+             nameLabel.setFont(nameLabel.getFont().deriveFont(java.awt.Font.PLAIN));
+         }
          nameLabel.setOpaque(true);
          nameLabel.setBackground(bc);
          nameLabel.setText(tokenList.getName());
