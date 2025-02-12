@@ -77,9 +77,9 @@ public class COMACorpus extends AbstractCOMACorpus  {
         fetchAttributes("//Transcription", transcriptionAttributes, FIXED_TRANSCRIPTION_ATTRIBUTES);
         
         // 11-02-2025: added for #492
-        fetchAttributes("//Communication/Setting", communicationAttributes, new String[0][0], "Setting:");
-        fetchAttributes("//Communication/Location", communicationAttributes, new String[0][0], "Location:");
-        fetchAttributes("//Communication/Language", communicationAttributes, new String[0][0], "Language:");
+        fetchAttributes("//Communication/Setting", communicationAttributes, new String[0][0], "Setting");
+        fetchAttributes("//Communication/Location", communicationAttributes, new String[0][0], "Location");
+        fetchAttributes("//Communication/Language", communicationAttributes, new String[0][0], "Language");
     }
     
     @Override

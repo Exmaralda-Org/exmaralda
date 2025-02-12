@@ -92,8 +92,15 @@ public abstract class AbstractCOMACorpus extends AbstractXMLFileListCorpus imple
                     if (an.contains("'")) {
                         xpathToValueString = "Description/Key[@Name=\"" + an + "\"]/text()";
                     }
+                    if (indexPrefix.length()>0){
+                        xpathToValueString = indexPrefix + "/" + xpathToValueString;
+                    }
                     XPath xpathToValue = XPath.newInstance(xpathToValueString);
-                    index.put(indexPrefix + attributeName, xpathToValue);
+                    String label = attributeName;
+                    if (indexPrefix.length()>0){
+                        label = indexPrefix + ": " + label;
+                    }
+                    index.put(label, xpathToValue);
                 }
             }
             for (String[] fa : fixedAttributes) {
