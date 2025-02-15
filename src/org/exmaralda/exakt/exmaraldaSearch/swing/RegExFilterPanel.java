@@ -20,7 +20,6 @@ public class RegExFilterPanel extends javax.swing.JPanel {
     InputHelperDialog inputHelperDialog = new InputHelperDialog(this);
     DefaultComboBoxModel columnSelectionComboBoxModel;
     List<String[]> meta;
-    String[] fixedColumns = {"Left context",  "Match text", "Right context", "Communication", "Speaker"};
     COMASearchResultListTableModel tableModel;
     private int selectedColumn = -1;
     
@@ -28,18 +27,7 @@ public class RegExFilterPanel extends javax.swing.JPanel {
     public RegExFilterPanel(COMASearchResultListTableModel m) {
         initComponents();
         tableModel = m;
-        meta = m.getMetaIdentifiers();
-        
-        columnSelectionComboBoxModel = new DefaultComboBoxModel();
-        for (String s : fixedColumns){
-            columnSelectionComboBoxModel.addElement(s);
-        }
-        for (AnalysisInterface ai : m.getData().getAnalyses()){
-            columnSelectionComboBoxModel.addElement(ai.getName());
-        }
-        for (String[] s : meta){
-            columnSelectionComboBoxModel.addElement(s[1] + "[" + s[0] + "]");
-        }
+        columnSelectionComboBoxModel = new ColumnSelectionComboBoxModel(m);
         columnSelectionComboBox.setModel(columnSelectionComboBoxModel);
     }
     

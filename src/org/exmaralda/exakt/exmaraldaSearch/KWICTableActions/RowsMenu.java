@@ -29,6 +29,7 @@ public class RowsMenu extends javax.swing.JMenu {
     private final JMenuItem selectHighlightedMenuItem;
     private final JMenuItem deselectHighlightedMenuItem;
     private final JMenuItem removeUnselectedMenuItem;
+    private final JMenuItem advancedSortMenuItem;
    
     
     
@@ -105,9 +106,25 @@ public class RowsMenu extends javax.swing.JMenu {
             }
         });
         this.add(deselectHighlightedMenuItem);
+        
+        this.addSeparator();
 
+        advancedSortMenuItem = new JMenuItem("Advanced sorting...");
+        advancedSortMenuItem.addActionListener(new javax.swing.AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                advancedSorting(e);
+            }
 
+        });
+        this.add(advancedSortMenuItem);
     }
+    
+    void advancedSorting(ActionEvent e) {
+        if (exaktFrame.getActiveSearchPanel()==null) return;
+        exaktFrame.getActiveSearchPanel().getKWICTable().advancedSortAction.actionPerformed(e);
+    }
+    
 
     void sample(ActionEvent e){
         if (exaktFrame.getActiveSearchPanel()==null) return;

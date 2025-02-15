@@ -43,6 +43,7 @@ public class COMAKWICTable  extends javax.swing.JTable
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.PraatAction praatAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction copyAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ImportAnalysesAction importAnalysesAction;
+    public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.AdvancedSortAction advancedSortAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction sampleAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ShuffleAction shuffleAction;
     public org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SelectAllAction selectAllAction;
@@ -119,6 +120,7 @@ public class COMAKWICTable  extends javax.swing.JTable
         copyAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.CopyAction(this, "Copy");
         importAnalysesAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ImportAnalysesAction(this, "Import analyses...");
         sampleAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SampleAction(this, "Sample...");
+        advancedSortAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.AdvancedSortAction(this, "Advanced sort...");
         shuffleAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.ShuffleAction(this, "Shuffle");
         selectAllAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.SelectAllAction(this, "Select all");
         deselectAllAction = new org.exmaralda.exakt.exmaraldaSearch.KWICTableActions.DeselectAllAction(this, "Deselect all");
