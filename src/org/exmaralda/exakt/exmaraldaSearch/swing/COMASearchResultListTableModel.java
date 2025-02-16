@@ -195,6 +195,10 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
     public int dataIndexToAnalysisColumnIndex(int i) {        
         return super.dataIndexToAnalysisColumnIndex(i) + 2;
     }
+    
+    public void multiSort(List<AdvancedSortDirective> sortDirectives){
+        this.getData();
+    }
 
 
 

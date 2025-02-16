@@ -332,10 +332,12 @@ public class COMAKWICTableSorter extends AbstractTableModel {
 
     // TableModel interface methods 
 
+    @Override
     public int getRowCount() {
         return (tableModel == null) ? 0 : tableModel.getRowCount();
     }
 
+    @Override
     public int getColumnCount() {
         // changed for row numbering in version 0.4, 22-Jan-2008
         //return (tableModel == null) ? 0 : tableModel.getColumnCount();
@@ -399,6 +401,7 @@ public class COMAKWICTableSorter extends AbstractTableModel {
             this.modelIndex = index;
         }
 
+        @Override
         public int compareTo(Object o) {
             int row1 = modelIndex;
             int row2 = ((Row) o).modelIndex;
@@ -433,6 +436,8 @@ public class COMAKWICTableSorter extends AbstractTableModel {
     }
 
     private class TableModelHandler implements TableModelListener {
+        
+        @Override
         public void tableChanged(TableModelEvent e) {
             
             // If we're not sorting by anything, just pass the event along.             
@@ -484,7 +489,6 @@ public class COMAKWICTableSorter extends AbstractTableModel {
             // Something has happened to the data that may have invalidated the row order. 
             clearSortingState();
             fireTableDataChanged();
-            return;
         }
     }
 
@@ -534,6 +538,7 @@ public class COMAKWICTableSorter extends AbstractTableModel {
             this.priority = priority;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Color color = c == null ? Color.GRAY : c.getBackground(); 
             color = Color.BLACK;
@@ -569,10 +574,12 @@ public class COMAKWICTableSorter extends AbstractTableModel {
             g.translate(-x, -y);
         }
 
+        @Override
         public int getIconWidth() {
             return size;
         }
 
+        @Override
         public int getIconHeight() {
             return size;
         }
@@ -585,6 +592,7 @@ public class COMAKWICTableSorter extends AbstractTableModel {
             this.tableCellRenderer = tableCellRenderer;
         }
 
+        @Override
         public Component getTableCellRendererComponent(JTable table, 
                                                        Object value,
                                                        boolean isSelected, 

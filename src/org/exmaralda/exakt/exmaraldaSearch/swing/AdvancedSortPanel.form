@@ -51,17 +51,18 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="orderLabel">
+        <Component class="javax.swing.JLabel" name="sortLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Order: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="orderComboBox">
+        <Component class="javax.swing.JComboBox" name="sortTypeComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="alphabetically"/>
-                <StringItem index="1" value="numerically"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Alphabet"/>
+                <StringItem index="1" value="Alphabet_Reversed"/>
+                <StringItem index="2" value="Number"/>
               </StringArray>
             </Property>
           </Properties>
@@ -69,15 +70,12 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="orderComboBox2">
+        <Component class="javax.swing.JComboBox" name="sortDirectionComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="2">
                 <StringItem index="0" value="ascending"/>
                 <StringItem index="1" value="descending"/>
-                <StringItem index="2" value="ascending reversed"/>
-                <StringItem index="3" value="descending reversed"/>
-                <StringItem index="4" value=" "/>
               </StringArray>
             </Property>
           </Properties>

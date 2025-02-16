@@ -4,6 +4,10 @@
  */
 package org.exmaralda.exakt.exmaraldaSearch.swing;
 
+import org.exmaralda.exakt.exmaraldaSearch.AdvancedSortDirective;
+import org.exmaralda.exakt.exmaraldaSearch.AdvancedSortDirective.SORT_DIRECTION;
+import org.exmaralda.exakt.exmaraldaSearch.AdvancedSortDirective.SORT_TYPE;
+
 /**
  *
  * @author bernd
@@ -17,6 +21,17 @@ public class AdvancedSortPanel extends javax.swing.JPanel {
         initComponents();
         ColumnSelectionComboBoxModel comboBoxModel = new ColumnSelectionComboBoxModel(kwic.getWrappedModel());
         columnNameComboBox.setModel(comboBoxModel);
+    }
+    
+    public AdvancedSortDirective getSortDirective(){
+        int col = columnNameComboBox.getSelectedIndex();
+        SORT_TYPE sortType = SORT_TYPE.valueOf(((String)sortTypeComboBox.getSelectedItem()).toUpperCase());
+        SORT_DIRECTION sortDirection = SORT_DIRECTION.valueOf(((String)sortDirectionComboBox.getSelectedItem()).toUpperCase());
+        return new AdvancedSortDirective(col, sortType, sortDirection);
+    }
+    
+    public boolean isActive(){
+        return activeCheckBox.isSelected();
     }
 
     /**
@@ -33,9 +48,9 @@ public class AdvancedSortPanel extends javax.swing.JPanel {
         columnLabel = new javax.swing.JLabel();
         columnNameComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        orderLabel = new javax.swing.JLabel();
-        orderComboBox = new javax.swing.JComboBox<>();
-        orderComboBox2 = new javax.swing.JComboBox<>();
+        sortLabel = new javax.swing.JLabel();
+        sortTypeComboBox = new javax.swing.JComboBox<>();
+        sortDirectionComboBox = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -50,14 +65,14 @@ public class AdvancedSortPanel extends javax.swing.JPanel {
 
         add(jPanel1);
 
-        orderLabel.setText("Order: ");
-        jPanel2.add(orderLabel);
+        sortLabel.setText("Order: ");
+        jPanel2.add(sortLabel);
 
-        orderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "alphabetically", "numerically" }));
-        jPanel2.add(orderComboBox);
+        sortTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alphabet", "Alphabet_Reversed", "Number" }));
+        jPanel2.add(sortTypeComboBox);
 
-        orderComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ascending", "descending", "ascending reversed", "descending reversed", " " }));
-        jPanel2.add(orderComboBox2);
+        sortDirectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ascending", "descending" }));
+        jPanel2.add(sortDirectionComboBox);
 
         add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
@@ -69,8 +84,8 @@ public class AdvancedSortPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> columnNameComboBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JComboBox<String> orderComboBox;
-    private javax.swing.JComboBox<String> orderComboBox2;
-    private javax.swing.JLabel orderLabel;
+    private javax.swing.JComboBox<String> sortDirectionComboBox;
+    private javax.swing.JLabel sortLabel;
+    private javax.swing.JComboBox<String> sortTypeComboBox;
     // End of variables declaration//GEN-END:variables
 }

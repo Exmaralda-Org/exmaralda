@@ -6,6 +6,7 @@ package org.exmaralda.exakt.exmaraldaSearch.swing;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.exmaralda.exakt.exmaraldaSearch.AdvancedSortDirective;
 
 /**
  *
@@ -31,6 +32,16 @@ public class AdvancedSortDialog extends javax.swing.JDialog {
         sortPanels.add(initialPanel);
         mainPanel.add(initialPanel);
         pack();
+    }
+    
+    public List<AdvancedSortDirective> getSortDirectives(){
+        List<AdvancedSortDirective> result = new ArrayList<>();
+        for (AdvancedSortPanel sortPanel : sortPanels){
+            if (sortPanel.isActive()){
+                result.add(sortPanel.getSortDirective());
+            }
+        }        
+        return result;
     }
 
     /**

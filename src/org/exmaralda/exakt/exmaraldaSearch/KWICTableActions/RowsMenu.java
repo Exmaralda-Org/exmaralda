@@ -29,7 +29,7 @@ public class RowsMenu extends javax.swing.JMenu {
     private final JMenuItem selectHighlightedMenuItem;
     private final JMenuItem deselectHighlightedMenuItem;
     private final JMenuItem removeUnselectedMenuItem;
-    private final JMenuItem advancedSortMenuItem;
+    //private final JMenuItem advancedSortMenuItem;
    
     
     
@@ -107,7 +107,9 @@ public class RowsMenu extends javax.swing.JMenu {
         });
         this.add(deselectHighlightedMenuItem);
         
-        this.addSeparator();
+        
+        // this was for issue #445, but it seems we don't need it
+        /*this.addSeparator();
 
         advancedSortMenuItem = new JMenuItem("Advanced sorting...");
         advancedSortMenuItem.addActionListener(new javax.swing.AbstractAction() {
@@ -117,7 +119,7 @@ public class RowsMenu extends javax.swing.JMenu {
             }
 
         });
-        this.add(advancedSortMenuItem);
+        this.add(advancedSortMenuItem);*/
     }
     
     void advancedSorting(ActionEvent e) {
