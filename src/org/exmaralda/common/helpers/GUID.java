@@ -1,7 +1,7 @@
 /*
  * Created on 25.02.2004 by woerner
  */
-package org.exmaralda.coma.helpers;
+package org.exmaralda.common.helpers;
 
 /**
  * coma2/org.sfb538.coma2/GUID.java
