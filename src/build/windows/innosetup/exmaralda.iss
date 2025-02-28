@@ -11,6 +11,9 @@ AppPublisherURL=http://www.exmaralda.org
 AppSupportURL=http://www.exmaralda.org
 AppUpdatesURL=http://www.exmaralda.org
 
+
+
+
 DefaultDirName={pf}\EXMARaLDA
 DefaultGroupName=EXMARaLDA
 DisableDirPage=no
@@ -25,6 +28,7 @@ VersionInfoCompany=Musical Bits GmbH
 VersionInfoCopyright=Thomas Schmidt, Kai Wörner
 VersionInfoDescription=Version @version@ (Build time: @build-time@)
 VersionInfoVersion=@version@ 
+
 
 [Types]
 Name: "full"; Description: "Full installation (all tools)"
@@ -137,3 +141,16 @@ Filename: "{app}\PartiturEditor.exe"; Description: "{cm:LaunchProgram, Partitur-
 [UninstallDelete]
 Type: files; Name: "{app}\exmaralda.url"
 
+[Code]
+procedure CurStepChanged(CurStep: TSetupStep);
+var 
+  ErrorCode: Integer;
+begin
+  if CurStep = ssPostInstall then
+  begin
+    if MsgBox('Installation is complete! You can support EXMARaLDA development through buymeacoffee.com/linguisticbits.de. Would you like to go to the website?', mbConfirmation, MB_YESNO) = IDYES then
+    begin
+        ShellExec('', 'https://buymeacoffee.com/linguisticbits.de', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+    end;
+  end;
+end;
