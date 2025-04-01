@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.exmaralda.tagging;
+package org.exmaralda.tagging.training;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
+import org.exmaralda.tagging.TreeTaggableOrthonormalTranscription;
 import static org.exmaralda.tagging.TreeTaggableOrthonormalTranscription.XPATH_NO_XY;
 import org.jdom.Document;
 import org.jdom.Element;

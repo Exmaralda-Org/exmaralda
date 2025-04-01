@@ -24,13 +24,14 @@ import org.jdom.xpath.XPath;
  */
 public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
 
-    public static String XPATH_TO_SEGS = "//tei:seg[not(tei:seg)]";
+    public static String XPATH_TO_SEGS = "//tei:annotationBlock/descendant::tei:seg[not(tei:seg)]";
     public static String XPATH_ALL_WORDS_AND_PUNCTUATION = "descendant::*[self::tei:w or self::tei:pc]";
     public static String XPATH_NO_XY = "descendant::*[(self::tei:w and not(@norm='&')) or self::tei:pc]"; 
     public static String XPATH_NO_DUMMIES = "descendant::*[(self::tei:w and not(@norm='&' or @norm='%' or @norm='§' or @norm='äh')) or self::pc]"; 
     //change 06.11.2013
     //public String xpathToTokens = "descendant::*[self::w or self::p]"; 
     public String xpathToTokens = XPATH_NO_XY;
+    public String xpathToSegs = XPATH_TO_SEGS;
     
     Document transcriptionDocument;
     List<Element> segs;
@@ -39,6 +40,8 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
     boolean basedOnNormalization;
     
     boolean verbose = false;
+    
+    Namespace teiNamespace = Namespace.getNamespace("tei", "http://www.tei-c.org/ns/1.0");
    
 
     public TreeTaggableISOTEITranscription(File transcription, boolean basedOnNormalization) throws JDOMException, IOException {
@@ -52,15 +55,15 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
     public TreeTaggableISOTEITranscription(Document transcriptionDoc, File transcriptionFile, boolean bon) throws JDOMException, IOException {
         transcriptionDocument = transcriptionDoc;
         base=transcriptionFile.getName();
-        XPath xpath = XPath.newInstance(XPATH_TO_SEGS);
-        xpath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
+        XPath xpath = XPath.newInstance(xpathToSegs);
+        xpath.addNamespace(teiNamespace);
         segs = xpath.selectNodes(transcriptionDocument);
         basedOnNormalization = bon;
     }
     
     public void clearTagging() throws JDOMException{
         XPath xpath = XPath.newInstance("//tei:w");
-        xpath.addNamespace("tei", "http://www.tei-c.org/ns/1.0");        
+        xpath.addNamespace(teiNamespace);        
         List l = xpath.selectNodes(transcriptionDocument);
         for (Object o : l){
             Element e = (Element)o;
@@ -73,6 +76,14 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
     public void setXPathToTokens(String xp){
         xpathToTokens = xp;
     }
+    
+    public void setXPathToSegs(String xp) throws JDOMException{
+        xpathToSegs = xp;
+        XPath xpath = XPath.newInstance(xpathToSegs);
+        xpath.addNamespace(teiNamespace);
+        segs = xpath.selectNodes(transcriptionDocument);        
+    }
+    
 
     @Override
     public int getNumberOfTaggableSegments() {
@@ -90,7 +101,9 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
         ArrayList<String> result = new ArrayList<>();
         Element contribution = segs.get(pos);
         try {
-            List l = XPath.newInstance(xpathToTokens).selectNodes(contribution);
+            XPath xpath = XPath.newInstance(xpathToTokens);
+            xpath.addNamespace(teiNamespace);        
+            List l = xpath.selectNodes(contribution);
             for (Object o : l){
                 Element e = (Element)o;
                 if (basedOnNormalization){
@@ -131,7 +144,9 @@ public class TreeTaggableISOTEITranscription implements TreeTaggableDocument {
         ArrayList<String> result = new ArrayList<>();
         for (Element contribution : segs){
             try {
-                List l = XPath.newInstance(xpathToTokens).selectNodes(contribution);
+                XPath xpath = XPath.newInstance(xpathToTokens);
+                xpath.addNamespace(teiNamespace);        
+                List l = xpath.selectNodes(contribution);
                 for (Object o : l){
                     Element e = (Element)o;
                     if (basedOnNormalization){

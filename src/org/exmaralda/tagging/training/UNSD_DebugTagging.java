@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.exmaralda.tagging;
+package org.exmaralda.tagging.training;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,8 @@ import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerException;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.exmaralda.exakt.utilities.FileIO;
+import org.exmaralda.tagging.TreeTaggableOrthonormalTranscription;
+import org.exmaralda.tagging.TreeTagger;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.JDOMException;

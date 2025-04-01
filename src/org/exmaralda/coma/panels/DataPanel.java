@@ -273,9 +273,9 @@ public class DataPanel extends JPanel implements ActionListener,
 
 	private JButton searchButton;
 
-	private TableRowSorter<TableModel> sRowSorter;
+	private TableRowSorter<TableModel> speakerTableRowSorter;
 
-	private TableRowSorter<TableModel> rowSorter;
+	private TableRowSorter<TableModel> commTableRowSorter;
 
 	private JPanel speakerTopPanel;
 
@@ -411,11 +411,11 @@ public class DataPanel extends JPanel implements ActionListener,
 		speakerTableModel.addTableModelListener(this);
 		speakerTable = new JTable(speakerTableModel);
 		speakerTable.putClientProperty("Quaqua.Table.style", "striped");
-		sRowSorter = new TableRowSorter<TableModel>(speakerTableModel);
-		sRowSorter.addRowSorterListener(this);
-		sRowSorter.setSortsOnUpdates(false);
+		speakerTableRowSorter = new TableRowSorter<TableModel>(speakerTableModel);
+		speakerTableRowSorter.addRowSorterListener(this);
+		speakerTableRowSorter.setSortsOnUpdates(false);
 
-		speakerTable.setRowSorter(sRowSorter);
+		speakerTable.setRowSorter(speakerTableRowSorter);
 		speakerTable.removeColumn(speakerTable.getColumnModel().getColumn(0)); // Element-Column
 		speakerTable.removeColumn(speakerTable.getColumnModel().getColumn(0)); // ID-Column
 		speakerTable.setDefaultRenderer(Object.class,
@@ -564,10 +564,10 @@ public class DataPanel extends JPanel implements ActionListener,
 				new ConnectionCellRenderer());
 		commTable.setGridColor(Color.LIGHT_GRAY);
 
-		rowSorter = new TableRowSorter<TableModel>(commTableModel);
-		rowSorter.addRowSorterListener(this);
-		rowSorter.setSortsOnUpdates(false);
-		commTable.setRowSorter(rowSorter);
+		commTableRowSorter = new TableRowSorter<>(commTableModel);
+		commTableRowSorter.addRowSorterListener(this);
+		commTableRowSorter.setSortsOnUpdates(false);
+		commTable.setRowSorter(commTableRowSorter);
 
 		commTable.removeColumn(commTable.getColumnModel().getColumn(0));
 		commTable.removeColumn(commTable.getColumnModel().getColumn(0));
@@ -979,6 +979,7 @@ public class DataPanel extends JPanel implements ActionListener,
 		updateLists(false);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		coma.status("action '" + cmd + "' performed!");

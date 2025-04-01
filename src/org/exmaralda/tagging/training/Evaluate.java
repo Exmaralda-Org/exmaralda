@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.exmaralda.tagging;
+package org.exmaralda.tagging.training;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,6 +18,7 @@ import javax.xml.transform.TransformerException;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
+import org.exmaralda.tagging.Merge;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;

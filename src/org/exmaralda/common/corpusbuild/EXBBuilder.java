@@ -101,7 +101,7 @@ public class EXBBuilder {
                 default :     
                     exs = exb.toSegmentedTranscription();
                     
-            }
+            }            
             File exsOut = new File(exbFile.getParentFile(), exbFile.getName().replaceAll("\\.exb", "_s.exs"));
             exs.writeXMLToFile(exsOut.getAbsolutePath(), "none");
             System.out.println("[EXBBuilder]: Segmented " + exbFile.getAbsolutePath() + " --> " + exsOut.getName());
