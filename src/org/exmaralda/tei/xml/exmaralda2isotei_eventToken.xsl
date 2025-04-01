@@ -401,7 +401,7 @@
     </xsl:function>
     
     <!-- returns latest event that is connected to the given event through an uninterrupted chain of other events -->
-    <xsl:function name="exmaralda:last-endpoint-of-segment-chain">
+    <!-- <xsl:function name="exmaralda:last-endpoint-of-segment-chain">
         <xsl:param name="event"/>
         <xsl:choose>
             <xsl:when test="not($event/following-sibling::event) or exmaralda:timeline-position($event/following-sibling::event[1]/@start)&gt;exmaralda:timeline-position($event/@end)">
@@ -411,7 +411,22 @@
                 <xsl:value-of select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/>
             </xsl:otherwise>
         </xsl:choose>        
+    </xsl:function> -->
+    <!-- returns latest event that is connected to the given event through an uninterrupted chain of other events -->
+    <xsl:function name="exmaralda:last-endpoint-of-segment-chain" as="xs:string">
+        <xsl:param name="event" as="node()"/>
+        <xsl:choose>
+            <xsl:when test="not($event/following-sibling::event) or exmaralda:timeline-position($event/following-sibling::event[1]/@start)&gt;exmaralda:timeline-position($event/@end)">
+                <xsl:value-of select="$event/@end"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- <xsl:value-of select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/> -->
+                <xsl:sequence select="exmaralda:last-endpoint-of-segment-chain($event/following-sibling::event[1])"/>
+            </xsl:otherwise>
+        </xsl:choose>        
     </xsl:function>
+    
+
     
     <xsl:function name="exmaralda:determine-recording-type">
         <xsl:param name="path"/>
