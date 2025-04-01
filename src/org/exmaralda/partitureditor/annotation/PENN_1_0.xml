@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><annotation-specification>
+    <annotation-set exmaralda-tier-category="POS">
+        <category name="POS-tags">
+            <version version="1.0"/>
+            <description>POS-tags</description>
+            <category name="Coordinating conjunction">
+                <tag ud-mapping="CCONJ" name="CC"/>
+                <description/>
+            </category>
+            <category name="Cardinal number">
+                <tag ud-mapping="NUM" name="CD"/>
+                <description/>
+            </category>
+            <category name="Determiner">
+                <tag ud-mapping="DET" name="DT"/>
+                <description/>
+            </category>
+            <category name="Existential there">
+                <tag ud-mapping="PRON" name="EX"/>
+                <description/>
+            </category>
+            <category name="Foreign word">
+                <tag ud-mapping="X" name="FW"/>
+                <description/>
+            </category>
+            <category name="Preposition or subordinating conjunction">
+                <tag ud-mapping="ADP" name="IN"/>
+                <description/>
+            </category>
+            <category name="Adjectives">
+                <tag name="J"/>
+                <description/>
+                <category name="Adjective">
+                    <tag ud-mapping="ADJ" name="JJ"/>
+                    <description/>
+                </category>
+                <category name="Adjective, comparative">
+                    <tag ud-mapping="ADJ" name="JJR"/>
+                    <description/>
+                </category>
+                <category name="Adjective, superlative">
+                    <tag ud-mapping="ADJ" name="JJS"/>
+                    <description/>
+                </category>                
+            </category>
+            <category name="List item marker">
+                <tag ud-mapping="X" name="LS"/>
+                <description/>
+            </category>
+            <category name="Modal">
+                <tag ud-mapping="VERB" name="MD"/>
+                <description/>
+            </category>
+            <category name="Nouns">
+                <tag name="N"/>
+                <description/>
+                <category name="Noun, singular or mass">
+                    <tag ud-mapping="NOUN" name="NN"/>
+                    <description/>
+                </category>
+                <category name="Noun, plural">
+                    <tag ud-mapping="NOUN" name="NNS"/>
+                    <description/>
+                </category>
+                <category name="Proper noun, singular">
+                    <tag ud-mapping="PROPN" name="NNP"/>
+                    <description/>
+                </category>
+                <category name="Proper noun, plural">
+                    <tag ud-mapping="PROPN" name="NNPS"/>
+                    <description/>
+                </category>                
+            </category>
+            <category name="Predeterminer">
+                <tag ud-mapping="DET" name="PDT"/>
+                <description/>
+            </category>
+            <category name="Possessive ending">
+                <tag ud-mapping="PART" name="POS"/>
+                <description/>
+            </category>
+            <category name="Pronouns">
+                <tag name="PR"/>
+                <description/>
+                <category name="Personal pronoun">
+                    <tag ud-mapping="PRON" name="PRP"/>
+                    <description/>
+                </category>
+                <category name="Possessive pronoun">
+                    <tag ud-mapping="DET" name="PRP$"/>
+                    <description/>
+                </category>
+            </category>
+            <category name="Adverbs">
+                <tag ud-mapping="ADV" name="RB"/>
+                <description/>
+                <category name="Adverb">
+                    <tag ud-mapping="ADV" name="RB"/>
+                    <description/>
+                </category>
+                <category name="Adverb, comparative">
+                    <tag ud-mapping="ADV" name="RBR"/>
+                    <description/>
+                </category>
+                <category name="Adverb, superlative">
+                    <tag ud-mapping="ADV" name="RBS"/>
+                    <description/>
+                </category>
+            </category>
+            <category name="Particle">
+                <tag ud-mapping="ADP" name="RP"/>
+                <description/>
+            </category>
+            <category name="Symbol">
+                <tag ud-mapping="SYM" name="SYM"/>
+                <description/>
+            </category>
+            <category name="to">
+                <tag ud-mapping="PART" name="TO"/>
+                <description/>
+            </category>
+            <category name="Interjection">
+                <tag ud-mapping="INTJ" name="UH"/>
+                <description/>
+            </category>
+            <category name="Verbs">
+                <tag name="V"/>
+                <description/>
+                    
+                <category name="Verb, base form">
+                    <tag ud-mapping="VERB" name="VB"/>
+                    <description/>
+                </category>
+                <category name="Verb, past tense">
+                    <tag ud-mapping="VERB" name="VBD"/>
+                    <description/>
+                </category>
+                <category name="Verb, gerund or present participle">
+                    <tag ud-mapping="VERB" name="VBG"/>
+                    <description/>
+                </category>
+                <category name="Verb, past participle">
+                    <tag ud-mapping="VERB" name="VBN"/>
+                    <description/>
+                </category>
+                <category name="Verb, non-3rd person singular present">
+                    <tag ud-mapping="VERB" name="VBP"/>
+                    <description/>
+                </category>
+                <category name="Verb, 3rd person singular present">
+                    <tag ud-mapping="VERB" name="VBZ"/>
+                    <description/>
+                </category>
+            </category>
+            <category name="Wh-words">
+                <tag name="W"/>
+                <description/>
+                
+                <category name="Wh-determiner">
+                    <tag ud-mapping="DET" name="WDT"/>
+                    <description/>
+                </category>
+                <category name="Wh-pronoun">
+                    <tag ud-mapping="PRON" name="WP"/>
+                    <description/>
+                </category>
+                <category name="Possessive wh-pronoun">
+                    <tag ud-mapping="DET" name="WP$"/>
+                    <description/>
+                </category>
+                <category name="Wh-adverb">
+                    <tag ud-mapping="ADV" name="WRB"/>
+                    <description/>
+                </category>
+            </category>
+        </category>
+    </annotation-set>
+</annotation-specification>
