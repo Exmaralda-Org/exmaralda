@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><annotation-specification>
+<?xml version="1.0" encoding="UTF-8"?>
+<annotation-specification>
     <annotation-set exmaralda-tier-category="POS">
         <category name="POS-tags">
             <version version="1.0 oder 2.0"/>
@@ -10,7 +11,7 @@
             werden. Das braucht hier aber nicht geändert zu werden-->
             <category name="Nomina">
                 <!-- Abschnitttitel -->
-                <tag name="N"/>
+                <tag name="N" ud-mapping="NOUN"/>
                 <description/>
                 <!-- Das ist jetzt eine echte Kategorie, d.h. eine Wortart, für
                 die es ein POS-Tag gibt. -->
@@ -29,7 +30,7 @@
             <!-- end nomina -->
 
             <category name="Verben">
-                <tag name="V"/>
+                <tag name="V" ud-mapping="VERB"/>
                 <description/>
                 <category name="finites Verb, voll">
                     <tag ud-mapping="VERB" name="VVFIN"/>
@@ -83,18 +84,18 @@
             <!-- end verben -->
 
             <category name="UNSD: Default-Verbformen">
-                <tag name="V"/>
+                <tag name="V" ud-mapping="VERB"/>
                 <description/>
                 <category name="Auxiliarverb (STTS 2.0: VAFIN und VAINF)">
-                    <tag name="VA"/>
+                    <tag name="VA" ud-mapping="AUX"/>
                     <description>[du] hat, [er] is</description>
                 </category>
                 <category name="Modalverb (STTS 2.0: VMFIN und VMINF)">
-                    <tag name="VM"/>
+                    <tag name="VM" ud-mapping="AUX"/>
                     <description>[du] kann, [wi] muss</description>
                 </category>
                 <category name="Vollverb (STTS 2.0: VVFIN und VVINF)">
-                    <tag name="VV"/>
+                    <tag name="VV" ud-mapping="VERB"/>
                     <description>[du] leben, [wi] geht</description>
                 </category>
             </category>
@@ -108,7 +109,7 @@
                 </category>
             </category>
             <category name="Adjektive">
-                <tag name="ADJ"/>
+                <tag name="ADJ" ud-mapping="ADJ"/>
                 <description/>
                 <category name="attributives Adjektiv">
                     <tag ud-mapping="ADJ" name="ADJA"/>
@@ -120,7 +121,7 @@
                 </category>
             </category>
             <category name="Pronomina">
-                <tag name="P"/>
+                <tag name="P" ud-mapping="PRON"/>
                 <description/>
                 <category name="substituierendes Demonstrativpronomen">
                     <tag ud-mapping="PRON" name="PDS"/>
@@ -139,7 +140,7 @@
                     <description>kein [Mensch], irgendein [Glas]</description>
                 </category>
                 <category name="substituierendes Indefinitpronomen mit Determiner">
-                    <tag name="PIDS"/>
+                    <tag name="PIDS" ud-mapping="PRON"/>
                     <version version="2.0only"/>
                     <description>[ein] bisschen, [die] beiden</description>
                 </category>
@@ -198,10 +199,10 @@
                 </category>
             </category>
             <category name="Ordinalzahlen">
-                <tag name="ORD"/>
+                <tag name="ORD" ud-mapping="NUM"/>
                 <description/>
                 <category name="Ordinalzahl">
-                    <tag name="ORD"/>
+                    <tag name="ORD" ud-mapping="NUM"/>
                     <version version="2.0only"/>
                     <description>[der] zweite [Mann], erster, dritter</description>
                 </category>
@@ -215,7 +216,7 @@
                 </category>
             </category>
             <category name="Konjunktionen">
-                <tag name="KO"/>
+                <tag name="KO" ud-mapping="X"/>
                 <description/>
                 <category name="unterordnende Konjunktion mit 'zu' und Infinitiv">
                     <tag ud-mapping="SCONJ" name="KOUI"/>
@@ -235,7 +236,7 @@
                 </category>
             </category>
             <category name="Adpositionen">
-                <tag name="AP"/>
+                <tag name="AP" ud-mapping="ADP"/>
                 <description/>
                 <category name="Präposition; Zirkumposition links">
                     <tag ud-mapping="ADP" name="APPR"/>
@@ -265,7 +266,7 @@
             </category>
 
             <category name="Partikeln">
-                <tag name="PTK"/>
+                <tag name="PTK" ud-mapping="PART"/>
                 <description/>
                 <category name="'zu' vor Infinitiv">
                     <tag ud-mapping="PART" name="PTKZU"/>
@@ -289,17 +290,17 @@
                     <description>am [schönsten], zu [schnell]</description>
                 </category>
                 <category name="Modal- und Abtönungspartikeln">
-                    <tag name="PTKMA"/>
+                    <tag name="PTKMA" ud-mapping="PART"/>
                     <version version="2.0only"/>
                     <description>halt, ja, schon</description>
                 </category>
                 <category name="Intensitäts-, Fokus- und Gradpartikeln">
-                    <tag name="PTKIFG"/>
+                    <tag name="PTKIFG" ud-mapping="PART"/>
                     <version version="2.0only"/>
                     <description>sehr, nur, ziemlich</description>
                 </category>
                 <category name="Partikel eines Mehrwortlexems">
-                    <tag name="PTKMWL"/>
+                    <tag name="PTKMWL" ud-mapping="ADV"/>
                     <version version="2.0only"/>
                     <description>[x] noch, immer [+gesteigertes Adjektiv], schon [+gesteigertes
                         Adjektiv]</description>
@@ -308,54 +309,54 @@
 
 
             <category name="UNSD: Zusätzliche Partikeln">
-                <tag name="PTK"/>
+                <tag name="PTK" ud-mapping="PART"/>
                 <description/>
                 <category name="Aspektpartikel">
-                    <tag name="PTKAM"/>
+                    <tag name="PTKAM" ud-mapping="PART"/>
                     <description>am [arbeiten]</description>
                 </category>
                 <category name="Pluralwort">
-                    <tag name="PL"/>
+                    <tag name="PL" ud-mapping="PART"/>
                     <description>alle [Haus] 'Häuser'</description>
                 </category>
             </category>
 
 
             <category name="nicht-grammatische Elemente (satz-unabhängige Elemente)">
-                <tag name="NG"/>
+                <tag name="NG" ud-mapping="PART"/>
                 <description/>
                 <category name="Interjektionen, Responsive und Rezeptionssignale">
-                    <tag name="NGIRR"/>
+                    <tag name="NGIRR" ud-mapping="INTJ"/>
                     <version version="2.0only"/>
                     <description>mhm, ach, tja</description>
                 </category>
                 <category name="Häsitationspartikeln">
-                    <tag name="NGHES"/>
+                    <tag name="NGHES" ud-mapping="INTJ"/>
                     <version version="2.0only"/>
                     <description>ähm, öhm, äh</description>
                 </category>
-                <category name="Onomatopoeia">
-                    <tag name="NGONO"/>
+                <category name="Onomatopoeiapoeia">
+                    <tag name="NGONO" ud-mapping="PART"/>
                     <version version="2.0only"/>
                     <description>peng, miau</description>
                 </category>
                 <category name="Inflektive, Aktionswörter">
-                    <tag name="NGAKW"/>
+                    <tag name="NGAKW" ud-mapping="PART"/>
                     <version version="2.0only"/>
                     <description>lol, seufz</description>
                 </category>
             </category>
 
             <category name="satz-externe Elemente">
-                <tag name="SE"/>
+                <tag name="SE" ud-mapping="PART"/>
                 <description/>
                 <category name="Diskursmarker">
-                    <tag name="SEDM"/>
+                    <tag name="SEDM" ud-mapping="PART"/>
                     <version version="2.0only"/>
                     <description>weil, also, trotzdem</description>
                 </category>
                 <category name="Tag Questions">
-                    <tag name="SEQU"/>
+                    <tag name="SEQU" ud-mapping="PART"/>
                     <version version="2.0only"/>
                     <description>ne, wa, gell</description>
                 </category>
@@ -373,33 +374,34 @@
                     <tag ud-mapping="X" name="TRUNC"/>
                     <description>an [und Abreise]</description>
                 </category>
-                <category name="Nichtwort: (Sonderzeichen enthaltend), Stottern, Wort-Bestandteil-Reste">
+                <category
+                    name="Nichtwort: (Sonderzeichen enthaltend), Stottern, Wort-Bestandteil-Reste">
                     <tag ud-mapping="X" name="XY"/>
                     <description>(D2XW3), w w [weißt du], [te] ha we [in der Normalisierung
                         THW]</description>
                 </category>
                 <category name="Abbruch auf Wortebene">
-                    <tag name="AB"/>
+                    <tag name="AB" ud-mapping="X"/>
                     <version version="2.0only"/>
                     <description>[er] gef, [er hat] ge</description>
                 </category>
                 <category name="Uninterpretierbar">
-                    <tag name="UI"/>
+                    <tag name="UI" ud-mapping="X"/>
                     <version version="2.0only"/>
                     <description>+++ +++</description>
                 </category>
                 <category name="Buchstabiertes">
-                    <tag name="SPELL"/>
+                    <tag name="SPELL" ud-mapping="X"/>
                     <version version="2.0only"/>
                     <description>[das wird mit] ce ha [geschrieben], [patient] B</description>
                 </category>
                 <category name="Äußerungsabbrüche">
-                    <tag name="AA"/>
+                    <tag name="AA" ud-mapping="X"/>
                     <version version="2.0only"/>
                     <description>[das haus] das [in dem ich wohne]</description>
                 </category>
                 <category name="Objektsprache">
-                    <tag name="OS"/>
+                    <tag name="OS" ud-mapping="X"/>
                     <version version="2.0only"/>
                     <description>[solche sätze wie] John liebt Mary</description>
                 </category>
@@ -424,28 +426,28 @@
             <category name="UNSD: Zusätzliche Extra-Tags">
                 <description>zusätzliche tags</description>
                 <category name="Fremdsprachliches Material: Englisch">
-                    <tag name="FM-EN"/>
+                    <tag name="FM-EN" ud-mapping="X"/>
                     <description>and, parents, you</description>
                 </category>
                 <category name="Fremdsprachliches Material: Tok Pisin">
-                    <tag name="FM-TP"/>
+                    <tag name="FM-TP" ud-mapping="X"/>
                     <description>nambis 'Strand', solwara 'Meer'</description>
                 </category>
                 <category name="Fremdsprachliches Material: Kuanua">
-                    <tag name="FM-KU"/>
+                    <tag name="FM-KU" ud-mapping="X"/>
                     <description>gunan 'Platz'</description>
                 </category>
                 <category name="Fremdsprachliches Material: Latein">
-                    <tag name="FM-LA"/>
+                    <tag name="FM-LA" ud-mapping="X"/>
                     <description>mea culpa</description>
                 </category>
                 <category name="Fremdsprachliches Material: Spanisch">
-                    <tag name="FM-ES"/>
+                    <tag name="FM-ES" ud-mapping="X"/>
                     <description>roca, siesta</description>
                 </category>
 
-                </category>
             </category>
+        </category>
 
     </annotation-set>
 </annotation-specification>
