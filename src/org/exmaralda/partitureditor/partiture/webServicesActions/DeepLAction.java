@@ -233,7 +233,7 @@ public class DeepLAction extends org.exmaralda.partitureditor.partiture.Abstract
                                 
                             }
                         }
-                    } catch (JexmaraldaException | IOException | URISyntaxException | SAXException | FSMException ex) {
+                    } catch (JexmaraldaException | IOException | URISyntaxException | SAXException | FSMException | InterruptedException ex) {
                         Logger.getLogger(DeepLAction.class.getName()).log(Level.SEVERE, null, ex);
                         pbd.addText("Error: " + ex.getLocalizedMessage());
                         pbd.setTextAreaBackgroundColor(java.awt.Color.RED);

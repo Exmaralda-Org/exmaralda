@@ -73,11 +73,18 @@ public class TranscriberConverter {
         String firstLine = br1.readLine();
         int i1 = firstLine.indexOf("encoding");
         int i2 = firstLine.lastIndexOf("\"");
-        String encoding = firstLine.substring(i1+10, i2);
-        System.out.println("TRS encoding= " + encoding);
+        // 30-04-2025, changed for #200
+        if (i2<0){
+            i2 = firstLine.lastIndexOf("'");
+        }
+        String encoding = "UTF-8";
+        if (i2>0){
+            encoding = firstLine.substring(i1+10, i2);
+            System.out.println("TRS encoding= " + encoding);
+        }
         br1.close();
         
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         FileInputStream fis = new FileInputStream(filename);
         InputStreamReader isr = new InputStreamReader(fis, encoding);
         //InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
