@@ -31,6 +31,7 @@ public abstract class AbstractSegmentation {
     public static final int GAT_MINIMAL_SEGMENTATION = 7;
     public static final int CHAT_MINIMAL_SEGMENTATION = 8;
     public static final int INEL_EVENT_BASED = 9;
+    public static final int cGAT_MINIMAL_SEGMENTATION = 10;
 
     /** Creates a new instance of AbstractSegmentation
      * @param ptef */
@@ -52,7 +53,8 @@ public abstract class AbstractSegmentation {
         if (segName.equals("CHAT")) return CHAT_SEGMENTATION;
         if (segName.equals("IPA")) return IPA_SEGMENTATION;
         if (segName.equals("GENERIC")) return GENERIC_SEGMENTATION;
-        if (segName.equals("cGAT_MINIMAL")) return GAT_MINIMAL_SEGMENTATION;
+        if (segName.equals("cGAT_MINIMAL")) return cGAT_MINIMAL_SEGMENTATION;
+        if (segName.equals("GAT_MINIMAL")) return GAT_MINIMAL_SEGMENTATION;
         if (segName.equals("CHAT_MINIMAL")) return CHAT_MINIMAL_SEGMENTATION;
         if (segName.equals("INEL_EVENT_BASED")) return INEL_EVENT_BASED;
         return NO_SEGMENTATION;
@@ -69,6 +71,7 @@ public abstract class AbstractSegmentation {
             case AbstractSegmentation.GAT_MINIMAL_SEGMENTATION : return new GATMinimalSegmentation();
             case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION : return new CHATMinimalSegmentation();            
             case AbstractSegmentation.INEL_EVENT_BASED : return new InelEventBasedSegmentation();            
+            case AbstractSegmentation.cGAT_MINIMAL_SEGMENTATION : return new cGATMinimalSegmentation();
         }
         return null;
     }
@@ -82,6 +85,7 @@ public abstract class AbstractSegmentation {
             case AbstractSegmentation.GAT_MINIMAL_SEGMENTATION : return "SpeakerContribution_Word";
             case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION : return "SpeakerContribution_Utterance_Word";     
             case AbstractSegmentation.INEL_EVENT_BASED : return "SpeakerContribution_Utterance_Word";     
+            case AbstractSegmentation.cGAT_MINIMAL_SEGMENTATION : return "SpeakerContribution_Word";
             
         }
         return null;

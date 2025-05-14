@@ -363,6 +363,7 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction countAction;
     public javax.swing.AbstractAction wordListAction;
     public javax.swing.AbstractAction transformationAction;
+    public javax.swing.AbstractAction autoNormalisationAction;
     public javax.swing.AbstractAction autoAnnotationAction;
     public javax.swing.AbstractAction insertUtteranceNumbersAction;
     public javax.swing.AbstractAction addTokenLayerAction;
@@ -691,6 +692,7 @@ public class PartitureTableWithActions extends PartitureTable
         //transformationAction = new TransformationAction(this);
         transformationAction = new TransformationAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/Transform.gif")));
         insertUtteranceNumbersAction = new InsertHIATUtteranceNumbersAction(this);
+        autoNormalisationAction = new AutoNormalisationAction(this);
         autoAnnotationAction = new AutoAnnotationAction(this);
         addTokenLayerAction = new AddTokenLayerAction(this);
         

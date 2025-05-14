@@ -183,12 +183,14 @@ public class AutoNormalizer {
         resultTier.setID(newTierID);
         resultTier.setCategory("norm");
         resultTier.setType("a");
+        resultTier.setDisplayName(resultTier.getDescription(bt.getHead().getSpeakertable()));
         
         
         for (int i=0; i<segmentation.size(); i++){
             TimedSegment segmentChain = (TimedSegment) segmentation.get(i);
             String xml = segmentChain.toXML();
             Element segmentChainElement = IOUtilities.readElementFromString(xml);
+            System.out.println(xml);
             List leavesL = XPath.selectNodes(segmentChainElement, "descendant::*[not(*)]");
 
             /*
@@ -202,14 +204,16 @@ public class AutoNormalizer {
             Event currentEvent = null;
             String danglingText = "";
             String preText = "";
-            for (Object o : leavesL){
+            for (Object o : leavesL){                
                 Element leafE = (Element)o;
+                //System.out.println(leafE.getText());
                 if (leafE.getAttributeValue("s")!=null && timeline.containsTimelineItemWithID(leafE.getAttributeValue("s"))){
                     if (lastEvent!=null){
                         lastEvent.setDescription(lastEvent.getDescription() + danglingText);
                     }
                     lastEvent = currentEvent;
                     currentEvent = new Event();
+                    //System.out.println("NEW EVENT " + leafE.getAttributeValue("s"));
                     currentEvent.setDescription(preText);
                     preText="";
                     currentEvent.setStart(leafE.getAttributeValue("s"));      
@@ -246,7 +250,9 @@ public class AutoNormalizer {
                     waitingForNewStart = true;
                 }
             }
-            lastEvent.setDescription(lastEvent.getDescription() + danglingText);
+            if (lastEvent!=null){
+                lastEvent.setDescription(lastEvent.getDescription() + danglingText);
+            }
             
         }
         
@@ -300,7 +306,7 @@ public class AutoNormalizer {
                 </ts>
         
         */
-        
+        resultTier.updatePositions();
         return resultTier;
         
     }

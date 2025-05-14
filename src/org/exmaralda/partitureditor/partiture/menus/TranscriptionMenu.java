@@ -47,6 +47,7 @@ public class TranscriptionMenu extends AbstractTableMenu implements MouseListene
         add(table.calculateTimeAction);
 
         addSeparator();
+        add(table.autoNormalisationAction);
         add(table.autoAnnotationAction);
         
         addSeparator();
