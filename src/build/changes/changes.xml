@@ -10,6 +10,8 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
+    <change tool="partitureditor" type="feature" version="1.8.2" date="14.05.2025">Auto normalisation method in Transcription menu (issue #524)</change>
+    <change tool="partitureditor" type="feature" version="1.8.2" date="01.04.2025">New specs (POS: UD, Pen, Italian, French) for annotation panel (issue #519)</change>
     <change tool="exakt" type="feature" version="1.4.3" date="20.02.2025">Retrieve types for annotation layers (issue #512)</change>
     <change tool="exakt" type="feature" version="1.4.3" date="20.02.2025">Retrieve available values for a given metadata attribute (issue #511)</change>
     <change tool="exakt" type="change" version="1.4.3" date="20.02.2025">Make all* Coma fields available for Metadata columns in EXAKT (issue #492)</change>
