@@ -1,2 +1,1486 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<lexicon><entry form="bratov"><n corr="bratov" freq="2" /></entry><entry form="vpisval"><n corr="vpisovali" freq="1" /></entry><entry form="Sprejm@š"><n corr="Sprejmeš" freq="1" /></entry><entry form="Sklenj@n"><n corr="Sklenjen" freq="1" /></entry><entry form="mojih"><n corr="mojih" freq="1" /></entry><entry form="besede"><n corr="besede" freq="1" /></entry><entry form="r@d"><n corr="rad" freq="1" /></entry><entry form="palčki"><n corr="palčki" freq="1" /></entry><entry form="dobre"><n corr="dobre" freq="2" /></entry><entry form="začetku"><n corr="začetku" freq="1" /></entry><entry form="bilo"><n corr="bilo" freq="1" /></entry><entry form="mejčk@no"><n corr="majčkeno" freq="1" /></entry><entry form="petih"><n corr="petih" freq="1" /></entry><entry form="naši"><n corr="naši" freq="1" /></entry><entry form="lahko"><n corr="lahko" freq="2" /></entry><entry form="Zato"><n corr="Zato" freq="1" /></entry><entry form="Jezusovo"><n corr="Jezusovo" freq="1" /></entry><entry form="bili"><n corr="bili" freq="2" /></entry><entry form="al"><n corr="ali" freq="4" /></entry><entry form="sejal@c"><n corr="sejalec" freq="2" /></entry><entry form="Provzaprov"><n corr="Pravzaprav" freq="1" /></entry><entry form="kliče"><n corr="kliče" freq="1" /></entry><entry form="novinarstvo"><n corr="novinarstvo" freq="1" /></entry><entry form="kmetiji"><n corr="kmetiji" freq="1" /></entry><entry form="hribovitemu"><n corr="hribovitemu" freq="1" /></entry><entry form="imajo"><n corr="imajo" freq="1" /></entry><entry form="Zagorju"><n corr="Zagorju" freq="1" /></entry><entry form="Rdeči"><n corr="Rdeči" freq="1" /></entry><entry form="več"><n corr="več" freq="2" /></entry><entry form="nared@l"><n corr="naredili" freq="1" /></entry><entry form="okolju"><n corr="okolju" freq="1" /></entry><entry form="bi"><n corr="bi" freq="4" /></entry><entry form="pones@l"><n corr="ponesel" freq="1" /></entry><entry form="spominjate"><n corr="spominjate" freq="1" /></entry><entry form="postali"><n corr="postali" freq="1" /></entry><entry form="Slovenc@v"><n corr="Slovencev" freq="1" /></entry><entry form="roku"><n corr="roku" freq="1" /></entry><entry form="zastopmo"><n corr="zastopimo" freq="1" /></entry><entry form="V"><n corr="V" freq="1" /></entry><entry form="filozofija"><n corr="filozofija" freq="1" /></entry><entry form="naključju"><n corr="naključju" freq="1" /></entry><entry form="odprta"><n corr="odprta" freq="1" /></entry><entry form="p@ršli"><n corr="prišli" freq="1" /></entry><entry form="Martina"><n corr="Martina" freq="1" /></entry><entry form="Dolenjsk@m"><n corr="Dolenjskem" freq="1" /></entry><entry form="h"><n corr="k" freq="1" /></entry><entry form="popravljat"><n corr="popravljati" freq="1" /></entry><entry form="Šmartno"><n corr="Šmartno" freq="1" /></entry><entry form="j"><n corr="je" freq="1" /></entry><entry form="potih"><n corr="potih" freq="1" /></entry><entry form="k"><n corr="k" freq="1" /></entry><entry form="rihtal"><n corr="rihtal" freq="1" /></entry><entry form="o"><n corr="o" freq="1" /></entry><entry form="veselj@m"><n corr="veseljem" freq="1" /></entry><entry form="s"><n corr="s" freq="5" /></entry><entry form="#hhh"><n corr="#hhh" freq="1" /></entry><entry form="v"><n corr="v" freq="21" /></entry><entry form="Kristus"><n corr="Kristus" freq="1" /></entry><entry form="z"><n corr="z" freq="6" /></entry><entry form="da"><n corr="da" freq="18" /></entry><entry form="Mimogrede"><n corr="Mimogrede" freq="1" /></entry><entry form="Res"><n corr="Res" freq="1" /></entry><entry form="do"><n corr="do" freq="2" /></entry><entry form="dubu"><n corr="dobil" freq="2" /></entry><entry form="Dan@s"><n corr="Danes" freq="2" /></entry><entry form="svojimi"><n corr="svojimi" freq="1" /></entry><entry form="#U"><n corr="#U" freq="1" /></entry><entry form="Teološki"><n corr="Teološki" freq="1" /></entry><entry form="Šunka"><n corr="Šunka" freq="1" /></entry><entry form="Teološka"><n corr="Teološka" freq="1" /></entry><entry form="reč@m"><n corr="rečem" freq="2" /></entry><entry form="res"><n corr="res" freq="4" /></entry><entry form="#e"><n corr="#e" freq="6" /></entry><entry form="tako"><n corr="tako" freq="2" /></entry><entry form="Grosuplje"><n corr="Grosuplje" freq="1" /></entry><entry form="težav"><n corr="težav" freq="1" /></entry><entry form="niste"><n corr="niste" freq="2" /></entry><entry form="mleko"><n corr="mleko" freq="1" /></entry><entry form="Tko"><n corr="Tako" freq="1" /></entry><entry form="sk@p"><n corr="skupaj" freq="1" /></entry><entry form="ljudmi"><n corr="ljudmi" freq="1" /></entry><entry form="Lado"><n corr="Lado" freq="1" /></entry><entry form="dobrodošli"><n corr="dobrodošli" freq="1" /></entry><entry form="Eno"><n corr="Eno" freq="1" /></entry><entry form="hribe"><n corr="hribe" freq="1" /></entry><entry form="mogoče"><n corr="mogoče" freq="1" /></entry><entry form="asociacija"><n corr="asociacija" freq="1" /></entry><entry form="procesijo"><n corr="procesijo" freq="1" /></entry><entry form="mehanika"><n corr="mehanika" freq="1" /></entry><entry form="tko"><n corr="tako" freq="2" /></entry><entry form="ena"><n corr="ena" freq="1" /></entry><entry form="Če"><n corr="Če" freq="1" /></entry><entry form="ga"><n corr="ga" freq="5" /></entry><entry form="tistih"><n corr="tistih" freq="1" /></entry><entry form="#eem"><n corr="#eem" freq="4" /></entry><entry form="gre"><n corr="gre" freq="1" /></entry><entry form="kupu"><n corr="kupil" freq="1" /></entry><entry form="strani"><n corr="strani" freq="1" /></entry><entry form="redkih"><n corr="redkih" freq="1" /></entry><entry form="Imela"><n corr="Imela" freq="1" /></entry><entry form="v@ndar"><n corr="vendar" freq="1" /></entry><entry form="Odraščali"><n corr="Odraščali" freq="1" /></entry><entry form="preskakvov"><n corr="preskakoval" freq="1" /></entry><entry form="mlajših"><n corr="mlajših" freq="1" /></entry><entry form="srečal"><n corr="srečal" freq="1" /></entry><entry form="eno"><n corr="eno" freq="2" /></entry><entry form="moškimi"><n corr="moškimi" freq="1" /></entry><entry form="Srednja"><n corr="Srednja" freq="1" /></entry><entry form="zd@j"><n corr="zdaj" freq="2" /></entry><entry form="miru"><n corr="miru" freq="2" /></entry><entry form="nejpr@j"><n corr="najprej" freq="1" /></entry><entry form="župnijsko"><n corr="župnijsko" freq="1" /></entry><entry form="včasih"><n corr="včasih" freq="2" /></entry><entry form="medij@v"><n corr="medijev" freq="1" /></entry><entry form="Lade"><n corr="Lade" freq="1" /></entry><entry form="življenju"><n corr="življenju" freq="2" /></entry><entry form="Lada"><n corr="Lada" freq="1" /></entry><entry form="če"><n corr="če" freq="1" /></entry><entry form="imel"><n corr="imeli" freq="1" /></entry><entry form="hitro"><n corr="hitro" freq="1" /></entry><entry form="popravca"><n corr="popravca" freq="2" /></entry><entry form="fanti"><n corr="fanti" freq="1" /></entry><entry form="bil"><n corr="bil" freq="2" /></entry><entry form="Potem"><n corr="Potem" freq="1" /></entry><entry form="tisoč"><n corr="tisoč" freq="1" /></entry><entry form="kako"><n corr="kako" freq="2" /></entry><entry form="sooblikoval"><n corr="sooblikoval" freq="1" /></entry><entry form="lepo"><n corr="lepo" freq="2" /></entry><entry form="potegnu"><n corr="potegnil" freq="1" /></entry><entry form="ustavljal"><n corr="ustavljal" freq="1" /></entry><entry form="imela"><n corr="imela" freq="1" /></entry><entry form="tisto"><n corr="tisto" freq="1" /></entry><entry form="letniku"><n corr="letniku" freq="1" /></entry><entry form="zajtrk"><n corr="zajtrk" freq="1" /></entry><entry form="Mogoče"><n corr="Mogoče" freq="1" /></entry><entry form="naj"><n corr="naj" freq="1" /></entry><entry form="različnostih"><n corr="različnostih" freq="1" /></entry><entry form="preko"><n corr="preko" freq="1" /></entry><entry form="dožvel"><n corr="doživel" freq="1" /></entry><entry form="nam"><n corr="nam" freq="1" /></entry><entry form="vsakega"><n corr="vsakega" freq="1" /></entry><entry form="pet"><n corr="pet" freq="2" /></entry><entry form="ljubez@n"><n corr="ljubezen" freq="1" /></entry><entry form="ed@n"><n corr="eden" freq="2" /></entry><entry form="vpisu"><n corr="vpisu" freq="2" /><n corr="vpisal" freq="1" /></entry><entry form="in"><n corr="in" freq="16" /></entry><entry form="duhovnika"><n corr="duhovnika" freq="2" /></entry><entry form="prvič"><n corr="prvič" freq="1" /></entry><entry form="Karitas"><n corr="Karitas" freq="1" /></entry><entry form="brez"><n corr="brez" freq="1" /></entry><entry form="Golob"><n corr="Golob" freq="3" /></entry><entry form="dobil"><n corr="dobil" freq="1" /></entry><entry form="iz"><n corr="iz" freq="1" /></entry><entry form="včer@j"><n corr="včeraj" freq="1" /></entry><entry form="mizah"><n corr="mizah" freq="1" /></entry><entry form="k@"><n corr="ker" freq="1" /><n corr="ke" freq="1" /></entry><entry form="ja"><n corr="ja" freq="1" /></entry><entry form="veselje"><n corr="veselje" freq="1" /></entry><entry form="je"><n corr="je" freq="32" /></entry><entry form="pač"><n corr="pač" freq="1" /></entry><entry form="kmal"><n corr="kmalu" freq="1" /></entry><entry form="Blo"><n corr="Bilo" freq="1" /></entry><entry form="izkopič@k"><n corr="izkupiček" freq="1" /></entry><entry form="vse"><n corr="vse" freq="1" /></entry><entry form="predstavljajo"><n corr="predstavljajo" freq="1" /></entry><entry form="celo"><n corr="celo" freq="1" /></entry><entry form="krog"><n corr="krog" freq="1" /></entry><entry form="anglešk@ga"><n corr="angleškega" freq="1" /></entry><entry form="smo"><n corr="smo" freq="8" /></entry><entry form="bla"><n corr="bila" freq="1" /></entry><entry form="Ja"><n corr="Ja" freq="8" /></entry><entry form="vala"><n corr="vala" freq="2" /></entry><entry form="mam"><n corr="imam" freq="2" /></entry><entry form="ble"><n corr="bile" freq="1" /></entry><entry form="zakup"><n corr="zakup" freq="1" /></entry><entry form="Je"><n corr="Je" freq="1" /></entry><entry form="sporočilo"><n corr="sporočilo" freq="1" /></entry><entry form="avto"><n corr="avto" freq="2" /></entry><entry form="ki"><n corr="ki" freq="5" /></entry><entry form="kaplan"><n corr="kaplan" freq="1" /></entry><entry form="meni"><n corr="meni" freq="1" /></entry><entry form="bogoslužju"><n corr="bogoslužju" freq="1" /></entry><entry form="potica"><n corr="potica" freq="1" /></entry><entry form="blo"><n corr="bilo" freq="3" /></entry><entry form="ampak"><n corr="ampak" freq="1" /></entry><entry form="ko"><n corr="ko" freq="1" /></entry><entry form="zarad"><n corr="zaradi" freq="1" /></entry><entry form="vstal"><n corr="vstali" freq="1" /></entry><entry form="novinarji"><n corr="novinarji" freq="1" /></entry><entry form="pozitivno"><n corr="pozitivno" freq="1" /></entry><entry form="poseb@n"><n corr="poseben" freq="1" /></entry><entry form="drugo"><n corr="drugo" freq="1" /></entry><entry form="gost"><n corr="gost" freq="1" /></entry><entry form="mene"><n corr="mene" freq="1" /></entry><entry form="recimo"><n corr="recimo" freq="1" /></entry><entry form="Goloba"><n corr="Goloba" freq="1" /></entry><entry form="k@šnih"><n corr="kakšnih" freq="1" /></entry><entry form="drugi"><n corr="drugi" freq="1" /></entry><entry form="prav"><n corr="pravi" freq="1" /></entry><entry form="Hvala"><n corr="Hvala" freq="1" /></entry><entry form="šole"><n corr="šole" freq="1" /></entry><entry form="leto"><n corr="leto" freq="2" /></entry><entry form="Savi"><n corr="Savi" freq="1" /></entry><entry form="svobodni"><n corr="svobodni" freq="1" /></entry><entry form="sed@mindvajs@tih"><n corr="sedemindvajsetih" freq="1" /></entry><entry form="srednje"><n corr="srednje" freq="1" /></entry><entry form="dela"><n corr="dela" freq="1" /></entry><entry form="izročilo"><n corr="izročilo" freq="1" /></entry><entry form="Mislim"><n corr="Mislim" freq="1" /></entry><entry form="Bog"><n corr="Bog" freq="1" /></entry><entry form="mi"><n corr="mi" freq="6" /></entry><entry form="filozofijo"><n corr="filozofijo" freq="1" /></entry><entry form="študentje"><n corr="študentje" freq="1" /></entry><entry form="vlogi"><n corr="vlogi" freq="1" /></entry><entry form="vami"><n corr="vami" freq="1" /></entry><entry form="krono"><n corr="krono" freq="1" /></entry><entry form="na"><n corr="na" freq="12" /></entry><entry form="prahu"><n corr="prahu" freq="1" /></entry><entry form="Pozna"><n corr="Pozna" freq="1" /></entry><entry form="ostanite"><n corr="ostanite" freq="1" /></entry><entry form="ne"><n corr="ne" freq="1" /></entry><entry form="prštimov"><n corr="prištimal" freq="1" /></entry><entry form="K@r"><n corr="Ker" freq="2" /></entry><entry form="lani"><n corr="lani" freq="1" /></entry><entry form="j@st"><n corr="jaz" freq="1" /></entry><entry form="meso"><n corr="meso" freq="1" /></entry><entry form="župnijo"><n corr="župnijo" freq="1" /></entry><entry form="duma"><n corr="doma" freq="1" /></entry><entry form="obvestilo"><n corr="obvestilo" freq="1" /></entry><entry form="med"><n corr="med" freq="3" /></entry><entry form="veliko"><n corr="veliko" freq="4" /></entry><entry form="pomislim"><n corr="pomislim" freq="1" /></entry><entry form="poslanstva"><n corr="poslanstva" freq="1" /></entry><entry form="volk"><n corr="volk" freq="1" /></entry><entry form="rok"><n corr="rok" freq="1" /></entry><entry form="nikol"><n corr="nikoli" freq="1" /></entry><entry form="Na"><n corr="Na" freq="6" /></entry><entry form="ob"><n corr="ob" freq="1" /></entry><entry form="od"><n corr="od" freq="1" /></entry><entry form="mel"><n corr="imeli" freq="1" /><n corr="imel" freq="1" /></entry><entry form="zelo"><n corr="zelo" freq="1" /></entry><entry form="poklic"><n corr="poklic" freq="1" /></entry><entry form="velike"><n corr="velike" freq="1" /></entry><entry form="k@r"><n corr="kar" freq="3" /></entry><entry form="kar"><n corr="kar" freq="3" /></entry><entry form="on"><n corr="on" freq="1" /></entry><entry form="mizo"><n corr="mizo" freq="1" /></entry><entry form="Tud"><n corr="Tudi" freq="1" /></entry><entry form="mislijo"><n corr="mislijo" freq="1" /></entry><entry form="službi"><n corr="službi" freq="1" /></entry><entry form="Niva"><n corr="Niva" freq="1" /></entry><entry form="drugim"><n corr="drugim" freq="1" /></entry><entry form="predstavlja"><n corr="predstavlja" freq="2" /></entry><entry form="praznike"><n corr="praznike" freq="1" /></entry><entry form="Nive"><n corr="Nive" freq="1" /></entry><entry form="pa"><n corr="pa" freq="23" /></entry><entry form="Nivo"><n corr="Nivo" freq="1" /></entry><entry form="deset"><n corr="deset" freq="1" /></entry><entry form="lohk"><n corr="lahko" freq="1" /></entry><entry form="sedanj@mu"><n corr="sedanjemu" freq="1" /></entry><entry form="pojed@l"><n corr="pojedli" freq="1" /></entry><entry form="po"><n corr="po" freq="5" /></entry><entry form="izbora"><n corr="izbora" freq="1" /></entry><entry form="pirhi"><n corr="pirhi" freq="1" /></entry><entry form="tud"><n corr="tudi" freq="3" /></entry><entry form="mami"><n corr="mami" freq="2" /></entry><entry form="č@s"><n corr="čas" freq="1" /></entry><entry form="Edin"><n corr="Edino" freq="1" /></entry><entry form="veselimi"><n corr="veselimi" freq="1" /></entry><entry form="prinaša"><n corr="prinaša" freq="1" /></entry><entry form="všeč"><n corr="všeč" freq="1" /></entry><entry form="zaužije"><n corr="zaužije" freq="1" /></entry><entry form="marsik@j"><n corr="marsikaj" freq="1" /></entry><entry form="naju"><n corr="naju" freq="1" /></entry><entry form="Mogu"><n corr="Mogel" freq="1" /></entry><entry form="trud@m"><n corr="trudim" freq="1" /></entry><entry form="let"><n corr="let" freq="1" /></entry><entry form="tiče"><n corr="tiče" freq="1" /></entry><entry form="dob@r"><n corr="dobro" freq="2" /></entry><entry form="prid@n"><n corr="priden" freq="1" /></entry><entry form="Po"><n corr="Pol" freq="1" /></entry><entry form="zaprte"><n corr="zaprte" freq="1" /></entry><entry form="sta"><n corr="sta" freq="2" /></entry><entry form="Zelo"><n corr="Zelo" freq="1" /></entry><entry form="ste"><n corr="ste" freq="6" /></entry><entry form="jezika"><n corr="jezika" freq="1" /></entry><entry form="dan@s"><n corr="danes" freq="2" /></entry><entry form="svoje"><n corr="svoje" freq="1" /></entry><entry form="botroval"><n corr="botroval" freq="1" /></entry><entry form="živi"><n corr="živi" freq="1" /></entry><entry form="najdete"><n corr="najdete" freq="1" /></entry><entry form="štal"><n corr="štali" freq="1" /></entry><entry form="Litiji"><n corr="Litiji" freq="1" /></entry><entry form="Kekč@va"><n corr="Kekčeva" freq="1" /></entry><entry form="spomladi"><n corr="spomladi" freq="1" /></entry><entry form="petindvajs@tih"><n corr="petindvajsetih" freq="1" /></entry><entry form="pol"><n corr="pol" freq="3" /></entry><entry form="maš"><n corr="maši" freq="1" /></entry><entry form="evrov"><n corr="evrov" freq="1" /></entry><entry form="nardit"><n corr="narediti" freq="1" /></entry><entry form="frekvencah"><n corr="frekvencah" freq="1" /></entry><entry form="se"><n corr="se" freq="16" /></entry><entry form="pot"><n corr="pot" freq="2" /></entry><entry form="predvs@m"><n corr="predvsem" freq="1" /></entry><entry form="ker"><n corr="ker" freq="3" /></entry><entry form="sm"><n corr="sem" freq="1" /></entry><entry form="letih"><n corr="letih" freq="3" /></entry><entry form="so"><n corr="so" freq="3" /></entry><entry form="m@nj"><n corr="manj" freq="1" /></entry><entry form="smis@l"><n corr="smisel" freq="1" /></entry><entry form="Zanimala"><n corr="Zanimala" freq="1" /></entry><entry form="sva"><n corr="sva" freq="1" /></entry><entry form="Velika"><n corr="Velika" freq="1" /></entry><entry form="ona"><n corr="ona" freq="1" /></entry><entry form="filmov"><n corr="filmov" freq="1" /></entry><entry form="izvirnim"><n corr="izvirnim" freq="1" /></entry><entry form="Martin"><n corr="Martin" freq="3" /></entry><entry form="ta"><n corr="ta" freq="2" /></entry><entry form="premestitvi"><n corr="premestitvi" freq="1" /></entry><entry form="naravnanostjo"><n corr="naravnanostjo" freq="1" /></entry><entry form="Štaj@rsk@ga"><n corr="Štajerskega" freq="1" /></entry><entry form="vasi"><n corr="vasi" freq="1" /></entry><entry form="Ati"><n corr="Ati" freq="1" /></entry><entry form="duhovnikov"><n corr="duhovnikov" freq="1" /></entry><entry form="nis@m"><n corr="nisem" freq="2" /></entry><entry form="to"><n corr="to" freq="2" /></entry><entry form="držita"><n corr="držita" freq="1" /></entry><entry form="prevzeli"><n corr="prevzeli" freq="1" /></entry><entry form="used@l"><n corr="usedli" freq="1" /></entry><entry form="nekak"><n corr="nekako" freq="1" /></entry><entry form="Pri"><n corr="Pri" freq="1" /></entry><entry form="jed"><n corr="jed" freq="1" /></entry><entry form="dvignilo"><n corr="dvignilo" freq="1" /></entry><entry form="polno"><n corr="polno" freq="1" /></entry><entry form="odnos"><n corr="odnos" freq="1" /></entry><entry form="ati"><n corr="ati" freq="2" /></entry><entry form="šli"><n corr="šli" freq="1" /></entry><entry form="To"><n corr="To" freq="3" /></entry><entry form="pomanjkanja"><n corr="pomanjkanja" freq="1" /></entry><entry form="šlo"><n corr="šlo" freq="1" /></entry><entry form="pri"><n corr="pri" freq="5" /></entry><entry form="menat"><n corr="menjati" freq="1" /></entry><entry form="že"><n corr="že" freq="4" /></entry><entry form="praznik"><n corr="praznik" freq="4" /></entry><entry form="Vrhniki"><n corr="Vrhniki" freq="1" /></entry><entry form="povezan"><n corr="povezani" freq="1" /></entry><entry form="kaplje"><n corr="kaplje" freq="1" /></entry><entry form="provzaprov"><n corr="pravzaprav" freq="1" /></entry><entry form="Sneguljčica"><n corr="Sneguljčica" freq="1" /></entry><entry form="nama"><n corr="nama" freq="1" /></entry><entry form="Razgibanemu"><n corr="Razgibanemu" freq="1" /></entry><entry form="četrt@m"><n corr="četrtem" freq="1" /></entry><entry form="vedno"><n corr="vedno" freq="3" /></entry><entry form="nami"><n corr="nami" freq="1" /></entry><entry form="navad"><n corr="navadi" freq="1" /></entry><entry form="treba"><n corr="treba" freq="2" /></entry><entry form="tak@t"><n corr="takrat" freq="1" /></entry><entry form="dražbo"><n corr="dražbo" freq="1" /></entry><entry form="žeg@nj"><n corr="žegen" freq="1" /></entry><entry form="Kostrevnica"><n corr="Kostrevnica" freq="1" /></entry><entry form="srca"><n corr="srca" freq="1" /></entry><entry form="povabilo"><n corr="povabilo" freq="1" /></entry><entry form="mejčk@n"><n corr="majčkeno" freq="1" /></entry><entry form="stvari"><n corr="stvari" freq="1" /></entry><entry form="največji"><n corr="največji" freq="2" /></entry><entry form="staro"><n corr="staro" freq="1" /></entry><entry form="krščanski"><n corr="krščanski" freq="2" /></entry><entry form="kinota"><n corr="kina" freq="1" /></entry><entry form="povezuje"><n corr="povezuje" freq="1" /></entry><entry form="vsepovsod"><n corr="vsepovsod" freq="1" /></entry><entry form="reku"><n corr="rekel" freq="1" /></entry><entry form="Igorja"><n corr="Igorja" freq="1" /></entry><entry form="drug@m"><n corr="drugem" freq="1" /></entry><entry form="hit@r"><n corr="hitro" freq="2" /></entry><entry form="sedmimi"><n corr="sedmimi" freq="3" /></entry><entry form="tudi"><n corr="tudi" freq="3" /></entry><entry form="čim"><n corr="čim" freq="1" /></entry><entry form="splošno"><n corr="splošno" freq="1" /></entry><entry form="Imate"><n corr="Imate" freq="1" /></entry><entry form="šol"><n corr="šoli" freq="1" /></entry><entry form="njega"><n corr="njega" freq="1" /></entry><entry form="hren"><n corr="hren" freq="1" /></entry><entry form="ž@blje"><n corr="žeblje" freq="1" /></entry><entry form="moj"><n corr="moj" freq="1" /></entry><entry form="studiu"><n corr="studiu" freq="1" /></entry><entry form="potrpežljiv@ga"><n corr="potrpežljivega" freq="1" /></entry><entry form="humor"><n corr="humor" freq="1" /></entry><entry form="stiku"><n corr="stiku" freq="1" /></entry><entry form="Kristusovo"><n corr="Kristusovo" freq="1" /></entry><entry form="domov"><n corr="domov" freq="1" /></entry><entry form="navezu"><n corr="navezal" freq="1" /></entry><entry form="človeku"><n corr="človeku" freq="2" /></entry><entry form="še"><n corr="še" freq="5" /></entry><entry form="zaprla"><n corr="zaprla" freq="1" /></entry><entry form="kle"><n corr="tule" freq="1" /></entry><entry form="za"><n corr="za" freq="7" /></entry><entry form="primer@n"><n corr="primerno" freq="1" /><n corr="primeren" freq="1" /></entry><entry form="v@s"><n corr="ves" freq="1" /></entry><entry form="simpatičnih"><n corr="simpatičnih" freq="1" /></entry><entry form="vas"><n corr="vas" freq="3" /></entry><entry form="mlekarju"><n corr="mlekarju" freq="1" /></entry><entry form="žvimo"><n corr="živimo" freq="1" /></entry><entry form="vsaka"><n corr="vsaka" freq="1" /></entry><entry form="jedi"><n corr="jedi" freq="1" /></entry><entry form="unikatna"><n corr="unikatna" freq="1" /></entry><entry form="navad@š"><n corr="navadiš" freq="1" /></entry><entry form="tega"><n corr="tega" freq="2" /></entry><entry form="ustvaril"><n corr="ustvaril" freq="1" /></entry><entry form="občini"><n corr="občini" freq="1" /></entry><entry form="zaupano"><n corr="zaupano" freq="1" /></entry><entry form="mnogočem"><n corr="mnogočem" freq="1" /></entry><entry form="Za"><n corr="Za" freq="2" /></entry><entry form="svoj"><n corr="svoj" freq="1" /></entry><entry form="hitrej"><n corr="hitreje" freq="1" /></entry><entry form="njen"><n corr="njen" freq="1" /></entry><entry form="vsamu"><n corr="vsakemu" freq="1" /></entry><entry form="Drugi"><n corr="Drugi" freq="1" /></entry><entry form="generacij"><n corr="generacij" freq="1" /></entry><entry form="ustov"><n corr="ostal" freq="1" /></entry><entry form="Štaj@rskega"><n corr="Štajerskega" freq="1" /></entry><entry form="ljudi"><n corr="ljudi" freq="1" /></entry><entry form="Štaj@rsk@m"><n corr="Štajerskem" freq="2" /></entry><entry form="Kristusove"><n corr="Kristusove" freq="1" /></entry><entry form="fakulteta"><n corr="fakulteta" freq="1" /></entry><entry form="takoj"><n corr="takoj" freq="1" /></entry><entry form="fakultete"><n corr="fakultete" freq="1" /></entry><entry form="noč"><n corr="noč" freq="2" /></entry><entry form="fakulteti"><n corr="fakulteti" freq="1" /></entry><entry form="doma"><n corr="doma" freq="2" /></entry><entry form="košar"><n corr="košari" freq="1" /></entry><entry form="naredu"><n corr="naredil" freq="2" /></entry><entry form="zlo"><n corr="zelo" freq="4" /></entry><entry form="telo"><n corr="telo" freq="1" /></entry><entry form="poštimat"><n corr="poštimati" freq="1" /></entry><entry form="mature"><n corr="mature" freq="1" /></entry><entry form="Duhovnik"><n corr="Duhovnik" freq="1" /></entry><entry form="maše"><n corr="maše" freq="1" /></entry><entry form="k@šno"><n corr="kakšno" freq="1" /></entry><entry form="širjenj@m"><n corr="širjenjem" freq="1" /></entry><entry form="dal"><n corr="dal" freq="4" /></entry><entry form="kot"><n corr="kot" freq="4" /></entry><entry form="vsaj"><n corr="vsaj" freq="1" /></entry><entry form="vs@h"><n corr="vseh" freq="1" /></entry><entry form="pes@m"><n corr="pesem" freq="1" /></entry><entry form="pristali"><n corr="pristali" freq="1" /></entry><entry form="mehanik"><n corr="mehanik" freq="1" /></entry><entry form="maturo"><n corr="maturo" freq="1" /></entry><entry form="t@m"><n corr="tam" freq="1" /></entry><entry form="zard"><n corr="zaradi" freq="1" /></entry><entry form="tam"><n corr="tam" freq="1" /></entry><entry form="ljudem"><n corr="ljudem" freq="1" /></entry><entry form="delovanju"><n corr="delovanju" freq="1" /></entry><entry form="odvijalo"><n corr="odvijalo" freq="1" /></entry><entry form="enih"><n corr="enih" freq="1" /></entry><entry form="Zaplani"><n corr="Zaplani" freq="1" /></entry><entry form="stvar"><n corr="stvar" freq="1" /></entry><entry form="tel@"><n corr="tele" freq="1" /></entry><entry form="mesto"><n corr="mesto" freq="1" /></entry><entry form="ima"><n corr="ima" freq="2" /></entry><entry form="prv@m"><n corr="prvem" freq="2" /></entry><entry form="simbol"><n corr="simbol" freq="1" /></entry><entry form="dons"><n corr="danes" freq="1" /></entry><entry form="pristopom"><n corr="pristopom" freq="1" /></entry><entry form="S@m"><n corr="Sem" freq="1" /></entry><entry form="oznanilo"><n corr="oznanilo" freq="1" /></entry><entry form="velikonočna"><n corr="velikonočna" freq="1" /></entry><entry form="nedeljo"><n corr="nedeljo" freq="1" /></entry><entry form="Dejstvo"><n corr="Dejstvo" freq="1" /></entry><entry form="velikonočni"><n corr="velikonočni" freq="1" /></entry><entry form="bila"><n corr="bila" freq="2" /></entry><entry form="iskov"><n corr="iskal" freq="1" /></entry><entry form="Slovenci"><n corr="Slovenci" freq="1" /></entry><entry form="prava"><n corr="prava" freq="1" /></entry><entry form="dobrote"><n corr="dobrote" freq="1" /></entry><entry form="hiši"><n corr="hiši" freq="1" /></entry><entry form="velikonočno"><n corr="velikonočno" freq="2" /></entry><entry form="zato"><n corr="zato" freq="1" /></entry><entry form="s@j"><n corr="saj" freq="1" /></entry><entry form="sam"><n corr="samo" freq="1" /></entry><entry form="s@m"><n corr="sem" freq="14" /></entry><entry form="potem"><n corr="potem" freq="3" /></entry><entry form="imamo"><n corr="imamo" freq="1" /></entry><entry form="verjet@n"><n corr="verjetno" freq="1" /></entry><entry form="odrešeni"><n corr="odrešeni" freq="1" /></entry><entry form="mis@lt"><n corr="misliti" freq="1" /></entry><entry form="Pretehta"><n corr="Pretehta" freq="1" /></entry><entry form="iskreno"><n corr="iskreno" freq="1" /></entry><entry form="prikupil"><n corr="prikupil" freq="1" /></entry><entry form="Vaš"><n corr="Vaš" freq="1" /></entry><entry form="Bohinju"><n corr="Bohinju" freq="3" /></entry><entry form="volje"><n corr="volje" freq="2" /></entry><entry form="kozlički"><n corr="kozlički" freq="1" /></entry><entry form="končan@m"><n corr="končanem" freq="1" /></entry></lexicon>
+<lexicon>
+    <entry form="bratov">
+        <n corr="bratov" freq="2"/>
+    </entry>
+    <entry form="vpisval">
+        <n corr="vpisovali" freq="1"/>
+    </entry>
+    <entry form="Sprejm@š">
+        <n corr="Sprejmeš" freq="1"/>
+    </entry>
+    <entry form="Sklenj@n">
+        <n corr="Sklenjen" freq="1"/>
+    </entry>
+    <entry form="mojih">
+        <n corr="mojih" freq="1"/>
+    </entry>
+    <entry form="besede">
+        <n corr="besede" freq="1"/>
+    </entry>
+    <entry form="r@d">
+        <n corr="rad" freq="1"/>
+    </entry>
+    <entry form="palčki">
+        <n corr="palčki" freq="1"/>
+    </entry>
+    <entry form="dobre">
+        <n corr="dobre" freq="2"/>
+    </entry>
+    <entry form="začetku">
+        <n corr="začetku" freq="1"/>
+    </entry>
+    <entry form="bilo">
+        <n corr="bilo" freq="1"/>
+    </entry>
+    <entry form="mejčk@no">
+        <n corr="majčkeno" freq="1"/>
+    </entry>
+    <entry form="petih">
+        <n corr="petih" freq="1"/>
+    </entry>
+    <entry form="naši">
+        <n corr="naši" freq="1"/>
+    </entry>
+    <entry form="lahko">
+        <n corr="lahko" freq="2"/>
+    </entry>
+    <entry form="Zato">
+        <n corr="Zato" freq="1"/>
+    </entry>
+    <entry form="Jezusovo">
+        <n corr="Jezusovo" freq="1"/>
+    </entry>
+    <entry form="bili">
+        <n corr="bili" freq="2"/>
+    </entry>
+    <entry form="al">
+        <n corr="ali" freq="4"/>
+    </entry>
+    <entry form="sejal@c">
+        <n corr="sejalec" freq="2"/>
+    </entry>
+    <entry form="Provzaprov">
+        <n corr="Pravzaprav" freq="1"/>
+    </entry>
+    <entry form="kliče">
+        <n corr="kliče" freq="1"/>
+    </entry>
+    <entry form="novinarstvo">
+        <n corr="novinarstvo" freq="1"/>
+    </entry>
+    <entry form="kmetiji">
+        <n corr="kmetiji" freq="1"/>
+    </entry>
+    <entry form="hribovitemu">
+        <n corr="hribovitemu" freq="1"/>
+    </entry>
+    <entry form="imajo">
+        <n corr="imajo" freq="1"/>
+    </entry>
+    <entry form="Zagorju">
+        <n corr="Zagorju" freq="1"/>
+    </entry>
+    <entry form="Rdeči">
+        <n corr="Rdeči" freq="1"/>
+    </entry>
+    <entry form="več">
+        <n corr="več" freq="2"/>
+    </entry>
+    <entry form="nared@l">
+        <n corr="naredili" freq="1"/>
+    </entry>
+    <entry form="okolju">
+        <n corr="okolju" freq="1"/>
+    </entry>
+    <entry form="bi">
+        <n corr="bi" freq="4"/>
+    </entry>
+    <entry form="pones@l">
+        <n corr="ponesel" freq="1"/>
+    </entry>
+    <entry form="spominjate">
+        <n corr="spominjate" freq="1"/>
+    </entry>
+    <entry form="postali">
+        <n corr="postali" freq="1"/>
+    </entry>
+    <entry form="Slovenc@v">
+        <n corr="Slovencev" freq="1"/>
+    </entry>
+    <entry form="roku">
+        <n corr="roku" freq="1"/>
+    </entry>
+    <entry form="zastopmo">
+        <n corr="zastopimo" freq="1"/>
+    </entry>
+    <entry form="V">
+        <n corr="V" freq="1"/>
+    </entry>
+    <entry form="filozofija">
+        <n corr="filozofija" freq="1"/>
+    </entry>
+    <entry form="naključju">
+        <n corr="naključju" freq="1"/>
+    </entry>
+    <entry form="odprta">
+        <n corr="odprta" freq="1"/>
+    </entry>
+    <entry form="p@ršli">
+        <n corr="prišli" freq="1"/>
+    </entry>
+    <entry form="Martina">
+        <n corr="Martina" freq="1"/>
+    </entry>
+    <entry form="Dolenjsk@m">
+        <n corr="Dolenjskem" freq="1"/>
+    </entry>
+    <entry form="h">
+        <n corr="k" freq="1"/>
+    </entry>
+    <entry form="popravljat">
+        <n corr="popravljati" freq="1"/>
+    </entry>
+    <entry form="Šmartno">
+        <n corr="Šmartno" freq="1"/>
+    </entry>
+    <entry form="j">
+        <n corr="je" freq="1"/>
+    </entry>
+    <entry form="potih">
+        <n corr="potih" freq="1"/>
+    </entry>
+    <entry form="k">
+        <n corr="k" freq="1"/>
+    </entry>
+    <entry form="rihtal">
+        <n corr="rihtal" freq="1"/>
+    </entry>
+    <entry form="o">
+        <n corr="o" freq="1"/>
+    </entry>
+    <entry form="veselj@m">
+        <n corr="veseljem" freq="1"/>
+    </entry>
+    <entry form="s">
+        <n corr="s" freq="5"/>
+    </entry>
+    <entry form="#hhh">
+        <n corr="#hhh" freq="1"/>
+    </entry>
+    <entry form="v">
+        <n corr="v" freq="21"/>
+    </entry>
+    <entry form="Kristus">
+        <n corr="Kristus" freq="1"/>
+    </entry>
+    <entry form="z">
+        <n corr="z" freq="6"/>
+    </entry>
+    <entry form="da">
+        <n corr="da" freq="18"/>
+    </entry>
+    <entry form="Mimogrede">
+        <n corr="Mimogrede" freq="1"/>
+    </entry>
+    <entry form="Res">
+        <n corr="Res" freq="1"/>
+    </entry>
+    <entry form="do">
+        <n corr="do" freq="2"/>
+    </entry>
+    <entry form="dubu">
+        <n corr="dobil" freq="2"/>
+    </entry>
+    <entry form="Dan@s">
+        <n corr="Danes" freq="2"/>
+    </entry>
+    <entry form="svojimi">
+        <n corr="svojimi" freq="1"/>
+    </entry>
+    <entry form="#U">
+        <n corr="#U" freq="1"/>
+    </entry>
+    <entry form="Teološki">
+        <n corr="Teološki" freq="1"/>
+    </entry>
+    <entry form="Šunka">
+        <n corr="Šunka" freq="1"/>
+    </entry>
+    <entry form="Teološka">
+        <n corr="Teološka" freq="1"/>
+    </entry>
+    <entry form="reč@m">
+        <n corr="rečem" freq="2"/>
+    </entry>
+    <entry form="res">
+        <n corr="res" freq="4"/>
+    </entry>
+    <entry form="#e">
+        <n corr="#e" freq="6"/>
+    </entry>
+    <entry form="tako">
+        <n corr="tako" freq="2"/>
+    </entry>
+    <entry form="Grosuplje">
+        <n corr="Grosuplje" freq="1"/>
+    </entry>
+    <entry form="težav">
+        <n corr="težav" freq="1"/>
+    </entry>
+    <entry form="niste">
+        <n corr="niste" freq="2"/>
+    </entry>
+    <entry form="mleko">
+        <n corr="mleko" freq="1"/>
+    </entry>
+    <entry form="Tko">
+        <n corr="Tako" freq="1"/>
+    </entry>
+    <entry form="sk@p">
+        <n corr="skupaj" freq="1"/>
+    </entry>
+    <entry form="ljudmi">
+        <n corr="ljudmi" freq="1"/>
+    </entry>
+    <entry form="Lado">
+        <n corr="Lado" freq="1"/>
+    </entry>
+    <entry form="dobrodošli">
+        <n corr="dobrodošli" freq="1"/>
+    </entry>
+    <entry form="Eno">
+        <n corr="Eno" freq="1"/>
+    </entry>
+    <entry form="hribe">
+        <n corr="hribe" freq="1"/>
+    </entry>
+    <entry form="mogoče">
+        <n corr="mogoče" freq="1"/>
+    </entry>
+    <entry form="asociacija">
+        <n corr="asociacija" freq="1"/>
+    </entry>
+    <entry form="procesijo">
+        <n corr="procesijo" freq="1"/>
+    </entry>
+    <entry form="mehanika">
+        <n corr="mehanika" freq="1"/>
+    </entry>
+    <entry form="tko">
+        <n corr="tako" freq="2"/>
+    </entry>
+    <entry form="ena">
+        <n corr="ena" freq="1"/>
+    </entry>
+    <entry form="Če">
+        <n corr="Če" freq="1"/>
+    </entry>
+    <entry form="ga">
+        <n corr="ga" freq="5"/>
+    </entry>
+    <entry form="tistih">
+        <n corr="tistih" freq="1"/>
+    </entry>
+    <entry form="#eem">
+        <n corr="#eem" freq="4"/>
+    </entry>
+    <entry form="gre">
+        <n corr="gre" freq="1"/>
+    </entry>
+    <entry form="kupu">
+        <n corr="kupil" freq="1"/>
+    </entry>
+    <entry form="strani">
+        <n corr="strani" freq="1"/>
+    </entry>
+    <entry form="redkih">
+        <n corr="redkih" freq="1"/>
+    </entry>
+    <entry form="Imela">
+        <n corr="Imela" freq="1"/>
+    </entry>
+    <entry form="v@ndar">
+        <n corr="vendar" freq="1"/>
+    </entry>
+    <entry form="Odraščali">
+        <n corr="Odraščali" freq="1"/>
+    </entry>
+    <entry form="preskakvov">
+        <n corr="preskakoval" freq="1"/>
+    </entry>
+    <entry form="mlajših">
+        <n corr="mlajših" freq="1"/>
+    </entry>
+    <entry form="srečal">
+        <n corr="srečal" freq="1"/>
+    </entry>
+    <entry form="eno">
+        <n corr="eno" freq="2"/>
+    </entry>
+    <entry form="moškimi">
+        <n corr="moškimi" freq="1"/>
+    </entry>
+    <entry form="Srednja">
+        <n corr="Srednja" freq="1"/>
+    </entry>
+    <entry form="zd@j">
+        <n corr="zdaj" freq="2"/>
+    </entry>
+    <entry form="miru">
+        <n corr="miru" freq="2"/>
+    </entry>
+    <entry form="nejpr@j">
+        <n corr="najprej" freq="1"/>
+    </entry>
+    <entry form="župnijsko">
+        <n corr="župnijsko" freq="1"/>
+    </entry>
+    <entry form="včasih">
+        <n corr="včasih" freq="2"/>
+    </entry>
+    <entry form="medij@v">
+        <n corr="medijev" freq="1"/>
+    </entry>
+    <entry form="Lade">
+        <n corr="Lade" freq="1"/>
+    </entry>
+    <entry form="življenju">
+        <n corr="življenju" freq="2"/>
+    </entry>
+    <entry form="Lada">
+        <n corr="Lada" freq="1"/>
+    </entry>
+    <entry form="če">
+        <n corr="če" freq="1"/>
+    </entry>
+    <entry form="imel">
+        <n corr="imeli" freq="1"/>
+    </entry>
+    <entry form="hitro">
+        <n corr="hitro" freq="1"/>
+    </entry>
+    <entry form="popravca">
+        <n corr="popravca" freq="2"/>
+    </entry>
+    <entry form="fanti">
+        <n corr="fanti" freq="1"/>
+    </entry>
+    <entry form="bil">
+        <n corr="bil" freq="2"/>
+    </entry>
+    <entry form="Potem">
+        <n corr="Potem" freq="1"/>
+    </entry>
+    <entry form="tisoč">
+        <n corr="tisoč" freq="1"/>
+    </entry>
+    <entry form="kako">
+        <n corr="kako" freq="2"/>
+    </entry>
+    <entry form="sooblikoval">
+        <n corr="sooblikoval" freq="1"/>
+    </entry>
+    <entry form="lepo">
+        <n corr="lepo" freq="2"/>
+    </entry>
+    <entry form="potegnu">
+        <n corr="potegnil" freq="1"/>
+    </entry>
+    <entry form="ustavljal">
+        <n corr="ustavljal" freq="1"/>
+    </entry>
+    <entry form="imela">
+        <n corr="imela" freq="1"/>
+    </entry>
+    <entry form="tisto">
+        <n corr="tisto" freq="1"/>
+    </entry>
+    <entry form="letniku">
+        <n corr="letniku" freq="1"/>
+    </entry>
+    <entry form="zajtrk">
+        <n corr="zajtrk" freq="1"/>
+    </entry>
+    <entry form="Mogoče">
+        <n corr="Mogoče" freq="1"/>
+    </entry>
+    <entry form="naj">
+        <n corr="naj" freq="1"/>
+    </entry>
+    <entry form="različnostih">
+        <n corr="različnostih" freq="1"/>
+    </entry>
+    <entry form="preko">
+        <n corr="preko" freq="1"/>
+    </entry>
+    <entry form="dožvel">
+        <n corr="doživel" freq="1"/>
+    </entry>
+    <entry form="nam">
+        <n corr="nam" freq="1"/>
+    </entry>
+    <entry form="vsakega">
+        <n corr="vsakega" freq="1"/>
+    </entry>
+    <entry form="pet">
+        <n corr="pet" freq="2"/>
+    </entry>
+    <entry form="ljubez@n">
+        <n corr="ljubezen" freq="1"/>
+    </entry>
+    <entry form="ed@n">
+        <n corr="eden" freq="2"/>
+    </entry>
+    <entry form="vpisu">
+        <n corr="vpisu" freq="2"/>
+        <n corr="vpisal" freq="1"/>
+    </entry>
+    <entry form="in">
+        <n corr="in" freq="16"/>
+    </entry>
+    <entry form="duhovnika">
+        <n corr="duhovnika" freq="2"/>
+    </entry>
+    <entry form="prvič">
+        <n corr="prvič" freq="1"/>
+    </entry>
+    <entry form="Karitas">
+        <n corr="Karitas" freq="1"/>
+    </entry>
+    <entry form="brez">
+        <n corr="brez" freq="1"/>
+    </entry>
+    <entry form="Golob">
+        <n corr="Golob" freq="3"/>
+    </entry>
+    <entry form="dobil">
+        <n corr="dobil" freq="1"/>
+    </entry>
+    <entry form="iz">
+        <n corr="iz" freq="1"/>
+    </entry>
+    <entry form="včer@j">
+        <n corr="včeraj" freq="1"/>
+    </entry>
+    <entry form="mizah">
+        <n corr="mizah" freq="1"/>
+    </entry>
+    <entry form="k@">
+        <n corr="ker" freq="1"/>
+        <n corr="ke" freq="1"/>
+    </entry>
+    <entry form="ja">
+        <n corr="ja" freq="1"/>
+    </entry>
+    <entry form="veselje">
+        <n corr="veselje" freq="1"/>
+    </entry>
+    <entry form="je">
+        <n corr="je" freq="32"/>
+    </entry>
+    <entry form="pač">
+        <n corr="pač" freq="1"/>
+    </entry>
+    <entry form="kmal">
+        <n corr="kmalu" freq="1"/>
+    </entry>
+    <entry form="Blo">
+        <n corr="Bilo" freq="1"/>
+    </entry>
+    <entry form="izkopič@k">
+        <n corr="izkupiček" freq="1"/>
+    </entry>
+    <entry form="vse">
+        <n corr="vse" freq="1"/>
+    </entry>
+    <entry form="predstavljajo">
+        <n corr="predstavljajo" freq="1"/>
+    </entry>
+    <entry form="celo">
+        <n corr="celo" freq="1"/>
+    </entry>
+    <entry form="krog">
+        <n corr="krog" freq="1"/>
+    </entry>
+    <entry form="anglešk@ga">
+        <n corr="angleškega" freq="1"/>
+    </entry>
+    <entry form="smo">
+        <n corr="smo" freq="8"/>
+    </entry>
+    <entry form="bla">
+        <n corr="bila" freq="1"/>
+    </entry>
+    <entry form="Ja">
+        <n corr="Ja" freq="8"/>
+    </entry>
+    <entry form="vala">
+        <n corr="vala" freq="2"/>
+    </entry>
+    <entry form="mam">
+        <n corr="imam" freq="2"/>
+    </entry>
+    <entry form="ble">
+        <n corr="bile" freq="1"/>
+    </entry>
+    <entry form="zakup">
+        <n corr="zakup" freq="1"/>
+    </entry>
+    <entry form="Je">
+        <n corr="Je" freq="1"/>
+    </entry>
+    <entry form="sporočilo">
+        <n corr="sporočilo" freq="1"/>
+    </entry>
+    <entry form="avto">
+        <n corr="avto" freq="2"/>
+    </entry>
+    <entry form="ki">
+        <n corr="ki" freq="5"/>
+    </entry>
+    <entry form="kaplan">
+        <n corr="kaplan" freq="1"/>
+    </entry>
+    <entry form="meni">
+        <n corr="meni" freq="1"/>
+    </entry>
+    <entry form="bogoslužju">
+        <n corr="bogoslužju" freq="1"/>
+    </entry>
+    <entry form="potica">
+        <n corr="potica" freq="1"/>
+    </entry>
+    <entry form="blo">
+        <n corr="bilo" freq="3"/>
+    </entry>
+    <entry form="ampak">
+        <n corr="ampak" freq="1"/>
+    </entry>
+    <entry form="ko">
+        <n corr="ko" freq="1"/>
+    </entry>
+    <entry form="zarad">
+        <n corr="zaradi" freq="1"/>
+    </entry>
+    <entry form="vstal">
+        <n corr="vstali" freq="1"/>
+    </entry>
+    <entry form="novinarji">
+        <n corr="novinarji" freq="1"/>
+    </entry>
+    <entry form="pozitivno">
+        <n corr="pozitivno" freq="1"/>
+    </entry>
+    <entry form="poseb@n">
+        <n corr="poseben" freq="1"/>
+    </entry>
+    <entry form="drugo">
+        <n corr="drugo" freq="1"/>
+    </entry>
+    <entry form="gost">
+        <n corr="gost" freq="1"/>
+    </entry>
+    <entry form="mene">
+        <n corr="mene" freq="1"/>
+    </entry>
+    <entry form="recimo">
+        <n corr="recimo" freq="1"/>
+    </entry>
+    <entry form="Goloba">
+        <n corr="Goloba" freq="1"/>
+    </entry>
+    <entry form="k@šnih">
+        <n corr="kakšnih" freq="1"/>
+    </entry>
+    <entry form="drugi">
+        <n corr="drugi" freq="1"/>
+    </entry>
+    <entry form="prav">
+        <n corr="pravi" freq="1"/>
+    </entry>
+    <entry form="Hvala">
+        <n corr="Hvala" freq="1"/>
+    </entry>
+    <entry form="šole">
+        <n corr="šole" freq="1"/>
+    </entry>
+    <entry form="leto">
+        <n corr="leto" freq="2"/>
+    </entry>
+    <entry form="Savi">
+        <n corr="Savi" freq="1"/>
+    </entry>
+    <entry form="svobodni">
+        <n corr="svobodni" freq="1"/>
+    </entry>
+    <entry form="sed@mindvajs@tih">
+        <n corr="sedemindvajsetih" freq="1"/>
+    </entry>
+    <entry form="srednje">
+        <n corr="srednje" freq="1"/>
+    </entry>
+    <entry form="dela">
+        <n corr="dela" freq="1"/>
+    </entry>
+    <entry form="izročilo">
+        <n corr="izročilo" freq="1"/>
+    </entry>
+    <entry form="Mislim">
+        <n corr="Mislim" freq="1"/>
+    </entry>
+    <entry form="Bog">
+        <n corr="Bog" freq="1"/>
+    </entry>
+    <entry form="mi">
+        <n corr="mi" freq="6"/>
+    </entry>
+    <entry form="filozofijo">
+        <n corr="filozofijo" freq="1"/>
+    </entry>
+    <entry form="študentje">
+        <n corr="študentje" freq="1"/>
+    </entry>
+    <entry form="vlogi">
+        <n corr="vlogi" freq="1"/>
+    </entry>
+    <entry form="vami">
+        <n corr="vami" freq="1"/>
+    </entry>
+    <entry form="krono">
+        <n corr="krono" freq="1"/>
+    </entry>
+    <entry form="na">
+        <n corr="na" freq="12"/>
+    </entry>
+    <entry form="prahu">
+        <n corr="prahu" freq="1"/>
+    </entry>
+    <entry form="Pozna">
+        <n corr="Pozna" freq="1"/>
+    </entry>
+    <entry form="ostanite">
+        <n corr="ostanite" freq="1"/>
+    </entry>
+    <entry form="ne">
+        <n corr="ne" freq="1"/>
+    </entry>
+    <entry form="prštimov">
+        <n corr="prištimal" freq="1"/>
+    </entry>
+    <entry form="K@r">
+        <n corr="Ker" freq="2"/>
+    </entry>
+    <entry form="lani">
+        <n corr="lani" freq="1"/>
+    </entry>
+    <entry form="j@st">
+        <n corr="jaz" freq="1"/>
+    </entry>
+    <entry form="meso">
+        <n corr="meso" freq="1"/>
+    </entry>
+    <entry form="župnijo">
+        <n corr="župnijo" freq="1"/>
+    </entry>
+    <entry form="duma">
+        <n corr="doma" freq="1"/>
+    </entry>
+    <entry form="obvestilo">
+        <n corr="obvestilo" freq="1"/>
+    </entry>
+    <entry form="med">
+        <n corr="med" freq="3"/>
+    </entry>
+    <entry form="veliko">
+        <n corr="veliko" freq="4"/>
+    </entry>
+    <entry form="pomislim">
+        <n corr="pomislim" freq="1"/>
+    </entry>
+    <entry form="poslanstva">
+        <n corr="poslanstva" freq="1"/>
+    </entry>
+    <entry form="volk">
+        <n corr="volk" freq="1"/>
+    </entry>
+    <entry form="rok">
+        <n corr="rok" freq="1"/>
+    </entry>
+    <entry form="nikol">
+        <n corr="nikoli" freq="1"/>
+    </entry>
+    <entry form="Na">
+        <n corr="Na" freq="6"/>
+    </entry>
+    <entry form="ob">
+        <n corr="ob" freq="1"/>
+    </entry>
+    <entry form="od">
+        <n corr="od" freq="1"/>
+    </entry>
+    <entry form="mel">
+        <n corr="imeli" freq="1"/>
+        <n corr="imel" freq="1"/>
+    </entry>
+    <entry form="zelo">
+        <n corr="zelo" freq="1"/>
+    </entry>
+    <entry form="poklic">
+        <n corr="poklic" freq="1"/>
+    </entry>
+    <entry form="velike">
+        <n corr="velike" freq="1"/>
+    </entry>
+    <entry form="k@r">
+        <n corr="kar" freq="3"/>
+    </entry>
+    <entry form="kar">
+        <n corr="kar" freq="3"/>
+    </entry>
+    <entry form="on">
+        <n corr="on" freq="1"/>
+    </entry>
+    <entry form="mizo">
+        <n corr="mizo" freq="1"/>
+    </entry>
+    <entry form="Tud">
+        <n corr="Tudi" freq="1"/>
+    </entry>
+    <entry form="mislijo">
+        <n corr="mislijo" freq="1"/>
+    </entry>
+    <entry form="službi">
+        <n corr="službi" freq="1"/>
+    </entry>
+    <entry form="Niva">
+        <n corr="Niva" freq="1"/>
+    </entry>
+    <entry form="drugim">
+        <n corr="drugim" freq="1"/>
+    </entry>
+    <entry form="predstavlja">
+        <n corr="predstavlja" freq="2"/>
+    </entry>
+    <entry form="praznike">
+        <n corr="praznike" freq="1"/>
+    </entry>
+    <entry form="Nive">
+        <n corr="Nive" freq="1"/>
+    </entry>
+    <entry form="pa">
+        <n corr="pa" freq="23"/>
+    </entry>
+    <entry form="Nivo">
+        <n corr="Nivo" freq="1"/>
+    </entry>
+    <entry form="deset">
+        <n corr="deset" freq="1"/>
+    </entry>
+    <entry form="lohk">
+        <n corr="lahko" freq="1"/>
+    </entry>
+    <entry form="sedanj@mu">
+        <n corr="sedanjemu" freq="1"/>
+    </entry>
+    <entry form="pojed@l">
+        <n corr="pojedli" freq="1"/>
+    </entry>
+    <entry form="po">
+        <n corr="po" freq="5"/>
+    </entry>
+    <entry form="izbora">
+        <n corr="izbora" freq="1"/>
+    </entry>
+    <entry form="pirhi">
+        <n corr="pirhi" freq="1"/>
+    </entry>
+    <entry form="tud">
+        <n corr="tudi" freq="3"/>
+    </entry>
+    <entry form="mami">
+        <n corr="mami" freq="2"/>
+    </entry>
+    <entry form="č@s">
+        <n corr="čas" freq="1"/>
+    </entry>
+    <entry form="Edin">
+        <n corr="Edino" freq="1"/>
+    </entry>
+    <entry form="veselimi">
+        <n corr="veselimi" freq="1"/>
+    </entry>
+    <entry form="prinaša">
+        <n corr="prinaša" freq="1"/>
+    </entry>
+    <entry form="všeč">
+        <n corr="všeč" freq="1"/>
+    </entry>
+    <entry form="zaužije">
+        <n corr="zaužije" freq="1"/>
+    </entry>
+    <entry form="marsik@j">
+        <n corr="marsikaj" freq="1"/>
+    </entry>
+    <entry form="naju">
+        <n corr="naju" freq="1"/>
+    </entry>
+    <entry form="Mogu">
+        <n corr="Mogel" freq="1"/>
+    </entry>
+    <entry form="trud@m">
+        <n corr="trudim" freq="1"/>
+    </entry>
+    <entry form="let">
+        <n corr="let" freq="1"/>
+    </entry>
+    <entry form="tiče">
+        <n corr="tiče" freq="1"/>
+    </entry>
+    <entry form="dob@r">
+        <n corr="dobro" freq="2"/>
+    </entry>
+    <entry form="prid@n">
+        <n corr="priden" freq="1"/>
+    </entry>
+    <entry form="Po">
+        <n corr="Pol" freq="1"/>
+    </entry>
+    <entry form="zaprte">
+        <n corr="zaprte" freq="1"/>
+    </entry>
+    <entry form="sta">
+        <n corr="sta" freq="2"/>
+    </entry>
+    <entry form="Zelo">
+        <n corr="Zelo" freq="1"/>
+    </entry>
+    <entry form="ste">
+        <n corr="ste" freq="6"/>
+    </entry>
+    <entry form="jezika">
+        <n corr="jezika" freq="1"/>
+    </entry>
+    <entry form="dan@s">
+        <n corr="danes" freq="2"/>
+    </entry>
+    <entry form="svoje">
+        <n corr="svoje" freq="1"/>
+    </entry>
+    <entry form="botroval">
+        <n corr="botroval" freq="1"/>
+    </entry>
+    <entry form="živi">
+        <n corr="živi" freq="1"/>
+    </entry>
+    <entry form="najdete">
+        <n corr="najdete" freq="1"/>
+    </entry>
+    <entry form="štal">
+        <n corr="štali" freq="1"/>
+    </entry>
+    <entry form="Litiji">
+        <n corr="Litiji" freq="1"/>
+    </entry>
+    <entry form="Kekč@va">
+        <n corr="Kekčeva" freq="1"/>
+    </entry>
+    <entry form="spomladi">
+        <n corr="spomladi" freq="1"/>
+    </entry>
+    <entry form="petindvajs@tih">
+        <n corr="petindvajsetih" freq="1"/>
+    </entry>
+    <entry form="pol">
+        <n corr="pol" freq="3"/>
+    </entry>
+    <entry form="maš">
+        <n corr="maši" freq="1"/>
+    </entry>
+    <entry form="evrov">
+        <n corr="evrov" freq="1"/>
+    </entry>
+    <entry form="nardit">
+        <n corr="narediti" freq="1"/>
+    </entry>
+    <entry form="frekvencah">
+        <n corr="frekvencah" freq="1"/>
+    </entry>
+    <entry form="se">
+        <n corr="se" freq="16"/>
+    </entry>
+    <entry form="pot">
+        <n corr="pot" freq="2"/>
+    </entry>
+    <entry form="predvs@m">
+        <n corr="predvsem" freq="1"/>
+    </entry>
+    <entry form="ker">
+        <n corr="ker" freq="3"/>
+    </entry>
+    <entry form="sm">
+        <n corr="sem" freq="1"/>
+    </entry>
+    <entry form="letih">
+        <n corr="letih" freq="3"/>
+    </entry>
+    <entry form="so">
+        <n corr="so" freq="3"/>
+    </entry>
+    <entry form="m@nj">
+        <n corr="manj" freq="1"/>
+    </entry>
+    <entry form="smis@l">
+        <n corr="smisel" freq="1"/>
+    </entry>
+    <entry form="Zanimala">
+        <n corr="Zanimala" freq="1"/>
+    </entry>
+    <entry form="sva">
+        <n corr="sva" freq="1"/>
+    </entry>
+    <entry form="Velika">
+        <n corr="Velika" freq="1"/>
+    </entry>
+    <entry form="ona">
+        <n corr="ona" freq="1"/>
+    </entry>
+    <entry form="filmov">
+        <n corr="filmov" freq="1"/>
+    </entry>
+    <entry form="izvirnim">
+        <n corr="izvirnim" freq="1"/>
+    </entry>
+    <entry form="Martin">
+        <n corr="Martin" freq="3"/>
+    </entry>
+    <entry form="ta">
+        <n corr="ta" freq="2"/>
+    </entry>
+    <entry form="premestitvi">
+        <n corr="premestitvi" freq="1"/>
+    </entry>
+    <entry form="naravnanostjo">
+        <n corr="naravnanostjo" freq="1"/>
+    </entry>
+    <entry form="Štaj@rsk@ga">
+        <n corr="Štajerskega" freq="1"/>
+    </entry>
+    <entry form="vasi">
+        <n corr="vasi" freq="1"/>
+    </entry>
+    <entry form="Ati">
+        <n corr="Ati" freq="1"/>
+    </entry>
+    <entry form="duhovnikov">
+        <n corr="duhovnikov" freq="1"/>
+    </entry>
+    <entry form="nis@m">
+        <n corr="nisem" freq="2"/>
+    </entry>
+    <entry form="to">
+        <n corr="to" freq="2"/>
+    </entry>
+    <entry form="držita">
+        <n corr="držita" freq="1"/>
+    </entry>
+    <entry form="prevzeli">
+        <n corr="prevzeli" freq="1"/>
+    </entry>
+    <entry form="used@l">
+        <n corr="usedli" freq="1"/>
+    </entry>
+    <entry form="nekak">
+        <n corr="nekako" freq="1"/>
+    </entry>
+    <entry form="Pri">
+        <n corr="Pri" freq="1"/>
+    </entry>
+    <entry form="jed">
+        <n corr="jed" freq="1"/>
+    </entry>
+    <entry form="dvignilo">
+        <n corr="dvignilo" freq="1"/>
+    </entry>
+    <entry form="polno">
+        <n corr="polno" freq="1"/>
+    </entry>
+    <entry form="odnos">
+        <n corr="odnos" freq="1"/>
+    </entry>
+    <entry form="ati">
+        <n corr="ati" freq="2"/>
+    </entry>
+    <entry form="šli">
+        <n corr="šli" freq="1"/>
+    </entry>
+    <entry form="To">
+        <n corr="To" freq="3"/>
+    </entry>
+    <entry form="pomanjkanja">
+        <n corr="pomanjkanja" freq="1"/>
+    </entry>
+    <entry form="šlo">
+        <n corr="šlo" freq="1"/>
+    </entry>
+    <entry form="pri">
+        <n corr="pri" freq="5"/>
+    </entry>
+    <entry form="menat">
+        <n corr="menjati" freq="1"/>
+    </entry>
+    <entry form="že">
+        <n corr="že" freq="4"/>
+    </entry>
+    <entry form="praznik">
+        <n corr="praznik" freq="4"/>
+    </entry>
+    <entry form="Vrhniki">
+        <n corr="Vrhniki" freq="1"/>
+    </entry>
+    <entry form="povezan">
+        <n corr="povezani" freq="1"/>
+    </entry>
+    <entry form="kaplje">
+        <n corr="kaplje" freq="1"/>
+    </entry>
+    <entry form="provzaprov">
+        <n corr="pravzaprav" freq="1"/>
+    </entry>
+    <entry form="Sneguljčica">
+        <n corr="Sneguljčica" freq="1"/>
+    </entry>
+    <entry form="nama">
+        <n corr="nama" freq="1"/>
+    </entry>
+    <entry form="Razgibanemu">
+        <n corr="Razgibanemu" freq="1"/>
+    </entry>
+    <entry form="četrt@m">
+        <n corr="četrtem" freq="1"/>
+    </entry>
+    <entry form="vedno">
+        <n corr="vedno" freq="3"/>
+    </entry>
+    <entry form="nami">
+        <n corr="nami" freq="1"/>
+    </entry>
+    <entry form="navad">
+        <n corr="navadi" freq="1"/>
+    </entry>
+    <entry form="treba">
+        <n corr="treba" freq="2"/>
+    </entry>
+    <entry form="tak@t">
+        <n corr="takrat" freq="1"/>
+    </entry>
+    <entry form="dražbo">
+        <n corr="dražbo" freq="1"/>
+    </entry>
+    <entry form="žeg@nj">
+        <n corr="žegen" freq="1"/>
+    </entry>
+    <entry form="Kostrevnica">
+        <n corr="Kostrevnica" freq="1"/>
+    </entry>
+    <entry form="srca">
+        <n corr="srca" freq="1"/>
+    </entry>
+    <entry form="povabilo">
+        <n corr="povabilo" freq="1"/>
+    </entry>
+    <entry form="mejčk@n">
+        <n corr="majčkeno" freq="1"/>
+    </entry>
+    <entry form="stvari">
+        <n corr="stvari" freq="1"/>
+    </entry>
+    <entry form="največji">
+        <n corr="največji" freq="2"/>
+    </entry>
+    <entry form="staro">
+        <n corr="staro" freq="1"/>
+    </entry>
+    <entry form="krščanski">
+        <n corr="krščanski" freq="2"/>
+    </entry>
+    <entry form="kinota">
+        <n corr="kina" freq="1"/>
+    </entry>
+    <entry form="povezuje">
+        <n corr="povezuje" freq="1"/>
+    </entry>
+    <entry form="vsepovsod">
+        <n corr="vsepovsod" freq="1"/>
+    </entry>
+    <entry form="reku">
+        <n corr="rekel" freq="1"/>
+    </entry>
+    <entry form="Igorja">
+        <n corr="Igorja" freq="1"/>
+    </entry>
+    <entry form="drug@m">
+        <n corr="drugem" freq="1"/>
+    </entry>
+    <entry form="hit@r">
+        <n corr="hitro" freq="2"/>
+    </entry>
+    <entry form="sedmimi">
+        <n corr="sedmimi" freq="3"/>
+    </entry>
+    <entry form="tudi">
+        <n corr="tudi" freq="3"/>
+    </entry>
+    <entry form="čim">
+        <n corr="čim" freq="1"/>
+    </entry>
+    <entry form="splošno">
+        <n corr="splošno" freq="1"/>
+    </entry>
+    <entry form="Imate">
+        <n corr="Imate" freq="1"/>
+    </entry>
+    <entry form="šol">
+        <n corr="šoli" freq="1"/>
+    </entry>
+    <entry form="njega">
+        <n corr="njega" freq="1"/>
+    </entry>
+    <entry form="hren">
+        <n corr="hren" freq="1"/>
+    </entry>
+    <entry form="ž@blje">
+        <n corr="žeblje" freq="1"/>
+    </entry>
+    <entry form="moj">
+        <n corr="moj" freq="1"/>
+    </entry>
+    <entry form="studiu">
+        <n corr="studiu" freq="1"/>
+    </entry>
+    <entry form="potrpežljiv@ga">
+        <n corr="potrpežljivega" freq="1"/>
+    </entry>
+    <entry form="humor">
+        <n corr="humor" freq="1"/>
+    </entry>
+    <entry form="stiku">
+        <n corr="stiku" freq="1"/>
+    </entry>
+    <entry form="Kristusovo">
+        <n corr="Kristusovo" freq="1"/>
+    </entry>
+    <entry form="domov">
+        <n corr="domov" freq="1"/>
+    </entry>
+    <entry form="navezu">
+        <n corr="navezal" freq="1"/>
+    </entry>
+    <entry form="človeku">
+        <n corr="človeku" freq="2"/>
+    </entry>
+    <entry form="še">
+        <n corr="še" freq="5"/>
+    </entry>
+    <entry form="zaprla">
+        <n corr="zaprla" freq="1"/>
+    </entry>
+    <entry form="kle">
+        <n corr="tule" freq="1"/>
+    </entry>
+    <entry form="za">
+        <n corr="za" freq="7"/>
+    </entry>
+    <entry form="primer@n">
+        <n corr="primerno" freq="1"/>
+        <n corr="primeren" freq="1"/>
+    </entry>
+    <entry form="v@s">
+        <n corr="ves" freq="1"/>
+    </entry>
+    <entry form="simpatičnih">
+        <n corr="simpatičnih" freq="1"/>
+    </entry>
+    <entry form="vas">
+        <n corr="vas" freq="3"/>
+    </entry>
+    <entry form="mlekarju">
+        <n corr="mlekarju" freq="1"/>
+    </entry>
+    <entry form="žvimo">
+        <n corr="živimo" freq="1"/>
+    </entry>
+    <entry form="vsaka">
+        <n corr="vsaka" freq="1"/>
+    </entry>
+    <entry form="jedi">
+        <n corr="jedi" freq="1"/>
+    </entry>
+    <entry form="unikatna">
+        <n corr="unikatna" freq="1"/>
+    </entry>
+    <entry form="navad@š">
+        <n corr="navadiš" freq="1"/>
+    </entry>
+    <entry form="tega">
+        <n corr="tega" freq="2"/>
+    </entry>
+    <entry form="ustvaril">
+        <n corr="ustvaril" freq="1"/>
+    </entry>
+    <entry form="občini">
+        <n corr="občini" freq="1"/>
+    </entry>
+    <entry form="zaupano">
+        <n corr="zaupano" freq="1"/>
+    </entry>
+    <entry form="mnogočem">
+        <n corr="mnogočem" freq="1"/>
+    </entry>
+    <entry form="Za">
+        <n corr="Za" freq="2"/>
+    </entry>
+    <entry form="svoj">
+        <n corr="svoj" freq="1"/>
+    </entry>
+    <entry form="hitrej">
+        <n corr="hitreje" freq="1"/>
+    </entry>
+    <entry form="njen">
+        <n corr="njen" freq="1"/>
+    </entry>
+    <entry form="vsamu">
+        <n corr="vsakemu" freq="1"/>
+    </entry>
+    <entry form="Drugi">
+        <n corr="Drugi" freq="1"/>
+    </entry>
+    <entry form="generacij">
+        <n corr="generacij" freq="1"/>
+    </entry>
+    <entry form="ustov">
+        <n corr="ostal" freq="1"/>
+    </entry>
+    <entry form="Štaj@rskega">
+        <n corr="Štajerskega" freq="1"/>
+    </entry>
+    <entry form="ljudi">
+        <n corr="ljudi" freq="1"/>
+    </entry>
+    <entry form="Štaj@rsk@m">
+        <n corr="Štajerskem" freq="2"/>
+    </entry>
+    <entry form="Kristusove">
+        <n corr="Kristusove" freq="1"/>
+    </entry>
+    <entry form="fakulteta">
+        <n corr="fakulteta" freq="1"/>
+    </entry>
+    <entry form="takoj">
+        <n corr="takoj" freq="1"/>
+    </entry>
+    <entry form="fakultete">
+        <n corr="fakultete" freq="1"/>
+    </entry>
+    <entry form="noč">
+        <n corr="noč" freq="2"/>
+    </entry>
+    <entry form="fakulteti">
+        <n corr="fakulteti" freq="1"/>
+    </entry>
+    <entry form="doma">
+        <n corr="doma" freq="2"/>
+    </entry>
+    <entry form="košar">
+        <n corr="košari" freq="1"/>
+    </entry>
+    <entry form="naredu">
+        <n corr="naredil" freq="2"/>
+    </entry>
+    <entry form="zlo">
+        <n corr="zelo" freq="4"/>
+    </entry>
+    <entry form="telo">
+        <n corr="telo" freq="1"/>
+    </entry>
+    <entry form="poštimat">
+        <n corr="poštimati" freq="1"/>
+    </entry>
+    <entry form="mature">
+        <n corr="mature" freq="1"/>
+    </entry>
+    <entry form="Duhovnik">
+        <n corr="Duhovnik" freq="1"/>
+    </entry>
+    <entry form="maše">
+        <n corr="maše" freq="1"/>
+    </entry>
+    <entry form="k@šno">
+        <n corr="kakšno" freq="1"/>
+    </entry>
+    <entry form="širjenj@m">
+        <n corr="širjenjem" freq="1"/>
+    </entry>
+    <entry form="dal">
+        <n corr="dal" freq="4"/>
+    </entry>
+    <entry form="kot">
+        <n corr="kot" freq="4"/>
+    </entry>
+    <entry form="vsaj">
+        <n corr="vsaj" freq="1"/>
+    </entry>
+    <entry form="vs@h">
+        <n corr="vseh" freq="1"/>
+    </entry>
+    <entry form="pes@m">
+        <n corr="pesem" freq="1"/>
+    </entry>
+    <entry form="pristali">
+        <n corr="pristali" freq="1"/>
+    </entry>
+    <entry form="mehanik">
+        <n corr="mehanik" freq="1"/>
+    </entry>
+    <entry form="maturo">
+        <n corr="maturo" freq="1"/>
+    </entry>
+    <entry form="t@m">
+        <n corr="tam" freq="1"/>
+    </entry>
+    <entry form="zard">
+        <n corr="zaradi" freq="1"/>
+    </entry>
+    <entry form="tam">
+        <n corr="tam" freq="1"/>
+    </entry>
+    <entry form="ljudem">
+        <n corr="ljudem" freq="1"/>
+    </entry>
+    <entry form="delovanju">
+        <n corr="delovanju" freq="1"/>
+    </entry>
+    <entry form="odvijalo">
+        <n corr="odvijalo" freq="1"/>
+    </entry>
+    <entry form="enih">
+        <n corr="enih" freq="1"/>
+    </entry>
+    <entry form="Zaplani">
+        <n corr="Zaplani" freq="1"/>
+    </entry>
+    <entry form="stvar">
+        <n corr="stvar" freq="1"/>
+    </entry>
+    <entry form="tel@">
+        <n corr="tele" freq="1"/>
+    </entry>
+    <entry form="mesto">
+        <n corr="mesto" freq="1"/>
+    </entry>
+    <entry form="ima">
+        <n corr="ima" freq="2"/>
+    </entry>
+    <entry form="prv@m">
+        <n corr="prvem" freq="2"/>
+    </entry>
+    <entry form="simbol">
+        <n corr="simbol" freq="1"/>
+    </entry>
+    <entry form="dons">
+        <n corr="danes" freq="1"/>
+    </entry>
+    <entry form="pristopom">
+        <n corr="pristopom" freq="1"/>
+    </entry>
+    <entry form="S@m">
+        <n corr="Sem" freq="1"/>
+    </entry>
+    <entry form="oznanilo">
+        <n corr="oznanilo" freq="1"/>
+    </entry>
+    <entry form="velikonočna">
+        <n corr="velikonočna" freq="1"/>
+    </entry>
+    <entry form="nedeljo">
+        <n corr="nedeljo" freq="1"/>
+    </entry>
+    <entry form="Dejstvo">
+        <n corr="Dejstvo" freq="1"/>
+    </entry>
+    <entry form="velikonočni">
+        <n corr="velikonočni" freq="1"/>
+    </entry>
+    <entry form="bila">
+        <n corr="bila" freq="2"/>
+    </entry>
+    <entry form="iskov">
+        <n corr="iskal" freq="1"/>
+    </entry>
+    <entry form="Slovenci">
+        <n corr="Slovenci" freq="1"/>
+    </entry>
+    <entry form="prava">
+        <n corr="prava" freq="1"/>
+    </entry>
+    <entry form="dobrote">
+        <n corr="dobrote" freq="1"/>
+    </entry>
+    <entry form="hiši">
+        <n corr="hiši" freq="1"/>
+    </entry>
+    <entry form="velikonočno">
+        <n corr="velikonočno" freq="2"/>
+    </entry>
+    <entry form="zato">
+        <n corr="zato" freq="1"/>
+    </entry>
+    <entry form="s@j">
+        <n corr="saj" freq="1"/>
+    </entry>
+    <entry form="sam">
+        <n corr="samo" freq="1"/>
+    </entry>
+    <entry form="s@m">
+        <n corr="sem" freq="14"/>
+    </entry>
+    <entry form="potem">
+        <n corr="potem" freq="3"/>
+    </entry>
+    <entry form="imamo">
+        <n corr="imamo" freq="1"/>
+    </entry>
+    <entry form="verjet@n">
+        <n corr="verjetno" freq="1"/>
+    </entry>
+    <entry form="odrešeni">
+        <n corr="odrešeni" freq="1"/>
+    </entry>
+    <entry form="mis@lt">
+        <n corr="misliti" freq="1"/>
+    </entry>
+    <entry form="Pretehta">
+        <n corr="Pretehta" freq="1"/>
+    </entry>
+    <entry form="iskreno">
+        <n corr="iskreno" freq="1"/>
+    </entry>
+    <entry form="prikupil">
+        <n corr="prikupil" freq="1"/>
+    </entry>
+    <entry form="Vaš">
+        <n corr="Vaš" freq="1"/>
+    </entry>
+    <entry form="Bohinju">
+        <n corr="Bohinju" freq="3"/>
+    </entry>
+    <entry form="volje">
+        <n corr="volje" freq="2"/>
+    </entry>
+    <entry form="kozlički">
+        <n corr="kozlički" freq="1"/>
+    </entry>
+    <entry form="končan@m">
+        <n corr="končanem" freq="1"/>
+    </entry>
+</lexicon>
