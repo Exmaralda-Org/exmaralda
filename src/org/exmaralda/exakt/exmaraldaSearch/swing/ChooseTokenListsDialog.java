@@ -73,13 +73,13 @@ public class ChooseTokenListsDialog extends javax.swing.JDialog {
         createWordListCheckBox = new javax.swing.JCheckBox();
         annotationTokenListsPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         okCancelPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         corpusNameLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Choose token lists");
@@ -100,10 +100,6 @@ public class ChooseTokenListsDialog extends javax.swing.JDialog {
         mainPanel.add(annotationTokenListsPanel);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/list.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-
         getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
 
         okButton.setText("OK");
@@ -132,6 +128,7 @@ public class ChooseTokenListsDialog extends javax.swing.JDialog {
         jPanel2.add(corpusNameLabel);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(jPanel3, java.awt.BorderLayout.EAST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,10 +189,10 @@ public class ChooseTokenListsDialog extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel corpusNameLabel;
     private javax.swing.JCheckBox createWordListCheckBox;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton okButton;
     private javax.swing.JPanel okCancelPanel;
