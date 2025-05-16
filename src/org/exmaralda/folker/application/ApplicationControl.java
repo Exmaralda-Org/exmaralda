@@ -934,6 +934,12 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             //{"control RIGHT", "moveRight", partitur.moveRightAction},
             //{"control LEFT", "moveLeft", partitur.moveLeftAction},
             
+            // 2025-05-16, added for #523
+            {"alt DELETE", "removeEvent", partitur.deleteEventAction},
+            {"alt ENTER", "insertPause", partitur.insertPauseAction},
+            {"control alt N", "findNextEvent", partitur.findNextEventAction}
+            
+            
         };
 
         processAssignments(partiturViewAssignments, applicationFrame.mainPanel.partiturViewPanel, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
