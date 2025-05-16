@@ -195,4 +195,13 @@ public class CommunicationTableModel extends DefaultTableModel {
 
 	}
 
+    @Override
+    public void setValueAt(Object aValue, int row, int column) {
+        System.out.printf("setValueAt called with row=%d col=%d, modelRowCount=%d%n", row, column, getRowCount());
+        super.setValueAt(aValue, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+        
+        
+        
+
 }

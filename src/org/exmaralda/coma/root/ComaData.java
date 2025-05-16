@@ -4,6 +4,7 @@
 package org.exmaralda.coma.root;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -278,51 +279,50 @@ public class ComaData {
 	 * @param speakerElmt
 	 * @return
 	 */
-	public List<Element> getCommunicationsForSpeaker(Element speakerElmt,
-			boolean filtered) {
-		HashSet<Element> commlist = new HashSet<Element>();
-		String speakerId = speakerElmt.getAttributeValue("Id");
-		List<Element> allComms = (filtered ? filterComms() : dataElement
-				.getChildren("Communication"));
-		for (Element el : allComms) {
-			List<Element> spks = el.getChild("Setting").getChildren("Person");
-			HashMap<String, Element> spkTmp = new HashMap<String, Element>();
-			for (Element sp : spks) {
-				if (sp.getText().equals(speakerId)) {
-					commlist.add(el);
+	public List<Element> getCommunicationsForSpeaker(Element speakerElmt, boolean filtered) {
+            HashSet<Element> commlist = new HashSet<Element>();
+            String speakerId = speakerElmt.getAttributeValue("Id");
+            List<Element> allComms = (filtered ? filterComms() : dataElement
+                            .getChildren("Communication"));
+            for (Element el : allComms) {
+                List<Element> spks = el.getChild("Setting").getChildren("Person");
+                //HashMap<String, Element> spkTmp = new HashMap<String, Element>();
+                for (Element sp : spks) {
+                        if (sp.getText().equals(speakerId)) {
+                                commlist.add(el);
 
-				}
+                        }
 
-			}
+                }
 
-		}
-		return (new Vector<Element>(commlist).subList(0, commlist.size()));
-		// return List.(commList);
+            }
+            return (new ArrayList<Element>(commlist).subList(0, commlist.size()));
 	}
 
 	public List<Element> filterComms() {
-		List<Element> allComms = dataElement.getChildren("Communication");
-		Vector<Element> independentList = new Vector<Element>();
-		independentList.addAll(allComms);
-		int fcount = 0;
-		for (ComaFilter filter : getCfilters().values()) {
-			if (filter.isEnabled()) {
-				try {
-					XPath xp = XPath.newInstance(filter.isInverted() ? filter
-							.getXPathInverted() : filter.getXPath());
-					List nl = xp.selectNodes(dataElement);
-					if ((filter.isIncluding()) && (fcount > 0)) {
-						independentList.addAll(nl);
-					} else {
-						independentList.retainAll(nl);
-					}
-				} catch (JDOMException err) {
-					err.printStackTrace();
-				}
-			}
-			fcount++;
-		}
-		return independentList;
+            List<Element> allComms = dataElement.getChildren("Communication");
+            List<Element> independentList = new ArrayList<>();
+            independentList.addAll(allComms);
+            int fcount = 0;
+            for (ComaFilter filter : getCfilters().values()) {
+                if (filter.isEnabled()) {
+                    try {
+                        XPath xp = XPath.newInstance(filter.isInverted() ? filter
+                                        .getXPathInverted() : filter.getXPath());
+                        List nl = xp.selectNodes(dataElement);
+                        if ((filter.isIncluding()) && (fcount > 0)) {
+                                independentList.addAll(nl);
+                        } else {
+                                independentList.retainAll(nl);
+                        }
+                    } catch (JDOMException err) {
+                        err.printStackTrace();
+                        System.out.println(err.getLocalizedMessage());
+                    }
+                }
+                fcount++;
+            }
+            return independentList;
 	}
 
 	public List<Element> filterSpeakers() {
