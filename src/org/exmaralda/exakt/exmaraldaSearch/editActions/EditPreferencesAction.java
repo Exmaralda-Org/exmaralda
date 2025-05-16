@@ -30,21 +30,22 @@ public class EditPreferencesAction extends org.exmaralda.exakt.exmaraldaSearch.s
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        EditPreferencesPanel p = new EditPreferencesPanel();
-        AbstractOKCancelDialog dialog = new AbstractOKCancelDialog(exaktFrame,true,p);
+        EditPreferencesPanel editPreferencesPanel = new EditPreferencesPanel();
+        AbstractOKCancelDialog dialog = new AbstractOKCancelDialog(exaktFrame,true,editPreferencesPanel);
         dialog.setTitle("Edit preferences");
         dialog.setVisible(true);
         if (dialog.isApproved()){
             Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
-            prefs.put("xsl-partitur-tool",p.getPartiturInToolStylesheet());
-            prefs.put("xsl-partitur-output",p.getPartiturOutputStylesheet());
-            prefs.put("xsl-concordance-output",p.getConcordanceOutputStylesheet());            
-            prefs.put("xsl-segmented-tool",p.getSegmentedOutputStylesheet());        
-            prefs.put("kwic-table-font-name",p.getKwicTableFont());
-            prefs.putInt("kwic-table-font-size",p.getKwicTableFontSize());
-            prefs.putInt("max-search-results",p.getMaxSearchResults());
-            prefs.putInt("kwic-context-limit",p.getKWICContextLimit());
-            prefs.putInt("full-display-limit",p.getFullDisplayContextLimit());            
+            prefs.put("xsl-partitur-tool",editPreferencesPanel.getPartiturInToolStylesheet());
+            prefs.put("xsl-partitur-output",editPreferencesPanel.getPartiturOutputStylesheet());
+            prefs.put("xsl-concordance-output",editPreferencesPanel.getConcordanceOutputStylesheet());            
+            prefs.put("xsl-segmented-tool",editPreferencesPanel.getSegmentedOutputStylesheet());        
+            prefs.put("kwic-table-font-name",editPreferencesPanel.getKwicTableFont());
+            prefs.putInt("kwic-table-font-size",editPreferencesPanel.getKwicTableFontSize());
+            prefs.putInt("max-search-results",editPreferencesPanel.getMaxSearchResults());
+            prefs.putInt("kwic-context-limit",editPreferencesPanel.getKWICContextLimit());
+            prefs.putInt("full-display-limit",editPreferencesPanel.getFullDisplayContextLimit()); 
+            prefs.putBoolean("delete-unfiltered", editPreferencesPanel.getDeleteUnfiltered());
         }
     }
     
