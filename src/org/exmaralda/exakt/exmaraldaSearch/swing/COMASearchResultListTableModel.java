@@ -156,10 +156,45 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
         return returnValue;
     }
     
+    // 16-05-2025 addef for 515
+    public void filter(int columnIndex, String regexString, boolean invert, boolean fullMatch) throws java.util.regex.PatternSyntaxException {
+        String modifiedRegexString = regexString;
+        if (columnIndex>=3 && columnIndex<=5 && fullMatch){
+            modifiedRegexString = "^" + modifiedRegexString + "$";
+        } else if ((columnIndex <3 || columnIndex>5) && !fullMatch){
+            modifiedRegexString = ".*" + modifiedRegexString + ".*";
+        }
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(modifiedRegexString);
+        switch (columnIndex){
+            // about #515: cases 3,4,5 will, by default try a partial match, default will try a complete match
+            case 3  : getData().filterLeftContext(pattern, invert);
+                      fireTableDataChanged();
+                      break;
+            case 4  : getData().filterMatchText(pattern, invert);
+                      fireTableDataChanged();
+                      break;
+            case 5  : getData().filterRightContext(pattern, invert);
+                      fireTableDataChanged();
+                      break;
+            default : for (int rowIndex = 0; rowIndex < this.getRowCount(); rowIndex++){
+                            // TO DO: Take care of boolean values from Binary Analysis!!!
+                            String content = null;
+                            if (getValueAt(rowIndex,columnIndex)!=null){
+                                content = getValueAt(rowIndex,columnIndex).toString();
+                            }
+                            //content = (String)(getValueAt(rowIndex,columnIndex));
+                            SearchResultInterface searchResult = getData().elementAt(rowIndex);
+                            boolean matches = ((content!=null) && (pattern.matcher(content).matches()));
+                            searchResult.setSelected((searchResult.isSelected()) && (matches^invert));                            
+                      }
+                      fireTableDataChanged();            
+        }        
+    }
     
     public void filter(int columnIndex, String regexString, boolean invert) throws java.util.regex.PatternSyntaxException {
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regexString);
         switch (columnIndex){
+            // about #515: cases 3,4,5 will, by default try a partial match, default will try a complete match
             case 3  : getData().filterLeftContext(pattern, invert);
                       fireTableDataChanged();
                       break;

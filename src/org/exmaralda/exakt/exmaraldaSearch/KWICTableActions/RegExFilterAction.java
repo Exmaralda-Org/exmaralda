@@ -57,7 +57,11 @@ public class RegExFilterAction extends AbstractKWICTableAction {
             int column = regexFilterPanel.getColumnIndex();
             String regex = regexFilterPanel.getRegularExpression();
             boolean invert = regexFilterPanel.getInvert();
-            table.getWrappedModel().filter(column, regex, invert);
+            
+            // 16-05-2025: issue #515
+            boolean fullMatch = regexFilterPanel.getFullMatch();
+            //table.getWrappedModel().filter(column, regex, invert);
+            table.getWrappedModel().filter(column, regex, invert, fullMatch);
 
             // 16-05-2025, issue #514
             Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
