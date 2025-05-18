@@ -899,6 +899,11 @@
                                 <translation lang="de" trans="Abbrechen"/>
                                 <translation lang="fr" trans="Annuler"/>
                         </item>
+                        <item id="error.usedummywav">
+                                <translation lang="en" trans="Continue with dummy audio"/>
+                                <translation lang="de" trans="Mit Dummy-Audio fortfahren"/>
+                                <translation lang="fr" trans="Continuer avec audio factice"/>
+                        </item>
                 </subdomain>
                 <subdomain name="main_gui">
                         <item id="gui.start">

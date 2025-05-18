@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotation-specification>
+    <annotation-set exmaralda-tier-category="POS">
+        <category name="POS-tags">
+            <version version="1.0"/>
+            <description>POS-tags</description>
+            <category name="abbreviation">
+                <tag name="ABR"/>
+                <description/>
+            </category>
+            <category name="adjective">
+                <tag name="ADJ"/>
+                <description/>
+            </category>
+            <category name="adverb">
+                <tag name="ADV"/>
+                <description/>
+            </category>
+            <category name="conjunction">
+                <tag name="CON"/>
+                <description/>
+            </category>
+            <category name="determiner">
+                <tag name="DET"/>
+                <description/>                
+                <category name="definite article">
+                    <tag name="DET:def"/>
+                    <description/>
+                </category>
+                <category name="indefinite article">
+                    <tag name="DET:indef"/>
+                    <description/>
+                </category>
+            </category>
+            <category name="foreign word">
+                <tag name="FW"/>
+                <description/>
+            </category>
+            <category name="interjection">
+                <tag name="INT"/>
+                <description/>
+            </category>
+            <category name="list symbol">
+                <tag name="LS"/>
+                <description/>
+            </category>
+            <category name="Nouns">
+                <tag name="N"/>
+                <description/>
+                <category name="noun">
+                    <tag name="NOM"/>
+                    <description/>
+                </category>
+                <category name="name">
+                    <tag name="NPR"/>
+                    <description/>
+                </category>
+            </category>
+            <category name="numeral">
+                <tag name="NUM"/>
+                <description/>
+            </category>
+            <category name="punctuation">
+                <tag name="PON"/>
+                <description/>
+            </category>
+            <category name="preposition">
+                <tag name="PRE"/>
+                <description/>
+                <category name="preposition+article">
+                    <tag name="PRE:det"/>
+                    <description/>
+                </category>
+            </category>            
+            <category name="pronoun">
+                <tag name="PRO"/>
+                <description/>
+                <category name="demonstrative pronoun">
+                    <tag name="PRO:demo"/>
+                    <description/>
+                </category>
+                <category name="indefinite pronoun">
+                    <tag name="PRO:indef"/>
+                    <description/>
+                </category>
+                <category name="interrogative pronoun">
+                    <tag name="PRO:inter"/>
+                    <description/>
+                </category>
+                <category name="personal pronoun">
+                    <tag name="PRO:pers"/>
+                    <description/>
+                </category>
+                <category name="possessive pronoun">
+                    <tag name="PRO:poss"/>
+                    <description/>
+                </category>
+                <category name="reflexive pronoun">
+                    <tag name="PRO:refl"/>
+                    <description/>
+                </category>
+                <category name="relative pronoun">
+                    <tag name="PRO:rela"/>
+                    <description/>
+                </category>
+            </category>
+            <category name="sentence marker">
+                <tag name="SENT"/>
+                <description/>
+            </category>
+            <category name="symbol">
+                <tag name="SYM"/>
+                <description/>
+            </category>
+            <category name="Verb">
+                <tag name="VER"/>
+                <description/>
+                <category name="verb conjunctive imperfect">
+                    <tag name="VER:cimp"/>
+                    <description/>
+                </category>
+                <category name="verb conditional">
+                    <tag name="VER:cond"/>
+                    <description/>
+                </category>
+                <category name="verb conjunctive present">
+                    <tag name="VER:cpre"/>
+                    <description/>
+                </category>
+                <category name="verb future tense">
+                    <tag name="VER:futu"/>
+                    <description/>
+                </category>
+                <category name="verb gerund">
+                    <tag name="VER:geru"/>
+                    <description/>
+                </category>
+                <category name="verb imperative">
+                    <tag name="VER:impe"/>
+                    <description/>
+                </category>
+                <category name="verb imperfect">
+                    <tag name="VER:impf"/>
+                    <description/>
+                </category>
+                <category name="verb infinitive">
+                    <tag name="VER:infi"/>
+                    <description/>
+                </category>
+                <category name="verb participle perfect">
+                    <tag name="VER:pper"/>
+                    <description/>
+                </category>
+                <category name="verb participle present">
+                    <tag name="VER:ppre"/>
+                    <description/>
+                </category>
+                <category name="verb present">
+                    <tag name="VER:pres"/>
+                    <description/>
+                </category>
+                <category name="verb reflexive infinitive">
+                    <tag name="VER:refl:infi"/>
+                    <description/>
+                </category>
+                <category name="verb simple past">
+                    <tag name="VER:remo"/>
+                    <description/>
+                </category>
+            </category>
+        </category>
+    </annotation-set>
+</annotation-specification>

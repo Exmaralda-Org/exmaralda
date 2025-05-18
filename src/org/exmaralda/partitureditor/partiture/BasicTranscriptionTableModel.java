@@ -168,11 +168,26 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
     /** inserts a tier BEFORE the specified row */
     public void insertTier(Tier tier, int row){        
         try {
-            Tier tierAfter = transcription.getBody().getTierAt(row);
-            transcription.getBody().insertTierBeforeTierWithID(tier, tierAfter.getID());
+            if (row<this.getNumRows()){
+                Tier tierAfter = transcription.getBody().getTierAt(row);
+                transcription.getBody().insertTierBeforeTierWithID(tier, tierAfter.getID());
+            } else {
+                transcription.getBody().addTier(tier);                
+            }
+            transcription.getBody().updatePositions();
             TierFormat newFormat = new TierFormat(tier.getType(), tier.getID(), this.defaultFontName);
             formats.setTierFormat(newFormat);
             fireRowsAdded(row,row);
+            for (int i=0; i<tier.getNumberOfEvents(); i++){
+                Event event = tier.getEventAt(i);
+                int col1 = transcription.getBody().getCommonTimeline().lookupID(event.getStart());
+                int col2 = transcription.getBody().getCommonTimeline().lookupID(event.getEnd());
+                fireEventAdded(row, col1, col2);
+                fireValueChanged(row,col1);
+                fireCellSpanChanged(row, col1);
+                
+                
+            }
         } catch (JexmaraldaException je) {} // should never get here               
     }
     
@@ -964,7 +979,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
                 return true;
             }
         } catch (JexmaraldaException je){}            // should never get here
-        return false;
+        return false;        
     }
         
 //******* METHODS FOR MANIPULATING THE TIMELINE *********************   

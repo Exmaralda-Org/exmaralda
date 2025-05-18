@@ -23,14 +23,9 @@ import org.jdom.xpath.XPath;
 public class TagDirectoryISOTEI {
 
     public static String TTC = "C:\\Users\\bernd\\Dropbox\\TreeTagger";
-    //public static String PF = "C:\\Users\\bernd\\Dropbox\\TreeTagger\\lib\\ParameterFile_ORIGINAL_ALL.par";
-    // better use this one and, while we're at it, put it into the TGDP project for future reference
     public static String PF = "C:\\linguisticbits_nb\\src\\de\\linguisticbits\\austin\\tgdp\\march_2023\\tagger\\2021-04-16_ParameterFile_ORIGINAL_ALL_FINAL.par";
-    // is it UTF-8 or isn't it??
     public static String ENC = "UTF-8";
-    //public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown", "", ""};
     public static String[] OPT = {"-token","-lemma","-sgml","-no-unknown"};
-
     public String xpathToTokens;
     public boolean applyPP;
     public TreeTagger tt;
@@ -40,7 +35,12 @@ public class TagDirectoryISOTEI {
         this(TTC, PF, ENC, OPT, TreeTaggableISOTEITranscription.XPATH_NO_XY, true);
     }
     
-    public TagDirectoryISOTEI(String treeTaggerDirectory, String parameterFile, String encoding, String[] treeTaggerOptions, String xpathToTokens, boolean applyPP) throws IOException, JDOMException {
+    public TagDirectoryISOTEI(String treeTaggerDirectory, 
+            String parameterFile, 
+            String encoding, 
+            String[] treeTaggerOptions, 
+            String xpathToTokens, 
+            boolean applyPP) throws IOException, JDOMException {
         this.xpathToTokens = xpathToTokens;
         this.applyPP = applyPP;
         
@@ -178,8 +178,14 @@ public class TagDirectoryISOTEI {
             }
             System.out.println("=================================");
             count2++;
+            
+            intermediate.delete();
+            output.delete();
+            
         }                
     }
+
+
     
     public void tagFile(File input, File output) throws JDOMException, IOException{
             Document trDoc = FileIO.readDocumentFromLocalFile(input);
@@ -220,6 +226,7 @@ public class TagDirectoryISOTEI {
             }
             
             tempOutput.delete();
+            intermediate.delete();
         
     }
     

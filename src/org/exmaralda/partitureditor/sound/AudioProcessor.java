@@ -120,6 +120,81 @@ public class AudioProcessor {
     }
     
     
+    // 18-05-2025, for issue #522
+    public static File generateSilenceWAV(int durationInSeconds) throws FileNotFoundException, IOException{
+        int sampleRate = 16000; 
+        int bitsPerSample = 16;
+        int channels = 1; // mono
+        int byteRate = sampleRate * channels * bitsPerSample / 8;
+        int totalSamples = durationInSeconds * sampleRate;
+
+        // total data size in bytes
+        int dataSize = totalSamples * channels * bitsPerSample / 8;
+
+        File tempWAV = File.createTempFile("TEMP_SILENCE", ".wav");
+        tempWAV.deleteOnExit();
+        System.out.println("Writing dummy (" + totalSamples + " samples)to " + tempWAV.getAbsolutePath());
+        // Output file
+        FileOutputStream out = new FileOutputStream(tempWAV);
+        DataOutputStream wav = new DataOutputStream(out);
+
+        // Write WAV Header
+        writeString(wav, "RIFF");
+        writeInt(wav, 36 + dataSize); // File size - 8 bytes
+        writeString(wav, "WAVE");
+
+        writeString(wav, "fmt ");
+        writeInt(wav, 16); // PCM chunk size
+        writeShort(wav, (short) 1); // Audio format 1 = PCM
+        writeShort(wav, (short) channels);
+        writeInt(wav, sampleRate);
+        writeInt(wav, byteRate);
+        writeShort(wav, (short) (channels * bitsPerSample / 8)); // Block align
+        writeShort(wav, (short) bitsPerSample);
+
+        writeString(wav, "data");
+        writeInt(wav, dataSize);
+
+        // Write silence (all zeros)
+        //for (int i = 0; i < totalSamples; i++) {
+        //    wav.writeShort(0); // 16-bit sample with 0 amplitude
+        //}
+        
+        // Create a large silent buffer
+        byte[] silenceBuffer = new byte[4096]; // 4 KB at a time
+
+        int bytesWritten = 0;
+        while (bytesWritten < dataSize) {
+            int toWrite = Math.min(silenceBuffer.length, dataSize - bytesWritten);
+            wav.write(silenceBuffer, 0, toWrite);
+            bytesWritten += toWrite;
+        }        
+
+        wav.close();
+        System.out.println("Generated silence.wav with " + durationInSeconds + " seconds of silence.");        
+        return tempWAV;
+    }
+    
+    // Helper methods for writing data in little endian format
+    private static void writeString(DataOutputStream out, String s) throws IOException {
+        for (int i = 0; i < s.length(); i++) {
+            out.writeByte(s.charAt(i));
+        }
+    }    
+    
+    private static void writeInt(DataOutputStream out, int value) throws IOException {
+        out.writeByte(value & 0xFF);
+        out.writeByte((value >> 8) & 0xFF);
+        out.writeByte((value >> 16) & 0xFF);
+        out.writeByte((value >> 24) & 0xFF);
+    }
+
+    private static void writeShort(DataOutputStream out, short value) throws IOException {
+        out.writeByte(value & 0xFF);
+        out.writeByte((value >> 8) & 0xFF);
+    }    
+    
+    
     private static AudioInputStream convertChannels(int nChannels, AudioInputStream sourceStream) {
             AudioFormat sourceFormat = sourceStream.getFormat();
             AudioFormat targetFormat = new AudioFormat(
@@ -133,9 +208,9 @@ public class AudioProcessor {
             return AudioSystem.getAudioInputStream(targetFormat,sourceStream);
     }
 
-private static int calculateFrameSize(int nChannels, int nSampleSizeInBits) {
-		return ((nSampleSizeInBits + 7) / 8) * nChannels;
-	}
+    private static int calculateFrameSize(int nChannels, int nSampleSizeInBits) {
+        return ((nSampleSizeInBits + 7) / 8) * nChannels;
+    }
 
 public static void main(String[] args){
         try{

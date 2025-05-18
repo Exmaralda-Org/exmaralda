@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -273,9 +274,9 @@ public class DataPanel extends JPanel implements ActionListener,
 
 	private JButton searchButton;
 
-	private TableRowSorter<TableModel> sRowSorter;
+	private TableRowSorter<TableModel> speakerTableRowSorter;
 
-	private TableRowSorter<TableModel> rowSorter;
+	private TableRowSorter<TableModel> commTableRowSorter;
 
 	private JPanel speakerTopPanel;
 
@@ -402,7 +403,8 @@ public class DataPanel extends JPanel implements ActionListener,
 		// communications
 		communicationPanel = new JPanel(new BorderLayout()); // holding comms
 		communicationTopPanel = new JPanel(new BorderLayout());
-		speakerPanel = new JPanel(new BorderLayout());
+		
+                speakerPanel = new JPanel(new BorderLayout());
 		speakerTopPanel = new JPanel(new BorderLayout());
 		speakerPanel.add(speakerTopPanel, BorderLayout.PAGE_START);
 		speakerTableModel = new SpeakerTableModel(coma.getData()
@@ -411,11 +413,11 @@ public class DataPanel extends JPanel implements ActionListener,
 		speakerTableModel.addTableModelListener(this);
 		speakerTable = new JTable(speakerTableModel);
 		speakerTable.putClientProperty("Quaqua.Table.style", "striped");
-		sRowSorter = new TableRowSorter<TableModel>(speakerTableModel);
-		sRowSorter.addRowSorterListener(this);
-		sRowSorter.setSortsOnUpdates(false);
+		speakerTableRowSorter = new TableRowSorter<TableModel>(speakerTableModel);
+		speakerTableRowSorter.addRowSorterListener(this);
+		speakerTableRowSorter.setSortsOnUpdates(false);
 
-		speakerTable.setRowSorter(sRowSorter);
+		speakerTable.setRowSorter(speakerTableRowSorter);
 		speakerTable.removeColumn(speakerTable.getColumnModel().getColumn(0)); // Element-Column
 		speakerTable.removeColumn(speakerTable.getColumnModel().getColumn(0)); // ID-Column
 		speakerTable.setDefaultRenderer(Object.class,
@@ -555,19 +557,16 @@ public class DataPanel extends JPanel implements ActionListener,
 		commTable = new JTable(commTableModel);
 		commTable.putClientProperty("Quaqua.Table.style", "striped");
 		communicationTableSelectionListener = new SelectionListener(commTable);
-		commTable.getSelectionModel().addListSelectionListener(
-				communicationTableSelectionListener);
+		commTable.getSelectionModel().addListSelectionListener(communicationTableSelectionListener);
 		commTableModel.addTableModelListener(this);
-		commTable
-				.setDefaultRenderer(Object.class, new ConnectionCellRenderer());
-		commTable.setDefaultRenderer(Boolean.class,
-				new ConnectionCellRenderer());
+		commTable.setDefaultRenderer(Object.class, new ConnectionCellRenderer());
+		commTable.setDefaultRenderer(Boolean.class, new ConnectionCellRenderer());
 		commTable.setGridColor(Color.LIGHT_GRAY);
 
-		rowSorter = new TableRowSorter<TableModel>(commTableModel);
-		rowSorter.addRowSorterListener(this);
-		rowSorter.setSortsOnUpdates(false);
-		commTable.setRowSorter(rowSorter);
+		commTableRowSorter = new TableRowSorter<>(commTableModel);
+		commTableRowSorter.addRowSorterListener(this);
+		commTableRowSorter.setSortsOnUpdates(false);
+		commTable.setRowSorter(commTableRowSorter);
 
 		commTable.removeColumn(commTable.getColumnModel().getColumn(0));
 		commTable.removeColumn(commTable.getColumnModel().getColumn(0));
@@ -900,85 +899,86 @@ public class DataPanel extends JPanel implements ActionListener,
 	 * 
 	 */
 
-	public void updateLists(boolean redoSelection) {
-		int[] cidx = commTable.getSelectedRows();
-		int[] sidx = speakerTable.getSelectedRows();
+	// #516?
+        public void updateLists(boolean redoSelection) {
+            int[] cidx = commTable.getSelectedRows();
+            int[] sidx = speakerTable.getSelectedRows();
 
-		coma.setCursor(Cursor.WAIT_CURSOR);
-		commTableModel.setRowCount(0);
-		speakerTableModel.setRowCount(0);
-		List comms = coma.getData().filterComms();
-		int ccount = 0;
-		for (Object c : comms) {
-			ccount++;
-			Element child = (Element) c;
-			coma.getCommIndex().put(child.getAttributeValue("Id"), child);
-			commTableModel.addRow(child);
-		}
-		commCountLabel.setText(Ui.getText("communications") + " (" + ccount
-				+ ")");
-		commFilters.removeAll();
-		for (ComaFilter filter : coma.getData().getCfilters().values()) {
-			filter.addChangeListener(this);
-			commFilters.add(filter.getPanel());
-		}
-		commFilters.revalidate();
-		removeCFiltersButton
-				.setEnabled((coma.getData().getCfilters().size() > 0));
-		List spks = coma.getData().filterSpeakers();
-		int scount = 0;
-		for (Object s : spks) {
-			scount++;
-			Element child = (Element) s;
-			coma.getSpeakerIndex().put(child.getAttributeValue("Id"), child);
-			speakerTableModel.addRow(child);
-			// personTableModel.addRow(child);
-		}
-		speakerCountLabel.setText(Ui.getText("speakers") + " (" + scount + ")");
-		speakerFilters.removeAll();
-		for (ComaFilter filter : coma.getData().getPfilters().values()) {
-			filter.addChangeListener(this);
-			speakerFilters.add(filter.getPanel());
-		}
-		speakerFilters.revalidate();
-		removeSpeakerFiltersButton.setEnabled((coma.getData().getPfilters()
-				.size() > 0));
+            coma.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            // #516 Why you doing that?!!!
+            commTableModel.setRowCount(0);
+            speakerTableModel.setRowCount(0);
+            
+            List comms = coma.getData().filterComms();
+            int ccount = 0;
+            for (Object c : comms) {
+                ccount++;
+                Element child = (Element) c;
+                coma.getCommIndex().put(child.getAttributeValue("Id"), child);
+                commTableModel.addRow(child);
+            }
+            commCountLabel.setText(Ui.getText("communications") + " (" + ccount + ")");
+            commFilters.removeAll();
+            for (ComaFilter filter : coma.getData().getCfilters().values()) {
+                filter.addChangeListener(this);
+                commFilters.add(filter.getPanel());
+            }
+            commFilters.revalidate();
+            removeCFiltersButton.setEnabled((!coma.getData().getCfilters().isEmpty()));
+            List spks = coma.getData().filterSpeakers();
+            int scount = 0;
+            for (Object s : spks) {
+                    scount++;
+                    Element child = (Element) s;
+                    coma.getSpeakerIndex().put(child.getAttributeValue("Id"), child);
+                    speakerTableModel.addRow(child);
+                    // personTableModel.addRow(child);
+            }
+            speakerCountLabel.setText(Ui.getText("speakers") + " (" + scount + ")");
+            speakerFilters.removeAll();
+            for (ComaFilter filter : coma.getData().getPfilters().values()) {
+                    filter.addChangeListener(this);
+                    speakerFilters.add(filter.getPanel());
+            }
+            speakerFilters.revalidate();
+            removeSpeakerFiltersButton.setEnabled((coma.getData().getPfilters()
+                            .size() > 0));
 
-		if (redoSelection && (lastSelectedTable != null)) {
-			valueDisplayPanel.setText("");
-			if (lastSelectedTable.equals("commTable")) {
-				for (int i : sidx) {
-					speakerTable.getSelectionModel().addSelectionInterval(i, i);
-				}
-				if (!data.getFilterChanged().equals("comm")) {
-					for (int i : cidx) {
-						commTable.getSelectionModel()
-								.addSelectionInterval(i, i);
-					}
-				}
-			} else {
-				for (int i : cidx) {
-					commTable.getSelectionModel().addSelectionInterval(i, i);
-				}
-				if (!data.getFilterChanged().equals("spk")) {
-					for (int i : sidx) {
-						speakerTable.getSelectionModel().addSelectionInterval(
-								i, i);
-					}
-				}
+            if (redoSelection && (lastSelectedTable != null)) {
+                    valueDisplayPanel.setText("");
+                    if (lastSelectedTable.equals("commTable")) {
+                            for (int i : sidx) {
+                                    speakerTable.getSelectionModel().addSelectionInterval(i, i);
+                            }
+                            if (!data.getFilterChanged().equals("comm")) {
+                                    for (int i : cidx) {
+                                            commTable.getSelectionModel()
+                                                            .addSelectionInterval(i, i);
+                                    }
+                            }
+                    } else {
+                            for (int i : cidx) {
+                                    commTable.getSelectionModel().addSelectionInterval(i, i);
+                            }
+                            if (!data.getFilterChanged().equals("spk")) {
+                                    for (int i : sidx) {
+                                            speakerTable.getSelectionModel().addSelectionInterval(
+                                                            i, i);
+                                    }
+                            }
 
-			}
+                    }
 
-		}
-		data.setFilterChanged("");
-		coma.setCursor(Cursor.getDefaultCursor());
-
+            }
+            data.setFilterChanged("");
+            coma.setCursor(Cursor.getDefaultCursor());
 	}
 
 	public void updateLists() {
-		updateLists(false);
+            updateLists(false);
 	}
 
+        @Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		coma.status("action '" + cmd + "' performed!");
@@ -1506,7 +1506,7 @@ public class DataPanel extends JPanel implements ActionListener,
 	private void addCommunication() {
 		Element elmt = data.getDataElement();
 		int myIndex = 0;
-		if (elmt.getChildren("Speaker").size() > 0) {
+		if (!elmt.getChildren("Speaker").isEmpty()) {
 			myIndex = elmt.getContent().indexOf(elmt.getChild("Speaker"));
 		} else {
 			myIndex = elmt.getContentSize();
@@ -1586,11 +1586,10 @@ public class DataPanel extends JPanel implements ActionListener,
 					// }
 					// display the transcription's description-values
 					transElmt = (Element) transcriptionTable.getModel()
-							.getValueAt(
-									transcriptionTable.getSelectedRows()[0], 0);
+							.getValueAt(transcriptionTable.getSelectedRows()[0], 0);
 					// haha!
 					transKeys = transElmt.getChild("Description").getChildren();
-					Vector<String> transcriptionInfo = new Vector();
+					List<String> transcriptionInfo = new ArrayList<>();
 					transcriptionInfo
 							.add(Ui.getText("fileLocation")
 									+ ": "
@@ -1600,8 +1599,7 @@ public class DataPanel extends JPanel implements ActionListener,
 						transcriptionInfo.add(myKey.getAttributeValue("Name")
 								+ "=" + myKey.getText());
 					}
-					transcriptionDescriptionList.setListData(transcriptionInfo
-							.toArray());
+					transcriptionDescriptionList.setListData(transcriptionInfo.toArray());
 				} else {
 					openInPEButton.setEnabled(false);
 				}
@@ -1616,26 +1614,32 @@ public class DataPanel extends JPanel implements ActionListener,
 	 * javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent
 	 * )
 	 */
-	public void stateChanged(ChangeEvent arg0) {
-		if (!layoutingPanel) {
-			if (arg0.toString().contains("FilterChanged")) {
-				coma.status("fired!!");
-				updateLists();
-			} else {
-				prefs.putInt("perTransRecPaneSelected",
-						perTransRec.getSelectedIndex());
-			}
-		}
+        @Override
+	public void stateChanged(ChangeEvent changeEvent) {
+            if (!layoutingPanel) {
+                if (changeEvent.toString().contains("FilterChanged")) {
+                        coma.status("fired!!");
+                        updateLists();
+                } else {
+                        prefs.putInt("perTransRecPaneSelected",
+                                        perTransRec.getSelectedIndex());
+                }
+            }
 	}
 
 	public void selectTab(int tabToSelect) {
 		perTransRec.setSelectedIndex(tabToSelect);
 	}
 
+        @Override
 	public void sorterChanged(RowSorterEvent arg0) {
-		commTable.scrollRectToVisible(commTable.getCellRect(
-				commTable.getSelectedRow(), 1, true));
+            //System.out.println("==> sorterChanged");
+            //System.out.println("commTable currently has " + commTable.getRowCount() + " rows.");
 
+            // This is a fix for #516. It works but nobody knows why. The ways of the lord are unfathomable. 
+            if (commTable.getRowCount()>0){
+                commTable.scrollRectToVisible(commTable.getCellRect(commTable.getSelectedRow(), 1, true));
+            }
 	}
 
 	/** @param rowIndices */
@@ -1875,109 +1879,101 @@ public class DataPanel extends JPanel implements ActionListener,
 
 	@Override
 	public void tableChanged(TableModelEvent e) {
-		if (e.getType() == TableModelEvent.UPDATE) {
-			if (e.getColumn() == 4) {
-				if ((TableModel) e.getSource() == commTableModel) {
-					XPath xp;
-					try {
-						xp = XPath.newInstance(commTableModel.getXPath());
+            if (e.getType() == TableModelEvent.UPDATE) {
+                if (e.getColumn() == 4) {
+                    if ((TableModel) e.getSource() == commTableModel) {
+                            XPath xp;
+                            try {
+                                    xp = XPath.newInstance(commTableModel.getXPath());
 
-						String v = (String) commTableModel.getValueAt(
-								e.getFirstRow(), e.getColumn());
-						List results = xp.selectNodes(data
-								.getSelectedCommunications().values()
-								.iterator().next());
+                                    String v = (String) commTableModel.getValueAt(e.getFirstRow(), e.getColumn());
+                                    List results = xp.selectNodes(data
+                                                    .getSelectedCommunications().values()
+                                                    .iterator().next());
 
-						if (results.size() == 0) {
-							XPath xp2 = XPath.newInstance(commTableModel
-									.getXPath().substring(
-											0,
-											commTableModel.getXPath().indexOf(
-													"/")));
-							List results2 = xp2.selectNodes(data
-									.getSelectedCommunications().values()
-									.iterator().next());
+                                    if (results.isEmpty()) {
+                                        XPath xp2 = XPath.newInstance(commTableModel
+                                                        .getXPath().substring(0, commTableModel.getXPath().indexOf("/")));
+                                        List results2 = xp2.selectNodes(data
+                                                        .getSelectedCommunications().values()
+                                                        .iterator().next());
 
-							if (results2.size() > 0) {
-								Element elx = (Element) results2.get(0);
-								elx.addContent(new Element("Key").setAttribute(
-										"Name",
-										commTableModel.getXPath().substring(
-												commTableModel.getXPath()
-														.indexOf("'") + 1,
-												commTableModel.getXPath()
-														.lastIndexOf("'"))));
-							}
-							results = xp.selectNodes(data
-									.getSelectedCommunications().values()
-									.iterator().next());
-						}
-						if (results.size() > 0) {
-							if (results.get(0).getClass().equals(Element.class)) {
-								((Element) results.get(0)).setText(v);
-							} else if (results.get(0).getClass()
-									.equals(Attribute.class)) {
-								((Attribute) results.get(0)).setValue(v);
-							}
-							coma.xmlChanged();
-							updateLists(true);
-						} else {
-							System.out.println("hä?");
-						}
+                                        if (!results2.isEmpty()) {
+                                                Element elx = (Element) results2.get(0);
+                                                elx.addContent(new Element("Key").setAttribute("Name",
+                                                        commTableModel.getXPath().substring(commTableModel.getXPath().indexOf("'") + 1,
+                                                        commTableModel.getXPath().lastIndexOf("'"))));
+                                        }
+                                        results = xp.selectNodes(data
+                                            .getSelectedCommunications().values()
+                                            .iterator().next());
+                                    }
+                                    if (!results.isEmpty()) {
+                                        if (results.get(0).getClass().equals(Element.class)) {
+                                                ((Element) results.get(0)).setText(v);
+                                        } else if (results.get(0).getClass()
+                                                        .equals(Attribute.class)) {
+                                                ((Attribute) results.get(0)).setValue(v);
+                                        }
+                                        coma.xmlChanged();
+                                        updateLists(true);
+                                    } else {
+                                            System.out.println("hä?");
+                                    }
 
-					} catch (JDOMException err) {
-						err.printStackTrace();
-					}
-				} else {
-					XPath xp;
-					try {
-						xp = XPath.newInstance(speakerTableModel.getXPath());
-						String v = (String) speakerTableModel.getValueAt(
-								e.getFirstRow(), e.getColumn());
-						List results = xp.selectNodes(data.getSelectedPersons()
-								.values().iterator().next());
-						if (results.size() == 0) {
-							XPath xp2 = XPath.newInstance(speakerTableModel
-									.getXPath().substring(
-											0,
-											speakerTableModel.getXPath()
-													.indexOf("/")));
-							List results2 = xp2.selectNodes(data
-									.getSelectedPersons().values().iterator()
-									.next());
+                            } catch (JDOMException err) {
+                                    err.printStackTrace();
+                            }
+                    } else {
+                            XPath xp;
+                            try {
+                                    xp = XPath.newInstance(speakerTableModel.getXPath());
+                                    String v = (String) speakerTableModel.getValueAt(
+                                                    e.getFirstRow(), e.getColumn());
+                                    List results = xp.selectNodes(data.getSelectedPersons()
+                                                    .values().iterator().next());
+                                    if (results.isEmpty()) {
+                                            XPath xp2 = XPath.newInstance(speakerTableModel
+                                                            .getXPath().substring(
+                                                                            0,
+                                                                            speakerTableModel.getXPath()
+                                                                                            .indexOf("/")));
+                                            List results2 = xp2.selectNodes(data
+                                                            .getSelectedPersons().values().iterator()
+                                                            .next());
 
-							if (results2.size() > 0) {
-								Element elx = (Element) results2.get(0);
-								elx.addContent(new Element("Key").setAttribute(
-										"Name",
-										speakerTableModel.getXPath().substring(
-												speakerTableModel.getXPath()
-														.indexOf("'") + 1,
-												speakerTableModel.getXPath()
-														.lastIndexOf("'"))));
-							}
-							results = xp.selectNodes(data.getSelectedPersons()
-									.values().iterator().next());
+                                            if (!results2.isEmpty()) {
+                                                    Element elx = (Element) results2.get(0);
+                                                    elx.addContent(new Element("Key").setAttribute(
+                                                                    "Name",
+                                                                    speakerTableModel.getXPath().substring(
+                                                                                    speakerTableModel.getXPath()
+                                                                                                    .indexOf("'") + 1,
+                                                                                    speakerTableModel.getXPath()
+                                                                                                    .lastIndexOf("'"))));
+                                            }
+                                            results = xp.selectNodes(data.getSelectedPersons()
+                                                            .values().iterator().next());
 
-						}
-						if (results.size() > 0) {
-							if (results.get(0).getClass().equals(Element.class)) {
-								((Element) results.get(0)).setText(v);
-							} else if (results.get(0).getClass()
-									.equals(Attribute.class)) {
-								((Attribute) results.get(0)).setValue(v);
-							}
-							coma.xmlChanged();
-							updateLists(true);
-						} else {
-							coma.status("Element doesn't exist!");
-						}
-					} catch (JDOMException err) {
-						err.printStackTrace();
-					}
-				}
-			}
-		}
+                                    }
+                                    if (!results.isEmpty()) {
+                                            if (results.get(0).getClass().equals(Element.class)) {
+                                                    ((Element) results.get(0)).setText(v);
+                                            } else if (results.get(0).getClass()
+                                                            .equals(Attribute.class)) {
+                                                    ((Attribute) results.get(0)).setValue(v);
+                                            }
+                                            coma.xmlChanged();
+                                            updateLists(true);
+                                    } else {
+                                            coma.status("Element doesn't exist!");
+                                    }
+                            } catch (JDOMException err) {
+                                    err.printStackTrace();
+                            }
+                    }
+                }
+            }
 	}
 
 	/** empties all displays. called for new, empty corpus. */

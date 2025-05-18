@@ -29,7 +29,12 @@ public class AnnotationSpecification {
         {"HaMaTac : Disfluency", "/org/exmaralda/partitureditor/annotation/disfluency-annotation-panel.xml"},
         {"Dulko : Annotation", "/org/exmaralda/partitureditor/annotation/dulko-annotation-panel.xml"},
         {"FOLK : STTS 2.0 POS", "/org/exmaralda/partitureditor/annotation/folk_stts_2_0-annotation-panel.xml"},
-        {"SegCor : Macro syntax", "/org/exmaralda/partitureditor/annotation/segcor-macrosyntax-annotation-panel.xml"}
+        {"SegCor : Macro syntax", "/org/exmaralda/partitureditor/annotation/segcor-macrosyntax-annotation-panel.xml"},
+        {"English : Penn POS Tags", "/org/exmaralda/partitureditor/annotation/PENN_1_0.xml"},
+        {"French : POS Tags", "/org/exmaralda/partitureditor/annotation/FRENCH_1_0.xml"},
+        {"Italian : POS Tags", "/org/exmaralda/partitureditor/annotation/ITALIAN_1_0.xml"},
+        {"German : STTS 2.0 POS Tags", "/org/exmaralda/partitureditor/annotation/stts_2_0-annotation-panel.xml"},
+        {"Universal Dependencies : POS Tags", "/org/exmaralda/partitureditor/annotation/UD_POS_1_0.xml"}
     };
 
     Map<String,Category> annotationSets = new HashMap<>();

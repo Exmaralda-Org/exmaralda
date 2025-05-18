@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotation-specification>
+    <annotation-set exmaralda-tier-category="POS">
+        <category name="POS-tags">
+            <version version="1.0"/>
+            <description>POS-tags</description>
+            <category name="adjective">
+                <tag name="ADJ"/>
+                <description/>
+            </category>
+            <category name="adposition">
+                <tag name="ADP"/>
+                <description/>
+            </category>
+            <category name="adverb">
+                <tag name="ADV"/>
+                <description/>
+            </category>
+            <category name="auxiliary">
+                <tag name="AUX"/>
+                <description/>
+            </category>
+            <category name="coordinating conjunction">
+                <tag name="CCONJ"/>
+                <description/>
+            </category>
+            <category name="determiner">
+                <tag name="DET"/>
+                <description/>
+            </category>
+            <category name="interjection">
+                <tag name="INTJ"/>
+                <description/>
+            </category>
+            <category name="noun">
+                <tag name="NOUN"/>
+                <description/>
+            </category>
+            <category name="numeral">
+                <tag name="NUM"/>
+                <description/>
+            </category>
+            <category name="particle">
+                <tag name="PART"/>
+                <description/>
+            </category>
+            <category name="pronoun">
+                <tag name="PRON"/>
+                <description/>
+            </category>
+            <category name="proper noun">
+                <tag name="PROPN"/>
+                <description/>
+            </category>
+            <category name="punctuation">
+                <tag name="PUNCT"/>
+                <description/>
+            </category>
+            <category name="subordinating conjunction">
+                <tag name="SCONJ"/>
+                <description/>
+            </category>
+            <category name="symbol">
+                <tag name="SYM"/>
+                <description/>
+            </category>
+            <category name="verb">
+                <tag name="VERB"/>
+                <description/>
+            </category>
+            <category name="other">
+                <tag name="X"/>
+                <description/>
+            </category>
+        </category>
+    </annotation-set>
+</annotation-specification>

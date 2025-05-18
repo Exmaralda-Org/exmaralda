@@ -8,10 +8,10 @@ package org.exmaralda.orthonormal.lexicon;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Vector;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
@@ -26,12 +26,13 @@ import org.jdom.xpath.XPath;
  */
 public class SimpleXMLFileLexicon extends AbstractNormalizationLexicon {
 
-    Hashtable<String,HashSet<String>> mappings = new Hashtable<String,HashSet<String>>();
+    HashMap<String,HashSet<String>> mappings = new HashMap<>();
 
+    @Override
     public void put(String form, String lemma, String transcriptionID, String wordID) {
         if (form==null || form.equals(lemma)) return;
         if (!mappings.containsKey(form)){
-            mappings.put(form, new HashSet<String>());
+            mappings.put(form, new HashSet<>());
         }
         mappings.get(form).add(lemma);
     }
@@ -70,28 +71,32 @@ public class SimpleXMLFileLexicon extends AbstractNormalizationLexicon {
     @Override
     public List<String> getCandidateForms(String form) throws LexiconException {
         HashSet<String> result = mappings.get(form);
-        Vector<String> resultVector = new Vector<String>();
+        List<String> resultVector = new ArrayList<>();
         if (result!=null){
             for (String e : result){
-                resultVector.addElement(e);
+                resultVector.add(e);
             }
         }
         resultVector.addAll(super.getCandidateForms(form));
         return resultVector;
     }
 
+    @Override
     public int getFrequency(String form, String correspondingForm) {
         return -1;
     }
 
+    @Override
     public boolean hasFrequencyInformation() {
         return false;
     }
 
+    @Override
     public boolean isCapitalOnly(String form) {
         return false;
     }
 
+    @Override
     public boolean hasCapitalInformation() {
         return false;
     }
@@ -108,6 +113,7 @@ public class SimpleXMLFileLexicon extends AbstractNormalizationLexicon {
         update(d);
     }
     
+    @Override
     public void update(Document d) throws SQLException, JDOMException, LexiconException{
         String transcriptionID = d.getRootElement().getAttributeValue("id");
         List l = XPath.newInstance("//w").selectNodes(d);

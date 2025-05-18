@@ -11,6 +11,7 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.util.prefs.Preferences;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
@@ -56,9 +57,24 @@ public class RegExFilterAction extends AbstractKWICTableAction {
             int column = regexFilterPanel.getColumnIndex();
             String regex = regexFilterPanel.getRegularExpression();
             boolean invert = regexFilterPanel.getInvert();
-            table.getWrappedModel().filter(column, regex, invert);
+            
+            // 16-05-2025: issue #515
+            boolean fullMatch = regexFilterPanel.getFullMatch();
+            //table.getWrappedModel().filter(column, regex, invert);
+            table.getWrappedModel().filter(column, regex, invert, fullMatch);
+
+            // 16-05-2025, issue #514
+            Preferences prefs = java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
+            boolean deleteUnfiltered = prefs.getBoolean("delete-unfiltered", false);
+            if (deleteUnfiltered){
+                table.getWrappedModel().removeUnselected();
+            }
+
+
             table.setCellEditors();
             table.adjustColumns();
+            
+            
         }
         selectedColumn = -1;
     }

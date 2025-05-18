@@ -78,7 +78,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
             kwicContextLimitSpinner.setValue(kwicContextLimit);
         }
 
-        fullDisplayContextLimit = prefs.getInt("full-display-limit", 50);;
+        fullDisplayContextLimit = prefs.getInt("full-display-limit", 50);
         if (fullDisplayContextLimit==-1){
             fullDisplayContextLimitCheckBox.setSelected(true);
             fullDisplayContextLimitSpinner.setValue(100);
@@ -87,7 +87,11 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
             fullDisplayContextLimitSpinner.setValue(fullDisplayContextLimit);
         }
         
-        this.praatPathTextField.setText(prefs.get("PRAAT-Directory", ""));                
+        this.praatPathTextField.setText(prefs.get("PRAAT-Directory", ""));  
+        
+        // 16-05-2025, issue #514
+        boolean deleteUnfiltered = prefs.getBoolean("delete-unfiltered", false);
+        deleteAfterFilterCheckBox.setSelected(deleteUnfiltered);
                 
     }
     
@@ -125,6 +129,11 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
 
     public void setConcordanceOutputStylesheet(String concordanceOutputStylesheet) {
         this.concordanceOutputStylesheet = concordanceOutputStylesheet;
+    }
+    
+    // 16-05-2025, issue #514
+    public boolean getDeleteUnfiltered(){
+        return deleteAfterFilterCheckBox.isSelected();
     }
     
     public String browseForStylesheet(String startDirectory){
@@ -176,6 +185,9 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         tabbedPane = new javax.swing.JTabbedPane();
+        optionsPanel = new javax.swing.JPanel();
+        deleteAfterFilterPanel = new javax.swing.JPanel();
+        deleteAfterFilterCheckBox = new javax.swing.JCheckBox();
         stylesheetsPanel = new javax.swing.JPanel();
         partiturInToolStylesheetPanel = new javax.swing.JPanel();
         partiturInToolSSLabel = new javax.swing.JLabel();
@@ -223,6 +235,17 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
         fullDisplayContextLimitCheckBox = new javax.swing.JCheckBox();
 
         setLayout(new java.awt.BorderLayout());
+
+        optionsPanel.setLayout(new javax.swing.BoxLayout(optionsPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        deleteAfterFilterPanel.setLayout(new javax.swing.BoxLayout(deleteAfterFilterPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        deleteAfterFilterCheckBox.setText("Delete unfiltered results immediately");
+        deleteAfterFilterPanel.add(deleteAfterFilterCheckBox);
+
+        optionsPanel.add(deleteAfterFilterPanel);
+
+        tabbedPane.addTab("Options", optionsPanel);
 
         stylesheetsPanel.setLayout(new javax.swing.BoxLayout(stylesheetsPanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -311,10 +334,10 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
             }
         });
         concordanceOutputStylesheetButton.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 concordanceOutputStylesheetButtonAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -543,6 +566,8 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JButton concordanceOutputStylesheetButton;
     private javax.swing.JPanel concordanceOutputStylesheetPanel;
     private javax.swing.JTextField concordanceOutputStylesheetTextField;
+    private javax.swing.JCheckBox deleteAfterFilterCheckBox;
+    private javax.swing.JPanel deleteAfterFilterPanel;
     private javax.swing.JPanel fontsPanel;
     private javax.swing.JCheckBox fullDisplayContextLimitCheckBox;
     private javax.swing.JPanel fullDisplayContextLimitPanel;
@@ -564,6 +589,7 @@ public class EditPreferencesPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox maxSearchResultsCheckBox;
     private javax.swing.JPanel maxSearchResultsPanel;
     private javax.swing.JSpinner maxSearchResultsSpinner;
+    private javax.swing.JPanel optionsPanel;
     private javax.swing.JLabel partiturInToolSSLabel;
     private javax.swing.JButton partiturInToolStylesheetButton;
     private javax.swing.JPanel partiturInToolStylesheetPanel;

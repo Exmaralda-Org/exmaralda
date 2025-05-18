@@ -2,7 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [Setup]
-ArchitecturesInstallIn64BitMode=x64
+; ArchitecturesInstallIn64BitMode=x64
+; Warning: Architecture identifier "x64" is deprecated. Substituting "x64os", but note that "x64compatible" is preferred in most cases. See the "Architecture Identifiers" topic in help file for more information.
+ArchitecturesInstallIn64BitMode=x64compatible
 
 AppName=EXMARaLDA
 AppVerName=EXMARaLDA @version@
@@ -11,7 +13,12 @@ AppPublisherURL=http://www.exmaralda.org
 AppSupportURL=http://www.exmaralda.org
 AppUpdatesURL=http://www.exmaralda.org
 
-DefaultDirName={pf}\EXMARaLDA
+
+
+
+; DefaultDirName={pf}\EXMARaLDA
+; Warning: Constant "pf" has been renamed. Use "commonpf" instead or consider using its "auto" form.
+DefaultDirName={commonpf}\EXMARaLDA
 DefaultGroupName=EXMARaLDA
 DisableDirPage=no
 
@@ -25,6 +32,7 @@ VersionInfoCompany=Musical Bits GmbH
 VersionInfoCopyright=Thomas Schmidt, Kai Wörner
 VersionInfoDescription=Version @version@ (Build time: @build-time@)
 VersionInfoVersion=@version@ 
+
 
 [Types]
 Name: "full"; Description: "Full installation (all tools)"
@@ -137,3 +145,16 @@ Filename: "{app}\PartiturEditor.exe"; Description: "{cm:LaunchProgram, Partitur-
 [UninstallDelete]
 Type: files; Name: "{app}\exmaralda.url"
 
+[Code]
+procedure CurStepChanged(CurStep: TSetupStep);
+var 
+  ErrorCode: Integer;
+begin
+  if CurStep = ssPostInstall then
+  begin
+    if MsgBox('Installation is complete! You can support EXMARaLDA development through buymeacoffee.com/linguisticbits.de. Would you like to go to the website?', mbConfirmation, MB_YESNO) = IDYES then
+    begin
+        ShellExec('', 'https://buymeacoffee.com/linguisticbits.de', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
+    end;
+  end;
+end;

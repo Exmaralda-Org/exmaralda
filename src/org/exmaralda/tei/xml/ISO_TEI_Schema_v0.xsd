@@ -311,6 +311,8 @@
       <!-- added 28-10-2020 -->
       <xs:attribute name="who" use="optional" type="xs:IDREF"/> 
       <xs:attribute ref="xml:lang" use="optional"/>            
+      <!-- added 06-05-2025 -->
+      <xs:attribute name="type" use="optional" type="xs:NCName"/> 
     </xs:complexType>
   </xs:element>
 
