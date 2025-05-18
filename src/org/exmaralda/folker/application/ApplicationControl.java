@@ -1365,19 +1365,36 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             } catch (IOException ex) {
                 Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex);
                 int optionChosen = displayRecordingNotFoundDialog(mediaPath, ex);
-                if (optionChosen==JOptionPane.NO_OPTION) return;
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording") + ": " + f.getName());
-                fileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
-                //fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("default-audio-path", "")));
-                fileChooser.setCurrentDirectory(f.getParentFile());
-                int retValue = fileChooser.showOpenDialog(getFrame());
-                if (retValue==JFileChooser.CANCEL_OPTION) return;
-                mediaPath = fileChooser.getSelectedFile().getAbsolutePath();
-                // added 05-10-2009
-                elt.setMediaPath(mediaPath);
-                // added 28-09-2010
-                DOCUMENT_CHANGED = true;
+                if (optionChosen==JOptionPane.CANCEL_OPTION) return;
+                if (optionChosen==JOptionPane.NO_OPTION) {
+                    double timeInMiliseconds = elt.getTimeline().getMaximumTime();
+                    int dummyDuration = (int) ((timeInMiliseconds / 1000.0) * 1.5);
+                    //dummyDuration = Math.min(dummyDuration, 3600);
+                    try {
+                        File dummyWAV = AudioProcessor.generateSilenceWAV(dummyDuration);
+                        mediaPath = dummyWAV.getAbsolutePath();
+                        System.out.println("Media set to dummy file: " + mediaPath);
+                        elt.setMediaPath(mediaPath);
+                        //mediaSet = true;
+                        DOCUMENT_CHANGED = true;
+                    } catch (IOException ex1) {
+                        displayException(ex1);
+                        Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+                } else {
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setDialogTitle(FOLKERInternationalizer.getString("dialog.recording") + ": " + f.getName());
+                    fileChooser.setFileFilter(new org.exmaralda.folker.utilities.WaveFileFilter());
+                    //fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("default-audio-path", "")));
+                    fileChooser.setCurrentDirectory(f.getParentFile());
+                    int retValue = fileChooser.showOpenDialog(getFrame());
+                    if (retValue==JFileChooser.CANCEL_OPTION) return;
+                    mediaPath = fileChooser.getSelectedFile().getAbsolutePath();
+                    // added 05-10-2009
+                    elt.setMediaPath(mediaPath);
+                    // added 28-09-2010
+                    DOCUMENT_CHANGED = true;
+                }
             }
         }
 
@@ -2356,12 +2373,16 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
         //String message = "Fehler beim Lesen der Aufnahme" + " \n" + mediaPath + ".\n" + "Fehlermeldung" + ":\n" + ex.getLocalizedMessage();
         String message = FOLKERInternationalizer.getString("error.readingrecording") + " \n" + mediaPath + ".\n" + FOLKERInternationalizer.getString("error.message") + ":\n" + ex.getLocalizedMessage();
         //String[] options = {"Aufnahme neu zuordnen", "Abbrechen"};
-        String[] options = {FOLKERInternationalizer.getString("dialog.recording"), FOLKERInternationalizer.getString("error.cancel")};
+        String[] options = {
+            FOLKERInternationalizer.getString("dialog.recording"), 
+            FOLKERInternationalizer.getString("error.usedummywav"),
+            FOLKERInternationalizer.getString("error.cancel")
+        };
         //  Object message, String title, int optionType, int messageType, Icon icon, Object[] options, Object initialValue
         int optionChosen = JOptionPane.showOptionDialog(applicationFrame, 
                     message,
                     FOLKERInternationalizer.getString("error.readingrecording"),
-                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.YES_NO_CANCEL_OPTION, 
                     JOptionPane.WARNING_MESSAGE, 
                     new Constants().getIcon(Constants.RECORDING_WARNING_ICON),
                     options, 
