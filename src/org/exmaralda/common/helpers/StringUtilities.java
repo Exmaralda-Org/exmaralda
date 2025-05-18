@@ -1,4 +1,4 @@
-package org.exmaralda.partitureditor.partiture;
+package org.exmaralda.common.helpers;
 
 import java.awt.*;
 import java.util.*;
