@@ -323,6 +323,7 @@ public class PartitureTableWithActions extends PartitureTable
 
     public javax.swing.AbstractAction exaktSearchAction;    
     
+    public javax.swing.AbstractAction selectBlockAction; // issue #473
     public javax.swing.AbstractAction selectionToNewAction;
     public javax.swing.AbstractAction leftPartToNewAction;
     public javax.swing.AbstractAction rightPartToNewAction;
@@ -654,6 +655,8 @@ public class PartitureTableWithActions extends PartitureTable
 
         exaktSearchAction = new ExaktSearchAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")));
 
+        selectBlockAction = new SelectBlockAction(this);
+        
         selectionToNewAction = new SelectionToNewAction(this, null);
         leftPartToNewAction = new LeftPartToNewAction(this, null);
         rightPartToNewAction = new RightPartToNewAction(this, null);
@@ -1345,6 +1348,90 @@ public class PartitureTableWithActions extends PartitureTable
         selectionEndCol=col2;        
         selectionChanged();        
     }
+    
+    // 19-05-2025: issue #473
+    public void selectBlock() {
+        if (selectionStartRow<0 || selectionStartCol<0) {
+            JOptionPane.showMessageDialog(this, "Cannot select block: no event selected");
+            return;
+        }
+        Tier tier = getModel().getTier(selectionStartRow);
+        if (tier.getType().equals("d")) {
+            JOptionPane.showMessageDialog(this, "Cannot select block for tier of type D(escription)");
+            return;
+        }
+        if (tier.getSpeaker()==null) {
+            JOptionPane.showMessageDialog(this, "Cannot select block for tier without speaker");
+            return;
+        }
+        try {
+            Tier transcriptionTier = tier;
+            int transcriptionTierPosition = selectionStartRow;
+            if (!(transcriptionTier.getType().equals("t"))){
+                for (int i=selectionStartRow; i>=0; i--){
+                    Tier tryTier = getModel().getTier(i);
+                    if (tryTier.getSpeaker()==null || !tryTier.getSpeaker().equals(tier.getSpeaker())) break;
+                    if (tryTier.getType().equals("t")){
+                        transcriptionTier = tryTier;
+                        transcriptionTierPosition = i;
+                    }
+                }
+            }
+            if (!(transcriptionTier.getType().equals("t"))){
+                for (int i=selectionStartRow; i<getModel().getNumRows(); i++){
+                    Tier tryTier = getModel().getTier(i);
+                    if (tryTier.getSpeaker()==null || !tryTier.getSpeaker().equals(tier.getSpeaker())) break;
+                    if (tryTier.getType().equals("t")){
+                        transcriptionTier = tryTier;
+                        transcriptionTierPosition = i;
+                    }
+                }
+            }
+            if (!(transcriptionTier.getType().equals("t"))){
+                JOptionPane.showMessageDialog(this, "Cannot select block: \nno corresponding tier of type T(ranscription)");
+                return;                
+            }            
+            Event event1 = getModel().getEvent(selectionStartRow, selectionStartCol);
+            Event event2 = event1;
+            for (int i = selectionEndCol; i>=selectionStartCol; i--){
+                if (getModel().containsEvent(selectionStartRow, i)){
+                    event2 = getModel().getEvent(selectionStartRow, i);
+                    break;
+                }
+            }
+            Vector<Event> eventsIntersecting = transcriptionTier.getEventsIntersecting(getModel().getTranscription().getBody().getCommonTimeline(), event1.getStart(), event2.getEnd());
+            if (eventsIntersecting.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Cannot select block: \nno events in corresponding tier of type T(ranscription)");
+                return;                                
+            }
+            String startID = eventsIntersecting.firstElement().getStart();
+            String endID = eventsIntersecting.lastElement().getEnd();
+            
+            int blockStartRow = transcriptionTierPosition;
+            while (blockStartRow>=0 && getModel().getTier(blockStartRow).getSpeaker()!=null && getModel().getTier(blockStartRow).getSpeaker().equals(tier.getSpeaker())){
+                blockStartRow--;
+            }
+            int blockEndRow = transcriptionTierPosition;
+            while (blockEndRow<getModel().getNumRows() && getModel().getTier(blockEndRow).getSpeaker()!=null && getModel().getTier(blockEndRow).getSpeaker().equals(tier.getSpeaker())){
+                blockEndRow++;
+            }
+            blockStartRow++;
+            blockEndRow--;
+            
+            int blockStartCol = getModel().getColumnNumber(startID);
+            int blockEndCol = getModel().getColumnNumber(endID) - 1;
+            
+            this.setNewSelection(blockStartRow, blockEndRow, blockStartCol, blockEndCol);
+            
+            
+        } catch (JexmaraldaException ex) {
+            Logger.getLogger(PartitureTableWithActions.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Cannot select block: " + ex.getLocalizedMessage());
+        }
+        
+        
+    }
+    
 
     void setupLinkPanel(){
         if (getModel().containsEvent(selectionStartRow, selectionStartCol)){
@@ -3271,6 +3358,7 @@ public class PartitureTableWithActions extends PartitureTable
         }
         return y;
     }
+
 
 
     

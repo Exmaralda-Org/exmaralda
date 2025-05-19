@@ -9,7 +9,6 @@ package org.exmaralda.partitureditor.partiture.menus;
 import javax.swing.*;
 import org.exmaralda.partitureditor.partiture.*;
 import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import org.exmaralda.common.helpers.Internationalizer;
 
@@ -34,6 +33,8 @@ public class EditMenu extends AbstractTableMenu {
     private final JMenuItem lowerUpperCaseMenuItem;
 
     private final JMenuItem exaktSearchMenuItem;
+
+    private final JMenuItem selectBlockMenuItem; // #473
 
     
     //private final javax.swing.JMenu selectionMenu;
@@ -107,6 +108,12 @@ public class EditMenu extends AbstractTableMenu {
         exaktSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
         exaktSearchMenuItem.setToolTipText("Use EXAKT interface to do a search on this transcription");
                 
+        this.add(new javax.swing.JSeparator());
+        //-------------------------------------------------
+        
+        selectBlockMenuItem = add(table.selectBlockAction);
+        selectBlockMenuItem.setToolTipText("Extend the selection to the block belonging to the current selection");
+        selectBlockMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
         this.add(new javax.swing.JSeparator());
         //-------------------------------------------------
         add(table.selectionToNewAction).setToolTipText("Make a new transcription from the current selection");

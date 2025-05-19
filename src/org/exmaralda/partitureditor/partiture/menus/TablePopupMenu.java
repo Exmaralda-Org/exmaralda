@@ -33,6 +33,7 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
     private final JMenuItem formatTierMenuItem;
     private JMenuItem copyMenuItem;
     private JMenuItem copyHTMLMenuItem;
+    private JMenuItem selectBlockMenuItem;
         
     
     /** Creates a new instance of TablePopupMenu
@@ -123,6 +124,8 @@ public class TablePopupMenu extends javax.swing.JPopupMenu {
         this.add(new javax.swing.JPopupMenu.Separator());
         
         //this.add(table.moveMenu);
+        
+        selectBlockMenuItem = this.add(table.selectBlockAction);
 
         this.pack();
     }
