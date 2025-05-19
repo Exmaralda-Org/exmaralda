@@ -32,6 +32,7 @@ public class EventMenu extends AbstractTableMenu {
     private final JMenuItem moveLeftMenuItem;
     private final JMenuItem moveDownLeftMenuItem;
     private final JMenuItem moveDownRightMenuItem;
+    private final JMenuItem moveToOtherSpeakerMenuItem;
     
     private final JMenuItem findNextEventMenuItem;
     private final JMenuItem splitLongEventMenuItem;
@@ -112,8 +113,10 @@ public class EventMenu extends AbstractTableMenu {
         moveDownLeftMenuItem.setToolTipText("Move the current event to the left in the following tier");
         
         moveDownRightMenuItem = this.add(table.moveDownRightAction);
-        moveDownLeftMenuItem.setToolTipText("Move the current event to the right in the following tier");
+        moveDownRightMenuItem.setToolTipText("Move the current event to the right in the following tier");
         
+        moveToOtherSpeakerMenuItem = this.add(table.moveToOtherSpeakerAction);
+        moveToOtherSpeakerMenuItem.setToolTipText("Move the current selection to another speaker's tiers");
 
         addSeparator();
                 

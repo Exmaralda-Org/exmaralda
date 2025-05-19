@@ -6,47 +6,55 @@
 
 package org.exmaralda.partitureditor.jexmaraldaswing;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 
 /**
  *
  * @author  thomas
  */
-public class SingleTierSelectionDialog extends OKCancelDialog {
+public class SingleSpeakerSelectionDialog extends OKCancelDialog {
     
     javax.swing.DefaultComboBoxModel comboBoxModel;
-    String[] tierIDs;
+    List<String> speakerIDs;
     
     /** Creates new form SingleTierSelectionDialog
      * @param bt
      * @param parent
      * @param modal */
-    public SingleTierSelectionDialog(BasicTranscription bt, java.awt.Frame parent, boolean modal) {
+    public SingleSpeakerSelectionDialog(BasicTranscription bt, List<String> speakerIDs, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTranscription(bt);
+        setSpeakers(bt, speakerIDs);
     }
     
     public void setExplanationText(String text){
         explanationLabel.setText(text);
     }
     
-    final void setTranscription(BasicTranscription bt){
-        String[] descs = new String[bt.getBody().getNumberOfTiers()];
-        for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
-            Tier t = bt.getBody().getTierAt(pos);
-            String d = t.getDescription(bt.getHead().getSpeakertable());
-            String id = t.getID();
-            descs[pos] = d + " (" + id + ")";
+    final void setSpeakers(BasicTranscription bt, List<String> speakerIDs){
+        String[] descs = new String[speakerIDs.size()];
+        int pos=0;
+        for (String speakerID : speakerIDs){
+            try {
+                String abb = bt.getHead().getSpeakertable().getSpeakerWithID(speakerID).getAbbreviation();
+                descs[pos] = speakerID + " (" + abb + ")";
+                pos++;
+            } catch (JexmaraldaException ex) {
+                Logger.getLogger(SingleSpeakerSelectionDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         comboBoxModel = new javax.swing.DefaultComboBoxModel(descs);
-        tierSelectionComboBox.setModel(comboBoxModel);
-        tierIDs = bt.getBody().getAllTierIDs();
+        speakerSelectionComboBox.setModel(comboBoxModel);
+        this.speakerIDs = speakerIDs;
     }
     
-    public String getSelectedTierID(){
-        return tierIDs[tierSelectionComboBox.getSelectedIndex()];
+    public String getSelectedSpeakerID(){
+        return speakerIDs.get(speakerSelectionComboBox.getSelectedIndex());
     }
     
     /** This method is called from within the constructor to
@@ -58,21 +66,21 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tierSelectionComboBox = new javax.swing.JComboBox();
+        speakerSelectionComboBox = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         explanationLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tier selection");
+        setTitle("Speaker selection");
 
         jPanel1.setMinimumSize(new java.awt.Dimension(250, 60));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 60));
 
-        tierSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        tierSelectionComboBox.setMaximumSize(new java.awt.Dimension(200, 22));
-        tierSelectionComboBox.setMinimumSize(new java.awt.Dimension(200, 22));
-        tierSelectionComboBox.setPreferredSize(new java.awt.Dimension(200, 22));
-        jPanel1.add(tierSelectionComboBox);
+        speakerSelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        speakerSelectionComboBox.setMaximumSize(new java.awt.Dimension(200, 22));
+        speakerSelectionComboBox.setMinimumSize(new java.awt.Dimension(200, 22));
+        speakerSelectionComboBox.setPreferredSize(new java.awt.Dimension(200, 22));
+        jPanel1.add(speakerSelectionComboBox);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -104,7 +112,7 @@ public class SingleTierSelectionDialog extends OKCancelDialog {
     private javax.swing.JLabel explanationLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JComboBox tierSelectionComboBox;
+    private javax.swing.JComboBox speakerSelectionComboBox;
     // End of variables declaration//GEN-END:variables
     
 }

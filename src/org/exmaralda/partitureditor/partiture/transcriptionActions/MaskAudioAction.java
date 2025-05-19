@@ -63,6 +63,7 @@ public class MaskAudioAction extends org.exmaralda.partitureditor.partiture.Abst
         
         // select a tier as the basis for masking
         SingleTierSelectionDialog tierSelectionDialog = new SingleTierSelectionDialog(transcription, frame, true);
+        tierSelectionDialog.setExplanationText("<html>Please select the <b>tier</b> <br/>to be used as the basis for masking.</html>");
         tierSelectionDialog.setVisible(true);
         if (tierSelectionDialog.getReturnStatus()==SingleTierSelectionDialog.RET_CANCEL) return;
         String tierID = tierSelectionDialog.getSelectedTierID();

@@ -415,6 +415,7 @@ public class PartitureTableWithActions extends PartitureTable
     // 24-06-2016 MuM-Multi new 
     public javax.swing.AbstractAction moveDownLeftAction;
     public javax.swing.AbstractAction moveDownRightAction;
+    public javax.swing.AbstractAction moveToOtherSpeakerAction;
     
 
 
@@ -743,6 +744,7 @@ public class PartitureTableWithActions extends PartitureTable
         // 24-06-2016 MuM-Multi new 
         moveDownLeftAction = new MoveDownLeftAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-left.png")));
         moveDownRightAction = new MoveDownRightAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/arrow-lower-right.png")));
+        moveToOtherSpeakerAction = new MoveToOtherSpeakerAction(this);
         
         //*********************************************************************************************
         //***************************************** TIMELINE ACTIONS **********************************
