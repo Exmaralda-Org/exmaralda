@@ -70,6 +70,11 @@ public class AutoAnnotationDialog extends javax.swing.JDialog implements Documen
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Auto Annotation");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -152,6 +157,10 @@ public class AutoAnnotationDialog extends javax.swing.JDialog implements Documen
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        regexTextField.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments

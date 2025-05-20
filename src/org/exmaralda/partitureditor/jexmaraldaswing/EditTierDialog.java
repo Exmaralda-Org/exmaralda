@@ -97,6 +97,11 @@ public class EditTierDialog extends JEscapeDialog {
         autoCheckBox = new javax.swing.JCheckBox();
 
         setTitle("Edit tier properties");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -279,6 +284,10 @@ public class EditTierDialog extends JEscapeDialog {
         setVisible (false);
         dispose ();
     }//GEN-LAST:event_closeDialog
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        categoryTextField.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
     * @param args the command line arguments

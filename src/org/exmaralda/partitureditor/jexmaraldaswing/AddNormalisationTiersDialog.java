@@ -69,6 +69,11 @@ public class AddNormalisationTiersDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add normalization tier(s)");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -160,6 +165,10 @@ public class AddNormalisationTiersDialog extends javax.swing.JDialog {
         approved = false;
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        profilesComboBox.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments

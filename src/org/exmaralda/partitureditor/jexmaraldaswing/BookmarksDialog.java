@@ -61,6 +61,11 @@ public class BookmarksDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bookmarks");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         bookmarksList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,6 +104,10 @@ public class BookmarksDialog extends javax.swing.JDialog {
             gotoButtonActionPerformed(null);
         }
     }//GEN-LAST:event_bookmarksListMouseClicked
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        bookmarksList.requestFocus();
+    }//GEN-LAST:event_formComponentShown
     
     /**
      * @param args the command line arguments

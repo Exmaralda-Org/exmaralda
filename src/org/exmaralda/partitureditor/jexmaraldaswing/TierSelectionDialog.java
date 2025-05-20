@@ -77,6 +77,11 @@ public class TierSelectionDialog extends javax.swing.JDialog {
         selectedTiersList = new javax.swing.JList();
 
         setTitle("Select tiers");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -269,6 +274,10 @@ public class TierSelectionDialog extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_selectedTiersListMouseClicked
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        unselectedTiersList.requestFocus();
+    }//GEN-LAST:event_formComponentShown
     
     /**
      * @param args the command line arguments

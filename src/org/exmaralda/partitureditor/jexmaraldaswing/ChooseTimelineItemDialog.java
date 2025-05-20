@@ -64,6 +64,11 @@ public class ChooseTimelineItemDialog extends JEscapeDialog {
         timelineItemsList.setSelectedIndex(0);
 
         setTitle("Choose a timeline item");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -133,6 +138,10 @@ public class ChooseTimelineItemDialog extends JEscapeDialog {
         }
     }//GEN-LAST:event_timelineItemsListMouseClicked
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        timelineItemsList.requestFocus();
+    }//GEN-LAST:event_formComponentShown
+
     /**
     * @param args the command line arguments
     */
@@ -150,7 +159,8 @@ public class ChooseTimelineItemDialog extends JEscapeDialog {
     // End of variables declaration//GEN-END:variables
 
     public boolean chooseTimelineItem(){
-        show();
+        //show();
+        this.setVisible(true);
         return change;
     }
 }

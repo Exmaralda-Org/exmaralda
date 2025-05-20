@@ -47,6 +47,11 @@ public class LowerUpperCaseDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("To lower/upper case");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.Y_AXIS));
 
@@ -102,6 +107,10 @@ public class LowerUpperCaseDialog extends javax.swing.JDialog {
     private void toUpperCaseRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toUpperCaseRadioButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_toUpperCaseRadioButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        toLowerCaseRadioButton.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments

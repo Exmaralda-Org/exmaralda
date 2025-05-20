@@ -72,6 +72,11 @@ public class SingleSpeakerSelectionDialog extends OKCancelDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Speaker selection");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setMinimumSize(new java.awt.Dimension(250, 60));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 60));
@@ -91,6 +96,10 @@ public class SingleSpeakerSelectionDialog extends OKCancelDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        speakerSelectionComboBox.requestFocus();
+    }//GEN-LAST:event_formComponentShown
     
     /**
      * @param args the command line arguments

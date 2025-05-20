@@ -142,6 +142,11 @@ public class TransformationDialog extends javax.swing.JDialog {
         saveButton = new javax.swing.JButton();
 
         setTitle("Transformation");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         scenariosPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Scenarios"));
         scenariosPanel.setLayout(new javax.swing.BoxLayout(scenariosPanel, javax.swing.BoxLayout.Y_AXIS));
@@ -499,6 +504,10 @@ public class TransformationDialog extends javax.swing.JDialog {
         approved = true;
         setVisible(false);
     }//GEN-LAST:event_transformButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        transformationScenariosComboBox.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
 
 

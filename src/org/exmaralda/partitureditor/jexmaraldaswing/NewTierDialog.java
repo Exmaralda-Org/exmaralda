@@ -138,6 +138,11 @@ public class NewTierDialog extends JEscapeDialog {
         warningLabel = new javax.swing.JLabel();
 
         setTitle("New tier");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -396,6 +401,10 @@ public class NewTierDialog extends JEscapeDialog {
     private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoryComboBoxActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        speakerComboBox.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
     * @param args the command line arguments

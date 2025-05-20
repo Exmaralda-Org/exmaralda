@@ -94,6 +94,11 @@ public class GotoDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Go to");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         mainPanel.setLayout(new java.awt.GridLayout(2, 1));
 
@@ -105,7 +110,7 @@ public class GotoDialog extends javax.swing.JDialog {
         timeRadioButton.setPreferredSize(new java.awt.Dimension(160, 23));
         timePanel.add(timeRadioButton);
 
-        timeTextField.setFont(new java.awt.Font("Tahoma", 0, 14));
+        timeTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         timeTextField.setText("0:00.00");
         timeTextField.setMaximumSize(new java.awt.Dimension(150, 23));
         timeTextField.setPreferredSize(new java.awt.Dimension(150, 23));
@@ -219,6 +224,10 @@ public class GotoDialog extends javax.swing.JDialog {
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         setVisible(false);
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        timelineItemSpinner.requestFocus();
+    }//GEN-LAST:event_formComponentShown
 
     /**
     * @param args the command line arguments
