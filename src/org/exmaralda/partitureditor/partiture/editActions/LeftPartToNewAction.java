@@ -48,6 +48,9 @@ public class LeftPartToNewAction extends org.exmaralda.partitureditor.partiture.
         //table.reexportHTMLAction.setEnabled(false);
         table.restoreAction.setEnabled(false);
         table.clearUndo();
+        
+        table.status("New transcription is left part of old one");
+        
     }
     
     

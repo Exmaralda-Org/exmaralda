@@ -114,6 +114,10 @@ public class LowerUpperCaseAction extends org.exmaralda.partitureditor.partiture
             }
         }
                 
+        if (toLower){
+            table.status("Changed upper to lower case. ");
+        } else {
+            table.status("Changed lower to upper case. ");
+        }
     }
-    
 }

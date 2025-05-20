@@ -38,6 +38,9 @@ public class ChopAudioAction extends org.exmaralda.partitureditor.partiture.Abst
         } else if (dialog.existingTierUpdated){
             table.resetData();
         }
+        
+        table.status("Audio chopped. ");
+        
     }
     
 }

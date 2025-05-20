@@ -19,6 +19,7 @@ public class FindNextAction extends org.exmaralda.partitureditor.partiture.Abstr
         super("Find next", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("FindNextAction");
         table.commitEdit(true);

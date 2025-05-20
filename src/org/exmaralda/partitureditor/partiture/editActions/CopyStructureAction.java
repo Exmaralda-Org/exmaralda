@@ -35,6 +35,8 @@ public class CopyStructureAction extends org.exmaralda.partitureditor.partiture.
     private void copyStructureAction(){
         BasicTranscription newTranscription = table.getCurrentSelectionAsNewTranscription();
         table.setStructureClipboard(newTranscription);
+        table.status("Structure copied to clipboard");
+        
         
     }
     

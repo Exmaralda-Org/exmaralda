@@ -93,7 +93,8 @@ public class CopyHTMLAction extends org.exmaralda.partitureditor.partiture.Abstr
         //}
         //it.copyRTFToClipboard(table.rtfParameters);
         String html = it.toHTML(table.htmlParameters);
-        table.getToolkit().getSystemClipboard().setContents(new HTMLSelection(html),null);            
+        table.getToolkit().getSystemClipboard().setContents(new HTMLSelection(html),null);   
+        table.status("HTML copied to clipboard");
     }
     
    

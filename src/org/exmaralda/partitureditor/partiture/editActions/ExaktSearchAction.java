@@ -13,6 +13,9 @@ import org.exmaralda.partitureditor.partiture.*;
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -67,7 +70,7 @@ public class ExaktSearchAction extends org.exmaralda.partitureditor.partiture.Ab
                 }
             });
             
-        } catch (Exception ex) {
+        } catch (IOException | ParserConfigurationException | TransformerException | JDOMException | SAXException ex) {
             ex.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(table.getParent(), ex.getMessage());
         }

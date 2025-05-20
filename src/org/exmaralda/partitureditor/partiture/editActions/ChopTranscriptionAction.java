@@ -45,8 +45,12 @@ public class ChopTranscriptionAction extends org.exmaralda.partitureditor.partit
             }
             String message = Integer.toString(parts.length) + " files written to " + dialog.getTargetDirectory();
             javax.swing.JOptionPane.showMessageDialog(table.parent, message);
+            table.status("Transcription chopped. ");
+            
         } catch (IOException ioe){
             javax.swing.JOptionPane.showMessageDialog(table.parent, ioe.getLocalizedMessage());
         }
+        
+        
     }
 }

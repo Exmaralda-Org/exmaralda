@@ -44,6 +44,9 @@ public class RightPartToNewAction extends org.exmaralda.partitureditor.partiture
         //table.getModel().setTranscription(newTranscription);
 
         table.setFilename("untitled.exb");
+        
+        table.status("New transcription is right part of old one");
+        
 
         table.linkPanelDialog.getLinkPanel().emptyContents();
         table.largeTextField.setText("");

@@ -40,8 +40,9 @@ public class PasteAction extends org.exmaralda.partitureditor.partiture.Abstract
                     Object data = trans.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
                     String text = (String)data;
                     editingComponent.replaceSelection(text);
-                } catch (java.awt.datatransfer.UnsupportedFlavorException ufe){
-                } catch (java.io.IOException ioe){
+                    table.status("Text pasted. ");
+                } catch (java.awt.datatransfer.UnsupportedFlavorException | java.io.IOException ex){
+                    System.out.println(ex.getLocalizedMessage());
                 }                
             }
         }

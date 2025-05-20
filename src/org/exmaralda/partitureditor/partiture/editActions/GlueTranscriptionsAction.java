@@ -60,6 +60,7 @@ public class GlueTranscriptionsAction extends org.exmaralda.partitureditor.parti
                     table.stratify(table.getModel().getTranscription());
                     table.resetData();
                     table.transcriptionChanged = true;
+                    table.status("Transcriptions glued");
                 } catch (JexmaraldaException je){
                     je.printStackTrace();
                     javax.swing.JOptionPane.showMessageDialog(table.parent, "Glue failed : " + je.getMessage());

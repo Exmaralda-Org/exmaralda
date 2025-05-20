@@ -20,6 +20,7 @@ public class SelectionToNewAction extends org.exmaralda.partitureditor.partiture
         super("Selection to new", icon, t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("selectionToNewAction!");
         table.commitEdit(true);
@@ -42,6 +43,8 @@ public class SelectionToNewAction extends org.exmaralda.partitureditor.partiture
 
         //table.getModel().setTranscription(newTranscription);
         table.setFilename("untitled.exb");
+        
+        table.status("New transcription is selection of old one");
         // added 09-06-2009
         table.anchorTimelineItemAction.actionPerformed(null);
         table.linkPanelDialog.getLinkPanel().emptyContents();

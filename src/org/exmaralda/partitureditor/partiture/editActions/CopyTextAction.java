@@ -96,5 +96,7 @@ public class CopyTextAction extends org.exmaralda.partitureditor.partiture.Abstr
         }
         java.awt.datatransfer.StringSelection ss = new java.awt.datatransfer.StringSelection(text);
         table.getToolkit().getSystemClipboard().setContents(ss,ss);
+        table.status("Text copied to clipboard");
+        
     }
 }

@@ -38,6 +38,8 @@ public class PasteStructureAction extends org.exmaralda.partitureditor.partiture
         }
         table.pasteStructureClipboard();
         
+
+        
     }
     
    

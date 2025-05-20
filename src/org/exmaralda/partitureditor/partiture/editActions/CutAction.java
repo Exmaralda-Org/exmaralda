@@ -42,6 +42,8 @@ public class CutAction extends org.exmaralda.partitureditor.partiture.AbstractTa
             String newText = oldText.substring(0,start) + oldText.substring(end);
             editingComponent.setText(newText);
             editingComponent.setCaretPosition(start);
+            table.status("Text cut");
+            
         }        
     }
     
