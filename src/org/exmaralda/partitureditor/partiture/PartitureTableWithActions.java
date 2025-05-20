@@ -1124,6 +1124,9 @@ public class PartitureTableWithActions extends PartitureTable
        
         getModel().pasteStructure(this.getStructureClipboard(), selectionStartRow, selectionEndRow, selectionStartCol, selectionEndCol);
         
+        status("Structure pasted. ");
+        
+        
         transcriptionChanged = true;
         
         int newSelectionEndCol = getModel().getTranscription().getBody().getCommonTimeline().lookupID(rememberSelectionEndColID) + 1;
@@ -3115,6 +3118,7 @@ public class PartitureTableWithActions extends PartitureTable
         undoHandler.undo(this);
         undoAction.setEnabled(!(undoHandler.isEmpty()));
         fireUndoChanged(undoHandler.getCurrentDescription());
+        status("Undone: " + undoHandler.getCurrentDescription());
     }
 
     public void clearUndo() {
