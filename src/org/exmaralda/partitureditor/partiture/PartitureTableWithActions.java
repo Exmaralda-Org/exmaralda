@@ -36,7 +36,6 @@ import org.exmaralda.partitureditor.partiture.legacyActions.ImportActionInel;
 import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheWordSegmentationAction;
 import org.exmaralda.partitureditor.partiture.legacyActions.StadtspracheTierSegmentationAction;
 import org.exmaralda.partitureditor.partiture.legacyActions.MakeSyllableStructureTierAction;
-import org.exmaralda.partitureditor.partiture.legacyActions.AppendSpaceAction;
 import org.exmaralda.partitureditor.partiture.legacyActions.ExSyncCleanupAction;
 import org.exmaralda.partitureditor.partiture.legacyActions.K8MysteryConverterAction;
 
@@ -320,6 +319,9 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction gotoAction;
     // #274
     public javax.swing.AbstractAction lowerUpperCaseAction;
+    // #525
+    public javax.swing.AbstractAction appendSpaceAction;
+    
 
     public javax.swing.AbstractAction exaktSearchAction;    
     
@@ -474,8 +476,6 @@ public class PartitureTableWithActions extends PartitureTable
     public javax.swing.AbstractAction k8MysteryConverterAction;
     public javax.swing.AbstractAction exSyncEventShrinkerAction;
     public javax.swing.AbstractAction exSyncCleanupAction;
-    /* SFB 632 */
-    public javax.swing.AbstractAction appendSpaceAction;
     
     /* SiN */
     public javax.swing.AbstractAction stadtspracheWordSegmentationAction;
@@ -653,6 +653,7 @@ public class PartitureTableWithActions extends PartitureTable
         gotoAction = new GotoAction(this);
         // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         lowerUpperCaseAction = new LowerUpperCaseAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/upper-and-lower-case-a-letter.png")));
+        appendSpaceAction = new AppendSpaceAction(this);
 
         exaktSearchAction = new ExaktSearchAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/exakt/exmaraldaSearch/swing/resources/exakt_small.png")));
 
@@ -797,7 +798,6 @@ public class PartitureTableWithActions extends PartitureTable
 
         syllableStructureAction = new MakeSyllableStructureTierAction(this);
         k8MysteryConverterAction = new K8MysteryConverterAction(this);
-        appendSpaceAction = new AppendSpaceAction(this);
         exSyncCleanupAction = new ExSyncCleanupAction(this);
         exSyncEventShrinkerAction = new ExSyncEventShrinkerAction(this, new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/ExSyncEventShrinker.gif")));
         

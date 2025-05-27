@@ -4,8 +4,9 @@
  * Created on 22. April 2004, 11:48
  */
 
-package org.exmaralda.partitureditor.partiture.legacyActions;
+package org.exmaralda.partitureditor.partiture.editActions;
 
+import javax.swing.JOptionPane;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
@@ -19,9 +20,10 @@ public class AppendSpaceAction extends org.exmaralda.partitureditor.partiture.Ab
     
     /** Creates a new instance of MakeSyllableStructureTierAction */
     public AppendSpaceAction(PartitureTableWithActions t) {
-        super("[SFB 632] B6: Append spaces", t);
+        super("Append spaces", t);
     }
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
         System.out.println("appendSpaceAction!");
         table.commitEdit(true);
@@ -31,15 +33,18 @@ public class AppendSpaceAction extends org.exmaralda.partitureditor.partiture.Ab
     
     private void appendSpace(){
         BasicTranscription bt = table.getModel().getTranscription();
+        int countReplacements = 0;
         for (int pos=0; pos<bt.getBody().getNumberOfTiers(); pos++){
             Tier tier = bt.getBody().getTierAt(pos);
             for (int i=0; i<tier.getNumberOfEvents(); i++){
                 Event event = tier.getEventAt(i);
                 if (!event.getDescription().endsWith(" ")){
                     event.setDescription(event.getDescription() + " ");
+                    countReplacements++;
                 }
             }
         }
+        JOptionPane.showMessageDialog(table, "<html><b>" + Integer.toString(countReplacements) + "</b> spaces appended at event boundaries.</html>");
         table.getModel().fireFormatReset();
     }
 

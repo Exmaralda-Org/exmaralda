@@ -30,7 +30,10 @@ public class EditMenu extends AbstractTableMenu {
     private final JMenuItem searchInEventsMenuItem;
     private final JMenuItem findNextMenuItem;
     private final JMenuItem replaceInEventsMenuItem;
+    
     private final JMenuItem lowerUpperCaseMenuItem;
+    private final JMenuItem appendSpacesMenuItem;
+    
 
     private final JMenuItem exaktSearchMenuItem;
 
@@ -96,18 +99,28 @@ public class EditMenu extends AbstractTableMenu {
         replaceInEventsMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
         replaceInEventsMenuItem.setToolTipText("Search and replace text in events");
         
-        lowerUpperCaseMenuItem = this.add(table.lowerUpperCaseAction);
-        replaceInEventsMenuItem.setToolTipText("Replace upper with lower case letters or vice versa");
-
-        add(table.gotoAction).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
-
         this.add(new javax.swing.JSeparator());
+        
         //-------------------------------------------------
 
         exaktSearchMenuItem = this.add(table.exaktSearchAction);
         exaktSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
         exaktSearchMenuItem.setToolTipText("Use EXAKT interface to do a search on this transcription");
                 
+        this.add(new javax.swing.JSeparator());
+        
+
+        lowerUpperCaseMenuItem = this.add(table.lowerUpperCaseAction);
+        lowerUpperCaseMenuItem.setToolTipText("Replace upper with lower case letters or vice versa");
+        
+        appendSpacesMenuItem = this.add(table.appendSpaceAction);
+        appendSpacesMenuItem.setToolTipText("Append a space at the end of each event where there is none");
+
+        this.add(new javax.swing.JSeparator());
+        
+
+        add(table.gotoAction).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
+
         this.add(new javax.swing.JSeparator());
         //-------------------------------------------------
         
