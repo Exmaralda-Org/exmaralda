@@ -100,9 +100,14 @@ public class AutoNormalisationAction extends org.exmaralda.partitureditor.partit
                 BasicTranscription bt = table.getModel().getTranscription();
                 Tier normalizeBasicTranscriptionTier = autoNormalizer.normalizeBasicTranscriptionTier(bt, tierID, segmentationAlgorithm, wordSegmentationName);
 
-                System.out.println(normalizeBasicTranscriptionTier.toXML());
+                //System.out.println(normalizeBasicTranscriptionTier.toXML());
                 int row = table.getModel().getTranscription().getBody().lookupID(tierID);
                 table.getModel().insertTier(normalizeBasicTranscriptionTier, row + 1);
+                if (profile.switchTiers){
+                    table.getModel().moveTierUp(row + 1);
+                    table.getModel().getTier(row).setType("t");
+                    table.getModel().getTranscription().getBody().getTierWithID(tierID).setType("a");                    
+                }
             }
 
             table.resetData();

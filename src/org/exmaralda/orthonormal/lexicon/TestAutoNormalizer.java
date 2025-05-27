@@ -16,7 +16,6 @@ import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
-import org.exmaralda.partitureditor.jexmaralda.segment.GATMinimalSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
 import org.jdom.JDOMException;
@@ -38,17 +37,19 @@ public class TestAutoNormalizer {
             Logger.getLogger(TestAutoNormalizer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    String in = "C:\\Users\\bernd\\Dropbox\\work\\2023_Maribor\\2025_04_30_NORMALISATION\\TEST_DEBUG_SCHEME.exb";
 
     private void doit() throws IOException, SAXException, JexmaraldaException, FSMException, JDOMException, LexiconException, ParserConfigurationException, TransformerException {
         XMLLexicon lexicon = new XMLLexicon();
-        //lexicon.read("/org/exmaralda/orthonormal/lexicon/GOS_Normalization_Lexicon_MAY_2025.xml");
-        lexicon.read("/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");
+        lexicon.read("/org/exmaralda/orthonormal/lexicon/GOS_Normalization_Lexicon_MAY_2025.xml");
+        //lexicon.read("/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");
         AutoNormalizer autoNormalizer = new AutoNormalizer(lexicon);
-        //BasicTranscription bt = new BasicTranscription("C:\\Users\\bernd\\Dropbox\\work\\2023_Maribor\\2025_04_30_NORMALISATION\\Rog-Art-J-Gvecg-P580041-pog.exb");
-        BasicTranscription bt = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2025_05_07_FOLK\\Hausaufgabe250502.flk"));
-        //AbstractSegmentation segmentationAlgo = new GenericSegmentation();
-        AbstractSegmentation segmentationAlgo = new cGATMinimalSegmentation();
-        Tier normalizeBasicTranscriptionTier = autoNormalizer.normalizeBasicTranscriptionTier(bt, "TIE1", segmentationAlgo, "SpeakerContribution_Word");
+        BasicTranscription bt = new BasicTranscription(in);
+        //BasicTranscription bt = EventListTranscriptionXMLReaderWriter.readXMLAsBasicTranscription(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2025_05_07_FOLK\\Hausaufgabe250502.flk"));
+        AbstractSegmentation segmentationAlgo = new GenericSegmentation();
+        //AbstractSegmentation segmentationAlgo = new cGATMinimalSegmentation();
+        Tier normalizeBasicTranscriptionTier = autoNormalizer.normalizeBasicTranscriptionTier(bt, "TIE2", segmentationAlgo, "SpeakerContribution_Word");
         System.out.println(normalizeBasicTranscriptionTier.toXML());
         
         

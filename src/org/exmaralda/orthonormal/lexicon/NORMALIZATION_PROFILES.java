@@ -19,10 +19,16 @@ public class NORMALIZATION_PROFILES {
     static final Map<String, NormalizationProfile> MAP = new HashMap<>();
     
     static {
-       NormalizationProfile cGATProfile = new NormalizationProfile ("German / FOLK", "cGAT_MINIMAL", "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");
+       NormalizationProfile cGATProfile = new NormalizationProfile (
+               "German / FOLK", "cGAT_MINIMAL", 
+               "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");
        PROFILES.add(cGATProfile);
        
-       NormalizationProfile gosProfile = new NormalizationProfile ("Slovene / GOS", "GENERIC", "/org/exmaralda/orthonormal/lexicon/GOS_Normalization_Lexicon_MAY_2025.xml");
+       NormalizationProfile gosProfile = new NormalizationProfile (
+               "Slovene / GOS", "GENERIC", 
+               "/org/exmaralda/orthonormal/lexicon/GOS_Normalization_Lexicon_MAY_2025.xml",
+               true
+       );
        PROFILES.add(gosProfile);
        
        

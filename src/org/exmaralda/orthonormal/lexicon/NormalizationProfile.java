@@ -13,6 +13,7 @@ public class NormalizationProfile {
     public String name;
     public String segmentationAlgorithmName;
     public String lexiconPath;
+    public boolean switchTiers = false;
 
     public NormalizationProfile(String name, String segmentationAlgorithmName, String lexiconPath) {
         this.name = name;
@@ -20,6 +21,12 @@ public class NormalizationProfile {
         this.lexiconPath = lexiconPath;
     }
     
+    public NormalizationProfile(String name, String segmentationAlgorithmName, String lexiconPath, boolean switchTiers) {
+        this.name = name;
+        this.segmentationAlgorithmName = segmentationAlgorithmName;
+        this.lexiconPath = lexiconPath;
+        this.switchTiers = switchTiers;
+    }
     
     
 }
