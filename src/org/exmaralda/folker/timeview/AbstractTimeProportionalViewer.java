@@ -94,6 +94,15 @@ public abstract class AbstractTimeProportionalViewer extends JComponent
         return tolerance;
     }
 
+    @Override
+    public Dimension getMinimumSize() {
+        Dimension preferred = super.getMinimumSize();
+        return new Dimension(preferred.width, Math.max(preferred.height, 100));
+    }
+    
+    
+    
+
     // 01-12-2023: new for #442
     public void setTolerance(double tolerance) {
         this.tolerance = tolerance;

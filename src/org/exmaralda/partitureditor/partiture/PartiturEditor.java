@@ -19,6 +19,7 @@ import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -32,6 +33,8 @@ import org.exmaralda.partitureditor.partiture.menus.*;
 import org.exmaralda.partitureditor.partiture.toolbars.*;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.common.helpers.Internationalizer;
+import org.exmaralda.folker.application.ApplicationControl;
+import org.exmaralda.partitureditor.sound.AudioProcessor;
 import org.exmaralda.pro.ProUtilities;
 import org.exmaralda.pro.swing.GetRegisteredDialog;
 import org.xml.sax.SAXException;
@@ -870,22 +873,45 @@ public class PartiturEditor extends javax.swing.JFrame
             } catch (IOException ex) {
                 //ex.printStackTrace();
                 System.out.println(ex.getLocalizedMessage());
-                String[] options = {"Edit recordings", "Ignore"};                
+                String[] options = 
+                    {"Edit recordings", "Continue with dummy audio", "Ignore"};                
                 // changed this for issue #220
+                // and changed it again for issue #522
                 Object messagePane = new RecordingErrorMessagePanel(rf, ex, getPreferencesNode());
                 int optionChosen = JOptionPane.showOptionDialog(this, messagePane , "Player: Problem opening Media",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,
                         new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/folker/tangoicons/tango-icon-theme-0.8.1/22x22/mimetypes/video-x-generic.png")),
                         options, "Edit recordings");
                 
-                if (optionChosen==JOptionPane.YES_OPTION){
-                    table.editRecordingsAction.actionPerformed(null);
-                } else {
-                    timelineViewer = new org.exmaralda.folker.timeview.TimelineViewer();
-                    partiturTimelinePanel.setTimelineViewer(timelineViewer);
-                    partiturTimelinePanel.setTimeViewVisible(false);
-                    menuBar.viewMenu.setProportionButtonsVisible(false);
-                    return false;
+                switch (optionChosen) {
+                    case JOptionPane.YES_OPTION:
+                        table.editRecordingsAction.actionPerformed(null);
+                        break;
+                    case JOptionPane.CANCEL_OPTION:
+                        timelineViewer = new org.exmaralda.folker.timeview.TimelineViewer();
+                        partiturTimelinePanel.setTimelineViewer(timelineViewer);
+                        partiturTimelinePanel.setTimeViewVisible(false);
+                        menuBar.viewMenu.setProportionButtonsVisible(false);
+                        return false;
+                    default:
+                        // new for #522 : Continue with dummy
+                        double timeInSeconds = Math.max(30,bt.getBody().getCommonTimeline().getMaxTime());
+                        int dummyDuration = (int) ((timeInSeconds) * 1.5);
+                        //dummyDuration = Math.min(dummyDuration, 3600);
+                        try {
+                            File dummyWAV = AudioProcessor.generateSilenceWAV(dummyDuration);
+                            String mediaPath = dummyWAV.getAbsolutePath();
+                            System.out.println("Media set to dummy file: " + mediaPath);
+                            Vector<String> referencedFiles = bt.getHead().getMetaInformation().getReferencedFiles();
+                            referencedFiles.add(0, mediaPath);
+                            bt.getHead().getMetaInformation().setReferencedFiles(referencedFiles);
+                            setupMedia();                            
+                        } catch (IOException ex1) {
+                            JOptionPane.showMessageDialog(rootPane, "Error creating dummy audio: \n" + ex1.getLocalizedMessage());
+                            Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                        
+                        break;
                 }
             }
         } else {

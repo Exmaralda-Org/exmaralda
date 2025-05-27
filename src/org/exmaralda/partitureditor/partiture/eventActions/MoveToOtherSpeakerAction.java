@@ -189,28 +189,10 @@ public class MoveToOtherSpeakerAction extends org.exmaralda.partitureditor.parti
             
             try {
                 table.getModel().moveToTier(sourceTier.getID(), targetTier.getID(), startTLI, endTLI);
-                
-                
-                /*Vector<Event> eventsBetween = sourceTier.getEventsIntersecting(table.getModel().getTranscription().getBody().getCommonTimeline(), startTLI, endTLI);
-                for (Event event : eventsBetween){
-                int startCol = table.getModel().getTranscription().getBody().getCommonTimeline().lookupID(event.getStart());
-                int endCol = table.getModel().getTranscription().getBody().getCommonTimeline().lookupID(event.getEnd());
-                targetTier.addEvent(event);
-                table.getModel().fireEventAdded(startPosition + j, startCol, endCol);
-                //sourceTier.removeEventAtStartPoint(event.getStart());
-                table.getModel().deleteEvent(table.selectionStartRow + j, startCol);
-                }*/
             } catch (JexmaraldaException ex) {
                 Logger.getLogger(MoveToOtherSpeakerAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        //table.getModel().fireAreaChanged(table.selectionStartCol, table.selectionEndCol);
-        
-        
-        
-        
-        
         
     }
     
