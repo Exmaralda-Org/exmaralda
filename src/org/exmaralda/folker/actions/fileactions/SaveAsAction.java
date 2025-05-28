@@ -45,7 +45,7 @@ public class SaveAsAction extends AbstractApplicationAction {
         imageLabel.setIcon(new Constants().getIcon(Constants.SMALL_FOLKER_ICON));
         fileChooser.setAccessory(imageLabel);                
         // changed 22-05-2021
-        if (ac.currentFilePath==null && ac.currentMediaPath==null){
+        if (ac.currentFilePath==null && ac.currentMediaPath!=null){
             int index = Math.max(0, ac.currentMediaPath.lastIndexOf(".wav"));
             File f = new File(ac.currentMediaPath.substring(0, index) + ".flk");
             fileChooser.setSelectedFile(f);

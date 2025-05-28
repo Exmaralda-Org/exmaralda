@@ -13,8 +13,6 @@ import org.exmaralda.folker.actions.AbstractApplicationAction;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.folker.application.ApplicationControl;

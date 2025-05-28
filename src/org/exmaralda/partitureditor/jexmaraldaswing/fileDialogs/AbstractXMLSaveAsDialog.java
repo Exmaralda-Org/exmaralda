@@ -39,7 +39,11 @@ public abstract class AbstractXMLSaveAsDialog extends javax.swing.JFileChooser {
      */
     public AbstractXMLSaveAsDialog(String startDirectory) {
         this();
-        setCurrentDirectory(new File(startDirectory));
+        File tryFile = new File(startDirectory);
+        setCurrentDirectory(tryFile);
+        if ((!tryFile.exists()) || tryFile.isFile()){
+            this.setSelectedFile(tryFile);
+        }
     }
 
     public AbstractXMLSaveAsDialog(String startDirectory, boolean showDTDPanel) {

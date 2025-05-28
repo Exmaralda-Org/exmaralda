@@ -6,6 +6,7 @@
 
 package org.exmaralda.partitureditor.partiture.fileActions;
 
+import java.io.File;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.SaveBasicTranscriptionAsDialog;
 import org.exmaralda.partitureditor.partiture.*;
 
@@ -31,7 +32,23 @@ public class SaveAsAction extends org.exmaralda.partitureditor.partiture.Abstrac
     }
     
     private void saveTranscription(){
-        SaveBasicTranscriptionAsDialog dialog = new SaveBasicTranscriptionAsDialog(table.homeDirectory, table.getModel().getTranscription(), table.getModel().getTierFormatTable());
+        // 28-05-2025 issue #527
+        String startDirectory = table.homeDirectory;
+        if (table.getFilename().equals("untitled.exb")){
+            String referencedFile = table.getModel().getTranscription().getHead().getMetaInformation().getReferencedFile();
+            if (referencedFile!=null && referencedFile.length()>0){
+                int index = new File(referencedFile).getName().lastIndexOf(".");
+                if (index<0){
+                    index = new File(referencedFile).getName().length();
+                }
+                File suggestedFile = new File(new File(referencedFile).getParentFile(), new File(referencedFile).getName().substring(0, index) + ".exb");
+                System.out.println("Suggested filename " + suggestedFile.getAbsolutePath());
+                if (suggestedFile.getParentFile().exists() && (!suggestedFile.exists())){
+                    startDirectory = suggestedFile.getAbsolutePath();
+                }
+            }
+        }
+        SaveBasicTranscriptionAsDialog dialog = new SaveBasicTranscriptionAsDialog(startDirectory, table.getModel().getTranscription(), table.getModel().getTierFormatTable());
         dialog.setSaveTierFormatTable(table.saveTierFormatTable);
         dialog.prettyPrint = table.prettyPrint;
         boolean success = dialog.saveTranscriptionAs(table.parent);
