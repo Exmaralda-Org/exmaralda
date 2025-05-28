@@ -36,6 +36,7 @@ public class MaskerProgressDialog extends javax.swing.JDialog implements MaskerL
         estimatePanel.setVisible(false);
         pack();
         timer = new javax.swing.Timer(100, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 progressBar.setValue(currentProgress);
                 progressBar.setString(progressString);
@@ -106,6 +107,7 @@ public class MaskerProgressDialog extends javax.swing.JDialog implements MaskerL
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 ProgressBarDialog dialog = new ProgressBarDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

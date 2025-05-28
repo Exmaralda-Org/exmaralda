@@ -196,6 +196,9 @@ public class AutoNormalizer {
             TimedSegment wordSegmentChain = (TimedSegment) wordSegmentation.get(i);
             TimedSegment eventSegmentChain = (TimedSegment) eventSegmentation.get(i);
             
+            fireProgress((double)i / (double)wordSegmentation.size(), 
+                    "Autonormalizing contribution " + Integer.toString(i+1) + " of " + Integer.toString(wordSegmentation.size()) + " in tier " + tierID);
+            
             List<Integer> newEventPoints = new ArrayList<>();
             newEventPoints.add(0);
             Vector events = eventSegmentChain.getAllSegmentsWithName("e");

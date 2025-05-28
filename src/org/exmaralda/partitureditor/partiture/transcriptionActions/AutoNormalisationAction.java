@@ -7,7 +7,6 @@
 package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,19 +19,10 @@ import org.exmaralda.partitureditor.fsm.FSMException;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
-import org.exmaralda.partitureditor.jexmaralda.TierFormat;
-import org.exmaralda.partitureditor.jexmaralda.TierFormatTable;
-import org.exmaralda.partitureditor.jexmaralda.errorChecker.EditErrorsDialog;
 import org.exmaralda.partitureditor.jexmaralda.segment.AbstractSegmentation;
-import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaraldaswing.AddNormalisationTiersDialog;
-import org.exmaralda.partitureditor.jexmaraldaswing.AutoAnnotationDialog;
-import org.exmaralda.partitureditor.jexmaraldaswing.TierSelectionDialog;
 import org.exmaralda.partitureditor.partiture.*;
-import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
 import org.xml.sax.SAXException;
 
 
