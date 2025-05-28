@@ -42,6 +42,7 @@ import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.io.XMLReaderWriter;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
 import org.jdom.Attribute;
 import org.jdom.Content;
@@ -63,6 +64,7 @@ public class TEIConverter extends AbstractConverter {
     public static String EXMARaLDA2EVENT_TOKEN_ISO_TEI_XSL = "/org/exmaralda/tei/xml/exmaralda2isotei_eventToken.xsl";
     
     public static String FOLKER2ISO_TEI_XSL = "/org/exmaralda/tei/xml/folker2isotei.xsl";
+    public static String INEL_SEGMENTED_ISO_TEI_XSL = "/org/exmaralda/tei/xml/exmaraldaEXS2ISOTEI_InelEventBased.xsl";
     
     /* 
         Converting from ISO/TEI to EXB is done in several steps:
@@ -99,6 +101,7 @@ public class TEIConverter extends AbstractConverter {
     public static final int CGAT_MINIMAL_ISO_METHOD = 8;
     public static final int ISO_EVENT_TOKEN_METHOD = 9;
     public static final int ISO_GENERIC_METHOD = 10;
+    public static final int ISO_INEL_METHOD = 11;
 
     
     String language = "en";
@@ -147,6 +150,25 @@ public class TEIConverter extends AbstractConverter {
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
     }
     
+
+    // *********************
+    // INEL EVENT BASED
+    // *********************
+
+    public void writeINELEventBasedISOTEIToFile(BasicTranscription bt, String path)  throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerConfigurationException, TransformerException, FSMException {
+        BasicTranscription copyBT = bt.makeCopy();
+        copyBT.normalize();              
+        InelEventBasedSegmentation segmentation = new InelEventBasedSegmentation();
+        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);        
+        System.out.println("[TEIConverter] Segmented transcription created");
+        StylesheetFactory sf = new StylesheetFactory(true);
+        String result = sf.applyInternalStylesheetToString(TEIConverter.INEL_SEGMENTED_ISO_TEI_XSL, st.toXML());
+        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        setDocLanguage(teiDoc, language);     
+        IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+    }
+
+
     // *********************
     // HIAT
     // *********************

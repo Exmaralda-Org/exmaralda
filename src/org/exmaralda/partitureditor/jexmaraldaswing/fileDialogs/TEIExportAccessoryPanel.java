@@ -45,6 +45,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         if (noSegmentationISORadioButton.isSelected()) return TEIConverter.ISO_NON_SEGMENTED_METHOD;
         if (modenaMethodRadioButton.isSelected()) return TEIConverter.MODENA_METHOD;
         if (genericISORadioButton.isSelected()) return TEIConverter.ISO_GENERIC_METHOD;
+        if (inelSegmentationRadioButton1.isSelected()) return TEIConverter.ISO_INEL_METHOD;
         return TEIConverter.GENERIC_METHOD;
     }
 
@@ -72,6 +73,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         hiatNewRadioButton = new javax.swing.JRadioButton();
         hiatISORadioButton = new javax.swing.JRadioButton();
         cGatSegmentationRadioButton = new javax.swing.JRadioButton();
+        inelSegmentationRadioButton1 = new javax.swing.JRadioButton();
         wordIDsCheckBox = new javax.swing.JCheckBox();
         languagePanel = new javax.swing.JPanel();
         languageLabel = new javax.swing.JLabel();
@@ -212,6 +214,17 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         });
         add(cGatSegmentationRadioButton);
 
+        buttonGroup1.add(inelSegmentationRadioButton1);
+        inelSegmentationRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        inelSegmentationRadioButton1.setForeground(new java.awt.Color(0, 0, 102));
+        inelSegmentationRadioButton1.setText("ISO - INEL segmentation");
+        inelSegmentationRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inelSegmentationRadioButton1ActionPerformed(evt);
+            }
+        });
+        add(inelSegmentationRadioButton1);
+
         wordIDsCheckBox.setSelected(true);
         wordIDsCheckBox.setText("Generate Word IDs");
         wordIDsCheckBox.setEnabled(false);
@@ -292,6 +305,10 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_languageTextFieldActionPerformed
 
+    private void inelSegmentationRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inelSegmentationRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inelSegmentationRadioButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton azmRadioButton;
@@ -306,6 +323,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton hiatOldRadioButton;
     private javax.swing.JRadioButton hiatSegmentationRadioButton;
     private javax.swing.JPanel hiatVariantsPanel;
+    private javax.swing.JRadioButton inelSegmentationRadioButton1;
     private javax.swing.JRadioButton isoEventTokenRadioButton;
     private javax.swing.JLabel languageLabel;
     private javax.swing.JPanel languagePanel;
