@@ -91,6 +91,9 @@
         <xsl:copy>
             <xsl:attribute name="from" select="concat($XPOINTER_HASH, $FROM_TARGET)"/>
             <xsl:attribute name="to" select="concat($XPOINTER_HASH, $TO_TARGET)"/>
+            <xsl:if test="@type">
+                <xsl:attribute name="type" select="@type"/>                
+            </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
