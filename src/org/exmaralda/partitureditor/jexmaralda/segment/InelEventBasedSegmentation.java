@@ -176,7 +176,9 @@ public class InelEventBasedSegmentation extends AbstractSegmentation {
                 targetSegmentChain.setStart(segmentChain.getStart());
                 targetSegmentChain.setEnd(segmentChain.getEnd());
                 targetSegmentChain.setName("sc");
-                targetSegmentChain.setID("sc_INEL_" + Integer.toString(j+1));
+                //targetSegmentChain.setID("sc_INEL_" + Integer.toString(j+1));
+                // 2025-07-04 changed for #517
+                targetSegmentChain.setID("sc_INEL_" + segmentedTier.getID()+ "_" + Integer.toString(j+1) );
                 targetSegmentation.addSegment(targetSegmentChain);
                 
                 TimedSegment currentUtterance = new TimedSegment();
