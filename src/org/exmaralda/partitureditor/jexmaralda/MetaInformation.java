@@ -256,14 +256,18 @@ public class MetaInformation extends Object {
                     && !relativeToWhat.startsWith("https://")){
                 if (method==OLD_METHOD){
                     if (new File(referencedFile).isAbsolute()) continue;
-                        URI uri2 = new File(relativeToWhat).getParentFile().toURI();
-                        System.out.println("Resolving " + referencedFile + " relative to " + relativeToWhat);
-                        String modRelPath = referencedFile.replaceAll(" ", "%20");
+                    URI uri2 = new File(relativeToWhat).getParentFile().toURI();
+                    System.out.println("Resolving " + referencedFile + " relative to " + relativeToWhat);
+                    String modRelPath = referencedFile.replaceAll(" ", "%20");
+                    try {
                         URI absoluteURI = uri2.resolve(modRelPath);
                         //URI absoluteURI = uri2.resolve(referencedFile);
                         referencedFile = new File(absoluteURI).getAbsolutePath();
                         referencedFiles.setElementAt(referencedFile, count);
                         returnValue= true;
+                    } catch (IllegalArgumentException ex){
+                        // Now what??
+                    }
                 }  else if (method==NEW_METHOD){
                         referencedFile = org.exmaralda.common.helpers.RelativePath.resolveRelativePath(referencedFile, relativeToWhat);
                         referencedFiles.setElementAt(referencedFile, count);
