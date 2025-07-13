@@ -13,6 +13,7 @@ package org.exmaralda.orthonormal.gui;
 
 import javax.swing.JFileChooser;
 import org.exmaralda.folker.utilities.FOLKERInternationalizer;
+import org.exmaralda.orthonormal.lexicon.XMLLexicon;
 import org.exmaralda.orthonormal.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 
@@ -31,6 +32,15 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         String lexicon_type = PreferencesUtilities.getProperty("lexicon-type", "xml");
         String LEXICON_PATH = PreferencesUtilities.getProperty("lexicon-path", "");
+        String INTERNAL_LEXICON_PATH = PreferencesUtilities.getProperty("internal-lexicon-path", XMLLexicon.DEFAULT_LEXICON);
+        
+        if (INTERNAL_LEXICON_PATH.contains("GOS_")) {
+            internalComboBox.setSelectedIndex(1);
+        } else if (INTERNAL_LEXICON_PATH.contains("KOMPAS_")) {
+            internalComboBox.setSelectedIndex(2);
+        } else {
+            internalComboBox.setSelectedIndex(0);            
+        }
         
         String tageset_type = PreferencesUtilities.getProperty("tagset-type", "xml");
         String TAGSET_PATH = PreferencesUtilities.getProperty("tagset-path", "");
@@ -111,6 +121,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
+        internalParametersPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        internalComboBox = new javax.swing.JComboBox<>();
         tagsetPanel = new javax.swing.JPanel();
         tagsetTypePanel = new javax.swing.JPanel();
         internalPOSRadioButton = new javax.swing.JRadioButton();
@@ -238,6 +251,19 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         rdbParamatersPanel.add(jPanel4);
 
         lexiconPanel.add(rdbParamatersPanel, java.awt.BorderLayout.EAST);
+
+        internalParametersPanel.setLayout(new javax.swing.BoxLayout(internalParametersPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel8.setText("Lexicon: ");
+        internalParametersPanel.add(jLabel8);
+
+        internalComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "German / FOLK", "Slovene / GOS", "Swiss German / KompAS", " ", " " }));
+        internalComboBox.setMaximumSize(new java.awt.Dimension(300, 22));
+        internalComboBox.setMinimumSize(new java.awt.Dimension(300, 22));
+        internalComboBox.setPreferredSize(new java.awt.Dimension(300, 22));
+        internalParametersPanel.add(internalComboBox);
+
+        lexiconPanel.add(internalParametersPanel, java.awt.BorderLayout.CENTER);
 
         mainTabbedPane.addTab("Lexikon", lexiconPanel);
 
@@ -431,6 +457,13 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         PreferencesUtilities.setProperty("lexicon-type", type);
         PreferencesUtilities.setProperty("tagset-type", posType);
         PreferencesUtilities.setProperty("lexicon-path", xmlFileTextField.getText());
+        int selectedInternalIndex = internalComboBox.getSelectedIndex();
+        switch (selectedInternalIndex){
+            case 0 : PreferencesUtilities.setProperty("internal-lexicon-path", XMLLexicon.DEFAULT_LEXICON); break;
+            case 1 : PreferencesUtilities.setProperty("internal-lexicon-path", "/org/exmaralda/orthonormal/lexicon/GOS_Normalization_Lexicon_MAY_2025.xml"); break;
+            case 2 : PreferencesUtilities.setProperty("internal-lexicon-path", "/org/exmaralda/orthonormal/lexicon/KOMPAS_Normalization_Lexicon_JULY_2025.xml"); break;
+            default : PreferencesUtilities.setProperty("internal-lexicon-path", XMLLexicon.DEFAULT_LEXICON);             
+        }
         PreferencesUtilities.setProperty("tagset-path", xmlPOSFileTextField.getText());
         PreferencesUtilities.setProperty("rdb-url", this.urlTextField.getText());
         PreferencesUtilities.setProperty("rdb-username", this.usernameTextField.getText());
@@ -483,6 +516,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_defaultAudioBrowseButtonActionPerformed
 
     private void switchViews(){
+        internalParametersPanel.setVisible(internalRadioButton.isSelected());
         xmlParamatersPanel.setVisible(xmlRadioButton.isSelected());
         rdbParamatersPanel.setVisible(rdbRadioButton.isSelected());
         xmlPOSParametersPanel.setVisible(xmlPOSRadioButton.isSelected());
@@ -518,7 +552,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField defaultAudioTextField;
     private javax.swing.JCheckBox enablePrettyPrintCheckBox;
     private javax.swing.JPanel enablePrettyPrintPanel;
+    private javax.swing.JComboBox<String> internalComboBox;
     private javax.swing.JRadioButton internalPOSRadioButton;
+    private javax.swing.JPanel internalParametersPanel;
     private javax.swing.JRadioButton internalRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -527,6 +563,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

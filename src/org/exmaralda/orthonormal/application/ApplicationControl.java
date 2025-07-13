@@ -209,7 +209,8 @@ public final class ApplicationControl implements  ListSelectionListener,
                 // built-in XML lexicon
                 lexicon = new XMLLexicon();
                 try {
-                    lexicon.read(null);
+                    String INTERNAL_LEXICON_PATH = PreferencesUtilities.getProperty("internal-lexicon-path", "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");                    
+                    lexicon.read(INTERNAL_LEXICON_PATH);
                     success=true;
                     status("Internal lexicon read successfully.");
                 } catch (IOException ex) {

@@ -90,6 +90,8 @@ public class MoveToOtherSpeakerAction extends org.exmaralda.partitureditor.parti
                 Logger.getLogger(MoveToOtherSpeakerAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        System.out.println("candidateStarters: " + String.join(" / ", candidateStarters));
         
         int heightOfSelection = table.selectionEndRow - table.selectionStartRow + 1;
         List<String> candidateStartersConsolidated = new ArrayList<>();
@@ -99,6 +101,7 @@ public class MoveToOtherSpeakerAction extends org.exmaralda.partitureditor.parti
             for (int j=0; j<heightOfSelection; j++){
                 Tier sourceTier = table.getModel().getTier(table.selectionStartRow + j);                
                 if (startPosition + j > table.getModel().getNumRows() -1){
+                    System.out.println("Reason 1: " + sourceTier.getID());
                     doneBreak = true;
                     break;
                 }
@@ -108,6 +111,7 @@ public class MoveToOtherSpeakerAction extends org.exmaralda.partitureditor.parti
                         (!targetTier.getCategory().equals(sourceTier.getCategory())) ||
                         (!targetTier.getType().equals(sourceTier.getType()))
                    ){
+                    System.out.println("Reason 2: " + sourceTier.getID());
                     doneBreak = true;
                     break;                    
                 }
@@ -126,6 +130,8 @@ public class MoveToOtherSpeakerAction extends org.exmaralda.partitureditor.parti
         String startTLI = table.getModel().getTimelineItem(table.selectionStartCol).getID();
         String endTLI = table.getModel().getTimelineItem(table.selectionEndCol + 1).getID();
             
+        System.out.println("candidateStartersConsolidated: " + String.join(" / ", candidateStartersConsolidated));
+        
         
         for (String tierID : candidateStartersConsolidated){
             int startPosition = table.getModel().getTranscription().getBody().lookupID(tierID);
@@ -149,6 +155,7 @@ public class MoveToOtherSpeakerAction extends org.exmaralda.partitureditor.parti
             return;
         }
         
+        System.out.println("candidateStartersConsolidated2: " + String.join(" / ", candidateStartersConsolidated2));
         
         List<String> speakerIDs = new ArrayList<>();
         for (String tierID : candidateStartersConsolidated2){

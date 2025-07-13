@@ -7,6 +7,7 @@ package org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs;
 
 import java.beans.PropertyChangeEvent;
 import java.io.*;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 /**
  *
  * @author thomas
@@ -54,6 +55,8 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
         //setFileFilter(TEIFileFilter);
         setMultiSelectionEnabled(false);
         addPropertyChangeListener("fileFilterChanged", this);
+        
+        
     }
 
     @Override
@@ -71,6 +74,19 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
             setAccessory(null);
         }
         revalidate();
+        
+        File selectedFile = this.getSelectedFile();
+        if (selectedFile != null) {
+            ParameterFileFilter newFilter = (ParameterFileFilter) getFileFilter();
+            String extension = newFilter.getSuffix();
+            String newExt = extension;
+            String name = selectedFile.getName();
+            String baseName = name.contains(".")
+                    ? name.substring(0, name.lastIndexOf('.'))
+                    : name;
+            File newFile = new File(selectedFile.getParentFile(), baseName + "." + newExt);
+            setSelectedFile(newFile);
+        }        
 
     }
 

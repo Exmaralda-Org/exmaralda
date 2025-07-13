@@ -21,7 +21,7 @@ public class NORMALIZATION_PROFILES {
     static {
        NormalizationProfile cGATProfile = new NormalizationProfile (
                "German / FOLK", "cGAT_MINIMAL", 
-               "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");
+               XMLLexicon.DEFAULT_LEXICON);
        PROFILES.add(cGATProfile);
        
        NormalizationProfile gosProfile = new NormalizationProfile (
@@ -32,6 +32,12 @@ public class NORMALIZATION_PROFILES {
        PROFILES.add(gosProfile);
        
        
+       NormalizationProfile kompasProfile = new NormalizationProfile (
+               "Swiss German / KompAS", "cGAT_MINIMAL", 
+               "/org/exmaralda/orthonormal/lexicon/KOMPAS_Normalization_Lexicon_JULY_2025.xml"
+       );
+       PROFILES.add(kompasProfile);
+
        for (NormalizationProfile profile : PROFILES){
            MAP.put(profile.name, profile);
        }

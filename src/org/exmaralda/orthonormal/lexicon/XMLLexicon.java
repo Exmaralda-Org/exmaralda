@@ -40,9 +40,11 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2022.xml";
     //String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_JULY_2023.xml";
     
-    String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml";
+    public static String DEFAULT_LEXICON = "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml";
     String CAPITAL_ONLY_LIST = "/org/exmaralda/orthonormal/lexicon/dereko_capital_only.txt";
     HashSet<String> capitalOnly = new HashSet<>(240000, 1.0f);  
+    
+    boolean hasCapitalOnly = false;
 
     
     @Override
@@ -69,12 +71,16 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
             try {
                 String internalPath = (String)source;
                 d = new IOUtilities().readDocumentFromResource(internalPath);
+                if (internalPath.contains("FOLK_") || internalPath.contains("KOMPAS_")){
+                    hasCapitalOnly = true;                    
+                }
             } catch (JDOMException ex) {
               throw new IOException(ex);
             }
         } else {
             try {
                 d = new IOUtilities().readDocumentFromResource(DEFAULT_LEXICON);
+                hasCapitalOnly = true;
             } catch (JDOMException ex) {
                 throw new IOException(ex);
             }
@@ -85,12 +91,13 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
             map.put(info.form, info);            
         }
 
-        
-        InputStream in = getClass().getResourceAsStream(CAPITAL_ONLY_LIST);
-        BufferedReader input = new BufferedReader(new InputStreamReader(in));        
-        String nextLine;
-        while ((nextLine = input.readLine()) != null){
-            capitalOnly.add(nextLine);
+        if (hasCapitalOnly){
+            InputStream in = getClass().getResourceAsStream(CAPITAL_ONLY_LIST);
+            BufferedReader input = new BufferedReader(new InputStreamReader(in));        
+            String nextLine;
+            while ((nextLine = input.readLine()) != null){
+                capitalOnly.add(nextLine);
+            }
         }
         
     }
@@ -129,7 +136,7 @@ public class XMLLexicon extends AbstractNormalizationLexicon {
 
     @Override
     public boolean hasCapitalInformation() {
-        return true;
+        return this.hasCapitalOnly;
     }
 
     @Override
