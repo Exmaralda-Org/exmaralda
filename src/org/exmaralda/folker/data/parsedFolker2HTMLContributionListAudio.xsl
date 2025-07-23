@@ -338,7 +338,7 @@
                 <b><xsl:text>[</xsl:text></b>
             </xsl:if>
             
-            <!--- this is to switch spaces at the end of brackted overlaps -->
+            <!--- this is to switch spaces at the end of bracketed overlaps -->
             <xsl:choose>
                 <xsl:when test="count(//segment[@end-reference=current()/@end-reference])>1">
                     <xsl:if test="ends-with(text(),' ')">

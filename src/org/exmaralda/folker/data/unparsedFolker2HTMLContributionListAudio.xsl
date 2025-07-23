@@ -72,6 +72,7 @@
     </xsl:template>
 
     <xsl:template match="contribution">
+        <xsl:variable name="THIS_SPEAKER_REFERENCE" select="@speaker-reference"/>
         <tr>
             <td class="time">
                 <xsl:text>[</xsl:text>
@@ -99,8 +100,9 @@
                 <!-- <xsl:value-of select="ancestor::contribution/@speaker-reference"/> -->
                 <!-- #403 Making Transkripts more readable (having speaker IDs only when the speaker changes) -->
                 <!-- <xsl:value-of select="@speaker-reference"/> --> <!-- this was the code before replaced by the following lines -->
+                <!-- 23-07-2025, changed this for issue #493, it is working now, but I don't really understand why -->
                 <xsl:choose>
-                    <xsl:when test="position() = 1 or preceding-sibling::contribution[1]/@speaker-reference != @speaker-reference"> <!-- boundary condition... first contribution (position() = 1) should always have a speaker ID displayed; this comes out of sync when lines (contributions) occur without speaker reference at all. In that case, the next linw will not receive a speaker ID, as the when-condition is not met. -->
+                    <xsl:when test="not(preceding-sibling::contribution) or not(preceding-sibling::contribution[1]/@speaker-reference=$THIS_SPEAKER_REFERENCE)"> <!-- boundary condition... first contribution (position() = 1) should always have a speaker ID displayed; this comes out of sync when lines (contributions) occur without speaker reference at all. In that case, the next linw will not receive a speaker ID, as the when-condition is not met. -->
                         <xsl:value-of select="@speaker-reference"/>
                     </xsl:when>
                     <xsl:otherwise>
