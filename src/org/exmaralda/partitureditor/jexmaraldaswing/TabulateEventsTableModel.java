@@ -116,5 +116,39 @@ public class TabulateEventsTableModel extends AbstractTableModel {
         mainTier.getEventAt(rowIndex).setDescription(newDescription);
         this.fireTableCellUpdated(rowIndex, columnIndex);
     }
+
+    String toCSV() {
+        // Fields with embedded commas or double-quote characters must be quoted.
+        //1997,Ford,E350,"Super, luxurious truck"
+        //Each of the embedded double-quote characters must be represented by a pair of double-quote characters.
+        //1997,Ford,E350,"Super, ""luxurious"" truck"
+        String allCSV = "";
+        String headerRow = "";
+        for (int col=0; col<getColumnCount(); col++){
+            String value = getColumnName(col);
+            String escapedValue = value.replace("\"", "\"\"");
+            String quotedEscapedValue = "\"" + escapedValue + "\"";
+            headerRow+=quotedEscapedValue;
+            if (col<getColumnCount()-1){
+                headerRow+=",";
+            }
+        }
+        allCSV+=headerRow+"\n";
+        for (int row=0; row<getRowCount(); row++){
+            String currentRow = "";
+            for (int col=0; col<getColumnCount(); col++){
+                Object o = getValueAt(row, col);
+                String value = o.toString();
+                String escapedValue = value.replace("\"", "\"\"");
+                String quotedEscapedValue = "\"" + escapedValue + "\"";
+                currentRow+=quotedEscapedValue;
+                if (col<getColumnCount()-1){
+                    currentRow+=",";
+                }
+            }
+            allCSV+=currentRow + "\n";            
+        }
+        return allCSV;
+    }
     
 }

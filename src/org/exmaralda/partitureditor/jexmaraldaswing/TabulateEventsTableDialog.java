@@ -7,22 +7,24 @@ package org.exmaralda.partitureditor.jexmaraldaswing;
 
 import com.klg.jclass.table.JCTableDataEvent;
 import com.klg.jclass.table.JCTableDataListener;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import org.exmaralda.folker.utilities.PreferencesUtilities;
 import org.exmaralda.partitureditor.jexmaralda.BasicTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Event;
 import org.exmaralda.partitureditor.jexmaralda.Tier;
+import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFilter;
 import org.exmaralda.partitureditor.partiture.AbstractTranscriptionTableModel;
+import org.exmaralda.partitureditor.partiture.PartiturEditor;
 import org.exmaralda.partitureditor.search.EventSearchResult;
 import org.exmaralda.partitureditor.search.SearchResultListener;
 import org.exmaralda.partitureditor.sound.Playable;
@@ -70,14 +72,14 @@ public class TabulateEventsTableDialog extends javax.swing.JDialog implements JC
         eventTable.getColumnModel().getColumn(1).setPreferredWidth(100);
         eventTable.getColumnModel().getColumn(2).setPreferredWidth(100);
         eventTable.getColumnModel().getColumn(3).setPreferredWidth(60);
-        eventTable.getColumnModel().getColumn(4).setMinWidth(250);
+        eventTable.getColumnModel().getColumn(4).setPreferredWidth(250);
         for (int i=0; i<dependentTiers.length; i++){
-            eventTable.getColumnModel().getColumn(5 + i).setMinWidth(250);            
+            eventTable.getColumnModel().getColumn(5 + i).setPreferredWidth(250);            
         }
         eventTable.setRowHeight(18);
         displayNameLabel.setText(mainTier.getDisplayName());
-        Dimension d = new Dimension(eventListPanel.getPreferredSize().width + dependentTiers.length * 250, eventListPanel.getPreferredSize().height);
-        eventListPanel.setPreferredSize(d);
+        //Dimension d = new Dimension(eventListPanel.getPreferredSize().width + dependentTiers.length * 250, eventListPanel.getPreferredSize().height);
+        //eventListPanel.setPreferredSize(d);
         pack();
         
     }
@@ -123,14 +125,17 @@ public class TabulateEventsTableDialog extends javax.swing.JDialog implements JC
         topPanel = new javax.swing.JPanel();
         displayNameLabel = new javax.swing.JLabel();
         bottomPanel = new javax.swing.JPanel();
+        exportButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tabulate events");
 
+        eventListPanel.setMaximumSize(new java.awt.Dimension(1200, 800));
         eventListPanel.setPreferredSize(new java.awt.Dimension(820, 400));
         eventListPanel.setLayout(new java.awt.BorderLayout());
 
+        eventTableScrollPane.setMaximumSize(new java.awt.Dimension(1200, 800));
         eventTableScrollPane.setPreferredSize(new java.awt.Dimension(620, 400));
 
         eventTable.setAutoCreateRowSorter(true);
@@ -146,7 +151,7 @@ public class TabulateEventsTableDialog extends javax.swing.JDialog implements JC
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        eventTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        eventTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         eventTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         eventTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,6 +168,15 @@ public class TabulateEventsTableDialog extends javax.swing.JDialog implements JC
         topPanel.add(displayNameLabel);
 
         getContentPane().add(topPanel, java.awt.BorderLayout.PAGE_START);
+
+        exportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exmaralda/partitureditor/partiture/Icons/file-csv-solid-full.png"))); // NOI18N
+        exportButton.setText("Export...");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
+        bottomPanel.add(exportButton);
 
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +209,67 @@ public class TabulateEventsTableDialog extends javax.swing.JDialog implements JC
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         dispose();
     }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        PartiturEditor pe = (PartiturEditor)getParent();
+        ParameterFileFilter csvFilter = new ParameterFileFilter("csv", "Comma separated values, UTF-8 (*.csv)");
+        fileChooser.setFileFilter(csvFilter);
+        fileChooser.setDialogTitle("Export tabulated events as CSV file");
+        String userNode = pe.getPreferencesNode();
+        java.util.prefs.Preferences settings = java.util.prefs.Preferences.userRoot().node(userNode);
+        String startDirectory = settings.get("LastExportDirectory", PreferencesUtilities.getProperty("workingDirectory", ""));
+        File startDirectoryFile = new File(startDirectory);
+        if (startDirectoryFile.isDirectory()){
+            fileChooser.setCurrentDirectory(startDirectoryFile);
+        } else {
+            fileChooser.setCurrentDirectory(startDirectoryFile.getParentFile());            
+        }
+        
+        int approved = fileChooser.showSaveDialog(this);
+        if (approved==JFileChooser.APPROVE_OPTION){
+            FileOutputStream fos = null;
+            File selectedFile = fileChooser.getSelectedFile();
+            settings.put("LastExportDirectory", selectedFile.getAbsolutePath());        
+            String filename = selectedFile.getAbsolutePath();
+
+            //check whether or not the selected file has an extension
+            if (!selectedFile.getName().contains(".")){
+                filename+=".csv";
+            }
+
+            File exportFile = new File(filename);
+            
+            try {
+                if (exportFile.exists()){
+                    int option = JOptionPane.showConfirmDialog(pe, "File " + exportFile.getAbsolutePath() + " exists.\nOverwrite?");
+                    pe.getPartitur().status("CSV saving canceled.");
+                    if (option!=JOptionPane.YES_OPTION) return;
+                }   String csv = tableModel.toCSV();
+                System.out.println("Started writing CSV document..." + exportFile.getAbsolutePath());
+                fos = new FileOutputStream(exportFile);
+                fos.write("\uFEFF".getBytes("UTF-8")); // BOM BOM
+                fos.write(csv.getBytes("UTF-8"));
+                fos.close();
+                System.out.println("CSV document written.");
+                pe.getPartitur().status("CSV file " + exportFile.getAbsolutePath() + " written. ");
+            } catch (IOException ex) {
+                Logger.getLogger(TabulateEventsTableDialog.class.getName()).log(Level.SEVERE, null, ex);
+                String message = "File " + exportFile.getAbsolutePath() + "\ncould not be written. Error message:\n" + ex.getLocalizedMessage();
+                JOptionPane.showMessageDialog(pe, message);
+                pe.getPartitur().status("Error writing CSV.");
+            } finally {
+                try {
+                    fos.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(TabulateEventsTableDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    String message = "File " + exportFile.getAbsolutePath() + "\ncould not be written. Error message:\n" + ex.getLocalizedMessage();
+                    JOptionPane.showMessageDialog(pe, message);
+                    pe.getPartitur().status("Error writing CSV.");
+                }
+            }
+        }
+    }//GEN-LAST:event_exportButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +324,7 @@ public class TabulateEventsTableDialog extends javax.swing.JDialog implements JC
     private javax.swing.JPanel eventListPanel;
     private javax.swing.JTable eventTable;
     private javax.swing.JScrollPane eventTableScrollPane;
+    private javax.swing.JButton exportButton;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
 
