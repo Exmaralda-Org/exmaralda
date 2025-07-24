@@ -57,7 +57,12 @@ public class InsertWhisperResultDialog extends javax.swing.JDialog {
     
     public HashMap<String, Object> getParameters() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("TIER-ID", ((Tier)tierSelectionPanel.tierList.getSelectedValue()).getID());
+        Object selectedValue = tierSelectionPanel.tierList.getSelectedValue();
+        if (selectedValue!=null){
+            result.put("TIER-ID", ((Tier)selectedValue).getID());
+        } else {
+            result.put("TIER-ID", null);
+        }
         result.put("TEXT", recognizedTextArea.getText());
         return result;
     }

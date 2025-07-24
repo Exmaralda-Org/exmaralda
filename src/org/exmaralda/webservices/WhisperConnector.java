@@ -5,6 +5,8 @@
  */
 package org.exmaralda.webservices;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -81,14 +83,13 @@ public class WhisperConnector {
     
     public String callWhisperSimple(File audioFile) throws IOException, URISyntaxException {
         String result = callWhisper(audioFile, "whisper-1", "", "json", 0.2, "en");    
-        // {"text":"Here we go, here's my voice message. So why do you need that?"}
-        return result.substring(9, result.length() -2);            
+        return result;
     }
     
     public String callWhisperRegular(File audioFile, String language, String prompt) throws IOException, URISyntaxException {
         String result = callWhisper(audioFile, "whisper-1", prompt, "json", 0.2, language);    
         // {"text":"Here we go, here's my voice message. So why do you need that?"}
-        return result.substring(9, result.length() -2);            
+        return result;
     }
 
 
@@ -151,12 +152,17 @@ public class WhisperConnector {
         int statusCode = statusLine.getStatusCode();
         
         if (statusCode==200 && result != null) {
-            String resultAsString = EntityUtils.toString(result, "utf-8");
+            // there have been recent changes to the Whisper/OpenAI REST (speech-to-text/transcription) service, and it's now returning JSON in its responses. 
+            String resultAsString = EntityUtils.toString(result, "utf-8");            
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(resultAsString);
+            String text = jsonNode.get("text").asText();
+    
             EntityUtils.consume(result);
             httpClient.close();
             
             
-            return resultAsString;
+            return text;
         } else {
             // something went wrong, throw an exception
             System.out.println(EntityUtils.toString(result, "utf-8"));
@@ -171,7 +177,7 @@ public class WhisperConnector {
         WhisperConnector whisperConnector = new WhisperConnector("");
         //File audioFile = new File("C:\\Users\\bernd\\Dropbox\\work\\2023_CMC_MANNHEIM\\AUDIO-2023-09-11-19-43-34.mp3");
         //File audioFile = new File("C:\\Users\\bernd\\Dropbox\\work\\2023_CMC_MANNHEIM\\TEST.wav");
-        File audioFile = new File("C:\\Users\\bernd\\Dropbox\\work\\2023_CMC_MANNHEIM\\AUDIO-2023-09-11-19-42-53.m4a");
+        File audioFile = new File("C:\\Users\\bernd\\Dropbox\\work\\ZZZ_ERLEDIGT\\2023_CMC_MANNHEIM\\AUDIO-2023-09-11-19-42-53.m4a");
         
         if (audioFile.exists()){
             //String result = whisperConnector.callWhisper(audioFile, "whisper-1", "", "json", 0.2, "en");            

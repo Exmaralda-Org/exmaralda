@@ -541,7 +541,7 @@ public class COMAKWICTableSorter extends AbstractTableModel {
         @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Color color = c == null ? Color.GRAY : c.getBackground(); 
-            color = Color.BLACK;
+            color = Color.WHITE;
             // In a compound sort, make each succesive triangle 20% 
             // smaller than the previous one. 
             int dx = (int)(size/2*Math.pow(0.8, priority));
