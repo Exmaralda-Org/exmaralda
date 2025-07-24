@@ -21,6 +21,8 @@ public class TimeStringFormatter {
     
     static String REGEX = "(\\d{0,3}:)?(\\d{1,2})(\\.\\d{1,3})?";
     
+    static final int ONE_HOUR_IN_MILISECONDS = 60 * 60 * 1000;
+    
     /** Creates a new instance of TimeStringFormatter */
     public TimeStringFormatter() {
     }
@@ -115,13 +117,22 @@ public class TimeStringFormatter {
     }
 
     public static String formatSeconds(int seconds){
-        
-        int minutes = seconds/60;
         String formatted = "";
+        
+        // new 24-07-2025, issue #460
+        int hours = seconds/3600;
+        if (hours>0){
+            formatted += Integer.toString(hours) + ":";
+        }
+        int remainingSeconds = seconds - 3600*hours;
+        System.out.println("Remaining seconds " + remainingSeconds);
+        
+        
+        int minutes = remainingSeconds/60;
         if (minutes<10) formatted+="0";
         formatted+=Integer.toString(minutes) + ":";
         
-        int remainingSeconds = seconds - 60*minutes;
+        remainingSeconds = remainingSeconds - 60*minutes;
         if (remainingSeconds<10) formatted+="0";
         formatted+=Integer.toString(remainingSeconds);
         
@@ -193,7 +204,10 @@ public class TimeStringFormatter {
     }
 
     public static String formatMiliseconds(double miliseconds, int digitsAfterComma){
-        return formatMiliseconds(false, miliseconds, digitsAfterComma);
+        boolean doHours = (miliseconds >= TimeStringFormatter.ONE_HOUR_IN_MILISECONDS);
+        // 24-07-2025, changed for #460
+        //return formatMiliseconds(false, miliseconds, digitsAfterComma);
+        return formatMiliseconds(doHours, miliseconds, digitsAfterComma);
     }
     
     public static String formatMiliseconds(boolean doHours, double miliseconds, int digitsAfterComma){
@@ -223,7 +237,7 @@ public class TimeStringFormatter {
     public static void main(String[] args){
         try {
             //System.out.println(formatMiliseconds(true, 60*60*1000, 0));
-            System.out.println(parseString("25:43.65") / 1000.0);
+            System.out.println(formatSeconds(4872));
         } catch (Exception ex) {
             Logger.getLogger(TimeStringFormatter.class.getName()).log(Level.SEVERE, null, ex);
         }
