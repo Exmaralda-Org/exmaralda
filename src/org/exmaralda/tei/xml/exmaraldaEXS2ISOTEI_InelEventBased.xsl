@@ -43,6 +43,8 @@
     <xsl:template match="ts[@n='sc']">
         <tei:annotationBlock>
             <xsl:variable name="SPEAKER_ID" select="ancestor::segmented-tier/@speaker"/>
+            <xsl:variable name="START_ID" select="@s"/>
+            <xsl:variable name="END_ID" select="@e"/>
             <xsl:variable name="START_POSITION" select="exmaralda:timelinePosition(@s)"/>
             <xsl:variable name="END_POSITION" select="exmaralda:timelinePosition(@e)"/>
             <xsl:attribute name="xml:id" select="@id"/>
@@ -69,6 +71,16 @@
                     </tei:spanGrp>
                 </xsl:if>
             </xsl:for-each>
+            
+            <tei:spanGrp type="SpeakerContribution_Event">
+                <xsl:for-each select="ancestor::segmented-tier[1]/segmentation[@name='SpeakerContribution_Event']/ts[@s=$START_ID and @e=$END_ID]/ts">
+                    <tei:span>
+                        <xsl:attribute name="from" select="@s"/>
+                        <xsl:attribute name="to" select="@e"/>
+                        <xsl:value-of select="text()"/>
+                    </tei:span>
+                </xsl:for-each>
+            </tei:spanGrp>
             
         </tei:annotationBlock>
     </xsl:template>
