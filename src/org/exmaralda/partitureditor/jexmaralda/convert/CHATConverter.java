@@ -92,8 +92,8 @@ public class CHATConverter extends Vector<String> {
 
     private void generateSpeakerTable() throws JexmaraldaException {
         System.out.println("[CHATConverter] Generating speakertable");
-        speakers = new HashSet<String>();
-        HashSet<String> abbs = new HashSet<String>();
+        speakers = new HashSet<>();
+        HashSet<String> abbs = new HashSet<>();
         String participantsLine = null;
         for (String line : this){
             if (line.startsWith("@Participants")){
@@ -114,13 +114,14 @@ public class CHATConverter extends Vector<String> {
                 speaker.setAbbreviation(info[0]);
                 if (info.length>1){
                     speaker.getUDSpeakerInformation().setAttribute("CHAT:Full Name", info[1]);
-                    if ((abbs.contains(info[1]) && (!abbs.contains(info[0])))){
+                    // don't really understand this part...
+                    /*if ((abbs.contains(info[1]) && (!abbs.contains(info[0])))){
                         abbs.add(info[0]);
                         speaker.setAbbreviation(info[0]);
                     } else {
                         abbs.add(info[1]);
                         speaker.setAbbreviation(info[1]);
-                    }
+                    }*/
                 }
                 if (info.length>2){
                     speaker.getUDSpeakerInformation().setAttribute("CHAT:Role", info[2]);
@@ -201,7 +202,7 @@ public class CHATConverter extends Vector<String> {
                 }
                 break; // look no further: we found a recording!
             }
-            if (line.indexOf("%snd:")>=0){
+            if (line.contains("%snd:")){
                 String sndLine = line;
                 //*MAR:	he would like nothing ? %snd:"boys68a1"_0_26331
                 String snd = sndLine.substring(sndLine.indexOf("%snd:")+5);
@@ -235,7 +236,7 @@ public class CHATConverter extends Vector<String> {
 
     private void generateTiers() throws JexmaraldaException{
         // collect the dependent tier categories
-        Vector<String> dependentCategories = new Vector<String>();
+        Vector<String> dependentCategories = new Vector<>();
         for (String line: this){
             if (line.startsWith("%")){
                 String category = line.substring(1, line.indexOf(":"));
@@ -326,7 +327,7 @@ public class CHATConverter extends Vector<String> {
                 }
 
                 if (tl.lookupID(start)>=tl.lookupID(end)){
-                    throw new JexmaraldaException("Illegal temoral structure at line " + Integer.toString(pos) + ": " + line);
+                    throw new JexmaraldaException("Illegal temporal structure at line " + Integer.toString(pos) + ": " + line);
                 }
 
                 // added 22-11-2010: don't add events with identical start and end
@@ -387,7 +388,7 @@ public class CHATConverter extends Vector<String> {
             }
 
             // replace all left white space with ordinary space
-            StringBuffer clean = new StringBuffer();
+            StringBuilder clean = new StringBuilder();
             for (int pos2=0; pos2<line.length(); pos2++){
                 char c = line.charAt(pos2);
                 if (Character.isWhitespace(c)){
@@ -399,6 +400,7 @@ public class CHATConverter extends Vector<String> {
             }
             line = clean.toString();
 
+            // a pause line?
             if (CA && line.matches("^\\s*\\(\\d{1,2}\\.\\d{0,2}\\)\\s*")){
                 line = "*xPx: " + line;
             }
@@ -436,7 +438,7 @@ public class CHATConverter extends Vector<String> {
                         if (thisSpeaker.equals(previousSpeaker)){
                             String combinedLine = elementAt(pos-1) + line.substring(i2+1);
                             // replace all left white space with ordinary space
-                            StringBuffer clean = new StringBuffer();
+                            StringBuilder clean = new StringBuilder();
                             for (int pos2=0; pos2<combinedLine.length(); pos2++){
                                 char c = combinedLine.charAt(pos2);
                                 if (Character.isWhitespace(c)){
@@ -448,14 +450,41 @@ public class CHATConverter extends Vector<String> {
                             }
                             combinedLine = clean.toString();
                             setElementAt(elementAt(pos-1) + line, pos-1);
-                            removeElementAt(pos);
+                            removeElementAt(pos);                            
                             pos--;
                         }
-                }
-                }
-
+                    }
+                } 
             }
         }
+        
+        // glue lines together that were broken up because of line wrapping
+        if (CA){
+            for (int pos=1; pos<size(); pos++){
+                String line = elementAt(pos);
+                if (line.startsWith(" ")){
+                    System.out.println(line);
+                    /* new 09-08-2025 for GCSAE -- cases like this:
+                        *M:	(1.9) 0_1965
+                                Andy's starting to rub off on you 1965_3403
+                                (.) 3403_3679
+                                if you keep going 3679_4644
+                        *A:	why, hhh: 4644_6399
+                                what cause he's old⇗ 6399_7584                    
+                    */
+                    int j=pos-1;
+                    while (j>=0 && !(elementAt(j).startsWith("*"))){
+                        j--;
+                    }
+                    if (elementAt(j).startsWith("*")){
+                        int i1 = elementAt(j).indexOf(":");
+                        String speakerAbb = elementAt(j).substring(0, i1+1);
+                        setElementAt(speakerAbb + elementAt(pos), pos);
+                    }
+                }                
+            }
+        }
+        
         System.out.println("[CHATConverter] Document normalized");
     }
 
