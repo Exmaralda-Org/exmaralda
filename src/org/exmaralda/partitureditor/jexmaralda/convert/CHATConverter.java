@@ -463,7 +463,7 @@ public class CHATConverter extends Vector<String> {
             for (int pos=1; pos<size(); pos++){
                 String line = elementAt(pos);
                 if (line.startsWith(" ")){
-                    System.out.println(line);
+                    //System.out.println(line);
                     /* new 09-08-2025 for GCSAE -- cases like this:
                         *M:	(1.9) 0_1965
                                 Andy's starting to rub off on you 1965_3403
