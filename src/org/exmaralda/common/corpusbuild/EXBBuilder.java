@@ -24,6 +24,7 @@ import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.exmaralda.partitureditor.jexmaralda.Speaker;
 import org.exmaralda.partitureditor.jexmaralda.Speakertable;
 import org.exmaralda.partitureditor.jexmaralda.UDInformationHashtable;
+import org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.jdom.Document;
@@ -43,6 +44,7 @@ public class EXBBuilder {
     File topDirectory;
     String uniqueSpeakerDistinction = "descendant::abbreviation";
     String segmentation = "default";
+    String customFSM = null;
     
     Set<String> deleteMetaKeys = new HashSet<>();
     Map<String, String> corpusMetadata = new HashMap<>();
@@ -55,6 +57,14 @@ public class EXBBuilder {
         this.segmentation = segmentation;
     }
     
+    public EXBBuilder(String corpusName, File topDirectory, String uniqueSpeakerDistinction, String segmentation, String customFSM){
+        this.corpusName = corpusName;
+        this.topDirectory = topDirectory;
+        this.uniqueSpeakerDistinction = uniqueSpeakerDistinction;
+        this.segmentation = segmentation;
+        this.customFSM = customFSM;
+    }
+
     public void setDeleteMetaKeys(Set<String> deleteMetaKeys){
         this.deleteMetaKeys = deleteMetaKeys;
     }
@@ -92,11 +102,24 @@ public class EXBBuilder {
                     break;
                 case "GENERIC" :
                     GenericSegmentation genericSegmentation = new GenericSegmentation();
+                    if (customFSM!=null){
+                        genericSegmentation = new GenericSegmentation(customFSM);
+                    } 
                     exs = genericSegmentation.BasicToSegmented(exb);
                     break;
                 case "HIAT" :
                     HIATSegmentation hiatSegmentation = new HIATSegmentation();
+                    if (customFSM!=null){
+                        hiatSegmentation = new HIATSegmentation(customFSM);
+                    } 
                     exs = hiatSegmentation.BasicToSegmented(exb);
+                    break;
+                case "CHAT_MINIMAL" :     // issue #532
+                    CHATMinimalSegmentation chatSegmentation = new CHATMinimalSegmentation();
+                    if (customFSM!=null){
+                        chatSegmentation = new CHATMinimalSegmentation(customFSM);
+                    } 
+                    exs = chatSegmentation.BasicToSegmented(exb);
                     break;
                 default :     
                     exs = exb.toSegmentedTranscription();
@@ -104,7 +127,7 @@ public class EXBBuilder {
             }            
             File exsOut = new File(exbFile.getParentFile(), exbFile.getName().replaceAll("\\.exb", "_s.exs"));
             exs.writeXMLToFile(exsOut.getAbsolutePath(), "none");
-            System.out.println("[EXBBuilder]: Segmented " + exbFile.getAbsolutePath() + " --> " + exsOut.getName());
+            System.out.println("[EXBBuilder]: Segmented " + exbFile.getAbsolutePath() + " --> " + exsOut.getName() + " (" + segmentation + ")");
         }
     }
 

@@ -46,14 +46,20 @@ public class SegmentTranscriptions extends AbstractBasicTranscriptionProcessor {
         }
     }
 
+    @Override
     public void processTranscription(BasicTranscription bt) {
         try {
             SegmentedTranscription st;
             if (customFSM.equals("NO_SEGMENTATION")){
                 st = bt.toSegmentedTranscription();
             } else if (customFSM.equals("CHAT_MINIMAL")){
-                org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation cs
-                        = new org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation();
+                // issue #532
+                org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation cs;
+                if (customFSM.length()>0){
+                    cs = new org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation(customFSM);
+                } else {
+                    cs = new org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation();
+                }
                 st = cs.BasicToSegmented(bt);
             } else {
                 org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation hs;

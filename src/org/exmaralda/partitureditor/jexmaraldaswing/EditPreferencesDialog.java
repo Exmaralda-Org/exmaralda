@@ -96,7 +96,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[43];
+        String[] result = new String[44];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -151,6 +151,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         // 01-12-2023: new for #442
         result[42] = ((Double) timelineToleranceSpinner.getValue()).toString();
+        
+        // 10-08-2025: new for #532
+        result[43] = chatMinimalTextField.getText();
+        
         
         
         return result;        
@@ -211,26 +215,30 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         changeHIATUtteranceList2HTMLButton = new javax.swing.JButton();
         segmentationPanel = new javax.swing.JPanel();
         fsmPanel = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        hiatPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         hiatTextField = new javax.swing.JTextField();
         changeHIATButton = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
+        gatPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         gatTextField = new javax.swing.JTextField();
         changeGATButton = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        chatTextField = new javax.swing.JTextField();
-        changeCHATButton = new javax.swing.JButton();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        genericTextField = new javax.swing.JTextField();
-        changeGenericButton = new javax.swing.JButton();
-        jPanel17 = new javax.swing.JPanel();
+        cGatMinimalPanel = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         cGATMinimalTextField = new javax.swing.JTextField();
         changecGATMinimalButton = new javax.swing.JButton();
+        chatPanel = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        chatTextField = new javax.swing.JTextField();
+        changeCHATButton = new javax.swing.JButton();
+        chatMinimalPanel = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        chatMinimalTextField = new javax.swing.JTextField();
+        changeCHATMinimalButton = new javax.swing.JButton();
+        genericPanel = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        genericTextField = new javax.swing.JTextField();
+        changeGenericButton = new javax.swing.JButton();
         preferredSegmentationPanel = new javax.swing.JPanel();
         preferredSegmentationComboBox = new javax.swing.JComboBox();
         pauseNotationPanel = new javax.swing.JPanel();
@@ -555,19 +563,19 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         fsmPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Finite State Machines"));
         fsmPanel.setLayout(new javax.swing.BoxLayout(fsmPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        hiatPanel.setLayout(new javax.swing.BoxLayout(hiatPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel12.setText("HIAT:");
         jLabel12.setMaximumSize(new java.awt.Dimension(150, 20));
         jLabel12.setMinimumSize(new java.awt.Dimension(150, 20));
         jLabel12.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel6.add(jLabel12);
+        hiatPanel.add(jLabel12);
 
         hiatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
         hiatTextField.setMinimumSize(new java.awt.Dimension(180, 20));
         hiatTextField.setPreferredSize(new java.awt.Dimension(180, 20));
-        jPanel6.add(hiatTextField);
+        hiatPanel.add(hiatTextField);
 
         changeHIATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeHIATButton.setText("Change...");
@@ -579,23 +587,23 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 changeHIATButtonActionPerformed(evt);
             }
         });
-        jPanel6.add(changeHIATButton);
+        hiatPanel.add(changeHIATButton);
 
-        fsmPanel.add(jPanel6);
+        fsmPanel.add(hiatPanel);
 
-        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+        gatPanel.setLayout(new javax.swing.BoxLayout(gatPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel14.setText("GAT:");
         jLabel14.setMaximumSize(new java.awt.Dimension(150, 20));
         jLabel14.setMinimumSize(new java.awt.Dimension(150, 20));
         jLabel14.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel8.add(jLabel14);
+        gatPanel.add(jLabel14);
 
         gatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
         gatTextField.setMinimumSize(new java.awt.Dimension(180, 20));
         gatTextField.setPreferredSize(new java.awt.Dimension(180, 20));
-        jPanel8.add(gatTextField);
+        gatPanel.add(gatTextField);
 
         changeGATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changeGATButton.setText("Change...");
@@ -607,79 +615,23 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 changeGATButtonActionPerformed(evt);
             }
         });
-        jPanel8.add(changeGATButton);
+        gatPanel.add(changeGATButton);
 
-        fsmPanel.add(jPanel8);
+        fsmPanel.add(gatPanel);
 
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel15.setText("CHAT: ");
-        jLabel15.setMaximumSize(new java.awt.Dimension(150, 20));
-        jLabel15.setMinimumSize(new java.awt.Dimension(150, 20));
-        jLabel15.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel9.add(jLabel15);
-
-        chatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
-        chatTextField.setMinimumSize(new java.awt.Dimension(180, 20));
-        chatTextField.setPreferredSize(new java.awt.Dimension(180, 20));
-        jPanel9.add(chatTextField);
-
-        changeCHATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        changeCHATButton.setText("Change...");
-        changeCHATButton.setMaximumSize(new java.awt.Dimension(100, 30));
-        changeCHATButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeCHATButton.setPreferredSize(new java.awt.Dimension(100, 30));
-        changeCHATButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeCHATButtonActionPerformed(evt);
-            }
-        });
-        jPanel9.add(changeCHATButton);
-
-        fsmPanel.add(jPanel9);
-
-        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel21.setText("Generic: ");
-        jLabel21.setMaximumSize(new java.awt.Dimension(150, 20));
-        jLabel21.setMinimumSize(new java.awt.Dimension(150, 20));
-        jLabel21.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel15.add(jLabel21);
-
-        genericTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
-        genericTextField.setMinimumSize(new java.awt.Dimension(180, 20));
-        genericTextField.setPreferredSize(new java.awt.Dimension(180, 20));
-        jPanel15.add(genericTextField);
-
-        changeGenericButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        changeGenericButton.setText("Change...");
-        changeGenericButton.setMaximumSize(new java.awt.Dimension(100, 30));
-        changeGenericButton.setMinimumSize(new java.awt.Dimension(80, 20));
-        changeGenericButton.setPreferredSize(new java.awt.Dimension(100, 30));
-        changeGenericButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeGenericButtonActionPerformed(evt);
-            }
-        });
-        jPanel15.add(changeGenericButton);
-
-        fsmPanel.add(jPanel15);
-
-        jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.LINE_AXIS));
+        cGatMinimalPanel.setLayout(new javax.swing.BoxLayout(cGatMinimalPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel22.setText("cGAT Minimal: ");
         jLabel22.setMaximumSize(new java.awt.Dimension(150, 20));
         jLabel22.setMinimumSize(new java.awt.Dimension(150, 20));
         jLabel22.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel17.add(jLabel22);
+        cGatMinimalPanel.add(jLabel22);
 
         cGATMinimalTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
         cGATMinimalTextField.setMinimumSize(new java.awt.Dimension(180, 20));
         cGATMinimalTextField.setPreferredSize(new java.awt.Dimension(180, 20));
-        jPanel17.add(cGATMinimalTextField);
+        cGatMinimalPanel.add(cGATMinimalTextField);
 
         changecGATMinimalButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         changecGATMinimalButton.setText("Change...");
@@ -691,15 +643,99 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
                 changecGATMinimalButtonActionPerformed(evt);
             }
         });
-        jPanel17.add(changecGATMinimalButton);
+        cGatMinimalPanel.add(changecGATMinimalButton);
 
-        fsmPanel.add(jPanel17);
+        fsmPanel.add(cGatMinimalPanel);
+
+        chatPanel.setLayout(new javax.swing.BoxLayout(chatPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel15.setText("CHAT: ");
+        jLabel15.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel15.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel15.setPreferredSize(new java.awt.Dimension(150, 20));
+        chatPanel.add(jLabel15);
+
+        chatTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        chatTextField.setMinimumSize(new java.awt.Dimension(180, 20));
+        chatTextField.setPreferredSize(new java.awt.Dimension(180, 20));
+        chatPanel.add(chatTextField);
+
+        changeCHATButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        changeCHATButton.setText("Change...");
+        changeCHATButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeCHATButton.setMinimumSize(new java.awt.Dimension(80, 20));
+        changeCHATButton.setPreferredSize(new java.awt.Dimension(100, 30));
+        changeCHATButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeCHATButtonActionPerformed(evt);
+            }
+        });
+        chatPanel.add(changeCHATButton);
+
+        fsmPanel.add(chatPanel);
+
+        chatMinimalPanel.setLayout(new javax.swing.BoxLayout(chatMinimalPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel23.setText("CHAT Minimal: ");
+        jLabel23.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel23.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel23.setPreferredSize(new java.awt.Dimension(150, 20));
+        chatMinimalPanel.add(jLabel23);
+
+        chatMinimalTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        chatMinimalTextField.setMinimumSize(new java.awt.Dimension(180, 20));
+        chatMinimalTextField.setPreferredSize(new java.awt.Dimension(180, 20));
+        chatMinimalPanel.add(chatMinimalTextField);
+
+        changeCHATMinimalButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        changeCHATMinimalButton.setText("Change...");
+        changeCHATMinimalButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeCHATMinimalButton.setMinimumSize(new java.awt.Dimension(80, 20));
+        changeCHATMinimalButton.setPreferredSize(new java.awt.Dimension(100, 30));
+        changeCHATMinimalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeCHATMinimalButtonActionPerformed(evt);
+            }
+        });
+        chatMinimalPanel.add(changeCHATMinimalButton);
+
+        fsmPanel.add(chatMinimalPanel);
+
+        genericPanel.setLayout(new javax.swing.BoxLayout(genericPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel21.setText("Generic: ");
+        jLabel21.setMaximumSize(new java.awt.Dimension(150, 20));
+        jLabel21.setMinimumSize(new java.awt.Dimension(150, 20));
+        jLabel21.setPreferredSize(new java.awt.Dimension(150, 20));
+        genericPanel.add(jLabel21);
+
+        genericTextField.setMaximumSize(new java.awt.Dimension(2147483647, 30));
+        genericTextField.setMinimumSize(new java.awt.Dimension(180, 20));
+        genericTextField.setPreferredSize(new java.awt.Dimension(180, 20));
+        genericPanel.add(genericTextField);
+
+        changeGenericButton.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        changeGenericButton.setText("Change...");
+        changeGenericButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        changeGenericButton.setMinimumSize(new java.awt.Dimension(80, 20));
+        changeGenericButton.setPreferredSize(new java.awt.Dimension(100, 30));
+        changeGenericButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeGenericButtonActionPerformed(evt);
+            }
+        });
+        genericPanel.add(changeGenericButton);
+
+        fsmPanel.add(genericPanel);
 
         segmentationPanel.add(fsmPanel, java.awt.BorderLayout.CENTER);
 
         preferredSegmentationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Preferred Segmentation"));
 
-        preferredSegmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "GENERIC", "HIAT", "DIDA", "GAT", "cGAT_MINIMAL", "CHAT", "CHAT_MINIMAL", "IPA", "INEL_EVENT_BASED", " " }));
+        preferredSegmentationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "GENERIC", "HIAT", "DIDA", "GAT", "cGAT_MINIMAL", "CHAT", "CHAT_MINIMAL", "IPA", "INEL_EVENT_BASED", "" }));
         preferredSegmentationComboBox.setMinimumSize(new java.awt.Dimension(100, 18));
         preferredSegmentationComboBox.setPreferredSize(new java.awt.Dimension(130, 27));
         preferredSegmentationComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -1300,6 +1336,14 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
             cGATMinimalTextField.setText(dialog.getSelectedFile().getPath());
         }                                
     }//GEN-LAST:event_changecGATMinimalButtonActionPerformed
+
+    private void changeCHATMinimalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeCHATMinimalButtonActionPerformed
+       AbstractXMLOpenDialog dialog = new AbstractXMLOpenDialog(cGATMinimalTextField.getText());
+        dialog.setFileFilter(new ParameterFileFilter("xml", "Finite State Machine (*.xml)"));
+        if (dialog.showDialog(this,"Choose")==javax.swing.JFileChooser.APPROVE_OPTION){
+            chatMinimalTextField.setText(dialog.getSelectedFile().getPath());
+        }                                
+    }//GEN-LAST:event_changeCHATMinimalButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1327,8 +1371,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton browseForAutoSavePathButton;
     private javax.swing.JTextField cGATMinimalTextField;
+    private javax.swing.JPanel cGatMinimalPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton changeCHATButton;
+    private javax.swing.JButton changeCHATMinimalButton;
     private javax.swing.JButton changeFreeStylesheetVisualisationButton;
     private javax.swing.JButton changeGATButton;
     private javax.swing.JButton changeGeneralPurposeFontButton;
@@ -1341,6 +1387,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton changeTierFontButton;
     private javax.swing.JButton changeTranscription2FormattableButton;
     private javax.swing.JButton changecGATMinimalButton;
+    private javax.swing.JPanel chatMinimalPanel;
+    private javax.swing.JTextField chatMinimalTextField;
+    private javax.swing.JPanel chatPanel;
     private javax.swing.JTextField chatTextField;
     private javax.swing.JRadioButton cocoaQuicktimePlayerRadioButton;
     private javax.swing.JRadioButton decimalCommaRadioButton;
@@ -1358,11 +1407,14 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel fontsPanel;
     private javax.swing.JTextField freeStylesheetVisualisationTextField;
     private javax.swing.JPanel fsmPanel;
+    private javax.swing.JPanel gatPanel;
     private javax.swing.JTextField gatTextField;
     private javax.swing.JLabel generalPurposeFontLabel;
     private javax.swing.JPanel generalPurposeFontPanel;
+    private javax.swing.JPanel genericPanel;
     private javax.swing.JTextField genericTextField;
     private javax.swing.JTextField head2HTMLTextField;
+    private javax.swing.JPanel hiatPanel;
     private javax.swing.JTextField hiatTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1379,6 +1431,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -1392,17 +1445,12 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton javaFXPlayerRadioButton;
     private javax.swing.JRadioButton jdsPlayerRadioButton;
     private javax.swing.JRadioButton jmfPlayerRadioButton;
@@ -1539,12 +1587,14 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         genericTextField.setText(values[38]);
         cGATMinimalTextField.setText(values[39]);
+        // issue #532
+        chatMinimalTextField.setText(values[43]);
         
         // issue #433
         rearrangeTranscriptionControlsCheckBox.setSelected(Boolean.parseBoolean(values[41]));
         
         // issue #442
-        timelineToleranceSpinner.setValue(Double.parseDouble(values[42]));
+        timelineToleranceSpinner.setValue(Double.valueOf(values[42]));
 
         show();
         return changed;

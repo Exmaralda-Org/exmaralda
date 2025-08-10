@@ -187,6 +187,8 @@ public class PartitureTableWithActions extends PartitureTable
     public String gatFSM = "";
     /** path to the FSM used for CHAT segmentation (optional) */
     public String chatFSM = "";
+    /** path to the FSM used for CHAT minimal segmentation (optional) */
+    public String chatMinimalFSM = "";
     /** path to the FSM used for IPA segmentation (optional) */
     public String ipaFSM = "";
     /** path to the FSM used for generic segmentation (optional) */
@@ -560,6 +562,7 @@ public class PartitureTableWithActions extends PartitureTable
         if (preferredSegmentation.equals("HIAT")) return hiatFSM;
         if (preferredSegmentation.equals("GAT")) return gatFSM;
         if (preferredSegmentation.equals("CHAT")) return chatFSM;
+        if (preferredSegmentation.equals("CHAT_MINIMAL")) return chatMinimalFSM;
         if (preferredSegmentation.equals("DIDA")) return didaFSM;
         if (preferredSegmentation.equals("GENERIC")) return genericFSM;
         if (preferredSegmentation.equals("cGAT_MINIMAL")) return cGATMinimalFSM;
@@ -580,7 +583,7 @@ public class PartitureTableWithActions extends PartitureTable
         if (preferredSegmentation.equals("CHAT"))
             return new org.exmaralda.partitureditor.jexmaralda.segment.CHATSegmentation(chatFSM);
         if (preferredSegmentation.equals("CHAT_MINIMAL"))
-            return new org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation();
+            return new org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation(chatMinimalFSM);
         if (preferredSegmentation.equals("DIDA"))
             return new org.exmaralda.partitureditor.jexmaralda.segment.DIDASegmentation(didaFSM);
         if (preferredSegmentation.equals("IPA"))
@@ -2230,6 +2233,7 @@ public class PartitureTableWithActions extends PartitureTable
         didaFSM = settings.get("DIDA-FSM","");
         gatFSM = settings.get("GAT-FSM","");
         chatFSM = settings.get("CHAT-FSM","");
+        chatMinimalFSM = settings.get("CHAT-MINIMAL-FSM","");
         ipaFSM = settings.get("IPA-FSM","");
         genericFSM = settings.get("GENERIC-FSM","");
         cGATMinimalFSM = settings.get("CGAT-MINIMAL-FSM","");
@@ -2336,6 +2340,7 @@ public class PartitureTableWithActions extends PartitureTable
         settings.put("DIDA-FSM", this.didaFSM);
         settings.put("GAT-FSM", this.gatFSM);
         settings.put("CHAT-FSM", this.chatFSM);
+        settings.put("CHAT-MINIMAL-FSM", this.chatMinimalFSM);
         settings.put("IPA-FSM", this.ipaFSM);
         settings.put("GENERIC-FSM", this.genericFSM);
         settings.put("CGAT-MINIMAL-FSM", this.cGATMinimalFSM);

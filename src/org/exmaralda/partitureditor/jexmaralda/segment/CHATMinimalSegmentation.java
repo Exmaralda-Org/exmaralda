@@ -29,6 +29,7 @@ public class CHATMinimalSegmentation extends AbstractSegmentation {
         super(ptef);
     }
 
+    @Override
     public SegmentedTranscription BasicToSegmented(BasicTranscription bt) throws SAXException, FSMException {
          SegmentedTranscription st = bt.toSegmentedTranscription();
          FSMSaxReader sr = new FSMSaxReader();
@@ -88,6 +89,7 @@ public class CHATMinimalSegmentation extends AbstractSegmentation {
     }
 
 
+    @Override
     public Vector getSegmentationErrors(BasicTranscription bt) throws SAXException {
          Vector result = new Vector();
          SegmentedTranscription st = bt.toSegmentedTranscription();
