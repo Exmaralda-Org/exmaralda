@@ -43,8 +43,28 @@
 		</xsl:element>
 	</xsl:template>
 
+	<xsl:template match="*:ts[@n='CHAT:u']">
+		<xsl:element name="seg" xmlns="http://www.tei-c.org/ns/1.0">
+			<xsl:attribute name="type">utterance</xsl:attribute>
+			<xsl:attribute name="subtype">
+				<xsl:variable name="utteranceEndSymbol">
+					<xsl:value-of select="child::nts[not(text()=' ')][last()]"/>
+				</xsl:variable>
+				<xsl:choose>
+					<xsl:when test="$utteranceEndSymbol='?'">interrogative</xsl:when>
+					<xsl:when test="$utteranceEndSymbol='!'">exclamative</xsl:when>
+					<xsl:when test="$utteranceEndSymbol='.'">declarative</xsl:when>
+					<xsl:when test="$utteranceEndSymbol='&#x2026;'">interrupted</xsl:when>
+					<xsl:when test="$utteranceEndSymbol='&#x02D9;'">modeless</xsl:when>
+					<xsl:otherwise>not_classified</xsl:otherwise>
+				</xsl:choose>				
+			</xsl:attribute>
+			<xsl:apply-templates/>
+		</xsl:element>
+	</xsl:template>
+
 	<!-- 20-02-2017: added generic word (issue #57) -->
-	<xsl:template match="*:ts[@n='HIAT:w' or @n='cGAT:w' or @n='GEN:w']">
+	<xsl:template match="*:ts[@n='HIAT:w' or @n='cGAT:w' or @n='GEN:w' or @n='CHAT:w']">
 		<xsl:element name="w" xmlns="http://www.tei-c.org/ns/1.0">
 			<xsl:apply-templates/>
 		</xsl:element>

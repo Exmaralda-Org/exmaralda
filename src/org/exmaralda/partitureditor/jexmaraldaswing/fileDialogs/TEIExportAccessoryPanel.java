@@ -46,6 +46,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         if (modenaMethodRadioButton.isSelected()) return TEIConverter.MODENA_METHOD;
         if (genericISORadioButton.isSelected()) return TEIConverter.ISO_GENERIC_METHOD;
         if (inelSegmentationRadioButton1.isSelected()) return TEIConverter.ISO_INEL_METHOD;
+        if (chatMinimalSegmentationRadioButton.isSelected()) return TEIConverter.ISO_CHAT_MINIMAL_METHOD;
         return TEIConverter.GENERIC_METHOD;
     }
 
@@ -73,6 +74,7 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         hiatNewRadioButton = new javax.swing.JRadioButton();
         hiatISORadioButton = new javax.swing.JRadioButton();
         cGatSegmentationRadioButton = new javax.swing.JRadioButton();
+        chatMinimalSegmentationRadioButton = new javax.swing.JRadioButton();
         inelSegmentationRadioButton1 = new javax.swing.JRadioButton();
         wordIDsCheckBox = new javax.swing.JCheckBox();
         languagePanel = new javax.swing.JPanel();
@@ -214,6 +216,17 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         });
         add(cGatSegmentationRadioButton);
 
+        buttonGroup1.add(chatMinimalSegmentationRadioButton);
+        chatMinimalSegmentationRadioButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chatMinimalSegmentationRadioButton.setForeground(new java.awt.Color(0, 0, 102));
+        chatMinimalSegmentationRadioButton.setText("ISO - CHAT Minimal segmentation");
+        chatMinimalSegmentationRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chatMinimalSegmentationRadioButtonActionPerformed(evt);
+            }
+        });
+        add(chatMinimalSegmentationRadioButton);
+
         buttonGroup1.add(inelSegmentationRadioButton1);
         inelSegmentationRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         inelSegmentationRadioButton1.setForeground(new java.awt.Color(0, 0, 102));
@@ -309,12 +322,17 @@ public class TEIExportAccessoryPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_inelSegmentationRadioButton1ActionPerformed
 
+    private void chatMinimalSegmentationRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatMinimalSegmentationRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chatMinimalSegmentationRadioButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton azmRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JRadioButton cGatSegmentationRadioButton;
+    private javax.swing.JRadioButton chatMinimalSegmentationRadioButton;
     private javax.swing.JRadioButton genericISORadioButton;
     private javax.swing.JRadioButton genericRadioButton;
     private javax.swing.JRadioButton hiatISORadioButton;

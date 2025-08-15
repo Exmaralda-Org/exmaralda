@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- created on 09-05-201, based on the conventions of the E11 project used for the HABLA corpus -->
+<!-- created on 10-08-2025, specifically for GCSAusE -->
 <fsm name="CHAT: Utterances and Words">
 	<char-set id="UtteranceEndSymbols">
 		<comment>Characters that signal the end of an utterance</comment>
@@ -12,7 +12,6 @@
 	<char-set id="PreUtteranceEndSymbols">
 		<comment>Characters that can precede an utterance end symbol and qualify the utterance as aborted, interrupted etc.</comment>
 		<char>…</char>
-		<char>+</char>
 		<char>/</char>
 	</char-set>
 	<char-set id="SpaceSymbols">
@@ -22,6 +21,12 @@
 	<char-set id="PauseSymbol">
 		<comment>Character which represents a pause</comment>
 		<char>#</char>
+	</char-set>
+	<char-set id="PlusSymbol">
+		<comment>No idea what it means...</comment>
+		<char>+</char>
+		<char>&#x2248;</char> <!-- double tilde -->
+		<char>&#x224B;</char> <!-- triple tilde -->
 	</char-set>
 	<char-set id="OpenParenthesis">
 		<char>(</char>
@@ -44,7 +49,7 @@
 		<!-- <char>:</char> -->
 		<char>;</char>
 		<!-- <char>,</char> -->
-		<char>_</char>
+		<!-- <char>_</char> -->
 		<char>&#x2014;</char>
 	</char-set>
 	
@@ -61,9 +66,9 @@
 		<forbidden>no parentheses closing, no utterance end symbol, no square brackets, no end of input allowed</forbidden>
 		<transition>
 			<input-char-set id="OpenParenthesis"/>
-			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<target id="TurnOpen_UtteranceOpen_ParenthesesOpen"/>
 			<output oo="yes">
-				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
 			</output>
 		</transition>
 		<transition>
@@ -72,6 +77,14 @@
 			<output oo="yes">
 				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<nts n="CHAT:p">]]></prefix>
 				<suffix><![CDATA[</nts>]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-char-set id="PlusSymbol"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<ts n="sc" s="" e="">]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
 			</output>
 		</transition>
 		<transition>
@@ -123,16 +136,48 @@
 	</transitions>
 	
 	<!-- ************************* -->
+	
+	<transitions source="TurnOpen_UtteranceOpen_ParenthesesOpen">
+		<comment>An utterance is open, but no word, an open parenthesis has been encountered</comment>
+		<forbidden>No further open parenthesis, no end of input</forbidden>
+		<transition>
+			<input-char-set id="OpenParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<suffix><![CDATA[</ats>]]></suffix>
+			</output>
+		</transition>
+		<transition>
+			<input-end/>
+			<target id="Error"/>
+		</transition>
+		<transition>
+			<input-other/>
+			<target id="TurnOpen_UtteranceOpen_ParenthesesOpen"/>
+			<output oo="yes"/>
+		</transition>		
+		
+		
+		
+	</transitions>
 		
 	<transitions source="TurnOpen_UtteranceOpen">
 		<comment>An utterance is open, but no word, no non-phonological segment and no open parenthesis has been encountered</comment>
 		<forbidden> No closing square bracket/parenthesis allowed, no end of input allowed </forbidden>
 		<transition>
 			<input-char-set id="OpenParenthesis"/>
-			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<target id="TurnOpen_UtteranceOpen_ParenthesesOpen"/>
 			<output oo="yes">
-				<prefix><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>
+				<prefix><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
 			</output>
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
 		</transition>
 		<transition>
 			<input-char-set id="WordPunctuation"/>
@@ -143,15 +188,20 @@
 			</output>
 		</transition>
 		<transition>
+			<input-char-set id="PlusSymbol"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		
+		<transition>
 			<input-char-set id="PauseSymbol"/>
 			<target id="TurnOpen_UtteranceOpen_PauseOpen"/>
 			<output oo="yes">
 				<prefix><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
 			</output>
-		</transition>
-		<transition>
-			<input-char-set id="CloseParenthesis"/>
-			<target id="Error"/>
 		</transition>
 		<transition>
 			<input-char-set id="OpenSquareBracket"/>
@@ -166,7 +216,10 @@
 		</transition>
 		<transition>
 			<input-end/>
-			<target id="Error"/>
+			<target id="TurnParsedSuccessfully"/>
+			<output oo="no">
+				<prefix><![CDATA[</ts>]]><![CDATA[</ts>]]></prefix>
+			</output>
 		</transition>
 		<transition>
 			<input-char-set id="UtteranceEndSymbols"/>
@@ -212,8 +265,15 @@
 		<forbidden>No pause symbol, no closing square bracket, no end of input (waiting for utterance end symbol...) allowed</forbidden>
 		<transition>
 			<input-char-set id="OpenParenthesis"/>
+			<!-- <target id="Error"/> -->
 			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
-			<output oo="yes"/>
+			<output oo="yes"/>			
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<!-- <target id="Error"/> -->
+			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<output oo="yes"/>			
 		</transition>
 		<transition>
 			<input-char-set id="WordPunctuation"/>
@@ -224,13 +284,17 @@
 			</output>
 		</transition>
 		<transition>
+			<input-char-set id="PlusSymbol"/>
+			<target id="TurnOpen_UtteranceOpen"/>
+			<output oo="yes">
+				<prefix><![CDATA[</ts>]]><![CDATA[<nts n="CHAT:p">]]></prefix>
+				<suffix><![CDATA[</nts>]]></suffix>
+			</output>
+		</transition>
+		
+		<transition>
 			<input-char-set id="PauseSymbol"/>
 			<target id="Error"/>
-		</transition>
-		<transition>
-			<input-char-set id="CloseParenthesis"/>
-			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
-			<output oo="yes"/>
 		</transition>
 		<transition>
 			<input-char-set id="OpenSquareBracket"/>
@@ -289,10 +353,15 @@
 		<forbidden>Only space or new utterance beginning allowed</forbidden>
 		<transition>
 			<input-char-set id="OpenParenthesis"/>
-			<target id="TurnOpen_UtteranceOpen_WordOpen"/>
+			<target id="TurnOpen_UtteranceOpen_ParenthesesOpen"/>
 			<output oo="yes">
-				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ts n="CHAT:w" s="" e="">]]></prefix>				
+				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
 			</output>
+			
+		</transition>
+		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
 		</transition>
 		<transition>
 			<input-char-set id="WordPunctuation"/>
@@ -308,10 +377,6 @@
 			<output oo="yes">
 				<prefix><![CDATA[</ts>]]><![CDATA[<ts n="CHAT:u" s="" e="">]]><![CDATA[<ats n="CHAT:pause" s="" e="">]]></prefix>
 			</output>
-		</transition>
-		<transition>
-			<input-char-set id="CloseParenthesis"/>
-			<target id="Error"/>
 		</transition>
 		<transition>
 			<input-char-set id="OpenSquareBracket"/>
@@ -368,15 +433,15 @@
 			<target id="Error"/>
 		</transition>
 		<transition>
+			<input-char-set id="CloseParenthesis"/>
+			<target id="Error"/>
+		</transition>
+		<transition>
 			<input-char-set id="WordPunctuation"/>
 			<target id="Error"/>
 		</transition>
 		<transition>
 			<input-char-set id="PauseSymbol"/>
-			<target id="Error"/>
-		</transition>
-		<transition>
-			<input-char-set id="CloseParenthesis"/>
 			<target id="Error"/>
 		</transition>
 		<transition>

@@ -73,7 +73,7 @@ public class EditSegmentationErrorsDialog extends javax.swing.JDialog implements
                 segmentationAlgorithm = new cGATMinimalSegmentation(ptef);
                 break;
             case AbstractSegmentation.CHAT_MINIMAL_SEGMENTATION :
-                segmentationAlgorithm = new CHATMinimalSegmentation();
+                segmentationAlgorithm = new CHATMinimalSegmentation(ptef); // #532
                 break;
             case AbstractSegmentation.INEL_EVENT_BASED :
                 segmentationAlgorithm = new InelEventBasedSegmentation();

@@ -40,6 +40,7 @@ import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.data.GATParser;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.io.XMLReaderWriter;
+import org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation;
@@ -102,6 +103,7 @@ public class TEIConverter extends AbstractConverter {
     public static final int ISO_EVENT_TOKEN_METHOD = 9;
     public static final int ISO_GENERIC_METHOD = 10;
     public static final int ISO_INEL_METHOD = 11;
+    public static final int ISO_CHAT_MINIMAL_METHOD = 12;
 
     
     String language = "en";
@@ -311,6 +313,43 @@ public class TEIConverter extends AbstractConverter {
     }
     
 
+    // *********************
+    // CHAT MINIMAL 
+    // *********************
+
+    public void writeChatMinimalSegmentedISOTEIToFile(BasicTranscription bt, String filename, String customFSM) throws SAXException,
+                                                                              FSMException,
+                                                                              XSLTransformException,
+                                                                              JDOMException,
+                                                                              IOException,
+                                                                              ParserConfigurationException,
+                                                                              TransformerException
+                                                                              {
+        // added 13-12-2013
+        BasicTranscription copyBT = bt.makeCopy();
+        copyBT.normalize();        
+        System.out.println("started writing document...");
+        CHATMinimalSegmentation segmentation;
+        if (customFSM==null || customFSM.length()==0){
+            segmentation = new CHATMinimalSegmentation();
+        } else {
+            segmentation = new CHATMinimalSegmentation(customFSM);
+        }
+        SegmentedTranscription st = segmentation.BasicToSegmented(copyBT);
+        System.out.println("Segmented transcription created");
+        String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
+        TEIMerger teiMerger = new TEIMerger(true);
+        Document stdoc = FileIO.readDocumentFromString(st.toXML());
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
+        System.out.println("Merged");
+        generateWordIDs(teiDoc);
+        setDocLanguage(teiDoc, language);        
+        setTranscriptionDesc(teiDoc, "CHAT Minimal", "1.0");
+        IOUtilities.writeDocumentToLocalFile(filename, teiDoc);
+        System.out.println("document written.");        
+    }
+    
+    
     public void writeFOLKERISOTEIToFile(BasicTranscription bt, String path) throws SAXException, 
                                                                                 ParserConfigurationException, 
                                                                                 IOException, 
