@@ -44,6 +44,12 @@ public class TEIMerger {
     static String SORT_AND_CLEAN_STYLESHEET_ISO = "/org/exmaralda/tei/xml/ISOTEICleanAndSort.xsl";; //Constants.TEICLEANANDSORTStylesheet;
 
     static String BODY_NODE = "//text";
+    
+    // 2025-08-22 this is new 
+    // I want a different method for outputting the full text
+    // without destroying anything that relies on the old one (INEL?)
+    public enum  FULL_TEXT_METHOD {FULLTEXT, ORIGINAL};
+    public FULL_TEXT_METHOD fullTextMethod = FULL_TEXT_METHOD.FULLTEXT;
 
     XSLTransformer transformer;
     XSLTransformer transformer2;
@@ -210,7 +216,8 @@ public class TEIMerger {
         return finalDocument;
     }
     
-    public static Vector TEIMerge(Document segmentedTranscription, String nameOfDeepSegmentation, String nameOfFlatSegmentation) throws IOException {                
+    // why was this static??
+    public /*static*/ Vector TEIMerge(Document segmentedTranscription, String nameOfDeepSegmentation, String nameOfFlatSegmentation) throws IOException {                
         return TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, false);
     }
     /** this method will take the segmented transcription and, for each speaker contribution in the segmentation with
@@ -225,7 +232,8 @@ public class TEIMerger {
      * @param includeFullText
      * the method returns a vector of speaker-contribution elements with 'who' attributes
      * @return  */
-    public static Vector TEIMerge(Document segmentedTranscription, 
+    // why was this static??
+    public /*static*/ Vector TEIMerge(Document segmentedTranscription, 
             String nameOfDeepSegmentation, 
             String nameOfFlatSegmentation,
             boolean includeFullText) throws IOException {                
@@ -303,29 +311,47 @@ public class TEIMerger {
                 // NEW 25-04-2016
                 // include full text if Daniel J. wisheth thus
                 if (includeFullText){
-                    Element annotation = new Element("annotation");
-                    annotation.setAttribute("start", start);
-                    annotation.setAttribute("end", end);
-                    annotation.setAttribute("level", "full-text");
-                    
-                    String fullText = "";
-                    List l = XPath.selectNodes(sc2, "descendant::text()");
-                    for (Object o : l){
-                        Text text = (Text)o;
-                        fullText+=text.getText();
-                    }
-                    annotation.setAttribute("value", fullText);
-                    
                     Element annotationsElement = mergedElement.getChild("annotations");
                     if (annotationsElement==null){
                         annotationsElement = new Element("annotations");
                         mergedElement.addContent(annotationsElement);
                     }
-                    annotationsElement.addContent(annotation);
+
+                    if (fullTextMethod==FULL_TEXT_METHOD.FULLTEXT){
+                        Element annotation = new Element("annotation");
+                        annotation.setAttribute("start", start);
+                        annotation.setAttribute("end", end);
+                        annotation.setAttribute("level", "full-text");
+
+                        String fullText = "";
+                        List l = XPath.selectNodes(sc2, "descendant::text()");
+                        for (Object o : l){
+                            Text text = (Text)o;
+                            fullText+=text.getText();
+                        }
+                        annotation.setAttribute("value", fullText);
+
+                        annotationsElement.addContent(annotation);
+                    } else {
+                        // i.e. fullTextMethod==FULL_TEXT_METHOD.FULLTEXT, new 22-08-2025
+                        List l = sc2.getChildren();
+                        for (Object o : l){
+                            Element x = (Element)o;
+                            //System.out.println(IOUtilities.elementToString(x));
+                            // <ts n="e" id="Seg_3920" s="T205" e="T206">I can't get my xxx- </ts>
+                            Element annotation = new Element("annotation");
+                            annotation.setAttribute("start", x.getAttributeValue("s"));
+                            annotation.setAttribute("end", x.getAttributeValue("e"));
+                            annotation.setAttribute("level", "original");
+                            annotation.setAttribute("value", x.getText());
+                            annotationsElement.addContent(annotation);
+                        }
+
+                    }
+                    //*****************************************
+
+                    returnValue.addElement(mergedElement.detach());
                 }
-                //*****************************************
-                
-                returnValue.addElement(mergedElement.detach());
             }
             
             // issue #89 - Now the vector contains elements only from the 

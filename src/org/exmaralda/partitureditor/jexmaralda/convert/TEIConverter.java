@@ -35,6 +35,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.exmaralda.common.corpusbuild.FileIO;
 import org.exmaralda.common.corpusbuild.TEIMerger;
+import org.exmaralda.common.corpusbuild.TEIMerger.FULL_TEXT_METHOD;
 import org.exmaralda.common.jdomutilities.IOUtilities;
 import org.exmaralda.folker.data.EventListTranscription;
 import org.exmaralda.folker.data.GATParser;
@@ -339,8 +340,9 @@ public class TEIConverter extends AbstractConverter {
         System.out.println("Segmented transcription created");
         String nameOfDeepSegmentation = "SpeakerContribution_Utterance_Word";
         TEIMerger teiMerger = new TEIMerger(true);
+        teiMerger.fullTextMethod = FULL_TEXT_METHOD.ORIGINAL;
         Document stdoc = FileIO.readDocumentFromString(st.toXML());
-        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
+        Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true, true);
         System.out.println("Merged");
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        

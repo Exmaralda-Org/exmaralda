@@ -2068,8 +2068,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             int nextIndex = -1;
             for (int index = startIndex+1; index<getTranscription().getNumberOfEvents(); index++){
                 boolean hasError =
-                        (!((Boolean) (eventListTableModel.getValueAt(index, 5))).booleanValue())
-                        || (!((Boolean) (eventListTableModel.getValueAt(index, 6))).booleanValue());
+                        (!((Boolean) (eventListTableModel.getValueAt(index, 5))))
+                        || (!((Boolean) (eventListTableModel.getValueAt(index, 6))));
                 if (hasError){
                     nextIndex = index;
                     break;
@@ -2086,8 +2086,8 @@ public final class ApplicationControl extends AbstractTimeviewPartiturPlayerCont
             int nextIndex = -1;
             for (int index = startIndex+1; index<getTranscription().getNumberOfContributions(); index++){
                 boolean hasError =
-                        (!((Boolean) (contributionListTable.getValueAt(index, 5))).booleanValue())
-                        || (!((Boolean) (contributionListTable.getValueAt(index, 6))).booleanValue());
+                        (!((Boolean) (contributionListTable.getValueAt(index, 5))))
+                        || (!((Boolean) (contributionListTable.getValueAt(index, 6))));
                 if (hasError){
                     nextIndex = index;
                     break;
