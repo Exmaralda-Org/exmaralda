@@ -29,10 +29,10 @@ import org.jdom.transform.XSLTransformer;
  */
 public class DSParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/DSPatterns.xml";
+    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/agd/DSPatterns.xml";
 
     Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/DS_transformcontribution.xsl";
+    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/agd/DS_transformcontribution.xsl";
     XSLTransformer minimalTransformer;
     
 

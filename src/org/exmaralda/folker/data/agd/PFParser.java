@@ -29,10 +29,10 @@ import org.jdom.transform.XSLTransformer;
  */
 public class PFParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/PFPatterns.xml";
+    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/agd/PFPatterns.xml";
 
     Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/PF_transformcontribution.xsl";
+    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/agd/PF_transformcontribution.xsl";
     XSLTransformer minimalTransformer;
     
 
@@ -52,6 +52,7 @@ public class PFParser extends AbstractParser {
     }
 
 
+    @Override
     public void parseDocument(Document doc, int parseLevel){
         if (parseLevel==0) return;
 

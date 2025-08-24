@@ -34,10 +34,10 @@ import org.jdom.xpath.XPath;
  */
 public class NAMDParser extends AbstractParser {
 
-    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/NAMD_Patterns.xml";
+    String PATTERNS_FILE_PATH = "/org/exmaralda/folker/data/agd/NAMD_Patterns.xml";
 
     Hashtable<String, String> minimalPatterns;
-    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/NAMD_transformcontribution.xsl";
+    String MINIMAL_TRANSFORMER_FILE_PATH = "/org/exmaralda/folker/data/agd/NAMD_transformcontribution.xsl";
     XSLTransformer minimalTransformer;
     
     Hashtable<String, String> basicPatterns;
