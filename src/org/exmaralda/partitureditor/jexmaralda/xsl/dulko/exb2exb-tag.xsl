@@ -44,12 +44,13 @@
     <xsl:when test="string-length($tagger-model)=0">
       <xsl:message terminate="yes">Error: The TreeTagger parameter file is unset.</xsl:message>
     </xsl:when>
-    <xsl:when test="string-length($lang)&gt;0 and
-                    string-length($tagger-lang)=0">
+    <xsl:when test="string-length($lang)=0">
+      <xsl:message terminate="yes">Error: No language used is set in the speakertable.</xsl:message>
+    </xsl:when>
+    <xsl:when test="string-length($tagger-lang)=0">
       <xsl:message terminate="yes">Error: The first language used in the speakertable is unsupported by TreeTagger.</xsl:message>
     </xsl:when>
-    <xsl:when test="string-length($lang)&gt;0 and
-                    not(matches($tagger-model-uri,concat('/[^/.]*',$tagger-lang)))">
+    <xsl:when test="not(matches($tagger-model-uri,concat('/[^/.]*',$tagger-lang)))">
       <xsl:message terminate="yes">Error: The first language used in the speakertable does not match the TreeTagger parameter file.</xsl:message>
     </xsl:when>
     <xsl:otherwise>
