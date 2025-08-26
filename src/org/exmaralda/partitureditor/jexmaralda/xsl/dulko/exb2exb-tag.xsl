@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-tag.xsl -->
-<!-- Version 12.2 -->
-<!-- Andreas Nolda 2023-07-17 -->
+<!-- Version 12.3 -->
+<!-- Andreas Nolda 2025-08-26 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -10,8 +10,6 @@
                 exclude-result-prefixes="xs tt">
 
 <xsl:include href="exb2exb-tiers.xsl"/>
-
-<xsl:include href="lang.xsl"/>
 
 <xsl:variable name="tagger"
               select="tt:new()"/>

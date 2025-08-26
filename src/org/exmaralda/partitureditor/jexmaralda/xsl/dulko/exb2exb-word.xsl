@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.5 -->
-<!-- Andreas Nolda 2023-09-21 -->
+<!-- Version 12.6 -->
+<!-- Andreas Nolda 2025-08-26 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -13,8 +13,6 @@
 
 <!-- change the user-visible parameter into a variable (actually, a constant) -->
 <xsl:variable name="zh-number">0</xsl:variable>
-
-<xsl:include href="lang.xsl"/>
 
 <xsl:variable name="tagger"
               select="tt:new()"/>

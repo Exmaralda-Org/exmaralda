@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-s.xsl -->
-<!-- Version 13.0 -->
-<!-- Andreas Nolda 2024-06-17 -->
+<!-- Version 13.1 -->
+<!-- Andreas Nolda 2025-08-26 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:include href="exb2exb-tiers.xsl"/>
-
-<xsl:include href="lang.xsl"/>
 
 <xsl:template match="basic-body">
   <xsl:variable name="pos-id"
