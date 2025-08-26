@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-diff.xsl -->
-<!-- Version 7.3 -->
-<!-- Andreas Nolda 2019-05-05 -->
+<!-- Version 7.4 -->
+<!-- Andreas Nolda 2025-08-26 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -149,8 +149,8 @@
           </xsl:when>
           <!-- The event on reference tier 1 corresponds to several events on reference tier 2. -->
           <xsl:when test="$reference-tier2/event[@end=$end1] and
-                          not(generate-id($reference-tier2/event[@start=$start1])=
-                              generate-id($reference-tier2/event[@end=$end1]))">
+                          not($reference-tier2/event[@start=$start1] is
+                              $reference-tier2/event[@end=$end1])">
             <event>
               <xsl:attribute name="start">
                 <xsl:value-of select="$start1"/>
@@ -163,8 +163,8 @@
           </xsl:when>
           <!-- The event on reference tier 2 corresponds to several events on reference tier 1. -->
           <xsl:when test="$reference-tier1/event[@end=$end2] and
-                          not(generate-id($reference-tier1/event[@start=$start2])=
-                              generate-id($reference-tier1/event[@end=$end2]))">
+                          not($reference-tier1/event[@start=$start2] is
+                              $reference-tier1/event[@end=$end2])">
             <!-- On reference tier 1, with category "orig", there is no "-" event
                  being contained in the event on reference tier 2. -->
             <xsl:if test="not($reference-tier1[@category='orig']/event[@start=$subtimeline/tli[preceding-sibling::tli/@id=$start2]/@id]
