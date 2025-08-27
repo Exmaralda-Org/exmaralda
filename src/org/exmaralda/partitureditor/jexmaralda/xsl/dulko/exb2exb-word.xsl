@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-word.xsl -->
-<!-- Version 12.5 -->
-<!-- Andreas Nolda 2023-09-21 -->
+<!-- Version 12.6 -->
+<!-- Andreas Nolda 2025-08-26 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -13,8 +13,6 @@
 
 <!-- change the user-visible parameter into a variable (actually, a constant) -->
 <xsl:variable name="zh-number">0</xsl:variable>
-
-<xsl:include href="lang.xsl"/>
 
 <xsl:variable name="tagger"
               select="tt:new()"/>
@@ -69,14 +67,15 @@
 <xsl:template match="basic-body">
   <xsl:choose>
     <xsl:when test="string-length($tagger-abbreviations)=0">
-      <xsl:message>Warning: The TreeTagger abbreviations file is unset.</xsl:message>
+      <xsl:message terminate="yes">Error: The TreeTagger abbreviations file is unset.</xsl:message>
     </xsl:when>
-    <xsl:when test="string-length($lang)&gt;0 and
-                    string-length($tagger-lang)=0">
-      <xsl:message>Warning: The first language used in the speakertable is unsupported by TreeTagger.</xsl:message>
+    <xsl:when test="string-length($lang)=0">
+      <xsl:message terminate="yes">Error: No language used is set in the speakertable.</xsl:message>
     </xsl:when>
-    <xsl:when test="string-length($lang)&gt;0 and
-                    not(matches($tagger-abbreviations-uri,concat('/[^/.]*',$tagger-lang)))">
+    <xsl:when test="string-length($tagger-lang)=0">
+      <xsl:message terminate="yes">Error: The first language used in the speakertable is unsupported by TreeTagger.</xsl:message>
+    </xsl:when>
+    <xsl:when test="not(matches($tagger-abbreviations-uri,concat('/[^/.]*',$tagger-lang)))">
       <xsl:message terminate="yes">Error: The first language used in the speakertable does not match the TreeTagger abbreviations file.</xsl:message>
     </xsl:when>
     <xsl:otherwise>

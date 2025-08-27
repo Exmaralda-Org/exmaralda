@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- metadata.xsl -->
-<!-- Version 3.3 -->
-<!-- Andreas Nolda 2023-07-18 -->
+<!-- Version 3.4 -->
+<!-- Andreas Nolda 2025-08-26 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 exclude-result-prefixes="xs">
+
+<xsl:include href="lang.xsl"/>
 
 <xsl:strip-space elements="head
                            meta-information
@@ -105,6 +107,24 @@
   <variable>written_task</variable>
 </xsl:variable> -->
 
+<xsl:param name="tagset">
+  <xsl:choose>
+    <xsl:when test="$lang='als'">UD</xsl:when>
+    <xsl:when test="$lang='bul'">BTB-TS</xsl:when>
+    <xsl:when test="$lang='dan'">ePOS</xsl:when>
+    <xsl:when test="$lang='deu'">STTS</xsl:when>
+    <xsl:when test="$lang='eng'">Penn Treebank</xsl:when>
+    <xsl:when test="$lang='hun'">UD</xsl:when>
+    <xsl:when test="$lang='lat'">Lamap</xsl:when>
+    <xsl:when test="$lang='nor'">UD</xsl:when>
+    <xsl:when test="$lang='por'">EAGLES</xsl:when>
+    <xsl:when test="$lang='ukr'">UD</xsl:when>
+    <xsl:when test="$lang='swe'">SUC</xsl:when>
+    <!-- ... -->
+    <xsl:otherwise>unknown</xsl:otherwise>
+  </xsl:choose>
+</xsl:param>
+
 <xsl:template name="get-document-metadata">
   <xsl:call-template name="get-document-metadata-in-meta-information"/>
   <xsl:call-template name="get-document-metadata-in-speakertable"/>
@@ -143,7 +163,9 @@
 <xsl:template match="ud-information[@attribute-name='pos_tagset']"
               mode="corpus-metadata">
   <meta variable="pos_tagset">
-    <xsl:if test="/basic-transcription/basic-body/tier[ends-with(@category,'pos')]">STTS</xsl:if>
+    <xsl:if test="/basic-transcription/basic-body/tier[ends-with(@category,'pos')]">
+      <xsl:value-of select="$tagset"/>
+    </xsl:if>
   </meta>
 </xsl:template>
 
