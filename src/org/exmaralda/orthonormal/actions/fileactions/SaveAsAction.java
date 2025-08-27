@@ -39,7 +39,7 @@ public class SaveAsAction extends AbstractApplicationAction {
         fileChooser.setDialogTitle("Transkription speichern");
         fileChooser.setFileFilter(new org.exmaralda.folker.utilities.NormalizedFolkerFileFilter());
         fileChooser.setCurrentDirectory(new File(PreferencesUtilities.getProperty("workingDirectory", "")));
-        if (ac.currentFilePath==null){
+        if (ac.currentFilePath==null && ac.currentMediaPath!=null){
             int index = Math.max(0, ac.currentMediaPath.toLowerCase().lastIndexOf(".wav"));
             File f = new File(ac.currentMediaPath.substring(0, index) + ".fln");
             fileChooser.setSelectedFile(f);
