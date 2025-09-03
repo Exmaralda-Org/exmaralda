@@ -29,9 +29,9 @@ public class FolkerCorpusWizard extends AbstractWizardDialog{
             + "Double click on any entry to change its state from 'included' (green check mark) to 'excluded' (red X) or vice versa. ";
 
     String PARAMETERS_EXPLANATION = "<html><p style='font-family:sans-serif;font-size:11pt;'><b>Parameters</b><br/>Specify parameters for generating the EXMARaLDA corpus.<br/> "
-            + "Choose <span style='color:blue; font-weight:bold'>separate folder</span> if you want all generated EXMARaLDA transcriptions to be written to a separate folder"
+            + "Choose <span style='color:blue; font-weight:bold'>separate folder</span> if you want all generated EXMARaLDA transcriptions to be written to a separate folder "
             + "underneath the top level folder. This makes it easier to remove the generated files later. <br/>"
-            + "Choose <span style='color:blue; font-weight:bold'>same folder</span> if you want all generated EXMARaLDA transcriptions to be written to the same folder as the original FOLKER transcription"
+            + "Choose <span style='color:blue; font-weight:bold'>same folder</span> if you want all generated EXMARaLDA transcriptions to be written to the same folder as the original FOLKER transcription. "
             + "This ensures that relative audio links are kept and remain valid even if you move the corpus folder.<br/>"
             + "Choose <span style='color:blue; font-weight:bold'>Generate Basic Transcriptions</span> if you want to write EXMARaLDA basic transcriptions alongside the EXMARaLDA segemented transcriptions"
             + "This will require additional space, but enables you to edit transcriptions with the EXMARaLDA editor. ";
