@@ -324,8 +324,15 @@
                             </alternative>
                         </uncertain> -->
                         <span>
-                            <xsl:attribute name="from"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor::uncertain/child::w[1]/@id"/></xsl:attribute>
-                            <xsl:attribute name="to"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor::uncertain/child::w[last()]/@id"/></xsl:attribute>
+                            <!-- 03-09-2025: Won't work as long as <w> does not have IDs, as in FOLKER (vs. OrthoNormal) -->
+                            <xsl:attribute name="from">
+                                <xsl:value-of select="$XPOINTER_HASH"/>
+                                <xsl:value-of select="ancestor::uncertain/child::w[1]/@id"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="to">
+                                <xsl:value-of select="$XPOINTER_HASH"/>
+                                <xsl:value-of select="ancestor::uncertain/child::w[last()]/@id"/>
+                            </xsl:attribute>
                             <xsl:choose>
                                 <xsl:when test="count(w)=1"><xsl:value-of select="w[1]"/></xsl:when>
                                 <xsl:otherwise>
@@ -668,9 +675,17 @@
     <xsl:template match="breathe">
         <xsl:element name="vocal"  xmlns="http://www.tei-c.org/ns/1.0">
             <!-- added 19-11-2019 -->
-            <xsl:attribute name="xml:id">
+            <!-- <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
-            </xsl:attribute>
+            </xsl:attribute> -->
+            <!-- changed 03-09-2019 -->
+            <xsl:attribute name="xml:id">
+                <xsl:choose>
+                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                    <xsl:otherwise>v<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>                                
+            
             <xsl:if test="not(ancestor::*[@speaker-reference])">
                 <xsl:attribute name="start"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@start-reference"/></xsl:attribute>
                 <xsl:attribute name="end"><xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="ancestor-or-self::*/@end-reference"/></xsl:attribute>
@@ -805,9 +820,17 @@
     <xsl:template match="p">        
         <pc  xmlns="http://www.tei-c.org/ns/1.0">
             <!-- added 19-11-2019 -->
-            <xsl:attribute name="xml:id">
+            <!-- <xsl:attribute name="xml:id">
                 <xsl:value-of select="@id"/>
-            </xsl:attribute>
+            </xsl:attribute> -->
+            <!-- changed 03-09-2019 -->
+            <xsl:attribute name="xml:id">
+                <xsl:choose>
+                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                    <xsl:otherwise>p<xsl:value-of select="generate-id()"/></xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>                                
+            
             <xsl:apply-templates/>
         </pc>
     </xsl:template>
