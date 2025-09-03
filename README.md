@@ -1,10 +1,9 @@
 # EXMARaLDA
 
+EXMARaLDA is a system for working with oral corpora on a computer. It consists of a transcription and annotation tool (**Partitur-Editor**), a tool for managing corpora (**Corpus-Manager**) and a query and analysis tool (**EXAKT**).
+Two further tools were developed for the workflow of the FOLK project: Another transcription tool (**FOLKER**) and a tool for token-level annotation (**OrthoNormal**)
 
-
-
-EXMARaLDA is a system for working with oral corpora on a computer. It consists of a transcription and annotation tool (Partitur-Editor), a tool for managing corpora (Corpus-Manager) and a query and analysis tool (EXAKT).
-Two further tools were developed for the workflow of the FOLK project: Another transcription tool (FOLKER) and a tool for token-level annotation (OrthoNormal)
+![Partitur-Editor](https://exmaralda.org/files/reklame/PE_ROYAL.png)
 
 EXMARaLDA’s features include:
 
