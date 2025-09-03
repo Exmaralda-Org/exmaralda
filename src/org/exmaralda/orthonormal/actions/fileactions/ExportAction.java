@@ -37,7 +37,7 @@ public class ExportAction extends AbstractApplicationAction {
     ParameterFileFilter exmaraldaFileFilter = new ParameterFileFilter(exmaraldaSuffixes, FOLKERInternationalizer.getString("misc.basicTranscription"));
     ParameterFileFilter elanFileFilter = new ParameterFileFilter("eaf", "ELAN Annotation File (*.eaf)");
     ParameterFileFilter praatFileFilter = new ParameterFileFilter("textGrid", "Praat TextGrid (*.textGrid)");
-    ParameterFileFilter teiFileFilter = new ParameterFileFilter("xml", "TEI File (*.xml)");
+    ParameterFileFilter teiFileFilter = new ParameterFileFilter("xml", "ISO/TEI File (*.xml)");
     ParameterFileFilter tcfFileFilter = new ParameterFileFilter(tcfSuffixes, "TCF File (*.tcf, *.xml)");
     ParameterFileFilter f4FileFilter = new ParameterFileFilter(f4Suffixes, "F4 transcript (*.rtf, *.txt)");
     ParameterFileFilter audacityLabelFileFilter = new ParameterFileFilter("txt", "Audacity label file (*.txt)");
