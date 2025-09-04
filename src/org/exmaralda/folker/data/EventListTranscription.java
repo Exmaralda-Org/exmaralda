@@ -321,7 +321,7 @@ public class EventListTranscription {
         int count=0;
         for (Event e : getEventlist().events){
             String text = e.getText();
-            if (text.matches("\\(\\d{1,2}\\.\\d{1,2}\\) ?")){
+            if (text.matches("\\(\\d{1,3}\\.\\d{1,2}\\) ?")){
                 double pauseLength = e.getEndpoint().getTime() - e.getStartpoint().getTime();
                 String newPauseText = "(" + Double.toString(Math.round(pauseLength/10.0)/100.0) + ") ";
                 if (!text.trim().equals(newPauseText.trim())){
