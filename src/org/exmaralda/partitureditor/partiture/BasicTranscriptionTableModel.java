@@ -1245,7 +1245,7 @@ public class BasicTranscriptionTableModel extends AbstractTranscriptionTableMode
             for (int eventno=0; eventno<tier.getNumberOfEvents(); eventno++){
                 Event event = tier.getEventAt(eventno);
                 String text = event.getDescription();
-                if (text.matches("\\(\\d{1,2}\\.\\d{1,2}\\) ?")){
+                if (text.matches("\\(\\d{1,3}\\.\\d{1,2}\\) ?")){
                     try {
                         double start = transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getStart()).getTime();
                         double end = transcription.getBody().getCommonTimeline().getTimelineItemWithID(event.getEnd()).getTime();

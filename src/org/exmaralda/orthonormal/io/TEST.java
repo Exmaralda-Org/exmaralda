@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
+import org.exmaralda.orthonormal.lexicon.SimpleXMLFileLexicon;
 import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
 import org.exmaralda.partitureditor.jexmaralda.SegmentedTranscription;
 import org.jdom.JDOMException;
@@ -35,9 +36,10 @@ public class TEST {
     }
 
     private void doit() throws JDOMException, IOException, SAXException, ParserConfigurationException, TransformerException, TransformerConfigurationException, JexmaraldaException {
-        NormalizedFolkerTranscription nft = XMLReaderWriter.readNormalizedFolkerTranscription(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_24_ISSUE_313\\FOLK_MEET_03_A01_MASK_TAGGED.fln"));
+        SimpleXMLFileLexicon x = new SimpleXMLFileLexicon();
+        /*NormalizedFolkerTranscription nft = XMLReaderWriter.readNormalizedFolkerTranscription(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_24_ISSUE_313\\FOLK_MEET_03_A01_MASK_TAGGED.fln"));
         SegmentedTranscription segmentedTranscription = nft.toSegmentedTranscription();
-        segmentedTranscription.writeXMLToFile(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_24_ISSUE_313\\FOLK_MEET_03_A01_MASK_TAGGED_TEST.exs").getAbsolutePath(), "none");
+        segmentedTranscription.writeXMLToFile(new File("C:\\Users\\bernd\\Dropbox\\work\\EXMARaLDA_Support\\2023_02_24_ISSUE_313\\FOLK_MEET_03_A01_MASK_TAGGED_TEST.exs").getAbsolutePath(), "none");*/
     }
     
 }
