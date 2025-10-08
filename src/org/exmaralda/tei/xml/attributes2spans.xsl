@@ -48,11 +48,20 @@
                 </tei:spanGrp>
             </xsl:if>
             
+            <!-- 08-10-2025: new for issue #538 -->
+            <xsl:if test="descendant::tei:w/@xml:lang">
+                <tei:spanGrp type="lang">                
+                    <xsl:apply-templates select="descendant::tei:w" mode="PROCESS_ATTRIBUTES">
+                        <xsl:with-param name="ATTRIBUTE_NAME">xml:lang</xsl:with-param>
+                    </xsl:apply-templates>
+                </tei:spanGrp>
+            </xsl:if>
+
         </xsl:copy>
     </xsl:template>
         
     <xsl:template match="tei:w" mode="PROCESS_ATTRIBUTES">
-        <xsl:param name="ATTRIBUTE_NAME"></xsl:param>
+        <xsl:param name="ATTRIBUTE_NAME"/>
         <tei:span>
             <xsl:attribute name="from" select="@xml:id"/>
             <xsl:attribute name="to" select="@xml:id"/>
@@ -72,5 +81,6 @@
     <xsl:template match="tei:w/@lemma"/>
     <xsl:template match="tei:w/@pos"/>
     <xsl:template match="tei:w/@phon"/>
+    <xsl:template match="tei:w/@xml:lang"/>
     
 </xsl:stylesheet>

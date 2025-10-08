@@ -42,6 +42,20 @@
                 </xsl:attribute>
             </xsl:if>
             
+            <!-- 08-10-2025: new for issue #538 -->
+            <xsl:if test="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='lang']">
+                <xsl:attribute name="xml:lang">
+                    <xsl:variable name="id" select="@xml:id"/>
+                    <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='lang']/descendant::tei:span[@from=$id]"/>
+                </xsl:attribute>
+            </xsl:if>
+            
+            <xsl:if test="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='phon']">
+                <xsl:attribute name="phon">
+                    <xsl:variable name="id" select="@xml:id"/>
+                    <xsl:value-of select="ancestor::tei:annotationBlock/descendant::tei:spanGrp[@type='phon']/descendant::tei:span[@from=$id]"/>
+                </xsl:attribute>
+            </xsl:if>
 
             <xsl:apply-templates select="@*|node()"/>            
         </xsl:copy>
@@ -50,5 +64,7 @@
     <xsl:template match="tei:spanGrp[@type='lemma']"/>
     <xsl:template match="tei:spanGrp[@type='pos']"/>
     <xsl:template match="tei:spanGrp[@type='norm']"/>
+    <xsl:template match="tei:spanGrp[@type='lang']"/>
+    <xsl:template match="tei:spanGrp[@type='phon']"/>
     
 </xsl:stylesheet>
