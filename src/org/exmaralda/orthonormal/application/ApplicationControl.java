@@ -195,7 +195,6 @@ public final class ApplicationControl implements  ListSelectionListener,
     }
 
 
-
     public void setupLexicon() {
         System.out.println("Setting up lexicon");
         String type = PreferencesUtilities.getProperty("lexicon-type", "xml");
@@ -208,14 +207,22 @@ public final class ApplicationControl implements  ListSelectionListener,
             if ("xml".equals(type)){
                 // built-in XML lexicon
                 lexicon = new XMLLexicon();
+                String INTERNAL_LEXICON_PATH = PreferencesUtilities.getProperty("internal-lexicon-path", XMLLexicon.DEFAULT_LEXICON);                    
                 try {
-                    String INTERNAL_LEXICON_PATH = PreferencesUtilities.getProperty("internal-lexicon-path", "/org/exmaralda/orthonormal/lexicon/FOLK_Normalization_Lexicon_NOV_2024.xml");                    
                     lexicon.read(INTERNAL_LEXICON_PATH);
                     success=true;
                     status("Internal lexicon read successfully.");
                 } catch (IOException ex) {
-                    ex.printStackTrace();;
-                    errorMessage = "Interne XML-Lexikondatei konnte nicht gelesen werden:\n" + ex.getLocalizedMessage();
+                    System.out.println("Lexicon " + INTERNAL_LEXICON_PATH + " could not be read.");
+                    System.out.println("Trying once more with " + XMLLexicon.DEFAULT_LEXICON);
+                    try {
+                        lexicon.read(INTERNAL_LEXICON_PATH);
+                        success=true;
+                        status("Internal lexicon read successfully.");
+                    } catch (IOException ex1) {
+                        Logger.getLogger(ApplicationControl.class.getName()).log(Level.SEVERE, null, ex1);
+                        errorMessage = "Interne XML-Lexikondatei konnte nicht gelesen werden:\n" + ex.getLocalizedMessage();
+                    }                    
                 }            
             } else if ("xml-local".equals(type)){
                 // local lexicon on the file system
