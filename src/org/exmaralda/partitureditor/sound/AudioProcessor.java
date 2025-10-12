@@ -8,6 +8,8 @@ package org.exmaralda.partitureditor.sound;
 
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.*;
 import org.exmaralda.partitureditor.jexmaralda.*;
 /**
@@ -23,6 +25,26 @@ public class AudioProcessor {
 
     /** Creates a new instance of AudioProcessor */
     public AudioProcessor() {
+    }
+    
+    public static double getDuration(File audioFile){
+        AudioInputStream audioInputStream = null;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioFormat format = audioInputStream.getFormat();        
+            long frames = audioInputStream.getFrameLength();
+            double durationInSeconds = (frames + 0.0) / format.getFrameRate();
+            return durationInSeconds;
+        } catch (UnsupportedAudioFileException | IOException ex) {
+            Logger.getLogger(AudioProcessor.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                audioInputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AudioProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1.0;
     }
     
     public static boolean isCuttable(String pathToSoundFile){
