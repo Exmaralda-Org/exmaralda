@@ -21,7 +21,12 @@ public class Test {
     public static void main(String[] args) {
         try {
             AnnotationSpecification as = new AnnotationSpecification();
-            as.read(new File("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\ANNOTATION\\annotation-specification-hu.xml"));
+            //as.read(new File("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\ANNOTATION\\annotation-specification-hu.xml"));
+            
+            UDPOSMapping m = new UDPOSMapping(UDPOSMapping.TagSet.STTS_2_0);
+            for (String key : m.keySet()){
+                System.out.println(key + " --> " + m.get(key));
+            }
         } catch (JDOMException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
