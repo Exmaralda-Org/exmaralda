@@ -18,6 +18,7 @@ import java.awt.BorderLayout;
 import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
@@ -344,7 +345,8 @@ public class PartiturEditor extends javax.swing.JFrame
                         if (isFileAlreadyOpen){
                             String message = "You are trying to open the file\n"
                                     + filepath + ".\n"
-                                    + "This file already seems to be open.";
+                                    + "This file already seems to be open.\n"
+                                    + "Partitur-Editor will terminate. ";
                             JOptionPane.showMessageDialog(pe, message);
                             pe.exit();                                    
                         }
@@ -375,6 +377,8 @@ public class PartiturEditor extends javax.swing.JFrame
                             pe.table.setLeftColumn(column);
                             pe.wasCalledFromOutside = true;
                         }
+                        
+                        pe.lockFile(fileToBeOpened);
                         
                         //pe.table.transcriptionChanged = true;
                     } catch (JexmaraldaException | SAXException ex){
@@ -1034,7 +1038,22 @@ public class PartiturEditor extends javax.swing.JFrame
                 raf.close();
                 return true;
             }
-
+            lock.release();            
+            return false; // we successfully got the lock → not open elsewhere
+        } catch (OverlappingFileLockException | IOException e) {
+            // This JVM process already has a lock on the file
+            return true;
+        }
+    }    
+    
+    // 22-10-2025, new for issue #537
+    private void lockFile(File file){
+        try {
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            FileChannel channel = raf.getChannel();
+            
+            // Try to acquire an exclusive lock without blocking
+            FileLock lock = channel.tryLock();
             // Add a shutdown hook to release the lock when the app exits
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
@@ -1045,16 +1064,12 @@ public class PartiturEditor extends javax.swing.JFrame
                     // ignore
                 }
             }));
-
-            return false; // we successfully got the lock → not open elsewhere
-        } catch (OverlappingFileLockException e) {
-            // This JVM process already has a lock on the file
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
     
 
 
