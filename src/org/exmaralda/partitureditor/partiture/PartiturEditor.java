@@ -19,6 +19,10 @@ import java.awt.HeadlessException;
 import java.awt.desktop.OpenFilesEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -333,6 +337,19 @@ public class PartiturEditor extends javax.swing.JFrame
                     try{
                         // dirty fix for #216
                         String filepath = StringUtilities.fixFilePath(args[0]);
+                        
+                        // 22-10-2025, new for issue #537
+                        File fileToBeOpened = new File(filepath);
+                        boolean isFileAlreadyOpen = pe.isFileAlreadyOpen(fileToBeOpened);
+                        if (isFileAlreadyOpen){
+                            String message = "You are trying to open the file\n"
+                                    + filepath + ".\n"
+                                    + "This file already seems to be open.";
+                            JOptionPane.showMessageDialog(pe, message);
+                            pe.exit();                                    
+                        }
+                        
+                        
                         BasicTranscription bt = new BasicTranscription(filepath);
                         //BasicTranscription bt = new BasicTranscription(args[0]);
                         pe.table.stratify(bt);
@@ -1000,6 +1017,44 @@ public class PartiturEditor extends javax.swing.JFrame
             getRegisteredDialog.setVisible(true);
         }
     }
+    
+    
+    
+    // 22-10-2025, new for issue #537
+    private boolean isFileAlreadyOpen(File file) {
+        try {
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            FileChannel channel = raf.getChannel();
+
+            // Try to acquire an exclusive lock without blocking
+            FileLock lock = channel.tryLock();
+
+            if (lock == null) {
+                // Could not get the lock — someone else has it
+                raf.close();
+                return true;
+            }
+
+            // Add a shutdown hook to release the lock when the app exits
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    lock.release();
+                    channel.close();
+                    raf.close();
+                } catch (IOException e) {
+                    // ignore
+                }
+            }));
+
+            return false; // we successfully got the lock → not open elsewhere
+        } catch (OverlappingFileLockException e) {
+            // This JVM process already has a lock on the file
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return true;
+        }
+    }    
     
 
 
