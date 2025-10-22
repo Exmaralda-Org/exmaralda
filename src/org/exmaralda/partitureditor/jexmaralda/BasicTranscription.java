@@ -425,6 +425,16 @@ public class BasicTranscription extends AbstractTranscription {
             }
         }
         
+        // 22-10-2025, new for #539
+        Vector<String> thisReferencedFiles = getHead().getMetaInformation().getReferencedFiles();
+        Vector<String> otherReferencedFiles = otherTrans.getHead().getMetaInformation().getReferencedFiles();
+        for (String otherReferencedFile : otherReferencedFiles){
+            boolean alreadyThere = thisReferencedFiles.contains(otherReferencedFile);
+            if (!(alreadyThere)){
+                thisReferencedFiles.add(otherReferencedFile);
+            }
+        }
+        
         //merge timelines
         Map<String,String> tliMappings = new HashMap<String,String>();
         Timeline thisTimeline = getBody().getCommonTimeline();
