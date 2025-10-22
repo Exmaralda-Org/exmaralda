@@ -5,146 +5,147 @@
             <version version="1.0"/>
             <description>POS-tags</description>
             <category name="abbreviation">
-                <tag name="ABR"/>
+                <tag name="ABR" ud-mapping="X"/>
                 <description/>
             </category>
             <category name="adjective">
-                <tag name="ADJ"/>
+                <tag name="ADJ" ud-mapping="ADJ"/>
                 <description/>
             </category>
             <category name="adverb">
-                <tag name="ADV"/>
+                <tag name="ADV" ud-mapping="ADV"/>
                 <description/>
             </category>
             <category name="determiner">
-                <tag name="DET"/>
+                <tag name="DET" ud-mapping="DET"/>
                 <description/>
                 <category name="article">
-                    <tag name="DET:ART"/>
+                    <tag name="DET:ART" ud-mapping="DET"/>
                     <description/>
                 </category>
                 <category name="possessive pronoun (ma, ta, ...)">
-                    <tag name="DET:POS"/>
+                    <tag name="DET:POS" ud-mapping="DET"/>
                     <description/>
                 </category>
             </category>
             <category name="interjection">
-                <tag name="INT"/>
+                <tag name="INT" ud-mapping="INTJ"/>
                 <description/>
             </category>
+            <!-- ups, this one does not seem right -->
             <category name="conjunction">
-                <tag name="KON"/>
+                <tag name="KON" ud-mapping="CCONJ|SCONJ"/>
                 <description/>
             </category>
             <category name="Names">
                 <tag name="N"/>
                 <description/>
                 <category name="proper name">
-                    <tag name="NAM"/>
+                    <tag name="NAM" ud-mapping="PROPN"/>
                     <description/>
                 </category>
                 <category name="noun">
-                    <tag name="NOM"/>
+                    <tag name="NOM" ud-mapping="NOUN"/>
                     <description/>
                 </category>
             </category>
             <category name="numeral">
-                <tag name="NUM"/>
+                <tag name="NUM" ud-mapping="NUM"/>
                 <description/>
             </category>
             <category name="pronoun">
-                <tag name="PRO"/>
+                <tag name="PRO" ud-mapping="PRON"/>
                 <description/>
                 <category name="demonstrative pronoun">
-                    <tag name="PRO:DEM"/>
+                    <tag name="PRO:DEM" ud-mapping="PRON"/>
                     <description/>
                 </category>
                 <category name="indefinite pronoun">
-                    <tag name="PRO:IND"/>
+                    <tag name="PRO:IND" ud-mapping="PRON"/>
                     <description/>
                 </category>
                 <category name="personal pronoun">
-                    <tag name="PRO:PER"/>
+                    <tag name="PRO:PER" ud-mapping="PRON"/>
                     <description/>
                 </category>
                 <category name="possessive pronoun (mien, tien, ...)">
-                    <tag name="PRO:POS"/>
+                    <tag name="PRO:POS" ud-mapping="PRON"/>
                     <description/>
                 </category>
                 <category name="relative pronoun">
-                    <tag name="PRO:REL"/>
+                    <tag name="PRO:REL" ud-mapping="PRON"/>
                     <description/>
                 </category>
             </category>
             <category name="preposition">
-                <tag name="PRP"/>
+                <tag name="PRP" ud-mapping="ADP"/>
                 <description/>
                 <category name="preposition plus article (au,du,aux,des)">
-                    <tag name="PRP:det"/>
+                    <tag name="PRP:det" ud-mapping="ADP"/>
                     <description/>
                 </category>
             </category>
             <category name="punctuation">
-                <tag name="PUN"/>
+                <tag name="PUN" ud-mapping="PUNCT"/>
                 <description/>
                 <category name="punctuation citation">
-                    <tag name="PUN:cit"/>
+                    <tag name="PUN:cit ud-mapping="PUNCT""/>
                     <description/>
                 </category>
             </category>
             <category name="sentence tag">
-                <tag name="SENT"/>
+                <tag name="SENT" ud-mapping="X"/>
                 <description/>
             </category>
             <category name="symbol">
-                <tag name="SYM"/>
+                <tag name="SYM" ud-mapping="X"/>
                 <description/>
             </category>
             <category name="verb">
-                <tag name="VER"/>
+                <tag name="VER" ud-mapping="VERB"/>
                 <description/>
                 <category name="verb conditional">
-                    <tag name="VER:cond"/>
+                    <tag name="VER:cond" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb futur">
-                    <tag name="VER:futu"/>
+                    <tag name="VER:futu" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb imperative">
-                    <tag name="VER:impe"/>
+                    <tag name="VER:impe" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb imperfect">
-                    <tag name="VER:impf"/>
+                    <tag name="VER:impf" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb infinitive">
-                    <tag name="VER:infi"/>
+                    <tag name="VER:infi" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb past participle">
-                    <tag name="VER:pper"/>
+                    <tag name="VER:pper" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb present participle">
-                    <tag name="VER:ppre"/>
+                    <tag name="VER:ppre" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb present">
-                    <tag name="VER:pres"/>
+                    <tag name="VER:pres" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb simple past">
-                    <tag name="VER:simp"/>
+                    <tag name="VER:simp" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb subjunctive imperfect">
-                    <tag name="VER:subi"/>
+                    <tag name="VER:subi" ud-mapping="VERB"/>
                     <description/>
                 </category>
                 <category name="verb subjunctive present">
-                    <tag name="VER:subp"/>
+                    <tag name="VER:subp" ud-mapping="VERB"/>
                     <description/>
                 </category>
             </category>
