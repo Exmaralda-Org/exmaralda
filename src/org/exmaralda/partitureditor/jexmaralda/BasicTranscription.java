@@ -436,7 +436,7 @@ public class BasicTranscription extends AbstractTranscription {
         }
         
         //merge timelines
-        Map<String,String> tliMappings = new HashMap<String,String>();
+        Map<String,String> tliMappings = new HashMap<>();
         Timeline thisTimeline = getBody().getCommonTimeline();
         Timeline otherTimeline = otherTrans.getBody().getCommonTimeline();
         thisTimeline.completeTimes();

@@ -46,6 +46,7 @@ import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.InelEventBasedSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
+import org.exmaralda.tei.TEINamespaceCleanser;
 import org.jdom.Attribute;
 import org.jdom.Content;
 import org.jdom.Document;
@@ -98,6 +99,8 @@ public class TEIConverter extends AbstractConverter {
     public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
     public static String ISOTEI2FOLKER_2_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2folker.xsl";
     
+    public static String ISOTEI2EXMARaLDA_TIME2TOKEN_SPANS_XSL = "/org/exmaralda/tei/xml/time2tokenSpanReferences.xsl";
+
     public static final int ISO_NON_SEGMENTED_METHOD = 6;
     public static final int HIAT_ISO_METHOD = 7;
     public static final int CGAT_MINIMAL_ISO_METHOD = 8;
@@ -137,6 +140,7 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);        
         setTranscriptionDesc(teiDoc, "unspecified", "unspecified");
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        TEINamespaceCleanser.cleanFile(new File(path));
         System.out.println("[TEIConverter] Non segmented ISO TEI File written to " + path);
     }
     
@@ -151,6 +155,8 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);     
         setTranscriptionDesc(teiDoc, "EVENT_TOKEN", "1.0");
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        TEINamespaceCleanser.cleanFile(new File(path));
+        System.out.println("[TEIConverter] Event token ISO TEI File written to " + path);
     }
     
 
@@ -166,9 +172,14 @@ public class TEIConverter extends AbstractConverter {
         System.out.println("[TEIConverter] Segmented transcription created");
         StylesheetFactory sf = new StylesheetFactory(true);
         String result = sf.applyInternalStylesheetToString(TEIConverter.INEL_SEGMENTED_ISO_TEI_XSL, st.toXML());
-        Document teiDoc = IOUtilities.readDocumentFromString(result);
+        String result2 = sf.applyInternalStylesheetToString(TEIConverter.ISOTEI2EXMARaLDA_0_NORMALIZE, result);
+        String result3 = sf.applyInternalStylesheetToString(TEIConverter.ISOTEI2EXMARaLDA_TIME2TOKEN_SPANS_XSL, result2);
+        Document teiDoc = IOUtilities.readDocumentFromString(result3);
         setDocLanguage(teiDoc, language);     
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        TEINamespaceCleanser.cleanFile(new File(path));
+        System.out.println("[TEIConverter] INEL event based ISO TEI File written to " + path);
+        
     }
 
 
@@ -234,7 +245,8 @@ public class TEIConverter extends AbstractConverter {
         //IOUtilities.writeDocumentToLocalFile(filename, teiDoc, prettyFormat);
         System.out.println("[TEIConverter] Started writing document " + filename + "...");
         IOUtilities.writeDocumentToLocalFile(filename, teiDoc);
-        System.out.println("[TEIConverter] document " + filename + " written.");        
+        TEINamespaceCleanser.cleanFile(new File(filename));       
+        System.out.println("[TEIConverter] HIAT ISO/TEI " + filename + " written.");        
     }
     
     // *********************
@@ -274,7 +286,8 @@ public class TEIConverter extends AbstractConverter {
         //prettyFormat.setTextMode(Format.TextMode.TRIM_FULL_WHITE);                
         //IOUtilities.writeDocumentToLocalFile(filename, teiDoc, prettyFormat);
         IOUtilities.writeDocumentToLocalFile(filename, teiDoc);
-        System.out.println("document written.");        
+        TEINamespaceCleanser.cleanFile(new File(filename));       
+        System.out.println("[TEIConverter] cGAT Minimal ISO/TEI " + filename + " written.");        
     }
     
     // *********************
@@ -310,7 +323,8 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);        
         setTranscriptionDesc(teiDoc, "GENERIC", "1.0");
         IOUtilities.writeDocumentToLocalFile(filename, teiDoc);
-        System.out.println("document written.");        
+        TEINamespaceCleanser.cleanFile(new File(filename));       
+        System.out.println("[TEIConverter] Generic ISO/TEI " + filename + " written.");        
     }
     
 
@@ -348,7 +362,8 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);        
         setTranscriptionDesc(teiDoc, "CHAT Minimal", "1.0");
         IOUtilities.writeDocumentToLocalFile(filename, teiDoc);
-        System.out.println("document written.");        
+        TEINamespaceCleanser.cleanFile(new File(filename));       
+        System.out.println("[TEIConverter] CHAT Minimal ISO/TEI " + filename + " written.");        
     }
     
     
@@ -373,6 +388,9 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);       
         setTranscriptionDesc(teiDoc, "cGAT-Minimal", "2017");        
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
+        TEINamespaceCleanser.cleanFile(new File(path));       
+        System.out.println("[TEIConverter] FOLKER ISO/TEI " + path + " written.");        
+        
     }
     
     public void writeFOLKERISOTEIToFile(Document flnDoc, String absolutePath) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException, JDOMException {
@@ -383,6 +401,8 @@ public class TEIConverter extends AbstractConverter {
         setDocLanguage(teiDoc, language);                
         setTranscriptionDesc(teiDoc, "cGAT-Minimal", "2017");
         IOUtilities.writeDocumentToLocalFile(absolutePath, teiDoc);
+        TEINamespaceCleanser.cleanFile(new File(absolutePath));       
+        System.out.println("[TEIConverter] FOLKER ISO/TEI " + absolutePath + " written.");        
     }
     
     

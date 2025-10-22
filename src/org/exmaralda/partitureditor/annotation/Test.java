@@ -5,7 +5,6 @@
 
 package org.exmaralda.partitureditor.annotation;
 
-import java.io.File;
 import java.io.IOException;
 import org.jdom.JDOMException;
 
@@ -23,14 +22,11 @@ public class Test {
             AnnotationSpecification as = new AnnotationSpecification();
             //as.read(new File("C:\\Dokumente und Einstellungen\\thomas\\Desktop\\ANNOTATION\\annotation-specification-hu.xml"));
             
-            UDPOSMapping m = new UDPOSMapping(UDPOSMapping.TagSet.STTS_2_0);
+            UDPOSMapping m = new UDPOSMapping(UDPOSMapping.TagSet.PENN_1_0);
             for (String key : m.keySet()){
                 System.out.println(key + " --> " + m.get(key));
             }
-        } catch (JDOMException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (JDOMException | IOException ex) {
         }
     }
 
