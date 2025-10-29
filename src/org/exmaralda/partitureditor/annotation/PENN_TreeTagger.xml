@@ -2,28 +2,36 @@
 <annotation-specification>
     <annotation-set exmaralda-tier-category="POS">
         <category name="POS-tags">
-            <version version="1.0"/>
-            <description>PENN POS-tags according to the original specification at https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html</description>
+            <version version="1.1"/>
+            <description>PENN POS-tags according to the TreeTagger documentation at https://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/Penn-Treebank-Tagset.pdf</description>
+            <!-- identical in 1.0 -->
             <category name="Coordinating conjunction">
                 <tag ud-mapping="CCONJ" name="CC"/>
-                <description/>
+                <description>
+                    He asked to be transferred for/CC he was unhappy                    
+                </description>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Cardinal number">
                 <tag ud-mapping="NUM" name="CD"/>
                 <description/>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Determiner">
                 <tag ud-mapping="DET" name="DT"/>
                 <description/>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Existential there">
                 <tag ud-mapping="PRON" name="EX"/>
-                <description/>
+                <description>There/EX was a party in progress</description>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Foreign word">
                 <tag ud-mapping="X" name="FW"/>
-                <description/>
+                <description>bete/FW noire/FW</description>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Preposition or subordinating conjunction">
                 <tag ud-mapping="ADP" name="IN"/>
                 <description/>
@@ -31,31 +39,38 @@
             <category name="Adjectives">
                 <tag name="J"/>
                 <description/>
+                <!-- identical in 1.0 -->
                 <category name="Adjective">
                     <tag ud-mapping="ADJ" name="JJ"/>
                     <description/>
                 </category>
+                <!-- identical in 1.0 -->
                 <category name="Adjective, comparative">
                     <tag ud-mapping="ADJ" name="JJR"/>
                     <description/>
                 </category>
+                <!-- identical in 1.0 -->
                 <category name="Adjective, superlative">
                     <tag ud-mapping="ADJ" name="JJS"/>
                     <description/>
                 </category>                
             </category>
+            <!-- identical in 1.0 -->
             <category name="List item marker">
                 <tag ud-mapping="X" name="LS"/>
                 <description/>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Modal">
                 <tag ud-mapping="VERB" name="MD"/>
-                <description/>
+                <description>can, could, dare, may, might, must, ought, shall, should, will, would</description>
             </category>
+
+
             <category name="Nouns">
                 <tag name="N"/>
                 <description/>
-                <category name="Noun, singular or mass">
+                <!-- <category name="Noun, singular or mass">
                     <tag ud-mapping="NOUN" name="NN"/>
                     <description/>
                 </category>
@@ -70,18 +85,47 @@
                 <category name="Proper noun, plural">
                     <tag ud-mapping="PROPN" name="NNPS"/>
                     <description/>
-                </category>                
+                </category>   -->
+                <!-- different from 1.0 -->
+                <!--
+                    NN Noun singular or mass 
+                    NNS Noun plural 
+                    NP Propernoun singular 
+                    NPS Propernoun plural                    
+                -->
+                <category name="Noun, singular or mass">
+                    <tag ud-mapping="NOUN" name="NN"/>
+                    <description/>
+                </category>
+                <category name="Noun, plural">
+                    <tag ud-mapping="NOUN" name="NNS"/>
+                    <description/>
+                </category>
+                <category name="Proper noun, singular">
+                    <tag ud-mapping="PROPN" name="NP"/>
+                    <description/>
+                </category>
+                <category name="Proper noun, plural">
+                    <tag ud-mapping="PROPN" name="NPS"/>
+                    <description/>
+                </category>   -->                
             </category>
+            
+            
+            <!-- identical in 1.0 -->
             <category name="Predeterminer">
                 <tag ud-mapping="DET" name="PDT"/>
                 <description/>
             </category>
+            <!-- identical in 1.0 -->
             <category name="Possessive ending">
                 <tag ud-mapping="PART" name="POS"/>
                 <description/>
             </category>
+            
+            <!-- different from 1.0 -->
             <category name="Pronouns">
-                <tag name="PR"/>
+                <!-- <tag name="PR"/>
                 <description/>
                 <category name="Personal pronoun">
                     <tag ud-mapping="PRON" name="PRP"/>
@@ -90,8 +134,22 @@
                 <category name="Possessive pronoun">
                     <tag ud-mapping="DET" name="PRP$"/>
                     <description/>
+                </category> -->
+                
+                <tag name="PP"/>
+                <description/>
+                <category name="Personal pronoun">
+                    <tag ud-mapping="PRON" name="PP"/>
+                    <description/>
                 </category>
+                <category name="Possessive pronoun">
+                    <tag ud-mapping="DET" name="PP$"/>
+                    <description/>
+                </category>
+                
             </category>
+            
+            <!-- identical in 1.0 -->
             <category name="Adverbs">
                 <tag ud-mapping="ADV" name="RB"/>
                 <description/>
@@ -108,22 +166,32 @@
                     <description/>
                 </category>
             </category>
+            
+            <!-- identical in 1.0 -->
             <category name="Particle">
                 <tag ud-mapping="ADP" name="RP"/>
                 <description/>
             </category>
+            
+            <!-- identical in 1.0 -->
             <category name="Symbol">
                 <tag ud-mapping="SYM" name="SYM"/>
                 <description/>
             </category>
+
+            <!-- identical in 1.0 -->
             <category name="to">
                 <tag ud-mapping="PART" name="TO"/>
                 <description/>
             </category>
+
+            <!-- identical in 1.0 -->
             <category name="Interjection">
                 <tag ud-mapping="INTJ" name="UH"/>
                 <description/>
             </category>
+            
+            <!-- identical in 1.0 -->
             <category name="Verbs">
                 <tag name="V"/>
                 <description/>
@@ -153,6 +221,8 @@
                     <description/>
                 </category>
             </category>
+            
+            <!-- identical in 1.0 -->
             <category name="Wh-words">
                 <tag name="W"/>
                 <description/>
@@ -174,6 +244,8 @@
                     <description/>
                 </category>
             </category>
+            
+            
         </category>
     </annotation-set>
 </annotation-specification>
