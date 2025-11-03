@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- exb2exb-s.xsl -->
-<!-- Version 13.1 -->
-<!-- Andreas Nolda 2025-08-26 -->
+<!-- Version 13.2 -->
+<!-- Andreas Nolda 2025-11-01 -->
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -86,6 +86,8 @@
 
 <xsl:template name="get-end-tli">
   <xsl:choose>
+    <!-- non-sentence-final punctuation (ignored) -->
+    <xsl:when test=".=$non-sentence-final-punctuation/punct"/>
     <!-- closing parenthesis -->
     <xsl:when test="following-sibling::event[1][.=')']">
       <xsl:for-each select="following-sibling::event[1]">
@@ -102,9 +104,11 @@
     <!-- "¶" or "|" event on the "orig" tier -->
     <xsl:when test="not(following-sibling::event[1][@start=current()/@end]) and
                     ../../tier[@category='orig']/event[normalize-space(.)='&#xB6;' or
-                                                       normalize-space(.)='|'][@start=current()/@end]">
+                                                       normalize-space(.)='|']
+                                                      [@start=current()/@end]">
       <xsl:for-each select="../../tier[@category='orig']/event[normalize-space(.)='&#xB6;' or
-                                                               normalize-space(.)='|'][@start=current()/@end]">
+                                                               normalize-space(.)='|']
+                                                              [@start=current()/@end]">
         <xsl:call-template name="get-end-tli"/>
       </xsl:for-each>
     </xsl:when>
@@ -190,6 +194,15 @@
   </xsl:choose>
 </xsl:variable>
 
+<xsl:variable name="non-sentence-final-punctuation">
+  <!-- inverted exclamation mark -->
+  <punct>&#xA1;</punct>
+  <!-- inverted question mark -->
+  <punct>&#xBF;</punct>
+  <!-- inverted interrobang -->
+  <punct>&#x2E18;</punct>
+</xsl:variable>
+
 <xsl:template name="s-events">
   <xsl:param name="pos-id"/>
   <!-- cf. Michael Kay, "XSLT 2.0 and XPath 2.0", 4th ed., p. 895 -->
@@ -216,15 +229,18 @@
   <xsl:variable name="end-tlis">
     <xsl:choose>
       <xsl:when test="$starts-with-title">
-        <xsl:for-each select="tier[@id=$reference-id]/event[position()&gt;count($title-words)]
-                                                           [@start=../../tier[@id=$pos-id]/event[.=$sentence-final-tags/tag][not(following-sibling::event[1][.=$sentence-final-tags/tag])]/@start or
+        <xsl:for-each select="tier[@id=$reference-id]/event[position()&gt;count($title-words)][@start=../../tier[@id=$pos-id]/event[.=$sentence-final-tags/tag]
+                                                                                                                                   [not(following-sibling::event[1][.=$sentence-final-tags/tag]
+                                                                                                                                                                   [not(@start=../../tier[@id=$reference-id]/event[.=$non-sentence-final-punctuation/punct]/@start)])]/@start or
                                                             .=$sentence-final-abbreviations/abbr and
                                                               following-sibling::event[1][matches(substring(.,1,1),'\p{Lu}')]]">
           <xsl:call-template name="get-end-tli"/>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:for-each select="tier[@id=$reference-id]/event[@start=../../tier[@id=$pos-id]/event[.=$sentence-final-tags/tag][not(following-sibling::event[1][.=$sentence-final-tags/tag])]/@start or
+        <xsl:for-each select="tier[@id=$reference-id]/event[@start=../../tier[@id=$pos-id]/event[.=$sentence-final-tags/tag]
+                                                                                                [not(following-sibling::event[1][.=$sentence-final-tags/tag]
+                                                                                                                                [not(@start=../../tier[@id=$reference-id]/event[.=$non-sentence-final-punctuation/punct]/@start)])]/@start or
                                                             .=$sentence-final-abbreviations/abbr and
                                                               following-sibling::event[1][matches(substring(.,1,1),'\p{Lu}')]]">
           <xsl:call-template name="get-end-tli"/>
