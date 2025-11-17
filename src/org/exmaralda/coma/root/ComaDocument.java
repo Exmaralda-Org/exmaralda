@@ -44,6 +44,31 @@ public class ComaDocument extends Document {
         return getIDs("//Transcription");
     }
     
+    // for #545: Sad that it is somehow duplicating the ZuMult implementation, but so what...
+    public List<String> getTranscriptionIDsForCommunication(String communicationID) throws JDOMException{
+        return getIDs("//Communication[@Id='" + communicationID + "']/descendant::Transcription");        
+    }
+
+    public List<String> getSpeakerIDsForCommunication(String communicationID) throws JDOMException{
+        List<String> result = new ArrayList<>();
+        List l = XPath.selectNodes(this, "//Communication[@Id='" + communicationID + "']/descendant::Person");
+        for (Object o : l){
+            Element e = (Element)o;
+            String id = e.getText();
+            result.add(id);
+        }
+        return result;                
+    }
+
+    public List<String> getCommunicationIDsForSpeaker(String speakerID) throws JDOMException {
+        return getIDs("//Communication[descendant::Person='" + speakerID + "']");                
+    }
+    
+    public String getCommunicationIDForTranscription(String transcriptionID) throws JDOMException{
+        Element commE = (Element) XPath.selectSingleNode(this, "//Transcription[@Id='" + transcriptionID + "']/ancestor::Communication[1]");
+        return commE.getAttributeValue("Id");
+    }
+    
     Map<String, Map<String, String>> communicationMetadata;
     Map<String, Map<String, String>> speakerMetadata;
     Map<String, Map<String, String>> transcriptionMetadata;

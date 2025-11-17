@@ -52,6 +52,7 @@ public class TestComaDocument {
             }
         }
         
+        System.out.println("==================");
         Map<String, Map<String, String>> communicationMetadataAsMap = comaDocument.getCommunicationMetadataAsMap();
         for (String key : communicationMetadataAsMap.keySet()){
             System.out.println(key);
@@ -60,12 +61,26 @@ public class TestComaDocument {
             }
         }
         
+        System.out.println("==================");
         Map<String, Map<String, String>> transcriptionMetadataAsMap = comaDocument.getTranscriptionMetadataAsMap();
         for (String key : transcriptionMetadataAsMap.keySet()){
             System.out.println(key);
             for (String key2 : transcriptionMetadataAsMap.get(key).keySet()){
                 System.out.println("\t" + key2 + "\t" + transcriptionMetadataAsMap.get(key).get(key2));
             }
+        }
+        
+        System.out.println("==================");
+        for (String id : comaDocument.getSpeakerIDs()){
+            System.out.println(id);
+            for (String id2 : comaDocument.getCommunicationIDsForSpeaker(id)){
+                System.out.println("\t" + id2);
+            }
+        }
+        
+        System.out.println("==================");
+        for (String id : comaDocument.getTranscriptionIDs()){
+            System.out.println(id + "\t" + comaDocument.getCommunicationIDForTranscription(id));
         }
     }
     
