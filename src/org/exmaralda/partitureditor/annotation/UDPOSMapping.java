@@ -21,7 +21,7 @@ import org.jdom.xpath.XPath;
 public class UDPOSMapping extends HashMap<String, String> {
 
     
-    public enum TagSet {PENN_1_0, FRENCH_1_0, ITALIAN_1_0, STTS_2_0};
+    public enum TagSet {PENN_1_0, PENN_TREE_TAGGER, FRENCH_1_0, ITALIAN_1_0, STTS_2_0};
     
     
     public UDPOSMapping(TagSet tagSet) throws JDOMException, IOException{
@@ -53,6 +53,8 @@ public class UDPOSMapping extends HashMap<String, String> {
         switch (tagSet){
             case PENN_1_0 : 
                 return "/org/exmaralda/partitureditor/annotation/PENN_1_0.xml";
+            case PENN_TREE_TAGGER : 
+                return "/org/exmaralda/partitureditor/annotation/PENN_TreeTagger.xml";
             case FRENCH_1_0 : 
                 return "/org/exmaralda/partitureditor/annotation/FRENCH_1_0.xml";
             case ITALIAN_1_0 : 
