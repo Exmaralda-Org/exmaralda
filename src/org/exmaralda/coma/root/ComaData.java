@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.prefs.Preferences;
 
-import org.exmaralda.coma.datatypes.ComaDatatype;
 import org.exmaralda.coma.datatypes.ComaTemplate;
 import org.exmaralda.coma.filters.ComaFilter;
 import org.exmaralda.coma.helpers.ComaTemplates;
