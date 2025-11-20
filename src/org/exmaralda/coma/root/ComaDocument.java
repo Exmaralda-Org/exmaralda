@@ -113,6 +113,10 @@ public class ComaDocument extends Document {
                 String value = e2.getText();
                 thisMap.put(key, value);
             }
+            if (e.getName().equals("Speaker")){
+                String sex = e.getChildText("Sex");
+                thisMap.put("Sex", sex);
+            }
             result.put(id, thisMap);
         }
         return result;        
