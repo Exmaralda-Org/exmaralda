@@ -24,6 +24,7 @@ public class AboutAction extends javax.swing.AbstractAction {
 
     
     
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         AboutDialog ad = new AboutDialog(null, true, application);
         ad.setLocationRelativeTo((java.awt.Component)application);

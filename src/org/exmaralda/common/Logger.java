@@ -6,6 +6,7 @@
 package org.exmaralda.common;
 
 import java.io.*;
+import org.exmaralda.common.application.AboutDialog;
 
 /**
  *
@@ -76,6 +77,7 @@ public class Logger {
         
         System.out.println("JRE version : " + System.getProperty("java.version"));
         System.out.println("JRE vendor : " + System.getProperty("java.vendor"));
+        System.out.println("JavaFX version : " + AboutDialog.getJavaFXVersion());
         
         System.out.println("JVM version (specification/implementation) : " 
                 + System.getProperty("java.vm.specification.version") + " / " + System.getProperty("java.vm.version"));

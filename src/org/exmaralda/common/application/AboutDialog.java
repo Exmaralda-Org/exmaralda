@@ -5,6 +5,9 @@
  */
 
 package org.exmaralda.common.application;
+import java.lang.module.ModuleDescriptor;
+import java.util.Optional;
+import javafx.application.Application;
 import javax.swing.JOptionPane;
 import org.exmaralda.common.*;
 import org.exmaralda.exakt.utilities.HTMLSelection;
@@ -28,9 +31,15 @@ public class AboutDialog extends javax.swing.JDialog {
         String javaVersion = System.getProperty("java.version");
         String os = System.getProperty("os.name");
         String osVersion = System.getProperty("os.version");
+        
+        //Package pkg = javafx.application.Application.class.getPackage();
+        //String jfxVersion = pkg.getImplementationVersion();
+        String jfxVersion = getJavaFXVersion();
+        
         osLabel.setText(os);
         osVersionLabel.setText(osVersion);
         javaVersionLabel.setText(javaVersion);
+        jfxVersionLabel.setText(jfxVersion);
         softwareVersionLabel.setText(app.getVersion());
         buildTimeLabel.setText(org.exmaralda.common.EXMARaLDAConstants.BUILD_TIME);
 
@@ -70,6 +79,8 @@ public class AboutDialog extends javax.swing.JDialog {
         osVersionLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         javaVersionLabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jfxVersionLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         softwareVersionLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -90,7 +101,7 @@ public class AboutDialog extends javax.swing.JDialog {
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         versionInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Version Info"));
-        versionInfoPanel.setLayout(new java.awt.GridLayout(5, 2));
+        versionInfoPanel.setLayout(new java.awt.GridLayout(6, 2));
 
         jLabel1.setText("Operating system: ");
         versionInfoPanel.add(jLabel1);
@@ -109,6 +120,12 @@ public class AboutDialog extends javax.swing.JDialog {
 
         javaVersionLabel.setText("jLabel1");
         versionInfoPanel.add(javaVersionLabel);
+
+        jLabel8.setText("JFX version: ");
+        versionInfoPanel.add(jLabel8);
+
+        jfxVersionLabel.setText("jLabel1");
+        versionInfoPanel.add(jfxVersionLabel);
 
         jLabel7.setText("Software version: ");
         versionInfoPanel.add(jLabel7);
@@ -217,6 +234,13 @@ private void copyDebugButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         });*/
     }
+    
+    public static String getJavaFXVersion() {
+        Package pkg = javafx.application.Application.class.getPackage();
+        return (pkg != null && pkg.getImplementationVersion() != null)
+               ? pkg.getImplementationVersion()
+               : "unknown";
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel basePanel;
@@ -233,8 +257,10 @@ private void copyDebugButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel javaVersionLabel;
+    private javax.swing.JLabel jfxVersionLabel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel osLabel;
     private javax.swing.JLabel osVersionLabel;
