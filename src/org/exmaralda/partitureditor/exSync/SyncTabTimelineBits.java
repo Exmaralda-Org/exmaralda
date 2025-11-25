@@ -6,15 +6,18 @@
 
 package org.exmaralda.partitureditor.exSync;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author  thomas
  */
-public abstract class SyncTabTimelineBits extends java.util.Vector implements java.util.Comparator{
+public abstract class SyncTabTimelineBits extends ArrayList {
     
     /** Creates a new instance of SyncTabTimelineBits */
     public SyncTabTimelineBits() {
     }
+    
     
     
 }
