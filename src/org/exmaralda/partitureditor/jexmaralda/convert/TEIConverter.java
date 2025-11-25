@@ -100,6 +100,8 @@ public class TEIConverter extends AbstractConverter {
     public static String ISOTEI2FOLKER_2_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2folker.xsl";
     
     public static String ISOTEI2EXMARaLDA_TIME2TOKEN_SPANS_XSL = "/org/exmaralda/tei/xml/time2tokenSpanReferences.xsl";
+    
+    public static String ISOTEI2EXMARaLDA_INEL_FINAL_FIXES_XSL = "/org/exmaralda/tei/xml/INELFinalFixes.xsl";
 
     public static final int ISO_NON_SEGMENTED_METHOD = 6;
     public static final int HIAT_ISO_METHOD = 7;
@@ -174,7 +176,8 @@ public class TEIConverter extends AbstractConverter {
         String result = sf.applyInternalStylesheetToString(TEIConverter.INEL_SEGMENTED_ISO_TEI_XSL, st.toXML());
         String result2 = sf.applyInternalStylesheetToString(TEIConverter.ISOTEI2EXMARaLDA_0_NORMALIZE, result);
         String result3 = sf.applyInternalStylesheetToString(TEIConverter.ISOTEI2EXMARaLDA_TIME2TOKEN_SPANS_XSL, result2);
-        Document teiDoc = IOUtilities.readDocumentFromString(result3);
+        String result4 = sf.applyInternalStylesheetToString(TEIConverter.ISOTEI2EXMARaLDA_INEL_FINAL_FIXES_XSL, result3);
+        Document teiDoc = IOUtilities.readDocumentFromString(result4);
         setDocLanguage(teiDoc, language);     
         IOUtilities.writeDocumentToLocalFile(path, teiDoc);
         TEINamespaceCleanser.cleanFile(new File(path));
