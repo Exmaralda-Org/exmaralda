@@ -22,10 +22,20 @@
         <xsl:copy>
             <xsl:attribute name="from" select="@from"/>
             <xsl:attribute name="to" select="@from"/>
+            <xsl:variable name="AB_ID" select="ancestor::tei:annotationBlock/@xml:id"/>
             <xsl:variable name="COUNT" select="count(preceding-sibling::tei:span) + 1"/>
+            <xsl:variable name="TYPE" select="parent::tei:spanGrp/@type"/>
             <xsl:for-each select="tokenize(text(), $TOKENIZE_REGEX)">
                 <tei:span>
-                    <xsl:attribute name="xml:id" select="concat('mb', $COUNT, '_', position())"/>
+                    <xsl:choose>
+                        <xsl:when test="$TYPE='mb'">
+                            <xsl:attribute name="xml:id" select="concat($AB_ID, '_mb', $COUNT, '_', position())"/>                            
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="from" select="concat($AB_ID, '_mb', $COUNT, '_', position())"/>                            
+                            <xsl:attribute name="to" select="concat($AB_ID, '_mb', $COUNT, '_', position())"/>                                                        
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:value-of select="."/>
                 </tei:span>
             </xsl:for-each>
