@@ -10,6 +10,12 @@ import javax.swing.*;
 import org.exmaralda.partitureditor.partiture.*;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
+import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import org.exmaralda.partitureditor.partiture.fileActions.OpenRecentAction;
 
 /**
@@ -99,7 +105,9 @@ public class FileMenu extends AbstractTableMenu {
         while ((fileCount<5) && (pos<recentFiles.size())){
             String filename = (String)(recentFiles.elementAt(pos));
             if (!hs.contains(filename)){
-                if (new java.io.File(filename).exists()){
+                // this has been found to hang when a network drive is not connected
+                //if (new java.io.File(filename).exists()){
+                if (existsWithTimeout(filename, 200)){
                     add(new OpenRecentAction(table, filename)).setToolTipText(filename);
                     hs.add(filename);
                     fileCount++;
@@ -110,4 +118,21 @@ public class FileMenu extends AbstractTableMenu {
         //addSeparator();
     }
     
+    
+    private static boolean existsWithTimeout(String path, long timeoutMs) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            Future<Boolean> future = executor.submit(() -> new File(path).exists());
+            return future.get(timeoutMs, TimeUnit.MILLISECONDS);
+        } catch (TimeoutException e) {
+            // Timed out => treat as "unknown/unreachable"
+            return false;
+        } catch (Exception e) {
+            // Any other error => also treat as "does not exist"
+            return false;
+        } finally {
+            executor.shutdownNow();
+        }
+    }    
+
 }

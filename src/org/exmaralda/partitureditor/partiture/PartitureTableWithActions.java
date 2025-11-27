@@ -3000,6 +3000,7 @@ public class PartitureTableWithActions extends PartitureTable
         System.out.println("Default player: " + defaultPlayer);
         
         String playerType = settings.get("PlayerType", defaultPlayer);
+        
         settings.put("PlayerType", playerType);
         
         System.out.println("User's player: " + playerType);
