@@ -48,7 +48,9 @@ public class StylesheetFactory implements javax.xml.transform.ErrorListener {
             tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null);            
         } else {
             //System.setProperty("javax.xml.transform.TransformerFactory", "org.apache.xalan.processor.TransformerFactoryImpl");                
-            tFactory = TransformerFactory.newInstance("org.apache.xalan.processor.TransformerFactoryImpl", null);            
+            //tFactory = TransformerFactory.newInstance("org.apache.xalan.processor.TransformerFactoryImpl", null);            
+            // 2025-21-03: changed for issue #544
+            tFactory = TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null);            
         }
     }
     
