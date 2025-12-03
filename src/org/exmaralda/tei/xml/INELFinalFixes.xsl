@@ -15,8 +15,11 @@
     </xsl:template>
     
     <!-- mb, mp, mc, ge, gr, and gg. The last one is optional, if it matters for the processing - only 2 corpora use it. -->
+    <!-- 
+        This is my mistake - we don't need to break words into morphemes on the mc layer for Tsakorpus purposes. Could you remove it from the list?
+    -->
     <xsl:template match="tei:spanGrp[
-        @type='mb' or @type='mp' or @type='mc' or @type='ge' or
+        @type='mb' or @type='mp' or @type='ge' or
         @type='gr' or @type='gg'
         ]/tei:span">
         <xsl:copy>
@@ -41,6 +44,36 @@
             </xsl:for-each>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- Sentence-level annotations (tier types ref, st, stl, ts, fe, fr, ltr, nt in the example, often there are others) refer to words:
+        <span from="TIE4.e0.w" to="TIE4.e1.2.1">ASS_ChND_190725_Batu_conv.ASS.001 (001)</span>
+            ...when they should refer to the segment instead:
+        <span from="TIE4.u1" to="TIE4.u1">ASS_ChND_190725_Batu_conv.ASS.001 (001)</span>
+    -->
+    <xsl:template match="tei:spanGrp[
+        @type='ref' or @type='st' or @type='stl' or
+        @type='ts' or @type='fe' or @type='fr' or
+        @type='ltr' or @type='nt' or @type='fr'
+        ]/tei:span">
+        <xsl:copy>
+            <xsl:attribute name="from" select="id(@from)/ancestor::tei:seg[1]/@xml:id"/>
+            <xsl:attribute name="to" select="id(@to)/ancestor::tei:seg[1]/@xml:id"/>
+            <xsl:apply-templates select="@*[not(name()='from' or name()='to')]|node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- incident nodes are lacking ids:
+        <incident><desc>ChND:</desc></incident>
+        The old converter created them:
+        <incident xml:id="inc7"><desc>ChND:</desc></incident> 
+    -->    
+    <xsl:template match="tei:incident[not(@xml:id)]">
+        <xsl:copy>
+            <xsl:attribute name="xml:id" select="generate-id(.)"/>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>        
+    </xsl:template>
+        
     
 
     
