@@ -73,6 +73,17 @@
         </xsl:copy>
     </xsl:template>
     
+
+    <!-- For word layers: make to the same value as from, i.e. skip/ignore punctuation -->
+    <xsl:template match="tei:spanGrp[@type = $WORD_LEVEL_LAYERS/layers/layer]/tei:span">
+        <xsl:copy>
+            <xsl:attribute name="from" select="@from"/>
+            <xsl:attribute name="to" select="@from"/>
+            <xsl:value-of select="text()"/>
+        </xsl:copy>        
+    </xsl:template>
+        
+
     <!-- Sentence-level annotations (tier types ref, st, stl, ts, fe, fr, ltr, nt in the example, often there are others) refer to words:
         <span from="TIE4.e0.w" to="TIE4.e1.2.1">ASS_ChND_190725_Batu_conv.ASS.001 (001)</span>
             ...when they should refer to the segment instead:
