@@ -5,7 +5,39 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <xsl:variable name="TOKENIZE_REGEX">[=\-]</xsl:variable>
+    <!-- These are the symbols signalling morpheme breaks in the morpheme layers -->
+    <xsl:param name="MORPHEME_TOKENIZE_REGEX">[=\-]</xsl:param>
+
+    <!-- mb, mp, ge, gr, and gg  -->
+    <xsl:param name="MORPHEME_LEVEL_LAYERS">
+        <layers>
+            <layer>mb</layer>
+            <layer>mp</layer>
+            <layer>ge</layer>
+            <layer>gr</layer>
+            <layer>gg</layer>
+        </layers>
+    </xsl:param>
+    
+    <!-- If an explicit list is the way to go, then I would suggest treating the following as "word-level":
+        tx, mc, ps, SeR, SyF, IST, BOR, BOR-Morph, BOR-Phon, BOR-Src, CS, ExLocPoss, geo 
+    -->
+    <xsl:param name="WORD_LEVEL_LAYERS">
+        <layers>
+            <layer>mc</layer>
+            <layer>ps</layer>
+            <layer>SeR</layer>
+            <layer>SyF</layer>
+            <layer>IST</layer>
+            <layer>BOR</layer>
+            <layer>BOR-Morph</layer>
+            <layer>BOR-Phon</layer>
+            <layer>BOR-Src</layer>
+            <layer>CS</layer>
+            <layer>ExLocPoss</layer>
+            <layer>geo</layer>
+        </layers>
+    </xsl:param>
     
     
     <xsl:template match="@*|node()">
@@ -14,26 +46,22 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- mb, mp, mc, ge, gr, and gg. The last one is optional, if it matters for the processing - only 2 corpora use it. -->
-    <!-- 
-        This is my mistake - we don't need to break words into morphemes on the mc layer for Tsakorpus purposes. Could you remove it from the list?
-    -->
-    <xsl:template match="tei:spanGrp[
-        @type='mb' or @type='mp' or @type='ge' or
-        @type='gr' or @type='gg'
-        ]/tei:span">
+    <!-- For morpheme level layers: Tokenize and assign ids or ref-ids -->
+    <xsl:template match="tei:spanGrp[@type = $MORPHEME_LEVEL_LAYERS/layers/layer]/tei:span">
         <xsl:copy>
             <xsl:attribute name="from" select="@from"/>
             <xsl:attribute name="to" select="@from"/>
             <xsl:variable name="AB_ID" select="ancestor::tei:annotationBlock/@xml:id"/>
             <xsl:variable name="COUNT" select="count(preceding-sibling::tei:span) + 1"/>
             <xsl:variable name="TYPE" select="parent::tei:spanGrp/@type"/>
-            <xsl:for-each select="tokenize(text(), $TOKENIZE_REGEX)">
+            <xsl:for-each select="tokenize(text(), $MORPHEME_TOKENIZE_REGEX)">
                 <tei:span>
                     <xsl:choose>
+                        <!-- mb is special: it defines the morphemes, so it gets an @xml:id -->
                         <xsl:when test="$TYPE='mb'">
                             <xsl:attribute name="xml:id" select="concat($AB_ID, '_mb', $COUNT, '_', position())"/>                            
                         </xsl:when>
+                        <!-- all others refer to the morpheme defined under mb via @from and @to -->
                         <xsl:otherwise>
                             <xsl:attribute name="from" select="concat($AB_ID, '_mb', $COUNT, '_', position())"/>                            
                             <xsl:attribute name="to" select="concat($AB_ID, '_mb', $COUNT, '_', position())"/>                                                        
@@ -49,12 +77,9 @@
         <span from="TIE4.e0.w" to="TIE4.e1.2.1">ASS_ChND_190725_Batu_conv.ASS.001 (001)</span>
             ...when they should refer to the segment instead:
         <span from="TIE4.u1" to="TIE4.u1">ASS_ChND_190725_Batu_conv.ASS.001 (001)</span>
+        Then everything that's neither "morpheme-" not "word-level" belongs to the "sentence-level" bucket.        
     -->
-    <xsl:template match="tei:spanGrp[
-        @type='ref' or @type='st' or @type='stl' or
-        @type='ts' or @type='fe' or @type='fr' or
-        @type='ltr' or @type='nt' or @type='fr'
-        ]/tei:span">
+    <xsl:template match="tei:spanGrp[not(@type = $MORPHEME_LEVEL_LAYERS/layers/layer or @type = $WORD_LEVEL_LAYERS/layers/layer)]/tei:span">
         <xsl:copy>
             <xsl:attribute name="from" select="id(@from)/ancestor::tei:seg[1]/@xml:id"/>
             <xsl:attribute name="to" select="id(@to)/ancestor::tei:seg[1]/@xml:id"/>
@@ -62,7 +87,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- incident nodes are lacking ids:
+    <!-- incident nodes may be lacking ids:
         <incident><desc>ChND:</desc></incident>
         The old converter created them:
         <incident xml:id="inc7"><desc>ChND:</desc></incident> 
