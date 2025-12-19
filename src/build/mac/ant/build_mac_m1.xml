@@ -18,6 +18,8 @@
     <property name="icons_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/icons"/>
     <!-- file assocation configurations for jpackage -->
     <property name="file_ass_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/jpackage_file_ass"/>
+    <!-- entitlements plist for code signing -->
+    <property name="entitlements_file" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/entitlements.plist"/>
     
     <!-- version numbers -->
     <property name="exmaralda_version" value="1.12"/>
@@ -178,9 +180,65 @@
     <!-- ******************************************************* -->
     <!-- ******************************************************* -->
 
-    <!-- step 3: remove faulty signatures -->
+    <!-- step 3: remove faulty signatures and resign with entitlements -->
     <target name="remove_signatures" depends="mac_executables_jpackage">
+        <!-- Remove existing signatures from all apps -->
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/PartiturEditor_13_64/PartiturEditor.app/Contents/MacOS/PartiturEditor"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/FOLKER_13_64/FOLKER.app/Contents/MacOS/FOLKER"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/EXAKT_13_64/EXAKT.app/Contents/MacOS/EXAKT"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/Coma_13_64/Coma.app/Contents/MacOS/Coma"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/OrthoNormal_13_64/OrthoNormal.app/Contents/MacOS/OrthoNormal"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/><arg value="${jpackage_target}/TeiDrop_13_64/TeiDrop.app/Contents/MacOS/TeiDrop"/>
+        </exec>
         
+        <!-- Resign launchers with entitlements -->
+        <exec executable="codesign">
+            <arg value="--sign"/><arg value="-"/>
+            <arg value="--entitlements"/><arg value="${entitlements_file}"/>
+            <arg value="--force"/>
+            <arg value="${jpackage_target}/PartiturEditor_13_64/PartiturEditor.app/Contents/MacOS/PartiturEditor"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--sign"/><arg value="-"/>
+            <arg value="--entitlements"/><arg value="${entitlements_file}"/>
+            <arg value="--force"/>
+            <arg value="${jpackage_target}/FOLKER_13_64/FOLKER.app/Contents/MacOS/FOLKER"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--sign"/><arg value="-"/>
+            <arg value="--entitlements"/><arg value="${entitlements_file}"/>
+            <arg value="--force"/>
+            <arg value="${jpackage_target}/EXAKT_13_64/EXAKT.app/Contents/MacOS/EXAKT"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--sign"/><arg value="-"/>
+            <arg value="--entitlements"/><arg value="${entitlements_file}"/>
+            <arg value="--force"/>
+            <arg value="${jpackage_target}/Coma_13_64/Coma.app/Contents/MacOS/Coma"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--sign"/><arg value="-"/>
+            <arg value="--entitlements"/><arg value="${entitlements_file}"/>
+            <arg value="--force"/>
+            <arg value="${jpackage_target}/OrthoNormal_13_64/OrthoNormal.app/Contents/MacOS/OrthoNormal"/>
+        </exec>
+        <exec executable="codesign">
+            <arg value="--sign"/><arg value="-"/>
+            <arg value="--entitlements"/><arg value="${entitlements_file}"/>
+            <arg value="--force"/>
+            <arg value="${jpackage_target}/TeiDrop_13_64/TeiDrop.app/Contents/MacOS/TeiDrop"/>
+        </exec>
     </target>
     
     <!-- ******************************************************* -->
@@ -197,23 +255,41 @@
         <delete file="${local_directory}/Coma_M1.dmg"/>
         
         
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/FOLKER_13_64 ${local_directory}/Folker_M1.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/FOLKER_13_64"/>
+            <arg value="${local_directory}/Folker_M1.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/PartiturEditor_13_64 ${local_directory}/PartiturEditor_M1.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/PartiturEditor_13_64"/>
+            <arg value="${local_directory}/PartiturEditor_M1.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/Coma_13_64 ${local_directory}/Coma_M1.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/Coma_13_64"/>
+            <arg value="${local_directory}/Coma_M1.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/OrthoNormal_13_64 ${local_directory}/OrthoNormal_M1.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/OrthoNormal_13_64"/>
+            <arg value="${local_directory}/OrthoNormal_M1.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/TeiDrop_13_64 ${local_directory}/TeiDrop_M1.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/TeiDrop_13_64"/>
+            <arg value="${local_directory}/TeiDrop_M1.dmg"/>
         </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/EXAKT_13_64 ${local_directory}/Exakt_M1.dmg"/>
+        <exec executable="hdiutil">
+            <arg value="create"/>
+            <arg value="-srcfolder"/>
+            <arg value="${local_directory}/EXAKT_13_64"/>
+            <arg value="${local_directory}/Exakt_M1.dmg"/>
         </exec> 
     </target>
     
