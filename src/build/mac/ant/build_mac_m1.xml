@@ -1,34 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="changeme" default="BUILD_MAC" basedir=".">
+<project name="EXMARaLDA_Build_M1_Mac" default="BUILD_MAC" basedir="/Users/thomasschmidt/NetBeansProjects/exmaralda/exmaralda_nb">
     
     <description>Builds, tests, and runs the project EXMARaLDA.</description>
-    
+ 
+    <import file="/Users/thomasschmidt/NetBeansProjects/exmaralda/exmaralda_nb/nbproject/build-impl.xml"/>
+       
    
     <!-- directory where to put the final results, i.e. the disk images -->
-    <property name="local_directory" value="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
+    <property name="local_directory" value="/Users/thomasschmidt/EXMARaLDA_Build"/>
+    
+    <property name="template_directory" value="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build"/>
+   
     
     <!-- the jpackage executable, should be part of newer OpenJDKs -->
-    <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home/bin/jpackage"/>
+    <!-- <property name="jpackage_excecutable" location="/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home/bin/jpackage"/> -->
+    
     <!-- the jar with compiled EXMARaLDA Java code -->
-    <property name="jpackage_source" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/EXMARaLDA_NetBeansProject/dist"/>
+    <property name="jpackage_source" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/exmaralda_nb/dist"/>
+    <property name="jpackage_input" location="/Users/thomasschmidt/jarfolder"/>
     <!-- the target folder for what jpackage writes -->
-    <property name="jpackage_target" location="/Users/thomasschmidt/Desktop/EXMARaLDA_Build"/>
+    <property name="jpackage_target" location="/Users/thomasschmidt/EXMARaLDA_Build/jpackage"/>
     
     <!-- folder with icons for the individual apps, partly also document icons -->
-    <property name="icons_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/icons"/>
+    <property name="icons_folder" location="${template_directory}/mac/icons"/>
     <!-- file assocation configurations for jpackage -->
-    <property name="file_ass_folder" location="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/jpackage_file_ass"/>
+    <property name="file_ass_folder" location="${template_directory}/mac/jpackage_file_ass"/>
+    <!-- launcher properties for all in one jpackage -->
+    <property name="launcher_folder" location="${template_directory}/mac/launchers"/>
     
     <!-- version numbers -->
-    <property name="exmaralda_version" value="1.12"/>
-    <property name="partitureditor_version" value="1.7"/>
-    <property name="coma_version" value="2.0"/>
-    <property name="exakt_version" value="1.4"/>
-    <property name="folker_version" value="1.3"/>
-    <property name="orthonormal_version" value="1.0"/>
-    <property name="teidrop_version" value="1.0"/>
+    <property name="exmaralda_version" value="1.16"/>
+    <property name="partitureditor_version" value="1.8.2"/>
+    <property name="coma_version" value="2.0.3"/>
+    <property name="exakt_version" value="1.4.3"/>
+    <property name="folker_version" value="1.3.3"/>
+    <property name="orthonormal_version" value="1.0.3"/>
+    <property name="teidrop_version" value="1.0.3"/>
+    
+    <property name="runtime_image" value="/Users/thomasschmidt/EXMARaLDA_Build/runtimeimage"/>
+    <property name="jlink_executable" value="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin/jlink"/>
+    <!-- <property name="jdk.home" value="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"/> -->
+    <property name="jdk.home" value="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"/>
+    <property name="jpackage_excecutable" location="${jdk.home}/bin/jpackage"/> 
+    
+    <property name="entitlements_plist" value="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/build/mac/Entitlements.plist"/>
+    
+    
+    
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    <target name="-pre-compile">
+        <tstamp/>
+        <echo message="Updating EXMARaLDA Constants"/>
+        <copy file="${template_directory}/EXMARaLDAConstants.java.txt" 
+              tofile="/Users/thomasschmidt/NetBeansProjects/exmaralda/src/org/exmaralda/common/EXMARaLDAConstants.java" overwrite="true">
+            <filterset>
+               <filter token="PARTITUREDITOR_VERSION" value="${partitureditor_version}"/>
+               <filter token="EXAKT_VERSION" value="${exakt_version}"/>
+               <filter token="FOLKER_VERSION" value="${folker_version}"/>
+               <filter token="ORTHONORMAL_VERSION" value="${orthonormal_version}"/>
+               <filter token="SURFER_VERSION" value="${surfer_version}"/>
+               <filter token="ORTHONORMAL_VERSION" value="${orthonormal_version}"/>
+               <filter token="BUILD_TIME" value="${DSTAMP}.${TSTAMP}"/>
+            </filterset>
+        </copy>
+    </target>   
+    
     
 
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+
+    <target name="BUILD_MAC" depends="NOTARIZE">
+        <!-- do nothing, just defining the main target -->
+    </target>    
 
     <!-- ********************************************** -->
     <!-- ********************************************** -->
@@ -37,194 +84,637 @@
 
     <!-- STEP 1: delete left-overs from previous builds -->
     
-    <target name="prepare_jpackage">
+    <target name="prepare_jpackage" depends="jar">
+      <echo message="PREPARING JPACKAGE"/>
         <delete dir="${jpackage_source}/native"/>
 
-        <delete dir="${jpackage_target}/PartiturEditor_13_64"/>
-        <delete dir="${jpackage_target}/Coma_13_64"/>
-        <delete dir="${jpackage_target}/EXAKT_13_64"/>
-        <delete dir="${jpackage_target}/FOLKER_13_64"/>
-        <delete dir="${jpackage_target}/OrthoNormal_13_64"/>
-        <delete dir="${jpackage_target}/TeiDrop_13_64"/>   
+        <delete file="${jpackage_target}/*.dmg"/>
         
         <copy todir="${jpackage_source}/native">
-            <fileset dir="/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2020_LIBS/native-mac-m1"/> 
-        </copy>             
+            <fileset dir="/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2020_LIBS/native-mac-m1"/>
+            <!-- <fileset dir="/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2025-11-25_JAVA_FX_25/MAC-M1/javafx-sdk-21.0.9/lib">
+                <include name="*.dylib"/>
+            </fileset>-->
+            
+        </copy>         
+        
+        <delete dir="${jpackage_input}"/>
+
+        <copy todir="${jpackage_input}">
+            <fileset dir="${jpackage_source}" includes="**/*.jar"/> 
+            <fileset dir="${jpackage_source}" includes="**/*.dylib"/> 
+            <!-- <mapper>
+                <flattenmapper/>
+            </mapper>      -->      
+        </copy>         
+                
     </target>
     
-    <!-- ******************************************************* -->
-    <!-- ******************************************************* -->
-    <!-- ******************************************************* -->
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    <!-- ********************************************** -->
+    
+    <target name="clean-runtime-image">
+      <echo message="DELETING RUNTIME IMAGE"/>
+        <delete dir="${runtime_image}"/>
+    </target>
 
-    <!-- STEP 2: build the apps with jpackage -->
-    <target name="mac_executables_jpackage" depends="prepare_jpackage">
+    <target name="jlink-runtime-image" depends="clean-runtime-image">
+        <echo message="Creating custom runtime image at: ${runtime_image}"/>
 
+        <exec executable="${jlink_executable}" failonerror="true">
+            <arg value="--module-path"/>
+            <arg value="${jdk.home}/jmods:/Users/thomasschmidt/Dropbox/EXMARaLDA_Build/2025-11-25_JAVA_FX_25/MAC-M1/javafx-sdk-21.0.9/lib"/>
+
+            <arg value="--add-modules"/>
+            <arg value="java.base,java.desktop,java.logging,java.xml,jdk.jsobject,javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web"/>
+
+
+            <arg value="--output"/>
+            <arg value="${runtime_image}"/>
+
+            <!-- optional optimization flags -->
+            <arg value="--strip-debug"/>
+            <arg value="--no-header-files"/>
+            <arg value="--no-man-pages"/>
+
+        </exec>
+
+        <echo message="Runtime image created successfully."/>
+    </target>
+        
+    
+
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    
+    
+
+
+    <target name="JPACKAGE_DMGS_SIGNED" depends="prepare_jpackage, jlink-runtime-image">
+
+        <delete>
+            <fileset dir="${local_directory}" includes="**/*.*"/>
+        </delete>
+        
+      
+        
+        <echo message="JPACKAGING FOLKER"/>
+       
         <!-- FOLKER -->
         <exec executable="${jpackage_excecutable}">
-            <arg value="--type"/><arg value="app-image"/>
-            <arg value="--input"/><arg value="${jpackage_source}"/>
-            <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--type"/>
+            <arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!-- -->
+                        
+            <arg value="--input"/><arg value="${jpackage_input}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
+            <arg value="--runtime-image"/><arg value="${jdk.home}"/>
+            <!--  <arg value="runtime-image"/><arg value="${runtime_image}"/>  -->
+
+            <arg value="--java-options"/>
+            <arg value="-XstartOnFirstThread"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=FOLKER"/>
-            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
             <arg value="--app-version"/><arg value="${folker_version}"/>
-            <arg value="--icon"/><arg value="${icons_folder}/folker.icns"/>
             <arg value="--name"/><arg value="FOLKER"/>
             <arg value="--mac-package-name"/><arg value="FOLKER"/>
-            <arg value="--mac-package-identifier"/><arg value="FOLKER"/>
+            <arg value="--mac-package-identifier"/><arg value="org.exmaralda.folker"/>
             <arg value="--file-associations"/><arg value="${file_ass_folder}/folker_file_ass.properties"/>
             
-        </exec>    
+            
 
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>
+
+
+        </exec>    
+        
+         <echo message="JPACKAGING PARTITUR-EDITOR"/>
+        
         <!-- Partitur-Editor -->
         <exec executable="${jpackage_excecutable}">
-            <arg value="--type"/><arg value="app-image"/>
+            
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!-- -->
             <arg value="--input"/><arg value="${jpackage_source}"/>
-            <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--runtime-image"/><arg value="${jdk.home}"/>
+            
+            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
-            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>            
+            <arg value="--java-options"/>
+            <arg value="-Dapple.laf.useScreenMenuBar=true"/>            
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=PartiturEditor"/>
             <arg value="--main-class"/><arg value="org.exmaralda.partitureditor.partiture.PartiturEditor"/>
             <arg value="--app-version"/><arg value="${partitureditor_version}"/>
-            <arg value="--icon"/><arg value="${icons_folder}/partitureditor.icns"/>
             <arg value="--name"/><arg value="PartiturEditor"/>
+            <arg value="--mac-package-identifier"/><arg value="org.exmaralda.partitureditor"/>            
             <arg value="--mac-package-name"/><arg value="PartiturEditor"/>
             <arg value="--file-associations"/><arg value="${file_ass_folder}/partitureditor_file_ass.properties"/>
+
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
+
         </exec>    
+        
+        <echo message="JPACKAGING COMA"/>
         
         <!-- COMA -->
         <exec executable="${jpackage_excecutable}">
-            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!-- -->
             <arg value="--input"/><arg value="${jpackage_source}"/>
-            <arg value="--dest"/><arg value="${jpackage_target}/Coma_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/Coma_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--runtime-image"/><arg value="${jdk.home}"/>
+            
+            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=Coma"/>
             <arg value="--main-class"/><arg value="org.exmaralda.coma.launcher.Launcher"/>
             <arg value="--app-version"/><arg value="${coma_version}"/>
-            <arg value="--icon"/><arg value="${icons_folder}/coma.icns"/>
             <arg value="--name"/><arg value="Coma"/>
             <arg value="--mac-package-name"/><arg value="Coma"/>
             <arg value="--file-associations"/><arg value="${file_ass_folder}/coma_file_ass.properties"/>
             
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
         </exec>    
         
+        <echo message="JPACKAGING EXAKT"/>
+
         <!-- EXAKT -->
         <exec executable="${jpackage_excecutable}">
-            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!-- -->
             <arg value="--input"/><arg value="${jpackage_source}"/>
-            <arg value="--dest"/><arg value="${jpackage_target}/EXAKT_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/EXAKT_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--runtime-image"/><arg value="${jdk.home}"/>
+            
+            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=EXAKT"/>
             <arg value="--main-class"/><arg value="org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT"/>
             <arg value="--app-version"/><arg value="${exakt_version}"/>
-            <arg value="--icon"/><arg value="${icons_folder}/exakt.icns"/>
             <arg value="--name"/><arg value="EXAKT"/>
             <arg value="--mac-package-name"/><arg value="EXAKT"/>
             
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
         </exec>    
         
+         <echo message="JPACKAGING ORTHONORMAL"/>
 
         <!-- OrthoNormal -->
         <exec executable="${jpackage_excecutable}">
-            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!-- -->
             <arg value="--input"/><arg value="${jpackage_source}"/>
-            <arg value="--dest"/><arg value="${jpackage_target}/OrthoNormal_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/OrthoNormal_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--runtime-image"/><arg value="${jdk.home}"/>
+            
+            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=OrthoNormal"/>
             <arg value="--main-class"/><arg value="org.exmaralda.orthonormal.application.ApplicationFrame"/>
             <arg value="--app-version"/><arg value="${orthonormal_version}"/>
-            <arg value="--icon"/><arg value="${icons_folder}/orthonormal.icns"/>
             <arg value="--name"/><arg value="OrthoNormal"/>
             <arg value="--mac-package-name"/><arg value="OrthoNormal"/>
             <arg value="--file-associations"/><arg value="${file_ass_folder}/orthonormal_file_ass.properties"/>
             
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
             
         </exec>    
 
+        <echo message="JPACKAGING TEIDROP"/>
+
         <!-- TeiDrop -->
         <exec executable="${jpackage_excecutable}">
-            <arg value="--type"/><arg value="app-image"/>
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            <!-- -->
             <arg value="--input"/><arg value="${jpackage_source}"/>
-            <arg value="--dest"/><arg value="${jpackage_target}/TeiDrop_13_64"/>
-            <arg value="--main-jar"/><arg value="EXMARaLDA.jar"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/TeiDrop_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--runtime-image"/><arg value="${jdk.home}"/>
+            
+            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
             <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=TeiDrop"/>
             <arg value="--main-class"/><arg value="org.exmaralda.tei.swing.ApplicationFrame"/>
             <arg value="--app-version"/><arg value="${teidrop_version}"/>
-            <arg value="--icon"/><arg value="${icons_folder}/teidrop.icns"/>
             <arg value="--name"/><arg value="TeiDrop"/>
             <arg value="--mac-package-name"/><arg value="TeiDrop"/>
+
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
             
         </exec>  
+    
+
+   
+
+    </target>
+    
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    
+    <target name="NOTARIZE_PARTITUR_EDITOR" depends="JPACKAGE_DMG_PARTITUR_EDITOR">
+        <!-- Partitur-Editor -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/PartiturEditor_DMG/PartiturEditor-${partitureditor_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>            
+    </target>
+    
+    <target name="NOTARIZE" depends="JPACKAGE_DMGS_SIGNED">
+        <!-- xcrun notarytool submit /Users/thomasschmidt/EXMARaLDA_Build/jpackage/EXAKT_DMG/EXAKT-1.4.dmg \-\-keychain-profile "NOTARIZATION_PASSWORD" \-\-wait -->
+
+
+        <!-- Partitur-Editor -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/PartiturEditor_DMG/PartiturEditor-${partitureditor_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>    
+
+
+        <!-- Coma -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/Coma_DMG/Coma-${coma_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>    
+
+        <!-- EXAKT -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/EXAKT_DMG/EXAKT-${exakt_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>    
+
+        <!-- TeiDrop -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/TeiDrop_DMG/TeiDrop-${teidrop_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>    
+
+
+        <!-- FOLKER -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/FOLKER_DMG/FOLKER-${folker_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>    
+        
+        <!-- OrthoNormal -->
+        <exec executable="xcrun">
+            <arg value="notarytool"/>
+            <arg value="submit"/>
+            <arg value="${jpackage_target}/OrthoNormal_DMG/OrthoNormal-${orthonormal_version}.dmg"/>
+            <arg value="--keychain-profile"/><arg value="NOTARIZATIONPASSWORD2"/>
+            <arg value="--wait"/>
+        </exec>    
+
+ 
+
+    </target>
+    
+    
+    
+    
+    
+    <target name="JPACKAGE_DMGS_ALL_IN_ONE_SIGNED" depends="prepare_jpackage">
+
+       
+         <echo message="JPACKAGING ALL IN ONE"/>
+         
+         <!--
+                You might want an additional launcher if your application has different default values for arguments or can run with or without the Windows console, 
+                or if you package multiple apps together to share a runtime. The format for the option is 
+                \-\-add-launcher launcher-name=properties-file, 
+                where launcher-name is the named used for the additional launcher. Use quotes if the name contains spaces.        
+          -->
+       
+       <echo message="${launcher_folder}"/>
+       
+        <!-- ALL IN ONE -->
+        <exec executable="${jpackage_excecutable}">
+            <arg value="--type"/>
+            <arg value="pkg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Installer: Thomas Schmidt (YXGNP3T9KU)"/>            
+            <!-- -->
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/EXMARaLDA_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <!-- -->
+            
+            <arg value="--add-launcher"/><arg value="EXAKT=${launcher_folder}/exakt_launcher.properties"/>
+            
+          
+            
+        </exec>    
+
     </target>    
+
+
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    <!-- ******************************************************* -->
+    
+    <target name="JPACKAGE_DMG_PARTITUR_EDITOR" depends="prepare_jpackage">
+        <delete>
+            <fileset dir="${local_directory}" includes="**/*.*"/>
+        </delete>
+
+        <echo message="JPACKAGING PARTITUR-EDITOR"/>
+        
+        <!-- Partitur-Editor -->
+        <exec executable="${jpackage_excecutable}">
+            
+            <arg value="--verbose"/>
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
+            <!-- -->
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_DMG2"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>            
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=PartiturEditor"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.partitureditor.partiture.PartiturEditor"/>
+            <arg value="--app-version"/><arg value="${partitureditor_version}"/>
+            <arg value="--name"/><arg value="PartiturEditor"/>
+            <arg value="--mac-package-name"/><arg value="PartiturEditor"/>
+            <arg value="--mac-package-identifier"/><arg value="org.exmaralda.partitureditor"/>            
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/partitureditor_file_ass.properties"/>
+        </exec>    
+        
+    </target>
     
     <!-- ******************************************************* -->
     <!-- ******************************************************* -->
     <!-- ******************************************************* -->
 
-    <!-- step 3: remove faulty signatures -->
-    <target name="remove_signatures" depends="mac_executables_jpackage">
+    <target name="JPACKAGE_DMG_FOLKER" depends="prepare_jpackage">
+        <echo message="JPACKAGING FOLKER"/>
+       
+        <!-- FOLKER -->
+        <exec executable="${jpackage_excecutable}">
+            
+            <arg value="--verbose"/>
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
+            <!-- -->
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=FOLKER"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${folker_version}"/>
+            <arg value="--name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-identifier"/><arg value="org.exmaralda.folker"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/folker_file_ass.properties"/>            
+        </exec>            
         
     </target>
     
-    <!-- ******************************************************* -->
+        <!-- ******************************************************* -->
     <!-- ******************************************************* -->
     <!-- ******************************************************* -->
     
-    <!-- step 4: put the apps into disk images -->
-    <target name="make_dmgs" depends="remove_signatures">  
-        <delete file="${local_directory}/Folker_M1.dmg"/>
-        <delete file="${local_directory}/PartiturEditor_M1.dmg"/>
-        <delete file="${local_directory}/Exakt_M1.dmg"/>
-        <delete file="${local_directory}/OrthoNormal_M1.dmg"/>
-        <delete file="${local_directory}/TeiDrop_M1.dmg"/>
-        <delete file="${local_directory}/Coma_M1.dmg"/>
+    
+    <target name="DEBUG2" depends="prepare_jpackage">
+            <echo message="JPACKAGING PARITTUR_EDITOR"/>
+            <exec executable="${jpackage_excecutable}">
+            
+            <arg value="--type"/><arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+            
+            <!-- -->
+            <arg value="--input"/><arg value="${jpackage_source}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/PartiturEditor_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>            
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=PartiturEditor"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.partitureditor.partiture.PartiturEditor"/>
+            <arg value="--app-version"/><arg value="${partitureditor_version}"/>
+            <arg value="--name"/><arg value="PartiturEditor"/>
+            <arg value="--mac-package-identifier"/><arg value="org.exmaralda.partitureditor"/>            
+            <arg value="--mac-package-name"/><arg value="PartiturEditor"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/partitureditor_file_ass.properties"/>
+
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>            
+            <arg value="--mac-entitlements"/><arg value="${entitlements_plist}"/>
+
+        </exec>    
+       
+    </target>
+
+    
+    <target name="DEBUG" depends="embed-app-in-runtime">
+      
         
+        <echo message="JPACKAGING FOLKER"/>
+        <echo message="Entitlements file: ${entitlements_plist}"/>
+        <available file="${entitlements_plist}" property="entitlements.exists"/>
+        <echo message="Entitlements exists: ${entitlements.exists}"/>
+       
+        <!-- FOLKER -->
+        <exec executable="${jpackage_excecutable}">
+            
+            <arg value="--verbose"/>
+            
+            <arg value="--type"/>
+            <arg value="dmg"/>
+            <arg value="--resource-dir"/><arg value="${icons_folder}"/>
+                        
+            <!-- -->
+            
+                        
+            <arg value="--input"/><arg value="${jpackage_input}"/>
+            <arg value="--dest"/><arg value="${jpackage_target}/FOLKER_DMG"/>
+            <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
+            <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
+            <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
+            <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
+            <!-- -->
+            <arg value="--java-options"/><arg value="-Dcom.apple.mrj.application.apple.menu.about.name=FOLKER"/>
+            <arg value="--main-class"/><arg value="org.exmaralda.folker.application.ApplicationFrame"/>
+            <arg value="--app-version"/><arg value="${folker_version}"/>
+            <arg value="--name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-name"/><arg value="FOLKER"/>
+            <arg value="--mac-package-identifier"/><arg value="org.exmaralda.folker"/>
+            <arg value="--file-associations"/><arg value="${file_ass_folder}/folker_file_ass.properties"/>
+
+            <arg value="--runtime-image"/><arg value="${runtime_image}"/>           
+            <!--  SIGNING -->
+            <arg value="--mac-sign"/>
+            <arg value="--mac-signing-key-user-name"/><arg value="Developer ID Application: Thomas Schmidt (YXGNP3T9KU)"/>
+            <arg value="--mac-entitlements"/><arg value="${entitlements_plist}"/>
+        </exec>    
         
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/FOLKER_13_64 ${local_directory}/Folker_M1.dmg"/>
-        </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/PartiturEditor_13_64 ${local_directory}/PartiturEditor_M1.dmg"/>
-        </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/Coma_13_64 ${local_directory}/Coma_M1.dmg"/>
-        </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/OrthoNormal_13_64 ${local_directory}/OrthoNormal_M1.dmg"/>
-        </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/TeiDrop_13_64 ${local_directory}/TeiDrop_M1.dmg"/>
-        </exec> 
-        <exec command="hdiutil">
-            <arg line="create -srcfolder ${local_directory}/EXAKT_13_64 ${local_directory}/Exakt_M1.dmg"/>
-        </exec> 
+        <echo message="MOUNTING"/>
+        <exec executable="hdiutil">
+            <arg value="attach"/>
+            <arg value="${jpackage_target}/FOLKER_DMG/FOLKER-1.3.3.dmg"/>
+            <arg value="-nobrowse"/>
+            <arg value="-mountpoint"/>
+            <arg value="/tmp/FOLKER_mount"/>
+        </exec>        
+        
+        <!-- 1. Copy app to writable temp location (preserves signature) -->
+        <exec executable="cp">
+            <arg value="-R"/>
+            <arg value="/tmp/FOLKER_mount/FOLKER.app"/>
+            <arg value="${jpackage_target}/FOLKER_unsigned.app"/>
+        </exec>        
+        
+        <!-- 2. Remove existing signature from launcher only -->
+        <echo message="REMOVE SIGNATURE"/>
+        <exec executable="codesign">
+            <arg value="--remove-signature"/>
+            <arg value="${jpackage_target}/FOLKER_unsigned.app/Contents/MacOS/FOLKER"/>
+        </exec>
+
+        <echo message="SEPARATE CODESIGNING"/>
+        <exec executable="codesign">
+            <arg value="-f"/>
+            <arg value="--entitlements"/>
+            <arg value="${entitlements_plist}"/>
+            <arg value="-s"/>
+            <arg value="BBCEF8F6E23C201A25A7ABBF1DE1762F34DE9F1E"/>
+            <arg value="--options"/>
+            <arg value="runtime"/>
+            <arg value="${jpackage_target}/FOLKER_unsigned.app/Contents/MacOS/FOLKER"/>
+            
+        </exec>
+
+        <echo message="VERIFYING CODESIGNING"/>
+        <!-- Verify it worked -->
+        <exec executable="codesign">
+            <arg value="-d"/>
+            <arg value="--entitlements"/>
+            <arg value="-"/>
+            <arg value="--xml"/>
+            <arg value="${jpackage_target}/FOLKER_unsigned.app/Contents/MacOS/FOLKER"/>
+        </exec>        
+        
+        <!-- Eject -->
+        <echo message="EJECTING"/>
+        <exec executable="hdiutil">
+            <arg value="detach"/>
+            <arg value="/tmp/FOLKER_mount"/>
+        </exec>        
     </target>
     
+    <target name="embed-app-in-runtime" depends="prepare_jpackage, jlink-runtime-image">
+        <echo message="Copying app jars and native libraries into runtime image..."/>
+
+        <!-- Create directories inside runtime image -->
+        <mkdir dir="${runtime_image}/lib"/>
+        <mkdir dir="${runtime_image}/native"/>
+
+        <!-- Copy all jars from your app/lib -->
+        <copy todir="${runtime_image}/lib" flatten="true">
+            <fileset dir="${jpackage_input}" includes="**/*.jar"/>
+        </copy>
+
+        <!-- Copy all native libraries -->
+        <copy todir="${runtime_image}/native" flatten="true">
+            <fileset dir="${jpackage_source}/native" includes="**/*.dylib"/>
+        </copy>
+
+
+        <echo message="App successfully embedded into runtime image."/>
+    </target>
+
     
-    <target name="BUILD_MAC" depends="make_dmgs">
-        <!-- do nothing, just defining the main target -->
-    </target>    
     
     
-    
-    
+
+            
 </project>
 
 
