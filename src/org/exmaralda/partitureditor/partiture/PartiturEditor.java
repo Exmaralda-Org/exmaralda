@@ -73,8 +73,7 @@ public class PartiturEditor extends javax.swing.JFrame
     /** the user settings */
     /** changed in version 1.3.3. to use java 1.4 properties */
     //private java.util.Properties settings;
-    private java.util.prefs.Preferences settings;
-    
+    private java.util.prefs.Preferences settings;    
         
     /** the main menu bar */
     public PartiturMenuBar menuBar;
@@ -110,6 +109,10 @@ public class PartiturEditor extends javax.swing.JFrame
     PartiturTimelinePanel partiturTimelinePanel;
     org.exmaralda.folker.timeview.TimelineViewer timelineViewer = new org.exmaralda.folker.timeview.TimelineViewer();
     public PartiturEditorTimeviewPlayerControl controller;
+    
+    
+    // 2025-12-26: #537
+    public boolean lockFiles = false;
   
     /** Creates new form PartiturEditor */
     public PartiturEditor() {
@@ -335,7 +338,7 @@ public class PartiturEditor extends javax.swing.JFrame
                 PartiturEditor pe = new PartiturEditor();
                 pe.setVisible(true);
                 if (args.length>0){
-                    try{
+                    try {
                         // dirty fix for #216
                         String filepath = StringUtilities.fixFilePath(args[0]);
                         
@@ -491,6 +494,9 @@ public class PartiturEditor extends javax.swing.JFrame
             
             settings = java.util.prefs.Preferences.userRoot().node(getPreferencesNode());
 
+            // 2025-12-26: #537
+            lockFiles = settings.getBoolean("LockFiles", false);
+
             String os = System.getProperty("os.name").substring(0,3);
             String jreVersion = System.getProperty("java.version");        
             String defaultPlayer = "BAS-Audio-Player";
@@ -522,7 +528,9 @@ public class PartiturEditor extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(rootPane, message);
                 playerType = defaultPlayer;                
             }
+            
             boolean playerTypeConfirmed = settings.getBoolean("PlayerTypeConfirmed", false);
+            
             if ((!playerTypeConfirmed) && (!playerType.equals(defaultPlayer))){
                 String message = "Your player preference is set to " + playerType + ".\n"
                         + "This is not the recommended default player for your system.\n"
@@ -621,6 +629,9 @@ public class PartiturEditor extends javax.swing.JFrame
         settings.put("SHOW-SiNMenu", Boolean.toString(false));
         settings.put("SHOW-ODTSTDMenu", Boolean.toString(false));
         settings.put("SHOW-INELMenu", Boolean.toString(false));
+        
+        // 2025-12-26: #537
+        settings.put("LockFiles", Boolean.toString(lockFiles));
         
         settings.put("SHOW-TransformationDropdown", Boolean.toString(getTransformationComboBox().isShowing()));
         
@@ -1048,6 +1059,8 @@ public class PartiturEditor extends javax.swing.JFrame
     
     // 22-10-2025, new for issue #537
     private void lockFile(File file){
+        // 2025-12-26: #537
+        if (!lockFiles) return;
         try {
             RandomAccessFile raf = new RandomAccessFile(file, "rw");
             FileChannel channel = raf.getChannel();

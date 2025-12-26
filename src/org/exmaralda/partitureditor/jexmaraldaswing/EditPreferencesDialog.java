@@ -96,7 +96,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     }
     
     public String[] getValues(){
-        String[] result = new String[44];
+        String[] result = new String[45];
         result[0] = tierFontLabel.getText();
         result[1] = generalPurposeFontLabel.getText();
         result[2] = head2HTMLTextField.getText();
@@ -154,6 +154,10 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         // 10-08-2025: new for #532
         result[43] = chatMinimalTextField.getText();
+        
+        // 2025-12-26: #537
+        result[44] = Boolean.toString(lockFilesCheckBox.isSelected());;
+       
         
         
         
@@ -276,6 +280,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         prettyPrintPanel = new javax.swing.JPanel();
         enablePrettyPrintCheckBox = new javax.swing.JCheckBox();
+        lockFilesCheckBox = new javax.swing.JCheckBox();
         languagePanel = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         languagesComboBox = new javax.swing.JComboBox();
@@ -844,6 +849,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         autoSavePanel.add(enableUndoPanel, java.awt.BorderLayout.SOUTH);
 
+        autoSaveMainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Auto save"));
         autoSaveMainPanel.setLayout(new javax.swing.BoxLayout(autoSaveMainPanel, javax.swing.BoxLayout.Y_AXIS));
 
         enableAutoSavePanel.setLayout(new javax.swing.BoxLayout(enableAutoSavePanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -919,11 +925,15 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
 
         autoSavePanel.add(autoSaveMainPanel, java.awt.BorderLayout.CENTER);
 
+        prettyPrintPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("File Handling"));
         prettyPrintPanel.setLayout(new javax.swing.BoxLayout(prettyPrintPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        enablePrettyPrintCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         enablePrettyPrintCheckBox.setText("Enable XML pretty print ");
         prettyPrintPanel.add(enablePrettyPrintCheckBox);
+
+        lockFilesCheckBox.setText("Lock files");
+        lockFilesCheckBox.setToolTipText("Lock files opened by double click from access through other apps");
+        prettyPrintPanel.add(lockFilesCheckBox);
 
         autoSavePanel.add(prettyPrintPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -1457,6 +1467,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel languagePanel;
     private javax.swing.JComboBox languagesComboBox;
     private javax.swing.JCheckBox legacyMenuCheckBox;
+    private javax.swing.JCheckBox lockFilesCheckBox;
     private javax.swing.JLabel logDirectoryLabel;
     private javax.swing.JPanel logPanel;
     private javax.swing.JPanel mainPanel;
@@ -1580,7 +1591,7 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         // pause notation
         pausePrefixTextField.setText(values[26]);
         pauseSuffixTextField.setText(values[27]);
-        digitsSpinner.setValue(Integer.parseInt(values[28]));
+        digitsSpinner.setValue(Integer.valueOf(values[28]));
         decimalCommaRadioButton.setSelected(Boolean.parseBoolean(values[29]));
         enableAutoSaveCheckBox.setSelected(Boolean.parseBoolean(values[30]));
         autoInterpolateCheckBox.setSelected(Boolean.parseBoolean(values[31]));
@@ -1595,6 +1606,9 @@ public class EditPreferencesDialog extends javax.swing.JDialog {
         
         // issue #442
         timelineToleranceSpinner.setValue(Double.valueOf(values[42]));
+        
+        // 2025-12-26: #537
+        lockFilesCheckBox.setSelected(Boolean.parseBoolean(values[44]));
 
         show();
         return changed;
