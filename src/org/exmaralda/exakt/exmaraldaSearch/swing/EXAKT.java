@@ -122,6 +122,7 @@ public class EXAKT extends javax.swing.JFrame
     public AppendSearchResultAction appendSearchResultAction;
     public CloseSearchResultAction closeSearchResultAction;
     public CreateCollectionAction createCollectionAction; 
+    public SaveKWICColumnConfigurationAsAction saveKWICColumnConfigurationAsAction;
 
     public NewWordlistAction newWordlistAction;
     
@@ -277,6 +278,8 @@ public class EXAKT extends javax.swing.JFrame
         changeFontAction = new ChangeFontAction(this, "Change font...", null);
         
         browsingModeAction = new BrowsingModeAction(this, "Browsing mode...", null);
+        
+        saveKWICColumnConfigurationAsAction = new SaveKWICColumnConfigurationAsAction(this, "Save KWIC column configuration as...", null);
 
         newSearchPanelAction.setEnabled(false);
         saveSearchResultAsAction.setEnabled(false);
@@ -285,6 +288,8 @@ public class EXAKT extends javax.swing.JFrame
         appendSearchResultAction.setEnabled(false);
         closeSearchResultAction.setEnabled(false);
         createCollectionAction.setEnabled(false);
+        
+        
     }
     
     private void initMenuBar(){

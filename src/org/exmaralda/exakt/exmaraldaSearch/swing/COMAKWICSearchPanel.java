@@ -63,8 +63,6 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
 
     ActionListener actionListener;
     ActionListener actionListener2;
-    ActionListener actionListener3;
-    ActionListener actionListener4;
     
     List<COMAKWICSearchPanelListener> listenerList = new ArrayList<>();
     
@@ -78,7 +76,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     public COMAKWICSearchPanel(COMACorpusInterface c, boolean configureForApplet) {
         corpus = c;
         tableModel = new COMASearchResultListTableModel(getSearchResultList(), corpus, getMeta());
-        getSearchHistory().addHistory("", new HashSet<String>());
+        getSearchHistory().addHistory("", new HashSet<>());
         initComponents();
         ((COMAKWICTable)(kwicTable)).copyAction.setCorpus(c);
         ((COMAKWICTable)(kwicTable)).copyAction.setMeta(getMeta());
@@ -173,11 +171,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         xpathTextField.addActionListener(actionListener2);
 
         // actionListener for the xsl textfield
-        actionListener3 = new ActionListener() {     
+        new ActionListener() {     
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                 if (isSearching) return;
-                 performSearch();                 
+                if (isSearching) return;
+                performSearch();                 
             }
         };
         xslTextField.addActionListener(actionListener2);
@@ -964,6 +962,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
             message+="These will be deleted for the new search.\n";
             message+="Do you want to continue?";
             int ret = javax.swing.JOptionPane.showConfirmDialog(this, message, "Warning", javax.swing.JOptionPane.YES_NO_OPTION);
+            //JOptionPane.showOptionDialog(praatButton, message, message, WIDTH, HEIGHT, icon, ADDITIONAL_DATA_LOCATORS, kwicTable)
             if (ret==javax.swing.JOptionPane.NO_OPTION) return;
         }
 
@@ -984,10 +983,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                     try {
                         searchExpression = ((String[])(this.searchExpressionComboBox.getSelectedItem()))[0];
                         parameters = new RegularExpressionSearchParameters(searchExpression, ADDITIONAL_DATA_LOCATORS);
-                    } catch (PatternSyntaxException ex) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "Error in expression: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
-                    } catch (JDOMException ex) {
+                    } catch (PatternSyntaxException | JDOMException ex) {
                         javax.swing.JOptionPane.showMessageDialog(this, "Error in expression: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                         return;
                     }
@@ -1000,12 +996,8 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                         searchExpression = annotationRegExField.getText();
                         //System.out.println(searchExpression);
                         parameters = new RegularExpressionSearchParameters(searchExpression, ADDITIONAL_DATA_LOCATORS, SearchParametersInterface.ANNOTATION_SEARCH, segmentationName);
-                    } catch (PatternSyntaxException ex) {
+                    } catch (PatternSyntaxException | JDOMException ex) {
                         //System.out.println("Pattern");
-                        javax.swing.JOptionPane.showMessageDialog(this, "Error in expression: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
-                    } catch (JDOMException ex) {
-                        //System.out.println("JDOM");
                         javax.swing.JOptionPane.showMessageDialog(this, "Error in expression: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                         return;
                     }
@@ -1018,12 +1010,8 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                         searchExpression = descriptionRegExField.getText();
                         //System.out.println(searchExpression);
                         parameters = new RegularExpressionSearchParameters(searchExpression, ADDITIONAL_DATA_LOCATORS, SearchParametersInterface.DEFAULT_SEARCH, segmentationName);
-                    } catch (PatternSyntaxException ex) {
+                    } catch (PatternSyntaxException | JDOMException ex) {
                         //System.out.println("Pattern");
-                        javax.swing.JOptionPane.showMessageDialog(this, "Error in expression: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
-                    } catch (JDOMException ex) {
-                        //System.out.println("JDOM");
                         javax.swing.JOptionPane.showMessageDialog(this, "Error in expression: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                         return;
                     }
@@ -1110,11 +1098,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         }
         tableModel.addTableModelListener(this);
                 
-        HashSet<String> types = getSearchResultList().getTypes();
-        inputHelperDialog.inputHelperPanel.setTypes(types);
+        HashSet<String> hereTypes = getSearchResultList().getTypes();
+        inputHelperDialog.inputHelperPanel.setTypes(hereTypes);
 
         if (searchTypeComboBox.getSelectedIndex()==0){
-            if (searchHistory.addHistory(searchExpression, types)){
+            if (searchHistory.addHistory(searchExpression, hereTypes)){
                 searchExpressionComboBox.setModel(new javax.swing.DefaultComboBoxModel(searchHistory));
             }
         }
