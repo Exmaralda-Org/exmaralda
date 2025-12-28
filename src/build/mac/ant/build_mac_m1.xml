@@ -177,8 +177,7 @@
             <arg value="--runtime-image"/><arg value="${jdk.home}"/>
             <!--  <arg value="runtime-image"/><arg value="${runtime_image}"/>  -->
 
-            <arg value="--java-options"/>
-            <arg value="-XstartOnFirstThread"/>
+            <!--  <arg value="java-options"/><arg value="-XstartOnFirstThread"/> -->
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
@@ -213,7 +212,7 @@
             <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
             <arg value="--runtime-image"/><arg value="${jdk.home}"/>
             
-            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
+            <!--  <arg value="java-options"/><arg value="-XstartOnFirstThread"/> -->
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/>
             <arg value="-Dapple.laf.useScreenMenuBar=true"/>            
@@ -246,7 +245,7 @@
             <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
             <arg value="--runtime-image"/><arg value="${jdk.home}"/>
             
-            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
+            <!--  <arg value="java-options"/><arg value="-XstartOnFirstThread"/> -->
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
@@ -276,7 +275,7 @@
             <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
             <arg value="--runtime-image"/><arg value="${jdk.home}"/>
             
-            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
+            <!--  <arg value="java-options"/><arg value="-XstartOnFirstThread"/> -->
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
@@ -305,7 +304,7 @@
             <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
             <arg value="--runtime-image"/><arg value="${jdk.home}"/>
             
-            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
+            <!--  <arg value="java-options"/><arg value="-XstartOnFirstThread"/> -->
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <arg value="--java-options"/><arg value="--enable-native-access=ALL-UNNAMED"/>            
@@ -335,7 +334,7 @@
             <arg value="--main-jar"/><arg value="exmaralda_nb.jar"/>
             <arg value="--runtime-image"/><arg value="${jdk.home}"/>
             
-            <arg value="--java-options"/><arg value="-XstartOnFirstThread"/>
+            <!--  <arg value="java-options"/><arg value="-XstartOnFirstThread"/> -->
             <arg value="--java-options"/><arg value="-Djava.library.path=$ROOTDIR/Contents/app/native"/>
             <arg value="--java-options"/><arg value="-Dapple.laf.useScreenMenuBar=true"/>
             <!-- -->
