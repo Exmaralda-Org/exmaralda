@@ -23,6 +23,7 @@ import java.awt.Cursor;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdom.*;
@@ -146,6 +147,10 @@ public class EXAKT extends javax.swing.JFrame
     
     //NEW 10-11-2015
     PraatControl praatControl;
+    
+    static final String TIME_NOW = "HH:mm:ss";
+    SimpleDateFormat sdf = new SimpleDateFormat(TIME_NOW);
+    
     
     /** Creates new form EXAKT */
     public EXAKT() {
@@ -1884,8 +1889,13 @@ public class EXAKT extends javax.swing.JFrame
 
     }
 
-    public void status(String message){
-        statusLabel.setText(message); 
+    public void status(String m){
+        //statusLabel.setText(message); 
+        Calendar cal = Calendar.getInstance();
+        String message = "[" + sdf.format(cal.getTime()) + "] " + m;
+        statusLabel.setText(" " + message);
+        statusLabel.setToolTipText(message);
+        
     }
 
     // new 07-12-2015

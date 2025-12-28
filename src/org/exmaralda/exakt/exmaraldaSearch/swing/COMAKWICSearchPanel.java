@@ -955,15 +955,20 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         //updateSearchResult();
     }
     
+    KWICColumnConfiguration rememberedColumnConfiguration = null;
+
     private void performSearch(){
+        
+        rememberedColumnConfiguration = null;
         
         if (!getSearchResultList().getAnalyses().isEmpty()){
             String message = "You have " + getSearchResultList().getAnalyses().size() + " analysis columns for this concordance.\n";
-            message+="These will be deleted for the new search.\n";
-            message+="Do you want to continue?";
+            message+="Do you want to keep them for the new search? ";
+            //message+="Do you want to continue?";
             int ret = javax.swing.JOptionPane.showConfirmDialog(this, message, "Warning", javax.swing.JOptionPane.YES_NO_OPTION);
             //JOptionPane.showOptionDialog(praatButton, message, message, WIDTH, HEIGHT, icon, ADDITIONAL_DATA_LOCATORS, kwicTable)
-            if (ret==javax.swing.JOptionPane.NO_OPTION) return;
+            //if (ret==javax.swing.JOptionPane.NO_OPTION) return;
+            rememberedColumnConfiguration = getKWICTable().getWrappedModel().getKWICColumnConfiguration();            
         }
 
         
@@ -1064,7 +1069,7 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         final Runnable doUpdateSearchResult = new Runnable() {
              @Override
              public void run() {
-                 updateSearchResult();
+                 updateSearchResult();                 
              }
          };        
         /*Thread*/ searchThread = new Thread(){
@@ -1090,7 +1095,9 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
     
     private void updateSearchResult(){
         setSearchResultList(search.getSearchResult());
-        tableModel = new COMASearchResultListTableModel(getSearchResultList(), corpus, getMeta());            
+        tableModel = new COMASearchResultListTableModel(getSearchResultList(), corpus, getMeta());  
+        
+        
         ((COMAKWICTable)(kwicTable)).setWrappedModel(tableModel);
         if (searchTypeComboBox.getSelectedIndex()==1){
             // annotation search
@@ -1115,6 +1122,11 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
                 );
         this.fireCOMAKWICSearchPanelEvent(ev);
         
+        if (rememberedColumnConfiguration!=null){
+            tableModel.setKWICColumnConfiguration(rememberedColumnConfiguration);
+        }
+
+
         ((COMAKWICTable)(kwicTable)).adjustColumns();
         
         
