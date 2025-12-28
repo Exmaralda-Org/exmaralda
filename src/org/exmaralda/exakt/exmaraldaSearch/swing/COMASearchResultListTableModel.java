@@ -9,11 +9,16 @@
 
 package org.exmaralda.exakt.exmaraldaSearch.swing;
 
+import java.lang.reflect.Constructor;
 import java.util.*;
 import org.exmaralda.exakt.search.SearchResultInterface;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.search.SimpleSearchResult;
 import org.exmaralda.exakt.exmaraldaSearch.*;
+import org.exmaralda.exakt.search.analyses.AnalysisInterface;
+import org.exmaralda.exakt.search.analyses.BinaryAnalysis;
+import org.exmaralda.exakt.search.analyses.ClosedCategoryListAnalysis;
+import org.exmaralda.exakt.search.analyses.FreeAnalysis;
 
 
 /**
@@ -234,6 +239,83 @@ public class COMASearchResultListTableModel extends org.exmaralda.exakt.search.s
     public void multiSort(List<AdvancedSortDirective> sortDirectives){
         this.getData();
     }
+    
+    public KWICColumnConfiguration getKWICColumnConfiguration(){
+        KWICColumnConfiguration result = new KWICColumnConfiguration();
+        for (int i=0; i<getColumnCount(); i++){
+            if (!(isAnalysisColumn(i))) continue;
+            AnalysisInterface ai = getAnalysisForColumn(i);
+            String name = ai.getName();
+            String cl = ai.getClass().getName();
+            String typeName = "analysis";
+            if ((ai instanceof FreeAnalysis) && ((FreeAnalysis)ai).isAnnotation){
+                typeName = "annotation";
+            }
+            if (ai instanceof ClosedCategoryListAnalysis){
+                ClosedCategoryListAnalysis ccla = (ClosedCategoryListAnalysis)ai;
+                String[] categories = ccla.getCategories();                
+                result.addColumn(name, cl, typeName, categories);
+            } else {
+                result.addColumn(name, cl, typeName);
+            }
+        }
+        
+        for (String[] metaIdentifier : this.getMetaIdentifiers()){
+            String cl = metaIdentifier[0];
+            String name = metaIdentifier[1];
+            result.addColumn(name, cl, "metadata");            
+        }        
+        return result;
+    }
+    
+    
+    public void setKWICColumnConfiguration(KWICColumnConfiguration columnConfiguration){
+        // Remove all existing additional columns
+        metaIdentifiers = null;
+        for (int i=0; i<getColumnCount(); i++){
+            if (!(isAnalysisColumn(i))) continue;
+            removeAnalysisAtColumn(i);
+            i--;
+        }
+        fireTableStructureChanged();
+        
+        
+        List<String[]> metaIdentifiers = new ArrayList<>();
+        for (KWICColumnConfigurationEntry entry : columnConfiguration.getEntries()){
+            switch (entry.type){
+                case "analysis" :
+                    switch (entry.cl){
+                        case "org.exmaralda.exakt.search.analyses.FreeAnalysis" :
+                            FreeAnalysis fa = new FreeAnalysis(entry.name);
+                            int col = addAnalysis(fa);
+                            System.out.println("Free analysis " + entry.name + " added at column " + col);
+                            break;    
+                        case "org.exmaralda.exakt.search.analyses.BinaryAnalysis" :
+                            BinaryAnalysis ba = new BinaryAnalysis(entry.name);
+                            int col2 = addAnalysis(ba);
+                            System.out.println("Binary analysis " + entry.name + " added at column " + col2);
+                            break;    
+                        case "org.exmaralda.exakt.search.analyses.ClosedCategoryListAnalysis" :
+                            ClosedCategoryListAnalysis ccla = new ClosedCategoryListAnalysis(entry.name, entry.values);
+                            int col3 = addAnalysis(ccla);
+                            System.out.println("Closed category list analysis " + entry.name + " added at column " + col3);
+                            break;    
+                    }
+                    break;
+                case "annotation" :                    
+                    break;
+                case "metadata" :                    
+                    String type = entry.cl;
+                    String name = entry.name;
+                    String[] both = {type,name};
+                    metaIdentifiers.add(both);
+                    break;
+                    
+            }
+        }
+        setMetaIdentifiers(metaIdentifiers);
+    }
+    
 
 
 

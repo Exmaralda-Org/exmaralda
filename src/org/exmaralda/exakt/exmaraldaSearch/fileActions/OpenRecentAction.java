@@ -22,8 +22,10 @@ public class OpenRecentAction extends org.exmaralda.exakt.exmaraldaSearch.swing.
         filetoopen = new File(filename);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         exaktFrame.doOpen(filetoopen);
+        exaktFrame.status("Corpus " + filetoopen.getAbsolutePath() + " opened. ");        
     }
 
 }

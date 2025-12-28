@@ -27,7 +27,6 @@ public final class ColumnsMenu extends javax.swing.JMenu {
     private final JMenuItem addAnnotationMenuItem;
     private final JMenuItem addAnalysisMenuItem;
     private final JMenuItem importAnalysesMenuItem;
-    private final JMenuItem saveKWICColumnConfigurationAsMenuItem;
     
     
     /** Creates a new instance of FileMenu
@@ -89,9 +88,6 @@ public final class ColumnsMenu extends javax.swing.JMenu {
 
         this.enableMenuItems(false);
         
-        this.addSeparator();
-        saveKWICColumnConfigurationAsMenuItem = new JMenuItem(exaktFrame.saveKWICColumnConfigurationAsAction);
-        this.add(saveKWICColumnConfigurationAsMenuItem);
     }
 
     void filter(ActionEvent e){

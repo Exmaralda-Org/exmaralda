@@ -9,7 +9,6 @@
 
 package org.exmaralda.exakt.search.swing;
 
-import org.exmaralda.exakt.exmaraldaSearch.swing.KWICColumnConfiguration;
 import org.exmaralda.exakt.search.analyses.*;
 import org.exmaralda.exakt.search.*;
 /**
@@ -251,10 +250,6 @@ public abstract class SearchResultListTableModel extends javax.swing.table.Abstr
         return 1 + 3 + data.getAnalyses().size();
     }
     
-    public KWICColumnConfiguration getKWICColumnConfiguration(){
-        KWICColumnConfiguration result = new KWICColumnConfiguration();
-        return result;
-    }
     
     
     

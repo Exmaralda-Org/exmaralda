@@ -1323,6 +1323,10 @@ public class COMAKWICSearchPanel extends javax.swing.JPanel
         return entry;
     }
 
+    public void setColumnConfiguration(KWICColumnConfiguration columnConfiguration) {
+        this.getKWICTable().getWrappedModel().setKWICColumnConfiguration(columnConfiguration);
+    }
+
     public class SortIgnoreCase implements Comparator<Object> {
         @Override
         public int compare(Object o1, Object o2) {

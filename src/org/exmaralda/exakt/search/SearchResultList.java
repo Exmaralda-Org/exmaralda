@@ -301,7 +301,11 @@ public class SearchResultList extends Vector<SearchResultInterface> {
         // and find annotations of the specified category
         Vector<AnalysisInterface> newAnalyses = new Vector<>();
         newAnalyses.addAll(this.getAnalyses());
+        
+        
         FreeAnalysis additionalAnalysis = new FreeAnalysis(annotationCategory);
+        // 2025-12-27: changed for #444 -- mark this as an annotation
+        additionalAnalysis.isAnnotation = true;
         newAnalyses.add(additionalAnalysis);
         returnValue.setAnalyses(newAnalyses);
         

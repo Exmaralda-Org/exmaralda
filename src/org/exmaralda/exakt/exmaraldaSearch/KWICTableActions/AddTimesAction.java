@@ -20,7 +20,6 @@ import org.exmaralda.exakt.search.SearchResultList;
  */
 public class AddTimesAction extends AbstractKWICTableAction {
     
-    int count=0;
     
     
     /** Creates a new instance of WordWiseReversedSortAction

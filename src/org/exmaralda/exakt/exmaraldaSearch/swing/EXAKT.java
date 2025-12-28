@@ -71,7 +71,7 @@ public class EXAKT extends javax.swing.JFrame
                     javax.swing.event.ListSelectionListener,
                     org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICSearchPanelListener,
                     org.exmaralda.common.ExmaraldaApplication,
-                    MouseListener {
+                    MouseListener { 
     
 
     /** ch-ch-ch-changes! */
@@ -122,6 +122,7 @@ public class EXAKT extends javax.swing.JFrame
     public AppendSearchResultAction appendSearchResultAction;
     public CloseSearchResultAction closeSearchResultAction;
     public CreateCollectionAction createCollectionAction; 
+    public OpenKWICColumnConfigurationAction openKWICColumnConfigurationAction;
     public SaveKWICColumnConfigurationAsAction saveKWICColumnConfigurationAsAction;
 
     public NewWordlistAction newWordlistAction;
@@ -279,6 +280,7 @@ public class EXAKT extends javax.swing.JFrame
         
         browsingModeAction = new BrowsingModeAction(this, "Browsing mode...", null);
         
+        openKWICColumnConfigurationAction = new OpenKWICColumnConfigurationAction(this, "Open KWIC column configuration...", null);
         saveKWICColumnConfigurationAsAction = new SaveKWICColumnConfigurationAsAction(this, "Save KWIC column configuration as...", null);
 
         newSearchPanelAction.setEnabled(false);
@@ -1184,14 +1186,25 @@ public class EXAKT extends javax.swing.JFrame
 
     private List<AbstractTokenList> wordlistsToBeAdded = new ArrayList<>();
 
-    void updateWordListList(){
+    /*void updateWordListList(){
         for (AbstractTokenList wordlistToBeAdded : wordlistsToBeAdded){
             this.wordListListModel.addElement(wordlistToBeAdded);
             wordlistsToBeAdded.remove(wordlistToBeAdded);
             status("Token list " + wordlistToBeAdded.getName() + " added.");
+        }        
+    }*/
+    
+    // 2025-12-28: changed to avoid concurrent modification exception
+    void updateWordListList() {
+        Iterator<AbstractTokenList> it = wordlistsToBeAdded.iterator();
+        while (it.hasNext()) {
+            AbstractTokenList wordlist = it.next();
+            wordListListModel.addElement(wordlist);
+            it.remove(); // ✔ legal removal
+            status("Token list " + wordlist.getName() + " added.");
         }
-        
     }
+    
     
     final Runnable doUpdateCorpusList = new Runnable() {
          @Override
@@ -1872,7 +1885,7 @@ public class EXAKT extends javax.swing.JFrame
     }
 
     public void status(String message){
-        statusLabel.setText(message);
+        statusLabel.setText(message); 
     }
 
     // new 07-12-2015

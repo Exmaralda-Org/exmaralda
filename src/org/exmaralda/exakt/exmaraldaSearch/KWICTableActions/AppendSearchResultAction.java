@@ -52,6 +52,8 @@ public class AppendSearchResultAction extends org.exmaralda.exakt.exmaraldaSearc
                 exaktFrame.getActiveSearchPanel().setSearchResultList(newList);
                 exaktFrame.getActiveSearchPanel().setCellEditors();  
                 exaktFrame.getActiveSearchPanel().getKWICTable().adjustColumns();
+                
+                exaktFrame.status("Search result " + file.getName() + " added. ");
 
             } catch (JDOMException ex) {
                 String message = "JDOM Exception:";

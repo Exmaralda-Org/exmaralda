@@ -14,9 +14,9 @@ import javax.swing.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTableSorter;
+import org.exmaralda.exakt.exmaraldaSearch.swing.COMASearchResultListTableModel;
 import org.exmaralda.exakt.exmaraldaSearch.swing.KWICColumnConfiguration;
-import org.exmaralda.exakt.search.swing.SearchResultListTableModel;
+import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTableSorter;
 import org.exmaralda.exakt.utilities.FileIO;
 import org.jdom.Document;
 
@@ -68,11 +68,12 @@ public class SaveKWICColumnConfigurationAsAction extends org.exmaralda.exakt.exm
 
             }  else {goAhead = true;}                   
         }
-        KWICColumnConfiguration kwicColumnConfiguration = ((SearchResultListTableModel)((COMAKWICTableSorter)exaktFrame.getActiveSearchPanel().getKWICTable().getModel()).getTableModel()).getKWICColumnConfiguration();
+        KWICColumnConfiguration kwicColumnConfiguration = ((COMASearchResultListTableModel)((COMAKWICTableSorter)exaktFrame.getActiveSearchPanel().getKWICTable().getModel()).getTableModel()).getKWICColumnConfiguration();
         Document document = kwicColumnConfiguration.getDocument();
         try {
             FileIO.writeDocumentToLocalFile(file, document);
             System.out.println("KWIC column configration written to " + file.getAbsolutePath());
+            exaktFrame.status("KWIC column configration written to " + file.getAbsolutePath());
         } catch (IOException ex) {
             Logger.getLogger(SaveKWICColumnConfigurationAsAction.class.getName()).log(Level.SEVERE, null, ex);
             String message = "Error writing KWIC column configuration to\n" 

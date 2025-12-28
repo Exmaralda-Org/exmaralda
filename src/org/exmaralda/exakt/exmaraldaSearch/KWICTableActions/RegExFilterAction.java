@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.util.prefs.Preferences;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 
 /**
@@ -74,6 +75,7 @@ public class RegExFilterAction extends AbstractKWICTableAction {
             table.setCellEditors();
             table.adjustColumns();
             
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status("Filter " + regex + " applied to " + table.getColumnName(column) + ".");
             
         }
         selectedColumn = -1;

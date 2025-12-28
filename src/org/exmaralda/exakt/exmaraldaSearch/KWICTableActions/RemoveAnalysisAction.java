@@ -12,6 +12,7 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 import java.awt.event.ActionEvent;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import javax.swing.*;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.exakt.search.analyses.AnalysisInterface;
 /**
  *
@@ -47,7 +48,10 @@ public class RemoveAnalysisAction extends AbstractKWICTableAction {
         String text = "Are you sure you want to remove\n the analysis '" + analysis.getName() +"'?'";
         int reply = JOptionPane.showConfirmDialog(table, text, "Remove analysis", JOptionPane.YES_NO_OPTION);
         if (reply==JOptionPane.OK_OPTION){
+            String colName = table.getColumnName(selectedColumn);
             table.getWrappedModel().removeAnalysisAtColumn(selectedColumn);
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status("Column " + colName + " removed.");
+            
         }
         selectedColumn = -1;
     }

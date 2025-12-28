@@ -104,6 +104,7 @@ public class CopyAction extends AbstractKWICTableAction {
             String text = org.exmaralda.exakt.utilities.FileIO.getDocumentAsString(doc);
             org.exmaralda.exakt.utilities.HTMLSelection html = new org.exmaralda.exakt.utilities.HTMLSelection(text);
             table.getToolkit().getSystemClipboard().setContents(html,null);
+            
         } catch (HeadlessException | IOException ex) {
             Logger.getLogger(CopyAction.class.getName()).log(Level.SEVERE, null, ex);          
         }

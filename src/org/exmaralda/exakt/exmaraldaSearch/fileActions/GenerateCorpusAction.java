@@ -30,6 +30,7 @@ public class GenerateCorpusAction extends org.exmaralda.exakt.exmaraldaSearch.sw
         if (file!=null){
             exaktFrame.doOpen(file);
             exaktFrame.setLastCorpusPath(file);
+            exaktFrame.status("Corpus " + file.getAbsolutePath() + " generated. ");            
         }
     }
     

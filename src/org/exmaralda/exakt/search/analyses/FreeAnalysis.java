@@ -17,6 +17,9 @@ import org.jdom.Element;
  */
 public class FreeAnalysis extends AbstractAnalysis {
     
+    
+    public boolean isAnnotation = false;
+    
     /** Creates a new instance of BinaryAnalysis */
     public FreeAnalysis(String n) {
         super(n);

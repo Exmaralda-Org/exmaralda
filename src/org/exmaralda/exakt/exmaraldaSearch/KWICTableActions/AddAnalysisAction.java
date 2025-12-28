@@ -12,6 +12,8 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 import java.awt.event.ActionEvent;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import javax.swing.*;
+import org.exmaralda.common.ExmaraldaApplication;
+import org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT;
 import org.exmaralda.exakt.search.analyses.AnalysisInterface;
 import org.exmaralda.exakt.search.swing.AbstractOKCancelDialog;
 import org.exmaralda.exakt.search.swing.AnalysisSelectionPanel;
@@ -21,7 +23,6 @@ import org.exmaralda.exakt.search.swing.AnalysisSelectionPanel;
  */
 public class AddAnalysisAction extends AbstractKWICTableAction {
     
-    int count=0;
     AnalysisSelectionPanel asp;
     AbstractOKCancelDialog dialog;
     
@@ -46,6 +47,7 @@ public class AddAnalysisAction extends AbstractKWICTableAction {
             int i = table.getWrappedModel().addAnalysis(ai);
             table.setCellEditors();
             table.adjustColumns();
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status("Analysis " + ai.getName() + " added at column " + i + ".");
         }
     }
     
