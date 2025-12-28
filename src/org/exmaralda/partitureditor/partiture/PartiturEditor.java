@@ -322,22 +322,31 @@ public class PartiturEditor extends javax.swing.JFrame
         // added 09-11-2022: issue #344
         System.setProperty("apple.awt.application.name", "Partitur-Editor");        
         System.out.println("java.library.path=" + System.getProperty("java.library.path"));
+        System.out.println("java.awt.headless = " + System.getProperty("java.awt.headless"));
+        System.out.println("GraphicsEnvironment.isHeadless() = " +
+                java.awt.GraphicsEnvironment.isHeadless());
         try {
             System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            System.out.println("System L&F set.");
         }           
         catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(PartiturEditor.class.getName()).log(Level.SEVERE, null, ex);
         } 
+                
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                System.out.println("Initializing PartiturEditor");
                 PartiturEditor pe = new PartiturEditor();
+                System.out.println("PartiturEditor initialized");
                 pe.setVisible(true);
+                System.out.println("PartiturEditor set to visible");
                 if (args.length>0){
                     try{
                         // dirty fix for #216
                         String filepath = StringUtilities.fixFilePath(args[0]);
+                        System.out.println("Trying to open " + filepath);
                         
                         // 22-10-2025, new for issue #537
                         File fileToBeOpened = new File(filepath);
@@ -1025,7 +1034,7 @@ public class PartiturEditor extends javax.swing.JFrame
     
     
     // 22-10-2025, new for issue #537
-    private boolean isFileAlreadyOpen(File file) {
+    private boolean isFileAlreadyOpen(File file) {        
         try {
             RandomAccessFile raf = new RandomAccessFile(file, "rw");
             FileChannel channel = raf.getChannel();
