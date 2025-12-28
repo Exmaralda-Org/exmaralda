@@ -11,6 +11,7 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMASearchResultListTableModel;
 
@@ -40,6 +41,9 @@ public class SampleAction extends AbstractKWICTableAction {
             table.getWrappedModel().sample(Math.abs(howMany));
             table.setCellEditors();
             table.adjustColumns();
+            
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status(howMany + " search results sampled. ");
+            
         } catch (NumberFormatException nfe){
             JOptionPane.showMessageDialog(table, numberString + " could not be parsed as number.");
             System.out.println(nfe.getLocalizedMessage());

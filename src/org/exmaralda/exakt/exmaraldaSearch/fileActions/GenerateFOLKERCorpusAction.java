@@ -75,6 +75,7 @@ public class GenerateFOLKERCorpusAction extends org.exmaralda.exakt.exmaraldaSea
                     File file = new File(comaPath);
                     exaktFrame.doOpen(file);
                     exaktFrame.setLastCorpusPath(file);
+                    exaktFrame.status("Corpus " + file.getAbsolutePath() + " generated. ");                                
                 }
             };
             Thread generateThread = new Thread(){

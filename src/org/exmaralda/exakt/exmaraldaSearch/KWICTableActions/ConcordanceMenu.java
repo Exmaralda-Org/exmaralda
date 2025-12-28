@@ -36,6 +36,9 @@ public final class ConcordanceMenu extends javax.swing.JMenu {
         add(exaktFrame.saveSearchResultAsAction);
         this.add(new JSeparator());
         add(exaktFrame.createCollectionAction);
+        this.add(new JSeparator());
+        add(exaktFrame.openKWICColumnConfigurationAction);
+        add(exaktFrame.saveKWICColumnConfigurationAsAction);
 
         //browsingModeMenuItem = this.add(exaktFrame.browsingModeAction);
         //this.add(new javax.swing.JSeparator());

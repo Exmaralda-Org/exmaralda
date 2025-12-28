@@ -28,10 +28,12 @@ public abstract class AbstractAnalysis implements AnalysisInterface {
         name = e.getAttributeValue("name");
     }
     
+    @Override
     public String getName(){
         return name;
     }
     
+    @Override
     public Element toXML(){
         Element e = new Element("analysis");
         e.setAttribute("name", getName());

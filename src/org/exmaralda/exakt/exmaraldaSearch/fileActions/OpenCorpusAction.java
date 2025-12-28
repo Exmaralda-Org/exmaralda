@@ -48,6 +48,7 @@ public class OpenCorpusAction extends org.exmaralda.exakt.exmaraldaSearch.swing.
             final File file = fileChooser.getSelectedFile();        
             exaktFrame.doOpen(file);
             exaktFrame.setLastCorpusPath(file);
+            exaktFrame.status("Corpus " + file.getAbsolutePath() + " opened. ");
         }                    
     }
     

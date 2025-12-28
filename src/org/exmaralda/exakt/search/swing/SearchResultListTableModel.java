@@ -254,4 +254,5 @@ public abstract class SearchResultListTableModel extends javax.swing.table.Abstr
     
     
     
+    
 }

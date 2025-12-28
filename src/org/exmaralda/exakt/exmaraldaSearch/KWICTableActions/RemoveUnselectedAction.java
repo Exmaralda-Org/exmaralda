@@ -12,6 +12,7 @@ package org.exmaralda.exakt.exmaraldaSearch.KWICTableActions;
 import java.awt.event.ActionEvent;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
 import javax.swing.JOptionPane;
+import org.exmaralda.common.ExmaraldaApplication;
 
 /**
  *
@@ -32,9 +33,13 @@ public class RemoveUnselectedAction extends AbstractKWICTableAction {
         String message = "Are you sure you want to remove unselected search results?";
         int returnValue =  JOptionPane.showConfirmDialog(table.getTopLevelAncestor(), message, "Remove unselected search results", JOptionPane.YES_NO_OPTION);
         if (returnValue==JOptionPane.OK_OPTION){
+            int before = table.getWrappedModel().getRowCount();
             table.getWrappedModel().removeUnselected();
+            int after = table.getWrappedModel().getRowCount();
             table.setCellEditors();
             table.adjustColumns();
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status((after-before) + " unselected search results removed");
+            
         }
     }
     

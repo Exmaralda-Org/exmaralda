@@ -1362,31 +1362,37 @@ public class TaggerApplication
 			e.printStackTrace();
 		}
 	}
-	public class SaveTagsetAccessory extends JPanel {
 
-		private JCheckBox saveTagsetCB;
+    @Override
+    public void status(String message) {
+        // just do nothing for now
+        // issue 553
+    }
+    public class SaveTagsetAccessory extends JPanel {
 
-		public SaveTagsetAccessory() {
-			setLayout(new BorderLayout());
-			JPanel p = new JPanel();
-			saveTagsetCB = new JCheckBox("Save Tagset in File");
-			// saveTagsetCB.addItemListener(new ItemListener() {
-			//
-			// public void itemStateChanged(ItemEvent e) {
-			// if (e.getStateChange() == ItemEvent.SELECTED) {
-			// System.out.println("checkbox is selected");
-			// } else {
-			// System.out.println("checkbox is NOT selected");
-			// }
-			// }
-			// });
-			p.add(saveTagsetCB);
-			add(p, BorderLayout.CENTER);
-		}
-		public boolean getSaveTagset() {
-			return saveTagsetCB.isSelected();
-		}
-	}
+            private JCheckBox saveTagsetCB;
+
+            public SaveTagsetAccessory() {
+                    setLayout(new BorderLayout());
+                    JPanel p = new JPanel();
+                    saveTagsetCB = new JCheckBox("Save Tagset in File");
+                    // saveTagsetCB.addItemListener(new ItemListener() {
+                    //
+                    // public void itemStateChanged(ItemEvent e) {
+                    // if (e.getStateChange() == ItemEvent.SELECTED) {
+                    // System.out.println("checkbox is selected");
+                    // } else {
+                    // System.out.println("checkbox is NOT selected");
+                    // }
+                    // }
+                    // });
+                    p.add(saveTagsetCB);
+                    add(p, BorderLayout.CENTER);
+            }
+            public boolean getSaveTagset() {
+                    return saveTagsetCB.isSelected();
+            }
+    }
 	
 
 }

@@ -38,6 +38,8 @@ public interface ExmaraldaApplication {
 
     public void resetSettings();
     
+    public void status(String message);
+    
     //public void checkRegistration();
     
     /*default void checkRegistration(){

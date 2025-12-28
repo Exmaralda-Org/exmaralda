@@ -23,6 +23,7 @@ import java.awt.Cursor;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdom.*;
@@ -71,7 +72,7 @@ public class EXAKT extends javax.swing.JFrame
                     javax.swing.event.ListSelectionListener,
                     org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICSearchPanelListener,
                     org.exmaralda.common.ExmaraldaApplication,
-                    MouseListener {
+                    MouseListener { 
     
 
     /** ch-ch-ch-changes! */
@@ -122,6 +123,8 @@ public class EXAKT extends javax.swing.JFrame
     public AppendSearchResultAction appendSearchResultAction;
     public CloseSearchResultAction closeSearchResultAction;
     public CreateCollectionAction createCollectionAction; 
+    public OpenKWICColumnConfigurationAction openKWICColumnConfigurationAction;
+    public SaveKWICColumnConfigurationAsAction saveKWICColumnConfigurationAsAction;
 
     public NewWordlistAction newWordlistAction;
     
@@ -144,6 +147,10 @@ public class EXAKT extends javax.swing.JFrame
     
     //NEW 10-11-2015
     PraatControl praatControl;
+    
+    static final String TIME_NOW = "HH:mm:ss";
+    SimpleDateFormat sdf = new SimpleDateFormat(TIME_NOW);
+    
     
     /** Creates new form EXAKT */
     public EXAKT() {
@@ -277,6 +284,9 @@ public class EXAKT extends javax.swing.JFrame
         changeFontAction = new ChangeFontAction(this, "Change font...", null);
         
         browsingModeAction = new BrowsingModeAction(this, "Browsing mode...", null);
+        
+        openKWICColumnConfigurationAction = new OpenKWICColumnConfigurationAction(this, "Open KWIC column configuration...", null);
+        saveKWICColumnConfigurationAsAction = new SaveKWICColumnConfigurationAsAction(this, "Save KWIC column configuration as...", null);
 
         newSearchPanelAction.setEnabled(false);
         saveSearchResultAsAction.setEnabled(false);
@@ -285,6 +295,8 @@ public class EXAKT extends javax.swing.JFrame
         appendSearchResultAction.setEnabled(false);
         closeSearchResultAction.setEnabled(false);
         createCollectionAction.setEnabled(false);
+        
+        
     }
     
     private void initMenuBar(){
@@ -1179,14 +1191,25 @@ public class EXAKT extends javax.swing.JFrame
 
     private List<AbstractTokenList> wordlistsToBeAdded = new ArrayList<>();
 
-    void updateWordListList(){
+    /*void updateWordListList(){
         for (AbstractTokenList wordlistToBeAdded : wordlistsToBeAdded){
             this.wordListListModel.addElement(wordlistToBeAdded);
             wordlistsToBeAdded.remove(wordlistToBeAdded);
             status("Token list " + wordlistToBeAdded.getName() + " added.");
+        }        
+    }*/
+    
+    // 2025-12-28: changed to avoid concurrent modification exception
+    void updateWordListList() {
+        Iterator<AbstractTokenList> it = wordlistsToBeAdded.iterator();
+        while (it.hasNext()) {
+            AbstractTokenList wordlist = it.next();
+            wordListListModel.addElement(wordlist);
+            it.remove(); // ✔ legal removal
+            status("Token list " + wordlist.getName() + " added.");
         }
-        
     }
+    
     
     final Runnable doUpdateCorpusList = new Runnable() {
          @Override
@@ -1866,8 +1889,13 @@ public class EXAKT extends javax.swing.JFrame
 
     }
 
-    public void status(String message){
-        statusLabel.setText(message);
+    public void status(String m){
+        //statusLabel.setText(message); 
+        Calendar cal = Calendar.getInstance();
+        String message = "[" + sdf.format(cal.getTime()) + "] " + m;
+        statusLabel.setText(" " + message);
+        statusLabel.setToolTipText(message);
+        
     }
 
     // new 07-12-2015

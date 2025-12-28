@@ -45,6 +45,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
         Boolean showODTSTDMenu = false;
         Boolean showInelMenu = false;
         Boolean showTransformationDropdown = false;
+        // 2025-12-26: #537
+        Boolean lockFiles = false;
         if (app instanceof PartiturEditor){
             PartiturEditor pe = (PartiturEditor)app;
             showSFB538Menu = pe.menuBar.legacyMenu.isShowing();
@@ -55,7 +57,9 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
             showODTSTDMenu = false;
             showInelMenu = false;
             showTransformationDropdown = pe.getTransformationComboBox().isShowing();
-        }
+            // 2025-12-26: #537
+            lockFiles = pe.lockFiles; 
+    }
         
         String oldMediaPlayer = mediaPlayer;
 
@@ -105,7 +109,9 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                             Boolean.toString(table.prettyPrint),
                             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("rearrange-transcription-controls", "false"), // issue #433
                             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").get("TIMELINE-TOLERANCE", "0.05"), // issue #442
-                            table.chatMinimalFSM // issue #532
+                            table.chatMinimalFSM, // issue #532
+                            Boolean.toString(lockFiles)            // 2025-12-26: #537
+                
         };
         EditPreferencesDialog dialog = new EditPreferencesDialog(table.parent, true, app);
         if ((evt!=null) && ("ChangeSegmentation".equals(evt.getActionCommand()))){
@@ -179,6 +185,7 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    pe.menuBar.inelMenu.setVisible(Boolean.parseBoolean(newValues[23]));*/
                    
                    pe.getTransformationComboBox().setVisible(Boolean.parseBoolean(newValues[37]));
+                   pe.lockFiles = Boolean.parseBoolean(newValues[44]);
             }
 
             table.AUTO_ANCHOR = Boolean.parseBoolean(newValues[24]);
@@ -211,6 +218,10 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                         + "You must <b>restart the Partitur-Editor </b><br/>for this change to take effect.</html>";
                 JOptionPane.showMessageDialog(table, message);
             }
+            
+            // 2025-12-26: #537
+            java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.PartiturEditor").put("LockFiles", newValues[44]);            
+            
 
         }
     }

@@ -1251,6 +1251,11 @@ public class Coma extends JFrame implements ChangeListener,
         }
     }
 
+    @Override
+    public void status(String message) {
+        // do nothing for now
+    }
+
     class RefreshRecordingsTask extends SwingWorker<Void, Void> {
 
         @Override

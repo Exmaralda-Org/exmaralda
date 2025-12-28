@@ -15,9 +15,10 @@ import java.awt.event.ActionEvent;
 import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.exakt.exmaraldaSearch.swing.AddAnnotationDialog;
-import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICSearchPanel;
 import org.exmaralda.exakt.exmaraldaSearch.swing.COMAKWICTable;
+import org.exmaralda.exakt.exmaraldaSearch.swing.EXAKT;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.xml.sax.SAXException;
 /**
@@ -26,7 +27,6 @@ import org.xml.sax.SAXException;
  */
 public class AddAnnotationAction extends AbstractKWICTableAction {
     
-    int count=0;
     
     
     /** Creates a new instance of WordWiseReversedSortAction
@@ -50,6 +50,8 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
             aad.setLocationRelativeTo(table);
             aad.setVisible(true);
 
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status("Adding annotation " + aad.getCategory() + ". ");
+
             table.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             SearchResultList srl = table.getWrappedModel().getData();
             // changed 18-10-2011 - bug fix
@@ -59,9 +61,7 @@ public class AddAnnotationAction extends AbstractKWICTableAction {
             table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             table.adjustColumns();
             
-            
-            
-            
+            ((ExmaraldaApplication)(table.getTopLevelAncestor())).status("Annotation " + aad.getCategory() + " added. ");
             
         } catch (HeadlessException | SAXException ex) {
             System.out.println(ex.getLocalizedMessage());

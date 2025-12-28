@@ -11,11 +11,16 @@ package org.exmaralda.exakt.exmaraldaSearch.fileActions;
 
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.Vector;
-import org.exmaralda.common.corpusbuild.CHATBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import org.exmaralda.common.corpusbuild.EAFBuilder;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.exakt.wizard.corpuswizards.EAFCorpusWizard;
+import org.exmaralda.partitureditor.jexmaralda.JexmaraldaException;
+import org.jdom.JDOMException;
+import org.xml.sax.SAXException;
 /**
  *
  * @author thomas
@@ -29,6 +34,7 @@ public class GenerateEAFCorpusAction extends org.exmaralda.exakt.exmaraldaSearch
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         EAFCorpusWizard theMagician = new EAFCorpusWizard(exaktFrame, true);
         theMagician.setLocationRelativeTo(exaktFrame);
@@ -42,9 +48,9 @@ public class GenerateEAFCorpusAction extends org.exmaralda.exakt.exmaraldaSearch
         final String comaPath = (String)theData[0];
         Vector<File> folkerFiles = (Vector<File>)theData[1];
         Object[] parameters = (Object[])theData[2];
-        boolean separateDirectory = ((Boolean)parameters[0]).booleanValue();
+        boolean separateDirectory = ((Boolean)parameters[0]);
         String directoryName = (String)parameters[1];
-        boolean writeBasic = ((Boolean)parameters[2]).booleanValue();
+        boolean writeBasic = ((Boolean)parameters[2]);
         try {
             final EAFBuilder theBuilder = new EAFBuilder(new File(comaPath), folkerFiles, directoryName, separateDirectory, writeBasic);
             pbd = new ProgressBarDialog(exaktFrame, false);
@@ -56,10 +62,9 @@ public class GenerateEAFCorpusAction extends org.exmaralda.exakt.exmaraldaSearch
             final Runnable doItWhenIsOver = new Runnable() {
                  public void run() {
                     File file = new File(comaPath);
-                    if (file!=null){
-                        exaktFrame.doOpen(file);
-                        exaktFrame.setLastCorpusPath(file);
-                    }
+                    exaktFrame.doOpen(file);
+                    exaktFrame.setLastCorpusPath(file);
+                    exaktFrame.status("Corpus " + file.getAbsolutePath() + " generated. ");            
                  }
              };
             Thread generateThread = new Thread(){
@@ -68,7 +73,7 @@ public class GenerateEAFCorpusAction extends org.exmaralda.exakt.exmaraldaSearch
                     try {
                         theBuilder.doBuild();
                         javax.swing.SwingUtilities.invokeLater(doItWhenIsOver);
-                    } catch (Exception ex) {
+                    } catch (IOException | URISyntaxException | ParserConfigurationException | TransformerException | JexmaraldaException | JDOMException | SAXException ex) {
                         ex.printStackTrace();
                         pbd.setVisible(false);
                         exaktFrame.showErrorDialog(ex);
@@ -78,7 +83,7 @@ public class GenerateEAFCorpusAction extends org.exmaralda.exakt.exmaraldaSearch
             };
             generateThread.start();
 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 

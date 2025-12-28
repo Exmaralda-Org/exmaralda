@@ -196,7 +196,8 @@ public class SaveSearchResultAction extends org.exmaralda.exakt.exmaraldaSearch.
                 }                
                 exaktFrame.setLastSearchResultPath(file);
                 exaktFrame.getActiveSearchPanel().setCurrentSearchResultFile(file);
-                exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);                
+                exaktFrame.getActiveSearchPanel().setCurrentSearchResultFileType(type);    
+                exaktFrame.status("Search result saved as " + file.getAbsolutePath());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(exaktFrame, ex.getMessage());
                 System.out.println(ex.getLocalizedMessage());

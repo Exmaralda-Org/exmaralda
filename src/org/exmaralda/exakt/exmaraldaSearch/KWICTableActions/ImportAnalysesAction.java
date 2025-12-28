@@ -13,6 +13,7 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import org.exmaralda.common.ExmaraldaApplication;
 import org.jdom.JDOMException;
 import org.exmaralda.exakt.search.SearchResultList;
 import org.exmaralda.exakt.search.analyses.AnalysisInterface;
@@ -50,6 +51,8 @@ public class ImportAnalysesAction extends AbstractKWICTableAction {
                     table.getWrappedModel().addAnalysis(ai);
                     table.setCellEditors();                    
                 }
+                ((ExmaraldaApplication)(table.getTopLevelAncestor())).status("Analyses imported from " + file.getName()  + ". ");
+                
             } catch (IOException | JDOMException ex) {
                 System.out.println(ex.getLocalizedMessage());
                 JOptionPane.showMessageDialog(table, ex.getLocalizedMessage());

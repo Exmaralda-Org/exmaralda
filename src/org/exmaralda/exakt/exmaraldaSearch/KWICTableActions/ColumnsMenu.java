@@ -87,6 +87,7 @@ public final class ColumnsMenu extends javax.swing.JMenu {
         this.add(importAnalysesMenuItem);        
 
         this.enableMenuItems(false);
+        
     }
 
     void filter(ActionEvent e){
