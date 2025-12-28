@@ -718,6 +718,11 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         }
     }
     
+    @Override
+    public void status(String message) {
+        // just do nothing for now
+        // issue 553
+    }
 
     
     

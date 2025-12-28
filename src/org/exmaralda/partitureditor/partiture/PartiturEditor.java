@@ -1084,6 +1084,12 @@ public class PartiturEditor extends javax.swing.JFrame
         }
     }
     
+    @Override
+    public void status(String message) {
+        // just do nothing for now
+        // issue 553
+        table.status(message);
+    }
 
 
 }

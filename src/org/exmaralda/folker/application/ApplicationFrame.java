@@ -321,6 +321,12 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
             getRegisteredDialog.setVisible(true);
         }
     }
+
+    @Override
+    public void status(String message) {
+        // just do nothing for now
+        // issue 553
+    }
     
     
 }
