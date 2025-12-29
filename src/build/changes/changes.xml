@@ -10,19 +10,31 @@
 	date 	= the date
 	release = true | false (is it a release-version) 
 --> 
-    <change tool="orthonormal" type="change" version="1.0.2" date="12.10.2025">Update FOLK normalization lexicon to FOLK 2.24 (OCT 25) (issue #74)</change>
-    <change tool="folker" type="change" version="1.3.2" date="04.09.2025">Adapt automatic pause update to three digit pauses (issue #535)</change>
-    <change tool="folker" type="change" version="1.3.2" date="03.09.2025">Allow three digit pauses in GAT parsing (issue #535)</change>
+
+    <change tool="exakt" type="feature" version="1.4.3" date="28.12.2025">Save user presets for columns/annotations(issue #444)</change>
+    <change tool="exakt" type="change" version="1.4.3" date="28.12.2025">Status messages (issue #553)</change>
+    <change tool="exakt" type="bug" version="1.4.3" date="28.12.2025">Concurrent modification bugling (issue #554)</change>
+    <change tool="all" type="change" version="1.16" date="27.11.2025">Splash screen version number update (#547)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="25.11.2025">Updates to Dulko (issue #542)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="25.11.2025">Update to Java FX 25 for Windows (issue #546)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="25.11.2025">Update to Java 25 for Windows (issue #339)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="25.11.2025">Further changes to INEL ISO/TEI export (issue #517)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="22.10.2025">Check if a trainscription is already opened (issue #537)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="22.10.2025">Namespace cleansing for all ISO/TEI exports (issue #541)</change>
+    <change tool="partitureditor" type="change" version="1.8.2" date="22.10.2025">Further changes to INEL ISO/TEI export (issue #517)</change>
+    <change tool="orthonormal" type="change" version="1.0.3" date="12.10.2025">Update FOLK normalization lexicon to FOLK 2.24 (OCT 25) (issue #74)</change>
+    <change tool="folker" type="change" version="1.3.3" date="04.09.2025">Adapt automatic pause update to three digit pauses (issue #535)</change>
+    <change tool="folker" type="change" version="1.3.3" date="03.09.2025">Allow three digit pauses in GAT parsing (issue #535)</change>
     <change tool="partitureditor" type="change" version="1.8.2" date="27.08.2025">Improvements to Dulko, Thx to A. Nolda (issue #534)</change>
     <change tool="partitureditor" type="change" version="1.8.2" date="15.08.2025">Added options for CHAT minimal segmentation in several places (issue #532)</change>
-    <change tool="orthonormal" type="feature" version="1.0.2" date="24.07.2025">Choice of normalisation lexicons (issue #526)</change>
-    <change tool="folker" type="change" version="1.3.2" date="24.07.2025">Fixed glitch in FOLKER HTML-Audio output (issue #493)</change>
+    <change tool="orthonormal" type="feature" version="1.0.3" date="24.07.2025">Choice of normalisation lexicons (issue #526)</change>
+    <change tool="folker" type="change" version="1.3.3" date="24.07.2025">Fixed glitch in FOLKER HTML-Audio output (issue #493)</change>
     <change tool="partitureditor" type="change" version="1.8.2" date="24.07.2025">Adapted Whisper ASR functionality to new version of REST service (issue #421)</change>
     <change tool="partitureditor" type="change" version="1.8.2" date="24.07.2025">Changed formatting for absolute times (issue #460)</change>
     <change tool="partitureditor" type="bug" version="1.8.2" date="24.07.2025">One more fix in the INEL ISO/TEI export (issue #517)</change>
     <change tool="partitureditor" type="feature" version="1.8.2" date="24.07.2025">CSV export for tabulated data (issue #446)</change>
     <change tool="exakt" type="change" version="1.4.3" date="24.07.2025">Cosmetic change: white sorting indicators (issue #445)</change>
-    <change tool="orthonormal" type="feature" version="1.0.2" date="13.07.2025">Normalisation lexicons for Slovene and Swiss Germman (issue #520)</change>
+    <change tool="orthonormal" type="feature" version="1.0.3" date="13.07.2025">Normalisation lexicons for Slovene and Swiss Germman (issue #520)</change>
     <change tool="partitureditor" type="bug" version="1.8.2" date="12.07.2025">Annotations were ignored in INEL ISO/TEI export (issue #517)</change>
     <change tool="partitureditor" type="bug" version="1.8.2" date="04.07.2025">Fixed duplicate ID bug in INEL ISO/TEI export (issue #517)</change>
     <change tool="partitureditor" type="bug" version="1.8.2" date="03.07.2025">Fixed bug in selection of cGAT minimal segmentation algorithm (issue #529)</change>
@@ -32,7 +44,7 @@
     <change tool="partitureditor" type="change" version="1.8.2" date="27.05.2025">Tolerate missing audio in Partitur-Editor : option for dummy WAV (issue #522)</change>
     <change tool="partitureditor" type="feature" version="1.8.2" date="19.05.2025">Move to other speaker action (issue #473)</change>
     <change tool="partitureditor" type="feature" version="1.8.2" date="19.05.2025">Select block action (issue #473)</change>
-    <change tool="folker" type="change" version="1.3.2" date="18.05.2025">Tolerate missing audio in FOLKER : option for dummy WAV (issue #522)</change>
+    <change tool="folker" type="change" version="1.3.3" date="18.05.2025">Tolerate missing audio in FOLKER : option for dummy WAV (issue #522)</change>
     <change tool="coma" type="bug" version="2.0.5" date="16.05.2025">Bug fix (issue #516)</change>
     <change tool="exakt" type="feature" version="1.4.3" date="16.05.2025">Filtering: differentiate full vs. partial matching (issue #515)</change>
     <change tool="exakt" type="feature" version="1.4.3" date="16.05.2025">Option "Delete unfiltered search results directly" (issue #514)</change>
