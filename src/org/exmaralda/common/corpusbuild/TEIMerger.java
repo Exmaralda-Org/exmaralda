@@ -128,17 +128,16 @@ public class TEIMerger {
             StylesheetFactory ssf = new StylesheetFactory(true);
             String result =
                 ssf.applyInternalStylesheetToString(skeleton_stylesheet, IOUtilities.documentToString(segmentedTranscription));
-            teiDocument = IOUtilities.readDocumentFromString(result);
+                teiDocument = IOUtilities.readDocumentFromString(result);
         } else {
             teiDocument = transformer.transform(segmentedTranscription);            
         }
         
-        //FileIO.writeDocumentToLocalFile("C:\\Users\\bernd\\OneDrive\\Desktop\\TEST\\intermediate1.xml", teiDocument);      
+        FileIO.writeDocumentToLocalFile("Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1_interm2.xml", teiDocument);      
         System.out.println("STEP 1 completed.");
         
         Vector uElements = TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, includeFullText);
         
-
         XPath xp = XPath.newInstance(BODY_NODE);
         if (useNewStylesheets){
             BODY_NODE = "//tei:body";
@@ -333,7 +332,7 @@ public class TEIMerger {
 
                         annotationsElement.addContent(annotation);
                     } else {
-                        // i.e. fullTextMethod==FULL_TEXT_METHOD.FULLTEXT, new 22-08-2025
+                        // i.e. fullTextMethod!=FULL_TEXT_METHOD.FULLTEXT, new 22-08-2025
                         List l = sc2.getChildren();
                         for (Object o : l){
                             Element x = (Element)o;
@@ -348,10 +347,11 @@ public class TEIMerger {
                         }
 
                     }
-                    //*****************************************
 
-                    returnValue.addElement(mergedElement.detach());
                 }
+                //*****************************************
+                // #559 how on earth and when exactly did this end up inside the previous if statement????
+                returnValue.addElement(mergedElement.detach());
             }
             
             // issue #89 - Now the vector contains elements only from the 
@@ -370,7 +370,7 @@ public class TEIMerger {
     
     public static Element merge(Element e1, Element e2){
         
-        //System.out.println("Merging " + IOUtilities.elementToString(e1) + " with " + IOUtilities.elementToString(e2));
+        //System.out.println("Merging " + IOUtilities.elementToString(e1) + " \nwith \n" + IOUtilities.elementToString(e2));
         
         Iterator i1 = e1.getDescendants();
         Vector pcData1 = new Vector();
@@ -433,6 +433,7 @@ public class TEIMerger {
                 break;
             }
         }
+        //System.out.println("MERGED: " + IOUtilities.elementToString(e1));
         
         return e1;
     }

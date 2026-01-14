@@ -4,7 +4,6 @@
  */
 package org.exmaralda.partitureditor.jexmaralda.convert;
 
-import java.awt.print.PageFormat;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;

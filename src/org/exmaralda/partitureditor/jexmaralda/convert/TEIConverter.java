@@ -322,6 +322,9 @@ public class TEIConverter extends AbstractConverter {
         Document stdoc = FileIO.readDocumentFromString(st.toXML());
         Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
         System.out.println("Merged");
+        //FileIO.writeDocumentToLocalFile("Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1_interm.exs", stdoc);
+        // Thos one is empty!!!
+        //FileIO.writeDocumentToLocalFile("Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1_interm.xml", teiDoc);
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        
         setTranscriptionDesc(teiDoc, "GENERIC", "1.0");
