@@ -34,8 +34,8 @@ public class TestConversion {
         } 
     }
     
-    String IN = "Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1.exb";
-    String OUT = "Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1.xml";
+    String IN = "C:\\Users\\bernd\\Dropbox\\work\\2024_VW\\TGSC\\0-EXB\\1-1-1-10-a.exb";
+    String OUT = "C:\\Users\\bernd\\Dropbox\\work\\2024_VW\\TGSC\\TEST_GENERIC_1.xml";
 
     private void doit() throws SAXException, JexmaraldaException, FSMException, JDOMException, XSLTransformException, IOException, ParserConfigurationException, TransformerException {
         TEIConverter converter = new TEIConverter();

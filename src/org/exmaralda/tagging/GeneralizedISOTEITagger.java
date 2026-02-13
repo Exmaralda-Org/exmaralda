@@ -55,6 +55,7 @@ public class GeneralizedISOTEITagger {
             String paramFilePath = paramFileSpec[1];
             String paramFileEncoding = paramFileSpec[2];
             TreeTagger tt = new TreeTagger(treeTaggerDirectory, paramFilePath, paramFileEncoding, treeTaggerOptions);   
+            tt.verbose = false;
             language2TreeTagger.put(language, tt);
             System.out.println("[GeneralizedISOTEITagger] TreeTagger for language " + language + " initialised with " + new File(paramFilePath).getName());
         }
