@@ -93,6 +93,7 @@ public class TEIConverter extends AbstractConverter {
     public static String ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL = "/org/exmaralda/tei/xml/detokenize.xsl";
     public static String ISOTEI2EXMARaLDA_3b_AUGMENT_FINAL_XSL = "/org/exmaralda/tei/xml/augmentTimeline_final.xsl";
     public static String ISOTEI2EXMARaLDA_3c_REMOVE_STRAY_ANCHORS_XSL = "/org/exmaralda/tei/xml/removeStrayAnchors.xsl";
+    public static String ISOTEI2EXMARaLDA_3d_HANDLE_ORPHANED_ANCHORS_XSL = "/org/exmaralda/tei/xml/handleOrphanedAnchors.xsl";
 
     public static String ISOTEI2EXMARaLDA_4_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2exmaralda.xsl";
     
