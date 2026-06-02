@@ -16,7 +16,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
-import org.exmaralda.folker.data.Timepoint;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.orthonormal.lexicon.LexiconException;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
@@ -85,6 +84,7 @@ public class WordLabel extends JLabel implements MouseListener {
     void setWord(boolean lexiconUpdateNecessary){
         //String form = wordElement.getText();
         String form = getWordText(wordElement);
+        //System.out.println("Form: " + form);
         
         //////////////////////////////////
         //Timepoint timepoint =
@@ -95,6 +95,7 @@ public class WordLabel extends JLabel implements MouseListener {
         String normalizedForm = form;
         if (wordElement.getAttribute("n")!=null){
             normalizedForm = wordElement.getAttributeValue("n");
+            //System.out.println("Normalized: " + normalizedForm);
         }
         boolean isTagged = wordElement.getAttribute("lemma")!=null;
         String text = "<html>";
@@ -187,7 +188,7 @@ public class WordLabel extends JLabel implements MouseListener {
         //text+= " {" + Double.toString(time) + "}";
         
         text+="</html>";
- 
+        //System.out.println("Setting text : " + text);
         setText(text);
         try {
             if (lexiconUpdateNecessary){

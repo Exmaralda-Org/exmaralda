@@ -11,9 +11,13 @@
 
 package org.exmaralda.orthonormal.gui;
 
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -21,6 +25,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import org.exmaralda.orthonormal.application.ApplicationFrame;
 import org.jdom.Element;
@@ -36,6 +41,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
 
     public boolean escaped = false;
     java.awt.Frame parent;
+    //Component glassPane;
     
 
     /** Creates new form WordNormalizationDialog */
@@ -112,6 +118,25 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         playSelectionButton.setAction(((ApplicationFrame)(parent)).applicationControl.playSelectionAction);
         playSelectionButton.setToolTipText("Auswahl abspielen");
         
+        /*glassPane = ((JFrame)parent).getGlassPane();
+        glassPane.setVisible(true);   
+        
+        glassPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                if (!isVisible()) return;
+
+                Point p = e.getLocationOnScreen();
+                Rectangle r = getBounds();
+
+                if (!r.contains(p)) {
+                    escaped = true;
+                    exitDialog();
+                }
+            }
+        });        */
+        
     }
 
     public String getNormalizedForm(){
@@ -137,6 +162,7 @@ public class WordNormalizationDialog extends javax.swing.JDialog implements Mous
         if (getNormalizedForm().length()==0){
             escaped = true;
         }
+        //glassPane.setVisible(false);
         this.setVisible(false);
         this.dispose();
     }

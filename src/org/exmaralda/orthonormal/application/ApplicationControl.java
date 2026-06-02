@@ -1212,10 +1212,12 @@ public final class ApplicationControl implements  ListSelectionListener,
             case PlayableEvent.PLAYBACK_STARTED :                 
                 status("Playback gestartet.");
                 playSelectionAction.setEnabled(false);
+                playAction.setEnabled(false);
                 stopAction.setEnabled(true);
                 break;
             case PlayableEvent.PLAYBACK_STOPPED : 
                 playSelectionAction.setEnabled(selectionStart!=selectionEnd);
+                playAction.setEnabled(true);
                 stopAction.setEnabled(false);
                 status("Playback gestoppt.");
                 playerState=PLAYER_IDLE;
