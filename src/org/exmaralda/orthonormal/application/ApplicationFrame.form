@@ -175,6 +175,7 @@
                 <Component class="javax.swing.JButton" name="playSelectionButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Play audio for contribution"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -183,6 +184,7 @@
                 <Component class="javax.swing.JButton" name="playButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Play audio from contribution start"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -191,6 +193,7 @@
                 <Component class="javax.swing.JButton" name="stopButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Stop audio"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

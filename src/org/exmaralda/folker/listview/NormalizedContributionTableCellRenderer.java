@@ -46,8 +46,8 @@ public class NormalizedContributionTableCellRenderer extends JEditorPane impleme
         //setWrapStyleWord(true);
       this.setContentType("text/html");
       HTMLEditorKit kit = new HTMLEditorKit();
-      kit.getStyleSheet().addRule("b {color:red;}");
-      kit.getStyleSheet().addRule("body {font-family:sans-serif;}");
+      kit.getStyleSheet().addRule("b {color:red;}"); // this is the color for normalized forms
+      kit.getStyleSheet().addRule("body {font-family:sans-serif; }"); // here is the color for transcribed forms
       kit.getStyleSheet().addRule("i {color:#c0c0c0;}");
       setEditorKit(kit);
 
@@ -74,6 +74,8 @@ public class NormalizedContributionTableCellRenderer extends JEditorPane impleme
         isSelected, hasFocus, row, column);
         if (!isSelected){
             adaptee.setBackground(new java.awt.Color(240, 240, 240));
+            //adaptee.setBackground(new Color(89,89,89));
+            //adaptee.setForeground(Color.WHITE);
         }
         setForeground(adaptee.getForeground());
         setBackground(adaptee.getBackground());

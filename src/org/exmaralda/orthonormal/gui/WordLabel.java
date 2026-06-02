@@ -16,6 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
+import org.exmaralda.folker.data.Timepoint;
 import org.exmaralda.orthonormal.application.ApplicationControl;
 import org.exmaralda.orthonormal.lexicon.LexiconException;
 import org.exmaralda.orthonormal.utilities.WordUtilities;
@@ -84,6 +85,13 @@ public class WordLabel extends JLabel implements MouseListener {
     void setWord(boolean lexiconUpdateNecessary){
         //String form = wordElement.getText();
         String form = getWordText(wordElement);
+        
+        //////////////////////////////////
+        //Timepoint timepoint =
+        //        applicationControl.getTranscription().getTimeForId(wordElement.getAttributeValue("id"));
+        //double time = timepoint.getTime();
+        //////////////////////////////////
+        
         String normalizedForm = form;
         if (wordElement.getAttribute("n")!=null){
             normalizedForm = wordElement.getAttributeValue("n");
@@ -148,7 +156,7 @@ public class WordLabel extends JLabel implements MouseListener {
         if (isTagged && applicationControl.getMode()==ApplicationControl.TAGGING_MODE){
             text+="<small>";
             if (wordElement.getAttribute("p-pos")==null){
-                text+="<font color='gray'>";
+                text+="<font color='white'>";
             } else {
                 String pPos = wordElement.getAttributeValue("p-pos");
                 double p = 1.0;
@@ -161,9 +169,9 @@ public class WordLabel extends JLabel implements MouseListener {
                     }
                 }
                 if (p>applicationControl.maximumTagProbability){
-                    text+="<font color='gray'>";                        
+                    text+="<font color='white'>";                        
                 } else if (p<=applicationControl.maximumTagProbability && p>applicationControl.criticalTagProbability){
-                    text+="<font color='black'>";
+                    text+="<font color='yellow'>";
                 } else {
                     text+="<font color='red'>";                        
                 }
@@ -174,9 +182,13 @@ public class WordLabel extends JLabel implements MouseListener {
             text+=wordElement.getAttributeValue("pos");
             text+="}</font></small>";
         }            
+        
+        ///////////////////////
+        //text+= " {" + Double.toString(time) + "}";
+        
         text+="</html>";
  
-        this.setText(text);
+        setText(text);
         try {
             if (lexiconUpdateNecessary){
                 applicationControl.lexicon.put(form, normalizedForm, applicationControl.getTranscription().getID(), wordElement.getAttributeValue("id"));
@@ -204,8 +216,16 @@ public class WordLabel extends JLabel implements MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e==null || (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==1)){
-            // programatic or
+        if (e==null){
+            // programatic click
+            editWord();
+            applicationControl.updateContribution();
+        } else if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==2){
+            // double left click
+            // does not work - the first of the double click is processed before
+            autoTagWord();
+            applicationControl.updateContribution();   
+        } else if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==1){
             // single left click
             editWord();
             applicationControl.updateContribution();
@@ -222,11 +242,6 @@ public class WordLabel extends JLabel implements MouseListener {
                 // single right click and control
                 removeLemma();
             }
-        } else if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==2){
-            // double left click
-            // does not work - the first of the double click is processed before
-            autoTagWord();
-            applicationControl.updateContribution();   
         } 
     }
 

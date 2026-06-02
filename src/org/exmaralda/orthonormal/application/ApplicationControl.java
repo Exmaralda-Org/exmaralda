@@ -12,10 +12,12 @@ package org.exmaralda.orthonormal.application;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -38,6 +40,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.PatternSyntaxException;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableColumn;
 
 import org.bounce.text.xml.XMLEditorKit;
@@ -55,6 +59,7 @@ import org.exmaralda.orthonormal.data.NormalizedFolkerTranscription;
 import org.exmaralda.orthonormal.gui.ChangeSpeakerAbbreviationsDialog;
 import org.exmaralda.orthonormal.gui.EditContributionDialog;
 import org.exmaralda.orthonormal.gui.EditPreferencesDialog;
+import org.exmaralda.orthonormal.gui.PlayLabel;
 import org.exmaralda.orthonormal.gui.SaveLexiconDialog;
 import org.exmaralda.orthonormal.gui.SearchInDirectoryDialog;
 import org.exmaralda.orthonormal.gui.TaggingDialog;
@@ -468,6 +473,16 @@ public final class ApplicationControl implements  ListSelectionListener,
         player.startPlayback();
         playerState=PLAYER_PLAYING;
     }
+
+
+    public void playFromeTime(double startTime){
+        if (playerState==PLAYER_PLAYING) return;
+        player.setStartTime(startTime/1000.0);
+        player.setEndTime(selectionEnd/1000.0);
+        player.startPlayback();
+        playerState=PLAYER_PLAYING;
+    }
+
 
     public void play(){
         if (playerState==PLAYER_PLAYING) return;
@@ -1094,14 +1109,6 @@ public final class ApplicationControl implements  ListSelectionListener,
 
     void setupEditor(final Element contribution){
         commitEdit();
-        // maybe this could be optimized by keeping words in an index in the nft
-        /*Iterator i = contribution.getDescendants(new ElementFilter("w"));
-        while (i.hasNext()){
-            Element word = (Element)(i.next());
-            WordLabel wordLabel = new WordLabel(word, this);
-            applicationFrame.editPanel.add(wordLabel);
-        }*/
-        //long before = System.currentTimeMillis();
         if (mode==XML_MODE){
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
@@ -1146,16 +1153,32 @@ public final class ApplicationControl implements  ListSelectionListener,
             applicationFrame.editPanel.repaint();
             applicationFrame.editPanel.scrollRectToVisible(new Rectangle(0,0,1,1));            
         } else if (mode==CORRECTION_MODE) {
-            //ContributionTextPane contributionTextPane = new ContributionTextPane();
-            //contributionTextPane.setContribution(contribution);
-            // TODO
         } else {
             FlowLayout fl = new FlowLayout();
             fl.setAlignment(FlowLayout.LEFT);
             applicationFrame.editPanel.setLayout(fl);
+            
+            Timepoint lastTimepoint = null;
+
             for (Element word : nft.getWordsForContribution(contribution)){
+                JPanel wordPanel = new JPanel();
+                wordPanel.setBorder(null);
+                wordPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));                
+
+                String wordID = word.getAttributeValue("id");
+                Timepoint thisTimepoint = nft.getTimeForId(wordID);
+                if (thisTimepoint!=lastTimepoint){
+                    PlayLabel playLabel = new PlayLabel(thisTimepoint.getTime(), this);
+                    wordPanel.add(playLabel);
+                    lastTimepoint = thisTimepoint;
+                }
+                
                 WordLabel wordLabel = new WordLabel(word, this);
-                applicationFrame.editPanel.add(wordLabel);
+                wordPanel.add(wordLabel);
+                applicationFrame.editPanel.add(wordPanel);
+                
+                
+                //applicationFrame.editPanel.add(wordLabel);
             }
             applicationFrame.editPanel.revalidate();
             applicationFrame.editPanel.repaint();
@@ -1167,8 +1190,6 @@ public final class ApplicationControl implements  ListSelectionListener,
                 }
             }
         }
-        //long after = System.currentTimeMillis();
-        //System.out.println("Setup time: " + (after-before)/1000);
     }
 
     void commitEdit(){
@@ -1349,9 +1370,25 @@ public final class ApplicationControl implements  ListSelectionListener,
             }
         }
     }
+    
+    List<Component> getAllComponents(Container container) {
+        List<Component> result = new ArrayList<>();
+
+        for (Component c : container.getComponents()) {
+            result.add(c);
+
+            if (c instanceof Container) {
+                result.addAll(getAllComponents((Container) c));
+            }
+        }
+
+        return result;
+    }    
 
     void findWord(Element wordElement){
-        for (Component c : applicationFrame.editPanel.getComponents()){
+        List<Component> allComponents = getAllComponents(applicationFrame.editPanel);
+        //for (Component c : applicationFrame.editPanel.getComponents()){
+        for (Component c : allComponents){
             if (!(c instanceof WordLabel)) continue;
             WordLabel wl = (WordLabel)c;
             if (wl.getWordElement()==wordElement){

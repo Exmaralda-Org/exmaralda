@@ -203,12 +203,15 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         buttonPanel.add(playerTypeLabel);
 
         playSelectionButton.setText("jButton1");
+        playSelectionButton.setToolTipText("Play audio for contribution");
         buttonPanel.add(playSelectionButton);
 
         playButton.setText("jButton1");
+        playButton.setToolTipText("Play audio from contribution start");
         buttonPanel.add(playButton);
 
         stopButton.setText("jButton1");
+        stopButton.setToolTipText("Stop audio");
         buttonPanel.add(stopButton);
 
         playerControlsPanel.add(buttonPanel);

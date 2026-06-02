@@ -74,7 +74,7 @@ public class NormalizedFolkerTranscription {
     }
     
     public List<Element> getWords(){
-        ArrayList<Element> result = new ArrayList<Element>();
+        ArrayList<Element> result = new ArrayList<>();
         Iterator i = xmlDocument.getRootElement().getDescendants(new ElementFilter("w"));
         while (i.hasNext()){
             result.add((Element)(i.next()));
@@ -145,47 +145,82 @@ public class NormalizedFolkerTranscription {
         for (Object o : l2){
             Element timepoint = (Element)o;
             String id = timepoint.getAttributeValue("timepoint-id");
-            Double absoluteTime = Double.parseDouble(timepoint.getAttributeValue("absolute-time"));
-            Timepoint tp = new Timepoint(null, absoluteTime.doubleValue()* 1000.0);
+            Double absoluteTime = Double.valueOf(timepoint.getAttributeValue("absolute-time"));
+            Timepoint tp = new Timepoint(null, absoluteTime * 1000.0);
             timeMappings.put(id, tp);
         }
+        
+        
 
         indexSpeakers();
 
         wordMappings = new HashMap<>();
         tokenIDs = new HashSet<>();
+
         for (Element contribution : contributions){
+            
+            String startID = contribution.getAttributeValue("start-reference");
+            Timepoint currentStart = timeMappings.get(startID);
+
             ArrayList<Element> wordVector = new ArrayList<>();
             Iterator i = contribution.getDescendants(new ElementFilter());
             while (i.hasNext()){
                 Element token = (Element)(i.next());
+                
+                if (token.getName().equals("time")){
+                    String newStartID = token.getAttributeValue("timepoint-reference");
+                    currentStart = timeMappings.get(newStartID);
+                }
+                
                 if (token.getName().equals("w")){
                     wordVector.add(token);
                 }                
-                tokenIDs.add(token.getAttributeValue("id"));
+                String tokenID = token.getAttributeValue("id");
+                if (tokenID!=null){
+                    tokenIDs.add(tokenID);
+                    timeMappings.put(tokenID, currentStart);
+                }                        
             }
             wordMappings.put(contribution, wordVector);
         }
     }
     
     public void reindexContribution(Element contribution){
-            ArrayList<Element> wordVector = new ArrayList<>();
-            Iterator i = contribution.getDescendants(new ElementFilter());
-            while (i.hasNext()){
-                Element token = (Element)(i.next());
-                if (token.getName().equals("w")){
-                    wordVector.add(token);
-                }
-                tokenIDs.add(token.getAttributeValue("id"));
+            
+        String startID = contribution.getAttributeValue("start-reference");
+        Timepoint currentStart = timeMappings.get(startID);
+        
+        ArrayList<Element> wordVector = new ArrayList<>();
+        Iterator i = contribution.getDescendants(new ElementFilter());
+        while (i.hasNext()){
+            Element token = (Element)(i.next());
+            if (token.getName().equals("time")){
+                String newStartID = token.getAttributeValue("timepoint-reference");
+                currentStart = timeMappings.get(newStartID);
             }
-            wordMappings.put(contribution, wordVector);        
+
+            if (token.getName().equals("w")){
+                wordVector.add(token);
+            }
+            
+            String tokenID = token.getAttributeValue("id");
+            if (tokenID!=null){
+                tokenIDs.add(tokenID);
+                timeMappings.put(tokenID, currentStart);
+            }                        
+        }
+        wordMappings.put(contribution, wordVector);        
     }
     
     public void unindexContribution(Element contribution){
             Iterator i = contribution.getDescendants(new ElementFilter());
             while (i.hasNext()){
-                Element word = (Element)(i.next());
-                tokenIDs.remove(word.getAttributeValue("id"));
+                Element token = (Element)(i.next());
+                String tokenID = token.getAttributeValue("id");
+                if (tokenID!=null){
+                    tokenIDs.remove(tokenID);
+                    timeMappings.remove(tokenID);
+                }
             }
             wordMappings.remove(contribution);
     }
