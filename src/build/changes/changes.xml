@@ -11,6 +11,8 @@
 	release = true | false (is it a release-version) 
 --> 
 
+    <change tool="orthonormal" type="change" version="1.0.4" date="24.07.2025">Change colors (issue #551)</change>
+    <change tool="partitureditor" type="bug" version="1.8.3" date="02.06.2026">Reassign referenced files after "add token tier" (issue #565)</change>
     <change tool="exakt" type="feature" version="1.4.3" date="28.12.2025">Save user presets for columns/annotations(issue #444)</change>
     <change tool="exakt" type="change" version="1.4.3" date="28.12.2025">Status messages (issue #553)</change>
     <change tool="exakt" type="bug" version="1.4.3" date="28.12.2025">Concurrent modification bugling (issue #554)</change>
