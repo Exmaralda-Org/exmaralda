@@ -862,9 +862,11 @@ public final class ApplicationControl implements  ListSelectionListener,
     }
     
     void setWordListCellRenderers(){
+
+        applicationFrame.wordTable.setSelectionBackground(WordListTableCellRenderer.selectedBgColor);
+
         applicationFrame.wordTable.getColumnModel().getColumn(0).setCellRenderer(new WordListTableCellRenderer());
         applicationFrame.wordTable.getColumnModel().getColumn(0).setMaxWidth(45);
-        //applicationFrame.wordTable.getColumnModel().getColumn(0).setWidth(30);
         applicationFrame.wordTable.getColumnModel().getColumn(1).setCellRenderer(new WordListTableCellRenderer());
         applicationFrame.wordTable.getColumnModel().getColumn(2).setCellRenderer(new WordListTableCellRenderer());
         if (applicationFrame.wordTable.getModel().getColumnCount()>3){

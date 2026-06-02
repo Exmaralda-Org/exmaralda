@@ -28,12 +28,20 @@ import org.jdom.filter.AbstractFilter;
  */
 public class WordLabel extends JLabel implements MouseListener {
 
+    static String transcribedCSS = "<font color='rgb(126,192,238)'>";
+    static String normalizedCSS = "<font color='rgb(255,165,0)'>";
+    static Color mouseOverColor = new Color(0,0,128); // navy
+    static Color highlightColor = new Color(230,230,230); 
+    
+
     Element wordElement;
     ApplicationControl applicationControl;
     WordLabelPopupPanel popupPanel = new WordLabelPopupPanel();
     JDialog popupPanelDialog;
     
     AbstractFilter textFilter = new AbstractFilter(){
+        
+        @Override
         public boolean matches(Object o) {
             return ((o instanceof org.jdom.Text) && ((org.jdom.Text)o).getTextTrim().length()>0);
         }
@@ -43,7 +51,8 @@ public class WordLabel extends JLabel implements MouseListener {
         applicationControl = ac;
         this.wordElement = wordElement;
         addMouseListener(this);
-        setBackground(Color.WHITE);
+        //setBackground(Color.WHITE);
+        setBackground(WordListTableCellRenderer.selectedBgColor);
         setOpaque(true);
         setFont(this.getFont().deriveFont(16.0f));
         setWord(false);
@@ -69,6 +78,8 @@ public class WordLabel extends JLabel implements MouseListener {
         return result.toString().replaceAll("\\s", "");
         
     }
+    
+    
 
     void setWord(boolean lexiconUpdateNecessary){
         //String form = wordElement.getText();
@@ -83,7 +94,7 @@ public class WordLabel extends JLabel implements MouseListener {
             //this.setText(wordElement.getText());
             //this.setText(getWordText(wordElement));
             text+=getWordText(wordElement);
-            this.setForeground(Color.BLACK);
+            this.setForeground(Color.WHITE);
             this.setFont(this.getFont().deriveFont(Font.PLAIN));
         } else {
             this.setForeground(Color.RED);
@@ -92,41 +103,43 @@ public class WordLabel extends JLabel implements MouseListener {
             }
             if ((normalizedForm.startsWith(form))){
                 // lemma starts with form
-                text+="<font color='blue'>"
+                text+=transcribedCSS
                         + form
                         + "</font>"
                         + "["
-                        + "<font color='red'>"
+                        + normalizedCSS
                         //+ lemma.substring(wordElement.getText().length())
                         + normalizedForm.substring(form.length())
                         + "</font>"
                         + "]";
             } else if (normalizedForm.endsWith(form)){
                 // lemma ends with form
-                text+="[<font color='red'>"
+                text+="["
+                        + normalizedCSS
                         + normalizedForm.substring(0, normalizedForm.length() - form.length())
                         + "</font>"
                         + "]"
-                        + "<font color='blue'>"
+                        + transcribedCSS
                         + form
                         + "</font>";
             } else if ((normalizedForm.substring(0,1).equalsIgnoreCase(form.substring(0,1))) &&
                     (normalizedForm.substring(1).equals(form.substring(1)))){
                 // lemma is capitalized form
-                text+="[<font color='red'>"
+                text+="["
+                        + normalizedCSS
                         + normalizedForm.substring(0,1)
                         + "</font>"
                         + "]"
-                        + "<font color='blue'>"
+                        + transcribedCSS
                         + form.substring(1)
                         + "</font>";                        
             } else {
                 // it is more complex
-                text+="<font color='blue'>"
+                text+= transcribedCSS
                         + form
                         + "</font>"
                         + " ["
-                        + "<font color='red'>"
+                        + normalizedCSS
                         + normalizedForm
                         + "</font>"
                         + "]";
@@ -245,12 +258,14 @@ public class WordLabel extends JLabel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.setBackground(Color.YELLOW);
+        //this.setBackground(Color.YELLOW);
+        this.setBackground(mouseOverColor);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.setBackground(Color.WHITE);
+        //this.setBackground(Color.WHITE);
+        this.setBackground(WordListTableCellRenderer.selectedBgColor);
     }
 
     void editWord(){
@@ -328,7 +343,8 @@ public class WordLabel extends JLabel implements MouseListener {
     }
 
     public void highlight() {
-        this.setBackground(Color.GREEN);
+        //this.setBackground(Color.GREEN);
+        this.setBackground(highlightColor);
     }
 
 }
