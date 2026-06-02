@@ -8,6 +8,7 @@ package org.exmaralda.partitureditor.partiture.transcriptionActions;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -48,6 +49,7 @@ public class AddTokenLayerAction extends org.exmaralda.partitureditor.partiture.
         try {
             table.checkSave();
             BasicTranscription bt = table.getModel().getTranscription();
+            Vector<String> rememberedReferencedFiles = bt.getHead().getMetaInformation().getReferencedFiles();
             SegmentedTranscription st =
                     table.getAbstractSegmentation().BasicToSegmented(bt);
             
@@ -61,6 +63,7 @@ public class AddTokenLayerAction extends org.exmaralda.partitureditor.partiture.
             BasicTranscription importedTranscription = new BasicTranscription();
             importedTranscription.BasicTranscriptionFromString(result);
             // 06-07-2017: issue #111 (Helau!)
+            importedTranscription.getHead().getMetaInformation().setReferencedFiles(rememberedReferencedFiles);
             importedTranscription.getHead().getMetaInformation().resolveReferencedFile(table.filename, MetaInformation.NEW_METHOD);
             table.getModel().setTranscription(importedTranscription);
             table.setupMedia();
