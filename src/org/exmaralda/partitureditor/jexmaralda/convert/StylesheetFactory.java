@@ -429,7 +429,7 @@ public class StylesheetFactory implements javax.xml.transform.ErrorListener {
         try {
             Class.forName("net.sf.saxon.event.MessageWarner");
         } catch (ClassNotFoundException cnfe){
-            System.out.println("No net.sf.saxon.event.MessageWarner in classpath.");
+            //System.out.println("No net.sf.saxon.event.MessageWarner in classpath.");
             return;
         }
         try {
