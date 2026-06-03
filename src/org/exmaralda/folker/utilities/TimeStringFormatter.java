@@ -125,7 +125,7 @@ public class TimeStringFormatter {
             formatted += Integer.toString(hours) + ":";
         }
         int remainingSeconds = seconds - 3600*hours;
-        System.out.println("Remaining seconds " + remainingSeconds);
+        //System.out.println("Remaining seconds " + remainingSeconds);
         
         
         int minutes = remainingSeconds/60;
