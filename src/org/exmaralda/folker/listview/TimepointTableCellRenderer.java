@@ -64,7 +64,9 @@ public class TimepointTableCellRenderer extends javax.swing.table.DefaultTableCe
                 ((((Timepoint)value).getTime()<this.currentLeftmostVisibleTime) ||
                 ((((Timepoint)value).getTime()>this.currentRightmostVisibleTime)))){
             retValue.setForeground(java.awt.Color.GRAY);                        
-        }*/ else {
+        }*/ else if (isSelected){
+            retValue.setForeground(java.awt.Color.WHITE);            
+        } else {
             retValue.setForeground(java.awt.Color.BLUE);            
         }
         ((JLabel)(retValue)).setVerticalAlignment(SwingConstants.TOP);

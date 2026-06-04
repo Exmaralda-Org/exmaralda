@@ -24,34 +24,21 @@ import org.exmaralda.partitureditor.jexmaralda.convert.StylesheetFactory;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-//public class NormalizedContributionTableCellRenderer extends JTextArea implements TableCellRenderer {
 public class NormalizedContributionTableCellRenderer extends JEditorPane implements TableCellRenderer {
   
-    private final DefaultTableCellRenderer adaptee =  new DefaultTableCellRenderer();
     private final int ADDITIONAL_HEIGHT = 5;
     StylesheetFactory ssf = new StylesheetFactory(true);
     String XSL_PATH = "/org/exmaralda/folker/data/parsedContribution2Text.xsl";
-
-    //private boolean replaceSpaces = true;
   
-  /** map from table to map of rows to map of column heights */
-  //private final Map cellSizes = new HashMap();
-
-  javax.swing.text.StyledEditorKit sek = new javax.swing.text.StyledEditorKit();
-
-
-
   public NormalizedContributionTableCellRenderer() {
-        //setLineWrap(true);
-        //setWrapStyleWord(true);
-      this.setContentType("text/html");
+      setContentType("text/html");
+      
       HTMLEditorKit kit = new HTMLEditorKit();
-      kit.getStyleSheet().addRule("b {color:red;}"); // this is the color for normalized forms
-      kit.getStyleSheet().addRule("body {font-family:sans-serif; }"); // here is the color for transcribed forms
-      kit.getStyleSheet().addRule("i {color:#c0c0c0;}");
+      kit.getStyleSheet().addRule("body {font-family:sans-serif;}"); // here is the style for transcribed forms
+      kit.getStyleSheet().addRule("var {color:rgb(126,192,238); font-style: normal; font-weight: normal;}"); // this is the style for transcribed forms with a normalization
+      kit.getStyleSheet().addRule("b {color:rgb(255,165,0);}"); // this is the style for normalized forms
+      kit.getStyleSheet().addRule("i {color:rgb(130,130,130);}"); // this is the style for non-word tokens
       setEditorKit(kit);
-
-      //setEditorKit(sek);
 
   }
 
@@ -59,29 +46,35 @@ public class NormalizedContributionTableCellRenderer extends JEditorPane impleme
   public Component getTableCellRendererComponent(
                                             JTable table, Object obj, boolean isSelected,
                                             boolean hasFocus, int row, int column) {
-        //String celltext = ((Element)(obj)).getText();
-        String celltext = "";
+
+       String html = "";
+        
         Element element = (Element)(obj);
         try {
-            celltext = ssf.applyInternalStylesheetToString(XSL_PATH, IOUtilities.elementToString(element));
+            String[][] parameters = {
+                {"SELECTED", Boolean.toString(isSelected)}
+            };
+            html = ssf.applyInternalStylesheetToString(XSL_PATH, IOUtilities.elementToString(element), parameters);
             //System.out.println(celltext);
         } catch (IOException | ParserConfigurationException | TransformerException | SAXException ex) {
             System.out.println(ex.getMessage());
         }
+  
 
-        // set the colours, etc. using the standard for that platform
-        adaptee.getTableCellRendererComponent(table, celltext,
-        isSelected, hasFocus, row, column);
-        if (!isSelected){
-            adaptee.setBackground(new java.awt.Color(240, 240, 240));
-            //adaptee.setBackground(new Color(89,89,89));
-            //adaptee.setForeground(Color.WHITE);
+        if (isSelected) {
+            setBackground(table.getSelectionBackground());
+            //setForeground(Color.WHITE);
+        } else {
+            setBackground(new Color(240, 240, 240));
+            //setForeground(Color.BLACK);
         }
-        setForeground(adaptee.getForeground());
-        setBackground(adaptee.getBackground());
-        setBorder(adaptee.getBorder());
-        setFont(adaptee.getFont());
-        setText(adaptee.getText());
+
+        setText(html);
+
+        setOpaque(true);
+
+        setFont(table.getFont());        
+        
 
         // This line was very important to get it working with JDK1.4
         TableColumnModel columnModel = table.getColumnModel();

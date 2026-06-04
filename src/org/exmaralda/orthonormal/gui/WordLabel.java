@@ -31,7 +31,7 @@ public class WordLabel extends JLabel implements MouseListener {
     static String transcribedCSS = "<font color='rgb(126,192,238)'>";
     static String normalizedCSS = "<font color='rgb(255,165,0)'>";
     static Color mouseOverColor = new Color(0,0,128); // navy
-    static Color highlightColor = new Color(230,230,230); 
+    static Color highlightColor = Color.BLACK; //new Color(230,230,230); 
     
 
     Element wordElement;

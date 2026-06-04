@@ -17,7 +17,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -40,8 +39,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.PatternSyntaxException;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableColumn;
 
 import org.bounce.text.xml.XMLEditorKit;
@@ -179,6 +176,7 @@ public final class ApplicationControl implements  ListSelectionListener,
         
         contributionListTable = new NormalizedContributionListTable();
         contributionListTable.getSelectionModel().addListSelectionListener(this);
+        contributionListTable.setSelectionBackground(new Color(89,89,89));
 
         applicationFrame.wordTable.addMouseListener(this);
         applicationFrame.playerSlider.addChangeListener(this);
