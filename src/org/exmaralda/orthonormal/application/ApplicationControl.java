@@ -1953,9 +1953,10 @@ public final class ApplicationControl implements  ListSelectionListener,
     public void importISOTEIFile(File f) throws IOException {
         TEIConverter teiConverter = new TEIConverter();
         NormalizedFolkerTranscription importedNFT = teiConverter.readFOLKERISOTEIFromFile(f.getAbsolutePath());
-        File temp = File.createTempFile("ISOTEI", ".fln");
+        File temp = File.createTempFile("ISOTEI", ".fln");        
         FileIO.writeDocumentToLocalFile(temp, importedNFT.getDocument());
-        this.openTranscriptionFile(temp);
+        System.out.println(temp.getAbsolutePath() + " written.");
+        openTranscriptionFile(temp);
         
     }
     

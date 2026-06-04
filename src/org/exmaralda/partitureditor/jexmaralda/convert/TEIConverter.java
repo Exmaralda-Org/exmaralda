@@ -97,7 +97,8 @@ public class TEIConverter extends AbstractConverter {
 
     public static String ISOTEI2EXMARaLDA_4_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2exmaralda.xsl";
     
-    public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    //public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/spans2attributes.xsl";
     public static String ISOTEI2FOLKER_2_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2folker.xsl";
     
     public static String ISOTEI2EXMARaLDA_TIME2TOKEN_SPANS_XSL = "/org/exmaralda/tei/xml/time2tokenSpanReferences.xsl";
