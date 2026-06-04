@@ -485,10 +485,8 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
          
          
-         //lt.writeXMLToFile("F:\\Dropbox\\IDS\\ListTranscription.xml", "none");
          Document xml = GATSegmentation.toXML(lt);
          
-         //FileIO.writeDocumentToLocalFile("F:\\Dropbox\\IDS\\ListTranscription.xml", xml);
          
          StylesheetFactory sf = new StylesheetFactory(true);
          String html = sf.applyInternalStylesheetToString("/org/exmaralda/partitureditor/jexmaralda/xsl/GAT2HTML5.xsl", IOUtilities.documentToString(xml));
@@ -533,19 +531,6 @@ public class OutputAction extends org.exmaralda.partitureditor.partiture.Abstrac
 
 
     
-    private void copy(String pathToInternalResource, String filename) throws FileNotFoundException, IOException{
-    	 BufferedInputStream bis = new BufferedInputStream(getClass().getResourceAsStream(pathToInternalResource), 4096);
-         String theName = pathToInternalResource.substring(pathToInternalResource.lastIndexOf("/")+1);
-         File targetFile = new File(new File(filename).getParent() + System.getProperty("file.separator") + theName); // destination
-         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(targetFile), 4096);
-         int theChar;
-         while ((theChar = bis.read()) != -1) {
-            bos.write(theChar);
-         }
-         bos.close();
-         bis.close();
-        
-    }
     
     
 }

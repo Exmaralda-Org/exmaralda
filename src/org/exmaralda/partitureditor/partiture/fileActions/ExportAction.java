@@ -237,7 +237,8 @@ public class ExportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             new TsvConverter().writeText(trans, exportFile);
         } else if (selectedFileFilter==dialog.SRTFileFilter){
             trans.getBody().getCommonTimeline().completeTimes(false, trans);
-            new SrtConverter().writeText(trans, exportFile);
+            boolean basedOnSegmentChain = dialog.srtExportAccessoryPanel.isBasedOnSegmentChain();
+            new SrtConverter().writeText(trans, exportFile, basedOnSegmentChain);
         }
 
         ActionUtilities.memorizeFileFilter("last-export-filter", table.getTopLevelAncestor(), dialog);
