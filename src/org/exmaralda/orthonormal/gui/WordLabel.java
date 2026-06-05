@@ -106,7 +106,7 @@ public class WordLabel extends JLabel implements MouseListener {
             this.setForeground(Color.WHITE);
             this.setFont(this.getFont().deriveFont(Font.PLAIN));
         } else {
-            this.setForeground(Color.RED);
+            this.setForeground(WordListTableCellRenderer.warningBgColor);
             if (!isTagged){
                 this.setFont(this.getFont().deriveFont(Font.BOLD));
             }
