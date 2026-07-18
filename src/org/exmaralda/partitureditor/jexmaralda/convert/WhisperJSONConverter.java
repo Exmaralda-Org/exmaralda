@@ -31,13 +31,21 @@ import org.exmaralda.partitureditor.jexmaralda.TimelineItem;
 // issue #357
 public class WhisperJSONConverter {
     
+    public enum VARIANTS {WHISPER_X, DOTE_WHISPER};
+    
     
     public static BasicTranscription readWhisperJSON(File jsonFile) throws IOException, JexmaraldaException{
         return readWhisperJSON(jsonFile, true);
     }
+    
+    public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords) throws IOException, JexmaraldaException{
+        return readWhisperJSON(jsonFile, wantsWords, VARIANTS.WHISPER_X);
+    }
+    
 
     // 24-06-2024, revised for WhisperX
-    public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords) throws IOException, JexmaraldaException{
+    // 18-07-2026, parameterised for DOTE Whisper
+    public static BasicTranscription readWhisperJSON(File jsonFile, boolean wantsWords, VARIANTS variant) throws IOException, JexmaraldaException{
         
         Map<String, List<Tier>> speakersToTiers = new HashMap<>();    
 
@@ -208,7 +216,12 @@ public class WhisperJSONConverter {
                 String danglingWords = "";
                 while (wordIterator.hasNext()){
                     JsonNode wordNode = wordIterator.next();
-                    String wText = wordNode.get("word").asText();
+                    String wText;
+                    if (variant==VARIANTS.DOTE_WHISPER){
+                        wText = wordNode.get("text").asText();
+                    } else {
+                        wText = wordNode.get("word").asText();                        
+                    }
                     if (wordNode.get("start")==null){
                         // this can happen:
                         // {"word": "2011"},
