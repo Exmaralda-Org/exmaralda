@@ -175,6 +175,7 @@
                 <Component class="javax.swing.JButton" name="playSelectionButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Play audio for contribution"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -183,6 +184,7 @@
                 <Component class="javax.swing.JButton" name="playButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Play audio from contribution start"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -191,6 +193,7 @@
                 <Component class="javax.swing.JButton" name="stopButton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jButton1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Stop audio"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -634,6 +637,9 @@
                     <Container class="javax.swing.JPanel" name="editPanel">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="59" green="59" red="59" type="rgb"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

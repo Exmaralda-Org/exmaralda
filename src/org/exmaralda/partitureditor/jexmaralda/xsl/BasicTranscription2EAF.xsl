@@ -55,7 +55,8 @@
                     <xsl:for-each select="//common-timeline/tli">
                             <xsl:element name="TIME_SLOT">
                                     <xsl:attribute name="TIME_SLOT_ID"><xsl:value-of select="@id"/></xsl:attribute>
-                                    <xsl:attribute name="TIME_VALUE"><xsl:value-of select="round(@time*1000)"/></xsl:attribute>
+                                    <!-- changed for issue #568 -->
+                                    <xsl:attribute name="TIME_VALUE"><xsl:value-of select="format-number(round(@time*1000), '0')"/></xsl:attribute>
                             </xsl:element>
                     </xsl:for-each>
 		</xsl:element>

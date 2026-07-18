@@ -93,10 +93,12 @@ public class TEIConverter extends AbstractConverter {
     public static String ISOTEI2EXMARaLDA_3_DETOKENIZE_XSL = "/org/exmaralda/tei/xml/detokenize.xsl";
     public static String ISOTEI2EXMARaLDA_3b_AUGMENT_FINAL_XSL = "/org/exmaralda/tei/xml/augmentTimeline_final.xsl";
     public static String ISOTEI2EXMARaLDA_3c_REMOVE_STRAY_ANCHORS_XSL = "/org/exmaralda/tei/xml/removeStrayAnchors.xsl";
+    public static String ISOTEI2EXMARaLDA_3d_HANDLE_ORPHANED_ANCHORS_XSL = "/org/exmaralda/tei/xml/handleOrphanedAnchors.xsl";
 
     public static String ISOTEI2EXMARaLDA_4_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2exmaralda.xsl";
     
-    public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    //public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/attributes2spans.xsl";
+    public static String ISOTEI2FOLKER_1_SPANS2ATTRIBUTES_XSL = "/org/exmaralda/tei/xml/spans2attributes.xsl";
     public static String ISOTEI2FOLKER_2_TRANSFORM_XSL = "/org/exmaralda/tei/xml/isotei2folker.xsl";
     
     public static String ISOTEI2EXMARaLDA_TIME2TOKEN_SPANS_XSL = "/org/exmaralda/tei/xml/time2tokenSpanReferences.xsl";
@@ -322,6 +324,9 @@ public class TEIConverter extends AbstractConverter {
         Document stdoc = FileIO.readDocumentFromString(st.toXML());
         Document teiDoc = teiMerger.SegmentedTranscriptionToTEITranscription(stdoc, nameOfDeepSegmentation, "SpeakerContribution_Event", true);
         System.out.println("Merged");
+        //FileIO.writeDocumentToLocalFile("Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1_interm.exs", stdoc);
+        // Thos one is empty!!!
+        //FileIO.writeDocumentToLocalFile("Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1_interm.xml", teiDoc);
         generateWordIDs(teiDoc);
         setDocLanguage(teiDoc, language);        
         setTranscriptionDesc(teiDoc, "GENERIC", "1.0");

@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import org.exmaralda.common.ExmaraldaApplication;
 import org.exmaralda.common.dialogs.ProgressBarDialog;
 import org.exmaralda.folker.utilities.PreferencesUtilities;
+import org.exmaralda.partitureditor.jexmaralda.convert.WhisperJSONConverter.VARIANTS;
 import org.exmaralda.partitureditor.jexmaraldaswing.ChooseTextSplitterDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.SelectMediaFileDialog;
 import org.exmaralda.partitureditor.jexmaraldaswing.fileDialogs.WhisperImportPostProcessDialog;
@@ -387,6 +388,17 @@ public class ImportAction extends org.exmaralda.partitureditor.partiture.Abstrac
             /**************************************************/
             // added 15-01-2023: issue #357
             importedTranscription = WhisperJSONConverter.readWhisperJSON(selectedFile);
+            WhisperImportPostProcessDialog wippd = new WhisperImportPostProcessDialog(table.parent, true);
+            wippd.setLocationRelativeTo(table);
+            wippd.setVisible(true);
+            Map<String, Boolean> parameters = wippd.getParameters();
+            WhisperJSONConverter.postProcess(importedTranscription, parameters);
+        } else if (selectedFileFilter == dialog.DoteWhisperJSONFileFilter) {
+            /**************************************************/
+            /********      DOTE WHISPER JSON              *****/
+            /**************************************************/
+            // added 18-07-2026: issue #567
+            importedTranscription = WhisperJSONConverter.readWhisperJSON(selectedFile, true, VARIANTS.DOTE_WHISPER);
             WhisperImportPostProcessDialog wippd = new WhisperImportPostProcessDialog(table.parent, true);
             wippd.setLocationRelativeTo(table);
             wippd.setVisible(true);

@@ -8,12 +8,20 @@
 
     <xsl:output encoding="UTF-8" method="html"/>
     
+    <xsl:param name="SELECTED">FALSE</xsl:param>
+    
     <!-- 08-03-2023: changed for issue # 340 -->
     <xsl:strip-space elements="w"/>
     
     <xsl:template match="/">
         <html>
             <body>
+                <xsl:attribute name="style">
+                    <xsl:choose>
+                        <xsl:when test="upper-case($SELECTED)='FALSE'">font-family: sans-serif; color:black;</xsl:when>
+                        <xsl:otherwise>font-family: sans-serif; color:white;</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
                 <xsl:apply-templates/>
             </body>
         </html>
@@ -57,9 +65,20 @@
             </xsl:when>
         </xsl:choose>
 
-        <xsl:apply-templates mode="transform-parsed-to-unparsed"/>
+        <xsl:choose>
+            <xsl:when test="@n">
+                <var style="color:rgb(126,192,238)">
+                    <xsl:apply-templates mode="transform-parsed-to-unparsed"/>                    
+                </var>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates mode="transform-parsed-to-unparsed"/>                                    
+            </xsl:otherwise>
+        </xsl:choose>
+        
+        
         <xsl:if test="@n">
-            <b> [<xsl:value-of select="@n"/>]</b>
+            <b style="color:rgb(255,165,0)"> [<xsl:value-of select="@n"/>]</b>
         </xsl:if>
         <!-- <xsl:if test="not(@transition='assimilated') and (following-sibling::*[1][self::time] or (parent::contribution and not(following-sibling::*)))"> -->
         <!-- This is saying: if the following sibling is not assimilated word, -->
@@ -86,6 +105,12 @@
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
             <xsl:choose>
                 <xsl:when test="@duration='unspecified'"><xsl:text>*</xsl:text></xsl:when>
                 <xsl:when test="@duration='micro'"><xsl:text>(.)</xsl:text></xsl:when>
@@ -124,6 +149,13 @@
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
+            
             <xsl:text>((</xsl:text>
             <xsl:value-of select="@description"/>
             <xsl:text>))</xsl:text>
@@ -159,6 +191,13 @@
             <xsl:text>&#x0020;</xsl:text>
         </xsl:if>
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
+            
             <xsl:if test="@type='in'">
                 <!-- change 04-02-2009 -->
                 <xsl:text>°</xsl:text>
@@ -210,6 +249,13 @@
     
     <xsl:template match="boundary" mode="transform-parsed-to-unparsed">
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
+            
             <xsl:choose>
                 <xsl:when test="@movement='low-fall'">.</xsl:when>
                 <xsl:when test="@movement='fall'">;</xsl:when>
@@ -260,11 +306,19 @@
 
     <!-- punctuation -->
     <xsl:template match="p" mode="transform-parsed-to-unparsed">
-        <i><xsl:apply-templates mode="transform-parsed-to-unparsed"/>
-        <xsl:if
-            test="not(following-sibling::*[not(self::time)][1][self::w and @transition='assimilated']) and (following-sibling::*[1][self::time] or (parent::contribution and not(following-sibling::*)))">
-            <xsl:text>&#x0020;</xsl:text>
-        </xsl:if></i>
+        <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
+            <xsl:apply-templates mode="transform-parsed-to-unparsed"/>
+            <xsl:if
+                test="not(following-sibling::*[not(self::time)][1][self::w and @transition='assimilated']) and (following-sibling::*[1][self::time] or (parent::contribution and not(following-sibling::*)))">
+                <xsl:text>&#x0020;</xsl:text>
+            </xsl:if>
+        </i>
     </xsl:template>
     
     <xsl:template match="p/text()" mode="transform-parsed-to-unparsed">
@@ -274,24 +328,48 @@
     
     <xsl:template match="hesitation"  mode="transform-parsed-to-unparsed">
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
             <xsl:text> .. </xsl:text>
         </i>
     </xsl:template>
 
     <xsl:template match="false-start" mode="transform-parsed-to-unparsed">
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
             <xsl:text>/</xsl:text>
         </i>
     </xsl:template>
 
     <xsl:template match="overlap[@position='start']" mode="transform-parsed-to-unparsed">
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
             <xsl:text>[</xsl:text>
         </i>
     </xsl:template>
     
     <xsl:template match="overlap[@position='end']" mode="transform-parsed-to-unparsed">
         <i>
+            <xsl:attribute name="style">
+                <xsl:choose>
+                    <xsl:when test="upper-case($SELECTED)='FALSE'">color:rgb(89,89,89)</xsl:when>
+                    <xsl:otherwise>color:rgb(225,225,225)</xsl:otherwise>
+                </xsl:choose>                
+            </xsl:attribute>
             <xsl:text>]</xsl:text>
         </i>
     </xsl:template>

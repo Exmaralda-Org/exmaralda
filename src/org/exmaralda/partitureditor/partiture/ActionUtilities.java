@@ -167,6 +167,9 @@ public class ActionUtilities {
                 case "WhisperJSON":
                     dialog.setFileFilter(dialog.WhisperJSONFileFilter);
                     break;
+                case "DoteWhisperJSON":
+                    dialog.setFileFilter(dialog.DoteWhisperJSONFileFilter);
+                    break;
                 case "AmberscriptJSON":
                     dialog.setFileFilter(dialog.AmberscriptJSONFileFilter);
                     break;
@@ -235,6 +238,7 @@ public class ActionUtilities {
             else if (selectedFileFilter==dialog.FlexTextXMLFileFilter) {lastFileFilter = "Flextext";}
             else if (selectedFileFilter==dialog.FrazierADCFileFilter) {lastFileFilter = "FrazierADC";}
             else if (selectedFileFilter==dialog.WhisperJSONFileFilter) {lastFileFilter = "WhisperJSON";}
+            else if (selectedFileFilter==dialog.DoteWhisperJSONFileFilter) {lastFileFilter = "DoteWhisperJSON";}
             else if (selectedFileFilter==dialog.AmberscriptJSONFileFilter) {lastFileFilter = "AmberscriptJSON";}
             else if (selectedFileFilter==dialog.AdobePremiereCSVFilter) {lastFileFilter = "AdobePremiereCSV";}
 

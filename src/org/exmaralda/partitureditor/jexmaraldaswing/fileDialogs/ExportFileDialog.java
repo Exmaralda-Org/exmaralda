@@ -19,6 +19,7 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
     public AudacityExportAccessoryPanel audacityExportAccessoryPanel = new AudacityExportAccessoryPanel();
     public TEIExportAccessoryPanel teiExportAccessoryPanel = new TEIExportAccessoryPanel();
     public TCFExportAccessoryPanel tcfExportAccessoryPanel = new TCFExportAccessoryPanel();
+    public SRTExportAccessoryPanel srtExportAccessoryPanel = new SRTExportAccessoryPanel();
 
     /** Creates new ExportTASXDialog
      * @param startDirectory */
@@ -70,6 +71,8 @@ public class ExportFileDialog extends AbstractFileFilterDialog  implements java.
             setAccessory(tcfExportAccessoryPanel);
         } else if (getFileFilter()==AudacityLabelFileFilter){
             setAccessory(audacityExportAccessoryPanel);
+        } else if (getFileFilter()==SRTFileFilter){
+            setAccessory(srtExportAccessoryPanel);
         } else {
             setAccessory(null);
         }

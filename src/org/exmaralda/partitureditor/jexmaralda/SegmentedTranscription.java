@@ -127,7 +127,7 @@ public class SegmentedTranscription extends AbstractTranscription implements XML
                             Segmentation dSeg = dSt.getSegmentationWithName(dSegmentationName);
                             AbstractSegmentVector partOfdSeg = dSeg.getSegments(getBody().getCommonTimeline(),TLIMapping, ts.getStart(), ts.getEnd());
                             partOfdSeg.setTierReference(dSeg.getTierReference());
-                            if (partOfdSeg.size()>0){
+                            if (!partOfdSeg.isEmpty()){
                                 sc.addDependent(partOfdSeg);
                             }
                         }

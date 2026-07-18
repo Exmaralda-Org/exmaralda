@@ -353,6 +353,11 @@
             <xsl:attribute name="type">
                 <xsl:value-of select="../@category"/>
             </xsl:attribute>
+            <xsl:if test="../ud-tier-information/ud-information[@attribute-name='ISO-TEI-Subtype']">
+                <xsl:attribute name="subtype">
+                    <xsl:value-of select="../ud-tier-information/ud-information[@attribute-name='ISO-TEI-Subtype']"/>
+                </xsl:attribute>                
+            </xsl:if>
             <xsl:attribute name="start">
                 <xsl:value-of select="$XPOINTER_HASH"/><xsl:value-of select="@start"/>
             </xsl:attribute>

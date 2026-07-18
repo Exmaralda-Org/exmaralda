@@ -18,6 +18,9 @@ import org.jdom.filter.AbstractFilter;
  * @author thomas
  */
 public class WordListTableCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+    
+    public static Color warningBgColor = new Color(0xF5, 0xB9, 0x42);
+    public static Color selectedBgColor = new Color(89, 89, 89);
 
     AbstractFilter textFilter = new AbstractFilter(){
         @Override
@@ -78,7 +81,8 @@ public class WordListTableCellRenderer extends javax.swing.table.DefaultTableCel
         //added 19-12-2012: check if this is in the dereko wordlist, if not, make it red
         if (column==0+1 && (!isSelected)){
             if("n".equals(word.getAttributeValue("i"))){
-                label.setBackground(Color.RED);
+                //label.setBackground(Color.RED);
+                label.setBackground(warningBgColor);
             } else {
                 label.setBackground(Color.WHITE);
             }
@@ -101,6 +105,8 @@ public class WordListTableCellRenderer extends javax.swing.table.DefaultTableCel
             }
 
         }
+        
+        
         return label;
     }
 

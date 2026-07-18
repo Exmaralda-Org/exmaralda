@@ -28,12 +28,20 @@ import org.jdom.filter.AbstractFilter;
  */
 public class WordLabel extends JLabel implements MouseListener {
 
+    static String transcribedCSS = "<font color='rgb(126,192,238)'>";
+    static String normalizedCSS = "<font color='rgb(255,165,0)'>";
+    static Color mouseOverColor = new Color(0,0,128); // navy
+    static Color highlightColor = Color.BLACK; //new Color(230,230,230); 
+    
+
     Element wordElement;
     ApplicationControl applicationControl;
     WordLabelPopupPanel popupPanel = new WordLabelPopupPanel();
     JDialog popupPanelDialog;
     
     AbstractFilter textFilter = new AbstractFilter(){
+        
+        @Override
         public boolean matches(Object o) {
             return ((o instanceof org.jdom.Text) && ((org.jdom.Text)o).getTextTrim().length()>0);
         }
@@ -43,7 +51,8 @@ public class WordLabel extends JLabel implements MouseListener {
         applicationControl = ac;
         this.wordElement = wordElement;
         addMouseListener(this);
-        setBackground(Color.WHITE);
+        //setBackground(Color.WHITE);
+        setBackground(WordListTableCellRenderer.selectedBgColor);
         setOpaque(true);
         setFont(this.getFont().deriveFont(16.0f));
         setWord(false);
@@ -69,13 +78,24 @@ public class WordLabel extends JLabel implements MouseListener {
         return result.toString().replaceAll("\\s", "");
         
     }
+    
+    
 
     void setWord(boolean lexiconUpdateNecessary){
         //String form = wordElement.getText();
         String form = getWordText(wordElement);
+        //System.out.println("Form: " + form);
+        
+        //////////////////////////////////
+        //Timepoint timepoint =
+        //        applicationControl.getTranscription().getTimeForId(wordElement.getAttributeValue("id"));
+        //double time = timepoint.getTime();
+        //////////////////////////////////
+        
         String normalizedForm = form;
         if (wordElement.getAttribute("n")!=null){
             normalizedForm = wordElement.getAttributeValue("n");
+            //System.out.println("Normalized: " + normalizedForm);
         }
         boolean isTagged = wordElement.getAttribute("lemma")!=null;
         String text = "<html>";
@@ -83,50 +103,52 @@ public class WordLabel extends JLabel implements MouseListener {
             //this.setText(wordElement.getText());
             //this.setText(getWordText(wordElement));
             text+=getWordText(wordElement);
-            this.setForeground(Color.BLACK);
+            this.setForeground(Color.WHITE);
             this.setFont(this.getFont().deriveFont(Font.PLAIN));
         } else {
-            this.setForeground(Color.RED);
+            this.setForeground(WordListTableCellRenderer.warningBgColor);
             if (!isTagged){
                 this.setFont(this.getFont().deriveFont(Font.BOLD));
             }
             if ((normalizedForm.startsWith(form))){
                 // lemma starts with form
-                text+="<font color='blue'>"
+                text+=transcribedCSS
                         + form
                         + "</font>"
                         + "["
-                        + "<font color='red'>"
+                        + normalizedCSS
                         //+ lemma.substring(wordElement.getText().length())
                         + normalizedForm.substring(form.length())
                         + "</font>"
                         + "]";
             } else if (normalizedForm.endsWith(form)){
                 // lemma ends with form
-                text+="[<font color='red'>"
+                text+="["
+                        + normalizedCSS
                         + normalizedForm.substring(0, normalizedForm.length() - form.length())
                         + "</font>"
                         + "]"
-                        + "<font color='blue'>"
+                        + transcribedCSS
                         + form
                         + "</font>";
             } else if ((normalizedForm.substring(0,1).equalsIgnoreCase(form.substring(0,1))) &&
                     (normalizedForm.substring(1).equals(form.substring(1)))){
                 // lemma is capitalized form
-                text+="[<font color='red'>"
+                text+="["
+                        + normalizedCSS
                         + normalizedForm.substring(0,1)
                         + "</font>"
                         + "]"
-                        + "<font color='blue'>"
+                        + transcribedCSS
                         + form.substring(1)
                         + "</font>";                        
             } else {
                 // it is more complex
-                text+="<font color='blue'>"
+                text+= transcribedCSS
                         + form
                         + "</font>"
                         + " ["
-                        + "<font color='red'>"
+                        + normalizedCSS
                         + normalizedForm
                         + "</font>"
                         + "]";
@@ -135,7 +157,7 @@ public class WordLabel extends JLabel implements MouseListener {
         if (isTagged && applicationControl.getMode()==ApplicationControl.TAGGING_MODE){
             text+="<small>";
             if (wordElement.getAttribute("p-pos")==null){
-                text+="<font color='gray'>";
+                text+="<font color='white'>";
             } else {
                 String pPos = wordElement.getAttributeValue("p-pos");
                 double p = 1.0;
@@ -148,9 +170,9 @@ public class WordLabel extends JLabel implements MouseListener {
                     }
                 }
                 if (p>applicationControl.maximumTagProbability){
-                    text+="<font color='gray'>";                        
+                    text+="<font color='white'>";                        
                 } else if (p<=applicationControl.maximumTagProbability && p>applicationControl.criticalTagProbability){
-                    text+="<font color='black'>";
+                    text+="<font color='yellow'>";
                 } else {
                     text+="<font color='red'>";                        
                 }
@@ -161,9 +183,13 @@ public class WordLabel extends JLabel implements MouseListener {
             text+=wordElement.getAttributeValue("pos");
             text+="}</font></small>";
         }            
+        
+        ///////////////////////
+        //text+= " {" + Double.toString(time) + "}";
+        
         text+="</html>";
- 
-        this.setText(text);
+        //System.out.println("Setting text : " + text);
+        setText(text);
         try {
             if (lexiconUpdateNecessary){
                 applicationControl.lexicon.put(form, normalizedForm, applicationControl.getTranscription().getID(), wordElement.getAttributeValue("id"));
@@ -191,8 +217,16 @@ public class WordLabel extends JLabel implements MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e==null || (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==1)){
-            // programatic or
+        if (e==null){
+            // programatic click
+            editWord();
+            applicationControl.updateContribution();
+        } else if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==2){
+            // double left click
+            // does not work - the first of the double click is processed before
+            autoTagWord();
+            applicationControl.updateContribution();   
+        } else if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==1){
             // single left click
             editWord();
             applicationControl.updateContribution();
@@ -209,11 +243,6 @@ public class WordLabel extends JLabel implements MouseListener {
                 // single right click and control
                 removeLemma();
             }
-        } else if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()==2){
-            // double left click
-            // does not work - the first of the double click is processed before
-            autoTagWord();
-            applicationControl.updateContribution();   
         } 
     }
 
@@ -245,12 +274,14 @@ public class WordLabel extends JLabel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.setBackground(Color.YELLOW);
+        //this.setBackground(Color.YELLOW);
+        this.setBackground(mouseOverColor);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.setBackground(Color.WHITE);
+        //this.setBackground(Color.WHITE);
+        this.setBackground(WordListTableCellRenderer.selectedBgColor);
     }
 
     void editWord(){
@@ -328,7 +359,8 @@ public class WordLabel extends JLabel implements MouseListener {
     }
 
     public void highlight() {
-        this.setBackground(Color.GREEN);
+        //this.setBackground(Color.GREEN);
+        this.setBackground(highlightColor);
     }
 
 }

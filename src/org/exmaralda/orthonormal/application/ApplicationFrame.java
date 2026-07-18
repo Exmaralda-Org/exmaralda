@@ -203,12 +203,15 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         buttonPanel.add(playerTypeLabel);
 
         playSelectionButton.setText("jButton1");
+        playSelectionButton.setToolTipText("Play audio for contribution");
         buttonPanel.add(playSelectionButton);
 
         playButton.setText("jButton1");
+        playButton.setToolTipText("Play audio from contribution start");
         buttonPanel.add(playButton);
 
         stopButton.setText("jButton1");
+        stopButton.setToolTipText("Stop audio");
         buttonPanel.add(stopButton);
 
         playerControlsPanel.add(buttonPanel);
@@ -433,7 +436,8 @@ public class ApplicationFrame extends javax.swing.JFrame implements org.exmarald
         mainSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         mainSplitPane.setLeftComponent(contributionTableScrollPane);
 
-        editPanel.setBackground(new java.awt.Color(255, 255, 255));
+        editPanel.setBackground(new java.awt.Color(89, 89, 89));
+        editPanel.setForeground(new java.awt.Color(255, 255, 255));
         editPanel.setPreferredSize(new java.awt.Dimension(500, 5000));
         editPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         editPanelScrollPane.setViewportView(editPanel);

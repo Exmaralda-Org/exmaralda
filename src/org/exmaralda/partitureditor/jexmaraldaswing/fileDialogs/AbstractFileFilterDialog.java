@@ -12,20 +12,29 @@ import org.exmaralda.partitureditor.jexmaraldaswing.fileFilters.ParameterFileFil
  * @author thomas
  */
 public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
-    public ParameterFileFilter AudacityLabelFileFilter = new ParameterFileFilter("txt", "Audacity Label File (*.txt)");
     public ParameterFileFilter AGFileFilter = new ParameterFileFilter("xml", "Annotation Graph File (*.xml)");
     public ParameterFileFilter EAFFileFilter = new ParameterFileFilter("eaf", "ELAN Annotation File (*.eaf)");
-    public ParameterFileFilter HIATDOSFileFilter = new ParameterFileFilter("dat", "HIAT-DOS file (*.dat)");
-    public ParameterFileFilter PraatFileFilter = new ParameterFileFilter("textGrid", "PRAAT Textgrid (*.textGrid)");
-    public ParameterFileFilter SimpleExmaraldaFileFilter = new ParameterFileFilter("txt", "Simple EXMARaLDA text file (*.txt)");
-    public ParameterFileFilter RioDeJaneiroFileFilter = new ParameterFileFilter("txt", "Rio de Janeiro style text transcription (*.txt)");
     public ParameterFileFilter TASXFileFilter = new ParameterFileFilter("xml", "TASX Annotation File (*.xml)");
+
+    static String[] fl_suff = {"flk", "fln"};
+    public ParameterFileFilter FOLKERTranscriptionFileFilter = new ParameterFileFilter(fl_suff, "FOLKER transcription (*.flk, *.fln)");
+    // issue #108
+    public ParameterFileFilter FLKTranscriptionFileFilter = new ParameterFileFilter("flk", "FOLKER transcription (*.flk)");
+    public ParameterFileFilter FLNTranscriptionFileFilter = new ParameterFileFilter("fln", "OrthoNormal transcription (*.fln)");
+
+    public ParameterFileFilter PraatFileFilter = new ParameterFileFilter("textGrid", "PRAAT Textgrid (*.textGrid)");
+
+    public ParameterFileFilter AudacityLabelFileFilter = new ParameterFileFilter("txt", "Audacity Label File (*.txt)");
+    public ParameterFileFilter TextFileFilter = new ParameterFileFilter("txt", "Plain text file (*.txt)");
+    public ParameterFileFilter SimpleExmaraldaFileFilter = new ParameterFileFilter("txt", "Simple EXMARaLDA text file (*.txt)");
+    public ParameterFileFilter exSyncFileFilter = new ParameterFileFilter("xml", "ExSync file (*.xml)");
+
+    public ParameterFileFilter RioDeJaneiroFileFilter = new ParameterFileFilter("txt", "Rio de Janeiro style text transcription (*.txt)");
+    public ParameterFileFilter HIATDOSFileFilter = new ParameterFileFilter("dat", "HIAT-DOS file (*.dat)");
     public ParameterFileFilter TEIFileFilter = new ParameterFileFilter("xml", "ISO/TEI file (*.xml)");
     static String[] tcf_suff = {"tcf", "xml"};
     public ParameterFileFilter TCFFileFilter = new ParameterFileFilter(tcf_suff, "TCF file (*.tcf, *.xml)");
     public ParameterFileFilter TEIModenaFileFilter = new ParameterFileFilter("xml", "Modena TEI file (*.xml)");
-    public ParameterFileFilter TextFileFilter = new ParameterFileFilter("txt", "Plain text file (*.txt)");
-    public ParameterFileFilter exSyncFileFilter = new ParameterFileFilter("xml", "ExSync file (*.xml)");
     public ParameterFileFilter HTMLPartiturFileFilter = new ParameterFileFilter("html", "HTML Partitur (*.html)");
     public ParameterFileFilter RTFPartiturFileFilter = new ParameterFileFilter("rtf", "RTF Partitur (*.rtf)");
     public ParameterFileFilter SVGPartiturFileFilter = new ParameterFileFilter("html", "SVG Partitur (*.html)");
@@ -47,11 +56,6 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter SimpleTextTranscriptFileFilter = new ParameterFileFilter("txt", "Simple text output (*.txt)");
     public ParameterFileFilter CHATTranscriptFileFilter = new ParameterFileFilter("cha", "CHAT transcript (*.cha)");
     
-    static String[] fl_suff = {"flk", "fln"};
-    public ParameterFileFilter FOLKERTranscriptionFileFilter = new ParameterFileFilter(fl_suff, "FOLKER transcription (*.flk, *.fln)");
-    // issue #108
-    public ParameterFileFilter FLKTranscriptionFileFilter = new ParameterFileFilter("flk", "FOLKER transcription (*.flk)");
-    public ParameterFileFilter FLNTranscriptionFileFilter = new ParameterFileFilter("fln", "OrthoNormal transcription (*.fln)");
     
     public ParameterFileFilter TreeTaggerFilter = new ParameterFileFilter("txt", "Tree Tagger Output (*.txt)");
     public ParameterFileFilter XSLStylesheetImportFilter = new ParameterFileFilter("xml", "Import via XSL Stylesheet (*.xml)");
@@ -70,6 +74,7 @@ public class AbstractFileFilterDialog extends javax.swing.JFileChooser {
     public ParameterFileFilter WhisperJSONFileFilter = new ParameterFileFilter("json", "Whisper JSON file (*.json)"); // issue #357
     public ParameterFileFilter AmberscriptJSONFileFilter = new ParameterFileFilter("json", "Amberscript JSON file (*.json)"); // issue #358
     public ParameterFileFilter AdobePremiereCSVFilter = new ParameterFileFilter("csv", "Adobe Premiere CSV (*.csv)"); // issue #363
+    public ParameterFileFilter DoteWhisperJSONFileFilter = new ParameterFileFilter("json", "DOTE Whisper JSON file (*.json)"); // issue #567
     
 
 

@@ -75,8 +75,11 @@ public class EXBBuilder {
     
     
     public void build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
+        System.out.println("[EXBBuilder] Building.");
         List<File> exbFiles = collectEXBFiles();
+        System.out.println("[EXBBuilder] " + exbFiles.size() + " EXB files collected. ");
         segmentEXBFiles(exbFiles);
+        System.out.println("[EXBBuilder] " + exbFiles.size() + " EXB files segmented as " + segmentation);
         constructComa(exbFiles);
     }
 
@@ -131,7 +134,8 @@ public class EXBBuilder {
         }
     }
 
-    private void constructComa(List<File> exbFiles) throws SAXException, JexmaraldaException, IOException, JDOMException {
+    private void constructComa(List<File> exbFiles) throws SAXException, JexmaraldaException, JDOMException, IOException {
+        System.out.println("[EXBBuilder] Constructing COMA");
         Map<String, Element> speakerElements = new HashMap<>();
         Document comaDocument = new Document(new Element("Corpus"));
         comaDocument.getRootElement().setAttribute("uniqueSpeakerDistinction", "//speaker/" + this.uniqueSpeakerDistinction);
@@ -155,6 +159,7 @@ public class EXBBuilder {
         }
         
         
+        System.out.println("[EXBBuilder] Adding " + exbFiles.size() + " transcriptions. ");
         for (File exbFile : exbFiles){
             BasicTranscription exb = new BasicTranscription(exbFile.getAbsolutePath());            
             Element communicationElement = new Element("Communication")
@@ -220,7 +225,7 @@ public class EXBBuilder {
             Element transcriptionElement1 = new Element("Transcription")
                     .setAttribute("Id", "EXB_" + exb.getHead().getMetaInformation().getTranscriptionName());
             transcriptionElement1.addContent(new Element("Name").setText(exb.getHead().getMetaInformation().getTranscriptionName()));
-            transcriptionElement1.addContent(new Element("Filename").setText(exbFile.getName()));
+            transcriptionElement1.addContent(new Element("Filename").setText(exbFile.getName())); 
             transcriptionElement1.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/')));
             communicationElement.addContent(transcriptionElement1);
             Element transcriptionDescriptionElement = new Element("Description");
@@ -277,8 +282,13 @@ public class EXBBuilder {
                 mediaElement.addContent(mediaDescriptionElement);
                 mediaDescriptionElement.addContent(new Element("Key").setAttribute("Name", "type").setText("digital"));
                 
-                relativePath = topDirectory.toPath().relativize(new File(referencedFile).toPath());
-                mediaElement.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/')));
+                try {
+                    relativePath = topDirectory.toPath().relativize(new File(referencedFile).toPath());
+                } catch (IllegalArgumentException ex){
+                    System.out.println("[EXBBuilder] Could not relativize link " + new File(referencedFile).toPath() + " to " + topDirectory.toPath());
+                    relativePath = new File(referencedFile).toPath();
+                }
+                mediaElement.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/'))); 
                 
                 
             }
