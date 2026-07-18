@@ -422,9 +422,13 @@ public class ChopAudioFileDialog extends org.exmaralda.partitureditor.jexmaralda
         Tier tier = transcription.getBody().getTierAt(tierNo);
         List<List<Event>> segmentChains = tier.getSegmentChains(timeline);
         for (List<Event> segmentChain : segmentChains){
-            Event firstEvent = segmentChain.getFirst();
+            // This does not work in Java 17
+            //Event firstEvent = segmentChain.getFirst();
+            Event firstEvent = segmentChain.get(0);
             double start = timeline.getPreviousTime(firstEvent.getStart());
-            Event lastEvent = segmentChain.getLast();
+            // This does not work in Java 17
+            //Event lastEvent = segmentChain.getLast();
+            Event lastEvent = segmentChain.get(segmentChains.size()-1);
             double end = timeline.getNextTime(lastEvent.getEnd());
             Object[] o = new Object[4];
             o[0] = start;

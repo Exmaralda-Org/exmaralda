@@ -106,7 +106,6 @@
                           <ComponentRef name="basedOnButtonGroup"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Based on segment chains in tier"/>
-                        <Property name="actionCommand" type="java.lang.String" value="Based on segment chains in tier"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="baseOnSegmentChainsRadioButtonActionPerformed"/>
