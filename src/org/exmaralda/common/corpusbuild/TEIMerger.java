@@ -133,7 +133,6 @@ public class TEIMerger {
             teiDocument = transformer.transform(segmentedTranscription);            
         }
         
-        FileIO.writeDocumentToLocalFile("Y:\\zat\\zat_corpus\\2025_amica\\2025-02_amica-01_hsrw\\amica_t1\\autotranscript\\2025-02_amica_t1_interm2.xml", teiDocument);      
         System.out.println("STEP 1 completed.");
         
         Vector uElements = TEIMerge(segmentedTranscription, nameOfDeepSegmentation, nameOfFlatSegmentation, includeFullText);
