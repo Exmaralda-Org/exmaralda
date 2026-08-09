@@ -45,6 +45,7 @@ public class EXBBuilder {
     String uniqueSpeakerDistinction = "descendant::abbreviation";
     String segmentation = "default";
     String customFSM = null;
+    String exsOutputDirectory = null;
     
     Set<String> deleteMetaKeys = new HashSet<>();
     Map<String, String> corpusMetadata = new HashMap<>();
@@ -73,6 +74,9 @@ public class EXBBuilder {
         this.corpusMetadata = corpusMetadata;
     }
     
+    public void setEXSOutputDirectory(String dirName){
+        this.exsOutputDirectory = dirName;
+    }
     
     public void build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
         System.out.println("[EXBBuilder] Building.");
@@ -128,7 +132,15 @@ public class EXBBuilder {
                     exs = exb.toSegmentedTranscription();
                     
             }            
-            File exsOut = new File(exbFile.getParentFile(), exbFile.getName().replaceAll("\\.exb", "_s.exs"));
+            File exsOutputFile = exbFile.getParentFile();
+            if (exsOutputDirectory!=null && exsOutputDirectory.length()>0){
+                Path absoluteDirectory = exsOutputFile.toPath()
+                    .resolve(exsOutputDirectory)
+                    .normalize()
+                    .toAbsolutePath();
+                exsOutputFile = absoluteDirectory.toFile();
+            }
+            File exsOut = new File(exsOutputFile, exbFile.getName().replaceAll("\\.exb", "_s.exs"));
             exs.writeXMLToFile(exsOut.getAbsolutePath(), "none");
             System.out.println("[EXBBuilder]: Segmented " + exbFile.getAbsolutePath() + " --> " + exsOut.getName() + " (" + segmentation + ")");
         }
