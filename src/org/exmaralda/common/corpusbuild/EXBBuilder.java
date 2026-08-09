@@ -279,7 +279,7 @@ public class EXBBuilder {
                     .toAbsolutePath();
                 isoTeiOutputFile = absoluteDirectory.toFile();
             }
-            File isoTeiFile = new File(exsOutputFile, exbFile.getName().replaceAll("\\.exb", ".xml"));
+            File isoTeiFile = new File(isoTeiOutputFile, exbFile.getName().replaceAll("\\.exb", ".xml"));
             Path relativePathISOTEI = topDirectory.toPath().relativize(isoTeiFile.toPath());                        
             Element transcriptionElement3 = new Element("Transcription")
                     .setAttribute("Id", "ISO_" + exb.getHead().getMetaInformation().getTranscriptionName());
