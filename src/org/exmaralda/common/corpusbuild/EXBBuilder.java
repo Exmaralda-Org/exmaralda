@@ -46,6 +46,7 @@ public class EXBBuilder {
     String segmentation = "default";
     String customFSM = null;
     String exsOutputDirectory = null;
+    String isoTeiOutputDirectory = null;
     
     Set<String> deleteMetaKeys = new HashSet<>();
     Map<String, String> corpusMetadata = new HashMap<>();
@@ -76,6 +77,10 @@ public class EXBBuilder {
     
     public void setEXSOutputDirectory(String dirName){
         this.exsOutputDirectory = dirName;
+    }
+
+    public void setISOTEIOutputDirectory(String dirName){
+        this.isoTeiOutputDirectory = dirName;
     }
     
     public void build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
@@ -232,33 +237,55 @@ public class EXBBuilder {
                 </Transcription>            
             */
             
-            Path relativePath = topDirectory.toPath().relativize(exbFile.toPath());
-            
+            // The basic transcription
+            Path relativePathEXB = topDirectory.toPath().relativize(exbFile.toPath());            
             Element transcriptionElement1 = new Element("Transcription")
                     .setAttribute("Id", "EXB_" + exb.getHead().getMetaInformation().getTranscriptionName());
             transcriptionElement1.addContent(new Element("Name").setText(exb.getHead().getMetaInformation().getTranscriptionName()));
             transcriptionElement1.addContent(new Element("Filename").setText(exbFile.getName())); 
-            transcriptionElement1.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/')));
+            transcriptionElement1.addContent(new Element("NSLink").setText(relativePathEXB.toString().replace(File.separatorChar, '/')));
             communicationElement.addContent(transcriptionElement1);
             Element transcriptionDescriptionElement = new Element("Description");
             transcriptionElement1.addContent(transcriptionDescriptionElement);
             transcriptionDescriptionElement.addContent(new Element("Key").setAttribute("Name", "segmented").setText("false"));
             
+            // The segmented transcription
+            File exsOutputFile = exbFile.getParentFile();
+            if (exsOutputDirectory!=null && exsOutputDirectory.length()>0){
+                Path absoluteDirectory = exsOutputFile.toPath()
+                    .resolve(exsOutputDirectory)
+                    .normalize()
+                    .toAbsolutePath();
+                exsOutputFile = absoluteDirectory.toFile();
+            }
+            File exsFile = new File(exsOutputFile, exbFile.getName().replaceAll("\\.exb", "_s.exs"));
+            Path relativePathEXS = topDirectory.toPath().relativize(exsFile.toPath());                        
             Element transcriptionElement2 = new Element("Transcription")
                     .setAttribute("Id", "EXS_" + exb.getHead().getMetaInformation().getTranscriptionName());
             transcriptionElement2.addContent(new Element("Name").setText(exb.getHead().getMetaInformation().getTranscriptionName()));
             transcriptionElement2.addContent(new Element("Filename").setText(exbFile.getName().replaceAll("\\.exb", "_s.exs")));
-            transcriptionElement2.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/').replaceAll("\\.exb", "_s.exs")));
+            transcriptionElement2.addContent(new Element("NSLink").setText(relativePathEXS.toString().replace(File.separatorChar, '/')));
             communicationElement.addContent(transcriptionElement2);
             Element transcriptionDescriptionElement2 = new Element("Description");
             transcriptionElement2.addContent(transcriptionDescriptionElement2);
             transcriptionDescriptionElement2.addContent(new Element("Key").setAttribute("Name", "segmented").setText("true"));
             
+            // The ISO/TEI transcription
+            File isoTeiOutputFile = exbFile.getParentFile();
+            if (isoTeiOutputDirectory!=null && isoTeiOutputDirectory.length()>0){
+                Path absoluteDirectory = isoTeiOutputFile.toPath()
+                    .resolve(isoTeiOutputDirectory)
+                    .normalize()
+                    .toAbsolutePath();
+                isoTeiOutputFile = absoluteDirectory.toFile();
+            }
+            File isoTeiFile = new File(exsOutputFile, exbFile.getName().replaceAll("\\.exb", ".xml"));
+            Path relativePathISOTEI = topDirectory.toPath().relativize(isoTeiFile.toPath());                        
             Element transcriptionElement3 = new Element("Transcription")
                     .setAttribute("Id", "ISO_" + exb.getHead().getMetaInformation().getTranscriptionName());
             transcriptionElement3.addContent(new Element("Name").setText(exb.getHead().getMetaInformation().getTranscriptionName()));
             transcriptionElement3.addContent(new Element("Filename").setText(exbFile.getName().replaceAll("\\.exb", ".xml")));
-            transcriptionElement3.addContent(new Element("NSLink").setText(relativePath.toString().replace(File.separatorChar, '/').replaceAll("\\.exb", ".xml")));
+            transcriptionElement3.addContent(new Element("NSLink").setText(relativePathISOTEI.toString().replace(File.separatorChar, '/')));
             communicationElement.addContent(transcriptionElement3);
             Element transcriptionDescriptionElement3 = new Element("Description");
             transcriptionElement3.addContent(transcriptionDescriptionElement3);
@@ -294,6 +321,7 @@ public class EXBBuilder {
                 mediaElement.addContent(mediaDescriptionElement);
                 mediaDescriptionElement.addContent(new Element("Key").setAttribute("Name", "type").setText("digital"));
                 
+                Path relativePath;
                 try {
                     relativePath = topDirectory.toPath().relativize(new File(referencedFile).toPath());
                 } catch (IllegalArgumentException ex){
