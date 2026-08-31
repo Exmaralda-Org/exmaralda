@@ -27,6 +27,7 @@ import org.exmaralda.partitureditor.jexmaralda.UDInformationHashtable;
 import org.exmaralda.partitureditor.jexmaralda.segment.CHATMinimalSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.GenericSegmentation;
 import org.exmaralda.partitureditor.jexmaralda.segment.HIATSegmentation;
+import org.exmaralda.partitureditor.jexmaralda.segment.cGATMinimalSegmentation;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -125,6 +126,14 @@ public class EXBBuilder {
                         hiatSegmentation = new HIATSegmentation(customFSM);
                     } 
                     exs = hiatSegmentation.BasicToSegmented(exb);
+                    break;
+                
+                case "cGAT_MINIMAL" : // issue #575
+                    cGATMinimalSegmentation cgatSegmentation = new cGATMinimalSegmentation();
+                    if (customFSM!=null){
+                        cgatSegmentation = new cGATMinimalSegmentation(customFSM);
+                    } 
+                    exs = cgatSegmentation.BasicToSegmented(exb);
                     break;
                 case "CHAT_MINIMAL" :     // issue #532
                     CHATMinimalSegmentation chatSegmentation = new CHATMinimalSegmentation();
