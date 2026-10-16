@@ -175,7 +175,8 @@ public class EditPreferencesAction extends org.exmaralda.partitureditor.partitur
                    pe.menuBar.transcriptionMenu.addTokenLayerMenuItem.setVisible(
                             table.preferredSegmentation.equals("GENERIC") ||
                             table.preferredSegmentation.equals("cGAT_MINIMAL") ||
-                            table.preferredSegmentation.equals("HIAT")
+                            table.preferredSegmentation.equals("HIAT") ||
+                            table.preferredSegmentation.equals("INEL_EVENT_BASED") // added 15-09-2026, issue #107
                     );
                    
 

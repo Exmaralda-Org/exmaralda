@@ -84,13 +84,13 @@ public class EXBBuilder {
         this.isoTeiOutputDirectory = dirName;
     }
     
-    public void build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
+    public File build() throws IOException, SAXException, JexmaraldaException, JDOMException, FSMException{
         System.out.println("[EXBBuilder] Building.");
         List<File> exbFiles = collectEXBFiles();
         System.out.println("[EXBBuilder] " + exbFiles.size() + " EXB files collected. ");
         segmentEXBFiles(exbFiles);
         System.out.println("[EXBBuilder] " + exbFiles.size() + " EXB files segmented as " + segmentation);
-        constructComa(exbFiles);
+        return constructComa(exbFiles);
     }
 
     private List<File> collectEXBFiles() throws IOException {
@@ -160,7 +160,7 @@ public class EXBBuilder {
         }
     }
 
-    private void constructComa(List<File> exbFiles) throws SAXException, JexmaraldaException, JDOMException, IOException {
+    private File constructComa(List<File> exbFiles) throws SAXException, JexmaraldaException, JDOMException, IOException {
         System.out.println("[EXBBuilder] Constructing COMA");
         Map<String, Element> speakerElements = new HashMap<>();
         Document comaDocument = new Document(new Element("Corpus"));
@@ -320,11 +320,11 @@ public class EXBBuilder {
                 count++;
                 if (referencedFile.length()==0) continue;
                 Element recordingElement = new Element("Recording")
-                        .setAttribute("Id", exb.getHead().getMetaInformation().getTranscriptionName()+ "_REC_" + Integer.toString(count));
+                        .setAttribute("Id", "REC_" + exb.getHead().getMetaInformation().getTranscriptionName()+  Integer.toString(count));
                 recordingElement.addContent(new Element("Name").setText(new File(referencedFile).getName()));
                 communicationElement.addContent(recordingElement);
                 Element mediaElement = new Element("Media")
-                        .setAttribute("Id", exb.getHead().getMetaInformation().getTranscriptionName()+ "_MED_" + Integer.toString(count));
+                        .setAttribute("Id", "MEDIA_" + exb.getHead().getMetaInformation().getTranscriptionName()+ Integer.toString(count));
                 recordingElement.addContent(mediaElement);
                 Element mediaDescriptionElement = new Element("Description");
                 mediaElement.addContent(mediaDescriptionElement);
@@ -353,6 +353,7 @@ public class EXBBuilder {
         FileIO.writeDocumentToLocalFile(comaOutFile.getAbsolutePath(), comaDocument);
         System.out.println("[EXBBuilder] " + comaOutFile.getAbsolutePath() + " written.");
         
+        return comaOutFile;
     }
 
     

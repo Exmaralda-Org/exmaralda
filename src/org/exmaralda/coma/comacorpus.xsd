@@ -192,11 +192,11 @@
 			<xs:documentation>a file in the filesystem</xs:documentation>
 		</xs:annotation>
 		<xs:all>
-			<xs:element name="Availability" type="AvailabilityType"/>
+			<xs:element name="Availability" type="AvailabilityType" minOccurs="0"/>
 			<xs:element name="Description" type="DescriptionType" minOccurs="0"/>
-			<xs:element name="filename" type="xs:string" minOccurs="0"/>
-			<xs:element name="mimetype" type="xs:string" minOccurs="0"/>
-			<xs:element name="relPath" type="xs:string" minOccurs="0"/>
+			<xs:element name="filename" type="xs:string" minOccurs="1"/>
+			<xs:element name="mimetype" type="xs:string" minOccurs="1"/>
+			<xs:element name="relPath" type="xs:string" minOccurs="1"/>
 			<xs:element name="absPath" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="URL" type="xs:anyURI" minOccurs="0"/>
 		</xs:all>

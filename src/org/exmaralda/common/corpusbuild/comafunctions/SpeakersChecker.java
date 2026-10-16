@@ -35,9 +35,11 @@ public class SpeakersChecker extends AbstractCorpusChecker {
 			throws JDOMException, SAXException, JexmaraldaException,
 			URISyntaxException {
 		String uniqueSpeakerDistinction = corpus.getRootElement()
-				.getAttributeValue("uniqueSpeakerDistinction");
+				.getAttributeValue("uniqueSpeakerDistinction")
+                        .replace("'", "\"");
 		// uniqueSpeakerDistinction="//speaker/ud-speaker-information/ud-information[@attribute-name=&#34;Sigle&#34;]"
 		// uniqueSpeakerDistinction="//speaker/abbreviation"
+                // descendant::ud-information[@attribute-name='uniqueID']
 		speakerFinder = "";
 		if (!("//speaker/abbreviation".equals(uniqueSpeakerDistinction))) {
 			int index1 = uniqueSpeakerDistinction.lastIndexOf("@");

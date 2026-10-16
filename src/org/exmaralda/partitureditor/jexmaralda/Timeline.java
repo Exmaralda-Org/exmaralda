@@ -379,8 +379,8 @@ public class Timeline extends Vector {
     }
     
 
-    public void completeTimes(){
-        completeTimes(true, null);
+    public int completeTimes(){
+        return completeTimes(true, null);
     }
     
     /** interpolates the timeline

@@ -34,6 +34,7 @@ public class GenerateCHATCorpusAction extends org.exmaralda.exakt.exmaraldaSearc
         super(ef, title, icon);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         CHATCorpusWizard theMagician = new CHATCorpusWizard(exaktFrame, true);
         theMagician.setLocationRelativeTo(exaktFrame);
@@ -45,13 +46,13 @@ public class GenerateCHATCorpusAction extends org.exmaralda.exakt.exmaraldaSearc
 
         Object[] theData = theMagician.getData();
         final String comaPath = (String)theData[0];
-        Vector<File> folkerFiles = (Vector<File>)theData[1];
+        Vector<File> chatFiles = (Vector<File>)theData[1];
         Object[] parameters = (Object[])theData[2];
         boolean separateDirectory = ((Boolean)parameters[0]);
         String directoryName = (String)parameters[1];
         boolean writeBasic = ((Boolean)parameters[2]);
         try {
-            final CHATBuilder theBuilder = new CHATBuilder(new File(comaPath), folkerFiles, directoryName, separateDirectory, writeBasic);
+            final CHATBuilder theBuilder = new CHATBuilder(new File(comaPath), chatFiles, directoryName, separateDirectory, writeBasic);
             pbd = new ProgressBarDialog(exaktFrame, false);
             pbd.setLocationRelativeTo(exaktFrame);
             pbd.setTitle("Generating corpus... ");

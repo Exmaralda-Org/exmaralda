@@ -78,23 +78,19 @@ public class CHATCorpusWizard extends AbstractWizardDialog{
     }
 
 
+    @Override
     public int getNumberOfSteps() {
         return 3;
     }
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 System.out.println("Setting system L&F : " + javax.swing.UIManager.getSystemLookAndFeelClassName());
                 try {
                     javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (InstantiationException ex) {
-                    ex.printStackTrace();
-                } catch (IllegalAccessException ex) {
-                    ex.printStackTrace();
-                } catch (UnsupportedLookAndFeelException ex) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                     ex.printStackTrace();
                 }
                 new CHATCorpusWizard(new javax.swing.JFrame(), true).setVisible(true);
@@ -137,13 +133,15 @@ public class CHATCorpusWizard extends AbstractWizardDialog{
         String text = "Scanning " + directory.getName();
         folkerTranscriptionsWizardPanel.countLabel.setText(text);
         Vector<File> result = new Vector<File>();
-        File[] folkerFiles = directory.listFiles(new FileFilter(){
+        File[] chatFiles = directory.listFiles(new FileFilter(){
+            @Override
             public boolean accept(File pathname) {
-                return pathname.getName().toLowerCase().endsWith("cha");
+                return pathname.isFile() && pathname.getName().toLowerCase().endsWith("cha");
             }
         });
-        for (File f : folkerFiles){result.addElement(f);}
+        for (File f : chatFiles){result.addElement(f);}
         File[] subDirectories = directory.listFiles(new FileFilter(){
+            @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory();
             }
@@ -156,6 +154,7 @@ public class CHATCorpusWizard extends AbstractWizardDialog{
 
 
 
+    @Override
     public void loadSettings() {
         java.util.prefs.Preferences preferences =
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");
@@ -165,6 +164,7 @@ public class CHATCorpusWizard extends AbstractWizardDialog{
 
     }
 
+    @Override
     public void storeSettings() {
         java.util.prefs.Preferences preferences =
             java.util.prefs.Preferences.userRoot().node("org.sfb538.exmaralda.EXAKT");

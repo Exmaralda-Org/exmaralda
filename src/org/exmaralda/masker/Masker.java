@@ -6,7 +6,6 @@ package org.exmaralda.masker;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -125,9 +124,14 @@ public class Masker {
         //lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length); // in case there are no "remaining"
         do {
              // Read frames into buffer                    
-             framesRead = wavFileIn.readFrames(buffer, bufferSizeCopy);
-             totalFramesRead+=framesRead;
-             lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length);
+            framesRead = wavFileIn.readFrames(buffer, bufferSizeCopy);
+            totalFramesRead+=framesRead;
+            //lastBufferValues = Arrays.copyOfRange(buffer, buffer.length-numChannels, buffer.length);
+            if (framesRead > 0) {
+                int lastFrameStart = (framesRead - 1) * numChannels;
+                lastBufferValues = Arrays.copyOfRange(
+                        buffer, lastFrameStart, lastFrameStart + numChannels);
+            }             
              wavFileOut.writeFrames(buffer, framesRead);
              fireMaskerEvent(MaskerEvent.COPY_ACTIVITY);
              
@@ -137,7 +141,7 @@ public class Masker {
         // remaining frames not fitting into 100 buffer
         int remaining = (int) (end - totalFramesRead);
         System.out.println(remaining + " REMAINING TO COPY");        
-        if (remaining>=0){
+        if (remaining>0){
             buffer = new double[remaining * numChannels];
             //buffer = new long[remaining * numChannels];
             framesRead = wavFileIn.readFrames(buffer, remaining);
@@ -165,7 +169,12 @@ public class Masker {
                 totalFramesRead+=framesRead;              
                 double[] mask = getMask(buffer, lastBufferValues, method);                
                 // give the previous last sample value to the beginning of the new mask
-                lastBufferValues = Arrays.copyOfRange(mask, mask.length-numChannels, mask.length);
+                //lastBufferValues = Arrays.copyOfRange(mask, mask.length-numChannels, mask.length);
+                if (framesRead > 0) {
+                    int lastFrameStart = (framesRead - 1) * numChannels;
+                    lastBufferValues = Arrays.copyOfRange(
+                            buffer, lastFrameStart, lastFrameStart + numChannels);
+                }                
                 wavFileOut.writeFrames(mask, framesRead);
                 fireMaskerEvent(MaskerEvent.MASK_ACTIVITY);
 
@@ -175,7 +184,7 @@ public class Masker {
         // remaining frames not fitting into 4000 buffer
         int remaining = (int) (end - totalFramesRead);
         //System.out.println(remaining + " REMAINING TO MASK");
-        if (remaining>=0){
+        if (remaining>0){
             System.out.println(remaining + " REMAINING TO MASK");
             //buffer = new long[remaining * numChannels];
             buffer = new double[remaining * numChannels];
@@ -209,7 +218,8 @@ public class Masker {
                         double numInChannel=originalBuffer[i*numChannels+c];
                         sum += numInChannel * numInChannel; // sum up the squares
                     }
-                    rms = Math.sqrt(sum / originalBuffer.length/numChannels);
+                    //rms = Math.sqrt(sum / originalBuffer.length/numChannels);
+                    rms = Math.sqrt(sum / (originalBuffer.length / numChannels));                    
                     double lowerLimit = 0.0-rms;
                     double upperLimit = rms;
                     //BrownNoiseGenerator brownNoiseGenerator = new BrownNoiseGenerator(lowerLimit,upperLimit);
