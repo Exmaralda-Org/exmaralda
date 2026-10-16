@@ -1,8 +1,8 @@
 package org.exmaralda.coma.helpers;
 
 import java.util.prefs.Preferences;
+import org.apache.commons.lang3.StringEscapeUtils;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.exmaralda.coma.datatypes.Language;
 import org.exmaralda.coma.resources.ResourceHandler;
 import org.exmaralda.coma.root.Ui;
@@ -108,7 +108,7 @@ public class ComaHTML {
 	public static String hilightSearchResult(String in, String search) {
 		if (search != null) {
 			if (search.length() > 0) {
-				return StringEscapeUtils.escapeHtml(in).replace(
+				return StringEscapeUtils.escapeHtml4(in).replace(
 						search,
 						"<span style='background-color:#FF9999';>" + search
 								+ "</span>");

@@ -3,7 +3,7 @@
  */
 package org.exmaralda.coma.datatypes;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.exmaralda.coma.helpers.ComaHTML;
 import org.exmaralda.coma.root.Coma;
 import org.jdom.Element;
@@ -85,7 +85,7 @@ public class Key extends ComaDatatype implements Comparable {
 	@Override
 	public String getFilterXPath() {
 		return getXPath() + "[@Name=\'" + name + "\' and text()=\'"
-				+ StringEscapeUtils.escapeXml(value) + "\']";
+				+ StringEscapeUtils.escapeXml10(value) + "\']";
 
 	}
 
